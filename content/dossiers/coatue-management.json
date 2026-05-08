@@ -5,15 +5,15 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.819115",
-  "last_updated": "2026-03-06T03:48:03",
+  "generated_at": "2026-05-07T23:07:36.118890",
+  "last_updated": "2026-03-23T19:28:04",
   "stats": {
-    "total_findings": 25,
+    "total_findings": 26,
     "total_connections": 5,
     "total_entities": 0,
     "finding_types": {
-      "financial": 17,
       "identity": 2,
+      "financial": 18,
       "relationship": 1,
       "intelligence": 5
     },
@@ -22,9 +22,59 @@
       "financial": 2,
       "advisory": 1
     },
-    "last_updated": "2026-03-06T03:48:03"
+    "last_updated": "2026-03-23T19:28:04"
   },
   "findings": [
+    {
+      "id": 4936,
+      "finding_type": "identity",
+      "summary": "Coatue Europe Ltd - Philippe Laffont sole PSC with 75-100% control",
+      "detail": "Coatue Europe Ltd. (13971484, incorporated 2022-03-11). Address: 1 Chamberlain Square Cs, Birmingham. Sole director: Matthew Shoenthal (American, address 9 West 57th Street 25th Floor, NYC - Coatue HQ). PSC: Philippe Laffont (American) with 75-100% share ownership, voting rights, and right to appoint/remove directors. This confirms Philippe Laffont (key person in investigation) personally controls the UK entity.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-03-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:22:32",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 13971484",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4968,
+      "finding_type": "financial",
+      "summary": "Coatue 13F Q4 2025: $40B AUM, 257 positions including $2.2B GE Vernova, $2.1B Constellation Energy, $738M Tesla, $88M Axon",
+      "detail": "SEC 13F-HR filed 2026-02-17 for Q4 2025. CIK 0001135730. 257 holdings, $40B total. 51 unique issuers. Key defense/energy/government-adjacent positions: GE Vernova $2.2B (defense energy systems), Constellation Energy $2.1B (nuclear power for AI/defense), Tesla $738M (Musk government role), Axon Enterprise $88M (law enforcement tech \u2014 Tasers, body cams, digital evidence), QuantumScape $38.5M (quantum battery tech). Private portfolio not on 13F includes Anduril, Applied Intuition (DoD contracts), Anthropic ($30B Series G co-led by Coatue at $380B valuation), Shield AI. The public portfolio shows massive energy bets (Constellation + GE Vernova = $4.3B) consistent with defense energy infrastructure play. Eaton Corp $1.5B is also relevant (power management for defense/industrial). Emil Michael served as senior advisor Oct 2018 to May 2025 Pentagon appointment.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-17",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:37",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 13F-HR CIK:0001135730 filed 2026-02-17, Accession 0000919574-26-001239",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4643,
       "finding_type": "financial",
@@ -44,7 +94,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001135730; LDA filing c73184c4-0396-4b6e-8a58-79b8da3f076f (Q3 2020); 13F-HR filings through 2025",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -70,7 +120,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "WhalWisdom 13F data, EDGAR CIK 0001135730, Shield AI federal contracts (USASpending), FEC donor records, Dealbreaker Oct 2018 (Michael-Coatue), CBS/NBC News (Anthropic dispute)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -170,7 +220,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR Form D filings CIK 0001135730 (251 filings, 2009-2026)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -195,57 +245,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR Form D filings CIK 0001135730",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4936,
-      "finding_type": "identity",
-      "summary": "Coatue Europe Ltd - Philippe Laffont sole PSC with 75-100% control",
-      "detail": "Coatue Europe Ltd. (13971484, incorporated 2022-03-11). Address: 1 Chamberlain Square Cs, Birmingham. Sole director: Matthew Shoenthal (American, address 9 West 57th Street 25th Floor, NYC - Coatue HQ). PSC: Philippe Laffont (American) with 75-100% share ownership, voting rights, and right to appoint/remove directors. This confirms Philippe Laffont (key person in investigation) personally controls the UK entity.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 18:22:32",
-      "target_name": "Coatue Management",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 13971484",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4968,
-      "finding_type": "financial",
-      "summary": "Coatue 13F Q4 2025: $40B AUM, 257 positions including $2.2B GE Vernova, $2.1B Constellation Energy, $738M Tesla, $88M Axon",
-      "detail": "SEC 13F-HR filed 2026-02-17 for Q4 2025. CIK 0001135730. 257 holdings, $40B total. 51 unique issuers. Key defense/energy/government-adjacent positions: GE Vernova $2.2B (defense energy systems), Constellation Energy $2.1B (nuclear power for AI/defense), Tesla $738M (Musk government role), Axon Enterprise $88M (law enforcement tech \u2014 Tasers, body cams, digital evidence), QuantumScape $38.5M (quantum battery tech). Private portfolio not on 13F includes Anduril, Applied Intuition (DoD contracts), Anthropic ($30B Series G co-led by Coatue at $380B valuation), Shield AI. The public portfolio shows massive energy bets (Constellation + GE Vernova = $4.3B) consistent with defense energy infrastructure play. Eaton Corp $1.5B is also relevant (power management for defense/industrial). Emil Michael served as senior advisor Oct 2018 to May 2025 Pentagon appointment.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:45:37",
-      "target_name": "Coatue Management",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC 13F-HR CIK:0001135730 filed 2026-02-17, Accession 0000919574-26-001239",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -295,7 +295,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "EDGAR 13F-HR CIK 0001135730 filed 2026-02-17",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -437,7 +437,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 2044519 N-2A filing; Coatue CTEK website; press release",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2044519",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -587,7 +587,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "13f.info filing history CIK 0001135730; InsideArbitrage; Seeking Alpha Q3 2025 analysis",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -612,7 +612,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, filed 2026-02-17, period 12-31-2025. tableEntryTotal: 257, tableValueTotal: 39962643007",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -637,7 +637,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, period 12-31-2025, filed 2026-02-17",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -662,7 +662,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, primary_doc.xml, period 12-31-2025, otherIncludedManagersCount: 20",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -695,6 +695,39 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "SiliconRepublic.com Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7449,
+      "finding_type": "financial",
+      "summary": "Coatue Management Q4 2025: $40B portfolio with minimal defense exposure; no direct defense-tech overlap with FF/8VC",
+      "detail": "Coatue Management (Philippe Laffont) Q4 2025 13F shows $39.96B across 52 positions. Top holdings: TSM ($2.62B), MSFT ($2.5B), META ($2.5B), AMZN ($2.29B), GEV ($2.2B). Only defense-adjacent holding is AXON (Axon Enterprise, $88M). Also holds TSLA ($738M). No positions in Palantir, Lockheed Martin, Northrop Grumman, RTX, General Dynamics, L3Harris, or other traditional defense stocks. Limited overlap with Founders Fund/8VC defense-tech thesis in public markets. Private market exposure (Coatue Growth Funds, Coatue Private Fund) not visible in 13F but Coatue has invested in defense-adjacent private companies.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:28:04",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "InsideArbitrage 13F Q4 2025 data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -780,7 +813,24 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2022-03-11",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Coatue Europe Ltd - Philippe Laffont sole PSC with 75-100% control",
+      "confidence": "confirmed",
+      "id": 4936
+    },
+    {
+      "date": "2026-02-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Coatue 13F Q4 2025: $40B AUM, 257 positions including $2.2B GE Vernova, $2.1B Constellation Energy, $738M Tesla, $88M Axon",
+      "confidence": "confirmed",
+      "id": 4968
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4711,
@@ -855,117 +905,5 @@
       "bridge-tax",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Coatue Management",
-      "connections": [
-        {
-          "target": "Philippe Laffont",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Founder, Director, and Executive Officer of Coatue Management LLC (104 fund entities). Listed on 61 Form D filings across 13 fund vehicles 2009-2025. HQ: 9 West 57th Street, 25th Floor, New York."
-        },
-        {
-          "target": "J.P. Morgan Private Investments",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "JPM Private Investments serves as Executive Officer/Promoter for 15 Coatue Private Investors feeder fund vehicles (27 filings). Channels JPM private wealth capital into Coatue strategies including defense-adjacent AI investments."
-        },
-        {
-          "target": "Anthropic",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Coatue dual-bet: invested in both Anthropic Series G and OpenAI round on same day as Anthropic federal ban"
-        },
-        {
-          "target": "Thomas Laffont",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Co-founder of Coatue, focused on private investments. Appears only as Director of OneTrust LLC (portfolio company) in Form D filings \u2014 notably absent from all Coatue fund-level filings."
-        },
-        {
-          "target": "Emil Michael",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Emil Michael nominated as Under Secretary of Defense (A&S) while Coatue invested in Anthropic (which Michael co-founded DPCM Capital SPAC era connections). Coatue also invested in OpenAI and Shield AI \u2014 all potential beneficiaries of DoD acquisition decisions Michael would oversee."
-        }
-      ],
-      "secondHop": {
-        "Anthropic": [
-          {
-            "target": "Emil Michael",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Michael led Anthropic blacklist after company refused to remove AI safety guardrails. Called Amodei a 'liar with God complex.' Coatue (Michael advisory client) invested $10B in Anthropic 4 weeks before ban."
-          }
-        ],
-        "Emil Michael": [
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne hosted the Nov 2014 Waverly Inn dinner where Michael proposed spending $1M against journalists; Osborne was Uber consultant 2013-2017"
-          },
-          {
-            "target": "Eric Schmidt",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Schmidt served as Special Advisor to DPCM Capital, Michael's SPAC that took D-Wave Quantum public"
-          },
-          {
-            "target": "Travis Kalanick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Kalanick's closest confidant and right-hand man at Uber 2013-2017; ousted together by Holder Report; co-raised $15B including $3.5B Saudi PIF investment"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both at top Pentagon: Feinberg DepSecDef, Michael USD(R&E)"
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Michael was Coatue senior advisor (Oct 2018+); Laffont's Coatue co-led $30B Anthropic Series G (Feb 2026) while Michael led Pentagon Anthropic standoff"
-          }
-        ],
-        "Philippe Laffont": [
-          {
-            "target": "Thomas Laffont",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Brothers split FEC donations: Philippe covers Democratic leadership (Schumer/DSCC), Thomas covers Republican leadership (McConnell)"
-          },
-          {
-            "target": "Coatue Management LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Laffont founded Coatue Management"
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Lonsdale via 8VC, Laffont via Coatue Management."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

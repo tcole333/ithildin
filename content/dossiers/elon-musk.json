@@ -3,37 +3,97 @@
   "slug": "elon-musk",
   "aliases": [],
   "profile_ids": [
+    "altman",
     "epstein",
+    "epstein-aetna",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.690616",
-  "last_updated": "2026-03-11T16:36:26",
+  "generated_at": "2026-05-07T23:07:35.987110",
+  "last_updated": "2026-04-15T03:47:22",
   "stats": {
-    "total_findings": 77,
-    "total_connections": 75,
-    "total_entities": 86,
+    "total_findings": 78,
+    "total_connections": 85,
+    "total_entities": 87,
     "finding_types": {
       "relationship": 3,
+      "intelligence": 35,
+      "financial": 22,
       "legal": 14,
       "identity": 3,
-      "financial": 21,
-      "location": 1,
-      "intelligence": 35
+      "location": 1
     },
     "connection_types": {
-      "corporate": 14,
-      "social": 4,
-      "employment": 14,
-      "legal": 6,
-      "financial": 13,
+      "corporate": 15,
+      "social": 5,
+      "employment": 16,
+      "legal": 8,
+      "financial": 14,
       "political": 18,
       "familial": 1,
-      "advisory": 4,
-      "funds": 1
+      "advisory": 5,
+      "funds": 1,
+      "controls": 2
     },
-    "last_updated": "2026-03-11T16:36:26"
+    "last_updated": "2026-04-15T03:47:22"
   },
   "findings": [
+    {
+      "id": 4935,
+      "finding_type": "relationship",
+      "summary": "Elon Musk was director of Surrey Satellite Technology Ltd (2005-2008) and xAI London established via Jared Birchall",
+      "detail": "Two key Musk UK connections: (1) Elon Musk (DOB 6/1971) served as director of Surrey Satellite Technology Limited (01916260) from 2005-01-10 to 2008-12-31. SSTL is a major UK satellite manufacturer now owned by Airbus Defence and Space (75-100% PSC). This predates SpaceX's commercial success and shows early Musk involvement in UK space/defense. (2) X.AI London Ltd (16131916, incorporated 2024-12-12) has Jared Birchall (DOB 9/1974, Musk's top financial aide) as sole director at 20 Air Street, London W1B. Birchall manages Musk's family office and multiple entities.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2005-01-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:22:23",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 01916260",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 16131916",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5584,
+      "finding_type": "intelligence",
+      "summary": "Falcon Landing LLC genealogy: Original CA entity (201113110103) incorporated May 10, 2011, terminated May 7, 2025. SpaceX Corp was a listed manager. Replaced by new TX entity (0805421225) incorporated Feb 14, 2024, same day as Space Exploration Holdings LLC (0805421332). Both TX entities managed by Elon Musk and Gwynne Shotwell, registered at 1 Rocket Rd Hawthorne CA, using CSC as agent. This represents the migration of SpaceX's aviation assets from CA to TX corporate structure.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2011-05-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:22:34",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_ca/201113110103",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 2735,
       "finding_type": "relationship",
@@ -52,6 +112,371 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA02718470",
           "source_quote": "Attendees Elon Musk Jeffrey Epstein Mark Zuckerberg Peter Thiel Reid Hoffman",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5573,
+      "finding_type": "intelligence",
+      "summary": "Corporate address cluster: 216 Park Road, Burlingame, CA 94010 \u2014 Musk's former personal residence, used for Neuralink-adjacent and personal entities: (1) NEUROTEK LLC (us_ca/201712210092, inc 2017-04-25, Terminated 2023-05-10) \u2014 owned by THE ELON MUSK REVOCABLE TRUST, managed by MATILDA SIMON-FERRIGNO, (2) PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) \u2014 Jared Birchall as CEO/Secretary/CFO, Lage Andersen as agent, (3) X.AI Corp uses 216 Park Rd Burlingame as Musk's officer address in Louisiana registration. NEUROTEK is particularly notable: an LLC owned by Musk's revocable trust, incorporated same year as early Neuralink work, name suggests neurotechnology purpose, now terminated. Matilda Simon-Ferrigno appears as manager.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2017-04-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:19",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_ca/201712210092",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5562,
+      "finding_type": "intelligence",
+      "summary": "Birchall-managed personal entity network: Jared Birchall (Musk's personal wealth manager) is the named manager on at least 4 entities, all incorporated 2020-07-14 at PO BOX 341886, Austin TX 78734: (1) Musk Industries LLC (us_tx/0803683028), (2) Europa 100 LLC (us_tx/0803683010), (3) Excession LLC (us_tx/0803683059 \u2014 named after Iain Banks sci-fi novel). Company numbers are near-sequential (0803683010, 0803683028, 0803683059), confirming same-day batch filing. Birchall also served as CEO/Secretary/CFO of PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) at 216 Park Road, Burlingame CA \u2014 Musk's media credibility rating project. Same Registered Agent Solutions Inc (5301 Southwest Pkwy, Austin TX) used for all TX Birchall entities and United States of America Inc.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-07-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:38",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0803683028",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5567,
+      "finding_type": "intelligence",
+      "summary": "Birchall entity cluster: Three entities (Excession LLC, Musk Industries LLC, Foundation Security Inc) all incorporated on same day July 14, 2020, all at PO Box 341886 Austin TX, all managed by Jared Birchall. This represents the formalization of the Musk family office structure in Texas concurrent with Musk's relocation from California. Birchall holds all officer positions at Foundation Security Inc (president, treasurer, secretary, director) - a private security company. Musk's name appears on NONE of these three entities.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-07-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:51",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0803683059",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5560,
+      "finding_type": "intelligence",
+      "summary": "X/Twitter/xAI holding structure: X Holdings Corp. (NV, inc 2023-03-09, Active, 38 filings) is the top-level holding company for the Twitter acquisition. Below it: X Corp. (TX, operational), Twitter Inc. (NV, re-domiciled), Nitro Merger Sub I Inc. (NV, Merge Dissolved \u2014 the acquisition vehicle), X App Corp. (NE). Musk holds all four officer positions (president/secretary/treasurer/director) in X Holdings. Two mystery shell corps: X12 Inc. and X42 Inc. (both NV, inc 2025-03-27, both Merge Dissolved) \u2014 created and dissolved same day as xAI Holdings Corp, suggesting structural transaction vehicles for the xAI-X merger. xAI structure: X.AI Corp. (TX, operational), X.AI Holdings Corp. (NV, Merge Dissolved), X.AI Co Issuer Corp. (NV, inc 2025-06-20, Active, 8 filings \u2014 debt issuance vehicle for xAI). All NV entities use 2110 Ranch Rd 620 S. #341886, Austin TX as officer address.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-03-09",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:26",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_nv/E29639412023-3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5579,
+      "finding_type": "intelligence",
+      "summary": "SpaceX restructuring entities: Two new TX LLCs incorporated 2024-02-14 for SpaceX: (1) Falcon Landing LLC (us_tx/0805421225) and (2) Space Exploration Holdings LLC (us_tx/0805421332). Both share: same address (1 Rocket Rd, Hawthorne CA), same registered agent (CSC, 211 E 7th St Austin TX), same officers (Elon Musk + Gwynne Shotwell as managers). Falcon Landing also has CA registrations (us_ca/201113110103 original, us_ca/B20250120413 new 2025). Names suggest: Falcon Landing = SpaceX real estate/property vehicle (falcon rocket landing facilities); Space Exploration Holdings = parent holding company for potential IPO/restructuring. Same-day filing with near-sequential company numbers confirms coordinated corporate restructuring.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-02-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:49",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805421225",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5566,
+      "finding_type": "intelligence",
+      "summary": "Political infrastructure entity: United States of America Inc. (us_tx/0805733050, Domestic For-Profit Corporation, inc 2024-10-02, In Existence). Elon Musk is sole director. Registered at 2110 RANCH ROAD 620 S UNIT 341886, LAKEWAY TX 78734 \u2014 the same PO Box address (341886) used by Musk Foundation, Musk Ventures, Ad Astra School, Europa 100, Musk Industries, and Excession. Agent: Registered Agent Solutions Inc (same as Birchall entities). Only 1 filing. The name 'United States of America Inc.' for a for-profit corporation is notable and may relate to political payment infrastructure. Incorporated weeks before the November 2024 election.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-10-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:47",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805733050",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5569,
+      "finding_type": "intelligence",
+      "summary": "United States of America Inc incorporated October 2, 2024 - exactly one month before the 2024 presidential election. Musk is sole director. Registered at 2110 Ranch Road 620 S #341886, Lakeway TX (same PO Box used across Musk network). For-profit corporation, not a PAC or nonprofit. Only 1 filing recorded. Name choice is extraordinary for a political payments vehicle - suggests intent to blur lines between corporate and government activity.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-10-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:01",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805733050",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5617,
+      "finding_type": "financial",
+      "summary": "Musk's 2025 FEC records show targeted max-contribution giving (,600 each) to a specific slate of Republican House and Senate candidates in a 1-week window (March 24-April 1, 2025): Davidson, Buddy Carter, Mike Collins, Eric Burlison, Stutzman, Anna Paulina Luna, Barry Moore (Senate), McGuire for Virginia, Rulli for Ohio, Mary Miller, Darrell Issa, Greene, Abe for Arizona, Tony Wied. Plus ,300 to Calvert Victory Fund. All via WinRed. This coordinated burst of max contributions to specific candidates likely reflects strategic influence-building with lawmakers relevant to SpaceX, Tesla, or DOGE objectives.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-04-01",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:36:50",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC Schedule A filings for contributor MUSK, ELON",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5576,
+      "finding_type": "intelligence",
+      "summary": "Thriving Capital Ventures LLC (TX: 0806036943): Incorporated May 9, 2025 - very recent. Three managers: Elon R. Musk (Tesla Inc, 1 Tesla Road, Austin TX), Dr. Omar N. Alsewaidi (Oakville, Ontario, Canada), and Essam M. Aboud (Sao Paulo, Brazil). Registered at 6060 N Central Expy Ste 500, Dallas TX. This is notable because: (1) international co-managers suggest cross-border venture capital activity, (2) Dallas address is unusual for Musk entities (usually Austin/Hawthorne/Palo Alto), (3) formation during Musk's DOGE tenure raises questions about concurrent private business activity.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:36",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0806036943",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5577,
+      "finding_type": "intelligence",
+      "summary": "Thriving Capital Ventures LLC (us_tx/0806036943, inc 2025-05-09) \u2014 New Musk-affiliated investment vehicle with international co-managers. Registered at 6060 N Central Expy Ste 500, Dallas TX. Three managers: (1) Elon R. Musk (address: Tesla Inc, 1 Tesla Road, Austin TX), (2) Dr. Omar N. Alsewaidi (342 Ashbury Road, Oakville ON, Canada), (3) Essam M. Aboud (Rua Jaci 164, Sao Paulo, Brazil). Agent: Lawyer's Aid Service Inc. The international co-managers (Canadian, Brazilian) and the name 'Thriving Capital Ventures' suggest a new cross-border investment vehicle. Note: distinct from 'Thriving Capital LLC' (us_tx/0802111859, inc 2014, governed by William McLeroy at 4406 Avenue D Austin \u2014 an unrelated entity with series LLCs for real estate including Hotel Ella Series).",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:40",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_tx/0806036943",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5580,
+      "finding_type": "intelligence",
+      "summary": "WISLA PLLC (KY: 1477890) - THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC filed July 23, 2025 lists 'Elon R. Musk, CIO' as organizer alongside 'Vladimir V. Putin, JD', 'Viktor M. Orban, JD', and 'Donald J. Trump, President of the United States of America'. Agent: The World Alliance of Nations, 480 Delaney Ferry Rd Ste 2, Versailles KY. Organizers: Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), Sophia J. Capet (Judge). This is almost certainly a fraudulent filing by the Capet family - Kentucky does not verify organizer identities on LLC filings. However, it remains a public record. The audacity of listing Putin and Trump as co-organizers alongside Musk suggests either satirical intent or sovereign citizen ideology.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-07-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:58",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_ky/1477890",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5581,
+      "finding_type": "intelligence",
+      "summary": "Questionable/fraudulent entity: THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC (us_ky/1477890, Kentucky LLC, inc 2025-07-23). Named organizers include 'Elon R. Musk, CIO', 'Viktor M. Orban, JD', 'Vladimir V. Putin, JD', and 'Donald J. Trump, President of the United States of America' alongside Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), and Sophia J. Capet (Judge). Registered agent: 'The World Alliance of Nations' at 480 Delaney Ferry Rd Ste 2, Versailles KY. Zero filings. This entity is almost certainly a fraudulent filing \u2014 Kentucky allows online LLC formation with minimal verification. The listing of Putin and Orban as organizers, and Musk as 'CIO', are not credible. Should be flagged as unreliable data in OC records, NOT evidence of actual Musk involvement.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "low",
+      "date_of_event": "2025-07-23",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:22:02",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opencorporates.com/companies/us_ky/1477890",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5331,
+      "finding_type": "legal",
+      "summary": "Sen. Warren's September 2025 letter demanded Pentagon explain xAI contract, asking if Musk discussed it during DOGE tenure",
+      "detail": "On September 10, 2025, Sen. Elizabeth Warren wrote to Defense Secretary Pete Hegseth demanding answers on the $200M xAI/Grok Pentagon contract. Five specific questions: (1) Whether officials discussed contract with Musk during his special government employee role; (2) Whether contract underwent DOGE review; (3) xAI's scope of work; (4) How DoD plans to implement Grok; (5) Who is accountable for operational/security failures. Former Pentagon contracting official stated the xAI contract 'came out of nowhere' when other companies had been under consideration for months. Warren also flagged Grok's antisemitic content generation.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:14",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://defensescoop.com/2025/09/11/sen-warren-letter-hegseth-musk-xai-dod-contract/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.warren.senate.gov/imo/media/doc/letter_to_pentagon_regarding_integration_of_grok_91025.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5782,
+      "finding_type": "legal",
+      "summary": "Fourth Circuit blocked Musk deposition in USAID case -- mandamus writ shields former DOGE head from sworn testimony (March 2026)",
+      "detail": "In February 2026, Judge Chuang (D. Maryland) ordered Musk to sit for a deposition regarding his role in shuttering USAID, writing there is 'no alternative' to deposing Musk in the lawsuit brought by anonymous USAID employees and contractors. The order noted defendants had 'effectively acknowledged that these orders were given orally, with no documentary record.' However, the Fourth Circuit Court of Appeals issued a writ of mandamus on March 4, 2026 blocking the deposition, ruling it was 'too soon to compel his testimony.' A dissenting judge wrote: 'Given the inadequate discovery responses by defendants thus far, I am deeply concerned that granting this writ of mandamus frustrates justice by broadly immunizing government officials who have historically been subject to depositions.' This case highlights DOGE's pattern of oral-only directives that left no documentary trail for litigation discovery.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:26",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 72279169",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "In re: Elon Musk, 4th Cir. No. 26-1160",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -372,7 +797,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR Schedule 13G/A filed 2025-11-10 CIK 0001494730",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1494730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -872,38 +1297,6 @@
       ]
     },
     {
-      "id": 4935,
-      "finding_type": "relationship",
-      "summary": "Elon Musk was director of Surrey Satellite Technology Ltd (2005-2008) and xAI London established via Jared Birchall",
-      "detail": "Two key Musk UK connections: (1) Elon Musk (DOB 6/1971) served as director of Surrey Satellite Technology Limited (01916260) from 2005-01-10 to 2008-12-31. SSTL is a major UK satellite manufacturer now owned by Airbus Defence and Space (75-100% PSC). This predates SpaceX's commercial success and shows early Musk involvement in UK space/defense. (2) X.AI London Ltd (16131916, incorporated 2024-12-12) has Jared Birchall (DOB 9/1974, Musk's top financial aide) as sole director at 20 Air Street, London W1B. Birchall manages Musk's family office and multiple entities.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 18:22:23",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 01916260",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 16131916",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5325,
       "finding_type": "intelligence",
       "summary": "Musk companies hold $13.5B+ in federal benefits from DoD since 2003, with $9.5B in direct defense contracts \u2014 no ethics disclosures filed during DOGE",
@@ -929,38 +1322,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://lynch.house.gov/2025/4/reps-lynch-and-connolly-lead-oversight-investigation-into-elon-musk-s-conflicts-of-interest-at-dod-citing-whopping-9-5-billion-in-defense-contracts",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5331,
-      "finding_type": "legal",
-      "summary": "Sen. Warren's September 2025 letter demanded Pentagon explain xAI contract, asking if Musk discussed it during DOGE tenure",
-      "detail": "On September 10, 2025, Sen. Elizabeth Warren wrote to Defense Secretary Pete Hegseth demanding answers on the $200M xAI/Grok Pentagon contract. Five specific questions: (1) Whether officials discussed contract with Musk during his special government employee role; (2) Whether contract underwent DOGE review; (3) xAI's scope of work; (4) How DoD plans to implement Grok; (5) Who is accountable for operational/security failures. Former Pentagon contracting official stated the xAI contract 'came out of nowhere' when other companies had been under consideration for months. Warren also flagged Grok's antisemitic content generation.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:18:14",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://defensescoop.com/2025/09/11/sen-warren-letter-hegseth-musk-xai-dod-contract/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.warren.senate.gov/imo/media/doc/letter_to_pentagon_regarding_integration_of_grok_91025.pdf",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1043,56 +1404,6 @@
       ]
     },
     {
-      "id": 5560,
-      "finding_type": "intelligence",
-      "summary": "X/Twitter/xAI holding structure: X Holdings Corp. (NV, inc 2023-03-09, Active, 38 filings) is the top-level holding company for the Twitter acquisition. Below it: X Corp. (TX, operational), Twitter Inc. (NV, re-domiciled), Nitro Merger Sub I Inc. (NV, Merge Dissolved \u2014 the acquisition vehicle), X App Corp. (NE). Musk holds all four officer positions (president/secretary/treasurer/director) in X Holdings. Two mystery shell corps: X12 Inc. and X42 Inc. (both NV, inc 2025-03-27, both Merge Dissolved) \u2014 created and dissolved same day as xAI Holdings Corp, suggesting structural transaction vehicles for the xAI-X merger. xAI structure: X.AI Corp. (TX, operational), X.AI Holdings Corp. (NV, Merge Dissolved), X.AI Co Issuer Corp. (NV, inc 2025-06-20, Active, 8 filings \u2014 debt issuance vehicle for xAI). All NV entities use 2110 Ranch Rd 620 S. #341886, Austin TX as officer address.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:26",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_nv/E29639412023-3",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5562,
-      "finding_type": "intelligence",
-      "summary": "Birchall-managed personal entity network: Jared Birchall (Musk's personal wealth manager) is the named manager on at least 4 entities, all incorporated 2020-07-14 at PO BOX 341886, Austin TX 78734: (1) Musk Industries LLC (us_tx/0803683028), (2) Europa 100 LLC (us_tx/0803683010), (3) Excession LLC (us_tx/0803683059 \u2014 named after Iain Banks sci-fi novel). Company numbers are near-sequential (0803683010, 0803683028, 0803683059), confirming same-day batch filing. Birchall also served as CEO/Secretary/CFO of PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) at 216 Park Road, Burlingame CA \u2014 Musk's media credibility rating project. Same Registered Agent Solutions Inc (5301 Southwest Pkwy, Austin TX) used for all TX Birchall entities and United States of America Inc.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:38",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0803683028",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5564,
       "finding_type": "intelligence",
       "summary": "Musk corporate network via OpenCorporates: 238 officer records across 139 unique entities in 30+ US states plus UK. Network managed through two tiers: (1) Musk direct on public companies (Tesla, SpaceX, X Corp, xAI) and new holding structures (X Holdings Corp, X.AI Holdings Corp, X12 Inc, X42 Inc); (2) Jared Birchall as frontman on ~54 private entities via Excession LLC family office. Key non-obvious entities: United States of America Inc (political payments, inc. Oct 2, 2024 just before election), Falcon Landing LLC (aviation with Gwynne Shotwell), Foundation Security Inc (private security), PRAVDA CORP (media verification, terminated), Red Planet Ventures III LLC (Mars VC, Feb 2025), CTC Holding LLC (xAI property, Jul 2025), AIQ Phase LLC (AI subsidiary, Aug 2025).",
@@ -1118,56 +1429,6 @@
       ]
     },
     {
-      "id": 5566,
-      "finding_type": "intelligence",
-      "summary": "Political infrastructure entity: United States of America Inc. (us_tx/0805733050, Domestic For-Profit Corporation, inc 2024-10-02, In Existence). Elon Musk is sole director. Registered at 2110 RANCH ROAD 620 S UNIT 341886, LAKEWAY TX 78734 \u2014 the same PO Box address (341886) used by Musk Foundation, Musk Ventures, Ad Astra School, Europa 100, Musk Industries, and Excession. Agent: Registered Agent Solutions Inc (same as Birchall entities). Only 1 filing. The name 'United States of America Inc.' for a for-profit corporation is notable and may relate to political payment infrastructure. Incorporated weeks before the November 2024 election.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:47",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805733050",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5567,
-      "finding_type": "intelligence",
-      "summary": "Birchall entity cluster: Three entities (Excession LLC, Musk Industries LLC, Foundation Security Inc) all incorporated on same day July 14, 2020, all at PO Box 341886 Austin TX, all managed by Jared Birchall. This represents the formalization of the Musk family office structure in Texas concurrent with Musk's relocation from California. Birchall holds all officer positions at Foundation Security Inc (president, treasurer, secretary, director) - a private security company. Musk's name appears on NONE of these three entities.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:51",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0803683059",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5568,
       "finding_type": "intelligence",
       "summary": "Corporate address cluster: PO BOX 341886 / 2110 Ranch Road 620 S, Austin/Lakeway TX 78734 \u2014 This is the primary nexus of Musk's personal corporate network. At least 10 entities registered here: (1) Musk Foundation (us_tx/0803691850), (2) Musk Ventures LLC (us_ca/200115210031), (3) Musk Industries LLC (us_tx/0803683028), (4) Europa 100 LLC (us_tx/0803683010), (5) Excession LLC (us_tx/0803683059), (6) Ad Astra School (us_tx/0804164877), (7) United States of America Inc (us_tx/0805733050), (8) X Holdings Corp (officer address), (9) X12 Inc (officer address), (10) X42 Inc (officer address), (11) xAI Holdings Corp (officer address), (12) xAI Co Issuer Corp (officer address). The address appears in two forms: PO BOX 341886 and 2110 Ranch Road 620 S #341886. This suggests a commercial mail receiving agency (CMRA) at Ranch Road 620 South in Lakeway, TX serving as Musk's primary corporate address.",
@@ -1186,31 +1447,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://opencorporates.com/companies/us_tx/0803683028",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5569,
-      "finding_type": "intelligence",
-      "summary": "United States of America Inc incorporated October 2, 2024 - exactly one month before the 2024 presidential election. Musk is sole director. Registered at 2110 Ranch Road 620 S #341886, Lakeway TX (same PO Box used across Musk network). For-profit corporation, not a PAC or nonprofit. Only 1 filing recorded. Name choice is extraordinary for a political payments vehicle - suggests intent to blur lines between corporate and government activity.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:01",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805733050",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1293,31 +1529,6 @@
       ]
     },
     {
-      "id": 5573,
-      "finding_type": "intelligence",
-      "summary": "Corporate address cluster: 216 Park Road, Burlingame, CA 94010 \u2014 Musk's former personal residence, used for Neuralink-adjacent and personal entities: (1) NEUROTEK LLC (us_ca/201712210092, inc 2017-04-25, Terminated 2023-05-10) \u2014 owned by THE ELON MUSK REVOCABLE TRUST, managed by MATILDA SIMON-FERRIGNO, (2) PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) \u2014 Jared Birchall as CEO/Secretary/CFO, Lage Andersen as agent, (3) X.AI Corp uses 216 Park Rd Burlingame as Musk's officer address in Louisiana registration. NEUROTEK is particularly notable: an LLC owned by Musk's revocable trust, incorporated same year as early Neuralink work, name suggests neurotechnology purpose, now terminated. Matilda Simon-Ferrigno appears as manager.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:19",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_ca/201712210092",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5574,
       "finding_type": "intelligence",
       "summary": "The Foundation (TX: 0804444372) / The X Foundation: Foreign nonprofit, inc. Feb 2022. Key officers beyond Birchall: RONALD F. GONG (secretary/director) and TERESA HOLLAND (treasurer/director). All at PO Box 341886 Austin TX. Registered address at 700 Milam St Ste 1300, Houston TX. This entity uses a different agent (GKL Registered Agents) from the standard Musk network (Registered Agent Solutions Inc), suggesting separate legal handling for the nonprofit. Gong and Holland are new names in the Musk inner circle - not publicly associated with his companies.",
@@ -1368,56 +1579,6 @@
       ]
     },
     {
-      "id": 5576,
-      "finding_type": "intelligence",
-      "summary": "Thriving Capital Ventures LLC (TX: 0806036943): Incorporated May 9, 2025 - very recent. Three managers: Elon R. Musk (Tesla Inc, 1 Tesla Road, Austin TX), Dr. Omar N. Alsewaidi (Oakville, Ontario, Canada), and Essam M. Aboud (Sao Paulo, Brazil). Registered at 6060 N Central Expy Ste 500, Dallas TX. This is notable because: (1) international co-managers suggest cross-border venture capital activity, (2) Dallas address is unusual for Musk entities (usually Austin/Hawthorne/Palo Alto), (3) formation during Musk's DOGE tenure raises questions about concurrent private business activity.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:36",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0806036943",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5577,
-      "finding_type": "intelligence",
-      "summary": "Thriving Capital Ventures LLC (us_tx/0806036943, inc 2025-05-09) \u2014 New Musk-affiliated investment vehicle with international co-managers. Registered at 6060 N Central Expy Ste 500, Dallas TX. Three managers: (1) Elon R. Musk (address: Tesla Inc, 1 Tesla Road, Austin TX), (2) Dr. Omar N. Alsewaidi (342 Ashbury Road, Oakville ON, Canada), (3) Essam M. Aboud (Rua Jaci 164, Sao Paulo, Brazil). Agent: Lawyer's Aid Service Inc. The international co-managers (Canadian, Brazilian) and the name 'Thriving Capital Ventures' suggest a new cross-border investment vehicle. Note: distinct from 'Thriving Capital LLC' (us_tx/0802111859, inc 2014, governed by William McLeroy at 4406 Avenue D Austin \u2014 an unrelated entity with series LLCs for real estate including Hotel Ella Series).",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:40",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0806036943",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5578,
       "finding_type": "intelligence",
       "summary": "Address cluster analysis - PO Box 341886, Austin TX 78734 is the central node of the Musk private entity network. At least 8 entities registered there: Excession LLC, Musk Industries LLC, Foundation Security Inc, Musk Ventures LLC, Musk Foundation, Ad Astra School, Peninsula LLC, and The Foundation. All managed by Jared Birchall. The 2110 Ranch Road 620 S #341886 (Lakeway TX) variant is the physical address corresponding to this PO Box - used by United States of America Inc, Red Planet Ventures III, and X Holdings Corp. Second cluster: 216 Park Road, Burlingame CA 94010 - used by PRAVDA CORP and NEUROTEK LLC (both terminated), representing an earlier era of Musk's personal holding structure. Third cluster: 1 Rocket Road, Hawthorne CA - SpaceX HQ shared with Falcon Landing LLC, Space Exploration Holdings LLC, and New World Industries LLC.",
@@ -1436,81 +1597,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://opencorporates.com/officers?q=Elon+Musk",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5579,
-      "finding_type": "intelligence",
-      "summary": "SpaceX restructuring entities: Two new TX LLCs incorporated 2024-02-14 for SpaceX: (1) Falcon Landing LLC (us_tx/0805421225) and (2) Space Exploration Holdings LLC (us_tx/0805421332). Both share: same address (1 Rocket Rd, Hawthorne CA), same registered agent (CSC, 211 E 7th St Austin TX), same officers (Elon Musk + Gwynne Shotwell as managers). Falcon Landing also has CA registrations (us_ca/201113110103 original, us_ca/B20250120413 new 2025). Names suggest: Falcon Landing = SpaceX real estate/property vehicle (falcon rocket landing facilities); Space Exploration Holdings = parent holding company for potential IPO/restructuring. Same-day filing with near-sequential company numbers confirms coordinated corporate restructuring.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:49",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_tx/0805421225",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5580,
-      "finding_type": "intelligence",
-      "summary": "WISLA PLLC (KY: 1477890) - THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC filed July 23, 2025 lists 'Elon R. Musk, CIO' as organizer alongside 'Vladimir V. Putin, JD', 'Viktor M. Orban, JD', and 'Donald J. Trump, President of the United States of America'. Agent: The World Alliance of Nations, 480 Delaney Ferry Rd Ste 2, Versailles KY. Organizers: Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), Sophia J. Capet (Judge). This is almost certainly a fraudulent filing by the Capet family - Kentucky does not verify organizer identities on LLC filings. However, it remains a public record. The audacity of listing Putin and Trump as co-organizers alongside Musk suggests either satirical intent or sovereign citizen ideology.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:21:58",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_ky/1477890",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5581,
-      "finding_type": "intelligence",
-      "summary": "Questionable/fraudulent entity: THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC (us_ky/1477890, Kentucky LLC, inc 2025-07-23). Named organizers include 'Elon R. Musk, CIO', 'Viktor M. Orban, JD', 'Vladimir V. Putin, JD', and 'Donald J. Trump, President of the United States of America' alongside Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), and Sophia J. Capet (Judge). Registered agent: 'The World Alliance of Nations' at 480 Delaney Ferry Rd Ste 2, Versailles KY. Zero filings. This entity is almost certainly a fraudulent filing \u2014 Kentucky allows online LLC formation with minimal verification. The listing of Putin and Orban as organizers, and Musk as 'CIO', are not credible. Should be flagged as unreliable data in OC records, NOT evidence of actual Musk involvement.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "low",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:22:02",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_ky/1477890",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1561,31 +1647,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://opencorporates.com/companies/us_tx/0800731791",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5584,
-      "finding_type": "intelligence",
-      "summary": "Falcon Landing LLC genealogy: Original CA entity (201113110103) incorporated May 10, 2011, terminated May 7, 2025. SpaceX Corp was a listed manager. Replaced by new TX entity (0805421225) incorporated Feb 14, 2024, same day as Space Exploration Holdings LLC (0805421332). Both TX entities managed by Elon Musk and Gwynne Shotwell, registered at 1 Rocket Rd Hawthorne CA, using CSC as agent. This represents the migration of SpaceX's aviation assets from CA to TX corporate structure.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:22:34",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://opencorporates.com/companies/us_ca/201113110103",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1735,32 +1796,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions Wikidata Q317521; gem_energy_ownership gem-own-e100000001201",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5617,
-      "finding_type": "financial",
-      "summary": "Musk's 2025 FEC records show targeted max-contribution giving (,600 each) to a specific slate of Republican House and Senate candidates in a 1-week window (March 24-April 1, 2025): Davidson, Buddy Carter, Mike Collins, Eric Burlison, Stutzman, Anna Paulina Luna, Barry Moore (Senate), McGuire for Virginia, Rulli for Ohio, Mary Miller, Darrell Issa, Greene, Abe for Arizona, Tony Wied. Plus ,300 to Calvert Victory Fund. All via WinRed. This coordinated burst of max contributions to specific candidates likely reflects strategic influence-building with lawmakers relevant to SpaceX, Tesla, or DOGE objectives.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:36:50",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC Schedule A filings for contributor MUSK, ELON",
+          "evidence_ref": "OpenSanctions:Wikidata",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1786,39 +1822,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Public Citizen report 2025; Quartz 2025; Congressional investigations",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5782,
-      "finding_type": "legal",
-      "summary": "Fourth Circuit blocked Musk deposition in USAID case -- mandamus writ shields former DOGE head from sworn testimony (March 2026)",
-      "detail": "In February 2026, Judge Chuang (D. Maryland) ordered Musk to sit for a deposition regarding his role in shuttering USAID, writing there is 'no alternative' to deposing Musk in the lawsuit brought by anonymous USAID employees and contractors. The order noted defendants had 'effectively acknowledged that these orders were given orally, with no documentary record.' However, the Fourth Circuit Court of Appeals issued a writ of mandamus on March 4, 2026 blocking the deposition, ruling it was 'too soon to compel his testimony.' A dissenting judge wrote: 'Given the inadequate discovery responses by defendants thus far, I am deeply concerned that granting this writ of mandamus frustrates justice by broadly immunizing government officials who have historically been subject to depositions.' This case highlights DOGE's pattern of oral-only directives that left no documentary trail for litigation discovery.",
-      "source_datasets": [
-        "courtlistener",
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 02:44:26",
-      "target_name": "Elon Musk",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 72279169",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "In re: Elon Musk, 4th Cir. No. 26-1160",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1945,6 +1948,31 @@
         {
           "evidence_type": "file",
           "evidence_ref": "NYT/dnyuz.com Feb 27 2026 investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6925,
+      "finding_type": "financial",
+      "summary": "TEMPORAL PATTERN: Oct 2024 entity formation burst \u2014 United States of America Inc incorporated exactly 1 month before 2024 election",
+      "detail": "Entity formation analysis shows concentrated pre-election activity: United States of America Inc (TX 0805733050) incorporated Oct 2, 2024, exactly one month before the 2024 presidential election. This coincides with Kenneth Howery's FEC donation Oct 11, 2024 and the period when Emil Michael resigned from D-Wave board Oct 28 (3 days before Tradewinds). The Oct 2024 cluster contains 6 findings across 3 targets (Musk, Horn/Mamula, Howery) suggesting coordinated pre-election positioning across the defense tech and diplomatic networks.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:23:47",
+      "target_name": "Elon Musk",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-20",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -3175,6 +3203,196 @@
       ]
     },
     {
+      "id": 3573,
+      "person_a": "Elon Musk",
+      "person_b": "Schaerr Jaffe LLP",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:38:38",
+      "profile_id": "tech-right",
+      "other_person": "Schaerr Jaffe LLP",
+      "other_person_slug": "schaerr-jaffe-llp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg Law reporting, LDA filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3636,
+      "person_a": "Elon Musk",
+      "person_b": "Musk Foundation",
+      "relationship_type": "controls",
+      "description": "Musk is President and Director of Musk Foundation (EIN 852133087), zero compensation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:25",
+      "profile_id": "tech-right",
+      "other_person": "Musk Foundation",
+      "other_person_slug": "musk-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3640,
+      "person_a": "Elon Musk",
+      "person_b": "Jared Birchall",
+      "relationship_type": "employment",
+      "description": "Birchall is Musk's money manager, hired from Morgan Stanley in 2016 to run family office (Excession LLC), controls 90+ Musk shell entities in Texas",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:37",
+      "profile_id": "tech-right",
+      "other_person": "Jared Birchall",
+      "other_person_slug": "jared-birchall",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024201",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thedeepdive.ca/jared-birchall-the-man-behind-elon-musks-many-many-ventures-and-potential-conflicts-of-interests/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3712,
+      "person_a": "Elon Musk",
+      "person_b": "United States of America Inc",
+      "relationship_type": "controls",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:04:31",
+      "profile_id": "tech-right",
+      "other_person": "United States of America Inc",
+      "other_person_slug": "united-states-of-america-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "tx_sos:0805733050",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3771,
+      "person_a": "Elon Musk",
+      "person_b": "Katie Miller",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:36",
+      "profile_id": "tech-right",
+      "other_person": "Katie Miller",
+      "other_person_slug": "katie-miller",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "littlesis:2013088",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3812,
+      "person_a": "Elon Musk",
+      "person_b": "Sriram Krishnan",
+      "relationship_type": "advisory",
+      "description": "Krishnan served as key advisor to Musk during Twitter/X acquisition rebuild (Nov 2022). Described as one of Musk's 'key lieutenants' alongside Sacks and Calacanis. Musk publicly defended Krishnan during H-1B controversy. Both now in Trump administration orbit.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:16",
+      "profile_id": "tech-right",
+      "other_person": "Sriram Krishnan",
+      "other_person_slug": "sriram-krishnan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Week Nov 2022; Fortune Nov 2022",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3856,
+      "person_a": "David Sacks",
+      "person_b": "Elon Musk",
+      "relationship_type": "social",
+      "description": "PayPal Mafia colleagues (1999-2002). Social relationship per LittleSis. Both in Trump's inner circle - Musk runs DOGE, Sacks is AI/Crypto Czar.",
+      "strength": "strong",
+      "date_range": "1999-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:20",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 117853 relationships",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4884,
+      "person_a": "Greg Brockman",
+      "person_b": "Elon Musk",
+      "relationship_type": "legal",
+      "description": "Brockman's 2017 private journal entries, obtained in Musk v. Altman discovery, show he was internally strategizing for-profit conversion while publicly reassuring Musk of nonprofit commitment. Core evidentiary basis for fraud claims.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Greg Brockman",
+      "other_person_slug": "greg-brockman",
+      "evidence": []
+    },
+    {
+      "id": 4965,
+      "person_a": "Elon Musk",
+      "person_b": "OpenAI, Inc.",
+      "relationship_type": "corporate",
+      "description": "Musk donated approximately $44.8M to OpenAI (2016-2020) through Donor Advised Funds (Vanguard, Fidelity) and YC.org fiscal sponsorship. The court found Musk has standing as settlor of charitable trust despite using DAFs. These donations form the basis of all equitable remedies claimed.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:40:50",
+      "profile_id": "altman",
+      "other_person": "OpenAI, Inc.",
+      "other_person_slug": "openai-inc",
+      "evidence": []
+    },
+    {
       "id": 2620,
       "person_a": "DOGE",
       "person_b": "Elon Musk",
@@ -3428,6 +3646,28 @@
       "other_person": "Corey Lewandowski",
       "other_person_slug": "corey-lewandowski",
       "evidence": []
+    },
+    {
+      "id": 5444,
+      "person_a": "Elon Musk",
+      "person_b": "Richard Merkin",
+      "relationship_type": "financial",
+      "description": "Both are co-funders of Global Learning XPRIZE (M prize); both affiliated with XPRIZE Foundation (Musk on board of trustees, Merkin as supporter/profile). No evidence found of direct Tesla/SpaceX investment by Merkin despite target briefing's 'widely reported' claim.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:47:22",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.xprize.org/people/merkin-family-foundation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -4376,9 +4616,44 @@
       "entity_type": "government",
       "jurisdiction": "Federal",
       "entity_status": "active"
+    },
+    {
+      "role": "Co-founder, Co-chair, Board Member January 2016 - February 21, 2018; donor",
+      "date_start": null,
+      "date_end": null,
+      "source": "courtlistener_pacer_doc_427",
+      "entity_id": 3049,
+      "entity_name": "OpenAI, Inc.",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
     }
   ],
   "timeline": [
+    {
+      "date": "1999-present",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "PayPal Mafia colleagues (1999-2002). Social relationship per LittleSis. Both in Trump's inner circle - Musk runs DOGE, Sacks is AI/Crypto Czar.",
+      "other_person": "David Sacks",
+      "id": 3856
+    },
+    {
+      "date": "2005-01-10",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Elon Musk was director of Surrey Satellite Technology Ltd (2005-2008) and xAI London established via Jared Birchall",
+      "confidence": "confirmed",
+      "id": 4935
+    },
+    {
+      "date": "2011-05-10",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Falcon Landing LLC genealogy: Original CA entity (201113110103) incorporated May 10, 2011, terminated May 7, 2025. SpaceX Corp was a listed manager. Replaced by new TX entity (0805421225) incorporated Feb 14, 2024, same day as Space Exploration Holdings LLC (0805421332). Both TX entities managed by Elon Musk and Gwynne Shotwell, registered at 1 Rocket Rd Hawthorne CA, using CSC as agent. This represents the migration of SpaceX's aviation assets from CA to TX corporate structure.",
+      "confidence": "high",
+      "id": 5584
+    },
     {
       "date": "2015-08-02",
       "type": "finding",
@@ -4388,12 +4663,68 @@
       "id": 2735
     },
     {
+      "date": "2017-04-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Corporate address cluster: 216 Park Road, Burlingame, CA 94010 \u2014 Musk's former personal residence, used for Neuralink-adjacent and personal entities: (1) NEUROTEK LLC (us_ca/201712210092, inc 2017-04-25, Terminated 2023-05-10) \u2014 owned by THE ELON MUSK REVOCABLE TRUST, managed by MATILDA SIMON-FERRIGNO, (2) PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) \u2014 Jared Birchall as CEO/Secretary/CFO, Lage Andersen as agent, (3) X.AI Corp uses 216 Park Rd Burlingame as Musk's officer address in Louisiana registration. NEUROTEK is particularly notable: an LLC owned by Musk's revocable trust, incorporated same year as early Neuralink work, name suggests neurotechnology purpose, now terminated. Matilda Simon-Ferrigno appears as manager.",
+      "confidence": "high",
+      "id": 5573
+    },
+    {
+      "date": "2020-07-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Birchall-managed personal entity network: Jared Birchall (Musk's personal wealth manager) is the named manager on at least 4 entities, all incorporated 2020-07-14 at PO BOX 341886, Austin TX 78734: (1) Musk Industries LLC (us_tx/0803683028), (2) Europa 100 LLC (us_tx/0803683010), (3) Excession LLC (us_tx/0803683059 \u2014 named after Iain Banks sci-fi novel). Company numbers are near-sequential (0803683010, 0803683028, 0803683059), confirming same-day batch filing. Birchall also served as CEO/Secretary/CFO of PRAVDA CORP (us_ca/4076172, inc 2017-10-19, Terminated 2020-10-19) at 216 Park Road, Burlingame CA \u2014 Musk's media credibility rating project. Same Registered Agent Solutions Inc (5301 Southwest Pkwy, Austin TX) used for all TX Birchall entities and United States of America Inc.",
+      "confidence": "high",
+      "id": 5562
+    },
+    {
+      "date": "2020-07-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Birchall entity cluster: Three entities (Excession LLC, Musk Industries LLC, Foundation Security Inc) all incorporated on same day July 14, 2020, all at PO Box 341886 Austin TX, all managed by Jared Birchall. This represents the formalization of the Musk family office structure in Texas concurrent with Musk's relocation from California. Birchall holds all officer positions at Foundation Security Inc (president, treasurer, secretary, director) - a private security company. Musk's name appears on NONE of these three entities.",
+      "confidence": "high",
+      "id": 5567
+    },
+    {
       "date": "2020-2026",
       "type": "connection",
       "relationship_type": "financial",
       "description": "Michael is SpaceX investor; Musk runs DOGE which protects SpaceX's $13.7B+ Pentagon contracts from cuts; DOGE-USD(R&E) structural alignment benefits both",
       "other_person": "Emil Michael",
       "id": 2673
+    },
+    {
+      "date": "2023-03-09",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "X/Twitter/xAI holding structure: X Holdings Corp. (NV, inc 2023-03-09, Active, 38 filings) is the top-level holding company for the Twitter acquisition. Below it: X Corp. (TX, operational), Twitter Inc. (NV, re-domiciled), Nitro Merger Sub I Inc. (NV, Merge Dissolved \u2014 the acquisition vehicle), X App Corp. (NE). Musk holds all four officer positions (president/secretary/treasurer/director) in X Holdings. Two mystery shell corps: X12 Inc. and X42 Inc. (both NV, inc 2025-03-27, both Merge Dissolved) \u2014 created and dissolved same day as xAI Holdings Corp, suggesting structural transaction vehicles for the xAI-X merger. xAI structure: X.AI Corp. (TX, operational), X.AI Holdings Corp. (NV, Merge Dissolved), X.AI Co Issuer Corp. (NV, inc 2025-06-20, Active, 8 filings \u2014 debt issuance vehicle for xAI). All NV entities use 2110 Ranch Rd 620 S. #341886, Austin TX as officer address.",
+      "confidence": "high",
+      "id": 5560
+    },
+    {
+      "date": "2024-02-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "SpaceX restructuring entities: Two new TX LLCs incorporated 2024-02-14 for SpaceX: (1) Falcon Landing LLC (us_tx/0805421225) and (2) Space Exploration Holdings LLC (us_tx/0805421332). Both share: same address (1 Rocket Rd, Hawthorne CA), same registered agent (CSC, 211 E 7th St Austin TX), same officers (Elon Musk + Gwynne Shotwell as managers). Falcon Landing also has CA registrations (us_ca/201113110103 original, us_ca/B20250120413 new 2025). Names suggest: Falcon Landing = SpaceX real estate/property vehicle (falcon rocket landing facilities); Space Exploration Holdings = parent holding company for potential IPO/restructuring. Same-day filing with near-sequential company numbers confirms coordinated corporate restructuring.",
+      "confidence": "high",
+      "id": 5579
+    },
+    {
+      "date": "2024-10-02",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Political infrastructure entity: United States of America Inc. (us_tx/0805733050, Domestic For-Profit Corporation, inc 2024-10-02, In Existence). Elon Musk is sole director. Registered at 2110 RANCH ROAD 620 S UNIT 341886, LAKEWAY TX 78734 \u2014 the same PO Box address (341886) used by Musk Foundation, Musk Ventures, Ad Astra School, Europa 100, Musk Industries, and Excession. Agent: Registered Agent Solutions Inc (same as Birchall entities). Only 1 filing. The name 'United States of America Inc.' for a for-profit corporation is notable and may relate to political payment infrastructure. Incorporated weeks before the November 2024 election.",
+      "confidence": "high",
+      "id": 5566
+    },
+    {
+      "date": "2024-10-02",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "United States of America Inc incorporated October 2, 2024 - exactly one month before the 2024 presidential election. Musk is sole director. Registered at 2110 Ranch Road 620 S #341886, Lakeway TX (same PO Box used across Musk network). For-profit corporation, not a PAC or nonprofit. Only 1 filing recorded. Name choice is extraordinary for a political payments vehicle - suggests intent to blur lines between corporate and government activity.",
+      "confidence": "high",
+      "id": 5569
     },
     {
       "date": "2025-01-20 to 2025-05-28",
@@ -4418,6 +4749,62 @@
       "description": "DOGE fired ~20 FDA neurological device reviewers overseeing Neuralink; Neuralink got Breakthrough designation 10 weeks later",
       "other_person": "FDA",
       "id": 2634
+    },
+    {
+      "date": "2025-04-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Musk's 2025 FEC records show targeted max-contribution giving (,600 each) to a specific slate of Republican House and Senate candidates in a 1-week window (March 24-April 1, 2025): Davidson, Buddy Carter, Mike Collins, Eric Burlison, Stutzman, Anna Paulina Luna, Barry Moore (Senate), McGuire for Virginia, Rulli for Ohio, Mary Miller, Darrell Issa, Greene, Abe for Arizona, Tony Wied. Plus ,300 to Calvert Victory Fund. All via WinRed. This coordinated burst of max contributions to specific candidates likely reflects strategic influence-building with lawmakers relevant to SpaceX, Tesla, or DOGE objectives.",
+      "confidence": "high",
+      "id": 5617
+    },
+    {
+      "date": "2025-05-09",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Thriving Capital Ventures LLC (TX: 0806036943): Incorporated May 9, 2025 - very recent. Three managers: Elon R. Musk (Tesla Inc, 1 Tesla Road, Austin TX), Dr. Omar N. Alsewaidi (Oakville, Ontario, Canada), and Essam M. Aboud (Sao Paulo, Brazil). Registered at 6060 N Central Expy Ste 500, Dallas TX. This is notable because: (1) international co-managers suggest cross-border venture capital activity, (2) Dallas address is unusual for Musk entities (usually Austin/Hawthorne/Palo Alto), (3) formation during Musk's DOGE tenure raises questions about concurrent private business activity.",
+      "confidence": "high",
+      "id": 5576
+    },
+    {
+      "date": "2025-05-09",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Thriving Capital Ventures LLC (us_tx/0806036943, inc 2025-05-09) \u2014 New Musk-affiliated investment vehicle with international co-managers. Registered at 6060 N Central Expy Ste 500, Dallas TX. Three managers: (1) Elon R. Musk (address: Tesla Inc, 1 Tesla Road, Austin TX), (2) Dr. Omar N. Alsewaidi (342 Ashbury Road, Oakville ON, Canada), (3) Essam M. Aboud (Rua Jaci 164, Sao Paulo, Brazil). Agent: Lawyer's Aid Service Inc. The international co-managers (Canadian, Brazilian) and the name 'Thriving Capital Ventures' suggest a new cross-border investment vehicle. Note: distinct from 'Thriving Capital LLC' (us_tx/0802111859, inc 2014, governed by William McLeroy at 4406 Avenue D Austin \u2014 an unrelated entity with series LLCs for real estate including Hotel Ella Series).",
+      "confidence": "high",
+      "id": 5577
+    },
+    {
+      "date": "2025-07-23",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "WISLA PLLC (KY: 1477890) - THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC filed July 23, 2025 lists 'Elon R. Musk, CIO' as organizer alongside 'Vladimir V. Putin, JD', 'Viktor M. Orban, JD', and 'Donald J. Trump, President of the United States of America'. Agent: The World Alliance of Nations, 480 Delaney Ferry Rd Ste 2, Versailles KY. Organizers: Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), Sophia J. Capet (Judge). This is almost certainly a fraudulent filing by the Capet family - Kentucky does not verify organizer identities on LLC filings. However, it remains a public record. The audacity of listing Putin and Trump as co-organizers alongside Musk suggests either satirical intent or sovereign citizen ideology.",
+      "confidence": "medium",
+      "id": 5580
+    },
+    {
+      "date": "2025-07-23",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Questionable/fraudulent entity: THE WORLD INTELLIGENCE, SECURITY AND LEGAL ALLIANCE PLLC (us_ky/1477890, Kentucky LLC, inc 2025-07-23). Named organizers include 'Elon R. Musk, CIO', 'Viktor M. Orban, JD', 'Vladimir V. Putin, JD', and 'Donald J. Trump, President of the United States of America' alongside Lilyeth M. Breeden-Capet (CEO), Mark L. Capet (COO), and Sophia J. Capet (Judge). Registered agent: 'The World Alliance of Nations' at 480 Delaney Ferry Rd Ste 2, Versailles KY. Zero filings. This entity is almost certainly a fraudulent filing \u2014 Kentucky allows online LLC formation with minimal verification. The listing of Putin and Orban as organizers, and Musk as 'CIO', are not credible. Should be flagged as unreliable data in OC records, NOT evidence of actual Musk involvement.",
+      "confidence": "low",
+      "id": 5581
+    },
+    {
+      "date": "2025-09-10",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Sen. Warren's September 2025 letter demanded Pentagon explain xAI contract, asking if Musk discussed it during DOGE tenure",
+      "confidence": "high",
+      "id": 5331
+    },
+    {
+      "date": "2026-03-04",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Fourth Circuit blocked Musk deposition in USAID case -- mandamus writ shields former DOGE head from sworn testimony (March 2026)",
+      "confidence": "confirmed",
+      "id": 5782
     }
   ],
   "curation": {
@@ -4867,726 +5254,6 @@
       "bridge-tax",
       "narrative-shield",
       "complexity-as-credential"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Elon Musk",
-      "connections": [
-        {
-          "target": "Peter Thiel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "https://www.siliconvalley.com/2025/06/08/paypal-mafia-power-trio-musk-thiel-sacks-silicon-valley-startup-trump-white-house/",
-          "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "EFTA02718470",
-          "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-        },
-        {
-          "target": "Jeffrey Epstein",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "EFTA02718470",
-          "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-        },
-        {
-          "target": "Steve Davis",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Fortune Feb 2025",
-          "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-        },
-        {
-          "target": "Judge Reed O'Connor",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "O'Connor presides over multiple Musk lawsuits while holding Tesla stock (15K-50K). X Corp ToS updated to force all disputes to O'Connor's Fort Worth division. O'Connor also held Twitter stock during takeover and Brookfield investments."
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Gracias (longtime friend) manages AJG Growth Fund LLC holding Austin Proper Hotel condos and Tesla stock. Registered as Delaware entity."
-        },
-        {
-          "target": "Chris Young",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Young serves as America PAC treasurer, paid up to 1M salary via Europa 100 LLC (Musk personal entity). Managed ~80M in PAC operations for Trump 2024."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk heads DOGE under Trump while companies hold 38B+ in government contracts. DOGE cuts benefit Musk: NHTSA Tesla investigators fired, FAA/FCC oversight reduced, xAI gets Pentagon/GSA contracts, IRS data access sought."
-        },
-        {
-          "target": "Reed O'Connor",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "CourtListener 4:23-cv-01175, NPR Oct 2024",
-          "description": "X Corp ToS channels all disputes to N.D. TX Fort Worth where O'Connor sits; O'Connor holds Tesla stock and has 3+ Musk-entity cases"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC records for both donors",
-          "description": "Both donated to America PAC. Gracias served on Tesla board 2007-2021. Parallel MAGA-aligned political spending patterns."
-        },
-        {
-          "target": "Neuralink Corp",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk is CEO of Neuralink Corp (TX TID:32077682303, NV formation). Neuralink is listed as member of River Bottoms Ranch LLC and Three Little Pigs LLC, both TX property entities. Birchall is CFO and Director."
-        },
-        {
-          "target": "Chris Young",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica Feb 2025 disclosure",
-          "description": "Young paid 100K-1M/yr by Musk's Europa 100 LLC to advise political and public policy. Also VP of USA Inc. Serves as America PAC director/treasurer and DOGE agent at CFPB simultaneously."
-        },
-        {
-          "target": "Chris Gober",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC C00879510 Schedule B",
-          "description": "Gober served as director and chief lawyer of America PAC in 2024. His firm Lex Politica PLLC paid 217K by America PAC in 2025-2026 cycle. Previously: General Counsel NRSC, Deputy Counsel RNC, General Counsel TX GOP."
-        },
-        {
-          "target": "NHTSA",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "Fortune Feb 23 2025",
-          "description": "DOGE fired AV safety specialists at NHTSA while 8 Tesla investigations active; Tesla launched Robotaxi 4 months later"
-        },
-        {
-          "target": "FDA",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "CNBC Feb 18 2025",
-          "description": "DOGE fired ~20 FDA neurological device reviewers overseeing Neuralink; Neuralink got Breakthrough designation 10 weeks later"
-        },
-        {
-          "target": "DOGE",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "Compiled timeline Jan-May 2025",
-          "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
-        },
-        {
-          "target": "Paul Atkins",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Atkins sworn in as SEC Chair Apr 21 2025 while SEC v Musk (1:25-cv-00105) active. Held 6M in crypto businesses. Receptive to DOGE at SEC. Enforcement collapsed: 313 actions (decade low), 808M penalties (lowest since 2012). Both lead Musk case attorneys resigned days after DOGE entered SEC."
-        },
-        {
-          "target": "FAA",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk pressured FAA Admin Whitaker to resign (succeeded Jan 20 2025). DOGE fired 332 FAA employees. Three SpaceX employees (Malaska, Glantz, Kiernan) placed inside FAA with ethics waivers. Starlink awarded FAA contract threatening 2.4B Verizon deal. 5x launch increase approved May 2025."
-        },
-        {
-          "target": "Thomas Shedd",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "GSA financial disclosure",
-          "description": "Former Tesla engineer (8 years) installed as GSA TTS Director; fired 18F division of tech consultants; reportedly maintained ties to Tesla while in government. GSA manages federal procurement including tech contracts"
-        },
-        {
-          "target": "Chris Young",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica 2025-05-14",
-          "description": "Young receives K-M annually from Musk's Europa 100 LLC while serving as SGE at CFPB, which regulates Tesla (auto loans) and X (payments). VP of 'United States of America Inc.' another Musk entity."
-        },
-        {
-          "target": "Shivon Zilis",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Neuralink Dir of Ops/Special Projects (7 yrs), mother of 3 Musk children, former OpenAI board observer, defense-oriented political donor"
-        },
-        {
-          "target": "Joe Gebbia",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Tesla board member since 2022, Airbnb co-founder, appointed US Chief Design Officer Aug 2025, led DOGE OPM retirement system redesign"
-        },
-        {
-          "target": "Kimbal Musk",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Brothers. Kimbal on Tesla and SpaceX boards. Co-founded Zip2 together. Both on Musk Foundation. Kimbal's Nova Sky Stories operates in Austin near Musk HQ cluster."
-        },
-        {
-          "target": "Alex Spiro",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Personal lawyer handling SEC suit, Twitter shareholder litigation, X/Twitter head of legal, also chairs Dogecoin treasury company"
-        },
-        {
-          "target": "Joe Gebbia",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:118031",
-          "description": "Personal friends per LittleSis. Gebbia on Tesla board (audit committee). Political donations shifted to align with Musk-adjacent causes starting 2024. Now in Musk-connected DOGE/federal government."
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 424384",
-          "description": "Birchall serves as Musk's chief personal adviser, financial manager, CEO of Neuralink, treasurer of Boring Company, CFO of xAI, and controls all Musk nonprofit and personal entities"
-        },
-        {
-          "target": "DOGE",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk led DOGE Jan-May 2025 while companies received 38B total government funding -- 11.8B additional contract potential"
-        },
-        {
-          "target": "Citizens for Sanity",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk donated $50M+ to Citizens for Sanity in 2022 via Building America's Future and Freedom's Future Fund. CFS run by AFL employees, spent $93M on midterm ads."
-        },
-        {
-          "target": "Stephen Miller",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk donated $50M+ to Citizens for Sanity (run by AFL employees) in 2022. AFL's 2022 revenue spike to $44.4M aligns with this funding. Musk now runs DOGE, intersecting with Miller's DHS operations."
-        },
-        {
-          "target": "Marc Andreessen",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "a16z invested in xAI (Series B $6B + Series C $6B), SpaceX, and Twitter $44B acquisition. Andreessen recruits for Musk-led DOGE"
-        },
-        {
-          "target": "Thomas Shedd",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://www.npr.org/2025/02/07/nx-s1-5288988/doge-elon-musk-staff-trump",
-          "description": "Former Tesla software engineer, appointed to head Technology Transformation Services at GSA as part of DOGE"
-        },
-        {
-          "target": "Ricardo Biasini",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
-          "description": "Former Tesla engineer (2011-2016, Autopilot) and Boring Company employee; now senior adviser to OPM director under DOGE"
-        },
-        {
-          "target": "DOGE",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "https://fortune.com/2025/02/06/elon-musk-conflicts-interest-doge-tesla-spacex/",
-          "description": "Musk led DOGE as special government employee while his companies held $13.5B+ in DoD contracts; no ethics disclosures filed"
-        },
-        {
-          "target": "Amanda Scales",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://www.npr.org/2025/02/07/nx-s1-5288988/doge-elon-musk-staff-trump",
-          "description": "Former xAI recruiter, named OPM chief of staff controlling federal hiring as DOGE operative"
-        },
-        {
-          "target": "Eliezer Mishory",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "https://news.bloomberglaw.com/securities-law/musks-doge-hunts-for-sec-cuts-but-savings-will-prove-elusive",
-          "description": "Mishory (former Kalshi chief regulatory officer) leads DOGE team at SEC, where Musk faces active enforcement suit over Twitter acquisition disclosures"
-        },
-        {
-          "target": "Brian Bjelde",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://edition.cnn.com/2025/03/03/politics/doge-opm-shrink-government",
-          "description": "Bjelde, longtime SpaceX engineer, installed as top adviser at OPM where he directed plans for 70% workforce cuts across all federal agencies \u2014 including those regulating Musk companies"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Long-time Musk associate; CEO of Valor Equity Partners managing 17.5B including public pension funds; DOGE operative; resigned DOGE July 4 2025 after AFL-CIO pressure over fiduciary conflicts"
-        },
-        {
-          "target": "Brendan Carr",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "https://spacenews.com/fcc-approves-7500-additional-starlink-satellites/",
-          "description": "FCC Chairman Carr approved 7,500 additional Starlink satellites, opened 20,000+ MHz spectrum for satellite broadband, advocated redirecting $42.5B broadband subsidies toward Starlink, and publicly promoted Starlink as preferred solution"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "FEC:GRACIAS_ANTONIO_MAGA_INC",
-          "description": "Valor Equity Partners founder, long-term Musk investor, former Tesla board member. Donated 1M to MAGA Inc. DOGE volunteer at SSA."
-        },
-        {
-          "target": "Michael Grimes",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Morgan Stanley MD who advised Twitter/X takeover deal, now DOGE Senior Adviser at Commerce"
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall manages Excession LLC (250B family office) and serves as officer on 54 Musk entities across 15 jurisdictions. Controls all business AND political payment infrastructure."
-        },
-        {
-          "target": "United States of America Inc.",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Sole director of USA Inc (TX 0805733050, inc 2024-10-02), a for-profit corp used to manage voter payments and 1M lottery for America PAC."
-        },
-        {
-          "target": "Department of Defense",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "USASpending awards and timeline APIs",
-          "description": "SpaceX (Musk-owned) received $7.18B from DoD total, with $1.01B in new awards after Jan 20 2025 (DOGE inauguration). Concurrent with Musk heading DOGE, SpaceX DoD awards include NSSL Phase 3 ($1.16B), Starshield/Starlink subscriptions ($472M)."
-        },
-        {
-          "target": "America PAC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "FEC C00879510",
-          "description": "Musk is primary funder of America PAC (.8M in 2024-2025)"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC",
-          "description": "Gracias (Valor Equity Partners CEO) mirrors Musk's political realignment: both shifted from Democratic to Republican giving 2022-2024"
-        },
-        {
-          "target": "Tesla Inc",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk-owned Tesla lobbied DOE, EPA, DOT/NHTSA \u2014 agencies DOGE later entered and cut staff at"
-        },
-        {
-          "target": "SpaceX",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk-owned SpaceX lobbied DOD, NASA, FAA, DARPA \u2014 agencies DOGE later entered (FAA with SpaceX employees)"
-        },
-        {
-          "target": "X Corp",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk-owned X Corp lobbied FCC, FTC, EOP \u2014 DOGE targeted these agencies; FCC reversed SpaceX subsidy denial"
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Howery holds major positions in Musk ecosystem: SpaceX $100M-200M, Tesla $500M-1B, Neuralink $250M-500M. PayPal co-founders. Both part of Thiel network. Howery ambassador to Denmark where Greenland is key Musk/SpaceX interest."
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "https://littlesis.org/relationships/1996230",
-          "description": "LittleSis: close friends. PayPal co-founders. Both participated in Rockbridge Network. Howery's Denmark ambassadorship aligns with Musk interests in Arctic resources."
-        },
-        {
-          "target": "Gwynne Shotwell",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Shotwell manages SpaceX and Starlink Services while systematically cultivating congressional defense/space committee members with 130K in bipartisan contributions"
-        },
-        {
-          "target": "JB Straubel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Straubel serves on Tesla board while CEO of Redwood Materials which has DoD SBIR contract and benefits from IRA battery incentives"
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall manages 54+ Musk entities including X.AI London Ltd directorship (UK 16131916), zero personal political contributions despite managing 250M+ political apparatus"
-        },
-        {
-          "target": "Red Planet Ventures",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "RPV I/II/III formed at Musk PO Box 341886, same address as Excession LLC family office and 15+ Musk entities"
-        },
-        {
-          "target": "Thriving Capital Ventures",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk listed as manager of Thriving Capital Ventures LLC alongside two foreign nationals, formed May 2025"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "npr.org:2025-04-11; Wisconsin rally March 30 2025; Valor Equity CEO embedded as DOGE SSA operative",
-          "description": null
-        },
-        {
-          "target": "Aram Moghaddassi",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "nbcnews.com:'a longtime ally of Elon Musk'; installed as SSA co-CIO via DOGE",
-          "description": null
-        },
-        {
-          "target": "Steve Davis",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "npr.org:Steve Davis identified as DOGE adviser; widely reported DOGE senior operative",
-          "description": null
-        },
-        {
-          "target": "Edward Coristine",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "littlesis-455034 revolving-door-project-coristine",
-          "description": "Coristine served as DOGE expert at OPM, reporting to Amanda Scales (ex-xAI/Musk). Professional relationship confirmed by LittleSis."
-        },
-        {
-          "target": "Aram Moghaddassi",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Moghaddassi described as longtime Musk ally by SSA CDO whistleblower complaint"
-        },
-        {
-          "target": "Building America's Future",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "WSJ Oct 2024 reporting, ReadSludge Dec 2025",
-          "description": "Musk provided $50M+ to BAF in 2022, likely $74.5M+ in 2024, est $100M+ total"
-        },
-        {
-          "target": "DOGE",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Musk led DOGE while his companies held B in government contracts and received new awards"
-        },
-        {
-          "target": "SpaceX",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Musk is CEO of SpaceX which holds .6B in NASA/DoD contracts while he led DOGE"
-        },
-        {
-          "target": "xAI",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Musk is founder/director of xAI which received M Pentagon contract after DOGE tenure"
-        },
-        {
-          "target": "Emil Michael",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "Fortune Feb 2026",
-          "description": "Michael is SpaceX investor; Musk runs DOGE which protects SpaceX's $13.7B+ Pentagon contracts from cuts; DOGE-USD(R&E) structural alignment benefits both"
-        },
-        {
-          "target": "Kash Patel",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis",
-          "description": "FBI-DOGE tension: Patel told FBI staff to ignore Musk's DOGE demand. LittleSis notes generic relationship between them."
-        },
-        {
-          "target": "Andrew Ferguson",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "https://www.androidheadlines.com/2025/03/ftc-layoffs-consumer-protection-antitrust-offices.html",
-          "description": "FTC Chair Ferguson (replaced Lina Khan) heads weakened antitrust agency ahead of Musk's $1.25T SpaceX-xAI merger \u2014 the largest private company merger ever announced"
-        },
-        {
-          "target": "Brad Buss",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Former Tesla board and SolarCity CFO now directing AECOM Inc, a top-10 DoD contractor with 4.3B in defense contracts"
-        },
-        {
-          "target": "Michael Russo",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://www.csoonline.com/article/4046997/whistleblower-doge-put-social-security-database-covering-300-million-americans-on-insecure-cloud.html",
-          "description": "Russo previously executive at payment processor for Musk's Starlink before becoming SSA CIO"
-        },
-        {
-          "target": "Sam Corcos",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "propublica-doge-tracker",
-          "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
-        },
-        {
-          "target": "Clark Minor",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
-        },
-        {
-          "target": "Michael Russo",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Russo CTO at Shift4 which processes Starlink payments; indirect employer-client link"
-        },
-        {
-          "target": "Mark Paoletta",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "DeSmog Feb 2025",
-          "description": "Paoletta appointed OMB GC specifically to work with Musk's DOGE team; former firm Schaerr Jaffe represents Musk/X in litigation; Paoletta provides legal architecture enabling DOGE spending cuts at OMB"
-        },
-        {
-          "target": "Corey Lewandowski",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Both hold SGE (special government employee) titles in Trump 2nd administration: Lewandowski at DHS, Musk led DOGE (Jan-May 2025). Lewandowski commented publicly on Musk's DOGE logo on NewsNation. Same legal framework used to avoid full federal employee disclosure requirements. No direct business relationship found."
-        }
-      ],
-      "secondHop": {
-        "Antonio Gracias": [
-          {
-            "target": "Jon Koval",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Valor Equity Partners CEO and VP, both assigned to SSA via DOGE"
-          },
-          {
-            "target": "Christopher Hohn",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Javier Muniz",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Gracias led Series B recapitalization of Lykos; Muniz (former FDA reviewer, former MindMed VP R&D) appointed CMO of Resilient Pharmaceuticals (renamed Lykos) post-Series B June 2025"
-          }
-        ],
-        "DOGE": [
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
-          },
-          {
-            "target": "Pete Hegseth",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis served as effective DOGE leader from GSA HQ while president of Boring Company -- continued asserting control after May 2025 departure"
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Jared Birchall": [
-          {
-            "target": "X.AI Holdings Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall signed both Form D filings as Corporate Secretary of X.AI Holdings Corp"
-          },
-          {
-            "target": "Musk Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall controls Musk Foundation grantmaking and is president of The Foundation, the primary grant recipient"
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is president of The Foundation (EIN 92-0742101), which received $137M from Musk Foundation in 2023 and $470M in 2024"
-          },
-          {
-            "target": "Neuralink Corporation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as CFO and government POC on Neuralink SAM.gov registration (UEI JGGFP357J8B8). PSC codes indicate positioning for federal R&D medical contracts."
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is President of The Foundation while also heading Excession LLC family office and serving as officer at Neuralink, xAI, Boring Company, and Foundation Security"
-          }
-        ],
-        "Jeffrey Epstein": [
-          {
-            "target": "Leon Black",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
-          },
-          {
-            "target": "Kathy Ruemmler",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
-          },
-          {
-            "target": "Reid Weingarten",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2015-08-02",
-        "label": "Musk attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 alongside Mark Zuckerberg Priscilla Chan Peter Thiel Reid Hoffman Joi Ito Ed Boyden Navaid Farooq Desiree Dudley Michelle Yee. Lesley Groff sent guest list. Saida Sapieva coordinated.",
-        "type": "relationship",
-        "evidence_ref": null,
-        "id": 2735
-      },
-      {
-        "date": "2020-2026",
-        "label": "financial with Emil Michael",
-        "type": "financial",
-        "entity": "Emil Michael",
-        "id": 2673
-      },
-      {
-        "date": "2025-01-20 to 2025-05-28",
-        "label": "political with DOGE",
-        "type": "political",
-        "entity": "DOGE",
-        "id": 2632
-      },
-      {
-        "date": "2025-02-14 to 2025-06-22",
-        "label": "legal with NHTSA",
-        "type": "legal",
-        "entity": "NHTSA",
-        "id": 2633
-      },
-      {
-        "date": "2025-02-17 to 2025-05-01",
-        "label": "legal with FDA",
-        "type": "legal",
-        "entity": "FDA",
-        "id": 2634
-      }
     ]
   }
 }

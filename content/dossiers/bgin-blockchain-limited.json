@@ -1,0 +1,306 @@
+{
+  "name": "BGIN BLOCKCHAIN LIMITED",
+  "slug": "bgin-blockchain-limited",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.353173",
+  "last_updated": "2026-03-30T03:00:40",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 4,
+      "financial": 2,
+      "legal": 1,
+      "market": 1
+    },
+    "connection_types": {
+      "corporate": 6
+    },
+    "last_updated": "2026-03-30T03:00:40"
+  },
+  "findings": [
+    {
+      "id": 8645,
+      "finding_type": "corporate",
+      "summary": "BGIN BLOCKCHAIN LIMITED completed Nasdaq IPO at $6.00 per Class A ordinary share, raising $30 million",
+      "detail": "BGIN BLOCKCHAIN LIMITED (CIK 0001945565) listed on the Nasdaq Stock Market under ticker BGIN on October 20, 2025 (8-A12B registration) with the 424B4 prospectus filed October 22, 2025. The offering was 5,000,000 Class A ordinary shares at $6.00 per share, for gross proceeds of $30,000,000. The company is a Cayman Islands exempted company with operations in Singapore, Hong Kong, and the United States.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-10-22",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8648,
+      "finding_type": "financial",
+      "summary": "BGIN distributed $10M in dividends partly in USDT stablecoins; prospectus flags potential Section 5 Securities Act liability",
+      "detail": "The 424B4 prospectus discloses two dividend distributions: (1) January 2024: $5M declared and paid to shareholders, with $949,000 settled in USDT coins; this was reclassified from final to interim dividend in March 2024. (2) June 2025: $5M declared, shareholders could elect cash or USDT; $949,000 paid in USDT. The prospectus expressly flags: 'If USDT were to be deemed a security under the Securities Act, we might have liabilities arising out of a possible violation of Section 5 of the Securities Act in connection with our distributions of dividends to shareholders in the form of USDT coins.'",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-10-22",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8649,
+      "finding_type": "financial",
+      "summary": "BGIN's intercompany cash flows in FY2024 exceeded $500M across subsidiaries, vastly disproportionate to its $30M IPO size",
+      "detail": "424B4 prospectus discloses FY2024 intercompany transfers including: Bgin HK \u2192 Bgin Trading $220,651,271; Bgin Trading \u2192 Bgin HK $295,192,349; Bgin HK \u2192 Bgin Singapore $66,107,110; Bgin SG \u2192 Bgin HK $11,580,082; Bgin SG \u2192 Bgin Singapore $71,000,000. Multi-directional flows total hundreds of millions across the group, consistent with a high-volume crypto-to-fiat payment processing operation. The company raised $30M in its IPO.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-10-22",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8650,
+      "finding_type": "corporate",
+      "summary": "BGIN uses affiliated PRC entities (Shenzhen Bgin, Zhongshan Bgin) controlled by its own officers for R&D, IT, and manufacturing services \u2014 undisclosed financials",
+      "detail": "The 424B4 prospectus discloses that Bgin SG entered a service agreement with Shenzhen Bgin Technology Co., Ltd. (PRC), an entity 'controlled by directors and officers,' for project development and maintenance services. Historically, Bgin HK had R&D, admin, and maintenance service agreements with Shenzhen Bgin (March 2022\u2013June 2024). Earlier (March 2019\u2013May 2022), Bgin HK also used Shenzhen Bgin and its subsidiary Zhongshan Bgin Technology for mining machine manufacturing and farm operations. These are ongoing related-party arrangements with undisclosed dollar amounts in the prospectus summary.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-10-22",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8652,
+      "finding_type": "corporate",
+      "summary": "BGIN changed its auditor to MaloneBailey, LLP approximately two months after its IPO closed",
+      "detail": "6-K filed 2025-12-15 (accession 0001213900-25-121479) announces appointment of MaloneBailey, LLP as independent registered public accounting firm. The IPO closed October 22, 2025. The prior auditor is not identified in the filings reviewed. Auditor changes within months of an IPO are a recognized governance red flag.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-12-15",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8653,
+      "finding_type": "corporate",
+      "summary": "BGIN announced successful tape-out of 4nm BT1 Bitcoin mining ASIC chip \u2014 direct competition with Bitmain and similar chip designers",
+      "detail": "6-K filed 2026-03-16 (accession 0001213900-26-028429) announces 'Successful Tape-Out of 4nm BT1 Bitcoin Mining Chip.' A tape-out is the final step before semiconductor manufacturing. BGIN previously designed and sold FPGA-based mining machines; the BT1 is an ASIC chip using a 4nm process node. This is a significant technical milestone and places BGIN in direct competition with established ASIC chip designers.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-16",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8654,
+      "finding_type": "legal",
+      "summary": "BGIN received a favorable decision in an intellectual property dispute \u2014 nature of dispute unconfirmed",
+      "detail": "6-K filed 2026-03-26 (accession 0001213900-26-034401) announces 'Favorable Decision in Intellectual Property Dispute.' The exhibit (Exhibit 99.1) was not separately fetched. Given the BT1 chip tape-out announcement 10 days prior, the dispute may relate to chip design IP or the FPGA/ASIC mining machine patents. No party name, jurisdiction, or financial terms available from the 6-K cover filing alone.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8651,
+      "finding_type": "market",
+      "summary": "BGIN stock has declined 63% from its $6.00 IPO price to $2.22 within five months; trading volume is extremely thin",
+      "detail": "Market data as of 2026-03-29: BGIN price $2.22, 52-week high $6.50 (shortly post-IPO), 52-week low $2.09. Daily trading volume in March 2026 averaged approximately 6,000\u20137,000 shares, with some days as low as 1,000 shares. Market cap approximately $251M at current price, implying high share count (~113M total). Thin volume suggests most shares are locked up and the effective float is very small.",
+      "source_datasets": "market",
+      "confidence": "high",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "BGIN BLOCKCHAIN LIMITED",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4446,
+      "person_a": "BGIN BLOCKCHAIN LIMITED",
+      "person_b": "Bgin Trading Limited",
+      "relationship_type": "corporate",
+      "description": "BGIN Ltd is the indirect parent of Bgin Trading (HK). Bgin Trading declared a $17M USDT dividend to Bgin Rig in January 2024 and a $5M USDT dividend in June 2025, which were passed up to BGIN Ltd.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Bgin Trading Limited",
+      "other_person_slug": "bgin-trading-limited",
+      "evidence": []
+    },
+    {
+      "id": 4448,
+      "person_a": "BGIN BLOCKCHAIN LIMITED",
+      "person_b": "Shenzhen Bgin Technology Co., Ltd.",
+      "relationship_type": "corporate",
+      "description": "Shenzhen Bgin provides project development and maintenance services to BGIN subsidiaries (Bgin SG, Bgin HK) under contract. Shenzhen Bgin is not a BGIN subsidiary \u2014 it is controlled by BGIN's directors and officers. Active related-party relationship as of IPO date.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Shenzhen Bgin Technology Co., Ltd.",
+      "other_person_slug": "shenzhen-bgin-technology-co-ltd",
+      "evidence": []
+    },
+    {
+      "id": 4450,
+      "person_a": "BGIN BLOCKCHAIN LIMITED",
+      "person_b": "Bgin Mining Inc.",
+      "relationship_type": "corporate",
+      "description": "Bgin Mining Inc. (Nebraska) is a wholly owned indirect subsidiary conducting US mining machine sales and self-mining. Three Section 16 filers use the Omaha NE address, suggesting a US services/compliance arrangement centered on this entity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Bgin Mining Inc.",
+      "other_person_slug": "bgin-mining-inc",
+      "evidence": []
+    },
+    {
+      "id": 4440,
+      "person_a": "Decho Investment Limited",
+      "person_b": "BGIN BLOCKCHAIN LIMITED",
+      "relationship_type": "corporate",
+      "description": "Decho Investment Limited holds 100% of BGIN's Class B ordinary shares (22,554,375), representing controlling voting power. Wu directs Decho through Mister NK Ltd / Xiantaipai Trust.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Decho Investment Limited",
+      "other_person_slug": "decho-investment-limited",
+      "evidence": []
+    },
+    {
+      "id": 4444,
+      "person_a": "Moon Aquarius Limited",
+      "person_b": "BGIN BLOCKCHAIN LIMITED",
+      "relationship_type": "corporate",
+      "description": "Moon Aquarius Limited holds 37,917,656 Class A shares in BGIN, approximately 41.9% of Class A outstanding as of December 31, 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Moon Aquarius Limited",
+      "other_person_slug": "moon-aquarius-limited",
+      "evidence": []
+    },
+    {
+      "id": 4451,
+      "person_a": "Qingfeng Wu",
+      "person_b": "BGIN BLOCKCHAIN LIMITED",
+      "relationship_type": "corporate",
+      "description": "Wu is the founder, CEO, and director of BGIN. Controls through Class B shares (55.46% voting). Signed all 6-K filings reviewed. Purchased 249,500 Class A in the IPO at $6.00.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Qingfeng Wu",
+      "other_person_slug": "qingfeng-wu",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-10-22",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "BGIN BLOCKCHAIN LIMITED completed Nasdaq IPO at $6.00 per Class A ordinary share, raising $30 million",
+      "confidence": "confirmed",
+      "id": 8645
+    },
+    {
+      "date": "2025-10-22",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BGIN distributed $10M in dividends partly in USDT stablecoins; prospectus flags potential Section 5 Securities Act liability",
+      "confidence": "high",
+      "id": 8648
+    },
+    {
+      "date": "2025-10-22",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BGIN's intercompany cash flows in FY2024 exceeded $500M across subsidiaries, vastly disproportionate to its $30M IPO size",
+      "confidence": "high",
+      "id": 8649
+    },
+    {
+      "date": "2025-10-22",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "BGIN uses affiliated PRC entities (Shenzhen Bgin, Zhongshan Bgin) controlled by its own officers for R&D, IT, and manufacturing services \u2014 undisclosed financials",
+      "confidence": "high",
+      "id": 8650
+    },
+    {
+      "date": "2025-12-15",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "BGIN changed its auditor to MaloneBailey, LLP approximately two months after its IPO closed",
+      "confidence": "high",
+      "id": 8652
+    },
+    {
+      "date": "2026-03-16",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "BGIN announced successful tape-out of 4nm BT1 Bitcoin mining ASIC chip \u2014 direct competition with Bitmain and similar chip designers",
+      "confidence": "high",
+      "id": 8653
+    },
+    {
+      "date": "2026-03-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "BGIN received a favorable decision in an intellectual property dispute \u2014 nature of dispute unconfirmed",
+      "confidence": "medium",
+      "id": 8654
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "market",
+      "summary": "BGIN stock has declined 63% from its $6.00 IPO price to $2.22 within five months; trading volume is extremely thin",
+      "confidence": "high",
+      "id": 8651
+    }
+  ]
+}

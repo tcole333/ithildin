@@ -5,25 +5,29 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:18.155769",
-  "last_updated": "2026-03-11T16:35:26",
+  "generated_at": "2026-05-07T23:07:36.176816",
+  "last_updated": "2026-03-24T14:18:12",
   "stats": {
-    "total_findings": 17,
-    "total_connections": 7,
-    "total_entities": 15,
+    "total_findings": 19,
+    "total_connections": 23,
+    "total_entities": 17,
     "finding_types": {
-      "relationship": 5,
+      "relationship": 6,
       "financial": 4,
       "identity": 2,
       "intelligence": 4,
-      "legal": 2
+      "legal": 3
     },
     "connection_types": {
       "corporate": 1,
-      "political": 5,
-      "advisory": 1
+      "political": 12,
+      "advisory": 2,
+      "controls": 4,
+      "employment": 2,
+      "owns": 1,
+      "social": 1
     },
-    "last_updated": "2026-03-11T16:35:26"
+    "last_updated": "2026-03-24T14:18:12"
   },
   "findings": [
     {
@@ -529,6 +533,93 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7601,
+      "finding_type": "relationship",
+      "summary": "Controls interlocking network of 5+ election nonprofits from CPI headquarters at 300 Independence Ave SE DC",
+      "detail": "Mitchell operates at least 5 interconnected entities all sharing the CPI address: (1) Election Integrity Network (EIN 332585603, 501c3), (2) FAIR Elections Fund (EIN 931870447, 501c3, raised 3.9M in first year), (3) Valid Vote (GA 501c3, supports EagleAI), (4) Compass Legal Group (her law firm handling tax-exempt applications), (5) 1792 Exchange (she is Secretary/Principal Officer). Only Citizens Vote Coalition (80+ member orgs) sits atop. CPI provided 525K of EIN 753K revenue in 2022. FAIR Elections Fund distributed 1.6M in grants including 400K to FDRLST Media, 325K to Virginia Institute for Public Policy, 300K to State Freedom Caucus Foundation.",
+      "source_datasets": [
+        "990",
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:04:26",
+      "target_name": "Cleta Mitchell",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Documented.net EagleAI investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IssueOne Only Citizens Vote report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 24151",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EINs 332585603 931870447 821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7603,
+      "finding_type": "legal",
+      "summary": "Mitchell is attorney in active NC voting rights case Democracy North Carolina v Hirsch with RNC and NC Election Integrity Team",
+      "detail": "Mitchell is listed as attorney in Democracy North Carolina v. Hirsch (1:23-cv-00878, M.D.N.C.), filed 2023-10-17, a 42 USC 1983 voting rights case. Co-parties include NC Republican Party, RNC, NC Election Integrity Team. Judge Thomas Schroeder presiding. Case remains active (no termination date). Mitchell also sued Jan 6 Select Committee (1:22-cv-00250 D.D.C.) and fought AT&T subpoena of her phone records (1:21-mc-00157 D.D.C.).",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:04:48",
+      "target_name": "Cleta Mitchell",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 61609804",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 62644822",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 67887996",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -644,6 +735,281 @@
       ]
     },
     {
+      "id": 3699,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "controls",
+      "description": "Mitchell is Director of EIN, President of FAIR Elections Fund, Chairman of PILF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Election Integrity Network",
+      "other_person_slug": "election-integrity-network",
+      "evidence": []
+    },
+    {
+      "id": 3774,
+      "person_a": "Cleta Mitchell",
+      "person_b": "J. Christian Adams",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:19",
+      "profile_id": "tech-right",
+      "other_person": "J. Christian Adams",
+      "other_person_slug": "j-christian-adams",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/leadership",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3775,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Sharon Bemis",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:20",
+      "profile_id": "tech-right",
+      "other_person": "Sharon Bemis",
+      "other_person_slug": "sharon-bemis",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/leadership",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3776,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Kerri Toloczko",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:21",
+      "profile_id": "tech-right",
+      "other_person": "Kerri Toloczko",
+      "other_person_slug": "kerri-toloczko",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "electionintegritynetwork.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3777,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Julie Adams",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:22",
+      "profile_id": "tech-right",
+      "other_person": "Julie Adams",
+      "other_person_slug": "julie-adams",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "propublica.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3778,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Jim Womack",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:22",
+      "profile_id": "tech-right",
+      "other_person": "Jim Womack",
+      "other_person_slug": "jim-womack",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whqr.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3828,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Foundation for Accountability Integrity and Research in Elections",
+      "relationship_type": "controls",
+      "description": "President and founder of FAIR Elections Fund",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:37",
+      "profile_id": "tech-right",
+      "other_person": "Foundation for Accountability Integrity and Research in Elections",
+      "other_person_slug": "foundation-for-accountability-integrity-and-research-in-elections",
+      "evidence": []
+    },
+    {
+      "id": 3829,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Compass Legal Group",
+      "relationship_type": "owns",
+      "description": "Beneficial owner of Compass Legal Group",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:37",
+      "profile_id": "tech-right",
+      "other_person": "Compass Legal Group",
+      "other_person_slug": "compass-legal-group",
+      "evidence": []
+    },
+    {
+      "id": 3830,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "controls",
+      "description": "Co-founder and leader",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:37",
+      "profile_id": "tech-right",
+      "other_person": "Only Citizens Vote Coalition",
+      "other_person_slug": "only-citizens-vote-coalition",
+      "evidence": []
+    },
+    {
+      "id": 3831,
+      "person_a": "Cleta Mitchell",
+      "person_b": "EagleAI",
+      "relationship_type": "advisory",
+      "description": "Guides strategy and provides legal counsel for EagleAI",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:37",
+      "profile_id": "tech-right",
+      "other_person": "EagleAI",
+      "other_person_slug": "eagleai",
+      "evidence": []
+    },
+    {
+      "id": 3838,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "controls",
+      "description": "Mitchell is chairman of PILF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Public Interest Legal Foundation",
+      "other_person_slug": "public-interest-legal-foundation",
+      "evidence": []
+    },
+    {
+      "id": 3839,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Hans von Spakovsky",
+      "relationship_type": "political",
+      "description": "Both lead election enforcement apparatus; Mitchell chairs PILF where von Spakovsky is board member; both connected to Project 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Hans von Spakovsky",
+      "other_person_slug": "hans-von-spakovsky",
+      "evidence": []
+    },
+    {
+      "id": 3840,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Hans von Spakovsky",
+      "relationship_type": "social",
+      "description": "Co-leaders of election integrity movement",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Hans von Spakovsky",
+      "other_person_slug": "hans-von-spakovsky",
+      "evidence": []
+    },
+    {
+      "id": 3868,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Kurt Olsen",
+      "relationship_type": "political",
+      "description": "Both involved in Gabbard election security operations per Wall Street Journal",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:21",
+      "profile_id": "tech-right",
+      "other_person": "Kurt Olsen",
+      "other_person_slug": "kurt-olsen",
+      "evidence": []
+    },
+    {
+      "id": 3869,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Tulsi Gabbard",
+      "relationship_type": "political",
+      "description": "Mitchell works with Gabbard ODNI on election security activities",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:21",
+      "profile_id": "tech-right",
+      "other_person": "Tulsi Gabbard",
+      "other_person_slug": "tulsi-gabbard",
+      "evidence": []
+    },
+    {
+      "id": 3889,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Gina Swoboda",
+      "relationship_type": "political",
+      "description": "Mitchell facilitated Swoboda introductions to state officials; Swoboda featured at CPI EIN summits",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:12",
+      "profile_id": "tech-right",
+      "other_person": "Gina Swoboda",
+      "other_person_slug": "gina-swoboda",
+      "evidence": []
+    },
+    {
       "id": 3295,
       "person_a": "Cleta Mitchell",
       "person_b": "Trey Trainor",
@@ -672,6 +1038,17 @@
       "date_start": "2021",
       "date_end": null,
       "source": "InfluenceWatch",
+      "entity_id": 968,
+      "entity_name": "Election Integrity Network",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "Founder and Chairman",
+      "date_start": "2021-01",
+      "date_end": null,
+      "source": "electionintegritynetwork.org/leadership",
       "entity_id": 968,
       "entity_name": "Election Integrity Network",
       "entity_type": "nonprofit",
@@ -828,6 +1205,17 @@
       "source": "IRS 990 CPI 2021, compensation ,000",
       "entity_id": 972,
       "entity_name": "Conservative Partnership Institute",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "President/Founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search:exposedbycmd",
+      "entity_id": 969,
+      "entity_name": "FAIR Elections Fund",
       "entity_type": "nonprofit",
       "jurisdiction": "DC",
       "entity_status": "active"

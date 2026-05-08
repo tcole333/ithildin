@@ -1,0 +1,267 @@
+{
+  "name": "Readsboro International Corporation",
+  "slug": "readsboro-international-corporation",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.407317",
+  "last_updated": "2026-04-02T22:54:52",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 2,
+      "intelligence": 1,
+      "legal": 1,
+      "location": 1,
+      "financial": 1
+    },
+    "connection_types": {
+      "financial": 2,
+      "corporate": 1
+    },
+    "last_updated": "2026-04-02T22:54:52"
+  },
+  "findings": [
+    {
+      "id": 9200,
+      "finding_type": "identity",
+      "summary": "Readsboro International Corporation does not appear in any public corporate registry (OpenCorporates returns 0 results globally). The entity foreclosed on 7 Centice Corp patents in 2016 and transferred them to Cyprus-based ASB International Services Ltd in 2021. Historical entities named Readsboro exist in classic offshore jurisdictions: Readsboro Company NV (Curacao, inactive) and Readsboro SA (Panama, 1986, suspended).",
+      "detail": null,
+      "source_datasets": [
+        "registry",
+        "patents"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:18:51",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates global search for Readsboro (30 results, none matching Readsboro International Corporation); USPTO assignment records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9233,
+      "finding_type": "intelligence",
+      "summary": "Ghost entity with no registry footprint used to execute strict foreclosure on 7 Centice patents in 2016",
+      "detail": "Executed 'STRICT FORECLOSURE RESULTING FROM PROMISSORY NOTE DEFAULT' on 7 Centice Corporation (f/k/a Optopo Inc.) patents on 2016-10-20. Filed supplemental resubmission 2017-02-07. Transferred all patents to ASB International Services Ltd (Cyprus HE385193) on 2021-03-18. No corporate registry record found in OpenCorporates, Cyprus registry, or web search. Likely incorporated in a non-disclosure jurisdiction (Marshall Islands or similar). The entity served as an intermediary to distance the foreclosure from recognizable S-Group entities.",
+      "source_datasets": [
+        "registry",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:26:41",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates: 0 results for Readsboro International",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO Assignment Database: foreclosure records 2016-10-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9236,
+      "finding_type": "legal",
+      "summary": "Ghost entity that foreclosed 7 Centice patents in 2016 via strict foreclosure. No corporate registration found in any jurisdiction.",
+      "detail": "On 2016-08-11, Readsboro International Corporation executed strict foreclosure from promissory note default on 7 Centice Corporation patents (7218395, 7379181, 7720694, 7830507, 8331678, 8417539, 8417540, 8731959). USPTO Reel/Frame 41190/466. Supplemental filing 2017-02-07 at 41650/55. Entity does NOT appear in OpenCorporates or any US/offshore corporate registry. Related historical entities: Readsboro Company N.V. (Curacao #23002, Inactive) and Readsboro S.A. (Panama #169714, Suspendido).",
+      "source_datasets": [
+        "patents",
+        "opencorporates"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:35:19",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates search: zero results for Readsboro International Corporation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO Patent Assignment Database Reel/Frame 41190/466",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9266,
+      "finding_type": "identity",
+      "summary": "Readsboro International Corporation has zero public registry presence -- not on OpenCorporates, no web results, no corporate filing records found. Conducted strict foreclosure on Centice Corporation patents (Aug 2016) and transferred them to ASB International Services Ltd (Dec 2020). Both transactions handled by Williams Mullen / F. Michael Sajovec in Raleigh NC. Complete opacity suggests purpose-built shell entity. 'Readsboro' is a tiny Vermont town (~800 population) with no connection to the NC-based Centice or the Cyprus-based ASB.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:34:14",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-41190-466,USPTO-55638-474",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9311,
+      "finding_type": "location",
+      "summary": "CRITICAL: Bulk USPTO data reveals Readsboro International Corporation is registered in LARNACA, CYPRUS -- not a US entity as previously assumed. Address confirmed from USPTO patent assignment bulk data (reel 41190/466). Foreclosure date: October 20, 2016. Transferred 8 Centice patents (not 7 as previously counted). The pipeline now uses 3 different Cyprus cities: Limassol (Oscrivia), Larnaca (Readsboro), Nicosia (ASB). Different service providers at each location creates opacity through jurisdictional separation within a single country.",
+      "detail": null,
+      "source_datasets": [
+        "uspto"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:52:46",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-41190-466",
+          "source_quote": "READSBORO INTERNATIONAL CORPORATION, LARNACA, CYPRUS as assignee of STRICT FORECLOSURE RESULTING FROM PROMISSORY NOTE DEFAULT",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9313,
+      "finding_type": "financial",
+      "summary": "PATTERN ANALYSIS: The Readsboro strict foreclosure on Centice patents is the ONLY strict foreclosure to a foreign/offshore entity in the entire USPTO patent assignment bulk database (7.8M records, 1970-2017). Of 8 strict foreclosures total in the database, all others involve US domestic entities or individuals. The Centice\u2192Readsboro (Larnaca, Cyprus) transfer is a unique outlier -- strict foreclosure on US patents to a Cyprus shell entity has no precedent in the data.",
+      "detail": null,
+      "source_datasets": [
+        "uspto"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:54:52",
+      "target_name": "Readsboro International Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-41190-466",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4803,
+      "person_a": "Centice Corp",
+      "person_b": "Readsboro International Corporation",
+      "relationship_type": "financial",
+      "description": "Readsboro seized 7 Centice patents via strict foreclosure from promissory note default (2016-08-11)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:19:17",
+      "profile_id": "dfj-network",
+      "other_person": "Centice Corp",
+      "other_person_slug": "centice-corp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO assignment records Reel/Frame 41190/466",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4804,
+      "person_a": "ASB International Services Ltd",
+      "person_b": "Readsboro International Corporation",
+      "relationship_type": "corporate",
+      "description": "Readsboro transferred 7 Centice Raman spectroscopy patents to ASB International Services (Cyprus HE385193) on 2020-12-29",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:19:17",
+      "profile_id": "dfj-network",
+      "other_person": "ASB International Services Ltd",
+      "other_person_slug": "asb-international-services-ltd",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO assignment records Reel/Frame 55638/474",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4817,
+      "person_a": "ASB International Services Ltd",
+      "person_b": "Readsboro International Corporation",
+      "relationship_type": "financial",
+      "description": "Readsboro transferred 7 foreclosed Centice patents to ASB International in Dec 2020",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:31",
+      "profile_id": "epstein",
+      "other_person": "ASB International Services Ltd",
+      "other_person_slug": "asb-international-services-ltd",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO Reel/Frame 55638/474",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

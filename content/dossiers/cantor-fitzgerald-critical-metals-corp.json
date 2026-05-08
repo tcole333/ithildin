@@ -1,0 +1,231 @@
+{
+  "name": "Cantor Fitzgerald / Critical Metals Corp",
+  "slug": "cantor-fitzgerald-critical-metals-corp",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.376391",
+  "last_updated": "2026-03-24T00:15:49",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "negative_result": 1,
+      "intelligence": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-24T00:15:49"
+  },
+  "findings": [
+    {
+      "id": 7537,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald served as sole book-running manager for Sizzle Acquisition Corp IPO ($155M, Nov 2021) \u2014 the SPAC that became CRML",
+      "detail": "Cantor Fitzgerald & Co. was the sole book-running manager for Sizzle Acquisition Corp's initial public offering on November 4, 2021. The IPO was upsized from $135M to $155M, offering 15,500,000 units at $10.00 per unit. Each unit consisted of one share of common stock and one-half of one redeemable warrant exercisable at $11.50 per share. Sizzle merged with European Lithium/Critical Metals Corp in February 2024, making Cantor the originating financial infrastructure for what became CRML.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:13:59",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1829322/000121390023082166/ea187557ex1-1_sizzle.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7538,
+      "finding_type": "financial",
+      "summary": "Cantor converted $5.7M deferred underwriting fee into 1,200,000 CRML shares at $6.79/share instead of cash payment",
+      "detail": "On October 26, 2023, Sizzle and Cantor Fitzgerald amended their Underwriting Agreement. Instead of receiving the $5,705,000 cash deferred underwriting commission, Cantor agreed to accept 900,000 Deferred Commission Shares. At closing of the CRML business combination (Feb 27, 2024), Cantor received 1,200,000 Ordinary Shares as compensation for the deferred underwriting fee at a deemed issue price of $6.79 per share. Additionally, Cantor received 47,250 shares in exchange for private shares purchased during the Sizzle IPO at $10.00 per share. Total Cantor share allocation: 1,247,250 CRML Ordinary Shares. Cantor was also given registration rights for these shares, enabling future resale.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:14:13",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390025018118/ea0202260-08.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1829322/000121390023082166/ea187557ex1-1_sizzle.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7539,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald sold 87% of its CRML stake (1,086,122 shares) within months of lock-up expiry, reducing from 1.247M to 161K shares",
+      "detail": "Cantor Fitzgerald LP held 1,247,250 CRML shares through Q3/Q4 2024 (valued at $9.3M-$17M at peak). After the one-year lock-up expired around Feb 27, 2025, Cantor rapidly divested. By Q1 2025 (March 31, 2025), holdings dropped 87.08% to 161,128 shares valued at just $224K. Subsequently Cantor rebuilt slightly: Q2 2025 = 249K shares ($891K), Q3 2025 = 190K shares ($1.2M). The original 1,200,000 shares received at $6.79 deemed price were sold during a period when CRML traded between $1.39-$3.58, suggesting Cantor realized a loss on many shares \u2014 unless some were sold earlier in Q4 2024 when stock was at $6.82. Cantor had registration rights enabling this resale.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:14:27",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "13F-HR filings by Cantor Fitzgerald LP: Feb 14, 2025 (1,247,250 shares) and May 15, 2025 (161,128 shares), tracked via Stockzoa/Fintel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7540,
+      "finding_type": "financial",
+      "summary": "Cantor named as Selling Securityholder in CRML prospectus covering 100.3M shares \u2014 Cantor held 1.247M of those",
+      "detail": "In the Feb 27, 2025 424B3 prospectus (Registration No. 333-278400), Cantor Fitzgerald & Co. is listed as a Selling Securityholder for 1,247,250 Ordinary Shares out of a total secondary offering of 100,312,567 shares. The prospectus enabled Cantor and other insiders to sell shares into the public market. Other major selling securityholders included European Lithium (67.8M shares at effective price of $0.68/share), VO Sponsor LLC (3.4M shares), PIPE Investors Empery entities (5.3M shares total), GEM Global (14.4M shares), and various vendors/service providers (1.015M shares). The prospectus also covered 7.75M shares issuable upon public warrant exercise at $11.50.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:14:38",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390025018118/ea0202260-08.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7542,
+      "finding_type": "financial",
+      "summary": "CRML filed 4 F-3 shelf registrations and 23 424B3 prospectuses since 2023 \u2014 serial dilution infrastructure",
+      "detail": "CRML has filed an extraordinary volume of registration statements enabling share resales: 4 F-3 shelf registrations (Apr 2025, Oct 2025, Feb 2026, Mar 2026) and 23 424B3 prospectuses since Dec 2023. Key registrations: (1) 100.3M shares via F-1/424B3 covering all SPAC-era insiders including Cantor; (2) 18M shares for Oct 2025 PIPE investor; (3) 2.78M shares for placement agent warrants and asset purchase; (4) 2.74M shares for GEM Global. The company also registered 18.1M shares via S-8 for its incentive plan. Shares outstanding grew to ~117.7M by Oct 2025. While Cantor is not the placement agent for the 2025 PIPE transactions (those were Jett Capital Advisors, Cohen & Company Capital Markets, and EAS Advisors), Cantor created the original SPAC infrastructure that enabled this pattern.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:15:04",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 424B3 prospectus Feb 27, 2025 detailing 100.3M share secondary offering",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7544,
+      "finding_type": "negative_result",
+      "summary": "Cantor Fitzgerald is NOT the placement agent for CRML's 2025 PIPE financings \u2014 separate firms handle those",
+      "detail": "Despite Cantor's deep involvement as SPAC underwriter and significant shareholder, Cantor Fitzgerald was NOT the placement agent for CRML's two major 2025 PIPE financings. The February 2025 $22.5M PIPE used Jett Capital Advisors LLC, Cohen & Company Capital Markets, and EAS Advisors LLC (acting through Odeon Capital Group LLC). The October 2025 $50M PIPE used Jett Capital Advisors and Cohen & Company Capital Markets. The March 2026 424B3 filing identifies 'February Placement Agents' and 'October Placement Agents' \u2014 neither of which is Cantor. Cantor's role appears confined to the SPAC origination layer, not ongoing capital raises.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:15:22",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390026023653/ea0279761-424b3_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML press release Feb 6, 2025: Critical Metals Corp Announces $22.5 Million Private Placement Equity Financing, naming Jett Capital, Cohen, EAS as placement agents",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7548,
+      "finding_type": "intelligence",
+      "summary": "Cantor's CRML shares acquired at $6.79 effective cost were registered for resale under 100.3M share prospectus \u2014 benefiting from registration infrastructure it helped create",
+      "detail": "Cantor's 1,247,250 CRML shares (1,200,000 deferred fee shares at $6.79 deemed price + 47,250 private placement shares at $10.00) were included in the Feb 2025 424B3 prospectus registering 100,312,567 shares for resale. This prospectus was the registration vehicle that enabled Cantor to sell its shares on the open market. Key structural point: Cantor created the SPAC, earned the underwriting commission, converted cash commission to equity, received registration rights as part of the fee modification agreement, and then used the registration statement infrastructure to liquidate its position \u2014 dumping 87% of shares within months of lock-up expiry. The CRML prospectus explicitly notes that sales by selling securityholders could increase volatility and cause significant price decline.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:15:49",
+      "target_name": "Cantor Fitzgerald / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390025018118/ea0202260-08.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sizzle 8-K Oct 26, 2023 Underwriting Agreement Amendment granting registration rights",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

@@ -3,36 +3,39 @@
   "slug": "peter-thiel",
   "aliases": [],
   "profile_ids": [
+    "altman",
+    "dfj-network",
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.650256",
-  "last_updated": "2026-03-06T01:42:19",
+  "generated_at": "2026-05-07T23:07:35.952290",
+  "last_updated": "2026-04-06T20:15:56",
   "stats": {
-    "total_findings": 95,
-    "total_connections": 71,
-    "total_entities": 1,
+    "total_findings": 96,
+    "total_connections": 85,
+    "total_entities": 3,
     "finding_types": {
       "identity": 2,
       "unknown": 16,
       "relationship": 20,
-      "financial": 17,
+      "financial": 18,
       "legal": 16,
       "location": 1,
       "intelligence": 15,
       "communication": 8
     },
     "connection_types": {
-      "social": 21,
-      "employment": 2,
+      "social": 22,
+      "employment": 4,
       "legal": 1,
-      "corporate": 17,
-      "financial": 16,
-      "advisory": 6,
+      "corporate": 18,
+      "financial": 22,
+      "advisory": 7,
       "political": 5,
+      "funds": 3,
       "intelligence": 3
     },
-    "last_updated": "2026-03-06T01:42:19"
+    "last_updated": "2026-04-06T20:15:56"
   },
   "findings": [
     {
@@ -74,7 +77,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OPENSANCTIONS:Q705525",
+          "evidence_ref": "OpenSanctions:Q705525",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2984,6 +2987,31 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 6848,
+      "finding_type": "financial",
+      "summary": "Thiel adopted Rule 10b5-1 trading plan on November 14, 2025 to sell up to 2,000,000 shares of Palantir Class A common stock by March 12, 2027.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:41:19",
+      "target_name": "Peter Thiel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -3770,6 +3798,219 @@
       "profile_id": "tech-right",
       "other_person": "Praxis",
       "other_person_slug": "praxis",
+      "evidence": []
+    },
+    {
+      "id": 3409,
+      "person_a": "Peter Thiel",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "funds",
+      "description": "Early financier of Rockbridge Network. Described as puppet master. Mentor and funder of Vance since before 2022 Senate race. Maintains presence at high-dollar retreats. Silicon Valley billionaire and Palantir founder.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:01:55",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Reuters Aug 2024; Economy.ac Jun 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3436,
+      "person_a": "Chris Buskirk",
+      "person_b": "Peter Thiel",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:43:48",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Described as Thiel 'confidant'. Thiel poured millions into committee that paid consulting fees to Buskirk's company. Thiel major donor to Rockbridge Network. Thiel introduced Vance to Buskirk. Both co-invest through 1789 Capital ecosystem.",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3662,
+      "person_a": "Erebor Bank",
+      "person_b": "Peter Thiel",
+      "relationship_type": "funds",
+      "description": "Thiel/Founders Fund is a backer of Erebor Bank",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:37",
+      "profile_id": "tech-right",
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Multiple press reports; OCC charter application",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3687,
+      "person_a": "Peter Thiel",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "financial",
+      "description": "Peter Thiel is a donor to Rockbridge Network",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:24",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 423815",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3743,
+      "person_a": "Blake Masters",
+      "person_b": "Peter Thiel",
+      "relationship_type": "employment",
+      "description": "Masters served as COO of Thiel Capital and president of Thiel Foundation. Met Thiel at Stanford Law School 2011.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:01",
+      "profile_id": "tech-right",
+      "other_person": "Blake Masters",
+      "other_person_slug": "blake-masters",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Blake_Masters",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3854,
+      "person_a": "David Sacks",
+      "person_b": "Peter Thiel",
+      "relationship_type": "social",
+      "description": "Co-authors of 'The Diversity Myth' (1995). Both Stanford Review. PayPal co-executives (Thiel CEO, Sacks COO 1999-2002). Both key PayPal Mafia members. Sacks' M donation to JD Vance PAC aligned with Thiel's M backing.",
+      "strength": "strong",
+      "date_range": "1992-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:08",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship, EDGAR, FEC",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3858,
+      "person_a": "Keith Rabois",
+      "person_b": "Peter Thiel",
+      "relationship_type": "employment",
+      "description": "Rabois was PayPal EVP under Thiel (2000-02). GP at Thiel's Founders Fund (2019-2024). PayPal Mafia member. Both Stanford alumni.",
+      "strength": "strong",
+      "date_range": "2000-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:35",
+      "profile_id": "tech-right",
+      "other_person": "Keith Rabois",
+      "other_person_slug": "keith-rabois",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis, Founders Fund, PayPal history",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4776,
+      "person_a": "Foresight Institute",
+      "person_b": "Peter Thiel",
+      "relationship_type": "funds",
+      "description": "100K Thiel Foundation grant 2013; Breakthrough Philanthropy fundraiser Dec 2010; board member Sonia Arrison bridges both orgs",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:53:55",
+      "profile_id": "dfj-network",
+      "other_person": "Foresight Institute",
+      "other_person_slug": "foresight-institute",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00752271",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4863,
+      "person_a": "Peter Thiel",
+      "person_b": "Sam Altman",
+      "relationship_type": "financial",
+      "description": "Thiel was primary backer of Hydrazine Capital and early mentor",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 16:50:05",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5085,
+      "person_a": "Peter Thiel",
+      "person_b": "Hydrazine Capital",
+      "relationship_type": "financial",
+      "description": "Peter Thiel was the anchor investor/LP in Hydrazine Capital Fund I (~$20-21M), which Sam Altman launched in 2012 after selling Loopt. Fund I focused 75% of capital on YC companies with Thiel's backing.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Capital",
+      "other_person_slug": "hydrazine-capital",
       "evidence": []
     },
     {
@@ -4565,6 +4806,80 @@
       ]
     },
     {
+      "id": 3421,
+      "person_a": "Chris Buskirk",
+      "person_b": "Peter Thiel",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:03:45",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:439747",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3496,
+      "person_a": "David Sacks",
+      "person_b": "Peter Thiel",
+      "relationship_type": "corporate",
+      "description": "Both Stanford Review editors (Thiel founder 1987, Sacks editor-in-chief). PayPal Mafia core (Thiel co-founder, Sacks COO). Sacks ran Craft Ventures after PayPal. Thiel donated to Sacks politically. Now both in Trump orbit: Sacks as AI/Crypto Czar, Thiel as kingmaker.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:14",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": []
+    },
+    {
+      "id": 3567,
+      "person_a": "America 21 PAC",
+      "person_b": "Peter Thiel",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:57",
+      "profile_id": "tech-right",
+      "other_person": "America 21 PAC",
+      "other_person_slug": "america-21-pac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00777185",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5089,
+      "person_a": "Sam Altman",
+      "person_b": "Peter Thiel",
+      "relationship_type": "financial",
+      "description": "Shared co-investment in Helion Energy Inc. via Mithril Capital (Thiel) and direct investment (Altman). Non-subject edge in graph. Creates undocumented indirect financial relationship between the two.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
       "id": 1345,
       "person_a": "Nathan Myhrvold",
       "person_b": "Peter Thiel",
@@ -4683,6 +4998,28 @@
   ],
   "entities": [
     {
+      "role": "Managing Member of GP",
+      "date_start": "2025-03",
+      "date_end": null,
+      "source": "SEC Form D CIK 0002059945",
+      "entity_id": 1159,
+      "entity_name": "Founders Fund Growth III, LP",
+      "entity_type": "fund",
+      "jurisdiction": "de",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Member of GP",
+      "date_start": "2026-03",
+      "date_end": null,
+      "source": "SEC Form D CIK 0002112131",
+      "entity_id": 1160,
+      "entity_name": "Founders Fund Growth IV, LP",
+      "entity_type": "fund",
+      "jurisdiction": "de",
+      "entity_status": "active"
+    },
+    {
       "role": "principal",
       "date_start": null,
       "date_end": null,
@@ -4712,6 +5049,14 @@
       "id": 2727
     },
     {
+      "date": "1992-present",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Co-authors of 'The Diversity Myth' (1995). Both Stanford Review. PayPal co-executives (Thiel CEO, Sacks COO 1999-2002). Both key PayPal Mafia members. Sacks' M donation to JD Vance PAC aligned with Thiel's M backing.",
+      "other_person": "David Sacks",
+      "id": 3854
+    },
+    {
       "date": "1995",
       "type": "finding",
       "finding_type": "relationship",
@@ -4726,6 +5071,14 @@
       "summary": "Thiel business empire: PayPal (1998), Palantir (2003), Facebook investor (2004), Founders Fund ($17B AUM)",
       "confidence": "high",
       "id": 2687
+    },
+    {
+      "date": "2000-present",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Rabois was PayPal EVP under Thiel (2000-02). GP at Thiel's Founders Fund (2019-2024). PayPal Mafia member. Both Stanford alumni.",
+      "other_person": "Keith Rabois",
+      "id": 3858
     },
     {
       "date": "2005",
@@ -5310,6 +5663,14 @@
       "summary": "Palantir government contracts nearly doubled to $970.5M in 2025; $10B Army contract, $30M ICE ImmigrationOS, Israeli Defense Ministry partnership",
       "confidence": "high",
       "id": 2692
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Thiel/Founders Fund is a backer of Erebor Bank",
+      "other_person": "Erebor Bank",
+      "id": 3662
     },
     {
       "date": "2025-03-10",

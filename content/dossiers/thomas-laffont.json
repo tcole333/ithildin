@@ -5,15 +5,15 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:08.013837",
+  "generated_at": "2026-05-07T23:07:36.444386",
   "last_updated": "2026-03-06T03:51:55",
   "stats": {
     "total_findings": 5,
     "total_connections": 2,
     "total_entities": 0,
     "finding_types": {
-      "financial": 2,
-      "relationship": 3
+      "relationship": 3,
+      "financial": 2
     },
     "connection_types": {
       "political": 1,
@@ -22,6 +22,31 @@
     "last_updated": "2026-03-06T03:51:55"
   },
   "findings": [
+    {
+      "id": 5843,
+      "finding_type": "relationship",
+      "summary": "EDGAR: Thomas Laffont linked to OneTrust LLC and Weights & Biases \u2014 data governance and AI infrastructure",
+      "detail": "EDGAR Form D filings show Thomas Laffont (as Coatue representative) involved in private placements for OneTrust LLC (CIK 0001782045, Atlanta GA, filed 2023-08-04) and Weights & Biases Inc (CIK 0001987275, San Francisco CA, filed 2023-10-03). OneTrust is a leading data governance and privacy platform used by enterprises and government agencies. Weights & Biases provides ML experiment tracking and model monitoring infrastructure widely used in AI/defense R&D. Both represent strategic Coatue investments in AI infrastructure that could benefit from defense/government AI deployments.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-08-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:51:55",
+      "target_name": "Thomas Laffont",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR Form D filings: OneTrust LLC 0001140361-23-037979; Weights & Biases 0001987275-23-000001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5353,
       "finding_type": "financial",
@@ -136,31 +161,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 5843,
-      "finding_type": "relationship",
-      "summary": "EDGAR: Thomas Laffont linked to OneTrust LLC and Weights & Biases \u2014 data governance and AI infrastructure",
-      "detail": "EDGAR Form D filings show Thomas Laffont (as Coatue representative) involved in private placements for OneTrust LLC (CIK 0001782045, Atlanta GA, filed 2023-08-04) and Weights & Biases Inc (CIK 0001987275, San Francisco CA, filed 2023-10-03). OneTrust is a leading data governance and privacy platform used by enterprises and government agencies. Weights & Biases provides ML experiment tracking and model monitoring infrastructure widely used in AI/defense R&D. Both represent strategic Coatue investments in AI infrastructure that could benefit from defense/government AI deployments.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:51:55",
-      "target_name": "Thomas Laffont",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR Form D filings: OneTrust LLC 0001140361-23-037979; Weights & Biases 0001987275-23-000001",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -196,7 +196,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2023-08-04",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "EDGAR: Thomas Laffont linked to OneTrust LLC and Weights & Biases \u2014 data governance and AI infrastructure",
+      "confidence": "confirmed",
+      "id": 5843
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5823,
@@ -288,82 +297,5 @@
         "description": "Thomas's board seats at OneTrust and Weights & Biases place him in governance roles at companies that provide infrastructure for data privacy compliance and AI model development respectively. These are not consumer products \u2014 they are platforms used by enterprises and government agencies. Board-level control of vendors in these categories constitutes a governance role in the AI infrastructure supply chain not reflected in fund-level filings."
       }
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Thomas Laffont",
-      "connections": [
-        {
-          "target": "Philippe Laffont",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Brothers split FEC donations: Philippe covers Democratic leadership (Schumer/DSCC), Thomas covers Republican leadership (McConnell)"
-        },
-        {
-          "target": "Coatue Management",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Co-founder of Coatue, focused on private investments. Appears only as Director of OneTrust LLC (portfolio company) in Form D filings \u2014 notably absent from all Coatue fund-level filings."
-        }
-      ],
-      "secondHop": {
-        "Coatue Management": [
-          {
-            "target": "Philippe Laffont",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founder, Director, and Executive Officer of Coatue Management LLC (104 fund entities). Listed on 61 Form D filings across 13 fund vehicles 2009-2025. HQ: 9 West 57th Street, 25th Floor, New York."
-          },
-          {
-            "target": "J.P. Morgan Private Investments",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "JPM Private Investments serves as Executive Officer/Promoter for 15 Coatue Private Investors feeder fund vehicles (27 filings). Channels JPM private wealth capital into Coatue strategies including defense-adjacent AI investments."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Emil Michael nominated as Under Secretary of Defense (A&S) while Coatue invested in Anthropic (which Michael co-founded DPCM Capital SPAC era connections). Coatue also invested in OpenAI and Shield AI \u2014 all potential beneficiaries of DoD acquisition decisions Michael would oversee."
-          },
-          {
-            "target": "Anthropic",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Coatue dual-bet: invested in both Anthropic Series G and OpenAI round on same day as Anthropic federal ban"
-          }
-        ],
-        "Philippe Laffont": [
-          {
-            "target": "Coatue Management LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Laffont founded Coatue Management"
-          },
-          {
-            "target": "Emil Michael",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Michael was Coatue senior advisor (Oct 2018+); Laffont's Coatue co-led $30B Anthropic Series G (Feb 2026) while Michael led Pentagon Anthropic standoff"
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Lonsdale via 8VC, Laffont via Coatue Management."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

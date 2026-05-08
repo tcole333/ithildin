@@ -5,7 +5,7 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.979258",
+  "generated_at": "2026-05-07T23:07:36.389258",
   "last_updated": "2026-03-06T03:51:44",
   "stats": {
     "total_findings": 7,
@@ -24,6 +24,31 @@
     "last_updated": "2026-03-06T03:51:44"
   },
   "findings": [
+    {
+      "id": 5821,
+      "finding_type": "financial",
+      "summary": "FEC donations 2016-2022 \u2014 primarily Democratic, $50K to Schumer majority committee",
+      "detail": "FEC records show Philippe Laffont donated $50,000 to SCHUMER COMMITTEE FOR THE MAJORITY on 2016-10-31, plus memo-allocated contributions to multiple Democratic Senate campaigns. In 2019, donated $5,600 to WIN THE ERA PAC (Buttigieg). In 2022, donated $5,800 to CRUMPACKER FOR CONGRESS (R-CO) and $2,900 to SINEMA FOR ARIZONA (IND). Employer listed as COATUE MANAGEMENT. No Trump-related donations found.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2016-10-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:48:00",
+      "target_name": "Philippe Laffont",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions search: Laffont Philippe, 20 records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4601,
       "finding_type": "financial",
@@ -44,7 +69,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "FEC filings, LDA filings, EDGAR CIK 0001135730, WhaleeWisdom",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -130,7 +155,7 @@
       "id": 5820,
       "finding_type": "financial",
       "summary": "Coatue $54B AUM with defense tech exposure (SpaceX, Anthropic, AI)",
-      "detail": "Coatue Management, founded by Philippe Laffont in 1999, manages over $54 billion in AUM as of Dec 2024. The firm has invested in SpaceX, OpenAI, Anthropic ($30B Series G lead at $380B valuation), xAI, Scale AI, and Anduril — spanning AI/defense tech. Coatue is characterized as a late-stage defense tech investor writing $50M+ growth checks. EDGAR shows 1,339 filings for Coatue Management LLC (CIK 0001135730), predominantly Schedule 13G/13D filings.",
+      "detail": "Coatue Management, founded by Philippe Laffont in 1999, manages over $54 billion in AUM as of Dec 2024. The firm has invested in SpaceX, OpenAI, Anthropic ($30B Series G lead at $380B valuation), xAI, Scale AI, and Anduril \u2014 spanning AI/defense tech. Coatue is characterized as a late-stage defense tech investor writing $50M+ growth checks. EDGAR shows 1,339 filings for Coatue Management LLC (CIK 0001135730), predominantly Schedule 13G/13D filings.",
       "source_datasets": [
         "edgar",
         "web_search"
@@ -152,7 +177,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "EDGAR search (CIK 0001135730)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -167,34 +192,9 @@
       ]
     },
     {
-      "id": 5821,
-      "finding_type": "financial",
-      "summary": "FEC donations 2016-2022 — primarily Democratic, $50K to Schumer majority committee",
-      "detail": "FEC records show Philippe Laffont donated $50,000 to SCHUMER COMMITTEE FOR THE MAJORITY on 2016-10-31, plus memo-allocated contributions to multiple Democratic Senate campaigns. In 2019, donated $5,600 to WIN THE ERA PAC (Buttigieg). In 2022, donated $5,800 to CRUMPACKER FOR CONGRESS (R-CO) and $2,900 to SINEMA FOR ARIZONA (IND). Employer listed as COATUE MANAGEMENT. No Trump-related donations found.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:48:00",
-      "target_name": "Philippe Laffont",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions search: Laffont Philippe, 20 records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5842,
       "finding_type": "financial",
-      "summary": "Coatue Q4 2025 13F: $40B public portfolio, 52 holdings — TSM, MSFT, META, AMZN, GEV top 5",
+      "summary": "Coatue Q4 2025 13F: $40B public portfolio, 52 holdings \u2014 TSM, MSFT, META, AMZN, GEV top 5",
       "detail": "Coatue Management LLC Q4 2025 13F filing reports 52 holdings with total value of $40.0 billion. Top 5 holdings: TSM (Taiwan Semiconductor), MSFT (Microsoft), META (Meta Platforms), AMZN (Amazon), GEV (GE Vernova). Recent additions include NFLX (+$960M), AMAT (+$677M), NTRA (+$564M), and 13 new positions including INFY, EXPD, SPGI. The public portfolio does not include Coatue's significant private holdings in SpaceX, Anthropic, OpenAI, and other pre-IPO companies. Combined public and private AUM exceeds $54B. EDGAR shows 944 filings under Philippe Laffont name and 1,339 under Coatue Management LLC.",
       "source_datasets": [
         "edgar",
@@ -217,7 +217,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "EDGAR 13F filings (CIK 0001135730)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1135730",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -332,7 +332,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2016-10-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC donations 2016-2022 \u2014 primarily Democratic, $50K to Schumer majority committee",
+      "confidence": "confirmed",
+      "id": 5821
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5820,
@@ -386,25 +395,25 @@
       }
     ],
     "curated_at": "2026-03-11T22:48:52.634555",
-    "lead": "<p>Philippe Laffont is the founder and chief investment officer of <a href=\"/dossiers/coatue-management\">Coatue Management</a>, a New York-based technology-focused hedge fund he established in 1999 after leaving Julian Robertson's Tiger Management. [Finding #5367] Coatue managed over $54 billion in combined public and private assets as of December 2024, with a $40 billion public equity portfolio concentrated in Taiwan Semiconductor, Microsoft, Meta, Amazon, and GE Vernova and a private portfolio spanning <a href=\"/dossiers/spacex\">SpaceX</a>, OpenAI, <a href=\"/dossiers/xai\">xAI</a>, Scale AI, Anduril, and <a href=\"/dossiers/shield-ai\">Shield AI</a>. [Finding #5820] [Finding #5842]</p><p>In February 2026 Coatue co-led Anthropic’s $30 billion Series G at a $380 billion valuation, and two weeks later co-led OpenAI’s $110 billion round — the OpenAI close occurring on the same day the Trump administration banned Anthropic from all federal use. [Finding #5820] LittleSis data identifies Laffont as holding a director seat at ByteDance, the Chinese parent of TikTok, at the same time Coatue holds major positions in Anthropic and OpenAI and Coatue’s former senior advisor <a href=\"/dossiers/emil-michael\">Emil Michael</a> serves as Under Secretary of Defense for Research and Engineering. [Finding #5362]</p><p>Laffont’s personal federal campaign donations between 2016 and 2022 ran almost entirely to Democratic infrastructure: $50,000 to the Schumer Committee for the Majority, $20,300 to the DSCC, and contributions to Democratic Senate candidates in seven states, alongside $5,600 to Pete Buttigieg’s Win the Era PAC. [Finding #5821] His brother <a href=\"/dossiers/thomas-laffont\">Thomas Laffont</a>, who co-founded Coatue and leads its private equity operations, donated in the same period to Mitch McConnell ($10,000) and Jeb Bush, providing combined Republican Senate access. [Finding #5357] A review of lobbying records shows Coatue’s PE Asia 34 LLC retained Gibson Dunn and Crutcher LLP to work government and financial securities issues. [Finding #4601]</p>",
+    "lead": "<p>Philippe Laffont is the founder and chief investment officer of <a href=\"/dossiers/coatue-management\">Coatue Management</a>, a New York-based technology-focused hedge fund he established in 1999 after leaving Julian Robertson's Tiger Management. [Finding #5367] Coatue managed over $54 billion in combined public and private assets as of December 2024, with a $40 billion public equity portfolio concentrated in Taiwan Semiconductor, Microsoft, Meta, Amazon, and GE Vernova and a private portfolio spanning <a href=\"/dossiers/spacex\">SpaceX</a>, OpenAI, <a href=\"/dossiers/xai\">xAI</a>, Scale AI, Anduril, and <a href=\"/dossiers/shield-ai\">Shield AI</a>. [Finding #5820] [Finding #5842]</p><p>In February 2026 Coatue co-led Anthropic\u2019s $30 billion Series G at a $380 billion valuation, and two weeks later co-led OpenAI\u2019s $110 billion round \u2014 the OpenAI close occurring on the same day the Trump administration banned Anthropic from all federal use. [Finding #5820] LittleSis data identifies Laffont as holding a director seat at ByteDance, the Chinese parent of TikTok, at the same time Coatue holds major positions in Anthropic and OpenAI and Coatue\u2019s former senior advisor <a href=\"/dossiers/emil-michael\">Emil Michael</a> serves as Under Secretary of Defense for Research and Engineering. [Finding #5362]</p><p>Laffont\u2019s personal federal campaign donations between 2016 and 2022 ran almost entirely to Democratic infrastructure: $50,000 to the Schumer Committee for the Majority, $20,300 to the DSCC, and contributions to Democratic Senate candidates in seven states, alongside $5,600 to Pete Buttigieg\u2019s Win the Era PAC. [Finding #5821] His brother <a href=\"/dossiers/thomas-laffont\">Thomas Laffont</a>, who co-founded Coatue and leads its private equity operations, donated in the same period to Mitch McConnell ($10,000) and Jeb Bush, providing combined Republican Senate access. [Finding #5357] A review of lobbying records shows Coatue\u2019s PE Asia 34 LLC retained Gibson Dunn and Crutcher LLP to work government and financial securities issues. [Finding #4601]</p>",
     "system_role": "Technology hedge fund manager bridging late-stage AI private investment and public equity markets. As founder of Coatue, Laffont allocates capital at scale into both US AI companies (Anthropic, OpenAI, xAI, Scale AI) and Chinese tech (ByteDance board seat), while maintaining Democratic Party political access through direct Senate leadership donations. His fund's former senior advisor now oversees defense acquisition policy for the portfolio companies Coatue backed.",
     "sections": [
       {
         "id": "career-and-tiger-cub-lineage",
         "title": "Career and Tiger Cub Lineage",
-        "content": "Laffont was born in Belgium and earned bachelor's and master's degrees in computer science from MIT in 1991. After two years as a McKinsey consultant (1992–1994), he joined Julian Robertson's Tiger Management as a research analyst in 1996. [Finding #5367] Robertson's firm produced a generation of hedge fund founders now known collectively as Tiger Cubs: Chase Coleman at Tiger Global, Andreas Halvorsen at Viking Global, John Griffin at Blue Ridge, and Lee Ainslie at Maverick. Laffont founded <a href=\"/dossiers/coatue-management\">Coatue Management</a> in 1999, naming it after a beach on Nantucket. The Tiger Cub network's collective AUM exceeds $100 billion and represents an informal but durable capital-allocation ecosystem built on shared training and deal flow.",
+        "content": "Laffont was born in Belgium and earned bachelor's and master's degrees in computer science from MIT in 1991. After two years as a McKinsey consultant (1992\u20131994), he joined Julian Robertson's Tiger Management as a research analyst in 1996. [Finding #5367] Robertson's firm produced a generation of hedge fund founders now known collectively as Tiger Cubs: Chase Coleman at Tiger Global, Andreas Halvorsen at Viking Global, John Griffin at Blue Ridge, and Lee Ainslie at Maverick. Laffont founded <a href=\"/dossiers/coatue-management\">Coatue Management</a> in 1999, naming it after a beach on Nantucket. The Tiger Cub network's collective AUM exceeds $100 billion and represents an informal but durable capital-allocation ecosystem built on shared training and deal flow.",
         "viz": null
       },
       {
         "id": "coatue-portfolio-and-defense-tech-exposure",
         "title": "Coatue Portfolio and Defense-Tech Exposure",
-        "content": "Coatue’s Q4 2025 13F filing reported 52 holdings totaling $40 billion in public equities; the five largest were TSM, MSFT, META, AMZN, and GEV. [Finding #5842] The 13F data shows an absence of defense-prime equities — Palantir, Lockheed, Northrop, and Raytheon did not appear in any quarter from Q4 2024 through Q4 2025. [Finding #5842] Instead, Coatue invested directly in pre-IPO defense-adjacent companies: <a href=\"/dossiers/spacex\">SpaceX</a>, <a href=\"/dossiers/shield-ai\">Shield AI</a> (a UAV contractor with $72 million in federal awards), Anthropic, OpenAI, <a href=\"/dossiers/xai\">xAI</a>, Scale AI, and Anduril. [Finding #5820] In May 2025 Coatue launched CTEK (Coatue Innovation Fund), a closed-end tender-offer vehicle providing qualified individual investors access to the private portfolio; Jeff Bezos (Bezos Expeditions) and Michael Dell (DFO Management) provided $1 billion in combined anchor capital. [Finding #5820] EDGAR lists 1,339 filings under <a href=\"/dossiers/coatue-management\">Coatue Management</a> LLC (CIK 0001135730) and 944 under Laffont’s personal CIK 0001279618, spanning 104 fund entities across 13 vehicles from 2009 to 2025. [Finding #5842]",
+        "content": "Coatue\u2019s Q4 2025 13F filing reported 52 holdings totaling $40 billion in public equities; the five largest were TSM, MSFT, META, AMZN, and GEV. [Finding #5842] The 13F data shows an absence of defense-prime equities \u2014 Palantir, Lockheed, Northrop, and Raytheon did not appear in any quarter from Q4 2024 through Q4 2025. [Finding #5842] Instead, Coatue invested directly in pre-IPO defense-adjacent companies: <a href=\"/dossiers/spacex\">SpaceX</a>, <a href=\"/dossiers/shield-ai\">Shield AI</a> (a UAV contractor with $72 million in federal awards), Anthropic, OpenAI, <a href=\"/dossiers/xai\">xAI</a>, Scale AI, and Anduril. [Finding #5820] In May 2025 Coatue launched CTEK (Coatue Innovation Fund), a closed-end tender-offer vehicle providing qualified individual investors access to the private portfolio; Jeff Bezos (Bezos Expeditions) and Michael Dell (DFO Management) provided $1 billion in combined anchor capital. [Finding #5820] EDGAR lists 1,339 filings under <a href=\"/dossiers/coatue-management\">Coatue Management</a> LLC (CIK 0001135730) and 944 under Laffont\u2019s personal CIK 0001279618, spanning 104 fund entities across 13 vehicles from 2009 to 2025. [Finding #5842]",
         "viz": null
       },
       {
         "id": "anthropic-openai-and-the-federal-ban-timeline",
         "title": "Anthropic, OpenAI, and the Federal Ban Timeline",
-        "content": "Coatue’s relationship with Anthropic began with participation in the Series F (September 2025), then accelerated to co-leading a $10 billion round in January 2026 and co-leading the $30 billion Series G at a $380 billion valuation on February 12, 2026. [Finding #5820] Laffont appeared on CNBC on February 13, 2026, describing Coatue as an AI-first fund and framing the Anthropic investment around ‘AI agents and enterprise-level systems.’ [Finding #5820] On February 27, 2026, the Trump administration banned Anthropic from federal use; that same day Coatue co-led OpenAI’s $110 billion round. [Finding #5820] The combined Coatue commitment to Anthropic is estimated at $2–5 billion. Coatue also invested in <a href=\"/dossiers/xai\">xAI</a> and Scale AI within the same window, representing a concentrated dual bet on the two dominant US AI model companies immediately before and after a federal exclusion order against one of them.",
+        "content": "Coatue\u2019s relationship with Anthropic began with participation in the Series F (September 2025), then accelerated to co-leading a $10 billion round in January 2026 and co-leading the $30 billion Series G at a $380 billion valuation on February 12, 2026. [Finding #5820] Laffont appeared on CNBC on February 13, 2026, describing Coatue as an AI-first fund and framing the Anthropic investment around \u2018AI agents and enterprise-level systems.\u2019 [Finding #5820] On February 27, 2026, the Trump administration banned Anthropic from federal use; that same day Coatue co-led OpenAI\u2019s $110 billion round. [Finding #5820] The combined Coatue commitment to Anthropic is estimated at $2\u20135 billion. Coatue also invested in <a href=\"/dossiers/xai\">xAI</a> and Scale AI within the same window, representing a concentrated dual bet on the two dominant US AI model companies immediately before and after a federal exclusion order against one of them.",
         "viz": null
       },
       {
@@ -416,13 +425,13 @@
       {
         "id": "key-relationships",
         "title": "Key Relationships",
-        "content": "The central relationship in the Coatue network is with <a href=\"/dossiers/emil-michael\">Emil Michael</a>, who served as Coatue’s senior advisor from October 2018 through his confirmation as Under Secretary of Defense for Research and Engineering in May 2025. [Finding #5362] Michael’s DoD portfolio directly covers AI and defense technology acquisition — the precise sector where Coatue holds its largest private investments. [Finding #5820]\n\nLaffont’s brother <a href=\"/dossiers/thomas-laffont\">Thomas Laffont</a> co-founded Coatue and leads its private equity operations. FEC records show the brothers’ political donations create bipartisan Senate leadership access: Philippe concentrates on Democratic leadership (Schumer, DSCC), Thomas on Republican leadership (McConnell). [Finding #5357]\n\nCoatue and <a href=\"/dossiers/trae-stephens\">Trae Stephens</a> co-invested in Blend Labs Inc (BLND), with Stephens via <a href=\"/dossiers/founders-fund\">Founders Fund</a> and Laffont via <a href=\"/dossiers/coatue-management\">Coatue Management</a>. [Finding #5820] Stephens co-founded <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>, in which Coatue also holds a direct investment, creating overlapping financial interests. <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a> (<a href=\"/dossiers/8vc\">8VC</a>, Palantir co-founder) is a third Blend Labs co-investor. J.P. Morgan Private Investments acts as Executive Officer and Promoter across 15 Coatue Private Investors feeder fund vehicles, channeling private wealth capital into Coatue’s defense-adjacent AI investment thesis. [Finding #5842]",
+        "content": "The central relationship in the Coatue network is with <a href=\"/dossiers/emil-michael\">Emil Michael</a>, who served as Coatue\u2019s senior advisor from October 2018 through his confirmation as Under Secretary of Defense for Research and Engineering in May 2025. [Finding #5362] Michael\u2019s DoD portfolio directly covers AI and defense technology acquisition \u2014 the precise sector where Coatue holds its largest private investments. [Finding #5820]\n\nLaffont\u2019s brother <a href=\"/dossiers/thomas-laffont\">Thomas Laffont</a> co-founded Coatue and leads its private equity operations. FEC records show the brothers\u2019 political donations create bipartisan Senate leadership access: Philippe concentrates on Democratic leadership (Schumer, DSCC), Thomas on Republican leadership (McConnell). [Finding #5357]\n\nCoatue and <a href=\"/dossiers/trae-stephens\">Trae Stephens</a> co-invested in Blend Labs Inc (BLND), with Stephens via <a href=\"/dossiers/founders-fund\">Founders Fund</a> and Laffont via <a href=\"/dossiers/coatue-management\">Coatue Management</a>. [Finding #5820] Stephens co-founded <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>, in which Coatue also holds a direct investment, creating overlapping financial interests. <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a> (<a href=\"/dossiers/8vc\">8VC</a>, Palantir co-founder) is a third Blend Labs co-investor. J.P. Morgan Private Investments acts as Executive Officer and Promoter across 15 Coatue Private Investors feeder fund vehicles, channeling private wealth capital into Coatue\u2019s defense-adjacent AI investment thesis. [Finding #5842]",
         "viz": "ego_network"
       },
       {
         "id": "political-donations-and-lobbying",
         "title": "Political Donations and Lobbying",
-        "content": "FEC individual contribution records show Philippe Laffont donated $50,000 to the Schumer Committee for the Majority on October 31, 2016, and $20,300 to the DSCC in the same cycle — the two dominant Democratic Senate fundraising committees. [Finding #5821] He also donated to seven Democratic Senate candidates in competitive 2016 races (Ross, Van Hollen, Murphy, Bayh, Duckworth, Feingold, Cortez Masto), $5,600 to Pete Buttigieg’s Win the Era PAC in 2019, and $2,900 to Kyrsten Sinema in 2022. His sole Republican donation — $5,800 to Jimmy Crumpacker for Congress in 2022 — was partially refunded ($2,900). [Finding #5357] His employer is listed on all FEC filings as <a href=\"/dossiers/coatue-management\">Coatue Management</a>. Combined identified federal donations total approximately $93,000. [Finding #5821]\n\nA review of lobbying records shows Coatue PE Asia 34 LLC retained Gibson Dunn and Crutcher LLP to lobby on government issues and financial securities issues. [Finding #4601] Analysis of FEC filings indicates Coatue employees’ aggregate donations run heavily Democratic, including contributions to the Harris Victory Fund and DNC. [Finding #4601]",
+        "content": "FEC individual contribution records show Philippe Laffont donated $50,000 to the Schumer Committee for the Majority on October 31, 2016, and $20,300 to the DSCC in the same cycle \u2014 the two dominant Democratic Senate fundraising committees. [Finding #5821] He also donated to seven Democratic Senate candidates in competitive 2016 races (Ross, Van Hollen, Murphy, Bayh, Duckworth, Feingold, Cortez Masto), $5,600 to Pete Buttigieg\u2019s Win the Era PAC in 2019, and $2,900 to Kyrsten Sinema in 2022. His sole Republican donation \u2014 $5,800 to Jimmy Crumpacker for Congress in 2022 \u2014 was partially refunded ($2,900). [Finding #5357] His employer is listed on all FEC filings as <a href=\"/dossiers/coatue-management\">Coatue Management</a>. Combined identified federal donations total approximately $93,000. [Finding #5821]\n\nA review of lobbying records shows Coatue PE Asia 34 LLC retained Gibson Dunn and Crutcher LLP to lobby on government issues and financial securities issues. [Finding #4601] Analysis of FEC filings indicates Coatue employees\u2019 aggregate donations run heavily Democratic, including contributions to the Harris Victory Fund and DNC. [Finding #4601]",
         "viz": null
       }
     ],
@@ -446,7 +455,7 @@
       },
       {
         "name": "Bipartisan Sibling Access Strategy",
-        "description": "Philippe and Thomas Laffont's respective FEC donation patterns — Philippe covering Democratic Senate leadership, Thomas covering Republican Senate leadership — together produce access to both parties' dominant Senate fundraising infrastructure without either brother appearing to cross-donate. This structure is documented across hedge fund families in this investigation and represents a coordinated rather than individual political strategy."
+        "description": "Philippe and Thomas Laffont's respective FEC donation patterns \u2014 Philippe covering Democratic Senate leadership, Thomas covering Republican Senate leadership \u2014 together produce access to both parties' dominant Senate fundraising infrastructure without either brother appearing to cross-donate. This structure is documented across hedge fund families in this investigation and represents a coordinated rather than individual political strategy."
       },
       {
         "name": "Private Portfolio Opacity via Closed-End Feeder",
@@ -457,188 +466,5 @@
         "description": "The ByteDance directorship alongside Anthropic and OpenAI investments creates simultaneous personal and financial exposure to both US and Chinese AI ecosystems at a moment of active government intervention in both. This structural position is distinct from diversified passive investing: a board seat entails fiduciary duty to ByteDance while Coatue's capital actively bets on its US competitors."
       }
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Philippe Laffont",
-      "connections": [
-        {
-          "target": "Coatue Management LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "EDGAR",
-          "description": "Laffont founded Coatue Management"
-        },
-        {
-          "target": "Emil Michael",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Michael was Coatue senior advisor (Oct 2018+); Laffont's Coatue co-led $30B Anthropic Series G (Feb 2026) while Michael led Pentagon Anthropic standoff"
-        },
-        {
-          "target": "Coatue Management",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Founder, Director, and Executive Officer of Coatue Management LLC (104 fund entities). Listed on 61 Form D filings across 13 fund vehicles 2009-2025. HQ: 9 West 57th Street, 25th Floor, New York."
-        },
-        {
-          "target": "Thomas Laffont",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Brothers split FEC donations: Philippe covers Democratic leadership (Schumer/DSCC), Thomas covers Republican leadership (McConnell)"
-        },
-        {
-          "target": "Trae Stephens",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-        },
-        {
-          "target": "Joe Lonsdale",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Co-investors in Blend Labs Inc (BLND). Lonsdale via 8VC, Laffont via Coatue Management."
-        }
-      ],
-      "secondHop": {
-        "Coatue Management": [
-          {
-            "target": "J.P. Morgan Private Investments",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "JPM Private Investments serves as Executive Officer/Promoter for 15 Coatue Private Investors feeder fund vehicles (27 filings). Channels JPM private wealth capital into Coatue strategies including defense-adjacent AI investments."
-          },
-          {
-            "target": "Thomas Laffont",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Co-founder of Coatue, focused on private investments. Appears only as Director of OneTrust LLC (portfolio company) in Form D filings — notably absent from all Coatue fund-level filings."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Emil Michael nominated as Under Secretary of Defense (A&S) while Coatue invested in Anthropic (which Michael co-founded DPCM Capital SPAC era connections). Coatue also invested in OpenAI and Shield AI — all potential beneficiaries of DoD acquisition decisions Michael would oversee."
-          },
-          {
-            "target": "Anthropic",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Coatue dual-bet: invested in both Anthropic Series G and OpenAI round on same day as Anthropic federal ban"
-          }
-        ],
-        "Coatue Management LLC": [
-          {
-            "target": "Emil Michael",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Michael was Coatue senior advisor Oct 2017-2025; now USD(R&E) overseeing defense tech; Coatue invested in Shield AI, Anthropic"
-          }
-        ],
-        "Emil Michael": [
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne hosted the Nov 2014 Waverly Inn dinner where Michael proposed spending $1M against journalists; Osborne was Uber consultant 2013-2017"
-          },
-          {
-            "target": "Eric Schmidt",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Schmidt served as Special Advisor to DPCM Capital, Michael's SPAC that took D-Wave Quantum public"
-          },
-          {
-            "target": "Travis Kalanick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Kalanick's closest confidant and right-hand man at Uber 2013-2017; ousted together by Holder Report; co-raised $15B including $3.5B Saudi PIF investment"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both at top Pentagon: Feinberg DepSecDef, Michael USD(R&E)"
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Michael as USD(R&E) oversees Anduril's contract ecosystem: IVAS ($22B), TITAN, Golden Dome, Altius production. Michael publicly champions 'new primes' like Anduril. Both are Trump administration aligned. Michael's 6 tech priorities map directly to Anduril's product portfolio."
-          }
-        ],
-        "Joe Lonsdale": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale is Palantir co-founder, Thiel mentee. Founded 8VC. Part of Thiel defense tech network."
-          },
-          {
-            "target": "Palantir Technologies Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir"
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Erebor Bank (Columbus, OH). Both from Thiel network: Luckey via Anduril/Founders Fund, Lonsdale via Palantir/8VC. Erebor positioned as bank for defense/crypto/AI ecosystem. $4.35B valuation."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir with Thiel in 2003. Later founded 8VC which invests in Thiel-network defense companies (Palantir, Anduril). Both back Erebor Bank. Lonsdale's 8VC employs sons of sanctioned Russian oligarchs."
-          },
-          {
-            "target": "8VC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
-          }
-        ],
-        "Trae Stephens": [
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Founders Fund",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

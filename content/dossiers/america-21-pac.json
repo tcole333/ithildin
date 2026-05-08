@@ -1,0 +1,427 @@
+{
+  "name": "America 21 PAC",
+  "slug": "america-21-pac",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.352005",
+  "last_updated": "2026-03-23T18:34:14",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6,
+      "relationship": 2
+    },
+    "connection_types": {
+      "funds": 2,
+      "financial": 4
+    },
+    "last_updated": "2026-03-23T18:34:14"
+  },
+  "findings": [
+    {
+      "id": 7109,
+      "finding_type": "financial",
+      "summary": "America 21 PAC (FEC C00804690) financial overview across three cycles: 2022 cycle raised ,500 (contributions), 2024 cycle raised ,166, 2026 cycle raised ,750,000 (through Dec 2025). Total lifetime receipts approximately .64M. Registered Feb 9, 2022. Super PAC (Independent Expenditure-Only), treasurer Janna Rutland of Crosby Ottenhoff Group. Current address: 421 Office Park Dr, Mountain Brook, AL 35223. Previous address: PO Box 9891, Arlington, VA 22219. Banks at Chain Bridge Bank, McLean VA. Cash on hand at end of 2025: ,789.",
+      "detail": null,
+      "source_datasets": [
+        "FEC"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-02-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:30:58",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7119,
+      "finding_type": "relationship",
+      "summary": "Crosby Ottenhoff Group manages America 21 PAC's compliance operations. Crosby Ottenhoff is a Republican political finance firm co-founded by Caleb Crosby (former Congressional Leadership Fund treasurer, former RNC Chief Finance Officer) and Benjamin Ottenhoff (current WinRed PAC treasurer). The firm is headquartered in Birmingham, AL with offices at 2024 3rd Ave N Suite 210 and 6 Office Park Circle #100, Mountain Brook, AL 35223. America 21 PAC's registered address (421 Office Park Dr, Mountain Brook, AL 35223) is the Crosby Ottenhoff Group office. Other known employees: Zac Funderburk, Meredith Stanley (Operations Lead), Cara Turner (Accountant). The firm also provides compliance for other PACs including Rite PAC. Holtzman Vogel PLLC (Haymarket, VA) handles legal work \u2014 a preeminent Republican election law firm founded by Jill Holtzman Vogel (former RNC Chief Counsel).",
+      "detail": null,
+      "source_datasets": [
+        "fec,littlesis,web"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-02-09",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:08",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7121,
+      "finding_type": "relationship",
+      "summary": "America 21 PAC functions as a financial hub in the Rockbridge Network's PAC ecosystem. Funding chain: (a) Thiel gave $19.5M to Saving Arizona PAC (2021-2022), which gave $789K to America 21 PAC; (b) Buskirk (Rockbridge co-founder) seeded America 21 PAC with the first $30,500 donation in Mar 2022; (c) Turnout for America (Rockbridge's $25M+ super PAC run by Buskirk) gave $750K in Jan 2025; (d) America 21 PAC made IEs supporting Blake Masters (Thiel protege) in 2022 ($240K), then pivoted to funding Trump-aligned PACs. The PAC bridges Rockbridge/Thiel money (via Saving Arizona/Turnout for America) with GOP establishment donors (Singer, WinRed conduit from Currents/Walton family). It serves as a Rockbridge-controlled vehicle that can accept funds from Rockbridge entities and external donors, then deploy them to targeted campaigns.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-02-09",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:21",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7111,
+      "finding_type": "financial",
+      "summary": "America 21 PAC complete donor list: (1) Turnout for America (Rockbridge super PAC) ,000 on Jan 28, 2025; (2) Paul Singer (Elliott Management) ,000,000 on Nov 14, 2025; (3) Saving Arizona PAC (Thiel/Masters super PAC) ,000 on Nov 4, 2022 and ,000 on Nov 7, 2022 (K total), plus ,166 on Aug 6, 2024; (4) Chris Buskirk (Rockbridge co-founder, employer 'CAG', occupation 'management') ,500 on Mar 3, 2022 \u2014 the very first donation, founding the PAC; (5) WinRed ,000 on Dec 29, 2022 and ,000 each on Sep 28 and Dec 28, 2023; (6) Jeff Current (Madrone Ventures/Walton family) ,000 on Sep 26, 2023; (7) Tamara Current (Madrone Ventures/Walton family) ,000 on Dec 21, 2023 and ,000 on Dec 26, 2022; (8) Michigan Strong ,611 on Mar 9, 2023 (non-federal contribution). PAC also earned ~K/year in interest from Chain Bridge Bank.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-03-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:14",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7114,
+      "finding_type": "financial",
+      "summary": "America 21 PAC disbursements reveal three distinct operational phases: (1) 2022 PHASE - Blake Masters support: K in independent expenditures supporting Blake Masters (AZ-Senate) and opposing Mark Kelly via Pulse Associates LLC (K media placement), National Moving Pictures LLC (K media production), and Ascent Media LLC (K digital media opposing Kelly). (2) 2023-2024 PHASE - Dormancy with strategic consulting: K to Timoleon LLC (Southlake TX) for strategic/communications consulting and list rental, .5K to Telperion LLC for strategic/management consulting, K contribution to Make America Great Again Inc (C00825851) in June 2024, K to Accelerate Media Labs for printing. (3) 2025 PHASE - MAGA KY funding: K contribution to MAGA KY (C00908723) on Dec 3, 2025, targeting anti-Massie campaign. Operating expenses managed by Crosby Ottenhoff Group (compliance), Holtzman Vogel PLLC (legal), CMDI (database), Howard Sckolnik CPA (accounting).",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-03-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:29",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7127,
+      "finding_type": "financial",
+      "summary": "Jeff Current (Madrone Ventures, real estate architecture) and Tamara Current (Madrone Ventures CEO, real estate development) donated a combined $100K to America 21 PAC across 2022-2023: Jeff K on Sep 26, 2023; Tamara K on Dec 21, 2023 and K on Dec 26, 2022. Both list San Jose, CA as address. Madrone Ventures/Madrone Capital Partners is a private equity/VC firm associated with the Walton family (Walmart heirs), specifically Rob Walton. This connects Walton family money to the Rockbridge PAC ecosystem through America 21 PAC.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-12-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:33:09",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7117,
+      "finding_type": "financial",
+      "summary": "Paul Singer dual-channel funding to MAGA KY anti-Massie campaign: Singer gave $1M directly to MAGA KY on Jun 27, 2025, then gave $1M to America 21 PAC on Nov 14, 2025, which forwarded $750K to MAGA KY on Dec 3, 2025. Total Singer money reaching MAGA KY: $1.75M out of the PAC's $2.75M total (63.6%). The indirect channel through America 21 PAC adds a layer of distance between Singer and the anti-Massie campaign. Massie's opposition to Israel aid is a key trigger \u2014 Singer, Paulson, and Adelson (via Preserve America PAC) are all known pro-Israel mega-donors. This represents Singer deploying both direct and pass-through funding to a single-purpose campaign.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:54",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7133,
+      "finding_type": "financial",
+      "summary": "Paul Singer's 2025 giving pattern shows a convergence of GOP establishment and Rockbridge networks through America 21 PAC. In 2022, Singer gave to establishment GOP vehicles (SLF, CLF, NRSC/NRCC) and pro-Israel groups (United Democracy Project) but NOT to Rockbridge-adjacent PACs like Saving Arizona. By 2025, Singer is giving directly to MAGA KY and through Rockbridge's America 21 PAC. Singer's other major 2025 recipients: SLF PAC ($4M), CLF ($3M), United Democracy Project ($2.5M), Pine Tree Results PAC ($1M), Sentinel Action Fund ($750K), Conservatives for American Excellence ($950K), Security Is Strength PAC ($500K). The $1M to America 21 PAC represents Singer's first known donation to a Rockbridge-controlled entity.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:14",
+      "target_name": "America 21 PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3447,
+      "person_a": "America 21 PAC",
+      "person_b": "Turnout for America",
+      "relationship_type": "funds",
+      "description": "Turnout for America transferred $750K to America 21 PAC (Jan 2025)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:45:01",
+      "profile_id": "tech-right",
+      "other_person": "Turnout for America",
+      "other_person_slug": "turnout-for-america",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00804690 receipts showing $750,000 from Turnout for America 2025-01-28",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3448,
+      "person_a": "America 21 PAC",
+      "person_b": "Saving Arizona PAC",
+      "relationship_type": "funds",
+      "description": "Saving Arizona PAC transferred remaining $39.2K to America 21 PAC before termination (Aug 2024)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:45:03",
+      "profile_id": "tech-right",
+      "other_person": "Saving Arizona PAC",
+      "other_person_slug": "saving-arizona-pac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00777185 disbursements showing $39,166.13 contribution to America 21 PAC 2024-08-07",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3563,
+      "person_a": "America 21 PAC",
+      "person_b": "Chris Buskirk",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:53",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3564,
+      "person_a": "America 21 PAC",
+      "person_b": "Paul Singer",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:53",
+      "profile_id": "tech-right",
+      "other_person": "Paul Singer",
+      "other_person_slug": "paul-singer",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00804690",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3566,
+      "person_a": "America 21 PAC",
+      "person_b": "MAGA KY",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:54",
+      "profile_id": "tech-right",
+      "other_person": "MAGA KY",
+      "other_person_slug": "maga-ky",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00908723",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3567,
+      "person_a": "America 21 PAC",
+      "person_b": "Peter Thiel",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:57",
+      "profile_id": "tech-right",
+      "other_person": "Peter Thiel",
+      "other_person_slug": "peter-thiel",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00777185",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-02-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "America 21 PAC (FEC C00804690) financial overview across three cycles: 2022 cycle raised ,500 (contributions), 2024 cycle raised ,166, 2026 cycle raised ,750,000 (through Dec 2025). Total lifetime receipts approximately .64M. Registered Feb 9, 2022. Super PAC (Independent Expenditure-Only), treasurer Janna Rutland of Crosby Ottenhoff Group. Current address: 421 Office Park Dr, Mountain Brook, AL 35223. Previous address: PO Box 9891, Arlington, VA 22219. Banks at Chain Bridge Bank, McLean VA. Cash on hand at end of 2025: ,789.",
+      "confidence": "high",
+      "id": 7109
+    },
+    {
+      "date": "2022-02-09",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Crosby Ottenhoff Group manages America 21 PAC's compliance operations. Crosby Ottenhoff is a Republican political finance firm co-founded by Caleb Crosby (former Congressional Leadership Fund treasurer, former RNC Chief Finance Officer) and Benjamin Ottenhoff (current WinRed PAC treasurer). The firm is headquartered in Birmingham, AL with offices at 2024 3rd Ave N Suite 210 and 6 Office Park Circle #100, Mountain Brook, AL 35223. America 21 PAC's registered address (421 Office Park Dr, Mountain Brook, AL 35223) is the Crosby Ottenhoff Group office. Other known employees: Zac Funderburk, Meredith Stanley (Operations Lead), Cara Turner (Accountant). The firm also provides compliance for other PACs including Rite PAC. Holtzman Vogel PLLC (Haymarket, VA) handles legal work \u2014 a preeminent Republican election law firm founded by Jill Holtzman Vogel (former RNC Chief Counsel).",
+      "confidence": "medium",
+      "id": 7119
+    },
+    {
+      "date": "2022-02-09",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "America 21 PAC functions as a financial hub in the Rockbridge Network's PAC ecosystem. Funding chain: (a) Thiel gave $19.5M to Saving Arizona PAC (2021-2022), which gave $789K to America 21 PAC; (b) Buskirk (Rockbridge co-founder) seeded America 21 PAC with the first $30,500 donation in Mar 2022; (c) Turnout for America (Rockbridge's $25M+ super PAC run by Buskirk) gave $750K in Jan 2025; (d) America 21 PAC made IEs supporting Blake Masters (Thiel protege) in 2022 ($240K), then pivoted to funding Trump-aligned PACs. The PAC bridges Rockbridge/Thiel money (via Saving Arizona/Turnout for America) with GOP establishment donors (Singer, WinRed conduit from Currents/Walton family). It serves as a Rockbridge-controlled vehicle that can accept funds from Rockbridge entities and external donors, then deploy them to targeted campaigns.",
+      "confidence": "medium",
+      "id": 7121
+    },
+    {
+      "date": "2022-03-03",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "America 21 PAC complete donor list: (1) Turnout for America (Rockbridge super PAC) ,000 on Jan 28, 2025; (2) Paul Singer (Elliott Management) ,000,000 on Nov 14, 2025; (3) Saving Arizona PAC (Thiel/Masters super PAC) ,000 on Nov 4, 2022 and ,000 on Nov 7, 2022 (K total), plus ,166 on Aug 6, 2024; (4) Chris Buskirk (Rockbridge co-founder, employer 'CAG', occupation 'management') ,500 on Mar 3, 2022 \u2014 the very first donation, founding the PAC; (5) WinRed ,000 on Dec 29, 2022 and ,000 each on Sep 28 and Dec 28, 2023; (6) Jeff Current (Madrone Ventures/Walton family) ,000 on Sep 26, 2023; (7) Tamara Current (Madrone Ventures/Walton family) ,000 on Dec 21, 2023 and ,000 on Dec 26, 2022; (8) Michigan Strong ,611 on Mar 9, 2023 (non-federal contribution). PAC also earned ~K/year in interest from Chain Bridge Bank.",
+      "confidence": "high",
+      "id": 7111
+    },
+    {
+      "date": "2022-03-03",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "America 21 PAC disbursements reveal three distinct operational phases: (1) 2022 PHASE - Blake Masters support: K in independent expenditures supporting Blake Masters (AZ-Senate) and opposing Mark Kelly via Pulse Associates LLC (K media placement), National Moving Pictures LLC (K media production), and Ascent Media LLC (K digital media opposing Kelly). (2) 2023-2024 PHASE - Dormancy with strategic consulting: K to Timoleon LLC (Southlake TX) for strategic/communications consulting and list rental, .5K to Telperion LLC for strategic/management consulting, K contribution to Make America Great Again Inc (C00825851) in June 2024, K to Accelerate Media Labs for printing. (3) 2025 PHASE - MAGA KY funding: K contribution to MAGA KY (C00908723) on Dec 3, 2025, targeting anti-Massie campaign. Operating expenses managed by Crosby Ottenhoff Group (compliance), Holtzman Vogel PLLC (legal), CMDI (database), Howard Sckolnik CPA (accounting).",
+      "confidence": "high",
+      "id": 7114
+    },
+    {
+      "date": "2022-12-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Jeff Current (Madrone Ventures, real estate architecture) and Tamara Current (Madrone Ventures CEO, real estate development) donated a combined $100K to America 21 PAC across 2022-2023: Jeff K on Sep 26, 2023; Tamara K on Dec 21, 2023 and K on Dec 26, 2022. Both list San Jose, CA as address. Madrone Ventures/Madrone Capital Partners is a private equity/VC firm associated with the Walton family (Walmart heirs), specifically Rob Walton. This connects Walton family money to the Rockbridge PAC ecosystem through America 21 PAC.",
+      "confidence": "high",
+      "id": 7127
+    },
+    {
+      "date": "2025-11-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Paul Singer dual-channel funding to MAGA KY anti-Massie campaign: Singer gave $1M directly to MAGA KY on Jun 27, 2025, then gave $1M to America 21 PAC on Nov 14, 2025, which forwarded $750K to MAGA KY on Dec 3, 2025. Total Singer money reaching MAGA KY: $1.75M out of the PAC's $2.75M total (63.6%). The indirect channel through America 21 PAC adds a layer of distance between Singer and the anti-Massie campaign. Massie's opposition to Israel aid is a key trigger \u2014 Singer, Paulson, and Adelson (via Preserve America PAC) are all known pro-Israel mega-donors. This represents Singer deploying both direct and pass-through funding to a single-purpose campaign.",
+      "confidence": "medium",
+      "id": 7117
+    },
+    {
+      "date": "2025-11-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Paul Singer's 2025 giving pattern shows a convergence of GOP establishment and Rockbridge networks through America 21 PAC. In 2022, Singer gave to establishment GOP vehicles (SLF, CLF, NRSC/NRCC) and pro-Israel groups (United Democracy Project) but NOT to Rockbridge-adjacent PACs like Saving Arizona. By 2025, Singer is giving directly to MAGA KY and through Rockbridge's America 21 PAC. Singer's other major 2025 recipients: SLF PAC ($4M), CLF ($3M), United Democracy Project ($2.5M), Pine Tree Results PAC ($1M), Sentinel Action Fund ($750K), Conservatives for American Excellence ($950K), Security Is Strength PAC ($500K). The $1M to America 21 PAC represents Singer's first known donation to a Rockbridge-controlled entity.",
+      "confidence": "medium",
+      "id": 7133
+    }
+  ]
+}

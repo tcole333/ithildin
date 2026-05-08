@@ -1,0 +1,405 @@
+{
+  "name": "Reinhardt LLP",
+  "slug": "reinhardt-llp",
+  "aliases": [],
+  "profile_ids": [
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.389870",
+  "last_updated": "2026-04-13T17:07:19",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "relationship": 2,
+      "identity": 2,
+      "financial": 2,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "legal": 4,
+      "employment": 1,
+      "corporate": 2,
+      "financial": 1
+    },
+    "last_updated": "2026-04-13T17:07:19"
+  },
+  "findings": [
+    {
+      "id": 10171,
+      "finding_type": "relationship",
+      "summary": "Reinhardt LLP (co-founded by Italian-American attorney Andrea Fiocchi) served as SOP agent for all 4 Domus Arbiter buyer LLCs at Trump SoHo",
+      "detail": "All 4 LLCs that purchased 14 units for $10.86M were registered through Reinhardt LLP (200 Liberty St, 27th Fl, NYC 10281). Reinhardt was co-founded by Andrea Fiocchi, a dual US-Italy national who specializes in real estate and expat law for foreign clients. The firm has strong Italian affiliations and Italian-speaking attorneys (Fiocchi and Carlo Giovannetti). This is consistent with Domus Arbiter CEO Giampiero Rispo's specialty in Italian/European HNW investors. Reinhardt LLP is DISTINCT from Martin Jajan who handled the separate Khrapunov-linked SOHO-numbered shell company purchases. The Domus/Reinhardt clients appear to be a separate Italian investor network.",
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:08:32",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361078",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361085",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361093",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10241,
+      "finding_type": "relationship",
+      "summary": "Reinhardt LLP has degree 6, betweenness 0.096, and zero clustering -- a perfect structural hole. Connects shell company cluster (PURPLE COFFEE, SPRING FLAGS, PINK DIME, TREFOIL ROOMS) to Fiocchi and Domus Arbiter. None of its neighbors connect to each other.",
+      "detail": "Reinhardt LLP appears to be the legal services provider creating/managing a constellation of shell entities for Zampolli-associated real estate operations. Four LLC neighbors have names consistent with purpose-built shell companies. The complete absence of edges between neighbors (brokerage_score=1.0) suggests deliberate compartmentalization. Only 1 finding despite 7 connections.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:20:16",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-39",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10294,
+      "finding_type": "identity",
+      "summary": "Reinhardt LLP founded 2005 by Dierk Reinhardt (German, Stuttgart), Andrea Fiocchi (Italian-American), and Sarah E. Tallent. Merged with SavicFoley P.C. on Jan 26, 2022 to become Reinhardt Savic Foley LLP. Offices: NYC (200 Liberty St 27th Fl), London, Denver, Stuttgart. Originally at 44 Wall Street 10th Floor. International boutique firm specializing in expat law, corporate, real estate, immigration for European HNW clients.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:53",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013031800030001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10309,
+      "finding_type": "financial",
+      "summary": "Florida corporate registry reveals 6 entities registered to Reinhardt LLP address \u2014 all with Italian or European principals: (1) ES Global Management Group LLC (FL, 2008, EIN 262069983, MGR: Alberto Scaduto), (2) F.S. Venture Group LLC (FL, 2008, EIN 263030857, MGRs: Alberto Scaduto + Filippo Santonocito), (3) Luna 5 LLC (FL, 2015, MGR: Carlo Giovannetti), (4) It's All About The Music Corp (DE, 2014, EIN 463832563, Pres: Luca Piccolo, Directors: Ernesto Senatore + Roberto Postiglione), (5) Galliflo LLC (DE, 2019, EIN 83-3811864, MBR: Sara Tiziana Levi), (6) Allora Uno LLC (DE, 2020, EIN 85-2966578, MBR/MGR: Riccardo Ravasini + Moon Young Kim). Pattern: Italian-named principals using Reinhardt LLP as registered address for FL/DE shell entities.",
+      "detail": null,
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:42",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL:L08000021880,FL:L08000070942,FL:L15000033613,FL:F14000001242,FL:M19000002243,FL:M20000008860",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10317,
+      "finding_type": "financial",
+      "summary": "Floreor Rosario Corp, c/o Reinhardt LLP (44 Wall Street 10th Fl), recorded a tax lien release with Interaudi Bank (19 East 54th St, NYC) on Feb 18, 2025 for property at 20 West Street Unit 42A (ACRIS doc 2025021801280001). Interaudi Bank is a small NYC private bank that has appeared in ICIJ FinCEN Files context regarding Italian mafia money laundering probes. The Reinhardt LLP client using Interaudi Bank for NYC real estate financing is a noteworthy banking relationship.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:04:22",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2025021801280001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10328,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Reinhardt LLP / Andrea Fiocchi operate as a full-service Italian/European HNW conduit for NYC luxury real estate. The pattern confirmed across 3 independent source types: (1) ACRIS: 13+ power-of-attorney transactions for clients from Italy, France, Germany, Turkey, Latin America spanning 2009-2017 plus 4 shell LLC purchases totaling $10.86M at Trump SoHo; (2) FL corporate registry: 6 entities with Italian-named principals registered to the firm's address; (3) CourtListener: all 3 federal cases involve Italian/European corporate clients. The firm specifically handles: property purchases via POA, corporate structuring through FL/DE entities, yacht/aircraft transactions, and immigration/expat services. The 4 colorfully-named Trump SoHo LLCs are part of a larger, systematic infrastructure for placing European capital into NYC real estate through layered legal structures designed to shield beneficial ownership.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "registry",
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:06:55",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013031800030001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:6127133",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10331,
+      "finding_type": "identity",
+      "summary": "Merger press release confirms: Reinhardt LLP merged with SavicFoley P.C. on January 26, 2022 to form Reinhardt Savic Foley LLP. Key partners: Stefan Savic (NY), Thomas Foley (dual NY/England solicitor, worked on Princess Diana investigation and post-war Iraq inquiries), Carlo Giovannetti (NY, licensed in Italy), Kurt Krautheim. CRITICAL: Carlo Giovannetti is both a named partner of the merged firm AND the MGR of Luna 5 LLC (FL, L15000033613, 2015) registered to Reinhardt LLP. This means a firm partner personally managed one of the Italian shell companies registered at the firm's address \u2014 collapsing the distinction between law firm and client entity.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:07:19",
+      "target_name": "Reinhardt LLP",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:newswire.com/reinhardt-llp-and-savicfoley-merger-21614534",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5237,
+      "person_a": "Reinhardt LLP",
+      "person_b": "SPRING FLAGS LLC",
+      "relationship_type": "legal",
+      "description": "Reinhardt LLP formed and served as SOP agent for Spring Flags LLC (Trump SoHo buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "SPRING FLAGS LLC",
+      "other_person_slug": "spring-flags-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361085",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5239,
+      "person_a": "Reinhardt LLP",
+      "person_b": "TREFOIL ROOMS LLC",
+      "relationship_type": "legal",
+      "description": "Reinhardt LLP formed and served as SOP agent for Trefoil Rooms LLC (Trump SoHo buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "TREFOIL ROOMS LLC",
+      "other_person_slug": "trefoil-rooms-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361093",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5236,
+      "person_a": "PURPLE COFFEE LLC",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "legal",
+      "description": "Reinhardt LLP formed and served as SOP agent for Purple Coffee LLC (Trump SoHo buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "PURPLE COFFEE LLC",
+      "other_person_slug": "purple-coffee-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361078",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5238,
+      "person_a": "PINK DIME LLC",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "legal",
+      "description": "Reinhardt LLP formed and served as SOP agent for Pink Dime LLC (Trump SoHo buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "PINK DIME LLC",
+      "other_person_slug": "pink-dime-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4361025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5240,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "employment",
+      "description": "Co-founder and equity partner at Reinhardt LLP; Italian-American attorney specializing in RE and expat law",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "Andrea Fiocchi",
+      "other_person_slug": "andrea-fiocchi",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5250,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "corporate",
+      "description": "Fiocchi co-founded Reinhardt LLP, dual US-Italy national, Italian expat real estate law",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:17",
+      "profile_id": "zampolli",
+      "other_person": "Andrea Fiocchi",
+      "other_person_slug": "andrea-fiocchi",
+      "evidence": []
+    },
+    {
+      "id": 5297,
+      "person_a": "Domus Arbiter Realty Corp.",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "corporate",
+      "description": "Reinhardt LLP served as agent for all 4 Domus Arbiter buyer LLCs; Fiocchi/Rispo Italian investor network",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:40:50",
+      "profile_id": "zampolli",
+      "other_person": "Domus Arbiter Realty Corp.",
+      "other_person_slug": "domus-arbiter-realty-corp",
+      "evidence": []
+    },
+    {
+      "id": 5362,
+      "person_a": "Interaudi Bank",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "financial",
+      "description": "Banking relationship: Reinhardt client Floreor Rosario Corp has tax lien with Interaudi Bank (2025)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:39",
+      "profile_id": "zampolli",
+      "other_person": "Interaudi Bank",
+      "other_person_slug": "interaudi-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2025021801280001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

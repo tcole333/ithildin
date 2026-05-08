@@ -2,7 +2,7 @@
 **Stats**: 8 findings, 11 connections, 0 entities
 **Dossier**: /dossiers/ipi
 
-> IPI demonstrates how a legitimate international policy institution can be captured as a conduit for influence operations, blending sovereign government funding with private donor money to create a platform where the source and purpose of funds become indistinguishable from ordinary think-tank activity.
+> IPI illustrates how a policy institution funded by both sovereign governments and private donors can become a channel for undisclosed financial relationships, particularly when a single intermediary controls access to multiple funding streams.
 
 ## Key Findings
 - **[financial/confirmed]** IPI submitted a 20M grant proposal to Gates Foundation on September 4, 2013 for Polio Eradication and Peace and Health (EFTA02678411). The proposal was for 60 months (2014-2018) covering Pakistan, Nigeria, Somalia. The Foundation approved only 2.5M (grant OPP1096058), signed March 2, 2014. Payment: 1.25M upon signing, 1.25M in March 2015 contingent on progress report. Grant end date December 31, 2015. (Finding #290)
@@ -28,11 +28,11 @@
 - **Leon Black** [financial/medium]: Black Family Foundation (EIN 13-3947890) K to IPI (Dec 2014 per KPMG). IPI 990 shows .87M revenue in 2014, its peak year. Black was a key donor to the Rod-Larsen-led entity.
 
 ## Open Questions
-- What caused the anomalous $8.07 million deficit in 2011, representing an 81% year-over-year revenue decline? The 2011 990 PDF should reveal whether this was an investment loss, accounting adjustment, or donor withdrawal.
-- What were the exact amounts of Norwegian and Swedish government funding to IPI by year, and did these sovereign contributions change after the KPMG review or Epstein's 2019 arrest?
-- Did Epstein receive any formal or informal advisory role at IPI, or was his influence exercised entirely through Rod-Larsen and the funding conduit structure?
-- Who were the 33+ Congressional members on IPI advisory boards, and did any of them have knowledge of the Epstein funding pipeline or the sovereign donor reporting arrangement?
-- What was the institutional relationship between IPI's Ministerial Working Dinners at 777 UN Plaza (attended by UAE, Luxembourg, and other foreign officials) and the Mongolia Advisory Board that paid $100K each to former heads of state?
+- What caused the $8.07 million deficit in 2011? The 2011 990 PDF (EIN 03-0213226) should reveal whether this was an investment loss, accounting adjustment, or donor withdrawal.
+- What were the exact amounts of Norwegian and Swedish government funding to IPI by year? Schedule B data (not publicly available) or NORAD grant records could establish whether sovereign contributions changed after the KPMG review or Epstein's 2019 arrest.
+- Did Epstein hold any formal or informal advisory role at IPI, or was his influence exercised entirely through Rod-Larsen and the funding conduit structure? Board minutes and governance records could clarify this.
+- Which Congressional members served on IPI advisory boards, and did any have knowledge of the Epstein funding or the sovereign donor reporting arrangement?
+- How did IPI's Mongolia Advisory Board relate to its Ministerial Working Dinners at 777 UN Plaza with UAE, Luxembourg, and other foreign officials? Were these programs funded from the same sources?
 
 ## Applicable Models
 - narrative-shield

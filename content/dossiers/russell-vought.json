@@ -1,0 +1,628 @@
+{
+  "name": "Russell Vought",
+  "slug": "russell-vought",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.321233",
+  "last_updated": "2026-05-07T15:18:33",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 10,
+    "total_entities": 6,
+    "finding_types": {
+      "financial": 5,
+      "identity": 1,
+      "intelligence": 1,
+      "background": 2,
+      "legal": 1
+    },
+    "connection_types": {
+      "political": 5,
+      "shares_officer": 3,
+      "corporate": 1,
+      "controls": 1
+    },
+    "last_updated": "2026-05-07T15:18:33"
+  },
+  "findings": [
+    {
+      "id": 7103,
+      "finding_type": "financial",
+      "summary": "FEC donations (2004-2015, 11 records): Small-dollar conservative donor pattern. Listed employer as Heritage Action for America (2013-2015, Arlington VA), US House of Representatives (2008-2010, Washington DC). Recipients: Senate Conservatives Fund (100), Mike Lee (2x100), Matt Bevin (2x250), Pat Toomey (250), John McCain (250), Doug Hoffman (250), Pete Olson (250), Jim Patterson (50), Pro-Growth Action Team (300). All donations under 300. Zero post-2015 donations found.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2015-02-06",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:15:01",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7096,
+      "finding_type": "financial",
+      "summary": "Vought holds simultaneous leadership roles across 3 nonprofit entities: President & Director of Center for American Restoration Inc (c3, EIN 854307005), President & Director of Citizens for Renewing America Inc (c4, EIN 861769922), and Treasurer & Director of America First Legal Foundation (c3, EIN 862190372, Stephen Miller's org). Total comp from CRA: 314K (2023). Zero comp from AFL.",
+      "detail": null,
+      "source_datasets": [
+        "IRS 990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:13:25",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 861769922, IRS 990 EIN 862190372",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7097,
+      "finding_type": "financial",
+      "summary": "CRA c3 and CPI share the same address (300 Independence Ave SE, Washington DC 20003) and overlapping board members. CPI incubated CRA with 1.93M in seed grants (1.347M in 2022 + 583K in 2021). CPI also seeded AFL with 1.334M (2021). CPI CEO Ed Corrigan and COO Wesley Denton both serve as unpaid board members at CRA. Denton is Chairman & Treasurer at CRA c3, Treasurer at CRA c4. Corrigan is board member at both CRA entities.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:13:36",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7098,
+      "finding_type": "financial",
+      "summary": "Vought's CRA operates a c3/c4 pair: Center for American Restoration Inc (c3, EIN 854307005, revenue 4.39M) and Citizens for Renewing America Inc (c4, EIN 861769922, revenue 348K). All 11 officers are IDENTICAL across both entities with same titles and compensation \u2014 reported as paid by related organization, not directly. The c4 arm made a 228K grant to Election Integrity Network Inc (2022), while the c3 made a 100K grant to American Accountability Foundation (2022).",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:13:45",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 861769922",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7100,
+      "finding_type": "financial",
+      "summary": "CRA c3 major donors (2023 990): Fidelity Investments Charitable Gift Fund 517.5K, Vanguard Charitable Endowment 300K, Donors Trust 226K, National Christian Charitable Foundation 197.5K, National Philanthropic Trust 93K, Chicago Community Trust 10K. Earlier (2021-2022): CPI grants totaling 1.93M. Goldman Sachs Charitable Gift Fund 25K (2022). Vanguard Charitable 100K (2024). DAF-heavy donor base obscures ultimate funders.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:03",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7101,
+      "finding_type": "identity",
+      "summary": "Shared officer network across CRA/CPI/AFL: Ed Corrigan serves as CEO of CPI (440K comp), Board Member of both CRA entities (unpaid), and Director of AFL (unpaid). Wesley Denton serves as COO of CPI (439K comp), Chairman & Treasurer of CRA c3 (unpaid), Treasurer of CRA c4 (unpaid). Kevin Kookogey serves as Board Member of CRA c3, Chairman & Secretary of CRA c4, and Chairman of Citizens for Limited Government and Constitutional Integrity (EIN 852140761) and Tennessee Stands Foundation (EIN 853460880). This creates interlocking governance across the CPI-incubated network.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:13",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 861769922, IRS 990 EIN 821470217, IRS 990 EIN 862190372",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5493,
+      "finding_type": "intelligence",
+      "summary": "Russell Vought (OMB Director) is primary vehicle for DOGE agenda continuation post-disbandment. American Prospect (Feb 2026): Vought quietly institutionalized government demolition agenda. He was likely architect of DOGE most severe staffing cuts; argued president can make cuts without Congress. OMB under Vought became choke point to cut off funding and functioning of programs. White House 2026 budget request (drafted by Vought) doubled DOGE budget to 45M and envisions far more institutionalized presence at agency level. NPR described approach as most aggressive use of OMB since Nixon administration.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:58",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://prospect.org/2026/02/05/doge-russell-vought-elon-musk-office-management-budget/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7099,
+      "finding_type": "background",
+      "summary": "Vought career trajectory: Senate staffer (Gramm 1999, Hagel to 2003) -> Republican Study Committee -> House Republican Conference Policy Director (2008-2010) -> Co-founded Heritage Action for America with Michael Needham (2010), served as VP & Political Director through 2017 -> OMB Deputy Director/Acting Director/Director (2017-2021) -> Founded Center for Renewing America at CPI's headquarters (2021) -> Co-authored Project 2025 Mandate for Leadership -> OMB Director again (2025-present) + Acting CFPB Director (Feb 2025-).",
+      "detail": null,
+      "source_datasets": [
+        "littlesis, opensanctions, fec, web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:13:54",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q29963497",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7104,
+      "finding_type": "legal",
+      "summary": "CourtListener shows 20 cases involving Russell Vought. Notable: (1) Personal Chapter 13 bankruptcy in D.N.J., filed 2004-05-13, terminated 2005-12-06, case 04-26584. (2) Trademark suit: Restoration Action Inc v. Center for American Restoration Inc, E.D. Va. 1:21-cv-00400, filed 2021-03-31. (3) Baltimore v. Vought, D.Md. 1:25-cv-00458, APA challenge to OMB. (4) Cheryl Steele v. Vought, D.C. Cir. 26-5060, employment case filed 2026-02-19. (5) Multiple CFPB-related suits naming Vought as acting director.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:15:23",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener",
+          "source_quote": " Russell Vought, Chapter 13, D.N.J. Bankr., Case 04-26584, filed 2004-05-13, terminated 2005-12-06. Restoration Action Inc v. Center for American Restoration Inc, 1:21-cv-00400, E.D. Va., filed 2021-03-31, Trademark.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7105,
+      "finding_type": "background",
+      "summary": "LittleSis maps 29 relationships for Vought. Key connections: (1) Wife Mary Vought. (2) Business partners: Wesley Denton (CPI COO) and Ed Corrigan (CPI CEO). (3) Social: William Wolfe. (4) Staff/subordinate: James Braid. (5) Generic relationship with Elon Musk. (6) FEC donations to John McCain, Pat Toomey, Doug Hoffman, Pete Olson, Pro-Growth Action Team. (7) Board of Visitors, US Naval Academy (Dec 2020 - Sep 2021). Education: Wheaton College, GWU Law.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:15:34",
+      "target_name": "Russell Vought",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:115231",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2993,
+      "person_a": "DOGE",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": "OMB Director; primary vehicle for DOGE agenda continuation; likely architect of most severe staffing cuts; drafted 2026 budget doubling DOGE to 45M; Project 2025 architect",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:33:33",
+      "profile_id": "tech-right",
+      "other_person": "DOGE",
+      "other_person_slug": "doge",
+      "evidence": []
+    },
+    {
+      "id": 3385,
+      "person_a": "Mark Paoletta",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": "Close allies at OMB; co-developed impoundment theory via CRA between administrations; Paoletta serves as Vought's GC at OMB in both Trump terms; together they architect legal basis for DOGE spending cuts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:36:07",
+      "profile_id": "tech-right",
+      "other_person": "Mark Paoletta",
+      "other_person_slug": "mark-paoletta",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios Jul 2025",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRA impoundment paper",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WashPost Jan 2020",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3552,
+      "person_a": "Russell Vought",
+      "person_b": "Stephen Miller",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:29",
+      "profile_id": "tech-right",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 862190372",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3553,
+      "person_a": "Edward Corrigan",
+      "person_b": "Russell Vought",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:30",
+      "profile_id": "tech-right",
+      "other_person": "Edward Corrigan",
+      "other_person_slug": "edward-corrigan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3554,
+      "person_a": "Russell Vought",
+      "person_b": "Wesley Denton",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:31",
+      "profile_id": "tech-right",
+      "other_person": "Wesley Denton",
+      "other_person_slug": "wesley-denton",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005, IRS 990 EIN 821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3555,
+      "person_a": "Jeffrey Clark",
+      "person_b": "Russell Vought",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:32",
+      "profile_id": "tech-right",
+      "other_person": "Jeffrey Clark",
+      "other_person_slug": "jeffrey-clark",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 854307005",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3695,
+      "person_a": "Center for Renewing America",
+      "person_b": "Russell Vought",
+      "relationship_type": "controls",
+      "description": "Russell Vought is President of CRA c3 and c4. CRA received 1.94M from CPI.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Center for Renewing America",
+      "other_person_slug": "center-for-renewing-america",
+      "evidence": []
+    },
+    {
+      "id": 5976,
+      "person_a": "Mark Paoletta",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": "Long-running Vought-Paoletta partnership: OMB Director / GC dyad in Trump I (2018-2021), Center for Renewing America Senior Fellow under Vought 2021-2025, OMB GC under Vought again Trump II (2025-)",
+      "strength": "strong",
+      "date_range": "2018/present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:33",
+      "profile_id": "epstein",
+      "other_person": "Mark Paoletta",
+      "other_person_slug": "mark-paoletta",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3556,
+      "person_a": "Jim DeMint",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:33",
+      "profile_id": "tech-right",
+      "other_person": "Jim DeMint",
+      "other_person_slug": "jim-demint",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3557,
+      "person_a": "Mark Meadows",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:34",
+      "profile_id": "tech-right",
+      "other_person": "Mark Meadows",
+      "other_person_slug": "mark-meadows",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "Co-founder, VP & Political Director",
+      "date_start": "2010",
+      "date_end": "2017",
+      "source": "LittleSis:540206, Heritage Action press release",
+      "entity_id": 1188,
+      "entity_name": "Heritage Action for America",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "Treasurer & Director",
+      "date_start": "2021",
+      "date_end": null,
+      "source": "IRS 990 EIN 862190372 (2023)",
+      "entity_id": 967,
+      "entity_name": "America First Legal Foundation",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "President & Director",
+      "date_start": "2021-01",
+      "date_end": "2025-01",
+      "source": "IRS 990 EIN 854307005 (2023)",
+      "entity_id": 1053,
+      "entity_name": "Center for American Restoration Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "President & Director",
+      "date_start": "2021-01",
+      "date_end": "2025-01",
+      "source": "IRS 990 EIN 861769922 (2023)",
+      "entity_id": 1054,
+      "entity_name": "Citizens for Renewing America Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "Co-Author, Mandate for Leadership",
+      "date_start": "2023",
+      "date_end": "2024",
+      "source": "LittleSis:1976967",
+      "entity_id": 1189,
+      "entity_name": "Project 2025",
+      "entity_type": "association",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "Founder/Director",
+      "date_start": null,
+      "date_end": null,
+      "source": "Center for Renewing America c3",
+      "entity_id": 1053,
+      "entity_name": "Center for American Restoration Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2015-02-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC donations (2004-2015, 11 records): Small-dollar conservative donor pattern. Listed employer as Heritage Action for America (2013-2015, Arlington VA), US House of Representatives (2008-2010, Washington DC). Recipients: Senate Conservatives Fund (100), Mike Lee (2x100), Matt Bevin (2x250), Pat Toomey (250), John McCain (250), Doug Hoffman (250), Pete Olson (250), Jim Patterson (50), Pro-Growth Action Team (300). All donations under 300. Zero post-2015 donations found.",
+      "confidence": "confirmed",
+      "id": 7103
+    },
+    {
+      "date": "2018/present",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Long-running Vought-Paoletta partnership: OMB Director / GC dyad in Trump I (2018-2021), Center for Renewing America Senior Fellow under Vought 2021-2025, OMB GC under Vought again Trump II (2025-)",
+      "other_person": "Mark Paoletta",
+      "id": 5976
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Vought holds simultaneous leadership roles across 3 nonprofit entities: President & Director of Center for American Restoration Inc (c3, EIN 854307005), President & Director of Citizens for Renewing America Inc (c4, EIN 861769922), and Treasurer & Director of America First Legal Foundation (c3, EIN 862190372, Stephen Miller's org). Total comp from CRA: 314K (2023). Zero comp from AFL.",
+      "confidence": "confirmed",
+      "id": 7096
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CRA c3 and CPI share the same address (300 Independence Ave SE, Washington DC 20003) and overlapping board members. CPI incubated CRA with 1.93M in seed grants (1.347M in 2022 + 583K in 2021). CPI also seeded AFL with 1.334M (2021). CPI CEO Ed Corrigan and COO Wesley Denton both serve as unpaid board members at CRA. Denton is Chairman & Treasurer at CRA c3, Treasurer at CRA c4. Corrigan is board member at both CRA entities.",
+      "confidence": "high",
+      "id": 7097
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Vought's CRA operates a c3/c4 pair: Center for American Restoration Inc (c3, EIN 854307005, revenue 4.39M) and Citizens for Renewing America Inc (c4, EIN 861769922, revenue 348K). All 11 officers are IDENTICAL across both entities with same titles and compensation \u2014 reported as paid by related organization, not directly. The c4 arm made a 228K grant to Election Integrity Network Inc (2022), while the c3 made a 100K grant to American Accountability Foundation (2022).",
+      "confidence": "confirmed",
+      "id": 7098
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CRA c3 major donors (2023 990): Fidelity Investments Charitable Gift Fund 517.5K, Vanguard Charitable Endowment 300K, Donors Trust 226K, National Christian Charitable Foundation 197.5K, National Philanthropic Trust 93K, Chicago Community Trust 10K. Earlier (2021-2022): CPI grants totaling 1.93M. Goldman Sachs Charitable Gift Fund 25K (2022). Vanguard Charitable 100K (2024). DAF-heavy donor base obscures ultimate funders.",
+      "confidence": "high",
+      "id": 7100
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Shared officer network across CRA/CPI/AFL: Ed Corrigan serves as CEO of CPI (440K comp), Board Member of both CRA entities (unpaid), and Director of AFL (unpaid). Wesley Denton serves as COO of CPI (439K comp), Chairman & Treasurer of CRA c3 (unpaid), Treasurer of CRA c4 (unpaid). Kevin Kookogey serves as Board Member of CRA c3, Chairman & Secretary of CRA c4, and Chairman of Citizens for Limited Government and Constitutional Integrity (EIN 852140761) and Tennessee Stands Foundation (EIN 853460880). This creates interlocking governance across the CPI-incubated network.",
+      "confidence": "high",
+      "id": 7101
+    }
+  ]
+}

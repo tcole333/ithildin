@@ -1,0 +1,683 @@
+{
+  "name": "Day One Ventures",
+  "slug": "day-one-ventures",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein",
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.218235",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 15,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 3,
+      "financial": 6,
+      "negative_result": 1,
+      "legal": 3,
+      "identity": 1,
+      "relationship": 1
+    },
+    "connection_types": {
+      "owns": 1,
+      "funds": 2
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9173,
+      "finding_type": "intelligence",
+      "summary": "Day One Ventures portfolio mapped: 107+ companies across nuclear, quantum, BCI, AI security, biometrics, defense biotech",
+      "detail": "Complete portfolio mapping of Day One Ventures (Masha Drokova/Bucher). Fund structure: 3 main Cayman Islands funds (11M/52.5M/150M) plus 11 AngelList syndicate SPVs. Strategically sensitive investments: Valar Atomics (nuclear), QuEra (quantum), CalypsoAI (Pentagon AI), Terran Orbital (satellites/Lockheed), Abel Police (law enforcement AI), Pilgrim (defense biotech), xAI (frontier AI), World (biometrics), Merge Labs (BCI), Orchid (genomics), Esper (satellites), Rainmaker (weather mod). Angel: NtechLab (sanctioned Russian facial recognition).",
+      "source_datasets": [
+        "web_search",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 03:32:47",
+      "target_name": "Day One Ventures",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:NtechLab",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1727427",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo Finance 2025 investment review",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "dayoneventures.com portfolio page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9174,
+      "finding_type": "financial",
+      "summary": "Day One Ventures LP base includes sanctioned Russian oligarchs Mamut and Yevtushenkov per 2017 fundraising pitch",
+      "detail": "2017 fundraising pitch email (sent under maiden name Drokova) listed Alexander Mamut (sanctioned Russian oligarch, CAATSA list) and Vladimir Yevtushenkov (sanctioned Russian oligarch, Sistema owner, defense electronics/drone manufacturer) as investors. Drokova denied writing the email. Dmitry Eremeev (Bank 131/Telegram payments) confirmed as first investor. Serguei Beloussov/Serg Bell confirmed as fund financier -- subject of US intelligence investigation Dec 2022 for suspected classified info transfer to Russian state institutions. 96%+ of capital reportedly from outside US.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-02 03:32:58",
+      "target_name": "Day One Ventures",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SF Standard Feb 10 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch Feb 10 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WashPo Dec 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Maria Drokova",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9176,
+      "finding_type": "financial",
+      "summary": "Day One Ventures operates 11 AngelList syndicate SPVs for deal-specific co-investment -- potential capital routing mechanism",
+      "detail": "SEC EDGAR reveals 11 syndicate sub-funds under Day One Ventures Syndicate LP: AN, PU, WO (I and II), PO, LI, SU, OW-0529, YO-0703, VA-0618, ZA-0724. All Delaware-incorporated, Washington state-based, administered via AngelList Advisors LLC. Two-letter codes likely correspond to portfolio companies (e.g., VA=Valar Atomics, WO=World, SU=Superhuman, YO=you.com, OW=Owner.com). These SPVs allow investors who are not formal LPs to participate in specific deals -- potentially a mechanism to channel capital from sources not disclosed in the main fund filings. Later funds include date codes (e.g., OW-0529 = May 29 deal date).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 03:33:29",
+      "target_name": "Day One Ventures",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D filings: CIKs 0001902107, 0001809182, 0001910834, 0001923330, 0001920335, 0001945705, 0001951858, 0002025424, 0002029743, 0002082478, 0002083323",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9177,
+      "finding_type": "financial",
+      "summary": "Day One co-led Valar Atomics 130M round -- nuclear reactor company contracted with Trump administration",
+      "detail": "Day One Ventures co-led Valar Atomics Series A at 130M alongside Snowpoint Ventures and Dream Ventures. Valar manufactures nuclear fission reactors, deployed 6 modules via US Air Force C-17 to Utah. Angel investors include Palmer Luckey (Anduril founder) and Shyam Sankar (Palantir CTO). Valar benefits from Trump executive orders cutting NRC oversight of reactor approvals. Controversy: Valar exec distributed company hats at DOE meeting, prompting NRC ethics objection. Valar subsequently raised 450M at 2B valuation. Day One syndicate SPV VA-0618 (filed Aug 2025) likely corresponds to this investment.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 03:33:44",
+      "target_name": "Day One Ventures",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Nov 2025 Valar 130M raise",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR Dec 2025 Trump nuclear safety concerns",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TNW Valar 450M raise",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9188,
+      "finding_type": "negative_result",
+      "summary": "No Day One Ventures portfolio companies appear in Epstein corpus",
+      "detail": "Searched NtechLab, QuEra, CalypsoAI, Valar Atomics, Merge Labs, Pilgrim biotech. Zero genuine hits. Investments were either independent of Epstein or communicated outside captured channels.",
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "low",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:15:01",
+      "target_name": "Day One Ventures",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LMSBAND corpus search zero results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9215,
+      "finding_type": "intelligence",
+      "summary": "No public CFIUS action against Day One Ventures identified despite portfolio containing 5+ companies in mandatory-filing sectors",
+      "detail": "Comprehensive search of public records, news, and legal databases found no evidence of CFIUS filing, declaration, review, or enforcement action involving Day One Ventures. Portfolio includes Valar Atomics (nuclear), QuEra Computing (quantum), Pilgrim (defense biotech), Merge Labs (BCI/neurotechnology), Esper (satellite ISR). All three main funds are Cayman Islands-incorporated. With 96% foreign capital Day One likely qualifies as foreign person for CFIUS purposes. Nuclear and quantum are explicitly listed critical technologies under CFIUS mandatory declaration rules. Biotechnology R&D NAICS 541714 is a mandatory filing sector.",
+      "source_datasets": [
+        "web_search",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:19",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CFIUS regulations 31 CFR Part 800",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EO 14083 Sept 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FIRRMA implementing rules",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 17 Form D filings reviewed",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9216,
+      "finding_type": "legal",
+      "summary": "GVA Capital 216M OFAC penalty establishes direct enforcement precedent for Russian-connected Silicon Valley VC funds",
+      "detail": "In June 2025 OFAC assessed 215,988,868 dollar penalty against GVA Capital Ltd, a San Francisco VC firm, for managing 20M investment for sanctioned oligarch Kerimov in Luminar (LiDAR). Maximum statutory penalty. First enforcement action under new administration. GVA Capital structure parallels Day One Ventures -- both SF-based VC firms with Russian oligarch connections investing in dual-use technology sectors.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:22",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ July 2025 reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OFAC enforcement action 20250612",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Paul Weiss and Arnold Porter legal analyses",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9217,
+      "finding_type": "intelligence",
+      "summary": "Co-investor Serguei Beloussov subject to first-ever FASCSA exclusion order via Acronis AG Sept 2025",
+      "detail": "Beloussov co-invested alongside Day One Ventures in QuEra Computing seed round. His company Acronis AG was the first entity excluded under FASCSA in September 2025 -- barred from all Intelligence Community procurement. The FASCSA order did not publicly state rationale. Beloussov born in Leningrad USSR, Singapore citizen since 2001.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:24",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNI FASCSA exclusion order Sept 15 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Mayer Brown legal analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "QuEra Computing seed round investor disclosures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9218,
+      "finding_type": "financial",
+      "summary": "Day One Ventures SEC filings show all three main funds incorporated in Cayman Islands with Fund II business address in Grand Cayman",
+      "detail": "EDGAR search returned 17 Form D filings across 14 Day One entities. Fund I (CIK 0001727427, filed 2018, San Francisco CA, Cayman incorporated). Fund II (CIK 0001831965, filed Nov 2020, Grand Cayman business address, Cayman incorporated). Fund III (CIK 0002009720, filed Feb 2024, Dallas TX, Cayman incorporated, amended April 2025). 11 additional SPV syndicate funds all Delaware-incorporated with WA or TX business addresses. Recent SPV activity through August 2025 indicates ongoing deal activity.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:34",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1727427",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9219,
+      "finding_type": "legal",
+      "summary": "Yevtushenkov/Sistema sanctioned by UK, Australia, Ukraine since 2022; Sistema US-sanctioned since November 2023",
+      "detail": "Vladimir Yevtushenkov sanctioned by Australia April 2022 and UK April 2022. AFK Sistema itself became a Designated Person May 2023 under UK sanctions. Sistema under US sanctions since November 2023. Day One Ventures previously identified Yevtushenkov conglomerate as LP investor. 2024 report found Sistema continued sourcing weapons components through front companies despite sanctions. Mamut on US Treasury Putin List 2018 but not formally sanctioned by US.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:41",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Interfax reporting on Sistema sanctions",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Newsweek reporting on Yevtushenkov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022 reporting on Day One LP disclosures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9220,
+      "finding_type": "legal",
+      "summary": "COINS Act Dec 2025 explicitly names Russia as country of concern for outbound investment restrictions covering AI quantum and semiconductors",
+      "detail": "The Comprehensive Outbound Investment National Security Act of 2025 (COINS Act), signed December 18, 2025 as part of FY2026 NDAA, expands countries of concern to include Russia alongside China, Iran, North Korea, Cuba, and Venezuela. Covered technology sectors include AI, quantum information technology, semiconductors, high-performance computing, and hypersonic systems. Treasury has 450 days to promulgate implementing regulations (expected by March 2027). Multiple Day One portfolio companies fall within covered sectors.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:00:46",
+      "target_name": "Day One Ventures",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "COINS Act text in FY2026 NDAA",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sidley Austin legal analysis Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wilson Sonsini analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9829,
+      "finding_type": "financial",
+      "summary": "LittleSis confirms Alexander Mamut (CAATSA-listed Russian oligarch, Rambler Group owner) as owner of Day One Ventures. Other confirmed owners/investors per LittleSis: Vladimir Evtushenkov (sanctioned Russian oligarch, AFK Sistema), Dmitry Eremeev (first investor, Bank 131 owner, Durov brothers partner). Bucher listed as Founder and Principal. Mamut was also listed by Bucher in fundraising pitch documents as investor in a Day One fund. Fund I filed SEC Form D in Jan 2018, incorporated in Cayman Islands (E9).",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:49:06",
+      "target_name": "Day One Ventures",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationships for entity 438855",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1727427",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022-03-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9832,
+      "finding_type": "identity",
+      "summary": "Day One Ventures corporate structure: GP is Day One Ventures Management LLC (Delaware, formed 2017-04-19, company #6385830). Fund LP is Day One Ventures LP (Delaware, formed 2017-04-19, #6385831). California foreign registration terminated 2023-03-09 (1130 S Flower St, Suite 311, Los Angeles). Re-registered in Texas 2023-03-09 (3839 McKinney Ave Suite 155-5070, Dallas TX). SEC Form D filings: Fund I (CIK 0001727427, filed Jan 2018, Cayman Islands); Fund II (CIK 0001831965, filed Nov 2020, Grand Cayman); Fund III (CIK 0002009720, filed Feb 2024, Dallas TX). Syndicate LP (Delaware, formed 2020-03-03, #7881872) with 10+ sub-funds. Most recent California LLC formed 2026-02-17 at 700 El Camino Real, Suite 120, Menlo Park CA. Drokova also has personal entities: DROKOVA INC. (NY, inactive, 111 8th Ave NYC, formed 2015) and DROKOVA LLC (Delaware, formed 2016; active in NY at 2 Rector St Suite 1202).",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates",
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:49:38",
+      "target_name": "Day One Ventures",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates search results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9836,
+      "finding_type": "financial",
+      "summary": "Day One Ventures has THREE sanctioned/CAATSA-listed Russian oligarchs as investors/owners per LittleSis: (1) Alexander Mamut - CAATSA 2018, CA/UA sanctions, Rambler Group owner; (2) Vladimir Evtushenkov - sanctioned by EU, UK, CA, AU, NZ, CH, UA, CZ, owner of AFK Sistema (defense electronics, military UAVs); (3) Dmitry Eremeev - first investor, Bank 131 owner, Durov brothers partner. Serg Bell (Runa Capital/Acronis founder) also reported as Day One financier. This concentration of sanctioned Russian oligarch money in a Silicon Valley VC fund is notable.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "opensanctions",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:12",
+      "target_name": "Day One Ventures",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 438855 relationships",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q2007053",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q916992",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022-03-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9972,
+      "finding_type": "relationship",
+      "summary": "Day One Ventures is a perfect structural hole (brokerage_score=1.0, betweenness=0.515 rank 3) connecting two categories of actors who have no documented connections to each other: (1) Masha Bucher (founder, Kremlin-connected); (2) Alexander Mamut (sanctioned oligarch, Rambler/nginx raid); (3) Vladimir Evtushenkov (sanctioned oligarch, AFK Sistema/military UAVs); (4) Belltower Fund Group Ltd (unknown Cayman entity, 0 findings). The fund concentrates at least 3 sanctioned Russian oligarchs as investors/owners, with a Kremlin-connected founder.",
+      "detail": "Structural observation: Day One Ventures sits at betweenness rank 3 with brokerage_score=1.0. Its four neighbors \u2014 Bucher, Mamut, Evtushenkov, Belltower Fund Group Ltd \u2014 have no documented connections to each other through Day One or otherwise. This means the fund creates the only documented linkage between (a) Mamut's Rambler/Lynwood network (Thread 6) and (b) the Runa Capital/nginx VC network (Thread 1). Previously documented: Mamut is CAATSA-listed, Evtushenkov is sanctioned by EU/UK/CA/AU/NZ/CH/UA/CZ. Belltower Fund Group Ltd has zero findings. Innocent explanation: Mamut and Evtushenkov were pre-existing Bucher contacts from her Nashi/Moscow days who saw a legitimate investment opportunity. Falsification: if Belltower Fund Group Ltd is found to be unconnected to Russian state actors, and if the Mamut/Evtushenkov investments were made independently, the coordination hypothesis weakens.",
+      "source_datasets": "graph_tools:analysis_run_37",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "Day One Ventures",
+      "profile_id": "nginx",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5098,
+      "person_a": "Day One Ventures",
+      "person_b": "Masha Bucher",
+      "relationship_type": "owns",
+      "description": "Founder and Principal of Day One Ventures. Founded Jan 2018.",
+      "strength": "strong",
+      "date_range": "2018-01/",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:37",
+      "profile_id": "nginx",
+      "other_person": "Masha Bucher",
+      "other_person_slug": "masha-bucher",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1935680",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1727427",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5099,
+      "person_a": "Alexander Mamut",
+      "person_b": "Day One Ventures",
+      "relationship_type": "funds",
+      "description": "Investor/owner of Day One Ventures per LittleSis. Listed by Bucher in fundraising pitch documents.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:39",
+      "profile_id": "nginx",
+      "other_person": "Alexander Mamut",
+      "other_person_slug": "alexander-mamut",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1935681",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022-03-26",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5100,
+      "person_a": "Day One Ventures",
+      "person_b": "Vladimir Evtushenkov",
+      "relationship_type": "funds",
+      "description": "Owner/investor of Day One Ventures per LittleSis. Sanctioned Russian oligarch (EU, UK, CA, AU, NZ, CH, UA, CZ). AFK Sistema owner.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:41",
+      "profile_id": "nginx",
+      "other_person": "Vladimir Evtushenkov",
+      "other_person_slug": "vladimir-evtushenkov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1935683",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q2007053",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2018-01/",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Founder and Principal of Day One Ventures. Founded Jan 2018.",
+      "other_person": "Masha Bucher",
+      "id": 5098
+    }
+  ]
+}

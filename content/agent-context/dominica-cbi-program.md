@@ -1,0 +1,17 @@
+# Dominica CBI Program
+**Stats**: 8 findings, 2 connections, 0 entities
+**Dossier**: /dossiers/dominica-cbi-program
+
+## Key Findings
+- **[financial/high]** Dominica CBI program sold 34,500+ passports (EU data) vs 7,700 disclosed in gazettes; massive revenue discrepancies in budget records (Finding #10047)
+- **[intelligence/high]** Dominica pattern of selling ambassadorships alongside CBI passports: Monfared paid K+ for diplomatic passport, Nanthan laundered proceeds, Skerrit had 'no memory' (Finding #10050)
+- **[financial/high]** EU data reveals Dominica sold 34,500 CBI passports vs 7,700 names published — massive disclosure gap suggests thousands of undisclosed citizenship grants (Finding #10159)
+- **[intelligence/high]** Swiss Leaks (2015): 28 Dominican passport holders held $40.9M in 78 HSBC Swiss private bank accounts in Geneva — establishes historical Dominican-Swiss banking channel (Finding #10164)
+- **[legal/high]** Dominica suspended CBI applications from Iranian nationals effective March 24, 2026 — triggered by Shamkhani passport scandal and US pressure including Trump travel ban and visa restrictions (Finding #10177)
+- **[intelligence/medium]** OCCRP Passports of Caribbean screening: 20+ named notable Dominica CBI holders include: Saddam Hussein's top nuclear scientist (2014, Jafar Dhia Jafar candidate), Libyan Gaddafi-era colonel (2015), Asadullah Khalid (Afghan intel chief, 2017 PEP), Samir Rifai (Jordan ex-PM via Range, 2018), God Nisanov + Zarakh Iliev (OFAC-sanctioned Russian/Azeri oligarchs, 2017), Omar Murtuzaliev (Russia, not yet sanctioned), Yildirim Demiroren (Turkey, 2018), Anthony Haiden (US/Dominica airport contractor, 2017), Ali Reza Monfared (Iran oil theft, 2009), Mehdi Monfared (now CBI broker), Mehdi Ebrahimi Eshratabadi (Iran, Interpol 2019), Hassan Jaffar al-Lami (Iraq Noor Bank), Namir el-Akabi (Iraq, 2010), Oday Nadir al-Quraishi (Iraq), Ehsan Azarnekou (Iran), Pedro Fort Berbel (Spain SEC Ponzi, 2015), Gursamarjit Singh (India/UK Tory donor, 2013), Faouri father/son (Jordan fraud, 2010), Pai-Hung Wang + Ching-Yi Hsieh (Taiwan fraud, 2017), Rakesh Wadhwa (India/Nepal casino tax fugitive, 2016), Prateek Gupta (India bank fraud, 2018), Aman Lohia (India Interpol, 2018), Preeti+Sanjay Chandra (India money laundering), Roman Vasilenko (Russia fraud, 2018), Glory Oseidebame + Muyiwa Folorunso (Nigeria Ponzi, 2017), Bassem Awadallah (Jordan royal court / Jordan 2021 coup attempt) (2023-10-11) (Finding #10393)
+- **[financial/medium]** Dominica CBI real estate option escrow held at National Commercial Bank of Dominica — funds for real estate projects NOT publicly accounted in national budget (Finding #10158)
+- **[legal/medium]** FinCEN Advisory FIN-2014-A004 warned of CBI passport abuse for sanctions evasion (targeting St Kitts); rescinded Feb 2026 after reforms — Dominica was never directly named but same risks apply (Finding #10165)
+
+## Top Connections
+- **Hossein Shamkhani** [intelligence/strong]: Shamkhani obtained Dominica CBI passport under alias Hugo Hayek — used to evade US/EU sanctions on Iranian/Russian oil shipping empire, acquire Dubai properties, open EU corporate accounts
+- **Hossein Shamkhani** [financial/strong]: Shamkhani obtained Dominica CBI passport under alias Hugo Hayek, used to evade OFAC sanctions on Iranian oil shipping empire. Passport revoked Aug 2025 after OFAC designation of 50+ entities and 50+ vessels in his network.

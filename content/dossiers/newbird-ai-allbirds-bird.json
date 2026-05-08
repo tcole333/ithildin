@@ -1,0 +1,236 @@
+{
+  "name": "NewBird AI (Allbirds BIRD)",
+  "slug": "newbird-ai-allbirds-bird",
+  "aliases": [],
+  "profile_ids": [
+    "allbirds"
+  ],
+  "generated_at": "2026-05-07T23:07:36.341902",
+  "last_updated": "2026-04-16T05:40:10",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "infrastructure": 3,
+      "coordination": 1,
+      "financial": 3,
+      "corporate": 2
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-16T05:40:10"
+  },
+  "findings": [
+    {
+      "id": 10574,
+      "finding_type": "infrastructure",
+      "summary": "newbird.ai domain not controlled by Allbirds \u2014 registered January 22, 2026 (84 days pre-announcement) via GoDaddy privacy proxy, redirects to unrelated NeuBird Inc (AI SRE startup)",
+      "detail": "WHOIS shows newbird.ai registered 2026-01-22 by Domains By Proxy LLC (GoDaddy privacy service). Domain resolves with redirect to neubird.ai, the website of NeuBird Inc, a legitimate AI SRE company unrelated to Allbirds or the GPU pivot. newbirdai.com was registered on April 15 2026 (day of announcement) via Registrar.eu with dynamic DNS nameservers (dyna-ns.net). No operational NewBird AI website exists.",
+      "source_datasets": "whois",
+      "confidence": "high",
+      "date_of_event": "2026-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10704,
+      "finding_type": "coordination",
+      "summary": "newbirdai.com registered April 15, 2026 (announcement day); allbirds.ai domain history unverified \u2014 complete domain registration sequence suggests phased brand preparation",
+      "detail": "newbirdai.com was registered on April 15, 2026 \u2014 the same day as the PREM14A filing and BIRD's +582% spike. This is consistent with Allbirds (or Chardan) controlling the newbirdai.com registration and registering it on announcement day once the NewBird AI brand was public. newbird.ai (registered January 22, 2026) routes to NeuBird Inc. (unrelated AI SRE company) and appears to be controlled by NeuBird, not Allbirds. The task brief references an allbirds.ai domain registration in May 2025 \u2014 this is not documented in the investigation DB as of this analysis run. If allbirds.ai was registered by an undisclosed party in May 2025, it would extend the pre-announcement domain preparation window to approximately 11 months before the April 15, 2026 announcement. Verification required.",
+      "source_datasets": "whois",
+      "confidence": "medium",
+      "date_of_event": "2026-01-22",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:40:10",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10579,
+      "finding_type": "financial",
+      "summary": "Asset sale to American Exchange Group ($39M) also contingent on May 18 vote \u2014 company currently holds no cash from either transaction",
+      "detail": "The Asset Purchase Agreement with Allbirds IP LLC (American Exchange Group affiliate) was signed March 29 2026 for $39M. This sale is also subject to the May 18 2026 stockholder vote. Until both votes succeed, Allbirds has neither the $39M from the shoe brand sale nor the $50M from the convertible note. The company's pre-announcement market cap was ~$21M (stock at ~$3). The company closed all US full-price stores in February 2026 and had revenue declining ~20%/year.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10576,
+      "finding_type": "financial",
+      "summary": "Support agreements signed April 8 (one week before public announcement) locked 71% voting power from insiders including Maveron, co-founders Zwillinger and Brown, and director Boyce",
+      "detail": "8-K filed around April 8 2026 discloses Support Agreements where entities affiliated with Maveron, Joey Zwillinger, Tim Brown, and Dick Boyce (collectively ~71% voting power as of Feb 28 2026) committed to vote as Board recommends at the May 18 Special Meeting. These agreements were signed a full week before the April 15 public announcement, raising questions about trading during the April 8-15 window.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-04-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10575,
+      "finding_type": "financial",
+      "summary": "$50M convertible financing facility not yet closed as of April 16 2026 \u2014 contingent on May 18 stockholder vote; institutional investor unnamed; terms undisclosed",
+      "detail": "Allbirds announced April 15 2026 it executed a $50M convertible financing facility with an unnamed institutional investor. Placement agent: Chardan. Facility expected to close Q2 2026, subject to stockholder approval at May 18 Special Meeting. Convertible note terms (interest rate, conversion price, maturity) not publicly disclosed. Investor ownership capped at 4.99% (expandable to 9.99%). No GPU purchases can occur until closing.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10577,
+      "finding_type": "corporate",
+      "summary": "Zero GPU hardware, datacenter partners, named customers, or AI executives as of April 16 2026 \u2014 proxy and press release confirm no existing compute assets",
+      "detail": "PREM14A (preliminary proxy) and April 15 press release explicitly describe plans to 'acquire' GPU assets in the future. The proxy acknowledges the company is 'investigating potential opportunities' in AI infrastructure \u2014 early-stage planning language. No GPU vendors (Nvidia, AMD, Intel) named. No datacenter operators (Equinix, Digital Realty, CoreWeave, etc.) named. No customers named. No AI or tech executives named for the pivot. CEO Joe Vernachio has ~40 years in footwear/apparel with zero AI/tech experience.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10578,
+      "finding_type": "corporate",
+      "summary": "High structural similarity to Long Blockchain (Long Island Iced Tea, 2017): distressed consumer brand, convertible note pivot, no tech expertise, stock +500%, no operational substance",
+      "detail": "Long Island Iced Tea rebranded to Long Blockchain Corp in December 2017. Stock surged ~275-380% on announcement. Company never achieved any blockchain operations. Nasdaq delisted in February 2021. SEC charged three individuals with insider trading in 2023. Allbirds mirrors this pattern: distressed consumer brand (shoes vs iced tea), pivot to hot sector (GPU cloud vs blockchain), stock +500-600%, convertible note financing, zero named tech partners or customers, CEO from original industry. Multiple credible outlets (TechCrunch, The Register, Engadget, NBC News, Decrypt) have independently drawn the same comparison.",
+      "source_datasets": "web_search",
+      "confidence": "medium",
+      "date_of_event": "2026-04-15",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10581,
+      "finding_type": "infrastructure",
+      "summary": "Chardan served as placement agent on the $50M convertible note \u2014 Chardan is known for small-cap digital asset and speculative deal placement",
+      "detail": "The GlobeNewswire press release names Chardan as placement agent. Chardan's own website describes services in 'Digital Asset Advisory and Placement' and 'bridging traditional finance and digital assets.' The bank has a track record in speculative small-cap structured transactions. Holland & Hart LLP is named as legal counsel.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10580,
+      "finding_type": "infrastructure",
+      "summary": "No USPTO trademark filings found for NewBird AI, NewBird, or Allbirds AI as of April 16 2026",
+      "detail": "USPTO TESS search via secondary sources and direct website returned no trademark applications for 'NewBird AI', 'NewBird', 'New Bird AI', or 'Allbirds AI'. Combined with failure to secure newbird.ai domain and day-of domain registration of newbirdai.com, this suggests the rebrand was either rushed or the IP protection strategy had not been executed as of announcement date.",
+      "source_datasets": "uspto",
+      "confidence": "high",
+      "date_of_event": "2026-04-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "NewBird AI (Allbirds BIRD)",
+      "profile_id": "allbirds",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-01-22",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "newbird.ai domain not controlled by Allbirds \u2014 registered January 22, 2026 (84 days pre-announcement) via GoDaddy privacy proxy, redirects to unrelated NeuBird Inc (AI SRE startup)",
+      "confidence": "high",
+      "id": 10574
+    },
+    {
+      "date": "2026-01-22",
+      "type": "finding",
+      "finding_type": "coordination",
+      "summary": "newbirdai.com registered April 15, 2026 (announcement day); allbirds.ai domain history unverified \u2014 complete domain registration sequence suggests phased brand preparation",
+      "confidence": "medium",
+      "id": 10704
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Asset sale to American Exchange Group ($39M) also contingent on May 18 vote \u2014 company currently holds no cash from either transaction",
+      "confidence": "high",
+      "id": 10579
+    },
+    {
+      "date": "2026-04-08",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Support agreements signed April 8 (one week before public announcement) locked 71% voting power from insiders including Maveron, co-founders Zwillinger and Brown, and director Boyce",
+      "confidence": "high",
+      "id": 10576
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "$50M convertible financing facility not yet closed as of April 16 2026 \u2014 contingent on May 18 stockholder vote; institutional investor unnamed; terms undisclosed",
+      "confidence": "high",
+      "id": 10575
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Zero GPU hardware, datacenter partners, named customers, or AI executives as of April 16 2026 \u2014 proxy and press release confirm no existing compute assets",
+      "confidence": "high",
+      "id": 10577
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "High structural similarity to Long Blockchain (Long Island Iced Tea, 2017): distressed consumer brand, convertible note pivot, no tech expertise, stock +500%, no operational substance",
+      "confidence": "medium",
+      "id": 10578
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "Chardan served as placement agent on the $50M convertible note \u2014 Chardan is known for small-cap digital asset and speculative deal placement",
+      "confidence": "high",
+      "id": 10581
+    },
+    {
+      "date": "2026-04-16",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "No USPTO trademark filings found for NewBird AI, NewBird, or Allbirds AI as of April 16 2026",
+      "confidence": "high",
+      "id": 10580
+    }
+  ]
+}

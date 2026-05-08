@@ -1,0 +1,199 @@
+{
+  "name": "OpenAI LP",
+  "slug": "openai-lp",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.406848",
+  "last_updated": "2026-04-06T17:39:55",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 1,
+      "privacy": 2,
+      "legal": 3
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-04-06T17:39:55"
+  },
+  "findings": [
+    {
+      "id": 9511,
+      "finding_type": "corporate",
+      "summary": "OpenAI corporate structure as described in 2023-2024 complaints: OpenAI Inc. (nonprofit parent) wholly owns OpenAI GP LLC which is general partner of OpenAI LP (the commercial entity). OpenAI Startup Fund I LP, OpenAI Startup Fund GP I LLC, and OpenAI Startup Fund Management LLC all located at 3180 18th Street San Francisco CA 94110. Sam Altman is Manager of OpenAI Startup Fund GP I LLC. Microsoft invested $10B+ and is exclusive Azure cloud and GPT-3 licensee.",
+      "detail": "Complaint describes OpenAI 2019 restructuring from pure nonprofit to capped-profit model as pivotal moment when data harvesting strategy intensified. Analysts cited in complaint estimate OpenAI would add $30-40B to Microsoft's top line. OpenAI was at $27-29B valuation in April 2023 close of $300M share sale.",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2019-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9509,
+      "finding_type": "privacy",
+      "summary": "Both NDCA OpenAI privacy complaints (filed 2023-2024) allege OpenAI scraped approximately 300 billion words from the internet without consent and failed to register as a data broker under California and Vermont law. Training data included 'books, articles, websites and posts \u2014 including personal information obtained without consent.' Comparison drawn to Clearview AI facial recognition scraping scandal.",
+      "detail": "Training datasets cited: WebText2 described as OpenAI's proprietary AI corpus. Complaint alleges billions of images scraped, many of children. Defendants did not contest these factual assertions \u2014 both cases dismissed on procedural grounds before merits adjudication.",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2023-09-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9510,
+      "finding_type": "privacy",
+      "summary": "OpenAI complaints allege real-time interception of user data from ChatGPT and third-party API integrations. 16 categories of data collected: account info, name, contact, login credentials, emails, payment info, transaction records, IP addresses, geolocation, social media data, chat logs, usage data, analytics, cookies, keystrokes, typed searches. Third-party collection via Snapchat (location), Stripe (financial), Spotify (music preferences), Slack/Teams (conversation patterns), MyChart (health records).",
+      "detail": "Plaintiffs allege this data was shared with Microsoft. Microsoft Azure acts as OpenAI's exclusive cloud. Microsoft gained exclusive access to entire OpenAI codebase via investment. No discovery was ordered so these allegations were never tested against OpenAI's actual data practices.",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2023-09-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9507,
+      "finding_type": "legal",
+      "summary": "Judge Chhabria dismissed T. v OpenAI LP First Amended Complaint under Rule 8(a)(2). Court found 200-page complaint contained 'swaths of unnecessary and distracting allegations making it nearly impossible to determine the adequacy of the plaintiffs legal claims.' Included policy grievances, nuclear weapons analogies, and request to establish 'independent body of thought leaders' to approve AI products.",
+      "detail": "Full case name at dismissal: MARILYN COUSART, et al. v. OPENAI LP, et al., Case No. 23-cv-04557-VC. Dismissed with leave to amend in 21 days. Plaintiffs did not re-file; case terminated June 27, 2024. Court warned class counsel 'can't be trusted to adequately and responsibly represent the interests of absent class members.'",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2024-05-23",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9506,
+      "finding_type": "legal",
+      "summary": "A.S. v OpenAI LP (3:24-cv-01190 NDCA) voluntarily dismissed before any substantive ruling. Plaintiff A.S. (Florida, pseudonymous ChatGPT user) filed class action Feb 27 2024 alleging ECPA, CFAA, CIPA, invasion of privacy, and common law claims against OpenAI LP and Microsoft for scraping 300 billion words and intercepting user data. Counsel Glancy Prongay Murray. Case terminated May 30 2024 on plaintiff's notice of voluntary dismissal.",
+      "detail": "Nature of suit: 370 Other Fraud. Judge Vince Chhabria. PACER case ID 425482. Defendants: OpenAI LP, OpenAI Incorporated, OpenAI GP LLC, OpenAI Startup Fund I LP, OpenAI Startup Fund GP I LLC, OpenAI Startup Fund Management LLC, Microsoft Corporation.",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2024-05-30",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9508,
+      "finding_type": "legal",
+      "summary": "DOE v. OPENAI LP (1:25-cv-04564 D.D.C.) filed December 30 2025 by pro se plaintiff JOHN DOE (through guardian JANE DOE). RICO claim (18:1962) against 13 defendants including all major AI companies. Terminated within 31 days on January 30 2026, likely at IFP (in forma pauperis) screening. Plaintiff filed Motion to Vacate and multiple supplemental briefs through March 2026.",
+      "detail": "Cause: 18:1962 Racketeering. Nature of suit: 470 Racketeer/Corrupt Organization. Named defendants include Sam Altman individually, OpenAI Global LLC, Meta Platforms, Perplexity AI, Alphabet, Google, Microsoft, Anthropic, Amazon Web Services, Nvidia, xAI Corp. Judge initials JEB = James Boasberg.",
+      "source_datasets": "courtlistener_recap",
+      "confidence": "high",
+      "date_of_event": "2026-01-30",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "OpenAI LP",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4932,
+      "person_a": "Microsoft Corporation",
+      "person_b": "OpenAI LP",
+      "relationship_type": "corporate",
+      "description": "Microsoft invested $10B+ in OpenAI LP and is the exclusive licensee of GPT-3, exclusive Azure cloud provider, and gained access to entire OpenAI codebase. Described in complaints as exerting 'considerable control' over OpenAI LP. Both companies co-defendants across all NDCA cases.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "profile_id": "altman",
+      "other_person": "Microsoft Corporation",
+      "other_person_slug": "microsoft-corporation",
+      "evidence": []
+    },
+    {
+      "id": 4935,
+      "person_a": "OpenAI GP LLC",
+      "person_b": "OpenAI LP",
+      "relationship_type": "corporate",
+      "description": "OpenAI GP LLC is the general partner of OpenAI LP, managing its operations. OpenAI GP is liable for debts and obligations of OpenAI LP including litigation judgments.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "profile_id": "altman",
+      "other_person": "OpenAI GP LLC",
+      "other_person_slug": "openai-gp-llc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-01-01",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OpenAI corporate structure as described in 2023-2024 complaints: OpenAI Inc. (nonprofit parent) wholly owns OpenAI GP LLC which is general partner of OpenAI LP (the commercial entity). OpenAI Startup Fund I LP, OpenAI Startup Fund GP I LLC, and OpenAI Startup Fund Management LLC all located at 3180 18th Street San Francisco CA 94110. Sam Altman is Manager of OpenAI Startup Fund GP I LLC. Microsoft invested $10B+ and is exclusive Azure cloud and GPT-3 licensee.",
+      "confidence": "high",
+      "id": 9511
+    },
+    {
+      "date": "2023-09-05",
+      "type": "finding",
+      "finding_type": "privacy",
+      "summary": "Both NDCA OpenAI privacy complaints (filed 2023-2024) allege OpenAI scraped approximately 300 billion words from the internet without consent and failed to register as a data broker under California and Vermont law. Training data included 'books, articles, websites and posts \u2014 including personal information obtained without consent.' Comparison drawn to Clearview AI facial recognition scraping scandal.",
+      "confidence": "high",
+      "id": 9509
+    },
+    {
+      "date": "2023-09-05",
+      "type": "finding",
+      "finding_type": "privacy",
+      "summary": "OpenAI complaints allege real-time interception of user data from ChatGPT and third-party API integrations. 16 categories of data collected: account info, name, contact, login credentials, emails, payment info, transaction records, IP addresses, geolocation, social media data, chat logs, usage data, analytics, cookies, keystrokes, typed searches. Third-party collection via Snapchat (location), Stripe (financial), Spotify (music preferences), Slack/Teams (conversation patterns), MyChart (health records).",
+      "confidence": "high",
+      "id": 9510
+    },
+    {
+      "date": "2024-05-23",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Judge Chhabria dismissed T. v OpenAI LP First Amended Complaint under Rule 8(a)(2). Court found 200-page complaint contained 'swaths of unnecessary and distracting allegations making it nearly impossible to determine the adequacy of the plaintiffs legal claims.' Included policy grievances, nuclear weapons analogies, and request to establish 'independent body of thought leaders' to approve AI products.",
+      "confidence": "high",
+      "id": 9507
+    },
+    {
+      "date": "2024-05-30",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "A.S. v OpenAI LP (3:24-cv-01190 NDCA) voluntarily dismissed before any substantive ruling. Plaintiff A.S. (Florida, pseudonymous ChatGPT user) filed class action Feb 27 2024 alleging ECPA, CFAA, CIPA, invasion of privacy, and common law claims against OpenAI LP and Microsoft for scraping 300 billion words and intercepting user data. Counsel Glancy Prongay Murray. Case terminated May 30 2024 on plaintiff's notice of voluntary dismissal.",
+      "confidence": "high",
+      "id": 9506
+    },
+    {
+      "date": "2026-01-30",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOE v. OPENAI LP (1:25-cv-04564 D.D.C.) filed December 30 2025 by pro se plaintiff JOHN DOE (through guardian JANE DOE). RICO claim (18:1962) against 13 defendants including all major AI companies. Terminated within 31 days on January 30 2026, likely at IFP (in forma pauperis) screening. Plaintiff filed Motion to Vacate and multiple supplemental briefs through March 2026.",
+      "confidence": "high",
+      "id": 9508
+    }
+  ]
+}

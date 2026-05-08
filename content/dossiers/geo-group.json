@@ -6,26 +6,27 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.876967",
-  "last_updated": "2026-03-04T03:33:28",
+  "generated_at": "2026-05-07T23:07:36.208600",
+  "last_updated": "2026-03-23T19:19:54",
   "stats": {
-    "total_findings": 15,
-    "total_connections": 19,
+    "total_findings": 16,
+    "total_connections": 21,
     "total_entities": 0,
     "finding_types": {
-      "financial": 10,
+      "financial": 11,
       "identity": 1,
       "relationship": 2,
       "intelligence": 2
     },
     "connection_types": {
-      "financial": 8,
+      "financial": 9,
       "employment": 6,
       "corporate": 3,
+      "owns": 1,
       "political": 1,
       "intelligence": 1
     },
-    "last_updated": "2026-03-04T03:33:28"
+    "last_updated": "2026-03-23T19:19:54"
   },
   "findings": [
     {
@@ -470,6 +471,31 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7367,
+      "finding_type": "financial",
+      "summary": "GEO Group is 10th largest DHS contract recipient since 2025 with 845M in awards",
+      "detail": "USASpending data shows GEO Group Inc (UEI: JMLKZZ1NL2Z6, DUNS: 612706465) received approximately 845.3M in DHS contracts in the period since Jan 2025, making it the 10th largest DHS contract recipient. This is in context of the mass deportation agenda driving increased ICE detention capacity. The 121M contract awarded December 2025 (for immigrant location services) came after the Lewandowski-Zoley confrontation.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:03",
+      "target_name": "GEO Group",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending top-recipients query, DHS agency filter, date range 2025-01-01 to 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -622,6 +648,50 @@
       "other_person": "ICE Skip Tracing Program",
       "other_person_slug": "ice-skip-tracing-program",
       "evidence": []
+    },
+    {
+      "id": 3755,
+      "person_a": "Corey Lewandowski",
+      "person_b": "GEO Group",
+      "relationship_type": "financial",
+      "description": "Demanded success fees for DHS contract protection; LittleSis documents professional relationship with George Zoley",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:34",
+      "profile_id": "tech-right",
+      "other_person": "Corey Lewandowski",
+      "other_person_slug": "corey-lewandowski",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2026-03-19; LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3762,
+      "person_a": "GEO Group",
+      "person_b": "George Zoley",
+      "relationship_type": "owns",
+      "description": "Founder of GEO Group private prison company",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:54",
+      "profile_id": "tech-right",
+      "other_person": "George Zoley",
+      "other_person_slug": "george-zoley",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis; NBC News",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     },
     {
       "id": 2833,
@@ -908,301 +978,5 @@
       "bridge-tax",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "GEO Group",
-      "connections": [
-        {
-          "target": "CoreCivic",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Both awarded WEXMAC TITUS contracts for ICE detention expansion via DoD vehicle"
-        },
-        {
-          "target": "Tom Homan",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Consulting fees (at least $5K disclosed) 2023-2024; FBI sting recorded $50K cash acceptance Sept 2024"
-        },
-        {
-          "target": "Matthew Albence",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Acting ICE Director -> GEO Group SVP Client Relations 2022"
-        },
-        {
-          "target": "Julie Myers Wood",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Head of ICE 2006-2008 -> GEO Board of Directors 2014, ~$250K/year"
-        },
-        {
-          "target": "David Venturella",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "12 years at GEO earning $6M+, now back at ICE overseeing contracts with ethics waiver"
-        },
-        {
-          "target": "Daniel Ragsdale",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "ICE Deputy Director -> GEO Group EVP 2017, now SVP Contract Admin Jan 2025"
-        },
-        {
-          "target": "CoreCivic",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Two dominant private prison companies. Combined $4.8B revenue 2025. Both doubled inaugural donations. Both focused lobbying on DHS appropriations. Both expanding detention capacity for ICE."
-        },
-        {
-          "target": "Proclamation 10886 (Border Emergency)",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Emergency declaration enables no-bid contracting authority. GEO Delaney Hall 1.2B 15-year contract awarded Feb 25 (36 days post-declaration)"
-        },
-        {
-          "target": "One Big Beautiful Bill (H.R. 1)",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "OBBBA provides 45B detention funding through FY2029. GEO expected to receive outsized share given existing infrastructure and 14 idle facilities ready for reactivation."
-        },
-        {
-          "target": "ICE Skip Tracing Program",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "GEO Group subsidiary awarded skip tracing IDIQ contract in Dec 2025. GEO profits at every stage: detention (Delaney Hall), transport (GEO Transport/CSI sub), and now bounty hunting (skip tracing)."
-        },
-        {
-          "target": "Tom Homan",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Homan consulted for GEO Care division before returning to DHS as Border Czar in Trump 2nd admin with ethics waiver"
-        },
-        {
-          "target": "Daniel Bible",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "ICE Deputy Executive Associate Director left ICE Oct 31 2024 days before election, now GEO Executive VP"
-        },
-        {
-          "target": "Pam Bondi",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
-        },
-        {
-          "target": "Donald Trump",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "PAC first corp to max out to Trump campaign; GEO Acquisition II gave 1M to MAGA super PAC; 500K to inaugural; execs Zoley and Evans each gave 11600 to Trump Save America JFC"
-        },
-        {
-          "target": "B.I. Incorporated",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Wholly-owned subsidiary, sole provider of ICE ISAP electronic monitoring for 21 years, 2.2B contract value"
-        },
-        {
-          "target": "George Zoley",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Founder, Chairman, and CEO (again as of Mar 1 2026). Created company 1984 as division of Wackenhut. Total comp ~7.2M. Controls via long tenure and board chairmanship"
-        },
-        {
-          "target": "BlackRock",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "BlackRock holds 16.05% of GEO Group (19.66M shares) as largest institutional shareholder. Also holds 17% of CoreCivic and 5.45% of Palantir, creating passive financial interest across entire enforcement ecosystem."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "GEO subsidiary B.I. Inc provides SmartLINK monitoring ($2.2B contract). Palantir provides targeting/analytics. Together form surveillance-to-enforcement cycle: GEO monitors -> Palantir analyzes -> ICE arrests -> GEO detains."
-        },
-        {
-          "target": "Cooper Creek Partners",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Cooper Creek Partners hedge fund holds concentrated positions in BOTH GEO Group and CoreCivic -- explicit sector bet on detention industry profiting from immigration enforcement."
-        }
-      ],
-      "secondHop": {
-        "CoreCivic": [
-          {
-            "target": "Proclamation 10886 (Border Emergency)",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Emergency declaration enables no-bid contracting. CoreCivic received three no-bid detention contracts totaling 5,753 beds"
-          },
-          {
-            "target": "One Big Beautiful Bill (H.R. 1)",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OBBBA provides 45B detention funding through FY2029. CoreCivic positioned to capture major share with existing facilities and rapid construction capability (12-18 months vs 4-5 years public)."
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ],
-        "Pam Bondi": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
-          },
-          {
-            "target": "DOJ Voting Section",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-          },
-          {
-            "target": "Ed Martin",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
-          }
-        ],
-        "Proclamation 10886 (Border Emergency)": [
-          {
-            "target": "CSI Aviation",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Emergency authority justifies sole-source deportation flight contract 128-219M on Feb 28, 39 days post-declaration"
-          }
-        ],
-        "Tom Homan": [
-          {
-            "target": "Charles Sowell",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Homan consulted for Sowell's SE&M Solutions at $20K/month; Sowell used Homan connection to attract detention contract clients"
-          },
-          {
-            "target": "Mark Hall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hall is Homan's senior adviser in White House; previously Border911 board member; paid $50K by Sowell before entering government"
-          },
-          {
-            "target": "Michael Flynn",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Homan served as CEO of The America Project, co-founded by Flynn and Byrne"
-          },
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
-          }
-        ],
-        "ICE Skip Tracing Program": [
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Palantir ImmigrationOS provides the surveillance targeting platform that skip tracing bounty hunters then operationalize. Technology-to-enforcement pipeline: AI targeting plus privatized apprehension."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

@@ -6,18 +6,18 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.946356",
+  "generated_at": "2026-05-07T23:07:36.323717",
   "last_updated": "2026-03-06T18:26:22",
   "stats": {
     "total_findings": 10,
     "total_connections": 5,
     "total_entities": 3,
     "finding_types": {
+      "financial": 5,
       "legal": 1,
       "document": 1,
       "relationship": 2,
-      "intelligence": 1,
-      "financial": 5
+      "intelligence": 1
     },
     "connection_types": {
       "employment": 4,
@@ -26,6 +26,46 @@
     "last_updated": "2026-03-06T18:26:22"
   },
   "findings": [
+    {
+      "id": 5981,
+      "finding_type": "financial",
+      "summary": "Eliminated entire 18F digital services division at 1am; 5 separate Tesla compensation agreements disclosed",
+      "detail": "Thomas Shedd eliminated the entire 18F digital services division (~90 staff) at 1:00am on March 1, 2025, calling them 'non-essential' and 'non-critical.' 18F had built Login.gov, IRS Direct File, and the US Web Design System. Shedd also cut TTS workforce by 50% and demanded root access to Notify.gov (causing engineer resignation). ProPublica disclosure reveals 5 separate Tesla compensation agreements: ESPP account ($5M-25M), unvested RSUs ($250K-500K), vested stock options ($50K-100K), unvested stock options ($100K-250K), vested RSUs ($50K-100K), plus Tesla 401(k) and two salary entries ($195K and $210K). Now serves as GSA senior advisor for fraud prevention. His financial disclosure states he 'will take an unpaid leave of absence' from Tesla, contradicting earlier section stating Tesla employment ended January 2025.",
+      "source_datasets": [
+        "propublica_disclosures",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:25:44",
+      "target_name": "Thomas Shedd",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "18F elimination reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Nextgov 'unheard of' ties report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosure (shedd-thomas)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4489,
       "finding_type": "legal",
@@ -323,46 +363,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 5981,
-      "finding_type": "financial",
-      "summary": "Eliminated entire 18F digital services division at 1am; 5 separate Tesla compensation agreements disclosed",
-      "detail": "Thomas Shedd eliminated the entire 18F digital services division (~90 staff) at 1:00am on March 1, 2025, calling them 'non-essential' and 'non-critical.' 18F had built Login.gov, IRS Direct File, and the US Web Design System. Shedd also cut TTS workforce by 50% and demanded root access to Notify.gov (causing engineer resignation). ProPublica disclosure reveals 5 separate Tesla compensation agreements: ESPP account ($5M-25M), unvested RSUs ($250K-500K), vested stock options ($50K-100K), unvested stock options ($100K-250K), vested RSUs ($50K-100K), plus Tesla 401(k) and two salary entries ($195K and $210K). Now serves as GSA senior advisor for fraud prevention. His financial disclosure states he 'will take an unpaid leave of absence' from Tesla, contradicting earlier section stating Tesla employment ended January 2025.",
-      "source_datasets": [
-        "propublica_disclosures",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 18:25:44",
-      "target_name": "Thomas Shedd",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "18F elimination reporting",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Nextgov 'unheard of' ties report",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica 278 disclosure (shedd-thomas)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -535,7 +535,16 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-03-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Eliminated entire 18F digital services division at 1am; 5 separate Tesla compensation agreements disclosed",
+      "confidence": "high",
+      "id": 5981
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5949,
@@ -675,161 +684,5 @@
       "enabler-gradient",
       "manufactured-dependency"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Thomas Shedd",
-      "connections": [
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "GSA financial disclosure",
-          "description": "Former Tesla engineer (8 years) installed as GSA TTS Director; fired 18F division of tech consultants; reportedly maintained ties to Tesla while in government. GSA manages federal procurement including tech contracts"
-        },
-        {
-          "target": "Tesla",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Shedd on unpaid leave from Tesla while serving as GSA TTS director and DOL CIO with access to OSHA Tesla investigation data"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://www.npr.org/2025/02/07/nx-s1-5288988/doge-elon-musk-staff-trump",
-          "description": "Former Tesla software engineer, appointed to head Technology Transformation Services at GSA as part of DOGE"
-        },
-        {
-          "target": "Amanda Scales",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Musk company employment records",
-          "description": "Musk company employees at separate agencies: Shedd (Tesla) at GSA/DOL controlling contracting/OSHA data, Scales (xAI) at OPM managing federal layoffs -- parallel Musk company-to-government pipeline at agencies regulating Musk businesses"
-        },
-        {
-          "target": "Gregory Barbaccia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "FedScoop TTS transition",
-          "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
-        }
-      ],
-      "secondHop": {
-        "Amanda Scales": [
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former xAI recruiter, named OPM chief of staff controlling federal hiring as DOGE operative"
-          },
-          {
-            "target": "xAI",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former xAI employee; appointed OPM Chief of Staff; point of contact for federal worker purge coordinating termination guidance"
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Gregory Barbaccia": [
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
-          },
-          {
-            "target": "Thomas Williams",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
-          },
-          {
-            "target": "Sam Corcos",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-          }
-        ],
-        "Tesla": [
-          {
-            "target": "Joe Gebbia",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Airbnb co-founder AND Tesla board member assigned to OPM via DOGE"
-          },
-          {
-            "target": "Daniel Abrahamson",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Tesla senior counsel assigned to DOT as Senior Adviser while NHTSA investigates Tesla FSD/Autopilot"
-          },
-          {
-            "target": "Rajasekar Jegannathan",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Tesla VP of IT assigned to GSA as Data Engineer"
-          },
-          {
-            "target": "Riccardo Biasini",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Tesla/Boring Company executive assigned to OPM as Senior Adviser"
-          },
-          {
-            "target": "Tarak Makecha",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Tesla Energy/SkySafe, assigned to DOJ, FBI, State, USAGM via DOGE"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

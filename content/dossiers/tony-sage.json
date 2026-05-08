@@ -5,70 +5,46 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:08.014355",
-  "last_updated": "2026-03-09T19:15:44",
+  "generated_at": "2026-05-07T23:07:36.182880",
+  "last_updated": "2026-03-24T18:32:12",
   "stats": {
-    "total_findings": 8,
-    "total_connections": 2,
+    "total_findings": 19,
+    "total_connections": 3,
     "total_entities": 6,
     "finding_types": {
-      "relationship": 3,
-      "intelligence": 2,
-      "identity": 1,
-      "legal": 1,
-      "financial": 1
+      "financial": 7,
+      "intelligence": 3,
+      "legal": 5,
+      "relationship": 2,
+      "location": 1,
+      "negative_result": 1
     },
     "connection_types": {
-      "corporate": 1,
+      "corporate": 2,
       "financial": 1
     },
-    "last_updated": "2026-03-09T19:15:44"
+    "last_updated": "2026-03-24T18:32:12"
   },
   "findings": [
     {
-      "id": 6247,
-      "finding_type": "relationship",
-      "summary": "Cantor Fitzgerald LP is an equity owner of Critical Metals Corp (LittleSis). Howard Lutnick (US Commerce Secretary) listed as indirect owner. Cantor received 1,247,250 CRML shares as deferred SPAC underwriting fee from Sizzle Acquisition Corp IPO. Cantor held peak M position Q1 2024, divested to ~190K shares by Q3 2025. LittleSis ownership relation confirmed current as of Feb 2025.",
+      "id": 6383,
+      "finding_type": "financial",
+      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal \u2014 Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
       "detail": null,
       "source_datasets": [
-        "littlesis,stockzoa"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:55:43",
-      "target_name": "Critical Metals Corp / Cantor Fitzgerald",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "LittleSis:rel/2043850",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6249,
-      "finding_type": "relationship",
-      "summary": "Howard Lutnick (US Commerce Secretary since Jan 2025, former Cantor Fitzgerald CEO) is an indirect owner of Critical Metals Corp per LittleSis. Senators Warren, Van Hollen, Wyden pressed Lutnick in Feb 2026 re Cantor Fitzgerald serving as lead placement agent for USA Rare Earth .5B private raise while Commerce Dept simultaneously announced .6B deal with same company. Lutnick divested Cantor stake to children (Brandon/Kyle) via trusts in May 2025.",
-      "detail": null,
-      "source_datasets": [
-        "littlesis,web_search"
+        "web_search"
       ],
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2025-12-19",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-09 17:55:50",
-      "target_name": "Howard Lutnick / Critical Metals Corp",
+      "created_at": "2026-03-09 19:15:44",
+      "target_name": "Tony Sage",
       "profile_id": "tech-right",
       "evidence": [
         {
-          "evidence_type": "file",
-          "evidence_ref": "LittleSis:rel/2043852,CNBC:2026-02-26-lutnick-rare-earth",
+          "evidence_type": "ref",
+          "evidence_ref": "theassay.com:CRML-cyclone,takeovers.gov.au:TP26-002",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -101,31 +77,6 @@
       ]
     },
     {
-      "id": 6258,
-      "finding_type": "identity",
-      "summary": "Tanbreez team structure: Greg Barnes (Founder/Principal Geologist, Perth WA); Bolette Nielsen (Chairperson, Greenland office manager, 20+ years Greenland mining experience); Tony Sage (Director, 35+ years resources); Anna Wingell (Perth office manager, with Tanbreez since 2011). Technical consultants: Hans Kristian Schonwandt (former Greenland Deputy Minister and Chief Geologist, Professor emeritus, drafted Greenland Mines Act, 60 years Greenland geology); Rasmus Chr. Rasmussen (35 years Greenland mining services, local contractor near Qaqortoq with 50+ employees).",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:57:09",
-      "target_name": "Tanbreez Mining Greenland A/S",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Tanbreez.com/about/team",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6353,
       "finding_type": "intelligence",
       "summary": "CAPE LAMBERT CORPORATION (ICIJ node 10048336) is a Panama entity incorporated Feb 6, 2007 via Mossack Fonseca, with Consulco International Limited (RAK FTZ, UAE) as intermediary. NO officers or beneficial owners are named in the ICIJ database. Connection to Tony Sage / ASX:CFE Cape Lambert Resources Ltd is UNVERIFIED \u2014 the name match is suggestive but no public evidence confirms Sage as an officer or beneficiary of this Panamanian entity. The ATO investigation of Sage's Cape Lambert Resources resulted in a M assessment settled for .4M, with Sage seeking access to ATO criminal investigation reports in Jan 2023 \u2014 implying criminal fraud/evasion referrals were made.",
@@ -143,7 +94,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "Finding #6253",
+          "evidence_ref": "6253",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -201,10 +152,49 @@
       ]
     },
     {
-      "id": 6383,
-      "finding_type": "financial",
-      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal \u2014 Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
-      "detail": null,
+      "id": 7463,
+      "finding_type": "legal",
+      "summary": "CONFIRMED CORRECTION: .36M confiscation (Supreme Court of Victoria, May 30, 2023) was Oz Minerals Ltd / Oxiana (Cambodia), NOT Tony Sage. Tony Sage's AFP matter is Operation Lemans (Sierra Leone bribery, launched 2012). No charges filed against Sage as of Jan 2023. Disclosure obligation argument still applies to active investigation, but without confiscation.",
+      "detail": "CORRECTED: The AFP media release and NGM Lawyers analysis describe the $9.36M confiscation as involving a company that SELF-REPORTED foreign bribery involving Cambodia mining rights (2006-2009). This was Oz Minerals (formerly Oxiana Limited), NOT Cape Lambert/Tony Sage. Operation Lemans (the Sage/Cape Lambert investigation) was launched in 2012 over alleged Sierra Leone/Marampa bribery. As of March 2026, Operation Lemans has: NO confiscation orders, NO criminal charges, NO prosecution, NO public resolution. The investigation appears to have stalled \u2014 AFP seized documents from Sage but a privilege dispute kept them in legal limbo for years (per Lawyerly Jul 2018). The CDPP has not publicly stated a decision.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:53:57",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "AFP media release: afp.gov.au/news-centre/media-release/australian-mining-company-investigated-afp-over-alleged-foreign-bribery",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Lawyerly Jul 2018: lawyerly.com.au/stalemate-broken-docs-afp-raid-mining-magnate-tony-sage/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NGM Lawyers analysis: ngm.com.au/australian-mining-company-foreign-bribery-afp-investigation/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7464,
+      "finding_type": "legal",
+      "summary": "ASX blocked Sage deals with Frank Timis (drug conviction, AIM rules breaches): ASX used absolute discretion to delist Global Iron and International Petroleum to prevent Timis gaining control; Sage responded by listing both on NSX instead",
+      "detail": "The Australian Securities Exchange decided to block transactions by two of Tony Sage's companies \u2014 Global Iron Ltd and International Petroleum Ltd \u2014 on grounds that controversial businessman Frank Timis would gain too much control. International Petroleum planned to acquire Timis-controlled Eastern Petroleum Corporation (Kazakhstan oil fields), while Global Iron was set to acquire African Petroleum Corporation (Liberia oil/gas blocks). ASX stated it was 'not satisfied the two Companies would comply with the ASX listing rules including the discharge of their obligations with respect to continuous disclosure on an ongoing basis, or that they would meet the standards required of listed entities and their officers as a result of Mr Timis' influence.' Timis had a drug conviction from the 1990s and was executive chairman of Regal Petroleum, which was fined for AIM rules continuous disclosure breaches. ASX said the deals could proceed but the companies would be delisted. Sage's response: he listed both African Petroleum and International Petroleum on the NSX (National Stock Exchange) instead, circumventing the ASX ban. This demonstrates a pattern of regulatory arbitrage \u2014 when one exchange blocks a deal, Sage moves to a less restrictive venue.",
       "source_datasets": [
         "web_search"
       ],
@@ -212,13 +202,489 @@
       "date_of_event": null,
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-09 19:15:44",
+      "created_at": "2026-03-23 20:54:14",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "BusinessNews.com.au: businessnews.com.au/article/Sage-deal-with-Timis-blocked-by-ASX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Engineering News: engineeringnews.co.za/article/asx-loses-global-iron-international-petroleum-trading-ban-appeal-2010-06-18",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7465,
+      "finding_type": "legal",
+      "summary": "Perth Glory salary cap scandal: FFA found 'complete breakdown in proper corporate governance' under Sage's chairmanship; 3 years systematic cap breaches, payments hidden through family member accounts, club fined A$269K and excluded from finals",
+      "detail": "Football Federation Australia found Perth Glory guilty of breaching the A-League salary cap for three consecutive seasons under Tony Sage's ownership. Key details: (1) Club exceeded 2014/15 salary cap of A$2.55M by approximately A$400-500K; (2) Payments deliberately concealed \u2014 Irish international Andy Keogh paid A$150K through a family member's bank account while his actual salary was A$300-350K, but club reported A$150K to FFA; (3) Other concealed benefits included accommodation expenses, motor vehicle provisions, and player agent fees; (4) FFA sanctions: excluded from finals series, fined A$269K; (5) FFA CEO David Gallop stated the situation 'points to a complete breakdown in proper corporate governance' and called Sage's alleged lack of knowledge 'obviously unacceptable for a chairman.' This mirrors a broader pattern: payments routed through obscured channels to avoid regulatory caps, with the principal claiming lack of knowledge of the financial operations.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:54:29",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FTBL: ftbl.com.au/news/inside-a-salary-cap-scandal-it-was-complete-bullshit-530959",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Stuff.co.nz: stuff.co.nz/sport/football/a-league/67908540",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "The New Daily: thenewdaily.com.au/sport/football/2015/04/02/perth-glory-scrutiny-league-salary-cap-scandal/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7466,
+      "finding_type": "financial",
+      "summary": "Cape Lambert share-for-asset deal pattern: Kasombo Copper-Cobalt Project vended into Fe Limited (now CuFe) for 25M shares + 10M facilitator shares + A$125K cash \u2014 structurally similar to CRML copper powder deal (2M shares at premium for physical commodity)",
+      "detail": "Cape Lambert Resources entered a binding terms sheet with Fe Limited (ASX:FEL, now CuFe ASX:CUF) to assign 100% of rights in the Kasombo Copper-Cobalt Project (DRC) to Fe Limited. Consideration: 25 million fully paid ordinary FEL shares at VWAP deemed issue price, plus A$50K non-refundable deposit on execution, plus A$75K three months after settlement. Additionally, 10 million shares were issued to 'the facilitator of the transaction' at the same deemed price. This demonstrates Sage's established pattern: (1) acquiring distressed/early-stage mining assets cheaply; (2) vending them into listed vehicles for share consideration; (3) maintaining cross-holdings between his stable of companies. The CRML copper powder deal (2M shares at $10/share = $20M for 40kg of copper powder from Swiss Commodity Re) follows the same template \u2014 physical commodity/asset acquired for share consideration at a premium. The key difference: the copper powder deal lacks the standard mining industry due diligence (independent valuation, ore body reports) and involves an asset with disputed market pricing.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:54:47",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "MarketScreener: marketscreener.com/quote/stock/CUFE-LTD-10357291/news/Fe-FEL-Acquires-Rights-to-Kasombo-Copper-Cobalt-Project-in-DRC-24743928/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Proactive Investors: proactiveinvestors.com.au/companies/news/180814/cape-lambert-resources-does-deal-with-fe-limited-180814.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7467,
+      "finding_type": "intelligence",
+      "summary": "PATTERN ANALYSIS: Tony Sage corporate conduct exhibits recurring pattern across 20+ years \u2014 (1) share-for-asset swaps between controlled entities, (2) regulatory arbitrage when exchanges block deals, (3) payments through obscured channels, (4) offshore entity structures, (5) simultaneous control of multiple listed vehicles creating cross-holding networks",
+      "detail": "COMPREHENSIVE PATTERN ANALYSIS of Tony Sage's corporate conduct across Cape Lambert, CuFe, European Lithium, CRML, Perth Glory, Cyclone Metals, Global Iron, International Petroleum:\n\nPATTERN 1 \u2014 SHARE-FOR-ASSET SWAPS: Sage repeatedly acquires assets cheaply and vends them into listed vehicles for share consideration. Examples: (a) CopperCo acquired from receivership via debt-to-equity conversion, assets sold for ~A$300M; (b) Cape Lambert magnetite project bought for A$20M, sold to MCC for A$400M; (c) Kasombo project vended into Fe Limited for 25M shares + facilitator shares; (d) CRML copper powder: 40kg acquired for 2M shares at $10/share ($20M). The CRML deal is the outlier \u2014 it involves a physical commodity with disputed pricing (claimed $1,500-2,500/g vs market sources saying 2-3 orders of magnitude lower) rather than a mining tenement.\n\nPATTERN 2 \u2014 REGULATORY ARBITRAGE: When ASX blocked Sage-Timis deals (Global Iron, International Petroleum) due to concerns about Timis' influence and continuous disclosure compliance, Sage listed both on the less-regulated NSX. When Sage needed a US listing for CRML's Greenland rare earth play, he used a BVI incorporation and SPAC merger rather than direct ASX listing.\n\nPATTERN 3 \u2014 OBSCURED PAYMENT CHANNELS: Perth Glory salary cap: player payments routed through family member bank accounts. ATO investigation: $19.8M allegedly disguised as loans via offshore entities. In both cases, Sage claimed lack of knowledge of the specific arrangements.\n\nPATTERN 4 \u2014 OFFSHORE STRUCTURES: Cape Lambert Corporation (Panama, Mossack Fonseca, 2007, intermediary Consulco International in RAK FTZ UAE) \u2014 name matches Sage's company but ICIJ database lists no officers. Metal Exploration Mauritius Ltd \u2014 Cape Lambert subsidiary. CRML \u2014 incorporated in BVI. Swiss Commodity Re \u2014 HK-based entity, Deayton has two BVI entities in ICIJ databases.\n\nPATTERN 5 \u2014 CROSS-HOLDING NETWORK: Sage simultaneously chairs/controls CRML, European Lithium (holds 37.3% of CRML), CuFe, and (until Oct 2025) Cyclone Metals. All entities share the same registered address: 32 Harrogate Street, West Leederville WA. Okewood Pty Ltd provides consulting services to multiple entities. This creates a web where assets and value can flow between entities under Sage's control.\n\nRELEVANCE TO CRML COPPER POWDER DEAL: The copper powder transaction ($20M in shares at 40% premium for 40kg of 99.96% pure copper powder from Swiss Commodity Re) resembles prior Sage transactions in form (share-for-asset swap) but differs in important ways: (a) the asset is a physical commodity, not a mining tenement; (b) the seller (Swiss Commodity Re / Kenneth Deayton) has no established connection to Sage, unlike prior related-party swaps; (c) the pricing is disputed by market sources; (d) there is no independent valuation disclosed; (e) 200K additional shares went to Malcolm Macintyre (Capella Capital), whose role as 'co-seller' is unexplained.",
+      "source_datasets": [
+        "web_search",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:55:17",
       "target_name": "Tony Sage",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "theassay.com:CRML-cyclone,takeovers.gov.au:TP26-002",
+          "evidence_ref": "AFP media release (May 2023)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessNews.com.au Sage-Timis ASX block",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FTBL Perth Glory salary cap",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Panama Papers database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Proactive Investors Cape Lambert-FEL deal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CRML filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Tony Sage",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7468,
+      "finding_type": "financial",
+      "summary": "ATO $96M assessment details: issued May 2012, comprising A$66.9M additional income tax + A$28.8M penalties. Cape Lambert paid A$33M as initial holding amount while objecting. After 2-year investigation, settled for A$2.4M \u2014 a 97.5% reduction suggesting ATO's initial position was substantially weakened",
+      "detail": "The ATO initiated investigation of Cape Lambert Resources Ltd tax arrangements in 2012, issuing Notice of Amended Assessment in May 2012 imposing liabilities totaling A$96M: A$66.9M in additional income tax and A$28.8M in penalties. Cape Lambert paid A$33M as an initial holding amount in 2012 while objecting to the assessment. The share price dropped 75% on the news. After two years of investigation (2012-2014), the ATO settled for just A$2.4M \u2014 a 97.5% reduction from the original assessment. In January 2023, The West Australian reported that Sage was fighting to get criminal investigation reports linked to the ATO claims of fraud or evasion, implying the ATO had referred the matter for criminal investigation. The massive gap between the A$96M assessment and A$2.4M settlement could indicate either: (a) the ATO dramatically overreached in its initial assessment, or (b) a negotiated resolution where Sage cooperated on the parallel AFP investigation (Operation Lemans). The timing \u2014 ATO investigation 2012-2014, AFP investigation 2012-2021, AFP confiscation settlement 2023 \u2014 suggests these were parallel tracks of the same underlying conduct.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:55:37",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Ground News: ground.news/article/sage-in-blue-over-tax-office-fraud-evasion-claims",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The West Australian Jan 2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Tony Sage page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7469,
+      "finding_type": "financial",
+      "summary": "Perth Glory receivership Jul 2023: KordaMentha appointed, Sage stripped of A-League license after club required APL loans to pay staff/player wages. Sage invested ~A$50M over 15 years, lost ~A$14M in final 3 years. Club subsequently placed in liquidation before sale to Melbourne property developer Robert Brij",
+      "detail": "Perth Glory was placed into receivership in July 2023, ending Tony Sage's 15-year sole ownership. Key facts: (1) APL issued breach notice and stripped Sage of the license due to financial turmoil; (2) Club required loans from the central APL administration to pay staff and player wages; (3) Advisory firm KordaMentha appointed to oversee transition; (4) Sage had invested approximately A$50M during his tenure, including approximately A$14M in losses over the final 3 years; (5) Financial difficulties exacerbated by COVID-19 pandemic and forced relocation from Perth Oval for Women's World Cup upgrades; (6) Club was subsequently placed in liquidation before being acquired by Melbourne property developer Robert Brij. The Perth Glory receivership occurred during the same period that Cape Lambert was settling with the AFP on the foreign bribery confiscation ($9.36M, April-May 2023), and while European Lithium/CRML were positioning for the NASDAQ listing via SPAC merger.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:55:52",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ESPN: espn.com.au/football/story/_/id/38050718/a-league-club-perth-glory-goes-receivership",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "RNZ: rnz.co.nz/news/sport/494292/a-league-club-perth-glory-placed-in-liquidation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "The New Daily: thenewdaily.com.au/sport/football/2023/07/22/perth-glory-owner-quits",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7470,
+      "finding_type": "legal",
+      "summary": "Cyclone Metals boardroom battle: Sage removed as chairman Oct 2025 after 24 years as founding director. Filed Takeovers Panel application Dec 2025 alleging undisclosed shareholder association \u2014 Panel declined to conduct proceedings. Was simultaneously selling down Cyclone shareholdings while launching spill motion",
+      "detail": "Tony Sage was removed as Cyclone Metals (ASX:CLE, formerly Cape Lambert Resources) chairman on 21 October 2025 pursuant to a resolution passed at a requisitioned general meeting under s249D Corporations Act. He had been founding director since December 2000 (24 years). Sage responded with: (1) launching spill motion against newly appointed managing director; (2) filing Takeovers Panel application (19 December 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal; (3) simultaneously selling down his own Cyclone shareholdings. The Takeovers Panel declined to conduct proceedings (decision TP26/002), finding Sage had 'not demonstrated a sufficient body of material to warrant the Panel making further enquiries on the allegation of an association.' The Assay reported this with a spotlight on Critical Metals Corp, noting the 'apparent disconnect between the campaign at Cyclone Metals and Sage's primary role at US-listed Critical Metals Corp.' This pattern \u2014 aggressive defense of board positions while monetizing holdings \u2014 is consistent with Sage's approach to maintaining control of multiple listed vehicles simultaneously.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:56:12",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "BusinessNews: businessnews.com.au/article/Tony-Sage-in-Cyclone-board-clash",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Takeovers Panel decision TP26/002",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Takeovers Panel media release TP25/103 (23 Dec 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "The Assay: theassay.com/news/critical-metals-corp-in-spotlight-as-tony-sage-pursues-cyclone-metals-boardroom-battle/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7472,
+      "finding_type": "financial",
+      "summary": "Cape Lambert Mt Anketell iron ore flip: purchased for A$20M, sold to Metallurgical Corporation of China (MCC) for A$400M in 2008 \u2014 20x return. MCC disputed final A$80M payment; Supreme Court of WA ordered arbitration in Singapore; settled after MCC placed A$80M in escrow",
+      "detail": "Tony Sage's signature deal: Cape Lambert purchased the Mt Anketell magnetite iron ore project and sold it 18 months later to the state-owned Metallurgical Corporation of China (MCC) for A$400M in 2008. MCC agreed to pay US$290M in two installments (2008) with US$70M due within 2 years conditional on mining approval. MCC failed to make the final payment. Cape Lambert commenced Supreme Court of WA action in September 2010. In March 2013, court ordered SIAC arbitration in Singapore and A$80M escrow with NAB. MCC placed A$80M in escrow November 2013. Parties ultimately settled. This deal established Sage's reputation as a mine-flipper \u2014 acquire cheap, sell dear to Chinese SOEs during the commodity boom. However, it also demonstrates: (a) his willingness to engage in prolonged litigation to extract full payment; (b) the scale of transactions flowing through his entities; (c) the ATO's A$96M assessment may have been triggered by how the proceeds of this sale were structured through offshore entities.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:56:30",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Bloomberg: bloomberg.com/news/articles/2008-07-28/cape-lambert-wins-china-metallurgical-sale-approval",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "BusinessNews: businessnews.com.au/article/MCC-told-to-set-aside-80m-over-Cape-Lambert-stoush",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Proactive Investors: proactiveinvestors.com/companies/news/151338",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7481,
+      "finding_type": "relationship",
+      "summary": "EUR-CRML board overlap confirms Sage network continuity: Malcolm Day (EUR director since Jul 2012, also MD of Moab Minerals) and Mykhailo Zhernov (EUR director since Dec 2021, ALTERA FINANCE founder, 3.6% EUR shareholder) both serve on CRML board. EUR won ballot for Pilbara iron ore tenements near old Cape Lambert port area in Sep 2019 \u2014 assets recycled through Sage's new vehicle",
+      "detail": "The EUR-CRML board overlap demonstrates how Tony Sage maintains network continuity across his vehicles. Malcolm Day has been an EUR director since July 2012 and simultaneously serves as MD of Moab Minerals (ASX:MOM) since 1999 \u2014 he is also on the CRML board. Mykhailo Zhernov (managing partner Millstone and Co, Ukraine, formerly ALTERA FINANCE founder) has been an EUR director since December 2021, holds 3.6% of EUR, and also serves on the CRML board. Tony Sage holds 1.9% of EUR directly (beyond his chairman role). Notably, when iron ore tenements near Rio Tinto's Cape Lambert port expired in March 2019, European Lithium applied for and won approximately 90% of the available exploration landholdings in a September 2019 ballot. This means the geographic area associated with Cape Lambert Resources' original iron ore operations is now being explored by Sage's newer vehicle EUR \u2014 a form of asset recycling through corporate succession. EUR's investor rights agreement allows it to nominate 4 of 5 CRML directors while holding more than 50% \u2014 giving Sage effective board control of CRML through EUR.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:59:02",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 20-F board composition",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "European Lithium corporate directory: europeanlithium.com/our-company/corporate-directory/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Stockhead: stockhead.com.au/resources/its-back-to-the-future-for-tony-sage-as-eur-secures-pilbara-iron-ore-gold-tenement/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7482,
+      "finding_type": "location",
+      "summary": "32 Harrogate Street West Leederville WA is 'Sage House' \u2014 commercial building where CuFe, ESG Minerals, and CRML share offices. Building marketed as boutique coworking/office space, but effectively serves as hub for Sage's corporate network",
+      "detail": "32 Harrogate Street, West Leederville WA 6007 \u2014 the registered address for multiple Tony Sage entities \u2014 is a contemporary two-storey boutique building referred to as 'SAGE HOUSE' in commercial real estate listings. CuFe Ltd has its Principal Administrative and Registered Office at Unit 3, 32 Harrogate Street. ESG Minerals is also at Unit 3, 32 Harrogate Street. CRML lists 32 Harrogate Street as its business address in SEC filings. The building offers shared office and coworking spaces through Office Hub, suggesting Sage's entities occupy part of a commercial building that also leases space to third parties. The naming of the building as 'Sage House' confirms Sage's ownership or primary tenancy of the building itself. This physical co-location facilitates the shared back-office infrastructure across Sage's listed vehicles \u2014 consistent with the Okewood Pty Ltd consulting model where one entity provides management services to multiple listed companies.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:00:23",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CuFe corporate directory: felimited.com.au/corporate-directory/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ESG Minerals contact: esgminerals.com.au/contact/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Office Hub listing: office-hub.com/au/buildings/sage-house-west-leederville-wa",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7582,
+      "finding_type": "financial",
+      "summary": "AFR Margin Call: EUR cashed out ~$185M in CRML shares since Oct 2025; Sage received $22.7M compensation; EUR trades at $590M discount to CRML holdings",
+      "detail": "Australian Financial Review 'Margin Call' column (March 2026) reports: (1) European Lithium has cashed out approximately $185M worth of Critical Metals shares since October 2025. Our prior SEC filing analysis had tracked $54.75M \u2014 the AFR figure is 3.4x larger, suggesting additional sales through channels not yet captured in US filings or made via ASX. (2) Sage received $22.7M salary package from CRML last financial year, including $21.7M in shares. (3) EUR still owns ~half of CRML (~$1.5B market cap at time of article) but trades at only $283M market cap \u2014 a $590M discount. The columnist asks 'Why could that be?' implying Australian market does not believe CRML's US valuation. (4) Article references Cape Lambert Resources history where Sage convinced Metallurgical Corporation of China to pay $400M for low-grade Pilbara iron ore that was not worth extracting \u2014 'a tract of moose pasture.' (5) Sage simultaneously selling Cyclone Metals stock through EUR while running a spill motion against its new MD \u2014 contradictory behavior. Sage was removed from Cyclone board Oct 2025 with 71% of votes against.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:52:23",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Australian Financial Review, Margin Call column, March 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7589,
+      "finding_type": "financial",
+      "summary": "Cape Lambert sold Mt Anketell magnetite to MCC for A$400M (20x markup from A$20M in 18 months); 18 years later mine has never produced",
+      "detail": "Tony Sage acquired the Mt Anketell magnetite iron ore project in WA for ~A$20M circa 2005. Sold to Chinese consortium led by MCC Mining for A$400M in mid-2008 \u2014 20x return in ~18 months. Cape Lambert received A$320M; MCC refused final A$80M because Cape Lambert failed to obtain mining approvals. Resolved via court-ordered Singapore arbitration and NAB escrow (Nov 2013). As of 2026, 18 years after sale, the mine has NEVER produced a tonne of iron ore. Required Anketell deepwater port (est. A$4.5B) never built. JORC resource: 1.9B tonnes at 30.7% Fe \u2014 low grade magnetite, effectively stranded without port. Direct precedent for CRML copper powder: same operator, same pattern of selling overvalued mining assets at extreme markups.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:16:08",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Business News Perth: Cape Lambert MCC escrow litigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Porter GEO database: Mt Anketell/Cape Lambert deposit",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Supreme Court of WA proceedings Sept 2010 / March 2013",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7752,
+      "finding_type": "negative_result",
+      "summary": "No ASIC enforcement action or investigation found against Tony Sage, European Lithium, or Cape Lambert as of March 2026",
+      "detail": "Web search found no ASIC enforcement actions or investigations against Tony Sage, European Lithium Ltd, or Cape Lambert Resources in 2024-2026. Historical context: Cape Lambert had an Australian Taxation Office dispute (2012-2014) resulting in a $96M assessment later settled for $2.4M, and there was an Australian Federal Police investigation (Operation Lemans) in 2012 involving Sage's international dealings. No ASIC charges or formal investigation found. Tony Sage remains active as Executive Director of European Lithium and is named as a director of CRML.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:12",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://tonysage.com.au/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -266,6 +732,28 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3902,
+      "person_a": "Malcolm Scott Macintyre",
+      "person_b": "Tony Sage",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:39",
+      "profile_id": "tech-right",
+      "other_person": "Malcolm Scott Macintyre",
+      "other_person_slug": "malcolm-scott-macintyre",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-26-019356",
           "source_quote": null,
           "source_page": null
         }
@@ -340,7 +828,16 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-12-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal \u2014 Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
+      "confidence": "high",
+      "id": 6383
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6247,
@@ -587,29 +1084,5 @@
       "jurisdictional-arbitrage",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Tony Sage",
-      "connections": [
-        {
-          "target": "Michael C. Ryan",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "GlobeNewswire:2025-02-26",
-          "description": "Ryan appointed to CRML board under Sage's chairmanship. Both serve on Critical Metals Corp board."
-        },
-        {
-          "target": "Greg Barnes",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "description": "Sage (CRML CEO) and Barnes (Rimbal/Tanbreez founder) are parties to Heads of Agreement. CRML acquiring Tanbreez from Rimbal via share-for-equity deal. Both signed Oct 2025 PIPE agreement with Alyeska."
-        }
-      ],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": []
   }
 }

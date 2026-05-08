@@ -4,13 +4,14 @@
   "aliases": [],
   "profile_ids": [
     "epstein",
+    "hfia",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.710290",
-  "last_updated": "2026-03-09T17:57:28",
+  "generated_at": "2026-05-07T23:07:36.022451",
+  "last_updated": "2026-03-29T20:30:02",
   "stats": {
     "total_findings": 61,
-    "total_connections": 34,
+    "total_connections": 37,
     "total_entities": 1,
     "finding_types": {
       "location": 4,
@@ -23,15 +24,15 @@
       "legal": 12
     },
     "connection_types": {
-      "political": 9,
-      "financial": 13,
-      "corporate": 4,
+      "political": 10,
+      "financial": 14,
+      "corporate": 5,
       "familial": 1,
       "legal": 2,
       "social": 4,
       "owns": 1
     },
-    "last_updated": "2026-03-09T17:57:28"
+    "last_updated": "2026-03-29T20:30:02"
   },
   "findings": [
     {
@@ -1126,7 +1127,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR Schedule 13D/A Amend 20B, CIK 1094831, filed 2025-10-06",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1094831",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1248,7 +1249,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "OpenSanctions search Howard Lutnick; FARA search Lutnick/Cantor/Tether",
+          "evidence_ref": "OpenSanctions:search",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2297,7 +2298,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC 13D/A Amendment 20B, CIK 1094831, 2025-10-06",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1094831",
           "source_quote": null,
           "source_page": null
         }
@@ -2803,11 +2804,70 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions:Q16194176,Bloomberg:2025-05-19",
+          "evidence_ref": "OpenSanctions:Q16194176",
           "source_quote": null,
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3821,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Howard Lutnick",
+      "relationship_type": "financial",
+      "description": "Lutnick led Cantor Fitzgerald which held 1.247M CRML shares; now Commerce Secretary influencing trade/tariff policy affecting CRML's Greenland rare earth operations. Sons Brandon and Kyle now run Cantor.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:27",
+      "profile_id": "tech-right",
+      "other_person": "Critical Metals Corp",
+      "other_person_slug": "critical-metals-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Gizmodo reporting; CNBC Feb 2026; Cantor 13F filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3822,
+      "person_a": "Howard Lutnick",
+      "person_b": "USA Rare Earth",
+      "relationship_type": "political",
+      "description": "As Commerce Secretary, Lutnick's department structured $1.6B investment in USAR while his sons' firm Cantor served as lead placement agent for the simultaneous $1.5B PIPE. Senators Warren, Van Hollen, Wyden raised formal conflict of interest concerns.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:39",
+      "profile_id": "tech-right",
+      "other_person": "USA Rare Earth",
+      "other_person_slug": "usa-rare-earth",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Feb 26, 2026; Sen. Van Hollen press release Feb 2026",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4395,
+      "person_a": "Howard Lutnick",
+      "person_b": "Cantor Fitzgerald L.P.",
+      "relationship_type": "corporate",
+      "description": "Howard Lutnick, as Chairman/CEO of CF Group Management Inc. and controlling person of Cantor Fitzgerald LP, indirectly controls approximately 12.36M shares of Satellogic Inc. as of March 2026. Lutnick was confirmed as US Secretary of Commerce in February 2025. Cantor sold ~1M Satellogic shares in Jan-Mar 2026 after Lutnick took office. Satellogic's satellite imagery products have defense applications, putting them in Lutnick's Commerce Department regulatory ambit.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Cantor Fitzgerald L.P.",
+      "other_person_slug": "cantor-fitzgerald-lp",
+      "evidence": []
     },
     {
       "id": 356,

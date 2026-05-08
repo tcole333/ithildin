@@ -1,0 +1,705 @@
+{
+  "name": "OpenAI",
+  "slug": "openai",
+  "aliases": [],
+  "profile_ids": [
+    "altman",
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.162520",
+  "last_updated": "2026-05-07T04:36:50",
+  "stats": {
+    "total_findings": 21,
+    "total_connections": 10,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 4,
+      "political": 2,
+      "governance": 3,
+      "financial": 9,
+      "intellectual_property": 2,
+      "legal": 1
+    },
+    "connection_types": {
+      "financial": 4,
+      "corporate": 3,
+      "employment": 2,
+      "contracts_with": 1
+    },
+    "last_updated": "2026-05-07T04:36:50"
+  },
+  "findings": [
+    {
+      "id": 9427,
+      "finding_type": "corporate",
+      "summary": "OpenAI LP formed March 2019 as capped-profit hybrid; investor returns capped at 100x; Microsoft invested $1B",
+      "detail": "OpenAI LP announced March 2019 as Delaware limited partnership. First-round investor returns capped at 100x investment. Microsoft invested $1B providing both capital and Azure cloud access. Structure: OpenAI nonprofit owns OpenAI GP LLC which controls OpenAI LP. Any returns above cap go to nonprofit. Renamed to OpenAI OpCo LLC January 2023.",
+      "source_datasets": "websearch",
+      "confidence": "high",
+      "date_of_event": "2019-03-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9424,
+      "finding_type": "political",
+      "summary": "OpenAI OpCo LLC registered as federal lobbyist Q4 2023; four external firms retained: DLA Piper, Akin Gump, Hogan Lovells, Miller Strategies",
+      "detail": "Registrant: OPENAI OPCO LLC (LDA registrant ID 401107987). Address: 1455 3rd Street San Francisco CA 94158. Contact: Nicole Diaz. Self-reported lobbying expenses: $260K (Q4 2023), $1.76M (full year 2024), $2.99M (full year 2025). External firm retainers: DLA Piper ($50-90K/quarter), Akin Gump ($80K/quarter), Hogan Lovells (registration only), Miller Strategies ($80-150K/quarter, added Q4 2024). Issues: AI regulation, copyright/fair use for training data, No Fakes Act, state preemption, energy/data centers.",
+      "source_datasets": "senate_lda",
+      "confidence": "high",
+      "date_of_event": "2023-10-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9428,
+      "finding_type": "governance",
+      "summary": "November 2023 board crisis: Altman fired for not being 'consistently candid'; pre-crisis board was Sutskever, Toner, McCauley, D'Angelo",
+      "detail": "November 17 2023: board fired Altman citing he 'was not consistently candid in his communications.' Board at time: Ilya Sutskever (chief scientist), Adam D'Angelo (Quora CEO), Tasha McCauley (entrepreneur), Helen Toner (CSET strategy director). Helen Toner later stated Altman withheld information about ChatGPT release and his ownership interest in the OpenAI Startup Fund. Emmett Shear (Twitch co-founder) served as interim CEO Nov 19-29 ($3,720 compensation on 2023 990). Altman reinstated November 22 2023 under pressure from employees and investors.",
+      "source_datasets": "irs_990,websearch",
+      "confidence": "high",
+      "date_of_event": "2023-11-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9592,
+      "finding_type": "financial",
+      "summary": "OpenAI lobbying infrastructure assembled 6-7 weeks before Nov 2023 board firing: OpCo LDA registration, Chan Park hire, Akin Gump/Babin engagement all in Oct-Nov 2023",
+      "detail": "Oct 1 2023: OpenAI OpCo LLC registers as federal lobbyist; four external firms retained. Oct 2023: Chan Park installed as internal lobbying head (ex-Senate Judiciary). Nov 1 2023: Chan Park formally hired; Akin Gump/Babin (ex-Schumer Chief Counsel) engaged. Nov 17 2023: Board fires Altman. The lobbying buildout preceded the board crisis by 6-7 weeks. Board cited Altman's failure to be 'consistently candid'; the lobbying pivot may have been an undisclosed plan. INNOCENT EXPLANATION: OpenAI independently decided in fall 2023 to build government affairs capacity.",
+      "source_datasets": "analysis_run,lda_registry",
+      "confidence": "medium",
+      "date_of_event": "2023-11-17",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9422,
+      "finding_type": "governance",
+      "summary": "Post-crisis board reconstituted: Bret Taylor as chair, Lawrence Summers added, Adam D'Angelo retained; Toner/McCauley/Sutskever departed",
+      "detail": "Following Sam Altman's firing (November 17 2023) and reinstatement (November 22 2023). Outgoing board members who voted to fire Altman: Helen Toner (CSET), Tasha McCauley, Ilya Sutskever. Adam D'Angelo (Quora CEO) was only pre-crisis director to remain. New directors: Bret Taylor (chair, co-created Google Maps, Salesforce co-CEO, Sierra AI) and Lawrence Summers (former Treasury Secretary). Reid Hoffman, Shivon Zilis, Will Hurd also on 2023 990 as directors.",
+      "source_datasets": "irs_990,websearch",
+      "confidence": "high",
+      "date_of_event": "2023-11-21",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9431,
+      "finding_type": "financial",
+      "summary": "OpenAI 990 (2023): 13 officers including Chris Clark (Sec/Tres $397K), Ilya Sutskever ($322K), Sam Altman ($76K); revenue $5.36M, assets $22.7M",
+      "detail": "2023 Form 990 (EIN 81-0861541): Revenue $5,363,248; Expenses $2,866,846; Assets $22,678,253; Net assets $21,132,340. Officers: Chris Clark (Sec/Tres, 10hrs/wk, $397,354 total); Ilya Sutskever ($322,201); Greg Brockman ($85,184); Sam Altman (Dir/Pres/CEO, $76,001); Emmett Shear ($3,720 interim CEO). Board at $0: Reid Hoffman, Shivon Zilis, Will Hurd, Adam D'Angelo, Bret Taylor, Lawrence Summers, Tasha McCauley, Helen Toner.",
+      "source_datasets": "irs_990",
+      "confidence": "high",
+      "date_of_event": "2023-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9465,
+      "finding_type": "political",
+      "summary": "OpenAI OpCo lobbying targeted Commerce Dept., White House, and both chambers on AI safety (S.2770), AI likenesses (NO FAKES Act), AI copyright \u2014 all within Cantwell Commerce Committee jurisdiction",
+      "detail": "OpenAI OpCo's Q4 2024 lobbying filing specifically names S.2770 (Protect AI Act) as a lobbied bill. Commerce Dept. (DOC) is listed as a government entity target in every quarterly report from Q4 2023 through Q3 2025. The NO FAKES Act (H.R. 9551/S.4875) is cited repeatedly 2024. White House Office consistently listed. Issue codes: Computer Industry (CPI), Science/Technology (SCI), Copyright/Patent/Trademark (CPT).",
+      "source_datasets": "senate_lda",
+      "confidence": "high",
+      "date_of_event": "2024-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9674,
+      "finding_type": "corporate",
+      "summary": "OpenAI Public Sector LLC formed December 2024 and SAM-registered January 2025 \u2014 purpose-built federal contracting vehicle",
+      "detail": "SAM.gov bulk data confirms two distinct OpenAI entities registered for federal contracting: (1) OPENAI, L.L.C. (UEI: JD14SDWQZKT7, CAGE: 9WPC2) \u2014 entity start September 17, 2020; SAM registration March 27, 2024; NAICS 423430; POC Felipe Millon (Govt), Patricia Lue (Electronic); expires April 19, 2026. (2) OPENAI PUBLIC SECTOR, LLC (UEI: VMHYEMJA9GF4, CAGE: 0YC30) \u2014 entity start December 20, 2024; SAM registration January 30, 2025; NAICS codes 513210/518210/541511/541512/541611; POC Sahar Odderstol (Govt), Chris Myers (Alt Govt); expires February 24, 2027. Both at 1455 3rd St, San Francisco, CA 94158.",
+      "source_datasets": "sam_gov",
+      "confidence": "high",
+      "date_of_event": "2024-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9680,
+      "finding_type": "corporate",
+      "summary": "OTA contracting gap: OpenAI's two largest federal contracts ($200M + $3.5M) are OTAs invisible on USASpending.gov",
+      "detail": "Other Transaction Agreements (OTAs) are exempt from Federal Acquisition Regulation (FAR) reporting requirements and do not appear on USASpending.gov. This means OpenAI's two confirmed contracts \u2014 the $200M CDAO prototype OTA (June 2025) and the $3.5M U.S. Cyber Command OTA (October 2025) \u2014 are invisible in the official federal spending transparency database. The Cyber Command OTA went unnoticed until documented by researcher Jack Poulson. For Oklo, the DOE Reactor Pilot Program OTAs and the Atomic Alchemy radioisotope OTA (January 2026) also fall outside USASpending visibility. This structural opacity makes it impossible to fully audit federal AI and nuclear energy contracting flows through public databases alone.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2025-01-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9429,
+      "finding_type": "governance",
+      "summary": "OpenAI abandoned plan to remove nonprofit control May 5 2025, but retained PBC conversion; Foundation keeps board appointment power",
+      "detail": "Original December 2024 restructuring proposal would have converted for-profit to PBC and removed it from nonprofit control. Following backlash and AG pressure, May 5 2025 announcement: nonprofit retains control. Foundation retains sole power to appoint all board members of OpenAI Group PBC and can replace directors at any time. Final structure approved by Delaware AG (Oct 28) and California AG (Oct 27 2025).",
+      "source_datasets": "websearch",
+      "confidence": "high",
+      "date_of_event": "2025-05-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9670,
+      "finding_type": "intellectual_property",
+      "summary": "OpenAI patent portfolio shows 43 granted patents 2019\u20132025; Sam Altman not a named inventor on any",
+      "detail": "OpenAI's USPTO portfolio contains 43 patents filed 2019\u20132025 covering LLMs, image generation (DALL-E series), speech recognition (Whisper), code generation (Codex), in-memory computing, and API infrastructure. Top inventors by patent count: Jack David Kendall (7), Noah Deutsch (5), Benjamin Zweig (5), Ilya Sutskever (4), Aditya Ramesh (4). Greg Brockman appears as inventor on 2 Whisper patents. Sam Altman appears on no OpenAI patents. The Rain Neuromorphics acquisition added 17 hardware/computing patents to the portfolio under OpenAI OPCO, LLC.",
+      "source_datasets": "uspto_odp",
+      "confidence": "high",
+      "date_of_event": "2025-05-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9671,
+      "finding_type": "financial",
+      "summary": "OpenAI Public Sector LLC awarded $200M CDAO prototype OTA for frontier AI in warfighting and enterprise domains",
+      "detail": "The Pentagon's Chief Digital and AI Office (CDAO) awarded a $200M prototype Other Transaction Agreement (OTA) to OpenAI Public Sector LLC on June 16, 2025. The OTA covers development of prototype frontier AI capabilities for national security challenges in both warfighting and enterprise domains. Work is primarily in the National Capital Region with an estimated completion date of July 2026. Only ~$2M was obligated at award time; balance tied to deliverables. Because this is an OTA (outside FAR), it does not appear on USASpending.gov. OpenAI Public Sector LLC (UEI: VMHYEMJA9GF4) was incorporated December 20, 2024 and SAM-registered January 30, 2025 \u2014 a purpose-built federal contracting vehicle that received a $200M contract within 6 months of registration.",
+      "source_datasets": "web_search,sam_gov",
+      "confidence": "high",
+      "date_of_event": "2025-06-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9681,
+      "finding_type": "financial",
+      "summary": "DoD awarded up to $800M in frontier AI contracts split among Anthropic, Google, OpenAI, and xAI in July 2025",
+      "detail": "The Pentagon's CDAO awarded a second tranche of frontier AI contracts on July 14, 2025, with Anthropic, Google, OpenAI, and xAI (Elon Musk's AI company) each receiving contracts worth up to $200M. OpenAI's individual allocation from this round was not separately disclosed but the total envelope was up to $800M. This was separate from OpenAI's prior $200M CDAO OTA announced June 16, 2025.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2025-07-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9673,
+      "finding_type": "financial",
+      "summary": "GSA added OpenAI ChatGPT Enterprise to Multiple Award Schedule at $1/agency/year through August 2026",
+      "detail": "The General Services Administration announced a partnership with OpenAI on August 6, 2025, delivering ChatGPT Enterprise to all participating federal agencies via the Multiple Award Schedule (MAS) at $1 per year per agency. The contract runs 8/14/2025\u20138/13/2026, with a 60-day bonus period of unlimited advanced model use. GSA SKU: CHATGPTENTBASE-FED. Available via Carahsoft reseller channel. This is a separate arrangement from the CDAO OTA.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2025-08-06",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9672,
+      "finding_type": "financial",
+      "summary": "OpenAI awarded $3.5M U.S. Cyber Command OTA \u2014 contract went unnoticed on USASpending due to OTA exemption",
+      "detail": "OpenAI signed a $3,500,000 Other Transaction Agreement (OTA) with U.S. Cyber Command on October 16, 2025. The contract did not appear on USASpending.gov due to OTA exemption from FAR reporting. The omission was documented by researcher Jack Poulson (Tech Inquiry). This is a concrete example of the transparency gap in AI government contracting: two of OpenAI's largest federal contracts are invisible in the official spending database.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2025-10-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9666,
+      "finding_type": "intellectual_property",
+      "summary": "OpenAI acquired 17 patents from Rain Neuromorphics Inc. in October 2025 bulk transfer",
+      "detail": "USPTO assignment records show 17 patents transferred from Rain Neuromorphics Inc. to OpenAI OPCO, LLC on 2025-10-21 (uniform execution date confirms bulk acquisition, not individual employee assignments). Core technology: memristive devices, in-memory computing architectures, efficient matrix multiplication, neuromorphic learning algorithms. Primary inventor: Jack David Kendall. This consummates Sam Altman's disclosed personal investment in Rain AI \u2014 Altman had previously invested in Rain Neuromorphics before becoming OpenAI CEO, which was disclosed as a conflict of interest. OpenAI's operating subsidiary (OpenAI OPCO, LLC) is the receiving entity.",
+      "source_datasets": "uspto_odp",
+      "confidence": "high",
+      "date_of_event": "2025-10-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9418,
+      "finding_type": "corporate",
+      "summary": "OpenAI completes for-profit recapitalization: OpenAI Inc renamed OpenAI Foundation; OpenAI Group PBC incorporated in Delaware",
+      "detail": "On October 28 2025, OpenAI completed its restructuring. OpenAI Inc (EIN 81-0861541) was renamed OpenAI Foundation. OpenAI Group PBC was incorporated as a Delaware Public Benefit Corporation with registered agent Corporation Trust Company at 1209 N Orange St Wilmington DE 19801. Delaware AG Kathy Jennings issued Statement of No Objection; California AG Rob Bonta signed MOU October 27 2025. Foundation retains sole power to appoint all OpenAI Group PBC board members. Foundation holds 26% equity stake (~$130B). Microsoft holds 27% stake (~$135B).",
+      "source_datasets": "websearch,senate_lda",
+      "confidence": "high",
+      "date_of_event": "2025-10-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9457,
+      "finding_type": "financial",
+      "summary": "OpenAI OpCo spent ~$6.95M on lobbying 2023-2025 across in-house (~$5.01M) and three external firms (DLA Piper, Akin Gump, Miller Strategies)",
+      "detail": "OpenAI OpCo self-filed LDA lobbying expenses: Q4 2023 $260K, Q1 2024 $340K, Q2 2024 $480K (amended), Q3 2024 $430K, Q4 2024 $510K, Q1 2025 $560K (amended), Q2 2025 $620K, Q3 2025 $920K, Q4 2025 $890K. Total: $5,010,000. External firms additional: DLA Piper $590K, Akin Gump $670K, Miller Strategies $680K. Grand total ~$6.95M for period Q4 2023\u2013Q4 2025.",
+      "source_datasets": "senate_lda",
+      "confidence": "high",
+      "date_of_event": "2025-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9421,
+      "finding_type": "legal",
+      "summary": "Musk v. Altman trial scheduled April 27 2026, Oakland; $79B-$134B damages sought; defendants include Altman, Brockman, Hoffman, Microsoft",
+      "detail": "Case 4:24-cv-04722 (NDCA), Judge Yvonne Gonzalez Rogers. Filed August 5 2024; FAC November 14 2024. Trial begins April 27 2026 in Oakland, expected 4 weeks. Claims: fraud, breach of contract, unjust enrichment, breach of fiduciary duty (Microsoft: aiding and abetting). January 2026 ruling denied motions to dismiss. March 13 2026 pretrial: judge questioned damages methodology. OpenAI entities named: OpenAI Inc, OpCo LLC, Global LLC, Holdings LLC, GP LLC, LP, Foundation.",
+      "source_datasets": "courtlistener,websearch",
+      "confidence": "high",
+      "date_of_event": "2026-04-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9388,
+      "finding_type": "financial",
+      "summary": "OpenAI Startup Fund has grown from single GP to 6 SPV entities created between Dec 2023 and Jul 2025 (SPV I through SPV VI with matching GP LLCs). All Delaware-incorporated. Altman was CEO and manager of the original GP entity. Separate from OpenAI Opco LLC which handles lobbying operations.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 16:49:35",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:us_de:OpenAI-Startup-Fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9570,
+      "finding_type": "financial",
+      "summary": "OpenAI lobbying infrastructure assembled 6-7 weeks before Nov 2023 board firing: OpCo LDA registration, Chan Park hire, Akin Gump/Babin engagement all in Oct-Nov 2023",
+      "detail": "Oct 1 2023: OpenAI OpCo LLC registers as federal lobbyist; four external firms retained. Oct 2023: Chan Park installed as internal lobbying head (ex-Senate Judiciary). Nov 1 2023: Chan Park formally hired; Akin Gump/Babin (ex-Schumer Chief Counsel) engaged. Nov 17 2023: Board fires Altman. The lobbying buildout preceded the board crisis by 6-7 weeks. Board cited Altman's failure to be 'consistently candid'; the lobbying pivot may have been an undisclosed plan. INNOCENT EXPLANATION: OpenAI independently decided in fall 2023 to build government affairs capacity as the company scaled.",
+      "source_datasets": [
+        "lda_registry,analysis_run,web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:50:51",
+      "target_name": "OpenAI",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-30",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2213,
+      "person_a": "MGX",
+      "person_b": "OpenAI",
+      "relationship_type": "financial",
+      "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:01:13",
+      "profile_id": "epstein",
+      "other_person": "MGX",
+      "other_person_slug": "mgx",
+      "evidence": []
+    },
+    {
+      "id": 2453,
+      "person_a": "OpenAI",
+      "person_b": "SoftBank Group",
+      "relationship_type": "financial",
+      "description": "SoftBank invested $40B in OpenAI (11% stake, 2nd largest shareholder). Co-founders of Stargate LLC (40% each). OpenAI has operational responsibility, SoftBank financial. $1B joint investment in SB Energy. SoftBank sold Nvidia stake to fund OpenAI investment.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 15:55:57",
+      "profile_id": "epstein",
+      "other_person": "SoftBank Group",
+      "other_person_slug": "softbank-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SoftBank Group press release 2025-12-31, Stargate announcement",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2607,
+      "person_a": "OpenAI",
+      "person_b": "Oscar Health",
+      "relationship_type": "corporate",
+      "description": "Oscar Health deploys OpenAI-powered AI agent Oswell for member healthcare support while Kushner is major OpenAI investor",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:25:09",
+      "profile_id": "epstein",
+      "other_person": "Oscar Health",
+      "other_person_slug": "oscar-health",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "F-4373",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2605,
+      "person_a": "Josh Kushner",
+      "person_b": "OpenAI",
+      "relationship_type": "financial",
+      "description": "Thrive Capital invested 1B+ in OpenAI across multiple rounds while OpenAI took stake in Thrive Holdings creating circular bidirectional investment",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:25:09",
+      "profile_id": "epstein",
+      "other_person": "Josh Kushner",
+      "other_person_slug": "josh-kushner",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "F-4367 F-4368",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3589,
+      "person_a": "Kevin Weil",
+      "person_b": "OpenAI",
+      "relationship_type": "employment",
+      "description": "CPO of OpenAI, commissioned as D201 LTC 3 days before OpenAI received $200M Pentagon OTA",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:42:48",
+      "profile_id": "tech-right",
+      "other_person": "Kevin Weil",
+      "other_person_slug": "kevin-weil",
+      "evidence": []
+    },
+    {
+      "id": 3593,
+      "person_a": "Department of Defense",
+      "person_b": "OpenAI",
+      "relationship_type": "contracts_with",
+      "description": "$200M prototype OTA from CDAO awarded June 16 2025 for frontier AI in warfighting and enterprise domains",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:42:55",
+      "profile_id": "tech-right",
+      "other_person": "Department of Defense",
+      "other_person_slug": "department-of-defense",
+      "evidence": []
+    },
+    {
+      "id": 4918,
+      "person_a": "Sam Altman",
+      "person_b": "OpenAI",
+      "relationship_type": "corporate",
+      "description": "Altman is CEO of OpenAI. OpenAI's energy procurement needs (data center power) directly conflicted with Altman's Oklo chairmanship, prompting his April 2025 board resignation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 5033,
+      "person_a": "Jack David Kendall",
+      "person_b": "OpenAI",
+      "relationship_type": "corporate",
+      "description": "Jack David Kendall is the primary inventor on Rain Neuromorphics' 17-patent portfolio, all of which transferred to OpenAI OPCO, LLC in October 2025. He appears as inventor on 7 OpenAI-attributed patents in the neuromorphic/in-memory computing space.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Jack David Kendall",
+      "other_person_slug": "jack-david-kendall",
+      "evidence": []
+    },
+    {
+      "id": 5944,
+      "person_a": "Larry Summers",
+      "person_b": "OpenAI",
+      "relationship_type": "employment",
+      "description": "Summers resigned OpenAI board Nov 19 2025 over Epstein emails revelations. Also stepped back from Harvard teaching pending investigation. No public UAE role yet \u2014 watch for Mubadala/MGX/PIF macro-advisor announcement.",
+      "strength": "strong",
+      "date_range": "2023-2025-11-19",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:36:50",
+      "profile_id": "epstein",
+      "other_person": "Lawrence Summers",
+      "other_person_slug": "lawrence-summers",
+      "evidence": []
+    },
+    {
+      "id": 2774,
+      "person_a": "Emil Michael",
+      "person_b": "OpenAI",
+      "relationship_type": "financial",
+      "description": "Michael's Anthropic ban transferred Pentagon AI market share to OpenAI, a Coatue portfolio company",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 21:44:50",
+      "profile_id": "tech-right",
+      "other_person": "Emil Michael",
+      "other_person_slug": "emil-michael",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-03-01",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OpenAI LP formed March 2019 as capped-profit hybrid; investor returns capped at 100x; Microsoft invested $1B",
+      "confidence": "high",
+      "id": 9427
+    },
+    {
+      "date": "2023-10-01",
+      "type": "finding",
+      "finding_type": "political",
+      "summary": "OpenAI OpCo LLC registered as federal lobbyist Q4 2023; four external firms retained: DLA Piper, Akin Gump, Hogan Lovells, Miller Strategies",
+      "confidence": "high",
+      "id": 9424
+    },
+    {
+      "date": "2023-11-17",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "November 2023 board crisis: Altman fired for not being 'consistently candid'; pre-crisis board was Sutskever, Toner, McCauley, D'Angelo",
+      "confidence": "high",
+      "id": 9428
+    },
+    {
+      "date": "2023-11-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI lobbying infrastructure assembled 6-7 weeks before Nov 2023 board firing: OpCo LDA registration, Chan Park hire, Akin Gump/Babin engagement all in Oct-Nov 2023",
+      "confidence": "medium",
+      "id": 9592
+    },
+    {
+      "date": "2023-11-21",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Post-crisis board reconstituted: Bret Taylor as chair, Lawrence Summers added, Adam D'Angelo retained; Toner/McCauley/Sutskever departed",
+      "confidence": "high",
+      "id": 9422
+    },
+    {
+      "date": "2023-12-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI 990 (2023): 13 officers including Chris Clark (Sec/Tres $397K), Ilya Sutskever ($322K), Sam Altman ($76K); revenue $5.36M, assets $22.7M",
+      "confidence": "high",
+      "id": 9431
+    },
+    {
+      "date": "2023-2025-11-19",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Summers resigned OpenAI board Nov 19 2025 over Epstein emails revelations. Also stepped back from Harvard teaching pending investigation. No public UAE role yet \u2014 watch for Mubadala/MGX/PIF macro-advisor announcement.",
+      "other_person": "Lawrence Summers",
+      "id": 5944
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "political",
+      "summary": "OpenAI OpCo lobbying targeted Commerce Dept., White House, and both chambers on AI safety (S.2770), AI likenesses (NO FAKES Act), AI copyright \u2014 all within Cantwell Commerce Committee jurisdiction",
+      "confidence": "high",
+      "id": 9465
+    },
+    {
+      "date": "2024-03-27",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OpenAI Public Sector LLC formed December 2024 and SAM-registered January 2025 \u2014 purpose-built federal contracting vehicle",
+      "confidence": "high",
+      "id": 9674
+    },
+    {
+      "date": "2025-01-30",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OTA contracting gap: OpenAI's two largest federal contracts ($200M + $3.5M) are OTAs invisible on USASpending.gov",
+      "confidence": "high",
+      "id": 9680
+    },
+    {
+      "date": "2025-05-05",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "OpenAI abandoned plan to remove nonprofit control May 5 2025, but retained PBC conversion; Foundation keeps board appointment power",
+      "confidence": "high",
+      "id": 9429
+    },
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "intellectual_property",
+      "summary": "OpenAI patent portfolio shows 43 granted patents 2019\u20132025; Sam Altman not a named inventor on any",
+      "confidence": "high",
+      "id": 9670
+    },
+    {
+      "date": "2025-06-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI Public Sector LLC awarded $200M CDAO prototype OTA for frontier AI in warfighting and enterprise domains",
+      "confidence": "high",
+      "id": 9671
+    },
+    {
+      "date": "2025-07-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DoD awarded up to $800M in frontier AI contracts split among Anthropic, Google, OpenAI, and xAI in July 2025",
+      "confidence": "high",
+      "id": 9681
+    },
+    {
+      "date": "2025-08-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GSA added OpenAI ChatGPT Enterprise to Multiple Award Schedule at $1/agency/year through August 2026",
+      "confidence": "high",
+      "id": 9673
+    },
+    {
+      "date": "2025-10-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI awarded $3.5M U.S. Cyber Command OTA \u2014 contract went unnoticed on USASpending due to OTA exemption",
+      "confidence": "high",
+      "id": 9672
+    },
+    {
+      "date": "2025-10-21",
+      "type": "finding",
+      "finding_type": "intellectual_property",
+      "summary": "OpenAI acquired 17 patents from Rain Neuromorphics Inc. in October 2025 bulk transfer",
+      "confidence": "high",
+      "id": 9666
+    },
+    {
+      "date": "2025-10-28",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OpenAI completes for-profit recapitalization: OpenAI Inc renamed OpenAI Foundation; OpenAI Group PBC incorporated in Delaware",
+      "confidence": "high",
+      "id": 9418
+    },
+    {
+      "date": "2025-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI OpCo spent ~$6.95M on lobbying 2023-2025 across in-house (~$5.01M) and three external firms (DLA Piper, Akin Gump, Miller Strategies)",
+      "confidence": "high",
+      "id": 9457
+    },
+    {
+      "date": "2026-04-27",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Musk v. Altman trial scheduled April 27 2026, Oakland; $79B-$134B damages sought; defendants include Altman, Brockman, Hoffman, Microsoft",
+      "confidence": "high",
+      "id": 9421
+    }
+  ]
+}

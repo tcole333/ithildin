@@ -4,13 +4,14 @@
   "aliases": [],
   "profile_ids": [
     "epstein",
-    "tech-right"
+    "tech-right",
+    "zampolli"
   ],
-  "generated_at": "2026-03-11T18:36:07.943699",
-  "last_updated": "2026-03-05T04:29:36",
+  "generated_at": "2026-05-07T23:07:36.315869",
+  "last_updated": "2026-04-13T13:44:48",
   "stats": {
     "total_findings": 10,
-    "total_connections": 16,
+    "total_connections": 17,
     "total_entities": 0,
     "finding_types": {
       "financial": 6,
@@ -19,7 +20,7 @@
       "document": 1
     },
     "connection_types": {
-      "political": 3,
+      "political": 4,
       "social": 3,
       "financial": 3,
       "familial": 1,
@@ -28,7 +29,7 @@
       "intelligence": 2,
       "corporate": 1
     },
-    "last_updated": "2026-03-05T04:29:36"
+    "last_updated": "2026-04-13T13:44:48"
   },
   "findings": [
     {
@@ -47,7 +48,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002031474 Form 3 and Form 4 filings 2024-2025",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2031474",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -341,7 +342,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "LittleSis entity 71297; SEC CIK 0002059583",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059583",
           "source_quote": null,
           "source_page": null
         }
@@ -650,6 +651,28 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 5322,
+      "person_a": "Jared Kushner",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "political",
+      "description": "Both present at Islamabad Talks (Apr 11-12 2026). Both long-term Trump inner circle. Kushner named co-lead negotiator for Iran; Zampolli role undisclosed.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 13:44:48",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Islamabad_Talks",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -664,13 +687,13 @@
     }
   ],
   "curation": {
-    "lead": "<p>Jared Kushner served as Senior Adviser to President Donald Trump from January 2017 to January 2021, overseeing a Middle East diplomacy portfolio that included the Abraham Accords. His 2019 financial disclosure listed more than 100 real estate entities across seven trusts, with estimated disclosed asset value between $174 million and $710 million [Finding #4359] [Finding #4360].</p><p>After leaving the White House, Kushner launched <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>, a private equity firm that received a $2 billion commitment from Saudi Arabia's Public Investment Fund, a decision made over the PIF advisory board's recorded objection [Finding #4331]. SEC filings show he became a Director of QXO Inc. (Brad Jacobs's company), with approximately 32.7 million shares valued at roughly $630 million, representing <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>'s entire disclosed public equity portfolio [Finding #4322].</p><p>Analysis of financial records suggests two parallel channels of Gulf sovereign wealth flowing to Trump-connected entities: the MBS/Saudi PIF channel to Affinity Partners, and the Abu Dhabi/<a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon</a> channel to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> and <a href=\"/dossiers/mgx\">MGX</a>. <a href=\"/dossiers/rick-gerson\">Rick Gerson</a> appears in both channels as an intermediary [Finding #4339]. During the Trump transition, Gerson delivered a Russia relations plan co-drafted with Kirill Dmitriev \u2014 head of the Russian Direct Investment Fund \u2014 to Kushner on January 18, 2017 [Finding #4331].</p>",
+    "lead": "<p>Jared Kushner served as Senior Adviser to President Donald Trump from January 2017 to January 2021, overseeing a Middle East diplomacy portfolio that included the Abraham Accords. His 2019 financial disclosure listed more than 100 real estate entities across seven trusts, with estimated disclosed asset value between $174 million and $710 million [Finding #4359] [Finding #4360].</p><p>After leaving the White House, Kushner launched <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>, a private equity firm that received a $2 billion commitment from Saudi Arabia's Public Investment Fund, a decision made over the PIF advisory board's recorded objection [Finding #4331]. SEC filings show he became a Director of QXO Inc. (Brad Jacobs's company), with approximately 32.7 million shares valued at roughly $630 million, representing <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>'s entire disclosed public equity portfolio [Finding #4322].</p><p>Analysis of financial records suggests two parallel channels of Gulf sovereign wealth flowing to Trump-connected entities: the MBS/Saudi PIF channel to Affinity Partners, and the Abu Dhabi/<a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon</a> channel to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> and <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>. <a href=\"/dossiers/rick-gerson\">Rick Gerson</a> appears in both channels as an intermediary [Finding #4339]. During the Trump transition, Gerson delivered a Russia relations plan co-drafted with Kirill Dmitriev \u2014 head of the Russian Direct Investment Fund \u2014 to Kushner on January 18, 2017 [Finding #4331].</p>",
     "system_role": "Kushner links the Trump family's political network to Gulf sovereign wealth funds (Saudi PIF, Abu Dhabi) and post-White House private equity. After serving as Senior Adviser with a Middle East diplomacy portfolio, he launched Affinity Partners, which received a $2 billion commitment from Saudi Arabia's Public Investment Fund.",
     "sections": [
       {
         "id": "gulf-sovereign-capital",
         "title": "Gulf Sovereign Capital and Affinity Partners",
-        "content": "<p>Saudi Arabia's Public Investment Fund committed $2 billion to <a href=\"/dossiers/affinity-partners\">Affinity Partners</a> after Kushner left the White House, a decision documented in the public record as having been made over the objection of the PIF's own advisory board [Finding #4331]. LittleSis, which uses a defined relationship-strength taxonomy, categorizes the Kushner-Mohammed bin Salman relationship as \"close friends\" \u2014 the highest available category, above professional or associate-level [Finding #4331].</p><p>SEC filings and LittleSis records together suggest that the MBS/PIF-to-Affinity channel is structurally parallel to a second Gulf channel: Abu Dhabi under <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed</a> routing sovereign capital to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> via <a href=\"/dossiers/mgx\">MGX</a>. Analysis of these records identifies four shared features in both channels: sovereign wealth fund capital, no FARA registration, deal timing following White House departure, and Abraham Accords diplomatic relationships underlying the commercial ones [Finding #4339]. <a href=\"/dossiers/rick-gerson\">Rick Gerson</a> \u2014 described by UAE officials as \"Kushner's guy\" \u2014 appears in both channels as an intermediary [Finding #4331] [Finding #4339].</p><p>SEC filings show <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>'s entire disclosed public equity portfolio concentrated in a single position: QXO Inc., where Kushner sits on the board of directors. He received grants of 9.3 million shares in August 2024 at $9.14 per share and 16.3 million shares in April 2025 at $12.30 per share, bringing total direct and indirect holdings to approximately 32.7 million shares worth roughly $630 million [Finding #4322].</p>",
+        "content": "<p>Saudi Arabia's Public Investment Fund committed $2 billion to <a href=\"/dossiers/affinity-partners\">Affinity Partners</a> after Kushner left the White House, a decision documented in the public record as having been made over the objection of the PIF's own advisory board [Finding #4331]. LittleSis, which uses a defined relationship-strength taxonomy, categorizes the Kushner-Mohammed bin Salman relationship as \"close friends\" \u2014 the highest available category, above professional or associate-level [Finding #4331].</p><p>SEC filings and LittleSis records together suggest that the MBS/PIF-to-Affinity channel is structurally parallel to a second Gulf channel: Abu Dhabi under <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed</a> routing sovereign capital to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> via <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>. Analysis of these records identifies four shared features in both channels: sovereign wealth fund capital, no FARA registration, deal timing following White House departure, and Abraham Accords diplomatic relationships underlying the commercial ones [Finding #4339]. <a href=\"/dossiers/rick-gerson\">Rick Gerson</a> \u2014 described by UAE officials as \"Kushner's guy\" \u2014 appears in both channels as an intermediary [Finding #4331] [Finding #4339].</p><p>SEC filings show <a href=\"/dossiers/affinity-partners\">Affinity Partners</a>'s entire disclosed public equity portfolio concentrated in a single position: QXO Inc., where Kushner sits on the board of directors. He received grants of 9.3 million shares in August 2024 at $9.14 per share and 16.3 million shares in April 2025 at $12.30 per share, bringing total direct and indirect holdings to approximately 32.7 million shares worth roughly $630 million [Finding #4322].</p>",
         "viz": null
       },
       {
@@ -710,347 +733,6 @@
       "private-order",
       "jurisdictional-arbitrage",
       "complexity-as-credential"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Jared Kushner",
-      "connections": [
-        {
-          "target": "Steve Witkoff",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "F-3826; F-4013",
-          "description": "Joint meetings with Kirill Dmitriev at Faena Miami Oct 2025 to negotiate Ukraine peace plan. Dmitriev publicly credited both for assistance. Co-navigators in Trump foreign policy network."
-        },
-        {
-          "target": "Rick Gerson",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "NBC News June 2018",
-          "description": "Close friends for 10+ years. UAE officials consider Gerson 'Kushner's guy.' Brother Mark Gerson invested in Cadre (Josh Kushner). Mueller investigated Gerson's role as intermediary."
-        },
-        {
-          "target": "Mohammed bin Salman",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 71297; SEC CIK 0002059583",
-          "description": "Close friends per LittleSis; MBS PIF committed 2B to Jared Affinity Partners despite advisory board opposition; 844K Trump 47 donation 2024"
-        },
-        {
-          "target": "Rosemary Vrablic",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 71297",
-          "description": "Deutsche Bank private wealth manager with dual relationship: personal banker and direct business transactions. Approved Kushner loans other banks rejected. Resigned DB Nov 2021."
-        },
-        {
-          "target": "Charles Kushner",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "FEC records 2024; NY DOS filings; DOJ case 2:04-cr-00580",
-          "description": "Father-son. Charles founded Kushner Companies; convicted 2005; Jared assumed control via Oct 2008 DE LLC restructuring. Coordinated 2024 political donations. Charles pardoned Dec 2020 now Ambassador to France."
-        },
-        {
-          "target": "Rick Gerson",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "F-4143; F-4223; LittleSis entity 71297",
-          "description": "Gerson is Kushner MBZ intermediary per Mueller investigation. Alpha Wave co-founder. Already in DB as F-4143 F-4223. LittleSis associates Jared with Gerson as MBZ backchannel."
-        },
-        {
-          "target": "Abbe Lowell",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 71297; F-2314",
-          "description": "Abbe Lowell is Jared personal attorney per LittleSis. Already in DB as F-2314 connected to Epstein network via Ruemmler. Lowell represented both Kushner and Hunter Biden."
-        },
-        {
-          "target": "Adam Boehler",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "https://www.documentcloud.org/documents/21044267",
-          "description": "Harvard summer roommates; Boehler led DFC building Gulf relationships that became Affinity Partners investor pipeline; 423-page FOIA documents coordination"
-        },
-        {
-          "target": "Nikola Selakovic",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "BIRN:BalkanInsight-Dec16-2025",
-          "description": "Serbian Culture Minister indicted for illegally removing cultural heritage protection to enable Kushner Affinity Partners Belgrade Trump Tower project"
-        },
-        {
-          "target": "Rick Gerson",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "Mueller Report Vol. I",
-          "description": "Gerson is close personal friend of Kushner. Delivered Dmitriev/Putin-backed US-Russia reconciliation plan to Kushner on Jan 18, 2017. Acted as informal intermediary connecting Kushner to UAE and Russian sovereign fund principals."
-        },
-        {
-          "target": "Tom Barrack",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:330784",
-          "description": "Friends per LittleSis. Barrack emailed Kushner during 2016 campaign per trial evidence. Both in Trump inner circle with overlapping Middle East portfolios."
-        },
-        {
-          "target": "Kirill Dmitriev",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis entity 71297",
-          "description": "LittleSis generic relationship. Dmitriev heads Russian Direct Investment Fund RDIF. Met Erik Prince in Seychelles Jan 2017. Communicated with Kushner transition team. Mueller investigated."
-        },
-        {
-          "target": "George Nader",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis entity 71297",
-          "description": "Associates per LittleSis. Nader served as backchannel intermediary between Trump transition and UAE/Saudi officials. Convicted child sex trafficking. Mueller investigation witness."
-        },
-        {
-          "target": "Carl Icahn",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://commercialobserver.com/2024/06/jared-kushner-carl-icahn-milton-towers/",
-          "description": "Co-tenants at Milton Tower, 16690 Collins Ave, Sunny Isles Beach FL; both had formal Trump WH roles; Affinity 9th floor, Icahn Enterprises 12th floor"
-        },
-        {
-          "target": "Tahnoon bin Zayed",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "F-4339 (parallel channels), F-4143 (Rick Gerson Abu Dhabi connections), F-4352 (three channel synthesis)",
-          "description": "Parallel Gulf sovereignty channels: Kushner/MBS/PIF and Tahnoon/Abu Dhabi/WLFI both flow sovereign capital to Trump orbit; Rick Gerson spans both channels as intermediary"
-        },
-        {
-          "target": "Alan Dershowitz",
-          "type": "social",
-          "strength": 0.4,
-          "evidence_ref": "LittleSis entities 71297 102209",
-          "description": "LittleSis records generic relationship student between Jared and Dershowitz. Dershowitz is central Epstein network figure. Both Jared AND Josh Kushner have LittleSis connections to Dershowitz."
-        }
-      ],
-      "secondHop": {
-        "Abbe Lowell": [
-          {
-            "target": "Jack Abramoff",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Lowell served as Abramoff criminal defense attorney in 2006 corruption case. Only Abramoff-adjacent name with direct Epstein network contact."
-          },
-          {
-            "target": "Kathy Ruemmler",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Ruemmler had dinner with Lowell Sep 17 2018 and spent hour on phone about Kushner defense Nov 5 2017. Both DC white-collar attorneys."
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 0.4,
-            "description": "No direct emails between Lowell and Epstein found. Connection is via Kathy Ruemmler who mentioned Lowell to Epstein twice: dinner Sep 2018, Kushner defense call Nov 2017. Lowell was in Epstein social/professional orbit through DC defense bar."
-          }
-        ],
-        "Alan Dershowitz": [
-          {
-            "target": "Ken Starr",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Jack Abramoff",
-            "type": "legal",
-            "strength": 0.4,
-            "description": "Connected through shared defense attorney Abbe David Lowell. Lowell represented Abramoff in DDC corruption case and Dershowitz in Epstein-related defamation matters. Second-degree connection, not direct."
-          },
-          {
-            "target": "William Barr",
-            "type": "legal",
-            "strength": 0.4,
-            "description": "Dershowitz was on Epstein's defense team alongside K&E's Lefkowitz and Starr for the 2008 NPA. Barr joined K&E the year after the NPA was secured (2009). Dershowitz later provided Trump's impeachment defense while Barr served as AG. Both were in Republican legal defense ecosystem. Dershowitz also made FEC donations to similar Republican candidates."
-          }
-        ],
-        "Charles Kushner": [
-          {
-            "target": "Murray Huberfeld",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Co-investors in NorCrown Trust; Huberfeld later ran Platinum Partners fraud; Kushner family member Stadtmauer lent 22M to Platinum"
-          },
-          {
-            "target": "Benjamin Brafman",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Brafman secured Trump pardon for Charles Kushner (Dec 23 2020). Kushner is Jared Kushner's father and Trump's in-law."
-          },
-          {
-            "target": "Brookfield Asset Management",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Held Brookfield equity while Brookfield subsidiary executed 99-year lease bailout of 666 Fifth Avenue; required to divest for ambassadorship"
-          },
-          {
-            "target": "Millennium USA LP",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Held equity interest in Izzy Englanders hedge fund; required to divest for ambassadorship"
-          }
-        ],
-        "George Nader": [
-          {
-            "target": "Kathy Ruemmler",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Rick Gerson",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "George Nader (UAE national security advisor) introduced Gerson to Dmitriev in late Nov 2016. Nader and Gerson exchanged WhatsApp messages on Jan 10, 2017, including photo of Nader with MBZ taken in Morocco. Nader facilitated the Gerson-Dmitriev-Seychelles channel."
-          },
-          {
-            "target": "Elliott Broidy",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Co-conspirators in anti-Qatar influence operation. Nader paid Broidy 2.7M. Both charged with FARA violations. Both pardoned by Trump Jan 2021."
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": ""
-          },
-          {
-            "target": "Elliott Broidy",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Kirill Dmitriev": [
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Professional relationship per LittleSis. Dmitriev is RDIF CEO sanctioned by US 2022. Met multiple times including Faena hotel Miami Oct 2025 with Kushner. Negotiated 28-point Ukraine peace plan. Putin meetings."
-          },
-          {
-            "target": "Rick Gerson",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Gerson served as Kushner's back-channel to Dmitriev (RDIF CEO) during 2016-2017 transition. UAE's George Nader brokered the introduction Nov 2016. Co-drafted US-Russia reconciliation plan cleared through Putin. Gerson present in Seychelles during Prince-Dmitriev meeting."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "social",
-            "strength": 0.7,
-            "description": "Professional relationship per LittleSis; Dmitriev is CEO of Russian Direct Investment Fund, was tasked by Putin to make inroads with Trump team"
-          }
-        ],
-        "Steve Witkoff": [
-          {
-            "target": "Zach Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
-          },
-          {
-            "target": "Zachary Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
-          },
-          {
-            "target": "Tahnoon bin Zayed Al Nahyan",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
-          }
-        ],
-        "Rick Gerson": [
-          {
-            "target": "Mohammed bin Zayed",
-            "type": "political",
-            "strength": 1.0,
-            "description": "MBZ had a 'long relationship' with Gerson per Mueller investigation. Gerson attended secret Dec 2016 meeting with MBZ and Trump transition team at Four Seasons NYC. Met MBZ in Seychelles Jan 2017."
-          },
-          {
-            "target": "Tahnoun bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Both operate in UAE sovereign capital ecosystem. Gerson's Alpha Wave Global co-files with Lunate Holding RSC Ltd and Chimera Investment LLC (UAE entities). Tahnoun controls ADQ and MGX sovereign funds. George Nader (UAE advisor) introduced Gerson to Dmitriev. Tahnoun is UAE's national security advisor \u2014 the same institutional apparatus that facilitated Gerson's transition-period back-channel."
-          }
-        ],
-        "Tahnoon bin Zayed": [
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "MGX (backed by Mubadala, chaired by Tahnoon) made $2B Binance investment settled via Trump-family WLFI's USD1 stablecoin. Tahnoon-Trump nexus also has precedent in Barrack/Alshahhi FARA case."
-          },
-          {
-            "target": "Chimera Investment LLC",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Chimera Capital is part of Royal Group, chaired by Sheikh Tahnoon bin Zayed. Royal Group holds 61% of IHC. Chimera launched Lunate (Sep 2023) as alternative investment arm."
-          }
-        ],
-        "Tom Barrack": [
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Scheduled meetings with Barrack + Rod-Larsen. 'bannon, barrack, puppet masters'. Inauguration invitation consulting."
-          },
-          {
-            "target": "Sheikh Hamad",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Epstein hosted Barrack-Sheikh Hamad meeting at 71st St Jan 2012. Colony Capital office coordinated."
-          },
-          {
-            "target": "Paul Manafort",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barrack brokered Manafort into Trump campaign. Gates was Barracks deputy on inaugural. Epstein tracked this chain May 2017-Aug 2018."
-          },
-          {
-            "target": "Sultan Bin Sulayem",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barrack sent inauguration invitations to Sultan. Sultan asked Epstein whether to accept Jan 2017. Barrack discussed Sultan from Dubai Oct 2010."
-          },
-          {
-            "target": "Paul Manafort",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Barrack brought Manafort into Trump campaign. Both prosecuted in separate FARA-related cases stemming from 58th Presidential Inaugural Committee. Epstein tracked connection: manafort gates patten all worked with barrack oy (EFTA02625236). Summers warned Epstein Oct 2017: Public link to manafort will be a disaster."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2016 to present",
-        "label": "advisory with Rick Gerson",
-        "type": "advisory",
-        "entity": "Rick Gerson",
-        "id": 2896
-      }
     ]
   }
 }

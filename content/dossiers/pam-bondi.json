@@ -6,15 +6,15 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.971199",
+  "generated_at": "2026-05-07T23:07:36.364403",
   "last_updated": "2026-03-11T04:31:23",
   "stats": {
     "total_findings": 8,
     "total_connections": 8,
     "total_entities": 1,
     "finding_types": {
-      "legal": 6,
       "financial": 1,
+      "legal": 6,
       "intelligence": 1
     },
     "connection_types": {
@@ -24,6 +24,39 @@
     "last_updated": "2026-03-11T04:31:23"
   },
   "findings": [
+    {
+      "id": 6550,
+      "finding_type": "financial",
+      "summary": "FEC records show Pam Bondi (likely the AG) donated 1000 to Tommy Tuberville for Senate (2020-05-27) while employed at Ballard Partners (lobbying firm) in DC. Earlier 2000 to Huck PAC (2014-12-19) from Tallahassee. LittleSis ID: 114097.",
+      "detail": null,
+      "source_datasets": [
+        "FEC",
+        "LittleSis"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2020-05-27",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:36:24",
+      "target_name": "Pam Bondi",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 114097",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6524,
       "finding_type": "legal",
@@ -92,39 +125,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Stateline 2025-07-16",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6550,
-      "finding_type": "financial",
-      "summary": "FEC records show Pam Bondi (likely the AG) donated 1000 to Tommy Tuberville for Senate (2020-05-27) while employed at Ballard Partners (lobbying firm) in DC. Earlier 2000 to Huck PAC (2014-12-19) from Tallahassee. LittleSis ID: 114097.",
-      "detail": null,
-      "source_datasets": [
-        "FEC",
-        "LittleSis"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 03:36:24",
-      "target_name": "Pam Bondi",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis entity 114097",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -504,6 +504,14 @@
   ],
   "timeline": [
     {
+      "date": "2020-05-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC records show Pam Bondi (likely the AG) donated 1000 to Tommy Tuberville for Senate (2020-05-27) while employed at Ballard Partners (lobbying firm) in DC. Earlier 2000 to Huck PAC (2014-12-19) from Tallahassee. LittleSis ID: 114097.",
+      "confidence": "medium",
+      "id": 6550
+    },
+    {
       "date": "2025-08-04",
       "type": "finding",
       "finding_type": "legal",
@@ -619,257 +627,6 @@
       "narrative-shield",
       "manufactured-dependency",
       "private-order"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Pam Bondi",
-      "connections": [
-        {
-          "target": "Stephen Miller",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "The Atlantic March 2026",
-          "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
-        },
-        {
-          "target": "DOJ Voting Section",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-        },
-        {
-          "target": "Ed Martin",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "DOJ memorandum",
-          "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
-        },
-        {
-          "target": "Harmeet Dhillon",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
-        },
-        {
-          "target": "Eric Neff",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
-        },
-        {
-          "target": "GEO Group",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
-        },
-        {
-          "target": "National Fraud Enforcement Division",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "NFED initial MN focus parallels Bondi voter roll demands to MN; both use fraud claims as lever for state election data"
-        },
-        {
-          "target": "Heather Honey",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Bondi DOJ collects voter rolls and shares with DHS where Honey serves as Deputy Asst Sec of Election Integrity. Honey manages DHS side of the DOJ-DHS-SAVE voter data pipeline. Honey contradicted DHS spokesperson about data sharing occurring."
-        }
-      ],
-      "secondHop": {
-        "DOJ Voting Section": [
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "PILF data cited in DOJ letter to PA SOS Aug 2025; DOJ filed amicus for PILF in Maine case; Riordan revolving door"
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "AAG Civil Rights Division, oversees Voting Section since April 2025"
-          },
-          {
-            "target": "Eric Neff",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Acting Chief of DOJ Voting Section, replaced Maureen Riordan Dec 2025"
-          },
-          {
-            "target": "Megan Frederick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOJ Voting Section attorney, hired by Dec 2025"
-          },
-          {
-            "target": "Joseph W. Voiland",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Counsel on WI voter rolls case, appeared Feb 2026"
-          }
-        ],
-        "Eric Neff": [
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
-          },
-          {
-            "target": "Maureen Riordan",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neff succeeded Riordan as DOJ Voting Section Acting Chief. Riordan from PILF pipeline; Neff from True the Vote pipeline."
-          },
-          {
-            "target": "True the Vote",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neff serves as Acting Chief under Dhillon's Civil Rights Division leadership"
-          }
-        ],
-        "GEO Group": [
-          {
-            "target": "Tom Homan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Consulting fees (at least $5K disclosed) 2023-2024; FBI sting recorded $50K cash acceptance Sept 2024"
-          },
-          {
-            "target": "Matthew Albence",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Acting ICE Director -> GEO Group SVP Client Relations 2022"
-          },
-          {
-            "target": "Julie Myers Wood",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Head of ICE 2006-2008 -> GEO Board of Directors 2014, ~$250K/year"
-          },
-          {
-            "target": "Proclamation 10886 (Border Emergency)",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Emergency declaration enables no-bid contracting authority. GEO Delaney Hall 1.2B 15-year contract awarded Feb 25 (36 days post-declaration)"
-          },
-          {
-            "target": "One Big Beautiful Bill (H.R. 1)",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OBBBA provides 45B detention funding through FY2029. GEO expected to receive outsized share given existing infrastructure and 14 idle facilities ready for reactivation."
-          }
-        ],
-        "Harmeet Dhillon": [
-          {
-            "target": "Judicial Watch",
-            "type": "political",
-            "strength": 1.0,
-            "description": "DOJ under Dhillon filed statement of interest supporting JW Oregon lawsuit; parallel NVRA enforcement"
-          },
-          {
-            "target": "Dhillon Law Group",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founded firm, sold to brother Mandeep Dhillon upon DOJ confirmation. Firm was primary outside counsel to Trump campaign, received ~4.5M in 2023."
-          },
-          {
-            "target": "Center for American Liberty",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founded 501c3 in 2018, raised over 15M for pro bono conservative legal services"
-          }
-        ],
-        "Heather Honey": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller directs weekly election enforcement meetings; Honey is DHS election integrity deputy"
-          },
-          {
-            "target": "Cyber Ninjas",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Honey was Cyber Ninjas subcontractor during Arizona Maricopa County 2020 audit"
-          },
-          {
-            "target": "Cleta Mitchell",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Honey is VP on Mitchell's FAIR Elections Fund board; both in election integrity network"
-          }
-        ],
-        "Stephen Miller": [
-          {
-            "target": "Steve Bannon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Alliance originated at 2012 dinner with Sessions. Miller sent 900+ emails to Breitbart as de facto assignment editor. Bannon recruited Miller to Trump campaign Jan 2016."
-          },
-          {
-            "target": "Tom Homan",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Palantir",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Gene Hamilton",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Co-founders AFL. Both Sessions alumni. Miller (WH) and Hamilton (DHS/DOJ) were the two key Sessions staffers who coordinated immigration policy in Trump 1.0 largely without knowledge of other officials."
-          }
-        ],
-        "Ed Martin": [
-          {
-            "target": "Kurt Olsen",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Ed Martin (Weaponization Working Group) publicly stated working with Olsen on election integrity on War Room podcast Jan 2026"
-          },
-          {
-            "target": "Colin McDonald",
-            "type": "political",
-            "strength": 0.7,
-            "description": "McDonald co-chaired Weaponization Working Group led by Ed Martin"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-08-04",
-        "label": "AG Pam Bondi sent letters demanding voter registration rolls from 15+ states. DOJ sued Georgia (Dec 2025) to force release of 2020 ballot documents. Minnesota received demand from AG Bondi to share voter rolls. DOJ voter data requests escalated Aug 2025.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6524
-      }
     ]
   }
 }

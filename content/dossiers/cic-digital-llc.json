@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:08.000686",
+  "generated_at": "2026-05-07T23:07:36.417184",
   "last_updated": "2026-02-26T15:57:30",
   "stats": {
     "total_findings": 5,
@@ -112,7 +112,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR S-1/A filing, CIK 0002083122, accession 000199937126003355, filed 2026-02-13",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2083122",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -392,158 +392,6 @@
       "access-capitalism",
       "parallel-financial-system",
       "disclosure-timing"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "CIC Digital LLC",
-      "connections": [
-        {
-          "target": "Justin Sun",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "CNBC May 23 2025 reporting",
-          "description": "Justin Sun became top TRUMP meme coin holder, attended May 22 2025 gala dinner with Trump. Sun's SEC fraud charges were simultaneously paused by SEC citing public interest. Sun invested heavily in WLFI tokens. Creates dual channel: Sun buys access via meme coin while SEC drops his case."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "Trump 2024 financial disclosure; gettrumpmemes.com",
-          "description": "Trump wholly owns CIC Digital LLC through The Donald J. Trump Revocable Trust. CIC Digital holds 36% of TRUMP token supply and receives trading fee revenue."
-        },
-        {
-          "target": "Fight Fight Fight LLC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "Wikipedia ; Blumenthal letter May 2025",
-          "description": "CIC Digital LLC co-owns Fight Fight Fight LLC alongside Celebration Cards LLC. Fight Fight Fight is the issuer of the TRUMP meme coin."
-        },
-        {
-          "target": "DT Marks DEFI LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Trump financial disclosure; WLFI documentation; gettrumpmemes.com",
-          "description": "Both entities are Trump family-owned and central to the crypto empire. DT Marks DEFI owns 60% of WLFI; CIC Digital holds 80% of TRUMP tokens (with FFF LLC). Same beneficial owner (Trump family) operating parallel crypto ventures with different entity structures."
-        }
-      ],
-      "secondHop": {
-        "DT Marks DEFI LLC": [
-          {
-            "target": "WLF Holdco LLC",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DT Marks DEFI LLC owns 60% equity in WLF Holdco LLC, the holding company for World Liberty Financial Inc."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump holds 70% stake in DT Marks DEFI LLC as of end-2024; remaining 30% held by Trump family members"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Trump entity owns 60% of WLFI, entitled to 75% of token sale revenue. Received 187M from Aryam 250M upfront"
-          },
-          {
-            "target": "Aryam Investment 1",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "187M from Aryam initial payment went to Trump family entities DT Marks DEFI LLC and DT Marks SC LLC"
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Justin Sun": [
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Sun invested 75M in WLFI tokens and took advisory role. Became top TRUMP meme coin holder. SEC fraud case paused Feb 2025 after Trump inauguration. WLFI blacklisted Sun's address Sept 2025 freezing 107M in tokens. Creates pattern: invest in Trump crypto -> SEC case dropped -> then frozen out."
-          },
-          {
-            "target": "TRUMP Meme Coin",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Justin Sun is largest known TRUMP token holder. Spent 40M+ by May 2025, announced additional 100M purchase Jul 2025. Also invested 75M in WLFI. Attended May 22, 2025 dinner with Trump. SEC investigation into Sun paused under Trump administration."
-          },
-          {
-            "target": "World Liberty Financial Inc.",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Invested $75M in WLFI tokens, became largest individual investor and advisor. Wallet frozen by WLFI team (595M tokens, ~$107M) after attempting to move tokens to exchanges post-TGE. SEC reportedly backed off investigation into Sun's companies after Trump took office. Sun's involvement creates nexus between Tron ecosystem and Trump family crypto."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Sun invested 75M in WLFI, becoming largest single investor. 56M flowed directly to Trump entities via revenue split. Sun faces SEC lawsuit. WLFI later froze Sun tokens after attempted transfer."
-          }
-        ],
-        "Fight Fight Fight LLC": [
-          {
-            "target": "Celebration Cards LLC",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Celebration Cards LLC (Wyoming) co-owns Fight Fight Fight LLC alongside CIC Digital LLC. Receives trading fee revenue from TRUMP token. Registered agent Cloud Peak Law LLC (Sheridan WY), known for anonymous shell formation."
-          },
-          {
-            "target": "Bill Zanker",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Zanker is the authorized person on Fight Fight Fight LLCs Delaware filing and leads the company. He conceived and promoted Trumps NFT and crypto ventures, organized the May 2025 top-holder dinner, and attempted the Official Trump Wallet launch with Magic Eden."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-01-17",
-        "label": "TRUMP MEME COIN LAUNCH TIMING: TRUMP token launched Jan 17, 2025 \u2014 exactly 3 days before inauguration (Jan 20). Token hit market cap of ~73B within 48 hours before crashing. MELANIA token launched Jan 18, further diluting TRUMP holders. By launch, CIC Digital LLC and Fight Fight Fight LLC held 800M of 1B tokens (80%). Per Canary TRUMP Coin ETF S-1/A (SEC Registration 333-289857), Fight Fight Fight LLC is owned by CIC Digital LLC and Celebration Cards LLC. The 6 insider wallet groups have staggered 3-month unlock schedules, with first unlock Apr 18, 2025. All trading fees flow to CIC Digital and Celebration Cards. The pre-inauguration timing ensured maximum speculative demand before presidential power was assumed.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 3732
-      },
-      {
-        "date": "2025-05-22",
-        "label": "TRUMP MEME COIN GALA: Trump hosted black-tie dinner May 22, 2025 at Virginia golf club for top 220 TRUMP token holders who spent combined 148M. Top holder was Justin Sun (Chinese crypto mogul facing SEC fraud charges that were PAUSED citing public interest). 19 of top 25 holders likely foreign nationals per Bloomberg. 35 House Democrats demanded DOJ investigation for potential bribery and foreign emoluments violations. Trump family earned 320M+ in trading fees since Jan launch. 764,000 wallets of small holders lost money. GD Culture Group (Chinese ties) announced 300M TRUMP purchase after Trump signaled TikTok ban delay.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 3740
-      }
     ]
   }
 }

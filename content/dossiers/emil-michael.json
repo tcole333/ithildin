@@ -8,19 +8,20 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.636822",
-  "last_updated": "2026-03-10T00:46:07",
+  "generated_at": "2026-05-07T23:07:35.923742",
+  "last_updated": "2026-03-23T16:55:10",
   "stats": {
-    "total_findings": 102,
-    "total_connections": 27,
+    "total_findings": 118,
+    "total_connections": 30,
     "total_entities": 0,
     "finding_types": {
       "identity": 5,
+      "document": 9,
       "relationship": 9,
-      "legal": 20,
-      "financial": 52,
-      "intelligence": 7,
-      "document": 7,
+      "legal": 22,
+      "financial": 62,
+      "intelligence": 8,
+      "background": 1,
       "location": 1,
       "communication": 1
     },
@@ -28,11 +29,11 @@
       "social": 1,
       "advisory": 4,
       "employment": 3,
-      "financial": 8,
-      "political": 7,
+      "financial": 10,
+      "political": 8,
       "corporate": 4
     },
-    "last_updated": "2026-03-10T00:46:07"
+    "last_updated": "2026-03-23T16:55:10"
   },
   "findings": [
     {
@@ -66,6 +67,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "White House archives 2009-2010 WHF class",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4630,
+      "finding_type": "document",
+      "summary": "EFTA02698238 connects Emil Michael to AliphCom/Jawbone voting agreement alongside SK Casablanca LLC and Kenneth A. Fox",
+      "detail": "DOJ EFTA document EFTA02698238 (34 pages) is a Fourth Amended and Restated Voting Agreement for AliphCom (Jawbone wearables company), dated June 16, 2011. Document lists Emil Michael (1504 Bay Road #2402, Miami Beach, FL 33139) as an investor alongside SK Casablanca LLC (120 Tamarack Dr, Hillsborough, CA 94010) and Kenneth A. Fox (70 E. 55th Street, Floor 11, New York, NY 10022). Fox is co-founder of Internet Capital Group and Stripes Group. Also lists Stanford Management Company (SEVF II) and Antonio Soler (London). The document connects Michael to Silicon Valley investment circles pre-Uber era. AliphCom/Jawbone later went into liquidation in 2017 after raising 900M.",
+      "source_datasets": [
+        "efta"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-06-16",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 18:30:43",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02698238",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -177,6 +203,31 @@
       ]
     },
     {
+      "id": 4999,
+      "finding_type": "legal",
+      "summary": "DOE v. Uber Technologies (3:17-cv-03470, N.D. Cal.) \u2014 Michael named as defendant alongside Kalanick and Eric Alexander in Jane Doe personal injury lawsuit",
+      "detail": "Filed 2017-06-15, terminated 2018-02-05. Jane Doe filed a personal injury (diversity jurisdiction) lawsuit against Uber Technologies Inc., Travis Kalanick, Emil Michael, and Eric Alexander. Judge Susan Yvonne Illston, N.D. California. This is the case arising from Uber executive Eric Alexander obtaining the medical records of an Indian rape victim and sharing them with Kalanick and Michael. The rapid termination (8 months) suggests settlement. Represented by Wigdor LLP (plaintiff), Latham & Watkins and Orrick Herrington (defense).",
+      "source_datasets": [
+        "courtlistener,govinfo"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2017-06-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:48:47",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket ID 6074925; GovInfo USCOURTS-cand-3_17-cv-03470",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4537,
       "finding_type": "financial",
       "summary": "Coatue Management senior advisor since Oct 2017 \u2014 hedge fund with broad defense-adjacent tech portfolio creates conflict surface across dozens of companies as USD(R&E)",
@@ -214,6 +265,113 @@
       ]
     },
     {
+      "id": 4976,
+      "finding_type": "financial",
+      "summary": "Emil Michael manages Nomadic Ventures LLC (FL L18000104420), formed 2018-04-25, active, at 1511 W 27th Street, Miami Beach FL 33140 (Sunset Island #2). EIN: 82-5384431.",
+      "detail": "Florida domestic LLC registered at Emil Michael's residential address. Michael listed as sole MGR. Entity formed after departure from Uber (2017).",
+      "source_datasets": [
+        "FL SunBiz"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:19",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL SunBiz record L18000104420",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4983,
+      "finding_type": "financial",
+      "summary": "FEC records show Emil Michael's full political donation history via M8 Enterprises LLC (2020-2024): Maria Elvira Salazar (FL-27, $14,200 total), Brady Duke (FL-09, $500), David Perdue GA-Sen ($2,800), Francis Suarez pres campaign ($3,300), SOS America PAC ($10,000), Trump MAGA Inc ($1,000,000).",
+      "detail": "All donations consistently Republican. Earliest: 2020-06-25 Salazar for Congress $5,600. Pattern shows growing engagement: Salazar district rep support starting 2020, escalating to $1M Super PAC in Feb 2024. Total identifiable FEC contributions via M8 Enterprises: approximately $1,037,900.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-06-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:44",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC filings employer search M8 Enterprises",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4977,
+      "finding_type": "financial",
+      "summary": "Emil Michael manages M10 Enterprises LLC (FL L20000327803), formed 2020-10-23, active, at 1511 West 27th Street, Miami Beach FL 33140. No EIN listed.",
+      "detail": "Florida domestic LLC at same Sunset Island address as Nomadic Ventures. Michael listed as sole MGR. Purpose unknown. Naming convention (M8, M10) suggests a series of personal holding entities.",
+      "source_datasets": [
+        "FL SunBiz"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-10-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:22",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL SunBiz record L20000327803",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5007,
+      "finding_type": "financial",
+      "summary": "DPCM Capital Inc (CIK 0001821742) SEC filings confirm SPAC entity and D-Wave Quantum merger \u2014 992 EDGAR filings",
+      "detail": "SEC EDGAR full-text search for 'DPCM Capital' returns 992 filings. Top result is a Form 425 (merger communication) dated 2022-07-21 listing both DPCM Capital Inc (CIK 0001821742) and D-Wave Quantum Inc (CIK 0001907982, tickers QBTS/QBTS-WT). DPCM Capital incorporated in Delaware, business location Miami FL. D-Wave Quantum incorporated in Delaware, business location New York NY. SIC codes: 6770 (Blank Checks) for DPCM, 7374 (Computer Processing and Data Preparation) for D-Wave.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-07-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:49:50",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1907982",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4531,
       "finding_type": "financial",
       "summary": "DPCM Capital SPAC merged with D-Wave Quantum (Aug 2022); Michael sat on D-Wave board until Oct 2024, then as USD(R&E) designated quantum computing as Pentagon priority with $250M earmarked",
@@ -236,14 +394,14 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001821742",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001828144",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1828144",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -266,7 +424,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC Form 4, CDPM Sponsor Group, Aug 5 2022; SEC Form 4, Emil Michael, Jun 2024; D-Wave 10-K Feb 26 2026 CIK 0001907982",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1907982",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -304,6 +462,165 @@
       ]
     },
     {
+      "id": 4981,
+      "finding_type": "financial",
+      "summary": "FEC records show Emil Michael made $1,000,000 donation to Make America Great Again Inc (Trump Super PAC) on 2024-02-28 via M8 Enterprises LLC, Miami Beach FL.",
+      "detail": "This is the largest single political donation identified. Made through M8 Enterprises LLC. Additional 2024 donations: $6,600 to Salazar Victory Committee (2024-03-14), $6,600 to Salazar for Congress (2024-03-19). All contributions from Miami Beach address.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-02-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:37",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4972,
+      "finding_type": "financial",
+      "summary": "D-Wave board director compensation 2023: Emil Michael received ,250 cash retainer + ,000 in RSUs (75,675 RSUs vesting May 31, 2024) for total 2023 compensation of ,250. Annual program: ,000 base retainer + committee fees + ,000 annual RSU grant. Michael served on Nominating & Governance Committee.",
+      "detail": "Non-employee director comp program per DEF 14A: ,000 annual cash retainer; committee members get additional ,000 annual retainer per committee. Michael was on Nominating & Governance Committee (chaired by Steven West). He was NOT on Compensation Committee or Audit Committee. Annual RSU grant of ,000 vests after ~1 year. Oct 27, 2022: granted 29,021 RSUs (vested at 2023 annual meeting). Jun 28, 2023: granted 75,675 RSUs (vested May 31, 2024). Jun 6, 2024: granted 106,626 RSUs (scheduled to vest May 31, 2025 \u2014 but Michael resigned Oct 28, 2024). Board max for non-employee directors: ,000/year.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-05-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:50",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC Filing DEF 14A 04/23/2024 CIK:0001907982",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5860,
+      "finding_type": "financial",
+      "summary": "DPCM Capital SPAC merged with D-Wave Quantum (Aug 2022); Michael resigned D-Wave board Oct 2024 before Pentagon nomination",
+      "detail": "Michael founded DPCM Capital Inc (blank-check SPAC, $250M IPO Oct 2020, NYSE: XPOA). DPCM merged with D-Wave Systems Aug 5, 2022 creating D-Wave Quantum Inc (NYSE: QBTS). Michael joined D-Wave board as part of deal. DPCM Capital registered in FL as foreign profit corp (EIN 850525645), principal address 2650 E. Bayshore Rd, Palo Alto, CA. Michael sold 111,938 D-Wave shares (insider sale June 4, 2024). Resigned D-Wave board October 28, 2024, ahead of Pentagon nomination (December 2024). D-Wave has defense/quantum computing applications.",
+      "source_datasets": [
+        "edgar",
+        "fl_sunbiz",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-06-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:53:42",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4990,
+      "finding_type": "relationship",
+      "summary": "Michael's D-Wave board committee role: Nominating & Governance Committee member (with Steven West as chair and Philip Smalley III). Not on Compensation or Audit committees. Board determined Michael was independent under NYSE listing standards. He was elected Class II director for term expiring at 2027 annual meeting, but resigned Oct 28, 2024.",
+      "detail": "Per 2024 DEF 14A: Board had 8 members in staggered classes. Michael's Class II term (2024-2027) was confirmed at June 6, 2024 annual meeting. Other Class II directors: Amy Cappellanti-Wolf, Philip Adam Smalley III. Board also included Kirstjen Nielsen (former DHS Secretary, Class III). Board independence determination: 'our Board of Directors has determined that Roger Biscay, Amy Cappellanti-Wolf, Ziv Ehrenfeld, Emil Michael, Kirstjen Nielsen, Philip Adam Smalley III, and Steven M. West do not have any relationships that would interfere with the exercise of independent judgment'",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-06-06",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:47:20",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC Filing DEF 14A 04/23/2024 CIK:0001907982",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4956,
+      "finding_type": "financial",
+      "summary": "No SEC Form 4/5 filed after Dec 2024 nomination \u2014 last D-Wave filing June 14, 2024 showing warrant disposition",
+      "detail": "Emil Michael's last SEC filing for D-Wave (QBTS) was June 14, 2024 \u2014 a Form 4 reporting sale of 2,424,648 warrants (strike price 11.50, exercisable for 1.4541326 shares each). His CIK is 0001828144. He was nominated Dec 2024 and confirmed May 2025 as USD(R&E). If he divested his remaining ~887K QBTS common shares before or upon confirmation, a Form 4 would be required within 2 business days. No such filing exists. Two possible explanations: (1) He has NOT divested D-Wave shares, retaining financial interest in a company seeking DoD quantum computing contracts; or (2) Shares were transferred in a manner not triggering Form 4 (e.g., gift, private transfer) or the filing is delinquent. His most recent Form 144 (intent to sell) was May 31, 2024. D-Wave formed a US government business unit in Dec 2025, explicitly targeting DoD contracts.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-06-14",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:43:54",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1828144",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form 4 June 14 2024 for D-Wave",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6985,
+      "finding_type": "financial",
+      "summary": "SEC 8-K establishes precise resignation timeline: Oct 25 notice given, Oct 28 effective, Oct 30 8-K filed \u2014 3 business days before Oct 31 Tradewinds announcement. Tradewinds monthly collection/evaluation cycle means D-Wave submitted Sep 2024 while Michael was director.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:52:47",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001907982-24-000129",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4550,
       "finding_type": "intelligence",
       "summary": "Michael resigned from D-Wave board Oct 28, 2024 \u2014 three days before D-Wave's Tradewinds DoD Awardable announcement on Oct 31, 2024",
@@ -320,6 +637,88 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "D-Wave press release Oct 31 2024 Tradewinds Awardable; MarketScreener board changes report Oct 2024; Trump nomination announcement Jan 20 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6996,
+      "finding_type": "financial",
+      "summary": "No SEC Form 4 filings by Michael after Oct 28, 2024 board resignation. Last Form 4 was June 2024 showing 887,138 shares retained. Certificate of divestiture OGE-2025-297 indicates shares were divested before taking office May 2025, but no public record of when or at what price the 887K shares were sold between Oct 2024 and May 2025.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-28",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:04",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=EDGAR-EFTS-search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6994,
+      "finding_type": "financial",
+      "summary": "D-Wave Government Inc. has one DOD contract on record (N6600116P7457, Navy, $40K, May 2016 for training). However, D-Wave obtained 'Awardable' vendor status on DOD's CDAO Tradewinds Solutions Marketplace in October 2024 per D-Wave press release and Sen. Warren's letter. The CDAO reports to OUSD(R&E) for TAI&A (Trusted AI & Autonomy) critical technology area per Michael's own SASC testimony. Michael's 278e shows: D-Wave Board Member 8/2022-10/2024, D-Wave Quantum board fees $39,000, 75,675 vested restricted stock units (capital gains $15K-$50K), and the D-Wave/M8 Enterprises relationship terminated per Section 3 #4 ('No ongoing relationship or holdings or economics as of the date of filing,' 8/2022). Michael appears to have liquidated D-Wave holdings by June 2024 (per earlier finding #4966), and certificate of divestiture OGE-2025-297 may cover remaining positions.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:53:41",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending N6600116P7457, DocumentCloud:25971448",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7001,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL ANALYSIS: Falsification test result \u2014 the Tradewinds application was NOT filed months before resignation (falsification threshold). Based on Tradewinds monthly collection/evaluation cycle, D-Wave submitted its pitch video during the Sep 2024 collection period (Sep 1-30) while Michael was still a board director. Application preparation with Clipper Defense began weeks/months earlier. Michael gave resignation notice Oct 25, effective Oct 28. Tradewinds result announced Oct 31. The 3-day gap between resignation and announcement is NOT the meaningful temporal signal \u2014 the real signal is that D-Wave initiated and completed its DoD marketplace application entirely while Michael was a sitting board director and prospective Trump administration nominee (M MAGA donation Feb 2024).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:55:10",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001907982-24-000132",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001907982-24-000129",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -357,6 +756,371 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Warren letter March 2, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5003,
+      "finding_type": "legal",
+      "summary": "Senate confirmation timeline: nominated 2025-01-20, SASC committee hearing 2025-03-27, committee report 2025-04-08, cloture 2025-05-12/14, confirmed 2025-05-14",
+      "detail": "GovInfo Congressional Record entries document the full confirmation timeline for Emil Michael as USD(R&E): CPD-202500107 shows sub-cabinet nomination submitted 2025-01-20. CREC 2025-03-26/27 shows SASC committee meeting scheduled. CREC 2025-04-08 shows Executive Reports of Committee (SASC reported favorably). CREC 2025-05-12 shows cloture motion filed and Executive Calendar. CREC 2025-05-14 shows cloture vote, Executive Calendar vote, and confirmation. This approximately 4-month confirmation process is notable given his Holder Report history.",
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-01-20",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:49:11",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CREC-2025-05-14 (confirmations); CPD-202500107 (nomination); CREC-2025-04-08 (committee report)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6972,
+      "finding_type": "financial",
+      "summary": "OGE 278e (56 pages, DocumentCloud 25971448) discloses 43 positions held outside government, 182+ assets/income sources, 41 employment agreements, and 10 liabilities. Key defense-relevant holdings: Collaborative Robotics (board member + K-K vested, K-K unvested stock), Perplexity (board member + M-M vested, M-M unvested stock), Crossroads AI (consultant + K-K vested incentive units), CounselAI (K-K vested, K-M unvested options). Also holds Uber stock (M-M in Family Trust #3, over M in brokerage, M-M in trust #168.5), Belgard Capital Fund LLC (M-M), Bond Capital (M-M vested anticipated profit interests), Sequoia Capital funds (7 funds, K-K each), and K-K in Solana cryptocurrency.",
+      "detail": null,
+      "source_datasets": [
+        "web",
+        "oge"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:50:46",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6981,
+      "finding_type": "financial",
+      "summary": "278e Section 3 reveals Michael's employment arrangements with 41 companies contain a repeated structural pattern: for companies where Michael holds both vested and unvested equity (Perplexity, Collaborative Robotics, 1Money, Zima International, Campus Group, Ankorstore), the agreements state that unvested portions 'must accelerate them before I assume the duties of the position of Under Secretary or I will forfeit them.' This creates a pre-confirmation financial windfall incentive \u2014 companies must either accelerate Michael's equity before he takes office or lose the advisory relationship incentive structure. Companies that accelerate give Michael additional vested equity he then retains while overseeing their potential defense contracts. The Perplexity arrangement (3/2024) is most notable: both vested and unvested stock, plus a 208(b)(1) waiver pathway explicitly contemplated.",
+      "detail": null,
+      "source_datasets": [
+        "oge"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:52:33",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448 Section 3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6995,
+      "finding_type": "financial",
+      "summary": "278e reveals massive retained Uber position despite serving as Pentagon CTO: item 177.1 shows Uber (UBER) stock in brokerage account valued OVER $50,000,000 with capital gains OVER $5,000,000. Additional Uber holdings: Family Trust #3 item 164.1 ($5M-$25M), Trust #168.5 ($1M-$5M), item 163.10 ($1K-$15K), and open short call options on Uber (item 174.1, strike $65, exp 06/2025, 4,998 contracts, premium income $6,488,254). Total Uber exposure estimated at $56M-$80M+. The short call position suggests active options writing strategy on his largest holding. Uber had Maxwell AFB ride services agreement Dec 2024 per Warren letter. M8 Enterprises (Michael's LLC) will 'stop providing advisory services upon confirmation' but 'continue to manage the assets this company holds' per Section 3 #1.",
+      "detail": null,
+      "source_datasets": [
+        "oge"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:01",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6999,
+      "finding_type": "financial",
+      "summary": "278e Section 6 discloses Michael holds LP interests in venture/private equity funds with EIF=Yes (Excepted Investment Fund) status that would normally screen him from individual portfolio company conflicts: Sequoia Capital funds (items 93-99, 7 funds totaling est. $400K-$1.6M), Benchmark Founders funds (items 112-114, 3 funds totaling $150K-$450K), Future Ventures L.P. (item 85, $100K-$250K), 1984 Ventures Fund I ($250K-$500K), Craft Ventures I ($100K-$250K), Bling Capital funds (items 100-102, $150K-$300K), and Belgard Capital Fund LLC (item 161.1, $25M-$50M \u2014 the single largest disclosed asset). EIF status means Michael is NOT required to recuse from matters affecting individual portfolio companies within these funds \u2014 even if those funds hold Anduril, Palantir, Shield AI, or other defense tech positions. The EIF exemption under 5 CFR 2640.201(a) is the key structural loophole: it allows him to participate in decisions affecting defense contractors in which he has indirect financial exposure through fund investments.",
+      "detail": null,
+      "source_datasets": [
+        "oge"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:21",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448 Section 6",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6991,
+      "finding_type": "financial",
+      "summary": "DIRECT CONFLICT IDENTIFIED: Collaborative Robotics Inc., where Michael is board member (since 12/2022) with $250K-$500K vested common stock and $100K-$250K unvested common stock, received SBIR Phase I contract W5170125C0100 from Army on 2025-02-03 for $249,205 \u2014 'Explosion Proof Collaborative Robots' (Topic A244-059). Contract period 2/2025-8/2025. Michael was nominated 2025-01-20, confirmed 2025-05-14. The contract was awarded DURING the confirmation period. Michael's 278e Section 3 #13 states he 'holds vested and unvested stock' in Collaborative Robotics with a repurchase/retention structure. As USD(R&E) he oversees SBIR program policy and the Army's S&T enterprise. SBIR Phase I leads to Phase II and Phase III (production contracts) \u2014 decisions in which Michael has direct 'authority, direction, and control.' This is the most concrete conflict overlap identified.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-02-03",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:53:23",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending W5170125C0100",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4680,
+      "finding_type": "legal",
+      "summary": "Warren's March 2, 2025 letter demanded four specific ethics commitments from Michael \u2014 4-year recusal from former clients/employers, 4-year post-government lobbying restriction, divestiture from conflicted holdings, specific company disclosures \u2014 with March 10 deadline. No public record of Michael's response exists.",
+      "detail": "Sen. Elizabeth Warren wrote to Michael on March 2, 2025 demanding he match ethics commitments made by predecessors (Lloyd Austin, Frank Kendall, Heidi Shyu). The four specific asks: (1) Recuse from all particular matters involving former clients and employers for 4 years; (2) Four-year post-government restriction on seeking compensation from companies overseen during DoD tenure; (3) Commitment to not lobby DoD after leaving department; (4) Disclose specific companies from which he will recuse. Warren specifically cited DPCM Capital's acquisition of D-Wave, noting D-Wave was 'seeking a DoD contract for quantum computing services.' The response deadline was March 10, 2025. Michael was confirmed 54-43 on May 14, 2025. No public record of his response to Warren's letter has been located. His APQ ethics responses (p.2) contain only statutory boilerplate with no company-specific commitments.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-02",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:33:33",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.warren.senate.gov/newsroom/press-releases/warren-presses-defense-research-and-engineering-nominee-to-address-conflicts-of-interest-questions-incidents-of-attacks-on-journalists-and-public-accountability",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5038,
+      "finding_type": "legal",
+      "summary": "Warren letter demands 4-year recusal, divestiture, no-lobbying pledge - no public response found",
+      "detail": "Sen. Warren (D-MA) sent 5-page letter dated March 2, 2025 demanding: (1) 4-year recusal from all particular matters involving former clients/employers, (2) divestiture from holdings impacted by DoD contracts, (3) commitment not to lobby DoD for 4 years after leaving, (4) commitment not to seek employment from regulated companies for 4 years. Letter posed 9 specific questions with March 10, 2025 deadline. Warren identified conflicts: DPCM Capital SPAC acquired D-Wave which obtained DoD Awardable status Oct 2024, Uber ride services on military bases (Maxwell AFB Dec 2024), TellmeNetworks as potential military contractor. No public response from Michael found. Confirmed 54-43 on May 14, 2025 without addressing these demands publicly.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:15:50",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "warren.senate.gov/imo/media/doc/final_-_warren_letter_to_emil_michael_on_ethics_commitment.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6980,
+      "finding_type": "legal",
+      "summary": "Sen. Warren letter (March 2, 2025) specifically flagged 3 conflicts: (1) D-Wave obtained 'Awardable' vendor status on DOD CDAO Tradewinds marketplace Oct 2024, while Michael led DPCM Capital which merged D-Wave public; (2) Uber struck Maxwell AFB ride services agreement Dec 2024; (3) TellmeNetworks (Michael's former company, acquired by Microsoft) became military contractor. Warren asked 9 specific questions including whether Michael would commit to 4-year recusal from former clients/employers, 4-year post-employment lobbying ban, and 4-year revolving-door ban. No public record of Michael's written response to this letter. Warren also noted predecessor Heidi Shyu 'voluntarily agreed to recuse from her former employers specific-party matters for four years \u2014 going beyond the two-year recusal requirement in former President Biden ethics pledge.'",
+      "detail": null,
+      "source_datasets": [
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:52:08",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "warren.senate.gov letter March 2 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6989,
+      "finding_type": "document",
+      "summary": "Warren letter (Mar 2, 2025) explicitly connects D-Wave Tradewinds status to Michael's DPCM Capital SPAC: 'You now lead DPCM Capital, Inc., a SPAC that acquired the quantum computing company D-Wave Systems. In October 2024, D-Wave obtained Awardable status on a marketplace that fast-tracks companies to become DoD contractors.' Requested 4-year recusal from former employer matters.",
+      "detail": null,
+      "source_datasets": [
+        "warren_senate"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-02",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:53:05",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "warren-letter-2025-03-02",
+          "source_quote": "You now lead DPCM Capital, Inc., a special purpose acquisition company (SPAC) that acquired the quantum computing company D-Wave Systems. In October 2024, D-Wave obtained Awardable status on a marketplace that fast-tracks companies to become DoD contractors.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4957,
+      "finding_type": "document",
+      "summary": "No public ethics agreement found on OGE PAS index despite Warren demanding specific commitments with March 10, 2025 deadline",
+      "detail": "Senator Warren's March 2, 2025 letter demanded four specific ethics commitments from Michael: (1) 4-year recusal from matters involving former clients/employers, (2) 4-year post-government lobbying restriction, (3) divestiture from conflicted holdings, (4) company-specific disclosure. Deadline was March 10, 2025. Predecessor Heidi Shyu had a public ethics agreement with 4-year recusal. SASC APQ responses confirm Michael gave only bare-minimum ethics commitments \u2014 comply with 18 USC 208 (general conflict statute) with no specific divestiture list, no company-specific recusal. Trump rescinded Biden ethics EO 13989 on Inauguration Day (Jan 20, 2025) with no replacement \u2014 first time since 1989 no admin ethics pledge exists. The OGE PAS index, which hosts ethics agreements for other DoD officials (e.g., Justin Overbaugh DUSD(I&S), Pedro Allende), contains no entry for Michael.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-10",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:44:07",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OGE PAS Index search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SASC APQ responses",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Warren letter March 2 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5010,
+      "finding_type": "financial",
+      "summary": "Warren letter (Mar 2 2025) flagged DPCM Capital/D-Wave, Uber, Coatue as conflicts; demanded 4-year recusal from former clients, 4-year post-employment lobbying ban, and divestiture of DoD-impacted holdings",
+      "detail": "Sen. Warren's 5-page letter identified: (1) DPCM Capital SPAC acquired D-Wave, which obtained Awardable vendor status Oct 2024; (2) Uber has Maxwell AFB ride contract; (3) TellmeNetworks (sold to Microsoft) could seek military speech-recognition contracts. Letter posed 9 questions demanding commitments by March 10, 2025. Cited precedent of Heidi Shyu's 4-year recusal.",
+      "source_datasets": [
+        "warren_senate_gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:50:28",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.warren.senate.gov/imo/media/doc/final_-_warren_letter_to_emil_michael_on_ethics_commitment.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6974,
+      "finding_type": "legal",
+      "summary": "Michael's SASC APQ responses reveal he committed only to the statutory minimum recusal under 18 U.S.C. 208, stating 'I will comply with all recusal requirements under 18 U.S.C. \u00a7 208' \u2014 declining to voluntarily adopt the broader 4-year recusal from former clients/employers that Sen. Warren requested and that his predecessor Heidi Shyu voluntarily adopted. The 278e ethics agreement (Section 3) shows he will RETAIN vested stock/options in most portfolio companies, with unvested portions subject to acceleration-or-forfeit clauses if companies don't accelerate before he assumes duties. Critically, Perplexity agreement states: he will not participate in any particular matter that has a direct and predictable effect on his financial interests unless he first obtains a written waiver pursuant to 18 U.S.C. 208(b)(1).",
+      "detail": null,
+      "source_datasets": [
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:06",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6977,
+      "finding_type": "background",
+      "summary": "USD(R&E) role has direct authority/oversight over: DARPA, DIU (Defense Innovation Unit), Office of Strategic Capital (OSC), Missile Defense Agency (MDA), Space Development Agency (SDA), Test Resource Management Center, Defense Technical Information Center, Defense Science Board, and all 10 FFRDCs. Michael confirmed DARPA is 'under the authority, direction, and control of the USD(R&E).' He also serves as statutory advisor to the Joint Requirements Oversight Council (JROC) and chairs the Missile Defense Executive Board. OSC, which 'develops and implements strategies and partnerships to accelerate and scale private investment in critical technologies,' is a direct report \u2014 creating a structural overlap between his venture investment background and the office tasked with leveraging private capital markets for defense.",
+      "detail": null,
+      "source_datasets": [
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:25",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SASC APQ responses, armed-services.senate.gov",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -408,6 +1172,196 @@
       ]
     },
     {
+      "id": 4597,
+      "finding_type": "intelligence",
+      "summary": "Emil Michael confirmed as USD(R&E) May 14, 2025, sworn in May 20, 2025. Nominated Inauguration Day Jan 2025. Pentagon CTO role: primary advisor to SecDef on tech development, prototyping, testing. Trimmed critical technology areas from 14 to 6 priorities. Previously: Uber SVP (helped raise $3B), DPCM Capital CEO (SPAC merged D-Wave public at $1.2B in Aug 2022), Coatue Management senior advisor (Oct 2018-present). D-Wave investor base includes In-Q-Tel (CIA VC fund). D-Wave Government Inc created for federal contracts.",
+      "detail": null,
+      "source_datasets": [
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-14",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 17:00:46",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DefenseScoop 2025-05-14, BreakingDefense 2025-05-14, DWave SEC filings, Congress.gov PN12-31",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4625,
+      "finding_type": "financial",
+      "summary": "Emil Michael confirmed as USD(R&E) with extensive tech investment portfolio creating potential defense conflicts",
+      "detail": "Emil Michael (CIK 0001828144) confirmed 54-43 as Under Secretary of Defense for R&E on May 14, 2025. Previously CEO/Chairman of DPCM Capital (CIK 0001821742), a SPAC that raised $300M and merged with D-Wave Quantum (QBTS). Michael resigned from D-Wave board Oct 28, 2024 before confirmation. Personal investment portfolio includes SpaceX, Brex, Revolut, GoPuff, Stripe, Coinbase, and 50+ tech companies through M8 Enterprises LLC. Now oversees DARPA, defense labs, R&D for hypersonics, AI, biotech, quantum, directed energy. Also became acting DIU director Aug 2025. Stated goal: create 'five more Andurils and Palantirs and SpaceXs.' Senator Warren requested 4-year recusal from former client matters.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 18:30:15",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1828144",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4713,
+      "finding_type": "intelligence",
+      "summary": "Emil Michael as USD(R&E) technology gatekeeper: Confirmed May 14, 2025, sworn in May 20. Trimmed critical technology areas from 14 to 6: Applied AI, Scaled Hypersonics, Scaled Directed Energy, Biomanufacturing, Contested Logistics, Battlefield Information Dominance. Now oversees DIU + CDAO + OSC after Pentagon consolidation. Publicly champions 'new primes' (Palantir, SpaceX, Anduril) \u2014 stated Pentagon should ensure companies 'don't have to sue the government to get your first big contract.' Led Anthropic standoff: called CEO 'liar' with 'God complex,' resulting in unprecedented 'supply-chain risk' designation and federal ban. OpenAI replacement deal followed within hours. Previous Coatue advisory role creates conflict surface across $40B tech portfolio.",
+      "detail": "Michael's 6 critical technology areas and portfolio company alignment:\n\n1. APPLIED AI -> Benefits: Palantir (AI platform), Anduril (Lattice AI), Shield AI (autonomous flight), OpenAI (replacement for banned Anthropic)\n2. SCALED HYPERSONICS -> Benefits: Varda Space Industries (FF portfolio, hypersonic materials testbed)\n3. SCALED DIRECTED ENERGY -> Benefits: Multiple defense tech startups in a16z/FF portfolios\n4. BIOMANUFACTURING -> Benefits: Various biotech startups across VC portfolios\n5. CONTESTED LOGISTICS -> Benefits: SpaceX (Starlink), Anduril (autonomous logistics)\n6. BATTLEFIELD INFORMATION DOMINANCE -> Benefits: Palantir (data fusion), Anduril (Lattice/TITAN), Shield AI (autonomous ISR)\n\nThe consolidation of DIU, CDAO, and OSC under Michael's USD(R&E) office is structurally significant: it means one appointee with extensive VC/tech industry relationships now controls the three primary mechanisms for channeling Pentagon resources to startups:\n- DIU: Rapid prototyping contracts (bypasses traditional procurement)\n- CDAO: AI/digital technology procurement\n- OSC: Government loans to defense startups ($984M authorized)\n\nAnthropic case as enforcement mechanism:\nMichael's attack on Anthropic sends a signal to the entire AI industry: companies that refuse to remove safety guardrails for military use face existential regulatory retaliation. The 'supply-chain risk' designation (normally used for adversary-nation companies like Huawei/ZTE) was unprecedented for a US company. This creates a chilling effect that benefits companies willing to cooperate (OpenAI, Palantir) at the expense of those with ethical constraints.\n\nWarren recusal request: Senator Warren asked Michael to commit to recusing from matters involving former clients and employers for four years. This would encompass Coatue Management and potentially its portfolio companies. The scope of required recusals would be enormous given Michael's extensive tech industry relationships.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-14",
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:37:25",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "GovConWire (6 tech priorities), DefenseScoop (Anthropic dispute), GovCIO Media (DIU/CDAO consolidation), Warren.senate.gov (recusal request), Sourcery.vc (DoW interview)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4955,
+      "finding_type": "document",
+      "summary": "OGE 278e financial disclosure for Emil Michael IS available via ProPublica (DocumentCloud ID 25971448, disclosure_documents record 1906). Ethics agreement, 3 278-T transaction reports (Jun/Aug/Oct 2025), 4 OGE waivers (2025-116 through 119), and certificate of divestiture (OGE-2025-297) also on file. Net worth: $120M-$277M. Not indexed in OGE's own public search tool but captured by ProPublica API ingest.",
+      "detail": "Searched OGE public financial disclosure database (extapps2.oge.gov/201/Presiden.nsf/PAS+Index) for Emil Michael. No 278e nominee report, annual report, or ethics agreement found. Other Trump administration PAS officials confirmed around same period have their 278e filings publicly available (Rubio, Pulte, Ueland, Kennedy). Michael was confirmed May 14, 2025 as USD(R&E) in 54-43 vote. Under 5 CFR 2634, PAS officials must file OGE 278e within 30 days of nomination and the report must be made available for public inspection. The absence of this document 10 months post-confirmation is notable and may indicate either: (1) delayed processing by OGE, (2) an exemption/waiver, or (3) non-compliance.",
+      "source_datasets": [
+        "web",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-14",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:43:43",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov PN12-31: confirmation May 14, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OGE PAS Index search: no results for Emil Michael",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4978,
+      "finding_type": "financial",
+      "summary": "CRITICAL GAP: No SEC filings from Emil Michael after Jul 12, 2024. Last filing was a Rent the Runway RSU grant (Form 4, Jul 11 2024 transaction). No D-Wave Form 4/Form 5 filed reflecting disposition of 887,138 shares or 106,626 RSUs between his board resignation (Oct 28, 2024) and USD(R&E) confirmation (May 14, 2025). Either shares were not disposed of, or there is a missing filing.",
+      "detail": "Timeline of concern: Oct 28, 2024 - Resigned D-Wave board. Jan 2025 - Nominated as USD(R&E). May 14, 2025 - Confirmed by Senate. As of last Form 4 (Jun 4, 2024), Michael held 887,138 common shares directly + 106,626 RSUs (scheduled to vest May 31, 2025, but he resigned before vesting). He had 0 warrants remaining (all sold Jun 2024). If the 106,626 RSUs were forfeited upon resignation (Oct 28), he would hold only 887,138 shares. No Form 5 (annual statement) was filed for the period ending Dec 31, 2024. A Senate ethics agreement or OGE 278 filing would be needed to confirm divestiture status.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-14",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:26",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC EDGAR full filing history CIK:0001828144 - 19 total filings, last dated 07/12/2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5012,
+      "finding_type": "legal",
+      "summary": "Senate confirmed Michael 54-43 on May 14 2025; 3 Democrats crossed over (Gallego-AZ, Warner-VA, King-ME); sworn in May 20 2025",
+      "detail": "Full vote breakdown: 51 Republicans + 3 Democrats/Independents = 54 Yea. 40 Democrats = 43 Nay. Not voting: Gillibrand (D-NY), Graham (R-SC), Tuberville (R-AL). Gallego previously received campaign contribution from Michael (LittleSis: ,000 in 2014). SASC committee voted favorably by roll call April 8, 2025. Hearing held March 27, 2025 in SD-G50 Dirksen.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-05-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:50:56",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govtrack.us/congress/votes/119-2025/s254",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6992,
+      "finding_type": "document",
+      "summary": "Michael's 278e financial disclosure states D-Wave board member 8/2022-10/2024 with 'No ongoing relationship or holdings or economics as of the date of filing.' OGE certificate of divestiture OGE-2025-297 on file, plus 4 OGE waivers (2025-116 through 2025-119). Disclosure available via ProPublica DocumentCloud ID 25971448.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:53:23",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OGE:278e-Emil-Michael",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4533,
       "finding_type": "financial",
       "summary": "SpaceX investor/advisor creates conflict: SpaceX holds $5.9B Space Force contract; Michael as USD(R&E) oversees R&E pipeline feeding SpaceX's largest government customer",
@@ -438,6 +1392,132 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Fortune Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5015,
+      "finding_type": "financial",
+      "summary": "D-Wave share sales: sold 111,938 shares Jun 4 2024 retaining 887,138 shares; D-Wave obtained DoD Awardable vendor status Oct 2024 creating direct conflict; no public evidence of full divestiture before taking office May 2025",
+      "detail": "SEC Form 4 filing shows Michael sold 111,938 QBTS shares Jun 4 2024 but retained 887,138 shares. Four months later, D-Wave obtained Awardable status on DoD CDAO Tradewinds Solutions Marketplace (Oct 31 2024). Michael then nominated for USD(R&E) in Jan 2025 - the office that oversees CDAO. Warren letter specifically flagged this conflict. Michael left D-Wave board in Oct 2024. No SEC filing found showing full divestiture of remaining 887K shares before swearing in May 20 2025.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:51:35",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://finance.yahoo.com/news/insider-sale-director-emil-michael-070424932.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5857,
+      "finding_type": "relationship",
+      "summary": "Senate confirmed as USD(R&E) / Pentagon CTO May 2025 (54-43); sworn in May 20, 2025",
+      "detail": "Senate voted 54-43 to confirm Emil Michael as Undersecretary of Defense for Research and Engineering and Pentagon CTO. Nominated by Trump on Inauguration Day. Sworn in May 20, 2025. Prior: White House Fellow under Obama (2009-2011) serving as special assistant to Defense Secretary Robert Gates managing projects in Afghanistan, Iraq, Pakistan. Then Uber Chief Business Officer (2013-2017) under Travis Kalanick, raising nearly $15 billion including $3.5B from Saudi PIF.",
+      "source_datasets": [
+        "web_search",
+        "congress_gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-05-20",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:53:25",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "DefenseScoop 5/14/2025; Breaking Defense; Congress.gov PN12-31; cto.mil",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5000,
+      "finding_type": "legal",
+      "summary": "Michael confirmed as Politically Exposed Person (PEP) in OpenSanctions \u2014 listed in US Plum Book as USD(R&E)",
+      "detail": "OpenSanctions returns two PEP records for Emil Michael: (1) Wikidata Q18560065 \u2014 DOB 1972-09-19, born Egypt, Harvard/Stanford Law education, noted as 'Vice President of Business at Uber', country tag 'eg'. (2) US Plum Book entry: 'UNDER SECRETARY OF DEFENSE (RESEARCH AND ENGINEERING), OFFICE OF THE SECRETARY OF DEFENSE'. Both flagged role.pep. First seen in dataset 2025-05-27.",
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-05-27",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:48:57",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:ID",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5009,
+      "finding_type": "legal",
+      "summary": "AAU v. Department of Defense (1:25-cv-11740, D. Mass.) \u2014 universities suing DoD under Michael's USD(R&E) purview over research policy",
+      "detail": "Association of American Universities and major research institutions (MIT, Johns Hopkins, Brown, U of Washington, Arizona State, U of Pittsburgh, U of Maryland, ACE) filed suit against Department of Defense on 2025-06-16 in D. Massachusetts. Currently active with First Circuit appeal filed 2025-12-16. While Michael is not personally named as a defendant, as USD(R&E) he oversees the department's research and engineering portfolio that is the subject of this litigation. Related to broader DOGE-era federal research funding disputes \u2014 parallel suits against HHS and DOE by same plaintiffs.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-16",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:50:11",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 1:25-cv-11740; GovInfo USCOURTS-mad-1_25-cv-11740",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4979,
+      "finding_type": "financial",
+      "summary": "DPCM Capital, Inc. filed in FL as foreign profit corp (F25000005464), registered 2025-09-29, incorporated in DE. Officers: Alan Baratz (P), John Markovich (D), Trevor Lanting (D), Greg Golkov (DST). All at 2650 E. Bayshore Rd, Palo Alto. EIN: 850525645.",
+      "detail": "This appears to be a post-SPAC operating entity. Officers are all D-Wave executives: Baratz is CEO, Lanting is CTO. FL filing is 2025-09-29 which is after DPCM SPAC merged with D-Wave. Emil Michael not listed as officer on this entity.",
+      "source_datasets": [
+        "FL SunBiz"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-09-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:29",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL SunBiz record F25000005464",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -526,6 +1606,56 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "NPR Feb 27, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5859,
+      "finding_type": "intelligence",
+      "summary": "Leading Pentagon-Anthropic AI contract dispute; called CEO Amodei liar with God-complex",
+      "detail": "As USD(R&E), Michael leading negotiations on $200M Pentagon AI contract with Anthropic. Dispute centers on Anthropic refusing to remove restrictions on AI use for domestic mass surveillance and fully autonomous weapons. Michael publicly attacked Anthropic CEO Dario Amodei on X, calling him a liar with a God-complex. Trump directed federal agencies to stop using Anthropic tools. Defense Secretary Hegseth threatened to designate Anthropic a supply-chain risk to national security. Negotiations resumed March 5, 2026.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:53:32",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Fortune 2/27/2026; Axios 3/4/2026; The Hill; CBS News; CNBC 3/5/2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6978,
+      "finding_type": "financial",
+      "summary": "USASpending data shows Anduril Industries has $204M in DOD contracts (top 20 sampled: Army $9.1M, Navy $194.7M, primarily loitering munitions/ALTIUS, autonomous force protection, counter-intrusion systems). Palantir Technologies has $819M in DOD contracts (top 20 sampled: Army $816M, including Maven Smart System at $293M, CDAO MSS $228M, AI/ML programs). Both companies' contract portfolios fall squarely within USD(R&E) oversight areas: AI/autonomy (CDAO reports to OUSD(R&E) for TAI&A critical technology area), prototyping/experimentation (Anduril's SBIR Phase III contracts), and technology transition. Michael's 278e does NOT disclose direct holdings in either Anduril or Palantir, but this does not eliminate potential overlap through: (a) VC fund portfolio exposure via Sequoia, Benchmark Founders, or Bond Capital funds that may hold Anduril/Palantir positions, and (b) Founders Fund #85 listed as EIF=Yes ($100K-$250K) \u2014 Founders Fund is Anduril's lead investor.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:48",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov query results",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -629,7 +1759,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC Form 4 June 2024 (CIK 0001828144)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1828144",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -765,11 +1895,11 @@
       "id": 4548,
       "finding_type": "financial",
       "summary": "SpaceX investment likely $100K-$1M personal/direct stake; angel range is $5K-$150K but SpaceX secondary market minimums higher; OGE 278e financial disclosure not located in open sources; divestiture status unknown",
-      "detail": "Michael lists SpaceX on emilmichael.com among key investments alongside Stripe, ByteDance, Revolut, Brex, GoPuff. NFX Signal profiles him with $5K-$50K angel range ($25K sweet spot). EasyVC/Tracxn lists $25K-$150K range. SpaceX secondary market typically requires $100K-$500K+ minimums. Assessment: SpaceX stake likely $100K-$1M, personal/direct (not through DPCM Capital which focused on D-Wave SPAC). Investment timing unknown but most likely post-Uber (2017+) when personal wealth increased from Uber equity (IPO May 2019 at ~$82B). His OGE Form 278e \u2014 required for Senate-confirmed PAS officials \u2014 would list exact SpaceX holdings, but this filing has NOT been located in OGE database, open web, or news sources. No evidence of divestiture or formal recusal from SpaceX-related matters found.",
+      "detail": "Michael lists SpaceX on emilmichael.com among key investments alongside Stripe, ByteDance, Revolut, Brex, GoPuff. His OGE Form 278e (ProPublica DocumentCloud 25971448, not indexed in OGE's own public search tool but captured via ProPublica API ingest) confirms SpaceX exposure through Gigafund 0.1, a SpaceX-focused VC fund, with $1-5M in undisclosed assets. The 278e also reveals holdings in Tesla (TSLA) stock, Coatue CT XXX LLC (Coatue Management hedge fund), and Benchmark Founders Fund VII (Thiel-affiliated). Total disclosed net worth: $120M-$277M. Despite the filing's existence, no evidence of divestiture or formal recusal from SpaceX-related matters has been found \u2014 Michael provided only statutory minimum ethics commitments under 18 U.S.C. \u00a7208 without company-specific recusals.",
       "source_datasets": null,
-      "confidence": "medium",
+      "confidence": "high",
       "date_of_event": null,
-      "claim_type": "inference",
+      "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-03-03 07:33:32",
       "target_name": "Emil Michael",
@@ -849,56 +1979,6 @@
       ]
     },
     {
-      "id": 4597,
-      "finding_type": "intelligence",
-      "summary": "Emil Michael confirmed as USD(R&E) May 14, 2025, sworn in May 20, 2025. Nominated Inauguration Day Jan 2025. Pentagon CTO role: primary advisor to SecDef on tech development, prototyping, testing. Trimmed critical technology areas from 14 to 6 priorities. Previously: Uber SVP (helped raise $3B), DPCM Capital CEO (SPAC merged D-Wave public at $1.2B in Aug 2022), Coatue Management senior advisor (Oct 2018-present). D-Wave investor base includes In-Q-Tel (CIA VC fund). D-Wave Government Inc created for federal contracts.",
-      "detail": null,
-      "source_datasets": [
-        "congress_gov"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 17:00:46",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DefenseScoop 2025-05-14, BreakingDefense 2025-05-14, DWave SEC filings, Congress.gov PN12-31",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4625,
-      "finding_type": "financial",
-      "summary": "Emil Michael confirmed as USD(R&E) with extensive tech investment portfolio creating potential defense conflicts",
-      "detail": "Emil Michael (CIK 0001828144) confirmed 54-43 as Under Secretary of Defense for R&E on May 14, 2025. Previously CEO/Chairman of DPCM Capital (CIK 0001821742), a SPAC that raised $300M and merged with D-Wave Quantum (QBTS). Michael resigned from D-Wave board Oct 28, 2024 before confirmation. Personal investment portfolio includes SpaceX, Brex, Revolut, GoPuff, Stripe, Coinbase, and 50+ tech companies through M8 Enterprises LLC. Now oversees DARPA, defense labs, R&D for hypersonics, AI, biotech, quantum, directed energy. Also became acting DIU director Aug 2025. Stated goal: create 'five more Andurils and Palantirs and SpaceXs.' Senator Warren requested 4-year recusal from former client matters.",
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 18:30:15",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR CIK 0001821742, CIK 0001828144; Senate confirmation vote 54-43 (May 14 2025); Breaking Defense 2025/05; Warren letter 2025/03/02; Axios 2025/12/10",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4628,
       "finding_type": "financial",
       "summary": "Emil Michael's DPCM Capital SPAC merged D-Wave Quantum onto NYSE - quantum computing defense overlap",
@@ -916,32 +1996,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001821742; D-Wave board resignation Oct 28 2024 (MarketScreener); NASDAQ IPO pricing Oct 2020; D-Wave investor list includes In-Q-Tel",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4630,
-      "finding_type": "document",
-      "summary": "EFTA02698238 connects Emil Michael to AliphCom/Jawbone voting agreement alongside SK Casablanca LLC and Kenneth A. Fox",
-      "detail": "DOJ EFTA document EFTA02698238 (34 pages) is a Fourth Amended and Restated Voting Agreement for AliphCom (Jawbone wearables company), dated June 16, 2011. Document lists Emil Michael (1504 Bay Road #2402, Miami Beach, FL 33139) as an investor alongside SK Casablanca LLC (120 Tamarack Dr, Hillsborough, CA 94010) and Kenneth A. Fox (70 E. 55th Street, Floor 11, New York, NY 10022). Fox is co-founder of Internet Capital Group and Stripes Group. Also lists Stanford Management Company (SEVF II) and Antonio Soler (London). The document connects Michael to Silicon Valley investment circles pre-Uber era. AliphCom/Jawbone later went into liquidation in 2017 after raising 900M.",
-      "source_datasets": [
-        "efta"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 18:30:43",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02698238",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1042,7 +2097,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001828144 insider filings",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1828144",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1093,31 +2148,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.armed-services.senate.gov/download/michael-apq-responses",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4680,
-      "finding_type": "legal",
-      "summary": "Warren's March 2, 2025 letter demanded four specific ethics commitments from Michael \u2014 4-year recusal from former clients/employers, 4-year post-government lobbying restriction, divestiture from conflicted holdings, specific company disclosures \u2014 with March 10 deadline. No public record of Michael's response exists.",
-      "detail": "Sen. Elizabeth Warren wrote to Michael on March 2, 2025 demanding he match ethics commitments made by predecessors (Lloyd Austin, Frank Kendall, Heidi Shyu). The four specific asks: (1) Recuse from all particular matters involving former clients and employers for 4 years; (2) Four-year post-government restriction on seeking compensation from companies overseen during DoD tenure; (3) Commitment to not lobby DoD after leaving department; (4) Disclose specific companies from which he will recuse. Warren specifically cited DPCM Capital's acquisition of D-Wave, noting D-Wave was 'seeking a DoD contract for quantum computing services.' The response deadline was March 10, 2025. Michael was confirmed 54-43 on May 14, 2025. No public record of his response to Warren's letter has been located. His APQ ethics responses (p.2) contain only statutory boilerplate with no company-specific commitments.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 19:33:33",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.warren.senate.gov/newsroom/press-releases/warren-presses-defense-research-and-engineering-nominee-to-address-conflicts-of-interest-questions-incidents-of-attacks-on-journalists-and-public-accountability",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1200,31 +2230,6 @@
       ]
     },
     {
-      "id": 4713,
-      "finding_type": "intelligence",
-      "summary": "Emil Michael as USD(R&E) technology gatekeeper: Confirmed May 14, 2025, sworn in May 20. Trimmed critical technology areas from 14 to 6: Applied AI, Scaled Hypersonics, Scaled Directed Energy, Biomanufacturing, Contested Logistics, Battlefield Information Dominance. Now oversees DIU + CDAO + OSC after Pentagon consolidation. Publicly champions 'new primes' (Palantir, SpaceX, Anduril) \u2014 stated Pentagon should ensure companies 'don't have to sue the government to get your first big contract.' Led Anthropic standoff: called CEO 'liar' with 'God complex,' resulting in unprecedented 'supply-chain risk' designation and federal ban. OpenAI replacement deal followed within hours. Previous Coatue advisory role creates conflict surface across $40B tech portfolio.",
-      "detail": "Michael's 6 critical technology areas and portfolio company alignment:\n\n1. APPLIED AI -> Benefits: Palantir (AI platform), Anduril (Lattice AI), Shield AI (autonomous flight), OpenAI (replacement for banned Anthropic)\n2. SCALED HYPERSONICS -> Benefits: Varda Space Industries (FF portfolio, hypersonic materials testbed)\n3. SCALED DIRECTED ENERGY -> Benefits: Multiple defense tech startups in a16z/FF portfolios\n4. BIOMANUFACTURING -> Benefits: Various biotech startups across VC portfolios\n5. CONTESTED LOGISTICS -> Benefits: SpaceX (Starlink), Anduril (autonomous logistics)\n6. BATTLEFIELD INFORMATION DOMINANCE -> Benefits: Palantir (data fusion), Anduril (Lattice/TITAN), Shield AI (autonomous ISR)\n\nThe consolidation of DIU, CDAO, and OSC under Michael's USD(R&E) office is structurally significant: it means one appointee with extensive VC/tech industry relationships now controls the three primary mechanisms for channeling Pentagon resources to startups:\n- DIU: Rapid prototyping contracts (bypasses traditional procurement)\n- CDAO: AI/digital technology procurement\n- OSC: Government loans to defense startups ($984M authorized)\n\nAnthropic case as enforcement mechanism:\nMichael's attack on Anthropic sends a signal to the entire AI industry: companies that refuse to remove safety guardrails for military use face existential regulatory retaliation. The 'supply-chain risk' designation (normally used for adversary-nation companies like Huawei/ZTE) was unprecedented for a US company. This creates a chilling effect that benefits companies willing to cooperate (OpenAI, Palantir) at the expense of those with ethical constraints.\n\nWarren recusal request: Senator Warren asked Michael to commit to recusing from matters involving former clients and employers for four years. This would encompass Coatue Management and potentially its portfolio companies. The scope of required recusals would be enormous given Michael's extensive tech industry relationships.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 19:37:25",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "GovConWire (6 tech priorities), DefenseScoop (Anthropic dispute), GovCIO Media (DIU/CDAO consolidation), Warren.senate.gov (recusal request), Sourcery.vc (DoW interview)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4738,
       "finding_type": "legal",
       "summary": "OpenAI's Pentagon deal included the SAME two safeguards (no mass surveillance, no autonomous weapons) that Anthropic was banned for requesting. OpenAI CEO Altman later admitted deal was 'opportunistic and sloppy.' Military used Claude AI during Iran strikes hours after Trump announced ban, proving the technology was mission-critical.",
@@ -1268,110 +2273,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Warren letter to Emil Michael, SASC APQ, EO rescission",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4955,
-      "finding_type": "document",
-      "summary": "OGE 278e financial disclosure for Emil Michael IS available via ProPublica (DocumentCloud ID 25971448, disclosure_documents record 1906). Ethics agreement, 3 278-T transaction reports (Jun/Aug/Oct 2025), 4 OGE waivers (2025-116 through 119), and certificate of divestiture (OGE-2025-297) also on file. Net worth: $120M-$277M. Not indexed in OGE's own public search tool but captured by ProPublica API ingest.",
-      "detail": "Searched OGE public financial disclosure database (extapps2.oge.gov/201/Presiden.nsf/PAS+Index) for Emil Michael. No 278e nominee report, annual report, or ethics agreement found. Other Trump administration PAS officials confirmed around same period have their 278e filings publicly available (Rubio, Pulte, Ueland, Kennedy). Michael was confirmed May 14, 2025 as USD(R&E) in 54-43 vote. Under 5 CFR 2634, PAS officials must file OGE 278e within 30 days of nomination and the report must be made available for public inspection. The absence of this document 10 months post-confirmation is notable and may indicate either: (1) delayed processing by OGE, (2) an exemption/waiver, or (3) non-compliance.",
-      "source_datasets": [
-        "web",
-        "edgar"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:43:43",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Congress.gov PN12-31: confirmation May 14, 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OGE PAS Index search: no results for Emil Michael",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4956,
-      "finding_type": "financial",
-      "summary": "No SEC Form 4/5 filed after Dec 2024 nomination \u2014 last D-Wave filing June 14, 2024 showing warrant disposition",
-      "detail": "Emil Michael's last SEC filing for D-Wave (QBTS) was June 14, 2024 \u2014 a Form 4 reporting sale of 2,424,648 warrants (strike price 11.50, exercisable for 1.4541326 shares each). His CIK is 0001828144. He was nominated Dec 2024 and confirmed May 2025 as USD(R&E). If he divested his remaining ~887K QBTS common shares before or upon confirmation, a Form 4 would be required within 2 business days. No such filing exists. Two possible explanations: (1) He has NOT divested D-Wave shares, retaining financial interest in a company seeking DoD quantum computing contracts; or (2) Shares were transferred in a manner not triggering Form 4 (e.g., gift, private transfer) or the filing is delinquent. His most recent Form 144 (intent to sell) was May 31, 2024. D-Wave formed a US government business unit in Dec 2025, explicitly targeting DoD contracts.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:43:54",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR CIK 0001828144 filing history",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC Form 4 June 14 2024 for D-Wave",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4957,
-      "finding_type": "document",
-      "summary": "No public ethics agreement found on OGE PAS index despite Warren demanding specific commitments with March 10, 2025 deadline",
-      "detail": "Senator Warren's March 2, 2025 letter demanded four specific ethics commitments from Michael: (1) 4-year recusal from matters involving former clients/employers, (2) 4-year post-government lobbying restriction, (3) divestiture from conflicted holdings, (4) company-specific disclosure. Deadline was March 10, 2025. Predecessor Heidi Shyu had a public ethics agreement with 4-year recusal. SASC APQ responses confirm Michael gave only bare-minimum ethics commitments \u2014 comply with 18 USC 208 (general conflict statute) with no specific divestiture list, no company-specific recusal. Trump rescinded Biden ethics EO 13989 on Inauguration Day (Jan 20, 2025) with no replacement \u2014 first time since 1989 no admin ethics pledge exists. The OGE PAS index, which hosts ethics agreements for other DoD officials (e.g., Justin Overbaugh DUSD(I&S), Pedro Allende), contains no entry for Michael.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:44:07",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OGE PAS Index search",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SASC APQ responses",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Warren letter March 2 2025",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1504,31 +2405,6 @@
       ]
     },
     {
-      "id": 4972,
-      "finding_type": "financial",
-      "summary": "D-Wave board director compensation 2023: Emil Michael received ,250 cash retainer + ,000 in RSUs (75,675 RSUs vesting May 31, 2024) for total 2023 compensation of ,250. Annual program: ,000 base retainer + committee fees + ,000 annual RSU grant. Michael served on Nominating & Governance Committee.",
-      "detail": "Non-employee director comp program per DEF 14A: ,000 annual cash retainer; committee members get additional ,000 annual retainer per committee. Michael was on Nominating & Governance Committee (chaired by Steven West). He was NOT on Compensation Committee or Audit Committee. Annual RSU grant of ,000 vests after ~1 year. Oct 27, 2022: granted 29,021 RSUs (vested at 2023 annual meeting). Jun 28, 2023: granted 75,675 RSUs (vested May 31, 2024). Jun 6, 2024: granted 106,626 RSUs (scheduled to vest May 31, 2025 \u2014 but Michael resigned Oct 28, 2024). Board max for non-employee directors: ,000/year.",
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:45:50",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "SEC Filing DEF 14A 04/23/2024 CIK:0001907982",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4974,
       "finding_type": "financial",
       "summary": "Emil Michael beneficial ownership as of proxy record date (Apr 10, 2024): 4,938,167 shares (3.05% of D-Wave). Includes common shares held personally and via Emil Michael Living Trust dated 7/28/2017, plus 3,939,091 common shares underlying warrants distributed from Sponsor Aug 22, 2023.",
@@ -1579,131 +2455,6 @@
       ]
     },
     {
-      "id": 4976,
-      "finding_type": "financial",
-      "summary": "Emil Michael manages Nomadic Ventures LLC (FL L18000104420), formed 2018-04-25, active, at 1511 W 27th Street, Miami Beach FL 33140 (Sunset Island #2). EIN: 82-5384431.",
-      "detail": "Florida domestic LLC registered at Emil Michael's residential address. Michael listed as sole MGR. Entity formed after departure from Uber (2017).",
-      "source_datasets": [
-        "FL SunBiz"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:19",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FL SunBiz record L18000104420",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4977,
-      "finding_type": "financial",
-      "summary": "Emil Michael manages M10 Enterprises LLC (FL L20000327803), formed 2020-10-23, active, at 1511 West 27th Street, Miami Beach FL 33140. No EIN listed.",
-      "detail": "Florida domestic LLC at same Sunset Island address as Nomadic Ventures. Michael listed as sole MGR. Purpose unknown. Naming convention (M8, M10) suggests a series of personal holding entities.",
-      "source_datasets": [
-        "FL SunBiz"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:22",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FL SunBiz record L20000327803",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4978,
-      "finding_type": "financial",
-      "summary": "CRITICAL GAP: No SEC filings from Emil Michael after Jul 12, 2024. Last filing was a Rent the Runway RSU grant (Form 4, Jul 11 2024 transaction). No D-Wave Form 4/Form 5 filed reflecting disposition of 887,138 shares or 106,626 RSUs between his board resignation (Oct 28, 2024) and USD(R&E) confirmation (May 14, 2025). Either shares were not disposed of, or there is a missing filing.",
-      "detail": "Timeline of concern: Oct 28, 2024 - Resigned D-Wave board. Jan 2025 - Nominated as USD(R&E). May 14, 2025 - Confirmed by Senate. As of last Form 4 (Jun 4, 2024), Michael held 887,138 common shares directly + 106,626 RSUs (scheduled to vest May 31, 2025, but he resigned before vesting). He had 0 warrants remaining (all sold Jun 2024). If the 106,626 RSUs were forfeited upon resignation (Oct 28), he would hold only 887,138 shares. No Form 5 (annual statement) was filed for the period ending Dec 31, 2024. A Senate ethics agreement or OGE 278 filing would be needed to confirm divestiture status.",
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:26",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR full filing history CIK:0001828144 - 19 total filings, last dated 07/12/2024",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4979,
-      "finding_type": "financial",
-      "summary": "DPCM Capital, Inc. filed in FL as foreign profit corp (F25000005464), registered 2025-09-29, incorporated in DE. Officers: Alan Baratz (P), John Markovich (D), Trevor Lanting (D), Greg Golkov (DST). All at 2650 E. Bayshore Rd, Palo Alto. EIN: 850525645.",
-      "detail": "This appears to be a post-SPAC operating entity. Officers are all D-Wave executives: Baratz is CEO, Lanting is CTO. FL filing is 2025-09-29 which is after DPCM SPAC merged with D-Wave. Emil Michael not listed as officer on this entity.",
-      "source_datasets": [
-        "FL SunBiz"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:29",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FL SunBiz record F25000005464",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4981,
-      "finding_type": "financial",
-      "summary": "FEC records show Emil Michael made $1,000,000 donation to Make America Great Again Inc (Trump Super PAC) on 2024-02-28 via M8 Enterprises LLC, Miami Beach FL.",
-      "detail": "This is the largest single political donation identified. Made through M8 Enterprises LLC. Additional 2024 donations: $6,600 to Salazar Victory Committee (2024-03-14), $6,600 to Salazar for Congress (2024-03-19). All contributions from Miami Beach address.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:37",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC filings",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4982,
       "finding_type": "financial",
       "summary": "Emil Michael also served as director of Rent the Runway (NASDAQ: RENT) from May 2023. Received RSU grants: initial board grant (no shares at Form 3, May 2023) and annual grants of 2,184 RSUs (Jul 2023 vesting) and 1,685 RSUs (Jul 2024 vesting). Total RENT position as of Jul 12, 2024: 3,869 shares. This is an additional public company board seat requiring divestiture/ethics review for government service.",
@@ -1722,31 +2473,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "SEC Filing CIK:0001828144 Form 3 05/10/2023; Form 4 07/14/2023; Form 4 07/12/2024 (Rent the Runway)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4983,
-      "finding_type": "financial",
-      "summary": "FEC records show Emil Michael's full political donation history via M8 Enterprises LLC (2020-2024): Maria Elvira Salazar (FL-27, $14,200 total), Brady Duke (FL-09, $500), David Perdue GA-Sen ($2,800), Francis Suarez pres campaign ($3,300), SOS America PAC ($10,000), Trump MAGA Inc ($1,000,000).",
-      "detail": "All donations consistently Republican. Earliest: 2020-06-25 Salazar for Congress $5,600. Pattern shows growing engagement: Salazar district rep support starting 2020, escalating to $1M Super PAC in Feb 2024. Total identifiable FEC contributions via M8 Enterprises: approximately $1,037,900.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:46:44",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC filings employer search M8 Enterprises",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1797,31 +2523,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "SEC Filing DEFM14A CIK:0001821742 filed 07/13/2022; 8-K filed 07/23/2021 CIK:0001821742; S-1 filed 10/02/2020 CIK:0001821742",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4990,
-      "finding_type": "relationship",
-      "summary": "Michael's D-Wave board committee role: Nominating & Governance Committee member (with Steven West as chair and Philip Smalley III). Not on Compensation or Audit committees. Board determined Michael was independent under NYSE listing standards. He was elected Class II director for term expiring at 2027 annual meeting, but resigned Oct 28, 2024.",
-      "detail": "Per 2024 DEF 14A: Board had 8 members in staggered classes. Michael's Class II term (2024-2027) was confirmed at June 6, 2024 annual meeting. Other Class II directors: Amy Cappellanti-Wolf, Philip Adam Smalley III. Board also included Kirstjen Nielsen (former DHS Secretary, Class III). Board independence determination: 'our Board of Directors has determined that Roger Biscay, Amy Cappellanti-Wolf, Ziv Ehrenfeld, Emil Michael, Kirstjen Nielsen, Philip Adam Smalley III, and Steven M. West do not have any relationships that would interfere with the exercise of independent judgment'",
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:47:20",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "SEC Filing DEF 14A 04/23/2024 CIK:0001907982",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1882,56 +2583,6 @@
       ]
     },
     {
-      "id": 4999,
-      "finding_type": "legal",
-      "summary": "DOE v. Uber Technologies (3:17-cv-03470, N.D. Cal.) \u2014 Michael named as defendant alongside Kalanick and Eric Alexander in Jane Doe personal injury lawsuit",
-      "detail": "Filed 2017-06-15, terminated 2018-02-05. Jane Doe filed a personal injury (diversity jurisdiction) lawsuit against Uber Technologies Inc., Travis Kalanick, Emil Michael, and Eric Alexander. Judge Susan Yvonne Illston, N.D. California. This is the case arising from Uber executive Eric Alexander obtaining the medical records of an Indian rape victim and sharing them with Kalanick and Michael. The rapid termination (8 months) suggests settlement. Represented by Wigdor LLP (plaintiff), Latham & Watkins and Orrick Herrington (defense).",
-      "source_datasets": [
-        "courtlistener,govinfo"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:48:47",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket ID 6074925; GovInfo USCOURTS-cand-3_17-cv-03470",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5000,
-      "finding_type": "legal",
-      "summary": "Michael confirmed as Politically Exposed Person (PEP) in OpenSanctions \u2014 listed in US Plum Book as USD(R&E)",
-      "detail": "OpenSanctions returns two PEP records for Emil Michael: (1) Wikidata Q18560065 \u2014 DOB 1972-09-19, born Egypt, Harvard/Stanford Law education, noted as 'Vice President of Business at Uber', country tag 'eg'. (2) US Plum Book entry: 'UNDER SECRETARY OF DEFENSE (RESEARCH AND ENGINEERING), OFFICE OF THE SECRETARY OF DEFENSE'. Both flagged role.pep. First seen in dataset 2025-05-27.",
-      "source_datasets": [
-        "opensanctions"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:48:57",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions ID Q18560065; OpenSanctions ID usplum-9489a09e7d585c997d6b4d0f71dc23ca94b3e054",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5002,
       "finding_type": "location",
       "summary": "Emil Michael's residential address confirmed: 1511 W 27th Street, Sunset Island #2, Miami Beach FL 33140. Three entities registered at this address: Nomadic Ventures LLC (2018), M10 Enterprises LLC (2020), and historically 7th Sign Records LLC (2004, inactive). FEC filings also list Miami Beach FL as contributor city.",
@@ -1951,31 +2602,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FL SunBiz records, FEC filings",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5003,
-      "finding_type": "legal",
-      "summary": "Senate confirmation timeline: nominated 2025-01-20, SASC committee hearing 2025-03-27, committee report 2025-04-08, cloture 2025-05-12/14, confirmed 2025-05-14",
-      "detail": "GovInfo Congressional Record entries document the full confirmation timeline for Emil Michael as USD(R&E): CPD-202500107 shows sub-cabinet nomination submitted 2025-01-20. CREC 2025-03-26/27 shows SASC committee meeting scheduled. CREC 2025-04-08 shows Executive Reports of Committee (SASC reported favorably). CREC 2025-05-12 shows cloture motion filed and Executive Calendar. CREC 2025-05-14 shows cloture vote, Executive Calendar vote, and confirmation. This approximately 4-month confirmation process is notable given his Holder Report history.",
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:49:11",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GovInfo CREC-2025-05-14 (confirmations); CPD-202500107 (nomination); CREC-2025-04-08 (committee report)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2058,31 +2684,6 @@
       ]
     },
     {
-      "id": 5007,
-      "finding_type": "financial",
-      "summary": "DPCM Capital Inc (CIK 0001821742) SEC filings confirm SPAC entity and D-Wave Quantum merger \u2014 992 EDGAR filings",
-      "detail": "SEC EDGAR full-text search for 'DPCM Capital' returns 992 filings. Top result is a Form 425 (merger communication) dated 2022-07-21 listing both DPCM Capital Inc (CIK 0001821742) and D-Wave Quantum Inc (CIK 0001907982, tickers QBTS/QBTS-WT). DPCM Capital incorporated in Delaware, business location Miami FL. D-Wave Quantum incorporated in Delaware, business location New York NY. SIC codes: 6770 (Blank Checks) for DPCM, 7374 (Computer Processing and Data Preparation) for D-Wave.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:49:50",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001821742 (DPCM Capital Inc); CIK 0001907982 (D-Wave Quantum Inc)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5008,
       "finding_type": "financial",
       "summary": "No FEC political donation records found for Emil Michael \u2014 zero federal campaign contributions on file",
@@ -2108,56 +2709,6 @@
       ]
     },
     {
-      "id": 5009,
-      "finding_type": "legal",
-      "summary": "AAU v. Department of Defense (1:25-cv-11740, D. Mass.) \u2014 universities suing DoD under Michael's USD(R&E) purview over research policy",
-      "detail": "Association of American Universities and major research institutions (MIT, Johns Hopkins, Brown, U of Washington, Arizona State, U of Pittsburgh, U of Maryland, ACE) filed suit against Department of Defense on 2025-06-16 in D. Massachusetts. Currently active with First Circuit appeal filed 2025-12-16. While Michael is not personally named as a defendant, as USD(R&E) he oversees the department's research and engineering portfolio that is the subject of this litigation. Related to broader DOGE-era federal research funding disputes \u2014 parallel suits against HHS and DOE by same plaintiffs.",
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:50:11",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 1:25-cv-11740; GovInfo USCOURTS-mad-1_25-cv-11740",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5010,
-      "finding_type": "financial",
-      "summary": "Warren letter (Mar 2 2025) flagged DPCM Capital/D-Wave, Uber, Coatue as conflicts; demanded 4-year recusal from former clients, 4-year post-employment lobbying ban, and divestiture of DoD-impacted holdings",
-      "detail": "Sen. Warren's 5-page letter identified: (1) DPCM Capital SPAC acquired D-Wave, which obtained Awardable vendor status Oct 2024; (2) Uber has Maxwell AFB ride contract; (3) TellmeNetworks (sold to Microsoft) could seek military speech-recognition contracts. Letter posed 9 questions demanding commitments by March 10, 2025. Cited precedent of Heidi Shyu's 4-year recusal.",
-      "source_datasets": [
-        "warren_senate_gov"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:50:28",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.warren.senate.gov/imo/media/doc/final_-_warren_letter_to_emil_michael_on_ethics_commitment.pdf",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5011,
       "finding_type": "legal",
       "summary": "SASC APQ responses: Michael committed only to statutory 18 USC 208 recusal, not Warren's broader 4-year request; agreed to disclose conflicts and recuse from specific matters but gave no commitment to divest D-Wave or sever Coatue ties",
@@ -2176,31 +2727,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.armed-services.senate.gov/download/michael-apq-responses",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5012,
-      "finding_type": "legal",
-      "summary": "Senate confirmed Michael 54-43 on May 14 2025; 3 Democrats crossed over (Gallego-AZ, Warner-VA, King-ME); sworn in May 20 2025",
-      "detail": "Full vote breakdown: 51 Republicans + 3 Democrats/Independents = 54 Yea. 40 Democrats = 43 Nay. Not voting: Gillibrand (D-NY), Graham (R-SC), Tuberville (R-AL). Gallego previously received campaign contribution from Michael (LittleSis: ,000 in 2014). SASC committee voted favorably by roll call April 8, 2025. Hearing held March 27, 2025 in SD-G50 Dirksen.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:50:56",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.govtrack.us/congress/votes/119-2025/s254",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2251,31 +2777,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://littlesis.org/entities/158441-Emil_Michael",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5015,
-      "finding_type": "financial",
-      "summary": "D-Wave share sales: sold 111,938 shares Jun 4 2024 retaining 887,138 shares; D-Wave obtained DoD Awardable vendor status Oct 2024 creating direct conflict; no public evidence of full divestiture before taking office May 2025",
-      "detail": "SEC Form 4 filing shows Michael sold 111,938 QBTS shares Jun 4 2024 but retained 887,138 shares. Four months later, D-Wave obtained Awardable status on DoD CDAO Tradewinds Solutions Marketplace (Oct 31 2024). Michael then nominated for USD(R&E) in Jan 2025 - the office that oversees CDAO. Warren letter specifically flagged this conflict. Michael left D-Wave board in Oct 2024. No SEC filing found showing full divestiture of remaining 887K shares before swearing in May 20 2025.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 03:51:35",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://finance.yahoo.com/news/insider-sale-director-emil-michael-070424932.html",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2631,31 +3132,6 @@
       ]
     },
     {
-      "id": 5038,
-      "finding_type": "legal",
-      "summary": "Warren letter demands 4-year recusal, divestiture, no-lobbying pledge - no public response found",
-      "detail": "Sen. Warren (D-MA) sent 5-page letter dated March 2, 2025 demanding: (1) 4-year recusal from all particular matters involving former clients/employers, (2) divestiture from holdings impacted by DoD contracts, (3) commitment not to lobby DoD for 4 years after leaving, (4) commitment not to seek employment from regulated companies for 4 years. Letter posed 9 specific questions with March 10, 2025 deadline. Warren identified conflicts: DPCM Capital SPAC acquired D-Wave which obtained DoD Awardable status Oct 2024, Uber ride services on military bases (Maxwell AFB Dec 2024), TellmeNetworks as potential military contractor. No public response from Michael found. Confirmed 54-43 on May 14, 2025 without addressing these demands publicly.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:15:50",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "warren.senate.gov/imo/media/doc/final_-_warren_letter_to_emil_michael_on_ethics_commitment.pdf",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5040,
       "finding_type": "financial",
       "summary": "OSC reports directly to USD(R&E) - Michael oversees office that invests in defense tech startups where he has personal financial ties",
@@ -2781,84 +3257,6 @@
       ]
     },
     {
-      "id": 5857,
-      "finding_type": "relationship",
-      "summary": "Senate confirmed as USD(R&E) / Pentagon CTO May 2025 (54-43); sworn in May 20, 2025",
-      "detail": "Senate voted 54-43 to confirm Emil Michael as Undersecretary of Defense for Research and Engineering and Pentagon CTO. Nominated by Trump on Inauguration Day. Sworn in May 20, 2025. Prior: White House Fellow under Obama (2009-2011) serving as special assistant to Defense Secretary Robert Gates managing projects in Afghanistan, Iraq, Pakistan. Then Uber Chief Business Officer (2013-2017) under Travis Kalanick, raising nearly $15 billion including $3.5B from Saudi PIF.",
-      "source_datasets": [
-        "web_search",
-        "congress_gov"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:53:25",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "DefenseScoop 5/14/2025; Breaking Defense; Congress.gov PN12-31; cto.mil",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5859,
-      "finding_type": "intelligence",
-      "summary": "Leading Pentagon-Anthropic AI contract dispute; called CEO Amodei liar with God-complex",
-      "detail": "As USD(R&E), Michael leading negotiations on $200M Pentagon AI contract with Anthropic. Dispute centers on Anthropic refusing to remove restrictions on AI use for domestic mass surveillance and fully autonomous weapons. Michael publicly attacked Anthropic CEO Dario Amodei on X, calling him a liar with a God-complex. Trump directed federal agencies to stop using Anthropic tools. Defense Secretary Hegseth threatened to designate Anthropic a supply-chain risk to national security. Negotiations resumed March 5, 2026.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:53:32",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Fortune 2/27/2026; Axios 3/4/2026; The Hill; CBS News; CNBC 3/5/2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5860,
-      "finding_type": "financial",
-      "summary": "DPCM Capital SPAC merged with D-Wave Quantum (Aug 2022); Michael resigned D-Wave board Oct 2024 before Pentagon nomination",
-      "detail": "Michael founded DPCM Capital Inc (blank-check SPAC, $250M IPO Oct 2020, NYSE: XPOA). DPCM merged with D-Wave Systems Aug 5, 2022 creating D-Wave Quantum Inc (NYSE: QBTS). Michael joined D-Wave board as part of deal. DPCM Capital registered in FL as foreign profit corp (EIN 850525645), principal address 2650 E. Bayshore Rd, Palo Alto, CA. Michael sold 111,938 D-Wave shares (insider sale June 4, 2024). Resigned D-Wave board October 28, 2024, ahead of Pentagon nomination (December 2024). D-Wave has defense/quantum computing applications.",
-      "source_datasets": [
-        "edgar",
-        "fl_sunbiz",
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:53:42",
-      "target_name": "Emil Michael",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR DPCM Capital filings (CIK 0001821742); FL registry F25000005464; D-Wave press releases; GuruFocus insider sale report",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5862,
       "finding_type": "relationship",
       "summary": "Uber-to-Pentagon pipeline: Michael close lieutenant to Kalanick; raised $3.5B from Saudi PIF; investment portfolio spans defense-adjacent companies",
@@ -2907,6 +3305,31 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 6919,
+      "finding_type": "financial",
+      "summary": "TEMPORAL PATTERN: D-Wave-to-Pentagon pipeline shows coordinated timing across 7 milestones spanning 2022-2026",
+      "detail": "Timeline analysis reveals tight temporal coordination: (1) DPCM/D-Wave merger closes Aug 2022, (2) Michael files Form 144 share sale May 2024, (3) Michael resigns D-Wave board Oct 28 2024 \u2014 exactly 3 days before D-Wave achieves DoD Tradewinds status Oct 31, (4) Michael confirmed as USD(R&E) May 2025, (5) Michael announces quantum as critical tech area #4 Nov 2025, (6) D-Wave forms Government Business Unit citing Michael by name Dec 2025, (7) D-Wave/Anduril/Davidson missile defense collaboration announced Jan 2026. The resignation-to-Tradewinds 3-day gap and the Dec 2025 GBU announcement explicitly naming the serving USD(R&E) represent the tightest temporal correlations.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:23:08",
+      "target_name": "Emil Michael",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -2948,7 +3371,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC S-1 DPCM Capital CIK 0001821742",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821742",
           "source_quote": null,
           "source_page": null
         }
@@ -3135,7 +3558,7 @@
       "created_at": "2026-03-03 20:23:54",
       "profile_id": "tech-right",
       "other_person": "Palantir",
-      "other_person_slug": "palantir-technologies",
+      "other_person_slug": "palantir",
       "evidence": []
     },
     {
@@ -3229,6 +3652,50 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "TechCrunch; Wikipedia; Fortune",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3523,
+      "person_a": "Emil Michael",
+      "person_b": "Perplexity",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:37",
+      "profile_id": "tech-right",
+      "other_person": "Perplexity",
+      "other_person_slug": "perplexity",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3522,
+      "person_a": "Collaborative Robotics",
+      "person_b": "Emil Michael",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:37",
+      "profile_id": "tech-right",
+      "other_person": "Collaborative Robotics",
+      "other_person_slug": "collaborative-robotics",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DocumentCloud:25971448",
           "source_quote": null,
           "source_page": null
         }
@@ -3450,6 +3917,28 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3424,
+      "person_a": "Chris Buskirk",
+      "person_b": "Emil Michael",
+      "relationship_type": "political",
+      "description": "Both Rockbridge Network attendees",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:03:45",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:423815,NBC News",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -3461,6 +3950,14 @@
       "summary": "White House Fellowship (2009-2011) was critical career pivot \u2014 placed with SecDef Gates, followed by 2014 Defense Business Board appointment, creating continuous Pentagon relationship spanning 15+ years enabling USD(R&E) nomination",
       "confidence": "high",
       "id": 4545
+    },
+    {
+      "date": "2011-06-16",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "EFTA02698238 connects Emil Michael to AliphCom/Jawbone voting agreement alongside SK Casablanca LLC and Kenneth A. Fox",
+      "confidence": "confirmed",
+      "id": 4630
     },
     {
       "date": "2011-2017",
@@ -3535,12 +4032,44 @@
       "id": 4546
     },
     {
+      "date": "2017-06-15",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOE v. Uber Technologies (3:17-cv-03470, N.D. Cal.) \u2014 Michael named as defendant alongside Kalanick and Eric Alexander in Jane Doe personal injury lawsuit",
+      "confidence": "confirmed",
+      "id": 4999
+    },
+    {
       "date": "2017-10-01",
       "type": "finding",
       "finding_type": "financial",
       "summary": "Coatue Management senior advisor since Oct 2017 \u2014 hedge fund with broad defense-adjacent tech portfolio creates conflict surface across dozens of companies as USD(R&E)",
       "confidence": "high",
       "id": 4537
+    },
+    {
+      "date": "2018-04-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Emil Michael manages Nomadic Ventures LLC (FL L18000104420), formed 2018-04-25, active, at 1511 W 27th Street, Miami Beach FL 33140 (Sunset Island #2). EIN: 82-5384431.",
+      "confidence": "confirmed",
+      "id": 4976
+    },
+    {
+      "date": "2020-06-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC records show Emil Michael's full political donation history via M8 Enterprises LLC (2020-2024): Maria Elvira Salazar (FL-27, $14,200 total), Brady Duke (FL-09, $500), David Perdue GA-Sen ($2,800), Francis Suarez pres campaign ($3,300), SOS America PAC ($10,000), Trump MAGA Inc ($1,000,000).",
+      "confidence": "confirmed",
+      "id": 4983
+    },
+    {
+      "date": "2020-10-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Emil Michael manages M10 Enterprises LLC (FL L20000327803), formed 2020-10-23, active, at 1511 West 27th Street, Miami Beach FL 33140. No EIN listed.",
+      "confidence": "confirmed",
+      "id": 4977
     },
     {
       "date": "2020-2022",
@@ -3557,6 +4086,14 @@
       "description": "Michael is SpaceX investor; Musk runs DOGE which protects SpaceX's $13.7B+ Pentagon contracts from cuts; DOGE-USD(R&E) structural alignment benefits both",
       "other_person": "Elon Musk",
       "id": 2673
+    },
+    {
+      "date": "2022-07-21",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DPCM Capital Inc (CIK 0001821742) SEC filings confirm SPAC entity and D-Wave Quantum merger \u2014 992 EDGAR filings",
+      "confidence": "confirmed",
+      "id": 5007
     },
     {
       "date": "2022-08-05",
@@ -3591,12 +4128,84 @@
       "id": 4532
     },
     {
+      "date": "2024-02-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC records show Emil Michael made $1,000,000 donation to Make America Great Again Inc (Trump Super PAC) on 2024-02-28 via M8 Enterprises LLC, Miami Beach FL.",
+      "confidence": "confirmed",
+      "id": 4981
+    },
+    {
+      "date": "2024-05-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "D-Wave board director compensation 2023: Emil Michael received ,250 cash retainer + ,000 in RSUs (75,675 RSUs vesting May 31, 2024) for total 2023 compensation of ,250. Annual program: ,000 base retainer + committee fees + ,000 annual RSU grant. Michael served on Nominating & Governance Committee.",
+      "confidence": "confirmed",
+      "id": 4972
+    },
+    {
+      "date": "2024-06-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DPCM Capital SPAC merged with D-Wave Quantum (Aug 2022); Michael resigned D-Wave board Oct 2024 before Pentagon nomination",
+      "confidence": "confirmed",
+      "id": 5860
+    },
+    {
+      "date": "2024-06-06",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Michael's D-Wave board committee role: Nominating & Governance Committee member (with Steven West as chair and Philip Smalley III). Not on Compensation or Audit committees. Board determined Michael was independent under NYSE listing standards. He was elected Class II director for term expiring at 2027 annual meeting, but resigned Oct 28, 2024.",
+      "confidence": "confirmed",
+      "id": 4990
+    },
+    {
+      "date": "2024-06-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "No SEC Form 4/5 filed after Dec 2024 nomination \u2014 last D-Wave filing June 14, 2024 showing warrant disposition",
+      "confidence": "medium",
+      "id": 4956
+    },
+    {
+      "date": "2024-10-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SEC 8-K establishes precise resignation timeline: Oct 25 notice given, Oct 28 effective, Oct 30 8-K filed \u2014 3 business days before Oct 31 Tradewinds announcement. Tradewinds monthly collection/evaluation cycle means D-Wave submitted Sep 2024 while Michael was director.",
+      "confidence": "medium",
+      "id": 6985
+    },
+    {
       "date": "2024-10-28",
       "type": "finding",
       "finding_type": "intelligence",
       "summary": "Michael resigned from D-Wave board Oct 28, 2024 \u2014 three days before D-Wave's Tradewinds DoD Awardable announcement on Oct 31, 2024",
       "confidence": "medium",
       "id": 4550
+    },
+    {
+      "date": "2024-10-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "No SEC Form 4 filings by Michael after Oct 28, 2024 board resignation. Last Form 4 was June 2024 showing 887,138 shares retained. Certificate of divestiture OGE-2025-297 indicates shares were divested before taking office May 2025, but no public record of when or at what price the 887K shares were sold between Oct 2024 and May 2025.",
+      "confidence": "medium",
+      "id": 6996
+    },
+    {
+      "date": "2024-10-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "D-Wave Government Inc. has one DOD contract on record (N6600116P7457, Navy, $40K, May 2016 for training). However, D-Wave obtained 'Awardable' vendor status on DOD's CDAO Tradewinds Solutions Marketplace in October 2024 per D-Wave press release and Sen. Warren's letter. The CDAO reports to OUSD(R&E) for TAI&A (Trusted AI & Autonomy) critical technology area per Michael's own SASC testimony. Michael's 278e shows: D-Wave Board Member 8/2022-10/2024, D-Wave Quantum board fees $39,000, 75,675 vested restricted stock units (capital gains $15K-$50K), and the D-Wave/M8 Enterprises relationship terminated per Section 3 #4 ('No ongoing relationship or holdings or economics as of the date of filing,' 8/2022). Michael appears to have liquidated D-Wave holdings by June 2024 (per earlier finding #4966), and certificate of divestiture OGE-2025-297 may cover remaining positions.",
+      "confidence": "medium",
+      "id": 6994
+    },
+    {
+      "date": "2024-10-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL ANALYSIS: Falsification test result \u2014 the Tradewinds application was NOT filed months before resignation (falsification threshold). Based on Tradewinds monthly collection/evaluation cycle, D-Wave submitted its pitch video during the Sep 2024 collection period (Sep 1-30) while Michael was still a board director. Application preparation with Clipper Defense began weeks/months earlier. Michael gave resignation notice Oct 25, effective Oct 28. Tradewinds result announced Oct 31. The 3-day gap between resignation and announcement is NOT the meaningful temporal signal \u2014 the real signal is that D-Wave initiated and completed its DoD marketplace application entirely while Michael was a sitting board director and prospective Trump administration nominee (M MAGA donation Feb 2024).",
+      "confidence": "medium",
+      "id": 7001
     },
     {
       "date": "2025-01-20",
@@ -3607,6 +4216,118 @@
       "id": 4540
     },
     {
+      "date": "2025-01-20",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Senate confirmation timeline: nominated 2025-01-20, SASC committee hearing 2025-03-27, committee report 2025-04-08, cloture 2025-05-12/14, confirmed 2025-05-14",
+      "confidence": "confirmed",
+      "id": 5003
+    },
+    {
+      "date": "2025-01-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OGE 278e (56 pages, DocumentCloud 25971448) discloses 43 positions held outside government, 182+ assets/income sources, 41 employment agreements, and 10 liabilities. Key defense-relevant holdings: Collaborative Robotics (board member + K-K vested, K-K unvested stock), Perplexity (board member + M-M vested, M-M unvested stock), Crossroads AI (consultant + K-K vested incentive units), CounselAI (K-K vested, K-M unvested options). Also holds Uber stock (M-M in Family Trust #3, over M in brokerage, M-M in trust #168.5), Belgard Capital Fund LLC (M-M), Bond Capital (M-M vested anticipated profit interests), Sequoia Capital funds (7 funds, K-K each), and K-K in Solana cryptocurrency.",
+      "confidence": "high",
+      "id": 6972
+    },
+    {
+      "date": "2025-01-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "278e Section 3 reveals Michael's employment arrangements with 41 companies contain a repeated structural pattern: for companies where Michael holds both vested and unvested equity (Perplexity, Collaborative Robotics, 1Money, Zima International, Campus Group, Ankorstore), the agreements state that unvested portions 'must accelerate them before I assume the duties of the position of Under Secretary or I will forfeit them.' This creates a pre-confirmation financial windfall incentive \u2014 companies must either accelerate Michael's equity before he takes office or lose the advisory relationship incentive structure. Companies that accelerate give Michael additional vested equity he then retains while overseeing their potential defense contracts. The Perplexity arrangement (3/2024) is most notable: both vested and unvested stock, plus a 208(b)(1) waiver pathway explicitly contemplated.",
+      "confidence": "medium",
+      "id": 6981
+    },
+    {
+      "date": "2025-01-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "278e reveals massive retained Uber position despite serving as Pentagon CTO: item 177.1 shows Uber (UBER) stock in brokerage account valued OVER $50,000,000 with capital gains OVER $5,000,000. Additional Uber holdings: Family Trust #3 item 164.1 ($5M-$25M), Trust #168.5 ($1M-$5M), item 163.10 ($1K-$15K), and open short call options on Uber (item 174.1, strike $65, exp 06/2025, 4,998 contracts, premium income $6,488,254). Total Uber exposure estimated at $56M-$80M+. The short call position suggests active options writing strategy on his largest holding. Uber had Maxwell AFB ride services agreement Dec 2024 per Warren letter. M8 Enterprises (Michael's LLC) will 'stop providing advisory services upon confirmation' but 'continue to manage the assets this company holds' per Section 3 #1.",
+      "confidence": "high",
+      "id": 6995
+    },
+    {
+      "date": "2025-01-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "278e Section 6 discloses Michael holds LP interests in venture/private equity funds with EIF=Yes (Excepted Investment Fund) status that would normally screen him from individual portfolio company conflicts: Sequoia Capital funds (items 93-99, 7 funds totaling est. $400K-$1.6M), Benchmark Founders funds (items 112-114, 3 funds totaling $150K-$450K), Future Ventures L.P. (item 85, $100K-$250K), 1984 Ventures Fund I ($250K-$500K), Craft Ventures I ($100K-$250K), Bling Capital funds (items 100-102, $150K-$300K), and Belgard Capital Fund LLC (item 161.1, $25M-$50M \u2014 the single largest disclosed asset). EIF status means Michael is NOT required to recuse from matters affecting individual portfolio companies within these funds \u2014 even if those funds hold Anduril, Palantir, Shield AI, or other defense tech positions. The EIF exemption under 5 CFR 2640.201(a) is the key structural loophole: it allows him to participate in decisions affecting defense contractors in which he has indirect financial exposure through fund investments.",
+      "confidence": "medium",
+      "id": 6999
+    },
+    {
+      "date": "2025-02-03",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DIRECT CONFLICT IDENTIFIED: Collaborative Robotics Inc., where Michael is board member (since 12/2022) with $250K-$500K vested common stock and $100K-$250K unvested common stock, received SBIR Phase I contract W5170125C0100 from Army on 2025-02-03 for $249,205 \u2014 'Explosion Proof Collaborative Robots' (Topic A244-059). Contract period 2/2025-8/2025. Michael was nominated 2025-01-20, confirmed 2025-05-14. The contract was awarded DURING the confirmation period. Michael's 278e Section 3 #13 states he 'holds vested and unvested stock' in Collaborative Robotics with a repurchase/retention structure. As USD(R&E) he oversees SBIR program policy and the Army's S&T enterprise. SBIR Phase I leads to Phase II and Phase III (production contracts) \u2014 decisions in which Michael has direct 'authority, direction, and control.' This is the most concrete conflict overlap identified.",
+      "confidence": "medium",
+      "id": 6991
+    },
+    {
+      "date": "2025-03-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Warren's March 2, 2025 letter demanded four specific ethics commitments from Michael \u2014 4-year recusal from former clients/employers, 4-year post-government lobbying restriction, divestiture from conflicted holdings, specific company disclosures \u2014 with March 10 deadline. No public record of Michael's response exists.",
+      "confidence": "medium",
+      "id": 4680
+    },
+    {
+      "date": "2025-03-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Warren letter demands 4-year recusal, divestiture, no-lobbying pledge - no public response found",
+      "confidence": "confirmed",
+      "id": 5038
+    },
+    {
+      "date": "2025-03-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Sen. Warren letter (March 2, 2025) specifically flagged 3 conflicts: (1) D-Wave obtained 'Awardable' vendor status on DOD CDAO Tradewinds marketplace Oct 2024, while Michael led DPCM Capital which merged D-Wave public; (2) Uber struck Maxwell AFB ride services agreement Dec 2024; (3) TellmeNetworks (Michael's former company, acquired by Microsoft) became military contractor. Warren asked 9 specific questions including whether Michael would commit to 4-year recusal from former clients/employers, 4-year post-employment lobbying ban, and 4-year revolving-door ban. No public record of Michael's written response to this letter. Warren also noted predecessor Heidi Shyu 'voluntarily agreed to recuse from her former employers specific-party matters for four years \u2014 going beyond the two-year recusal requirement in former President Biden ethics pledge.'",
+      "confidence": "high",
+      "id": 6980
+    },
+    {
+      "date": "2025-03-02",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Warren letter (Mar 2, 2025) explicitly connects D-Wave Tradewinds status to Michael's DPCM Capital SPAC: 'You now lead DPCM Capital, Inc., a SPAC that acquired the quantum computing company D-Wave Systems. In October 2024, D-Wave obtained Awardable status on a marketplace that fast-tracks companies to become DoD contractors.' Requested 4-year recusal from former employer matters.",
+      "confidence": "confirmed",
+      "id": 6989
+    },
+    {
+      "date": "2025-03-10",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "No public ethics agreement found on OGE PAS index despite Warren demanding specific commitments with March 10, 2025 deadline",
+      "confidence": "medium",
+      "id": 4957
+    },
+    {
+      "date": "2025-03-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Warren letter (Mar 2 2025) flagged DPCM Capital/D-Wave, Uber, Coatue as conflicts; demanded 4-year recusal from former clients, 4-year post-employment lobbying ban, and divestiture of DoD-impacted holdings",
+      "confidence": "confirmed",
+      "id": 5010
+    },
+    {
+      "date": "2025-03-27",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Michael's SASC APQ responses reveal he committed only to the statutory minimum recusal under 18 U.S.C. 208, stating 'I will comply with all recusal requirements under 18 U.S.C. \u00a7 208' \u2014 declining to voluntarily adopt the broader 4-year recusal from former clients/employers that Sen. Warren requested and that his predecessor Heidi Shyu voluntarily adopted. The 278e ethics agreement (Section 3) shows he will RETAIN vested stock/options in most portfolio companies, with unvested portions subject to acceleration-or-forfeit clauses if companies don't accelerate before he assumes duties. Critically, Perplexity agreement states: he will not participate in any particular matter that has a direct and predictable effect on his financial interests unless he first obtains a written waiver pursuant to 18 U.S.C. 208(b)(1).",
+      "confidence": "high",
+      "id": 6974
+    },
+    {
+      "date": "2025-03-27",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "USD(R&E) role has direct authority/oversight over: DARPA, DIU (Defense Innovation Unit), Office of Strategic Capital (OSC), Missile Defense Agency (MDA), Space Development Agency (SDA), Test Resource Management Center, Defense Technical Information Center, Defense Science Board, and all 10 FFRDCs. Michael confirmed DARPA is 'under the authority, direction, and control of the USD(R&E).' He also serves as statutory advisor to the Joint Requirements Oversight Council (JROC) and chairs the Missile Defense Executive Board. OSC, which 'develops and implements strategies and partnerships to accelerate and scale private investment in critical technologies,' is a direct report \u2014 creating a structural overlap between his venture investment background and the office tasked with leveraging private capital markets for defense.",
+      "confidence": "high",
+      "id": 6977
+    },
+    {
       "date": "2025-05-14",
       "type": "finding",
       "finding_type": "identity",
@@ -3615,12 +4336,108 @@
       "id": 4538
     },
     {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Emil Michael confirmed as USD(R&E) May 14, 2025, sworn in May 20, 2025. Nominated Inauguration Day Jan 2025. Pentagon CTO role: primary advisor to SecDef on tech development, prototyping, testing. Trimmed critical technology areas from 14 to 6 priorities. Previously: Uber SVP (helped raise $3B), DPCM Capital CEO (SPAC merged D-Wave public at $1.2B in Aug 2022), Coatue Management senior advisor (Oct 2018-present). D-Wave investor base includes In-Q-Tel (CIA VC fund). D-Wave Government Inc created for federal contracts.",
+      "confidence": "high",
+      "id": 4597
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Emil Michael confirmed as USD(R&E) with extensive tech investment portfolio creating potential defense conflicts",
+      "confidence": "high",
+      "id": 4625
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Emil Michael as USD(R&E) technology gatekeeper: Confirmed May 14, 2025, sworn in May 20. Trimmed critical technology areas from 14 to 6: Applied AI, Scaled Hypersonics, Scaled Directed Energy, Biomanufacturing, Contested Logistics, Battlefield Information Dominance. Now oversees DIU + CDAO + OSC after Pentagon consolidation. Publicly champions 'new primes' (Palantir, SpaceX, Anduril) \u2014 stated Pentagon should ensure companies 'don't have to sue the government to get your first big contract.' Led Anthropic standoff: called CEO 'liar' with 'God complex,' resulting in unprecedented 'supply-chain risk' designation and federal ban. OpenAI replacement deal followed within hours. Previous Coatue advisory role creates conflict surface across $40B tech portfolio.",
+      "confidence": "medium",
+      "id": 4713
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "OGE 278e financial disclosure for Emil Michael IS available via ProPublica (DocumentCloud ID 25971448, disclosure_documents record 1906). Ethics agreement, 3 278-T transaction reports (Jun/Aug/Oct 2025), 4 OGE waivers (2025-116 through 119), and certificate of divestiture (OGE-2025-297) also on file. Net worth: $120M-$277M. Not indexed in OGE's own public search tool but captured by ProPublica API ingest.",
+      "confidence": "medium",
+      "id": 4955
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CRITICAL GAP: No SEC filings from Emil Michael after Jul 12, 2024. Last filing was a Rent the Runway RSU grant (Form 4, Jul 11 2024 transaction). No D-Wave Form 4/Form 5 filed reflecting disposition of 887,138 shares or 106,626 RSUs between his board resignation (Oct 28, 2024) and USD(R&E) confirmation (May 14, 2025). Either shares were not disposed of, or there is a missing filing.",
+      "confidence": "medium",
+      "id": 4978
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Senate confirmed Michael 54-43 on May 14 2025; 3 Democrats crossed over (Gallego-AZ, Warner-VA, King-ME); sworn in May 20 2025",
+      "confidence": "confirmed",
+      "id": 5012
+    },
+    {
+      "date": "2025-05-14",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Michael's 278e financial disclosure states D-Wave board member 8/2022-10/2024 with 'No ongoing relationship or holdings or economics as of the date of filing.' OGE certificate of divestiture OGE-2025-297 on file, plus 4 OGE waivers (2025-116 through 2025-119). Disclosure available via ProPublica DocumentCloud ID 25971448.",
+      "confidence": "high",
+      "id": 6992
+    },
+    {
       "date": "2025-05-20",
       "type": "finding",
       "finding_type": "financial",
       "summary": "SpaceX investor/advisor creates conflict: SpaceX holds $5.9B Space Force contract; Michael as USD(R&E) oversees R&E pipeline feeding SpaceX's largest government customer",
       "confidence": "high",
       "id": 4533
+    },
+    {
+      "date": "2025-05-20",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "D-Wave share sales: sold 111,938 shares Jun 4 2024 retaining 887,138 shares; D-Wave obtained DoD Awardable vendor status Oct 2024 creating direct conflict; no public evidence of full divestiture before taking office May 2025",
+      "confidence": "high",
+      "id": 5015
+    },
+    {
+      "date": "2025-05-20",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Senate confirmed as USD(R&E) / Pentagon CTO May 2025 (54-43); sworn in May 20, 2025",
+      "confidence": "confirmed",
+      "id": 5857
+    },
+    {
+      "date": "2025-05-27",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Michael confirmed as Politically Exposed Person (PEP) in OpenSanctions \u2014 listed in US Plum Book as USD(R&E)",
+      "confidence": "confirmed",
+      "id": 5000
+    },
+    {
+      "date": "2025-06-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "AAU v. Department of Defense (1:25-cv-11740, D. Mass.) \u2014 universities suing DoD under Michael's USD(R&E) purview over research policy",
+      "confidence": "medium",
+      "id": 5009
+    },
+    {
+      "date": "2025-09-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DPCM Capital, Inc. filed in FL as foreign profit corp (F25000005464), registered 2025-09-29, incorporated in DE. Officers: Alan Baratz (P), John Markovich (D), Trevor Lanting (D), Greg Golkov (DST). All at 2650 E. Bayshore Rd, Palo Alto. EIN: 850525645.",
+      "confidence": "confirmed",
+      "id": 4979
     },
     {
       "date": "2025-2026",
@@ -3645,6 +4462,22 @@
       "summary": "Coatue Management (Michael's advisory client) co-led Anthropic's $10B funding round at $350B valuation in Jan 2026; Coatue's individual investment amount undisclosed. This creates conflict: Michael attacks Anthropic CEO while his advisory client invests billions in the company.",
       "confidence": "high",
       "id": 4543
+    },
+    {
+      "date": "2026-03-05",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Leading Pentagon-Anthropic AI contract dispute; called CEO Amodei liar with God-complex",
+      "confidence": "high",
+      "id": 5859
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "USASpending data shows Anduril Industries has $204M in DOD contracts (top 20 sampled: Army $9.1M, Navy $194.7M, primarily loitering munitions/ALTIUS, autonomous force protection, counter-intrusion systems). Palantir Technologies has $819M in DOD contracts (top 20 sampled: Army $816M, including Maven Smart System at $293M, CDAO MSS $228M, AI/ML programs). Both companies' contract portfolios fall squarely within USD(R&E) oversight areas: AI/autonomy (CDAO reports to OUSD(R&E) for TAI&A critical technology area), prototyping/experimentation (Anduril's SBIR Phase III contracts), and technology transition. Michael's 278e does NOT disclose direct holdings in either Anduril or Palantir, but this does not eliminate potential overlap through: (a) VC fund portfolio exposure via Sequoia, Benchmark Founders, or Bond Capital funds that may hold Anduril/Palantir positions, and (b) Founders Fund #85 listed as EIF=Yes ($100K-$250K) \u2014 Founders Fund is Anduril's lead investor.",
+      "confidence": "medium",
+      "id": 6978
     }
   ],
   "curation": {

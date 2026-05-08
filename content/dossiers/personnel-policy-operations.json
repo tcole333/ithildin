@@ -1,0 +1,398 @@
+{
+  "name": "Personnel Policy Operations",
+  "slug": "personnel-policy-operations",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.388710",
+  "last_updated": "2026-03-23T19:01:16",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "identity": 1,
+      "relationship": 2,
+      "legal": 1
+    },
+    "connection_types": {
+      "financial": 2,
+      "advisory": 2,
+      "employment": 1,
+      "funds": 1
+    },
+    "last_updated": "2026-03-23T19:01:16"
+  },
+  "findings": [
+    {
+      "id": 7130,
+      "finding_type": "financial",
+      "summary": "PPO PASS-THROUGH STRUCTURE CONFIRMED: CPI granted 1.15M (2022) and 880K (2023) to PPO. PPO then granted 1.13M (2022) and 429K (2023) to Constitutional Rights Defense Fund, a 501c4 with no online presence. PPO spokesperson confirmed funds paid legal bills for Mark Meadows and Jeffrey Clark. This is a documented c3-to-c4 pass-through: CPI (c3) -> PPO (c3) -> CRDF (c4) -> defense attorneys. Both CPI and PPO share address at 300 Independence Ave SE DC 20003.",
+      "detail": null,
+      "source_datasets": [
+        "ProPublica Nonprofit Explorer, NOTUS"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:33:59",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001; NOTUS reporting 2024-07-10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7134,
+      "finding_type": "identity",
+      "summary": "PPO LEADERSHIP \u2014 ALL THREE FOUNDERS FROM TRUMP PRESIDENTIAL PERSONNEL OFFICE, TWO RETURNED TO GOVERNMENT: (1) Troup Hemenway \u2014 President/Exec Director, former Associate Director of WH Presidential Personnel Office (defense/IC portfolio), then Heritage Project 2025 senior advisor for personnel placement. (2) Andrew Kloster \u2014 General Counsel, former Deputy GC then Acting GC of OPM, returned to OPM as General Counsel Jan 2025. (3) Joshua Whitehouse \u2014 Treasurer (from Feb 2024), former WH liaison to DHS and DoD, Special Assistant to President in PPO. Board also includes Matthew Buckham (Secretary, co-founder of American Accountability Foundation, former WH Presidential Personnel Office) and Alexei Woltornist (Treasurer until Feb 2024, former DHS Asst Sec for Public Affairs, now on Homeland Security Advisory Council).",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:22",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001; Heritage Foundation press release; POGO reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7138,
+      "finding_type": "relationship",
+      "summary": "PPO IS PROJECT 2025 ADVISORY BOARD MEMBER AND SCHEDULE F IMPLEMENTATION VEHICLE: LittleSis confirms PPO is Advisory Board Member of Project 2025 (Heritage Foundation). PPO launched database to review federal employees for alignment with America First agenda. PPO founder Kloster returned to OPM as GC in Jan 2025 and OPM immediately began issuing memos to strip protections from career employees under Schedule Policy/Career (renamed Schedule F). PPO founder Hemenway was one of three heads of the Project 2025 team at Heritage. PPO thus serves dual function: (1) legal defense fund for indicted Trump allies and (2) personnel vetting pipeline for government placement.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:54",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1974934; Heritage press release; POGO reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7132,
+      "finding_type": "financial",
+      "summary": "PPO COMPLETE FUNDING SOURCES (2022-2024): CPI 1.15M (2022) + 880K (2023) = 2.03M. Leandro P Rizzuto Foundation 1M (2024). Vanguard Charitable Endowment 500K (2024). Donor Advised Charitable Giving Inc 110K (2024) \u2014 same entity gave 160M to 85 Fund (Leonard Leo) in 2024. The Dunn Foundation (Tim Dunn) 87.5K (2024). Tree of Life Foundation 50K (2022). PPO revenue trajectory: 1.43M (2022), 2.05M (2023), 4.55M (2024). PPO is diversifying away from CPI dependence with new major donors.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:09",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001",
+          "source_quote": " grants received include CPI 1150000 (2022), CPI 880005 (2023), Vanguard 500000 (2024), Rizzuto 1000000 (2024), Dunn 87500 (2024), Tree of Life 50000 (2022), DACG 110000 (2024)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7136,
+      "finding_type": "financial",
+      "summary": "PPO COURAGE UNDER FIRE LEGAL DEFENSE FUND \u2014 SPENT 3M+ DEFENDING TRUMP-ALIGNED OFFICIALS: Confirmed recipients include Mark Meadows (former WH Chief of Staff, indicted GA), Jeffrey Clark (former AAG, indicted GA), John Eastman (indicted GA, disbarred CA), Peter Navarro (convicted contempt of Congress), Mike Roman (former Trump campaign operative, indicted GA), and six Nevada fake electors (100K for legal fees, case dismissed on venue grounds). PPO spokesperson confirmed the pass-through to CRDF in 2022 went to Meadows and Clark defense costs. Washington Post reported 3M+ total spent and Tim Dunn helped seed the fund.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:33",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NOTUS 2024-07-10; The Hill 2024-07-08; Washington Post 2024-05-15",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7137,
+      "finding_type": "legal",
+      "summary": "ACCOUNTABLE.US FILED DC AG COMPLAINT AGAINST CPI AND PPO (July 2024): Alleges CPI violated nonprofit status by funneling 1.2M through PPO to Constitutional Rights Defense Fund for Meadows legal defense. Complaint argues CPI has been operating exclusively for the benefit of the Republican Party. Seeks immediate dissolution of both organizations under DC law. CRDF has no online presence, no EIN found in IRS databases, filed a corporate income tax return rather than a nonprofit return. CRDF representative Thomas Datwyler described it as a nonprofit corporation but it was listed as 501c4 on PPO forms despite no IRS determination letter being found.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-07-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:44",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Accountable.US press release 2024-07-10; NOTUS 2024-07-10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7141,
+      "finding_type": "relationship",
+      "summary": "PPO GOVERNMENT PLACEMENT PIPELINE \u2014 3 OF 5 OFFICERS NOW IN TRUMP 2.0 GOVERNMENT: (1) Andrew Kloster: OPM General Counsel (Jan 2025), managing Schedule F implementation. (2) Joshua Whitehouse: PPO Treasurer, former WH liaison to DHS/DoD. (3) Matthew Buckham: HHS Chief of Staff under RFK Jr, previously WH liaison to HHS and oversaw political appointee recruitment. He previously co-founded American Accountability Foundation (CPI satellite). Also Alexei Woltornist appointed to Homeland Security Advisory Council (Jun 2025). Hemenway was Project 2025 senior advisor for personnel placement at Heritage. PPO is effectively a revolving door between conservative nonprofit sector and federal government personnel operations.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:37:42",
+      "target_name": "Personnel Policy Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Jan 2025; HHS.gov leadership page; DHS announcement Jun 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3568,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:59",
+      "profile_id": "tech-right",
+      "other_person": "Conservative Partnership Institute",
+      "other_person_slug": "conservative-partnership-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3569,
+      "person_a": "Constitutional Rights Defense Fund",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:35:00",
+      "profile_id": "tech-right",
+      "other_person": "Constitutional Rights Defense Fund",
+      "other_person_slug": "constitutional-rights-defense-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3570,
+      "person_a": "Personnel Policy Operations",
+      "person_b": "Project 2025",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:35:06",
+      "profile_id": "tech-right",
+      "other_person": "Project 2025",
+      "other_person_slug": "project-2025",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1974934",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3571,
+      "person_a": "Office of Personnel Management",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:37:50",
+      "profile_id": "tech-right",
+      "other_person": "Office of Personnel Management",
+      "other_person_slug": "office-of-personnel-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Jan 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3572,
+      "person_a": "Heritage Foundation",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:37:51",
+      "profile_id": "tech-right",
+      "other_person": "Heritage Foundation",
+      "other_person_slug": "heritage-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Heritage Foundation press release",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3681,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "funds",
+      "description": "CPI granted .03M to PPO (2022-2023). PPO is the personnel pipeline for Trump admin. Same address.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:16",
+      "profile_id": "tech-right",
+      "other_person": "Conservative Partnership Institute",
+      "other_person_slug": "conservative-partnership-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 grants EIN 821470217; 990 EIN 881773001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PPO PASS-THROUGH STRUCTURE CONFIRMED: CPI granted 1.15M (2022) and 880K (2023) to PPO. PPO then granted 1.13M (2022) and 429K (2023) to Constitutional Rights Defense Fund, a 501c4 with no online presence. PPO spokesperson confirmed funds paid legal bills for Mark Meadows and Jeffrey Clark. This is a documented c3-to-c4 pass-through: CPI (c3) -> PPO (c3) -> CRDF (c4) -> defense attorneys. Both CPI and PPO share address at 300 Independence Ave SE DC 20003.",
+      "confidence": "high",
+      "id": 7130
+    },
+    {
+      "date": "2022-01-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "PPO LEADERSHIP \u2014 ALL THREE FOUNDERS FROM TRUMP PRESIDENTIAL PERSONNEL OFFICE, TWO RETURNED TO GOVERNMENT: (1) Troup Hemenway \u2014 President/Exec Director, former Associate Director of WH Presidential Personnel Office (defense/IC portfolio), then Heritage Project 2025 senior advisor for personnel placement. (2) Andrew Kloster \u2014 General Counsel, former Deputy GC then Acting GC of OPM, returned to OPM as General Counsel Jan 2025. (3) Joshua Whitehouse \u2014 Treasurer (from Feb 2024), former WH liaison to DHS and DoD, Special Assistant to President in PPO. Board also includes Matthew Buckham (Secretary, co-founder of American Accountability Foundation, former WH Presidential Personnel Office) and Alexei Woltornist (Treasurer until Feb 2024, former DHS Asst Sec for Public Affairs, now on Homeland Security Advisory Council).",
+      "confidence": "medium",
+      "id": 7134
+    },
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "PPO IS PROJECT 2025 ADVISORY BOARD MEMBER AND SCHEDULE F IMPLEMENTATION VEHICLE: LittleSis confirms PPO is Advisory Board Member of Project 2025 (Heritage Foundation). PPO launched database to review federal employees for alignment with America First agenda. PPO founder Kloster returned to OPM as GC in Jan 2025 and OPM immediately began issuing memos to strip protections from career employees under Schedule Policy/Career (renamed Schedule F). PPO founder Hemenway was one of three heads of the Project 2025 team at Heritage. PPO thus serves dual function: (1) legal defense fund for indicted Trump allies and (2) personnel vetting pipeline for government placement.",
+      "confidence": "medium",
+      "id": 7138
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PPO COMPLETE FUNDING SOURCES (2022-2024): CPI 1.15M (2022) + 880K (2023) = 2.03M. Leandro P Rizzuto Foundation 1M (2024). Vanguard Charitable Endowment 500K (2024). Donor Advised Charitable Giving Inc 110K (2024) \u2014 same entity gave 160M to 85 Fund (Leonard Leo) in 2024. The Dunn Foundation (Tim Dunn) 87.5K (2024). Tree of Life Foundation 50K (2022). PPO revenue trajectory: 1.43M (2022), 2.05M (2023), 4.55M (2024). PPO is diversifying away from CPI dependence with new major donors.",
+      "confidence": "high",
+      "id": 7132
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PPO COURAGE UNDER FIRE LEGAL DEFENSE FUND \u2014 SPENT 3M+ DEFENDING TRUMP-ALIGNED OFFICIALS: Confirmed recipients include Mark Meadows (former WH Chief of Staff, indicted GA), Jeffrey Clark (former AAG, indicted GA), John Eastman (indicted GA, disbarred CA), Peter Navarro (convicted contempt of Congress), Mike Roman (former Trump campaign operative, indicted GA), and six Nevada fake electors (100K for legal fees, case dismissed on venue grounds). PPO spokesperson confirmed the pass-through to CRDF in 2022 went to Meadows and Clark defense costs. Washington Post reported 3M+ total spent and Tim Dunn helped seed the fund.",
+      "confidence": "high",
+      "id": 7136
+    },
+    {
+      "date": "2024-07-10",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "ACCOUNTABLE.US FILED DC AG COMPLAINT AGAINST CPI AND PPO (July 2024): Alleges CPI violated nonprofit status by funneling 1.2M through PPO to Constitutional Rights Defense Fund for Meadows legal defense. Complaint argues CPI has been operating exclusively for the benefit of the Republican Party. Seeks immediate dissolution of both organizations under DC law. CRDF has no online presence, no EIN found in IRS databases, filed a corporate income tax return rather than a nonprofit return. CRDF representative Thomas Datwyler described it as a nonprofit corporation but it was listed as 501c4 on PPO forms despite no IRS determination letter being found.",
+      "confidence": "high",
+      "id": 7137
+    },
+    {
+      "date": "2025-01-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "PPO GOVERNMENT PLACEMENT PIPELINE \u2014 3 OF 5 OFFICERS NOW IN TRUMP 2.0 GOVERNMENT: (1) Andrew Kloster: OPM General Counsel (Jan 2025), managing Schedule F implementation. (2) Joshua Whitehouse: PPO Treasurer, former WH liaison to DHS/DoD. (3) Matthew Buckham: HHS Chief of Staff under RFK Jr, previously WH liaison to HHS and oversaw political appointee recruitment. He previously co-founded American Accountability Foundation (CPI satellite). Also Alexei Woltornist appointed to Homeland Security Advisory Council (Jun 2025). Hemenway was Project 2025 senior advisor for personnel placement at Heritage. PPO is effectively a revolving door between conservative nonprofit sector and federal government personnel operations.",
+      "confidence": "medium",
+      "id": 7141
+    }
+  ]
+}

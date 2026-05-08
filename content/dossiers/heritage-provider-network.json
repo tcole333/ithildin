@@ -1,0 +1,525 @@
+{
+  "name": "Heritage Provider Network",
+  "slug": "heritage-provider-network",
+  "aliases": [],
+  "profile_ids": [
+    "epstein-aetna"
+  ],
+  "generated_at": "2026-05-07T23:07:36.381218",
+  "last_updated": "2026-04-15T03:49:13",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 5,
+      "relationship": 1,
+      "unknown": 1
+    },
+    "connection_types": {
+      "controls": 1,
+      "subsidiary_of": 3,
+      "advisory": 1,
+      "legal": 2,
+      "corporate": 1
+    },
+    "last_updated": "2026-04-15T03:49:13"
+  },
+  "findings": [
+    {
+      "id": 10486,
+      "finding_type": "legal",
+      "summary": "CA DMHC 2018 routine examination found Quality Assurance deficiencies (report S17-R-357)",
+      "detail": "California Department of Managed Health Care issued a Final Report (reference S17-R-357, addressed to 'Dr. Richard Merkin, President' at HPN, dated Feb 7 2018) after a routine examination of fiscal and administrative affairs under Knox-Keene Act \u00a71382(a). Findings of Quality Assurance violations: (i) failure to have QA program directed by providers and/or failure to document quality of care review; (ii) failure to document identification of problems; (iii) failure to document that effective action was taken to improve care where deficiencies were identified; (iv) failure to document follow-up where indicated; (v) failure to ensure QA program designed to deliver care at professionally recognized standards of practice across all enrollees; (vi) failure to ensure quality problems were identified and corrected for ALL provider entities. HPN required to submit corrective action response within 30 days. Significant because (a) these are systemic QA failures across multiple provider entities, (b) the report was personally addressed to Richard Merkin as Plan President, and (c) QA/documentation gaps overlap with patterns that would be relevant to RADV / Medicare Advantage upcoding allegations. Additional prior DMHC enforcement actions listed on wpso.dmhc.ca.gov/enfactions/actionListing but specific dates/fines blocked by 403 from automated fetch \u2014 human follow-up needed.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2018-02-07",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:47:25",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DMHC:S17-R-357",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://wpso.dmhc.ca.gov/enfactions/actionListing.aspx?OrgType=0&Org=Heritage+Provider+Network",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.dmhc.ca.gov/desktopmodules/dmhc/hpexams/exams/357Routine020718.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10480,
+      "finding_type": "legal",
+      "summary": "SDNY DOJ False Claims Act case (1:19-cv-04027): United States v. Heritage Provider Network Inc.",
+      "detail": "Docket 71893972 on CourtListener confirms an active DOJ FCA case filed against Heritage Provider Network Inc. in the Southern District of New York, civil case 1:19-cv-04027, PACER case ID 515005. Case title: 'United States of America v. Heritage Provider Network Inc.' \u2014 United States as sole captioned plaintiff. Court: U.S. District Court, S.D.N.Y. No relator caption visible in CourtListener metadata (cause/nature of suit fields blank at fetch time). Date filed: not yet populated (2019 case; docket last modified 2025-11-10). No judge assigned in CL metadata. Richard Merkin is NOT personally named as a defendant \u2014 only the corporate entity HPN. No public DOJ press release surfaced on this case via web search, suggesting it may still be under seal or have been resolved quietly. Case type (FCA qui tam vs direct US action) cannot be confirmed without PACER complaint text.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2019",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:46:27",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL_DOCKET:71893972",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PACER:1:19-cv-04027:nysd",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/71893972/united-states-of-america-v-heritage-provider-network-inc/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10482,
+      "finding_type": "legal",
+      "summary": "Head v. Regal Medical Group - $49.99M class action data breach settlement (Feb 2023 ransomware)",
+      "detail": "The December 2022 ransomware attack on Heritage Provider Network/Regal Medical Group exfiltrated PHI of approximately 3.3-3.4 million patients (names, SSNs, DOB, addresses, medical diagnoses, lab results, prescriptions, plan member numbers). Eleven defendants settled for $49,995,000 preliminary approval: Heritage Provider Network Inc.; Regal Medical Group Inc.; Lakeside Medical Organization A Medical Group Inc.; ADOC Acquisition Co. A Medical Group Inc. dba ADOC Medical Group; West Covina Plan IPA Inc. dba Greater Covina Medical Group Inc.; Affiliated Doctors of Orange County Medical Group Inc.; Arizona Health Advantage Inc.; AZPC Clinics LLC; Quality Care Surgery Center LLC dba Community Surgery Center of Glendale; Sun Eun Enterprise Inc. dba Pacific Family Hospice; Valley's Best Hospice Inc. Class counsel: Scott Edward Cole (Cole & Van Note), Daniel S. Robinson (Robinson Calcagnie Inc.), Jean Martin (Morgan & Morgan Complex Litigation Group). Class representatives: Timothy Head, Richard Kontas, Diana Skaggs, Ideh Horri Farahani, Lequeint Cole. Final approval hearing Jan 28 2026. Underlying consolidated CDCA federal dockets include Sergio Ortega v HPN (5:23-cv-00331 CDCA, filed Feb 28 2023, terminated Mar 27 2023 to consolidate) and Sam Abedi v HPN (2:23-cv-01113), Pinchem v Regal (2:15-cv-06518), Austin v Regal (2:23-cv-01077), and ~14 parallel Regal Medical Group CDCA dockets from Feb 2023. Also in LASC state court as Timothy Head v Regal Medical Group (23STCV02939). Reveals the true scope of HPN's corporate group: all these Arizona and hospice entities share infrastructure with the core CA managed-care group \u2014 far broader than public-facing 'Heritage Provider Network' marketing suggests.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:47:09",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL_DOCKET:66809747",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL_DOCKET:66813550",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL_DOCKET:66908630",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hipaajournal.com/multiple-lawsuits-regal-medical-group-ransomware/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.regalmedicalsettlement.com/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10472,
+      "finding_type": "relationship",
+      "summary": "HPN federal lobbying client since 2004; lobbyist Thomas A Scully (former CMS Administrator, 2001-2004) registered as lobbyist for HPN at Alston & Bird \u2014 direct revolving-door from Medicare regulator to HPN's Medicare Advantage policy advocacy",
+      "detail": "LDA 2004 registration RR; client HERITAGE PROVIDER NETWORKS California; registrant ALSTON & BIRD LLP; lobbyist THOMAS A SCULLY covered_position 'CENTERS FOR MEDICARE & MEDICAID SERVICES ADMIN'; co-lobbyists Alicia Ziemiecki, David Hebert, Marc Scheineson, M Lynn Sykes; issue HCR Health Issues",
+      "source_datasets": [
+        "lda"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:44:48",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "lda:filing_uuid=57438d59-efb4-4e7b-b098-9279fb5c06ab",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10473,
+      "finding_type": null,
+      "summary": "HPN/Regal ransomware breach Dec 1 2022 \u2014 3.3M patient records (names, DOB, SSN, addresses, healthcare information) exfiltrated; .99M class-action settlement (Head v Regal Medical Group et al); one of the largest healthcare data breach settlements in US history; raises information-security and regulatory compliance concerns about Merkin's operations",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:44:50",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hipaajournal.com/multiple-lawsuits-regal-medical-group-ransomware/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10488,
+      "finding_type": "legal",
+      "summary": "Pacificare of Texas v HPN bankruptcy adversary (2003) and pattern of payor/provider litigation",
+      "detail": "Older federal litigation inventory: (a) Pacificare Of Texas Inc v Heritage Provider Network Inc, Bankr CDCA 2:03-ap-01862, filed 2003-06-04 \u2014 a bankruptcy adversary proceeding where Pacificare (now UnitedHealth) sued HPN; suggests payor-provider contractual dispute during Pacificare's mid-2000s integration; (b) Heritage Provider Network Inc. v Community Family Care Medical Group IPA Inc. (2:20-cv-09675 CDCA, filed 2020-10-21) \u2014 HPN as plaintiff suing another IPA; (c) Verity Health System / Clinicomp International adversary proceeding 2:19-ap-01042 (2019) \u2014 HPN as party to Verity Catholic hospital bankruptcy collapse; (d) Jeff Hartley v Anthem Blue Cross (2:14-cv-03035 CDCA 2014) \u2014 HPN named as third-party defendant in ERISA payor dispute; (e) Ecure CA LLC v Regal Medical Group Inc. (2:22-cv-08948 CDCA 2022-12-09); (f) Advanced Orthopedic Center Inc v Regal Medical Group Inc. (2:23-cv-07068 CDCA 2023-08-25). Pattern: HPN/Regal repeatedly in provider-contract and payor-denial disputes in CDCA \u2014 consistent with aggressive utilization-management and contract-enforcement posture typical of tightly managed-care delegated medical groups.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:47:58",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-cl-party-hpn.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-cl-party-regal.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10489,
+      "finding_type": "legal",
+      "summary": "HPN federal lobbying 2004-onward via Senate LDA; no FARA registration",
+      "detail": "Heritage Provider Network appears as a federal lobbying CLIENT (not registrant) in Senate LDA filings beginning 2004 mid-year, with both mid-year and year-end reports filed continuously 2004-2005+ (at least 9 filings surfaced, of format RR=Registration, MM=Mid-Year Report, YY=Year-End Report). UUIDs include 57438d59-efb4-4e7b-b098-9279fb5c06ab (2004 RR), 1a8a2efd-aacc-4fd2-8322-3f9decb67ee3 (2004 MM), 2e8fd3f3-c4fd-4974-b773-e8f04e416175 (2004 YY), 0a04d3ae-e4c5-4762-b9b1-2cdcef6e2424 (2005 MM), 62bb8def-7a11-4b77-9401-d573fbddf023 (2005 YY). Lobbyist registrant name and issues not captured in summary output \u2014 follow-up needed to identify lobbying firm, issues, and spending. No FARA registrations for 'Richard Merkin' or 'Heritage Provider' \u2014 zero foreign-agent exposure, consistent with HPN being a domestic Medicare Advantage operator with no foreign-principal business. One LDA 'MERKIN' lobbyist hit (WILLIAM S MERKIN, LDA ID 28152) is a DIFFERENT PERSON from Dr. Richard Merkin \u2014 flagged as disambiguation noise.",
+      "source_datasets": [
+        "lobbying",
+        "fara"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:48:15",
+      "target_name": "Heritage Provider Network",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-fara-hpn.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-fara-merkin.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-lda-client-hpn.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-lda-filings-hpn.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-merkin-OJ21vJ7o/c-lda-lob.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5395,
+      "person_a": "Heritage Provider Network",
+      "person_b": "Richard Merkin",
+      "relationship_type": "controls",
+      "description": "Founder and CEO since 1979/1996",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:32",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://littlesis.org/entities/49700-Richard_N_Merkin",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5397,
+      "person_a": "Heritage Provider Network",
+      "person_b": "Regal Medical Group",
+      "relationship_type": "subsidiary_of",
+      "description": "Regal Medical Group is HPN affiliate/subsidiary",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:32",
+      "profile_id": "epstein-aetna",
+      "other_person": "Regal Medical Group",
+      "other_person_slug": "regal-medical-group",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.regalmed.com/about-us/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5398,
+      "person_a": "Heritage Provider Network",
+      "person_b": "Lakeside Medical Group",
+      "relationship_type": "subsidiary_of",
+      "description": "Lakeside Medical is HPN affiliate",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:32",
+      "profile_id": "epstein-aetna",
+      "other_person": "Lakeside Medical Group",
+      "other_person_slug": "lakeside-medical-group",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.lakesidemed.com/about-us/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5399,
+      "person_a": "Desert Oasis Healthcare",
+      "person_b": "Heritage Provider Network",
+      "relationship_type": "subsidiary_of",
+      "description": "DOHC is HPN affiliate since 2006 merger",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:33",
+      "profile_id": "epstein-aetna",
+      "other_person": "Desert Oasis Healthcare",
+      "other_person_slug": "desert-oasis-healthcare",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.mydohc.com/about/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5410,
+      "person_a": "Heritage Provider Network",
+      "person_b": "Thomas A Scully",
+      "relationship_type": "advisory",
+      "description": "Former CMS Administrator (2001-2004) registered as HPN's federal lobbyist via Alston & Bird beginning 2004 \u2014 direct revolving-door from Medicare regulator to Medicare Advantage operator",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:54",
+      "profile_id": "epstein-aetna",
+      "other_person": "Thomas A Scully",
+      "other_person_slug": "thomas-a-scully",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "lda:57438d59-efb4-4e7b-b098-9279fb5c06ab",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5446,
+      "person_a": "Heritage Provider Network",
+      "person_b": "United States Department of Justice",
+      "relationship_type": "legal",
+      "description": "United States v. Heritage Provider Network Inc., SDNY 1:19-cv-04027 \u2014 active False Claims Act-style case filed 2019, docket last modified Nov 2025",
+      "strength": "strong",
+      "date_range": "2019-",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:49:04",
+      "profile_id": "epstein-aetna",
+      "other_person": "United States Department of Justice",
+      "other_person_slug": "united-states-department-of-justice",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL_DOCKET:71893972",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PACER:1:19-cv-04027:nysd",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5448,
+      "person_a": "California Department of Managed Health Care",
+      "person_b": "Heritage Provider Network",
+      "relationship_type": "legal",
+      "description": "DMHC 2018 routine examination (report S17-R-357) found QA program deficiencies across HPN provider entities; corrective action plan required",
+      "strength": "strong",
+      "date_range": "2018",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:49:04",
+      "profile_id": "epstein-aetna",
+      "other_person": "California Department of Managed Health Care",
+      "other_person_slug": "california-department-of-managed-health-care",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.dmhc.ca.gov/desktopmodules/dmhc/hpexams/exams/357Routine020718.pdf",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5449,
+      "person_a": "Heritage Provider Network",
+      "person_b": "Regal Medical Group",
+      "relationship_type": "corporate",
+      "description": "Regal Medical Group is a core operating subsidiary/affiliated medical group within HPN's California managed-care delegated network; co-defendants in Head v Regal data breach class action (11 HPN-affiliated entities)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:49:13",
+      "profile_id": "epstein-aetna",
+      "other_person": "Regal Medical Group",
+      "other_person_slug": "regal-medical-group",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.regalmed.com/Regal-en-us/assets/File/HPN%20Provider%20Manual_02072024%20RLA%20Addendum.pdf",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2018",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "DMHC 2018 routine examination (report S17-R-357) found QA program deficiencies across HPN provider entities; corrective action plan required",
+      "other_person": "California Department of Managed Health Care",
+      "id": 5448
+    },
+    {
+      "date": "2018-02-07",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "CA DMHC 2018 routine examination found Quality Assurance deficiencies (report S17-R-357)",
+      "confidence": "high",
+      "id": 10486
+    },
+    {
+      "date": "2019",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "SDNY DOJ False Claims Act case (1:19-cv-04027): United States v. Heritage Provider Network Inc.",
+      "confidence": "high",
+      "id": 10480
+    },
+    {
+      "date": "2019-",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "United States v. Heritage Provider Network Inc., SDNY 1:19-cv-04027 \u2014 active False Claims Act-style case filed 2019, docket last modified Nov 2025",
+      "other_person": "United States Department of Justice",
+      "id": 5446
+    },
+    {
+      "date": "2023-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Head v. Regal Medical Group - $49.99M class action data breach settlement (Feb 2023 ransomware)",
+      "confidence": "high",
+      "id": 10482
+    }
+  ]
+}

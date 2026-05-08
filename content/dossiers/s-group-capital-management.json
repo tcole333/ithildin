@@ -1,0 +1,556 @@
+{
+  "name": "S-Group Capital Management",
+  "slug": "s-group-capital-management",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.440546",
+  "last_updated": "2026-04-02T22:43:23",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 14,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 1,
+      "relationship": 2,
+      "intelligence": 1,
+      "identity": 1
+    },
+    "connection_types": {
+      "funds": 5,
+      "controls": 2,
+      "employment": 4,
+      "financial": 2,
+      "corporate": 1
+    },
+    "last_updated": "2026-04-02T22:43:23"
+  },
+  "findings": [
+    {
+      "id": 9116,
+      "finding_type": "financial",
+      "summary": "Mordashov investment vehicle that channeled sanctioned oligarch capital into US tech companies including Centice",
+      "detail": "S-Group Capital Management, founded 2007 in Moscow, manages financial assets of Alexei Mordashov (Severstal CEO, sanctioned by EU/UK/US/AU/JP/CA). SGCM invested in: Centice Corp (Series E, USD 9.86M, Mar 2013 + earlier debt round Jul 2012), FiberZone Networks (USD 12M round led by SGCM, Aug 2011), Advanced Diamond Technologies (Series D USD 5.2M led by SGCM, 2011; convertible note USD 0.84M, Dec 2013), Innolume (EUR 6M, 38% stake, 2008), Bisant (Series A USD 0.59M, Jun 2014), Competentum Group (via S-Group Ventures). Also managed S-Group Ventures (co-funded with Russian Venture Company) investing in Vocord (49% stake), Sonda Technologies (100% ownership). S-Group Direct Investments was a separate fund vehicle. SGCM is reportedly no longer investing.",
+      "source_datasets": [
+        "web_search",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:47:01",
+      "target_name": "S-Group Capital Management",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CBInsights portfolio page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crain's Chicago Business Aug 2011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase S-Group Capital Management",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FiberZone GlobeNewsWire Aug 2011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Optics.org Innolume Aug 2008",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9212,
+      "finding_type": "relationship",
+      "summary": "S-Group Capital Management (Mordashov/Severstal) invested in both Spectralus and Innolume; Oscrivia involved in S-Group Ventures arrangement",
+      "detail": "S-Group Capital Management OOO (Moscow, founded 2007, now inactive) backed by Alexei Mordashov (Severstal, EU-sanctioned). Led Series C investment in Innolume (quantum dot lasers). Vladimir Yakushev served as Managing Partner of S-Group and Chairman of Spectralus OOO and Nano Optic Devices. Web search confirms Oscrivia was involved in the S-Group Ventures / Russian Venture Fund investment arrangement. This connects the Cyprus entity holding Centice/Spectralus patent security interests directly to the Mordashov investment network.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:03",
+      "target_name": "S-Group Capital Management",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase Vladimir Yakushev",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Laser Focus World Innolume Series C announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook S-Group Capital Management investor profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9229,
+      "finding_type": "intelligence",
+      "summary": "Systematic patent extraction pipeline: 24 US patents transferred to Russia/Cyprus entities across 3 portfolio companies",
+      "detail": "Pipeline confirmed at: (1) Spectralus: 8 laser patents to OOO Spectralus (2015), (2) Centice: 7 Raman spectroscopy patents via Readsboro strict foreclosure to ASB International Services Cyprus (2016-2021), (3) Nano-Optic Devices: 9 optical computing patents to OOO Nanooptic Devices (2016). Oscrivia Limited (Cyprus HE176751, director Aleksei Kirpu) used as lending vehicle to take security interests. Vladimir Yakushev (S-Group Managing Partner) chairs all Russian receiving entities. Centice received NIH SBIR funding. Innolume, ADT, FiberZone checked -- no extraction pattern found at those companies.",
+      "source_datasets": [
+        "registry",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:25:57",
+      "target_name": "S-Group Capital Management",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com: Kirpu director of Oscrivia, DGH Services director of ASB",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates: Oscrivia HE176751, ASB International HE385193",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Mordashov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBIR.gov: Centice NIH SBIR awards",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO ODP API assignment records for 24 patents",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9246,
+      "finding_type": "identity",
+      "summary": "S-Group Capital describes itself as managing financial assets for Mordashov; Gabidullin and Yakushev both MIPT + INSEAD graduates recruited as partners in 2007",
+      "detail": "S-Group Capital Management Limited was founded in 2007 in Moscow. It describes itself as managing 'financial assets of private investors headed by Mr. Alexei A. Mordashov, the majority shareholder and CEO of OAO Severstal and ZAO Severgroup.' Managing Partner Vladimir Yakushev and Partner Aidar Gabidullin both graduated from Moscow Institute of Physics and Technology (MIPT) and hold INSEAD MBA degrees, suggesting coordinated recruitment. Yakushev was formerly executive director of Severstal-Resource. The firm invested in US/European technology companies (Centice, Spectralus, Advanced Diamond Technologies, FiberZone, Innolume, Nano Optic Devices) and is now listed as 'no longer investing.'",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:37:19",
+      "target_name": "S-Group Capital Management",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg: Aidar Gabidoullin profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase: S-Group Capital Management profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MarketScreener: Vladimir Yakushev positions",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9280,
+      "finding_type": "relationship",
+      "summary": "S-Group Capital Management is a Moscow-based venture capital fund founded 2007 that co-invested with QWave Capital (Kouzmine/Beloussov) in Centice Corp, FiberZone Networks, and Innolume. S-Group placed its partners Yakushev and Gabidullin on the boards of these portfolio companies alongside QWave's Creer and Kouzmine. This explains the Centice Corp board composition named in FBI memo EFTA00129096.",
+      "detail": null,
+      "source_datasets": [
+        "web_search,crunchbase"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:42:04",
+      "target_name": "S-Group Capital Management",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://tracxn.com/d/venture-capital/s-group-capital-management/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4729,
+      "person_a": "Centice Corporation",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group Direct Investments Ltd co-led Centice 2009 USD 4M bridge financing. S-Group is Alexei Mordashov's investment vehicle.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:01",
+      "profile_id": "dfj-network",
+      "other_person": "Centice Corporation",
+      "other_person_slug": "centice-corporation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BioSpace 2009-04-06 press release",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4732,
+      "person_a": "Alexei Mordashov",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "controls",
+      "description": "Mordashov is the principal behind S-Group Capital Management which manages his financial assets. Mordashov sanctioned by EU/US/Australia Feb 2022.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:02",
+      "profile_id": "dfj-network",
+      "other_person": "Alexei Mordashov",
+      "other_person_slug": "alexei-mordashov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "S-Group Capital Management corporate profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4763,
+      "person_a": "S-Group Capital Management",
+      "person_b": "Vladimir Yakushev",
+      "relationship_type": "employment",
+      "description": "Managing Partner, co-founder (2007-present)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:47:58",
+      "profile_id": "dfj-network",
+      "other_person": "Vladimir Yakushev",
+      "other_person_slug": "vladimir-yakushev",
+      "evidence": []
+    },
+    {
+      "id": 4764,
+      "person_a": "Alexei Mordashov",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group manages Mordashov's investment portfolio",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:47:58",
+      "profile_id": "dfj-network",
+      "other_person": "Alexei Mordashov",
+      "other_person_slug": "alexei-mordashov",
+      "evidence": []
+    },
+    {
+      "id": 4766,
+      "person_a": "Aidar Gabidullin",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "employment",
+      "description": "Partner responsible for financial and tech companies",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:47:59",
+      "profile_id": "dfj-network",
+      "other_person": "Aidar Gabidullin",
+      "other_person_slug": "aidar-gabidullin",
+      "evidence": []
+    },
+    {
+      "id": 4810,
+      "person_a": "S-Group Capital Management",
+      "person_b": "Vladimir Yakushev",
+      "relationship_type": "employment",
+      "description": "Yakushev was Managing Partner of S-Group Capital Management (Mordashov/Severstal) and chairs Spectralus OOO and Nano Optic Devices",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:36",
+      "profile_id": "epstein",
+      "other_person": "Vladimir Yakushev",
+      "other_person_slug": "vladimir-yakushev",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase profile",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook investor profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4811,
+      "person_a": "Alexei Mordashov",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "financial",
+      "description": "S-Group Capital Management backed by Alexei Mordashov (Severstal, EU-sanctioned Feb 2022)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:38",
+      "profile_id": "epstein",
+      "other_person": "Alexei Mordashov",
+      "other_person_slug": "alexei-mordashov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Pandora Papers",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook S-Group profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4820,
+      "person_a": "S-Group Capital Management",
+      "person_b": "Spectralus Corporation",
+      "relationship_type": "funds",
+      "description": "S-Group Capital Management invested in Spectralus Corporation. Yakushev served as Chairman.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:41",
+      "profile_id": "epstein",
+      "other_person": "Spectralus Corporation",
+      "other_person_slug": "spectralus-corporation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CBInsights",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4821,
+      "person_a": "Nano-Optic Devices LLC",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group Capital Management invested in Nano-Optic Devices. Yakushev served as Chairman.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:41",
+      "profile_id": "epstein",
+      "other_person": "Nano-Optic Devices LLC",
+      "other_person_slug": "nano-optic-devices-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Tracxn",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4822,
+      "person_a": "Centice Corporation",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group Capital Management invested in Centice Corporation. Yakushev served as Board Director.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:41",
+      "profile_id": "epstein",
+      "other_person": "Centice Corporation",
+      "other_person_slug": "centice-corporation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4826,
+      "person_a": "Oscrivia Limited",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "controls",
+      "description": "Oscrivia is the administrative/lending vehicle through which S-Group Capital Management (Mordashov's tech VC arm) operated its US technology investments. S-Group partner Gabidullin used Oscrivia's address as his directorship base for Centice Corp.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:38",
+      "profile_id": "epstein",
+      "other_person": "Oscrivia Limited",
+      "other_person_slug": "oscrivia-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Joint security interests taken by Oscrivia on S-Group portfolio company patents",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC EDGAR Form D: Gabidullin at c/o Oscrivia address",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4832,
+      "person_a": "Aidar Gabidullin",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "employment",
+      "description": "Partner at S-Group Capital Management",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:43:17",
+      "profile_id": "epstein",
+      "other_person": "Aidar Gabidullin",
+      "other_person_slug": "aidar-gabidullin",
+      "evidence": []
+    },
+    {
+      "id": 4812,
+      "person_a": "Oscrivia Limited",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "financial",
+      "description": "Oscrivia involved in S-Group Ventures / Russian Venture Fund investment arrangement per web search",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:40",
+      "profile_id": "epstein",
+      "other_person": "Oscrivia Limited",
+      "other_person_slug": "oscrivia-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search results",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4836,
+      "person_a": "S-Group Capital Management",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "corporate",
+      "description": "QWave Capital co-invested with S-Group Capital Management in Centice Corp, FiberZone Networks, and Innolume; Kouzmine is QWave managing partner",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:43:23",
+      "profile_id": "epstein",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

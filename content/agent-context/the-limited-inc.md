@@ -1,6 +1,8 @@
 # The Limited Inc
-**Stats**: 9 findings, 5 connections, 0 entities
+**Stats**: 9 findings, 3 connections, 0 entities
 **Dossier**: /dossiers/the-limited-inc
+
+> The Limited Inc functions in this investigation as the corporate infrastructure that anchored Leslie Wexner's Columbus, Ohio commercial empire — providing the supply-chain logistics, banking relationships, and disclosure architecture within which both the SAT air cargo operation and the Mast Industries CNMI sourcing network operated largely outside public view across a decade of SEC filings.
 
 ## Key Findings
 - **[financial/confirmed]** FULL TEXT of Unrestricted Subsidiary definition from Dec 15, 1995 $1B credit agreement (EX-4.8): Five carve-out categories allow The Limited to designate entities that are EXCLUDED from consolidated SEC reporting via private written notice to Agent (Morgan Guaranty Trust). Category (c): 'exclusively in the business of owning or leasing, and operating, aircraft and/or trucks.' Category (e): 'primarily as a carrier transporting goods in both intrastate and interstate commerce.' Designation is one-way: may only change once during agreement term. Deutsche Bank AG New York Branch was Managing Agent. Agreement replaced Aug 30, 1990 facility. Counsel: Davis Polk & Wardwell (Company), Cravath Swaine & Moore (Agent). (1995-12-15) (Finding #2551)
@@ -16,6 +18,16 @@
 ## Top Connections
 - **ATMI** [legal/strong]: ATMI sued The Limited under False Claims Act for false country of origin declarations to US Customs — directly related to CNMI quota circumvention scheme
 - **Deutsche Bank** [financial/strong]: Deutsche Bank AG (NY/Cayman) served as Managing Agent on The Limited's ~$715M 1995 credit facility with $82M commitment — same bank that later maintained Epstein's accounts (RM 82289)
-- **Deutsche Bank** [financial/strong]: Deutsche Bank AG New York Branch was Managing Agent on The Limited Dec 15, 1995 B revolving credit facility
-- **Southern Air Transport** [financial/strong]: None
 - **Southern Air Transport** [financial/medium]: Dec 1995 credit agreement has Unrestricted Subsidiary carve-outs for aircraft/carrier entities. SAT relocated to Columbus same year.
+
+## Open Questions
+- Was the aircraft/carrier Unrestricted Subsidiary carve-out present in The Limited's August 30, 1990 credit agreement, or was it language added specifically in the December 1995 refinancing — eight months after SAT began Columbus/Rickenbacker flights? The 1990 agreement text is not in EDGAR and would require JPMorgan archive or lender syndicate access to answer.
+- Was any entity designated as an Unrestricted Subsidiary under the 1995 or 1997 credit agreements, and if so, what entity name appears in the private written notice to Morgan Guaranty Trust? This designation is the only mechanism that would explain why no air cargo or carrier subsidiary appears in any Exhibit 21 filing across FY1994–FY2005.
+- What was the precise contractual relationship between The Limited (or Mast Industries) and Southern Air Transport for the Hong Kong–Rickenbacker cargo operation — was it a commercial charter contract, a capacity agreement, or an equity or operational stake — and is documentation held by SAT's bankruptcy estate (1998) or by Ohio state economic development records related to Wexner's role in SAT's relocation?
+- The September 25, 1997 credit agreement, also not filed in full on EDGAR, postdates SAT's operational peak at Rickenbacker. Did this agreement retain, expand, or remove the aircraft/carrier Unrestricted Subsidiary categories, and does any filed amendment or consent address the SAT relationship specifically?
+- What was the full scope of Mast Industries' CNMI sourcing network — specific factory operators, supervisory personnel, and labor recruitment channels — and does the record from the 1999 CNMI class action litigation or the dismissed ATMI False Claims Act suit contain exhibits that name individual contractors or subcontractors operating in Saipan?
+
+## Applicable Models
+- jurisdictional-arbitrage
+- parallel-financial-system
+- complexity-as-credential

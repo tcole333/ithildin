@@ -5,15 +5,15 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.954098",
+  "generated_at": "2026-05-07T23:07:36.330823",
   "last_updated": "2026-03-10T00:11:46",
   "stats": {
     "total_findings": 9,
     "total_connections": 14,
     "total_entities": 6,
     "finding_types": {
-      "intelligence": 3,
       "identity": 5,
+      "intelligence": 3,
       "legal": 1
     },
     "connection_types": {
@@ -26,6 +26,31 @@
     "last_updated": "2026-03-10T00:11:46"
   },
   "findings": [
+    {
+      "id": 6484,
+      "finding_type": "identity",
+      "summary": "Biographical profile: Born February 1999. Graduated Syosset High School 2017 (NY State debate champion). BS Applied Mathematics, UC Berkeley 2021. Career: Neuralink (~2021-2022), X Corp/Twitter (Dec 2022+), xAI. DOGE role at SSA beginning early 2025. Held simultaneous appointments at SSA and DHS. Named in Aug 2025 Borges whistleblower complaint for authorizing NUMIDENT copy to insecure AWS cloud. On March 15, 2025, requested SAVE access stating it was 'absolutely critical to get detailed immigration status for non-citizen SSNs.' Publicly announced as SSA co-CIO. Described 6,300 DMF additions as immigrants 'on the terrorist watch list or with FBI criminal records.' Fourth CIO at SSA since Jan 20, 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:11:02",
+      "target_name": "Aram Moghaddassi",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "wikivault.com.ng:moghaddassi; fedscoop:ssa-doge-cio; whistleblower.org:borges-disclosure-2025-08-26; npr:2026-01-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6401,
       "finding_type": "intelligence",
@@ -221,31 +246,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "DOGE_TRACK:moghaddassi; whistleblower.org/Borges-Disclosure",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6484,
-      "finding_type": "identity",
-      "summary": "Biographical profile: Born February 1999. Graduated Syosset High School 2017 (NY State debate champion). BS Applied Mathematics, UC Berkeley 2021. Career: Neuralink (~2021-2022), X Corp/Twitter (Dec 2022+), xAI. DOGE role at SSA beginning early 2025. Held simultaneous appointments at SSA and DHS. Named in Aug 2025 Borges whistleblower complaint for authorizing NUMIDENT copy to insecure AWS cloud. On March 15, 2025, requested SAVE access stating it was 'absolutely critical to get detailed immigration status for non-citizen SSNs.' Publicly announced as SSA co-CIO. Described 6,300 DMF additions as immigrants 'on the terrorist watch list or with FBI criminal records.' Fourth CIO at SSA since Jan 20, 2025.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-10 00:11:02",
-      "target_name": "Aram Moghaddassi",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "wikivault.com.ng:moghaddassi; fedscoop:ssa-doge-cio; whistleblower.org:borges-disclosure-2025-08-26; npr:2026-01-23",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -612,6 +612,14 @@
   ],
   "timeline": [
     {
+      "date": "2025-03-15",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Biographical profile: Born February 1999. Graduated Syosset High School 2017 (NY State debate champion). BS Applied Mathematics, UC Berkeley 2021. Career: Neuralink (~2021-2022), X Corp/Twitter (Dec 2022+), xAI. DOGE role at SSA beginning early 2025. Held simultaneous appointments at SSA and DHS. Named in Aug 2025 Borges whistleblower complaint for authorizing NUMIDENT copy to insecure AWS cloud. On March 15, 2025, requested SAVE access stating it was 'absolutely critical to get detailed immigration status for non-citizen SSNs.' Publicly announced as SSA co-CIO. Described 6,300 DMF additions as immigrants 'on the terrorist watch list or with FBI criminal records.' Fourth CIO at SSA since Jan 20, 2025.",
+      "confidence": "high",
+      "id": 6484
+    },
+    {
       "date": "2025-07-25",
       "type": "finding",
       "finding_type": "intelligence",
@@ -798,307 +806,6 @@
     "applicable_models": [
       "private-order",
       "enabler-gradient"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Aram Moghaddassi",
-      "connections": [
-        {
-          "target": "Neuralink",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Neuralink/X engineer assigned to Treasury, SSA, HHS, Labor, DHS (5 agencies)"
-        },
-        {
-          "target": "Charles Borges",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "fedscoop.com:Borges (CDO) filed whistleblower complaint about Moghaddassi-authorized NUMIDENT database upload; Borges resigned Aug 29 2025",
-          "description": null
-        },
-        {
-          "target": "Elon Musk",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "nbcnews.com:'a longtime ally of Elon Musk'; installed as SSA co-CIO via DOGE",
-          "description": null
-        },
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Moghaddassi described as longtime Musk ally by SSA CDO whistleblower complaint"
-        },
-        {
-          "target": "Edward Coristine",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Both assigned to SSA; Moghaddassi as CIO granted Coristine and others USCIS database access"
-        },
-        {
-          "target": "Leland Dudek",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "wapo:2025-04-12; npr:2026-01-23",
-          "description": "Moghaddassi sent 6300-name list to Dudek for Death Master File entry; both operated in DOGE SSA context"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "npr.org:both DOGE SSA operatives; Moghaddassi as SSA CIO authorized NUMIDENT database upload",
-          "description": null
-        },
-        {
-          "target": "John Solly",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
-          "description": "Moghaddassi (SSA CIO) requested provisional authorization for Solly's cloud operation; July 25 2025 issued Provisional Authorization to Operate"
-        },
-        {
-          "target": "Chuck Borges",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": "https://whistleblower.org/wp-content/uploads/2025/08/08-26-2025-Borges-Disclosure-Sanitized.pdf",
-          "description": "Borges (CDO, whistleblower) filed disclosure against DOGE/Moghaddassi cloud operations at SSA August 26 2025"
-        },
-        {
-          "target": "Steve Davis",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": "npr.org:2026-01-23:Steve Davis (DOGE adviser) copied on March 3 2025 encrypted file from SSA DOGE member to DHS",
-          "description": null
-        },
-        {
-          "target": "True the Vote",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "DOJ-SSA-Notice-of-Corrections-Jan-16-2026",
-          "description": "SSA DOGE staffer referred for Hatch Act violations in connection with voter data agreement. Moghaddassi contacted Florida officials on voter data during the same period True the Vote was soliciting DOGE partnership."
-        },
-        {
-          "target": "Kristi Noem",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "wapo:2025-04-12; spokesman-review:2025-04-12",
-          "description": "Moghaddassi (DOGE SSA/DHS) coordinated with Noem (DHS Secretary) on Death Master File immigration enforcement scheme; Noem signed memoranda authorizing DMF additions"
-        },
-        {
-          "target": "Gregg Phillips",
-          "type": "political",
-          "strength": 0.2,
-          "evidence_ref": "democracydocket.com; popular.info",
-          "description": "Phillips (True the Vote) claimed DHS partnership on voter roll checks same period Moghaddassi used DHS email to contact Florida officials on voter data."
-        },
-        {
-          "target": "Catherine Engelbrecht",
-          "type": "political",
-          "strength": 0.2,
-          "evidence_ref": null,
-          "description": "Engelbrecht published 'Appeal to DOGE' March 2025 proposing SSA data + TTV voter rolls; Moghaddassi was DOGE SSA lead requesting SAVE access same month \u2014 potential coordination channel not confirmed"
-        }
-      ],
-      "secondHop": {
-        "Antonio Gracias": [
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Gracias (longtime friend) manages AJG Growth Fund LLC holding Austin Proper Hotel condos and Tesla stock. Registered as Delaware entity."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both donated to America PAC. Gracias served on Tesla board 2007-2021. Parallel MAGA-aligned political spending patterns."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Long-time Musk associate; CEO of Valor Equity Partners managing 17.5B including public pension funds; DOGE operative; resigned DOGE July 4 2025 after AFL-CIO pressure over fiduciary conflicts"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Valor Equity Partners founder, long-term Musk investor, former Tesla board member. Donated 1M to MAGA Inc. DOGE volunteer at SSA."
-          },
-          {
-            "target": "Jon Koval",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Valor Equity Partners CEO and VP, both assigned to SSA via DOGE"
-          }
-        ],
-        "Edward Coristine": [
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Coristine served as DOGE expert at OPM, reporting to Amanda Scales (ex-xAI/Musk). Professional relationship confirmed by LittleSis."
-          },
-          {
-            "target": "Joe Gebbia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Coristine moved from DOGE/SSA to National Design Studio under Gebbia's leadership (Dec 2025)"
-          },
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operative at CBP; accessed USCIS immigration data at DHS"
-          },
-          {
-            "target": "EGodly",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "DiamondCDN LLC provided DDoS protection and caching to EGodly cybercrime group Oct 2022-Jun 2023. EGodly thanked DiamondCDN on Telegram Feb 15 2023."
-          },
-          {
-            "target": "Neuralink",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Neuralink intern (age 19), assigned across 9+ agencies including CISA, DHS, FEMA"
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Kristi Noem": [
-          {
-            "target": "Troy Dean Edgar",
-            "type": "political",
-            "strength": 1.0,
-            "description": "DHS Deputy Secretary / Secretary; Edgar holds Palantir, Raytheon, Tesla stock"
-          },
-          {
-            "target": "Leland Dudek",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Dudek signed two memoranda with Noem (DHS Secretary) authorizing Death Master File immigrant additions despite initially believing the action was illegal"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Lewandowski serves as unpaid SGE/de facto chief of staff to DHS Secretary Noem (Jan 2025-present). LittleSis records both a professional position (shadow chief of staff) and a personal relationship (paramour, since 2019). Lewandowski approves contracts and reviews policy before Noem signs. Alleged romantic relationship is 'Washington worst-kept secret' per multiple outlets; both deny it but Noem was questioned directly in March 2026 House hearings."
-          }
-        ],
-        "Steve Davis": [
-          {
-            "target": "The Boring Company",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Boring Company while serving as DOGE de facto leader from GSA 6th floor; continued DOGE influence after May 29 departure; led meeting after officially leaving"
-          },
-          {
-            "target": "Nicole Hollander",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Married couple both placed at GSA via DOGE. Hollander handles GSA real estate (previously managed X/Twitter real estate); Davis was effective DOGE leader and Boring Company president"
-          },
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis served as effective DOGE leader from GSA HQ while president of Boring Company -- continued asserting control after May 2025 departure"
-          },
-          {
-            "target": "SpaceX",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
-          }
-        ],
-        "Leland Dudek": [
-          {
-            "target": "DOGE",
-            "type": "political",
-            "strength": 1.0,
-            "description": "SSA anti-fraud manager elevated to acting commissioner Feb 16 2025 after cooperating with DOGE; installed after Michelle King refused DOGE data access"
-          }
-        ],
-        "True the Vote": [
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "J. Christian Adams (PILF president) served as TTV counsel in 2013 Colorado voter roll cases; PILF is co-party in TTV v. IRS (DC Circuit, 2025-26)"
-          },
-          {
-            "target": "Eric Neff",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
-          },
-          {
-            "target": "Judicial Watch",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
-          }
-        ],
-        "John Solly": [
-          {
-            "target": "Michael Russo",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Russo (SSA CIO) authorized Solly (DOGE-aligned) to upload NUMIDENT production data to test cloud environment June 25 2025"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-07-25",
-        "label": "Aram Moghaddassi (DOGE-affiliated SSA CIO) issued Provisional Authorization to Operate for NUMIDENT cloud on July 25 2025, explicitly stating business need is higher than security risk",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6401
-      }
     ]
   }
 }

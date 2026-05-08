@@ -3,14 +3,17 @@
   "slug": "ghislaine-maxwell",
   "aliases": [],
   "profile_ids": [
+    "dfj-network",
     "epstein",
-    "tech-right"
+    "epstein-aetna",
+    "tech-right",
+    "zampolli"
   ],
-  "generated_at": "2026-03-11T18:36:07.940440",
-  "last_updated": "2026-03-04T17:37:21",
+  "generated_at": "2026-05-07T23:07:36.312011",
+  "last_updated": "2026-05-07T15:22:54",
   "stats": {
     "total_findings": 10,
-    "total_connections": 22,
+    "total_connections": 31,
     "total_entities": 2,
     "finding_types": {
       "legal": 3,
@@ -23,12 +26,13 @@
     },
     "connection_types": {
       "legal": 8,
-      "corporate": 3,
-      "social": 6,
+      "corporate": 5,
+      "social": 11,
       "financial": 4,
-      "political": 1
+      "political": 1,
+      "advisory": 2
     },
-    "last_updated": "2026-03-04T17:37:21"
+    "last_updated": "2026-05-07T15:22:54"
   },
   "findings": [
     {
@@ -507,6 +511,127 @@
       ]
     },
     {
+      "id": 4780,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Ted Waitt",
+      "relationship_type": "social",
+      "description": "Romantic partner 2003-2010. Maxwell used Waitt as social access vector to Silicon Valley elite. Maxwell helped Waitt obtain yacht Plan B. Attended Chelsea Clinton wedding 2010.",
+      "strength": "strong",
+      "date_range": "2003-2010",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:54:54",
+      "profile_id": "dfj-network",
+      "other_person": "Ted Waitt",
+      "other_person_slug": "ted-waitt",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00264440",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00579231",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5153,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "social",
+      "description": "Professional relationship and TerraMar Project board partnership. Zampolli was Board Member of Maxwell's TerraMar and co-founded Sustainable Oceans Alliance with Maxwell (2013).",
+      "strength": "strong",
+      "date_range": "2013-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:17:13",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:entity-351728",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:wikipedia.org/TerraMar",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5266,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "corporate",
+      "description": "Zampolli was Board Member of Maxwell's TerraMar Project; co-named in 2013 Sustainable Oceans Alliance",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:58",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": []
+    },
+    {
+      "id": 5416,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Richard Merkin",
+      "relationship_type": "social",
+      "description": "Oct 26 2010 10:00am confirmed in-person meeting brokered by Donald Tang.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:46:49",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02416721",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02417762",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 6023,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Lewis Ranieri",
+      "relationship_type": "social",
+      "description": "Maxwell shipped FedEx Priority Overnight Nov 26 2001 (Tracking 8286949011 97) from Epstein 457 Madison Ave to LOU RANIERI / RANIERI & CO INC, Uniondale NY 11553. Primary FedEx invoice billing record.",
+      "strength": "strong",
+      "date_range": "2001-11",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:22:54",
+      "profile_id": "epstein",
+      "other_person": "Lewis Ranieri",
+      "other_person_slug": "lewis-ranieri",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01313161",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 11,
       "person_a": "Ghislaine Maxwell",
       "person_b": "Kathy Ruemmler",
@@ -767,6 +892,99 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 4717,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Masha Drokova",
+      "relationship_type": "advisory",
+      "description": "Drokova served as advisor to Maxwell's TerraMar Project. Listed as advisor per LittleSis organizational mapping.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:41",
+      "profile_id": "dfj-network",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis database",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TerraMar Project records",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5128,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:12:34",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:351728",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia:TerraMar_Project",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5148,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:13:45",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": []
+    },
+    {
+      "id": 5163,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Ron Burkle",
+      "relationship_type": "social",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:41:20",
+      "profile_id": "zampolli",
+      "other_person": "Ron Burkle",
+      "other_person_slug": "ron-burkle",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10056,10062",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -803,12 +1021,28 @@
       "id": 515
     },
     {
+      "date": "2001-11",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Maxwell shipped FedEx Priority Overnight Nov 26 2001 (Tracking 8286949011 97) from Epstein 457 Madison Ave to LOU RANIERI / RANIERI & CO INC, Uniondale NY 11553. Primary FedEx invoice billing record.",
+      "other_person": "Lewis Ranieri",
+      "id": 6023
+    },
+    {
       "date": "2002-09",
       "type": "finding",
       "finding_type": "legal",
       "summary": "Flight log entry (Sep 2002) lists passengers: 'President Clinton, Kevin Spacey, Chris Tucker, Jeffrey Epstein and the initials GM.' Maxwell's deposition was asked about this trip to confirm she remembered traveling with Clinton in Sep 2002. Separately, Kellen, Mucinska, and Marcinkova all pled Fifth Amendment when asked about Copperfield, Spacey, and Wexner \u2014 prosecutor called it 'absolutely absurd.'",
       "confidence": "confirmed",
       "id": 1351
+    },
+    {
+      "date": "2003-2010",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Romantic partner 2003-2010. Maxwell used Waitt as social access vector to Silicon Valley elite. Maxwell helped Waitt obtain yacht Plan B. Attended Chelsea Clinton wedding 2010.",
+      "other_person": "Ted Waitt",
+      "id": 4780
     },
     {
       "date": "2006",
@@ -833,6 +1067,14 @@
       "summary": "On Dec 8, 2009, Ghislaine Maxwell (from 'Gmax') emailed Epstein with blackmail-related advice: 'If you call I would start by saying what ever you saw was fake and part of a blackmail scheme.' This shows Maxwell coaching Epstein on how to dismiss compromising material as fabricated blackmail -- indicating awareness of the vulnerability and existence of such material.",
       "confidence": "confirmed",
       "id": 531
+    },
+    {
+      "date": "2013-2019",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Professional relationship and TerraMar Project board partnership. Zampolli was Board Member of Maxwell's TerraMar and co-founded Sustainable Oceans Alliance with Maxwell (2013).",
+      "other_person": "Paolo Zampolli",
+      "id": 5153
     },
     {
       "date": "2016",

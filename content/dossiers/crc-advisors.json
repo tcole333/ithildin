@@ -1,0 +1,582 @@
+{
+  "name": "CRC Advisors",
+  "slug": "crc-advisors",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.243261",
+  "last_updated": "2026-03-23T19:23:36",
+  "stats": {
+    "total_findings": 13,
+    "total_connections": 10,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "relationship": 4,
+      "legal": 2,
+      "intelligence": 1,
+      "financial": 2,
+      "background": 2,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "controls": 1,
+      "employment": 1,
+      "contracts_with": 6,
+      "financial": 1,
+      "corporate": 1
+    },
+    "last_updated": "2026-03-23T19:23:36"
+  },
+  "findings": [
+    {
+      "id": 7360,
+      "finding_type": "identity",
+      "summary": "CRC Advisors LLC registered in Florida on 2021-05-18 as domestic LLC (ID L21000231274, EIN 86-3965137). Principal address: 1200 Brickell Bay Drive Suite 3324, Miami FL 33131. This is a separate registration from the Virginia and DC entities.",
+      "detail": null,
+      "source_datasets": [
+        "fl_dos"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2021-05-18",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:29",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL SunBiz L21000231274",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7389,
+      "finding_type": "relationship",
+      "summary": "CRC Advisors served as PR firm for the Rumble Inc SPAC merger with CF Acquisition Corp VI (CFVI, led by Howard Lutnick of Cantor Fitzgerald). Transaction completed Sept 16 2022, valued at 2.1B enterprise value, 400M gross proceeds. Media contact for announcement was Brian Doherty of CRC Advisors. Rumble is the conservative alternative video platform.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-09-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:19",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR 0001213900-22-056631",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7362,
+      "finding_type": "legal",
+      "summary": "DC Attorney General Brian Schwalb opened investigation in August 2023 into Leonard Leo and his network of nonprofit groups after receiving a letter from progressive watchdog group claiming Leo-aligned groups violated nonprofit tax law. Investigation focuses on self-dealing between Leo nonprofits and his for-profit CRC Advisors.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:38",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Truthout; CREW reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7400,
+      "finding_type": "intelligence",
+      "summary": "2024 Conservative Partnership Institute leak exposed CRC Advisors client resumes revealing corporate clients beyond the nonprofit network: Eli Lilly (pharmaceutical), Chevron (oil major), Charles Koch Americans for Prosperity, Competitive Enterprise Institute. CRC also promoted book by Trump cronies Corey Lewandowski and David Bossie. CRC sought to get journalists to write about green groups wrongfully claiming solidarity with Black protesters while backing radical policies like the Green New Deal.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:21:26",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Rolling Stone 2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7409,
+      "finding_type": "legal",
+      "summary": "DC AG investigation update: Campaign for Accountability filed IRS complaint alleging Leo misused 73M in nonprofit cash by diverting to for-profit BH Group and CRC Advisors 2016-2021. House Judiciary (Jordan) and Oversight (Comer) launched counter-inquiry into DC AG Schwalb, threatening subpoena. As of Sept 2025 Leo attorneys working with Schwalb. Leo legal team calls CfA complaint sloppy, deceptive, and legally flawed.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:26",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "House Judiciary Committee press release; Courthouse News Service",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7344,
+      "finding_type": "financial",
+      "summary": "CRC Advisors received 104M+ from Leonard Leo-tied nonprofits over a decade. In 2022 alone, 85 Fund paid CRC 21.36M for consulting/public affairs/advertising. In 2023 CRC brought in 33M+ with approx 80 percent from Leo-tied organizations. At least 7 core Leo network nonprofits are CRC clients.",
+      "detail": null,
+      "source_datasets": [
+        "LittleSis",
+        "CREW",
+        "Accountable US"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:43",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:378456",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7346,
+      "finding_type": "relationship",
+      "summary": "BH Group LLC (formed 2016, Virginia) owns CRC Advisors. Leonard Leo owns 35+ percent of BH Group per 2018 IRS filing for Rule of Law Trust. BH Group has received over 15M from Leo-connected groups including Rule of Law Trust, Judicial Crisis Network, 85 Fund, and Wellspring Committee since 2016.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:50",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:1964878",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7349,
+      "finding_type": "relationship",
+      "summary": "Creative Response Concepts (CRC predecessor) registered as foreign agent in 2005 for work with Ukrainian politician Viktor Yanukovych, backed by Russian President Putin. CRC was part of a cluster of US consultancies working for Yanukovych 2002-2005 that included Paul Manaforts firm, DB Communications, Venable, Potomac Communications Strategies, and Jefferson Waterman International.",
+      "detail": null,
+      "source_datasets": [
+        "fara",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:58",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA registration 2005",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7352,
+      "finding_type": "background",
+      "summary": "CRC Advisors acquired The Polling Company Inc/WomanTrend (founded by Kellyanne Conway) in September 2017. Conway had long history working with CRC prior to acquisition. CRC is also known as CRC Public Relations. Founded 1989 by Leif Noren as Creative Response Concepts. Greg Mueller became president. Leo took over in Jan 2020.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:07",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:1972657",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7357,
+      "finding_type": "financial",
+      "summary": "CRC Advisors known as PR firm behind Swift Boat Veterans for Truth campaign (2004) against John Kerry. Also worked for Conservatives for Patients Rights producing anti-Obama healthcare ads featuring Rick Scott. Client list in 2022 included 25+ conservative nonprofits: Heritage Action 797K, Susan B Anthony Pro-Life America 543K, PatientRightsAdvocateOrg 885K, America Engaged 600K, Consumers Research 598K, Americans for Public Trust 480K, Solidarity Healthshare 450K, Parents Defending Education 355K, Media Research Center 337K, Job Creators Network 287K, and others.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:20",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:378456",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7392,
+      "finding_type": "relationship",
+      "summary": "CRC Advisors serves as consultant to State Financial Officers Foundation (SFOF) and its members in anti-ESG campaign, helping place op-eds and messaging. SFOF works with ALEC to draft anti-ESG legislation. Consumers Research paid CRC close to 1M 2018-2021 for PR, 599K for legal services in 2022, and 676K for digital media in 2024. Note: legal categorization unusual for a PR firm.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:27",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "sfofexposed.org; exposedbycmd.org",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7401,
+      "finding_type": "background",
+      "summary": "FEC employer search reveals CRC Advisors employees making political donations: Gregory Mueller (president), Charmaine Mueller (likely spouse), Adam Kennedy, Cale Brown, Michael Martin, TJ Winer, Ryan Moy, Elizabeth Kuhn, and notably an employee named Antonin Scalia donating to Trump committees in 2024. Employee donations heavily favor Trump and Virginia Republican candidates.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:04",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC employer search CRC Advisors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7410,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: No federal contracts via USASpending. No lobbying registrations (LDA). No current FARA registrations (predecessor registered 2005 for Yanukovych). No GLEIF LEI records. No OpenSanctions matches. No direct federal litigation as party in CourtListener. No IRS 990 filings (CRC is for-profit LLC, not nonprofit). SAM.gov not searched (no API key).",
+      "detail": null,
+      "source_datasets": [
+        "usaspending",
+        "fara"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:36",
+      "target_name": "CRC Advisors",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "multiple source checks",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3430,
+      "person_a": "CRC Advisors",
+      "person_b": "Leonard Leo",
+      "relationship_type": "controls",
+      "description": "Co-founder/Chairman, received $102M+ from nonprofits 2016-2022",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:41:56",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": []
+    },
+    {
+      "id": 3431,
+      "person_a": "CRC Advisors",
+      "person_b": "Jonathan Bunch",
+      "relationship_type": "employment",
+      "description": "President of CRC Advisors, former Federalist Society SVP, Teneo board member since 2019",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:41:57",
+      "profile_id": "tech-right",
+      "other_person": "Jonathan Bunch",
+      "other_person_slug": "jonathan-bunch",
+      "evidence": []
+    },
+    {
+      "id": 3626,
+      "person_a": "CRC Advisors",
+      "person_b": "Concord Fund",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:08",
+      "profile_id": "tech-right",
+      "other_person": "Concord Fund",
+      "other_person_slug": "concord-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3668,
+      "person_a": "CRC Advisors",
+      "person_b": "Leonard Leo",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:00",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis, CREW",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3676,
+      "person_a": "85 Fund",
+      "person_b": "CRC Advisors",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:11",
+      "profile_id": "tech-right",
+      "other_person": "85 Fund",
+      "other_person_slug": "85-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1954965",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3749,
+      "person_a": "CRC Advisors",
+      "person_b": "Kellyanne Conway",
+      "relationship_type": "corporate",
+      "description": "CRC acquired Conways Polling Company Inc/WomanTrend in September 2017",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:00",
+      "profile_id": "tech-right",
+      "other_person": "Kellyanne Conway",
+      "other_person_slug": "kellyanne-conway",
+      "evidence": []
+    },
+    {
+      "id": 3770,
+      "person_a": "CRC Advisors",
+      "person_b": "State Financial Officers Foundation",
+      "relationship_type": "contracts_with",
+      "description": "CRC serves as consultant to SFOF and its members in anti-ESG campaign, helping place op-eds and messaging",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:21",
+      "profile_id": "tech-right",
+      "other_person": "State Financial Officers Foundation",
+      "other_person_slug": "state-financial-officers-foundation",
+      "evidence": []
+    },
+    {
+      "id": 3750,
+      "person_a": "CRC Advisors",
+      "person_b": "Viktor Yanukovych",
+      "relationship_type": "contracts_with",
+      "description": "Creative Response Concepts registered as FARA foreign agent in 2005 for Yanukovych work alongside Paul Manafort",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:02",
+      "profile_id": "tech-right",
+      "other_person": "Viktor Yanukovych",
+      "other_person_slug": "viktor-yanukovych",
+      "evidence": []
+    },
+    {
+      "id": 3768,
+      "person_a": "CRC Advisors",
+      "person_b": "Rumble",
+      "relationship_type": "contracts_with",
+      "description": "CRC Advisors served as PR firm for Rumble SPAC merger with CF Acquisition Corp VI (Cantor Fitzgerald), completed Sept 2022",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:19",
+      "profile_id": "tech-right",
+      "other_person": "Rumble",
+      "other_person_slug": "rumble",
+      "evidence": []
+    },
+    {
+      "id": 3769,
+      "person_a": "Americans for Prosperity",
+      "person_b": "CRC Advisors",
+      "relationship_type": "contracts_with",
+      "description": "CPI leak exposed CRC Advisors as client of Koch network AFP",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:20",
+      "profile_id": "tech-right",
+      "other_person": "Americans for Prosperity",
+      "other_person_slug": "americans-for-prosperity",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-05-18",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "CRC Advisors LLC registered in Florida on 2021-05-18 as domestic LLC (ID L21000231274, EIN 86-3965137). Principal address: 1200 Brickell Bay Drive Suite 3324, Miami FL 33131. This is a separate registration from the Virginia and DC entities.",
+      "confidence": "confirmed",
+      "id": 7360
+    },
+    {
+      "date": "2022-09-16",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "CRC Advisors served as PR firm for the Rumble Inc SPAC merger with CF Acquisition Corp VI (CFVI, led by Howard Lutnick of Cantor Fitzgerald). Transaction completed Sept 16 2022, valued at 2.1B enterprise value, 400M gross proceeds. Media contact for announcement was Brian Doherty of CRC Advisors. Rumble is the conservative alternative video platform.",
+      "confidence": "high",
+      "id": 7389
+    },
+    {
+      "date": "2023-08",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DC Attorney General Brian Schwalb opened investigation in August 2023 into Leonard Leo and his network of nonprofit groups after receiving a letter from progressive watchdog group claiming Leo-aligned groups violated nonprofit tax law. Investigation focuses on self-dealing between Leo nonprofits and his for-profit CRC Advisors.",
+      "confidence": "high",
+      "id": 7362
+    },
+    {
+      "date": "2024",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "2024 Conservative Partnership Institute leak exposed CRC Advisors client resumes revealing corporate clients beyond the nonprofit network: Eli Lilly (pharmaceutical), Chevron (oil major), Charles Koch Americans for Prosperity, Competitive Enterprise Institute. CRC also promoted book by Trump cronies Corey Lewandowski and David Bossie. CRC sought to get journalists to write about green groups wrongfully claiming solidarity with Black protesters while backing radical policies like the Green New Deal.",
+      "confidence": "high",
+      "id": 7400
+    },
+    {
+      "date": "2025-09",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DC AG investigation update: Campaign for Accountability filed IRS complaint alleging Leo misused 73M in nonprofit cash by diverting to for-profit BH Group and CRC Advisors 2016-2021. House Judiciary (Jordan) and Oversight (Comer) launched counter-inquiry into DC AG Schwalb, threatening subpoena. As of Sept 2025 Leo attorneys working with Schwalb. Leo legal team calls CfA complaint sloppy, deceptive, and legally flawed.",
+      "confidence": "high",
+      "id": 7409
+    }
+  ]
+}

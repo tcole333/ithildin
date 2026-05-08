@@ -1,0 +1,508 @@
+{
+  "name": "DHS SAVE Database",
+  "slug": "dhs-save-database",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.262895",
+  "last_updated": "2026-03-23T18:58:47",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "background": 4,
+      "legal": 7,
+      "financial": 1
+    },
+    "connection_types": {
+      "political": 3,
+      "employment": 1
+    },
+    "last_updated": "2026-03-23T18:58:47"
+  },
+  "findings": [
+    {
+      "id": 7246,
+      "finding_type": "background",
+      "summary": "Complete SAVE expansion timeline: Jan 20, 2025: EO 14159 directs DHS to provide free citizenship verification access. Mar 25, 2025: EO 14248 directs proof-of-citizenship for voting, DHS database sharing with states. Mar-May 2025: DHS re-engineers SAVE from pull-based to push-based ingestion system. May 15, 2025: SSA-DHS-USCIS agreement signed, SSA Master Files integrated (no SORN, no CMA). Jul 15, 2025: Senate Democrats request SAVE details. Aug 15, 2025: SAVE upgrade enables 4-digit SSN queries. Aug 26, 2025: Heather Honey appointed DHS Deputy Asst Sec for Election Integrity. Sept 2025: Honey denies DOJ data sharing to state officials; DHS spokesperson contradicts. Sept 30, 2025: LWV v DHS lawsuit filed. Oct 8, 2025: 20 states and 45 subdivisions registered for SAVE voter purposes. Oct 31, 2025: SORN published (retroactive); PIA updated. Nov 3, 2025: USCIS announces 26 states with MOAs, 46M voter queries. Nov 12, 2025: SSA publishes its own belated SORN. Nov 17, 2025: PI denied. Dec 2025: DOJ offers confidential MOUs to states. Jan 9, 2026: Texas shares 18M voter records with DOJ. Mar 12, 2026: LWV summary judgment motion filed.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-20",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:24",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.uscis.gov/newsroom/news-releases/uscis-enhances-voter-verification-systems",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7212,
+      "finding_type": "legal",
+      "summary": "Executive Order chain authorizing SAVE expansion: EO 14159 (Jan 20, 2025, Protecting the American People Against Invasion) directed DHS Secretary to provide states fee-free access to citizenship verification systems per 8 USC 1373/1644. EO 14248 (Mar 25, 2025, Preserving and Protecting the Integrity of American Elections) directed proof-of-citizenship for voter registration and DHS database sharing with states. Together these EOs provided legal basis for: (1) SSN-based SAVE queries replacing alien ID requirement, (2) fee elimination for state/local agencies, (3) bulk upload capability, (4) SSA data integration. DHS implemented changes between March-May 2025, months before publishing required SORN (Oct 31, 2025).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:39",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.whitehouse.gov/presidential-actions/2025/03/preserving-and-protecting-the-integrity-of-american-elections/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7202,
+      "finding_type": "legal",
+      "summary": "May 15, 2025 SSA-DHS-USCIS Agreement: SSA began sharing Master Files of Social Security Number Holders (SSA-60-0058) with DHS/USCIS for integration into SAVE. Data includes full SSNs, names, DOB, addresses, citizenship status fields, and Death Master File records for hundreds of millions of Americans. Agreement posted on SSA FOIA website (redacted). Agreement went into effect without prior SORN publication or Computer Matching Agreement as required by Privacy Act. Acting SSA Commissioner Leland Dudek warned 'They are probably going to make some massive mistakes.' SSA citizenship data is a static snapshot from first SSA interaction \u2014 no automatic update when individuals naturalize.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-15",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:54:39",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.ssa.gov/foia/resources/proactivedisclosure/2025/May%2015",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7211,
+      "finding_type": "background",
+      "summary": "SAVE false positive rates and accuracy data: Texas screened 18M+ voter records \u2014 96.3% confirmed citizens, 3.1% unresolved/need more info, 0.04% flagged noncitizen. Texas county-level analysis showed ~25% of noncitizen flags were actually US citizens. Louisiana screened 2.9M voters, flagged 390 (0.014%). Virginia cancelled 1,644 registrations Sept 2024-Aug 2025 via SAVE. Indiana uploaded 488,030 records, found 165 noncitizens (21 had voted). Marion County FL official documented SSA Death Master File false positives \u2014 indicating living people as dead. 33M+ voters run through SAVE total by Sept 2025. Core accuracy problem: SSA citizenship data is static snapshot from first interaction, no automatic update upon naturalization.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-10",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:28",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/09/10/nx-s1-5477367/save-election-citizenship-data-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7207,
+      "finding_type": "legal",
+      "summary": "Privacy Act and Computer Matching Act violations in SAVE expansion: DHS and SSA began sharing data via May 15, 2025 agreement without required SORN (published retroactively Oct 31, 2025), without Computer Matching Agreement (none applicable to new SAVE functions), and without 30-day Congressional notice period. The Computer Matching and Privacy Protection Act requires written matching agreements disclosed to Congress and public before data sharing begins. EPIC and 15 organizations filed formal comments identifying these violations. SSA separately published its own belated SORN on Nov 12, 2025 for the SSA-60-0058 Master Files modification. League of Women Voters v. DHS (1:25-cv-03501) amended complaint filed Jan 21, 2026; motion for summary judgment filed Mar 12, 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:04",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://epic.org/documents/league-of-women-voters-v-dhs/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7242,
+      "finding_type": "legal",
+      "summary": "League of Women Voters v. DHS (1:25-cv-03501, D.D.C., Judge Sparkle L. Sooknanan): Filed Sept 30, 2025 by LWV, LWV-VA, LWV-LA, LWV-TX, EPIC, Campaign Legal Center, and 5 anonymous individuals against DHS, SSA, DOJ, Kristi Noem, Pam Bondi, Frank Bisignano (SSA). Texas intervened as defendant. Claims: Privacy Act violations (no SORN before data sharing, no CMA), APA violations, unauthorized data consolidation, separation of powers. Nov 17, 2025: Judge denied preliminary injunction \u2014 serious questions about lawfulness but insufficient irreparable harm showing. Jan 21, 2026: amended complaint filed. Mar 12, 2026: plaintiffs filed motion for summary judgment. Case not terminated.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:07",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/71499795/league-of-women-voters-v-us-department-of-homeland-security/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7200,
+      "finding_type": "background",
+      "summary": "SAVE system transformation from single-query to bulk voter screening: Pre-2025, SAVE only processed one-at-a-time queries using DHS-issued alien registration numbers against DHS immigration records. By May 2025, DHS re-engineered SAVE into a bulk ingestion system accepting SSN-based queries against consolidated DHS, SSA, and State Dept databases. States can now upload entire voter rolls via spreadsheet template. IBM FALCON contract (M) provides underlying IT infrastructure. Query volume surged from 25M in all of 2024 to 205M by Oct 2025, including 46M+ voter verification queries.",
+      "detail": null,
+      "source_datasets": [
+        "uscis,biometricupdate,fairelectionscenter"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:54:27",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.uscis.gov/newsroom/news-releases/uscis-enhances-voter-verification-systems",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7204,
+      "finding_type": "legal",
+      "summary": "October 31, 2025 SORN (Docket USCIS-2025-0337): DHS published modified System of Records Notice in Federal Register (2025-19735) adding voter registration and voter list maintenance as official SAVE purposes. Added US citizens by birth to covered categories. Updated record categories to include full and truncated SSNs, US passport numbers, driver license numbers, and SSA data. Added SSA-60-0058 Master Files as record source. Removed SAVE transaction fees for state/local agencies. New routine uses effective Dec 1, 2025. Comment period closed Dec 1, 2025 \u2014 but system changes were already operational since May 2025. Published retroactively to legitimize actions challenged in League of Women Voters v. DHS (1:25-cv-03501, D.D.C.).",
+      "detail": null,
+      "source_datasets": [
+        "federal_register"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:54:53",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.federalregister.gov/documents/2025/10/31/2025-19735/privacy-act-of-1974-system-of-records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7216,
+      "finding_type": "background",
+      "summary": "26 states with SAVE voter verification MOAs as of Nov 2025. States confirmed using SAVE for voter screening: TX (18M records, signed DOJ MOU), LA (2.9M, 390 flagged), IN (488K, 165 noncitizens found), OH, VA (1,644 cancelled). Testing/considering: ID, NC (declined soft launch), MS, ME, MN, CT, FL (Marion County). 20 states and 45 subdivisions registered for voter purposes by Oct 8, 2025. States that rejected DOJ MOU but may have independent SAVE MOAs: TN, SD. Fee elimination removed cost barrier \u2014 SAVE formerly charged per query. Aug 15, 2025 upgrade enabled 4-digit SSN queries. USCIS urging all 50 states to sign MOAs.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-03",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:54",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.uscis.gov/newsroom/news-releases/uscis-enhances-voter-verification-systems",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7253,
+      "finding_type": "legal",
+      "summary": "Indiana DHS settlement established precedent for state SAVE access. AG Todd Rokita and SOS Diego Morales obtained settlement enabling Indiana to upload 488,030 voter registrations to enhanced SAVE using last 4 SSN digits. Results: 165 noncitizens found (21 had voted). Settlement terms allow states to negotiate new info-sharing agreements with federal agencies. Pending LWV v DHS class action could upend settlement if courts prohibit DHS from disclosing SAVE information to states. Florida, Iowa, Ohio were related plaintiff states.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:47",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://indianacitizen.org/dhs-settlement-morales-rokita-tout-win-on-voter-verification-but-expert-warns-of-disenfranchisement/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7209,
+      "finding_type": "legal",
+      "summary": "DOJ-DHS-SAVE voter purge pipeline mechanism: DOJ sends NVRA Section 8 demand letters to states requesting full voter rolls (names, addresses, DOB, DL numbers, partial SSNs). States that comply provide data to DOJ. DOJ then shares voter rolls with DHS for SAVE cross-referencing. DHS runs bulk queries against consolidated SSA/DHS/State Dept databases. DHS returns citizenship flags to states. DOJ offers confidential MOUs requiring states to remove flagged voters within 45 days. As of Dec 2025, DOJ sued 30+ states for refusing to provide unredacted voter data. Texas signed MOU and shared 18M voter records (Jan 2026). Alaska also signed. Colorado, Wisconsin rejected and released MOU text. The MOU lacks encryption requirements and audit logs; allows DOJ contractors access without safeguards.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-18",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:16",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/analysis-opinion/confidential-agreements-show-trump-administrations-plans-states-voter",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7250,
+      "finding_type": "financial",
+      "summary": "IBM FALCON contract (M) provides underlying IT infrastructure for SAVE. Full contract name: Fast Agile Lifecycle for Continuous Verification, Operations and Nextgen. IBM provides DevSecOps services supporting USCIS Verification Information System (VIS) which includes SAVE. This is the contract that enabled the technical transformation from single-query to bulk upload capability. Between March-May 2025, SAVE re-engineered from pull-based verification to push-based ingestion system under this contract.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:36",
+      "target_name": "DHS SAVE Database",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://orangeslices.ai/contract-award-279m-dhs-uscis-devsecops-contract/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3560,
+      "person_a": "DHS SAVE Database",
+      "person_b": "DOJ Civil Rights Division",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:28",
+      "profile_id": "tech-right",
+      "other_person": "DOJ Civil Rights Division",
+      "other_person_slug": "doj-civil-rights-division",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/2025/09/12/doj-is-sharing-state-voter-roll-lists-with-homeland-security/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3628,
+      "person_a": "DHS SAVE Database",
+      "person_b": "Social Security Administration",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:31",
+      "profile_id": "tech-right",
+      "other_person": "Social Security Administration",
+      "other_person_slug": "social-security-administration",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.ssa.gov/foia/resources/proactivedisclosure/2025/May%2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3629,
+      "person_a": "DHS SAVE Database",
+      "person_b": "DOJ Voting Section",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:33",
+      "profile_id": "tech-right",
+      "other_person": "DOJ Voting Section",
+      "other_person_slug": "doj-voting-section",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/analysis-opinion/confidential-agreements-show-trump-administrations-plans-states-voter",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3630,
+      "person_a": "DHS SAVE Database",
+      "person_b": "Heather Honey",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:39",
+      "profile_id": "tech-right",
+      "other_person": "Heather Honey",
+      "other_person_slug": "heather-honey",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.votebeat.org/arizona/2025/08/26/heather-honey-election-activist-hired-department-of-homeland-security/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-01-20",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Complete SAVE expansion timeline: Jan 20, 2025: EO 14159 directs DHS to provide free citizenship verification access. Mar 25, 2025: EO 14248 directs proof-of-citizenship for voting, DHS database sharing with states. Mar-May 2025: DHS re-engineers SAVE from pull-based to push-based ingestion system. May 15, 2025: SSA-DHS-USCIS agreement signed, SSA Master Files integrated (no SORN, no CMA). Jul 15, 2025: Senate Democrats request SAVE details. Aug 15, 2025: SAVE upgrade enables 4-digit SSN queries. Aug 26, 2025: Heather Honey appointed DHS Deputy Asst Sec for Election Integrity. Sept 2025: Honey denies DOJ data sharing to state officials; DHS spokesperson contradicts. Sept 30, 2025: LWV v DHS lawsuit filed. Oct 8, 2025: 20 states and 45 subdivisions registered for SAVE voter purposes. Oct 31, 2025: SORN published (retroactive); PIA updated. Nov 3, 2025: USCIS announces 26 states with MOAs, 46M voter queries. Nov 12, 2025: SSA publishes its own belated SORN. Nov 17, 2025: PI denied. Dec 2025: DOJ offers confidential MOUs to states. Jan 9, 2026: Texas shares 18M voter records with DOJ. Mar 12, 2026: LWV summary judgment motion filed.",
+      "confidence": "medium",
+      "id": 7246
+    },
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Executive Order chain authorizing SAVE expansion: EO 14159 (Jan 20, 2025, Protecting the American People Against Invasion) directed DHS Secretary to provide states fee-free access to citizenship verification systems per 8 USC 1373/1644. EO 14248 (Mar 25, 2025, Preserving and Protecting the Integrity of American Elections) directed proof-of-citizenship for voter registration and DHS database sharing with states. Together these EOs provided legal basis for: (1) SSN-based SAVE queries replacing alien ID requirement, (2) fee elimination for state/local agencies, (3) bulk upload capability, (4) SSA data integration. DHS implemented changes between March-May 2025, months before publishing required SORN (Oct 31, 2025).",
+      "confidence": "medium",
+      "id": 7212
+    },
+    {
+      "date": "2025-05-15",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "May 15, 2025 SSA-DHS-USCIS Agreement: SSA began sharing Master Files of Social Security Number Holders (SSA-60-0058) with DHS/USCIS for integration into SAVE. Data includes full SSNs, names, DOB, addresses, citizenship status fields, and Death Master File records for hundreds of millions of Americans. Agreement posted on SSA FOIA website (redacted). Agreement went into effect without prior SORN publication or Computer Matching Agreement as required by Privacy Act. Acting SSA Commissioner Leland Dudek warned 'They are probably going to make some massive mistakes.' SSA citizenship data is a static snapshot from first SSA interaction \u2014 no automatic update when individuals naturalize.",
+      "confidence": "medium",
+      "id": 7202
+    },
+    {
+      "date": "2025-09-10",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "SAVE false positive rates and accuracy data: Texas screened 18M+ voter records \u2014 96.3% confirmed citizens, 3.1% unresolved/need more info, 0.04% flagged noncitizen. Texas county-level analysis showed ~25% of noncitizen flags were actually US citizens. Louisiana screened 2.9M voters, flagged 390 (0.014%). Virginia cancelled 1,644 registrations Sept 2024-Aug 2025 via SAVE. Indiana uploaded 488,030 records, found 165 noncitizens (21 had voted). Marion County FL official documented SSA Death Master File false positives \u2014 indicating living people as dead. 33M+ voters run through SAVE total by Sept 2025. Core accuracy problem: SSA citizenship data is static snapshot from first interaction, no automatic update upon naturalization.",
+      "confidence": "medium",
+      "id": 7211
+    },
+    {
+      "date": "2025-09-30",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Privacy Act and Computer Matching Act violations in SAVE expansion: DHS and SSA began sharing data via May 15, 2025 agreement without required SORN (published retroactively Oct 31, 2025), without Computer Matching Agreement (none applicable to new SAVE functions), and without 30-day Congressional notice period. The Computer Matching and Privacy Protection Act requires written matching agreements disclosed to Congress and public before data sharing begins. EPIC and 15 organizations filed formal comments identifying these violations. SSA separately published its own belated SORN on Nov 12, 2025 for the SSA-60-0058 Master Files modification. League of Women Voters v. DHS (1:25-cv-03501) amended complaint filed Jan 21, 2026; motion for summary judgment filed Mar 12, 2026.",
+      "confidence": "medium",
+      "id": 7207
+    },
+    {
+      "date": "2025-09-30",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "League of Women Voters v. DHS (1:25-cv-03501, D.D.C., Judge Sparkle L. Sooknanan): Filed Sept 30, 2025 by LWV, LWV-VA, LWV-LA, LWV-TX, EPIC, Campaign Legal Center, and 5 anonymous individuals against DHS, SSA, DOJ, Kristi Noem, Pam Bondi, Frank Bisignano (SSA). Texas intervened as defendant. Claims: Privacy Act violations (no SORN before data sharing, no CMA), APA violations, unauthorized data consolidation, separation of powers. Nov 17, 2025: Judge denied preliminary injunction \u2014 serious questions about lawfulness but insufficient irreparable harm showing. Jan 21, 2026: amended complaint filed. Mar 12, 2026: plaintiffs filed motion for summary judgment. Case not terminated.",
+      "confidence": "medium",
+      "id": 7242
+    },
+    {
+      "date": "2025-10-31",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "SAVE system transformation from single-query to bulk voter screening: Pre-2025, SAVE only processed one-at-a-time queries using DHS-issued alien registration numbers against DHS immigration records. By May 2025, DHS re-engineered SAVE into a bulk ingestion system accepting SSN-based queries against consolidated DHS, SSA, and State Dept databases. States can now upload entire voter rolls via spreadsheet template. IBM FALCON contract (M) provides underlying IT infrastructure. Query volume surged from 25M in all of 2024 to 205M by Oct 2025, including 46M+ voter verification queries.",
+      "confidence": "medium",
+      "id": 7200
+    },
+    {
+      "date": "2025-10-31",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "October 31, 2025 SORN (Docket USCIS-2025-0337): DHS published modified System of Records Notice in Federal Register (2025-19735) adding voter registration and voter list maintenance as official SAVE purposes. Added US citizens by birth to covered categories. Updated record categories to include full and truncated SSNs, US passport numbers, driver license numbers, and SSA data. Added SSA-60-0058 Master Files as record source. Removed SAVE transaction fees for state/local agencies. New routine uses effective Dec 1, 2025. Comment period closed Dec 1, 2025 \u2014 but system changes were already operational since May 2025. Published retroactively to legitimize actions challenged in League of Women Voters v. DHS (1:25-cv-03501, D.D.C.).",
+      "confidence": "medium",
+      "id": 7204
+    },
+    {
+      "date": "2025-11-03",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "26 states with SAVE voter verification MOAs as of Nov 2025. States confirmed using SAVE for voter screening: TX (18M records, signed DOJ MOU), LA (2.9M, 390 flagged), IN (488K, 165 noncitizens found), OH, VA (1,644 cancelled). Testing/considering: ID, NC (declined soft launch), MS, ME, MN, CT, FL (Marion County). 20 states and 45 subdivisions registered for voter purposes by Oct 8, 2025. States that rejected DOJ MOU but may have independent SAVE MOAs: TN, SD. Fee elimination removed cost barrier \u2014 SAVE formerly charged per query. Aug 15, 2025 upgrade enabled 4-digit SSN queries. USCIS urging all 50 states to sign MOAs.",
+      "confidence": "medium",
+      "id": 7216
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Indiana DHS settlement established precedent for state SAVE access. AG Todd Rokita and SOS Diego Morales obtained settlement enabling Indiana to upload 488,030 voter registrations to enhanced SAVE using last 4 SSN digits. Results: 165 noncitizens found (21 had voted). Settlement terms allow states to negotiate new info-sharing agreements with federal agencies. Pending LWV v DHS class action could upend settlement if courts prohibit DHS from disclosing SAVE information to states. Florida, Iowa, Ohio were related plaintiff states.",
+      "confidence": "high",
+      "id": 7253
+    },
+    {
+      "date": "2025-12-18",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOJ-DHS-SAVE voter purge pipeline mechanism: DOJ sends NVRA Section 8 demand letters to states requesting full voter rolls (names, addresses, DOB, DL numbers, partial SSNs). States that comply provide data to DOJ. DOJ then shares voter rolls with DHS for SAVE cross-referencing. DHS runs bulk queries against consolidated SSA/DHS/State Dept databases. DHS returns citizenship flags to states. DOJ offers confidential MOUs requiring states to remove flagged voters within 45 days. As of Dec 2025, DOJ sued 30+ states for refusing to provide unredacted voter data. Texas signed MOU and shared 18M voter records (Jan 2026). Alaska also signed. Colorado, Wisconsin rejected and released MOU text. The MOU lacks encryption requirements and audit logs; allows DOJ contractors access without safeguards.",
+      "confidence": "medium",
+      "id": 7209
+    }
+  ]
+}

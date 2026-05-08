@@ -5,23 +5,210 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.954991",
-  "last_updated": "2026-03-11T16:43:29",
+  "generated_at": "2026-05-07T23:07:36.157847",
+  "last_updated": "2026-03-23T21:21:44",
   "stats": {
-    "total_findings": 9,
-    "total_connections": 11,
+    "total_findings": 21,
+    "total_connections": 26,
     "total_entities": 0,
     "finding_types": {
-      "financial": 8,
-      "relationship": 1
+      "financial": 16,
+      "relationship": 2,
+      "intelligence": 3
     },
     "connection_types": {
-      "controls": 1,
-      "funds": 10
+      "controls": 3,
+      "funds": 14,
+      "financial": 6,
+      "employment": 2,
+      "political": 1
     },
-    "last_updated": "2026-03-11T16:43:29"
+    "last_updated": "2026-03-23T21:21:44"
   },
   "findings": [
+    {
+      "id": 6705,
+      "finding_type": "financial",
+      "summary": "CPI 2021 major donors: anonymous 25.7M (55%), Save America PAC 1M, DonorsTrust 1.3M, six 1M+ anonymous donors",
+      "detail": "CPI 2021 Schedule B reveals: Single anonymous individual gave 25.7M (more than 55% of total revenue). At least six other anonymous individuals each gave 1M+. Named donors: Trump Save America PAC 1M (July 26 2021), DonorsTrust 1.3M (with earmarks for American Moment 200K and Election Integrity 10K). Richard Uihlein foundation gave 1.25M in 2020. Stanley E Fulton private foundation 500K. Chicago Community Trust 200K. CPI tax status as 501c3 means Schedule B donor names filed with IRS but not made public.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-07-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:42:00",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Sludge/Documented analysis of CPI 2021 Form 990",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7077,
+      "finding_type": "financial",
+      "summary": "CPI anonymous 25.7M donor identified as Mike Rydin (Michael Rydin), 74-year-old retired Houston software developer who founded HCSS (Heavy Construction Systems Specialists) in 1986. Rydin confirmed the donation to The Daily Beast. His identity was traced through CPI internal audit filed in NY charity database and CPI property names: 'Rydin House' (Capitol Hill townhome, .5M, 2020) and 'Camp Rydin' (2,200-acre Chesapeake Bay retreat, .25M, Dec 2021). The ,638,709 constituted 56% of CPI's .7M revenue in 2021 and exceeded CPI's combined fundraising from its first four years (2017-2020). Rydin also gave K in 2020. This is NOT a Barre Seid/Marble Freedom Trust pass-through \u2014 Rydin is an independent donor motivated by admiration for CPI founder Jim DeMint.",
+      "detail": null,
+      "source_datasets": [
+        "Daily Beast, CPI 2021 Form 990, CPI NY charity audit, ProPublica Nonprofit Explorer"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:45",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CPI-990-2021:Schedule-B",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7088,
+      "finding_type": "financial",
+      "summary": "NEGATIVE FINDING: No documented direct grant from Marble Freedom Trust, 85 Fund, Concord Fund, or Rule of Law Trust to CPI in 990 records. MFT's documented grants go to: Schwab Charitable ($153.8M 2022), Rule of Law Trust ($153M 2021), Concord Fund ($28.9M 2022, $16.5M 2021), DonorsTrust ($41.1M 2021). The 85 Fund grants go primarily to DonorsTrust ($71.1M 2021). DonorsTrust did give CPI $1.027M in 2021, but this is far less than $25.7M. The MFT->DonorsTrust->CPI pipeline exists but at the $1M level, not $25.7M level. The hypothesis that Seid/MFT was the $25.7M donor is REFUTED.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2021-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:18",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:850784793",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6963,
+      "finding_type": "financial",
+      "summary": "DARK MONEY OVERLAY: Same funders back all pipeline nodes. DonorsTrust funded: CPI (1.027M 2021, 927K 2022, 607K 2023), AFL (3.14M 2023, 99K 2022, 25K 2021), PILF (251K 2023, 250K 2021), TTV (250K 2021, 207K 2022, 51K 2023), Heritage (361K 2021, 408K 2022, 547K 2023), CRA (226K 2023, 30K 2022). Bradley Impact Fund funded: AFL (27.14M 2022, 302K 2021), CPI (712K 2022, 354K 2021, 252K 2023), PILF (425K 2022, 252K 2021, 125K 2023), TTV (34K 2023, 10K 2022), Heritage (105K 2022, 280K 2021). Servant Foundation funded: CPI (5.45M 2023, 1.52M 2024, 1.01M 2022), PILF (500K 2024, 401K 2023), TTV (22K 2024, 12K 2023), CRA (86K 2024). 85 Fund (Leo): sent 92M to DonorsTrust (2023), directly funded PILF 400K (2020). The pipeline traces: 85Fund/MFT -> DonorsTrust -> CPI -> satellite orgs (AFL, PILF, FAIR/EIN, CRA, AAF).",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:26",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 Schedule I: DonorsTrust EIN 52-2166327, Bradley Impact Fund EIN 45-4678325, Servant Foundation EIN 43-1890105, 85 Fund EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7000,
+      "finding_type": "financial",
+      "summary": "RYDIN FOUNDATION - MAJOR CPI/AFL FUNDER: The Rydin Foundation gave CPI 5M (2023) + 1.5M (2022) = 6.5M total, and AFL 1.5M (2023), plus Heritage 167K (2023). Total 8.17M to pipeline orgs. LittleSis identifies Mike Rydin and Michael T Rydin as donors to CPI. The Rydin Foundation is a significant undocumented funder of the election enforcement pipeline, backing both the hub (CPI) and a key satellite (AFL) with multi-million dollar grants.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:54:33",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 Rydin Foundation EIN 87-3788576, LittleSis entity 402960",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6962,
+      "finding_type": "financial",
+      "summary": "CPI GRANT NETWORK TO ALL THREE VOTER PIPELINE NODES CONFIRMED: Node 1 (Data Collection): CPI funded FAIR Elections Fund 795K (2023), FAIR has Cleta Mitchell as President and Heather Honey as VP. CPI also funded Election Integrity Network 525K (2022) + 20K (2023). Node 2 (DOJ Feeder): CPI funded AFL 1.334M (2021) + 30K (2022). CPI funded PILF 50K (2021). CPI funded CRA 1.347M (2022) + 584K (2021), and CRA funded EIN 228K (2022). Node 3 (DHS): Heather Honey serves as VP of FAIR Elections Fund \u2014 a CPI satellite org. CPI total outgoing grants across all satellite orgs: 3.9M (2021), 5.4M (2022), 3.0M (2023), 8.45M (2024). CPI is the organizational hub connecting all three pipeline nodes.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:10",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 Schedule I: CPI EIN 82-1519768 (2021-2024), FAIR EIN 93-1870447 (2024)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7102,
+      "finding_type": "financial",
+      "summary": "CPI TOP DOCUMENTED FUNDERS (via 990 recipient-EIN search, EIN 82-1470217): Servant Foundation $7.98M (2022-2024), Rydin Foundation $6.5M (2022-2023), Dunn Foundation $5M (2023-2024), DonorsTrust $2.55M (2021-2023), Schwab Charitable $1.15M (2021-2023), Bradley Impact Fund $1.32M (2021-2023), Woodforest Charitable $1.68M (2021-2022), Vanguard Charitable $1.33M (2022-2024), Fidelity Charitable $883K (2021-2023), Natl Christian Charitable $615K (2021-2023), USATransform $600K (2022), Citizens United Foundation $300K (2021). But the $25.6M personal Rydin gift (2021) dwarfs all of these combined. Total documented 990 grants to CPI: $20.9M across 77 grants. With Rydin personal donation, over $46M from known sources.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:35",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6695,
       "finding_type": "financial",
@@ -177,32 +364,6 @@
       ]
     },
     {
-      "id": 6705,
-      "finding_type": "financial",
-      "summary": "CPI 2021 major donors: anonymous 25.7M (55%), Save America PAC 1M, DonorsTrust 1.3M, six 1M+ anonymous donors",
-      "detail": "CPI 2021 Schedule B reveals: Single anonymous individual gave 25.7M (more than 55% of total revenue). At least six other anonymous individuals each gave 1M+. Named donors: Trump Save America PAC 1M (July 26 2021), DonorsTrust 1.3M (with earmarks for American Moment 200K and Election Integrity 10K). Richard Uihlein foundation gave 1.25M in 2020. Stanley E Fulton private foundation 500K. Chicago Community Trust 200K. CPI tax status as 501c3 means Schedule B donor names filed with IRS but not made public.",
-      "source_datasets": [
-        "990",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 16:42:00",
-      "target_name": "Conservative Partnership Institute",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Sludge/Documented analysis of CPI 2021 Form 990",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6708,
       "finding_type": "financial",
       "summary": "FAIR Elections Fund received 795K from CPI in 2023, raised 3.9M in first full year - Cleta Mitchell election ops vehicle",
@@ -248,6 +409,162 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Compilation of IRS 990 filings for MFT, DonorsTrust, 85 Fund, CPI, BIF. ProPublica, NBC News, Sludge, CMD, NOTUS investigative reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7275,
+      "finding_type": "financial",
+      "summary": "CPI (EIN 82-1470217) is a 501(c)(3) at 300 Independence Ave SE, DC. Revenue exploded from $6.2M (2020) to $45.7M (2021), now $19.5M (2023). Assets: $71M. Led by Jim DeMint (Chairman, $625K), Mark Meadows (Senior Partner, $588K), Ed Corrigan (President/CEO, $440K), Wesley Denton (COO/Treasurer, $439K). CPI made $10.7M in grants to 17 incubated organizations (2021-2023).",
+      "detail": "990 filings show CPI's revenue trajectory: $1.8M (2017), $4.3M (2018), $5.3M (2019), $6.2M (2020), $45.7M (2021), $36.4M (2022), $19.5M (2023). The 7x jump from 2020 to 2021 coincided with Trump leaving office. Major donors: Servant Foundation ($6.97M cumulative), Rydin Foundation ($6.5M), Dunn Foundation ($5M), Donors Trust ($1.95M), Bradley Impact Fund ($712K), Woodforest Charitable Foundation ($1.68M), USATransform ($600K), Vanguard Charitable ($1.03M), WL Amos Sr Foundation ($900K), Schwab Charitable ($564K). CPI has 14 disregarded entities listed on its 990.",
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:52",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 filing EIN 82-1470217, ProPublica Nonprofit Explorer; IRS 990 bulk database grants",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7279,
+      "finding_type": "financial",
+      "summary": "CPI grant network: $10.76M distributed to 17 organizations (2021-2023). Largest recipients: Center for Renewing America ($1.94M), America First Legal ($1.37M), Personnel Policy Operations ($2.03M), American Voting Rights Foundation ($1M), State Freedom Caucus Foundation ($1.03M), FAIR Elections Fund ($795K), Election Integrity Network ($545K), American Accountability Foundation ($545K), American Moment ($364K), FDRLST Media Foundation ($175K), Virginia Institute for Public Policy ($505K), American Cornerstone Institute ($161K).",
+      "detail": "All 17 CPI grant recipients from 990 filings (2021-2023): Center for Renewing America Inc (854307005) $1,940,701; America First Legal Foundation (862190372) $1,374,105; Personnel Policy Organization/Operations (881773001) $2,030,005; American Voting Rights Foundation (871891209) $1,005,000; FAIR Elections Fund (931870447) $795,000; State Freedom Caucus Foundation (883060056) $1,032,248; Election Integrity Network Inc (882166493) $545,000; American Accountability Foundation (854391204) $545,100; American Moment Inc (851875789) $364,000; FDRLST Media Foundation (825231385) $175,000; Virginia Inst for Public Policy (541870848) $505,000; American Cornerstone Institute (861545903) $160,950; American Main Street Initiative (873579772) $88,500; Institute for Citizen Focused Service (862967724) $100,000; Public Interest Legal Foundation (454355641) $50,000; Conservative Partnership Initiative (920747253) $20,000; Institute for Legislative Analysis (923231068) $10,000; Capitol Hill Christian Academy (883303022) $10,000; Election Integrity Project (871277640) $5,505.",
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:06",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 grants made by EIN 82-1470217, bulk 990 database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7284,
+      "finding_type": "relationship",
+      "summary": "CPI officer network spans at least 8 organizations via shared leadership. Ed Corrigan: CPI President/CEO + Board Member at Center for Renewing America, Citizens for Renewing America, Leadership Institute. Wesley Denton: CPI COO/Treasurer + Chairman/Treasurer at Center for Renewing America + Treasurer at Citizens for Renewing America. Cleta Mitchell: CPI Senior Legal Fellow + President of FAIR Elections Fund + Chairman of Public Interest Legal Foundation + Director of Election Integrity Network. Patrick Corrigan: Treasurer at FAIR Elections Fund + Treasurer at State Freedom Caucus Foundation.",
+      "detail": "Cross-referencing 990 officer searches reveals interlocking directorates across CPI and its incubated orgs. All share 300 Independence Ave SE, DC 20003 as their address. Key overlaps: (1) Ed Corrigan sits on CPI, CRA c3, CRA c4, and Leadership Institute boards; (2) Wesley Denton spans CPI, CRA c3, CRA c4; (3) Cleta Mitchell spans FAIR Elections, PILF, Election Integrity Network; (4) Patrick Corrigan (Ed's brother) serves as Treasurer at FAIR Elections Fund and State Freedom Caucus Foundation; (5) Gene Hamilton: AFL VP/General Counsel + Citizens for Sanity President + EIN Secretary/Director; (6) Russ Vought: CRA President + AFL Treasurer; (7) Mark Meadows: CPI Senior Partner + State Freedom Caucus Network Director. NYT reported CPI paid $3.2M+ since 2021 to companies led by its own leaders or their relatives, including Compass Professional, Compass Legal Services, Compass Property Management, and Compass Direct LLC.",
+      "source_datasets": [
+        "990",
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:22",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 officer-search for Corrigan, Denton, Mitchell, Hamilton, Vought, Meadows; LittleSis CPI relationships",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7287,
+      "finding_type": "intelligence",
+      "summary": "CPI is a formal member of Project 2025. CPI-incubated organizations placed multiple leaders in Trump admin roles: Ed Corrigan led personnel selection for domestic policy departments; Russ Vought (CRA President, AFL Treasurer) was nominated as OMB Director; Stephen Miller (AFL President) became Deputy Chief of Staff; Gene Hamilton (AFL VP/General Counsel) returned to DOJ. PPO (Personnel Policy Operations) received $2.03M from CPI and placed Trump-aligned staff in positions critical to the incoming administration.",
+      "detail": "LittleSis confirms CPI is a member of Project 2025. The personnel pipeline operates through multiple channels: (1) PPO (EIN 88-1773001, founded 2023, $2M revenue) led by John Troup Hemenway, Matt Buckham, Alexei Woltornist - received $2.03M from CPI and itself granted $1.56M to Constitutional Rights Defense Fund; (2) American Moment (EIN 85-1875789, $1.3M revenue) led by Saurabh Sharma cultivates conservative staffers; (3) CPI's own CP Academy (Hugh Fike, $224K) trains conservative operatives. Ed Corrigan was tapped by the Trump Transition to lead personnel for all domestic policy departments. CPI alumni in Trump admin: Russ Vought (OMB), Stephen Miller (Deputy CoS), Gene Hamilton (DOJ), Hugh Fike (OMB veteran), Wesley Denton (OMB veteran).",
+      "source_datasets": [
+        "990",
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:35",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis CPI entity 402960; 990 filings for PPO EIN 881773001, American Moment EIN 851875789; web reporting from Axios, NPR, Washington Examiner",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7302,
+      "finding_type": "intelligence",
+      "summary": "All CPI-incubated organizations share the address 300 Independence Ave SE, Washington DC 20003. This includes: CPI itself, PPO, CRA (c3), State Freedom Caucus Foundation, AAF, American Moment, FAIR Elections Fund. Axios reported in 2023 that CPI bought prime DC office space. The co-location pattern combined with shared officers (Corrigan, Denton, Mitchell, Hamilton) indicates these are functionally departments of a single operation, not independent organizations.",
+      "detail": "All 7 organizations sharing 300 Independence Ave SE: (1) CPI EIN 821470217; (2) PPO EIN 881773001; (3) Center for Renewing America EIN 854307005; (4) State Freedom Caucus Foundation EIN 883060056; (5) American Accountability Foundation EIN 854391204; (6) American Moment EIN 851875789; (7) FAIR Elections Fund EIN 931870447. The address consolidation and officer overlap create what is effectively a holding-company structure using 501(c)(3) and (c)(4) designations. NYT reported CPI paid 3.2M to insider-led Compass companies (Compass Professional, Compass Legal, Compass Property Management, Compass Direct LLC).",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:41",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 filings showing address for all 7 organizations; NYT reporting on Compass entities",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7305,
+      "finding_type": "intelligence",
+      "summary": "CPI-incubated org leaders who moved to Trump administration: Russell Vought (CRA President -> OMB Director); Stephen Miller (AFL President -> Deputy Chief of Staff); Gene Hamilton (AFL VP/General Counsel -> DOJ senior role); Ed Corrigan (CPI President -> led domestic policy personnel); Jeffrey Clark (CRA Sr Fellow -> DOJ nominee). CPI is formally part of Project 2025 coalition.",
+      "detail": "The revolving door between CPI-incubated orgs and the Trump administration is systematic: (1) Russell Vought: President of Center for Renewing America (314K comp) and Treasurer of AFL -> nominated as OMB Director; (2) Stephen Miller: President of America First Legal Foundation (267K comp) -> Deputy Chief of Staff for Policy; (3) Gene Hamilton: VP and General Counsel of AFL (454K comp) and President of Citizens for Sanity -> returned to DOJ senior role; (4) Ed Corrigan: CPI President/CEO -> led personnel selection for all domestic policy departments during Trump transition; (5) Jeffrey Clark: Senior Fellow and Director of Litigation at CRA (202K comp) -> DOJ nominee (previously attempted to overturn 2020 election results); (6) Hugh Fike and Wesley Denton: both CPI staffers and OMB veterans. Mark Meadows (former White House Chief of Staff) is CPI Senior Partner at 588K. LittleSis confirms CPI is a formal member of Project 2025.",
+      "source_datasets": [
+        "990",
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:56",
+      "target_name": "Conservative Partnership Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 officer records for EINs 821470217, 854307005, 862190372, 861769922; LittleSis entity 402960; public appointment records",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -515,10 +832,348 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3511,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Foundation for Accountability Integrity and Research in Elections",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:34",
+      "profile_id": "tech-right",
+      "other_person": "Foundation for Accountability Integrity and Research in Elections",
+      "other_person_slug": "foundation-for-accountability-integrity-and-research-in-elections",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 Schedule I CPI 2023",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3512,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "DonorsTrust",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:39",
+      "profile_id": "tech-right",
+      "other_person": "DonorsTrust",
+      "other_person_slug": "donorstrust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 DonorsTrust EIN 52-2166327 (2020-2023)",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3545,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Mike Rydin",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:24",
+      "profile_id": "tech-right",
+      "other_person": "Mike Rydin",
+      "other_person_slug": "mike-rydin",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CPI-990-2021:Schedule-B",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3568,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:59",
+      "profile_id": "tech-right",
+      "other_person": "Personnel Policy Operations",
+      "other_person_slug": "personnel-policy-operations",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 881773001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3681,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "funds",
+      "description": "CPI granted .03M to PPO (2022-2023). PPO is the personnel pipeline for Trump admin. Same address.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:16",
+      "profile_id": "tech-right",
+      "other_person": "Personnel Policy Operations",
+      "other_person_slug": "personnel-policy-operations",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 grants EIN 821470217; 990 EIN 881773001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3683,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "funds",
+      "description": "CPI granted K to EIN (2022-2023). CPI owns EIN per LittleSis. Cleta Mitchell directs both.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:18",
+      "profile_id": "tech-right",
+      "other_person": "Election Integrity Network",
+      "other_person_slug": "election-integrity-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 grants; LittleSis entity 402960",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3700,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Mark Meadows",
+      "relationship_type": "employment",
+      "description": "Senior Partner at CPI, compensation 587K. Also Director of State Freedom Caucus Network.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Mark Meadows",
+      "other_person_slug": "mark-meadows",
+      "evidence": []
+    },
+    {
+      "id": 3701,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Jim DeMint",
+      "relationship_type": "controls",
+      "description": "Founding Chairman, compensation 625K. CPI founded 2017.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Jim DeMint",
+      "other_person_slug": "jim-demint",
+      "evidence": []
+    },
+    {
+      "id": 3698,
+      "person_a": "American Moment",
+      "person_b": "Conservative Partnership Institute",
+      "relationship_type": "funds",
+      "description": "CPI granted 364K to American Moment (2021-2023). Cultivates conservative staffers.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "American Moment",
+      "other_person_slug": "american-moment",
+      "evidence": []
+    },
+    {
+      "id": 3705,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "FAIR Elections Fund",
+      "relationship_type": "funds",
+      "description": "CPI granted 795K to FAIR Elections Fund (2023). Cleta Mitchell is President. Pat Corrigan is Treasurer.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:27",
+      "profile_id": "tech-right",
+      "other_person": "FAIR Elections Fund",
+      "other_person_slug": "fair-elections-fund",
+      "evidence": []
+    },
+    {
+      "id": 3708,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Ed Corrigan",
+      "relationship_type": "controls",
+      "description": "President and CEO of CPI, compensation 440K. Also on boards of CRA c3, CRA c4, Leadership Institute",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:27",
+      "profile_id": "tech-right",
+      "other_person": "Ed Corrigan",
+      "other_person_slug": "ed-corrigan",
+      "evidence": []
+    },
+    {
+      "id": 3709,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Wesley Denton",
+      "relationship_type": "employment",
+      "description": "COO and Treasurer of CPI, compensation 439K. Also Chairman/Treasurer of CRA",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:27",
+      "profile_id": "tech-right",
+      "other_person": "Wesley Denton",
+      "other_person_slug": "wesley-denton",
+      "evidence": []
+    },
+    {
+      "id": 3818,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:39",
+      "profile_id": "tech-right",
+      "other_person": "Election Integrity Network",
+      "other_person_slug": "election-integrity-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3707,
+      "person_a": "Chris Buskirk",
+      "person_b": "Conservative Partnership Institute",
+      "relationship_type": "political",
+      "description": "Indirect but structurally significant: Buskirk's Rockbridge Network overlaps CPI orbit through shared personnel (Ned Ryun), donor networks, and MAGA alignment",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:27",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": []
+    },
+    {
+      "id": 3819,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:44",
+      "profile_id": "tech-right",
+      "other_person": "Public Interest Legal Foundation",
+      "other_person_slug": "public-interest-legal-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2021-07-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CPI 2021 major donors: anonymous 25.7M (55%), Save America PAC 1M, DonorsTrust 1.3M, six 1M+ anonymous donors",
+      "confidence": "high",
+      "id": 6705
+    },
+    {
+      "date": "2021-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CPI anonymous 25.7M donor identified as Mike Rydin (Michael Rydin), 74-year-old retired Houston software developer who founded HCSS (Heavy Construction Systems Specialists) in 1986. Rydin confirmed the donation to The Daily Beast. His identity was traced through CPI internal audit filed in NY charity database and CPI property names: 'Rydin House' (Capitol Hill townhome, .5M, 2020) and 'Camp Rydin' (2,200-acre Chesapeake Bay retreat, .25M, Dec 2021). The ,638,709 constituted 56% of CPI's .7M revenue in 2021 and exceeded CPI's combined fundraising from its first four years (2017-2020). Rydin also gave K in 2020. This is NOT a Barre Seid/Marble Freedom Trust pass-through \u2014 Rydin is an independent donor motivated by admiration for CPI founder Jim DeMint.",
+      "confidence": "high",
+      "id": 7077
+    },
+    {
+      "date": "2021-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "NEGATIVE FINDING: No documented direct grant from Marble Freedom Trust, 85 Fund, Concord Fund, or Rule of Law Trust to CPI in 990 records. MFT's documented grants go to: Schwab Charitable ($153.8M 2022), Rule of Law Trust ($153M 2021), Concord Fund ($28.9M 2022, $16.5M 2021), DonorsTrust ($41.1M 2021). The 85 Fund grants go primarily to DonorsTrust ($71.1M 2021). DonorsTrust did give CPI $1.027M in 2021, but this is far less than $25.7M. The MFT->DonorsTrust->CPI pipeline exists but at the $1M level, not $25.7M level. The hypothesis that Seid/MFT was the $25.7M donor is REFUTED.",
+      "confidence": "medium",
+      "id": 7088
+    },
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DARK MONEY OVERLAY: Same funders back all pipeline nodes. DonorsTrust funded: CPI (1.027M 2021, 927K 2022, 607K 2023), AFL (3.14M 2023, 99K 2022, 25K 2021), PILF (251K 2023, 250K 2021), TTV (250K 2021, 207K 2022, 51K 2023), Heritage (361K 2021, 408K 2022, 547K 2023), CRA (226K 2023, 30K 2022). Bradley Impact Fund funded: AFL (27.14M 2022, 302K 2021), CPI (712K 2022, 354K 2021, 252K 2023), PILF (425K 2022, 252K 2021, 125K 2023), TTV (34K 2023, 10K 2022), Heritage (105K 2022, 280K 2021). Servant Foundation funded: CPI (5.45M 2023, 1.52M 2024, 1.01M 2022), PILF (500K 2024, 401K 2023), TTV (22K 2024, 12K 2023), CRA (86K 2024). 85 Fund (Leo): sent 92M to DonorsTrust (2023), directly funded PILF 400K (2020). The pipeline traces: 85Fund/MFT -> DonorsTrust -> CPI -> satellite orgs (AFL, PILF, FAIR/EIN, CRA, AAF).",
+      "confidence": "medium",
+      "id": 6963
+    },
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "RYDIN FOUNDATION - MAJOR CPI/AFL FUNDER: The Rydin Foundation gave CPI 5M (2023) + 1.5M (2022) = 6.5M total, and AFL 1.5M (2023), plus Heritage 167K (2023). Total 8.17M to pipeline orgs. LittleSis identifies Mike Rydin and Michael T Rydin as donors to CPI. The Rydin Foundation is a significant undocumented funder of the election enforcement pipeline, backing both the hub (CPI) and a key satellite (AFL) with multi-million dollar grants.",
+      "confidence": "medium",
+      "id": 7000
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CPI GRANT NETWORK TO ALL THREE VOTER PIPELINE NODES CONFIRMED: Node 1 (Data Collection): CPI funded FAIR Elections Fund 795K (2023), FAIR has Cleta Mitchell as President and Heather Honey as VP. CPI also funded Election Integrity Network 525K (2022) + 20K (2023). Node 2 (DOJ Feeder): CPI funded AFL 1.334M (2021) + 30K (2022). CPI funded PILF 50K (2021). CPI funded CRA 1.347M (2022) + 584K (2021), and CRA funded EIN 228K (2022). Node 3 (DHS): Heather Honey serves as VP of FAIR Elections Fund \u2014 a CPI satellite org. CPI total outgoing grants across all satellite orgs: 3.9M (2021), 5.4M (2022), 3.0M (2023), 8.45M (2024). CPI is the organizational hub connecting all three pipeline nodes.",
+      "confidence": "medium",
+      "id": 6962
+    },
+    {
+      "date": "2024-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CPI TOP DOCUMENTED FUNDERS (via 990 recipient-EIN search, EIN 82-1470217): Servant Foundation $7.98M (2022-2024), Rydin Foundation $6.5M (2022-2023), Dunn Foundation $5M (2023-2024), DonorsTrust $2.55M (2021-2023), Schwab Charitable $1.15M (2021-2023), Bradley Impact Fund $1.32M (2021-2023), Woodforest Charitable $1.68M (2021-2022), Vanguard Charitable $1.33M (2022-2024), Fidelity Charitable $883K (2021-2023), Natl Christian Charitable $615K (2021-2023), USATransform $600K (2022), Citizens United Foundation $300K (2021). But the $25.6M personal Rydin gift (2021) dwarfs all of these combined. Total documented 990 grants to CPI: $20.9M across 77 grants. With Rydin personal donation, over $46M from known sources.",
+      "confidence": "confirmed",
+      "id": 7102
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6695,
@@ -611,171 +1266,5 @@
       "bridge-tax",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Conservative Partnership Institute",
-      "connections": [
-        {
-          "target": "America First Legal Foundation",
-          "type": "controls",
-          "strength": 1.0,
-          "evidence_ref": "990 filings",
-          "description": "CPI incubated AFL, shared address 611 Pennsylvania Ave SE, 3 CPI personnel on AFL board (Meadows, Corrigan, Denton)"
-        },
-        {
-          "target": "Center for Renewing America",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica CPI EIN 821470217 Schedule I 2021",
-          "description": "CPI created and funded CRA: 583K direct grant plus 1M+ to c3 arm (Center for American Restoration) in 2021. Shared address at 300 Independence Ave SE DC. Board overlap: Denton and Corrigan serve on both boards. CRA files tax docs in care of CPI."
-        },
-        {
-          "target": "DonorsTrust Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2021 990 Schedule B",
-          "description": "DonorsTrust granted 1.3M to CPI in 2021 including earmarks for American Moment and Election Integrity"
-        },
-        {
-          "target": "Personnel Policy Operations Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2023 990 Schedule I",
-          "description": "CPI granted 880,005 to PPO in 2023"
-        },
-        {
-          "target": "Center for American Restoration Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 990 Schedule I",
-          "description": "CPI granted 583K(2021) and 1.347M(2022) to CRA for mission activities"
-        },
-        {
-          "target": "America First Legal Foundation",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2021 990 Schedule I",
-          "description": "CPI granted 1,334,105 to AFL in 2021 for mission and program support"
-        },
-        {
-          "target": "State Freedom Caucus Foundation",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2023 990 Schedule I",
-          "description": "CPI granted 568,500 to SFCF in 2023"
-        },
-        {
-          "target": "Foundation for Accountability Integrity and Research in Elections",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2023 990 Schedule I",
-          "description": "CPI granted 795,000 to FAIR Elections Fund in 2023"
-        },
-        {
-          "target": "American Accountability Foundation",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2021 990 Schedule I",
-          "description": "CPI granted 335,000+ to AAF in 2021"
-        },
-        {
-          "target": "American Moment Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2021 990 Schedule I",
-          "description": "CPI granted 336,000 to American Moment in 2021"
-        },
-        {
-          "target": "American Cornerstone Institute Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "CPI 2021 990 Schedule I",
-          "description": "CPI granted 161,000 to ACI in 2021"
-        }
-      ],
-      "secondHop": {
-        "America First Legal Foundation": [
-          {
-            "target": "Stephen Miller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Miller founded AFL in 2021, serves as President and Executive Director earning $527K. AFL is the litigation arm of his immigration enforcement policy apparatus."
-          },
-          {
-            "target": "Russ Vought",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
-          },
-          {
-            "target": "Ed Corrigan",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "AFL board director. Also CEO of Conservative Partnership Institute. Led Trump transition domestic policy personnel selection, placing hundreds in government."
-          },
-          {
-            "target": "DonorsTrust",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DonorsTrust gave AFL $21.3M in 2024 (up from $3.2M in 2023). Anonymous dark money conduit providing 2/3 of AFL's revenue."
-          },
-          {
-            "target": "Reed Rubinstein",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Rubinstein served as AFL Senior Counselor, Director of Oversight & Investigations, then Senior VP earning $277K. Now confirmed as State Dept Legal Advisor 2025 - AFL-to-government pipeline."
-          }
-        ],
-        "Center for Renewing America": [
-          {
-            "target": "Russ Vought",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
-          },
-          {
-            "target": "Jeffrey Clark",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Clark served as CRA Senior Fellow and Director of Litigation with 219K compensation, left for acting OIRA Administrator March 2025, resigned March 2026"
-          },
-          {
-            "target": "Kash Patel",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Patel served as CRA Senior Fellow for National Security, became FBI Director Feb 2025"
-          },
-          {
-            "target": "Mark Paoletta",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Paoletta served as CRA Senior Fellow, became OMB General Counsel, also partner at Schaerr Jaffe, received money from Leonard Leo for Thomas defense"
-          },
-          {
-            "target": "Adam Candeub",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Candeub served as CRA Senior Fellow, became FCC General Counsel Feb 2025, authored Project 2025 FTC chapter"
-          }
-        ],
-        "DonorsTrust Inc": [
-          {
-            "target": "Marble Freedom Trust",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "MFT granted 59.1M to DonorsTrust in 2020. 85 Fund (MFT grantee) transferred 92M to DonorsTrust in 2022"
-          },
-          {
-            "target": "Bradley Impact Fund",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "DonorsTrust granted 12.7M to Bradley Impact Fund in 2022"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

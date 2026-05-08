@@ -2,6 +2,8 @@
 **Stats**: 11 findings, 3 connections, 0 entities
 **Dossier**: /dossiers/jesse-masyr
 
+> Jesse Masyr was a named partner and management committee member at Wachtel & Masyr LLP, the New York law firm that served as corporate counsel and registered process agent for Jeffrey Epstein's entities from at least 1988.
+
 ## Key Findings
 - **[identity/high]** Gold & Wachtel LLP founded August 1984 was predecessor to Wachtel & Masyr LLP - firm lineage Gold & Wachtel -> Wachtel & Masyr -> Wachtel & Missry (1984-08) (Finding #2227)
 - **[legal/high]** Gold & Wachtel (predecessor to Wachtel & Masyr) served as registered process agent for J. Epstein's Company Inc. from 1988 (1988) (Finding #2201)
@@ -19,3 +21,13 @@
 - **Jeffrey Epstein** [legal/strong]: Masyr was named partner at Wachtel & Masyr LLP which represented Epstein in litigation (96 CIV 8307 SDNY) and served as registered process agent for J. Epstein Company Inc. since 1988. Masyr served on the firm management committee with Steven J. Cohen who appeared as Epstein's attorney of record.
 - **William Wachtel** [corporate/strong]: Co-named partners at Wachtel & Masyr LLP. Wachtel was co-founder and managing partner since 1984. Masyr was on the management committee. They jointly controlled the firm that served as Epstein corporate counsel and held equity in FirstFlight/Saker Aviation. After Masyr's departure, firm became Wachtel & Missry.
 - **Darren Indyke** [employment/medium]: Both connected through Gold & Wachtel / Wachtel & Masyr law firm ecosystem. Gold & Wachtel LLP was founded 1984 and served as Epstein's registered agent. The firm produced Darren Indyke who became Epstein's primary attorney and estate executor. Masyr was a named partner and management committee member at the firm.
+
+## Open Questions
+- At what point did Masyr personally handle matters for Epstein, versus the work being delegated to Cohen and other committee members? The firm's representation is documented; Masyr's individual role within it is not.
+- What is the content of the Wachtel & Masyr document bearing the DB-SDNY prefix and Fed. R. Crim. P. 6(e) marking (EFTA01361592)? The document is described as an ABR Research Profile, but its subject and relevance to the Deutsche Bank grand jury production are unknown.
+- Did Masyr depart the firm before or after Epstein's 2006-2008 Florida prosecution? The timeline of his exit relative to the firm's continued representation of Epstein-adjacent matters is unresolved.
+- What was the nature of Darren Indyke's tenure at Gold & Wachtel / Wachtel & Masyr prior to his transition to Epstein's in-house legal team? The connection is established by firm ecosystem overlap, but the mechanism is not documented.
+- Did the Downtown Manhattan Heliport (operated by Saker from 2008) serve any Epstein-connected flight operations? The geographic proximity to Epstein's 71st Street townhouse is noted, but no flight records connecting the two have been located.
+
+## Applicable Models
+- enabler-gradient

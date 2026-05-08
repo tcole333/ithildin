@@ -6,21 +6,23 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.911594",
-  "last_updated": "2026-03-06T17:38:34",
+  "generated_at": "2026-05-07T23:07:36.236287",
+  "last_updated": "2026-03-23T18:58:25",
   "stats": {
-    "total_findings": 12,
-    "total_connections": 4,
+    "total_findings": 14,
+    "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "financial": 11,
+      "financial": 13,
       "intelligence": 1
     },
     "connection_types": {
       "financial": 2,
-      "corporate": 2
+      "corporate": 3,
+      "funds": 1,
+      "controls": 1
     },
-    "last_updated": "2026-03-06T17:38:34"
+    "last_updated": "2026-03-23T18:58:25"
   },
   "findings": [
     {
@@ -328,6 +330,78 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7228,
+      "finding_type": "financial",
+      "summary": "Musk Foundation (EIN 852133087) received 6B in 2021 and 2.5B in 2022 via stock donations, has distributed 567M in 121 grants",
+      "detail": "Musk Foundation (EIN 852133087, PO Box 341886, Austin TX, NTEE T22 private grantmaking, ruling date 9/1/2020) financial summary from 990-PF filings: 2020: Revenue 155.9M, Expenses 10.3M, Assets 217.3M. 2021: Revenue 6.03B, Expenses 166.9M, Assets 379.6M. 2022: Revenue 2.55B, Expenses 165.5M, Assets 650.7M. 2023: Revenue 20.5M, Expenses 237.3M, Assets 536.2M. Total grants made: 121 grants totaling 567.2M. Top recipients: The Foundation (227M across 2022-2023), XPRIZE Foundation (54M in 2021, 54M in 2023), St Jude Children's Research Hospital (55M in 2021), Fidelity Charitable (25M in 2023, 36M in 2022), Khan Academy (7M in 2022). Officers: Elon Musk (President/Director, 0 comp), Jared Birchall (Secretary/Treasurer/Director, 0 comp), Matilda Simon (Director, 0 comp). The older Musk Foundation (EIN 770587507, ruling 3/2002) is now dormant with 2.5M in assets, made 19 grants totaling 73.1M. 2021 revenue of 6B appears to be appreciated Tesla stock donations.",
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:18",
+      "target_name": "Musk Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:EIN_770587507_original_Musk_Foundation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:EIN_852133087_2021_revenue_6029889623",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:EIN_852133087_2023_revenue_20491653_expenses_237275888_assets_536153034",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7232,
+      "finding_type": "financial",
+      "summary": "Musk Foundation grant network reveals concentration: 40% to The Foundation (education), 19% to XPRIZE, 11% to Fidelity Charitable DAF",
+      "detail": "Analysis of 121 grants totaling 567.2M reveals high concentration in grant recipients. The Foundation (Musk-controlled education entity) received approximately 227M (40% of total grants). XPRIZE Foundation received 108M (19%). Fidelity Charitable (donor-advised fund, less transparent) received 61M (11%). St Jude Children's Research Hospital received 55M (10%). Remaining 20% distributed among ~100 smaller grants, heavily weighted toward South Texas school districts near SpaceX Boca Chica facility (Los Fresnos CISD 2.2M, Brownsville ISD 1.75M, Harlingen CISD 997K, San Benito CISD 388K, Point Isabel ISD 100K, Rio Hondo ISD 125K, Santa Maria ISD 34K). The South Texas school grants correlate geographically with SpaceX Starbase operations, suggesting community investment tied to business presence. Fidelity Charitable contributions obscure ultimate recipients via DAF structure.",
+      "source_datasets": [
+        "990",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:31",
+      "target_name": "Musk Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -423,6 +497,72 @@
       "other_person": "The Foundation",
       "other_person_slug": "the-foundation",
       "evidence": []
+    },
+    {
+      "id": 3634,
+      "person_a": "Jared Birchall",
+      "person_b": "Musk Foundation",
+      "relationship_type": "corporate",
+      "description": "Birchall serves as Secretary, Treasurer and Director of Musk Foundation (EIN 852133087)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:22",
+      "profile_id": "tech-right",
+      "other_person": "Jared Birchall",
+      "other_person_slug": "jared-birchall",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3635,
+      "person_a": "Musk Foundation",
+      "person_b": "The Foundation",
+      "relationship_type": "funds",
+      "description": "Musk Foundation granted 227M+ to The Foundation across 2022-2023 (89.9M in 2022, 137M in 2023)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:24",
+      "profile_id": "tech-right",
+      "other_person": "The Foundation",
+      "other_person_slug": "the-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3636,
+      "person_a": "Elon Musk",
+      "person_b": "Musk Foundation",
+      "relationship_type": "controls",
+      "description": "Musk is President and Director of Musk Foundation (EIN 852133087), zero compensation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:25",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -526,84 +666,5 @@
       "jurisdictional-arbitrage",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Musk Foundation",
-      "connections": [
-        {
-          "target": "The Foundation",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "IRS 990 EIN 920742101",
-          "description": "Musk Foundation granted 137M to The Foundation in 2023, 100M seed in 2022. Both controlled by Birchall. The Foundation at same PO Box 341886 as Musk family office. 68% of Musk Foundation grants go to Musk-controlled entities."
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 424384",
-          "description": "Birchall controls Musk Foundation grantmaking and is president of The Foundation, the primary grant recipient"
-        },
-        {
-          "target": "The Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica 990 EIN 852133087, 920742101",
-          "description": "Both entities share PO BOX 341886, Austin TX 78734; The Foundation is Musk's education-focused 501c3 with M+ revenue"
-        },
-        {
-          "target": "The Foundation",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk Foundation sends 607M (2022-2024) to The Foundation which warehouses it at 0.03% expenditure rate"
-        }
-      ],
-      "secondHop": {
-        "Jared Birchall": [
-          {
-            "target": "X.AI Holdings Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall signed both Form D filings as Corporate Secretary of X.AI Holdings Corp"
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is president of The Foundation (EIN 92-0742101), which received $137M from Musk Foundation in 2023 and $470M in 2024"
-          },
-          {
-            "target": "Neuralink Corporation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as CFO and government POC on Neuralink SAM.gov registration (UEI JGGFP357J8B8). PSC codes indicate positioning for federal R&D medical contracts."
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is President of The Foundation while also heading Excession LLC family office and serving as officer at Neuralink, xAI, Boring Company, and Foundation Security"
-          },
-          {
-            "target": "Red Planet Ventures I LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920034."
-          }
-        ],
-        "The Foundation": [
-          {
-            "target": "Ronald F. Gong",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Secretary and director alongside Birchall and Teresa Holland. PO BOX 341886 Austin TX. Also known as The X Foundation."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

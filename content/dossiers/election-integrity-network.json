@@ -1,0 +1,454 @@
+{
+  "name": "Election Integrity Network",
+  "slug": "election-integrity-network",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.310342",
+  "last_updated": "2026-03-23T21:23:03",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 3,
+      "financial": 1,
+      "relationship": 4,
+      "identity": 1,
+      "background": 1
+    },
+    "connection_types": {
+      "political": 1,
+      "funds": 1,
+      "controls": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-03-23T21:23:03"
+  },
+  "findings": [
+    {
+      "id": 7425,
+      "finding_type": "intelligence",
+      "summary": "NCEIT case study \u2014 EIN's most developed state operation: NCEIT led by Jim Womack (President, Lee County GOP Chair) and Jay DeLancy (COO, Air Force retiree, election integrity advocate since 2011). ~750 members from 90/100 NC counties. 25 active county taskforces. 1200+ trained poll observers. 150+ with incident-reporting access. Hans von Spakovsky (Heritage/PILF board) serves as legal consultant to Womack on voter roll cleanup. J. Christian Adams (PILF President) consulted on voter roll maintenance. Kevin Cline (RNC attorney) listed as legal advisor on NCEIT list-maintenance team. Josh Findlay (RNC national election integrity director) attended NCEIT June kickoff summit. Dave Warren (RNC NC election integrity director) attended calls. RNC reps message Womack 'almost daily.' Mitchell publicly praised: 'Be like North Carolina. Be like Jim Womack.' NC election board director Karen Brinson Bell equated mass records requests to 'denial-of-service attacks.'",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-10-11",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:39",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "whqr.org/local/2022-10-11",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7417,
+      "finding_type": "intelligence",
+      "summary": "EIN ERIC defection campaign: In June 2022, Mitchell convened a secret ERIC summit at CPI with red-state lawmakers, presenting a 29-page report calling ERIC a 'threat to election integrity.' Secretaries of state from the first five states to withdraw attended. Result: Florida, West Virginia, Missouri, Ohio, and Iowa pulled out of ERIC in 2023. The campaign created a voter data vacuum that EIN then fills with EagleAI, a voter roll challenge tool promoted by Mitchell. EagleAI (founded by Dr. John Rick Richards) operates in 9 states: AZ, CO, FL, GA, NV, OH, PA, TN, TX with 5 more pending: IL, KY, MI, MD, WI. American Oversight obtained EIN meeting records showing EagleAI algorithms only pick up 90% of address changes and was still in 'development phase' with unresolved issues as of May 2024. Mitchell's Compass Legal Group managed the tax-exempt application for Valid Vote, the nonprofit behind EagleAI. This creates a vertically integrated cycle: EIN campaigns to defund ERIC -> states lose voter data tool -> EIN promotes EagleAI replacement -> Mitchell's Compass Legal Group gets the legal work -> EagleAI data feeds PILF litigation and state chapter voter challenges.",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-06-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:37",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "americanoversight.org,npr.org",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7419,
+      "finding_type": "financial",
+      "summary": "EIN funding pipeline confirmed via 990 records: CPI is primary funder \u2014 CPI granted 525K to EIN (2022), 20K to EIN (2023). CRA (CPI satellite, Russ Vought) granted 228K to EIN (2022). VIPP (EIN's original fiscal home) received: DonorsTrust 365K (2023) + 200K (2022), CPI 330K (2023) + 175K (2022), Bradley Foundation 125K (2021) + 100K (2023), Diana Davis Spencer Foundation 100K (2020) + 60K (2019), JP Humphreys Foundation 50K each (2021-2023), William H. Donner Foundation 40K (2023), State Policy Network 65K (2024). VIPP total identifiable grants 2019-2024 exceed 1.5M. FAIR Elections Fund (Mitchell's grant-making vehicle) received 795K from CPI (2023), then disbursed 1.6M in 2024 to EIN coalition partner organizations. FGA (coalition member) received: DonorsTrust 2.3M (2023), 85 Fund (Leo) 2M (2020), Bradley Impact 1.17M (2023), Scaife 800K (2023), Searle Freedom Trust 800K (2023), Dunn Foundation 1M (2022). FGA then granted 89K to Citizen Outreach Foundation (NV EIN chapter partner) in 2024.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:52",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990",
+          "source_quote": " CPI Schedule I grants 2022: Election Integrity Network Inc 525,000; CRA Schedule I grants 2022: Election Integrity Network Inc 228,200; VIPP received DonorsTrust 365K 2023, CPI 330K 2023, Bradley 125K 2021",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7520,
+      "finding_type": "relationship",
+      "summary": "EIN-CPI-ROA INDIRECT CONNECTION: Election Integrity Network Inc (EIN 88-2166493) is legally registered as Election Integrity Action Inc. Officers include Cleta Mitchell (Director), Wade Miller (Chair), Gene Hamilton (Secretary). Received .2K total: K from CPI (2022), .2K from Citizens for Renewing America (2022), K from CPI (2023). CPI itself received .45M from Servant Foundation (2023) and M from Rydin Foundation (2023). No direct ROA grant to EIN, but the entities share the same ecosystem: ROA funds SBA List and APP (ETI fiscal sponsors), while CPI/CRA fund EIN. Both tracks converge under Cleta Mitchell who directs both EIN and FAIR Elections Fund (EIN 93-1870447, K from CPI in 2023). FAIR Elections Fund shares CPI's address at 300 Independence Ave SE.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:19:56",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:882166493",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:931870447",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6678,
+      "finding_type": "relationship",
+      "summary": "Cleta Mitchell (PILF chair) runs the Election Integrity Network (EIN) through Conservative Partnership Institute - the central coordination hub connecting all 5 election enforcement orgs. EIN summits co-hosted with RNC and sponsored by Heritage Foundation. 20+ EIN coalition members involved in Project 2025. EIN central to dismantling ERIC (the interstate voter roll comparison system), creating the data vacuum that PILF then sues to fill. Mitchell simultaneously chairs PILF while running EIN, making her the key nexus between litigation strategy and grassroots activation.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:03:35",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Documented.net investigation; InfluenceWatch; NPR investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7535,
+      "finding_type": "intelligence",
+      "summary": "EIN STATE CHAPTER PARTNERS AND ROA ECOSYSTEM CONVERGENCE: EIN operates state coalitions in GA, NC, FL, AZ, PA, MI, WI, VA \u2014 the same swing states targeted by VRF voter roll data and LIF ballot initiative funding. National partners include: Tea Party Patriots (received .75M from ROA), Heritage Action (connected to Heritage/CPI ecosystem), Foundation for Government Accountability, Honest Elections Project, ALEC Action, and Election Transparency Initiative (SBA List/APP joint project, both ROA grantees). Dick Uihlein Foundation gave M to CPI in 2021 specifically for EIN launch. Bradley Foundation gave K for Virginia Institute for Public Policy 'Virginia Fair Elections project' \u2014 the model CPI replicated nationally. State coalition groups include Audit the Vote PA, Stand Up Michigan, Arizona Freedom Caucus. This creates a parallel structure: ROA funds operational entities (FVF, LDF, LIF, VRF) while CPI/EIN provides coordination and strategy.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:23:03",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7411,
+      "finding_type": "identity",
+      "summary": "EIN leadership roster (2025-2026): Founder/Chairman Cleta Mitchell, President Sharon Bemis (former ME Town Clerk, RNC Election Integrity State Director 2022, North Anson ME), EVP Kerri Toloczko (also VIPP Strategic Partnerships Director, former US-China Commission appointee), Coalitions Director Sara Vieira (founder RIFEE, New England Coalition Chair), Policy Director Kathy Harms (TN Fair Elections Coalition co-chair), Deputy Director Ned Jones (former Citizens Election Research Center director and Virginia Project Election Integrity Director), Administrative Assistant Magan Brillon. Lindsey Zea collaborated on Election Policies Handbook. EIN spun out from VIPP as independent 501(c)(3) in Aug 2025 (EIN 33-2585603), address 300 Independence Ave SE DC 20003.",
+      "detail": null,
+      "source_datasets": [
+        "electionintegritynetwork.org,FEC,ProPublica-Nonprofit-Explorer"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:49",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/leadership",
+          "source_quote": " Sharon P. Bemis - President, Kerri Toloczko - Executive Vice President, Sara Vieira - Coalitions Director, Kathy Harms - Policy Director, Ned Jones - Deputy Director, Magan Brillon - Administrative Assistant",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7412,
+      "finding_type": "relationship",
+      "summary": "EIN state chapter network mapped across 30+ states. Active chapters with named organizations: Alaska (907Honest), Arizona (EZAZ), Colorado (COIFFE), Florida (Florida Fair Elections), Georgia (Georgia Fair Elections), Illinois (IEIP/IL Conservative Union), Louisiana (Louisiana Fair Elections), Maine (Maine EIN), Maryland (MVIG/EFFE4USA), Michigan (Michigan Fair Elections), Minnesota (MN Election Integrity Solutions), Mississippi (MS Fair Elections), Nevada (Pigpen Project/Citizen Outreach Foundation), New Jersey (Citizens for NJ Election Integrity), New Mexico (NM Coalition), New York (Project Civica), North Carolina (NCEIT), Ohio (Ohio EIN), Pennsylvania (PA Fair Elections), Rhode Island (RIFE), South Carolina (SC Safe Elections), Tennessee (TN Fair Elections), Texas (Advancing Integrity), Vermont (VT EIN), Virginia (Virginia Fair Elections), Washington, West Virginia (Citizens for WV Election Integrity), Wisconsin (WI Election Integrity Coalition). 20+ additional states listed as coming soon. Each chapter holds regular meetings (weekly or biweekly) and coordinates through @ElectionIntegrity.Network email addresses.",
+      "detail": null,
+      "source_datasets": [
+        "electionintegritynetwork.org"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:01",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/state-organizations",
+          "source_quote": " State organizations listed with meeting schedules, contact emails, and social media handles for 30+ state chapters",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7428,
+      "finding_type": "background",
+      "summary": "EIN 2025 legislative victories across state chapters: Nevada \u2014 Pigpen Project removed 87 registrants in Washoe County, tracked 41 election bills (15 signed into law). Pennsylvania \u2014 PA Fair Elections prompted 28,000+ voluntary cancellations from out-of-state movers (500% increase). Wisconsin \u2014 court ruling enforcing citizenship verification and voter roll audits. Texas \u2014 restored AG election fraud prosecution authority, constitutional amendment banning noncitizen voting. Tennessee \u2014 closed internet ballot return loopholes. West Virginia \u2014 formed Legislative Election Integrity Caucus. North Carolina \u2014 reforms in HB 958. Virginia \u2014 Power of the Pen guide achieved 100% veto success rate. Washington \u2014 IL26-126 initiative advanced proof-of-citizenship requirements. Missouri \u2014 HB 2308 for enhanced verification, Amendment 4 on fraud/foreign funding. Michigan \u2014 thwarted ranked choice voting. New York \u2014 Project Civica gathered 1700 SAVE Act signatures, won FOIL lawsuits. Louisiana \u2014 funded litigation for auditable voting machines. SAVE Act passed House April 2025 with Rep. Chip Roy floor speech.",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:54",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/news/a-year-of-unyielding-resolve",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7415,
+      "finding_type": "relationship",
+      "summary": "EIN-PILF-TTV-CPI cross-organizational personnel map: (1) PILF: Cleta Mitchell serves as both EIN Founder/Chairman AND PILF Board Chair simultaneously, making her the direct nexus between litigation strategy (PILF) and grassroots coordination (EIN). J. Christian Adams (PILF President) was TTV counsel in 2013 CO voter roll cases. PILF is co-party with TTV in True the Vote v. IRS (DC Circuit 25-5219, active). (2) True the Vote: Catherine Engelbrecht (TTV founder) and Gregg Phillips (TTV co-founder, now FEMA) both connected through the 15-org DOGE SSA voter data agreement probe. Phillips stated DHS 'wants to partner with us' on voter rolls (March 2025). (3) CPI: CPI is EIN's institutional parent \u2014 funded EIN 525K (2022) + 20K (2023). CPI also funds PILF 50K (2021). CPI-satellite CRA funded EIN 228K (2022). Heather Honey served as VP on CPI-satellite FAIR Elections Fund board before becoming DHS Deputy Asst Sec for Election Integrity. (4) Heritage: Hans von Spakovsky sits on PILF board AND Heritage; Heritage sponsored EIN summits. (5) Julie Adams: EIN Regional Coordinator for GA, simultaneously Tea Party Patriots Action field director (TPPA received 1.1M from Leo-connected groups, 2.5M from Uihlein). Adams used her Fulton County Board seat to refuse March 2024 primary certification.",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:21",
+      "target_name": "Election Integrity Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "electionintegritynetwork.org/leadership,propublica.org,americanoversight.org,whqr.org",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3371,
+      "person_a": "ALEC",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "political",
+      "description": "EIN state chapters serve as grassroots execution arm for ALEC model legislation. Chapter leaders lobby state legislators and target election officials implementing ALEC-drafted model bills.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:03:31",
+      "profile_id": "tech-right",
+      "other_person": "ALEC",
+      "other_person_slug": "alec",
+      "evidence": []
+    },
+    {
+      "id": 3683,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "funds",
+      "description": "CPI granted K to EIN (2022-2023). CPI owns EIN per LittleSis. Cleta Mitchell directs both.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:18",
+      "profile_id": "tech-right",
+      "other_person": "Conservative Partnership Institute",
+      "other_person_slug": "conservative-partnership-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 grants; LittleSis entity 402960",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3699,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "controls",
+      "description": "Mitchell is Director of EIN, President of FAIR Elections Fund, Chairman of PILF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Cleta Mitchell",
+      "other_person_slug": "cleta-mitchell",
+      "evidence": []
+    },
+    {
+      "id": 3818,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Election Integrity Network",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:39",
+      "profile_id": "tech-right",
+      "other_person": "Conservative Partnership Institute",
+      "other_person_slug": "conservative-partnership-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-10-11",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "NCEIT case study \u2014 EIN's most developed state operation: NCEIT led by Jim Womack (President, Lee County GOP Chair) and Jay DeLancy (COO, Air Force retiree, election integrity advocate since 2011). ~750 members from 90/100 NC counties. 25 active county taskforces. 1200+ trained poll observers. 150+ with incident-reporting access. Hans von Spakovsky (Heritage/PILF board) serves as legal consultant to Womack on voter roll cleanup. J. Christian Adams (PILF President) consulted on voter roll maintenance. Kevin Cline (RNC attorney) listed as legal advisor on NCEIT list-maintenance team. Josh Findlay (RNC national election integrity director) attended NCEIT June kickoff summit. Dave Warren (RNC NC election integrity director) attended calls. RNC reps message Womack 'almost daily.' Mitchell publicly praised: 'Be like North Carolina. Be like Jim Womack.' NC election board director Karen Brinson Bell equated mass records requests to 'denial-of-service attacks.'",
+      "confidence": "high",
+      "id": 7425
+    },
+    {
+      "date": "2023-06-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "EIN ERIC defection campaign: In June 2022, Mitchell convened a secret ERIC summit at CPI with red-state lawmakers, presenting a 29-page report calling ERIC a 'threat to election integrity.' Secretaries of state from the first five states to withdraw attended. Result: Florida, West Virginia, Missouri, Ohio, and Iowa pulled out of ERIC in 2023. The campaign created a voter data vacuum that EIN then fills with EagleAI, a voter roll challenge tool promoted by Mitchell. EagleAI (founded by Dr. John Rick Richards) operates in 9 states: AZ, CO, FL, GA, NV, OH, PA, TN, TX with 5 more pending: IL, KY, MI, MD, WI. American Oversight obtained EIN meeting records showing EagleAI algorithms only pick up 90% of address changes and was still in 'development phase' with unresolved issues as of May 2024. Mitchell's Compass Legal Group managed the tax-exempt application for Valid Vote, the nonprofit behind EagleAI. This creates a vertically integrated cycle: EIN campaigns to defund ERIC -> states lose voter data tool -> EIN promotes EagleAI replacement -> Mitchell's Compass Legal Group gets the legal work -> EagleAI data feeds PILF litigation and state chapter voter challenges.",
+      "confidence": "medium",
+      "id": 7417
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "EIN funding pipeline confirmed via 990 records: CPI is primary funder \u2014 CPI granted 525K to EIN (2022), 20K to EIN (2023). CRA (CPI satellite, Russ Vought) granted 228K to EIN (2022). VIPP (EIN's original fiscal home) received: DonorsTrust 365K (2023) + 200K (2022), CPI 330K (2023) + 175K (2022), Bradley Foundation 125K (2021) + 100K (2023), Diana Davis Spencer Foundation 100K (2020) + 60K (2019), JP Humphreys Foundation 50K each (2021-2023), William H. Donner Foundation 40K (2023), State Policy Network 65K (2024). VIPP total identifiable grants 2019-2024 exceed 1.5M. FAIR Elections Fund (Mitchell's grant-making vehicle) received 795K from CPI (2023), then disbursed 1.6M in 2024 to EIN coalition partner organizations. FGA (coalition member) received: DonorsTrust 2.3M (2023), 85 Fund (Leo) 2M (2020), Bradley Impact 1.17M (2023), Scaife 800K (2023), Searle Freedom Trust 800K (2023), Dunn Foundation 1M (2022). FGA then granted 89K to Citizen Outreach Foundation (NV EIN chapter partner) in 2024.",
+      "confidence": "high",
+      "id": 7419
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "EIN-CPI-ROA INDIRECT CONNECTION: Election Integrity Network Inc (EIN 88-2166493) is legally registered as Election Integrity Action Inc. Officers include Cleta Mitchell (Director), Wade Miller (Chair), Gene Hamilton (Secretary). Received .2K total: K from CPI (2022), .2K from Citizens for Renewing America (2022), K from CPI (2023). CPI itself received .45M from Servant Foundation (2023) and M from Rydin Foundation (2023). No direct ROA grant to EIN, but the entities share the same ecosystem: ROA funds SBA List and APP (ETI fiscal sponsors), while CPI/CRA fund EIN. Both tracks converge under Cleta Mitchell who directs both EIN and FAIR Elections Fund (EIN 93-1870447, K from CPI in 2023). FAIR Elections Fund shares CPI's address at 300 Independence Ave SE.",
+      "confidence": "medium",
+      "id": 7520
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Cleta Mitchell (PILF chair) runs the Election Integrity Network (EIN) through Conservative Partnership Institute - the central coordination hub connecting all 5 election enforcement orgs. EIN summits co-hosted with RNC and sponsored by Heritage Foundation. 20+ EIN coalition members involved in Project 2025. EIN central to dismantling ERIC (the interstate voter roll comparison system), creating the data vacuum that PILF then sues to fill. Mitchell simultaneously chairs PILF while running EIN, making her the key nexus between litigation strategy and grassroots activation.",
+      "confidence": "medium",
+      "id": 6678
+    },
+    {
+      "date": "2024-12-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "EIN STATE CHAPTER PARTNERS AND ROA ECOSYSTEM CONVERGENCE: EIN operates state coalitions in GA, NC, FL, AZ, PA, MI, WI, VA \u2014 the same swing states targeted by VRF voter roll data and LIF ballot initiative funding. National partners include: Tea Party Patriots (received .75M from ROA), Heritage Action (connected to Heritage/CPI ecosystem), Foundation for Government Accountability, Honest Elections Project, ALEC Action, and Election Transparency Initiative (SBA List/APP joint project, both ROA grantees). Dick Uihlein Foundation gave M to CPI in 2021 specifically for EIN launch. Bradley Foundation gave K for Virginia Institute for Public Policy 'Virginia Fair Elections project' \u2014 the model CPI replicated nationally. State coalition groups include Audit the Vote PA, Stand Up Michigan, Arizona Freedom Caucus. This creates a parallel structure: ROA funds operational entities (FVF, LDF, LIF, VRF) while CPI/EIN provides coordination and strategy.",
+      "confidence": "medium",
+      "id": 7535
+    },
+    {
+      "date": "2025-05-09",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "EIN leadership roster (2025-2026): Founder/Chairman Cleta Mitchell, President Sharon Bemis (former ME Town Clerk, RNC Election Integrity State Director 2022, North Anson ME), EVP Kerri Toloczko (also VIPP Strategic Partnerships Director, former US-China Commission appointee), Coalitions Director Sara Vieira (founder RIFEE, New England Coalition Chair), Policy Director Kathy Harms (TN Fair Elections Coalition co-chair), Deputy Director Ned Jones (former Citizens Election Research Center director and Virginia Project Election Integrity Director), Administrative Assistant Magan Brillon. Lindsey Zea collaborated on Election Policies Handbook. EIN spun out from VIPP as independent 501(c)(3) in Aug 2025 (EIN 33-2585603), address 300 Independence Ave SE DC 20003.",
+      "confidence": "high",
+      "id": 7411
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "EIN state chapter network mapped across 30+ states. Active chapters with named organizations: Alaska (907Honest), Arizona (EZAZ), Colorado (COIFFE), Florida (Florida Fair Elections), Georgia (Georgia Fair Elections), Illinois (IEIP/IL Conservative Union), Louisiana (Louisiana Fair Elections), Maine (Maine EIN), Maryland (MVIG/EFFE4USA), Michigan (Michigan Fair Elections), Minnesota (MN Election Integrity Solutions), Mississippi (MS Fair Elections), Nevada (Pigpen Project/Citizen Outreach Foundation), New Jersey (Citizens for NJ Election Integrity), New Mexico (NM Coalition), New York (Project Civica), North Carolina (NCEIT), Ohio (Ohio EIN), Pennsylvania (PA Fair Elections), Rhode Island (RIFE), South Carolina (SC Safe Elections), Tennessee (TN Fair Elections), Texas (Advancing Integrity), Vermont (VT EIN), Virginia (Virginia Fair Elections), Washington, West Virginia (Citizens for WV Election Integrity), Wisconsin (WI Election Integrity Coalition). 20+ additional states listed as coming soon. Each chapter holds regular meetings (weekly or biweekly) and coordinates through @ElectionIntegrity.Network email addresses.",
+      "confidence": "high",
+      "id": 7412
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "EIN 2025 legislative victories across state chapters: Nevada \u2014 Pigpen Project removed 87 registrants in Washoe County, tracked 41 election bills (15 signed into law). Pennsylvania \u2014 PA Fair Elections prompted 28,000+ voluntary cancellations from out-of-state movers (500% increase). Wisconsin \u2014 court ruling enforcing citizenship verification and voter roll audits. Texas \u2014 restored AG election fraud prosecution authority, constitutional amendment banning noncitizen voting. Tennessee \u2014 closed internet ballot return loopholes. West Virginia \u2014 formed Legislative Election Integrity Caucus. North Carolina \u2014 reforms in HB 958. Virginia \u2014 Power of the Pen guide achieved 100% veto success rate. Washington \u2014 IL26-126 initiative advanced proof-of-citizenship requirements. Missouri \u2014 HB 2308 for enhanced verification, Amendment 4 on fraud/foreign funding. Michigan \u2014 thwarted ranked choice voting. New York \u2014 Project Civica gathered 1700 SAVE Act signatures, won FOIL lawsuits. Louisiana \u2014 funded litigation for auditable voting machines. SAVE Act passed House April 2025 with Rep. Chip Roy floor speech.",
+      "confidence": "high",
+      "id": 7428
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "EIN-PILF-TTV-CPI cross-organizational personnel map: (1) PILF: Cleta Mitchell serves as both EIN Founder/Chairman AND PILF Board Chair simultaneously, making her the direct nexus between litigation strategy (PILF) and grassroots coordination (EIN). J. Christian Adams (PILF President) was TTV counsel in 2013 CO voter roll cases. PILF is co-party with TTV in True the Vote v. IRS (DC Circuit 25-5219, active). (2) True the Vote: Catherine Engelbrecht (TTV founder) and Gregg Phillips (TTV co-founder, now FEMA) both connected through the 15-org DOGE SSA voter data agreement probe. Phillips stated DHS 'wants to partner with us' on voter rolls (March 2025). (3) CPI: CPI is EIN's institutional parent \u2014 funded EIN 525K (2022) + 20K (2023). CPI also funds PILF 50K (2021). CPI-satellite CRA funded EIN 228K (2022). Heather Honey served as VP on CPI-satellite FAIR Elections Fund board before becoming DHS Deputy Asst Sec for Election Integrity. (4) Heritage: Hans von Spakovsky sits on PILF board AND Heritage; Heritage sponsored EIN summits. (5) Julie Adams: EIN Regional Coordinator for GA, simultaneously Tea Party Patriots Action field director (TPPA received 1.1M from Leo-connected groups, 2.5M from Uihlein). Adams used her Fulton County Board seat to refuse March 2024 primary certification.",
+      "confidence": "medium",
+      "id": 7415
+    }
+  ]
+}

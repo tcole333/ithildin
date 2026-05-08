@@ -1,0 +1,350 @@
+{
+  "name": "George Reenstra",
+  "slug": "george-reenstra",
+  "aliases": [],
+  "profile_ids": [
+    "epstein-aetna"
+  ],
+  "generated_at": "2026-05-07T23:07:36.380447",
+  "last_updated": "2026-04-14T19:51:04",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 1,
+    "finding_types": {
+      "communication": 2,
+      "financial": 3,
+      "negative_result": 1,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-14T19:51:04"
+  },
+  "findings": [
+    {
+      "id": 10425,
+      "finding_type": "communication",
+      "summary": "2011 N722JE/Aetna sale terms originated from Reenstra, not Aetna: Epstein tells his pilot and Reenstra 'the deal george and i agreed, he now needs to go to aetvna. 11.9 for 750 1.5 for 472.. profit after all costs will be split 50/50 on the sale with george'",
+      "detail": "June 9 2011 email from Epstein (jeevacation@gmail.com) to Larry Visoski (ivjet) and Reenstra, cc Richard Kahn (Epstein accountant), captured in EFTA00933758 and EFTA00718832. Shows Epstein and Reenstra pre-negotiated the price (11.9M for 750 plus 1.5M trade-in for 472) with a 50/50 profit-split structure, and only then did Reenstra take the deal 'to aetvna' (Aetna). Reenstra's same-day reply confirms: 'Yes on the numbers and yes we split the profit on 472 however I do get my 100k for the sale of 750 above the 472 profit split at the closing of 750'. This profit-sharing structure on the 472 trade is incompatible with a disinterested broker who sourced a buyer; it shows Reenstra was economically aligned with Epstein in how the trade-in was monetized after the Aetna sale.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-06-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:51:04",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00718832",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00933758",
+          "source_quote": "the deal george and i agreed, he now needs to go to aetvna. 11 .9 for 750 1.5 for 472.. profit after all costs will be split 50/50 on the sale .. with george; EFTA00718832:Yes on the numbers and yes we split the profit on 472 however I do get my 100k for the sale of 750 above the 472 profit split at the closing of 750",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10419,
+      "finding_type": "financial",
+      "summary": "Reenstra/ASG received $826,000 in disclosed remuneration plus $90,319 settlement wire from Epstein's Freedom Air International for five Sikorsky helicopter transactions (2008-2012)",
+      "detail": "Feb 11 2012 AGREEMENT AND GENERAL RELEASE among Reenstra, Aircraft Services Group Inc, Jeffrey Epstein, and Freedom Air International Inc (f/k/a Air Ghislaine Inc and Shmitka Air Inc) discloses payments: 667 acquisition 250K, 667 sale 126K, 750 acquisition 250K, 750 sale 100K (to Aetna), 472 sale 100K; total 826K. Plus 90,319 final wire to BAK Opportunities LLC at Chase account 856500855. Warranty clause para 3 states that on one of the two C++ acquisitions, ASG accepted $100,000 less than would ordinarily have been payable. Not consistent with a single arm's-length commission.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-02-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:49:45",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00283609",
+          "source_quote": "Reenstra and ASG acknowledge and agree that Reenstra, ASG and/or the affiliates thereof have received payment of the following remuneration in connection with the acquisition and subsequent sale of the Subject Aircraft by FAI (including when FAI was formerly known as Air Ghislaine, Inc. and Shmitka Air, Inc.): Acqusition by FAI of S-76C++, Serial No. 760667 $250,000.00; Sale by FAI of S-76C++, Serial No. 760667 $126,000.00; Acqusition by FAI of S-76C++, Serial No. 760750 $250,000.00; Sale by FAI of S-76C++, Serial No. 760750 $100,000.00; Sale by FAI of S-76C+, Serial No. 760472 $100,000.00; Total $826,000.00",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00289958",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00588908",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01176652",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10422,
+      "finding_type": "financial",
+      "summary": "Reenstra's final $90,319 Epstein settlement was routed to BAK Opportunities LLC at Chase Bank (Ramsey NJ), account 856500855, not to Aircraft Services Group Inc \u2014 payment laundering pattern that routine brokerage fees would not require",
+      "detail": "Per Feb 11 2012 AGREEMENT AND GENERAL RELEASE, Freedom Air International paid the final 90,319 settlement via wire to 'BAK Opportunities LLC' at Chase Bank, 555 North Franklin Turnpike, Ramsey NJ 07446, ABA 021000021, account 856500855 \u2014 described as an 'affiliate' of Reenstra/ASG. The same BAK Opportunities LLC also appears as the named seller in a Sikorsky 472 purchase agreement (EFTA01172554). Routing commissions through a separate LLC rather than the operating broker (ASG) is consistent with tax/trace partitioning not characteristic of straight arm's-length brokerage.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-02-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:50:25",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00283609",
+          "source_quote": "Upon the execution and delivery of this Agreement by all of the parties hereto, in full and final payment of all amounts due and payable from FAI to the ASG Parties in connection with FAI's acquisition and subsequent sale of 742, FAI shall pay ASG and Reenstra the sum of $90,319 by wire transfer of said amount to the account of their affiliate, BAK Opportunities, LLC, in accordance with the following wire transfer instructions: Bank: Chase Bank 555 North Franklin Turnpike Ramsey, NJ 07446 ABA No.: 021000021 Account Name: BAK Opportunities LLC Account Number: 856500855",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01172554",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10423,
+      "finding_type": "negative_result",
+      "summary": "Reenstra does not appear in any Epstein corpus outside aviation-transaction documents: no flight manifests, guest lists, island/residence calendars, Little Black Book entries, or non-aviation business correspondence",
+      "detail": "Targeted searches across DOJ Vol 11 (99 doc hits on 'Reenstra', all transaction-related), LMSBAND (60+ hits, all aviation), Unified Epstein DB (5 doc hits, 1 entity record, all aviation), and ingested IATS escrow file EFTA01339374 (40 page matches, all transaction-related) returned zero hits placing Reenstra in Epstein's flight logs, calendar, personal visits, LBB, Zorro Ranch/Little St. James/NYC-townhouse guest lists, or any non-aviation business context. The two call-log appearances (EFTA00006374, EFTA01308309) treat Reenstra as a vendor touchpoint \u2014 'forwarded helicopter pictures from George Reenstra to your yahoo' and an 11:40AM voicemail about painting a helicopter \u2014 standard broker-operator communications. This is evidence FOR the null hypothesis on the personal/social dimension: Reenstra's relationship with Epstein appears economic only.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2012-02-11",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:50:37",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00006374",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01308309",
+          "source_quote": "forwarded helicopter pictures from George Reenstra to your r yahoo; EFTA00006374:George Reenstra 11:40AM Via email re photos of other 7G s: That is on temp hold, apparently we are now painting all black with a camel stripe",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10424,
+      "finding_type": "financial",
+      "summary": "Feb 2012 release contains unusual disclosure that ASG 'accepted $100,000.00 less in remuneration than otherwise would have ordinarily been payable' on one of the two C++ acquisitions \u2014 warranty language suggesting price-manipulation side-deals atypical of arm's-length brokerage",
+      "detail": "Paragraph 3 of the Feb 11 2012 AGREEMENT AND GENERAL RELEASE (EFTA00283609) contains an explicit representation that on one of the two S-76C++ new-build acquisitions (either 667 or 750), the ASG Parties accepted $100,000 less in remuneration than would ordinarily have been payable \u2014 and that 'no ASG Party received any discount, benefit, compensation, commission or other form of remuneration, whether directly or indirectly (e.g., through a separate transaction not involving the Subject Aircraft), in connection with the acquisition and/or subsequent sale by FAI of any of the Subject Aircraft'. The existence of this representation \u2014 using explicit 'separate transaction' language \u2014 indicates counsel was concerned enough about undisclosed side-payments to paper over that risk in the release. Routine broker engagements do not require this kind of warranty.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-02-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:50:52",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00283609",
+          "source_quote": "Reenstra and ASG represent and warrant that of the $250,000.00 per acquisition of remuneration received by the ASG Parties in connection with the acquisition by FAI of 667 and 750, with respect to one of those acquisitions the ASG Parties accepted $100,000.00 less in remuneration than otherwise would have ordinarily been payable. Reenstra and ASG further represent and warrant that, other than as stated in paragraph 2 above, no ASG Party received any discount, benefit, compensation, commission or other form of remuneration, whether directly or indirectly (e.g., through a separate transaction not involving the Subject Aircraft)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10420,
+      "finding_type": "relationship",
+      "summary": "Reenstra admits he held a Bell helicopter (B model) in his own name as nominee for Epstein: 'you bought it, never took title to it left it in my name and then I sold it for you'",
+      "detail": "May 1 2012 email from Reenstra to Epstein describing the B model transaction. Epstein had asked Reenstra to enumerate all commissions paid on helicopter purchases and sales; Reenstra responded that in addition to Sikorsky rep fees and Epstein-paid commissions, on the 'B model' Epstein purchased but 'never took title to it left it in my name and then I sold it for you' earning 100K. This is a nominee titleholder relationship \u2014 inconsistent with arm's-length brokerage.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-05-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:49:56",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00718831",
+          "source_quote": "No, sikorsky pays me as a rep, you paid me on the sale to Aetna and Lerner and I was paid on the sale of the B to the drilling company ...the B deal was when you bought it, never took title to it left it in my name and then I sold it for you",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10421,
+      "finding_type": "communication",
+      "summary": "Reenstra's documented relationship with Epstein spans Dec 2007 through March 2020 (12+ years), covering at least 5 compensated helicopter deals plus a Bell model held in nominee title \u2014 not limited to the 2011 N722JE/Aetna transaction",
+      "detail": "Earliest documented contact: Dec 27 2007 Air Ghislaine acquisition Acceptance and Delivery documents referenced in Epstein office index EFTA00310735. Reenstra helped close 'Green Delivery at the eleventh hour in December 2008' per Epstein's own Jan 27 2010 memo EFTA00722159. Continues through Feb 2012 General Release, then a May 2012 final commission accounting, then resumes in 2019 for the N722JE sale to ASI Wings/Jon Oringer (Sept 30 2019 wire instructions IATS escrow file p.650), Nov 2019 international registry work (p.813), and March 2 2020 engine-serial delivery (p.896) \u2014 8 years after the supposedly 'full and final' 2012 release.",
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband",
+        "investigations"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2020-03-02",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 19:50:09",
+      "target_name": "George Reenstra",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00283609",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00310735",
+          "source_quote": "Acceptance and Delivery documents of December 27, 2007 14. Turbomeca Warranty 15. $75,000 Credit Agreement A. Air Ghislaine/Beechiet; EFTA01339374:From: George Reenstra Sent: 3/2/2020 8:56:46 AM To: Rhiannon Routh CC: Megan Newberry As requested N722JE, together with said aircraft's two Turbomeca S.A. Model Arriel 2S2 engines, bearing manufacturer's serial numbers 42285TEC and 42286TEC",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00718831",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00722159",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [
+    {
+      "role": "Aircraft Broker (principal)",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA01339374; Aircraft Services Group business records",
+      "entity_id": 3617,
+      "entity_name": "Aircraft Services Group, Inc.",
+      "entity_type": "inc",
+      "jurisdiction": "New Jersey",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2011-06-09",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "2011 N722JE/Aetna sale terms originated from Reenstra, not Aetna: Epstein tells his pilot and Reenstra 'the deal george and i agreed, he now needs to go to aetvna. 11.9 for 750 1.5 for 472.. profit after all costs will be split 50/50 on the sale with george'",
+      "confidence": "confirmed",
+      "id": 10425
+    },
+    {
+      "date": "2012-02-11",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Reenstra/ASG received $826,000 in disclosed remuneration plus $90,319 settlement wire from Epstein's Freedom Air International for five Sikorsky helicopter transactions (2008-2012)",
+      "confidence": "confirmed",
+      "id": 10419
+    },
+    {
+      "date": "2012-02-11",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Reenstra's final $90,319 Epstein settlement was routed to BAK Opportunities LLC at Chase Bank (Ramsey NJ), account 856500855, not to Aircraft Services Group Inc \u2014 payment laundering pattern that routine brokerage fees would not require",
+      "confidence": "confirmed",
+      "id": 10422
+    },
+    {
+      "date": "2012-02-11",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "Reenstra does not appear in any Epstein corpus outside aviation-transaction documents: no flight manifests, guest lists, island/residence calendars, Little Black Book entries, or non-aviation business correspondence",
+      "confidence": "medium",
+      "id": 10423
+    },
+    {
+      "date": "2012-02-11",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Feb 2012 release contains unusual disclosure that ASG 'accepted $100,000.00 less in remuneration than otherwise would have ordinarily been payable' on one of the two C++ acquisitions \u2014 warranty language suggesting price-manipulation side-deals atypical of arm's-length brokerage",
+      "confidence": "confirmed",
+      "id": 10424
+    },
+    {
+      "date": "2012-05-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Reenstra admits he held a Bell helicopter (B model) in his own name as nominee for Epstein: 'you bought it, never took title to it left it in my name and then I sold it for you'",
+      "confidence": "confirmed",
+      "id": 10420
+    },
+    {
+      "date": "2020-03-02",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Reenstra's documented relationship with Epstein spans Dec 2007 through March 2020 (12+ years), covering at least 5 compensated helicopter deals plus a Bell model held in nominee title \u2014 not limited to the 2011 N722JE/Aetna transaction",
+      "confidence": "medium",
+      "id": 10421
+    }
+  ]
+}

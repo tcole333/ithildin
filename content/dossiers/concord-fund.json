@@ -1,0 +1,467 @@
+{
+  "name": "Concord Fund",
+  "slug": "concord-fund",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.283209",
+  "last_updated": "2026-03-23T19:02:54",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "background": 1,
+      "financial": 5,
+      "relationship": 2,
+      "intelligence": 1,
+      "document": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "funds": 2,
+      "financial": 1,
+      "shares_officer": 1,
+      "controls": 1,
+      "contracts_with": 1,
+      "corporate": 1
+    },
+    "last_updated": "2026-03-23T19:02:54"
+  },
+  "findings": [
+    {
+      "id": 7206,
+      "finding_type": "background",
+      "summary": "Concord Fund (EIN 20-2303252) is a 501(c)(4) organization at 8300 Boone Blvd Suite 500, Vienna VA 22182. Founded 2005 as Judicial Confirmation Network, renamed Judicial Crisis Network (2008), then Concord Fund (2020). Also operates under aliases: Honest Elections Project Action, Free to Learn Action. Co-founded by Ann Corkery and Robin Arkley II. Key officers: Carrie Severino (president since 2010, former Thomas clerk), Neil Corkery (treasurer), James L. Hirsen (board member since 2005), Gary Marx (board member). Shares 8300 Boone Blvd Suite 500 address with Rule of Law Trust (EIN 83-1047727), where Leonard Leo serves as Trustee.",
+      "detail": null,
+      "source_datasets": [
+        "ProPublica,LittleSis,InfluenceWatch,Wikipedia"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:02",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica Nonprofit Explorer EIN 202303252",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7208,
+      "finding_type": "financial",
+      "summary": "Concord Fund received $247.6M in documented grants (2017-2024). Dominant funder: Marble Freedom Trust (Leonard Leo, chairman) \u2014 $60.45M (2024), $55.5M (2023), $28.9M (2022), $16.5M (2021) = $190.25M total (77% of all grants received). Other funders: Rule of Law Trust $24.5M (2020-2021, same address, Leo is trustee), 45Committee $3.2M (2017-2019), Government Accountability Alliance $375K, State Solutions Inc $150K, Prairie Fire Freedom Inc $130K, American Democracy Alliance $100K, Arizona Free Enterprise Club $20K. Single-source dependency on Marble Freedom Trust is extreme \u2014 organization would collapse without Leo's conduit.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:15",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 grants to EIN 202303252",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7210,
+      "finding_type": "financial",
+      "summary": "Concord Fund granted $101.2M to 131 recipient organizations (990 data). Major grantees: One Nation $12M, Susan B Anthony List $11.05M, Republican Governors Association $6M, Republican AGs Association $8.83M, Heritage Action for America $3.44M, CatholicVote Civic Action $2.7M, Americans for Limited Government $1.81M, Independent Women's Voice $1.5M, Foundation for Fair Courts LLC $1.5M, Bluegrass Freedom Action $3M, Protect Women Ohio Action $3M, Republican State Leadership $2.55M, Club for Growth $1.35M, Faith Freedom Coalition $1M, Advancing American Freedom $500K. Also made FEC-reported PAC contributions totaling $4M in 2023-2024: Truth and Courage PAC $2.5M, Pole Position PAC $750K, Congressional Leadership Fund $750K.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:27",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 grants by EIN 202303252; FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7213,
+      "finding_type": "financial",
+      "summary": "CRC Advisors (Leonard Leo/Greg Mueller PR firm, created 2020) received $3.76M from Concord Fund in 2022 alone per LittleSis. BH Group received $1.2M from Concord Fund (from 2018). CRC Advisors evolved from CRC Strategies/Creative Response Concepts, which received over $23M from JCN since 2014. Concord Fund also registered as lobbying client through OnMessage Public Strategies (Alexandria VA), with lobbyist contact Tommy Binion. This establishes Leo collects fees from his own nonprofit network \u2014 the Marble Freedom Trust (where Leo is paid $600K as chairman) funds Concord Fund, which then pays Leo's CRC Advisors for consulting.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:40",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1971283; LDA filing 668c762d",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7215,
+      "finding_type": "relationship",
+      "summary": "Concord Fund and 85 Fund are sister organizations in the Leo network, sharing officer Carrie Severino (president of Concord Fund, Director/Secretary of 85 Fund at $246,320 compensation in 2023). Both were rebranded simultaneously in 2020: Judicial Crisis Network -> Concord Fund, Judicial Education Project -> 85 Fund. The 85 Fund (EIN 20-2466871) is a 501(c)(3) at 201 Main St Fort Worth TX, while Concord Fund is a 501(c)(4) \u2014 the structure allows the (c)(4) Concord Fund to do unlimited political spending while the (c)(3) 85 Fund handles tax-deductible 'educational' activities. 85 Fund revenue exploded from $7.8M (2018) to $143M (2023). 85 Fund operates the Honest Elections Project and Free to Learn as fictitious business names.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:52",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 202466871; 990 officer search Carrie Severino",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7233,
+      "finding_type": "intelligence",
+      "summary": "Concord Fund operates Honest Elections Project Action as a fictitious business name \u2014 a voter restriction advocacy arm that campaigned against mail-in voting and for voting restrictions using election integrity rhetoric. The 85 Fund (sister org) operates the corresponding Honest Elections Project. OpenSecrets reported in May 2020 that the conservative dark money network rebranded specifically to push voting restrictions before the 2020 election. In 2024, Concord Fund donated $1M against a Missouri abortion amendment and $5M to Will Scharf's unsuccessful MO Attorney General campaign. The Honest Elections Project ran $250K in anti-mail-voting ads in April 2020. These activities directly connect Concord Fund to the broader election enforcement apparatus being tracked in Thread 10.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:33",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSecrets 2020 report; FEC records; InfluenceWatch",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7235,
+      "finding_type": "document",
+      "summary": "Concord Fund has 11 lobbying disclosure filings through registrant OnMessage Public Strategies (817 Slaters Lane, Alexandria VA 22314). Primary lobbyist: Thomas Binion, whose covered position was 'Legislative Director, Legislative Assistant, Legislative Aide: Rep. Steve King.' Lobbying focus: 'Issues related to government oversight and reform' (GOV issue code). Registration effective 2023-09-06. Q3 2023 income reported as $20,000.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:43",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filing 668c762d-bdbd-4e43-b160-32fd1a2a8366",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7258,
+      "finding_type": "relationship",
+      "summary": "Cross-organizational officer overlap reveals the Concord Fund inner circle holds positions across multiple Leo-network and conservative entities. Ann Corkery (Concord co-founder): also Counsel at 85 Fund ($197,600 comp), Director at Sudan Relief Fund. Neil Corkery (Concord treasurer): Director/President at Sudan Relief Fund ($174,909 comp), Director/Treasurer at Foundation for Accountability and Civic Trust (FACT, EIN 46-4754874). Gary Marx (Concord board): Director/Treasurer at 85 Fund, Director at Right Vote Inc (EIN 93-2721813). James L. Hirsen (Concord board since 2005): President of Justice and Freedom Fund (EIN 33-0836794), President of World Faith Foundation. Carrie Severino (Concord president): Director/Secretary at 85 Fund ($246,320 comp). The Corkery couple bridges the Concord Fund, 85 Fund, and Sudan Relief Fund simultaneously.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:01",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 officer search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7263,
+      "finding_type": "financial",
+      "summary": "Concord Fund (as Judicial Crisis Network) was the primary dark money vehicle for Supreme Court confirmation campaigns: $7M attacking Merrick Garland nomination (2016), $10M boosting Neil Gorsuch (2017), $10M+ defending Brett Kavanaugh (2018), $10M supporting Amy Coney Barrett (under 2 months, 2020). The 2015-2016 tax return showed a single $17.9M anonymous donation constituting 96.6% of revenue. The Wellspring Committee (Ann Corkery-directed, Koch network) was the primary conduit for these funds until it sunsetted circa 2018, after which Marble Freedom Trust (funded by $1.6B Barre Seid donation in 2021) became the dominant funder.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:14",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sen. Whitehouse Scheme speech; Wikipedia; InfluenceWatch",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7301,
+      "finding_type": "financial",
+      "summary": "The full money flow from Barre Seid to the Concord Fund downstream network: (1) Barre Seid donated Tripp Lite electronics company to Marble Freedom Trust (April 2020), yielding $1.65B when sold to Eaton Corp (March 2021). (2) Marble Freedom Trust (Leo chairman, $600K salary) granted $190.25M to Concord Fund (2021-2024) and $153M to Rule of Law Trust (same address as Concord Fund). (3) Rule of Law Trust granted $24.5M to Concord Fund. (4) Concord Fund paid $12M to CRC Advisors (Leo/Mueller's for-profit PR firm) from a single $29M Marble grant. (5) Concord Fund then distributed $101.2M to 131 downstream conservative organizations. The DAF layer (Schwab Charitable, DonorsTrust) obscures additional flows. Net effect: a single billionaire's donation is laundered through 3-4 nonprofit layers before reaching political action groups, with Leo's for-profit firm extracting fees at each step.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:40",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990; Truthout; InfluenceWatch; Wikipedia",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7303,
+      "finding_type": "negative_result",
+      "summary": "Negative results: (1) Corporate registry search returned 0 matches for Concord Fund or Judicial Confirmation Network in unified registry (FL entries unrelated investment funds). The Concord Fund does not appear to be registered as a business entity in any state corporate registry in our database \u2014 it likely exists solely as an IRS-recognized 501(c)(4). (2) No FARA foreign agent registrations. (3) No OpenSanctions/PEP hits (Bulgarian entity unrelated). (4) No USASpending federal contracts/grants. (5) No SEC EDGAR filings (results were unrelated entities). (6) SAM.gov unavailable (no API key). (7) No GLEIF LEI record. (8) CourtListener returned 1 case (Katz v. JCN, S.D. Indiana, 2018) but no significant litigation profile. (9) 990 officers database returned 0 officers for EIN 202303252 \u2014 the org files Form 990-O (organization exempt under 501(c)(4)) which has limited disclosure.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:54",
+      "target_name": "Concord Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3399,
+      "person_a": "Concord Fund",
+      "person_b": "Marble Freedom Trust",
+      "relationship_type": "funds",
+      "description": "MFT granted 28.9M(2021) and 55.5M(2022) to Concord Fund, total 100.9M",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:43:28",
+      "profile_id": "tech-right",
+      "other_person": "Marble Freedom Trust",
+      "other_person_slug": "marble-freedom-trust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MFT 990 Schedule I",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3623,
+      "person_a": "Concord Fund",
+      "person_b": "Marble Freedom Trust",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:58",
+      "profile_id": "tech-right",
+      "other_person": "Marble Freedom Trust",
+      "other_person_slug": "marble-freedom-trust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 grants to EIN 202303252",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3624,
+      "person_a": "85 Fund",
+      "person_b": "Concord Fund",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:05",
+      "profile_id": "tech-right",
+      "other_person": "85 Fund",
+      "other_person_slug": "85-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 202466871; LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3625,
+      "person_a": "Concord Fund",
+      "person_b": "Leonard Leo",
+      "relationship_type": "controls",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:07",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990; LittleSis CRC Advisors",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3627,
+      "person_a": "Concord Fund",
+      "person_b": "Rule of Law Trust",
+      "relationship_type": "funds",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:08",
+      "profile_id": "tech-right",
+      "other_person": "Rule of Law Trust",
+      "other_person_slug": "rule-of-law-trust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 grants to EIN 202303252",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3626,
+      "person_a": "CRC Advisors",
+      "person_b": "Concord Fund",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:08",
+      "profile_id": "tech-right",
+      "other_person": "CRC Advisors",
+      "other_person_slug": "crc-advisors",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3672,
+      "person_a": "85 Fund",
+      "person_b": "Concord Fund",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:08",
+      "profile_id": "tech-right",
+      "other_person": "85 Fund",
+      "other_person_slug": "85-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990, LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

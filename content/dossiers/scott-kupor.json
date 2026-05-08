@@ -5,24 +5,101 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.899885",
-  "last_updated": "2026-03-06T18:27:54",
+  "generated_at": "2026-05-07T23:07:36.150876",
+  "last_updated": "2026-03-23T19:00:12",
   "stats": {
-    "total_findings": 13,
-    "total_connections": 3,
-    "total_entities": 0,
+    "total_findings": 22,
+    "total_connections": 10,
+    "total_entities": 1,
     "finding_types": {
-      "intelligence": 1,
-      "financial": 9,
-      "relationship": 3
+      "financial": 11,
+      "background": 1,
+      "intelligence": 5,
+      "relationship": 4,
+      "legal": 1
     },
     "connection_types": {
-      "corporate": 2,
-      "employment": 1
+      "corporate": 4,
+      "employment": 6
     },
-    "last_updated": "2026-03-06T18:27:54"
+    "last_updated": "2026-03-23T19:00:12"
   },
   "findings": [
+    {
+      "id": 7065,
+      "finding_type": "financial",
+      "summary": "FEC records show Kupor's political donations were minimal before OPM appointment:  to Romney for President (2007, while at Opsware), ,500/year to NVCA VenturePAC (2016-2018). No direct donations to Trump found in FEC. Kupor's pathway to OPM was through Marc Andreessen's recruitment pipeline rather than political donation networks.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2018-01-11",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:47",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7079,
+      "finding_type": "background",
+      "summary": "IRS 990 records show Kupor served as Director at Global Impact Investing Network (2023-2024), Treasurer/Secretary at Becklam K Foundation (2023-2024), and Director at Silicon Valley Community Foundation (2023). All unpaid positions. No corporate registry records found as officer of any entity.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:52",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 officer search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7061,
+      "finding_type": "intelligence",
+      "summary": "OPM directed conversion of Chief Information Officer positions from career-reserved SES to politically appointable SES roles (Feb 2025 memo). This enabled DOGE-affiliated tech industry personnel to replace career federal IT leaders. Combined with Schedule Policy/Career rule, creates systematic mechanism to replace career civil servants with political/network appointees across all agencies.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:36",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "nextgov.com Feb 2025, nbcnews.com, federalnewsnetwork.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5505,
       "finding_type": "intelligence",
@@ -32,7 +109,7 @@
         "web_search"
       ],
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2025-07-14",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-03-05 22:32:36",
@@ -42,6 +119,221 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://fortune.com/2025/09/19/scott-kupor-a16z-talks-new-role-director-opm-trump-doge-job-cuts/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5796,
+      "finding_type": "relationship",
+      "summary": "Post-DOGE: a16z managing partner Scott Kupor confirmed as OPM director, absorbing DOGE functions",
+      "detail": "Scott Kupor, a16z's first hire (2009) and former managing partner, was Trump's nominee for OPM director (Dec 2024). Sworn in July 14 2025. To address conflicts, resigned as managing partner from a16z and from 32 a16z funds, but remained passive investor in 38 other funds. Will divest from Microsoft, Apple, Adobe, Amazon, Lockheed Martin. OPM under Kupor absorbed core DOGE workforce management functions. Kupor has spoken about using AI to mitigate staffing losses from DOGE-era cuts. a16z portfolio companies include Levels Health (Sam Corcos, now Treasury CIO), creating a network effect between VC firm and government tech appointments.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:49",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune, Sep 2025; Fortune, Apr 2025; OPM.gov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7055,
+      "finding_type": "relationship",
+      "summary": "Comprehensive a16z-to-government personnel pipeline at OPM: (1) Scott Kupor, a16z Managing Partner -> OPM Director; (2) James Sullivan, a16z Investment Partner -> OPM Senior Advisor (retains up to M in a16z holdings); (3) Greg Hogan, VP at a16z-backed Comma.ai -> OPM CIO (Jan-Sept 2025); (4) Clayton Cromer, OPM Deputy General Counsel, holds Founders Fund assets. Marc Andreessen served as unpaid DOGE recruiter placing a16z personnel.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-07-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:15",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "propublica financial disclosures, revolvingdoorproject.org, fortune.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5962,
+      "finding_type": "financial",
+      "summary": "OPM Director confirmed DOGE dissolution Nov 2025 but retained passive investor status in 38 a16z funds with carried interest",
+      "detail": "Scott Kupor as OPM Director announced DOGE dissolution November 24, 2025 (8 months early). However, dissolution was effectively a dispersal: operatives remained embedded at agencies, Russell Vought institutionalizing DOGE agenda at OMB, 2026 budget requests doubled DOGE budget to $45M. Kupor resigned managing partner from 32 a16z funds but RETAINED passive investor status in 38 other a16z funds and forfeited only UNVESTED carried interest. His disclosure shows CNK fund carried interest valued at $250M-500M each (multiple funds). He planned elimination of 300,000 federal roles by end 2025. As OPM Director, controls Schedule F political appointments that bypass civil service protections -- directly relevant to staffing agencies with a16z-friendly personnel. Net worth $182M-573M+, the wealthiest OPM Director in history with 1,546 disclosed assets.",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-11-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:24:45",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DOGE dissolution reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OPM Director statements Nov 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosure (kupor-scott-aaron)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7085,
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor oversaw net federal workforce reduction of ~249,000 employees (10.8% decrease) in 2025 while simultaneously creating Tech Force pipeline to bring in 1,000 tech workers from private sector. Court found OPM 'unlawfully directed mass firings' (Sept 2025). OPM claimed 92% of departures were voluntary; departing employees disputed this, saying they left under duress. OPM itself lost 1/3 of its workforce (3,110 to ~2,000).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:14",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "federalnewsnetwork.com Jan 2026, govexec.com Dec 2025, court ruling Sept 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7050,
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor launched US Tech Force (Dec 2025) with 29 corporate partners including a16z portfolio companies Anduril and Coinbase, plus Palantir and xAI. DOJ opinion permits Tech Force hires to retain unvested RSUs and deferred compensation from partner companies without divestiture. 10,000 applications for 1,000 positions at GS-13/14 (K-K) for 2-year stints.",
+      "detail": null,
+      "source_datasets": [
+        "opm.gov,fedscoop.com,govexec.com,federalnewsnetwork.com"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-15",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:09:43",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "opm.gov Tech Force announcement, govexec.com DOJ opinion March 2026, fedscoop.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7058,
+      "finding_type": "financial",
+      "summary": "OPM Tech Force partner list contains at least 5 companies that are a16z portfolio companies or closely linked: Anduril (a16z American Dynamism investment, B valuation March 2026), Coinbase (a16z turned M into B valuation), plus partners in sectors where a16z has major portfolio positions (AI/defense). a16z raised .176B American Dynamism fund in Jan 2026 and B total in latest raise. Kupor remains passive investor in 38 a16z funds including American Dynamism and AI funds.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:27",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z.com, techcrunch.com Jan 2026, fortune.com April 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7053,
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor finalized Schedule Policy/Career rule (Feb 6, 2026, effective March 8, 2026) reclassifying up to 50,000 federal positions as at-will, stripping appeal rights and Merit Systems Protection Board oversight. Employees can be removed for 'subversion of presidential directives.' Combined with Tech Force pipeline, creates mechanism to replace career civil servants with network-affiliated tech workers.",
+      "detail": null,
+      "source_datasets": [
+        "federal_register"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-02-06",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:04",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Federal Register Feb 6 2026, opm.gov, fedscoop.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7051,
+      "finding_type": "legal",
+      "summary": "DOJ Office of Legal Counsel issued opinion (March 2026) permitting Tech Force employees to retain unvested RSUs and deferred compensation while serving in government. OPM Director Kupor stated arrangements 'do not require the workers to divest of their stock.' Ethics lawyer Richard Painter warned: 'You're giving advice on technology and AI, and you have AI stock' presents serious ethical problems.",
+      "detail": null,
+      "source_datasets": [
+        "govexec.com"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:09:54",
+      "target_name": "Scott Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "govexec.com DOJ opinion March 2026",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -274,31 +566,6 @@
       ]
     },
     {
-      "id": 5796,
-      "finding_type": "relationship",
-      "summary": "Post-DOGE: a16z managing partner Scott Kupor confirmed as OPM director, absorbing DOGE functions",
-      "detail": "Scott Kupor, a16z's first hire (2009) and former managing partner, was Trump's nominee for OPM director (Dec 2024). Sworn in July 14 2025. To address conflicts, resigned as managing partner from a16z and from 32 a16z funds, but remained passive investor in 38 other funds. Will divest from Microsoft, Apple, Adobe, Amazon, Lockheed Martin. OPM under Kupor absorbed core DOGE workforce management functions. Kupor has spoken about using AI to mitigate staffing losses from DOGE-era cuts. a16z portfolio companies include Levels Health (Sam Corcos, now Treasury CIO), creating a network effect between VC firm and government tech appointments.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 02:45:49",
-      "target_name": "Scott Kupor",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Fortune, Sep 2025; Fortune, Apr 2025; OPM.gov",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5961,
       "finding_type": "financial",
       "summary": "DOGE Personnel: Scott Kupor \u2014 a16z Managing Partner as OPM Director, $182M+ net worth",
@@ -346,46 +613,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica Financial Disclosures slug kupor-scott-aaron",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5962,
-      "finding_type": "financial",
-      "summary": "OPM Director confirmed DOGE dissolution Nov 2025 but retained passive investor status in 38 a16z funds with carried interest",
-      "detail": "Scott Kupor as OPM Director announced DOGE dissolution November 24, 2025 (8 months early). However, dissolution was effectively a dispersal: operatives remained embedded at agencies, Russell Vought institutionalizing DOGE agenda at OMB, 2026 budget requests doubled DOGE budget to $45M. Kupor resigned managing partner from 32 a16z funds but RETAINED passive investor status in 38 other a16z funds and forfeited only UNVESTED carried interest. His disclosure shows CNK fund carried interest valued at $250M-500M each (multiple funds). He planned elimination of 300,000 federal roles by end 2025. As OPM Director, controls Schedule F political appointments that bypass civil service protections -- directly relevant to staffing agencies with a16z-friendly personnel. Net worth $182M-573M+, the wealthiest OPM Director in history with 1,546 disclosed assets.",
-      "source_datasets": [
-        "web_search",
-        "propublica_disclosures"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 18:24:45",
-      "target_name": "Scott Kupor",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DOGE dissolution reporting",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OPM Director statements Nov 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica 278 disclosure (kupor-scott-aaron)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -451,10 +678,272 @@
       "other_person": "Andreessen Horowitz",
       "other_person_slug": "andreessen-horowitz",
       "evidence": []
+    },
+    {
+      "id": 3535,
+      "person_a": "Marc Andreessen",
+      "person_b": "Scott Kupor",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:02",
+      "profile_id": "tech-right",
+      "other_person": "Marc Andreessen",
+      "other_person_slug": "marc-andreessen",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fortune.com, littlesis.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3536,
+      "person_a": "James Sullivan",
+      "person_b": "Scott Kupor",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:02",
+      "profile_id": "tech-right",
+      "other_person": "James Sullivan",
+      "other_person_slug": "james-sullivan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "propublica financial disclosures",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3538,
+      "person_a": "Scott Kupor",
+      "person_b": "Sriram Krishnan",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:05",
+      "profile_id": "tech-right",
+      "other_person": "Sriram Krishnan",
+      "other_person_slug": "sriram-krishnan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z employment records, techcrunch.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3539,
+      "person_a": "Brian Quintenz",
+      "person_b": "Scott Kupor",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:05",
+      "profile_id": "tech-right",
+      "other_person": "Brian Quintenz",
+      "other_person_slug": "brian-quintenz",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z employment records, coindesk.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3652,
+      "person_a": "Office of Personnel Management",
+      "person_b": "Scott Kupor",
+      "relationship_type": "employment",
+      "description": "Confirmed as OPM Director July 2025, sworn in July 14, 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:12",
+      "profile_id": "tech-right",
+      "other_person": "Office of Personnel Management",
+      "other_person_slug": "office-of-personnel-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov PN12-24",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OPM.gov",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3499,
+      "person_a": "Marc Andreessen",
+      "person_b": "Scott Kupor",
+      "relationship_type": "corporate",
+      "description": "a16z co-leadership: Andreessen co-founder, Kupor managing partner/COO. Now both in government: Andreessen as DOGE recruiter, Kupor as OPM Director. Their firm a16z holds Anduril and major defense tech portfolio.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:25",
+      "profile_id": "tech-right",
+      "other_person": "Marc Andreessen",
+      "other_person_slug": "marc-andreessen",
+      "evidence": []
+    },
+    {
+      "id": 3537,
+      "person_a": "Greg Hogan",
+      "person_b": "Scott Kupor",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:04",
+      "profile_id": "tech-right",
+      "other_person": "Greg Hogan",
+      "other_person_slug": "greg-hogan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z seed funding of Comma.ai, revolvingdoorproject.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
-  "entities": [],
-  "timeline": [],
+  "entities": [
+    {
+      "role": "Director",
+      "date_start": "2025-07-14",
+      "date_end": null,
+      "source": "opm.gov, congress.gov PN12-24",
+      "entity_id": 1169,
+      "entity_name": "Office of Personnel Management",
+      "entity_type": "agency",
+      "jurisdiction": "dc",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2018-01-11",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC records show Kupor's political donations were minimal before OPM appointment:  to Romney for President (2007, while at Opsware), ,500/year to NVCA VenturePAC (2016-2018). No direct donations to Trump found in FEC. Kupor's pathway to OPM was through Marc Andreessen's recruitment pipeline rather than political donation networks.",
+      "confidence": "high",
+      "id": 7065
+    },
+    {
+      "date": "2024",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "IRS 990 records show Kupor served as Director at Global Impact Investing Network (2023-2024), Treasurer/Secretary at Becklam K Foundation (2023-2024), and Director at Silicon Valley Community Foundation (2023). All unpaid positions. No corporate registry records found as officer of any entity.",
+      "confidence": "confirmed",
+      "id": 7079
+    },
+    {
+      "date": "2025-02",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "OPM directed conversion of Chief Information Officer positions from career-reserved SES to politically appointable SES roles (Feb 2025 memo). This enabled DOGE-affiliated tech industry personnel to replace career federal IT leaders. Combined with Schedule Policy/Career rule, creates systematic mechanism to replace career civil servants with political/network appointees across all agencies.",
+      "confidence": "high",
+      "id": 7061
+    },
+    {
+      "date": "2025-07-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Scott Kupor, former a16z managing partner (16 years, first hire of Andreessen and Horowitz in 2009), sworn in as OPM Director July 14, 2025. Resigned managing partner from a16z, gave up managing member seat in 32 funds, but remained passive investor in 38 other a16z funds. Announced expected elimination of 300000 federal roles by end 2025. Called DOGE a catalyst for efficiency. Confirmed DOGE disbandment Nov 2025 but said principles remain alive. His appointment places Silicon Valley VC executive in charge of federal government HR during largest peacetime workforce reduction.",
+      "confidence": "high",
+      "id": 5505
+    },
+    {
+      "date": "2025-07-14",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Post-DOGE: a16z managing partner Scott Kupor confirmed as OPM director, absorbing DOGE functions",
+      "confidence": "high",
+      "id": 5796
+    },
+    {
+      "date": "2025-07-14",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Comprehensive a16z-to-government personnel pipeline at OPM: (1) Scott Kupor, a16z Managing Partner -> OPM Director; (2) James Sullivan, a16z Investment Partner -> OPM Senior Advisor (retains up to M in a16z holdings); (3) Greg Hogan, VP at a16z-backed Comma.ai -> OPM CIO (Jan-Sept 2025); (4) Clayton Cromer, OPM Deputy General Counsel, holds Founders Fund assets. Marc Andreessen served as unpaid DOGE recruiter placing a16z personnel.",
+      "confidence": "medium",
+      "id": 7055
+    },
+    {
+      "date": "2025-11-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OPM Director confirmed DOGE dissolution Nov 2025 but retained passive investor status in 38 a16z funds with carried interest",
+      "confidence": "high",
+      "id": 5962
+    },
+    {
+      "date": "2025-12",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor oversaw net federal workforce reduction of ~249,000 employees (10.8% decrease) in 2025 while simultaneously creating Tech Force pipeline to bring in 1,000 tech workers from private sector. Court found OPM 'unlawfully directed mass firings' (Sept 2025). OPM claimed 92% of departures were voluntary; departing employees disputed this, saying they left under duress. OPM itself lost 1/3 of its workforce (3,110 to ~2,000).",
+      "confidence": "high",
+      "id": 7085
+    },
+    {
+      "date": "2025-12-15",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor launched US Tech Force (Dec 2025) with 29 corporate partners including a16z portfolio companies Anduril and Coinbase, plus Palantir and xAI. DOJ opinion permits Tech Force hires to retain unvested RSUs and deferred compensation from partner companies without divestiture. 10,000 applications for 1,000 positions at GS-13/14 (K-K) for 2-year stints.",
+      "confidence": "medium",
+      "id": 7050
+    },
+    {
+      "date": "2026-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OPM Tech Force partner list contains at least 5 companies that are a16z portfolio companies or closely linked: Anduril (a16z American Dynamism investment, B valuation March 2026), Coinbase (a16z turned M into B valuation), plus partners in sectors where a16z has major portfolio positions (AI/defense). a16z raised .176B American Dynamism fund in Jan 2026 and B total in latest raise. Kupor remains passive investor in 38 a16z funds including American Dynamism and AI funds.",
+      "confidence": "medium",
+      "id": 7058
+    },
+    {
+      "date": "2026-02-06",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "OPM under Kupor finalized Schedule Policy/Career rule (Feb 6, 2026, effective March 8, 2026) reclassifying up to 50,000 federal positions as at-will, stripping appeal rights and Merit Systems Protection Board oversight. Employees can be removed for 'subversion of presidential directives.' Combined with Tech Force pipeline, creates mechanism to replace career civil servants with network-affiliated tech workers.",
+      "confidence": "medium",
+      "id": 7053
+    },
+    {
+      "date": "2026-03",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOJ Office of Legal Counsel issued opinion (March 2026) permitting Tech Force employees to retain unvested RSUs and deferred compensation while serving in government. OPM Director Kupor stated arrangements 'do not require the workers to divest of their stock.' Ethics lawyer Richard Painter warned: 'You're giving advice on technology and AI, and you have AI stock' presents serious ethical problems.",
+      "confidence": "high",
+      "id": 7051
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5961,
@@ -552,71 +1041,5 @@
       "bridge-tax",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Scott Kupor",
-      "connections": [
-        {
-          "target": "Andreessen Horowitz",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "First hire 2009; managing partner 16 years; resigned from 32 funds but passive investor in 38 others upon becoming OPM Director July 2025; planned 300K federal role elimination"
-        },
-        {
-          "target": "Sam Corcos",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica disclosures",
-          "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
-        },
-        {
-          "target": "Andreessen Horowitz",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "a16z first hire and managing partner became OPM Director July 2025, absorbed DOGE workforce functions"
-        }
-      ],
-      "secondHop": {
-        "Sam Corcos": [
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
-          },
-          {
-            "target": "Clark Minor",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-          }
-        ],
-        "Andreessen Horowitz": [
-          {
-            "target": "Sam Corcos",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

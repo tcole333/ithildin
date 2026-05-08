@@ -1,0 +1,177 @@
+{
+  "name": "We care 4 u LLC",
+  "slug": "we-care-4-u-llc",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.448360",
+  "last_updated": "2026-03-27T15:46:55",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 1,
+      "regulatory": 2,
+      "pattern": 1,
+      "risk": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-03-27T15:46:55"
+  },
+  "findings": [
+    {
+      "id": 8099,
+      "finding_type": "corporate",
+      "summary": "We Care 4 U LLC was incorporated September 28, 2019, with Mukhtar S Yusuf as sole organizer and manager, at 2833 13th Ave S Suite 224 \u2014 one suite removed from HADEF (Suite 225); the LLC remained dormant without a DHS license for over 5 years",
+      "detail": "OpenCorporates confirms: company number 0fb8bf61-1ae2-e911-9186-00155d01b4fc, jurisdiction us_mn, type LLC (Domestic), status Active. Officers: Mukhtar S Yusuf (organizer, 1005 E 24th St Minneapolis) and Mukhtar S Yusuf (manager, 2845 Bloomington Ave #207 Minneapolis). Agent: We Care 4 u. Filings count: 9. No prior DHS licensure found for the 2019\u20132025 period.",
+      "source_datasets": "opencorporates,mn_sos",
+      "confidence": "high",
+      "date_of_event": "2019-09-28",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:05:35",
+      "target_name": "We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8097,
+      "finding_type": "regulatory",
+      "summary": "We Care 4 U LLC holds active MN DHS HCBS license 1114633, issued March 14, 2025, with DHS Entity ID 6621926 \u2014 licensed for Basic Support Services and In-Home Support Services across Hennepin County",
+      "detail": "License details from MN DHS Licensing Information Lookup: Address 2833 13TH AVE S #224 Minneapolis MN 55407, phone (612) 800-4888, Hennepin County. Services include 24-hour emergency assistance, adult companion services, homemaker, night supervision, respite care, individual community living support, individualized home supports, semi-independent living skills, individualized home supports with training and family training. Restrictions: None. Waivers: ECS, EW, AC, CADI, CAC, DD, BI. Last renewed January 1, 2026; next renewal December 31, 2026. No licensing actions or maltreatment investigation memorandums posted.",
+      "source_datasets": "mn_dhs",
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-14",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:05:35",
+      "target_name": "We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8098,
+      "finding_type": "pattern",
+      "summary": "We Care 4 U LLC activated its DHS HCBS license approximately 8 weeks after HADEF was involuntarily dissolved and reinstated, suggesting the operator pivoted to HCBS services following FOF-era enforcement disruption",
+      "detail": "HADEF was involuntarily dissolved 2025-01-07 and reinstated approximately 18 days later. We Care 4 U LLC then obtained DHS HCBS license 1114633 on 2025-03-14. The LLC had been incorporated since 2019 without a DHS license. This timeline is consistent with the operator shift strategy documented elsewhere in MN FOF-adjacent cases, though it could also represent opportunistic legitimate licensing.",
+      "source_datasets": "mn_dhs,opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2025-03-14",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:05:35",
+      "target_name": "We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8100,
+      "finding_type": "regulatory",
+      "summary": "No NPI registered in NPPES for We Care 4 U LLC as of March 2026 \u2014 entity is not billing Medicare and has no CMS provider enumeration",
+      "detail": "NPPES API query for organization_name=We+Care+4+U, city=Minneapolis, state=MN returned 0 results. Medicare CMS provider spending search also returned 0 results. MN DHS Entity ID 6621926 is the relevant billing reference for Medicaid-only waiver claims.",
+      "source_datasets": "cms_nppes",
+      "confidence": "high",
+      "date_of_event": "2025-03-14",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:05:35",
+      "target_name": "We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8101,
+      "finding_type": "risk",
+      "summary": "We Care 4 U LLC shows multiple structural red flags for potential HCBS Medicaid fraud: virtual office suite shared with inactive entities, operator with FOF-adjacent history, license activated post-enforcement disruption, no NPI, no public employee roster",
+      "detail": "Risk factors: (1) Suite 224 is shared with Horizon Academy (inactive nonprofit, never filed 990), suggesting thin operational presence; (2) Mukhtar Yusuf controlled HADEF during its 2021 food distribution revenue spike at an FOF-purchased building; (3) License obtained March 2025, 8 weeks after HADEF dissolution/reinstatement; (4) No NPI, no Medicare billing, Medicaid-only via state DHS; (5) No public staff roster or employee background checks visible; (6) Multiple prior inactive LLCs suggest shell-building practice. None of these factors individually constitute fraud \u2014 but the pattern matches documented MN HCBS fraud profiles.",
+      "source_datasets": "mn_dhs,opencorporates,investigation_db",
+      "confidence": "medium",
+      "date_of_event": "2025-03-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:05:35",
+      "target_name": "We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4069,
+      "person_a": "Mukhtar Yusuf",
+      "person_b": "We care 4 u LLC",
+      "relationship_type": "corporate",
+      "description": "Mukhtar Yusuf is the organizer and manager of We care 4 u LLC, which is registered at Suite 224 of 2833 13th Ave S Minneapolis \u2014 the adjacent suite to HADEF at Suite 225. Both entities operate under Mukhtar Yusuf at the same building.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:33:32",
+      "profile_id": "feeding-our-future",
+      "other_person": "Mukhtar Yusuf",
+      "other_person_slug": "mukhtar-yusuf",
+      "evidence": []
+    },
+    {
+      "id": 4092,
+      "person_a": "Horn of Africa Development and Education Foundation",
+      "person_b": "We care 4 u LLC",
+      "relationship_type": "corporate",
+      "description": "Mukhtar Yusuf controls both HADEF (nonprofit, Suite 225) and We Care 4 U LLC (for-profit, Suite 224) at the same address, sharing an identical phone number (612-800-4888). HADEF paid $225,050 in undisclosed M&G fees in 2021 while falsely certifying no related-party business relationships on the 990. We Care 4 U LLC is the primary candidate recipient of those fees.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "profile_id": "feeding-our-future",
+      "other_person": "Horn of Africa Development and Education Foundation",
+      "other_person_slug": "horn-of-africa-development-and-education-foundation",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-09-28",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "We Care 4 U LLC was incorporated September 28, 2019, with Mukhtar S Yusuf as sole organizer and manager, at 2833 13th Ave S Suite 224 \u2014 one suite removed from HADEF (Suite 225); the LLC remained dormant without a DHS license for over 5 years",
+      "confidence": "high",
+      "id": 8099
+    },
+    {
+      "date": "2025-03-14",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "We Care 4 U LLC holds active MN DHS HCBS license 1114633, issued March 14, 2025, with DHS Entity ID 6621926 \u2014 licensed for Basic Support Services and In-Home Support Services across Hennepin County",
+      "confidence": "confirmed",
+      "id": 8097
+    },
+    {
+      "date": "2025-03-14",
+      "type": "finding",
+      "finding_type": "pattern",
+      "summary": "We Care 4 U LLC activated its DHS HCBS license approximately 8 weeks after HADEF was involuntarily dissolved and reinstated, suggesting the operator pivoted to HCBS services following FOF-era enforcement disruption",
+      "confidence": "medium",
+      "id": 8098
+    },
+    {
+      "date": "2025-03-14",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "No NPI registered in NPPES for We Care 4 U LLC as of March 2026 \u2014 entity is not billing Medicare and has no CMS provider enumeration",
+      "confidence": "high",
+      "id": 8100
+    },
+    {
+      "date": "2025-03-14",
+      "type": "finding",
+      "finding_type": "risk",
+      "summary": "We Care 4 U LLC shows multiple structural red flags for potential HCBS Medicaid fraud: virtual office suite shared with inactive entities, operator with FOF-adjacent history, license activated post-enforcement disruption, no NPI, no public employee roster",
+      "confidence": "medium",
+      "id": 8101
+    }
+  ]
+}

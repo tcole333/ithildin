@@ -1,0 +1,34 @@
+# Paolo Zampolli
+**Stats**: 159 findings, 86 connections, 4 entities
+**Dossier**: /dossiers/paolo-zampolli
+
+## Key Findings
+- **[negative_result/confirmed]** NEGATIVE RESULT: The three custody/matrimonial cases in NY Supreme Court (Ungaro 301822/2018 and 350016/2018; Felizardo 161870/2025) are classified as Matrimonial-Contested or Plenary Custody and expose NO downloadable document URLs to the public despite showing complete metadata. Case 350016/2018 does not appear in NYSCEF party-search (likely purged post-disposition in 2018). Deposition transcripts, sworn affirmations, child support calculations, and financial disclosures are sealed under DRL §235 and NY CPLR matrimonial privacy rules. Hypotheses 1 (Oct 2018 email authorship) and 2 (Zampolli sworn statements about law enforcement) CANNOT be resolved via NYSCEF public access — would require court-intervention motion, subpoena, or party-to-litigation access (2026-04-13) (Finding #10386)
+- **[intelligence/confirmed]** Zampolli present at US-Iran peace talks in Pakistan, April 11 2026. VP JD Vance led American delegation meeting senior Iranian negotiators. Zampolli posted photo of himself at the event on X (@AMBZAMPOLLI), sarcastically thanking NYT photo editors. NYT headline: 'U.S. and Iran Hold Historic High-Level Peace Talks.' This follows his Feb 5 2026 Muscat visit (one day before prior Iran talks) and confirms his Special Envoy role extends to direct involvement in Iran diplomacy — despite documented connections to Iranian CBI sanctions evaders (Shamkhani) through the Dominica pipeline he brokered. (2026-04-11) (Finding #10198)
+- **[intelligence/confirmed]** AP photo (Reuters/Jonathan Ernst) confirms Zampolli walked the red carpet at Budapest Ferenc Liszt International Airport on April 7, 2026 alongside VP JD Vance and Second Lady Usha Vance. Caption identifies him as 'a friend of President Donald Trump and Trump's envoy for global partnerships.' He was part of the official arrival party, not just peripherally present. (2026-04-07) (Finding #10212)
+- **[financial/confirmed]** Zampolli sworn (July 2019) that May 7, 2015 Cabrits Kempinski Dominica agreement entitled him to 5% of development profits; project generated 800 CBI passports at $220K each = $195M gross; Asaria and Shehada received $30M distributions each from Bank of Dominica Geneva account while denying Zampolli his share (2019-07-08) (Finding #10357)
+- **[intelligence/confirmed]** Zampolli alleged under oath (July 2019) that Range Developments principals Asaria and Shehada 'are known to sell passports to Iran, Yemen, and Sudan to circumvent U.S. Treasury sanctions and United Nations Security Council sanctions' — extraordinary admission implicating the Dominica CBI program Zampolli personally marketed (2019-07-08) (Finding #10361)
+- **[identity/confirmed]** Zampolli swore (July 2019) he is 'United Nations Ambassador for the Commonwealth of Dominica... a United States citizen and a New York resident and has resided in the United States for 25 years. His primary business is real estate developments.' — 25 years would date NY residency to ~1994 (2019-07-08) (Finding #10362)
+- **[location/confirmed]** Range Developments is located at 654 Madison Ave 9th Fl NYC 10065 per Zampolli's petition; Kempinski Hotels operates from 551 Madison Ave 4th Fl NYC 10022; Xavier Destribats oversees Kempinski Americas; Zampolli's attorney Hantman & Associates at 1120 Ave of Americas 4th Fl NYC 10036 (2019-07-08) (Finding #10367)
+- **[legal/confirmed]** Chemtob Moss Forman & Beyda LLP sued Zampolli Oct 25, 2018 for $89,280.95 unpaid matrimonial legal fees; served as his divorce counsel Mar-Sep 2018 and was relieved Sep 27, 2018 by Judge Katz (2018-10-25) (Finding #10351)
+
+## Top Connections
+- **Jeffrey Epstein** [social/strong]: Direct personal relationship: Zampolli forwarded articles to Epstein (2010), Epstein warned contacts about Zampolli (2011), Epstein patronized ID Models, jointly bid for Elite Model Management (2004)
+- **Ghislaine Maxwell** [social/strong]: Professional relationship and TerraMar Project board partnership. Zampolli was Board Member of Maxwell's TerraMar and co-founded Sustainable Oceans Alliance with Maxwell (2013).
+- **Roosevelt Skerrit** [political/strong]: Skerrit appointed Zampolli Minister-Counsellor (2011) then UN Ambassador (Oct 2013); Zampolli brokered CBI hotel deal for Dominica
+- **Mohammed Asaria** [financial/strong]: Signed 5% profit participation agreement May 7 2015 for Cabrits Kempinski; Zampolli sued Asaria July 2019 for non-payment of .5M+
+- **Range Developments** [financial/strong]: Profit participation agreement for Cabrits Kempinski resort; claims to have brought project to Dominica; litigation over unpaid commissions
+- **The Paramount Realty Group of America Corp.** [owns/strong]: Zampolli's personal brokerage firm. Per Domus Arbiter lawsuit, Zampolli transferred all proceeds from Trump SoHo sales to Paramount.
+- **Bayrock Group LLC** [contracts_with/strong]: Bayrock contracted with Zampolli/Paramount Realty for 6% commission to sell Trump SoHo units (2013). Per Domus Arbiter lawsuit, Zampolli sold 14 units totaling $10.8M — 50% of all Trump SoHo sales in first 10 months of 2013.
+- **Douglas Elliman LLC** [corporate/strong]: Dual-license arrangement 2011-2014: Zampolli held Elliman license while maintaining Paramount Realty brokerage. Agreed to transfer 30% of commissions for Elliman-branded deals. Both named co-defendants in Domus Arbiter case; Elliman later sued Zampolli separately for hidden commissions.
+- **Keith Mitchell** [political/strong]: Mitchell appointed Zampolli Grenada Tourism Ambassador (Aug 2012) and his partner Ungaro as Grenada UN Ambassador (June 2014)
+- **Amanda Ungaro** [familial/strong]: Romantic partners 2003-2023, son Giovanni (b. 2010). Parallel ambassadorships: he Dominica, she Grenada. Met when she was signed to his agency ID Models.
+- **Matteo Salvini** [political/strong]: Zampolli met with Italian Deputy PM Matteo Salvini in Feb 2025 while claiming envoy-to-Italy title. Salvini was the only senior Italian official who endorsed the meeting publicly, tweeting about 'excellent relations with the new US administration.' Other Italian officials (Tajani, Cirielli) denied knowledge of Zampolli's appointment.
+- **Mikhail Degtyarev** [political/strong]: Zampolli met Russian Sports Minister Degtyarev in Tashkent (Jan 2026) at Olympic Council of Asia General Assembly. Degtyarev described 'good communication' and exchanges 'going beyond sports.' Zampolli subsequently advocated for Russia's return to global sports.
+- ... and 74 more
+
+## Entity Roles
+- Ambassador under Ministry of Tourism at Government of Grenada (Grenada)
+- client (defendant in fee action) at Chemtob Moss Forman & Beyda, LLP (New York)
+- CEO / Founder at ID Model Management, Inc. (New York)
+- Co-Chairman / Employee at The Paramount Realty Group of America Corp. (New York)

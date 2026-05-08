@@ -1,0 +1,289 @@
+{
+  "name": "Allbirds Inc",
+  "slug": "allbirds-inc",
+  "aliases": [],
+  "profile_ids": [
+    "allbirds"
+  ],
+  "generated_at": "2026-05-07T23:07:36.303567",
+  "last_updated": "2026-04-16T04:42:49",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 10
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-04-16T04:42:49"
+  },
+  "findings": [
+    {
+      "id": 10555,
+      "finding_type": "financial",
+      "summary": "Allbirds $50M senior secured convertible note facility: primary conversion at 120% of lower reference price (~$2.99 given $2.49 April 14 close)",
+      "detail": "The PREM14A states: 'we have entered into an agreement to sell up to $50 million in senior secured convertible notes (the Convertible Notes), the proceeds of which would permit the Company to purchase Electronics Assets and develop and expand the anticipated Electronics Infrastructure Business.' Primary conversion price is '120% of the lower of (x) the closing bid price of our Class A common stock on the Trading Day ended immediately prior to the time of initial filing of the initial preliminary proxy with respect to the Asset Sale and (y) the closing bid price on the trading day ended immediately preceding the closing date of such applicable tranche.' April 14, 2026 close was approximately $2.49, implying a primary Conversion Price of ~$2.99.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10556,
+      "finding_type": "financial",
+      "summary": "BIRD Alternate Conversion Price: 93% of 10-day lowest VWAP (no floor) \u2014 floating death-spiral structure; 85% of 15-day lowest VWAP in default",
+      "detail": "Alternate Conversion Price per PREM14A: 'the lower of: the Conversion Price then in effect; and either, if no event of default then exists, 93% of the lowest volume weighted average price of our Class A common stock during the ten (10) consecutive Trading Days ending and including the Trading Day immediately preceding the delivery or deemed delivery of the applicable Conversion Notice; or if an event of default then exists, 85% of the lowest volume weighted average price of our Class A common stock during the fifteen (15) consecutive Trading Days.' No floor price is stated. This is a classic floating/death-spiral conversion mechanism.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10557,
+      "finding_type": "financial",
+      "summary": "BIRD stock +582% on PREM14A filing date: Alternate Conversion Price (~$2.22) vs $16.99 market price creates >7x immediate arbitrage gap for convertible note investor",
+      "detail": "BIRD stock closed at $2.49 on April 14, 2026 (the day before the PREM14A filing). On April 15, 2026 (filing date) the stock closed at $16.99 \u2014 a 582% single-day increase. The 10-day VWAP lookback window for Alternate Conversion on April 15 captures approximately April 1\u201314 prices (range $2.39\u2013$2.59). Alternate Conversion Price on filing date \u2248 93% \u00d7 $2.39 \u2248 $2.22. The stock trades at $16.99 \u2014 creating an immediate >7x arbitrage windfall for the Investor on the first day of potential conversion.",
+      "source_datasets": "edgar_prem14a,market_data",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10558,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 4.99%/9.99% beneficial ownership blocker (61-day notice required to increase to 9.99%)",
+      "detail": "Per PREM14A: 'Conversions and issuance of our Class A common stock pursuant to the Convertible Notes are prohibited if such conversion or issuance would cause the applicable holder (together with its affiliates) to beneficially own in excess of 4.99% of the outstanding our Class A common stock (which percentage is subject to increase to 9.99% or decrease, at the option of such holder, except that any increase will only be effective upon 61-days' prior notice to us).' With ~8.7M shares outstanding, 4.99% cap = ~435,000 shares.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10559,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 24-month MFN participation right \u2014 Investor can co-invest in \u226555% of all future financing deals on same terms",
+      "detail": "Per PREM14A Securities Purchase Agreement description: 'for the twenty-four months immediately following the Issuance Date, the Investor has the right to co-invest for at least 55% of any of the Company's future financing deals on the same terms with other investors.' This is an MFN/participation right that restricts the company's ability to raise capital without the Investor's participation for 2 years.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10560,
+      "finding_type": "financial",
+      "summary": "BIRD convertible facility GPU covenants: Investor approves each GPU purchase, controls lease counterparty selection, receives all lease rents via Cash Collateral Account, and has right to appoint the COO",
+      "detail": "Per PREM14A: 'The proceeds from the Facility are anticipated to be used to purchase GPU assets and related ancillary equipment for AI model training, subject to the approval of the Investor.' Further: 'form a new subsidiary to acquire the Purchased Assets, and lease the Purchased Assets via contracted lease and management arrangements with a counterparty in the AI infrastructure sector, subject to the Investor's approval. All such lease payments will be deposited into a blocked control account with a custodian acceptable to the Investor (the Cash Collateral Account), for the Investor's benefit.' Also: 'the Investor has the right to appoint a new Chief Operating Officer of the Company.'",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10561,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 12% annual interest (payable in stock or cash), 5% OID, 2-year maturity, default rate up to 18%",
+      "detail": "Per PREM14A: 'The Convertible Notes bear interest at the rate of 12.0% per annum... shall be payable, subject to the satisfaction of customary equity conditions, in shares of our Class A common stock or, at our option, in cash, in arrears on the first calendar day of each calendar quarter... The interest rate of the Convertible Notes will automatically increase to rate to be negotiated by the parties not in excess of 18% per annum (the Default Rate) upon the occurrence and continuance of an event of default.' Also: '5% original issue discount.' Maturity: '2 years from date of issuance.'",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10562,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: Events of default include delisting, non-payment, and bankruptcy; 25% cash redemption premium on default",
+      "detail": "Per PREM14A on events of default: '(i) the suspension from trading or the failure to list our Class A common stock within certain time periods; (ii) failure to make payments when due under the Convertible Notes; and (iii) bankruptcy or insolvency of the Company.' Plus 'standard and customary events of default.' Upon default: holder may redeem at '25% redemption premium to the greater of the face value and the equity value of our Class A common stock underlying the Convertible Notes.' Bankruptcy: 'immediate' cash redemption at 25% premium.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10563,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: Customary demand and piggyback registration rights granted to Investor; Registration Rights Agreement in place",
+      "detail": "Per PREM14A: 'The Company also granted to the Investor customary demand and piggyback registration rights with respect to the shares of common stock underlying the Convertible Notes.' Registration Rights Agreement executed separately. No S-3 resale registration filing timeline specified in the proxy, but demand rights would require filing within a customary period after closing.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10564,
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: No warrants issued; standard proportional anti-dilution only; no ratchet; no floor price on Alternate Conversion",
+      "detail": "The PREM14A confirms: no warrants attached to the convertible notes. The proxy notes the Board considered 'a unit offering with warrants' as an alternative but chose the current structure. The proxy risk factors confirm 'anti-dilution adjustments, variable conversion features, or fluctuations in the market price of our Class A common stock' contribute to dilution uncertainty. No ratchet anti-dilution on conversion price is disclosed. Standard stock split/dividend/combination proportional adjustments only.",
+      "source_datasets": "edgar_prem14a",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "target_name": "Allbirds Inc",
+      "profile_id": "allbirds",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5495,
+      "person_a": "Allbirds Inc",
+      "person_b": "Unnamed Institutional Investor (BIRD convertible facility)",
+      "relationship_type": "corporate",
+      "description": "Allbirds entered into a $50M senior secured convertible note facility with an unnamed institutional investor ('the Investor'). Investor controls GPU procurement approval, lease counterparty selection, Cash Collateral Account for lease rents, and holds a right to appoint the company's COO. Investor also has a 24-month MFN participation right (55% co-investment right) on all future financings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "profile_id": "allbirds",
+      "other_person": "Unnamed Institutional Investor (BIRD convertible facility)",
+      "other_person_slug": "unnamed-institutional-investor-bird-convertible-facility",
+      "evidence": []
+    },
+    {
+      "id": 5496,
+      "person_a": "Allbirds Inc",
+      "person_b": "Allbirds IP LLC (American Exchange Group affiliate)",
+      "relationship_type": "corporate",
+      "description": "Allbirds entered into Asset Purchase Agreement dated March 29, 2026 to sell substantially all footwear IP, inventory, contracts and related assets to Allbirds IP LLC (affiliated with American Exchange Group) for $39M. Closing subject to stockholder approval (Special Meeting May 18, 2026). Allbirds will retain cash proceeds and pivot to GPU/AI infrastructure as NewBird AI Inc.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "profile_id": "allbirds",
+      "other_person": "Allbirds IP LLC (American Exchange Group affiliate)",
+      "other_person_slug": "allbirds-ip-llc-american-exchange-group-affiliate",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Allbirds $50M senior secured convertible note facility: primary conversion at 120% of lower reference price (~$2.99 given $2.49 April 14 close)",
+      "confidence": "high",
+      "id": 10555
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD Alternate Conversion Price: 93% of 10-day lowest VWAP (no floor) \u2014 floating death-spiral structure; 85% of 15-day lowest VWAP in default",
+      "confidence": "high",
+      "id": 10556
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD stock +582% on PREM14A filing date: Alternate Conversion Price (~$2.22) vs $16.99 market price creates >7x immediate arbitrage gap for convertible note investor",
+      "confidence": "high",
+      "id": 10557
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 4.99%/9.99% beneficial ownership blocker (61-day notice required to increase to 9.99%)",
+      "confidence": "high",
+      "id": 10558
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 24-month MFN participation right \u2014 Investor can co-invest in \u226555% of all future financing deals on same terms",
+      "confidence": "high",
+      "id": 10559
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible facility GPU covenants: Investor approves each GPU purchase, controls lease counterparty selection, receives all lease rents via Cash Collateral Account, and has right to appoint the COO",
+      "confidence": "high",
+      "id": 10560
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: 12% annual interest (payable in stock or cash), 5% OID, 2-year maturity, default rate up to 18%",
+      "confidence": "high",
+      "id": 10561
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: Events of default include delisting, non-payment, and bankruptcy; 25% cash redemption premium on default",
+      "confidence": "high",
+      "id": 10562
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: Customary demand and piggyback registration rights granted to Investor; Registration Rights Agreement in place",
+      "confidence": "high",
+      "id": 10563
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BIRD convertible notes: No warrants issued; standard proportional anti-dilution only; no ratchet; no floor price on Alternate Conversion",
+      "confidence": "high",
+      "id": 10564
+    }
+  ]
+}

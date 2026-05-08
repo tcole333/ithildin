@@ -5,17 +5,17 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.722361",
-  "last_updated": "2026-02-17T18:23:37",
+  "generated_at": "2026-05-07T23:07:36.033466",
+  "last_updated": "2026-05-07T02:27:06",
   "stats": {
-    "total_findings": 58,
+    "total_findings": 59,
     "total_connections": 12,
     "total_entities": 0,
     "finding_types": {
       "identity": 12,
       "financial": 2,
       "legal": 18,
-      "intelligence": 17,
+      "intelligence": 18,
       "communication": 5,
       "relationship": 2,
       "document": 2
@@ -28,7 +28,7 @@
       "social": 1,
       "political": 1
     },
-    "last_updated": "2026-02-17T18:23:37"
+    "last_updated": "2026-05-07T02:27:06"
   },
   "findings": [
     {
@@ -1188,6 +1188,46 @@
           "evidence_type": "ref",
           "evidence_ref": "HOUSE_OVERSIGHT_028576",
           "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11108,
+      "finding_type": "intelligence",
+      "summary": "Probability assessment: Soffer was probably FLOATED but NOT RETAINED for the SoftBank caper (~10-15% he was actually engaged) \u2014 multi-source open-source search returned zero direct evidence",
+      "detail": "Comprehensive multi-source search across English, French, Italian, Israeli press, court records (BAILII, CourtListener, French commercial registers), and legal directories returned ZERO results connecting Ron Soffer or Soffer Avocats to Misra, Sama, Arora, Benedetti, SoftBank, Vision Fund, OneIM, or the honey trap matter. The actually-engaged cast: Misra=Paul Weiss; SoftBank investigative=Shearman & Sterling (probe terminated 2019 inconclusively); Sama=Mark MacDougall/Akin Gump; Arora=no public counsel of record. Reasons skepticism is warranted: (1) Zero public footprint after two waves of WSJ reporting (Feb 2020 + Sama memoir Sept 2024). (2) Wrong jurisdictional fit (US/UK-centered hostilities, no obvious French litigation problem for Misra). (3) Wrong specialism (Soffer is ICC/Bouvier-style commercial litigator, not US white-collar defense). (4) Timing \u2014 Weingarten email Jan 26 2019, Epstein arrested July 2019 and dead August 2019, six-month window. (5) No conflict-of-interest disclosure trail. Reasons not to drop to zero: (a) The Fisher & Soffer landlord-tenant relationship with Epstein 1996-1998 is real (Soffer was the named partner of Epstein's mid-1990s landlord-litigation counterparty, so Epstein knew the Soffer name independently). (b) No published denial. (c) France could matter for OneIM build-out. Net probability: Soffer was probably floated and considered but not retained. Most likely scenario: Weingarten and Epstein discussed using Soffer (perhaps because Epstein knew the Fisher & Soffer name from the 1996-1998 history), but the engagement either never happened or was so quiet it left no public trace.",
+      "source_datasets": [
+        "wsj.com",
+        "semafor.com"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-01-26",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:27:06",
+      "target_name": "Ron Soffer",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "semafor-2024-09-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "wsj-2020-02-27",
+          "source_quote": "Misra was represented by Paul Weiss; SoftBank investigative counsel was Shearman & Sterling \u2014 Soffer not named anywhere in SoftBank caper coverage",
           "source_page": null,
           "assessment": null
         }
@@ -2623,6 +2663,14 @@
       "summary": "CRITICAL DISAMBIGUATION INSIGHT: Epstein may have conflated TWO different Soffers when telling Weingarten about the Council of Europe connection. Dr. Soffer the ophthalmologist (partner of Dr. Rony Shimony, 485 Madison Ave) actually treated Jagland on Sept 27, 2012 when Shimony was unavailable for Yom Kippur (EFTA01888282). Epstein paid $1,995 for the visit. This medical Dr. Soffer had a REAL, documented interaction with Jagland. Ron Soffer the lawyer teaches ECHR jurisprudence and practices international human rights law. Both are Israeli-origin professionals in their respective fields. When Epstein told Weingarten 'they know each other well' regarding Soffer and the CoE Secretary General, he may have been: (a) correctly referring to the lawyer's institutional knowledge, (b) conflating the medical Dr. Soffer's actual patient relationship with Jagland, or (c) deliberately blurring the two to assert intelligence authority.",
       "confidence": "medium",
       "id": 3308
+    },
+    {
+      "date": "2019-01-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Probability assessment: Soffer was probably FLOATED but NOT RETAINED for the SoftBank caper (~10-15% he was actually engaged) \u2014 multi-source open-source search returned zero direct evidence",
+      "confidence": "medium",
+      "id": 11108
     },
     {
       "date": "2019-05-30",

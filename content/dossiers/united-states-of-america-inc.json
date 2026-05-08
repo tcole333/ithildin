@@ -1,0 +1,224 @@
+{
+  "name": "United States of America Inc",
+  "slug": "united-states-of-america-inc",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.447964",
+  "last_updated": "2026-03-23T19:04:31",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "background": 1,
+      "identity": 1
+    },
+    "connection_types": {
+      "financial": 1,
+      "controls": 1
+    },
+    "last_updated": "2026-03-23T19:04:31"
+  },
+  "findings": [
+    {
+      "id": 7304,
+      "finding_type": "financial",
+      "summary": "USA Inc received $81.1M in in-kind contributions from America PAC across 13 transactions (Oct 2024-Dec 2025). Breakdown: $51.7M pre-inauguration 'petition incentives' (Oct-Dec 2024), $27.3M post-inauguration 'petition incentives' (H1 2025 including WI Supreme Court race), $1.7M late 2025. Categories: petition incentives ($78.8M), petition admin support ($473K), petition processing fees ($274K), petition incentive fulfillment ($232K), website services ($56K), travel/food ($11K), social media ($2K), subscriptions ($5K). Prior reporting stated $8.8M; actual total is 9x higher.",
+      "detail": null,
+      "source_datasets": [
+        "FEC"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-10-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:55",
+      "target_name": "United States of America Inc",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=C00879510%3ASB",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7310,
+      "finding_type": "background",
+      "summary": "NEGATIVE FINDING: No evidence found that USA Inc is paying DOGE operatives or acting as a shadow government agency. DOGE workers are paid through federal agency transfer payments (Economy Act of 1932) and draw salaries from agencies like GSA. The $81M flowing through USA Inc is accounted for by petition incentive operations (voter data collection/canvassing), not government operations. USA Inc's role is as Musk's political canvassing and voter data collection infrastructure entity. The 'shadow agency' hypothesis is not supported by available evidence. However, the entity IS notable for: (1) blurring lines between campaign infrastructure and Musk's corporate network, (2) continuing operations post-election for state races, (3) the extraordinary scale of spending ($81M) routed through a for-profit corporation rather than the PAC directly.",
+      "detail": null,
+      "source_datasets": [
+        "fec_api,web"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-02",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:03:46",
+      "target_name": "United States of America Inc",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=C00879510%3ASB",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7306,
+      "finding_type": "financial",
+      "summary": "USA Inc petition operations continued well after the 2024 election through at least Dec 2025. Post-election spending: $27.3M on 'petition incentives' in H1 2025 targeted the Wisconsin Supreme Court race (April 2025), offering $100 per petition signature opposing 'activist judges' in support of Brad Schimel. The petition infrastructure that began as a presidential election tool was repurposed for state judicial elections, demonstrating permanent political infrastructure, not a one-time campaign operation.",
+      "detail": null,
+      "source_datasets": [
+        "fec_api"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-21",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:03:04",
+      "target_name": "United States of America Inc",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=C00879510%3ASB",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4423,
+      "finding_type": "identity",
+      "summary": "TX Comptroller confirms UNITED STATES OF AMERICA INC (TID 32097038932, SoS 0805733050) formed Oct 2 2024 \u2014 one month before 2024 election. Officers: Elon Musk as PRESIDENT, Jared Birchall as SECRETARY. Parent company of GROUP AMERICA LLC (TID 32097028388, same-day formation). Both use new address: 2025 Guadalupe Street Suite 260, Austin TX 78705 (near UT campus). Entity used for America PAC voter outreach operations including 47-dollar petition payments. Musk personally named as president of a company called United States of America \u2014 entity naming appears deliberately misleading.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:53:28",
+      "target_name": "United States of America Inc",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX Comptroller Franchise Tax search TID 32097038932, entity detail showing officers",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5602,
+      "finding_type": "financial",
+      "summary": "United States of America Inc appears as both a major donor TO America PAC (.9M in 12 contributions, Nov 2024-Jun 2025) and a major recipient FROM America PAC (.3M in in-kind contributions). This circular flow pattern -- entity donates to PAC, PAC makes in-kind contributions back -- suggests USA Inc may be an operational entity (possibly canvassing/GOTV operations) that the PAC funds through in-kind transfers. Blitz Canvassing LLC also appears as a K donor. Both entities warrant further investigation for connections to the Musk organizational network.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:35:31",
+      "target_name": "United States of America Inc",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC Schedule A/B filings for America PAC C00879510",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3028,
+      "person_a": "America PAC",
+      "person_b": "United States of America Inc",
+      "relationship_type": "financial",
+      "description": "Circular financial flow: USA Inc donates .9M to America PAC, America PAC makes .3M in-kind to USA Inc",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:14",
+      "profile_id": "tech-right",
+      "other_person": "America PAC",
+      "other_person_slug": "america-pac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3712,
+      "person_a": "Elon Musk",
+      "person_b": "United States of America Inc",
+      "relationship_type": "controls",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:04:31",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "tx_sos:0805733050",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2024-10-02",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "USA Inc received $81.1M in in-kind contributions from America PAC across 13 transactions (Oct 2024-Dec 2025). Breakdown: $51.7M pre-inauguration 'petition incentives' (Oct-Dec 2024), $27.3M post-inauguration 'petition incentives' (H1 2025 including WI Supreme Court race), $1.7M late 2025. Categories: petition incentives ($78.8M), petition admin support ($473K), petition processing fees ($274K), petition incentive fulfillment ($232K), website services ($56K), travel/food ($11K), social media ($2K), subscriptions ($5K). Prior reporting stated $8.8M; actual total is 9x higher.",
+      "confidence": "high",
+      "id": 7304
+    },
+    {
+      "date": "2024-10-02",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "NEGATIVE FINDING: No evidence found that USA Inc is paying DOGE operatives or acting as a shadow government agency. DOGE workers are paid through federal agency transfer payments (Economy Act of 1932) and draw salaries from agencies like GSA. The $81M flowing through USA Inc is accounted for by petition incentive operations (voter data collection/canvassing), not government operations. USA Inc's role is as Musk's political canvassing and voter data collection infrastructure entity. The 'shadow agency' hypothesis is not supported by available evidence. However, the entity IS notable for: (1) blurring lines between campaign infrastructure and Musk's corporate network, (2) continuing operations post-election for state races, (3) the extraordinary scale of spending ($81M) routed through a for-profit corporation rather than the PAC directly.",
+      "confidence": "medium",
+      "id": 7310
+    },
+    {
+      "date": "2025-03-21",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "USA Inc petition operations continued well after the 2024 election through at least Dec 2025. Post-election spending: $27.3M on 'petition incentives' in H1 2025 targeted the Wisconsin Supreme Court race (April 2025), offering $100 per petition signature opposing 'activist judges' in support of Brad Schimel. The petition infrastructure that began as a presidential election tool was repurposed for state judicial elections, demonstrating permanent political infrastructure, not a one-time campaign operation.",
+      "confidence": "medium",
+      "id": 7306
+    }
+  ]
+}

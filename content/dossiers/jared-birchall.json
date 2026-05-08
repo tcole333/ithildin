@@ -6,28 +6,169 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.893272",
-  "last_updated": "2026-03-09T17:40:03",
+  "generated_at": "2026-05-07T23:07:36.231218",
+  "last_updated": "2026-03-23T18:58:37",
   "stats": {
-    "total_findings": 13,
-    "total_connections": 17,
+    "total_findings": 14,
+    "total_connections": 22,
     "total_entities": 14,
     "finding_types": {
-      "relationship": 7,
       "intelligence": 1,
+      "relationship": 8,
+      "legal": 1,
       "financial": 2,
-      "identity": 2,
-      "legal": 1
+      "identity": 2
     },
     "connection_types": {
-      "employment": 1,
-      "corporate": 13,
+      "employment": 2,
+      "corporate": 14,
       "advisory": 2,
-      "financial": 1
+      "financial": 1,
+      "controls": 3
     },
-    "last_updated": "2026-03-09T17:40:03"
+    "last_updated": "2026-03-23T18:58:37"
   },
   "findings": [
+    {
+      "id": 5556,
+      "finding_type": "intelligence",
+      "summary": "Birchall serves as officer on 54 unique companies across 15 jurisdictions. He is sole manager of Excession LLC (250B family office, TX 0803683059), manages Europa 100 LLC (political payments conduit, TX 0803683010), is president/director/CFO of Foundation Security entities (3 company numbers across TX and CA), and controls N158X LLC (CA 201717010663 terminated 2023) and BUSHWHACKER LLC (CA 202030710021). Six core entities all incorporated on 2020-07-14: Excession, Europa 100, Bushwhacker, Foundation Security, Musk Industries, at the PO BOX 341886 address cluster. This corporate infrastructure underpins both Musk business operations and political spending apparatus.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-07-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:07",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OC:us_tx/0803683059",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5876,
+      "finding_type": "relationship",
+      "summary": "Birchall confirmed as Director of X.AI London Ltd (UK company 16131916), extending Musk proxy network to UK jurisdiction",
+      "detail": "UK Companies House registry confirms Jared Birchall as Director of X.AI LONDON LTD (UK company number 16131916, active), effective 2024-12-12. Registered address: 20 Air Street, London W1B 5AN. This adds UK jurisdiction to Birchall's known officer positions across US states. The 20 Air Street address is in London's Mayfair/Soho area. Birchall's appointment as Director (not just secretary) gives him legal fiduciary duties under UK Companies Act. This is notable because: (1) it extends Birchall's role from US family office manager to international corporate director, (2) X.AI London represents Musk's AI operations in the UK regulatory environment, (3) Birchall now has officer positions in at least 54+ US entities plus this UK company, making him potentially subject to UK regulatory requirements while simultaneously managing Musk's US political spending apparatus.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:54:58",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House registry, company 16131916, officer appointment Jared Birchall 2024-12-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6235,
+      "finding_type": "relationship",
+      "summary": "Jared Birchall serves as Director of X.AI LONDON LTD (UK company number 16131916, incorporated 2024-12-12) effective 2024-12-12. Address listed as 20 Air Street London W1B 5AN. Confirms Birchall's direct role in xAI operations beyond Texas family office management.",
+      "detail": "Registry.db entry for X.AI LONDON LTD (entity_id 6082636, source_jurisdiction=uk): officer record shows person_name=BIRCHALL Jared, title=Director, effective_date=2024-12-12, address=20 Air Street London W1B 5AN. Source: UK Companies House ingested 2026-03-04.",
+      "source_datasets": [
+        "uk_companies_house"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:36:30",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "REGISTRY:UK:16131916",
+          "source_quote": "officer: BIRCHALL Jared, title=Director, effective_date=2024-12-12, address=20 Air Street London W1B 5AN",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6236,
+      "finding_type": "legal",
+      "summary": "Jared Birchall confirmed as Manager on Certificate of Formation for all three Red Planet Ventures entities. Address on all three filings: 2110 Ranch Road 620 S., #341886, Austin TX 78734-0277 \u2014 the same PO Box as the entities themselves. Officer UID 000001 on all three. Only one filing per entity (Certificate of Formation, 2025-02-25). No subsequent amendments.",
+      "detail": "OpenCorporates entity lookups us_tx/0805920034, 0805920052, 0805920058: officers field shows Jared Birchall, position=manager, address=2110 Ranch Road 620 S #341886 Austin TX 78734-0277, uid=000001. filings_count=1 for each entity. All three identical officer structure.",
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-02-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:38:08",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "REGISTRY:TX:0805920034",
+          "source_quote": "officers: [{name: Jared Birchall, position: manager, address: 2110 Ranch Road 620 S., #341886, Austin TX 78734-0277, uid: 000001}], filings_count: 1",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "REGISTRY:TX:0805920052",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "REGISTRY:TX:0805920058",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6218,
+      "finding_type": "relationship",
+      "summary": "Jared Birchall appears in Solaris Energy Infrastructure (NYSE:SEI) 10-Q filing (CIK 0001697500, accession 0001558370-25-009911, filed 2025-08-01) in two exhibits: (1) Amended and Restated Limited LLC Agreement of Stateline Power, LLC \u2014 a Texas LLC formed as 49.9% JV between Solaris and a counterparty (redacted) for 900 MW primary power to a data center; (2) Amended and Restated Master Equipment Rental Agreement with CTC Property LLC (Nevada LLC, address redacted) as 'Customer' \u2014 identified as Musk/xAI's Memphis Colossus data center entity. Birchall's name appears in these documents, confirming Excession/Birchall manages xAI's physical infrastructure entities including CTC Property LLC.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-08-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:25:26",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:0001558370-25-009911",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4399,
       "finding_type": "relationship",
@@ -98,32 +239,6 @@
       ]
     },
     {
-      "id": 5556,
-      "finding_type": "intelligence",
-      "summary": "Birchall serves as officer on 54 unique companies across 15 jurisdictions. He is sole manager of Excession LLC (250B family office, TX 0803683059), manages Europa 100 LLC (political payments conduit, TX 0803683010), is president/director/CFO of Foundation Security entities (3 company numbers across TX and CA), and controls N158X LLC (CA 201717010663 terminated 2023) and BUSHWHACKER LLC (CA 202030710021). Six core entities all incorporated on 2020-07-14: Excession, Europa 100, Bushwhacker, Foundation Security, Musk Industries, at the PO BOX 341886 address cluster. This corporate infrastructure underpins both Musk business operations and political spending apparatus.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:07",
-      "target_name": "Jared Birchall",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OC:us_tx/0803683059",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5613,
       "finding_type": "financial",
       "summary": "Jared Birchall has zero FEC contribution records. Despite managing tens of billions in Musk assets as head of Excession LLC/family office, Birchall makes no personal political contributions. This is consistent with a principal-agent relationship where Birchall operates as Musk's proxy rather than as an independent political actor. His absence from FEC records despite his central role in the Musk entity network is itself noteworthy -- it suggests operational discipline in maintaining separation between his personal identity and his role as Musk's financial manager.",
@@ -142,31 +257,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC donor search 'Jared Birchall' returned 0 results",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5876,
-      "finding_type": "relationship",
-      "summary": "Birchall confirmed as Director of X.AI London Ltd (UK company 16131916), extending Musk proxy network to UK jurisdiction",
-      "detail": "UK Companies House registry confirms Jared Birchall as Director of X.AI LONDON LTD (UK company number 16131916, active), effective 2024-12-12. Registered address: 20 Air Street, London W1B 5AN. This adds UK jurisdiction to Birchall's known officer positions across US states. The 20 Air Street address is in London's Mayfair/Soho area. Birchall's appointment as Director (not just secretary) gives him legal fiduciary duties under UK Companies Act. This is notable because: (1) it extends Birchall's role from US family office manager to international corporate director, (2) X.AI London represents Musk's AI operations in the UK regulatory environment, (3) Birchall now has officer positions in at least 54+ US entities plus this UK company, making him potentially subject to UK regulatory requirements while simultaneously managing Musk's US political spending apparatus.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:54:58",
-      "target_name": "Jared Birchall",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House registry, company 16131916, officer appointment Jared Birchall 2024-12-12",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -250,95 +340,6 @@
       ]
     },
     {
-      "id": 6218,
-      "finding_type": "relationship",
-      "summary": "Jared Birchall appears in Solaris Energy Infrastructure (NYSE:SEI) 10-Q filing (CIK 0001697500, accession 0001558370-25-009911, filed 2025-08-01) in two exhibits: (1) Amended and Restated Limited LLC Agreement of Stateline Power, LLC \u2014 a Texas LLC formed as 49.9% JV between Solaris and a counterparty (redacted) for 900 MW primary power to a data center; (2) Amended and Restated Master Equipment Rental Agreement with CTC Property LLC (Nevada LLC, address redacted) as 'Customer' \u2014 identified as Musk/xAI's Memphis Colossus data center entity. Birchall's name appears in these documents, confirming Excession/Birchall manages xAI's physical infrastructure entities including CTC Property LLC.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:25:26",
-      "target_name": "Jared Birchall",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR:0001558370-25-009911",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6235,
-      "finding_type": "relationship",
-      "summary": "Jared Birchall serves as Director of X.AI LONDON LTD (UK company number 16131916, incorporated 2024-12-12) effective 2024-12-12. Address listed as 20 Air Street London W1B 5AN. Confirms Birchall's direct role in xAI operations beyond Texas family office management.",
-      "detail": "Registry.db entry for X.AI LONDON LTD (entity_id 6082636, source_jurisdiction=uk): officer record shows person_name=BIRCHALL Jared, title=Director, effective_date=2024-12-12, address=20 Air Street London W1B 5AN. Source: UK Companies House ingested 2026-03-04.",
-      "source_datasets": [
-        "uk_companies_house"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:30",
-      "target_name": "Jared Birchall",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:UK:16131916",
-          "source_quote": "officer: BIRCHALL Jared, title=Director, effective_date=2024-12-12, address=20 Air Street London W1B 5AN",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6236,
-      "finding_type": "legal",
-      "summary": "Jared Birchall confirmed as Manager on Certificate of Formation for all three Red Planet Ventures entities. Address on all three filings: 2110 Ranch Road 620 S., #341886, Austin TX 78734-0277 \u2014 the same PO Box as the entities themselves. Officer UID 000001 on all three. Only one filing per entity (Certificate of Formation, 2025-02-25). No subsequent amendments.",
-      "detail": "OpenCorporates entity lookups us_tx/0805920034, 0805920052, 0805920058: officers field shows Jared Birchall, position=manager, address=2110 Ranch Road 620 S #341886 Austin TX 78734-0277, uid=000001. filings_count=1 for each entity. All three identical officer structure.",
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:38:08",
-      "target_name": "Jared Birchall",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:0805920034",
-          "source_quote": "officers: [{name: Jared Birchall, position: manager, address: 2110 Ranch Road 620 S., #341886, Austin TX 78734-0277, uid: 000001}], filings_count: 1",
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:0805920052",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:0805920058",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6238,
       "finding_type": "identity",
       "summary": "OpenCorporates shows Jared Birchall serving as officer (manager, director, CFO, secretary, or similar) at 90+ entities across TX, CA, NV, NM, FL, GA, LA, MA, MS, NH, NC, KY, OR, WA, and UK jurisdictions. Entities include: Excession LLC, Musk Foundation, Musk Industries LLC, Foundation Security Inc, Neuralink Corp (6 jurisdictions), X.AI Corp (7 jurisdictions), X.AI London Ltd, The Boring Company (5 jurisdictions), Ad Astra School, Ad Astra Texas, Bushwhacker LLC, Horse Ranch LLC, Peninsula LLC, BSP 2023 LLC, River Bottoms Ranch LLC, CapX Holdco Inc, CAPX 1 LLC, N158X LLC, AIQ Phase LLC, MZX Tech LLC, PRAVDA Corp, and Red Planet Ventures I/II/III. Address on most TX filings: PO Box 341886, Austin TX 78734.",
@@ -358,6 +359,60 @@
           "evidence_type": "ref",
           "evidence_ref": "REGISTRY:TX:0805920034",
           "source_quote": "OC officer search Jared Birchall: total_count=90, includes Excession, Musk Foundation, Musk Industries, Neuralink, X.AI, Boring Company, Red Planet Ventures I/II/III across 15+ jurisdictions",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7223,
+      "finding_type": "relationship",
+      "summary": "Jared Birchall is manager of Excession LLC (Musk family office), Musk Industries LLC, Horse Ranch LLC, and officer of Musk Foundation - all at PO Box 341886",
+      "detail": "Jared Birchall, Musk's money manager hired from Morgan Stanley in 2016, serves as manager/officer across the PO Box 341886 entity cluster. TX Comptroller filings confirm him as manager of: Excession LLC (family office, formed 7/14/2020), Musk Industries LLC (formed 7/14/2020), Horse Ranch LLC (land holding, formed 3/30/2021). IRS 990 confirms him as Secretary, Treasurer and Director of Musk Foundation (EIN 852133087). He is also a trustee of The Foundation (EIN 920742101). Birchall Capital Investments LLC (taxpayer 32103306919, formed 12/4/2025) is a separate entity at Farmers Branch TX with different registered agent (Mark W. Sutherland), suggesting personal investment activity separate from Musk operations.",
+      "source_datasets": [
+        "registry",
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:44",
+      "target_name": "Jared Birchall",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024201_Excession_officer_Birchall",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024391_Musk_Industries_officer_Birchall",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32078477562_Horse_Ranch_officer_Birchall",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32103306919_Birchall_Capital_Investments",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -604,7 +659,7 @@
       "created_at": "2026-03-09 17:36:49",
       "profile_id": "tech-right",
       "other_person": "Red Planet Ventures I LLC",
-      "other_person_slug": "red-planet-ventures",
+      "other_person_slug": "red-planet-ventures-i-llc",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -675,6 +730,122 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "REGISTRY:TX:32075024201",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3631,
+      "person_a": "Excession LLC",
+      "person_b": "Jared Birchall",
+      "relationship_type": "controls",
+      "description": "Birchall is Manager of Excession LLC (Musk family office) at PO Box 341886 Austin TX, formed 7/14/2020",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:17",
+      "profile_id": "tech-right",
+      "other_person": "Excession LLC",
+      "other_person_slug": "excession-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024201",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3632,
+      "person_a": "Jared Birchall",
+      "person_b": "Musk Industries LLC",
+      "relationship_type": "controls",
+      "description": "Birchall is Manager of Musk Industries LLC at PO Box 341886 Austin TX, formed 7/14/2020",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:18",
+      "profile_id": "tech-right",
+      "other_person": "Musk Industries LLC",
+      "other_person_slug": "musk-industries-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024391",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3633,
+      "person_a": "Horse Ranch LLC",
+      "person_b": "Jared Birchall",
+      "relationship_type": "controls",
+      "description": "Birchall is Manager of Horse Ranch LLC at PO Box 341886 Austin TX, formed 3/30/2021, holds 530 acres near Tesla Gigafactory",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:20",
+      "profile_id": "tech-right",
+      "other_person": "Horse Ranch LLC",
+      "other_person_slug": "horse-ranch-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32078477562",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3634,
+      "person_a": "Jared Birchall",
+      "person_b": "Musk Foundation",
+      "relationship_type": "corporate",
+      "description": "Birchall serves as Secretary, Treasurer and Director of Musk Foundation (EIN 852133087)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:22",
+      "profile_id": "tech-right",
+      "other_person": "Musk Foundation",
+      "other_person_slug": "musk-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3640,
+      "person_a": "Elon Musk",
+      "person_b": "Jared Birchall",
+      "relationship_type": "employment",
+      "description": "Birchall is Musk's money manager, hired from Morgan Stanley in 2016 to run family office (Excession LLC), controls 90+ Musk shell entities in Texas",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:37",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX_Comptroller:32075024201",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thedeepdive.ca/jared-birchall-the-man-behind-elon-musks-many-many-ventures-and-potential-conflicts-of-interests/",
           "source_quote": null,
           "source_page": null
         }
@@ -852,7 +1023,48 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2020-07-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Birchall serves as officer on 54 unique companies across 15 jurisdictions. He is sole manager of Excession LLC (250B family office, TX 0803683059), manages Europa 100 LLC (political payments conduit, TX 0803683010), is president/director/CFO of Foundation Security entities (3 company numbers across TX and CA), and controls N158X LLC (CA 201717010663 terminated 2023) and BUSHWHACKER LLC (CA 202030710021). Six core entities all incorporated on 2020-07-14: Excession, Europa 100, Bushwhacker, Foundation Security, Musk Industries, at the PO BOX 341886 address cluster. This corporate infrastructure underpins both Musk business operations and political spending apparatus.",
+      "confidence": "high",
+      "id": 5556
+    },
+    {
+      "date": "2024-12-12",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Birchall confirmed as Director of X.AI London Ltd (UK company 16131916), extending Musk proxy network to UK jurisdiction",
+      "confidence": "confirmed",
+      "id": 5876
+    },
+    {
+      "date": "2024-12-12",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Jared Birchall serves as Director of X.AI LONDON LTD (UK company number 16131916, incorporated 2024-12-12) effective 2024-12-12. Address listed as 20 Air Street London W1B 5AN. Confirms Birchall's direct role in xAI operations beyond Texas family office management.",
+      "confidence": "confirmed",
+      "id": 6235
+    },
+    {
+      "date": "2025-02-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Jared Birchall confirmed as Manager on Certificate of Formation for all three Red Planet Ventures entities. Address on all three filings: 2110 Ranch Road 620 S., #341886, Austin TX 78734-0277 \u2014 the same PO Box as the entities themselves. Officer UID 000001 on all three. Only one filing per entity (Certificate of Formation, 2025-02-25). No subsequent amendments.",
+      "confidence": "confirmed",
+      "id": 6236
+    },
+    {
+      "date": "2025-08-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Jared Birchall appears in Solaris Energy Infrastructure (NYSE:SEI) 10-Q filing (CIK 0001697500, accession 0001558370-25-009911, filed 2025-08-01) in two exhibits: (1) Amended and Restated Limited LLC Agreement of Stateline Power, LLC \u2014 a Texas LLC formed as 49.9% JV between Solaris and a counterparty (redacted) for 900 MW primary power to a data center; (2) Amended and Restated Master Equipment Rental Agreement with CTC Property LLC (Nevada LLC, address redacted) as 'Customer' \u2014 identified as Musk/xAI's Memphis Colossus data center entity. Birchall's name appears in these documents, confirming Excession/Birchall manages xAI's physical infrastructure entities including CTC Property LLC.",
+      "confidence": "high",
+      "id": 6218
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6236,
@@ -1171,257 +1383,5 @@
       "private-order",
       "bridge-tax"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Jared Birchall",
-      "connections": [
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-        },
-        {
-          "target": "Igor Kurganov",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Power struggle over Musk Foundation control: Kurganov managed 5.7B daily operations, Birchall pushed for his removal May 2022 after FBI inquiries"
-        },
-        {
-          "target": "X.AI Holdings Corp",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall signed both Form D filings as Corporate Secretary of X.AI Holdings Corp"
-        },
-        {
-          "target": "Musk Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 424384",
-          "description": "Birchall controls Musk Foundation grantmaking and is president of The Foundation, the primary grant recipient"
-        },
-        {
-          "target": "The Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 439493",
-          "description": "Birchall is president of The Foundation (EIN 92-0742101), which received $137M from Musk Foundation in 2023 and $470M in 2024"
-        },
-        {
-          "target": "Excession LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "TX Comptroller entity 32075024201",
-          "description": "Birchall is Manager of Excession LLC (Musk family office), PO Box 341886, Austin TX, formed 7/14/2020"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 424384",
-          "description": "Birchall serves as Musk's chief personal adviser, financial manager, CEO of Neuralink, treasurer of Boring Company, CFO of xAI, and controls all Musk nonprofit and personal entities"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall manages Excession LLC (250B family office) and serves as officer on 54 Musk entities across 15 jurisdictions. Controls all business AND political payment infrastructure."
-        },
-        {
-          "target": "Foundation Security, Inc.",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "President, treasurer, secretary, director, CEO, and CFO across 3 Foundation Security entities. Firm conducted background investigations on rivals per NYT."
-        },
-        {
-          "target": "Neuralink Corporation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SAM.gov entity record 289418",
-          "description": "Birchall listed as CFO and government POC on Neuralink SAM.gov registration (UEI JGGFP357J8B8). PSC codes indicate positioning for federal R&D medical contracts."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall manages 54+ Musk entities including X.AI London Ltd directorship (UK 16131916), zero personal political contributions despite managing 250M+ political apparatus"
-        },
-        {
-          "target": "The Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall is President of The Foundation while also heading Excession LLC family office and serving as officer at Neuralink, xAI, Boring Company, and Foundation Security"
-        },
-        {
-          "target": "Red Planet Ventures I LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "REGISTRY:TX:0805920034",
-          "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920034."
-        },
-        {
-          "target": "Red Planet Ventures II, LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "REGISTRY:TX:0805920052",
-          "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920052."
-        },
-        {
-          "target": "Red Planet Ventures III, LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "REGISTRY:TX:0805920058",
-          "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920058."
-        },
-        {
-          "target": "Excession, LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "REGISTRY:TX:32075024201",
-          "description": "Birchall confirmed as Manager per TX Comptroller 2025 CPA data. TX taxpayer 32075024201."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Birchall advised Trump transition team on space policy and AI after 2024 election. Simultaneously CEO of Neuralink, Musk's money manager, and manager of personal TX LLCs."
-        }
-      ],
-      "secondHop": {
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          },
-          {
-            "target": "Judge Reed O'Connor",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "O'Connor presides over multiple Musk lawsuits while holding Tesla stock (15K-50K). X Corp ToS updated to force all disputes to O'Connor's Fort Worth division. O'Connor also held Twitter stock during takeover and Brookfield investments."
-          }
-        ],
-        "Excession LLC": [
-          {
-            "target": "Red Planet Ventures I/II/III",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Same mailing address (PO Box 341886 Austin TX), same registered agent (Registered Agent Solutions Inc), formed same day as xAI merger Form D"
-          },
-          {
-            "target": "America PAC",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Excession LLC (Musk personal holding) appears as America PAC in-kind donor (,324)"
-          }
-        ],
-        "Excession, LLC": [
-          {
-            "target": "Musk Industries, LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Excession LLC and Musk Industries LLC share identical corporate infrastructure: same formation date (7/14/2020), same PO Box 341886 address, same manager (Jared Birchall), same registered agent, near-sequential SOS file numbers (0803683028 and 0803683059)."
-          }
-        ],
-        "Musk Foundation": [
-          {
-            "target": "The Foundation",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Musk Foundation granted 137M to The Foundation in 2023, 100M seed in 2022. Both controlled by Birchall. The Foundation at same PO Box 341886 as Musk family office. 68% of Musk Foundation grants go to Musk-controlled entities."
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both entities share PO BOX 341886, Austin TX 78734; The Foundation is Musk's education-focused 501c3 with M+ revenue"
-          },
-          {
-            "target": "The Foundation",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Musk Foundation sends 607M (2022-2024) to The Foundation which warehouses it at 0.03% expenditure rate"
-          }
-        ],
-        "The Foundation": [
-          {
-            "target": "Ronald F. Gong",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Secretary and director alongside Birchall and Teresa Holland. PO BOX 341886 Austin TX. Also known as The X Foundation."
-          }
-        ],
-        "X.AI Holdings Corp": [
-          {
-            "target": "X.AI Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Holdings Corp formed 2025 as restructuring vehicle for SpaceX-xAI merger. 20B offering. Both NV-incorporated, both Musk/Birchall controlled."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

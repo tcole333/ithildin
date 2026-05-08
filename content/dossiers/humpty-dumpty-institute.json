@@ -8,7 +8,7 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.865741",
+  "generated_at": "2026-05-07T23:07:36.195117",
   "last_updated": "2026-03-04T17:01:13",
   "stats": {
     "total_findings": 17,
@@ -358,6 +358,31 @@
       ]
     },
     {
+      "id": 4889,
+      "finding_type": "financial",
+      "summary": "The Humpty Dumpty Institute Inc (Mark Epstein board member, CODEL pipeline, CCP/Taihe connections) received two PPP loans totaling $82,190: $40,656 from Cross River Bank on April 30, 2020 (fully forgiven $41,277.54) and $41,534 on second draw. Address: 140 Thompson St Apt 2E, New York NY 10012. Nonprofit (Y), NAICS 813319 (Social Advocacy Organizations), 3 jobs.",
+      "detail": "HDI organized 52+ Congressional Delegations and had 33+ Congress members on its advisory board. Jeffrey Epstein had access to fill CODEL slots through Mark Epstein's board position. The 140 Thompson St Apt 2E address is SoHo residential -- HDI appears to have operated from a personal apartment. 3 reported jobs for an organization running dozens of international congressional delegations is surprisingly small, suggesting much of its operations were volunteer-based or contracted out.",
+      "source_datasets": [
+        "sba_ppp"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-04-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 17:01:13",
+      "target_name": "Humpty Dumpty Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBA PPP FOIA dataset",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 124,
       "finding_type": "intelligence",
       "summary": "HDI Congressional Advisory Board includes 33+ current/former US Representatives and Senators as of 2022. Current members include: Don Bacon (R-NE), Andre Carson (D-IN), Buddy Carter (R-GA), Judy Chu (D-CA), Yvette Clarke (D-NY), Jim Clyburn (D-SC), Ruben Gallego (D-AZ), Raul Grijalva (D-AZ), Andy Harris (R-MD), Jim Himes (D-CT), Hank Johnson (D-GA), Robin Kelly (D-IL), Gregory Meeks (D-NY), Barry Moore (R-AL), August Pfluger (R-TX), Mark Pocan (D-WI), Bennie Thompson (D-MS), Maxine Waters (D-CA), Debbie Wasserman Schultz (D-FL), Frederica Wilson (D-FL). Former members include Mark Meadows, Adam Schiff, Sheila Jackson Lee, and others.",
@@ -427,31 +452,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA:negative_search_HDI",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4889,
-      "finding_type": "financial",
-      "summary": "The Humpty Dumpty Institute Inc (Mark Epstein board member, CODEL pipeline, CCP/Taihe connections) received two PPP loans totaling $82,190: $40,656 from Cross River Bank on April 30, 2020 (fully forgiven $41,277.54) and $41,534 on second draw. Address: 140 Thompson St Apt 2E, New York NY 10012. Nonprofit (Y), NAICS 813319 (Social Advocacy Organizations), 3 jobs.",
-      "detail": "HDI organized 52+ Congressional Delegations and had 33+ Congress members on its advisory board. Jeffrey Epstein had access to fill CODEL slots through Mark Epstein's board position. The 140 Thompson St Apt 2E address is SoHo residential -- HDI appears to have operated from a personal apartment. 3 reported jobs for an organization running dozens of international congressional delegations is surprisingly small, suggesting much of its operations were volunteer-based or contracted out.",
-      "source_datasets": [
-        "sba_ppp"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 17:01:13",
-      "target_name": "Humpty Dumpty Institute",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SBA PPP FOIA dataset",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -793,6 +793,14 @@
       "description": "Partnership since 2017. Taihe employs 12+ CCP/PLA members. HDI participated in Taihe forums in Beijing. Neither registered under FARA.",
       "other_person": "Taihe Institute",
       "id": 557
+    },
+    {
+      "date": "2020-04-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "The Humpty Dumpty Institute Inc (Mark Epstein board member, CODEL pipeline, CCP/Taihe connections) received two PPP loans totaling $82,190: $40,656 from Cross River Bank on April 30, 2020 (fully forgiven $41,277.54) and $41,534 on second draw. Address: 140 Thompson St Apt 2E, New York NY 10012. Nonprofit (Y), NAICS 813319 (Social Advocacy Organizations), 3 jobs.",
+      "confidence": "confirmed",
+      "id": 4889
     },
     {
       "date": "2022",

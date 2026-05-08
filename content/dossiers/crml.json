@@ -1,0 +1,152 @@
+{
+  "name": "CRML",
+  "slug": "crml",
+  "aliases": [],
+  "profile_ids": [
+    "crml"
+  ],
+  "generated_at": "2026-05-07T23:07:36.417655",
+  "last_updated": "2026-03-24T18:33:22",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "location": 1,
+      "intelligence": 3,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-24T18:33:22"
+  },
+  "findings": [
+    {
+      "id": 7750,
+      "finding_type": "location",
+      "summary": "CRML copper powder: No physical storage location disclosed in any public filing or press release through March 2026",
+      "detail": "Press release (Nov 21 2025) and SEC 6-K (Nov 25 2025) describe 40kg UHP copper as 'G7 and EU-origin secured stockpile' but never name a country, warehouse, custodian, or chain-of-custody documentation. No subsequent 6-K, 20-F, or investor presentation through March 2026 has disclosed physical location. The only geographic descriptor is 'European based single family office' Swiss Commodity Re.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:07",
+      "target_name": "CRML",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.globenewswire.com/news-release/2025/11/21/3192887/0/en/CRML-Secures-One-of-the-Largest-Strategic-Stockpiles-of-Ultra-High-Purity-Copper-Powder-in-a-US-20M-All-Share-Acquisition-Issued-at-a-40-Premium-to-Market.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7754,
+      "finding_type": "intelligence",
+      "summary": "Financely Group documented copper powder SKR fraud template before CRML deal \u2014 CRML matches template exactly",
+      "detail": "Financely Group published multiple articles (financely-group.com) documenting the UHP copper powder fraud template: (1) Claim 500kg-class copper powder in Swiss free zones (Embrach) at 99.9999%+ purity valued at USD 1500-2500/gram vs LME rate of USD 0.009/gram \u2014 250,000x inflation. (2) Use 'family office' seller structure. (3) Claim 'G7/EU origin' and 'traceable supply chain.' (4) Never provide SKR, warehouse receipt, or inspection certificate. (5) Disappear when legal due diligence triggered. CRML's Nov 2025 transaction matches: 40kg at 99.96%, USD 1500-2500/gram claimed value, 'European family office' seller (Swiss Commodity Re), 'G7 and EU-origin', no storage disclosed. July 2025 Financely article described a nearly identical 500kg transaction in Embrach Free Zone.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:21",
+      "target_name": "CRML",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://financelygroup.medium.com/ultra-fine-copper-powder-the-phantom-collateral-that-wont-stay-dead-0eeb37ba89eb",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7758,
+      "finding_type": "relationship",
+      "summary": "Blumenthal-Macintyre ABN AMRO Sydney connection: probable introduction mechanism for CRML copper deal",
+      "detail": "Darrin Blumenthal (Jett Capital director, CRML exclusive financial advisor) began his career at ABN AMRO Sydney M&A team. Malcolm Scott Macintyre (Capella Capital MD) was Local Managing Director at ABN AMRO Infrastructure Capital Group for 12 years. Both were ABN AMRO Sydney alumni, creating a plausible professional introduction pathway. Jett Capital was exclusive financial advisor for the CRML-Swiss Commodity Re copper deal and also acted as placement agent for CRML's PIPE financings. Macintyre received 200,000 CRML shares under the same Asset Sale Agreement \u2014 suggesting he introduced or facilitated the copper transaction. Note: Blumenthal's ABN AMRO role was M&A (early career), Macintyre's was infrastructure capital (12yr) \u2014 different divisions but same institution and city.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:46",
+      "target_name": "CRML",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.capellacapital.com.au/team/malcolm-macintyre",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7762,
+      "finding_type": "intelligence",
+      "summary": "Supply chain gap: No manufacturer identified for CRML copper powder \u2014 GGP Metalpowder (Germany) is world's largest copper powder producer but does not match Swiss Commodity Re's HK structure",
+      "detail": "GGP Metalpowder AG (F\u00fcrth/Spalt, Bavaria, Germany) is the world's largest electrolytic copper powder producer with >50% global market share and 15,000+ tonne/year capacity. It produces ultra-fine copper powders (products Cu CH UF 10 <10 micron; Cu CH UF 20 <20 micron) from 99.9%+ copper cathodes. Kymera International (US) is another major producer. Neither has any public link to Swiss Commodity Re Limited or Kenneth Deayton. No manufacturer has been publicly identified for the claimed 40kg 99.96% UHP batch. CRML's press release never names a producer, only the seller. The 'G7 and EU-origin' claim is compatible with GGP in Germany but no evidence exists of that chain.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:33:12",
+      "target_name": "CRML",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://kymerainternational.com/solutions/metal-powders-pastes/copper/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7764,
+      "finding_type": "intelligence",
+      "summary": "NINGI Research Dec 2025 short report on CRML: 'elaborate promotional vehicle,' geological fantasies, Tanbreez project claims false",
+      "detail": "NINGI Research published a short position report on CRML dated November/December 2025 (thread posted Dec 10 2025). Their thesis: CRML is 'not a legitimate mining venture but an elaborate promotional vehicle' with 'entire narrative constructed on geological fantasies and engineering impossibilities.' Primary focus was Tanbreez Rare Earth Project feasibility claims. CRML stock dropped ~10.87% on the report publication. The report preceded or coincided with the copper deal (deal announced Nov 21, report Dec 10) suggesting the copper acquisition may have been designed to shift the narrative away from the Tanbreez critique. NINGI stated short position publicly via X/Twitter (@NingiResearch, post 1990799535275454937).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:33:22",
+      "target_name": "CRML",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://ningiresearch.com/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

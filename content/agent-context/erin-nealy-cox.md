@@ -1,6 +1,8 @@
 # Erin Nealy Cox
-**Stats**: 7 findings, 10 connections, 0 entities
+**Stats**: 7 findings, 9 connections, 0 entities
 **Dossier**: /dossiers/erin-nealy-cox
+
+> Former federal cybercrime prosecutor, Trump-appointed US Attorney for the Northern District of Texas (2017–2021), and current Kirkland &amp; Ellis partner specializing in government regulatory and internal investigations.
 
 ## Key Findings
 - **[identity/high]** Career timeline: Born 1970 Pascagoula MS. BBA UT Austin, JD magna cum laude SMU Dedman. Clerked Judge Politz (5th Cir) and Judge Sanders (NDTX). Simpson Thacher 1996-97. AUSA NDTX 1999-2008 (cyber and white collar). DOJ Main Justice 2004-05 chief of staff to AAG Office of Legal Policy. Stroz Friedberg 2008-2016 cybersecurity exec. McKinsey 2016-17 senior advisor. US Attorney NDTX: nominated Sep 22 2017, confirmed Nov 9 2017, sworn Nov 17 2017. Resigned effective Jan 9 2021. K&E partner announced Jun 23 2021, started Sep 1 2021 in Dallas. Sally Beauty Holdings board member. Federalist Society contributor. (2017-09-22) (Finding #3116)
@@ -16,9 +18,19 @@
 - **Kirkland & Ellis** [employment/strong]: K&E Partner (Dallas, June 2021). Former US Attorney NDTX 2017-2021 who brought Boeing DPA. Joined same firm that defended Boeing.
 - **Mark Filip** [employment/strong]: Prosecutor-defense counsel on Boeing 737 MAX case 4:21-cr-00005. Filip signed DPA for Boeing defense, Cox oversaw prosecution as NDTX USA. Filip welcomed Cox to K&E as partner Sep 2021. Now colleagues at K&E Government Regulatory practice.
 - **The Boeing Company** [legal/strong]: Nealy Cox as NDTX US Attorney oversaw prosecution of Boeing in 4:21-cr-00005. Filed DPA Jan 7 2021. Boeing charged with conspiracy to defraud US re 737 MAX MCAS. 2.51B total penalty. No guilty plea, no exec charged, no monitor. DPA breached May 2024. Case ultimately dismissed Nov 2025 via NPA.
-- **Mark Filip** [employment/strong]: Nealy Cox was US Atty NDTX who signed Boeing DPA on Jan 7 2021 her last day. Joined KE as partner Jun 23 2021. Filip personally welcomed her per KE press release.
 - **JD Vance** [political/medium]: FEC records show Nealy Cox donated 8300 to Vance Victory joint fundraising committee Apr 5 2024, split between JD Vance for Senate and Working for Ohio PAC. Employer listed as Kirkland Ellis. Largest single donation in her FEC record.
 - **Reed O Connor** [legal/medium]: Judge O Connor assigned to Boeing case 4:21-cr-00005 in NDTX, Nealy Cox district. O Connor later rejected plea deal Dec 2024, but ultimately dismissed case Nov 2025 at DOJ request. Both are Federalist Society connected. O Connor is conservative NDTX judge known for nationwide injunctions.
 - **Christina Nolan** [political/medium]: FEC: Nealy Cox donated 2900 to Christina Nolan for US Senate (VT-R) in 2022 via WinRed. Nolan was former US Attorney for Vermont - another Trump-appointed USA. K&E partners supporting K&E pipeline candidates running for office.
 - **Boeing** [legal/medium]: Lead Boeing DPA prosecutor resigned 2 days after signing then joined KE
 - **Alexander Acosta** [legal/circumstantial]: Structural parallel: Both Trump-appointed US Attorneys who negotiated historically lenient agreements (Acosta: Epstein NPA, Nealy Cox: Boeing DPA) with K&E on defense side. American Prospect titled article Boeing Epstein Deal. Same victims lawyer Paul Cassell drew explicit comparison. Both resigned shortly after agreements.
+
+## Open Questions
+- What was the timeline of K&E recruitment contacts with Nealy Cox relative to the DPA negotiation? The public record establishes that Filip welcomed her five months after the DPA was signed, but the date any employment discussion was first initiated has not been documented.
+- Why was the Boeing case filed in NDTX — a district with no Boeing corporate presence — rather than in WDWA (Boeing headquarters) or NDIL (Boeing Chicago office)? Professor Coffee raised the venue question publicly but no DOJ explanation has been located.
+- Who at DOJ, and at what level, approved the waiver of an independent compliance monitor in the original DPA? The line prosecutor was Chad Meacham; it is not documented whether the no-monitor decision was made at the AUSA level, the U.S. Attorney level, or required Main Justice approval.
+- On what terms were the Boeing victims' families' impropriety claims against Nealy Cox withdrawn on January 20, 2022? Whether the withdrawal was a litigation settlement or a unilateral decision is not documented in available records.
+- Nealy Cox's Stroz Friedberg tenure (2008–2016) overlaps with sensitive financial-institution investigations. Whether any Stroz clients later appeared in the Boeing matter or the K&amp;E network has not been investigated.
+
+## Applicable Models
+- {'id': 'private-order', 'rationale': 'The K&E–DOJ revolving door documented here — Filip writing DPA policy as Deputy AG, then using it to defend Boeing at K&E, then welcoming the Boeing prosecutor as a K&E partner — is a canonical instance of the Private Order model\'s "revolving door as access mechanism" and "institutional capture" mechanisms. The network includes Nealy Cox as a node in the Filip → K&E → DOJ Criminal Division cluster documented in that model.'}
+- {'id': 'enabler-gradient', 'rationale': 'The factual record positions Nealy Cox at a documentable point on the enabler gradient. She oversaw a prosecution that legal commentators characterized as capturing lenient terms for Boeing, then joined the defense firm within months. Whether that reflects knowing participation, willful blindness, or professional conduct consistent with DOJ norms is the specific question the gradient model is designed to frame — the platform should present the evidence and let the reader assess.'}

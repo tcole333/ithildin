@@ -1,0 +1,417 @@
+{
+  "name": "Ilyas Khrapunov",
+  "slug": "ilyas-khrapunov",
+  "aliases": [],
+  "profile_ids": [
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.403370",
+  "last_updated": "2026-04-13T17:07:20",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "financial": 2,
+      "controls": 1,
+      "legal": 1,
+      "familial": 2
+    },
+    "last_updated": "2026-04-13T17:07:20"
+  },
+  "findings": [
+    {
+      "id": 10156,
+      "finding_type": "financial",
+      "summary": "Khrapunov laundering operated through FBME Bank (Tanzania/Russia/Cyprus) processing ~$440M via offshore shell network \u2014 bank sanctioned by US in 2016",
+      "detail": "Court documents show Ilyas Khrapunov ('Elvis') was ultimate beneficiary of a complex web of almost a dozen offshore companies and trusts that processed close to $440M through accounts at FBME Bank. FBME Bank was Tanzania-based with offices in Russia and Cyprus \u2014 sanctioned by the US government in early 2016 for involvement in money laundering, terrorism financing, and arms proliferation. The bank is now defunct. Some of these FBME funds were used for US real estate investments including the 3 Trump SoHo condos. The FBME \u2192 shell companies \u2192 Trump SoHo pipeline represents the complete money trail.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:04",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FinCEN: FBME Bank sanctions (2016)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10288,
+      "finding_type": "financial",
+      "summary": "ACRIS deeds confirm all 3 Khrapunov shell LLCs purchased Trump SoHo units from Bayrock/Sapir Organization LLC and Bayrock/Zar Spring LLC (joint grantors) on April 30, 2013 (recorded May 8, 2013): Soho 3310 LLC - Unit 3310 at 246 Spring St (Block 491, Lot 1483) for $1,407,321.50; Soho 3311 LLC - Unit 3311 (Block 491, Lot 1484) for $829,351.25; Soho 3203 LLC - Unit 3203 (Block 491, Lot 1467) for $879,833.50. Total: $3,116,506.25. All three buyer LLCs listed address as 'C/O JAJAN PLLC, MARTIN I. JAJAN, ESQ., 30 BROAD STREET, 14TH FLOOR, NEW YORK, NY 10004.' Both Bayrock entities listed address as 'C/O BAYROCK GROUP, LLC, 160 VARICK STREET, 2ND FLOOR, NEW YORK, NY 10013.'",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:31",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100019001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10290,
+      "finding_type": "financial",
+      "summary": "ACRIS shows Soho 3310 LLC (Khrapunov shell) resold Trump SoHo unit 3310 to MT TRUMP SOHO 3310, LLC on May 27, 2014 for $1,405,000 -- just 13 months after purchase for $1,407,321.50. Slight loss of $2,321.50. Buyer MT TRUMP SOHO 3310 LLC listed address as 60 Suydam Road, Somerset, NJ 08873. Seller still listed Jajan PLLC at 110 Wall Street 11th Floor as address. Quick resale at effective loss may indicate urgency to exit position, possibly triggered by escalating BTA Bank litigation pressure.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:38",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014052901776001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10293,
+      "finding_type": "financial",
+      "summary": "ACRIS shows Soho 3203 LLC (Khrapunov shell) resold Trump SoHo unit 3203 to HEAVEN FRYTL - NEW YORK - LLC on September 25, 2014 for $840,000 -- 17 months after purchase for $879,833.50, a loss of $39,833.50 (4.5%). Jajan PLLC at 40 Wall Street 25th Floor listed as seller address. Buyer HEAVEN FRYTL appears to be a foreign entity (unusual name pattern). Sale occurred same month as City of Almaty v. Viktor Khrapunov filed in CD Cal (2:14-cv-03650, filed May 13, 2014), suggesting liquidation of US real estate assets during active litigation.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:49",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014092901627001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10296,
+      "finding_type": "financial",
+      "summary": "ACRIS shows Soho 3311 LLC (Khrapunov shell) trajectory: (1) purchased Trump SoHo unit 3311 April 30, 2013 for $829,351.25; (2) took $300,000 mortgage from Thomas G. and Silma Sherman (90 Almeria Ave, Coral Gables, FL) on May 22, 2015; (3) resold unit to Joseph Adulamy (1 S. Ben-Yosef Street #25, Ramat, Tel Aviv) on October 16, 2015 for $777,000 -- a loss of $52,351.25 (6.3%); (4) mortgage satisfaction recorded October 9, 2015. All 3 Khrapunov units sold at losses totaling $94,506 (-3.0% aggregate), consistent with distressed liquidation rather than investment returns.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:58",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015052800394001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015102801155002",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015112301207001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10332,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: All 3 Khrapunov-linked Trump SoHo units were liquidated at losses within 13-30 months of purchase: Soho 3310 sold May 2014 at -$2,322 loss (-0.2%); Soho 3203 sold Sept 2014 at -$39,834 loss (-4.5%); Soho 3311 sold Oct 2015 at -$52,351 loss (-6.3%). Aggregate loss: $94,507 on $3,116,506 investment (-3.0%). The timing correlates with escalating litigation: City of Almaty filed CDCA RICO suit May 2014 (same month as first sale), City of Almaty filed SDNY suit July 2015 (shortly before final sale). The progressive deepening of losses (0.2% -> 4.5% -> 6.3%) suggests increasing urgency to liquidate as legal pressure mounted. If the purpose was money laundering rather than investment, the losses are the cost of converting dirty money into clean real estate proceeds.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:07:20",
+      "target_name": "Ilyas Khrapunov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014052901776001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014092901627001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015102801155002",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5223,
+      "person_a": "Daniel Ridloff",
+      "person_b": "Ilyas Khrapunov",
+      "relationship_type": "corporate",
+      "description": "Ridloff served as VP of Khrapunov's SDG-Investment Fund, managing US investments",
+      "strength": "strong",
+      "date_range": "2012-2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:59",
+      "profile_id": "zampolli",
+      "other_person": "Daniel Ridloff",
+      "other_person_slug": "daniel-ridloff",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5224,
+      "person_a": "Felix Sater",
+      "person_b": "Ilyas Khrapunov",
+      "relationship_type": "financial",
+      "description": "Sater facilitated Khrapunov US investments including Trump SoHo condos; found liable for 52M in BTA Bank case",
+      "strength": "strong",
+      "date_range": "2012-2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:59",
+      "profile_id": "zampolli",
+      "other_person": "Felix Sater",
+      "other_person_slug": "felix-sater",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BTA Bank v. Sater verdict (Oct 2025)",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5228,
+      "person_a": "FBME Bank",
+      "person_b": "Ilyas Khrapunov",
+      "relationship_type": "financial",
+      "description": "Ultimate beneficiary of ~440M processed through FBME Bank via offshore shell network",
+      "strength": "strong",
+      "date_range": "pre-2016",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:59",
+      "profile_id": "zampolli",
+      "other_person": "FBME Bank",
+      "other_person_slug": "fbme-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court documents",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5231,
+      "person_a": "Ilyas Khrapunov",
+      "person_b": "SDG-Investment Fund",
+      "relationship_type": "controls",
+      "description": "SDG (Swiss Development Group) controlled by Ilyas Khrapunov",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:00:20",
+      "profile_id": "zampolli",
+      "other_person": "SDG-Investment Fund",
+      "other_person_slug": "sdg-investment-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5282,
+      "person_a": "Ilyas Khrapunov",
+      "person_b": "Martin Jajan",
+      "relationship_type": "legal",
+      "description": "Jajan PLLC formed shell companies for Khrapunov family Trump SoHo purchases",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:06",
+      "profile_id": "zampolli",
+      "other_person": "Martin Jajan",
+      "other_person_slug": "martin-jajan",
+      "evidence": []
+    },
+    {
+      "id": 5284,
+      "person_a": "Elvira Kudryashova",
+      "person_b": "Ilyas Khrapunov",
+      "relationship_type": "familial",
+      "description": "Elvira Kudryashova is Viktor Khrapunov's stepdaughter; beneficial owner of Trump SoHo condos",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:11",
+      "profile_id": "zampolli",
+      "other_person": "Elvira Kudryashova",
+      "other_person_slug": "elvira-kudryashova",
+      "evidence": []
+    },
+    {
+      "id": 5207,
+      "person_a": "Ilyas Khrapunov",
+      "person_b": "Viktor Khrapunov",
+      "relationship_type": "familial",
+      "description": "Ilyas is son of Viktor Khrapunov; both Interpol-wanted; Ilyas used codename Elvis in offshore network controlling ~440M through FBME accounts",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:34:10",
+      "profile_id": "zampolli",
+      "other_person": "Viktor Khrapunov",
+      "other_person_slug": "viktor-khrapunov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP: Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2012-2014",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Ridloff served as VP of Khrapunov's SDG-Investment Fund, managing US investments",
+      "other_person": "Daniel Ridloff",
+      "id": 5223
+    },
+    {
+      "date": "2012-2014",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Sater facilitated Khrapunov US investments including Trump SoHo condos; found liable for 52M in BTA Bank case",
+      "other_person": "Felix Sater",
+      "id": 5224
+    },
+    {
+      "date": "pre-2016",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Ultimate beneficiary of ~440M processed through FBME Bank via offshore shell network",
+      "other_person": "FBME Bank",
+      "id": 5228
+    }
+  ]
+}

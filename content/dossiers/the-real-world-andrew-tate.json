@@ -1,0 +1,345 @@
+{
+  "name": "The Real World (Andrew Tate)",
+  "slug": "the-real-world-andrew-tate",
+  "aliases": [],
+  "profile_ids": [
+    "manosphere"
+  ],
+  "generated_at": "2026-05-07T23:07:36.302427",
+  "last_updated": "2026-03-29T03:58:30",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "digital": 9,
+      "operational": 1,
+      "financial": 1
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 1
+    },
+    "last_updated": "2026-03-29T03:58:30"
+  },
+  "findings": [
+    {
+      "id": 8255,
+      "finding_type": "digital",
+      "summary": "jointherealworld.com domain secured via first SSL cert April 2019 \u2014 4 years before TRW public launch \u2014 indicating early brand pre-positioning",
+      "detail": "Certificate transparency logs show jointherealworld.com received its first SSL certificate on 2019-04-14 from Cloudflare. The platform was not publicly launched until January 2023 (and Hustler's University not until May 2021). The domain was secured approximately 4 years before the public platform launch, indicating deliberate brand pre-positioning.",
+      "source_datasets": "crtsh",
+      "confidence": "confirmed",
+      "date_of_event": "2019-04-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8252,
+      "finding_type": "digital",
+      "summary": "The Real World internal infrastructure runs on therealworld.ag (Antigua TLD), launched 2023-01-01; 30+ service subdomains mapped including api, rpc2 (AWS ELB), sentry, unleash, nmi relay",
+      "detail": "Certificate transparency logs show a wildcard Let's Encrypt cert for *.therealworld.ag issued 2023-01-01, and an Amazon RSA cert for therealworld.ag and trw.network issued 2023-01-04. The .ag TLD (Antigua and Barbuda) was chosen for the internal platform domain. All 30+ internal service subdomains (api, rpc, workers, sentry, mgmt, ingest, etc.) are hosted under this domain, all behind Cloudflare proxy (172.66.41.10 / 172.66.42.246).",
+      "source_datasets": "crtsh,shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2023-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8251,
+      "finding_type": "digital",
+      "summary": "nmi.therealworld.ag subdomain on Vercel confirms NMI payment gateway integration at DNS level; checkout also loads Kount (ssl.kaptcha.com) and 3DS Integrator (cdn.3dsintegrator.com)",
+      "detail": "The domain nmi.therealworld.ag resolves via CNAME to cname.vercel-dns.com, confirming a dedicated Vercel-hosted subdomain named after the NMI payment processor. Combined with ssl.kaptcha.com (Kount fraud detection) and cdn.3dsintegrator.com (3D Secure) loading in the TRW checkout page, this constitutes direct DNS-level confirmation of the NMI payment gateway integration.",
+      "source_datasets": "shodan,crtsh",
+      "confidence": "confirmed",
+      "date_of_event": "2023-01-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8254,
+      "finding_type": "digital",
+      "summary": "TRW checkout stack confirmed: Next.js/Vercel frontend, NMI card processing, Kount/Equifax fraud detection (ssl.kaptcha.com), 3DS Integrator for 3D Secure, HotJar analytics, internal ingest.therealworld.ag telemetry",
+      "detail": "URLScan scan 73d6635c (2023-12-21) of the TRW checkout page recorded external domains cdn.3dsintegrator.com, ssl.kaptcha.com, ingest.therealworld.ag, and hotjar.com. ssl.kaptcha.com is Kount (Equifax's fraud detection platform, acquired 2021), confirmed by kaptcha.com DNS pointing to AWS ELBs named 'colle-elast-*' (collector) with a subdomain mqa \u2192 collector.qa06.private.kount.com.",
+      "source_datasets": "urlscan,shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2023-12-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8259,
+      "finding_type": "digital",
+      "summary": "Live TRW checkout URL captured: checkout.jointherealworld.com/checkout/plan/contender with affiliate ID hckfpcqj; supports USDC/USDT crypto payments and card (via NMI)",
+      "detail": "URLScan scan e55a4cac (2024-01-16) captured a live TRW checkout URL: https://checkout.jointherealworld.com/checkout/plan/contender?a=hckfpcqj?subid=ads. The page loaded from Vercel (IP 76.76.21.164). Crypto payment icons (usdc.3e92b3cf.svg, usdt.6d35925e.svg) confirm USDC and USDT ERC-20 support. URL structure reveals: plan name 'contender', affiliate ID 'hckfpcqj', traffic source 'ads'.",
+      "source_datasets": "urlscan",
+      "confidence": "high",
+      "date_of_event": "2024-01-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8224,
+      "finding_type": "operational",
+      "summary": "The Real World suffered a data breach exposing nearly 1 million user accounts (emails, passwords) in May 2024 due to a misconfigured database.",
+      "detail": "A misconfigured database exposed the personal data of 968,447 user accounts for The Real World platform in May 2024. Leaked data included email addresses and account passwords. This is a significant consumer-harm signal and suggests backend infrastructure operated with minimal security controls at a platform claiming hundreds of thousands of active subscribers.",
+      "source_datasets": "web",
+      "confidence": "high",
+      "date_of_event": "2024-05-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 17:04:42",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8221,
+      "finding_type": "financial",
+      "summary": "The Real World subscription price escalated from $49.99 to $99.99/month over three years; platform uses high-risk gateway NMI and Radom Pay crypto processor after mainstream processors dropped it post-2022 deplatforming.",
+      "detail": "The Real World (TRW) subscription price has been raised multiple times: $49.99/month at launch (as Hustler's University 2.0), then $49 as The Real World, raised to approximately $77/month in mid-2025, $99.99/month as of February 2026 per member reports. The platform intentionally avoids mainstream payment processors. After its previous mainstream processor dropped it following the 2022 Meta/TikTok deplatforming, The Real World migrated to NMI (Network Merchants Inc., Schaumburg, Illinois), a high-risk-specialist payment gateway, and Radom Pay for cryptocurrency subscriptions.",
+      "source_datasets": "web",
+      "confidence": "high",
+      "date_of_event": "2025-06-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 17:04:42",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8258,
+      "finding_type": "digital",
+      "summary": "TRW affiliate TikTok clip tool (cliptok.jointherealworld.com) runs on trw-afm.online, hosted on Hetzner Germany (128.140.103.112), registered via Porkbun",
+      "detail": "cliptok.jointherealworld.com CNAME points to trw-afm.online. Certificate (id from ct.sh 2025-08-10) shows CN=cliptok.jointherealworld.com with SAN=trw-afm.online. trw-afm.online resolves to 128.140.103.112 (Hetzner Online GmbH, ASN 24940, Nuremberg, Germany). Registrar: Porkbun. 'Cliptok' appears to be a TikTok clip reposting / affiliate marketing tool.",
+      "source_datasets": "crtsh,shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2025-08-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8261,
+      "finding_type": "digital",
+      "summary": "Live Radom Pay checkout (pay.radom.com/checkout/{uuid}) confirmed redirecting to Telegram after payment \u2014 consistent with TRW's crypto-then-community onboarding flow",
+      "detail": "URLScan scan 019b07fd (2025-12-10) captured a live Radom Pay checkout URL: https://pay.radom.com/checkout/4e0186d8-e912-468f-b543-ae28786846e1. The page loaded and then redirected to t.me (Telegram, IP 149.154.167.99). This pattern \u2014 Radom checkout \u2192 Telegram redirect \u2014 is consistent with TRW's onboarding flow (pay \u2192 join Telegram/Matrix community).",
+      "source_datasets": "urlscan",
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8256,
+      "finding_type": "digital",
+      "summary": "therealworld.com is owned by MTV/Viacom (Paramount), not Andrew Tate; HTTP 301 redirects to www.mtv.com/series/all-content; Tate's platform runs on jointherealworld.com",
+      "detail": "therealworld.com resolves to three AWS ALB pool IPs (100.28.104.175, 54.157.108.158, 98.83.184.133, ASN AS14618 Amazon Data Services NoVa, Ashburn VA) but returns a 301 redirect to www.mtv.com/series/all-content. The Shodan-scanned SSL certs on those IPs belong to AMC Networks, Viacom, and Dentons law firm \u2014 shared ALB tenants. MTV/Viacom owns therealworld.com as the brand domain for their long-running reality TV show.",
+      "source_datasets": "shodan,urlscan",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8257,
+      "finding_type": "digital",
+      "summary": "TRW content library hosted on Hetzner dedicated server (91.98.19.94) in Dubai, UAE \u2014 operationally consistent with Tate's UAE base",
+      "detail": "library.jointherealworld.com resolves to 91.98.19.94 (Hetzner Online GmbH, ASN unknown, city: Dubai, UAE). Hostname: static.94.19.98.91.clients.your-server.de. This is a Hetzner dedicated server in the UAE, serving the TRW content library. Consistent with Andrew Tate's stated operational base in Dubai.",
+      "source_datasets": "shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "target_name": "The Real World (Andrew Tate)",
+      "profile_id": "manosphere",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4136,
+      "person_a": "The Real World (Andrew Tate)",
+      "person_b": "NMI (Network Merchants Inc.)",
+      "relationship_type": "corporate",
+      "description": "Andrew Tate's The Real World uses NMI (Network Merchants Inc.) as its card payment processor after mainstream processors dropped the account. This relationship is confirmed via change.org petition update referencing NMI by name as the payment facilitator for Tate's merchandise and subscription store.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 17:04:42",
+      "profile_id": "manosphere",
+      "other_person": "NMI (Network Merchants Inc.)",
+      "other_person_slug": "nmi-network-merchants-inc",
+      "evidence": []
+    },
+    {
+      "id": 4137,
+      "person_a": "The Real World (Andrew Tate)",
+      "person_b": "Radom Pay",
+      "relationship_type": "corporate",
+      "description": "The Real World uses Radom Pay as its cryptocurrency subscription processor, confirmed via multiple source references identifying Radom Pay as the crypto payment rail for Hustler's University and The Real World alongside NMI for card payments.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 17:04:42",
+      "profile_id": "manosphere",
+      "other_person": "Radom Pay",
+      "other_person_slug": "radom-pay",
+      "evidence": []
+    },
+    {
+      "id": 4260,
+      "person_a": "New Era Learning LLC",
+      "person_b": "The Real World (Andrew Tate)",
+      "relationship_type": "financial",
+      "description": "NMI (Network Merchants Inc.) connects The Real World branded platform and New Era Learning LLC (operator) in its payment gateway role \u2014 neither entity has a direct documented edge to the other in the graph, only through NMI and Radom Pay",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:58:30",
+      "profile_id": "manosphere",
+      "other_person": "New Era Learning LLC",
+      "other_person_slug": "new-era-learning-llc",
+      "evidence": []
+    },
+    {
+      "id": 4159,
+      "person_a": "Radom Pay",
+      "person_b": "The Real World (Andrew Tate)",
+      "relationship_type": "corporate",
+      "description": "Radom Pay uses HotJar (site ID 6433214) for user behavior analytics on their pay.radom.com checkout page. The TRW checkout (checkout.jointherealworld.com) also loads HotJar. Both platforms use the same analytics vendor for checkout funnel analysis, though their specific HotJar site IDs may differ.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-28 18:03:35",
+      "profile_id": "manosphere",
+      "other_person": "Radom Pay",
+      "other_person_slug": "radom-pay",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-04-14",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "jointherealworld.com domain secured via first SSL cert April 2019 \u2014 4 years before TRW public launch \u2014 indicating early brand pre-positioning",
+      "confidence": "confirmed",
+      "id": 8255
+    },
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "The Real World internal infrastructure runs on therealworld.ag (Antigua TLD), launched 2023-01-01; 30+ service subdomains mapped including api, rpc2 (AWS ELB), sentry, unleash, nmi relay",
+      "confidence": "confirmed",
+      "id": 8252
+    },
+    {
+      "date": "2023-01-04",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "nmi.therealworld.ag subdomain on Vercel confirms NMI payment gateway integration at DNS level; checkout also loads Kount (ssl.kaptcha.com) and 3DS Integrator (cdn.3dsintegrator.com)",
+      "confidence": "confirmed",
+      "id": 8251
+    },
+    {
+      "date": "2023-12-21",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "TRW checkout stack confirmed: Next.js/Vercel frontend, NMI card processing, Kount/Equifax fraud detection (ssl.kaptcha.com), 3DS Integrator for 3D Secure, HotJar analytics, internal ingest.therealworld.ag telemetry",
+      "confidence": "confirmed",
+      "id": 8254
+    },
+    {
+      "date": "2024-01-16",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "Live TRW checkout URL captured: checkout.jointherealworld.com/checkout/plan/contender with affiliate ID hckfpcqj; supports USDC/USDT crypto payments and card (via NMI)",
+      "confidence": "high",
+      "id": 8259
+    },
+    {
+      "date": "2024-05-01",
+      "type": "finding",
+      "finding_type": "operational",
+      "summary": "The Real World suffered a data breach exposing nearly 1 million user accounts (emails, passwords) in May 2024 due to a misconfigured database.",
+      "confidence": "high",
+      "id": 8224
+    },
+    {
+      "date": "2025-06-20",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "The Real World subscription price escalated from $49.99 to $99.99/month over three years; platform uses high-risk gateway NMI and Radom Pay crypto processor after mainstream processors dropped it post-2022 deplatforming.",
+      "confidence": "high",
+      "id": 8221
+    },
+    {
+      "date": "2025-08-10",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "TRW affiliate TikTok clip tool (cliptok.jointherealworld.com) runs on trw-afm.online, hosted on Hetzner Germany (128.140.103.112), registered via Porkbun",
+      "confidence": "confirmed",
+      "id": 8258
+    },
+    {
+      "date": "2025-12-10",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "Live Radom Pay checkout (pay.radom.com/checkout/{uuid}) confirmed redirecting to Telegram after payment \u2014 consistent with TRW's crypto-then-community onboarding flow",
+      "confidence": "confirmed",
+      "id": 8261
+    },
+    {
+      "date": "2026-03-28",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "therealworld.com is owned by MTV/Viacom (Paramount), not Andrew Tate; HTTP 301 redirects to www.mtv.com/series/all-content; Tate's platform runs on jointherealworld.com",
+      "confidence": "confirmed",
+      "id": 8256
+    },
+    {
+      "date": "2026-03-28",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "TRW content library hosted on Hetzner dedicated server (91.98.19.94) in Dubai, UAE \u2014 operationally consistent with Tate's UAE base",
+      "confidence": "confirmed",
+      "id": 8257
+    }
+  ]
+}

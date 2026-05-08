@@ -1,0 +1,588 @@
+{
+  "name": "Oscrivia Limited",
+  "slug": "oscrivia-limited",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.320455",
+  "last_updated": "2026-04-03T02:37:04",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 11,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6,
+      "identity": 3,
+      "location": 1
+    },
+    "connection_types": {
+      "financial": 5,
+      "corporate": 4,
+      "controls": 2
+    },
+    "last_updated": "2026-04-03T02:37:04"
+  },
+  "findings": [
+    {
+      "id": 9198,
+      "finding_type": "financial",
+      "summary": "Oscrivia Limited (Cyprus, HE176751, incorporated 2006-05-15) held a joint security interest with Fulcrum Financial Partners LP on ALL 9 Centice Corp patents from 2012-02-15 to 2013-02-28. Oscrivia is registered at Karaiskaki 6, City House, 3032 Limassol, Cyprus. Sole director and secretary: Aleksei Kirpu (Estonian-Russian name). The City House address appears in ICIJ Paradise Papers database.",
+      "detail": null,
+      "source_datasets": [
+        "patents",
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:18:50",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO ODP assignment records (Reel/Frame 28026/275 security agreement, 30410/175 release); OpenCorporates entity cy/HE176751",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9209,
+      "finding_type": "financial",
+      "summary": "Oscrivia held security interests on Spectralus Inc. patents (2007) in addition to Centice (2012) -- repeat IP security vehicle",
+      "detail": "Oscrivia Limited (Cyprus HE176751) obtained a security agreement on 4 Spectralus Inc. laser/optics patents on 2007-09-20 (reel/frame 19855/164), five years before taking security on all 9 Centice patents in April 2012. Patents: 7742510, 7570676, 7724797, 7413635 -- all relating to solid-state laser technology with nonlinear frequency conversion. Inventors: Stepan Essaian (ex-Ioffe Institute St. Petersburg) and Andrei Shchegrov. Proves Oscrivia is a repeat IP security interest vehicle targeting US optics/photonics companies.",
+      "source_datasets": [
+        "patents"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:54:36",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO assignment records reel/frame 19855/164 (2007-09-20)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "assignee search Oscrivia returning 13 patents (9 Centice + 4 Spectralus)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9230,
+      "finding_type": "financial",
+      "summary": "Cyprus lending vehicle (HE176751) took security interests on Spectralus patents (2007) and co-lent on Centice patents (2012) with Fulcrum Financial Partners",
+      "detail": "Director/Secretary: Aleksei Kirpu. Also associated with Unifirm Limited, A.B. Aterra Resources Ltd, Ocean Management Limited. Incorporated 2006-05-15 in Limassol, Cyprus. Status: Active (reminder letter sent). Security agreement on Spectralus patents 7742510, 7413635, 7570676, 7724797 recorded 2007-09-20. Joint security interest with Fulcrum Financial Partners on 9 Centice patents recorded 2012-04-11, released 2013-05-14.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:26:08",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CyprusRegistry.com: Kirpu director/secretary",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates: HE176751",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO Assignment Database: security agreements",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9238,
+      "finding_type": "financial",
+      "summary": "Cyprus conduit (HE176751) linking S-Group/Mordashov to patent extraction. Registered at 6 Karaiskaki St, City House, Limassol -- same address as PwC Cyprus and SeverGroup/Lenta entities.",
+      "detail": "Oscrivia Limited (Cyprus HE176751, incorporated 2006-05-15, Karaiskaki 6, CITY HOUSE, 3032 Limassol) held security agreements on Spectralus patents from 2007 and jointly released Centice patent security with Fulcrum Financial Partners LP in 2013. Address is listed in ICIJ Offshore Leaks Database (Paradise Papers) and is the same building as PwC Cyprus Limassol and SeverGroup entities including Lenta PLC (78% owned by Mordashov). Oscrivia co-lent with Fulcrum Financial Partners LP (Delaware #4190977, est. 2006-09-26).",
+      "source_datasets": [
+        "patents",
+        "opencorporates",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:35:44",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Offshore Leaks: 6 Karaiskaki Street Limassol",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates cy/HE176751",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO Patent Assignment Database: security agreements on patents 7413635, 7570676, 7724797, 7742510",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9241,
+      "finding_type": "identity",
+      "summary": "Oscrivia is corporate secretary to three Mordashov-controlled Cyprus entities: Unifirm (HE136845), A.B. Aterra Resources (HE137069), Ocean Management (HE367691)",
+      "detail": "Oscrivia Limited (HE176751) serves as corporate secretary to three Mordashov-controlled Cyprus entities: Unifirm Limited (HE136845, the master Mordashov holding company documented in ICIJ Pandora Papers), A.B. Aterra Resources Ltd (HE137069, mining investments in Silver Bear Resources and GB Minerals), and Ocean Management Limited (HE367691). Aleksei Kirpu is sole director/secretary of Oscrivia and co-director (with Elena Boguslavskaya) of all three entities. This identifies Oscrivia as the administrative backbone of sanctioned oligarch Alexei Mordashov's Cyprus offshore infrastructure.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:18",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com HE136845 shows Oscrivia Limited as Secretary, Aleksei Kirpu and Elena Boguslavskaya as Directors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com HE137069 shows Oscrivia Limited as Secretary, Aleksei Kirpu as Director",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com HE367691 shows Oscrivia Limited as Secretary, Aleksei Kirpu and Elena Boguslavskaya as Directors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9244,
+      "finding_type": "identity",
+      "summary": "Oscrivia listed as Russian Federation entity in USPTO filings -- registered in Cyprus but operating identity as Russian",
+      "detail": "In USPTO patent assignment records for Centice Corp patents (e.g., US8417540B2), Oscrivia Limited is listed as being from the 'Russian Federation' in its capacity as secured party. This contradicts its Cyprus registration (HE176751) and suggests that either the filing party identified Oscrivia by its beneficial ownership (Mordashov/Russia) rather than its jurisdiction of incorporation, or that Oscrivia presented itself as a Russian entity in the transaction.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:56",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Google Patents US8417540: 'Secured Parties: Fulcrum Financial Partners, L.P. (North Carolina); Oscrivia Limited (Russian Federation)'",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9251,
+      "finding_type": "financial",
+      "summary": "Held security interest across BOTH Spectralus and Centice patent families, connecting two pipelines through same Cyprus/Moscow lender",
+      "detail": "USPTO assignment records show Oscrivia Limited (Karaiskaki 6, Limassol Cyprus / S-Group Capital Management Moscow) took security agreements on 4 Spectralus laser patents in Sept 2007, and was named jointly with Fulcrum Financial Partners in the Feb 2013 release of security interest on 9 Centice pharmaceutical verification patents.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 20:21:02",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO patent assignments database: Oscrivia security on Spectralus 7742510, 7413635, 7570676, 7724797; Release filings listing FULCRUM AND OSCRIVIA as joint releasors on 9 Centice patents",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9254,
+      "finding_type": "identity",
+      "summary": "Cyprus company lists Moscow address (S-Group Capital Management) on USPTO filings, indicating actual controllers operate from Russia",
+      "detail": "Despite being registered in Limassol Cyprus, Oscrivia Limited assignee address on USPTO records is S-GROUP CAPITAL MANAGEMENT, MOSCOW, RUSSIAN FEDERATION, 119435. S-Group Capital Management warrants investigation as a potential investment vehicle.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 20:21:31",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO assignment raw_json assigneeAddress for Oscrivia security agreements shows cityName MOSCOW with S-Group Capital Management",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9260,
+      "finding_type": "location",
+      "summary": "Bulk USPTO data confirms Oscrivia registered address: Karaiskaki 6, City House, Limassol, Cyprus 3032 on security agreement for Spectralus patents (reel 19855/164, 2007-09-20). Correspondent: John M. Naber, 1901 L Street NW Suite 800, Washington DC 20036-3506.",
+      "detail": null,
+      "source_datasets": [
+        "uspto"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:30:34",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-19855-164",
+          "source_quote": "OSCRIVIA LIMITED, KARAISKAKI 6 CITY HOUSE, LIMASSOL, CYPRUS 3032",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9314,
+      "finding_type": "financial",
+      "summary": "Bulk USPTO data reveals Oscrivia Limited held SEPARATE security agreement on Centice Corporation patents (reel 28026/275, April 11, 2012). Filed same reel as Fulcrum Financial Partners security. 9 Centice patents covered. Correspondent: Linda Blackwell at Wyrick Robbins Yates & Ponton LLP, 4101 Lake Boone Trail Suite 300, Raleigh NC 27607. This is a DIFFERENT law firm from Williams Mullen (Sajovec), which handled the later Readsboro and ASB transactions. Also confirms Oscrivia is the only Cyprus entity to hold security interests on US patents in the entire USPTO bulk database.",
+      "detail": null,
+      "source_datasets": [
+        "uspto"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:37:04",
+      "target_name": "Oscrivia Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-28026-275",
+          "source_quote": "SECURITY AGREEMENT, CENTICE CORPORATION to OSCRIVIA LIMITED, LIMASSOL CYPRUS, correspondent LINDA BLACKWELL WYRICK ROBBINS YATES & PONTON LLP",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4805,
+      "person_a": "Centice Corp",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "financial",
+      "description": "Oscrivia held joint security interest (with Fulcrum Financial Partners) on all 9 Centice patents from 2012-02-15 to 2013-02-28",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:19:17",
+      "profile_id": "dfj-network",
+      "other_person": "Centice Corp",
+      "other_person_slug": "centice-corp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO assignment records Reel/Frame 28026/275 and 30410/175",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4809,
+      "person_a": "Oscrivia Limited",
+      "person_b": "Spectralus Corporation",
+      "relationship_type": "financial",
+      "description": "Oscrivia held security agreement on 4 Spectralus laser patents from Sept 2007",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:34",
+      "profile_id": "epstein",
+      "other_person": "Spectralus Corporation",
+      "other_person_slug": "spectralus-corporation",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "USPTO assignment reel/frame 19855/164",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4824,
+      "person_a": "Centice Corporation",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "financial",
+      "description": "Oscrivia jointly held and released security agreements on Centice patents with Fulcrum Financial Partners (2012-2013)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:49",
+      "profile_id": "epstein",
+      "other_person": "Centice Corporation",
+      "other_person_slug": "centice-corporation",
+      "evidence": []
+    },
+    {
+      "id": 4825,
+      "person_a": "Oscrivia Limited",
+      "person_b": "Unifirm Limited",
+      "relationship_type": "corporate",
+      "description": "Oscrivia is corporate secretary to Unifirm (Mordashov master holding company). Both share Aleksei Kirpu as director and are registered at Karaiskaki 6, City House, Limassol.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:30",
+      "profile_id": "epstein",
+      "other_person": "Unifirm Limited",
+      "other_person_slug": "unifirm-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com HE136845: Oscrivia Limited as Secretary",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4826,
+      "person_a": "Oscrivia Limited",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "controls",
+      "description": "Oscrivia is the administrative/lending vehicle through which S-Group Capital Management (Mordashov's tech VC arm) operated its US technology investments. S-Group partner Gabidullin used Oscrivia's address as his directorship base for Centice Corp.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:38",
+      "profile_id": "epstein",
+      "other_person": "S-Group Capital Management",
+      "other_person_slug": "s-group-capital-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Joint security interests taken by Oscrivia on S-Group portfolio company patents",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC EDGAR Form D: Gabidullin at c/o Oscrivia address",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4827,
+      "person_a": "Alexei Mordashov",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "controls",
+      "description": "Mordashov is the ultimate beneficial owner of Oscrivia, which serves as secretary to his master holding company Unifirm and other entities. Oscrivia's director Kirpu exclusively serves Mordashov-controlled companies.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:44",
+      "profile_id": "epstein",
+      "other_person": "Alexei Mordashov",
+      "other_person_slug": "alexei-mordashov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry: Kirpu directs only Mordashov entities",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Pandora Papers: Unifirm documented as Mordashov holding",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4828,
+      "person_a": "A.B. Aterra Resources Ltd",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "corporate",
+      "description": "Oscrivia is corporate secretary to A.B. Aterra Resources Ltd (HE137069), Mordashov's mining investment vehicle. Kirpu is director of both.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:51",
+      "profile_id": "epstein",
+      "other_person": "A.B. Aterra Resources Ltd",
+      "other_person_slug": "ab-aterra-resources-ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CyprusRegistry.com HE137069: Oscrivia Limited as Secretary, Aleksei Kirpu as Director",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4829,
+      "person_a": "Aidar Gabidullin",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "corporate",
+      "description": "Gabidullin (S-Group partner) used Oscrivia's Cyprus address as his correspondence address for Centice Corp board directorship per SEC Form D filings",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:38:57",
+      "profile_id": "epstein",
+      "other_person": "Aidar Gabidullin",
+      "other_person_slug": "aidar-gabidullin",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC EDGAR Form D 0001415617-09-000003: Gabidullin at c/o Oscrivia Ltd Karaiskaki 6 City House Limassol",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4830,
+      "person_a": "Fulcrum Financial Partners LP",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "financial",
+      "description": "Joint security interest holders on all 9 Centice Corp patents from 2012-02-15 to 2013-02-28. Fulcrum is a legitimate Raleigh NC venture fund; Oscrivia is a Mordashov vehicle.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:39:04",
+      "profile_id": "epstein",
+      "other_person": "Fulcrum Financial Partners LP",
+      "other_person_slug": "fulcrum-financial-partners-lp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO assignment records: joint security agreement recorded 2012-04-11",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4812,
+      "person_a": "Oscrivia Limited",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "financial",
+      "description": "Oscrivia involved in S-Group Ventures / Russian Venture Fund investment arrangement per web search",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:40",
+      "profile_id": "epstein",
+      "other_person": "S-Group Capital Management",
+      "other_person_slug": "s-group-capital-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search results",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4818,
+      "person_a": "Alexei Mordashov",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "corporate",
+      "description": "Oscrivia registered at same Limassol address as PwC Cyprus and Mordashov SeverGroup entities. Joint lender on patent security agreements.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:31",
+      "profile_id": "epstein",
+      "other_person": "Alexei Mordashov",
+      "other_person_slug": "alexei-mordashov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Offshore Leaks",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates cy/HE176751",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

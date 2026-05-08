@@ -5,18 +5,18 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.922916",
+  "generated_at": "2026-05-07T23:07:36.286278",
   "last_updated": "2026-03-09T19:21:22",
   "stats": {
     "total_findings": 11,
     "total_connections": 2,
     "total_entities": 4,
     "finding_types": {
+      "legal": 1,
+      "intelligence": 5,
       "relationship": 2,
       "financial": 2,
-      "document": 1,
-      "intelligence": 5,
-      "legal": 1
+      "document": 1
     },
     "connection_types": {
       "corporate": 2
@@ -24,6 +24,63 @@
     "last_updated": "2026-03-09T19:21:22"
   },
   "findings": [
+    {
+      "id": 6390,
+      "finding_type": "legal",
+      "summary": "Rtskhiladze v. Mueller active as of 2025: DC Circuit reversed district court dismissal in August 2024, remanding retraction claim. District court issued opinion May 30 2025 granting/denying in part motion to dismiss; parties required to file joint status report by June 13 2025. Case terminated December 31 2025 per CourtListener. The Mueller footnote at issue states Rtskhiladze texted Cohen he 'stopped flow of some tapes from Russia' \u2014 the case is about defamation/retraction, not criminal liability.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:21:03",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:17256270",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.courtlistener.com/opinion/10595626/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6388,
+      "finding_type": "intelligence",
+      "summary": "EPA reconsideration timeline maps directly to Logical Strategies lobbying: Rtskhiladze hired Javelin Advisors in July 2025 (Q3 registration). On June 16 2025, EPA filed with Fifth Circuit to reconsider the chrysotile ban, seeking 30-month delay. On July 7 2025, EPA reversed course and withdrew the motion \u2014 shortly after public opposition. Rtskhiladze's Q4 2025 LDA report shows zero activity, consistent with lobbying objective collapsing after EPA withdrawal.",
+      "detail": null,
+      "source_datasets": [
+        "lda_senate"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-16",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:45",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:0603c969-Q4-2025-no-activity; web_search:EPA-withdrawal-july-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6364,
       "finding_type": "relationship",
@@ -184,31 +241,6 @@
       ]
     },
     {
-      "id": 6388,
-      "finding_type": "intelligence",
-      "summary": "EPA reconsideration timeline maps directly to Logical Strategies lobbying: Rtskhiladze hired Javelin Advisors in July 2025 (Q3 registration). On June 16 2025, EPA filed with Fifth Circuit to reconsider the chrysotile ban, seeking 30-month delay. On July 7 2025, EPA reversed course and withdrew the motion \u2014 shortly after public opposition. Rtskhiladze's Q4 2025 LDA report shows zero activity, consistent with lobbying objective collapsing after EPA withdrawal.",
-      "detail": null,
-      "source_datasets": [
-        "lda_senate"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:20:45",
-      "target_name": "Giorgi Rtskhiladze",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:0603c969-Q4-2025-no-activity; web_search:EPA-withdrawal-july-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6389,
       "finding_type": "intelligence",
       "summary": "OxyChem (Occidental Chemical) is the only US company that was still importing raw chrysotile asbestos as of 2023-2024, sourcing from Brazil and China (not Russia/Kazakhstan). Olin and Westlake had stopped importing by 2021 and 2016 respectively. The primary US beneficiaries of delaying the chrysotile ban are domestic chlor-alkali producers (OxyChem, Olin, Westlake), not Russian/Kazakh exporters directly \u2014 who lost US market access under the 2024 ban. Key question: who would specifically benefit from the EPA rule reconsideration if Rtskhiladze is the intermediary?",
@@ -227,38 +259,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "web_search:OxyChem-asbestos-imports-2023; ADAO:oxychem-lobbies-15year",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6390,
-      "finding_type": "legal",
-      "summary": "Rtskhiladze v. Mueller active as of 2025: DC Circuit reversed district court dismissal in August 2024, remanding retraction claim. District court issued opinion May 30 2025 granting/denying in part motion to dismiss; parties required to file joint status report by June 13 2025. Case terminated December 31 2025 per CourtListener. The Mueller footnote at issue states Rtskhiladze texted Cohen he 'stopped flow of some tapes from Russia' \u2014 the case is about defamation/retraction, not criminal liability.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:21:03",
-      "target_name": "Giorgi Rtskhiladze",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CL:17256270",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.courtlistener.com/opinion/10595626/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -306,6 +306,13 @@
       "target_name": "Giorgi Rtskhiladze",
       "profile_id": "tech-right",
       "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
         {
           "evidence_type": "ref",
           "evidence_ref": "https://www.sec.gov/edgar/search/#/q=search%3AUralasbest%3D1result-not-related",
@@ -408,7 +415,24 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Rtskhiladze v. Mueller active as of 2025: DC Circuit reversed district court dismissal in August 2024, remanding retraction claim. District court issued opinion May 30 2025 granting/denying in part motion to dismiss; parties required to file joint status report by June 13 2025. Case terminated December 31 2025 per CourtListener. The Mueller footnote at issue states Rtskhiladze texted Cohen he 'stopped flow of some tapes from Russia' \u2014 the case is about defamation/retraction, not criminal liability.",
+      "confidence": "high",
+      "id": 6390
+    },
+    {
+      "date": "2025-06-16",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "EPA reconsideration timeline maps directly to Logical Strategies lobbying: Rtskhiladze hired Javelin Advisors in July 2025 (Q3 registration). On June 16 2025, EPA filed with Fifth Circuit to reconsider the chrysotile ban, seeking 30-month delay. On July 7 2025, EPA reversed course and withdrew the motion \u2014 shortly after public opposition. Rtskhiladze's Q4 2025 LDA report shows zero activity, consistent with lobbying objective collapsing after EPA withdrawal.",
+      "confidence": "medium",
+      "id": 6388
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6384,
@@ -578,94 +602,5 @@
       "jurisdictional-arbitrage",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Giorgi Rtskhiladze",
-      "connections": [
-        {
-          "target": "Keith Schiller",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:52b3a9dd-8f59-48c4-929f-90b04e0697bf",
-          "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations."
-        },
-        {
-          "target": "George Sorial",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:52b3a9dd-8f59-48c4-929f-90b04e0697bf",
-          "description": "Rtskhiladze (Logical Strategies LLC founder) hired Sorial (Javelin Advisors co-founder) for $1.2M Q3 2025 EPA asbestos lobbying"
-        }
-      ],
-      "secondHop": {
-        "George Sorial": [
-          {
-            "target": "GreenMet",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Javelin Advisors",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Javelin Advisors LLC"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Sen. Katie Britt",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "Keith Schiller": [
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Rep. Ronny Jackson",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "GreenMet",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Drew Horn",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Ronny Jackson",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Javelin Advisors used Ronny Jackson as primary congressional contact for Pakistan rare earth lobbying. Jackson held in-person meeting May 1 2025 with Pakistani officials, documented in Javelin FARA filings."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

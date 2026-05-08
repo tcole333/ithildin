@@ -5,26 +5,65 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.906537",
-  "last_updated": "2026-03-11T16:35:25",
+  "generated_at": "2026-05-07T23:07:36.228182",
+  "last_updated": "2026-03-24T14:10:24",
   "stats": {
-    "total_findings": 12,
-    "total_connections": 8,
+    "total_findings": 14,
+    "total_connections": 9,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 4,
-      "legal": 2,
       "unknown": 4,
+      "intelligence": 5,
+      "legal": 3,
       "relationship": 2
     },
     "connection_types": {
-      "political": 1,
+      "political": 2,
       "legal": 1,
       "employment": 6
     },
-    "last_updated": "2026-03-11T16:35:25"
+    "last_updated": "2026-03-24T14:10:24"
   },
   "findings": [
+    {
+      "id": 6595,
+      "finding_type": null,
+      "summary": "Biden-era voting rights cases systematically dropped",
+      "detail": "AG Bondi ordered dismissal of all active Voting Section cases. Specific dropped cases: (1) Houston County GA at-large elections (filed Jan 16 2025, dismissed March 24 2025) - alleged dilution of Black voting power via at-large system. (2) Georgia SB 202 (voter suppression law) - DOJ had argued disproportionate effect on Black voters and intentional discrimination. (3) Texas congressional and state legislative redistricting maps - DOJ attorney told judges before trial that government wanted to dismiss all claims alleging maps dilute Black/Latino voting strength. (4) Virginia voter purge case (dismissed Jan 28 2025) - despite litigation revealing naturalized citizens erroneously removed, court had ordered restoration of 1600 improperly purged voters. These dismissals represent abandonment of VRA Section 2 enforcement on behalf of minority voters.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:28:59",
+      "target_name": "DOJ Voting Section",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/03/24/nx-s1-5332145/voting-rights-act-1965-justice-department",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.democracydocket.com/news-alerts/trumps-doj-drops-lawsuit-against-georgias-voter-suppression-bill/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.justsecurity.org/113745/wjh-trump-dismissal-voting-rights-lawsuits/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6670,
       "finding_type": "intelligence",
@@ -69,6 +108,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "DOJ press releases; Brennan Center tracker",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7229,
+      "finding_type": "legal",
+      "summary": "DOJ NVRA voter roll litigation campaign: DOJ sued 30+ states/jurisdictions for refusing to provide unredacted voter rolls. First wave Sept 2025: CA, ME, MI, MN, NH, NY, OR, PA. Second wave Dec 2025: DE, MD, NM, RI, VT, WA, CO, HI, MA, NV, GA, IL, WI, DC. Third wave Jan-Feb 2026: CT, AZ, VA, KY, NJ, OK, UT. Several early cases dismissed \u2014 CA (Jan 15, 2026), MI (Feb 10, 2026), OR (Feb 5, 2026) \u2014 DOJ appealed all on Feb 25, 2026. States provided public voter lists but refused unredacted versions containing SSNs and DL numbers. DOJ argued NVRA Section 8 requires full records; states argued PII not included in public inspection right.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:20",
+      "target_name": "DOJ Voting Section",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/research-reports/tracker-justice-department-requests-voter-information",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -165,45 +229,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.npr.org/2025/05/19/g-s1-66906/trump-civil-rights-justice-exodus",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6595,
-      "finding_type": null,
-      "summary": "Biden-era voting rights cases systematically dropped",
-      "detail": "AG Bondi ordered dismissal of all active Voting Section cases. Specific dropped cases: (1) Houston County GA at-large elections (filed Jan 16 2025, dismissed March 24 2025) - alleged dilution of Black voting power via at-large system. (2) Georgia SB 202 (voter suppression law) - DOJ had argued disproportionate effect on Black voters and intentional discrimination. (3) Texas congressional and state legislative redistricting maps - DOJ attorney told judges before trial that government wanted to dismiss all claims alleging maps dilute Black/Latino voting strength. (4) Virginia voter purge case (dismissed Jan 28 2025) - despite litigation revealing naturalized citizens erroneously removed, court had ordered restoration of 1600 improperly purged voters. These dismissals represent abandonment of VRA Section 2 enforcement on behalf of minority voters.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:28:59",
-      "target_name": "DOJ Voting Section",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.npr.org/2025/03/24/nx-s1-5332145/voting-rights-act-1965-justice-department",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.democracydocket.com/news-alerts/trumps-doj-drops-lawsuit-against-georgias-voter-suppression-bill/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.justsecurity.org/113745/wjh-trump-dismissal-voting-rights-lawsuits/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -518,6 +543,39 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7625,
+      "finding_type": "intelligence",
+      "summary": "DOJ requested voter rolls from 48 states and dismissed voting rights cases while staffed by former election deniers",
+      "detail": "Trump DOJ sent requests to 48+ states for complete voter registration lists with confidential agreements. At least 11 states complied despite 3 courts ruling compliance not required. DOJ voluntarily dismissed Biden-era Virginia voter purge lawsuit Jan 29 2025 (9 days after inauguration). DOJ Voting Section now led and staffed by people who spent years unsuccessfully disputing the 2020 election results per Brennan Center. Three major lawsuits challenge the EO: LULAC v Executive Office, California v Trump, Washington v Trump. Courts have blocked most provisions but Section 2b data collection partially underway. Louisiana found only 79 potential noncitizens among 74M ballots over 40 years. Utah found zero instances of noncitizen voting.",
+      "source_datasets": [
+        "web_search",
+        "govinfo"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:24",
+      "target_name": "DOJ Voting Section",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Brennan Center EO status tracker Mar 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DemocracyDocket Virginia dismissal Jan 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -688,10 +746,40 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3629,
+      "person_a": "DHS SAVE Database",
+      "person_b": "DOJ Voting Section",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:33",
+      "profile_id": "tech-right",
+      "other_person": "DHS SAVE Database",
+      "other_person_slug": "dhs-save-database",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/analysis-opinion/confidential-agreements-show-trump-administrations-plans-states-voter",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
   "timeline": [
+    {
+      "date": "2025-03-24",
+      "type": "finding",
+      "finding_type": null,
+      "summary": "Biden-era voting rights cases systematically dropped",
+      "confidence": "high",
+      "id": 6595
+    },
     {
       "date": "2025-09-12",
       "type": "finding",
@@ -707,6 +795,14 @@
       "summary": "DOJ sued 29 states + DC for voter registration rolls (Sep 2025-Feb 2026) in escalating waves: Wave 1 (Sep 16-25): CA, ME, MI, MN, NH, NY, OR, PA; Wave 2 (Dec 1-2): DE, MD, NM, RI, VT, WA; Wave 3 (Dec 11): CO, HI, MA, NV; Wave 4 (Dec 18): DC, GA, IL, WI; Wave 5 (Jan 6): AZ, CT; Wave 6 (Jan 16): VA; Wave 7 (Feb 26): KY, NJ, OK, UT",
       "confidence": "high",
       "id": 6648
+    },
+    {
+      "date": "2025-09-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOJ NVRA voter roll litigation campaign: DOJ sued 30+ states/jurisdictions for refusing to provide unredacted voter rolls. First wave Sept 2025: CA, ME, MI, MN, NH, NY, OR, PA. Second wave Dec 2025: DE, MD, NM, RI, VT, WA, CO, HI, MA, NV, GA, IL, WI, DC. Third wave Jan-Feb 2026: CT, AZ, VA, KY, NJ, OK, UT. Several early cases dismissed \u2014 CA (Jan 15, 2026), MI (Feb 10, 2026), OR (Feb 5, 2026) \u2014 DOJ appealed all on Feb 25, 2026. States provided public voter lists but refused unredacted versions containing SSNs and DL numbers. DOJ argued NVRA Section 8 requires full records; states argued PII not included in public inspection right.",
+      "confidence": "medium",
+      "id": 7229
     }
   ],
   "curation": {
@@ -824,240 +920,6 @@
       "private-order",
       "bridge-tax",
       "narrative-shield"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "DOJ Voting Section",
-      "connections": [
-        {
-          "target": "Pam Bondi",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-        },
-        {
-          "target": "Public Interest Legal Foundation",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "DOJ amicus PILF v. Bellows",
-          "description": "PILF data cited in DOJ letter to PA SOS Aug 2025; DOJ filed amicus for PILF in Maine case; Riordan revolving door"
-        },
-        {
-          "target": "Harmeet Dhillon",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "AAG Civil Rights Division, oversees Voting Section since April 2025"
-        },
-        {
-          "target": "Eric Neff",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket",
-          "description": "Acting Chief of DOJ Voting Section, replaced Maureen Riordan Dec 2025"
-        },
-        {
-          "target": "Christopher J. Gardner",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket",
-          "description": "Trial Attorney, DOJ Voting Section, hired by Dec 2025"
-        },
-        {
-          "target": "Brittany E. Bennett",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket",
-          "description": "Trial Attorney, DOJ Voting Section, hired by Dec 2025"
-        },
-        {
-          "target": "Megan Frederick",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket",
-          "description": "DOJ Voting Section attorney, hired by Dec 2025"
-        },
-        {
-          "target": "Joseph W. Voiland",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket",
-          "description": "Counsel on WI voter rolls case, appeared Feb 2026"
-        }
-      ],
-      "secondHop": {
-        "Christopher J. Gardner": [
-          {
-            "target": "Kenneth Chesebro",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Provided collective legal advice to GA fake electors alongside Chesebro in Dec 2020"
-          },
-          {
-            "target": "John Eastman",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Worked closely with Eastman to challenge GA 2020 results and advise fake electors"
-          }
-        ],
-        "Eric Neff": [
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
-          },
-          {
-            "target": "Maureen Riordan",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neff succeeded Riordan as DOJ Voting Section Acting Chief. Riordan from PILF pipeline; Neff from True the Vote pipeline."
-          },
-          {
-            "target": "Pam Bondi",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
-          },
-          {
-            "target": "True the Vote",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neff serves as Acting Chief under Dhillon's Civil Rights Division leadership"
-          }
-        ],
-        "Harmeet Dhillon": [
-          {
-            "target": "Pam Bondi",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
-          },
-          {
-            "target": "Judicial Watch",
-            "type": "political",
-            "strength": 1.0,
-            "description": "DOJ under Dhillon filed statement of interest supporting JW Oregon lawsuit; parallel NVRA enforcement"
-          },
-          {
-            "target": "Dhillon Law Group",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founded firm, sold to brother Mandeep Dhillon upon DOJ confirmation. Firm was primary outside counsel to Trump campaign, received ~4.5M in 2023."
-          },
-          {
-            "target": "Center for American Liberty",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founded 501c3 in 2018, raised over 15M for pro bono conservative legal services"
-          }
-        ],
-        "Joseph W. Voiland": [
-          {
-            "target": "Kenneth Chesebro",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Included in privileged email communications with Chesebro during Dec 2020 re safe harbor deadline and alternate elector logistics"
-          }
-        ],
-        "Pam Bondi": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
-          },
-          {
-            "target": "Ed Martin",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
-          },
-          {
-            "target": "GEO Group",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
-          },
-          {
-            "target": "National Fraud Enforcement Division",
-            "type": "political",
-            "strength": 0.7,
-            "description": "NFED initial MN focus parallels Bondi voter roll demands to MN; both use fraud claims as lever for state election data"
-          },
-          {
-            "target": "Heather Honey",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Bondi DOJ collects voter rolls and shares with DHS where Honey serves as Deputy Asst Sec of Election Integrity. Honey manages DHS side of the DOJ-DHS-SAVE voter data pipeline. Honey contradicted DHS spokesperson about data sharing occurring."
-          }
-        ],
-        "Public Interest Legal Foundation": [
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "J. Christian Adams (PILF president) served as TTV counsel in 2013 Colorado voter roll cases; PILF is co-party in TTV v. IRS (DC Circuit, 2025-26)"
-          },
-          {
-            "target": "Maureen Riordan",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "PILF litigation counsel 2021-June 2025, then DOJ Voting Section Acting Chief May 2025-Jan 2026"
-          },
-          {
-            "target": "Hans von Spakovsky",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "PILF board member; also DOJ Civil Rights Division 2002-2005 and Heritage Foundation Election Law Reform"
-          },
-          {
-            "target": "Cleta Mitchell",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "PILF Board Chair; also founded CPI Election Integrity Network; participated in Raffensperger call"
-          },
-          {
-            "target": "Bradley Impact Fund Inc",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "BIF gave PILF $3.31M over 2017-2022 for election law initiative"
-          }
-        ],
-        "Megan Frederick": [
-          {
-            "target": "Cleta Mitchell",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Frederick was Project Manager at Mitchell's Only Citizens Vote Coalition through 2024, worked hand in hand with EIN executive VP"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-09-12",
-        "label": "DOJ confirmed sharing state voter roll data with DHS for noncitizen identification. DHS SAVE program upgraded from single-name to bulk searches enabling scanning of millions of registrations. DOJ sent confidential MOUs to 12+ states requiring removal of any voters flagged as ineligible by federal review. Former DOJ lawyers warn this effectively creates a national voter roll under federal control. DHS also investigating naturalized US citizens who may have registered before naturalization.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6670
-      },
-      {
-        "date": "2025-09-16",
-        "label": "DOJ sued 29 states + DC for voter registration rolls (Sep 2025-Feb 2026) in escalating waves: Wave 1 (Sep 16-25): CA, ME, MI, MN, NH, NY, OR, PA; Wave 2 (Dec 1-2): DE, MD, NM, RI, VT, WA; Wave 3 (Dec 11): CO, HI, MA, NV; Wave 4 (Dec 18): DC, GA, IL, WI; Wave 5 (Jan 6): AZ, CT; Wave 6 (Jan 16): VA; Wave 7 (Feb 26): KY, NJ, OK, UT",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6648
-      }
     ]
   }
 }

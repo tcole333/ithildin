@@ -1,18 +1,27 @@
 {
   "name": "Red Planet Ventures",
   "slug": "red-planet-ventures",
-  "aliases": [
-    "Red Planet Ventures I LLC"
-  ],
+  "aliases": [],
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.872107",
+  "generated_at": "2026-05-07T23:07:36.214170",
   "last_updated": "2026-03-09T17:42:30",
   "stats": {
-    "total_findings": 24,
-    "total_connections": 2,
-    "total_entities": 0
+    "total_findings": 16,
+    "total_connections": 1,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 7,
+      "identity": 1,
+      "legal": 2,
+      "relationship": 1,
+      "financial": 5
+    },
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-03-09T17:42:30"
   },
   "findings": [
     {
@@ -24,7 +33,7 @@
         "registry"
       ],
       "confidence": "confirmed",
-      "date_of_event": null,
+      "date_of_event": "2025-02-25",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
       "created_at": "2026-03-06 03:55:47",
@@ -49,7 +58,7 @@
         "registry"
       ],
       "confidence": "confirmed",
-      "date_of_event": null,
+      "date_of_event": "2025-02-25",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
       "created_at": "2026-03-06 17:36:31",
@@ -76,7 +85,7 @@
         "web_search"
       ],
       "confidence": "medium",
-      "date_of_event": null,
+      "date_of_event": "2025-02-25",
       "claim_type": "inference",
       "verification_status": "unverified",
       "created_at": "2026-03-06 17:36:39",
@@ -86,6 +95,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Texas SOS records; EDGAR full-text search (0 hits); SEC Form D database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6220,
+      "finding_type": "legal",
+      "summary": "CourtListener cases search for 'PO Box 341886' returned 2 Musk-linked cases: (1) Tarantino v. Musk, 1:25-cv-00335, W.D. Texas, filed 2025-03-03, Nature of suit: 360 P.I. Other, Cause: 18:1030 Computer Fraud and Abuse Act, Judge: David A. Ezra. Filed 6 days after Red Planet Ventures formation. (2) Sigmon v. Musk, 2:23-cv-00757, S.D. West Virginia, filed 2023-11-22, Nature of suit: 190 Contract Other. Neither case names Red Planet Ventures as a party - address match only indicates Musk's PO Box is in court records.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:27:12",
+      "target_name": "Red Planet Ventures",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:69710653",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -212,31 +246,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "https://www.courtlistener.com/?q=2026-03-09",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6220,
-      "finding_type": "legal",
-      "summary": "CourtListener cases search for 'PO Box 341886' returned 2 Musk-linked cases: (1) Tarantino v. Musk, 1:25-cv-00335, W.D. Texas, filed 2025-03-03, Nature of suit: 360 P.I. Other, Cause: 18:1030 Computer Fraud and Abuse Act, Judge: David A. Ezra. Filed 6 days after Red Planet Ventures formation. (2) Sigmon v. Musk, 2:23-cv-00757, S.D. West Virginia, filed 2023-11-22, Nature of suit: 190 Contract Other. Neither case names Red Planet Ventures as a party - address match only indicates Musk's PO Box is in court records.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:27:12",
-      "target_name": "Red Planet Ventures",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CL:69710653",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -371,7 +380,7 @@
     {
       "id": 6226,
       "finding_type": "intelligence",
-      "summary": "Multiple secondary sources reference that the three-entity Red Planet Ventures structure 'mirrors' the LLC architecture Musk used in the Twitter/X acquisition. That acquisition used a similar multi-entity structure (X Holdings I, X Holdings II, X Holdings Corp at close). This is consistent with GP/LP/carry investment fund architecture where: Entity I = General Partner managing entity, Entity II = main LP fund vehicle, Entity III = carried interest or co-invest vehicle. Structure is pre-operational — no investors, no capital, no investments disclosed 13 months after formation.",
+      "summary": "Multiple secondary sources reference that the three-entity Red Planet Ventures structure 'mirrors' the LLC architecture Musk used in the Twitter/X acquisition. That acquisition used a similar multi-entity structure (X Holdings I, X Holdings II, X Holdings Corp at close). This is consistent with GP/LP/carry investment fund architecture where: Entity I = General Partner managing entity, Entity II = main LP fund vehicle, Entity III = carried interest or co-invest vehicle. Structure is pre-operational \u2014 no investors, no capital, no investments disclosed 13 months after formation.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -396,7 +405,7 @@
     {
       "id": 6239,
       "finding_type": "intelligence",
-      "summary": "SYNTHESIS: Red Planet Ventures I/II/III are dormant shelf LLCs — Musk/Birchall fund architecture created during DOGE tenure with zero activity in 13 months. Formed Feb 25 2025 (same day as X.AI Corp Form D — Birchall batch admin day). Triple GP/LP/carry structure at PO Box 341886 (Excession family office). No SEC Form D, no GLEIF LEI, no officers beyond Birchall, no amendments, no litigation, no news coverage beyond NYT Feb 2026 investigation, domain parked. 21 sources probed: zero hits outside TX registry. Investigative significance: entities were created with investment fund architecture during Musk government service but never activated — either (a) parked for future use post-DOGE, (b) abandoned, or (c) operating without required SEC filings. The absence of Form D 13 months post-formation, while Birchall simultaneously filed Form D for X.AI Corp on the same day, suggests deliberate non-filing or no capital deployment.",
+      "summary": "SYNTHESIS: Red Planet Ventures I/II/III are dormant shelf LLCs \u2014 Musk/Birchall fund architecture created during DOGE tenure with zero activity in 13 months. Formed Feb 25 2025 (same day as X.AI Corp Form D \u2014 Birchall batch admin day). Triple GP/LP/carry structure at PO Box 341886 (Excession family office). No SEC Form D, no GLEIF LEI, no officers beyond Birchall, no amendments, no litigation, no news coverage beyond NYT Feb 2026 investigation, domain parked. 21 sources probed: zero hits outside TX registry. Investigative significance: entities were created with investment fund architecture during Musk government service but never activated \u2014 either (a) parked for future use post-DOGE, (b) abandoned, or (c) operating without required SEC filings. The absence of Form D 13 months post-formation, while Birchall simultaneously filed Form D for X.AI Corp on the same day, suggests deliberate non-filing or no capital deployment.",
       "detail": null,
       "source_datasets": [
         "analysis_run"
@@ -413,206 +422,6 @@
           "evidence_type": "ref",
           "evidence_ref": "6211,6212,6213,6214,6219,6224,6227,6228,6236,6237",
           "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6211,
-      "finding_type": "financial",
-      "summary": "SEC EDGAR exact phrase search: zero hits for 'Red Planet Ventures I LLC' in EFTS full-text index. No CIK registered. No Form D filed as of March 2026. SEC company browser confirms no matching companies for 'Red Planet Ventures' as a filer name.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:24:36",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=EFTS-search-2026-03-09",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6227,
-      "finding_type": "legal",
-      "summary": "Red Planet Ventures I, LLC remains ACTIVE in TX as of 2026-03-09 with no officer amendments filed since formation. TX Taxpayer ID: 32098973491, SoS file 0805920034. officerInfo empty. No EIN/FEI on record.",
-      "detail": "TX Comptroller API entity lookup as of 2026-03-09: sosRegistrationStatus=ACTIVE, rightToTransactTX=ACTIVE, effectiveSosRegistrationDate=02/25/2025, sosFileNumber=0805920034, officerInfo=[]. No amendments or officer filings since initial formation.",
-      "source_datasets": [
-        "tx_comptroller"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:35:55",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:32098973491",
-          "source_quote": "sosRegistrationStatus=ACTIVE, officerInfo=[], effectiveSosRegistrationDate=02/25/2025, sosFileNumber=0805920034",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6228,
-      "finding_type": "identity",
-      "summary": "TX taxpayer IDs confirmed for all three Red Planet Ventures entities: I=32098973491, II=32098973384, III=32098973327. All share mailing address 2110 Ranch Road 620 S Unit 341886, Lakeway TX 78734-0277.",
-      "detail": "ZIP+4 78734-0277 consistent across all three entities. The 2110 Ranch Road 620 S address is the street address for PO Box 341886 (mailbox service in Lakeway TX). All three ACTIVE.",
-      "source_datasets": [
-        "tx_comptroller"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:35:55",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:32098973491",
-          "source_quote": "mailingAddressStreet=2110 RANCH ROAD 620 S UNIT 341886, mailingAddressCity=LAKEWAY, mailingAddressZip4=0277",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6231,
-      "finding_type": "legal",
-      "summary": "No SEC EDGAR filings found for Red Planet Ventures I, II, or III as of 2026-03-09. No Form D (Reg D exemption), no investment advisor registration, no fund filings. Consistent with fund not yet deployed or fund avoiding SEC registration.",
-      "detail": "EDGAR full-text search for phrase Red Planet Ventures returned 0 hits (timed_out=false, total.value=0). Searched EDGAR company search and full-text search.",
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:16",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:32098973491",
-          "source_quote": "EDGAR full-text search: hits.total.value=0 for phrase Red Planet Ventures",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6232,
-      "finding_type": "identity",
-      "summary": "Separate entity RED PLANET VENTURES LLC found in Delaware (company #7415573, incorporated 2023-04-19) with different registered agent (A Registered Agent Inc, 8 The Green Ste A, Dover DE 19901). No officers listed. Not related to TX Red Planet Ventures I/II/III based on different formation date, agent, and location.",
-      "detail": "OpenCorporates search for Red Planet Ventures in us_de returned one result: company 7415573, incorporated 2023-04-19, company type=Domestic Limited Liability Company, registered address=Kent DE, agent=A REGISTERED AGENT INC. No filings count. Likely unrelated entity.",
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:16",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:DE:7415573",
-          "source_quote": "company_number=7415573, jurisdiction_code=us_de, incorporation_date=2023-04-19, agent_name=A REGISTERED AGENT INC, filings_count=0",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6233,
-      "finding_type": "identity",
-      "summary": "Lateral check of TX SoS file numbers adjacent to Red Planet Ventures I (0805920034), II (0805920052), III (0805920058) found no co-formation cluster at zip 78734 or 78735. Adjacent entities are unrelated small businesses at different Texas addresses. The gaps between the three numbers (18 and 6) are consistent with normal daily TX filing volume.",
-      "detail": "TX Comptroller fileNumber search for numbers 0805920010 through 0805920064 (skipping the three Red Planet numbers) returned entities at diverse TX zip codes with no 78734/78735 addresses and different registered agents. No batch filing pattern detected.",
-      "source_datasets": [
-        "tx_comptroller"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:16",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:32098973491",
-          "source_quote": "Adjacent SoS file number lookup: all adjacent entities show different zip codes and registered agents; no cluster at 78734/78735",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6234,
-      "finding_type": "identity",
-      "summary": "Thriving Capital Ventures LLC (TX SoS 0806036943, formed 05/09/2025) not connected to Red Planet Ventures cluster. Different registered agent (Lawyer Aid Service Inc, 505 West 15th St Austin TX 78701), mailing address 6060 N Central Expy Ste 500 Dallas TX 75206. No shared personnel or addresses.",
-      "detail": "TX Comptroller entity 32100198111: effectiveSosRegistrationDate=05/09/2025, registeredAgentName=LAWYERS AID SERVICE INC, mailingAddressStreet=6060 N CENTRAL EXPY STE 500, mailingAddressCity=DALLAS, mailingAddressZip=75206. officerInfo=[]. Formed 2.5 months after Red Planet Ventures cluster, different agent, different city.",
-      "source_datasets": [
-        "tx_comptroller"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:30",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:32100198111",
-          "source_quote": "effectiveSosRegistrationDate=05/09/2025, registeredAgentName=LAWYERS AID SERVICE INC, mailingAddressCity=DALLAS, officerInfo=[]",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6237,
-      "finding_type": "legal",
-      "summary": "As of 2026-03-09 (13 months post-formation), all three Red Planet Ventures entities have exactly one TX SoS filing each: Certificate of Formation dated 2025-02-25. No amendments, annual reports, or ownership changes filed. TX LLC law does not require annual reports, so absence of additional filings is legally consistent but provides no new public officer data.",
-      "detail": "OpenCorporates filings endpoint for us_tx/0805920034: filings_count=1, one filing: {title: Certificate of Formation, filing_type: Certificate of Formation, date: 2025-02-25}. Same for II and III. TX LLCs do not file mandatory annual reports (unlike corporations), so absence of follow-on filings is expected.",
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:38:08",
-      "target_name": "Red Planet Ventures I LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:0805920034",
-          "source_quote": "filings_count=1, filings[0]={title: Certificate of Formation, date: 2025-02-25}",
           "source_page": null,
           "assessment": null
         }
@@ -634,32 +443,43 @@
       "other_person": "Elon Musk",
       "other_person_slug": "elon-musk",
       "evidence": []
-    },
-    {
-      "id": 3192,
-      "person_a": "Jared Birchall",
-      "person_b": "Red Planet Ventures I LLC",
-      "relationship_type": "corporate",
-      "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920034.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:36:49",
-      "profile_id": "tech-right",
-      "other_person": "Jared Birchall",
-      "other_person_slug": "jared-birchall",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "REGISTRY:TX:0805920034",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-02-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Red Planet Ventures I, II, III: 3-fund VC structure created 2/25/2025, one month after DOGE launch, at Musk family office address",
+      "confidence": "confirmed",
+      "id": 5886
+    },
+    {
+      "date": "2025-02-25",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Red Planet Ventures I/II/III formed Feb 25, 2025 - sequential Texas LLCs at Musk PO Box",
+      "confidence": "confirmed",
+      "id": 5909
+    },
+    {
+      "date": "2025-02-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Red Planet Ventures formed 36 days into DOGE tenure - no SEC Form D filings found",
+      "confidence": "medium",
+      "id": 5910
+    },
+    {
+      "date": "2025-03-03",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "CourtListener cases search for 'PO Box 341886' returned 2 Musk-linked cases: (1) Tarantino v. Musk, 1:25-cv-00335, W.D. Texas, filed 2025-03-03, Nature of suit: 360 P.I. Other, Cause: 18:1030 Computer Fraud and Abuse Act, Judge: David A. Ezra. Filed 6 days after Red Planet Ventures formation. (2) Sigmon v. Musk, 2:23-cv-00757, S.D. West Virginia, filed 2023-11-22, Nature of suit: 190 Contract Other. Neither case names Red Planet Ventures as a party - address match only indicates Musk's PO Box is in court records.",
+      "confidence": "confirmed",
+      "id": 6220
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6212,
@@ -782,94 +602,5 @@
       "jurisdictional-arbitrage",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Red Planet Ventures",
-      "connections": [
-        {
-          "target": "Elon Musk",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "RPV I/II/III formed at Musk PO Box 341886, same address as Excession LLC family office and 15+ Musk entities"
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "REGISTRY:TX:0805920034",
-          "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920034."
-        }
-      ],
-      "secondHop": {
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Jared Birchall": [
-          {
-            "target": "X.AI Holdings Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall signed both Form D filings as Corporate Secretary of X.AI Holdings Corp"
-          },
-          {
-            "target": "Musk Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall controls Musk Foundation grantmaking and is president of The Foundation, the primary grant recipient"
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is president of The Foundation (EIN 92-0742101), which received $137M from Musk Foundation in 2023 and $470M in 2024"
-          },
-          {
-            "target": "Neuralink Corporation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as CFO and government POC on Neuralink SAM.gov registration (UEI JGGFP357J8B8). PSC codes indicate positioning for federal R&D medical contracts."
-          },
-          {
-            "target": "The Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall is President of The Foundation while also heading Excession LLC family office and serving as officer at Neuralink, xAI, Boring Company, and Foundation Security"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

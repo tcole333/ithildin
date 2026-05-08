@@ -6,11 +6,11 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.903139",
-  "last_updated": "2026-03-09T17:57:28",
+  "generated_at": "2026-05-07T23:07:36.260506",
+  "last_updated": "2026-03-24T00:16:14",
   "stats": {
     "total_findings": 12,
-    "total_connections": 14,
+    "total_connections": 15,
     "total_entities": 0,
     "finding_types": {
       "legal": 3,
@@ -18,11 +18,11 @@
     },
     "connection_types": {
       "corporate": 5,
-      "financial": 7,
+      "financial": 8,
       "employment": 1,
       "owns": 1
     },
-    "last_updated": "2026-03-09T17:57:28"
+    "last_updated": "2026-03-24T00:16:14"
   },
   "findings": [
     {
@@ -477,7 +477,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC 8-K BGC Group 2025-10-06; EDGAR CIK 1094831",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1094831",
           "source_quote": null,
           "source_page": null
         }
@@ -674,7 +674,35 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions:Q16194176,Bloomberg:2025-05-19",
+          "evidence_ref": "OpenSanctions:Q16194176",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3820,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Critical Metals Corp",
+      "relationship_type": "financial",
+      "description": "Cantor was sole book-running manager for Sizzle SPAC IPO ($155M), converted $5.7M deferred underwriting fee to 1,247,250 CRML shares, sold 87% within months of lock-up expiry",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:14",
+      "profile_id": "tech-right",
+      "other_person": "Critical Metals Corp",
+      "other_person_slug": "critical-metals-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1829322",
           "source_quote": null,
           "source_page": null
         }
@@ -814,294 +842,5 @@
       "enabler-gradient",
       "manufactured-dependency"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Cantor Fitzgerald",
-      "connections": [
-        {
-          "target": "US Commerce Department",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:Cantor-MLStrategies-2020",
-          "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head."
-        },
-        {
-          "target": "Tether Operations Limited",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "LDA:Cantor-MLStrategies-2020,LDA:Cantor-Checkmate-2025Q4,LDA:Tether-FTI-2022-2023,LDA:Tether-Continental-2023",
-          "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues."
-        },
-        {
-          "target": "Howard Lutnick",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC 13D/A; FEC donor records",
-          "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address."
-        },
-        {
-          "target": "Tether Holdings Limited",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "LDA lobbying disclosures; public reporting on CF-Tether relationship",
-          "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total)."
-        },
-        {
-          "target": "BGC Group",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC 8-K BGC Group 2025-10-06; EDGAR CIK 1094831",
-          "description": "Cantor Fitzgerald LP is the controlling entity of BGC Group Inc. CF Group Management Inc (CFGM) is the managing general partner of Cantor Fitzgerald LP. CFGM voting shares transferred from Howard to Brandon Lutnick trusts for 200K. BGC Group trades on Nasdaq (ticker BGC), CIK 1094831, HQ 499 Park Ave NY."
-        },
-        {
-          "target": "Parabridge International Services",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "EFTA01249207",
-          "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers."
-        },
-        {
-          "target": "Tether Investments",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "CoinDesk:Most Influential 2025-12-09",
-          "description": "Cantor Fitzgerald custodies approximately 99% of Tether B+ reserves (primarily US Treasuries). Cantor purchased convertible 5% equity stake in Tether for M+. Tether contributed 24,500 BTC to Twenty One Capital which was created via Cantor-sponsored SPAC. Tether purchased ALL PIPE Bitcoin (.7M) on behalf of XXI and SoftBank."
-        },
-        {
-          "target": "Brandon Lutnick",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
-          "description": "Chairman of Cantor Fitzgerald LP and CEO/Chairman of Cantor Equity Partners Inc (SPAC). Previously was under Howard Lutnick. Now runs the serial SPAC factory (CEP I through VI) while Cantor custodies Tether reserves and holds 5% equity stake in Tether."
-        },
-        {
-          "target": "USAT Holdings Inc",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "tether.io",
-          "description": "Cantor Fitzgerald serves as USAT reserve custodian and preferred primary dealer"
-        },
-        {
-          "target": "SoftBank Group",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC S-4 Twenty One Capital, Cantor press release 2025-04-23",
-          "description": "SoftBank and Cantor Fitzgerald co-founded Twenty One Capital (Bitcoin treasury company) via SPAC merger. SoftBank contributed $900M BTC initially, then bought additional $780M shares. Brandon Lutnick (son of Commerce Sec Howard Lutnick) chairs Cantor. Tether is third partner. Sullivan & Cromwell advised SoftBank."
-        },
-        {
-          "target": "Tether",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://www.theblock.co/post/327961/lutnick-cantor-fitzgerald-negotiated-a-5-ownership-stake-in-tether-wsj",
-          "description": "Cantor holds 5% ownership stake in Tether (~$600M), manages majority of Tether's $133B reserves (US Treasuries), and earns tens of millions in annual fees. Also manages reserves for Tether's GENIUS Act-compliant USAT stablecoin. Brandon Lutnick (Howard's son) launched Twenty One Capital with Tether/SoftBank."
-        },
-        {
-          "target": "USA Rare Earth",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "1.5B PIPE led by Cantor Fitzgerald"
-        },
-        {
-          "target": "Critical Metals Corp",
-          "type": "owns",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:rel/2043850",
-          "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
-        },
-        {
-          "target": "Howard Lutnick",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "OpenSanctions:Q16194176,Bloomberg:2025-05-19",
-          "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald until becoming US Commerce Secretary. Divested ownership to sons Brandon (Chairman) and Kyle (Exec Vice Chairman) via trusts May 2025."
-        }
-      ],
-      "secondHop": {
-        "Brandon Lutnick": [
-          {
-            "target": "Howard Lutnick",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howard divested all BGC Group/Cantor Fitzgerald holdings to trusts controlled by Brandon per Oct 2025 SEC filings. CFGM voting shares for 200K. Brandon controls 23.4% BGC Group with 75.1% voting power."
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Brandon (age 27) became Chairman of Cantor Fitzgerald when Howard became Commerce Secretary Feb 2025. Brandon also chairs Cantor Equity Partners (CEP SPAC that merged into Twenty One Capital/XXI). Kyle Lutnick is exec vice chairman. Family maintains control of firm while father sets government policy affecting firm interests."
-          },
-          {
-            "target": "Tether Investments",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Brandon Lutnick chaired Cantor Equity Partners SPAC that merged with Tether-controlled Twenty One Assets to create XXI. Cantor EP Holdings (Sponsor) retained convertible notes and shares."
-          },
-          {
-            "target": "Twenty One Capital",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO and Chairman of Cantor Equity Partners Inc SPAC that merged with Twenty One Capital. Son of Commerce Secretary Howard Lutnick. Now Chairman of Cantor Fitzgerald LP which sponsored the SPAC, served as financial advisor, and custodies Tether reserves."
-          },
-          {
-            "target": "Kyle Lutnick",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-leaders of Cantor Fitzgerald post-divestiture; Brandon CEO/Chairman, Kyle Exec VP"
-          }
-        ],
-        "Critical Metals Corp": [
-          {
-            "target": "GreenMet",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tanbreez offtake partnership for DoD REE supply"
-          },
-          {
-            "target": "GreenMet",
-            "type": "contracts_with",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Matt Schnappauf",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
-          },
-          {
-            "target": "Kenneth Raymond Deayton",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Swiss Commodity Re Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "Howard Lutnick": [
-          {
-            "target": "Paolo Ardoino",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Lutnick (Commerce Sec, former Cantor CEO) has multi-layered financial relationship with Ardoino (Tether CEO): Cantor custodies Tether's 127B+ in T-bills, holds 5% equity stake via convertible debt, co-launched Twenty One Capital SPAC, and serves as designated custodian for USAT stablecoin"
-          },
-          {
-            "target": "Tether Investments",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howard Lutnick's Cantor Fitzgerald manages Tether's 80B+ Treasury reserves and holds a 5% stake in Tether. Lutnick publicly vouched for Tether before becoming Commerce Secretary. His son Brandon chaired the SPAC that merged with Tether's Twenty One Assets."
-          },
-          {
-            "target": "Twenty One Capital",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Former CEO of Cantor Fitzgerald which set up the CEP SPAC, custodies Tether reserves, and holds 5% equity in Tether. Confirmed as Commerce Secretary Feb 24, 2025. Divested Cantor stakes to children including Brandon. Commerce Dept influences crypto regulation affecting Tether, XXI, and the SPAC vehicle his firm created."
-          },
-          {
-            "target": "Roberto Velez",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "BGC whistleblower with board-level Lutnick contact per FBI FD-302"
-          },
-          {
-            "target": "Sarah Ferguson",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor gave Ferguson office space above CF HQ for Children in Crisis charity"
-          }
-        ],
-        "SoftBank Group": [
-          {
-            "target": "Tether",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Co-investors in Twenty One Capital (Bitcoin treasury). Tether contributed $1.6B BTC, SoftBank $900M BTC via Stellar Beacon LLC. Tether is majority owner. Both connected via Cantor Fitzgerald (Cantor manages Tether's treasury, processes redemptions)."
-          },
-          {
-            "target": "Sullivan & Cromwell LLP",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "S&C advises SoftBank on Arm IPO, Twenty One Capital, DigitalBridge, T-Mobile monetization; simultaneously advises OpenAI on Stargate and SB Energy"
-          },
-          {
-            "target": "MGX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Co-investors in Stargate LLC (SoftBank 40%, MGX 10%). Both participate in Stargate UAE with G42, Nvidia, Oracle, OpenAI, Cisco. MGX launched by Mubadala/G42 in 2024 with $100B AUM target. MGX also invested in OpenAI secondary sale. Both funded by Middle East sovereign wealth."
-          },
-          {
-            "target": "OpenAI",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SoftBank invested $40B in OpenAI (11% stake, 2nd largest shareholder). Co-founders of Stargate LLC (40% each). OpenAI has operational responsibility, SoftBank financial. $1B joint investment in SB Energy. SoftBank sold Nvidia stake to fund OpenAI investment."
-          },
-          {
-            "target": "Saudi PIF",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Saudi PIF was anchor LP in Vision Fund 1 ($45B committed, ~$35B deployed). PIF and Mubadala together provided ~2/3 of VF1's $93B capital. PIF did NOT invest in Vision Fund 2. SoftBank forayed into Saudi Arabia in 2021. Vision Fund connected SoftBank to both Saudi and UAE sovereign wealth."
-          }
-        ],
-        "Tether": [
-          {
-            "target": "Twenty One Capital",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tether Investments S.A. de C.V. (El Salvador) is PIPE investor contributing Bitcoin to business combination"
-          },
-          {
-            "target": "Bo Hines",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "CEO of Tether USA USAT stablecoin division, appointed Sep 2025, 22 days after White House resignation"
-          }
-        ],
-        "Tether Investments": [
-          {
-            "target": "iFinex Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tether and Bitfinex (iFinex Inc, BVI) are related entities. They jointly contributed 31,500 BTC to Twenty One Assets LLC and together hold 65.7% Class A and 74.7% Class B Stock (voting control). Both are Sellers under the Business Combination Agreement. Tether is an El Salvador sociedad anonima de capital variable."
-          }
-        ],
-        "Parabridge International Services": [
-          {
-            "target": "Deutsche Bank",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "PIS had Deutsche Bank accounts in Singapore and Hong Kong. Hired ex-Deutsche Bank CEO as Global President."
-          },
-          {
-            "target": "Children in Crisis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "PIS handled UK wire transfers for Cantor charity day funds to CIC and Stowe School"
-          }
-        ],
-        "Tether Operations Limited": [
-          {
-            "target": "Carlos Trujillo",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Former Trump-appointed US Ambassador to OAS Carlos Trujillo lobbied for Tether Operations Limited through Continental Strategy LLC in 2023 (Q1-Q3, $450K), on Banking and stablecoin legislation targeting Congress."
-          }
-        ],
-        "USAT Holdings Inc": [
-          {
-            "target": "Anchorage Digital Bank",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Anchorage Digital Bank NA issues USAT stablecoin; first federally chartered crypto bank to issue a regulated stablecoin"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

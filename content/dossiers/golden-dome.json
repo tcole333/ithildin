@@ -6,23 +6,24 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.909627",
-  "last_updated": "2026-03-09T04:45:37",
+  "generated_at": "2026-05-07T23:07:36.209720",
+  "last_updated": "2026-03-23T19:28:26",
   "stats": {
-    "total_findings": 12,
-    "total_connections": 6,
+    "total_findings": 16,
+    "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "financial": 10,
-      "intelligence": 2
+      "financial": 13,
+      "intelligence": 2,
+      "legal": 1
     },
     "connection_types": {
       "financial": 3,
       "corporate": 1,
       "contracts_with": 1,
-      "political": 1
+      "political": 2
     },
-    "last_updated": "2026-03-09T04:45:37"
+    "last_updated": "2026-03-23T19:28:26"
   },
   "findings": [
     {
@@ -354,6 +355,165 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7176,
+      "finding_type": "financial",
+      "summary": "Golden Dome missile defense program announced by Trump May 20, 2025. FY2026 defense appropriations bill (passed Feb 3, 2026) includes $13.4B for Golden Dome: $9.6B for MDA programs, $3.8B for Space Force. Reconciliation bill provided additional $23B in mandatory funding. MDA created SHIELD MA-IDIQ contract vehicle worth up to $151B over 10 years (3-year base + 3 two-year options). RFP posted Sep 10, 2025 on SAM.gov. 2,100 companies awarded IDIQ seats from 2,463 applicants. Congress complained DoD has not provided complete budgetary details, master deployment schedule, cost schedule, performance metrics, or finalized system architecture.",
+      "detail": "SHIELD contract uses FAR 16.505 ordering procedures. 19 work areas including R&D, prototyping, experimentation, systems engineering, weapons design, data mining, modernization, cybersecurity, and modeling/simulation. Total program cost estimates range from $175B (public estimates) to the $151B SHIELD ceiling. Congress has demanded detailed breakdown within two months showing how discretionary and mandatory funds are used through 2027. Appropriators stated they were unable to effectively assess resources available to specific program elements.",
+      "source_datasets": [
+        "web_search",
+        "govinfo"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:42:17",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov SHIELD RFP Sep 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "govinfo:CREC-2025-09-08 NDAA debate",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "spacenews defense appropriations FY2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7179,
+      "finding_type": "financial",
+      "summary": "Space Force awarded first Golden Dome space-based interceptor (SBI) prototype contracts on Nov 25, 2025 via Other Transaction Agreements (OTAs). Awardees: Northrop Grumman, Lockheed Martin, Anduril Industries, and True Anomaly. Initial awards valued under $9M each (some sources say $120K prize money, others $10M). Contracts focus on boost-phase interceptors to shoot down missiles minutes after launch. Separate competition for kinetic midcourse interceptors launched Dec 2025 with awards expected Feb 2026. No production contract decisions expected until after 2028.",
+      "detail": "Space Force initially withheld contractor names citing enhanced security measures. OTA mechanism allows bypassing normal FAR procurement rules. Anduril's selection signals it is being treated as full-spectrum prime contractor, not just a software/drone company. True Anomaly is a startup - inclusion suggests deliberate effort to include non-traditional contractors. The boost-phase intercept mission requires split-second decision-making, favoring software-first approaches. Executive order calls for prototype by 2028.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:42:30",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "airandspaceforces.com Dec 2025 article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "breakingdefense.com Nov 2025 article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7186,
+      "finding_type": "legal",
+      "summary": "Congressional oversight of Golden Dome procurement severely hampered. Despite appropriating $13.4B (FY2026) and $23B (reconciliation), Congress lacks: complete budgetary details, master deployment schedule, cost schedule, performance metrics, finalized system architecture. Space Force used OTAs for interceptor prototypes, bypassing standard FAR disclosure requirements. SHIELD IDIQ awarded 2,100 companies - so broad it provides minimal competitive information. 468 GovInfo congressional records reference Golden Dome, but FY2026 defense appropriations bill had to demand detailed spending breakdown with quarterly reporting requirements through 2027. GAO has 973 reports on MDA historically noting flexibility that reduces transparency.",
+      "detail": "Three mechanisms reduce oversight: (1) OTAs for SBI prototypes mean Space Force does not have to disclose contract values or awardee names, (2) SHIELD IDIQ with 2,100 awardees is so broad that individual task order competition is opaque, (3) mandatory reconciliation funding bypasses normal appropriations committee review. The combination means the largest new defense program is being procured with minimal public visibility into who gets what. Congress is essentially funding a program whose architecture it has not been briefed on.",
+      "source_datasets": [
+        "web_search",
+        "govinfo"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:43:40",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "defenseone.com Jan 2026 oversight article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "govinfo NDAA debate records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "spacenews FY2026 defense appropriations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7453,
+      "finding_type": "financial",
+      "summary": "Golden Dome FY2026 appropriation: $13.4B for space/missile defense; total program est. $185B",
+      "detail": "Trump announced Golden Dome missile defense system May 20, 2025. FY2026 defense appropriations (passed Feb 3, 2026) includes $13.4B for space and missile defense systems. Gen. Michael Guetlein (Director of Golden Dome initiative at Dept of War) increased cost estimate by $10B to $185B to accelerate space-based capabilities. Dec 2025 White House executive order calls for missile shield prototype by 2028. NDAA FY2026 (PLAW-119publ60, signed Dec 18 2025) includes Pituffik Space Base authorizations. Senate hearing (CHRG-119shrg61273, Feb 12 2025) on Greenland's geostrategic importance preceded program announcements.",
+      "source_datasets": [
+        "govinfo",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:28:26",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Executive Gov reporting on Guetlein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CHRG-119shrg61273",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo PLAW-119publ60",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Scientific American reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -445,6 +605,21 @@
       "profile_id": "tech-right",
       "other_person": "Kenneth Howery",
       "other_person_slug": "kenneth-howery",
+      "evidence": []
+    },
+    {
+      "id": 3608,
+      "person_a": "Golden Dome",
+      "person_b": "Ken Howery",
+      "relationship_type": "political",
+      "description": "Howery is US Ambassador to Denmark (confirmed Oct 2025), which controls Greenland/Pituffik Space Base - essential ground infrastructure for Golden Dome satellite constellation. Howery co-founded Founders Fund which invested $1B in Anduril (Golden Dome SBI prototype contractor).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:45:02",
+      "profile_id": "tech-right",
+      "other_person": "Ken Howery",
+      "other_person_slug": "ken-howery",
       "evidence": []
     }
   ],
@@ -568,188 +743,5 @@
       "bridge-tax",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Golden Dome",
-      "connections": [
-        {
-          "target": "Donald Trump Jr",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Trump Jr via 1789 Capital holds investments in SpaceX and Anduril, both frontrunners for $151B+ Golden Dome contracts. Father is president who announced the program."
-        },
-        {
-          "target": "Emil Michael",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Michael chairs Missile Defense Executive Board; MDA reports directly to USD(R&E). Controls requirements driving Golden Dome procurement."
-        },
-        {
-          "target": "Donald Trump Jr",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Trump Jr partner at 1789 Capital (2B AUM) holding SpaceX, Anduril, Hadrian -- all Golden Dome contractors"
-        },
-        {
-          "target": "SpaceX/Starshield",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Starshield NRO spy constellation provides infrastructure base for Golden Dome custody layer; $2B contract expected for 400-1000 tracking satellites"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Anduril received SBI prototype contract Nov 2025 and selected for $151B SHIELD IDIQ Dec 2025. Frontrunner for space-based interceptor component."
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "As Ambassador to Denmark, oversees Pituffik Space Base (stated priority #3). Pituffik NOC upgrade for Golden Dome data throughput. Primary US diplomatic channel for Greenland infrastructure decisions."
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          }
-        ],
-        "Donald Trump Jr": [
-          {
-            "target": "Omeed Malik",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Trump Jr is partner at 1789 Capital, co-founded by Malik. Joined Nov 2024 after father won presidential election. Fund grew from 200M to 2B AUM during his tenure."
-          },
-          {
-            "target": "Rebekah Mercer",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both partners at 1789 Capital. Mercer is co-founder and major investor (likely provided seed capital -- initial Form D showed 10M from 1 investor). Mercer also key Heritage Foundation trustee (Project 2025) and Cambridge Analytica funder."
-          },
-          {
-            "target": "American Daybreak",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Organized his Greenland trip"
-          },
-          {
-            "target": "Chase Herro",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Trump Jr is Web3 Ambassador for WLFI. Herro is co-founder/Executive Officer. Both promoted WLFI on social media livestream."
-          }
-        ],
-        "Emil Michael": [
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne hosted the Nov 2014 Waverly Inn dinner where Michael proposed spending $1M against journalists; Osborne was Uber consultant 2013-2017"
-          },
-          {
-            "target": "Eric Schmidt",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Schmidt served as Special Advisor to DPCM Capital, Michael's SPAC that took D-Wave Quantum public"
-          },
-          {
-            "target": "Travis Kalanick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Kalanick's closest confidant and right-hand man at Uber 2013-2017; ousted together by Holder Report; co-raised $15B including $3.5B Saudi PIF investment"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both at top Pentagon: Feinberg DepSecDef, Michael USD(R&E)"
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Michael was Coatue senior advisor (Oct 2018+); Laffont's Coatue co-led $30B Anthropic Series G (Feb 2026) while Michael led Pentagon Anthropic standoff"
-          }
-        ],
-        "Kenneth Howery": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Founders Fund co-founders; Howery is Amb. to Denmark holding Founders Fund, Palantir, Neuralink, Tesla"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Founders Fund. Howery holds carried interest in FF Management LLCs I-IV, Alpha Management. Thiel network placed Howery as Ambassador to Denmark."
-          },
-          {
-            "target": "Luke Nosek",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal co-founders, Founders Fund co-founders. Nosek left FF 2017 to start Gigafund (SpaceX-focused). Howery holds promissory notes from Gigafund Management Company LLC and Gigafund 0.2 LP $250M-500M."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          },
-          {
-            "target": "Stephen Oskoui",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howery is LP investor in Gigafund 0.2 LP (1 of 4 investors, 250M-500M position) managed by Oskoui and Nosek"
-          }
-        ],
-        "SpaceX/Starshield": [
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "SpaceX Starshield provides satellite communications backbone for LUCAS drones and autonomous systems in Iran operations"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

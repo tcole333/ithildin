@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.904595",
+  "generated_at": "2026-05-07T23:07:36.261402",
   "last_updated": "2026-02-27T15:19:23",
   "stats": {
     "total_findings": 12,
@@ -64,7 +64,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions ID Q5079897 us_fed_enforcements dataset; Federal Reserve Board press releases 2004-08-24 and 2005-02-10",
+          "evidence_ref": "OpenSanctions:ID",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -553,97 +553,5 @@
       "enabler-gradient",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Charles Kushner",
-      "connections": [
-        {
-          "target": "Benjamin Brafman",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "Village Voice Feb 2021",
-          "description": "Brafman secured Trump pardon for Charles Kushner (Dec 23 2020). Kushner is Jared Kushner's father and Trump's in-law."
-        },
-        {
-          "target": "Jared Kushner",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "FEC records 2024; NY DOS filings; DOJ case 2:04-cr-00580",
-          "description": "Father-son. Charles founded Kushner Companies; convicted 2005; Jared assumed control via Oct 2008 DE LLC restructuring. Coordinated 2024 political donations. Charles pardoned Dec 2020 now Ambassador to France."
-        },
-        {
-          "target": "Murray Huberfeld",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "Federal Reserve enforcement orders 2004-2005; Platinum Partners prosecution records",
-          "description": "Co-investors in NorCrown Trust; Huberfeld later ran Platinum Partners fraud; Kushner family member Stadtmauer lent 22M to Platinum"
-        },
-        {
-          "target": "Brookfield Asset Management",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "OGE ethics agreement April 2025 Appendix B; Brookfield 666 Fifth Ave lease 2018",
-          "description": "Held Brookfield equity while Brookfield subsidiary executed 99-year lease bailout of 666 Fifth Avenue; required to divest for ambassadorship"
-        },
-        {
-          "target": "Millennium USA LP",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "OGE ethics agreement April 2025 Section 3 and Appendix B",
-          "description": "Held equity interest in Izzy Englanders hedge fund; required to divest for ambassadorship"
-        }
-      ],
-      "secondHop": {
-        "Benjamin Brafman": [
-          {
-            "target": "Hillel Nahmad",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Brafman was Nahmad's defense attorney, negotiated plea deal, and later secured Trump pardon on Jan 20 2021."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "legal",
-            "strength": 0.7,
-            "description": "Brafman served as key pardon broker, securing Trump pardons for Nahmad, Charles Kushner, D'Souza, Blagojevich."
-          }
-        ],
-        "Jared Kushner": [
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Joint meetings with Kirill Dmitriev at Faena Miami Oct 2025 to negotiate Ukraine peace plan. Dmitriev publicly credited both for assistance. Co-navigators in Trump foreign policy network."
-          },
-          {
-            "target": "Rick Gerson",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Close friends for 10+ years. UAE officials consider Gerson 'Kushner's guy.' Brother Mark Gerson invested in Cadre (Josh Kushner). Mueller investigated Gerson's role as intermediary."
-          },
-          {
-            "target": "Mohammed bin Salman",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Close friends per LittleSis; MBS PIF committed 2B to Jared Affinity Partners despite advisory board opposition; 844K Trump 47 donation 2024"
-          },
-          {
-            "target": "Rosemary Vrablic",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank private wealth manager with dual relationship: personal banker and direct business transactions. Approved Kushner loans other banks rejected. Resigned DB Nov 2021."
-          },
-          {
-            "target": "Rick Gerson",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Gerson is Kushner MBZ intermediary per Mueller investigation. Alpha Wave co-founder. Already in DB as F-4143 F-4223. LittleSis associates Jared with Gerson as MBZ backchannel."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

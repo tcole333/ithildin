@@ -1,0 +1,254 @@
+{
+  "name": "Lynwood Investments CY Limited",
+  "slug": "lynwood-investments-cy-limited",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.362656",
+  "last_updated": "2026-04-12T18:22:14",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 1,
+      "legal": 3,
+      "intelligence": 2,
+      "identity": 1,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T18:22:14"
+  },
+  "findings": [
+    {
+      "id": 9899,
+      "finding_type": "financial",
+      "summary": "By April 2011, while Konovalov and Sysoev were still at Rambler, conspirators had finalized a M Series A term sheet with US VCs (BV Capital/E.Ventures and Runa Capital). Slide deck named F5 as exit target. Netflix and Jet-Stream B.V. identified as early NGINX Plus customers (2011).",
+      "detail": "Restored Yam Server emails revealed that by early April 2011, conspirators had negotiated a M Series A Preferred Stock Financing term sheet. BV Capital (now E.Ventures) and Runa Capital participated. A slide deck (Exhibit A to complaint) showed F5 specifically named as potential exit purchaser. Post-remand discovery reveals Netflix was a paying NGINX Plus customer in 2011 (before Sysoev left Rambler). Jet-Stream B.V. (Netherlands, CEO Stef van der Ziel) may be the earliest commercial customer -- Letters Rogatory filed to Netherlands seeking documents and testimony.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2011-04-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:22:14",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141 Para. 19-20; Letters Rogatory ECF 271; Netflix Compel Motion ECF 228 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9893,
+      "finding_type": "legal",
+      "summary": "2015 Assignment Agreement: Rambler assigned employment and IP rights to Lynwood (Jan 15, 2015). This is the chain of title from Rambler to Lynwood for nginx-related IP.",
+      "detail": "The assignment was described as prophylactic, done after Sysoev began giving media interviews about nginx in late 2014 but before the full conspiracy was known. Lynwood (then A&NN Holdings Limited, renamed Jan 2 2015) was part of A&NN Group which owned 50% of Rambler. Assignment amended on January 23, 2015. This is the sole legal basis for Lynwood's standing to sue.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2015-01-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:20:59",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141, Para. 457-458 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9895,
+      "finding_type": "intelligence",
+      "summary": "Amended Complaint names Alexander Korotkov as whistleblower who triggered the investigation in April 2019, disclosing the conspirators' scheme including the Yam Server containing deleted emails with NGINX Plus development evidence.",
+      "detail": "Korotkov was described as a co-conspirator who came forward. He informed Rambler and Lynwood of the importance of the NOC department and its ring-fenced servers. The forensic recovery of the Yam Server by Group iB revealed emails showing Sysoev and others secretly developing NGINX Plus using Rambler resources. Korotkov separately filed a trademark application for NGINX. The 9th Circuit opinion notes the whistleblower was the 2019 trigger but that Rambler had inquiry notice of potential claims as early as 2014.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-04-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:21:22",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141, Para. 13-15 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9892,
+      "finding_type": "legal",
+      "summary": "9th Circuit partially reversed dismissal of Lynwood v. Konovalov (3:20-cv-03778). Copyright claim on NGINX Plus code developed at Rambler survives. Case active in Phase 1 discovery with June 2026 deadline.",
+      "detail": "The 9th Circuit (22-16399, Nov 6 2024) REVERSED dismissal of Count 14 (copyright infringement) as to NGINX Plus code developed at Rambler, AFFIRMED dismissal of all other claims as time-barred. Only claim based on NGINX Plus code fixed in tangible medium before Sysoev left in Dec 2011 survives. Defendants assert no NGINX Plus code was written at Rambler. Netflix and Jet-Stream B.V. subpoenaed as early NGINX Plus customers.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:20:50",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener Opinion 10732595 (9th Cir. Memorandum, Nov 6 2024)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9894,
+      "finding_type": "identity",
+      "summary": "Lynwood has undergone serial name changes: A&NN Holdings Limited -> Lynwood Investments CY Limited (Jan 2015) -> Hemma Investments CY Limited -> HF Investments CY Limited. Address: Saifi 1, Porto Bello, Floor 3, Flat 302, 3042 Limassol, Cyprus.",
+      "detail": "The entity filing suit was originally A&NN Holdings Limited, part of A&NN Group which owned 50% of Rambler. Renamed to Lynwood Investments CY Limited on January 2, 2015 (two weeks before the IP assignment). Later renamed to Hemma Investments CY Limited (per Sept 2022 stipulation) and then HF Investments CY Limited (per Feb 2025 CMC statement). Serial renaming of the plaintiff entity is notable.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:21:06",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141 Para. 450, Stipulation ECF 166, CMC Statement ECF 209",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9896,
+      "finding_type": "relationship",
+      "summary": "A&NN Group corporate structure: Lynwood was part of A&NN Group which owned 50% of Rambler (2013-2014). A&NN increased to 100% in 2017. Tekso Holdings Limited (part of A&NN Group) sold its ~50% Rambler stake in July 2020, after the lawsuit was filed.",
+      "detail": "From 2013 until December 2014, A&NN Holdings (later Lynwood) indirectly owned 25% of Rambler while another 25% was owned by sister companies within A&NN Group. A&NN Group was both 50% shareholder and managing partner of Rambler. In January 2015, Lynwood ceased to be indirect shareholder but A&NN Group remained at 50%. In 2017, A&NN Group increased to 100% ownership. Tekso Holdings Limited sold its ~50% stake in July 2020.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:21:29",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141, Para. 450-451 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9897,
+      "finding_type": "legal",
+      "summary": "Case 3:20-cv-03778: Full defendant roster and counsel. F5 represented by Morrison & Foerster. Individual defendants (Konovalov, Sysoev, Alexeev, Dounin, Smirnoff, Robertson) by King & Spalding. Runa Capital by Willkie Farr. E.Ventures by Cooley. Lynwood represented by Meister Seelig & Fein (NY) and Hogan Lovells (appeal, with Neal Kumar Katyal).",
+      "detail": "F5 Defendants: F5 Networks Inc (now F5 Inc), NGINX Inc (BVI), NGINX Software Inc -- represented by Morrison & Foerster LLP (MJacobs, JGrant, BFox). Individual Defendants: Konovalov, Sysoev, Alexeev, Dounin, Smirnoff, Robertson -- represented by King & Spalding LLP (Quyen Ta). Runa Capital by Willkie Farr & Gallagher (Benedict Hur). E.Ventures/BV NGINX by Cooley LLP (Patrick Gunn). Plaintiff by Meister Seelig & Fein PLLC (Alexander Pencu, Christopher Major, Jeffrey Weingart). On appeal: Hogan Lovells US LLP (Neal Kumar Katyal argued). NGINX Inc (DE) defaulted, never appeared.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:21:47",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Stipulation ECF 166, CMC Statement ECF 209, Answer ECF 221 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9898,
+      "finding_type": "intelligence",
+      "summary": "Conspirators used ring-fenced NOC department at Rambler with its own email server (Yam Server), deleted 7+ servers, fabricated inventory records. Group iB forensic firm recovered deleted emails from Yam Server in late 2019.",
+      "detail": "Per the complaint: conspirators worked in the Network Operation Center (NOC) department ring-fenced from rest of Rambler. NOC had own servers and email not integrated with company systems. Gatekeepers: Konovalov (CTO), Viktor Popov (Deputy CTO), Smirnoff (Head of NOC). After departures in 2011-2012, they deleted electronic info, removed/destroyed at least 7 servers with NGINX code, fabricated inventory forms. Deputy CTO Popov and Smirnoff concealed evidence. Yam Server found disconnected in offsite server farm, slated for demolition. Group iB hired to perform forensic recovery.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:21:56",
+      "target_name": "Lynwood Investments CY Limited",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Amended Complaint ECF 141, Para. 10-16, 21 (Case 3:20-cv-03778-MMC)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-04-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "By April 2011, while Konovalov and Sysoev were still at Rambler, conspirators had finalized a M Series A term sheet with US VCs (BV Capital/E.Ventures and Runa Capital). Slide deck named F5 as exit target. Netflix and Jet-Stream B.V. identified as early NGINX Plus customers (2011).",
+      "confidence": "high",
+      "id": 9899
+    },
+    {
+      "date": "2015-01-15",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "2015 Assignment Agreement: Rambler assigned employment and IP rights to Lynwood (Jan 15, 2015). This is the chain of title from Rambler to Lynwood for nginx-related IP.",
+      "confidence": "confirmed",
+      "id": 9893
+    },
+    {
+      "date": "2019-04-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Amended Complaint names Alexander Korotkov as whistleblower who triggered the investigation in April 2019, disclosing the conspirators' scheme including the Yam Server containing deleted emails with NGINX Plus development evidence.",
+      "confidence": "confirmed",
+      "id": 9895
+    }
+  ]
+}

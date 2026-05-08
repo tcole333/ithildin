@@ -6,23 +6,27 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.884242",
-  "last_updated": "2026-03-09T18:19:48",
+  "generated_at": "2026-05-07T23:07:36.159258",
+  "last_updated": "2026-03-24T14:15:44",
   "stats": {
-    "total_findings": 14,
-    "total_connections": 5,
+    "total_findings": 21,
+    "total_connections": 9,
     "total_entities": 5,
     "finding_types": {
-      "intelligence": 8,
-      "financial": 4,
-      "relationship": 1,
-      "legal": 1
+      "intelligence": 10,
+      "financial": 5,
+      "relationship": 3,
+      "legal": 2,
+      "negative_result": 1
     },
     "connection_types": {
       "social": 1,
-      "political": 4
+      "corporate": 2,
+      "familial": 1,
+      "political": 4,
+      "intelligence": 1
     },
-    "last_updated": "2026-03-09T18:19:48"
+    "last_updated": "2026-03-24T14:15:44"
   },
   "findings": [
     {
@@ -193,7 +197,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "opensanctions:Q749887",
+          "evidence_ref": "OpenSanctions:Q749887",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -374,6 +378,248 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7631,
+      "finding_type": "relationship",
+      "summary": "LittleSis full relationship map (50 connections): Key network nodes include Steve Bannon (professional, 2 relationships), William Barr (professional), Robert Mercer (relations), Mike Pence (dear friends), Dana Rohrabacher (longtime friends), George Nader (professional), Kirill Dmitriev (generic). Entities: Vectus Global, Unplugged Systems, Airborne Technologies, Frontier Services Group, Academi, We Build the Wall Inc (advisory board), Institute of World Politics (board of trustees), Project Veritas (business). Major FEC donations to Trump Victory, Make America Number 1 (Mercer PAC), RNC, plus dozens of state Republican parties.",
+      "detail": "The LittleSis network reveals Prince sits at intersection of: (1) Private military/security (Academi, Vectus, FSG), (2) Trump political inner circle (Bannon, Pence, Mercer), (3) Russian backchannel (Dmitriev, Nader - Seychelles meeting), (4) Conservative infrastructure (We Build the Wall, Project Veritas, IWP). The Barr connection is significant given concerns about DOJ investigation handling. Rohrabacher connection spans decades.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:53",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/prince-littlesis-rels.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136 (50 relationships)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7633,
+      "finding_type": "legal",
+      "summary": "17 court cases identified in CourtListener. Key cases: (1) Multiple Blackwater/Xe Nisour Square massacre wrongful death suits (2007-2009, E.D.Va, S.D.Cal, D.C.). (2) Prince v. The Intercept - defamation suits in Wyoming, SDNY, and 2nd Circuit appeal (2020-2023). (3) Alsanabani v. Spear Operations Group LLC (D.D.C. 1:25-cv-01684, filed May 2025) - recent active case. (4) Brady v. Xe Services (E.D.N.C. 2009). (5) America 2030 Capital Limited v. Brantley (D.Colo 2020).",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:03",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/prince-court.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener party search: Erik Prince",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7635,
+      "finding_type": "intelligence",
+      "summary": "Prince operates as informal Trump advisor in 2025-2026 without official government role. Visited White House shortly after Jan 2025 inauguration. Served as character witness at Tulsi Gabbard DNI confirmation. Pitched mass deportation plan using private sector contractors to Trump admin. Active in Ecuador anti-crime consulting. Pattern: leverages political access to secure foreign government contracts (DRC $700M, Haiti 10-year, Ecuador).",
+      "detail": "Prince's business model is consistent: use political proximity to secure foreign government security contracts, then pivot to revenue-sharing on mineral/tax collection. No official title avoids disclosure requirements and Senate confirmation. CNN Mar 2025 investigation documented his maneuvering back into Trump orbit. The deportation plan pitch represents potential domestic application of his private military model.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:20",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2025/03/13/politics/erik-prince-return-maneuvered-inside-trump-orbit",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.metrotimes.com/news/erik-prince-pitches-mass-deportation-plan-to-trump-administration-38679931",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7638,
+      "finding_type": "intelligence",
+      "summary": "Prince's global private military operations expanding in 2025-2026: (1) DRC: deployed Israeli-trained drone operators and security force to Uvira against M23/AFC rebels (Reuters Feb 2026). (2) Haiti: Vectus Global 10-year contract with interim government, 200 mercenaries deployed. (3) Ecuador: consulting on anti-gang operations. (4) Austria indictment (May 2023) for Libya arms trafficking (Project Opus, $80M deal with Haftar) remains barrier to European operations.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:31",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.aljazeera.com/news/2025/8/15/blackwater-founder-erik-prince-to-send-forces-to-haiti-to-fight-gangs",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.thecanary.co/global/world-news/2026/02/11/erik-prince-deploys/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7640,
+      "finding_type": "financial",
+      "summary": "EDGAR filings: Prince registered as CIK 0002108572 (Prince Erik Dean). Filed Form 3 ownership document Mar 16 2026 related to Swarmer Inc (CIK 0002092574). Swarmer Inc IPO completed Mar 2026 (SWMR on Nasdaq). S-1 filed Feb 2 2026, S-1/A Feb 19. Total 28 Swarmer filings. Prince is non-executive chairman per Dec 2025 agreement. This is Prince's only US public market vehicle.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:41",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2092574",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2108572",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7641,
+      "finding_type": "relationship",
+      "summary": "Prince-Barr DOJ investigation nexus: House Intel Committee (Schiff) sent criminal referral to DOJ for Prince lying to Congress about Seychelles meeting with Russian banker Kirill Dmitriev. AG Barr's DOJ widely criticized for appearing to shield Prince from prosecution. CREW filed FOIA for Barr-Prince meeting records. FBI was investigating Prince for modified crop dusters (potential arms export violations). All investigations appeared to go dormant under Barr. LittleSis confirms Barr-Prince professional relationship.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:51",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theintercept.com/2020/02/20/erik-prince-fbi-investigation-trump-barr/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.citizensforethics.org/reports-investigations/foia-requests/doj-bill-barr-erik-prince/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7664,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE/LIMITED RESULTS for Prince tech-right network overlap: (1) No direct FARA registrations found for Prince or his entities. (2) No direct FEC donations to Thiel-backed candidates or Founders Fund entities. (3) No OpenSanctions listing beyond previously-documented ir_sanctions and ru_mfa_sanctions. (4) USASpending shows Academi contracts (20 results) but no current Vectus Global federal contracts. (5) No state corporate registry filings for Prince as named officer (name search returned false positive). (6) Prince's tech-right network connection is indirect: through Bannon, through defense tech ecosystem (Swarmer competes with Anduril in drone space), through Feinberg (both pitched Afghan war privatization to Kushner/Bannon). No direct Thiel/FF/Palantir/Anduril financial or corporate connection found.",
+      "detail": null,
+      "source_datasets": [
+        "fara",
+        "registry",
+        "usaspending",
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:44",
+      "target_name": "Erik Prince",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/prince-fara.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/prince-registry-officers.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/vectus-usaspending.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -394,6 +640,78 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "littlesis:37136",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3874,
+      "person_a": "Erik Prince",
+      "person_b": "Vectus Global",
+      "relationship_type": "corporate",
+      "description": "Prince founded/controls Vectus Global. Active contracts: DRC $700M mineral security, Haiti 10-year anti-gang, Ecuador consulting. Revenue-sharing model: security services as entry point to mineral/tax revenues.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:47",
+      "profile_id": "tech-right",
+      "other_person": "Vectus Global",
+      "other_person_slug": "vectus-global",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3875,
+      "person_a": "Erik Prince",
+      "person_b": "Swarmer, Inc",
+      "relationship_type": "corporate",
+      "description": "Non-executive chairman per Dec 2025 agreement. Filed Form 3 ownership Mar 2026. Only US public market vehicle for Prince. Agreement allows Prince to maintain other businesses (Vectus, FSG) if non-competing.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:47",
+      "profile_id": "tech-right",
+      "other_person": "Swarmer, Inc",
+      "other_person_slug": "swarmer-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2092574",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2108572",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3877,
+      "person_a": "Betsy DeVos",
+      "person_b": "Erik Prince",
+      "relationship_type": "familial",
+      "description": "Siblings. Prince is younger brother of DeVos. Betsy served as Trump Education Secretary (first term). DeVos family fortune from Amway/Alticor. Prince family wealth from Prince Corporation (auto parts). Father Edgar Prince co-founded Family Research Council with Gary Bauer.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:55",
+      "profile_id": "tech-right",
+      "other_person": "Betsy DeVos",
+      "other_person_slug": "betsy-devos",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136",
           "source_quote": null,
           "source_page": null
         }
@@ -468,6 +786,34 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://lobelog.com/why-feinberg-and-prince-are-offensive/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3873,
+      "person_a": "Erik Prince",
+      "person_b": "William Barr",
+      "relationship_type": "intelligence",
+      "description": "Professional relationship per LittleSis. Barr DOJ criticized for appearing to shield Prince from prosecution on congressional perjury referral and FBI crop duster investigation. CREW filed FOIA for Barr-Prince meeting records.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:37",
+      "profile_id": "tech-right",
+      "other_person": "William Barr",
+      "other_person_slug": "william-barr",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theintercept.com/2020/02/20/erik-prince-fbi-investigation-trump-barr/",
           "source_quote": null,
           "source_page": null
         }
@@ -743,170 +1089,6 @@
       "private-order",
       "manufactured-dependency",
       "narrative-shield"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Erik Prince",
-      "connections": [
-        {
-          "target": "Steve Bannon",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "littlesis:37136",
-          "description": "Long-time friend per LittleSis. Prince is regular War Room guest, used Bannon's platform for Greenland protectorate advocacy Jan 2026. Both linked to We Build the Wall Inc."
-        },
-        {
-          "target": "William Barr",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:1291",
-          "description": "LittleSis confirms professional relationship. Prince (Blackwater/Academi founder) is connected to Trump orbit and private military/intelligence operations. Both served in Republican national security establishment. Prince's sister Betsy DeVos was Trump Education Secretary. Prince met with Russian investors in Seychelles (Jan 2017) \u2014 investigated by Mueller's team which Barr later oversaw."
-        },
-        {
-          "target": "Steve Bannon",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Prince advocates Greenland acquisition on Bannon's War Room podcast; both in Trump orbit promoting territorial expansion"
-        },
-        {
-          "target": "Greenland",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Public advocacy for Greenland acquisition"
-        },
-        {
-          "target": "Stephen Feinberg",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "https://lobelog.com/why-feinberg-and-prince-are-offensive/",
-          "description": "Both independently pitched Afghan war privatization to Trump via Kushner/Bannon 2017. Feinberg (Cerberus/DynCorp) now Deputy SecDef, directing Pentagon critical minerals strategy. Parallel tracks in defense privatization network."
-        }
-      ],
-      "secondHop": {
-        "Stephen Feinberg": [
-          {
-            "target": "DOGE",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both at top Pentagon: Feinberg DepSecDef, Michael USD(R&E)"
-          },
-          {
-            "target": "Andrew Farkas",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Farkas emails to Epstein discuss Cerberus investments and project details, acting as intermediary"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Epstein files show 360+ Cerberus documents, emails suggest business relationship, 2015 Farkas email shows Cerberus committing $200M to Epstein-adjacent fund"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "financial",
-            "strength": 0.2,
-            "description": "POGO: Epstein files show financial ties to Feinberg. Feinberg now serves as #2 at Pentagon."
-          }
-        ],
-        "Steve Bannon": [
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "160+ emails, 526 jmail. Daily contact Jan 2018-Jul 2019. Bitcoin advisory, film collaboration, political intelligence exchange, USVI island, 100k payment."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Wolff served as intermediary. Forwarded WH intel Bannon->Wolff->Epstein. Proposed media project. Assessed leak risks."
-          },
-          {
-            "target": "Dan Fleuette",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Fleuette (doitfluet@protonmail.com) Bannon production coordinator. Shared American Carnage via Vimeo, coordinated USVI/Norway travel. ProtonMail user."
-          },
-          {
-            "target": "Sean Bannon",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Son. 210 A St NE Washington DC 20002. Apple Watch gift from Epstein Jan 2019. Film production."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Wolff intermediary between Bannon and Epstein, forwarded communications and arranged meetings"
-          }
-        ],
-        "William Barr": [
-          {
-            "target": "George H.W. Bush",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bush appointed Barr as 77th Attorney General (1991-1993). Barr previously served as Deputy AG and head of OLC under Bush. Barr recommended pardons for Iran-Contra figures Caspar Weinberger et al. in Dec 1992, which Bush granted."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Rod Rosenstein",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Rosenstein served as Deputy AG when Barr arrived as AG in Feb 2019. Rosenstein had appointed Mueller as Special Counsel and oversaw the investigation. Rosenstein resigned May 2019 after Barr took control of Mueller Report rollout. Rosenstein's departure removed oversight buffer between Barr and SDNY."
-          },
-          {
-            "target": "Robert Mueller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barr characterized Mueller's Special Counsel Report in his 4-page summary (Mar 24, 2019), which Mueller himself objected to as not capturing the 'context, nature, and substance' of the report. Judge Reggie Walton found Barr displayed 'lack of candor' in Mueller Report representations. Barr and Mueller had known each other for decades \u2014 their wives attended Bible study together."
-          },
-          {
-            "target": "John Durham",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barr appointed Durham as Special Counsel to investigate origins of FBI's Crossfire Hurricane investigation into Trump-Russia ties (May 2019). Durham's investigation lasted 4 years, cost .5M, resulted in zero convictions. Epstein tracked this: 'intel chiefs in barrs sights' (HOUSE_OVERSIGHT_027719). Durham appointment diverted DOJ resources and attention during period of Epstein prosecution."
-          }
-        ],
-        "Greenland": [
-          {
-            "target": "Tulsi Gabbard",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "DNI collection tasking on Greenland"
-          },
-          {
-            "target": "Critical Metals Corp",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Holds 30-year exploitation license for Tanbreez deposit (potentially world's largest REE deposit, 28.2M metric tons). $120M EXIM Bank LOI."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2017-2020",
-        "label": "political with William Barr",
-        "type": "political",
-        "entity": "William Barr",
-        "id": 1533
-      }
     ]
   }
 }

@@ -1,0 +1,363 @@
+{
+  "name": "IceCure Medical Ltd.",
+  "slug": "icecure-medical-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.248708",
+  "last_updated": "2026-03-30T03:00:40",
+  "stats": {
+    "total_findings": 13,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 1,
+      "financial": 7,
+      "corporate": 2,
+      "governance": 2,
+      "regulatory": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-03-30T03:00:40"
+  },
+  "findings": [
+    {
+      "id": 8671,
+      "finding_type": "legal",
+      "summary": "Pending Israeli class action (Tel Aviv District Court) alleging 2021 private placement to Epoch was at a material discount and exploited insider information",
+      "detail": "Class action motion filed in Tel Aviv District Court by Amir Yosef Brot (alleged shareholder) against IceCure, its board, controlling shareholder (Epoch), and investors in a 2021 private placement. Claims: private placement at significant discount; share price did not reflect material information allegedly known to management and investors; procedural defects in shareholder approval. Company denies as without merit.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2021-07-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8669,
+      "finding_type": "financial",
+      "summary": "Epoch provided $2M bridge loan to IceCure in May 2025 conditioned on equity-raise prepayment; repaid August 2025 after $10M Rights Offering where Epoch committed up to $5M",
+      "detail": "Bridge loan from Epoch (May 17, 2025, $2M at 12-month Treasury rate) was conditioned on prepayment from any equity raise (except ATM). Upon completing the $10M Rights Offering in August 2025, the bridge was repaid in full. Epoch committed to exercise up to $5M in the Rights Offering at $1.00/unit. The Rights Offering was oversubscribed 2x. Epoch's participation in the Rights Offering increased its stake from 45.7% to 45.8%.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-08-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8672,
+      "finding_type": "corporate",
+      "summary": "Epoch holds 45.8% of IceCure (35.8M shares); top 13 directors/management hold 48% combined; only 7 registered holders of record",
+      "detail": "20-F Item 7 (Major Shareholders as of March 13, 2026): 'Epoch Partner Investments Limited: 35,846,597 shares, 45.8%. All directors and senior management as a group (13 persons): 38,633,238 shares, 48.0%.' There were only seven holders of record as of March 17, 2026.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-13",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8663,
+      "finding_type": "financial",
+      "summary": "IceCure Medical 20-F discloses going concern doubt: $120.4M accumulated deficit, $15.1M FY2025 net loss, $8.9M cash, ~7-month runway at burn rate",
+      "detail": "IceCure Medical's FY2025 annual report (20-F) states: 'Since our inception, we have accumulated losses of $120,436 thousand as of December 31, 2025. In the year ended December 31, 2025, we generated losses of $15,057 thousand and negative cash flows from operating activities of $14,574 thousand... These conditions raise substantial doubts about our ability to continue as a going concern.' Cash on hand was $8.9M at December 31, 2025.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-17",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8664,
+      "finding_type": "governance",
+      "summary": "Controlling shareholder (Epoch/Li Haixiang, 45.8%) resigned board seat on same day going-concern 20-F was filed \u2014 now holds majority-adjacent stake with zero board representation",
+      "detail": "Li Haixiang, the sole director of Epoch Partner Investments Limited (45.8% controlling shareholder of IceCure), resigned from IceCure's board of directors on March 17, 2026 \u2014 the same day IceCure filed its going-concern FY2025 annual report on Form 20-F. The 6-K stated no disagreement with management. The Schedule 13D/A filed March 27 confirms Li Haixiang remains sole director of Epoch (still 45.8%), but no longer sits on IceCure's board.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8675,
+      "finding_type": "financial",
+      "summary": "IceCure has raised $41M+ since 2022 against $120M accumulated deficit and $3.4M annual revenue \u2014 structurally dependent on serial equity financing",
+      "detail": "Total raised since 2022 per management disclosure: 'Since 2022, we have funded our operations mainly through public offerings, raising an aggregate amount of net proceeds of $41 million.' Components: Dec 2022 offering ($13.6M), ATM #1 ($9.2M), ATM #2 ($6.3M), Rights Offering ($~10M), plus new March 2026 offering (~$3.5M) \u2014 plus Epoch bridge loan ($2M, repaid). Revenue remains minimal at $3.4M/year; $41M raised vs $120M accumulated deficit.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8668,
+      "finding_type": "governance",
+      "summary": "Four major personnel/structural changes at IceCure in a single week of March 2026: Epoch board rep exit, VP R&D resignation, CFO succession, shelf registration effective",
+      "detail": "CFO Ronen Tsimerman (serving since May 2017) to be replaced by Meir Peleg, formerly CFO of Gauzy Ltd. (Nasdaq: GAUZ) from September 2017 to January 2026. Peleg starts May 17, 2026. Separately, VP R&D and Engineering Naum Muchnik resigned effective April 12, 2026. New F-3 shelf became effective March 24, 2026. Within the same week: Li Haixiang resigned from board (March 17), VP R&D resigned (March 19), new CFO appointed (March 19), F-3 effective (March 24).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8670,
+      "finding_type": "regulatory",
+      "summary": "Positive 5-year ICESECRET kidney cancer data (89.4% recurrence-free) released March 25, 2026; stock still dropped 34% next day on capital raise announcement",
+      "detail": "IceCure 6-K (March 25, 2026) announces ICESECRET study: 'IceCure Reports Positive 5-Year Top-Line Results from ICESECRET Kidney Cancer Cryoablation Study: 89.4% and 83.9% Recurrence-Free Rates.' Despite positive data, stock fell from $0.588 (March 25 close) to $0.39 (March 26 close) on announcement of the capital raise.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8674,
+      "finding_type": "financial",
+      "summary": "ICCM crashed 34% on offering day; stock now 25% below the $0.50 offering price and near 52-week lows; all new warrants immediately underwater",
+      "detail": "ICCM stock declined 34% on March 26, 2026 (day of offering pricing at $0.50) from $0.588 to $0.39 on volume of 4.17M shares (vs. typical 150-700k). The offering price of $0.50 was set above the intraday close of $0.39. As of March 29, the stock trades at $0.375 \u2014 25% below the offering price. The 52-week high is $1.40; 52-week low is $0.37 (just set). This offering pattern, combined with the fact that all 16M new warrants are immediately out-of-the-money, raises questions about the economics for the Purchasers and whether the transaction involved side arrangements.",
+      "source_datasets": "edgar,market_data",
+      "confidence": "medium",
+      "date_of_event": "2026-03-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8665,
+      "finding_type": "financial",
+      "summary": "IceCure priced $4M registered direct offering at $0.50/share + 16M warrants on March 27, 2026; stock closed at $0.39 that day; investors unnamed",
+      "detail": "Registered direct offering (424B5, March 27, 2026): 8,000,000 ordinary shares at $0.50/share ($4.0M gross) plus concurrent private placement of 8M Series B warrants (5yr, $0.55 exercise) and 8M Series C warrants (1yr, $0.55 exercise). Placement agent A.G.P./Alliance Global Partners (7% fee). Investor identity: 'certain institutional investors' per Securities Purchase Agreement. Stock closed at $0.39 on offering day \u2014 below the $0.50 offering price. Net proceeds estimated at ~$3.5M.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8666,
+      "finding_type": "financial",
+      "summary": "Post-offering equity overhang: 39% fully diluted above basic; F-3 shelf 1/3 rule nearly exhausted (~$2.3M remaining capacity)",
+      "detail": "As of post-offering, IceCure has 81.18M basic shares and ~113M fully diluted. Warrant overhang includes: 9.7M Rights Offering warrants at $1.00 (63% OTM at $0.375), 8M Series B warrants at $0.55 (32% OTM), 8M Series C warrants at $0.55 (32% OTM), ~4.2M employee options (NIS 2.30+), ~1.9M RSUs, and 40.9k pre-funded warrants. F-3 shelf (333-290046, effective March 24, 2026) now nearly exhausted under 1/3 rule: non-affiliate float ~$30.55M, 12-month capacity ~$10.18M, used ~$7.9M already.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8673,
+      "finding_type": "financial",
+      "summary": "F-1 resale registration for 16M warrant shares must be filed by ~April 10, 2026 and will reveal identity of anonymous institutional purchasers in the March 27, 2026 offering",
+      "detail": "Securities Purchase Agreement requires IceCure to file an F-1 (or other available form) within 15 calendar days of March 26, 2026 (i.e., by April 10, 2026) to register shares issuable upon exercise of the 16M Series B/C warrants. The investors in the concurrent private placement who received the warrants are not named in the publicly filed documents, but will appear as selling shareholders in the F-1 resale registration.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8676,
+      "finding_type": "corporate",
+      "summary": "Offshore holding structure: BVI (Epoch) \u2192 Israeli parent \u2192 Delaware (US ops) + HK holding \u2192 China operations; Israeli IIA grants restrict IP transfer outside Israel",
+      "detail": "IceCure's subsidiary structure features two tax-advantaged or regulatory-access vehicles: (1) IceCure Medical HK Limited (Hong Kong) as a holding entity for the China subsidiary, and (2) Epoch's BVI holdco structure at the parent level. The Israeli parent also receives IIA (Innovation Authority) grants, imposing royalty obligations and transfer restrictions on technology. The combination of Israeli-IIA-funded R&D, BVI controlling entity, HK intermediate holding, and Chinese operating entity is a common medtech structure for Israeli companies targeting the Asian market via PRC-connected PE investors.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "IceCure Medical Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4462,
+      "person_a": "Epoch Partner Investments Limited",
+      "person_b": "IceCure Medical Ltd.",
+      "relationship_type": "corporate",
+      "description": "Epoch Partner Investments Limited holds 45.8% of IceCure Medical Ltd. as of March 13, 2026 (35,846,597 shares). Epoch participated in every major IceCure capital raise since at least 2021, including the December 2022 offering, 2024 ATM, May 2025 bridge loan, and August 2025 Rights Offering.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Epoch Partner Investments Limited",
+      "other_person_slug": "epoch-partner-investments-limited",
+      "evidence": []
+    },
+    {
+      "id": 4468,
+      "person_a": "A.G.P./Alliance Global Partners",
+      "person_b": "IceCure Medical Ltd.",
+      "relationship_type": "financial",
+      "description": "A.G.P./Alliance Global Partners acted as exclusive placement agent for the March 26-27, 2026 registered direct offering (7% fee on $4M gross proceeds plus fee on concurrent private placement warrants to unnamed institutional investors). A.G.P. is a repeat participant in small-cap Israeli Nasdaq company financings.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "A.G.P./Alliance Global Partners",
+      "other_person_slug": "agpalliance-global-partners",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-07-05",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Pending Israeli class action (Tel Aviv District Court) alleging 2021 private placement to Epoch was at a material discount and exploited insider information",
+      "confidence": "high",
+      "id": 8671
+    },
+    {
+      "date": "2025-08-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Epoch provided $2M bridge loan to IceCure in May 2025 conditioned on equity-raise prepayment; repaid August 2025 after $10M Rights Offering where Epoch committed up to $5M",
+      "confidence": "high",
+      "id": 8669
+    },
+    {
+      "date": "2026-03-13",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Epoch holds 45.8% of IceCure (35.8M shares); top 13 directors/management hold 48% combined; only 7 registered holders of record",
+      "confidence": "confirmed",
+      "id": 8672
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "IceCure Medical 20-F discloses going concern doubt: $120.4M accumulated deficit, $15.1M FY2025 net loss, $8.9M cash, ~7-month runway at burn rate",
+      "confidence": "confirmed",
+      "id": 8663
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Controlling shareholder (Epoch/Li Haixiang, 45.8%) resigned board seat on same day going-concern 20-F was filed \u2014 now holds majority-adjacent stake with zero board representation",
+      "confidence": "high",
+      "id": 8664
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "IceCure has raised $41M+ since 2022 against $120M accumulated deficit and $3.4M annual revenue \u2014 structurally dependent on serial equity financing",
+      "confidence": "high",
+      "id": 8675
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Four major personnel/structural changes at IceCure in a single week of March 2026: Epoch board rep exit, VP R&D resignation, CFO succession, shelf registration effective",
+      "confidence": "high",
+      "id": 8668
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Positive 5-year ICESECRET kidney cancer data (89.4% recurrence-free) released March 25, 2026; stock still dropped 34% next day on capital raise announcement",
+      "confidence": "confirmed",
+      "id": 8670
+    },
+    {
+      "date": "2026-03-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ICCM crashed 34% on offering day; stock now 25% below the $0.50 offering price and near 52-week lows; all new warrants immediately underwater",
+      "confidence": "medium",
+      "id": 8674
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "IceCure priced $4M registered direct offering at $0.50/share + 16M warrants on March 27, 2026; stock closed at $0.39 that day; investors unnamed",
+      "confidence": "confirmed",
+      "id": 8665
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Post-offering equity overhang: 39% fully diluted above basic; F-3 shelf 1/3 rule nearly exhausted (~$2.3M remaining capacity)",
+      "confidence": "high",
+      "id": 8666
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "F-1 resale registration for 16M warrant shares must be filed by ~April 10, 2026 and will reveal identity of anonymous institutional purchasers in the March 27, 2026 offering",
+      "confidence": "high",
+      "id": 8673
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Offshore holding structure: BVI (Epoch) \u2192 Israeli parent \u2192 Delaware (US ops) + HK holding \u2192 China operations; Israeli IIA grants restrict IP transfer outside Israel",
+      "confidence": "high",
+      "id": 8676
+    }
+  ]
+}

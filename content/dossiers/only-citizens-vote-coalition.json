@@ -1,0 +1,202 @@
+{
+  "name": "Only Citizens Vote Coalition",
+  "slug": "only-citizens-vote-coalition",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.436855",
+  "last_updated": "2026-03-24T14:15:33",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "financial": 2,
+      "negative_result": 2
+    },
+    "connection_types": {
+      "funds": 1,
+      "controls": 1,
+      "political": 1
+    },
+    "last_updated": "2026-03-24T14:15:33"
+  },
+  "findings": [
+    {
+      "id": 6838,
+      "finding_type": "identity",
+      "summary": "FAIR Elections Fund (EIN 93-1870447) is the fiscal vehicle for the Only Citizens Vote Coalition. 501(c)(3) incorporated in DC, ruling date January 2024. Registered at 300 Independence Ave SE, Washington DC 20003 \u2014 the Conservative Partnership Institute headquarters.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 01:15:55",
+      "target_name": "Only Citizens Vote Coalition",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:EIN931870447",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6839,
+      "finding_type": "financial",
+      "summary": "FAIR Elections Fund raised $3.9 million in its first full year of operations (FY ending June 30, 2024). More than three-quarters of its $2.1 million in disclosed expenses were disbursed as grants to other organizations.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 01:16:02",
+      "target_name": "Only Citizens Vote Coalition",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CMD:FAIR-Elections-2025-07-10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6840,
+      "finding_type": "negative_result",
+      "summary": "No corporate registry filings found for Only Citizens Vote Coalition in any jurisdiction. The coalition operates as a project of the FAIR Elections Fund rather than as a separately incorporated entity.",
+      "detail": null,
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 01:16:10",
+      "target_name": "Only Citizens Vote Coalition",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "registry:unified_search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6841,
+      "finding_type": "negative_result",
+      "summary": "No FEC filings found for Only Citizens Vote Coalition. As a 501(c)(3) project, it does not make direct political expenditures reportable to FEC.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 01:16:15",
+      "target_name": "Only Citizens Vote Coalition",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:donor_search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7607,
+      "finding_type": "financial",
+      "summary": "Only Citizens Vote Coalition channels over 590M in dark money through 80+ member orgs with 25 pct connected to Project 2025",
+      "detail": "Launched by Cleta Mitchell in 2024. 80+ member orgs, 450+ officers across groups. Total tracked funding: over 590M since Jan 2020 to nearly 3 dozen coalition members from 140+ donor organizations. Top donors: Schwab Charitable Fund 328M, DonorsTrust 80M, Bradley Impact Fund 31M, Fidelity Investments Charitable Gift Fund 24M. Top recipients: 85 Fund (housing Honest Elections Project) 413M, America First Legal Foundation 40M, Susan B Anthony List 18M. Roughly 25 pct of members connected to Project 2025.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:08",
+      "target_name": "Only Citizens Vote Coalition",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IssueOne Only Citizens Vote Coalition report 2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3372,
+      "person_a": "85 Fund",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "funds",
+      "description": "85 Fund (Leonard Leo) received 413M \u2014 70% of all tracked OCVC member funding. Houses Honest Elections Project, direct OCVC member.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:03:31",
+      "profile_id": "tech-right",
+      "other_person": "85 Fund",
+      "other_person_slug": "85-fund",
+      "evidence": []
+    },
+    {
+      "id": 3830,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "controls",
+      "description": "Co-founder and leader",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:37",
+      "profile_id": "tech-right",
+      "other_person": "Cleta Mitchell",
+      "other_person_slug": "cleta-mitchell",
+      "evidence": []
+    },
+    {
+      "id": 3884,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "political",
+      "description": "AFL is member of Only Citizens Vote Coalition",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:33",
+      "profile_id": "tech-right",
+      "other_person": "America First Legal Foundation",
+      "other_person_slug": "america-first-legal-foundation",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

@@ -6,22 +6,74 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.926606",
-  "last_updated": "2026-03-10T00:15:09",
+  "generated_at": "2026-05-07T23:07:36.247992",
+  "last_updated": "2026-03-23T19:17:51",
   "stats": {
-    "total_findings": 11,
-    "total_connections": 8,
+    "total_findings": 13,
+    "total_connections": 10,
     "total_entities": 2,
     "finding_types": {
-      "relationship": 5,
-      "financial": 6
+      "relationship": 6,
+      "financial": 6,
+      "legal": 1
     },
     "connection_types": {
-      "employment": 8
+      "employment": 9,
+      "financial": 1
     },
-    "last_updated": "2026-03-10T00:15:09"
+    "last_updated": "2026-03-23T19:17:51"
   },
   "findings": [
+    {
+      "id": 6445,
+      "finding_type": "relationship",
+      "summary": "REVOLVING DOOR: Gregory Barbaccia spent 10 years at Palantir (2010-2020), starting as government account manager, rising to security lead and head of Intelligence and Investigations unit. Appointed federal CIO and federal Chief AI Officer at OMB on January 27, 2025, as a DOGE operative. Palantir has $2.31B+ in DoD contracts and $1.02B in FY2025 federal contracts across all agencies. As federal CIO, Barbaccia oversees government-wide IT policy and technology standards \u2014 a role with direct relevance to Palantir's government business.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:53:21",
+      "target_name": "Gregory Barbaccia",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "nextgov:2025-01-30 fedscoop:barbaccia-cio",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5775,
+      "finding_type": "financial",
+      "summary": "Federal CIO Barbaccia 278T transaction report filed July 2025 indicates active stock trading while in office",
+      "detail": "Barbaccia most recent disclosure is a 278-T (Periodic Transaction Report) filed 2025-07-01, distinct from his initial 278. The transaction report shows active stock trading activity including purchases and sales of multiple holdings while serving as Federal CIO. Transaction reports filed during government service indicate ongoing financial market activity that must be monitored for conflicts with IT procurement decisions. His disclosure lists 143 total assets across 4 documents, indicating complex ongoing financial management.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:28",
+      "target_name": "Gregory Barbaccia",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosure barbaccia-gregory-j form_type 278 Transaction filed 2025-07-01",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5100,
       "finding_type": "relationship",
@@ -187,31 +239,6 @@
       ]
     },
     {
-      "id": 5775,
-      "finding_type": "financial",
-      "summary": "Federal CIO Barbaccia 278T transaction report filed July 2025 indicates active stock trading while in office",
-      "detail": "Barbaccia most recent disclosure is a 278-T (Periodic Transaction Report) filed 2025-07-01, distinct from his initial 278. The transaction report shows active stock trading activity including purchases and sales of multiple holdings while serving as Federal CIO. Transaction reports filed during government service indicate ongoing financial market activity that must be monitored for conflicts with IT procurement decisions. His disclosure lists 143 total assets across 4 documents, indicating complex ongoing financial management.",
-      "source_datasets": [
-        "propublica_disclosures"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 02:43:28",
-      "target_name": "Gregory Barbaccia",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica OGE 278 disclosure barbaccia-gregory-j form_type 278 Transaction filed 2025-07-01",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5803,
       "finding_type": "relationship",
       "summary": "Post-DOGE: Federal CIO Gregory Barbaccia is 10-year Palantir alum overseeing B+ in IT",
@@ -324,24 +351,84 @@
       ]
     },
     {
-      "id": 6445,
-      "finding_type": "relationship",
-      "summary": "REVOLVING DOOR: Gregory Barbaccia spent 10 years at Palantir (2010-2020), starting as government account manager, rising to security lead and head of Intelligence and Investigations unit. Appointed federal CIO and federal Chief AI Officer at OMB on January 27, 2025, as a DOGE operative. Palantir has $2.31B+ in DoD contracts and $1.02B in FY2025 federal contracts across all agencies. As federal CIO, Barbaccia oversees government-wide IT policy and technology standards \u2014 a role with direct relevance to Palantir's government business.",
-      "detail": null,
+      "id": 7153,
+      "finding_type": "legal",
+      "summary": "Federal CIO Barbaccia has FITARA authority over all federal IT procurement but NO documented Palantir recusal. Divested Anduril stake ($100K-$250K) only after POGO reporting. Retained up to $15K Palantir stock. FITARA gives CIOs approval authority over all IT investments \u2014 Barbaccia's role covers government-wide IT policy and technology standards directly relevant to Palantir's $1B+ federal portfolio.",
+      "detail": "FITARA (2014) requires CIO approval for all agency IT purchases. As Federal CIO at OMB, Barbaccia sets government-wide IT policy, oversees FITARA compliance, and influences procurement standards. OMB confirmed Barbaccia divested Anduril stake after POGO published, but no Palantir recusal documented despite Palantir being dominant federal IT vendor. Contrast with Thomas Williams (OMB defense) who DID recuse from Palantir matters after POGO reporting \u2014 because his wife held $2-10M Palantir stock. Barbaccia also named acting TTS Director at GSA (Feb 2026), expanding his procurement influence. Allan Mangaser, another Palantir+Theorem alum, serves directly under Barbaccia as Senior Adviser to CIO at OMB.",
       "source_datasets": [
         "web_search"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "date_of_event": null,
-      "claim_type": "paraphrase",
+      "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-03-09 20:53:21",
+      "created_at": "2026-03-23 18:40:30",
       "target_name": "Gregory Barbaccia",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "nextgov:2025-01-30 fedscoop:barbaccia-cio",
+          "evidence_ref": "CIO.gov FITARA handbook: CIO approval required for all IT investments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Nextgov Jan 2025: Gregory Barbaccia named federal CIO",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Gold Rush report: Barbaccia Anduril $100K-$250K, Palantir up to $15K",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Revolving Door Project profile: Gregory Barbaccia DOGE agent",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7330,
+      "finding_type": "relationship",
+      "summary": "Barbaccia (ex-Palantir 10yr) serves as Federal CIO with FITARA authority over IT procurement while Palantir receives billions in federal contracts - no public ethics recusal found",
+      "detail": "Gregory Barbaccia spent 10 years at Palantir (last 3 as head of intelligence and investigations) before being named Federal CIO in Jan 2025. As Federal CIO he oversees FITARA (Federal Information Technology Acquisition Reform Act 2014) which requires CIO sign-off on all agency technology projects. He also serves as inaugural Chief Federal AI Officer and was appointed to dual-hatted role at GSA (Feb 2026). He was identified as a DOGE agent conducting interviews of civil servants. No public OGE ethics agreement or formal Palantir recusal has been identified in reporting, despite his former employer receiving 3.56B+ in federal contracts and the new 1B DHS BPA being awarded during his tenure.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:49",
+      "target_name": "Gregory Barbaccia",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/palantir-federal-agencies-government-data/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/gregory-barbaccia-doge-agent/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/01/gregory-barbacia-named-federal-cio/402501/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -362,7 +449,7 @@
       "created_at": "2026-03-03 17:01:40",
       "profile_id": "tech-right",
       "other_person": "Palantir",
-      "other_person_slug": "palantir-technologies",
+      "other_person_slug": "palantir",
       "evidence": []
     },
     {
@@ -522,6 +609,50 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3585,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": "10-year Palantir vet as Federal CIO with FITARA authority over all federal IT. No Palantir recusal. Palantir federal contracts doubled to $1.02B during his tenure.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:58",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Gold Rush, USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3738,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir Technologies Inc.",
+      "relationship_type": "employment",
+      "description": "Barbaccia employed at Palantir for 10 years (last 3 as head of intelligence/investigations) before becoming Federal CIO in Jan 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:51",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies Inc.",
+      "other_person_slug": "palantir-technologies-inc",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/01/gregory-barbacia-named-federal-cio/402501/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -532,7 +663,7 @@
       "source": "nextgov:2025-01-30",
       "entity_id": 930,
       "entity_name": "Gregory Barbaccia",
-      "entity_type": "unknown",
+      "entity_type": "person",
       "jurisdiction": "Federal",
       "entity_status": "active"
     },
@@ -548,7 +679,24 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-01-27",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "REVOLVING DOOR: Gregory Barbaccia spent 10 years at Palantir (2010-2020), starting as government account manager, rising to security lead and head of Intelligence and Investigations unit. Appointed federal CIO and federal Chief AI Officer at OMB on January 27, 2025, as a DOGE operative. Palantir has $2.31B+ in DoD contracts and $1.02B in FY2025 federal contracts across all agencies. As federal CIO, Barbaccia oversees government-wide IT policy and technology standards \u2014 a role with direct relevance to Palantir's government business.",
+      "confidence": "high",
+      "id": 6445
+    },
+    {
+      "date": "2025-07-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Federal CIO Barbaccia 278T transaction report filed July 2025 indicates active stock trading while in office",
+      "confidence": "high",
+      "id": 5775
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5952,
@@ -686,220 +834,5 @@
       "bridge-tax",
       "manufactured-dependency"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Gregory Barbaccia",
-      "connections": [
-        {
-          "target": "Palantir",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
-        },
-        {
-          "target": "Thomas Shedd",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "FedScoop TTS transition",
-          "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
-        },
-        {
-          "target": "Clark Minor",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "fedscoop:palantir-agencies nextgov:barbaccia-cio fedscoop:minor-hhs-cio",
-          "description": "Both are Palantir alumni now in senior federal IT roles (Minor: HHS CIO, Barbaccia: Federal CIO at OMB). Two simultaneous Palantir-to-government placements while Palantir federal contracts near doubled."
-        },
-        {
-          "target": "Allan Mangaser",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "fedscoop.com/palantir-federal-agencies-government-data",
-          "description": "Both Palantir alums and Theorem alums now co-located in OMB CIO office. Barbaccia is Federal CIO, Mangaser is Senior Adviser to CIO."
-        },
-        {
-          "target": "Thomas Williams",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "pogo.org/gold-rush-top-trump-officials-silicon-valley-ties",
-          "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
-        },
-        {
-          "target": "Sam Corcos",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "home.treasury.gov/news/press-releases/sb0260",
-          "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-        }
-      ],
-      "secondHop": {
-        "Clark Minor": [
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Palantir engineer deployed as DOGE CIO of HHS. HHS Medicaid data feeds Palantir ELITE targeting tool \u2014 direct conflict between CIO authority and Palantir commercial interest."
-          },
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts"
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "13-yr Palantir veteran became HHS CIO May 2025, oversees largest civilian agency IT budget"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
-          },
-          {
-            "target": "Sam Corcos",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-          }
-        ],
-        "Palantir": [
-          {
-            "target": "Thomas Williams",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation."
-          },
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI"
-          },
-          {
-            "target": "CBP",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ],
-        "Sam Corcos": [
-          {
-            "target": "Scott Kupor",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
-          },
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
-          },
-          {
-            "target": "Andreessen Horowitz",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
-          }
-        ],
-        "Thomas Shedd": [
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former Tesla engineer (8 years) installed as GSA TTS Director; fired 18F division of tech consultants; reportedly maintained ties to Tesla while in government. GSA manages federal procurement including tech contracts"
-          },
-          {
-            "target": "Tesla",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Shedd on unpaid leave from Tesla while serving as GSA TTS director and DOL CIO with access to OSHA Tesla investigation data"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former Tesla software engineer, appointed to head Technology Transformation Services at GSA as part of DOGE"
-          },
-          {
-            "target": "Amanda Scales",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Musk company employees at separate agencies: Shedd (Tesla) at GSA/DOL controlling contracting/OSHA data, Scales (xAI) at OPM managing federal layoffs -- parallel Musk company-to-government pipeline at agencies regulating Musk businesses"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

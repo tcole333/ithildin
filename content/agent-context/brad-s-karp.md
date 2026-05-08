@@ -1,0 +1,25 @@
+# Brad S. Karp
+**Stats**: 8 findings, 10 connections, 0 entities
+**Dossier**: /dossiers/brad-s-karp
+
+## Key Findings
+- **[financial/confirmed]** Brad Karp, on Leon Black's behalf, formally requested in March 2016 that Paul Weiss act as a $2M escrow agent to make monthly payments to an individual pursuant to a contract — contemporaneous with the Black-Epstein $158M fee arrangement (2016-03-03) (Finding #10524)
+- **[location/confirmed]** Brad Karp was a recurring in-person participant at Jeffrey Epstein's 9 E 71st St residence from at least Jan 2014 through Mar 2019, with roughly monthly cadence; Karp brought his son David and wife Meredith to Epstein dinners incl Jul 21 2015 dinner with Soon-Yi Previn (Woody Allen's wife) (2015-07-21) (Finding #10532)
+- **[relationship/confirmed]** Jeffrey Epstein explicitly used Brad Karp and Paul Weiss as his referral network, steering the Bill & Melinda Gates Foundation to Karp and Paul Weiss partner Greg Ezring for a foundation-restructuring / donor-advised-fund project in 2014 (2014-07-09) (Finding #10528)
+- **[communication/confirmed]** Paul Weiss Chairman Brad Karp had direct, sustained personal correspondence and regular in-person meetings with Jeffrey Epstein from at least 2014 through March 2019 (2014-01-05) (Finding #10514)
+- **[relationship/confirmed]** Epstein introduced Brad Karp to Dr. Richard Merkin (Heritage Provider Network CEO) on Jan 5 2014 via the 'dick -brad, brad -dick, heritage group. calif.' terse introduction, integrating Karp into the same Epstein-captive pattern as Leon Black (2014-01-05) (Finding #10530)
+- **[legal/medium]** Brad Karp resigned as Paul Weiss Chairman Feb 4 2026 after DOJ released Karp-Epstein emails; firm's public defense ('adverse' to Epstein, only represented Leon Black on fee disputes) is contradicted by evidence of PW partners personally advising Epstein on tax, estate, securities (2026-02-04) (Finding #10535)
+- **[financial/medium]** Brad Karp is a major Democratic donor, contributing $338K+ in 2021-2025 alone (FEC partial cap), overwhelmingly to ActBlue, DNC, DSCC, Harris Victory Fund, Dan Goldman, John Fetterman, Val Demings, Kirsten Gillibrand, related vehicles (2025-12-31) (Finding #10533)
+- **[legal/medium]** Brad Karp signed the March 2025 $40M Trump executive-order settlement for Paul Weiss, establishing Karp as a reputational-crisis manager who repeatedly chooses accommodation over litigation under public pressure (2025-03-21) (Finding #10534)
+
+## Top Connections
+- **Richard Merkin** [legal/strong]: Jan 5 2014: Epstein directly introduced Merkin to Brad Karp (chairman, Paul Weiss). Establishes Merkin's Heritage Group as Paul Weiss client; Paul Weiss also represents Apollo Global Management.
+- **Jeffrey Epstein** [advisory/strong]: 30+ direct emails 2014-Mar 2019; ~20+ in-person meetings at 9 E 71st; Karp advised Epstein on fighting 2008 plea reopening per Bloomberg; Karp said 'I've got some ideas' after Epstein's Mar 3 2019 'will need tough civil attny'
+- **Leon Black** [legal/strong]: Karp was Leon Black's personal counsel via Paul Weiss (Apollo chairman's longtime law firm); Karp handled Black's tax remediation (Forms 8865/8858/5471 for 2007-2014), Black's 2013 Will & Rev Trust, Black's Phaidon LLC loss-harvesting structure, and Black's M escrow request (rejected by PW's Birenboim)
+- **Paul Weiss Rifkind Wharton & Garrison LLP** [employment/strong]: Karp was Chairman of Paul Weiss 2008 to Feb 4 2026; resigned after DOJ release of Epstein emails; succeeded by Scott Barshay
+- **Richard Merkin** [social/medium]: Introduced by Epstein Jan 5 2014 'dick -brad, brad -dick, heritage group. calif.'; Karp is repeat-player bridge between Epstein-captive Merkin and Epstein-captive Leon Black
+- **Kathleen Ruemmler** [social/medium]: Co-attended Epstein dinner May 19 2017 at 9 E 71st (Lesley Groff email); Karp considered Ruemmler as PW West Coast collaborator per Epstein 2014 Gates Foundation correspondence
+- **Jes Staley** [social/medium]: Co-attended May 21 2018 Woody Allen movie screening at Epstein's home; Karp + David Karp + Meredith Karp on same guest list as Staley + wife + daughter Alexa + mother-in-law
+- **Michael Wolff** [advisory/medium]: Attended Jan 31 2018 dinner with UN GA President Lajcak at Epstein's; Mar 23 2018 Wolff datebook: 'Also saw Brad Karp who is super menchy and offering much help on next book'; Jun 13 2018 Karp editing Wolff piece ('my suggested type of edits... will speak shortly to Michael')
+- **Bill Gates** [advisory/medium]: Epstein steered Gates Foundation to Karp/PW for DAF-restructuring project 2014; told Gates GC Connie Collingsworth to 'call Brad Karp' at Epstein's suggestion; urged Bill to personally call Karp to praise PW partners Russo and Ezring
+- **Darren Indyke** [social/weak]: Indyke's legal assistant Bebe Avdiu scheduled Epstein's Jul 21 2015 dinner hosting Brad Karp and his son with Soon-Yi Previn; routine coordination point between Indyke's office (Epstein's long-time personal counsel) and Karp

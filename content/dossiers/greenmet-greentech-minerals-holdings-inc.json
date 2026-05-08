@@ -1,0 +1,562 @@
+{
+  "name": "GreenMet (Greentech Minerals Holdings Inc.)",
+  "slug": "greenmet-greentech-minerals-holdings-inc",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.219983",
+  "last_updated": "2026-03-24T00:19:25",
+  "stats": {
+    "total_findings": 15,
+    "total_connections": 1,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "relationship": 1,
+      "intelligence": 1,
+      "document": 3,
+      "identity": 2,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-03-24T00:19:25"
+  },
+  "findings": [
+    {
+      "id": 6367,
+      "finding_type": "financial",
+      "summary": "Greentech Minerals Holdings Inc. signed a Financing and Purchase Option Agreement with Texas Mineral Resources Corp. (TMRC) on November 8, 2021. Greentech agreed to fund a $6.5M bankable feasibility study for TMRC's Black Hawk Mining District silver project in NM in exchange for 20.2% equity in a proposed TMRC-Santa Fe Gold JV. The deal was abandoned when Greentech determined not to pursue the financing option per TMRC Q1 FY2023 10-Q.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-11-08",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:01:58",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:0001580695-21-000344",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7380,
+      "finding_type": "financial",
+      "summary": "GreenMet's proven compensation model from prior deals: In Nov 2021, Greentech Minerals Holdings entered a Financing and Purchase Option Agreement with Texas Mineral Resources Corp (TMRC, SEC CIK 1445942) in which GreenMet funded a .5M exploration feasibility study in exchange for 20.2% equity in the resulting TMRC-Santa Fe Gold joint venture. This equity-for-services model \u2014 fund exploration, receive project equity \u2014 is GreenMet's established deal structure.",
+      "detail": null,
+      "source_datasets": [
+        "SEC EDGAR"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-11-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:29",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1445942%3A8K%3A20211110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7391,
+      "finding_type": "financial",
+      "summary": "GreenMet's business model from ION Analytics reporting: Libra Group holds 44% minority stake in GreenMet since March 2022. GreenMet works with Cantor Fitzgerald on Tanbreez project finance. Drew Horn described GreenMet's role as 'a facilitator' regarding Tanbreez. GreenMet is soliciting investors for Tanbreez (approximately USD 211M needed for scaling production, infrastructure, and hydropower). GreenMet also helped secure USD 50M Cerberus Capital Management investment in Torngat Metals (Strange Lake, Canada rare earth project) in Nov 2022 \u2014 GreenMet 'helped identify and develop the investment opportunity.' GreenMet's compensation model appears to be: (1) equity stakes in projects it facilitates, (2) advisory/facilitation fees for connecting capital to projects, (3) potential carried interest or success fees on capital raised.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:22",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ionanalytics.com/advisor-solicits-investors,prnewswire.com/ev-metals-supply-chain-leader-greenmet",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7416,
+      "finding_type": "relationship",
+      "summary": "GreenMet advisory network extends beyond CRML/Tanbreez. Three additional confirmed client/advisory relationships: (1) NioCorp Developments (NASDAQ: NB, CIK 1512228) \u2014 Drew Horn presented at NioCorp Elk Creek Critical Minerals Project webcast April 29, 2025. GreenMet appears in NioCorp EDGAR filings. Javelin Advisors (Sorial/Schiller) also lobbies for NioCorp. (2) US Critical Materials Corp \u2014 GreenMet entered strategic advisory alliance to support federal funding for gallium and critical mineral production. (3) Texas Mineral Resources Corp (TMRC) \u2014 Nov 2021 Financing and Purchase Option Agreement, equity-for-services deal. These relationships establish GreenMet as a serial critical minerals advisor with a pattern of facilitating government financing and private capital for pre-revenue mining companies. The NioCorp overlap with Javelin Advisors is particularly notable: both GreenMet (Horn) and Javelin (Sorial/Schiller) service the same client.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-04-29",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:29",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1512228",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1445942%3A8K%3A20211110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7414,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: GreenMet CRML compensation mechanism assessment. After exhaustive review of all CRML SEC filings (167 total including 20-F annual reports, 6-K current reports, F-3 registrations, Form 144 insider sales, Schedule 13D/G beneficial ownership, and material contracts/related party sections), GreenMet compensation is confirmed as COMPLETELY UNDISCLOSED in public SEC filings. Most likely compensation vectors: (1) EQUITY IN TANBREEZ (not CRML) \u2014 GreenMet's proven business model from TMRC deal (2021) was equity-for-services: fund exploration, receive project equity. If GreenMet holds equity in Tanbreez Mining Greenland A/S directly (rather than CRML shares), this would be invisible to US SEC filings since Tanbreez is a Danish/Greenlandic entity. Rimbal sold stakes to CRML, but GreenMet could hold a separate equity slice via a private arrangement with Rimbal or Tanbreez. (2) SUCCESS FEE FROM RIMBAL \u2014 Rimbal received USD 14M from selling 2M CRML shares in the Oct 2025 PIPE, plus approximately 8.4M shares in original acquisition. A referral/introduction fee paid by Rimbal (Australian private co) to GreenMet would be invisible to US disclosure. (3) ADVISORY FEE FROM CANTOR FITZGERALD \u2014 GreenMet works with Cantor Fitzgerald on Tanbreez project finance. Cantor is also the SPAC underwriter. A fee arrangement between GreenMet and Cantor would not require CRML disclosure. (4) FUTURE EQUITY/WARRANTS \u2014 compensation may be structured as deferred equity triggered by milestones (e.g., EXIM loan closing, Stage 2 completion) that have not yet occurred and thus not yet disclosed. GreenMet also operates as a fundraising intermediary (helped secure USD 50M Cerberus investment in Torngat Metals) where compensation is typically a percentage of capital raised. The Tanbreez facilitation likely follows this pattern but is structured through non-US entities to avoid SEC disclosure requirements.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-06",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:13",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3A20F%3A20251006",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1445942%3A8K%3A20211110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7383,
+      "finding_type": "document",
+      "summary": "CRML Form 144 insider sales review: All 6 Form 144 filings for CRML (CIK 1951089) were reviewed. Sellers are: (1) European Lithium Ltd \u2014 5M shares, Jan 14 2026, 10% shareholder, BMO Capital Markets. (2) Mykhailo Zhernov \u2014 50K shares, Oct 31 2025, Director, compensation, Oppenheimer. (3) Thomas John Harper \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (4) Sergey Savchenko \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (5) Michael J. Hanson \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (6) Dietrich Wanke \u2014 120K shares, Oct 22 2025, Director, compensation, Oppenheimer. GreenMet, Drew Horn, George Sorial, and Keith Schiller are ABSENT from all Form 144 filings. No GreenMet warrants or restricted shares appear in insider sale filings.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-01-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:43",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3A144%3A20260114",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3A144%3A20251031",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3A144%3A20251010",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7387,
+      "finding_type": "document",
+      "summary": "GreenMet's CRML/Tanbreez compensation vector analysis: Four F-3 registration statements and three Schedule 13D/G filings for CRML were reviewed. Selling shareholders in F-3 filings are: European Lithium, Rimbal, Alyeska Master Fund, Swiss Commodity Re, Malcolm Scott Macintyre, GEM Global Yield, Jett Capital, J.V.B. Financial Group. Schedule 13D/G filers are: European Lithium (74.3%), Empery Asset Management (9.23%). GreenMet, Drew Horn, George Sorial, and Keith Schiller appear in NONE of these filings. Combined with the prior zero-result EDGAR full-text search across 167 filings, this confirms GreenMet has no SEC-disclosed equity position, warrant holding, or advisory arrangement in any CRML regulatory filing.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:08",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3AF3%3A20260223",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3AF3%3A20260318",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3ASC13D%3A20240305",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK1951089%3ASC13G%3A20241016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7555,
+      "finding_type": "identity",
+      "summary": "GreenMet operates four distinct legal entities \u2014 advisory, capital, innovation, and parent \u2014 creating multiple vectors for undisclosed Tanbreez compensation",
+      "detail": "GreenMet corporate structure confirmed from web presence: (1) Greentech Minerals Holdings Inc. (parent, Delaware incorporated 2021-04-09, DC registered at 1825 K St NW Ste 515, DC 20006). (2) GreenMet Consulting LLC dba GreenMet Advisory (DC Foreign LLC, now withdrawn) \u2014 policy and business strategy consulting. (3) GreenMet Real Asset Management LLC dba GreenMet Capital (DC Foreign LLC, now withdrawn) \u2014 connects critical mineral projects with investment solutions. (4) GreenMet Technologies LLC dba GreenMet Innovation (entity not found in any public registry). KEY: GreenMet Capital is described as connecting projects with tailored investment solutions and facilitating project funding. This is EXACTLY the function GreenMet performed for Tanbreez. If GreenMet Capital received carried interest, success fees, or equity warrants from the CRML-Tanbreez transaction, it would flow through a now-withdrawn LLC with no public filing requirements. The withdrawn status of both DC LLCs is itself significant \u2014 it removes them from ongoing DC filing and disclosure requirements.",
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:59",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GreenMet website; GreenMet Advisory website; GreenMet Capital website; DC corporate registry",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7557,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULT: GreenMet equity-in-Tanbreez hypothesis weakened but not disproven by Danish registry and SEC data",
+      "detail": "HYPOTHESIS TEST: Our prior synthesis (#7414) hypothesized GreenMet compensation for the CRML-Tanbreez brokerage is structured as equity in Tanbreez Mining Greenland A/S (a Danish/Greenlandic entity invisible to US SEC filings). FINDINGS: (1) Danish CVR registry (CVR 12579918) lists ONLY three shareholders: Critical Metals Corp, Rimbal Pty Ltd, European Lithium Ltd. No GreenMet entity appears. (2) Ownership math: CRML 92.5% + European Lithium 7.5% = 100%. Zero shares unaccounted for. (3) However, CVR only requires registration of significant shareholders (typically 5%+ of voting rights). A small equity stake (e.g., 1-2%) could exist without CVR registration. (4) The equity-for-services model from GreenMet's TMRC deal (20.2% stake) involved a JOINT VENTURE, not minority equity in an existing entity. The Tanbreez deal structure is different. REVISED ASSESSMENT: Direct equity in Tanbreez A/S is UNLIKELY given the 100% accounted ownership. More plausible compensation vectors remain: (a) success fee from Rimbal (invisible Australian private transaction), (b) advisory fee from Cantor Fitzgerald, (c) carried interest in GreenMet Capital fund, (d) deferred equity/warrants in CRML itself (not yet triggered/disclosed), (e) consulting fees from CRML paid through ordinary business expenses (below materiality threshold for SEC disclosure).",
+      "source_datasets": [
+        "registry",
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:17:34",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Danish CVR registry CVR 12579918; CRML SEC filings; GlobeNewswire ownership press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6331,
+      "finding_type": "identity",
+      "summary": "George Sorial and Keith Schiller appear in Washington DC corporate registry documents as beneficial owners of GreenMet (Greentech Minerals Holdings Inc.), alongside CEO Drew Horn. Sorial stated they are 'passive minority shareholders in GreenMet and have no management role in the company.' They resigned board/advisor roles in early 2025 but retained shares. Company HQ: 1825 K St NW 515 Washington DC 20006. Founded 2021.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:57",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP:greenland-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6332,
+      "finding_type": "document",
+      "summary": "GreenMet's compensation for brokering the Critical Metals Corp (CRML) / Tanbreez partnership is NOT disclosed in any CRML SEC filing (confirmed: 0 EDGAR results for GreenMet or Sorial). GreenMet's press release describes itself as facilitating the April 2025 strategic partnership and the August 2025 10-year offtake LOI between CRML/Tanbreez and Ucore Rare Metals for a DOD-funded Louisiana processing facility. GreenMet's role described as 'played a central role in facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination.' No compensation terms disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:57",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=efts-search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6338,
+      "finding_type": "financial",
+      "summary": "GreenMet (fka Greentech Minerals Holdings Inc.) hired McKeon Group Inc as LDA registered lobbyist beginning Q4 2021 through at least Q1 2024. Lobbying issues: Natural Resources, Defense, Environment/Energy for 'rare earth and critical elements policy.' Government entities contacted include: DOD, White House Office, NSC, NEC, State Dept, Senate, House, Interior Dept, Energy Dept. Total disclosed lobbying income to McKeon: ,500 across 20 filings. Peak quarter Q2 2022: ,500. Lobbyist: Adam Raezler.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:20:32",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:GreenMet-McKeon-2021-2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6368,
+      "finding_type": "financial",
+      "summary": "GreenMet's compensation structure for the CRML-Tanbreez brokerage is structurally invisible. After reviewing all 167 CRML SEC filings (via EDGAR full-text search), the 2024 and 2025 20-F annual reports, and all 6-K press releases, GreenMet is mentioned in ZERO CRML SEC filings. GreenMet's own press releases describe its role as 'facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination' but disclose no fees, equity compensation, advisory agreement, or financial arrangement. The compensation mechanism (if any) is not publicly disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:07",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6372,
+      "finding_type": "financial",
+      "summary": "GreenMet's three-division corporate structure maps to specific legal entities: (1) GreenMet Advisory = GreenMet Consulting LLC (DC Foreign LLC C00007696390, withdrawn). (2) GreenMet Capital = GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, withdrawn). (3) GreenMet Innovation = GreenMet Technologies LLC (entity not found in any ingested registries \u2014 DC, FL, NY, DE searches returned zero results; OpenCorporates unavailable due to API key). The absence of GreenMet Technologies LLC from public registries is investigatively significant.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:46",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WEB:greenmet.com/who-we-are",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6373,
+      "finding_type": "financial",
+      "summary": "GreenMet's lobbying expenditure: McKeon Group Inc. lobbied for GreenMet from Q4 2021 through Q3 2023, generating disclosed income of: Q4 2021 $12,000; Q1 2022 $30,000; Q2 2022 $77,500; Q3 2022 $30,000; Q4 2022 $30,000; Q1 2023 $30,000; Q2 2023 $40,000; Q3 2023 $20,000. Total McKeon Group paid by GreenMet: ~$269,500. From Q2 2023 onwards, GreenMet self-lobbied through in-house arm Greentech Minerals Holdings LLC (fka GreenMet Consulting), targeting DoD, DoE, DoS, OSTP, Commerce, DLA, NSC, EOP, Treasury, USTDA.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:56",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:SENATE-FILINGS-GREENMET",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3826,
+      "person_a": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "person_b": "Javelin Advisors LLC",
+      "relationship_type": "corporate",
+      "description": "Shared beneficial owners: George Sorial and Keith Schiller are passive shareholders in GreenMet and co-founders of Javelin. Both entities operate in rare earth/critical minerals space. Javelin registered under FARA for Pakistan mineral lobbying; GreenMet facilitates Greenland rare earth deals. Both service NioCorp as client.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:25",
+      "profile_id": "tech-right",
+      "other_person": "Javelin Advisors LLC",
+      "other_person_slug": "javelin-advisors-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Global Witness FARA investigation",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP investigation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-11-08",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Greentech Minerals Holdings Inc. signed a Financing and Purchase Option Agreement with Texas Mineral Resources Corp. (TMRC) on November 8, 2021. Greentech agreed to fund a $6.5M bankable feasibility study for TMRC's Black Hawk Mining District silver project in NM in exchange for 20.2% equity in a proposed TMRC-Santa Fe Gold JV. The deal was abandoned when Greentech determined not to pursue the financing option per TMRC Q1 FY2023 10-Q.",
+      "confidence": "high",
+      "id": 6367
+    },
+    {
+      "date": "2021-11-08",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GreenMet's proven compensation model from prior deals: In Nov 2021, Greentech Minerals Holdings entered a Financing and Purchase Option Agreement with Texas Mineral Resources Corp (TMRC, SEC CIK 1445942) in which GreenMet funded a .5M exploration feasibility study in exchange for 20.2% equity in the resulting TMRC-Santa Fe Gold joint venture. This equity-for-services model \u2014 fund exploration, receive project equity \u2014 is GreenMet's established deal structure.",
+      "confidence": "high",
+      "id": 7380
+    },
+    {
+      "date": "2025-04-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GreenMet's business model from ION Analytics reporting: Libra Group holds 44% minority stake in GreenMet since March 2022. GreenMet works with Cantor Fitzgerald on Tanbreez project finance. Drew Horn described GreenMet's role as 'a facilitator' regarding Tanbreez. GreenMet is soliciting investors for Tanbreez (approximately USD 211M needed for scaling production, infrastructure, and hydropower). GreenMet also helped secure USD 50M Cerberus Capital Management investment in Torngat Metals (Strange Lake, Canada rare earth project) in Nov 2022 \u2014 GreenMet 'helped identify and develop the investment opportunity.' GreenMet's compensation model appears to be: (1) equity stakes in projects it facilitates, (2) advisory/facilitation fees for connecting capital to projects, (3) potential carried interest or success fees on capital raised.",
+      "confidence": "medium",
+      "id": 7391
+    },
+    {
+      "date": "2025-04-29",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "GreenMet advisory network extends beyond CRML/Tanbreez. Three additional confirmed client/advisory relationships: (1) NioCorp Developments (NASDAQ: NB, CIK 1512228) \u2014 Drew Horn presented at NioCorp Elk Creek Critical Minerals Project webcast April 29, 2025. GreenMet appears in NioCorp EDGAR filings. Javelin Advisors (Sorial/Schiller) also lobbies for NioCorp. (2) US Critical Materials Corp \u2014 GreenMet entered strategic advisory alliance to support federal funding for gallium and critical mineral production. (3) Texas Mineral Resources Corp (TMRC) \u2014 Nov 2021 Financing and Purchase Option Agreement, equity-for-services deal. These relationships establish GreenMet as a serial critical minerals advisor with a pattern of facilitating government financing and private capital for pre-revenue mining companies. The NioCorp overlap with Javelin Advisors is particularly notable: both GreenMet (Horn) and Javelin (Sorial/Schiller) service the same client.",
+      "confidence": "medium",
+      "id": 7416
+    },
+    {
+      "date": "2025-10-06",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: GreenMet CRML compensation mechanism assessment. After exhaustive review of all CRML SEC filings (167 total including 20-F annual reports, 6-K current reports, F-3 registrations, Form 144 insider sales, Schedule 13D/G beneficial ownership, and material contracts/related party sections), GreenMet compensation is confirmed as COMPLETELY UNDISCLOSED in public SEC filings. Most likely compensation vectors: (1) EQUITY IN TANBREEZ (not CRML) \u2014 GreenMet's proven business model from TMRC deal (2021) was equity-for-services: fund exploration, receive project equity. If GreenMet holds equity in Tanbreez Mining Greenland A/S directly (rather than CRML shares), this would be invisible to US SEC filings since Tanbreez is a Danish/Greenlandic entity. Rimbal sold stakes to CRML, but GreenMet could hold a separate equity slice via a private arrangement with Rimbal or Tanbreez. (2) SUCCESS FEE FROM RIMBAL \u2014 Rimbal received USD 14M from selling 2M CRML shares in the Oct 2025 PIPE, plus approximately 8.4M shares in original acquisition. A referral/introduction fee paid by Rimbal (Australian private co) to GreenMet would be invisible to US disclosure. (3) ADVISORY FEE FROM CANTOR FITZGERALD \u2014 GreenMet works with Cantor Fitzgerald on Tanbreez project finance. Cantor is also the SPAC underwriter. A fee arrangement between GreenMet and Cantor would not require CRML disclosure. (4) FUTURE EQUITY/WARRANTS \u2014 compensation may be structured as deferred equity triggered by milestones (e.g., EXIM loan closing, Stage 2 completion) that have not yet occurred and thus not yet disclosed. GreenMet also operates as a fundraising intermediary (helped secure USD 50M Cerberus investment in Torngat Metals) where compensation is typically a percentage of capital raised. The Tanbreez facilitation likely follows this pattern but is structured through non-US entities to avoid SEC disclosure requirements.",
+      "confidence": "medium",
+      "id": 7414
+    },
+    {
+      "date": "2026-01-14",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "CRML Form 144 insider sales review: All 6 Form 144 filings for CRML (CIK 1951089) were reviewed. Sellers are: (1) European Lithium Ltd \u2014 5M shares, Jan 14 2026, 10% shareholder, BMO Capital Markets. (2) Mykhailo Zhernov \u2014 50K shares, Oct 31 2025, Director, compensation, Oppenheimer. (3) Thomas John Harper \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (4) Sergey Savchenko \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (5) Michael J. Hanson \u2014 50K shares, Oct 10 2025, Officer, compensation, Oppenheimer. (6) Dietrich Wanke \u2014 120K shares, Oct 22 2025, Director, compensation, Oppenheimer. GreenMet, Drew Horn, George Sorial, and Keith Schiller are ABSENT from all Form 144 filings. No GreenMet warrants or restricted shares appear in insider sale filings.",
+      "confidence": "confirmed",
+      "id": 7383
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "GreenMet's CRML/Tanbreez compensation vector analysis: Four F-3 registration statements and three Schedule 13D/G filings for CRML were reviewed. Selling shareholders in F-3 filings are: European Lithium, Rimbal, Alyeska Master Fund, Swiss Commodity Re, Malcolm Scott Macintyre, GEM Global Yield, Jett Capital, J.V.B. Financial Group. Schedule 13D/G filers are: European Lithium (74.3%), Empery Asset Management (9.23%). GreenMet, Drew Horn, George Sorial, and Keith Schiller appear in NONE of these filings. Combined with the prior zero-result EDGAR full-text search across 167 filings, this confirms GreenMet has no SEC-disclosed equity position, warrant holding, or advisory arrangement in any CRML regulatory filing.",
+      "confidence": "high",
+      "id": 7387
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "GreenMet operates four distinct legal entities \u2014 advisory, capital, innovation, and parent \u2014 creating multiple vectors for undisclosed Tanbreez compensation",
+      "confidence": "medium",
+      "id": 7555
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULT: GreenMet equity-in-Tanbreez hypothesis weakened but not disproven by Danish registry and SEC data",
+      "confidence": "medium",
+      "id": 7557
+    }
+  ]
+}

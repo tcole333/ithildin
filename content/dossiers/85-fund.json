@@ -1,0 +1,537 @@
+{
+  "name": "85 Fund",
+  "slug": "85-fund",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.374180",
+  "last_updated": "2026-03-23T19:01:25",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 10,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "background": 1,
+      "intelligence": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "funds": 3,
+      "financial": 2,
+      "shares_officer": 1,
+      "corporate": 1,
+      "employment": 2,
+      "contracts_with": 1
+    },
+    "last_updated": "2026-03-23T19:01:25"
+  },
+  "findings": [
+    {
+      "id": 7274,
+      "finding_type": "financial",
+      "summary": "85 Fund paid CRC Advisors (Leonard Leo's for-profit consulting firm) 88M+ total since 2012, with 80M since Leo took over CRC in 2020. In 2022 alone, CRC received 21.4M from 85 Fund for consulting/public affairs/advertising per LittleSis. Total Leo network payments to CRC exceed 100M per CREW investigation. CRC brought in 33M in 2023, 26M (79%) from Leo-tied organizations. NYT reported some conservative operatives believe payments to CRC are a precondition for getting money from Leo's dark money network.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:51",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1954965",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7266,
+      "finding_type": "background",
+      "summary": "85 Fund (EIN 20-2466871) is a 501(c)(3) formerly known as Judicial Education Project, rebranded 2020. Revenue grew from 7.8M (2018) to 143M (2023). Registered address: 201 Main St, Fort Worth TX 76102. Operates under 5+ fictitious names: Honest Elections Project, Free to Learn, Law and Policy Forum, American Parents Coalition. Officers (2023): Todd Graves (Chairman, unpaid), Carrie Severino (Dir/Sec, 246K), Gary Marx (Dir/Treas, unpaid), Ormal Skinner (Counsel, 300K), Jason Snead (Counsel, 245K), Ann Corkery (Counsel, 198K), Chad Ennis (Counsel, 156K), Jacqueline Doyer (Counsel, 115K). Total officer comp: 1.26M on 143M revenue.",
+      "detail": null,
+      "source_datasets": [
+        "IRS 990",
+        "ProPublica Nonprofit Explorer"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:25",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7272,
+      "finding_type": "financial",
+      "summary": "85 Fund grant flows (2020-2023): RECEIVED 583M total. Top donors: Schwab Charitable 323M (2021-2023), Donor Advised Charitable Giving Inc 160M (2024), DonorsTrust 56M (2020-2021), Judicial Education Project/self 49M, National Philanthropic Trust 11M, RGA Policy Inst 4.5M, National Christian Charitable Fdn 2M, Fidelity 9M, Diana Davis Spencer Fdn 450K, Thomas W Smith Fdn 300K, Story Garschina Fdn 200K, Bradley Fdn 200K. GRANTED 320M total. Top recipients: DonorsTrust 267.7M (2020-2023), Federalist Society 8.7M, Ethics and Public Policy Center 4M, FIRE 2.1M, ALEC 955K, Turning Point USA 3.3M, FGA 2M, Heritage 40K+, Club for Growth Fdn 1.5M, Hawthorn Fdn 1.2M, Manhattan Institute 650K. Primary money flow: DAFs -> 85 Fund -> DonorsTrust -> downstream orgs.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:40",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7294,
+      "finding_type": "financial",
+      "summary": "85 Fund revenue trajectory shows explosive growth: 2014: 9.1M, 2015: 11.3M, 2016: 12.4M, 2017: 9.5M, 2018: 7.8M, 2019: 13.5M, 2020: 65.8M (5x increase, election year), 2021: 117.3M, 2022: 134.8M, 2023: 143.1M. Total revenue 2020-2023: 461M. The 2020 jump from 13.5M to 65.8M coincides with the JEP-to-85 Fund rebranding and the pivot to fiscal sponsor model. 100% of revenue comes from contributions/grants (zero program service revenue, zero investment income). Assets remain minimal (3.9M EOY 2023) indicating pass-through structure -- money flows in and is immediately redistributed.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:54",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7277,
+      "finding_type": "intelligence",
+      "summary": "85 Fund operates as a fiscal sponsor hub: DBA names allow launching new campaigns without forming new entities. Known DBAs/fictitious names: (1) Honest Elections Project - election integrity advocacy, (2) Free to Learn - education policy, (3) Law and Policy Forum, (4) American Parents Coalition (registered TX 2024). Consovoy McCarthy PLLC provided legal services. Also relationship with John Eastman per LittleSis. The fiscal sponsor model means any DBA can receive and spend money under the 85 Fund's 501(c)(3) umbrella with minimal disclosure.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:01",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis ID 371268",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7282,
+      "finding_type": "financial",
+      "summary": "LEO NETWORK CORPORATE ARCHITECTURE (2020-present): Twin hub model: 85 Fund (501c3, EIN 20-2466871) + Concord Fund (501c4, EIN 20-2303252). Money flows through DAFs (Schwab Charitable, Fidelity, National Philanthropic Trust) to obscure donors. Above hubs: Marble Freedom Trust (received 1.6B Barre Seid donation 2021) grants to Rule of Law Trust (153M in 2021) and Concord Fund (190M total 2021-2024). Rule of Law Trust grants to JCN/Concord (21.5M), Schwab Charitable (30M), Fidelity (9M), DonorsTrust (5.8M). Below hubs: 85 Fund and Concord Fund distribute to 100+ downstream orgs. Leo personally serves as Trustee of Rule of Law Trust (600K comp) and Chairman of Teneo Network. For-profit extraction: CRC Advisors (Leo chairman) received 88M+ from 85 Fund. Ann and Neil Corkery serve as operatives across multiple Leo entities.",
+      "detail": null,
+      "source_datasets": [
+        "990",
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-01-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:17",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2303252",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 83-1047727",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7298,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: (1) No corporate registry record found in unified registry for 85 Fund or Judicial Crisis Network -- FL-only registries don't cover DC/VA nonprofits. Need DC DLCP or VA SCC registry search. (2) No FARA registration found. (3) No OpenSanctions/PEP matches. (4) No USASpending federal contracts/grants. (5) No GLEIF/LEI records (expected for nonprofit). (6) EDGAR returned only 1 result (not substantive). (7) No 990 financials in bulk DB (only filing data from ProPublica). (8) No 990 officers prior to 2023 in bulk DB. (9) Leonard Leo does NOT appear on 85 Fund or Concord Fund 990 officer lists -- operates through intermediaries (Severino, Corkery, Graves, Marx).",
+      "detail": null,
+      "source_datasets": [
+        "990",
+        "fara",
+        "opensanctions"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:25",
+      "target_name": "85 Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "registry search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3372,
+      "person_a": "85 Fund",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "funds",
+      "description": "85 Fund (Leonard Leo) received 413M \u2014 70% of all tracked OCVC member funding. Houses Honest Elections Project, direct OCVC member.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:03:31",
+      "profile_id": "tech-right",
+      "other_person": "Only Citizens Vote Coalition",
+      "other_person_slug": "only-citizens-vote-coalition",
+      "evidence": []
+    },
+    {
+      "id": 3398,
+      "person_a": "85 Fund",
+      "person_b": "Marble Freedom Trust",
+      "relationship_type": "funds",
+      "description": "MFT granted via Schwab Charitable: 153.8M(2021) and 153.75M(2022) ultimately to 85 Fund",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:43:28",
+      "profile_id": "tech-right",
+      "other_person": "Marble Freedom Trust",
+      "other_person_slug": "marble-freedom-trust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MFT 990 Schedule I",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3619,
+      "person_a": "85 Fund",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:36",
+      "profile_id": "tech-right",
+      "other_person": "Public Interest Legal Foundation",
+      "other_person_slug": "public-interest-legal-foundation",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "propublica.org/nonprofits/990-search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3624,
+      "person_a": "85 Fund",
+      "person_b": "Concord Fund",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:56:05",
+      "profile_id": "tech-right",
+      "other_person": "Concord Fund",
+      "other_person_slug": "concord-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 202466871; LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3667,
+      "person_a": "85 Fund",
+      "person_b": "Leonard Leo",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:59",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990, LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3672,
+      "person_a": "85 Fund",
+      "person_b": "Concord Fund",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:08",
+      "profile_id": "tech-right",
+      "other_person": "Concord Fund",
+      "other_person_slug": "concord-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990, LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3673,
+      "person_a": "85 Fund",
+      "person_b": "DonorsTrust",
+      "relationship_type": "funds",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:09",
+      "profile_id": "tech-right",
+      "other_person": "DonorsTrust",
+      "other_person_slug": "donorstrust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3675,
+      "person_a": "85 Fund",
+      "person_b": "Carrie Severino",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:10",
+      "profile_id": "tech-right",
+      "other_person": "Carrie Severino",
+      "other_person_slug": "carrie-severino",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3676,
+      "person_a": "85 Fund",
+      "person_b": "CRC Advisors",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:11",
+      "profile_id": "tech-right",
+      "other_person": "CRC Advisors",
+      "other_person_slug": "crc-advisors",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1954965",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3678,
+      "person_a": "85 Fund",
+      "person_b": "Todd P. Graves",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:12",
+      "profile_id": "tech-right",
+      "other_person": "Todd P. Graves",
+      "other_person_slug": "todd-p-graves",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 20-2466871",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "85 Fund paid CRC Advisors (Leonard Leo's for-profit consulting firm) 88M+ total since 2012, with 80M since Leo took over CRC in 2020. In 2022 alone, CRC received 21.4M from 85 Fund for consulting/public affairs/advertising per LittleSis. Total Leo network payments to CRC exceed 100M per CREW investigation. CRC brought in 33M in 2023, 26M (79%) from Leo-tied organizations. NYT reported some conservative operatives believe payments to CRC are a precondition for getting money from Leo's dark money network.",
+      "confidence": "high",
+      "id": 7274
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "85 Fund (EIN 20-2466871) is a 501(c)(3) formerly known as Judicial Education Project, rebranded 2020. Revenue grew from 7.8M (2018) to 143M (2023). Registered address: 201 Main St, Fort Worth TX 76102. Operates under 5+ fictitious names: Honest Elections Project, Free to Learn, Law and Policy Forum, American Parents Coalition. Officers (2023): Todd Graves (Chairman, unpaid), Carrie Severino (Dir/Sec, 246K), Gary Marx (Dir/Treas, unpaid), Ormal Skinner (Counsel, 300K), Jason Snead (Counsel, 245K), Ann Corkery (Counsel, 198K), Chad Ennis (Counsel, 156K), Jacqueline Doyer (Counsel, 115K). Total officer comp: 1.26M on 143M revenue.",
+      "confidence": "confirmed",
+      "id": 7266
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "85 Fund grant flows (2020-2023): RECEIVED 583M total. Top donors: Schwab Charitable 323M (2021-2023), Donor Advised Charitable Giving Inc 160M (2024), DonorsTrust 56M (2020-2021), Judicial Education Project/self 49M, National Philanthropic Trust 11M, RGA Policy Inst 4.5M, National Christian Charitable Fdn 2M, Fidelity 9M, Diana Davis Spencer Fdn 450K, Thomas W Smith Fdn 300K, Story Garschina Fdn 200K, Bradley Fdn 200K. GRANTED 320M total. Top recipients: DonorsTrust 267.7M (2020-2023), Federalist Society 8.7M, Ethics and Public Policy Center 4M, FIRE 2.1M, ALEC 955K, Turning Point USA 3.3M, FGA 2M, Heritage 40K+, Club for Growth Fdn 1.5M, Hawthorn Fdn 1.2M, Manhattan Institute 650K. Primary money flow: DAFs -> 85 Fund -> DonorsTrust -> downstream orgs.",
+      "confidence": "high",
+      "id": 7272
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "85 Fund revenue trajectory shows explosive growth: 2014: 9.1M, 2015: 11.3M, 2016: 12.4M, 2017: 9.5M, 2018: 7.8M, 2019: 13.5M, 2020: 65.8M (5x increase, election year), 2021: 117.3M, 2022: 134.8M, 2023: 143.1M. Total revenue 2020-2023: 461M. The 2020 jump from 13.5M to 65.8M coincides with the JEP-to-85 Fund rebranding and the pivot to fiscal sponsor model. 100% of revenue comes from contributions/grants (zero program service revenue, zero investment income). Assets remain minimal (3.9M EOY 2023) indicating pass-through structure -- money flows in and is immediately redistributed.",
+      "confidence": "confirmed",
+      "id": 7294
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "85 Fund operates as a fiscal sponsor hub: DBA names allow launching new campaigns without forming new entities. Known DBAs/fictitious names: (1) Honest Elections Project - election integrity advocacy, (2) Free to Learn - education policy, (3) Law and Policy Forum, (4) American Parents Coalition (registered TX 2024). Consovoy McCarthy PLLC provided legal services. Also relationship with John Eastman per LittleSis. The fiscal sponsor model means any DBA can receive and spend money under the 85 Fund's 501(c)(3) umbrella with minimal disclosure.",
+      "confidence": "medium",
+      "id": 7277
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "LEO NETWORK CORPORATE ARCHITECTURE (2020-present): Twin hub model: 85 Fund (501c3, EIN 20-2466871) + Concord Fund (501c4, EIN 20-2303252). Money flows through DAFs (Schwab Charitable, Fidelity, National Philanthropic Trust) to obscure donors. Above hubs: Marble Freedom Trust (received 1.6B Barre Seid donation 2021) grants to Rule of Law Trust (153M in 2021) and Concord Fund (190M total 2021-2024). Rule of Law Trust grants to JCN/Concord (21.5M), Schwab Charitable (30M), Fidelity (9M), DonorsTrust (5.8M). Below hubs: 85 Fund and Concord Fund distribute to 100+ downstream orgs. Leo personally serves as Trustee of Rule of Law Trust (600K comp) and Chairman of Teneo Network. For-profit extraction: CRC Advisors (Leo chairman) received 88M+ from 85 Fund. Ann and Neil Corkery serve as operatives across multiple Leo entities.",
+      "confidence": "medium",
+      "id": 7282
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: (1) No corporate registry record found in unified registry for 85 Fund or Judicial Crisis Network -- FL-only registries don't cover DC/VA nonprofits. Need DC DLCP or VA SCC registry search. (2) No FARA registration found. (3) No OpenSanctions/PEP matches. (4) No USASpending federal contracts/grants. (5) No GLEIF/LEI records (expected for nonprofit). (6) EDGAR returned only 1 result (not substantive). (7) No 990 financials in bulk DB (only filing data from ProPublica). (8) No 990 officers prior to 2023 in bulk DB. (9) Leonard Leo does NOT appear on 85 Fund or Concord Fund 990 officer lists -- operates through intermediaries (Severino, Corkery, Graves, Marx).",
+      "confidence": "high",
+      "id": 7298
+    }
+  ]
+}

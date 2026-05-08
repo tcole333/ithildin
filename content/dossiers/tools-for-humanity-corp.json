@@ -1,0 +1,343 @@
+{
+  "name": "Tools for Humanity Corp",
+  "slug": "tools-for-humanity-corp",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.325396",
+  "last_updated": "2026-04-06T18:39:12",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 6,
+      "financial": 4
+    },
+    "connection_types": {
+      "corporate": 5,
+      "financial": 1
+    },
+    "last_updated": "2026-04-06T18:39:12"
+  },
+  "findings": [
+    {
+      "id": 9650,
+      "finding_type": "corporate",
+      "summary": "Tools for Humanity was incorporated in Delaware on June 26, 2019 per OpenCorporates (entity #7487684). The 2023/2024 Form D filings confirm 'within five years' with year value 2019.",
+      "detail": "The 2021 and 2022 Form D filings incorrectly marked 'overFiveYears: true' \u2014 a data entry inconsistency given the 2019 incorporation date. EIN: 84-2242184.",
+      "source_datasets": "edgar,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2019-06-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9647,
+      "finding_type": "corporate",
+      "summary": "Address changed from 650 Second Street #605, San Francisco CA 94107 (2021) to 548 Market St. PMB #49951, San Francisco CA 94104 (2022 onward). The Market St address is a private mailbox, not a physical office.",
+      "detail": "California state registry shows a third address: 650 7th Street, San Francisco CA 94103. The South Carolina area code phone number (803-361-3213) was used from 2021-2023, then changed to 888-414-1984 in 2024.",
+      "source_datasets": "edgar,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2022-03-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9644,
+      "finding_type": "financial",
+      "summary": "Three fundraising rounds filed as Form D: 2021 seed ($6.0M sold / $12M cap, 1 investor), 2022 Series ($72.3M sold / $197M cap, 82 investors), 2023 token round ($115.4M sold / $120M cap, 7 investors). Total sold ~$193.6M.",
+      "detail": "All investors were accredited in all rounds. Exemption: Rule 506(b) in all filings. File numbers: 021-389981 (2021), 021-439323 (2022), 021-498584 (2023/2024).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2023-04-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9646,
+      "finding_type": "corporate",
+      "summary": "2023 round introduced WLD token warrants as securities type: 'Sale and issuance of rights to receive WLD tokens in the future via Warrants exercisable for a fee.'",
+      "detail": "This is a hybrid security combining equity with crypto token rights. Only 7 accredited investors participated for $115.4M, implying average ticket of ~$16.5M. The 2024 D/A clarified 'exercisable for a fee' versus the original 2023 D which just said 'via Warrants'.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2023-04-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9648,
+      "finding_type": "financial",
+      "summary": "2024 Form D/A disclosed placement agent fees: FTP Securities LLP (CRD 129356) paid 600,000 WLD tokens (FMV $1.56M at $2.60/token, estimated $1.86M) and Miriam Kiwan paid $300,000 cash for the 2023 token warrant round.",
+      "detail": "FTP Securities LLP located at 1 Front Street, 31st Floor, San Francisco, CA 94111. Solicitation states: California and Massachusetts. Total disclosed placement fees: ~$2.16M. Miriam Kiwan is listed outside the formal broker-dealer compensation section.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-01-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9655,
+      "finding_type": "financial",
+      "summary": "All four Form D filings report $0 gross proceeds used, meaning TFH disclosed no use of proceeds in any offering. This is permissible under Form D rules but provides no transparency about capital deployment.",
+      "detail": "Despite raising ~$193.6M across three rounds, TFH declined to disclose any use of proceeds on any filing. Revenue range is also 'Decline to Disclose' on all filings.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-01-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9654,
+      "finding_type": "financial",
+      "summary": "Eightco Holdings (ORBS), Medirom Healthcare Technologies (MRM), and Maison Solutions (MSS) all cite TFH in SEC filings, warning about concentration of control over WLD token governance and lack of separation between TFH and the World Foundation.",
+      "detail": "Eightco 10-Q (Nov 2025): 'Opaque governance, concentration of ownership, and a potential lack of meaningful separation between the World Foundation and Tools for Humanity may create conflicts of interest.' These are public company risk disclosures, suggesting institutional concern about TFH governance structure.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-11-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9652,
+      "finding_type": "corporate",
+      "summary": "TOOLS FOR HUMANITY LIMITED (Scotland, UK, Companies House SC817653) incorporated July 26, 2024 and dissolved December 30, 2025 \u2014 a lifespan of only 17 months.",
+      "detail": "Address: Argyle House, 3 Lady Lawson Street, Edinburgh EH3 9DR. Short lifespan may indicate it was used for a specific purpose (e.g., GDPR compliance, EU token issuance) and then wound down.",
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": "2025-12-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9651,
+      "finding_type": "corporate",
+      "summary": "Burst of foreign state registrations in 2025: Georgia and Florida (April 15), Tennessee (April 28), Wyoming (September 26). A new Delaware LLC \u2014 TOOLS FOR HUMANITY HOLDING LLC \u2014 was incorporated February 5, 2026.",
+      "detail": "The 2025 registration burst may reflect expansion into new markets or compliance requirements related to Worldcoin iris-scanning operations. The new DE Holding LLC (Feb 2026) could signal pre-IPO restructuring or consolidation.",
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": "2026-02-05",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9653,
+      "finding_type": "corporate",
+      "summary": "Tools for Humanity GmbH is registered in Erlangen, Germany (Allee am R\u00f6thelheimpark 41, 91052 Erlangen). This is the Bayrisches TechCenter \u2014 the same complex where Alex Blania previously ran kowly UG.",
+      "detail": "Alexander Blania (TFH CEO) was previously Gesch\u00e4ftsf\u00fchrer of kowly UG, a German startup that was later liquidated. Tools for Humanity GmbH operating from Erlangen may reflect Blania's Germany network.",
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Tools for Humanity Corp",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5013,
+      "person_a": "Samuel Altman",
+      "person_b": "Tools for Humanity Corp",
+      "relationship_type": "corporate",
+      "description": "Executive Officer and Director of TFH (2022-2024); Director only in 2021. Simultaneous role at OpenAI creates potential conflict of interest.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Samuel Altman",
+      "other_person_slug": "samuel-altman",
+      "evidence": []
+    },
+    {
+      "id": 5016,
+      "person_a": "Thomas Scott",
+      "person_b": "Tools for Humanity Corp",
+      "relationship_type": "corporate",
+      "description": "Chief Legal Officer and Secretary of TFH. Signed all four Form D filings from 2021-2024. Consistent presence across all fundraising rounds.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Thomas Scott",
+      "other_person_slug": "thomas-scott",
+      "evidence": []
+    },
+    {
+      "id": 5019,
+      "person_a": "Tools for Humanity Corp",
+      "person_b": "Tools for Humanity Holding LLC",
+      "relationship_type": "corporate",
+      "description": "New Delaware LLC with same name brand incorporated Feb 2026. Likely a subsidiary or restructuring vehicle. Structural relationship not yet confirmed.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Tools for Humanity Holding LLC",
+      "other_person_slug": "tools-for-humanity-holding-llc",
+      "evidence": []
+    },
+    {
+      "id": 5020,
+      "person_a": "Tools for Humanity Corp",
+      "person_b": "Tools for Humanity GmbH",
+      "relationship_type": "corporate",
+      "description": "German subsidiary in Erlangen \u2014 same city as Alex Blania's prior venture (kowly UG). Likely European operational entity.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Tools for Humanity GmbH",
+      "other_person_slug": "tools-for-humanity-gmbh",
+      "evidence": []
+    },
+    {
+      "id": 5015,
+      "person_a": "Max Novendstern",
+      "person_b": "Tools for Humanity Corp",
+      "relationship_type": "corporate",
+      "description": "President and CFO of TFH in 2021 seed round. Departed before 2022 Series round. Now associated with Mana Finance / real estate investment vehicles.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Max Novendstern",
+      "other_person_slug": "max-novendstern",
+      "evidence": []
+    },
+    {
+      "id": 5017,
+      "person_a": "FTP Securities LLP",
+      "person_b": "Tools for Humanity Corp",
+      "relationship_type": "financial",
+      "description": "Placement agent for 2023 WLD token warrant round. Paid 600,000 WLD tokens (~$1.56-1.86M). Operated in CA and MA.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "FTP Securities LLP",
+      "other_person_slug": "ftp-securities-llp",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-06-26",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Tools for Humanity was incorporated in Delaware on June 26, 2019 per OpenCorporates (entity #7487684). The 2023/2024 Form D filings confirm 'within five years' with year value 2019.",
+      "confidence": "high",
+      "id": 9650
+    },
+    {
+      "date": "2022-03-29",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Address changed from 650 Second Street #605, San Francisco CA 94107 (2021) to 548 Market St. PMB #49951, San Francisco CA 94104 (2022 onward). The Market St address is a private mailbox, not a physical office.",
+      "confidence": "high",
+      "id": 9647
+    },
+    {
+      "date": "2023-04-12",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Three fundraising rounds filed as Form D: 2021 seed ($6.0M sold / $12M cap, 1 investor), 2022 Series ($72.3M sold / $197M cap, 82 investors), 2023 token round ($115.4M sold / $120M cap, 7 investors). Total sold ~$193.6M.",
+      "confidence": "high",
+      "id": 9644
+    },
+    {
+      "date": "2023-04-12",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "2023 round introduced WLD token warrants as securities type: 'Sale and issuance of rights to receive WLD tokens in the future via Warrants exercisable for a fee.'",
+      "confidence": "high",
+      "id": 9646
+    },
+    {
+      "date": "2024-01-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "2024 Form D/A disclosed placement agent fees: FTP Securities LLP (CRD 129356) paid 600,000 WLD tokens (FMV $1.56M at $2.60/token, estimated $1.86M) and Miriam Kiwan paid $300,000 cash for the 2023 token warrant round.",
+      "confidence": "high",
+      "id": 9648
+    },
+    {
+      "date": "2024-01-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "All four Form D filings report $0 gross proceeds used, meaning TFH disclosed no use of proceeds in any offering. This is permissible under Form D rules but provides no transparency about capital deployment.",
+      "confidence": "high",
+      "id": 9655
+    },
+    {
+      "date": "2025-11-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Eightco Holdings (ORBS), Medirom Healthcare Technologies (MRM), and Maison Solutions (MSS) all cite TFH in SEC filings, warning about concentration of control over WLD token governance and lack of separation between TFH and the World Foundation.",
+      "confidence": "medium",
+      "id": 9654
+    },
+    {
+      "date": "2025-12-30",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "TOOLS FOR HUMANITY LIMITED (Scotland, UK, Companies House SC817653) incorporated July 26, 2024 and dissolved December 30, 2025 \u2014 a lifespan of only 17 months.",
+      "confidence": "high",
+      "id": 9652
+    },
+    {
+      "date": "2026-02-05",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Burst of foreign state registrations in 2025: Georgia and Florida (April 15), Tennessee (April 28), Wyoming (September 26). A new Delaware LLC \u2014 TOOLS FOR HUMANITY HOLDING LLC \u2014 was incorporated February 5, 2026.",
+      "confidence": "high",
+      "id": 9651
+    }
+  ]
+}

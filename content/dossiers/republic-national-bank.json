@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:08.010215",
+  "generated_at": "2026-05-07T23:07:36.439732",
   "last_updated": "2026-02-17T20:20:03",
   "stats": {
     "total_findings": 5,
@@ -387,77 +387,5 @@
       "complexity-as-credential",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Republic National Bank",
-      "connections": [
-        {
-          "target": "Willard Zucker",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "Walsh IC Final Report Vol 1, p.221 fn.20",
-          "description": "Enterprise wire transfers routed through RNB; Zucker managed Swiss side via CSF Geneva"
-        },
-        {
-          "target": "Nan Morabia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis (finding 3350)",
-          "description": "Officer at Republic National Bank of New York; conducted cash drops outside bank channels"
-        },
-        {
-          "target": "Trade Development Bank",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Walsh IC Final Report Vol 1, p.221",
-          "description": "Both banks controlled by Edmond Safra; RNB (NY) handled Enterprise wire transfers, TDB (Geneva) held Codelis account"
-        }
-      ],
-      "secondHop": {
-        "Nan Morabia": [
-          {
-            "target": "Willard Zucker",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Zucker directed Morabia to make cash drops for Enterprise; she was his domestic cash distribution agent"
-          },
-          {
-            "target": "Robert Owen",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Morabia delivered $7,000 cash to Owen at Republic National Bank, Aug 1985"
-          },
-          {
-            "target": "Oliver North",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Morabia family conducted cash drops for Enterprise operations supervised by North"
-          },
-          {
-            "target": "Richard Secord",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Morabia family provided cash to Secord via intermediaries: David Morabia gave cash to William Haskell at Republic National Bank for delivery to Secord at home (Nov 17, 1986). RNB also handled Enterprise wire transfers."
-          },
-          {
-            "target": "Republic National Bank of New York",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Morabia was an officer at RNB; cash operation was conducted outside bank channels"
-          }
-        ],
-        "Willard Zucker": [
-          {
-            "target": "Albert Hakim",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Zucker managed Enterprise Swiss accounts for Hakim since mid-1970s; ran CSF financial management"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

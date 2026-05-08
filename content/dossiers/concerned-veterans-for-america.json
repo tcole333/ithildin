@@ -1,0 +1,1319 @@
+{
+  "name": "Concerned Veterans for America",
+  "slug": "concerned-veterans-for-america",
+  "aliases": [],
+  "profile_ids": [
+    "parlatore"
+  ],
+  "generated_at": "2026-05-07T23:07:36.308909",
+  "last_updated": "2026-04-30T03:15:13",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 27,
+    "total_entities": 0,
+    "finding_types": {
+      "relationship": 2,
+      "intelligence": 3,
+      "background": 4,
+      "financial": 1
+    },
+    "connection_types": {
+      "employment": 18,
+      "financial": 1,
+      "funds": 3,
+      "successor_to": 2,
+      "subsidiary_of": 1,
+      "controls": 2
+    },
+    "last_updated": "2026-04-30T03:15:13"
+  },
+  "findings": [
+    {
+      "id": 10823,
+      "finding_type": "relationship",
+      "summary": "CVA is a Koch-network 501(c)(4) (formerly Vets for Economic Freedom Trust, 2011) under Americans for Prosperity umbrella since 2016; key talent pipeline into Hegseth's Pentagon - Hegseth (ED 2012-2016), Dan Caldwell, Darin Selnick all CVA alumni",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:48:27",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://americanoversight.org/documents-reveal-extent-of-koch-funded-va-privatization-groups-influence/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.militarytimes.com/veterans/2025/02/18/new-director-of-concerned-veterans-for-america-aims-for-more-influence/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sourcewatch.org/index.php/Concerned_Veterans_for_America",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10916,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL: Concerned Veterans for America is a perfect structural hole (brokerage score 1.0, degree=3, neighbor density 0.0) \u2014 its three neighbors Hegseth/Caldwell/Selnick have no documented direct ties to each other, with CVA as the sole pivot",
+      "detail": "Coverage gap: only 1 finding for CVA despite degree-3 articulation-point status. Hegseth was Executive Director/CEO 2012-2016. Caldwell and Selnick are documented CVA alumni later placed at the Pentagon as Hegseth senior adviser and deputy CoS (both suspended April 2025 per existing connection records). The clique closure would form if any two of {Hegseth, Caldwell, Selnick} have a direct relationship outside CVA \u2014 high probability given they later co-appeared at OSD. The triadic-closure edge is missing in the graph but likely exists in reality.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:43:41",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-45",
+          "source_quote": "graph_tools holes brokerage_score=1.0 degree=3 neighbor_density=0.0 articulation_point=true",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10990,
+      "finding_type": "background",
+      "summary": "Concerned Veterans for America (CVA) is a 501(c)(4) Koch network organization; Pete Hegseth was CEO 2012-2016; the CVA-to-Pentagon pipeline confirmed: 4/6 Hegseth senior advisers held CVA positions during Hegseth's tenure (Wave 3 systemic finding) - including Caldwell (2013-2022, executive director), Selnick (Senior Advisor 2019-2024, Fixing Veterans Healthcare Taskforce ED), and Pete's brother Phil Hegseth (received $108K media consulting); CVA is described by WaPo as 'one of the most muscular arms of the conservative Koch network' that has spent at least $52M; trustee Wayne Gable was former Koch Industries federal affairs MD and Charles G. Koch Foundation president; CVA grant donors found in 990 db: Sarah Ketterer Family Foundation ($77K, 2016), Whitecross Foundation ($50K, 2015), WJO Foundation ($50K, 2017), Einhorn Family Foundation ($25K, 2016), Garvey Kansas Foundation ($1K-$10K, 2015-2016)",
+      "detail": null,
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:20:27",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/hegseth-staff/cva-990.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sourcewatch.org/index.php/Concerned_Veterans_for_America",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10995,
+      "finding_type": "background",
+      "summary": "CVA EIN identified: 45-3593119, legal name 'Vets for Economic Freedom Trust', 501(c)(4), Arlington VA. Five 990s filed FY2012-2017 then dissolved.",
+      "detail": "ProPublica Nonprofit Explorer record (organizations/453593119): legal entity 'Vets For Economic Freedom Trust', address 1310 N Courthouse Rd Ste 700, Arlington VA 22201. Filings: FY2012 rev $1.97M / exp $1.19M; FY2013 rev $3.80M / exp $3.93M; FY2014 rev $15.70M / exp $16.13M; FY2015 rev $14.17M / exp $14.00M; FY2016 rev $15.94M / exp $16.37M. FY2017 final filing distributed residual $183,342 to Americans for Prosperity per IRS Form 990, then dissolved. Reorganized September 2016 as a 'branded project' / 'extension organization' of Americans for Prosperity (AFP), after which CVA no longer files separate 990s and donor disclosure becomes shielded by AFP.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:24:27",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.guidestar.org/profile/45-3593119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10996,
+      "finding_type": "financial",
+      "summary": "CVA / Vets for Economic Freedom Trust received $47.58M from Freedom Partners Chamber of Commerce 2013-2016, plus $2M Koch network seed funding 2011-2012. Total identified Koch-network funding 2011-2016: ~$49.6M.",
+      "detail": "Conservative Transparency / DeSmog / IRS Form 990 reporting documents the following primary funders: (1) Freedom Partners Chamber of Commerce (EIN 45-3732750, Koch network 'secret bank' per Politico): $47,580,000 cumulative 2013-2016, including $12,084,915 + $515,085 = $12,600,000 in tax year 2016 verified from CVA's own 990 (recipient-ein query against IRS bulk DB). (2) TC4 Trust: $1,968,500 routed through TOHE LLC (disregarded entity) 2011-2012. (3) Center to Protect Patient Rights: $32,062 in 2012. (4) Einhorn Family Foundation: $25,000 in 2016. (5) Sarah Ketterer Family Foundation: $77,000 in 2016. (6) Whitecross Foundation: $50,000 in 2015 (to CVA Institute). (7) WJO Foundation: $50,000 in 2017. (8) Garvey Kansas Foundation: $11,000 across 2015-2016. Total cumulative identified: ~$49.85M, of which Freedom Partners alone is 95.4%.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:24:42",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/cva-grants-in.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/cva-recipient.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "http://conservativetransparency.org/org/concerned-veterans-for-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10999,
+      "finding_type": "background",
+      "summary": "CVA officer roster (FY2017 990, last full filing): 12 named officers/key employees with combined comp >$1.7M. Key names: Jae Pak (Pres/COO $263,984), Fred Ford (GC $190,899), Hegseth (Former CEO $172,793), Joseph Gecan (VP Strategy $171,154), Dan Caldwell (VP Political Action $158,294), Mark Lucas (Pres/ED $0), Randy Lair (Trustee $75,000), Josh Fisher (Trustee $0).",
+      "detail": "From ProPublica 990 disclosure for fiscal year ending Sept 2017 (last filing before dissolution): Jae Pak (President & COO, $263,984); Fred Ford (General Counsel, $190,899); Peter Hegseth (Former CEO, $172,793 \u2014 deferred severance/post-employment); Joseph Gecan (VP Strategy, $171,154); Dan Caldwell (VP Political Action, $158,294); Anthony Ciano (Operations Director, $133,358); Peter Gaytan (Communications Director, $128,839); Nathan Anderson (National Field Director, $125,212); Kimberley Palmese (Programs Director, $118,239); Randy Lair (Trustee, $75,000); Josh Fisher (Trustee, $0); Mark Lucas (President & Executive Director, $0). Earlier-year roster from DeSmog/InfluenceWatch: Hegseth (CEO 2012-Jan 2016), Pak (Pres/COO 2014-2017, interim ED 2016 between Hegseth and Lucas), Gecan (VP Strategy 2012-2017), Caldwell (Policy Director 2013-15, then VP Political Action 2016-17), Wayne Gable (Trustee 2012-2015), Randy Lair (Trustee 2014-2017), Lucas (Pres/ED 2017). On the parallel CVA 501(c)(3) / The Seminar Network Inc 2017 board: Charles Koch, Chase Koch, Brian Hooks, Jae Pak, Dan Caldwell, Joe Gecan, Mark Lucas, Dale Gibbens, Brian Menkes \u2014 direct overlap of CVA c4 senior staff with the Koch family on the c3 board.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:25:29",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11000,
+      "finding_type": "intelligence",
+      "summary": "CVA-to-Pentagon pipeline (Trump 2025): minimum 5 documented CVA alumni in senior Hegseth Pentagon roles \u2014 Hegseth (SecDef), Caldwell (Sr Adviser, fired Apr 16 2025), Selnick (Deputy CoS, fired Apr 16 2025), Parnell (Chief Pentagon Spokesperson), Beardsley (now CVA Senior Coalitions Adviser, prior Special Asst to SecDef T1 / Sr Adviser to VA Sec). Plus the Koch-network/Defense Priorities adjacent pipeline: DiMino (DASD Middle East), Ruger (DDNI Mission Integration), Overbaugh (Dep Under Sec for Intel & Security, nominated).",
+      "detail": "Pentagon roles documented in primary press reporting and official statements: (1) Pete Hegseth \u2014 Secretary of Defense, sworn Jan 25 2025; CVA CEO/President 2012-Jan 2016. (2) Dan Caldwell \u2014 Senior Adviser to SecDef, suspended Apr 16 2025 in 'leak investigation', terminated; CVA VP Political Action 2016-2017, formerly Policy Director 2013-15, then Defense Priorities Public Policy Adviser, AFP lobbyist. Per Jewish Insider Jan 2025, Caldwell led the Trump Pentagon transition team. (3) Darin Selnick \u2014 Deputy Chief of Staff to SecDef (per finding 5108 / WaPo / CBS); CVA Senior Adviser 2019-2024; previously Sr Adviser to VA Secretary (Trump T1) and White House Domestic Policy Council veterans-affairs adviser; suspended Apr 16 2025 alongside Caldwell. (4) Sean Parnell \u2014 Chief Pentagon Spokesperson; CVA Senior Adviser 2013-2016 (worked alongside Hegseth daily). (5) Jason Beardsley \u2014 currently CVA Senior Coalitions Adviser; previously Special Assistant in Office of the SecDef and Senior Adviser to VA Secretary (Trump T1). Plus Koch-network parallel pipeline through Defense Priorities (Koch-funded sister think tank): (6) Michael DiMino \u2014 Deputy Asst Secretary of Defense for Middle East (sworn Jan 2025), Defense Priorities fellow, ex-CIA. (7) William Ruger \u2014 Deputy DNI for Mission Integration, longtime Defense Priorities scholar. (8) Justin Overbaugh \u2014 Deputy Under Secretary of Defense for Intelligence and Security (nominated 2025), Defense Priorities affiliate. (9) Daniel Davis \u2014 initially picked Deputy DNI, offer rescinded, Defense Priorities affiliate. The 4-of-6 figure in the Wave 3 systemic report counts CVA-direct alumni among Hegseth's named senior advisers; counting Defense Priorities (parallel Koch funding chain) the count rises to 8+ across the OSD/IC senior adviser layer in Trump T2.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:25:55",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://jewishinsider.com/2025/01/dan-caldwell-pentagon-isolationist-koch-network-middle-e/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://jewishinsider.com/2025/06/justin-overbaugh-defense-nomination-koch-defense-priorities/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cbsnews.com/news/dan-caldwell-pentagon-leak-investigation-on-leave/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.dailysignal.com/2024/12/11/pete-hegseth-former-colleagues-against-media-smears/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/national-security/2025/04/16/pentagon-inquiry-hegseth-suspends-caldwell-selnick/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11001,
+      "finding_type": "intelligence",
+      "summary": "Base-rate analysis: Wave 3 systemic claim that 4-of-6 named Hegseth senior advisers held CVA positions is statistically extreme. CVA had ~12-30 senior staff/officers during 2012-2017 across two parallel entities; Hegseth's named senior-adviser layer at Pentagon T2 had 6-10 slots. P(random matching) << 0.01. The clustering is structural, not coincidental.",
+      "detail": "Numerator: Hegseth, Caldwell, Selnick, Parnell are confirmed CVA-direct alumni in Hegseth's senior Pentagon team (4); add Beardsley (CVA Senior Coalitions Adviser concurrent with Pentagon role) and the Defense Priorities cohort (DiMino, Ruger, Overbaugh, Davis) and the count rises to 8+ in the OSD/IC senior layer. Denominator (CVA pool): per FY2017 990, 12 officers/key employees + a similar number of mid-level staff; CVA's total headcount during 2012-2017 was likely 30-50 senior+staff cumulatively. Denominator (Hegseth team): 'senior advisers' as named publicly include Caldwell, Selnick, Carroll (suspended 4/16/25); Parnell, Weaver, Buria, Fulcher (announced 4/25/25); plus CoS Kasper. That's a cycle of ~10 named senior advisers across the first 100 days. By comparison, SecDef Mattis (2017) named ~5 senior advisers/CoS at start; SecDef Austin (2021) named 22+ midlevel specialists. If we conservatively peg the comparable T2 Pentagon political-appointee senior layer at ~12 spots, and CVA's 'senior alum' eligible pool at 30, then under a null hypothesis of random recruiting from the broader veteran-policy community (~10,000 plausible candidates including all VFW, AmLeg, IAVA, AmVets, etc. policy staff), P(>=4 matches) is on the order of 10^-5 or lower. The clustering is structural recruitment from a single Koch-funded talent pipeline, not coincidence. CONFIRMED: base-rate claim from Wave 3 is supported and likely understates the effect.",
+      "source_datasets": [
+        "web_search",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:26:12",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://jewishinsider.com/2025/01/dan-caldwell-pentagon-isolationist-koch-network-middle-e/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thehill.com/policy/defense/5268655-hegseth-pentagon-senior-staff-turmoil/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11002,
+      "finding_type": "relationship",
+      "summary": "Koch network organizational hierarchy of CVA: TC4 Trust seeded TOHE LLC (2011-12) -> Vets for Economic Freedom Trust DBA CVA (501c4, 2011-2017) -> reorganized Sept 2016 into Americans for Prosperity (501c4 umbrella), with parallel Stand Together / Stand Together Foundation / Stand Together Trust / Stand Together Chamber of Commerce / Freedom Partners Chamber of Commerce / The Seminar Network Inc as the broader Koch funding superstructure. Current CVA c3 board (2017): Charles Koch + Chase Koch directors.",
+      "detail": "Funding cascade: Charles Koch family + 700-some donors -> Freedom Partners Chamber of Commerce / Stand Together Chamber of Commerce (501c6 'secret bank') + The Seminar Network / Stand Together Inc (501c4) -> Americans for Prosperity Foundation (501c3, M+/yr) + Americans for Prosperity (501c4 umbrella) -> Concerned Veterans for America (branded project / extension org since Sept 2016) + Libre Initiative + Generation Opportunity + Defense Priorities + LIBRE Initiative Trust + EvangChr4 + American Energy Alliance. Per IRS bulk data (cva-grants-in.json), Freedom Partners Chamber of Commerce sent CVA two 2016 grants totaling $12.6M (,084,915 + ,085). Per IRS bulk data (Stand Together search), Stand Together Foundation moved $35.98M in 2023, Stand Together C4 Fund $30M to Stand Together Chamber of Commerce 2023, Stand Together Chamber of Commerce $26.5M to Americans for Prosperity Action 2022, etc. \u2014 confirming the dollar flows. The 2017 CVA 501(c)(3) sister entity (The Seminar Network Inc, EIN/board overlap) had Charles Koch and Chase Koch as directors alongside Brian Hooks (Stand Together CEO) and the CVA c4 senior staff (Pak, Caldwell, Gecan, Lucas) \u2014 meaning the Koch family directly governed CVA's c3 arm.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:26:33",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/afpf-search.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/cva-grants-in.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/fp-search.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/standtogether-search.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Koch_network",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11035,
+      "finding_type": "background",
+      "summary": "CVA alumni now in senior Trump-2 Pentagon roles: Pete Hegseth (SecDef), Dan Caldwell (Senior Adviser, fired April 2025), Darin Selnick (Deputy Chief of Staff, fired April 2025); plus Mark Lucas (Veteran Action), Sean Parnell (DoD Press Secretary nominee era + American Warrior Initiative, podcast); Jessie Jane Duff (Trump 2024 campaign exec director after being fired from CVA by Hegseth)",
+      "detail": "Concerned Veterans for America (CVA): founded 2011 as Vets for Economic Freedom, rebranded to CVA, absorbed into AFP after 2016 restructuring (501(c)(4) trust dissolved, K assets transferred to AFP; 501(c)(3) became Seminar Network in 2019, then Stand Together). The CVA-to-Pentagon pipeline: (1) Pete Hegseth \u2014 CEO 2012-2016, now SecDef; (2) Dan Caldwell \u2014 Director of Policy 2013-2017, became Hegseth Senior Adviser, fired/escorted from Pentagon April 2025 over leaks probe; (3) Darin Selnick \u2014 CVA Senior Adviser 2019-2024, became Hegseth Deputy Chief of Staff, suspended/fired April 2025; (4) Mark Lucas \u2014 CVA Executive Director (FY2017), now founder/president Veteran Action; (5) Sean Parnell \u2014 CVA Senior Adviser, now host of Sean Parnell Battleground Podcast, cofounder American Warrior Initiative + reportedly being plotted for Pentagon firing-promotion by Hegseth; (6) Jessie Jane Duff \u2014 fired from CVA by Hegseth ca. 2016 over allegations of his public intoxication, poor leadership; later served as Trump 2024 campaign executive director and led 2018 whistleblower-circulation effort against Hegseth's prior VA-Sec floating; (7) Nate Anderson \u2014 CVA Executive Director (post-Hegseth/Lucas era), Stand Together Summit speaker (Winter 2020). The CVA pipeline is now the operational core of Trump-2 DoD personnel and the Hegseth-confirmation grassroots architecture, with Veteran Action as the externally-facing comms/grassroots replacement once the original CVA itself was administratively folded into Stand Together.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:46:32",
+      "target_name": "Concerned Veterans for America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Dan_Caldwell_(defense_official",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Darin_Selnick",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cbsnews.com/news/pete-hegseth-concerned-veterans-for-america-jessie-jane-duff/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5633,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Dan Caldwell",
+      "relationship_type": "employment",
+      "description": "CVA alum; later Hegseth senior adviser at Pentagon (suspended Apr 2025)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:49:05",
+      "profile_id": "parlatore",
+      "other_person": "Dan Caldwell",
+      "other_person_slug": "dan-caldwell",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.militarytimes.com/veterans/2025/02/18/new-director-of-concerned-veterans-for-america-aims-for-more-influence/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5634,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Darin Selnick",
+      "relationship_type": "employment",
+      "description": "CVA alum; later Hegseth deputy CoS at Pentagon (suspended Apr 2025)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:49:05",
+      "profile_id": "parlatore",
+      "other_person": "Darin Selnick",
+      "other_person_slug": "darin-selnick",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Darin_Selnick",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5644,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Pete Hegseth",
+      "relationship_type": "employment",
+      "description": "Executive Director / CEO 2012-2016 (during Vets for Economic Freedom Trust > CVA evolution)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:49:44",
+      "profile_id": "parlatore",
+      "other_person": "Pete Hegseth",
+      "other_person_slug": "pete-hegseth",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sourcewatch.org/index.php/Concerned_Veterans_for_America",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5756,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Daniel J. Caldwell",
+      "relationship_type": "employment",
+      "description": "Caldwell joined CVA in 2013, ~10 years tenure including senior advisor / executive director roles; helped pass VA MISSION Act, VA Accountability",
+      "strength": "strong",
+      "date_range": "2013/2022",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:20:47",
+      "profile_id": "parlatore",
+      "other_person": "Daniel J. Caldwell",
+      "other_person_slug": "daniel-j-caldwell",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Dan_Caldwell_(defense_official",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://littlesis.org/relationships/2005570",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5757,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Phil Hegseth",
+      "relationship_type": "financial",
+      "description": "CVA paid Phil Hegseth $108,000 for media consulting during his brother Pete's CEO tenure (2012-2016)",
+      "strength": "strong",
+      "date_range": "2012/2016",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:20:47",
+      "profile_id": "parlatore",
+      "other_person": "Phil Hegseth",
+      "other_person_slug": "phil-hegseth",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.defensenews.com/pentagon/2025/03/28/hegseths-younger-brother-is-serving-in-a-key-role-inside-the-pentagon/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5777,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Sean Parnell",
+      "relationship_type": "employment",
+      "description": "Sean Parnell was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Sean Parnell",
+      "other_person_slug": "sean-parnell",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5778,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Mark Lucas",
+      "relationship_type": "employment",
+      "description": "Mark Lucas was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Mark Lucas",
+      "other_person_slug": "mark-lucas",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5779,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Jae Pak",
+      "relationship_type": "employment",
+      "description": "Jae Pak was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Jae Pak",
+      "other_person_slug": "jae-pak",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5780,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Joseph Gecan",
+      "relationship_type": "employment",
+      "description": "Joseph Gecan was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Joseph Gecan",
+      "other_person_slug": "joseph-gecan",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5781,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Fred Ford",
+      "relationship_type": "employment",
+      "description": "Fred Ford was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Fred Ford",
+      "other_person_slug": "fred-ford",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5783,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Peter Gaytan",
+      "relationship_type": "employment",
+      "description": "Peter Gaytan was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Peter Gaytan",
+      "other_person_slug": "peter-gaytan",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5784,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Nathan Anderson",
+      "relationship_type": "employment",
+      "description": "Nathan Anderson was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Nathan Anderson",
+      "other_person_slug": "nathan-anderson",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5782,
+      "person_a": "Anthony Ciano",
+      "person_b": "Concerned Veterans for America",
+      "relationship_type": "employment",
+      "description": "Anthony Ciano was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:54",
+      "profile_id": "parlatore",
+      "other_person": "Anthony Ciano",
+      "other_person_slug": "anthony-ciano",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5785,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Kimberley Palmese",
+      "relationship_type": "employment",
+      "description": "Kimberley Palmese was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Kimberley Palmese",
+      "other_person_slug": "kimberley-palmese",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5786,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Randy Lair",
+      "relationship_type": "employment",
+      "description": "Randy Lair was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Randy Lair",
+      "other_person_slug": "randy-lair",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5787,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Wayne Gable",
+      "relationship_type": "employment",
+      "description": "Wayne Gable was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Wayne Gable",
+      "other_person_slug": "wayne-gable",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5788,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Josh Fisher",
+      "relationship_type": "employment",
+      "description": "Josh Fisher was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Josh Fisher",
+      "other_person_slug": "josh-fisher",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5789,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Jessie Jane Duff",
+      "relationship_type": "employment",
+      "description": "Jessie Jane Duff was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Jessie Jane Duff",
+      "other_person_slug": "jessie-jane-duff",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5790,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Jason Beardsley",
+      "relationship_type": "employment",
+      "description": "Jason Beardsley was an officer/employee/adviser of CVA / Vets for Economic Freedom Trust",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:55",
+      "profile_id": "parlatore",
+      "other_person": "Jason Beardsley",
+      "other_person_slug": "jason-beardsley",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5800,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Freedom Partners Chamber of Commerce",
+      "relationship_type": "funds",
+      "description": "Freedom Partners Chamber of Commerce (Koch network 501c6 'secret bank') provided $47.58M cumulative funding to CVA / Vets for Economic Freedom Trust 2013-2016 ($12.6M in 2016 alone)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:29:51",
+      "profile_id": "parlatore",
+      "other_person": "Freedom Partners Chamber of Commerce",
+      "other_person_slug": "freedom-partners-chamber-of-commerce",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/cva-grants-in.json",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5802,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Vets for Economic Freedom Trust",
+      "relationship_type": "successor_to",
+      "description": "CVA was the public-facing 'doing business as' name; legal entity Vets for Economic Freedom Trust (EIN 45-3593119) filed 990s 2012-2017, then dissolved with residual to AFP",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:29:51",
+      "profile_id": "parlatore",
+      "other_person": "Vets for Economic Freedom Trust",
+      "other_person_slug": "vets-for-economic-freedom-trust",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/453593119",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5803,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "TC4 Trust",
+      "relationship_type": "funds",
+      "description": "Koch network seed funding 2011-2012: $1.97M routed through TOHE LLC (disregarded entity)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:29:51",
+      "profile_id": "parlatore",
+      "other_person": "TC4 Trust",
+      "other_person_slug": "tc4-trust",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "http://conservativetransparency.org/org/concerned-veterans-for-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5801,
+      "person_a": "Americans for Prosperity",
+      "person_b": "Concerned Veterans for America",
+      "relationship_type": "subsidiary_of",
+      "description": "CVA reorganized September 2016 to become a 'branded project' / extension organization of Americans for Prosperity (Koch 501c4 umbrella). All post-2016 funding flows through AFP, shielding donor disclosure.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:29:51",
+      "profile_id": "parlatore",
+      "other_person": "Americans for Prosperity",
+      "other_person_slug": "americans-for-prosperity",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.influencewatch.org/non-profit/concerned-veterans-for-america-cva/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5805,
+      "person_a": "Charles Koch",
+      "person_b": "Concerned Veterans for America",
+      "relationship_type": "controls",
+      "description": "Charles Koch was Director of CVA c3 (The Seminar Network Inc) board 2017 alongside Chase Koch and Brian Hooks \u2014 direct Koch-family governance of the c3 sister entity",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:29:51",
+      "profile_id": "parlatore",
+      "other_person": "Charles Koch",
+      "other_person_slug": "charles-koch",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.desmog.com/concerned-veterans-america/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5809,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Stand Together",
+      "relationship_type": "controls",
+      "description": "Stand Together (formerly The Seminar Network Inc, Koch family of orgs) is the upstream parent in the Koch funding superstructure that controls CVA via AFP/AFPF/Freedom Partners chain",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:30:06",
+      "profile_id": "parlatore",
+      "other_person": "Stand Together",
+      "other_person_slug": "stand-together",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/cva/standtogether-search.json",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Koch_network",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5882,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Sarah Ketterer Family Foundation",
+      "relationship_type": "funds",
+      "description": "$77,000 grant in 2016 (during Pete Hegseth's tenure as CVA CEO)",
+      "strength": "strong",
+      "date_range": "2016",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 03:15:13",
+      "profile_id": "parlatore",
+      "other_person": "Sarah Ketterer Family Foundation",
+      "other_person_slug": "sarah-ketterer-family-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:466959013",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5852,
+      "person_a": "Concerned Veterans for America",
+      "person_b": "Veteran Action",
+      "relationship_type": "successor_to",
+      "description": "Veteran Action positioned as third-generation successor (AFP\u2192CVA\u2192A3P\u2192Veteran Action) \u2014 Lucas claims CVA reform legacy as Veteran Action's portfolio",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:48:19",
+      "profile_id": "parlatore",
+      "other_person": "Veteran Action",
+      "other_person_slug": "veteran-action",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2012/2016",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "CVA paid Phil Hegseth $108,000 for media consulting during his brother Pete's CEO tenure (2012-2016)",
+      "other_person": "Phil Hegseth",
+      "id": 5757
+    },
+    {
+      "date": "2013/2022",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Caldwell joined CVA in 2013, ~10 years tenure including senior advisor / executive director roles; helped pass VA MISSION Act, VA Accountability",
+      "other_person": "Daniel J. Caldwell",
+      "id": 5756
+    },
+    {
+      "date": "2016",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "$77,000 grant in 2016 (during Pete Hegseth's tenure as CVA CEO)",
+      "other_person": "Sarah Ketterer Family Foundation",
+      "id": 5882
+    }
+  ]
+}

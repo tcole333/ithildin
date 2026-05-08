@@ -1,0 +1,246 @@
+{
+  "name": "OpenAI Startup Fund SPVs",
+  "slug": "openai-startup-fund-spvs",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.342293",
+  "last_updated": "2026-04-06T20:15:56",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 1,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 5,
+      "financial": 4
+    },
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-04-06T20:15:56"
+  },
+  "findings": [
+    {
+      "id": 9444,
+      "finding_type": "corporate",
+      "summary": "OpenAI Startup Fund entity family comprises 15 Delaware entities in 5 tranches: Management LLC + GP I + Fund I (Jul 2021); SPV GP I + SPV I (Dec 2023); SPV GP II/III + SPV II/III (Apr 2024); SPV GP IV + SPV IV (May 2024); SPV GP V + SPV V (Nov 2024); SPV GP VI + SPV VI (Jul 2025). All entities use Corporation Service Company or CT Corp as Delaware registered agent.",
+      "detail": null,
+      "source_datasets": "edgar,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2021-07-28",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9446,
+      "finding_type": "corporate",
+      "summary": "Ian Hathaway (not Sam Altman) is the named executive officer and signer for all six OpenAI Startup Fund SPVs (Form D filings 2024-02-02 through 2025-08-05). His title varies: 'Managing Member of the General Partner' (SPV I) and 'Manager of the Managing Member of the General Partner' (SPV II-VI). Altman does not appear on any SPV Form D.",
+      "detail": null,
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-02-02",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9451,
+      "finding_type": "corporate",
+      "summary": "All six OpenAI Startup Fund SPVs (I through VI) were incorporated after November 2023 \u2014 the month Altman was fired and rehired as OpenAI CEO. SPV GP I and SPV I LP were formed December 5, 2023 (weeks after the crisis). This timing strongly correlates the SPV proliferation with post-governance-crisis organizational restructuring, likely including the removal of Altman from direct fund management.",
+      "detail": null,
+      "source_datasets": "edgar,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2024-02-02",
+      "claim_type": "paraphrase",
+      "verification_status": "inference",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9455,
+      "finding_type": "financial",
+      "summary": "OpenAI Startup Fund is mentioned as a PIPE investor in Churchill Capital Corp X's merger with Infleqtion Inc (quantum computing company). This appears in two 425 filings from Churchill Capital Corp X (CIK 0002007825) dated 2025-10-06 and 2026-02-09. The specific fund entity and investment amount are not confirmed without reading the full PIPE investor table.",
+      "detail": null,
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-10-06",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9448,
+      "finding_type": "financial",
+      "summary": "Total documented capital raised across the OpenAI Startup Fund family: approximately $304.4M. Fund I: $175,250,000 (Section 3(c)(1)); SPV I: $10M; SPV II: $25M; SPV III: $5M; SPV IV: $44.9M; SPV V: $44.3M; SPV VI: $0 as of initial filing (Aug 2025). All SPVs use Section 3(c)(7) exemption (qualified purchasers only).",
+      "detail": null,
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-04-06",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9449,
+      "finding_type": "corporate",
+      "summary": "The OpenAI Startup Fund uses three sequential San Francisco addresses across its entity lifecycle: (1) 3180 18th Street, SF 94110 \u2014 Fund I, SPV I, SPV III; (2) 1960 Bryant Street, SF 94110 \u2014 SPV II, IV, V; (3) 1455 3rd Street, SF 94158 \u2014 SPV VI (OpenAI's Mission Bay HQ). Each address shift tracks approximate OpenAI office moves.",
+      "detail": null,
+      "source_datasets": "edgar,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2026-04-06",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9450,
+      "finding_type": "corporate",
+      "summary": "All OpenAI Startup Fund Delaware GP entities use one of two major registered agents: Corporation Service Company (CSC) for GP I through GP IV (2021-2024), and The Corporation Trust Company (CT Corp) for GP V and GP VI (2024-2025). Registered address for all: New Castle, Delaware. The switch between agents occurred between May and November 2024.",
+      "detail": null,
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": "2026-04-06",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9719,
+      "finding_type": "financial",
+      "summary": "Ian Hathaway manages both the FOVC Fund I GP LLC and OpenAI Startup Fund Management LLC \u2014 an isolated 3-node cluster showing the fund management structure sits outside the main OpenAI graph",
+      "detail": "Graph component: Ian Hathaway <-> FOVC Fund I GP LLC <-> OpenAI Startup Fund Management LLC. This cluster is isolated from the main Altman graph and from the separate Bobby Wu <-> OpenAI Startup Fund SPV I LP cluster. Ian Hathaway is a venture partner at Andreessen Horowitz who co-manages the OpenAI Startup Fund. FOVC Fund I GP LLC is a separate vehicle not traced in findings. The disconnection between Hathaway's management entity and the SPV-level entities (Bobby Wu, OAI ORG LLC) suggests different documentation layers of the same fund structure.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:07:36",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-33",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9781,
+      "finding_type": "financial",
+      "summary": "Ian Hathaway manages both the FOVC Fund I GP LLC and OpenAI Startup Fund Management LLC \u2014 an isolated 3-node cluster showing the fund management structure sits outside the main OpenAI graph",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "target_name": "OpenAI Startup Fund SPVs",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4903,
+      "person_a": "OpenAI Startup Fund SPVs",
+      "person_b": "Infleqtion Inc.",
+      "relationship_type": "corporate",
+      "description": "OpenAI Startup Fund is named as a PIPE investor in Churchill Capital Corp X's merger with Infleqtion Inc (quantum computing) per 425 filings from 2025-2026. Specific entity and amount unconfirmed.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Infleqtion Inc.",
+      "other_person_slug": "infleqtion-inc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-07-28",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "OpenAI Startup Fund entity family comprises 15 Delaware entities in 5 tranches: Management LLC + GP I + Fund I (Jul 2021); SPV GP I + SPV I (Dec 2023); SPV GP II/III + SPV II/III (Apr 2024); SPV GP IV + SPV IV (May 2024); SPV GP V + SPV V (Nov 2024); SPV GP VI + SPV VI (Jul 2025). All entities use Corporation Service Company or CT Corp as Delaware registered agent.",
+      "confidence": "high",
+      "id": 9444
+    },
+    {
+      "date": "2024-02-02",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Ian Hathaway (not Sam Altman) is the named executive officer and signer for all six OpenAI Startup Fund SPVs (Form D filings 2024-02-02 through 2025-08-05). His title varies: 'Managing Member of the General Partner' (SPV I) and 'Manager of the Managing Member of the General Partner' (SPV II-VI). Altman does not appear on any SPV Form D.",
+      "confidence": "high",
+      "id": 9446
+    },
+    {
+      "date": "2024-02-02",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "All six OpenAI Startup Fund SPVs (I through VI) were incorporated after November 2023 \u2014 the month Altman was fired and rehired as OpenAI CEO. SPV GP I and SPV I LP were formed December 5, 2023 (weeks after the crisis). This timing strongly correlates the SPV proliferation with post-governance-crisis organizational restructuring, likely including the removal of Altman from direct fund management.",
+      "confidence": "high",
+      "id": 9451
+    },
+    {
+      "date": "2025-10-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "OpenAI Startup Fund is mentioned as a PIPE investor in Churchill Capital Corp X's merger with Infleqtion Inc (quantum computing company). This appears in two 425 filings from Churchill Capital Corp X (CIK 0002007825) dated 2025-10-06 and 2026-02-09. The specific fund entity and investment amount are not confirmed without reading the full PIPE investor table.",
+      "confidence": "medium",
+      "id": 9455
+    },
+    {
+      "date": "2026-04-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Total documented capital raised across the OpenAI Startup Fund family: approximately $304.4M. Fund I: $175,250,000 (Section 3(c)(1)); SPV I: $10M; SPV II: $25M; SPV III: $5M; SPV IV: $44.9M; SPV V: $44.3M; SPV VI: $0 as of initial filing (Aug 2025). All SPVs use Section 3(c)(7) exemption (qualified purchasers only).",
+      "confidence": "high",
+      "id": 9448
+    },
+    {
+      "date": "2026-04-06",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "The OpenAI Startup Fund uses three sequential San Francisco addresses across its entity lifecycle: (1) 3180 18th Street, SF 94110 \u2014 Fund I, SPV I, SPV III; (2) 1960 Bryant Street, SF 94110 \u2014 SPV II, IV, V; (3) 1455 3rd Street, SF 94158 \u2014 SPV VI (OpenAI's Mission Bay HQ). Each address shift tracks approximate OpenAI office moves.",
+      "confidence": "high",
+      "id": 9449
+    },
+    {
+      "date": "2026-04-06",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "All OpenAI Startup Fund Delaware GP entities use one of two major registered agents: Corporation Service Company (CSC) for GP I through GP IV (2021-2024), and The Corporation Trust Company (CT Corp) for GP V and GP VI (2024-2025). Registered address for all: New Castle, Delaware. The switch between agents occurred between May and November 2024.",
+      "confidence": "high",
+      "id": 9450
+    }
+  ]
+}

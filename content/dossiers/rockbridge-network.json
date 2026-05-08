@@ -5,30 +5,59 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-14T19:59:46.643242",
-  "last_updated": "2026-03-14T19:45:12",
+  "generated_at": "2026-05-07T23:07:36.086765",
+  "last_updated": "2026-03-24T14:13:09",
   "stats": {
-    "total_findings": 37,
-    "total_connections": 21,
+    "total_findings": 33,
+    "total_connections": 26,
     "total_entities": 0,
     "finding_types": {
+      "legal": 2,
       "identity": 2,
       "relationship": 16,
-      "financial": 5,
-      "legal": 4,
+      "financial": 3,
       "intelligence": 10
     },
     "connection_types": {
       "controls": 3,
       "funds": 3,
-      "political": 12,
+      "political": 11,
       "subsidiary_of": 1,
       "employment": 1,
-      "contracts_with": 1
+      "contracts_with": 1,
+      "owns": 1,
+      "corporate": 1,
+      "financial": 2,
+      "social": 2
     },
-    "last_updated": "2026-03-14T19:45:12"
+    "last_updated": "2026-03-24T14:13:09"
   },
   "findings": [
+    {
+      "id": 6722,
+      "finding_type": "legal",
+      "summary": "Rockbridge Network LLC organizational structure: Delaware LLC (file 5834011, incorporated April 12 2021) steering 8 entities - Better Tomorrow (VA, voter turnout), Over the Horizon Action (Arlington VA, voter turnout 7 swing states), Firebrand Action (Glen Allen VA, inc 2022, journalism), Faithful in Action (Cheyenne WY, inc 2023, church mobilization), Turnout for America (super PAC, raised 25M in 2024), Revitalization Partners (charitable investment). Structure: 4 dark-money 501c4s, 2 super PACs, 1 donor-advised 501c3, umbrella LLC.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-04-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 18:59:37",
+      "target_name": "Rockbridge Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Reuters Aug 2024; NYT Nov 2024; OpenCorporates us_de/5834011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6710,
       "finding_type": "identity",
@@ -46,7 +75,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:54:21",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -85,7 +114,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:54:29",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
@@ -110,7 +139,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:54:45",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
@@ -138,7 +167,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:55:10",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -177,7 +206,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:55:32",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
@@ -202,7 +231,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:57:58",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -227,36 +256,11 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:58:38",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC:C00883520",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6722,
-      "finding_type": "legal",
-      "summary": "Rockbridge Network LLC organizational structure: Delaware LLC (file 5834011, incorporated April 12 2021) steering 8 entities - Better Tomorrow (VA, voter turnout), Over the Horizon Action (Arlington VA, voter turnout 7 swing states), Firebrand Action (Glen Allen VA, inc 2022, journalism), Faithful in Action (Cheyenne WY, inc 2023, church mobilization), Turnout for America (super PAC, raised 25M in 2024), Revitalization Partners (charitable investment). Structure: 4 dark-money 501c4s, 2 super PACs, 1 donor-advised 501c3, umbrella LLC.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 18:59:37",
-      "target_name": "Rockbridge Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Reuters Aug 2024; NYT Nov 2024; OpenCorporates us_de/5834011",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -277,7 +281,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 18:59:45",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -552,7 +556,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:04:09",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -577,7 +581,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:04:52",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -602,7 +606,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:39:34",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -627,7 +631,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:39:53",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -652,7 +656,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:40:16",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
@@ -691,7 +695,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:40:30",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -737,7 +741,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:40:43",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
@@ -776,7 +780,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:40:55",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -817,7 +821,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:44:00",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -879,7 +883,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:44:23",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -926,7 +930,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:44:41",
       "target_name": "Rockbridge Network",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -952,184 +956,77 @@
       ]
     },
     {
-      "id": 5448,
+      "id": 6922,
       "finding_type": "relationship",
-      "summary": "SYSTEMIC PATTERN: Rockbridge Network serves as coordinating infrastructure for Silicon Valley defense network's political operations. JD Vance (founder), David Sacks (speaker), Palmer Luckey (speaker). Conservative donor network that bridges tech wealth to political power.",
-      "detail": "Rockbridge Network is a conservative donor organization founded by JD Vance that serves as a gathering point for Silicon Valley defense-tech aligned donors. LittleSis records show Vance as founder, Sacks and Luckey as speakers. This represents a deliberate organizational vehicle for converting tech wealth into political influence, distinct from ad-hoc individual donations. The network provides a social coordination mechanism that makes the WinRed donation patterns more explicable \u2014 these are not independent actors coincidentally supporting the same candidates, but a network with institutional coordination infrastructure.",
-      "source_datasets": [
-        "littlesis,analysis_run"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 21:17:29",
-      "target_name": "Rockbridge Network \u2014 Conservative Donor Infrastructure",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "analysis-run-13; littlesis:252515 (Vance-Rockbridge founder); littlesis:117853 (Sacks-Rockbridge speaker); littlesis:158415 (Luckey-Rockbridge speaker)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6718,
-      "finding_type": "relationship",
-      "summary": "501(c)(4) GOTV PAC controlled by Rockbridge, claims 160K members; EIN 93-1558726, registered at 2232 Dell Range Blvd Ste 200 Cheyenne WY",
-      "detail": "Faithful in Action is a get-out-the-vote PAC controlled by the Rockbridge Group per LittleSis. Claims 160K members and organizes small churches with field teams twice weekly. Has no other public presence. LittleSis shows it as a child entity of Rockbridge Network (hierarchical relationship). Registered as 501(c)(4) with EIN 93-1558726 at 2232 Dell Range Blvd Suite 200, Cheyenne WY 82009. No 990 filings available (as a c4, Form 990 filings may be filed but not yet digitized). The Cheyenne WY address is a common registered agent location.",
-      "source_datasets": [
-        "littlesis",
-        "990"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 18:55:27",
-      "target_name": "Faithful in Action",
-      "profile_id": null,
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "990:931558726",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://littlesis.org/entities/451590-Faithful_in_Action",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6744,
-      "finding_type": "financial",
-      "summary": "Buskirk is Founder and CIO of 1789 Capital, anti-ESG venture capital firm co-founded with Omeed Malik (Founder/President) and Rebekah Mercer in Oct 2022. The fund has topped $1B in assets, investing in SpaceX, xAI, and Neuralink. Donald Trump Jr. joined the firm. 1789 Capital emerged from the Rockbridge Network.",
-      "detail": null,
-      "source_datasets": [
-        "wikipedia",
-        "bloomberg",
-        "cnbc"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:38:59",
-      "target_name": "Chris Buskirk",
-      "profile_id": null,
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Wikipedia, Bloomberg, CNBC",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6761,
-      "finding_type": "relationship",
-      "summary": "Leonard Leo as bridge between Rockbridge Network and Teneo Network: LittleSis confirms Leo has generic relationship with Rockbridge Network (entity 423815) AND Board Chairman position at Teneo Network (entity 436356). JD Vance is co-founder of both Rockbridge Network (with Chris Buskirk) and co-founder of Teneo Network (with Josh Hawley). Rockbridge is a political donor coordination network (150-200 members, $75M 2024 budget, tech-heavy: Thiel, Sacks, Andreessen, Luckey, Winklevoss twins). Teneo is a talent placement pipeline (under-40 professionals, 20 regional chapters). Leo attended Rockbridge April 2024 Palm Beach retreat as speaker. The two networks serve complementary functions: Rockbridge mobilizes donor capital, Teneo places personnel in institutions. Leo is the primary node connecting both to the Federalist Society judicial pipeline and his $1.6B dark money apparatus.",
-      "detail": null,
-      "source_datasets": [
-        "littlesis"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:41:19",
-      "target_name": "Leonard Leo",
-      "profile_id": null,
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "LittleSis entities 171815/423815/436356, NBC News, ProPublica",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6767,
-      "finding_type": "financial",
-      "summary": "Buskirk political spending and organizational control: (1) Rockbridge Network co-founder (2019) with JD Vance \u2014 membership costs $100K-$1M. (2) 1789 Capital co-founder/CIO (Oct 2022) with Omeed Malik and Rebekah Mercer \u2014 crossed $1B AUM 2025. (3) Turnout for America super PAC founder \u2014 raised $25M+ in 2024. (4) President of Firebrand Action (Virginia, 2022) \u2014 Rockbridge's media/investigative journalism arm. (5) President of Faithful in Action (Wyoming, 2023) \u2014 church mobilization. (6) Advisor to Saving Arizona PAC (2021-22, backed Blake Masters, $31.8M raised, $15M from Thiel). (7) Co-owner Executive Branch (Georgetown DC, 2025) \u2014 MAGA members club with Trump Jr, Malik, Witkoff brothers. (8) Director, Colombier Acquisition Corp II and III (SPACs). (9) Position at PublicSquare marketplace. FEC donations 2023-24: $110K to Trump 47 Committee, $106.7K to RNC, $5.8K to Blake Masters, $10K to Vance Victory, $5K to JD Vance for Senate.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:43:41",
-      "target_name": "Chris Buskirk",
-      "profile_id": null,
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC filings, LittleSis entity 439747, Reuters reporting, Rockbridge Network Wikipedia, InfluenceWatch",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6783,
-      "finding_type": "legal",
-      "summary": "Center for American Greatness Inc. (EIN 81-4984970) at 3107 E Camelback Rd, Phoenix AZ 85016 is the ONLY Buskirk-affiliated entity where he appears as an officer: President/Director (compensation $128,125 in 2024). Other directors: J. Eric E. Wise (Secretary/Director, King & Spalding restructuring partner), Ned Ryun (Director \u2014 also director of Better Tomorrow, the Rockbridge voter mobilization arm). Revenue $1.7M in 2024, 99.8% from contributions. This is the 501(c)(3) research arm, distinct from American Greatness Inc. the publisher.",
-      "detail": null,
-      "source_datasets": [
-        "propublica"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:52:05",
-      "target_name": "Chris Buskirk",
-      "profile_id": null,
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica Nonprofit Explorer EIN 81-4984970; King & Spalding attorney profile; InfluenceWatch",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6785,
-      "finding_type": "legal",
-      "summary": "Buskirk operates through a deliberate opacity architecture: (1) 1789 Foundation/Citizen AG \u2014 officers are the Yoder family (Mike founded it, wife Gabrielle is secretary) plus law partners Dreher and Pearson; (2) American Greatness Inc \u2014 officers are Ryan/Julie Gibson household plus neighbor Bonnie McQuiston; (3) Rockbridge Network entities \u2014 Better Tomorrow has Ned Ryun and Janna Rutland; Faithful in Action in Wyoming; Firebrand Action in Virginia. The ONLY entity where Buskirk appears as a named officer is Center for American Greatness Inc (the 501c3 research arm). He is publicly identified as publisher/CIO/president of multiple entities but absent from all corporate filings. This is a consistent pattern of using proxy officers across at least 2 distinct personal networks (the Gibson cluster and the Yoder cluster) to maintain legal distance.",
-      "detail": null,
+      "summary": "Rockbridge Network (degree 19, rank #4) has near-perfect brokerage (0.988) bridging Thiel, Mercer, Sacks, Leo, and Trump Jr. with only 1 edge among all 19 neighbors",
+      "detail": "Structural observation: Rockbridge Network connects an unusual combination of actors: Peter Thiel, Rebekah Mercer, David Sacks, Palmer Luckey, Marc Andreessen (tech-right), Leonard Leo (Federalist Society), Scott Bessent (Treasury), Donald Trump Jr., plus affiliated entities (Rockbridge Korea, Teneo Network, Turnout for America, Faithful in Action, Better Tomorrow, Over the Horizon, Firebrand Action, Revitalization Partners). Despite 19 connections, neighbor density is 0.012 -- these actors are connected to each other almost exclusively through Rockbridge. This entity appears to be a coordination node for tech-right political strategy.",
       "source_datasets": [
         "analysis_run"
       ],
       "confidence": "medium",
       "date_of_event": null,
-      "claim_type": "inference",
+      "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-03-14 19:52:28",
-      "target_name": "Chris Buskirk",
-      "profile_id": null,
+      "created_at": "2026-03-23 16:23:25",
+      "target_name": "Rockbridge Network",
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "FL Sunbiz N22000005670; N11000004422; L06000117683; ProPublica EIN 81-4984970; Democracy Docket; Reuters; NBC News",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7268,
+      "finding_type": "relationship",
+      "summary": "Rockbridge Network is an LLC co-founded in 2019 by JD Vance and Chris Buskirk that functions as a political venture capital umbrella. It steers 8 organizations across 4 c4s, 2 super PACs, 1 c3, and the LLC itself. Key members per LittleSis: Peter Thiel, Rebekah Mercer, Marc Andreessen, Palmer Luckey, David Sacks, Ken Howery, Luke Nosek, Winklevoss twins, Steve Wynn, Woody Johnson, Tucker Carlson, Blake Masters, Leonard Leo, Scott Bessent, Tulsi Gabbard, Steve Witkoff.",
+      "detail": "LittleSis entity 423815 shows 25 relationships. Rockbridge vehicles include: Turnout for America (super PAC, $25M+ raised 2024), Over the Horizon Action (c4, EIN 88-0696885, $3.88M revenue from Restoration of America), Better Tomorrow (GOTV nonprofit, Richmond VA), Faithful in Action (church voter mobilization). Janna Rutland serves as Treasurer. Vance no longer has formal role but appeared at April 2024 event. Three internal documents revealed $75M budget for 2024 and role seeking to influence presidential election. Buskirk told donors Rockbridge had ~3,000 people in the field during 2024 campaign.",
+      "source_datasets": [
+        "littlesis",
+        "web_search",
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:29",
+      "target_name": "Rockbridge Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 423815; NYT, Reuters, NBC News reporting; 990 filings for affiliated orgs",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7270,
+      "finding_type": "relationship",
+      "summary": "Rockbridge Network's membership overlaps heavily with Trump administration appointees: Scott Bessent (Treasury Secretary), Tulsi Gabbard (DNI), Steve Witkoff (Middle East Envoy), Woody Johnson (Ambassador). Tech donors Andreessen, Sacks, Luckey, Thiel form the 'Silicon Valley to MAGA' pipeline. Leonard Leo connects Rockbridge to judicial infrastructure.",
+      "detail": "Per LittleSis, at least 4 Rockbridge members now hold senior Trump administration positions: Scott Bessent (Treasury), Tulsi Gabbard (DNI), Steve Witkoff (ME Envoy), Woody Johnson (UK Ambassador). The donor roster reads as a who's who of Silicon Valley conservatives: Peter Thiel (donor), Marc Andreessen, Palmer Luckey (Anduril), David Sacks, Ken Howery, Luke Nosek (all Founders Fund/PayPal Mafia). Leonard Leo's presence bridges Rockbridge to the Federalist Society judicial network. Tom Emmer (House Majority Whip) provides congressional liaison.",
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:37",
+      "target_name": "Rockbridge Network",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationships for entity 423815; public appointment records",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1337,21 +1234,6 @@
       ]
     },
     {
-      "id": 3433,
-      "person_a": "Rockbridge Network",
-      "person_b": "Teneo Network",
-      "relationship_type": "political",
-      "description": "Overlapping conservative personnel pipelines. JD Vance co-founded both. Leonard Leo chairs Teneo and spoke at Rockbridge Apr 2024. Different sector focus: Rockbridge targets government/campaign, Teneo targets culture/media/business.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:43:41",
-      "profile_id": null,
-      "other_person": "Teneo Network",
-      "other_person_slug": "teneo-network",
-      "evidence": []
-    },
-    {
       "id": 3434,
       "person_a": "Claremont Institute",
       "person_b": "Rockbridge Network",
@@ -1361,7 +1243,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:43:41",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Claremont Institute",
       "other_person_slug": "claremont-institute",
       "evidence": []
@@ -1376,7 +1258,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:43:41",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "James Blair",
       "other_person_slug": "james-blair",
       "evidence": []
@@ -1391,7 +1273,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:45:04",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Over the Horizon Action",
       "other_person_slug": "over-the-horizon-action",
       "evidence": [
@@ -1413,7 +1295,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:45:06",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Turnout for America",
       "other_person_slug": "turnout-for-america",
       "evidence": [
@@ -1435,13 +1317,123 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:45:12",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Crosby Ottenhoff Group",
       "other_person_slug": "crosby-ottenhoff-group",
       "evidence": [
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC disbursement records from C00883520, C00804690, C00777185",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3669,
+      "person_a": "Chris Buskirk",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "owns",
+      "description": "Co-founder (2019) and head/president of Rockbridge Network LLC",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:04",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 423815",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3674,
+      "person_a": "JD Vance",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "political",
+      "description": "Co-founder of Rockbridge Network (2019); VP-elect as of 2024",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:09",
+      "profile_id": "tech-right",
+      "other_person": "JD Vance",
+      "other_person_slug": "jd-vance",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis; Reuters reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3677,
+      "person_a": "1789 Capital",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "corporate",
+      "description": "1789 Capital is the venture capital arm of Rockbridge; co-founded by same principals (Buskirk, Mercer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:11",
+      "profile_id": "tech-right",
+      "other_person": "1789 Capital",
+      "other_person_slug": "1789-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis; web reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3687,
+      "person_a": "Peter Thiel",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "financial",
+      "description": "Peter Thiel is a donor to Rockbridge Network",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:24",
+      "profile_id": "tech-right",
+      "other_person": "Peter Thiel",
+      "other_person_slug": "peter-thiel",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 423815",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3688,
+      "person_a": "Rebekah Mercer",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "financial",
+      "description": "Rebekah Mercer is a donor to Rockbridge Network and co-founder of 1789 Capital",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:26",
+      "profile_id": "tech-right",
+      "other_person": "Rebekah Mercer",
+      "other_person_slug": "rebekah-mercer",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 423815",
           "source_quote": null,
           "source_page": null
         }
@@ -1536,21 +1528,6 @@
       ]
     },
     {
-      "id": 3427,
-      "person_a": "Leonard Leo",
-      "person_b": "Rockbridge Network",
-      "relationship_type": "political",
-      "description": "Speaker at April 2024 retreat, bridge between Rockbridge donors and Teneo talent pipeline",
-      "strength": "medium",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-14 19:41:52",
-      "profile_id": null,
-      "other_person": "Leonard Leo",
-      "other_person_slug": "leonard-leo",
-      "evidence": []
-    },
-    {
       "id": 3432,
       "person_a": "Heritage Foundation",
       "person_b": "Rockbridge Network",
@@ -1560,14 +1537,75 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-14 19:43:41",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Heritage Foundation",
       "other_person_slug": "heritage-foundation",
       "evidence": []
+    },
+    {
+      "id": 3658,
+      "person_a": "Palmer Luckey",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "social",
+      "description": "Palmer Luckey connected to Rockbridge Network per LittleSis",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:23",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415 relationship data",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3862,
+      "person_a": "David Sacks",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "social",
+      "description": "LittleSis records generic relationship between Sacks and Rockbridge Network, a conservative/libertarian tech network.",
+      "strength": "medium",
+      "date_range": "unknown",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:09",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 117853 relationships",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2021-04-12",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Rockbridge Network LLC organizational structure: Delaware LLC (file 5834011, incorporated April 12 2021) steering 8 entities - Better Tomorrow (VA, voter turnout), Over the Horizon Action (Arlington VA, voter turnout 7 swing states), Firebrand Action (Glen Allen VA, inc 2022, journalism), Faithful in Action (Cheyenne WY, inc 2023, church mobilization), Turnout for America (super PAC, raised 25M in 2024), Revitalization Partners (charitable investment). Structure: 4 dark-money 501c4s, 2 super PACs, 1 donor-advised 501c3, umbrella LLC.",
+      "confidence": "high",
+      "id": 6722
+    },
+    {
+      "date": "unknown",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "LittleSis records generic relationship between Sacks and Rockbridge Network, a conservative/libertarian tech network.",
+      "other_person": "David Sacks",
+      "id": 3862
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6768,
@@ -1730,433 +1768,5 @@
       "complexity-as-credential",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Rockbridge Network",
-      "connections": [
-        {
-          "target": "Chris Buskirk",
-          "type": "controls",
-          "strength": 1.0,
-          "evidence_ref": "Reuters Aug 2024; NYT Nov 2024",
-          "description": "Buskirk is operational leader of Rockbridge Network. Also president of two subsidiaries: Firebrand Action (media arm) and Faithful in Action (church mobilization). Runs day-to-day operations while Vance provides political cover from VP office."
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "Reuters Aug 2024; Economy.ac Jun 2025",
-          "description": "Early financier of Rockbridge Network. Described in reporting as 'puppet master' of the network. Mentor and funder of Vance since before 2022 Senate race. Maintains presence at high-dollar retreats. Silicon Valley billionaire and Palantir founder."
-        },
-        {
-          "target": "Rebekah Mercer",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "Reuters Aug 2024; NBC News Apr 2024",
-          "description": "Major donor to Rockbridge Network. Also co-founder of 1789 Capital (alongside Buskirk and Malik). Attended April 2024 Palm Beach retreat. Traditional conservative donor providing capital and network access."
-        },
-        {
-          "target": "David Sacks",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "NYT Nov 2024; Reuters Aug 2024",
-          "description": "Speaker and member of Rockbridge Network. Now serves as White House AI and Crypto Czar in Trump administration. PayPal Mafia member. Key bridge between Silicon Valley tech elite and Rockbridge donor infrastructure."
-        },
-        {
-          "target": "Palmer Luckey",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "Reuters Aug 2024; LittleSis",
-          "description": "Speaker at Rockbridge Network events. Anduril Industries founder. Defense-tech billionaire. Key bridge between defense-tech sector and Rockbridge donor infrastructure."
-        },
-        {
-          "target": "Marc Andreessen",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "NYT Nov 2024; dnyuz.com",
-          "description": "Speaker and member of Rockbridge Network. Co-founder of a16z (Andreessen Horowitz). Enthusiastic supporter per reporting. Brings venture capital establishment into Rockbridge orbit."
-        },
-        {
-          "target": "Donald Trump Jr.",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "NBC News Apr 2024; Economy.ac Jun 2025; Korea Herald",
-          "description": "Active facilitator at Rockbridge events. Spoke at April 2024 Palm Beach event. No official government title but assists with appointments and lobbies globally to expand Rockbridge reach. Partner at 1789 Capital (joined 2024). Longtime associate of Chung Yong-jin (Rockbridge Asia head)."
-        },
-        {
-          "target": "Rockbridge Korea",
-          "type": "subsidiary_of",
-          "strength": 1.0,
-          "evidence_ref": "Korea Herald Sep 2025; KED Global Jun 2025",
-          "description": "Rockbridge Korea established Sep 2025 in Seoul as think tank. Led by Kim Hae-young (chair), board includes ex-PM Kim Boo-kyum, ex-Finance Min Bahk Jae-wan, Shinsegae chair Chung Yong-jin. First general meeting Sep 24 2025. Part of planned Asia expansion including Taiwan (Richard Tsai) and Japan (Tadashi Maeda) branches."
-        },
-        {
-          "target": "Omeed Malik",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "NBC News Apr 2024; Reuters Aug 2024",
-          "description": "Backer of Rockbridge Network. Co-founder of 1789 Capital alongside Buskirk and Mercer. Former Democrat turned Trump donor. Business partner of Donald Trump Jr. Described Rockbridge as ideas exchange. Attended since at least 2022 Mar-a-Lago meeting."
-        },
-        {
-          "target": "Teneo Network",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Overlapping conservative personnel pipelines. JD Vance co-founded both. Leonard Leo chairs Teneo and spoke at Rockbridge Apr 2024. Different sector focus: Rockbridge targets government/campaign, Teneo targets culture/media/business."
-        },
-        {
-          "target": "Claremont Institute",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Ideological pipeline: Rockbridge supplies money/infrastructure, Claremont supplies doctrine and ideological framing. Chris Buskirk is Claremont Publius Fellow and Rockbridge co-founder. Ryan P Williams (Claremont president) sits on SACR board linking all three organizations."
-        },
-        {
-          "target": "James Blair",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Blair served as Firebrand Action (Rockbridge subsidiary) secretary, resigned to join Trump campaign, became WH Deputy Chief of Staff. Demonstrates direct Rockbridge subsidiary to White House personnel pipeline."
-        },
-        {
-          "target": "Over the Horizon Action",
-          "type": "controls",
-          "strength": 1.0,
-          "evidence_ref": "NYT reporting; Rockbridge prospectus",
-          "description": "Rockbridge Network LLC steers Over the Horizon Action as its primary financial distribution hub"
-        },
-        {
-          "target": "Turnout for America",
-          "type": "controls",
-          "strength": 1.0,
-          "evidence_ref": "Reuters reporting; FEC filing",
-          "description": "Rockbridge Network LLC steers Turnout for America super PAC; Buskirk leads both"
-        },
-        {
-          "target": "Crosby Ottenhoff Group",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": "FEC disbursement records from C00883520, C00804690, C00777185",
-          "description": "All Rockbridge PACs use Crosby Ottenhoff Group for compliance consulting; Janna Rutland (COG employee) serves as treasurer of all Rockbridge PACs"
-        },
-        {
-          "target": "Leonard Leo",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "NBC News Apr 2024",
-          "description": "Prominent conservative lawyer and Federalist Society chairman. Speaker at Rockbridge April 2024 Palm Beach event. Also chairman of Teneo Network. Represents bridge between Rockbridge and traditional legal conservative infrastructure."
-        },
-        {
-          "target": "Scott Bessent",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "Economy.ac Jun 2025; NYT Nov 2024",
-          "description": "Treasury Secretary and Rockbridge Network member. Attended retreats. Per Economy.ac, considered strong contender for next Fed Chair with Trump advisors backing. Demonstrates Rockbridge reach into economic policy."
-        },
-        {
-          "target": "Teneo Network",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "ProPublica Teneo reporting; NBC News Apr 2024",
-          "description": "Personnel overlap: JD Vance co-founded both Rockbridge Network and Teneo Network (with Josh Hawley). Leonard Leo chairs Teneo and spoke at Rockbridge events. Both aim to build conservative institutional infrastructure but target different domains: Rockbridge focuses on donor/political operations while Teneo targets professional class across law, media, finance, tech."
-        },
-        {
-          "target": "Ken Howery",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "NYT Nov 2024; LittleSis",
-          "description": "Member of Rockbridge Network. Known for working the social scene at Rockbridge gatherings. PayPal Mafia member and former US Ambassador to Sweden under Trump. Founders Fund partner."
-        },
-        {
-          "target": "Leonard Leo",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Speaker at April 2024 retreat, bridge between Rockbridge donors and Teneo talent pipeline"
-        },
-        {
-          "target": "Heritage Foundation",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Complementary but competing conservative personnel pipelines. Rockbridge views Heritage as outdated. Both aim to staff Republican administrations but through different approaches: Rockbridge via elite donor network, Heritage via policy blueprint and mass training."
-        }
-      ],
-      "secondHop": {
-        "Chris Buskirk": [
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Co-founders of Rockbridge Network (2019). Buskirk hosted early dinners to build infrastructure for Vance political career. Rockbridge grew from informal dinners near Rockbridge OH into 150-200 member donor network with 75M budget by 2024."
-          },
-          {
-            "target": "Rebekah Mercer",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Omeed Malik",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "David Sacks": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Stanford Review colleagues, co-authored Diversity Myth 1998, PayPal COO. Sacks now Trump AI/Crypto czar. Cross-invested (Craft in Palantir, FF in Yammer)"
-          },
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Sacks speaker). Coordinated conservative donor network."
-          },
-          {
-            "target": "Michael Kratsios",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Sequential occupants of White House tech policy positions. Kratsios (CTO Trump 1.0), Sacks (AI/Crypto Czar Trump 2.0). Both from Thiel network."
-          },
-          {
-            "target": "Bo Hines",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Sacks was WH AI and Crypto Czar; Hines reported to Sacks as ED of Crypto Council. After resignation, Hines retained advisory role to assist Sacks on AI. Sacks praised Hines on departure."
-          },
-          {
-            "target": "Bo Hines",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hines served under Sacks as Executive Director of WH Crypto Council (Jan-Aug 2025). Sacks was WH AI and Crypto Czar (SGE). After resignation, Hines remained as SGE assisting Sacks on AI policy while simultaneously working for Tether."
-          }
-        ],
-        "Donald Trump Jr.": [
-          {
-            "target": "Office of Strategic Capital",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "1789 Capital (Trump Jr joined post-2024 election) portfolio company received largest-ever OSC loan at 620M. Four other portfolio companies received DoD contracts totaling 70M+. Warren/Blumenthal/Kim letter flagged conflict."
-          },
-          {
-            "target": "Changpeng Zhao",
-            "type": "political",
-            "strength": 1.0,
-            "description": "CZ pardon lobbied by Charles McDowell (Checkmate Gov Relations), identified as friend of Don Jr"
-          }
-        ],
-        "Ken Howery": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal co-founder, co-founded Founders Fund with Thiel. Served as US Ambassador to Sweden under Trump. Core Thiel inner circle."
-          }
-        ],
-        "Leonard Leo": [
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both served on board of Catholic Information Center, Opus Dei-affiliated institution at 15th and K St NW Washington DC. Leo is Federalist Society EVP who managed conservative judicial pipeline. CIC functions as nexus for Catholic conservative legal-political network."
-          },
-          {
-            "target": "Mark Paoletta",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Leo's Judicial Education Project paid Paoletta/MP Strategies ~300K for Thomas PR campaign; Leo and Paoletta traveled together with Thomas and Crow to Indonesia 2019; depicted together in Camp Topridge painting; Leo funds RAGA network Paoletta's firm assists"
-          },
-          {
-            "target": "Teneo Network Inc",
-            "type": "controls",
-            "strength": 1.0,
-            "description": "Board Chairman since 2021, revenue tripled under his leadership"
-          },
-          {
-            "target": "Federalist Society",
-            "type": "controls",
-            "strength": 1.0,
-            "description": "Co-Chairman board, Executive VP for 25+ years, judicial nomination pipeline"
-          },
-          {
-            "target": "CRC Advisors",
-            "type": "controls",
-            "strength": 1.0,
-            "description": "Co-founder/Chairman, received $102M+ from nonprofits 2016-2022"
-          }
-        ],
-        "Marc Andreessen": [
-          {
-            "target": "Scott Aaron Kupor",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "a16z Managing Partner relationship. Kupor is Managing Partner of AH Capital Management LLC (a16z) since 6/2009, Andreessen is co-founder. Kupor holds GP positions in 30+ a16z funds."
-          },
-          {
-            "target": "Scott Aaron Kupor",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Andreessen recruited Kupor (a16z Managing Partner) for OPM Director via DOGE pipeline. Kupor retains passive a16z fund interests"
-          },
-          {
-            "target": "Andreessen Horowitz (a16z)",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Andreessen co-founded a16z"
-          },
-          {
-            "target": "Benjamin Horowitz",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Coordinated $25M giving to Leading the Future PAC (Aug 2025) -- $12.5M each on same date. Combined a16z Super PAC funding exceeds $37M"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "a16z invested in xAI (Series B $6B + Series C $6B), SpaceX, and Twitter $44B acquisition. Andreessen recruits for Musk-led DOGE"
-          }
-        ],
-        "Omeed Malik": [
-          {
-            "target": "Rebekah Mercer",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of 1789 Capital (Oct 2022). Malik is president, Mercer provides capital and conservative donor network access. Mercer also Heritage Foundation trustee and Cambridge Analytica funder."
-          },
-          {
-            "target": "Donald Trump Jr",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Trump Jr is partner at 1789 Capital, co-founded by Malik. Joined Nov 2024 after father won presidential election. Fund grew from 200M to 2B AUM during his tenure."
-          }
-        ],
-        "Over the Horizon Action": [
-          {
-            "target": "The Faithful in Action",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "OTH Action granted $2.05M to Faithful in Action in FY2024"
-          },
-          {
-            "target": "Better Tomorrow",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "OTH Action granted $6.9M to Better Tomorrow in FY2024 \u2014 the primary funding relationship"
-          }
-        ],
-        "Palmer Luckey": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "FF invested in Anduril since 2017, led 2.5B round 2025. Luckey met Trae Stephens at FF retreat 2014. Also backed Erebor digital bank."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel's Founders Fund is lead investor in Anduril (B in Series G alone). Luckey operates within Thiel's tech-right network. Stephens (Thiel protege) co-founded Anduril with Luckey."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-          },
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B."
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Erebor Bank (Columbus, OH). Both from Thiel network: Luckey via Anduril/Founders Fund, Lonsdale via Palantir/8VC. Erebor positioned as bank for defense/crypto/AI ecosystem. $4.35B valuation."
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ],
-        "Rebekah Mercer": [
-          {
-            "target": "Donald Trump Jr",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both partners at 1789 Capital. Mercer is co-founder and major investor (likely provided seed capital -- initial Form D showed 10M from 1 investor). Mercer also key Heritage Foundation trustee (Project 2025) and Cambridge Analytica funder."
-          },
-          {
-            "target": "Heritage Foundation",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mercer is Heritage Foundation trustee; Heritage produced Project 2025 Greenland section. Mercer co-founded 1789 Capital with Greenland-relevant defense portfolio"
-          }
-        ],
-        "Turnout for America": [
-          {
-            "target": "America 21 PAC",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "Turnout for America transferred $750K to America 21 PAC (Jan 2025)"
-          },
-          {
-            "target": "Patriot Grassroots LLC",
-            "type": "contracts_with",
-            "strength": 1.0,
-            "description": "Turnout for America paid $14M+ to Patriot Grassroots LLC (Cheyenne WY) for field canvassing operations in 2024 election cycle"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

@@ -1,0 +1,220 @@
+{
+  "name": "Five A's Projects LLC",
+  "slug": "five-as-projects-llc",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.379979",
+  "last_updated": "2026-03-27T02:53:15",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 2,
+      "corporate": 1,
+      "background": 2,
+      "relationship": 2
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-27T02:53:15"
+  },
+  "findings": [
+    {
+      "id": 8042,
+      "finding_type": "financial",
+      "summary": "Five A's Projects LLC transferred more than $1M in FCNP funds to purchase Kelly's 19th Hole (8432 Noble Ave N, Brooklyn Park MN 55443) for $1M in October 2021; both co-organizers Abdi Nur Salah and Abdikadir Ainashe Mohamud forfeited this property in their respective Jan 2025 and Feb 2025 guilty pleas",
+      "detail": null,
+      "source_datasets": [
+        "doj"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-10-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:45:33",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "doj:usao-mn:abdikadir-mohamud-plea-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8061,
+      "finding_type": "financial",
+      "summary": "Five A's Projects LLC received $1M+ in FCNP fraud proceeds from Tunyar Trading and used them to purchase Kelly's 19th Hole (8432 Noble Ave N Brooklyn Park MN 55443) for $1,000,000; both co-organizers Abdi Nur Salah and Abdikadir Mohamud forfeited the property in their 2025 guilty pleas",
+      "detail": null,
+      "source_datasets": "doj_press_release",
+      "confidence": "high",
+      "date_of_event": "2021-10-01",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 02:53:15",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8037,
+      "finding_type": "corporate",
+      "summary": "Five A's Projects LLC (Oct 2021) co-organized by Abdi Nur Salah and Abdikadir Mohamud \u2014 undocumented direct organizational link between two FOF co-conspirators",
+      "detail": "Five A's Projects LLC (MN, incorporated 2021-10-07) was co-organized by Abdi N Salah (4659 Bryant Ave N) and Abdikadir Mohamud (1485 66th Ave NE, Fridley MN 55432). Abdikadir Mohamud is a separately charged FOF co-conspirator. This entity was incorporated 9 months after Stone Bridge Development LLC and 7 months before the scheme's approximate end. Registered at 2722 Park Avenue, Suite 100, Minneapolis MN 55407. Currently inactive.",
+      "source_datasets": "opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2021-10-07",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:32:16",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8041,
+      "finding_type": "background",
+      "summary": "Five A's Projects LLC (MN file 1262210500028, formed 2021-10-07, admin-terminated 2023-02-08) registered at 2722 Park Avenue Suite 100, Minneapolis MN 55407 \u2014 same building forfeited by Abdulkadir Nur Salah in his Jan 2025 guilty plea; one original filing, no amendments",
+      "detail": null,
+      "source_datasets": [
+        "mn_sos,opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-10-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:45:26",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "mn_sos:f117b330-8627-ec11-91b3-00155d32b93a",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8060,
+      "finding_type": "background",
+      "summary": "Five A's Projects LLC MN SOS filing: File Number 1262210500028, GUID f117b330-8627-ec11-91b3-00155d32b93a, formed 2021-10-07, admin-terminated 2023-02-08, registered 2722 Park Avenue Suite 100 Minneapolis MN 55407, no registered agent, no amendments",
+      "detail": null,
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2021-10-07",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 02:53:15",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8043,
+      "finding_type": "relationship",
+      "summary": "Five A's Projects LLC registered office (2722 Park Avenue Suite 100, Minneapolis MN) is the same building that Abdulkadir Nur Salah forfeited as part of his Jan 2025 guilty plea \u2014 creating a three-way link between all three FOF co-defendants (Abdi Nur Salah, Abdikadir Mohamud, Abdulkadir Nur Salah) through this single entity",
+      "detail": null,
+      "source_datasets": [
+        "doj"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-28",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:45:38",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "doj:usao-mn:nur-salah-brothers-plea-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8062,
+      "finding_type": "relationship",
+      "summary": "Five A's Projects LLC registered at 2722 Park Avenue Suite 100 Minneapolis \u2014 the same 2722 Park Avenue South property forfeited by Abdulkadir Nur Salah at his Jan 2025 guilty plea \u2014 creating a structural three-way link between all three FOF co-defendants through this single entity and address",
+      "detail": null,
+      "source_datasets": "doj_press_release,irs_ci",
+      "confidence": "medium",
+      "date_of_event": "2025-01-28",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:53:15",
+      "target_name": "Five A's Projects LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-10-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Five A's Projects LLC transferred more than $1M in FCNP funds to purchase Kelly's 19th Hole (8432 Noble Ave N, Brooklyn Park MN 55443) for $1M in October 2021; both co-organizers Abdi Nur Salah and Abdikadir Ainashe Mohamud forfeited this property in their respective Jan 2025 and Feb 2025 guilty pleas",
+      "confidence": "high",
+      "id": 8042
+    },
+    {
+      "date": "2021-10-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Five A's Projects LLC received $1M+ in FCNP fraud proceeds from Tunyar Trading and used them to purchase Kelly's 19th Hole (8432 Noble Ave N Brooklyn Park MN 55443) for $1,000,000; both co-organizers Abdi Nur Salah and Abdikadir Mohamud forfeited the property in their 2025 guilty pleas",
+      "confidence": "high",
+      "id": 8061
+    },
+    {
+      "date": "2021-10-07",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Five A's Projects LLC (Oct 2021) co-organized by Abdi Nur Salah and Abdikadir Mohamud \u2014 undocumented direct organizational link between two FOF co-conspirators",
+      "confidence": "medium",
+      "id": 8037
+    },
+    {
+      "date": "2021-10-07",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Five A's Projects LLC (MN file 1262210500028, formed 2021-10-07, admin-terminated 2023-02-08) registered at 2722 Park Avenue Suite 100, Minneapolis MN 55407 \u2014 same building forfeited by Abdulkadir Nur Salah in his Jan 2025 guilty plea; one original filing, no amendments",
+      "confidence": "high",
+      "id": 8041
+    },
+    {
+      "date": "2021-10-07",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Five A's Projects LLC MN SOS filing: File Number 1262210500028, GUID f117b330-8627-ec11-91b3-00155d32b93a, formed 2021-10-07, admin-terminated 2023-02-08, registered 2722 Park Avenue Suite 100 Minneapolis MN 55407, no registered agent, no amendments",
+      "confidence": "high",
+      "id": 8060
+    },
+    {
+      "date": "2025-01-28",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Five A's Projects LLC registered office (2722 Park Avenue Suite 100, Minneapolis MN) is the same building that Abdulkadir Nur Salah forfeited as part of his Jan 2025 guilty plea \u2014 creating a three-way link between all three FOF co-defendants (Abdi Nur Salah, Abdikadir Mohamud, Abdulkadir Nur Salah) through this single entity",
+      "confidence": "medium",
+      "id": 8043
+    },
+    {
+      "date": "2025-01-28",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Five A's Projects LLC registered at 2722 Park Avenue Suite 100 Minneapolis \u2014 the same 2722 Park Avenue South property forfeited by Abdulkadir Nur Salah at his Jan 2025 guilty plea \u2014 creating a structural three-way link between all three FOF co-defendants through this single entity and address",
+      "confidence": "medium",
+      "id": 8062
+    }
+  ]
+}

@@ -1,0 +1,525 @@
+{
+  "name": "Ned Ryun",
+  "slug": "ned-ryun",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.386465",
+  "last_updated": "2026-03-23T19:02:32",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 5,
+    "total_entities": 9,
+    "finding_types": {
+      "identity": 1,
+      "relationship": 1,
+      "financial": 4,
+      "background": 1
+    },
+    "connection_types": {
+      "political": 2,
+      "shares_officer": 2,
+      "corporate": 1
+    },
+    "last_updated": "2026-03-23T19:02:32"
+  },
+  "findings": [
+    {
+      "id": 7280,
+      "finding_type": "identity",
+      "summary": "Ned Ryun holds officer/director roles in at least 8 entities: (1) American Majority Inc (CEO/Founder, 501c3, EIN 26-1501154, est 2008, revenue .4M 2023); (2) American Majority Action (CEO/Chairman/Treasurer, 501c4, EIN 26-3594713, est 2009, revenue .6M 2023); (3) Voter Gravity (Founder/CEO, for-profit voter data software, est 2012); (4) Over the Horizon Action (Director, 501c4, EIN 88-0696885, Rockbridge Network voter turnout arm, revenue .9M 2023); (5) Center for American Greatness (Director, 501c3, EIN 81-4984970, est 2017, revenue .8M 2023); (6) Restoring Michigan's Future (Director, 501c4, EIN 87-3398119, election-focused grants in Michigan); (7) Better Tomorrow (Director, 501c4, EIN 87-2086524, Rockbridge Network voter registration entity); (8) Media Trackers Wisconsin Inc (Officer, nonprofit, EIN 27-3535978, conservative 'nimble attack blog', now inactive). Total known compensation: ,405 from American Majority/AMA (shared CEO compensation reported on both).",
+      "detail": null,
+      "source_datasets": [
+        "irs_990,fl_sos,littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:14",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:261501154",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:263594713",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:880696885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:814984970",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:873398119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872086524",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7285,
+      "finding_type": "relationship",
+      "summary": "Ned Ryun and Chris Buskirk share board seats across 4 organizations creating a tight cross-board governance network: (1) American Majority Inc - Ryun CEO, Buskirk Director; (2) American Majority Action - Ryun CEO/Chairman, Buskirk Director; (3) Center for American Greatness - Ryun Director, Buskirk President/Director; (4) Better Tomorrow - both Directors. This places Buskirk (Rockbridge Network co-founder with JD Vance) in direct governance over Ned Ryun's entire organizational ecosystem and vice versa. Peter Samuelson and Paul Bonicelli are also shared Directors across American Majority and American Majority Action. The cross-board pattern means decisions at Rockbridge-affiliated entities (Better Tomorrow, Over the Horizon Action) and Ryun's training/advocacy entities (AM, AMA) flow through the same governance layer.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:25",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:261501154",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:263594713",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:814984970",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872086524",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7289,
+      "finding_type": "financial",
+      "summary": "Restoration of America (EIN 47-2862042, 501c4, Ponte Vedra FL) is the primary funding conduit for Ned Ryun's organizations and multiple Rockbridge Network entities. 2023 revenue .3M. Grants to Ryun-connected entities: American Majority Action (.54M 2023, .39M 2022), American Majority Inc (.25M 2023 via Foundation for Restoration, K 2022), Over the Horizon Action (.6M 2023). Restoration of America also funds: Susan B Anthony List (.1M 2023), Tea Party Patriots Action (.6M 2023), American Principles Project (.9M 2023), Fight Voter Fraud Inc (.1M 2022, K 2023), Lawyers Democracy Fund (.4M 2022), Liberty Initiative Fund (M 2023). National Christian Charitable Foundation granted .4M to Foundation for the Restoration of America in 2023, making NCCF a likely upstream donor-advised fund source.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:41",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:261501154",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:263594713",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:880696885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7293,
+      "finding_type": "financial",
+      "summary": "FEC records show 5 donations by Ned Ryun (2005-2014), all Republican, totaling :  to Republican Party of Virginia (2014, employer listed as Voter Gravity, CEO),  to Niger Innis for Congress (2014),  to RNC via McCain-Palin Victory 2008 (employer listed as American Majority, President),  to Madison Project/Michael Steele for Senate (2005),  to Madison Project (2005). Home address consistently: 608 S Maple Ave, Purcellville VA 20132 (also seen as 106 Kirkbridge Court, Purcellville VA 20132 in 2005). Donation through Madison Project is notable \u2014 LittleSis confirms Ned Ryun was a Board Member of Madison Project Inc.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:52",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fec",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7296,
+      "finding_type": "background",
+      "summary": "Ned Ryun career timeline: (1) Born 1973-02-28 in Santa Barbara, twin brother Drew Ryun, son of Rep Jim Ryun (R-KS); (2) BA History (summa cum laude) University of Kansas; (3) Speechwriter for President George W. Bush (White House); (4) Founded/directed Generation Joshua (civics education for homeschool students, reached ~10K members, program of HSLDA); (5) Founded American Majority 2008 (conservative candidate training); (6) Founded American Majority Action 2009 (c4 advocacy arm); (7) Board Member, Madison Project Inc (conservative PAC); (8) Board Member, American Conservative Union (CPAC host org); (9) Founded Voter Gravity 2012 (political voter data software); (10) Founded Media Trackers Wisconsin ~2012 (conservative watchdog blog); (11) Appointed to Trump 1776 Commission Dec 2020; (12) Director, Center for American Greatness (Buskirk's org) by 2017; (13) Director, Over the Horizon Action (Rockbridge voter turnout) by 2022; (14) Director, Better Tomorrow (Rockbridge voter registration) by 2021; (15) Director, Restoring Michigan's Future by 2022. Fox News contributor. Author of 'Restoring Our Republic' and 'The Adversaries.' Resides in Western Loudoun County, VA.",
+      "detail": null,
+      "source_datasets": [
+        "990,littlesis,fec,websearch"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:06",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:261501154",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:263594713",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7299,
+      "finding_type": "financial",
+      "summary": "Center for American Greatness (where Ned Ryun is Director) is primarily funded by Donors Trust, the conservative donor-advised fund: K (2020), K (2021), K (2022), K (2023) \u2014 totaling .66M. Additional major funders: Bradley Foundation (K/year 2020-2023, K total), Bradley Impact Fund (K 2022), Thomas W Smith Foundation (K 2021, K 2020, K 2024), Sarah Scaife Foundation (K 2020-2021, K 2022, K 2023), Schwab Charitable (K 2023), Fidelity Charitable (K 2023). This places CAG squarely within the Bradley/Scaife/DonorsTrust conservative funding ecosystem. CAG made a K grant to George Mason University Foundation (2019). No whistleblower policy in place.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:20",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:814984970",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7300,
+      "finding_type": "financial",
+      "summary": "Restoring Michigan's Future (EIN 87-3398119, 501c4, Mountain Brook AL) is a targeted election infrastructure entity where Ned Ryun serves as Director alongside Ed McFadden and Andrew Wierda. Despite its Michigan-focused name, it is incorporated at an Alabama address. Granted ,500 to: American Principles Project (K 2022), State Solutions Inc (K 2022), America Back to Basics Act (K 2023), Stand Up Michigan Inc (.5K 2022). Revenue went to zero in 2023, suggesting it spent down donor funds. No conflict of interest or whistleblower policies. This appears to be a purpose-built pass-through for election-related grants in Michigan during the 2022-2023 cycle.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:32",
+      "target_name": "Ned Ryun",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:873398119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3455,
+      "person_a": "Chris Buskirk",
+      "person_b": "Ned Ryun",
+      "relationship_type": "political",
+      "description": "Ryun is director of both Center for American Greatness (alongside Buskirk) and Better Tomorrow (Rockbridge voter mobilization arm). Cross-entity board overlap links the publishing arm to the political operation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:54:29",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica EIN 81-4984970",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Reuters Rockbridge reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3682,
+      "person_a": "Chris Buskirk",
+      "person_b": "Ned Ryun",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:18",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:261501154",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:263594713",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:814984970",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872086524",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3696,
+      "person_a": "Center for American Greatness",
+      "person_b": "Ned Ryun",
+      "relationship_type": "corporate",
+      "description": "Director of CAG and Over the Horizon Action. Bridges Buskirk and Rockbridge networks.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Center for American Greatness",
+      "other_person_slug": "center-for-american-greatness",
+      "evidence": []
+    },
+    {
+      "id": 3684,
+      "person_a": "JD Vance",
+      "person_b": "Ned Ryun",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:19",
+      "profile_id": "tech-right",
+      "other_person": "JD Vance",
+      "other_person_slug": "jd-vance",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872086524",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:880696885",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3686,
+      "person_a": "James Blair",
+      "person_b": "Ned Ryun",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:20",
+      "profile_id": "tech-right",
+      "other_person": "James Blair",
+      "other_person_slug": "james-blair",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872086524",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "CEO/Founder",
+      "date_start": "2008",
+      "date_end": null,
+      "source": "990:261501154",
+      "entity_id": 1248,
+      "entity_name": "American Majority Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    },
+    {
+      "role": "CEO/Chairman/Treasurer/President",
+      "date_start": "2009",
+      "date_end": null,
+      "source": "990:263594713",
+      "entity_id": 1249,
+      "entity_name": "American Majority Action",
+      "entity_type": "nonprofit",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Founder/CEO",
+      "date_start": "2012",
+      "date_end": null,
+      "source": "littlesis:413641,fec",
+      "entity_id": 1253,
+      "entity_name": "Voter Gravity",
+      "entity_type": "inc",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Officer",
+      "date_start": "2012",
+      "date_end": null,
+      "source": "fl_sos:F12000003361",
+      "entity_id": 1254,
+      "entity_name": "Media Trackers Wisconsin Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "WI",
+      "entity_status": "inactive"
+    },
+    {
+      "role": "Director",
+      "date_start": "2017",
+      "date_end": null,
+      "source": "990:814984970",
+      "entity_id": 1252,
+      "entity_name": "Center for American Greatness Inc",
+      "entity_type": "nonprofit",
+      "jurisdiction": "AZ",
+      "entity_status": "active"
+    },
+    {
+      "role": "Director",
+      "date_start": "2021",
+      "date_end": null,
+      "source": "990:872086524",
+      "entity_id": 1255,
+      "entity_name": "Better Tomorrow",
+      "entity_type": "nonprofit",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Director",
+      "date_start": "2022",
+      "date_end": null,
+      "source": "990:880696885",
+      "entity_id": 1250,
+      "entity_name": "Over the Horizon Action",
+      "entity_type": "nonprofit",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Director",
+      "date_start": "2022",
+      "date_end": null,
+      "source": "990:873398119",
+      "entity_id": 1251,
+      "entity_name": "Restoring Michigan's Future",
+      "entity_type": "nonprofit",
+      "jurisdiction": "AL",
+      "entity_status": "active"
+    },
+    {
+      "role": "Founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "EXPOSEDbyCMD \u2014 ALEC CARE operated by VoterGravity",
+      "entity_id": 1037,
+      "entity_name": "VoterGravity",
+      "entity_type": "llc",
+      "jurisdiction": "VA",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": []
+}

@@ -6,7 +6,7 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.983149",
+  "generated_at": "2026-05-07T23:07:36.393673",
   "last_updated": "2026-03-04T00:55:42",
   "stats": {
     "total_findings": 7,
@@ -23,6 +23,45 @@
     "last_updated": "2026-03-04T00:55:42"
   },
   "findings": [
+    {
+      "id": 4702,
+      "finding_type": "financial",
+      "summary": "SpaceX-xAI merger Feb 2026 at 1.25T valuation creates single entity holding 14.6B+ federal contracts, 200M Pentagon AI deal, NRO spy satellites, and nuclear C4 alternatives",
+      "detail": "SpaceX acquired xAI in Feb 2026 in largest merger in history at 1.25T combined valuation (SpaceX 1T, xAI 250B). This consolidates under single corporate entity: 14.6B+ in NASA/DoD contract obligations, 13B pLEO IDIQ ceiling, 1.8B NRO spy satellite constellation, 200M Pentagon Grok AI contract for 3M military/civilian personnel, classified systems Grok integration (Feb 2026), GSA Schedule contract for Starlink terminals, and the Starshield military communications platform. Musk announced plan for orbital data centers combining AI compute with satellite infrastructure, requesting FCC authorization for up to 1M satellites. The merger occurred just 9 months after Musk officially departed DOGE (May 30, 2025) -- DOGE had given Musk team access to Treasury payment systems, IRS data, OPM personnel records, and competitor contract data that could inform commercial strategy.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:35:20",
+      "target_name": "SpaceX-xAI Merger",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bloomberg.com/news/articles/2026-02-02/elon-musk-s-spacex-said-to-combine-with-xai-ahead-of-mega-ipo",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2026/02/23/ai-defense-department-deal-musk-xai-grok",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4501,
       "finding_type": "financial",
@@ -181,45 +220,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 4702,
-      "finding_type": "financial",
-      "summary": "SpaceX-xAI merger Feb 2026 at 1.25T valuation creates single entity holding 14.6B+ federal contracts, 200M Pentagon AI deal, NRO spy satellites, and nuclear C4 alternatives",
-      "detail": "SpaceX acquired xAI in Feb 2026 in largest merger in history at 1.25T combined valuation (SpaceX 1T, xAI 250B). This consolidates under single corporate entity: 14.6B+ in NASA/DoD contract obligations, 13B pLEO IDIQ ceiling, 1.8B NRO spy satellite constellation, 200M Pentagon Grok AI contract for 3M military/civilian personnel, classified systems Grok integration (Feb 2026), GSA Schedule contract for Starlink terminals, and the Starshield military communications platform. Musk announced plan for orbital data centers combining AI compute with satellite infrastructure, requesting FCC authorization for up to 1M satellites. The merger occurred just 9 months after Musk officially departed DOGE (May 30, 2025) -- DOGE had given Musk team access to Treasury payment systems, IRS data, OPM personnel records, and competitor contract data that could inform commercial strategy.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 19:35:20",
-      "target_name": "SpaceX-xAI Merger",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.bloomberg.com/news/articles/2026-02-02/elon-musk-s-spacex-said-to-combine-with-xai-ahead-of-mega-ipo",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.axios.com/2026/02/23/ai-defense-department-deal-musk-xai-grok",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -240,7 +240,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SpaceX-xAI merger Feb 2026 at 1.25T valuation creates single entity holding 14.6B+ federal contracts, 200M Pentagon AI deal, NRO spy satellites, and nuclear C4 alternatives",
+      "confidence": "medium",
+      "id": 4702
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4502,
@@ -347,22 +356,5 @@
         "description": "The merger consolidates $14.6 billion in contract obligations into the IPO vehicle at a moment when the regulatory agencies capable of challenging the structure are operationally weakened. Pre-IPO SEC Form D raises ($1.6 billion across 131 investors as of January 2026) established the valuation floor before public pricing. The Tesla-to-xAI resource transfer alleged in the Delaware litigation, if proven, would constitute a value extraction from public Tesla shareholders to private SpaceX/xAI shareholders ahead of the IPO."
       }
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "SpaceX-xAI Merger",
-      "connections": [
-        {
-          "target": "Starshield",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Merger creates entity with classified NRO access + AI capabilities; security clearance timeline mismatch raises vetting concerns"
-        }
-      ],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": []
   }
 }

@@ -1,0 +1,638 @@
+{
+  "name": "Steve Jurvetson",
+  "slug": "steve-jurvetson",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.258167",
+  "last_updated": "2026-04-03T03:14:01",
+  "stats": {
+    "total_findings": 13,
+    "total_connections": 8,
+    "total_entities": 4,
+    "finding_types": {
+      "financial": 1,
+      "legal": 2,
+      "negative_result": 2,
+      "background": 1,
+      "intelligence": 7
+    },
+    "connection_types": {
+      "corporate": 3,
+      "advisory": 2,
+      "social": 2,
+      "intelligence": 1
+    },
+    "last_updated": "2026-04-03T03:14:01"
+  },
+  "findings": [
+    {
+      "id": 8915,
+      "finding_type": "financial",
+      "summary": "Jurvetson formal SEC separation from DFJ occurred Jan-May 2018 (months after public Nov 2017 departure). Present on Jan 2018 Box Inc Form 4, absent May 2018. Sold 15.2M Tesla Aug 2017 (at DFJ), 5.7M Tesla Nov 2019 (4mo post-Epstein arrest).",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-05-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:11",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1314917",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8924,
+      "finding_type": "legal",
+      "summary": "Delaware Chancery ruled Jurvetson dual fiduciary as matter of law in Tesla/SolarCity merger \u2014 sat on SpaceX board while DFJ owned millions of SolarCity shares. Defendant in Tornetta v Musk (56B comp). Agreed to return 3.1M stock options Jan 2026 settlement.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-02-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-Tesla-Del-Ch",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8925,
+      "finding_type": "negative_result",
+      "summary": "Zero federal litigation related to sexual misconduct, DFJ departure, Creer, Sanctum, blackmail, or protective orders. Strongly suggests private separation agreement with NDA or arbitration.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-negative",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9283,
+      "finding_type": "background",
+      "summary": "Steve Jurvetson departure from DFJ timeline: Investigation opened summer 2017; entrepreneur Keri Kukral posted Facebook warning late October 2017; Jurvetson stepped down November 13, 2017 from DFJ and took leave from SpaceX/Tesla boards. CNBC reported November 19, 2017 he was pushed out for lying. Jurvetson denied wrongdoing. The FBI memo (April 2025) alleges Creer blackmailed Jurvetson using SNCTM information - Jurvetson denies being blackmailed.",
+      "detail": null,
+      "source_datasets": [
+        "web_search,bloomberg,cnbc,washingtonpost"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:42:17",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2017/11/13/steve-jurvetson-out-at-his-firm-after-allegations-of-sexual-harassment.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9317,
+      "finding_type": "intelligence",
+      "summary": "Steve Jurvetson listed as 'Promotion and outreach advisor' in Epstein-associated project document 'New Methods Project - Foundational Questions in Measurement' (v1.0, September 5, 2014, EFTA00587739). Document lists $2MM budget with Jurvetson alongside Barry Nalebuff, Howard Morgan, Peter Diamandis, Henry Timms, Martin Seligman, Jeff Walker. This is a primary-source Epstein document establishing Jurvetson as an advisor for Epstein-linked programming \u2014 directly relevant to FBI memo EFTA00129096 alleging Creer blackmailed Jurvetson through DFJ.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:47:14",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": "Promotion and outreach advisors: \u2022 Barry Nalebuff \u2022 Steve Jurvetson \u2022 Howard Morgan \u2022 Peter Diamandis",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9318,
+      "finding_type": "intelligence",
+      "summary": "Epstein personally rated Steve Jurvetson '5 stars' in personal notes compiled January 17, 2013 (EFTA00715319/EFTA00715324), describing him as 'the only famous Silicon Valley VC with a deep understanding of advanced technology' who 'created the nanotech investment boom singlehandedly.' The rating '***' (3-stars) is shown in the LMSBAND snippet context but the detailed note is on page EFTA00715324. This document is Ben Goertzel's email to Epstein recommending 'interesting people to meet' and Epstein annotated his own assessment of them. INVESTIGATIVE SIGNIFICANCE: Epstein held Jurvetson in high regard as early as 2013, predating Jurvetson's 2017 forced departure from DFJ. Given FBI memo EFTA00129096 alleges Creer 'actively blackmailed' Jurvetson, and Epstein was monitoring Jurvetson's 2017 departure (EFTA02567913), this raises question of whether Creer's alleged blackmail operation was connected to Epstein's intelligence operations.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:47:22",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00715319",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9319,
+      "finding_type": "intelligence",
+      "summary": "Austin Hill emailed Jeffrey Epstein on November 14, 2017 (EFTA02567913) sharing the Recode article about Steve Jurvetson being forced out of Draper Fisher Jurvetson for sexual harassment, subject line: 'It's happening in my industry as well.' URL shared: recode.net/2017/11/13/16645274/steve-jurvetson-out-draper-fisher-jurvetson-sexual-harassment. INVESTIGATIVE SIGNIFICANCE: (1) Documents Epstein receiving active intelligence about Jurvetson's downfall from a Silicon Valley contact; (2) This is the same period (Nov 2017) Jurvetson was departing DFJ; (3) FBI memo EFTA00129096 alleges Creer was blackmailing Jurvetson \u2014 Epstein being informed of Jurvetson's sexual harassment exposure creates a potential Creer-Epstein intelligence pipeline question.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:47:30",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02567913",
+          "source_quote": "It's happening in my industry as well [URL to Jurvetson sexual harassment article at Recode, November 14, 2017]",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9322,
+      "finding_type": "intelligence",
+      "summary": "Steve Jurvetson named in Epstein 'Bios' document EFTA00774150 (April 20, 2009), appearing on a list of notable figures including Larry Page, Elon Musk, Nathan Myhrvold, Christof Koch, Danny Hillis, Bran Ferren, Frances Arnold, and others. The document was prepared for an Epstein meeting/event, with each name hyperlinked to Wikipedia for background research. 'Steve Juvertson' (misspelled) linked to en.wikipedia.org/wiki/Steve_Jurvetson. This establishes Jurvetson was in Epstein's target network as far back as April 2009.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:47:55",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00774150",
+          "source_quote": "Steve Juvertson: http://en.wikipedia.org/wiki/Steve_Jurvetson",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9326,
+      "finding_type": "legal",
+      "summary": "Steve Jurvetson named as party in two Tesla shareholder derivative suits: (1) Ross Weintraub v. Elon Musk (N.D. Cal. 3:14-cv-02817, filed June 18 2014) \u2014 breach of fiduciary duty, diversity jurisdiction, Jurvetson listed among Tesla directors; (2) In re Tesla Inc. Shareholder Derivative Litigation (D. Del. 1:18-cv-01669, filed Oct 25 2018) \u2014 Securities Exchange Act. Also named in two 2025 cases: Dinner Table Action v. Schneider (1st Cir. 25-1705) and Dinner Table Action v. Equal Citizens (1st Cir. 25-1706) \u2014 campaign finance cases unrelated to Tesla. The 2018 Tesla derivative case was filed during the same period Jurvetson departed DFJ over sexual harassment (Nov 2017). FBI memo EFTA00129096 alleges Creer blackmailed Jurvetson through DFJ Capital.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:50:46",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 3:14-cv-02817 cand CourtListener docket 1:18-cv-01669 ded",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9330,
+      "finding_type": "intelligence",
+      "summary": "Epstein was informed of Jurvetson's sexual harassment ouster from DFJ in November 2017. Austin Hill (Brudder Ventures, Montreal) emailed Epstein on November 14, 2017 with link to Recode article 'Steve Jurvetson Out Draper Fisher Jurvetson Sexual Harassment' with note 'It's happening in my industry as well.' Austin Hill had a documented regular relationship with Epstein from at least 2014 (multiple Fairmont Vancouver meetings) through October 2017. This establishes Epstein was actively tracking Jurvetson's sexual misconduct vulnerability \u2014 the same vulnerability the FBI memo (EFTA00129096) alleges Creer later exploited for blackmail.",
+      "detail": null,
+      "source_datasets": [
+        "DOJ_corpus"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:08:00",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02567913",
+          "source_quote": " It's happening in my industry as well [link to Recode article on Jurvetson sexual harassment ouster]",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9331,
+      "finding_type": "intelligence",
+      "summary": "Epstein had Steve Jurvetson listed as a 'Promotion and outreach advisor' for a proposed Foundational Questions in Measurement project (September 2014), alongside Peter Diamandis, Howard Morgan, Martin Seligman, and others. Project was a Templeton-style grant program targeting spiritual/measurement questions with $2.88M budget over two years. Documents: EFTA00587739 and EFTA00693768 (duplicate/revision). This establishes Jurvetson had a direct working relationship with Epstein's project design activities, not just social acquaintance.",
+      "detail": null,
+      "source_datasets": [
+        "DOJ_corpus"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:08:05",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": " Promotion and outreach advisors: Barry Nalebuff, Steve Jurvetson, Howard Morgan, Peter Diamandis, Henry Timms, Martin Seligman, Jeff Walker",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9332,
+      "finding_type": "intelligence",
+      "summary": "Epstein received a J.P. Morgan invitation to a DFJ Growth 2013 prospective investor conference call (March 11, 2013). The email (EFTA00652653) was sent from 'US GIO' to undisclosed recipients \u2014 Epstein was on the investor prospect list for a $350M DFJ Growth fund raise. Randy Glein (MD) and Barry Schuler (MD) were hosting. This demonstrates Epstein was being actively courted as a capital source by the DFJ network at the same time he was listing Jurvetson as a project advisor. Creer was a longtime DFJ affiliate during this period.",
+      "detail": null,
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:08:13",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00652653",
+          "source_quote": " DFJ Growth is seeking to raise $350 million in capital commitments for DFJ Growth 2013... Hosted by Randy Glein, Managing Director & Barry Schuler, Managing Director DFJ Growth",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9340,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE: Searched CourtListener for state/federal court civil suits by or against Steve Jurvetson naming Frank Creer as party. Zero results. Jurvetson appears only as Tesla board member defendant in Tesla shareholder derivative suits (Weintraub v. Musk N.D.Cal. 3:14-cv-02817; In re Tesla D.Del. 1:18-cv-01669) \u2014 unrelated to Creer or SNCTM.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:10:50",
+      "target_name": "Steve Jurvetson",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4674,
+      "person_a": "Steve Jurvetson",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "DFJ co-founders. Co-GPs on funds IV-VII. Jurvetson departed Nov 2017. Formal SEC separation Jan-May 2018.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Tim Draper",
+      "other_person_slug": "tim-draper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1068879",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4718,
+      "person_a": "Frank Creer",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "corporate",
+      "description": "Both DFJ network. FBI alleges Creer blackmailed Jurvetson using compromising material. Deep DFJ partnership connection turned adversarial.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:43",
+      "profile_id": "dfj-network",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DFJ partnership records",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FBI investigation files",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4777,
+      "person_a": "Foresight Institute",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "advisory",
+      "description": "Senior Associate; keynote speaker at Gatherings; DFJ was corporate sponsor; ~30 pct DFJ portfolio in nanotech",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:53:55",
+      "profile_id": "dfj-network",
+      "other_person": "Foresight Institute",
+      "other_person_slug": "foresight-institute",
+      "evidence": []
+    },
+    {
+      "id": 4785,
+      "person_a": "Steve Jurvetson",
+      "person_b": "Ted Waitt",
+      "relationship_type": "social",
+      "description": "Both served on Foresight Nanotech Institute Technology Roadmap steering committee (2005-2007). Jurvetson was Managing Director of Draper Fisher Jurvetson (Tim Drapers firm).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:54:54",
+      "profile_id": "dfj-network",
+      "other_person": "Ted Waitt",
+      "other_person_slug": "ted-waitt",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nanotech-now.com/news.cgi?story_id=10162",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4849,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "social",
+      "description": "Jurvetson was in Epstein's target network by April 2009 (EFTA00774150 bios list), rated highly in Epstein personal notes January 2013 (EFTA00715319), and named as 'promotion and outreach advisor' for Epstein-funded 'New Methods Project' in September 2014 (EFTA00587739). Epstein was alerted to Jurvetson's November 2017 DFJ departure for sexual harassment (EFTA02567913). The FBI memo EFTA00129096 alleges Creer 'actively blackmailed' Jurvetson via SNCTM, making Jurvetson a victim embedded in both the Epstein network and Creer's alleged blackmail apparatus.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:48:27",
+      "profile_id": "epstein",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00715319",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00774150",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2564,
+      "person_a": "Frank Creer",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "corporate",
+      "description": "FBI memo alleges Creer actively blackmailed Jurvetson through information collected at SNCTM sex club. Both invested in QWAVE Capital through DFJ. Creer denied, said they are close friends.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:31:14",
+      "profile_id": "epstein",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4851,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "advisory",
+      "description": "Jurvetson listed as 'Promotion and outreach advisor' on Epstein's Foundational Questions in Measurement project (September 2014). Epstein was also on DFJ Growth 2013 investor prospect list (EFTA00652653). Epstein received Jurvetson DFJ ouster news Nov 14 2017 via Austin Hill.",
+      "strength": "medium",
+      "date_range": "2013-2017",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:10:15",
+      "profile_id": "epstein",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00652653",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02567913",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4854,
+      "person_a": "Frank Creer",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "intelligence",
+      "description": "FBI ARMS Reach memo (EFTA00129096) alleges Creer actively blackmailed Jurvetson via SNCTM-collected information. Both were co-managing directors at DFJ. Both deny the allegation. Jurvetson says memo reads like a game of telephone. Unverified FBI intelligence assessment.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:14:01",
+      "profile_id": "epstein",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theiceman.substack.com/p/from-putins-kiss-to-epsteins-blackmail",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "partner",
+      "date_start": "1994",
+      "date_end": "2017",
+      "source": "sec_edgar",
+      "entity_id": 2635,
+      "entity_name": "Draper Fisher Jurvetson",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "director",
+      "date_start": "1997",
+      "date_end": "2006",
+      "source": "sec_edgar",
+      "entity_id": 2644,
+      "entity_name": "DFJ Fund IV LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "director",
+      "date_start": "2002",
+      "date_end": "2012",
+      "source": "sec_edgar",
+      "entity_id": 2645,
+      "entity_name": "DFJ Fund V LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2649,
+      "entity_name": "DFJ ePlanet Ventures LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "unknown"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2013-2017",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Jurvetson listed as 'Promotion and outreach advisor' on Epstein's Foundational Questions in Measurement project (September 2014). Epstein was also on DFJ Growth 2013 investor prospect list (EFTA00652653). Epstein received Jurvetson DFJ ouster news Nov 14 2017 via Austin Hill.",
+      "other_person": "Jeffrey Epstein",
+      "id": 4851
+    },
+    {
+      "date": "2018-05-07",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Jurvetson formal SEC separation from DFJ occurred Jan-May 2018 (months after public Nov 2017 departure). Present on Jan 2018 Box Inc Form 4, absent May 2018. Sold 15.2M Tesla Aug 2017 (at DFJ), 5.7M Tesla Nov 2019 (4mo post-Epstein arrest).",
+      "confidence": "confirmed",
+      "id": 8915
+    },
+    {
+      "date": "2020-02-04",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Delaware Chancery ruled Jurvetson dual fiduciary as matter of law in Tesla/SolarCity merger \u2014 sat on SpaceX board while DFJ owned millions of SolarCity shares. Defendant in Tornetta v Musk (56B comp). Agreed to return 3.1M stock options Jan 2026 settlement.",
+      "confidence": "confirmed",
+      "id": 8924
+    },
+    {
+      "date": "2026-03-31",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "Zero federal litigation related to sexual misconduct, DFJ departure, Creer, Sanctum, blackmail, or protective orders. Strongly suggests private separation agreement with NDA or arbitration.",
+      "confidence": "medium",
+      "id": 8925
+    }
+  ]
+}

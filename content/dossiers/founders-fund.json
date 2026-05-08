@@ -6,25 +6,277 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.939579",
-  "last_updated": "2026-03-10T00:45:42",
+  "generated_at": "2026-05-07T23:07:36.207297",
+  "last_updated": "2026-03-24T14:12:40",
   "stats": {
-    "total_findings": 12,
-    "total_connections": 4,
+    "total_findings": 16,
+    "total_connections": 12,
     "total_entities": 0,
     "finding_types": {
-      "unknown": 1,
-      "financial": 5,
-      "relationship": 2,
-      "legal": 4
+      "financial": 10,
+      "legal": 4,
+      "background": 1,
+      "unknown": 1
     },
     "connection_types": {
-      "financial": 3,
-      "employment": 1
+      "financial": 4,
+      "employment": 3,
+      "funds": 3,
+      "corporate": 2
     },
-    "last_updated": "2026-03-10T00:45:42"
+    "last_updated": "2026-03-24T14:12:40"
   },
   "findings": [
+    {
+      "id": 6952,
+      "finding_type": "financial",
+      "summary": "USASpending contract timeline analysis: Palantir contracts jumped from $163M (FY2019) to $269M (FY2020, +65%) during Kratsios acting USD(R&E) tenure. FY2020 Q3-Q4 (Kratsios period, Apr-Sep 2020) accounted for $231M of the $269M annual total (86%). Palantir won $91M Army AI/ML contract on Sep 29, 2020 (last day of FY2020). This was the largest single-year jump in Palantir's government revenue to that date. Kratsios oversaw the $106B DoD R&D budget as acting USD(R&E), which encompassed the AI modernization programs Palantir was competing for.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2020-09-29",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:40:29",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5635,
+      "finding_type": "legal",
+      "summary": "Chang v. Cashman (3:22-cv-02010, N.D. California) \u2014 Contract dispute involving Founders Fund, filed 2022-03-29, terminated 2025-04-18. Cause: 28:1332 Diversity-Breach of Contract. Assigned to Judge Araceli Martinez-Olguin, referred to Donna M. Ryu. This was a breach of contract case resolved after approximately 3 years of litigation.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-03-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:33:06",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 63196799: case_name='Chang v. Cashman', docket_number='3:22-cv-02010', court_id='cand', date_filed='2022-03-29', date_terminated='2025-04-18', nature_of_suit='Contract: Other', cause='28:1332 Diversity-Breach of Contract'",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5687,
+      "finding_type": "legal",
+      "summary": "GloriFi/Banzai litigation web spans 5+ related cases. Original RICO in D. Del. (24-cv-00599) still active. Parallel Georgia RICO case WPI Collateral Management v. Ramaswamy (1:24-cv-02148, N.D. Ga.) filed 2024-05-16 was TERMINATED 2024-10-03. Bankruptcy trustee Seidel has filed counterclaims against Neugebauer (24-03038, N.D. Tex. Bankr.). Additional cases: Seidel v. Neugebauer (25-03007) and Seidel v. Banzai (25-03009), both filed 2025-02-07 in N.D. Tex. Bankr. Ayers v. Neugebauer appeal (25-10572) pending in 5th Circuit. GloriFi (With Purpose Inc.) filed Ch. 7 bankruptcy 2023-02-08 (23-30246, N.D. Tex.).",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-05-16",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:46:52",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener search, 16 results for 'GloriFi Neugebauer'",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5634,
+      "finding_type": "legal",
+      "summary": "Banzai Advisory Group LLC v. The Founders Fund VII LP (1:24-cv-00599, D. Delaware) \u2014 Active RICO lawsuit filed 2024-05-17. Nature of suit: 470 Racketeer/Corrupt Organization. Cause: 18 USC 1962 Racketeering (RICO) Act. Assigned to Judge Colm F. Connolly. Case still pending as of 2025-09-09 (last filing date). Filed by Banzai Advisory Group against the Founders Fund VII LP entity specifically. Related proceeding: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, N.D. Texas Bankruptcy Court, filed 2025-02-07) \u2014 adversary proceeding for recovery of money/property via preference (547) and fraudulent transfer (548). This suggests Banzai may be in financial distress and the FF case may be part of a broader dispute involving insolvency.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-05-17",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:32:58",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CourtListener docket 68545185: case_name='Banzai Advisory Group, LLC v. The Founders Fund VII, LP', docket_number='1:24-cv-00599', court_id='ded', nature_of_suit='470 Racketeer/Corrupt Organization', cause='18:1962 Racketeering (RICO) Act', date_filed='2024-05-17', date_terminated=null, date_last_filing='2025-09-09', assigned_to='Colm F. Connolly'; Related: CourtListener docket 69623573: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, txnb, filed 2025-02-07)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5686,
+      "finding_type": "legal",
+      "summary": "Banzai Advisory Group v. Founders Fund VII (1:24-cv-00599, D. Del.) is an active RICO case filed 2024-05-17, NOT terminated. Cause: 18:1962 Racketeering (RICO) Act. Neugebauer (GloriFi founder) alleges FF VII and other investors used 'Trojan horse' convertible debt investments to gain blocking rights, installed operatives (including Keri Findley on the board), blocked competing capital raises, then stole IP for competing companies. Defendants include FF VII LP, FF VII Principals Fund LP, FF VII Entrepreneurs Fund LP, Vivek Ramaswamy Investments LLC, Lonsdale Family Revocable Trust, J. Nicholas Ayers 2021 Irrevocable Trust, Jackson Investment Group LLC, GFNCI LLC, Seven Talents LLC, Descante Capital LLC, plus individuals Keri Findley, Manuel Rios, Britt Amos, Cason Carter, Jerome Fadden. Kenneth Howery is NOT a named defendant.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-05-17",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:46:37",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 68545185; PACER case 85839; PRNewswire 2024-08-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5688,
+      "finding_type": "financial",
+      "summary": "Founders Fund Growth III LP (CIK 0002059945) filed Form D on 2025-04-11 with total offering of $4,595,493,889 from 270 investors. Date of first sale: 2025-03-28. GP structure: The Founders Fund Growth III Management LP is the GP, with FF Upper Tier GP LLC as the GP of the GP. Three managing members: Peter Thiel (signed the filing), Napoleon Ta, and Trae Stephens. Kenneth Howery is NOT listed as a related person, director, or managing member. Same governance as FF IX. Founders Fund Growth IV LP was incorporated in DE on Jan 28, 2026 but has filed NO Form D with SEC yet -- no fundraising disclosures, no managing members disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:47:09",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059945",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7036,
+      "finding_type": "financial",
+      "summary": "FF Growth III LP (CIK 0002059945) is the vehicle that most likely deployed the $1B Anduril Series G investment. Timeline: Growth III first sale 2025-03-28, Form D filed 2025-04-11 disclosing $4.6B from 270 investors. Anduril Series G closed June 2025. TechCrunch reported the Growth III fund was 'intended primarily for follow-on investments in its successful late-stage companies.' Anduril is a Growth III portfolio company. GP structure: The Founders Fund Growth III Management LP is GP, with FF Upper Tier GP LLC as GP of GP. Managing Members: Peter Thiel, Napoleon Ta, Trae Stephens. Kenneth Howery NOT listed. No public source explicitly confirms which vehicle deployed the $1B, but the size ($4.6B fund, $1B check = 22% of fund), timing (2 months before Series G close), and stated purpose (late-stage follow-on) make Growth III the overwhelmingly likely vehicle.",
+      "detail": null,
+      "source_datasets": [
+        "SEC EDGAR, TechCrunch, CNBC, Cooley"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-05",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:13",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 0002059945 filed 2025-04-11",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6957,
+      "finding_type": "financial",
+      "summary": "AGGREGATE ANALYSIS: Combined FF portfolio company federal contracts across Palantir, Anduril, SpaceX, and Scale AI show aggregate annual obligations growing from $714M (FY2019) to $4.65B (FY2025). Temporal correlations observed: (1) Palantir FY2020 +65% during Kratsios USD(R&E) tenure, with 86% of annual spending in Q3-Q4 when Kratsios was in role, (2) Palantir FY2025 first $1B year with 3 FF-linked officials in government, (3) Scale AI first contract awarded during Kratsios USD(R&E) period (FY2020 Q4), Kratsios then joined Scale AI, (4) Anduril DHS contracts began after Stephens' transition-team service gave visibility into CBP priorities. SpaceX shows weakest temporal correlation \u2014 growth continued through Biden years tracking launch cadence expansion. CONFOUNDERS: defense-tech spending increased broadly across both Trump terms and Biden term.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:35",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:multiple",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7039,
+      "finding_type": "financial",
+      "summary": "Founders Fund Growth IV LP (CIK 0002112131) filed Form D on 2026-03-23 (today). Total offering: $6,024,585,000 from 370 investors. Date of first sale: 2026-03-06. Incorporated in Delaware 2026. GP: The Founders Fund Growth IV Management LP, with FF Upper Tier GP LLC as GP of GP. Managing Members: Peter Thiel, Napoleon Ta, Trae Stephens. Kenneth Howery NOT listed. Peter Thiel signed the filing on 2026-03-20. Companion vehicle: Founders Fund Growth IV Principals Fund LP (CIK 0002122450) also filed same day. TechCrunch reported March 9 that ~$1.5B of the capital comes from FF partners. This is 31% larger than Growth III ($4.6B) and represents the fastest fundraise in FF history (less than 1 year after Growth III close).",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:27",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 0002112131 filed 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7044,
+      "finding_type": "background",
+      "summary": "COMPLETE FF FUND FAMILY MAP (from EDGAR registered entities): (1) FF Growth I LP (CIK 0001797273, Form D 2019-12-19), (2) FF Growth Principals Fund LP (CIK 0001806856, Form D 2020-03-27), (3) FF Growth Management LLC (CIK 0001853431, files 13F-HR quarterly), (4) FF Growth II LP (CIK 0001910667, Form D 2022-03-04), (5) FF Growth II Principals Fund LP (CIK 0001912096, Form D 2022-03-04), (6) FF Growth II Management LP (CIK 0002106825, files 13F-HR), (7) FF Growth III LP (CIK 0002059945, Form D 2025-04-11, $4.6B, 270 investors), (8) FF Growth III Principals Fund LP (CIK 0002062082, Form D 2025-04-11), (9) FF Growth IV LP (CIK 0002112131, Form D 2026-03-23, $6.0B, 370 investors), (10) FF Growth IV Principals Fund LP (CIK 0002122450, Form D 2026-03-23). FF IX LP (CIK 0001971631, Form D/A 2025-10-16, $971.6M, 235 investors). FF IX Principals Fund LP (CIK 0002090410). All at One Letterman Drive, Building D, 5th Floor, SF 94129.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:55",
+      "target_name": "Founders Fund",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK registrations and Form D filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 2702,
       "finding_type": null,
@@ -127,56 +379,6 @@
       ]
     },
     {
-      "id": 5216,
-      "finding_type": "relationship",
-      "summary": "ProPublica Financial Disclosure: Joseph Popolo (Ambassador to Netherlands) holds Founders Fund V and VI (-250M each), plus Palantir (-15K). LP investor in Thiel's venture funds with combined -500M exposure to Founders Fund. Also invested in Haydn Inc AI automation startup (-250M band).",
-      "detail": "Popolo is an LP investor in Founders Fund V and VI, each valued at -250M. Combined with Palantir stock (-15K), this represents a significant financial interest in Thiel's investment ecosystem. Serving as Ambassador to the Netherlands \u2014 a key NATO ally and host to the International Court of Justice \u2014 while financially tied to the Thiel defense-tech network.",
-      "source_datasets": [
-        "propublica"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 19:33:01",
-      "target_name": "Joseph Popolo",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica Financial Disclosure",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5223,
-      "finding_type": "relationship",
-      "summary": "ProPublica Financial Disclosure: Clayton Cromer (OPM Deputy General Counsel) holds The Founders Fund asset. Came from Latham & Watkins LLP (Associate, Jan 2022-Jan 2025). Now at OPM \u2014 the agency managing federal workforce that DOGE is restructuring, with multiple Palantir-linked personnel already embedded.",
-      "detail": "Cromer's disclosure lists The Founders Fund as an asset (value band /bin/zsh, likely LP interest or advisory). Prior position at Latham & Watkins, a major corporate law firm. OPM has 3 Thiel network members: Kupor (Director, a16z), Cromer (Deputy GC, Founders Fund), and Bonarrigo Villamil (Deputy Chief of Staff, Palantir holder). OPM is the personnel management agency being restructured by DOGE \u2014 Thiel network presence here is strategically significant.",
-      "source_datasets": [
-        "propublica"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 19:33:22",
-      "target_name": "Clayton Cromer",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica Financial Disclosure",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5379,
       "finding_type": "financial",
       "summary": "Founders Fund V Management (CIK 0001697733) held Rigetti Computing (RGTI) across all 5 quarters Q4 2024-Q4 2025. Position constant at 88,621 shares. Value fluctuated: Q4 2024 $1.35M, Q1 2025 $0.70M, Q2 2025 $1.05M, Q3 2025 $2.64M, Q4 2025 $1.96M. Rigetti is a quantum computing company with defense applications (quantum sensing, cryptography). This is Thiel's only defense-adjacent public equity position.",
@@ -194,7 +396,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001697733, Q4 2024 through Q4 2025 (5 quarterly filings)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1697733",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -219,82 +421,21 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001697733 (FF V Mgmt), CIK 0001616081 (FF IV Mgmt), CIK 0001695329 (FF II Mgmt), Q4 2024 through Q4 2025",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1697733",
           "source_quote": null,
           "source_page": null,
           "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5634,
-      "finding_type": "legal",
-      "summary": "Banzai Advisory Group LLC v. The Founders Fund VII LP (1:24-cv-00599, D. Delaware) \u2014 Active RICO lawsuit filed 2024-05-17. Nature of suit: 470 Racketeer/Corrupt Organization. Cause: 18 USC 1962 Racketeering (RICO) Act. Assigned to Judge Colm F. Connolly. Case still pending as of 2025-09-09 (last filing date). Filed by Banzai Advisory Group against the Founders Fund VII LP entity specifically. Related proceeding: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, N.D. Texas Bankruptcy Court, filed 2025-02-07) \u2014 adversary proceeding for recovery of money/property via preference (547) and fraudulent transfer (548). This suggests Banzai may be in financial distress and the FF case may be part of a broader dispute involving insolvency.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:32:58",
-      "target_name": "Founders Fund",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "CourtListener docket 68545185: case_name='Banzai Advisory Group, LLC v. The Founders Fund VII, LP', docket_number='1:24-cv-00599', court_id='ded', nature_of_suit='470 Racketeer/Corrupt Organization', cause='18:1962 Racketeering (RICO) Act', date_filed='2024-05-17', date_terminated=null, date_last_filing='2025-09-09', assigned_to='Colm F. Connolly'; Related: CourtListener docket 69623573: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, txnb, filed 2025-02-07)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5635,
-      "finding_type": "legal",
-      "summary": "Chang v. Cashman (3:22-cv-02010, N.D. California) \u2014 Contract dispute involving Founders Fund, filed 2022-03-29, terminated 2025-04-18. Cause: 28:1332 Diversity-Breach of Contract. Assigned to Judge Araceli Martinez-Olguin, referred to Donna M. Ryu. This was a breach of contract case resolved after approximately 3 years of litigation.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:33:06",
-      "target_name": "Founders Fund",
-      "profile_id": "tech-right",
-      "evidence": [
+        },
         {
           "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 63196799: case_name='Chang v. Cashman', docket_number='3:22-cv-02010', court_id='cand', date_filed='2022-03-29', date_terminated='2025-04-18', nature_of_suit='Contract: Other', cause='28:1332 Diversity-Breach of Contract'",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1616081",
           "source_quote": null,
           "source_page": null,
           "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5686,
-      "finding_type": "legal",
-      "summary": "Banzai Advisory Group v. Founders Fund VII (1:24-cv-00599, D. Del.) is an active RICO case filed 2024-05-17, NOT terminated. Cause: 18:1962 Racketeering (RICO) Act. Neugebauer (GloriFi founder) alleges FF VII and other investors used 'Trojan horse' convertible debt investments to gain blocking rights, installed operatives (including Keri Findley on the board), blocked competing capital raises, then stole IP for competing companies. Defendants include FF VII LP, FF VII Principals Fund LP, FF VII Entrepreneurs Fund LP, Vivek Ramaswamy Investments LLC, Lonsdale Family Revocable Trust, J. Nicholas Ayers 2021 Irrevocable Trust, Jackson Investment Group LLC, GFNCI LLC, Seven Talents LLC, Descante Capital LLC, plus individuals Keri Findley, Manuel Rios, Britt Amos, Cason Carter, Jerome Fadden. Kenneth Howery is NOT a named defendant.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:46:37",
-      "target_name": "Founders Fund",
-      "profile_id": "tech-right",
-      "evidence": [
+        },
         {
           "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 68545185; PACER case 85839; PRNewswire 2024-08-05",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1695329",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -302,35 +443,10 @@
       ]
     },
     {
-      "id": 5687,
-      "finding_type": "legal",
-      "summary": "GloriFi/Banzai litigation web spans 5+ related cases. Original RICO in D. Del. (24-cv-00599) still active. Parallel Georgia RICO case WPI Collateral Management v. Ramaswamy (1:24-cv-02148, N.D. Ga.) filed 2024-05-16 was TERMINATED 2024-10-03. Bankruptcy trustee Seidel has filed counterclaims against Neugebauer (24-03038, N.D. Tex. Bankr.). Additional cases: Seidel v. Neugebauer (25-03007) and Seidel v. Banzai (25-03009), both filed 2025-02-07 in N.D. Tex. Bankr. Ayers v. Neugebauer appeal (25-10572) pending in 5th Circuit. GloriFi (With Purpose Inc.) filed Ch. 7 bankruptcy 2023-02-08 (23-30246, N.D. Tex.).",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:46:52",
-      "target_name": "Founders Fund",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener search, 16 results for 'GloriFi Neugebauer'",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5688,
+      "id": 7281,
       "finding_type": "financial",
-      "summary": "Founders Fund Growth III LP (CIK 0002059945) filed Form D on 2025-04-11 with total offering of $4,595,493,889 from 270 investors. Date of first sale: 2025-03-28. GP structure: The Founders Fund Growth III Management LP is the GP, with FF Upper Tier GP LLC as the GP of the GP. Three managing members: Peter Thiel (signed the filing), Napoleon Ta, and Trae Stephens. Kenneth Howery is NOT listed as a related person, director, or managing member. Same governance as FF IX. Founders Fund Growth IV LP was incorporated in DE on Jan 28, 2026 but has filed NO Form D with SEC yet -- no fundraising disclosures, no managing members disclosed.",
-      "detail": null,
+      "summary": "Founders Fund Growth fund series: Growth I (2019, CIK 1797273), Growth II (2022, CIK 1910667), Growth III (Apr 2025, $4.6B, CIK 2059945), Growth IV (Mar 2026, $6.02B, CIK 2112131).",
+      "detail": "SEC EDGAR Form D filings track Founders Fund Growth fund series: (1) Founders Fund Growth LP (CIK 1797273) - Form D filed 2019-12-19. (2) Founders Fund Growth II LP (CIK 1910667) - Form D filed 2022-03-04. Principals Fund (CIK 1912096) same date. (3) Founders Fund Growth III LP (CIK 2059945) - Form D filed 2025-04-11. Principals Fund (CIK 2062082) same date. CNBC reported $4.6B close. Directors: Thiel, Ta, Stephens. (4) Founders Fund Growth IV LP (CIK 2112131) - Form D filed 2026-03-23. Principals Fund (CIK 2122450) same date. $6.02B total, 370 investors. Founders Fund Growth Management LLC (CIK 1853431) files quarterly 13F-HR reports showing public equity holdings. Also: Founders Fund Growth II Management LP (CIK 2106825) filed 13F-HR 2026-02-17. Kenneth Howery was a Founders Fund co-founder (2005) with Thiel and Nosek but is not named on any recent Form D filing.",
       "source_datasets": [
         "edgar"
       ],
@@ -338,13 +454,13 @@
       "date_of_event": null,
       "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-03-06 01:47:09",
+      "created_at": "2026-03-23 19:00:16",
       "target_name": "Founders Fund",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR Form D, CIK 0002059945, filed 2025-04-11",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1797273",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -398,6 +514,145 @@
       ]
     },
     {
+      "id": 3600,
+      "person_a": "Founders Fund",
+      "person_b": "Ken Howery",
+      "relationship_type": "employment",
+      "description": "Co-founder and partner of Founders Fund. Fund led Anduril's $2.5B raise. Howery now US Ambassador to Denmark (controls Greenland/Pituffik Space Base critical for Golden Dome).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:09",
+      "profile_id": "tech-right",
+      "other_person": "Ken Howery",
+      "other_person_slug": "ken-howery",
+      "evidence": []
+    },
+    {
+      "id": 3601,
+      "person_a": "Anduril Industries",
+      "person_b": "Founders Fund",
+      "relationship_type": "funds",
+      "description": "Founders Fund led Anduril's $2.5B raise at $30.5B valuation (Jun 2025) - largest check in fund history ($1B). Trae Stephens (Founders Fund) co-founded Anduril.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:11",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": []
+    },
+    {
+      "id": 3663,
+      "person_a": "Founders Fund",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery co-founded Founders Fund in 2005 with Thiel and Nosek. Not listed on Growth IV Form D (2026) but alleged to retain 3% carried interest",
+      "strength": "strong",
+      "date_range": "2005 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:39",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 000123191926000265; public reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3690,
+      "person_a": "Erebor Bank",
+      "person_b": "Founders Fund",
+      "relationship_type": "funds",
+      "description": "Founders Fund is a backer/investor in Erebor Bank. Peter Thiel (FF co-founder) is named as investor. FF portfolio company Anduril's founder Palmer Luckey co-founded Erebor.",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:44",
+      "profile_id": "tech-right",
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC charter application; multiple press reports",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3799,
+      "person_a": "Founders Fund",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery is co-founder and former partner of Founders Fund. First institutional investor in SpaceX and Palantir.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:22",
+      "profile_id": null,
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": []
+    },
+    {
+      "id": 3847,
+      "person_a": "Founders Fund",
+      "person_b": "Lux Capital",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: co-led Hadrian $260M Series C (Jul 2025), both invested in Anduril, both backed Erebor Bank ($350M at $4.35B). Lux donates Democratic while FF donates Republican, creating bipartisan political coverage for shared portfolio.",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:44",
+      "profile_id": "tech-right",
+      "other_person": "Lux Capital",
+      "other_person_slug": "lux-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC: Hadrian $260M Series C led by Founders Fund and Lux Capital",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Erebor Bank investor list",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3859,
+      "person_a": "Founders Fund",
+      "person_b": "Keith Rabois",
+      "relationship_type": "employment",
+      "description": "Rabois was General Partner at Founders Fund 2019-2024. Still listed as Founders Fund Partner on FEC filings through 2025-2026, suggesting ongoing carried interest or advisory role.",
+      "strength": "strong",
+      "date_range": "2019-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:40",
+      "profile_id": "tech-right",
+      "other_person": "Keith Rabois",
+      "other_person_slug": "keith-rabois",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC filings, TechCrunch Jan 2024",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2967,
       "person_a": "Founders Fund",
       "person_b": "Rigetti Computing",
@@ -426,10 +681,151 @@
       "other_person": "Anduril Industries",
       "other_person_slug": "anduril-industries",
       "evidence": []
+    },
+    {
+      "id": 3484,
+      "person_a": "Founders Fund",
+      "person_b": "goTenna",
+      "relationship_type": "funds",
+      "description": "Founders Fund listed as early goTenna investor (pre-government pivot). Peter Thiel connection. USV led Series B. Consumer mesh networking company that pivoted fully to government/military under ex-DHS/CBP CEO Schuler.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:21:02",
+      "profile_id": "tech-right",
+      "other_person": "goTenna",
+      "other_person_slug": "gotenna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn investor listings",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2005 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Howery co-founded Founders Fund in 2005 with Thiel and Nosek. Not listed on Growth IV Form D (2026) but alleged to retain 3% carried interest",
+      "other_person": "Kenneth Howery",
+      "id": 3663
+    },
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: co-led Hadrian $260M Series C (Jul 2025), both invested in Anduril, both backed Erebor Bank ($350M at $4.35B). Lux donates Democratic while FF donates Republican, creating bipartisan political coverage for shared portfolio.",
+      "other_person": "Lux Capital",
+      "id": 3847
+    },
+    {
+      "date": "2019-present",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Rabois was General Partner at Founders Fund 2019-2024. Still listed as Founders Fund Partner on FEC filings through 2025-2026, suggesting ongoing carried interest or advisory role.",
+      "other_person": "Keith Rabois",
+      "id": 3859
+    },
+    {
+      "date": "2020-09-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "USASpending contract timeline analysis: Palantir contracts jumped from $163M (FY2019) to $269M (FY2020, +65%) during Kratsios acting USD(R&E) tenure. FY2020 Q3-Q4 (Kratsios period, Apr-Sep 2020) accounted for $231M of the $269M annual total (86%). Palantir won $91M Army AI/ML contract on Sep 29, 2020 (last day of FY2020). This was the largest single-year jump in Palantir's government revenue to that date. Kratsios oversaw the $106B DoD R&D budget as acting USD(R&E), which encompassed the AI modernization programs Palantir was competing for.",
+      "confidence": "medium",
+      "id": 6952
+    },
+    {
+      "date": "2022-03-29",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Chang v. Cashman (3:22-cv-02010, N.D. California) \u2014 Contract dispute involving Founders Fund, filed 2022-03-29, terminated 2025-04-18. Cause: 28:1332 Diversity-Breach of Contract. Assigned to Judge Araceli Martinez-Olguin, referred to Donna M. Ryu. This was a breach of contract case resolved after approximately 3 years of litigation.",
+      "confidence": "high",
+      "id": 5635
+    },
+    {
+      "date": "2024-05-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "GloriFi/Banzai litigation web spans 5+ related cases. Original RICO in D. Del. (24-cv-00599) still active. Parallel Georgia RICO case WPI Collateral Management v. Ramaswamy (1:24-cv-02148, N.D. Ga.) filed 2024-05-16 was TERMINATED 2024-10-03. Bankruptcy trustee Seidel has filed counterclaims against Neugebauer (24-03038, N.D. Tex. Bankr.). Additional cases: Seidel v. Neugebauer (25-03007) and Seidel v. Banzai (25-03009), both filed 2025-02-07 in N.D. Tex. Bankr. Ayers v. Neugebauer appeal (25-10572) pending in 5th Circuit. GloriFi (With Purpose Inc.) filed Ch. 7 bankruptcy 2023-02-08 (23-30246, N.D. Tex.).",
+      "confidence": "high",
+      "id": 5687
+    },
+    {
+      "date": "2024-05-17",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Banzai Advisory Group LLC v. The Founders Fund VII LP (1:24-cv-00599, D. Delaware) \u2014 Active RICO lawsuit filed 2024-05-17. Nature of suit: 470 Racketeer/Corrupt Organization. Cause: 18 USC 1962 Racketeering (RICO) Act. Assigned to Judge Colm F. Connolly. Case still pending as of 2025-09-09 (last filing date). Filed by Banzai Advisory Group against the Founders Fund VII LP entity specifically. Related proceeding: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, N.D. Texas Bankruptcy Court, filed 2025-02-07) \u2014 adversary proceeding for recovery of money/property via preference (547) and fraudulent transfer (548). This suggests Banzai may be in financial distress and the FF case may be part of a broader dispute involving insolvency.",
+      "confidence": "confirmed",
+      "id": 5634
+    },
+    {
+      "date": "2024-05-17",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Banzai Advisory Group v. Founders Fund VII (1:24-cv-00599, D. Del.) is an active RICO case filed 2024-05-17, NOT terminated. Cause: 18:1962 Racketeering (RICO) Act. Neugebauer (GloriFi founder) alleges FF VII and other investors used 'Trojan horse' convertible debt investments to gain blocking rights, installed operatives (including Keri Findley on the board), blocked competing capital raises, then stole IP for competing companies. Defendants include FF VII LP, FF VII Principals Fund LP, FF VII Entrepreneurs Fund LP, Vivek Ramaswamy Investments LLC, Lonsdale Family Revocable Trust, J. Nicholas Ayers 2021 Irrevocable Trust, Jackson Investment Group LLC, GFNCI LLC, Seven Talents LLC, Descante Capital LLC, plus individuals Keri Findley, Manuel Rios, Britt Amos, Cason Carter, Jerome Fadden. Kenneth Howery is NOT a named defendant.",
+      "confidence": "medium",
+      "id": 5686
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Founders Fund is a backer/investor in Erebor Bank. Peter Thiel (FF co-founder) is named as investor. FF portfolio company Anduril's founder Palmer Luckey co-founded Erebor.",
+      "other_person": "Erebor Bank",
+      "id": 3690
+    },
+    {
+      "date": "2025-04-11",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Founders Fund Growth III LP (CIK 0002059945) filed Form D on 2025-04-11 with total offering of $4,595,493,889 from 270 investors. Date of first sale: 2025-03-28. GP structure: The Founders Fund Growth III Management LP is the GP, with FF Upper Tier GP LLC as the GP of the GP. Three managing members: Peter Thiel (signed the filing), Napoleon Ta, and Trae Stephens. Kenneth Howery is NOT listed as a related person, director, or managing member. Same governance as FF IX. Founders Fund Growth IV LP was incorporated in DE on Jan 28, 2026 but has filed NO Form D with SEC yet -- no fundraising disclosures, no managing members disclosed.",
+      "confidence": "confirmed",
+      "id": 5688
+    },
+    {
+      "date": "2025-06-05",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FF Growth III LP (CIK 0002059945) is the vehicle that most likely deployed the $1B Anduril Series G investment. Timeline: Growth III first sale 2025-03-28, Form D filed 2025-04-11 disclosing $4.6B from 270 investors. Anduril Series G closed June 2025. TechCrunch reported the Growth III fund was 'intended primarily for follow-on investments in its successful late-stage companies.' Anduril is a Growth III portfolio company. GP structure: The Founders Fund Growth III Management LP is GP, with FF Upper Tier GP LLC as GP of GP. Managing Members: Peter Thiel, Napoleon Ta, Trae Stephens. Kenneth Howery NOT listed. No public source explicitly confirms which vehicle deployed the $1B, but the size ($4.6B fund, $1B check = 22% of fund), timing (2 months before Series G close), and stated purpose (late-stage follow-on) make Growth III the overwhelmingly likely vehicle.",
+      "confidence": "medium",
+      "id": 7036
+    },
+    {
+      "date": "2025-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "AGGREGATE ANALYSIS: Combined FF portfolio company federal contracts across Palantir, Anduril, SpaceX, and Scale AI show aggregate annual obligations growing from $714M (FY2019) to $4.65B (FY2025). Temporal correlations observed: (1) Palantir FY2020 +65% during Kratsios USD(R&E) tenure, with 86% of annual spending in Q3-Q4 when Kratsios was in role, (2) Palantir FY2025 first $1B year with 3 FF-linked officials in government, (3) Scale AI first contract awarded during Kratsios USD(R&E) period (FY2020 Q4), Kratsios then joined Scale AI, (4) Anduril DHS contracts began after Stephens' transition-team service gave visibility into CBP priorities. SpaceX shows weakest temporal correlation \u2014 growth continued through Biden years tracking launch cadence expansion. CONFOUNDERS: defense-tech spending increased broadly across both Trump terms and Biden term.",
+      "confidence": "medium",
+      "id": 6957
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Founders Fund Growth IV LP (CIK 0002112131) filed Form D on 2026-03-23 (today). Total offering: $6,024,585,000 from 370 investors. Date of first sale: 2026-03-06. Incorporated in Delaware 2026. GP: The Founders Fund Growth IV Management LP, with FF Upper Tier GP LLC as GP of GP. Managing Members: Peter Thiel, Napoleon Ta, Trae Stephens. Kenneth Howery NOT listed. Peter Thiel signed the filing on 2026-03-20. Companion vehicle: Founders Fund Growth IV Principals Fund LP (CIK 0002122450) also filed same day. TechCrunch reported March 9 that ~$1.5B of the capital comes from FF partners. This is 31% larger than Growth III ($4.6B) and represents the fastest fundraise in FF history (less than 1 year after Growth III close).",
+      "confidence": "confirmed",
+      "id": 7039
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "COMPLETE FF FUND FAMILY MAP (from EDGAR registered entities): (1) FF Growth I LP (CIK 0001797273, Form D 2019-12-19), (2) FF Growth Principals Fund LP (CIK 0001806856, Form D 2020-03-27), (3) FF Growth Management LLC (CIK 0001853431, files 13F-HR quarterly), (4) FF Growth II LP (CIK 0001910667, Form D 2022-03-04), (5) FF Growth II Principals Fund LP (CIK 0001912096, Form D 2022-03-04), (6) FF Growth II Management LP (CIK 0002106825, files 13F-HR), (7) FF Growth III LP (CIK 0002059945, Form D 2025-04-11, $4.6B, 270 investors), (8) FF Growth III Principals Fund LP (CIK 0002062082, Form D 2025-04-11), (9) FF Growth IV LP (CIK 0002112131, Form D 2026-03-23, $6.0B, 370 investors), (10) FF Growth IV Principals Fund LP (CIK 0002122450, Form D 2026-03-23). FF IX LP (CIK 0001971631, Form D/A 2025-10-16, $971.6M, 235 investors). FF IX Principals Fund LP (CIK 0002090410). All at One Letterman Drive, Building D, 5th Floor, SF 94129.",
+      "confidence": "confirmed",
+      "id": 7044
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       2702,
@@ -519,134 +915,5 @@
       "bridge-tax"
     ],
     "curated_at": "2026-03-11T22:40:07.417240"
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Founders Fund",
-      "connections": [
-        {
-          "target": "Peter Thiel",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": "CNBC 2025",
-          "description": "Thiel founded Founders Fund; controls B AUM; FF invested in Palantir (.1B return), Anduril (B), SpaceX (.5B gain)"
-        },
-        {
-          "target": "Trae Stephens",
-          "type": "employment",
-          "strength": 1,
-          "evidence_ref": "Founders Fund website",
-          "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
-        },
-        {
-          "target": "Rigetti Computing",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Founders Fund V held 88,621 shares of Rigetti Computing ($2M) across all quarters Q4 2024-Q4 2025, a quantum computing company with defense applications"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Founders Fund is Anduril's largest single investor at $1B+ (June 2025). Kenneth Howery (FF co-founder, Ambassador to Denmark) ethics agreement explicitly excludes Anduril from recusal obligations despite FF being primary Anduril investor."
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "financial",
-            "strength": 1,
-            "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ],
-        "Trae Stephens": [
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

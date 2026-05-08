@@ -1,0 +1,223 @@
+{
+  "name": "ParaZero Technologies Ltd.",
+  "slug": "parazero-technologies-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.387803",
+  "last_updated": "2026-03-30T04:05:23",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "business": 1,
+      "governance": 2,
+      "financial": 3,
+      "regulatory": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-03-30T04:05:23"
+  },
+  "findings": [
+    {
+      "id": 8807,
+      "finding_type": "business",
+      "summary": "Defense narrative closely timed to equity raises: Israeli Defense Entity orders announced Jan 2 and Jan 30, 2026 flanked by two RDOs on Jan 5 and Jan 12. Additional orders announced Feb\u2013Mar 2026, followed by March 24 RDO.",
+      "detail": "6-K press releases: Jan 2 (first DefendAir order from Israeli Defense Entity), Jan 15 (Cyprus reseller), Jan 22 (2025 review), Jan 27 (NATO country order), Jan 30 (Major Global Defense Corporation order) \u2014 all within days of two equity raises (Jan 5, Jan 12). Feb\u2013Mar 2026 orders: Feb 18 (drone interception results), Feb 20 (second branch Israeli Defense Entity), Mar 13 (new Israeli Defense Entity order), Mar 20 (India BonV Aero), Mar 26 (XTEND partnership) \u2014 followed by March 24 RDO.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-01-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8804,
+      "finding_type": "governance",
+      "summary": "Nine Form 3 initial insider filings clustered on March 18, 2026 \u2014 one week before March 2026 RDO close and 20-F annual report. Directors Weiss, Dinar, Revach (since 2022) and Shtief (since Aug 2023) appear to be filing Form 3s approximately 2\u20134 years late relative to their reported appointment dates.",
+      "detail": "Form 3 required within 10 days of becoming a Section 16 reporting person. Amitay Weiss has been Chairman since Aug 2023, Tali Dinar and Moshe Revach directors since Feb 2022, Yigal Shtief director since Aug 2023. All filed initial Form 3s on March 18, 2026. No prior Form 3/4/5 filings found in EDGAR insider record for this issuer.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-18",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8803,
+      "finding_type": "financial",
+      "summary": "ParaZero completed fourth RDO in 12 months at $0.75/share \u2014 32% below August 2025 RDO price of $1.10 and 30% below March 20, 2026 market price of $1.07. Gross proceeds $4.0M; 4,125,000 pre-funded warrants at $0.00001 exercise price included.",
+      "detail": "March 2026 RDO: 1,208,333 ordinary shares + 4,125,000 pre-funded warrants at $0.75/$0.74999. Placement agent Aegis Capital Corp., 7% fee + $50K legal. 60-day standstill. Filed under F-3 shelf 333-281443. By this offering, ~$8.8M had been drawn from the $50M shelf. Five RDOs executed in 12 months (Feb 2025, Aug 2025, Jan 2026\u00d72, Mar 2026).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8815,
+      "finding_type": "financial",
+      "summary": "ParaZero Technologies (PRZO) raised ~$4M via 424B5 at $0.75/share \u2014 a 30% discount to the March 20 closing price of $1.07 \u2014 just six days after Weiss and eight other insiders filed HFIA Form 3s revealing their positions for the first time.",
+      "detail": "424B5 accession 0001213900-26-033215, filed March 24 2026. Offering: 1,208,333 ordinary shares + 4,125,000 pre-funded warrants at $0.75 / $0.74999. Placement agent: Aegis Capital Corp. Total raised: ~$4.0M ($3.72M net of 7% placement fee). Shelf registration No. 333-281443 effective Aug 2024; $8.8M already raised under shelf as of March 2026 out of $50M authorized. HFIA Form 3s for all nine directors/officers filed 2026-03-18 (six days prior).",
+      "source_datasets": "edgar_fpi_bundle",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8805,
+      "finding_type": "financial",
+      "summary": "FY2025 revenue $1,046,664 against $5,804,052 operating cash burn \u2014 gross margin ~4.8%, operating loss $7.5M. Company explicitly reliant on continuous equity raises, not revenue.",
+      "detail": "Revenue grew 12.3% to $1.047M but cost of sales was $996,701, leaving gross profit of ~$50K. Operating expenses: R&D $2.34M, S&M $1.62M, G&A $3.64M. Net loss $5.41M (improvement from $11.05M in 2024 due to non-cash warrant fair value gains of $1.92M). Cash at Dec 31, 2025: ~$4.2M. Operating cash burn $5.8M/year.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-26",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8809,
+      "finding_type": "governance",
+      "summary": "VP of R&D Alon Yasovsky gave notice February 11, 2026 of resignation effective April 12, 2026 \u2014 departing after only ~3 months in the role. Ariel Alon is third CEO in recent years (Boaz Shetzer preceded him).",
+      "detail": "20-F footnote to Item 6A. Yasovsky joined December 2025, filed Form 3 March 18, 2026, departing April 2026. Former CEO Boaz Shetzer was among the top-5 compensated officers in FY2025 at $168K total. Yuval Gilad (former Chief Product Officer) also departed. At least three senior leadership changes in 2025 alone.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-26",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8810,
+      "finding_type": "regulatory",
+      "summary": "Core technology developed with Israeli Innovation Authority (IIA) grants restricts transfer of know-how and manufacturing outside Israel; any non-Israeli acquirer of 5%+ must notify IIA; maximum redemption fee on know-how transfer is 6x total IIA grants.",
+      "detail": "20-F Item 5B. Royalty obligation 3\u20133.5% on product revenue. IIA approval required for manufacturing or IP transfer outside Israel. Change of control notification triggers at 5% equity or voting rights held by non-Israeli. This structurally limits foreign acquisition and creates regulatory friction for any M&A or IP licensing transaction.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-26",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "ParaZero Technologies Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4585,
+      "person_a": "ParaZero Technologies Ltd.",
+      "person_b": "Aegis Capital Corp.",
+      "relationship_type": "corporate",
+      "description": "Aegis Capital Corp. served as exclusive placement agent for at least 4 consecutive ParaZero RDOs in 2025-2026 (Aug 2025, Jan 2026 x2, Mar 2026). Ongoing commercial relationship with dilutive offering pattern.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "profile_id": "hfia",
+      "other_person": "Aegis Capital Corp.",
+      "other_person_slug": "aegis-capital-corp",
+      "evidence": []
+    },
+    {
+      "id": 4586,
+      "person_a": "Natan Israeli",
+      "person_b": "ParaZero Technologies Ltd.",
+      "relationship_type": "corporate",
+      "description": "Natan Israeli (ParaZero director) is a Brig. Gen. (Res.) of the Israeli Air Force. The unnamed 'Israeli Defense Entity' ordering DefendAir systems is likely IAF or IDF-affiliated. Israeli Board provides potential access/referral channel to defense procurement.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "profile_id": "hfia",
+      "other_person": "Natan Israeli",
+      "other_person_slug": "natan-israeli",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-01-02",
+      "type": "finding",
+      "finding_type": "business",
+      "summary": "Defense narrative closely timed to equity raises: Israeli Defense Entity orders announced Jan 2 and Jan 30, 2026 flanked by two RDOs on Jan 5 and Jan 12. Additional orders announced Feb\u2013Mar 2026, followed by March 24 RDO.",
+      "confidence": "medium",
+      "id": 8807
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Nine Form 3 initial insider filings clustered on March 18, 2026 \u2014 one week before March 2026 RDO close and 20-F annual report. Directors Weiss, Dinar, Revach (since 2022) and Shtief (since Aug 2023) appear to be filing Form 3s approximately 2\u20134 years late relative to their reported appointment dates.",
+      "confidence": "medium",
+      "id": 8804
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ParaZero completed fourth RDO in 12 months at $0.75/share \u2014 32% below August 2025 RDO price of $1.10 and 30% below March 20, 2026 market price of $1.07. Gross proceeds $4.0M; 4,125,000 pre-funded warrants at $0.00001 exercise price included.",
+      "confidence": "high",
+      "id": 8803
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ParaZero Technologies (PRZO) raised ~$4M via 424B5 at $0.75/share \u2014 a 30% discount to the March 20 closing price of $1.07 \u2014 just six days after Weiss and eight other insiders filed HFIA Form 3s revealing their positions for the first time.",
+      "confidence": "high",
+      "id": 8815
+    },
+    {
+      "date": "2026-03-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FY2025 revenue $1,046,664 against $5,804,052 operating cash burn \u2014 gross margin ~4.8%, operating loss $7.5M. Company explicitly reliant on continuous equity raises, not revenue.",
+      "confidence": "high",
+      "id": 8805
+    },
+    {
+      "date": "2026-03-26",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "VP of R&D Alon Yasovsky gave notice February 11, 2026 of resignation effective April 12, 2026 \u2014 departing after only ~3 months in the role. Ariel Alon is third CEO in recent years (Boaz Shetzer preceded him).",
+      "confidence": "high",
+      "id": 8809
+    },
+    {
+      "date": "2026-03-26",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Core technology developed with Israeli Innovation Authority (IIA) grants restricts transfer of know-how and manufacturing outside Israel; any non-Israeli acquirer of 5%+ must notify IIA; maximum redemption fee on know-how transfer is 6x total IIA grants.",
+      "confidence": "high",
+      "id": 8810
+    }
+  ]
+}

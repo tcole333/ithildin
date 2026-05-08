@@ -1,0 +1,276 @@
+{
+  "name": "Freedom Air International, Inc.",
+  "slug": "freedom-air-international-inc",
+  "aliases": [],
+  "profile_ids": [
+    "epstein-aetna"
+  ],
+  "generated_at": "2026-05-07T23:07:36.424106",
+  "last_updated": "2026-04-15T02:51:24",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "financial": 2,
+      "document": 1,
+      "intelligence": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-15T02:51:24"
+  },
+  "findings": [
+    {
+      "id": 10397,
+      "finding_type": "identity",
+      "summary": "Entity 293884 was renamed three times before the 2011 Aetna sale: Air Ghislaine, Inc. (original) \u2192 Shmitka Air, Inc. (2010-02-11) \u2192 Freedom Air International, Inc. (2010-07-06); the International Registry name change was recorded 2011-07-25, one day before closing",
+      "detail": "Six International Registry Priority Search Certificates within EFTA01339374 (pp 106-119) show the same Entity Id 293884 with successive name change records: Old Name 'Air Ghislaine, Inc.' \u2192 New Name 'Freedom Air International, Inc.' / Date Changed: 25-Jul-2011. The Delaware corporate timeline shows: Air Ghislaine renamed to Shmitka Air 2010-02-11 (FAA confirmed), Shmitka Air renamed to Freedom Air International 2010-07-06. The sequence substantially obscured the Maxwell-related name from corporate due diligence on the Aetna deal.",
+      "source_datasets": [
+        "court_exhibit",
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-07-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:21:56",
+      "target_name": "Freedom Air International, Inc.",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": "Entity Id 293884 / Old Name Air Ghislaine, Inc. / New Name Freedom Air International, Inc. / Date Changed 25-Jul-2011",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000106",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000108",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000113",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000116",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10394,
+      "finding_type": "financial",
+      "summary": "Sale price of N722JE to ASI Wings LLC was $11,900,000, with $11,800,000 wired to Freedom Air at JPMorgan Chase Panama and $100,000 deposit applied; closing 2011-07-26",
+      "detail": "IATS Wire Authorization Form (IATS-000090) shows: Originator IATS, Receiver Bank JP Morgan Chase, Beneficiary Freedom Air International Inc., Country Panama, Amount $11,800,000.00, OBI Reference 'N722JE, 760750', Control # B-11:31, Prepared by Judy Hunteman, Signed by Joan F. Roberts. Closing Settlement Statement (IATS-000148) shows Sale Price $11,900,000.",
+      "source_datasets": [
+        "court_exhibit",
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-07-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:21:56",
+      "target_name": "Freedom Air International, Inc.",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000090",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000148",
+          "source_quote": "Sale Price $11,900,000.00 / Proceeds Due to Seller at Closing $11,896,097.50",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000188",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10404,
+      "finding_type": "document",
+      "summary": "Freedom Air International, Inc. dissolved by Consent of Sole Stockholder on 2012-12-07, 17 months after receiving the $11.8M Panama wire",
+      "detail": "Marks Paneth document MP-00003267-3274 cited in Axia Ex 56 Materials Relied Upon (Doc 238-31 page 110): 'Corporate Dissolution or Liquidation, Freedom Air International, Inc., Consent of Sole Stockholder, December 7, 2012 (MP-00003267-3274).' The entity served its purpose in the 2011 transaction and was wound up; the missing #4324 bank statements would presumably show how the $11.8M Panama balance was disposed of before dissolution.",
+      "source_datasets": [
+        "courtlistener",
+        "investigations_db"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-12-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:23:42",
+      "target_name": "Freedom Air International, Inc.",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MP-00003267",
+          "source_quote": "Corporate Dissolution or Liquidation, Freedom Air International, Inc., Consent of Sole Stockholder, December 7, 2012",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:1:22-cv-10904-JSR:Doc 238-31",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10429,
+      "finding_type": "financial",
+      "summary": "N162AE (Aetna trade-in, S/N 760472) was resold by Freedom Air International to Greenwich AeroGroup Brazil Leasing, Inc. sometime between 2011-2013, then exported to Brazil on 2013-04-10 with tail changed to N162AD; realizes the 'Brazilian client' resale that Epstein and Reenstra had pre-negotiated in August 2011",
+      "detail": "EFTA01326828 is the FAA Aircraft Registry's consolidated April 10, 2013 export-deregistration packet for Sikorsky S-76C S/N 760472. Contains: (1) FAA telegraphic message to Registro Aeronautico Brasileiro confirming deregistration effective 1:00 PM CDT April 10, 2013, last registered owner Greenwich AeroGroup Brazil Leasing, Inc.; (2) Greenwich AeroGroup Brazil Leasing request letter dated 2013-04-09 signed by Kohler as President, address 4200 Summit Bridge Road Middletown DE; (3) historical conveyance documents back to 2001 including 1995 AML Leasing Trust declaration; (4) October 15, 2001 lease between State Street Bank and Trust Company (Lessor/Trustee of AML Leasing Trust) and Aetna Life Insurance Company (Lessee); (5) U.S. Bank National Association succession to State Street corporate trust business; (6) December 2009 transfer from AML Leasing Trust to ASI Wings LLC; (7) the July 2011 Bill of Sale from ASI Wings LLC to Freedom Air International, Inc. (signed for Aetna Inc. as Managing Member); (8) later conveyance from Freedom Air International to Greenwich AeroGroup Brazil Leasing with tail change N162AE \u2192 N162AD. This confirms the August 2011 Reenstra 'Client in Brazil' thread as a completed transaction and realizes the economic mechanism of the 50/50 Epstein-Reenstra profit split pre-negotiated in June 2011. Separately establishes that Aetna had leased N162AE via standard AML Leasing Trust / State Street bank-trustee structure from 2001-2009 \u2014 Aetna took full ownership for only ~18 months before selling to Freedom Air in 2011. This is normal Fortune 500 corporate aviation lease financing.",
+      "source_datasets": [
+        "duggan",
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2013-04-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 02:51:24",
+      "target_name": "Freedom Air International, Inc.",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01326828",
+          "source_quote": "State Street Bank and Trust Company, not in its individual capacity, but solely as Trustee under the Declaration of Trust by it, dated as of September 29, 1995 (the Lessor) and Aetna Life Insurance Company (the Lessee)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10413,
+      "finding_type": "intelligence",
+      "summary": "INFERENCE: The $11.8M wire to JPMorgan Chase Panama for a domestic Delaware-corp-to-Connecticut-LLC transaction has no legitimate business reason and is consistent with offshore financial structuring (tax avoidance, asset protection, layering)",
+      "detail": "INFERENCE from primary documents: every party to the 2011 transaction was US-based (Freedom Air = Delaware corp, ASI Wings = Delaware LLC operating from Hartford, IATS = Oklahoma escrow). There is no operational reason for sale proceeds to leave the country. Routing through JPMorgan Panama in 2011 (pre-FATCA effective date 2014, pre-Panama Papers 2016) provided maximum opacity for any subsequent fund movement. The fact that Axia Ex 56 materials-relied-upon list does NOT include Freedom Air International #4324 bank statements (despite including Hyperion Air statements through 2014) suggests the account may have been booked in Panama outside US discovery scope.",
+      "source_datasets": [
+        "doj_vol11",
+        "courtlistener",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:27:17",
+      "target_name": "Freedom Air International, Inc.",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": "Beneficiary Freedom Air International Inc. / Country Panama",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000090",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:1:22-cv-10904-JSR:Doc 238-31",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-07-25",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Entity 293884 was renamed three times before the 2011 Aetna sale: Air Ghislaine, Inc. (original) \u2192 Shmitka Air, Inc. (2010-02-11) \u2192 Freedom Air International, Inc. (2010-07-06); the International Registry name change was recorded 2011-07-25, one day before closing",
+      "confidence": "confirmed",
+      "id": 10397
+    },
+    {
+      "date": "2011-07-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Sale price of N722JE to ASI Wings LLC was $11,900,000, with $11,800,000 wired to Freedom Air at JPMorgan Chase Panama and $100,000 deposit applied; closing 2011-07-26",
+      "confidence": "confirmed",
+      "id": 10394
+    },
+    {
+      "date": "2012-12-07",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Freedom Air International, Inc. dissolved by Consent of Sole Stockholder on 2012-12-07, 17 months after receiving the $11.8M Panama wire",
+      "confidence": "confirmed",
+      "id": 10404
+    },
+    {
+      "date": "2013-04-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "N162AE (Aetna trade-in, S/N 760472) was resold by Freedom Air International to Greenwich AeroGroup Brazil Leasing, Inc. sometime between 2011-2013, then exported to Brazil on 2013-04-10 with tail changed to N162AD; realizes the 'Brazilian client' resale that Epstein and Reenstra had pre-negotiated in August 2011",
+      "confidence": "confirmed",
+      "id": 10429
+    }
+  ]
+}

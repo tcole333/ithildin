@@ -5,7 +5,7 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.833992",
+  "generated_at": "2026-05-07T23:07:36.160756",
   "last_updated": "2026-03-11T04:37:10",
   "stats": {
     "total_findings": 21,
@@ -13,8 +13,8 @@
     "total_entities": 0,
     "finding_types": {
       "financial": 10,
-      "intelligence": 4,
       "legal": 6,
+      "intelligence": 4,
       "relationship": 1
     },
     "connection_types": {
@@ -25,6 +25,130 @@
     "last_updated": "2026-03-11T04:37:10"
   },
   "findings": [
+    {
+      "id": 5302,
+      "finding_type": "financial",
+      "summary": "Trump Media board member; received 25,946 DJT restricted shares (~$779K) in Jan 2025; later claimed he rejected them",
+      "detail": "Patel served on the board of Trump Media & Technology Group (DJT). On January 28, 2025, he received 25,946 restricted shares worth approximately $779,400 at closing price of $30.04/share. 25% vested immediately, remainder over 9 quarterly installments. SEC Form 3 filed March 26, 2024 (ADSH: 0001474506-24-000109) confirms Patel as insider with CIK 0002015674. Patel later stated he 'did not and will not accept' the shares. He resigned from the board on February 20, 2025, the day of his FBI confirmation. The timing raises questions: shares were awarded weeks before his confirmation hearing.",
+      "source_datasets": [
+        "edgar",
+        "cnbc"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:31",
+      "target_name": "Kash Patel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2015674",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2025/01/31/trump-media-djt-stock-shares-kash-patel.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5849,
+      "finding_type": "legal",
+      "summary": "Active litigation: John Doe v. Kash Patel (4th Cir. 25-2028) as FBI Director in official capacity",
+      "detail": "CourtListener case 25-2028 in Court of Appeals for the Fourth Circuit. Filed 2025-09-03. Patel sued in official capacity as FBI Director. Also: Tremel Rosser v. Kash Patel (25-2288, 4th Cir). Multiple pending cases challenge FBI actions under Patel leadership. DOJ Criminal Division attorneys involved in defense.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-09-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:52:35",
+      "target_name": "Kash Patel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 71373152 (John Doe v. Kash Patel); docket 71735479 (Rosser v. Patel)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5329,
+      "finding_type": "intelligence",
+      "summary": "Cut FBI ties with ADL over Comey connection; used 'Government Gangsters' enemies list to target officials",
+      "detail": "As FBI Director, Patel severed the FBI's partnership with the Anti-Defamation League (ADL), which had been established under James Comey's directorship. Patel stated: 'This FBI won't partner with political fronts masquerading as watchdogs.' His book 'Government Gangsters' contained an appendix listing 60 names of former executive branch officials, widely interpreted as an enemies list. People on the list have faced investigations and criminal charges under Patel's FBI tenure. Former FBI Director James Comey faces a two-count federal criminal indictment, with arraignment scheduled for October 9, 2025.",
+      "source_datasets": [
+        "fox_news",
+        "msnbc"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-10-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:06",
+      "target_name": "Kash Patel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.foxnews.com/politics/patel-cuts-ties-comeys-fbi-made-adl-organization-faces-backlash-tpusa-criticism",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.ms.now/rachel-maddow-show/maddowblog/kash-patels-enemies-list-face-investigations-criminal-charges-rcna233875",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5313,
+      "finding_type": "legal",
+      "summary": "CLC filed DOJ OIG complaint over 10+ personal trips on government aircraft without reimbursement, including 2026 Milan Olympics",
+      "detail": "Campaign Legal Center filed complaint with DOJ Inspector General on March 4, 2026, requesting investigation into whether Patel violated federal travel regulations by failing to reimburse the government for at least 10 trips involving personal travel on government aircraft within nearly 12 months. Most recent trip: Milan, Italy during 2026 Winter Olympics to watch US men's hockey team. CREW also separately filed a complaint about Patel's Olympics trip. While FBI directors are required to use government aircraft for all travel, they must reimburse for personal trips.",
+      "source_datasets": [
+        "campaign_legal_center",
+        "crew"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:08",
+      "target_name": "Kash Patel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://campaignlegal.org/update/clc-calls-inquiry-multiple-trips-fbi-director-kash-patel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.citizensforethics.org/legal-action/legal-complaints/crew-complaint-investigate-kash-patels-olympics-trip/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5292,
       "finding_type": "financial",
@@ -165,39 +289,6 @@
       ]
     },
     {
-      "id": 5302,
-      "finding_type": "financial",
-      "summary": "Trump Media board member; received 25,946 DJT restricted shares (~$779K) in Jan 2025; later claimed he rejected them",
-      "detail": "Patel served on the board of Trump Media & Technology Group (DJT). On January 28, 2025, he received 25,946 restricted shares worth approximately $779,400 at closing price of $30.04/share. 25% vested immediately, remainder over 9 quarterly installments. SEC Form 3 filed March 26, 2024 (ADSH: 0001474506-24-000109) confirms Patel as insider with CIK 0002015674. Patel later stated he 'did not and will not accept' the shares. He resigned from the board on February 20, 2025, the day of his FBI confirmation. The timing raises questions: shares were awarded weeks before his confirmation hearing.",
-      "source_datasets": [
-        "edgar",
-        "cnbc"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:16:31",
-      "target_name": "Kash Patel",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR Form 3: CIK 0002015674 / 0001849635",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.cnbc.com/2025/01/31/trump-media-djt-stock-shares-kash-patel.html",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5306,
       "finding_type": "intelligence",
       "summary": "Fired dozen FBI CI-12 counterintelligence agents with Iran expertise days before US military strikes on Iran (March 2026)",
@@ -282,39 +373,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.newsweek.com/kash-patel-fbi-staff-ignore-elon-musk-demand-doge-2034948",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5313,
-      "finding_type": "legal",
-      "summary": "CLC filed DOJ OIG complaint over 10+ personal trips on government aircraft without reimbursement, including 2026 Milan Olympics",
-      "detail": "Campaign Legal Center filed complaint with DOJ Inspector General on March 4, 2026, requesting investigation into whether Patel violated federal travel regulations by failing to reimburse the government for at least 10 trips involving personal travel on government aircraft within nearly 12 months. Most recent trip: Milan, Italy during 2026 Winter Olympics to watch US men's hockey team. CREW also separately filed a complaint about Patel's Olympics trip. While FBI directors are required to use government aircraft for all travel, they must reimburse for personal trips.",
-      "source_datasets": [
-        "campaign_legal_center",
-        "crew"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:17:08",
-      "target_name": "Kash Patel",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://campaignlegal.org/update/clc-calls-inquiry-multiple-trips-fbi-director-kash-patel",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.citizensforethics.org/legal-action/legal-complaints/crew-complaint-investigate-kash-patels-olympics-trip/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -493,39 +551,6 @@
       ]
     },
     {
-      "id": 5329,
-      "finding_type": "intelligence",
-      "summary": "Cut FBI ties with ADL over Comey connection; used 'Government Gangsters' enemies list to target officials",
-      "detail": "As FBI Director, Patel severed the FBI's partnership with the Anti-Defamation League (ADL), which had been established under James Comey's directorship. Patel stated: 'This FBI won't partner with political fronts masquerading as watchdogs.' His book 'Government Gangsters' contained an appendix listing 60 names of former executive branch officials, described by media commentators as a targeting list. People on the list have faced investigations and criminal charges under Patel's FBI tenure. Former FBI Director James Comey faces a two-count federal criminal indictment, with arraignment scheduled for October 9, 2025.",
-      "source_datasets": [
-        "fox_news",
-        "msnbc"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:18:06",
-      "target_name": "Kash Patel",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.foxnews.com/politics/patel-cuts-ties-comeys-fbi-made-adl-organization-faces-backlash-tpusa-criticism",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.ms.now/rachel-maddow-show/maddowblog/kash-patels-enemies-list-face-investigations-criminal-charges-rcna233875",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5342,
       "finding_type": "intelligence",
       "summary": "Classified as Politically Exposed Person (PEP) by OpenSanctions; confirmed FBI Director since Feb 20, 2025",
@@ -551,7 +576,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions: Q104639732",
+          "evidence_ref": "OpenSanctions:Q104639732",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -654,31 +679,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "IRS Form 990 Kash Foundation 2023; web reporting",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5849,
-      "finding_type": "legal",
-      "summary": "Active litigation: John Doe v. Kash Patel (4th Cir. 25-2028) as FBI Director in official capacity",
-      "detail": "CourtListener case 25-2028 in Court of Appeals for the Fourth Circuit. Filed 2025-09-03. Patel sued in official capacity as FBI Director. Also: Tremel Rosser v. Kash Patel (25-2288, 4th Cir). Multiple pending cases challenge FBI actions under Patel leadership. DOJ Criminal Division attorneys involved in defense.",
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:52:35",
-      "target_name": "Kash Patel",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 71373152 (John Doe v. Kash Patel); docket 71735479 (Rosser v. Patel)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -798,7 +798,40 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-01-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Trump Media board member; received 25,946 DJT restricted shares (~$779K) in Jan 2025; later claimed he rejected them",
+      "confidence": "high",
+      "id": 5302
+    },
+    {
+      "date": "2025-09-03",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Active litigation: John Doe v. Kash Patel (4th Cir. 25-2028) as FBI Director in official capacity",
+      "confidence": "confirmed",
+      "id": 5849
+    },
+    {
+      "date": "2025-10-09",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Cut FBI ties with ADL over Comey connection; used 'Government Gangsters' enemies list to target officials",
+      "confidence": "high",
+      "id": 5329
+    },
+    {
+      "date": "2026-03-04",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "CLC filed DOJ OIG complaint over 10+ personal trips on government aircraft without reimbursement, including 2026 Milan Olympics",
+      "confidence": "high",
+      "id": 5313
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5297,
@@ -945,181 +978,5 @@
       "bridge-tax",
       "jurisdictional-arbitrage"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Kash Patel",
-      "connections": [
-        {
-          "target": "Russ Vought",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 357517",
-          "description": "Both connected to Center for Renewing America: Vought as founder, Patel as Senior Fellow for National Security and Intelligence"
-        },
-        {
-          "target": "Qatar",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "PBS; Public Citizen FARA complaint",
-          "description": "Patel consulted for Embassy of Qatar via Trishul LLC until Nov 2024 without FARA registration; now FBI Director with access to Qatar files"
-        },
-        {
-          "target": "Center for Renewing America",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "FBI.gov Director Patel page",
-          "description": "Patel served as CRA Senior Fellow for National Security, became FBI Director Feb 2025"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis",
-          "description": "FBI-DOGE tension: Patel told FBI staff to ignore Musk's DOGE demand. LittleSis notes generic relationship between them."
-        },
-        {
-          "target": "Corey Lewandowski",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Both serve in Trump 2nd administration: Lewandowski as DHS SGE/de facto chief of staff, Patel as FBI Director. Both face congressional scrutiny. Both are Trump loyalists placed in security/law enforcement positions. No direct business relationship found."
-        }
-      ],
-      "secondHop": {
-        "Center for Renewing America": [
-          {
-            "target": "Conservative Partnership Institute",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "CPI created and funded CRA: 583K direct grant plus 1M+ to c3 arm (Center for American Restoration) in 2021. Shared address at 300 Independence Ave SE DC. Board overlap: Denton and Corrigan serve on both boards. CRA files tax docs in care of CPI."
-          },
-          {
-            "target": "Russ Vought",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
-          },
-          {
-            "target": "Jeffrey Clark",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Clark served as CRA Senior Fellow and Director of Litigation with 219K compensation, left for acting OIRA Administrator March 2025, resigned March 2026"
-          },
-          {
-            "target": "Mark Paoletta",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Paoletta served as CRA Senior Fellow, became OMB General Counsel, also partner at Schaerr Jaffe, received money from Leonard Leo for Thomas defense"
-          },
-          {
-            "target": "Adam Candeub",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Candeub served as CRA Senior Fellow, became FCC General Counsel Feb 2025, authored Project 2025 FTC chapter"
-          }
-        ],
-        "Corey Lewandowski": [
-          {
-            "target": "Rudy Giuliani",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-          },
-          {
-            "target": "Ed Brookover",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-          },
-          {
-            "target": "Mary Coen",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-          },
-          {
-            "target": "Jason Osborne",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-          },
-          {
-            "target": "Matt Mowers",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Russ Vought": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Vought was AFL board treasurer, now OMB Director. Both involved in Project 2025. Vought controls federal spending (including DHS/ICE budgets) while Miller controls immigration policy."
-          },
-          {
-            "target": "America First Legal Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
-          },
-          {
-            "target": "Jeffrey Clark",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both at CRA before entering govt; CRA funded Election Integrity Network"
-          },
-          {
-            "target": "Ken Cuccinelli",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Cuccinelli is Senior Fellow at Vought's Center for Renewing America; both Project 2025 authors; CRA staging ground for election enforcement personnel"
-          }
-        ],
-        "Qatar": [
-          {
-            "target": "David Stern",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": ""
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

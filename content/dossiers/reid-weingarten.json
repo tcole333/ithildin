@@ -7,10 +7,10 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.823649",
-  "last_updated": "2026-02-16T16:14:55",
+  "generated_at": "2026-05-07T23:07:36.133888",
+  "last_updated": "2026-05-07T14:14:15",
   "stats": {
-    "total_findings": 24,
+    "total_findings": 25,
     "total_connections": 15,
     "total_entities": 1,
     "finding_types": {
@@ -18,14 +18,14 @@
       "communication": 10,
       "intelligence": 2,
       "legal": 7,
-      "relationship": 2
+      "relationship": 3
     },
     "connection_types": {
       "legal": 9,
       "social": 5,
       "advisory": 1
     },
-    "last_updated": "2026-02-16T16:14:55"
+    "last_updated": "2026-05-07T14:14:15"
   },
   "findings": [
     {
@@ -799,6 +799,31 @@
           "evidence_type": "ref",
           "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=negative_search_Weingarten",
           "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11157,
+      "finding_type": "relationship",
+      "summary": "STRUCTURAL Weingarten is the singular counsel-pivot bridging SoftBank-caper actors (Misra/Benedetti) to Epstein old-guard cluster (Barr/Karp/Ruemmler/Bannon/Holder/Wynn/Pence/Wolff/Gulen-extradition)",
+      "detail": "Graph metric: brokerage_score=0.80 deg=15. Reid Weingarten (Steptoe & Johnson) sits in size-4 cliques with both wave-clusters: clique-A {Benedetti, Misra, Epstein, Weingarten} AND clique-B {Bannon, Barr, Epstein, Weingarten}. Direct edges: Misra (legal \u2014 evaluating SoftBank Vision Fund representation Jan 2019), Benedetti (knew via Epstein Dec 2011, considered for SoftBank-caper deployment), Karp (concealed advisory role re Epstein matters), Ruemmler (Epstein contact-list co-occurrence), Wynn (DOJ/Broidy investigation), Holder (DOJ Public Integrity), Pence (one-on-one DC meeting), Barrack (Chagoury inquiries), Gulen (Turkey extradition representation post-2016 coup). Weingarten was Epstein primary criminal-defense counsel 2011-2019 (245+ emails). The structural insight: SoftBank-caper recruitment (Jan 2019) used the SAME Weingarten-pivot that managed Epstein defense, K&E coordination, and Bannon-introduction \u2014 i.e., the legal infrastructure for the SoftBank dirty-tricks hire was an extension of the Epstein representation, not a separate engagement. This connects theme 1 (UK dirty-tricks productization) to the K&E-Paul Weiss old-guard cluster via a single law firm bridge.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:14:15",
+      "target_name": "Reid Weingarten",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-50",
+          "source_quote": " graph_tools holes brokerage_score=0.80 deg=15; cliques size-4 Benedetti+Misra+Epstein+Weingarten AND size-4 Bannon+Barr+Epstein+Weingarten",
           "source_page": null,
           "assessment": null
         }

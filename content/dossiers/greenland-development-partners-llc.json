@@ -5,16 +5,16 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:08.004898",
+  "generated_at": "2026-05-07T23:07:36.425781",
   "last_updated": "2026-03-09T18:20:12",
   "stats": {
-    "total_findings": 7,
+    "total_findings": 5,
     "total_connections": 3,
     "total_entities": 0,
     "finding_types": {
       "financial": 2,
       "document": 2,
-      "intelligence": 3
+      "intelligence": 1
     },
     "connection_types": {
       "financial": 1,
@@ -98,7 +98,7 @@
     {
       "id": 6293,
       "finding_type": "document",
-      "summary": "Delaware LLC registry search returns 0 results for GDP LLC in the unified tool's local registry — confirmed that Delaware LLC formation documents are not ingested and members are not publicly disclosed per Delaware LLC law. The ArcticToday/Irish Times investigative reporting confirms investments were not publicly disclosed and do not appear in accessible corporate registries.",
+      "summary": "Delaware LLC registry search returns 0 results for GDP LLC in the unified tool's local registry \u2014 confirmed that Delaware LLC formation documents are not ingested and members are not publicly disclosed per Delaware LLC law. The ArcticToday/Irish Times investigative reporting confirms investments were not publicly disclosed and do not appear in accessible corporate registries.",
       "detail": null,
       "source_datasets": [
         "registry",
@@ -166,56 +166,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "ArcticToday / Politiken / LittleSis 82179",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6352,
-      "finding_type": "intelligence",
-      "summary": "SYNTHESIS: The Greenland rare earth competition involves three distinct but interconnected Trump-allied networks operating simultaneously: (1) The LAUDER CONSORTIUM (GDP LLC → Greenland Investment Group → Greenland Water Bank) — Ronald Lauder's water/hydropower play via Josette Sheeran, with the real prize being the Tasersiaq 680-2250MW hydropower concession. Conflict of interest: Greenland FM Vivian Motzfeldt's husband is the CEO of the company Lauder partly owns. (2) The GREENMET NETWORK (Horn/Sorial/Schiller → Javelin Advisors → Tanbreez → CRML) — Drew Horn (former Pence aide, OSD appointee) brokered the Tanbreez rare earth partnership, which CRML then acquired. GreenMet is completely absent from 167 CRML SEC filings despite brokering the deal. Javelin Advisors (Sorial/Schiller/Seiden) simultaneously ran Pakistan FARA lobbying (K), pardon brokering (M+ for Menendez co-conspirator Daibes), asbestos deregulation (.2M from unknown Logical Strategies LLC), and NioCorp critical minerals lobbying. (3) The PRINCE VECTOR — Erik Prince advocates Greenland acquisition via Bannon's War Room but has no registered entities. His operational model (Vectus Global DRC M minerals-security contract) shows the pattern: security services as entry point to mineral revenues. Swarmer Inc drone IPO is his only US SEC vehicle. THE PIVOT NODE is Svend Hardenberg — Greenlandic businessman who co-owns Greenland Water Bank (Lauder consortium) AND is a confirmed business partner of Drew Horn (GreenMet/CRML network). This single person bridges the two operations that present publicly as separate. FINANCIAL CHAIN: Alyeska Investment Group (B Chicago hedge fund) holds 9.9% of CRML AND 9.58% of USA Rare Earth — dual policy bets. Both companies received major Trump admin support within weeks of Alyeska's investment. DANISH PET surveilled 3 Trump-connected Americans in Greenland; best candidates are Thomas Dans (USARC chair, 'Trump's man in Greenland'), Drew Horn, and Keith Schiller. ANOMALY: Swiss Commodity Re Limited (M copper powder deal) is controlled by Kenneth Deayton, a Hong Kong corporate services executive who appears in Panama Papers — no Swiss registration exists.",
-      "detail": null,
-      "source_datasets": [
-        "LittleSis,FARA,EDGAR,bisbase.com,DR_Danish_Broadcasting,SEC_F-3,WebSearch,ICIJ_Panama_Papers"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:27:59",
-      "target_name": "Greenland Rare Earth Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "6283,6284,6287,6288,6290,6291,6293,6294,6296,6303,6305,6307,6308,6309,6310,6311,6312,6313,6285,6286,6289,6292,6295,6297,6298,6299,6300,6301,6302,6304,6306,6314,6340,6341,6342,6344,6346,6343,6345,6347,6348,6349,6350,6351",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6376,
-      "finding_type": "intelligence",
-      "summary": "SYNTHESIS (Wave 3): Three critical network features emerged. (1) HARDENBERG IS THE SUPERNODE: Svend Hardenberg simultaneously bridges 3 distinct Greenland resource clusters — Lauder consortium (GIG/GWB), GreenMet/Horn data center + seaweed, and ETM Kvanefjeld REE/uranium (separate from Tanbreez). He holds 21 Danish business roles and is the single indispensable Greenlandic intermediary for all US interests. (2) RTSKHILADZE-ASBESTOS VECTOR: Javelin Advisors' .2M asbestos client is Giorgi Rtskhiladze — Georgian-American Mueller Report figure ('stopped tapes from Russia'), Trump Tower Batumi broker, current Trump PAC donor, Toroil Group (Russian energy). The .2M payment for a single EPA rule via Trump's former bodyguard, combined with Rtskhiladze's CIS energy connections and no FARA registration, raises the question of whether Russian/Kazakh asbestos producers are using Trump insiders to influence US environmental regulation. (3) GREENMET COMPENSATION GAP: GreenMet's deal model (equity-for-financing, per abandoned TMRC precedent) produced zero visible compensation in 167 CRML filings. The advisory agreement is privately held. NioCorp creates a triangular relationship: Horn advocates publicly, Sorial/Schiller lobby for K. Sorial's concurrent Pakistan FARA + NioCorp lobbying is a dual-mandate conflict.",
-      "detail": null,
-      "source_datasets": [
-        "LDA,FARA,EDGAR,LittleSis,ownr.dk,WebSearch,NYDOS"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:07:06",
-      "target_name": "Greenland Rare Earth Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "6354,6355,6356,6357,6358,6359,6360,6361,6362,6363,6364,6365,6366,6367,6368,6369,6370,6371,6372,6373,6374,6375",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -333,77 +283,46 @@
       }
     ],
     "curated_at": "2026-03-11T23:00:46.671362",
-    "lead": "<p>Greenland Development Partners LLC (GDP LLC) is a Delaware-registered investor consortium that functions as the US-side vehicle for <a href='/dossiers/ronald-lauder'>Ronald Lauder</a>'s commercial interests in Greenland. GDP LLC holds a confirmed 25–33.32% stake in Greenland Water Bank ApS (Danish CVR 12941218) and holds a stake in Greenland Investment Group ApS (GIG), the Greenland-based operating entity bidding for the Tasersiaq hydropower concession.<sup>[ArcticToday, bisbase:DK1670228]</sup> The LLC is managed by <a href=\"/dossiers/josette-sheeran\">Josette Sheeran</a>, former US Deputy Secretary of State, as Portfolio Lead and Chair of both operating subsidiaries. Delaware law requires no public disclosure of LLC members or formation dates; no registered-agent record or EDGAR filing exists for GDP LLC.<sup>[registry-search, ArcticToday/Irish Times]</sup></p>",
+    "lead": "<p>Greenland Development Partners LLC (GDP LLC) is a Delaware-registered investor consortium that functions as the US-side vehicle for <a href='/dossiers/ronald-lauder'>Ronald Lauder</a>'s commercial interests in Greenland. GDP LLC holds a confirmed 25\u201333.32% stake in Greenland Water Bank ApS (Danish CVR 12941218) and holds a stake in Greenland Investment Group ApS (GIG), the Greenland-based operating entity bidding for the Tasersiaq hydropower concession.<sup>[ArcticToday, bisbase:DK1670228]</sup> The LLC is managed by <a href=\"/dossiers/josette-sheeran\">Josette Sheeran</a>, former US Deputy Secretary of State, as Portfolio Lead and Chair of both operating subsidiaries. Delaware law requires no public disclosure of LLC members or formation dates; no registered-agent record or EDGAR filing exists for GDP LLC.<sup>[registry-search, ArcticToday/Irish Times]</sup></p>",
     "system_role": "US-registered holding vehicle for Greenland resource-sector investments; the Delaware LLC layer sits between Ronald Lauder and the Greenland-registered operating entities (GIG and Greenland Water Bank).",
     "sections": [
       {
         "id": "corporate-structure",
         "title": "Corporate Structure",
-        "content": "<p>According to investigative reporting and Danish registry data, GDP LLC sits at the top of a three-tier structure. The LLC (Delaware entity #766) holds a stake in Greenland Investment Group ApS (#782), a Greenland/Denmark private limited company co-founded by Jørgen Wæver Johansen, and a 25–33.32% minority stake in Greenland Water Bank ApS (#790, CVR 12941218).<sup>[bisbase:DK1670228, ArcticToday/Politiken]</sup> The majority position in Greenland Water Bank (66.67–89.99%) is held by Greenland Invest ApS, the Danish holding company in which <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> holds a 50–66.65% direct stake and chairs since 2015.<sup>[ownr.dk, bisbase]</sup></p><p>A LittleSis entry records the ownership direction as GIG owning GDP LLC rather than the reverse — this conflicts with bisbase data showing GDP LLC as the direct owner of Greenland Water Bank. Whether this reflects a data-entry error in LittleSis or a genuinely circular structure is unresolved; the precise ownership percentages between GDP LLC and GIG are not publicly confirmed.<sup>[LittleSis rel 2043488, bisbase:DK1670228]</sup></p><p>GDP LLC is registered in Delaware, where LLC formation documents do not require public disclosure of members under state law. The ArcticToday and Irish Times investigations confirmed the investments were not publicly disclosed through any accessible registry at the time of reporting.<sup>[registry-search, ArcticToday/Irish Times 2025]</sup></p>",
+        "content": "<p>According to investigative reporting and Danish registry data, GDP LLC sits at the top of a three-tier structure. The LLC (Delaware entity #766) holds a stake in Greenland Investment Group ApS (#782), a Greenland/Denmark private limited company co-founded by J\u00f8rgen W\u00e6ver Johansen, and a 25\u201333.32% minority stake in Greenland Water Bank ApS (#790, CVR 12941218).<sup>[bisbase:DK1670228, ArcticToday/Politiken]</sup> The majority position in Greenland Water Bank (66.67\u201389.99%) is held by Greenland Invest ApS, the Danish holding company in which <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> holds a 50\u201366.65% direct stake and chairs since 2015.<sup>[ownr.dk, bisbase]</sup></p><p>A LittleSis entry records the ownership direction as GIG owning GDP LLC rather than the reverse \u2014 this conflicts with bisbase data showing GDP LLC as the direct owner of Greenland Water Bank. Whether this reflects a data-entry error in LittleSis or a genuinely circular structure is unresolved; the precise ownership percentages between GDP LLC and GIG are not publicly confirmed.<sup>[LittleSis rel 2043488, bisbase:DK1670228]</sup></p><p>GDP LLC is registered in Delaware, where LLC formation documents do not require public disclosure of members under state law. The ArcticToday and Irish Times investigations confirmed the investments were not publicly disclosed through any accessible registry at the time of reporting.<sup>[registry-search, ArcticToday/Irish Times 2025]</sup></p>",
         "viz": null
       },
       {
         "id": "key-people",
         "title": "Key People",
-        "content": "<p><strong><a href='/dossiers/ronald-lauder'>Ronald Lauder</a></strong> is the confirmed investor behind GDP LLC (LittleSis ID 5617, SEC CIK 0000942617). He published a February 2025 New York Post op-ed defending the Trump Greenland acquisition concept and stated he had worked closely with Greenland business and government leaders for years. John Bolton's memoir records Lauder as the person who originated the Greenland purchase idea with Trump. Lauder contributed $5 million to MAGA Inc. in March 2025, $1 million to the Trump Inaugural in December 2024, and additional sums to Security Is Strength PAC, Grow The Majority, and One Team Senate Majority.<sup>[LittleSis 5617, FEC, Bolton memoir, NYPost Feb 2025]</sup> His son-in-law Kevin Warsh — married to Lauder's daughter Jane — was nominated by Trump as Federal Reserve Chair in March 2026.<sup>[FEC, LittleSis]</sup> No FARA registrations or LDA lobbying filings exist for Lauder in connection with Greenland.<sup>[LittleSis 5617]</sup></p><p><strong>Josette Sheeran</strong> leads the portfolio as Chair of both GIG (from 2025-10-16) and Greenland Water Bank ApS (from 2025-07-31).<sup>[bisbase GWB registry, bisbase GIG registry]</sup> Concurrently, Sheeran serves as founder/CEO of Firefly Global Group (geopolitical consulting), board member of Capital Group (which manages over $2.5 trillion), board member of Mars Incorporated, and trustee of the McCain Institute. Prior government and multilateral roles include Executive Director of the World Food Programme, Vice Chair of the World Economic Forum, and US Deputy Secretary of State under the Bush administration. LittleSis records also list her as a Clinton Global Initiative member. In an EDGAR S-4/A filing dated 2025-01-30, she consented to be named director of Trailblazer Holdings Inc./Cyabra Strategy Ltd.; she previously served on the board of Canoo Inc. (GOEV).<sup>[bisbase, LittleSis 82179, EDGAR S-4/A 2025-01-30, LinkedIn]</sup> Before her diplomatic career, she was a member of the Unification Church and worked as an editor at the Washington Times.<sup>[ArcticToday/Politiken]</sup></p><p><strong>Jørgen Wæver Johansen</strong> is CEO/Director of Greenland Water Bank ApS and co-founder of Greenland Investment Group. He is the chairman of the governing Siumut party and a former Greenlandic MP (1999–2008), four-term cabinet minister, and Mayor of South Greenland. He and <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> sold partial stakes in Greenland Water Bank to the Lauder consortium. His wife is Vivian Motzfeldt, Greenland's Foreign Minister since 2022, who previously served on the Greenland Water Bank board until 2018 — before the Lauder consortium's entry — and who now negotiates Greenland's relationship with the United States while her husband is CEO of a company the Lauder group partially owns. Greenlandic media outlet Sermitsiaq documented the conflict of interest.<sup>[bisbase GWB, LittleSis rel 2043488, Sermitsiaq]</sup></p><p><strong><a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a></strong> is co-owner of Greenland Water Bank ApS (board member from July 2025) and holds a 50–66.65% stake in Greenland Invest ApS, the majority owner of GWB. He is simultaneously General Manager Greenland for Energy Transition Minerals (ASX:ETM, appointed May 2025) — which controls the Kvanefjeld REE/uranium deposit — and a business partner of <a href='/dossiers/drew-horn'>Drew Horn</a> (<a href=\"/dossiers/greenmet\">GreenMet</a> CEO, former Pence policy director) on an AI data center in Kangerlussuaq and a seaweed treatment project. Hardenberg holds 21 documented Danish business roles and is the primary Greenlandic intermediary connecting the Lauder consortium to the <a href=\"/dossiers/greenmet\">GreenMet</a> network, a network that presents publicly as separate from the Lauder consortium despite sharing Hardenberg as an intermediary [Finding #6352].<sup>[ownr.dk, LittleSis, bisbase, ArcticToday]</sup></p>",
+        "content": "<p><strong><a href='/dossiers/ronald-lauder'>Ronald Lauder</a></strong> is the confirmed investor behind GDP LLC (LittleSis ID 5617, SEC CIK 0000942617). He published a February 2025 New York Post op-ed defending the Trump Greenland acquisition concept and stated he had worked closely with Greenland business and government leaders for years. John Bolton's memoir records Lauder as the person who originated the Greenland purchase idea with Trump. Lauder contributed $5 million to MAGA Inc. in March 2025, $1 million to the Trump Inaugural in December 2024, and additional sums to Security Is Strength PAC, Grow The Majority, and One Team Senate Majority.<sup>[LittleSis 5617, FEC, Bolton memoir, NYPost Feb 2025]</sup> His son-in-law Kevin Warsh \u2014 married to Lauder's daughter Jane \u2014 was nominated by Trump as Federal Reserve Chair in March 2026.<sup>[FEC, LittleSis]</sup> No FARA registrations or LDA lobbying filings exist for Lauder in connection with Greenland.<sup>[LittleSis 5617]</sup></p><p><strong>Josette Sheeran</strong> leads the portfolio as Chair of both GIG (from 2025-10-16) and Greenland Water Bank ApS (from 2025-07-31).<sup>[bisbase GWB registry, bisbase GIG registry]</sup> Concurrently, Sheeran serves as founder/CEO of Firefly Global Group (geopolitical consulting), board member of Capital Group (which manages over $2.5 trillion), board member of Mars Incorporated, and trustee of the McCain Institute. Prior government and multilateral roles include Executive Director of the World Food Programme, Vice Chair of the World Economic Forum, and US Deputy Secretary of State under the Bush administration. LittleSis records also list her as a Clinton Global Initiative member. In an EDGAR S-4/A filing dated 2025-01-30, she consented to be named director of Trailblazer Holdings Inc./Cyabra Strategy Ltd.; she previously served on the board of Canoo Inc. (GOEV).<sup>[bisbase, LittleSis 82179, EDGAR S-4/A 2025-01-30, LinkedIn]</sup> Before her diplomatic career, she was a member of the Unification Church and worked as an editor at the Washington Times.<sup>[ArcticToday/Politiken]</sup></p><p><strong>J\u00f8rgen W\u00e6ver Johansen</strong> is CEO/Director of Greenland Water Bank ApS and co-founder of Greenland Investment Group. He is the chairman of the governing Siumut party and a former Greenlandic MP (1999\u20132008), four-term cabinet minister, and Mayor of South Greenland. He and <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> sold partial stakes in Greenland Water Bank to the Lauder consortium. His wife is Vivian Motzfeldt, Greenland's Foreign Minister since 2022, who previously served on the Greenland Water Bank board until 2018 \u2014 before the Lauder consortium's entry \u2014 and who now negotiates Greenland's relationship with the United States while her husband is CEO of a company the Lauder group partially owns. Greenlandic media outlet Sermitsiaq documented the conflict of interest.<sup>[bisbase GWB, LittleSis rel 2043488, Sermitsiaq]</sup></p><p><strong><a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a></strong> is co-owner of Greenland Water Bank ApS (board member from July 2025) and holds a 50\u201366.65% stake in Greenland Invest ApS, the majority owner of GWB. He is simultaneously General Manager Greenland for Energy Transition Minerals (ASX:ETM, appointed May 2025) \u2014 which controls the Kvanefjeld REE/uranium deposit \u2014 and a business partner of <a href='/dossiers/drew-horn'>Drew Horn</a> (<a href=\"/dossiers/greenmet\">GreenMet</a> CEO, former Pence policy director) on an AI data center in Kangerlussuaq and a seaweed treatment project. Hardenberg holds 21 documented Danish business roles and is the primary Greenlandic intermediary connecting the Lauder consortium to the <a href=\"/dossiers/greenmet\">GreenMet</a> network, a network that presents publicly as separate from the Lauder consortium despite sharing Hardenberg as an intermediary [Finding #6352].<sup>[ownr.dk, LittleSis, bisbase, ArcticToday]</sup></p>",
         "viz": null
       },
       {
         "id": "operating-assets",
         "title": "Operating Assets",
-        "content": "<p><strong>Greenland Water Bank ApS</strong> (CVR 12941218) was incorporated on 2016-12-09 and is registered at Inspektørbakken 35, st., Postboks 836, 3900 Nuuk. It bottles Lyngmark Spring water from Qeqertarsuaq, Disko Island, under the brand Imivik on a 20-year license. The company's registered address is a former school building in Nuuk with new security cameras installed. Financial performance has been consistently negative: the 2024 annual result was a loss of 20,014 DKK, with total assets of 699,000 DKK. The original founders, <a href=\"/dossiers/svend-hardenberg\">Svend Hardenberg</a> and Jørgen Wæver Johansen, sold partial stakes to the Lauder consortium; GDP LLC now holds 25–33.32% with the majority remaining under Greenland Invest ApS.<sup>[bisbase CVR 12941218, ArcticToday, Fortune, CNBC]</sup></p><p><strong>Greenland Investment Group ApS</strong> (#782) is the primary operating entity for the consortium's energy ambitions. GIG is bidding for the Tasersiaq hydropower concession at Greenland's largest lake (65 km long, southwest Greenland), announced by Greenland Minister Kalistat Lund. The projected output ranges from 680 MW to 2,250 MW; the project is conceived as the power source for an aluminium smelter. The license tender round is expected in the second half of 2026. No LDA lobbying filings, EDGAR filings, or SAM/USASpending records have been found for GIG.<sup>[bisbase GIG, ArcticToday, Fortune, Irish Times]</sup></p>",
+        "content": "<p><strong>Greenland Water Bank ApS</strong> (CVR 12941218) was incorporated on 2016-12-09 and is registered at Inspekt\u00f8rbakken 35, st., Postboks 836, 3900 Nuuk. It bottles Lyngmark Spring water from Qeqertarsuaq, Disko Island, under the brand Imivik on a 20-year license. The company's registered address is a former school building in Nuuk with new security cameras installed. Financial performance has been consistently negative: the 2024 annual result was a loss of 20,014 DKK, with total assets of 699,000 DKK. The original founders, <a href=\"/dossiers/svend-hardenberg\">Svend Hardenberg</a> and J\u00f8rgen W\u00e6ver Johansen, sold partial stakes to the Lauder consortium; GDP LLC now holds 25\u201333.32% with the majority remaining under Greenland Invest ApS.<sup>[bisbase CVR 12941218, ArcticToday, Fortune, CNBC]</sup></p><p><strong>Greenland Investment Group ApS</strong> (#782) is the primary operating entity for the consortium's energy ambitions. GIG is bidding for the Tasersiaq hydropower concession at Greenland's largest lake (65 km long, southwest Greenland), announced by Greenland Minister Kalistat Lund. The projected output ranges from 680 MW to 2,250 MW; the project is conceived as the power source for an aluminium smelter. The license tender round is expected in the second half of 2026. No LDA lobbying filings, EDGAR filings, or SAM/USASpending records have been found for GIG.<sup>[bisbase GIG, ArcticToday, Fortune, Irish Times]</sup></p>",
         "viz": null
       },
       {
         "id": "network-position",
         "title": "Network Position",
-        "content": "<p>Cross-referencing corporate registry data and investigative reporting, GDP LLC is one of at least three distinct Trump-allied investor networks operating simultaneously in Greenland's resource sector. The Lauder consortium (GDP LLC → GIG → Greenland Water Bank) focuses on water and hydropower; the <a href=\"/dossiers/greenmet\">GreenMet</a> network (Horn / <a href=\"/dossiers/george-sorial\">Sorial</a> / Schiller → Tanbreez → <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a>) focuses on rare earths; and <a href=\"/dossiers/erik-prince\">Erik Prince</a> has publicly advocated Greenland acquisition without having registered entities. <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> bridges all three: he is simultaneously a co-owner of Greenland Water Bank in the Lauder consortium, a business partner of <a href=\"/dossiers/drew-horn\">Drew Horn</a> on unrelated Greenland ventures, and General Manager of ETM's Greenland arm (a third rare-earth deposit, Kvanefjeld). Horn's 2-hop network graph places Lauder two hops away via Hardenberg, making Hardenberg the structural link between operations that present publicly as separate [Findings #6352, #6376].<sup>[LittleSis, ownr.dk]</sup></p><p><a href=\"/dossiers/ronald-lauder\">Ronald Lauder</a> has no FARA registrations and no LDA lobbying filings connected to Greenland. GIG has no lobbying, EDGAR, or SAM records. No registered lobbying channels have been identified for the consortium.<sup>[LittleSis 5617, LDA search, SAM search]</sup></p>",
+        "content": "<p>Cross-referencing corporate registry data and investigative reporting, GDP LLC is one of at least three distinct Trump-allied investor networks operating simultaneously in Greenland's resource sector. The Lauder consortium (GDP LLC \u2192 GIG \u2192 Greenland Water Bank) focuses on water and hydropower; the <a href=\"/dossiers/greenmet\">GreenMet</a> network (Horn / <a href=\"/dossiers/george-sorial\">Sorial</a> / Schiller \u2192 Tanbreez \u2192 <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a>) focuses on rare earths; and <a href=\"/dossiers/erik-prince\">Erik Prince</a> has publicly advocated Greenland acquisition without having registered entities. <a href='/dossiers/svend-hardenberg'>Svend Hardenberg</a> bridges all three: he is simultaneously a co-owner of Greenland Water Bank in the Lauder consortium, a business partner of <a href=\"/dossiers/drew-horn\">Drew Horn</a> on unrelated Greenland ventures, and General Manager of ETM's Greenland arm (a third rare-earth deposit, Kvanefjeld). Horn's 2-hop network graph places Lauder two hops away via Hardenberg, making Hardenberg the structural link between operations that present publicly as separate [Findings #6352, #6376].<sup>[LittleSis, ownr.dk]</sup></p><p><a href=\"/dossiers/ronald-lauder\">Ronald Lauder</a> has no FARA registrations and no LDA lobbying filings connected to Greenland. GIG has no lobbying, EDGAR, or SAM records. No registered lobbying channels have been identified for the consortium.<sup>[LittleSis 5617, LDA search, SAM search]</sup></p>",
         "viz": "ego_network"
       }
     ],
     "open_questions": [
-      "What is GDP LLC’s exact ownership percentage in Greenland Investment Group ApS? The bisbase data quantifies GWB at 25–33.32% but no equivalent figure is confirmed for GIG.",
+      "What is GDP LLC\u2019s exact ownership percentage in Greenland Investment Group ApS? The bisbase data quantifies GWB at 25\u201333.32% but no equivalent figure is confirmed for GIG.",
       "Who are the other members of GDP LLC beyond Lauder and Sheeran? Delaware law permits full non-disclosure; investigative reporting has not named additional members.",
       "When was GDP LLC formed? No formation date, registered agent, or operating agreement has surfaced in any accessible registry or filing.",
       "Has GDP LLC or any affiliated entity submitted a FARA registration for activities that could constitute representation of a foreign political party (Siumut) or Greenland governmental interest, given the Johansen/Motzfeldt relationship?",
-      "What is the valuation basis for GDP LLC’s GWB stake given the company has operated at a loss for nearly a decade with total assets of 699,000 DKK?",
-      "Did Greenland Foreign Minister Vivian Motzfeldt recuse from any US-Greenland sovereignty or trade discussions that intersected with the Lauder consortium’s commercial interests, and has the Greenlandic government made any formal conflict-of-interest determination?",
+      "What is the valuation basis for GDP LLC\u2019s GWB stake given the company has operated at a loss for nearly a decade with total assets of 699,000 DKK?",
+      "Did Greenland Foreign Minister Vivian Motzfeldt recuse from any US-Greenland sovereignty or trade discussions that intersected with the Lauder consortium\u2019s commercial interests, and has the Greenlandic government made any formal conflict-of-interest determination?",
       "Does the LittleSis ownership entry (recording GIG as owner of GDP LLC rather than the reverse) reflect a data error or a layered structure not visible in public registries?"
     ],
     "applicable_models": [
       "jurisdictional-arbitrage",
       "bridge-tax"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Greenland Development Partners LLC",
-      "connections": [
-        {
-          "target": "Greenland Investment Group",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Lauder consortium bought stakes from GIG"
-        },
-        {
-          "target": "Greenland Investment Group",
-          "type": "owns",
-          "strength": 1,
-          "evidence_ref": "ArcticToday",
-          "description": "GDP LLC (Delaware) owns stake in Greenland Investment Group"
-        },
-        {
-          "target": "Greenland Water Bank",
-          "type": "owns",
-          "strength": 1,
-          "evidence_ref": "ArcticToday",
-          "description": "GDP consortium acquired partial ownership from Hardenberg and Johansen"
-        }
-      ],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": []
   }
 }

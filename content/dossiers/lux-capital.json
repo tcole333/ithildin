@@ -1,0 +1,994 @@
+{
+  "name": "Lux Capital",
+  "slug": "lux-capital",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.265944",
+  "last_updated": "2026-03-24T14:18:06",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 17,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "relationship": 3,
+      "intelligence": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "funds": 10,
+      "employment": 2,
+      "advisory": 3,
+      "financial": 2
+    },
+    "last_updated": "2026-03-24T14:18:06"
+  },
+  "findings": [
+    {
+      "id": 7604,
+      "finding_type": "financial",
+      "summary": "Lux Capital complete EDGAR entity structure and fund architecture",
+      "detail": "SEC EDGAR reveals Lux Capital corporate structure: Lux Capital Management LLC (CIK 0001592843, GP entity at 920 Broadway 11th Floor, New York NY 10010), fund entities: Lux Ventures II LP (CIK 0001592755), Lux Ventures IV LP (CIK 0001633331), Lux Venture Partners IV LLC (CIK 0001633332), Lux Co-Invest Partners LLC (CIK 0001722021), Lux Co-Invest Opportunities LP (CIK 0001722022), Lux Health Tech Acquisition Corp (CIK 0001823767, SPAC). 14 filings from management entity including SC 13D/13G ownership filings on public portfolio companies (Science 37, Recursion Pharma, Evolv Technologies). Co-invest vehicles suggest syndication deals alongside main funds.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:04:50",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1592843",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR entity lookup for Lux Ventures: 520 filings across 10 registered entities",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7606,
+      "finding_type": "relationship",
+      "summary": "Lux Capital military-intelligence revolving door: former CIA Director, SOCOM Commander, and Navy acquisition chief as partners",
+      "detail": "Lux Capital has recruited three senior former military/intelligence officials as partners: (1) R. James Woolsey, former Director of Central Intelligence (CIA Director 1993-1995), joined as Partner circa 2011. (2) Gen. Raymond A. Thomas III, former Commander of US Special Operations Command (SOCOM), joined as Venture Partner in Jan 2020. (3) James F. Geurts, former Assistant Secretary of the Navy for Research, Development and Acquisition (ASN RDA) -- the Navy's top procurement official -- joined as Venture Partner in Jan 2022. This represents a systematic pipeline from the highest levels of defense/intelligence leadership directly into a VC fund investing in companies that sell to those same agencies. Geurts in particular oversaw Navy R&D acquisition, then joined a fund that invests in Anduril, which sells autonomous systems to the Navy.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:02",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 271769 (Geurts) Venture Partner at Lux Capital since 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 37798 (Woolsey) relationship to Lux Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 412600 (Thomas) Venture Partner at Lux Capital since 2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7608,
+      "finding_type": "financial",
+      "summary": "Lux Capital FEC donations: leadership donates predominantly Democratic, contrasting Thiel-network VCs",
+      "detail": "FEC records show Lux Capital partners donate predominantly to Democrats, contrasting sharply with Founders Fund/8VC Republican alignment. Josh Wolfe (co-founder): $7K to Mark Warner (D-VA, 2025), $5.8K to Maggie Hassan (D-NH, 2022), $1K to Pat Ryan/Maria Cantwell, $2K to Pete Visclosky (D-IN, 2007). Peter Hebert (co-founder): $7K to Haley Stevens (D-MI, 2025), $7K to Eric Jones (D, 2025). Deena Shakir (partner): $7K+ to Ro Khanna (D-CA), $7K Jon Ossoff (D-GA), $7K Pat Ryan (D-NY), $5K Next 50 PAC. All ActBlue-routed. Combined identified Lux employee donations are exclusively Democratic. This positions Lux as the bipartisan bridge in defense-tech VC: they co-invest with Thiel/Founders Fund/a16z on defense companies while their leadership funds the opposing party.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:17",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor search: Wolfe, Josh employer Lux (15 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC employer search: Lux Capital (20 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7609,
+      "finding_type": "financial",
+      "summary": "Lux Capital lobbying: $240K+ via Invariant LLC on AI policy and China policy (2023-2024)",
+      "detail": "Senate LDA filings show Lux Capital retained Invariant LLC as lobbyist from Q2 2023 through Q3 2025. Reported amounts: Q2 2023 $30K, Q3 2023 $70K, Q4 2023 $30K, Q1 2024 $30K, Q2 2024 $30K, Q3 2024 $30K, Q4 2024 $20K = $240K total. Lobbying issues: Science/Technology (all quarters) and Foreign Relations (Q2-Q3 2023). Specific activities: 'Educate policymakers about artificial intelligence policy' and 'Educate policymakers about China related policy developments.' Lobbyists: Jennifer Jacoby, Joel Richard, Melanie Harris, Samual Love. Q1-Q3 2025 filings show continued engagement but no reported amounts. Invariant LLC is a well-connected DC lobbying firm.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:05:28",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate LDA lobbying client search: Lux Capital (11 filings)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7613,
+      "finding_type": "financial",
+      "summary": "Lux Capital fund scale: $1.5B Fund IX (Jan 2026) + $200M dedicated defense fund, total AUM approaching $7B",
+      "detail": "Lux Capital closed Fund IX at $1.5B in Jan 2026, their largest ever. Additionally raising $200M for Lux Defense Leaders, their first industry-specific vehicle dedicated entirely to defense tech. Prior funds include Lux Ventures II through VIII. Total AUM approaching $7B per MainStreet Media analysis. Founded 2000 by Josh Wolfe, Peter Hebert, Robert Paull. HQ: 920 Broadway, 11th Floor, New York NY 10010 with Menlo Park CA office. Key defense-tech portfolio: Anduril (seed investor 2017), Saildrone (Series A 2016), Hadrian (co-led $260M Series C with Founders Fund, Jul 2025), Astranis, Planet, Primer AI, Evolv Technologies, Echodyne.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:09:01",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MainStreet Media: Lux Capital $7B shadow",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook: Lux Capital raising $200M for dedicated defense tech venture fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch Jan 2026: Lux Capital lands $1.5B for its largest fund ever",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7614,
+      "finding_type": "relationship",
+      "summary": "Lux Capital co-investment overlap map: Hadrian co-led with Founders Fund, shared investors across Anduril/Saronic/defense network",
+      "detail": "Lux Capital and Founders Fund co-led Hadrian's $260M Series C (Jul 2025), with a16z also participating. This is a direct co-investment between the two funds. Lux is also a seed/early investor in Anduril alongside Founders Fund and a16z. Portfolio company Saildrone competes in autonomous maritime domain with Saronic (backed by a16z, 8VC, General Catalyst -- not Lux). Evolv Technologies (EVLV, Lux portfolio) received government security contracts. Key co-investment overlaps: Lux + Founders Fund (Hadrian, Anduril, Erebor Bank), Lux + a16z (Hadrian, Anduril), Lux + 8VC (Anduril). Unlike Founders Fund and 8VC where the overlap is driven by shared founders (Thiel, Lonsdale), the Lux overlap is purely co-investment based.",
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:09:13",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Jul 2025: Hadrian $260M Series C led by Founders Fund and Lux Capital with a16z participation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: Lux Capital ownership of Anduril Industries",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Lux Q2 2025 Report listing portfolio companies",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7615,
+      "finding_type": "relationship",
+      "summary": "Brett McGurk (Biden's top Middle East envoy) joins Lux Capital as Venture Partner, Feb 2025",
+      "detail": "Brett McGurk, former Deputy Assistant to President Biden and White House Coordinator for the Middle East, joined Lux Capital as Venture Partner in February 2025. McGurk served as Special Presidential Envoy under Obama and Trump, led the 80-nation coalition to defeat ISIS, and led secret negotiations with Iran for hostage releases. At Lux, he helps founders navigate international cooperation and defense-tech diplomacy. This adds to Lux's pattern of recruiting senior national security officials: CIA Director Woolsey (2011), SOCOM Commander Tony Thomas (2020), and now McGurk (2025). This bipartisan approach (Obama/Trump/Biden official) differentiates Lux from the partisan Thiel network.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:09:25",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Jewish Insider: Biden Mideast advisor Brett McGurk moves to VC, joins Lux Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Lux Capital blog: The New Frontier of Tech Diplomacy: Brett McGurk Joins Lux Capital as Venture Partner",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7648,
+      "finding_type": "intelligence",
+      "summary": "SYSTEMIC: Lux Capital occupies unique bipartisan position in defense-tech VC ecosystem -- Democratic donors with Republican co-investors, bipartisan advisors spanning CIA/SOCOM/White House",
+      "detail": "Lux Capital occupies a structurally unique position in the defense-tech VC ecosystem. Unlike Founders Fund (Thiel, heavily Republican), 8VC (Lonsdale, Republican), or a16z (mixed but trending Republican), Lux leadership donates exclusively Democratic while co-investing with all three Republican-aligned funds. Key structural elements: (1) BIPARTISAN ADVISOR PIPELINE: Former CIA Director Woolsey (2011), former SOCOM Commander Tony Thomas (2020), former Biden Middle East envoy Brett McGurk (2025) -- spanning intelligence, military, and diplomatic leadership from both parties. (2) CO-INVESTMENT BRIDGES: Lux co-led Hadrian with Founders Fund, co-invested in Anduril alongside FF/a16z, led Erebor Bank round with FF/8VC/a16z. (3) DEMOCRATIC POLITICAL COVER: FEC shows Wolfe donates to Warner, Hassan; Hebert to Stevens; Shakir to Khanna, Ossoff. Combined with $240K lobbying on AI/China policy. (4) DEFENSE PORTFOLIO: $22M+ traceable government contracts across portfolio (Saildrone $17.6M, Primer $4.5M, Matterport $8K, plus untraceable Anduril billions). (5) SCALE: $1.5B Fund IX + $200M dedicated defense fund, approaching $7B total AUM. 9 fund generations since 2000. This makes Lux the connective tissue between the Republican-aligned Thiel defense network and the Democratic establishment -- a bridge investor that ensures defense-tech companies have political access regardless of which party controls government.",
+      "source_datasets": [
+        "fec",
+        "lobbying",
+        "littlesis",
+        "usaspending",
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:56",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC: Hadrian co-led with Founders Fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=9+fund+generations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC employer search: Lux Capital (all Democratic)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA lobbying: $240K via Invariant LLC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: Woolsey, Thomas, McGurk as advisors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: Saildrone $17.6M, Primer $4.5M",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7651,
+      "finding_type": "negative_result",
+      "summary": "CORRECTION: LittleSis incorrectly lists James Geurts as Lux Capital Venture Partner; he is actually at Anzu Partners",
+      "detail": "LittleSis entity 271769 shows James F Geurts as having a position (Venture Partner) at Lux Capital since Jan 2022. However, web search confirms Geurts actually joined Anzu-Green Critical Technologies Fund as Venture Partner (announced Dec 2024). Geurts served as ASN RD&A (2017-2021) and Under Secretary of the Navy. The LittleSis data appears to be an error. Confirmed Lux Capital venture partners/advisors are: R. James Woolsey (CIA Director, since 2011), Gen. Tony Thomas (SOCOM, since 2020), Brett McGurk (Biden Middle East envoy, since Feb 2025), Robert Paull (co-founder), Zack Schildhorn, Thomas Reardon.",
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:08",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessWire Dec 2024: Geurts joins Anzu-Green fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 271769 (incorrect attribution)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "luxcapital.com/advisors: no Geurts listed",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7662,
+      "finding_type": "financial",
+      "summary": "Lux Capital defense portfolio: $102M+ traceable USASpending contracts across 6 portfolio companies (excluding Anduril billions)",
+      "detail": "USASpending analysis of Lux Capital's defense-tech portfolio companies reveals $102M+ in traceable government contracts (excluding Anduril, which has billions in classified/IDIQ contracts): Echodyne Corp $54.9M (16 contracts: State Dept counter-drone/Ukraine, CBP border radar, Navy, Air Force, NASA), Astranis Space Technologies $18.9M (7 contracts: Air Force protected comms satellites, NASA), Saildrone Inc $17.6M (20 contracts: Coast Guard maritime ISR, Navy, NOAA), Applied Intuition $5.8M (5 contracts: Army/Air Force sensor simulation, has dedicated govt subsidiary), Primer Technologies $4.5M (5 contracts: SOCOM social media monitoring, Air Force), Evolv Technologies $0.1M (1 contract: Army screening equipment). Agencies represented: DoD (Army, Navy, Air Force, SOCOM, MDA), DHS (Coast Guard, CBP), State Dept, NASA, NOAA, USGS, DOT/FAA, DOC. The State Dept $50M to Echodyne for Ukraine counter-drone operations is particularly notable for its scale and geopolitical significance.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:30",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: aggregate search across Echodyne, Astranis, Saildrone, Applied Intuition, Primer, Evolv",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7665,
+      "finding_type": "financial",
+      "summary": "Lux Capital complete fund genealogy from EDGAR Form D filings: 9 generations of funds (2000-2026)",
+      "detail": "EDGAR Form D filings reveal the complete Lux fund architecture across 9 generations, all Delaware LPs (except Cayman III): Lux Ventures II LP (CIK 0001592755), Lux Ventures III LP (CIK 0001534238, filed Nov 2011), Lux Ventures III Special Founders Fund LP (CIK 0001534241, filed Jan 2012), Lux Ventures Cayman III LP (CIK 0001569760, Cayman Islands E9, filed Feb 2013), Lux Ventures IV LP (CIK 0001633331, filed Feb 2015), Lux Ventures V LP (CIK 0001698008, filed Mar 2017), Lux Ventures VI LP (CIK 0001783918, filed Aug 2019), Lux Ventures VI Sidecar LP (CIK 0001783917, filed Aug 2019), Lux Ventures VII LP (CIK 0001864660, filed Jun 2021), Lux Ventures VII Entrepreneurs Fund LP (CIK 0001864659, filed Jun 2021), Lux Ventures VIII LP (CIK 0001970486, filed Apr 2023), Lux Ventures VIII Entrepreneurs Fund LP (CIK 0001970485, filed Apr 2023), Lux Ventures IX LP (CIK 0002090925, filed Dec 2025, $1.5B), Lux Ventures IX Entrepreneurs Fund LP (CIK 0002101310, filed Jan 2026). Also Lux Health Tech Acquisition Corp (CIK 0001823767, SPAC, EIN 852825321). GP entities: Lux Capital Management LLC (CIK 0001592843), Lux Venture Partners IV LLC (CIK 0001633332), Lux Co-Invest Partners LLC (CIK 0001722021), Lux Co-Invest Opportunities LP (CIK 0001722022).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:52",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR Form D search for Lux Ventures (18 filings)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR company records for CIKs 0001592843, 0001823767",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7669,
+      "finding_type": "financial",
+      "summary": "Lux Capital was investor in FTX (now bankrupt); also invested in Hugging Face, Ramp, Yonder (disinformation detection)",
+      "detail": "LittleSis relationship data shows Lux Capital ownership positions in several notable companies beyond defense: FTX (Sam Bankman-Fried's crypto exchange, filed for bankruptcy Nov 2022 in one of the largest financial frauds in US history), Hugging Face (leading open-source AI/ML platform, two separate ownership entries), Ramp (corporate fintech), Yonder/formerly New Knowledge (disinformation detection startup, invested 2018), Nervana (AI chip company acquired by Intel), Strateos (robotic cloud laboratory), EvolutionaryScale (AI for biological research), Planet (satellite imaging), 3scan (microscopy AI). The FTX investment represents a notable loss; the Hugging Face and Planet investments represent AI/space infrastructure plays. Yonder/New Knowledge is interesting given Lux's national security focus -- it was a disinformation detection company.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:17:47",
+      "target_name": "Lux Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: 19 relationships for Lux Capital entity 412075",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3798,
+      "person_a": "Erebor Bank",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Lux Capital led Erebor Bank's $350M raise at $4.35B valuation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:18",
+      "profile_id": null,
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": []
+    },
+    {
+      "id": 3841,
+      "person_a": "Josh Wolfe",
+      "person_b": "Lux Capital",
+      "relationship_type": "employment",
+      "description": "Co-founder and Managing Partner",
+      "strength": "strong",
+      "date_range": "2000-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:06",
+      "profile_id": "tech-right",
+      "other_person": "Josh Wolfe",
+      "other_person_slug": "josh-wolfe",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1830001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 368225",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3842,
+      "person_a": "Lux Capital",
+      "person_b": "Peter Hebert",
+      "relationship_type": "employment",
+      "description": "Co-founder, based in Menlo Park CA",
+      "strength": "strong",
+      "date_range": "2000-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:11",
+      "profile_id": "tech-right",
+      "other_person": "Peter Hebert",
+      "other_person_slug": "peter-hebert",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1683771",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 421178",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3843,
+      "person_a": "Lux Capital",
+      "person_b": "R. James Woolsey",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since 2011. Former CIA Director (1993-1995). Revolving door: intelligence to defense-tech VC.",
+      "strength": "strong",
+      "date_range": "2011-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:17",
+      "profile_id": "tech-right",
+      "other_person": "R. James Woolsey",
+      "other_person_slug": "r-james-woolsey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessWire Apr 2011 announcement",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 37798",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3844,
+      "person_a": "Lux Capital",
+      "person_b": "Raymond A. Thomas",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since Jan 2020. Retired 4-star general, former Commander of USSOCOM (11th Commander). Works with Lux portfolio companies on strategy, team building, and advancing technologies for defense.",
+      "strength": "strong",
+      "date_range": "2020-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:23",
+      "profile_id": "tech-right",
+      "other_person": "Raymond A. Thomas",
+      "other_person_slug": "raymond-a-thomas",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 412600",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "luxcapital.com/advisors/tony-thomas",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3845,
+      "person_a": "Brett McGurk",
+      "person_b": "Lux Capital",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since Feb 2025. Former Deputy Assistant to President Biden, White House Coordinator for the Middle East. Served under Obama and Trump as Special Presidential Envoy.",
+      "strength": "strong",
+      "date_range": "2025-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:29",
+      "profile_id": "tech-right",
+      "other_person": "Brett McGurk",
+      "other_person_slug": "brett-mcgurk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Jewish Insider Feb 2025",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "luxcapital.com: Brett McGurk joins Lux Capital",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3846,
+      "person_a": "Anduril Industries",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Seed investor (2017). Josh Wolfe wrote personal check into Anduril seed round. Tomales Bay Capital Anduril I/II/III SPVs (Lux) hold secondary market shares. Also organized Palmer Luckey Israel defense trip (Feb 2026).",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:38",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=Tomales+Bay+Capital+Anduril+SPVs",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: Lux Capital is an owner of Anduril Industries",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3847,
+      "person_a": "Founders Fund",
+      "person_b": "Lux Capital",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: co-led Hadrian $260M Series C (Jul 2025), both invested in Anduril, both backed Erebor Bank ($350M at $4.35B). Lux donates Democratic while FF donates Republican, creating bipartisan political coverage for shared portfolio.",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:44",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC: Hadrian $260M Series C led by Founders Fund and Lux Capital",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Erebor Bank investor list",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3848,
+      "person_a": "Lux Capital",
+      "person_b": "Saildrone Inc",
+      "relationship_type": "funds",
+      "description": "Series A investor (2016). Saildrone builds autonomous surface vehicles for maritime ISR. $17.6M in government contracts.",
+      "strength": "strong",
+      "date_range": "2016-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:34",
+      "profile_id": "tech-right",
+      "other_person": "Saildrone Inc",
+      "other_person_slug": "saildrone-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: 20 Saildrone contracts",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "luxcapital.com/companies/saildrone",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3849,
+      "person_a": "Lux Capital",
+      "person_b": "Primer Technologies Inc",
+      "relationship_type": "funds",
+      "description": "Portfolio company. Primer builds NLP/AI for intelligence analysis. $4.5M+ in DoD contracts including $3M SOCOM social media monitoring contract.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:40",
+      "profile_id": "tech-right",
+      "other_person": "Primer Technologies Inc",
+      "other_person_slug": "primer-technologies-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: Lux Capital owns Primer Technologies",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: 5 Primer contracts",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3850,
+      "person_a": "Hadrian",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Co-led $260M Series C with Founders Fund (Jul 2025). Hadrian builds autonomous factories for defense/space parts. Valued at $1.6B (Jan 2026).",
+      "strength": "strong",
+      "date_range": "2022-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:45",
+      "profile_id": "tech-right",
+      "other_person": "Hadrian",
+      "other_person_slug": "hadrian",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Jul 2025: Hadrian Series C",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3851,
+      "person_a": "Evolv Technologies",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Portfolio company. Evolv makes AI weapons detection systems. Publicly traded EVLV. Lux filed SC 13D/13G ownership reports with SEC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:50",
+      "profile_id": "tech-right",
+      "other_person": "Evolv Technologies",
+      "other_person_slug": "evolv-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=26+Lux-related+filings+on+Evolv+Technologies+%28CIK+0001805385%29",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3852,
+      "person_a": "Erebor Bank",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Led Erebor Bank $350M round at $4.35B valuation. Co-investors: Founders Fund, 8VC, a16z, Haun Ventures. Erebor is defense-tech banking infrastructure.",
+      "strength": "strong",
+      "date_range": "2025-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:57",
+      "profile_id": "tech-right",
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #7033: Erebor Bank investor map",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3878,
+      "person_a": "Echodyne Corp",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Portfolio company. Echodyne makes metamaterial radar. $54.9M government contracts including $50M State Dept counter-drone/Ukraine.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:14:55",
+      "profile_id": "tech-right",
+      "other_person": "Echodyne Corp",
+      "other_person_slug": "echodyne-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: 16 Echodyne contracts",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "luxcapital.com portfolio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3879,
+      "person_a": "Astranis Space Technologies",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Portfolio company. Astranis builds small GEO comms satellites. $18.9M government contracts, primarily Air Force protected tactical waveforms.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:02",
+      "profile_id": "tech-right",
+      "other_person": "Astranis Space Technologies",
+      "other_person_slug": "astranis-space-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: 7 Astranis contracts",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "luxcapital.com portfolio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3880,
+      "person_a": "Applied Intuition Inc",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Portfolio company. Applied Intuition builds autonomous vehicle simulation. $5.8M DoD contracts. $15B valuation. Separate government subsidiary.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:08",
+      "profile_id": "tech-right",
+      "other_person": "Applied Intuition Inc",
+      "other_person_slug": "applied-intuition-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending: 5 Applied Intuition contracts",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3887,
+      "person_a": "Andreessen Horowitz (a16z)",
+      "person_b": "Lux Capital",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: both invested in Anduril and Hadrian ($260M Series C, Jul 2025). a16z also participated in Erebor Bank round with Lux.",
+      "strength": "medium",
+      "date_range": "2020-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:06",
+      "profile_id": "tech-right",
+      "other_person": "Andreessen Horowitz (a16z)",
+      "other_person_slug": "andreessen-horowitz-a16z",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC: Hadrian $260M co-led by FF and Lux, a16z participated",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Erebor Bank investor list",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2000-present",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Co-founder and Managing Partner",
+      "other_person": "Josh Wolfe",
+      "id": 3841
+    },
+    {
+      "date": "2000-present",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Co-founder, based in Menlo Park CA",
+      "other_person": "Peter Hebert",
+      "id": 3842
+    },
+    {
+      "date": "2011-present",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since 2011. Former CIA Director (1993-1995). Revolving door: intelligence to defense-tech VC.",
+      "other_person": "R. James Woolsey",
+      "id": 3843
+    },
+    {
+      "date": "2016-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Series A investor (2016). Saildrone builds autonomous surface vehicles for maritime ISR. $17.6M in government contracts.",
+      "other_person": "Saildrone Inc",
+      "id": 3848
+    },
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Seed investor (2017). Josh Wolfe wrote personal check into Anduril seed round. Tomales Bay Capital Anduril I/II/III SPVs (Lux) hold secondary market shares. Also organized Palmer Luckey Israel defense trip (Feb 2026).",
+      "other_person": "Anduril Industries",
+      "id": 3846
+    },
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: co-led Hadrian $260M Series C (Jul 2025), both invested in Anduril, both backed Erebor Bank ($350M at $4.35B). Lux donates Democratic while FF donates Republican, creating bipartisan political coverage for shared portfolio.",
+      "other_person": "Founders Fund",
+      "id": 3847
+    },
+    {
+      "date": "2020-present",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since Jan 2020. Retired 4-star general, former Commander of USSOCOM (11th Commander). Works with Lux portfolio companies on strategy, team building, and advancing technologies for defense.",
+      "other_person": "Raymond A. Thomas",
+      "id": 3844
+    },
+    {
+      "date": "2020-present",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Co-investors in defense tech: both invested in Anduril and Hadrian ($260M Series C, Jul 2025). a16z also participated in Erebor Bank round with Lux.",
+      "other_person": "Andreessen Horowitz (a16z)",
+      "id": 3887
+    },
+    {
+      "date": "2022-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Co-led $260M Series C with Founders Fund (Jul 2025). Hadrian builds autonomous factories for defense/space parts. Valued at $1.6B (Jan 2026).",
+      "other_person": "Hadrian",
+      "id": 3850
+    },
+    {
+      "date": "2025-present",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Venture Partner since Feb 2025. Former Deputy Assistant to President Biden, White House Coordinator for the Middle East. Served under Obama and Trump as Special Presidential Envoy.",
+      "other_person": "Brett McGurk",
+      "id": 3845
+    },
+    {
+      "date": "2025-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Led Erebor Bank $350M round at $4.35B valuation. Co-investors: Founders Fund, 8VC, a16z, Haun Ventures. Erebor is defense-tech banking infrastructure.",
+      "other_person": "Erebor Bank",
+      "id": 3852
+    }
+  ]
+}

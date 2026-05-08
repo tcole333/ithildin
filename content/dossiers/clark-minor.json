@@ -6,23 +6,70 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.938491",
-  "last_updated": "2026-03-09T20:55:14",
+  "generated_at": "2026-05-07T23:07:36.282464",
+  "last_updated": "2026-03-23T19:17:53",
   "stats": {
-    "total_findings": 10,
-    "total_connections": 6,
+    "total_findings": 11,
+    "total_connections": 7,
     "total_entities": 1,
     "finding_types": {
-      "relationship": 6,
       "financial": 2,
+      "relationship": 7,
       "intelligence": 2
     },
     "connection_types": {
-      "employment": 6
+      "employment": 7
     },
-    "last_updated": "2026-03-09T20:55:14"
+    "last_updated": "2026-03-23T19:17:53"
   },
   "findings": [
+    {
+      "id": 5944,
+      "finding_type": "financial",
+      "summary": "HHS awarded Palantir $6M N3C contract in Jan 2025 while Minor (Palantir 12yr vet) was being installed as HHS CTO",
+      "detail": "HHS awarded Palantir an initial contract of $6,052,451.75 plus $375,000 for 'Secure Platforms Support for the National Clinical Cohort Collaborative (N3C) Data Enclave and NIDAP' with start date January 31, 2025 and end date June 10, 2025. Clark Minor, Palantir's former Global Head of Cloud (2013-2024), was appointed HHS CTO on February 13, 2025 -- two weeks after this contract was awarded. Minor's financial disclosure shows net worth $5.2M-$19.8M including $1M-$5M in Palantir stock plus $100M-$250M range Palantir 401(k). This is in addition to existing Palantir-HHS contracts: $90M Foundry (2022, 5yr), $443M CDC modernization (2022, 5yr), $19M ARPA-H (2024, 2yr). Total Palantir-HHS transactions: nearly $300M from FY2021-2024 per Bloomberg.",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:23:02",
+      "target_name": "Clark Minor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg Palantir-HHS transactions",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop HHS CIO appointment",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosure (minor-clark)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "X/Twitter HHS-Palantir contract announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5215,
       "finding_type": "relationship",
@@ -200,53 +247,6 @@
       ]
     },
     {
-      "id": 5944,
-      "finding_type": "financial",
-      "summary": "HHS awarded Palantir $6M N3C contract in Jan 2025 while Minor (Palantir 12yr vet) was being installed as HHS CTO",
-      "detail": "HHS awarded Palantir an initial contract of $6,052,451.75 plus $375,000 for 'Secure Platforms Support for the National Clinical Cohort Collaborative (N3C) Data Enclave and NIDAP' with start date January 31, 2025 and end date June 10, 2025. Clark Minor, Palantir's former Global Head of Cloud (2013-2024), was appointed HHS CTO on February 13, 2025 -- two weeks after this contract was awarded. Minor's financial disclosure shows net worth $5.2M-$19.8M including $1M-$5M in Palantir stock plus $100M-$250M range Palantir 401(k). This is in addition to existing Palantir-HHS contracts: $90M Foundry (2022, 5yr), $443M CDC modernization (2022, 5yr), $19M ARPA-H (2024, 2yr). Total Palantir-HHS transactions: nearly $300M from FY2021-2024 per Bloomberg.",
-      "source_datasets": [
-        "web_search",
-        "propublica_disclosures"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 18:23:02",
-      "target_name": "Clark Minor",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Bloomberg Palantir-HHS transactions",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FedScoop HHS CIO appointment",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica 278 disclosure (minor-clark)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "X/Twitter HHS-Palantir contract announcement",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5946,
       "finding_type": "intelligence",
       "summary": "HHS workforce reduction of 10,000+ staff under Minor's technology leadership; DOGE agent with finance/procurement system access",
@@ -317,6 +317,46 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7336,
+      "finding_type": "relationship",
+      "summary": "Clark Minor (ex-Palantir 13yr, global head of cloud) appointed HHS CIO overseeing M in Palantir HHS contracts",
+      "detail": "Clark Minor, who spent 13 years at Palantir (Aug 2013 to Apr 2024) as global head of cloud/platform infrastructure, was appointed HHS CTO on Feb 13 2025 and subsequently became HHS CIO. He succeeds Jennifer Wendel who retired after 28 years. HHS has 405M in Palantir contracts per USASpending. Minor is identified as a DOGE agent by Revolving Door Project. His appointment places a Palantir veteran in charge of technology procurement at one of the agencies largest Palantir contract holders.",
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:11",
+      "target_name": "Clark Minor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending HHS Palantir data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/clark-minor-doge-agent/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/05/palantir-alum-appointed-top-tech-role-hhs/405180/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -347,7 +387,7 @@
       "created_at": "2026-03-06 03:55:25",
       "profile_id": "tech-right",
       "other_person": "Palantir",
-      "other_person_slug": "palantir-technologies",
+      "other_person_slug": "palantir",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -389,6 +429,28 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "fedscoop:palantir-agencies nextgov:barbaccia-cio fedscoop:minor-hhs-cio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3739,
+      "person_a": "Clark Minor",
+      "person_b": "Palantir Technologies Inc.",
+      "relationship_type": "employment",
+      "description": "Minor employed at Palantir for 13 years (Aug 2013-Apr 2024) as global head of cloud before becoming HHS CIO",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:53",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies Inc.",
+      "other_person_slug": "palantir-technologies-inc",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/05/palantir-alum-appointed-top-tech-role-hhs/405180/",
           "source_quote": null,
           "source_page": null
         }
@@ -438,7 +500,16 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-01-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "HHS awarded Palantir $6M N3C contract in Jan 2025 while Minor (Palantir 12yr vet) was being installed as HHS CTO",
+      "confidence": "high",
+      "id": 5944
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5944,
@@ -559,206 +630,5 @@
     "applicable_models": [
       "revolving-door"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Clark Minor",
-      "connections": [
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir engineer deployed as DOGE CIO of HHS. HHS Medicaid data feeds Palantir ELITE targeting tool \u2014 direct conflict between CIO authority and Palantir commercial interest."
-        },
-        {
-          "target": "Palantir",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "FedScoop; Bloomberg; ProPublica disclosure minor-clark",
-          "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts"
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "13-yr Palantir veteran became HHS CIO May 2025, oversees largest civilian agency IT budget"
-        },
-        {
-          "target": "Gregory Barbaccia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "fedscoop:palantir-agencies nextgov:barbaccia-cio fedscoop:minor-hhs-cio",
-          "description": "Both are Palantir alumni now in senior federal IT roles (Minor: HHS CIO, Barbaccia: Federal CIO at OMB). Two simultaneous Palantir-to-government placements while Palantir federal contracts near doubled."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
-        },
-        {
-          "target": "Sam Corcos",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-        }
-      ],
-      "secondHop": {
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Gregory Barbaccia": [
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
-          },
-          {
-            "target": "Thomas Shedd",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
-          },
-          {
-            "target": "Thomas Williams",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
-          }
-        ],
-        "Palantir": [
-          {
-            "target": "Thomas Williams",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation."
-          },
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI"
-          },
-          {
-            "target": "CBP",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ],
-        "Sam Corcos": [
-          {
-            "target": "Scott Kupor",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
-          },
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
-          },
-          {
-            "target": "Andreessen Horowitz",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

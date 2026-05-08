@@ -6,11 +6,11 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.964897",
-  "last_updated": "2026-03-05T20:43:09",
+  "generated_at": "2026-05-07T23:07:36.349881",
+  "last_updated": "2026-03-23T19:00:16",
   "stats": {
     "total_findings": 8,
-    "total_connections": 8,
+    "total_connections": 10,
     "total_entities": 0,
     "finding_types": {
       "financial": 4,
@@ -20,9 +20,11 @@
     "connection_types": {
       "corporate": 1,
       "employment": 3,
-      "financial": 4
+      "financial": 4,
+      "owns": 1,
+      "funds": 1
     },
-    "last_updated": "2026-03-05T20:43:09"
+    "last_updated": "2026-03-23T19:00:16"
   },
   "findings": [
     {
@@ -128,28 +130,28 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "CIK 0002041827",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2041827",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "CIK 0002051048",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2051048",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "CIK 0002056351",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2056351",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "CIK 0002076994",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2076994",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -269,7 +271,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001667766, Q4 2024 through Q4 2025; Joby Aviation press releases re DoD contracts",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1667766",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -294,7 +296,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001667766, Q4 2024 through Q4 2025; Joby Aviation press releases on DoD contracts (total value $163M)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1667766",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -435,6 +437,50 @@
       "other_person": "Joby Aviation",
       "other_person_slug": "joby-aviation",
       "evidence": []
+    },
+    {
+      "id": 3642,
+      "person_a": "8VC",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "owns",
+      "description": "Founder and managing partner of 8VC; sole managing member of 8VC GP I LLC",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:49",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1832823",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3654,
+      "person_a": "8VC",
+      "person_b": "Anduril Industries",
+      "relationship_type": "funds",
+      "description": "8VC invested in Anduril Industries",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:16",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search: 8VC portfolio includes Anduril",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -498,222 +544,5 @@
       "jurisdictional-arbitrage"
     ],
     "curated_at": "2026-03-11T22:47:13.251868+00:00"
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "8VC",
-      "connections": [
-        {
-          "target": "Joe Lonsdale",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "8vc.com",
-          "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
-        },
-        {
-          "target": "Jack Moshkovich",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Partner at 8VC since 2018 (analyst->principal->partner Jan 2025), son of sanctioned Vadim Moshkovich"
-        },
-        {
-          "target": "Denis Aven",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Investor at 8VC since 2022, son of OFAC-sanctioned Petr Aven (Alfa Group)"
-        },
-        {
-          "target": "Joe Lonsdale",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Founder and Managing Partner of 8VC; sole executive officer on all Form D filings"
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "8VC investor in Palantir; Lonsdale co-founded Palantir; Alex Moore was Palantir employee #1"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "8VC early investor in Anduril; defense technology company with billion-dollar Pentagon contracts"
-        },
-        {
-          "target": "Apollo Global Management",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Strategic partnership Oct 2025 to deploy several billion dollars in defense, manufacturing, energy"
-        },
-        {
-          "target": "Joby Aviation",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "8VC sole public equity holding: 4.8M shares of Joby Aviation ($63M), a defense eVTOL company with $163M in DoD contracts"
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          }
-        ],
-        "Apollo Global Management": [
-          {
-            "target": "Brad Karp",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Karp asked Epstein about Caesars while PW was defendant in Case 15-01145"
-          },
-          {
-            "target": "Marc Rowan",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Rowan named defendant in Caesars Case 15-01145 while Epstein tracked his liability"
-          },
-          {
-            "target": "Paul Weiss",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "PW is primary outside counsel to Apollo generating 100M+ annually and represented in 43B Athene merger. Karp handled Black fee disputes with Epstein."
-          },
-          {
-            "target": "Kirkland and Ellis",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "KE outside counsel for Apollo. 1517 SEC EDGAR filings mention both."
-          },
-          {
-            "target": "Kirkland & Ellis",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "K&E represents Apollo in numerous PE transactions including T.D. Williamson, TANAP pipeline, China data center JV, MidOcean, solar energy deals. Ongoing major client relationship."
-          }
-        ],
-        "Denis Aven": [
-          {
-            "target": "Petr Aven",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; Petr is OFAC SDN-listed oligarch, Alfa Group chairman"
-          },
-          {
-            "target": "Jack Moshkovich",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Close friends per Lonsdale; Moshkovich introduced Aven to 8VC"
-          }
-        ],
-        "Jack Moshkovich": [
-          {
-            "target": "Vadim Moshkovich",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; Vadim is EU-sanctioned oligarch, founder of Rusagro and AssistAgro (drone production)"
-          }
-        ],
-        "Joe Lonsdale": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale is Palantir co-founder, Thiel mentee. Founded 8VC. Part of Thiel defense tech network."
-          },
-          {
-            "target": "Palantir Technologies Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir"
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Erebor Bank (Columbus, OH). Both from Thiel network: Luckey via Anduril/Founders Fund, Lonsdale via Palantir/8VC. Erebor positioned as bank for defense/crypto/AI ecosystem. $4.35B valuation."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir with Thiel in 2003. Later founded 8VC which invests in Thiel-network defense companies (Palantir, Anduril). Both back Erebor Bank. Lonsdale's 8VC employs sons of sanctioned Russian oligarchs."
-          },
-          {
-            "target": "Erebor Bank",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Erebor Bank. Also founder of 8VC, co-founder of Palantir, DOGE advisor. Fundraising memo cited co-founder's 'unique connectivity to banking regulators' \u2014 likely refers to Lonsdale's connections."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

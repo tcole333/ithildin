@@ -1,0 +1,342 @@
+{
+  "name": "Runa Capital",
+  "slug": "runa-capital",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.343932",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 5,
+    "total_entities": 0,
+    "finding_types": {
+      "relationship": 6,
+      "negative_result": 2,
+      "financial": 1
+    },
+    "connection_types": {
+      "funds": 1,
+      "corporate": 2,
+      "owns": 1,
+      "employment": 1
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9793,
+      "finding_type": "relationship",
+      "summary": "11 corporate entities across 7 jurisdictions identified via OpenCorporates",
+      "detail": "OpenCorporates search reveals 11 Runa Capital entities: France (SASU, 2025, likely unrelated), California x4 (Fund III LP, Runa III Inc, two Runa Capital Inc), Florida x2, Singapore (SEA Pte Ltd, 2023), UK (Ltd, 2022), Delaware (Corp, 2012), Switzerland (AG, in liquidation, Zug). Fund III LP and Runa III Inc registered at Williams House, 4th Floor, 20 Reid Street, Hamilton, Bermuda HM11. The Delaware entity (inc. 2012-07-30) and active California entity (inc. 2015-07-08, at 595 Pacific Avenue, San Francisco) appear to be the core US operating entities. No Luxembourg entity found in OpenCorporates despite reports. Runa Capital AG in Zug, Switzerland now in liquidation.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:58:16",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates company search: Runa Capital (11 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9806,
+      "finding_type": "negative_result",
+      "summary": "No direct board interlock found between Runa Capital entities and NGINX Inc via OpenCorporates; Beloussov absent from Runa corporate filings",
+      "detail": "Cross-referencing all Runa Capital entity officers against NGINX Software Inc (us_ca/3379940, us_de/4978109) and NGINX Inc (us_de/5021656) officers reveals NO shared directors or officers in OpenCorporates. NGINX California officers: Joseph Patrick McDermott (CEO/CFO), Steven Irving Grieger (secretary). Runa Capital officers: Michael Fanfant, Peter Bauert, Gary John Carr, Vera Shokina, Miruna Sascau, Konstantin Vinogradov, Andrey Bliznyuk. No overlap. Critically, Serguei Beloussov does NOT appear as an officer on any Runa Capital entity in OpenCorporates -- his involvement as co-founder may be through equity/LP interests rather than formal officer positions. Igor Sysoev has zero corporate officer records in OpenCorporates. Gus Robertson appears only at F5 Inc (post-acquisition). Andre Elizarov not found. Dmitri Loguinov not found.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:00:02",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates entity details for NGINX Software Inc (us_ca/3379940, us_de/4978109), NGINX Inc (us_de/5021656), and all Runa Capital entities",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9807,
+      "finding_type": "relationship",
+      "summary": "Shared registered agent (INCORP SERVICES INC) between Runa Capital Inc Delaware and NGINX Software Inc Delaware",
+      "detail": "Both Runa Capital Inc (us_de/5191933, inc. 2012-07-30) and NGINX Software Inc (us_de/4978109, inc. 2011-05-04) used INCORP SERVICES, INC at 919 North Market Street, Suite 950, Wilmington, New Castle, DE 19801 as their registered agent in Delaware. While INCORP SERVICES is a common corporate service provider, the temporal proximity (NGINX incorporated May 2011, Runa July 2012) and the fact that both are in the Russian-origin tech space is notable. The newer Runa Capital Inc Florida entity (2024) also uses INCORP SERVICES at a Florida address.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:00:13",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates entity details: us_de/5191933 and us_de/4978109",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9812,
+      "finding_type": "relationship",
+      "summary": "LittleSis: DFJ Fund VIII Partners LP ownership stake in Runa Capital confirmed",
+      "detail": "LittleSis confirms DFJ Fund VIII Partners LP (entity 101815) as an owner of Runa Capital (entity 438845). Tim Draper is Managing Director of DFJ Fund VIII. This establishes the DFJ-Runa investment chain: Tim Draper -> DFJ Fund VIII -> Runa Capital -> Beloussov (founding partner).",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:01:31",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 2039376; entity 101815 (DFJ VIII) -> entity 438845 (Runa Capital); category 10 (ownership)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9816,
+      "finding_type": "relationship",
+      "summary": "LittleSis: Masha Bucher (Drokova) links Runa Capital to Alexander Mamut (CAATSA-listed Russian billionaire) via Day One Ventures",
+      "detail": "Masha Bucher (n\u00e9e Maria Alexandrovna Drokova, LittleSis entity 438844) held a position at Runa Capital and is the founder/principal of Day One Ventures. Alexander Mamut (LittleSis entity 80839, described as 'Russian investment billionaire') is listed as an owner of Day One Ventures. Mamut is also associated with CAATSA 2017 sanctions. Bucher also had a social relationship with Vladimir Putin and was a member of Nashi (pro-Putin youth movement). This represents a depth-3 chain from Beloussov: Runa Capital -> Masha Bucher -> Day One Ventures -> Alexander Mamut.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:27:18",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: entity 438844 (Masha Bucher); relationships 1935631 (position at Runa Capital), 1935680 (owner of Day One Ventures); entity 80839 (Alexander Mamut); Mamut-Day One ownership relationship",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9852,
+      "finding_type": "negative_result",
+      "summary": "No direct code-level connection found between Beloussov/Runa Capital network and nginx contributors. No @runa domain emails in git history. The Runa-NGINX connection remains at corporate/investment level (shared registered agent INCORP SERVICES INC) not developer level. Martin Duke (F5/Moscow) and Nikolay Morozov (securitycode.ru/TLS contributor) are not linked to Beloussov entities.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:57",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db full contributor email analysis; investigation.db entity cross-reference",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9870,
+      "finding_type": "financial",
+      "summary": "Runa Capital is a Cayman Islands entity (Paradise Papers) with shareholders Chikhachev, Beloussov, Galitsky, Zubarev, Shokina as CFO",
+      "detail": "Runa Capital (ICIJ node 82013273) is a Cayman Islands company incorporated 20-APR-2010, registered at Clifton House, 75 Fort Street, Grand Cayman KY1-1108. Paradise Papers (Appleby, data through 2014). Six connected officers: Alexander Galitsky (Netherlands) - Shareholder; Ilya Zubarev (Russia) - Shareholder; Dmitry Chikhachev (Russia) - Shareholder; Vera Shokina (Russia) - CFO from 30-AUG-2010; Serguei Beloussov (Singapore) - Shareholder; Reid Services Limited Cayman - Shareholder. Runa Capital also appears as Officer of Runa Capital Fund I L.P. and as Beneficiary of Technology Partners Star Trust (from 15-DEC-2010).",
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:14:53",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:80013273",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:82013273",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9969,
+      "finding_type": "relationship",
+      "summary": "Runa Capital is the dominant hub-broker in the nginx investigation graph: degree=7 (rank 1 of 29 nodes), betweenness centrality=0.687 (rank 1), brokerage score=1.0 (all 7 neighbors are disconnected from each other). It sits between NGINX Software Inc, Serguei Beloussov, Dmitry Chikhachev, DFJ Fund VIII Partners LP, Masha Bucher, DFJ Fund VIII LP, and Runa Capital Inc \u2014 controlling all information flow between these actors.",
+      "detail": "Structural observation: Runa Capital has perfect structural hole brokerage (neighbor_density=0.0, neighbor_edges=0, possible_edges=21). This means none of Runa Capital's 7 known network neighbors have documented direct connections to each other \u2014 Runa sits at the center of a star topology. In influence network analysis, this pattern is consistent with a broker or handler role, where the central node controls information flow between disconnected parties. Innocent explanation: Runa is simply a VC fund, and VC funds naturally connect to investors (DFJ, Beloussov), portfolio companies (NGINX Software Inc), and employees (Bucher, Chikhachev) who don't necessarily know each other directly. Falsification: documenting direct relationships between any two of Runa Capital's neighbors would reduce its brokerage score.",
+      "source_datasets": "graph_tools:analysis_run_37",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": []
+    },
+    {
+      "id": 9974,
+      "finding_type": "relationship",
+      "summary": "Open triad Dmitry Chikhachev \u2014 Serguei Beloussov via Runa Capital (closure_score=0.75): Both are Runa Capital co-founders and partners with corporate relationship to the same entity, yet no direct Chikhachev-Beloussov connection is documented. This is the highest-closure open triad and is statistically surprising given their shared institutional affiliation.",
+      "detail": "Triadic closure analysis identifies the Chikhachev-Beloussov triad via Runa Capital as the most likely undocumented direct relationship (score=0.75 out of 1.0). Both have 'corporate' relationship type to Runa Capital. Chikhachev is Managing Partner of Runa Capital; Beloussov is co-founding partner. Their known institutional overlap score is 0.167 (2 shared institutions). The absence of a documented direct link may reflect: (1) research gap (they obviously know each other as co-founders \u2014 the connection exists, we haven't documented it); (2) a deliberate arm's-length arrangement if their roles are compartmentalized. Action needed: document the Chikhachev-Beloussov direct relationship and check for any separate vehicles or structures they operate together outside Runa Capital.",
+      "source_datasets": "graph_tools:analysis_run_37",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "Runa Capital",
+      "profile_id": "nginx",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5093,
+      "person_a": "NGINX Software, Inc.",
+      "person_b": "Runa Capital",
+      "relationship_type": "funds",
+      "description": "Runa Capital led Series A investment in NGINX Inc (~2013). Shared registered agent (INCORP SERVICES INC) in Delaware. No direct board interlock found via OpenCorporates.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:37:50",
+      "profile_id": "nginx",
+      "other_person": "NGINX Software, Inc.",
+      "other_person_slug": "nginx-software-inc",
+      "evidence": []
+    },
+    {
+      "id": 5094,
+      "person_a": "Runa Capital",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Founding partner of Runa Capital, confirmed via LittleSis and OpenCorporates. No positions at any NGINX entity despite 17 officer positions globally at SWSoft/Parallels/Acronis entities.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:37:57",
+      "profile_id": "nginx",
+      "other_person": "Serguei Beloussov",
+      "other_person_slug": "serguei-beloussov",
+      "evidence": []
+    },
+    {
+      "id": 5095,
+      "person_a": "Dmitry Chikhachev",
+      "person_b": "Runa Capital",
+      "relationship_type": "corporate",
+      "description": "Managing Partner of Runa Capital, confirmed via OpenCorporates occupation field. Russian nationality, Luxembourg-based. Director of 3 Runa portfolio companies. No positions at any NGINX entity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:38:03",
+      "profile_id": "nginx",
+      "other_person": "Dmitry Chikhachev",
+      "other_person_slug": "dmitry-chikhachev",
+      "evidence": []
+    },
+    {
+      "id": 5096,
+      "person_a": "DFJ Fund VIII Partners LP",
+      "person_b": "Runa Capital",
+      "relationship_type": "owns",
+      "description": "DFJ Fund VIII Partners LP (Tim Draper) confirmed as owner of Runa Capital via LittleSis.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:38:08",
+      "profile_id": "nginx",
+      "other_person": "DFJ Fund VIII Partners LP",
+      "other_person_slug": "dfj-fund-viii-partners-lp",
+      "evidence": []
+    },
+    {
+      "id": 5097,
+      "person_a": "Masha Bucher",
+      "person_b": "Runa Capital",
+      "relationship_type": "employment",
+      "description": "PR Director, June 2011 - July 2013. Overlaps with Runa Capital nginx Series A (Aug 2011)",
+      "strength": "strong",
+      "date_range": "2011-06/2013-07",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:35",
+      "profile_id": "nginx",
+      "other_person": "Masha Bucher",
+      "other_person_slug": "masha-bucher",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 438844",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bne IntelliNews 2020-02-06",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-06/2013-07",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "PR Director, June 2011 - July 2013. Overlaps with Runa Capital nginx Series A (Aug 2011)",
+      "other_person": "Masha Bucher",
+      "id": 5097
+    }
+  ]
+}

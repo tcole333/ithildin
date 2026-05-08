@@ -1,0 +1,277 @@
+{
+  "name": "NovaBridge Biosciences",
+  "slug": "novabridge-biosciences",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.363752",
+  "last_updated": "2026-03-30T03:19:57",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "ownership": 4,
+      "corporate_structure": 1,
+      "corporate_identity": 1,
+      "business_operations": 1,
+      "governance": 1
+    },
+    "connection_types": {
+      "corporate": 4
+    },
+    "last_updated": "2026-03-30T03:19:57"
+  },
+  "findings": [
+    {
+      "id": 8746,
+      "finding_type": "ownership",
+      "summary": "T Investment Limited (BVI) holds 10% \u2014 beneficial owner behind Tony Chin not publicly disclosed",
+      "detail": "T Investment Limited (British Virgin Islands; contact: Tony Chin, Flat B, 4th Floor, Haven Commercial Building, 6-8 Tsing Fung Street, Hong Kong; counsel: Dechert LLP, Philadelphia) filed Schedule 13D on 2023-12-01 (event: November 22, 2023) disclosing 9.89% (8,172,022 ordinary shares). Per the 20-F (March 2025), T Investment held 10.0% (18,795,651 shares / 8,172,022 ADSs). Beneficial owner beyond 'Tony Chin' not disclosed. Entity type: private investment holding company (type 'IV' per Schedule 13D). SC 13D/A filed 2023-06-30.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2023-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8747,
+      "finding_type": "corporate_structure",
+      "summary": "NovaBridge divested all China operations in 2023-2024, eliminating VIE structure; now a pure US/Cayman entity",
+      "detail": "Per the 2025 20-F: 'I-Mab Biopharma Co., Ltd. (later renamed TJ Biopharma (Shanghai) Co., Ltd. and referred to herein as TJBio Shanghai), which was divested along with our Greater China assets and business operations in 2024, and Zhejiang Tianli Pharmaceutical Sales Co., Ltd., which was separately divested in 2023.' The company no longer has PRC subsidiaries. No VIE structure. PRC subsidiary cash at divestiture: $0.9M.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8748,
+      "finding_type": "ownership",
+      "summary": "Founder Jingwu Zhang Zang holds 5.1% through multi-trust structure including Mabcore (BVI); three unnamed Mabcore co-shareholders unidentified",
+      "detail": "20-F states Dr. Jingwu Zhang Zang (co-founder) holds 5.1% (9,530,579 shares) through Mabcore Limited (BVI, sole director; 55.6% equity held via Jingwu Zhang Zang 2018 Irrevocable Family Trust \u2014 NY law, 2,072,899 shares), The 2019 Hasselt Revocable Trust (California, 273,256 shares), The Doctor Zang 2020 Dynasty Trust (California, 5,962,625 shares), and direct ADSs (1,221,799 shares). Three unnamed individuals hold minority economic interests in Mabcore Limited. Mabcore address: Trinity Chambers, P.O. Box 4301, Road Town, Tortola, BVI.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-03",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8744,
+      "finding_type": "ownership",
+      "summary": "Everest Medicines (HKEX: 1952), listed as Wei Fu-controlled in NovaBridge 20-F, holds 16.1% separately; combined Wei Fu economic interest approximately 27%+",
+      "detail": "Schedule 13D filed 2025-08-05 by Everest Medicines Limited (Cayman, HKEX: 1952). Everest acquired 15,846,150 ADSs in August 1, 2025 underwritten offering at $1.95/ADS ($30,899,992.50 total). Total Everest position: 42,524,716 shares (16.1% of 264,485,455 shares post-offering). Everest's principal business address: 36 Robinson Road, #20-01 City House, Singapore 068877. The NovaBridge 20-F states: 'Everest Medicines Limited is a public company listed on the Hong Kong Stock Exchange and controlled by funds which are under common control of the C-Bridge group, which, in turn, is controlled by Mr. Wei Fu.'",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-08-05",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8742,
+      "finding_type": "corporate_identity",
+      "summary": "NovaBridge Biosciences is the renamed I-Mab (IMAB \u2192 NBP), Cayman-incorporated, NASDAQ-listed since January 2020",
+      "detail": "EDGAR registration data confirms name change from I-Mab to NovaBridge Biosciences effective 2025-10-28. CIK 0001778016, former ticker IMAB, new ticker NBP. State of incorporation: E9 (Cayman Islands). EIN: 000000000 (foreign entity). The 424B3 prospectus filed 2025-10-30 describes the company as 'NovaBridge Biosciences (formerly known as I-Mab), an exempted company incorporated in the Cayman Islands.'",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-10-28",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8743,
+      "finding_type": "ownership",
+      "summary": "Wei Fu controls 11.5% of NovaBridge through a four-layer Cayman/BVI/HK offshore fund structure (C-Bridge group)",
+      "detail": "Per Schedule 13D/A (Amendment No. 2) filed 2026-02-03, Wei Fu (Singapore citizen) holds 11.5% (30,499,709 shares) through five offshore vehicles: CBC Investment I-Mab Limited (BVI, 11,784,164 shares), C-Bridge II Investment Ten Limited (BVI, 2,369,546 shares), IBC Investment Seven Limited (HK, 3,641,554 shares), CBC SPVII Limited (HK, 5,574,560 shares), and Nova Aqua Limited (BVI, 7,129,885 shares held via family trust). Wei Fu is the sole director of C-Bridge Capital GP, Ltd., which ultimately controls all these vehicles.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-03",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8749,
+      "finding_type": "business_operations",
+      "summary": "NovaBridge has an undisclosed relationship with 'Visara' for VIS-101 (wet AMD); the governance reset on March 18 may be linked to this deal closing",
+      "detail": "6-K filed 2026-03-09 references 'NovaBridge and Visara Announce Positive Results from VIS-101 Phase 2a Wet AMD Study.' This is a joint announcement, suggesting an active collaboration with an entity called Visara. The March 3 6-K references 'NovaBridge to Host Business Update Call to Review Phase 2a Data for VIS-101 in Wet AMD.' NovaBridge is hosting the call, suggesting the program is controlled or licensed by NovaBridge. The nature of the NovaBridge-Visara relationship (acquisition, license, partnership) is not specified in available filings. Visara is not named as a subsidiary in the 20-F (filed April 2025), suggesting the relationship began after April 2025.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8745,
+      "finding_type": "governance",
+      "summary": "Mass board and management reset on 2026-03-18 \u2014 15 simultaneous Form 3 filings including 4 new independent directors and multiple new officers; event unexplained by any filed 6-K",
+      "detail": "Fifteen Form 3 filings (initial statements of beneficial ownership) were filed on 2026-03-18, all with event date 2026-03-18, covering all current officers and directors. Four new independent directors (Cunningham Emmett, Liu Xin, Woo Ian Ying, Lenz Robert A.) appear for the first time. New officers include Lei Ming Kyler (CFO, replacing Joseph Skelton), Lin Liwei Lorraine (General Counsel), Zhang Xiaofan Neo (CIO, 874,000 shares), Cao Sean Wuxiong (Director+Officer, title 'See Remarks'). This represents a mass governance reset. Lielie Zhang and Conor Chia-hung Yang (previously independent directors per 2025 20-F) are absent from Form 3 filings. The event date is exactly 9 days after the NovaBridge/Visara VIS-101 positive Phase 2a announcement (March 9, 2026). No 6-K has been filed as of 2026-03-29 describing this corporate event.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "NovaBridge Biosciences",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4537,
+      "person_a": "Wei Fu",
+      "person_b": "NovaBridge Biosciences",
+      "relationship_type": "corporate",
+      "description": "Wei Fu was appointed to NovaBridge's board pursuant to a shareholders agreement (Fourth Amended and Restated Shareholders Agreement, July 25, 2019) that gave C-Bridge entities the right to appoint a director.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Wei Fu",
+      "other_person_slug": "wei-fu",
+      "evidence": []
+    },
+    {
+      "id": 4540,
+      "person_a": "NovaBridge Biosciences",
+      "person_b": "Visara",
+      "relationship_type": "corporate",
+      "description": "NovaBridge and Visara jointly announced positive Phase 2a results for VIS-101 (wet AMD) on March 9, 2026 via NovaBridge's 6-K. The governance reset on March 18 may reflect closing of a NovaBridge-Visara deal.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Visara",
+      "other_person_slug": "visara",
+      "evidence": []
+    },
+    {
+      "id": 4538,
+      "person_a": "Jingwu Zhang Zang",
+      "person_b": "NovaBridge Biosciences",
+      "relationship_type": "corporate",
+      "description": "Jingwu Zhang Zang co-founded I-Mab (NovaBridge) and holds 5.1% through Mabcore Limited (BVI) and trusts. Dr. Zang is no longer a director as of March 2026 but remains a significant shareholder.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Jingwu Zhang Zang",
+      "other_person_slug": "jingwu-zhang-zang",
+      "evidence": []
+    },
+    {
+      "id": 4539,
+      "person_a": "T Investment Limited",
+      "person_b": "NovaBridge Biosciences",
+      "relationship_type": "corporate",
+      "description": "T Investment Limited filed SC 13D in December 2023 as a new 5%+ holder (9.89%) of I-Mab/NovaBridge. The relationship to the C-Bridge group or the company's management is unknown.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "T Investment Limited",
+      "other_person_slug": "t-investment-limited",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2023-12-01",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "T Investment Limited (BVI) holds 10% \u2014 beneficial owner behind Tony Chin not publicly disclosed",
+      "confidence": "high",
+      "id": 8746
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "NovaBridge divested all China operations in 2023-2024, eliminating VIE structure; now a pure US/Cayman entity",
+      "confidence": "high",
+      "id": 8747
+    },
+    {
+      "date": "2025-04-03",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "Founder Jingwu Zhang Zang holds 5.1% through multi-trust structure including Mabcore (BVI); three unnamed Mabcore co-shareholders unidentified",
+      "confidence": "high",
+      "id": 8748
+    },
+    {
+      "date": "2025-08-05",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "Everest Medicines (HKEX: 1952), listed as Wei Fu-controlled in NovaBridge 20-F, holds 16.1% separately; combined Wei Fu economic interest approximately 27%+",
+      "confidence": "high",
+      "id": 8744
+    },
+    {
+      "date": "2025-10-28",
+      "type": "finding",
+      "finding_type": "corporate_identity",
+      "summary": "NovaBridge Biosciences is the renamed I-Mab (IMAB \u2192 NBP), Cayman-incorporated, NASDAQ-listed since January 2020",
+      "confidence": "high",
+      "id": 8742
+    },
+    {
+      "date": "2026-02-03",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "Wei Fu controls 11.5% of NovaBridge through a four-layer Cayman/BVI/HK offshore fund structure (C-Bridge group)",
+      "confidence": "high",
+      "id": 8743
+    },
+    {
+      "date": "2026-03-09",
+      "type": "finding",
+      "finding_type": "business_operations",
+      "summary": "NovaBridge has an undisclosed relationship with 'Visara' for VIS-101 (wet AMD); the governance reset on March 18 may be linked to this deal closing",
+      "confidence": "medium",
+      "id": 8749
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Mass board and management reset on 2026-03-18 \u2014 15 simultaneous Form 3 filings including 4 new independent directors and multiple new officers; event unexplained by any filed 6-K",
+      "confidence": "high",
+      "id": 8745
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "name": "Nginx, Inc. (BVI)",
+  "slug": "nginx-inc-bvi",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.387448",
+  "last_updated": "2026-04-12T17:57:26",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "relationship": 1,
+      "financial": 2,
+      "intelligence": 2,
+      "negative_result": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T17:57:26"
+  },
+  "findings": [
+    {
+      "id": 9857,
+      "finding_type": "identity",
+      "summary": "NGINX parent entity was BVI-incorporated holding company, not a US entity",
+      "detail": "Nginx, Inc. was incorporated in the British Virgin Islands on July 6, 2011, headquartered in Road Town, Tortola. This BVI entity was the actual parent holding company through which all investor equity was held. The US entity (Nginx Software, Inc., DE #4978109) was merely a wholly-owned subsidiary providing administrative, sales, marketing, product management, and support services. Other wholly-owned subsidiaries: Nginx LLC (Russia/Moscow - core product development), Nginx International Limited (Ireland/Cork - product management and sales support), Nginx Asia Pacific Pte Ltd (Singapore - sales support).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-07-06",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:55:56",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001048695-19-000026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9858,
+      "finding_type": "relationship",
+      "summary": "Conyers Corporate Services (BVI) Ltd was registered agent and secretary for NGINX BVI entity",
+      "detail": "The F5-NGINX merger agreement confirms Conyers Corporate Services (BVI) Limited served as secretary of Nginx, Inc. and continued as secretary of the surviving corporation post-merger. Conyers is part of Conyers Dill & Pearman, one of the largest offshore law firms specializing in BVI, Bermuda, and Cayman Islands corporate services. The registered agent filed a letter confirming no objections to the merger per BVI Act Section 171.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:56:10",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001193125-19-070884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9859,
+      "finding_type": "financial",
+      "summary": "F5 acquired NGINX via BVI merger for ~$670M cash with BVI-incorporated merger sub",
+      "detail": "F5 Networks created Neva Merger Sub Limited (BVI) as a wholly-owned subsidiary to merge with and into Nginx, Inc. (BVI) pursuant to BVI Act Section 171. Total consideration approximately $670M in cash, with $2M escrowed for purchase price adjustments and 1% for indemnification. The merger was subject to HSR review plus antitrust clearance from Russia, Germany, and Spain. Fortis Advisors LLC (DE) served as Securityholder Representative. The name 'Neva' (a river in St. Petersburg) is notable given the Russian origins of NGINX.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:56:24",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001193125-19-070884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9860,
+      "finding_type": "financial",
+      "summary": "NGINX BVI share structure: 6 series of preferred stock totaling $104.6M liquidation preference",
+      "detail": "As of December 31, 2018, Nginx Inc (BVI) had 44M authorized ordinary shares (8.89M issued) and 25.9M authorized preferred shares (25.7M issued). Preferred stock breakdown: Series A (6.48M shares, $0.50 OIP, $3.24M liq pref), Series B (5.58M shares, $1.793 OIP, $10M liq pref), Series B-1 (3.29M shares, $6.083 OIP, $20M liq pref), Series B-2 (2.24M shares, $6.344 OIP, $14.2M liq pref), Series B-3 (2.09M shares, $6.673 OIP, $13.9M liq pref), Series C (6.02M shares, $7.186 OIP, $43.3M liq pref). Total liquidation preference: $104.6M. Runa Capital led the Series A ($3.24M at $0.50/share). The Series B-C progression shows multiple rounds of increasing valuation from ~$1.79 to $7.19 per share. All preferred shares convertible 1:1 to ordinary shares.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:56:41",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001048695-19-000026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9861,
+      "finding_type": "intelligence",
+      "summary": "ICIJ offshore leaks contain records for Igor Sysoev, Runa Capital, Dmitry Chikhachev, and Serguei Beloussov",
+      "detail": "ICIJ Offshore Leaks database contains 100% confidence matches for: (1) IGOR SYSOEV (id: 240054998) - NGINX creator/co-founder; (2) Runa Capital (ids: 82013273, 80013273) - two separate records, both 100% match; (3) Runa Capital Fund I L.P. (ids: 82013809, 80013809, 80119567) - three records; (4) Dmitry Chikhachev (id: 80048575) - Runa Capital managing partner, 100% match; (5) Serguei Beloussov (id: 80034924) - Acronis founder/Runa Capital connected, 100% match. ICIJ Neo4j database was offline so entity details and connection graphs could not be retrieved. The presence of these individuals in offshore leaks databases (Panama/Paradise/Pandora Papers) warrants further investigation when the database is available. No entity named 'Nginx' itself appears in ICIJ.",
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:56:56",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:reconcile:Beloussov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:reconcile:Chikhachev",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:reconcile:Igor_Sysoev",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:reconcile:Runa_Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9862,
+      "finding_type": "negative_result",
+      "summary": "No NGINX entities appear in OpenSanctions; BVI entity not in OpenCorporates (expected for BVI opacity)",
+      "detail": "OpenSanctions returned zero results for 'Nginx' as a company entity. OpenCorporates returned zero results for 'Nginx' in BVI jurisdiction (vg), consistent with the well-known opacity of the BVI Financial Services Commission registry. OpenCorporates did return 5 US entities: Nginx Software Inc (CA #3379940, active), Nginx Software Inc (WA #603364436, terminated 2020), Nginx Software Inc (DE #4978109), Nginx Inc (DE #5021656, inc. 2011-08-08), Nginx Software Inc (CO #20181181715, good standing). The Delaware entity 'Nginx, Inc.' (DE #5021656) incorporated Aug 8, 2011 was likely a placeholder or shell - the actual holding was in BVI. Igor Sysoev himself does not appear in OpenSanctions (the Sysoev results are unrelated Russian officials).",
+      "source_datasets": [
+        "opencorporates",
+        "opensanctions"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:57:10",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates:vg:nginx_search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:nginx",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9863,
+      "finding_type": "intelligence",
+      "summary": "BVI incorporation pattern classic for Russian-origin VC-backed tech: tax-neutral holding with Russian dev, US sales, Irish/Singapore transfer pricing",
+      "detail": "The NGINX corporate structure follows a textbook BVI holding pattern for Russian-origin technology companies: (1) BVI parent entity for tax-neutral equity holding and investor-friendly jurisdiction, (2) US subsidiary (Delaware) for sales, marketing, and customer-facing operations at 795 Folsom St, SF, (3) Russian subsidiary (Moscow) retaining core engineering talent, (4) Ireland subsidiary (Cork) for European operations and potential IP/transfer pricing benefits, (5) Singapore subsidiary for Asia-Pacific sales. This structure allows: investor equity to be held in English common-law BVI jurisdiction (avoiding Russian corporate law complications), flexible repatriation of capital, tax-efficient intercompany arrangements via Ireland and Singapore, and straightforward acquisition structure (BVI merger under BVI Act rather than complex Russian M&A). The Series B-3 ($13.9M, 2017) and Series C ($43.3M, 2018) indicate the company raised approximately $105M total before the $670M exit.",
+      "source_datasets": [
+        "edgar",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:57:26",
+      "target_name": "Nginx, Inc. (BVI)",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001048695-19-000026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001193125-19-070884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-07-06",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "NGINX parent entity was BVI-incorporated holding company, not a US entity",
+      "confidence": "confirmed",
+      "id": 9857
+    }
+  ]
+}

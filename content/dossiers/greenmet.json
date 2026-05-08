@@ -1,20 +1,64 @@
 {
   "name": "GreenMet",
   "slug": "greenmet",
-  "aliases": [
-    "GreenMet (Greentech Minerals Holdings Inc.)"
-  ],
+  "aliases": [],
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.925413",
+  "generated_at": "2026-05-07T23:07:36.288337",
   "last_updated": "2026-03-09T14:54:51",
   "stats": {
-    "total_findings": 18,
+    "total_findings": 11,
     "total_connections": 8,
-    "total_entities": 0
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "financial": 3,
+      "relationship": 4,
+      "intelligence": 3
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 2,
+      "employment": 1,
+      "contracts_with": 2
+    },
+    "last_updated": "2026-03-09T14:54:51"
   },
   "findings": [
+    {
+      "id": 6164,
+      "finding_type": "identity",
+      "summary": "GreenMet (Greentech Minerals Holdings Inc.) is a Delaware-incorporated company registered at 1825 K St NW Ste 515, DC 20006. SAM.gov: UEI ZD31U1MMR4J7, CAGE 9VEL9, incorporated 2021-04-09. Primary NAICS 551114. SAM POCs: Andrew Horn (CEO) and Nicholas Denno (Dir Ops). Two related DC-registered LLCs at same address (GreenMet Consulting LLC and GreenMet Real Asset Management LLC), both now withdrawn.",
+      "detail": null,
+      "source_datasets": [
+        "sam_gov",
+        "dc_dlcp"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2021-04-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:12:59",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DC_Corp_Registry_C00007696390",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov_UEI_ZD31U1MMR4J7",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6154,
       "finding_type": "financial",
@@ -48,39 +92,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "OCCRP investigation Jan 2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6164,
-      "finding_type": "identity",
-      "summary": "GreenMet (Greentech Minerals Holdings Inc.) is a Delaware-incorporated company registered at 1825 K St NW Ste 515, DC 20006. SAM.gov: UEI ZD31U1MMR4J7, CAGE 9VEL9, incorporated 2021-04-09. Primary NAICS 551114. SAM POCs: Andrew Horn (CEO) and Nicholas Denno (Dir Ops). Two related DC-registered LLCs at same address (GreenMet Consulting LLC and GreenMet Real Asset Management LLC), both now withdrawn.",
-      "detail": null,
-      "source_datasets": [
-        "sam_gov",
-        "dc_dlcp"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 05:12:59",
-      "target_name": "GreenMet",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DC_Corp_Registry_C00007696390",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SAM.gov_UEI_ZD31U1MMR4J7",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -401,182 +412,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 6331,
-      "finding_type": "identity",
-      "summary": "George Sorial and Keith Schiller appear in Washington DC corporate registry documents as beneficial owners of GreenMet (Greentech Minerals Holdings Inc.), alongside CEO Drew Horn. Sorial stated they are 'passive minority shareholders in GreenMet and have no management role in the company.' They resigned board/advisor roles in early 2025 but retained shares. Company HQ: 1825 K St NW 515 Washington DC 20006. Founded 2021.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:19:57",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OCCRP:greenland-2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6332,
-      "finding_type": "document",
-      "summary": "GreenMet's compensation for brokering the Critical Metals Corp (CRML) / Tanbreez partnership is NOT disclosed in any CRML SEC filing (confirmed: 0 EDGAR results for GreenMet or Sorial). GreenMet's press release describes itself as facilitating the April 2025 strategic partnership and the August 2025 10-year offtake LOI between CRML/Tanbreez and Ucore Rare Metals for a DOD-funded Louisiana processing facility. GreenMet's role described as 'played a central role in facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination.' No compensation terms disclosed.",
-      "detail": null,
-      "source_datasets": [
-        "edgar",
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:19:57",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=efts-search",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6338,
-      "finding_type": "financial",
-      "summary": "GreenMet (fka Greentech Minerals Holdings Inc.) hired McKeon Group Inc as LDA registered lobbyist beginning Q4 2021 through at least Q1 2024. Lobbying issues: Natural Resources, Defense, Environment/Energy for 'rare earth and critical elements policy.' Government entities contacted include: DOD, White House Office, NSC, NEC, State Dept, Senate, House, Interior Dept, Energy Dept. Total disclosed lobbying income to McKeon: ,500 across 20 filings. Peak quarter Q2 2022: ,500. Lobbyist: Adam Raezler.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:20:32",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:GreenMet-McKeon-2021-2024",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6367,
-      "finding_type": "financial",
-      "summary": "Greentech Minerals Holdings Inc. signed a Financing and Purchase Option Agreement with Texas Mineral Resources Corp. (TMRC) on November 8, 2021. Greentech agreed to fund a $6.5M bankable feasibility study for TMRC's Black Hawk Mining District silver project in NM in exchange for 20.2% equity in a proposed TMRC-Santa Fe Gold JV. The deal was abandoned when Greentech determined not to pursue the financing option per TMRC Q1 FY2023 10-Q.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:01:58",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR:0001580695-21-000344",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6368,
-      "finding_type": "financial",
-      "summary": "GreenMet's compensation structure for the CRML-Tanbreez brokerage is structurally invisible. After reviewing all 167 CRML SEC filings (via EDGAR full-text search), the 2024 and 2025 20-F annual reports, and all 6-K press releases, GreenMet is mentioned in ZERO CRML SEC filings. GreenMet's own press releases describe its role as 'facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination' but disclose no fees, equity compensation, advisory agreement, or financial arrangement. The compensation mechanism (if any) is not publicly disclosed.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:02:07",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6372,
-      "finding_type": "financial",
-      "summary": "GreenMet's three-division corporate structure maps to specific legal entities: (1) GreenMet Advisory = GreenMet Consulting LLC (DC Foreign LLC C00007696390, withdrawn). (2) GreenMet Capital = GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, withdrawn). (3) GreenMet Innovation = GreenMet Technologies LLC (entity not found in any ingested registries \u2014 DC, FL, NY, DE searches returned zero results; OpenCorporates unavailable due to API key). The absence of GreenMet Technologies LLC from public registries is investigatively significant.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:02:46",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "WEB:greenmet.com/who-we-are",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6373,
-      "finding_type": "financial",
-      "summary": "GreenMet's lobbying expenditure: McKeon Group Inc. lobbied for GreenMet from Q4 2021 through Q3 2023, generating disclosed income of: Q4 2021 $12,000; Q1 2022 $30,000; Q2 2022 $77,500; Q3 2022 $30,000; Q4 2022 $30,000; Q1 2023 $30,000; Q2 2023 $40,000; Q3 2023 $20,000. Total McKeon Group paid by GreenMet: ~$269,500. From Q2 2023 onwards, GreenMet self-lobbied through in-house arm Greentech Minerals Holdings LLC (fka GreenMet Consulting), targeting DoD, DoE, DoS, OSTP, Commerce, DLA, NSC, EOP, Treasury, USTDA.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:02:56",
-      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:SENATE-FILINGS-GREENMET",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -756,7 +591,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2021-04-09",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "GreenMet (Greentech Minerals Holdings Inc.) is a Delaware-incorporated company registered at 1825 K St NW Ste 515, DC 20006. SAM.gov: UEI ZD31U1MMR4J7, CAGE 9VEL9, incorporated 2021-04-09. Primary NAICS 551114. SAM POCs: Andrew Horn (CEO) and Nicholas Denno (Dir Ops). Two related DC-registered LLCs at same address (GreenMet Consulting LLC and GreenMet Real Asset Management LLC), both now withdrawn.",
+      "confidence": "confirmed",
+      "id": 6164
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6154,
@@ -887,200 +731,5 @@
       "manufactured-dependency",
       "jurisdictional-arbitrage"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "GreenMet",
-      "connections": [
-        {
-          "target": "Critical Metals Corp",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Tanbreez offtake partnership for DoD REE supply"
-        },
-        {
-          "target": "Ucore Rare Metals",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Facilitated 10-year offtake agreement"
-        },
-        {
-          "target": "Keith Schiller",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "OCCRP",
-          "description": "Passive minority shareholder, former board member"
-        },
-        {
-          "target": "Ned Mamula",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "OCCRP",
-          "description": "Former Chief Geologist; now USGS Director (divested)"
-        },
-        {
-          "target": "George Sorial",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "OCCRP",
-          "description": "Passive minority shareholder, former board member"
-        },
-        {
-          "target": "Drew Horn",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "GreenMet website",
-          "description": "CEO and founder of GreenMet"
-        },
-        {
-          "target": "Critical Metals Corp",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": "GreenMet brokered Critical Metals partnership with Tanbreez; facilitated EXIM LOI",
-          "description": null
-        },
-        {
-          "target": "Ucore Rare Metals",
-          "type": "contracts_with",
-          "strength": 0.7,
-          "evidence_ref": "GreenMet facilitated 10-year offtake between Critical Metals/Tanbreez and Ucore",
-          "description": null
-        }
-      ],
-      "secondHop": {
-        "Critical Metals Corp": [
-          {
-            "target": "Matt Schnappauf",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
-          },
-          {
-            "target": "Kenneth Raymond Deayton",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Swiss Commodity Re Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Lutnick led Cantor Fitzgerald which held 1.247M CRML shares; now Commerce Secretary influencing trade/tariff policy affecting CRML's Greenland rare earth operations. Sons Brandon and Kyle now run Cantor."
-          },
-          {
-            "target": "Cantor Fitzgerald",
-            "type": "owns",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
-          }
-        ],
-        "Drew Horn": [
-          {
-            "target": "George Sorial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Svend Hardenberg",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Hardenberg (Inuit Development Company) partners with Horn (AmForge Corporation) on 1.5GW AI data center in Kangerlussuaq"
-          },
-          {
-            "target": "George Logothetis",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "George Sorial": [
-          {
-            "target": "Javelin Advisors",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Javelin Advisors LLC"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Sen. Katie Britt",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Robert Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-lobbyists at Javelin Advisors LLC; Seiden Law LLP served as prime contractor for Pakistan FARA engagement, subcontracting to Javelin at K/month."
-          }
-        ],
-        "Keith Schiller": [
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Rep. Ronny Jackson",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Giorgi Rtskhiladze",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations."
-          },
-          {
-            "target": "Fred Daibes",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Javelin Advisors received $1M from Daibes for pardon-brokering lobbying Q1 2025"
-          },
-          {
-            "target": "Ronny Jackson",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Javelin Advisors used Ronny Jackson as primary congressional contact for Pakistan rare earth lobbying. Jackson held in-person meeting May 1 2025 with Pakistani officials, documented in Javelin FARA filings."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

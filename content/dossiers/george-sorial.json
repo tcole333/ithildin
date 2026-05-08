@@ -5,7 +5,7 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:08.004237",
+  "generated_at": "2026-05-07T23:07:36.425077",
   "last_updated": "2026-03-09T19:03:13",
   "stats": {
     "total_findings": 5,
@@ -13,8 +13,8 @@
     "total_entities": 9,
     "finding_types": {
       "identity": 3,
-      "document": 1,
-      "relationship": 1
+      "relationship": 1,
+      "document": 1
     },
     "connection_types": {
       "financial": 1,
@@ -34,7 +34,7 @@
         "fara"
       ],
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2019-06-07",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-03-09 18:16:07",
@@ -51,6 +51,56 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "web:CNN-2019-04-02",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6371,
+      "finding_type": "identity",
+      "summary": "George Sorial entity mapping: (1) Trump Organization EVP/Chief Compliance Counsel 2002-2019. (2) DeCotiis Fitzpatrick & Gluck (NJ law firm) \u2014 attorney, pre-Trump Organization. (3) Passive shareholder/board member GreenMet (Greentech Minerals Holdings Inc.) \u2014 resigned board early 2025. (4) Co-founder Javelin Advisors LLC (Dec 2024, with Keith Schiller). (5) STMS Consulting Partners LLC d/b/a Sorial Consulting \u2014 lobbied Lucas Compton LLC on behalf of Berman Law Group Q2-Q4 2020, $10K/quarter. (6) Board of Directors, The Platinum Group LLC (per LittleSis, from 2021-07-01). (7) Florida Bar member #116632. (8) FEC: $5,000 to self-employed donor in Sept 2025 (recipient unclear in data).",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-07-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:38",
+      "target_name": "George Sorial",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LITTLESIS:324769",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6375,
+      "finding_type": "relationship",
+      "summary": "George Sorial held a Board of Directors seat at The Platinum Group LLC (per LittleSis record, start date 2021-07-01, no end date shown). The Platinum Group LLC entity is not found in the investigation entity DB. This is a gap in entity mapping \u2014 unknown whether The Platinum Group LLC has any overlap with GreenMet, critical minerals, or other investigation targets.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-07-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:03:13",
+      "target_name": "George Sorial",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LITTLESIS:324769",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -101,56 +151,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA:STMS-Consulting-2020",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6371,
-      "finding_type": "identity",
-      "summary": "George Sorial entity mapping: (1) Trump Organization EVP/Chief Compliance Counsel 2002-2019. (2) DeCotiis Fitzpatrick & Gluck (NJ law firm) \u2014 attorney, pre-Trump Organization. (3) Passive shareholder/board member GreenMet (Greentech Minerals Holdings Inc.) \u2014 resigned board early 2025. (4) Co-founder Javelin Advisors LLC (Dec 2024, with Keith Schiller). (5) STMS Consulting Partners LLC d/b/a Sorial Consulting \u2014 lobbied Lucas Compton LLC on behalf of Berman Law Group Q2-Q4 2020, $10K/quarter. (6) Board of Directors, The Platinum Group LLC (per LittleSis, from 2021-07-01). (7) Florida Bar member #116632. (8) FEC: $5,000 to self-employed donor in Sept 2025 (recipient unclear in data).",
-      "detail": null,
-      "source_datasets": [
-        "littlesis"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:02:38",
-      "target_name": "George Sorial",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LITTLESIS:324769",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6375,
-      "finding_type": "relationship",
-      "summary": "George Sorial held a Board of Directors seat at The Platinum Group LLC (per LittleSis record, start date 2021-07-01, no end date shown). The Platinum Group LLC entity is not found in the investigation entity DB. This is a gap in entity mapping \u2014 unknown whether The Platinum Group LLC has any overlap with GreenMet, critical minerals, or other investigation targets.",
-      "detail": null,
-      "source_datasets": [
-        "littlesis"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:03:13",
-      "target_name": "George Sorial",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LITTLESIS:324769",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -437,7 +437,32 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2019-06-07",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "George A. Sorial: Egyptian-American attorney. Degrees from Boston University (BA, JD, MBA) and Seton Hall (LLM). Worked with Trump since 2002. Was Trump Organization EVP and Counsel managing global portfolio. From 2017 served as Chief Compliance Counsel. Left Trump Org June 7, 2019 amid increasing scrutiny. Co-wrote The Real Deal: My Decade Fighting Battles and Winning Wars with Trump. Co-founded Javelin Advisors LLC Nov 2024 with Keith Schiller and Robert Seiden. FARA lobbyist registered for Pakistan. LDA lobbyist for all Javelin clients. FEC donation 09/08/2025 to Sen. Katie Britt $5K jointly with Schiller.",
+      "confidence": "high",
+      "id": 6300
+    },
+    {
+      "date": "2021-07-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "George Sorial entity mapping: (1) Trump Organization EVP/Chief Compliance Counsel 2002-2019. (2) DeCotiis Fitzpatrick & Gluck (NJ law firm) \u2014 attorney, pre-Trump Organization. (3) Passive shareholder/board member GreenMet (Greentech Minerals Holdings Inc.) \u2014 resigned board early 2025. (4) Co-founder Javelin Advisors LLC (Dec 2024, with Keith Schiller). (5) STMS Consulting Partners LLC d/b/a Sorial Consulting \u2014 lobbied Lucas Compton LLC on behalf of Berman Law Group Q2-Q4 2020, $10K/quarter. (6) Board of Directors, The Platinum Group LLC (per LittleSis, from 2021-07-01). (7) Florida Bar member #116632. (8) FEC: $5,000 to self-employed donor in Sept 2025 (recipient unclear in data).",
+      "confidence": "high",
+      "id": 6371
+    },
+    {
+      "date": "2021-07-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "George Sorial held a Board of Directors seat at The Platinum Group LLC (per LittleSis record, start date 2021-07-01, no end date shown). The Platinum Group LLC entity is not found in the investigation entity DB. This is a gap in entity mapping \u2014 unknown whether The Platinum Group LLC has any overlap with GreenMet, critical minerals, or other investigation targets.",
+      "confidence": "high",
+      "id": 6375
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6316,
@@ -632,164 +657,5 @@
       "dual-mandate-conflict",
       "private-agreement-gap"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "George Sorial",
-      "connections": [
-        {
-          "target": "GreenMet",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "OCCRP",
-          "description": "Passive minority shareholder, former board member"
-        },
-        {
-          "target": "Javelin Advisors",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "FARA filings",
-          "description": "Co-founder of Javelin Advisors LLC"
-        },
-        {
-          "target": "Keith Schiller",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Co-founders of Javelin Advisors LLC; co-beneficial owners of GreenMet",
-          "description": null
-        },
-        {
-          "target": "Drew Horn",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "DC Corp Registry: both beneficial owners of GreenMet",
-          "description": null
-        },
-        {
-          "target": "Robert W. Seiden",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "FARA:7579",
-          "description": null
-        },
-        {
-          "target": "Sen. Katie Britt",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=7579-Supplemental-Statement-20251112",
-          "description": null
-        },
-        {
-          "target": "Robert Seiden",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:Javelin-2025",
-          "description": "Co-lobbyists at Javelin Advisors LLC; Seiden Law LLP served as prime contractor for Pakistan FARA engagement, subcontracting to Javelin at K/month."
-        },
-        {
-          "target": "Giorgi Rtskhiladze",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:52b3a9dd-8f59-48c4-929f-90b04e0697bf",
-          "description": "Rtskhiladze (Logical Strategies LLC founder) hired Sorial (Javelin Advisors co-founder) for $1.2M Q3 2025 EPA asbestos lobbying"
-        }
-      ],
-      "secondHop": {
-        "Drew Horn": [
-          {
-            "target": "GreenMet",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO and founder of GreenMet"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Svend Hardenberg",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Hardenberg (Inuit Development Company) partners with Horn (AmForge Corporation) on 1.5GW AI data center in Kangerlussuaq"
-          },
-          {
-            "target": "George Logothetis",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Giorgi Rtskhiladze": [
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations."
-          }
-        ],
-        "GreenMet": [
-          {
-            "target": "Ucore Rare Metals",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Facilitated 10-year offtake agreement"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former Chief Geologist; now USGS Director (divested)"
-          },
-          {
-            "target": "Critical Metals Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tanbreez offtake partnership for DoD REE supply"
-          },
-          {
-            "target": "Critical Metals Corp",
-            "type": "contracts_with",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "Keith Schiller": [
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Rep. Ronny Jackson",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Ronny Jackson",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Javelin Advisors used Ronny Jackson as primary congressional contact for Pakistan rare earth lobbying. Jackson held in-person meeting May 1 2025 with Pakistani officials, documented in Javelin FARA filings."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

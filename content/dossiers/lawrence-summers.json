@@ -5,29 +5,32 @@
     "Larry Summers"
   ],
   "profile_ids": [
+    "altman",
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.821899",
-  "last_updated": "2026-02-18T16:45:10",
+  "generated_at": "2026-05-07T23:07:36.113999",
+  "last_updated": "2026-05-07T04:36:50",
   "stats": {
-    "total_findings": 24,
-    "total_connections": 35,
-    "total_entities": 3,
+    "total_findings": 27,
+    "total_connections": 37,
+    "total_entities": 4,
     "finding_types": {
-      "intelligence": 17,
+      "intelligence": 19,
       "financial": 4,
       "relationship": 2,
-      "communication": 1
+      "communication": 1,
+      "governance": 1
     },
     "connection_types": {
       "social": 8,
-      "intelligence": 1,
+      "employment": 1,
+      "intelligence": 2,
       "financial": 14,
       "familial": 1,
       "advisory": 6,
       "corporate": 5
     },
-    "last_updated": "2026-02-18T16:45:10"
+    "last_updated": "2026-05-07T04:36:50"
   },
   "findings": [
     {
@@ -523,6 +526,45 @@
       ]
     },
     {
+      "id": 11118,
+      "finding_type": "intelligence",
+      "summary": "Larry Summers Oct 27 2017 email to Epstein from Saudi PIF/FII Riyadh: 'Spent time w Softbank deputy Najeev or some such PIF guy too' \u2014 earliest Epstein-orbit briefing about Misra at a Saudi sovereign-fund event, 15 months before Weingarten's Jan 2019 'Softbank caper' email",
+      "detail": "HOUSE_OVERSIGHT_025124 / 025128 / 025129 / 025133 / 025134 / 029108 (Oct 27 2017): Summers writes Epstein from Saudi PIF/FII Riyadh-style event: 'Spent time w Softbank deputy Najeev or some such PIF guy too. Flying back.' And: 'Softbank deputy guy i liked and seemed aware and honest re Son. Lots of slathering to saudis.' 'Najeev' is OCR error or Summers' phonetic rendering of Rajeev Misra. This places Epstein in a back-channel relationship with Larry Summers discussing a SoftBank deputy at a Saudi sovereign-fund event in October 2017, FIFTEEN MONTHS before the Weingarten 'Softbank caper' chain (Jan 2019). Summers is briefing Epstein on Misra's persona ('seemed aware and honest re Son') and the SoftBank-Saudi pitch dynamics ('Lots of slathering to saudis'). This pre-caper intelligence flow is significant because: (1) it pre-dates by months the WSJ March 2018 anonymous-shareholder reporting on the SoftBank dirty tricks; (2) it establishes Epstein's Misra knowledge through Summers/PIF/FII channels; (3) it confirms the FII-Riyadh layer (Aziza Alahmadi sent FII 2018 speakers list to Epstein Aug 12 2018). Cross-reference: Aug 12 2018 FII 2018 speakers list (EFTA02603142) had both Misra and Klein listed as speakers; Misra introduced Benedetti to Klein in June 2017 (4 months before Summers' email); Misra-Klein-Benedetti met at Hotel Baur au Lac Zurich Nov 2017 (1 month after Summers' email). The October 2017 timeline fits the Klein-Benedetti introduction sequencing.",
+      "source_datasets": [
+        "house-oversight"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2017-10-27",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:21:31",
+      "target_name": "Larry Summers",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_025124",
+          "source_quote": "Spent time w Softbank deputy Najeev or some such PIF guy too. Flying back",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_025128",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_029108",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 151,
       "finding_type": "intelligence",
       "summary": "Summers used Epstein as a PR crisis management adviser. When a Kelly Friendly forwarded an article 'A tax loophole for just Jeffrey Epstein?' from Sen. Sanders video (Dec 2, 2017), Summers forwarded it to Epstein with '????' (EFTA02559659). Epstein was also approached by Summers about Joe Lockhart (Glover Park Group, Clinton's former press secretary) as a potential PR adviser: 'Perhaps you should suggest Jefferey talk to Joe Lockhart at the Glover Park Group. He has helped Clinton and General Petraeus' (EFTA02384585, Jan 7, 2015). Summers introduced the two: 'Connecting the two of you' sent to both Epstein and Lockhart (EFTA02347846, Jan 25, 2015). This demonstrates Summers actively facilitated Epstein's crisis management strategy.",
@@ -682,6 +724,61 @@
       ]
     },
     {
+      "id": 9423,
+      "finding_type": "governance",
+      "summary": "Lawrence Summers resigned from OpenAI board November 19 2025 following Epstein email release by House Oversight Committee",
+      "detail": "Summers joined board November 2023 and was the highest-paid external director at $143,702/yr (2024 990). He resigned November 19 2025 after House Oversight Committee released Epstein estate documents including Summers correspondence. Summers also went on leave from Harvard. OpenAI board statement: 'We appreciate his many contributions.' No replacement director announced as of February 2026.",
+      "source_datasets": "websearch",
+      "confidence": "high",
+      "date_of_event": "2025-11-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "Lawrence Summers",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 11135,
+      "finding_type": "intelligence",
+      "summary": "Larry Summers resigned OpenAI board Nov 19 2025 over Epstein emails; stepped back from teaching at Harvard pending investigation; no public UAE role yet \u2014 but his Oct 27 2017 'Najeev or some such PIF guy' email and pro-stablecoin advocacy make him a Mubadala/MGX/Saudi-PIF macro-advisor candidate",
+      "detail": "Major prior datapoint not in original brief. Summers resigned OpenAI board November 19 2025 directly tied to Epstein-emails revelation cycle. Also stepped back from teaching at Harvard pending investigation. Sources: aljazeera.com/economy/2025/11/19; nbcnews.com/tech/tech-news/larry-summers-resigns-openai-board-jeffrey-epstein-emails-rcna244766. CROSS-REFERENCE: Summers had sent Epstein 'Spent time w Softbank deputy Najeev or some such PIF guy too' from Saudi PIF/FII Riyadh Oct 27 2017 (HOUSE_OVERSIGHT_025124, finding #11118) \u2014 earliest Epstein-orbit Misra briefing 15 months pre-Weingarten. Summers is also documented as having attended FII Riyadh and other Saudi PIF events. Pro-stablecoin advocacy (he co-authored major 2024 piece on stablecoin policy) makes him a natural candidate for: Mubadala economic-policy advisor, MGX International Advisory Council, Saudi PIF macro-advisor, possible quiet advisor to Aryam Investment 1 / WLFI given pro-stablecoin advocacy. As of May 2026 no public UAE/Mubadala role announced \u2014 watch for next 12 months. WIDER PATTERN: Summers + Karp + Ruemmler + Pritzker (Hyatt retired Feb 16 2026) + Staley (FCA-banned Jul 2025) + bin Sulayem (DP World replaced Feb 13 2026) all departed senior roles in a 6-month window Oct 2025-Feb 2026, all directly or indirectly Epstein-tied. The post-Epstein actor pipeline is now collapsing in real-time.",
+      "source_datasets": [
+        "aljazeera.com",
+        "nbcnews.com"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-11-19",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:35:54",
+      "target_name": "Larry Summers",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_025124",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "aljazeera-2025-11-19-summers",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "nbc-news-summers-openai",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 1452,
       "finding_type": "relationship",
       "summary": "LittleSis entity profile (entity 14597, updated Feb 8, 2026) now describes Summers with blurb: 'Resigned Harvard due to his close friendship with Jeffrey Epstein.' This public characterization confirms the reputational consequence has reached authoritative databases. LittleSis also confirms Summers maintained a 'social relationship' with Epstein (entity 36043). Key board positions contemporaneous with Epstein relationship: Block Inc (Square) board member, D.E. Shaw consultant, Center for Global Development, Doma Holdings, Eos Energy, LendingClub. His professional network through LittleSis includes Larry Ellison, the Winklevoss twins, and Keyu Jin. Summers also holds position at 'Project 2029' \u2014 a think tank entity worth investigating for Epstein network overlap.",
@@ -816,6 +913,21 @@
       ]
     },
     {
+      "id": 5944,
+      "person_a": "Larry Summers",
+      "person_b": "OpenAI",
+      "relationship_type": "employment",
+      "description": "Summers resigned OpenAI board Nov 19 2025 over Epstein emails revelations. Also stepped back from Harvard teaching pending investigation. No public UAE role yet \u2014 watch for Mubadala/MGX/PIF macro-advisor announcement.",
+      "strength": "strong",
+      "date_range": "2023-2025-11-19",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:36:50",
+      "profile_id": "epstein",
+      "other_person": "OpenAI",
+      "other_person_slug": "openai",
+      "evidence": []
+    },
+    {
       "id": 16,
       "person_a": "Larry Summers",
       "person_b": "Leon Black",
@@ -836,6 +948,21 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 5924,
+      "person_a": "Larry Summers",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "intelligence",
+      "description": "Summers met Misra at Saudi PIF/FII Riyadh-style event ~Oct 2017. Wrote to Epstein Oct 27 2017: 'Spent time w Softbank deputy Najeev or some such PIF guy too.' Earliest Epstein-orbit briefing on Misra at Saudi sovereign-fund event, 15 months pre-Weingarten 'Softbank caper' email.",
+      "strength": "medium",
+      "date_range": "2017-10",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:24:27",
+      "profile_id": "epstein",
+      "other_person": "Rajeev Misra",
+      "other_person_slug": "rajeev-misra",
+      "evidence": []
     },
     {
       "id": 87,
@@ -1378,6 +1505,17 @@
       "entity_type": "trust",
       "jurisdiction": "MA",
       "entity_status": "active"
+    },
+    {
+      "role": "Director (departed)",
+      "date_start": null,
+      "date_end": null,
+      "source": "irs_990,websearch",
+      "entity_id": 3047,
+      "entity_name": "OpenAI Foundation",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
     }
   ],
   "timeline": [
@@ -1502,12 +1640,28 @@
       "id": 147
     },
     {
+      "date": "2017-10",
+      "type": "connection",
+      "relationship_type": "intelligence",
+      "description": "Summers met Misra at Saudi PIF/FII Riyadh-style event ~Oct 2017. Wrote to Epstein Oct 27 2017: 'Spent time w Softbank deputy Najeev or some such PIF guy too.' Earliest Epstein-orbit briefing on Misra at Saudi sovereign-fund event, 15 months pre-Weingarten 'Softbank caper' email.",
+      "other_person": "Rajeev Misra",
+      "id": 5924
+    },
+    {
       "date": "2017-10-11",
       "type": "finding",
       "finding_type": "intelligence",
       "summary": "Summers warned Epstein about political exposure on Oct 11, 2017: 'Your pal should stay out of press. Public link to manafort will be a disaster. This is a staggering shit show.' This was forwarded in response to a Washington Post article about Trump allies and Manafort. The 'pal' likely refers to Steve Bannon, who Epstein hosted alongside Summers at dinners and who was Epstein's most frequent correspondent (160-1,399 emails across corpora). Summers then asked on Oct 27, 2017 if Epstein had been to Saudi Arabia, and reported attending an event where he spent time with 'Softbank deputy' and 'PIF guy.' He described his life as being among 'the lucrative and louche.' This reveals Summers providing real-time political intelligence and warnings to Epstein about Trump-Russia investigation proximity.",
       "confidence": "high",
       "id": 1423
+    },
+    {
+      "date": "2017-10-27",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Larry Summers Oct 27 2017 email to Epstein from Saudi PIF/FII Riyadh: 'Spent time w Softbank deputy Najeev or some such PIF guy too' \u2014 earliest Epstein-orbit briefing about Misra at a Saudi sovereign-fund event, 15 months before Weingarten's Jan 2019 'Softbank caper' email",
+      "confidence": "confirmed",
+      "id": 11118
     },
     {
       "date": "2017-12-02",
@@ -1556,6 +1710,30 @@
       "summary": "Lawrence Summers (Harvard Professor/President Emeritus, Brookline MA/Seabrook NH) made 240+ FEC contributions. Major donations: K Biden Action Fund (2020), .5K DNC (2020), K DNC (2019), K Dem Exec Committee FL (2021), .7K DNC (2020), .2K House Victory Project 2020. Exclusively Democratic donor. Recent recipients: Harris, Sherrod Brown, Maggie Hassan, Mark Warner, Sherrod Brown (2025). Also donated to smaller races: Debbie Mucarsel-Powell, Wendy Davis, Dan Feehan, Joy Fox. His giving is standard high-dollar Democratic donor activity -- no coordination with Epstein network members detected. Total giving exceeds K.",
       "confidence": "medium",
       "id": 465
+    },
+    {
+      "date": "2023-2025-11-19",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Summers resigned OpenAI board Nov 19 2025 over Epstein emails revelations. Also stepped back from Harvard teaching pending investigation. No public UAE role yet \u2014 watch for Mubadala/MGX/PIF macro-advisor announcement.",
+      "other_person": "OpenAI",
+      "id": 5944
+    },
+    {
+      "date": "2025-11-19",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Lawrence Summers resigned from OpenAI board November 19 2025 following Epstein email release by House Oversight Committee",
+      "confidence": "high",
+      "id": 9423
+    },
+    {
+      "date": "2025-11-19",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Larry Summers resigned OpenAI board Nov 19 2025 over Epstein emails; stepped back from teaching at Harvard pending investigation; no public UAE role yet \u2014 but his Oct 27 2017 'Najeev or some such PIF guy' email and pro-stablecoin advocacy make him a Mubadala/MGX/Saudi-PIF macro-advisor candidate",
+      "confidence": "high",
+      "id": 11135
     },
     {
       "date": "2026-02-08",

@@ -6,23 +6,29 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.993605",
-  "last_updated": "2026-03-05T21:20:33",
+  "generated_at": "2026-05-07T23:07:36.343157",
+  "last_updated": "2026-03-24T14:12:04",
   "stats": {
-    "total_findings": 6,
-    "total_connections": 10,
-    "total_entities": 0,
+    "total_findings": 9,
+    "total_connections": 20,
+    "total_entities": 1,
     "finding_types": {
-      "financial": 2,
+      "financial": 3,
       "intelligence": 1,
-      "relationship": 3
+      "relationship": 3,
+      "background": 1,
+      "legal": 1
     },
     "connection_types": {
-      "financial": 2,
-      "corporate": 5,
-      "political": 3
+      "financial": 3,
+      "corporate": 6,
+      "political": 4,
+      "legal": 2,
+      "owns": 2,
+      "social": 2,
+      "contracts_with": 1
     },
-    "last_updated": "2026-03-05T21:20:33"
+    "last_updated": "2026-03-24T14:12:04"
   },
   "findings": [
     {
@@ -197,6 +203,129 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7230,
+      "finding_type": "background",
+      "summary": "Oculus VR founder, Anduril Industries founder with 2.36B in federal contracts",
+      "detail": "Palmer Freeman Luckey (b. 1992, Long Beach, CA) founded Oculus VR, sold to Facebook/Meta for 2B in 2014. Fired from Facebook after funding pro-Trump group Nimble America in 2016. Founded Anduril Industries in 2017, now a 30B defense-tech company. ZeniMax Media sued Oculus; jury found NDA violation, Luckey personally ordered to pay 50M. Also sued by Total Recall Technologies (9th Circuit). Luckey is owner of Erebor Bank per LittleSis. Connected to Rockbridge Network. Anduril has received 2.36B in total federal contracts: 1.47B from DoD, 861M from DHS, 25M from DoE. Recently received up-to-20B Army contract for Lattice C2 software (March 2026). Anduril operates Arsenal-1, a 5M sq ft factory in Columbus OH for autonomous weapons production.",
+      "source_datasets": [
+        "usaspending",
+        "littlesis",
+        "courtlistener",
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:25",
+      "target_name": "Palmer Luckey",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: Total Recall Technologies v Palmer Luckey (19-15544); ZeniMax Media v Oculus (3:14-cv-01849)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR search Palmer Luckey: 2 filings (Colombier Acquisition Corp)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile: Anduril Industries Inc",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7234,
+      "finding_type": "financial",
+      "summary": "Luckey FEC donations: 309K+ heavily Republican including Take Back the House (300K), NRSC, and own Anduril PAC",
+      "detail": "FEC records show Palmer Luckey made 50+ contributions totaling 309K. Major recipients: Take Back the House 2022 (300K), WinRed (60.5K via latest batch plus 101.9K historic via LittleSis), One Team Senate Majority (53.5K), NRCC (17.7K), Emmer Majority Builders (16.5K), Dan Sullivan/NRSC (112K+106.5K via LittleSis), New Majority Federal PAC (10K), Anduril PAC (5.15K - company's own PAC). Also donated to Mike Gallagher (11.2K), Mike Garcia (17K), Mike Johnson (7K). Notably donated 1K to Alexandria Ocasio-Cortez in 2018. Exclusively Republican otherwise. Active 2020-2026.",
+      "source_datasets": [
+        "fec",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:35",
+      "target_name": "Palmer Luckey",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor search Luckey Palmer (50 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415 donation relationships",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7295,
+      "finding_type": "legal",
+      "summary": "Luckey involved in 3 major court cases: ZeniMax v Oculus (500M verdict, 50M personal), Total Recall Technologies v Luckey, Griffo v Oculus",
+      "detail": "CourtListener records show Palmer Luckey involved in significant litigation: (1) ZeniMax Media v Oculus VR Inc (3:14-cv-01849, N.D. Texas) filed 2014 - jury found Oculus guilty of patent infringement, 500M damages against Facebook, Luckey personally ordered to pay 50M for NDA violation and false designation. Appealed to 5th Circuit (18-10782). (2) Total Recall Technologies v Palmer Luckey (3:15-cv-02281, N.D. California; appealed 9th Circuit 19-15544) - technology dispute. (3) Griffo v Oculus VR Inc (8:15-cv-01228, C.D. California). The ZeniMax case established that Oculus/Luckey violated trade secret NDAs during Oculus founding, creating legal precedent about defense-tech founder's prior IP obligations.",
+      "source_datasets": [
+        "courtlistener",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:00",
+      "target_name": "Palmer Luckey",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: Griffo v Oculus VR 8:15-cv-01228",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: Total Recall Technologies v Palmer Luckey 3:15-cv-02281 and 19-15544",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: ZeniMax Media Inc v Oculus VR Inc 3:14-cv-01849",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -234,7 +363,7 @@
       "created_at": "2026-03-03 16:56:50",
       "profile_id": "tech-right",
       "other_person": "Anduril Industries LLC",
-      "other_person_slug": "anduril-industries",
+      "other_person_slug": "anduril-industries-llc",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -376,6 +505,144 @@
       "evidence": []
     },
     {
+      "id": 3412,
+      "person_a": "Palmer Luckey",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "political",
+      "description": "Speaker at Rockbridge Network events. Anduril Industries founder. Defense-tech billionaire. Key bridge between defense-tech sector and Rockbridge donor infrastructure.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:02:03",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Reuters Aug 2024; LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3531,
+      "person_a": "Adam Cohen",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:59:19",
+      "profile_id": "tech-right",
+      "other_person": "Adam Cohen",
+      "other_person_slug": "adam-cohen",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC:nr-occ-2025-76",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3532,
+      "person_a": "Jonathan Gould",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:59:19",
+      "profile_id": "tech-right",
+      "other_person": "Jonathan Gould",
+      "other_person_slug": "jonathan-gould",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate-Banking:Warren-Erebor-2026-02-25",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3644,
+      "person_a": "Anduril Industries",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "owns",
+      "description": "Founded Anduril Industries in 2017; company valued at 30B",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:53",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3661,
+      "person_a": "Erebor Bank",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "owns",
+      "description": "Palmer Luckey co-founded Erebor Bank. Investor memo cited his political network for charter approval",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:35",
+      "profile_id": "tech-right",
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC charter application; Warren letter 2026-02-25",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3853,
+      "person_a": "Josh Wolfe",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "social",
+      "description": "Wolfe organized Luckey's secret 2-day visit to Israel (Feb 2026) meeting PM Netanyahu and 10 Israeli defense startups. Wolfe was early backer of Luckey's Anduril through Lux Capital seed investment (2017).",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:04",
+      "profile_id": "tech-right",
+      "other_person": "Josh Wolfe",
+      "other_person_slug": "josh-wolfe",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #4571: Palmer Luckey Israel trip organized by Josh Wolfe",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2980,
       "person_a": "Keith Rabois",
       "person_b": "Palmer Luckey",
@@ -389,10 +656,120 @@
       "other_person": "Keith Rabois",
       "other_person_slug": "keith-rabois",
       "evidence": []
+    },
+    {
+      "id": 3500,
+      "person_a": "Marc Andreessen",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "financial",
+      "description": "a16z invested in Anduril Industries (Luckey's defense company). Luckey's Oculus was acquired by Meta where Andreessen serves on the board. Dual financial connection: investor relationship through a16z and corporate relationship through Meta/Oculus.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:28",
+      "profile_id": "tech-right",
+      "other_person": "Marc Andreessen",
+      "other_person_slug": "marc-andreessen",
+      "evidence": []
+    },
+    {
+      "id": 3551,
+      "person_a": "Andrew Bosworth",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:41",
+      "profile_id": "tech-right",
+      "other_person": "Andrew Bosworth",
+      "other_person_slug": "andrew-bosworth",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "breakingdefense.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3645,
+      "person_a": "Meta",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "corporate",
+      "description": "Founded Oculus VR, sold to Facebook/Meta for 2B in 2014. Fired 2017 after pro-Trump donation controversy.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:55",
+      "profile_id": "tech-right",
+      "other_person": "Meta",
+      "other_person_slug": "meta",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3658,
+      "person_a": "Palmer Luckey",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "social",
+      "description": "Palmer Luckey connected to Rockbridge Network per LittleSis",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:23",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415 relationship data",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
-  "entities": [],
-  "timeline": [],
+  "entities": [
+    {
+      "role": "founder",
+      "date_start": "2025",
+      "date_end": null,
+      "source": "OCC:charter-application-2025-06",
+      "entity_id": 624,
+      "entity_name": "Erebor Bank, N.A.",
+      "entity_type": "inc",
+      "jurisdiction": "OH",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Wolfe organized Luckey's secret 2-day visit to Israel (Feb 2026) meeting PM Netanyahu and 10 Israeli defense startups. Wolfe was early backer of Luckey's Anduril through Lux Capital seed investment (2017).",
+      "other_person": "Josh Wolfe",
+      "id": 3853
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Palmer Luckey co-founded Erebor Bank. Investor memo cited his political network for charter approval",
+      "other_person": "Erebor Bank",
+      "id": 3661
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4570,
@@ -496,288 +873,5 @@
       "private-order",
       "regulatory-capture"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Palmer Luckey",
-      "connections": [
-        {
-          "target": "Peter Thiel",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://fortune.com/2025/06/05/anduril-palmer-luckey-funding-30-billion-valuation-founders-fund/",
-          "description": "FF invested in Anduril since 2017, led 2.5B round 2025. Luckey met Trae Stephens at FF retreat 2014. Also backed Erebor digital bank."
-        },
-        {
-          "target": "Anduril Industries LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "FEC",
-          "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B."
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "CNBC 2025-06-05",
-          "description": "Thiel's Founders Fund is lead investor in Anduril (B in Series G alone). Luckey operates within Thiel's tech-right network. Stephens (Thiel protege) co-founded Anduril with Luckey."
-        },
-        {
-          "target": "Trae Stephens",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-        },
-        {
-          "target": "Joe Lonsdale",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders of Erebor Bank (Columbus, OH). Both from Thiel network: Luckey via Anduril/Founders Fund, Lonsdale via Palantir/8VC. Erebor positioned as bank for defense/crypto/AI ecosystem. $4.35B valuation."
-        },
-        {
-          "target": "Emil Michael",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Michael as USD(R&E) oversees Anduril's contract ecosystem: IVAS ($22B), TITAN, Golden Dome, Altius production. Michael publicly champions 'new primes' like Anduril. Both are Trump administration aligned. Michael's 6 tech priorities map directly to Anduril's product portfolio."
-        },
-        {
-          "target": "Erebor Bank",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Founder of Erebor Bank. Fundraising memo cited his 'political network' as key to securing regulatory approval. Also founder of Anduril Industries ($30.5B defense contractor)."
-        },
-        {
-          "target": "Antoine McCord",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "propublica:mccord-antoine",
-          "description": "McCord holds $100M-250M Anduril stock as DHS CIO; Luckey is Anduril founder/CEO"
-        },
-        {
-          "target": "JD Vance",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Both connected to Rockbridge Network (Vance founder, Luckey speaker). Luckey also connected via Anduril (Narya Capital invested)."
-        },
-        {
-          "target": "Keith Rabois",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Coordinated FEC donations to same recipients: Yvette Herrell, Take Back The House 2022, WinRed. Both Founders Fund-connected."
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries LLC": [
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-          },
-          {
-            "target": "Palantir Technologies Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Joint prime contractors on Army TITAN program (.4M). Both in Golden Dome consortium. Palantir-Anduril-SpaceX triangle proposing satellite missile defense. Trae Stephens worked at Palantir 2008-2014 before co-founding Anduril."
-          }
-        ],
-        "Emil Michael": [
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne hosted the Nov 2014 Waverly Inn dinner where Michael proposed spending $1M against journalists; Osborne was Uber consultant 2013-2017"
-          },
-          {
-            "target": "Eric Schmidt",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Schmidt served as Special Advisor to DPCM Capital, Michael's SPAC that took D-Wave Quantum public"
-          },
-          {
-            "target": "Travis Kalanick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Kalanick's closest confidant and right-hand man at Uber 2013-2017; ousted together by Holder Report; co-raised $15B including $3.5B Saudi PIF investment"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both at top Pentagon: Feinberg DepSecDef, Michael USD(R&E)"
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Michael was Coatue senior advisor (Oct 2018+); Laffont's Coatue co-led $30B Anthropic Series G (Feb 2026) while Michael led Pentagon Anthropic standoff"
-          }
-        ],
-        "Erebor Bank": [
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Erebor Bank. Also founder of 8VC, co-founder of Palantir, DOGE advisor. Fundraising memo cited co-founder's 'unique connectivity to banking regulators' \u2014 likely refers to Lonsdale's connections."
-          },
-          {
-            "target": "Jonathan Gould",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Gould as OCC Comptroller granted Erebor's national bank charter \u2014 conditional Oct 2025, full Feb 2026. Erebor's fundraising memo claimed co-founder had 'unique connectivity' to Gould. Gould publicly celebrated as 'first full-service charter in four years.' Gould has crypto background (Bitfury) aligning with Erebor's stablecoin plans."
-          },
-          {
-            "target": "Adam Cohen",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Cohen was Skadden partner who worked on Erebor's OCC charter application, then joined OCC as Chief Counsel (Aug 11, 2025) where he oversees bank supervision and licensing. Textbook revolving door \u2014 from representing the applicant to reviewing the application."
-          }
-        ],
-        "JD Vance": [
-          {
-            "target": "Peter Thiel",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mentor-protege since 2011. Thiel hired Vance at Mithril Capital, backed Narya Capital, donated 15M to Senate campaign, engineered VP selection"
-          },
-          {
-            "target": "Zach Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-          },
-          {
-            "target": "True Anomaly",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Vance co-founded Narya Capital which invested in True Anomaly (two rounds). True Anomaly won Golden Dome SBI contract. Vance retained 500K-1M Narya stake."
-          },
-          {
-            "target": "David Sacks",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Sacks speaker). Coordinated conservative donor network."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Witkoff spoke at Rockbridge Network semiannual conference April 2025. Rockbridge founded 2019 by Vance and Chris Buskirk as MAGA political infrastructure org."
-          }
-        ],
-        "Joe Lonsdale": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale is Palantir co-founder, Thiel mentee. Founded 8VC. Part of Thiel defense tech network."
-          },
-          {
-            "target": "Palantir Technologies Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir with Thiel in 2003. Later founded 8VC which invests in Thiel-network defense companies (Palantir, Anduril). Both back Erebor Bank. Lonsdale's 8VC employs sons of sanctioned Russian oligarchs."
-          },
-          {
-            "target": "8VC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
-          },
-          {
-            "target": "8VC",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Founder and Managing Partner of 8VC; sole executive officer on all Form D filings"
-          }
-        ],
-        "Keith Rabois": [
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Stanford Review, PayPal Mafia. Both libertarian activists since Stanford. Rabois later at Khosla Ventures, Founders Fund."
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Both Stanford contemporaries (Rabois attended around same time). Rabois was Partner at Founders Fund 2019-2024. Both part of PayPal extended network and Thiel orbit. Rabois also a prominent Trump-supporting tech figure."
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "familial",
-            "strength": 0.7,
-            "description": "Married 2018 (ceremony officiated by Sam Altman); Rabois is MD at Khosla Ventures / ex-Founders Fund GP; many of Helberg's investments tied to these funds"
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ],
-        "Trae Stephens": [
-          {
-            "target": "Founders Fund",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

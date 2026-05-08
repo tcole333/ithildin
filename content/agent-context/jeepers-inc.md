@@ -2,6 +2,8 @@
 **Stats**: 9 findings, 8 connections, 0 entities
 **Dossier**: /dossiers/jeepers-inc
 
+> Jeepers Inc is a USVI S-corporation that functioned as a holding vehicle within the Epstein entity constellation, receiving investment positions transferred from Financial Trust Company and serving as the distribution recipient for the Dubin-Fortress assignment.
+
 ## Key Findings
 - **[financial/medium]** Jeepers Inc USVI corporate details confirmed via multiple primary sources. USVI Division of Corporations entity 560561: Domestic Profit Corporation, registered 08/18/2003, at 6100 Red Hook Quarter B3, Charlotte Amalie, VI 00802 (Epstein USVI address). Registered agent: Business Basics VI LLC (Brett Kellerhals). Good standing from 08/18/2003 to 05/30/2022, last AR filed 06/30/2020, administratively dissolved 08/12/2022. JPMorgan bank records (EFTA01495008, EFTA01495013, EFTA01495019) confirm the same address. JPMorgan account team included Paul Morris (Banker), Paul Barrett (Investment Specialist). The Dec 2011 account statement shows no market value or activity. Deutsche Bank also held a Jeepers Inc brokerage account (EFTA01384085), which required KYC documentation including Certificate of Good Standing. Jeepers Inc was part of the Epstein entity constellation alongside JEGE Inc, Plan D LLC, NES LLC, Haze Trust, and Southern Trust. (2003-08-18) (Finding #1558)
 - **[financial/confirmed]** GRM box 004750681 contains Jeepers Inc USVI corporate documents: Articles of Incorporation/Certificate of Existence, S-Election, EIN, Qualified Subchapter S Subsidiary Election, Annual Reports, Franchise Tax, Minutes, Affidavit of Not Conducting Business, First Bank Account, IRS Notices, and Jeepers Inc Stock Certificate for 1000 Shares dated Aug. 18, 2003. Jeepers Inc Transactions section shows: D.B. Zwirn Special Opportunities Fund f/k/a Highbridge/Zwirn Special Opportunities Fund I (ASSIGNED FROM FTC), D.B. Zwirn Special Opportunities Fund f/k/a Highbridge/Zwirn Special Opportunities Fund II (ASSIGNED FROM FTC), DB Zwirn Special Opportunities Funds Investor Communication, Bear Stearns Bank Account, and Highbridge DB Zwirn Miscellaneous. The FTC assignments confirm Financial Trust Company transferred Zwirn fund positions to Jeepers Inc. (2003-08-18) (Finding #2495)
@@ -22,3 +24,15 @@
 - **Glenn Dubin** [financial/medium]: None
 - **Jeffrey Epstein** [financial/medium]: None
 - **DB Zwirn** [financial/medium]: Two volumes of communications regarding Jeepers/DB Zwirn stored in GRM Box #004740697 (EFTA00300480 p55). Volume of correspondence suggests substantial business relationship between Epstein's Jeepers entity and Daniel Zwirn's hedge fund.
+
+## Open Questions
+- The government subpoena in the Fortress arbitration demanded disclosure of all beneficial owners of and economic participants in Jeepers Inc and Financial Trust Company. What was produced in response, and are those production documents in the EFTA corpus or otherwise accessible?
+- The GRM records show two volumes of Jeepers–DB Zwirn correspondence (GRM Box #004740697). What specifically do these communications contain, and do they document the nature of the original investment relationship between FTC/Jeepers and the Zwirn funds?
+- The withdrawal requests drafted from November 2006 onward are recorded as "Withdrawal Requests Not Sent" and missing from files as of January 28, 2010. Who held these documents, and what determined the timing of their submission or non-submission relative to the Epstein criminal timeline?
+- The Dubin-to-Jeepers assignment of August 1, 2011 occurred after the DB Zwirn collapse and Epstein's 2008 sentencing. What were the terms that converted an adversarial Fortress-vs-Jeepers arbitration into a cooperative assignment arrangement, and are the settlement documents available?
+- Jeepers Inc held a Deutsche Bank brokerage account, a JPMorgan account, and a Bank of New York receiving account simultaneously. Were any Suspicious Activity Reports filed on Jeepers-related transactions at these institutions, given that Deutsche Bank's NYDFS consent order documents systemic SAR failures on the Epstein account cluster?
+
+## Applicable Models
+- jurisdictional-arbitrage
+- complexity-as-credential
+- enabler-gradient

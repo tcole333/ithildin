@@ -6,15 +6,15 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.981244",
+  "generated_at": "2026-05-07T23:07:36.390533",
   "last_updated": "2026-03-05T04:31:34",
   "stats": {
     "total_findings": 7,
     "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "relationship": 3,
       "financial": 3,
+      "relationship": 3,
       "intelligence": 1
     },
     "connection_types": {
@@ -27,6 +27,81 @@
     "last_updated": "2026-03-05T04:31:34"
   },
   "findings": [
+    {
+      "id": 5063,
+      "finding_type": "financial",
+      "summary": "FEC: Gerson donated to Al Lawson for Congress (x2 in 2020,  in 2017) and Alejandra Campoverdi for Congress ( in 2017) via Falcon Edge Capital",
+      "detail": "FEC records show Richard M. Gerson / Rick Gerson employed at Falcon Edge Capital, LLC made federal political contributions: Al Lawson for Congress  (2020-08-05, primary),  (2020-08-05, general),  (2017-03-27); Alejandra Campoverdi for Congress  (2017-03-03). Also  via ActBlue (2016-12-09). Mostly Democratic recipients. No large Trump-related contributions found in FEC records under this name, suggesting his Trump-orbit influence is relational rather than financial.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-08-05",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:29:11",
+      "target_name": "Rick Gerson",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor search for Richard M. Gerson and Rick Gerson, employer Falcon Edge Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5060,
+      "finding_type": "financial",
+      "summary": "EDGAR: Gerson (CIK 0001742201) is insider at Alpha Wave Global LP, Frontier Acquisition Corp, Pioneer Merger Corp, and Golden Falcon Acquisition Corp \u2014 multiple SPAC vehicles",
+      "detail": "SEC filings show Rick Matthew Gerson (CIK 0001742201) as insider/principal in: (1) Frontier Acquisition Corp (CIK 0001842223) / Frontier Acquisition Sponsor LLC (CIK 0001842222) \u2014 SC 13D filed 2021-03-25; (2) Pioneer Merger Corp (CIK 0001829797) / Pioneer Merger Sponsor LLC (CIK 0001830557) \u2014 SC 13D filed 2021-02-17; (3) Golden Falcon Acquisition Corp (CIK 0001823896) \u2014 Form 3 filed 2023-03-30; (4) Alpha Wave Global LP (CIK 0001558858) \u2014 Form 4s and 13Gs. Also: Alpha Wave Partners LLC (CIK 0002109152) Form D filed 2026-02-04, and Falcon CI II LP (CIK 0001702734) Form D/A 2018-04-04.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2021-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:28:45",
+      "target_name": "Rick Gerson",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR full-text search and CIK lookup",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5061,
+      "finding_type": "financial",
+      "summary": "Alpha Wave Global LP filings show Lunate Holding RSC Ltd (UAE) and Chimera Investment LLC as co-filing entities \u2014 direct UAE sovereign capital connection",
+      "detail": "EDGAR filings for Alpha Wave Global LP (CIK 0001558858) list Lunate Holding RSC Ltd (CIK 0002009522) and Chimera Investment LLC (CIK 0002009884) as co-reporting entities on SC 13G and Form 4 filings (e.g., for LENZ Therapeutics 2024-03-28, Alto Neuroscience 2024-02-08). Also co-filed with Alpha Wave Ventures GP Ltd (CIK 0002007422). Lunate is the Abu Dhabi sovereign wealth investment platform (spun out of Mubadala Investment Company). This shows Gerson's fund (evolved from Falcon Edge Capital to Alpha Wave) has direct structural ties to UAE sovereign capital, consistent with his role as UAE-connected intermediary.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-03-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:28:52",
+      "target_name": "Rick Gerson",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR SC 13G and Form 4 filings for Alpha Wave Global LP",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4143,
       "finding_type": "relationship",
@@ -90,56 +165,6 @@
       ]
     },
     {
-      "id": 5060,
-      "finding_type": "financial",
-      "summary": "EDGAR: Gerson (CIK 0001742201) is insider at Alpha Wave Global LP, Frontier Acquisition Corp, Pioneer Merger Corp, and Golden Falcon Acquisition Corp \u2014 multiple SPAC vehicles",
-      "detail": "SEC filings show Rick Matthew Gerson (CIK 0001742201) as insider/principal in: (1) Frontier Acquisition Corp (CIK 0001842223) / Frontier Acquisition Sponsor LLC (CIK 0001842222) \u2014 SC 13D filed 2021-03-25; (2) Pioneer Merger Corp (CIK 0001829797) / Pioneer Merger Sponsor LLC (CIK 0001830557) \u2014 SC 13D filed 2021-02-17; (3) Golden Falcon Acquisition Corp (CIK 0001823896) \u2014 Form 3 filed 2023-03-30; (4) Alpha Wave Global LP (CIK 0001558858) \u2014 Form 4s and 13Gs. Also: Alpha Wave Partners LLC (CIK 0002109152) Form D filed 2026-02-04, and Falcon CI II LP (CIK 0001702734) Form D/A 2018-04-04.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:28:45",
-      "target_name": "Rick Gerson",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR full-text search and CIK lookup",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5061,
-      "finding_type": "financial",
-      "summary": "Alpha Wave Global LP filings show Lunate Holding RSC Ltd (UAE) and Chimera Investment LLC as co-filing entities \u2014 direct UAE sovereign capital connection",
-      "detail": "EDGAR filings for Alpha Wave Global LP (CIK 0001558858) list Lunate Holding RSC Ltd (CIK 0002009522) and Chimera Investment LLC (CIK 0002009884) as co-reporting entities on SC 13G and Form 4 filings (e.g., for LENZ Therapeutics 2024-03-28, Alto Neuroscience 2024-02-08). Also co-filed with Alpha Wave Ventures GP Ltd (CIK 0002007422). Lunate is the Abu Dhabi sovereign wealth investment platform (spun out of Mubadala Investment Company). This shows Gerson's fund (evolved from Falcon Edge Capital to Alpha Wave) has direct structural ties to UAE sovereign capital, consistent with his role as UAE-connected intermediary.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:28:52",
-      "target_name": "Rick Gerson",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR SC 13G and Form 4 filings for Alpha Wave Global LP",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5062,
       "finding_type": "intelligence",
       "summary": "Mueller Report: Gerson served as back-channel between Kushner and Kirill Dmitriev (RDIF CEO), co-drafting US-Russia reconciliation plan Dec 2016-Jan 2017",
@@ -158,31 +183,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Mueller Report Vol. I; NBC News reporting; LittleSis relationship data",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5063,
-      "finding_type": "financial",
-      "summary": "FEC: Gerson donated to Al Lawson for Congress (x2 in 2020,  in 2017) and Alejandra Campoverdi for Congress ( in 2017) via Falcon Edge Capital",
-      "detail": "FEC records show Richard M. Gerson / Rick Gerson employed at Falcon Edge Capital, LLC made federal political contributions: Al Lawson for Congress  (2020-08-05, primary),  (2020-08-05, general),  (2017-03-27); Alejandra Campoverdi for Congress  (2017-03-03). Also  via ActBlue (2016-12-09). Mostly Democratic recipients. No large Trump-related contributions found in FEC records under this name, suggesting his Trump-orbit influence is relational rather than financial.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:29:11",
-      "target_name": "Rick Gerson",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor search for Richard M. Gerson and Rick Gerson, employer Falcon Edge Capital",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -432,6 +432,30 @@
       "description": "George Nader (UAE national security advisor) introduced Gerson to Dmitriev in late Nov 2016. Nader and Gerson exchanged WhatsApp messages on Jan 10, 2017, including photo of Nader with MBZ taken in Morocco. Nader facilitated the Gerson-Dmitriev-Seychelles channel.",
       "other_person": "George Nader",
       "id": 2897
+    },
+    {
+      "date": "2020-08-05",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC: Gerson donated to Al Lawson for Congress (x2 in 2020,  in 2017) and Alejandra Campoverdi for Congress ( in 2017) via Falcon Edge Capital",
+      "confidence": "confirmed",
+      "id": 5063
+    },
+    {
+      "date": "2021-03-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "EDGAR: Gerson (CIK 0001742201) is insider at Alpha Wave Global LP, Frontier Acquisition Corp, Pioneer Merger Corp, and Golden Falcon Acquisition Corp \u2014 multiple SPAC vehicles",
+      "confidence": "confirmed",
+      "id": 5060
+    },
+    {
+      "date": "2024-03-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Alpha Wave Global LP filings show Lunate Holding RSC Ltd (UAE) and Chimera Investment LLC as co-filing entities \u2014 direct UAE sovereign capital connection",
+      "confidence": "confirmed",
+      "id": 5061
     }
   ],
   "curation": {
@@ -499,7 +523,7 @@
       {
         "id": "uae-sovereign-capital-ties",
         "title": "UAE Sovereign Capital Ties",
-        "content": "Alpha Wave Global LP's SEC filings list Lunate Holding RSC Ltd (CIK 0002009522) and Chimera Investment LLC (CIK 0002009884) as co-reporting entities on 13G and Form 4 submissions covering positions in LENZ Therapeutics (March 2024) and Alto Neuroscience (February 2024) [Finding #5061]. Lunate was spun out of Mubadala Investment Company, Abu Dhabi's primary sovereign wealth platform. Chimera is a separate Abu Dhabi-listed investment company. Both sit within the broader capital ecosystem controlled by Tahnoun bin Zayed al-Nahyan, whose dossier is at <a href='/dossiers/tahnoun-bin-zayed-al-nahyan'>Tahnoun bin Zayed Al Nahyan</a> [Finding #5061]. Gerson's board membership on Abu Dhabi Catalyst Partners \u2014 a joint venture between Mubadala and Alpha Wave \u2014 further formalizes this structural relationship [Finding #4143]. These co-filings reflect a structural commercial relationship: UAE sovereign funds and Gerson's fund share mandatory SEC disclosure obligations for jointly held positions.",
+        "content": "Alpha Wave Global LP's SEC filings list Lunate Holding RSC Ltd (CIK 0002009522) and Chimera Investment LLC (CIK 0002009884) as co-reporting entities on 13G and Form 4 submissions covering positions in LENZ Therapeutics (March 2024) and Alto Neuroscience (February 2024) [Finding #5061]. Lunate was spun out of Mubadala Investment Company, Abu Dhabi's primary sovereign wealth platform. Chimera is a separate Abu Dhabi-listed investment company. Both sit within the broader capital ecosystem controlled by Tahnoun bin Zayed al-Nahyan, whose dossier is at <a href='/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan'>Tahnoun bin Zayed Al Nahyan</a> [Finding #5061]. Gerson's board membership on Abu Dhabi Catalyst Partners \u2014 a joint venture between Mubadala and Alpha Wave \u2014 further formalizes this structural relationship [Finding #4143]. These co-filings reflect a structural commercial relationship: UAE sovereign funds and Gerson's fund share mandatory SEC disclosure obligations for jointly held positions.",
         "viz": "ego_network"
       },
       {
@@ -517,7 +541,7 @@
       {
         "id": "network-position",
         "title": "Network Position",
-        "content": "Gerson's documented relationships span three distinct networks: the Kushner family social circle, UAE sovereign capital infrastructure, and Russian sovereign fund outreach. <a href='/dossiers/jared-kushner'>Jared Kushner</a> is his primary US political connection \u2014 UAE officials used 'Kushner's guy' as a descriptor, and Gerson's brother Mark invested in Cadre, the real estate tech platform co-founded by <a href=\"/dossiers/josh-kushner\">Josh Kushner</a> [Connection #2478]. Mohammed bin Zayed (MBZ), UAE President, had a documented 'long relationship' with Gerson per Mueller findings; the December 2016 Four Seasons meeting was a trilateral between MBZ, Gerson, and Trump transition principals [Finding #4143]. Kirill Dmitriev at RDIF used Gerson as the channel for delivering a policy framework to Kushner; LittleSis independently documents a social relationship between Gerson [Entity #49863] and Dmitriev [Entity #345191] [Finding #5062]. George Nader, who brokered the Dmitriev introduction, also appears in the Seychelles-era WhatsApp record \u2014 making Nader the common node linking Gerson to both the UAE and Russia channels simultaneously [Finding #5062]. <a href='/dossiers/tahnoun-bin-zayed-al-nahyan'>Tahnoun bin Zayed Al Nahyan</a>, as the Abu Dhabi official overseeing Lunate/Mubadala, represents Gerson's continuing institutional tie to the UAE sovereign apparatus post-transition [Finding #5061].",
+        "content": "Gerson's documented relationships span three distinct networks: the Kushner family social circle, UAE sovereign capital infrastructure, and Russian sovereign fund outreach. <a href='/dossiers/jared-kushner'>Jared Kushner</a> is his primary US political connection \u2014 UAE officials used 'Kushner's guy' as a descriptor, and Gerson's brother Mark invested in Cadre, the real estate tech platform co-founded by <a href=\"/dossiers/josh-kushner\">Josh Kushner</a> [Connection #2478]. Mohammed bin Zayed (MBZ), UAE President, had a documented 'long relationship' with Gerson per Mueller findings; the December 2016 Four Seasons meeting was a trilateral between MBZ, Gerson, and Trump transition principals [Finding #4143]. Kirill Dmitriev at RDIF used Gerson as the channel for delivering a policy framework to Kushner; LittleSis independently documents a social relationship between Gerson [Entity #49863] and Dmitriev [Entity #345191] [Finding #5062]. George Nader, who brokered the Dmitriev introduction, also appears in the Seychelles-era WhatsApp record \u2014 making Nader the common node linking Gerson to both the UAE and Russia channels simultaneously [Finding #5062]. <a href='/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan'>Tahnoun bin Zayed Al Nahyan</a>, as the Abu Dhabi official overseeing Lunate/Mubadala, represents Gerson's continuing institutional tie to the UAE sovereign apparatus post-transition [Finding #5061].",
         "viz": "ego_network"
       }
     ],
@@ -541,200 +565,6 @@
       {
         "name": "Foreign Government Advisory Pattern",
         "description": "The FARA registration for Morocco (2011-2012), followed by undisclosed UAE and Russian transition-period facilitation, fits a recurring pattern where formal foreign-agent registration is used early in a career and later advisory work with foreign state actors is conducted through informal channels that may not trigger FARA filing obligations as currently interpreted."
-      }
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Rick Gerson",
-      "connections": [
-        {
-          "target": "Jared Kushner",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "NBC News June 2018",
-          "description": "Close friends for 10+ years. UAE officials consider Gerson 'Kushner's guy.' Brother Mark Gerson invested in Cadre (Josh Kushner). Mueller investigated Gerson's role as intermediary."
-        },
-        {
-          "target": "Mohammed bin Zayed",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "NBC News June 2018",
-          "description": "MBZ had a 'long relationship' with Gerson per Mueller investigation. Gerson attended secret Dec 2016 meeting with MBZ and Trump transition team at Four Seasons NYC. Met MBZ in Seychelles Jan 2017."
-        },
-        {
-          "target": "Jared Kushner",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "F-4143; F-4223; LittleSis entity 71297",
-          "description": "Gerson is Kushner MBZ intermediary per Mueller investigation. Alpha Wave co-founder. Already in DB as F-4143 F-4223. LittleSis associates Jared with Gerson as MBZ backchannel."
-        },
-        {
-          "target": "Kirill Dmitriev",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 345191",
-          "description": "Gerson served as Kushner's back-channel to Dmitriev (RDIF CEO) during 2016-2017 transition. UAE's George Nader brokered the introduction Nov 2016. Co-drafted US-Russia reconciliation plan cleared through Putin. Gerson present in Seychelles during Prince-Dmitriev meeting."
-        },
-        {
-          "target": "Jared Kushner",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "Mueller Report Vol. I",
-          "description": "Gerson is close personal friend of Kushner. Delivered Dmitriev/Putin-backed US-Russia reconciliation plan to Kushner on Jan 18, 2017. Acted as informal intermediary connecting Kushner to UAE and Russian sovereign fund principals."
-        },
-        {
-          "target": "George Nader",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": "Mueller Report Vol. I",
-          "description": "George Nader (UAE national security advisor) introduced Gerson to Dmitriev in late Nov 2016. Nader and Gerson exchanged WhatsApp messages on Jan 10, 2017, including photo of Nader with MBZ taken in Morocco. Nader facilitated the Gerson-Dmitriev-Seychelles channel."
-        },
-        {
-          "target": "Tahnoun bin Zayed Al Nahyan",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "EDGAR Alpha Wave filings",
-          "description": "Both operate in UAE sovereign capital ecosystem. Gerson's Alpha Wave Global co-files with Lunate Holding RSC Ltd and Chimera Investment LLC (UAE entities). Tahnoun controls ADQ and MGX sovereign funds. George Nader (UAE advisor) introduced Gerson to Dmitriev. Tahnoun is UAE's national security advisor \u2014 the same institutional apparatus that facilitated Gerson's transition-period back-channel."
-        }
-      ],
-      "secondHop": {
-        "George Nader": [
-          {
-            "target": "Kathy Ruemmler",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Elliott Broidy",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Co-conspirators in anti-Qatar influence operation. Nader paid Broidy 2.7M. Both charged with FARA violations. Both pardoned by Trump Jan 2021."
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": ""
-          },
-          {
-            "target": "Jared Kushner",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "Associates per LittleSis. Nader served as backchannel intermediary between Trump transition and UAE/Saudi officials. Convicted child sex trafficking. Mueller investigation witness."
-          },
-          {
-            "target": "Elliott Broidy",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Jared Kushner": [
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Joint meetings with Kirill Dmitriev at Faena Miami Oct 2025 to negotiate Ukraine peace plan. Dmitriev publicly credited both for assistance. Co-navigators in Trump foreign policy network."
-          },
-          {
-            "target": "Mohammed bin Salman",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Close friends per LittleSis; MBS PIF committed 2B to Jared Affinity Partners despite advisory board opposition; 844K Trump 47 donation 2024"
-          },
-          {
-            "target": "Rosemary Vrablic",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank private wealth manager with dual relationship: personal banker and direct business transactions. Approved Kushner loans other banks rejected. Resigned DB Nov 2021."
-          },
-          {
-            "target": "Nikola Selakovic",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Serbian Culture Minister indicted for illegally removing cultural heritage protection to enable Kushner Affinity Partners Belgrade Trump Tower project"
-          },
-          {
-            "target": "Charles Kushner",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Charles founded Kushner Companies; convicted 2005; Jared assumed control via Oct 2008 DE LLC restructuring. Coordinated 2024 political donations. Charles pardoned Dec 2020 now Ambassador to France."
-          }
-        ],
-        "Kirill Dmitriev": [
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Professional relationship per LittleSis. Dmitriev is RDIF CEO sanctioned by US 2022. Met multiple times including Faena hotel Miami Oct 2025 with Kushner. Negotiated 28-point Ukraine peace plan. Putin meetings."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "social",
-            "strength": 0.7,
-            "description": "Professional relationship per LittleSis; Dmitriev is CEO of Russian Direct Investment Fund, was tasked by Putin to make inroads with Trump team"
-          }
-        ],
-        "Mohammed bin Zayed": [
-          {
-            "target": "Martin Edelman",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Edelman met MBZ during 2002 Gulf tour with Gen Tommy Franks. Became senior adviser to Mubadala the Abu Dhabi sovereign fund. Appointed Mubadala designee on AMD board 2013 and GlobalFoundries board 2017. Reportedly granted Emirati citizenship."
-          }
-        ],
-        "Tahnoun bin Zayed Al Nahyan": [
-          {
-            "target": "G42 Investments AI Holdings RSC Ltd",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tahnoun chairs G42, the Abu Dhabi AI company. G42 has SEC filings for vTv Therapeutics ownership and is connected to Cerebras Systems."
-          },
-          {
-            "target": "International Holding Company PJSC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tahnoun chairs IHC, the Abu Dhabi conglomerate listed on ADX."
-          },
-          {
-            "target": "MGX",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "LittleSis documents Tahnoun connection to World Liberty Financial (Trump family crypto). Trump signed G42 AI campus deal May 2025. Trump admin approved 35,000 Nvidia chip export to G42. Tahnoun visited Trump White House March 2025. Pattern: UAE sovereign capital flowing to Trump-adjacent ventures while receiving favorable regulatory treatment on AI chip exports."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2016 to present",
-        "label": "advisory with Jared Kushner",
-        "type": "advisory",
-        "entity": "Jared Kushner",
-        "id": 2896
-      },
-      {
-        "date": "2016-11 to 2017-01",
-        "label": "intelligence with Kirill Dmitriev",
-        "type": "intelligence",
-        "entity": "Kirill Dmitriev",
-        "id": 2895
-      },
-      {
-        "date": "2016-11 to 2017-01",
-        "label": "intelligence with George Nader",
-        "type": "intelligence",
-        "entity": "George Nader",
-        "id": 2897
       }
     ]
   }

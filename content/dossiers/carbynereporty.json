@@ -8,7 +8,7 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.937512",
+  "generated_at": "2026-05-07T23:07:36.306774",
   "last_updated": "2026-03-04T17:48:22",
   "stats": {
     "total_findings": 10,
@@ -202,6 +202,31 @@
       ]
     },
     {
+      "id": 4921,
+      "finding_type": "financial",
+      "summary": "Carbyne Inc received $396K PPP loan, only 91% forgiven \u2014 Ehud Barak-linked emergency tech",
+      "detail": "Carbyne, Inc. (New York, NY) received $396,000 PPP loan on 2020-04-27. Only $360,605 forgiven (91%), with $35,395 unforgiven. Ehud Barak and Peter Thiel-backed emergency communications startup. Lender: Valley National Bank. NAICS 541519. 21 jobs. Address: 276 5th Ave, New York NY.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-04-27",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 17:48:22",
+      "target_name": "Carbyne",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBA PPP FOIA dataset",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 413,
       "finding_type": "financial",
       "summary": "Carbyne Inc. maintained active lobbying from Q3 2021 through Q4 2025 (19 filings) via LSN Partners LLC, focused exclusively on Next Generation 911 and Emergency Communications. Spending was steady at 10K/quarter through Q3 2025, increasing to 20K/quarter from Q4 2024. Lobbied on Build Back Better Act, H.R.59 SAVE Act, and H.R.637 SAVE Act. Key lobbyist: Jose Fuentes (consistent throughout). Carbyne was co-founded by Ehud Barak with Epstein investment (STC wired 1M to ERGO Ltd at Bank Leumi). Barak was chairman. Axon acquired Carbyne Q4 2025. Lobbying continued through acquisition.",
@@ -241,31 +266,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=negative_search_Carbyne",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4921,
-      "finding_type": "financial",
-      "summary": "Carbyne Inc received $396K PPP loan, only 91% forgiven \u2014 Ehud Barak-linked emergency tech",
-      "detail": "Carbyne, Inc. (New York, NY) received $396,000 PPP loan on 2020-04-27. Only $360,605 forgiven (91%), with $35,395 unforgiven. Ehud Barak and Peter Thiel-backed emergency communications startup. Lender: Valley National Bank. NAICS 541519. 21 jobs. Address: 276 5th Ave, New York NY.",
-      "source_datasets": [
-        "usaspending"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 17:48:22",
-      "target_name": "Carbyne",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SBA PPP FOIA dataset",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -482,6 +482,14 @@
       "summary": "Indyke resisted revealing Epstein as controlling person of STC to Israeli lawyers handling Carbyne anti-money-laundering compliance. Wrote: 'I thought we did not want your name associated with this Investment.' Barak reassured Epstein: 'That is the Israeli banks paranoia after they paid the penalties...it was never leaked out of the banks.' Epstein ultimately gave 'ok' to disclose on March 14, 2019 \u2014 4 months before arrest.",
       "confidence": "confirmed",
       "id": 331
+    },
+    {
+      "date": "2020-04-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Carbyne Inc received $396K PPP loan, only 91% forgiven \u2014 Ehud Barak-linked emergency tech",
+      "confidence": "confirmed",
+      "id": 4921
     },
     {
       "date": "2021-07",

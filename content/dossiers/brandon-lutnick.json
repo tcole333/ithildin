@@ -6,7 +6,7 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.966514",
+  "generated_at": "2026-05-07T23:07:36.355380",
   "last_updated": "2026-03-06T03:50:53",
   "stats": {
     "total_findings": 8,
@@ -27,6 +27,31 @@
     "last_updated": "2026-03-06T03:50:53"
   },
   "findings": [
+    {
+      "id": 5827,
+      "finding_type": "financial",
+      "summary": "FEC: $419K to Trump 47 Committee (Aug 2024), $50K Grow the Majority (Sep 2025), all via Cantor Fitzgerald",
+      "detail": "FEC records show Brandon Lutnick (employer: CANTOR FITZGERALD, 499 Park Avenue, New York NY) donated $419,000 to TRUMP 47 COMMITTEE INC on 2024-08-16, with memo allocations to RNC ($123K x3) and NEVER SURRENDER INC ($3,300 x2). In 2025, donated $50,000 to GROW THE MAJORITY (GOP joint fundraiser) on 2025-09-22, with memo allocations to Speaker Mike Johnson ($7K), NRCC ($38K), and AMERICAN REVIVAL PAC ($5K). Occupation listed as CHAIRMAN. Also notable: $1,000 to TORRES FOR CONGRESS via ACTBLUE in 2023 (Democrat Ritchie Torres, NY-15) \u2014 a bipartisan crypto ally.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-08-16",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:48:52",
+      "target_name": "Brandon Lutnick",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions search: Lutnick Brandon, 17 records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 3880,
       "finding_type": "financial",
@@ -204,31 +229,6 @@
       ]
     },
     {
-      "id": 5827,
-      "finding_type": "financial",
-      "summary": "FEC: $419K to Trump 47 Committee (Aug 2024), $50K Grow the Majority (Sep 2025), all via Cantor Fitzgerald",
-      "detail": "FEC records show Brandon Lutnick (employer: CANTOR FITZGERALD, 499 Park Avenue, New York NY) donated $419,000 to TRUMP 47 COMMITTEE INC on 2024-08-16, with memo allocations to RNC ($123K x3) and NEVER SURRENDER INC ($3,300 x2). In 2025, donated $50,000 to GROW THE MAJORITY (GOP joint fundraiser) on 2025-09-22, with memo allocations to Speaker Mike Johnson ($7K), NRCC ($38K), and AMERICAN REVIVAL PAC ($5K). Occupation listed as CHAIRMAN. Also notable: $1,000 to TORRES FOR CONGRESS via ACTBLUE in 2023 (Democrat Ritchie Torres, NY-15) \u2014 a bipartisan crypto ally.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:48:52",
-      "target_name": "Brandon Lutnick",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions search: Lutnick Brandon, 17 records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5828,
       "finding_type": "financial",
       "summary": "Cantor-Tether conflict: Cantor custodies $80B+ Tether Treasury reserves while father is Commerce Secretary",
@@ -331,7 +331,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC 13D/A Amendment 20B, CIK 1094831, 2025-10-06",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1094831",
           "source_quote": null,
           "source_page": null
         }
@@ -435,7 +435,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC 8-K Dec 12 2025 CIK 0002070457",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2070457",
           "source_quote": null,
           "source_page": null
         }
@@ -577,6 +577,14 @@
   "entities": [],
   "timeline": [
     {
+      "date": "2024-08-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC: $419K to Trump 47 Committee (Aug 2024), $50K Grow the Majority (Sep 2025), all via Cantor Fitzgerald",
+      "confidence": "confirmed",
+      "id": 5827
+    },
+    {
       "date": "2024-2025",
       "type": "connection",
       "relationship_type": "corporate",
@@ -681,250 +689,6 @@
       "bridge-tax",
       "complexity-as-credential",
       "manufactured-dependency"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Brandon Lutnick",
-      "connections": [
-        {
-          "target": "Howard Lutnick",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC 13D/A Amendment 20B, CIK 1094831, 2025-10-06",
-          "description": "Howard divested all BGC Group/Cantor Fitzgerald holdings to trusts controlled by Brandon per Oct 2025 SEC filings. CFGM voting shares for 200K. Brandon controls 23.4% BGC Group with 75.1% voting power."
-        },
-        {
-          "target": "Howard Lutnick",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "Bloomberg",
-          "description": "Father-son. Brandon (age 27) became Chairman of Cantor Fitzgerald when Howard became Commerce Secretary Feb 2025. Brandon also chairs Cantor Equity Partners (CEP SPAC that merged into Twenty One Capital/XXI). Kyle Lutnick is exec vice chairman. Family maintains control of firm while father sets government policy affecting firm interests."
-        },
-        {
-          "target": "Tether Investments",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC 8-K Dec 12 2025 CIK 0002070457",
-          "description": "Brandon Lutnick chaired Cantor Equity Partners SPAC that merged with Tether-controlled Twenty One Assets to create XXI. Cantor EP Holdings (Sponsor) retained convertible notes and shares."
-        },
-        {
-          "target": "Twenty One Capital",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
-          "description": "CEO and Chairman of Cantor Equity Partners Inc SPAC that merged with Twenty One Capital. Son of Commerce Secretary Howard Lutnick. Now Chairman of Cantor Fitzgerald LP which sponsored the SPAC, served as financial advisor, and custodies Tether reserves."
-        },
-        {
-          "target": "Cantor Fitzgerald",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
-          "description": "Chairman of Cantor Fitzgerald LP and CEO/Chairman of Cantor Equity Partners Inc (SPAC). Previously was under Howard Lutnick. Now runs the serial SPAC factory (CEP I through VI) while Cantor custodies Tether reserves and holds 5% equity stake in Tether."
-        },
-        {
-          "target": "Kyle Lutnick",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Fortune 2025-02-20",
-          "description": "Co-leaders of Cantor Fitzgerald post-divestiture; Brandon CEO/Chairman, Kyle Exec VP"
-        },
-        {
-          "target": "Masayoshi Son",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC filings, Cantor press release",
-          "description": "Brandon Lutnick chairs Cantor Equity Partners SPAC that merged with SoftBank-backed Twenty One Capital. Son's SoftBank contributed $900M+ BTC. Brandon assumed Cantor chairman role when father Howard became Commerce Secretary. Direct business partnership between Commerce Sec's son and SoftBank."
-        },
-        {
-          "target": "Twenty One Capital",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://www.coindesk.com/markets/2025/04/23/commerce-secretary-lutnick-s-son-teams-up-with-tether-softbank-for-usd3b-bitcoin-spac-ft",
-          "description": "Brandon Lutnick chairs Cantor Fitzgerald and launched Twenty One Capital \u2014 a Bitcoin acquisition vehicle formed via Cantor Equity Partners SPAC, backed by Tether, SoftBank, and Bitfinex. Twenty One plans 42,000+ BTC at launch (~$4B). Son of Commerce Secretary Howard Lutnick."
-        },
-        {
-          "target": "Bo Hines",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC S-4 0001213900-25-087358",
-          "description": "Hines is Tether designee on XXI board; Brandon chairs XXI via CEP SPAC"
-        }
-      ],
-      "secondHop": {
-        "Bo Hines": [
-          {
-            "target": "Howard Lutnick",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Hines served as Executive Director of White House Crypto Council while Lutnick was Commerce Sec. Hines helped advance GENIUS Act. Left White House Aug 2025 to become CEO of Tether USAT -- the regulated stablecoin custodied by Cantor Fitzgerald (Lutnick family firm). Direct revolving door benefiting Lutnick financial interests."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump endorsed Hines for NC-13 (2022). Nxum Group donated $1M MAGA Inc billboard ads (Oct 2024). Trump appointed Hines WH Crypto Council ED (Jan 2025). Patron-client relationship."
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Hines CEO of Tether US (USAT); Lutnick former Cantor Fitzgerald chairman. Cantor is reserve custodian for USAT. Lutnick now Commerce Secretary. Both benefit from GENIUS Act framework Hines championed."
-          },
-          {
-            "target": "David Sacks",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Sacks was WH AI and Crypto Czar; Hines reported to Sacks as ED of Crypto Council. After resignation, Hines retained advisory role to assist Sacks on AI. Sacks praised Hines on departure."
-          },
-          {
-            "target": "Paolo Ardoino",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Ardoino is Tether CEO; Hines appointed CEO of Tether US (USAT division). Ardoino announced Hines appointment at Sep 12 2025 NYC event. Tether parent entity based in El Salvador; Hines runs US arm in Charlotte NC."
-          }
-        ],
-        "Cantor Fitzgerald": [
-          {
-            "target": "US Commerce Department",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head."
-          },
-          {
-            "target": "Tether Operations Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues."
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address."
-          },
-          {
-            "target": "Tether Holdings Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total)."
-          },
-          {
-            "target": "Parabridge International Services",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers."
-          }
-        ],
-        "Howard Lutnick": [
-          {
-            "target": "Paolo Ardoino",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Lutnick (Commerce Sec, former Cantor CEO) has multi-layered financial relationship with Ardoino (Tether CEO): Cantor custodies Tether's 127B+ in T-bills, holds 5% equity stake via convertible debt, co-launched Twenty One Capital SPAC, and serves as designated custodian for USAT stablecoin"
-          },
-          {
-            "target": "Tether Investments",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howard Lutnick's Cantor Fitzgerald manages Tether's 80B+ Treasury reserves and holds a 5% stake in Tether. Lutnick publicly vouched for Tether before becoming Commerce Secretary. His son Brandon chaired the SPAC that merged with Tether's Twenty One Assets."
-          },
-          {
-            "target": "Twenty One Capital",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Former CEO of Cantor Fitzgerald which set up the CEP SPAC, custodies Tether reserves, and holds 5% equity in Tether. Confirmed as Commerce Secretary Feb 24, 2025. Divested Cantor stakes to children including Brandon. Commerce Dept influences crypto regulation affecting Tether, XXI, and the SPAC vehicle his firm created."
-          },
-          {
-            "target": "Roberto Velez",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "BGC whistleblower with board-level Lutnick contact per FBI FD-302"
-          },
-          {
-            "target": "Sarah Ferguson",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor gave Ferguson office space above CF HQ for Children in Crisis charity"
-          }
-        ],
-        "Masayoshi Son": [
-          {
-            "target": "Sheikh Tahnoon bin Zayed",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Direct meeting to discuss AI infrastructure, semiconductor strategies, GPU deployment, joint collaboration. MGX (Tahnoon's fund) and SoftBank are co-investors in both Stargate US (MGX 10%) and Stargate UAE. Tahnoon's G42 is key operator in Stargate UAE. PIF (Saudi, aligned with Tahnoon network) was anchor LP in Vision Fund 1."
-          },
-          {
-            "target": "Rajeev Misra",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "First worked together on 2006 Vodafone Japan LBO when Misra was at DB. Misra joined SoftBank 2014, became Vision Fund co-CEO 2017. Son trusted Misra to run  fund. Misra left Nov 2024 but remains connected via OneIM."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Son made headline investment pledges directly to Trump at Mar-a-Lago in both 2016 ($50B) and 2024 ($100B). Co-founded Stargate with Trump announcement Jan 2025. Son's deals require regulatory favor: expedited permits, FTC/CFIUS clearance, federal land, chip export policy."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Son provides Trump headline investment pledges since Dec 2016; Trump provides regulatory forbearance and federal land access"
-          },
-          {
-            "target": "Brad Weingarten",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "YouTube briefing material prepared [HOUSE_OVERSIGHT_028601]"
-          }
-        ],
-        "Tether Investments": [
-          {
-            "target": "iFinex Inc",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tether and Bitfinex (iFinex Inc, BVI) are related entities. They jointly contributed 31,500 BTC to Twenty One Assets LLC and together hold 65.7% Class A and 74.7% Class B Stock (voting control). Both are Sellers under the Business Combination Agreement. Tether is an El Salvador sociedad anonima de capital variable."
-          }
-        ],
-        "Twenty One Capital": [
-          {
-            "target": "Jack Mallers",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Jack Mallers is CEO, President and Director of Twenty One Capital. Co-founder alongside Tether. Salary 600K + bonus up to 700K, stock options for 12,179,268 shares. Previously CEO of Strike."
-          },
-          {
-            "target": "Paolo Ardoino",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Paolo Ardoino is CEO of Tether and serves on XXI board as a Tether designee."
-          },
-          {
-            "target": "SoftBank",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Via Stellar Beacon LLC (Delaware), SoftBank holds 22.3% Class A and 25.3% Class B Stock (25.3% voting power). SoftBank paid cash to Tether which purchased 10,500 BTC on SoftBanks behalf. SoftBank consideration: .8M in Pubco stock. Sullivan and Cromwell LLP represented SoftBank."
-          },
-          {
-            "target": "Tether",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tether Investments S.A. de C.V. (El Salvador) is PIPE investor contributing Bitcoin to business combination"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2024-2025",
-        "label": "corporate with Tether Investments",
-        "type": "corporate",
-        "entity": "Tether Investments",
-        "id": 2277
-      }
     ]
   }
 }

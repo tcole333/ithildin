@@ -5,25 +5,161 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.828915",
-  "last_updated": "2026-03-09T19:21:33",
+  "generated_at": "2026-05-07T23:07:36.142443",
+  "last_updated": "2026-03-24T00:19:25",
   "stats": {
-    "total_findings": 22,
-    "total_connections": 0,
+    "total_findings": 23,
+    "total_connections": 1,
     "total_entities": 0,
     "finding_types": {
-      "identity": 1,
-      "financial": 8,
-      "intelligence": 7,
-      "legal": 1,
-      "document": 2,
+      "financial": 9,
       "relationship": 2,
-      "communication": 1
+      "communication": 1,
+      "intelligence": 7,
+      "identity": 1,
+      "legal": 1,
+      "document": 2
     },
-    "connection_types": {},
-    "last_updated": "2026-03-09T19:21:33"
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-03-24T00:19:25"
   },
   "findings": [
+    {
+      "id": 6319,
+      "finding_type": "financial",
+      "summary": "Pakistan paid Javelin Advisors ,000/month as a subcontractor to Seiden Law LLP. Seiden Law received ,000/month directly from Pakistan, subcontracted Javelin at K/month. Total Pakistan lobbying spend was ,000/month across two firms (Squire Patton Boggs ,500 + Seiden/Javelin). Javelin agreement dated April 24, 2025. Services: promote exploration and sale of rare earth/critical minerals, establish US economic partnerships.",
+      "detail": null,
+      "source_datasets": [
+        "fara",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-04-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:25",
+      "target_name": "Javelin Advisors LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:7579",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=Seiden-Law",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6374,
+      "finding_type": "relationship",
+      "summary": "Javelin Advisors LLC (Boca Raton FL address: 433 Plaza Real, Ste 275) registered under FARA (Reg No. 7579) on April 25, 2025 as agent for the Islamic Republic of Pakistan. FARA registration was terminated October 8, 2025. This means Javelin Advisors \u2014 founded by former GreenMet shareholders George Sorial and Keith Schiller \u2014 was a registered foreign agent for Pakistan while simultaneously lobbying for NioCorp Developments Ltd. (critical minerals/US defense) and Capstone USA Advisory Group LLC.",
+      "detail": null,
+      "source_datasets": [
+        "fara"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:03:05",
+      "target_name": "Javelin Advisors LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:7579",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6336,
+      "finding_type": "communication",
+      "summary": "FARA filings document Javelin Advisors' contacts with US government officials on behalf of Pakistan. Ronny Jackson (Rep TX-13, former Trump White House physician) was primary congressional contact. May 1 2025: in-person meeting with Pakistani officials. May 6: phone call re India-Pakistan conflict. May 16: dinner arrangement call. May 28: critical call leading to draft MoU delivery via email. Other targets: Rep. Dan Renshaw and Rep. Morgan Luttrell (both TX Navy veterans). Javelin also delivered a proposed bilateral MoU on rare earths to Ryan Zinke's office. MoU later led to M deal between US Strategic Metals and Pakistan's Frontier Works Organisation (September 2025).",
+      "detail": null,
+      "source_datasets": [
+        "fara",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:20:16",
+      "target_name": "Javelin Advisors LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:7579",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6295,
+      "finding_type": "intelligence",
+      "summary": "Javelin Advisors played a key role in the US-China rare earth agreement of October 30, 2025, per reporting from January 2026. The US-China deal: China agreed to pause sweeping controls on rare-earth magnets in exchange for US rolling back expansion of curbs on Chinese companies. This was reported alongside Javelin's Pakistan minerals work, suggesting Javelin was operating across multiple rare earth supply-chain diplomatic tracks simultaneously.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:15:26",
+      "target_name": "Javelin Advisors LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "X:sidhant-2008816210683814025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7559,
+      "finding_type": "financial",
+      "summary": "Javelin Advisors (Sorial/Schiller) secured Pakistan rare earth minerals lobbying contract via FARA \u2014 parallel to GreenMet's Greenland operations",
+      "detail": "Global Witness FARA analysis reveals: Javelin Advisors LLC (founded Dec 2024 by George Sorial and Keith Schiller) was hired by Pakistan government (contract signed April 8, 2025) to advise on 'US economic partnerships' and 'defense-related issues, including accessing military funding and counter-terrorism support' AND critically 'exploration and sale of rare earth/critical minerals.' Pakistan pays USD 450,000 combined to multiple firms including Javelin. Sorial and Schiller are simultaneously passive shareholders in GreenMet (Greenland rare earths) while running Javelin (Pakistan rare earths) \u2014 they operate across multiple rare earth mineral lobbying channels. Javelin also lobbies for NioCorp Developments (NASDAQ: NB), same client as GreenMet (Horn presented at NioCorp events). This creates a unified Horn-Sorial-Schiller critical minerals influence network spanning Greenland, Pakistan, and US domestic projects.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:18:04",
+      "target_name": "Javelin Advisors LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Global Witness FARA investigation; FARA filings DOJ",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6285,
       "finding_type": "identity",
@@ -125,31 +261,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA-registrant-filings-2024-2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6295,
-      "finding_type": "intelligence",
-      "summary": "Javelin Advisors played a key role in the US-China rare earth agreement of October 30, 2025, per reporting from January 2026. The US-China deal: China agreed to pause sweeping controls on rare-earth magnets in exchange for US rolling back expansion of curbs on Chinese companies. This was reported alongside Javelin's Pakistan minerals work, suggesting Javelin was operating across multiple rare earth supply-chain diplomatic tracks simultaneously.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:15:26",
-      "target_name": "Javelin Advisors LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "X:sidhant-2008816210683814025",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -406,39 +517,6 @@
       ]
     },
     {
-      "id": 6319,
-      "finding_type": "financial",
-      "summary": "Pakistan paid Javelin Advisors ,000/month as a subcontractor to Seiden Law LLP. Seiden Law received ,000/month directly from Pakistan, subcontracted Javelin at K/month. Total Pakistan lobbying spend was ,000/month across two firms (Squire Patton Boggs ,500 + Seiden/Javelin). Javelin agreement dated April 24, 2025. Services: promote exploration and sale of rare earth/critical minerals, establish US economic partnerships.",
-      "detail": null,
-      "source_datasets": [
-        "fara",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:19:25",
-      "target_name": "Javelin Advisors LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA:7579",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=Seiden-Law",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6320,
       "finding_type": "relationship",
       "summary": "Robert Seiden (private investigator formerly associated with Trump) is co-lobbyist with Sorial and Schiller at Javelin Advisors LLC. Seiden appears as lobbyist in LDA filings for clients: Fred Daibes (executive relief), Logical Strategies LLC (asbestos/EPA), Greg Lindberg (executive pardon), I-MEI Foods (Taiwan - defense contracts), NioCorp Developments (critical minerals/DOD), Capstone USA Advisory Group (Ukraine reconstruction). Seiden Law LLP is the prime contractor for Pakistan FARA engagement.",
@@ -514,32 +592,6 @@
       ]
     },
     {
-      "id": 6336,
-      "finding_type": "communication",
-      "summary": "FARA filings document Javelin Advisors' contacts with US government officials on behalf of Pakistan. Ronny Jackson (Rep TX-13, former Trump White House physician) was primary congressional contact. May 1 2025: in-person meeting with Pakistani officials. May 6: phone call re India-Pakistan conflict. May 16: dinner arrangement call. May 28: critical call leading to draft MoU delivery via email. Other targets: Rep. Dan Renshaw and Rep. Morgan Luttrell (both TX Navy veterans). Javelin also delivered a proposed bilateral MoU on rare earths to Ryan Zinke's office. MoU later led to M deal between US Strategic Metals and Pakistan's Frontier Works Organisation (September 2025).",
-      "detail": null,
-      "source_datasets": [
-        "fara",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:20:16",
-      "target_name": "Javelin Advisors LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA:7579",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6369,
       "finding_type": "financial",
       "summary": "Javelin Advisors LLC (co-founded by George Sorial and Keith Schiller, both former GreenMet shareholders) received $400,000 from NioCorp Developments Ltd. in Q4 2025, disclosed on LDA Senate filings. Lobbying was for 'funding and/or contracts with respect to NioCorp.' Javelin also registered under FARA for Islamic Republic of Pakistan (April-October 2025), generating at least $1M from Fred Daibes and $1.2M from Logical Strategies LLC. Total disclosed Javelin revenue in 2025: approximately $3.4M.",
@@ -558,31 +610,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA:JAVELIN-Q4-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6374,
-      "finding_type": "relationship",
-      "summary": "Javelin Advisors LLC (Boca Raton FL address: 433 Plaza Real, Ste 275) registered under FARA (Reg No. 7579) on April 25, 2025 as agent for the Islamic Republic of Pakistan. FARA registration was terminated October 8, 2025. This means Javelin Advisors \u2014 founded by former GreenMet shareholders George Sorial and Keith Schiller \u2014 was a registered foreign agent for Pakistan while simultaneously lobbying for NioCorp Developments Ltd. (critical minerals/US defense) and Capstone USA Advisory Group LLC.",
-      "detail": null,
-      "source_datasets": [
-        "fara"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 19:03:05",
-      "target_name": "Javelin Advisors LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA:7579",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -615,9 +642,79 @@
       ]
     }
   ],
-  "connections": [],
+  "connections": [
+    {
+      "id": 3826,
+      "person_a": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "person_b": "Javelin Advisors LLC",
+      "relationship_type": "corporate",
+      "description": "Shared beneficial owners: George Sorial and Keith Schiller are passive shareholders in GreenMet and co-founders of Javelin. Both entities operate in rare earth/critical minerals space. Javelin registered under FARA for Pakistan mineral lobbying; GreenMet facilitates Greenland rare earth deals. Both service NioCorp as client.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:25",
+      "profile_id": "tech-right",
+      "other_person": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "other_person_slug": "greenmet-greentech-minerals-holdings-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Global Witness FARA investigation",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP investigation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-04-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Pakistan paid Javelin Advisors ,000/month as a subcontractor to Seiden Law LLP. Seiden Law received ,000/month directly from Pakistan, subcontracted Javelin at K/month. Total Pakistan lobbying spend was ,000/month across two firms (Squire Patton Boggs ,500 + Seiden/Javelin). Javelin agreement dated April 24, 2025. Services: promote exploration and sale of rare earth/critical minerals, establish US economic partnerships.",
+      "confidence": "high",
+      "id": 6319
+    },
+    {
+      "date": "2025-04-25",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Javelin Advisors LLC (Boca Raton FL address: 433 Plaza Real, Ste 275) registered under FARA (Reg No. 7579) on April 25, 2025 as agent for the Islamic Republic of Pakistan. FARA registration was terminated October 8, 2025. This means Javelin Advisors \u2014 founded by former GreenMet shareholders George Sorial and Keith Schiller \u2014 was a registered foreign agent for Pakistan while simultaneously lobbying for NioCorp Developments Ltd. (critical minerals/US defense) and Capstone USA Advisory Group LLC.",
+      "confidence": "confirmed",
+      "id": 6374
+    },
+    {
+      "date": "2025-05-01",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "FARA filings document Javelin Advisors' contacts with US government officials on behalf of Pakistan. Ronny Jackson (Rep TX-13, former Trump White House physician) was primary congressional contact. May 1 2025: in-person meeting with Pakistani officials. May 6: phone call re India-Pakistan conflict. May 16: dinner arrangement call. May 28: critical call leading to draft MoU delivery via email. Other targets: Rep. Dan Renshaw and Rep. Morgan Luttrell (both TX Navy veterans). Javelin also delivered a proposed bilateral MoU on rare earths to Ryan Zinke's office. MoU later led to M deal between US Strategic Metals and Pakistan's Frontier Works Organisation (September 2025).",
+      "confidence": "high",
+      "id": 6336
+    },
+    {
+      "date": "2025-10-30",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Javelin Advisors played a key role in the US-China rare earth agreement of October 30, 2025, per reporting from January 2026. The US-China deal: China agreed to pause sweeping controls on rare-earth magnets in exchange for US rolling back expansion of curbs on Chinese companies. This was reported alongside Javelin's Pakistan minerals work, suggesting Javelin was operating across multiple rare earth supply-chain diplomatic tracks simultaneously.",
+      "confidence": "medium",
+      "id": 6295
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Javelin Advisors (Sorial/Schiller) secured Pakistan rare earth minerals lobbying contract via FARA \u2014 parallel to GreenMet's Greenland operations",
+      "confidence": "high",
+      "id": 7559
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6286,
@@ -728,14 +825,5 @@
       "complexity-as-credential",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Javelin Advisors LLC",
-      "connections": [],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": []
   }
 }

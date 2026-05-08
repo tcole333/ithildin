@@ -1,0 +1,1352 @@
+{
+  "name": "Tim Draper",
+  "slug": "tim-draper",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein",
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.215244",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 16,
+    "total_connections": 23,
+    "total_entities": 22,
+    "finding_types": {
+      "background": 1,
+      "legal": 2,
+      "relationship": 5,
+      "financial": 5,
+      "negative_result": 1,
+      "identity": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "employment": 4,
+      "corporate": 8,
+      "familial": 1,
+      "advisory": 2,
+      "financial": 1,
+      "social": 4,
+      "political": 1,
+      "intelligence": 2
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 8928,
+      "finding_type": "background",
+      "summary": "Draper Oakwood SPAC: Tim Draper was Senior Advisor only \u2014 no officer, director, or fiduciary role. No contractual commitments or voting power. Core team (Perry, Sarfraz, Erfan) from 3i Group plc (UK). SPAC pivoted from tech to Singapore luxury e-commerce (Reebonz). Required backstop investors.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2017-09-19",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:52",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1705771",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8926,
+      "finding_type": "legal",
+      "summary": "Draper and Draper Associates named defendants in Tezos ICO securities fraud class action (N.D. Cal. 3:17-cv-06779, 232M ICO). Named as promoter/facilitator. Dismissed 2020. Co-defendants: Breitmans, Dynamic Ledger, Tezos Foundation (Swiss), Bitcoin Suisse AG.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2017-11-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-3-17-cv-06779",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8921,
+      "finding_type": "relationship",
+      "summary": "Abduwahab Al Betairi (Saudi/Bahrain, Watar Partners Riyadh, Family Office Co Bahrain, managed 500M+ at Saudi American Bank/Citibank) appointed Draper Oakwood SPAC director Jan 2018. Connects Draper brand to Gulf state capital.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-01-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1705771",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8908,
+      "finding_type": "financial",
+      "summary": "Andra Capital (Haydar Haba) pitched Draper Global fund to Epstein (Nov 2, 2018, 8 months before arrest). Draper named as anchor investor and co-manager. Cayman master fund. Goldman Sachs as book-runner for $3-5B raise. Email routed through Lesley Groff. Fundraising was unsuccessful \u2014 Epstein's side repeatedly declined.",
+      "detail": null,
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-11-02",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:27:54",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00292375",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00484600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01017890",
+          "source_quote": "We have partnered with Tim Draper, who is joining our fund as an anchor investor and fund co-manager. Our cayman master fund name will be Draper Global managed by Andra.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8927,
+      "finding_type": "legal",
+      "summary": "Six DFJ/Draper entities plus Draper personally named defendants in AllRounds v eShares/Carta trade secrets (N.D. Cal. 3:20-cv-07083). Entities: Draper Associates LP, Draper Associates VI LP, DFJ Management LLC, DFJ Growth Management LLC, Threshold Management LLC, DFJ Mercury Venture Partners LP.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-10-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:52",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-3-20-cv-07083",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8901,
+      "finding_type": "relationship",
+      "summary": "FBI ARMS Reach vetting memo (OPERATION TRIP KNOT, Case 243H-WF-2182018, OCDETF Eurasian Organizations) identifies Draper as associate of Foresight Institute whose members included Ted Waitt (Epstein-Gates introduction broker) and convicted spy Charles Lieber. Filed by WFO Squad CR05 (Transnational Organized Crime, Eastern Hemisphere).",
+      "detail": null,
+      "source_datasets": [
+        "DOJ DS9"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-04-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:27:17",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129095",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": "DRAPER was identified as an associate of the FORESIGHT INSTITUTE, whose members included TED WAITT, DOB and convicted Chinese spy and researcher, CHARLES LIEBER",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8902,
+      "finding_type": "relationship",
+      "summary": "FBI memo alleges Draper hired Masha Drokova (aka Mariya Bucher, former Nashi leader known as 'Putin's Kiss', former Epstein publicist) as publicist for DFJ Financial. LittleSis corroborates with relationship record. Draper denied this claim.",
+      "detail": null,
+      "source_datasets": [
+        "DOJ DS9"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-04-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:27:22",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": "DRAPER hired MASHA DROKOVA also known as (aka) Mania Drokova aka Mariya Bucher...as the publicist for his former technology hedge fund DFJ FINANCIAL",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8903,
+      "finding_type": "relationship",
+      "summary": "FBI memo alleges Frank Moyle Creer (CEO of Draper Hero Institute, former DFJ Capital officer) was active member of Sanctum sex/swingers club and 'collected information on members for blackmail, similar to Jeffrey Epstein.' Creer denied all allegations.",
+      "detail": null,
+      "source_datasets": [
+        "DOJ DS9"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-04-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:27:26",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": "CREER was an active member of a private, high-end, high-initiation-fee sex/swingers club in Los Angeles and Northern California called Sanctum, and collected information on members of Sanctum for the purpose of blackmail, similar to JEFFREY EPSTEIN",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8904,
+      "finding_type": "financial",
+      "summary": "FBI memo places Draper in Ukraine meeting former President Viktor Yushchenko and Michael Caputo 'to discuss ways to oppose certain United States sanctions against Russia.' Case filed under OCDETF Eurasian Organizations.",
+      "detail": null,
+      "source_datasets": [
+        "DOJ DS9"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-04-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:27:29",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": "DRAPER previously traveled to Ukraine and met with former Ukrainian President VIKTOR YUSHCHENKO...and MICHAEL CAPUTO, to discuss ways to oppose certain United States (US) sanctions against Russia",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8914,
+      "finding_type": "financial",
+      "summary": "DFJ funds from Fund VIII onward use triple-layered Cayman structure: Fund LP -> Fund Partners LP (Cayman GP) -> Fund Ltd (Cayman LLC GP of GP). Creates beneficial ownership opacity. 20+ entities mapped across CA, Cayman, Germany, Bermuda.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:11",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1312964",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1385373",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1451794",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8920,
+      "finding_type": "negative_result",
+      "summary": "DFJ Financial (entity FBI memo says hired Drokova) has ZERO litigation on federal docket and ZERO SEC filings. Entity may not exist as formal legal entity or may use different registered name.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8996,
+      "finding_type": "financial",
+      "summary": "The Draper Foundation (nonprofit, est Dec 1996, 55 E 3rd Ave San Mateo) is the entity that granted $805K to Draper Hero Institute (where Creer was CEO). Officers: Timothy Cook Draper (CEO), William Henry Draper (Secretary, Tim's father), Desiree Omran (CFO). Foundation operates from same address as Draper Associates, JABE LLC, and Zone Ventures.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates 990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:23:40",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:55-e-3rd",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8997,
+      "finding_type": "relationship",
+      "summary": "DNX Venture Partners (Japanese VC, Mitch Kitamura) operates 12+ fund entities from 55 E 3rd Ave, San Mateo \u2014 Draper's primary address. DNX is part of the Draper Venture Network. Active fund family: DNX Partners IV, DNX Global Seed, DNX Japan IV/V, plus annex and seed funds. Ongoing entity formation through Feb 2026.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:23:44",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:55-e-3rd",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8998,
+      "finding_type": "identity",
+      "summary": "55 East 3rd Avenue, San Mateo CA 94401 hosts approximately 45 entities with 32 still active. Includes: Draper Associates, The Draper Foundation, Zone Ventures, JABE LLC, Draper Franchise LLC, DraperDragon funds, DNX fund family, Draper Oakwood entities, Brave VC (Bill Draper), Draper Productions, Draper Branding, multiple Riskmasters and Rhino SPV entities. This is the Draper empire operational hub.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:23:48",
+      "target_name": "Tim Draper",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:55-e-3rd",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9281,
+      "finding_type": "intelligence",
+      "summary": "FBI ARMS Reach memo (EFTA00129096, April 2025) contains additional intelligence on Tim Draper beyond Creer connection: (1) Draper previously traveled to Ukraine and met with former President Viktor Yushchenko and Michael Caputo 'to discuss ways to oppose certain United States sanctions against Russia'; (2) Draper was identified as associate of the Foresight Institute whose members included Ted Waitt (who brokered the Epstein-Gates introduction) and Charles Lieber (convicted Chinese spy/Harvard Chemistry chair). The memo was an FBI Enterprise Vetting Center (EVC) ARMS Reach request \u2014 someone proposed Draper be within 'arm's reach of POTUS' prompting the FBI vetting.",
+      "detail": null,
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:42:05",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": "DRAPER previously traveled to Ukraine and met with former Ukrainian President VIKTOR YUSHCHENKO and MICHAEL CAPUTO, to discuss ways to oppose certain United States sanctions against Russia",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9320,
+      "finding_type": "financial",
+      "summary": "Tim Draper's 'Draper Andra Global' fund pitch deck (EFTA00292375, ~2018) found in Epstein files. The deck pitches a late-stage co-investment fund with Draper as 'General Partner / Visionary Investor', targeting $1 billion, with 80% late-stage US tech and 20% discretionary international. Co-investors listed include KPCB, Sequoia, Accel, Andreessen Horowitz, Draper Associates. This document was in Epstein's files around 2018, indicating Draper was presenting investment opportunities to Epstein's network. RELEVANCE: The FBI memo EFTA00129096 identifies Frank Creer as CEO of Draper Hero Institute since April 2021 and describes the Draper network as the nexus for the alleged Creer blackmail operation. Draper pitching funds to Epstein's network pre-dates Creer's appointment by 3 years.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:47:37",
+      "target_name": "Tim Draper",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00292375",
+          "source_quote": "Tim Draper - Founding partner of leading venture capital firms Draper Associates and DFJ",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2559,
+      "person_a": "Frank Creer",
+      "person_b": "Tim Draper",
+      "relationship_type": "employment",
+      "description": "Creer served as CEO of Draper Hero Institute (Draper's nonprofit) since April 2021. Draper defended Creer against FBI allegations. Both connected through DFJ Capital / Zone Ventures ecosystem.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:31:07",
+      "profile_id": "epstein",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4662,
+      "person_a": "Frank Creer",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "Creer was CEO of Draper Hero Institute, former DFJ Capital officer",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:21",
+      "profile_id": "epstein",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4669,
+      "person_a": "Aamer Sarfraz",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "Co-founded Draper Oakwood Royalty Capital 2015. Sarfraz CEO of Draper Oakwood SPAC. Draper backed Sarfraz ag-tech 2011.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Aamer Sarfraz",
+      "other_person_slug": "aamer-sarfraz",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1705771",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4673,
+      "person_a": "John Fisher",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "DFJ co-founders. Co-GPs on every DFJ fund IV through X. 107 co-filings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "John Fisher",
+      "other_person_slug": "john-fisher",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1034597",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4674,
+      "person_a": "Steve Jurvetson",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "DFJ co-founders. Co-GPs on funds IV-VII. Jurvetson departed Nov 2017. Formal SEC separation Jan-May 2018.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Steve Jurvetson",
+      "other_person_slug": "steve-jurvetson",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1068879",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4685,
+      "person_a": "Masha Drokova",
+      "person_b": "Tim Draper",
+      "relationship_type": "employment",
+      "description": "Draper hired Drokova as publicist for DFJ Financial per FBI memo; LittleSis confirms position relationship",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:25:46",
+      "profile_id": "dfj-network",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4715,
+      "person_a": "Adam Draper",
+      "person_b": "Tim Draper",
+      "relationship_type": "familial",
+      "description": "Father and son. Adam Draper founded Boost VC incubator. Third generation of Draper venture capital dynasty (William H. Draper III -> Tim -> Adam).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:32",
+      "profile_id": "dfj-network",
+      "other_person": "Adam Draper",
+      "other_person_slug": "adam-draper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Boost VC filings",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Public records",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4773,
+      "person_a": "Foresight Institute",
+      "person_b": "Tim Draper",
+      "relationship_type": "advisory",
+      "description": "Draper identified as associate; DFJ was corporate sponsor; FBI memo EFTA00129096",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:53:55",
+      "profile_id": "dfj-network",
+      "other_person": "Foresight Institute",
+      "other_person_slug": "foresight-institute",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4857,
+      "person_a": "Foresight Institute",
+      "person_b": "Tim Draper",
+      "relationship_type": "advisory",
+      "description": "LittleSis entity #37259 confirmed: Tim Draper has/had a position at Foresight Institute. FBI memo states Draper associated with Foresight whose members include Ted Waitt (Maxwell associate) and Charles Lieber (convicted Chinese spy).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:14:14",
+      "profile_id": "epstein",
+      "other_person": "Foresight Institute",
+      "other_person_slug": "foresight-institute",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://littlesis.org/entities/37259-Tim_Draper",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4659,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Tim Draper",
+      "relationship_type": "financial",
+      "description": "Andra Capital/Draper Global fund pitched to Epstein as LP (Nov 2018). Unsuccessful.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:21",
+      "profile_id": "epstein",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00484600",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01017890",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4660,
+      "person_a": "Masha Drokova",
+      "person_b": "Tim Draper",
+      "relationship_type": "employment",
+      "description": "FBI memo alleges Draper hired Drokova for DFJ Financial. LittleSis corroborates.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:21",
+      "profile_id": "epstein",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4670,
+      "person_a": "Abduwahab Al Betairi",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "Al Betairi appointed Draper Oakwood SPAC director Jan 2018. Gulf state capital connection via Watar Partners (Riyadh).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Abduwahab Al Betairi",
+      "other_person_slug": "abduwahab-al-betairi",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1705771",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4675,
+      "person_a": "Haydar Haba",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "Haba Managing Partner of Andra Capital; Draper anchor investor/co-manager of Draper Global fund.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Haydar Haba",
+      "other_person_slug": "haydar-haba",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01017890",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4712,
+      "person_a": "Roderick Perry",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "Draper Oakwood Technology Acquisition SPAC. Perry also involved in Royalty Capital. Part of Draper's broader venture network.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:25",
+      "profile_id": "dfj-network",
+      "other_person": "Roderick Perry",
+      "other_person_slug": "roderick-perry",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Draper Oakwood SPAC records",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4713,
+      "person_a": "Gabe Turner",
+      "person_b": "Tim Draper",
+      "relationship_type": "employment",
+      "description": "Turner served as executive director of Draper Venture Network (DVN), the global network connecting Draper's venture fund affiliates worldwide.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:27",
+      "profile_id": "dfj-network",
+      "other_person": "Gabe Turner",
+      "other_person_slug": "gabe-turner",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Draper Venture Network records",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn profiles",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4783,
+      "person_a": "Ted Waitt",
+      "person_b": "Tim Draper",
+      "relationship_type": "social",
+      "description": "Both associated with Foresight Institute. FBI memo links them in same paragraph. Steve Jurvetson (Draper Fisher Jurvetson) served on same Foresight nanotech steering committee as Waitt.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:54:54",
+      "profile_id": "dfj-network",
+      "other_person": "Ted Waitt",
+      "other_person_slug": "ted-waitt",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4853,
+      "person_a": "Michael Caputo",
+      "person_b": "Tim Draper",
+      "relationship_type": "political",
+      "description": "Met in Ukraine with Tim Draper and former Ukrainian President Viktor Yushchenko to discuss ways to oppose US sanctions against Russia (per FBI memo EFTA00129096, Operation Trip Knot, April 2025).",
+      "strength": "medium",
+      "date_range": "2014-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:10:23",
+      "profile_id": "epstein",
+      "other_person": "Michael Caputo",
+      "other_person_slug": "michael-caputo",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5120,
+      "person_a": "Masha Bucher",
+      "person_b": "Tim Draper",
+      "relationship_type": "corporate",
+      "description": "LittleSis: 'Masha Bucher has/had a position at Tim Draper' (first relationship on entity 37259). Tim Draper is Managing Director at DFJ Fund VIII Partners LP, which invested in Runa Capital. Bucher served as Runa Capital PR Director June 2011-July 2013, directly overlapping with nginx Series A (August 2011). Creates simultaneous GP and LP visibility into the nginx investment.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Masha Bucher",
+      "other_person_slug": "masha-bucher",
+      "evidence": []
+    },
+    {
+      "id": 4714,
+      "person_a": "Brock Pierce",
+      "person_b": "Tim Draper",
+      "relationship_type": "social",
+      "description": "Pierce emailed Epstein about Adam Draper's incubator Boost VC, suggesting indirect connection. Both in crypto/VC circles.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:30",
+      "profile_id": "dfj-network",
+      "other_person": "Brock Pierce",
+      "other_person_slug": "brock-pierce",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Epstein correspondence",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4791,
+      "person_a": "Michael Caputo",
+      "person_b": "Tim Draper",
+      "relationship_type": "intelligence",
+      "description": "FBI ARMS memo (EFTA00129096) alleges Ukraine meeting with Yushchenko to discuss opposing US sanctions against Russia; both deny",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 03:23:42",
+      "profile_id": "dfj-network",
+      "other_person": "Michael Caputo",
+      "other_person_slug": "michael-caputo",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4839,
+      "person_a": "Charles Lieber",
+      "person_b": "Tim Draper",
+      "relationship_type": "social",
+      "description": "FBI ARMS Reach memo EFTA00129096: Draper was identified as associate of the Foresight Institute, whose members included Charles Lieber (convicted Chinese spy, Harvard Chemistry chair). Lieber was arrested in 2020 for concealing ties to Chinese government and lying about receiving payments from Wuhan University of Technology.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:43:35",
+      "profile_id": "epstein",
+      "other_person": "Charles Lieber",
+      "other_person_slug": "charles-lieber",
+      "evidence": []
+    },
+    {
+      "id": 4840,
+      "person_a": "Ted Waitt",
+      "person_b": "Tim Draper",
+      "relationship_type": "social",
+      "description": "FBI ARMS Reach memo EFTA00129096: Draper was associated with Foresight Institute which counted Ted Waitt as member. Ted Waitt was the broker who introduced Epstein to Bill Gates.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:43:35",
+      "profile_id": "epstein",
+      "other_person": "Ted Waitt",
+      "other_person_slug": "ted-waitt",
+      "evidence": []
+    },
+    {
+      "id": 4859,
+      "person_a": "Michael Caputo",
+      "person_b": "Tim Draper",
+      "relationship_type": "intelligence",
+      "description": "FBI memo alleges Draper met Caputo in Ukraine to discuss opposing US sanctions against Russia. Both deny: Draper says his only Yushchenko meeting was 2005 (no Caputo), Caputo says he never met Draper. Caputo was Trump operative who lived in Russia ~10 years in 1990s.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:14:23",
+      "profile_id": "epstein",
+      "other_person": "Michael Caputo",
+      "other_person_slug": "michael-caputo",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theiceman.substack.com/p/from-putins-kiss-to-epsteins-blackmail",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "founder",
+      "date_start": "1985",
+      "date_end": "2018",
+      "source": "sec_edgar",
+      "entity_id": 2635,
+      "entity_name": "Draper Fisher Jurvetson",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "founder",
+      "date_start": "1985",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2636,
+      "entity_name": "Draper Associates",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": "1997",
+      "date_end": "2006",
+      "source": "sec_edgar",
+      "entity_id": 2644,
+      "entity_name": "DFJ Fund IV LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "director",
+      "date_start": "2002",
+      "date_end": "2012",
+      "source": "sec_edgar",
+      "entity_id": 2645,
+      "entity_name": "DFJ Fund V LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "founder",
+      "date_start": "2015",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2663,
+      "entity_name": "Draper Oakwood Royalty Capital Ltd",
+      "entity_type": "corporation",
+      "jurisdiction": "gb",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "director",
+      "date_start": "2016",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2646,
+      "entity_name": "DFJ Fund VIII LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "active"
+    },
+    {
+      "role": "officer",
+      "date_start": "2017",
+      "date_end": "2018",
+      "source": "sec_edgar",
+      "entity_id": 2662,
+      "entity_name": "Draper Oakwood Technology Acquisition Inc",
+      "entity_type": "corporation",
+      "jurisdiction": "us_de",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "partner",
+      "date_start": "2018",
+      "date_end": null,
+      "source": "EFTA01017890",
+      "entity_id": 2638,
+      "entity_name": "Draper Global",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "littlesis",
+      "entity_id": 2643,
+      "entity_name": "Foresight Institute",
+      "entity_type": "nonprofit",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2647,
+      "entity_name": "DFJ Fund IX LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2648,
+      "entity_name": "DFJ Fund X LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2649,
+      "entity_name": "DFJ ePlanet Ventures LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2652,
+      "entity_name": "Zone Venture Fund II LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2653,
+      "entity_name": "Zone Ventures Management Co II LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2654,
+      "entity_name": "Draper Franchise LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2655,
+      "entity_name": "JABE LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / DFJ records",
+      "entity_id": 2711,
+      "entity_name": "DFJ Fund VI LP",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / DFJ records",
+      "entity_id": 2712,
+      "entity_name": "DFJ Partners VI LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / DFJ records",
+      "entity_id": 2713,
+      "entity_name": "DFJ Management Co VI LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / DFJ records",
+      "entity_id": 2714,
+      "entity_name": "DFJ Partners Growth Fund 2006 LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / DFJ records",
+      "entity_id": 2715,
+      "entity_name": "DFJ Network Affiliate VII",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_ca",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR / public records",
+      "entity_id": 2716,
+      "entity_name": "MVC Draper Fisher Jurvetson Fund I Inc",
+      "entity_type": "corporation",
+      "jurisdiction": "us_ny",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2014-2019",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Met in Ukraine with Tim Draper and former Ukrainian President Viktor Yushchenko to discuss ways to oppose US sanctions against Russia (per FBI memo EFTA00129096, Operation Trip Knot, April 2025).",
+      "other_person": "Michael Caputo",
+      "id": 4853
+    },
+    {
+      "date": "2017-09-19",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Draper Oakwood SPAC: Tim Draper was Senior Advisor only \u2014 no officer, director, or fiduciary role. No contractual commitments or voting power. Core team (Perry, Sarfraz, Erfan) from 3i Group plc (UK). SPAC pivoted from tech to Singapore luxury e-commerce (Reebonz). Required backstop investors.",
+      "confidence": "medium",
+      "id": 8928
+    },
+    {
+      "date": "2017-11-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Draper and Draper Associates named defendants in Tezos ICO securities fraud class action (N.D. Cal. 3:17-cv-06779, 232M ICO). Named as promoter/facilitator. Dismissed 2020. Co-defendants: Breitmans, Dynamic Ledger, Tezos Foundation (Swiss), Bitcoin Suisse AG.",
+      "confidence": "confirmed",
+      "id": 8926
+    },
+    {
+      "date": "2018-01-15",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Abduwahab Al Betairi (Saudi/Bahrain, Watar Partners Riyadh, Family Office Co Bahrain, managed 500M+ at Saudi American Bank/Citibank) appointed Draper Oakwood SPAC director Jan 2018. Connects Draper brand to Gulf state capital.",
+      "confidence": "confirmed",
+      "id": 8921
+    },
+    {
+      "date": "2018-11-02",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Andra Capital (Haydar Haba) pitched Draper Global fund to Epstein (Nov 2, 2018, 8 months before arrest). Draper named as anchor investor and co-manager. Cayman master fund. Goldman Sachs as book-runner for $3-5B raise. Email routed through Lesley Groff. Fundraising was unsuccessful \u2014 Epstein's side repeatedly declined.",
+      "confidence": "confirmed",
+      "id": 8908
+    },
+    {
+      "date": "2020-10-09",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Six DFJ/Draper entities plus Draper personally named defendants in AllRounds v eShares/Carta trade secrets (N.D. Cal. 3:20-cv-07083). Entities: Draper Associates LP, Draper Associates VI LP, DFJ Management LLC, DFJ Growth Management LLC, Threshold Management LLC, DFJ Mercury Venture Partners LP.",
+      "confidence": "confirmed",
+      "id": 8927
+    },
+    {
+      "date": "2025-04-03",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "FBI ARMS Reach vetting memo (OPERATION TRIP KNOT, Case 243H-WF-2182018, OCDETF Eurasian Organizations) identifies Draper as associate of Foresight Institute whose members included Ted Waitt (Epstein-Gates introduction broker) and convicted spy Charles Lieber. Filed by WFO Squad CR05 (Transnational Organized Crime, Eastern Hemisphere).",
+      "confidence": "high",
+      "id": 8901
+    },
+    {
+      "date": "2025-04-03",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "FBI memo alleges Draper hired Masha Drokova (aka Mariya Bucher, former Nashi leader known as 'Putin's Kiss', former Epstein publicist) as publicist for DFJ Financial. LittleSis corroborates with relationship record. Draper denied this claim.",
+      "confidence": "medium",
+      "id": 8902
+    },
+    {
+      "date": "2025-04-03",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "FBI memo alleges Frank Moyle Creer (CEO of Draper Hero Institute, former DFJ Capital officer) was active member of Sanctum sex/swingers club and 'collected information on members for blackmail, similar to Jeffrey Epstein.' Creer denied all allegations.",
+      "confidence": "medium",
+      "id": 8903
+    },
+    {
+      "date": "2025-04-03",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FBI memo places Draper in Ukraine meeting former President Viktor Yushchenko and Michael Caputo 'to discuss ways to oppose certain United States sanctions against Russia.' Case filed under OCDETF Eurasian Organizations.",
+      "confidence": "medium",
+      "id": 8904
+    },
+    {
+      "date": "2026-03-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DFJ funds from Fund VIII onward use triple-layered Cayman structure: Fund LP -> Fund Partners LP (Cayman GP) -> Fund Ltd (Cayman LLC GP of GP). Creates beneficial ownership opacity. 20+ entities mapped across CA, Cayman, Germany, Bermuda.",
+      "confidence": "medium",
+      "id": 8914
+    },
+    {
+      "date": "2026-03-31",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "DFJ Financial (entity FBI memo says hired Drokova) has ZERO litigation on federal docket and ZERO SEC filings. Entity may not exist as formal legal entity or may use different registered name.",
+      "confidence": "medium",
+      "id": 8920
+    },
+    {
+      "date": "2026-04-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "The Draper Foundation (nonprofit, est Dec 1996, 55 E 3rd Ave San Mateo) is the entity that granted $805K to Draper Hero Institute (where Creer was CEO). Officers: Timothy Cook Draper (CEO), William Henry Draper (Secretary, Tim's father), Desiree Omran (CFO). Foundation operates from same address as Draper Associates, JABE LLC, and Zone Ventures.",
+      "confidence": "medium",
+      "id": 8996
+    },
+    {
+      "date": "2026-04-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "DNX Venture Partners (Japanese VC, Mitch Kitamura) operates 12+ fund entities from 55 E 3rd Ave, San Mateo \u2014 Draper's primary address. DNX is part of the Draper Venture Network. Active fund family: DNX Partners IV, DNX Global Seed, DNX Japan IV/V, plus annex and seed funds. Ongoing entity formation through Feb 2026.",
+      "confidence": "medium",
+      "id": 8997
+    },
+    {
+      "date": "2026-04-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "55 East 3rd Avenue, San Mateo CA 94401 hosts approximately 45 entities with 32 still active. Includes: Draper Associates, The Draper Foundation, Zone Ventures, JABE LLC, Draper Franchise LLC, DraperDragon funds, DNX fund family, Draper Oakwood entities, Brave VC (Bill Draper), Draper Productions, Draper Branding, multiple Riskmasters and Rhino SPV entities. This is the Draper empire operational hub.",
+      "confidence": "medium",
+      "id": 8998
+    }
+  ]
+}

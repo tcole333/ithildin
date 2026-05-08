@@ -5,26 +5,149 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.897007",
-  "last_updated": "2026-03-06T03:52:02",
+  "generated_at": "2026-05-07T23:07:36.235200",
+  "last_updated": "2026-03-23T21:21:09",
   "stats": {
-    "total_findings": 19,
-    "total_connections": 6,
+    "total_findings": 14,
+    "total_connections": 13,
     "total_entities": 0,
     "finding_types": {
-      "financial": 12,
-      "intelligence": 4,
-      "relationship": 3
+      "relationship": 3,
+      "financial": 7,
+      "intelligence": 4
     },
     "connection_types": {
-      "corporate": 2,
-      "financial": 2,
-      "employment": 1,
-      "advisory": 1
+      "corporate": 3,
+      "financial": 3,
+      "employment": 3,
+      "political": 2,
+      "advisory": 2
     },
-    "last_updated": "2026-03-06T03:52:02"
+    "last_updated": "2026-03-23T21:21:09"
   },
   "findings": [
+    {
+      "id": 5841,
+      "finding_type": "relationship",
+      "summary": "HSAC appointment (June 2025): a16z founder on DHS advisory council alongside Lewandowski, Giuliani",
+      "detail": "Marc Andreessen was appointed to the reconstituted Homeland Security Advisory Council (HSAC) in June 2025, alongside Corey Lewandowski and Rudy Giuliani. HSAC convened July 2, 2025 at DHS HQ, chaired by SC Gov. Henry McMaster. Andreessen is described as focusing on 'technology-driven security solutions.' The appointment gives Andreessen \u2014 whose firm has a $1.176B defense fund and multiple personnel in administration roles \u2014 direct advisory access to DHS procurement and security policy. This creates a loop: a16z invests in defense/security startups, its founder advises DHS on security priorities, and a16z personnel (Kupor at OPM, Krishnan at White House) shape government hiring and policy.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-07-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:51:36",
+      "target_name": "Marc Andreessen",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS HSAC meeting minutes Jul 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov: HSAC members list",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "InsideAIPolicy.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "THX News Jun 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5355,
+      "finding_type": "financial",
+      "summary": "EDGAR FILING FOOTPRINT: Marc Andreessen (CIK 0001160077) has 134 EDGAR filings. a16z operates through extensive fund vehicle structure: Andreessen Horowitz Fund III LP (CIK 0001540352, 43 filings), Fund IV LP (CIK 0001603198, 41 filings), LSV Fund I LP (CIK 0001772284, 41 filings), plus LSV Fund I-Q, LSV Fund I-B, LSV Fund II, LSV Fund II-B, LSV Fund II-Q vehicles -- all filing as reporting persons on insider transactions. Latest filing: Form 3 (Initial Statement of Beneficial Ownership) for Navan Inc (CIK 0001639723), filed 2025-10-29. a16z fund vehicles listed as 10%+ owners or insiders in: Facebook/Meta, Samsara (IOT), Coinbase (COIN), Accolade (ACCD), Airbnb (ABNB), eBay, Okta, Slack. The LSV fund series appears to be the primary vehicle for growth/late-stage investments. Ben Horowitz (CIK 0001166586) has 71 separate filings.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-10-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:25",
+      "target_name": "Marc Andreessen",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1160077",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5844,
+      "finding_type": "financial",
+      "summary": "EDGAR: Andreessen through a16z LSV Funds holds positions in Navan Inc (Form 3, Oct 2025)",
+      "detail": "EDGAR shows Marc Andreessen (CIK 0001160077) filing Form 3 (Initial Statement of Beneficial Ownership) for Navan Inc (CIK 0001639723, Palo Alto CA) on 2025-10-29, through a network of a16z LSV funds: LSV Fund I, LSV Fund I-Q, LSV Fund I-B, LSV Fund II, LSV Fund II-B, LSV Fund II-Q, and AH Equity Partners LSV I and II LLCs. Total of 1,732 EDGAR filings reference Andreessen Horowitz, demonstrating extensive public market activity. The LSV (Late Stage Ventures) fund structure shows a16z's multi-layered investment vehicle approach.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-10-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:52:02",
+      "target_name": "Marc Andreessen",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR filing: 0001231919-25-000386, Form 3 for Navan Inc, filed 2025-10-29",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5832,
+      "finding_type": "financial",
+      "summary": "FEC: $11.9M to Fairshake crypto PAC (2025), $5K Meta PAC, extensive GOP donation pattern",
+      "detail": "FEC records show Marc Andreessen (employer: ANDREESSEN HOROWITZ / AH CAPITAL MANAGEMENT; address: PO Box 1707, Los Altos CA 94023) made massive 2025 donations: $11,900,000 to FAIRSHAKE crypto super PAC (2025-12-10), $50,000 to DEFEND AMERICAN JOBS (2025-12-10), $50,000 to PROTECT PROGRESS (2025-12-10), $5,000 to META PLATFORMS INC PAC (2025-12-16). Extensive GOP donations in late 2025: $12,000 Susan Collins, $7,000 Steve Scalise, $5,400 Daines Senate Majority Fund, $3,500 Andy Barr for Senate. In 2024, donated $2.5M to Right for America (Trump super PAC). Total a16z Fairshake commitments approximately $60M including Ben Horowitz contributions.",
+      "source_datasets": [
+        "fec",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:49:35",
+      "target_name": "Marc Andreessen",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions search: Andreessen Marc, 20 records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4603,
       "finding_type": "financial",
@@ -77,31 +200,6 @@
       ]
     },
     {
-      "id": 5303,
-      "finding_type": "financial",
-      "summary": "Ben Horowitz FEC analysis (2025-2026 cycle): $12.66M across 23 contributions. Dominated by $12.5M to Leading the Future (AI Super PAC, Aug 2025). Also $50K DSCC, $30.9K DNC, $12K each to Smith Victory and Team Jordan, $5.8K Sinema for Arizona, $5.4K Josh Gottheimer. Unlike Andreessen who is overwhelmingly Republican, Horowitz gives to both parties: DNC, DSCC, ActBlue, Dave Min, George Whitesides, Adam Smith (Democrats) alongside Republican recipients. CRITICAL: Both Andreessen and Horowitz gave exactly $12.5M each to Leading the Future on 2025-08-22 -- coordinated $25M contribution making a16z the anchor funder of the AI regulation Super PAC.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:16:31",
-      "target_name": "Benjamin Horowitz",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC API: 23 contributions for donor Benjamin Horowitz employer Andreessen Horowitz, retrieved 2026-03-05",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5309,
       "finding_type": "intelligence",
       "summary": "DOGE RECRUITER ROLE: Marc Andreessen served as unpaid recruiter for DOGE, interviewing and placing candidates for Trump administration positions. In Dec 2024 told Fortune he was spending 'half his time' at Mar-a-Lago advising Trump on tech and economic policy. LittleSis database formally lists him as holding 'Recruiter' position at Department of Government Efficiency. Washington Post reported he was 'quietly and successfully recruiting candidates for positions across Trump's Washington' with no formal role. This recruitment pipeline directly placed a16z personnel including Scott Kupor (OPM Director) and James Sullivan (OPM Senior Advisor) into government positions overseeing agencies that regulate or contract with a16z portfolio companies.",
@@ -131,7 +229,7 @@
     {
       "id": 5312,
       "finding_type": "intelligence",
-      "summary": "ANDREESSEN WHATSAPP INFLUENCE: Leaked WhatsApp messages (May-June 2025) from group chat including White House officials and tech leaders show Andreessen attacking DEI policies, calling Stanford and MIT 'mainly political lobbying operations fighting American innovation.' Urged National Science Foundation receive 'the bureaucratic death penalty.' Said universities would 'pay the price' for DEI. Trump subsequently issued executive orders targeting DEI in higher education. Pattern: private back-channel communication between tech billionaire and White House officials → policy outcomes aligned with a16z commercial interests (AI talent pipeline, university research funding redirected away from institutions with DEI programs).",
+      "summary": "ANDREESSEN WHATSAPP INFLUENCE: Leaked WhatsApp messages (May-June 2025) from group chat including White House officials and tech leaders show Andreessen attacking DEI policies, calling Stanford and MIT 'mainly political lobbying operations fighting American innovation.' Urged National Science Foundation receive 'the bureaucratic death penalty.' Said universities would 'pay the price' for DEI. Trump subsequently issued executive orders targeting DEI in higher education. Pattern: private back-channel communication between tech billionaire and White House officials \u2192 policy outcomes aligned with a16z commercial interests (AI talent pipeline, university research funding redirected away from institutions with DEI programs).",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -147,32 +245,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Washington Post 2025-07-12 leaked WhatsApp screenshots; Fortune 2025-07-16 Andreessen DEI messages; TechCrunch 2025-07-12",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5327,
-      "finding_type": "relationship",
-      "summary": "KUPOR REVOLVING DOOR DETAILS: Scott Kupor, a16z Managing Partner since inception (2009), appointed OPM Director, sworn in July 14, 2025. Resigned as managing partner and gave up managing member seat in 32 a16z funds. However: RETAINED passive investor status in 38 other a16z funds and forfeited only UNVESTED carried interest. ProPublica disclosure shows net worth $182M-$573M+, salary/bonus $2.5M from AH Capital Management, Airbnb stock $250-500M, plus holdings in Palantir (PLTR), L3Harris, Northrop Grumman, Lockheed Martin, RTX/Raytheon. As OPM Director, controls federal hiring policies, workforce rules, and pay scales that directly affect a16z portfolio company ability to hire from federal workforce (revolving door) and compete for government contracts. Kupor claims no conflict: 'I specifically wanted to take a role that was focused on very different things.' But OPM oversees Schedule F, which enables political appointments that bypass civil service protections -- directly relevant to defense tech staffing of agencies.",
-      "detail": null,
-      "source_datasets": [
-        "propublica",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:17:59",
-      "target_name": "Scott Aaron Kupor",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Fortune 2025-04-03 Kupor resignation from funds; Fortune 2025-09-19 Kupor OPM profile; ProPublica financial disclosure; opm.gov bio",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -205,106 +277,6 @@
       ]
     },
     {
-      "id": 5335,
-      "finding_type": "financial",
-      "summary": "FORTERRA (a16z PORTFOLIO): Autonomous military vehicle company. Raised $275M Series F led by a16z. Develops AutoDrive autonomous ground vehicle systems. KEY CONTRACTS: (1) Two Low-Rate Initial Production (LRIP) orders for ROGUE-Fires in FY2025 for Marine Corps NMESIS program (Navy Marine Expeditionary Ship Interdiction System) -- autonomous launchers for Naval Strike Missiles. (2) Partnership with Oshkosh Defense for ROGUE unmanned launcher vehicle. (3) BAE Systems partnership (Sep 2025) for autonomous AMPV (Armored Multi-Purpose Vehicle) prototype. (4) Defense News reports additional autonomous armored vehicle development with BAE (Sep 2025). HQ: Clarksburg, MD. This represents a16z portfolio company moving from startup to production-stage defense contractor with Marine Corps program of record.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:18:43",
-      "target_name": "Forterra",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Capitaly 2025 a16z defense tech profile; Forterra press release ROGUE-Fires LRIP; Breaking Defense 2025-09-30 BAE-Forterra; Defense News 2025-09-30",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5337,
-      "finding_type": "financial",
-      "summary": "CASTELION (a16z PORTFOLIO): Hypersonic weapons startup. a16z investor in both Series A ($70M led by Lightspeed, +$30M venture debt) and Series B ($350M, Dec 2025, led by Altimeter/Lightspeed). Develops 'Blackbeard' hypersonic weapon. KEY CONTRACTS: (1) US Navy awarded ~$50M (Feb 2026) for Blackbeard development and prototype production. (2) US Army included FY2026 budget funding for HIMARS-compatible Blackbeard variant. (3) Multiple Army and Navy integration contracts for Blackbeard on operational platforms. Manufacturing: 'Project Ranger' 1,000-acre solid rocket motor campus in Sandoval County, NM -- capable of producing thousands of missiles/year. CEO Bryon Hargis spoke at a16z American Dynamism Summit 2026. Castelion represents a16z portfolio company positioned on hypersonics -- one of Emil Michael's 6 priority technology areas as USD(R&E).",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:18:52",
-      "target_name": "Castelion",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "The Defense Post 2026-02-26; Castelion press releases; TechCrunch 2025-07-03; GovCon Wire Series B",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5345,
-      "finding_type": "financial",
-      "summary": "SARONIC (a16z PORTFOLIO): Autonomous naval vessel company. a16z investor via Series C. US Navy awarded $392M production contract (Dec 2025) for Corsair autonomous surface vessel -- announced at Reagan National Defense Forum by SecNav John Phelan. ~$200M obligated at award. Corsair: 24-foot modular ASV, 1000-lb payload, 1000nm range, 35+ knots. Designed for Pentagon Replicator program (expendable unmanned platform swarms to deter China/Taiwan invasion). Production timeline: prototype to production in <12 months -- far shorter than normal shipbuilding. Also raised $600M in private funding. This is the largest single government contract awarded to an a16z portfolio company outside of Anduril, and directly serves the 'commercial first' procurement doctrine that a16z lobbies for.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:19:38",
-      "target_name": "Saronic",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "WorkBoat 2025-12; The Defense Post 2025-12-15; Maritime Executive; gCaptain; Naval News 2025-12",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5347,
-      "finding_type": "financial",
-      "summary": "UMBRA (a16z PORTFOLIO): SAR satellite imaging company. Space Development Agency awarded $2M initial contract for feasibility study on integrating Umbra satellites into Proliferated Warfighter Space Architecture (PWSA). Additional STRATFI (Strategic Funding Increase) program funding of up to $60M for custom space-based intelligence capabilities. Partnership with Italy's E-GEOS (Dec 2025) for geospatial intelligence solutions. Umbra's integration into PWSA would allow theater observations to be downlinked directly to tactical nodes, eliminating need for ground terminals. This positions an a16z portfolio company as embedded sensor layer in the Pentagon's next-generation satellite constellation -- a foundational military infrastructure investment.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:19:47",
-      "target_name": "Umbra",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SpaceNews SDA-Umbra; Umbra press release Oct 2024; PR Newswire; Military Aerospace",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5349,
       "finding_type": "financial",
       "summary": "ANDREESSEN-MUSK FINANCIAL NEXUS: Andreessen has invested hundreds of millions in Musk enterprises. a16z participated in xAI Series B ($6B, May 2024) alongside Sequoia, Fidelity, Saudi Prince Alwaleed/Kingdom Holding. a16z also participated in xAI Series C ($6B, Dec 2024) alongside BlackRock, Fidelity, Lightspeed, QIA (Qatar), Nvidia, AMD. Andreessen also backed Musk's $44B X/Twitter acquisition. These financial ties create alignment between Andreessen's DOGE recruitment role and Musk's government restructuring agenda. When Andreessen recruits personnel for DOGE (which Musk leads), he is staffing an entity run by someone in whom he has billions invested. Separately, SpaceX (Musk) appears on a16z American Dynamism 50 list alongside a16z portfolio companies, suggesting mutual endorsement.",
@@ -323,31 +295,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Fortune 2024-12-05; TechCrunch 2024-12-25 xAI Series C; Axios 2024-05-27 xAI Series B; a16z.com American Dynamism 50",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5355,
-      "finding_type": "financial",
-      "summary": "EDGAR FILING FOOTPRINT: Marc Andreessen (CIK 0001160077) has 134 EDGAR filings. a16z operates through extensive fund vehicle structure: Andreessen Horowitz Fund III LP (CIK 0001540352, 43 filings), Fund IV LP (CIK 0001603198, 41 filings), LSV Fund I LP (CIK 0001772284, 41 filings), plus LSV Fund I-Q, LSV Fund I-B, LSV Fund II, LSV Fund II-B, LSV Fund II-Q vehicles -- all filing as reporting persons on insider transactions. Latest filing: Form 3 (Initial Statement of Beneficial Ownership) for Navan Inc (CIK 0001639723), filed 2025-10-29. a16z fund vehicles listed as 10%+ owners or insiders in: Facebook/Meta, Samsara (IOT), Coinbase (COIN), Accolade (ACCD), Airbnb (ABNB), eBay, Okta, Slack. The LSV fund series appears to be the primary vehicle for growth/late-stage investments. Ben Horowitz (CIK 0001166586) has 71 separate filings.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:20:25",
-      "target_name": "Marc Andreessen",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR full-text search Andreessen Horowitz, retrieved 2026-03-05; CIK 0001160077 filing count",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -383,36 +330,10 @@
       ]
     },
     {
-      "id": 5832,
-      "finding_type": "financial",
-      "summary": "FEC: $11.9M to Fairshake crypto PAC (2025), $5K Meta PAC, extensive GOP donation pattern",
-      "detail": "FEC records show Marc Andreessen (employer: ANDREESSEN HOROWITZ / AH CAPITAL MANAGEMENT; address: PO Box 1707, Los Altos CA 94023) made massive 2025 donations: $11,900,000 to FAIRSHAKE crypto super PAC (2025-12-10), $50,000 to DEFEND AMERICAN JOBS (2025-12-10), $50,000 to PROTECT PROGRESS (2025-12-10), $5,000 to META PLATFORMS INC PAC (2025-12-16). Extensive GOP donations in late 2025: $12,000 Susan Collins, $7,000 Steve Scalise, $5,400 Daines Senate Majority Fund, $3,500 Andy Barr for Senate. In 2024, donated $2.5M to Right for America (Trump super PAC). Total a16z Fairshake commitments approximately $60M including Ben Horowitz contributions.",
-      "source_datasets": [
-        "fec",
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:49:35",
-      "target_name": "Marc Andreessen",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions search: Andreessen Marc, 20 records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5833,
       "finding_type": "financial",
       "summary": "a16z American Dynamism: $1.176B defense-focused fund, part of $15B 2025 fundraise",
-      "detail": "Andreessen Horowitz raised $1.176 billion for its American Dynamism practice as part of a $15 billion total fundraise in 2025 — the firm's largest ever. American Dynamism backs defense, security, aerospace, public safety startups supporting US national interest. Over $1.5 billion already invested under the umbrella. a16z launched the Dynamic Tech Defense Reform Initiative to reform defense acquisition. Key defense investments include Chariot Defense (autonomous vehicle defense), Anduril, and numerous dual-use technology companies. The practice was initiated around 2020 by Marc Andreessen and Ben Horowitz to fund companies that support national interest.",
+      "detail": "Andreessen Horowitz raised $1.176 billion for its American Dynamism practice as part of a $15 billion total fundraise in 2025 \u2014 the firm's largest ever. American Dynamism backs defense, security, aerospace, public safety startups supporting US national interest. Over $1.5 billion already invested under the umbrella. a16z launched the Dynamic Tech Defense Reform Initiative to reform defense acquisition. Key defense investments include Chariot Defense (autonomous vehicle defense), Anduril, and numerous dual-use technology companies. The practice was initiated around 2020 by Marc Andreessen and Ben Horowitz to fund companies that support national interest.",
       "source_datasets": [
         "web_search"
       ],
@@ -487,70 +408,39 @@
       ]
     },
     {
-      "id": 5841,
+      "id": 7240,
       "finding_type": "relationship",
-      "summary": "HSAC appointment (June 2025): a16z founder on DHS advisory council alongside Lewandowski, Giuliani",
-      "detail": "Marc Andreessen was appointed to the reconstituted Homeland Security Advisory Council (HSAC) in June 2025, alongside Corey Lewandowski and Rudy Giuliani. HSAC convened July 2, 2025 at DHS HQ, chaired by SC Gov. Henry McMaster. Andreessen is described as focusing on 'technology-driven security solutions.' The appointment gives Andreessen — whose firm has a $1.176B defense fund and multiple personnel in administration roles — direct advisory access to DHS procurement and security policy. This creates a loop: a16z invests in defense/security startups, its founder advises DHS on security priorities, and a16z personnel (Kupor at OPM, Krishnan at White House) shape government hiring and policy.",
+      "summary": "Andreessen appointed to HSAC June 2025 while a16z portfolio companies bid for DHS contracts; 12.2M in FEC donations dominated by FAIRSHAKE crypto PAC",
+      "detail": "President Trump appointed Marc Andreessen to the Homeland Security Advisory Council (HSAC) on June 24, 2025, alongside Corey Lewandowski, Rudy Giuliani, and 22 others. First meeting July 2, 2025. Andreessen sits on HSAC while a16z portfolio company Anduril Industries receives hundreds of millions in DHS/CBP contracts (861M total from DHS). FEC records show Andreessen made 12.2M in political donations, dominated by 11.9M to FAIRSHAKE (crypto super PAC). Also donated to Defend American Jobs (50K), Protect Progress (50K), Grow the Majority (33K), NRCC (12.7K), numerous Republican candidates. Donated 5K to Meta Platforms PAC.",
       "source_datasets": [
+        "fec",
         "web_search"
       ],
-      "confidence": "confirmed",
+      "confidence": "high",
       "date_of_event": null,
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-06 03:51:36",
+      "created_at": "2026-03-23 18:58:01",
       "target_name": "Marc Andreessen",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "DHS HSAC meeting minutes Jul 2025",
+          "evidence_ref": "DHS.gov announcement 2025-06-24: President Trump Announces Appointments to HSAC",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "DHS.gov: HSAC members list",
+          "evidence_ref": "FEC donor search Andreessen Marc (50 results)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "InsideAIPolicy.com",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "THX News Jun 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5844,
-      "finding_type": "financial",
-      "summary": "EDGAR: Andreessen through a16z LSV Funds holds positions in Navan Inc (Form 3, Oct 2025)",
-      "detail": "EDGAR shows Marc Andreessen (CIK 0001160077) filing Form 3 (Initial Statement of Beneficial Ownership) for Navan Inc (CIK 0001639723, Palo Alto CA) on 2025-10-29, through a network of a16z LSV funds: LSV Fund I, LSV Fund I-Q, LSV Fund I-B, LSV Fund II, LSV Fund II-B, LSV Fund II-Q, and AH Equity Partners LSV I and II LLCs. Total of 1,732 EDGAR filings reference Andreessen Horowitz, demonstrating extensive public market activity. The LSV (Late Stage Ventures) fund structure shows a16z's multi-layered investment vehicle approach.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:52:02",
-      "target_name": "Marc Andreessen",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR filing: 0001231919-25-000386, Form 3 for Navan Inc, filed 2025-10-29",
+          "evidence_ref": "HSAC meeting minutes 2025-07-02 (DHS PDF)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -649,6 +539,152 @@
       "evidence": []
     },
     {
+      "id": 3413,
+      "person_a": "Marc Andreessen",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "political",
+      "description": "Speaker and member of Rockbridge Network. Co-founder of a16z (Andreessen Horowitz). Enthusiastic supporter per reporting. Brings venture capital establishment into Rockbridge orbit.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:02:03",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYT Nov 2024; dnyuz.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3535,
+      "person_a": "Marc Andreessen",
+      "person_b": "Scott Kupor",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:02",
+      "profile_id": "tech-right",
+      "other_person": "Scott Kupor",
+      "other_person_slug": "scott-kupor",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fortune.com, littlesis.org",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3647,
+      "person_a": "HSAC",
+      "person_b": "Marc Andreessen",
+      "relationship_type": "advisory",
+      "description": "Appointed to Homeland Security Advisory Council June 24, 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:59",
+      "profile_id": "tech-right",
+      "other_person": "HSAC",
+      "other_person_slug": "hsac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov HSAC announcement",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HSAC meeting minutes July 2, 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3811,
+      "person_a": "Marc Andreessen",
+      "person_b": "Sriram Krishnan",
+      "relationship_type": "employment",
+      "description": "Krishnan was a16z GP (2021-2024). Andreessen is LP in Krishnan's Kearny Jackson fund and wife's Schema Ventures. Multi-layered financial entanglement persisting through government service.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:09",
+      "profile_id": "tech-right",
+      "other_person": "Sriram Krishnan",
+      "other_person_slug": "sriram-krishnan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z.com; FEC; TechCrunch Jul 2024; Fortune May 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3499,
+      "person_a": "Marc Andreessen",
+      "person_b": "Scott Kupor",
+      "relationship_type": "corporate",
+      "description": "a16z co-leadership: Andreessen co-founder, Kupor managing partner/COO. Now both in government: Andreessen as DOGE recruiter, Kupor as OPM Director. Their firm a16z holds Anduril and major defense tech portfolio.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:25",
+      "profile_id": "tech-right",
+      "other_person": "Scott Kupor",
+      "other_person_slug": "scott-kupor",
+      "evidence": []
+    },
+    {
+      "id": 3500,
+      "person_a": "Marc Andreessen",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "financial",
+      "description": "a16z invested in Anduril Industries (Luckey's defense company). Luckey's Oculus was acquired by Meta where Andreessen serves on the board. Dual financial connection: investor relationship through a16z and corporate relationship through Meta/Oculus.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:28",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": []
+    },
+    {
+      "id": 3425,
+      "person_a": "Chris Buskirk",
+      "person_b": "Marc Andreessen",
+      "relationship_type": "political",
+      "description": "Andreessen is Rockbridge speaker",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:03:45",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:423815",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2901,
       "person_a": "Corey Lewandowski",
       "person_b": "Marc Andreessen",
@@ -672,7 +708,40 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-07-02",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "HSAC appointment (June 2025): a16z founder on DHS advisory council alongside Lewandowski, Giuliani",
+      "confidence": "confirmed",
+      "id": 5841
+    },
+    {
+      "date": "2025-10-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "EDGAR FILING FOOTPRINT: Marc Andreessen (CIK 0001160077) has 134 EDGAR filings. a16z operates through extensive fund vehicle structure: Andreessen Horowitz Fund III LP (CIK 0001540352, 43 filings), Fund IV LP (CIK 0001603198, 41 filings), LSV Fund I LP (CIK 0001772284, 41 filings), plus LSV Fund I-Q, LSV Fund I-B, LSV Fund II, LSV Fund II-B, LSV Fund II-Q vehicles -- all filing as reporting persons on insider transactions. Latest filing: Form 3 (Initial Statement of Beneficial Ownership) for Navan Inc (CIK 0001639723), filed 2025-10-29. a16z fund vehicles listed as 10%+ owners or insiders in: Facebook/Meta, Samsara (IOT), Coinbase (COIN), Accolade (ACCD), Airbnb (ABNB), eBay, Okta, Slack. The LSV fund series appears to be the primary vehicle for growth/late-stage investments. Ben Horowitz (CIK 0001166586) has 71 separate filings.",
+      "confidence": "confirmed",
+      "id": 5355
+    },
+    {
+      "date": "2025-10-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "EDGAR: Andreessen through a16z LSV Funds holds positions in Navan Inc (Form 3, Oct 2025)",
+      "confidence": "confirmed",
+      "id": 5844
+    },
+    {
+      "date": "2025-12-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC: $11.9M to Fairshake crypto PAC (2025), $5K Meta PAC, extensive GOP donation pattern",
+      "confidence": "confirmed",
+      "id": 5832
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5841,
@@ -799,122 +868,5 @@
       "narrative-shield",
       "regulatory-capture"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Marc Andreessen",
-      "connections": [
-        {
-          "target": "Andreessen Horowitz (a16z)",
-          "type": "corporate",
-          "strength": 1,
-          "evidence_ref": "a16z.com",
-          "description": "Andreessen co-founded a16z"
-        },
-        {
-          "target": "Scott Aaron Kupor",
-          "type": "corporate",
-          "strength": 1,
-          "evidence_ref": "propublica:kupor-scott-aaron",
-          "description": "a16z Managing Partner relationship. Kupor is Managing Partner of AH Capital Management LLC (a16z) since 6/2009, Andreessen is co-founder. Kupor holds GP positions in 30+ a16z funds."
-        },
-        {
-          "target": "Benjamin Horowitz",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Coordinated $25M giving to Leading the Future PAC (Aug 2025) -- $12.5M each on same date. Combined a16z Super PAC funding exceeds $37M"
-        },
-        {
-          "target": "Scott Aaron Kupor",
-          "type": "employment",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Andreessen recruited Kupor (a16z Managing Partner) for OPM Director via DOGE pipeline. Kupor retains passive a16z fund interests"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "a16z invested in xAI (Series B $6B + Series C $6B), SpaceX, and Twitter $44B acquisition. Andreessen recruits for Musk-led DOGE"
-        },
-        {
-          "target": "Corey Lewandowski",
-          "type": "advisory",
-          "strength": 0.2,
-          "evidence_ref": "Finding_4789",
-          "description": "Both appointed DHS HSAC 2025. Zero GovInfo co-occurrences prior. HSAC is nexus connecting Trump political operatives with Silicon Valley defense tech investors."
-        }
-      ],
-      "secondHop": {
-        "Corey Lewandowski": [
-          {
-            "target": "Rudy Giuliani",
-            "type": "political",
-            "strength": 1,
-            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-          },
-          {
-            "target": "Ed Brookover",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-          },
-          {
-            "target": "Mary Coen",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-          },
-          {
-            "target": "Jason Osborne",
-            "type": "political",
-            "strength": 1,
-            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-          },
-          {
-            "target": "Matt Mowers",
-            "type": "political",
-            "strength": 1,
-            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

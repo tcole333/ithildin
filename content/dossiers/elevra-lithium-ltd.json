@@ -1,0 +1,213 @@
+{
+  "name": "Elevra Lithium Ltd",
+  "slug": "elevra-lithium-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.359838",
+  "last_updated": "2026-03-30T03:00:40",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 2,
+      "financial": 2,
+      "ownership": 1,
+      "regulatory": 3
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-30T03:00:40"
+  },
+  "findings": [
+    {
+      "id": 8691,
+      "finding_type": "corporate",
+      "summary": "Brown and Buckler are directors of both Elevra Lithium and JV partner Morella Corporation (ASX:1MC) \u2014 undivested conflict",
+      "detail": "Elevra entered a joint venture agreement with Morella Corporation Limited (ASX:1MC) for Pilgangoora lithium tenements in Western Australia. Elevra holds 49%; Morella holds 51% (via a prior earn-in). Both James Brown and Allan Buckler serve as directors of both Elevra and Morella Corporation \u2014 a disclosed but structurally unmitigated conflict of interest on JV decisions.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-07-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8687,
+      "finding_type": "corporate",
+      "summary": "Sayona Mining redomiciled under the Elevra Lithium name following all-stock merger with Piedmont Lithium (Delaware)",
+      "detail": "Sayona Mining Limited merged Piedmont Lithium Inc. (Delaware, NYSE:PLL) into a wholly owned subsidiary via Shock MergeCo Inc. under the Agreement and Plan of Merger dated 2025-11-18 (amended 2025-04-22). Sayona renamed itself Elevra Lithium Ltd on 2025-09-16. The merged entity retains an Australian public company parent structure with a Delaware operating subsidiary.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-08-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8689,
+      "finding_type": "financial",
+      "summary": "Resource Capital Fund VIII holds 9.99% of Elevra with deep-in-the-money options and board observer rights",
+      "detail": "Resource Capital Fund VIII, L.P. received 2,156,250,000 pre-consolidation ordinary shares at AU$0.032/share and 408,541,913 pre-consolidation options (post-consolidation: 2,723,613 options) with exercise price AU$4.80 and expiry 2028-12-31. An additional 5,276,387 post-consolidation options to RCF remain pending regulatory approval. RCF holds a board-observer right under the RCF information and observation rights letter. RCF's total disclosed stake is 9.99% as of 2025-09-30.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-09-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8690,
+      "finding_type": "ownership",
+      "summary": "Director/KMP combined holding is 1.18% of issued shares; Buckler largest at 750,595 shares held across three vehicles",
+      "detail": "The 20-F Item 7 shareholder table discloses no holder above 5% other than RCF. Directors and KMP combined hold 1,987,247 shares (1.18% of issued shares). Allan Buckler holds the largest director position at 750,595 shares (275,510 direct + 408,418 via P Point Pty Ltd + 66,667 via Shazo Holdings Pty Ltd).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8688,
+      "finding_type": "regulatory",
+      "summary": "All 11 HFIA Form 3 filings for Elevra Lithium omit the relationship-field checkboxes in the machine-readable XML",
+      "detail": "11 HFIA Form 3 filings were submitted for Elevra Lithium (CIK 0001739016) on or between 2026-03-18 and 2026-03-20. All 11 Form 3 XML documents omit the Director/Officer/10%-Owner relationship checkboxes (isDirector, isOfficer, isTenPercentOwner elements absent or blank). The role of each filer is determinable from the 20-F and the Form 3 text rendering but was not encoded in the machine-readable XML.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8692,
+      "finding_type": "regulatory",
+      "summary": "Three insiders (Collard, Buckler, Beristain) filed HFIA Form 3s one to two days late",
+      "detail": "Three Form 3 filers (Collard on 2026-03-19; Buckler and Beristain on 2026-03-20) missed the HFIA 2026-03-18 filing deadline by one to two days. The SEC published no-action relief for HFIA delays caused by EDGAR access issues, with an outside date of 2026-04-01. The late filings may reflect EDGAR access bottlenecks rather than wilful non-compliance.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8693,
+      "finding_type": "regulatory",
+      "summary": "Three pre-merger Elevra KMPs (Crawford, Elder, Lucas) have no HFIA Form 3 in EDGAR \u2014 post-merger status unconfirmed",
+      "detail": "Former Elevra KMPs Paul Crawford (1,110,176 shares), Dougal Elder (23,415 shares), and Philip Lucas (nil shares) are listed in the 20-F as of fiscal year end 2025-06-30 but no HFIA Form 3 appears in EDGAR for any of these persons. Their post-merger status is unconfirmed. If any remain as directors or officers post-merger, a Form 3 filing obligation exists.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8694,
+      "finding_type": "financial",
+      "summary": "No F-3 shelf registration on file; potential upcoming capital raise for NAL expansion creates a resale-window risk",
+      "detail": "Elevra has no F-3 shelf registration or other registered resale mechanism currently on file. The 424B3 filed 2025-06-20 is the merger proxy/prospectus (F-4 based), not a post-merger resale shelf. The NAL Expansion Scoping Study (Jan 2026 announcement and Mar 2026 NI 43-101 filing) signals a capital-intensive growth phase. A future F-3 shelf or secondary offering would be a significant resale event in the HFIA window.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "Elevra Lithium Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2024-07-15",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Brown and Buckler are directors of both Elevra Lithium and JV partner Morella Corporation (ASX:1MC) \u2014 undivested conflict",
+      "confidence": "high",
+      "id": 8691
+    },
+    {
+      "date": "2025-08-29",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Sayona Mining redomiciled under the Elevra Lithium name following all-stock merger with Piedmont Lithium (Delaware)",
+      "confidence": "high",
+      "id": 8687
+    },
+    {
+      "date": "2025-09-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Resource Capital Fund VIII holds 9.99% of Elevra with deep-in-the-money options and board observer rights",
+      "confidence": "high",
+      "id": 8689
+    },
+    {
+      "date": "2025-09-30",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "Director/KMP combined holding is 1.18% of issued shares; Buckler largest at 750,595 shares held across three vehicles",
+      "confidence": "high",
+      "id": 8690
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "All 11 HFIA Form 3 filings for Elevra Lithium omit the relationship-field checkboxes in the machine-readable XML",
+      "confidence": "high",
+      "id": 8688
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Three insiders (Collard, Buckler, Beristain) filed HFIA Form 3s one to two days late",
+      "confidence": "medium",
+      "id": 8692
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Three pre-merger Elevra KMPs (Crawford, Elder, Lucas) have no HFIA Form 3 in EDGAR \u2014 post-merger status unconfirmed",
+      "confidence": "medium",
+      "id": 8693
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "No F-3 shelf registration on file; potential upcoming capital raise for NAL expansion creates a resale-window risk",
+      "confidence": "medium",
+      "id": 8694
+    }
+  ]
+}

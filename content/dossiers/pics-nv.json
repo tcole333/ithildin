@@ -1,0 +1,247 @@
+{
+  "name": "PicS N.V.",
+  "slug": "pics-nv",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.364878",
+  "last_updated": "2026-03-30T03:00:40",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "ownership": 2,
+      "legal": 1,
+      "corporate": 2,
+      "regulatory": 1,
+      "financial": 2
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-03-30T03:00:40"
+  },
+  "findings": [
+    {
+      "id": 8657,
+      "finding_type": "ownership",
+      "summary": "J&F Participa\u00e7\u00f5es (Batista family) controls 96.4% of voting power via 100% ownership of Class B super-voting shares; PicS claims controlled-company Nasdaq exemptions",
+      "detail": "F-1/A (accession 0001213900-26-005383) discloses: 'J&F Participa\u00e7\u00f5es, which is jointly controlled, pursuant to a shareholders' agreement, by Messrs. Joesley Mendon\u00e7a Batista and Wesley Mendon\u00e7a Batista, our ultimate controlling shareholders, will beneficially own 23.5% of our Class A common shares and 100% of our Class B common shares, which will represent approximately 96.4% of the combined voting power.' Company will elect controlled company status under Nasdaq rules, exempting it from independent board majority, independent compensation committee, and independent nom/gov committee requirements.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-01-20",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8658,
+      "finding_type": "legal",
+      "summary": "Controlling shareholders Joesley and Wesley Batista (via J&F Participa\u00e7\u00f5es) have documented DOJ plea agreement and Brazilian Leniency Agreement from Operation Car Wash bribery scandal",
+      "detail": "F-1/A contains a truncated paragraph disclosing J&F paid [amount] 'to the U.S. government, with the remaining balance deemed to have been offset by payments made by J&F to Brazilian authorities under the Leniency Agreement.' The DOJ plea agreement required J&F to implement a compliance program and make progress reports to the DOJ over a multi-year period. This refers to J&F Participa\u00e7\u00f5es' 2017 Brazilian Leniency Agreement and DOJ plea agreement connected to Opera\u00e7\u00e3o Lava Jato (Operation Car Wash) bribery scandal. Joesley Batista admitted to paying bribes to Brazilian government officials; J&F paid approximately R$10.3B in Brazil and US$256M to DOJ (publicly documented).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-01-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8656,
+      "finding_type": "corporate",
+      "summary": "PicS N.V. Nasdaq listing went effective 2026-01-28; 8-A12B filed same day for exchange registration",
+      "detail": "EFFECT filing accession 9999999995-26-000330 confirms registration statement 333-292572 became effective 2026-01-28. 8-A12B filed same day (accession 0001213900-26-008592) registers Class A shares on Nasdaq under symbol PICS.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-01-28",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8655,
+      "finding_type": "corporate",
+      "summary": "PicS N.V. IPO priced at $19.00/share on 2026-01-29, raising ~$388M net from 22.9M Class A shares; greenshoe fully available",
+      "detail": "Final prospectus (424B1) confirms: 22,857,143 Class A shares at US$19.00 = US$434,285,717 gross; net proceeds to PicS ~US$388.3M. Greenshoe: 3,428,571 additional shares. Post-IPO Class A outstanding (full overallotment): 46,564,491; Class B: 86,451,624 (all held by J&F International, not publicly traded).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-01-29",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8661,
+      "finding_type": "ownership",
+      "summary": "Bicycle I LP (Marcelo Claure / Claure Group) is the $50M anchor investor holding 2.63M Class A shares (~5.65%); also holds warrants to buy J&F controlling shareholder shares at ~$19 in Dec 2026-Mar 2027 (now deeply underwater)",
+      "detail": "Schedule 13G (accession 0001193125-26-041618) filed by Claure Group LLC and related entities. Combined position: 526,315 Class A shares held by Claure Group (trust affiliated with Raul Marcelo Claure) + 2,105,263 Class A shares held by Bicycle I, L.P. (Fund I) = 2,631,578 total Class A shares (~5.65% of 46,564,491 outstanding). Managing members of UGP (GP I's sole managing member): Raul Marcelo Claure and Mwashuma Nyatta. This matches the $50M anchor investment at $19.00/share disclosed in the 424B1.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-06",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8662,
+      "finding_type": "regulatory",
+      "summary": "All 9 Section 16 insiders filed Form 3 initial ownership reports ~7 weeks late (2026-03-18/19 vs. required within 2 business days of 2026-01-28 IPO)",
+      "detail": "9 Form 3 initial ownership statements were filed 2026-03-18/19 \u2014 approximately 49 calendar days (7 weeks) after the IPO effective date of 2026-01-28. SEC Rule 16a-3(a) requires Form 3 to be filed within 2 business days of becoming an insider. While the company notes FPI exemption from 16(b) and 16(c), this does not eliminate the 16(a) reporting obligation. Filers: Rodrigo Lu\u00eds Rosa Couto, Andr\u00e9 Cazotto, Eduardo Chedid Sim\u00f5es, Mauricio Costa de Moura, Jos\u00e9 Antonio Batista Costa, Jackson Ricardo Gomes, Marcio Antonio Teixeira Linares, William Rodney Pruett (8 confirmed; 9th unresolved). All reported only RSUs under derivative securities, no direct share holdings.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8659,
+      "finding_type": "financial",
+      "summary": "CEO Simoes, IR Officer Cazotto, and Director Pruett bought total ~194K shares open-market at $11.52-$11.80 after -22% earnings crash \u2014 37-39% below IPO price",
+      "detail": "Three Form 4 transactions confirmed: (1) William Rodney Pruett (Director) purchased 100,000 Class A shares at $11.80 on 2026-03-23 (accession 0001213900-26-033308); (2) Andr\u00e9 Augusto Cazotto (IR/Strategy Officer) purchased 6,500 shares at $11.55 on 2026-03-25 (accession 0001213900-26-034535); (3) Eduardo Chedid Sim\u00f5es (CEO/Executive Director) purchased 87,505 shares at $11.52 on 2026-03-26 (accession 0001213900-26-035225). All coded 'P' (open market purchase). All purchases post-earnings crash.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-19",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8660,
+      "finding_type": "financial",
+      "summary": "Earnings 6-K on 2026-03-19 triggered -22.5% single-day crash on 3\u00d7 average volume; PICS now down 46% from $19 IPO in 57 trading days, at 52-week low $10.22",
+      "detail": "Stock closed at $12.27 on 2026-03-19 (down from $15.83 prior close = -22.5%) on volume of 2,095,900 shares (~3\u00d7 prior daily average). This coincides with 6-K filing (accession 0001213900-26-031560) containing earnings press release (Exhibit 99.1), earnings release (99.2), earnings presentation (99.3), and audited consolidated financial statements (99.4). Subsequent decline to $10.22 by 2026-03-27. Total decline from $19.00 IPO to $10.22 current = -46.2% in 57 days.",
+      "source_datasets": "market_data,edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-19",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 03:00:40",
+      "target_name": "PicS N.V.",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4453,
+      "person_a": "J&F Participa\u00e7\u00f5es S.A.",
+      "person_b": "PicS N.V.",
+      "relationship_type": "corporate",
+      "description": "J&F Participa\u00e7\u00f5es (Batista family) holds 100% of J&F International, which in turn holds all 86,451,624 Class B shares of PicS N.V. (10 votes/share = 94.9-97.7% voting control). J&F Participa\u00e7\u00f5es is jointly controlled by Joesley and Wesley Batista via shareholders agreement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "J&F Participa\u00e7\u00f5es S.A.",
+      "other_person_slug": "jf-participaes-sa",
+      "evidence": []
+    },
+    {
+      "id": 4454,
+      "person_a": "Banco Original S.A.",
+      "person_b": "PicS N.V.",
+      "relationship_type": "corporate",
+      "description": "Banco Original S.A. is a J&F Participa\u00e7\u00f5es-controlled Brazilian bank that holds 10,139,388 Class A shares (23.5% of Class A) of PicS N.V. AND serves as the issuing bank for PicPay Card. Shared ultimate parent creates related-party transaction exposure between issuer (PicS) and Banco Original.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:00:40",
+      "profile_id": "hfia",
+      "other_person": "Banco Original S.A.",
+      "other_person_slug": "banco-original-sa",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-01-20",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "J&F Participa\u00e7\u00f5es (Batista family) controls 96.4% of voting power via 100% ownership of Class B super-voting shares; PicS claims controlled-company Nasdaq exemptions",
+      "confidence": "high",
+      "id": 8657
+    },
+    {
+      "date": "2026-01-20",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Controlling shareholders Joesley and Wesley Batista (via J&F Participa\u00e7\u00f5es) have documented DOJ plea agreement and Brazilian Leniency Agreement from Operation Car Wash bribery scandal",
+      "confidence": "high",
+      "id": 8658
+    },
+    {
+      "date": "2026-01-28",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "PicS N.V. Nasdaq listing went effective 2026-01-28; 8-A12B filed same day for exchange registration",
+      "confidence": "high",
+      "id": 8656
+    },
+    {
+      "date": "2026-01-29",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "PicS N.V. IPO priced at $19.00/share on 2026-01-29, raising ~$388M net from 22.9M Class A shares; greenshoe fully available",
+      "confidence": "high",
+      "id": 8655
+    },
+    {
+      "date": "2026-02-06",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "Bicycle I LP (Marcelo Claure / Claure Group) is the $50M anchor investor holding 2.63M Class A shares (~5.65%); also holds warrants to buy J&F controlling shareholder shares at ~$19 in Dec 2026-Mar 2027 (now deeply underwater)",
+      "confidence": "high",
+      "id": 8661
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "All 9 Section 16 insiders filed Form 3 initial ownership reports ~7 weeks late (2026-03-18/19 vs. required within 2 business days of 2026-01-28 IPO)",
+      "confidence": "medium",
+      "id": 8662
+    },
+    {
+      "date": "2026-03-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CEO Simoes, IR Officer Cazotto, and Director Pruett bought total ~194K shares open-market at $11.52-$11.80 after -22% earnings crash \u2014 37-39% below IPO price",
+      "confidence": "high",
+      "id": 8659
+    },
+    {
+      "date": "2026-03-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Earnings 6-K on 2026-03-19 triggered -22.5% single-day crash on 3\u00d7 average volume; PICS now down 46% from $19 IPO in 57 trading days, at 52-week low $10.22",
+      "confidence": "high",
+      "id": 8660
+    }
+  ]
+}

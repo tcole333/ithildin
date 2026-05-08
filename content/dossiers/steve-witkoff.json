@@ -3,13 +3,14 @@
   "slug": "steve-witkoff",
   "aliases": [],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "zampolli"
   ],
-  "generated_at": "2026-03-11T18:36:07.685203",
-  "last_updated": "2026-02-26T18:23:49",
+  "generated_at": "2026-05-07T23:07:35.982171",
+  "last_updated": "2026-04-13T13:44:44",
   "stats": {
     "total_findings": 83,
-    "total_connections": 39,
+    "total_connections": 40,
     "total_entities": 0,
     "finding_types": {
       "legal": 19,
@@ -23,14 +24,14 @@
     "connection_types": {
       "familial": 3,
       "financial": 12,
-      "political": 10,
+      "political": 11,
       "corporate": 7,
       "employment": 1,
       "social": 4,
       "advisory": 1,
       "intelligence": 1
     },
-    "last_updated": "2026-02-26T18:23:49"
+    "last_updated": "2026-04-13T13:44:44"
   },
   "findings": [
     {
@@ -72,7 +73,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR CIK 0002043140 Form D/A filed 2025-07-03",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -233,7 +234,14 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001675939 DFAN14A 2016-08-03; CIK 0001714491 Form D 2017-08-14",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1675939",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1714491",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -256,7 +264,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR CIK 0001925528 Form D/A 2024-03-25",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1925528",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -440,7 +448,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC CIK 0002043140 Form D/A; LDA filings; FARA database; GDELT articles; FEC records",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -463,7 +471,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "LittleSis entity 178965; SEC DFAN14A CIK 0001675939 filed 2016-08-03",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1675939",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1351,7 +1359,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions API search Steve Witkoff and Zach Witkoff",
+          "evidence_ref": "OpenSanctions:API",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1464,6 +1472,13 @@
       "target_name": "Steve Witkoff",
       "profile_id": "epstein",
       "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenSanctions:Q16189572",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
         {
           "evidence_type": "file",
           "evidence_ref": "https://en.wikipedia.org/wiki/Steve_Witkoff",
@@ -2257,7 +2272,7 @@
       "created_at": "2026-02-25 21:26:05",
       "profile_id": "epstein",
       "other_person": "Zach Witkoff",
-      "other_person_slug": "zachary-witkoff",
+      "other_person_slug": "zach-witkoff",
       "evidence": [
         {
           "evidence_type": "file",
@@ -2410,7 +2425,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "LittleSis:rel-familial-178965-263312 OpenSanctions:usplum",
+          "evidence_ref": "OpenSanctions:usplum",
           "source_quote": null,
           "source_page": null
         }
@@ -2738,7 +2753,7 @@
       "created_at": "2026-02-26 17:38:07",
       "profile_id": "epstein",
       "other_person": "World Liberty Financial Inc.",
-      "other_person_slug": "world-liberty-financial",
+      "other_person_slug": "world-liberty-financial-inc",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -2941,7 +2956,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR lookup Witkoff - Vector Group Ltd CIK 0000059440, 25 filings",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=59440",
           "source_quote": null,
           "source_page": null
         }
@@ -3104,6 +3119,28 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LittleSis:rel-EricAdams-178965",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5321,
+      "person_a": "Paolo Zampolli",
+      "person_b": "Steve Witkoff",
+      "relationship_type": "political",
+      "description": "Both present at Islamabad Talks (Apr 11-12 2026) as part of 300-member US delegation. Witkoff is lead Iran negotiator; Zampolli's role at talks is undisclosed.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 13:44:44",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Islamabad_Talks",
           "source_quote": null,
           "source_page": null
         }
@@ -3281,7 +3318,7 @@
       {
         "id": "gulf-state-financial-intersections",
         "title": "Gulf State Financial Intersections",
-        "content": "<p>Available evidence indicates that Witkoff's diplomatic role and Gulf State financial flows intersect through multiple channels. Press reports indicate <a href=\"/dossiers/mgx\">MGX</a>, an Abu Dhabi sovereign wealth vehicle backed by Mubadala and <a href=\"/dossiers/g42\">G42</a>, committed $2 billion to a transaction with Binance using WLFI's USD1 stablecoin. <a href=\"/dossiers/zachary-witkoff\">Zach Witkoff</a> announced this settlement at the Token2049 conference in Dubai. [Finding #3834] According to financial disclosures and press reporting, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, linked to <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, invested $500 million in WLFI, of which at least $31 million flowed to Witkoff-affiliated entities [Finding #3776].</p><p>According to press reporting, in <a href=\"/dossiers/witkoff-group\">Witkoff Group</a>'s real estate portfolio, both Abu Dhabi and Qatar sovereign wealth funds have been investors. The Park Lane Hotel on Central Park South, purchased in 2013 for $660 million, involved both the Qatar Investment Authority and Mubadala. [Finding #3834] According to court filings and press reporting, after the DOJ's 1MDB forfeiture action against prior owner Jho Low's entities, Mubadala purchased the forfeited stake for $140 million and jointly refinanced the hotel with Witkoff for $615 million in 2019 via <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> [Finding #3766].  According to press reporting, Alex Witkoff, who runs Witkoff Group's day-to-day operations, pitched the Qatar Investment Authority in 2024 for a $4 billion real estate credit fund projecting $80 million per year in management fees; Qatar confirmed the proposal was declined [Finding #3834].</p><p>No FARA registration exists for Steve Witkoff, Zach Witkoff, or any Witkoff entity [Finding #3775]. According to legal analysis, government officials acting in their official capacity are generally exempt from FARA, though the concurrent private business interests in the same jurisdictions where Witkoff conducts diplomacy raise unresolved questions about the separation of diplomatic and commercial activity [Finding #3775].</p>",
+        "content": "<p>Available evidence indicates that Witkoff's diplomatic role and Gulf State financial flows intersect through multiple channels. Press reports indicate <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, an Abu Dhabi sovereign wealth vehicle backed by Mubadala and <a href=\"/dossiers/g42\">G42</a>, committed $2 billion to a transaction with Binance using WLFI's USD1 stablecoin. <a href=\"/dossiers/zachary-witkoff\">Zach Witkoff</a> announced this settlement at the Token2049 conference in Dubai. [Finding #3834] According to financial disclosures and press reporting, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, linked to <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, invested $500 million in WLFI, of which at least $31 million flowed to Witkoff-affiliated entities [Finding #3776].</p><p>According to press reporting, in <a href=\"/dossiers/witkoff-group\">Witkoff Group</a>'s real estate portfolio, both Abu Dhabi and Qatar sovereign wealth funds have been investors. The Park Lane Hotel on Central Park South, purchased in 2013 for $660 million, involved both the Qatar Investment Authority and Mubadala. [Finding #3834] According to court filings and press reporting, after the DOJ's 1MDB forfeiture action against prior owner Jho Low's entities, Mubadala purchased the forfeited stake for $140 million and jointly refinanced the hotel with Witkoff for $615 million in 2019 via <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> [Finding #3766].  According to press reporting, Alex Witkoff, who runs Witkoff Group's day-to-day operations, pitched the Qatar Investment Authority in 2024 for a $4 billion real estate credit fund projecting $80 million per year in management fees; Qatar confirmed the proposal was declined [Finding #3834].</p><p>No FARA registration exists for Steve Witkoff, Zach Witkoff, or any Witkoff entity [Finding #3775]. According to legal analysis, government officials acting in their official capacity are generally exempt from FARA, though the concurrent private business interests in the same jurisdictions where Witkoff conducts diplomacy raise unresolved questions about the separation of diplomatic and commercial activity [Finding #3775].</p>",
         "viz": "ego_network"
       },
       {
@@ -3322,628 +3359,6 @@
       "jurisdictional-arbitrage",
       "enabler-gradient",
       "complexity-as-credential"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Steve Witkoff",
-      "connections": [
-        {
-          "target": "Zach Witkoff",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "FEC filings, FL SunBiz registrations, WLFI Form D/A",
-          "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
-        },
-        {
-          "target": "World Liberty Financial",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
-        },
-        {
-          "target": "World Liberty Financial",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
-        },
-        {
-          "target": "Chase Herro",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Witkoff introduced Herro to Trump family. WC Digital Fi LLC (Witkoff) receives 50% of Herro/Folkman WLFI share. Witkoff is longtime Trump donor, real estate developer, now Special Envoy."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "CourtListener docket IDs 70262725, 70651481 (Democracy Forward FOIA suits)",
-          "description": "Trump donor ($1.29M+), personal friend, named WLFI Promoter, appointed Special Envoy to Middle East"
-        },
-        {
-          "target": "Michael Ashner",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders of WW Investors LLC (2016 NYRT proxy fight) and Winthrop-Witkoff Co-Investment Fund LP (2017)"
-        },
-        {
-          "target": "Zachary Witkoff",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
-        },
-        {
-          "target": "Alex Witkoff",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "FL SunBiz registry officers search",
-          "description": "Father-son; Alex is EVP Development at Maltese Golf Club LLC (Witkoff family venture)"
-        },
-        {
-          "target": "James Stomber",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "NY DOS ID 2173394; TX Comptroller TID 32001879876",
-          "description": "Law partners at Stomber and Witkoff LLP (NY, 1997); Stomber also authorized person at Winthrop-Witkoff fund; ACRIS property transfer from Witkoff to Stomber (2003)"
-        },
-        {
-          "target": "Scott Alper",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Alper is at The Witkoff Group (FEC employer, donates as real estate), authorized person at Winthrop-Witkoff fund"
-        },
-        {
-          "target": "Tahnoon bin Zayed Al Nahyan",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
-        },
-        {
-          "target": "Marc Kasowitz",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "LDA Senate lobbying filings 2017",
-          "description": "Witkoff retained Kasowitz LLP for lobbying on internet drug trafficking 2017 Q2-Q4. Kasowitz is Trump's personal attorney."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:rel-social-178965-15108",
-          "description": "Friends since 1986. Witkoff was Trump attorney at Dreyer & Traub. Golf buddies at Mar-a-Lago. Most trusted outside family per WH official. Co-chaired 2025 inaugural. WLFI revenue sharing links them financially."
-        },
-        {
-          "target": "Kirill Dmitriev",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:rel-2031565",
-          "description": "Professional relationship per LittleSis. Dmitriev is RDIF CEO sanctioned by US 2022. Met multiple times including Faena hotel Miami Oct 2025 with Kushner. Negotiated 28-point Ukraine peace plan. Putin meetings."
-        },
-        {
-          "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "https://accountable.us/what-to-know-about-trumps-billionaire-middle-east-special-envoy-steve-witkoff/",
-          "description": "Witkoff is Trump Middle East envoy negotiating with UAE officials including Tahnoon while Witkoff family profits from Tahnoon's M WLFI investment. Son Zach is WLFI co-founder."
-        },
-        {
-          "target": "Len Blavatnik",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://popular.info/p/top-trump-negotiator-retains-partnership",
-          "description": "Business partners: One High Line NYC 1.15B refi 2024, Ocean Terrace Miami. Blavatnik Ukraine-sanctioned Dec 2023. Fortune from post-Soviet deals with sanctioned Vekselberg. Faena hotel co-owner where Witkoff-Dmitriev met."
-        },
-        {
-          "target": "Jared Kushner",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "F-3826; F-4013",
-          "description": "Joint meetings with Kirill Dmitriev at Faena Miami Oct 2025 to negotiate Ukraine peace plan. Dmitriev publicly credited both for assistance. Co-navigators in Trump foreign policy network."
-        },
-        {
-          "target": "Mubadala Investment Company",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Mubadala bought Low's forfeited Park Lane stake for $140M (2018), co-owned hotel with Witkoff, joint $615M refi (2019)"
-        },
-        {
-          "target": "Deutsche Bank",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Deutsche Bank co-provided $615M Park Lane Hotel refinance (2019) to Witkoff/Mubadala JV"
-        },
-        {
-          "target": "Aryam Investment 1",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "WSJ reporting Jan 2026",
-          "description": "31M+ from Aryam payment went to Witkoff-affiliated entities. Witkoff is Trump Middle East envoy. His sons co-founded WLFI."
-        },
-        {
-          "target": "WC Digital Fi LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "cnbc.com",
-          "description": "Witkoff family affiliate receiving WLFI revenue share"
-        },
-        {
-          "target": "Sheldon Silver",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "justice.gov",
-          "description": "Silver directed Witkoff to hire Goldberg & Iryami for tax work; firm secretly shared fees with Silver. Silver took official action benefiting Witkoff in return."
-        },
-        {
-          "target": "World Liberty Financial Inc.",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC Form D filing 0002043140-24-000002",
-          "description": "Listed as Promoter on SEC Form D at 4400 Biscayne Blvd Suite 900 Miami FL. Father of co-founders Zach and Alex Witkoff. Witkoff family entities (WC Digital Fi LLC, WC Digital SC LLC) received $31M+ from UAE $500M deal. Steve Witkoff simultaneously serves as Trump special envoy. Nexus of foreign policy and family crypto interests."
-        },
-        {
-          "target": "WC Digital Fi LLC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "DLNews Oct 2024; Wikipedia WLFI",
-          "description": "WC Digital Fi LLC is affiliated with Steve Witkoff family. Witkoff introduced Herro/Folkman to Trump sons, served as WLFI co-founder emeritus before becoming special envoy"
-        },
-        {
-          "target": "World Liberty Financial",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Schiff press release 2026",
-          "description": "Co-founder emeritus of WLFI. Witkoff-family entities received ~31M from Aryam 250M payment. Son Zach nominated as WLTC bank president. Witkoff serves as Trump special envoy to Middle East while family profits from WLFI"
-        },
-        {
-          "target": "Kirill Dmitriev",
-          "type": "social",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Professional relationship per LittleSis; Dmitriev is CEO of Russian Direct Investment Fund, was tasked by Putin to make inroads with Trump team"
-        },
-        {
-          "target": "Anatoly Golubchik",
-          "type": "social",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:rel-Golubchik-178965",
-          "description": "Friends per LittleSis; Golubchik identified as Russian-American organized crime boss"
-        },
-        {
-          "target": "Michael Shvo",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "EFTA02451170",
-          "description": "Witkoff and Shvo partnered to seek $800M in EB-5 visa investor funding for NYC luxury real estate development in 2015. The deal was flagged to Jeffrey Epstein by Richard Kahn (EFTA02495035). Shvo was later indicted and settled tax evasion charges (2016-2018), which Kahn also forwarded to Epstein."
-        },
-        {
-          "target": "Jho Low",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "CourtListener docket ID 4616640",
-          "description": "Witkoff Group partnered with Jynwel Capital (Jho Low's fund) to purchase Park Lane Hotel in 2013 using 1MDB funds; DOJ forfeiture action 2:16-cv-05370"
-        },
-        {
-          "target": "Marc Kasowitz",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "LDA filing: Kasowitz LLP for Witkoff Group, 2017",
-          "description": "Witkoff Group hired Kasowitz LLP (Trump's personal attorney) for federal lobbying in 2017 on telecom and law enforcement issues during Trump's first year in office"
-        },
-        {
-          "target": "Howard Lorber",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "SEC EDGAR lookup Witkoff - Vector Group Ltd CIK 0000059440, 25 filings",
-          "description": "Vector Group Ltd (Howard Lorber chairman) mentioned Witkoff in 25 SEC filings. Both are prominent NYC real estate figures and Trump allies."
-        },
-        {
-          "target": "Stephen Schwarzman",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "https://bylinetimes.com/2025/12/01/trump-envoy-has-financial-ties-with-former-adviser-to-putins-money-man-now-leading-kremlin-peace-talks/",
-          "description": "Blackstone provided 256M Woolworth refi 2015 and 278.9M refi 2025 to Witkoff. Schwarzman sat on RDIF advisory board 2011-2014 alongside Dmitriev. Indirect financial network connecting Witkoff-Blackstone-RDIF."
-        },
-        {
-          "target": "Justin Sun",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "https://en.wikipedia.org/wiki/World_Liberty_Financial",
-          "description": "Sun invested 75M in WLFI, becoming largest single investor. 56M flowed directly to Trump entities via revenue split. Sun faces SEC lawsuit. WLFI later froze Sun tokens after attempted transfer."
-        },
-        {
-          "target": "JD Vance",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:rel-2030783",
-          "description": "Witkoff spoke at Rockbridge Network semiannual conference April 2025. Rockbridge founded 2019 by Vance and Chris Buskirk as MAGA political infrastructure org."
-        },
-        {
-          "target": "Eric Adams",
-          "type": "social",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Relationship documented in LittleSis; Witkoff major NYC developer, Adams indicted NYC mayor"
-        },
-        {
-          "target": "Norman Brownstein",
-          "type": "advisory",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Brownstein Hyatt lobbied for Witkoff Group on tax reform (H.R. 1) implementation, K Q4 2018"
-        },
-        {
-          "target": "Richard Kahn",
-          "type": "intelligence",
-          "strength": 0.4,
-          "evidence_ref": "EFTA02495035",
-          "description": "Richard Kahn (HBRK Associates, Epstein's financial manager) monitored and forwarded news about Steve Witkoff's EB-5 deal with Michael Shvo to Jeffrey Epstein in July 2015 (EFTA02495035). No direct communication, but Witkoff was on Kahn's radar as a significant NYC real estate figure."
-        },
-        {
-          "target": "Sheldon Silver",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": "CourtListener docket IDs 4354797, 4354798",
-          "description": "Witkoff Group referenced in evidence of US v. Silver corruption case (1:15-cr-00093); Silver convicted of honest services fraud involving NYC real estate developers"
-        },
-        {
-          "target": "Eric Adams",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": "LittleSis:rel-EricAdams-178965",
-          "description": "Generic relationship per LittleSis. NYC developer-mayor network. Adams federally indicted Sept 2024 on corruption including foreign campaign contributions."
-        }
-      ],
-      "secondHop": {
-        "Aryam Investment 1": [
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Aryam Investment 1 (Tahnoon bin Zayed/G42) acquired 49% of WLFI for 500M. Signed Jan 16 2025 by Eric Trump, 4 days pre-inauguration. 187M to Trump family entities. G42 executives took board seats. Deal not publicly disclosed."
-          },
-          {
-            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Aryam Investment 1 is an investment vehicle controlled by Sheikh Tahnoon, managed by his G42 executives"
-          },
-          {
-            "target": "G42",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Aryam managed by G42 executives Martin Edelman (general counsel) and Peng Xiao (CEO). G42 is chaired by Tahnoon."
-          },
-          {
-            "target": "Martin Edelman",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Signed the Aryam-WLFI agreement. G42 general counsel managing the Delaware entity of Aryam."
-          },
-          {
-            "target": "Peng Xiao",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-signed the Aryam-WLFI agreement. CEO of G42, manages the Aryam Delaware entity."
-          }
-        ],
-        "Chase Herro": [
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Herro donated $746K to Trump PACs July 2024, then co-founded WLFI with Trump family as promoters"
-          },
-          {
-            "target": "Zach Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders, executive officers, and directors of World Liberty Financial Inc per SEC Form D"
-          },
-          {
-            "target": "Zachary Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of 17+ companies since 2013 including Nexus Group (USVI), Dough Finance (DeFi), Axiom Management Group LLC (PR, WLFI revenue vehicle). Co-owners of WLFI receiving 12.5% each of net revenue."
-          },
-          {
-            "target": "Eric Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
-          },
-          {
-            "target": "Zachary Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-members of WLF Holdco LLC Board of Managers. Both involved in WLFI operations."
-          }
-        ],
-        "Deutsche Bank": [
-          {
-            "target": "Gratitude America Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank Trust Company Americas was primary banking relationship for GA. Account managed by Stewart Oldfield. KYC case #01353080. Part of the SOUTHERN FINANCIAL RELATIONSHIP umbrella with Mort Inc. GA account changed to Inactive Prospect after all accounts closed."
-          },
-          {
-            "target": "Enhanced Education",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank held Enhanced Education brokerage account managed by Ted Serure. Account underwent KYC/AML review 2018-2019. DB compliance flagged the Enhanced Education trade name for due diligence. Account closed Feb 2019."
-          },
-          {
-            "target": "The Limited Inc",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank AG (NY/Cayman) served as Managing Agent on The Limited's ~$715M 1995 credit facility with $82M commitment \u2014 same bank that later maintained Epstein's accounts (RM 82289)"
-          },
-          {
-            "target": "Robert Rankin",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Rankin was head of Deutsche Bank Asia-Pacific, later Crown Resorts executive chairman"
-          },
-          {
-            "target": "Erika Kellerhals",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DB performed formal KYC screening of Kellerhals (GCIS ID 11593661, Oct 2016) and listed her alongside inner circle (Beller, Indyke, Kahn) in account opening documents for Butterfly entity (Oct 2018). Kellerhals was DB-recognized as a related person for Epstein account management."
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Jared Kushner": [
-          {
-            "target": "Rick Gerson",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Close friends for 10+ years. UAE officials consider Gerson 'Kushner's guy.' Brother Mark Gerson invested in Cadre (Josh Kushner). Mueller investigated Gerson's role as intermediary."
-          },
-          {
-            "target": "Mohammed bin Salman",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Close friends per LittleSis; MBS PIF committed 2B to Jared Affinity Partners despite advisory board opposition; 844K Trump 47 donation 2024"
-          },
-          {
-            "target": "Rosemary Vrablic",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Deutsche Bank private wealth manager with dual relationship: personal banker and direct business transactions. Approved Kushner loans other banks rejected. Resigned DB Nov 2021."
-          },
-          {
-            "target": "Rick Gerson",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Gerson is Kushner MBZ intermediary per Mueller investigation. Alpha Wave co-founder. Already in DB as F-4143 F-4223. LittleSis associates Jared with Gerson as MBZ backchannel."
-          },
-          {
-            "target": "Nikola Selakovic",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Serbian Culture Minister indicted for illegally removing cultural heritage protection to enable Kushner Affinity Partners Belgrade Trump Tower project"
-          }
-        ],
-        "Kirill Dmitriev": [
-          {
-            "target": "Rick Gerson",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Gerson served as Kushner's back-channel to Dmitriev (RDIF CEO) during 2016-2017 transition. UAE's George Nader brokered the introduction Nov 2016. Co-drafted US-Russia reconciliation plan cleared through Putin. Gerson present in Seychelles during Prince-Dmitriev meeting."
-          }
-        ],
-        "Mubadala Investment Company": [
-          {
-            "target": "Sheikh Tahnoon bin Zayed",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tahnoon was Mubadala chairman; Mubadala subsidiary Aryam Investment 1 purchased 49% of WLFI for $500M"
-          },
-          {
-            "target": "Binance",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "MGX (Mubadala subsidiary, Tahnoon-chaired) made $2B investment in Binance, creating sovereign fund-crypto exchange link. Beydoun v. Mubadala RICO case (N.D. Cal.) separately targets Mubadala."
-          },
-          {
-            "target": "G42",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Mubadala took stake in G42 (Nov 2020), transferred Injazat and Khazna to G42. Co-founded MGX with G42 (Mar 2024)."
-          }
-        ],
-        "Sheikh Tahnoon bin Zayed Al Nahyan": [
-          {
-            "target": "World Liberty Financial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "UAE entity Aryam Investment 1 acquired 49% WLFI stake for M; controlled by Tahnoon who is UAE national security adviser"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tahnoon-backed Aryam Investment 1 acquired 49% of WLFI for USD500M. Tahnoon controls all entities involved (G42, Aryam, MGX)."
-          },
-          {
-            "target": "TikTok USDS Joint Venture LLC",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tahnoon chairs MGX which holds 15% of TikTok USDS JV. Separately, Tahnoon's IHC/Lunate subsidiary inherited ByteDance stake from G42's 42XFund. Dual economic interest on both sides of the TikTok divestiture."
-          },
-          {
-            "target": "World Liberty Financial Inc.",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Through Aryam Investment 1, acquired 49% stake in WLF for $500M (Jan 2025, pre-inauguration). G42 executives got board seats. Tahnoon is UAE national security adviser, brother of UAE President, controls G42 (flagged by US intelligence for China military tech links). Subsequently, UAE approved for 500,000 Nvidia AI chips per year, with 1/5 going to G42. Potential quid pro quo under investigation."
-          },
-          {
-            "target": "Changpeng Zhao",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tahnoon's MGX invested B in CZ's Binance via USD1 stablecoin (Mar 2025). CZ subsequently pardoned by Trump (Oct 2025). Binance also helped build USD1 technology."
-          }
-        ],
-        "Tahnoon bin Zayed Al Nahyan": [
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tahnoon backed Aryam Investment 1 which purchased 49% of WLFI for $500M, Jan 2025"
-          },
-          {
-            "target": "MGX",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi"
-          },
-          {
-            "target": "Mohammed bin Zayed Al Nahyan",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Brothers; MBZ is UAE President, Tahnoon is UAE National Security Adviser"
-          },
-          {
-            "target": "Changpeng Zhao",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Tahnoon chairs MGX which invested $2B in CZ's Binance; Binance subsequently received Abu Dhabi licenses under Tahnoon's regime"
-          },
-          {
-            "target": "Eric Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
-          }
-        ],
-        "Zachary Witkoff": [
-          {
-            "target": "Zak Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both are directors/officers of WLFI and ALT5 Sigma Corp board nominees"
-          },
-          {
-            "target": "Zach Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-members of WLF Holdco LLC Board of Managers. Both directors of ALT5 Sigma Corp (Witkoff is Chairman). Witkoff is co-founder and CEO of WLFI."
-          }
-        ],
-        "World Liberty Financial": [
-          {
-            "target": "Eric Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Named Promoter on SEC Form D, public operational face of WLFI"
-          },
-          {
-            "target": "MGX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
-          },
-          {
-            "target": "Trump Administration",
-            "type": "political",
-            "strength": 1.0,
-            "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
-          },
-          {
-            "target": "Justin Sun",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Sun invested 75M in WLFI tokens and took advisory role. Became top TRUMP meme coin holder. SEC fraud case paused Feb 2025 after Trump inauguration. WLFI blacklisted Sun's address Sept 2025 freezing 107M in tokens. Creates pattern: invest in Trump crypto -> SEC case dropped -> then frozen out."
-          },
-          {
-            "target": "G42",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "G42 executives (Edelman, Peng Xiao) signed WLFI deal and took board seats. G42 personnel manage Aryam Investment 1."
-          }
-        ],
-        "Zach Witkoff": [
-          {
-            "target": "ALT5 Sigma Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
-          },
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-          },
-          {
-            "target": "SC Financial Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
-          },
-          {
-            "target": "SC Financial Technologies LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy."
-          },
-          {
-            "target": "World Liberty Trust Company",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Proposed president/chairman/director of WLTC national trust bank"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2017-04 to 2017-12",
-        "label": "political with Marc Kasowitz",
-        "type": "political",
-        "entity": "Marc Kasowitz",
-        "id": 2225
-      }
     ]
   }
 }

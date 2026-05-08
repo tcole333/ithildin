@@ -1,0 +1,192 @@
+{
+  "name": "nginx-git-analysis",
+  "slug": "nginx-git-analysis",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.450718",
+  "last_updated": "2026-04-12T16:59:30",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 4,
+      "negative_result": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T16:59:30"
+  },
+  "findings": [
+    {
+      "id": 9797,
+      "finding_type": "intelligence",
+      "summary": "Pre-acquisition SSL hardening burst: 14 Dounin commits in 14 days before F5 announcement",
+      "detail": "Between 2019-02-25 and 2019-03-09, Maxim Dounin committed 14 SSL/TLS commits including dynamic certificate loading, disabling client renegotiation, fixing memory leaks in SSL callbacks, PEM certificate parsing from memory. Completed 2 days before F5 acquisition announcement on 2019-03-11. Aligns with pre-acquisition value enhancement.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-02-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:14",
+      "target_name": "nginx-git-analysis",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db commits 2d7faa23 20c8700a 9ff7ba3d 6e5a731e 0808b04c 59c34b67",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9804,
+      "finding_type": "negative_result",
+      "summary": "Rambler raid (2019-12-12) produced no visible disruption to nginx development",
+      "detail": "Russian police raid and Sysoev questioning caused no observable disruption. Sysoev had not committed code since June 2012. Dounin committed 13 times in December. Ermilov contributed 7 commits Dec 16. Development team was structurally insulated from the legal action.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-12-12",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:30",
+      "target_name": "nginx-git-analysis",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db: Sysoev last commit 2012-06-20; Dec 2019 19 commits 3 authors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9802,
+      "finding_type": "intelligence",
+      "summary": "QUIC/HTTP3 explosion Feb-Mar 2020: largest code change in nginx history 10 months post-acquisition",
+      "detail": "Three @nginx.com developers simultaneously launched massive QUIC/HTTP3 implementation. Homutov: 62 commits Feb-Mar. Arutyunyan: 56 in March alone. Kandaurov: 78 in Feb-Mar. March 2020: 123 total commits, highest monthly output ever. Consistent with post-acquisition strategic feature development.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2020-02-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:27",
+      "target_name": "nginx-git-analysis",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db timeline March 2020: 123 commits 6 authors",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9799,
+      "finding_type": "intelligence",
+      "summary": "Complete development freeze March 2022: zero commits during Ukraine invasion and Moscow office closure",
+      "detail": "From an average of 30-50 commits/month, nginx had ZERO commits in March 2022. Russian invasion began Feb 24; F5 announced Moscow R&D closure March 15. Starkest anomaly in the entire dataset. Development resumed April with only 2 commits.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-03-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:17",
+      "target_name": "nginx-git-analysis",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db timeline Jan-Apr 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9800,
+      "finding_type": "intelligence",
+      "summary": "Loss of 1062 commits of institutional knowledge: Ermilov and Homutov departed after Moscow closure",
+      "detail": "Ruslan Ermilov (645 commits, @nginx.com, since 2012) and Vladimir Homutov (417 commits, @nginx.com, since 2013) both permanently departed by July 2022 after Moscow R&D closure. Combined 1062 commits of core infrastructure knowledge in connection handling, TLS, QUIC protocol. No replacements of comparable depth appeared until late 2024.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-07-12",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:21",
+      "target_name": "nginx-git-analysis",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db contributor transitions July 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-02-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Pre-acquisition SSL hardening burst: 14 Dounin commits in 14 days before F5 announcement",
+      "confidence": "medium",
+      "id": 9797
+    },
+    {
+      "date": "2019-12-12",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "Rambler raid (2019-12-12) produced no visible disruption to nginx development",
+      "confidence": "medium",
+      "id": 9804
+    },
+    {
+      "date": "2020-02-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "QUIC/HTTP3 explosion Feb-Mar 2020: largest code change in nginx history 10 months post-acquisition",
+      "confidence": "medium",
+      "id": 9802
+    },
+    {
+      "date": "2022-03-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Complete development freeze March 2022: zero commits during Ukraine invasion and Moscow office closure",
+      "confidence": "medium",
+      "id": 9799
+    },
+    {
+      "date": "2022-07-12",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Loss of 1062 commits of institutional knowledge: Ermilov and Homutov departed after Moscow closure",
+      "confidence": "medium",
+      "id": 9800
+    }
+  ]
+}

@@ -5,34 +5,34 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.988640",
-  "last_updated": "2026-03-11T05:03:06",
+  "generated_at": "2026-05-07T23:07:36.401251",
+  "last_updated": "2026-03-24T14:08:34",
   "stats": {
-    "total_findings": 11,
-    "total_connections": 7,
+    "total_findings": 6,
+    "total_connections": 11,
     "total_entities": 0,
     "finding_types": {
       "intelligence": 3,
-      "financial": 2,
-      "relationship": 4,
-      "document": 1,
-      "identity": 1
+      "financial": 1,
+      "relationship": 1,
+      "document": 1
     },
     "connection_types": {
-      "advisory": 3,
+      "advisory": 4,
       "successor_to": 1,
       "funds": 1,
       "legal": 1,
-      "political": 1
+      "employment": 1,
+      "political": 3
     },
-    "last_updated": "2026-03-11T05:03:06"
+    "last_updated": "2026-03-24T14:08:34"
   },
   "findings": [
     {
       "id": 6146,
       "finding_type": "intelligence",
       "summary": "Heritage Foundation produced Project 2025 Arctic/Greenland section, Luke Coffey policy papers, and praised Project Vault; Rebekah Mercer (1789 Capital co-founder) is Heritage trustee",
-      "detail": "Heritage Foundation is the primary think tank making the intellectual case for Greenland engagement. Multiple channels: (1) Project 2025 contained dedicated Arctic section recommending 'enhanced economic ties' with Greenland; (2) Luke Coffey (then Allison Center director, now at Hudson Institute) published multiple Greenland papers arguing for US consulate in Greenland and stronger Arctic defense chain; (3) Heritage praised Project Vault as 'Trump's Bold Plan To Stop China From Starving Our Military'; (4) Heritage impact page boasts 'Heritage Leads the Way on U.S. Policy With Greenland.' Key connection: Rebekah Mercer is both a Heritage Foundation trustee (which produced Project 2025's Greenland recommendations) and co-founder of 1789 Capital (which holds Vulcan Elements, Anduril, SpaceX — companies that benefit from Greenland mineral and defense policies). CSIS also published major Greenland/rare earth/Arctic security report in Jan 2026.",
+      "detail": "Heritage Foundation is the primary think tank making the intellectual case for Greenland engagement. Multiple channels: (1) Project 2025 contained dedicated Arctic section recommending 'enhanced economic ties' with Greenland; (2) Luke Coffey (then Allison Center director, now at Hudson Institute) published multiple Greenland papers arguing for US consulate in Greenland and stronger Arctic defense chain; (3) Heritage praised Project Vault as 'Trump's Bold Plan To Stop China From Starving Our Military'; (4) Heritage impact page boasts 'Heritage Leads the Way on U.S. Policy With Greenland.' Key connection: Rebekah Mercer is both a Heritage Foundation trustee (which produced Project 2025's Greenland recommendations) and co-founder of 1789 Capital (which holds Vulcan Elements, Anduril, SpaceX \u2014 companies that benefit from Greenland mineral and defense policies). CSIS also published major Greenland/rare earth/Arctic security report in Jan 2026.",
       "source_datasets": [
         "web_search"
       ],
@@ -118,52 +118,6 @@
       ]
     },
     {
-      "id": 6560,
-      "finding_type": "relationship",
-      "summary": "PILF board is a nexus of DOJ Voting Section alumni and election enforcement figures: Chair Cleta Mitchell (Raffensperger call participant, Election Integrity Network founder), Hans von Spakovsky (DOJ Civil Rights 2002-2005, Heritage, now AAF/Pence), John Eastman (disbarred Jan 6 memo author), Ken Blackwell (former OH SOS). All served together on Trump's 2017 Election Integrity Commission.",
-      "detail": "Full PILF board composition reveals concentrated network of DOJ alumni and election enforcement activists: (1) Cleta Mitchell - Board Chair. Participated in Trump's Jan 2, 2021 Raffensperger call. Founded Conservative Partnership Institute's Election Integrity Network. (2) Hans von Spakovsky - Board member. DOJ Civil Rights Division Counsel 2002-2005, FEC commissioner (recess appointment). Heritage Foundation Election Law Reform Initiative manager until Dec 2025, then left for Advancing American Freedom (Pence org) in Jan 2026 mass exodus. (3) John C. Eastman - Board member since inception. Architect of the Jan 6 coup memo. Disbarred. (4) Ken Blackwell - Treasurer. Former Ohio Secretary of State, Family Research Council. (5) All four served on Trump's 2017 Presidential Advisory Commission on Election Integrity (disbanded). Adams (PILF president) was hired into DOJ in 2005 by Bradley Schlozman, who was found to have violated federal law via politicized hiring.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:04:38",
-      "target_name": "PILF Board Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Brennan Center 2017",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Media Matters",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "PILF board page publicinterestlegal.org",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Wikipedia",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6634,
       "finding_type": "relationship",
       "summary": "Heritage mass exodus Dec 2025: 20+ staff departed to AAF after Kevin Roberts defended Tucker Carlson interview with antisemitic Nick Fuentes. 3 trustees also resigned. M funding withdrawn.",
@@ -203,45 +157,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "WashTimes Dec 26 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6636,
-      "finding_type": "relationship",
-      "summary": "Von Spakovsky moved Heritage election integrity apparatus to AAF. Election Fraud Database (electionfraud.heritage.org) remains at Heritage but lost its principal architect. Von Spakovsky now at AAF Meese Institute pushing SAVE Act.",
-      "detail": "Hans von Spakovsky managed Heritage Election Law Reform Initiative and Election Fraud Database (1,412+ proven cases) since 2017. He authored Project 2025 FEC chapter. Resigned from Heritage Dec 22, 2025 (same day Roberts tapped him for interim Meese Center leadership). Joined AAF Meese Institute as Senior Legal Fellow Jan 12, 2026. At AAF, he continues election integrity work: pushing SAVE Act, voter citizenship verification requirements. The Election Fraud Database website (electionfraud.heritage.org) remains live at Heritage but has lost its creator and primary maintainer. Heritage states election integrity remains a 2026 priority but has not named von Spakovsky's replacement for the Election Law Reform Initiative.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:56:52",
-      "target_name": "Hans von Spakovsky",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "AAF press release Jan 12 2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Heritage electionfraud.heritage.org",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "WashTimes Jan 14 2026",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -353,102 +268,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 6667,
-      "finding_type": "financial",
-      "summary": "Combined financial scale of NVRA litigation network (latest 990s): JW ~$82M revenue (2023, EIN 521885088), AFL ~$9.6M (2023, EIN 862190372, but $44.4M in 2022), PILF ~$3.4M (2023, EIN 454355641), TTV ~$1.5M (2022, EIN 272860095), Heritage Foundation ~$100M+ (not broken out for election work). PILF budget tripled from $1.5M (2018) to $3.7M (2023) during period of maximum NVRA litigation. AFL went from zero (founded 2021) to $44M in one year.",
-      "detail": null,
-      "source_datasets": [
-        "990"
-      ],
-      "confidence": "high",
-      "date_of_event": "2023-12-31",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 05:01:18",
-      "target_name": "NVRA Election Enforcement Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica 990 filings",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6678,
-      "finding_type": "relationship",
-      "summary": "Cleta Mitchell (PILF chair) runs the Election Integrity Network (EIN) through Conservative Partnership Institute - the central coordination hub connecting all 5 election enforcement orgs. EIN summits co-hosted with RNC and sponsored by Heritage Foundation. 20+ EIN coalition members involved in Project 2025. EIN central to dismantling ERIC (the interstate voter roll comparison system), creating the data vacuum that PILF then sues to fill. Mitchell simultaneously chairs PILF while running EIN, making her the key nexus between litigation strategy and grassroots activation.",
-      "detail": null,
-      "source_datasets": [
-        "web"
-      ],
-      "confidence": "medium",
-      "date_of_event": "2024-01-01",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 05:03:35",
-      "target_name": "Election Integrity Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Documented.net investigation; InfluenceWatch; NPR investigation",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6680,
-      "finding_type": "identity",
-      "summary": "Eric Neff appointed Acting Chief of DOJ Voting Section — former LA DA who botched Konnech prosecution using True the Vote evidence, placed on admin leave, $5M settlement",
-      "detail": "Eric V. Neff (CA Bar #289367, admitted 2013) replaced Maureen Riordan as Acting Chief of DOJ Voting Section by Dec 2025. Deputy DA III at LA County DA 2015-2024. Placed on admin leave 2022 after prosecuting Konnech CEO Eugene Yu based on True the Vote/Gregg Phillips tip, withheld TTV involvement from supervisors. Charges dropped in 6 weeks; county paid $5M settlement. Filed tort claim April 2024. Wrote RedState articles on Dominion Sept-Oct 2024. Briefly represented Patrick Byrne alongside Stefanie Lambert; discovered never admitted to Central District of CA bar. RNLA member. Now signs DOJ lawsuits against 30 states seeking unredacted voter rolls.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 16:34:05",
-      "target_name": "Eric Neff",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CA State Bar record #289367",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CalSalaries 2022",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DOJ website",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Democracy Docket Dec 2025-Jan 2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -540,6 +359,43 @@
       ]
     },
     {
+      "id": 3572,
+      "person_a": "Heritage Foundation",
+      "person_b": "Personnel Policy Operations",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:37:51",
+      "profile_id": "tech-right",
+      "other_person": "Personnel Policy Operations",
+      "other_person_slug": "personnel-policy-operations",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Heritage Foundation press release",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3835,
+      "person_a": "Hans von Spakovsky",
+      "person_b": "Heritage Foundation",
+      "relationship_type": "employment",
+      "description": "Senior Legal Fellow, Manager of Election Law Reform Initiative",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Hans von Spakovsky",
+      "other_person_slug": "hans-von-spakovsky",
+      "evidence": []
+    },
+    {
       "id": 3165,
       "person_a": "1789 Capital",
       "person_b": "Heritage Foundation",
@@ -583,6 +439,43 @@
       "other_person": "Public Interest Legal Foundation",
       "other_person_slug": "public-interest-legal-foundation",
       "evidence": []
+    },
+    {
+      "id": 3432,
+      "person_a": "Heritage Foundation",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "political",
+      "description": "Complementary but competing conservative personnel pipelines. Rockbridge views Heritage as outdated. Both aim to staff Republican administrations but through different approaches: Rockbridge via elite donor network, Heritage via policy blueprint and mass training.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:43:41",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": []
+    },
+    {
+      "id": 3783,
+      "person_a": "Heritage Foundation",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:31",
+      "profile_id": "tech-right",
+      "other_person": "Voter Reference Foundation",
+      "other_person_slug": "voter-reference-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBA Pro-Life America press release; Washington Examiner",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -634,20 +527,20 @@
       }
     ],
     "curated_at": "2026-03-11T22:59:19.547765+00:00",
-    "lead": "<p>The Heritage Foundation is a 501(c)(3) public-policy research organization founded in 1973 (EIN 23-7327730), headquartered at 214 Massachusetts Avenue NE, Washington, D.C. It reports annual revenue consistently in the $100–120 million range, making it one of the largest conservative policy organizations in the United States. Heritage occupies three distinct roles relevant to this investigation: it coordinated the production of Project 2025, the policy and personnel blueprint for the second Trump administration; it maintains the Election Fraud Database, the primary private-sector dataset cited in federal and state voter-roll enforcement actions; and analysis of personnel records indicates it served as the institutional home that trained and credentialed staff who now populate <a href=\"/dossiers/advancing-american-freedom\">Advancing American Freedom</a>, <a href=\"/dossiers/public-interest-legal-foundation\">Public Interest Legal Foundation</a>, and the broader <a href=\"/dossiers/doj-voting-section\">DOJ Voting Section</a> alumni network [Finding #6549] [Finding #6551].</p><p>In October 2025, Heritage President Kevin Roberts refused to retract a statement defending Tucker Carlson's interview with Nick Fuentes. By January 2026, more than 60 staff had departed, including the heads of Heritage's legal center (John Malcolm), economic center (Richard Stern), and data team (Kevin Dayaratna), along with Hans von Spakovsky, who managed the Election Law Reform Initiative and authored the federal election oversight chapter of Project 2025. These personnel migrated to AAF's three newly created institutes, which replicate the Heritage centers they vacated in structure, personnel, and mission [Finding #6634] [Finding #6649]. The Diana Davis Spencer Foundation simultaneously withdrew a multi-million-dollar five-year funding commitment, and its CEO resigned as Heritage trustee [Finding #6634]. The result was a transfer of institutional capability—legal, economic, and data-analytic—from one organization to another, while the Election Fraud Database and Project 2025 infrastructure remained at Heritage.</p>",
+    "lead": "<p>The Heritage Foundation is a 501(c)(3) public-policy research organization founded in 1973 (EIN 23-7327730), headquartered at 214 Massachusetts Avenue NE, Washington, D.C. It reports annual revenue consistently in the $100\u2013120 million range, making it one of the largest conservative policy organizations in the United States. Heritage occupies three distinct roles relevant to this investigation: it coordinated the production of Project 2025, the policy and personnel blueprint for the second Trump administration; it maintains the Election Fraud Database, the primary private-sector dataset cited in federal and state voter-roll enforcement actions; and analysis of personnel records indicates it served as the institutional home that trained and credentialed staff who now populate <a href=\"/dossiers/advancing-american-freedom\">Advancing American Freedom</a>, <a href=\"/dossiers/public-interest-legal-foundation\">Public Interest Legal Foundation</a>, and the broader <a href=\"/dossiers/doj-voting-section\">DOJ Voting Section</a> alumni network [Finding #6549] [Finding #6551].</p><p>In October 2025, Heritage President Kevin Roberts refused to retract a statement defending Tucker Carlson's interview with Nick Fuentes. By January 2026, more than 60 staff had departed, including the heads of Heritage's legal center (John Malcolm), economic center (Richard Stern), and data team (Kevin Dayaratna), along with Hans von Spakovsky, who managed the Election Law Reform Initiative and authored the federal election oversight chapter of Project 2025. These personnel migrated to AAF's three newly created institutes, which replicate the Heritage centers they vacated in structure, personnel, and mission [Finding #6634] [Finding #6649]. The Diana Davis Spencer Foundation simultaneously withdrew a multi-million-dollar five-year funding commitment, and its CEO resigned as Heritage trustee [Finding #6634]. The result was a transfer of institutional capability\u2014legal, economic, and data-analytic\u2014from one organization to another, while the Election Fraud Database and Project 2025 infrastructure remained at Heritage.</p>",
     "system_role": "Heritage Foundation is a major conservative policy organization that functions in this investigation primarily as the source institution for election-enforcement and executive-power infrastructure operating inside and adjacent to the second Trump administration. Its relevance spans three areas: (1) Project 2025, coordinated by Heritage, served as the policy and staffing manual that the administration drew on after inauguration, including chapters written by personnel who subsequently entered government; (2) the Election Fraud Database, maintained since 2017, is cited as evidentiary support in NVRA voter-roll litigation filed by PILF, AFL, and Judicial Watch, though the Brennan Center published a counter-analysis concluding that the database's own data shows voter fraud is statistically rare; (3) the December 2025 staff exodus transferred Heritage's operational legal, economic, and data teams to AAF, splitting the conservative policy ecosystem along a Pence/traditional-conservative vs. Roberts/populist-nationalist axis without dissolving the underlying personnel network. Heritage's influence persists through its alumni across multiple organizations even as its own institutional direction remains contested.",
     "sections": [
       {
         "id": "project-2025-and-policy-pipeline",
         "title": "Project 2025 and the Policy-to-Government Pipeline",
         "viz": null,
-        "content": "<p>Heritage coordinated the production of Project 2025, the 887-page Mandate for Leadership that served as the policy and personnel blueprint for the second Trump administration. Heritage scholars authored or co-authored chapters covering federal election oversight (Hans von Spakovsky), Arctic and Greenland policy (through the Allison Center for Foreign Policy Studies), and multiple domestic policy domains. The Arctic section recommended 'enhanced economic ties' with Greenland and a permanent U.S. consulate there—recommendations Heritage subsequently publicized under the tagline 'Heritage Leads the Way on U.S. Policy With Greenland' [Finding #6146]. Luke Coffey, then director of the Allison Center, published multiple papers arguing for U.S. Arctic defense integration with Greenland before departing for the Hudson Institute.</p><p>The Project 2025 pipeline operated through Heritage Action for America, Heritage's 501(c)(4) affiliate, which received $8.8 million from the Only Citizens Vote Coalition's identified donor network (the Issue One figure, covering the 2020–2024 period). That coalition, coordinated by <a href=\"/dossiers/cleta-mitchell\">Cleta Mitchell</a> through the <a href=\"/dossiers/conservative-partnership-institute\">Conservative Partnership Institute</a>'s Election Integrity Network, co-hosted EIN summits with the RNC and lists Heritage as a sponsor [Finding #6678]. Twenty or more EIN member organizations participated in Project 2025, creating overlap between Heritage's policy output and the litigation and activation network built around Mitchell's EIN [Finding #6680].</p><p>The Greenland policy thread connects Heritage to <a href=\"/dossiers/rebekah-mercer\">Rebekah Mercer</a>, who holds a Heritage trustee seat. Mercer co-founded <a href=\"/dossiers/1789-capital\">1789 Capital</a> with Donald Trump Jr. and Omeed Malik; the fund holds positions in Vulcan Elements (which received a $620 million DoD loan under Project Vault), Anduril, and <a href=\"/dossiers/spacex\">SpaceX</a>—companies whose contract revenues are materially affected by the Greenland mineral and Arctic defense policies Heritage publicly advocated [Finding #6146] [Finding #6141]. Heritage praised Project Vault as 'Trump's Bold Plan To Stop China From Starving Our Military.' The Mercer-Heritage-1789 Capital triangle places a Heritage trustee simultaneously in a private fund that profits from the defense and resource policies Heritage scholars recommended in Project 2025.</p>"
+        "content": "<p>Heritage coordinated the production of Project 2025, the 887-page Mandate for Leadership that served as the policy and personnel blueprint for the second Trump administration. Heritage scholars authored or co-authored chapters covering federal election oversight (Hans von Spakovsky), Arctic and Greenland policy (through the Allison Center for Foreign Policy Studies), and multiple domestic policy domains. The Arctic section recommended 'enhanced economic ties' with Greenland and a permanent U.S. consulate there\u2014recommendations Heritage subsequently publicized under the tagline 'Heritage Leads the Way on U.S. Policy With Greenland' [Finding #6146]. Luke Coffey, then director of the Allison Center, published multiple papers arguing for U.S. Arctic defense integration with Greenland before departing for the Hudson Institute.</p><p>The Project 2025 pipeline operated through Heritage Action for America, Heritage's 501(c)(4) affiliate, which received $8.8 million from the Only Citizens Vote Coalition's identified donor network (the Issue One figure, covering the 2020\u20132024 period). That coalition, coordinated by <a href=\"/dossiers/cleta-mitchell\">Cleta Mitchell</a> through the <a href=\"/dossiers/conservative-partnership-institute\">Conservative Partnership Institute</a>'s Election Integrity Network, co-hosted EIN summits with the RNC and lists Heritage as a sponsor [Finding #6678]. Twenty or more EIN member organizations participated in Project 2025, creating overlap between Heritage's policy output and the litigation and activation network built around Mitchell's EIN [Finding #6680].</p><p>The Greenland policy thread connects Heritage to <a href=\"/dossiers/rebekah-mercer\">Rebekah Mercer</a>, who holds a Heritage trustee seat. Mercer co-founded <a href=\"/dossiers/1789-capital\">1789 Capital</a> with Donald Trump Jr. and Omeed Malik; the fund holds positions in Vulcan Elements (which received a $620 million DoD loan under Project Vault), Anduril, and <a href=\"/dossiers/spacex\">SpaceX</a>\u2014companies whose contract revenues are materially affected by the Greenland mineral and Arctic defense policies Heritage publicly advocated [Finding #6146] [Finding #6141]. Heritage praised Project Vault as 'Trump's Bold Plan To Stop China From Starving Our Military.' The Mercer-Heritage-1789 Capital triangle places a Heritage trustee simultaneously in a private fund that profits from the defense and resource policies Heritage scholars recommended in Project 2025.</p>"
       },
       {
         "id": "election-fraud-database",
         "title": "The Election Fraud Database and NVRA Enforcement Architecture",
         "viz": null,
-        "content": "<p>Heritage launched the Election Fraud Database at electionfraud.heritage.org in 2017, managed by Hans von Spakovsky through Heritage's Election Law Reform Initiative. It catalogs instances of alleged voter fraud across the United States and is routinely cited by NVRA litigants as evidence that voter-roll maintenance addresses a documented fraud problem. A Brennan Center for Justice counter-analysis concluded that the database's own data demonstrates voter fraud is statistically rare, not a basis for broad voter-roll purge programs. Despite this contested evidentiary status, analysis of litigation filings indicates the database continues to function as a cited authority in cases brought by <a href=\"/dossiers/public-interest-legal-foundation\">Public Interest Legal Foundation</a> and <a href=\"/dossiers/america-first-legal-foundation\">America First Legal Foundation</a> [Finding #6551].</p><p>Von Spakovsky also served on Trump's 2017 Presidential Advisory Commission on Election Integrity (PACEI), alongside J. Christian Adams (now PILF president), Ken Blackwell, and Kris Kobach. All four remain active in the election enforcement network as of March 2026, operating through PILF, AAF, FRC/AFPI, and the Kansas Attorney General's office respectively [Finding #6609]. Heritage was a summit sponsor for the Election Integrity Network at the Conservative Partnership Institute. Von Spakovsky sat on the PILF board while running Heritage's election operation, and Mitchell simultaneously chairs PILF while running EIN—positions that create a closed feedback loop between database production (Heritage/AAF), litigation strategy (PILF/AFL/JW), and grassroots activation (EIN) [Finding #6678] [Finding #6560].</p><p>Von Spakovsky's departure to AAF in January 2026 transferred his personal expertise and network relationships to the Pence organization, but the Election Fraud Database's intellectual property remained at Heritage. Heritage stated publicly that election integrity remains a 2026 organizational priority, meaning both institutions now claim the same policy domain with partially overlapping personnel histories [Finding #6636].</p>"
+        "content": "<p>Heritage launched the Election Fraud Database at electionfraud.heritage.org in 2017, managed by Hans von Spakovsky through Heritage's Election Law Reform Initiative. It catalogs instances of alleged voter fraud across the United States and is routinely cited by NVRA litigants as evidence that voter-roll maintenance addresses a documented fraud problem. A Brennan Center for Justice counter-analysis concluded that the database's own data demonstrates voter fraud is statistically rare, not a basis for broad voter-roll purge programs. Despite this contested evidentiary status, analysis of litigation filings indicates the database continues to function as a cited authority in cases brought by <a href=\"/dossiers/public-interest-legal-foundation\">Public Interest Legal Foundation</a> and <a href=\"/dossiers/america-first-legal-foundation\">America First Legal Foundation</a> [Finding #6551].</p><p>Von Spakovsky also served on Trump's 2017 Presidential Advisory Commission on Election Integrity (PACEI), alongside J. Christian Adams (now PILF president), Ken Blackwell, and Kris Kobach. All four remain active in the election enforcement network as of March 2026, operating through PILF, AAF, FRC/AFPI, and the Kansas Attorney General's office respectively [Finding #6609]. Heritage was a summit sponsor for the Election Integrity Network at the Conservative Partnership Institute. Von Spakovsky sat on the PILF board while running Heritage's election operation, and Mitchell simultaneously chairs PILF while running EIN\u2014positions that create a closed feedback loop between database production (Heritage/AAF), litigation strategy (PILF/AFL/JW), and grassroots activation (EIN) [Finding #6678] [Finding #6560].</p><p>Von Spakovsky's departure to AAF in January 2026 transferred his personal expertise and network relationships to the Pence organization, but the Election Fraud Database's intellectual property remained at Heritage. Heritage stated publicly that election integrity remains a 2026 organizational priority, meaning both institutions now claim the same policy domain with partially overlapping personnel histories [Finding #6636].</p>"
       },
       {
         "id": "december-2025-fracture",
@@ -665,14 +558,14 @@
         "id": "financial-profile",
         "title": "Financial Profile",
         "viz": null,
-        "content": "<p>Heritage's IRS Form 990 (EIN 23-7327730) documents revenue stable in the $100–120 million range from 2013 through 2022, with assets significantly above $100 million as of the most recent available filing year. The organization is classified under NTEE code W050 (public policy research) and has held 501(c)(3) status since 1973. For comparison, AAF reported $10.7 million in 2024 revenue across its two entities, and PILF reported approximately $3.4 million. Even after the December 2025 departures, Heritage retains an order-of-magnitude financial advantage over the organizations that absorbed its former staff [Finding #6549].</p><p>Heritage Action for America, the 501(c)(4) affiliate, received $8.8 million from the Only Citizens Vote Coalition donor network as tracked by Issue One over the 2020–2024 period. Heritage does not publicly disclose individual donors to either the 501(c)(3) or the 501(c)(4), consistent with the donor-advised fund structure that characterizes the broader conservative funding network. The Diana Davis Spencer Foundation's withdrawal of its multi-million-dollar commitment represents the first documented major donor departure tied directly to a Heritage leadership decision [Finding #6634] [Finding #6667].</p>"
+        "content": "<p>Heritage's IRS Form 990 (EIN 23-7327730) documents revenue stable in the $100\u2013120 million range from 2013 through 2022, with assets significantly above $100 million as of the most recent available filing year. The organization is classified under NTEE code W050 (public policy research) and has held 501(c)(3) status since 1973. For comparison, AAF reported $10.7 million in 2024 revenue across its two entities, and PILF reported approximately $3.4 million. Even after the December 2025 departures, Heritage retains an order-of-magnitude financial advantage over the organizations that absorbed its former staff [Finding #6549].</p><p>Heritage Action for America, the 501(c)(4) affiliate, received $8.8 million from the Only Citizens Vote Coalition donor network as tracked by Issue One over the 2020\u20132024 period. Heritage does not publicly disclose individual donors to either the 501(c)(3) or the 501(c)(4), consistent with the donor-advised fund structure that characterizes the broader conservative funding network. The Diana Davis Spencer Foundation's withdrawal of its multi-million-dollar commitment represents the first documented major donor departure tied directly to a Heritage leadership decision [Finding #6634] [Finding #6667].</p>"
       }
     ],
     "open_questions": [
       "What is the precise dollar figure of the Diana Davis Spencer Foundation's withdrawn commitment, and which other major donors reduced or ended support after the Roberts-Fuentes controversy? Heritage's 2025 Form 990 has not yet been filed, leaving the full financial impact undocumented in primary sources.",
       "Does Kevin Roberts hold any formal board, advisory, or organizational relationship with entities linked to Nick Fuentes, Tucker Carlson, or the broader nationalist media network? His refusal to retract has been attributed to ideological alignment, but underlying financial or organizational ties have not been established from primary sources.",
       "Who now manages the Election Fraud Database after von Spakovsky and the data analytics team departed to AAF? Heritage stated it remains committed to election integrity work in 2026, but the database's principal architect has left, and no public announcement has identified his successor or any changes to methodology.",
-      "What is Rebekah Mercer's specific governance role at Heritage—does she sit on subcommittees with authority over research priorities or personnel—and did she take any position on the Roberts controversy? Her board seat and 1789 Capital partnership with Trump Jr. are documented, but her active governance participation is not.",
+      "What is Rebekah Mercer's specific governance role at Heritage\u2014does she sit on subcommittees with authority over research priorities or personnel\u2014and did she take any position on the Roberts controversy? Her board seat and 1789 Capital partnership with Trump Jr. are documented, but her active governance participation is not.",
       "Which Project 2025 chapters have been adopted as administration policy, and does Heritage maintain any formal tracking relationship with government personnel identified in the document? The Trump campaign publicly distanced itself from Project 2025 in July 2024, yet multiple recommendations were implemented after inauguration."
     ],
     "applicable_models": [
@@ -682,195 +575,5 @@
       "private-order",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Heritage Foundation",
-      "connections": [
-        {
-          "target": "Rebekah Mercer",
-          "type": "advisory",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Mercer is Heritage Foundation trustee; Heritage produced Project 2025 Greenland section. Mercer co-founded 1789 Capital with Greenland-relevant defense portfolio"
-        },
-        {
-          "target": "Advancing American Freedom",
-          "type": "successor_to",
-          "strength": 1,
-          "evidence_ref": "AAF press releases",
-          "description": "AAF absorbed Heritage legal, economic, and data teams in Dec 2025-Jan 2026 mass exodus. 20+ staff moved. Three AAF institutes mirror Heritage centers."
-        },
-        {
-          "target": "Diana Davis Spencer Foundation",
-          "type": "funds",
-          "strength": 1,
-          "evidence_ref": "WashPost Dec 2025",
-          "description": "Withdrew M 5-year funding commitment from Heritage after antisemitism controversy. CEO Abby Spencer Moffat resigned as Heritage trustee."
-        },
-        {
-          "target": "Public Interest Legal Foundation",
-          "type": "legal",
-          "strength": 1,
-          "evidence_ref": "LittleSis; Heritage website",
-          "description": null
-        },
-        {
-          "target": "1789 Capital",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Mercer connection creates policy-to-investment pipeline"
-        },
-        {
-          "target": "America First Legal Foundation",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Heritage election fraud database and Project 2025 election chapter provide intellectual framework for AFL voter roll litigation"
-        },
-        {
-          "target": "Public Interest Legal Foundation",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Heritage election fraud database provides data cited by PILF in voter roll purge cases; von Spakovsky and Adams share DOJ Voting Section alumni network"
-        }
-      ],
-      "secondHop": {
-        "1789 Capital": [
-          {
-            "target": "Defense Supplemental Spending",
-            "type": "financial",
-            "strength": 1,
-            "description": "Iran war supplemental funding benefits 1789 Capital portfolio: SpaceX, Anduril, Hadrian, Vulcan Elements"
-          },
-          {
-            "target": "Anduril Industries",
-            "type": "financial",
-            "strength": 1,
-            "description": "1789 Capital invested in Anduril 2.5B Series G (Jun 2025) led by Founders Fund. Creates Trump family financial interest in Anduril Golden Dome contracts (SHIELD, SBI, IVAS 22B)."
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1,
-            "description": "1789 Capital holds SpaceX position. SpaceX is bidding 2B+ Golden Dome satellite tracking constellation. Creates direct Trump family financial benefit from SpaceX government contracts via Trump Jr partnership."
-          },
-          {
-            "target": "True Anomaly",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "No direct investment overlap. 1789 Capital and Narya Capital (True Anomaly investor) both operate in defense tech VC with separate portfolios. Both fund principals (Trump Jr, Vance) are immediate family/office of President/VP. Both portfolios benefit from Golden Dome procurement."
-          },
-          {
-            "target": "Project Vault",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "1789 Capital portfolio company Vulcan Elements (rare earth magnets, 620M DoD loan) is direct beneficiary of Project Vault 12B critical mineral reserve"
-          }
-        ],
-        "Advancing American Freedom": [
-          {
-            "target": "Hans von Spakovsky",
-            "type": "employment",
-            "strength": 1,
-            "description": "Von Spakovsky joined AAF Meese Institute as Senior Legal Fellow Jan 12 2026. Previously managed Heritage Election Law Reform Initiative."
-          },
-          {
-            "target": "Marc Short",
-            "type": "controls",
-            "strength": 1,
-            "description": "Chairman of AAF board. Former Pence CoS. Koch connection via Advanced Strategies (K/yr consulting)."
-          },
-          {
-            "target": "Joshua Pitcock",
-            "type": "advisory",
-            "strength": 1,
-            "description": "AAF Secretary/Board. Former Pence CoS. Currently Oracle SVP Government Affairs."
-          }
-        ],
-        "America First Legal Foundation": [
-          {
-            "target": "Stephen Miller",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Miller founded AFL in 2021, serves as President and Executive Director earning $527K. AFL is the litigation arm of his immigration enforcement policy apparatus."
-          },
-          {
-            "target": "Russ Vought",
-            "type": "corporate",
-            "strength": 1,
-            "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
-          },
-          {
-            "target": "Ed Corrigan",
-            "type": "corporate",
-            "strength": 1,
-            "description": "AFL board director. Also CEO of Conservative Partnership Institute. Led Trump transition domestic policy personnel selection, placing hundreds in government."
-          },
-          {
-            "target": "DonorsTrust",
-            "type": "financial",
-            "strength": 1,
-            "description": "DonorsTrust gave AFL $21.3M in 2024 (up from $3.2M in 2023). Anonymous dark money conduit providing 2/3 of AFL's revenue."
-          },
-          {
-            "target": "Reed Rubinstein",
-            "type": "employment",
-            "strength": 1,
-            "description": "Rubinstein served as AFL Senior Counselor, Director of Oversight & Investigations, then Senior VP earning $277K. Now confirmed as State Dept Legal Advisor 2025 - AFL-to-government pipeline."
-          }
-        ],
-        "Public Interest Legal Foundation": [
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1,
-            "description": "J. Christian Adams (PILF president) served as TTV counsel in 2013 Colorado voter roll cases; PILF is co-party in TTV v. IRS (DC Circuit, 2025-26)"
-          },
-          {
-            "target": "Maureen Riordan",
-            "type": "employment",
-            "strength": 1,
-            "description": "PILF litigation counsel 2021-June 2025, then DOJ Voting Section Acting Chief May 2025-Jan 2026"
-          },
-          {
-            "target": "DOJ Voting Section",
-            "type": "legal",
-            "strength": 1,
-            "description": "PILF data cited in DOJ letter to PA SOS Aug 2025; DOJ filed amicus for PILF in Maine case; Riordan revolving door"
-          },
-          {
-            "target": "Hans von Spakovsky",
-            "type": "advisory",
-            "strength": 1,
-            "description": "PILF board member; also DOJ Civil Rights Division 2002-2005 and Heritage Foundation Election Law Reform"
-          },
-          {
-            "target": "Cleta Mitchell",
-            "type": "advisory",
-            "strength": 1,
-            "description": "PILF Board Chair; also founded CPI Election Integrity Network; participated in Raffensperger call"
-          }
-        ],
-        "Rebekah Mercer": [
-          {
-            "target": "Donald Trump Jr",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Both partners at 1789 Capital. Mercer is co-founder and major investor (likely provided seed capital -- initial Form D showed 10M from 1 investor). Mercer also key Heritage Foundation trustee (Project 2025) and Cambridge Analytica funder."
-          },
-          {
-            "target": "Omeed Malik",
-            "type": "corporate",
-            "strength": 1,
-            "description": "Co-founders of 1789 Capital (Oct 2022). Malik is president, Mercer provides capital and conservative donor network access. Mercer also Heritage Foundation trustee and Cambridge Analytica funder."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

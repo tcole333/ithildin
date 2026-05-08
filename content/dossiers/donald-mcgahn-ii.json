@@ -1,0 +1,451 @@
+{
+  "name": "Donald McGahn II",
+  "slug": "donald-mcgahn-ii",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.359473",
+  "last_updated": "2026-03-24T14:14:50",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 5,
+    "total_entities": 1,
+    "finding_types": {
+      "identity": 1,
+      "intelligence": 2,
+      "financial": 1,
+      "relationship": 3,
+      "legal": 1
+    },
+    "connection_types": {
+      "advisory": 1,
+      "employment": 1,
+      "familial": 1,
+      "corporate": 1,
+      "political": 1
+    },
+    "last_updated": "2026-03-24T14:14:50"
+  },
+  "findings": [
+    {
+      "id": 7643,
+      "finding_type": "identity",
+      "summary": "McGahn career profile: (1) Patton Boggs/Squire Patton Boggs - election law, lobbyist (confirmed in Senate LDA data). (2) FEC Commissioner under GW Bush. (3) Jones Day partner (2014-2017, 2019-present). (4) WH Counsel Jan 2017-Oct 2018. (5) NRCC General Counsel. (6) Trump Transition Team General Counsel. (7) Admin Conference of US Board Member. Education: Notre Dame undergrad, Widener Law. Wife: Shannon McGahn (House Financial Services Committee Staff Director, former Mnuchin counselor). Known for: guitar player in cover band, libertarian election law philosophy focused on deregulation.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:02",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/mcgahn-littlesis-rels.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986 (29 relationships)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.jonesday.com/en/lawyers/m/donald-mcgahn",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7644,
+      "finding_type": "intelligence",
+      "summary": "McGahn-Leo judicial pipeline: Architected confirmation of 234 Article III judges during Trump first term (3 Supreme Court, 54 appellate, 174 district). Leonard Leo provided initial slate of 21 SCOTUS candidates in 2016. McGahn in-sourced judicial selection to Federalist Society. Nearly 90% of Trump appellate judges were FedSoc members. McGahn told WaPo he will stay involved as outside adviser on nominations. McGahn sought nominees concerned about limiting federal regulatory authority - explicitly linking judicial selection to regulatory reform agenda.",
+      "detail": "The McGahn-Leo judicial pipeline represents the most consequential structural change of the Trump era. McGahn centralized selection within the executive branch while drawing on FedSoc-vetted candidates. This bypassed traditional senatorial courtesy and ABA vetting. The regulatory deregulation motive is explicit in McGahn's own words: regulatory reform and judicial selection are deeply connected. McConnell personally urged McGahn not to resign, recognizing the judicial pipeline as the administration's most durable legacy.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:16",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/List_of_federal_judges_appointed_by_Donald_Trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cbsnews.com/news/trump-judicial-confirmations-second-term/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2022/09/13/1122536384/trump-lawyers-jones-day-servants-of-the-damned-david-enrich",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7645,
+      "finding_type": "financial",
+      "summary": "McGahn FEC donations: 60 records totaling $69,325. Jones Day listed as employer on most filings. Address: Potomac, MD. 2025 donations surged to $33,500 post-Trump reelection (48% of lifetime total). Top recipients: NRSC ($10K), NRCC ($10K), RNC ($10K), Collins for Senator ($3.3K), Ted Cruz ($3.2K). Also donated to Lindsey Graham, Thom Tillis, Jim Jordan, Josh Hawley, Tom Cotton, Pete Stauber, Steve Scalise. Pattern shows systematic Republican institutional support plus targeted donations to key allies.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:26",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/mcgahn-fec-all.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor search: Donald McGahn",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7646,
+      "finding_type": "relationship",
+      "summary": "LittleSis full relationship map (29 connections): Key network nodes include Leonard Leo (generic relationship), Federalist Society (member), NRA (generic), Mitch McConnell (professional), Freedom Partners Chamber of Commerce and Freedom Partners Action Fund (Koch network - business), Stefan Passantino (position under McGahn), Mike Roman (special assistant under McGahn). Family: Shannon McGahn (wife), Joseph McGahn (family), Paddy McGahn (family - uncle, Atlantic City political figure). Jones Day partner. NRCC general counsel. Donations to Joseph Pitts, GW Bush, RNC, Demaris Miller.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:36",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/mcgahn-littlesis-rels.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986 (29 relationships)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7647,
+      "finding_type": "relationship",
+      "summary": "Jones Day-Trump administration revolving door: McGahn brought 5 Jones Day lawyers to White House, 6 more appointed to senior Trump admin posts. Jones Day effectively served as talent pipeline for conservative government. Key figures include Stefan Passantino (who later became involved with Building America Future / Musk dark money entity). Jones Day also represented Trump campaign on election law matters. NPR/NYT investigations documented Jones Day as conservative machine shaping Trump judicial and regulatory policy.",
+      "detail": "The Jones Day pipeline represents institutional capture: the firm provided legal infrastructure for the Trump political project (campaign representation, judicial selection personnel, regulatory deregulation lawyers) while maintaining commercial law practice. McGahn's return to Jones Day in 2019 after WH tenure completes the revolving door. He continues advising on judicial nominations from outside government. Shannon McGahn's parallel career (Treasury counselor, House Financial Services staff director) creates dual-track regulatory influence.",
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:48",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.abajournal.com/news/article/how-jones-days-conservative-machine-helped-shape-policy-in-the-trump-administration",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2022/09/13/1122536384/trump-lawyers-jones-day-servants-of-the-damned-david-enrich",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7649,
+      "finding_type": "legal",
+      "summary": "McGahn congressional testimony case: Committee on the Judiciary v. Donald McGahn II (D.C. Circuit 19-5331, filed Nov 26 2019). House Judiciary Committee sued to enforce subpoena for McGahn's testimony about Trump obstruction described in Mueller Report. Case established precedent that senior WH officials cannot claim absolute immunity from congressional subpoenas. Also: McGahn confirmed as lobbyist at Squire Patton Boggs (formerly Patton Boggs) in Senate LDA records (registrant ID 30906).",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:12:57",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/mcgahn-court.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/mcgahn-lobbying.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener:19-5331 D.C. Circuit",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7655,
+      "finding_type": "relationship",
+      "summary": "McGahn Jones Day pipeline continues into Trump 2nd term: Stephen Kenny (former Jones Day lawyer, former RNC staffer, former Grassley Judiciary Committee aide) is now Deputy White House Counsel shepherding daily judicial selection business. This extends the Jones Day-FedSoc judicial pipeline without McGahn holding official position. McGahn himself continues at Jones Day advising clients on navigating government authority. Trump 2nd term confirmed 26 judicial nominees in 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:14:14",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://rollcall.com/2025/12/30/trumps-2025-saw-26-lifetime-judicial-nominees-approved/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cbsnews.com/news/trump-judicial-confirmations-second-term/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7659,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL SHIFT: Trump-FedSoc judicial pipeline fracturing in 2nd term. Trump called Leonard Leo a sleazebag (May 2025) and blamed FedSoc for bad judicial advice after trade court ruled against tariffs. Trump now favors loyalty-based nominees over FedSoc-vetted constitutionalists (e.g. Emil Bove, his former personal lawyer, nominated as judge). This represents a potential break in the McGahn-Leo institutional pipeline. McGahn's continuing influence depends on whether FedSoc model survives Trump's MAGA loyalty test.",
+      "detail": "The Trump-Leo fracture is structurally significant for McGahn's network. The first-term model (Leo lists -> McGahn vetting -> Senate confirmation) produced 234 judges but also judges who ruled against Trump on tariffs. Trump's response is to bypass the FedSoc pipeline in favor of personal loyalists. If this shift holds, McGahn's role as institutional judicial architect is diminished. However, Stephen Kenny (Jones Day pipeline) remains in place as deputy WH counsel, suggesting the infrastructure persists even as the principal-agent relationship changes.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:14:50",
+      "target_name": "Donald McGahn II",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://slate.com/news-and-politics/2025/06/why-trump-attacks-leonard-leo-explained.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.csmonitor.com/USA/Justice/2025/0604/trump-leonard-leo-federalist-society",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3863,
+      "person_a": "Donald McGahn II",
+      "person_b": "Leonard Leo",
+      "relationship_type": "advisory",
+      "description": "McGahn-Leo judicial pipeline: Leo provided SCOTUS candidate lists, McGahn executed in-sourced judicial selection through Federalist Society. Together confirmed 234 judges including 3 SCOTUS justices. McGahn continues as outside adviser on nominations.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:12",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2022/09/13/1122536384/trump-lawyers-jones-day-servants-of-the-damned-david-enrich",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3864,
+      "person_a": "Donald McGahn II",
+      "person_b": "Stefan Passantino",
+      "relationship_type": "employment",
+      "description": "Passantino served under McGahn in White House Counsel office. Later became involved with Building America's Future (Musk dark money entity). LittleSis confirms position relationship.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:19",
+      "profile_id": "tech-right",
+      "other_person": "Stefan Passantino",
+      "other_person_slug": "stefan-passantino",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3865,
+      "person_a": "Donald McGahn II",
+      "person_b": "Shannon McGahn",
+      "relationship_type": "familial",
+      "description": "Married couple. Shannon serves as House Financial Services Committee Staff Director, previously counselor to Treasury Secretary Mnuchin. Dual-track regulatory influence.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:19",
+      "profile_id": "tech-right",
+      "other_person": "Shannon McGahn",
+      "other_person_slug": "shannon-mcgahn",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3870,
+      "person_a": "Donald McGahn II",
+      "person_b": "Jones Day",
+      "relationship_type": "corporate",
+      "description": "Partner at Jones Day (2014-2017, 2019-present). Brought 5 Jones Day lawyers to WH, 6 more to senior admin posts. Firm served as talent pipeline for Trump admin. Represented Trump campaign on election law.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:27",
+      "profile_id": "tech-right",
+      "other_person": "Jones Day",
+      "other_person_slug": "jones-day",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3876,
+      "person_a": "Donald McGahn II",
+      "person_b": "Freedom Partners Chamber of Commerce",
+      "relationship_type": "political",
+      "description": "LittleSis confirms business relationship between McGahn and Freedom Partners (Koch network). Also connected to Freedom Partners Action Fund. This links McGahn to the Koch donor network that funded conservative judicial and regulatory initiatives.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:55",
+      "profile_id": "tech-right",
+      "other_person": "Freedom Partners Chamber of Commerce",
+      "other_person_slug": "freedom-partners-chamber-of-commerce",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:116986",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "irs_990:363235550",
+      "entity_id": 1372,
+      "entity_name": "Federalist Society for Law and Public Policy Studies",
+      "entity_type": "nonprofit",
+      "jurisdiction": "dc",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": []
+}

@@ -1,0 +1,314 @@
+{
+  "name": "SEALSQ Corp",
+  "slug": "sealsq-corp",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.344330",
+  "last_updated": "2026-03-29T19:47:40",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 5,
+    "total_entities": 0,
+    "finding_types": {
+      "governance": 3,
+      "financial": 5,
+      "corporate": 1
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 2
+    },
+    "last_updated": "2026-03-29T19:47:40"
+  },
+  "findings": [
+    {
+      "id": 8564,
+      "finding_type": "governance",
+      "summary": "SEALSQ Board approved crypto treasury policy allocating up to $30M of corporate cash into Bitcoin, Ethereum, HBAR, and WECAN tokens. Board also authorized Investment Committee whose members may personally invest in the same assets as the company.",
+      "detail": "WECAN tokens are ERC-20 tokens issued by WeCan Group SA, in which SEALSQ already holds 28.3% equity (as of Sept 9, 2025). Investing corporate cash in tokens from a company SEALSQ partially owns creates circular value-transfer risk. Investment Committee members explicitly permitted to personally co-invest in same assets.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2025-09-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8561,
+      "finding_type": "financial",
+      "summary": "SEALSQ raised ~$200M gross in October 2025 registered direct + concurrent private placement: 12.64M ordinary shares at $7.50 plus 14.03M pre-funded warrants and 53.33M Class D Warrants at $7.50 (7-year). Placement agent Maxim Group LLC earned 6% fee.",
+      "detail": "October 2025 Purchase Agreement. Stock was near its 52-week high of $8.71 at time of offering. Class D Warrants are now deeply out of the money at current price of $2.45.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2025-10-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8567,
+      "finding_type": "financial",
+      "summary": "CVI Investments Inc. (managed by Heights Capital Management Inc.) filed Schedule 13G/A showing zero shares of SEALSQ as of Dec 31, 2025 \u2014 full exit from previously disclosed 5%+ position.",
+      "detail": "CVI Investments is a Heights Capital Management vehicle that frequently participates in PIPE/registered-direct offerings. Exit timing (reported Dec 31, 2025) follows the post-offering stock price decline from Oct 2025 offering at $7.50.",
+      "source_datasets": "edgar_13g",
+      "confidence": "high",
+      "date_of_event": "2026-02-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8566,
+      "finding_type": "corporate",
+      "summary": "SEALSQ abandoned planned majority acquisition of Quobly SAS (French quantum startup, EPFL ecosystem) in February 2026, then announced new acquisition target Miraex SA (Swiss photonics/quantum) in March 2026. Serial M&A announcements without closings may be used to sustain narrative momentum.",
+      "detail": "Quobly: discontinued majority acquisition Feb 2026, now pursuing minority investment in Quobly's anticipated Series A. Miraex: LOI signed March 24, 2026 for 100% acquisition \u2014 60-day exclusivity from EPFL Innovation Park, Ecublens, Switzerland.",
+      "source_datasets": "edgar_6k",
+      "confidence": "medium",
+      "date_of_event": "2026-02-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8560,
+      "finding_type": "financial",
+      "summary": "SEALSQ raised ~$117M net in March 2026 registered direct offering: 22.9M ordinary shares + 7.5M pre-funded warrants at $4.11 per unit, plus 60.8M Class E Warrants at $5.50 exercise (7-year term). Placement agent Maxim Group LLC earned ~$7.5M (6% fee).",
+      "detail": "Registration Number 333-290963. Securities Purchase Agreement dated March 15, 2026. Gross proceeds $124,999,269. Net proceeds ~$116,900,000. Shares outstanding after offering: 215,123,759. Maxim Group LLC sole placement agent.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8568,
+      "finding_type": "financial",
+      "summary": "SEALSQ ATM facility with Cantor Fitzgerald and Maxim sold 15.45M shares through March 13, 2026. Combined with Oct 2025 and March 2026 registered directs, total dilution from capital markets exceeds 65M new shares (excluding warrants) in under 12 months.",
+      "detail": "ATM facility established May 19, 2025 for up to $100M. 15.45M shares sold at market (implies ~$50\u201360M at average ~$3.50). Total from all three mechanisms: ~$325\u2013375M gross proceeds. Maxim Group LLC is agent or co-agent on ATM, Oct 2025 direct, and Mar 2026 direct.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "medium",
+      "date_of_event": "2026-03-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8563,
+      "finding_type": "governance",
+      "summary": "13 insiders filed initial Form 3s on 2026-03-18 \u2014 the HFIA reporting deadline \u2014 simultaneously reporting first-time beneficial ownership. Three insiders then filed Form 4 sales beginning the same day: Verjus sold 5,000 shares at $3.03 on March 18; O'Hara sold 50,000 shares across March 18\u201325; Buonanno exercised 15,000 options at $0.01 on March 27.",
+      "detail": "O'Hara sales: 10,000 shares/day at $3.02, $3.00 (Mar 19-20); 10,000/day at $2.99, $2.90, $2.92 (Mar 23-25). Total ~$149K gross. Verjus: 5,000 @ $3.03 = ~$15K. Buonanno: exercised 15,000 options at $0.01 cost basis.",
+      "source_datasets": "edgar_forms_34",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8565,
+      "finding_type": "governance",
+      "summary": "Carlos Moreira, founder/CEO of parent WISeKey, is the dominant insider at SEALSQ with 66 Class F shares plus 614,953 ordinary shares. Class F shares confer supervoting rights. Other Class F holders: Ruma Bose (26), David Fergusson (4), and apparent others \u2014 control concentrated in a small group.",
+      "detail": "Moreira address listed as c/o WISeKey International Holding AG, Avenue Louis-Casai 58, Cointrin, Switzerland. Class F total visible: 100 shares. Full Class F register requires BVI company records or Form 20-F review.",
+      "source_datasets": "edgar_forms_34",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8562,
+      "finding_type": "financial",
+      "summary": "LAES stock at $2.45 as of March 29, 2026 \u2014 67% below Oct 2025 offering price of $7.50 and 40% below March 2026 offering price of $4.11. Investors in both registered directs are substantially underwater.",
+      "detail": "52-week high: $8.71. 52-week low: $2.12. Current market cap: ~$530M. Weekly price shows sustained decline from Oct 2025 spike through March 2026. Net tangible book value was $0.95/share as of June 30, 2025.",
+      "source_datasets": "market_data",
+      "confidence": "high",
+      "date_of_event": "2026-03-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "SEALSQ Corp",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4362,
+      "person_a": "SEALSQ Corp",
+      "person_b": "WISeKey International Holding SA",
+      "relationship_type": "corporate",
+      "description": "Parent-subsidiary relationship. WISeKey is the founding parent of SEALSQ. WISeKey SA co-tenants SEALSQ's new Geneva HQ. Carlos Moreira controls both entities.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "WISeKey International Holding SA",
+      "other_person_slug": "wisekey-international-holding-sa",
+      "evidence": []
+    },
+    {
+      "id": 4363,
+      "person_a": "SEALSQ Corp",
+      "person_b": "WeCan Group SA",
+      "relationship_type": "corporate",
+      "description": "SEALSQ holds 28.3% equity in WeCan Group SA AND approved up to $30M in WECAN token purchases as treasury reserve \u2014 circular related-party investment.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "WeCan Group SA",
+      "other_person_slug": "wecan-group-sa",
+      "evidence": []
+    },
+    {
+      "id": 4364,
+      "person_a": "Carlos Moreira",
+      "person_b": "SEALSQ Corp",
+      "relationship_type": "corporate",
+      "description": "Dominant insider with 66 Class F supervoting shares + 614,953 ordinary shares. Controls SEALSQ through Class F voting power and through parent WISeKey.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Carlos Moreira",
+      "other_person_slug": "carlos-moreira",
+      "evidence": []
+    },
+    {
+      "id": 4366,
+      "person_a": "Maxim Group LLC",
+      "person_b": "SEALSQ Corp",
+      "relationship_type": "financial",
+      "description": "Sole placement agent for two large registered direct offerings ($200M Oct 2025; $125M Mar 2026) plus co-agent on $100M ATM. Earned estimated $19.5M+ in fees across SEALSQ transactions.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Maxim Group LLC",
+      "other_person_slug": "maxim-group-llc",
+      "evidence": []
+    },
+    {
+      "id": 4368,
+      "person_a": "CVI Investments Inc.",
+      "person_b": "SEALSQ Corp",
+      "relationship_type": "financial",
+      "description": "Heights Capital Management vehicle that held >5% of SEALSQ (prior 13G) then fully exited by Dec 31, 2025 (13G/A filed 2026-02-17 showing zero shares). Typical PIPE/registered-direct hedge fund investor.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "CVI Investments Inc.",
+      "other_person_slug": "cvi-investments-inc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-09-03",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "SEALSQ Board approved crypto treasury policy allocating up to $30M of corporate cash into Bitcoin, Ethereum, HBAR, and WECAN tokens. Board also authorized Investment Committee whose members may personally invest in the same assets as the company.",
+      "confidence": "high",
+      "id": 8564
+    },
+    {
+      "date": "2025-10-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SEALSQ raised ~$200M gross in October 2025 registered direct + concurrent private placement: 12.64M ordinary shares at $7.50 plus 14.03M pre-funded warrants and 53.33M Class D Warrants at $7.50 (7-year). Placement agent Maxim Group LLC earned 6% fee.",
+      "confidence": "high",
+      "id": 8561
+    },
+    {
+      "date": "2026-02-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CVI Investments Inc. (managed by Heights Capital Management Inc.) filed Schedule 13G/A showing zero shares of SEALSQ as of Dec 31, 2025 \u2014 full exit from previously disclosed 5%+ position.",
+      "confidence": "high",
+      "id": 8567
+    },
+    {
+      "date": "2026-02-20",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "SEALSQ abandoned planned majority acquisition of Quobly SAS (French quantum startup, EPFL ecosystem) in February 2026, then announced new acquisition target Miraex SA (Swiss photonics/quantum) in March 2026. Serial M&A announcements without closings may be used to sustain narrative momentum.",
+      "confidence": "medium",
+      "id": 8566
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SEALSQ raised ~$117M net in March 2026 registered direct offering: 22.9M ordinary shares + 7.5M pre-funded warrants at $4.11 per unit, plus 60.8M Class E Warrants at $5.50 exercise (7-year term). Placement agent Maxim Group LLC earned ~$7.5M (6% fee).",
+      "confidence": "high",
+      "id": 8560
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SEALSQ ATM facility with Cantor Fitzgerald and Maxim sold 15.45M shares through March 13, 2026. Combined with Oct 2025 and March 2026 registered directs, total dilution from capital markets exceeds 65M new shares (excluding warrants) in under 12 months.",
+      "confidence": "medium",
+      "id": 8568
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "13 insiders filed initial Form 3s on 2026-03-18 \u2014 the HFIA reporting deadline \u2014 simultaneously reporting first-time beneficial ownership. Three insiders then filed Form 4 sales beginning the same day: Verjus sold 5,000 shares at $3.03 on March 18; O'Hara sold 50,000 shares across March 18\u201325; Buonanno exercised 15,000 options at $0.01 on March 27.",
+      "confidence": "high",
+      "id": 8563
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Carlos Moreira, founder/CEO of parent WISeKey, is the dominant insider at SEALSQ with 66 Class F shares plus 614,953 ordinary shares. Class F shares confer supervoting rights. Other Class F holders: Ruma Bose (26), David Fergusson (4), and apparent others \u2014 control concentrated in a small group.",
+      "confidence": "high",
+      "id": 8565
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "LAES stock at $2.45 as of March 29, 2026 \u2014 67% below Oct 2025 offering price of $7.50 and 40% below March 2026 offering price of $4.11. Investors in both registered directs are substantially underwater.",
+      "confidence": "high",
+      "id": 8562
+    }
+  ]
+}

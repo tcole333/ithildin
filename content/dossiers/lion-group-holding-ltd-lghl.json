@@ -1,0 +1,175 @@
+{
+  "name": "Lion Group Holding Ltd. (LGHL)",
+  "slug": "lion-group-holding-ltd-lghl",
+  "aliases": [],
+  "profile_ids": [
+    "allbirds"
+  ],
+  "generated_at": "2026-05-07T23:07:36.433191",
+  "last_updated": "2026-04-16T05:40:10",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "conflict_of_interest": 3,
+      "regulatory": 2
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-04-16T05:40:10"
+  },
+  "findings": [
+    {
+      "id": 10662,
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL 6-K (June 18, 2025): Chardan named as placement agent but buyer anonymized as 'institutional investor'; Kerry Propper and dual role completely absent",
+      "detail": "The LGHL 6-K (accession 0001213900-25-055423) announcing the $600M ATW convertible facility states: 'Chardan Capital Markets Inc. is acting as the sole placement agent in connection with the sale of the Notes and will be paid a cash fee equal to 2% of the net proceeds received by the Company from the sale of the Notes sold in the offering.' The buyer is identified only as 'an institutional investor' / 'the Buyer' throughout the filing. Kerry Propper is not mentioned. No dual-role conflict is disclosed.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-18",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-04-16 05:24:15",
+      "target_name": "Lion Group Holding Ltd. (LGHL)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10663,
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL F-3 (August 22, 2025): filed 14 days after ZOOZ dual-role benchmark; Chardan has zero mentions; Propper disclosed only as ATW managing member \u2014 no dual-role conflict disclosure",
+      "detail": "The LGHL F-3 resale registration (accession 0001213900-25-079899) names Kerry Propper in selling stockholder footnote 4 as a Managing Member of ATW Partners Opportunities Fund GP, LLC. Chardan Capital Markets appears zero times in the entire document. No disclosure of Propper's role as co-founder and Executive Chairman of Chardan. The filing was made 14 days after the ZOOZ 6-K (August 8, 2025) that explicitly disclosed Propper's dual role. Risk factor section contains only generic business conflict language (client-vs-client, employee-vs-client) with no reference to the Chardan/ATW structural conflict.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-08-22",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-04-16 05:24:15",
+      "target_name": "Lion Group Holding Ltd. (LGHL)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10666,
+      "finding_type": "regulatory",
+      "summary": "LGHL F-3 and 424B3 material omission of Propper/Chardan/ATW conflict creates Securities Act Section 11/12 and Exchange Act Rule 10b-5 exposure \u2014 HIGH severity",
+      "detail": "Securities Act Section 11 imposes strict liability on issuers for material omissions in registration statements. The LGHL F-3 (Aug 22, 2025) omits the material fact that the sole placement agent (Chardan) and the investor (ATW) share a common principal (Kerry Propper). This conflict is directly relevant to whether the deal terms were arm's-length. The omission is arguably material given: (1) LGHL ADS declined 98.7% from the June 18 announcement peak, (2) ATW received conversion rights at ~93% of lowest 10-day VWAP, (3) ATW filed for resale of 14.58 billion shares in the 424B3. Securities Act Sections 11/12(a)(2) and Exchange Act Rule 10b-5 liability exposure is HIGH.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-08-22",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:15",
+      "target_name": "Lion Group Holding Ltd. (LGHL)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10710,
+      "finding_type": "regulatory",
+      "summary": "SYSTEMIC PATTERN: LGHL F-3 registration statement is the systemic weak link for SEC enforcement \u2014 effective registration with material omission of Chardan/ATW/Propper conflict creates strict liability under Securities Act Section 11",
+      "detail": "The LGHL F-3 was filed August 22, 2025 \u2014 exactly 14 days after the ZOOZ 6-K set the Propper dual-role disclosure benchmark (August 8, 2025). The F-3 registered ATW Digital Asset Opportunities VI LLC's resale of 14.58B shares. Despite the recent ZOOZ benchmark, the LGHL F-3 omitted Chardan entirely and disclosed Propper only as ATW investor, not as Chardan Chairman. The 424B3 supplements (December 2025) maintained this omission. An effective registration statement with material omission creates strict liability under Securities Act Section 11 for all signatories. The systemic weak link is not the BIRD deal (not yet effective) or the press release (non-liability context), but the LGHL F-3 \u2014 an effective registration statement where: (1) the conflict was known (ZOOZ benchmark existed), (2) the omission is specific and identifiable, (3) multiple supplements were filed without correction, and (4) the underlying conduct (ATW extracting value via conversions) was ongoing through the registration period. Secondary weak link: FINRA Rule 5110 \u2014 Chardan's 2% placement fee on deals where its chairman is the investor may constitute unreasonable underwriting compensation, directly paralleling the 2024 SPAC AWC action.",
+      "source_datasets": "edgar,findings_tracker,opensanctions",
+      "confidence": "medium",
+      "date_of_event": "2025-08-22",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:40:10",
+      "target_name": "Lion Group Holding Ltd. (LGHL)",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10664,
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL 424B3 (Dec 10-11, 2025): boilerplate conflict risk factor does not address Chardan/ATW/Propper structural conflict; Propper still only identified as ATW managing member",
+      "detail": "LGHL 424B3 base prospectus (accession 0001213900-25-119891) and supplement (0001213900-25-120660) both name Kerry Propper only in ATW selling stockholder footnotes. Conflict of interest risk factor section (S-22 in Dec 10 filing) reads: 'We face the possibility of actual, potential, or perceived conflicts of interest in the ordinary course of our business operations. Conflicts of interest may exist between (i) our different businesses; (ii) us and our clients; (iii) our clients; (iv) us and our employees; and (v) our clients and our employees.' No mention of the specific Chardan/ATW/Propper structural conflict. This risk factor is boilerplate carried forward from the original prospectus and is not responsive to the actual conflict.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-10",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-04-16 05:24:15",
+      "target_name": "Lion Group Holding Ltd. (LGHL)",
+      "profile_id": "allbirds",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5565,
+      "person_a": "Chardan Capital Markets LLC",
+      "person_b": "Lion Group Holding Ltd. (LGHL)",
+      "relationship_type": "corporate",
+      "description": "Chardan Capital Markets LLC acted as sole placement agent for the LGHL $600M ATW convertible facility (June 2025), earning 2% placement fee on proceeds. Chardan's Executive Chairman (Kerry Propper) is also the managing member of the investor (ATW). This undisclosed connection appears in LGHL F-3 (August 2025) and 424B3 (December 2025) as a zero-mention of Chardan despite its central role in the transaction.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:15",
+      "profile_id": "allbirds",
+      "other_person": "Chardan Capital Markets LLC",
+      "other_person_slug": "chardan-capital-markets-llc",
+      "evidence": []
+    },
+    {
+      "id": 5566,
+      "person_a": "ATW Digital Asset Opportunities VI LLC",
+      "person_b": "Lion Group Holding Ltd. (LGHL)",
+      "relationship_type": "corporate",
+      "description": "ATW Digital Asset Opportunities VI LLC is the investor in the LGHL $600M convertible facility (June 2025). ATW's managing member (Propper) is also Chardan's Executive Chairman. This structural conflict mirrors the Allbirds/BIRD transaction where ATW is assessed at 70-80% probability as the investor and Chardan is the placement agent.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:15",
+      "profile_id": "allbirds",
+      "other_person": "ATW Digital Asset Opportunities VI LLC",
+      "other_person_slug": "atw-digital-asset-opportunities-vi-llc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-06-18",
+      "type": "finding",
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL 6-K (June 18, 2025): Chardan named as placement agent but buyer anonymized as 'institutional investor'; Kerry Propper and dual role completely absent",
+      "confidence": "confirmed",
+      "id": 10662
+    },
+    {
+      "date": "2025-08-22",
+      "type": "finding",
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL F-3 (August 22, 2025): filed 14 days after ZOOZ dual-role benchmark; Chardan has zero mentions; Propper disclosed only as ATW managing member \u2014 no dual-role conflict disclosure",
+      "confidence": "confirmed",
+      "id": 10663
+    },
+    {
+      "date": "2025-08-22",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "LGHL F-3 and 424B3 material omission of Propper/Chardan/ATW conflict creates Securities Act Section 11/12 and Exchange Act Rule 10b-5 exposure \u2014 HIGH severity",
+      "confidence": "medium",
+      "id": 10666
+    },
+    {
+      "date": "2025-08-22",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "SYSTEMIC PATTERN: LGHL F-3 registration statement is the systemic weak link for SEC enforcement \u2014 effective registration with material omission of Chardan/ATW/Propper conflict creates strict liability under Securities Act Section 11",
+      "confidence": "medium",
+      "id": 10710
+    },
+    {
+      "date": "2025-12-10",
+      "type": "finding",
+      "finding_type": "conflict_of_interest",
+      "summary": "LGHL 424B3 (Dec 10-11, 2025): boilerplate conflict risk factor does not address Chardan/ATW/Propper structural conflict; Propper still only identified as ATW managing member",
+      "confidence": "confirmed",
+      "id": 10664
+    }
+  ]
+}

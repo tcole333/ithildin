@@ -1,0 +1,273 @@
+{
+  "name": "Hydrazine Capital Management, LLC",
+  "slug": "hydrazine-capital-management-llc",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.402821",
+  "last_updated": "2026-04-06T18:39:12",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate_structure": 4,
+      "financial": 1,
+      "personnel": 1
+    },
+    "connection_types": {
+      "corporate": 8
+    },
+    "last_updated": "2026-04-06T18:39:12"
+  },
+  "findings": [
+    {
+      "id": 9433,
+      "finding_type": "corporate_structure",
+      "summary": "Sam Altman is Managing Director of Hydrazine Capital Management LLC since September 2020",
+      "detail": "Form ADV for Hydrazine Capital Management, LLC (CRD 332160, filed 3/25/2026) Schedule A shows: ALTMAN, SAM \u2014 Individual \u2014 MANAGING DIRECTOR OF HYDRAZINE CAPITAL MANAGEMENT, LLC \u2014 Title/Status Acquired 09/2020 \u2014 Ownership Code E (75% or more) \u2014 Control Person: Yes.",
+      "source_datasets": "sec_iapd",
+      "confidence": "confirmed",
+      "date_of_event": "2020-09-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9434,
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Corporation is a controlling member of Hydrazine Capital Management LLC with Sam Altman as 75%+ owner",
+      "detail": "Form ADV Schedule A shows Hydrazine Corporation (DE entity, company #6697154, formed 2022-03-25) became a member of Hydrazine Capital Management LLC in 03/2022. Schedule B shows Sam Altman as owner of Hydrazine Corporation with ownership code E (75%+), acquired 03/2022. This creates a two-layer ownership: Sam Altman owns Hydrazine Corporation which is a member of the management entity.",
+      "source_datasets": "sec_iapd,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2022-03-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9437,
+      "finding_type": "financial",
+      "summary": "Total Hydrazine Capital platform AUM exceeds $1.9B including Apollo Projects",
+      "detail": "Aggregated from Form ADV (CRD 332160, filed 3/25/2026): Fund I $30.2M + Fund II LP $424.6M + Fund II SPV $514.2M + Fund II AIV $7.2M + Fund III $105.7M + Fund IV $310.8M = $1.393B Hydrazine funds; plus Apollo Projects LP $553.2M under same management entity = $1.946B total platform.",
+      "source_datasets": "sec_iapd",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9441,
+      "finding_type": "personnel",
+      "summary": "Carmen Beckwith serves as CFO across all three IAPD-registered Hydrazine Capital entities",
+      "detail": "Carmen Beckwith signed Form ADV execution pages as 'Chief Financial Officer' for: Hydrazine Capital GP, LLC (CRD 165781, signed 11/25/2024), Hydrazine Capital IV GP, LLC (CRD 325716, signed 11/19/2024), Hydrazine Capital Management, LLC (CRD 332160, signed 03/25/2026). Note: earlier ADVs contain typo 'CHIEF FINACIAL OFFICER' suggesting same drafter across all filings.",
+      "source_datasets": "sec_iapd",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9438,
+      "finding_type": "corporate_structure",
+      "summary": "950 Lombard St, SF (Sam Altman's personal residence) used as business address for Hydrazine Capital and Apollo Projects entities from 2012\u20132022",
+      "detail": "California SOS records show 950 Lombard St, SF as registered address for: Hydrazine Capital GP, LLC (CA #201213110391), Hydrazine Capital II GP, LLC (CA #201419710062), Hydrazine Capital II SPV (CA #201513310277), Hydrazine Capital II AIV (CA #202129100013), Hydrazine Capital Management (CA #202111310924). EDGAR shows Apollo Projects SPV-B, L.P. (CIK 1879946) at same address. Also used by Altman 3, LLC (CA #202129110481). Sam Altman filed $27M lemon mansion lawsuit about this property in 2024.",
+      "source_datasets": "opencorporates,sec_edgar,media",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9440,
+      "finding_type": "corporate_structure",
+      "summary": "No Form D filings found in EDGAR for any Hydrazine Capital entity",
+      "detail": "Comprehensive EDGAR EFTS search (forms=D, query='Hydrazine Capital') returns zero results. Company name search for 'hydrazine' with type D also returns zero results. All Hydrazine Capital funds operate as exempt reporting advisers under the Venture Capital Fund Adviser Exemption (Section 203(l)). This means they are not required to register as investment advisers but the absence of Form D filings for fund launches is unusual given the fund sizes involved.",
+      "source_datasets": "sec_edgar",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital Management, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4866,
+      "person_a": "Structure Fund I GP, LLC",
+      "person_b": "Hydrazine Capital Management, LLC",
+      "relationship_type": "corporate",
+      "description": "Structure Fund I GP LLC and Structure Fund I LP share their registered address (8595 Pelham Road Suite 400 #309 Greenville SC 29615) with all Hydrazine Capital entities, Apollo Projects entities, and all other Altman personal financial vehicles. Same CT Corp registered agents in both DE and CA. This is the Altman family office infrastructure cluster.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Structure Fund I GP, LLC",
+      "other_person_slug": "structure-fund-i-gp-llc",
+      "evidence": []
+    },
+    {
+      "id": 4891,
+      "person_a": "Hydrazine Capital Management, LLC",
+      "person_b": "Aduro Advisors",
+      "relationship_type": "corporate",
+      "description": "Aduro Advisors (Denver, CO, 2420 17th St) serves as third-party unaffiliated fund administrator and recordkeeper for all Hydrazine Capital funds. Phone: 720-389-6248. Founded by Braughm Ricke.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Aduro Advisors",
+      "other_person_slug": "aduro-advisors",
+      "evidence": []
+    },
+    {
+      "id": 4892,
+      "person_a": "Hydrazine Capital Management, LLC",
+      "person_b": "Frank Rimerman + Co. LLP",
+      "relationship_type": "corporate",
+      "description": "Frank Rimerman + Co. LLP (San Jose, CA) audits Hydrazine Capital II LP, II AIV, III LP, IV LP, and Apollo Projects LP. PCAOB #1596.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Frank Rimerman + Co. LLP",
+      "other_person_slug": "frank-rimerman-co-llp",
+      "evidence": []
+    },
+    {
+      "id": 4895,
+      "person_a": "Hydrazine Capital Management, LLC",
+      "person_b": "Hydrazine Corporation",
+      "relationship_type": "corporate",
+      "description": "Hydrazine Corporation (DE #6697154, formed 2022-03-25) is a member of Hydrazine Capital Management LLC since 03/2022. Sam Altman owns 75%+ of Hydrazine Corporation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Corporation",
+      "other_person_slug": "hydrazine-corporation",
+      "evidence": []
+    },
+    {
+      "id": 4887,
+      "person_a": "Sam Altman",
+      "person_b": "Hydrazine Capital Management, LLC",
+      "relationship_type": "corporate",
+      "description": "Sam Altman is Managing Director (since 09/2020) and 75%+ indirect owner via Hydrazine Corporation. Confirmed via Form ADV Schedule A (CRD 332160) and EDGAR Schedule 13D.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 4890,
+      "person_a": "University of Michigan Endowment",
+      "person_b": "Hydrazine Capital Management, LLC",
+      "relationship_type": "corporate",
+      "description": "University of Michigan invested $105M in Hydrazine Capital II and $75M in Hydrazine Capital IV \u2014 two of the endowment's largest VC fund checks ever. University of Michigan is the sole outside LP in Fund IV.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "profile_id": "altman",
+      "other_person": "University of Michigan Endowment",
+      "other_person_slug": "university-of-michigan-endowment",
+      "evidence": []
+    },
+    {
+      "id": 4969,
+      "person_a": "Carmen Beckwith",
+      "person_b": "Hydrazine Capital Management, LLC",
+      "relationship_type": "corporate",
+      "description": "Beckwith signed Form ADV execution page as CFO for Hydrazine Capital Management LLC (CRD 332160) on 2026-03-25",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "profile_id": "altman",
+      "other_person": "Carmen Beckwith",
+      "other_person_slug": "carmen-beckwith",
+      "evidence": []
+    },
+    {
+      "id": 5006,
+      "person_a": "Hydrazine Capital Management, LLC",
+      "person_b": "Hydrazine Capital III, L.P.",
+      "relationship_type": "corporate",
+      "description": "Hydrazine Capital Management LLC (CRD 332160, active) is the umbrella investment adviser managing all Hydrazine Capital funds including Fund III. Fund III GP (CRD 325713) is inactive \u2014 advisory authority consolidated under Management LLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Capital III, L.P.",
+      "other_person_slug": "hydrazine-capital-iii-lp",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2020-09-01",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Sam Altman is Managing Director of Hydrazine Capital Management LLC since September 2020",
+      "confidence": "confirmed",
+      "id": 9433
+    },
+    {
+      "date": "2022-03-01",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Corporation is a controlling member of Hydrazine Capital Management LLC with Sam Altman as 75%+ owner",
+      "confidence": "high",
+      "id": 9434
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Total Hydrazine Capital platform AUM exceeds $1.9B including Apollo Projects",
+      "confidence": "high",
+      "id": 9437
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "personnel",
+      "summary": "Carmen Beckwith serves as CFO across all three IAPD-registered Hydrazine Capital entities",
+      "confidence": "high",
+      "id": 9441
+    }
+  ]
+}

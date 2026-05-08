@@ -1,0 +1,432 @@
+{
+  "name": "Mikhail Prokhorov",
+  "slug": "mikhail-prokhorov",
+  "aliases": [],
+  "profile_ids": [
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.434239",
+  "last_updated": "2026-04-13T17:04:38",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 9,
+    "total_entities": 0,
+    "finding_types": {
+      "background": 1,
+      "intelligence": 2,
+      "relationship": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "owns": 1,
+      "intelligence": 2,
+      "social": 3,
+      "financial": 2
+    },
+    "last_updated": "2026-04-13T17:04:38"
+  },
+  "findings": [
+    {
+      "id": 10068,
+      "finding_type": "background",
+      "summary": "Mikhail Prokhorov (b.1965 Moscow) \u2014 Russian-Israeli oligarch profile. Co-owned Norilsk Nickel (25%) with Potanin via Interros. Sold stake 2008 at peak. Founded Onexim Group 2007. Owned Brooklyn Nets 2010-2019 (sold to Tsai ~3.4B). SEC CIK 0001260715. LittleSis ID 74802. OpenSanctions Q233581: CAATSA 2018, Ukrainian sanctions (UA-SA1644). Pandora Papers: 3 ICIJ offshore nodes (Trident Trust, 2x OMC). Detained Courchevel Jan 2007 in French prostitution sting with Oleg Baibakov \u2014 both released without charges.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "opensanctions",
+        "icij",
+        "edgar",
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:43:28",
+      "target_name": "Mikhail Prokhorov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK0001260715",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:240552677",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:74802",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q233581",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10070,
+      "finding_type": "intelligence",
+      "summary": "Prokhorov-Epstein documented relationship: Epstein files show Prokhorov was in Epstein contact network. Prokhorov sought Warren Buffett autograph through Epstein. Was among Russian billionaires helping Western guests with visas, parties at SPIEF, penthouse selection in Moscow City. Epstein acted as intermediary for Russian elite \u2014 arranging introductions, handling visas, passing messages. The Oct 25 2018 email (DOJ:EFTA02618736) naming Prokhorov, Baibakov, Zampolli, and Konchakovskaya as 'Killers' and stating 'Prokhorov ha molto da nascondere' (Prokhorov has much to hide) suggests an adversarial relationship between the email sender and these individuals, in context of depositions and legal disputes. Sender asked Epstein 'Did you write depositions against me?'",
+      "detail": null,
+      "source_datasets": [
+        "doj"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:43:54",
+      "target_name": "Mikhail Prokhorov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02619619",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02619777",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10071,
+      "finding_type": "relationship",
+      "summary": "Prokhorov-Baibakov Norilsk Nickel connection confirmed. Prokhorov was General Director and Baibakov was Vice President of Norilsk Nickel simultaneously. Both detained together Jan 9 2007 in Courchevel, France during French police raid on luxury prostitution network. 26 people detained total, including models found with packages of condoms. Prokhorov held 4 days; no charges filed. This Courchevel incident involved models and is structurally parallel to the modeling industry connections of Zampolli (ID Models) and Epstein (MC2/Elite). The 'Baibakov' in the Oct 2018 email almost certainly refers to Oleg Baibakov, not economist Nikolai Baibakov (died 2008), given the Prokhorov pairing and 'plus all his people' phrasing.",
+      "detail": null,
+      "source_datasets": [
+        "doj"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:05",
+      "target_name": "Mikhail Prokhorov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10073,
+      "finding_type": "intelligence",
+      "summary": "Prokhorov-Zampolli potential nexus analysis. No direct business relationship documented between Prokhorov and Zampolli in LittleSis, EDGAR, or corporate registries. However, structural overlaps identified: (1) Both operated in NYC luxury social scene \u2014 Prokhorov at 375 Park Ave / Brooklyn sports, Zampolli in Trump properties / Gramercy Park. (2) Both involved in modeling/entertainment \u2014 Prokhorov's Courchevel 2007 incident with models, Zampolli's ID Models agency. (3) Both in Epstein's contact network. (4) Baibakov (Prokhorov's Norilsk VP) has NYC apartment at Columbus Circle and claims Nets ownership \u2014 same ultra-luxury NYC social tier as Zampolli. (5) The Oct 2018 email groups them as co-'Killers' suggesting a specific shared context \u2014 likely a legal dispute involving depositions where the redacted sender felt victimized by all four individuals acting in concert.",
+      "detail": null,
+      "source_datasets": [
+        "doj",
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:28",
+      "target_name": "Mikhail Prokhorov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:351728",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:74802",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10322,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULT: No direct Prokhorov civil litigation in NY courts involving custody, depositions, or Russian models found. CourtListener returns 20 results for 'Prokhorov' but only two relevant to Mikhail Prokhorov: (1) In Re Finskiy (EDNY 2017, SDNY 2017) \u2014 28 USC 1782 discovery application by former Norilsk Nickel manager Maxim Finskiy against Prokhorov and Dmitry Razumov, related to gold mining investment disputes, not custody. (2) Jackman v. Singer (2014, SD Iowa) \u2014 listed Brooklyn Nets as party but no direct Prokhorov involvement in custody-type litigation. The Oct 2018 email sender's claim that Prokhorov 'has much to hide' likely refers to events/proceedings outside the US court system.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:04:38",
+      "target_name": "Mikhail Prokhorov",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener_search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5174,
+      "person_a": "Mikhail Prokhorov",
+      "person_b": "Oleg Baibakov",
+      "relationship_type": "corporate",
+      "description": "Prokhorov (Gen Director) and Baibakov (VP/CAO) at Norilsk Nickel. Detained together Courchevel 2007. Baibakov claims partial Brooklyn Nets ownership. Both named as 'Killers' in Oct 2018 Epstein email (EFTA02618736).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:51",
+      "profile_id": "zampolli",
+      "other_person": "Oleg Baibakov",
+      "other_person_slug": "oleg-baibakov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5180,
+      "person_a": "Mikhail Prokhorov",
+      "person_b": "Onexim Group",
+      "relationship_type": "owns",
+      "description": "Prokhorov founded and controls Onexim Group (2007). Through Onexim managed Brooklyn Nets, Barclays Center, and broader US investment portfolio.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:52",
+      "profile_id": "zampolli",
+      "other_person": "Onexim Group",
+      "other_person_slug": "onexim-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:74802",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5175,
+      "person_a": "Mikhail Prokhorov",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "intelligence",
+      "description": "Named together as 'Killers' in Oct 2018 Epstein email (EFTA02618736). No direct business relationship documented; connection is through shared listing in adversarial email and shared presence in Epstein network/NYC luxury scene.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:51",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5176,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Mikhail Prokhorov",
+      "relationship_type": "social",
+      "description": "Epstein files show Prokhorov in Epstein contact network. Prokhorov sought Warren Buffett autograph through Epstein. Was among Russian billionaires Epstein helped with visas/introductions.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:52",
+      "profile_id": "zampolli",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5182,
+      "person_a": "Mikhail Prokhorov",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "social",
+      "description": "Co-named as 'killers' in Oct 2018 email to Epstein, alongside Oleg Baibakov and Anna Konchakovskaya. Grouped as working together against the email sender.",
+      "strength": "medium",
+      "date_range": "2018-10-25",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:51:59",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02618604",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5303,
+      "person_a": "Anna Konchakovskaya",
+      "person_b": "Mikhail Prokhorov",
+      "relationship_type": "social",
+      "description": "Konchakovskaya was prima dancer at Dyagilev nightclub where Prokhorov was regular patron. Named together as 'Killers' in Oct 2018 email to Epstein (EFTA02618736).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 05:03:07",
+      "profile_id": "zampolli",
+      "other_person": "Anna Konchakovskaya",
+      "other_person_slug": "anna-konchakovskaya",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "nightout.ru Dyagilev history",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "selflovers.ru biography",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5340,
+      "person_a": "Mikhail Prokhorov",
+      "person_b": "Vladimir Potanin",
+      "relationship_type": "financial",
+      "description": "LittleSis: Former business partners. Both co-owned Norilsk Nickel/Interros before 2007 split. Potanin retained control of Norilsk Nickel, Prokhorov took cash.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:26:25",
+      "profile_id": "zampolli",
+      "other_person": "Vladimir Potanin",
+      "other_person_slug": "vladimir-potanin",
+      "evidence": []
+    },
+    {
+      "id": 5349,
+      "person_a": "Bill Block",
+      "person_b": "Mikhail Prokhorov",
+      "relationship_type": "financial",
+      "description": "QED International received Russian investment via Media Content Capital (Lesin/Lessine) \u2014 same Russian oligarch financing ecosystem as Prokhorov",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:06",
+      "profile_id": "zampolli",
+      "other_person": "Bill Block",
+      "other_person_slug": "bill-block",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5178,
+      "person_a": "Anna Konchakovskaya",
+      "person_b": "Mikhail Prokhorov",
+      "relationship_type": "intelligence",
+      "description": "Named together in Oct 2018 Epstein email (EFTA02618736) as 'Killers.' Konchakovskaya is a Moscow dancer/model; Prokhorov had Courchevel 2007 model incident. Likely in Russian oligarch entertainment/social circuit.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:52",
+      "profile_id": "zampolli",
+      "other_person": "Anna Konchakovskaya",
+      "other_person_slug": "anna-konchakovskaya",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2018-10-25",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Co-named as 'killers' in Oct 2018 email to Epstein, alongside Oleg Baibakov and Anna Konchakovskaya. Grouped as working together against the email sender.",
+      "other_person": "Paolo Zampolli",
+      "id": 5182
+    }
+  ]
+}

@@ -1,0 +1,850 @@
+{
+  "name": "Save America",
+  "slug": "save-america",
+  "aliases": [],
+  "profile_ids": [
+    "parlatore"
+  ],
+  "generated_at": "2026-05-07T23:07:36.272619",
+  "last_updated": "2026-04-30T04:52:03",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 10,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6,
+      "intelligence": 3,
+      "background": 1,
+      "legal": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "funds": 4,
+      "controls": 1,
+      "contracts_with": 2,
+      "political": 2,
+      "financial": 1
+    },
+    "last_updated": "2026-04-30T04:52:03"
+  },
+  "findings": [
+    {
+      "id": 10883,
+      "finding_type": "financial",
+      "summary": "Save America PAC (FEC C00762591) is the ONLY Trump-aligned committee identified in FEC Schedule B with payments to Parlatore Law Group; cross-PAC sweep of all FEC schedule_b records totaling $334,313.27 to any 'Parlatore' recipient confirms 99.5% concentration in Save America",
+      "detail": "Cross-FEC schedule_b sweep using recipient_name='PARLATORE' returned 24 records across all committees, all cycles: SAVE AMERICA C00762591 $332,818.24 (9 disb -- all to PARLATORE LAW GROUP LLP); INDEPENDENT DEMOCRATS FOR LAROUCHE C00188888 $900 (5 -- 1980s family namesake, unrelated); WINRED C00694323 $495.03 (9 -- contribution refunds to Bill/Kathy/Gail Parlatore family donors, unrelated to Tim or PLG); LAROUCHE CAMPAIGN C00171538 $100 (1 -- 1980s namesake). Verified 0 disbursements to any Parlatore recipient from MAGA INC C00825851, TRUMP 47 C00867937, TRUMP SAVE AMERICA JFC C00770941, NEVER SURRENDER INC C00828541, RNC C00003418. Implication: All institutional flow from Trump-aligned politics to Parlatore's firm went through Trump's leadership PAC (Save America), not the principal campaign or super-PAC. Save America was the legal-fees vehicle of choice -- per CNN Feb 2023 reporting it spent >$16M on legal services in 2022; per CBS $50M total on attorneys in 2023. PLG's $332K was a small slice of that pool, but 100% of PLG's institutional Trump-PAC revenue.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:04",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=schedule_b%3AParlatore-cross-PAC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10926,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL: Save America PAC sits at the intersection of Trump-legal cluster and PLG-firm cluster via two independent edges (William Brown Sr donation; PLG LLP <-> Trump JFC <-> Save America), forming the financial bridge between threads 67 (Trump Legal) and 69 (PLG Operations)",
+      "detail": "Save America's three neighbors are Tim Parlatore, Parlatore Law Group LLP, and William Brown. Cliques: {Save America, PLG LLP, Parlatore} and {Save America, PLG LLP, William Brown}. Connection record indicates William Brown made a 2024-10-07 $1041.02 contribution to Trump National Committee JFC (which conduits to Save America and the RNC). PLG LLP is documented as a direct vendor to Save America (legal disbursements). This is the only multi-edge path linking Trump-legal money flows to PLG firm payroll-adjacent attorneys without crossing Tim Parlatore \u2014 making Save America an institutional bridge node in the political-finance subgraph.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:44:34",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-45",
+          "source_quote": "graph_tools cliques members=[Save America,PLG LLP,Parlatore] and [Save America,PLG LLP,William Brown]",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10932,
+      "finding_type": "intelligence",
+      "summary": "HUNCH (hypothesis #232): Save America's largest single PLG disbursement ($76,984.34, 2022-11-23) sits at the intersection of THREE near-simultaneous events \u2014 (a) Trump 2024 launch Nov 15, (b) Jack Smith Special Counsel appointment Nov 18, (c) Indyke joining PLG ~Oct 2022 + USVI $105M Epstein settlement Nov 2022. The conventional read attributes the payment solely to Trump-documents defense, but the temporal cluster suggests the PLG retainer may have covered combined Trump-defense + Indyke-mediated Epstein-network transaction work. Lead #45259 will check Schedule B narrative + Joint Defense Agreement scope to test.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:48:37",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10864",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10867",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10883",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10888",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11087,
+      "finding_type": "background",
+      "summary": "Save America PAC structure: Trump leadership PAC C00762591, treasurer Bradley T. Crate, address PO Box 509 Arlington VA 22216, registered 2020-11-09, sponsor candidate P80001571",
+      "detail": "Save America is Donald J. Trump's leadership PAC (designation 'D'), registered with the FEC on 2020-11-09 (two days after election results were called). Sole treasurer of record across all four cycles is Bradley T. Crate of Red Curve Solutions LLC (138 Conant St 2nd Fl, Beverly MA 01915 \u2014 phone 617-303-6800). Statement-of-Organization mailing address P.O. Box 509, Arlington VA 22216. Sponsor candidate P80001571 (Trump). Filed first F1 2020-11-09; latest filing 2026-04-15. Filing frequency was Monthly during 2022 and 2024 cycles (heavy spending years), Quarterly in 2020 and 2026. Designation 'Leadership PAC'; type 'PAC \u2013 Qualified' (was 'Nonqualified' in 2020 cycle, qualified by 2022 after meeting thresholds).",
+      "source_datasets": [
+        "fec",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:48:53",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-totals.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.fec.gov/data/committee/C00762591/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11088,
+      "finding_type": "financial",
+      "summary": "Save America cumulative cycle totals 2020-2026: $256.3M receipts, $254.0M disbursements; $112.9M to legal recipients (44.5% of all spending)",
+      "detail": "Cycle-by-cycle FEC totals: 2020 cycle (Oct-Dec 2020) \u2014 receipts $31,512,712.61, disbursements $343,077.51 (just bootstrap costs). 2022 cycle \u2014 receipts $109,290,510.18, disbursements $122,196,336.99, individual contributions $1,176,102.90, transfers from affiliated party $108,035,602.57 (almost all receipts came as transfers from Trump 2020 / DJTFP wind-down). 2024 cycle \u2014 receipts $99,719,702.79, disbursements $111,551,209.50, individual contributions only $129,285.05 (donor base collapsed after 2020-21 election-defense fundraising), transfers from affiliated party $39,293,500.97, fed_candidate_contribution_refunds $60,000,000 (the MAGA Inc clawback returned cash), candidate-committee contributions $5,000. 2026 cycle (through 2026-03-31) \u2014 receipts $15,808,522.23 ($15.48M from affiliated transfers, just $12,775 individual), disbursements $21,080,428.01, transfers to affiliated $6,397,000 (to Make America Great Again PAC C00580100). Total disbursements pulled from FEC Schedule B: 11,127 records spanning 2020-12 through 2026-03 totaling $253,825,646.71. Of those, 1,075 records totaling $112,900,116.78 went to legal-services recipients (law firms, litigation-support vendors, expert witnesses); 10,052 records totaling $140,925,529.93 to all other purposes.",
+      "source_datasets": [
+        "fec",
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:49:10",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-disb-merged.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-totals.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11090,
+      "finding_type": "legal",
+      "summary": "FEC dismissed Campaign Legal Center complaint MUR 8090 against Save America 6-0 on 2024-06-06; held that BCRA soft-money ban was not violated by Save America's $60M transfer to MAGA Inc super PAC",
+      "detail": "Campaign Legal Center filed an FEC complaint in November 2022 alleging Trump and Save America violated BCRA's 'soft money' ban (52 USC 30125(e)) by transferring $60M to MAGA Inc \u2014 a sum vastly exceeding the $5,000 federal-candidate contribution limit to other PACs. CLC and NRDC Action Votes filed a supplemental/amended complaint in May 2023. The matter became MUR 8090. On 2024-06-06 the FEC voted 6-0 to dismiss, taking the position that a federal candidate or officeholder who merely transfers hard money from a leadership PAC to a soft-money entity does not trigger BCRA's soft-money ban, even if the recipient super PAC engages in activities 'in connection with' federal elections. The dismissal effectively legalized the funding pipeline now used to underwrite Trump's legal-defense apparatus. CLC also filed a separate complaint regarding 'concealing' legal-expense payments by reimbursing an accounting firm that fronted them, alleging corporate-contribution and reporting violations (status not confirmed via this wave).",
+      "source_datasets": [
+        "fec",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:49:34",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:MUR8090",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://campaignlegal.org/press-releases/breaking-campaign-legal-center-and-nrdc-action-votes-file-amended-fec-complaint",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://campaignlegal.org/press-releases/breaking-campaign-legal-center-files-fec-complaint-against-former-president-donald",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11091,
+      "finding_type": "financial",
+      "summary": "Top 10 Save America disbursement recipients 2020-2026 dominated by Trump legal team: $60M MAGA Inc, $21.6M Make America Great Again PAC, $12M Robert & Robert PLLC, $11.3M Event Strategies, $9.8M Blanche Law, $9.4M Habba Madaio, $7.7M Red Curve Solutions, $7.7M John F. Lauro PA, $7.35M Continental PLLC (Boris Epshteyn)",
+      "detail": "Top recipients aggregated from 11,127 FEC Schedule B entries: (1) MAKE AMERICA GREAT AGAIN INC. $60,004,750.00 across 9 records 2022-10-03 to 2022-11-03 (super PAC C00825851); (2) MAKE AMERICA GREAT AGAIN PAC $21,612,000.00 across 53 records 2023-02-23 to 2025-12-22 (multicandidate PAC C00580100, also Crate-treasured); (3) ROBERT & ROBERT, PLLC $12,069,890.85 across 18 records 2023-01-13 to 2024-10-02 (NY law firm \u2014 Trump civil-fraud / NY state AG); (4) EVENT STRATEGIES, INC. $11,339,994.39 across 50 records 2021-03-05 to 2024-02-14 (rally event production, VA); (5) BLANCHE LAW $9,812,947.76 across 33 records 2023-04-10 to 2025-02-10 (Todd Blanche \u2014 federal criminal cases including Bragg NY hush-money trial); (6) HABBA MADAIO & ASSOCIATES LLP $9,427,004.86 across 51 records 2022-04-26 to 2025-12-10 (Alina Habba \u2014 E. Jean Carroll civil cases, NY civil fraud); (7) RED CURVE SOLUTIONS $7,726,618.86 across 225 records 2021-02-26 to 2025-12-10 (Crate's compliance firm \u2014 recurring 'compliance services'); (8) JOHN F. LAURO, P.A. $7,722,952.79 across 20 records 2022-10-05 to 2024-11-25 (Trump's Jack Smith DC J6 case lead counsel); (9) CONTINENTAL PLLC $7,350,309.72 across 21 records 2022-09-19 to 2024-09-10 (Boris Epshteyn 'strategic consulting'); (10) CHRIS KISE & ASSOCIATES, P.A. $6,327,801.21 across 19 records 2022-10-18 to 2024-10-23 (Mar-a-Lago classified-docs case + NY civil fraud). Notable also: SULLIVAN & CROMWELL LLP $3,963,518.06 (post-2025 NY appeal); HAYSTACKID LLC $2,852,277.21 (e-discovery vendor); JAMES OTIS LAW GROUP $2,541,977.41 (special-counsel-related); PAYCHEX $2,743,334.35 (in-house payroll, not legal); SILVERMAN THOMPSON $3,435,373.58 (Habba 2022 fraud-investigation pre-Habba Madaio); CRITTON LUTTIER & COLEMAN trust account $3,000,000 single payment 2022-08-30 (likely Walt Nauta or co-defendant retainer).",
+      "source_datasets": [
+        "fec",
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:50:01",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-disb-merged.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11092,
+      "finding_type": "intelligence",
+      "summary": "Save America monthly legal-fee disbursements correlate with each Trump indictment milestone: Aug 2022 raid ($3.9M), spring 2023 indictments ($3.3-4.9M/mo), Oct 2024 final pre-election push ($5.1M), then collapse Jan-May 2025 post-inauguration before resuming for civil/tariff matters",
+      "detail": "Monthly Save America legal-fee disbursement totals (synthesis from 1,075 records classified as legal): pre-FBI-raid 2021-02 through 2022-07 averaged $10K-$200K (background civil work). 2022-08 (Mar-a-Lago FBI raid 8/8/22): jump to $3,908,797 \u2014 a 19x month-over-month spike driven by $3M one-time payment to Critton Luttier & Coleman trust account (2022-08-30) and onboarding of Boris Epshteyn / Continental PLLC. 2022-09 $1.56M; 2022-10 (Smith appointed 11/18) $1.78M; 2022-11 $3.19M; 2022-12 $3.25M. 2023 indictment year (Bragg 3/30, Smith SDFL 6/8, Smith DDC 8/1, Willis Fulton 8/14): monthly averages $4M+, peak 2023-07 $5.19M. 2024 (NY hush-money trial Apr-May, conviction 5/30, Cannon dismissal 7/15, Butler attempt 7/13, election 11/5): peak 2024-02 $6.24M, 2024-10 (final pre-election push) $5.14M. Cumulative 2024-cycle legal disbursements ~$45M+. After Trump's 2025-01-20 inauguration, monthly legal fees collapsed: 2025-01 $382K, 2025-02 $942K, 2025-03 $333K, 2025-05 only $22K \u2014 a 99% reduction from 2024 peaks consistent with DOJ dropping federal prosecutions and SDFL classified-docs case being final. Resumed in 2025-06 ($1.38M) and 2025-12 ($3.12M) for ongoing civil litigation (Carroll appeal, NY judgments, post-presidential civil cases) and tariff/IEEPA constitutional matters.",
+      "source_datasets": [
+        "fec",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:50:17",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-legal-only.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11093,
+      "finding_type": "negative_result",
+      "summary": "Pentagon-orbit individuals (Hegseth, Phelan, Caldwell, Selnick, Parnell, Kasper, McKissack, Hung Cao, Parlatore, Stephen Feinberg) show ZERO direct contributions to Save America (C00762591), Trump Save America JFC (C00770941), or MAGA Inc (C00825851) per FEC Schedule A across all cycles",
+      "detail": "Wave-7 cross-check pulled FEC contributor records for surnames in the Hegseth/Pentagon staff orbit (200 results each where available). Filtered for committee_id \u2208 {C00762591 Save America, C00770941 Trump Save America JFC, C00825851 MAGA Inc.}. Results: Hegseth (200 records, 0 hits); Parlatore (200 records, 0 hits \u2014 Parlatore's federal giving has gone to Cruz/Van Orden/Trump principal-campaign committees only); Phelan, John (100, 0); Caldwell (200, 0); Selnick (100, 0); McKissack (100, 0); Cao, Hung (100, 0); Parnell, Sean (54, 0); Kasper (100, 0); Brown William (50, 0); Feinberg, Stephen (Cerberus \u2014 100 records, 0 hits \u2014 Feinberg's recent giving is Democratic: ActBlue/Harris/DNC/Ossoff, no Trump/Save America). NEGATIVE RESULT: the Pentagon-orbit personnel investigated in waves 1-6 are not financial donors to Trump's PAC apparatus. Their relationship to Trump-world runs through patronage / appointment / legal representation, not through campaign contributions. (William Brown query was small batch and may not be exhaustive \u2014 recommend follow-up FEC bulk lookup if Pentagon Reserve Loophole thread expands.)",
+      "source_datasets": [
+        "fec",
+        "analysis_run"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:50:34",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-brown-william.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-caldwell.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-cao-hung.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-feinberg.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-hegseth.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-kasper.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-mckissack.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-parlatore.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-parnell.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-phelan-john.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/donor-selnick.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00770941",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00825851",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11094,
+      "finding_type": "financial",
+      "summary": "Save America made ZERO independent expenditures (Schedule E) across all four cycles 2020-2026; spending was channeled exclusively through transfers and operating disbursements (legal/consulting/payroll/travel)",
+      "detail": "FEC Schedule E query for committee_id C00762591 returned 0 records. Confirmed by FEC totals field 'independent_expenditures' = 0.00 in every cycle. Save America does NOT make independent expenditures itself \u2014 that role is reserved for the affiliated super PAC MAGA Inc (C00825851). Save America's spending is structured almost entirely as: (a) operating expenditures (legal services, consulting, vendor payments) \u2014 $159.3M total / 10,777 records on FEC line 'Other Federal Operating Expenditures'; (b) contributions to other federal committees $65.3M / 174 records; (c) transfers to affiliated party committees $21.6M / 53 records (all to Make America Great Again PAC C00580100); (d) other disbursements $7.06M / 52 records; (e) refunds to individuals $561K / 70 records.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:50:43",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-ie.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-totals.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11095,
+      "finding_type": "financial",
+      "summary": "Save America's individual-donor receipts collapsed from $1.18M (2022 cycle) to $129K (2024 cycle) to $12.8K (2026 cycle); after 2020-21 election-defense fundraising bait-and-switch, virtually all funds now arrive via inter-PAC transfers and the JFC waterfall",
+      "detail": "FEC committee totals show stark donor-base collapse for Save America: 2020 cycle (Oct-Dec 2020) \u2014 individual contributions $1,054,827.84; transfers from affiliated party $30,452,064.97 (the famous 'Election Defense Fund' funnel where ~60% of donations to the joint Trump/RNC fundraising effort went to Save America). 2022 cycle \u2014 individual $1,176,102.90; transfers from affiliated $108,035,602.57 (the residue of 2020 election-defense money + ongoing JFC flow). 2024 cycle \u2014 individual $129,285.05 (a 91% drop from 2022); transfers from affiliated $39,293,500.97 plus the $60M MAGA Inc refund. 2026 cycle YTD \u2014 individual $12,774.69 (a 90% further drop); transfers from affiliated $15,481,589.59 (essentially all funding). Confirmed FEC complaint history (multiple 2021-2022 actions) about 'Official Election Defense Fund' solicitations directing dollars meant for 2020 recount efforts to Save America's general fund. The arc establishes Save America as a structural pass-through for inter-committee Trump money, not a small-dollar grassroots PAC: 99.92% of 2026 funds are inter-committee transfers.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:50:57",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-totals.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11097,
+      "finding_type": "financial",
+      "summary": "Save America non-legal disbursement pattern: $11.3M to Event Strategies (rallies), $2.85M to HaystackID (e-discovery), $2.74M to Paychex (payroll), $2.44M to American Express (corporate card), $1.55M to Facebook ads (2021-22 only), plus 2022 sub-grants of $1M each to Conservative Partnership Institute, America First Policy Institute, Our American Century, American Leadership Action; $650K to Smithsonian for Trump portraits",
+      "detail": "Beyond legal fees, Save America's spending shows distinct pattern phases. 2021-2022 (pre-indictment, post-presidency political infrastructure phase): $11.34M to EVENT STRATEGIES INC (VA \u2014 Trump rally production through 2024); $2.74M to PAYCHEX (in-house staff payroll \u2014 Save America has a payroll); $1.55M to FACEBOOK ads (terminated 2022-02 when Trump returned to Twitter); $2.44M to AMERICAN EXPRESS (corporate card with travel/expenses); $2.79M to TAKE BACK GEORGIA + $1.5M GET GEORGIA RIGHT PAC (2022 GA primary intervention); $1M each to CONSERVATIVE PARTNERSHIP INSTITUTE (Mark Meadows / Cleta Mitchell think tank \u2014 2021-07-26), AMERICA FIRST POLICY INSTITUTE (post-presidency think tank \u2014 2021-06-15), OUR AMERICAN CENTURY (2022-05-10), AMERICAN LEADERSHIP ACTION (2022-05-02); $650K to SMITHSONIAN INSTITUTION (2022-07-14 \u2014 official portrait commissions per public reporting); $650K to WYOMING VALUES (anti-Cheney 2022 primary super PAC); $450K Free and Fair Arizona Elections; $200K Arizona First Project + Michigan Works PACs; $150K RNC; $150K Article III Foundation (2024-02-01 \u2014 judicial advocacy). 2023-2024 (legal-defense phase): operational spending crowded out \u2014 Event Strategies stops in Feb 2024, Facebook is gone, only legal vendors and Red Curve/Paychex/AmEx remain. Notable post-2024-election spending: SULLIVAN & CROMWELL LLP $3.96M across just 4 records 2025-03 to 2025-12 (NY appellate work; first major non-Trump-personal-counsel firm to receive serious money). PRINTINGHOUSE PRESS LTD $835K 2024-09 to 2025-06 (election mailers / merchandise printer).",
+      "source_datasets": [
+        "fec",
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:51:33",
+      "target_name": "Save America",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/wave7-savpac/savpac-disb-merged.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5679,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "Save America",
+      "relationship_type": "funds",
+      "description": "Save America PAC paid PLG $332,818.24 across 9 disbursements 2022-04-22 to 2023-03-22 for 'Legal Consulting' (FEC Schedule B)",
+      "strength": "strong",
+      "date_range": "2022-04-22:2023-03-22",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:34",
+      "profile_id": "parlatore",
+      "other_person": "Parlatore Law Group LLP",
+      "other_person_slug": "parlatore-law-group-llp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5899,
+      "person_a": "Make America Great Again Inc.",
+      "person_b": "Save America",
+      "relationship_type": "funds",
+      "description": "Save America transferred $60,004,750 to MAGA Inc super PAC on 2022-10-03 ($20M) and 2022-11-03 ($40M); the round-trip was reversed via monthly refunds in 2023 totaling $60M back to Save America to fund Trump legal fees",
+      "strength": "strong",
+      "date_range": "2022-10-03/2024-12-31",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:51:40",
+      "profile_id": "parlatore",
+      "other_person": "Make America Great Again Inc.",
+      "other_person_slug": "make-america-great-again-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00825851",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5900,
+      "person_a": "Make America Great Again PAC",
+      "person_b": "Save America",
+      "relationship_type": "funds",
+      "description": "Save America transferred $21,612,000 to Make America Great Again PAC (multicandidate, also Crate-treasured) across 53 transfers 2023-02-23 to 2025-12-22; both committees share treasurer Bradley T. Crate",
+      "strength": "strong",
+      "date_range": "2023-02-23/2025-12-22",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:51:43",
+      "profile_id": "parlatore",
+      "other_person": "Make America Great Again PAC",
+      "other_person_slug": "make-america-great-again-pac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00580100",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5901,
+      "person_a": "Bradley T. Crate",
+      "person_b": "Save America",
+      "relationship_type": "controls",
+      "description": "Bradley T. Crate is sole treasurer of Save America from registration 2020-11-09 through present (4 cycles)",
+      "strength": "strong",
+      "date_range": "2020-11-09/",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:51:45",
+      "profile_id": "parlatore",
+      "other_person": "Bradley T. Crate",
+      "other_person_slug": "bradley-t-crate",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5903,
+      "person_a": "Red Curve Solutions LLC",
+      "person_b": "Save America",
+      "relationship_type": "contracts_with",
+      "description": "Save America paid Red Curve Solutions $7,726,618.86 across 225 disbursements 2021-02-26 to 2025-12-10 for ongoing compliance / treasury / accounting services",
+      "strength": "strong",
+      "date_range": "2021-02-26/2025-12-10",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:51:51",
+      "profile_id": "parlatore",
+      "other_person": "Red Curve Solutions LLC",
+      "other_person_slug": "red-curve-solutions-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5906,
+      "person_a": "Save America",
+      "person_b": "Trump Save America Joint Fundraising Committee",
+      "relationship_type": "funds",
+      "description": "Trump Save America JFC (C00770941, registered 2021-02-27) is the joint fundraising committee that allocates donor money in waterfall: Trump campaign first, Save America second, RNC third, state parties fourth. Both committees share treasurer Bradley T. Crate and PO Box 509 Arlington VA 22216.",
+      "strength": "strong",
+      "date_range": "2021-02-27/",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:52:00",
+      "profile_id": "parlatore",
+      "other_person": "Trump Save America Joint Fundraising Committee",
+      "other_person_slug": "trump-save-america-joint-fundraising-committee",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00770941",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5907,
+      "person_a": "Continental PLLC",
+      "person_b": "Save America",
+      "relationship_type": "contracts_with",
+      "description": "Save America paid Continental PLLC $7,350,309.72 across 21 monthly retainer payments 2022-09-19 to 2024-09-10 \u2014 the Boris Epshteyn 'strategic consulting' channel that monetized Epshteyn's gatekeeping over Trump's legal team. (Documented in prior wave findings.)",
+      "strength": "strong",
+      "date_range": "2022-09-19/2024-09-10",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 04:52:03",
+      "profile_id": "parlatore",
+      "other_person": "Continental PLLC",
+      "other_person_slug": "continental-pllc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5681,
+      "person_a": "Save America",
+      "person_b": "William Brown",
+      "relationship_type": "political",
+      "description": "PLG attorney William Brown donated to Trump National Committee JFC (which conduits to Save America among other funds) on 2024-10-07; $3019.96 same-day split",
+      "strength": "medium",
+      "date_range": "2024-10-07",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:34",
+      "profile_id": "parlatore",
+      "other_person": "William Brown",
+      "other_person_slug": "william-brown",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=donor%3AWilliam_Brown_PLG",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5729,
+      "person_a": "Continental PLLC",
+      "person_b": "Save America",
+      "relationship_type": "financial",
+      "description": "Save America (C00805820) paid Continental PLLC (Boris Epshteyn law firm) $4,996,669 in 12 LEGAL CONSULTING payments Apr 2023-Apr 2024. Plus 14 monthly $12,500 payments to C&M Transcontinental LLC (likely affiliated).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:54:06",
+      "profile_id": "parlatore",
+      "other_person": "Continental PLLC",
+      "other_person_slug": "continental-pllc",
+      "evidence": []
+    },
+    {
+      "id": 5682,
+      "person_a": "Save America",
+      "person_b": "Timothy C. Parlatore",
+      "relationship_type": "political",
+      "description": "Tim Parlatore personally donated $25 to WinRed on 2021-12-15 listing PLG as employer; small but documented direct line of personal Republican giving",
+      "strength": "weak",
+      "date_range": "2021-12-15",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:34",
+      "profile_id": "parlatore",
+      "other_person": "Timothy C. Parlatore",
+      "other_person_slug": "timothy-c-parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=donor%3ATimothy_Parlatore",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2020-11-09/",
+      "type": "connection",
+      "relationship_type": "controls",
+      "description": "Bradley T. Crate is sole treasurer of Save America from registration 2020-11-09 through present (4 cycles)",
+      "other_person": "Bradley T. Crate",
+      "id": 5901
+    },
+    {
+      "date": "2021-02-26/2025-12-10",
+      "type": "connection",
+      "relationship_type": "contracts_with",
+      "description": "Save America paid Red Curve Solutions $7,726,618.86 across 225 disbursements 2021-02-26 to 2025-12-10 for ongoing compliance / treasury / accounting services",
+      "other_person": "Red Curve Solutions LLC",
+      "id": 5903
+    },
+    {
+      "date": "2021-02-27/",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Trump Save America JFC (C00770941, registered 2021-02-27) is the joint fundraising committee that allocates donor money in waterfall: Trump campaign first, Save America second, RNC third, state parties fourth. Both committees share treasurer Bradley T. Crate and PO Box 509 Arlington VA 22216.",
+      "other_person": "Trump Save America Joint Fundraising Committee",
+      "id": 5906
+    },
+    {
+      "date": "2021-12-15",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Tim Parlatore personally donated $25 to WinRed on 2021-12-15 listing PLG as employer; small but documented direct line of personal Republican giving",
+      "other_person": "Timothy C. Parlatore",
+      "id": 5682
+    },
+    {
+      "date": "2022-04-22:2023-03-22",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Save America PAC paid PLG $332,818.24 across 9 disbursements 2022-04-22 to 2023-03-22 for 'Legal Consulting' (FEC Schedule B)",
+      "other_person": "Parlatore Law Group LLP",
+      "id": 5679
+    },
+    {
+      "date": "2022-09-19/2024-09-10",
+      "type": "connection",
+      "relationship_type": "contracts_with",
+      "description": "Save America paid Continental PLLC $7,350,309.72 across 21 monthly retainer payments 2022-09-19 to 2024-09-10 \u2014 the Boris Epshteyn 'strategic consulting' channel that monetized Epshteyn's gatekeeping over Trump's legal team. (Documented in prior wave findings.)",
+      "other_person": "Continental PLLC",
+      "id": 5907
+    },
+    {
+      "date": "2022-10-03/2024-12-31",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Save America transferred $60,004,750 to MAGA Inc super PAC on 2022-10-03 ($20M) and 2022-11-03 ($40M); the round-trip was reversed via monthly refunds in 2023 totaling $60M back to Save America to fund Trump legal fees",
+      "other_person": "Make America Great Again Inc.",
+      "id": 5899
+    },
+    {
+      "date": "2023-02-23/2025-12-22",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Save America transferred $21,612,000 to Make America Great Again PAC (multicandidate, also Crate-treasured) across 53 transfers 2023-02-23 to 2025-12-22; both committees share treasurer Bradley T. Crate",
+      "other_person": "Make America Great Again PAC",
+      "id": 5900
+    },
+    {
+      "date": "2024-10-07",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "PLG attorney William Brown donated to Trump National Committee JFC (which conduits to Save America among other funds) on 2024-10-07; $3019.96 same-day split",
+      "other_person": "William Brown",
+      "id": 5681
+    }
+  ]
+}

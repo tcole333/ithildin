@@ -1,0 +1,259 @@
+{
+  "name": "Solana Growth Ventures LLC",
+  "slug": "solana-growth-ventures-llc",
+  "aliases": [],
+  "profile_ids": [
+    "allbirds"
+  ],
+  "generated_at": "2026-05-07T23:07:36.411564",
+  "last_updated": "2026-04-16T05:45:26",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "regulatory": 2
+    },
+    "connection_types": {
+      "financial": 1,
+      "corporate": 5
+    },
+    "last_updated": "2026-04-16T05:45:26"
+  },
+  "findings": [
+    {
+      "id": 10622,
+      "finding_type": "financial",
+      "summary": "Solana Growth Ventures LLC is sole investor in $500M KIDZ convertible note facility, Chardan placement agent",
+      "detail": "Classover Holdings (KIDZ) and Solana Growth Ventures LLC entered into a Securities Purchase Agreement for up to $500M in senior secured convertible notes. Initial $11M closing on June 6, 2025. Chardan Capital Markets Inc. is sole placement agent at 1% of net proceeds. SOL Collateral Management LLC serves as collateral agent. Conversion price $7.36/share (200% of prior day close). 4.99% beneficial ownership blocker. 80% of proceeds mandated for SOL/BTC/USDC purchase. As of Dec 31, 2025: $7,775,000 outstanding.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-05-30",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10627,
+      "finding_type": "regulatory",
+      "summary": "No Schedule 13D or 13G filed by SGV for KIDZ \u2014 4.99% conversion blocker prevents threshold trigger",
+      "detail": "SGV has NOT filed any Schedule 13D or 13G for KIDZ. The 4.99% beneficial ownership cap in the Note prevents conversion-driven reporting threshold from being breached: $11M / $7.36 = ~1.495M shares, vs ~23.8M shares outstanding = ~6.3% potential ownership, blocked by the cap. SGV would need to acquire shares outside conversion or increase the cap to trigger 13D/G obligations.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-05-30",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10676,
+      "finding_type": "financial",
+      "summary": "Solana Growth Ventures LLC is named 'Required Holder' in the KIDZ $500M SPA, giving it unilateral authority to amend all Transaction Documents including the Pledge and Security Agreement.",
+      "detail": "SPA Section 8(e): 'Required Holder means Solana Growth Ventures LLC.' This designation means SGV controls all waivers, amendments, and collateral agent instructions \u2014 structurally more powerful than a passive convertible investor. EDGAR accession 0001477932-25-004289 EX-10.1.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-05-30",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-16 05:24:52",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10623,
+      "finding_type": "financial",
+      "summary": "KIDZ Note confirms SGV as Holder; SOL Collateral Management LLC as collateral agent",
+      "detail": "The Note issued June 6, 2025 reads: 'FOR VALUE RECEIVED, Classover Holdings, Inc., a Delaware corporation (the 'Company'), hereby promises to pay to the order of Solana Growth Ventures LLC or its affiliates or registered assigns ('Holder') the amount set forth above as the Original Principal Amount ($11,000,000).' SOL Collateral Management LLC named as collateral agent in the SPA (Section 4(k)).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-06-06",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10629,
+      "finding_type": "regulatory",
+      "summary": "KIDZ proxy flags SGV's full $500M facility as potential change-of-control event under Nasdaq Rule 5635(b)",
+      "detail": "KIDZ DEF 14A (June 30, 2025) confirms no other company needed to vote to approve the EPFA and SPA proposals because Hui Luo (CEO/Chairwoman) held ~91% of voting power. SGV's convertible note represented a potential change-of-control requiring Nasdaq Rule 5635(b) shareholder approval \u2014 SGV could have received common shares exceeding 19.99% threshold if all tranches were drawn. Suggests SGV is treated as a potential control-level investor.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-06-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10670,
+      "finding_type": "financial",
+      "summary": "Sol* LLC naming pattern is KIDZ-specific: three Solana-branded entities formed in 36 days for KIDZ deal roles; LGHL used ATW-branded SPV (ATW Digital Asset Opportunities VI LLC); BIRD investor entity name remains unknown \u2014 may be either a new Sol* LLC or an ATW-branded vehicle",
+      "detail": "KIDZ (Classover Holdings) deal used three 'Sol/Solana'-branded LLCs formed in a 36-day window: (1) Solana Growth Ventures LLC as sole investor in the $500M convertible facility, (2) SOL Collateral Management LLC as collateral agent per the Note agreement, and (3) Chaince Securities LLC as pre-deal Solana strategy advisor (Mercurity Fintech subsidiary). All three served deal-specific roles and had no prior documented history. LGHL used a different SPV naming pattern: ATW Digital Asset Opportunities VI LLC (an ATW-branded entity, not Sol-branded), confirmed by Schedule 13G filing July 9, 2025. For BIRD, the $50M convertible investor is completely unnamed in all April 15, 2026 filings. The divergence suggests either: (a) the Sol-branded entity pattern is KIDZ-specific and a different ATW-branded SPV will appear in BIRD filings, or (b) a new Sol* entity was recently formed for BIRD and has not yet surfaced in Delaware or SEC filings. The 4.99% beneficial ownership blocker in both KIDZ and BIRD prevents mandatory Schedule 13D/G filing.",
+      "source_datasets": "findings_tracker,connections_graph",
+      "confidence": "medium",
+      "date_of_event": "2026-04-16",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:15",
+      "target_name": "Solana Growth Ventures LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5534,
+      "person_a": "Solana Growth Ventures LLC",
+      "person_b": "Classover Holdings, Inc.",
+      "relationship_type": "financial",
+      "description": "SGV is sole investor in $500M senior secured convertible note facility (SPA dated May 30, 2025). Initial $11M closing June 6, 2025. $7,775,000 outstanding as of Dec 31, 2025. Chardan Capital Markets as placement agent (1%). SOL Collateral Management LLC as collateral agent.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "profile_id": "allbirds",
+      "other_person": "Classover Holdings, Inc.",
+      "other_person_slug": "classover-holdings-inc",
+      "evidence": []
+    },
+    {
+      "id": 5535,
+      "person_a": "SOL Collateral Management LLC",
+      "person_b": "Solana Growth Ventures LLC",
+      "relationship_type": "corporate",
+      "description": "SOL Collateral Management LLC serves as collateral agent for SGV's convertible note facility with KIDZ, per SPA Section 4(k). Both entities appear exclusively in KIDZ filings. Likely share common principals or are under common control.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "profile_id": "allbirds",
+      "other_person": "SOL Collateral Management LLC",
+      "other_person_slug": "sol-collateral-management-llc",
+      "evidence": []
+    },
+    {
+      "id": 5577,
+      "person_a": "Steven Oliveira",
+      "person_b": "Solana Growth Ventures LLC",
+      "relationship_type": "corporate",
+      "description": "Steven Oliveira serves as Manager of both Solana Growth Ventures LLC and SOL Collateral Management LLC, effectively controlling the investor position and the collateral enforcement mechanism in the KIDZ SPA. This dual role means a single individual controls whether to convert notes, enforce security interests, and amend deal terms.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:52",
+      "profile_id": "allbirds",
+      "other_person": "Steven Oliveira",
+      "other_person_slug": "steven-oliveira",
+      "evidence": []
+    },
+    {
+      "id": 5612,
+      "person_a": "Solana Growth Ventures LLC",
+      "person_b": "SOL Collateral Management LLC",
+      "relationship_type": "corporate",
+      "description": "Steven Oliveira controls both SGV (lender) and SOL Collateral Management LLC (collateral agent) on the KIDZ note deal. This is a structural conflict of interest \u2014 the same person serves as both the creditor and the custodian/agent responsible for protecting the borrower's collateral.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:45:26",
+      "profile_id": "allbirds",
+      "other_person": "SOL Collateral Management LLC",
+      "other_person_slug": "sol-collateral-management-llc",
+      "evidence": []
+    },
+    {
+      "id": 5610,
+      "person_a": "Solana Growth Ventures LLC",
+      "person_b": "Chaince Securities LLC",
+      "relationship_type": "corporate",
+      "description": "SGV provided KIDZ a $500M note purchase facility ($11M drawn Jun 2025); Chaince served as KIDZ's treasury advisor on the same strategy. The SGV notes were placed via Chardan Capital Markets. Oliveira (SGV) and Chaince converged on the same issuer with a coordinated deal structure.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:45:26",
+      "profile_id": "allbirds",
+      "other_person": "Chaince Securities LLC",
+      "other_person_slug": "chaince-securities-llc",
+      "evidence": []
+    },
+    {
+      "id": 5580,
+      "person_a": "Chaince Securities LLC",
+      "person_b": "Solana Growth Ventures LLC",
+      "relationship_type": "corporate",
+      "description": "Chaince Securities LLC and Solana Growth Ventures LLC both operate within the same Classover Holdings (KIDZ) Solana treasury transaction ecosystem. Chaince advises; SGV funds. The common deal structure and naming convention suggest Chaince may have sourced or structured SGV.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:52",
+      "profile_id": "allbirds",
+      "other_person": "Chaince Securities LLC",
+      "other_person_slug": "chaince-securities-llc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Solana Growth Ventures LLC is sole investor in $500M KIDZ convertible note facility, Chardan placement agent",
+      "confidence": "high",
+      "id": 10622
+    },
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "No Schedule 13D or 13G filed by SGV for KIDZ \u2014 4.99% conversion blocker prevents threshold trigger",
+      "confidence": "medium",
+      "id": 10627
+    },
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Solana Growth Ventures LLC is named 'Required Holder' in the KIDZ $500M SPA, giving it unilateral authority to amend all Transaction Documents including the Pledge and Security Agreement.",
+      "confidence": "confirmed",
+      "id": 10676
+    },
+    {
+      "date": "2025-06-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "KIDZ Note confirms SGV as Holder; SOL Collateral Management LLC as collateral agent",
+      "confidence": "high",
+      "id": 10623
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "KIDZ proxy flags SGV's full $500M facility as potential change-of-control event under Nasdaq Rule 5635(b)",
+      "confidence": "medium",
+      "id": 10629
+    },
+    {
+      "date": "2026-04-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Sol* LLC naming pattern is KIDZ-specific: three Solana-branded entities formed in 36 days for KIDZ deal roles; LGHL used ATW-branded SPV (ATW Digital Asset Opportunities VI LLC); BIRD investor entity name remains unknown \u2014 may be either a new Sol* LLC or an ATW-branded vehicle",
+      "confidence": "medium",
+      "id": 10670
+    }
+  ]
+}

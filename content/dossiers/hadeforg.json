@@ -1,0 +1,159 @@
+{
+  "name": "hadef.org",
+  "slug": "hadeforg",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.450116",
+  "last_updated": "2026-03-27T04:23:05",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 1,
+    "total_entities": 0,
+    "finding_types": {
+      "digital": 5
+    },
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-03-27T04:23:05"
+  },
+  "findings": [
+    {
+      "id": 8117,
+      "finding_type": "digital",
+      "summary": "hadef.org cert gap: site dormant Apr 2018 \u2013 Nov 2020 (2.5 years), reactivated exactly as HADEF entered the COVID CACFP fraud ecosystem",
+      "detail": "hadef.org first cert was issued 2016-12-11 (GoDaddy). After regular renewal through April 2018, no certificate was issued for 2.5 years until November 2020 when Let's Encrypt automation was set up. The site reactivation in Nov 2020 precedes HADEF's FY2021 revenue spike of $1.175M from CACFP food program payments by approximately one month.",
+      "source_datasets": "crtsh",
+      "confidence": "confirmed",
+      "date_of_event": "2020-11-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:23:05",
+      "target_name": "hadef.org",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8120,
+      "finding_type": "digital",
+      "summary": "June 2025: 7 certs issued in single month (vs. ~1/quarter norm) \u2014 correlates with HADEF's 2025 dissolution/reinstatement period, suggesting server migration or account restructuring",
+      "detail": "crt.sh timeline shows 7 Let's Encrypt certificates issued in June 2025 alone, breaking the otherwise steady quarterly rhythm. This spike occurs 5 months after HADEF's January 2025 involuntary dissolution and January 25, 2025 reinstatement. Most likely cause: Hostinger account migration, server reassignment, or cPanel reconfiguration that triggered mass cert reissuance for all hosted domains.",
+      "source_datasets": "crtsh",
+      "confidence": "high",
+      "date_of_event": "2025-06-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:23:05",
+      "target_name": "hadef.org",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8119,
+      "finding_type": "digital",
+      "summary": "9 hadef.org subdomains in CT logs including cpanel, webmail, webdisk \u2014 confirms budget shared cPanel hosting on Hostinger",
+      "detail": "crt.sh subdomains query returned: cpanel.hadef.org, cpcalendars.hadef.org, cpcontacts.hadef.org, m.hadef.org, mail.hadef.org, webdisk.hadef.org, webmail.hadef.org, www.hadef.org. These subdomains were TLS-certified under Let's Encrypt cPanel auto-TLS \u2014 standard cPanel hosting behavior. 76 total cert records, 43 unique certs since 2016-12-11.",
+      "source_datasets": "crtsh",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-21",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:23:05",
+      "target_name": "hadef.org",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8118,
+      "finding_type": "digital",
+      "summary": "hadef.org hosted on Hostinger shared cPanel (AS47583); all email, DNS, and web infrastructure is Hostinger-managed; no independent infrastructure",
+      "detail": "hadef.org resolves via www CNAME to www.hadef.org.cdn.hstgr.net (Hostinger CDN). All A and AAAA records are in Hostinger AS47583 address space. MX records point to mx1/mx2.hostinger.com. Nameservers are ns1/ns2.dns-parking.com (Hostinger DNS). SPF allows only Hostinger SMTP. The site uses standard shared cPanel hosting on Hostinger \u2014 a budget hosting provider.",
+      "source_datasets": "shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:23:05",
+      "target_name": "hadef.org",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8121,
+      "finding_type": "digital",
+      "summary": "hadef.org DMARC policy is p=none (no enforcement) \u2014 domain vulnerable to spoofing; anyone can send @hadef.org email with no automatic consequence",
+      "detail": "DMARC record: v=DMARC1; p=none. Policy of 'none' means no action is taken on authentication failures \u2014 emails failing SPF/DKIM are delivered normally. Combined with Hostinger-only SPF (~all softfail), the domain has minimal email authentication enforcement.",
+      "source_datasets": "shodan",
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 04:23:05",
+      "target_name": "hadef.org",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4085,
+      "person_a": "hadef.org",
+      "person_b": "2722 Park Ave S Minneapolis",
+      "relationship_type": "corporate",
+      "description": "hadef.org was the domain/public face of HADEF's CACFP food site operations. HADEF listed 2722 Park Ave S Minneapolis as its food distribution site under Partners in Nutrition sponsorship (MDE records). The site claimed 1,000 children/day capacity. HADEF received $1,155,035 in CACFP/SFSP payments via Partners in Nutrition in FY2021. 2722 Park Ave was subsequently purchased for $2.8M using FoF fraud proceeds.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:23:05",
+      "profile_id": "feeding-our-future",
+      "other_person": "2722 Park Ave S Minneapolis",
+      "other_person_slug": "2722-park-ave-s-minneapolis",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2020-11-01",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "hadef.org cert gap: site dormant Apr 2018 \u2013 Nov 2020 (2.5 years), reactivated exactly as HADEF entered the COVID CACFP fraud ecosystem",
+      "confidence": "confirmed",
+      "id": 8117
+    },
+    {
+      "date": "2025-06-01",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "June 2025: 7 certs issued in single month (vs. ~1/quarter norm) \u2014 correlates with HADEF's 2025 dissolution/reinstatement period, suggesting server migration or account restructuring",
+      "confidence": "high",
+      "id": 8120
+    },
+    {
+      "date": "2026-03-21",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "9 hadef.org subdomains in CT logs including cpanel, webmail, webdisk \u2014 confirms budget shared cPanel hosting on Hostinger",
+      "confidence": "confirmed",
+      "id": 8119
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "hadef.org hosted on Hostinger shared cPanel (AS47583); all email, DNS, and web infrastructure is Hostinger-managed; no independent infrastructure",
+      "confidence": "confirmed",
+      "id": 8118
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "digital",
+      "summary": "hadef.org DMARC policy is p=none (no enforcement) \u2014 domain vulnerable to spoofing; anyone can send @hadef.org email with no automatic consequence",
+      "confidence": "confirmed",
+      "id": 8121
+    }
+  ]
+}

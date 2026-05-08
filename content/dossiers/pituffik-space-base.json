@@ -5,17 +5,21 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.979826",
-  "last_updated": "2026-03-09T04:46:25",
+  "generated_at": "2026-05-07T23:07:36.365422",
+  "last_updated": "2026-03-23T19:29:34",
   "stats": {
-    "total_findings": 7,
-    "total_connections": 0,
+    "total_findings": 8,
+    "total_connections": 2,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 7
+      "intelligence": 7,
+      "financial": 1
     },
-    "connection_types": {},
-    "last_updated": "2026-03-09T04:46:25"
+    "connection_types": {
+      "political": 1,
+      "contracts_with": 1
+    },
+    "last_updated": "2026-03-23T19:29:34"
   },
   "findings": [
     {
@@ -199,9 +203,80 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7436,
+      "finding_type": "financial",
+      "summary": "Pituffik Space Base: $384M+ in MILCON since 2016, additional $57M authorized in FY2026 NDAA",
+      "detail": "Pituffik Space Base (formerly Thule Air Base) in Greenland has received roughly $384M in construction investment since 2016 including dormitory recapitalization, new civil engineer facility, energy upgrades, and backup electrical plant modernization. Serco Inc. awarded $323M power plant construction contract (Aug 2024, 4-year term) with Aarsleff as Danish subcontractor. FY2026 NDAA authorized $32M for runway approach/landing system improvements and up to $25M for flight operations improvements. Senate MILCON appropriations report (CRPT-119srpt43) covers FY2026 funding.",
+      "source_datasets": [
+        "govinfo",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:27:09",
+      "target_name": "Pituffik Space Base",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CRPT-119srpt43",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Serco press release Aug 2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Stars and Stripes Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
-  "connections": [],
+  "connections": [
+    {
+      "id": 3793,
+      "person_a": "Kenneth Howery",
+      "person_b": "Pituffik Space Base",
+      "relationship_type": "political",
+      "description": "As Ambassador to Denmark (confirmed Oct 2025), Howery has direct diplomatic portfolio over Pituffik Space Base and Greenland Arctic security. Named Pituffik as explicit priority in confirmation hearing.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:29:15",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": []
+    },
+    {
+      "id": 3796,
+      "person_a": "Pituffik Space Base",
+      "person_b": "Serco Inc.",
+      "relationship_type": "contracts_with",
+      "description": "Serco awarded $323M contract (Aug 2024, 4-year term) for backup electrical plant construction at Pituffik Space Base via USACE. Subcontracted Aarsleff (Danish construction).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:29:34",
+      "profile_id": "tech-right",
+      "other_person": "Serco Inc.",
+      "other_person_slug": "serco-inc",
+      "evidence": []
+    }
+  ],
   "entities": [],
   "timeline": [],
   "curation": {
@@ -285,14 +360,5 @@
       "bridge-tax",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Pituffik Space Base",
-      "connections": [],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": []
   }
 }

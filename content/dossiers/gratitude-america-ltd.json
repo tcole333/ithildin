@@ -5,26 +5,29 @@
     "Gratitude America"
   ],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "epstein-aetna",
+    "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.750666",
-  "last_updated": "2026-02-18T16:22:36",
+  "generated_at": "2026-05-07T23:07:36.058267",
+  "last_updated": "2026-04-15T04:59:02",
   "stats": {
-    "total_findings": 43,
-    "total_connections": 71,
+    "total_findings": 44,
+    "total_connections": 72,
     "total_entities": 0,
     "finding_types": {
       "identity": 2,
       "financial": 37,
       "legal": 2,
       "intelligence": 1,
-      "relationship": 1
+      "relationship": 2
     },
     "connection_types": {
       "financial": 39,
+      "funds": 1,
       "corporate": 32
     },
-    "last_updated": "2026-02-18T16:22:36"
+    "last_updated": "2026-04-15T04:59:02"
   },
   "findings": [
     {
@@ -1369,6 +1372,31 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 6930,
+      "finding_type": "relationship",
+      "summary": "Gratitude America Ltd (degree 18, rank 5) with zero findings is a major blind spot -- connects IPI, Kuhn Foundation, Deutsche Bank, MIT Media Lab, and 13 other entities",
+      "detail": "Critical coverage gap: Gratitude America Ltd has the 5th highest degree in the network (18 connections) with betweenness rank #28, yet zero findings have been recorded. It forms a clique with Enhanced Education and International Peace Institute. Its connection network spans philanthropic (Kuhn Foundation, Melanoma Research Alliance, Chopra Foundation, Hasty Pudding Institute, Cancer Research Wellness Institute), financial (Deutsche Bank Trust Americas, Morgan Stanley), educational (MIT Media Lab, Verse Video Education, ASU Foundation via Enhanced Education), and cultural (NPO Baleto teatras) entities. Brokerage score 0.98 -- near-perfect broker.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:24:12",
+      "target_name": "Gratitude America Ltd",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -1567,6 +1595,28 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/330783933",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5491,
+      "person_a": "Gratitude America",
+      "person_b": "Melanoma Research Alliance Foundation",
+      "relationship_type": "funds",
+      "description": "Epstein's own foundation gave MRAF $225K in 2016, same entity that Leon/Debra Black co-founded and that Michael Milken sits on.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:59:02",
+      "profile_id": "epstein-aetna",
+      "other_person": "Melanoma Research Alliance Foundation",
+      "other_person_slug": "melanoma-research-alliance-foundation",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "investigations/epstein/990-findings.md",
           "source_quote": null,
           "source_page": null
         }

@@ -6,31 +6,148 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.846676",
-  "last_updated": "2026-03-11T16:43:18",
+  "generated_at": "2026-05-07T23:07:36.153345",
+  "last_updated": "2026-03-24T14:15:33",
   "stats": {
-    "total_findings": 24,
-    "total_connections": 15,
+    "total_findings": 21,
+    "total_connections": 20,
     "total_entities": 0,
     "finding_types": {
-      "financial": 11,
       "relationship": 8,
-      "intelligence": 2,
-      "legal": 3
+      "legal": 4,
+      "financial": 8,
+      "intelligence": 1
     },
     "connection_types": {
       "corporate": 4,
-      "financial": 1,
-      "employment": 1,
-      "controls": 2,
+      "financial": 2,
+      "employment": 2,
+      "controls": 3,
       "funds": 4,
       "contracts_with": 1,
-      "political": 1,
-      "advisory": 1
+      "advisory": 2,
+      "political": 2
     },
-    "last_updated": "2026-03-11T16:43:18"
+    "last_updated": "2026-03-24T14:15:33"
   },
   "findings": [
+    {
+      "id": 6605,
+      "finding_type": "relationship",
+      "summary": "Reed Rubinstein (AFL SVP) confirmed as State Dept Legal Adviser May 2025 by 51-46 vote. Now shapes international law from senior federal position.",
+      "detail": "Reed Rubinstein was appointed AFL Senior Vice President in Feb 2024, nominated by Trump as State Department Legal Adviser, hearing held March 25, 2025, confirmed May 15, 2025 by 51-46 vote. Now holds one of the most powerful legal positions in the federal government, advising the Secretary of State on all international legal matters. Third AFL leader to enter Trump 2.0 government.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:31:36",
+      "target_name": "America First Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov PN25-50 nomination record",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Foreign Relations Committee hearing March 25, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "state.gov biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6612,
+      "finding_type": "legal",
+      "summary": "AFL litigation-to-executive-order pipeline confirmed: AFL filed NVRA suits (Sept 2024) and EAC petition (July 2025) for proof-of-citizenship voter registration. Trump EO 14248 (March 2025) ordered same requirement. AFL petition drew 353K+ comments and 14 state AG support.",
+      "detail": "Clear policy pipeline: (1) AFL filed NVRA suits against all 15 AZ counties Sept 2024 demanding noncitizen removal from rolls - settled/dismissed April 2025. (2) Trump signed EO 14248 March 25, 2025 ordering EAC to amend federal voter registration form to require documentary proof of citizenship. (3) AFL filed formal EAC rulemaking petition July 16, 2025 for same requirement. (4) 14 state AGs (TX, AL, IA, AR, KS, GA, LA, ID, NE, IN, OH, SC, WV, SD) support AFL petition. (5) Comment period closed Oct 2025 with 353K+ comments. (6) Federal courts blocked EO provisions -- DC court and MA court issued injunctions. The sequence shows AFL creating the legal framework that the administration then adopts as executive policy, with AFL simultaneously litigating to achieve the same goals through administrative proceedings.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:32:32",
+      "target_name": "America First Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFL press releases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Brennan Center litigation tracker",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EO 14248 text",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Federal Register 2025-15930 (EAC petition)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6606,
+      "finding_type": "relationship",
+      "summary": "Matthew Whitaker (AFL Executive Director/Board) confirmed as US Ambassador to NATO April 2025 (52-45 vote). Fourth AFL leader to enter Trump 2.0 government.",
+      "detail": "Matthew Whitaker served as AFL Executive Director and board member. Former Acting AG under Trump 1.0. Confirmed as US Ambassador to NATO on April 1, 2025 by 52-45 vote. This is significant: the AFL's executive director now represents the US at NATO, while AFL continues to litigate domestic policy positions that align with Trump administration goals.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:31:44",
+      "target_name": "America First Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate confirmation vote records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "state.gov NATO appointment",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4777,
       "finding_type": "financial",
@@ -94,31 +211,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.notus.org/money/trump-donors-trust-america-first-policy-institute-legal-foundation-donations",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6478,
-      "finding_type": "intelligence",
-      "summary": "Congressional probe: Reps. John Larson (D-CT), Robert Garcia (D-CA), and Joe Morelle (D-NY) sent records demands to 15 anti-voting groups to identify which signed the DOGE SSA 'voter data agreement.' The 15 groups are: (1) America First Policy Institute, (2) America First Legal Foundation, (3) Citizens Election Research Center, (4) Citizens Outreach Foundation, (5) Early Vote Action, (6) Election Integrity Network, (7) Election Transparency Initiative, (8) Elections Oversight Group, (9) Honest Elections Project, (10) Public Interest Legal Foundation, (11) The American Project, (12) True the Vote, (13) Virginia Institute for Public Policy, (14) Voters Organized for Trusted Election Results in Georgia, (15) Wisconsin Voter Alliance. As of March 2026, no group responses have been publicly disclosed.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-10 00:10:11",
-      "target_name": "DOGE SSA Voter Data Agreement",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "democracydocket:2026-01:dems-demand-records; democracy-docket.com:voter-data-agreement-demand",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -254,77 +346,6 @@
       ]
     },
     {
-      "id": 6605,
-      "finding_type": "relationship",
-      "summary": "Reed Rubinstein (AFL SVP) confirmed as State Dept Legal Adviser May 2025 by 51-46 vote. Now shapes international law from senior federal position.",
-      "detail": "Reed Rubinstein was appointed AFL Senior Vice President in Feb 2024, nominated by Trump as State Department Legal Adviser, hearing held March 25, 2025, confirmed May 15, 2025 by 51-46 vote. Now holds one of the most powerful legal positions in the federal government, advising the Secretary of State on all international legal matters. Third AFL leader to enter Trump 2.0 government.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:31:36",
-      "target_name": "America First Legal Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Congress.gov PN25-50 nomination record",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Senate Foreign Relations Committee hearing March 25, 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "state.gov biography",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6606,
-      "finding_type": "relationship",
-      "summary": "Matthew Whitaker (AFL Executive Director/Board) confirmed as US Ambassador to NATO April 2025 (52-45 vote). Fourth AFL leader to enter Trump 2.0 government.",
-      "detail": "Matthew Whitaker served as AFL Executive Director and board member. Former Acting AG under Trump 1.0. Confirmed as US Ambassador to NATO on April 1, 2025 by 52-45 vote. This is significant: the AFL's executive director now represents the US at NATO, while AFL continues to litigate domestic policy positions that align with Trump administration goals.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:31:44",
-      "target_name": "America First Legal Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Senate confirmation vote records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "state.gov NATO appointment",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6607,
       "finding_type": "relationship",
       "summary": "AFL board/leadership placed 4 members into Trump 2.0 government simultaneously: Miller (Deputy CoS/HSA), Hamilton (Deputy WH Counsel, returned Jun 2025), Rubinstein (State Dept Legal Adviser), Whitaker (NATO Ambassador). Vought (board/treasurer) confirmed as OMB Director. Meadows (board) remains at CPI.",
@@ -437,52 +458,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "WSJ reporting on Musk donations",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6612,
-      "finding_type": "legal",
-      "summary": "AFL litigation-to-executive-order pipeline confirmed: AFL filed NVRA suits (Sept 2024) and EAC petition (July 2025) for proof-of-citizenship voter registration. Trump EO 14248 (March 2025) ordered same requirement. AFL petition drew 353K+ comments and 14 state AG support.",
-      "detail": "Clear policy pipeline: (1) AFL filed NVRA suits against all 15 AZ counties Sept 2024 demanding noncitizen removal from rolls - settled/dismissed April 2025. (2) Trump signed EO 14248 March 25, 2025 ordering EAC to amend federal voter registration form to require documentary proof of citizenship. (3) AFL filed formal EAC rulemaking petition July 16, 2025 for same requirement. (4) 14 state AGs (TX, AL, IA, AR, KS, GA, LA, ID, NE, IN, OH, SC, WV, SD) support AFL petition. (5) Comment period closed Oct 2025 with 353K+ comments. (6) Federal courts blocked EO provisions -- DC court and MA court issued injunctions. The sequence shows AFL creating the legal framework that the administration then adopts as executive policy, with AFL simultaneously litigating to achieve the same goals through administrative proceedings.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:32:32",
-      "target_name": "America First Legal Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "AFL press releases",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Brennan Center litigation tracker",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EO 14248 text",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Federal Register 2025-15930 (EAC petition)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -608,46 +583,6 @@
       ]
     },
     {
-      "id": 6631,
-      "finding_type": "financial",
-      "summary": "CRA-CPI NETWORK: CPI is parent org. CPI also spawned America First Legal (1.33M grant 2021), American Accountability Foundation (335K), American Moment (336K), American Cornerstone Institute (161K), Institute for Citizen Focused Service (100K), Public Interest Legal Foundation (50K). CPI total grants to partners 3.9M+ (2021). CPI revenue 45.7M (2021) from 6.2M (2020). CPI also houses Election Integrity Network (Cleta Mitchell) and FAIR Elections Fund. DonorsTrust gave nearly 20M to Project 2025 advisory orgs including CPI in 2021. Leonard Leo Marble Freedom Trust gave 41M to DonorsTrust in 2021.",
-      "detail": "Conservative Partnership Institute created and funded entire ecosystem of partner organizations in 2021, coinciding with revenue explosion from 6.2M to 45.7M. Schedule I grants 2021: America First Legal Foundation 1334105 for mission and program support; Center for American Restoration 1M+; Center for Renewing America 583701; American Accountability Foundation 335K+; American Moment 336K; American Cornerstone Institute 161K; Institute for Citizen Focused Service 100K; Public Interest Legal Foundation 50K. Total partner grants 3.9M+. CPI also internally houses Election Integrity Network (Cleta Mitchell) and FAIR Elections Fund (3.9M first year). DonorsTrust distributed nearly 20M to 36 nonprofit orgs advising Project 2025 in 2021 including CPI. Leonard Leo Marble Freedom Trust gave 41M to DonorsTrust in 2021 after Barre Seid donation. This creates a dark money pipeline: Seid -> Leo/Marble Freedom Trust -> DonorsTrust -> CPI -> CRA/AFL/AAF etc -> government placements.",
-      "source_datasets": [
-        "990",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:35:34",
-      "target_name": "Center for Renewing America",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NBC News Leonard Leo Koch networks Jun 2024",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica CPI EIN 821470217",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Sludge Nov 2022 CPI tax analysis",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6652,
       "finding_type": "financial",
       "summary": "AFL 2022 $44.4M revenue spike: 61% ($27.1M) from Bradley Impact Fund. Revenue: $6.4M(2021)->44.4M(2022)->9.6M(2023)->31.5M(2024). 2024 rebound driven by $21.3M from DonorsTrust.",
@@ -729,90 +664,6 @@
       ]
     },
     {
-      "id": 6672,
-      "finding_type": "financial",
-      "summary": "Issue One tracked 590M+ in contributions since Jan 2020 to OCVC member orgs from 140+ donor orgs. Top 10 beneficiaries (94% of total, all Project 2025-linked): 85 Fund 413M (Leonard Leo), America First Legal 40M (Stephen Miller), SBA List 18M, FGA 16M, CPI 16M, Family Research Council 16M, TX Public Policy Foundation 15M, America First Policy Inst 11M, Heritage Action 8.8M, Tea Party Patriots 3.4M. Top donors are DAFs: Schwab Charitable 328M (17 beneficiaries), DonorsTrust 80M (14), Bradley Impact Fund 31M (9), Fidelity Charitable 24M (19), Concord Fund 24M (Carrie Severino). 25% of OCVC members (22+ orgs) participated in Project 2025. True donor identities hidden behind DAF structures.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 05:02:23",
-      "target_name": "OCVC Funding Network",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Issue One Whos Behind OCVC report Oct 2024",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Issue One press release",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6701,
-      "finding_type": "financial",
-      "summary": "DonorsTrust 2024 grants: AFL got 21.3M (up from 3.2M in 2023), AFPI got 4.4M, Teneo Network 4.4M",
-      "detail": "DonorsTrust 2024 Schedule I grants to election enforcement apparatus: America First Legal Foundation=21.3M (breakdown: 20.7M general ops, 100K election interference, 100K matching, 101K election monitoring, 250K legal defense) | America First Policy Institute=4.4M (2M+ general, 1M+ Election Integrity Project, 1.4M Veterans Initiative) | Teneo Network=4.4M | RealClearFoundation=4.4M. Total DonorsTrust grants 2024 = 284.1M across 4,500 awards. 2023 was 351.2M (record). 8 unnamed donors gave 162.4M in 2024.",
-      "source_datasets": [
-        "990",
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 16:41:10",
-      "target_name": "DonorsTrust Inc",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NOTUS reporting on DonorsTrust 2024 990 Schedule I",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6703,
-      "finding_type": "financial",
-      "summary": "Bradley Impact Fund gave 27.1M to AFL in 2022, 862K to CPI in 2022, 1.07M to CPI over 2020-2022",
-      "detail": "Bradley Impact Fund (EIN 454678325) 2022 grants: America First Legal Foundation=27,100,000 (largest single grant, constituting 61% of AFL 44.4M revenue that year) | CPI=862,310. Bradley nonprofits gave 1,072,460 to CPI over 2020-2022 period. Bradley Foundation separately gave 550,000 to CPI over 2018-2022. BIF revenue: 108M(2022), 90.7M(2023). BIF also received 12.7M from DonorsTrust in 2022. Cleta Mitchell serves on Bradley Foundation board and chairs CPI Election Integrity Network.",
-      "source_datasets": [
-        "990",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 16:41:39",
-      "target_name": "Bradley Impact Fund",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UrbanMilwaukee, EXPOSEDbyCMD reporting on Bradley 990 filings",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6706,
       "finding_type": "financial",
       "summary": "AFL revenue trajectory: 6.4M(2021)->44.4M(2022)->9.6M(2023). Bradley Impact Fund provided 27.1M in 2022, DonorsTrust 21.3M in 2024",
@@ -832,6 +683,87 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "IRS 990 filings, Bradley Impact Fund 990, DonorsTrust 990, Sludge reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7629,
+      "finding_type": "legal",
+      "summary": "AFL FOIA litigation machine: 20 federal court cases identified in CourtListener, almost all FOIA lawsuits against federal agencies. Targets include DOJ, State Dept, DOD, FEC, DOL, Commerce, Education, NSF, USDA, NARA, CEQ, HRSA, Pardon Attorney. Cases span 2021-2026. Most recent: AFL v. HRSA (Jan 2026) and AFL v. Office of the Pardon Attorney (Feb 2026). Also has DC Circuit appeal (AFL v. FBI, Nov 2024).",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:41",
+      "target_name": "America First Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/afl-court.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener party search: America First Legal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7661,
+      "finding_type": "financial",
+      "summary": "AFL revenue spiked to 44M in 2022 then dropped to 9.6M in 2023; incubated by CPI, received 1.37M from CPI, Project 2025 advisory board member",
+      "detail": "America First Legal Foundation (EIN 862190372) revenue: 6.4M (2021), 44.4M (2022), 9.6M (2023). Assets 13.2M (2023). Address: 611 Pennsylvania Ave SE 231 DC 20003. Founded by Stephen Miller (now WH senior advisor), VP Gene Hamilton (authored P2025 DOJ chapter). Received 1.37M from CPI. Incubated by CPI per LittleSis. Project 2025 Advisory Board member. Filed 20+ FOIA lawsuits against federal agencies. Election-specific litigation: challenged drop boxes in PA (dismissed), challenged election admin in AZ (active). Also sued Stanford Internet Observatory researchers over censorship research.",
+      "source_datasets": [
+        "990",
+        "courtlistener",
+        "littlesis",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:25",
+      "target_name": "America First Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener party search AFL",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DemocracyDocket AFL analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 416495",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 862190372",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1082,6 +1014,95 @@
       ]
     },
     {
+      "id": 3513,
+      "person_a": "America First Legal Foundation",
+      "person_b": "DonorsTrust",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:43",
+      "profile_id": "tech-right",
+      "other_person": "DonorsTrust",
+      "other_person_slug": "donorstrust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 DonorsTrust EIN 52-2166327 (2023)",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3694,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Stephen Miller",
+      "relationship_type": "controls",
+      "description": "Stephen Miller is President and Executive Director of AFL, comp 266K",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
+      "evidence": []
+    },
+    {
+      "id": 3742,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Blake Masters",
+      "relationship_type": "advisory",
+      "description": "Masters serves as unpaid director on AFL board (1 hr/week). AFL is Stephen Miller's legal warfare organization.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:00",
+      "profile_id": "tech-right",
+      "other_person": "Blake Masters",
+      "other_person_slug": "blake-masters",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/862190372",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3882,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Gene Hamilton",
+      "relationship_type": "employment",
+      "description": "VP and General Counsel of AFL",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:32",
+      "profile_id": "tech-right",
+      "other_person": "Gene Hamilton",
+      "other_person_slug": "gene-hamilton",
+      "evidence": []
+    },
+    {
+      "id": 3884,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Only Citizens Vote Coalition",
+      "relationship_type": "political",
+      "description": "AFL is member of Only Citizens Vote Coalition",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:15:33",
+      "profile_id": "tech-right",
+      "other_person": "Only Citizens Vote Coalition",
+      "other_person_slug": "only-citizens-vote-coalition",
+      "evidence": []
+    },
+    {
       "id": 2825,
       "person_a": "America First Legal Foundation",
       "person_b": "Blake Masters",
@@ -1128,7 +1149,32 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Reed Rubinstein (AFL SVP) confirmed as State Dept Legal Adviser May 2025 by 51-46 vote. Now shapes international law from senior federal position.",
+      "confidence": "confirmed",
+      "id": 6605
+    },
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "AFL litigation-to-executive-order pipeline confirmed: AFL filed NVRA suits (Sept 2024) and EAC petition (July 2025) for proof-of-citizenship voter registration. Trump EO 14248 (March 2025) ordered same requirement. AFL petition drew 353K+ comments and 14 state AG support.",
+      "confidence": "high",
+      "id": 6612
+    },
+    {
+      "date": "2025-04-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Matthew Whitaker (AFL Executive Director/Board) confirmed as US Ambassador to NATO April 2025 (52-45 vote). Fourth AFL leader to enter Trump 2.0 government.",
+      "confidence": "confirmed",
+      "id": 6606
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4777,
@@ -1261,371 +1307,5 @@
       "narrative-shield",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "America First Legal Foundation",
-      "connections": [
-        {
-          "target": "Stephen Miller",
-          "type": "corporate",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Miller founded AFL in 2021, serves as President and Executive Director earning $527K. AFL is the litigation arm of his immigration enforcement policy apparatus."
-        },
-        {
-          "target": "Russ Vought",
-          "type": "corporate",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
-        },
-        {
-          "target": "Ed Corrigan",
-          "type": "corporate",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "AFL board director. Also CEO of Conservative Partnership Institute. Led Trump transition domestic policy personnel selection, placing hundreds in government."
-        },
-        {
-          "target": "DonorsTrust",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "DonorsTrust gave AFL $21.3M in 2024 (up from $3.2M in 2023). Anonymous dark money conduit providing 2/3 of AFL's revenue."
-        },
-        {
-          "target": "Reed Rubinstein",
-          "type": "employment",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Rubinstein served as AFL Senior Counselor, Director of Oversight & Investigations, then Senior VP earning $277K. Now confirmed as State Dept Legal Advisor 2025 - AFL-to-government pipeline."
-        },
-        {
-          "target": "Conservative Partnership Institute",
-          "type": "controls",
-          "strength": 1,
-          "evidence_ref": "990 filings",
-          "description": "CPI incubated AFL, shared address 611 Pennsylvania Ave SE, 3 CPI personnel on AFL board (Meadows, Corrigan, Denton)"
-        },
-        {
-          "target": "Citizens for Sanity",
-          "type": "controls",
-          "strength": 1,
-          "evidence_ref": "AFL 990 Schedule R 2022",
-          "description": "AFL controls CfS per 990 Schedule R. Gene Hamilton serves as officer at both."
-        },
-        {
-          "target": "Bradley Impact Fund Inc",
-          "type": "funds",
-          "strength": 1,
-          "evidence_ref": "BIF 990 Schedule I 2022",
-          "description": "BIF granted AFL $27.1M in 2022 (61% of AFL revenue)"
-        },
-        {
-          "target": "DonorsTrust Inc",
-          "type": "funds",
-          "strength": 1,
-          "evidence_ref": "NOTUS reporting, DonorsTrust 990",
-          "description": "DonorsTrust gave AFL $21.3M in 2024, $3.2M in 2023"
-        },
-        {
-          "target": "FlexPoint Media Inc",
-          "type": "contracts_with",
-          "strength": 1,
-          "evidence_ref": "AFL 990 contractor payments",
-          "description": "AFL paid FlexPoint/PG Placements $18M+ for advertising 2022"
-        },
-        {
-          "target": "Conservative Partnership Institute",
-          "type": "funds",
-          "strength": 1,
-          "evidence_ref": "CPI 2021 990 Schedule I",
-          "description": "CPI granted 1,334,105 to AFL in 2021 for mission and program support"
-        },
-        {
-          "target": "Bradley Impact Fund",
-          "type": "funds",
-          "strength": 1,
-          "evidence_ref": "Bradley Impact Fund 2022 990",
-          "description": "Bradley Impact Fund granted 27.1M to AFL in 2022 - single largest grant constituting 61% of AFL revenue"
-        },
-        {
-          "target": "Blake Masters",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "AFL board director. Peter Thiel protege. Bridges Silicon Valley libertarian tech money (Thiel, Musk) to Miller's immigration enforcement apparatus."
-        },
-        {
-          "target": "Judicial Watch",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both demonstrate nonprofit-to-government personnel/strategy pipeline; AFL leaders in Trump admin, Fitton informal adviser to Trump"
-        },
-        {
-          "target": "Heritage Foundation",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Heritage election fraud database and Project 2025 election chapter provide intellectual framework for AFL voter roll litigation"
-        }
-      ],
-      "secondHop": {
-        "Blake Masters": [
-          {
-            "target": "Peter Thiel",
-            "type": "political",
-            "strength": 1,
-            "description": "Masters was COO of Thiel Capital. Thiel funded Masters Senate campaign with .5M+ via FEC. Multiple Thiel Capital employees also donated to Masters campaign."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "advisory",
-            "strength": 1,
-            "description": "Mentor-protege. Masters co-wrote Zero to One with Thiel. Thiel backed Masters AZ Senate campaign 2022. Previously ran Thiel Foundation."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1,
-            "description": "Thiel invested $13.5M+ in Masters 2022 AZ Senate race via Saving Arizona PAC. Masters served as Thiel Capital employee and Thiel Foundation president 2014-2022."
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Howery donated $5,800 to Blake Masters' Senate campaign (2022). Masters is Thiel's former COO at Thiel Capital, co-author of Zero to One. Connects Howery to Thiel political operation beyond Founders Fund."
-          }
-        ],
-        "Bradley Impact Fund": [
-          {
-            "target": "DonorsTrust Inc",
-            "type": "funds",
-            "strength": 1,
-            "description": "DonorsTrust granted 12.7M to Bradley Impact Fund in 2022"
-          }
-        ],
-        "Bradley Impact Fund Inc": [
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "funds",
-            "strength": 1,
-            "description": "BIF gave PILF $3.31M over 2017-2022 for election law initiative"
-          }
-        ],
-        "Citizens for Sanity": [
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1,
-            "description": "Musk donated $50M+ to Citizens for Sanity in 2022 via Building America's Future and Freedom's Future Fund. CFS run by AFL employees, spent $93M on midterm ads."
-          },
-          {
-            "target": "FlexPoint Media Inc",
-            "type": "contracts_with",
-            "strength": 1,
-            "description": "CfS paid FlexPoint $62M+ for advertising in 2022"
-          },
-          {
-            "target": "Freedom's Future Fund Inc",
-            "type": "funds",
-            "strength": 1,
-            "description": "FFF paid CfS $28.7M in 2022 before dissolving. Sister org of Building Americas Future."
-          },
-          {
-            "target": "Building America's Future",
-            "type": "funds",
-            "strength": 1,
-            "description": "BAF paid CfS $43M in 2022 as Musk pass-through"
-          },
-          {
-            "target": "American Commitment",
-            "type": "funds",
-            "strength": 0.7,
-            "description": "American Commitment gave CfS $13.4M in 2022"
-          }
-        ],
-        "Conservative Partnership Institute": [
-          {
-            "target": "DonorsTrust Inc",
-            "type": "funds",
-            "strength": 1,
-            "description": "DonorsTrust granted 1.3M to CPI in 2021 including earmarks for American Moment and Election Integrity"
-          },
-          {
-            "target": "Personnel Policy Operations Inc",
-            "type": "funds",
-            "strength": 1,
-            "description": "CPI granted 880,005 to PPO in 2023"
-          },
-          {
-            "target": "State Freedom Caucus Foundation",
-            "type": "funds",
-            "strength": 1,
-            "description": "CPI granted 568,500 to SFCF in 2023"
-          },
-          {
-            "target": "Foundation for Accountability Integrity and Research in Elections",
-            "type": "funds",
-            "strength": 1,
-            "description": "CPI granted 795,000 to FAIR Elections Fund in 2023"
-          },
-          {
-            "target": "Center for Renewing America",
-            "type": "funds",
-            "strength": 1,
-            "description": "CPI created and funded CRA: 583K direct grant plus 1M+ to c3 arm (Center for American Restoration) in 2021. Shared address at 300 Independence Ave SE DC. Board overlap: Denton and Corrigan serve on both boards. CRA files tax docs in care of CPI."
-          }
-        ],
-        "DonorsTrust Inc": [
-          {
-            "target": "Marble Freedom Trust",
-            "type": "funds",
-            "strength": 1,
-            "description": "MFT granted 59.1M to DonorsTrust in 2020. 85 Fund (MFT grantee) transferred 92M to DonorsTrust in 2022"
-          }
-        ],
-        "Ed Corrigan": [
-          {
-            "target": "Jeff Sessions",
-            "type": "employment",
-            "strength": 1,
-            "description": "Corrigan ran Senate Steering Committee under Sessions as chairman. This predates and underpins the Miller network - Corrigan connected Sessions to the broader conservative movement infrastructure."
-          }
-        ],
-        "Heritage Foundation": [
-          {
-            "target": "Rebekah Mercer",
-            "type": "advisory",
-            "strength": 1,
-            "description": "Mercer is Heritage Foundation trustee; Heritage produced Project 2025 Greenland section. Mercer co-founded 1789 Capital with Greenland-relevant defense portfolio"
-          },
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1,
-            "description": ""
-          },
-          {
-            "target": "Advancing American Freedom",
-            "type": "successor_to",
-            "strength": 1,
-            "description": "AAF absorbed Heritage legal, economic, and data teams in Dec 2025-Jan 2026 mass exodus. 20+ staff moved. Three AAF institutes mirror Heritage centers."
-          },
-          {
-            "target": "Diana Davis Spencer Foundation",
-            "type": "funds",
-            "strength": 1,
-            "description": "Withdrew M 5-year funding commitment from Heritage after antisemitism controversy. CEO Abby Spencer Moffat resigned as Heritage trustee."
-          },
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Heritage election fraud database provides data cited by PILF in voter roll purge cases; von Spakovsky and Adams share DOJ Voting Section alumni network"
-          }
-        ],
-        "Judicial Watch": [
-          {
-            "target": "Tom Fitton",
-            "type": "controls",
-            "strength": 1,
-            "description": "President since 1998, governs $503M in assets with 2 other board members"
-          },
-          {
-            "target": "Robert Popper",
-            "type": "employment",
-            "strength": 1,
-            "description": "Senior Attorney & Director Election Integrity Project since 2013"
-          },
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1,
-            "description": ""
-          },
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1,
-            "description": ""
-          },
-          {
-            "target": "Christina Bobb",
-            "type": "employment",
-            "strength": 1,
-            "description": "Attorney on litigation team, former DHS exec/Trump attorney/RNC election counsel"
-          }
-        ],
-        "Russ Vought": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1,
-            "description": "Vought was AFL board treasurer, now OMB Director. Both involved in Project 2025. Vought controls federal spending (including DHS/ICE budgets) while Miller controls immigration policy."
-          },
-          {
-            "target": "Kash Patel",
-            "type": "political",
-            "strength": 1,
-            "description": "Both connected to Center for Renewing America: Vought as founder, Patel as Senior Fellow for National Security and Intelligence"
-          },
-          {
-            "target": "Jeffrey Clark",
-            "type": "employment",
-            "strength": 1,
-            "description": "Both at CRA before entering govt; CRA funded Election Integrity Network"
-          },
-          {
-            "target": "Ken Cuccinelli",
-            "type": "employment",
-            "strength": 1,
-            "description": "Cuccinelli is Senior Fellow at Vought's Center for Renewing America; both Project 2025 authors; CRA staging ground for election enforcement personnel"
-          },
-          {
-            "target": "Center for Renewing America",
-            "type": "employment",
-            "strength": 1,
-            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
-          }
-        ],
-        "Stephen Miller": [
-          {
-            "target": "Steve Bannon",
-            "type": "political",
-            "strength": 1,
-            "description": "Alliance originated at 2012 dinner with Sessions. Miller sent 900+ emails to Breitbart as de facto assignment editor. Bannon recruited Miller to Trump campaign Jan 2016."
-          },
-          {
-            "target": "Tom Homan",
-            "type": "political",
-            "strength": 1,
-            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "financial",
-            "strength": 1,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Palantir",
-            "type": "financial",
-            "strength": 1,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Gene Hamilton",
-            "type": "employment",
-            "strength": 1,
-            "description": "Co-founders AFL. Both Sessions alumni. Miller (WH) and Hamilton (DHS/DOJ) were the two key Sessions staffers who coordinated immigration policy in Trump 1.0 largely without knowledge of other officials."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

@@ -1,0 +1,412 @@
+{
+  "name": "Lion Holdings Group, LLC",
+  "slug": "lion-holdings-group-llc",
+  "aliases": [],
+  "profile_ids": [
+    "manosphere"
+  ],
+  "generated_at": "2026-05-07T23:07:36.292640",
+  "last_updated": "2026-03-29T04:41:24",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 9,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate_structure": 6,
+      "financial": 5
+    },
+    "connection_types": {
+      "corporate": 9
+    },
+    "last_updated": "2026-03-29T04:41:24"
+  },
+  "findings": [
+    {
+      "id": 8482,
+      "finding_type": "corporate_structure",
+      "summary": "Patrick Bet-David's real estate portfolio is controlled through PBD Real Estate Holdings LLC (separate from Lion Holdings Group) \u2014 managing member of both 5990 Federal Hwy Property LLC ($4.2M, Dec 2021) and 1200 W Cypress Creek Property LLC ($25M, Sep 2024)",
+      "detail": "5990 FEDERAL HWY PROPERTY LLC (L21000509392, formed 2021-12-01) and 1200 W CYPRESS CREEK PROPERTY LLC (L24000341990, formed 2024-08-02) both list PBD Real Estate Holdings LLC as MGRM and Jennifer Bet-David / Thomas Ellsworth as ARs. This is a third distinct holding pillar alongside Lion Holdings (operating) and VIG (investment/securities).",
+      "source_datasets": "fl_registry_db",
+      "confidence": "high",
+      "date_of_event": "2021-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8477,
+      "finding_type": "financial",
+      "summary": "Valuetainment acquired 5100 N. Dixie Highway, Oakland Park FL for $4.4M from IDDI on December 15, 2021 \u2014 the address is listed as the registered address on all VIG SEC filings and the address given for Samuel Carvajal in Lion Holdings officer records",
+      "detail": "12,510 sq ft property on 1.65 acres purchased from IDDI (ID & Design International). Part of a combined ~$9M dual-property Broward acquisition via broker Jaime Sturgis. Converted to podcast studio and production facility. Neighborhood participation meeting for Valuetainment Media development held July 20, 2023.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2021-12-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8480,
+      "finding_type": "corporate_structure",
+      "summary": "Thomas Ellsworth is the signing officer on VIG Series One Form D (2022-10-04) with title 'Managing Director of Issuer's Manager' \u2014 indicating a C-suite or senior executive role across both Lion Holdings operating entities and the VIG investment arm",
+      "detail": "Thomas Ellsworth appears as Authorized Representative on Valuetainment LLC (L21000355704), Valuetainment Commerce LLC (L21000461921), and as Auth on VIG (M21000013160). Form D CIK 0001948390 signed by Ellsworth as Managing Director of Issuer's Manager on 2022-10-04.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2022-10-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8473,
+      "finding_type": "corporate_structure",
+      "summary": "Three entities filed simultaneously on January 18, 2023 with consecutive Florida doc numbers: VT Media Rights LLC (L23000033064), Lion Holdings Group LLC (L23000033065), and Bet-David Consulting LLC (L23000033067) \u2014 all at 1200 W. Cypress Creek Road, all with Lion Holdings as MGRM",
+      "detail": "Formation date 2023-01-18. Three consecutive doc numbers confirm simultaneous batch filing. VT Media Rights (L23000033064) has Lion Holdings Group LLC as MGRM and is believed to hold rights to the VT.com domain acquired by Bet-David circa 2023 (announced at Vault Conference). PHP Agency sold June 2022. Six-month post-close restructuring created operating control structure.",
+      "source_datasets": "fl_registry_db,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2023-01-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8474,
+      "finding_type": "corporate_structure",
+      "summary": "Lion Holdings Group LLC is managing member of five operating entities: Valuetainment LLC, Valuetainment Commerce LLC, Bet-David Consulting LLC, BetDavid Enterprises LLC, and VT Media Rights LLC \u2014 creating a unified control layer between Patrick Bet-David and all operating businesses",
+      "detail": "Confirmed via OpenCorporates entity detail (L23000033065) and local registry records for Valuetainment LLC (L21000355704), Valuetainment Commerce LLC (L21000461921), and VT Media Rights LLC (L23000033064), all showing Lion Holdings Group LLC as MGRM. VT Media Rights added from Cypress Creek address search.",
+      "source_datasets": "opencorporates,fl_registry_db",
+      "confidence": "high",
+      "date_of_event": "2023-01-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8475,
+      "finding_type": "corporate_structure",
+      "summary": "Valuetainment Investments Group LLC (VIG) is deliberately excluded from Lion Holdings Group management \u2014 Patrick Bet-David controls VIG directly, structurally separating securities/investment activity from operating businesses",
+      "detail": "VIG (M21000013160) officer record shows Bet-David as MGR and Thomas Ellsworth as Auth, with no Lion Holdings Group entry. VIG Form D (CIK 0001948390) confirms VIG LLC as the manager of the Series entities, not Lion Holdings.",
+      "source_datasets": "fl_registry_db,sec_edgar",
+      "confidence": "high",
+      "date_of_event": "2023-01-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8481,
+      "finding_type": "financial",
+      "summary": "Patrick Bet-David acquired 10.7-acre mixed-use campus at 1200/1400 NW 62nd Street, Fort Lauderdale (near Executive Airport) for $25M through bankruptcy sale \u2014 includes 20,150 sq ft office building and 18,048 sq ft private airplane hangar with two-bedroom apartment",
+      "detail": "Seller: Cypress Creek Florida (through liquidating trustee B. Riley Advisory Services). Previous debt on property: $16.7M. Property acquired September 2024. Buyer LLC name not disclosed in article. 1200 W CYPRESS CREEK PROPERTY LLC (L24000341990) formed August 2024 is the likely acquisition vehicle; managed by PBD Real Estate Holdings LLC.",
+      "source_datasets": "web_fetch",
+      "confidence": "high",
+      "date_of_event": "2024-09-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8479,
+      "finding_type": "financial",
+      "summary": "Patrick Bet-David has publicly stated Lion Holdings (the umbrella brand) is worth more than $500 million and employs 115 people",
+      "detail": "Attributed to Bet-David in multiple sources. Not independently verified via financial statements or third-party valuation. Inside the Unlikely Success of Patrick Bet-David, The Spectator.",
+      "source_datasets": "web_search",
+      "confidence": "medium",
+      "date_of_event": "2025-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8478,
+      "finding_type": "corporate_structure",
+      "summary": "Simultaneous registered agent change to Corporation Service Company across all Valuetainment/Lion Holdings entities (Feb 27, 2026) combined with Bridge Partners VP Digital Marketing executive search (Jan 2026) are consistent with M&A due diligence or institutional capital raise preparation",
+      "detail": "CSC is predominantly used by companies in institutional transactions. Bridge Partners published VP Digital Marketing position description for Lion Holdings in January 2026 (bridgepartnersllc.com). No transaction announced publicly as of March 2026.",
+      "source_datasets": "fl_registry_db,web_search",
+      "confidence": "medium",
+      "date_of_event": "2026-02-27",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    },
+    {
+      "id": 8422,
+      "finding_type": "financial",
+      "summary": "Lion Holdings Group LLC is a pure structural broker (brokerage=1.0, degree=6, betweenness=0.012) \u2014 sole link between Patrick Bet-David and all five Valuetainment operating entities; neighbors have zero interconnection",
+      "detail": "Lion Holdings has six connections (Patrick Bet-David, Bet-David Consulting, Valuetainment Commerce, BetDavid Enterprises, Jennifer Bet-David, Casey Verkouteren) with clustering coefficient 0.0 and brokerage 1.0. This is the textbook topology of a holding company liability firewall: it is the single required node through which all Valuetainment operating structure flows, and none of the downstream entities have direct edges to each other or to Bet-David except through Lion Holdings. Formed January 18, 2023 (same day as Bet-David Consulting, consecutive FL doc numbers), six months after PHP Agency sale closed. The simultaneous registered agent change to Corporation Service Company in February 2026 across all entities signals likely M&A or fundraising activity.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:51:44",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8435,
+      "finding_type": "financial",
+      "summary": "Lion Holdings Group LLC is a pure structural broker (brokerage=1.0, degree=6) \u2014 sole link between Patrick Bet-David and all five Valuetainment operating entities; FL doc L23000033065, formed same day as Bet-David Consulting with consecutive doc numbers six months after PHP Agency sale",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:58:30",
+      "target_name": "Lion Holdings Group, LLC",
+      "profile_id": "manosphere",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4236,
+      "person_a": "Lion Holdings Group, LLC",
+      "person_b": "Bet-David Consulting, LLC",
+      "relationship_type": "corporate",
+      "description": "Lion Holdings Group is the Managing Member of Bet-David Consulting. Both filed on 01/18/2023 with consecutive FL document numbers.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "Bet-David Consulting, LLC",
+      "other_person_slug": "bet-david-consulting-llc",
+      "evidence": []
+    },
+    {
+      "id": 4237,
+      "person_a": "Lion Holdings Group, LLC",
+      "person_b": "Valuetainment Commerce, LLC",
+      "relationship_type": "corporate",
+      "description": "Lion Holdings Group is the Managing Member of Valuetainment Commerce, LLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "Valuetainment Commerce, LLC",
+      "other_person_slug": "valuetainment-commerce-llc",
+      "evidence": []
+    },
+    {
+      "id": 4238,
+      "person_a": "Lion Holdings Group, LLC",
+      "person_b": "BetDavid Enterprises LLC",
+      "relationship_type": "corporate",
+      "description": "Lion Holdings Group is the Managing Member of BetDavid Enterprises LLC (effective 2017, FL-registered 2023).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "BetDavid Enterprises LLC",
+      "other_person_slug": "betdavid-enterprises-llc",
+      "evidence": []
+    },
+    {
+      "id": 4235,
+      "person_a": "Patrick Bet-David",
+      "person_b": "Lion Holdings Group, LLC",
+      "relationship_type": "corporate",
+      "description": "Patrick Bet-David is the Managing Member (MGRM) of Lion Holdings Group, LLC \u2014 the apex holding entity for all Valuetainment operating businesses",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "Patrick Bet-David",
+      "other_person_slug": "patrick-bet-david",
+      "evidence": []
+    },
+    {
+      "id": 4242,
+      "person_a": "Jennifer Bet-David",
+      "person_b": "Lion Holdings Group, LLC",
+      "relationship_type": "corporate",
+      "description": "Jennifer Bet-David (Patrick's wife) is an Authorized Representative on Lion Holdings Group and all three operating entities managed by it.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "Jennifer Bet-David",
+      "other_person_slug": "jennifer-bet-david",
+      "evidence": []
+    },
+    {
+      "id": 4287,
+      "person_a": "Lion Holdings Group, LLC",
+      "person_b": "Valuetainment, LLC",
+      "relationship_type": "corporate",
+      "description": "Lion Holdings Group LLC is the managing member (MGRM) of Valuetainment LLC \u2014 confirmed via local registry officer record",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "profile_id": "manosphere",
+      "other_person": "Valuetainment, LLC",
+      "other_person_slug": "valuetainment-llc",
+      "evidence": []
+    },
+    {
+      "id": 4295,
+      "person_a": "Lion Holdings Group, LLC",
+      "person_b": "VT Media Rights, LLC",
+      "relationship_type": "corporate",
+      "description": "Lion Holdings Group LLC is managing member (MGRM) of VT Media Rights LLC \u2014 filed same day with consecutive doc number L23000033064, one before Lion Holdings (L23000033065)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "profile_id": "manosphere",
+      "other_person": "VT Media Rights, LLC",
+      "other_person_slug": "vt-media-rights-llc",
+      "evidence": []
+    },
+    {
+      "id": 4294,
+      "person_a": "Thomas Ellsworth",
+      "person_b": "Lion Holdings Group, LLC",
+      "relationship_type": "corporate",
+      "description": "Thomas Ellsworth is Authorized Representative of Lion Holdings operating entities AND signed the VIG Series One Form D as Managing Director of Issuer's Manager \u2014 bridging the operating and investment arms",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 04:41:24",
+      "profile_id": "manosphere",
+      "other_person": "Thomas Ellsworth",
+      "other_person_slug": "thomas-ellsworth",
+      "evidence": []
+    },
+    {
+      "id": 4243,
+      "person_a": "Casey Verkouteren",
+      "person_b": "Lion Holdings Group, LLC",
+      "relationship_type": "corporate",
+      "description": "Casey Verkouteren (VP Finance, Valuetainment) is an Authorized Representative on Lion Holdings Group only \u2014 the apex holding company, not the operating subsidiaries.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 03:47:37",
+      "profile_id": "manosphere",
+      "other_person": "Casey Verkouteren",
+      "other_person_slug": "casey-verkouteren",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-12-01",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Patrick Bet-David's real estate portfolio is controlled through PBD Real Estate Holdings LLC (separate from Lion Holdings Group) \u2014 managing member of both 5990 Federal Hwy Property LLC ($4.2M, Dec 2021) and 1200 W Cypress Creek Property LLC ($25M, Sep 2024)",
+      "confidence": "high",
+      "id": 8482
+    },
+    {
+      "date": "2021-12-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Valuetainment acquired 5100 N. Dixie Highway, Oakland Park FL for $4.4M from IDDI on December 15, 2021 \u2014 the address is listed as the registered address on all VIG SEC filings and the address given for Samuel Carvajal in Lion Holdings officer records",
+      "confidence": "high",
+      "id": 8477
+    },
+    {
+      "date": "2022-10-04",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Thomas Ellsworth is the signing officer on VIG Series One Form D (2022-10-04) with title 'Managing Director of Issuer's Manager' \u2014 indicating a C-suite or senior executive role across both Lion Holdings operating entities and the VIG investment arm",
+      "confidence": "high",
+      "id": 8480
+    },
+    {
+      "date": "2023-01-18",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Three entities filed simultaneously on January 18, 2023 with consecutive Florida doc numbers: VT Media Rights LLC (L23000033064), Lion Holdings Group LLC (L23000033065), and Bet-David Consulting LLC (L23000033067) \u2014 all at 1200 W. Cypress Creek Road, all with Lion Holdings as MGRM",
+      "confidence": "high",
+      "id": 8473
+    },
+    {
+      "date": "2023-01-18",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Lion Holdings Group LLC is managing member of five operating entities: Valuetainment LLC, Valuetainment Commerce LLC, Bet-David Consulting LLC, BetDavid Enterprises LLC, and VT Media Rights LLC \u2014 creating a unified control layer between Patrick Bet-David and all operating businesses",
+      "confidence": "high",
+      "id": 8474
+    },
+    {
+      "date": "2023-01-18",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Valuetainment Investments Group LLC (VIG) is deliberately excluded from Lion Holdings Group management \u2014 Patrick Bet-David controls VIG directly, structurally separating securities/investment activity from operating businesses",
+      "confidence": "high",
+      "id": 8475
+    },
+    {
+      "date": "2024-09-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Patrick Bet-David acquired 10.7-acre mixed-use campus at 1200/1400 NW 62nd Street, Fort Lauderdale (near Executive Airport) for $25M through bankruptcy sale \u2014 includes 20,150 sq ft office building and 18,048 sq ft private airplane hangar with two-bedroom apartment",
+      "confidence": "high",
+      "id": 8481
+    },
+    {
+      "date": "2025-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Patrick Bet-David has publicly stated Lion Holdings (the umbrella brand) is worth more than $500 million and employs 115 people",
+      "confidence": "medium",
+      "id": 8479
+    },
+    {
+      "date": "2026-02-27",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Simultaneous registered agent change to Corporation Service Company across all Valuetainment/Lion Holdings entities (Feb 27, 2026) combined with Bridge Partners VP Digital Marketing executive search (Jan 2026) are consistent with M&A due diligence or institutional capital raise preparation",
+      "confidence": "medium",
+      "id": 8478
+    }
+  ]
+}

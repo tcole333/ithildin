@@ -1,0 +1,313 @@
+{
+  "name": "IHS Holding Ltd",
+  "slug": "ihs-holding-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.381682",
+  "last_updated": "2026-03-29T19:47:40",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 1,
+      "corporate_structure": 2,
+      "insider_transaction": 1,
+      "governance": 3
+    },
+    "connection_types": {
+      "corporate": 8
+    },
+    "last_updated": "2026-03-29T19:47:40"
+  },
+  "findings": [
+    {
+      "id": 8543,
+      "finding_type": "financial",
+      "summary": "IFC (World Bank Group) holds 5.7% of IHS Holding Ltd via a Schedule 13G covering a 12/31/2021 triggering event filed ~4 years late, citing international organization immunity. The filing may have been triggered by HFIA compliance.",
+      "detail": "International Finance Corporation filed Schedule 13G (0001193125-26-055588) on 2026-02-17 disclosing 5.7% beneficial ownership (19,158,270 shares) of IHS Holding Ltd. The triggering event date is 12/31/2021 \u2014 approximately 4 years before the filing date. IFC explicitly invokes international organization immunity and states the filing is voluntary. IFC holds 11,661,983 shares directly and 7,496,287 through IFC Global Infrastructure Fund LP via IFC Asset Management Company.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8541,
+      "finding_type": "corporate_structure",
+      "summary": "IHS Holding Ltd (Mauritius, NYSE:IHS) has an undisclosed Cayman Islands ultimate parent (IHS Holding Limited) that is not directly registered with the SEC and functions as the LTIP grantor for management compensation.",
+      "detail": "EX-8.1 of IHS Holding Ltd's 2025 annual report (20-F, accession 0001104659-26-028162) explicitly designates 'IHS Holding Limited (ultimate parent)' as incorporated in the Cayman Islands. The SEC-registered entity (IHS Holding Ltd) is a Mauritius holdco below the Cayman parent. The Cayman entity is also the LTIP vehicle named in Rule 144 filings as the source of management share awards.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-16",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8547,
+      "finding_type": "corporate_structure",
+      "summary": "IHS Holding uses a 4-layer offshore structure: Cayman (ultimate parent) \u2192 Mauritius (SEC registrant + 10 country holdcos) \u2192 Netherlands cooperatives and UAE entities \u2192 African/LatAm operating companies. BVI entity also present.",
+      "detail": "IHS Holding Ltd's 20-F subsidiary exhibit (EX-8.1) lists 47 subsidiaries across 15 jurisdictions including: Cayman Islands (ultimate parent), Mauritius (10+ holdcos), Netherlands (4 cooperatives/BVs used as interco and tax-efficient structures), UAE (4 entities including FZE), BVI (1 entity: Centennial Towers of Colombia Ltd.), UK, USA, and operating entities in Nigeria, Cameroon, C\u00f4te d'Ivoire, Zambia, Rwanda, South Africa, Egypt, Colombia, Brazil. Netherlands cooperative (Co\u00f6peratief U.A.) structures are commonly used for tax-efficient interco flows.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8542,
+      "finding_type": "insider_transaction",
+      "summary": "CEO, CFO, and Nigeria CEO sold shares on HFIA day-one (2026-03-18) as sell-to-cover tax transactions on LTIP vesting. Mechanical explanation is documented in Rule 144 filings; timing is notable but not conclusive of misconduct.",
+      "detail": "Three insiders (Sam Darwish CEO, Stephen Howden CFO, Mohamad Darwish Nigeria CEO) sold ordinary shares on 2026-03-18 \u2014 the first day of HFIA Section 16 reporting requirements \u2014 and simultaneously filed Form 3 initial beneficial ownership statements. Three Rule 144 filings confirm these were sell-to-cover transactions for LTIP tax obligations; shares were acquired from IHS Holding Limited (Cayman) on 03/15-18/2026. Proceeds: CEO ~$710K, CFO ~$324K, Nigeria CEO ~$132K.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8544,
+      "finding_type": "governance",
+      "summary": "Two insiders filed Form 3 with role listed as 'See Remarks' \u2014 including William Saad, who holds 3.5M indirect shares (~1%). Role opacity and unidentified indirect holding vehicle are governance flags.",
+      "detail": "Two Form 3 filers \u2014 William Saad (CIK 0002112444) and Ayotade Oyinlola (CIK 0001970538) \u2014 listed their role with the issuer as 'See Remarks' rather than a named title. William Saad holds 276,694 direct shares and 3,466,169 indirect ordinary shares (~1.0% of outstanding). His indirect holding is the third-largest among all IHS insiders after the CEO. Neither his actual title nor the vehicle holding his indirect shares is identified in reviewed EDGAR filings.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8545,
+      "finding_type": "governance",
+      "summary": "CEO Sam Darwish and Nigeria CEO Mohamad Darwish share a surname. A possible family relationship is unconfirmed but would be a material related-party disclosure issue.",
+      "detail": "Sam Darwish (Chairman & CEO, CIK 0002014938) and Mohamad Darwish (EVP IHS Nigeria CEO, CIK 0002014864) share an uncommon surname. Both filed Form 3 on 2026-03-18; both sold shares the same day. A familial relationship \u2014 if confirmed \u2014 would constitute a related-party relationship not disclosed in EDGAR ownership filings. Mohamad Darwish holds 1,620,294 indirect shares whose holding vehicle is unidentified.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-18",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8546,
+      "finding_type": "governance",
+      "summary": "IHS board director Bashir El-Rufai is son of former Kaduna Governor Nasir El-Rufai (confirmed PEP). El-Rufai holds 1M+ indirect shares via unidentified vehicle. IHS has substantial Nigeria operations including in Kaduna.",
+      "detail": "Bashir Ahmad El-Rufai (CIK 0002110468) filed Form 3 as a director of IHS Holding Ltd with 37,112 direct shares and 1,047,404 indirect shares. The indirect holding vehicle is unidentified. His father, Nasir Ahmad El-Rufai (DOB 1960-02-16), is confirmed in OpenSanctions as a PEP (Wikidata Q6082944) \u2014 former Kaduna State Governor (2015-2023) and former FCT Minister. IHS Holding operates extensively in Nigeria including Kaduna State. No adverse finding against Bashir El-Rufai personally.",
+      "source_datasets": "edgar,opensanctions",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "target_name": "IHS Holding Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4338,
+      "person_a": "Sam Darwish",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "Sam Darwish is Director, Chairman and CEO of IHS Holding Ltd, and holds 12,746,233 ordinary shares indirectly, sourced from the Cayman Islands ultimate parent IHS Holding Limited. LTIP awards were granted by IHS Holding Limited per Rule 144 filings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Sam Darwish",
+      "other_person_slug": "sam-darwish",
+      "evidence": []
+    },
+    {
+      "id": 4339,
+      "person_a": "IHS Holding Limited (Cayman Islands)",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "IHS Holding Limited (Cayman Islands) is identified as the ultimate parent of IHS Holding Ltd per EX-8.1 of the 2025 20-F. The Cayman entity also grants LTIP awards to IHS Holding Ltd management. Beneficial ownership of the Cayman entity is not disclosed in reviewed filings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "IHS Holding Limited (Cayman Islands)",
+      "other_person_slug": "ihs-holding-limited-cayman-islands",
+      "evidence": []
+    },
+    {
+      "id": 4340,
+      "person_a": "International Finance Corporation",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "IFC holds 5.7% of IHS Holding Ltd (19,158,270 shares). IFC is a World Bank Group member and filed Schedule 13G on 2026-02-17 covering a 12/31/2021 event, approximately 4 years late, invoking international organization immunity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "International Finance Corporation",
+      "other_person_slug": "international-finance-corporation",
+      "evidence": []
+    },
+    {
+      "id": 4344,
+      "person_a": "Mohamad Darwish",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "Mohamad Darwish is EVP IHS Nigeria CEO and also holds 1,620,294 ordinary shares indirectly via unidentified vehicle. He sold 16,153 shares on HFIA day-one (2026-03-18) as sell-to-cover LTIP tax transaction sourced from IHS Holding Limited (Cayman).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Mohamad Darwish",
+      "other_person_slug": "mohamad-darwish",
+      "evidence": []
+    },
+    {
+      "id": 4346,
+      "person_a": "John Ellis Bush",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "John Ellis Bush (Jeb Bush) sits on the IHS Holding Ltd board as an independent director with 118,556 shares \u2014 an allocation larger than other independent directors (37,112 each). The reason for the differential is not documented in reviewed EDGAR filings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "John Ellis Bush",
+      "other_person_slug": "john-ellis-bush",
+      "evidence": []
+    },
+    {
+      "id": 4348,
+      "person_a": "Bashir Ahmad El-Rufai",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "Bashir El-Rufai holds 1,047,404 IHS ordinary shares indirectly via an unidentified vehicle \u2014 a notably large indirect position for an independent director. The vehicle is not named in EDGAR filings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Bashir Ahmad El-Rufai",
+      "other_person_slug": "bashir-ahmad-el-rufai",
+      "evidence": []
+    },
+    {
+      "id": 4349,
+      "person_a": "Mustafa Tharoo",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "Mustafa Tharoo (EVP, Group General Counsel) has 667,155 direct shares \u2014 the largest direct holding among non-CEO officers. As GC he would be responsible for overseeing HFIA compliance disclosures.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "Mustafa Tharoo",
+      "other_person_slug": "mustafa-tharoo",
+      "evidence": []
+    },
+    {
+      "id": 4347,
+      "person_a": "William Saad",
+      "person_b": "IHS Holding Ltd",
+      "relationship_type": "corporate",
+      "description": "William Saad filed Form 3 with role 'See Remarks' and holds 3,466,169 shares indirectly \u2014 the largest indirect position among non-CEO insiders. The holding vehicle and his actual role are unidentified.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:47:40",
+      "profile_id": "hfia",
+      "other_person": "William Saad",
+      "other_person_slug": "william-saad",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-02-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "IFC (World Bank Group) holds 5.7% of IHS Holding Ltd via a Schedule 13G covering a 12/31/2021 triggering event filed ~4 years late, citing international organization immunity. The filing may have been triggered by HFIA compliance.",
+      "confidence": "high",
+      "id": 8543
+    },
+    {
+      "date": "2026-03-16",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "IHS Holding Ltd (Mauritius, NYSE:IHS) has an undisclosed Cayman Islands ultimate parent (IHS Holding Limited) that is not directly registered with the SEC and functions as the LTIP grantor for management compensation.",
+      "confidence": "high",
+      "id": 8541
+    },
+    {
+      "date": "2026-03-16",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "IHS Holding uses a 4-layer offshore structure: Cayman (ultimate parent) \u2192 Mauritius (SEC registrant + 10 country holdcos) \u2192 Netherlands cooperatives and UAE entities \u2192 African/LatAm operating companies. BVI entity also present.",
+      "confidence": "high",
+      "id": 8547
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "insider_transaction",
+      "summary": "CEO, CFO, and Nigeria CEO sold shares on HFIA day-one (2026-03-18) as sell-to-cover tax transactions on LTIP vesting. Mechanical explanation is documented in Rule 144 filings; timing is notable but not conclusive of misconduct.",
+      "confidence": "high",
+      "id": 8542
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Two insiders filed Form 3 with role listed as 'See Remarks' \u2014 including William Saad, who holds 3.5M indirect shares (~1%). Role opacity and unidentified indirect holding vehicle are governance flags.",
+      "confidence": "high",
+      "id": 8544
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "CEO Sam Darwish and Nigeria CEO Mohamad Darwish share a surname. A possible family relationship is unconfirmed but would be a material related-party disclosure issue.",
+      "confidence": "medium",
+      "id": 8545
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "IHS board director Bashir El-Rufai is son of former Kaduna Governor Nasir El-Rufai (confirmed PEP). El-Rufai holds 1M+ indirect shares via unidentified vehicle. IHS has substantial Nigeria operations including in Kaduna.",
+      "confidence": "high",
+      "id": 8546
+    }
+  ]
+}

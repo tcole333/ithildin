@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.927460",
+  "generated_at": "2026-05-07T23:07:36.290288",
   "last_updated": "2026-02-14T21:50:09",
   "stats": {
     "total_findings": 11,
@@ -179,7 +179,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 10-K CIK 0001128281 FY2024",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1128281",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -301,7 +301,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 10-K CIK 0001128281 FY2024",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1128281",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -548,159 +548,6 @@
     ],
     "applicable_models": [
       "enabler-gradient"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Jesse Masyr",
-      "connections": [
-        {
-          "target": "Jeffrey Epstein",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "EFTA01325008",
-          "description": "Masyr was named partner at Wachtel & Masyr LLP which represented Epstein in litigation (96 CIV 8307 SDNY) and served as registered process agent for J. Epstein Company Inc. since 1988. Masyr served on the firm management committee with Steven J. Cohen who appeared as Epstein's attorney of record."
-        },
-        {
-          "target": "William Wachtel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC EDGAR 0001144204-08-025959",
-          "description": "Co-named partners at Wachtel & Masyr LLP. Wachtel was co-founder and managing partner since 1984. Masyr was on the management committee. They jointly controlled the firm that served as Epstein corporate counsel and held equity in FirstFlight/Saker Aviation. After Masyr's departure, firm became Wachtel & Missry."
-        },
-        {
-          "target": "Darren Indyke",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "EFTA01332942",
-          "description": "Both connected through Gold & Wachtel / Wachtel & Masyr law firm ecosystem. Gold & Wachtel LLP was founded 1984 and served as Epstein's registered agent. The firm produced Darren Indyke who became Epstein's primary attorney and estate executor. Masyr was a named partner and management committee member at the firm."
-        }
-      ],
-      "secondHop": {
-        "Darren Indyke": [
-          {
-            "target": "Leon Black",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Indyke handled legal matters for both Epstein and Black. Conference call details (EFTA02340224) show joint calls between Epstein, Black-related parties, Brad Karp, Brad Wechsler, and Patrick Fenn."
-          },
-          {
-            "target": "Gratitude America Ltd",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Indyke served as Treasurer (2012-2015) then Vice President/Director (2017-2019). Signed account closure letter Jan 10, 2019. Address: 575 Lexington Ave 4th Floor NYC then 9053 Estate Thomas USVI. Zero compensation."
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "In-house attorney at Southern Financial LLC for 15+ years. Secretary at STC, Authorized Signatory at SFL. Co-executor of estate. Beneficiary of Butterfly Trust. Trustee of 1953 Trust and Epstein 2019 Trust."
-          },
-          {
-            "target": "Richard Kahn",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-beneficiaries of Butterfly Trust. Co-trustees of 1953 Trust. Co-executors of estate. Both at 575 Lexington Ave 4th Floor. Co-occur in 830 LMSBAND files."
-          },
-          {
-            "target": "Stewart Oldfield",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Indyke corresponded extensively with Oldfield at Deutsche Bank on Prytanee LLC, CDD forms, account management. 381 LMSBAND co-occurrences."
-          }
-        ],
-        "Jeffrey Epstein": [
-          {
-            "target": "Leon Black",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
-          },
-          {
-            "target": "Kathy Ruemmler",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
-          },
-          {
-            "target": "Reid Weingarten",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "1984-08",
-        "label": "Gold & Wachtel LLP founded August 1984 was predecessor to Wachtel & Masyr LLP - firm lineage Gold & Wachtel -> Wachtel & Masyr -> Wachtel & Missry",
-        "type": "identity",
-        "evidence_ref": null,
-        "id": 2227
-      },
-      {
-        "date": "1988",
-        "label": "Gold & Wachtel (predecessor to Wachtel & Masyr) served as registered process agent for J. Epstein's Company Inc. from 1988",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 2201
-      },
-      {
-        "date": "1988-11",
-        "label": "SYNTHESIS: Gold & Wachtel/Wachtel & Masyr was Epstein's primary NY corporate law firm from at least 1988, predating even the Bear Stearns era",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 2250
-      },
-      {
-        "date": "1996",
-        "label": "Wachtel & Masyr LLP represented Jeffrey Epstein in 1996-98 eviction case at 34 East 69th Street (former Iranian consulate)",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 2205
-      },
-      {
-        "date": "2007",
-        "label": "FirstFlight (precursor to Saker Aviation) managed aircraft owned by entity involving directors Wachtel, Iovino, and Siegel - 6.8M in charter revenue in 2007",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2217
-      },
-      {
-        "date": "2008",
-        "label": "Saker Aviation operated Downtown Manhattan Heliport from 2008-2025, offering fuel and corporate charter/helicopter services",
-        "type": "identity",
-        "evidence_ref": null,
-        "id": 2215
-      },
-      {
-        "date": "2011-08-31",
-        "label": "Wachtel & Masyr LLP held equity stake in FirstFlight/Saker Aviation through private placement",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2220
-      },
-      {
-        "date": "2020",
-        "label": "Jesse Masyr left Wachtel & Masyr/Missry and now practices at Fox Rothschild LLP in New York",
-        "type": "identity",
-        "evidence_ref": null,
-        "id": 2224
-      }
     ]
   }
 }

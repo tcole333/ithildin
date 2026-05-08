@@ -6,23 +6,24 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.935447",
-  "last_updated": "2026-03-09T04:54:40",
+  "generated_at": "2026-05-07T23:07:36.278694",
+  "last_updated": "2026-03-23T19:02:27",
   "stats": {
-    "total_findings": 14,
-    "total_connections": 6,
+    "total_findings": 11,
+    "total_connections": 10,
     "total_entities": 0,
     "finding_types": {
       "financial": 9,
-      "intelligence": 4,
-      "identity": 1
+      "intelligence": 2
     },
     "connection_types": {
       "financial": 4,
+      "corporate": 2,
+      "owns": 2,
       "intelligence": 1,
       "political": 1
     },
-    "last_updated": "2026-03-09T04:54:40"
+    "last_updated": "2026-03-23T19:02:27"
   },
   "findings": [
     {
@@ -42,81 +43,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Fox Business; TechCrunch Dec 2025; ReadSludge Jun 2025; 1789 Capital Wikipedia",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4709,
-      "finding_type": "intelligence",
-      "summary": "Office of Strategic Capital (OSC) deep dive: Pentagon finance office established Dec 2022 by SecDef Austin to attract private capital for national security tech. Authorized $984M in loans (FY24-25). Largest single loan: $620M to Vulcan Elements (rare earth magnets) \u2014 company backed by 1789 Capital (Trump Jr partner) which invested just 3 months prior. Warren flagged multiple conflicts: OSC consultants Linda Lourie (WestExec Advisors, advises tech/defense companies) and Kirsten Bartok Touw (New Vista Capital, supports defense/logistics companies) hired as 'special government employees' with lighter ethics rules. OSC now reports to Emil Michael's USD(R&E) office after Pentagon consolidated DIU and CDAO under R&E.",
-      "detail": "OSC structural conflicts:\n\n1. CONSULTANT CONFLICTS: Warren identified two consultants hired as Special Government Employees (SGEs):\n   - Linda Lourie: Senior adviser at WestExec Advisors (founded by Tony Blinken, advises tech/defense companies seeking government contracts). WestExec helps companies navigate Pentagon procurement while Lourie simultaneously advises the Pentagon on which companies to fund.\n   - Kirsten Bartok Touw: Managing partner at New Vista Capital (supports emerging aerospace, defense, and logistics companies). Her fund invests in the very companies OSC is designed to lend to.\n   SGEs face lighter ethics rules than full federal employees \u2014 not subject to full myriad of ethics laws. Warren called this 'an opportunity to refresh their Rolodexes without appropriate guardrails.'\n\n2. VULCAN ELEMENTS CASE STUDY: \n   - Aug 2025: Vulcan raises $65M from private investors including 1789 Capital (Trump Jr is partner)\n   - Nov 2025: OSC awards Vulcan $620M conditional loan (largest OSC loan ever) + $50M Commerce Dept equity\n   - 3-month turnaround from VC investment to $620M government loan. 1789 Capital has had 4+ portfolio companies win government contracts in 2025.\n   - Vulcan CEO denied knowing Trump Jr personally. But the pattern is: 1789 invests \u2192 government contract follows.\n\n3. ORGANIZATIONAL CONSOLIDATION:\n   Pentagon consolidated DIU (Defense Innovation Unit) and CDAO (Chief Digital and AI Office) under USD(R&E). This means Emil Michael \u2014 former Coatue Management advisor with tech industry relationships \u2014 now oversees the primary mechanisms for channeling Pentagon capital to startups: OSC (loans), DIU (prototyping/contracts), and CDAO (AI procurement).\n\n4. STRUCTURAL ANALYSIS:\n   The OSC creates a feedback loop: VC funds invest in startups \u2192 OSC provides government loans that de-risk those investments \u2192 startups use loans to scale \u2192 government awards production contracts \u2192 VC fund returns multiply. The same political network that appoints OSC leadership also manages the funds that benefit from OSC decisions.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 19:36:04",
-      "target_name": "Office of Strategic Capital",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Warren.senate.gov letter March 2025, The Hill July 2023, DefenseScoop Oct 2024, TechCrunch Dec 2025, GovCIO Media (DIU/CDAO consolidation), Bloomberg Nov 2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4727,
-      "finding_type": "financial",
-      "summary": "Massive expansion of US munitions industrial base underway as Iran war creates urgent demand: (1) Lockheed Martin Munitions Acceleration Center in Camden AR for THAAD/PAC-3 surge \u2014 THAAD production quadrupling from 96 to 400/yr; (2) Anduril Arsenal-1 in Ohio \u2014 $1B, 5M sqft factory targeting Jul 2026 production start for Fury, Roadrunner, Barracuda autonomous weapons + 6,000 solid rocket motors/yr by end 2026; (3) Anduril opened new $75M solid rocket motor facility in McHenry MS (Aug 2025) \u2014 first new SRM facility in US in 50 years; (4) Lockheed JASSM/LRASM capacity to 3,960/yr by late 2026; (5) Solid rocket motor supply chain 6x expansion. Multi-billion dollar capital investments spanning 20+ facilities.",
-      "detail": "The industrial base expansion was underway before the Iran war but the conflict now provides overwhelming justification for acceleration and additional funding. Key investment patterns: (1) Traditional primes (Lockheed, RTX, Northrop) expanding existing facilities with government co-investment; (2) New entrants (Anduril, SpektreWorks) building greenfield capacity optimized for autonomous/low-cost systems; (3) Supply chain investments (Vulcan Elements rare earths, solid rocket motors) backed by 1789 Capital / Trump Jr connections; (4) Arsenal-1 will produce 'tens of thousands' of autonomous weapons annually \u2014 the same systems now being combat-tested in Iran. The war validates the investment thesis and creates political cover for accelerated spending.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 20:23:03",
-      "target_name": "Munitions Industrial Base Surge",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Lockheed Martin features 2025, Anduril press releases 2025-2026, Army Recognition 2026, Defense One 2026-02, Breaking Defense 2025-11",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4730,
-      "finding_type": "intelligence",
-      "summary": "SYNTHESIS: The Iran war operationalizes and validates the entire defense tech capture structure mapped in the investigation. Pre-war positioning (2024-early 2026): DOGE cleared traditional contractors ($71B terminated), 'commercial first' policy favored tech companies, Golden Dome created $151-542B target, RTX framework agreements signed Feb 4, reconciliation allocated $152B (accelerated to 1 year), 1789 Capital portfolio companies received $735M+ in contracts. War began Feb 28: Palantir AI directed strikes, Anduril Lattice managed drone swarms, SpaceX/Starshield provided comms, LUCAS drone deployed in 7 months from demo. Result: defense stocks at all-time highs, supplemental funding discussion begun, Gulf allies dependent on US for interceptor resupply, every missile expended is a future contract. The people who set the policy, own the companies, and profit from the stocks are the same network.",
-      "detail": "The wartime capture cycle operates as follows: (1) APPOINTEES set policy: Emil Michael (USD R&E) oversees MDA and missile defense requirements, chairs Missile Defense Executive Board; Pete Hegseth (SecDef) directs commercial-first procurement and fast-track weapons; Stephen Feinberg (DepSecDef) shapes threat assessments; (2) POLICY creates demand: Golden Dome requirements, DOGE elimination of competitors, framework agreements for expanded production; (3) WAR depletes inventory: Operation Epic Fury consumes hundreds of Tomahawks, JASSMs, SM-3/SM-6/PAC-3/THAAD interceptors; (4) DEPLETION triggers contracts: RTX framework agreements activate, supplemental funding requested, Gulf FMS orders; (5) COMPANIES profit: RTX, Lockheed, Palantir, Anduril, SpaceX stocks surge; (6) INVESTORS profit: 1789 Capital (Trump Jr), Founders Fund (Thiel), a16z (Andreessen), Coatue (Laffont) hold positions in beneficiary companies; (7) INSIDERS trade: Congress members with defense stock holdings vote on war funding, Polymarket bets placed with apparent foreknowledge. This is not a conspiracy theory \u2014 it is the documented, structural result of eliminating ethics constraints while placing financially interested parties in decision-making positions during wartime.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 20:23:23",
-      "target_name": "Wartime Capture Synthesis",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Composite synthesis from 30+ sources across all research tasks in this session",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -166,7 +92,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR Form D filings CIK 0001965234 (via 13f.info/form-d/0001965234-1789-capital-fund-i-lp); Bloomberg Sep 2025 reporting; Fox Business Dec 2025 reporting",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1965234",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -192,31 +118,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Wikipedia 1789 Capital article (compiled from Bloomberg, Reuters, TechCrunch, CNN Business reporting); PitchBook investor profile; CBInsights portfolio data",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4757,
-      "finding_type": "identity",
-      "summary": "Omeed Malik background and SPAC empire: Born ~1979-80 NJ, Colgate BA, Emory JD. Career: MF Global (SVP, reorganized global distribution), Bank of America Merrill Lynch (prime brokerage exec, exited 2018, settled defamation claim against BofA). Founded Farvahar Partners (merchant bank). Co-founded 1789 Capital (Oct 2022) with Chris Buskirk and Rebekah Mercer. SPAC vehicles: Colombier Acquisition Corp I (chairman/CEO, 2021) merged with PSQ Holdings/PublicSq; Colombier Acquisition Corp II merged with GrabAGun (online firearms). Spoke at Doha Forum and SCALE Global summits. No direct connection to Erebor Bank investor base found.",
-      "detail": "Malik is the operational driver of 1789 Capital -- Mercer provides capital and conservative network access, Buskirk provides media/intellectual conservative credibility (he runs American Greatness), and Trump Jr provides political access. Malik's MF Global stint is notable -- MF Global collapsed in 2011 under Jon Corzine in the 8th largest US bankruptcy, with 1.6B in customer funds missing. Malik left before the collapse. His defamation claim against BofA after departing prime brokerage in 2018 was settled, suggesting the departure was contentious. The SPAC vehicles (Colombier I and II) are separate from 1789 Capital funds but represent the same conservative investment thesis. Partners also include Paul Abrahimzadeh, Andy Nasser, Joe Voboril, Jordan Cohen (COO), Emanuel Zareh.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 00:51:42",
-      "target_name": "Omeed Malik",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Wikipedia Omeed Malik article; Farvahar Partners website; 1789 Capital website team page; Axios Nov 2023 SPAC reporting",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -385,6 +286,39 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 6714,
+      "finding_type": "financial",
+      "summary": "Anti-ESG investment firm co-founded by Buskirk, Omeed Malik, and Rebekah Mercer with 150M initial fund; 1789 Capital Fund I GP LLC registered in FL from DE at 214 Brazilian Ave Palm Beach",
+      "detail": "1789 Capital is an anti-ESG investment firm promoting patriotic capitalism. Co-founded by Chris Buskirk (CIO), Omeed Malik, and Rebekah Mercer. Initial fund of 150M. First investment in Last Country Inc (Tucker Carlson and Neil Patel media company). LittleSis aliases include Colombier Acquisition Corp SPAC. Corporate entities: 1789 Capital Management LLC (DE, with branches in NJ, FL, AZ). 1789 Capital Fund I GP LLC registered in FL (foreign LLC from DE) at 214 Brazilian Ave Suite 200-J, Palm Beach FL 33480. This is the SAME building as Colombier Sponsor LLC at Suite 200-A.",
+      "source_datasets": [
+        "littlesis",
+        "fl_sunbiz"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 18:54:53",
+      "target_name": "1789 Capital",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL-SunBiz:M25000008821",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://littlesis.org/entities/439746-1789_Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -431,6 +365,87 @@
       "profile_id": "tech-right",
       "other_person": "SpaceX",
       "other_person_slug": "spacex",
+      "evidence": []
+    },
+    {
+      "id": 3407,
+      "person_a": "1789 Capital",
+      "person_b": "Chris Buskirk",
+      "relationship_type": "corporate",
+      "description": "Co-founder and CIO of 1789 Capital (est. 2022) alongside Omeed Malik and Rebekah Mercer. 1789 Capital emerged from discussions at Rockbridge Mar-a-Lago meeting in 2022. Fund crossed 1B AUM by Sep 2025. Invested 15M in Tucker Carlson media company.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-14 19:01:44",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "1789capital.vc; Reuters Aug 2024",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3670,
+      "person_a": "1789 Capital",
+      "person_b": "Chris Buskirk",
+      "relationship_type": "owns",
+      "description": "Co-founder and Chief Investment Officer since 2022",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:05",
+      "profile_id": "tech-right",
+      "other_person": "Chris Buskirk",
+      "other_person_slug": "chris-buskirk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 439746; EDGAR filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3677,
+      "person_a": "1789 Capital",
+      "person_b": "Rockbridge Network",
+      "relationship_type": "corporate",
+      "description": "1789 Capital is the venture capital arm of Rockbridge; co-founded by same principals (Buskirk, Mercer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:11",
+      "profile_id": "tech-right",
+      "other_person": "Rockbridge Network",
+      "other_person_slug": "rockbridge-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis; web reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3706,
+      "person_a": "1789 Capital",
+      "person_b": "Rebekah Mercer",
+      "relationship_type": "owns",
+      "description": "Co-founder of 1789 Capital with Buskirk and Omeed Malik",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:27",
+      "profile_id": "tech-right",
+      "other_person": "Rebekah Mercer",
+      "other_person_slug": "rebekah-mercer",
       "evidence": []
     },
     {
@@ -597,174 +612,5 @@
       "bridge-tax",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "1789 Capital",
-      "connections": [
-        {
-          "target": "Defense Supplemental Spending",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "Iran war supplemental funding benefits 1789 Capital portfolio: SpaceX, Anduril, Hadrian, Vulcan Elements"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "1789 Capital invested in Anduril 2.5B Series G (Jun 2025) led by Founders Fund. Creates Trump family financial interest in Anduril Golden Dome contracts (SHIELD, SBI, IVAS 22B)."
-        },
-        {
-          "target": "SpaceX",
-          "type": "financial",
-          "strength": 1,
-          "evidence_ref": null,
-          "description": "1789 Capital holds SpaceX position. SpaceX is bidding 2B+ Golden Dome satellite tracking constellation. Creates direct Trump family financial benefit from SpaceX government contracts via Trump Jr partnership."
-        },
-        {
-          "target": "True Anomaly",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "No direct investment overlap. 1789 Capital and Narya Capital (True Anomaly investor) both operate in defense tech VC with separate portfolios. Both fund principals (Trump Jr, Vance) are immediate family/office of President/VP. Both portfolios benefit from Golden Dome procurement."
-        },
-        {
-          "target": "Project Vault",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "1789 Capital portfolio company Vulcan Elements (rare earth magnets, 620M DoD loan) is direct beneficiary of Project Vault 12B critical mineral reserve"
-        },
-        {
-          "target": "Heritage Foundation",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Mercer connection creates policy-to-investment pipeline"
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "financial",
-            "strength": 1,
-            "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          }
-        ],
-        "Heritage Foundation": [
-          {
-            "target": "Rebekah Mercer",
-            "type": "advisory",
-            "strength": 1,
-            "description": "Mercer is Heritage Foundation trustee; Heritage produced Project 2025 Greenland section. Mercer co-founded 1789 Capital with Greenland-relevant defense portfolio"
-          },
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1,
-            "description": ""
-          },
-          {
-            "target": "Advancing American Freedom",
-            "type": "successor_to",
-            "strength": 1,
-            "description": "AAF absorbed Heritage legal, economic, and data teams in Dec 2025-Jan 2026 mass exodus. 20+ staff moved. Three AAF institutes mirror Heritage centers."
-          },
-          {
-            "target": "Diana Davis Spencer Foundation",
-            "type": "funds",
-            "strength": 1,
-            "description": "Withdrew M 5-year funding commitment from Heritage after antisemitism controversy. CEO Abby Spencer Moffat resigned as Heritage trustee."
-          },
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Heritage election fraud database provides data cited by PILF in voter roll purge cases; von Spakovsky and Adams share DOJ Voting Section alumni network"
-          }
-        ],
-        "SpaceX": [
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1,
-            "description": "SpaceX acquired xAI Feb 2 2026 via all-stock deal at 1.25T combined valuation"
-          },
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1,
-            "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1,
-            "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
-          },
-          {
-            "target": "Honeycomb Partners",
-            "type": "financial",
-            "strength": 1,
-            "description": "Fiszel offered Epstein SpaceX co-investment in Feb 2017. Company valued at 18B. Fiszel buying 2M (60pct personal) for opt-in private side of Honeycomb. Up to additional 6M co-invest possible. Elon Musk buying 100M personally at 105/share vs investor cost of 118/share."
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1,
-            "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield."
-          }
-        ],
-        "True Anomaly": [
-          {
-            "target": "JD Vance",
-            "type": "financial",
-            "strength": 1,
-            "description": "Vance co-founded Narya Capital which invested in True Anomaly (two rounds). True Anomaly won Golden Dome SBI contract. Vance retained 500K-1M Narya stake."
-          },
-          {
-            "target": "Narya Capital",
-            "type": "financial",
-            "strength": 1,
-            "description": "Narya Capital (co-founded by VP JD Vance) invested in True Anomaly in two funding rounds. Vance retained 500K-1M stake in Narya Fund I per 2025 disclosure. True Anomaly then won Golden Dome SBI prototype contract."
-          },
-          {
-            "target": "Even Rogers",
-            "type": "employment",
-            "strength": 1,
-            "description": "Founder and CEO. West Point grad, 10-year USAF career, Air Force Weapons School grad, authored Spacepower doctrine. Founded company 12 days after leaving military in 2022."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

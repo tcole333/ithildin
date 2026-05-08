@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.880472",
+  "generated_at": "2026-05-07T23:07:36.226154",
   "last_updated": "2026-02-26T18:48:39",
   "stats": {
     "total_findings": 14,
@@ -115,7 +115,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002043140 Form D (2024-10-30)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -365,7 +365,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002043140 company data",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -402,7 +402,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002043140 filings list",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -476,7 +476,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions API search",
+          "evidence_ref": "OpenSanctions:API",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -802,7 +802,7 @@
       {
         "id": "regulatory-and-media-coverage",
         "title": "Regulatory and Media Landscape",
-        "content": "<p>Analysis of GDELT media monitoring data identified 12 articles mentioning Chase Herro between January and February 2026, with predominantly critical or investigative framing. Coverage topics included the WLFI lending platform launch, USD1 stablecoin deals with Pakistan, the Abu Dhabi sovereign investment, WLFI token holders unable to liquidate $550 million in locked tokens, and a Trump family Mar-a-Lago crypto summit. International outlets from India, Australia, Iran, Pakistan, and Nigeria published coverage emphasizing geopolitical concern. [Finding #3690]</p><p>A review of sanctions and regulatory databases returned no results for Chase Herro in OpenSanctions. No entities matching Herro were found in Nevada, New Jersey, or Texas corporate registries. The FINRA BrokerCheck record (if the Chase Roscher Herron match is correct) shows no regulatory disclosures. [Finding #3691]</p><p>The broader WLFI regulatory environment has drawn Congressional scrutiny. Senator Elizabeth Warren and Senate Banking Committee Democrats have demanded answers regarding <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>'s failure to divest WLFI cryptocurrency assets while serving as Special Envoy. The May 2025 UAE-WLFI $2 billion deal via Binance and <a href=\"/dossiers/mgx\">MGX</a> -- in which WLFI's stablecoin was the settlement instrument -- occurred while Steve Witkoff was simultaneously negotiating diplomatic matters with UAE officials. [Finding #3690]</p>",
+        "content": "<p>Analysis of GDELT media monitoring data identified 12 articles mentioning Chase Herro between January and February 2026, with predominantly critical or investigative framing. Coverage topics included the WLFI lending platform launch, USD1 stablecoin deals with Pakistan, the Abu Dhabi sovereign investment, WLFI token holders unable to liquidate $550 million in locked tokens, and a Trump family Mar-a-Lago crypto summit. International outlets from India, Australia, Iran, Pakistan, and Nigeria published coverage emphasizing geopolitical concern. [Finding #3690]</p><p>A review of sanctions and regulatory databases returned no results for Chase Herro in OpenSanctions. No entities matching Herro were found in Nevada, New Jersey, or Texas corporate registries. The FINRA BrokerCheck record (if the Chase Roscher Herron match is correct) shows no regulatory disclosures. [Finding #3691]</p><p>The broader WLFI regulatory environment has drawn Congressional scrutiny. Senator Elizabeth Warren and Senate Banking Committee Democrats have demanded answers regarding <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>'s failure to divest WLFI cryptocurrency assets while serving as Special Envoy. The May 2025 UAE-WLFI $2 billion deal via Binance and <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a> -- in which WLFI's stablecoin was the settlement instrument -- occurred while Steve Witkoff was simultaneously negotiating diplomatic matters with UAE officials. [Finding #3690]</p>",
         "viz": null
       }
     ],
@@ -819,236 +819,5 @@
       "access-capitalism",
       "offshore-opacity"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Chase Herro",
-      "connections": [
-        {
-          "target": "Donald Trump",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Herro donated $746K to Trump PACs July 2024, then co-founded WLFI with Trump family as promoters"
-        },
-        {
-          "target": "Zach Folkman",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders, executive officers, and directors of World Liberty Financial Inc per SEC Form D"
-        },
-        {
-          "target": "Zachary Folkman",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "DL News background reporting",
-          "description": "Co-founders of 17+ companies since 2013 including Nexus Group (USVI), Dough Finance (DeFi), Axiom Management Group LLC (PR, WLFI revenue vehicle). Co-owners of WLFI receiving 12.5% each of net revenue."
-        },
-        {
-          "target": "Steve Witkoff",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Witkoff introduced Herro to Trump family. WC Digital Fi LLC (Witkoff) receives 50% of Herro/Folkman WLFI share. Witkoff is longtime Trump donor, real estate developer, now Special Envoy."
-        },
-        {
-          "target": "Eric Trump",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
-        },
-        {
-          "target": "Zachary Witkoff",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-members of WLF Holdco LLC Board of Managers. Both involved in WLFI operations."
-        },
-        {
-          "target": "Axiom Management Group LLC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "CoinDesk Sep 2024; NBC News Oct 2024",
-          "description": "Herro co-owns Axiom Management Group LLC with Folkman. Herro is self-described 'dirtbag of the internet' with prison history and prior Dough Finance venture that was hacked for .1M"
-        },
-        {
-          "target": "Donald Trump Jr",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Trump Jr is Web3 Ambassador for WLFI. Herro is co-founder/Executive Officer. Both promoted WLFI on social media livestream."
-        }
-      ],
-      "secondHop": {
-        "Axiom Management Group LLC": [
-          {
-            "target": "Zachary Folkman",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Folkman co-owns Axiom Management Group LLC with Chase Herro. Located at Folkman's address: 954 Calle Constitucion, Dorado PR 00646"
-          },
-          {
-            "target": "WC Digital Fi LLC",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Herro/Folkman agreed to send 50% of Axiom fees to WC Digital Fi LLC (affiliated with Steve Witkoff). Net effect: Witkoff family gets 12.5% of WLFI revenue"
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Donald Trump Jr": [
-          {
-            "target": "Golden Dome",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr via 1789 Capital holds investments in SpaceX and Anduril, both frontrunners for $151B+ Golden Dome contracts. Father is president who announced the program."
-          },
-          {
-            "target": "Golden Dome",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr partner at 1789 Capital (2B AUM) holding SpaceX, Anduril, Hadrian -- all Golden Dome contractors"
-          },
-          {
-            "target": "Omeed Malik",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Trump Jr is partner at 1789 Capital, co-founded by Malik. Joined Nov 2024 after father won presidential election. Fund grew from 200M to 2B AUM during his tenure."
-          },
-          {
-            "target": "Rebekah Mercer",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both partners at 1789 Capital. Mercer is co-founder and major investor (likely provided seed capital -- initial Form D showed 10M from 1 investor). Mercer also key Heritage Foundation trustee (Project 2025) and Cambridge Analytica funder."
-          },
-          {
-            "target": "American Daybreak",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Organized his Greenland trip"
-          }
-        ],
-        "Eric Trump": [
-          {
-            "target": "World Liberty Financial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Named Promoter on SEC Form D, public operational face of WLFI"
-          },
-          {
-            "target": "Tahnoon bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
-          },
-          {
-            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Eric Trump signed the Aryam Investment 1 deal giving Tahnoon 49% of WLFI for M, 4 days before inauguration. Later announced MGX-Binance USD1 settlement at Token2049 Dubai."
-          },
-          {
-            "target": "WLF Holdco LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump serves as manager on board of managers of WLF Holdco LLC. Signed the M Aryam Investment 1 deal on behalf of WLF. Address: c/o The Trump Organization, Jupiter FL 33477"
-          },
-          {
-            "target": "ALT5 Sigma Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
-          }
-        ],
-        "Steve Witkoff": [
-          {
-            "target": "Zach Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
-          },
-          {
-            "target": "Zachary Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
-          },
-          {
-            "target": "Tahnoon bin Zayed Al Nahyan",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
-          }
-        ],
-        "Zach Folkman": [
-          {
-            "target": "Zachary Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-members of WLF Holdco LLC Board of Managers. Both directors of ALT5 Sigma Corp (Witkoff is Chairman). Witkoff is co-founder and CEO of WLFI."
-          },
-          {
-            "target": "Steven Witkoff",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Steven Witkoff (real estate developer, Trump Middle East envoy) is named promoter on WLFI Form D/A. Father of Zachary Witkoff. Connected Folkman/Herro to Trump family. Both promoters of WLFI."
-          }
-        ],
-        "Zachary Witkoff": [
-          {
-            "target": "Zak Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both are directors/officers of WLFI and ALT5 Sigma Corp board nominees"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

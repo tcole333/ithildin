@@ -1,0 +1,285 @@
+{
+  "name": "Indonesia Energy Corp Ltd",
+  "slug": "indonesia-energy-corp-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.336860",
+  "last_updated": "2026-03-30T03:40:11",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "structural": 3,
+      "strategic": 1,
+      "market": 1,
+      "regulatory": 1
+    },
+    "connection_types": {
+      "corporate": 3
+    },
+    "last_updated": "2026-03-30T03:40:11"
+  },
+  "findings": [
+    {
+      "id": 8761,
+      "finding_type": "financial",
+      "summary": "Revenue declining three consecutive years; FY2024 net loss tripled to $6.3M on $2.7M revenue; accumulated deficit $45.9M",
+      "detail": "FY2024 20-F: Revenue $2,667,508 (down from $3,525,454 in 2023 and $4,097,403 in 2022). Net loss $6,343,541 in 2024 vs $2,642,684 in 2023 \u2014 a 140% increase YoY in losses. G&A increased from $3.37M to $5.17M. Lease operating expenses exceeded revenue every year. Accumulated deficit $45,926,978 as of December 31, 2024.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8763,
+      "finding_type": "financial",
+      "summary": "CEO Wirawan Jusuf owns 50% of INDO's office landlord (PT WKM); related-party rent $155,659 in 2024",
+      "detail": "20-F discloses that PT WKM (50%-owned by CEO Wirawan Jusuf) leases office space at Giesmart Plaza to INDO subsidiaries. INDO paid $155,659 in rent to PT WKM in FY2024 ($64,730 Zone 2 + $90,929 Zone 1/3/4). Leases extended through March 2025 and September 2027 respectively. The co-owner of PT WKM (remaining 50%) is not named in the disclosure.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8764,
+      "finding_type": "structural",
+      "summary": "Pre-IPO WJ Energy co-shareholder HFO Investment Group controlled by adult sister of CIO James J. Huang",
+      "detail": "20-F discloses that pre-IPO WJ Energy shareholder HFO Investment Group Ltd is 'controlled by the adult sister of our Chief Investment Officer and director, James J. Huang.' HFO initially owned 50% of WJ Energy, sold down to 10%, then participated in 2019 restructuring receiving ordinary shares of INDO. The current economic position of HFO post-restructuring is not fully disclosed in the most recent 20-F.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8765,
+      "finding_type": "structural",
+      "summary": "Opera Cove International Limited (15% WJ Energy pre-IPO) executed entrustment agreement ceding beneficial ownership to Maderic; Opera Cove identity undisclosed",
+      "detail": "20-F discloses that on June 25, 2017, Maderic and Opera Cove International Limited (an 'unaffiliated third party') 'executed an entrustment agreement giving Maderic legal and beneficial ownership of the shares held by Opera.' Opera had received 1,500 shares (15%) of WJ Energy from Maderic. The economic interest in Opera's WJ Energy shares and the identity and beneficial owner of Opera Cove are not disclosed.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8762,
+      "finding_type": "structural",
+      "summary": "Maderic Holding Limited jurisdiction 'corrected' from Cayman Islands to Hong Kong in 2023 \u2014 a 3.5-year lag after original 13D disclosure",
+      "detail": "SC 13D/A filed July 20, 2023 states: 'This Amendment No. 1 to Schedule 13D is being made solely to correct an error in the Schedule 13D originally filed by Reporting Persons on December 31, 2019 regarding the jurisdiction of incorporation of MADERIC Holding Limited. The jurisdiction of MADERIC Holding Limited is hereby amended from Cayman Islands to Hong Kong.' No share count or beneficial owner changes were reported. The 2019 original 13D misidentified Maderic's jurisdiction for over three years.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2025-07-20",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8767,
+      "finding_type": "strategic",
+      "summary": "INDO signed Brazil MOU with Aguila Capital (Blener Mayhew) in August 2025 as Kruh Block production declines",
+      "detail": "H1 2025 operating review (6-K September 30, 2025) discloses a memorandum of understanding signed in August 2025 with Aguila Energia e Participa\u00e7\u00f5es Ltda. (AEP), an affiliate of Rio de Janeiro-based Aguila Capital led by energy executive Blener Mayhew. The MOU establishes a framework to jointly pursue Brazilian oil, gas, and energy assets. No transactions have been executed. The Brazilian MOU represents a geographic pivot narrative for a company whose Indonesian producing asset is in production decline.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-08-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8760,
+      "finding_type": "financial",
+      "summary": "INDO filed fourth ATM prospectus supplement in 9 months, registering up to $7.9M in new ordinary shares through H.C. Wainwright",
+      "detail": "The February 5, 2026 424B5 states: 'aggregate market value of our outstanding Ordinary Shares held by non-affiliates was approximately $42,408,438' and 'we have sold $6,213,569.45 of Ordinary Shares pursuant to General Instruction I.B.5 on Form F-3' in the prior 12 months. Under the current supplement INDO registered up to an additional $7,900,000 via ATM with H.C. Wainwright. This is the fourth ATM supplement since May 2024, reflecting serial dilution as primary working capital source.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-05",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8766,
+      "finding_type": "market",
+      "summary": "Unexplained 20-25x volume spike on INDO March 2-6, 2026, 12+ days before HFIA Form 3 filings began; no identified public catalyst",
+      "detail": "Market data shows INDO trading volume of 28,375,800 shares on March 2, 2026 at a close of $6.74 \u2014 approximately 15-25x the normal daily volume observed in subsequent weeks (1.3M\u20132.9M shares/day). Volume remained elevated at 13M and 15.7M on March 3 and 6 respectively. No Form 6-K or press release was identified for this period. HFIA Form 3 filings did not begin until March 18, 2026.",
+      "source_datasets": "market_data",
+      "confidence": "high",
+      "date_of_event": "2026-03-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8759,
+      "finding_type": "regulatory",
+      "summary": "HFIA first-wave Form 3 compliance: 8 of 10 expected insiders filed; Huang and Fathurachman absent",
+      "detail": "8 Form 3s filed by Indonesia Energy Corp Ltd insiders between 2026-03-18 and 2026-03-27. Wirawan Jusuf (Chairman/CEO) is the only 10%-plus owner. No Form 4 activity filed post-HFIA. Two officers listed in the 2025 20-F \u2014 James J. Huang (CIO & Director) and Ahmad Fathurachman (Independent Director) \u2014 are absent from the Form 3 wave as of 2026-03-29.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "target_name": "Indonesia Energy Corp Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4549,
+      "person_a": "Indonesia Energy Corp Ltd",
+      "person_b": "WJ Energy Ltd",
+      "relationship_type": "corporate",
+      "description": "WJ Energy Ltd (HK) is wholly owned by Indonesia Energy Corp Ltd post-2019 restructuring. WJ Energy directly and indirectly owns all four Indonesian operating subsidiaries (GWN, HNE, CNE, HWE).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "profile_id": "hfia",
+      "other_person": "WJ Energy Ltd",
+      "other_person_slug": "wj-energy-ltd",
+      "evidence": []
+    },
+    {
+      "id": 4553,
+      "person_a": "Indonesia Energy Corp Ltd",
+      "person_b": "H.C. Wainwright & Co. LLC",
+      "relationship_type": "corporate",
+      "description": "H.C. Wainwright & Co., LLC has acted as INDO's ATM sales agent since July 22, 2022 under a continuously renewed at-the-market offering agreement. Four prospectus supplements filed under the ATM since May 2024, raising the registered ATM capacity to cover over $19M in cumulative sales over the program's life.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "profile_id": "hfia",
+      "other_person": "H.C. Wainwright & Co. LLC",
+      "other_person_slug": "hc-wainwright-co-llc",
+      "evidence": []
+    },
+    {
+      "id": 4548,
+      "person_a": "Maderic Holding Limited",
+      "person_b": "Indonesia Energy Corp Ltd",
+      "relationship_type": "corporate",
+      "description": "Maderic Holding Limited holds 5,222,222 ordinary shares of Indonesia Energy Corp Ltd, representing 37.54% as of April 2025. Single largest shareholder. Maderic's shares were received in the 2019 IPO restructuring in exchange for WJ Energy share interests and converted loan receivables.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:40:11",
+      "profile_id": "hfia",
+      "other_person": "Maderic Holding Limited",
+      "other_person_slug": "maderic-holding-limited",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-04-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Revenue declining three consecutive years; FY2024 net loss tripled to $6.3M on $2.7M revenue; accumulated deficit $45.9M",
+      "confidence": "high",
+      "id": 8761
+    },
+    {
+      "date": "2025-04-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CEO Wirawan Jusuf owns 50% of INDO's office landlord (PT WKM); related-party rent $155,659 in 2024",
+      "confidence": "high",
+      "id": 8763
+    },
+    {
+      "date": "2025-04-30",
+      "type": "finding",
+      "finding_type": "structural",
+      "summary": "Pre-IPO WJ Energy co-shareholder HFO Investment Group controlled by adult sister of CIO James J. Huang",
+      "confidence": "high",
+      "id": 8764
+    },
+    {
+      "date": "2025-04-30",
+      "type": "finding",
+      "finding_type": "structural",
+      "summary": "Opera Cove International Limited (15% WJ Energy pre-IPO) executed entrustment agreement ceding beneficial ownership to Maderic; Opera Cove identity undisclosed",
+      "confidence": "high",
+      "id": 8765
+    },
+    {
+      "date": "2025-07-20",
+      "type": "finding",
+      "finding_type": "structural",
+      "summary": "Maderic Holding Limited jurisdiction 'corrected' from Cayman Islands to Hong Kong in 2023 \u2014 a 3.5-year lag after original 13D disclosure",
+      "confidence": "confirmed",
+      "id": 8762
+    },
+    {
+      "date": "2025-08-01",
+      "type": "finding",
+      "finding_type": "strategic",
+      "summary": "INDO signed Brazil MOU with Aguila Capital (Blener Mayhew) in August 2025 as Kruh Block production declines",
+      "confidence": "high",
+      "id": 8767
+    },
+    {
+      "date": "2026-02-05",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "INDO filed fourth ATM prospectus supplement in 9 months, registering up to $7.9M in new ordinary shares through H.C. Wainwright",
+      "confidence": "confirmed",
+      "id": 8760
+    },
+    {
+      "date": "2026-03-02",
+      "type": "finding",
+      "finding_type": "market",
+      "summary": "Unexplained 20-25x volume spike on INDO March 2-6, 2026, 12+ days before HFIA Form 3 filings began; no identified public catalyst",
+      "confidence": "high",
+      "id": 8766
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "HFIA first-wave Form 3 compliance: 8 of 10 expected insiders filed; Huang and Fathurachman absent",
+      "confidence": "high",
+      "id": 8759
+    }
+  ]
+}

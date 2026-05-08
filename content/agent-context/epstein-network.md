@@ -2,6 +2,8 @@
 **Stats**: 17 findings, 3 connections, 0 entities
 **Dossier**: /dossiers/epstein-network
 
+> The Epstein Network is a case study in how a single individual constructed a multi-jurisdictional infrastructure that combined legitimate financial advisory, nonprofit grant-making, political influence, and intelligence brokerage into a unified system of manufactured dependency &mdash; where each component reinforced the others, fiduciary control was concentrated in a handful of loyalists, and the deliberate use of USVI incorporation, trust layering, and disclosure avoidance created opacity that persisted well beyond the principal's death.
+
 ## Key Findings
 - **[financial/medium]** FEC analysis reveals ZERO donations from employees of Gratitude America, Enhanced Education, DKIP, or Financial Trust Company. These core Epstein entities had no political footprint via employer-based donations. The ONLY Epstein entities appearing in FEC employer fields are: J Epstein and Company/Epstein and Company Inc (Jeffrey's donations 1994-2000), New York Strategy Group (Indyke, Groff, Schantz), Ossa Properties (Barrett, Mark Epstein), and RDK Properties (Kahn). The absence of donations from Gratitude America employees is notable given its M endowment from Leon Black. (1994) (Finding #469)
 - **[legal/confirmed]** The 2007 Jeffrey E. Epstein Insurance Trust #3 (dated Nov 1, 2007): Darren Indyke as trustee designated Richard Kahn as additional trustee effective Dec 17-27, 2012. Deutsche Bank ran KYC/AML adverse media searches on the trust (analyst Mayur Rathod) and cleared it, noting Epstein sex offense charges were cleared already. 258 documents referencing this trust in DugganUSA. The 2001 Trust One: Epstein removed Jeffrey A. Schantz as co-trustee and designated Ghislaine Maxwell and Ira Zicherman as successor co-trustees. The Will directed all property to the 2001 Trust, with executors Indyke, Joseph Pagano, and Lawrence Newman, and backup executors Jes Staley and Andrew Farkas. (2007-11-01) (Finding #609)
@@ -20,3 +22,19 @@
 - **Landon Thomas Jr.** [financial/strong]: Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting 
 - **Lawrence Summers** [corporate/strong]: Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme
 - **Forums LLC** [corporate/strong]: Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A
+
+## Open Questions
+- What are the total assets and activities of the three Epstein USVI foundations (J Epstein VI Foundation, Enhanced Education, COUQ Foundation) that are absent from federal IRS 990 filings? Their deliberate structuring to avoid federal nonprofit transparency suggests a parallel pool of financial activity that remains largely undocumented.
+- What was the full scope of Epstein's hedge fund and private equity portfolio ($195 million per the estate inventory), and which fund managers maintained relationships with Epstein after his 2008 conviction? The identity of these counterparties would reveal the professional network that continued to accept Epstein capital post-conviction.
+- What entity is Caribbean Risk Group LLC (NAICS 238140, Masonry Contractors) at 9053 Estate Thomas Suite 101, St. Thomas -- the same address as the Kellerhals law firm -- and why did it use the same out-of-state lender (United Fidelity Bank, Indiana) for its PPP loan as the Kellerhals firm?
+- How was Epstein's intelligence brokerage function compensated? The January 2019 convergence of SDNY RICO intelligence, Carlos Ghosn/Rajeev Misra/SoftBank inquiries, and Benedetti/Teodorani-Fabbri social intelligence in a single week demonstrates an active intelligence operation, but the revenue model for this function remains unclear beyond the advisory fees from Leon Black.
+- What was the nature of the relationship between IPI's Congressional engagement (33+ members) and the Humpty Dumpty Institute's Congressional delegation programs, given that both organizations had zero LDA filings despite activities that appear to constitute lobbying under federal definitions?
+
+## Applicable Models
+- parallel-financial-system
+- jurisdictional-arbitrage
+- manufactured-dependency
+- enabler-gradient
+- complexity-as-credential
+- narrative-shield
+- bridge-tax

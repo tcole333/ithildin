@@ -3,13 +3,14 @@
   "slug": "william-barr",
   "aliases": [],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.673520",
-  "last_updated": "2026-02-18T16:36:43",
+  "generated_at": "2026-05-07T23:07:35.969435",
+  "last_updated": "2026-03-24T14:13:37",
   "stats": {
     "total_findings": 87,
-    "total_connections": 79,
+    "total_connections": 80,
     "total_entities": 0,
     "finding_types": {
       "identity": 6,
@@ -25,10 +26,10 @@
       "familial": 1,
       "legal": 18,
       "social": 7,
-      "intelligence": 1,
+      "intelligence": 2,
       "employment": 7
     },
-    "last_updated": "2026-02-18T16:36:43"
+    "last_updated": "2026-03-24T14:13:37"
   },
   "findings": [
     {
@@ -2140,6 +2141,13 @@
       "evidence": [
         {
           "evidence_type": "ref",
+          "evidence_ref": "2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
           "evidence_ref": "MuckRock CREST CIA-RDP77M00144R000800070004-6; MuckRock article April 16",
           "source_quote": null,
           "source_page": null,
@@ -4076,6 +4084,34 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "National Security Archive briefing book Feb 7 2019; NSA Doc 12 Cheney memo Aug 31 1989",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3873,
+      "person_a": "Erik Prince",
+      "person_b": "William Barr",
+      "relationship_type": "intelligence",
+      "description": "Professional relationship per LittleSis. Barr DOJ criticized for appearing to shield Prince from prosecution on congressional perjury referral and FBI crop duster investigation. CREW filed FOIA for Barr-Prince meeting records.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:37",
+      "profile_id": "tech-right",
+      "other_person": "Erik Prince",
+      "other_person_slug": "erik-prince",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:37136",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theintercept.com/2020/02/20/erik-prince-fbi-investigation-trump-barr/",
           "source_quote": null,
           "source_page": null
         }

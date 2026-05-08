@@ -1,6 +1,8 @@
 # Noam Chomsky
-**Stats**: 72 findings, 26 connections, 0 entities
+**Stats**: 72 findings, 19 connections, 0 entities
 **Dossier**: /dossiers/noam-chomsky
+
+> Chomsky illustrates how Epstein leveraged a specific vulnerability — a family trust dispute and limited financial expertise — to embed himself as an indispensable advisor to a globally prominent intellectual, subsequently using that relationship for social proof with other contacts including Steve Bannon and the broader Harvard academic network.
 
 ## Key Findings
 - **[relationship/confirmed]** Epstein's attorney Darren Indyke's office coordinated Chomsky meetings - Bebe Avdiu (legal assistant at Indyke PLLC) arranged Harvard lunch (June 2017) (2017-06-30) (Finding #3543)
@@ -24,9 +26,22 @@
 - **Richard Kahn** [financial/strong]: Kahn proposed as replacement trustee for Carol Chomsky marital trusts (Nov 2017), served as financial advisor, processed Gratitude America payments, consulted with attorney Pisegna on settlement tax issues, and Chomsky considered granting him power of attorney for mediation
 - **Darren Indyke** [financial/strong]: Indyke drafted the consulting agreement for the $30K Gratitude America payment to Chomsky (Feb 2017). Indyke's office (575 Lexington Ave, 4th Floor) was the same address as HBRK Associates (Kahn). Indyke's legal assistant Bebe Avdiu coordinated Chomsky dinner meetings with Epstein at Harvard.
 - **Jeffrey Epstein** [advisory/strong]: Epstein served as de facto financial advisor managing Chomsky's trust dispute with his children. Proposed legal strategies, directed litigation counsel, negotiated with third parties (Bain), and controlled document execution. Relationship extended from intellectual friendship (2015) to deep financial entanglement (2017-2019).
-- **Richard Kahn** [financial/strong]: Epstein's personal accountant Richard Kahn (HBRK Associates) was placed in fiduciary role over Chomsky family trusts. Kahn handled tax payments, accountant introductions (Nick Nichols), and maintained independent contact with Chomsky. Children objected strenuously.
-- **Max Kohlenberg** [legal/strong]: Max Kohlenberg served as trustee of Carol Chomsky marital trusts. Resisted Chomsky's K distribution request, demanded financial disclosure. Epstein mediated between them.
-- **Deborah Pechet Quinan** [legal/strong]: Deborah Pechet Quinan (RIW law firm, with Gene Landy) served as Chomsky's trust attorney, advising on removal of trustees and fiduciary options. She coordinated with Max Kohlenberg and communicated with Epstein about trust matters.
-- **Darren Indyke** [financial/strong]: Epstein's personal attorney Darren Indyke's firm wired ,159 to Chomsky in December 2018. Chomsky claimed these were his own funds being reorganized through Epstein's office.
-- **Gratitude America Ltd** [financial/strong]: Gratitude America Ltd (Epstein's USVI nonprofit, funded through Deutsche Bank Trust) issued ,000 check to Noam Chomsky on March 2, 2017. Valeria stated this was payment for a linguistics challenge/prize initiative Epstein wanted to establish.
-- ... and 14 more
+- **Steve Bannon** [social/medium]: Epstein-brokered introduction. Dinner at 71st St May 2018. Tucson meeting Feb 2019.
+- **Gratitude America Ltd** [financial/medium]: 30K consulting from Gratitude to Chomsky confirmed Feb 2017. Darren Indyke to draft consulting agreement. Epstein also directed 20K from foundation for administering the Chomsky challenge in linguistics.
+- **Peter Thiel** [social/medium]: Epstein arranged Chomsky-Thiel meeting Oct 2015. Told Chomsky about Thiel. Three-way meeting proposed.
+- **Richard Kahn** [advisory/medium]: Kahn was Epstein associate at HBRK Associates Inc. (575 Lexington Avenue, 4th Floor, NY 10022) who Epstein proposed as mediator for Chomsky trust dispute
+- **Deborah Pechet Quinan** [legal/medium]: Pechet Quinan was Chomsky's trust/estate attorney at RIW law firm (dq@riw.com), advised on trust options including trustee removal; Epstein called her 'a flake'
+- ... and 7 more
+
+## Open Questions
+- What was the nature of the 'Bain' negotiation Epstein conducted on Chomsky's behalf in February 2018, where Bain offered $150,000 and Epstein countered at $250,000? Was this related to trust asset liquidation, intellectual property, or another transaction?
+- What documents did Epstein instruct Valeria Chomsky to sign in February 2018, when she stated 'I don't have any investments with them' and asked 'Why should I sign? I will, if you tell me to'? What entity or institution required her signature?
+- What was the outcome of the Carol S. Chomsky Revocable Trust mediation and settlement process that was underway as of January 2019? Was Richard Kahn ultimately installed in a fiduciary role?
+- Did Epstein's $50,000 donation to the University of Arizona Center for Consciousness Studies in March 2017 have any connection to Chomsky's appointment as Laureate Professor at the same institution later that year?
+- When Epstein proposed assigning 'my interest in the trust' to an insurance company for $3 million in October 2018, was he referring to a personal interest he held in the Chomsky family trust, or was he drafting language on Chomsky's behalf as his proxy? If the former, how was that interest acquired?
+
+## Applicable Models
+- manufactured-dependency
+- narrative-shield
+- enabler-gradient
+- complexity-as-credential

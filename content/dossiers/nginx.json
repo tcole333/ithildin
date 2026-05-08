@@ -1,0 +1,284 @@
+{
+  "name": "nginx",
+  "slug": "nginx",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.349210",
+  "last_updated": "2026-04-12T17:54:49",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 8,
+      "identity": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T17:54:49"
+  },
+  "findings": [
+    {
+      "id": 9855,
+      "finding_type": "intelligence",
+      "summary": "Sysoev stopped meaningful code contribution in 2011 (8 commits in 2012, then 3 total through 2017) despite remaining CTO until 2022",
+      "detail": "Igor Sysoev's commit pattern shows he was fully active through 2011 (281 commits), then dropped to 8 commits in 2012 (all in Jan), 2 in 2015, and his final single commit on 2017-04-20. The transition in August 2011 coincides exactly with the arrival of Dounin and Ermilov as the first NGINX Inc hires. Sysoev effectively became a non-coding CTO/founder from 2012 onward, while Dounin assumed day-to-day release management and the largest share of ongoing commits. His influence_score (172,843) remains highest due to historic breadth across 13 subsystems and 593 unique files.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:54:36",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db Sysoev activity timeline and influence metrics",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9854,
+      "finding_type": "intelligence",
+      "summary": "2020 activity surge (QUIC/HTTP3 development) was largest coordinated effort: Kandaurov, Arutyunyan, Homutov each 5-10x their prior annual output",
+      "detail": "In 2020, three developers had dramatic activity increases: Kandaurov went from 14 commits (2019) to 230 commits (2020), Arutyunyan from 31 to 210, Homutov from 8 to 221. All concentrated on the 'connection' subsystem (QUIC protocol implementation). This is the largest coordinated development effort in nginx history after initial creation. It occurred entirely within the @nginx.com team in Moscow, 8 months after the F5 acquisition closed. Homutov became the QUIC lead (183 QUIC commits total), making his 2022 departure particularly costly.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-02-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:54:23",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db activity and subsystem analysis for 2019-2020 period",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9846,
+      "finding_type": "intelligence",
+      "summary": "Moscow office closure (Mar 2022) triggered permanent departure of Ermilov and Homutov within 4 months",
+      "detail": "Ermilov's last commit: 2022-07-12 (ru@nginx.com). Homutov's last @nginx.com commit: 2022-07-27. Both stopped abruptly. Homutov later reappeared under vl@wbsrv.ru (4 commits, QUIC work, Oct 2023-Apr 2024) and briefly vl@inspert.ru (1 commit, Sep 2023), suggesting he continued QUIC development independently. Ermilov never returned. The July 2022 departure is 4 months after Moscow closure was announced in March 2022.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-07-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:30",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db commit history for Ermilov and Homutov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9848,
+      "finding_type": "intelligence",
+      "summary": "Dounin's last self-committed code was 2024-01-30; his final authored commit (2024-05-24) was committed by Kandaurov @f5.com",
+      "detail": "Dounin held direct commit/push access through 2024-01-30 (committer: mdounin@mdounin.ru). His last authored commit 'Added max_headers directive' on 2024-05-24 was committed by s.kandaurov@f5.com, meaning Dounin had lost push access by that date. This is consistent with Dounin creating the freenginx fork in February 2024 - he continued contributing briefly to the F5 repo but no longer had direct commit authority.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-01-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:44",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db committer vs author fields for Dounin commits post-2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9841,
+      "finding_type": "identity",
+      "summary": "Nginx commit authority concentrated in 7 UTC+3 developers (95.6% of all 8553 commits)",
+      "detail": "Top 7 contributors all UTC+3: Igor Sysoev (3683, 2002-2017), Maxim Dounin (1688, 2011-2024), Sergey Kandaurov (712, 2013-present), Ruslan Ermilov (645, 2011-2022), Roman Arutyunyan (616, 2014-present), Vladimir Homutov (417, 2013-2022), Valentin Bartenev (413, 2011-2018). No F5 @f5.com engineer has ever exceeded 6 commits to the core OSS repository despite owning the project since 2019.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:01",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db nginx repo contributor and influence analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9843,
+      "finding_type": "intelligence",
+      "summary": "Email domain transitions trace governance shifts: sysoev.ru(2002) -> nginx.com(2011) -> f5.com(2025) with wbsrv.ru as departure marker",
+      "detail": "Four distinct email domain eras map to corporate control: (1) sysoev.ru (2002-2017, 3683 commits) - sole proprietor era; (2) nginx.com (2011-present, 2894 commits across 13 people) - NGINX Inc era, used by all core devs; (3) f5.com (2020-present, only 32 author commits across 14 people) - corporate overlay that never achieved code dominance; (4) wbsrv.ru (2022-2024, 5 commits by Bartenev and Homutov) - post-departure consultancy domain. Critical: Dounin never used @nginx.com, always mdounin.ru (1688 commits). This independence signal preceded his fork.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:17",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_contributor_network domain-analysis output for nginx repo",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9851,
+      "finding_type": "intelligence",
+      "summary": "Post-fork governance: Arutyunyan shifted to gmail.com committer (Aug 2024), Kandaurov to @f5.com committer (Oct 2025) - split corporate allegiance",
+      "detail": "After the GitHub migration (Aug 2024), commit authority restructured: Arutyunyan switched committer email from arut@nginx.com to arutyunyan.roman@gmail.com (first use: 2024-08-30), suggesting personal independence from F5 corporate email. Kandaurov switched from pluknet@nginx.com to s.kandaurov@f5.com committer email on 2025-10-06. This means Arutyunyan operates under a personal identity while Kandaurov fully adopted F5 corporate identity. Arutyunyan also committed code for F5 employees (Herasimovich, Semenov, Hong) indicating he has merge authority but maintains personal email.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:53:57",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db committer email transitions for Arutyunyan and Kandaurov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9853,
+      "finding_type": "intelligence",
+      "summary": "F5 @f5.com engineers had minimal OSS code contribution despite 5+ years of ownership: only 32 author commits total, mostly peripheral",
+      "detail": "From 2019 (acquisition) through 2026, @f5.com email authors produced only 32 commits across 14 people. The most prolific F5-email contributor is Zhidao Hong (6 commits, 2025). Pavel Pautov managed 4 commits across 4.4 years. F5's real engineering presence was through Bavshin who served as NGINX Plus committer/integrator (26 commits as committer, often committing code authored by @nginx.com developers for the commercial NGINX Plus branch). The critical insight: F5 acquired NGINX but never built independent engineering capacity in the core codebase.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:54:09",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db domain analysis for f5.com email contributions",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9856,
+      "finding_type": "intelligence",
+      "summary": "Bavshin (@f5.com) was NGINX Plus gatekeeper since 2013 - committed proprietary features authored by @nginx.com devs",
+      "detail": "Aleksei Bavshin (a.bavshin@f5.com) appears as committer for code authored by Homutov, Ermilov, and Volyntsev dating back to 2013. These commits (sticky sessions, SRV records, re-resolvable servers) are NGINX Plus proprietary features. Author dates range 2013-2019 but Bavshin committed dates include 2024-11-07, indicating these were cherry-picked or rebased into the OSS repo much later. Bavshin is the bridge between the Moscow core team and the F5 commercial branch. His 26 total commits as committer span 2013-2026, making him the longest-serving F5-side contributor.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:54:49",
+      "target_name": "nginx",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "git_analysis.db committer!=author analysis showing Bavshin pattern",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-12-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Sysoev stopped meaningful code contribution in 2011 (8 commits in 2012, then 3 total through 2017) despite remaining CTO until 2022",
+      "confidence": "confirmed",
+      "id": 9855
+    },
+    {
+      "date": "2020-02-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "2020 activity surge (QUIC/HTTP3 development) was largest coordinated effort: Kandaurov, Arutyunyan, Homutov each 5-10x their prior annual output",
+      "confidence": "confirmed",
+      "id": 9854
+    },
+    {
+      "date": "2022-07-12",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Moscow office closure (Mar 2022) triggered permanent departure of Ermilov and Homutov within 4 months",
+      "confidence": "confirmed",
+      "id": 9846
+    },
+    {
+      "date": "2024-01-30",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Dounin's last self-committed code was 2024-01-30; his final authored commit (2024-05-24) was committed by Kandaurov @f5.com",
+      "confidence": "confirmed",
+      "id": 9848
+    }
+  ]
+}

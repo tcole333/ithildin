@@ -1,21 +1,85 @@
 {
   "name": "Anduril Industries",
   "slug": "anduril-industries",
-  "aliases": [
-    "Anduril Industries LLC"
-  ],
+  "aliases": [],
   "profile_ids": [
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.953029",
-  "last_updated": "2026-03-10T00:45:49",
+  "generated_at": "2026-05-07T23:07:36.148907",
+  "last_updated": "2026-03-24T14:10:38",
   "stats": {
-    "total_findings": 20,
-    "total_connections": 16,
-    "total_entities": 0
+    "total_findings": 22,
+    "total_connections": 33,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "financial": 16,
+      "intelligence": 2,
+      "relationship": 3
+    },
+    "connection_types": {
+      "financial": 9,
+      "intelligence": 2,
+      "employment": 3,
+      "contracts_with": 10,
+      "funds": 4,
+      "owns": 2,
+      "corporate": 3
+    },
+    "last_updated": "2026-03-24T14:10:38"
   },
   "findings": [
+    {
+      "id": 4932,
+      "finding_type": "identity",
+      "summary": "Anduril Industries UK Ltd - Matt Grimm as director since incorporation",
+      "detail": "Anduril Industries UK Ltd. (12316056, incorporated 2019-11-14). Address: 2 New Street Square, London EC4A 3BZ. Current directors: Matthew Marley Grimm (American, appointed at incorporation, address: 1400 Anduril, Costa Mesa CA), Richard Daniel Drake (British, 2024), Maury David Shenk (British, 2024). Former director: Michael Miles Galvin (American, 2022-2023). No PSC records on file. The 2 New Street Square address is Freshfields Bruckhaus Deringer's London office.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-11-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:21:55",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 12316056",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6954,
+      "finding_type": "financial",
+      "summary": "Anduril DHS border surveillance contracts show temporal pattern: Trae Stephens led DoD transition (Nov 2016-Jan 2017), co-founded Anduril Jun 2017 targeting border surveillance. First CBP contract FY2019 ($6.8M). First major DHS award FY2020 Q4 ($60.7M) \u2014 same quarter Kratsios was acting USD(R&E). Contract grew to $363M single award on Dec 25, 2025 (FY2026 Q1), weeks after Howery and Helberg confirmations. Total DHS Anduril contracts: $20K (FY2019) to $363M single award (Dec 2025). Anduril also received Golden Dome prototype contracts in late 2025 and $20B Army enterprise agreement Mar 2026.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:40:49",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:awards:Anduril:DHS",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4557,
       "finding_type": "financial",
@@ -140,31 +204,6 @@
       ]
     },
     {
-      "id": 4932,
-      "finding_type": "identity",
-      "summary": "Anduril Industries UK Ltd - Matt Grimm as director since incorporation",
-      "detail": "Anduril Industries UK Ltd. (12316056, incorporated 2019-11-14). Address: 2 New Street Square, London EC4A 3BZ. Current directors: Matthew Marley Grimm (American, appointed at incorporation, address: 1400 Anduril, Costa Mesa CA), Richard Daniel Drake (British, 2024), Maury David Shenk (British, 2024). Former director: Michael Miles Galvin (American, 2022-2023). No PSC records on file. The 2 New Street Square address is Freshfields Bruckhaus Deringer's London office.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 18:21:55",
-      "target_name": "Anduril Industries",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 12316056",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4960,
       "finding_type": "financial",
       "summary": "Total federal spending: DOD 1.43B, DHS 862M, DOE 25M, Commerce 490K. SAM registered as Anduril Federal (DBA), DE-incorporated 2017, HQ DC, primary NAICS 334511. HigherGov shows 24 tracked contracts totaling 107M predominantly Marine Corps (69M) and AFLR (22M).",
@@ -240,38 +279,24 @@
       ]
     },
     {
-      "id": 4565,
+      "id": 6909,
       "finding_type": "financial",
-      "summary": "Anduril Industries, Inc. is incorporated in Delaware (file #6386483), formed April 20, 2017. Legal address: c/o Incorporating Services, Ltd., 3500 S DuPont Hwy, Dover, DE 19901. HQ: 1375 Sunflower Avenue, Costa Mesa, CA 92626. LEI: 254900CIXLZUXXNYQW57. Total funding: .26B. Series G (June 2025): .5B at .5B valuation led by Founders Fund (B). Series F (Aug 2024) at B. Currently seeking B raise at B+ valuation for 2026.",
+      "summary": "Procurement spike: Anduril federal spending surged 178.7% in FY2024 (FY2023 $235.8M -> FY2024 $657.1M), then moderated to $611.5M in FY2025. 3-year CAGR of 42.6% far exceeds sector norms. Combined USASpending total exceeds $2.36B since FY2019.",
       "detail": null,
       "source_datasets": [
-        "gleif"
+        "usaspending"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "date_of_event": null,
       "claim_type": "synthesis",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 16:55:12",
-      "target_name": "Anduril Industries LLC",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 14:39:17",
+      "target_name": "Anduril Industries",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "CNBC 2025-06-05",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GLEIF API",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "TechCrunch 2025-06-05",
+          "evidence_ref": "USASPENDING:ANDURIL INDUSTRIES, INC.",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -279,81 +304,32 @@
       ]
     },
     {
-      "id": 4566,
+      "id": 7160,
       "finding_type": "financial",
-      "summary": "Anduril PAC (Anduril Industries, Inc. Political Action Committee) receives donations from senior employees. Key donors: Sam Yoon (,000), Gregory Kausner (,696), Matthew Steckman (,848), Chris Brose (,496), Keith Flynn (,496), Megan Milam (,496), Zachary Mears (,152). Several are former senior government officials - Brose was SASC staff director, Milam is registered lobbyist, Kausner was DOD official.",
-      "detail": null,
+      "summary": "US Army awarded Anduril a $20B firm-fixed-price enterprise contract (W9128Z-26-D-A001) on Mar 14 2026, consolidating 120+ separate procurement actions into single 10-year vehicle covering Lattice AI platform, hardware, data infrastructure, and support services. Awarded by Army Contracting Command, Aberdeen Proving Ground. First task order: $87M for JIATF 401 counter-drone C2 capability.",
+      "detail": "Contract structure functions as an ordering guide where any federal buyer can procure Anduril commercially-made products. Firm-fixed-price structure transfers cost risk to Anduril. Follows model of Palantir 10-year $10B enterprise agreement from prior year. No evidence of formal competition for the contract vehicle itself - consolidation of existing sole-source commercial relationships. Contract number W9128Z-26-D-A001, completion March 12, 2036.",
       "source_datasets": [
+        "usaspending",
         "web_search"
       ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:55:15",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC API",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4567,
-      "finding_type": "intelligence",
-      "summary": "Anduril lobbying began September 2017 (same month as founding) through Invariant LLC (Heather Podesta's firm). Lobbying issues: Defense, Homeland Security, Budget/Appropriations, Law Enforcement. Lobbying spend via Invariant escalated from K (Q3 2017) to K/quarter by 2020. Key lobbyists: Heather Podesta (former Congressional counsel), Benjamin Klein (former Sen. Dorgan staff), Robert Hoffman (former Sen. DeWine staff), Sean Joyce (former Rep. Shuster/McHenry staff). By Q4 2020, Anduril added 3 more lobbying firms: self-registered in-house (Megan Milam), Thorn Run Partners, and Cornerstone Government Affairs.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:55:22",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA Senate Lobbying Database",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4568,
-      "finding_type": "intelligence",
-      "summary": "Anduril selected alongside Palantir as prime contractor for Army TITAN (Tactical Intelligence Targeting Access Node) deep-sensing system for long-range fires. Palantir awarded .4M prime agreement; Anduril leads hardware design, development, and scaled manufacturing across 10 TITAN vehicles. First TITAN Basic and second TITAN Advanced prototypes delivered on-time (2025). Production decision expected FY2026. Anduril manufacturing in Costa Mesa, CA.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
+      "confidence": "high",
       "date_of_event": null,
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-03 16:55:31",
-      "target_name": "Anduril Industries LLC",
+      "created_at": "2026-03-23 18:41:05",
+      "target_name": "Anduril Industries",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "Anduril press release 2024-03-08",
+          "evidence_ref": "army.mil announcement Mar 14 2026",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "Axios 2025-03-12",
+          "evidence_ref": "usaspending:W9128Z-26-D-A001",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -361,38 +337,176 @@
       ]
     },
     {
-      "id": 4569,
-      "finding_type": "intelligence",
-      "summary": "Anduril among awardees of up to B Golden Dome missile defense contract. Consortium includes SpaceX, Palantir, Anduril, Northrop Grumman, Lockheed Martin, True Anomaly, Firefly Aerospace, AeroVironment, Blue Origin, Redwire. SpaceX-Anduril-Palantir partnership presented proposal for 400-1000+ tracking satellites plus 200 attack satellites with missiles/lasers. Final Golden Dome contract decisions expected early 2026.",
-      "detail": null,
+      "id": 7164,
+      "finding_type": "financial",
+      "summary": "Anduril federal contract obligations show exponential growth trajectory: FY2019 $6.8M, FY2020 $90.3M, FY2021 $53.5M, FY2022 $210.7M, FY2023 $235.8M, FY2024 $657.1M, FY2025 $611.5M, FY2026 $494.7M (partial year). Total tracked obligations exceed $2.3B. Defense revenues estimated at $950M in FY2024, making Defense News Top 100 at #93. Company valued at $30.5B after Founders Fund-led $2.5B raise (Jun 2025), reportedly raising another $4B at $60B valuation (Mar 2026).",
+      "detail": "USASpending timeline data shows Anduril went from near-zero federal revenue to over $600M/year in contract obligations within 5 years. FY2024 spike to $657M reflects REPLICATOR, IVAS headset takeover, and expanding CBP tower program. Growth trajectory: 0 -> 7K -> 90M -> 54M -> 211M -> 236M -> 657M -> 612M -> 495M(partial). This is one of the fastest-growing federal contractors in history.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:19",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending timeline data FY2012-FY2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7167,
+      "finding_type": "financial",
+      "summary": "Anduril CBP autonomous surveillance tower program is largest DHS contract: $362.9M tower purchase order (Dec 2025), plus $50.7M, $44M, $41.9M, $50.3M, $37M in additional delivery orders - all under parent IDIQ 70B02C20D00000019 awarded via SBIR Phase III authority. 300+ towers deployed along US-Mexico border. Program designated CBP 'program of record.' Total DHS/CBP contract value exceeds $700M across all delivery orders.",
+      "detail": "All CBP tower contracts are delivery orders under a single SBIR Phase III IDIQ (70B02C20D00000019). SBIR Phase III authority allows sole-source procurement without size limits once a company has won Phase I/II - this is how Anduril has avoided competitive bidding for a massive border surveillance program. The $362.9M single delivery order (70B02C26F00000035, Dec 2025) for tower purchases is the largest individual CBP order.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:33",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:70B02C25F00000422",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:70B02C25F00000662",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:70B02C25F00000926",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:70B02C26F00000035",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7171,
+      "finding_type": "relationship",
+      "summary": "Anduril lobbying via two firms: Invariant LLC (since Sep 2017, lobbyists include Heather Podesta, Benjamin Klein, Robert Hoffman, Sean Joyce) and Cornerstone Government Affairs (since Nov 2020, lobbyists include William Smith (fmr Staff Director House Approps), Anthony Lazarski (fmr Senate Armed Services staffer), Heather Molino (fmr Staff Director House Intelligence), James Richards, Susan Sweat (fmr staffer to Sen. Wicker)). Q1 2025 filings show lobbying on FY25/FY26 DoD Appropriations and FY26 NDAA under both Defense and Budget/Appropriations issue codes.",
+      "detail": "Cornerstone lobbyist William Smith was formerly Staff Director of the House Appropriations Committee - the key committee that controls defense spending. Anthony Lazarski was Professional Staff Member on Senate Armed Services Committee. Heather Molino was Staff Director of House Intelligence Committee. These are very senior former congressional staff with direct access to defense spending decisions. Heather Podesta at Invariant is a well-known DC power lobbyist.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:46",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "lda:c834c4fa-7263-42dc-bcc1-cd031b3342a5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "lda:ebb875ce-e145-4a9a-836f-05465f85d0c6",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7181,
+      "finding_type": "financial",
+      "summary": "Anduril REPLICATOR program involvement: selected for Replicator 1.2 tranche with Ghost-X and Altius-600 UAS. SOCOM awarded $86M 3-year contract for autonomy software integration (Lattice). Pentagon awarded $250M contract for 500 Roadrunner counter-drone interceptors plus Pulsar EW capability. Anduril also won $100M CDAO edge data mesh contract via OTA (Dec 2024). Additional $94M Navy contract for Altius 600M-V loitering munitions production (Feb 2025). $159M Soldier Borne Mission Command contract. $250M air defense production contract.",
+      "detail": "Key FY2024-2025 contracts from USASpending data: N0016425CJR94 Navy $94M Altius 600M-V production, N6833524C0294 Navy $6.7M SBIR Phase III, M6785425F0199 USMC $10.4M I-CSUAS hardware, M6785426F1012 USMC $24M loitering munition rounds, M6785426F0032 USMC $10.5M GBAD hardware. Anduril now operates across all military domains: land (autonomous towers), air (Ghost-X, Altius drones), sea (underwater vehicles), and space (Golden Dome SBI prototype). Third US solid rocket motor supplier, breaking L3Harris/Northrop duopoly.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:43:02",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "defensenews.com REPLICATOR article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "defensescoop.com SOCOM article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:M6785426F1012",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "usaspending:N0016425CJR94",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7185,
+      "finding_type": "financial",
+      "summary": "Anduril acquired ExoAnalytic Solutions, a space surveillance firm, on March 11, 2026 - just 3 days before the $20B Army enterprise contract announcement and during active Golden Dome interceptor prototype work. ExoAnalytic operates a global network of optical telescopes tracking objects in space - capability directly relevant to Golden Dome space-based interceptor targeting. Acquisition positions Anduril to provide space domain awareness for missile defense kill chains.",
+      "detail": "The timing is notable: Anduril acquires space surveillance capability (Mar 11) -> Army announces $20B enterprise contract (Mar 14) -> First task order $87M for counter-drone C2 (Mar 17). ExoAnalytic gives Anduril indigenous space situational awareness that would be essential for any space-based interceptor system. Combined with Anduril's Golden Dome SBI prototype contract, this makes Anduril a vertically integrated space defense company.",
       "source_datasets": [
         "web_search"
       ],
       "confidence": "high",
       "date_of_event": null,
-      "claim_type": "synthesis",
+      "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-03 16:55:37",
-      "target_name": "Anduril Industries LLC",
+      "created_at": "2026-03-23 18:43:27",
+      "target_name": "Anduril Industries",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "CNBC 2026-01-27",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Fortune 2025-05-21",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GovExec 2025-12",
+          "evidence_ref": "techcrunch.com Mar 11 2026 article",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -400,97 +514,39 @@
       ]
     },
     {
-      "id": 4573,
-      "finding_type": "legal",
-      "summary": "Key litigation: (1) Total Recall Technologies v. Palmer Luckey (N.D. Cal. 3:15-cv-02281, filed 2015, appealed to 9th Cir. 19-15544) - contract dispute over Oculus VR origins. (2) ZeniMax Media v. Oculus VR (N.D. Tex. 3:14-cv-01849, filed 2014) - copyright/trade secrets, jury found M damages against Facebook, Luckey personally ordered to pay M for NDA violation. (3) Iron Bird LLC v. Anduril Industries (D. Del. 1:25-cv-00210, filed 2025-02-20, terminated 2025-03-26) - patent infringement claim.",
-      "detail": null,
-      "source_datasets": [
-        "littlesis",
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:56:05",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener",
-          "source_quote": "cases search Palmer Luckey - 20 results; LittleSis:entity 158415 summary",
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4574,
+      "id": 7237,
       "finding_type": "financial",
-      "summary": "SEC EDGAR reveals extensive secondary market for Anduril shares. At least 20+ SPVs filing Form D: Dominari Master SPV Series XIV/XXVII Anduril, Augurey Ventures II/III/IV Series Anduril, Aurochs Capital Fund Series Anduril, Tomales Bay Capital Anduril I/II/III (Lux Capital), Anduril Holdings SPV LP, EQ AD Anduril, Bloom Opportunities Anduril, Inflection Ventures Anduril Fund IV, OPX Anduril (Opulentia Ventures), Greenbird Intelligence Fund Series O/T Anduril, JDY Anduril SPV. Major mutual fund holders: Fidelity (multiple funds), Franklin Strategic Series, BlackRock Science & Technology Trust, Variable Insurance Products Fund.",
-      "detail": null,
+      "summary": "Anduril federal contract spending exploded from 6.8M (FY2019) to 657M (FY2024), 611M (FY2025), 494M (FY2026 partial)",
+      "detail": "USASpending timeline shows Anduril Industries exponential federal contract growth: FY2019 6.8M, FY2020 90.3M, FY2021 53.5M, FY2022 210.7M, FY2023 235.8M, FY2024 657.1M, FY2025 611.5M, FY2026 (partial) 494.7M. Total: 2.36B. DHS/CBP awards include 362.9M Autonomous Surveillance Towers SBIR Phase III IDIQ (Dec 2025), multiple border surveillance tower contracts. DoD contracts include 20B Army Lattice C2 contract (March 2026). Anduril lobbied on Defense and Homeland Security issues continuously since 2017 Q3, initially through Invariant LLC (20K-110K/quarter), then expanded to in-house lobbying, Thorn Run Partners, and Cornerstone Government Affairs.",
       "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 16:56:16",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR EFTS",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4576,
-      "finding_type": "intelligence",
-      "summary": "Anduril leadership pipeline from national security establishment. Christian Brose: promoted to President & Chief Strategy Officer (Jan 2025), former Staff Director of Senate Armed Services Committee for 3 years under Sen. John McCain, Senior Fellow at Carnegie Endowment, member Aspen Strategy Group, author of 'The Kill Chain'. Matthew Steckman: COO. Megan Milam: registered federal lobbyist. Gregory Kausner: former DOD official. This revolving door between SASC/DOD and Anduril is the primary mechanism for defense procurement access.",
-      "detail": null,
-      "source_datasets": [
-        "fec",
+        "usaspending",
         "lobbying"
       ],
       "confidence": "high",
       "date_of_event": null,
-      "claim_type": "synthesis",
+      "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-03 16:56:27",
-      "target_name": "Anduril Industries LLC",
+      "created_at": "2026-03-23 18:57:49",
+      "target_name": "Anduril Industries",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "Anduril.com leadership page",
+          "evidence_ref": "LDA lobbying client Anduril (20 filings)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "FEC records",
+          "evidence_ref": "USASpending awards Anduril Industries Inc DHS (20 awards)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "LDA filings",
+          "evidence_ref": "USASpending timeline query for Anduril (19 fiscal years)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -498,89 +554,128 @@
       ]
     },
     {
-      "id": 4577,
+      "id": 7265,
       "finding_type": "financial",
-      "summary": "USASpending confirms Anduril Industries, Inc. as federal contractor. Also lists Anduril LLC and Anduril Engineering LLC as separate entities receiving federal funds. Anduril reported approximately B in revenue in 2024, nearly doubling from prior year. Secured defense contracts totaling approximately .5B. Key contract: CONT_AWD_FA865020C9300_9700 (Air Force). Products include: Lattice AI platform, Ghost autonomous drones, Altius munitions (loitering), Menace counter-UAS, TITAN vehicles, Autonomous fighter jet (in development).",
-      "detail": null,
+      "summary": "Anduril DHS border surveillance: 861M total, including 363M SBIR Phase III for Autonomous Surveillance Towers (Dec 2025)",
+      "detail": "Anduril Industries received 861.6M from DHS, all through CBP. Major awards: 362.9M Autonomous Surveillance Towers SBIR Phase III IDIQ (Dec 2025), 50.7M (Sep 2025), 44M (Sep 2025), 41.8M (Aug 2025), 50.3M (Jun 2024), 37M (Aug 2024), 67.2M (Jun 2022), 36.9M (Jun 2021). First major DHS contract was 4.8M in June 2018 for 10 Lattice-powered surveillance towers in San Diego/Yuma. By 2020, CBP formalized Lattice as Program of Record with 85M expansion. 290 surveillance towers installed along Mexico border as of 2023. The Dec 2025 363M award came 5 months after Andreessen's appointment to HSAC, though this is an ongoing CBP program predating HSAC reconstitution.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:22",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CBP.gov: Anduril Surveillance Towers FOIA record",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OrangeSlices.ai: Anduril 363M SBIR Phase III",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending awards Anduril Industries DHS (20 awards)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7288,
+      "finding_type": "relationship",
+      "summary": "Anduril lobbied DHS and Defense continuously since Q3 2017, spending grew from 20K to 110K+/quarter via Invariant LLC, expanded to 4 firms by 2020",
+      "detail": "Senate LDA records show Anduril Industries lobbied on Homeland Security and Defense issues from Q3 2017. Initially exclusively through Invariant LLC: Q3 2017 20K, Q4 2017 60K, then steady growth to 110K/quarter by Q4 2019. Continued at 110K/quarter through Q3 2020. In Q4 2020 added three more lobbying operations: in-house lobbying (Anduril Industries Inc as both registrant and client - Defense/Telecommunications/Trade), Thorn Run Partners (30K - Defense/Appropriations), and Cornerstone Government Affairs (Defense/Appropriations). This multi-firm lobbying expansion coincided with Anduril's federal contract surge from 6.8M (FY2019) to 90.3M (FY2020). Lobbying issues consistently focused on Homeland Security and Defense.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:39",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate LDA client search Anduril (20 filings)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7440,
+      "finding_type": "financial",
+      "summary": "Anduril assumed $22B IVAS contract from Microsoft via Army contract novation, Apr 2025",
+      "detail": "On Feb 11, 2025, Microsoft and Anduril announced partnership to transfer the Army's IVAS (Integrated Visual Augmentation System) program. On Apr 10, 2025, the Army signed the contract novation transferring Microsoft's 10-year, $22B contract to Anduril. Anduril received employees, hardware, IP, and facilities. Microsoft retained role as Azure cloud provider. Anduril not expected to produce new hardware but focused on software deployment (accelerated from 180 days to 18 hours). Meta also partnering with Anduril on mixed reality devices for military use (May 2025).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:27:19",
+      "target_name": "Anduril Industries",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Apr 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Feb 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Microsoft press release Feb 11 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7456,
+      "finding_type": "financial",
+      "summary": "Anduril contract portfolio: $360M+ visible in USASpending, dominated by counter-UAS and loitering munitions",
+      "detail": "USASpending shows 50 Anduril Industries contracts totaling $360.4M visible in public data. Largest: ALTIUS 600M-V loitering munitions production ($94M); GHOSTSHIELD ($17M); HEIMDALL ($13.3M); Counter Intrusion System ($19.8M); I-CSUAS (counter small UAS) installations at multiple bases (Yuma, Miramar, Cherry Point, JBAB, Wallops Island, Iwakuni, K-Bay). Also: PM GBAD Home Alone I-CSUAS hardware ($10.5M). Anduril has now also assumed the $22B IVAS contract. Approved for SHIELD IDIQ ($151B ceiling) for Golden Dome.",
       "source_datasets": [
         "usaspending"
       ],
       "confidence": "high",
       "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 16:57:11",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Fortune 2025-06-05",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "USASpending API",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4578,
-      "finding_type": "identity",
-      "summary": "Anduril has no FARA registrations (not acting as foreign agent). GLEIF shows 4 LEI records for 'Anduril' entities: (1) Anduril Industries, Inc. (US-DE, LEI 254900CIXLZUXXNYQW57), (2) Anduril Ventures GmbH (Munich, Germany - unrelated), (3) ANDURIL INV SL (Tortella, Spain - unrelated), (4) Anduril Oy (Helsinki, Finland - unrelated). Only the Delaware entity is the defense company. Delaware file #6386483 via Incorporating Services, Ltd.",
-      "detail": null,
-      "source_datasets": [
-        "fara",
-        "gleif"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:57:18",
-      "target_name": "Anduril Industries LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA database",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GLEIF API",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4591,
-      "finding_type": "financial",
-      "summary": "Anduril DOD contracts: .5B+ total contracts (+ from DOD), assumed Microsoft  IVAS AR headset contract (Army),  autonomous aircraft program with General Atomics,  SOCOM counter-drone contract,  Navy counter-drone. Revenue doubled to  in 2024. Valuation .5B. Co-founded by Trae Stephens (FF partner) and Palmer Luckey. Lobbied via Invariant LLC (.1M+), focused on defense/homeland security.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
       "claim_type": "paraphrase",
-      "verification_status": "verified",
-      "created_at": "2026-03-03 17:00:10",
-      "target_name": "Anduril Industries LLC",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:30:05",
+      "target_name": "Anduril Industries",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "DefenseNews 2024-10-08, Wikipedia, Fortune 2025-06-05, LDA filings",
+          "evidence_ref": "USASpending Anduril Industries contracts (50 records)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -759,6 +854,371 @@
       "evidence": []
     },
     {
+      "id": 3509,
+      "person_a": "Anduril Industries",
+      "person_b": "Trae Stephens",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:44",
+      "profile_id": "tech-right",
+      "other_person": "Trae Stephens",
+      "other_person_slug": "trae-stephens",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:awards:Anduril:DHS",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3516,
+      "person_a": "Anduril Industries",
+      "person_b": "Cornerstone Government Affairs, Inc.",
+      "relationship_type": "contracts_with",
+      "description": "Lobbying firm representing Anduril on Defense/Budget issues, Q4 2020-present, .12M total LDA income",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:43",
+      "profile_id": "tech-right",
+      "other_person": "Cornerstone Government Affairs, Inc.",
+      "other_person_slug": "cornerstone-government-affairs-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:75557",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3533,
+      "person_a": "Anduril Industries",
+      "person_b": "Founders Fund Growth III LP",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:11:49",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund Growth III LP",
+      "other_person_slug": "founders-fund-growth-iii-lp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059945",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3588,
+      "person_a": "Anduril Industries",
+      "person_b": "Meta Platforms",
+      "relationship_type": "contracts_with",
+      "description": "Meta is key partner on Anduril SBMC team; $159M OTA awarded Sept 4 2025 for EagleEye mixed reality combat system",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:42:47",
+      "profile_id": "tech-right",
+      "other_person": "Meta Platforms",
+      "other_person_slug": "meta-platforms",
+      "evidence": []
+    },
+    {
+      "id": 3594,
+      "person_a": "Anduril Industries",
+      "person_b": "Department of Defense",
+      "relationship_type": "contracts_with",
+      "description": "$159M SBMC OTA awarded Sept 4 2025 for mixed reality combat goggle prototype; part of $22B IVAS program replacement",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:43:00",
+      "profile_id": "tech-right",
+      "other_person": "Department of Defense",
+      "other_person_slug": "department-of-defense",
+      "evidence": []
+    },
+    {
+      "id": 3598,
+      "person_a": "Anduril Industries",
+      "person_b": "Michael Obadal",
+      "relationship_type": "employment",
+      "description": "Obadal was Senior Director at Anduril 2023-2025, then confirmed as Under Secretary of Army Sep 2025. Army awarded Anduril $20B enterprise contract Mar 2026.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:05",
+      "profile_id": "tech-right",
+      "other_person": "Michael Obadal",
+      "other_person_slug": "michael-obadal",
+      "evidence": []
+    },
+    {
+      "id": 3601,
+      "person_a": "Anduril Industries",
+      "person_b": "Founders Fund",
+      "relationship_type": "funds",
+      "description": "Founders Fund led Anduril's $2.5B raise at $30.5B valuation (Jun 2025) - largest check in fund history ($1B). Trae Stephens (Founders Fund) co-founded Anduril.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:11",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": []
+    },
+    {
+      "id": 3602,
+      "person_a": "Anduril Industries",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": "Consortium partners bidding for Golden Dome. Both Thiel-backed. Palantir has separate $10B Army enterprise contract; Anduril has $20B version.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:13",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": []
+    },
+    {
+      "id": 3603,
+      "person_a": "Anduril Industries",
+      "person_b": "ExoAnalytic Solutions",
+      "relationship_type": "owns",
+      "description": "Anduril acquired ExoAnalytic Solutions Mar 11 2026 - space surveillance firm with global telescope network. Provides space domain awareness for Golden Dome interceptor targeting.",
+      "strength": "strong",
+      "date_range": "2026-03-11:present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:15",
+      "profile_id": "tech-right",
+      "other_person": "ExoAnalytic Solutions",
+      "other_person_slug": "exoanalytic-solutions",
+      "evidence": []
+    },
+    {
+      "id": 3604,
+      "person_a": "Andrew Bosworth",
+      "person_b": "Anduril Industries",
+      "relationship_type": "corporate",
+      "description": "Bosworth CTO of Meta which is key partner to Anduril on $159M SBMC contract; Bosworth also D201 Army Reserve LTC advising on Army tech transformation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:38",
+      "profile_id": "tech-right",
+      "other_person": "Andrew Bosworth",
+      "other_person_slug": "andrew-bosworth",
+      "evidence": []
+    },
+    {
+      "id": 3606,
+      "person_a": "Anduril Industries",
+      "person_b": "U.S. Customs and Border Protection",
+      "relationship_type": "contracts_with",
+      "description": "CBP autonomous surveillance tower program of record. 300+ towers deployed. SBIR Phase III IDIQ 70B02C20D00000019 with $700M+ in delivery orders. Largest single order $363M (Dec 2025).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:57",
+      "profile_id": "tech-right",
+      "other_person": "U.S. Customs and Border Protection",
+      "other_person_slug": "us-customs-and-border-protection",
+      "evidence": []
+    },
+    {
+      "id": 3607,
+      "person_a": "Anduril Industries",
+      "person_b": "U.S. Army",
+      "relationship_type": "contracts_with",
+      "description": "$20B enterprise contract W9128Z-26-D-A001 (Mar 2026). First task order $87M counter-drone C2. Also $22B IVAS headset program (taken from Microsoft Feb 2025), Ghost-X drones, TITAN, RCV, Roadrunner.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:45:00",
+      "profile_id": "tech-right",
+      "other_person": "U.S. Army",
+      "other_person_slug": "us-army",
+      "evidence": []
+    },
+    {
+      "id": 3644,
+      "person_a": "Anduril Industries",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "owns",
+      "description": "Founded Anduril Industries in 2017; company valued at 30B",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:53",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 158415",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3649,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "Anduril Industries",
+      "relationship_type": "funds",
+      "description": "a16z investor in Anduril via American Dynamism fund; Anduril has 2.36B in federal contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:03",
+      "profile_id": "tech-right",
+      "other_person": "Andreessen Horowitz",
+      "other_person_slug": "andreessen-horowitz",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z American Dynamism portfolio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3654,
+      "person_a": "8VC",
+      "person_b": "Anduril Industries",
+      "relationship_type": "funds",
+      "description": "8VC invested in Anduril Industries",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:16",
+      "profile_id": "tech-right",
+      "other_person": "8VC",
+      "other_person_slug": "8vc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search: 8VC portfolio includes Anduril",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3656,
+      "person_a": "Anduril Industries",
+      "person_b": "Department of Homeland Security",
+      "relationship_type": "contracts_with",
+      "description": "861M in DHS/CBP contracts for border surveillance towers, Lattice AI platform",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:20",
+      "profile_id": "tech-right",
+      "other_person": "Department of Homeland Security",
+      "other_person_slug": "department-of-homeland-security",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending DHS awards",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3794,
+      "person_a": "Anduril Industries",
+      "person_b": "Missile Defense Agency",
+      "relationship_type": "contracts_with",
+      "description": "Anduril approved as SHIELD IDIQ vendor (one of 2,440 approved). Anduril also holds $22B IVAS contract from Army. Multiple existing DoD contracts totaling $360M visible in USASpending.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:29:21",
+      "profile_id": "tech-right",
+      "other_person": "Missile Defense Agency",
+      "other_person_slug": "missile-defense-agency",
+      "evidence": []
+    },
+    {
+      "id": 3800,
+      "person_a": "Anduril Industries",
+      "person_b": "Tom Keane",
+      "relationship_type": "employment",
+      "description": "Senior VP of Engineering at Anduril. Key role in IVAS contract transfer from Microsoft.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:26",
+      "profile_id": null,
+      "other_person": "Tom Keane",
+      "other_person_slug": "tom-keane",
+      "evidence": []
+    },
+    {
+      "id": 3846,
+      "person_a": "Anduril Industries",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Seed investor (2017). Josh Wolfe wrote personal check into Anduril seed round. Tomales Bay Capital Anduril I/II/III SPVs (Lux) hold secondary market shares. Also organized Palmer Luckey Israel defense trip (Feb 2026).",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:38",
+      "profile_id": "tech-right",
+      "other_person": "Lux Capital",
+      "other_person_slug": "lux-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=Tomales+Bay+Capital+Anduril+SPVs",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: Lux Capital is an owner of Anduril Industries",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2802,
       "person_a": "Anduril Industries",
       "person_b": "True Anomaly",
@@ -804,6 +1264,34 @@
       "evidence": []
     },
     {
+      "id": 3463,
+      "person_a": "Anduril Industries",
+      "person_b": "Forterra",
+      "relationship_type": "corporate",
+      "description": "Scott Sanders (Forterra CGO) is former early Anduril employee. Both compete for DoD ground autonomy programs.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 00:37:34",
+      "profile_id": "tech-right",
+      "other_person": "Forterra",
+      "other_person_slug": "forterra",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn profiles",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2725,
       "person_a": "Anduril Industries",
       "person_b": "Cerberus Capital Management",
@@ -824,106 +1312,43 @@
           "source_page": null
         }
       ]
-    },
-    {
-      "id": 2684,
-      "person_a": "Anduril Industries LLC",
-      "person_b": "Palmer Luckey",
-      "relationship_type": "corporate",
-      "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:56:50",
-      "profile_id": "tech-right",
-      "other_person": "Palmer Luckey",
-      "other_person_slug": "palmer-luckey",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GLEIF",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2685,
-      "person_a": "Anduril Industries LLC",
-      "person_b": "Trae Stephens",
-      "relationship_type": "corporate",
-      "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:56:53",
-      "profile_id": "tech-right",
-      "other_person": "Trae Stephens",
-      "other_person_slug": "trae-stephens",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Fortune 2024-11-16",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Wikipedia",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Wikipedia, Founders Fund",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2688,
-      "person_a": "Anduril Industries LLC",
-      "person_b": "Palantir Technologies Inc",
-      "relationship_type": "corporate",
-      "description": "Joint prime contractors on Army TITAN program (.4M). Both in Golden Dome consortium. Palantir-Anduril-SpaceX triangle proposing satellite missile defense. Trae Stephens worked at Palantir 2008-2014 before co-founding Anduril.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 16:57:00",
-      "profile_id": "tech-right",
-      "other_person": "Palantir Technologies Inc",
-      "other_person_slug": "palantir-technologies-inc",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Anduril press release",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CNBC Golden Dome",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Seed investor (2017). Josh Wolfe wrote personal check into Anduril seed round. Tomales Bay Capital Anduril I/II/III SPVs (Lux) hold secondary market shares. Also organized Palmer Luckey Israel defense trip (Feb 2026).",
+      "other_person": "Lux Capital",
+      "id": 3846
+    },
+    {
+      "date": "2019-11-14",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Anduril Industries UK Ltd - Matt Grimm as director since incorporation",
+      "confidence": "confirmed",
+      "id": 4932
+    },
+    {
+      "date": "2025-12-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Anduril DHS border surveillance contracts show temporal pattern: Trae Stephens led DoD transition (Nov 2016-Jan 2017), co-founded Anduril Jun 2017 targeting border surveillance. First CBP contract FY2019 ($6.8M). First major DHS award FY2020 Q4 ($60.7M) \u2014 same quarter Kratsios was acting USD(R&E). Contract grew to $363M single award on Dec 25, 2025 (FY2026 Q1), weeks after Howery and Helberg confirmations. Total DHS Anduril contracts: $20K (FY2019) to $363M single award (Dec 2025). Anduril also received Golden Dome prototype contracts in late 2025 and $20B Army enterprise agreement Mar 2026.",
+      "confidence": "medium",
+      "id": 6954
+    },
+    {
+      "date": "2026-03-11:present",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Anduril acquired ExoAnalytic Solutions Mar 11 2026 - space surveillance firm with global telescope network. Provides space domain awareness for Golden Dome interceptor targeting.",
+      "other_person": "ExoAnalytic Solutions",
+      "id": 3603
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4565,
@@ -1077,498 +1502,5 @@
       "bridge-tax",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Anduril Industries",
-      "connections": [
-        {
-          "target": "Department of Defense",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "USASpending",
-          "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-        },
-        {
-          "target": "Department of Homeland Security",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "USASpending",
-          "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-        },
-        {
-          "target": "Operation Epic Fury",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-        },
-        {
-          "target": "8VC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "8VC early investor in Anduril; defense technology company with billion-dollar Pentagon contracts"
-        },
-        {
-          "target": "1789 Capital",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "1789 Capital invested in Anduril 2.5B Series G (Jun 2025) led by Founders Fund. Creates Trump family financial interest in Anduril Golden Dome contracts (SHIELD, SBI, IVAS 22B)."
-        },
-        {
-          "target": "Corey Lewandowski",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica:2026-03-05",
-          "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-        },
-        {
-          "target": "Ryan Wunderly",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founder of Founders Fund which led Anduril's $2.5B Series G with $1B check (June 2025). Anduril frontrunner for Golden Dome program with Arctic/Greenland components. Howery oversees Greenland as Denmark ambassador."
-        },
-        {
-          "target": "Golden Dome",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Anduril received SBI prototype contract Nov 2025 and selected for $151B SHIELD IDIQ Dec 2025. Frontrunner for space-based interceptor component."
-        },
-        {
-          "target": "True Anomaly",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both are Golden Dome SBI prototype awardees (Nov 2025, 4 known winners). Both SHIELD IDIQ awardees (151B ceiling). Compete for space-based interceptor production contracts worth 1.8B-3.4B annually. Both backed by Thiel-connected VC (Narya/Founders Fund)."
-        },
-        {
-          "target": "Founders Fund",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Founders Fund is Anduril's largest single investor at $1B+ (June 2025). Kenneth Howery (FF co-founder, Ambassador to Denmark) ethics agreement explicitly excludes Anduril from recusal obligations despite FF being primary Anduril investor."
-        },
-        {
-          "target": "SpaceX",
-          "type": "contracts_with",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "SpaceX and Anduril are co-members of the Golden Dome missile defense consortium along with Palantir. Both are Founders Fund portfolio companies. Musk and Luckey both participated in Trump inaugural giving ($1.89B+ combined). Both have DOGE-linked personnel in regulatory agencies overseeing their operations."
-        },
-        {
-          "target": "Cerberus Capital Management",
-          "type": "intelligence",
-          "strength": 0.2,
-          "evidence_ref": "Breaking Defense 2025",
-          "description": "Both part of Silicon Valley/PE-to-Pentagon pipeline; Feinberg (Cerberus) as DepSecDef has oversight of contracts going to Anduril; Trae Stephens (Anduril co-founder) was competing with Feinberg for same DepSecDef position"
-        },
-        {
-          "target": "Palmer Luckey",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "FEC",
-          "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B."
-        },
-        {
-          "target": "Trae Stephens",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Fortune 2024-11-16",
-          "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-        },
-        {
-          "target": "Palantir Technologies Inc",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Anduril press release",
-          "description": "Joint prime contractors on Army TITAN program (.4M). Both in Golden Dome consortium. Palantir-Anduril-SpaceX triangle proposing satellite missile defense. Trae Stephens worked at Palantir 2008-2014 before co-founding Anduril."
-        }
-      ],
-      "secondHop": {
-        "1789 Capital": [
-          {
-            "target": "Defense Supplemental Spending",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Iran war supplemental funding benefits 1789 Capital portfolio: SpaceX, Anduril, Hadrian, Vulcan Elements"
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "1789 Capital holds SpaceX position. SpaceX is bidding 2B+ Golden Dome satellite tracking constellation. Creates direct Trump family financial benefit from SpaceX government contracts via Trump Jr partnership."
-          },
-          {
-            "target": "True Anomaly",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "No direct investment overlap. 1789 Capital and Narya Capital (True Anomaly investor) both operate in defense tech VC with separate portfolios. Both fund principals (Trump Jr, Vance) are immediate family/office of President/VP. Both portfolios benefit from Golden Dome procurement."
-          },
-          {
-            "target": "Project Vault",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "1789 Capital portfolio company Vulcan Elements (rare earth magnets, 620M DoD loan) is direct beneficiary of Project Vault 12B critical mineral reserve"
-          },
-          {
-            "target": "Heritage Foundation",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Mercer connection creates policy-to-investment pipeline"
-          }
-        ],
-        "8VC": [
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
-          },
-          {
-            "target": "Jack Moshkovich",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Partner at 8VC since 2018 (analyst->principal->partner Jan 2025), son of sanctioned Vadim Moshkovich"
-          },
-          {
-            "target": "Denis Aven",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Investor at 8VC since 2022, son of OFAC-sanctioned Petr Aven (Alfa Group)"
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Founder and Managing Partner of 8VC; sole executive officer on all Form D filings"
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "8VC investor in Palantir; Lonsdale co-founded Palantir; Alex Moore was Palantir employee #1"
-          }
-        ],
-        "Cerberus Capital Management": [
-          {
-            "target": "Kirkland & Ellis",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "K&E is ongoing outside counsel to Cerberus across multiple acquisitions (Staples Europe, SubCom, PQ Performance Chemicals). Cerberus chairman of global investments was Dan Quayle."
-          },
-          {
-            "target": "William Barr",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "LittleSis records transaction relationship (2018). Barr did business with Cerberus Capital in 2018 before AG nomination. Cerberus is chaired by former VP Dan Quayle (Bush administration colleague of Barr) and founded by Steve Feinberg (later Trump intelligence advisory board chair, now Deputy SecDef). Cerberus owns DynCorp (military contractor). This connects Barr to private equity/defense contractor nexus with intelligence community ties."
-          }
-        ],
-        "Corey Lewandowski": [
-          {
-            "target": "Rudy Giuliani",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-          },
-          {
-            "target": "Ed Brookover",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-          },
-          {
-            "target": "Mary Coen",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-          },
-          {
-            "target": "Jason Osborne",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-          },
-          {
-            "target": "Matt Mowers",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-          }
-        ],
-        "Department of Defense": [
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir has .3B+ in DoD contracts including .3B Maven Smart System and B Army Enterprise Agreement"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX (Musk-owned) received $7.18B from DoD total, with $1.01B in new awards after Jan 20 2025 (DOGE inauguration). Concurrent with Musk heading DOGE, SpaceX DoD awards include NSSL Phase 3 ($1.16B), Starshield/Starlink subscriptions ($472M)."
-          }
-        ],
-        "Founders Fund": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel founded Founders Fund; controls B AUM; FF invested in Palantir (.1B return), Anduril (B), SpaceX (.5B gain)"
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
-          },
-          {
-            "target": "Rigetti Computing",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Founders Fund V held 88,621 shares of Rigetti Computing ($2M) across all quarters Q4 2024-Q4 2025, a quantum computing company with defense applications"
-          }
-        ],
-        "Golden Dome": [
-          {
-            "target": "SpaceX/Starshield",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Starshield NRO spy constellation provides infrastructure base for Golden Dome custody layer; $2B contract expected for 400-1000 tracking satellites"
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "political",
-            "strength": 1.0,
-            "description": "As Ambassador to Denmark, oversees Pituffik Space Base (stated priority #3). Pituffik NOC upgrade for Golden Dome data throughput. Primary US diplomatic channel for Greenland infrastructure decisions."
-          },
-          {
-            "target": "Donald Trump Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr via 1789 Capital holds investments in SpaceX and Anduril, both frontrunners for $151B+ Golden Dome contracts. Father is president who announced the program."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Michael chairs Missile Defense Executive Board; MDA reports directly to USD(R&E). Controls requirements driving Golden Dome procurement."
-          },
-          {
-            "target": "Donald Trump Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr partner at 1789 Capital (2B AUM) holding SpaceX, Anduril, Hadrian -- all Golden Dome contractors"
-          }
-        ],
-        "Kenneth Howery": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Founders Fund co-founders; Howery is Amb. to Denmark holding Founders Fund, Palantir, Neuralink, Tesla"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Founders Fund. Howery holds carried interest in FF Management LLCs I-IV, Alpha Management. Thiel network placed Howery as Ambassador to Denmark."
-          },
-          {
-            "target": "Luke Nosek",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal co-founders, Founders Fund co-founders. Nosek left FF 2017 to start Gigafund (SpaceX-focused). Howery holds promissory notes from Gigafund Management Company LLC and Gigafund 0.2 LP $250M-500M."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          },
-          {
-            "target": "Stephen Oskoui",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howery is LP investor in Gigafund 0.2 LP (1 of 4 investors, 250M-500M position) managed by Oskoui and Nosek"
-          }
-        ],
-        "Operation Epic Fury": [
-          {
-            "target": "RTX/Raytheon",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "War depletes RTX Tomahawk/SM-3/SM-6/AMRAAM stockpiles, activating Feb 4 framework agreements for 2-4x production surge"
-          },
-          {
-            "target": "SpaceX/Starshield",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "SpaceX Starshield provides satellite communications backbone for LUCAS drones and autonomous systems in Iran operations"
-          },
-          {
-            "target": "Lockheed Martin",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "War depletes Lockheed JASSM/THAAD/PAC-3 MSE stockpiles, triggering production surge and reconciliation spending"
-          }
-        ],
-        "Palantir Technologies Inc": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Thiel is Palantir chairman; FF founding investor; B+ Army contract; Palantir CIK 0001321655"
-          },
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Joint prime contractors on Army TITAN program (.4M). Both in Golden Dome consortium. Palantir-Anduril-SpaceX triangle proposing satellite missile defense. Trae Stephens worked at Palantir 2008-2014 before co-founding Anduril."
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale co-founded Palantir"
-          }
-        ],
-        "Palmer Luckey": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "FF invested in Anduril since 2017, led 2.5B round 2025. Luckey met Trae Stephens at FF retreat 2014. Also backed Erebor digital bank."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel's Founders Fund is lead investor in Anduril (B in Series G alone). Luckey operates within Thiel's tech-right network. Stephens (Thiel protege) co-founded Anduril with Luckey."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-          },
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B."
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Erebor Bank (Columbus, OH). Both from Thiel network: Luckey via Anduril/Founders Fund, Lonsdale via Palantir/8VC. Erebor positioned as bank for defense/crypto/AI ecosystem. $4.35B valuation."
-          }
-        ],
-        "SpaceX": [
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "SpaceX acquired xAI Feb 2 2026 via all-stock deal at 1.25T combined valuation"
-          },
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
-          },
-          {
-            "target": "Honeycomb Partners",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Fiszel offered Epstein SpaceX co-investment in Feb 2017. Company valued at 18B. Fiszel buying 2M (60pct personal) for opt-in private side of Honeycomb. Up to additional 6M co-invest possible. Elon Musk buying 100M personally at 105/share vs investor cost of 118/share."
-          },
-          {
-            "target": "NASA",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX NASA obligations: 7.46B all-time. CCP contracts: 3.03B, 213.9M, 208.4M."
-          }
-        ],
-        "Trae Stephens": [
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Stephens introduced Thiel to Carbyne [Wave 5]"
-          },
-          {
-            "target": "Philippe Laffont",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Co-investors in Blend Labs Inc (BLND). Stephens via Founders Fund, Laffont via Coatue Management."
-          }
-        ],
-        "True Anomaly": [
-          {
-            "target": "JD Vance",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Vance co-founded Narya Capital which invested in True Anomaly (two rounds). True Anomaly won Golden Dome SBI contract. Vance retained 500K-1M Narya stake."
-          },
-          {
-            "target": "Narya Capital",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Narya Capital (co-founded by VP JD Vance) invested in True Anomaly in two funding rounds. Vance retained 500K-1M stake in Narya Fund I per 2025 disclosure. True Anomaly then won Golden Dome SBI prototype contract."
-          },
-          {
-            "target": "Even Rogers",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Founder and CEO. West Point grad, 10-year USAF career, Air Force Weapons School grad, authored Spacepower doctrine. Founded company 12 days after leaving military in 2022."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

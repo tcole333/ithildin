@@ -1,0 +1,199 @@
+{
+  "name": "Hydrazine Capital III, L.P.",
+  "slug": "hydrazine-capital-iii-lp",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.402110",
+  "last_updated": "2026-04-06T20:15:56",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate_structure": 3,
+      "financial": 3
+    },
+    "connection_types": {
+      "corporate": 3
+    },
+    "last_updated": "2026-04-06T20:15:56"
+  },
+  "findings": [
+    {
+      "id": 9631,
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Capital III LP and GP have never registered as California foreign entities \u2014 deliberately excluded from the July 2022 restructuring wave that registered all other Hydrazine funds",
+      "detail": "The July 2022 restructuring wave re-registered all pre-existing Hydrazine entities in California: Hydrazine Capital GP (Jul 15), Hydrazine Capital II GP (Jul 15), Hydrazine Capital II SPV (Jul 15), Hydrazine Capital Management (Jul 15), Hydrazine Capital II LP (Aug 4), Hydrazine Capital II AIV (Sep 6), Hydrazine Capital LP/I (Sep 13). Fund IV, formed Sep 2022, was registered in CA within 6 days. Fund III, formed Feb 2022, was excluded from this wave and has NEVER registered in California. This is a deliberate omission, not an oversight.",
+      "source_datasets": "opencorporates_ca",
+      "confidence": "high",
+      "date_of_event": "2022-07-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9731,
+      "finding_type": "financial",
+      "summary": "Hydrazine Capital III has only 2 beneficial owners per Form ADV \u2014 identity of LP(s) completely undisclosed; fund has $105.7M in assets and was deliberately excluded from the 2022 mass-restructuring that registered all other Hydrazine funds in California",
+      "detail": null,
+      "source_datasets": [
+        "sec_iapd"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:11:19",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://adviserinfo.sec.gov/firm/summary/332160",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9769,
+      "finding_type": "financial",
+      "summary": "Hydrazine Capital III has only 2 beneficial owners, $105.7M AUM, LP identity undisclosed; fund was deliberately excluded from July 2022 mass-CA-registration wave and never appears in SEC portfolio company filings",
+      "detail": null,
+      "source_datasets": "sec_iapd",
+      "confidence": "medium",
+      "date_of_event": "2026-03-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9439,
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Capital III entities have no California foreign registrations despite $105.7M in assets",
+      "detail": "Delaware records confirm Hydrazine Capital III GP, LLC (DE #6616365) and Hydrazine Capital III, L.P. (DE #6616375) both formed 2022-02-11. California SOS search returns no matching entities for these names. Form ADV (CRD 332160) shows Fund III has $105.7M in gross assets and 2 beneficial owners. All other Hydrazine fund generations have California foreign registrations. This absence may represent a compliance gap.",
+      "source_datasets": "opencorporates,sec_iapd",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9630,
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Capital III GP and LP use Corporation Service Company (CSC) as Delaware registered agent \u2014 unique across the 10-entity Hydrazine fund family",
+      "detail": "Full comparison across all 10 Delaware Hydrazine entities confirms Fund III (LP and GP) use Corporation Service Company at 251 Little Falls Drive, Wilmington DE 19808 as registered agent. All other funds use either Cogency Global Inc (Funds I, II, Management) or The Corporation Trust Company/CT Corp (Fund IV). This is the only fund-generation using CSC, suggesting either a different formation attorney or deliberate structural separation.",
+      "source_datasets": "opencorporates_de",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9632,
+      "finding_type": "financial",
+      "summary": "Hydrazine Capital III LP never appears as an investor in any SEC-filed document \u2014 zero EDGAR mentions across all 8 portfolio-company filers referencing Hydrazine Capital",
+      "detail": "Searched EDGAR full-text for 'Hydrazine Capital III' across all form types. Zero results returned. Separately searched portfolio company filings for all 8 EDGAR filers that mention 'Hydrazine Capital' (Reddit, Oklo/AltC, Expedia, Altman Samuel H., Green Dot, ANGI, Fractyl Health, Weave Communications) \u2014 in all cases, references are to Hydrazine Capital II LP only. Fund III never appears as an investor in any EDGAR-filed document, suggesting its portfolio consists exclusively of private/pre-IPO positions.",
+      "source_datasets": "edgar_efts",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Hydrazine Capital III, L.P.",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4978,
+      "person_a": "Sam Altman",
+      "person_b": "Hydrazine Capital III, L.P.",
+      "relationship_type": "corporate",
+      "description": "Hydrazine Capital III LP (105.7M, 2 beneficial owners) has no California foreign registration unlike all other Hydrazine fund generations \u2014 anomalous structure suggesting deliberate opacity around LP identity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 5005,
+      "person_a": "Hydrazine Capital III GP, LLC",
+      "person_b": "Hydrazine Capital III, L.P.",
+      "relationship_type": "corporate",
+      "description": "Hydrazine Capital III GP, LLC is the general partner of Hydrazine Capital III, L.P. Both formed simultaneously on 2022-02-11 in Delaware with CSC as registered agent.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Capital III GP, LLC",
+      "other_person_slug": "hydrazine-capital-iii-gp-llc",
+      "evidence": []
+    },
+    {
+      "id": 5006,
+      "person_a": "Hydrazine Capital Management, LLC",
+      "person_b": "Hydrazine Capital III, L.P.",
+      "relationship_type": "corporate",
+      "description": "Hydrazine Capital Management LLC (CRD 332160, active) is the umbrella investment adviser managing all Hydrazine Capital funds including Fund III. Fund III GP (CRD 325713) is inactive \u2014 advisory authority consolidated under Management LLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Capital Management, LLC",
+      "other_person_slug": "hydrazine-capital-management-llc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-07-15",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Hydrazine Capital III LP and GP have never registered as California foreign entities \u2014 deliberately excluded from the July 2022 restructuring wave that registered all other Hydrazine funds",
+      "confidence": "high",
+      "id": 9631
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Hydrazine Capital III has only 2 beneficial owners per Form ADV \u2014 identity of LP(s) completely undisclosed; fund has $105.7M in assets and was deliberately excluded from the 2022 mass-restructuring that registered all other Hydrazine funds in California",
+      "confidence": "medium",
+      "id": 9731
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Hydrazine Capital III has only 2 beneficial owners, $105.7M AUM, LP identity undisclosed; fund was deliberately excluded from July 2022 mass-CA-registration wave and never appears in SEC portfolio company filings",
+      "confidence": "medium",
+      "id": 9769
+    }
+  ]
+}

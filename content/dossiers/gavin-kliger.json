@@ -5,17 +5,17 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.987952",
+  "generated_at": "2026-05-07T23:07:36.400310",
   "last_updated": "2026-03-06T18:26:13",
   "stats": {
     "total_findings": 6,
     "total_connections": 1,
-    "total_entities": 0,
+    "total_entities": 1,
     "finding_types": {
+      "intelligence": 1,
       "financial": 3,
       "identity": 1,
-      "legal": 1,
-      "intelligence": 1
+      "legal": 1
     },
     "connection_types": {
       "employment": 1
@@ -23,6 +23,31 @@
     "last_updated": "2026-03-06T18:26:13"
   },
   "findings": [
+    {
+      "id": 5986,
+      "finding_type": "intelligence",
+      "summary": "DOGE Personnel: Kyle Kliger roster entry is likely data error \u2014 Gavin Kliger (not Kyle) is the CFPB/OPM operative",
+      "detail": "The investigation roster lists 'Kyle Kliger' as a DOGE operative at CFPB. No evidence exists for a person named Kyle Kliger in DOGE. The actual operative is Gavin Kliger (age 25), a software engineer from Databricks AI background deployed to 8+ agencies: OPM (senior tech advisor), CFPB, USDA, USAID, NIH, IRS, FTC, VOA. At CFPB: led mass layoffs of ~1,400 of 1,700 employees, held prohibited stocks worth up to $715K (Apple, Tesla, crypto) while overseeing cuts. Screamed at staff during 36-hour layoff marathon. Ethics attorneys warned him not to participate in actions benefiting his holdings \u2014 he did anyway. Left CFPB May 8, 2025. The original question about whether Kyle is Gavin's brother has no supporting evidence. There is only one Kliger in DOGE: Gavin Kliger.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-08",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:26:13",
+      "target_name": "Gavin Kliger",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica: DOGE's Gavin Kliger received conflict warnings before CFPB firings; Bloomberg Law: DOGE employee who screamed for CFPB job cuts leaves agency; Wikipedia: Gavin Kliger; Gov Executive: DOGE aide owns stock prohibited by ethics laws",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5501,
       "finding_type": "financial",
@@ -154,31 +179,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 5986,
-      "finding_type": "intelligence",
-      "summary": "DOGE Personnel: Kyle Kliger roster entry is likely data error \u2014 Gavin Kliger (not Kyle) is the CFPB/OPM operative",
-      "detail": "The investigation roster lists 'Kyle Kliger' as a DOGE operative at CFPB. No evidence exists for a person named Kyle Kliger in DOGE. The actual operative is Gavin Kliger (age 25), a software engineer from Databricks AI background deployed to 8+ agencies: OPM (senior tech advisor), CFPB, USDA, USAID, NIH, IRS, FTC, VOA. At CFPB: led mass layoffs of ~1,400 of 1,700 employees, held prohibited stocks worth up to $715K (Apple, Tesla, crypto) while overseeing cuts. Screamed at staff during 36-hour layoff marathon. Ethics attorneys warned him not to participate in actions benefiting his holdings \u2014 he did anyway. Left CFPB May 8, 2025. The original question about whether Kyle is Gavin's brother has no supporting evidence. There is only one Kliger in DOGE: Gavin Kliger.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 18:26:13",
-      "target_name": "Gavin Kliger",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica: DOGE's Gavin Kliger received conflict warnings before CFPB firings; Bloomberg Law: DOGE employee who screamed for CFPB job cuts leaves agency; Wikipedia: Gavin Kliger; Gov Executive: DOGE aide owns stock prohibited by ethics laws",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -205,8 +205,29 @@
       ]
     }
   ],
-  "entities": [],
-  "timeline": [],
+  "entities": [
+    {
+      "role": "Special Advisor / Senior Advisor",
+      "date_start": "2025-01",
+      "date_end": null,
+      "source": "linkedin, wired.com",
+      "entity_id": 1169,
+      "entity_name": "Office of Personnel Management",
+      "entity_type": "agency",
+      "jurisdiction": "dc",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-05-08",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "DOGE Personnel: Kyle Kliger roster entry is likely data error \u2014 Gavin Kliger (not Kyle) is the CFPB/OPM operative",
+      "confidence": "high",
+      "id": 5986
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5501,
@@ -305,55 +326,5 @@
       "access-capitalism",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Gavin Kliger",
-      "connections": [
-        {
-          "target": "DOGE",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
-          "description": "DOGE operative at USAID and CFPB; sent lockout email to USAID employees"
-        }
-      ],
-      "secondHop": {
-        "DOGE": [
-          {
-            "target": "Elon Musk",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
-          },
-          {
-            "target": "Pete Hegseth",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

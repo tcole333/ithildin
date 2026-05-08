@@ -1,5 +1,6 @@
 # Palantir Technologies
-**Stats**: 70 findings, 40 connections, 0 entities
+**Aliases**: Palantir, Palantir Technologies Inc.
+**Stats**: 105 findings, 60 connections, 0 entities
 **Dossier**: /dossiers/palantir-technologies
 
 > Palantir Technologies functions as the primary data integration layer between U.S. government agencies and AI-driven decision-making, occupying a structural position where defense procurement, immigration enforcement, tax administration, and healthcare data converge into a single commercial platform operated by a company whose former employees hold senior technology positions at multiple client agencies.
@@ -11,6 +12,12 @@
 - **[intelligence/medium]** Palantir FALCON system provides ICE dragnet access to dozens of government and commercial databases including DMV photos, SEVIS student records, IRS data, Social Security files, and license-plate readers (Finding #4666)
 - **[intelligence/medium]** Palantir ELITE tool uses Medicaid data from 80M patients to generate ICE deportation targets with confidence-scored dossiers and map-based raid planning (Finding #4668)
 - **[financial/high]** Palantir: $30M ImmigrationOS contract (2025-2027) for AI-driven deportation targeting. Has supplied ICE with FALCON and ICM since 2013. New system integrates passport, SSN, IRS, license plate data. 25 new AI use cases added in 6 months. (Finding #4802)
+- **[relationship/high]** Palantir revolving door with Pentagon CDAO: Tech Transparency Project identified systematic personnel pipeline. Greg Little (first CDAO head) -> Palantir senior counselor (Aug 2023); David Spirk (Pentagon CDO, CDAO co-creator) -> Palantir senior counselor (Jul 2022); Maura Thompson (CDAO/JCS logistics) -> Palantir deployment strategist; Trevor Austin (former Palantir engineer) -> CDAO acting CTO. CDAO oversees all DoD AI procurement including Maven. (Finding #4823)
+- **[relationship/high]** Jacob Helberg: Palantir senior advisor to CEO Karp -> Under Secretary of State for Economic Growth, Energy, and the Environment (Trump 2, confirmed 2025). Donated $1M to Trump campaign plus $3.9M to Trump-aligned PACs/inaugural. Shifted from Democratic donor to major Trump supporter after Oct 7 attack. Launched Pax Silica (State Dept AI/supply chain security) in Dec 2025. Keeping SpaceX and OpenAI stakes in government role. (Finding #4827)
+- **[financial/high]** Palantir lobbying: $6.08M spent in 2025 (up from $5.77M in 2024). Hired Ballard Partners (Trump-tied, became highest-paid DC lobbying firm) and Miller Strategies for defense policy/appropriations after Trump's 2024 election. Also uses Invariant ($560K in 2024 — lobbies on DoD tech procurement, AI policy, border surveillance) and Brownstein Hyatt Farber Schreck. Palantir lobbyists bundled $2.9M for DCCC in January 2026 alone (38% of DCCC monthly total). (Finding #4832)
+- **[intelligence/high]** Palantir ICE data pipeline architecture: FALCON database contains SSNs, financial records, call records, ISP records. Accesses CBP's Analytical Framework for Intelligence (AFI) system which assigns risk scores to travelers including US citizens. ICM auto-resolves identity across EID, CBP border crossings, APIS manifests, DMV files, LexisNexis, and Thomson Reuters CLEAR. Georgetown Law's American Dragnet study: ICE has scanned driver's license photos of 1 in 3 US adults, can access driver data for 3 in 4 adults, tracks vehicles in areas home to 3 in 4 adults. (Finding #4836)
+- **[financial/high]** DHS appointees Palantir stock conflicts: Beyond Miller ($100K-$250K), at least 4 other DHS officials held Palantir stock. Troy Edgar (DHS Deputy Secretary) and Robert Law (Under Secretary for Strategy, Policy, Plans) agreed to divest. Paul Ingrassia (DHS White House liaison, $1K-$15K) and Zachariah Hoag (special assistant) also held stock. Over a dozen Trump appointees across WH and DHS owned Palantir stock. (Finding #4845)
+- **[intelligence/high]** Amnesty International Aug 2025 report: Palantir and Babel Street pose surveillance threats to both pro-Palestine student protesters and migrants. Found ImmigrationOS possesses automated capabilities for constant monitoring including real-time social media monitoring across platforms, pattern recognition and sentiment analysis, and data aggregation. NYC Comptroller Levine requested third-party human rights risk assessment of Palantir's DHS/ICE work. (Finding #4852)
 
 ## Top Connections
 - **Department of Defense** [financial/strong]: Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039.
@@ -25,7 +32,7 @@
 - **NHS England** [corporate/strong]: GBP 330M Federated Data Platform contract (Nov 2023, 7 years). Rejected by 75%+ of hospital trusts. BMA urged doctors to pull back after ICE revelations. Heavily redacted contract.
 - **NSA** [intelligence/strong]: Snowden docs: Palantir helped build XKEYSCORE, deployed across 3 Five Eyes nations by 2010. GCHQ cited faster analytics. CIA In-Q-Tel provided initial USD 2M seed investment in 2005.
 - **8VC** [financial/strong]: 8VC investor in Palantir; Lonsdale co-founded Palantir; Alex Moore was Palantir employee #1
-- ... and 28 more
+- ... and 48 more
 
 ## Open Questions
 - What is the specific data pipeline between GEO Group's SmartLINK monitoring system ($2.2 billion contract) and Palantir's ImmigrationOS/ELITE platforms? While the systems are designed for interoperability, no public documentation confirms a direct data feed.

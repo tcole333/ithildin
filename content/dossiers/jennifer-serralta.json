@@ -1,0 +1,630 @@
+{
+  "name": "Jennifer Serralta",
+  "slug": "jennifer-serralta",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.289618",
+  "last_updated": "2026-04-06T20:15:56",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 13,
+    "total_entities": 14,
+    "finding_types": {
+      "corporate": 6,
+      "personnel": 1,
+      "financial": 1,
+      "relationship": 3
+    },
+    "connection_types": {
+      "familial": 1,
+      "corporate": 12
+    },
+    "last_updated": "2026-04-06T20:15:56"
+  },
+  "findings": [
+    {
+      "id": 9745,
+      "finding_type": "corporate",
+      "summary": "ALTMAN FAMILY LLC (CA #201525910397) is a previously undocumented California LLC in Altman's portfolio, formed approximately 2015",
+      "detail": "B2BHint.com entity aggregator lists ALTMAN FAMILY LLC with California entity number 201525910397. The CA entity number format places formation at approximately 2015. This entity was referenced separately from Altman Holdco in reporting on Pagaya Technologies (Carmen Beckwith signed as Authorized Signatory for Altman Family LLC in the Pagaya F-3 Registration Rights Agreement, Sep 30, 2024). This is the oldest named family LLC in the portfolio, predating Apollo RE LLC and the property holding LLCs.",
+      "source_datasets": "b2bhint,web_search,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2015-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9406,
+      "finding_type": "personnel",
+      "summary": "Jennifer Serralta is Sam Altman's cousin and COO of his family office, hired 2021",
+      "detail": "Jennifer Serralta is Sam Altman's cousin and serves as COO of his family office. She was hired in 2021. Her name appears as manager on all major Altman property and investment LLCs. Business Insider and SF Standard reporting confirmed by registry records.",
+      "source_datasets": "opencorporates,web_search",
+      "confidence": "high",
+      "date_of_event": "2021-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "corroborated",
+      "created_at": "2026-04-06 17:12:10",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9743,
+      "finding_type": "corporate",
+      "summary": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC registered in Hawaii (HI #264766C6, cancelled) at 75-5520 Kona Bay Drive \u2014 one digit off from Altman's actual Big Island estate at 75-5530 Kona Bay Drive, Kailua-Kona HI 96740",
+      "detail": "The Hawaii registration of the QOF (Oct 20, 2021, three months after the $43M Big Surf LLC purchase) used 75-5520 Kona Bay Drive rather than the actual estate address (75-5530). The 75-5520 address has been owned by a different private party since 2007. This raises the question of whether the QOF was intended to hold a separate Opportunity Zone investment in Kailua-Kona \u2014 which has two designated OZ census tracts (Kealakehe and Kailua) \u2014 rather than the existing Big Surf estate, or whether the address was simply entered incorrectly. The HI registration was subsequently cancelled. The CA formation (Aug 2022) is the primary active registration.",
+      "source_datasets": "hawaii_dcca,web_search,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2021-10-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9744,
+      "finding_type": "financial",
+      "summary": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC is a private single-investor QOF self-certified via IRS Form 8996 \u2014 no SEC Form D filing found, consistent with non-public fund structure",
+      "detail": "EDGAR full-text search returned zero results for the fund. QOFs do not require SEC registration unless offering interests to outside investors. The absence of a Form D indicates this is a single-investor vehicle, likely deploying Altman's own capital gains from 2021 tech investment liquidations. Under TCJA 2017 (26 USC \u00a71400Z-2), the fund must hold 90%+ of assets in Qualified Opportunity Zone property and file Form 8996 annually. Capital gains deferred until Dec 31, 2026; post-10-year appreciation permanently excluded from tax.",
+      "source_datasets": "edgar,irs,web_search",
+      "confidence": "high",
+      "date_of_event": "2022-08-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9518,
+      "finding_type": "corporate",
+      "summary": "Jennifer Serralta manages 950 Lombard LLC as part of her role as COO of Sam Altman's family office; she also manages Amberley Properties LLC, Big Surf LLC, Green Valley Ranch Napa LLC, and the Sam Altman Qualified Opportunity Fund",
+      "detail": "Serralta is Altman's cousin. Her role as manager of 950 Lombard LLC is confirmed from public property records and reporting. She is not named in the complaint. No litigation involving Amberley Properties LLC, Big Surf LLC, or Green Valley Ranch Napa LLC was found.",
+      "source_datasets": "news,property_records",
+      "confidence": "high",
+      "date_of_event": "2024-07-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9746,
+      "finding_type": "corporate",
+      "summary": "Montana LLC cluster (Montvale Group, Oakland Collection, Hawthorne Lane Collective) represents a deliberate architectural shift to Montana jurisdiction for privacy and tax advantages starting September 2025",
+      "detail": "Three LLCs formed in Montana in a 10-week window (Sep 9 and Nov 18, 2025). Montana LLCs do not require public disclosure of member/manager names in the same way as California. Montana has no state capital gains tax (CA rate 13.3%). All three use Bozeman-area infrastructure: Montvale and Oakland Collection use local attorney Rebecca H. Pape (28 E Mendenhall, Bozeman MT) as registered agent, while Hawthorne Lane Collective uses CT Corporation System (3011 American Way, Missoula MT), which typically signals a larger or more complex transaction. All managed by Jennifer Serralta at her LA address (350 S. Grand Ave Ste 2000, Los Angeles). Geographic target is likely Gallatin County / Bozeman-area real estate.",
+      "source_datasets": "opencorporates,web_search",
+      "confidence": "high",
+      "date_of_event": "2025-09-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9389,
+      "finding_type": "relationship",
+      "summary": "Jennifer Serralta is Sam Altmans cousin and serves as COO of his family office. She manages at least three property-holding LLCs: 950 Lombard LLC, Amberley Properties LLC, and Sam Altman Qualified Opportunity Fund. She is the operational layer between Altman and his real estate holdings.",
+      "detail": null,
+      "source_datasets": [
+        "websearch"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 16:49:39",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SFStandard:2025-02-19",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TheRealDeal:2025-02-18",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9683,
+      "finding_type": "corporate",
+      "summary": "Jennifer Serralta is Sam Altman's cousin and COO of his personal family office, managing 14+ LLCs holding real estate and investment assets",
+      "detail": "Serralta manages entities across the Altman portfolio including 950 Lombard LLC (SF primary residence), Amberley Properties LLC (Jan 2025 $14M SF purchase), Green Valley Ranch Napa LLC, Big Surf LLC (Hawaii), SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC, APOLLO RE LLC, APOLLO PROJECTS GP LLC, and the three 2025 Montana LLCs. Her address is consistently 350 S Grand Ave Suite 2000, Los Angeles CA 90071 (Two California Plaza, Andersen office).",
+      "source_datasets": "opencorporates,web_search",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9692,
+      "finding_type": "corporate",
+      "summary": "Jennifer Serralta is Sam Altman's cousin and family office COO, confirmed by Business Insider reporting and her role on SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC and other named Altman entities",
+      "detail": "Business Insider identified Jennifer Serralta as Altman's cousin who describes herself on LinkedIn as COO of a family office. She is confirmed manager on SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC (CA 202251811284), 950 LOMBARD LLC (CA 202009010842), APOLLO PROJECTS GP LLC, and 11 other entities in OpenCorporates. Her presence on Heron and Meramec directly links those entities to Altman.",
+      "source_datasets": "opencorporates,web",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9709,
+      "finding_type": "relationship",
+      "summary": "Jennifer Serralta is a high-betweenness broker (rank #3, score 0.2396) connecting Sam Altman's personal financial vehicles \u2014 ALTMAN HOLDCO, 950 Lombard LLC, Andersen Tax LLC, Carmen Beckwith, Oliver Mulherin, Michael Shetterly, and Rebecca H. Pape",
+      "detail": "Degree=9, betweenness=0.2396, brokerage_score=0.889. Neighbors do not connect to each other (clustering=0.111), indicating Serralta is the central coordinator of Altman's personal financial office rather than a member of any dense circle. She is the primary bridge between Thread 2 (Personal Financial Vehicles) and Thread 6 (Mulherin & Family).",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:06:08",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-33",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9771,
+      "finding_type": "relationship",
+      "summary": "Jennifer Serralta is a high-betweenness broker (rank #3, score 0.2396) connecting Sam Altman's personal financial vehicles \u2014 ALTMAN HOLDCO, 950 Lombard LLC, Andersen Tax LLC, Carmen Beckwith, Oliver Mulherin, Michael Shetterly, and Rebecca H. Pape",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "target_name": "Jennifer Serralta",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4861,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Sam Altman",
+      "relationship_type": "familial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 16:50:03",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SFStandard:2025-02-19",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4878,
+      "person_a": "Jennifer Serralta",
+      "person_b": "8595 Pelham Road, Suite 400 #309, Greenville, SC 29615",
+      "relationship_type": "corporate",
+      "description": "8595 Pelham Road Suite 400 #309 Greenville SC is the shared registered address for 48+ Altman family office entities spanning real estate, venture capital, and holding structures.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "8595 Pelham Road, Suite 400 #309, Greenville, SC 29615",
+      "other_person_slug": "8595-pelham-road-suite-400-309-greenville-sc-29615",
+      "evidence": []
+    },
+    {
+      "id": 4870,
+      "person_a": "Sam Altman",
+      "person_b": "Jennifer Serralta",
+      "relationship_type": "corporate",
+      "description": "Jennifer Serralta is Sam Altman's cousin, hired 2021 as COO of his family office. She appears as manager on every confirmed property LLC and most investment fund entities.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 4876,
+      "person_a": "ALTMAN HOLDCO, LLC",
+      "person_b": "Jennifer Serralta",
+      "relationship_type": "corporate",
+      "description": "The 2022 restructuring simultaneously created new versions of all prior Hydrazine Capital entities, Altman Family LLC, and Altman Holdco. All moved to Serralta's Greenville SC address. This event marks the formalization of Serralta's family office management role.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "ALTMAN HOLDCO, LLC",
+      "other_person_slug": "altman-holdco-llc",
+      "evidence": []
+    },
+    {
+      "id": 4941,
+      "person_a": "Jennifer Serralta",
+      "person_b": "950 Lombard LLC",
+      "relationship_type": "corporate",
+      "description": "Jennifer Serralta (Altman cousin, family office COO) is the manager of 950 Lombard LLC, the entity that purchased and owns the property.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:39:55",
+      "profile_id": "altman",
+      "other_person": "950 Lombard LLC",
+      "other_person_slug": "950-lombard-llc",
+      "evidence": []
+    },
+    {
+      "id": 4989,
+      "person_a": "Carmen Beckwith",
+      "person_b": "Jennifer Serralta",
+      "relationship_type": "corporate",
+      "description": "Both Carmen Beckwith and Jennifer Serralta signed as Authorized Signatories for Altman Family LLC (Pagaya F-3, Sep/Oct 2024). They are co-managers on Heron LLC and Meramec Group LLC (both CA, Dec 2023). Jennifer Serralta is confirmed as Sam Altman's cousin and COO of his family office. Beckwith and Serralta constitute the CFO/COO leadership pair of the Altman family office.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:11",
+      "profile_id": "altman",
+      "other_person": "Carmen Beckwith",
+      "other_person_slug": "carmen-beckwith",
+      "evidence": []
+    },
+    {
+      "id": 5038,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Sam Altman",
+      "relationship_type": "corporate",
+      "description": "Serralta is Altman's cousin and COO of his personal family office; she manages all real estate and investment holding LLCs including Montvale Group, Oakland Collection, and Hawthorne Lane Collective",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 5047,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Andersen Tax LLC",
+      "relationship_type": "corporate",
+      "description": "Serralta operates from Andersen Tax's LA office (350 S Grand Ave Suite 2000). Andersen Tax provides tax advisory and management representation for all Altman family office real estate entities via Serralta and the Beckwith/Turpel/White team.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Andersen Tax LLC",
+      "other_person_slug": "andersen-tax-llc",
+      "evidence": []
+    },
+    {
+      "id": 5069,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Montvale Group LLC",
+      "relationship_type": "corporate",
+      "description": "Jennifer Serralta manages all three Montana LLCs (Montvale Group, Oakland Collection, Hawthorne Lane Collective) from her LA address, with Bozeman-area registered agents \u2014 confirming her as operational layer for Altman's 2025 Montana property acquisition program",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "profile_id": "altman",
+      "other_person": "Montvale Group LLC",
+      "other_person_slug": "montvale-group-llc",
+      "evidence": []
+    },
+    {
+      "id": 4874,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Michael Shetterly",
+      "relationship_type": "corporate",
+      "description": "Michael Shetterly is an employment attorney at Ogletree Deakins in Greenville SC \u2014 same city as Serralta's registered address. He appears as manager on Amberley Properties, Heron, and Meramec Group \u2014 likely serving as legal counsel on LLC filings.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Michael Shetterly",
+      "other_person_slug": "michael-shetterly",
+      "evidence": []
+    },
+    {
+      "id": 4985,
+      "person_a": "Oliver Mulherin",
+      "person_b": "Jennifer Serralta",
+      "relationship_type": "corporate",
+      "description": "Oliver Mulherin's Structure Fund I GP LLC and LP use the Altman family office Pelham Road mailbox address and CT Corp as registered agent \u2014 the same agent as the two most recent OpenAI Startup Fund entities. Structure Fund is integrated into the family office administrative infrastructure immediately on formation.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "profile_id": "altman",
+      "other_person": "Oliver Mulherin",
+      "other_person_slug": "oliver-mulherin",
+      "evidence": []
+    },
+    {
+      "id": 5041,
+      "person_a": "Jennifer Serralta",
+      "person_b": "Rebecca H. Pape",
+      "relationship_type": "corporate",
+      "description": "Pape serves as Montana registered agent for Serralta-managed Altman LLCs including Montvale Group and Oakland Collection; Pape is a professional registered agent serving 347+ MT LLCs",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Rebecca H. Pape",
+      "other_person_slug": "rebecca-h-pape",
+      "evidence": []
+    },
+    {
+      "id": 5070,
+      "person_a": "Michael Shetterly",
+      "person_b": "Jennifer Serralta",
+      "relationship_type": "corporate",
+      "description": "Michael Shetterly (Ogletree Deakins, Greenville SC) organized the Wyoming LLC cluster (Briarwood Properties, Woodbine Group, Sunnyside Associates) \u2014 connecting Shetterly's known Altman family office work to a parallel WY property acquisition program distinct from Serralta's CA/MT portfolio",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "profile_id": "altman",
+      "other_person": "Michael Shetterly",
+      "other_person_slug": "michael-shetterly",
+      "evidence": []
+    }
+  ],
+  "entities": [
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SF Standard (Feb 2025)",
+      "entity_id": 2980,
+      "entity_name": "950 Lombard LLC",
+      "entity_type": "llc",
+      "jurisdiction": "California",
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "The Real Deal (Feb 2025)",
+      "entity_id": 2981,
+      "entity_name": "Amberley Properties LLC",
+      "entity_type": "llc",
+      "jurisdiction": "California",
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SF Standard",
+      "entity_id": 2984,
+      "entity_name": "Sam Altman Qualified Opportunity Fund",
+      "entity_type": "fund",
+      "jurisdiction": "California",
+      "entity_status": "active"
+    },
+    {
+      "role": "Chief Operating Officer, Altman family office",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates,web_search",
+      "entity_id": 2999,
+      "entity_name": "Jennifer Serralta",
+      "entity_type": "person",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Chief Executive Officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3026,
+      "entity_name": "APOLLO PROJECTS GP, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SF Standard 2024-07-16; The Real Deal SF 2025-02-18",
+      "entity_id": 3175,
+      "entity_name": "950 Lombard LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Chief Executive Officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "california_sos",
+      "entity_id": 2994,
+      "entity_name": "Apollo Projects GP, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates_us_ca",
+      "entity_id": 3028,
+      "entity_name": "Heron, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates_us_ca",
+      "entity_id": 3036,
+      "entity_name": "Meramec Group, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3321,
+      "entity_name": "Montvale Group, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3322,
+      "entity_name": "Oakland Collection, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3038,
+      "entity_name": "Hawthorne Lane Collective, LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3025,
+      "entity_name": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "Co-Manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates",
+      "entity_id": 3025,
+      "entity_name": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2015-01-01",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "ALTMAN FAMILY LLC (CA #201525910397) is a previously undocumented California LLC in Altman's portfolio, formed approximately 2015",
+      "confidence": "high",
+      "id": 9745
+    },
+    {
+      "date": "2021-01-01",
+      "type": "finding",
+      "finding_type": "personnel",
+      "summary": "Jennifer Serralta is Sam Altman's cousin and COO of his family office, hired 2021",
+      "confidence": "high",
+      "id": 9406
+    },
+    {
+      "date": "2021-10-20",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC registered in Hawaii (HI #264766C6, cancelled) at 75-5520 Kona Bay Drive \u2014 one digit off from Altman's actual Big Island estate at 75-5530 Kona Bay Drive, Kailua-Kona HI 96740",
+      "confidence": "high",
+      "id": 9743
+    },
+    {
+      "date": "2022-08-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC is a private single-investor QOF self-certified via IRS Form 8996 \u2014 no SEC Form D filing found, consistent with non-public fund structure",
+      "confidence": "high",
+      "id": 9744
+    },
+    {
+      "date": "2024-07-12",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Jennifer Serralta manages 950 Lombard LLC as part of her role as COO of Sam Altman's family office; she also manages Amberley Properties LLC, Big Surf LLC, Green Valley Ranch Napa LLC, and the Sam Altman Qualified Opportunity Fund",
+      "confidence": "high",
+      "id": 9518
+    },
+    {
+      "date": "2025-09-09",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Montana LLC cluster (Montvale Group, Oakland Collection, Hawthorne Lane Collective) represents a deliberate architectural shift to Montana jurisdiction for privacy and tax advantages starting September 2025",
+      "confidence": "high",
+      "id": 9746
+    }
+  ]
+}

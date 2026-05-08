@@ -1,6 +1,8 @@
 # Robert Gold
-**Stats**: 5 findings, 6 connections, 0 entities
+**Stats**: 8 findings, 6 connections, 0 entities
 **Dossier**: /dossiers/robert-gold
+
+> Gold occupies a specific structural position in the Epstein network: the institutional origin point. As co-managing partner of the firm where Epstein first received legal services, Gold's career provides the earliest documented connection between Epstein and the prosecutorial networks of the Southern District of New York. The allegation recorded in House Oversight documents &mdash; that Gold used those former AUSA relationships to delay SDNY action on the Towers Financial fraud until the statute of limitations had nearly expired &mdash; frames him not merely as a transactional attorney but as someone whose institutional knowledge of federal enforcement timelines could be deployed as a protective resource. His later career shows a pattern of serial lateral moves across large firms (DLA Piper, Wilson Sonsini, Mishcon de Reya) while maintaining personal contact with Epstein through correspondence and travel. Gold represents the revolving-door dynamic at its most specific: a prosecutor who built network capital in a division focused on official corruption and securities fraud, then applied that capital in private practice on behalf of a client whose exposure was precisely in those categories.
 
 ## Key Findings
 - **[identity/high]** Robert Gold (b. Sept 16 1945): co-founding partner of Gold and Wachtel. Columbia BA Economics 1967, Cornell JD and MBA 1971. AUSA SDNY Criminal Division 1973-1977 (Official Corruption Unit, Securities Fraud Unit). Career: Shea and Gould (1971, 1980), Gold and Wachtel (co-managing partner, 1984-late 1990s), McDermott Will and Emery, Ranieri and Co (1998-2000), Sullivan and Worcester, DLA Piper (2006), Wilson Sonsini (2008), Mishcon de Reya (2014). Represented George Steinbrenner. Defeated Ronald Perelman hostile takeover of Hudson News. Involved in Watergate, Iran-Contra, Marcos prosecution cases. (1945-09-16) (Finding #2096)
@@ -14,5 +16,18 @@
 - **Steven Hoffenberg** [legal/strong]: Gold used former AUSA connections to shield Epstein from Towers Financial prosecution, running out statute of limitations. Hoffenberg served 19 years; Epstein was never charged.
 - **Gold and Wachtel** [employment/strong]: Co-managing partner and name partner. Former AUSA SDNY criminal division 1973-1977. Formed firm with William Wachtel.
 - **Harry Wachtel** [corporate/strong]: Co-founders of Gold and Wachtel law firm (1984). Gold served as co-managing partner.
-- **Jeffrey Epstein** [legal/strong]: Robert Gold co-managing partner of Gold and Wachtel which represented J. Epstein and Company Inc from 1988 as process agent. Gold would have been responsible for bringing Epstein as client or approving him.
 - **Jeffrey Epstein** [legal/medium]: As co-managing partner of Gold & Wachtel, Gold was the senior partner when the firm began representing Epstein in 1988. Gold was a former AUSA with criminal defense expertise.
+- **Jerry McMorris** [social/medium]: Robert Gold sent FedEx Priority Overnight from J. Epstein & Co (457 Madison Ave) to Mr Jerry McMorris at Colorado Rockies Baseball Club.
+
+## Open Questions
+- What was the nature of the indebtedness described in Epstein's 2001 Trust ONE debt forgiveness provision for Robert Gold &mdash; was it a loan, deferred legal fees, or another financial arrangement, and was it ever collected?
+- Who is &ldquo;Alan&rdquo; referenced in Gold's June 2014 Paris email to Epstein, and what was the nature of the work Gold performed at Mishcon de Reya that brought him to Paris in connection with Epstein's network?
+- What are the primary documents &mdash; if any exist &mdash; describing Gold's role in the Ana Obregon asset recovery referenced in the House Oversight narrative, and in what year did that representation occur?
+- Were there additional contacts between Gold and Epstein beyond the 13 documents identified in the DOJ corpus, and does the Mishcon de Reya correspondence produced through that firm reflect a legal or purely personal relationship?
+- Does the Gold &amp; Wachtel client relationship with Jackie Fine Arts (the Herman Finesod tax shelter operation that recruited Darren Indyke) predate or postdate the firm's engagement by Epstein in 1988, and was Gold personally involved in the Jackie Fine Arts representation?
+
+## Applicable Models
+- revolving-door
+- enabler-gradient
+- regulatory-capture
+- narrative-shield

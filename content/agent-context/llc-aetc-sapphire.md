@@ -1,0 +1,10 @@
+# LLC AETC Sapphire
+**Stats**: 5 findings, 0 connections, 0 entities
+**Dossier**: /dossiers/llc-aetc-sapphire
+
+## Key Findings
+- **[financial/confirmed]** Corrective USPTO patent assignments to Russian GE-Rosneft JV entity filed October 13, 2022 — 8 months after comprehensive Russia export controls — formalizing ownership of SEAJET naval pod drive patent (US 11502560) in name 'AETC SAPPHIRE LLC' (2022-10-13) (Finding #9377)
+- **[financial/confirmed]** GE Energy Power Conversion Technology Ltd (British GE subsidiary, formerly Converteam UK) transferred SEAJET pod drive patents to AETC Sapphire in 2018-2019: patent 10179636 (Reel 48057/485, Jan 2019) and patent 10710694 (Reel 48544/422, Mar 2019). Inventors include French engineers from Converteam/GE Marine lineage. (2019-03-08) (Finding #9378)
+- **[financial/high]** Rosneft designated OFAC SDN on October 22, 2025 under E.O. 14024 — Trump administration's first Russia sanctions action. 34 Rosneft subsidiaries also named. As a 50%-Rosneft-owned JV, AETC Sapphire's US patent portfolio (6+ SEAJET pod drive patents) is now potentially blocked property. Wind-down GL-126/127 expired November 21, 2025. (2025-10-22) (Finding #9382)
+- **[background/high]** AETC Sapphire holds 6 granted US patents (+ 1 pending app 18037605) on SEAJET pod drive technology: stator housing assembly, screw propeller, ring seals, force direction sensors, drive shaft braking, propulsion units with hydraulic modules. Technology used by 15 navies. Inventors are French (Julliand, Vincent, Roche, Humbert, Hemmelmann, Mandou, Bry, Deschamps, Barth) and Russian (Ginesin, Gavrilov, Kniazev) engineers. (2024) (Finding #9381)
+- **[background/high]** September 2021: Rosneft, GE Energy Power Conversion Technology Ltd, and Sapphire Applied Engineering and Training Center LLC signed License Agreement at 6th Eastern Economic Forum for unified 15MW ice-class pod drive technology — executed 5 months before Russia invaded Ukraine and comprehensive export controls were imposed (2021-09) (Finding #9380)

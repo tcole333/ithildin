@@ -5,21 +5,23 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.886217",
-  "last_updated": "2026-02-13T04:21:02",
+  "generated_at": "2026-05-07T23:07:36.223201",
+  "last_updated": "2026-05-07T02:29:09",
   "stats": {
-    "total_findings": 14,
-    "total_connections": 5,
+    "total_findings": 15,
+    "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 13,
+      "intelligence": 14,
       "document": 1
     },
     "connection_types": {
       "intelligence": 4,
-      "employment": 1
+      "employment": 1,
+      "corporate": 1,
+      "legal": 1
     },
-    "last_updated": "2026-02-13T04:21:02"
+    "last_updated": "2026-05-07T02:29:09"
   },
   "findings": [
     {
@@ -62,6 +64,31 @@
         {
           "evidence_type": "file",
           "evidence_ref": "WEB:sarawakreport.org/2017/03/latest-on-genevas-1mdb-snooper/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11109,
+      "finding_type": "intelligence",
+      "summary": "Giannakopoulos co-shareholder with Charlie Ergen (US satellite-TV billionaire, EchoStar founder) in 2010 \u2014 major previously-unknown US billionaire-tier connection",
+      "detail": "Per the Benedetti deep-dive search, Nicolas Giannakopoulos (Swiss-Greek private intelligence operative who became Misra's Geneva subcontractor on the SoftBank caper) was a 2010 co-shareholder with Charlie Ergen \u2014 the US satellite-TV billionaire, EchoStar/DISH Network founder. At the time Giannakopoulos described himself as 'private consultant in security and investigation.' This is a previously underappreciated US-billionaire-tier connection for the operative who later: (a) ran the SoftBank dirty-tricks public phase 2015-2017 (distributed Arora/Sama private banking screenshots; hired Mark Hollingsworth to plant The Independent Oct 2015 piece); (b) ran the bogus University of Geneva seminar for Najib Razak/1MDB Oct 26-27 2016; (c) was SCL Group's Switzerland agent (CA parent) since 2010, with his Swiss entity sharing address and phone with SCL's Geneva office; (d) board member at High-Tech Bridge SA (Geneva cybersecurity); (e) terminated by University of Geneva June 2017; (f) faces criminal defamation complaints from SoftBank (Dec 2017) and Sama in Geneva via Geneva AG Olivier Jornot. The Ergen connection raises whether Giannakopoulos's intelligence-for-hire architecture had US-side principals beyond the SoftBank/1MDB matters.",
+      "source_datasets": [
+        "axios.com"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2010-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:27:19",
+      "target_name": "Nicolas Giannakopoulos",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "benedetti-deepdive-research",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -463,6 +490,36 @@
       "evidence": []
     },
     {
+      "id": 5914,
+      "person_a": "Charlie Ergen",
+      "person_b": "Nicolas Giannakopoulos",
+      "relationship_type": "corporate",
+      "description": "Co-shareholders in 2010. At the time Giannakopoulos described himself as 'private consultant in security and investigation.' Ergen is US satellite-TV billionaire EchoStar/DISH Network founder. Previously underappreciated US-billionaire-tier connection for the SCL/CA Geneva agent who later ran the SoftBank dirty-tricks public phase 2015-2017.",
+      "strength": "medium",
+      "date_range": "2010",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:28:50",
+      "profile_id": "epstein",
+      "other_person": "Charlie Ergen",
+      "other_person_slug": "charlie-ergen",
+      "evidence": []
+    },
+    {
+      "id": 5918,
+      "person_a": "Nicolas Giannakopoulos",
+      "person_b": "Olivier Jornot",
+      "relationship_type": "legal",
+      "description": "Geneva Cantonal Attorney General Jornot is the prosecutor handling SoftBank's Dec 2017 criminal defamation complaint against Giannakopoulos and Giannakopoulos's Nov 2016 counter-complaint alleging hacking. Sama also filed defamation complaint in Geneva Dec 23 2016. The Swiss prosecutorial route became Sama's chosen forum for redress instead of US/UK civil litigation.",
+      "strength": "medium",
+      "date_range": "2016-present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:29:09",
+      "profile_id": "epstein",
+      "other_person": "Olivier Jornot",
+      "other_person_slug": "olivier-jornot",
+      "evidence": []
+    },
+    {
       "id": 435,
       "person_a": "Nicolas Giannakopoulos",
       "person_b": "Steve Bannon",
@@ -495,6 +552,22 @@
       "summary": "Giannakopoulos was SCL Group (Cambridge Analytica parent) partner in Switzerland since 2010. One of his Swiss companies shared an address and phone number with SCL's Geneva office. He was the SCL agent for Switzerland and their conduit into Swiss academic/intelligence circles.",
       "confidence": "high",
       "id": 821
+    },
+    {
+      "date": "2010",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Co-shareholders in 2010. At the time Giannakopoulos described himself as 'private consultant in security and investigation.' Ergen is US satellite-TV billionaire EchoStar/DISH Network founder. Previously underappreciated US-billionaire-tier connection for the SCL/CA Geneva agent who later ran the SoftBank dirty-tricks public phase 2015-2017.",
+      "other_person": "Charlie Ergen",
+      "id": 5914
+    },
+    {
+      "date": "2010-01-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Giannakopoulos co-shareholder with Charlie Ergen (US satellite-TV billionaire, EchoStar founder) in 2010 \u2014 major previously-unknown US billionaire-tier connection",
+      "confidence": "medium",
+      "id": 11109
     },
     {
       "date": "2014",
@@ -559,6 +632,14 @@
       "summary": "UNIVERSITY TERMINATION AFTERMATH: University of Geneva terminated Giannakopoulos in June 2017 after internal investigation found: (1) his appointment as Vice-Director of OUS was never formally endorsed by the Global Studies Institute, (2) seminar funding was never formally submitted or endorsed, (3) he used university premises and branding without authorization. His superior Prof. Frederic Esposito at the Global Studies Institute was also implicated. After termination, Giannakopoulos faced defamation complaints from SoftBank and Alok Sama at the Geneva Public Prosecutor's Office (filed Dec 23, 2016). Giannakopoulos counter-filed alleging computer attacks on his company Global Risk Profile. No public record of criminal conviction. He continued operating through Miles SA, OCO, Global Risk Profile, and later founded Apex Fusion Foundation (Zug, blockchain, 2024). Still speaks at conferences including Corporate Intelligence & Security Conference.",
       "confidence": "medium",
       "id": 987
+    },
+    {
+      "date": "2016-present",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Geneva Cantonal Attorney General Jornot is the prosecutor handling SoftBank's Dec 2017 criminal defamation complaint against Giannakopoulos and Giannakopoulos's Nov 2016 counter-complaint alleging hacking. Sama also filed defamation complaint in Geneva Dec 23 2016. The Swiss prosecutorial route became Sama's chosen forum for redress instead of US/UK civil litigation.",
+      "other_person": "Olivier Jornot",
+      "id": 5918
     },
     {
       "date": "2018-12-06",
@@ -680,202 +761,6 @@
       "private-order",
       "narrative-shield",
       "bridge-tax"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Nicolas Giannakopoulos",
-      "connections": [
-        {
-          "target": "Alessandro Benedetti",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Giannakopoulos was Benedetti's subcontractor in the SoftBank sabotage operation (2015-2016). Benedetti recruited Giannakopoulos to distribute leaked banking records and act as nominal shareholder."
-        },
-        {
-          "target": "Mark Hollingsworth",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Giannakopoulos hired freelance journalist Hollingsworth to pitch SoftBank-related story to The Independent (published Oct 2015). Email evidence suggests Hollingsworth would be paid if story published."
-        },
-        {
-          "target": "Najib Razak",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": null
-        },
-        {
-          "target": "SCL Group",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": null
-        },
-        {
-          "target": "Steve Bannon",
-          "type": "intelligence",
-          "strength": 0.2,
-          "evidence_ref": null,
-          "description": "Two-hop organizational overlap via Cambridge Analytica/SCL Group. Giannakopoulos was SCL partner since 2010. Bannon was CA Vice President Jun 2014-Aug 2016. No direct contact evidence found."
-        }
-      ],
-      "secondHop": {
-        "Alessandro Benedetti": [
-          {
-            "target": "Rajeev Misra",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Misra paid Benedetti 500K via Barkmere Group BVI Apr 2015 for smear campaign. Benedetti expected exec position plus profit share. Falling out led to WSJ leak Feb 2020"
-          },
-          {
-            "target": "Jacques Attali",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 0.7,
-            "description": "Paris contacts list, calendar entries Sept-Oct 2013, Epstein inquired about Benedetti via Teodorani Jan 28 2019"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": ""
-          },
-          {
-            "target": "Rajeev Misra",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "SCL Group": [
-          {
-            "target": "Vincent Tchenguiz",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Largest shareholder SCL Group 2005-2015, parent of Cambridge Analytica"
-          }
-        ],
-        "Steve Bannon": [
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "160+ emails, 526 jmail. Daily contact Jan 2018-Jul 2019. Bitcoin advisory, film collaboration, political intelligence exchange, USVI island, 100k payment."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Wolff served as intermediary. Forwarded WH intel Bannon->Wolff->Epstein. Proposed media project. Assessed leak risks."
-          },
-          {
-            "target": "Dan Fleuette",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Fleuette (doitfluet@protonmail.com) Bannon production coordinator. Shared American Carnage via Vimeo, coordinated USVI/Norway travel. ProtonMail user."
-          },
-          {
-            "target": "Sean Bannon",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Son. 210 A St NE Washington DC 20002. Apple Watch gift from Epstein Jan 2019. Film production."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Wolff intermediary between Bannon and Epstein, forwarded communications and arranged meetings"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2005-09-23",
-        "label": "FARA/LDA search results: Neither Cambridge Analytica nor SCL Group registered under FARA (Foreign Agents Registration Act) or filed LDA lobbying disclosures, despite conducting election influence operations in multiple countries (Trinidad, Saint Lucia, Saint Kitts, Malaysia, Nigeria, Kenya). This mirrors the Epstein network pattern of systematic FARA avoidance documented in Wave 6. SCL International Group Ltd registered as BVI offshore entity (reg #677767, incorporated 2005-09-23, Portcullis TrustNet Chambers, Road Town, Tortola) per ICIJ Offshore Leaks database.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 838
-      },
-      {
-        "date": "2010",
-        "label": "Giannakopoulos was SCL Group (Cambridge Analytica parent) partner in Switzerland since 2010. One of his Swiss companies shared an address and phone number with SCL's Geneva office. He was the SCL agent for Switzerland and their conduit into Swiss academic/intelligence circles.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 821
-      },
-      {
-        "date": "2014",
-        "label": "KAZAKHSTAN OPERATION: Prior to the 1MDB seminar, Giannakopoulos conducted a covert lobbying operation for the Kazakh government (2014-2015) targeting fugitive oligarch Mukhtar Ablyazov. FTI Consulting (London PR firm serving Kazakhstan) activated Giannakopoulos's OCO (Organized Crime Observatory) to produce a purportedly independent but critical report portraying Ablyazov as a swindler hiding behind political persecution. FTI employee Jonathan Hawker coordinated the operation. Giannakopoulos held meetings at Reed Smith law firm in London with FTI representatives. He claimed to refuse FTI payment for the OCO report but acknowledged accepting research contracts from companies close to the Kazakh government through his company Inside.co. Pattern: academic/NGO credentials used as cover for intelligence-for-hire operations -- identical to the 1MDB seminar one year later.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 986
-      },
-      {
-        "date": "2014-11-24",
-        "label": "Barkmere Limited, the shell company controlled by Benedetti through which Misra paid USD 500K for the SoftBank operation, is registered in Cyprus (HE 338259, incorporated 2014-11-24), identified via OCCRP Aleph. The timing -- incorporated November 2014, operation began 2015 -- suggests it was created specifically for this purpose. Registered at Spyrou Kyprianou 18, Floor 2, 1075 Nicosia. Reports also reference a Barkmere Group (BVI), suggesting a multi-jurisdiction structure.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 839
-      },
-      {
-        "date": "2016",
-        "label": "Giannakopoulos conducted intelligence operations for Malaysian PM Najib Razak related to 1MDB scandal (2016-2017). Organized bogus University of Geneva seminar to gather intelligence on 1MDB critics and opposition politicians. Suspended from University of Geneva after exposure by Sarawak Report, then terminated. SCL Group's Southeast Asia office in Kuala Lumpur directed by Azrin Zizal, connecting Giannakopoulos-SCL-Malaysia intelligence operations.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 823
-      },
-      {
-        "date": "2016-01-20",
-        "label": "In the SoftBank operation (2015-2016), Giannakopoulos distributed screenshots of Nikesh Arora and Alok Sama's private banking records and emails to journalists. He was positioned as the nominal shareholder behind the Boies Schiller Flexner LLP complaint letter sent to SoftBank board (Jan 20, 2016, signed by partner Matthew Schwartz). He was recruited as subcontractor by Alessandro Benedetti, who was paid USD 500K from Rajeev Misra via Standard Chartered Bank to Barkmere Group (BVI/Cyprus).",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 826
-      },
-      {
-        "date": "2016-10",
-        "label": "BOGUS SEMINAR MECHANICS: The University of Geneva seminar took place October 26-27, 2016, formally hosted by the Observatory on Security (OUS) at the Global Studies Institute (GSI). Giannakopoulos invited senior Malaysian civil society figures and 1MDB investigators including Clare Rewcastle Brown (Sarawak Report editor), promising Swiss officials would brief on 1MDB investigation progress. Political leaders Muhyiddin Yassin (former Deputy PM) and Nurul Izzah Anwar (opposition MP) were listed as speakers but did not attend. No Swiss officials appeared. Giannakopoulos steered discussions toward how frozen Swiss-seized 1MDB assets could be diverted to an NGO the attendees could join -- intelligence collection disguised as civic engagement. Cost CHF 17,000 paid privately by Giannakopoulos, not by the university as initially claimed. University had no knowledge the event was taking place despite formal invitations sent in its name.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 981
-      },
-      {
-        "date": "2016-12",
-        "label": "Giannakopoulos operated within a larger intelligence-for-hire ecosystem with direct Epstein network overlaps: (1) Boies Schiller Flexner was used by Giannakopoulos to send the SoftBank shareholder letter AND represented Epstein victims (Giuffre). (2) K2 Intelligence was hired to investigate SoftBank targets alongside the Giannakopoulos operation. (3) Tal Hanan/Team Jorge did business with Cambridge Analytica (LittleSis rels #1913078-79). (4) Psy-Group had a relationship with CA from Dec 2016. These overlapping private intelligence firms suggest a shared ecosystem rather than isolated operations.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 836
-      },
-      {
-        "date": "2016-12",
-        "label": "LittleSis network analysis reveals the Cambridge Analytica/SCL ecosystem had significant overlaps with known intelligence-for-hire firms: (1) Team Jorge (Tal Hanan's Israeli disinformation operation) did business with CA. (2) Psy-Group (Joel Zamel's firm, investigated by Mueller) had a CA relationship from Dec 2016. (3) SCL Group did business with Michael Flynn (Nov-Dec 2016). (4) SCL Group was owned by Vincent Tchenguiz (Iranian-British financier involved in Kaupthing bank collapse). (5) Sophie Schmidt (Eric Schmidt's daughter) interned at SCL Group. (6) Cambridge Analytica was owned by Gravitas Maximus LLC (Mercer family). These connections place Giannakopoulos within a private intelligence ecosystem that intersected with multiple nodes in the Epstein network.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 841
-      },
-      {
-        "date": "2016-12-23",
-        "label": "UNIVERSITY TERMINATION AFTERMATH: University of Geneva terminated Giannakopoulos in June 2017 after internal investigation found: (1) his appointment as Vice-Director of OUS was never formally endorsed by the Global Studies Institute, (2) seminar funding was never formally submitted or endorsed, (3) he used university premises and branding without authorization. His superior Prof. Frederic Esposito at the Global Studies Institute was also implicated. After termination, Giannakopoulos faced defamation complaints from SoftBank and Alok Sama at the Geneva Public Prosecutor's Office (filed Dec 23, 2016). Giannakopoulos counter-filed alleging computer attacks on his company Global Risk Profile. No public record of criminal conviction. He continued operating through Miles SA, OCO, Global Risk Profile, and later founded Apex Fusion Foundation (Zug, blockchain, 2024). Still speaks at conferences including Corporate Intelligence & Security Conference.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 987
-      },
-      {
-        "date": "2018-12-06",
-        "label": "The Cambridge Analytica link to Bannon creates a two-hop connection: Giannakopoulos was SCL/CA partner since 2010; Bannon was CA Vice President Jun 2014 - Aug 2016 (LittleSis rel #1320305). However, there is NO direct evidence of Giannakopoulos-Bannon contact or coordination. The timing is notable: Giannakopoulos ran the SoftBank operation in 2015-2016 while Bannon led CA; Bannon then entered Epstein's orbit in Jan 2018. Richard Kahn forwarded a Senate Intelligence Committee article about Bannon being grilled about Cambridge Analytica to Epstein (EFTA02610736, Dec 6, 2018).",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 834
-      }
     ]
   }
 }

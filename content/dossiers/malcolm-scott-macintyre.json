@@ -1,0 +1,645 @@
+{
+  "name": "Malcolm Scott Macintyre",
+  "slug": "malcolm-scott-macintyre",
+  "aliases": [],
+  "profile_ids": [
+    "crml",
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.196762",
+  "last_updated": "2026-03-24T22:14:03",
+  "stats": {
+    "total_findings": 17,
+    "total_connections": 4,
+    "total_entities": 2,
+    "finding_types": {
+      "background": 5,
+      "identity": 3,
+      "financial": 1,
+      "document": 2,
+      "negative_result": 2,
+      "intelligence": 3,
+      "relationship": 1
+    },
+    "connection_types": {
+      "financial": 2,
+      "social": 1,
+      "corporate": 1
+    },
+    "last_updated": "2026-03-24T22:14:03"
+  },
+  "findings": [
+    {
+      "id": 7715,
+      "finding_type": "background",
+      "summary": "Managing Director of Capella Capital Pty Ltd (Sydney, NSW). 30 years in infrastructure finance/investment banking/accounting. Prior: ABN AMRO Infrastructure Capital Group (Local MD, 12 years), Babcock & Brown (North American Transport/Social Infrastructure Group, New York, left Jan 2013). Address: 22 Faraday Avenue, Rose Bay NSW 2029, Australia.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:09",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "capellacapital.com.au/team/malcolm-macintyre",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7716,
+      "finding_type": "background",
+      "summary": "Capella Capital acquired by Sojitz Corporation (Japan) for ~AUD 470M (JPY 47B). Deal announced Feb 2025, closed June 23, 2025. Macintyre retained as MD and equity co-investor. Sojitz has a Metals, Mineral Resources & Recycling division. Post-acquisition, Capella targets Middle East, Central Asia, Europe, US for expansion.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:09",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "capellacapital.com.au/news/sojitz-corporations-investment-in-capella-capital-is-now-complete",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7398,
+      "finding_type": "identity",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) is confirmed as Managing Director of Capella Capital, one of Australia's leading infrastructure developers and financiers. Career: 30 years infrastructure finance, previously at Babcock & Brown (headed North American Transport and Social Infrastructure in New York), ABN AMRO, and Infrastructure Capital Partners. Currently also CEO of Darling Harbour Live (PPP project entity). Capella Capital is a partnership with Lendlease, recently acquired by Japan's Sojitz Corporation. No direct connection to Tony Sage, Kenneth Deayton, or the Perth mining network was found. His receipt of 200,000 CRML shares ($2M) from the copper powder deal suggests he is either a co-owner of the copper stockpile or an intermediary in the transaction.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-21",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:58",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7714,
+      "finding_type": "financial",
+      "summary": "Received 200,000 CRML ordinary shares under Asset Sale Agreement dated Nov 21, 2025. Shares worth ~M at deal price (/share) or ~.47M at closing FMV. Co-registered for resale in CRML F-3 filed Feb 23, 2026.",
+      "detail": null,
+      "source_datasets": [
+        "SEC_EDGAR"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-11-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:53:52",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7718,
+      "finding_type": "document",
+      "summary": "CRML press release (6-K, Nov 25, 2025) describes Swiss Commodity RE as 'a long-only multi-generational European based single family office.' In reality, Swiss Commodity Re Limited (HK Co. 79047415) was incorporated October 30, 2025 \u2014 22 days before the deal \u2014 at Deayton's corporate services office in Hong Kong. The 'European family office' description is false and was included in an SEC-filed document signed by CEO Tony Sage.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:26",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7717,
+      "finding_type": "document",
+      "summary": "CRITICAL DISCLOSURE GAP: The CRML 6-K press release (Nov 21, 2025) and half-year financial statements (Dec 31, 2025) both describe all 2,000,000 ASA shares going to 'the Seller' (Swiss Commodity Re). Macintyre is NOT named as a recipient in either. The 200K/1.8M split is only visible in the F-3 registration statement (Feb 23, 2026). Financial statements say 'the Company issued the Seller a total of 2,000,000 ordinary shares' \u2014 this is facially misleading as 200K went to a separate individual.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-13",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:18",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7719,
+      "finding_type": "negative_result",
+      "summary": "No CRML-related-party disclosure for Macintyre in half-year financial statements (Dec 31, 2025). His name appears zero times in the financial statements. No Form 144 filed as of March 23, 2026. No ASIC enforcement history, court cases (US), sanctions, exclusions, or SAM.gov records found. No LittleSis mapping. No LMSBAND/DOJ corpus hits.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-13",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:34",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7316,
+      "finding_type": "identity",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) who received 200,000 CRML shares under the same Nov 21 2025 Asset Sale Agreement as Swiss Commodity Re is likely Malcolm Macintyre, Managing Director of Capella Capital (Sydney), an Australian infrastructure developer and financier. Capella Capital has financed over AUD 32 billion in infrastructure projects. Macintyre previously headed Babcock and Brown's North American Transport and Social Infrastructure Group (New York) and served as Local Managing Director at ABN AMRO's Infrastructure Capital Group (12-year tenure). No direct connection to Tony Sage, Kenneth Deayton, or mining/commodities was found in public sources. His infrastructure finance background has no obvious nexus to ultra-high-purity copper powder.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:05:02",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web:capellacapital.com.au",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7595,
+      "finding_type": "intelligence",
+      "summary": "Macintyre's 200K copper shares likely a finder's fee; Signature Corporation / HWL Ebsworth is plausible Deayton-Macintyre connection vector",
+      "detail": "Macintyre received 200,000 CRML shares (10% of copper deal) despite zero commodities/mining background. Most likely explanation: finder's fee for introducing parties. Plausible connection vector: Deayton is a Director of Signature Corporation (Australia), specializing in 'founder exits and corporate advisory.' Signature's adviser William Abbott is a consultant at HWL Ebsworth, a major Australian law firm active in infrastructure PPP work \u2014 the exact sector where Macintyre operates (Capella Capital, Babcock & Brown, ABN AMRO infrastructure). Both Deayton and Macintyre are Australians operating in the HK-Australia professional corridor. Additionally, Sojitz Corporation (Japan) acquired Capella Capital for AUD 470M \u2014 Sojitz has diversified commodity trading operations that could theoretically intersect with the HK corporate services world.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:18:12",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML F-3 filed Feb 23, 2026 \u2014 Macintyre 200,000 shares",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://signaturecorporation.com.au/about/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7686,
+      "finding_type": "identity",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) is Managing Director of Capella Capital (Australia's leading infrastructure developer/financier, B+ projects; recently acquired by Sojitz Corporation from Lendlease). He received 200,000 CRML shares under the same Nov 21, 2025 Asset Sale Agreement as Swiss Commodity Re Limited. His role in the copper powder transaction \u2014 whether as co-seller, finder/broker, or nominee \u2014 is not disclosed in SEC filings. His background is infrastructure finance, not commodity trading.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:21",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7706,
+      "finding_type": "intelligence",
+      "summary": "Malcolm Scott Macintyre confirmed as second ASA seller: received 200,000 CRML shares from the copper powder Asset Sale Agreement (November 21, 2025), registered for resale in the 424B3. Business address: 22 Faraday Avenue, Rose Bay, NSW 2029, Australia. His public profile is MD of Capella Capital (Australian infrastructure PPP financier), 30 years in infrastructure development/investment banking. Capella Capital was acquired by Sojitz Corporation (Japan) in early 2025. No connection to commodities, copper, Hong Kong, or Critical Metals found in public profile. His inclusion as a 10% ASA share recipient (200K of 2M shares) with no disclosed role is anomalous.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:42:59",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390026023653/ea0279761-424b3_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7753,
+      "finding_type": "background",
+      "summary": "Macintyre biography: 30 years infrastructure finance, ex-ABN AMRO Infrastructure Capital Group (12 yrs), ex-Babcock & Brown (New York), MD Capella Capital \u2014 no metals/copper background",
+      "detail": "Sourced from capellacapital.com.au/team/malcolm-macintyre and LinkedIn. Full career: 30 years in infrastructure development, financing, investment banking, accounting. ABN AMRO Infrastructure Capital Group: Local Managing Director, 12 years. Babcock & Brown: Headed North American Transport & Social Infrastructure Group, New York. Capella Capital: MD, involved in Melbourne Metro, Sydney Light Rail, Darling Harbour Live, financed $32B+ in 15 years. Capella acquired by Sojitz Corporation (Japan) for AUD 470M (JPY 47bn), deal targeted June 2025. Sojitz: metals/mineral resources division exists but this Capella acquisition was for infrastructure, not metals. Macintyre has zero known metals, commodities, or copper background. His 200K CRML shares under same Nov 21 Asset Sale Agreement suggests a finder or facilitator role.",
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:19",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.capellacapital.com.au/team/malcolm-macintyre",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7755,
+      "finding_type": "relationship",
+      "summary": "Sojitz Corporation acquired Capella Capital in June 2025 \u2014 Sojitz has active Metals/Mineral Resources division, but Capella acquisition was infrastructure-only",
+      "detail": "Sojitz Corporation (Tokyo) agreed to acquire a 70% stake in Capella Capital Lendlease Pty Ltd from Lendlease Group for approximately AUD 160M, targeting June 2025 completion. Total deal value AUD 470M. The acquisition is for Sojitz to 'strengthen large-scale infrastructure development capability in energy, social, and transportation infrastructure.' Sojitz does have a Metals, Mineral Resources & Recycling Division, but the Capella acquisition was NOT part of that division \u2014 it was for infrastructure projects. Capella is now listed as a Sojitz group company. No evidence that Macintyre's CRML copper powder deal was facilitated by or connected to Sojitz's metals division.",
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:28",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sojitz.com/en/news/article/20250131.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7760,
+      "finding_type": "background",
+      "summary": "Sojitz Corporation acquired Capella Capital (Macintyre employer) June 2025 \u2014 five months before CRML copper deal",
+      "detail": "Sojitz Corporation (Japan) concluded share purchase agreement for Capella Capital and its investment platform from Lendlease Corporation in January 2025, with JPY 47bn (AUD 470M) investment. Acquisition completed by June 2025 per Capella announcement. Macintyre was promoted to 'Executive Head of M&A and Project Origination' at Sojitz following completion. The CRML copper deal was Nov 21 2025 \u2014 5 months after Sojitz integration. Sojitz has a Metals, Mineral Resources and Recycling Division. No specific evidence found linking Sojitz to the copper powder supply chain, but the institutional connection to a major trading house with metals division is notable. Macintyre's access to Asian metals networks may have expanded post-Sojitz acquisition.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:59",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.capellacapital.com.au/news/sojitz-corporations-investment-in-capella-capital-is-now-complete",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7790,
+      "finding_type": "negative_result",
+      "summary": "Macintyre is NOT in the ASIC AFS Licensee dataset (March 2026 extract, weekly updated). He holds no Australian Financial Services Licence. His role in the CRML copper ASA was therefore as an unlicensed intermediary or co-owner, not a registered financial adviser or broker.",
+      "detail": null,
+      "source_datasets": [
+        "asic"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:13:42",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ASIC AFSL dataset March 2026",
+          "source_quote": " No record for 'Macintyre' in the March 2026 weekly-updated AFS licensee extract (data.gov.au)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7791,
+      "finding_type": "background",
+      "summary": "Florida registry: Macintyre served as VP and Director of Miami Access Tunnel Partners, Inc. (FL P08000039721, inactive) \u2014 a Babcock & Brown-era US infrastructure PPP bid vehicle for the Miami Tunnel project. C/O Corporation Service Co., 1201 Hays St, Tallahassee FL 32301. Confirms North American infrastructure role during 2009-2013 Babcock & Brown period. No mining or commodity connections visible in US registry records.",
+      "detail": null,
+      "source_datasets": [
+        "fl_sos"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:13:50",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fl_registry:P08000039721",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7792,
+      "finding_type": "intelligence",
+      "summary": "ROLE DETERMINATION (synthesis): Macintyre's exact role in the CRML copper ASA is most likely finder/deal arranger. Evidence: (1) He is not an AFSL licensee \u2014 no formal financial services registration; (2) No commodity, copper, or mining background anywhere in career record; (3) No public connection to Deayton or Swiss Commodity Re found in any source; (4) 10% share split (200K of 2M) matches finder's fee convention; (5) His ABN AMRO Sydney tenure overlaps with Darrin Blumenthal (Jett Capital), the most likely introduction vector to CRML; (6) He is entirely absent from CRML's initial 6-K and half-year financials \u2014 only disclosed in F-3, suggesting his role was deliberately kept off primary disclosure. Beneficial ownership is unlikely: no commodity background, no custody arrangements, and no partial beneficial ownership of 40kg copper disclosed. Nominee is possible but his public identity (named in SEC F-3) argues against it. The shares represent compensation for introducing the copper deal to CRML through the Jett Capital / ABN AMRO alumni network.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:14:03",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML:F-3:Feb2026,CRML:6-K:Nov2025,asic_afsl:March2026,fl_registry:P08000039721",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3766,
+      "person_a": "Kenneth Raymond Deayton",
+      "person_b": "Malcolm Scott Macintyre",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:21:50",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Raymond Deayton",
+      "other_person_slug": "kenneth-raymond-deayton",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3895,
+      "person_a": "Malcolm Scott Macintyre",
+      "person_b": "Swiss Commodity Re Limited",
+      "relationship_type": "financial",
+      "description": "Macintyre received 200,000 CRML shares as co-seller under the same ASA as Swiss Commodity Re; no disclosed role; Australian infrastructure financier with no commodities background",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:43:43",
+      "profile_id": "tech-right",
+      "other_person": "Swiss Commodity Re Limited",
+      "other_person_slug": "swiss-commodity-re-limited",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390026023653/ea0279761-424b3_critical.htm",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3899,
+      "person_a": "Darrin Blumenthal",
+      "person_b": "Malcolm Scott Macintyre",
+      "relationship_type": "social",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:47:28",
+      "profile_id": "tech-right",
+      "other_person": "Darrin Blumenthal",
+      "other_person_slug": "darrin-blumenthal",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "7596,7710",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3902,
+      "person_a": "Malcolm Scott Macintyre",
+      "person_b": "Tony Sage",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 16:54:39",
+      "profile_id": "tech-right",
+      "other_person": "Tony Sage",
+      "other_person_slug": "tony-sage",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "Managing Director",
+      "date_start": "2009",
+      "date_end": null,
+      "source": "web_search",
+      "entity_id": 1344,
+      "entity_name": "Malcolm Scott Macintyre",
+      "entity_type": "person",
+      "jurisdiction": "au",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Director",
+      "date_start": "2013",
+      "date_end": null,
+      "source": "capellacapital.com.au",
+      "entity_id": 1345,
+      "entity_name": "Capella Capital",
+      "entity_type": "corporation",
+      "jurisdiction": "au",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-01-01",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Managing Director of Capella Capital Pty Ltd (Sydney, NSW). 30 years in infrastructure finance/investment banking/accounting. Prior: ABN AMRO Infrastructure Capital Group (Local MD, 12 years), Babcock & Brown (North American Transport/Social Infrastructure Group, New York, left Jan 2013). Address: 22 Faraday Avenue, Rose Bay NSW 2029, Australia.",
+      "confidence": "high",
+      "id": 7715
+    },
+    {
+      "date": "2025-06-23",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Capella Capital acquired by Sojitz Corporation (Japan) for ~AUD 470M (JPY 47B). Deal announced Feb 2025, closed June 23, 2025. Macintyre retained as MD and equity co-investor. Sojitz has a Metals, Mineral Resources & Recycling division. Post-acquisition, Capella targets Middle East, Central Asia, Europe, US for expansion.",
+      "confidence": "high",
+      "id": 7716
+    },
+    {
+      "date": "2025-11-21",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) is confirmed as Managing Director of Capella Capital, one of Australia's leading infrastructure developers and financiers. Career: 30 years infrastructure finance, previously at Babcock & Brown (headed North American Transport and Social Infrastructure in New York), ABN AMRO, and Infrastructure Capital Partners. Currently also CEO of Darling Harbour Live (PPP project entity). Capella Capital is a partnership with Lendlease, recently acquired by Japan's Sojitz Corporation. No direct connection to Tony Sage, Kenneth Deayton, or the Perth mining network was found. His receipt of 200,000 CRML shares ($2M) from the copper powder deal suggests he is either a co-owner of the copper stockpile or an intermediary in the transaction.",
+      "confidence": "medium",
+      "id": 7398
+    },
+    {
+      "date": "2025-11-21",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Received 200,000 CRML ordinary shares under Asset Sale Agreement dated Nov 21, 2025. Shares worth ~M at deal price (/share) or ~.47M at closing FMV. Co-registered for resale in CRML F-3 filed Feb 23, 2026.",
+      "confidence": "confirmed",
+      "id": 7714
+    },
+    {
+      "date": "2025-11-25",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "CRML press release (6-K, Nov 25, 2025) describes Swiss Commodity RE as 'a long-only multi-generational European based single family office.' In reality, Swiss Commodity Re Limited (HK Co. 79047415) was incorporated October 30, 2025 \u2014 22 days before the deal \u2014 at Deayton's corporate services office in Hong Kong. The 'European family office' description is false and was included in an SEC-filed document signed by CEO Tony Sage.",
+      "confidence": "medium",
+      "id": 7718
+    },
+    {
+      "date": "2026-03-13",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "CRITICAL DISCLOSURE GAP: The CRML 6-K press release (Nov 21, 2025) and half-year financial statements (Dec 31, 2025) both describe all 2,000,000 ASA shares going to 'the Seller' (Swiss Commodity Re). Macintyre is NOT named as a recipient in either. The 200K/1.8M split is only visible in the F-3 registration statement (Feb 23, 2026). Financial statements say 'the Company issued the Seller a total of 2,000,000 ordinary shares' \u2014 this is facially misleading as 200K went to a separate individual.",
+      "confidence": "medium",
+      "id": 7717
+    },
+    {
+      "date": "2026-03-13",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "No CRML-related-party disclosure for Macintyre in half-year financial statements (Dec 31, 2025). His name appears zero times in the financial statements. No Form 144 filed as of March 23, 2026. No ASIC enforcement history, court cases (US), sanctions, exclusions, or SAM.gov records found. No LittleSis mapping. No LMSBAND/DOJ corpus hits.",
+      "confidence": "medium",
+      "id": 7719
+    }
+  ]
+}

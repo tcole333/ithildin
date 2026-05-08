@@ -5,24 +5,29 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.980570",
-  "last_updated": "2026-03-11T05:03:06",
+  "generated_at": "2026-05-07T23:07:36.296372",
+  "last_updated": "2026-03-24T14:08:34",
   "stats": {
-    "total_findings": 7,
-    "total_connections": 10,
+    "total_findings": 11,
+    "total_connections": 16,
     "total_entities": 0,
     "finding_types": {
-      "relationship": 2,
-      "legal": 3,
-      "financial": 2
+      "relationship": 3,
+      "background": 1,
+      "financial": 3,
+      "legal": 4
     },
     "connection_types": {
       "legal": 5,
       "employment": 1,
       "advisory": 3,
-      "funds": 1
+      "funds": 1,
+      "financial": 3,
+      "corporate": 1,
+      "controls": 1,
+      "political": 1
     },
-    "last_updated": "2026-03-11T05:03:06"
+    "last_updated": "2026-03-24T14:08:34"
   },
   "findings": [
     {
@@ -44,6 +49,81 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LittleSis entity 396637 relationships",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6984,
+      "finding_type": "background",
+      "summary": "PILF LITIGATION PATTERN: CourtListener shows systematic lawsuits against state election officials to force voter roll access and purges: v. Reed (VA 2016), v. Haake (VA 2016), v. Lamone (MD 2019), v. Winfrey (MI 2019), v. Benson (MI 2020, 2021), v. Boockvar (PA 2020), v. Voye (PA 2020), v. Griswold (CO 2021), v. Dupuis (CA 2024). These cases targeted secretaries of state and election officials in swing and blue states to force disclosure of voter roll data and compel list maintenance (purges). This litigation pattern is now being replicated with federal power: the DOJ Voting Section (staffed by former PILF counsel Riordan) is demanding the same voter rolls from states via confidential MOUs, backed by the threat of federal enforcement.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-02-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:52:41",
+      "target_name": "Public Interest Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener case database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7203,
+      "finding_type": "financial",
+      "summary": "PILF funding network via IRS 990: Major donors include The 85 Fund/Leonard Leo network (K in 2020), Bradley Impact Fund (K 2022, K 2019), Sarah Scaife Foundation (K-K annually 2020-2023), Lynde and Harry Bradley Foundation (K-K annually 2020-2023), Servant Foundation (K 2024, K 2023), Stanley E. Fulton Family Foundation (K 2021), DonorsTrust (K 2023). Total identifiable funding exceeds M over 2019-2024.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:54:43",
+      "target_name": "Public Interest Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "propublica.org/nonprofits/990-search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6966,
+      "finding_type": "relationship",
+      "summary": "PIPELINE NODE 2 CONFIRMED - DOJ VOTING SECTION: Maureen Riordan, PILF litigation counsel 2021-2025, was made Acting Chief of DOJ Voting Section in 2025. Riordan appeared on Cleta Mitchell's Election Integrity Network podcast in 2022 stating she wanted to 'reclaim our election systems from the left.' Eric Neff, another lawyer with ties to election conspiracy theorists, subsequently became acting chief replacing Riordan. Additional DOJ Voting Section hires include one lawyer who worked on Georgia fake electors plot and another who was senior member of Cleta Mitchell's anti-voting network. This confirms the DOJ Voting Section as Node 2: PILF personnel placed in Voting Section, converting it from voting rights enforcement to voter roll purge operations. The funding chain: CPI/DonorsTrust/Bradley -> PILF -> personnel -> DOJ Voting Section.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:48:47",
+      "target_name": "Public Interest Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Democracy Docket reporting 2025, Cleta Mitchell podcast 2022",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -101,6 +181,46 @@
       ]
     },
     {
+      "id": 6553,
+      "finding_type": "legal",
+      "summary": "PILF v. Benson (Michigan) NVRA case: filed 2021, dismissed by district court 2024, appealed, SCOTUS denied cert March 2, 2026. PILF alleged MI failed to remove deceased voters. Notably, the Trump DOJ sued Michigan SOS Benson on the same legal theory about 2 weeks after PILF's SCOTUS petition - suggesting coordination or at least parallel strategy. PILF also sued PA (Boockvar, 2020) and Detroit (Winfrey, 2019-2020), both dismissed.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-02",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:36:41",
+      "target_name": "Public Interest Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener dockets",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Democracy Docket",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Midwesterner",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6664,
       "finding_type": "legal",
       "summary": "SCOTUS denied PILF cert petition (PILF v. Schmidt, PA) on Mar 2, 2026 - major setback. PILF sought to establish that denial of voter roll access automatically confers standing to sue. Third Circuit imposed nexus requirement. Also denied Michigan petition same day. JW and Center for Election Confidence filed supporting amicus briefs.",
@@ -151,46 +271,6 @@
       ]
     },
     {
-      "id": 6553,
-      "finding_type": "legal",
-      "summary": "PILF v. Benson (Michigan) NVRA case: filed 2021, dismissed by district court 2024, appealed, SCOTUS denied cert March 2, 2026. PILF alleged MI failed to remove deceased voters. Notably, the Trump DOJ sued Michigan SOS Benson on the same legal theory about 2 weeks after PILF's SCOTUS petition - suggesting coordination or at least parallel strategy. PILF also sued PA (Boockvar, 2020) and Detroit (Winfrey, 2019-2020), both dismissed.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 03:36:41",
-      "target_name": "Public Interest Legal Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener dockets",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Democracy Docket",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "The Midwesterner",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6563,
       "finding_type": "financial",
       "summary": "PILF 990 revenue trajectory: $1.3M (2012) -> $562K (2015 trough) -> $2.2M (2017) -> $3.8M (2020 election year) -> $4.9M (2024). EIN 45-4355641. Adams compensation $274K (2024). Major funders: Bradley Foundation $3.31M, Pope Foundation $670K, Jaquish & Kenninger $475K.",
@@ -216,6 +296,47 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica Nonprofit Explorer EIN 45-4355641",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7612,
+      "finding_type": "legal",
+      "summary": "PILF filed 8+ voter roll purge lawsuits in 2024 cycle while Trump DOJ dismissed Virginia voter purge challenge",
+      "detail": "PILF filed voter roll access and purge lawsuits in at least 8 states during 2023-2024 cycle. Cleta Mitchell is chairman, J Christian Adams is president, von Spakovsky is board member. Revenue grew from 1.5M (2018) to 3.4M (2023). Trump DOJ voluntarily dismissed Biden-era lawsuit challenging Virginia Gov Youngkin voter purge program on Jan 29, 2025 (9 days after inauguration). The Virginia purge used flawed DMV citizenship data, potentially removing naturalized citizens. SCOTUS had reinstated the purge 6 days before Nov 2024 election. DOJ dismissal aligns with Project 2025 recommendation to cease voting rights enforcement.",
+      "source_datasets": [
+        "courtlistener",
+        "990",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:25",
+      "target_name": "Public Interest Legal Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DemocracyDocket PILF litigation tracker",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DemocracyDocket Virginia purge case Jan 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 990 EIN 454355641",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -422,6 +543,58 @@
       ]
     },
     {
+      "id": 3619,
+      "person_a": "85 Fund",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:36",
+      "profile_id": "tech-right",
+      "other_person": "85 Fund",
+      "other_person_slug": "85-fund",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "propublica.org/nonprofits/990-search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3836,
+      "person_a": "Hans von Spakovsky",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "corporate",
+      "description": "Board member of PILF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Hans von Spakovsky",
+      "other_person_slug": "hans-von-spakovsky",
+      "evidence": []
+    },
+    {
+      "id": 3838,
+      "person_a": "Cleta Mitchell",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "controls",
+      "description": "Mitchell is chairman of PILF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:08:34",
+      "profile_id": "tech-right",
+      "other_person": "Cleta Mitchell",
+      "other_person_slug": "cleta-mitchell",
+      "evidence": []
+    },
+    {
       "id": 3306,
       "person_a": "Heritage Foundation",
       "person_b": "Public Interest Legal Foundation",
@@ -435,6 +608,72 @@
       "other_person": "Heritage Foundation",
       "other_person_slug": "heritage-foundation",
       "evidence": []
+    },
+    {
+      "id": 3514,
+      "person_a": "DonorsTrust",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:45:52",
+      "profile_id": "tech-right",
+      "other_person": "DonorsTrust",
+      "other_person_slug": "donorstrust",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS Form 990 DonorsTrust EIN 52-2166327 (2021-2023)",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3780,
+      "person_a": "Public Interest Legal Foundation",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:28",
+      "profile_id": "tech-right",
+      "other_person": "Voter Reference Foundation",
+      "other_person_slug": "voter-reference-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3819,
+      "person_a": "Conservative Partnership Institute",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:44",
+      "profile_id": "tech-right",
+      "other_person": "Conservative Partnership Institute",
+      "other_person_slug": "conservative-partnership-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:821470217",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -446,6 +685,30 @@
       "summary": "PILF board/leadership per LittleSis: Chair Cleta Mitchell (major GOP election lawyer, on Trump-Raffensperger Jan 6 call), Director Hans von Spakovsky (Heritage Foundation election integrity expert - direct Heritage link), Director John Eastman (disbarred, Trump fake electors scheme), Director David Norcross (former RNC general counsel), Director Ken Blackwell (former Ohio SOS), Treasurer Neil Corkery (dark money network), Legal Counsel Charlie Spies (GOP election lawyer), Legal Counsel from Dickinson Wright firm",
       "confidence": "high",
       "id": 6676
+    },
+    {
+      "date": "2024-02-05",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "PILF LITIGATION PATTERN: CourtListener shows systematic lawsuits against state election officials to force voter roll access and purges: v. Reed (VA 2016), v. Haake (VA 2016), v. Lamone (MD 2019), v. Winfrey (MI 2019), v. Benson (MI 2020, 2021), v. Boockvar (PA 2020), v. Voye (PA 2020), v. Griswold (CO 2021), v. Dupuis (CA 2024). These cases targeted secretaries of state and election officials in swing and blue states to force disclosure of voter roll data and compel list maintenance (purges). This litigation pattern is now being replicated with federal power: the DOJ Voting Section (staffed by former PILF counsel Riordan) is demanding the same voter rolls from states via confidential MOUs, backed by the threat of federal enforcement.",
+      "confidence": "high",
+      "id": 6984
+    },
+    {
+      "date": "2024-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PILF funding network via IRS 990: Major donors include The 85 Fund/Leonard Leo network (K in 2020), Bradley Impact Fund (K 2022, K 2019), Sarah Scaife Foundation (K-K annually 2020-2023), Lynde and Harry Bradley Foundation (K-K annually 2020-2023), Servant Foundation (K 2024, K 2023), Stanley E. Fulton Family Foundation (K 2021), DonorsTrust (K 2023). Total identifiable funding exceeds M over 2019-2024.",
+      "confidence": "high",
+      "id": 7203
+    },
+    {
+      "date": "2025-06-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "PIPELINE NODE 2 CONFIRMED - DOJ VOTING SECTION: Maureen Riordan, PILF litigation counsel 2021-2025, was made Acting Chief of DOJ Voting Section in 2025. Riordan appeared on Cleta Mitchell's Election Integrity Network podcast in 2022 stating she wanted to 'reclaim our election systems from the left.' Eric Neff, another lawyer with ties to election conspiracy theorists, subsequently became acting chief replacing Riordan. Additional DOJ Voting Section hires include one lawyer who worked on Georgia fake electors plot and another who was senior member of Cleta Mitchell's anti-voting network. This confirms the DOJ Voting Section as Node 2: PILF personnel placed in Voting Section, converting it from voting rights enforcement to voter roll purge operations. The funding chain: CPI/DonorsTrust/Bradley -> PILF -> personnel -> DOJ Voting Section.",
+      "confidence": "high",
+      "id": 6966
     },
     {
       "date": "2025-07-08",
@@ -462,6 +725,14 @@
       "summary": "PILF data directly cited in DOJ letter to Pennsylvania Secretary of State Al Schmidt: 19,489 cross-state duplicate registrants, 3,170 same-address duplications, 321 placeholder birthdates identified by PILF research",
       "confidence": "high",
       "id": 6643
+    },
+    {
+      "date": "2026-03-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "PILF v. Benson (Michigan) NVRA case: filed 2021, dismissed by district court 2024, appealed, SCOTUS denied cert March 2, 2026. PILF alleged MI failed to remove deceased voters. Notably, the Trump DOJ sued Michigan SOS Benson on the same legal theory about 2 weeks after PILF's SCOTUS petition - suggesting coordination or at least parallel strategy. PILF also sued PA (Boockvar, 2020) and Detroit (Winfrey, 2019-2020), both dismissed.",
+      "confidence": "high",
+      "id": 6553
     },
     {
       "date": "2026-03-02",
@@ -581,300 +852,6 @@
       "narrative-shield",
       "enabler-gradient",
       "regulatory-capture"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Public Interest Legal Foundation",
-      "connections": [
-        {
-          "target": "True the Vote",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "J. Christian Adams (PILF president) served as TTV counsel in 2013 Colorado voter roll cases; PILF is co-party in TTV v. IRS (DC Circuit, 2025-26)"
-        },
-        {
-          "target": "Maureen Riordan",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket 2025-06",
-          "description": "PILF litigation counsel 2021-June 2025, then DOJ Voting Section Acting Chief May 2025-Jan 2026"
-        },
-        {
-          "target": "DOJ Voting Section",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "DOJ amicus PILF v. Bellows",
-          "description": "PILF data cited in DOJ letter to PA SOS Aug 2025; DOJ filed amicus for PILF in Maine case; Riordan revolving door"
-        },
-        {
-          "target": "Hans von Spakovsky",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "PILF board page",
-          "description": "PILF board member; also DOJ Civil Rights Division 2002-2005 and Heritage Foundation Election Law Reform"
-        },
-        {
-          "target": "Cleta Mitchell",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "PILF board page",
-          "description": "PILF Board Chair; also founded CPI Election Integrity Network; participated in Raffensperger call"
-        },
-        {
-          "target": "Bradley Impact Fund Inc",
-          "type": "funds",
-          "strength": 1.0,
-          "evidence_ref": "Bradley Foundation tax filings, bradleyimpactfund.org",
-          "description": "BIF gave PILF $3.31M over 2017-2022 for election law initiative"
-        },
-        {
-          "target": "DOJ Civil Rights Division",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "Democracy Docket; DOJ PA letter",
-          "description": null
-        },
-        {
-          "target": "Judicial Watch",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "SCOTUS docket 25-379; multiple amicus briefs",
-          "description": null
-        },
-        {
-          "target": "Heritage Foundation",
-          "type": "legal",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis; Heritage website",
-          "description": null
-        },
-        {
-          "target": "Heritage Foundation",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Heritage election fraud database provides data cited by PILF in voter roll purge cases; von Spakovsky and Adams share DOJ Voting Section alumni network"
-        }
-      ],
-      "secondHop": {
-        "Cleta Mitchell": [
-          {
-            "target": "Heather Honey",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Honey is VP on Mitchell's FAIR Elections Fund board; both in election integrity network"
-          },
-          {
-            "target": "Ken Cuccinelli",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Co-leaders at Election Transparency Initiative; collaborated at ALEC to pass Only Citizens Vote model bill"
-          },
-          {
-            "target": "Megan Frederick",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Frederick was Project Manager at Mitchell's Only Citizens Vote Coalition through 2024, worked hand in hand with EIN executive VP"
-          },
-          {
-            "target": "Christopher Gardner",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Gardner worked with Mitchell, Eastman, Chesebro on GA fake electors plot 2020"
-          },
-          {
-            "target": "ALEC",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Mitchell chairs ALEC secret election working group. Led Dec 2024 elections panel. Distributed Voters Election Integrity Bill of Rights. Co-presented OCVC model bill July 2024."
-          }
-        ],
-        "DOJ Voting Section": [
-          {
-            "target": "Pam Bondi",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "AAG Civil Rights Division, oversees Voting Section since April 2025"
-          },
-          {
-            "target": "Eric Neff",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Acting Chief of DOJ Voting Section, replaced Maureen Riordan Dec 2025"
-          },
-          {
-            "target": "Megan Frederick",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOJ Voting Section attorney, hired by Dec 2025"
-          },
-          {
-            "target": "Joseph W. Voiland",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Counsel on WI voter rolls case, appeared Feb 2026"
-          }
-        ],
-        "Heritage Foundation": [
-          {
-            "target": "Rebekah Mercer",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mercer is Heritage Foundation trustee; Heritage produced Project 2025 Greenland section. Mercer co-founded 1789 Capital with Greenland-relevant defense portfolio"
-          },
-          {
-            "target": "Advancing American Freedom",
-            "type": "successor_to",
-            "strength": 1.0,
-            "description": "AAF absorbed Heritage legal, economic, and data teams in Dec 2025-Jan 2026 mass exodus. 20+ staff moved. Three AAF institutes mirror Heritage centers."
-          },
-          {
-            "target": "Diana Davis Spencer Foundation",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "Withdrew M 5-year funding commitment from Heritage after antisemitism controversy. CEO Abby Spencer Moffat resigned as Heritage trustee."
-          },
-          {
-            "target": "1789 Capital",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Mercer connection creates policy-to-investment pipeline"
-          },
-          {
-            "target": "America First Legal Foundation",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Heritage election fraud database and Project 2025 election chapter provide intellectual framework for AFL voter roll litigation"
-          }
-        ],
-        "Judicial Watch": [
-          {
-            "target": "Tom Fitton",
-            "type": "controls",
-            "strength": 1.0,
-            "description": "President since 1998, governs $503M in assets with 2 other board members"
-          },
-          {
-            "target": "Robert Popper",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Senior Attorney & Director Election Integrity Project since 2013"
-          },
-          {
-            "target": "True the Vote",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Christina Bobb",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Attorney on litigation team, former DHS exec/Trump attorney/RNC election counsel"
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "DOJ under Dhillon filed statement of interest supporting JW Oregon lawsuit; parallel NVRA enforcement"
-          }
-        ],
-        "Bradley Impact Fund Inc": [
-          {
-            "target": "America First Legal Foundation",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "BIF granted AFL $27.1M in 2022 (61% of AFL revenue)"
-          }
-        ],
-        "Hans von Spakovsky": [
-          {
-            "target": "Advancing American Freedom",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Von Spakovsky joined AAF Meese Institute as Senior Legal Fellow Jan 12 2026. Previously managed Heritage Election Law Reform Initiative."
-          },
-          {
-            "target": "Ken Cuccinelli",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Both occupy election integrity intellectual infrastructure; HvS provides legal theory and fraud databases, Cuccinelli operational advocacy via ETI and ALEC"
-          }
-        ],
-        "Maureen Riordan": [
-          {
-            "target": "Eric Neff",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neff succeeded Riordan as DOJ Voting Section Acting Chief. Riordan from PILF pipeline; Neff from True the Vote pipeline."
-          }
-        ],
-        "True the Vote": [
-          {
-            "target": "Eric Neff",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
-          },
-          {
-            "target": "Aram Moghaddassi",
-            "type": "political",
-            "strength": 0.7,
-            "description": "SSA DOGE staffer referred for Hatch Act violations in connection with voter data agreement. Moghaddassi contacted Florida officials on voter data during the same period True the Vote was soliciting DOGE partnership."
-          },
-          {
-            "target": "Antonio Gracias",
-            "type": "political",
-            "strength": 0.7,
-            "description": "SSA DOGE staffer who publicly used SSA data to make voter fraud claims. One of two staffers referred for Hatch Act violations related to voter data agreement with unnamed advocacy group."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2024-01-01",
-        "label": "PILF board/leadership per LittleSis: Chair Cleta Mitchell (major GOP election lawyer, on Trump-Raffensperger Jan 6 call), Director Hans von Spakovsky (Heritage Foundation election integrity expert - direct Heritage link), Director John Eastman (disbarred, Trump fake electors scheme), Director David Norcross (former RNC general counsel), Director Ken Blackwell (former Ohio SOS), Treasurer Neil Corkery (dark money network), Legal Counsel Charlie Spies (GOP election lawyer), Legal Counsel from Dickinson Wright firm",
-        "type": "relationship",
-        "evidence_ref": null,
-        "id": 6676
-      },
-      {
-        "date": "2025-07-08",
-        "label": "PILF's former lawyer Maureen Riordan is now acting chief of DOJ Voting Section; PILF copies all state voter roll letters to her and AAG Harmeet Dhillon, creating direct pipeline from nonprofit to federal enforcement",
-        "type": "relationship",
-        "evidence_ref": null,
-        "id": 6641
-      },
-      {
-        "date": "2025-07-24",
-        "label": "PILF data directly cited in DOJ letter to Pennsylvania Secretary of State Al Schmidt: 19,489 cross-state duplicate registrants, 3,170 same-address duplications, 321 placeholder birthdates identified by PILF research",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6643
-      },
-      {
-        "date": "2026-03-02",
-        "label": "SCOTUS denied PILF cert petition (PILF v. Schmidt, PA) on Mar 2, 2026 - major setback. PILF sought to establish that denial of voter roll access automatically confers standing to sue. Third Circuit imposed nexus requirement. Also denied Michigan petition same day. JW and Center for Election Confidence filed supporting amicus briefs.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6664
-      }
     ]
   }
 }

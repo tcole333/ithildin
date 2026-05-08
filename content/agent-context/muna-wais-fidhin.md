@@ -1,0 +1,27 @@
+# Muna Wais Fidhin
+**Stats**: 27 findings, 12 connections, 0 entities
+**Dossier**: /dossiers/muna-wais-fidhin
+
+## Key Findings
+- **[legal/confirmed]** FoF kickback recipient named in indictment: Abdikerm Eidleh, FoF employee; used shell companies Hope Suppliers LLC and Eidleh Inc. to receive and launder kickbacks from Fidhin (2025-09-03) (Finding #8201)
+- **[legal/confirmed]** WorldRemit does not appear in the Fidhin indictment; only Amal Financial named as international money transfer company in money laundering counts (2025-09-03) (Finding #8205)
+- **[legal/confirmed]** Forfeiture target: real property and all structures at 13198 Meadow Lane, Savage, Minnesota; subject to forfeiture under 18 U.S.C. §§ 981(a)(1)(C), 982(a)(1) and 28 U.S.C. § 2461(c) (2025-09-03) (Finding #8206)
+- **[legal/confirmed]** Fake invoice suppliers named: Hoda Abdi (owner of Alif Halal, Burnsville MN) provided fraudulent food purchase invoices for M5 Café; Fahad Nur (owner of The Produce LLC) provided fake invoices for M5 Care claims (2025-09-03) (Finding #8207)
+- **[financial/confirmed]** M5 Café site fraud: >166,000 meals claimed, ~$600,000 claimed entitlement, ~$550,000 actually received from FCNP under FoF sponsorship; site operated from medical clinic in Burnsville, MN (2025-09-03) (Finding #8208)
+- **[financial/confirmed]** M5 Care site fraud: ~170,000 meals claimed November 2021–February 2022, >$400,000 claimed under Sponsor A sponsorship; fake invoices from Alif Halal and The Produce LLC (2025-09-03) (Finding #8209)
+- **[legal/confirmed]** Abdirahman Irro, Somaliland, and husband Abdirahman Daahir Aadan are not named or referenced anywhere in the Fidhin indictment (2025-09-03) (Finding #8210)
+- **[legal/confirmed]** Wire fraud Counts 1-3: emails from Fidhin to FoF employee dated Jan 31, 2021 (fraudulent invoices) and April 30, 2021 (x2, fraudulent meal counts and invoices) transmitted in interstate commerce (2025-09-03) (Finding #8211)
+
+## Top Connections
+- **Abdirahman Daahir Aadan** [corporate/strong]: Abdirahman Daahir Aadan is the husband of Muna Wais Fidhin and Somaliland Foreign Minister appointed by President Irro. His Minnesota daycare business is named in the indictment as a money laundering vehicle for Fidhin's FOF proceeds. He is a PEP.
+- **Abdirahman Dahir Adam Bakal** [corporate/strong]: Muna Wais Fidhin is the wife of Abdirahman Dahir Adam Bakal (Hon. Eng Abdirahman Dahir Adam Bakal), Somaliland's Minister of Foreign Affairs and International Cooperation. Husband's Minnesota daycare business was allegedly used as a money laundering channel. Husband not charged; U.S. authorities stated no confirmed involvement.
+- **Unknown FOF Employee** [corporate/strong]: Fidhin paid approximately $27,000 in kickbacks to an unnamed Feeding Our Future employee in exchange for his sponsorship of her M5 Café food site and submission of fraudulent meal claims to the Federal Child Nutrition Program. This forms the basis of four federal programs bribery counts.
+- **Abdirahman Daahir Aadan** [corporate/strong]: Abdirahman Daahir Aadan is married to Muna Wais Fidhin, who was indicted as FoF defendant #75. They share a residential address at 13198 Meadow Lane, Savage MN 55378. Muna simultaneously held the Waddani party U.S. branch chairwoman role while her husband was a senior Waddani official and now Foreign Minister.
+- **Amal Financial Inc** [financial/strong]: Fidhin's wire fraud counts (3 counts) specifically charge overseas transfers via Amal Financial using FOF fraud proceeds; 'tens of thousands' transmitted via the entity. Indictment filed Sept 3, 2025.
+- **Abdikerm Eidleh** [corporate/strong]: Fidhin paid $27,000 in kickbacks to Eidleh across 4 checks (Jan-May 2021) via his shell companies Hope Suppliers LLC and Eidleh Inc., in exchange for FoF sponsorship of her fraudulent FCNP participation
+- **Hoda Abdi** [corporate/strong]: Hoda Abdi (Alif Halal owner) provided fake food-purchase invoices and receipts to Fidhin for use in fraudulent FCNP claims; Fidhin paid Abdi for the documents
+- **Fahad Nur** [corporate/strong]: Fahad Nur (The Produce LLC owner) provided fake invoices to Fidhin to support her M5 Care FCNP claims
+- **Abdirahman Mohamed Abdullahi (Irro)** [political/medium]: Fidhin served as U.S. chairperson of Waddani Party, which Irro leads. Allegedly wired WorldRemit funds supporting Irro's successful 2024 presidential campaign. Met with Irro at his private residence in Hargeisa (November 2024) and with VP Mohamed Aw-Ali Abdi (August 2025). Claim that Fidhin is a 'close relative' of Irro is unverified.
+- **Sharmarke Issa** [corporate/weak]: Muna Wais Fidhin's M5 Care nonprofit and Sharmarke Issa's food sites (Minnesota Somali Community, Wacan Restaurant LLC) both operated under Partners in Quality Care (PIQC) FCNP sponsorship — creating a structural shared-channel connection between the Fidhin/Somaliland network and the Nur Salah/Safari cluster. No direct bilateral financial transaction or communication is documented.
+- **Omar Fateh** [financial/weak]: Muna Wais Fidhin donated $1,000 to Omar Fateh's Minneapolis mayoral campaign on July 10, 2025. No prior relationship documented. Fateh denies knowing her. Donation returned day of arrest.
+- **Omar Fateh** [corporate/weak]: Fidhin made a $1,000 campaign contribution to Omar Fateh's Minneapolis mayoral campaign on July 10, 2025 — her first-ever political donation. The donation was returned by Fateh's campaign on September 4, 2025, the same day as Fidhin's arrest. Fateh stated he had no prior knowledge of Fidhin.

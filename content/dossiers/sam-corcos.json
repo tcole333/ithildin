@@ -5,26 +5,51 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.960554",
-  "last_updated": "2026-03-10T00:15:09",
+  "generated_at": "2026-05-07T23:07:36.300663",
+  "last_updated": "2026-03-23T18:41:48",
   "stats": {
-    "total_findings": 9,
-    "total_connections": 6,
+    "total_findings": 11,
+    "total_connections": 7,
     "total_entities": 1,
     "finding_types": {
+      "relationship": 4,
       "intelligence": 1,
       "identity": 2,
-      "relationship": 3,
-      "financial": 3
+      "financial": 4
     },
     "connection_types": {
       "employment": 4,
       "corporate": 1,
-      "financial": 1
+      "financial": 2
     },
-    "last_updated": "2026-03-10T00:15:09"
+    "last_updated": "2026-03-23T18:41:48"
   },
   "findings": [
+    {
+      "id": 7070,
+      "finding_type": "relationship",
+      "summary": "Sam Corcos, co-founder of a16z-backed Levels Health, became Treasury Department CIO after initially serving as DOGE associate and special advisor. Levels received Andreessen Horowitz funding. This is the second a16z-backed founder to take a CIO role in a federal agency (alongside Greg Hogan from a16z-backed Comma.ai at OPM).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:15",
+      "target_name": "Sam Corcos",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fedscoop.com, linkedin.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5478,
       "finding_type": "intelligence",
@@ -322,6 +347,60 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7147,
+      "finding_type": "financial",
+      "summary": "IRS cancel-and-replace timeline: Corcos arrived Jan 2025 as DOGE adviser, canceled $1.5B in IRS modernization contracts by Mar 2025, then oversaw $100M new Palantir BPA awarded Sep 23, 2025 plus $27.6M in immediate task orders the next day",
+      "detail": "Detailed timeline: (1) Jan 20, 2025: Corcos arrives at Treasury as DOGE special adviser. (2) Jan 27-28: Two Palantir IRS task orders $11.8M+$1.8M within first week. (3) Mar 20: Corcos announces canceling $1.5B IRS modernization contracts. (4) Apr 2: $500K OCPO task order. (5) Apr 5-12: DOGE+Palantir 3-day hackathon building Mega API. (6) Apr 18: $2.75M ontology mapping extension. (7) May 14: Corcos officially named Treasury CIO. (8) Jul 14: $2.4M Compliance 2.0 task order. (9) Sep 23: New $100M BPA 2023H225A00002 awarded to Palantir. (10) Sep 24: Two task orders $14.2M Unified API + $13.3M Compliance Hub. FY2025 Q4 Palantir Treasury spending: $60.5M \u2014 2.4x all of FY2024 ($24.9M). Pattern: cancel competitors, then expand Palantir via new contract vehicle.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:39:51",
+      "target_name": "Sam Corcos",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop May 14, 2025: DOGE rep Sam Corcos is Treasury's new CIO",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Reuters Mar 20, 2025: Trump DOGE executive claims $1.5B savings from IRS technology budget",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending BPA 2023H225A00002, $100M ceiling, Sep 23, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending task orders 205AE925F00202 and 205AE925F00203, Sep 24, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wired April 2025: Palantir Is Helping DOGE With IRS Mega API",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -397,6 +476,28 @@
       ]
     },
     {
+      "id": 3581,
+      "person_a": "Palantir Technologies",
+      "person_b": "Sam Corcos",
+      "relationship_type": "financial",
+      "description": "Corcos as Treasury CIO oversaw $100M new IRS BPA to Palantir (Sep 2025) and $27.6M in immediate task orders, after canceling $1.5B in competing IRS modernization contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:48",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending BPA 2023H225A00002",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3004,
       "person_a": "Andreessen Horowitz",
       "person_b": "Sam Corcos",
@@ -464,12 +565,21 @@
       "source": "fedscoop:2025-05-06",
       "entity_id": 904,
       "entity_name": "Sam Corcos",
-      "entity_type": "unknown",
+      "entity_type": "person",
       "jurisdiction": "Federal",
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Sam Corcos, co-founder of a16z-backed Levels Health, became Treasury Department CIO after initially serving as DOGE associate and special advisor. Levels received Andreessen Horowitz funding. This is the second a16z-backed founder to take a CIO role in a federal agency (alongside Greg Hogan from a16z-backed Comma.ai at OPM).",
+      "confidence": "high",
+      "id": 7070
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5935,
@@ -591,200 +701,5 @@
       "manufactured-dependency",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Sam Corcos",
-      "connections": [
-        {
-          "target": "DOGE",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
-        },
-        {
-          "target": "Scott Kupor",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica disclosures",
-          "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
-        },
-        {
-          "target": "Gregory Barbaccia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "home.treasury.gov/news/press-releases/sb0260",
-          "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-        },
-        {
-          "target": "Andreessen Horowitz",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "propublica-doge-tracker",
-          "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
-        },
-        {
-          "target": "Clark Minor",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-        }
-      ],
-      "secondHop": {
-        "Andreessen Horowitz": [
-          {
-            "target": "Scott Kupor",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "First hire 2009; managing partner 16 years; resigned from 32 funds but passive investor in 38 others upon becoming OPM Director July 2025; planned 300K federal role elimination"
-          },
-          {
-            "target": "Scott Kupor",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "a16z first hire and managing partner became OPM Director July 2025, absorbed DOGE workforce functions"
-          }
-        ],
-        "Clark Minor": [
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Palantir engineer deployed as DOGE CIO of HHS. HHS Medicaid data feeds Palantir ELITE targeting tool \u2014 direct conflict between CIO authority and Palantir commercial interest."
-          },
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts"
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "13-yr Palantir veteran became HHS CIO May 2025, oversees largest civilian agency IT budget"
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both are Palantir alumni now in senior federal IT roles (Minor: HHS CIO, Barbaccia: Federal CIO at OMB). Two simultaneous Palantir-to-government placements while Palantir federal contracts near doubled."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
-          }
-        ],
-        "DOGE": [
-          {
-            "target": "Elon Musk",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
-          },
-          {
-            "target": "Pete Hegseth",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Gregory Barbaccia": [
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
-          },
-          {
-            "target": "Thomas Shedd",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
-          },
-          {
-            "target": "Thomas Williams",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

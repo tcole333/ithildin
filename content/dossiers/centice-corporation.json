@@ -1,0 +1,356 @@
+{
+  "name": "Centice Corporation",
+  "slug": "centice-corporation",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.418187",
+  "last_updated": "2026-04-02T22:30:26",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "relationship": 1,
+      "financial": 4
+    },
+    "connection_types": {
+      "corporate": 3,
+      "funds": 3,
+      "financial": 1
+    },
+    "last_updated": "2026-04-02T22:30:26"
+  },
+  "findings": [
+    {
+      "id": 9032,
+      "finding_type": "relationship",
+      "summary": "Centice Corp (CIK 1415617, DE #3686615) is a dead Duke University spectroscopy spinoff where QWave Capital placed Tambovskaya mafia figure Serguei Kouzmine and DFJ officer Frank Creer on the board. Founded 2003 as Optopo Inc by David Brady and Prasant Potuluri from DARPA/NIH-funded research. Developed MFL-3000 drug identification for law enforcement. Raised ~40M from Aurora Funds, Novak Biddle, S-Group Direct Investments (Mordashov money), QWave Capital, Fulcrum Financial. Now dead -- domain for sale, patents expired/transferred.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "registry",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-04-01 22:54:06",
+      "target_name": "Centice Corporation",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Google Patents US7379181B2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/3686615",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBIR.gov portfolio 119969",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1415617",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9035,
+      "finding_type": "financial",
+      "summary": "Centice patents pledged as security to opaque entities before death. Patent US7379181B2 security history: Vogen Funding LP (Illinois equipment finance) held security 2008-2012; then Fulcrum Financial Partners LP and Oscrivia Limited held security 2012-2013. Oscrivia Limited is an unidentified offshore entity. Patent expired 2016 fee non-payment. Separate reports indicate Centice IP transferred to Readsboro International Corporation (2016, via strict foreclosure on promissory note default) then to ASB International Services Ltd (2021).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:54:35",
+      "target_name": "Centice Corporation",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Google Patents US7379181B2 assignment history",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Justia Patents assignee records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9214,
+      "finding_type": "financial",
+      "summary": "Centice received NIH SBIR funding (Phase I 2005, 2006; Phase II 2007) and raised ~M venture capital before patent foreclosure",
+      "detail": "Centice Corporation (originally Optopo Inc.) received NIH SBIR Phase I awards in 2005 and 2006 and Phase II in 2007 for Raman spectroscopy pharmaceutical verification technology originating from Duke University (Brady/Potuluri). Total venture capital raised: approximately .5-44.6M across 15 rounds. The M Series D convertible debt closing (August 2012) coincides precisely with Oscrivia/Fulcrum taking security on all 9 patents (April 2012). Government-funded innovation was ultimately stripped via promissory note foreclosure to ghost entity Readsboro International (2016) and transferred to Cyprus shell ASB International Services (2021).",
+      "source_datasets": [
+        "patents",
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:55:20",
+      "target_name": "Centice Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessWire Centice Series D announcement 2012-08-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBIR.gov portfolio 119969",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO assignment chain for patent 7218395",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9252,
+      "finding_type": "financial",
+      "summary": "Patent portfolio passed through three Cyprus entities in different cities: Oscrivia (Limassol), Readsboro (Larnaca), ASB International (Nicosia)",
+      "detail": "Deliberate layering pattern: Oscrivia Limited in Limassol as security interest holder (2007-2013), Readsboro International Corporation in Larnaca as foreclosure recipient (2016), ASB International Services Ltd in Nicosia as final assignee (2020). All 7 Centice patents expired for non-payment after reaching ASB.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 20:21:31",
+      "target_name": "Centice Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO assignments: Oscrivia at Karaiskaki 6 Limassol 3032; Readsboro at 4 Arch Makariou Larnaca 6016; ASB at Prevezis 12 Nicosia 1065",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9259,
+      "finding_type": "financial",
+      "summary": "Complete Centice patent security chain: Vogen Funding LP security (2008) -> Vogen release (2012-02) -> Fulcrum Financial security (2012-02) -> Fulcrum+Oscrivia release (2013-02) -> Readsboro strict foreclosure (2016-08) -> ASB International transfer (2020-12). Oscrivia held security interest on Centice alongside Fulcrum, released 3 years before Readsboro foreclosed.",
+      "detail": null,
+      "source_datasets": [
+        "USPTO_bulk,USPTO_ODP"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:30:26",
+      "target_name": "Centice Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-19855-164,USPTO-21194-475,USPTO-28026-275,USPTO-28052-668,USPTO-30410-175,USPTO-41190-466,USPTO-55638-474",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4727,
+      "person_a": "Centice Corporation",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "corporate",
+      "description": "Kouzmine placed on Centice board by QWave Capital (his fund). SEC Form D lists him as Director.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:01",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1415617",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4728,
+      "person_a": "Centice Corporation",
+      "person_b": "Frank Creer",
+      "relationship_type": "corporate",
+      "description": "Creer placed on Centice board by QWave Capital. SEC Form D lists him as Director.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:01",
+      "profile_id": "dfj-network",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1415617",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4729,
+      "person_a": "Centice Corporation",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group Direct Investments Ltd co-led Centice 2009 USD 4M bridge financing. S-Group is Alexei Mordashov's investment vehicle.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:01",
+      "profile_id": "dfj-network",
+      "other_person": "S-Group Capital Management",
+      "other_person_slug": "s-group-capital-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BioSpace 2009-04-06 press release",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4730,
+      "person_a": "Centice Corporation",
+      "person_b": "Vladimir Yakushev",
+      "relationship_type": "corporate",
+      "description": "Yakushev (S-Group Managing Partner) sat on Centice board as Director representing Mordashov interests.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:01",
+      "profile_id": "dfj-network",
+      "other_person": "Vladimir Yakushev",
+      "other_person_slug": "vladimir-yakushev",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1415617",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4731,
+      "person_a": "Centice Corporation",
+      "person_b": "QWave Capital",
+      "relationship_type": "funds",
+      "description": "QWave Fund invested in Centice as part of initial 2013 USD 7M round across 3 portfolio companies. Placed Kouzmine and Creer on board.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:55:02",
+      "profile_id": "dfj-network",
+      "other_person": "QWave Capital",
+      "other_person_slug": "qwave-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo Finance QWave Fund press release 2013-06-20",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4822,
+      "person_a": "Centice Corporation",
+      "person_b": "S-Group Capital Management",
+      "relationship_type": "funds",
+      "description": "S-Group Capital Management invested in Centice Corporation. Yakushev served as Board Director.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:41",
+      "profile_id": "epstein",
+      "other_person": "S-Group Capital Management",
+      "other_person_slug": "s-group-capital-management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4824,
+      "person_a": "Centice Corporation",
+      "person_b": "Oscrivia Limited",
+      "relationship_type": "financial",
+      "description": "Oscrivia jointly held and released security agreements on Centice patents with Fulcrum Financial Partners (2012-2013)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 17:36:49",
+      "profile_id": "epstein",
+      "other_person": "Oscrivia Limited",
+      "other_person_slug": "oscrivia-limited",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

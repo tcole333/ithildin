@@ -5,23 +5,77 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.984683",
-  "last_updated": "2026-03-09T18:57:14",
+  "generated_at": "2026-05-07T23:07:36.346385",
+  "last_updated": "2026-03-24T00:19:25",
   "stats": {
-    "total_findings": 7,
-    "total_connections": 4,
+    "total_findings": 9,
+    "total_connections": 7,
     "total_entities": 9,
     "finding_types": {
-      "relationship": 6,
-      "identity": 1
+      "identity": 2,
+      "relationship": 7
     },
     "connection_types": {
-      "corporate": 3,
-      "employment": 1
+      "corporate": 4,
+      "employment": 1,
+      "owns": 1,
+      "controls": 1
     },
-    "last_updated": "2026-03-09T18:57:14"
+    "last_updated": "2026-03-24T00:19:25"
   },
   "findings": [
+    {
+      "id": 7553,
+      "finding_type": "identity",
+      "summary": "Hardenberg has 21 corporate roles across Greenlandic entities \u2014 full network mapped from ownr.dk registry",
+      "detail": "Svend Hardenberg (former Greenland Permanent Secretary, former Mayor of Kommune Kujalleq, 4 Cabinet Minister positions 1999-2008) has 21 corporate roles per ownr.dk profile. DIRECTLY OWNED: Amaroq (full partner), GREENLAND INVEST ApS (50-66.65%), Amaroq ApS (100%), Qappik ApS (100%). INDIRECTLY OWNED via GREENLAND INVEST ApS: Nanoq Power ApS, Greenland Water Bank ApS, Kaffivik ApS, Imivik of Greenland ApS. INDIRECTLY OWNED via Amaroq ApS: Inuit Development Company ApS. DIRECTORSHIPS: Amaroq ApS (since 2021-03-23), Inuit Development Company ApS (since 2021-03-23), Qappik ApS (since 2023-02-15). BOARD CHAIRMAN positions: GREENLAND INVEST ApS (since 2015-04-04), Nanoq Power ApS (since 2016-12-08), Amaroq ApS (since 2024-05-30), Inuit Development Company ApS (since 2024-05-30), Qappik ApS (since 2023-02-15), Imivik of Greenland ApS (since 2025-08-04). BOARD MEMBER positions: Greenland Minerals A/S (since 2024-10-10), Greenland Water Bank ApS (since 2025-07-31), ETM Greenland A/S (Board Chairman since 2025-05-16). Co-owner with Jorgen Waever Johansen (Siumut party chair, married to Foreign Minister Vivian Motzfeldt). Ronald Lauder's Greenland Development Partners bought into Greenland Water Bank.",
+      "source_datasets": [
+        "registry",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:31",
+      "target_name": "Svend Hardenberg",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ownr.dk profile 4000726053; ArcticToday investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7556,
+      "finding_type": "relationship",
+      "summary": "Hardenberg-Horn partnership spans mining AND data center, with Hardenberg simultaneously on competing REE company ETM's board",
+      "detail": "Svend Hardenberg and Drew Horn partnership structure: (1) MINING: Hardenberg's Inuit Development Company ApS signed LOI with AmForge Corporation (Dan Whaley, CEO) for 1.5GW AI data center at Kangerlussuaq. GreenMet role is 'matchmaker' \u2014 Horn handles US side, Hardenberg handles Greenland/Denmark. (2) BOARD CONFLICTS: Hardenberg simultaneously chairs ETM Greenland A/S board (since 2025-05-16) \u2014 ETM controls the Kvanefjeld REE deposit, a COMPETING rare earth project to Tanbreez. Hardenberg is thus connected to both the Tanbreez network (via Horn/GreenMet) and the Kvanefjeld network (via ETM board). (3) POLITICAL: Co-owner Jorgen Waever Johansen is married to Greenland Foreign Minister Vivian Motzfeldt, who previously served on Greenland Water Bank board. (4) LAUDER: Ronald Lauder's Greenland Development Partners (Delaware LLC) bought into Greenland Water Bank from Hardenberg/Johansen \u2014 Lauder is the person who gave Trump the Greenland acquisition idea per John Bolton. Hardenberg sits at the intersection of ALL three major external interest networks operating in Greenland: Trump/GreenMet, Lauder, and Australian mining (ETM/European Lithium).",
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:17:14",
+      "target_name": "Svend Hardenberg",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday investigations; ownr.dk; OCCRP; ETM ASX announcements",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6167,
       "finding_type": "relationship",
@@ -301,6 +355,84 @@
       "other_person": "Energy Transition Minerals",
       "other_person_slug": "energy-transition-minerals",
       "evidence": []
+    },
+    {
+      "id": 3823,
+      "person_a": "ETM Greenland A/S",
+      "person_b": "Svend Hardenberg",
+      "relationship_type": "corporate",
+      "description": "Board Chairman since 2025-05-16; General Manager Greenland for Energy Transition Minerals (parent of ETM Greenland A/S). ETM controls Kvanefjeld REE deposit \u2014 competing rare earth project to Tanbreez.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:10",
+      "profile_id": "tech-right",
+      "other_person": "ETM Greenland A/S",
+      "other_person_slug": "etm-greenland-as",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ETM ASX announcement",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ownr.dk registry profile",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3824,
+      "person_a": "Greenland Water Bank ApS",
+      "person_b": "Svend Hardenberg",
+      "relationship_type": "owns",
+      "description": "Co-owner via GREENLAND INVEST ApS (50-66.65% stake). Sold portion to Ronald Lauder's Greenland Development Partners LLC (Delaware). Greenland FM Vivian Motzfeldt previously on board.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:25",
+      "profile_id": "tech-right",
+      "other_person": "Greenland Water Bank ApS",
+      "other_person_slug": "greenland-water-bank-aps",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday investigation",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ownr.dk registry",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3825,
+      "person_a": "Inuit Development Company ApS",
+      "person_b": "Svend Hardenberg",
+      "relationship_type": "controls",
+      "description": "Director and Board Chairman. Indirectly owned via Amaroq ApS (100% owned by Hardenberg). Signed LOI with AmForge Corp for 1.5GW AI data center at Kangerlussuaq.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:25",
+      "profile_id": "tech-right",
+      "other_person": "Inuit Development Company ApS",
+      "other_person_slug": "inuit-development-company-aps",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ownr.dk registry",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -404,7 +536,24 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Hardenberg has 21 corporate roles across Greenlandic entities \u2014 full network mapped from ownr.dk registry",
+      "confidence": "confirmed",
+      "id": 7553
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Hardenberg-Horn partnership spans mining AND data center, with Hardenberg simultaneously on competing REE company ETM's board",
+      "confidence": "medium",
+      "id": 7556
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6167,
@@ -611,122 +760,5 @@
       "jurisdictional-arbitrage",
       "conflict-of-interest-disclosure-gap"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Svend Hardenberg",
-      "connections": [
-        {
-          "target": "Ronald Lauder",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Hardenberg is Lauder's Greenland-side partner; former top civil servant and energy executive; sold stakes in Greenland Water Bank and Greenland Investment Group to Lauder consortium"
-        },
-        {
-          "target": "Drew Horn",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ArcticToday",
-          "description": "Hardenberg (Inuit Development Company) partners with Horn (AmForge Corporation) on 1.5GW AI data center in Kangerlussuaq"
-        },
-        {
-          "target": "Jorgen Waever Johansen",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ArcticToday",
-          "description": "Co-owners of Greenland Water Bank; both sold partial stakes to Lauder's investor group"
-        },
-        {
-          "target": "Energy Transition Minerals",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Hardenberg chairs ETM Greenland A/S and serves as General Manager Greenland for Energy Transition Minerals (ASX:ETM), appointed May 2025. Separate from GreenMet/CRML/Tanbreez cluster."
-        }
-      ],
-      "secondHop": {
-        "Drew Horn": [
-          {
-            "target": "GreenMet",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO and founder of GreenMet"
-          },
-          {
-            "target": "George Sorial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "George Logothetis",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Jorgen Waever Johansen": [
-          {
-            "target": "Ronald Lauder",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lauder consortium acquired partial ownership stake in Greenland Water Bank from Johansen"
-          },
-          {
-            "target": "Vivian Motzfeldt",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Married couple. Johansen chairs Siumut party; Motzfeldt is Foreign Minister. Both connected to Lauder via Water Bank."
-          }
-        ],
-        "Ronald Lauder": [
-          {
-            "target": "Jacqui Safra",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Jacqui Safra was in negotiations with Ronald Lauder to sell his Jerusalem property (The Sherover House in Talbieh), but the deal fell through. Safra then offered the property to Epstein through Brockman."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Wharton classmates, planted Greenland acquisition idea"
-          },
-          {
-            "target": "Josette Sheeran",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Lauder deployed Sheeran as Chair/CEO of Greenland Investment Group to lead his Greenland portfolio"
-          },
-          {
-            "target": "Kevin Warsh",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Warsh married Jane Lauder (Ronald's granddaughter). Warsh nominated as Fed Chair while Lauder has major Greenland investments."
-          },
-          {
-            "target": "Josette Sheeran",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

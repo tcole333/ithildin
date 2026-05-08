@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.969547",
+  "generated_at": "2026-05-07T23:07:36.360889",
   "last_updated": "2026-02-27T15:25:09",
   "stats": {
     "total_findings": 8,
@@ -61,7 +61,14 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001844181; Oscar Health CIK 0001568651; Thrive entity CIKs 0001527725 through 0001848082",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1844181",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1568651",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -84,7 +91,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC SC 13D/A Oscar Health CIK 0001568651 Amendment 3 Nov 13 2024",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1568651",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -375,95 +382,5 @@
       "manufactured-dependency",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Josh Kushner",
-      "connections": [
-        {
-          "target": "OpenAI",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "F-4367 F-4368",
-          "description": "Thrive Capital invested 1B+ in OpenAI across multiple rounds while OpenAI took stake in Thrive Holdings creating circular bidirectional investment"
-        },
-        {
-          "target": "Oscar Health",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "F-4371",
-          "description": "71.5 percent combined voting power via dual-class shares across 9 Thrive Capital fund vehicles as Co-Founder and Vice Chairman"
-        },
-        {
-          "target": "Masayoshi Son",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "SEC EDGAR Thrive Capital CIK entities; public reporting on Thrive/OpenAI investment",
-          "description": "Thrive Capital is major OpenAI investor at 1B+. OpenAI is centerpiece of Stargate 500B AI infrastructure project with SoftBank. Josh Kushner connects to Thread 8 SoftBank/Stargate findings through OpenAI equity."
-        }
-      ],
-      "secondHop": {
-        "Masayoshi Son": [
-          {
-            "target": "Sheikh Tahnoon bin Zayed",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Direct meeting to discuss AI infrastructure, semiconductor strategies, GPU deployment, joint collaboration. MGX (Tahnoon's fund) and SoftBank are co-investors in both Stargate US (MGX 10%) and Stargate UAE. Tahnoon's G42 is key operator in Stargate UAE. PIF (Saudi, aligned with Tahnoon network) was anchor LP in Vision Fund 1."
-          },
-          {
-            "target": "Rajeev Misra",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "First worked together on 2006 Vodafone Japan LBO when Misra was at DB. Misra joined SoftBank 2014, became Vision Fund co-CEO 2017. Son trusted Misra to run  fund. Misra left Nov 2024 but remains connected via OneIM."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Son made headline investment pledges directly to Trump at Mar-a-Lago in both 2016 ($50B) and 2024 ($100B). Co-founded Stargate with Trump announcement Jan 2025. Son's deals require regulatory favor: expedited permits, FTC/CFIUS clearance, federal land, chip export policy."
-          },
-          {
-            "target": "Brandon Lutnick",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Brandon Lutnick chairs Cantor Equity Partners SPAC that merged with SoftBank-backed Twenty One Capital. Son's SoftBank contributed $900M+ BTC. Brandon assumed Cantor chairman role when father Howard became Commerce Secretary. Direct business partnership between Commerce Sec's son and SoftBank."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Son provides Trump headline investment pledges since Dec 2016; Trump provides regulatory forbearance and federal land access"
-          }
-        ],
-        "OpenAI": [
-          {
-            "target": "SoftBank Group",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SoftBank invested $40B in OpenAI (11% stake, 2nd largest shareholder). Co-founders of Stargate LLC (40% each). OpenAI has operational responsibility, SoftBank financial. $1B joint investment in SB Energy. SoftBank sold Nvidia stake to fund OpenAI investment."
-          },
-          {
-            "target": "Oscar Health",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Oscar Health deploys OpenAI-powered AI agent Oswell for member healthcare support while Kushner is major OpenAI investor"
-          },
-          {
-            "target": "MGX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'"
-          },
-          {
-            "target": "Emil Michael",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Michael's Anthropic ban transferred Pentagon AI market share to OpenAI, a Coatue portfolio company"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

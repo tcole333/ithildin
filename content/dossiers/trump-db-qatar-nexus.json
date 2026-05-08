@@ -5,170 +5,37 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:08.015473",
+  "generated_at": "2026-05-07T23:07:36.446282",
   "last_updated": "2026-02-15T09:33:29",
   "stats": {
-    "total_findings": 10,
+    "total_findings": 5,
     "total_connections": 0,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 1,
-      "financial": 6,
-      "legal": 1,
-      "document": 1,
-      "relationship": 1
+      "financial": 5
     },
     "connection_types": {},
     "last_updated": "2026-02-15T09:33:29"
   },
   "findings": [
     {
-      "id": 248,
-      "finding_type": "intelligence",
-      "summary": "Alrasheed coordinated with Epstein during 2017 Qatar blockade, providing real-time intelligence on Kuwaiti Emir Sabah's mediation with Saudi and Qatar. Epstein discussed communication protocols and subjects (economic, military, tech) with Alrasheed.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2017",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 21:31:52",
-      "target_name": "Anas Alrasheed",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02400783",
-          "source_quote": "His highness Sheik Sabah just left to Saudi and then qater",
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02650477",
-          "source_quote": "it depends on which subject. economic, military, tech?",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 349,
+      "id": 2576,
       "finding_type": "financial",
-      "summary": "Trump Properties LLC purchased Maison de l Amitie Palm Beach for 41.35M out of Gosman bankruptcy Nov 2004, financed by Deutsche Bank. Epstein stated ultimate owner unknown. Sold to Rybolovlev for 95M in 2008 via County Road Property LLC. Epstein alleged DB loan guaranteed by entity controlled by Rybolovlev via Xitrans Finance Ltd BVI and Cyprus trust. Abe Gosman called Ghislaine Maxwell Apr 2004 around time of sale.",
+      "summary": "Qatar Investment Authority (QIA) confirmed as sovereign wealth fund via GLEIF LEI 5493008JZL5CRK3VS565. Category: RESIDENT_GOVERNMENT_ENTITY, subcategory: STATE_GOVERNMENT. Legal form: Sovereign Wealth Fund. Jurisdiction: Qatar. Address: Ooredoo Tower (Building 14), Dafna Street, Al Dafna District, Doha. Created 2005-01-01. Active status. QIA has at least one direct subsidiary: Jade Holding LLC (LEI 2549004U6K21MGN3L374, Doha, registered as #03986). Epstein's own statement (Finding #1060, Jul 20 2017 email to Landon Thomas Jr): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorism against the advice of tillerson and state ie DB?' The Qatar shareholding in Deutsche Bank (~6% as of 2017) is widely documented in DB 20-F annual reports filed with SEC. However, our SEC EDGAR full-text search for 'Qatar Investment Authority Deutsche Bank' and 'Qatar Holdings Deutsche' returned zero hits in the filing text index, meaning the Qatar shareholding must be verified through the DB annual reports (filed as 20-F under CIK 1159508) rather than text search.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
-      "date_of_event": "2004-11",
+      "date_of_event": "2005-01-01",
       "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-02-12 21:56:10",
-      "target_name": "Trump Properties LLC",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02332924",
-          "source_quote": "From Abe Gosman Taken by HELEN on 04/27/2004",
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02628958",
-          "source_quote": "buying it through an entity named Trump Properties LLC ultimate owner unknown",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 402,
-      "finding_type": "legal",
-      "summary": "Alrasheed (Saudi Arabian Epstein contact, 70 emails, KSA touchline/Qatar blockade intelligence) has no FARA registration. Saudi Arabia has 270 FARA-registered foreign principals. Alrasheed's documented role transmitting Saudi government intelligence to Epstein (Qatar blockade context, KSA political positioning) without FARA registration suggests undisclosed foreign agent activity. Similarly, Sulayem (UAE) and Alahmadi (Saudi, 10M palace) have zero FARA presence.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 22:43:14",
-      "target_name": "Alrasheed",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA negative search for Alrasheed",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 494,
-      "finding_type": "document",
-      "summary": "ACRIS search notable absences: Ghislaine Maxwell, Lesley Groff, LSJE LLC, NES LLC, Ossa Properties LLC, Haze Trust, Nautilus Inc, Laurel Inc, Cypress Inc, HBRK Associates, DKIP LLC, M Epstein Family Holdings LLC, BV70 LLC, 1953 Trust, RDK Asset Management, Butterfly Trust (Epstein version), Enhanced Education, Gratitude America, Financial Trust Company, Jeepers Inc, Southern Trust Company, and ERGO Ltd all returned ZERO results in NYC ACRIS real property parties. This suggests these entities either: (a) did not transact in NYC real property, (b) operated through other named entities, or (c) are registered in other jurisdictions (USVI, FL, NM) without NYC property involvement.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 23:02:50",
-      "target_name": "ACRIS Search Results",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ACRIS batch search 2026-02-12",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2572,
-      "finding_type": "financial",
-      "summary": "Epstein email to Landon Thomas (Jul 20, 2017): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorsim against the advice of tillerson and state. ie DB?' Epstein explicitly connected Qatar's DB ownership to Trump's DB dependence and the diplomatic crisis.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2017-07-20",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 09:32:55",
+      "created_at": "2026-02-15 09:33:29",
       "target_name": "Trump-DB-Qatar Nexus",
       "profile_id": "epstein",
       "evidence": [
         {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02643168",
-          "source_quote": " qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorsim against the advice of tillerson and state. ie DB?",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2573,
-      "finding_type": "financial",
-      "summary": "Landon Thomas reply to Epstein's Qatar-DB-Trump email (Jul 20, 2017 2:00 PM): 'Often times no\\! Am getting ready to approach Barrack for a lengthy profile.' Thomas deflected the Qatar-DB question and pivoted to Tom Barrack. EFTA02368670 is the reply with the original quoted.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2017-07-20",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 09:32:59",
-      "target_name": "Trump-DB-Qatar Nexus",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02368670",
-          "source_quote": " Often times no\\! Am getting ready to approach Barrack for a lengthy profile. Would like to do another, updated version of this story.",
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF LEI 5493008JZL5CRK3VS565; DOJ EFTA via Finding 1060",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -340,46 +207,46 @@
       ]
     },
     {
-      "id": 2576,
+      "id": 2572,
       "finding_type": "financial",
-      "summary": "Qatar Investment Authority (QIA) confirmed as sovereign wealth fund via GLEIF LEI 5493008JZL5CRK3VS565. Category: RESIDENT_GOVERNMENT_ENTITY, subcategory: STATE_GOVERNMENT. Legal form: Sovereign Wealth Fund. Jurisdiction: Qatar. Address: Ooredoo Tower (Building 14), Dafna Street, Al Dafna District, Doha. Created 2005-01-01. Active status. QIA has at least one direct subsidiary: Jade Holding LLC (LEI 2549004U6K21MGN3L374, Doha, registered as #03986). Epstein's own statement (Finding #1060, Jul 20 2017 email to Landon Thomas Jr): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorism against the advice of tillerson and state ie DB?' The Qatar shareholding in Deutsche Bank (~6% as of 2017) is widely documented in DB 20-F annual reports filed with SEC. However, our SEC EDGAR full-text search for 'Qatar Investment Authority Deutsche Bank' and 'Qatar Holdings Deutsche' returned zero hits in the filing text index, meaning the Qatar shareholding must be verified through the DB annual reports (filed as 20-F under CIK 1159508) rather than text search.",
+      "summary": "Epstein email to Landon Thomas (Jul 20, 2017): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorsim against the advice of tillerson and state. ie DB?' Epstein explicitly connected Qatar's DB ownership to Trump's DB dependence and the diplomatic crisis.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2005-01-01",
-      "claim_type": "synthesis",
+      "confidence": "high",
+      "date_of_event": "2017-07-20",
+      "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-15 09:33:29",
+      "created_at": "2026-02-15 09:32:55",
       "target_name": "Trump-DB-Qatar Nexus",
       "profile_id": "epstein",
       "evidence": [
         {
-          "evidence_type": "ref",
-          "evidence_ref": "GLEIF LEI 5493008JZL5CRK3VS565; DOJ EFTA via Finding 1060",
-          "source_quote": null,
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02643168",
+          "source_quote": " qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorsim against the advice of tillerson and state. ie DB?",
           "source_page": null,
           "assessment": null
         }
       ]
     },
     {
-      "id": 2859,
-      "finding_type": "relationship",
-      "summary": "Network analysis: 675 nodes, 1072 edges, 13 components. Non-Epstein subgraph contains 70% of all edges (1009/1447). Top non-Epstein hubs: Indyke (67), Thiel (58), Black (36), Barrack (34)",
-      "detail": "Graph analysis run #1 on 2857 findings/1447 connections. Key metrics: avg degree 3.18, max degree 262 (Epstein), density 0.0047. 131 bridge nodes, 178 structural holes (min degree 3), 41 cliques (min size 3). 104 cross-thread actors identified. Largest component: 643 nodes (95%). Non-Epstein top hubs indicate these are independently significant actors, not just Epstein satellites: Indyke=legal infrastructure, Thiel=tech/finance, Black=Apollo, Barrack=Gulf/political, 2017 Caterpillar Trust=financial vehicle.",
+      "id": 2573,
+      "finding_type": "financial",
+      "summary": "Landon Thomas reply to Epstein's Qatar-DB-Trump email (Jul 20, 2017 2:00 PM): 'Often times no\\! Am getting ready to approach Barrack for a lengthy profile.' Thomas deflected the Qatar-DB question and pivoted to Tom Barrack. EFTA02368670 is the reply with the original quoted.",
+      "detail": null,
       "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
+      "confidence": "high",
+      "date_of_event": "2017-07-20",
+      "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-16 04:06:55",
-      "target_name": "Investigation Network",
+      "created_at": "2026-02-15 09:32:59",
+      "target_name": "Trump-DB-Qatar Nexus",
       "profile_id": "epstein",
       "evidence": [
         {
-          "evidence_type": "ref",
-          "evidence_ref": "analysis-run-1",
-          "source_quote": null,
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02368670",
+          "source_quote": " Often times no\\! Am getting ready to approach Barrack for a lengthy profile. Would like to do another, updated version of this story.",
           "source_page": null,
           "assessment": null
         }
@@ -519,51 +386,6 @@
       {
         "name": "Shell-Trust-Liquidity-Concentration",
         "description": "The Haze Trust account architecture illustrates a pattern documented across multiple Epstein entities: accounts held dormant or near-zero for years, then receiving large concentrated inflows, cycling through a small number of large outgoing transfers, and returning to zero before account closure. The Haze Trust went from USD 1,000 to USD 21 million within a single calendar month in mid-2017. This pattern \u2014 matched in the Butterfly Trust (USD 2.65 million through that vehicle to co-conspirators per NYDFS) \u2014 is structurally designed to minimize the observable account history at any given compliance review point while concentrating large transaction volumes into brief windows."
-      }
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Trump-DB-Qatar Nexus",
-      "connections": [],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": [
-      {
-        "date": "2005-01-01",
-        "label": "Qatar Investment Authority (QIA) confirmed as sovereign wealth fund via GLEIF LEI 5493008JZL5CRK3VS565. Category: RESIDENT_GOVERNMENT_ENTITY, subcategory: STATE_GOVERNMENT. Legal form: Sovereign Wealth Fund. Jurisdiction: Qatar. Address: Ooredoo Tower (Building 14), Dafna Street, Al Dafna District, Doha. Created 2005-01-01. Active status. QIA has at least one direct subsidiary: Jade Holding LLC (LEI 2549004U6K21MGN3L374, Doha, registered as #03986). Epstein's own statement (Finding #1060, Jul 20 2017 email to Landon Thomas Jr): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorism against the advice of tillerson and state ie DB?' The Qatar shareholding in Deutsche Bank (~6% as of 2017) is widely documented in DB 20-F annual reports filed with SEC. However, our SEC EDGAR full-text search for 'Qatar Investment Authority Deutsche Bank' and 'Qatar Holdings Deutsche' returned zero hits in the filing text index, meaning the Qatar shareholding must be verified through the DB annual reports (filed as 20-F under CIK 1159508) rather than text search.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2576
-      },
-      {
-        "date": "2008-08-29",
-        "label": "HBRK Associates Inc. (Richard Kahn entity) confirmed as NY corporation via NY Secretary of State: DOS ID 3714818, filed Aug 29, 2008, type Domestic Business Corporation, county New York, jurisdiction New York. Process server and registered agent: Richard Kahn, address 1365 York Avenue Apt. 28, New York NY 10021 (Kahn personal residence). DS10 financial records confirm HBRK held Deutsche Bank accounts (acct 44129914, 42953715, 42953694) with peak balance $199,440 (May 2017). On Dec 12, 2019 (post-Epstein death), HBRK received $9.24M across 7 incoming transfers as final DB account closure/estate distribution. Outgoing activity was minimal: $12.15 to Ulster Savings Bank (Aug 2015) and $3,000 to JPMorgan Chase (Oct 2017). JP Morgan account 799789169 also confirmed for regular check activity.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2574
-      },
-      {
-        "date": "2013-09-24",
-        "label": "DS10 Deutsche Bank internal records confirm The Haze Trust account architecture: multiple DB accounts (42953236, 44129543, 42967287) opened Sep 24, 2013. Balance trajectory: $0 (Sep-Nov 2013) -> $1K (Apr 2017) -> $21.02M (May 2017) -> $4.25M (Oct 2017) -> $19.12M (Nov 2017) -> $2.50M (Jul 2018) -> $0 (Aug 2018). Two outgoing transactions: $131.44 to BNP Paribas SA (May 2, 2017, EFTA01299387) and $13M internal transfer (Oct 26, 2017, EFTA01287132). Peak balance $21.02M. Haze Trust address confirmed at 6100 Red Hook Qtrs Suite 83, St Thomas VI (EFTA01344082, marked DB-SDNY-0029206). DugganUSA returns investment account statements (EFTA01501998, EFTA01502283, EFTA01502442) showing active portfolio from Feb 2012 through 2013+ with beginning market value $6.4M. Haze Trust was used for attempted $23M Bin Ennakhil palace purchase in Marrakech (Mar 2019) via Deutsche Bank and LGT Bank Liechtenstein, but DB had closed the accounts. No property recorded in ACRIS under Haze name.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2575
-      },
-      {
-        "date": "2017-07-20",
-        "label": "Epstein email to Landon Thomas (Jul 20, 2017): 'qatar is the biggest shareholder in DB. db is donalds funder. donald goes after qatar for terrorsim against the advice of tillerson and state. ie DB?' Epstein explicitly connected Qatar's DB ownership to Trump's DB dependence and the diplomatic crisis.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2572
-      },
-      {
-        "date": "2017-07-20",
-        "label": "Landon Thomas reply to Epstein's Qatar-DB-Trump email (Jul 20, 2017 2:00 PM): 'Often times no\\! Am getting ready to approach Barrack for a lengthy profile.' Thomas deflected the Qatar-DB question and pivoted to Tom Barrack. EFTA02368670 is the reply with the original quoted.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 2573
       }
     ]
   }

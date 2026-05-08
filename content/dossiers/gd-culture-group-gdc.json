@@ -1,0 +1,379 @@
+{
+  "name": "GD Culture Group (GDC)",
+  "slug": "gd-culture-group-gdc",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-05-07T23:07:36.336458",
+  "last_updated": "2026-03-05T04:18:30",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 5,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "identity": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "financial": 4
+    },
+    "last_updated": "2026-03-05T04:18:30"
+  },
+  "findings": [
+    {
+      "id": 4159,
+      "finding_type": "financial",
+      "summary": "GDC Pallas acquisition was a related-party transaction where a BVI shell company incorporated June 30 2025 with zero operations and M in Bitcoin was exchanged for 39.2M GDC shares (233% dilution). Pallas directors Yan Wang (4.12%) and Qing Wang (7.28%) were pre-existing GDC shareholders. The 10-Q confirms Pallas had no operations except holding Bitcoin and was treated as an asset acquisition with excess fair value recorded as capital contribution. Bitcoin cost basis was M (roughly K per BTC). Despite receiving 16.6% of post-deal shares each, neither Yan Wang nor Qing Wang filed SC 13D. December 2025 proxy lists NO 5% beneficial owners despite multiple holders exceeding threshold.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:14:46",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 10-Q 2025-11-03 ea0261929-10q; SEC DEF 14C 2025-09-29; SEC DEFR14A 2025-12-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4160,
+      "finding_type": "financial",
+      "summary": "Gongzheng Xu (7.28% GDC shareholder) and Qing Wang (7.28%) sold unspecified software to GDC for .77M payable in 2.44M shares at .36/share on April 28-29, 2025 -- weeks before the M Vista Frontier agreement. Despite being described as sellers unaffiliated with the Company in the 8-K, both later appear as Pallas-related shareholders. Gongzheng Xu appears as 5% holder in the Sep 2025 DEF 14C but not in the Dec 2025 proxy.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:14:56",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K 2025-04-30 ea0240079-8k; SEC DEF 14C 2025-09-29",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4161,
+      "finding_type": "identity",
+      "summary": "GDC corporate history reveals serial shell company: (1) JM Global Holding Co - blank check SPAC, Delaware April 2015. (2) TMSR Holding Company - after reverse merger with Chinese recycling company. (3) Code Chain New Continent - another pivot. (4) GD Culture Group - name changed Jan 2023. CEO Xiaojian Wang (age 36) appointed April 2023, formerly VP Biz Dev at Foregrowth Inc Vancouver and interbank trader at China Minsheng Bank. CFO Zihao Zhao (30) formerly PwC Shanghai auditor. No officers or directors own any GDC stock. Company had .1M net loss in 2024 and received Nasdaq stockholders equity deficiency notice March 2025.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:07",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 10-K 2025-03-18 ea0234379-10k; SEC Form D 2025-05-14; SEC DEF 14C 2025-09-29",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4162,
+      "finding_type": "financial",
+      "summary": "GDC 5% beneficial ownership table as of Sep 8 2025 (DEF 14C) shows concentrated ownership by Chinese nationals and opaque offshore entities: Jiang Liu (9.29% 1.56M shares), ABOUT INVESTMENT PTE LTD (6.92% Singapore, sole director Li Jiaming at 1 Shenton Way), Gongzheng Xu (7.28% 1.22M shares), Qing Wang (7.28% 1.22M shares), VINER TOTAL INVESTMENTS FUND (6.64% 1.12M shares GP is Apollo Asset Management Ltd Hong Kong at 141 Des Voeux Road Central). None of these are the officers. All holdings acquired in 2025 -- the Dec 2024 10-K showed zero 5% holders.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:18",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C 2025-09-29 beneficial ownership table",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5029,
+      "finding_type": "financial",
+      "summary": "GDC announced M crypto treasury to buy Bitcoin and TRUMP token via unnamed BVI investor",
+      "detail": "On May 12, 2025, Nasdaq-listed GD Culture Group (CIK 0001641398, ticker GDC) and subsidiary AI Catalysis Corp entered into a Common Stock Purchase Agreement with an unnamed BVI-incorporated accredited investor for up to M in common stock. Proceeds designated for purchasing Bitcoin and OFFICIAL TRUMP token. GDC is a Nevada company with 8 staff, no revenue in 2024, .1M net loss, facing Nasdaq delisting warning. CEO Xiaojian Wang previously at China Minsheng Bank. Largest shareholder Jiazhen Li (17.11%). BVI investor identity not disclosed.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:14:33",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GlobeNewsWire press release May 12 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K filing 0001213900-25-040192",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5032,
+      "finding_type": "financial",
+      "summary": "GDC acquired Pallas Capital Holding (BVI) with 7,500 Bitcoin (M) via all-share deal",
+      "detail": "On Sep 10, 2025, GDC entered share exchange agreement to acquire 100% of Pallas Capital Holding Ltd (BVI company) for 39,189,344 shares of GDC common stock. Pallas Capital held 7,500 Bitcoin valued at approximately .8M. This positioned GDC among top 15 publicly traded companies by Bitcoin reserves. Shares fell 28% on announcement. Pallas Capital's beneficial owners not disclosed in SEC filings \u2014 a BVI shell acquiring massive BTC reserves then merging into a near-zero-revenue Nasdaq-listed entity raises significant questions about the source and custody of these Bitcoin.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:14:42",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GlobeNewsWire Sep 16 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K filing Sep 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5035,
+      "finding_type": "intelligence",
+      "summary": "On-chain analysis inconclusive: no public wallet addresses identified for GDC TRUMP token holdings",
+      "detail": "Despite GDC's May 2025 announcement of M commitment to buy Bitcoin and TRUMP token, and the Sep 2025 Pallas Capital acquisition of 7,500 BTC, no on-chain wallet addresses have been publicly disclosed or identified for GDC's crypto holdings. SEC filings do not contain wallet addresses. The BVI investor's identity remains undisclosed. No evidence found that GDC appeared among the TRUMP dinner top-220 holder leaderboard. The absence of verifiable on-chain data means it cannot be confirmed whether GDC actually purchased TRUMP tokens or just announced the intent. The Pallas Capital BTC custody arrangements and proof-of-reserves have not been independently verified.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:15:02",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR EFTS search May-Sep 2025 GDC filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web research on-chain analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5053,
+      "finding_type": "financial",
+      "summary": "Vista Frontier Investments Limited identified as unnamed BVI investor in M crypto treasury deal",
+      "detail": "SEC DEF 14C filing (accession 0001213900-25-093119, Sep 29 2025) identifies the previously unnamed BVI investor in the May 11, 2025 Common Stock Purchase Agreement as Vista Frontier Investments Limited. Board and Majority Stockholders approved issuance of more than 19.99% of outstanding shares to Vista Frontier, requiring Nasdaq Rule 5635(d) compliance. Vista Frontier is a BVI limited company; beneficial owners not disclosed in the filing.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:18:12",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C accession 0001213900-25-093119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5055,
+      "finding_type": "financial",
+      "summary": "GDC authorized 50x share increase (200M to 10B common, 20M to 1B preferred) to facilitate crypto deals",
+      "detail": "DEF 14C (0001213900-25-093119) reveals Board and Majority Stockholders approved increasing authorized common stock from 200,000,000 shares to 10,000,000,000 shares (50x increase) and preferred stock from 20,000,000 to 1,000,000,000 shares. This massive authorization combined with the Vista Frontier M stock purchase agreement and the Pallas Capital 39.2M share issuance creates enormous dilution capacity. Pre-deal outstanding was only 16,795,433 shares. GDC address listed as 810 Seventh Avenue, 22nd Floor, New York, NY 10019.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:18:30",
+      "target_name": "GD Culture Group (GDC)",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C accession 0001213900-25-093119",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2492,
+      "person_a": "GD Culture Group (GDC)",
+      "person_b": "Yan Wang",
+      "relationship_type": "corporate",
+      "description": "Pre-existing 4.12% shareholder who became director of Pallas Capital to facilitate M Bitcoin acquisition; no disclosed role at GDC",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:45",
+      "profile_id": "epstein",
+      "other_person": "Yan Wang",
+      "other_person_slug": "yan-wang",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C 2025-09-29; 8-K 2025-09-16",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2493,
+      "person_a": "GD Culture Group (GDC)",
+      "person_b": "Vista Frontier Investments Limited",
+      "relationship_type": "financial",
+      "description": "BVI LLC committed to purchase up to M of GDC common stock at 90% of lowest 5-day VWAP; funds for Bitcoin and TRUMP token purchases",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:45",
+      "profile_id": "epstein",
+      "other_person": "Vista Frontier Investments Limited",
+      "other_person_slug": "vista-frontier-investments-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K 2025-05-13 Exhibit 10.1; DEF 14C 2025-09-29",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2494,
+      "person_a": "GD Culture Group (GDC)",
+      "person_b": "Univest Securities LLC",
+      "relationship_type": "financial",
+      "description": "Sole placement agent for all GDC capital raises 2023-2025; FINRA-sanctioned for AML failures in low-priced stocks",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:51",
+      "profile_id": "epstein",
+      "other_person": "Univest Securities LLC",
+      "other_person_slug": "univest-securities-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 2025-05-14; 8-K filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2496,
+      "person_a": "GD Culture Group (GDC)",
+      "person_b": "VINER TOTAL INVESTMENTS FUND",
+      "relationship_type": "financial",
+      "description": "Hong Kong-based fund (GP: Apollo Asset Management Ltd HK at 141 Des Voeux Road Central) holding 6.64% of GDC pre-Pallas deal",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:51",
+      "profile_id": "epstein",
+      "other_person": "VINER TOTAL INVESTMENTS FUND",
+      "other_person_slug": "viner-total-investments-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C 2025-09-29",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2495,
+      "person_a": "ABOUT INVESTMENT PTE LTD",
+      "person_b": "GD Culture Group (GDC)",
+      "relationship_type": "financial",
+      "description": "Singapore entity (sole director Li Jiaming at 1 Shenton Way) holding 6.92% of GDC pre-Pallas deal",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:15:51",
+      "profile_id": "epstein",
+      "other_person": "ABOUT INVESTMENT PTE LTD",
+      "other_person_slug": "about-investment-pte-ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14C 2025-09-29",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

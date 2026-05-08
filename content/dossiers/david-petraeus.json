@@ -5,18 +5,18 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.809682",
+  "generated_at": "2026-05-07T23:07:36.120417",
   "last_updated": "2026-02-17T22:22:27",
   "stats": {
-    "total_findings": 27,
+    "total_findings": 26,
     "total_connections": 15,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 12,
-      "relationship": 5,
-      "financial": 6,
       "identity": 1,
-      "legal": 3
+      "legal": 3,
+      "intelligence": 11,
+      "financial": 6,
+      "relationship": 5
     },
     "connection_types": {
       "social": 4,
@@ -29,22 +29,112 @@
   },
   "findings": [
     {
-      "id": 3428,
-      "finding_type": "intelligence",
-      "summary": "During the Dec 2012 FBI sting at a Clearwater Beach hotel, Davidson claimed he had heard a rumor that General David Petraeus had met Heather Clem and Bubba Clem at a swingers' party and that there was video of the resulting encounter. This was during the same meeting where Davidson was negotiating the sale of the Hogan sex tape. The Petraeus affair with Paula Broadwell became public Nov 9, 2012 \u2014 just weeks before the FBI sting. Davidson was positioning himself as having access to a tape that could compromise a potential Secretary of State nominee. The claim is unverified and may have been fabricated to inflate Davidson's value as a kompromat broker.",
-      "detail": null,
+      "id": 3441,
+      "finding_type": "identity",
+      "summary": "Americans for Petraeus 2012 Inc Tampa FL nonprofit - inactive since 2011",
+      "detail": "FL registry: Americans for Petraeus 2012 Inc (N10000010684), domestic nonprofit formed 2010-11-15, inactive, at 4009 Southernwood Ct Tampa FL 33616. EIN 273987299. Draft-Petraeus presidential campaign entity. Tampa address notable given Jill Kelley connection to MacDill AFB social circles.",
       "source_datasets": null,
-      "confidence": "low",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
+      "confidence": "confirmed",
+      "date_of_event": "2010-11-15",
+      "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-17 21:27:38",
-      "target_name": "Keith Davidson",
+      "created_at": "2026-02-17 22:13:24",
+      "target_name": "David Petraeus",
       "profile_id": "epstein",
       "evidence": [
         {
-          "evidence_type": "file",
-          "evidence_ref": "CourtListener docket 4500580 doc 94; Inquisitr 2016-12-02",
+          "evidence_type": "ref",
+          "evidence_ref": "FL corporate registry N10000010684",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3451,
+      "finding_type": "legal",
+      "summary": "Petraeus criminal case: United States v. Petraeus, 3:15-cr-00047, W.D. North Carolina, Judge David Keesler, filed 2015-03-03, terminated 2015-04-23. Pled guilty to misdemeanor unauthorized removal of classified docs. 2 years probation, $100K fine. Prosecution by DOJ National Security Division in Charlotte \u2014 far from DC. Case resolved in 50 days, reflecting pre-arranged plea deal with extraordinary leniency for a former CIA Director.",
+      "detail": "CourtListener docket ID 4305495. PACER case ncwd/78230. Two CourtListener docket entries (4305495 and 4305496) suggest PACER tracking anomaly. Internet Archive docket XML at gov.uscourts.ncwd.78230. Date last filing 2025-03-10 suggests ongoing supervised release records even a decade later.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2015-03-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:19:27",
+      "target_name": "David Petraeus",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 4305495",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PACER case 3:15-cr-00047 W.D.N.C.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3456,
+      "finding_type": "intelligence",
+      "summary": "Tampa FBI field office temporal overlap: The Petraeus investigation and the Hogan/Davidson extortion case were both handled by or involved the Tampa/M.D. Florida FBI field office in overlapping timeframes. Kelley reported threatening emails to a Tampa FBI agent (Frederick Humphries) in May 2012. The FBI Tampa field office investigated, tracing emails to Paula Broadwell, discovering the Petraeus affair by summer 2012. Petraeus resigned Nov 9, 2012. The Davidson FBI sting at a Clearwater Beach hotel occurred Dec 2012 \u2014 Davidson allegedly claimed a Petraeus sex tape during this sting, just weeks after the Petraeus resignation. Both investigations originated from the same Tampa FBI jurisdiction (M.D. Florida). The Gawker Media v. FBI FOIA case (M.D. Fla. docket 4500580) sought FBI records about the Hogan tape investigation.",
+      "detail": "Key timeline: May 2012 - Kelley reports emails to Tampa FBI Agent Humphries. Summer 2012 - FBI traces to Broadwell. Nov 9, 2012 - Petraeus resigns. Dec 2012 - Davidson FBI sting in Clearwater Beach (Tampa area). Davidson claims Petraeus sex tape exists. The proximity suggests Davidson may have been exploiting the Petraeus scandal news to inflate his leverage. Gawker Media v. FBI, M.D. Fla. docket 4500580, filed 2015-05-19.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2015-05-19",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:20:03",
+      "target_name": "David Petraeus",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 4226213 (Kelley M.D. Fla.)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 4500580 (Gawker v FBI)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #3428 (Davidson Petraeus tape claim)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3434,
+      "finding_type": "financial",
+      "summary": "Petraeus SEC Form 3 filing for OneStream Inc (KKR portfolio company) - board director",
+      "detail": "David Petraeus (CIK 0001920463) filed SEC Form 3 for OneStream Inc (OS, CIK 0001889956) on 2024-07-24. OneStream is a KKR-backed enterprise software company in MI that IPO'd July 2024. Multiple filings (S-1, 424B4, DEF 14A, 10-K, PREM14C through Feb 2026) confirm ongoing board role.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2024-07-24",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:13:04",
+      "target_name": "David Petraeus",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001415889-24-020075",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -119,29 +209,6 @@
       ]
     },
     {
-      "id": 3434,
-      "finding_type": "financial",
-      "summary": "Petraeus SEC Form 3 filing for OneStream Inc (KKR portfolio company) - board director",
-      "detail": "David Petraeus (CIK 0001920463) filed SEC Form 3 for OneStream Inc (OS, CIK 0001889956) on 2024-07-24. OneStream is a KKR-backed enterprise software company in MI that IPO'd July 2024. Multiple filings (S-1, 424B4, DEF 14A, 10-K, PREM14C through Feb 2026) confirm ongoing board role.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": "2024-07-24",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 22:13:04",
-      "target_name": "David Petraeus",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001415889-24-020075",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 3435,
       "finding_type": "financial",
       "summary": "Petraeus appears in Devon Energy proxy statements 2019-2025 as board member",
@@ -157,7 +224,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR DEF 14A for Devon Energy ADSH 0001193125-19-115142",
+          "evidence_ref": "SEC:0001193125-19-115142",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -180,7 +247,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001387131-17-004667",
+          "evidence_ref": "SEC:0001387131-17-004667",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -203,7 +270,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001193125-23-045802",
+          "evidence_ref": "SEC:0001193125-23-045802",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -226,30 +293,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions Q28591",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3441,
-      "finding_type": "identity",
-      "summary": "Americans for Petraeus 2012 Inc Tampa FL nonprofit - inactive since 2011",
-      "detail": "FL registry: Americans for Petraeus 2012 Inc (N10000010684), domestic nonprofit formed 2010-11-15, inactive, at 4009 Southernwood Ct Tampa FL 33616. EIN 273987299. Draft-Petraeus presidential campaign entity. Tampa address notable given Jill Kelley connection to MacDill AFB social circles.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": "2010-11-15",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 22:13:24",
-      "target_name": "David Petraeus",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FL corporate registry N10000010684",
+          "evidence_ref": "OpenSanctions:Q28591",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -448,36 +492,6 @@
       ]
     },
     {
-      "id": 3451,
-      "finding_type": "legal",
-      "summary": "Petraeus criminal case: United States v. Petraeus, 3:15-cr-00047, W.D. North Carolina, Judge David Keesler, filed 2015-03-03, terminated 2015-04-23. Pled guilty to misdemeanor unauthorized removal of classified docs. 2 years probation, $100K fine. Prosecution by DOJ National Security Division in Charlotte \u2014 far from DC. Case resolved in 50 days, reflecting pre-arranged plea deal with extraordinary leniency for a former CIA Director.",
-      "detail": "CourtListener docket ID 4305495. PACER case ncwd/78230. Two CourtListener docket entries (4305495 and 4305496) suggest PACER tracking anomaly. Internet Archive docket XML at gov.uscourts.ncwd.78230. Date last filing 2025-03-10 suggests ongoing supervised release records even a decade later.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": "2015-03-03",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 22:19:27",
-      "target_name": "David Petraeus",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 4305495",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "PACER case 3:15-cr-00047 W.D.N.C.",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 3453,
       "finding_type": "relationship",
       "summary": "LittleSis maps Petraeus's institutional network: KKR partner (2013-present), Trilateral Commission member, Atlantic Council board, Council on Foreign Relations task force, Belfer Center (Harvard) senior fellow, Wilson Center co-chair, friend of Alex Karp (Palantir CEO), friend of Michael Flynn, adviser relationship with Kim and Frederick Kagan (neoconservative think tank figures), client of Robert Barnett and David Kendall (top DC lawyers).",
@@ -517,43 +531,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.businesswire.com/news/home/20250413402703/en/KKR-Appoints-General-David-Petraeus-as-Chairman-of-the-Middle-East-and-Establishes-Dedicated-Investment-Team-in-the-Region",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3456,
-      "finding_type": "intelligence",
-      "summary": "Tampa FBI field office temporal overlap: The Petraeus investigation and the Hogan/Davidson extortion case were both handled by or involved the Tampa/M.D. Florida FBI field office in overlapping timeframes. Kelley reported threatening emails to a Tampa FBI agent (Frederick Humphries) in May 2012. The FBI Tampa field office investigated, tracing emails to Paula Broadwell, discovering the Petraeus affair by summer 2012. Petraeus resigned Nov 9, 2012. The Davidson FBI sting at a Clearwater Beach hotel occurred Dec 2012 \u2014 Davidson allegedly claimed a Petraeus sex tape during this sting, just weeks after the Petraeus resignation. Both investigations originated from the same Tampa FBI jurisdiction (M.D. Florida). The Gawker Media v. FBI FOIA case (M.D. Fla. docket 4500580) sought FBI records about the Hogan tape investigation.",
-      "detail": "Key timeline: May 2012 - Kelley reports emails to Tampa FBI Agent Humphries. Summer 2012 - FBI traces to Broadwell. Nov 9, 2012 - Petraeus resigns. Dec 2012 - Davidson FBI sting in Clearwater Beach (Tampa area). Davidson claims Petraeus sex tape exists. The proximity suggests Davidson may have been exploiting the Petraeus scandal news to inflate his leverage. Gawker Media v. FBI, M.D. Fla. docket 4500580, filed 2015-05-19.",
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2015-05-19",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 22:20:03",
-      "target_name": "David Petraeus",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 4226213 (Kelley M.D. Fla.)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket 4500580 (Gawker v FBI)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #3428 (Davidson Petraeus tape claim)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -784,13 +761,13 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001387131-17-004667",
+          "evidence_ref": "SEC:0001387131-17-004667",
           "source_quote": null,
           "source_page": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001415889-24-020075",
+          "evidence_ref": "SEC:0001415889-24-020075",
           "source_quote": null,
           "source_page": null
         }
@@ -1010,7 +987,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR ADSH 0001193125-23-045802",
+          "evidence_ref": "SEC:0001193125-23-045802",
           "source_quote": null,
           "source_page": null
         }

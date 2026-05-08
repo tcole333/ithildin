@@ -5,36 +5,44 @@
     "Darren K. Indyke"
   ],
   "profile_ids": [
-    "epstein"
+    "dfj-network",
+    "epstein",
+    "epstein-aetna",
+    "parlatore"
   ],
-  "generated_at": "2026-03-11T18:36:07.658162",
-  "last_updated": "2026-02-18T17:20:50",
+  "generated_at": "2026-05-07T23:07:35.930393",
+  "last_updated": "2026-04-30T00:47:09",
   "stats": {
-    "total_findings": 93,
-    "total_connections": 67,
-    "total_entities": 24,
+    "total_findings": 113,
+    "total_connections": 81,
+    "total_entities": 26,
     "finding_types": {
-      "relationship": 8,
-      "identity": 12,
+      "relationship": 11,
+      "identity": 13,
       "financial": 27,
       "location": 4,
-      "legal": 29,
-      "intelligence": 6,
+      "legal": 31,
+      "intelligence": 13,
       "communication": 6,
-      "document": 1
+      "document": 1,
+      "background": 4,
+      "negative_result": 2,
+      "unknown": 1
     },
     "connection_types": {
-      "advisory": 1,
+      "advisory": 2,
       "corporate": 7,
-      "employment": 13,
+      "employment": 15,
       "financial": 17,
       "intelligence": 1,
-      "legal": 23,
+      "legal": 26,
       "familial": 3,
+      "controls": 5,
+      "owns": 2,
       "political": 1,
-      "social": 1
+      "social": 2
     },
-    "last_updated": "2026-02-18T17:20:50"
+    "last_updated": "2026-04-30T00:47:09"
   },
   "findings": [
     {
@@ -638,6 +646,46 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA01837558",
           "source_quote": "the British reporter anchored a rental boat on the northside of the dock under master bedroom area. She has just left was there for about 3 hours only managed to physically catch sight of her when they were pulling up the anchor.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10893,
+      "finding_type": "relationship",
+      "summary": "INDYKE'S PRE-PLG AIRCRAFT-STRUCTURING ROLE \u2014 PRIMARY-SOURCE FAA RECORDS confirm: (1) Indyke signed as Vice President of JEGE Inc., registered owner of N908JE from 2001 to Oct 5, 2019 (cancellation); (2) Hyperion Air Inc. (Wilmington DE, formed and controlled by Indyke per court filings) sold N909JE to Starbridge Landing Inc. in Nov 2013; deregistered Dec 2, 2014 for export to Venezuela; (3) Indyke signed as Corporate Secretary on the FAA registration application for the 2001 Bell 430 helicopter (s/n 49078, N901RL) registered to Hyperion Air Inc. in March 2012 \u2014 purchased from Bovale Developments for .58M. These pre-2022 transactions ESTABLISH Indyke's hands-on aircraft-structuring expertise that Parlatore later described as the rationale for hiring him at PLG. The N722JE helicopter transaction (FSF LLC -> ASI Wings LLC -> Hyperion Air LLC) at the heart of the active epstein-aetna investigation falls within the same Indyke aircraft-portfolio work-stream. The 2019 transfer to Hyperion Air, Panama wire to JPM #4324, and 1031 exchange via TVPX all carry Indyke's structuring fingerprints from this confirmed aircraft-handling pattern.",
+      "detail": null,
+      "source_datasets": [
+        "doj_efta",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-03-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:49",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cbp.gov/sites/default/files/2024-05/jeffrey_epstein_report_of_aircraft_arrival_2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.justice.gov/epstein/files/DataSet%208/EFTA00021666.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.justice.gov/epstein/files/DataSet%208/EFTA00021675.pdf",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -2152,6 +2200,64 @@
       ]
     },
     {
+      "id": 10866,
+      "finding_type": "background",
+      "summary": "Indyke maintained THE INDYKE LAW FIRM, PLLC as a parallel solo practice throughout his Of Counsel tenure at PLG. The firm is a FL domestic LLC (source_id L22000043914), formed January 24, 2022 \u2014 NINE MONTHS BEFORE Indyke joined PLG (Oct 2022). Status: ACTIVE as of Feb 2026. Principal address: 16065 Bristol Isle Way, Delray Beach FL 33446 (Indyke's home; same address as Harlequin Dane, LLC \u2014 Indyke's longstanding personal LLC). Officer record lists 'INDYKE DARREN K' as AMBR (authorized member). This means Indyke had a Florida law firm BEFORE joining PLG and continued operating it through and after his PLG tenure \u2014 PLG was a name-attached overlay, not his primary practice.",
+      "detail": null,
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-01-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:15:53",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=L22000043914",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10882,
+      "finding_type": "relationship",
+      "summary": "Indyke's wife MICHELLE FERN SAIPHER registered SAPPHIRE STREETS ENTERPRISES, LLC in Florida on 2022-03-01 (entity_id L22000106577 per Florida Intercreditreport). This was 7 months before Indyke joined PLG (Oct 2022) and 5 weeks after THE INDYKE LAW FIRM PLLC was formed (Jan 24, 2022). The early-2022 timing \u2014 coinciding with Indyke's January 2022 personal-PLLC formation \u2014 suggests household reorganization preceding his PLG affiliation. Saipher was previously named in JPMorgan Chase 2020 SARs alongside Indyke and his entity NEW YORK STRATEGY LLC (dissolved 2015). NEW YORK STRATEGY LLC is the vehicle Indyke used in 2014 to receive a ,000 loan repayment from Epstein's Deutsche Bank account. None of Indyke's wife's entities appear in our registry index under 'Saipher' search; SAPPHIRE STREETS data is from third-party sunbiz mirrors. INFRA REQUEST: improve our FL/NY registry index for 'Saipher' coverage.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-03-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:16:54",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://florida.intercreditreport.com/company/sapphire-streets-enterprises-llc-l22000106577",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://lastpagefirst.substack.com/p/darren-indyke-full-profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 1715,
       "finding_type": "relationship",
       "summary": "Parlatore Law Group connection: Indyke joined Parlatore Law Group LLP as Of Counsel in October 2022. Timothy Parlatore had previously represented Donald Trump in the classified documents investigation and currently represents SecDef Pete Hegseth. Indyke departed January 2026 after DOJ released 3.5M Epstein files. This timing suggests either Parlatore distanced from Indyke due to political exposure or Indyke left proactively. Indyke defense attorney is Daniel Weiner (professional relationship confirmed on LittleSis). Marc Agnifilo also served as Indykes attorney. Indykes Florida bar section membership number: 1018593.",
@@ -2175,6 +2281,77 @@
       ]
     },
     {
+      "id": 10885,
+      "finding_type": "intelligence",
+      "summary": "EPSTEIN-ESTATE WORK PRODUCT CONFIRMED CONTINUING through PLG tenure. Per Bloomberg Law (Aug 2025), USVI court filings, and class-action filings: Indyke and Richard Kahn remain the named co-executors of the Epstein estate from 2019 to date (Apr 2026). The estate signed a M USVI AG racketeering settlement (Nov 2022 \u2014 one month after Indyke joined PLG). The estate signed a M class-action settlement (Feb 2026 \u2014 one month AFTER Indyke departed PLG). Estate work explicitly continued at PLG: per Parlatore (The Atlantic, Aug 2025) and Bloomberg, Indyke's 'work on the Epstein estate has kept him so busy that he didn't have time for much else.' This means PLG's billing infrastructure, conflicts system, and tax/transactional services were likely supporting Epstein estate work from Oct 2022 through Jan 2026 \u2014 which is EXACTLY the period when (a) the USVI settlement was implemented, (b) Little St. James was sold, (c) survivor class-action negotiations occurred, (d) the November 2022 Indyke deposition began. Open question: did PLG bill the estate? what was the Epstein-estate-fee revenue share at PLG?",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-11-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:10",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/in-house-counsel/epsteins-personal-lawyer-indyke-to-testify-before-house-panel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://usvidoj.com/u-s-virgin-islands-attorney-general-settles-sex-trafficking-case-against-estate-of-jeffrey-epstein-and-co-defendants-for-over-105-million/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nbcnews.com/news/us-news/epstein-estate-agrees-35-million-settlement-victim-class-action-rcna259863",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10888,
+      "finding_type": "intelligence",
+      "summary": "TIMING ANALYSIS \u2014 INDYKE PLG ENTRY (Oct 2022) vs USVI SETTLEMENT (Nov 2022): Indyke joined Parlatore Law Group in October 2022. The USVI Attorney General settled with the Epstein estate, Indyke and Kahn as co-executors, and 10 Epstein-created entities for M cash plus 50% of Little St. James proceeds in November 2022 \u2014 within ~30 days of Indyke joining PLG. The 2022 USVI complaint had specifically alleged Indyke and Kahn moved M out of estate accounts. Inference: Indyke's PLG affiliation may have been timed to provide a 'real law firm' veneer for settlement negotiations, replacing his prior solo-practice + JEGE/Southern Trust officer-roles posture. Test: examine the dates on Indyke's signature blocks in the USVI settlement papers \u2014 did he sign as 'The Indyke Law Firm PLLC,' 'Of Counsel, Parlatore Law Group,' or 'Co-Executor of the Estate of Jeffrey E. Epstein'? Document discoverable via vicourts.org filings (16911884, 16911886, 17104534, 17035342).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-11-01",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:22",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://usvidoj.com/u-s-virgin-islands-attorney-general-settles-sex-trafficking-case-against-estate-of-jeffrey-epstein-and-co-defendants-for-over-105-million/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.vicourts.org/common/pages/DisplayFile.aspx?itemId=16911884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 1706,
       "finding_type": "identity",
       "summary": "Current Florida activities: Indyke now works as licensed Florida real estate agent with Luxury Partners Realty, office at 5272 Fairway Woods Dr Unit 4113, Delray Beach FL 33484. Specializes in luxury residential properties in Boca Raton-Delray Beach area. Also operates The Indyke Law Firm PLLC (FL entity, active). Previous 6030 Le Lac Rd Boca Raton property (bought 2015 for 3.1M without mortgage) was SOLD May 2023 for 5.5M. The no-mortgage purchase in 2015 on a 3.1M property is notable given Indyke was salaried attorney. Also previously owned property at Boca Grove Plantation (bought 2014 for 460K, sold 2018) requiring 70K+ social equity membership. Current personal address: 16065 Bristol Isle Way, Delray Beach FL 33446.",
@@ -2191,6 +2368,45 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://darrensluxuryhomes.com/about-us/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10869,
+      "finding_type": "background",
+      "summary": "Indyke registered as a 'Luxury Residential Specialist' at Luxury Partners Realty in Delray Beach, FL in September 2024 \u2014 DURING his PLG Of Counsel tenure. He runs darrensluxuryhomes.com claiming '30+ years of high-stakes deal-making' and serves the Boca Raton-Delray Beach corridor. This is a MAJOR client-development pivot mid-tenure: Indyke was acquiring a real-estate-broker book of business while parallel-tracked at PLG's transactional/aviation practice. Suggests he was building post-Epstein-estate exit infrastructure as the estate wound down (estate settled USVI claim Nov 2022 for M; class action settlement Feb 2026 for M).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-09-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:16:01",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://darrensluxuryhomes.com/about-us/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://profile.lessie.ai/darren-indyke",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.luxurypartnersrealty.com/agents/Darren-Indyke/8844497",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2244,6 +2460,78 @@
       ]
     },
     {
+      "id": 10871,
+      "finding_type": "relationship",
+      "summary": "Indyke departed Parlatore Law Group early January 2026, with FL Bar listing him as having resumed solo practice. Per Parlatore's statement to Bloomberg Law, the departure 'had nothing to do with the Epstein affair'. TIMING: PLG departure happened BEFORE the DOJ Epstein-files release (Jan 30, 2026; ~3M pages, 180k images, 2k videos) AND BEFORE Indyke's House Oversight deposition (Mar 5, 2026). Indyke was subpoenaed Jan 23, 2026 \u2014 concurrent with departure. Indyke retained Daniel Weiner and Marc Weinstein at Hughes Hubbard & Reed for Congressional testimony \u2014 i.e., he switched legal representation OUT of PLG before testifying. The substitution of counsel is itself signal: PLG was not his hired representation for the Epstein-related testimony, suggesting either insulation of PLG from optics or pre-existing role separation.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-01-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:16:12",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/in-house-counsel/epsteins-personal-lawyer-indyke-to-testify-before-house-panel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://oversightdemocrats.house.gov/imo/media/doc/01232026subpoenatoindyke.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10862,
+      "finding_type": "identity",
+      "summary": "PRIMARY-SOURCE CONFIRMATION: Indyke's NY State Bar registration (#2491850) lists him as Of Counsel at PARLATORE LAW GROUP, LLP, 260 Madison Ave Fl 17, NY 10016-2410, phone (212) 603-9918. Status as of February 2026: 'Due to reregister within 30 days'. Wave 1 brief listed 1 World Trade Center as PLG HQ; this is INCORRECT \u2014 PLG's NYC office is 260 Madison Ave 17th Floor; their other office is 1440 N Edgewood St, Arlington VA 22201 (per parlatorelawgroup.com/contact). Indyke's prior bar addresses include 1 World Trade Center, 1345 Avenue of the Americas, 575 Lexington Ave (changed 2020-2026).",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:15:42",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://opengovus.com/new-york-state-attorney/2491850",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/practice-areas/aviation/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/who-we-are/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 1736,
       "finding_type": "legal",
       "summary": "Comprehensive negative results across 8 regulatory databases: (1) FARA: zero registrations \u2014 Indyke never registered as foreign agent despite managing entities with international financial flows, (2) LDA Lobbying: zero filings \u2014 no registered lobbying activity, (3) UCC: zero filings in FL or NM \u2014 no secured transactions despite managing multiple LLCs, (4) FAA: zero aircraft registrations, (5) OpenSanctions: no matches among 4.13M entities, (6) USVI corporate registry: zero hits for Indyke or DKIP \u2014 notably absent despite Indyke being authorized signatory for USVI entities like Laurel Inc and Cypress Inc, (7) UK Companies House: search unavailable (no API key), (8) ProPublica 990: no Indyke-named nonprofits. The USVI registry absence is most significant \u2014 Indyke signed USVI corporate documents as Secretary but does not appear as registered officer in USVI records.",
@@ -2280,7 +2568,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions:search-Darren-Indyke",
+          "evidence_ref": "OpenSanctions:search",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2296,6 +2584,53 @@
           "evidence_type": "ref",
           "evidence_ref": "https://www.ltg.gov.vi/division-of-corporations/",
           "source_quote": "Found 0 USVI entities matching Indyke",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10879,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULT: NO entity in any queried corporate registry (FL Sunbiz, NY DOS via opengovny, FL search by 1140 Broadway / 1WTC / 260 Madison / 1440 N Edgewood) shows Indyke as officer or PLG as registered agent on any new aircraft, aviation, or special-purpose entity formed during his Oct 2022 - Jan 2026 PLG tenure. Indyke's existing officer footprint (5 records via unified registry: MAX HOTEL SERVICES CORP., HARLEQUIN DANE LLC, BRISTOL POINTE HOA, THE INDYKE LAW FIRM PLLC, FLORIDA SCIENCE FOUNDATION INC.) all pre-date PLG joining or are personal/family. EDGAR returned 0 results for 'Darren Indyke' (no SEC filings as named officer). OpenSanctions: 0. ICIJ Neo4j: offline (probe not executable in this wave). 990 officer search: 0 (he is on Epstein-foundation 990s historically but not via this tool's officer-search index). This means: any aircraft-structuring work Indyke did at PLG either (a) used existing pre-2022 entity shells (e.g., Hyperion Air LLC), (b) used DE LLCs we couldn't query (DE rate-limit 403 throughout this wave), (c) used non-Indyke nominees per usual offshoring practice (USVI shells, Caribbean trusts). Strong source gap: Delaware LLC search and ICIJ offshore graph are mandatory follow-ups.",
+      "detail": null,
+      "source_datasets": [
+        "registry",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-29",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:16:43",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/g-edgar-indyke.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/g-indyke-officers.json",
+          "source_quote": "5 officer records: MAX HOTEL SERVICES CORP (NY 2773652), HARLEQUIN DANE LLC (FL L15000068663 inactive), BRISTOL POINTE HOMEOWNERS ASSOCIATION INC (FL N99000006813 active), THE INDYKE LAW FIRM PLLC (FL L22000043914 active), THE FLORIDA SCIENCE FOUNDATION INC (FL N07000010684 inactive)",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/g-indyke-officers2.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/g-sanctions-indyke.json",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -2681,6 +3016,528 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "NY SoS address searches: 457 Madison (14 entities)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9180,
+      "finding_type": null,
+      "summary": "Indyke filed WE Talks trademark; website registered to Epstein address 301 E 66th St",
+      "detail": "Daily Beast reporter Kate Briquelet confirmed that Epstein attorney Darren Indyke represented WE Talks for a trademark application, and the WE Talks website was registered to 301 E. 66th Street, a known Epstein address.",
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:14:28",
+      "target_name": "Darren Indyke",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01030806",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9189,
+      "finding_type": "legal",
+      "summary": "Indyke filed WE Talks trademark for Drokova/Pozhidaeva enterprise",
+      "detail": "Darren Indyke, Epstein's personal attorney, filed the trademark application for WE Talks and registered WE TALKS ENTERPRISES LLC in New York (May 23, 2018). The trademark address matched the Jeffrey Epstein VI Foundation address on Lexington Avenue. WE Talks website domain was registered to 301 E 66th St, a known Epstein property. WeWork Companies Inc. opposed the trademark filing. Day-to-day operations were run by Victoria Drokova (Masha's sister, MGIMO law graduate) and Svetlana Pozhidaeva (also MGIMO). This establishes direct legal infrastructure connection between Epstein's attorney and the Drokova family's corporate entities.",
+      "source_datasets": [
+        "lmsband",
+        "registry",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:16:11",
+      "target_name": "Darren Indyke",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Byline Times Oct 2025: Inside Epsteins Russian Tech Web",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01030806",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Explainer.one: WE Talks registered by Darren Indyke",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates: WE TALKS ENTERPRISES LLC NY #5346753 incorporated 2018-05-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9194,
+      "finding_type": "negative_result",
+      "summary": "No evidence Indyke served as attorney for Day One Ventures SEC filings",
+      "detail": "EDGAR search for Day One Ventures shows Form D filings for Fund I (CIK 0001727427, first filed 2018), Fund II, and Fund III (CIK 0002009720). None of the filing metadata references Indyke. Web searches for 'Darren Indyke Day One Ventures' returned no results. While Indyke handled WE Talks trademark and corporate registration, there is no evidence he served as legal counsel for Masha's primary VC entity.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:17:07",
+      "target_name": "Darren Indyke",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR search: Day One Ventures Funds I-III, 17 filings, no Indyke reference",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search: zero results for Darren Indyke Day One Ventures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10907,
+      "finding_type": "intelligence",
+      "summary": "ARTICLE ANGLE C \u2014 'Indyke at Parlatore: The Epstein Estate's Side Door Through a MAGA Law Firm'. THESIS: From October 2022 through January 2026, Jeffrey Epstein's personal attorney and estate co-executor Darren Indyke held an Of Counsel role at Parlatore Law Group \u2014 the same firm whose managing partner is Pete Hegseth's personal attorney and now a Pentagon Reserve officer. Indyke's PLG affiliation began within 30 days of the November 2022 USVI Attorney General settlement, was sustained throughout the wind-down of the Epstein estate, and ended in the same month DOJ released the largest tranche of Epstein files. EVIDENCE CHAIN: (1) Indyke registered as PLG Of Counsel from October 2022 to early January 2026 \u2014 primary-source confirmed via NY State Bar #2491850 listing 260 Madison Ave Fl 17 (#10820, #10862). (2) Indyke maintained THE INDYKE LAW FIRM PLLC (FL L22000043914), formed January 24, 2022 \u2014 NINE MONTHS BEFORE joining PLG, status ACTIVE Feb 2026, principal address his Delray Beach residence (#10866). (3) Wife Michelle Fern Saipher registered Sapphire Streets Enterprises LLC March 1, 2022 \u2014 household reorganization preceding PLG affiliation; Saipher previously named in JPMorgan Chase 2020 SARs alongside Indyke and his New York Strategy LLC (#10882). (4) Per Parlatore's own on-record explanation (The Atlantic, Aug 2025): hired Indyke for 'skills doing a bunch of stuff I dont know how to do,' specifically 'on the legal side of the Epstein business,' 'purchasing aircraft' and 'structuring financial transactions' (#10875). (5) Indyke's pre-2022 aircraft-structuring work confirmed by FAA primary-source records: signed as VP of JEGE Inc. owner of N908JE 2001-2019; signed as Corporate Secretary on Hyperion Air Inc.'s March 2012 FAA application for Bell 430 N901RL purchased from Bovale Developments; structured Hyperion-Air-to-Starbridge-Landing transfer of N909JE in November 2013 (deregistered Dec 2 2014 for Venezuela export) (#10893). (6) Estate work confirmed continuing during PLG tenure: USVI AG racketeering settlement signed Nov 2022 (within 30 days of PLG entry; #10888), M class-action settlement Feb 2026 (one month AFTER PLG departure; #10885); Indyke and Richard Kahn remain estate co-executors 2019 to date. (7) DEPARTURE TIMING: Indyke departed PLG early January 2026 (#10871); subpoenaed by House Oversight 2026-01-23; retained Hughes Hubbard's Daniel Weiner and Marc Weinstein for his March 5 2026 deposition \u2014 i.e., he switched representation OUT of PLG to testify, suggesting deliberate role-separation. DOJ released the Epstein files tranche January 30 2026. (8) Mid-tenure pivot: September 2024, Indyke registered as a 'Luxury Residential Specialist' at Luxury Partners Realty in Delray Beach FL (darrensluxuryhomes.com) \u2014 building post-estate-exit infrastructure DURING his PLG tenure (#10869). KILLER FACT: Indyke's Florida solo law firm THE INDYKE LAW FIRM PLLC was formed January 24, 2022 \u2014 NINE MONTHS before he joined PLG, and remains active in Florida Sunbiz as of Feb 2026 (#10866). PLG was an overlay, not his primary practice. The single attribution Parlatore made for Indyke's PLG portfolio \u2014 'aircraft purchases' \u2014 is structurally identical to the work Indyke did pre-2022 for the Epstein aircraft fleet (FAA primary records, #10893), and his Hyperion Air entity sits in the active epstein-aetna investigation's N722JE / FSF / ASI Wings transaction trail. STRONGEST COUNTER & REBUTTAL: Counter \u2014 'Lots of lawyers have parallel practices and Of Counsel arrangements; Indyke was simply finishing legitimate estate-administration work.' Rebuttal \u2014 The timing arc (Indyke PLLC formed before PLG; PLG joined within 30 days of USVI settlement; PLG exited the same month as DOJ release; switch of counsel for testimony) is too neat for coincidence. The aircraft-structuring expertise Parlatore explicitly cited as the rationale is the same expertise that touches the active epstein-aetna helicopter trail. The deliberate role-separation before testifying is itself diagnostic. REMAINING GAPS: (a) signature-block question \u2014 did Indyke sign the USVI settlement papers as 'The Indyke Law Firm,' 'Of Counsel PLG,' or 'Co-Executor'? (vicourts.org filings 16911884, 16911886, 17104534, 17035342); (b) did PLG bill the Epstein estate? what was the fee revenue share?; (c) the 'small number of unnamed individual clients' Indyke handled at PLG \u2014 names; (d) whether any PLG aircraft-purchase work-product touches N722JE / FSF / ASI Wings / Hyperion. VISUAL/DOCUMENT ANCHORS: (a) The Atlantic Aug 2025 'Epstein's Top Lawyer Now Works for a MAGA Attorney' headline; (b) FL L22000043914 Sunbiz screenshot showing THE INDYKE LAW FIRM PLLC formation date 2022-01-24 ACTIVE; (c) NY Bar #2491850 registration showing Of Counsel PLG; (d) USVI 2022 complaint cover page; (e) FAA registration for Hyperion Air N901RL March 2012 with Indyke's signature; (f) Indyke's darrensluxuryhomes.com listing as 'Luxury Residential Specialist' Sept 2024; (g) House Oversight Mar 5 2026 deposition cover. HEADLINE CANDIDATES: 'Indyke at Parlatore: The Epstein Estate's Side Door'; 'How Epstein's Lawyer Spent Three Years at Pete Hegseth's Lawyer's Firm'; 'A Florida Law Firm, an Estate, and a MAGA Pentagon Connection'; 'The Aircraft Structuring Continued.'",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "registry",
+        "faa",
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:34:26",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10820",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10862",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10866",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10869",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10875",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10888",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10893",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10904",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL L22000043914",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.theatlantic.com/politics/archive/2025/08/epstein-lawyer-trump-attorney/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10908,
+      "finding_type": "intelligence",
+      "summary": "CROSS-INVESTIGATION LINKAGE \u2014 parlatore -> epstein-aetna: The Wave 2 Indyke evidence reinforces and extends the active epstein-aetna investigation's N722JE / FSF / ASI Wings / Hyperion thread in three concrete ways. (1) PRIMARY-SOURCE FAA TRAIL CONFIRMED: Indyke's hands-on aircraft-structuring expertise is now FAA-confirmed (not just inferred from Parlatore's Atlantic quote) \u2014 JEGE Inc. N908JE 2001-2019 (Indyke as VP); Hyperion Air Inc. N909JE Nov-2013 transfer to Starbridge Landing then Dec-2014 export to Venezuela; Hyperion Air Inc. N901RL Bell 430 purchase from Bovale Developments March 2012 with Indyke as Corporate Secretary on the FAA Form 8050-1 (#10893). The Hyperion Air entity itself is the bridge: N722JE in the epstein-aetna investigation moves through FSF LLC -> ASI Wings LLC -> Hyperion Air LLC, and Hyperion Air is the same Wilmington DE entity Indyke controlled via signed FAA filings going back to 2012. (2) INDYKE'S PARALLEL SOLO INFRASTRUCTURE: THE INDYKE LAW FIRM PLLC (FL L22000043914) was formed Jan 24, 2022 \u2014 nine months before PLG, status ACTIVE Feb 2026 (#10866). Wife Michelle Fern Saipher registered Sapphire Streets Enterprises LLC March 1, 2022 \u2014 Saipher previously named in JPMorgan Chase 2020 SARs alongside Indyke and New York Strategy LLC, the vehicle Indyke used in 2014 to receive a ,000 loan repayment from Epstein's Deutsche Bank account (#10882). The household had operational corporate infrastructure independent of PLG throughout. (3) DELIBERATE ROLE-SEPARATION TIMING: Indyke's January 2026 PLG departure is contemporaneous with (a) DOJ Epstein-files release Jan 30, 2026, (b) House Oversight subpoena Jan 23, 2026, (c) substitution to Hughes Hubbard counsel for the March 5 2026 deposition (#10871). Indyke insulated PLG from the testimony exposure. HYPOTHESES TO TEST IN EPSTEIN-AETNA USING WAVE 2 EVIDENCE: (H1) Did the 2019 N722JE transfer to Hyperion Air carry Indyke's signature on the FAA Form 8050-1? Pull the FAA registration pdf via FAA Aircraft Registry. (H2) Did the Panama wire to JPM #4324 referenced in epstein-aetna findings cross with NEW YORK STRATEGY LLC (Indyke's pre-PLG vehicle) or Sapphire Streets Enterprises (Saipher Mar-2022 entity)? Pull both via FL/NY registry index. (H3) Did the TVPX 1031 exchange that handles N722JE involve THE INDYKE LAW FIRM PLLC (FL L22000043914) as transactional counsel? Examine TVPX SEC filings and Florida Sunbiz cross-references. (H4) Did PLG's transactional infrastructure (260 Madison NYC; 1440 N Edgewood Arlington VA) ever appear as registered-agent or address-of-record on any aircraft holding company between Oct 2022 and Jan 2026? Negative result so far per #10879 but Delaware LLC search remains a hard gap. (H5) Did the USVI settlement implementation (Nov 2022 onward) move estate aircraft through entities Indyke could have re-deployed for non-estate purposes? Examine vicourts.org filings 16911884, 16911886, 17104534, 17035342 for entity-list exhibits. RECOMMENDED CROSS-THREAD LEADS: (a) FOIA FAA Form 8050-1 set for N722JE, N908JE, N909JE, N901RL \u2014 verify Indyke signatures; (b) ICIJ Aleph offshore graph query for 'Indyke,' 'Saipher,' 'Hyperion Air,' 'JEGE,' 'New York Strategy LLC,' 'Sapphire Streets' \u2014 full beneficial-ownership graph; (c) Delaware LLC unified-registry cross \u2014 Hyperion Air, FSF, ASI Wings; (d) JPM #4324 SAR review via published Pandora/FinCEN-derived corpora; (e) Hughes Hubbard (Daniel Weiner, Marc Weinstein) FARA / lobbying / litigation footprint cross \u2014 does the firm's Indyke representation overlap any other epstein-aetna-relevant client? OPERATIONAL ASK: epstein-aetna investigation should add Indyke at Parlatore (Oct 2022 - Jan 2026) to the entity timeline as a DOCUMENTED SHELTER PERIOD bracketing the USVI settlement and the DOJ release, and treat the FAA aircraft-structuring fingerprint as the most concrete evidentiary bridge between the two investigations.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "registry",
+        "faa"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:35:01",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10866",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10869",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10875",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10879",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10888",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10893",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10907",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL L22000043914",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10910,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL: Darren Indyke is highest-betweenness non-subject node (rank 2, betweenness=0.3737, degree=8) in parlatore graph; with primary subject excluded he is the only structural bridge between Epstein-estate shell cluster (Hyperion/ASI/Harlequin/FSF) and the Parlatore Law Group cluster",
+      "detail": "Graph stats: 83 nodes, 111 edges. Indyke is one of 13 articulation-point bridges; his neighbors are Parlatore, Hyperion Air LLC, Indyke Law Firm PLLC, FSF LLC, ASI Wings LLC, Harlequin Dane LLC, Hyperion Air Inc., plus Tim Parlatore. Brokerage score 0.929 (only 2 of 28 possible neighbor-pairs are connected). Removing Parlatore from the graph isolates the Epstein-estate shell sub-component, with Indyke as its sole point of contact to the rest of the parlatore network. Theory implication (NOT fact): Indyke is the only documented operational link between PLG client-base and Epstein-estate corporate residue.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:43:13",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-45",
+          "source_quote": "graph_tools betweenness rank=2 value=0.3737 degree=8 brokerage_score=0.929",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10918,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL: Indyke 'Before-the-Raid' rolling 15-day sequence \u2014 PLG departure (~Jan 2026) \u2192 House Oversight subpoena (1/23) \u2192 DOJ Epstein-files release (1/30). Three pressure-related events compressed into ~15 days suggests reactive damage-control timeline.",
+      "detail": "FACT: (a) 2026-01-15 ~ Indyke departs PLG and resumes solo practice (FL Bar); (b) 2026-01-23 House Oversight Committee subpoenas Indyke (8 days later); (c) 2026-01-30 DOJ releases approximately 3 million Epstein-files pages (7 days after subpoena). Followed by 2026-02-08 Parlatore substituting in for Sirois (D. Me.) and 2026-03-05 Indyke deposition with Hughes Hubbard counsel. THEORY (synthesis): the 15-day cluster is consistent with a pre-emptive 'distance' move (Indyke leaves PLG before Oversight/DOJ fingerprints land on PLG) rather than coincidence \u2014 particularly because Indyke retained Hughes Hubbard separately for the deposition rather than continuing through PLG. INNOCENT EXPLANATION: Indyke had been operating his solo Indyke Law Firm PLLC parallel to Of Counsel role since 2022; departure could be unrelated career timing. FALSIFICATION: if Indyke's departure paperwork (FL Bar) predates the subpoena issuance (or its first informal indication via Hill staff communications), the 'reactive distancing' reading is undermined. If departure was already scheduled for unrelated reasons (e.g. retirement, lease end), proximity is coincidence.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:43:54",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-47",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10936,
+      "finding_type": "intelligence",
+      "summary": "HUNCH (hypothesis #246): Indyke's Sept 2024 'Luxury Residential Specialist' realtor registration at Luxury Partners Realty Delray Beach \u2014 added DURING his PLG tenure when he was supposedly 'too busy with Epstein estate' for other work \u2014 combined with wife Saipher's Mar 2022 SAPPHIRE STREETS ENTERPRISES LLC FL formation, fits Indyke's documented pre-2022 aircraft-structuring methodology applied to FL real estate. May be the licensing infrastructure for collecting commission income on Epstein-estate FL property dispositions while PLG provides institutional veneer. Lead #45276 will pull DBPR realtor records and FL county property transactions Sept 2024-Jan 2026.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:49:11",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10866",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10869",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10893",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11009,
+      "finding_type": "background",
+      "summary": "Indyke (Epstein executor) departed PLG roster between Oct 2025 and Jan 2026",
+      "detail": "PLG /who-we-are roster captured 2025-10-10 includes darren.indyke@parlatorelawgroup.com; same page captured 2026-01-18 (and current Apr 2026) omits him. Departure overlaps the same window as McKissack's exit.",
+      "source_datasets": [
+        "wayback"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:27:27",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://web.archive.org/web/20251010155453/https://parlatorelawgroup.com/who-we-are",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://web.archive.org/web/20260118000000/https://parlatorelawgroup.com/who-we-are",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11024,
+      "finding_type": "background",
+      "summary": "Indyke separated from Parlatore Law Group in January 2026; resumed solo practice at THE INDYKE LAW FIRM, PLLC (FL L22000043914)",
+      "detail": "Bloomberg Law (Feb 4 2026) reports Tim Parlatore stated Indyke departed PLG 'last month' (i.e. Jan 2026), claiming the move 'had nothing to do with the Epstein affair' and that Indyke had only been a 'part-time lawyer' at his firm. Florida Bar registration shows Indyke resumed solo practice. His pre-existing PLLC (FL Sunbiz L22000043914, formed 2022, status ACTIVE, AMBR Darren K Indyke, 16065 Bristol Isle Way Delray Beach) is the vehicle.",
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:44:42",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL-SunBiz:L22000043914",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/in-house-counsel/epsteins-personal-lawyer-indyke-to-testify-before-house-panel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11025,
+      "finding_type": "legal",
+      "summary": "Indyke retained Hughes Hubbard & Reed (Daniel Weiner, Marc Weinstein) for House Oversight deposition March 19 2026; testified he had 'no knowledge whatsoever' of Epstein crimes",
+      "detail": "On March 19 2026, Indyke was deposed by the House Committee on Oversight and Government Reform behind closed doors. He was represented by Daniel Weiner (litigation chair, Hughes Hubbard & Reed) and Marc Weinstein (white-collar/regulatory chair). Indyke testified in opening statement: 'Had I known that he was abusing or trafficking women, I would have quit working for him at once and severed all ties to him.' He confirmed the existence of hard drives held by Epstein's private investigators but would not confirm/deny a settlement with Jane Doe 4. Rep. Dave Min (D) said 'I think it's very likely he perjured himself over and over and over again.' Subpoena was issued Jan 23 2026 \u2014 same window as PLG departure.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:44:50",
+      "target_name": "Darren Indyke",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/in-house-counsel/epsteins-personal-lawyer-indyke-to-testify-before-house-panel",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://oversightdemocrats.house.gov/imo/media/doc/01232026subpoenatoindyke.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2026/03/19/politics/darren-indyke-jeffrey-epstein-testimony",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -3757,6 +4614,237 @@
       ]
     },
     {
+      "id": 4798,
+      "person_a": "Darren Indyke",
+      "person_b": "Victoria Drokova",
+      "relationship_type": "legal",
+      "description": "Indyke (Epstein's personal lawyer since 1996, co-executor of estate) filed trademark paperwork for WE TALKS ENTERPRISES LLC, co-founded by Victoria. Indyke worked exclusively for Epstein - creating WE Talks means this was an Epstein-directed entity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 03:34:15",
+      "profile_id": "dfj-network",
+      "other_person": "Victoria Drokova",
+      "other_person_slug": "victoria-drokova",
+      "evidence": []
+    },
+    {
+      "id": 4800,
+      "person_a": "Darren Indyke",
+      "person_b": "Victoria Drokova",
+      "relationship_type": "legal",
+      "description": "Indyke registered WE TALKS ENTERPRISES LLC (May 2018) and filed trademark application for WE Talks, co-founded by Victoria Drokova and Svetlana Pozhidaeva. Trademark address matched Epstein foundation address. Website domain registered to 301 E 66th St (Epstein property). Indyke served as legal bridge between Epstein network and Victoria's corporate activities while Victoria appears zero times in Epstein corpus.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 16:17:23",
+      "profile_id": "epstein",
+      "other_person": "Victoria Drokova",
+      "other_person_slug": "victoria-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01030806",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates: WE TALKS ENTERPRISES LLC NY #5346753",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5643,
+      "person_a": "Darren Indyke",
+      "person_b": "Parlatore Law Group",
+      "relationship_type": "employment",
+      "description": "Of Counsel Oct 2022 - early 2026; corporate work, aircraft-purchase structuring; ex-Epstein personal attorney 1995-2019",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:49:44",
+      "profile_id": "parlatore",
+      "other_person": "Parlatore Law Group",
+      "other_person_slug": "parlatore-law-group",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.theatlantic.com/politics/archive/2025/08/epsteins-lawyer-maga-attorney/683747/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5649,
+      "person_a": "Darren Indyke",
+      "person_b": "Timothy C. Parlatore",
+      "relationship_type": "employment",
+      "description": "Indyke was Of Counsel at Parlatore Law Group Oct 2022 - early 2026",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:49:44",
+      "profile_id": "parlatore",
+      "other_person": "Timothy C. Parlatore",
+      "other_person_slug": "timothy-c-parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.theatlantic.com/politics/archive/2025/08/epsteins-lawyer-maga-attorney/683747/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5684,
+      "person_a": "Darren Indyke",
+      "person_b": "Timothy C. Parlatore",
+      "relationship_type": "advisory",
+      "description": "Parlatore on record (The Atlantic Aug 2025) explaining Indyke was hired for aircraft-purchase structuring and complex financial transactions",
+      "strength": "strong",
+      "date_range": "2022-10-01/2026-01-15",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:17",
+      "profile_id": "parlatore",
+      "other_person": "Timothy C. Parlatore",
+      "other_person_slug": "timothy-c-parlatore",
+      "evidence": []
+    },
+    {
+      "id": 5685,
+      "person_a": "Darren Indyke",
+      "person_b": "Hyperion Air, LLC",
+      "relationship_type": "controls",
+      "description": "Indyke signed FAA registration as Corporate Secretary of Hyperion Air Inc. for N901RL Bell 430 helicopter March 2012; signed N909JE sale Nov 2013",
+      "strength": "strong",
+      "date_range": "2012-03-01/2019-12-31",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:19",
+      "profile_id": "parlatore",
+      "other_person": "Hyperion Air, LLC",
+      "other_person_slug": "hyperion-air-llc",
+      "evidence": []
+    },
+    {
+      "id": 5686,
+      "person_a": "Darren Indyke",
+      "person_b": "The Indyke Law Firm, PLLC",
+      "relationship_type": "owns",
+      "description": "Indyke is AMBR (authorized member) of THE INDYKE LAW FIRM, PLLC (FL L22000043914), formed January 24, 2022; status active.",
+      "strength": "strong",
+      "date_range": "2022-01-24/",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:20",
+      "profile_id": "parlatore",
+      "other_person": "The Indyke Law Firm, PLLC",
+      "other_person_slug": "the-indyke-law-firm-pllc",
+      "evidence": []
+    },
+    {
+      "id": 5689,
+      "person_a": "Darren Indyke",
+      "person_b": "Harlequin Dane, LLC",
+      "relationship_type": "owns",
+      "description": "Indyke listed as MGRM (manager-member) of HARLEQUIN DANE, LLC (FL L15000068663) at his home address 16065 Bristol Isle Way, Delray Beach FL \u2014 entity now inactive",
+      "strength": "strong",
+      "date_range": "2015-04-17/",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:32",
+      "profile_id": "parlatore",
+      "other_person": "Harlequin Dane, LLC",
+      "other_person_slug": "harlequin-dane-llc",
+      "evidence": []
+    },
+    {
+      "id": 5728,
+      "person_a": "Darren Indyke",
+      "person_b": "Hyperion Air Inc.",
+      "relationship_type": "controls",
+      "description": "Indyke signed FAA Form 8050-1 as Corporate Secretary on Hyperion Air Inc.'s March 2012 registration of Bell 430 N901RL purchased from Bovale Developments; Hyperion Air also owned N909JE 2013, transferred to Starbridge Landing then exported to Venezuela 2014. Hyperion Air is the same entity in the active epstein-aetna investigation's N722JE -> FSF -> ASI Wings -> Hyperion Air transaction trail. Cross-investigation bridge entity.",
+      "strength": "strong",
+      "date_range": "2012-03-01 to 2019-10-05",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:35:13",
+      "profile_id": "parlatore",
+      "other_person": "Hyperion Air Inc.",
+      "other_person_slug": "hyperion-air-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10866",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10893",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10907",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10908",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5818,
+      "person_a": "Darren Indyke",
+      "person_b": "The Indyke Law Firm, PLLC",
+      "relationship_type": "controls",
+      "description": "Indyke is sole authorized member (AMBR) of his FL PLLC (Sunbiz L22000043914, ACTIVE); resumed as primary practice vehicle after Jan 2026 PLG departure",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:47:08",
+      "profile_id": "parlatore",
+      "other_person": "The Indyke Law Firm, PLLC",
+      "other_person_slug": "the-indyke-law-firm-pllc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL-SunBiz:L22000043914",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5819,
+      "person_a": "Darren Indyke",
+      "person_b": "Hughes Hubbard & Reed LLP",
+      "relationship_type": "legal",
+      "description": "Indyke retained HH&R (Daniel Weiner litigation chair, Marc Weinstein white-collar chair) for House Oversight Committee deposition March 19 2026",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:47:09",
+      "profile_id": "parlatore",
+      "other_person": "Hughes Hubbard & Reed LLP",
+      "other_person_slug": "hughes-hubbard-reed-llp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/in-house-counsel/epsteins-personal-lawyer-indyke-to-testify-before-house-panel",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 343,
       "person_a": "Darren Indyke",
       "person_b": "Lesley Groff",
@@ -4171,6 +5259,64 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02217395",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5687,
+      "person_a": "Darren Indyke",
+      "person_b": "FSF, LLC",
+      "relationship_type": "controls",
+      "description": "Per epstein-aetna investigation, FSF LLC is the source entity in the N722JE helicopter chain (FSF -> ASI Wings -> Hyperion Air); Indyke's confirmed role across Hyperion Air and JEGE Inc. makes him the most likely structuring counsel for the FSF -> ASI Wings -> Hyperion sequence",
+      "strength": "medium",
+      "date_range": "2019-01-01/2019-12-31",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:27",
+      "profile_id": "parlatore",
+      "other_person": "FSF, LLC",
+      "other_person_slug": "fsf-llc",
+      "evidence": []
+    },
+    {
+      "id": 5688,
+      "person_a": "ASI Wings, LLC",
+      "person_b": "Darren Indyke",
+      "relationship_type": "controls",
+      "description": "ASI Wings LLC is the intermediary entity in the N722JE helicopter chain in epstein-aetna investigation; Indyke's confirmed Hyperion-Air structuring role makes him the most likely counsel of record on the ASI Wings transfer",
+      "strength": "medium",
+      "date_range": "2019-01-01/2019-12-31",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:18:29",
+      "profile_id": "parlatore",
+      "other_person": "ASI Wings, LLC",
+      "other_person_slug": "asi-wings-llc",
+      "evidence": []
+    },
+    {
+      "id": 5481,
+      "person_a": "Brad S. Karp",
+      "person_b": "Darren Indyke",
+      "relationship_type": "social",
+      "description": "Indyke's legal assistant Bebe Avdiu scheduled Epstein's Jul 21 2015 dinner hosting Brad Karp and his son with Soon-Yi Previn; routine coordination point between Indyke's office (Epstein's long-time personal counsel) and Karp",
+      "strength": "weak",
+      "date_range": "2015-07-21..",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:26",
+      "profile_id": "epstein-aetna",
+      "other_person": "Brad S. Karp",
+      "other_person_slug": "brad-s-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02340072",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02492729",
           "source_quote": null,
           "source_page": null
         }
@@ -4613,6 +5759,28 @@
       "entity_type": "unknown",
       "jurisdiction": "NY",
       "entity_status": "unknown"
+    },
+    {
+      "role": "Vice President",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA01339374 (signed Bills of Sale)",
+      "entity_id": 3605,
+      "entity_name": "Freedom Air International, Inc.",
+      "entity_type": "inc",
+      "jurisdiction": "Delaware",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "Vice President",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA01339374 (FAA registration forms predecessor entity)",
+      "entity_id": 3604,
+      "entity_name": "Air Ghislaine, Inc.",
+      "entity_type": "inc",
+      "jurisdiction": "Delaware",
+      "entity_status": "renamed"
     }
   ],
   "timeline": [
@@ -4817,6 +5985,30 @@
       "id": 1728
     },
     {
+      "date": "2012-03-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "INDYKE'S PRE-PLG AIRCRAFT-STRUCTURING ROLE \u2014 PRIMARY-SOURCE FAA RECORDS confirm: (1) Indyke signed as Vice President of JEGE Inc., registered owner of N908JE from 2001 to Oct 5, 2019 (cancellation); (2) Hyperion Air Inc. (Wilmington DE, formed and controlled by Indyke per court filings) sold N909JE to Starbridge Landing Inc. in Nov 2013; deregistered Dec 2, 2014 for export to Venezuela; (3) Indyke signed as Corporate Secretary on the FAA registration application for the 2001 Bell 430 helicopter (s/n 49078, N901RL) registered to Hyperion Air Inc. in March 2012 \u2014 purchased from Bovale Developments for .58M. These pre-2022 transactions ESTABLISH Indyke's hands-on aircraft-structuring expertise that Parlatore later described as the rationale for hiring him at PLG. The N722JE helicopter transaction (FSF LLC -> ASI Wings LLC -> Hyperion Air LLC) at the heart of the active epstein-aetna investigation falls within the same Indyke aircraft-portfolio work-stream. The 2019 transfer to Hyperion Air, Panama wire to JPM #4324, and 1031 exchange via TVPX all carry Indyke's structuring fingerprints from this confirmed aircraft-handling pattern.",
+      "confidence": "confirmed",
+      "id": 10893
+    },
+    {
+      "date": "2012-03-01 to 2019-10-05",
+      "type": "connection",
+      "relationship_type": "controls",
+      "description": "Indyke signed FAA Form 8050-1 as Corporate Secretary on Hyperion Air Inc.'s March 2012 registration of Bell 430 N901RL purchased from Bovale Developments; Hyperion Air also owned N909JE 2013, transferred to Starbridge Landing then exported to Venezuela 2014. Hyperion Air is the same entity in the active epstein-aetna investigation's N722JE -> FSF -> ASI Wings -> Hyperion Air transaction trail. Cross-investigation bridge entity.",
+      "other_person": "Hyperion Air Inc.",
+      "id": 5728
+    },
+    {
+      "date": "2012-03-01/2019-12-31",
+      "type": "connection",
+      "relationship_type": "controls",
+      "description": "Indyke signed FAA registration as Corporate Secretary of Hyperion Air Inc. for N901RL Bell 430 helicopter March 2012; signed N909JE sale Nov 2013",
+      "other_person": "Hyperion Air, LLC",
+      "id": 5685
+    },
+    {
       "date": "2012-09-28",
       "type": "finding",
       "finding_type": "relationship",
@@ -4889,12 +6081,28 @@
       "id": 512
     },
     {
+      "date": "2015-04-17/",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Indyke listed as MGRM (manager-member) of HARLEQUIN DANE, LLC (FL L15000068663) at his home address 16065 Bristol Isle Way, Delray Beach FL \u2014 entity now inactive",
+      "other_person": "Harlequin Dane, LLC",
+      "id": 5689
+    },
+    {
       "date": "2015-04-27",
       "type": "finding",
       "finding_type": "identity",
       "summary": "FL entities at Indyke's Bristol Isle Way address: THE INDYKE LAW FIRM PLLC (L22000043914) and HARLEQUIN DANE LLC (L15000068663, formed 2015)",
       "confidence": "high",
       "id": 2226
+    },
+    {
+      "date": "2015-07-21..",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Indyke's legal assistant Bebe Avdiu scheduled Epstein's Jul 21 2015 dinner hosting Brad Karp and his son with Soon-Yi Previn; routine coordination point between Indyke's office (Epstein's long-time personal counsel) and Karp",
+      "other_person": "Brad S. Karp",
+      "id": 5481
     },
     {
       "date": "2015-10",
@@ -5031,6 +6239,22 @@
       "description": "Joint Personal Representatives of the Estate of Jeffrey E. Epstein per Katlyn Doe complaint",
       "other_person": "Richard D. Kahn",
       "id": 1967
+    },
+    {
+      "date": "2019-01-01/2019-12-31",
+      "type": "connection",
+      "relationship_type": "controls",
+      "description": "Per epstein-aetna investigation, FSF LLC is the source entity in the N722JE helicopter chain (FSF -> ASI Wings -> Hyperion Air); Indyke's confirmed role across Hyperion Air and JEGE Inc. makes him the most likely structuring counsel for the FSF -> ASI Wings -> Hyperion sequence",
+      "other_person": "FSF, LLC",
+      "id": 5687
+    },
+    {
+      "date": "2019-01-01/2019-12-31",
+      "type": "connection",
+      "relationship_type": "controls",
+      "description": "ASI Wings LLC is the intermediary entity in the N722JE helicopter chain in epstein-aetna investigation; Indyke's confirmed Hyperion-Air structuring role makes him the most likely counsel of record on the ASI Wings transfer",
+      "other_person": "ASI Wings, LLC",
+      "id": 5688
     },
     {
       "date": "2019-02",
@@ -5265,6 +6489,30 @@
       "id": 1708
     },
     {
+      "date": "2022-01-24",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Indyke maintained THE INDYKE LAW FIRM, PLLC as a parallel solo practice throughout his Of Counsel tenure at PLG. The firm is a FL domestic LLC (source_id L22000043914), formed January 24, 2022 \u2014 NINE MONTHS BEFORE Indyke joined PLG (Oct 2022). Status: ACTIVE as of Feb 2026. Principal address: 16065 Bristol Isle Way, Delray Beach FL 33446 (Indyke's home; same address as Harlequin Dane, LLC \u2014 Indyke's longstanding personal LLC). Officer record lists 'INDYKE DARREN K' as AMBR (authorized member). This means Indyke had a Florida law firm BEFORE joining PLG and continued operating it through and after his PLG tenure \u2014 PLG was a name-attached overlay, not his primary practice.",
+      "confidence": "high",
+      "id": 10866
+    },
+    {
+      "date": "2022-01-24/",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Indyke is AMBR (authorized member) of THE INDYKE LAW FIRM, PLLC (FL L22000043914), formed January 24, 2022; status active.",
+      "other_person": "The Indyke Law Firm, PLLC",
+      "id": 5686
+    },
+    {
+      "date": "2022-03-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Indyke's wife MICHELLE FERN SAIPHER registered SAPPHIRE STREETS ENTERPRISES, LLC in Florida on 2022-03-01 (entity_id L22000106577 per Florida Intercreditreport). This was 7 months before Indyke joined PLG (Oct 2022) and 5 weeks after THE INDYKE LAW FIRM PLLC was formed (Jan 24, 2022). The early-2022 timing \u2014 coinciding with Indyke's January 2022 personal-PLLC formation \u2014 suggests household reorganization preceding his PLG affiliation. Saipher was previously named in JPMorgan Chase 2020 SARs alongside Indyke and his entity NEW YORK STRATEGY LLC (dissolved 2015). NEW YORK STRATEGY LLC is the vehicle Indyke used in 2014 to receive a ,000 loan repayment from Epstein's Deutsche Bank account. None of Indyke's wife's entities appear in our registry index under 'Saipher' search; SAPPHIRE STREETS data is from third-party sunbiz mirrors. INFRA REQUEST: improve our FL/NY registry index for 'Saipher' coverage.",
+      "confidence": "high",
+      "id": 10882
+    },
+    {
       "date": "2022-10",
       "type": "finding",
       "finding_type": "relationship",
@@ -5273,12 +6521,44 @@
       "id": 1715
     },
     {
+      "date": "2022-10-01/2026-01-15",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Parlatore on record (The Atlantic Aug 2025) explaining Indyke was hired for aircraft-purchase structuring and complex financial transactions",
+      "other_person": "Timothy C. Parlatore",
+      "id": 5684
+    },
+    {
+      "date": "2022-11-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "EPSTEIN-ESTATE WORK PRODUCT CONFIRMED CONTINUING through PLG tenure. Per Bloomberg Law (Aug 2025), USVI court filings, and class-action filings: Indyke and Richard Kahn remain the named co-executors of the Epstein estate from 2019 to date (Apr 2026). The estate signed a M USVI AG racketeering settlement (Nov 2022 \u2014 one month after Indyke joined PLG). The estate signed a M class-action settlement (Feb 2026 \u2014 one month AFTER Indyke departed PLG). Estate work explicitly continued at PLG: per Parlatore (The Atlantic, Aug 2025) and Bloomberg, Indyke's 'work on the Epstein estate has kept him so busy that he didn't have time for much else.' This means PLG's billing infrastructure, conflicts system, and tax/transactional services were likely supporting Epstein estate work from Oct 2022 through Jan 2026 \u2014 which is EXACTLY the period when (a) the USVI settlement was implemented, (b) Little St. James was sold, (c) survivor class-action negotiations occurred, (d) the November 2022 Indyke deposition began. Open question: did PLG bill the estate? what was the Epstein-estate-fee revenue share at PLG?",
+      "confidence": "high",
+      "id": 10885
+    },
+    {
+      "date": "2022-11-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "TIMING ANALYSIS \u2014 INDYKE PLG ENTRY (Oct 2022) vs USVI SETTLEMENT (Nov 2022): Indyke joined Parlatore Law Group in October 2022. The USVI Attorney General settled with the Epstein estate, Indyke and Kahn as co-executors, and 10 Epstein-created entities for M cash plus 50% of Little St. James proceeds in November 2022 \u2014 within ~30 days of Indyke joining PLG. The 2022 USVI complaint had specifically alleged Indyke and Kahn moved M out of estate accounts. Inference: Indyke's PLG affiliation may have been timed to provide a 'real law firm' veneer for settlement negotiations, replacing his prior solo-practice + JEGE/Southern Trust officer-roles posture. Test: examine the dates on Indyke's signature blocks in the USVI settlement papers \u2014 did he sign as 'The Indyke Law Firm PLLC,' 'Of Counsel, Parlatore Law Group,' or 'Co-Executor of the Estate of Jeffrey E. Epstein'? Document discoverable via vicourts.org filings (16911884, 16911886, 17104534, 17035342).",
+      "confidence": "medium",
+      "id": 10888
+    },
+    {
       "date": "2023-05",
       "type": "finding",
       "finding_type": "identity",
       "summary": "Current Florida activities: Indyke now works as licensed Florida real estate agent with Luxury Partners Realty, office at 5272 Fairway Woods Dr Unit 4113, Delray Beach FL 33484. Specializes in luxury residential properties in Boca Raton-Delray Beach area. Also operates The Indyke Law Firm PLLC (FL entity, active). Previous 6030 Le Lac Rd Boca Raton property (bought 2015 for 3.1M without mortgage) was SOLD May 2023 for 5.5M. The no-mortgage purchase in 2015 on a 3.1M property is notable given Indyke was salaried attorney. Also previously owned property at Boca Grove Plantation (bought 2014 for 460K, sold 2018) requiring 70K+ social equity membership. Current personal address: 16065 Bristol Isle Way, Delray Beach FL 33446.",
       "confidence": "medium",
       "id": 1706
+    },
+    {
+      "date": "2024-09-01",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Indyke registered as a 'Luxury Residential Specialist' at Luxury Partners Realty in Delray Beach, FL in September 2024 \u2014 DURING his PLG Of Counsel tenure. He runs darrensluxuryhomes.com claiming '30+ years of high-stakes deal-making' and serves the Boca Raton-Delray Beach corridor. This is a MAJOR client-development pivot mid-tenure: Indyke was acquiring a real-estate-broker book of business while parallel-tracked at PLG's transactional/aviation practice. Suggests he was building post-Epstein-estate exit infrastructure as the estate wound down (estate settled USVI claim Nov 2022 for M; class action settlement Feb 2026 for M).",
+      "confidence": "high",
+      "id": 10869
     },
     {
       "date": "2024-11",
@@ -5297,12 +6577,36 @@
       "id": 1703
     },
     {
+      "date": "2026-01-15",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Indyke departed Parlatore Law Group early January 2026, with FL Bar listing him as having resumed solo practice. Per Parlatore's statement to Bloomberg Law, the departure 'had nothing to do with the Epstein affair'. TIMING: PLG departure happened BEFORE the DOJ Epstein-files release (Jan 30, 2026; ~3M pages, 180k images, 2k videos) AND BEFORE Indyke's House Oversight deposition (Mar 5, 2026). Indyke was subpoenaed Jan 23, 2026 \u2014 concurrent with departure. Indyke retained Daniel Weiner and Marc Weinstein at Hughes Hubbard & Reed for Congressional testimony \u2014 i.e., he switched legal representation OUT of PLG before testifying. The substitution of counsel is itself signal: PLG was not his hired representation for the Epstein-related testimony, suggesting either insulation of PLG from optics or pre-existing role separation.",
+      "confidence": "high",
+      "id": 10871
+    },
+    {
+      "date": "2026-02-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "PRIMARY-SOURCE CONFIRMATION: Indyke's NY State Bar registration (#2491850) lists him as Of Counsel at PARLATORE LAW GROUP, LLP, 260 Madison Ave Fl 17, NY 10016-2410, phone (212) 603-9918. Status as of February 2026: 'Due to reregister within 30 days'. Wave 1 brief listed 1 World Trade Center as PLG HQ; this is INCORRECT \u2014 PLG's NYC office is 260 Madison Ave 17th Floor; their other office is 1440 N Edgewood St, Arlington VA 22201 (per parlatorelawgroup.com/contact). Indyke's prior bar addresses include 1 World Trade Center, 1345 Avenue of the Americas, 575 Lexington Ave (changed 2020-2026).",
+      "confidence": "confirmed",
+      "id": 10862
+    },
+    {
       "date": "2026-02-15",
       "type": "finding",
       "finding_type": "legal",
       "summary": "Comprehensive negative results across 8 regulatory databases: (1) FARA: zero registrations \u2014 Indyke never registered as foreign agent despite managing entities with international financial flows, (2) LDA Lobbying: zero filings \u2014 no registered lobbying activity, (3) UCC: zero filings in FL or NM \u2014 no secured transactions despite managing multiple LLCs, (4) FAA: zero aircraft registrations, (5) OpenSanctions: no matches among 4.13M entities, (6) USVI corporate registry: zero hits for Indyke or DKIP \u2014 notably absent despite Indyke being authorized signatory for USVI entities like Laurel Inc and Cypress Inc, (7) UK Companies House: search unavailable (no API key), (8) ProPublica 990: no Indyke-named nonprofits. The USVI registry absence is most significant \u2014 Indyke signed USVI corporate documents as Secretary but does not appear as registered officer in USVI records.",
       "confidence": "medium",
       "id": 1736
+    },
+    {
+      "date": "2026-04-29",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULT: NO entity in any queried corporate registry (FL Sunbiz, NY DOS via opengovny, FL search by 1140 Broadway / 1WTC / 260 Madison / 1440 N Edgewood) shows Indyke as officer or PLG as registered agent on any new aircraft, aviation, or special-purpose entity formed during his Oct 2022 - Jan 2026 PLG tenure. Indyke's existing officer footprint (5 records via unified registry: MAX HOTEL SERVICES CORP., HARLEQUIN DANE LLC, BRISTOL POINTE HOA, THE INDYKE LAW FIRM PLLC, FLORIDA SCIENCE FOUNDATION INC.) all pre-date PLG joining or are personal/family. EDGAR returned 0 results for 'Darren Indyke' (no SEC filings as named officer). OpenSanctions: 0. ICIJ Neo4j: offline (probe not executable in this wave). 990 officer search: 0 (he is on Epstein-foundation 990s historically but not via this tool's officer-search index). This means: any aircraft-structuring work Indyke did at PLG either (a) used existing pre-2022 entity shells (e.g., Hyperion Air LLC), (b) used DE LLCs we couldn't query (DE rate-limit 403 throughout this wave), (c) used non-Indyke nominees per usual offshoring practice (USVI shells, Caribbean trusts). Strong source gap: Delaware LLC search and ICIJ offshore graph are mandatory follow-ups.",
+      "confidence": "medium",
+      "id": 10879
     }
   ],
   "curation": {

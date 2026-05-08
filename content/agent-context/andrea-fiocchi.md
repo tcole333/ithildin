@@ -1,0 +1,28 @@
+# Andrea Fiocchi
+**Stats**: 10 findings, 16 connections, 0 entities
+**Dossier**: /dossiers/andrea-fiocchi
+
+## Key Findings
+- **[financial/confirmed]** ACRIS reveals Fiocchi handled 13+ NYC luxury real estate transactions (2009-2017) as power of attorney for international clients. Pattern: European/Latin American HNW individuals grant power of attorney to Fiocchi + Sarah Tallent at 44 Wall St. Clients include: Saverio Bardoni (Modena, Italy, 75 Wall St), Pierre Mozziconacci (Paris, 55 Wall St), Matilde Filippi di Baldissero (Istanbul, 167 E 82nd St), Andreas Gauger (Karlsruhe, Germany, 16 W 19th St), Jose Federico Perez Intriago (555 W 59th St), Nazzarena Rossi (188 E 64th St), Zlatan Ibrahimovic (101 Leonard St), Giuseppe Cipriani (114 Liberty St). (Finding #10298)
+- **[relationship/confirmed]** CONFIRMED: Giuseppe Cipriani is a direct Fiocchi/Reinhardt client. ACRIS document 2017091100932001 (power of attorney, June 28, 2017): Cipriani, Giuseppe (110 East 42nd Street, NY) grants POA to Fiocchi, Andrea + Lovejoy, John J (both at 44 Wall Street 10th Floor) for 114 Liberty Street Unit 10. This connects the Cipriani hospitality empire directly to the Reinhardt LLP client network. (Finding #10311)
+- **[relationship/confirmed]** CONFIRMED: Zlatan Ibrahimovic is a direct Reinhardt LLP/Fiocchi client. ACRIS document 2015061900749001 (POA, March 19, 2015): Ibrahimovic, Zlatan (c/o Reinhardt LLP, 44 Wall St Fl 10) grants power of attorney to Fiocchi, Andrea at same address for 101 Leonard Street Unit 6B. Ibrahimovic used the law firm as his US mailing address. 101 Leonard is a luxury TriBeCa condo building. (Finding #10312)
+- **[legal/confirmed]** CourtListener shows Fiocchi as attorney in 3 federal cases: (1) Nebiolo v. W.P. Lavori in Corso SRL (SDNY 1:17-cv-05679, diversity, July 2017 - terminated March 2018) — Italian fashion company dispute (Woolrich), firm listed as both 'Reinhardt LLP' and 'Reinhardt & Schachter, P.C.'; (2) Oryx Jet Limited v. Baroque Aviation LLC (SDNY 1:18-cv-05250, diversity, June 2018 - terminated Oct 2018) — private jet contract dispute, firm 'Reinhardt LLP'; (3) Corex S.p.A. v. Cargo Compass S.p.A. (EDNY 1:24-cv-03221, breach of contract/marine, April 2024 - pending) — Italian shipping companies dispute, firm 'Reinhardt Savic Foley LLP'. All three involve Italian/European corporate clients, confirming international practice focus. (Finding #10314)
+- **[negative_result/confirmed]** Andrea Fiocchi has zero FEC donation records. No political contributions found. Given his HNW client base and NYC real estate focus, this is a deliberate choice to stay below the political radar — consistent with the zero-clustering compartmentalization pattern observed in network analysis. (Finding #10316)
+- **[identity/high]** Fiocchi is dual US-Italy attorney with extensive European HNW client base in NYC luxury real estate (Finding #10225)
+- **[identity/high]** Andrea Fiocchi: equity partner at Reinhardt Savic Foley LLP, dual US-Italy national, admitted in NY State, SDNY, EDNY, and England & Wales. Fluent in English, Italian, French. Specializes in corporate, commercial, real estate/construction law with focus on private equity investments, HNW investments, aircraft/yacht purchases, corporate structuring. Clients span construction, real estate, hospitality, food & wine, fashion, entertainment, finance. Secretary of Cairos USA Corp (FL, 2008, DE-incorporated). (Finding #10297)
+- **[identity/high]** ACRIS reveals Alan F. Fiocchi — likely a relative of Andrea — active in NYC real estate. Alan F. Fiocchi addresses: 111 Kent Avenue PH-B, Brooklyn (2014-2016), 151 West 28th Street 6W, NYC (2018-2021), 2010 Route 9, Garrison, NY (2020), and 260 Madison Avenue 17th Floor, NYC (business). Also appears as MGR of Fiocchi Family Farm LLC (FL, L22000144124) at 3326 Mary Street, Miami FL 33133 with Imane H. Fiocchi and Bowery F. Fiocchi. Giovanni Fiocchi appears as MGRM of Motto I LLC (FL, L09000039890) at 1691 Michigan Avenue, Miami Beach FL — same address as 'It's All About The Music Corp' (Reinhardt LLP client). Family network spans NYC-Miami with luxury real estate and entertainment connections. (Finding #10320)
+
+## Top Connections
+- **Reinhardt LLP** [employment/strong]: Co-founder and equity partner at Reinhardt LLP; Italian-American attorney specializing in RE and expat law
+- **Reinhardt LLP** [corporate/strong]: Fiocchi co-founded Reinhardt LLP, dual US-Italy national, Italian expat real estate law
+- **Domus Arbiter Realty Corp** [legal/strong]: Fiocchi/Reinhardt formed the 4 LLCs that purchased the 14 units Domus Arbiter had originally introduced to Trump SoHo
+- **Giuseppe Cipriani** [corporate/strong]: Fiocchi acted as attorney for Cipriani in NYC real estate transaction (114 Liberty St)
+- **Zlatan Ibrahimovic** [corporate/strong]: Fiocchi acted as attorney for Ibrahimovic in NYC real estate transaction (101 Leonard St)
+- **Giuseppe Cipriani** [advisory/strong]: Attorney-client: Fiocchi held POA for Cipriani at 114 Liberty St Unit 10 (ACRIS 2017)
+- **Zlatan Ibrahimovic** [advisory/strong]: Attorney-client: Fiocchi held POA for Ibrahimovic at 101 Leonard St Unit 6B (ACRIS 2015)
+- **Dierk Reinhardt** [corporate/strong]: Co-founders of Reinhardt LLP (2005), now Reinhardt Savic Foley LLP
+- **Sarah E. Tallent** [corporate/strong]: Co-founders of Reinhardt LLP (2005); joint POA agents on 10+ ACRIS transactions 2009-2014
+- **Alberto Scaduto** [advisory/strong]: Attorney-client: Scaduto is MGR of ES Global + F.S. Venture Group, both at Reinhardt LLP address
+- **Carlo Giovannetti** [corporate/strong]: Fellow partners at Reinhardt Savic Foley LLP; Giovannetti licensed in Italy
+- **Reinhardt Savic Foley LLP** [employment/strong]: None
+- ... and 4 more

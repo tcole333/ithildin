@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.871219",
+  "generated_at": "2026-05-07T23:07:36.202453",
   "last_updated": "2026-02-27T15:23:47",
   "stats": {
     "total_findings": 16,
@@ -39,7 +39,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002059583",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059583",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -62,7 +62,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR full-text search for Affinity Partners, CIK 0002059583 filing history",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059583",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -108,7 +108,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002059583 13F-HR filings Q4 2024 through Q4 2025",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2059583",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -593,7 +593,7 @@
       {
         "id": "key-relationships",
         "title": "Key Relationships",
-        "content": "<p>The Saudi Public Investment Fund is Affinity's dominant capital source and primary institutional relationship. The PIF committed approximately $2 billion within weeks of the fund's launch, reportedly despite opposition from the PIF's own advisory board. By July 2024, Saudi Arabia had paid $87 million in management fees on an investment with no recorded returns. [Connection #2598] The timing and scale of the commitment -- made shortly after <a href=\"/dossiers/jared-kushner\">Kushner</a> left the White House, where he had led the administration's Middle East portfolio including the Abraham Accords and close Saudi relations -- has been the central focus of congressional scrutiny.</p><p>A structural parallel exists between Affinity and the Stargate AI infrastructure joint venture, which channels $500 billion in capital through <a href=\"/dossiers/mgx\">MGX</a> (UAE sovereign wealth) and <a href=\"/dossiers/softbank-group\">SoftBank</a>. Both vehicles direct Gulf sovereign wealth through politically connected U.S. structures during the Trump presidency. <a href=\"/dossiers/josh-kushner\">Josh Kushner</a>'s Thrive Capital, an OpenAI investor, provides a family-level connection between the two. [Connection #2600]</p><p>The reported December 2025 interest in a Warner Bros. Discovery takeover, which would have directed sovereign wealth fund capital into a major U.S. media company, was withdrawn the same day as the Serbia deal. The dual withdrawal suggests a coordinated pullback, possibly driven by regulatory or political risk assessment. An acquisition of this nature would have raised significant CFIUS and national security concerns. [Finding #4366]</p>",
+        "content": "<p>The Saudi Public Investment Fund is Affinity's dominant capital source and primary institutional relationship. The PIF committed approximately $2 billion within weeks of the fund's launch, reportedly despite opposition from the PIF's own advisory board. By July 2024, Saudi Arabia had paid $87 million in management fees on an investment with no recorded returns. [Connection #2598] The timing and scale of the commitment -- made shortly after <a href=\"/dossiers/jared-kushner\">Kushner</a> left the White House, where he had led the administration's Middle East portfolio including the Abraham Accords and close Saudi relations -- has been the central focus of congressional scrutiny.</p><p>A structural parallel exists between Affinity and the Stargate AI infrastructure joint venture, which channels $500 billion in capital through <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a> (UAE sovereign wealth) and <a href=\"/dossiers/softbank-group\">SoftBank</a>. Both vehicles direct Gulf sovereign wealth through politically connected U.S. structures during the Trump presidency. <a href=\"/dossiers/josh-kushner\">Josh Kushner</a>'s Thrive Capital, an OpenAI investor, provides a family-level connection between the two. [Connection #2600]</p><p>The reported December 2025 interest in a Warner Bros. Discovery takeover, which would have directed sovereign wealth fund capital into a major U.S. media company, was withdrawn the same day as the Serbia deal. The dual withdrawal suggests a coordinated pullback, possibly driven by regulatory or political risk assessment. An acquisition of this nature would have raised significant CFIUS and national security concerns. [Finding #4366]</p>",
         "viz": "ego_network"
       }
     ],
@@ -611,38 +611,5 @@
       "complexity-as-credential",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Affinity Partners",
-      "connections": [
-        {
-          "target": "Saudi PIF",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://www.finance.senate.gov/chairmans-news/wyden-investigation-of-kushner-firm-continues",
-          "description": "Saudi PIF committed 2B to Affinity within weeks of launch despite advisory board opposing; 87M in fees paid with zero returns; Wyden: likely FARA-circumventing compensation scheme"
-        },
-        {
-          "target": "Stargate",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "F-4109 (MGX-Stargate), F-4346 (Wyden Affinity), F-4337 (Thrive Capital entities)",
-          "description": "Parallel Gulf-backed Trump investment vehicles: Affinity (Saudi PIF 2B) and Stargate (MGX/SoftBank 500B) both channel sovereign wealth through politically-connected structures; Thrive Capital (Josh Kushner) is OpenAI investor connecting both"
-        }
-      ],
-      "secondHop": {
-        "Saudi PIF": [
-          {
-            "target": "SoftBank Group",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Saudi PIF was anchor LP in Vision Fund 1 ($45B committed, ~$35B deployed). PIF and Mubadala together provided ~2/3 of VF1's $93B capital. PIF did NOT invest in Vision Fund 2. SoftBank forayed into Saudi Arabia in 2021. Vision Fund connected SoftBank to both Saudi and UAE sovereign wealth."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

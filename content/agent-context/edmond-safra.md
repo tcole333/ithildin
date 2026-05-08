@@ -2,6 +2,8 @@
 **Stats**: 9 findings, 8 connections, 0 entities
 **Dossier**: /dossiers/edmond-safra
 
+> Edmond Safra is significant to the Epstein investigation primarily as the patriarch of a banking dynasty whose institutional infrastructure — Republic National Bank, Hermitage Capital, and an offshore network spanning five leak datasets — intersected with Russian money-laundering exposures, Iran-Contra-era financial flows, and a network of successors and family members who remained active in Epstein's social and financial orbit for more than a decade after Safra's death. The evidentiary record for Safra himself is historical; the analytical significance lies in the institutional structures he built and the family members who maintained them.
+
 ## Key Findings
 - **[relationship/medium]** Edmond Safra and wife Marielle appear on Peggy Siegal's master contact list (39 pages) sent to Epstein in September 2010. Listed as 'Mr. & Mrs. Edmond Safra (Marielle) / 600/ FASHION/ LI/ BUSINESS/'. Since Edmond died Dec 1999, this appears to be a historical master list, but confirms Safra moved in overlapping social circles. Jean Doumanian (Jacqui Safra's partner) also listed. (Finding #3331)
 - **[financial/medium]** Zero FEC donations found for Edmond Safra; no OpenSanctions records; no FARA registrations for Safra entities (Finding #3335)
@@ -22,3 +24,16 @@
 - **Republic National Bank of New York** [corporate/strong]: Safra founded RNB in 1966; also founded Trade Development Bank Geneva (sold to AmEx 1983)
 - **Semion Mogilevich** [intelligence/medium]: Safra's RNB exposed Mogilevich-linked Benex money laundering through Bank of New York (1998-1999); Safra died in arson 3 months later
 - **Ariane de Rothschild** [financial/medium]: Safra banking network (RNB, Republic New York Corp) partially absorbed into Edmond de Rothschild banking system after Safra death 1999. Both represent Sephardic private banking dynasties.
+
+## Open Questions
+- What was the full scope of Republic National Bank's role in Iran-Contra financial flows? Congressional records reference an RNB officer (Nan Morabia) delivering $150,000 in cash to Adnan Khashoggi on November 26, 1986, and handling Enterprise wire transfers through RNB. The extent of institutional versus individual involvement, and Safra's personal knowledge, has not been resolved in primary sources reviewed here.
+- Did Safra's 1998 filing of SARs against Benex Worldwide — which triggered the Bank of New York–Mogilevich money-laundering investigation — create adversarial exposure that contributed to his death fourteen months later? The timeline is documented but no primary-source evidence of a causal link has been found.
+- Who controlled the ICIJ-identified offshore entities (J. Safra Holding Bahamas, Safra Capital Management Ltd, Safra Foundation in Pandora Papers) after Edmond Safra's death in 1999, and whether any of these structures intersected with Epstein network financial flows, has not been investigated.
+- The connection between the Safra banking network and Ariane de Rothschild's Edmond de Rothschild Group is recorded as both institutions representing Sephardic private banking dynasties with partial institutional overlap after 1999, but the nature and extent of any direct asset or relationship transfer has not been verified against primary sources [Connection #2090].
+- Andrew Safra's role in the Epstein social network is documented only by a single email reference (EFTA02433816, December 2009). His full relationship to the Epstein circle — including whether he appears elsewhere in the EFTA corpus or in other primary sources — has not been systematically searched.
+
+## Applicable Models
+- parallel-financial-system
+- jurisdictional-arbitrage
+- narrative-shield
+- bridge-tax

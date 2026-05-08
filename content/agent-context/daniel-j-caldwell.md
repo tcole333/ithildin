@@ -1,0 +1,18 @@
+# Daniel J. Caldwell
+**Stats**: 5 findings, 6 connections, 0 entities
+**Dossier**: /dossiers/daniel-j-caldwell
+
+## Key Findings
+- **[intelligence/high]** Caldwell escorted from Pentagon Apr 15 2025 placed on administrative leave; fired Apr 18 2025 along with Selnick and Carroll for alleged unauthorized disclosures; no evidence publicly released supporting leak charge; Caldwell retained security clearance; subsequently hired by ODNI under DNI Tulsi Gabbard for an administrative role (2025-04-18) (Finding #10974)
+- **[background/high]** Dan Caldwell biography: born Scottsdale AZ Mar 26; ASU 2011 cum laude (Asian History/Political Science); enlisted USMC Nov 2005 as infantryman; Marine Presidential Support security at Camp David; deployed Iraq with 2/1 Marines (Al Anbar/Ninawa); staffer for Rep David Schweikert (R-AZ) 2011-2013; joined CVA 2013; ~10 years at CVA helping pass VA MISSION Act and VA Accountability; VP Foreign Policy at Stand Together; named Senior Advisor to SecDef Hegseth Feb 2025 (Finding #10973)
+- **[relationship/high]** Caldwell is the defense secretary's designated Defense Department point of contact in the Yemen Houthi strikes Signal group chat published by The Atlantic; close ally of Pete Hegseth from joint CVA tenure (Hegseth was CVA CEO 2012-2016, Caldwell at CVA 2013-2022) (Finding #10975)
+- **[financial/high]** LittleSis donation records: $500 to Joseph Kent / Joe Kent for Congress (Feb-Mar 2021) and $1,000 via WinRed (same period); positions at CVA (Senior Advisor 2014-present per LittleSis), Stand Together (Foreign Policy campaign advisor), US DoD (through Apr 2024-Apr 2025 per LittleSis dating, actually Feb-Apr 2025) (Finding #10976)
+- **[background/high]** Koch network ties: Caldwell was Vice President of Foreign Policy at Stand Together (the Koch policy umbrella); led Stand Together response to Russia-Ukraine war as a leading voice against escalation; Concerned Veterans for America was Koch-funded and described by Washington Post as 'one of the most muscular arms of the conservative Koch network' that has spent at least $52M; Caldwell also was a public policy advisor at Defense Priorities (Koch-funded isolationist think tank) (Finding #10977)
+
+## Top Connections
+- **US Department of Defense** [employment/strong]: Senior Advisor to SecDef Hegseth Feb 2025; fired Apr 18 2025 in leak probe (no evidence publicly released); retains security clearance
+- **Concerned Veterans for America** [employment/strong]: Caldwell joined CVA in 2013, ~10 years tenure including senior advisor / executive director roles; helped pass VA MISSION Act, VA Accountability
+- **Pete Hegseth** [advisory/strong]: Caldwell served as Senior Advisor to SecDef Hegseth Feb-Apr 2025; long Hegseth ally from CVA tenure (Hegseth CEO 2012-2016, Caldwell at CVA 2013-2022); designated DoD point of contact in Yemen Houthi Signal chat
+- **Darin Selnick** [social/strong]: Cross-cohort overlap: both senior CVA figures (Caldwell at CVA 2013-2022 incl exec director; Selnick CVA Senior Advisor 2019-2024) - so they overlapped at CVA roughly 2019-2022; reunited as Hegseth Pentagon advisers Jan-Feb 2025; fired together Apr 18 2025 with Carroll for alleged unauthorized disclosures; signed joint statement calling termination 'unconscionable'
+- **Stand Together** [employment/strong]: Caldwell was Vice President of Foreign Policy at Stand Together (Koch policy umbrella); led Stand Together response to Russia-Ukraine war
+- **Tim Parlatore** [social/weak]: Co-membership in Pete Hegseth's 'Defense Team Huddle' Signal chat (Jan-Apr 2025) where Yemen strike details discussed; Parlatore as personal attorney, Caldwell as designated DoD point of contact for Houthi strikes chat

@@ -2,6 +2,8 @@
 **Stats**: 13 findings, 6 connections, 0 entities
 **Dossier**: /dossiers/southern-financial-llc
 
+> A USVI-registered trading subsidiary wholly owned by Southern Trust Company Inc and controlled by Jeffrey Epstein, Southern Financial LLC functioned as a derivatives vehicle, an internal lending conduit, an investment-fund disbursement account, and a liquidation vehicle across distinct financial institutions from 2013 to 2019.
+
 ## Key Findings
 - **[financial/confirmed]** ISDA derivatives master agreement between Deutsche Bank AG (London branch) and Southern Financial LLC. Key details: (1) Southern Financial LLC address: 6100 Red Hook Quarter B3, St Thomas USVI 00802, (2) Attention: Jeffrey Epstein, (3) Fax: 340-775-2528, (4) Deutsche Bank AG London Winchester House as counterparty. This confirms Southern Financial LLC was the entity used for derivatives/swap trading with Deutsche Bank. Separately, account statements show Southern Financial holding Global Mortgage Securitization 2005-A Class B2 bonds ($8.25M face value at 5.250%, maturing 2032) traded through JPMorgan Securities LLC, confirming cross-bank trading activity. (2013) (Finding #648)
 - **[legal/medium]** Per NYDFS Consent Order (2020), Southern Financial LLC was a wholly owned subsidiary of Southern Trust Company Inc. The DB-Epstein relationship officially began August 19, 2013 when DB opened brokerage accounts for both Southern Trust Company Inc. (self-described 'database company and services' founded in USVI 2011) and Southern Financial LLC. KYC purposes: Southern Trust to 'hold marketable securities and cash,' Southern Financial to 'invest long term with the bank.' Over the relationship, Epstein/entities/associates opened 40+ accounts at DB. Classified 'high-risk' from onset with enhanced due diligence. Designated 'Honorary PEP' due to connections to prominent political figures. ARRC reviewed in Jan 2015, was 'comfortable with things continuing' despite 40 underage victims and co-conspirators as Butterfly Trust beneficiaries. (2013-08-19) (Finding #596)
@@ -23,3 +25,16 @@
 - **Financial Trust Company** [corporate/medium]: None
 - **Harlequin Dane LLC** [financial/medium]: DS10: 51K pass-through May 2-3 2019
 - **Southern Trust Company Inc** [corporate/medium]: Same address 6100 Red Hook Quarter B3. Both GLEIF LEIs. STC owns SF LLC (entity_relations). SF wholly owned subsidiary.
+
+## Open Questions
+- Aloha Group Capital appears as a named entity in the May 2019 TD Ameritrade transfer correspondence: is it an independent brokerage firm, a Deutsche Bank client code, or a TD Ameritrade account alias — and where did the extracted funds flow after the transfer?
+- Southern Financial LLC's source of wealth was recorded by Deutsche Bank as 'High Risk financial Institutions': what specific institutions or transactions formed the documented basis for this characterization?
+- The $500,000 wire from Southern Financial LLC to JPMorgan Chase on May 5, 2017 is recorded in DS10 data without a stated purpose — what investment or obligation did this payment satisfy?
+- Harlequin Dane LLC received two below-market loans from Southern Financial LLC (May 2015, June 2016) and repaid $51,000 in May 2019 immediately passed through to Citibank — what is the full principal and interest history of these loans, and what was the Citibank recipient account?
+- The NYDFS Consent Order's January 2015 ARRC review found Deutsche Bank 'comfortable with things continuing' despite 40 documented underage victims as Butterfly Trust beneficiaries: which Deutsche Bank personnel participated in that review and what records were presented?
+
+## Applicable Models
+- jurisdictional-arbitrage
+- parallel-financial-system
+- complexity-as-credential
+- manufactured-dependency

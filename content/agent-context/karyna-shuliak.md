@@ -1,6 +1,8 @@
 # Karyna Shuliak
-**Stats**: 6 findings, 7 connections, 0 entities
+**Stats**: 7 findings, 6 connections, 0 entities
 **Dossier**: /dossiers/karyna-shuliak
+
+> Shuliak occupied a role that had no formal title but combined the functions of a principal's personal representative, property operations director, and designated estate beneficiary. Her position is significant to the investigation for three reasons. First, the 1953 Trust designation makes her the intended recipient of Epstein's accumulated wealth, placing her at the center of any post-death asset-tracing effort. Second, her USVI property management role gives her direct operational knowledge of the island facilities, their renovation history, and the contractors and staff who worked there. Third, the Maxim Churkin contact on June 25, 2019 — two weeks before Epstein's arrest — involved a Switzerland intermediary discussion whose substance and purpose remain unresolved. With 13,731 DOJ corpus hits, she is among the most documentable figures in the network, yet almost no investigative reporting has focused on her specifically.
 
 ## Key Findings
 - **[identity/high]** Shuliak submitted birth certificate for USVI professional licensing (Aug 2015). Was referred to as Dr. Shuliak and Dr. Karyna Shuliak in official correspondence. Had US passport photos taken Apr 2019 (sent to Jeffrey and Yulia). Maintained floor plan for a dedicated apartment furnished by Artefacto (Brazilian luxury furniture, Sept 2014). LMSBAND shows Deutsche Bank due diligence/KYC was performed on Shuliak (PWM BIS-RESEARCH). Also appears as SHULYAK/SHULIAK/SHULAK in DB AML records alongside associate DZIANIS SHULIAK (age 39, person associate of EPSTEIN JEFFREY E at 9 E 71st). (2015-08) (Finding #1208)
@@ -14,7 +16,21 @@
 - **Jeffrey Epstein** [social/strong]: Epstein's last girlfriend. De facto property manager/Chief of Staff. 13,731 DOJ Vol 11 hits. $100M heiress (1953 Trust).
 - **Maxim Churkin** [social/strong]: Jun 25, 2019: Churkin contacted Shuliak re Switzerland intermediary. 2 weeks before arrest.
 - **Marcel Kellerhals** [social/strong]: Kellerhals recruited Shuliak [Wave 5]
-- **Jeffrey Epstein** [social/medium]: None
+- **Jeffrey Epstein** [familial/strong]: Karyna Shuliak (née Pshenychna), Belarusian DOB 5/31/1989; long-term partner; received ~50% of 1953 Trust ($100M+) plus 32.73-carat diamond ring 'in contemplation of marriage' Aug 8 2019; Epstein's last external phone call Aug 9 2019. Married to DZIANIS SHULIAK (DB AML records); Indyke handled divorce affidavit March 2019. Interior Decorator JSC Interiors LLC $70K hired Mar 2 2015. Per existing finding #1414: Nov 28 2014 Boeing N908JE LSJ→Bedford with Reid Hoffman + Joi Ito.
 - **Cecile de Jongh** [social/medium]: None
 - **Eva Dubin** [social/medium]: Eva provided medical advice for Karyna mother surgery and coordinated Epstein back pain treatment through Sonia Jones
-- **Eva Dubin** [social/medium]: None
+
+## Open Questions
+- What is the current legal status of the 1953 Trust bequest to Shuliak? Victims' civil suits, estate administration proceedings, and the USVI government's $105 million settlement with the estate all affect the residual available to the primary beneficiary. No public record has been located confirming whether Shuliak received any portion of the estate or whether the bequest is subject to ongoing litigation.
+- Who is DZIANIS SHULIAK (aliases: SHULYAK DENNIS, SHULAK DZIANIS, age 39), recorded in Deutsche Bank AML records as a person associate of EPSTEIN JEFFREY E at 9 East 71st Street? The DB AML records link this individual to Karyna's own KYC file under the same variant spellings. The relationship — whether familial, professional, or coincidental — has not been established.
+- What is the full substance of the June 25, 2019 Maxim Churkin contact regarding a Switzerland intermediary? Churkin contacted Shuliak approximately two weeks before Epstein's arrest. Whether this communication concerned asset movement, legal strategy, travel arrangements, or an unrelated matter is not determinable from the available record.
+- What credential does Shuliak's doctoral designation refer to, and was her USVI medical license ultimately granted? The correspondence from August 2015 and November 2015 documents an active application and a status update, but no record confirming licensure or denial has been located. Whether the credential is medical, dental, or another specialty has not been verified from available records.
+- Who is Yulia — the person to whom the April 2019 passport photo was forwarded alongside Epstein? The document (EFTA02314208) shows Shuliak sending passport photos to both Jeffrey and Yulia, but no person named Yulia appears in the available connection records. Given the April 2019 date — three months before arrest — the identity of this co-recipient is potentially significant for understanding pre-arrest travel coordination.
+- What happened to the LSJE LLC and Haze Trust assets after Epstein's death? These were the entities through which Shuliak-directed furniture purchases were routed, and the Haze Trust held approximately $40.58 million under Deutsche Bank RM 82289 as of the last available balance record. The disposition of these trust assets — and whether they were included in or separate from the 1953 Trust bequest — has not been traced.
+
+## Applicable Models
+- household-integration
+- enabler-gradient
+- jurisdictional-arbitrage
+- manufactured-dependency
+- principal-representative

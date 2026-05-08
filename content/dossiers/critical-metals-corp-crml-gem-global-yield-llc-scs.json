@@ -1,0 +1,208 @@
+{
+  "name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+  "slug": "critical-metals-corp-crml-gem-global-yield-llc-scs",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.398920",
+  "last_updated": "2026-03-24T22:42:06",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-24T22:42:06"
+  },
+  "findings": [
+    {
+      "id": 7811,
+      "finding_type": "financial",
+      "summary": "GEM SPA draw-down mechanics (Article VI Section 6.01): Price = 90% of average Daily Closing Price over 30-trading-day period. Volume cap = 400% of 30-day average daily volume per draw-down. Company sets Threshold Price; days where price\u00d790% < threshold are excluded. One draw-down per period. Company must deliver shares to GEM BEFORE the pricing period begins. Registration Statement must be effective for GEM to be obligated to accept. Litigation clause (\u00a75.03(f)): no action before any arbitrator seeking to restrain transactions is a condition precedent \u2014 the March 2025 GEM arbitration would have blocked further draw-downs.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-07-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:41:37",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 6.01(a): the Purchaser shall pay a per-Share amount equal to 90% of the average Daily Closing Price during the Draw Down Pricing Period. Subject to Section 4.06 hereof, the Draw Down Amount Requested shall not exceed four hundred percent (400%) (the 'Draw Down Limit') of the average daily trading volume for the 30 Trading Days immediately preceding the Draw Down Exercise Date.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7812,
+      "finding_type": "financial",
+      "summary": "GEM SPA Section 4.08(a): CRML was contractually prohibited from entering any other equity line agreement during the Investment Period. This means the March 5 2026 'GEM Agreement' replacement could not be executed until the July 2023 SPA was simultaneously terminated. The same-day termination-and-replacement structure on March 5 was legally required by this exclusivity clause.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-07-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:41:45",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 4.08(a): The Company shall not enter into any agreement, the principal purpose of which is to secure an 'equity line' similar to the financing provided for under this Agreement during the Investment Period.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7813,
+      "finding_type": "financial",
+      "summary": "GEM SPA Commitment Fee: 1.5% of $125M Aggregate Limit = $1.875M payable to GEM Yield Bahamas Ltd (GYBL). On Public Listing Date (Feb 27 2024), CRML issued 122,549 Commitment Fee Shares to GYBL at Daily Closing Price. Adjustment mechanism: if value falls below unpaid fee on days 90/180/270 post-listing, CRML must issue additional shares (anti-dilution shortfall top-up). Fee is owed regardless of whether CRML ever issues a Draw Down Notice.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-07-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:41:54",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 4.12(a): the Commitment Fee shall be payable by the Company irrespective of whether any Draw Down Notices have been delivered by the Company in accordance herewith",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7814,
+      "finding_type": "financial",
+      "summary": "GEM SPA Warrant (Section 4.12(b)): On Public Listing Date, CRML issued Warrant to GYBL for 2.0% of total fully-diluted equity, at exercise price = lesser of (a) closing bid price on Public Listing Date or (b) $972M / total equity interests. Warrant term: 36 months from Public Listing Date (expires Feb 27, 2027). Adjustment clause: on 1-year anniversary (Feb 27, 2025), if average 10-day price < 90% of exercise price, new exercise price = 105% of current trading price. By Oct 2025 20-F, exercise price was adjusted down to $7.00/share from original ~$10.71.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-07-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:42:06",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 4.12(b): On the first anniversary following the Public Listing Date (the 'Adjustment Date'), if all or any portion of the Warrants remain unexercised and the average Daily Closing Price of the Common Shares for the 10 Trading Days following the Adjustment Date (the 'Current Trading Price') is less than 90% of the then-current exercise price of the Warrant, the exercise price of such remaining Warrant shall adjust to 105% of the Current Trading Price.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7809,
+      "finding_type": "financial",
+      "summary": "GEM SPA Section 7.01: Agreement terminates on earliest of (1) 36 months from Public Listing Date [Investment Period = Feb 27, 2027], (2) 36 months from Effective Date [July 4, 2026, extended to match Investment Period], (3) Purchaser purchases full $125M Aggregate Limit, or (4) Company's SOLE DISCRETION at any time \u2014 so long as Warrant is issued and Commitment Fee is paid. March 5 2026 termination was a unilateral discretionary act under clause (4), 12 months before natural Feb 2027 expiry.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:41:15",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 7.01 Term, Termination by Mutual Consent. Unless earlier terminated as provided hereunder, this Agreement shall terminate automatically on the earliest of (i) thirty-six (36) consecutive months from the Public Listing Date (the 'Investment Period'); (ii) thirty-six (36) months from the Effective Date (as may be extended for the duration of the Investment Period if the Public Listing Date falls within such three (3) year period), (iii) the date the Purchaser shall have purchased the Aggregate Limit, and (iv) in the Company's sole discretion at any time as long as the Company has issued or remains obligated to issue the Warrant on the Public Listing Date pursuant to Section 4.12(b) and to pay the Commitment Fee as required by Section 4.12(a).",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7810,
+      "finding_type": "financial",
+      "summary": "GEM SPA Section 7.02: Upon termination, the Warrant and Registration Rights Agreement expressly survive and 'shall not terminate' \u2014 they continue 'in accordance with their respective terms.' This explains why GEM retained full warrant exercise rights after the March 5 2026 SPA termination, enabling the 1,409,624-share cashless exercise.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:41:25",
+      "target_name": "Critical Metals Corp (CRML) / GEM Global Yield LLC SCS",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-23-098983",
+          "source_quote": "Section 7.02 Effect of Termination. In the event of termination by the Company or the Purchaser, the transactions contemplated by this Agreement shall be terminated without further action by either party, it being understood that the Warrant and Registration Rights Agreement shall not terminate and shall continue to survive in accordance with their respective terms.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2023-07-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GEM SPA draw-down mechanics (Article VI Section 6.01): Price = 90% of average Daily Closing Price over 30-trading-day period. Volume cap = 400% of 30-day average daily volume per draw-down. Company sets Threshold Price; days where price\u00d790% < threshold are excluded. One draw-down per period. Company must deliver shares to GEM BEFORE the pricing period begins. Registration Statement must be effective for GEM to be obligated to accept. Litigation clause (\u00a75.03(f)): no action before any arbitrator seeking to restrain transactions is a condition precedent \u2014 the March 2025 GEM arbitration would have blocked further draw-downs.",
+      "confidence": "confirmed",
+      "id": 7811
+    },
+    {
+      "date": "2023-07-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GEM SPA Section 4.08(a): CRML was contractually prohibited from entering any other equity line agreement during the Investment Period. This means the March 5 2026 'GEM Agreement' replacement could not be executed until the July 2023 SPA was simultaneously terminated. The same-day termination-and-replacement structure on March 5 was legally required by this exclusivity clause.",
+      "confidence": "confirmed",
+      "id": 7812
+    },
+    {
+      "date": "2023-07-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GEM SPA Commitment Fee: 1.5% of $125M Aggregate Limit = $1.875M payable to GEM Yield Bahamas Ltd (GYBL). On Public Listing Date (Feb 27 2024), CRML issued 122,549 Commitment Fee Shares to GYBL at Daily Closing Price. Adjustment mechanism: if value falls below unpaid fee on days 90/180/270 post-listing, CRML must issue additional shares (anti-dilution shortfall top-up). Fee is owed regardless of whether CRML ever issues a Draw Down Notice.",
+      "confidence": "confirmed",
+      "id": 7813
+    },
+    {
+      "date": "2023-07-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "GEM SPA Warrant (Section 4.12(b)): On Public Listing Date, CRML issued Warrant to GYBL for 2.0% of total fully-diluted equity, at exercise price = lesser of (a) closing bid price on Public Listing Date or (b) $972M / total equity interests. Warrant term: 36 months from Public Listing Date (expires Feb 27, 2027). Adjustment clause: on 1-year anniversary (Feb 27, 2025), if average 10-day price < 90% of exercise price, new exercise price = 105% of current trading price. By Oct 2025 20-F, exercise price was adjusted down to $7.00/share from original ~$10.71.",
+      "confidence": "confirmed",
+      "id": 7814
+    }
+  ]
+}

@@ -5,16 +5,16 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.890508",
+  "generated_at": "2026-05-07T23:07:36.245491",
   "last_updated": "2026-03-09T19:02:27",
   "stats": {
     "total_findings": 13,
     "total_connections": 7,
     "total_entities": 13,
     "finding_types": {
+      "intelligence": 3,
       "identity": 3,
       "relationship": 5,
-      "intelligence": 3,
       "financial": 2
     },
     "connection_types": {
@@ -26,6 +26,31 @@
     "last_updated": "2026-03-09T19:02:27"
   },
   "findings": [
+    {
+      "id": 6180,
+      "finding_type": "intelligence",
+      "summary": "Horn appeared on Fox and Friends Jan 14 2025 praising Trump Greenland policy; stated Greenlanders 'tired of being exploited and oppressed by the Danes'",
+      "detail": "Drew Horn appeared on Fox and Friends (January 14, 2025) supporting Trump administration Greenland acquisition efforts. Stated that Greenlanders are 'tired of being exploited and oppressed by the Danes.' This media appearance came while GreenMet had active business interests in Greenland (Tanbreez partnership, data center plans), raising questions about whether his public advocacy served his commercial interests.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 14:36:21",
+      "target_name": "Drew Horn",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.occrp.org/en/scoop/as-trump-talked-about-seizing-greenland-former-employees-gained-a-foothold-in-the-arctic-island",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6176,
       "finding_type": "identity",
@@ -148,31 +173,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://projects.propublica.org/trump-town/staffers/andrew-luxton-horn",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6180,
-      "finding_type": "intelligence",
-      "summary": "Horn appeared on Fox and Friends Jan 14 2025 praising Trump Greenland policy; stated Greenlanders 'tired of being exploited and oppressed by the Danes'",
-      "detail": "Drew Horn appeared on Fox and Friends (January 14, 2025) supporting Trump administration Greenland acquisition efforts. Stated that Greenlanders are 'tired of being exploited and oppressed by the Danes.' This media appearance came while GreenMet had active business interests in Greenland (Tanbreez partnership, data center plans), raising questions about whether his public advocacy served his commercial interests.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 14:36:21",
-      "target_name": "Drew Horn",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.occrp.org/en/scoop/as-trump-talked-about-seizing-greenland-former-employees-gained-a-foothold-in-the-arctic-island",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -760,7 +760,16 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-01-14",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Horn appeared on Fox and Friends Jan 14 2025 praising Trump Greenland policy; stated Greenlanders 'tired of being exploited and oppressed by the Danes'",
+      "confidence": "high",
+      "id": 6180
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6200,
@@ -1043,183 +1052,5 @@
       "complexity-as-credential",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Drew Horn",
-      "connections": [
-        {
-          "target": "GreenMet",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "GreenMet website",
-          "description": "CEO and founder of GreenMet"
-        },
-        {
-          "target": "George Sorial",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "DC Corp Registry: both beneficial owners of GreenMet",
-          "description": null
-        },
-        {
-          "target": "Keith Schiller",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "DC Corp Registry: both beneficial owners of GreenMet",
-          "description": null
-        },
-        {
-          "target": "Ned Mamula",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "Co-authored Mamula book; Mamula was GreenMet Chief Geologist before USGS appointment",
-          "description": null
-        },
-        {
-          "target": "Svend Hardenberg",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ArcticToday",
-          "description": "Hardenberg (Inuit Development Company) partners with Horn (AmForge Corporation) on 1.5GW AI data center in Kangerlussuaq"
-        },
-        {
-          "target": "George Logothetis",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "Libra Group (Logothetis) invested in GreenMet (Horn CEO) March 2022",
-          "description": null
-        },
-        {
-          "target": "Thomas Dans",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "Both in Trump admin Greenland initiatives: Horn/GreenMet minerals, Dans/American Daybreak",
-          "description": null
-        }
-      ],
-      "secondHop": {
-        "George Sorial": [
-          {
-            "target": "GreenMet",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Javelin Advisors",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Javelin Advisors LLC"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Sen. Katie Britt",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "GreenMet": [
-          {
-            "target": "Ucore Rare Metals",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Facilitated 10-year offtake agreement"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former Chief Geologist; now USGS Director (divested)"
-          },
-          {
-            "target": "Critical Metals Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Tanbreez offtake partnership for DoD REE supply"
-          },
-          {
-            "target": "Critical Metals Corp",
-            "type": "contracts_with",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "Keith Schiller": [
-          {
-            "target": "Robert W. Seiden",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Rep. Ronny Jackson",
-            "type": "political",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Giorgi Rtskhiladze",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations."
-          },
-          {
-            "target": "Ronny Jackson",
-            "type": "advisory",
-            "strength": 0.7,
-            "description": "Javelin Advisors used Ronny Jackson as primary congressional contact for Pakistan rare earth lobbying. Jackson held in-person meeting May 1 2025 with Pakistani officials, documented in Javelin FARA filings."
-          }
-        ],
-        "Thomas Dans": [
-          {
-            "target": "US Arctic Research Commission",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Appointed head of USARC"
-          }
-        ],
-        "Svend Hardenberg": [
-          {
-            "target": "Ronald Lauder",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Hardenberg is Lauder's Greenland-side partner; former top civil servant and energy executive; sold stakes in Greenland Water Bank and Greenland Investment Group to Lauder consortium"
-          },
-          {
-            "target": "Jorgen Waever Johansen",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-owners of Greenland Water Bank; both sold partial stakes to Lauder's investor group"
-          },
-          {
-            "target": "Energy Transition Minerals",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hardenberg chairs ETM Greenland A/S and serves as General Manager Greenland for Energy Transition Minerals (ASX:ETM), appointed May 2025. Separate from GreenMet/CRML/Tanbreez cluster."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

@@ -1,21 +1,53 @@
 {
   "name": "Zachary Witkoff",
   "slug": "zachary-witkoff",
-  "aliases": [
-    "Zach Witkoff"
-  ],
+  "aliases": [],
   "profile_ids": [
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.964113",
+  "generated_at": "2026-05-07T23:07:36.348650",
   "last_updated": "2026-03-06T03:51:28",
   "stats": {
-    "total_findings": 15,
-    "total_connections": 10,
-    "total_entities": 0
+    "total_findings": 9,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "identity": 2
+    },
+    "connection_types": {
+      "corporate": 3,
+      "familial": 1
+    },
+    "last_updated": "2026-03-06T03:51:28"
   },
   "findings": [
+    {
+      "id": 5830,
+      "finding_type": "financial",
+      "summary": "FEC: $100K Trump Victory (2020), $13.2K Republicans for Pro-Crypto Senate Majority (2024), $16.5K JD Vance",
+      "detail": "FEC records show Zachary Witkoff (employers: THE WITKOFF GROUP, WITKOFF CAPITAL, WHTIKOFF GROUP [sic]; occupation: REAL ESTATE; address: 4700 Meridian Avenue, Miami Beach FL 33140) has donated consistently to Republican/Trump-aligned causes. Key donations: $100,000 TRUMP VICTORY (2020-10-26), $35,500 RNC (2020-10-26), $13,200 REPUBLICANS FOR A PRO-CRYPTO SENATE MAJORITY (2024-09-30, with memo allocations to McCormick, Moreno, Sam Brown, Rogers), $16,500 total to JD Vance campaigns via VANCE VICTORY (2023-2024). Also donated $2,900 to Democrat KEN RUSSELL FOR FLORIDA (2021). Employer names suggest Witkoff Group and Witkoff Capital entities.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-10-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:49:14",
+      "target_name": "Zachary Witkoff",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions search: Witkoff Zachary, 20 records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 3718,
       "finding_type": "financial",
@@ -55,7 +87,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0000862861 DEF 14A 2026-02-03; Form 3 2025-11-13",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=862861",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -149,31 +181,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Yahoo Finance",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5830,
-      "finding_type": "financial",
-      "summary": "FEC: $100K Trump Victory (2020), $13.2K Republicans for Pro-Crypto Senate Majority (2024), $16.5K JD Vance",
-      "detail": "FEC records show Zachary Witkoff (employers: THE WITKOFF GROUP, WITKOFF CAPITAL, WHTIKOFF GROUP [sic]; occupation: REAL ESTATE; address: 4700 Meridian Avenue, Miami Beach FL 33140) has donated consistently to Republican/Trump-aligned causes. Key donations: $100,000 TRUMP VICTORY (2020-10-26), $35,500 RNC (2020-10-26), $13,200 REPUBLICANS FOR A PRO-CRYPTO SENATE MAJORITY (2024-09-30, with memo allocations to McCormick, Moreno, Sam Brown, Rogers), $16,500 total to JD Vance campaigns via VANCE VICTORY (2023-2024). Also donated $2,900 to Democrat KEN RUSSELL FOR FLORIDA (2021). Employer names suggest Witkoff Group and Witkoff Capital entities.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:49:14",
-      "target_name": "Zachary Witkoff",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions search: Witkoff Zachary, 20 records",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -297,158 +304,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 3780,
-      "finding_type": "legal",
-      "summary": "Mahmoud Khalil v. President - deportation case references Zach Witkoff's envoy role (3d Cir., 2025)",
-      "detail": "Mahmoud Khalil v. President United States of America (25-2357, 3d Circuit, docket ID 70845691) is a habeas corpus case challenging deportation. The case appears in searches for 'Zachary Witkoff' and references Zach Witkoff's role as Special Envoy to the Middle East in the context of government actions involving Middle Eastern nationals. The case involves the Trump administration's use of diplomatic/envoy channels and their intersection with immigration enforcement.",
-      "source_datasets": null,
-      "confidence": "low",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:00:04",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CourtListener docket ID 70845691",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.courtlistener.com/docket/70845691/mahmoud-khalil-v-president-united-states-of-america/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3796,
-      "finding_type": null,
-      "summary": "Zach Witkoff FEC filings show employer as World Liberty Financial CEO in 2025",
-      "detail": "FEC donor records show Zachary Witkoff listed employer as WORLD LIBERTY FINANCIAL with occupation CEO in August 2025 donations to Morris for Senate (7000 total). Earlier filings (2023-2024) list employer as THE WITKOFF GROUP (VP Development) and WITKOFF CAPITAL (Family Office). Total Zach Witkoff political donations: approximately 312,900 across both ZACH and ZACHARY name variants. Major recipients include Trump Victory (100K in 2020), Republicans for a Pro-Crypto Senate Majority (13.2K in 2024), JD Vance campaigns (multiple), and Colorado/Arizona Republican parties.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:01:23",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor search for ZACH WITKOFF and ZACHARY WITKOFF",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3822,
-      "finding_type": null,
-      "summary": "Witkoff Capital listed as Zach Witkoff family office - no corporate registration found",
-      "detail": "FEC records from 2021-2024 list Zach Witkoff employer as WITKOFF CAPITAL with occupation FAMILY OFFICE. Searched NY DOS, FL SunBiz, NJ Division of Revenue, WY SOS, TX Comptroller, NV SOS, PR SURI, USVI - no registration found under that name. This unregistered or very privately registered entity served as the Witkoff family investment vehicle before Zach transitioned to World Liberty Financial. FEC records show his employer shifting: Witkoff Group (VP Development, 2020-2023) -> Witkoff Capital (Family Office, 2021-2024) -> World Liberty Financial (CEO, 2025).",
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:03:01",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor search ZACH WITKOFF and ZACHARY WITKOFF; corporate registry searches across 8+ jurisdictions",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3825,
-      "finding_type": null,
-      "summary": "Zach Witkoff donated to pro-crypto Senate candidates in coordinated 2024 batch",
-      "detail": "On Sep 30, 2024, Zachary Witkoff made a coordinated batch of donations totaling 26,400: Republicans for a Pro-Crypto Senate Majority (13,200), plus 3,300 each to Rogers for Senate, Sam Brown for Nevada, Friends of Dave McCormick, and Bernie Moreno for Senate. Employer listed as WHTIKOFF GROUP (sic - typo in filings). These were explicitly crypto-aligned Senate candidates. This spending pattern predates the WLFI launch and shows the Witkoff family was actively investing in crypto-friendly political infrastructure before the Trump crypto venture was publicly known.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:03:20",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor search ZACHARY WITKOFF",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3827,
-      "finding_type": null,
-      "summary": "FORTIVIS LLC and ANDIE DC LLC: new Zach Witkoff entities formed 2025 post-appointment",
-      "detail": "Two new FL LLCs managed by Zach Witkoff were formed in 2025 after Steve Witkoff's appointment as Middle East envoy: (1) ANDIE DC LLC (FL L25000093601, formed Mar 5 2025) at 4400 Biscayne Blvd Suite 900 Miami. DC may refer to Washington DC, suggesting real estate development in the capital. (2) FORTIVIS LLC (FL L25000461213, formed Oct 9 2025) same address. Purpose unknown for both entities. The formation of new business entities by the Special Envoy's son, from the same office as ongoing diplomatic/business activities, raises questions about the separation of government and business interests.",
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:03:30",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FL SunBiz L25000093601 and L25000461213; registry.db officers search",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3839,
-      "finding_type": null,
-      "summary": "Born May 21, 1993. WLFI co-founder alongside Chase Herro and Zak Folkman. Trump Special Envoy to Middle East. Wedding at Mar-a-Lago 2022. OpenSanctions flags as role.rca. Congressional inquiries from CCP Committee and Senate HSGAC.",
-      "detail": "Zachary Witkoff, born May 21, 1993. Son of Steve Witkoff. Co-founded World Liberty Financial with Chase Herro and Zak Folkman. Manages daily operations as one of top three managers. Appointed Trump Special Envoy to Middle East. Had 2022 wedding at Mar-a-Lago where Trump danced until 4am. OpenSanctions flags with role.rca (Relative or Close Associate of PEP). Wikidata Q134277714. Received Congressional letters from House Select Committee on CCP (Feb 4, 2026 regarding WLFI) and Senate HSGAC (Sen. Blumenthal May 6, 2025). Announced 2B MGX-Binance deal using WLFI tokens alongside Eric Trump.",
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:04:48",
-      "target_name": "Zach Witkoff",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://en.wikipedia.org/wiki/Zach_Witkoff",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://democrats-selectcommitteeontheccp.house.gov/sites/evo-subsites/democrats-selectcommitteeontheccp.house.gov/files/evo-media-document/2-4-26-scc-letter-to-wlf.pdf",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -511,155 +366,17 @@
       "other_person": "Zak Folkman",
       "other_person_slug": "zak-folkman",
       "evidence": []
-    },
-    {
-      "id": 2165,
-      "person_a": "ALT5 Sigma Corp",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "corporate",
-      "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 21:26:06",
-      "profile_id": "epstein",
-      "other_person": "ALT5 Sigma Corp",
-      "other_person_slug": "alt5-sigma-corp",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "BusinessWire Aug 13 2025",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2230,
-      "person_a": "JD Vance",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "political",
-      "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100).",
-      "strength": "strong",
-      "date_range": "2023-09 to 2024-04",
-      "verification_status": "unverified",
-      "created_at": "2026-02-25 23:04:18",
-      "profile_id": "epstein",
-      "other_person": "JD Vance",
-      "other_person_slug": "jd-vance",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC donor search ZACHARY WITKOFF",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2369,
-      "person_a": "SC Financial Technologies",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "employment",
-      "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-02-26 05:55:14",
-      "profile_id": "epstein",
-      "other_person": "SC Financial Technologies",
-      "other_person_slug": "sc-financial-technologies",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "dawn.com",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2504,
-      "person_a": "SC Financial Technologies LLC",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "corporate",
-      "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-02-26 17:38:49",
-      "profile_id": "epstein",
-      "other_person": "SC Financial Technologies LLC",
-      "other_person_slug": "sc-financial-technologies-llc",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "BusinessWire Jan 2026",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Reuters Jan 2026",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2541,
-      "person_a": "World Liberty Trust Company",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "corporate",
-      "description": "Proposed president/chairman/director of WLTC national trust bank",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-02-26 18:23:40",
-      "profile_id": "epstein",
-      "other_person": "World Liberty Trust Company",
-      "other_person_slug": "world-liberty-trust-company",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OCC application 2026-Charter-344521",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 2372,
-      "person_a": "Fortivis LLC",
-      "person_b": "Zach Witkoff",
-      "relationship_type": "corporate",
-      "description": "FL LLC formed Oct 2025 at Witkoff Group address 4400 Biscayne Blvd Suite 900 Miami",
-      "strength": "medium",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-02-26 05:55:14",
-      "profile_id": "epstein",
-      "other_person": "Fortivis LLC",
-      "other_person_slug": "fortivis-llc",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "sunbiz.org:L25000461213",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
     }
   ],
   "entities": [],
   "timeline": [
     {
-      "date": "2023-09 to 2024-04",
-      "type": "connection",
-      "relationship_type": "political",
-      "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100).",
-      "other_person": "JD Vance",
-      "id": 2230
+      "date": "2020-10-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC: $100K Trump Victory (2020), $13.2K Republicans for Pro-Crypto Senate Majority (2024), $16.5K JD Vance",
+      "confidence": "confirmed",
+      "id": 5830
     }
   ],
   "curation": {
@@ -738,7 +455,7 @@
       {
         "id": "gulf-state-deals-and-conflict-of-interest",
         "title": "Gulf State Deals and Conflict of Interest",
-        "content": "<p>In May 2025, Zachary Witkoff appeared alongside Eric Trump in Abu Dhabi to announce that <a href=\"/dossiers/mgx\">MGX</a>, a UAE state-backed fund, would invest $2 billion in Binance using WLFI's USD1 stablecoin tokens. [Finding #5831] This announcement occurred while his father <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a> served as Trump's Special Envoy to the Middle East, conducting active diplomacy with the same Gulf states. Steve Witkoff's financial disclosure shows he continued to retain WLFI cryptocurrency assets ten months into government service. [Finding #5831]</p><p>Separately, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an entity linked to UAE national security adviser <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, acquired 49 percent of WLFI for $500 million. Eric Trump signed that contract on January 16, 2025, four days before the inauguration. At least $31 million from that deal flowed to Witkoff-affiliated entities through WC Digital Fi LLC.</p><p>The New York Times reported that Steve Witkoff's involvement in a multibillion-dollar AI project between the United States and the UAE coincided with WLFI negotiating its own multibillion-dollar deal with an Emirati state venture firm. [Finding #5831] According to Congressional records, multiple Democratic lawmakers raised concerns: Senator Schiff demanded answers on the failure to divest WLFI crypto assets, House Foreign Affairs Democrats called for investigation of what they termed \"sketchy business dealings,\" the House Select Committee on CCP sent a letter to Zachary Witkoff on February 4, 2026, and Senator Blumenthal sent a HSGAC inquiry on May 6, 2025 [Finding #3839]. According to OpenSanctions, Zachary Witkoff is classified as role.rca (Relative or Close Associate of a Politically Exposed Person) [Finding #3839].</p>",
+        "content": "<p>In May 2025, Zachary Witkoff appeared alongside Eric Trump in Abu Dhabi to announce that <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, a UAE state-backed fund, would invest $2 billion in Binance using WLFI's USD1 stablecoin tokens. [Finding #5831] This announcement occurred while his father <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a> served as Trump's Special Envoy to the Middle East, conducting active diplomacy with the same Gulf states. Steve Witkoff's financial disclosure shows he continued to retain WLFI cryptocurrency assets ten months into government service. [Finding #5831]</p><p>Separately, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an entity linked to UAE national security adviser <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, acquired 49 percent of WLFI for $500 million. Eric Trump signed that contract on January 16, 2025, four days before the inauguration. At least $31 million from that deal flowed to Witkoff-affiliated entities through WC Digital Fi LLC.</p><p>The New York Times reported that Steve Witkoff's involvement in a multibillion-dollar AI project between the United States and the UAE coincided with WLFI negotiating its own multibillion-dollar deal with an Emirati state venture firm. [Finding #5831] According to Congressional records, multiple Democratic lawmakers raised concerns: Senator Schiff demanded answers on the failure to divest WLFI crypto assets, House Foreign Affairs Democrats called for investigation of what they termed \"sketchy business dealings,\" the House Select Committee on CCP sent a letter to Zachary Witkoff on February 4, 2026, and Senator Blumenthal sent a HSGAC inquiry on May 6, 2025 [Finding #3839]. According to OpenSanctions, Zachary Witkoff is classified as role.rca (Relative or Close Associate of a Politically Exposed Person) [Finding #3839].</p>",
         "viz": "ego_network"
       },
       {
@@ -773,275 +490,6 @@
       "jurisdictional-arbitrage",
       "enabler-gradient",
       "manufactured-dependency"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Zachary Witkoff",
-      "connections": [
-        {
-          "target": "Zach Folkman",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-members of WLF Holdco LLC Board of Managers. Both directors of ALT5 Sigma Corp (Witkoff is Chairman). Witkoff is co-founder and CEO of WLFI."
-        },
-        {
-          "target": "Chase Herro",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-members of WLF Holdco LLC Board of Managers. Both involved in WLFI operations."
-        },
-        {
-          "target": "Steve Witkoff",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
-        },
-        {
-          "target": "Zak Folkman",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Both are directors/officers of WLFI and ALT5 Sigma Corp board nominees"
-        },
-        {
-          "target": "ALT5 Sigma Corp",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "BusinessWire Aug 13 2025",
-          "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
-        },
-        {
-          "target": "JD Vance",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC donor search ZACHARY WITKOFF",
-          "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-        },
-        {
-          "target": "SC Financial Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "dawn.com",
-          "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
-        },
-        {
-          "target": "SC Financial Technologies LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "BusinessWire Jan 2026",
-          "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy."
-        },
-        {
-          "target": "World Liberty Trust Company",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "OCC application 2026-Charter-344521",
-          "description": "Proposed president/chairman/director of WLTC national trust bank"
-        },
-        {
-          "target": "Fortivis LLC",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "sunbiz.org:L25000461213",
-          "description": "FL LLC formed Oct 2025 at Witkoff Group address 4400 Biscayne Blvd Suite 900 Miami"
-        }
-      ],
-      "secondHop": {
-        "ALT5 Sigma Corp": [
-          {
-            "target": "Zach Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "ALT5 received 7.3B WLFI tokens (valued at 1.5B) via registered direct offering Aug 2025. Zach Witkoff (WLFI co-founder) became ALT5 Chairman. Eric Trump became board observer. ALT5 primary asset is WLFI tokens. Creates circular value mechanism: WLFI issues tokens to ALT5, ALT5 holds them as treasury, inflating both valuations."
-          },
-          {
-            "target": "Jon Isaac",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Former CEO of JanOne Inc (now ALT5 Sigma). Under SEC fraud charges since 2021 for inflating earnings and secret stock sales at JanOne/Live Ventures. Left before 2024 rebrand but retains over 1M ALT5 shares. His brother Tony Isaac appointed Acting CEO of ALT5 in Nov 2025."
-          },
-          {
-            "target": "Eric Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
-          }
-        ],
-        "Chase Herro": [
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Herro donated $746K to Trump PACs July 2024, then co-founded WLFI with Trump family as promoters"
-          },
-          {
-            "target": "Zach Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders, executive officers, and directors of World Liberty Financial Inc per SEC Form D"
-          },
-          {
-            "target": "Zachary Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of 17+ companies since 2013 including Nexus Group (USVI), Dough Finance (DeFi), Axiom Management Group LLC (PR, WLFI revenue vehicle). Co-owners of WLFI receiving 12.5% each of net revenue."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Witkoff introduced Herro to Trump family. WC Digital Fi LLC (Witkoff) receives 50% of Herro/Folkman WLFI share. Witkoff is longtime Trump donor, real estate developer, now Special Envoy."
-          },
-          {
-            "target": "Eric Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
-          }
-        ],
-        "JD Vance": [
-          {
-            "target": "Peter Thiel",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mentor-protege since 2011. Thiel hired Vance at Mithril Capital, backed Narya Capital, donated 15M to Senate campaign, engineered VP selection"
-          },
-          {
-            "target": "Zach Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-          },
-          {
-            "target": "True Anomaly",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Vance co-founded Narya Capital which invested in True Anomaly (two rounds). True Anomaly won Golden Dome SBI contract. Vance retained 500K-1M Narya stake."
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Luckey speaker). Luckey also connected via Anduril (Narya Capital invested)."
-          },
-          {
-            "target": "David Sacks",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Sacks speaker). Coordinated conservative donor network."
-          }
-        ],
-        "SC Financial Technologies": [
-          {
-            "target": "World Liberty Financial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-owns USD1 stablecoin brand; Delaware affiliate"
-          },
-          {
-            "target": "Zach Witkoff",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
-          },
-          {
-            "target": "Pakistan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Jan 2026 MOU for USD1 stablecoin integration with central bank"
-          }
-        ],
-        "SC Financial Technologies LLC": [
-          {
-            "target": "Zach Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy."
-          }
-        ],
-        "Steve Witkoff": [
-          {
-            "target": "Zach Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
-          },
-          {
-            "target": "World Liberty Financial",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
-          },
-          {
-            "target": "Tahnoon bin Zayed Al Nahyan",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
-          },
-          {
-            "target": "WC Digital Fi LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Witkoff family affiliate receiving WLFI revenue share"
-          }
-        ],
-        "World Liberty Trust Company": [
-          {
-            "target": "Zach Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Proposed president/chairman/director of WLTC national trust bank"
-          }
-        ],
-        "Zach Folkman": [
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Folkman is co-founder, Exec Officer, Director of WLFI. Trump is named promoter. DT Marks DEFI LLC (Trump entity) receives 75% of WLFI revenue; Axiom Management (Folkman entity) receives 25%. Both promoters on WLFI Form D."
-          },
-          {
-            "target": "Steven Witkoff",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Steven Witkoff (real estate developer, Trump Middle East envoy) is named promoter on WLFI Form D/A. Father of Zachary Witkoff. Connected Folkman/Herro to Trump family. Both promoters of WLFI."
-          }
-        ],
-        "Fortivis LLC": [
-          {
-            "target": "Zach Witkoff",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "FL LLC formed Oct 2025 at Witkoff Group address 4400 Biscayne Blvd Suite 900 Miami"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2023-09 to 2024-04",
-        "label": "political with JD Vance",
-        "type": "political",
-        "entity": "JD Vance",
-        "id": 2230
-      }
     ]
   }
 }

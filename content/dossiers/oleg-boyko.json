@@ -3,27 +3,88 @@
   "slug": "oleg-boyko",
   "aliases": [],
   "profile_ids": [
+    "dfj-network",
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.978509",
-  "last_updated": "2026-02-26T18:31:07",
+  "generated_at": "2026-05-07T23:07:36.181230",
+  "last_updated": "2026-04-02T02:51:47",
   "stats": {
-    "total_findings": 7,
-    "total_connections": 5,
-    "total_entities": 0,
+    "total_findings": 19,
+    "total_connections": 11,
+    "total_entities": 12,
     "finding_types": {
-      "relationship": 2,
-      "financial": 3,
-      "intelligence": 1,
-      "legal": 1
+      "identity": 3,
+      "relationship": 3,
+      "financial": 8,
+      "intelligence": 3,
+      "legal": 2
     },
     "connection_types": {
-      "financial": 3,
-      "corporate": 2
+      "financial": 6,
+      "corporate": 3,
+      "employment": 1,
+      "intelligence": 1
     },
-    "last_updated": "2026-02-26T18:31:07"
+    "last_updated": "2026-04-02T02:51:47"
   },
   "findings": [
+    {
+      "id": 8923,
+      "finding_type": "identity",
+      "summary": "Corporate structure mapped: Finstar-Holding LLC (AZ), Finstar Financial Group LLC (SDNY), Ritzio Purchase Limited (Nicosia Cyprus, Diagorou St 4 Kermia Bldg 6th Fl, agent Christoforos Panagis). BVI entities via FashionTV. Personally sued SDNY Fashion One Television (2016). Zero SEC presence.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-1-16-cv-05328",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-2-23-cv-01186",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8995,
+      "finding_type": "identity",
+      "summary": "Diagorou Street 4, Kermia Building, Nicosia Cyprus is a shell company factory with ~65 entities (peak registration 2004-2008). Managed by Interstatus Limited (corporate secretary) run by Elena Andreou and Marina Psyllou (each directing 20+ shells). Generic entity names: Steel Products, Ocean Fish Resources, Caspian Worldwide Energy, Railway Industries. Ritzio Purchase Limited registered here. This is professional nominee director/corporate concealment infrastructure.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:23:35",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:diagorou-4",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4052,
       "finding_type": "relationship",
@@ -84,7 +145,7 @@
         },
         {
           "evidence_type": "file",
-          "evidence_ref": "OpenSanctions Q4090404 (AU/UA/PL sanctions)",
+          "evidence_ref": "OpenSanctions:Q4090404",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -121,7 +182,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions Q4090404",
+          "evidence_ref": "OpenSanctions:Q4090404",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -282,6 +343,373 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 8978,
+      "finding_type": "identity",
+      "summary": "Oleg Viktorovich Boyko: full identity profile -- born 28 September 1964, Moscow, INN 773603237802, citizenships Russia/Italy/Serbia, wheelchair user since 1996, resides Switzerland/Italy",
+      "detail": "Full identity: Oleg Viktorovich Boyko, born 28 September 1964, Moscow. INN 773603237802. Citizenships: Russia, Italy (passport February 2008), Serbia (granted March 2025 by Vucevic government despite active sanctions from Poland/Ukraine/Australia). Education: Moscow Aviation Institute (radio electronics), MBA from Russian Presidential Academy. Uses wheelchair since 1996 accident. Resides in Switzerland/Italy. Assets: Yacht Blade (~8-10M USD), Bombardier jet HB-JRX, Villa on Lake Como, apartments in Monaco and London. Net worth ~1.5B USD.",
+      "source_datasets": [
+        "opensanctions",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:25",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BIRN Serbia citizenship report March 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CAATSA Section 241 report January 2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q4090404",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8979,
+      "finding_type": "financial",
+      "summary": "Boyko sanctions status: sanctioned by Poland (Dec 2024), Ukraine (2022), Australia (Apr 2022). Canada sanctioned Apr 2022 but lifted Nov 2023 after court challenge. On US CAATSA Putin List (2018, #17 of 96 oligarchs). Finstar Bank PAO (St. Petersburg) is on US OFAC SDN list. Boyko personally NOT on OFAC SDN.",
+      "detail": "Poland ABW intelligence assessment states Boyko has ties to criminal organizations and Russian intelligence services. Casinos under his control flagged as potential vehicles for money laundering from organized crime and Russian intelligence. ABW notes Boyko informally controls Polish lending operations through 4Finance management team despite no formal ties. AS 4Finance owns 100 percent of BASTOREHILL INVESTMENTS sp. z o.o. in Warsaw (sanctioned by Poland Sep 2024). Finstar Bank PAO (formerly PJSC Bank SIAB) at Chernigovskaya 8, St. Petersburg designated under OFAC RUSHAR program.",
+      "source_datasets": [
+        "opensanctions",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Canada Federal Court proceedings August 2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OFAC SDN list Finstar Bank PAO",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q4090404",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8980,
+      "finding_type": "financial",
+      "summary": "Boyko corporate empire: Finstar Financial Group (~2B AUM), offices in Cyprus/Serbia/UAE, 30+ country footprint. Wealth management through Feldmans Management (Overseas) Limited (HE127822 Cyprus) with Bahamas nominee layer (Feldmans Services Limited, Nassau). Key holding: Tirona Limited (Cyprus). Primary associates: Daria Kozlova Michalidou and Olena Tkachuk manage wealth across Cyprus/BVI/Bahamas/Seychelles.",
+      "detail": "Boyko empire structure: Feldmans Services Limited (Bahamas) provides nominee services concealing UBO. Controlled by Feldmans Management (Overseas) Limited (HE127822, Cyprus, incorporated 2002-02-12, active). Also Feldmans Nominees (Cyprus) Limited (HE196821, dissolved 2018). Central holding is Tirona Limited (Cyprus) which controls 4Finance group. Nakula Management Ltd (HE237281 Cyprus, incorporated 2008-09-03, active) filed SEC SC 13D for position in Enova International (ENVA, CIK 0001652676). Finstar also has two Liechtenstein Anstalts, Delaware entities (Finstar Capital Management Inc #2851435, Finstar Co #2861831), and Panama entity (Finstar Advisors Inc #155594526, active).",
+      "source_datasets": [
+        "opencorporates",
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:57",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "European Investigative Collaborations (Malta Files)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates Cyprus registry records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1652676",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8981,
+      "finding_type": "financial",
+      "summary": "Boyko Cyprus gambling hub at Diagorou 4, Kermia Building, Floor 6, Office 601, Nicosia: at least 10 Ritzio/related entities registered at this single address (2000-2019). Active entities: 4SG Limited (HE116163), Ritzio International Limited (HE139855), Ritzio Purchase Limited (HE144533). Separate Vulkan entity cluster at Sina 1, Nicosia. German operations: Ritzio Berlin, Central, Hamburg, North Germany GmbHs all currently registered.",
+      "detail": "Diagorou 4 entities: 4SG Limited (HE116163, 2000, active), Ritzio BC Limited (HE116475, 2000, dissolved 2018), Ritzio CIS Limited (HE128488, 2002, dissolved 2018), Ritzio LV Limited (HE135549, 2003, dissolved 2014), Ritzio International Limited (HE139855, 2003, active), Ritzio Purchase Limited (HE144533, 2003, active), Ritzio Entertainment Group Limited (HE102055, 1999, dissolved 2019), Ritzio Italy Limited (HE162487, 2005, dissolved 2018), Ritzio WE Limited (HE162366, 2005, dissolved 2019), Sodeza Holdings Limited (HE205527, 2007, dissolved 2014). Vulkan entities at Sina 1: Vulkan Holdings (HE128490), Vulkan Phantom (HE136503), Vulkan MG (HE141655), Vulkan North West (HE148806), Vulkan Finance (HE153273) -- all dissolved 2014-2016. Also Ritzio CZ Limited (HE206235) at different Nicosia address, dissolved 2014. Montenegro: Ritzio MNE d.o.o. (Podgorica, liquidated). Romania: Ritzio BU SRL (radiated).",
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:28:15",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates Cyprus corporate registry",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates Germany registry",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8982,
+      "finding_type": "financial",
+      "summary": "Boyko Malta tax scheme (4Finance/FCI Investments): 57M EUR profit in 2013 with only 512K EUR taxes paid (~0.9% effective rate). 106M EUR net cash flow from financing. Credence Corporate Advisory Services (Maltese service provider) fined 261K EUR for money laundering compliance breaches. FCI Investments subsequently liquidated; 4Finance now controlled through Tirona Limited (Cyprus).",
+      "detail": "4Finance originally a Latvian startup owned by 8 founders before Boyko acquired for 105M EUR. FCI Investments (formerly Fatcat Investments) was created by original owners before sale to Boyko. After establishing full control, Boyko liquidated FCI Investments and controls group through Tirona Limited with Latvian associates Uldis Arnicans and Edgar Dupats. 4Finance US Holding Inc registered in Delaware; managed North Star Finance LLC owned by Fort Belknap Native American Indian community of Montana -- exploiting tribal sovereign immunity to circumvent state payday lending regulations. Boyko family trust reduced 4Finance stake from 75% to 49% (2015) and completed full divestment in 2022.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:28:31",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Credence FIAU fine",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Malta Today reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Black Sea Malta Files investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8983,
+      "finding_type": "intelligence",
+      "summary": "Boyko appears in ICIJ Pandora Papers (linked to Alcogal/Panama) and Paradise Papers (Malta corporate registry). Wiener Privatbank connection: Alpha Bulgaria AD (controlled by Stoyan Staykov) acquired 9.55% stake (2024-2025), deliberately sub-10% to avoid EU fit-and-proper checks. Wolfgang Zehenter (Liechtenstein) on supervisory board believed to represent Boyko interests. Former FPO parliamentarian Barbara Kappel received 55K EUR from Staykov.",
+      "detail": "The Wiener Privatbank connection demonstrates Boyko's ongoing methodology of using intermediaries and sub-threshold stakes to maintain financial influence while avoiding regulatory scrutiny even post-sanctions. Austrian FMA approved the stake without deeper scrutiny. Economic Crime Prosecutor (WKStA) has stalled investigations into Staykov dealings. Boyko also connected to Staykov through broader Bulgarian business networks. ICIJ records: Oleg Viktorovich Boyko as officer in Pandora Papers via Alcogal (Aleman Cordero Galindo and Lee), and in Paradise Papers via Malta corporate registry.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:28:45",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Offshore Leaks Database nodes 240055148 and 56058520",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Trinity Bugle investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8984,
+      "finding_type": "relationship",
+      "summary": "Boyko-Kouzmine nexus assessment: Kouzmine was CEO of Boyko's Ritzio Entertainment (2002-2006), co-founded Fintech Ventures with Boyko, held senior management at Finstar Financial Group. Kouzmine separately identified as Tambovskaya-Malyshevskaya leader in Spanish Operation Troika proceedings, lived adjacent to Gennady Petrov in Marbella, managed corporate network in Spain/Panama/Liechtenstein/Liberia/BVI. Strong circumstantial case that Boyko knew of Kouzmine's organized crime role.",
+      "detail": "The relationship was not casual -- Kouzmine was CEO of Boyko's single largest revenue-generating company (Ritzio reached 1.6B USD in 2007 revenue). Boyko then entrusted Kouzmine with Finstar Financial Group management roles and co-founded Fintech Ventures with him. Polish ABW intelligence explicitly alleges Boyko has ties to criminal organizations and Russian intelligence. Both operated extensively in St. Petersburg (Tambovskaya home base) and Cyprus. The Spanish court in Operation Troika ruled the specific investments examined did not stem from crime (2018), but this addressed only the Spanish real estate investments and not the broader organizational relationships. Kouzmine had a prior SDNY federal criminal case (1:95-cr-00846, 1995-2000) predating the Boyko partnership.",
+      "source_datasets": [
+        "web_search",
+        "opensanctions"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:29:00",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:ABW",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Spanish Operation Troika judicial records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8994,
+      "finding_type": "financial",
+      "summary": "Boyko career timeline of sequential fortunes: (1) 1990s banking/retail -- National Credit Bank collapsed 1996 with OLBI-Diplomat Ponzi/money laundering exposure; (2) 1999-2004 Steel -- EvrazHolding with Alexander Abramov, sold 25% for 600-700M USD pre-LSE listing; (3) 2002-2009 Gambling -- Ritzio Entertainment, largest in Eastern Europe, 1.6B USD revenue peak, killed by Putin gambling ban; (4) 2006-2012 Retail -- Rive Gauche cosmetics chain, grew to #2 in Russia, sold majority for ~200M USD; (5) 2011-present Fintech -- 4Finance, Vivus, Spotcap, predatory microlending across 30 countries.",
+      "detail": "National Credit Bank (1990-1996): Founded by Boyko, collapsed after OLBI-Diplomat Ponzi scheme and money laundering exposed. EvrazHolding (1999-2004): Joint investment with Alexander Abramov combining three steel mills into major integrated steel producer. Boyko exited pre-IPO for ~650M USD. Ritzio (2002-2009): Founded by Boyko with Kouzmine as CEO, grew to 1000+ gambling outlets across 15 countries. Putin gambling ban in 2009 destroyed Russian operations. Still operates in 4 European countries. Rive Gauche (2006-2012): Acquired 75% of local St. Petersburg cosmetics chain, grew to 190 stores (#2 in Russia), sold 51% for ~200M USD, retains 24%. FashionTV (2013): Finstar became co-owner, broadcast to 500M+ households. 4Finance (2011-2022): Acquired 75% for ~105M EUR, predatory payday lending with rates reaching 1000%+ APR before regulation, divested fully by 2022.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:43:44",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg",
+          "source_quote": "Boyko sold his 25% stake in EvrazHolding for approximately 600 to 700 million dollars prior to its listing on the London Stock Exchange",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forbes",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia and financial press",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9124,
+      "finding_type": "intelligence",
+      "summary": "In 3 ICIJ datasets: Paradise Papers Malta (Allectika), Pandora Papers BVI (Kayland, Share Design)",
+      "detail": "Boyko appears in: Paradise Papers Malta registry (Allectika Limited C65964, shareholder); Pandora Papers Alcogal (Kayland Overseas Limited BVI 1739717, UBO; Share Design Limited BVI 1766039, UBO). Broader structure per investigative reporting: Tirona Limited (Cyprus) -> Feldmans Services Limited (Bahamas) -> Feldmans Management Overseas Limited (Cyprus).",
+      "source_datasets": [
+        "icij_offshore_leaks"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:49:58",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:240055140",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:240055148",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:56058520",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9125,
+      "finding_type": "legal",
+      "summary": "Sanctioned by Ukraine, Australia, Poland; Finstar Bank on OFAC SDN list",
+      "detail": "Boyko sanctioned: Ukraine NSDC, Australia DFAT (April 2022), Poland MSWIA (Dec 2024). Polish ABW intel: connections with organized crime and Russian intelligence services. Finstar Bank PAO (St Petersburg, SWIFT SAOARU2P) on OFAC SDN. 4Finance Holding and AS sanctioned by Poland.",
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:50:04",
+      "target_name": "Oleg Boyko",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q4090404",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -370,6 +798,28 @@
       ]
     },
     {
+      "id": 4666,
+      "person_a": "Oleg Boyko",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "corporate",
+      "description": "Co-founded Fintech Ventures and Ritzio Entertainment (gambling). FBI memo confirms.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-Ritzio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2424,
       "person_a": "Donald Trump",
       "person_b": "Oleg Boyko",
@@ -391,7 +841,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions Q4090404",
+          "evidence_ref": "OpenSanctions:Q4090404",
           "source_quote": null,
           "source_page": null
         },
@@ -402,6 +852,139 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 4704,
+      "person_a": "Oleg Boyko",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "financial",
+      "description": "Boyko and Kouzmine co-founded Ritzio Entertainment Group and Fintech Ventures. Kouzmine served as CEO of Ritzio (2002-2006) growing it to 1.25B USD revenue. Kouzmine held senior management at Finstar Financial Group. Multi-decade business partnership spanning gambling, fintech, and financial services across Russia, Cyprus, and internationally.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:43:56",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase Kouzmine profile",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates Cyprus registries",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4705,
+      "person_a": "Alexander Abramov",
+      "person_b": "Oleg Boyko",
+      "relationship_type": "financial",
+      "description": "Joint investors in EvrazHolding (1999-2004). Combined three steel mills into major integrated steel producer. Boyko sold 25% stake for 600-700M USD pre-LSE listing.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:44:01",
+      "profile_id": "dfj-network",
+      "other_person": "Alexander Abramov",
+      "other_person_slug": "alexander-abramov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4706,
+      "person_a": "Oleg Boyko",
+      "person_b": "Stoyan Staykov",
+      "relationship_type": "financial",
+      "description": "Staykov believed to be intermediary for Boyko in Wiener Privatbank acquisition. Alpha Bulgaria AD (Staykov-controlled) acquired 9.55% stake deliberately below 10% EU regulatory threshold. Wolfgang Zehenter (Liechtenstein) on supervisory board represents Boyko interests.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:44:06",
+      "profile_id": "dfj-network",
+      "other_person": "Stoyan Staykov",
+      "other_person_slug": "stoyan-staykov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Austrian media reporting",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Trinity Bugle investigation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4716,
+      "person_a": "Daria Kozlova Michalidou",
+      "person_b": "Oleg Boyko",
+      "relationship_type": "employment",
+      "description": "Kozlova Michalidou served as wealth manager for Boyko's interests across Cyprus, BVI, and Bahamas jurisdictions. Part of offshore financial management structure.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:34",
+      "profile_id": "dfj-network",
+      "other_person": "Daria Kozlova Michalidou",
+      "other_person_slug": "daria-kozlova-michalidou",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "BVI/Bahamas registries",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Cyprus corporate records",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4770,
+      "person_a": "Gennady Petrov",
+      "person_b": "Oleg Boyko",
+      "relationship_type": "intelligence",
+      "description": "Both sanctioned; ABW describes Boyko operating among Russian special services collaborators",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:51:47",
+      "profile_id": "dfj-network",
+      "other_person": "Gennady Petrov",
+      "other_person_slug": "gennady-petrov",
+      "evidence": []
     },
     {
       "id": 2560,
@@ -426,8 +1009,158 @@
       ]
     }
   ],
-  "entities": [],
-  "timeline": [],
+  "entities": [
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "courtlistener",
+      "entity_id": 2674,
+      "entity_name": "Finstar Financial Group LLC",
+      "entity_type": "llc",
+      "jurisdiction": "unknown",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "courtlistener",
+      "entity_id": 2675,
+      "entity_name": "Finstar-Holding LLC",
+      "entity_type": "llc",
+      "jurisdiction": "us_az",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "courtlistener",
+      "entity_id": 2676,
+      "entity_name": "Ritzio Purchase Limited",
+      "entity_type": "corporation",
+      "jurisdiction": "cy",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "Cyprus corporate registry / SEC filings",
+      "entity_id": 2698,
+      "entity_name": "Tirona Limited",
+      "entity_type": "corporation",
+      "jurisdiction": "cy",
+      "entity_status": "active"
+    },
+    {
+      "role": "beneficiary",
+      "date_start": null,
+      "date_end": null,
+      "source": "ICIJ Offshore Leaks",
+      "entity_id": 2699,
+      "entity_name": "Feldmans Services Limited",
+      "entity_type": "shell_company",
+      "jurisdiction": "bs",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC SC 13D filings",
+      "entity_id": 2700,
+      "entity_name": "Nakula Management Ltd",
+      "entity_type": "corporation",
+      "jurisdiction": "cy",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting / Latvian registry",
+      "entity_id": 2701,
+      "entity_name": "4Finance",
+      "entity_type": "corporation",
+      "jurisdiction": "lv",
+      "entity_status": "active"
+    },
+    {
+      "role": "owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "OFAC SDN List / Central Bank of Russia",
+      "entity_id": 2702,
+      "entity_name": "Finstar Bank PAO",
+      "entity_type": "bank",
+      "jurisdiction": "ru",
+      "entity_status": "sanctioned"
+    },
+    {
+      "role": "owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting",
+      "entity_id": 2703,
+      "entity_name": "FTV BVI Ltd",
+      "entity_type": "corporation",
+      "jurisdiction": "vg",
+      "entity_status": "active"
+    },
+    {
+      "role": "owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting / German registry",
+      "entity_id": 2704,
+      "entity_name": "Fashiontv.Com GMBH",
+      "entity_type": "corporation",
+      "jurisdiction": "de",
+      "entity_status": "active"
+    },
+    {
+      "role": "owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting / German registry",
+      "entity_id": 2705,
+      "entity_name": "Fashion TV Programmgesellschaft MbH",
+      "entity_type": "corporation",
+      "jurisdiction": "de",
+      "entity_status": "active"
+    },
+    {
+      "role": "owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting / Austrian registry",
+      "entity_id": 2724,
+      "entity_name": "Wiener Privatbank",
+      "entity_type": "bank",
+      "jurisdiction": "at",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-03-31",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Corporate structure mapped: Finstar-Holding LLC (AZ), Finstar Financial Group LLC (SDNY), Ritzio Purchase Limited (Nicosia Cyprus, Diagorou St 4 Kermia Bldg 6th Fl, agent Christoforos Panagis). BVI entities via FashionTV. Personally sued SDNY Fashion One Television (2016). Zero SEC presence.",
+      "confidence": "medium",
+      "id": 8923
+    },
+    {
+      "date": "2026-04-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Diagorou Street 4, Kermia Building, Nicosia Cyprus is a shell company factory with ~65 entities (peak registration 2004-2008). Managed by Interstatus Limited (corporate secretary) run by Elena Andreou and Marina Psyllou (each directing 20+ shells). Generic entity names: Steel Products, Ocean Fish Resources, Caspian Worldwide Energy, Railway Industries. Ritzio Purchase Limited registered here. This is professional nominee director/corporate concealment infrastructure.",
+      "confidence": "medium",
+      "id": 8995
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4217,
@@ -520,137 +1253,5 @@
       "enabler-gradient",
       "offshore-opacity"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Oleg Boyko",
-      "connections": [
-        {
-          "target": "Vadim Trincher",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ABC News report",
-          "description": "Boyko sold Trump Tower Unit 63A to Trincher in 2009 for $5M. Boyko had purchased from Trump in 1994. Senate Intel Committee reported Boyko has ties to Russian government, intelligence services, and organized crime."
-        },
-        {
-          "target": "Serguei Kouzmine",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "EFTA00129096",
-          "description": "Co-founded Ritzio Entertainment (gambling) and Fintech Ventures (microlending). Kouzmine ran some of Boyko's companies at Finstar. QWAVE Capital general partner of FinTech Ventures Fund."
-        },
-        {
-          "target": "Maksym Krippa",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "BlackBox OSINT investigation",
-          "description": "Krippa operates Boyko's Vulkan Casino brand in Ukraine under license. Ritzio International Group (Boyko) is the creator of the Vulkan brand. Krippa and partner Poliakov received rights from Boyko to manage casino websites."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "New Republic investigation",
-          "description": "Trump personally sold Trump Tower unit to Boyko. Boyko later sold Unit 63A to Vadim Trincher, which became command center for 100M+ Taiwanchik-Trincher gambling/laundering ring operating 3 floors below Trump penthouse."
-        },
-        {
-          "target": "QWAVE Capital",
-          "type": "financial",
-          "strength": 0.4,
-          "evidence_ref": "EFTA00129096",
-          "description": "Boyko's business partner Kouzmine co-founded QWAVE Capital. Boyko (sanctioned Russian oligarch, Finstar Financial Group) thus has indirect connection to Silicon Valley VC network connected to Epstein through Kouzmine-Beloussov chain."
-        }
-      ],
-      "secondHop": {
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Serguei Kouzmine": [
-          {
-            "target": "Serguei Beloussov",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founded QWAVE Capital in December 2012. Kouzmine Managing Partner, Beloussov Venture Partner. Kouzmine later President of Beloussov's Constructor University (2025)."
-          },
-          {
-            "target": "Masha Drokova",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Drokova served as publicist for QWAVE Capital (co-founded by Kouzmine) and Runa Capital. Both quantum computing investment firms."
-          }
-        ],
-        "Vadim Trincher": [
-          {
-            "target": "Anatoly Golubchik",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Co-defendants and co-conspirators in Taiwanchik-Trincher Organization. Both sentenced to 5 years on April 29, 2014. Trincher operated gambling ring from his Trump Tower apartment (unit 63A). Both also partners in Monarch Air Group and at least four aviation companies."
-          },
-          {
-            "target": "Alimzhan Tokhtakhounov",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Co-leaders of Taiwanchik-Trincher Organization; Trincher ran US operations from Trump Tower Unit 63A while Tokhtakhounov provided vor authority from Russia (2006-2013)"
-          },
-          {
-            "target": "Hillel Nahmad",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Nahmad co-led Nahmad-Trincher Org with Illya Trincher; both operated illegal gambling from within Trump Tower (63rd and 51st floors respectively)"
-          },
-          {
-            "target": "Illya Trincher",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; both convicted in Taiwanchik-Trincher case; Illya co-led poker operation from father's Trump Tower apartment"
-          },
-          {
-            "target": "Hillel Nahmad",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Co-defendants in SDNY 1:13-cr-00268. Nahmad and Illya Trincher ran the Nahmad-Trincher gambling operation from Trump Tower."
-          }
-        ],
-        "QWAVE Capital": [
-          {
-            "target": "Frank Creer",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "FBI memo states Creer and Jurvetson invested in QWAVE Capital through DFJ Capital via Beloussov's Runa Capital. Creer also knew Drokova through QWAVE connection."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

@@ -1,0 +1,245 @@
+{
+  "name": "ATW Partners LLC",
+  "slug": "atw-partners-llc",
+  "aliases": [],
+  "profile_ids": [
+    "allbirds"
+  ],
+  "generated_at": "2026-05-07T23:07:36.415375",
+  "last_updated": "2026-04-16T15:29:35",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "conflict_of_interest": 1
+    },
+    "connection_types": {
+      "corporate": 6
+    },
+    "last_updated": "2026-04-16T15:29:35"
+  },
+  "findings": [
+    {
+      "id": 10625,
+      "finding_type": "financial",
+      "summary": "ATW Partners placed $500M SOL-treasury deal with SOL Strategies 5 weeks before the KIDZ deal (different placement agent: Cohen & Company)",
+      "detail": "ATW Partners entered into a $500M convertible note facility with SOL Strategies Inc. (CSE: HODL) on April 23, 2025. Initial $20M closing May 1, 2025. Placement agent: Cohen & Company Capital Markets (4% finder's fee). Capital earmarked exclusively for SOL purchase and staking. Interest paid in SOL from staking yield. This is the first known ATW-SOL template deal, executed 5 weeks before KIDZ.",
+      "source_datasets": "web_search",
+      "confidence": "high",
+      "date_of_event": "2025-04-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "ATW Partners LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10584,
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC + Chardan Capital Markets confirmed partnership in LGHL $600M convertible (June 2025) \u2014 identical structure to BIRD deal",
+      "detail": "ATW Partners LLC (CIK 0001947975, New York) is confirmed as the investor in Lion Group Holding (LGHL) $600M senior secured convertible note facility arranged by Chardan Capital Markets as sole placement agent (June 2025). Deal structure is identical to the BIRD facility: multi-tranche at investor's option, OID, VWAP-based alternate conversion, first priority security interest, co-investment rights. Kerry Propper and Antonio Ruiz-Gimenez are ATW Partners co-founders.",
+      "source_datasets": "edgar,press_release",
+      "confidence": "high",
+      "date_of_event": "2025-06-01",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-16 04:49:43",
+      "target_name": "ATW Partners LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10585,
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC + Chardan Capital Markets confirmed partnership in BTOG $100M convertible (July 2025)",
+      "detail": "ATW Partners LLC is confirmed as the investor in Bit Origin Ltd (BTOG) $100M senior secured convertible note facility arranged by Chardan Capital Markets (July 2025). Chardan served as sole placement agent with 1% fee, identical arrangement to BIRD deal. ATW Partners filed no SC 13G for BTOG initially, consistent with 4.99% beneficial ownership cap suppressing filing obligations.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-07-01",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-16 04:49:43",
+      "target_name": "ATW Partners LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    },
+    {
+      "id": 10754,
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC confirmed as institutional investor in LGHL ($600M convertible, Chardan placement agent, June 2025) and BTOG ($500M facilities, Chardan placement agent, July 2025); Kerry Propper is Co-Founder of BOTH Chardan (placement agent) AND ATW Partners (investor) \u2014 same person on both sides of the deal; ATW holds Schedule 13G positions in LGHL, GCL, ONFO, MSS, LOT, DFLI, FTEL, AIIO and others",
+      "detail": null,
+      "source_datasets": [
+        "web_search,edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-07-09",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 15:29:35",
+      "target_name": "ATW Partners LLC",
+      "profile_id": "allbirds",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001947975-25-000006%3Asc13g-lghl",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10616,
+      "finding_type": "conflict_of_interest",
+      "summary": "Chardan Capital Markets is confirmed sole placement agent for Allbirds/BIRD $50M senior secured convertible note facility; Kerry Propper is simultaneously Chardan Executive Chairman and ATW Partners Managing Partner",
+      "detail": "The April 15, 2026 Allbirds press release states: 'Chardan is serving as placement agent on the Facility and Holland & Hart LLP is acting as legal counsel to Allbirds.' The institutional investor is unnamed. Kerry Propper is Co-Founder and Managing Partner of ATW Partners LLC and also Co-Founder and Executive Chairman of Chardan Capital Markets LLC. If ATW is the investor (assessed 75-80% probable), this represents an undisclosed conflict of interest where the placement agent and investor are controlled by the same individual.",
+      "source_datasets": "edgar,globenewswire,ir_allbirds",
+      "confidence": "high",
+      "date_of_event": "2026-04-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:07:55",
+      "target_name": "ATW Partners LLC",
+      "profile_id": "allbirds",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5498,
+      "person_a": "ATW Partners LLC",
+      "person_b": "ZOOZ Power Ltd.",
+      "relationship_type": "corporate",
+      "description": "ATW Partners is a confirmed portfolio investor in ZOOZ Power; Chardan Capital Markets served as sole placement agent in ZOOZ's $159M private placement and $1B ATM program (October 2025). Both relationships are controlled by Kerry Propper.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "profile_id": "allbirds",
+      "other_person": "ZOOZ Power Ltd.",
+      "other_person_slug": "zooz-power-ltd",
+      "evidence": []
+    },
+    {
+      "id": 5497,
+      "person_a": "Chardan Capital Markets LLC",
+      "person_b": "ATW Partners LLC",
+      "relationship_type": "corporate",
+      "description": "Kerry Propper is co-founder and Executive Chairman of Chardan Capital Markets and simultaneously co-founder and Managing Partner of ATW Partners LLC, creating a structural conflict of interest in transactions where Chardan places and ATW invests.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:42:49",
+      "profile_id": "allbirds",
+      "other_person": "Chardan Capital Markets LLC",
+      "other_person_slug": "chardan-capital-markets-llc",
+      "evidence": []
+    },
+    {
+      "id": 5509,
+      "person_a": "ATW Partners LLC",
+      "person_b": "Chardan Capital Markets LLC",
+      "relationship_type": "corporate",
+      "description": "ATW Partners LLC is the confirmed investor in Lion Group Holding (LGHL) $600M senior secured convertible note facility (June 2025). Chardan Capital Markets LLC served as sole placement agent at 1% fee \u2014 the same Chardan sole placement agent arrangement confirmed for the BIRD $50M convertible facility. Deal structure identical to BIRD: multi-tranche at investor option, OID, VWAP alternate conversion, first priority security interest.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:49:43",
+      "profile_id": "allbirds",
+      "other_person": "Chardan Capital Markets LLC",
+      "other_person_slug": "chardan-capital-markets-llc",
+      "evidence": []
+    },
+    {
+      "id": 5568,
+      "person_a": "Kerry Propper",
+      "person_b": "ATW Partners LLC",
+      "relationship_type": "corporate",
+      "description": "Kerry Propper is co-founder and Managing Partner of ATW Partners LLC \u2014 controlling the investor side of transactions where Chardan simultaneously acts as placement agent, creating an undisclosed structural conflict of interest.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:24:15",
+      "profile_id": "allbirds",
+      "other_person": "Kerry Propper",
+      "other_person_slug": "kerry-propper",
+      "evidence": []
+    },
+    {
+      "id": 5601,
+      "person_a": "ATW Digital Asset Opportunities VI LLC",
+      "person_b": "ATW Partners LLC",
+      "relationship_type": "corporate",
+      "description": "ATW Digital Asset Opportunities VI LLC is controlled by ATW Partners Opportunities Fund GP LLC (Kerry Propper as Managing Member of General Partner). Purpose-formed SPV for LGHL $600M convertible deal (June 2025).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 05:40:11",
+      "profile_id": "allbirds",
+      "other_person": "ATW Digital Asset Opportunities VI LLC",
+      "other_person_slug": "atw-digital-asset-opportunities-vi-llc",
+      "evidence": []
+    },
+    {
+      "id": 5512,
+      "person_a": "ATW Partners LLC",
+      "person_b": "Allbirds Inc.",
+      "relationship_type": "corporate",
+      "description": "ATW Partners LLC is the inferred (high confidence) undisclosed institutional investor behind the BIRD $50M convertible facility, based on the confirmed ATW Partners + Chardan Capital Markets recurring partnership in structurally identical deals (LGHL, BTOG) and ATW Partners' active AI/computing investment strategy (Robo.ai, December 2025).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-16 04:49:43",
+      "profile_id": "allbirds",
+      "other_person": "Allbirds Inc.",
+      "other_person_slug": "allbirds-inc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-04-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ATW Partners placed $500M SOL-treasury deal with SOL Strategies 5 weeks before the KIDZ deal (different placement agent: Cohen & Company)",
+      "confidence": "high",
+      "id": 10625
+    },
+    {
+      "date": "2025-06-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC + Chardan Capital Markets confirmed partnership in LGHL $600M convertible (June 2025) \u2014 identical structure to BIRD deal",
+      "confidence": "high",
+      "id": 10584
+    },
+    {
+      "date": "2025-07-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC + Chardan Capital Markets confirmed partnership in BTOG $100M convertible (July 2025)",
+      "confidence": "high",
+      "id": 10585
+    },
+    {
+      "date": "2025-07-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "ATW Partners LLC confirmed as institutional investor in LGHL ($600M convertible, Chardan placement agent, June 2025) and BTOG ($500M facilities, Chardan placement agent, July 2025); Kerry Propper is Co-Founder of BOTH Chardan (placement agent) AND ATW Partners (investor) \u2014 same person on both sides of the deal; ATW holds Schedule 13G positions in LGHL, GCL, ONFO, MSS, LOT, DFLI, FTEL, AIIO and others",
+      "confidence": "medium",
+      "id": 10754
+    },
+    {
+      "date": "2026-04-15",
+      "type": "finding",
+      "finding_type": "conflict_of_interest",
+      "summary": "Chardan Capital Markets is confirmed sole placement agent for Allbirds/BIRD $50M senior secured convertible note facility; Kerry Propper is simultaneously Chardan Executive Chairman and ATW Partners Managing Partner",
+      "confidence": "high",
+      "id": 10616
+    }
+  ]
+}

@@ -3,31 +3,233 @@
   "slug": "corey-lewandowski",
   "aliases": [],
   "profile_ids": [
-    "tech-right"
+    "tech-right",
+    "zampolli"
   ],
-  "generated_at": "2026-03-11T18:36:07.726206",
-  "last_updated": "2026-03-05T21:12:23",
+  "generated_at": "2026-05-07T23:07:36.002401",
+  "last_updated": "2026-04-14T02:54:04",
   "stats": {
-    "total_findings": 57,
-    "total_connections": 28,
+    "total_findings": 69,
+    "total_connections": 36,
     "total_entities": 8,
     "finding_types": {
-      "financial": 14,
-      "document": 10,
-      "intelligence": 17,
-      "legal": 12,
+      "legal": 13,
+      "document": 11,
       "identity": 3,
-      "relationship": 1
+      "financial": 19,
+      "intelligence": 17,
+      "relationship": 4,
+      "background": 1,
+      "negative_result": 1
     },
     "connection_types": {
-      "political": 14,
-      "corporate": 7,
-      "advisory": 4,
-      "financial": 3
+      "political": 15,
+      "corporate": 8,
+      "advisory": 6,
+      "financial": 5,
+      "owns": 1,
+      "legal": 1
     },
-    "last_updated": "2026-03-05T21:12:23"
+    "last_updated": "2026-04-14T02:54:04"
   },
   "findings": [
+    {
+      "id": 5142,
+      "finding_type": "legal",
+      "summary": "Lewandowski v. Property Clerk (D.D.C., Case No. 1:01-cv-01517, filed July 12, 2001, terminated Feb 27, 2002). Corey R. Lewandowski, listed at 8 Orchard Lane, Old Saybrook, CT 06475, filed a civil rights action (42 USC 1983) against D.C. Property Clerk. Judge Ricardo M. Urbina presiding. Nature of suit: 890 (Other Statutory Actions). This is the earliest known federal court filing by Lewandowski, years before his political career.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2001-07-12",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:52:43",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:4211171",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5163,
+      "finding_type": "legal",
+      "summary": "FARA/foreign lobbying concerns: (1) Avenue Strategies had affiliate 'Washington East West Political Strategies' designed as international recruitment vehicle for Middle Eastern and Eastern European clients. Never registered under FARA. (2) Public Citizen filed DOJ complaint May 3, 2017; Lewandowski left firm next day. (3) Turnberry Solutions (operating from Lewandowski's DC townhouse) represented Alliance of Independent Social Democrats (SNSD), a Serbian nationalist party in Bosnia. (4) George Birnbaum, business partner per LittleSis, joined Avenue Strategies July 2017 and had prior Israel political consulting connections (Avigdor Lieberman/Yisrael Beiteinu). (5) Lewandowski personally never registered as a lobbyist or foreign agent despite facilitating access.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": "2017-05-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:59:12",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://abcnews.go.com/Politics/trump-campaign-aides-set-foreign-lobbying-shop-corey/story?id=57082768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.citizen.org/news/is-corey-lewandowski-violating-lobbying-and-foreign-agents-registration-laws-public-citizen-calls-for-investigation/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5128,
+      "finding_type": "document",
+      "summary": "Lewandowski appears in House Permanent Select Committee on Intelligence minority views report (GOVPUB-Y4_IN8_18-PURL-gpo91497, 2018) on Russian Active Measures. He was referenced in the intelligence committee's investigation of Russian interference in the 2016 election. Also in CHRG-115hhrg31522 'Oversight of the FBI and DOJ Actions in Advance of the 2016 Election' (June 19, 2018) and CHRG-116hhrg44884 'Oversight of FISA' (Sept 18, 2019).",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "high",
+      "date_of_event": "2018-06-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:50:33",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CHRG-115hhrg31522",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CHRG-116hhrg44884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GOVPUB-Y4_IN8_18-PURL-gpo91497",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5119,
+      "finding_type": "document",
+      "summary": "Avenue Strategies mentioned in congressional hearing CHRG-116hhrg44492 (T-Mobile/Sprint merger hearing, 2019-03-12). Lewandowski's lobbying firm Avenue Strategies was retained by T-Mobile to lobby the Trump administration on the Sprint merger. Lewandowski stayed at Trump Hotel DC while T-Mobile executives also stayed there, creating an appearance of pay-to-play.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-03-12",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:48:35",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CHRG-116hhrg44492",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5149,
+      "finding_type": "identity",
+      "summary": "DC corporate registry shows KRISTEN LEWANDOWSKI EDITORIAL LLC (File #L00006277065) at 3038 Macomb St NW, Washington DC 20008, active since 2019-04-15. Agent: Kristen Lewandowski. This is in the upscale Cleveland Park/Cathedral neighborhood of DC. Lewandowski appears to have maintained both a Salem NH address (primary, per FEC) and a Washington DC presence.",
+      "detail": null,
+      "source_datasets": [
+        "dc_dlcp"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:53:20",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DC-DLCP:L00006277065",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5144,
+      "finding_type": "legal",
+      "summary": "Leopold v. DOJ (D.D.C., 1:19-cv-01278, filed May 2, 2019, Judge Reggie Walton). FOIA lawsuit seeking DOJ records, with Lewandowski appearing in document lists filed in the case. This case relates to FOIA requests for Mueller investigation-related materials. Still active (no termination date).",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2019-05-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:52:56",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:15042636",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5146,
+      "finding_type": "legal",
+      "summary": "HJC v. McGahn (D.D.C., 1:19-cv-02379, filed Aug 7, 2019, terminated Dec 6, 2021). House Judiciary Committee sued to enforce subpoena for Don McGahn's testimony. Lewandowski was separately subpoenaed by HJC and testified September 17, 2019. During testimony he was openly defiant, claiming executive privilege protections despite never serving in the White House. The HJC subsequently voted to hold him in contempt. The McGahn case established precedent about compelled Congressional testimony of former White House officials.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2019-09-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:53:09",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:16027602",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5116,
       "finding_type": "financial",
@@ -37,7 +239,7 @@
         "SBA PPP Loan Data"
       ],
       "confidence": "confirmed",
-      "date_of_event": null,
+      "date_of_event": "2020-04-28",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
       "created_at": "2026-03-05 16:47:55",
@@ -47,6 +249,88 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "PPP:Avenue_Strategies_LLC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5120,
+      "finding_type": "document",
+      "summary": "Avenue Strategies appears in House Committee on Education and Labor 116th Congress activity report (CRPT-116hrpt711, 2020-12-31). The exact context requires full document review, but this indicates the firm drew congressional attention beyond just the T-Mobile merger.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2020-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:48:39",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRPT-116hrpt711",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5125,
+      "finding_type": "document",
+      "summary": "Lewandowski referenced in Presidential Daily Compilation: (1) Trump remarks Sept 22, 2019 prior to Houston departure (DCPD-201900637), mentioning both Lewandowski and Giuliani. (2) Trump news conference Sept 25, 2019 in NYC (DCPD-201900663). (3) Trump remarks Aug 15, 2019 in Morristown NJ (DCPD-201900553). (4) Trump remarks June 11, 2025 at Les Miserables opening (DCPD-202500682). The 2025 mention confirms Lewandowski remained in Trump's public orbit into the second administration.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:50:09",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DCPD-201900637",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DCPD-202500682",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5122,
+      "finding_type": "document",
+      "summary": "Lewandowski referenced in Congressional Record 2026-03-03 (CREC-2026-03-03-pt1-PgS747-2) in connection with 'Housing for the 21st Century Act' debate and DHS. This is a very recent mention (2 days ago) suggesting ongoing congressional scrutiny of Lewandowski's DHS-adjacent role.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 16:48:56",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CREC-2026-03-03-pt1-PgS747-2",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -118,56 +402,6 @@
       ]
     },
     {
-      "id": 5119,
-      "finding_type": "document",
-      "summary": "Avenue Strategies mentioned in congressional hearing CHRG-116hhrg44492 (T-Mobile/Sprint merger hearing, 2019-03-12). Lewandowski's lobbying firm Avenue Strategies was retained by T-Mobile to lobby the Trump administration on the Sprint merger. Lewandowski stayed at Trump Hotel DC while T-Mobile executives also stayed there, creating an appearance of pay-to-play.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:48:35",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CHRG-116hhrg44492",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5120,
-      "finding_type": "document",
-      "summary": "Avenue Strategies appears in House Committee on Education and Labor 116th Congress activity report (CRPT-116hrpt711, 2020-12-31). The exact context requires full document review, but this indicates the firm drew congressional attention beyond just the T-Mobile merger.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:48:39",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CRPT-116hrpt711",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5121,
       "finding_type": "document",
       "summary": "Jan 6 Committee records show Lewandowski in White House Switchboard records on Jan 2, 2021 (CTRL0000084255) and Presidential Call Log on Jan 3, 2021 (CTRL0000083040) -- the critical pre-insurrection period. He appears alongside Giuliani in these records, suggesting active coordination in the days before Jan 6.",
@@ -193,31 +427,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "GPO-J6-DOC-CTRL0000084255",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5122,
-      "finding_type": "document",
-      "summary": "Lewandowski referenced in Congressional Record 2026-03-03 (CREC-2026-03-03-pt1-PgS747-2) in connection with 'Housing for the 21st Century Act' debate and DHS. This is a very recent mention (2 days ago) suggesting ongoing congressional scrutiny of Lewandowski's DHS-adjacent role.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:48:56",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CREC-2026-03-03-pt1-PgS747-2",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -289,38 +498,6 @@
       ]
     },
     {
-      "id": 5125,
-      "finding_type": "document",
-      "summary": "Lewandowski referenced in Presidential Daily Compilation: (1) Trump remarks Sept 22, 2019 prior to Houston departure (DCPD-201900637), mentioning both Lewandowski and Giuliani. (2) Trump news conference Sept 25, 2019 in NYC (DCPD-201900663). (3) Trump remarks Aug 15, 2019 in Morristown NJ (DCPD-201900553). (4) Trump remarks June 11, 2025 at Les Miserables opening (DCPD-202500682). The 2025 mention confirms Lewandowski remained in Trump's public orbit into the second administration.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:50:09",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DCPD-201900637",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DCPD-202500682",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5126,
       "finding_type": "document",
       "summary": "Lewandowski referenced in CHRG-119hhrg61918 'Restoring Law and Order in High-Crime U.S. Cities' (Nov 19, 2025) -- a 119th Congress hearing. This is a second Trump administration-era hearing referencing Lewandowski in a law enforcement/security context, consistent with his HSAC advisory role.",
@@ -364,45 +541,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "USCOURTS-cand-3_25-cv-01766",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5128,
-      "finding_type": "document",
-      "summary": "Lewandowski appears in House Permanent Select Committee on Intelligence minority views report (GOVPUB-Y4_IN8_18-PURL-gpo91497, 2018) on Russian Active Measures. He was referenced in the intelligence committee's investigation of Russian interference in the 2016 election. Also in CHRG-115hhrg31522 'Oversight of the FBI and DOJ Actions in Advance of the 2016 Election' (June 19, 2018) and CHRG-116hhrg44884 'Oversight of FISA' (Sept 18, 2019).",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:50:33",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CHRG-115hhrg31522",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CHRG-116hhrg44884",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GOVPUB-Y4_IN8_18-PURL-gpo91497",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -742,31 +880,6 @@
       ]
     },
     {
-      "id": 5142,
-      "finding_type": "legal",
-      "summary": "Lewandowski v. Property Clerk (D.D.C., Case No. 1:01-cv-01517, filed July 12, 2001, terminated Feb 27, 2002). Corey R. Lewandowski, listed at 8 Orchard Lane, Old Saybrook, CT 06475, filed a civil rights action (42 USC 1983) against D.C. Property Clerk. Judge Ricardo M. Urbina presiding. Nature of suit: 890 (Other Statutory Actions). This is the earliest known federal court filing by Lewandowski, years before his political career.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:52:43",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CL:4211171",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5143,
       "finding_type": "legal",
       "summary": "Two separate American Oversight v. DHS FOIA lawsuits (D.D.C.) filed in 2025 seeking records about DHS Homeland Security Advisory Council (HSAC) appointments. Case 1:25-cv-03113 (filed Sept 10, 2025, Judge McFadden) and Case 1:25-cv-03699 (filed Oct 20, 2025, Judge Kelly). Also Campaign Legal Center v. DHS (1:25-cv-03828, filed Oct 31, 2025). These FOIA lawsuits target records about the HSAC where Lewandowski was appointed alongside Giuliani and Andreessen. Active litigation challenging transparency of these appointments.",
@@ -806,31 +919,6 @@
       ]
     },
     {
-      "id": 5144,
-      "finding_type": "legal",
-      "summary": "Leopold v. DOJ (D.D.C., 1:19-cv-01278, filed May 2, 2019, Judge Reggie Walton). FOIA lawsuit seeking DOJ records, with Lewandowski appearing in document lists filed in the case. This case relates to FOIA requests for Mueller investigation-related materials. Still active (no termination date).",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:52:56",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CL:15042636",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5145,
       "finding_type": "legal",
       "summary": "DNC v. Russian Federation (S.D.N.Y., 1:18-cv-03501, filed Apr 20, 2018, terminated Jul 31, 2019). RICO lawsuit by Democratic National Committee against Russia, Trump campaign, and associates. Cause: 18:1964 Civil Remedies under RICO Act. Lewandowski appeared in case documents as Trump's campaign manager during the period of alleged Russian interference. Case was dismissed.",
@@ -849,31 +937,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "CL:6368549",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5146,
-      "finding_type": "legal",
-      "summary": "HJC v. McGahn (D.D.C., 1:19-cv-02379, filed Aug 7, 2019, terminated Dec 6, 2021). House Judiciary Committee sued to enforce subpoena for Don McGahn's testimony. Lewandowski was separately subpoenaed by HJC and testified September 17, 2019. During testimony he was openly defiant, claiming executive privilege protections despite never serving in the White House. The HJC subsequently voted to hold him in contempt. The McGahn case established precedent about compelled Congressional testimony of former White House officials.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:53:09",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CL:16027602",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -938,31 +1001,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "CL:60041300",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5149,
-      "finding_type": "identity",
-      "summary": "DC corporate registry shows KRISTEN LEWANDOWSKI EDITORIAL LLC (File #L00006277065) at 3038 Macomb St NW, Washington DC 20008, active since 2019-04-15. Agent: Kristen Lewandowski. This is in the upscale Cleveland Park/Cathedral neighborhood of DC. Lewandowski appears to have maintained both a Salem NH address (primary, per FEC) and a Washington DC presence.",
-      "detail": null,
-      "source_datasets": [
-        "dc_dlcp"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:53:20",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DC-DLCP:L00006277065",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1374,39 +1412,6 @@
       ]
     },
     {
-      "id": 5163,
-      "finding_type": "legal",
-      "summary": "FARA/foreign lobbying concerns: (1) Avenue Strategies had affiliate 'Washington East West Political Strategies' designed as international recruitment vehicle for Middle Eastern and Eastern European clients. Never registered under FARA. (2) Public Citizen filed DOJ complaint May 3, 2017; Lewandowski left firm next day. (3) Turnberry Solutions (operating from Lewandowski's DC townhouse) represented Alliance of Independent Social Democrats (SNSD), a Serbian nationalist party in Bosnia. (4) George Birnbaum, business partner per LittleSis, joined Avenue Strategies July 2017 and had prior Israel political consulting connections (Avigdor Lieberman/Yisrael Beiteinu). (5) Lewandowski personally never registered as a lobbyist or foreign agent despite facilitating access.",
-      "detail": null,
-      "source_datasets": [
-        "web_search",
-        "littlesis"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 16:59:12",
-      "target_name": "Corey Lewandowski",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://abcnews.go.com/Politics/trump-campaign-aides-set-foreign-lobbying-shop-corey/story?id=57082768",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.citizen.org/news/is-corey-lewandowski-violating-lobbying-and-foreign-agents-registration-laws-public-citizen-calls-for-investigation/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5164,
       "finding_type": "legal",
       "summary": "Criminal/conduct history: (1) March 2016: Charged with simple battery for grabbing Breitbart reporter Michelle Fields at Trump event in Jupiter, FL; charges dropped by Palm Beach County SA. (2) Sept 2021: Accused of unwanted sexual advances/touching at Las Vegas charity event by Trashelle Odom. Charged with misdemeanor battery in Clark County, NV (Sept 2022). Plea deal: impulse-training course, 50 hours community service, $1K fine. (3) 2017: Woman reported Lewandowski slapped her behind at Trump International Hotel DC holiday party; declined to press charges. These incidents did not prevent his appointment to DHS or HSAC.",
@@ -1675,6 +1680,324 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "analysis-run-10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6916,
+      "finding_type": "relationship",
+      "summary": "Corey Lewandowski is the second-highest degree node (27) and primary bridge between political operatives and defense-tech ecosystem",
+      "detail": "Structural observation: Lewandowski connects 27 distinct entities spanning Trump political orbit (Giuliani, Manafort, Barrack), current admin (Noem, Hegseth, Patel), and defense tech (Karp/Palantir, Anduril). Betweenness rank #6 (0.1835) with brokerage score 0.989 (near-perfect broker). His neighbors have almost no edges to each other (density 0.011), meaning he personally bridges otherwise disconnected clusters. 57 findings already documented but concentrated in thread 7 (DHS Procurement).",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:22:47",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7260,
+      "finding_type": "legal",
+      "summary": "Lewandowski accused of running pay-to-play scheme at DHS, demanding success fees from contractors including GEO Group",
+      "detail": "Multiple DHS contractors told White House officials they were asked to pay Corey Lewandowski success fees. As unpaid special government employee at DHS, Lewandowski served as de facto chief of staff to Secretary Noem and influenced contract awards. During transition, told GEO Group founder George Zoley he wanted payment for protecting/growing GEO contracts. Wanted compensation based on new/renewed contracts rather than retainer. GEO Group received 121M DHS contract in Dec 2025. Complaints reached Trump in October meeting. Congressional Democrats launched oversight inquiry (Rep. Connolly, Oversight Committee). Lewandowski denied allegations. Government ethics experts called arrangement 'blazing red flag of procurement integrity concern.' Lewandowski sits on HSAC alongside Andreessen, creating intersection of alleged pay-to-play and VC portfolio interest in DHS spending.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:09",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios: Oversight Committee inquiry expansion Sept 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News: DHS contractors told White House about Lewandowski payments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News: Democrats launch inquiry into Lewandowski",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7340,
+      "finding_type": "financial",
+      "summary": "AMMC LLC awarded K DHS contract via 31-hour bidding window requiring Trump loyalty",
+      "detail": "DHS awarded a 250K public affairs consulting contract to American Made Media Company (AMMC) LLC on Sept 30, 2025, just 4 days after posting. The bid window was only 31 hours. The contract required demonstrating an established track record of promoting Trump administration policies in the media. AMMC founding partners Justin Clark, Sean Dollman, Nick Trainer all worked alongside Lewandowski on Trump campaigns. Lewandowski reportedly green-lights six-figure contracts at DHS.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:29",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Guardian 2025-10; The Daily Beast 2026-02-26; Axios 2025-03-13",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7342,
+      "finding_type": "financial",
+      "summary": "Lewandowski demanded success fees from GEO Group for DHS contract protection",
+      "detail": "During the transition period Nov 2024-Jan 2025, Lewandowski told GEO Group founder George Zoley he wanted payment for protecting and growing GEO Group DHS contracts. In a second meeting late Feb/early March 2025, Lewandowski rejected a retainer, demanding compensation based on new/renewed DHS contracts (success fees). Zoley refused. Within weeks Lewandowski reportedly told DHS officials not to award more contracts to GEO Group. GEO Group later received a 121M contract in Dec 2025.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:35",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2026-03-19",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7361,
+      "finding_type": "document",
+      "summary": "Lewandowski financial disclosure submitted to DHS but not publicly released despite exceeding SGE 60-day threshold",
+      "detail": "DHS Office of General Counsel confirmed Lewandowski submitted a financial disclosure form as a Special Government Employee (SGE). However DHS claims it is not required to be publicly released. Rep. Robert Garcia challenged this, noting Lewandowski worked at least 69 days since late January 2025, exceeding the 60-day threshold for public OGE 278e filing. Lewandowskis FEC records show his employer as Lewandowski Strategic Advisors of Salem NH, occupation listed as Owner.",
+      "source_datasets": [
+        "web_search",
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:31",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News; The Hill 2025; FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7364,
+      "finding_type": "relationship",
+      "summary": "Lewandowski and Andreessen both appointed to HSAC June 2025, serving alongside Giuliani and other Trump allies",
+      "detail": "On June 24, 2025, Trump announced 25 appointments to the Homeland Security Advisory Council. Both Lewandowski and Marc Andreessen were named. Lewandowski served as chief adviser to DHS Secretary while also being an HSAC member. Other notable members: Rudy Giuliani, Henry McMaster (Chair), Joseph Gruters (Vice Chair), Bo Dietl, Georgette Mosbacher, Jim Pallotta, Omar Qudrat, Nicholas Luna. First meeting held July 2, 2025 at DHS headquarters. Lewandowski had a LittleSis-documented position as special advisor/SGE at DHS since 2025.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:42",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov 2025-06-24 announcement; CNN 2025-06-24; DHS HSAC meeting minutes 2025-07-02; LittleSis entity 217469",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7366,
+      "finding_type": "relationship",
+      "summary": "LittleSis maps 33 relationships including positions at DHS, Avenue Strategies, Lewandowski Strategic Advisors, Trump campaigns",
+      "detail": "LittleSis entity 217469 documents 33 relationships for Lewandowski: shadow chief of staff to Kristi Noem (DHS), special advisor/SGE at DHS (2025-), founder/president/CEO and owner of Lewandowski Strategic Advisors, principal at Avenue Strategies (2016-12 to 2017-05), campaign manager for Trump 2016 campaign (2015 to 2016-06), senior advisor to Trump 2020 (2019-02 to 2021-04), position at Never Surrender Inc, position at Americans for Prosperity, position at MAGA Action. Professional relationships with George Zoley (GEO Group), David Bossie, Jeff Landry. Paramour relationship with Kristi Noem noted (2019).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:53",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 217469 relationship data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7368,
+      "finding_type": "background",
+      "summary": "Lewandowski registered as lobbyist at Schwartz Communications pre-politics, only LDA lobbyist record",
+      "detail": "LDA records show Lewandowski as a registered lobbyist at Schwartz Communications of Waltham MA (LDA registrant 67991). He was listed as contact for the firm (phone 781-684-0770). This is his only personal LDA lobbyist filing. Avenue Strategies was registered as a separate entity (registrant 401104327, contact James Lang) - Lewandowski was not listed as a lobbyist on Avenue Strategies filings despite co-founding it, raising questions about whether he was performing unregistered lobbying.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:13",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate LDA lobbyist search for Lewandowski; LDA registrant search for Avenue Strategies",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7370,
+      "finding_type": "financial",
+      "summary": "FEC records show Lewandowski as owner of Lewandowski Strategic Advisors donating to GOP candidates",
+      "detail": "FEC donor records show 16 contributions from Corey Lewandowski of Salem NH, employer listed as Lewandowski Strategic Advisors, occupation Owner. Recipients include Mowers for Congress (2500 in 2021), Andy Barr (KY), and other Republican candidates. One contribution note references Green Monster Realty LLC as the source. Lewandowski Strategic Advisors LLC was incorporated in Delaware on May 12 2017 and does not register as a lobbying firm, meaning its clients are undisclosed.",
+      "source_datasets": [
+        "fec",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:28",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor search for Lewandowski Corey; Bloomberg company profile; Wikipedia",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7372,
+      "finding_type": "negative_result",
+      "summary": "Turn/River Capital is a 2.5B SF tech growth equity fund - no direct Lewandowski connection found in public records",
+      "detail": "Turn/River Capital is a San Francisco-based growth equity fund founded by Dominic Ang in 2012, managing 2.5B in Fund VI. SEC EDGAR shows 76 Form D filings for various Turn/River Capital funds (CIKs including 0001646683-85). The firm focuses on B2B software buyouts and recapitalizations. Despite the lead suggesting a Lewandowski connection, no public records (EDGAR, LDA, FEC, web search) link Lewandowski to Turn/River Capital. The name Turn River Capitol in the lead may be a misspelling or conflation.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:38",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR search for Turn River Capital; web search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7395,
+      "finding_type": "financial",
+      "summary": "Lewandowski last signature on DHS routing sheet before Noem for all contracts over 100K",
+      "detail": "Noem imposed a policy requiring her personal review and approval of all DHS contracts above 100K. Before contracts reach Noem, they must be approved by a series of political appointees who sign a checklist (routing sheet). Lewandowski is typically the last name on the checklist before Noems. This gives Lewandowski effective veto power over all significant DHS spending. Noem was found to have misled Congress about Lewandowskis role in DHS contracts. Congressional Democrats launched a formal inquiry and wrote to DHS OIG on March 18 2026.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:39",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica reporting; NBC News 2026-03-19; House Oversight Democrats letter to DHS OIG 2026-03-18",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7397,
+      "finding_type": "financial",
+      "summary": "Salus Worldwide Solutions won fast-tracked nearly 1B DHS deportation contract in May 2025",
+      "detail": "Salus Worldwide Solutions Corp won a fast-tracked DHS contract in May 2025 to help carry out deportations, ultimately worth nearly 1 billion dollars. Salus appears as 20th in top DHS recipients with 498M in USASpending data. This contract was awarded through the same routing process where Lewandowski signs off. The speed of the award and the scale of the contract merit scrutiny.",
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:43",
+      "target_name": "Corey Lewandowski",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2026-03-19; USASpending top-recipients query showing Salus at 498M",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2032,6 +2355,166 @@
       ]
     },
     {
+      "id": 3648,
+      "person_a": "Corey Lewandowski",
+      "person_b": "HSAC",
+      "relationship_type": "advisory",
+      "description": "Appointed to HSAC June 2025; also serves as SGE at DHS, de facto chief of staff to Noem",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:02",
+      "profile_id": "tech-right",
+      "other_person": "HSAC",
+      "other_person_slug": "hsac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios: Lewandowski DHS role",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov HSAC announcement",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3751,
+      "person_a": "Avenue Strategies",
+      "person_b": "Corey Lewandowski",
+      "relationship_type": "corporate",
+      "description": "Co-founder and principal of Avenue Strategies (Dec 2016 - May 2017)",
+      "strength": "strong",
+      "date_range": "2016-12/2017-05",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:05",
+      "profile_id": "tech-right",
+      "other_person": "Avenue Strategies",
+      "other_person_slug": "avenue-strategies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 217469; LDA filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3752,
+      "person_a": "Corey Lewandowski",
+      "person_b": "Lewandowski Strategic Advisors",
+      "relationship_type": "owns",
+      "description": "Founder and owner of consulting firm incorporated DE May 2017",
+      "strength": "strong",
+      "date_range": "2017-05/",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:13",
+      "profile_id": "tech-right",
+      "other_person": "Lewandowski Strategic Advisors",
+      "other_person_slug": "lewandowski-strategic-advisors",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC donor records; Bloomberg",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3753,
+      "person_a": "Corey Lewandowski",
+      "person_b": "Homeland Security Advisory Council",
+      "relationship_type": "advisory",
+      "description": "Appointed member and chief advisor to DHS Secretary, June 2025",
+      "strength": "strong",
+      "date_range": "2025-06/",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:18",
+      "profile_id": "tech-right",
+      "other_person": "Homeland Security Advisory Council",
+      "other_person_slug": "homeland-security-advisory-council",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov 2025-06-24",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3754,
+      "person_a": "AMMC LLC",
+      "person_b": "Corey Lewandowski",
+      "relationship_type": "political",
+      "description": "AMMC founders Clark, Dollman, Trainer all worked with Lewandowski on Trump campaigns; Lewandowski green-lights DHS contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:26",
+      "profile_id": "tech-right",
+      "other_person": "AMMC LLC",
+      "other_person_slug": "ammc-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Daily Beast 2026-02-26; Axios 2025-03-13",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3755,
+      "person_a": "Corey Lewandowski",
+      "person_b": "GEO Group",
+      "relationship_type": "financial",
+      "description": "Demanded success fees for DHS contract protection; LittleSis documents professional relationship with George Zoley",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:34",
+      "profile_id": "tech-right",
+      "other_person": "GEO Group",
+      "other_person_slug": "geo-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2026-03-19; LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3765,
+      "person_a": "Corey Lewandowski",
+      "person_b": "Salus Worldwide Solutions Corp",
+      "relationship_type": "financial",
+      "description": "Lewandowski signed off on routing sheet for fast-tracked nearly 1B deportation contract May 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:54",
+      "profile_id": "tech-right",
+      "other_person": "Salus Worldwide Solutions Corp",
+      "other_person_slug": "salus-worldwide-solutions-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2026-03-19; ProPublica",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2902,
       "person_a": "Corey Lewandowski",
       "person_b": "Jason Miller",
@@ -2141,6 +2624,28 @@
       "other_person": "Paul Atkins",
       "other_person_slug": "paul-atkins",
       "evidence": []
+    },
+    {
+      "id": 5376,
+      "person_a": "Corey Lewandowski",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 02:54:04",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYT:2026-03-20 Ungaro ICE investigation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     },
     {
       "id": 2903,
@@ -2337,7 +2842,120 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2001-07-12",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Lewandowski v. Property Clerk (D.D.C., Case No. 1:01-cv-01517, filed July 12, 2001, terminated Feb 27, 2002). Corey R. Lewandowski, listed at 8 Orchard Lane, Old Saybrook, CT 06475, filed a civil rights action (42 USC 1983) against D.C. Property Clerk. Judge Ricardo M. Urbina presiding. Nature of suit: 890 (Other Statutory Actions). This is the earliest known federal court filing by Lewandowski, years before his political career.",
+      "confidence": "confirmed",
+      "id": 5142
+    },
+    {
+      "date": "2016-12/2017-05",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Co-founder and principal of Avenue Strategies (Dec 2016 - May 2017)",
+      "other_person": "Avenue Strategies",
+      "id": 3751
+    },
+    {
+      "date": "2017-05-03",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "FARA/foreign lobbying concerns: (1) Avenue Strategies had affiliate 'Washington East West Political Strategies' designed as international recruitment vehicle for Middle Eastern and Eastern European clients. Never registered under FARA. (2) Public Citizen filed DOJ complaint May 3, 2017; Lewandowski left firm next day. (3) Turnberry Solutions (operating from Lewandowski's DC townhouse) represented Alliance of Independent Social Democrats (SNSD), a Serbian nationalist party in Bosnia. (4) George Birnbaum, business partner per LittleSis, joined Avenue Strategies July 2017 and had prior Israel political consulting connections (Avigdor Lieberman/Yisrael Beiteinu). (5) Lewandowski personally never registered as a lobbyist or foreign agent despite facilitating access.",
+      "confidence": "high",
+      "id": 5163
+    },
+    {
+      "date": "2017-05/",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Founder and owner of consulting firm incorporated DE May 2017",
+      "other_person": "Lewandowski Strategic Advisors",
+      "id": 3752
+    },
+    {
+      "date": "2018-06-19",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Lewandowski appears in House Permanent Select Committee on Intelligence minority views report (GOVPUB-Y4_IN8_18-PURL-gpo91497, 2018) on Russian Active Measures. He was referenced in the intelligence committee's investigation of Russian interference in the 2016 election. Also in CHRG-115hhrg31522 'Oversight of the FBI and DOJ Actions in Advance of the 2016 Election' (June 19, 2018) and CHRG-116hhrg44884 'Oversight of FISA' (Sept 18, 2019).",
+      "confidence": "high",
+      "id": 5128
+    },
+    {
+      "date": "2019-03-12",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Avenue Strategies mentioned in congressional hearing CHRG-116hhrg44492 (T-Mobile/Sprint merger hearing, 2019-03-12). Lewandowski's lobbying firm Avenue Strategies was retained by T-Mobile to lobby the Trump administration on the Sprint merger. Lewandowski stayed at Trump Hotel DC while T-Mobile executives also stayed there, creating an appearance of pay-to-play.",
+      "confidence": "medium",
+      "id": 5119
+    },
+    {
+      "date": "2019-04-15",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "DC corporate registry shows KRISTEN LEWANDOWSKI EDITORIAL LLC (File #L00006277065) at 3038 Macomb St NW, Washington DC 20008, active since 2019-04-15. Agent: Kristen Lewandowski. This is in the upscale Cleveland Park/Cathedral neighborhood of DC. Lewandowski appears to have maintained both a Salem NH address (primary, per FEC) and a Washington DC presence.",
+      "confidence": "confirmed",
+      "id": 5149
+    },
+    {
+      "date": "2019-05-02",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Leopold v. DOJ (D.D.C., 1:19-cv-01278, filed May 2, 2019, Judge Reggie Walton). FOIA lawsuit seeking DOJ records, with Lewandowski appearing in document lists filed in the case. This case relates to FOIA requests for Mueller investigation-related materials. Still active (no termination date).",
+      "confidence": "high",
+      "id": 5144
+    },
+    {
+      "date": "2019-09-17",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "HJC v. McGahn (D.D.C., 1:19-cv-02379, filed Aug 7, 2019, terminated Dec 6, 2021). House Judiciary Committee sued to enforce subpoena for Don McGahn's testimony. Lewandowski was separately subpoenaed by HJC and testified September 17, 2019. During testimony he was openly defiant, claiming executive privilege protections despite never serving in the White House. The HJC subsequently voted to hold him in contempt. The McGahn case established precedent about compelled Congressional testimony of former White House officials.",
+      "confidence": "high",
+      "id": 5146
+    },
+    {
+      "date": "2020-04-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Avenue Strategies LLC received a PPP loan of $42,715, approved 2020-04-28, fully forgiven ($43,072.14). Lender: EagleBank. Address: 1627 Eye St NW Suite 1110, Washington DC 20006. NAICS 813940 (Political Organizations). 3 jobs retained.",
+      "confidence": "confirmed",
+      "id": 5116
+    },
+    {
+      "date": "2020-12-31",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Avenue Strategies appears in House Committee on Education and Labor 116th Congress activity report (CRPT-116hrpt711, 2020-12-31). The exact context requires full document review, but this indicates the firm drew congressional attention beyond just the T-Mobile merger.",
+      "confidence": "medium",
+      "id": 5120
+    },
+    {
+      "date": "2025-06-11",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Lewandowski referenced in Presidential Daily Compilation: (1) Trump remarks Sept 22, 2019 prior to Houston departure (DCPD-201900637), mentioning both Lewandowski and Giuliani. (2) Trump news conference Sept 25, 2019 in NYC (DCPD-201900663). (3) Trump remarks Aug 15, 2019 in Morristown NJ (DCPD-201900553). (4) Trump remarks June 11, 2025 at Les Miserables opening (DCPD-202500682). The 2025 mention confirms Lewandowski remained in Trump's public orbit into the second administration.",
+      "confidence": "confirmed",
+      "id": 5125
+    },
+    {
+      "date": "2025-06/",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Appointed member and chief advisor to DHS Secretary, June 2025",
+      "other_person": "Homeland Security Advisory Council",
+      "id": 3753
+    },
+    {
+      "date": "2026-03-03",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Lewandowski referenced in Congressional Record 2026-03-03 (CREC-2026-03-03-pt1-PgS747-2) in connection with 'Housing for the 21st Century Act' debate and DHS. This is a very recent mention (2 days ago) suggesting ongoing congressional scrutiny of Lewandowski's DHS-adjacent role.",
+      "confidence": "high",
+      "id": 5122
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5143,
@@ -2615,399 +3233,5 @@
       "jurisdictional-arbitrage",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Corey Lewandowski",
-      "connections": [
-        {
-          "target": "Rudy Giuliani",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "GPO-J6-DOC-CTRL0000084255",
-          "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-        },
-        {
-          "target": "Barry Bennett",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:avenue-strategies-filings",
-          "description": "Co-founders of Avenue Strategies LLC (2017). Bennett was chief lobbyist appearing on all filings 2017-2020. Bennett covered positions: Chief of Staff Rep Jean Schmidt, Communications Director G8 Summit State Dept."
-        },
-        {
-          "target": "Bud Cummins",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:avenue-strategies-filings",
-          "description": "Cummins was lobbyist at Avenue Strategies 2017-2020. Former US Attorney ED AR 2001-2006, fired in US Attorney firings scandal."
-        },
-        {
-          "target": "Ed Brookover",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:avenue-strategies-filings",
-          "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-        },
-        {
-          "target": "Mary Coen",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:avenue-strategies-filings",
-          "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-        },
-        {
-          "target": "Jason Osborne",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "LDA:avenue-strategies-filings",
-          "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-        },
-        {
-          "target": "Matt Mowers",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "https://www.fec.gov/data/search/?q=individual-contributions",
-          "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-        },
-        {
-          "target": "David Kensinger",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Kensinger was lobbyist at Avenue Strategies in 2019. Former Chief of Staff to Sen Sam Brownback 2001-04."
-        },
-        {
-          "target": "James F. Lang",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LDA:401104327",
-          "description": "James F. Lang listed as contact person for Avenue Strategies (LDA registrant ID 401104327). Lang managed the day-to-day lobbying operations while Lewandowski provided the political access and brand."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "CL:60041057",
-          "description": "Named as class representative alongside Trump in 3 federal lawsuits against social media companies (Jul-Nov 2021). Also campaign manager 2015-Jun 2016, Mueller investigation witness, Congressional testimony 2019. Continuous inner-circle access broker."
-        },
-        {
-          "target": "Paul Manafort",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "CL:6368549",
-          "description": "Manafort replaced Lewandowski as Trump campaign chairman in June 2016 after Lewandowski was fired. Per Finding #2778, Tom Barrack brokered the replacement. Both later faced legal scrutiny from Mueller investigation."
-        },
-        {
-          "target": "Rudy Giuliani",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Both appointed to DHS HSAC in June 2025. Trump political operatives now sitting on homeland security advisory council alongside Silicon Valley defense technology investors."
-        },
-        {
-          "target": "Kristi Noem",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Lewandowski serves as unpaid SGE/de facto chief of staff to DHS Secretary Noem (Jan 2025-present). LittleSis records both a professional position (shadow chief of staff) and a personal relationship (paramour, since 2019). Lewandowski approves contracts and reviews policy before Noem signs. Multiple media outlets have reported an alleged romantic relationship; both have denied it. Noem was questioned about the relationship during March 2026 House hearings."
-        },
-        {
-          "target": "David Bossie",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Professional relationship per LittleSis. Both appointed to Pentagon Defense Business Board (Dec 2020). Both blocked by Biden admin (Feb 2021). Both Trump campaign operatives who co-authored book 'Let Trump Be Trump'. Bossie was deputy campaign manager for Trump 2016."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica:2026-03-05",
-          "description": "DHS contract approval authority over Palantir 1B BPA, 30M ImmigrationOS, 139M ICM, 299K VOWS"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica:2026-03-05",
-          "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-        },
-        {
-          "target": "Jason Miller",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "GPO-J6-DOC-MM007112",
-          "description": "J6 records: Miller emailed Stepien, Clark, Bossie, Meadows, Kushner re Giuliani surrogate briefing Nov 14 2020. Same Trump campaign operative network."
-        },
-        {
-          "target": "Tom Barrack",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "F:2778",
-          "description": "Per Finding #2778, Barrack brokered Lewandowski's replacement with Manafort as campaign manager in June 2016. This places Barrack as intermediary in Lewandowski's removal from campaign."
-        },
-        {
-          "target": "Nicholas Luna",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both HSAC members (appointed June 2025). Luna is WH Deputy Chief of Staff for Strategic Implementation; Lewandowski is de facto DHS chief of staff. Luna is Trump's personal aide and gatekeeper to the Oval Office. Both serve as institutional connectors between White House and DHS."
-        },
-        {
-          "target": "Troy Dean Edgar",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "propublica:edgar-troy-dean",
-          "description": "DHS Deputy Secretary and DHS SGE respectively; Edgar holds Palantir stock while Lewandowski controls contract approvals >100K including Palantir 1B BPA"
-        },
-        {
-          "target": "Paul Atkins",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Political operative financial overlap. Atkins holds Solamere Capital funds. Avenue Strategies not found in disclosure."
-        },
-        {
-          "target": "Bernard Kerik",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": "GPO-J6-TRANSCRIPT-CTRL0000036628",
-          "description": "Both mentioned in Kerik J6 deposition (CTRL0000036628, Jan 13 2022). Kerik was Giuliani associate; Lewandowski in same Trump operative circle."
-        },
-        {
-          "target": "Pete Hegseth",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Both serve in Trump 2nd administration: Lewandowski as DHS SGE/de facto chief of staff, Hegseth as Secretary of Defense. Lewandowski was previously appointed to Pentagon Defense Business Board (Dec 2020). Both face congressional scrutiny for conduct and governance issues. No direct business relationship found but operate in parallel within same administration's defense/security apparatus."
-        },
-        {
-          "target": "Kash Patel",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Both serve in Trump 2nd administration: Lewandowski as DHS SGE/de facto chief of staff, Patel as FBI Director. Both face congressional scrutiny. Both are Trump loyalists placed in security/law enforcement positions. No direct business relationship found."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "political",
-          "strength": 0.4,
-          "evidence_ref": null,
-          "description": "Both hold SGE (special government employee) titles in Trump 2nd administration: Lewandowski at DHS, Musk led DOGE (Jan-May 2025). Lewandowski commented publicly on Musk's DOGE logo on NewsNation. Same legal framework used to avoid full federal employee disclosure requirements. No direct business relationship found."
-        },
-        {
-          "target": "Marc Andreessen",
-          "type": "advisory",
-          "strength": 0.2,
-          "evidence_ref": "Finding_4789",
-          "description": "Both appointed DHS HSAC 2025. Zero GovInfo co-occurrences prior. HSAC is nexus connecting Trump political operatives with Silicon Valley defense tech investors."
-        },
-        {
-          "target": "Alex Karp",
-          "type": "corporate",
-          "strength": 0.2,
-          "evidence_ref": null,
-          "description": "Indirect but structurally significant: Lewandowski has contract approval authority at DHS as final political appointee before Secretary Noem. Palantir (CEO: Alex Karp) was awarded up to $1B DHS blanket purchase agreement (Feb 2026). WSJ specifically asked Lewandowski about Palantir meetings; DHS denied his involvement. Connection is circumstantial but structurally important given Lewandowski's gatekeeper role on all DHS contracts >100K."
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Co-founder of Founders Fund which led Anduril's $2.5B Series G with $1B check (June 2025). Anduril frontrunner for Golden Dome program with Arctic/Greenland components. Howery oversees Greenland as Denmark ambassador."
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Kristi Noem": [
-          {
-            "target": "Troy Dean Edgar",
-            "type": "political",
-            "strength": 1.0,
-            "description": "DHS Deputy Secretary / Secretary; Edgar holds Palantir, Raytheon, Tesla stock"
-          },
-          {
-            "target": "Leland Dudek",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Dudek signed two memoranda with Noem (DHS Secretary) authorizing Death Master File immigrant additions despite initially believing the action was illegal"
-          },
-          {
-            "target": "Aram Moghaddassi",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Moghaddassi (DOGE SSA/DHS) coordinated with Noem (DHS Secretary) on Death Master File immigration enforcement scheme; Noem signed memoranda authorizing DMF additions"
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ],
-        "Paul Manafort": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barrack brokered Manafort into Trump campaign. Gates was Barracks deputy on inaugural. Epstein tracked this chain May 2017-Aug 2018."
-          },
-          {
-            "target": "Tom Barrack",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Barrack brought Manafort into Trump campaign. Both prosecuted in separate FARA-related cases stemming from 58th Presidential Inaugural Committee. Epstein tracked connection: manafort gates patten all worked with barrack oy (EFTA02625236). Summers warned Epstein Oct 2017: Public link to manafort will be a disaster."
-          },
-          {
-            "target": "Tom Barrack",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Met in Beirut late 1970s. Close friends for decades. Barrack lent Manafort 1.5M. Barrack introduced Manafort to Trump campaign Feb-Mar 2016. Gates was Barracks deputy on inaugural."
-          },
-          {
-            "target": "Tom Barrack",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Barrack lent 1.5M to Manafort per LittleSis. Close friends. Both involved in Trump 2016 campaign. Both faced federal charges related to foreign influence."
-          }
-        ],
-        "Rudy Giuliani": [
-          {
-            "target": "Bill Siegel",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Siegel arranged meeting between Epstein and Giuliani in Sep 2010. Epstein preferred Giuliani over his partner."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Barr's SDNY was investigating Giuliani's Ukraine dealings, Parnas/Fruman foreign campaign contributions, and other matters. Barr created Ukraine coordination framework to assert DOJ control over Ukraine-related investigations (Feb 2020). Giuliani was Trump's personal attorney during Barr's AG tenure. Both former SDNY-affiliated prosecutors (Giuliani was SDNY USA 1983-1989). Berman's firing may have been partly motivated by SDNY's Giuliani investigation."
-          },
-          {
-            "target": "Bill Siegel",
-            "type": "social",
-            "strength": 0.7,
-            "description": "Siegel attempted to arrange Epstein-Giuliani meeting Sep 2010 as intermediary"
-          }
-        ],
-        "Tom Barrack": [
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Scheduled meetings with Barrack + Rod-Larsen. 'bannon, barrack, puppet masters'. Inauguration invitation consulting."
-          },
-          {
-            "target": "Sheikh Hamad",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Epstein hosted Barrack-Sheikh Hamad meeting at 71st St Jan 2012. Colony Capital office coordinated."
-          },
-          {
-            "target": "Sultan Bin Sulayem",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Barrack sent inauguration invitations to Sultan. Sultan asked Epstein whether to accept Jan 2017. Barrack discussed Sultan from Dubai Oct 2010."
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Epstein monitored Barracks legal exposure as early as Oct 2017 via Summers warning about Manafort link. Maintained active social relationship 2009-2017 per DOJ corpus. Epstein used Barrack-Trump proximity to signal Gulf contacts about US political access. Barrack served as Epstein conduit to Gulf figures (Sheikh Hamad meeting at 71st St Jan 2012). The UAE relationship central to Barracks indictment was visible in Epstein correspondence."
-          },
-          {
-            "target": "Hamad bin Jassim Al Thani",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Barrack coordinated meetings between Sheikh Hamad and Epstein at 71st St NYC. Colony Capital had extensive MENA investments. Barrack served as intermediary between Gulf royals and Trump circle."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

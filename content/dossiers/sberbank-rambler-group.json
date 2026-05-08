@@ -1,0 +1,268 @@
+{
+  "name": "Sberbank / Rambler Group",
+  "slug": "sberbank-rambler-group",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.441121",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 2,
+      "intelligence": 2,
+      "legal": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9837,
+      "finding_type": "financial",
+      "summary": "Sberbank acquired 46.5% of Rambler Group: binding docs signed Apr 23, 2019; deal closed Aug 26, 2019 -- 3.5 months before Dec 12 nginx raid",
+      "detail": "Sberbank signed legally binding documents to acquire 46.5% of Rambler Group on April 23, 2019. The deal closed on August 26, 2019 after regulatory approval. Post-deal ownership: Sberbank 46.5%, A&NN Investments (Mamut) 46.5%, Era Capital 7%. Board: 3 Sberbank + 3 A&NN + 1 Era Capital reps. Chairman: Lev Khasis (Sberbank First Deputy CEO). Cash investment ~11 billion rubles (~$173M). The 3.5-month gap weakens direct state-coordination thesis for the investment itself, but the broader sequence (F5 buys nginx Mar 2019 -> Sberbank enters Rambler Apr 2019 -> Lynwood criminal complaint Dec 2019 -> Sberbank intervenes Dec 2019 -> Lynwood sues in US Jun 2020 -> Sberbank buys 100% Oct 2020) is notable.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-08-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:51:16",
+      "target_name": "Sberbank / Rambler Group",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWDN report Aug 27 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Investegate filing Apr 23 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MarketScreener stock filing",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Moscow Times Apr 23 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Sberbank official press release (sberbank.ru/en/press_center)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9962,
+      "finding_type": "intelligence",
+      "summary": "Sberbank acquired Rambler control 3.5 months before nginx raid: acquisition enabled leverage then reversal",
+      "detail": "Sberbank binding docs signed Apr 23, 2019; stake closed Aug 26, 2019. Whistleblower Korotkov disclosed NGINX scheme to Lynwood in April 2019 -- same month. Criminal case initiated Dec 4, 2019 (3.5 months post-close). Sberbank board reversed Dec 16, 2019 -- 4 days after Rambler's public claim. Sequence: Sberbank signs -> whistleblower discloses -> Sberbank closes -> criminal case filed -> raid -> Sberbank board reverses. Without Sberbank majority control, neither the claim nor the sudden reversal would have been executable on a 4-day turnaround. The 'board not informed beforehand' claim is contradicted by the speed of the response.",
+      "source_datasets": [
+        "registry,courtlistener,analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-08-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:24:16",
+      "target_name": "Sberbank / Rambler Group",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-34,finding:9837,finding:9838,finding:9839,finding:9895",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9978,
+      "finding_type": "intelligence",
+      "summary": "Sberbank acquired Rambler control 3.5 months before nginx raid: acquisition enabled leverage then reversal",
+      "detail": "Sberbank binding docs signed Apr 23, 2019; stake closed Aug 26, 2019. Whistleblower Korotkov disclosed NGINX scheme in April 2019 -- same month. Criminal case initiated Dec 4, 2019 (3.5 months post-close). Sberbank board reversed Dec 16, 2019 -- 4 days after Rambler's public claim. Sequence: Sberbank signs -> whistleblower discloses -> Sberbank closes -> criminal case filed -> raid -> Sberbank board reverses. The 'board not informed beforehand' claim is contradicted by the speed of the response.",
+      "source_datasets": "registry,courtlistener,analysis_run",
+      "confidence": "medium",
+      "date_of_event": "2019-08-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "Sberbank / Rambler Group",
+      "profile_id": "nginx",
+      "evidence": []
+    },
+    {
+      "id": 9839,
+      "finding_type": "legal",
+      "summary": "Sberbank board intervened Dec 16, 2019 to terminate Lynwood agreement and drop criminal case -- claimed not informed beforehand",
+      "detail": "Emergency Rambler board meeting Dec 16, 2019 called by Sberbank. Board unanimously voted to: (1) task management with requesting law enforcement terminate criminal proceedings, (2) terminate agreement with Lynwood Investments CY, (3) pursue any IP claims via civil law only. Sberbank claimed it was not informed of the copyright dispute or criminal case. Herman Gref publicly said he was 'disappointed' and hoped for resolution 'without a litigation campaign.' Board chairman Lev Khasis (Sberbank First Deputy CEO) stated: 'We will do our utmost to ensure this situation is resolved through negotiations.' Despite this, Lynwood still filed a $750M+ civil suit in N.D. California on Jun 8, 2020 (case 3:2020-cv-03778). Dismissed with prejudice Aug 16, 2022 by Judge Chesney on laches/timeliness grounds.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2019-12-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:51:44",
+      "target_name": "Sberbank / Rambler Group",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWDN Dec 16 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Interfax Gref statement Dec 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Justia docket 3:2020-cv-03778",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Mondaq/Morrison Foerster dismissal announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Moscow Times Dec 17 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9840,
+      "finding_type": "financial",
+      "summary": "Sberbank progressively acquired 100% of Rambler: 46.5% (Aug 2019) -> 55% (Jul 2020) -> 100% (Oct 29, 2020)",
+      "detail": "Sberbank acquired Rambler in three tranches: (1) 46.5% closed Aug 26, 2019 for ~11B rubles; (2) increased to 55% in Jul 2020 by buying Era Capital's 6.95% treasury stake + 1.5% from A&NN; (3) acquired Mamut's remaining 45% on Oct 29, 2020 for 3B rubles initial payment + deferred second tranche. By Oct 2020, Russian state-controlled Sberbank owned 100% of Rambler Group -- the same entity that had (via Lynwood) launched the nginx criminal case and whose civil suit against F5 was still pending. Rambler Group entities (INN 7707375342 and INN 7725243282) are under Ukrainian sanctions.",
+      "source_datasets": [
+        "web_search",
+        "opensanctions"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-10-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:51:57",
+      "target_name": "Sberbank / Rambler Group",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWDN Oct 29 2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MarketScreener",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Nasdaq Oct 29 2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:ru",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TASS Jul 2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-08-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Sberbank acquired 46.5% of Rambler Group: binding docs signed Apr 23, 2019; deal closed Aug 26, 2019 -- 3.5 months before Dec 12 nginx raid",
+      "confidence": "confirmed",
+      "id": 9837
+    },
+    {
+      "date": "2019-08-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Sberbank acquired Rambler control 3.5 months before nginx raid: acquisition enabled leverage then reversal",
+      "confidence": "medium",
+      "id": 9962
+    },
+    {
+      "date": "2019-08-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Sberbank acquired Rambler control 3.5 months before nginx raid: acquisition enabled leverage then reversal",
+      "confidence": "medium",
+      "id": 9978
+    },
+    {
+      "date": "2019-12-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Sberbank board intervened Dec 16, 2019 to terminate Lynwood agreement and drop criminal case -- claimed not informed beforehand",
+      "confidence": "high",
+      "id": 9839
+    },
+    {
+      "date": "2020-10-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Sberbank progressively acquired 100% of Rambler: 46.5% (Aug 2019) -> 55% (Jul 2020) -> 100% (Oct 29, 2020)",
+      "confidence": "high",
+      "id": 9840
+    }
+  ]
+}

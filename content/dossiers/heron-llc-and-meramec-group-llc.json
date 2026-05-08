@@ -1,0 +1,160 @@
+{
+  "name": "Heron LLC and Meramec Group LLC",
+  "slug": "heron-llc-and-meramec-group-llc",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.401717",
+  "last_updated": "2026-04-06T20:15:56",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "network": 1,
+      "corporate": 3,
+      "relationship": 2
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-06T20:15:56"
+  },
+  "findings": [
+    {
+      "id": 9696,
+      "finding_type": "network",
+      "summary": "Wyoming LLC cluster (Briarwood Properties, Woodbine Group, Sunnyside Associates) \u2014 all organized by Shetterly at Ogletree Greenville in 2023 \u2014 represents a parallel undocumented property acquisition program in Wyoming",
+      "detail": "Three Wyoming LLCs organized by Michael Shetterly (Ogletree Deakins) at his Greenville SC office address in 2023, all with nature/place-name naming consistent with Altman real estate vehicles. WY entity numbers suggest two (Woodbine 2023-001369022, Sunnyside 2023-001369121) were formed same day. No reporting has linked these to Altman properties in Wyoming. Jackson Hole / Teton area is consistent with his profile.",
+      "source_datasets": "opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2023-01-01",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9690,
+      "finding_type": "corporate",
+      "summary": "Heron LLC and Meramec Group LLC are confirmed Sam Altman family office entities, both formed December 11, 2023, with identical five-member management teams",
+      "detail": "Both CA LLCs share the same five managers (Jennifer Serralta, Michael Shetterly, Carmen Beckwith, Samantha Turpel, Lori White), the same registered address (350 S. Grand Ave Suite 2000 LA), and the same registered agent (CT Corporation). CA entity numbers are 202360018805 and 202360018799 \u2014 separated by 6, confirming same-day batch filing. Source: OpenCorporates entity lookups for both entities.",
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": "2023-12-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9691,
+      "finding_type": "corporate",
+      "summary": "The 350 S. Grand Avenue Suite 2000 Los Angeles registered address is Andersen Tax LLC \u2014 confirming Andersen Tax as the tax advisory provider for all Altman family office LLCs",
+      "detail": "OpenGovUS and multiple commercial real estate sources confirm Andersen Tax LLC is the tenant at 350 S Grand Ave Suite 2000, Los Angeles CA 90071-3429. Jennifer Serralta (Altman's cousin/COO) lists this as her address on Heron, Meramec, Green Valley Ranch Napa, APOLLO RE, and other Altman entities. The same firm also operates Suite 700E at 1051 E Hillsdale Blvd Foster City, where Beckwith, Turpel, and White are based.",
+      "source_datasets": "web,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2023-12-11",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9695,
+      "finding_type": "corporate",
+      "summary": "The formation date of December 11, 2023 \u2014 19 days post-OpenAI reinstatement and 9 days after the Real Deal portfolio expos\u00e9 \u2014 is consistent with formation of new acquisition vehicles with more opaque naming to avoid press identification",
+      "detail": "The Real Deal published 'OpenAI CEO Sam Altman's $85 Million Real Estate Splurge' on December 2, 2023, identifying several Altman LLCs by linking them through Jennifer Serralta. Nine days later (Dec 11), Heron and Meramec were filed. Altman's earlier confirmed entities used transparent names (950 Lombard, Green Valley Ranch Napa, SAM ALTMAN QUALIFIED OPPORTUNITY FUND). Heron and Meramec are more opaque, potentially reflecting increased awareness of media scrutiny.",
+      "source_datasets": "opencorporates,web",
+      "confidence": "medium",
+      "date_of_event": "2023-12-11",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9720,
+      "finding_type": "relationship",
+      "summary": "Heron LLC and Meramec Group LLC form a tightly clustered pair (clustering=0.667) both directly connected to Sam Altman and to each other, suggesting they are co-managed personal LLCs serving the same purpose",
+      "detail": "Graph clique: [Heron LLC, Meramec Group LLC, Sam Altman]. Both have degree=3, clustering=0.667 (highest in graph for high-degree nodes). These appear to be personal investment or real estate holding vehicles. The high clustering coefficient means the only other connection for each is their direct link to the other LLC \u2014 they share membership or management. Meramec Group LLC has 1 finding; Heron LLC has 0 findings. The Meramec Group finding references an Andersen Tax LLC connection via Jennifer Serralta.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:07:44",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-33",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9782,
+      "finding_type": "relationship",
+      "summary": "Heron LLC and Meramec Group LLC form a tightly clustered pair (clustering=0.667) both directly connected to Sam Altman and to each other, suggesting they are co-managed personal LLCs serving the same purpose",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "target_name": "Heron LLC and Meramec Group LLC",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "network",
+      "summary": "Wyoming LLC cluster (Briarwood Properties, Woodbine Group, Sunnyside Associates) \u2014 all organized by Shetterly at Ogletree Greenville in 2023 \u2014 represents a parallel undocumented property acquisition program in Wyoming",
+      "confidence": "medium",
+      "id": 9696
+    },
+    {
+      "date": "2023-12-11",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Heron LLC and Meramec Group LLC are confirmed Sam Altman family office entities, both formed December 11, 2023, with identical five-member management teams",
+      "confidence": "high",
+      "id": 9690
+    },
+    {
+      "date": "2023-12-11",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "The 350 S. Grand Avenue Suite 2000 Los Angeles registered address is Andersen Tax LLC \u2014 confirming Andersen Tax as the tax advisory provider for all Altman family office LLCs",
+      "confidence": "high",
+      "id": 9691
+    },
+    {
+      "date": "2023-12-11",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "The formation date of December 11, 2023 \u2014 19 days post-OpenAI reinstatement and 9 days after the Real Deal portfolio expos\u00e9 \u2014 is consistent with formation of new acquisition vehicles with more opaque naming to avoid press identification",
+      "confidence": "medium",
+      "id": 9695
+    }
+  ]
+}

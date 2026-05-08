@@ -5,31 +5,751 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.679992",
-  "last_updated": "2026-03-09T04:47:07",
+  "generated_at": "2026-05-07T23:07:35.957638",
+  "last_updated": "2026-03-23T19:34:44",
   "stats": {
-    "total_findings": 85,
-    "total_connections": 22,
+    "total_findings": 92,
+    "total_connections": 30,
     "total_entities": 4,
     "finding_types": {
-      "relationship": 8,
       "financial": 47,
+      "relationship": 10,
+      "location": 1,
       "document": 5,
-      "intelligence": 12,
-      "legal": 8,
+      "legal": 9,
       "identity": 4,
-      "location": 1
+      "intelligence": 13,
+      "background": 2,
+      "negative_result": 1
     },
     "connection_types": {
-      "financial": 8,
-      "corporate": 9,
+      "financial": 9,
+      "corporate": 14,
       "social": 1,
-      "political": 3,
+      "political": 5,
       "intelligence": 1
     },
-    "last_updated": "2026-03-09T04:47:07"
+    "last_updated": "2026-03-23T19:34:44"
   },
   "findings": [
+    {
+      "id": 5654,
+      "finding_type": "financial",
+      "summary": "Lembas entities are Founders Fund co-investment/carry vehicles with Tolkien naming: Lembas LLC (DE 2007), Lembas II LP (DE #4678059, 2009), Lembas III LP (DE #4863415, 2010, CIK 1503830). SEC Form D for Lembas III confirms Managing Members are Ken Howery, Luke Nosek, Sean Parker, Peter Thiel via FF III Management LLC. Separate Lembas Capital LP (CIK 1755925) is a hedge fund at 64 Bleecker St #339, NYC, managed by Lucien Constable via Lampa Capital LLC/GP, $13.6M raised, 22 investors - this appears to be a distinct vehicle that evolved from the original Lembas structure but is now independently managed.",
+      "detail": "The Lembas family spans 8 Delaware entities: Lembas LLC (2007-04-17, original vehicle), Lembas II LP (2009-04-17, on Howery's OGE 278 at $250M-500M), Lembas III LP (2010-08-23, SEC-confirmed FF principals vehicle), Lembas Capital LLC (2018-09-30), Lembas Capital LP (2018-09-30), Lembas Capital GP LLC (2021-02-01), Lembas Fund LLC (2022-06-27), Lembas Research LLC (2022-06-27). The 2018+ entities (Lembas Capital) appear to be a spin-off hedge fund now renamed Lampa Capital, managed by Lucien Constable at 64 Bleecker Street NYC. The original Lembas II/III are GP carry vehicles for FF Alpha and FF III respectively.",
+      "source_datasets": [
+        "edgar",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": "2007-04-17",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:40:04",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1503830",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1755925",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5699,
+      "finding_type": "financial",
+      "summary": "FF Humbition Inc, FF Slow Inc, FF Longevity Inc are confirmed Founders Fund SPVs. All registered in Delaware with CA foreign registrations at One Letterman Drive Bldg D 5th Floor, SF 94129 (Founders Fund HQ). FF Slow (DE 2015-04-15), FF Humbition (DE 2015-12-11), FF Longevity (DE 2017-05-24). Humbition likely linked to 'humbition' VC fund (est. 2017, NYC, early-stage tech). Portfolio company identities behind SPV names not publicly disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2015-04-15",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:48:58",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/5729661",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/5905751",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/6422010",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5703,
+      "finding_type": "financial",
+      "summary": "Howery Hospitality LLC (CA 201615810110, incorporated 2016-05-31) is a California LLC registered at 32972 Pinnacle Dr, Trabuco Canyon, CA 92679 - a residential address in Orange County. Active. No web presence. Purpose unclear but registered address is residential, suggesting possible family connection or personal hospitality venture.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2016-05-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:49:34",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_ca/201615810110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5653,
+      "finding_type": "financial",
+      "summary": "Gigafund 0.2 LP (CIK 1738772, DE #6747952): VC fund raising $100M, $51M sold as of May 2018 with only 4 investors. Managed by Luke Nosek and Stephen Oskoui as Managing Members of the GP of the GP, at 1200 Seaport Blvd, Redwood City CA 94063. Gigafund family has 80+ Delaware entities (0 through 0.28+, plus Gigafund 1 LP). Gigafund 1 LP (CIK 2085918) files SC 13G/Form 3 for Angel Studios Inc. Nosek/Oskoui are the principals. Howery's $250M-500M position in Gigafund 0.2 LP as 1 of only 4 investors means he holds 25%+ of this SpaceX-focused fund.",
+      "detail": "Gigafund was founded by Luke Nosek after he left Founders Fund in 2017. It focuses on long-term concentrated positions, heavily in SpaceX. The Delaware corporate registry shows 80+ Gigafund entities (0, 0-A, 0.1 through 0.28+, plus Gigafund 1 LP and associated GP structures), indicating prolific SPV creation for individual investments. The naming convention (0, 0.1, 0.2, etc.) suggests individual deal vehicles under a master fund structure. Howery as 1 of 4 investors in the 0.2 vehicle with $250M-500M exposure represents extreme concentration. First sale date: 2018-04-25.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:39:47",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1738772",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5700,
+      "finding_type": "financial",
+      "summary": "Lampa Capital LP (SEC CIK 0001755925) confirmed as same entity as Lembas Capital LP. Name changed from Lembas to Lampa between 2018-10-30 and 2022-02-18 per SEC records. Delaware LP at 64 Bleecker St #339, NY 10012. Pooled investment fund under 3(c)(1) exemption. Executive: Lucien Constable (Luke Constable). GP: Lampa Capital GP LLC. Total raised: $13.625M from Form D filings. Phone 650-758-7138 (Bay Area area code).",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-10-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:49:07",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FormDs.com lembas-capital-lp",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1755925",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5705,
+      "finding_type": "financial",
+      "summary": "Kitsune Management LLC exists in multiple jurisdictions: Delaware (7281988, 2019-02-13), Florida (L21000371990, 2021-08-19, Tallahassee), Texas (foreign, 0805288395, 2023-10-06, Chicago address 455 N Cityfront Plaza Dr), Michigan (withdrawn), New Mexico (dissolved). The Delaware entity is most likely Howery-connected. FL and TX registrations suggest multi-state real estate operations. Chicago address on TX filing is notable.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-02-13",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:49:58",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/7281988",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_fl/L21000371990",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_tx/0805288395",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5701,
+      "finding_type": "financial",
+      "summary": "BTC Wynwood I LLC (DE 6544090, incorporated 2022-01-14) and BTC Wynwood II LLC (DE 6914244, incorporated 2022-07-15) are both Delaware LLCs. Also BC BTC Wynwood I LLC (DE 10386058, 2025-10-30). Miami Wynwood district commercial real estate holdings. Not found in Florida Sunbiz - registered only in Delaware. BTC prefix meaning unclear - not found in any Bitcoin/crypto RE context.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-01-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:49:16",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/6544090",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_de/6914244",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5702,
+      "finding_type": "financial",
+      "summary": "Object Dash LLC (NV E22281242022-9, incorporated 2022-04-07) is a Nevada domestic LLC. Active status. Howery OGE 278 disclosure lists Las Vegas undeveloped land and commercial real estate. No officers visible in public records. No web presence found.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-04-07",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:49:24",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates us_nv/E22281242022-9",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5692,
+      "finding_type": "relationship",
+      "summary": "Keri Findley is Peter Thiel's money manager, not just a GloriFi board member. She founded Tacora Capital (venture debt) with $250M backing from Thiel. Previously partner at Third Point. In GloriFi, she was appointed to the board in Nov 2021 seed round, then removed by Neugebauer on April 3, 2022. Findley is also advisor to 8VC (Joe Lonsdale's VC firm) and Firework Ventures. Filed separate defamation suit (Findley v. Bredahl, 1:23-cv-00884, S.D.N.Y., terminated 2023-04-14). As of Feb 2026, Findley's new fund is seeking $300M from global family offices. This connects the Thiel family office operation directly to the GloriFi RICO case.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-04-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:47:53",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg 2022-12-08; Bloomberg 2026-02-24; CourtListener case 1:23-cv-00884; WFAA reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5696,
+      "finding_type": "location",
+      "summary": "FEC records show one $3,300 donation on 2024-10-11 from NEW YORK NY 10038 at 222 Broadway. 222 Broadway is a large commercial building in lower Manhattan Financial District, historically home to Western Electric/AT&T, currently owned by 222 Broadway Owner LLC. Recent tenants include JPMorgan Chase and formerly WeWork (2013-2024). Being converted to 799 residential apartments by GFP Real Estate. The 10038 zip code corresponds to the Civic Center/Financial District area. Separate $3,300 transfer on same date lists same 222 Broadway address with 'INFORMATION REQUESTED PER BEST EFFORTS' for employer/occupation, suggesting the committee could not verify Howery's employment at that address.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-10-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:48:33",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions 2024-10-11; CompStak building data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5672,
+      "finding_type": "financial",
+      "summary": "FEC records confirm: Ken Howery donated exactly $1,000,000 to the Trump Vance Inaugural Committee (C00894162) on December 9, 2024. His Denmark ambassadorship was announced December 22, 2024 -- just 13 days later. Donor address listed as P.O. Box 10796, Chicago IL 60611. This places him among the ~130 seven-figure inaugural donors. The committee raised $245.3M total.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:41:11",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://api.open.fec.gov/v1/schedules/schedule_a/?contributor_name=ken+howery&committee_id=C00894162",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5685,
+      "finding_type": "financial",
+      "summary": "Howery donated $1,000,000 to inaugural committee on 2024-12-09, listed as 'KEN HOWERY' from Chicago IL 60611 PO Box 10796 with no employer/occupation listed. This is the single largest donation in the FEC records. Separately donated $125,000 to MAHA Alliance PAC (RFK Jr's Make America Healthy Again movement): $75K on 2024-10-11 and two $25K donations on 2024-10-17. Also donated $150K to Trump 47 Committee via three $50K donations on 2024-10-17. Total 2024 political giving exceeds $1.5M.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-09",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:46:23",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions API, committee C00888172 (MAHA Alliance)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5624,
+      "finding_type": "document",
+      "summary": "Howery nominated Ambassador to Denmark (not Sweden) on 2024-12-22, confirmed 51-47 by Senate on 2025-10-07 en bloc. Arrived Copenhagen 2025-11-05. Has ethics agreement (6 pages), certificate of divestiture (OGE-2025-279-CDIV), and ethics agreement certification. Previous: Ambassador to Sweden 2019-2021. Consultant to Gemini Space Station LLC 2021-2025. Senate Foreign Relations Committee hearing 2025-05-08.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-12-22",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:31:43",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica Doc 1672-1675, Congress.gov PN54-3 119th Congress",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5681,
+      "finding_type": "document",
+      "summary": "GovInfo records: 247 Congressional Record entries mentioning Kenneth Howery, 112 for 'Howery ambassador Denmark.' Key dates: Nomination received by Senate 03/24/2025. Hearing 05/08/2025. Committee executive report 05/15/2025. Business meeting (committee vote) 09/17/2025. En bloc nomination vote 10/07/2025. Senate confirmation 10/07/2025 (51-47). Senate Resolution 412 authorized en bloc consideration. Also found: DCPD-202500394 (March 25, 2025) - Trump document signing ceremony with ambassadorial nominees.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:42:56",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://api.govinfo.gov/packages/CREC-2025-10-07/granules/CREC-2025-10-07-pt1-PgS6978-2/summary",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5669,
+      "finding_type": "financial",
+      "summary": "Ethics agreement (dated April 25, 2025) requires Howery to divest: Berkshire Hathaway, Palantir (PLTR), Planet Labs (PL), Tesla (TSLA) within 90 days of confirmation; plus Miruvor LP within 90 days and Entrepreneur First Next Stage LP and Valor Equity Partners IV-B LP within 120 days. He retains right to 3% interest in future Founders Fund vehicles but must divest any that make first capital call during tenure.",
+      "detail": null,
+      "source_datasets": [
+        "documentcloud",
+        "oge"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:40:37",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.documentcloud.org/documents/25971740",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5680,
+      "finding_type": "financial",
+      "summary": "Howery's OGE ethics agreement (April 25, 2025) reveals extensive financial holdings. REQUIRED DIVESTITURES: Palantir (PLTR), Tesla (TSLA), Berkshire Hathaway, Planet Labs (PL), Miruvor LP, Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RETAINED with recusal: SpaceX, Blockchain.com, Bacasable Global, Gemini Space Station/Astronauts Corps, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, plus virtual currencies. CRITICAL: Retains right to 3% interest in future Founders Fund vehicles. Must divest carried interest in any FF fund that makes first capital call during tenure.",
+      "detail": null,
+      "source_datasets": [
+        "state_dept"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:42:49",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-5RXDUfzR/ethics-agreement.txt",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.state.gov/howerykenneth-kingdomofdenmark-april2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6109,
+      "finding_type": "legal",
+      "summary": "Howery ethics agreement (April 25, 2025) complete inventory: DIVEST (90d): Berkshire Hathaway, Palantir, Planet Labs, Tesla, Miruvor LP. DIVEST (120d): Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RECUSAL (retained): SpaceX, Blockchain.com, Bacasable Global, Gemini Astronauts Corps/Space Station, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, all virtual currencies. Retains 3% right in future FF vehicles but must divest if capital call during tenure. CRITICAL: Anduril Industries completely absent from divestiture list AND recusal obligations despite FF being Anduril's largest investor (B, June 2025).",
+      "detail": "Full text analysis from DocumentCloud 25971740. Agreement addressed to Richard C. Visek, Principal Deputy Legal Adviser, State Dept. Howery also retains Gemini Space Station LLC interest (resigned from management Jan 2025). Family Trusts 3/4 resigned; Trust 1 retained as trustee; Trusts 15/16 retained if unfunded. Meta Stable Edge LP and Polychain Fund I LP flagged as heightened risk because still acquiring new holdings. Agreement explicitly notes Denmark companies have heightened conflict potential. No mention of Anduril, Golden Dome, missile defense, or defense technology companies beyond SpaceX.",
+      "source_datasets": [
+        "documentcloud"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:25:13",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.documentcloud.org/documents/25971740-howery-kenneth-finalea/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5636,
+      "finding_type": "identity",
+      "summary": "Howery confirmed as US Ambassador to Denmark (covering Greenland/Faroe Islands) on Oct 7, 2025, by 51-47 Senate vote. Confirmation hearing May 8, 2025 set three priorities: shared security/NATO burden-sharing, deeper trade and tech ties, and Arctic security focused on Greenland and Pituffik Space Base. Second ambassadorship under Trump (previously Sweden 2019-2021). Nominated Dec 22, 2024.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:33:15",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.arctictoday.com/trumps-ambassador-tasked-with-getting-greenland-confirmed/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.congress.gov/nomination/119th-congress/54/3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5676,
+      "finding_type": "intelligence",
+      "summary": "Senate hearing transcript (May 8, 2025) reveals Howery's three stated priorities as Denmark ambassador: (1) shared security/NATO burden-sharing across the Kingdom, (2) deeper trade and technology partnerships, (3) Arctic security with focus on Greenland and Pituffik Space Base. On Greenland questions, Howery consistently deflected with prepared talking points about 'self-determination' and 'expanding cooperation.' Would not directly answer whether Trump wants to 'take over' Greenland. Introduced by Sen. Cruz and Sen. Cornyn (both TX). Confirmed 51-47 on Oct 7, 2025 in en bloc vote.",
+      "detail": null,
+      "source_datasets": [
+        "govinfo",
+        "congress_gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-05-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:42:10",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.foreign.senate.gov/imo/media/doc/8cf9a610-0520-8599-ff3c-3c712e99161e/05%2008%2025%20Nominations%20--%20Orr",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5660,
+      "finding_type": "financial",
+      "summary": "Peter Thiel and Silicon Valley billionaires (Bezos, Gates, Altman) have invested in AI-driven rare earth mining in Greenland. Thiel backed Praxis ($525M raised) to build 'freedom city' in Greenland via Pronomos Capital. KoBold Metals (Bezos/Gates/Altman) holds 51% stake in Disko-Nuussuaq project hunting copper/nickel/cobalt. Greenland has 25 of 34 EU critical raw materials. Howery co-founded FF with Thiel, was among those promoting 'freedom city' concept, and now serves as ambassador overseeing Greenland.",
+      "detail": "CORRECTION: KoBold Metals Disko-Nuussuaq project was nickel-copper-cobalt exploration, NOT rare earth as originally reported. KoBold exited the project May 19, 2025, returning 49% stake to 80 Mile plc in exchange for NSR royalty. KoBold invested 13.4M in exploration but never progressed to drilling.",
+      "source_datasets": [
+        "Medium",
+        "New Republic",
+        "Jacobin"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:38:45",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://medium.com/@impactnews-wire/gates-altman-bezos-and-thiel-have-secretly-invested-in-ai-driven-rare-earth-mining-in-greenland-0c41c3144bb0",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://newrepublic.com/article/205102/oligarchs-pushing-conquest-greenland-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6114,
+      "finding_type": "legal",
+      "summary": "TIMELINE CONFLICT: FF-Anduril $1B investment (June 5, 2025) occurred AFTER Howery's ethics agreement was signed (April 25, 2025) but BEFORE Senate confirmation (Oct 7, 2025). The ethics agreement was drafted before this investment existed. No amendment to the ethics agreement has been publicly filed to address this new $1B exposure. Under Section 1 General Commitments, Howery agreed not to modify the agreement without State Dept and OGE approval. But nothing in the agreement requires him to proactively report new FF investments or seek amendments when FF's portfolio changes.",
+      "detail": null,
+      "source_datasets": [
+        "documentcloud",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-05",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:25:43",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2025/06/05/anduril-raises-2-5b-at-30-5b-valuation-led-by-founders-fund/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.documentcloud.org/documents/25971740-howery-kenneth-finalea/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5668,
+      "finding_type": "relationship",
+      "summary": "Howery confirmed as ambassador Oct 7, 2025. Summoned by Denmark TWICE: (1) August 27, 2025 \u2014 deputy Mark Stroh summoned over PET-detected covert influence operations by Trump-connected Americans in Greenland; (2) December 22, 2025 \u2014 Howery summoned after Trump named Gov. Jeff Landry as Greenland special envoy whose stated mission was 'to make Greenland part of the US.' In November 2025, Howery denied knowledge of interference. Timeline suggests operations pre-dated his confirmation.",
+      "detail": null,
+      "source_datasets": [
+        "Axios",
+        "Defense News"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-08-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:40:09",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2025/12/22/greenland-envoy-landry-denmark-summon-ambassador",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.defensenews.com/global/europe/2025/08/27/denmark-summons-us-envoy-over-report-of-greenland-influence-operations/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5639,
+      "finding_type": "legal",
+      "summary": "No FARA registration found for Kenneth Howery post-ambassadorship. FARA search for 'Howery' returned 0 registrants and 0 foreign principals. FARA search for 'Founders Fund' also returned 0 results. Despite serving as US Ambassador to Denmark (2025-present, confirmed 2025-10-07), there is no indication Howery has registered as a foreign agent or that Founders Fund has any FARA obligations. This is expected for a sitting ambassador but would become significant if Howery leaves the post and engages in any lobbying or advisory work related to Danish/Nordic interests.",
+      "detail": null,
+      "source_datasets": [
+        "fara"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:33:26",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA search 'Howery': 0 registrants, 0 foreign principals; FARA search 'Founders Fund': 0 registrants, 0 foreign principals",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5651,
+      "finding_type": "financial",
+      "summary": "Founders Fund complete Delaware corporate structure: 50+ entities across 9 numbered fund families (I-IX), 4 Growth funds (I-IV), Alpha fund, and supporting vehicles. Each fund family follows pattern: [Fund LP + Principals Fund LP + Entrepreneurs Fund LP + Management LLC]. Fund IX (2023) and Growth IV (2026-01-28) are newest. Total DE entities: Fund I-IX (main funds), Growth I-IV, Alpha, plus Lembas II/III, SpaceX Fund, and FF Upper Tier GP LLC. All at One Letterman Drive Building D, 5th Floor, San Francisco CA 94129.",
+      "detail": "Full list of Delaware entities by fund family: FUND I-IX (main fund LPs), each with Principals Fund LP, Entrepreneurs Fund LP, Management LLC. Growth series: Growth LP, Growth II LP, Growth III LP, Growth IV LP (newest, inc 2026-01-28), each with Management LLC and Principals Fund LP. Alpha Management LLC (inc 2007-11-26). Special vehicles: Lembas II LP (inc 2009-04-17), Lembas III LP (inc 2010-08-23, managed by same team as FF III), FF SpaceX Fund LP. Also Lembas LLC (2007), Lembas Capital LLC/LP (2018), Lembas Capital GP LLC (2021), Lembas Fund LLC (2022), Lembas Research LLC (2022). Growth Management LLC (CIK 1853431) files 13F-HR showing public equity holdings including BitMine Immersion Technologies.",
+      "source_datasets": [
+        "edgar",
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-01-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 00:39:15",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Delaware SoS search, SEC EDGAR company lookups",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7041,
+      "finding_type": "legal",
+      "summary": "HOWERY ETHICS TIMELINE ANALYSIS: Howery's ethics agreement (April 25, 2025) grants him 3% carry right in future FF vehicles, with obligation to divest carried interest in any fund making its first capital call during his tenure. FF Growth III first sale was 2025-03-28 -- BEFORE the ethics agreement date (April 25, 2025) and BEFORE his Oct 7 confirmation. This means Growth III was already calling capital before Howery entered government service, so the divestiture trigger may not apply to Growth III. However, FF Growth IV first sale was 2026-03-06 -- well AFTER Howery's Oct 7 confirmation. If Howery holds 3% carry in Growth IV, the ethics agreement would require divestiture of that specific interest. Growth IV's $6B size means Howery's 3% carry could be worth $180M+ over the fund's life. Neither Growth III nor Growth IV lists Howery as a managing member or related person on their Form D filings.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:41",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 0002059945, SEC Form D 0002112131, Howery OGE ethics agreement April 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 5213,
       "finding_type": "relationship",
@@ -74,31 +794,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica OGE 278 Nominee Report Doc 1672",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5624,
-      "finding_type": "document",
-      "summary": "Howery nominated Ambassador to Denmark (not Sweden) on 2024-12-22, confirmed 51-47 by Senate on 2025-10-07 en bloc. Arrived Copenhagen 2025-11-05. Has ethics agreement (6 pages), certificate of divestiture (OGE-2025-279-CDIV), and ethics agreement certification. Previous: Ambassador to Sweden 2019-2021. Consultant to Gemini Space Station LLC 2021-2025. Senate Foreign Relations Committee hearing 2025-05-08.",
-      "detail": null,
-      "source_datasets": [
-        "propublica"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:31:43",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ProPublica Doc 1672-1675, Congress.gov PN54-3 119th Congress",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -331,39 +1026,6 @@
       ]
     },
     {
-      "id": 5636,
-      "finding_type": "identity",
-      "summary": "Howery confirmed as US Ambassador to Denmark (covering Greenland/Faroe Islands) on Oct 7, 2025, by 51-47 Senate vote. Confirmation hearing May 8, 2025 set three priorities: shared security/NATO burden-sharing, deeper trade and tech ties, and Arctic security focused on Greenland and Pituffik Space Base. Second ambassadorship under Trump (previously Sweden 2019-2021). Nominated Dec 22, 2024.",
-      "detail": null,
-      "source_datasets": [
-        "web_search",
-        "congress_gov"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:33:15",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.arctictoday.com/trumps-ambassador-tasked-with-getting-greenland-confirmed/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.congress.gov/nomination/119th-congress/54/3",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5637,
       "finding_type": "intelligence",
       "summary": "Denmark summoned US diplomat (charge d'affaires before Howery's confirmation) in Aug 2025 over reports of covert US influence operations in Greenland designed to map perceived allies/opponents and stoke secessionist sentiment. After assuming post, Howery denied knowledge of interference campaign. He was summoned again Dec 22, 2025 after Trump appointed Jeff Landry as special envoy to Greenland. Danish intel service PET confirmed Greenland targeted by US interference campaigns.",
@@ -422,31 +1084,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica OGE 278 Doc 1672",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5639,
-      "finding_type": "legal",
-      "summary": "No FARA registration found for Kenneth Howery post-ambassadorship. FARA search for 'Howery' returned 0 registrants and 0 foreign principals. FARA search for 'Founders Fund' also returned 0 results. Despite serving as US Ambassador to Denmark (2025-present, confirmed 2025-10-07), there is no indication Howery has registered as a foreign agent or that Founders Fund has any FARA obligations. This is expected for a sitting ambassador but would become significant if Howery leaves the post and engages in any lobbying or advisory work related to Danish/Nordic interests.",
-      "detail": null,
-      "source_datasets": [
-        "fara"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:33:26",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FARA search 'Howery': 0 registrants, 0 foreign principals; FARA search 'Founders Fund': 0 registrants, 0 foreign principals",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -782,32 +1419,6 @@
       ]
     },
     {
-      "id": 5651,
-      "finding_type": "financial",
-      "summary": "Founders Fund complete Delaware corporate structure: 50+ entities across 9 numbered fund families (I-IX), 4 Growth funds (I-IV), Alpha fund, and supporting vehicles. Each fund family follows pattern: [Fund LP + Principals Fund LP + Entrepreneurs Fund LP + Management LLC]. Fund IX (2023) and Growth IV (2026-01-28) are newest. Total DE entities: Fund I-IX (main funds), Growth I-IV, Alpha, plus Lembas II/III, SpaceX Fund, and FF Upper Tier GP LLC. All at One Letterman Drive Building D, 5th Floor, San Francisco CA 94129.",
-      "detail": "Full list of Delaware entities by fund family: FUND I-IX (main fund LPs), each with Principals Fund LP, Entrepreneurs Fund LP, Management LLC. Growth series: Growth LP, Growth II LP, Growth III LP, Growth IV LP (newest, inc 2026-01-28), each with Management LLC and Principals Fund LP. Alpha Management LLC (inc 2007-11-26). Special vehicles: Lembas II LP (inc 2009-04-17), Lembas III LP (inc 2010-08-23, managed by same team as FF III), FF SpaceX Fund LP. Also Lembas LLC (2007), Lembas Capital LLC/LP (2018), Lembas Capital GP LLC (2021), Lembas Fund LLC (2022), Lembas Research LLC (2022). Growth Management LLC (CIK 1853431) files 13F-HR showing public equity holdings including BitMine Immersion Technologies.",
-      "source_datasets": [
-        "edgar",
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:39:15",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Delaware SoS search, SEC EDGAR company lookups",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5652,
       "finding_type": "financial",
       "summary": "Howery's role evolution at Founders Fund via SEC Form D filings: Managing Member of FF Alpha Management (SpaceX Fund 2009, with Thiel/Nosek/Parker), Managing Member of FF III-VI Management (2010-2016, with Thiel/Nosek/Singerman). ABSENT from Fund VII (2019), Fund VIII (2022), Fund IX (2023/2025), and all Growth funds. Fund VII-VIII managed by Thiel/Singerman/Rabois; Fund IX by Thiel/Napoleon Ta/Trae Stephens with new FF Upper Tier GP LLC. His departure from management coincides with his 2019 confirmation as Ambassador to Sweden. Retained LP/carried interest positions but no longer a managing member of new funds.",
@@ -826,57 +1437,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "SEC EDGAR Form D filings for FF SpaceX Fund, FF III, V, VI, VII, VIII, IX",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5653,
-      "finding_type": "financial",
-      "summary": "Gigafund 0.2 LP (CIK 1738772, DE #6747952): VC fund raising $100M, $51M sold as of May 2018 with only 4 investors. Managed by Luke Nosek and Stephen Oskoui as Managing Members of the GP of the GP, at 1200 Seaport Blvd, Redwood City CA 94063. Gigafund family has 80+ Delaware entities (0 through 0.28+, plus Gigafund 1 LP). Gigafund 1 LP (CIK 2085918) files SC 13G/Form 3 for Angel Studios Inc. Nosek/Oskoui are the principals. Howery's $250M-500M position in Gigafund 0.2 LP as 1 of only 4 investors means he holds 25%+ of this SpaceX-focused fund.",
-      "detail": "Gigafund was founded by Luke Nosek after he left Founders Fund in 2017. It focuses on long-term concentrated positions, heavily in SpaceX. The Delaware corporate registry shows 80+ Gigafund entities (0, 0-A, 0.1 through 0.28+, plus Gigafund 1 LP and associated GP structures), indicating prolific SPV creation for individual investments. The naming convention (0, 0.1, 0.2, etc.) suggests individual deal vehicles under a master fund structure. Howery as 1 of 4 investors in the 0.2 vehicle with $250M-500M exposure represents extreme concentration. First sale date: 2018-04-25.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:39:47",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR Form D for CIK 1738772, Delaware SoS search for Gigafund",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5654,
-      "finding_type": "financial",
-      "summary": "Lembas entities are Founders Fund co-investment/carry vehicles with Tolkien naming: Lembas LLC (DE 2007), Lembas II LP (DE #4678059, 2009), Lembas III LP (DE #4863415, 2010, CIK 1503830). SEC Form D for Lembas III confirms Managing Members are Ken Howery, Luke Nosek, Sean Parker, Peter Thiel via FF III Management LLC. Separate Lembas Capital LP (CIK 1755925) is a hedge fund at 64 Bleecker St #339, NYC, managed by Lucien Constable via Lampa Capital LLC/GP, $13.6M raised, 22 investors - this appears to be a distinct vehicle that evolved from the original Lembas structure but is now independently managed.",
-      "detail": "The Lembas family spans 8 Delaware entities: Lembas LLC (2007-04-17, original vehicle), Lembas II LP (2009-04-17, on Howery's OGE 278 at $250M-500M), Lembas III LP (2010-08-23, SEC-confirmed FF principals vehicle), Lembas Capital LLC (2018-09-30), Lembas Capital LP (2018-09-30), Lembas Capital GP LLC (2021-02-01), Lembas Fund LLC (2022-06-27), Lembas Research LLC (2022-06-27). The 2018+ entities (Lembas Capital) appear to be a spin-off hedge fund now renamed Lampa Capital, managed by Lucien Constable at 64 Bleecker Street NYC. The original Lembas II/III are GP carry vehicles for FF Alpha and FF III respectively.",
-      "source_datasets": [
-        "edgar",
-        "registry"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 00:40:04",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR filings for CIK 1503830 and CIK 1755925, Delaware SoS search for Lembas",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -951,7 +1511,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR Form D/A for CIK 1464202",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1464202",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1013,40 +1573,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.cnbc.com/2025/06/05/anduril-valuation-founders-fund.html",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5660,
-      "finding_type": "financial",
-      "summary": "Peter Thiel and Silicon Valley billionaires (Bezos, Gates, Altman) have invested in AI-driven rare earth mining in Greenland. Thiel backed Praxis ($525M raised) to build 'freedom city' in Greenland via Pronomos Capital. KoBold Metals (Bezos/Gates/Altman) holds 51% stake in Disko-Nuussuaq project hunting copper/nickel/cobalt. Greenland has 25 of 34 EU critical raw materials. Howery co-founded FF with Thiel, was among those promoting 'freedom city' concept, and now serves as ambassador overseeing Greenland.",
-      "detail": "CORRECTION: KoBold Metals Disko-Nuussuaq project was nickel-copper-cobalt exploration, NOT rare earth as originally reported. KoBold exited the project May 19, 2025, returning 49% stake to 80 Mile plc in exchange for NSR royalty. KoBold invested 13.4M in exploration but never progressed to drilling.",
-      "source_datasets": [
-        "Medium",
-        "New Republic",
-        "Jacobin"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:38:45",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://medium.com/@impactnews-wire/gates-altman-bezos-and-thiel-have-secretly-invested-in-ai-driven-rare-earth-mining-in-greenland-0c41c3144bb0",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://newrepublic.com/article/205102/oligarchs-pushing-conquest-greenland-trump",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1289,65 +1815,6 @@
       ]
     },
     {
-      "id": 5668,
-      "finding_type": "relationship",
-      "summary": "Howery confirmed as ambassador Oct 7, 2025. Summoned by Denmark TWICE: (1) August 27, 2025 \u2014 deputy Mark Stroh summoned over PET-detected covert influence operations by Trump-connected Americans in Greenland; (2) December 22, 2025 \u2014 Howery summoned after Trump named Gov. Jeff Landry as Greenland special envoy whose stated mission was 'to make Greenland part of the US.' In November 2025, Howery denied knowledge of interference. Timeline suggests operations pre-dated his confirmation.",
-      "detail": null,
-      "source_datasets": [
-        "Axios",
-        "Defense News"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:40:09",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.axios.com/2025/12/22/greenland-envoy-landry-denmark-summon-ambassador",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.defensenews.com/global/europe/2025/08/27/denmark-summons-us-envoy-over-report-of-greenland-influence-operations/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5669,
-      "finding_type": "financial",
-      "summary": "Ethics agreement (dated April 25, 2025) requires Howery to divest: Berkshire Hathaway, Palantir (PLTR), Planet Labs (PL), Tesla (TSLA) within 90 days of confirmation; plus Miruvor LP within 90 days and Entrepreneur First Next Stage LP and Valor Equity Partners IV-B LP within 120 days. He retains right to 3% interest in future Founders Fund vehicles but must divest any that make first capital call during tenure.",
-      "detail": null,
-      "source_datasets": [
-        "documentcloud",
-        "oge"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:40:37",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.documentcloud.org/documents/25971740",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5670,
       "finding_type": "financial",
       "summary": "Ethics agreement Section 3 permits RETENTION (not divestiture) of: Space Exploration Technologies Corporation (SpaceX/Starlink), Blockchain.com Group Holdings Inc., Bacasable Global Limited, Gemini Astronauts Corps LLC/Gemini Space Station LLC. Also retains: Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, plus all virtual currency holdings. State Dept determined recusal sufficient - divestiture not required for these.",
@@ -1392,31 +1859,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.foreign.senate.gov/imo/media/doc/8cf9a610-0520-8599-ff3c-3c712e99161e/05%2008%2025%20Nominations%20--%20Orr",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5672,
-      "finding_type": "financial",
-      "summary": "FEC records confirm: Ken Howery donated exactly $1,000,000 to the Trump Vance Inaugural Committee (C00894162) on December 9, 2024. His Denmark ambassadorship was announced December 22, 2024 -- just 13 days later. Donor address listed as P.O. Box 10796, Chicago IL 60611. This places him among the ~130 seven-figure inaugural donors. The committee raised $245.3M total.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:41:11",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://api.open.fec.gov/v1/schedules/schedule_a/?contributor_name=ken+howery&committee_id=C00894162",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1499,32 +1941,6 @@
       ]
     },
     {
-      "id": 5676,
-      "finding_type": "intelligence",
-      "summary": "Senate hearing transcript (May 8, 2025) reveals Howery's three stated priorities as Denmark ambassador: (1) shared security/NATO burden-sharing across the Kingdom, (2) deeper trade and technology partnerships, (3) Arctic security with focus on Greenland and Pituffik Space Base. On Greenland questions, Howery consistently deflected with prepared talking points about 'self-determination' and 'expanding cooperation.' Would not directly answer whether Trump wants to 'take over' Greenland. Introduced by Sen. Cruz and Sen. Cornyn (both TX). Confirmed 51-47 on Oct 7, 2025 in en bloc vote.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo",
-        "congress_gov"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:42:10",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.foreign.senate.gov/imo/media/doc/8cf9a610-0520-8599-ff3c-3c712e99161e/05%2008%2025%20Nominations%20--%20Orr",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5677,
       "finding_type": "financial",
       "summary": "FEC total political giving pattern (2024): Kenneth Howery made major political contributions including $1M to Trump Vance Inaugural Committee (12/09/2024), multiple Trump 47 Committee contributions ($10K on 10/17, $8.4K+$1.6K on 11/14), NRSC Targeted State Victory ($10K), plus America PAC contributions totaling $9.9K across multiple dates. Father Charles Kenneth Howery also donated $3K to America PAC. The inaugural donation timeline (Dec 9) preceding Denmark nomination (Dec 22) by 13 days creates appearance issue even if not legally problematic, as inaugural donations are unlimited and unregulated.",
@@ -1593,63 +2009,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.documentcloud.org/documents/25971740",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5680,
-      "finding_type": "financial",
-      "summary": "Howery's OGE ethics agreement (April 25, 2025) reveals extensive financial holdings. REQUIRED DIVESTITURES: Palantir (PLTR), Tesla (TSLA), Berkshire Hathaway, Planet Labs (PL), Miruvor LP, Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RETAINED with recusal: SpaceX, Blockchain.com, Bacasable Global, Gemini Space Station/Astronauts Corps, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, plus virtual currencies. CRITICAL: Retains right to 3% interest in future Founders Fund vehicles. Must divest carried interest in any FF fund that makes first capital call during tenure.",
-      "detail": null,
-      "source_datasets": [
-        "state_dept"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:42:49",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "/tmp/osint-5RXDUfzR/ethics-agreement.txt",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.state.gov/howerykenneth-kingdomofdenmark-april2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5681,
-      "finding_type": "document",
-      "summary": "GovInfo records: 247 Congressional Record entries mentioning Kenneth Howery, 112 for 'Howery ambassador Denmark.' Key dates: Nomination received by Senate 03/24/2025. Hearing 05/08/2025. Committee executive report 05/15/2025. Business meeting (committee vote) 09/17/2025. En bloc nomination vote 10/07/2025. Senate confirmation 10/07/2025 (51-47). Senate Resolution 412 authorized en bloc consideration. Also found: DCPD-202500394 (March 25, 2025) - Trump document signing ceremony with ambassadorial nominees.",
-      "detail": null,
-      "source_datasets": [
-        "govinfo"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:42:56",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://api.govinfo.gov/packages/CREC-2025-10-07/granules/CREC-2025-10-07-pt1-PgS6978-2/summary",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1739,31 +2098,6 @@
       ]
     },
     {
-      "id": 5685,
-      "finding_type": "financial",
-      "summary": "Howery donated $1,000,000 to inaugural committee on 2024-12-09, listed as 'KEN HOWERY' from Chicago IL 60611 PO Box 10796 with no employer/occupation listed. This is the single largest donation in the FEC records. Separately donated $125,000 to MAHA Alliance PAC (RFK Jr's Make America Healthy Again movement): $75K on 2024-10-11 and two $25K donations on 2024-10-17. Also donated $150K to Trump 47 Committee via three $50K donations on 2024-10-17. Total 2024 political giving exceeds $1.5M.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:46:23",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions API, committee C00888172 (MAHA Alliance)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5689,
       "finding_type": "relationship",
       "summary": "Napoleon Ta is the key figure behind Founders Fund growth investing. Former professional poker player who funded his education with poker winnings. BS from University of Colorado, MBA from Stanford. Partner at FF focusing on growth investments. Described as 'arguably Founders Fund's most influential investor after Thiel himself.' Maintains extremely low profile -- has repeatedly asked team NOT to submit his returns to Forbes Midas List. Named as Managing Member of GP for both FF IX ($971.6M, 235 investors) and FF Growth III ($4.6B, 270 investors) alongside Peter Thiel and Trae Stephens. Sits on boards of RigUp, The Athletic, and Zenreach.",
@@ -1781,7 +2115,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC Form D filings CIK 1971631 and 2059945; The Generalist profile",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1971631",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1806,7 +2140,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001622212; OGE 278 disclosure; Crunchbase; Fortune 2017-07-26",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1622212",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1832,31 +2166,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC employer search 'Founders Fund', 50 results; FEC donor search 'Kenneth Howery', 50 results",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5692,
-      "finding_type": "relationship",
-      "summary": "Keri Findley is Peter Thiel's money manager, not just a GloriFi board member. She founded Tacora Capital (venture debt) with $250M backing from Thiel. Previously partner at Third Point. In GloriFi, she was appointed to the board in Nov 2021 seed round, then removed by Neugebauer on April 3, 2022. Findley is also advisor to 8VC (Joe Lonsdale's VC firm) and Firework Ventures. Filed separate defamation suit (Findley v. Bredahl, 1:23-cv-00884, S.D.N.Y., terminated 2023-04-14). As of Feb 2026, Findley's new fund is seeking $300M from global family offices. This connects the Thiel family office operation directly to the GloriFi RICO case.",
-      "detail": null,
-      "source_datasets": [
-        "courtlistener"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:47:53",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Bloomberg 2022-12-08; Bloomberg 2026-02-24; CourtListener case 1:23-cv-00884; WFAA reporting",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1939,31 +2248,6 @@
       ]
     },
     {
-      "id": 5696,
-      "finding_type": "location",
-      "summary": "FEC records show one $3,300 donation on 2024-10-11 from NEW YORK NY 10038 at 222 Broadway. 222 Broadway is a large commercial building in lower Manhattan Financial District, historically home to Western Electric/AT&T, currently owned by 222 Broadway Owner LLC. Recent tenants include JPMorgan Chase and formerly WeWork (2013-2024). Being converted to 799 residential apartments by GFP Real Estate. The 10038 zip code corresponds to the Civic Center/Financial District area. Separate $3,300 transfer on same date lists same 222 Broadway address with 'INFORMATION REQUESTED PER BEST EFFORTS' for employer/occupation, suggesting the committee could not verify Howery's employment at that address.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:48:33",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions 2024-10-11; CompStak building data",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5697,
       "finding_type": "financial",
       "summary": "Knightsbridge Property & Lifestyle Management Ltd (UK 08883532) is UK property management company handling Howery's London residence expenses. Founded 2014. SIC 68320/81100. PSC: Andrea Koday-Voros (Hungarian, 75-100%). Address: 4th Floor Portman House, 2 Portman St, London W1H 6DU. Howery is client, not owner.",
@@ -2014,160 +2298,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0002055592",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5699,
-      "finding_type": "financial",
-      "summary": "FF Humbition Inc, FF Slow Inc, FF Longevity Inc are confirmed Founders Fund SPVs. All registered in Delaware with CA foreign registrations at One Letterman Drive Bldg D 5th Floor, SF 94129 (Founders Fund HQ). FF Slow (DE 2015-04-15), FF Humbition (DE 2015-12-11), FF Longevity (DE 2017-05-24). Humbition likely linked to 'humbition' VC fund (est. 2017, NYC, early-stage tech). Portfolio company identities behind SPV names not publicly disclosed.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:48:58",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/5729661",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/5905751",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/6422010",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5700,
-      "finding_type": "financial",
-      "summary": "Lampa Capital LP (SEC CIK 0001755925) confirmed as same entity as Lembas Capital LP. Name changed from Lembas to Lampa between 2018-10-30 and 2022-02-18 per SEC records. Delaware LP at 64 Bleecker St #339, NY 10012. Pooled investment fund under 3(c)(1) exemption. Executive: Lucien Constable (Luke Constable). GP: Lampa Capital GP LLC. Total raised: $13.625M from Form D filings. Phone 650-758-7138 (Bay Area area code).",
-      "detail": null,
-      "source_datasets": [
-        "sec_edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:49:07",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FormDs.com lembas-capital-lp",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001755925",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5701,
-      "finding_type": "financial",
-      "summary": "BTC Wynwood I LLC (DE 6544090, incorporated 2022-01-14) and BTC Wynwood II LLC (DE 6914244, incorporated 2022-07-15) are both Delaware LLCs. Also BC BTC Wynwood I LLC (DE 10386058, 2025-10-30). Miami Wynwood district commercial real estate holdings. Not found in Florida Sunbiz - registered only in Delaware. BTC prefix meaning unclear - not found in any Bitcoin/crypto RE context.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:49:16",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/6544090",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/6914244",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5702,
-      "finding_type": "financial",
-      "summary": "Object Dash LLC (NV E22281242022-9, incorporated 2022-04-07) is a Nevada domestic LLC. Active status. Howery OGE 278 disclosure lists Las Vegas undeveloped land and commercial real estate. No officers visible in public records. No web presence found.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:49:24",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_nv/E22281242022-9",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5703,
-      "finding_type": "financial",
-      "summary": "Howery Hospitality LLC (CA 201615810110, incorporated 2016-05-31) is a California LLC registered at 32972 Pinnacle Dr, Trabuco Canyon, CA 92679 - a residential address in Orange County. Active. No web presence. Purpose unclear but registered address is residential, suggesting possible family connection or personal hospitality venture.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:49:34",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_ca/201615810110",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2055592",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2215,45 +2346,6 @@
       ]
     },
     {
-      "id": 5705,
-      "finding_type": "financial",
-      "summary": "Kitsune Management LLC exists in multiple jurisdictions: Delaware (7281988, 2019-02-13), Florida (L21000371990, 2021-08-19, Tallahassee), Texas (foreign, 0805288395, 2023-10-06, Chicago address 455 N Cityfront Plaza Dr), Michigan (withdrawn), New Mexico (dissolved). The Delaware entity is most likely Howery-connected. FL and TX registrations suggest multi-state real estate operations. Chicago address on TX filing is notable.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 01:49:58",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_de/7281988",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_fl/L21000371990",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OpenCorporates us_tx/0805288395",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 5706,
       "finding_type": "intelligence",
       "summary": "OffshoreAlert search negative results: No matches for Kenneth Howery, Howery, Carpe Diem Holdings, Lembas, Windward One, or Gigafund. Founders Fund returned 2 results but both were about Three Arrows Capital (unrelated crypto fund). Howery has no OffshoreAlert reporting footprint.",
@@ -2272,31 +2364,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "OffshoreAlert API searches 2026-03-05",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6109,
-      "finding_type": "legal",
-      "summary": "Howery ethics agreement (April 25, 2025) complete inventory: DIVEST (90d): Berkshire Hathaway, Palantir, Planet Labs, Tesla, Miruvor LP. DIVEST (120d): Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RECUSAL (retained): SpaceX, Blockchain.com, Bacasable Global, Gemini Astronauts Corps/Space Station, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, all virtual currencies. Retains 3% right in future FF vehicles but must divest if capital call during tenure. CRITICAL: Anduril Industries completely absent from divestiture list AND recusal obligations despite FF being Anduril's largest investor (B, June 2025).",
-      "detail": "Full text analysis from DocumentCloud 25971740. Agreement addressed to Richard C. Visek, Principal Deputy Legal Adviser, State Dept. Howery also retains Gemini Space Station LLC interest (resigned from management Jan 2025). Family Trusts 3/4 resigned; Trust 1 retained as trustee; Trusts 15/16 retained if unfunded. Meta Stable Edge LP and Polychain Fund I LP flagged as heightened risk because still acquiring new holdings. Agreement explicitly notes Denmark companies have heightened conflict potential. No mention of Anduril, Golden Dome, missile defense, or defense technology companies beyond SpaceX.",
-      "source_datasets": [
-        "documentcloud"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 04:25:13",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.documentcloud.org/documents/25971740-howery-kenneth-finalea/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2362,39 +2429,6 @@
       ]
     },
     {
-      "id": 6114,
-      "finding_type": "legal",
-      "summary": "TIMELINE CONFLICT: FF-Anduril $1B investment (June 5, 2025) occurred AFTER Howery's ethics agreement was signed (April 25, 2025) but BEFORE Senate confirmation (Oct 7, 2025). The ethics agreement was drafted before this investment existed. No amendment to the ethics agreement has been publicly filed to address this new $1B exposure. Under Section 1 General Commitments, Howery agreed not to modify the agreement without State Dept and OGE approval. But nothing in the agreement requires him to proactively report new FF investments or seek amendments when FF's portfolio changes.",
-      "detail": null,
-      "source_datasets": [
-        "documentcloud",
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 04:25:43",
-      "target_name": "Kenneth Howery",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://techcrunch.com/2025/06/05/anduril-raises-2-5b-at-30-5b-valuation-led-by-founders-fund/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.documentcloud.org/documents/25971740-howery-kenneth-finalea/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6115,
       "finding_type": "intelligence",
       "summary": "Anduril received initial Golden Dome space-based interceptor prototype contract from Space Force in Nov 2025, one month after Howery's confirmation. Also selected for $151B SHIELD IDIQ (Dec 2, 2025) and second tranche (Dec 18, 2025). Howery's stated priority #3 as ambassador is 'Arctic security with focus on Greenland and Pituffik Space Base.' Pituffik is being upgraded for Golden Dome data throughput with $32M NDAA authorization for runway/landing systems. Howery has no recusal obligation for Anduril-affecting matters despite FF being Anduril's largest investor and Pituffik being a critical Golden Dome node.",
@@ -2420,6 +2454,172 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://warwingsdaily.com/in-greenland-pituffik-centralizes-the-golden-dome-strategic-alert-system/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6928,
+      "finding_type": "relationship",
+      "summary": "Kenneth Howery bridges the Thiel venture network and defense/intelligence apparatus: degree 20 (rank 3), betweenness 0.2569 (rank 3), connecting to Golden Dome and Tulsi Gabbard",
+      "detail": "Structural observation: Howery has the third-highest betweenness centrality (0.2569) in the network, bridging the Thiel venture ecosystem (Thiel, Nosek, Rabois, Singerman, Boyle, Asparouhov, Ta, Constable, Oskoui) to defense programs (Anduril, SpaceX, Palantir, Golden Dome) and government officials (Tulsi Gabbard, JD Vance). With 85 findings, Howery is well-documented but his bridge function between venture capital and Golden Dome specifically warrants attention. His connection to Tulsi Gabbard (DNI) and Golden Dome simultaneously suggests an intelligence-venture interface.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:23:58",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6932,
+      "finding_type": "relationship",
+      "summary": "TEMPORAL PATTERN: Greenland operations cluster Jun-Oct 2025 \u2014 Howery confirmation, GreenMet LOI, PET surveillance, and Greenland Water Bank all converge",
+      "detail": "Timeline analysis reveals a dense Greenland operations cluster: (1) Howery confirmed as Ambassador to Denmark May 8, 2025, (2) GreenMet/Tanbreez strategic partnership April 2025, (3) KoBold Metals exits Disko-Nuussuaq May 2025 returning stake to local entity, (4) PET (Danish intelligence) surveilled 3 Trump-connected Americans in Greenland Aug 2025, (5) Howery summoned by Denmark twice (Aug 27 and Oct), (6) Greenland Water Bank ApS registered at Nuuk address, (7) AmForge/GreenMet 1.5GW AI data center LOI Jan 2026. The PET surveillance finding [6190] is temporally sandwiched between Howery's confirmation and his diplomatic summons \u2014 Danish counterintelligence was actively monitoring the network.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:24:27",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7241,
+      "finding_type": "background",
+      "summary": "Howery confirmed as US Ambassador to Denmark on 2025-10-07 (51-47 vote). Hearing 2025-05-08. Assumed duties 2025-11-05.",
+      "detail": "Kenneth Howery was nominated by Trump on 2024-12-22 to be Ambassador to Denmark (covering Greenland and Faroe Islands). Senate Foreign Relations Committee hearing held 2025-05-08. Committee reported favorably 2025-05-15. Senate confirmed 2025-10-07 in en-bloc vote, 51-47. Howery arrived in Denmark 2025-10-31 and assumed duties 2025-11-05. He previously served as US Ambassador to Sweden (2019-2021, confirmed 62-32 on 2019-09-17). Co-founder of Founders Fund and PayPal. FEC records show he lists employer as 'U.S. DEPARTMENT OF STATE' and occupation as 'AMBASSADOR', donating from Chicago, IL address. He donated $7,000 to Whatley for Senate via WinRed on 2025-11-25.",
+      "source_datasets": [
+        "web_search",
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:03",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov PN54-3, GovInfo CREC-2025-10-07, FEC donor records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7244,
+      "finding_type": "negative_result",
+      "summary": "Howery OGE 278 financial disclosure for Denmark ambassadorship NOT found in public OGE database. No publicly accessible ethics agreement or divestiture record located.",
+      "detail": "Extensive search of OGE public disclosure database (extapps2.oge.gov) returned no results for 'Howery' in any category. The OGE PAS Index database showed zero documents matching the Howery surname. His 2019 Sweden ambassadorship disclosure also could not be located in the public OGE archive (404 error). No publicly available ethics agreement, 278e filing, or divestiture commitment was found for his 2025 Denmark nomination. As a PAS (Presidential Appointment requiring Senate confirmation) nominee, he was required to file OGE Form 278e and negotiate an ethics agreement with the State Department. The absence from the public database does not mean no filing exists - it may be that OGE has not yet published it or it requires a separate FOIA request. Critical question: whether Howery's ethics agreement addresses his Founders Fund carried interest in existing and future funds.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:16",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OGE public disclosure search at extapps2.oge.gov/201/Presiden.nsf returned no results for Howery",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7247,
+      "finding_type": "intelligence",
+      "summary": "FF Growth IV first capital call 2026-03-06 occurred while Howery serves as ambassador. His 3% carry interest status is unresolved in public record.",
+      "detail": "Founders Fund Growth IV's first sale (capital call) occurred on 2026-03-06, per SEC Form D. Howery has been serving as US Ambassador to Denmark since 2025-11-05. The lead alleges he holds a 3% carried interest in FF Growth IV. Form D does not disclose passive carry holders. Howery is not listed as a related person on the filing (Thiel, Ta, Stephens are). TechCrunch reported the fund is approximately $6B with $1.5B from partners. If Howery retains 3% carry on a $6B fund, this represents a significant ongoing financial interest in Founders Fund while serving as a government official. His OGE 278 disclosure and ethics agreement are not publicly available, so it cannot be confirmed whether he pledged to divest this interest. Under 18 USC 208, federal employees must not participate in matters affecting their financial interests. If he retains carry, any ambassadorial action affecting Founders Fund portfolio companies (many in defense/tech) would create a potential conflict.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:29",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 000123191926000265 showing first sale 2026-03-06; TechCrunch 2026-03-09 reporting ~$6B fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7444,
+      "finding_type": "background",
+      "summary": "Ambassador Howery confirmed to Denmark Oct 2025; set Pituffik/Arctic security as top priority",
+      "detail": "Ken Howery, PayPal co-founder and Founders Fund co-founder, confirmed as US Ambassador to Denmark Oct 7, 2025. In confirmation hearing, set three priorities: (1) shared security/NATO burden-sharing, (2) deeper trade/tech ties, (3) Arctic security with specific attention to Greenland and Pituffik Space Base. Previously served as Ambassador to Sweden (2019-2021) under Trump 1.0. Summoned to Danish foreign ministry Dec 2025 after Trump appointed Jeff Landry as special envoy to Greenland. Navigating between Trump Greenland acquisition rhetoric and Danish diplomatic relations.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:27:42",
+      "target_name": "Kenneth Howery",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday confirmation reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios Dec 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "US Embassy Denmark biography",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2650,6 +2850,58 @@
       "evidence": []
     },
     {
+      "id": 3663,
+      "person_a": "Founders Fund",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery co-founded Founders Fund in 2005 with Thiel and Nosek. Not listed on Growth IV Form D (2026) but alleged to retain 3% carried interest",
+      "strength": "strong",
+      "date_range": "2005 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:39",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D 000123191926000265; public reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3793,
+      "person_a": "Kenneth Howery",
+      "person_b": "Pituffik Space Base",
+      "relationship_type": "political",
+      "description": "As Ambassador to Denmark (confirmed Oct 2025), Howery has direct diplomatic portfolio over Pituffik Space Base and Greenland Arctic security. Named Pituffik as explicit priority in confirmation hearing.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:29:15",
+      "profile_id": "tech-right",
+      "other_person": "Pituffik Space Base",
+      "other_person_slug": "pituffik-space-base",
+      "evidence": []
+    },
+    {
+      "id": 3799,
+      "person_a": "Founders Fund",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery is co-founder and former partner of Founders Fund. First institutional investor in SpaceX and Palantir.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:22",
+      "profile_id": null,
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": []
+    },
+    {
       "id": 3040,
       "person_a": "JD Vance",
       "person_b": "Kenneth Howery",
@@ -2819,7 +3071,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC Form D/A for CIK 1755925",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1755925",
           "source_quote": null,
           "source_page": null
         }
@@ -2854,6 +3106,95 @@
       "other_person": "Tulsi Gabbard",
       "other_person_slug": "tulsi-gabbard",
       "evidence": []
+    },
+    {
+      "id": 3498,
+      "person_a": "David Sacks",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "PayPal co-founders (Howery co-founder, Sacks COO). Both Stanford Review editors-in-chief. Both Rockbridge Network members. Shared FEC recipients: Blake Masters, Blake Masters for Senate, Romney Victory, David Perdue. Now: Sacks AI/Crypto Czar, Howery holds FF/Palantir/SpaceX interests.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:19",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": []
+    },
+    {
+      "id": 3502,
+      "person_a": "Kenneth Howery",
+      "person_b": "Michael Kratsios",
+      "relationship_type": "corporate",
+      "description": "Both worked at Thiel-founded Clarium Capital Management LLC. Howery as co-founder, Kratsios as CFO/Chief Compliance Officer. Both later entered government: Howery as Ambassador to Sweden, Kratsios as OSTP CTO then DoD. Clarium served as the Thiel personnel pipeline to government.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:37",
+      "profile_id": "tech-right",
+      "other_person": "Michael Kratsios",
+      "other_person_slug": "michael-kratsios",
+      "evidence": []
+    },
+    {
+      "id": 3534,
+      "person_a": "Founders Fund Growth IV LP",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:11:51",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund Growth IV LP",
+      "other_person_slug": "founders-fund-growth-iv-lp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2112131",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3802,
+      "person_a": "Jeff Landry",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "political",
+      "description": "Trump appointed Landry as special envoy to Greenland Dec 2025. Landry's comments about making Greenland part of US triggered Denmark summoning Howery to foreign ministry.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:44",
+      "profile_id": null,
+      "other_person": "Jeff Landry",
+      "other_person_slug": "jeff-landry",
+      "evidence": []
+    },
+    {
+      "id": 3691,
+      "person_a": "Erebor Bank",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery is Founders Fund co-founder. FF invests in Erebor. Howery's potential carry interest in FF creates indirect financial exposure to Erebor's success.",
+      "strength": "circumstantial",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:47",
+      "profile_id": "tech-right",
+      "other_person": "Erebor Bank",
+      "other_person_slug": "erebor-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Synthesis from findings 7247, 7251",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -2902,7 +3243,224 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2005 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Howery co-founded Founders Fund in 2005 with Thiel and Nosek. Not listed on Growth IV Form D (2026) but alleged to retain 3% carried interest",
+      "other_person": "Founders Fund",
+      "id": 3663
+    },
+    {
+      "date": "2007-04-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Lembas entities are Founders Fund co-investment/carry vehicles with Tolkien naming: Lembas LLC (DE 2007), Lembas II LP (DE #4678059, 2009), Lembas III LP (DE #4863415, 2010, CIK 1503830). SEC Form D for Lembas III confirms Managing Members are Ken Howery, Luke Nosek, Sean Parker, Peter Thiel via FF III Management LLC. Separate Lembas Capital LP (CIK 1755925) is a hedge fund at 64 Bleecker St #339, NYC, managed by Lucien Constable via Lampa Capital LLC/GP, $13.6M raised, 22 investors - this appears to be a distinct vehicle that evolved from the original Lembas structure but is now independently managed.",
+      "confidence": "high",
+      "id": 5654
+    },
+    {
+      "date": "2015-04-15",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FF Humbition Inc, FF Slow Inc, FF Longevity Inc are confirmed Founders Fund SPVs. All registered in Delaware with CA foreign registrations at One Letterman Drive Bldg D 5th Floor, SF 94129 (Founders Fund HQ). FF Slow (DE 2015-04-15), FF Humbition (DE 2015-12-11), FF Longevity (DE 2017-05-24). Humbition likely linked to 'humbition' VC fund (est. 2017, NYC, early-stage tech). Portfolio company identities behind SPV names not publicly disclosed.",
+      "confidence": "medium",
+      "id": 5699
+    },
+    {
+      "date": "2016-05-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Howery Hospitality LLC (CA 201615810110, incorporated 2016-05-31) is a California LLC registered at 32972 Pinnacle Dr, Trabuco Canyon, CA 92679 - a residential address in Orange County. Active. No web presence. Purpose unclear but registered address is residential, suggesting possible family connection or personal hospitality venture.",
+      "confidence": "high",
+      "id": 5703
+    },
+    {
+      "date": "2018-04-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Gigafund 0.2 LP (CIK 1738772, DE #6747952): VC fund raising $100M, $51M sold as of May 2018 with only 4 investors. Managed by Luke Nosek and Stephen Oskoui as Managing Members of the GP of the GP, at 1200 Seaport Blvd, Redwood City CA 94063. Gigafund family has 80+ Delaware entities (0 through 0.28+, plus Gigafund 1 LP). Gigafund 1 LP (CIK 2085918) files SC 13G/Form 3 for Angel Studios Inc. Nosek/Oskoui are the principals. Howery's $250M-500M position in Gigafund 0.2 LP as 1 of only 4 investors means he holds 25%+ of this SpaceX-focused fund.",
+      "confidence": "confirmed",
+      "id": 5653
+    },
+    {
+      "date": "2018-10-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Lampa Capital LP (SEC CIK 0001755925) confirmed as same entity as Lembas Capital LP. Name changed from Lembas to Lampa between 2018-10-30 and 2022-02-18 per SEC records. Delaware LP at 64 Bleecker St #339, NY 10012. Pooled investment fund under 3(c)(1) exemption. Executive: Lucien Constable (Luke Constable). GP: Lampa Capital GP LLC. Total raised: $13.625M from Form D filings. Phone 650-758-7138 (Bay Area area code).",
+      "confidence": "confirmed",
+      "id": 5700
+    },
+    {
+      "date": "2019-02-13",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Kitsune Management LLC exists in multiple jurisdictions: Delaware (7281988, 2019-02-13), Florida (L21000371990, 2021-08-19, Tallahassee), Texas (foreign, 0805288395, 2023-10-06, Chicago address 455 N Cityfront Plaza Dr), Michigan (withdrawn), New Mexico (dissolved). The Delaware entity is most likely Howery-connected. FL and TX registrations suggest multi-state real estate operations. Chicago address on TX filing is notable.",
+      "confidence": "medium",
+      "id": 5705
+    },
+    {
+      "date": "2022-01-14",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BTC Wynwood I LLC (DE 6544090, incorporated 2022-01-14) and BTC Wynwood II LLC (DE 6914244, incorporated 2022-07-15) are both Delaware LLCs. Also BC BTC Wynwood I LLC (DE 10386058, 2025-10-30). Miami Wynwood district commercial real estate holdings. Not found in Florida Sunbiz - registered only in Delaware. BTC prefix meaning unclear - not found in any Bitcoin/crypto RE context.",
+      "confidence": "high",
+      "id": 5701
+    },
+    {
+      "date": "2022-04-07",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Object Dash LLC (NV E22281242022-9, incorporated 2022-04-07) is a Nevada domestic LLC. Active status. Howery OGE 278 disclosure lists Las Vegas undeveloped land and commercial real estate. No officers visible in public records. No web presence found.",
+      "confidence": "high",
+      "id": 5702
+    },
+    {
+      "date": "2023-04-14",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Keri Findley is Peter Thiel's money manager, not just a GloriFi board member. She founded Tacora Capital (venture debt) with $250M backing from Thiel. Previously partner at Third Point. In GloriFi, she was appointed to the board in Nov 2021 seed round, then removed by Neugebauer on April 3, 2022. Findley is also advisor to 8VC (Joe Lonsdale's VC firm) and Firework Ventures. Filed separate defamation suit (Findley v. Bredahl, 1:23-cv-00884, S.D.N.Y., terminated 2023-04-14). As of Feb 2026, Findley's new fund is seeking $300M from global family offices. This connects the Thiel family office operation directly to the GloriFi RICO case.",
+      "confidence": "high",
+      "id": 5692
+    },
+    {
+      "date": "2024-10-11",
+      "type": "finding",
+      "finding_type": "location",
+      "summary": "FEC records show one $3,300 donation on 2024-10-11 from NEW YORK NY 10038 at 222 Broadway. 222 Broadway is a large commercial building in lower Manhattan Financial District, historically home to Western Electric/AT&T, currently owned by 222 Broadway Owner LLC. Recent tenants include JPMorgan Chase and formerly WeWork (2013-2024). Being converted to 799 residential apartments by GFP Real Estate. The 10038 zip code corresponds to the Civic Center/Financial District area. Separate $3,300 transfer on same date lists same 222 Broadway address with 'INFORMATION REQUESTED PER BEST EFFORTS' for employer/occupation, suggesting the committee could not verify Howery's employment at that address.",
+      "confidence": "high",
+      "id": 5696
+    },
+    {
+      "date": "2024-12-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC records confirm: Ken Howery donated exactly $1,000,000 to the Trump Vance Inaugural Committee (C00894162) on December 9, 2024. His Denmark ambassadorship was announced December 22, 2024 -- just 13 days later. Donor address listed as P.O. Box 10796, Chicago IL 60611. This places him among the ~130 seven-figure inaugural donors. The committee raised $245.3M total.",
+      "confidence": "confirmed",
+      "id": 5672
+    },
+    {
+      "date": "2024-12-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Howery donated $1,000,000 to inaugural committee on 2024-12-09, listed as 'KEN HOWERY' from Chicago IL 60611 PO Box 10796 with no employer/occupation listed. This is the single largest donation in the FEC records. Separately donated $125,000 to MAHA Alliance PAC (RFK Jr's Make America Healthy Again movement): $75K on 2024-10-11 and two $25K donations on 2024-10-17. Also donated $150K to Trump 47 Committee via three $50K donations on 2024-10-17. Total 2024 political giving exceeds $1.5M.",
+      "confidence": "confirmed",
+      "id": 5685
+    },
+    {
+      "date": "2024-12-22",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Howery nominated Ambassador to Denmark (not Sweden) on 2024-12-22, confirmed 51-47 by Senate on 2025-10-07 en bloc. Arrived Copenhagen 2025-11-05. Has ethics agreement (6 pages), certificate of divestiture (OGE-2025-279-CDIV), and ethics agreement certification. Previous: Ambassador to Sweden 2019-2021. Consultant to Gemini Space Station LLC 2021-2025. Senate Foreign Relations Committee hearing 2025-05-08.",
+      "confidence": "confirmed",
+      "id": 5624
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Howery is Founders Fund co-founder. FF invests in Erebor. Howery's potential carry interest in FF creates indirect financial exposure to Erebor's success.",
+      "other_person": "Erebor Bank",
+      "id": 3691
+    },
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "GovInfo records: 247 Congressional Record entries mentioning Kenneth Howery, 112 for 'Howery ambassador Denmark.' Key dates: Nomination received by Senate 03/24/2025. Hearing 05/08/2025. Committee executive report 05/15/2025. Business meeting (committee vote) 09/17/2025. En bloc nomination vote 10/07/2025. Senate confirmation 10/07/2025 (51-47). Senate Resolution 412 authorized en bloc consideration. Also found: DCPD-202500394 (March 25, 2025) - Trump document signing ceremony with ambassadorial nominees.",
+      "confidence": "confirmed",
+      "id": 5681
+    },
+    {
+      "date": "2025-04-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Ethics agreement (dated April 25, 2025) requires Howery to divest: Berkshire Hathaway, Palantir (PLTR), Planet Labs (PL), Tesla (TSLA) within 90 days of confirmation; plus Miruvor LP within 90 days and Entrepreneur First Next Stage LP and Valor Equity Partners IV-B LP within 120 days. He retains right to 3% interest in future Founders Fund vehicles but must divest any that make first capital call during tenure.",
+      "confidence": "confirmed",
+      "id": 5669
+    },
+    {
+      "date": "2025-04-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Howery's OGE ethics agreement (April 25, 2025) reveals extensive financial holdings. REQUIRED DIVESTITURES: Palantir (PLTR), Tesla (TSLA), Berkshire Hathaway, Planet Labs (PL), Miruvor LP, Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RETAINED with recusal: SpaceX, Blockchain.com, Bacasable Global, Gemini Space Station/Astronauts Corps, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, plus virtual currencies. CRITICAL: Retains right to 3% interest in future Founders Fund vehicles. Must divest carried interest in any FF fund that makes first capital call during tenure.",
+      "confidence": "confirmed",
+      "id": 5680
+    },
+    {
+      "date": "2025-04-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Howery ethics agreement (April 25, 2025) complete inventory: DIVEST (90d): Berkshire Hathaway, Palantir, Planet Labs, Tesla, Miruvor LP. DIVEST (120d): Entrepreneur First Next Stage LP, Valor Equity Partners IV-B LP. RECUSAL (retained): SpaceX, Blockchain.com, Bacasable Global, Gemini Astronauts Corps/Space Station, Meta Stable Edge LP, Polychain Fund I LP, Initialized III LP, 500 Startups LP, Founders Fund IV Principals Fund LP, all virtual currencies. Retains 3% right in future FF vehicles but must divest if capital call during tenure. CRITICAL: Anduril Industries completely absent from divestiture list AND recusal obligations despite FF being Anduril's largest investor (B, June 2025).",
+      "confidence": "confirmed",
+      "id": 6109
+    },
+    {
+      "date": "2025-05-08",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Howery confirmed as US Ambassador to Denmark (covering Greenland/Faroe Islands) on Oct 7, 2025, by 51-47 Senate vote. Confirmation hearing May 8, 2025 set three priorities: shared security/NATO burden-sharing, deeper trade and tech ties, and Arctic security focused on Greenland and Pituffik Space Base. Second ambassadorship under Trump (previously Sweden 2019-2021). Nominated Dec 22, 2024.",
+      "confidence": "high",
+      "id": 5636
+    },
+    {
+      "date": "2025-05-08",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Senate hearing transcript (May 8, 2025) reveals Howery's three stated priorities as Denmark ambassador: (1) shared security/NATO burden-sharing across the Kingdom, (2) deeper trade and technology partnerships, (3) Arctic security with focus on Greenland and Pituffik Space Base. On Greenland questions, Howery consistently deflected with prepared talking points about 'self-determination' and 'expanding cooperation.' Would not directly answer whether Trump wants to 'take over' Greenland. Introduced by Sen. Cruz and Sen. Cornyn (both TX). Confirmed 51-47 on Oct 7, 2025 in en bloc vote.",
+      "confidence": "confirmed",
+      "id": 5676
+    },
+    {
+      "date": "2025-05-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Peter Thiel and Silicon Valley billionaires (Bezos, Gates, Altman) have invested in AI-driven rare earth mining in Greenland. Thiel backed Praxis ($525M raised) to build 'freedom city' in Greenland via Pronomos Capital. KoBold Metals (Bezos/Gates/Altman) holds 51% stake in Disko-Nuussuaq project hunting copper/nickel/cobalt. Greenland has 25 of 34 EU critical raw materials. Howery co-founded FF with Thiel, was among those promoting 'freedom city' concept, and now serves as ambassador overseeing Greenland.",
+      "confidence": "high",
+      "id": 5660
+    },
+    {
+      "date": "2025-06-05",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "TIMELINE CONFLICT: FF-Anduril $1B investment (June 5, 2025) occurred AFTER Howery's ethics agreement was signed (April 25, 2025) but BEFORE Senate confirmation (Oct 7, 2025). The ethics agreement was drafted before this investment existed. No amendment to the ethics agreement has been publicly filed to address this new $1B exposure. Under Section 1 General Commitments, Howery agreed not to modify the agreement without State Dept and OGE approval. But nothing in the agreement requires him to proactively report new FF investments or seek amendments when FF's portfolio changes.",
+      "confidence": "medium",
+      "id": 6114
+    },
+    {
+      "date": "2025-08-27",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Howery confirmed as ambassador Oct 7, 2025. Summoned by Denmark TWICE: (1) August 27, 2025 \u2014 deputy Mark Stroh summoned over PET-detected covert influence operations by Trump-connected Americans in Greenland; (2) December 22, 2025 \u2014 Howery summoned after Trump named Gov. Jeff Landry as Greenland special envoy whose stated mission was 'to make Greenland part of the US.' In November 2025, Howery denied knowledge of interference. Timeline suggests operations pre-dated his confirmation.",
+      "confidence": "high",
+      "id": 5668
+    },
+    {
+      "date": "2025-10-07",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "No FARA registration found for Kenneth Howery post-ambassadorship. FARA search for 'Howery' returned 0 registrants and 0 foreign principals. FARA search for 'Founders Fund' also returned 0 results. Despite serving as US Ambassador to Denmark (2025-present, confirmed 2025-10-07), there is no indication Howery has registered as a foreign agent or that Founders Fund has any FARA obligations. This is expected for a sitting ambassador but would become significant if Howery leaves the post and engages in any lobbying or advisory work related to Danish/Nordic interests.",
+      "confidence": "medium",
+      "id": 5639
+    },
+    {
+      "date": "2026-01-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Founders Fund complete Delaware corporate structure: 50+ entities across 9 numbered fund families (I-IX), 4 Growth funds (I-IV), Alpha fund, and supporting vehicles. Each fund family follows pattern: [Fund LP + Principals Fund LP + Entrepreneurs Fund LP + Management LLC]. Fund IX (2023) and Growth IV (2026-01-28) are newest. Total DE entities: Fund I-IX (main funds), Growth I-IV, Alpha, plus Lembas II/III, SpaceX Fund, and FF Upper Tier GP LLC. All at One Letterman Drive Building D, 5th Floor, San Francisco CA 94129.",
+      "confidence": "confirmed",
+      "id": 5651
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "HOWERY ETHICS TIMELINE ANALYSIS: Howery's ethics agreement (April 25, 2025) grants him 3% carry right in future FF vehicles, with obligation to divest carried interest in any fund making its first capital call during his tenure. FF Growth III first sale was 2025-03-28 -- BEFORE the ethics agreement date (April 25, 2025) and BEFORE his Oct 7 confirmation. This means Growth III was already calling capital before Howery entered government service, so the divestiture trigger may not apply to Growth III. However, FF Growth IV first sale was 2026-03-06 -- well AFTER Howery's Oct 7 confirmation. If Howery holds 3% carry in Growth IV, the ethics agreement would require divestiture of that specific interest. Growth IV's $6B size means Howery's 3% carry could be worth $180M+ over the fund's life. Neither Growth III nor Growth IV lists Howery as a managing member or related person on their Form D filings.",
+      "confidence": "medium",
+      "id": 7041
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5680,
@@ -3154,462 +3712,5 @@
       "complexity-as-credential",
       "jurisdictional-arbitrage"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Kenneth Howery",
-      "connections": [
-        {
-          "target": "Peter Thiel",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "propublica:howery-kenneth",
-          "description": "Founders Fund co-founders; Howery is Amb. to Denmark holding Founders Fund, Palantir, Neuralink, Tesla"
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders of Founders Fund. Howery holds carried interest in FF Management LLCs I-IV, Alpha Management. Thiel network placed Howery as Ambassador to Denmark."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Howery holds major positions in Musk ecosystem: SpaceX $100M-200M, Tesla $500M-1B, Neuralink $250M-500M. PayPal co-founders. Both part of Thiel network. Howery ambassador to Denmark where Greenland is key Musk/SpaceX interest."
-        },
-        {
-          "target": "Luke Nosek",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "PayPal co-founders, Founders Fund co-founders. Nosek left FF 2017 to start Gigafund (SpaceX-focused). Howery holds promissory notes from Gigafund Management Company LLC and Gigafund 0.2 LP $250M-500M."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": "https://littlesis.org/relationships/1996230",
-          "description": "LittleSis: close friends. PayPal co-founders. Both participated in Rockbridge Network. Howery's Denmark ambassadorship aligns with Musk interests in Arctic resources."
-        },
-        {
-          "target": "Trae Stephens",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "https://littlesis.org/relationships/1231723",
-          "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-        },
-        {
-          "target": "Stephen Oskoui",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC Form D for Gigafund 0.2 LP, OGE 278",
-          "description": "Howery is LP investor in Gigafund 0.2 LP (1 of 4 investors, 250M-500M position) managed by Oskoui and Nosek"
-        },
-        {
-          "target": "Brian Singerman",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC Form D filings for FF III-VIII",
-          "description": "Both Managing Members of FF Management LLCs III-VI (2010-2016); Singerman continues as managing member through Fund VIII"
-        },
-        {
-          "target": "Anduril Industries",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founder of Founders Fund which led Anduril's $2.5B Series G with $1B check (June 2025). Anduril frontrunner for Golden Dome program with Arctic/Greenland components. Howery oversees Greenland as Denmark ambassador."
-        },
-        {
-          "target": "SpaceX",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "FF invested $500M+ in SpaceX. Greenland banned SpaceX Starlink in 2024 for geopolitical reasons, choosing Eutelsat. Howery as ambassador has diplomatic leverage over country that rejected FF portfolio company. SpaceX is Golden Dome frontrunner."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Howery is early personal investor in Palantir. Palantir Gotham is central C2 platform for Golden Dome missile defense. Palantir has billions in federal IC/DoD contracts. Greenland's Pituffik is critical Golden Dome node."
-        },
-        {
-          "target": "Golden Dome",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "As Ambassador to Denmark, oversees Pituffik Space Base (stated priority #3). Pituffik NOC upgrade for Golden Dome data throughput. Primary US diplomatic channel for Greenland infrastructure decisions."
-        },
-        {
-          "target": "JD Vance",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "https://newstracs.com/chart-and-overview-of-key-links-for-jd-vance-with-thiel-mercer-rockbridge/2024/07/29/",
-          "description": "Connected through Rockbridge Network (Vance co-founded with Chris Buskirk in 2019). Howery is a participant/donor. Network serves as Trump-aligned alternative to Koch Network linking Silicon Valley to MAGA politics."
-        },
-        {
-          "target": "Blake Masters",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "https://littlesis.org/relationships/1936350",
-          "description": "Howery donated $5,800 to Blake Masters' Senate campaign (2022). Masters is Thiel's former COO at Thiel Capital, co-author of Zero to One. Connects Howery to Thiel political operation beyond Founders Fund."
-        },
-        {
-          "target": "Keith Rabois",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://littlesis.org/relationships/1944712",
-          "description": "Both Stanford contemporaries (Rabois attended around same time). Rabois was Partner at Founders Fund 2019-2024. Both part of PayPal extended network and Thiel orbit. Rabois also a prominent Trump-supporting tech figure."
-        },
-        {
-          "target": "Sean Parker",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://littlesis.org/relationships/731513",
-          "description": "Parker is Executive General Partner at Founders Fund. Both connected through PayPal network and Silicon Valley political circles."
-        },
-        {
-          "target": "Delian Asparouhov",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://littlesis.org/relationships/1933481",
-          "description": "Asparouhov is Partner at Founders Fund and co-founded Varda Space Industries (space manufacturing). Both in FF orbit. Varda has attracted DoD demand alongside pharmaceutical manufacturing."
-        },
-        {
-          "target": "Katherine Boyle",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://littlesis.org/relationships/2031273",
-          "description": "Both at Founders Fund. Boyle is known for her 'American Dynamism' thesis promoting defense tech investment. Key ideological driver of FF's defense portfolio strategy."
-        },
-        {
-          "target": "Napoleon Ta",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "SEC Form D/A for FF IX",
-          "description": "Both Managing Members of FF IX Management LP (Fund IX, 2023/2025)"
-        },
-        {
-          "target": "Lucien Constable",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "SEC Form D/A for CIK 1755925",
-          "description": "Lembas Capital LP (now Lampa Capital) managed by Constable; evolved from FF Lembas vehicles Howery co-managed"
-        },
-        {
-          "target": "Antonio Gracias",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both connected to Musk/Thiel network. Gracias's Valor portfolio includes Anduril and SpaceX. Gracias served on DOGE. Howery's direct Valor M33 III LP holding claimed but unverified from open sources."
-        },
-        {
-          "target": "Tulsi Gabbard",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Gabbard's DNI collection emphasis message on Greenland complements Howery's ambassador role; both serve as instruments of Greenland acquisition policy"
-        }
-      ],
-      "secondHop": {
-        "Anduril Industries": [
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          },
-          {
-            "target": "Department of Homeland Security",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
-          },
-          {
-            "target": "Operation Epic Fury",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
-          },
-          {
-            "target": "Ryan Wunderly",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
-          }
-        ],
-        "Blake Masters": [
-          {
-            "target": "Peter Thiel",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Masters was COO of Thiel Capital. Thiel funded Masters Senate campaign with .5M+ via FEC. Multiple Thiel Capital employees also donated to Masters campaign."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mentor-protege. Masters co-wrote Zero to One with Thiel. Thiel backed Masters AZ Senate campaign 2022. Previously ran Thiel Foundation."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested $13.5M+ in Masters 2022 AZ Senate race via Saving Arizona PAC. Masters served as Thiel Capital employee and Thiel Foundation president 2014-2022."
-          },
-          {
-            "target": "America First Legal Foundation",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "AFL board director. Peter Thiel protege. Bridges Silicon Valley libertarian tech money (Thiel, Musk) to Miller's immigration enforcement apparatus."
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Golden Dome": [
-          {
-            "target": "SpaceX/Starshield",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Starshield NRO spy constellation provides infrastructure base for Golden Dome custody layer; $2B contract expected for 400-1000 tracking satellites"
-          },
-          {
-            "target": "Donald Trump Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr via 1789 Capital holds investments in SpaceX and Anduril, both frontrunners for $151B+ Golden Dome contracts. Father is president who announced the program."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Michael chairs Missile Defense Executive Board; MDA reports directly to USD(R&E). Controls requirements driving Golden Dome procurement."
-          },
-          {
-            "target": "Donald Trump Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Trump Jr partner at 1789 Capital (2B AUM) holding SpaceX, Anduril, Hadrian -- all Golden Dome contractors"
-          }
-        ],
-        "JD Vance": [
-          {
-            "target": "Peter Thiel",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Mentor-protege since 2011. Thiel hired Vance at Mithril Capital, backed Narya Capital, donated 15M to Senate campaign, engineered VP selection"
-          },
-          {
-            "target": "Zach Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-          },
-          {
-            "target": "True Anomaly",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Vance co-founded Narya Capital which invested in True Anomaly (two rounds). True Anomaly won Golden Dome SBI contract. Vance retained 500K-1M Narya stake."
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Luckey speaker). Luckey also connected via Anduril (Narya Capital invested)."
-          },
-          {
-            "target": "David Sacks",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Sacks speaker). Coordinated conservative donor network."
-          }
-        ],
-        "Keith Rabois": [
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Stanford Review, PayPal Mafia. Both libertarian activists since Stanford. Rabois later at Khosla Ventures, Founders Fund."
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Coordinated FEC donations to same recipients: Yvette Herrell, Take Back The House 2022, WinRed. Both Founders Fund-connected."
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "familial",
-            "strength": 0.7,
-            "description": "Married 2018 (ceremony officiated by Sam Altman); Rabois is MD at Khosla Ventures / ex-Founders Fund GP; many of Helberg's investments tied to these funds"
-          }
-        ],
-        "Luke Nosek": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal co-founder, co-founded Founders Fund with Thiel. Core inner circle."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ],
-        "SpaceX": [
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "SpaceX acquired xAI Feb 2 2026 via all-stock deal at 1.25T combined valuation"
-          },
-          {
-            "target": "xAI",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
-          },
-          {
-            "target": "Honeycomb Partners",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Fiszel offered Epstein SpaceX co-investment in Feb 2017. Company valued at 18B. Fiszel buying 2M (60pct personal) for opt-in private side of Honeycomb. Up to additional 6M co-invest possible. Elon Musk buying 100M personally at 105/share vs investor cost of 118/share."
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield."
-          }
-        ],
-        "Trae Stephens": [
-          {
-            "target": "Anduril Industries LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
-          },
-          {
-            "target": "Founders Fund",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

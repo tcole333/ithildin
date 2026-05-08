@@ -1,0 +1,1808 @@
+{
+  "name": "Serguei Beloussov",
+  "slug": "serguei-beloussov",
+  "aliases": [],
+  "profile_ids": [
+    "dfj-network",
+    "epstein",
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.106692",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 28,
+    "total_connections": 26,
+    "total_entities": 14,
+    "finding_types": {
+      "financial": 4,
+      "relationship": 10,
+      "intelligence": 5,
+      "legal": 2,
+      "communication": 4,
+      "background": 2,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "social": 3,
+      "corporate": 12,
+      "employment": 5,
+      "financial": 3,
+      "familial": 1,
+      "controls": 2
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9002,
+      "finding_type": "financial",
+      "summary": "USASpending: 20 federal contracts to Acronis entities totaling ~262K across FY2008-FY2016, zero spending after Acronis SCS formed",
+      "detail": "USASpending records show 20 federal contract awards to Acronis entities (Acronis Inc and Acronis International GmbH) totaling approximately 262,381 USD across FY2008-FY2016. Agencies included: DoD Army (67,940), DoD Navy (44,894), DoD Education Activity (35,972), VA (64,354), NIH (23,000), Treasury/IRS/OCC/Mint (8,919), DOT Maritime Admin (13,000), EPA (1,820). All contracts were small purchase orders for backup software licenses, maintenance, and True Image Server products. The USASpending timeline shows zero Acronis spending from FY2017 onward -- coinciding with Acronis SCS incorporation (Oct 2016) and SAM registration (March 2019). Acronis SCS has zero direct USASpending awards.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2008-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:38:57",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov awards search for Acronis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov recipient search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov timeline",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8911,
+      "finding_type": "relationship",
+      "summary": "SEC filings confirm Beloussov and Kouzmine are co-officers/directors at Nano-Meta Technologies Inc (CIK 1614332, Purdue spinout, nanotechnology/metamaterials). Primary source confirmation of their business partnership.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2014-07-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:11",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1614332",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9257,
+      "finding_type": "relationship",
+      "summary": "Same Palo Alto attorney Pavel Pogodin (Transpacific Law Group) filed both the Spectralus-to-OOO Spectralus and Nano-Optic Devices-to-OOO Nanooptic Devices patent transfers with USPTO. Coordinated legal management across both Russia-bound pipelines from a single law firm.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2015-09-16",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 21:13:36",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-assignments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9005,
+      "finding_type": "relationship",
+      "summary": "Acronis SCS CEO John Zanni was former Acronis CMO/SVP and former Microsoft GM -- internal promotion, not independent hire",
+      "detail": "John Zanni (b. 1962) became CEO of Acronis SCS upon its 2018/2019 launch. Career path: Microsoft GM Worldwide Hosting and Cloud (1994-2010), Parallels VP (2010-2013), Acronis CMO and SVP Cloud Strategy (2015-2017), then Acronis SCS CEO. This means the person running the supposedly independent US firewall entity came directly from leadership positions at the parent company (Acronis) and its sister company (Parallels, also founded by Beloussov). He was not an outside hire brought in for independent governance -- he was an insider from the Beloussov corporate ecosystem.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:39:24",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GPEC interview",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: John Zanni",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9001,
+      "finding_type": "financial",
+      "summary": "Acronis SCS Inc SAM.gov registration confirms foreign-owned status with US government contract eligibility",
+      "detail": "Acronis SCS Inc (UEI Q87MPM4P1VM3, CAGE 8C8A6) registered in SAM.gov on 2019-03-21 with business type code 20 = Foreign Owned. Delaware incorporation, entity start date 2016-10-17. Physical address: 1225 W Washington St Ste 205, Tempe AZ 85288. Government POC: Vanessa Ogar, Director of Information System Security. Entity vetting source: Ernst and Young. Primary NAICS 513210 (Software Publishers). Registration still active, expires 2026-06-25, last updated 2025-07-01.",
+      "source_datasets": [
+        "sam"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-03-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:38:53",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov awardee record for UEI Q87MPM4P1VM3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov entity registration",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9008,
+      "finding_type": "intelligence",
+      "summary": "Acronis SCS had zero direct federal contract awards in USASpending despite being registered in SAM and holding DoDIN APL certification -- suggests sales through resellers/integrators or classified channels",
+      "detail": "Despite Acronis SCS being registered in SAM.gov since March 2019 (UEI Q87MPM4P1VM3) and holding DoDIN APL, Common Criteria, and FIPS 140-2 certifications, USASpending shows ZERO direct contract awards to Acronis SCS Inc. The pre-2017 contracts were all direct to Acronis Inc or Acronis International GmbH. After Acronis SCS was created as the government-facing entity, the public procurement record goes dark. This suggests one of several possibilities: (1) Sales went through reseller/integrator channels not directly attributed to Acronis SCS, (2) Contract vehicles were structured as subcontracts under larger primes, (3) Some procurement occurred through classified or intelligence community channels not publicly reported, or (4) The transition from direct parent sales to the SCS subsidiary structure changed the procurement approach. The DoDIN APL listing alone would have driven significant DoD purchases, but these do not appear in USASpending.",
+      "source_datasets": [
+        "usaspending",
+        "sam",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-03-21",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:39:54",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov zero contracts for UEI Q87MPM4P1VM3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov active registration",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending zero results for Acronis SCS",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9004,
+      "finding_type": "relationship",
+      "summary": "Acronis SCS board of directors includes Tom Ridge (first DHS Secretary), Judge Eugene Sullivan (former AF General Counsel/NRO General Counsel), Peter Cleveland (Intel VP Global Government Affairs)",
+      "detail": "Acronis SCS announced three board members in August 2019: (1) Tom Ridge - first US Secretary of Homeland Security, former PA Governor; (2) Eugene R. Sullivan - Vietnam veteran, former General Counsel of US Air Force, former General Counsel of National Reconnaissance Office, retired federal judge; (3) Peter Cleveland - Intel VP of Law and Public Policy, former Chief of Staff to Senator Dianne Feinstein, former Deputy General Counsel of Intel Corporation. This board composition was clearly designed to provide the political credibility needed to sell a foreign-owned cybersecurity product into the most sensitive US defense environments. The NRO and DHS connections are particularly notable given the subsequent FASCSA exclusion affecting Intelligence Community systems.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-08-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-01 22:39:15",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire announcement August 2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "acronisscs.com/leadership/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9003,
+      "finding_type": "intelligence",
+      "summary": "Acronis SCS achieved DoDIN APL, Common Criteria, and FIPS 140-2 certifications for Hardened Backup -- only full-disk backup solution on APL, deployed to air-gapped DoD systems",
+      "detail": "Acronis SCS Cyber Backup 12.5 Hardened Edition earned: DoDIN APL certification (April 2020), Common Criteria certification (August 2020), FIPS 140-2 validation (December 2020). It was the ONLY full-disk image backup and disaster recovery point solution on the DoDIN APL. Designed specifically for air-gapped no-internet environments: DoD weapons testing sites, development labs, training simulators, deployed tactical elements and warfighters, public utility SCADA systems. Also completed CMMC 2.0 Level 1 self-attestation. This means Acronis software -- from a company now excluded by DNI on classified grounds -- was the certified backup solution running on some of the most sensitive US military systems.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-04-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:39:08",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire Common Criteria announcement (August 2020)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire DoDIN APL certification announcement (April 2020)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire FIPS 140-2 announcement (December 2020)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8919,
+      "finding_type": "legal",
+      "summary": "Runa Capital is defendant in active NGINX copyright case: Lynwood Investments CY (Cyprus) v Konovalov/Runa Capital/F5 (N.D. Cal. 3:20-cv-03778). 9th Circuit appeal 22-16399 still open. Names NGINX BVI and DE entities.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-06-08",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:51",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL-3-20-cv-03778",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8916,
+      "finding_type": "relationship",
+      "summary": "Katya Fisher (CIK 1748363) bridges Beloussov empire: Runa Capital Investment Director (2019-21), SIT Holding AG Exec Vice Chairman (2021+), Global Blockchain SPAC board. Disclosed as Counsel to Beloussov and affiliates.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-05-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:40:11",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1894951",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9007,
+      "finding_type": "intelligence",
+      "summary": "FASCSA order effective date July 11, 2025 but not published until September 15, 2025 -- two-month classified delay before public posting to SAM.gov",
+      "detail": "The DNI FASCSA exclusion order against Acronis AG went into effect on July 11, 2025, but was not published on SAM.gov until September 15, 2025 -- a gap of approximately 66 days. This delay suggests the order was initially classified or restricted, and agencies were notified through non-public channels before the public posting. The order itself provides no findings or rationale, which multiple law firms noted underscores the classified nature of the underlying intelligence. GSA removed Acronis from GSA Advantage on September 18, 2025 (three days after publication). Acronis SCS is not accepting new contracts. The order is indefinite.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-11",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:39:43",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crowell and Moring alert",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Mayer Brown client alert (Oct 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PilieroMazza analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wilson Sonsini alert",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9006,
+      "finding_type": "legal",
+      "summary": "OpenSanctions confirms Acronis AG exclusion from SAM.gov (debarment) first seen 2025-09-17, address Rheinweg 9 Schaffhausen, CAGE SCLS4, UEI YX9GLSWJ2L34",
+      "detail": "OpenSanctions dataset us_sam_exclusions shows Acronis AG (Switzerland) with debarment topic. First seen 2025-09-17, last seen 2026-02-13. Created at 2025-09-15. CAGE code SCLS4, UEI YX9GLSWJ2L34. Address: Rheinweg 9, 8200 Schaffhausen, Switzerland. This is the parent company of Acronis SCS. The FASCSA order explicitly covers all subordinate, subsidiary, or affiliated organizations, meaning Acronis SCS falls within its scope despite being structured as an independent US entity.",
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-09-15",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-01 22:39:33",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9258,
+      "finding_type": "financial",
+      "summary": "100% of patents transferred to Russian/Cyprus receiving entities (23 total: 7 OOO Spectralus, 9 OOO Nanooptic, 7 ASB International) expired for non-payment of maintenance fees. By contrast, Innolume GmbH (Germany, same S-Group portfolio) maintained 15/17 patents. Receiving entities appear to be non-operational shells that never intended to commercialize \u2014 value was in the transfer itself, not patent protection.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-02",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 21:13:36",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USPTO-assignments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4258,
+      "finding_type": "communication",
+      "summary": "Beloussov had extensive direct email communications with Epstein from Jan-Mar 2018. Introduced by Drokova on Jan 12 2018. Had phone call with Epstein Jan 17 2018. Discussed quantum computing, bio computing, algebraic topology, and Marvin Minsky. Beloussov's assistant Eugenia Goryacheva coordinated scheduling. Beloussov attempted to arrange in-person meeting in NYC for Mar 7 2018. Described as 'Masha's friend' in scheduling emails. Also known as Serg Bell, founder of Acronis, Singapore-based, founder of Constructor Group which owns Constructor University.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:30:18",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02536866",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02537886",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02537547",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02524528",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02234335",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8968,
+      "finding_type": "communication",
+      "summary": "Beloussov publicly denied ever meeting Epstein; corpus emails prove otherwise",
+      "detail": "In Feb 2026, Serg Bell told the Washington Post he never met or done business with Epstein and spoke to him only once by phone, at the request of Harvard officials. However, the EFTA corpus contains at minimum 7 direct email exchanges between Beloussov and Epstein from Jan-Mar 2018, including substantive intellectual discussions about Minsky, quantum computing, algebraic topology, and bio computing. Multiple scheduling attempts for in-person meetings in NYC and at Acronis Burlington office. Beloussovs assistant Eugenia Goryacheva coordinated with Lesley Groff. EFTA00285556 (Epsteins March 2018 calendar) shows Beloussov scheduled for March 7 meeting in NY.",
+      "source_datasets": [
+        "lmsband",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-04-01 21:25:16",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00285556",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00467549",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00470210",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00907387",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00908795",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8969,
+      "finding_type": "intelligence",
+      "summary": "FBI WFO Transnational Organized Crime squad identified Beloussov-Kouzmine-QWave as part of blackmail and intelligence network",
+      "detail": "FBI record email EFTA00129096 from WFO Squad CR05 (Transnational Organized Crime - Eastern Hemisphere Matters), dated April 3, 2025, identifies: Drokova as publicist for QWave Capital and Runa Capital, both headed by Beloussov; Kouzmine as Beloussovs QWave co-founder who co-founded Fintech Ventures and Ritzio Entertainment with oligarch Oleg Boyko; Frank Moyle Creer funneled money into quantum computing research through QWave Capital to gain access to politicians and decision-makers susceptible to his blackmail operations; Creer and Jurvetson through DFJ Capital were both investors with Beloussovs Runa Capital in QWave Capital.",
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:25:27",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8971,
+      "finding_type": "relationship",
+      "summary": "Beloussov co-founded Russian Quantum Center, now US-sanctioned for acting on behalf of Russian government",
+      "detail": "Beloussov co-founded the Russian Quantum Center (formally International Center for Quantum Optics and Quantum Technologies LLC) with Mikhail Lukin (Harvard) and served as Chairman of Board of Trustees. The RQC was added to the SDN list in 2022 for acting on behalf of the Russian government. Putins special envoy Dmitry Peskov said in 2019 that Beloussov had done great things for Russia and could now help it from abroad. Beloussov was already under scrutiny from US and Swiss intelligence over concerns he remained on good terms with the Kremlin and used investments to acquire sensitive technology secrets.",
+      "source_datasets": [
+        "opensanctions",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:25:51",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:NK",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022-12-19",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8974,
+      "finding_type": "background",
+      "summary": "Beloussov acquired Jacobs University Bremen through SIT, creating Constructor University - institutional platform under his control",
+      "detail": "SIT (Schaffhausen Institute of Technology), founded by Beloussov in 2019, acquired 66.68 percent majority stake in Jacobs University Bremen in Sept 2021. University renamed Constructor University in Nov 2022. Bremen city provided 99-year heritable leasehold on campus. SIT also has entities in 10+ countries. Katya Fisher serves as Executive Vice Chairman and CLO across the Constructor Group (Constructor Technology, Constructor Knowledge, Constructor Capital). Fisher also serves as director of GBBK SPAC (NASDAQ, delisted Apr 2025 after share redemptions) and was investment director at Runa Capital. This gives Beloussov control over an academic institution, a SPAC vehicle, and VC fund through interconnected leadership.",
+      "source_datasets": [
+        "web_search",
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:26:30",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Constructor University website",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GBBK SPAC Research",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8975,
+      "finding_type": "background",
+      "summary": "Beloussov email to Epstein reveals he studied algebraic topology with Fomenko and Novikov at Moscow State University",
+      "detail": "In EFTA00908795 (Jan 19, 2018), Beloussov tells Epstein: Studied algebraic topology much 27 years ago for 1.5 years with Fomenko and Novikov. Anatoly Fomenko is a Moscow State University professor and Russian Academy of Sciences member known for New Chronology pseudohistory. Sergei Novikov is a Fields Medal winner. This places Beloussov studying at MSU around 1990-1991, consistent with his MIPT background. The mention of Fomenko is significant as Fomenko is a controversial figure whose pseudoscientific history has been appropriated by Russian nationalist movements.",
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:26:38",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00908795",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8977,
+      "finding_type": "communication",
+      "summary": "Drokova introduced Beloussov to Epstein specifically as Mikhail Lukins classmate/friend/sponsor - connecting quantum computing funding to Epsteins Harvard access",
+      "detail": "In EFTA00913187 and EFTA00913223, Drokova tells Epstein about Beloussov: It is the one whos Lukin classmate/friend/sponsor. Mikhail Lukin is a Harvard professor and leading quantum computing researcher who co-founded the Russian Quantum Center with Beloussov. This introduction was not casual - it specifically positioned Beloussov as the funding source behind a Harvard quantum computing researcher Epstein wanted access to. FBI memo EFTA00129096 notes how Epstein previously funneled money into research at MIT to gain access to politicians and decision-makers. The Beloussov-Lukin-Epstein connection mirrors this pattern: use funding of cutting-edge research as a door-opening mechanism.",
+      "source_datasets": [
+        "lmsband"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:01",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00913187",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00913223",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9029,
+      "finding_type": "relationship",
+      "summary": "Beloussov (Acronis founder) co-founded QWave Capital in 2012 with Serguei Kouzmine (Tambovskaya mafia leader) and Zubarev. Fund offices in Moscow, Boston, NYC. Focus: quantum technology startups. Beloussov also instrumental in Russian Quantum Center, which was added to OFAC SDN sanctions list Sept 15, 2022. Washington Post Dec 2022: Beloussov drew scrutiny from US and Swiss intelligence for remaining on good terms with Kremlin and using investments to acquire sensitive technology secrets.",
+      "detail": "QWave Capital targeted 100M fund size per TechCrunch 2012. Russian Quantum Center sanctioned as International Center for Quantum Optics and Quantum Technologies LLC. Timeline: Beloussov founds Acronis products that penetrate DoD/IC networks, simultaneously co-investing with alleged organized crime figure in quantum tech with Moscow presence, while Russian quantum entity he co-founded gets sanctioned.",
+      "source_datasets": [
+        "web_search",
+        "opensanctions"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-04-01 22:48:53",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OFAC SDN listing Sept 15 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch Dec 2012 QWave article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post Dec 2022 intelligence probe article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Serg Bell article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9122,
+      "finding_type": "intelligence",
+      "summary": "Paradise Papers: shareholder Runa Capital (Cayman), director Cloud Linux (BVI) via Appleby",
+      "detail": "Beloussov appears in Paradise Papers (Appleby) as shareholder of Runa Capital (Cayman, 2010) and Runa Capital Fund I L.P. (Cayman, 2010, 51 shareholders), and director of Cloud Linux Ltd (BVI, 2009-2011). UK Companies House confirms Beloussov=Bell via same officer ID f0auIj9uO6cKanw0P6OeQ32iCOk at Acronis Ltd 06006404.",
+      "source_datasets": [
+        "icij_offshore_leaks"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:49:46",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "dfj-network",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://offshoreleaks.icij.org/nodes/80034924",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UKCH:06006404",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9276,
+      "finding_type": "communication",
+      "summary": "Serguei Beloussov (QWave Capital co-founder, Runa Capital) had extensive email correspondence with Jeffrey Epstein in January-March 2018. On January 12, 2018, Masha Drokova introduced them writing: 'You both are one of the most intelligent and fun people I met in my life.' Multiple calls scheduled via Lesley Groff (Epstein assistant). Beloussov referred to Epstein as 'Jeffrey' from first email; discussed quantum computing, Marvin Minsky, bio-computing and algebraic topology. An in-person NYC meeting was scheduled for March 7, 2018. Beloussov's assistant Eugenia Goryacheva coordinated logistics. This establishes Beloussov had a personal relationship with Epstein facilitated by Drokova, who the FBI memo connects to Creer via QWave Capital.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 22:41:49",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02524528",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02536826",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02537547",
+          "source_quote": "Jeffrey, Serguei, Connecting you here. You both are one of the most intelligent and fun people I met in my life. Super smart and special. You should connect and stay in touch. You both share interest in quantum technology. \u2014 Masha",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02639794",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9796,
+      "finding_type": "relationship",
+      "summary": "Beloussov corporate network spans 6+ jurisdictions: US (SWsoft, nScaled, Parallels), Cyprus (Dreamcroft, Standard and Western Holdings), Germany (Acronis, Parallels), Panama (Corson Enterprises), UK (nScaled), Singapore (personal address)",
+      "detail": "OpenCorporates shows Serguei Beloussov (DOB: 1971-02-08 per German records, or 1971-08 per UK records; nationality listed as Singaporean) as officer of: SWsoft Inc (us_ca/2373055, CEO), SWsoft Consulting Division Inc (us_ca/1896140, CEO/agent/director), SWsoft Inc (us_tx/0013588206, agent), Parallels Software Inc (us_wa/602869924, governor), Parallels GmbH (de/M1103_HRB9640, geschaeftsfuehrer to 2007), Acronis Germany GmbH (de/D2601V_HRB161369, geschaeftsfuehrer from 2015, prokurist 2013-2015), nScaled Inc (us_ca/3110257, CEO), nScaled Limited (gb/07591925, director from 2015), Dreamcroft Limited (cy/HE189243, director), Standard and Western Holdings Cyprus Limited (cy/HE82550, director), Corson Enterprises Inc (pa/265699, presidente/tesorero/director), and Integrated Health Partners Limited (gb/06107341, director 2020). Personal address: 68 Bayshore Road #30-05 Costa Del Sol, Singapore 469986. Does NOT appear as officer of any Runa Capital entity directly.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:59:00",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates officer search: Beloussov (33 results, filtered to Serguei)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9813,
+      "finding_type": "relationship",
+      "summary": "LittleSis: Beloussov (as Serg Bell) confirmed as founding partner of Runa Capital; only 2 relationships mapped",
+      "detail": "LittleSis entity 439095 (Serg Bell) has aliases: Serg Bell, Sergey Mikhaylovich Belousov, Serguei Beloussov. Listed as founding partner of Runa Capital (relationship 1937150). Also connected to Varvara Russkova Corcos (GVA Capital). LittleSis profile is sparse \u2014 only 2 direct relationships. No connections to Acronis, Parallels, NGINX, or F5 Networks in the database. Acronis, Parallels, and NGINX do not exist as entities in LittleSis.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:24:52",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 439095 (Serg Bell); relationship 1937150 (founding partner at Runa Capital); relationship 2017597 (Varvara Russkova Corcos position)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9817,
+      "finding_type": "relationship",
+      "summary": "LittleSis: Beloussov connected to GVA Capital via Varvara Russkova Corcos; GVA owned by Suleyman Kerimov and Pavel Cherkashin",
+      "detail": "Varvara Russkova Corcos (LittleSis entity 455503) has a position at both Serg Bell (Beloussov, entity 439095) and GVA Capital (entity 438880). GVA Capital is owned by Suleyman Kerimov (entity 76905, sanctioned Russian oligarch) and Pavel Cherkashin (entity 437970) and Magomed Musaev (entity 437969). Corcos is married to Sam Corcos (entity 455502). This provides a second network vector from Beloussov to sanctioned Russian wealth through GVA Capital.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:27:30",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis: relationship 2017597 (Corcos-Bell); relationship 2017596 (Corcos-GVA); GVA ownership by Kerimov (entity 76905), Cherkashin (entity 437970), Musaev (entity 437969)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9823,
+      "finding_type": "negative_result",
+      "summary": "Serguei Beloussov has 17 officer positions globally at SWSoft/Parallels/Acronis entities but NO positions at any NGINX corporate entity. His connection to NGINX is through Runa Capital investment, not direct corporate control.",
+      "detail": "OpenCorporates officer search found Beloussov at: SWSoft Consulting Division Inc (CA), SWSoft Inc (TX/CA), Acronis Germany GmbH (DE), Parallels Software Inc (WA), Parallels GmbH (DE), nScaled Inc/Ltd (CA/UK), Dreamcroft Limited (CY HE189243), Standard and Western Holdings Cyprus (HE82550), Integrated Health Partners Limited (UK), Corson Enterprises Inc (PA). DOB listed as 1971-02-08 on German filings but 1971-08 on UK filings (discrepancy). Nationality: Singaporean. No NGINX entity officer positions found despite being key investor via Runa Capital Series A (~2013).",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:30:35",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:officer_search/Serguei_Beloussov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9873,
+      "finding_type": "financial",
+      "summary": "Beloussov connected to 5+ offshore entities across Paradise Papers and Offshore Leaks: Runa Capital, Runa Fund I, Cloud Linux Ltd (BVI), plus Higgins Investments, Walenside, HAMUNTS through intermediary Dr. Valera Beloussov",
+      "detail": "Serguei Beloussov (ICIJ node 80034924, Singapore) appears in Paradise Papers - Appleby with 3 direct connections: (1) Shareholder of Runa Capital (Cayman, 20-APR-2010); (2) Shareholder of Runa Capital Fund I L.P. (Cayman, 02-AUG-2010); (3) Director of Cloud Linux Ltd (BVI, 06-OCT-2009, resigned 10-JAN-2011). Address: 10 Anson Road #20-26, International Plaza, 079903, Singapore. Additionally, a potentially related person 'Dr. Valera Beloussov' appears in the Offshore Leaks dataset as an Intermediary (node 297814) connected to: (a) Dr. Valera Beloussov entity (node 196162); (b) Higgins Investments Ltd; (c) Walenside Limited; (d) HAMUNTS LIMITED. These entities share the same registered address and involve officers like Cornhill Registrars, EFG Trust Company, EFG Corporate Services. Dreamcroft Limited and Standard and Western Holdings (Cyprus entities linked to Beloussov) do NOT appear in ICIJ database.",
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:15:43",
+      "target_name": "Serguei Beloussov",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:196162",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:297814",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:80034924",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:82014260",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2557,
+      "person_a": "Masha Drokova",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "social",
+      "description": "Drokova introduced Beloussov to Epstein Jan 12 2018, calling both 'most intelligent and fun people I met.' FBI memo identifies her as QWAVE Capital publicist. Beloussov described as 'Masha's friend' in scheduling emails.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:31:07",
+      "profile_id": "epstein",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02536866",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2562,
+      "person_a": "Serguei Beloussov",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "corporate",
+      "description": "Co-founded QWAVE Capital in December 2012. Kouzmine Managing Partner, Beloussov Venture Partner. Kouzmine later President of Beloussov's Constructor University (2025).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:31:14",
+      "profile_id": "epstein",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2563,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "social",
+      "description": "Direct email correspondence Jan-Mar 2018. Introduced by Drokova. Discussed quantum computing, bio computing, Marvin Minsky. Phone call Jan 17 2018. Planned NYC meeting Mar 7 2018.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:31:14",
+      "profile_id": "epstein",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02536866",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02537886",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02524528",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4661,
+      "person_a": "Masha Drokova",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Drokova was publicist for QWave Capital and Runa Capital (Beloussov firms)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:21",
+      "profile_id": "epstein",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00467667",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4665,
+      "person_a": "Serguei Beloussov",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "corporate",
+      "description": "Co-directors at Nano-Meta Technologies Inc (Purdue spinout). Also co-founders of QWave Capital.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1614332",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4667,
+      "person_a": "Katya Fisher",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "employment",
+      "description": "Runa Capital Investment Director 2019-21. SIT Holding AG Exec VP 2021+. Disclosed Counsel to Beloussov and affiliates.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Katya Fisher",
+      "other_person_slug": "katya-fisher",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1894951",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4676,
+      "person_a": "Ilya Zubarev",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "employment",
+      "description": "Zubarev officer at both Acronis AG and Runa Capital investment committee. Dual role bridging operating company and VC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Ilya Zubarev",
+      "other_person_slug": "ilya-zubarev",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1620187",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4677,
+      "person_a": "Dmitry Chikhachev",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Chikhachev is Runa Capital Managing Partner (Moscow). Co-director with Beloussov at Runa Capital III Holdings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Dmitry Chikhachev",
+      "other_person_slug": "dmitry-chikhachev",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1760090",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4678,
+      "person_a": "Andrey Bliznyuk",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Bliznyuk is Runa Capital Partner (Palo Alto, 459 Hamilton Ave \u2014 2 miles from DFJ Sand Hill Rd). Co-director at Runa Capital III Holdings.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:20",
+      "profile_id": "dfj-network",
+      "other_person": "Andrey Bliznyuk",
+      "other_person_slug": "andrey-bliznyuk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-CIK-1760090",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4684,
+      "person_a": "Masha Drokova",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "employment",
+      "description": "Drokova was publicist for Beloussov entities QWave Capital and Runa Capital; introduced Beloussov to Epstein Jan 2018 as ex-boss and Lukin classmate/friend/sponsor",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:25:44",
+      "profile_id": "dfj-network",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00467609",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00913223",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4691,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "social",
+      "description": "Direct email correspondence Jan-Mar 2018, introduced by Masha Drokova. Discussed quantum computing, Minsky, algebraic topology, bio computing. Multiple scheduling attempts for in-person meetings. Beloussov appeared in Epstein March 2018 calendar.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "profile_id": "dfj-network",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    },
+    {
+      "id": 4693,
+      "person_a": "Mikhail Lukin",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Co-founded Russian Quantum Center. Beloussov was Chairman of Board of Trustees. Lukin is Harvard quantum computing professor. Drokova described Beloussov to Epstein as Lukins classmate/friend/sponsor.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "profile_id": "dfj-network",
+      "other_person": "Mikhail Lukin",
+      "other_person_slug": "mikhail-lukin",
+      "evidence": []
+    },
+    {
+      "id": 4695,
+      "person_a": "Ilya Zubarev",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "MIPT university classmates. Co-founded Acronis, Parallels, and Runa Capital together.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "profile_id": "dfj-network",
+      "other_person": "Ilya Zubarev",
+      "other_person_slug": "ilya-zubarev",
+      "evidence": []
+    },
+    {
+      "id": 4696,
+      "person_a": "Katya Fisher",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Fisher is EVP and CLO of Constructor Group (Beloussov umbrella), was investment director at Runa Capital, and director of GBBK SPAC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "profile_id": "dfj-network",
+      "other_person": "Katya Fisher",
+      "other_person_slug": "katya-fisher",
+      "evidence": []
+    },
+    {
+      "id": 4700,
+      "person_a": "Frank Moyle Creer",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "financial",
+      "description": "Creer and Jurvetson through DFJ Capital were investors with Beloussovs Runa Capital in QWave Capital. Per FBI memo EFTA00129096, Creer funneled money into quantum computing research through QWave to gain access to politicians and decision-makers.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:53",
+      "profile_id": "dfj-network",
+      "other_person": "Frank Moyle Creer",
+      "other_person_slug": "frank-moyle-creer",
+      "evidence": []
+    },
+    {
+      "id": 4703,
+      "person_a": "Frank Creer",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Creer was Managing Director of QWave Capital, co-founded by Beloussov. Both invested in quantum technology companies.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:35:35",
+      "profile_id": "dfj-network",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": []
+    },
+    {
+      "id": 4709,
+      "person_a": "Oznur Bell",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "familial",
+      "description": "Married. Oznur Bell (n\u00e9e Beloussova) is Beloussov's wife. She serves as board chair of Constructor University, which Beloussov controls.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:12:14",
+      "profile_id": "dfj-network",
+      "other_person": "Oznur Bell",
+      "other_person_slug": "oznur-bell",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Constructor University disclosures",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Public records",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4720,
+      "person_a": "Acronis SCS Inc",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "controls",
+      "description": "Beloussov is founder of Acronis AG which owns Acronis SCS. SCS CEO John Zanni is former Acronis CMO/SVP. SCS registered as Foreign Owned. Board includes no Beloussov associates directly but company is structurally controlled through parent.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:40:24",
+      "profile_id": "dfj-network",
+      "other_person": "Acronis SCS Inc",
+      "other_person_slug": "acronis-scs-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov Foreign Owned registration",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Zanni career at Acronis/Parallels",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4721,
+      "person_a": "John Zanni",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "employment",
+      "description": "Zanni worked at Beloussov companies Acronis (CMO/SVP 2015-2017) and Parallels (VP 2010-2013) before becoming CEO of Beloussov subsidiary Acronis SCS",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:40:26",
+      "profile_id": "dfj-network",
+      "other_person": "John Zanni",
+      "other_person_slug": "john-zanni",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4723,
+      "person_a": "Acronis AG",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "controls",
+      "description": "Beloussov founded Acronis, served as CEO until EQT acquisition, now Chief Research Officer with significant equity stake",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:49:32",
+      "profile_id": "dfj-network",
+      "other_person": "Acronis AG",
+      "other_person_slug": "acronis-ag",
+      "evidence": []
+    },
+    {
+      "id": 4726,
+      "person_a": "Serguei Beloussov",
+      "person_b": "Serguei Kouzmine",
+      "relationship_type": "financial",
+      "description": "Co-founded QWave Capital in 2012 with offices in Moscow, Boston, NYC. M quantum technology VC fund.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 22:49:45",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Kouzmine",
+      "other_person_slug": "serguei-kouzmine",
+      "evidence": []
+    },
+    {
+      "id": 4739,
+      "person_a": "Masha Drokova",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "employment",
+      "description": "Drokova was publicist for Beloussov's QWave Capital and Runa Capital. She later introduced him to Epstein (Jan 2018). Beloussov reportedly became Day One Ventures LP.",
+      "strength": "strong",
+      "date_range": "2015 to 2018",
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:16:08",
+      "profile_id": "epstein",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": []
+    },
+    {
+      "id": 5094,
+      "person_a": "Runa Capital",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Founding partner of Runa Capital, confirmed via LittleSis and OpenCorporates. No positions at any NGINX entity despite 17 officer positions globally at SWSoft/Parallels/Acronis entities.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:37:57",
+      "profile_id": "nginx",
+      "other_person": "Runa Capital",
+      "other_person_slug": "runa-capital",
+      "evidence": []
+    },
+    {
+      "id": 5104,
+      "person_a": "Cloud Linux Ltd",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "corporate",
+      "description": "Director of Cloud Linux Ltd BVI (Paradise Papers, 06-OCT-2009 to 10-JAN-2011, resigned)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:16:41",
+      "profile_id": "nginx",
+      "other_person": "Cloud Linux Ltd",
+      "other_person_slug": "cloud-linux-ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:82014260",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5123,
+      "person_a": "Serguei Beloussov",
+      "person_b": "Suleyman Kerimov",
+      "relationship_type": "corporate",
+      "description": "Indirect connection via shared intermediary Varvara Russkova Corcos, who has positions at both Serg Bell (Beloussov, Runa Capital co-founder) and GVA Capital (Kerimov co-owner). Beloussov is a Runa Capital co-founder who invested in NGINX Inc Series A; Kerimov is a Putin ally and Russian Security Council member. The intermediary creates a documented 2-hop bridge between the nginx investor network and the Kremlin inner circle.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Suleyman Kerimov",
+      "other_person_slug": "suleyman-kerimov",
+      "evidence": []
+    },
+    {
+      "id": 4855,
+      "person_a": "Frank Creer",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "financial",
+      "description": "FBI memo states Creer invested in QWave Capital, quantum fund co-founded by Beloussov (Serg Bell), Kouzmine, and Zubarev. Connection through which Creer enters Epstein-adjacent network per FBI.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:14:01",
+      "profile_id": "epstein",
+      "other_person": "Frank Creer",
+      "other_person_slug": "frank-creer",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theiceman.substack.com/p/from-putins-kiss-to-epsteins-blackmail",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "officer",
+      "date_start": "2010",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2665,
+      "entity_name": "Acronis AG",
+      "entity_type": "corporation",
+      "jurisdiction": "ch",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": "2014",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2669,
+      "entity_name": "Nano-Meta Technologies Inc",
+      "entity_type": "corporation",
+      "jurisdiction": "us_il",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "director",
+      "date_start": "2018",
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2666,
+      "entity_name": "Runa Capital III Holdings",
+      "entity_type": "investment_fund",
+      "jurisdiction": "ky",
+      "entity_status": "active"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA00129096",
+      "entity_id": 2641,
+      "entity_name": "QWave Capital",
+      "entity_type": "investment_fund",
+      "jurisdiction": "unknown",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA00129096",
+      "entity_id": 2642,
+      "entity_name": "Runa Capital",
+      "entity_type": "investment_fund",
+      "jurisdiction": "unknown",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "sec_edgar",
+      "entity_id": 2670,
+      "entity_name": "Schaffhausen Institute of Technology Holding AG",
+      "entity_type": "corporation",
+      "jurisdiction": "ch",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC filings / corporate history",
+      "entity_id": 2706,
+      "entity_name": "Parallels Inc",
+      "entity_type": "corporation",
+      "jurisdiction": "us_wa",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC filings / corporate history",
+      "entity_id": 2706,
+      "entity_name": "Parallels Inc",
+      "entity_type": "corporation",
+      "jurisdiction": "us_wa",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "Cyprus registry / litigation records",
+      "entity_id": 2707,
+      "entity_name": "Virtuozzo",
+      "entity_type": "corporation",
+      "jurisdiction": "cy",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "Corporate history",
+      "entity_id": 2708,
+      "entity_name": "SWsoft",
+      "entity_type": "corporation",
+      "jurisdiction": "us_va",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR",
+      "entity_id": 2709,
+      "entity_name": "FP Capital Acronis III",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_de",
+      "entity_status": "active"
+    },
+    {
+      "role": "manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC EDGAR",
+      "entity_id": 2710,
+      "entity_name": "FP Capital Acronis IV",
+      "entity_type": "investment_fund",
+      "jurisdiction": "us_de",
+      "entity_status": "active"
+    },
+    {
+      "role": "founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "Public reporting / Runa Capital records",
+      "entity_id": 2642,
+      "entity_name": "Runa Capital",
+      "entity_type": "investment_fund",
+      "jurisdiction": "unknown",
+      "entity_status": "active"
+    },
+    {
+      "role": "Co-Founder (no formal officer position found)",
+      "date_start": null,
+      "date_end": null,
+      "source": "OpenCorporates negative result",
+      "entity_id": 2642,
+      "entity_name": "Runa Capital",
+      "entity_type": "investment_fund",
+      "jurisdiction": "unknown",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2008-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "USASpending: 20 federal contracts to Acronis entities totaling ~262K across FY2008-FY2016, zero spending after Acronis SCS formed",
+      "confidence": "confirmed",
+      "id": 9002
+    },
+    {
+      "date": "2014-07-21",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "SEC filings confirm Beloussov and Kouzmine are co-officers/directors at Nano-Meta Technologies Inc (CIK 1614332, Purdue spinout, nanotechnology/metamaterials). Primary source confirmation of their business partnership.",
+      "confidence": "confirmed",
+      "id": 8911
+    },
+    {
+      "date": "2015 to 2018",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Drokova was publicist for Beloussov's QWave Capital and Runa Capital. She later introduced him to Epstein (Jan 2018). Beloussov reportedly became Day One Ventures LP.",
+      "other_person": "Masha Drokova",
+      "id": 4739
+    },
+    {
+      "date": "2015-09-16",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Same Palo Alto attorney Pavel Pogodin (Transpacific Law Group) filed both the Spectralus-to-OOO Spectralus and Nano-Optic Devices-to-OOO Nanooptic Devices patent transfers with USPTO. Coordinated legal management across both Russia-bound pipelines from a single law firm.",
+      "confidence": "confirmed",
+      "id": 9257
+    },
+    {
+      "date": "2018-01-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Acronis SCS CEO John Zanni was former Acronis CMO/SVP and former Microsoft GM -- internal promotion, not independent hire",
+      "confidence": "confirmed",
+      "id": 9005
+    },
+    {
+      "date": "2019-03-21",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Acronis SCS Inc SAM.gov registration confirms foreign-owned status with US government contract eligibility",
+      "confidence": "confirmed",
+      "id": 9001
+    },
+    {
+      "date": "2019-03-21",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Acronis SCS had zero direct federal contract awards in USASpending despite being registered in SAM and holding DoDIN APL certification -- suggests sales through resellers/integrators or classified channels",
+      "confidence": "medium",
+      "id": 9008
+    },
+    {
+      "date": "2019-08-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Acronis SCS board of directors includes Tom Ridge (first DHS Secretary), Judge Eugene Sullivan (former AF General Counsel/NRO General Counsel), Peter Cleveland (Intel VP Global Government Affairs)",
+      "confidence": "confirmed",
+      "id": 9004
+    },
+    {
+      "date": "2020-04-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Acronis SCS achieved DoDIN APL, Common Criteria, and FIPS 140-2 certifications for Hardened Backup -- only full-disk backup solution on APL, deployed to air-gapped DoD systems",
+      "confidence": "confirmed",
+      "id": 9003
+    },
+    {
+      "date": "2020-06-08",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Runa Capital is defendant in active NGINX copyright case: Lynwood Investments CY (Cyprus) v Konovalov/Runa Capital/F5 (N.D. Cal. 3:20-cv-03778). 9th Circuit appeal 22-16399 still open. Names NGINX BVI and DE entities.",
+      "confidence": "confirmed",
+      "id": 8919
+    },
+    {
+      "date": "2022-05-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Katya Fisher (CIK 1748363) bridges Beloussov empire: Runa Capital Investment Director (2019-21), SIT Holding AG Exec Vice Chairman (2021+), Global Blockchain SPAC board. Disclosed as Counsel to Beloussov and affiliates.",
+      "confidence": "confirmed",
+      "id": 8916
+    },
+    {
+      "date": "2025-07-11",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "FASCSA order effective date July 11, 2025 but not published until September 15, 2025 -- two-month classified delay before public posting to SAM.gov",
+      "confidence": "high",
+      "id": 9007
+    },
+    {
+      "date": "2025-09-15",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "OpenSanctions confirms Acronis AG exclusion from SAM.gov (debarment) first seen 2025-09-17, address Rheinweg 9 Schaffhausen, CAGE SCLS4, UEI YX9GLSWJ2L34",
+      "confidence": "confirmed",
+      "id": 9006
+    },
+    {
+      "date": "2026-04-02",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "100% of patents transferred to Russian/Cyprus receiving entities (23 total: 7 OOO Spectralus, 9 OOO Nanooptic, 7 ASB International) expired for non-payment of maintenance fees. By contrast, Innolume GmbH (Germany, same S-Group portfolio) maintained 15/17 patents. Receiving entities appear to be non-operational shells that never intended to commercialize \u2014 value was in the transfer itself, not patent protection.",
+      "confidence": "medium",
+      "id": 9258
+    }
+  ]
+}

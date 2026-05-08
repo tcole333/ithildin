@@ -1,0 +1,778 @@
+{
+  "name": "Parlatore Law Group LLP",
+  "slug": "parlatore-law-group-llp",
+  "aliases": [],
+  "profile_ids": [
+    "parlatore"
+  ],
+  "generated_at": "2026-05-07T23:07:36.237380",
+  "last_updated": "2026-04-30T00:30:04",
+  "stats": {
+    "total_findings": 14,
+    "total_connections": 9,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "legal": 1,
+      "background": 1,
+      "negative_result": 1,
+      "intelligence": 7
+    },
+    "connection_types": {
+      "controls": 1,
+      "employment": 6,
+      "funds": 1,
+      "familial": 1
+    },
+    "last_updated": "2026-04-30T00:30:04"
+  },
+  "findings": [
+    {
+      "id": 10867,
+      "finding_type": "financial",
+      "summary": "Largest single Save America PAC disbursement to PLG: $76,984.34 on 2022-11-23 (legal consulting) -- timing aligns with Trump 2024 launch (Nov 15 2022) and Special Counsel Jack Smith appointment (Nov 18 2022)",
+      "detail": "FEC Schedule B sub_id 4080120231759234818, disbursement_date 2022-11-23, amount $76,984.34, recipient PARLATORE LAW GROUP LLP, description 'LEGAL CONSULTING', filing image 202307319584589542. Trump declared 2024 candidacy 2022-11-15; Jack Smith appointed Special Counsel 2022-11-18; Mar-a-Lago documents probe and Jan 6 grand jury active. Five days after Smith's appointment, Save America cuts a $76,984.34 check to PLG -- the single largest payment in the 9-disbursement series. Parlatore later confirmed publicly he represented Trump in the Mar-a-Lago documents matter.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-11-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:15:58",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10864,
+      "finding_type": "financial",
+      "summary": "Save America PAC paid Parlatore Law Group ,818.24 across 9 disbursements (April 2022 - March 2023) for 'Legal Consulting'; no payments before or after that window",
+      "detail": "FEC Schedule B disbursements from Save America (C00762591) to PARLATORE LAW GROUP LLP, all coded 'LEGAL CONSULTING'. First disbursement: 2022-04-22 ($25,000). Last disbursement: 2023-03-22 ($50,000). Cross-PAC scan of all FEC schedule_b records confirms Save America is the ONLY Trump-aligned committee that has paid PLG -- MAGA Inc (C00825851), Trump 47 (C00867937), Trump Save America JFC (C00770941), Never Surrender Inc (C00828541), and RNC (C00003418) all show 0 disbursements to Parlatore. Paginated full-disbursement scan of Save America from 2023-04-01 onward (2000 records pulled) confirms no PLG payments after 2023-03-22, contradicting the Wave-1 working hypothesis that PLG continued to receive Save America payments after Parlatore's May 2023 departure from Trump's legal team. Disbursement totals: 2022 calendar year: $196,493.14 (5 disbursements); 2023 calendar year: $136,325.10 (4 disbursements through March 22).",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-03-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:15:49",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10810,
+      "finding_type": "legal",
+      "summary": "Parlatore Law Group publicly markets a Board for Correction of Naval Records (BCNR) / Board for Correction of Military Records (BCMR) petition practice; firm publishes multiple how-to articles ('Tips for a Successful Petition to BCMR/BCNR', 'An Introduction to the BCNR', 'Navigating the BCNR', 'BCMR Advisory Opinions', 'Correction of Military Records from BCMR'), and partners Elizabeth Candelario and Kieran McDowell are listed as administrative-law / military servicemember practice attorneys",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:48:08",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "http://www.plgmilitary.com/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/an-introduction-to-the-bcnr/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/content/navigating-bcnr",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/tips-for-a-successful-petition-to-bcmr-bcnr/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10834,
+      "finding_type": "background",
+      "summary": "Parlatore Law Group LLP founded 2018 by Timothy C. Parlatore; ~14 attorneys; principal office listed as 1440 N Edgewood St, Arlington VA on firm website (Apr 2026); LinkedIn HQ field still shows 1 World Trade Center NYC; Martindale-Hubbell shows 260 Madison Ave NYC. Multi-state distributed practice with attorneys in DC, NY, VA, CT, CA, SC, TX, KY, NJ, RI metro areas.",
+      "detail": "Founder bio (parlatorelawgroup.com): 'Founded by a military veteran. The firm's culture and ethos draw heavily from the experience.' Firm hosts a dedicated Military & Veterans practice (BCNR/BCMR appeals, court-martial defense, VA disability, military records correction). Other practice areas: Corporate, Criminal, Government Regulatory & Compliance, Litigation, Trusts & Estates, Strategic Legal & Crisis Communications, 'Counsel & Compass' (general counsel services), Maritime, Mediation. The address on the firm's contact page (1440 N Edgewood St Arlington VA 22201) is shared in unified registry with at least four unrelated FL-registered entities: 1902 Thomasville Investors LLC (mgr Joseph Reger), 601 34th Street Investors LLC, 921 South Missouri Investors LLC, and Rebel Health Medical Services PA Corp (officer Eric S. Brittain) \u2014 i.e. building is a multi-tenant or shared workspace.",
+      "source_datasets": [
+        "website",
+        "linkedin",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:06:19",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.linkedin.com/company/parlatore-law-group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com/contact/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com/who-we-are/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10837,
+      "finding_type": "financial",
+      "summary": "Aggregate FEC search by employer 'Parlatore Law Group' returns 18 contribution records (2020-2024) showing partisan asymmetry: William Brown (Partner, Navy SEAL, Parlatore Law Group employer) gave THREE contributions on 2024-10-07 totaling $3,019.96: $1,041.02 WinRed + $1,041.02 Trump National Committee JFC + $936.92 Never Surrender Inc. (Trump Save America Joint Fundraising Committee, Republican Party) \u2014 concentrated giving to Trump-aligned vehicles. Other GOP donors via Parlatore employer: Jennifer Crawford (paralegal, La Plata MD) $800 to Dan Cox for Congress (R-MD); Jonathan Klein (Partner, Baltimore MD) $150 across WinRed 2023-2024; M Glod (attorney, Houston TX) $50 to Ron Johnson for Senate (R-WI). Some D-side small donors: Max Hass (Wheat Ridge CO) $21 ActBlue, Erin Darden (Fort Washington MD) $15 ActBlue. The $3K William Brown cluster is structurally significant relative to firm size.",
+      "detail": "Top FEC committees receiving Parlatore-employed contributions: WinRed (multiple), Trump National Committee JFC Inc., Never Surrender Inc. (Republican Party), Van Orden for Congress (R-WI), Dan Cox for Congress (R-MD), Ron Johnson for Senate (R-WI), ActBlue (smaller). Pattern: firm employees materially fund Trump political infrastructure. This precedes the alleged 2025-04-01 Pentagon commissioning by ~6 months. Note: William Brown's address South Bound Brook NJ matches a Navy SEAL community; he is the partner described in firm's LinkedIn page as 'Navy SEAL veteran'.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:07:07",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-fec-emp.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://api.open.fec.gov/v1/schedules/schedule_a/?contributor_employer=Parlatore+Law+Group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10839,
+      "finding_type": "negative_result",
+      "summary": "Multi-source negative-result omnibus for Parlatore Law Group LLP and Timothy Parlatore: zero LDA lobbying filings, zero FARA, zero UCC liens, zero EDGAR insider/13D filings naming Tim, zero ACRIS NYC real-estate hits naming Tim/PLG, zero GLEIF LEI, zero OpenSanctions PEP, zero IRS 990 officer roles. Unified corporate registry has zero hits for the firm name (NY DOS not currently ingested into unified registry \u2014 must retrieve manually). EDGAR surname 'Parlatore' returned 76 unrelated Salvatore/Vincent Parlatore filings (LBO Capital Corp/Enercorp Inc, FL). 100 ACRIS hits all map to unrelated Staten Island Parlatore family. These negatives establish that as of 2026-04-29 the firm has not registered any federal-lobbying or foreign-principal representation despite having a DC-admitted partner (Candelario) practicing LDA compliance.",
+      "detail": "Files: b-registry-plg.json (0), b-edgar.json (76 unrelated), b-edgar2.json (Tim:0), b-lda-client.json (0), b-lda-reg.json (0), b-lda-lob.json (0), b-fara.json (0), b-ucc.json (0), b-acris.json (100 unrelated), b-gleif.json (4 unrelated IT/DK), b-sanctions.json (0), b-990.json (3 unrelated Pet Care Trust). NY DOS public-inquiry portal returned 403/socket-closed under WebFetch \u2014 needs manual retrieval. OpenCorporates direct API returned 401 (paid-plan required).",
+      "source_datasets": [
+        "fec",
+        "edgar",
+        "acris",
+        "gleif",
+        "fara",
+        "opensanctions"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:07",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-acris.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-edgar.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-fara.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-gleif.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-lda-client.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-registry-plg.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-sanctions.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-9w7DGxYW/b-ucc.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10880,
+      "finding_type": "financial",
+      "summary": "PLG-employed attorneys/staff produced 18 itemized FEC contributions 2020-2024 totaling $5,279.96 -- Republican lean (37% to Trump-aligned, 36% to WinRed conduit, 8% to Dan Cox, 9% to Van Orden, only $36 ActBlue)",
+      "detail": "FEC Schedule A employer search for 'Parlatore Law Group' returned 18 itemized records 2020-2024. By recipient: WINRED $1916.02 (8 records); TRUMP NATIONAL COMMITTEE JFC INC $1041.02 (1); NEVER SURRENDER INC $936.92 (1); DAN COX FOR CONGRESS $800 (2); VAN ORDEN FOR CONGRESS $500 (1); RON JOHNSON FOR SENATE $50 (1); ACTBLUE $36 (4). Donor names: BROWN WILLIAM (3 records, $3019.96 -- 57% of all PLG-employee giving), PARLATORE TIMOTHY (3 records, $1025), KLEIN JONATHAN (3, $150), CRAWFORD JENNIFER paralegal (2, $800), HASS MAX (3, $21), FRANK MEGAN (2, $200), DARDEN ERIN (1, $15), GLOD M (1, $50). Pattern: 95% Republican; the only Democratic giving is by Erin Darden and Max Hass (small ActBlue donations). Bulk of dollars (57%) come from one donor (William Brown) on a single 2024 date.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:16:46",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=employer%3AParlatore_Law_Group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10911,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL: Save America\u2192PLG payment escalation aligned with Jack Smith Special Counsel appointment (5-day delta). Largest single PLG disbursement ($76,984.34, 2022-11-23) lands 5 days after Jack Smith was named Special Counsel (2022-11-18). Suggests retainer/legal-fee acceleration in response to escalating federal exposure, not coincidence.",
+      "detail": "FACT: Save America PAC paid PLG $76,984.34 on 2022-11-23 \u2014 its largest single disbursement to PLG. This is 5 calendar days after AG Garland appointed Jack Smith Special Counsel (2022-11-18) for the Mar-a-Lago documents and Jan 6 cases. Context: PLG had been on retainer since at least 2022-04-22 ($25K), and Parlatore had joined Trump's classified-documents legal team in October 2022. THEORY (synthesis): the spike size and timing are consistent with an emergency retainer top-up triggered by Special Counsel escalation, not a routine bill. Best innocent explanation: invoice accumulation from intensifying Mar-a-Lago discovery work happened to fall in that pay period. FALSIFICATION: PLG invoice copies (subpoenable) showing pre-Nov 18 work justifying $76,984 in November billings would defeat the suggestion of post-Smith trigger.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:43:20",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-47",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10913,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL: Save America\u2192PLG payment stream stops 8 days before Bragg Trump indictment. Last Save America\u2192PLG payment ($50K) on 2023-03-22; NY DA Bragg indicts Trump on 2023-03-30. Cessation pattern, not buildup, ahead of indictment.",
+      "detail": "FACT: 2023-03-22 was the final Save America\u2192PLG disbursement; 2023-03-30 (8 days later) Bragg returned the Manhattan indictment. Parlatore did not represent Trump in the Bragg case, and would publicly resign from Trump legal team eight weeks later (2023-05-19), citing Boris Epshteyn obstruction. THEORY (synthesis): the cessation may reflect a deliberate decision to stop PAC-funded payments to PLG before the first criminal indictment to limit campaign-finance exposure, OR a routine end-of-engagement billing. INNOCENT EXPLANATION: PLG's classified-documents work for Trump was wrapping up regardless. FALSIFICATION: if PLG continued to be paid via OTHER Trump-aligned entities (MAGA Inc, Trump 47, RNC, JFCs) through April 2023 at similar volume, the 'stopped before Bragg' framing collapses.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:43:29",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-47",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10925,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL: Indyke joins PLG (~Oct 2022) within ~14 days of Parlatore joining Trump classified-documents team (2022-10-01); USVI Epstein-estate settlement follows ~Nov 2022. Three Epstein-adjacent + Trump-adjacent corporate moves in same month.",
+      "detail": "FACT: October 2022 brackets three notable events: (a) ~2022-10-01 Parlatore publicly disclosed as Trump classified-documents counsel; (b) ~2022-10-15 Darren Indyke (former Epstein personal/estate counsel) joins PLG as Of Counsel; (c) ~2022-11-01 USVI Epstein-estate settlement closes. THEORY (synthesis): the simultaneous arrival of an Epstein-estate insider at the firm now retained by a former Trump president \u2014 at exactly the moment the Mar-a-Lago documents matter is escalating to grand jury \u2014 is structurally noteworthy. INNOCENT EXPLANATION: Indyke had been operating his own PLLC and the move to a high-profile boutique was career-natural; PLG was rapidly hiring during Trump-engagement growth. FALSIFICATION: PLG hiring records (registry filings, malpractice carrier listings, NY State Bar registration changes) showing Indyke's joining was negotiated months earlier (e.g., spring 2022 before Mar-a-Lago raid) would defeat the 'simultaneous escalation' framing.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:44:28",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-47",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10927,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL: William Brown's $3,019.96 single-day Trump JFC giving (2024-10-07) lands 7 days after Rowden v. Navy active filing (2024-09-30). Maximal personal Trump-PAC contribution by a PLG partner during a window when PLG is actively suing the Navy \u2014 one month before Hegseth nomination.",
+      "detail": "FACT: 2024-09-30 Rowden v. Navy is on the active docket (Parlatore sole counsel for plaintiff in DDC 1:24-cv-02393); 2024-10-07 PLG partner William Brown Jr (Navy SEAL veteran) splits a single-day $3,019.96 across WinRed/Trump National JFC; 2024-11-12 Trump nominates Hegseth for SecDef. THEORY (synthesis): the timing is consistent with PLG firm-internal political alignment ahead of expected Hegseth nomination, while Parlatore is simultaneously litigating against the very service Hegseth would soon lead. INNOCENT EXPLANATION: Brown is a self-described Navy SEAL veteran with prior Republican giving; $3K-day giving is common in late-October before federal elections. FALSIFICATION: if Brown made similar single-day max giving in non-election Octobers (2022, 2026), the 2024 spike loses signal.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:44:38",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-47",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10929,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL: PLG LLP entity (degree=7, betweenness rank=13) is the only PLG-firm node connected to BOTH Save America PAC and Trump National Committee JFC, indicating it is the contracting entity used for Trump-orbit legal work",
+      "detail": "PLG LLP neighbors: Save America, William Brown, William Brown Jr, Andrea Parlatore Bereck, Tim Parlatore, plus 2 others. The cliques {PLG LLP, Save America, Parlatore} and {PLG LLP, Save America, William Brown} indicate PLG LLP is the legal-services contracting entity for Save America. The split between 'Parlatore Law Group' and 'Parlatore Law Group LLP' as separate graph nodes suggests two legal entities (likely PLLC for NY practice + LLP for federal/political contracting). Existing connection records confirm Andrea Parlatore Bereck on PLG LLP.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:44:54",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-45",
+          "source_quote": "graph_tools betweenness rank=13 degree=7 cliques=[PLG LLP,Save America,Parlatore],[PLG LLP,Save America,William Brown]",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10930,
+      "finding_type": "intelligence",
+      "summary": "HUNCH (hypothesis #230): PLG's military-spouse-attorney clustering (Bereck-Tim's wife, Candelario-Marine spouse Camp Pendleton, McDowell-JAG spouse, Gatti-Marine spouse, Ramey-USO Pacific) may function as a covert chain-of-command intelligence/intake pipeline rather than industry-standard cloud-firm staffing. Five spousal entry points to active-duty commands plus Tim in OSD uniform creates a unique structural posture. Lead #45234 will benchmark vs peer firms and cross-tab spouse-billet vs PLG-client commands.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run:46",
+        "synthesis:generate-hunches"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:48:21",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10868",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10870",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10878",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10886",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10892",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10931,
+      "finding_type": "intelligence",
+      "summary": "HUNCH (hypothesis #231): PLG may function as a litigation-conflicts/billing laundering layer \u2014 Indyke's continued Epstein-estate work (Bloomberg Aug 2025: 'work on the Epstein estate has kept him so busy') and McEntire's parallel Mahoney federal-employment practice both fit a 'cloud-firm + parallel solo-practice' template that could obscure conflicts and fee flows. Indyke's PLG entry Oct 2022 = 30 days before USVI $105M Epstein settlement. Lead #45254 will pull USVI signature blocks and FAA filings to confirm whether Indyke billed through PLG or solo.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:48:30",
+      "target_name": "Parlatore Law Group LLP",
+      "profile_id": "parlatore",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10866",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10869",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10888",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:10894",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5660,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "Timothy C. Parlatore",
+      "relationship_type": "controls",
+      "description": "Founder and namesake of the firm",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 21:50:04",
+      "profile_id": "parlatore",
+      "other_person": "Timothy C. Parlatore",
+      "other_person_slug": "timothy-c-parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/team/timothy-c-parlatore/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5666,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "Timothy C. Parlatore",
+      "relationship_type": "employment",
+      "description": "Founder and Managing Partner; founded firm 2018",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:52",
+      "profile_id": "parlatore",
+      "other_person": "Timothy C. Parlatore",
+      "other_person_slug": "timothy-c-parlatore",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5668,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "William Brown Jr",
+      "relationship_type": "employment",
+      "description": "Partner; described as Navy SEAL veteran on firm LinkedIn page",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:52",
+      "profile_id": "parlatore",
+      "other_person": "William Brown Jr",
+      "other_person_slug": "william-brown-jr",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.linkedin.com/company/parlatore-law-group",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5669,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "Scott D. Brenner",
+      "relationship_type": "employment",
+      "description": "Partner; ~30y commercial/IP/criminal; AV-rated",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:52",
+      "profile_id": "parlatore",
+      "other_person": "Scott D. Brenner",
+      "other_person_slug": "scott-d-brenner",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com/scott-d-brenner/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5667,
+      "person_a": "Elizabeth Candelario",
+      "person_b": "Parlatore Law Group LLP",
+      "relationship_type": "employment",
+      "description": "Partner since 2019; military-records BCNR/BCMR practice + LDA compliance",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:52",
+      "profile_id": "parlatore",
+      "other_person": "Elizabeth Candelario",
+      "other_person_slug": "elizabeth-candelario",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.parlatorelawgroup.com/elizabeth-candelario/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5679,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "Save America",
+      "relationship_type": "funds",
+      "description": "Save America PAC paid PLG $332,818.24 across 9 disbursements 2022-04-22 to 2023-03-22 for 'Legal Consulting' (FEC Schedule B)",
+      "strength": "strong",
+      "date_range": "2022-04-22:2023-03-22",
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:34",
+      "profile_id": "parlatore",
+      "other_person": "Save America",
+      "other_person_slug": "save-america",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00762591",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5680,
+      "person_a": "Parlatore Law Group LLP",
+      "person_b": "William Brown",
+      "relationship_type": "employment",
+      "description": "William Brown listed PARLATORE LAW GROUP as employer / occupation LAWYER on 2024 FEC contributions; donor records the only attestation found",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 23:17:34",
+      "profile_id": "parlatore",
+      "other_person": "William Brown",
+      "other_person_slug": "william-brown",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=donor%3AWilliam_Brown_PLG",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5806,
+      "person_a": "Merideth Q. McEntire",
+      "person_b": "Parlatore Law Group LLP",
+      "relationship_type": "employment",
+      "description": "Current Partner at PLG concurrently with Mahoney through Dec 2025",
+      "strength": "strong",
+      "date_range": "2024:current",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 00:30:04",
+      "profile_id": "parlatore",
+      "other_person": "Merideth Q. McEntire",
+      "other_person_slug": "merideth-q-mcentire",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://parlatorelawgroup.com/team/merideth-q-mcentire/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5670,
+      "person_a": "Andrea Parlatore Bereck",
+      "person_b": "Parlatore Law Group LLP",
+      "relationship_type": "familial",
+      "description": "Family-tied attorney at firm (likely sister/spouse \u2014 surname Parlatore Bereck)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-29 22:08:52",
+      "profile_id": "parlatore",
+      "other_person": "Andrea Parlatore Bereck",
+      "other_person_slug": "andrea-parlatore-bereck",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.linkedin.com/company/parlatore-law-group",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-04-22:2023-03-22",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Save America PAC paid PLG $332,818.24 across 9 disbursements 2022-04-22 to 2023-03-22 for 'Legal Consulting' (FEC Schedule B)",
+      "other_person": "Save America",
+      "id": 5679
+    },
+    {
+      "date": "2022-11-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Largest single Save America PAC disbursement to PLG: $76,984.34 on 2022-11-23 (legal consulting) -- timing aligns with Trump 2024 launch (Nov 15 2022) and Special Counsel Jack Smith appointment (Nov 18 2022)",
+      "confidence": "confirmed",
+      "id": 10867
+    },
+    {
+      "date": "2023-03-22",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Save America PAC paid Parlatore Law Group ,818.24 across 9 disbursements (April 2022 - March 2023) for 'Legal Consulting'; no payments before or after that window",
+      "confidence": "confirmed",
+      "id": 10864
+    },
+    {
+      "date": "2024:current",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Current Partner at PLG concurrently with Mahoney through Dec 2025",
+      "other_person": "Merideth Q. McEntire",
+      "id": 5806
+    }
+  ]
+}

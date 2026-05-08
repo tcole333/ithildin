@@ -3,10 +3,12 @@
 **Stats**: 4 findings, 9 connections, 1 entities
 **Dossier**: /dossiers/bertrand-g-des-pallieres
 
+> French structured-credit banker who functions as a recurring inter-firm bridge: the Deutsche Bank alumnus who introduced SoftBank’s Rajeev Misra to the Italian financier Alessandro Benedetti, the named SPQR Capital creditor source for the October 2015 Independent article on the Wind Hellas creditor dispute, and the partner now sitting inside Misra’s post-SoftBank Abu Dhabi vehicle OneIM — the same individual reappearing across each successive setting in which the Misra–Benedetti relationship has operated.
+
 ## Key Findings
 - **[identity/high]** Bertrand des Pallieres (French banker, born Nov 1966, Rome resident) is the structural connector between Misra and Benedetti via Deutsche Bank alumni network — NOT Indian PE circles (2014-12-01) (Finding #11101)
-- **[intelligence/high]** REWRITE OF EARLIER UNDERSTANDING: des Pallieres was the on-the-record named creditor source for the Independent's Oct 28, 2015 'Trojan horse' piece by Armitage and Hollingsworth. Identified verbatim as 'SPQR Capital's Bertrand des Pallieres' — not an anonymous back-channel facilitator. He was the public attribution that allowed the planted story to clear UK libel review. Same des Pallieres: (a) born Nov 1966, French, Rome resident; (b) introduced Misra to Benedetti via Deutsche Bank alumni network; (c) co-director with Benedetti at Attali Investment Partners Ltd 2010-Dec 2015 (resigned same month the Indep piece's Lux court date sat); (d) is now Partner – Private Credit at OneIM (Misra's Abu Dhabi vehicle) per finding #11114. The 2015 Independent piece is therefore the moment des Pallieres put his name to the public attack on Arora — his SPQR Capital quote provided the legal cover for the smear that took down Arora 8 months later. He has remained inside the Misra ecosystem ever since. (2015-10-28) (Finding #11125)
 - **[intelligence/confirmed]** CONFIRMED: des Pallieres is currently Partner – Private Credit at OneIM (Misra's Abu Dhabi firm). The man who introduced Misra to Benedetti in 2015 is now Misra's Abu Dhabi private-credit lieutenant; Misra retained him into the next vehicle despite WSJ Feb 2020 naming him publicly (2024-01-01) (Finding #11114)
+- **[intelligence/high]** REWRITE OF EARLIER UNDERSTANDING: des Pallieres was the on-the-record named creditor source for the Independent's Oct 28, 2015 'Trojan horse' piece by Armitage and Hollingsworth. Identified verbatim as 'SPQR Capital's Bertrand des Pallieres' — not an anonymous back-channel facilitator. He was the public attribution that allowed the planted story to clear UK libel review. Same des Pallieres: (a) born Nov 1966, French, Rome resident; (b) introduced Misra to Benedetti via Deutsche Bank alumni network; (c) co-director with Benedetti at Attali Investment Partners Ltd 2010-Dec 2015 (resigned same month the Indep piece's Lux court date sat); (d) is now Partner – Private Credit at OneIM (Misra's Abu Dhabi vehicle) per finding #11114. The 2015 Independent piece is therefore the moment des Pallieres put his name to the public attack on Arora — his SPQR Capital quote provided the legal cover for the smear that took down Arora 8 months later. He has remained inside the Misra ecosystem ever since. (2015-10-28) (Finding #11125)
 - **[identity/high]** Bertrand G. des Pallieres = Wind Hellas / TIM Hellas figure (NOT Stephane); founder/CEO SPQR Capital; ex-JPMorgan MD Global Head Structured Credit (1992-2005), ex-Deutsche Bank MD Global Head Principal Finance (2005-2007); director SPQR Capital Holdings SA (Lux), Equus Total Return Inc, Cadogan Petroleum Plc, Lansdowne Capital SA, InfraVia Capital Partners SAS, Attali Investment Partners Ltd, Euromax Finance Ltd, Methorios Capital Services Ltd, SPQR Capital (Cayman) Ltd, Bitfury Group Ltd (Finding #11221)
 
 ## Top Connections
@@ -22,3 +24,16 @@
 
 ## Entity Roles
 - director at Attali Investment Partners Ltd (gb)
+
+## Open Questions
+- Which entity actually appeared at the 28 October 2015 Luxembourg courthouse hearing in the Wind Hellas creditor matter, given that Compagnie Du Salève SA (Luxembourg B223232) was not incorporated until 23 March 2018? The closed French SARL #803012046 in Monnetier-Mornex (Haute-Savoie) is the leading candidate but has not been confirmed against the docket.
+- What was the legal and editorial process by which the on-the-record SPQR Capital quote in the 28 October 2015 Independent article was solicited, drafted, and approved — and did Mark Hollingsworth, Jim Armitage, or any third party participate in shaping the attribution?
+- Why does the OneIM team-page biography list Centricus and JPMorgan but omit Deutsche Bank, given that the WSJ February 2020 article publicly named the Deutsche Bank-alumni introduction route, and is this omission a contractual condition of his OneIM partnership?
+- What is the substantive purpose of the 4 August 2025 Companies House filing for Bitfury Group Limited that retroactively backdated his director details to 1 February 2023, and does the backdating coincide with any SoftBank, Cipher Mining, or OneIM transaction?
+- Across SPQR Capital Holdings SA, SPQR Capital (Cayman) Ltd, Cadogan Petroleum plc, Methorios Capital LLP, and Bitfury Group Limited, what is the full beneficial-ownership and creditor chain, and which Luxembourg or BVI entities at 12 rue Guillaume Schneider L-2522 share corporate administrators with him beyond Mathieu Villaume and the Five Arrows / Rothschild affiliates already documented?
+
+## Applicable Models
+- bridge-tax
+- narrative-shield
+- jurisdictional-arbitrage
+- enabler-gradient

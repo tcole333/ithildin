@@ -1,0 +1,466 @@
+{
+  "name": "F5 Networks / NGINX Inc",
+  "slug": "f5-networks-nginx-inc",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.194300",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 17,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 2,
+      "financial": 1,
+      "legal": 14
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9967,
+      "finding_type": "intelligence",
+      "summary": "F5 named as top acquisition target in 2011 NGINX pitch deck -- actual acquisition occurred 8 years later exactly as planned",
+      "detail": "The 2011 NGINX pitch deck (Exhibit A, Lynwood v. Konovalov) names F5 as a primary exit target under 'Networking vendor' category alongside Cisco, Juniper, Brocade, and Radware. The deck specifies a '4-5 year maturity period.' F5 acquired NGINX 8 years later (2019), 3-4 years later than planned. The pitch deck was created while Sysoev and Konovalov were still Rambler employees, using Rambler resources (per Lynwood allegations). This is not merely coincidence -- it suggests the NGINX commercialization was a structured exit play with F5 as a known likely acquirer from the start. This predetermination raises questions about the due diligence quality: did F5 know it was the planned acquirer since 2011?",
+      "source_datasets": [
+        "courtlistener,analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2011-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:25:11",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-34,finding:9902,finding:9910",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9983,
+      "finding_type": "intelligence",
+      "summary": "F5 named as top acquisition target in 2011 NGINX pitch deck -- actual acquisition occurred 8 years later exactly as planned",
+      "detail": "The 2011 NGINX pitch deck (Exhibit A, Lynwood v. Konovalov) names F5 as a primary exit target under 'Networking vendor' category. The deck specifies a '4-5 year maturity period.' F5 acquired NGINX 8 years later (2019), 3-4 years later than planned. The pitch deck was created while Sysoev and Konovalov were still Rambler employees. This predetermination raises questions about F5 due diligence quality: did F5 know it was the planned acquirer since 2011?",
+      "source_datasets": "courtlistener,analysis_run",
+      "confidence": "high",
+      "date_of_event": "2011-04-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": []
+    },
+    {
+      "id": 9808,
+      "finding_type": "financial",
+      "summary": "F5/NGINX Merger: $670M all-cash acquisition, NGINX as BVI entity, $643.2M actual purchase price",
+      "detail": "F5 Networks acquired Nginx, Inc. (BVI) for ~$670M announced value ($643.2M actual purchase price after adjustments). All-cash merger funded from F5 balance sheet. NGINX survived as wholly-owned subsidiary. Purchase price allocation: $509.4M goodwill, $62.5M developed technology (7yr), $12M customer relationships (15yr), $14.5M trade name (7yr), $0.3M non-competition agreements (2yr), $44.5M net tangible assets. Merger vehicle: Neva Merger Sub Limited (BVI). Legal counsel: Wilson Sonsini (F5), Qatalyst Partners (NGINX financial advisor), Foros (F5 financial advisor). Transaction costs ~$19M.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:00:54",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1048695/000104869519000026/exhibit993.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1048695/000119312519070884/d713823d8k.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9810,
+      "finding_type": "legal",
+      "summary": "Russian antitrust clearance required for F5/NGINX merger \u2014 Russia listed in merger agreement Schedule 2.2(a)(ii)",
+      "detail": "The merger agreement Schedule 2.2(a)(ii) lists four jurisdictions requiring antitrust approval: (1) United States (HSR), (2) Germany, (3) Russia, (4) Spain. The 8-K states the merger is subject to 'clearance under the antitrust laws of Russia, Germany and Spain.' This confirms NGINX had sufficient operations/revenue touching Russia to trigger competition review by Russian authorities (likely FAS - Federal Antimonopoly Service). Russian regulatory authorities had approval power over the F5/NGINX transaction. All four clearances were obtained by the May 8, 2019 closing date.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:01:12",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1048695/000119312519070884/d713823dex21.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9908,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Factual narrative - Sysoev wrote NGINX at Rambler, open-sourced 2004, Rambler never objected",
+      "detail": "F5 Background section (Doc 88, pp.2-3) presents factual narrative from Lynwood own complaint: (1) Sysoev wrote first NGINX code in 2001 after ~1yr at Rambler as sysadmin; (2) In 2004, while at Rambler, Sysoev published NGINX as open source; (3) Rambler NEVER objected or told Sysoev to remove NGINX; (4) Instead Rambler gave Sysoev salary increases and bonuses; (5) By 2010 NGINX had 6pct global market share; (6) When Sysoev left Rambler in 2011, Rambler did not accuse him of stealing or claim NGINX belonged to Rambler; (7) Rambler never claimed during the 8yr period 2011-2019; (8) Only after F5 acquired NGINX for 670M did Rambler/Lynwood suddenly claim ownership. F5 emphasizes Rambler was a sophisticated tech company that knew and bonused Sysoev for NGINX.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:03:42",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Lynwood v. Konovalov, 3:20-cv-03778-MMC, pp.18-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9911,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Copyright ownership fails - open source code cannot be solely owned by Rambler",
+      "detail": "F5 copyright argument (Section III.A, pp.16-19): (1) Lynwood definition of Copyrighted Works is woefully unspecific - includes ALL open source and proprietary NGINX over 10 years, pled in the alternative with and/or, includes unidentified derivations; (2) Including open source software renders ownership IMPLAUSIBLE because open source NGINX has been free since 2004 and programmers worldwide have edited it since at least 2007; (3) Citing Computer Assocs v Altai: elements entering public domain via freely accessible program exchanges are not copyright-protected; (4) Complaint admits multiple open source community members contributed (para 171); (5) Definition extends beyond copyright to ideas conceived but not reduced to writing; (6) Lynwood fails to identify elements ORIGINAL to Rambler vs open source community contributions; (7) NGINX was based on Apache, but Lynwood fails to separate Apache-derived elements; (8) BSD-style license admits worldwide use, reproduction, and derivative works.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:03:52",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section III.A, pp.33-35",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9913,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Copyright time-barred - Sysoev 2004 release was express repudiation of Rambler ownership",
+      "detail": "F5 argues (Section III.B, pp.19-20) ALL copyright claims are time-barred under 17 USC 507(b). Where gravamen is copyright OWNERSHIP, separate-accrual rule does not apply - must bring claims within 3 years of plain and express repudiation. Repudiation events: (1) 2004 release included clear statement that Sysoev held copyright, not Rambler, with copyright notice containing his name, not Rambler (Compl para 305); (2) These were unequivocal acts of ownership; (3) Lynwood CONCEDES Rambler was aware (para 215); (4) Even taking later dates - Dec 2011 (departure), Aug 2012 (first registration), 2013 (NGINX Plus rollout) - neither party took action for 7+ years. Critical: F5 concedes it is exploiting NGINX but denies plaintiff owns copyrights. Also: complaint alleges Sysoev never directly notified Rambler, but F5 argues conduct, not words, is the test, citing Aalmuhammed.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:03:58",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section III.B, pp.36-37",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9915,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Fraud claims fail Rule 9(b) - no specifics on who, what, when, where, how of alleged theft and evidence destruction",
+      "detail": "F5 Section I (pp.3-7) argues all fraud-based claims (Claims 1, 9, 10, 13-14, 18-24) fail Rule 9(b) heightened pleading. Key arguments: (1) Lynwood alleges in boilerplate fashion that NGINX Software Inc and NGINX BVI engaged in fraud by directing theft of Rambler equipment and destruction of evidence but fails to specify WHICH defendant stole WHAT equipment, WHERE, WHEN, and HOW; (2) Same deficiency for evidence destruction - fails to allege what actions were taken, who destroyed evidence, where, when, and how; (3) For F5 aiding-and-abetting fraud claim, Lynwood bases it on conclusory allegations F5 knew about and provided substantial assistance in achieving the sale of the NGINX Enterprise, but fails to specify what misrepresentations F5 knew about or how F5 assisted; (4) For trademark fraud claims (18-23), Lynwood fails to show that at the time trademark applications were signed, conflicting rights were clearly established or known to the signatory; (5) For false advertising (Claim 24), fails to identify specific misleading statements, which defendant made them, and when/where; (6) Critically, F5 argues Rambler was never entitled to rely on any alleged misrepresentations because Rambler was a sophisticated tech company that knew about NGINX popularity and paid Sysoev bonuses for it - if it relied on misrepresentations, it closed its eyes to the truth.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:04:17",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section I, pp.20-24",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9916,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Lanham Act claims barred by laches - Rambler knew since 2004 but waited until 670M acquisition",
+      "detail": "F5 Section II.E (pp.13-15) argues laches bars all Lanham Act claims. Key facts: (1) Defendants openly used and registered NGINX marks for many years but Lynwood did nothing - that suddenly changed when F5 acquired NGINX BVI for 670M in 2019; (2) Conduct underlying claims began as early as 2004 when Sysoev allegedly released software under NGINX mark without authorization; (3) Even taking later dates: Dec 2011 departure, Aug 2012 first trademark registration, 2013 NGINX Plus commercial rollout - neither Lynwood nor Rambler took any action for 7+ years, far longer than any applicable limitations period; (4) Lynwood was aware of NGINX mark use via own allegations (paras 215, 282, 520); (5) Rambler had constructive notice of 2012 trademark registration; (6) In Jan 2015, Lynwood entered assignment agreement with Rambler after Sysoev appeared in media asserting NGINX authorship, yet still waited 5 more years. Prejudice: (1) NGINX BVI raised 100M in venture funding based primarily on NGINX Plus; (2) F5 allocated 14.5M to trade name and 509M to goodwill in 670M acquisition; (3) NGINX surpassed Apache in market share. F5 argues this rapid growth would have occurred under a different mark if Lynwood had not delayed.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:04:30",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section II.E, pp.30-32",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9918,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Employment-related claims preempted by Copyright Act and superseded by CUTSA",
+      "detail": "F5 Section IV (pp.22-33) argues employment-related claims (1, 9-10, 12-14, 26) are triply barred: (A) PREEMPTED BY COPYRIGHT ACT: The work at issue is computer software (17 USC 102(a)(1)), and the claims seek to vindicate rights equivalent to copyright exclusive rights (17 USC 106). No extra element transforms them beyond copyright scope. Specifically: (1) Aiding-and-abetting claim (Claim 9) is about aiding sale of copyrighted work to competitor, same as Del Madera; (2) Fraud claim (14) is predicated on defendants knowing taking of plaintiff alleged work; (3) Conspiracy, tortious interference, and unjust enrichment all rely on allegedly unauthorized use of the software. (B) SUPERSEDED BY CUTSA: Employment claims arise from alleged theft, disclosure, and use of confidential proprietary information (NGINX Software), and CUTSA supersedes all civil remedies based on misappropriation of confidential/proprietary information regardless of whether it qualifies as trade secret. (C) TIME-BARRED: Under California law, relevant limitations periods are 2 years (claims vs F5 Networks) or 2-3 years (claims vs NGINX entities). Claims accrued in 2011 when alleged conspiracy began and employees left. Even the 2019 sale was merely the culmination of wrongdoing that began in 2011.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:04:44",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section IV, pp.39-51",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9920,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: F5 could not have known about or aided 2011 wrongs when it acquired NGINX in 2019",
+      "detail": "F5 Section IV.C.2-3 (pp.27-29) makes a temporal impossibility argument against the aiding-and-abetting claim: (1) Lynwood theory is that by acquiring NGINX in May 2019, F5 substantially assisted Rambler former employees - all of whom ended employment with Rambler in 2011 or 2012 - to breach employment obligations and defraud Rambler; (2) But any fraud happened no later than 2011 and any employment duties ended in 2011-2012, so F5 Networks in 2019 could not have known about, much less assisted, wrongs that predated its involvement by nearly a decade; (3) Lynwood conclusory allegations that F5 knew about the wrongs are based only on boilerplate known or should have known assertions; (4) The few specifics Lynwood does allege actually REFUTE F5 knowledge: NGINX BVI warranted to F5 Networks that NGINX BVI owned the NGINX Software outright and that no NGINX BVI employee was breaching any duty owed to any former employer (Compl para 415); (5) Knowledge is the crucial element for aiding-and-abetting, and Lynwood fails to plead actual knowledge of the specific primary violation. Nowhere does Lynwood allege F5 actually knew of the former employees alleged misrepresentations or that the sale would breach NDA, work-for-hire, and disclosure obligations supposedly owed Rambler over seven years after employment ended.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:05:05",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section IV.C.2-3, pp.44-46",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9923,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Key factual admissions - Sysoev employment dates, NGINX timeline, Rambler knowledge, and acquisition terms",
+      "detail": "F5 makes or accepts these factual statements in Doc 88: ADMITTED/ACCEPTED: (1) Sysoev was a Rambler employee from 2000 to 2011 (Glossary p.15); (2) Sysoev wrote first line of NGINX code in 2001 (p.19, citing Compl para 11); (3) NGINX was published as open source in 2004, while Sysoev was at Rambler (p.19); (4) Konovalov was Rambler employee 2008-2011 and co-founder of NGINX BVI (p.15); (5) Smirnoff was Rambler employee 2006-2012 and then NGINX BVI employee (p.15); (6) Dounin was Rambler employee 2004-2007 and later NGINX BVI employee (p.15); (7) NGINX BVI was incorporated in 2011 (p.15); (8) NGINX Software Inc registered first NGINX trademarks in 2011 (p.15); (9) NGINX BVI began developing NGINX Plus and licensed it from 2013 to 2019 (p.15); (10) F5 Networks acquired NGINX BVI and NGINX Software Inc in 2019 for 670M (p.19); (11) F5 concedes it is exploiting NGINX (p.36); (12) NGINX BVI raised 100M in venture funding based primarily on NGINX Plus (p.32, Compl para 47); (13) In acquisition, 14.5M allocated to trade name and 509M to goodwill (p.32); (14) Rambler assigned rights to Lynwood in Jan 2015 (p.31-32); (15) NGINX Plus was primary revenue driver for NGINX BVI from 2013 to 2019 (p.32, Compl para 47). DISPUTED: F5 does NOT accept that NGINX code was Rambler work-for-hire, that the Yam Server existed or was destroyed, or that any confidential information was misappropriated.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:05:21",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Glossary p.15 and Background pp.18-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9924,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Trademark standing fails - Lynwood/Rambler never used NGINX mark in commerce and abandoned it after 2011",
+      "detail": "F5 Section II.A (pp.8-12) argues Lynwood lacks standing for all Lanham Act claims. Key points: (1) TRADEMARK INFRINGEMENT standing requires owning a federal registration, owning an unregistered mark, or having a cognizable interest. Lynwood claims none of these properly. Its claim rests on alleged UNREGISTERED common law rights (Compl para 856), but such rights require bona fide use of a mark in the ordinary course of trade. Lynwood fails to allege it or Rambler ever used the NGINX mark in commerce independently of Sysoev. (2) Even if Sysoev use during employment created rights, merely inventing a mark during employment does not confer mark ownership (Sengoku Works v. RMC). Paradoxically, Lynwood alleges both that Sysoev use inured to Rambler benefit AND that such use was unauthorized and uncontrolled - Lynwood cannot have it both ways. (3) Lynwood has not alleged continuous use of the NGINX mark to the present. Plaintiff concedes the NGINX website was NOT hosted on Rambler servers after Sysoev departure (Compl para 516). Even if Rambler once had rights, it ABANDONED them after 2011. (4) FALSE ADVERTISING standing requires showing injury to commercial interest in sales or business reputation from deception. Lynwood does not allege it or Rambler lost any business. Neither sells products that compete with the F5 Entities. (5) CANCELLATION standing requires a real and rational basis for believing registration damages you. Lynwood has never used, marketed, licensed, or commercially exploited any product under the NGINX name and has never applied to register the mark.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:05:35",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section II.A, pp.25-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9927,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Yam Server and evidence destruction treated ONLY as Rule 9(b) pleading deficiency, not substantively addressed",
+      "detail": "F5's treatment of the Yam Server and evidence destruction allegations is notably superficial. The motion mentions these allegations only in Section I (fraud pleading, p.21) where it challenges them under Rule 9(b): Lynwood alleges NGINX Software Inc and NGINX BVI engaged in fraud by directing the theft of Rambler equipment and destruction of evidence (Compl para 682). F5 response is purely procedural - Lynwood fails to specify which defendant stole what equipment, where, when, and how; and fails to specify who destroyed evidence, where, when, and how. F5 does NOT substantively deny that equipment was stolen or evidence destroyed. It does NOT address the Yam Server by name. It does NOT explain what happened to the server. This is a conspicuous omission in a 53-page brief that argues every other point at length. The motion's silence on the merits of the Yam Server allegation is itself informative - F5 chose to attack only the pleading specificity rather than deny the factual allegations.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:05:52",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section I.A, p.21",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9930,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Paul Goldstein co-counsel - copyright ownership theory bears his academic fingerprint",
+      "detail": "Paul Goldstein (Stanford Law School, CA SBN 79613, paulgold@stanford.edu) is listed as co-counsel for F5, NGINX Inc (BVI), and NGINX Software Inc. Goldstein is one of the foremost U.S. copyright scholars. His involvement is reflected in several sophisticated copyright arguments: (1) The Jacobsen v. Kamind Assocs citation (535 F.3d 1373, Fed. Cir. 2008) about open source licenses and the obligation to identify original vs contributed code - this is a foundational open source copyright case; (2) The Computer Assocs v. Altai abstraction-filtration-comparison framework (982 F.2d 693, 2d Cir. 1992) for identifying protectable elements in software; (3) The argument that Lynwood Copyrighted Works definition extends BEYOND copyright scope to include ideas not reduced to writing and other IP rights appurtenant thereto, which is a sophisticated doctrinal distinction between copyright and other IP; (4) The choice-of-law analysis in footnote 6 about whether Russian or US copyright law applies, citing Itar-Tass v. Russian Kurier on the most significant relationship test; (5) The Feist/originality framework applied to the open source context; (6) The ownership-repudiation time-bar theory under Aalmuhammed v. Lee. These arguments collectively construct a framework where open source publication effectively extinguishes or at minimum complicates any employer copyright claim.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:06:07",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, cover page and Section III, pp.33-37",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9933,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: NGINX Plus treated as post-departure development, no concession of Rambler-era work on commercial product",
+      "detail": "F5's brief draws a crucial line on NGINX Plus that the 9th Circuit later found insufficient. F5's Glossary defines NGINX Plus as 'A commercial version of the NGINX software with added features for paying subscribers' and NGINX BVI as 'The company that began developing NGINX Plus in 2011 and licensed the software from 2013 to 2019.' The brief's entire framework treats all commercial NGINX activity as post-departure (post-2011). Key characterizations: (1) Lynwood definition of Copyrighted Works includes 'all NGINX Plus software modules conceived and/or developed before the end of 2011' but F5 attacks this as impermissibly vague rather than substantively addressing whether any NGINX Plus code was in fact developed at Rambler pre-departure; (2) F5 notes the complaint alleges first step in the conspiracy was registering NGINXPLUS.COM in 2010 (Compl para 34, 232) - this is actually a factual concession that NGINX Plus planning began BEFORE Sysoev left Rambler in 2011; (3) F5 notes NGINX Plus commercial rollout was 2013 (Compl para 46); (4) The brief argues NGINX BVI was formed in 2011 and began developing NGINX Plus then. The 9th Circuit later found that Lynwood had plausibly alleged that at least some NGINX Plus code was conceived or developed while the team was still at Rambler, which was sufficient to survive the MTD on the copyright claim.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:06:19",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Glossary p.15 and Section III.A, pp.33-34",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9937,
+      "finding_type": "legal",
+      "summary": "F5 MTD Doc 88: Unjust enrichment fails - F5 paid fair market value of 670M, no quasi-contractual relationship with Rambler/Lynwood",
+      "detail": "F5 Section V (pp.34-35) argues unjust enrichment fails for two reasons: (A) NO VIABLE THEORY: Under California law unjust enrichment is not a standalone cause of action and can only survive as a quasi-contract claim. But there is no prior quasi-contractual relationship between Lynwood/Rambler and any F5 Entity. The lack of any prior relationship precludes the application of an unjust enrichment theory. (B) ELEMENTS NOT PLED: Lynwood fails to show (1) F5 received a benefit and (2) unjust retention at Lynwood expense. The only benefits alleged are revenues and profits related to NGINX BVI (Compl para 872), but F5 obtained those benefits by paying fair market value of 670M to acquire NGINX BVI. Citing Rheem Mfg v. United States: defendant paid the fair market value of the property at the trustee sale, tends to show that there was no unjust enrichment. Even if unjust enrichment existed, restitution would go to NGINX BVI (the seller), not Lynwood.",
+      "source_datasets": [
+        "court_filing"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:06:36",
+      "target_name": "F5 Networks / NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 88, F5 MTD, Section V, pp.51-52",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-04-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "F5 named as top acquisition target in 2011 NGINX pitch deck -- actual acquisition occurred 8 years later exactly as planned",
+      "confidence": "medium",
+      "id": 9967
+    },
+    {
+      "date": "2011-04-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "F5 named as top acquisition target in 2011 NGINX pitch deck -- actual acquisition occurred 8 years later exactly as planned",
+      "confidence": "high",
+      "id": 9983
+    }
+  ]
+}

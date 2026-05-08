@@ -1,0 +1,416 @@
+{
+  "name": "Partners In Nutrition",
+  "slug": "partners-in-nutrition",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.213512",
+  "last_updated": "2026-03-27T19:14:18",
+  "stats": {
+    "total_findings": 16,
+    "total_connections": 1,
+    "total_entities": 0,
+    "finding_types": {
+      "network": 2,
+      "financial": 11,
+      "legal": 1,
+      "corporate": 1,
+      "regulatory": 1
+    },
+    "connection_types": {
+      "financial": 1
+    },
+    "last_updated": "2026-03-27T19:14:18"
+  },
+  "findings": [
+    {
+      "id": 8125,
+      "finding_type": "network",
+      "summary": "Aimee Bock (convicted FoF leader) was Executive Director of Partners In Quality Care in 2017 per 990 filing",
+      "detail": "IRS 990 filings for Partners In Nutrition (EIN 47-4302258, also operating as Partners In Quality Care) list Aimee Bock as Executive Director for fiscal year 2017. Kara Lomen succeeded her as ED (2018-2023). Christine Twait was co-listed as Executive Director in 2017. All three incorporated Feeding Our Future on November 7, 2016 while employed at PIQC (per investigation finding #7883). Bock was fired in 2018 for misconduct (per finding #7903).",
+      "source_datasets": "propublica_990",
+      "confidence": "high",
+      "date_of_event": "2017-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8160,
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets first appeared in FY2020 at $487,712 \u2014 with only $3,002 in actual contributions received that year, ruling out private donors as the source",
+      "detail": "990 XML FY2020: DonorRestrictionNetAssetsGrp EOY = $487,712 appeared for the first time, while NoDonorRestrictionNetAssetsGrp EOY = -$117,818. In the same year, PIQC received only $3,002 in contributions/grants (CYContributionsGrantsAmt) and $9,334,683 in government contracts (program service revenue). The $487K donor-restricted amount cannot be traced to any external donor contribution. The Share Our Strength $25,000 grant appears in FY2020 but is insufficient to explain $487,712. This is the earliest appearance of the donor-restricted classification \u2014 at the start of PIQC's dramatic CACFP revenue growth.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "medium",
+      "date_of_event": "2020-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8126,
+      "finding_type": "financial",
+      "summary": "Partners In Quality Care revenue spiked 15x to $140.7M in 2021 (pandemic fraud period) then collapsed 99.9% to $172K in 2023",
+      "detail": "Partners In Nutrition reported $140,746,408 in revenue for fiscal year 2021 (ending Sept 30, 2021) \u2014 a 15x increase from $9,433,392 in FY2020. Expenses were $130,432,328, yielding $10.3M net surplus. Total assets reached $32.3M. Revenue then declined to $62M in FY2022 and collapsed to $172K in FY2023 following the September 2022 DOJ indictments. The organization received audit flags for going concern, material noncompliance, and material weaknesses in internal controls in multiple years (2020-2023). These figures are consistent with fraudulent pandemic-era CACFP/SFSP meal reimbursement claims.",
+      "source_datasets": "propublica_990",
+      "confidence": "high",
+      "date_of_event": "2021-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8161,
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets jumped $10.28M during FY2021 \u2014 the $140M CACFP fraud peak year \u2014 via an explicit reclassification of government contract revenue to grants, creating the donor-restriction pool",
+      "detail": "IRS 990 XML object_id 202320329349300347, TaxPeriodEndDt 2021-09-30: DonorRestrictionNetAssetsGrp BOY=$487,712 / EOY=$10,768,660 (increase of $10,280,948). NoDonorRestrictionNetAssetsGrp BOY=-$117,818 / EOY=-$84,686. Total revenue was $140,746,408, essentially all CACFP reimbursements. Schedule O note (Part VI Sec C Line 19): 'audited financial statements are on file with both the office of the MN Attorney General and the Federal Audit Clearinghouse.' Additional Schedule O note referenced a 'correction of prior characterization of government contract dollars as grants rather than service revenues.' PPP loan forgiveness of $110,660 classified as grant receipts.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2021-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8148,
+      "finding_type": "financial",
+      "summary": "PIQC FY2021-2022 balance sheet trajectory: received ~$202.7M in CACFP reimbursements; paid ~$65.1M to site operators in FY2021 plus ~$13.7M more in FY2022; retained $19.8M in assets by FY2022 EOY. The $15.7M accounts receivable from MDE that existed at FY2021 EOY was entirely extinguished by FY2022 \u2014 these were claims MDE subsequently denied and the court upheld.",
+      "detail": "990 XML FY2021: AccountsReceivableGrp BOY $1,825,919 / EOY $15,748,997 (MDE owed PIQC). FY2022: AccountsReceivableGrp BOY $15,748,997 / EOY $0 \u2014 wiped out, consistent with MDE's denial of Nov/Dec 2021 and subsequent 2022 claims. CashNonInterestBearingGrp FY2022 EOY $19,796,703 (BOY $16,565,841) \u2014 cash accumulated from CACFP receipts.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2022-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8162,
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted assets increased $605K to $11,374,050 in FY2022 even after CACFP operations ended in January 2022, with no Schedule O explanation \u2014 while without-donor-restriction net assets fell to -$2.77M",
+      "detail": "IRS 990 XML object_id 202322079349301717, TaxPeriodEndDt 2022-09-30: DonorRestrictionNetAssetsGrp BOY=$10,768,660 / EOY=$11,374,050. NoDonorRestrictionNetAssetsGrp BOY=-$84,686 / EOY=-$2,765,553. Total assets: BOY $32,314,838 / EOY $19,821,703. Schedule O note (Part III Line 3): 'Starting January 2022, the organization was no longer a sponsor of the CACFP program, which accounted for approximately 99% of total revenue.' Despite program cessation in January 2022, donor-restricted assets INCREASED by $605,390 during FY2022. No Schedule O explanation of what the restrictions are.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2022-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8144,
+      "finding_type": "legal",
+      "summary": "MN Court of Appeals A22-0965 affirmed all MDE claim denials against PIQC for Nov/Dec 2021 and Jan-May 2022 CACFP claims, finding 'pervasive recordkeeping failures' and that groceries rather than meals were delivered. Court upheld MDE reliance on federal investigation affidavits connecting PIQC to individuals who diverted food-program funds.",
+      "detail": "Consolidated appeals A22-0965/A22-1613/A22-1746. MDE termination reversed on procedural grounds (OMB regs used instead of 7 CFR 226.6(c)(3)) but court said MDE could re-initiate under proper path. Claim denials affirmed on all four grounds. Court cited 7 CFR 226.14(a): state agencies 'shall disallow any portion of a claim and recover any payment to an institution not properly payable.'",
+      "source_datasets": "courtlistener",
+      "confidence": "high",
+      "date_of_event": "2023-09-18",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8163,
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets decreased $605,388 in FY2023 with zero program activity \u2014 reversing the exact FY2022 increase, with no Schedule O explanation \u2014 suggesting these amounts are accounting entries rather than genuine restrictions",
+      "detail": "IRS 990 XML object_id 202440459349302959, TaxPeriodEndDt 2023-09-30: DonorRestrictionNetAssetsGrp BOY=$11,374,050 / EOY=$10,768,662 (decrease of $605,388). NoDonorRestrictionNetAssetsGrp BOY=-$2,765,553 / EOY=-$2,939,741. Program expenses: $114,990 in CACFP provider payments despite claiming operations ceased January 2022. Contributions/grants = $10,000. FSAuditedInd and FederalGrantAuditRequiredInd both = 0 in XML. The $605,388 decrease exactly reverses the $605,390 FY2022 increase. No Schedule O explanation provided for the restriction release.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "medium",
+      "date_of_event": "2023-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8129,
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 showed anomalous $10.9M revenue vs $240K expenses \u2014 likely asset liquidation or recovery, not operations",
+      "detail": "Partners In Nutrition reported $10,870,692 in revenue for FY2024 with only $239,750 in expenses \u2014 yielding $10.6M net income while retaining $18.7M in total assets. For an organization with $152K operational revenue in FY2025, this FY2024 revenue spike is anomalous and may represent asset liquidation, settlement receipts, or restitution recovery flows rather than program income.",
+      "source_datasets": "propublica_990",
+      "confidence": "medium",
+      "date_of_event": "2024-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8142,
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 asset base is 98.5% liquid: $18,200,192 in savings/temp cash investments + $587,398 cash. No real estate, equipment, or program investments. Total assets $18,787,590.",
+      "detail": "IRS 990 XML (object 202521919349301642) Part X balance sheet confirms: SavingsAndTempCashInvstGrp EOY $18,200,192; CashNonInterestBearingGrp EOY $587,398. TotalAssetsEOYAmt $18,787,590. No land/building or investment securities lines reported.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8143,
+      "finding_type": "financial",
+      "summary": "PIQC recognized $10,761,752 in 'GAIN FROM LIABILITY WRITE-OFF' in FY2024: $7.4M accounts payable to convicted CACFP operators written off + $3.3M deferred revenue released. Net assets jumped from $7.8M to $18.5M in one fiscal year with no real program activity.",
+      "detail": "From 990 XML Schedule O ExplanationTxt: 'GAIN FROM LIABILITY WRITE-OFF'. Balance sheet confirms: AccountsPayableAccrExpnssGrp dropped from $7,443,501 to $27,935; DeferredRevenueGrp dropped from $3,318,663 to $0. CYOtherRevenueAmt = $10,761,752. OtherRevenueTotalAmt = $10,761,752.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8145,
+      "finding_type": "financial",
+      "summary": "PIQC's $11,374,050 in 'donor restricted' net assets has been completely static since FY2022 at a dormant organization with zero program activity \u2014 unexplained and potentially used as an asset protection mechanism against creditor claims.",
+      "detail": "From 990 XML FY2022-FY2024: DonorRestrictionNetAssetsGrp EOY = $11,374,050 in all three years without change. For FY2021 it was $10,768,660. No program services, 0 employees. Schedule O provides no explanation for the restrictions or release conditions.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8147,
+      "finding_type": "corporate",
+      "summary": "PIQC FY2024 990 confirms organization has ceased all food-program operations. Schedule O states: 'PARTNERS IN QUALITY CARE HAS CEASED OPERATION OF THE USDA CHILD AND ADULT CARE FOOD PROGRAM AND SUMMER FOOD SERVICE PROGRAM AS WELL AS ALL CONSULTING AND GRANT ACTIVITIES. THE ORGANIZATION REMAINS COMMITTED TO ITS MISSION.'",
+      "detail": "From 990 XML ExplanationTxt. Zero employees, 0 program service revenue, 0 program expenses. Three unpaid board members (Aaron Twait, Eleni Sauvageau, Ryan Seelau). Audited statements on file with MN AG and Federal Audit Clearinghouse per Schedule O.",
+      "source_datasets": "irs_990_xml",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8164,
+      "finding_type": "regulatory",
+      "summary": "PIQC never filed a mandatory Single Audit with the Federal Audit Clearinghouse despite receiving $200M+ in federal CACFP awards in FY2021-2022 \u2014 PIQC's own 990s falsely claim these audits are on file with FAC",
+      "detail": "Federal Audit Clearinghouse (app.fac.gov) search by EIN 474302258 across all audit years returned zero results. PIQC's own 990 Schedule O states in every year (FY2021-FY2024): 'audited financial statements are on file with both the office of the MN Attorney General and the Federal Audit Clearinghouse.' PIQC received approximately $140M in federal CACFP awards in FY2021 and $62M in FY2022 \u2014 far exceeding the $750,000 threshold requiring a Single Audit under OMB Uniform Guidance (2 CFR Part 200). The mandatory Single Audit was never filed. PIQC's Schedule O claim is false.",
+      "source_datasets": "fac_gov",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8128,
+      "finding_type": "network",
+      "summary": "Aaron Twait (current PIQC Board President) shares surname with Christine Twait (2017 co-ED who co-founded Feeding Our Future) \u2014 possible family connection",
+      "detail": "Current PIQC Board President (FY2025) is Aaron Twait. Christine Twait served as co-Executive Director alongside Aimee Bock in FY2017, when the organization first scaled. The shared surname suggests a possible family connection. If confirmed, Aaron Twait's governance role in an organization with $18.7M in remaining assets and ongoing audit concerns would warrant scrutiny given Christine Twait's role in the founding of Feeding Our Future.",
+      "source_datasets": "propublica_990",
+      "confidence": "medium",
+      "date_of_event": "2025-01-01",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8146,
+      "finding_type": "financial",
+      "summary": "No federal civil action (False Claims Act or otherwise) has been identified against PIQC as an entity despite $202.7M in CACFP receipts in FY2021-2022, MDE findings of false and fraudulent claims, and federal investigation affidavits connecting PIQC to convicted fraudsters. FCA statute of limitations runs approximately 2027-2028.",
+      "detail": "CourtListener party search, case search, and opinions search found only PIQC v. MDE administrative appeal (D. Minn. 0:22-cv-02195, dismissed Nov 2022). No DOJ civil FCA complaint, no USDA administrative recovery action, no federal judgment. FCA 6-year statute from violations in 2021-2022 means civil window remains open through ~2027-2028 (or 10 years maximum).",
+      "source_datasets": "courtlistener",
+      "confidence": "medium",
+      "date_of_event": "2026-03-27",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Partners In Nutrition",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4094,
+      "person_a": "Partners In Nutrition",
+      "person_b": "Christine Twait",
+      "relationship_type": "financial",
+      "description": "Christine Twait holds a $149,792 revolving insider loan to PIQC as of FY2024, four years after she co-founded Feeding Our Future while serving as PIQC co-ED. She is described as 'former board member' in FY2022 filings. The continuing financial relationship (insider loan) between PIQC and a key Feeding Our Future founder is a significant network connection.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "profile_id": "feeding-our-future",
+      "other_person": "Christine Twait",
+      "other_person_slug": "christine-twait",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2017-01-01",
+      "type": "finding",
+      "finding_type": "network",
+      "summary": "Aimee Bock (convicted FoF leader) was Executive Director of Partners In Quality Care in 2017 per 990 filing",
+      "confidence": "high",
+      "id": 8125
+    },
+    {
+      "date": "2020-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets first appeared in FY2020 at $487,712 \u2014 with only $3,002 in actual contributions received that year, ruling out private donors as the source",
+      "confidence": "medium",
+      "id": 8160
+    },
+    {
+      "date": "2021-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Partners In Quality Care revenue spiked 15x to $140.7M in 2021 (pandemic fraud period) then collapsed 99.9% to $172K in 2023",
+      "confidence": "high",
+      "id": 8126
+    },
+    {
+      "date": "2021-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets jumped $10.28M during FY2021 \u2014 the $140M CACFP fraud peak year \u2014 via an explicit reclassification of government contract revenue to grants, creating the donor-restriction pool",
+      "confidence": "high",
+      "id": 8161
+    },
+    {
+      "date": "2022-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC FY2021-2022 balance sheet trajectory: received ~$202.7M in CACFP reimbursements; paid ~$65.1M to site operators in FY2021 plus ~$13.7M more in FY2022; retained $19.8M in assets by FY2022 EOY. The $15.7M accounts receivable from MDE that existed at FY2021 EOY was entirely extinguished by FY2022 \u2014 these were claims MDE subsequently denied and the court upheld.",
+      "confidence": "high",
+      "id": 8148
+    },
+    {
+      "date": "2022-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted assets increased $605K to $11,374,050 in FY2022 even after CACFP operations ended in January 2022, with no Schedule O explanation \u2014 while without-donor-restriction net assets fell to -$2.77M",
+      "confidence": "high",
+      "id": 8162
+    },
+    {
+      "date": "2023-09-18",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MN Court of Appeals A22-0965 affirmed all MDE claim denials against PIQC for Nov/Dec 2021 and Jan-May 2022 CACFP claims, finding 'pervasive recordkeeping failures' and that groceries rather than meals were delivered. Court upheld MDE reliance on federal investigation affidavits connecting PIQC to individuals who diverted food-program funds.",
+      "confidence": "high",
+      "id": 8144
+    },
+    {
+      "date": "2023-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC's donor-restricted net assets decreased $605,388 in FY2023 with zero program activity \u2014 reversing the exact FY2022 increase, with no Schedule O explanation \u2014 suggesting these amounts are accounting entries rather than genuine restrictions",
+      "confidence": "medium",
+      "id": 8163
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 showed anomalous $10.9M revenue vs $240K expenses \u2014 likely asset liquidation or recovery, not operations",
+      "confidence": "medium",
+      "id": 8129
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 asset base is 98.5% liquid: $18,200,192 in savings/temp cash investments + $587,398 cash. No real estate, equipment, or program investments. Total assets $18,787,590.",
+      "confidence": "high",
+      "id": 8142
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC recognized $10,761,752 in 'GAIN FROM LIABILITY WRITE-OFF' in FY2024: $7.4M accounts payable to convicted CACFP operators written off + $3.3M deferred revenue released. Net assets jumped from $7.8M to $18.5M in one fiscal year with no real program activity.",
+      "confidence": "high",
+      "id": 8143
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC's $11,374,050 in 'donor restricted' net assets has been completely static since FY2022 at a dormant organization with zero program activity \u2014 unexplained and potentially used as an asset protection mechanism against creditor claims.",
+      "confidence": "high",
+      "id": 8145
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "PIQC FY2024 990 confirms organization has ceased all food-program operations. Schedule O states: 'PARTNERS IN QUALITY CARE HAS CEASED OPERATION OF THE USDA CHILD AND ADULT CARE FOOD PROGRAM AND SUMMER FOOD SERVICE PROGRAM AS WELL AS ALL CONSULTING AND GRANT ACTIVITIES. THE ORGANIZATION REMAINS COMMITTED TO ITS MISSION.'",
+      "confidence": "high",
+      "id": 8147
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "PIQC never filed a mandatory Single Audit with the Federal Audit Clearinghouse despite receiving $200M+ in federal CACFP awards in FY2021-2022 \u2014 PIQC's own 990s falsely claim these audits are on file with FAC",
+      "confidence": "high",
+      "id": 8164
+    },
+    {
+      "date": "2025-01-01",
+      "type": "finding",
+      "finding_type": "network",
+      "summary": "Aaron Twait (current PIQC Board President) shares surname with Christine Twait (2017 co-ED who co-founded Feeding Our Future) \u2014 possible family connection",
+      "confidence": "medium",
+      "id": 8128
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "No federal civil action (False Claims Act or otherwise) has been identified against PIQC as an entity despite $202.7M in CACFP receipts in FY2021-2022, MDE findings of false and fraudulent claims, and federal investigation affidavits connecting PIQC to convicted fraudsters. FCA statute of limitations runs approximately 2027-2028.",
+      "confidence": "medium",
+      "id": 8146
+    }
+  ]
+}

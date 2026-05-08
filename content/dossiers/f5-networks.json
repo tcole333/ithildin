@@ -1,0 +1,208 @@
+{
+  "name": "F5 Networks",
+  "slug": "f5-networks",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.423681",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 1,
+      "negative_result": 1,
+      "legal": 1,
+      "financial": 2
+    },
+    "connection_types": {
+      "corporate": 3
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9811,
+      "finding_type": "intelligence",
+      "summary": "F5 10-K confirms Moscow as NGINX development center but risk factors contain zero Russia-specific disclosures",
+      "detail": "F5 10-K FY2019 (Item 1) explicitly states: 'NGINX products are developed in San Francisco, California; Cork, Ireland; and Moscow, Russia.' However, neither the FY2019 risk factors (65,856 chars) nor the FY2020 risk factors (66,866 chars) mention Russia, Moscow, Rambler, or any Russia-specific risks. Despite acquiring a company whose core product development occurred in Moscow through Nginx LLC, F5 disclosed no geopolitical, sanctions, or IP-ownership risks specific to Russia. The Rambler raid/IP claim surfaced approximately 6 months after closing (December 2019) and was likewise not mentioned in any subsequent 10-K risk factors reviewed. The DEF 14A proxy statement also contains no mention of Russia, Sysoev, Konovalov, or Rambler.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:01:25",
+      "target_name": "F5 Networks",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1048695/000104869519000034/ffiv10k9-30x2019.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1048695/000104869520000041/ffiv-20200930.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9814,
+      "finding_type": "negative_result",
+      "summary": "LittleSis: No personnel bridge found between Beloussov/Runa orbit and F5 Networks at depth 2",
+      "detail": "Comprehensive LittleSis cross-referencing of the Beloussov network (92 entities at depth 2, including Runa Capital, DFJ Fund VIII, Tim Draper, Masha Bucher, Vera Shokina, GVA Capital) against the F5 Networks network (28 entities including all board members and executives) found zero shared entity IDs. Also checked depth-2 from the F5 side (relationships of CEO Locoh-Donou, board members Chadwick, Combes, Scott Thompson) \u2014 still no overlap. NGINX, Acronis, and Parallels do not exist in LittleSis. NEA (New Enterprise Associates) also showed no overlap with either network.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:25:15",
+      "target_name": "F5 Networks",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Cross-referencing of LittleSis entities 439095 (Beloussov), 438845 (Runa Capital), 101815 (DFJ VIII), 37259 (Tim Draper), 438844 (Masha Bucher), 448889 (Vera Shokina), 438880 (GVA Capital) vs 118963 (F5 Networks) and all connected persons",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9932,
+      "finding_type": "legal",
+      "summary": "Lynwood demanded all F5 due diligence documents for the $670M NGINX merger, including third-party provider due diligence and board meeting minutes \u2014 suggesting F5 either failed to discover or willfully ignored Rambler's IP claims",
+      "detail": "F5 RFP requests 6-7 demand all due diligence documents and communications, including due diligence by third-party providers, investment advisors, financial consultants, and technical consultants. Request 8 demands board meeting minutes about the merger. Request 17 targets the valuation and calculation of the Total Closing Consideration of $670M. Request 32 targets IP rights allegedly acquired. Requests 85-86 specifically target F5's knowledge of Rambler's ownership claims. Request 220 asks about F5's knowledge or anticipation that criminal or civil litigation could occur concerning Rambler/Lynwood's alleged interest in NGINX.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:06:11",
+      "target_name": "F5 Networks",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 103-2 (F5 RFP), Requests 6-8, 17, 32, 85-86, 220",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9947,
+      "finding_type": "financial",
+      "summary": "F5 booked $509.4M goodwill and $89.3M intangible assets from the $670M NGINX acquisition; Lynwood demands all supporting valuations, including developed technologies ($62.5M), customer relationships ($12M), trade name ($14.5M), and non-competition agreements ($300K)",
+      "detail": "F5 RFP requests 41-44 target specific financial disclosures from F5's 10-K (Nov 15, 2019, FY2019). Request 41 quotes F5's goodwill statement: 'The goodwill related to the NGINX acquisition is comprised primarily of expected synergies from combining operations and the acquired intangible assets that do not qualify for separate recognition.' Request 42 targets the $509,414,000 goodwill valuation (page 56 of 10-K). Request 43 targets intangible assets at $89,300,000. Request 44 targets purchase price allocation: Net tangible assets $44,494,000; Developed technologies $62,500,000; Customer relationships $12,000,000; Trade name $14,500,000; Non-competition agreements $300,000; Goodwill $509,414,000. Request 51 targets the goodwill reduction of $6M in the post-close measurement period (from 10-Q, Q3 FY2020).",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:07:44",
+      "target_name": "F5 Networks",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 103-2, F5 RFP Requests 41-44, 51",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9955,
+      "finding_type": "financial",
+      "summary": "Lynwood demanded F5's Merger Agreement escrow details: $2M deposited for post-closing purchase price adjustment and 1% of Merger Consideration for indemnification obligations, plus Fortis Advisors LLC communications and Nginx Acquisition Equity Incentive Plan",
+      "detail": "F5 RFP request 34 quotes the F5 Form 8-K (March 11, 2019): 'At the closing of the Merger, F5 will deposit with an escrow agent (i) $2,000,000 of the Merger Consideration to fund potential payment obligations of certain former securityholders of Nginx with respect to a post-closing purchase price adjustment, and (ii) 1% of the Merger Consideration to fund potential post-closing indemnification obligations of certain former securityholders of Nginx, on the terms and conditions set forth in the Merger Agreement. To supplement the potential post-closing indemnification obligations for breaches of Nginx's representations and warranties and certain other matters, F5 has obtained an insurance policy, the costs and expenses of which are shared equally by F5 and Nginx's securityholders (subject to the condition that Nginx's securityholders will not be required to pay in excess of $1,000,000 in the aggregate for such costs and expenses).' Request 36 targets Escrow Agreement, Shareholder Consent, and Joinder Agreement. Requests 54-55 target the Nginx Acquisition Equity Incentive Plan and Nginx 2011 Share Plan (from F5 10-K page 66). Requests 56-57 demand all communications with and concerning Fortis Advisors LLC, who was a party to the Merger Agreement. Request 50 demands all consideration paid to Co-Defendants.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:09:19",
+      "target_name": "F5 Networks",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 103-2, F5 RFP Requests 34-36, 50, 54-57",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5111,
+      "person_a": "F5 Networks",
+      "person_b": "Lynwood Investments CY Ltd (Mamut)",
+      "relationship_type": "corporate",
+      "description": "F5's failure to disclose Russia IP chain risk in 10-K risk factors (FY2019-FY2020) despite naming Moscow as dev center is likely the core fraud theory in three 2025-2026 securities class actions. The Moscow code dependency (93.6% security-critical code) and Lynwood IP claim (Dec 2019) were material undisclosed risks.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Lynwood Investments CY Ltd (Mamut)",
+      "other_person_slug": "lynwood-investments-cy-ltd-mamut",
+      "evidence": []
+    },
+    {
+      "id": 5112,
+      "person_a": "F5 Networks",
+      "person_b": "Sergey Kandaurov",
+      "relationship_type": "corporate",
+      "description": "Post-2022 'closure' of Moscow office has not reduced Moscow's operational control of nginx security-critical code. Kandaurov and Arutyunyan continue as sole significant contributors at UTC+3 timezone while F5 Western bench produced only 32 commits across 14 people in 7 years.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Sergey Kandaurov",
+      "other_person_slug": "sergey-kandaurov",
+      "evidence": []
+    },
+    {
+      "id": 5113,
+      "person_a": "F5 Networks",
+      "person_b": "Roman Arutyunyan",
+      "relationship_type": "corporate",
+      "description": "Arutyunyan's shift from arut@nginx.com to personal gmail.com (Aug 2024) while continuing to commit security-critical nginx code from UTC+3 suggests F5 may be engaging him as Russia-based contractor to avoid sanctions compliance optics while retaining code dependency.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Roman Arutyunyan",
+      "other_person_slug": "roman-arutyunyan",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

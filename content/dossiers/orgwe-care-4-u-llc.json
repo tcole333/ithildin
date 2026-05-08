@@ -1,0 +1,245 @@
+{
+  "name": "org:We care 4 u LLC",
+  "slug": "orgwe-care-4-u-llc",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.373136",
+  "last_updated": "2026-03-27T12:27:34",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "infrastructure": 5,
+      "pattern": 2,
+      "connection": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-03-27T12:27:34"
+  },
+  "findings": [
+    {
+      "id": 8130,
+      "finding_type": "infrastructure",
+      "summary": "We Care 4 U LLC operates wecare4llc.com, launched July 2023 with first cert from ZeroSSL; hosted on Hostinger (AS47583, IP 147.79.79.118)",
+      "detail": "wecare4llc.com received its first SSL certificate (ZeroSSL) on July 29, 2023 \u2014 approximately 4 years after We Care 4 U LLC was incorporated (September 2019) and 20 months before its DHS HCBS license was issued (March 2025). The cert history shows 22 unique certificates through February 2026, with regular Let's Encrypt renewals.",
+      "source_datasets": "crtsh",
+      "confidence": "high",
+      "date_of_event": "2023-07-29",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8135,
+      "finding_type": "infrastructure",
+      "summary": "wecare4llc.com had a burst of 7 subdomain cert issuances in August 2024 (app, admin, backend, dev, staging, demo, ftp) \u2014 indicating a healthcare application platform build-out prior to DHS license activation",
+      "detail": "CT logs show certificate issuances for admin.wecare4llc.com, app.wecare4llc.com, backend.wecare4llc.com, dev.wecare4llc.com, staging.wecare4llc.com, demo.wecare4llc.com in early August 2024 \u2014 approximately 7 months before the DHS HCBS license was issued (March 14, 2025). These subdomains are now NXDOMAIN, suggesting a transient development/staging environment. The 'app' and 'backend' subdomains suggest a client-facing healthcare portal was built.",
+      "source_datasets": "crtsh",
+      "confidence": "high",
+      "date_of_event": "2024-08-08",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8136,
+      "finding_type": "infrastructure",
+      "summary": "wecare4ullc.com (typo variant) had a GoDaddy cert Jan 2024\u2013Jan 2025, now NXDOMAIN \u2014 likely registered as placeholder then abandoned in favor of wecare4llc.com",
+      "detail": "A separate domain wecare4ullc.com (with double 'l') received a GoDaddy SSL cert on January 16, 2024 (expired January 16, 2025). The domain now resolves to NXDOMAIN. It received only one cert across its lifetime, suggesting it was registered as a typo-variant or placeholder domain but never actively used.",
+      "source_datasets": "crtsh,shodan",
+      "confidence": "high",
+      "date_of_event": "2025-01-16",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8131,
+      "finding_type": "pattern",
+      "summary": "wecare4llc.com contact page lists HADEF's Suite 225 address instead of We Care 4 U's Suite 224 \u2014 reveals website was built by cloning HADEF's template",
+      "detail": "The wecare4llc.com contact page states address as '2833 13th ste 225 Minneapolis MN 55407'. The entity's registered address (MN SOS, DHS license 1114633, OpenCorporates) is Suite 224. Suite 225 is HADEF's registered address. This error has not been corrected and persists on the live website as of March 2026.",
+      "source_datasets": "live_web_crawl",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8132,
+      "finding_type": "pattern",
+      "summary": "wecare4llc.com and hadef.org share identical WordPress stack including theme (ekko), cache hash (qiyc4fz1), and hosting org \u2014 consistent with single administrator or shared web developer",
+      "detail": "Both wecare4llc.com and hadef.org use: (1) identical WordPress theme 'ekko' by Key Design; (2) identical WP Fastest Cache path hash 'qiyc4fz1' appearing in each site's JS bundle path; (3) identical Contact Form 7 contact form structure; (4) identical footer/navigation layouts; (5) same jQuery Migrate 3.4.x; (6) identical popup contact widget showing (612)-800-4888. Both are hosted on Hostinger (AS47583) with the same Shodan org attribution 'Brander Group Inc.'",
+      "source_datasets": "live_web_crawl,shodan,crtsh",
+      "confidence": "medium",
+      "date_of_event": "2026-03-27",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8133,
+      "finding_type": "connection",
+      "summary": "Phone (612) 800-4888 is shared between We Care 4 U LLC's DHS license record, MN.gov provider listings, wecare4llc.com, and hadef.org \u2014 confirming operator identity across entities",
+      "detail": "Phone (612) 800-4888 appears in: (1) MN DHS HCBS license record for We Care 4 U LLC (license 1114633); (2) MN.gov provider directory listings for multiple We Care 4 U services; (3) wecare4llc.com popup contact widget; (4) hadef.org popup contact widget. The same number serves as the public contact for both entities.",
+      "source_datasets": "mn_dhs,live_web_crawl",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8134,
+      "finding_type": "infrastructure",
+      "summary": "We Care 4 U LLC uses two emails: operational inbox info@wecare4llc.com and personal/alternative Gmail Wecarehomescare@gmail.com",
+      "detail": "wecare4llc.com contact page identifies two contact emails: 'Wecarehomescare@gmail.com' (embedded in contact page text) and 'info@wecare4llc.com' (sidebar popup widget). The Gmail address may indicate early-stage operation or an alternate operational inbox. Neither email appears in breach data or business directories (not searched).",
+      "source_datasets": "live_web_crawl",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8137,
+      "finding_type": "infrastructure",
+      "summary": "HADEF maintains active @hadeforg social accounts on three platforms; We Care 4 U claims @wecare4u but all social links are dead/redirect to homepage",
+      "detail": "HADEF (hadef.org) has an active social media presence under handles @hadeforg: Facebook (web.facebook.com/hadeforg), Twitter/X (twitter.com/hadeforg), Instagram (instagram.com/hadeforg/). All three are linked from the live hadef.org footer. We Care 4 U's website claims @wecare4u handles on the contact page but all social icon links redirect to wecare4llc.com homepage \u2014 the accounts may not exist or were never established.",
+      "source_datasets": "live_web_crawl",
+      "confidence": "medium",
+      "date_of_event": "2026-03-27",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "target_name": "org:We care 4 u LLC",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4089,
+      "person_a": "org:We care 4 u LLC",
+      "person_b": "org:Horn of Africa Development and Education Foundation",
+      "relationship_type": "corporate",
+      "description": "wecare4llc.com and hadef.org share: identical WordPress theme (ekko), identical WP Fastest Cache hash (qiyc4fz1), same phone (612-800-4888), same hosting provider and Shodan org (Brander Group Inc./Hostinger AS47583), and identical page structure. The wecare4llc.com contact page incorrectly lists HADEF's Suite 225 address, confirming the LLC site was built by cloning HADEF's template.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "profile_id": "feeding-our-future",
+      "other_person": "org:Horn of Africa Development and Education Foundation",
+      "other_person_slug": "orghorn-of-africa-development-and-education-foundation",
+      "evidence": []
+    },
+    {
+      "id": 4090,
+      "person_a": "org:We care 4 u LLC",
+      "person_b": "org:Brander Group Inc.",
+      "relationship_type": "corporate",
+      "description": "Both wecare4llc.com and hadef.org are attributed to 'Brander Group Inc.' in Shodan host data on Hostinger (AS47583). The shared attribution suggests both sites were built or managed by the same web developer entity. This developer is the likely bridge between We Care 4 U LLC and HADEF's digital infrastructure.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 12:27:34",
+      "profile_id": "feeding-our-future",
+      "other_person": "org:Brander Group Inc.",
+      "other_person_slug": "orgbrander-group-inc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2023-07-29",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "We Care 4 U LLC operates wecare4llc.com, launched July 2023 with first cert from ZeroSSL; hosted on Hostinger (AS47583, IP 147.79.79.118)",
+      "confidence": "high",
+      "id": 8130
+    },
+    {
+      "date": "2024-08-08",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "wecare4llc.com had a burst of 7 subdomain cert issuances in August 2024 (app, admin, backend, dev, staging, demo, ftp) \u2014 indicating a healthcare application platform build-out prior to DHS license activation",
+      "confidence": "high",
+      "id": 8135
+    },
+    {
+      "date": "2025-01-16",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "wecare4ullc.com (typo variant) had a GoDaddy cert Jan 2024\u2013Jan 2025, now NXDOMAIN \u2014 likely registered as placeholder then abandoned in favor of wecare4llc.com",
+      "confidence": "high",
+      "id": 8136
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "pattern",
+      "summary": "wecare4llc.com contact page lists HADEF's Suite 225 address instead of We Care 4 U's Suite 224 \u2014 reveals website was built by cloning HADEF's template",
+      "confidence": "high",
+      "id": 8131
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "pattern",
+      "summary": "wecare4llc.com and hadef.org share identical WordPress stack including theme (ekko), cache hash (qiyc4fz1), and hosting org \u2014 consistent with single administrator or shared web developer",
+      "confidence": "medium",
+      "id": 8132
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "connection",
+      "summary": "Phone (612) 800-4888 is shared between We Care 4 U LLC's DHS license record, MN.gov provider listings, wecare4llc.com, and hadef.org \u2014 confirming operator identity across entities",
+      "confidence": "high",
+      "id": 8133
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "We Care 4 U LLC uses two emails: operational inbox info@wecare4llc.com and personal/alternative Gmail Wecarehomescare@gmail.com",
+      "confidence": "high",
+      "id": 8134
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "infrastructure",
+      "summary": "HADEF maintains active @hadeforg social accounts on three platforms; We Care 4 U claims @wecare4u but all social links are dead/redirect to homepage",
+      "confidence": "medium",
+      "id": 8137
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 **Stats**: 7 findings, 3 connections, 0 entities
 **Dossier**: /dossiers/elizabeth-ross-johnson
 
-> Johnson illustrates Epstein’s earliest method of wealth capture: gaining co-ownership of a billionaire client’s property, routing her affairs through his office address, and characterizing the arrangement as “familial” — a template he would refine with subsequent targets. Her 1998 exit also demonstrates that some clients recognized the arrangement’s nature and formally severed ties.
+> Johnson illustrates Epstein’s earliest documented method of gaining financial control over wealthy clients: co-ownership of a billionaire’s property, routing her affairs through his office address, and characterizing the arrangement as “familial.” Her 1998 exit also demonstrates that some clients recognized the arrangement’s nature and formally severed ties.
 
 ## Key Findings
 - **[financial/high]** Deutsche Bank due diligence research on Epstein (EFTA01296720) reveals a deed record in Eagle County, Colorado showing Elizabeth Ross Johnson (J&J heiress known as Libet Johnson) as both SELLER and co-BUYER with Jeffrey E. Epstein of 375 Mill Creek Circle, Vail, CO 81657. Both parties used the address 457 Madison Ave NYC 10022 (Epstein office). Total market value was 19,280,153 dollars (land 1,626,790 plus improvements 17,653,363). Johnson effectively added Epstein to the deed of her existing property, giving a convicted sex offender co-ownership of a multi-million dollar estate. (Finding #582)
@@ -19,10 +19,10 @@
 - **Woody Johnson** [familial/medium]: None
 
 ## Open Questions
-- What was the exact date Johnson added Epstein to the Vail property deed, and does Eagle County maintain the original filing that would establish the start date of the co-ownership arrangement?
+- What was the exact date Johnson added Epstein to the Vail property deed? Eagle County records may contain the original filing establishing the start date of the co-ownership arrangement.
 - Who introduced Johnson to Epstein — was it directly through Les Wexner, through J&J social circles, or through another intermediary? The Wexner connection is reported but the specific mechanism is undocumented.
 - What prompted the 1998 exit? Did Johnson receive outside legal advice, was there a specific incident, or did the Johnson family intervene to install Christopher Wold Johnson as co-trustee?
-- Can the reported $24 million sale of the Vail property to French buyers be verified through Eagle County records, and who were the buyers? The claim that they never visited the property is unverified.
+- Can the reported $24 million sale of the Vail property to French buyers be verified through Eagle County records, and who were the buyers?
 - Were there other Epstein-linked transactions in Johnson’s financial history beyond the Vail property — particularly any involving Epstein entities like Financial Trust Company or Southern Trust?
 
 ## Applicable Models

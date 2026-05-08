@@ -1,0 +1,534 @@
+{
+  "name": "Felix Sater",
+  "slug": "felix-sater",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.378873",
+  "last_updated": "2026-04-13T17:03:46",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 9,
+    "total_entities": 1,
+    "finding_types": {
+      "negative_result": 1,
+      "legal": 4,
+      "background": 1,
+      "relationship": 1
+    },
+    "connection_types": {
+      "employment": 2,
+      "corporate": 4,
+      "financial": 1,
+      "legal": 1,
+      "social": 1
+    },
+    "last_updated": "2026-04-13T17:03:46"
+  },
+  "findings": [
+    {
+      "id": 10037,
+      "finding_type": "negative_result",
+      "summary": "No direct personal connection found between Felix Sater and Paolo Zampolli in any source checked. However, both operated in Trump Org real estate sales during overlapping periods (2004-2006+), and Zampolli was co-defendant with Bayrock (Sater's company) in a Trump SoHo fraud case. This is one degree of separation via Bayrock, not a direct documented link.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:13:57",
+      "target_name": "Felix Sater",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:49948",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WebSearch:2026-04-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10065,
+      "finding_type": "legal",
+      "summary": "Sater found liable $52M in BTA Bank money laundering case (Oct 2025); previously convicted in $40M Mafia stock fraud (1998)",
+      "detail": "Felix Sater (born 1966, Soviet Union) has extensive criminal/civil history. 1991: convicted of first-degree assault for stabbing a commodities broker. 1998: pleaded guilty to involvement in $40M stock fraud scheme orchestrated by Russian Mafia (Genovese and Bonanno crime families); became FBI informant. 2003-2008: managing director at Bayrock Group, senior advisor to Trump. Kazakhstan's BTA Bank sued Sater for allegedly using Trump-branded properties (including Trump SoHo) to launder millions stolen from the bank \u2014 specifically, $3M masked as condo down payments. In Oct 2025, Sater found liable and ordered to pay $52M in damages. LittleSis ID: 49948.",
+      "source_datasets": [
+        "wikipedia",
+        "littlesis",
+        "pbs"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:41:38",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 49948",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "PBS: pbs.org/newshour/politics/lawsuit-says-felix-sater-looked-to-launder-cash-through-trump-projects",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Felix Sater",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10146,
+      "finding_type": "background",
+      "summary": "Sater had Trump Org 'Senior Advisor' title and office in Trump Tower through 2010-2011, bridging his Bayrock exit and Khrapunov investment period",
+      "detail": "After leaving Bayrock in 2008/2009 when his criminal past was exposed, Sater received business cards identifying him as 'Senior Advisor to Donald Trump' with @TrumpOrg.com email and an office described as the 'third office down' from Trump in Trump Tower. He maintained this role through at least 2010-2011. Trump Organization's general counsel claimed he was 'never employed by or on the payroll' and no deals resulted. This bridging role is critical: Sater was simultaneously advising Trump AND facilitating Khrapunov investments (2012-2014).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:57:14",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ABC News 2015: Memory Lapse? Trump Seeks Distance From Advisor With Past Ties to Mafia",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "BTA Bank trial evidence per Wikipedia/Felix Sater",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10150,
+      "finding_type": "relationship",
+      "summary": "Sater and Ridloff facilitated Khrapunov Trump SoHo purchases in April 2013 \u2014 same period Bayrock contracted Zampolli for Trump SoHo sales",
+      "detail": "Critical temporal overlap: In 2013, Sater and Ridloff were actively facilitating Khrapunov family investments through SDG, including purchasing 3 Trump SoHo condos for $3.1M via shell companies in April 2013. Simultaneously, the Domus Arbiter case (651970/2014) shows Bayrock sponsor entities contracted with Zampolli/Paramount Realty and Douglas Elliman to sell Trump SoHo units in January 2013, ultimately selling 14 units for $10.86M. The Khrapunov 3 condos at $3.1M were likely part of the 14 units Zampolli sold. If Zampolli was the broker who sold Khrapunov shell companies their Trump SoHo condos, he was the intermediary between Sater's money-laundering operation and the legal sales process.",
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:57:52",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BTA Bank v. Sater trial: Sater facilitated Khrapunov investments 2012-2014",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Domus Arbiter v. Bayrock: Zampolli contracted January 2013 for Trump SoHo sales",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho: Khrapunov condos purchased April 2013",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10153,
+      "finding_type": "legal",
+      "summary": "Sater found liable for $52M in BTA Bank retrial (Oct 2025) \u2014 first trial awarded $32M (June 2024), new trial granted (Jan 2025)",
+      "detail": "City of Almaty and BTA Bank JSC v. Sater (1:19-cv-02645, SDNY, Judge Koeltl): Civil trial in which Sater was accused of helping Ilyas Khrapunov launder millions through US real estate including Trump SoHo condos. First jury verdict June 2024: $32M damages. Sater won new trial in January 2025. Retrial October 2025: $52M verdict. Case terminated February 27, 2026 per CourtListener. Also: Sater filed for bankruptcy (23-21478, D.N.J., December 2023); City of Almaty filed adversary proceeding (24-01147, D.N.J., March 2024, terminated September 2024). The retrial verdict confirms the factual finding that Sater facilitated Khrapunov money through Trump SoHo \u2014 this is no longer just an allegation but a jury-confirmed finding.",
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:58:30",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg Law: Ex-Trump Ally Felix Sater Liable In Money Laundering Trial (Oct 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg: Ex-Trump Advisor Felix Sater Gets New Money-Laundering Trial (Jan 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: 1:19-cv-02645, 23-21478, 24-01147",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "RegTechTimes: Felix Sater Loses 32 Million Verdict (June 2024)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10155,
+      "finding_type": "legal",
+      "summary": "Kriss v. Bayrock RICO suit (2010-2018) alleged Sater continued controlling Bayrock after formal departure \u2014 suit settled after 8 years",
+      "detail": "Jody Kriss (former Bayrock director of finance) filed RICO suit in SDNY in May 2010 (10 Civ. 3959) alleging Bayrock was 'substantially and covertly mob-owned and operated' and that Sater's role was hidden. The suit alleged Sater and Arif laundered money, evaded taxes, and bilked Kriss out of millions. Critically, the complaint alleged Sater continued to control Bayrock operations even after his formal departure. The lawsuit was settled in February 2018 after nearly a decade of litigation. The settlement terms were not disclosed. If the Kriss allegations about continued Sater control are accurate, then Sater \u2014 not just Arif \u2014 may have been the one who authorized the contract with Zampolli for Trump SoHo sales in 2013.",
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:58:53",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: Kriss v. Bayrock Group LLC (1:13-cv-03905, SDNY)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Real Deal (Feb 2018): Kriss, Bayrock agree to settle lawsuit after 8 years",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "vLex: Kriss v. Bayrock Grp. LLC, 10 Civ. 3959 (LGS) (FM)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10310,
+      "finding_type": "legal",
+      "summary": "City of Almaty, Kazakhstan v. Sater (SDNY 1:19-cv-02645, Judge John G. Koeltl). Filed March 25, 2019; terminated February 27, 2026. Cause: Diversity-Fraud. First trial June 2024: jury awarded $32M+ to Almaty/BTA Bank. New trial granted January 2025. Retrial September 2025: Sater found liable for $52M. Case alleged Sater helped Ilyas Khrapunov launder portion of ~$6B allegedly stolen from BTA Bank by Mukhtar Ablyazov. Khrapunov purchases of 3 Trump SoHo units (via Jajan-created shell companies) were specifically alleged as part of the laundering scheme. Sater stated he would appeal.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:46",
+      "target_name": "Felix Sater",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener:docket-14790184,SDNY:1:19-cv-02645",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5170,
+      "person_a": "Bayrock Group LLC",
+      "person_b": "Felix Sater",
+      "relationship_type": "employment",
+      "description": "Managing director of Bayrock Group 2003-2008. Key decision-maker on Trump SoHo project. Joined at urging of founder Tevfik Arif.",
+      "strength": "strong",
+      "date_range": "2003-2008",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:42:24",
+      "profile_id": "zampolli",
+      "other_person": "Bayrock Group LLC",
+      "other_person_slug": "bayrock-group-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 49948",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Felix Sater",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5221,
+      "person_a": "Daniel Ridloff",
+      "person_b": "Felix Sater",
+      "relationship_type": "corporate",
+      "description": "Co-ran US arm of Khrapunov's SDG-Investment Fund (2012-2014); both formerly at Bayrock, both briefly at Trump Org",
+      "strength": "strong",
+      "date_range": "2012-2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:44",
+      "profile_id": "zampolli",
+      "other_person": "Daniel Ridloff",
+      "other_person_slug": "daniel-ridloff",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: City of Almaty v. Sater (1:19-cv-02645)",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5224,
+      "person_a": "Felix Sater",
+      "person_b": "Ilyas Khrapunov",
+      "relationship_type": "financial",
+      "description": "Sater facilitated Khrapunov US investments including Trump SoHo condos; found liable for 52M in BTA Bank case",
+      "strength": "strong",
+      "date_range": "2012-2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:59:59",
+      "profile_id": "zampolli",
+      "other_person": "Ilyas Khrapunov",
+      "other_person_slug": "ilyas-khrapunov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BTA Bank v. Sater verdict (Oct 2025)",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5230,
+      "person_a": "Felix Sater",
+      "person_b": "SDG-Investment Fund",
+      "relationship_type": "corporate",
+      "description": "Co-ran US arm of SDG with Ridloff, facilitating Khrapunov investments",
+      "strength": "strong",
+      "date_range": "2012-2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:00:20",
+      "profile_id": "zampolli",
+      "other_person": "SDG-Investment Fund",
+      "other_person_slug": "sdg-investment-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Steppe to Soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5252,
+      "person_a": "Felix Sater",
+      "person_b": "Trump Organization",
+      "relationship_type": "employment",
+      "description": "Sater held Senior Advisor title with Trump Org, office in Trump Tower 2010-2011",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:22",
+      "profile_id": "zampolli",
+      "other_person": "Trump Organization",
+      "other_person_slug": "trump-organization",
+      "evidence": []
+    },
+    {
+      "id": 5253,
+      "person_a": "Felix Sater",
+      "person_b": "Tevfik Arif",
+      "relationship_type": "corporate",
+      "description": "Both co-principals at Bayrock Group; Sater found liable M for Bayrock-related laundering",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:24",
+      "profile_id": "zampolli",
+      "other_person": "Tevfik Arif",
+      "other_person_slug": "tevfik-arif",
+      "evidence": []
+    },
+    {
+      "id": 5283,
+      "person_a": "Felix Sater",
+      "person_b": "Martin Jajan",
+      "relationship_type": "legal",
+      "description": "Jajan handled majority of Trump SoHo shell company cash sales; Sater facilitated Khrapunov purchases",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:08",
+      "profile_id": "zampolli",
+      "other_person": "Martin Jajan",
+      "other_person_slug": "martin-jajan",
+      "evidence": []
+    },
+    {
+      "id": 5341,
+      "person_a": "Felix Sater",
+      "person_b": "Michael Cohen",
+      "relationship_type": "social",
+      "description": "LittleSis: Social relationship. Michael Cohen and Felix Sater have/had a social relationship. Both worked from Trump Tower, collaborated on Trump Moscow project.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:26:27",
+      "profile_id": "zampolli",
+      "other_person": "Michael Cohen",
+      "other_person_slug": "michael-cohen",
+      "evidence": []
+    },
+    {
+      "id": 5150,
+      "person_a": "Felix Sater",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "corporate",
+      "description": "Both sold Trump-branded properties through Trump Org during overlapping periods (2004-2006+). Zampolli co-defendant with Sater's Bayrock in Trump SoHo fraud suit.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:14:13",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:351728",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:49948",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "Managing Director",
+      "date_start": "2003",
+      "date_end": "2008",
+      "source": "Wikipedia; LittleSis",
+      "entity_id": 3436,
+      "entity_name": "Bayrock Group LLC",
+      "entity_type": "llc",
+      "jurisdiction": "New York",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2003-2008",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Managing director of Bayrock Group 2003-2008. Key decision-maker on Trump SoHo project. Joined at urging of founder Tevfik Arif.",
+      "other_person": "Bayrock Group LLC",
+      "id": 5170
+    },
+    {
+      "date": "2012-2014",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Co-ran US arm of Khrapunov's SDG-Investment Fund (2012-2014); both formerly at Bayrock, both briefly at Trump Org",
+      "other_person": "Daniel Ridloff",
+      "id": 5221
+    },
+    {
+      "date": "2012-2014",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Sater facilitated Khrapunov US investments including Trump SoHo condos; found liable for 52M in BTA Bank case",
+      "other_person": "Ilyas Khrapunov",
+      "id": 5224
+    },
+    {
+      "date": "2012-2014",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Co-ran US arm of SDG with Ridloff, facilitating Khrapunov investments",
+      "other_person": "SDG-Investment Fund",
+      "id": 5230
+    }
+  ]
+}

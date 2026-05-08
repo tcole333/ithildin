@@ -1,0 +1,988 @@
+{
+  "name": "Amanda Ungaro",
+  "slug": "amanda-ungaro",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.171948",
+  "last_updated": "2026-04-14T03:13:33",
+  "stats": {
+    "total_findings": 19,
+    "total_connections": 11,
+    "total_entities": 2,
+    "finding_types": {
+      "intelligence": 3,
+      "document": 1,
+      "legal": 10,
+      "identity": 1,
+      "negative_result": 2,
+      "relationship": 1,
+      "background": 1
+    },
+    "connection_types": {
+      "political": 2,
+      "familial": 3,
+      "social": 4,
+      "legal": 2
+    },
+    "last_updated": "2026-04-14T03:13:33"
+  },
+  "findings": [
+    {
+      "id": 10268,
+      "finding_type": "intelligence",
+      "summary": "Ungaro's immigration vulnerability was deliberate: Zampolli kept Ungaro on Grenada diplomatic passport (tax-exempt status) rather than pursuing US citizenship/green card \u2014 per out-of-court settlement documents, Zampolli preferred this for tax advantages. Ungaro alleges Zampolli repeatedly promised to arrange citizenship ('Wait for Trump to win the election and we will sort out your papers')",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2014-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:59:14",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "El Pais interview; bekahdayyy Substack; Daily Beast April 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10380,
+      "finding_type": "document",
+      "summary": "Ungaro v. Zampolli matrimonial NY Sup Ct 301822/2018 (Judge Michael L. Katz) converted to e-filing Sep 4, 2024; now shows 75 filings across motion sequences 013-015 (Oct 2024 - Jul 2025) including sealed affirmations, exhibits A-U, multiple OSCs, and 2025 notice-of-discontinuance activity; all 75 documents metadata-only \u2014 document PDFs NOT publicly downloadable per DRL matrimonial sealing (Public Access=true but no doc URLs exposed)",
+      "detail": null,
+      "source_datasets": [
+        "nyscef"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2018-09-24",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 03:12:56",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NYSCEF:301822/2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10336,
+      "finding_type": "legal",
+      "summary": "Oct 2018 legal timeline puts Ungaro in active litigation against Zampolli on exact window of the Epstein emails: money judgment entered 9/24/2018 (case 301822/2018, NY Supreme); court appearance 10/04/2018 (case 350016/2018); Oct 25 2018 emails to Epstein accuse Zampolli of 'writing depositions against me' and 'putting words in my mouth and on paper'. Judge Michael L. Katz. Son Giovanni ('G.') was 8 years old \u2014 matches email 'I m scared for my son'. Zampolli admitted in the same custody proceeding that he had Ungaro's name 'flagged through Homeland Security to prevent her from leaving the US with their child' (see finding #10264). This establishes motive, means, and temporal alignment for Ungaro as the sender.",
+      "detail": null,
+      "source_datasets": [
+        "doj_epstein",
+        "nyscef"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2018-10-25",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 02:50:06",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02617838",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10337,
+      "finding_type": "identity",
+      "summary": "Match criteria between Oct 2018 email sender profile and Amanda Ungaro: (1) had a son in Oct 2018 (Giovanni, b. 2010, age 8) \u2713; (2) personal relationship with Zampolli \u2713 (19-year partner, mother of his son); (3) active accusation that Zampolli fabricated her deposition \u2713 (NYSCEF 350016/2018 + 301822/2018 custody litigation ongoing, money judgment 9/24/2018); (4) personally knew Epstein \u2713 (flew on Epstein plane 2002 with Brunel, lived in Zampolli's NYC social circle which overlapped Epstein, Maxwell, Block, Brunel); (5) was in Zampolli's Italian household / linguistic environment for 19 years (plausible mixed Italian/English/Portuguese fluency explains the 'broken English' email style that Italian media paraphrased into Italian); (6) drug-use reference 'I stopped cocaine' is consistent with (a) Ungaro's prior allegation that Brunel tried to plant drugs in her bag on her 2002 flight, (b) a denial she was making in contested custody proceedings; (7) 'mediation reg Bill Block' and 'Ari's private business' references fit the ID Models / Endeavor / WME model-agency-entertainment network Zampolli was embedded in. Does NOT explain: the Russian Gmail date-locale header ('\u0427\u0442, 25 \u043e\u043a\u0442. 2018 \u0433.') \u2014 requires follow-up (Ungaro's email UI language setting, or device previously configured by another user).",
+      "detail": null,
+      "source_datasets": [
+        "doj_epstein",
+        "wikipedia_en",
+        "nyscef",
+        "dailybeast",
+        "newsweek"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2018-10-25",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 02:50:18",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02618604",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10266,
+      "finding_type": "legal",
+      "summary": "Prior litigation: Ungaro v. Zampolli (Index No. 301822/2018, NY Supreme Court, NY County) \u2014 money judgment entered Sept 24, 2018, Zampolli attempted to vacate claiming exemptions on financial institution funds, denied by Judge Michael L. Katz, affirmed unanimously by First Department Feb 4, 2020 (2020 NY Slip Op 00823)",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener,web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-02-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:58:57",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Justia: Ungaro v Zampolli 2020 NY Slip Op 00823; Trellis 301822/2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10262,
+      "finding_type": "legal",
+      "summary": "Criminal investigation of Miami Beauty Academy predates Zampolli ICE contact by 14+ months: CrimeStoppers tips received April 2024, undercover detective sting Jan 23 2025, search warrants executed March 6 2025 \u2014 all before Zampolli contacted Venturella in June 2025",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-04-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:58:23",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Local10 WPLG June 18 2025; NBC Miami June 18 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10250,
+      "finding_type": "legal",
+      "summary": "TEMPORAL PATTERN: 3-day gap between Zampolli contacting ICE about ex-partner Ungaro (Jun 15) and her arrest (Jun 18) \u2014 coincides with DOJ denaturalization enforcement memo (Jun 11)",
+      "detail": "Timeline: (1) Jun 11 2025: DOJ denaturalization enforcement memo issued \u2014 policy context enabling ICE action; (2) Jun 15 2025: Zampolli contacts ICE official about ex-partner Amanda Ungaro; (3) Jun 18 2025: Ungaro arrested in Aventura FL on unlicensed cosmetic clinic charges; (4) Sep 1 2025: Ungaro deported to Brazil after 3 months ICE detention. The 3-day gap between ICE contact and arrest is extremely tight for standard enforcement timelines. The DOJ denaturalization memo 4 days earlier created favorable policy environment. Zampolli was serving as US Special Envoy at the time \u2014 using government position to influence immigration enforcement against a personal adversary in a custody dispute raises serious abuse-of-office concerns.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-15",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:22:31",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-38",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10261,
+      "finding_type": "legal",
+      "summary": "Ungaro arrested June 18, 2025 in Aventura FL with Joao Batista Cunha De Araujo at Miami Beauty Academy (2820 NE 214th St) \u2014 charges: unlicensed practice of medicine (4 counts), grand theft (3 counts), organized scheme to defraud, unlawful communications device use, medical license misrepresentation",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:58:16",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC Miami June 18 2025 arrest report; Local10 WPLG June 18 2025 report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10269,
+      "finding_type": "legal",
+      "summary": "Detention conditions: Ungaro described Miami ICE facility as 'hall with more than 120 people, floor was wet, no windows, four days without seeing the sun \u2014 came out infested with lice.' Witnessed elderly person handcuffed to wheelchair, woman who miscarried with delayed medical care. Transferred to Louisiana facility. Deported to Brazil with only prison uniform.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-18",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:59:22",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Daily Beast: Melanias Party Pal Spills on Hellish ICE Ordeal; El Pais interview",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10277,
+      "finding_type": "legal",
+      "summary": "DISPUTED: bekahdayyy Substack claims 'criminal charges were never brought against them \u2014 they were simply arrested, detained for a prolonged period, and deported.' This contradicts Local10/NBC Miami reporting of specific criminal charges. Possible meanings: (1) charges were filed but later dropped, (2) charges were filed at arrest but no formal prosecution occurred, (3) source error. Resolution requires Miami-Dade court records check.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "low",
+      "date_of_event": "2025-06-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:00:37",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bekahdayyy Substack Jan 2026 update; Local10 WPLG June 18 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10267,
+      "finding_type": "legal",
+      "summary": "Custody timeline: Sep 2024 Ungaro files for custody and child support; Jun 18 2025 arrested in Aventura; Jun 15 (approx) Zampolli contacts Venturella; Jun-Sep 2025 Ungaro in ICE detention (Miami then Louisiana); Sep 5 2025 grandmother Tania Soares Felizardo files custody petition and restraining order v. Zampolli in NY Supreme Court (NY County); Sep 2025 Ungaro requests deportation to Brazil; Nov 2025 son moves to Brazil (with Zampolli consent); end of 2025 son returns to US",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-05",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:59:06",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro; Law.com Radar: Tania Soares Felizardo v. Paolo Zampolli NY Supreme Court",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10275,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE: CourtListener search for Amanda Ungaro found only unrelated NM civil rights case (Ungaro v. Calt, 1:17-cv-00480, D.N.M., different person). No federal criminal case found for the Aventura arrest \u2014 charges appear to be state-level only (Miami-Dade County). No immigration court records accessible.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-04-13",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:00:25",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener search party:Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10276,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE: OpenSanctions returned 0 results for Amanda Ungaro \u2014 she is not on any sanctions/PEP lists despite having held Grenada UN Ambassador position (2014). No FARA registration found for either Zampolli or Ungaro's Grenadian diplomatic roles.",
+      "detail": null,
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-04-13",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:00:29",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10006,
+      "finding_type": "relationship",
+      "summary": "Amanda Ungaro (nee Amanda Sanders) is a Brazilian former model from Londrina. Was partner of Paolo Zampolli from approx 2002-2023. They have a son born 2010. She arrived in the US at age 16-17 on Jeffrey Epstein plane with modeling agent Jean-Luc Brunel. NOTE: The target brief listed Amanda Sanders - this appears to be an earlier name or alias for Amanda Ungaro.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:12:04",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DailyBeast:ungaro-ice",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Newsweek:amanda-ungaro-epstein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia:Amanda_Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10008,
+      "finding_type": "legal",
+      "summary": "In 2025 Ungaro arrested in Miami for unlicensed cosmetic surgery clinic (Botox), fraud, and visa overstay. Placed in ICE custody for 3 months reportedly at Zampolli request - he contacted top ICE official about her illegal immigration status. She requested deportation to Brazil. Ongoing custody battle over their son with Zampolli.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:12:09",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DailyBeast:ungaro-ice",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Emptywheel:2026-04-09",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYT:zampolli-ice",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10053,
+      "finding_type": "intelligence",
+      "summary": "Zampolli's wife Amanda Ungaro served as Grenada UN Ambassador (2014); deported by ICE in 2025 after arrest for unlicensed cosmetic surgery clinic",
+      "detail": "Amanda Ungaro, Brazilian-born model and former partner of Paolo Zampolli, appointed UN Ambassador for Grenada by PM Keith Mitchell in June 2014, handling Post-15th Agendas and second committee. Both Zampolli and Ungaro held parallel Caribbean ambassadorships (Dominica and Grenada respectively) \u2014 the same two nations where Range Developments had CBI resort projects. In 2025, Ungaro was arrested in Miami for running unlicensed cosmetic surgery clinic (Botox), fraud, and visa overstay. Subsequently deported to Brazil by ICE. Reports indicate she was on Epstein Lolita Express at age 16-17 (2002) before becoming White House regular and UN Ambassador.",
+      "source_datasets": [
+        "https://en.wikipedia.org/wiki/Amanda_Ungaro",
+        "https://www.thedailybeast.com/the-strange-case-of-melania-trump-and-amanda-ungaro-the-model-deported-by-ice/"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:39:03",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Daily Beast April 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo News April 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10087,
+      "finding_type": "intelligence",
+      "summary": "Ungaro background verified: Brazilian model (b. 1984 Londrina), arrived US at 16-17 on Epstein plane with agent Jean-Luc Brunel, joined ID Models, partnered with Zampolli from age 19 until 2023 separation",
+      "detail": "Amanda Soares Felizardo Ungaro born April 1984 in Londrina, Brazil. Began modeling career at 13. At age 16-17, she was flown to New York City on a plane owned by Jeffrey Epstein with her modeling agent Jean-Luc Brunel (later charged with rape and sexual assault of minors, died in French jail 2022). She was signed to ID Models, founded by Paolo Zampolli. She began a relationship with Zampolli when she was approximately 19 and he was 32. They had a son Giovanni (b. 2010). Appointed Grenada UN Ambassador June 6, 2014 by PM Keith Mitchell, handling Post-15th Agendas and Blue Economy under 69th UN Vice-President. Arrested Miami 2025 for unlicensed cosmetic clinic (Botox), fraud, visa overstay. ICE detention followed \u2014 NYT investigation found Zampolli contacted ICE official David Venturella to facilitate detention during custody battle. Deported to Brazil September 2025. In April 2026 sent threatening messages to Melania Trump from Brazil.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:26:46",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Daily Beast: Strange Case of Melania Trump and Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Newsweek: Who Is Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo News: Ungaro arrived on Epstein plane at 17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10092,
+      "finding_type": "legal",
+      "summary": "Ungaro arrested Miami June 2025, ICE detention weaponized in custody battle \u2014 Zampolli allegedly contacted ICE official David Venturella to trigger deportation",
+      "detail": "Amanda Ungaro arrested June 18, 2025 in Aventura, Florida (with Joao Batista Cunha De Araujo) for operating an unlicensed cosmetic clinic, fraud, and visa overstay. Subsequently placed in ICE custody for three months. NYT investigation based on records found that Paolo Zampolli contacted David Venturella, a top ICE official, informing him Ungaro was in the country illegally and that her immigration detention would help him gain custody of their son. DHS denied targeting, calling political motivation allegations FALSE. Ungaro requested deportation to Brazil in September 2025 rather than face prolonged detention. In April 2026, Ungaro sent threatening messages to Melania Trump from Brazil, claiming she would expose information about the Trumps and Epstein. This is relevant because Ungaro may possess knowledge of Zampollis CBI dealing structure and Grenada diplomatic arrangements.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:27:24",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Daily Beast: Melanias Party Pal Spills on Hellish ICE Ordeal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC Miami: June 18, 2025 arrest report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYT investigation: Zampolli contacted ICE official Venturella",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10304,
+      "finding_type": "background",
+      "summary": "Amanda Ungaro (b. April 1984 Londrina, Brazil) arrived in NYC at age 16-17 on Jeffrey Epstein's plane (June 2002), accompanied by Jean-Luc Brunel. Signed to ID Models (Zampolli's agency). Had 19-year relationship with Zampolli (32 at the time); son Giovanni born 2010. Appointed UN Ambassador for Grenada June 2014. Couple separated 2021/2023. Arrested June 2025 in Miami for unlicensed cosmetic procedures. Zampolli contacted ICE official David Venturella to request her transfer to immigration custody; she was detained 3.5 months, deported to Brazil. Custody battle ongoing (NYSCEF 301822/2018, next appearance 04/27/2026). Zampolli calls her 'a criminal and a psychopath.'",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:29",
+      "target_name": "Amanda Ungaro",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NYSCEF:301822/2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5187,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Keith Mitchell",
+      "relationship_type": "political",
+      "description": "Mitchell appointed Ungaro as Grenada UN Ambassador June 6, 2014 \u2014 she was Zampollis partner, creating family-level diplomatic coverage",
+      "strength": "strong",
+      "date_range": "2014",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:27:33",
+      "profile_id": "zampolli",
+      "other_person": "Keith Mitchell",
+      "other_person_slug": "keith-mitchell",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5188,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "familial",
+      "description": "Romantic partners 2003-2023, son Giovanni (b. 2010). Parallel ambassadorships: he Dominica, she Grenada. Met when she was signed to his agency ID Models.",
+      "strength": "strong",
+      "date_range": "2003-2023",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:27:36",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Paolo Zampolli",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5191,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Jean-Luc Brunel",
+      "relationship_type": "social",
+      "description": "Brunel was Ungaros modeling agent when she flew to NYC on Epstein plane at age 16-17 circa 2001-2002",
+      "strength": "strong",
+      "date_range": "2001-2002",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:27:53",
+      "profile_id": "zampolli",
+      "other_person": "Jean-Luc Brunel",
+      "other_person_slug": "jean-luc-brunel",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amanda Ungaro",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo News",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5260,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Ungaro arrived US at 16-17 on Epstein's plane with agent Brunel",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:41",
+      "profile_id": "zampolli",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    },
+    {
+      "id": 5281,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Government of Grenada",
+      "relationship_type": "political",
+      "description": "Ungaro appointed Grenada UN Ambassador by PM Keith Mitchell in June 2014",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:04",
+      "profile_id": "zampolli",
+      "other_person": "Government of Grenada",
+      "other_person_slug": "government-of-grenada",
+      "evidence": []
+    },
+    {
+      "id": 5344,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Joao Batista Cunha De Araujo",
+      "relationship_type": "social",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:00:14",
+      "profile_id": "zampolli",
+      "other_person": "Joao Batista Cunha De Araujo",
+      "other_person_slug": "joao-batista-cunha-de-araujo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Local10 WPLG June 18 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5345,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Tania Soares Felizardo",
+      "relationship_type": "familial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:00:15",
+      "profile_id": "zampolli",
+      "other_person": "Tania Soares Felizardo",
+      "other_person_slug": "tania-soares-felizardo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Law.com Radar: Tania Soares Felizardo v. Paolo Zampolli",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5372,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 02:50:24",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02619619",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5378,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Tania Soares Felizardo",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 03:13:33",
+      "profile_id": "zampolli",
+      "other_person": "Tania Soares Felizardo",
+      "other_person_slug": "tania-soares-felizardo",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NYSCEF:161870/2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5130,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "familial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:12:36",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:351728",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5140,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Jean-Luc Brunel",
+      "relationship_type": "social",
+      "description": null,
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:13:09",
+      "profile_id": "epstein",
+      "other_person": "Jean-Luc Brunel",
+      "other_person_slug": "jean-luc-brunel",
+      "evidence": []
+    }
+  ],
+  "entities": [
+    {
+      "role": "Model",
+      "date_start": "2002",
+      "date_end": null,
+      "source": "Wikipedia: Amanda Ungaro",
+      "entity_id": 3423,
+      "entity_name": "ID Models.com Inc.",
+      "entity_type": "corporation",
+      "jurisdiction": "New York",
+      "entity_status": "active"
+    },
+    {
+      "role": "UN Ambassador (Post-15th Agendas, Blue Economy)",
+      "date_start": "2014-06-06",
+      "date_end": null,
+      "source": "Wikipedia: Amanda Ungaro; The New Today Grenada",
+      "entity_id": 3455,
+      "entity_name": "Government of Grenada",
+      "entity_type": "government",
+      "jurisdiction": "Grenada",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2001-2002",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Brunel was Ungaros modeling agent when she flew to NYC on Epstein plane at age 16-17 circa 2001-2002",
+      "other_person": "Jean-Luc Brunel",
+      "id": 5191
+    },
+    {
+      "date": "2003-2023",
+      "type": "connection",
+      "relationship_type": "familial",
+      "description": "Romantic partners 2003-2023, son Giovanni (b. 2010). Parallel ambassadorships: he Dominica, she Grenada. Met when she was signed to his agency ID Models.",
+      "other_person": "Paolo Zampolli",
+      "id": 5188
+    },
+    {
+      "date": "2014",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Mitchell appointed Ungaro as Grenada UN Ambassador June 6, 2014 \u2014 she was Zampollis partner, creating family-level diplomatic coverage",
+      "other_person": "Keith Mitchell",
+      "id": 5187
+    },
+    {
+      "date": "2014-01-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Ungaro's immigration vulnerability was deliberate: Zampolli kept Ungaro on Grenada diplomatic passport (tax-exempt status) rather than pursuing US citizenship/green card \u2014 per out-of-court settlement documents, Zampolli preferred this for tax advantages. Ungaro alleges Zampolli repeatedly promised to arrange citizenship ('Wait for Trump to win the election and we will sort out your papers')",
+      "confidence": "medium",
+      "id": 10268
+    },
+    {
+      "date": "2018-09-24",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Ungaro v. Zampolli matrimonial NY Sup Ct 301822/2018 (Judge Michael L. Katz) converted to e-filing Sep 4, 2024; now shows 75 filings across motion sequences 013-015 (Oct 2024 - Jul 2025) including sealed affirmations, exhibits A-U, multiple OSCs, and 2025 notice-of-discontinuance activity; all 75 documents metadata-only \u2014 document PDFs NOT publicly downloadable per DRL matrimonial sealing (Public Access=true but no doc URLs exposed)",
+      "confidence": "confirmed",
+      "id": 10380
+    },
+    {
+      "date": "2018-10-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Oct 2018 legal timeline puts Ungaro in active litigation against Zampolli on exact window of the Epstein emails: money judgment entered 9/24/2018 (case 301822/2018, NY Supreme); court appearance 10/04/2018 (case 350016/2018); Oct 25 2018 emails to Epstein accuse Zampolli of 'writing depositions against me' and 'putting words in my mouth and on paper'. Judge Michael L. Katz. Son Giovanni ('G.') was 8 years old \u2014 matches email 'I m scared for my son'. Zampolli admitted in the same custody proceeding that he had Ungaro's name 'flagged through Homeland Security to prevent her from leaving the US with their child' (see finding #10264). This establishes motive, means, and temporal alignment for Ungaro as the sender.",
+      "confidence": "medium",
+      "id": 10336
+    },
+    {
+      "date": "2018-10-25",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Match criteria between Oct 2018 email sender profile and Amanda Ungaro: (1) had a son in Oct 2018 (Giovanni, b. 2010, age 8) \u2713; (2) personal relationship with Zampolli \u2713 (19-year partner, mother of his son); (3) active accusation that Zampolli fabricated her deposition \u2713 (NYSCEF 350016/2018 + 301822/2018 custody litigation ongoing, money judgment 9/24/2018); (4) personally knew Epstein \u2713 (flew on Epstein plane 2002 with Brunel, lived in Zampolli's NYC social circle which overlapped Epstein, Maxwell, Block, Brunel); (5) was in Zampolli's Italian household / linguistic environment for 19 years (plausible mixed Italian/English/Portuguese fluency explains the 'broken English' email style that Italian media paraphrased into Italian); (6) drug-use reference 'I stopped cocaine' is consistent with (a) Ungaro's prior allegation that Brunel tried to plant drugs in her bag on her 2002 flight, (b) a denial she was making in contested custody proceedings; (7) 'mediation reg Bill Block' and 'Ari's private business' references fit the ID Models / Endeavor / WME model-agency-entertainment network Zampolli was embedded in. Does NOT explain: the Russian Gmail date-locale header ('\u0427\u0442, 25 \u043e\u043a\u0442. 2018 \u0433.') \u2014 requires follow-up (Ungaro's email UI language setting, or device previously configured by another user).",
+      "confidence": "medium",
+      "id": 10337
+    },
+    {
+      "date": "2020-02-04",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Prior litigation: Ungaro v. Zampolli (Index No. 301822/2018, NY Supreme Court, NY County) \u2014 money judgment entered Sept 24, 2018, Zampolli attempted to vacate claiming exemptions on financial institution funds, denied by Judge Michael L. Katz, affirmed unanimously by First Department Feb 4, 2020 (2020 NY Slip Op 00823)",
+      "confidence": "high",
+      "id": 10266
+    },
+    {
+      "date": "2024-04-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Criminal investigation of Miami Beauty Academy predates Zampolli ICE contact by 14+ months: CrimeStoppers tips received April 2024, undercover detective sting Jan 23 2025, search warrants executed March 6 2025 \u2014 all before Zampolli contacted Venturella in June 2025",
+      "confidence": "high",
+      "id": 10262
+    },
+    {
+      "date": "2025-06-15",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "TEMPORAL PATTERN: 3-day gap between Zampolli contacting ICE about ex-partner Ungaro (Jun 15) and her arrest (Jun 18) \u2014 coincides with DOJ denaturalization enforcement memo (Jun 11)",
+      "confidence": "medium",
+      "id": 10250
+    },
+    {
+      "date": "2025-06-18",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Ungaro arrested June 18, 2025 in Aventura FL with Joao Batista Cunha De Araujo at Miami Beauty Academy (2820 NE 214th St) \u2014 charges: unlicensed practice of medicine (4 counts), grand theft (3 counts), organized scheme to defraud, unlawful communications device use, medical license misrepresentation",
+      "confidence": "high",
+      "id": 10261
+    },
+    {
+      "date": "2025-06-18",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Detention conditions: Ungaro described Miami ICE facility as 'hall with more than 120 people, floor was wet, no windows, four days without seeing the sun \u2014 came out infested with lice.' Witnessed elderly person handcuffed to wheelchair, woman who miscarried with delayed medical care. Transferred to Louisiana facility. Deported to Brazil with only prison uniform.",
+      "confidence": "high",
+      "id": 10269
+    },
+    {
+      "date": "2025-06-18",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DISPUTED: bekahdayyy Substack claims 'criminal charges were never brought against them \u2014 they were simply arrested, detained for a prolonged period, and deported.' This contradicts Local10/NBC Miami reporting of specific criminal charges. Possible meanings: (1) charges were filed but later dropped, (2) charges were filed at arrest but no formal prosecution occurred, (3) source error. Resolution requires Miami-Dade court records check.",
+      "confidence": "low",
+      "id": 10277
+    },
+    {
+      "date": "2025-09-05",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Custody timeline: Sep 2024 Ungaro files for custody and child support; Jun 18 2025 arrested in Aventura; Jun 15 (approx) Zampolli contacts Venturella; Jun-Sep 2025 Ungaro in ICE detention (Miami then Louisiana); Sep 5 2025 grandmother Tania Soares Felizardo files custody petition and restraining order v. Zampolli in NY Supreme Court (NY County); Sep 2025 Ungaro requests deportation to Brazil; Nov 2025 son moves to Brazil (with Zampolli consent); end of 2025 son returns to US",
+      "confidence": "medium",
+      "id": 10267
+    },
+    {
+      "date": "2026-04-13",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE: CourtListener search for Amanda Ungaro found only unrelated NM civil rights case (Ungaro v. Calt, 1:17-cv-00480, D.N.M., different person). No federal criminal case found for the Aventura arrest \u2014 charges appear to be state-level only (Miami-Dade County). No immigration court records accessible.",
+      "confidence": "high",
+      "id": 10275
+    },
+    {
+      "date": "2026-04-13",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE: OpenSanctions returned 0 results for Amanda Ungaro \u2014 she is not on any sanctions/PEP lists despite having held Grenada UN Ambassador position (2014). No FARA registration found for either Zampolli or Ungaro's Grenadian diplomatic roles.",
+      "confidence": "high",
+      "id": 10276
+    }
+  ]
+}

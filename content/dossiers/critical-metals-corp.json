@@ -5,29 +5,131 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.767331",
-  "last_updated": "2026-03-09T19:26:24",
+  "generated_at": "2026-05-07T23:07:35.977810",
+  "last_updated": "2026-03-24T22:44:59",
   "stats": {
-    "total_findings": 35,
-    "total_connections": 8,
+    "total_findings": 84,
+    "total_connections": 12,
     "total_entities": 0,
     "finding_types": {
-      "financial": 16,
       "identity": 3,
-      "relationship": 3,
-      "intelligence": 4,
-      "document": 9
+      "document": 17,
+      "financial": 38,
+      "relationship": 4,
+      "intelligence": 18,
+      "negative_result": 2,
+      "legal": 2
     },
     "connection_types": {
       "corporate": 2,
       "contracts_with": 1,
       "owns": 2,
-      "financial": 2,
+      "financial": 6,
       "employment": 1
     },
-    "last_updated": "2026-03-09T19:26:24"
+    "last_updated": "2026-03-24T22:44:59"
   },
   "findings": [
+    {
+      "id": 6245,
+      "finding_type": "identity",
+      "summary": "Critical Metals Corp SAM.gov registration: UEI XW4PVY32Q7K1, CAGE code KD8P2. Incorporated in British Virgin Islands (country_of_incorporation: VGB). Physical address: Itchen Down House, Northington Road, Itchen Down, Winchester, SO21 1BT, UK. Entity start date: 2022-10-14. Registered in SAM: 2025-10-13, active 2025-10-15, expires 2026-10-13. Government POC: Michael Ryan (Director). Primary NAICS: 212290 (Other Metal Ore Mining). Purpose of registration: Z2 (federal contracts/grants). No exclusions.",
+      "detail": null,
+      "source_datasets": [
+        "sam"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2022-10-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:55:23",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM:XW4PVY32Q7K1",
+          "source_quote": "legal_business_name: CRITICAL METALS CORP.; uei: XW4PVY32Q7K1; cage_code: KD8P2; country_of_incorporation: VGB; phys_address_1: ITCHEN DOWN HOUSE, NORTHINGTON ROAD; phys_city: ITCHEN DOWN, WINCHESTER; phys_zip: SO21 1BT; phys_country: GBR; registration_date: 20251013; primary_naics: 212290",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6280,
+      "finding_type": "document",
+      "summary": "GEM Global Yield LLC SCS credit facility and dispute: July 4 2023 CRML entered $125M draw-down facility with GEM. 122,549 commitment fee shares and 1,814,797 warrants issued. GEM exercised warrant right Feb 27 2025 demanding $27.2M in shares. CRML entered arbitration with counterclaims. Also owed GEM cash payment of $3.5M (10% annual interest). Resolution: March 5 2026, GEM Agreement terminated the SPA. GEM received 1,409,624 shares (warrant exercise) + 2,744,062 shares for no consideration (settlement). CRML files registration for 2.744M resale shares.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2023-07-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:59:37",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A6K-20260306",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6268,
+      "finding_type": "financial",
+      "summary": "Mykhailo Zhernov (CRML Director) sold 500,000 shares under Rule 144 via Oppenheimer & Co on Oct 31 2025 (approx market value $628,270). Shares acquired via issuer compensation July 1 2024 (500,000 shares). At least 3 additional unnamed officers sold CRML shares under Rule 144 in October 2025. European Lithium sold 5,000,000 shares under Rule 144 in January 2026 (gross proceeds ~$85.5M, per 6A/A Amend 6).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-07-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:58:12",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=Form-144-0000103623-25-000048",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6241,
+      "finding_type": "relationship",
+      "summary": "CRML Q1 2025 lobbying report (filed 2025-04-21, income $70,000): issue areas shifted to include Trade (TRD), Manufacturing (MAN), and Budget/Appropriations (BUD) in addition to Defense and Foreign Relations. Description: \"Advocacy for policy and funding support for U.S government partnerships to secure and process critical minerals, including rare earths, domestically.\" This lobbying language encompasses both domestic sourcing and Greenland/allied nation sourcing.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:54:45",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:6f50c828-8913-46d4-bc93-133cfe326d0c",
+          "source_quote": "Advocacy for policy and funding support for U.S government partnerships to secure and process critical minerals, including rare earths, domestically - issue codes: TRD, DEF, MAN, COM, FOR, BUD - income: $70,000",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6246,
       "finding_type": "financial",
@@ -48,6 +150,289 @@
           "evidence_type": "file",
           "evidence_ref": "https://www.globenewswire.com/news-release/2025/06/16/3099747/",
           "source_quote": "EXIM will consider financing up to $120 million of the project costs with a repayment term of 15 years under EXIMs new Supply Chain Resiliency Initiative (SCRI). Date: June 16, 2025.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6260,
+      "finding_type": "document",
+      "summary": "CRML is incorporated in British Virgin Islands as holding company. CIK 0001951089. Files as foreign private issuer (20-F). Business address: 32 Harrogate Street, West Leederville, Australia (Tony Sage office). BVI registered address: Maples Corporate Services, Tortola. Incorporated 2022. Fiscal year ends June 30. 104,912,853 shares outstanding as of June 30 2025.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:36",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6262,
+      "finding_type": "financial",
+      "summary": "Going concern: CRML has substantial doubt about ability to continue as going concern. Losses of $51.9M (FY2025) and $139.4M (FY2024). Net cash outflows from operations $14.5M in FY2025. Working capital deficit (ex-share-settled liabilities) of $15.6M. Cash on hand only $7.3M as of June 30 2025. Company is pre-revenue mining exploration stage.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:44",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6263,
+      "finding_type": "financial",
+      "summary": "Beneficial ownership as of June 30 2025 (106.9M shares): European Lithium Ltd (EUR) owns 62,916,641 shares (58.9%). Rimbal Pty Ltd (Greg Barnes) owns 11,728,174 shares (11%). All named directors and officers reported ZERO beneficial ownership. As of Feb 2026: EUR reduced stake to 37.3% (45,536,338 shares) via multiple secondary sales to Alyeska.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:52",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6264,
+      "finding_type": "financial",
+      "summary": "Rimbal Pty Ltd (Australian company, controlled by geologist Gregory Barnes, 47 Labouchere Road, South Perth 6151 WA) is the second-largest shareholder at 11.0% (11,728,174 shares) as of June 30 2025 per 20-F. Shares acquired as payment for Tanbreez Stage 1 acquisition (July 23 2024: ~8.4M shares issued). Rimbal also participated as a selling shareholder in the October 2025 PIPE (sold 2M shares at $7/share = $14M). Rimbal is the entity holding Tanbreez Mining Greenland A/S and sold it to CRML.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:53",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:0001213900-25-096254",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6273,
+      "finding_type": "financial",
+      "summary": "EUR (Tony Sage's Australian mining company) has systematically reduced its CRML stake through secondary sales to Alyeska: (1) Oct 5 2025: EUR sold 3M shares to Alyeska at $7/share = $21M; (2) Oct 14-21 2025: Additional EUR reductions (Schedule 13D/A amendments 3-5 shows stake declining from ~65M to 53M shares); (3) Feb 3 2026: EUR sold 2.5M shares to Alyeska at $13.50/share = $33.75M. EUR stake went from 58.9% (June 30 2025) to 37.3% (Feb 4 2026). EUR has extracted at minimum $54.75M+ in secondary sales.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:58:38",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A13D-amendments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6276,
+      "finding_type": "financial",
+      "summary": "CRML executive compensation: Board approved $26,922,412 in aggregate compensation (cash + share-based) to directors and executive officers for FY2025 (year ended June 30 2025). In July 2025, 2,110,000 ordinary shares issued as equity awards valued at ~$6.9M. In April 2025, ~1.8M RSUs granted to directors vesting 1 year from grant. All compensation reported in aggregate; no individual disclosure required as foreign private issuer.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:58:57",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6278,
+      "finding_type": "document",
+      "summary": "CRML related-party transactions (from Note 17): EUR (parent) has provided capital contributions totaling $45.7M to CRML and its subsidiaries as of June 30 2025. Additional balance owed to EUR: $5,854,852 (vs $4,268,857 at June 30 2024). EUR essentially financed CRML operations pre-PIPE. Board identified 'significant deficiency' in internal controls: 'The Company lacks the controls needed to ensure that the accounting for its related party transactions is accurate and complete' due to lack of personnel.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:59:16",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6248,
+      "finding_type": "relationship",
+      "summary": "Cornerstone Government Affairs filed Q3 2025 Termination report for Critical Metals Corp on October 7, 2025 (income: $70,000). The lobbying engagement ran Feb-Sep 2025 and terminated approximately 4 months after the EXIM LOI was issued (June 16, 2025). The termination may reflect that the key government relationship goal (EXIM LOI) was achieved. CRML registered on SAM.gov on October 13, 2025 -- just 6 days after lobbying terminated -- suggesting preparation for potential direct federal procurement.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying",
+        "sam"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-07",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:55:44",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:56e99ec6-3a58-4420-9c2a-f49154a1dee2",
+          "source_quote": "filing_type: 3rd Quarter Termination; dt_posted: 2025-10-07; income: $70,000",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM:XW4PVY32Q7K1",
+          "source_quote": "registration_date: 20251013; activation_date: 20251015",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7802,
+      "finding_type": "document",
+      "summary": "March 4, 2026 424B3 prospectus confirms: Swiss Commodity RE Limited held 1,800,000 shares (1.5%), Malcolm Scott Macintyre held 200,000 shares (<1%), Jett Capital Advisors Holdings LLC held 427,500 warrant shares, Cohen & Company Securities LLC held 350,100 warrant shares \u2014 all registered for resale, no lock-up, freely tradeable as of March 4",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:18:14",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7804,
+      "finding_type": "intelligence",
+      "summary": "March 18, 2026: Nine CRML insiders filed Form 3 (initial ownership) \u2014 Sage Antony William Paul (Tony Sage), Zhernov Mykhailo, Day Malcolm Raymond, Savchenko Sergey (CFO), Hanson Michael J., McNamara Thomas M., Thomas John Harper, Ryan Michael C., Wanke Dietrich. This confirms the full CRML board/management composition as of that date. No Form 4 (actual insider sales) has been filed by any of these persons as of March 24, 2026.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-18",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:18:34",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=1951089-EDGAR",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7558,
+      "finding_type": "financial",
+      "summary": "US government considering direct equity stake in CRML, separate from USD 120M EXIM loan \u2014 unprecedented state investment in Greenland mining",
+      "detail": "Per SME Mining Engineering (sourced from Reuters/FT reporting): Trump administration officials have discussed taking a direct equity stake in Critical Metals Corp, which would give Washington a direct interest in the largest rare earths project in Greenland. This equity stake would be SEPARATE from the USD 120M EXIM Bank LOI already issued. If executed, this would represent an unprecedented US government direct investment in a BVI-incorporated mining company operating in a Danish autonomous territory. This further elevates the political significance of the CRML-Tanbreez deal and the undisclosed GreenMet intermediary role.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:17:52",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SME Mining Engineering Online; Fortune article Jan 2026",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -150,89 +535,6 @@
       ]
     },
     {
-      "id": 6241,
-      "finding_type": "relationship",
-      "summary": "CRML Q1 2025 lobbying report (filed 2025-04-21, income $70,000): issue areas shifted to include Trade (TRD), Manufacturing (MAN), and Budget/Appropriations (BUD) in addition to Defense and Foreign Relations. Description: \"Advocacy for policy and funding support for U.S government partnerships to secure and process critical minerals, including rare earths, domestically.\" This lobbying language encompasses both domestic sourcing and Greenland/allied nation sourcing.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:54:45",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:6f50c828-8913-46d4-bc93-133cfe326d0c",
-          "source_quote": "Advocacy for policy and funding support for U.S government partnerships to secure and process critical minerals, including rare earths, domestically - issue codes: TRD, DEF, MAN, COM, FOR, BUD - income: $70,000",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6245,
-      "finding_type": "identity",
-      "summary": "Critical Metals Corp SAM.gov registration: UEI XW4PVY32Q7K1, CAGE code KD8P2. Incorporated in British Virgin Islands (country_of_incorporation: VGB). Physical address: Itchen Down House, Northington Road, Itchen Down, Winchester, SO21 1BT, UK. Entity start date: 2022-10-14. Registered in SAM: 2025-10-13, active 2025-10-15, expires 2026-10-13. Government POC: Michael Ryan (Director). Primary NAICS: 212290 (Other Metal Ore Mining). Purpose of registration: Z2 (federal contracts/grants). No exclusions.",
-      "detail": null,
-      "source_datasets": [
-        "sam"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:55:23",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SAM:XW4PVY32Q7K1",
-          "source_quote": "legal_business_name: CRITICAL METALS CORP.; uei: XW4PVY32Q7K1; cage_code: KD8P2; country_of_incorporation: VGB; phys_address_1: ITCHEN DOWN HOUSE, NORTHINGTON ROAD; phys_city: ITCHEN DOWN, WINCHESTER; phys_zip: SO21 1BT; phys_country: GBR; registration_date: 20251013; primary_naics: 212290",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6248,
-      "finding_type": "relationship",
-      "summary": "Cornerstone Government Affairs filed Q3 2025 Termination report for Critical Metals Corp on October 7, 2025 (income: $70,000). The lobbying engagement ran Feb-Sep 2025 and terminated approximately 4 months after the EXIM LOI was issued (June 16, 2025). The termination may reflect that the key government relationship goal (EXIM LOI) was achieved. CRML registered on SAM.gov on October 13, 2025 -- just 6 days after lobbying terminated -- suggesting preparation for potential direct federal procurement.",
-      "detail": null,
-      "source_datasets": [
-        "lobbying",
-        "sam"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:55:44",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:56e99ec6-3a58-4420-9c2a-f49154a1dee2",
-          "source_quote": "filing_type: 3rd Quarter Termination; dt_posted: 2025-10-07; income: $70,000",
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SAM:XW4PVY32Q7K1",
-          "source_quote": "registration_date: 20251013; activation_date: 20251015",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6251,
       "finding_type": "identity",
       "summary": "CRML SPAC origin: Sizzle Acquisition Corp (NASDAQ: SZZLU) raised M IPO Nov 2021 with Cantor Fitzgerald as underwriter. Merged with European Lithium Ltd (ASX: EUR) to form Critical Metals Corp, listed Feb 28, 2024. EUR received ~80% of CRML. Cantor received 1,247,250 shares total: 47,250 from IPO private placement + 1,200,000 as deferred underwriting fee (deemed issue price .79). CIK 0001951089.",
@@ -300,7 +602,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions:search-2025-03-09",
+          "evidence_ref": "OpenSanctions:search",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -333,31 +635,6 @@
       ]
     },
     {
-      "id": 6260,
-      "finding_type": "document",
-      "summary": "CRML is incorporated in British Virgin Islands as holding company. CIK 0001951089. Files as foreign private issuer (20-F). Business address: 32 Harrogate Street, West Leederville, Australia (Tony Sage office). BVI registered address: Maples Corporate Services, Tortola. Incorporated 2022. Fiscal year ends June 30. 104,912,853 shares outstanding as of June 30 2025.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:57:36",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6261,
       "finding_type": "financial",
       "summary": "IDENTIFIED: The unnamed $50M PIPE investor is Alyeska Master Fund LP (Alyeska Investment Group, Chicago IL). Two PIPE tranches: (1) Oct 5-6 2025: $35M for 5,000,000 new shares + warrant for 10,000,000 shares at $7/share expiring Oct 2031; also bought 3M shares from European Lithium ($21M) and 2M shares from Rimbal ($14M) \u2014 total ~$70M deployed. (2) Oct 15-16 2025: $50M for 1,470,000 new shares + pre-funded warrant for 1,560,303 shares. Combined Alyeska holds 9.9% (11,652,735 shares) as of Dec 31 2025 per SCHEDULE 13G.",
@@ -376,81 +653,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "EDGAR:0001213900-25-096318",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6262,
-      "finding_type": "financial",
-      "summary": "Going concern: CRML has substantial doubt about ability to continue as going concern. Losses of $51.9M (FY2025) and $139.4M (FY2024). Net cash outflows from operations $14.5M in FY2025. Working capital deficit (ex-share-settled liabilities) of $15.6M. Cash on hand only $7.3M as of June 30 2025. Company is pre-revenue mining exploration stage.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:57:44",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6263,
-      "finding_type": "financial",
-      "summary": "Beneficial ownership as of June 30 2025 (106.9M shares): European Lithium Ltd (EUR) owns 62,916,641 shares (58.9%). Rimbal Pty Ltd (Greg Barnes) owns 11,728,174 shares (11%). All named directors and officers reported ZERO beneficial ownership. As of Feb 2026: EUR reduced stake to 37.3% (45,536,338 shares) via multiple secondary sales to Alyeska.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:57:52",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6264,
-      "finding_type": "financial",
-      "summary": "Rimbal Pty Ltd (Australian company, controlled by geologist Gregory Barnes, 47 Labouchere Road, South Perth 6151 WA) is the second-largest shareholder at 11.0% (11,728,174 shares) as of June 30 2025 per 20-F. Shares acquired as payment for Tanbreez Stage 1 acquisition (July 23 2024: ~8.4M shares issued). Rimbal also participated as a selling shareholder in the October 2025 PIPE (sold 2M shares at $7/share = $14M). Rimbal is the entity holding Tanbreez Mining Greenland A/S and sold it to CRML.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:57:53",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "EDGAR:0001213900-25-096254",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -526,31 +728,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3AFormD-20250221",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6268,
-      "finding_type": "financial",
-      "summary": "Mykhailo Zhernov (CRML Director) sold 500,000 shares under Rule 144 via Oppenheimer & Co on Oct 31 2025 (approx market value $628,270). Shares acquired via issuer compensation July 1 2024 (500,000 shares). At least 3 additional unnamed officers sold CRML shares under Rule 144 in October 2025. European Lithium sold 5,000,000 shares under Rule 144 in January 2026 (gross proceeds ~$85.5M, per 6A/A Amend 6).",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:58:12",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=Form-144-0000103623-25-000048",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -658,31 +835,6 @@
       ]
     },
     {
-      "id": 6273,
-      "finding_type": "financial",
-      "summary": "EUR (Tony Sage's Australian mining company) has systematically reduced its CRML stake through secondary sales to Alyeska: (1) Oct 5 2025: EUR sold 3M shares to Alyeska at $7/share = $21M; (2) Oct 14-21 2025: Additional EUR reductions (Schedule 13D/A amendments 3-5 shows stake declining from ~65M to 53M shares); (3) Feb 3 2026: EUR sold 2.5M shares to Alyeska at $13.50/share = $33.75M. EUR stake went from 58.9% (June 30 2025) to 37.3% (Feb 4 2026). EUR has extracted at minimum $54.75M+ in secondary sales.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:58:38",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A13D-amendments",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6274,
       "finding_type": "financial",
       "summary": "Technology Metals PLC (TM1) received 1,371,742 CRML shares from European Lithium in Nov 2024 in exchange for 100% of LRH Resources Ltd (which holds the Leinster Lithium project in Ireland). TM1 entered lock-up agreement with CRML preventing transfer until Feb 28 2025. This is an additional minor shareholder from a corporate transaction.",
@@ -733,31 +885,6 @@
       ]
     },
     {
-      "id": 6276,
-      "finding_type": "financial",
-      "summary": "CRML executive compensation: Board approved $26,922,412 in aggregate compensation (cash + share-based) to directors and executive officers for FY2025 (year ended June 30 2025). In July 2025, 2,110,000 ordinary shares issued as equity awards valued at ~$6.9M. In April 2025, ~1.8M RSUs granted to directors vesting 1 year from grant. All compensation reported in aggregate; no individual disclosure required as foreign private issuer.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:58:57",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6277,
       "finding_type": "document",
       "summary": "Board composition (FY2025 20-F): 5 directors total. Class I: Mykhailo Zhernov (EUR director since Dec 2021; managing partner Millstone & Co Investment Company, Ukraine; former ALTERA FINANCE founder). Class II: Malcolm Day (EUR director since Jul 2012; MD of ASX:MOM Moab Minerals since 1999) and Michael Hanson (partner, Hanson Peak LLP; 30 yrs natural resources/corporate finance; postings Russia and South Africa). Class III: Tony Sage (CEO/Executive Chairman) and Michael C. Ryan (independent; former Deputy Asst Secretary of Defense for European/NATO Policy Oct 2019-Oct 2020; 25 yrs USAF, Colonel; graduate French War College; National Intelligence University). EUR controls majority board via investor rights agreement (can nominate 4 of 5 while >50% shareholder).",
@@ -770,31 +897,6 @@
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-03-09 17:59:08",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6278,
-      "finding_type": "document",
-      "summary": "CRML related-party transactions (from Note 17): EUR (parent) has provided capital contributions totaling $45.7M to CRML and its subsidiaries as of June 30 2025. Additional balance owed to EUR: $5,854,852 (vs $4,268,857 at June 30 2024). EUR essentially financed CRML operations pre-PIPE. Board identified 'significant deficiency' in internal controls: 'The Company lacks the controls needed to ensure that the accounting for its related party transactions is accurate and complete' due to lack of personnel.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:59:16",
       "target_name": "Critical Metals Corp",
       "profile_id": "tech-right",
       "evidence": [
@@ -826,31 +928,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A6K-20250122",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6280,
-      "finding_type": "document",
-      "summary": "GEM Global Yield LLC SCS credit facility and dispute: July 4 2023 CRML entered $125M draw-down facility with GEM. 122,549 commitment fee shares and 1,814,797 warrants issued. GEM exercised warrant right Feb 27 2025 demanding $27.2M in shares. CRML entered arbitration with counterclaims. Also owed GEM cash payment of $3.5M (10% annual interest). Resolution: March 5 2026, GEM Agreement terminated the SPA. GEM received 1,409,624 shares (warrant exercise) + 2,744,062 shares for no consideration (settlement). CRML files registration for 2.744M resale shares.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 17:59:37",
-      "target_name": "Critical Metals Corp",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A6K-20260306",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -926,6 +1003,1345 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "6384,6385,6387,6388,6389,6377,6378,6381,6382",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6917,
+      "finding_type": "relationship",
+      "summary": "Critical Metals Corp has the highest betweenness centrality (0.3119) in the entire network, bridging Greenland resources, JPMorgan finance, and defense procurement",
+      "detail": "Structural observation: Critical Metals Corp tops the betweenness ranking despite having only degree 18 (rank 6). This means it sits on more shortest paths between other nodes than any entity including Elon Musk. It connects the Greenland resource extraction cluster (Tanbreez, GreenMet, Ucore), financial institutions (JPMorgan Chase, Cantor Fitzgerald, Alyeska), government financing (EXIM), and lobbying (Cornerstone Government Affairs). The entity is a literal bridge between the Greenland development story and the financial/political apparatus. 35 findings documented but concentrated in a single thread.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:22:55",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7476,
+      "finding_type": "financial",
+      "summary": "CRML stock declined 18pct from 10.02 to 8.26 during March 4-23 2026 while multiple registration statements enabled share sales",
+      "detail": "Since the Swiss Commodity Re F-3 became effective March 4, 2026 (333-293656, registering 2,777,600 shares), CRML stock fell from 10.02 (Mar 4) to 8.26 (Mar 23), an 18pct decline. During this period: (1) A SECOND F-3 was filed March 18 (333-294406) registering 2,744,062 shares for GEM Global Yield LLC SCS; (2) Director Zhernov filed Form 144 to sell 50,000 shares via Oppenheimer on March 23; (3) 9 new Form 3 (initial ownership) filings appeared March 18 for officers and directors. The March 10 volume spike (13.85M shares vs 4-8M average) with a significant price gap-up from 8.94 to 10.09 may reflect momentum trading rather than block selling. The steady decline from 10.02 to 8.26 over the period is consistent with gradual selling pressure but could also reflect broader market conditions. Key observation: CRML is a foreign private issuer exempt from Section 16 reporting, meaning insider sales need not be reported on Form 4.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:02",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "StockAnalysis.com CRML daily price and volume data March 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7477,
+      "finding_type": "intelligence",
+      "summary": "CRML copper powder deal structural comparison to Sage's prior transactions: follows same share-for-asset template as Cape Lambert-FEL Kasombo deal, but with critical differences \u2014 no independent valuation, disputed commodity pricing, no established seller relationship, BVI incorporation shields from ASX-style scrutiny",
+      "detail": "COMPARATIVE ANALYSIS of CRML copper powder deal vs Sage's historical share-for-asset transactions:\n\nSIMILARITIES: (1) Asset acquired for share consideration at a premium (CRML: 40% premium; Cape Lambert-FEL: shares at VWAP); (2) Non-cash transaction avoiding cash outflow from a cash-poor entity (CRML had $7.3M cash, $52M annual losses); (3) Shares issued in private placement exempt from registration; (4) Transaction creates paper value on balance sheet without cash expenditure.\n\nCRITICAL DIFFERENCES: (1) VALUATION: Cape Lambert's mining tenement transactions had geological reports, resource estimates, and comparable transaction benchmarks. The copper powder has no disclosed independent valuation and market sources dispute the $1,500-2,500/g pricing as 2-3 orders of magnitude too high; (2) SELLER RELATIONSHIP: Prior deals (Kasombo, CopperCo, African Iron) involved identifiable mining industry counterparties. Swiss Commodity Re is a HK corporate services entity whose director Kenneth Deayton has no mining/commodities background \u2014 he's a CPA/Deloitte/HSBC veteran running corporate services; (3) REGULATORY OVERSIGHT: Cape Lambert's ASX deals were subject to ASX listing rules, continuous disclosure, and ASIC oversight. CRML is BVI-incorporated, NASDAQ-listed as a foreign private issuer \u2014 reducing regulatory scrutiny compared to ASX; (4) FACILITATOR SHARES: The Kasombo deal included 10M 'facilitator shares.' The copper powder deal includes 200K shares to Malcolm Macintyre \u2014 his role is equally opaque; (5) SCALE OF PREMIUM: A$20M for 40kg of copper powder (A$500K/kg) vs established market pricing suggests the transaction may be a mechanism to issue shares at a discount rather than a genuine commercial acquisition.\n\nSTRUCTURAL HYPOTHESIS: The copper powder deal may serve a similar function to Sage's prior share-for-asset swaps \u2014 creating paper asset value while issuing shares to specific parties \u2014 but the extreme pricing anomaly and lack of independent verification distinguish it from standard mining industry practice.",
+      "source_datasets": [
+        "web_search",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:08",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Prior CRML findings on copper pricing anomaly",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Proactive Investors Cape Lambert-FEL deal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CRML 6-K filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7478,
+      "finding_type": "financial",
+      "summary": "CRML is a foreign private issuer exempt from Section 16 - insider sales not reported on Form 4",
+      "detail": "Critical Metals Corp is incorporated in the British Virgin Islands and qualifies as a foreign private issuer under the Exchange Act. Per the 424B3 prospectus: 'our officers, directors and principal shareholders will be exempt from the reporting and short-swing profit recovery provisions under Section 16 of the Exchange Act.' This means: (1) Officers/directors are NOT required to file Form 4 when buying or selling CRML shares; (2) The only insider reporting mechanism is the initial Form 3 filings; (3) Form 144 is only required for sales of restricted/control securities under Rule 144, NOT for sales of shares registered under an effective F-3; (4) Swiss Commodity Re (1.5pct holder, not an affiliate) has NO reporting obligation when selling registered shares. The practical implication is that sales by Swiss Commodity Re, Macintyre, or any non-affiliate selling securityholder through the registered prospectus are essentially invisible to SEC public filings until the next periodic report.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:14",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "424B3 prospectus filed 2026-03-04 section on foreign private issuer status",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7479,
+      "finding_type": "financial",
+      "summary": "Oppenheimer is the broker for CRML insider sales - confirmed via Form 144 filings by Director Zhernov",
+      "detail": "Both Form 144 filings by Director Zhernov Mykhailo (Oct 31, 2025 and Mar 23, 2026) identify Oppenheimer and Co Inc as the broker. The Jan 14, 2026 Form 144 by European Lithium Ltd (10pct holder) used BMO Capital Markets Corp. The prospectus Plan of Distribution allows selling securityholders to use any of: ordinary brokerage transactions, block trades, broker-dealer as principal, exchange distribution, private transactions, short sales, etc. No specific broker is named for Swiss Commodity Re or Macintyre in the prospectus.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:26",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2025-10-31 by Zhernov via Oppenheimer",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2026-01-14 by European Lithium via BMO Capital Markets",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2026-03-23 by Zhernov via Oppenheimer",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7480,
+      "finding_type": "financial",
+      "summary": "CRML has filed at least 5 registration statements enabling massive share resales - pattern of serial dilution",
+      "detail": "Per the 424B3 prospectus risk factors section, CRML has filed multiple registration statements for share resales: (1) F-1 subsequently amended to F-3 (April 23, 2025) - registered 100,312,567 shares (56.9pct of outstanding); (2) Registration statements filed April 2025 and October 2025; (3) F-3 Reg 333-293656 (effective March 4, 2026) - 2,777,600 shares (Swiss Commodity Re/Macintyre/placement agents); (4) F-3 Reg 333-294406 (filed March 18, 2026) - 2,744,062 shares (GEM Global Yield). Additionally, European Lithium (10pct holder) filed Form 144 to sell 5M shares on Jan 14, 2026. The aggregate registered share overhang relative to daily volume creates significant potential dilution. With 122M shares outstanding and tens of millions registered for resale, selling securityholders have ample registered inventory to sell without any filing requirements.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:58:28",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "424B3 prospectus risk factors section",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "F-3 Reg 333-294406 filed 2026-03-18",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2026-01-14 by European Lithium",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7568,
+      "finding_type": "intelligence",
+      "summary": "SEC FILING DEFICIENCIES in copper powder transaction: The 6-K filing for the Swiss Commodity Re copper powder acquisition is remarkable for what it OMITS: (1) No independent appraisal or valuation methodology. (2) No purity specification -- the 6-K says only 'ultra-high-purity copper powder' without stating 99.96% or any numeric purity. (3) No assay report or certificate of analysis. (4) No storage/custody location. (5) No seller background or verification. (6) No related-party determination. (7) No lock-up on shares. (8) No risk factors. The press release (which is NOT an SEC filing) contains the specific purity claim and the ,500-2,500/gram pricing assertion, but the actual 6-K filing contains neither. This creates a gap: the inflated valuation claims are in marketing material, not in the regulated filing, potentially providing legal cover while still deceiving investors.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:21:23",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CRML 6-K filing Nov 25 2025 via StockTitan/SEC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML F-3 prospectus Feb 23 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML GlobeNewswire press release Nov 21 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7575,
+      "finding_type": "intelligence",
+      "summary": "Financely Group published detailed copper powder fraud warning in September 2025, two months before CRML deal \u2014 describes identical scheme",
+      "detail": "Financely Group (financial advisory firm specializing in commodity fraud detection) published 'Why Every Ultra Fine Copper Powder and Nickel Wire Deal is a Scam' in September 2025, two months before CRML announced its copper powder acquisition (Nov 21, 2025). The article describes the CRML scheme exactly: sellers claim possession of impossibly valuable copper powder, products stored in Swiss Free-Zones with unverifiable custody, attached Safe Keeping Receipts from offshore banks, no mass balance (tonnage claims do not reconcile with packaging), photos are stock images, wrong pricing math quoting high-purity metal prices for off-spec material. Conclusion: 'This is a scam. The product is junk and the valuation is a fairy tale.' The Institut fuer Seltene Erden (Lucerne, Switzerland) separately notes significant quantities of ultrafine copper powder have 'disappeared into bank vaults worldwide' \u2014 a reference to the financial fraud usage of this product. Financely has published at least 7 analyses of this specific fraud type.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:50:20",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Institut fuer Seltene Erden copper powder pricing documentation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://financely-group.com/ultra-fine-copper-powder-scam/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7576,
+      "finding_type": "intelligence",
+      "summary": "EDGAR full-text search: 'ultra-high-purity copper' appears in exactly 5 SEC filings \u2014 all CRML. Term does not exist in any other company's filings.",
+      "detail": "EDGAR EFTS full-text search confirms: (1) 'ultra-high-purity copper' returns 5 results, all CIK 0001951089 (CRML). No other public company in SEC history has used this phrase. It is not an industry-standard designation. (2) 'Swiss Commodity Re' returns 7 results, all CRML. The counterparty has zero regulatory footprint outside CRML filings. (3) 'Malcolm Scott Macintyre' returns 2 results, both CRML (F-3 and 424B3). (4) 'Hong Kong Corporate Services Group' returns 0 results outside CRML. Neither the counterparty, the product terminology, nor the co-recipient exist anywhere in the SEC filing universe outside CRML's own disclosures.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:50:29",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC EDGAR EFTS (efts.sec.gov/LATEST/search-index) full-text search results, queried 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7577,
+      "finding_type": "financial",
+      "summary": "CBIZ CPAs replaced Marcum LLP as auditor; 7 material weaknesses found; internal controls 'not effective'; copper booked in unaudited financials",
+      "detail": "CBIZ CPAs P.C. served as auditor for FY2025 (year ended June 30, 2025), replacing Marcum LLP who audited FY2024 and FY2023. Audit fees: CBIZ ,009 (FY2025); Marcum ,960+,760 (FY2024). Management and CBIZ identified SEVEN material weaknesses, internal controls deemed 'not effective': (1) insufficient personnel for segregation of duties, (2) related-party transaction controls: 'lacks controls needed to assure accounting for related party transactions is accurate and complete,' (3) accounts payable/accrued expenses accuracy, (4) income tax provision review, (5) complex financial instruments accounting, (6) cybersecurity program inadequacy, (7) financial statement review completeness. Going-concern qualification: 'Substantial doubt exists about ability to continue as a going concern.' The copper powder (.8M) was booked in the Dec 31, 2025 half-year financials which are UNAUDITED. First audit exposure will be FY2026 20-F (expected Oct 2026). Audit committee has only 2 members (Malcolm Day and Michael Hanson).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:51:13",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7578,
+      "finding_type": "financial",
+      "summary": "Copper valued at .8M (not announced M) using fair value of shares issued; no independent appraisal; no fair value hierarchy disclosed",
+      "detail": "The Nov 21, 2025 press release announced the copper deal at $10/share ($20M for 2M shares). The Dec 31, 2025 half-year equity statement records: 'Issue of shares \u2013 Acquisition of copper: 2,000 shares, $15,798,000 premium, Total $15,800,000.' This implies shares valued at ~$7.90/share (CRML market close Dec 16, 2025), not the announced $10. The $4.2M gap was never disclosed or explained. The half-year 6-K states inventory policy: 'Inventories are valued at the lower of cost and net realisable value.' The 'cost' was determined solely by the market value of shares issued \u2014 no independent assessment of whether the copper is actually worth $15.8M. No fair value measurement hierarchy (Level 1/2/3) disclosed. No independent appraisal. No observable market inputs cited. The press release $10/share claim was contradicted by the Nov 20 close of $7.23 (only 24% premium, not 40% as claimed). The stock FELL on announcement day: Nov 21 close was $7.13, down 11.4%.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:51:26",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K filed Nov 25, 2025 \u2014 copper acquisition press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7579,
+      "finding_type": "financial",
+      "summary": "Consultant fees exploded 40x in 2 years (K\u2192.3M), promotion/IR 18x (K\u2192.2M); no consultants named; pre-revenue company",
+      "detail": "CRML spending growth from 20-F and 6-K filings: Consultant/professional services: FY2023 $311K \u2192 FY2024 $1.384M \u2192 FY2025 $12.338M (+792% YoY, 40x in 2 years). Promotion/IR/PR: FY2023 $64K \u2192 FY2024 $191K \u2192 FY2025 $1.192M (+523% YoY, 18x in 2 years). Share-based payments: FY2023 $0 \u2192 FY2024 $608K \u2192 FY2025 $30.567M (+4,926%). Director fees: FY2023 $0 \u2192 FY2024 $137K \u2192 FY2025 $1.391M. H1 FY2026 (Dec 2025): consultants $4.49M (+362% vs H1 FY2025 $972K), promotion $1.18M (+547% vs $183K). 20-F attributes consultant increase only to 'engagement of consultants in relationship with the business combination transaction.' No individual consultants named. Combined non-operating expenses consumed ~$53M in H1 FY2026 alone. Cash outflows from operations: H1 FY2025 $2.6M \u2192 H1 FY2026 $19.2M (+638%). Company has zero revenue.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:51:36",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K filed March 13, 2026, Exhibit 99.2 \u2014 H1 FY2026 financial statements",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7580,
+      "finding_type": "financial",
+      "summary": "50% share dilution in 18 months (81M\u2192125M+ shares); 120M+ shares registered for resale exceeding total outstanding; serial F-3 pattern",
+      "detail": "CRML shares outstanding: June 30, 2024: 80,994,098 \u2192 June 30, 2025: 104,790,304 \u2192 Dec 31, 2025: 121,342,258 \u2192 post-GEM Mar 2026: ~125.5M. This is 50%+ dilution in 18 months. Significant non-cash issuances: Tanbreez/Rimbal 13.4M shares ($96.85M), copper/Swiss Commodity Re 2M shares ($15.8M), RSU vesting 4.6M shares, GEM settlement 4.15M shares (2.74M for NO consideration), suppliers ~1.05M shares. CRML has filed 5+ registration statements and 23+ prospectuses since 2023. Total shares registered for resale across all F-3s exceeds 120M \u2014 more than total shares outstanding. Pattern: private issuance at favorable terms \u2192 immediate F-3 registration \u2192 no lock-up \u2192 rapid resale. Counterparties rotate: EUR/Cantor (SPAC), Alyeska (PIPE), Swiss Commodity Re (copper swap), GEM (dispute settlement). Company receives no cash from resale registrations.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:51:56",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 20-F FY2025 \u2014 share capital notes",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K filed March 13, 2026 \u2014 equity statement showing share movements",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML F-3 filings (Feb 23, Oct 20, 2025; Mar 18, 2026)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7583,
+      "finding_type": "intelligence",
+      "summary": "CRML proposed JV with Romanian state nuclear company Nuclearelectrica for processing facility in Feldioara, Brasov \u2014 Jan 2026",
+      "detail": "HotNews.ro reported (January 24, 2026) that Critical Metals Corp proposed a joint venture with Nuclearelectrica (Romania's state nuclear energy company) for a processing facility in Feldioara, Brasov County, Romania. The article's headline translates as 'What connects Feldioara to Greenland: The question marks of the economic deal proposed to the Romanian state.' Journalist Claudia Parvoiu raises skepticism about the proposal. This adds Romania to CRML's growing list of announced partnerships/proposals (Greenland, Saudi Arabia, US EXIM Bank) that create narrative value without requiring near-term execution. A pre-revenue BVI shell with $7.3M cash and going-concern doubt proposing industrial JVs with state nuclear companies fits the pattern of ambitious announcements designed to support stock price during selling periods.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:52:33",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://hotnews.ro/ce-leaga-feldioara-de-groenlanda-semnele-de-intrebare-ale-afacerii-economice-propuse-statului-roman-2154876",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7585,
+      "finding_type": "negative_result",
+      "summary": "Zero physical evidence for copper powder across 10 categories \u2014 no customs, storage, assay, insurance, transport, warehouse receipts, manufacturer, appraisal, inspection, or custody records",
+      "detail": "Comprehensive search across all available databases found zero physical evidence for the 40kg copper powder ($15.8M): (1) Customs/import: No records in US, AU, or HK customs databases for copper powder by CRML or Swiss Commodity Re. HS Code 7406 avg import price $10.35/kg \u2014 40kg would declare at ~$414, not $20M. (2) Storage: No location ever disclosed in any filing. (3) Warehouse receipt/SKR: Never disclosed. (4) Assay/certificate of analysis: Never disclosed; purity claims self-contradictory (99.96% AND 99.9999% in same press release). (5) Insurance: No cargo or storage insurance disclosed for a $15.8M asset. (6) Independent appraisal: Never obtained. (7) Manufacturer: No supply chain documented; no connection to any known UHP copper manufacturer. (8) Physical inspection: No verification performed. (9) Transportation: No shipping documents. (10) Custody: Not disclosed. The non-current inventory classification under IFRS IAS 2 requires measurement at lower of cost and NRV \u2014 if NRV is $8K-$200K, a write-down from $15.8M is required. This matches documented Financely Group fraud pattern where 'applicants fail to provide any documentation to support the collateral: no SKR, no inspection certificate, no insurance slip, no warehouse receipt.'",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:53:04",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K March 13, 2026 \u2014 half-year financials",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K Nov 25, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML F-3 Feb 23, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Financely Group copper powder fraud documentation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HS Code 7406 customs data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7586,
+      "finding_type": "intelligence",
+      "summary": "F-3 for copper shares effective in 9 days (unusually fast); promotional press release cadence intensified precisely during resale window",
+      "detail": "The F-3 registration for copper powder shares filed Feb 23, 2026 was declared effective Mar 4, 2026 \u2014 a 9-day gap, unusually fast (typical: 30-60 days). Total time from deal close (Dec 16) to freely sellable shares: 78 days. No lock-up period. Stock data around key dates: Nov 21 announcement \u2014 stock FELL (close $7.13, down 11.4%). Feb 23 F-3 filing \u2014 volume nearly doubled (11.6M shares), price $10.31. Mar 4 effective \u2014 $10.02. Mar 5-6 post-effective \u2014 immediate 12% decline to $8.80. Mar 23 current: $8.26, down 18% from effectiveness. CRML issued a barrage of press releases Jan-Mar 2026 (Saudi Arabia $1.5B term sheet, drilling results, lab acquisition, pilot plant, project management team, $30M acceleration program, 60 Degree North acquisition) precisely coinciding with the F-3 filing and effectiveness window \u2014 creating selling opportunities through elevated prices and volume. No Form 144 filings yet by Swiss Commodity Re or Macintyre as of Mar 23, 2026.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:53:16",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 424B3 filed Mar 4, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML press releases Jan-Mar 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML stock price data NYSE American",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7590,
+      "finding_type": "financial",
+      "summary": "Auditor context: CBIZ acquired Marcum Nov 2024; Marcum dismissed July 2025; Marcum fined $13M for systemic failures; clean opinions became 7 material weaknesses under CBIZ",
+      "detail": "Marcum LLP audited CRML FY2023-FY2024, giving clean opinions (no material weaknesses). CBIZ Inc acquired Marcum's attest business Nov 1, 2024 ($2.3B). CRML dismissed Marcum July 7, 2025 (6-K filed July 10, accession 0001213900-25-062809). No disagreements or reportable events stated. But: (1) Marcum fined $13M (SEC $10M + PCAOB $3M) June 2023 for systemic quality failures \u2014 tripled clients, 600+ SPACs, 'churning out audits at unsustainable pace.' Violations in 25-50% of audits. (2) CBIZ then found 7 material weaknesses for FY2025, controls 'not effective' \u2014 either rapid deterioration or Marcum deficiency. (3) CBIZ doesn't specialize in mining. (4) The copper powder ($15.8M, booked in unaudited H1 FY2026 financials) won't face CBIZ audit until FY2026 20-F (expected Oct 2026).",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:16:14",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 6-K filed July 10, 2025 (0001213900-25-062809)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Marcum Exhibit 15.1 confirmation letter",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PCAOB 2024 CBIZ inspection (Release 104-2025-092)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC/PCAOB Marcum $13M enforcement action June 2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7676,
+      "finding_type": "financial",
+      "summary": "CRML half-year financial statements (Dec 31 2025, filed Mar 13 2026) show copper inventory booked at $15,800,000 as non-current asset. Valuation method: 2,000,000 shares at $7.90 per share (fair value of shares at acquisition date). No independent third-party valuation disclosed. No custody location, storage, assay certificate, or insurance mentioned in Note 6 or anywhere in the financials.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:38:36",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-26-027768-EX99-2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7678,
+      "finding_type": "legal",
+      "summary": "CRML supplemental risk factors (Exhibit 99.3, filed Mar 13 2026) disclose a MATERIAL WEAKNESS specifically identified as: 'the Company identified a material weakness related to valuation and accounting for copper powder acquired in the period, in addition to material weaknesses previously identified, which remained not remediated as of December 31, 2025.' This is the company's own admission that the copper valuation is internally problematic.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:38:53",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-26-027768-EX99-3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7680,
+      "finding_type": "financial",
+      "summary": "Swiss Commodity Re Limited does NOT appear in CRML's Related Party Transactions note (Note 10) in the Dec 31 2025 half-year financial statements, despite the ASA being a $15.8M transaction. The entire related party section covers only European Lithium Ltd.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:38:55",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-26-027768-EX99-2-NOTE10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7683,
+      "finding_type": "financial",
+      "summary": "No SEC comment letters (UPLOAD or CORRESP) filed by SEC staff against CRML after Dec 1 2025 copper deal. Most recent CORRESP was April 10 2025 (F-3 acceleration request). No SEC staff challenge to the F-3 or copper valuation detected through EDGAR submissions as of March 23 2026.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:08",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-SUBMISSIONS-CIK0001951089",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7685,
+      "finding_type": "financial",
+      "summary": "CRML press release (Nov 21 2025, Exhibit 99.1 to 6-K) makes fabricated valuation claims: describes copper as selling 'between US$1,500 to US$2,500 per gram' (which would value 40kg at $60M-$100M). The claim is false - ultra-high purity copper powder trades at roughly $20-400/kg commercially. Press release also describes Swiss Commodity Re as 'a long-only multi-generational European based single family office' despite the entity being incorporated 22 days prior in HK.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:18",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-25-114760-EX99-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7687,
+      "finding_type": "document",
+      "summary": "CRML's Nov 21 2025 ASA closed December 16 2025. The F-3 was filed Feb 23 2026 and became effective March 3-4 2026. The 424B3 (final prospectus) was filed March 4 2026 making shares immediately sellable. Timeline: incorporated Oct 30 (22 days before deal) -> deal Nov 21 -> closed Dec 16 -> F-3 filed Feb 23 -> effective Mar 4 (76 days total from close to registration). No lock-up period whatsoever.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:23",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-F3-333-293656",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-424B3-0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7688,
+      "finding_type": "financial",
+      "summary": "CRML balance sheet as of Dec 31 2025: Copper inventory classified as NON-CURRENT asset ($15,800,000). This accounting classification itself is an admission that the company does not expect to sell or consume the copper within 12 months. This contradicts the press release portrayal of copper as an active commercial inventory for immediate monetization.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:31",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-26-027768-EX99-2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7689,
+      "finding_type": "financial",
+      "summary": "The Nov 21 2025 press release stated 2M shares at $10/share = $20M. The actual share price at acquisition close (Dec 16 2025) resulted in a booking of $15.8M (2M shares at $7.90/share). The F-3 also describes '1,800,000 ASA shares' to Swiss Commodity Re and '200,000 ASA shares' to Macintyre - consistent with 2M total but split differently than initially reported. The $20M valuation from the announcement was inflated versus the $15.8M actually booked.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:42",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-6K-0001213900-26-027768-EX99-2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-F3-333-293656",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7697,
+      "finding_type": "financial",
+      "summary": "European Lithium Ltd (ASX: EUR), a 10% CRML shareholder, filed Form 144 on January 14, 2026 to sell 5,000,000 CRML ordinary shares via BMO Capital Markets Corp (aggregate market value .8M). Tony Sage is Executive Chairman of European Lithium. This represents a major insider sell-down occurring shortly after the F-3 became effective. Swiss Commodity Re's 2M shares registered via F-3 (effective March 4, 2026) \u2014 no Form 144 filed by SCR as of March 24, 2026. Macintyre 200K shares: no Form 144 filed.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:41:18",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK%3A1951089%3A144%3A2026-01-14%3AEuropean-Lithium-Ltd-5M-shares-BMO",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7707,
+      "finding_type": "financial",
+      "summary": "CRML stock declined from approximately USD 9.40 on March 4, 2026 (F-3 effectiveness date) to USD 7.68 on March 23, 2026 \u2014 an 18.3% decline in 19 days during the resale window. Feb 20, 2026 close was USD 9.06. CRML stock up 158% YTD in 2026 prior to F-3 effectiveness. The F-3 covers 2,777,600 shares total (2M ASA + 777,600 placement agent warrants). Separately, European Lithium (39.5% shareholder, controlled by Tony Sage) sold 5,000,000 shares on January 14, 2026 via BMO Capital Markets for approximately USD 73.8M total.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:43:12",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stockstotrade.com/news/critical-metals-corp-crml-news-2026_03_20/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7770,
+      "finding_type": "document",
+      "summary": "Note 6 (Inventory) of CRML half-year financials (Dec 31 2025): Full text states 'On November 21, 2025, the Company entered into an Asset Sale Agreement (the ASA) with Swiss Commodity Re Limited (the Seller) and purchased 40kg of ultra-high-purity copper powder from Seller. Under the terms of the ASA, the transaction completed on December 16, 2025 when the Company issued the Seller a total of 2,000,000 ordinary shares.' No custody, storage, location, assay, or insurance language anywhere in the note. Cost stated as '2,000,000 shares at $7.90 per share, being the fair value of the shares as at the date of acquisition.'",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:34:27",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-027768:ea028050301ex99-2.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7771,
+      "finding_type": "document",
+      "summary": "CRML half-year financials accounting policy for inventory explicitly says 'Costs incurred in bringing CRML's inventory to its present location and condition are accounted for on a weighted average basis' and 'Inventory classified as non-current represent inventories not expected to be consumed or processed within the next 12 months and relate to ultra-high-grade copper powder.' The phrase 'present location' implicitly acknowledges a physical location exists but the location is never disclosed. The key estimate section references 'variables affecting costs recognised in bringing the inventory to its location and condition for sale' without naming any location.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:34:36",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-027768:ea028050301ex99-2.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7772,
+      "finding_type": "legal",
+      "summary": "Exhibit 99.3 to 6-K filed Mar 13 2026: Full material weakness disclosure reads: 'For the half year period ended December 31, 2025, the Company identified a material weakness related to valuation and accounting for copper powder acquired in the period, in addition to material weaknesses previously identified, which remained not remediated as of December 31, 2025.' Context: this disclosure appears in a supplemental risk factor update, NOT in the financial statements themselves. The half-year financial statements (Exhibit 99.2) are explicitly marked UNAUDITED. CBIZ CPAs P.C. (auditor) did not issue a review report for the half-year period \u2014 the financials are management-prepared without any auditor review attestation.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:34:45",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-027768:ea028050301ex99-3.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7773,
+      "finding_type": "intelligence",
+      "summary": "CONTRADICTION: Financial statements (Note 6, Note 12, equity statement) state '2,000,000 shares issued to the Seller' and 'Issue of shares - Acquisition of copper: 2,000,000 shares at $15.8M.' The F-3 prospectus (Feb 23, 2026, accession 0001213900-26-019356) discloses the shares were split: 1,800,000 to Swiss Commodity RE Limited and 200,000 to Malcolm Scott Macintyre separately. Note 3 of F-3: 'Consists of 1,800,000 Ordinary Shares received by the Selling Securityholder in accordance with the ASA. Kenneth Raymond Deayton may be deemed to have voting and investment control over the securities held by Swiss Commodity RE Limited. The business address for this Selling Securityholder is 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong.' Note 4: 'Consists of 200,000 Ordinary Shares received by the Selling Securityholder in accordance with the ASA. The business address for this Selling Securityholder is 22 Faraday Avenue, Rose Bay, New South Wales, 2029, Australia.' The financial statements' description of '2,000,000 shares to the Seller' obscures Macintyre's separate 200,000 share allocation.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:34:59",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-019356:ea0272973-f3_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7774,
+      "finding_type": "document",
+      "summary": "Note 10 (Related Party Transactions) of CRML half-year financials (Dec 31 2025) contains ZERO mention of Swiss Commodity Re Limited or Malcolm Scott Macintyre. Note 10 only discloses: (1) European Lithium Ltd (EUR) working capital advance of $2,355,328; (2) Tony Sage remuneration increase to $750,000/year via Okewood Pty Ltd; (3) EUR share sales generating $124.475M. The $15.8M copper powder acquisition from a 3-week-old HK entity run by a corporate services provider is not classified as a related party transaction, despite CRML having identified 'related party transactions' as a specific pre-existing significant deficiency in internal controls.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:35:09",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-027768:ea028050301ex99-2.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7775,
+      "finding_type": "document",
+      "summary": "CBIZ CPAs P.C. audit report for year ended June 30, 2025 (dated October 3, 2025, filed in 20-F Oct 6 2025): Contains (1) clean opinion \u2014 financial statements 'present fairly, in all material respects'; (2) Explanatory Paragraph for Going Concern \u2014 'the Company has a significant working capital deficiency, has incurred significant losses and needs to raise additional funds'; (3) NO reference to copper powder (deal not yet done); (4) No mention of material weaknesses in the audit report itself \u2014 only significant deficiencies in management's assessment. The half-year financials (period Dec 31 2025) are filed with NO CBIZ review report \u2014 marked '(Unaudited)' throughout. CBIZ did not issue any review of the interim period containing the copper transaction.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:35:20",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-096254:ea0257309-20f_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7776,
+      "finding_type": "intelligence",
+      "summary": "CRML filed NO announcement or closing notice for the December 16, 2025 copper powder transaction close. The 6-K filed November 25, 2025 announced the deal and stated it would 'close within 10 business days.' Review of all 6-K filings between Nov 25, 2025 and Mar 13, 2026 shows: Dec 12, 2025 6-K (FPCU term sheet only); Dec 31, 2025 6-K (AGM vote results only); Jan 21, 2026 6-K (Saudi offtake MoU only). No 6-K or current report was filed to announce the closing of the $20M copper deal. The F-3 (Feb 23, 2026) first discloses 'The closing of the transactions contemplated by the ASA occurred on December 16, 2025' \u2014 the public learned of the closing only through the registration statement, not a dedicated current report. This is unusual for a material transaction.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:35:30",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-019356:ea0272973-f3_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7778,
+      "finding_type": "financial",
+      "summary": "VALUATION CONTRADICTION: Press release (Nov 21, 2025) states '2,000,000 shares at $10/share = $20M.' 6-K form (Nov 25, 2025) states '2,000,000 shares... valued by the Company and the Seller at $20,000,000.' Financial statements (Dec 31, 2025) book at $15,800,000 \u2014 being '2,000,000 shares at $7.90/share, being the fair value of the shares as at the date of acquisition.' The $4.2M difference is the gap between (a) CRML's stock price on November 21 ($10) when deal was announced, and (b) CRML's stock price on December 16 ($7.90) when it actually closed. This means CRML announced a $20M deal but was only able to deliver $15.8M in stock value \u2014 a 21% shortfall. No 8-K or 6-K was filed to disclose the revised valuation. The equity statement shows this as 'Issue of shares \u2013 Acquisition of copper: 2,000 [shares] $15,798,000 [premium].' The ASA agreement itself has not been filed as an SEC exhibit.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:35:54",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-26-027768:ea028050301ex99-2.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7779,
+      "finding_type": "document",
+      "summary": "The 6-K form body (regulated filing, Nov 25 2025, accession 0001213900-25-114760) states: 'the Company purchased 40kg of ultra-high-purity copper powder from Seller in exchange for a total of 2,000,000 ordinary shares... valued by the Company and the Seller at $20,000,000.' The press release (Exhibit 99.1, same accession) additionally claims: 'secured one of the largest strategic stockpiles of ultra-high-purity critical copper powder,' 'G7 & EU-origin secured stockpiles,' 'fully compliant, highly sought after, traceable supply chain,' 'long-only multi-generational European based single family office,' 'DoW and NATO supply capabilities,' 'supplies our allied militaries immediately.' NONE of these promotional claims appear in the regulated 6-K filing itself. The form body does not disclose purity percentage, location, G7/EU origin, NATO/DoW context, or any supply chain details. This creates a two-tier disclosure: inflated marketing claims in the press release vs minimal factual disclosure in the regulated form.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:36:06",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-114760:ea0267240-6k_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7780,
+      "finding_type": "document",
+      "summary": "CRML 20-F annual report (year ended June 30, 2025, filed Oct 6 2025, accession 0001213900-25-096254) discloses six pre-existing significant deficiencies in internal controls, including specifically: 'The Company lacks the controls needed to assure that the accounting for its related party transactions is accurate and complete.' This pre-existing deficiency was known BEFORE the copper powder deal closed on Dec 16, 2025. The subsequent identification of a 'material weakness related to valuation and accounting for copper powder' suggests the copper deal exploited the exact control gap that existed. The 20-F also discloses CBIZ audit report included an Explanatory Paragraph for Going Concern (working capital deficiency, significant losses, need to raise additional funds).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:36:16",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-096254:ea0257309-20f_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7781,
+      "finding_type": "intelligence",
+      "summary": "INTERNAL CONTRADICTION in Nov 21 press release: (1) 'The Company will issue 2 million Ordinary shares at $US10 per share for 40 kilograms of the UHP 99.96% pure copper powder.' (2) The 'About Copper Powder' boilerplate section in the SAME press release states: 'Ultra High Purity (UHP) copper powder, often achieving purity levels of 99.9999% or higher, is a specialized material prized...' \u2014 describing a DIFFERENT grade of copper. 99.96% purity (4N = 99.99% is standard, so 99.96% is below even standard 4N) is not the same product as 99.9999% (6N). The press release uses inflated 6N pricing references to justify 99.96% copper. Additionally, the 6-K form body only says 'ultra-high-purity copper powder' without ANY purity figure \u2014 the 99.96% claim appears only in the press release exhibit, not in the actual SEC form, and is inconsistent with the general boilerplate used to justify the price.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:36:31",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-114760:ea026724001ex99-1_critical.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7782,
+      "finding_type": "negative_result",
+      "summary": "EDGAR submissions review confirmed: No SEC UPLOAD (staff comment letter) or CORRESP (company response) filed after April 10, 2025 through March 24, 2026. The most recent SEC comment letter exchange was April 10, 2025 (UPLOAD accession 0000000000-25-003829, related to prior F-3 acceleration). The copper powder transaction (November-December 2025), the F-3 registration (February 2026), and the half-year financials with material weakness disclosure (March 13, 2026) have not prompted any SEC staff comment letters as of the investigation date. This is notable: the SEC has not publicly challenged the copper powder valuation or related disclosures through the comment letter process.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:36:41",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-030663:filename1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7786,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: CRML copper powder physical non-existence \u2014 zero chain-of-custody evidence across all sources. No custody location, custodian, warehouse receipt, assay certificate, insurance policy, shipping record, or import/customs documentation found in: (1) any CRML SEC filing including 6-K Nov 2025, F-3 Feb 2026, 424B3 Mar 2026, half-year financials Dec 31 2025; (2) EDGAR full-text search across all CRML filings for custody/warehouse/assay/storage/insurance/shipping; (3) open web searches; (4) corporate registries; (5) trade data sources. The only location language is accounting boilerplate: 'costs incurred in bringing inventory to its present location.' A $15.8M non-current inventory asset has no physical address in any disclosure. The copper powder's physical existence cannot be verified from any public source.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:39:38",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-114760 0001213900-26-027768 0001213900-26-019356 0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7787,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: CRML copper powder \u2014 two-tier disclosure architecture provides legal cover. All promotional claims appear exclusively in the press release exhibit (Exhibit 99.1 to 6-K), not in the regulated form body: 'European based single family office,' 'G7 & EU-origin,' 'NATO supply capabilities,' 'traceable supply chain,' '$1,500-2,500/gram' price. The regulated 6-K form body states only that CRML entered an agreement to acquire copper. This bifurcation mirrors professional securities fraud methodology: make material misstatements in an exhibit-only press release to generate stock price movement while the regulated filing contains minimal verifiable claims. No SEC comment letters issued after April 2025 suggest SEC has not yet reviewed the Nov 2025 transaction.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:39:47",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-114760",
+          "source_quote": "6-K form body contains only: 'Critical Metals Corp...has entered into an Asset Sale Agreement with Swiss Commodity RE Limited'",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7788,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: CRML copper powder \u2014 no auditor has ever reviewed or opined on the copper valuation. CBIZ CPAs P.C. (PCAOB #199) audited CRML through June 30, 2025 \u2014 two months before the copper deal. The half-year financials (Dec 31, 2025) containing the $15.8M copper are explicitly marked '(Unaudited)' throughout with no auditor review report. The material weakness disclosure ('valuation and accounting for copper powder') is a management disclosure in a supplemental risk factors exhibit, not an auditor-identified finding. CBIZ was ratified as FY2026 auditor on Dec 29, 2025 \u2014 after the copper accounting problem already existed. CBIZ's 2024 PCAOB inspection found a Long-Lived Asset deficiency (failure to look beyond management's own analysis) directly relevant to the copper. No auditor has issued any opinion, review conclusion, or emphasis-of-matter paragraph on the $15.8M copper inventory.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "pcaob"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:39:57",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0001213900-25-096254 0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7789,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: CRML copper powder \u2014 evolved copper SKR fraud adapted for public equity markets. Financely Group documented the classic template (July 2025, 4 months pre-CRML): storage in Swiss free zone, $1,500-2,500/gram price claim, 'multi-generational European family office' seller, G7/EU-origin claim, no documentation. CRML variant innovates by replacing the defrauded lender with public shareholders: instead of soliciting private financing against phantom collateral (which requires documentation from lenders), CRML issued 2M liquid NASDAQ shares. No single party demands a warehouse receipt. The result: Swiss Commodity Re (Kenneth Deayton, HK corporate services) receives $15.8-20M equivalent in NASDAQ shares for copper of undisclosed provenance; Malcolm Macintyre receives $1.58-2M shares as apparent deal arranger; Jett Capital (Darrin Blumenthal, ABN AMRO Sydney alum) links Macintyre to CRML as financial advisor. The public market \u2014 not a lender \u2014 absorbs the phantom collateral risk.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:40:09",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "7738 7572 7700 7786",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7820,
+      "finding_type": "financial",
+      "summary": "H1 FY2026 net loss: $120.4M (up 536% from $18.9M). Dominant drivers: (1) warrant fair value loss -$80.1M, (2) share-based comp -$18.7M, (3) finance costs -$14.7M, (4) listing cost settlement -$9.5M. Net cash used in operations: -$19.2M. Basic loss per share -$1.07 vs -$0.21.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:44:32",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7822,
+      "finding_type": "financial",
+      "summary": "Note 20 post-period events (after Dec 31, 2025): (1) Jan 21, 2026 \u2014 210,000 shares to advisory board for ~$3.2M. (2) Feb 2, 2026 \u2014 400,000 shares to 'suppliers' in settlement of services to 'one of the Company advisors in connection with the marketing and investor relations agreement' for ~$5.0M. Combined ~$8.2M in share-based payments to undisclosed advisors within 5 weeks of period end.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:44:50",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7823,
+      "finding_type": "financial",
+      "summary": "CRML accounting policy for copper: 'Inventories are valued at the lower of cost and net realisable value.' The NRV is explicitly named as a KEY ESTIMATE requiring management judgement. Non-current inventory classification used: 'not expected to be consumed or processed within the next 12 months.' The company acknowledges it cannot sell the copper within one year \u2014 meaning no near-term NRV test via actual transaction price is imminent.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 22:44:59",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1031,6 +2447,100 @@
       "evidence": []
     },
     {
+      "id": 3718,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Kenneth Raymond Deayton",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:05:18",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Raymond Deayton",
+      "other_person_slug": "kenneth-raymond-deayton",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3767,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Swiss Commodity Re Limited",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:21:51",
+      "profile_id": "tech-right",
+      "other_person": "Swiss Commodity Re Limited",
+      "other_person_slug": "swiss-commodity-re-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3820,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Critical Metals Corp",
+      "relationship_type": "financial",
+      "description": "Cantor was sole book-running manager for Sizzle SPAC IPO ($155M), converted $5.7M deferred underwriting fee to 1,247,250 CRML shares, sold 87% within months of lock-up expiry",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:14",
+      "profile_id": "tech-right",
+      "other_person": "Cantor Fitzgerald",
+      "other_person_slug": "cantor-fitzgerald",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1951089",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1829322",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3821,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Howard Lutnick",
+      "relationship_type": "financial",
+      "description": "Lutnick led Cantor Fitzgerald which held 1.247M CRML shares; now Commerce Secretary influencing trade/tariff policy affecting CRML's Greenland rare earth operations. Sons Brandon and Kyle now run Cantor.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:16:27",
+      "profile_id": "tech-right",
+      "other_person": "Howard Lutnick",
+      "other_person_slug": "howard-lutnick",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Gizmodo reporting; CNBC Feb 2026; Cantor 13F filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3145,
       "person_a": "Critical Metals Corp",
       "person_b": "Greenland",
@@ -1086,12 +2596,132 @@
   "entities": [],
   "timeline": [
     {
+      "date": "2022-10-14",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Critical Metals Corp SAM.gov registration: UEI XW4PVY32Q7K1, CAGE code KD8P2. Incorporated in British Virgin Islands (country_of_incorporation: VGB). Physical address: Itchen Down House, Northington Road, Itchen Down, Winchester, SO21 1BT, UK. Entity start date: 2022-10-14. Registered in SAM: 2025-10-13, active 2025-10-15, expires 2026-10-13. Government POC: Michael Ryan (Director). Primary NAICS: 212290 (Other Metal Ore Mining). Purpose of registration: Z2 (federal contracts/grants). No exclusions.",
+      "confidence": "confirmed",
+      "id": 6245
+    },
+    {
+      "date": "2023-07-04",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "GEM Global Yield LLC SCS credit facility and dispute: July 4 2023 CRML entered $125M draw-down facility with GEM. 122,549 commitment fee shares and 1,814,797 warrants issued. GEM exercised warrant right Feb 27 2025 demanding $27.2M in shares. CRML entered arbitration with counterclaims. Also owed GEM cash payment of $3.5M (10% annual interest). Resolution: March 5 2026, GEM Agreement terminated the SPA. GEM received 1,409,624 shares (warrant exercise) + 2,744,062 shares for no consideration (settlement). CRML files registration for 2.744M resale shares.",
+      "confidence": "confirmed",
+      "id": 6280
+    },
+    {
+      "date": "2024-07-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Mykhailo Zhernov (CRML Director) sold 500,000 shares under Rule 144 via Oppenheimer & Co on Oct 31 2025 (approx market value $628,270). Shares acquired via issuer compensation July 1 2024 (500,000 shares). At least 3 additional unnamed officers sold CRML shares under Rule 144 in October 2025. European Lithium sold 5,000,000 shares under Rule 144 in January 2026 (gross proceeds ~$85.5M, per 6A/A Amend 6).",
+      "confidence": "high",
+      "id": 6268
+    },
+    {
+      "date": "2025-04-21",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "CRML Q1 2025 lobbying report (filed 2025-04-21, income $70,000): issue areas shifted to include Trade (TRD), Manufacturing (MAN), and Budget/Appropriations (BUD) in addition to Defense and Foreign Relations. Description: \"Advocacy for policy and funding support for U.S government partnerships to secure and process critical minerals, including rare earths, domestically.\" This lobbying language encompasses both domestic sourcing and Greenland/allied nation sourcing.",
+      "confidence": "confirmed",
+      "id": 6241
+    },
+    {
       "date": "2025-06-16",
       "type": "finding",
       "finding_type": "financial",
       "summary": "EXIM Bank issued Letter of Interest (LOI) to Critical Metals Corp on June 16, 2025, for up to $120 million in financing for the Tanbreez Rare Earth Project in Greenland. Loan term: 15 years. Program: Supply Chain Resiliency Initiative (SCRI) under The China and Transformational Exports Program (CTEP). Status as of announcement: LOI only -- \"EXIM will consider financing\" -- not a formal loan commitment. CRML expects to invest $10M in 2025 to acquire additional 50.5% of Tanbreez, bringing total ownership to 92.5%. Feasibility study expected by end of 2025. No government officials named in press release.",
       "confidence": "confirmed",
       "id": 6246
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "CRML is incorporated in British Virgin Islands as holding company. CIK 0001951089. Files as foreign private issuer (20-F). Business address: 32 Harrogate Street, West Leederville, Australia (Tony Sage office). BVI registered address: Maples Corporate Services, Tortola. Incorporated 2022. Fiscal year ends June 30. 104,912,853 shares outstanding as of June 30 2025.",
+      "confidence": "confirmed",
+      "id": 6260
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Going concern: CRML has substantial doubt about ability to continue as going concern. Losses of $51.9M (FY2025) and $139.4M (FY2024). Net cash outflows from operations $14.5M in FY2025. Working capital deficit (ex-share-settled liabilities) of $15.6M. Cash on hand only $7.3M as of June 30 2025. Company is pre-revenue mining exploration stage.",
+      "confidence": "confirmed",
+      "id": 6262
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Beneficial ownership as of June 30 2025 (106.9M shares): European Lithium Ltd (EUR) owns 62,916,641 shares (58.9%). Rimbal Pty Ltd (Greg Barnes) owns 11,728,174 shares (11%). All named directors and officers reported ZERO beneficial ownership. As of Feb 2026: EUR reduced stake to 37.3% (45,536,338 shares) via multiple secondary sales to Alyeska.",
+      "confidence": "confirmed",
+      "id": 6263
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Rimbal Pty Ltd (Australian company, controlled by geologist Gregory Barnes, 47 Labouchere Road, South Perth 6151 WA) is the second-largest shareholder at 11.0% (11,728,174 shares) as of June 30 2025 per 20-F. Shares acquired as payment for Tanbreez Stage 1 acquisition (July 23 2024: ~8.4M shares issued). Rimbal also participated as a selling shareholder in the October 2025 PIPE (sold 2M shares at $7/share = $14M). Rimbal is the entity holding Tanbreez Mining Greenland A/S and sold it to CRML.",
+      "confidence": "confirmed",
+      "id": 6264
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "EUR (Tony Sage's Australian mining company) has systematically reduced its CRML stake through secondary sales to Alyeska: (1) Oct 5 2025: EUR sold 3M shares to Alyeska at $7/share = $21M; (2) Oct 14-21 2025: Additional EUR reductions (Schedule 13D/A amendments 3-5 shows stake declining from ~65M to 53M shares); (3) Feb 3 2026: EUR sold 2.5M shares to Alyeska at $13.50/share = $33.75M. EUR stake went from 58.9% (June 30 2025) to 37.3% (Feb 4 2026). EUR has extracted at minimum $54.75M+ in secondary sales.",
+      "confidence": "confirmed",
+      "id": 6273
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "CRML executive compensation: Board approved $26,922,412 in aggregate compensation (cash + share-based) to directors and executive officers for FY2025 (year ended June 30 2025). In July 2025, 2,110,000 ordinary shares issued as equity awards valued at ~$6.9M. In April 2025, ~1.8M RSUs granted to directors vesting 1 year from grant. All compensation reported in aggregate; no individual disclosure required as foreign private issuer.",
+      "confidence": "confirmed",
+      "id": 6276
+    },
+    {
+      "date": "2025-06-30",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "CRML related-party transactions (from Note 17): EUR (parent) has provided capital contributions totaling $45.7M to CRML and its subsidiaries as of June 30 2025. Additional balance owed to EUR: $5,854,852 (vs $4,268,857 at June 30 2024). EUR essentially financed CRML operations pre-PIPE. Board identified 'significant deficiency' in internal controls: 'The Company lacks the controls needed to ensure that the accounting for its related party transactions is accurate and complete' due to lack of personnel.",
+      "confidence": "confirmed",
+      "id": 6278
+    },
+    {
+      "date": "2025-10-07",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Cornerstone Government Affairs filed Q3 2025 Termination report for Critical Metals Corp on October 7, 2025 (income: $70,000). The lobbying engagement ran Feb-Sep 2025 and terminated approximately 4 months after the EXIM LOI was issued (June 16, 2025). The termination may reflect that the key government relationship goal (EXIM LOI) was achieved. CRML registered on SAM.gov on October 13, 2025 -- just 6 days after lobbying terminated -- suggesting preparation for potential direct federal procurement.",
+      "confidence": "medium",
+      "id": 6248
+    },
+    {
+      "date": "2026-03-04",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "March 4, 2026 424B3 prospectus confirms: Swiss Commodity RE Limited held 1,800,000 shares (1.5%), Malcolm Scott Macintyre held 200,000 shares (<1%), Jett Capital Advisors Holdings LLC held 427,500 warrant shares, Cohen & Company Securities LLC held 350,100 warrant shares \u2014 all registered for resale, no lock-up, freely tradeable as of March 4",
+      "confidence": "confirmed",
+      "id": 7802
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "March 18, 2026: Nine CRML insiders filed Form 3 (initial ownership) \u2014 Sage Antony William Paul (Tony Sage), Zhernov Mykhailo, Day Malcolm Raymond, Savchenko Sergey (CFO), Hanson Michael J., McNamara Thomas M., Thomas John Harper, Ryan Michael C., Wanke Dietrich. This confirms the full CRML board/management composition as of that date. No Form 4 (actual insider sales) has been filed by any of these persons as of March 24, 2026.",
+      "confidence": "confirmed",
+      "id": 7804
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "US government considering direct equity stake in CRML, separate from USD 120M EXIM loan \u2014 unprecedented state investment in Greenland mining",
+      "confidence": "high",
+      "id": 7558
     }
   ],
   "curation": {
@@ -1237,245 +2867,6 @@
       "complexity-as-credential",
       "manufactured-dependency",
       "narrative-shield"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Critical Metals Corp",
-      "connections": [
-        {
-          "target": "GreenMet",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Tanbreez offtake partnership for DoD REE supply"
-        },
-        {
-          "target": "GreenMet",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": "GreenMet brokered Critical Metals partnership with Tanbreez; facilitated EXIM LOI",
-          "description": null
-        },
-        {
-          "target": "Cantor Fitzgerald",
-          "type": "owns",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:rel/2043850",
-          "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
-        },
-        {
-          "target": "Alyeska Investment Group",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "EDGAR:0001172661-26-001159",
-          "description": "Alyeska Master Fund LP deployed ~$85M in two PIPE tranches in October 2025 to acquire 9.9% of CRML. Also bought ~5M secondary shares from European Lithium and Rimbal."
-        },
-        {
-          "target": "Matt Schnappauf",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
-        },
-        {
-          "target": "Greenland",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Holds 30-year exploitation license for Tanbreez deposit (potentially world's largest REE deposit, 28.2M metric tons). $120M EXIM Bank LOI."
-        },
-        {
-          "target": "Howard Lutnick",
-          "type": "owns",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:rel/2043852",
-          "description": "Howard Lutnick (US Commerce Secretary) listed as indirect owner of CRML via Cantor Fitzgerald (LittleSis). Divested in May 2025 via trust to children."
-        },
-        {
-          "target": "JPMorgan Chase",
-          "type": "financial",
-          "strength": 0.2,
-          "evidence_ref": null,
-          "description": "JPMorgan 10B national security investment pledge + Goldman Sachs MP Materials deal creates financial ecosystem that benefits Greenland rare earth projects like CRML Tanbreez"
-        }
-      ],
-      "secondHop": {
-        "Alyeska Investment Group": [
-          {
-            "target": "European Lithium Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Alyeska purchased 3M secondary CRML shares from European Lithium in Oct 2025 PIPE at $7/share = $21M"
-          },
-          {
-            "target": "USA Rare Earth Inc",
-            "type": "financial",
-            "strength": 1.0,
-            "description": ""
-          }
-        ],
-        "Cantor Fitzgerald": [
-          {
-            "target": "US Commerce Department",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head."
-          },
-          {
-            "target": "Tether Operations Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues."
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address."
-          },
-          {
-            "target": "Tether Holdings Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total)."
-          },
-          {
-            "target": "Parabridge International Services",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers."
-          }
-        ],
-        "GreenMet": [
-          {
-            "target": "Ucore Rare Metals",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Facilitated 10-year offtake agreement"
-          },
-          {
-            "target": "Keith Schiller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Ned Mamula",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Former Chief Geologist; now USGS Director (divested)"
-          },
-          {
-            "target": "George Sorial",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Passive minority shareholder, former board member"
-          },
-          {
-            "target": "Drew Horn",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO and founder of GreenMet"
-          }
-        ],
-        "Howard Lutnick": [
-          {
-            "target": "Paolo Ardoino",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Lutnick (Commerce Sec, former Cantor CEO) has multi-layered financial relationship with Ardoino (Tether CEO): Cantor custodies Tether's 127B+ in T-bills, holds 5% equity stake via convertible debt, co-launched Twenty One Capital SPAC, and serves as designated custodian for USAT stablecoin"
-          },
-          {
-            "target": "Tether Investments",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howard Lutnick's Cantor Fitzgerald manages Tether's 80B+ Treasury reserves and holds a 5% stake in Tether. Lutnick publicly vouched for Tether before becoming Commerce Secretary. His son Brandon chaired the SPAC that merged with Tether's Twenty One Assets."
-          },
-          {
-            "target": "Twenty One Capital",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Former CEO of Cantor Fitzgerald which set up the CEP SPAC, custodies Tether reserves, and holds 5% equity in Tether. Confirmed as Commerce Secretary Feb 24, 2025. Divested Cantor stakes to children including Brandon. Commerce Dept influences crypto regulation affecting Tether, XXI, and the SPAC vehicle his firm created."
-          },
-          {
-            "target": "Roberto Velez",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "BGC whistleblower with board-level Lutnick contact per FBI FD-302"
-          },
-          {
-            "target": "Sarah Ferguson",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cantor gave Ferguson office space above CF HQ for Children in Crisis charity"
-          }
-        ],
-        "JPMorgan Chase": [
-          {
-            "target": "Paul Weiss",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "PW defended JPM in Epstein fiduciary breach derivative action dismissed with prejudice plus Bear Stearns class action and Asia FCPA and spoofing"
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Clayton advised Bear Stearns on its fire sale to JPMorgan in 2008 at Sullivan+Cromwell. JPM is a named target in Bondi Epstein investigation that Clayton now leads."
-          },
-          {
-            "target": "Kirkland and Ellis",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "KE in 6593 SEC EDGAR filings with JPMorgan. Counsel on banking transactions."
-          },
-          {
-            "target": "Liquid Funding, Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "JPMorgan Chase Bank (successor to Chase Manhattan Bank) served as Security Trustee under Collateral Trust and Security Agreement. Also a Placement Agent (J.P. Morgan Securities Inc). Lipman served as JPMorgan MD and LF Director simultaneously."
-          },
-          {
-            "target": "IPI",
-            "type": "financial",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Matt Schnappauf": [
-          {
-            "target": "Silicon Valley Defense Group",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Schnappauf is SVDG Policy Fellow per SVDG website."
-          }
-        ],
-        "Greenland": [
-          {
-            "target": "Tulsi Gabbard",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "DNI collection tasking on Greenland"
-          },
-          {
-            "target": "Erik Prince",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Public advocacy for Greenland acquisition"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-06-16",
-        "label": "EXIM Bank issued Letter of Interest (LOI) to Critical Metals Corp on June 16, 2025, for up to $120 million in financing for the Tanbreez Rare Earth Project in Greenland. Loan term: 15 years. Program: Supply Chain Resiliency Initiative (SCRI) under The China and Transformational Exports Program (CTEP). Status as of announcement: LOI only -- \"EXIM will consider financing\" -- not a formal loan commitment. CRML expects to invest $10M in 2025 to acquire additional 50.5% of Tanbreez, bringing total ownership to 92.5%. Feasibility study expected by end of 2025. No government officials named in press release.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 6246
-      }
     ]
   }
 }

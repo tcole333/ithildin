@@ -1,6 +1,8 @@
 # Brad Edwards
-**Stats**: 6 findings, 5 connections, 0 entities
+**Stats**: 6 findings, 3 connections, 0 entities
 **Dossier**: /dossiers/brad-edwards
+
+> Fort Lauderdale plaintiffs' attorney who represented Epstein victims in the federal CVRA case with Paul Cassell, while maintaining direct email correspondence with Epstein that produced a December 2018 defamation settlement between them and a November 2018 email introduction between Epstein and David Boies during the Sarah Ransome settlement.
 
 ## Key Findings
 - **[legal/medium]** Epstein and Brad Edwards had extensive personal relationship: regular phone dates, breakfast meetings in Palm Beach/Fort Lauderdale, 'our deal' discussions (Oct 2015), bets about Clinton flight logs, and referencing 'Dersh' (Dershowitz). Edwards connected Epstein with David Boies for 'ransome' discussions (Nov 2018). Edwards settled his defamation suit against Epstein in Dec 2018 with public apology. By Jan-Feb 2019, Edwards was requesting Epstein fund donations to National Crime Victim Bar Association through Enhanced Education - suggesting terms of settlement may have included ongoing financial relationship. (2015-10) (Finding #224)
@@ -13,6 +15,17 @@
 ## Top Connections
 - **Jeffrey Epstein** [legal/medium]: None
 - **David Boies** [legal/medium]: None
-- **Jeffrey Epstein** [legal/medium]: None
-- **David Boies** [legal/medium]: None
 - **Sarah Ransome** [legal/medium]: None
+
+## Open Questions
+- Florida Bar records: Was the bar complaint referenced in GRM Box #004740716 resolved, and on what terms? The simultaneous adversarial and personal roles documented in the email record are directly relevant to Florida professional conduct rules on conflicts of interest (Rule 4-1.7 RRTFB).
+- Client disclosure: Did Edwards's victims-clients in the CVRA case receive disclosure of his concurrent personal defamation settlement negotiations with Epstein? Edwards's emails document direct bilateral settlement discussions without counsel; Florida Rule 4-4.2 prohibits communication with represented parties — and Epstein was always represented.
+- Ransome connection: Did David Boies or Sarah Ransome know that the attorney who introduced Boies to Epstein was simultaneously negotiating his own settlement with Epstein? No documentation has been found establishing what disclosures were made.
+- Dershowitz settlement outcome: The October 2015 email exchange documents Epstein relaying a $1 million settlement offer between Edwards/Cassell and Dershowitz. Did that settlement complete? Court records for the defamation case between Giuffre v. Dershowitz and related matters are not in the current corpus.
+- Enhanced Education donation amount: The January 24, 2019 Edwards email requests a donation to NCVBA but does not specify an amount. Epstein's February 1 confirmation does not specify an amount. The actual check figure is not documented in any corpus record found.
+- Edwards Pottinger LLC: Stanley Pottinger — Epstein's former roommate and DOJ AAG Civil Rights 1973–1977 — later operated 'Edwards Pottinger LLC' as a law firm. The relationship between the two attorneys named Edwards and Pottinger in that entity has not been investigated. This is a different Brad Edwards from Brad J. Edwards of Fort Lauderdale if names do not match, but the coincidence of name and shared Epstein adjacency warrants verification.
+
+## Applicable Models
+- {'name': 'Dual-Role Conflict Structure', 'description': 'Edwards occupied simultaneous adversarial and cooperative roles with the same counterparty (Epstein) across overlapping time periods. This structure — where a lawyer pursuing claims against a subject also negotiates personal financial settlements with that subject — creates alignment of personal and client interests that is not reflected in public case records. The pattern recurs in the corpus: multiple attorneys who nominally opposed Epstein maintained direct personal channels that bypassed formal representation structures.'}
+- {'name': 'Perpetrator-as-Mediator', 'description': "The October 2015 Dershowitz settlement emails document Epstein actively mediating a financial dispute between his victims' attorney (Edwards) and his former defense counsel (Dershowitz), both of whom were engaged in defamation litigation against each other. The perpetrator's centrality to dispute resolution among parties who were nominally his adversaries illustrates how Epstein's network operated through information asymmetry: he had direct access to both sides and neither side could independently verify what he was telling the other."}
+- {'name': 'Foundation-as-Settlement-Vehicle', 'description': "The Enhanced Education donation to NCVBA at Edwards's request follows the same structural pattern seen elsewhere in the corpus: Epstein directing charitable disbursements to organizations with personal or legal significance to a counterparty, structured as foundation giving rather than direct payment. This pattern appears in the Leon Black donation structuring (where explicit steps were taken to avoid public disclosure of Black's name), the Gratitude America disbursements to Landon Thomas Jr.'s charity, and the IPI giving coordinated through Richard Kahn. In each case, the foundation vehicle obscures the relationship between the ultimate payer and the ultimate recipient."}

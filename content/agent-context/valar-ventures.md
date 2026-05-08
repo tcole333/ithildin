@@ -2,6 +2,8 @@
 **Stats**: 6 findings, 1 connections, 0 entities
 **Dossier**: /dossiers/valar-ventures
 
+> Valar Ventures functioned as the vehicle through which Epstein deployed more capital — USD 90.39M — than any other single investment entity in his portfolio, converting an initial pitch for USD 10–20M into a dominant LP stake that constituted nearly half of each fund's capital base, while all capital flowed through Southern Trust Company Inc., all communications were intermediated by Richard Kahn at HBRK Associates, and Nicole Junkermann's documented attendance at the pitch meeting — with no stated role in the investment — introduces a second network pathway alongside the Thiel-brokered introduction.
+
 ## Key Findings
 - **[financial/medium]** Valar Ventures was Peter Thiel's international venture capital platform focused on early-stage investments outside Silicon Valley. The initial pitch to Epstein came circa November 2014 (EFTA02594707), suggesting he invest USD 10-20MM in Fund II. The pitch cited Xero (New Zealand) and TransferWise (UK) as early hits. Nicole Junkermann attended the December 3, 2014 pitch meeting at 9 E 71st with Andrew McCormack and James Fitzgerald (the two Valar Ventures managing partners). Junkermann flew to NY specifically for this meeting. Multiple schedule entries confirm the meeting across EFTA02351944, EFTA02390441, EFTA02403336, EFTA02596951, EFTA02597854, EFTA02599239. (2014-12-03) (Finding #564)
 - **[financial/medium]** COMPLETE VALAR INVESTMENT TIMELINE: (1) Nov 2014: Initial pitch via EFTA02594707 suggesting USD 10-20MM for Fund II, citing Xero and TransferWise as wins; (2) Dec 3, 2014: In-person pitch meeting at 9 E 71st with McCormack, Fitzgerald, and Nicole Junkermann; (3) Jan 2015: Fund II closed at USD 102M; (4) Aug 2015: McCormack updates on Fund II deal flow, Epstein requests call (EFTA02489953, EFTA02490229); (5) Nov 2015: McCormack asks to catch up on Valar (EFTA02480444, EFTA02373015); (6) 2016: McCormack asks Epstein to decide allocations for Fund III first closing — Epstein was 'thinking in a pretty broad range' (EFTA02485187); (7) June 20, 2016: Fund III final closing at USD 104M, Thiel committed USD 30M (EFTA02460935); (8) Oct 2016: Kahn flags political risk from Thiel's politics (EFTA02447091); (9) Nov 2017: Epstein lunch with Thiel (EFTA02230818); (10) Apr 4, 2017: USD 52.5M wire from Southern Trust to Valar Global Fund III (EFTA01387768); (11) May 2018: Valar 2018 Annual Report sent, Fund 4 initial investments material attached (EFTA02634238); (12) Nov 2017: 'Jeffrey is ready for your Valar call' (EFTA02229858); (13) Feb 14, 2019: Year-end balances — Fund II = USD 40.7M, Fund III = USD 49.69M = total USD 90.39M (EFTA02629770). Epstein's USD 90.39M across Valar funds means he was approximately 44% of Fund II (40.7M/102M) and 48% of Fund III (49.69M/104M) — making him by far the largest single LP in both funds, even exceeding Peter Thiel's own USD 30M commitment to Fund III. (2014-12-03) (Finding #599)
@@ -12,3 +14,20 @@
 
 ## Top Connections
 - **Honeycomb Asset Management LP** [financial/medium]: Both appeared on Dechert Exhibit B investment ledger (EFTA00027019) as major fund allocations from Epstein. Honeycomb ~34M across 5 transactions, Valar (Peter Thiel) ~28M. Both accessed through Epstein network. Fiszel was introduced to Peter (likely Thiel) by Epstein in Feb 2016.
+
+## Open Questions
+- Why did Nicole Junkermann fly to New York specifically to attend a venture capital pitch meeting between Epstein and Valar Ventures' managing partners? No document in the available corpus explains her role or interest in the Valar investment. Her offshore structures in the BVI and her documented position in Epstein's network make this attendance worth tracing through UK and BVI corporate records.
+- What was the total capital deployed into Valar across all fund tranches, including Fund IV? The USD 90.39M figure covers only Funds II and III as of December 2018. Epstein queried about a "side car" (EFTA02634108) and received Fund IV materials (EFTA02634238), but the resulting Fund IV capital account balance is not documented in available records.
+- What were the actual LP returns on Valar Funds II and III, and what happened to the USD 90.39M position after Epstein's arrest on July 6, 2019? The estate liquidation and any redemption or transfer of these LP interests is not documented in the available corpus.
+- Did Brad Karp's presence on the Xero board serve as an independent introduction pathway to Valar Ventures, or was his Xero connection coincidental to the Thiel-brokered pitch? Establishing or eliminating this pathway would clarify whether the Valar relationship had multiple independent origin points.
+- What was Richard Kahn's compensation structure for intermediating Valar communications? The corpus shows Kahn acting as a forwarding and monitoring agent for a USD 90M investment position, but no retainer, fee, or carried-interest arrangement between Kahn/HBRK and Epstein or Valar is documented.
+- Vahe Stepanian and Stewart Oldfield are named as the Deutsche Bank personnel on the USD 52.5M wire (EFTA01387768). What were their roles at Deutsche Bank relative to Epstein's broader account relationship, and were they among the bank personnel who later faced regulatory scrutiny for the Epstein account?
+
+## Applicable Models
+- access-capitalism
+- bridge-tax
+- complexity-as-credential
+- enabler-gradient
+- offshore-opacity
+- parallel-financial-system
+- principal-representative

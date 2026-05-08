@@ -3,43 +3,49 @@
   "slug": "jeffrey-epstein",
   "aliases": [
     "Epstein",
+    "Erez",
     "J EPSTEIN",
     "JEFFREY EPSTEIN",
     "Jeffrey E Epstein"
   ],
   "profile_ids": [
+    "dfj-network",
     "epstein",
-    "tech-right"
+    "epstein-aetna",
+    "parlatore",
+    "tech-right",
+    "zampolli"
   ],
-  "generated_at": "2026-03-11T18:36:07.623011",
-  "last_updated": "2026-03-04T17:03:17",
+  "generated_at": "2026-05-07T23:07:35.899514",
+  "last_updated": "2026-05-07T15:19:19",
   "stats": {
-    "total_findings": 214,
-    "total_connections": 422,
+    "total_findings": 231,
+    "total_connections": 477,
     "total_entities": 111,
     "finding_types": {
       "identity": 17,
       "legal": 32,
-      "financial": 33,
-      "intelligence": 71,
+      "financial": 36,
+      "intelligence": 81,
       "location": 20,
       "unknown": 2,
       "document": 11,
-      "communication": 19,
-      "relationship": 9
+      "relationship": 12,
+      "communication": 20
     },
     "connection_types": {
-      "financial": 123,
-      "legal": 67,
-      "social": 98,
-      "corporate": 38,
-      "intelligence": 46,
-      "advisory": 22,
+      "financial": 131,
+      "legal": 69,
+      "social": 135,
+      "corporate": 39,
+      "intelligence": 47,
+      "advisory": 25,
       "political": 5,
-      "employment": 21,
-      "familial": 2
+      "employment": 22,
+      "familial": 3,
+      "funds": 1
     },
-    "last_updated": "2026-03-04T17:03:17"
+    "last_updated": "2026-05-07T15:19:19"
   },
   "findings": [
     {
@@ -59,6 +65,13 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "2026; Cooper Union enrollment confirmation via email from school official; NYU enrollment verification by Volscho (2019); The Daltonian school newspaper Fall 1974 issue; Peter Branch interview by Volscho; Lawrence Livermore Lab personnel search; Lawrence Berkeley Lab personnel search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "January 3",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -156,6 +169,13 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Civil List entries for Seymour Epstein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "January 3",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -738,6 +758,31 @@
       ]
     },
     {
+      "id": 11098,
+      "finding_type": "financial",
+      "summary": "US v. Epstein (96 CIV 8307) settlement disbursement: $355,370.52 in two Court-issued certified checks (#492385 + #492386) released 1/29/1999 \u2014 funds were re-disbursement of pre-existing court-managed escrow deposits from Epstein ($225K, Dec 1997) and Fisher (~$15K/mo from Apr 1998); 'Manuel Bermadez/Mermadez' was the SDNY cashier's-window runner (likely Berm\u00fadez), not a third-party payor",
+      "detail": "Stipulation and Order of Settlement (entry [75], 2/3/1999) released escrow funds to USA. Two Court-issued certified checks dated 1/29/1999, payable to 'U.S. Attorney': check #492385 = $335,526.17 and check #492386 = $19,844.35. Total $355,370.52. State Department retained Epstein's $12,000 security deposit plus accrued interest. CRITICAL CLARIFICATION: The funds were NOT a third-party-benefactor payment on 1/29/1999. The Cashier's Office was re-issuing pre-existing court-managed escrow deposits: Epstein deposited $225,000 via 12/17/1997 escrow order; Fisher paid ~$15,000/month into the Clerk's Court interest-bearing escrow from 4/10/1998 onward (~9 months); plus accrued interest \u2248 $355K total. The docket annotation 'Received check no. 492385 ... payable to USA by Manuel Bermadez' (and on the next line 'by Manuel Mermadez') was entered by the same deputy clerk 'djc' on the same date with two different spellings \u2014 almost certainly a transcription error of a handwritten Hispanic surname (most plausibly Berm\u00fadez), referring to the SDNY cashier's-window runner who signed for the certified checks (a USAO/SDNY messenger or AUSA Nakano's paralegal walking the checks to USAO at 100 Church Street). Operationally meaningless to the Epstein-network map. Negative-result confirmation: zero matches for Manuel Bermadez/Mermadez/Bermades/Bermudes/Bermudez (in Manhattan-attorney/escrow/title-co context) across NYS DOS, ACRIS, FEC, OpenCorporates, LMSBAND, DOJ Vol 11, Unified DB, CourtListener party search. Source: LMSBAND file_id 122196 / EFTA00187391 (full docket entry text).",
+      "source_datasets": [
+        "courtlistener.com/docket/10516885/united-states-v-epstein/"
+      ],
+      "confidence": "high",
+      "date_of_event": "1999-01-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:24:30",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:1:96-cv-08307:entry-75",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 503,
       "finding_type": "legal",
       "summary": "FL SunBiz corp P93000087814: Jeffrey E. Epstein listed as President/Secretary with sole officer address at 358 El Brillo Way, Palm Beach FL 33480. Voluntarily dissolved Mar 30 2000. Entity name not recovered from corprindata (officer-only file). This is a separate Palm Beach entity from Ghislaine Corp (P95000027272).",
@@ -846,6 +891,13 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "2026; C.O.U.Q. Foundation tax records; Ward",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "January 3",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1257,7 +1309,28 @@
       "evidence": [
         {
           "evidence_type": "file",
+          "evidence_ref": "2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
           "evidence_ref": "https://substack.com/@ksumnole987/p-183269827",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "August 19",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "January 3",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1438,6 +1511,39 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "OffshoreAlert:Katlyn-Doe-v-Epstein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10403,
+      "finding_type": "relationship",
+      "summary": "JPMorgan opened Hyperion Air Inc. account #4332 on 2009-01-23 while Epstein was serving 18-month sentence; Jes Staley personally decided to retain Epstein as PB client after the 2008 conviction in consultation with JPM General Counsel Stephen Cutler",
+      "detail": "JPMorgan USCG Due Diligence Report for Hyperion Air, Inc. (Exhibit 86, USVI v. JPMorgan, Doc 285-20, Bates JPM-SDNYLIT-00036884-00036890), Morgan Network narrative dated 05/13/2009: 'Epstein is well known to several JPM PB employees and to Jes Staley. Mr. Epstein was convicted of a felony charge in 2008 and is currently serving an 18-month prison sentence. Jes Staley conferred with Stephen Cutler and the decision was made to keep Mr. Epstein as a PB client. Staley and PB then decided that his PB relationship will be for banking and custody only.' DDR also lists the Epstein constellation of 20+ DDRs all under banker Paul V. Morris (DM ID 9710670708).",
+      "source_datasets": [
+        "courtlistener",
+        "investigations_db"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2009-05-13",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:23:42",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "JPM-SDNYLIT:00036884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:1:22-cv-10904-JSR:Doc 285-20",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1680,6 +1786,86 @@
       ]
     },
     {
+      "id": 10395,
+      "finding_type": "relationship",
+      "summary": "Indyke email confirms Epstein ownership chain: 'Mr Epstein is sole member of FSF, LLC which is sole stockholder of freedom air'",
+      "detail": "Email from Darren Indyke to Jap Blankenship dated 2011-07-25 5:54:36 PM EDT, in response to IATS escrow VP Joan Roberts demanding explanation of who Epstein is and why he wired $1.4M personally for a transaction whose corporate parties did not include him by name",
+      "source_datasets": [
+        "court_exhibit",
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-07-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:21:56",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": "Mr Epstein is sole member of FSF, LLC which is sole stockholder of freedom air",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10396,
+      "finding_type": "financial",
+      "summary": "Jeffrey Epstein personally wired $1,404,945 from JPMorgan Chase to IATS escrow on 2011-07-25 for the N162AE/N722JE transaction; IATS responded by demanding his passport and explanation of involvement",
+      "detail": "IBC wire receipt at IATS-000092 shows JPMCLEARING wire from originator 'JEFFREY EPSTEIN' for $1,404,945.00 received at IBC 2011-07-25 3:35:37 PM, OMAD Ref 20110725K4QLE01C000793072516l4FT03, Reference 'SERIAL NUMBER N162AE AND N722JE'. Joan Roberts email IATS-000024-25 (2011-07-25 4:02 PM): 'We just received the $1,404,945.00 from Jeffrey Epstein. In order to do our due diligence, I will need a copy of Mr. Epstein's passport as soon as possible. Also, I will need some explanation of who Mr. Epstein is and how he is involved in this transaction.'",
+      "source_datasets": [
+        "court_exhibit",
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-07-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:21:56",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01339374",
+          "source_quote": "We just received the $1,404,945.00 from Jeffrey Epstein. In order to do our due diligence, I will need a copy of Mr. Epstein's passport as soon as possible. Also, I will need some explanation of who Mr. Epstein is and how he is involved in this transaction.",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IATS-000092",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2194,
       "finding_type": "relationship",
       "summary": "Epstein attempted to arrange a private visit to Scorpios, the Onassis family's private Greek island, through intermediary Richard Steeve Giraud in Aug-Oct 2011 and again in late 2011/early 2012. Email chain: (1) Aug 20, 2011: Giraud writes to jeevacation@gmail.com arranging Scorpios visit, mentioning Capri with 'Boris'; (2) Sep 4, 2011: Giraud confirms 'all is ok now' and asks when Epstein wants to visit after Sep 12; (3) Oct 5, 2011: Giraud asks why the bank (Onassis Foundation is administered by a bank) received NDAs signed by Darren K. Indyke instead of Epstein directly; (4) Oct 9, 2011: Bank granted permission for Thursday or Friday visit, Giraud needs headcount for helicopter; (5) Dec 27, 2011/Jan: Giraud asks if Epstein has future plans to visit Scorpios, wishes Happy New Year. The NDA requirement and Indyke signing suggest a transaction or confidential arrangement, not just tourism. Scorpios was privately owned by the Onassis Foundation until sold to Dmitry Rybolovlev in 2013.",
@@ -1816,6 +2002,39 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "OffshoreAlert:Katlyn-Doe-v-Epstein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10402,
+      "finding_type": "communication",
+      "summary": "John Duffy (CEO JPM US Private Bank) March 2012 email re Hyperion Air cash withdrawals: 'better fact pattern than I thought' \u2014 confirms JPM advised Epstein to route cash withdrawals through aviation account for compliance cover",
+      "detail": "Per Axia Ex 56 page 28, citing JPM-SDNYLIT-00020772: 'This is a better fact pattern than I thought. JE and I spoke about his pattern of cash withdrawals. His answer was \"fuel payments in foreign countries.\" Some of the countries were OFAC listed. I did ask him to withdraw this cash from his aviation account for these payments. Clearly he is doing this.' This is a contemporaneous JPM compliance-officer-to-banker communication describing Epstein's cash withdrawal pattern through Hyperion Air accounts and JPM's own role in advising the routing.",
+      "source_datasets": [
+        "courtlistener",
+        "investigations_db"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2012-03-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 17:23:42",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "JPM-SDNYLIT:00020772",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:1:22-cv-10904-JSR:Doc 238-31",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2554,6 +2773,59 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA01683874",
           "source_quote": "Epstein knew former President Bill Clinton, and was very close to current President Donald Trump. In the spring of 2015, President Trump had just been to Epstein's property for lunch.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11139,
+      "finding_type": "intelligence",
+      "summary": "April 19 2015 = 'Agnelli-attack day' \u2014 within 12 hours: targeting decision (10:20 AM 'great great great') \u2192 recruitment-bypass strategy ('not through Edu') \u2192 Gulf-channel briefing on EXOR's full 15B liquidity + Ferrari spin-off timing (10:12 PM to Jabor Y. Qatari). Parallel Cushman & Wakefield insider-information thread Apr 13-23 2015: Epstein demanded $100M finder's fee via STC Southern Trust Company USVI; TPG-led consortium bought Cushman for $2B announced May 11 2015",
+      "detail": "EFTA02389138 (Apr 19 2015 10:20 AM) [REDACTED] sender \u2192 Epstein: 'john elkann - [REDACTED] has heard great things about him from a friend; I know that he is Lapo/s brother.. what do you hink?' Epstein replies 10:21 AM: 'great great great'. 2:58 PM same sender (iPhone, French-locale signature 'Envoy\u00e9 de mon iPhone'): 'I think he is the new target. How do w[e] meet him? Not through Edu for sure'. EFTA02504407 (Apr 19 2015 10:12 PM) Epstein \u2192 Jabor Y. (Qatari): 'shabaz could look at the details of EXOR. the owner of cushman, agnelli family holding. they just bid for an re insurance co last week, they will spin off ferrari this year. and will have fiat chrysler.maserati. most of their money is liquid. 15billion or so.' THIS IS THE SMOKING GUN: 12 hours from 'great great great' to a Gulf-channel briefing on EXOR's full 15B USD liquidity, Ferrari spin-off timing 6 months pre-IPO (RACE NYSE Oct 21 2015), and re-insurance bid. PARALLEL CUSHMAN INSIDER-INFO THREAD: (a) EFTA02508205 (Mar 5) Epstein\u2192Rod-Larsen 'find out if Norwegian sovereign fund trying to buy Cushman Wakefield'; (b) EFTA02341745 (Mar 17) Andrew L. Farkas Island Capital Group\u2192Florida Science Foundation '$2B partner... $3.5bb M&A deal'; (c) EFTA02505029 (Apr 13) Epstein\u2192Jabor Y. 'i have confidential info, on the major component of the cushman deal'; (d) EFTA02505022 (Apr 14) Epstein\u2192Farkas demanding $100M fee within 6 months of closing paid to STC USVI + 50/50 future-deal split; (e) EFTA02502630 (Apr 23) Epstein\u2192Jes Staley 'Is sterlick looking at cushman Wakefield'. Cushman sold to TPG-led DTZ consortium for $2B announced May 11 2015 (closed Sept 2015). STC = Southern Trust Company USVI = Epstein's post-NPA shell vehicle. TPG IS RECURRING COUNTERPARTY: TIM Hellas/Q-Telecom buyer 2007 (smear-target context for Arora), Cushman & Wakefield buyer 2015, Lucid PIPE 2021 (with Klein's Churchill IV). MANDELSON-TEODORANI-ELKANN TRIANGLE Aug 15 2010 (EFTA02423612): Mandelson asked Epstein to 'Get his views on john elkann and luca di montezemolo, both of whom I have been talking to today' while Epstein at Zorro Ranch with Teodorani. Mandelson became UK ambassador to US Feb 2025. 'Asian platform' person likely David Stern (Asia Gateway Ltd, Michelin House 81 Fulham Road London SW3 6RD). 'Great great great' sender REDACTED \u2014 top inference: Karyna Shuliak/Pshenychna (Belarusian dentist, Epstein late-period partner, iPhone French-locale, sent Italian-language quote via Teodorani Jan 17 2014).",
+      "source_datasets": [
+        "doj-vol-11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2015-04-19",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 05:43:07",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02389138",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02423612",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02504407",
+          "source_quote": "shabaz could look at the details of EXOR. the owner of cushman, agnelli family holding. they will spin off ferrari this year. most of their money is liquid. 15billion or so.",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02505022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02508205",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -4447,6 +4719,31 @@
       ]
     },
     {
+      "id": 11124,
+      "finding_type": "intelligence",
+      "summary": "May 30 2019 Epstein\u2192Wolff email (HOUSE_OVERSIGHT_031684) explicitly links Rybolovlev to MBS via Salvator Mundi \u2014 frames the $450M sale as MBS payoff; Epstein cites Rybolovlev as the man who 'knows all'; bridges Bouvier-Rybolovlev-Geneva-Russia-Gulf-Trump axis to SoftBank-caper geography",
+      "detail": "HOUSE_OVERSIGHT_031684 (May 30 2019, three months pre-arrest), Epstein\u2192Michael Wolff: 'is it a coincidence that the russian that bought the house in palm beach and knows all, is the same guy that sold a painting last year to mbs for 450 million dollars. that was only worth 1.5m?' Wolff: 'So MBS was paying him off? Why? Ideas?' Epstein: 'reminder trump overuled congress on yemen.' Then provides detailed Bouvier-freeport provenance: 'Salvator Mundi \u2026 Rybolovlev purchased it for 127 million in 2013 through his art dealer the Swiss businessman Yves Bouvier. Bouvier the owner and operator of several freeports bought the painting for 80 million with the intention of selling it to Rybolovlev at a steep profit. Its owner before Bouvier the New York City-based gallerist Robert Simon found the painting at an estate auction in New Orleans in 2005. He paid just 10000.' Epstein cites unnamed 'art guy' who said the painting was 'not very good.' Significance: (1) Epstein had inside knowledge of the Bouvier/Rybolovlev/Simon provenance chain (10K \u2192 80M \u2192 127M \u2192 450M) and an art-network advisor; (2) frames the Salvator Mundi sale as money-laundering/payoff from MBS to Rybolovlev (the Russian who bought Trump's Palm Beach mansion for M in 2008); (3) cites Trump-Yemen veto as the corruption thread; (4) Epstein labels Rybolovlev as a knowledge-holder ('knows all') about Trump-Russia. This is the SAME Geneva-Russia-Gulf-US axis that runs through the SoftBank caper geography (Misra/Benedetti Bulgari Hotel London + Hotel Baur au Lac Zurich; Geneva AG Olivier Jornot handles BOTH Bouvier and Misra/Benedetti/Giannakopoulos cross-complaints). The Bouvier-Epstein DIRECT contact is negative (only one substantive corpus mention, this email; Bouvier never in Epstein's address book/inbox/flight log). But the indirect intelligence consumption is high (~85%) \u2014 Epstein consumed Bouvier-Rybolovlev material via news + the Wolff manuscript channel. The Rybolovlev-Epstein connection itself is well-documented: Trump-Maison de l'Amitie 2008 (Epstein court-approved stalking horse bidder), Xitrans Finance Ltd BVI #494095 (Epstein knew exact offshore structure), Deutsche Bank shared banking, Wolff Siege manuscript editing channel.",
+      "source_datasets": [
+        "house-oversight"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2019-05-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:23:55",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_031684",
+          "source_quote": "is it a coincidence that the russian that bought the house in palm beach and knows all is the same guy that sold a painting last year to mbs for 450 million dollars",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2210,
       "finding_type": "legal",
       "summary": "Eyewitness M. Rachel Zabala photographed man believed to be Epstein walking with underage female at Olympic Tower corner (51st St and 5th Ave) on June 7, 2019, one month before arrest. Subject held Victoria Secret boutique bag. Submitted to US Attorney victim/witness coordinator July 28, 2019.",
@@ -5289,6 +5586,13 @@
         },
         {
           "evidence_type": "file",
+          "evidence_ref": "January 3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
           "evidence_ref": "Thomas. 'EPSTEIN BEGINS THE LONG-CON.' Substack",
           "source_quote": null,
           "source_page": null,
@@ -6073,6 +6377,560 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02598153",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10128,
+      "finding_type": "financial",
+      "summary": "Epstein pursued modeling agency acquisitions repeatedly: Elite bid (2004), MC2 funding (2005), new agency proposal (2014)",
+      "detail": "Pattern of Epstein's modeling industry investment attempts: (1) 2004: Joint bid with Zampolli to purchase Elite Model Management from bankruptcy auction \u2014 bid unsuccessful, Eddie Trump won at $4.4M. (2) 2005: Wired up to $1M to Jean-Luc Brunel to launch MC2 Model Management (which lost ~$49M between 2006-2015). (3) 2014: EFTA00633427 \u2014 unknown associate emails Epstein proposing to buy three model agencies (Paris, NY, LA) for ~11M euros to form one large agency, mentioning Bernard Hennet (ex-CEO of Elite, non-compete expiring March 2014) as team member. This pattern shows sustained, strategic interest in controlling modeling agency infrastructure over at least a decade.",
+      "source_datasets": [
+        "lmsband",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:34:54",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00159321",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00633427",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Jean-Luc Brunel (MC2 funding)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10246,
+      "finding_type": "relationship",
+      "summary": "Jeffrey Epstein has degree 10 but only 1 finding (gap ratio 11.0 -- highest in network). His non-subject degree is 9, with connections to Ron Burkle, Ghislaine Maxwell, Jean-Luc Brunel, Mikhail Prokhorov, Oleg Baibakov, Amanda Ungaro, Anna Konchakovskaya, Bill Block, and Elite Model Management.",
+      "detail": "Despite being the seed for Thread 6, Epstein has the worst coverage gap in the entire network. His neighbors form two clusters: the modeling industry group (Brunel, Elite Model, Amanda Ungaro, Bill Block) and the Russian oligarch group (Prokhorov, Baibakov, Konchakovskaya). The Epstein node also anchors the Ron Burkle chain (Burkle -> Bill Clinton, Sean Combs). Most of his 9 non-subject edges are uninvestigated.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:20:47",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-39",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10507,
+      "finding_type": "intelligence",
+      "summary": "'Erez' is Jeffrey Epstein's nickname \u2014 David Stern addresses him as 'Erez' in Jan 21 2014 email to jeevacation@gmail.com (EFTA01147588/89). Hebrew given name ('cedar'). Previously-unknown alias. Implies a non-English-speaking correspondent cohort. Corpus should be re-scanned for 'Erez' as handle.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11",
+        "user_provided"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:11:52",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147588",
+          "source_quote": " From: David Stern To: Jeffrey Epstein jeevacation@gmail.com ... Erez, You called me this morning and informed me that the closing",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147589",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10509,
+      "finding_type": "intelligence",
+      "summary": "Epstein acted as active deal intermediary (not mere introducer) in the Stern-Merkin CMDS HK transaction (EFTA01147588/89). On Jan 21 2014 Stern wrote: 'You called me this morning and informed me that the closing the of transaction as agreed between Dr Merkin and me on July 19 can not proceed because the government contract that was signed in December had only a value RMB 1 million, and Heritage was only informed about this contract amount (that you called insignificant sometime in December.)' Epstein personally phoned Stern to deliver Merkin/Heritage's reneging rationale, characterized the RMB 1M PRC Ministry of HR & Social Security contract as 'insignificant' to spin the walk-away, and was the messenger-in-chief between his paid estate/tax-advisory client (Merkin) and his deal-broker (Stern). This is tradecraft-identical to the Leon Black pattern: Epstein collects advisory fees from his principal AND manages the counterparty relationship with another Epstein-network collaborator, producing dual revenue streams and maximum informational asymmetry. The real government contract was signed Dec 19 2013 (Stern: 'Congratulations upon the successful signing of exactly that contract'), contradicting Epstein's 'insignificant' characterization.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11",
+        "user_provided"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:12:05",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147588",
+          "source_quote": " You called me this morning and informed me that the closing the of transaction as agreed between Dr Merkin and me on July 19 can not proceed",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147589",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02674224",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02681961",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10536,
+      "finding_type": "intelligence",
+      "summary": "STRUCTURAL SYNTHESIS \u2014 Epstein's paid-advisory business operated as a three-layer product: (1) advisory/strategy layer (Epstein personally \u2014 estate planning, tax structuring, USVI restructuring, family-office direction); (2) implementation/legal layer (Paul Weiss \u2014 Halperin T&E, Bronstein tax, Ezring securities, Okun IRS remediation, Karp senior client relationship); (3) deal-sourcing/broker layer (David Stern \u2014 China access, Prince Andrew access, Qatari capital, recycled-opportunity pitches). HNW captives (Black $158M confirmed, Merkin confirmed 2010-2019, Ferguson 2009-2011, Farkas May 2013, Qataris 2015-2016) paid into one or more layers. Paul Weiss's Feb 2026 denial of ever representing Epstein is materially false: Halperin T&E emails with Epstein labeled 'PRIVILEGED & CONFIDENTIAL ATTORNEY-CLIENT COMMUNICATION' (EFTA02356516); Epstein's accountant D'Agostino referenced 'other Paul Weiss invoices... not paid directly by our office' (EFTA02711770); Karp met monthly with Epstein at 9 E 71st through March 2019 and made a $2M escrow request to Paul Weiss partners for Leon Black monthly payments to 'an individual' (EFTA02470209 Mar 3 2016) contemporaneous with Wyden-documented $158M Black\u2192Epstein flow. Merkin fits the Black template precisely: (i) estate/trust architecture (Jul-Aug 2018 will/trust templates EFTA02547991/02625213); (ii) tax structuring (Jul 2018 USVI captive CFC EFTA02633385/02648539); (iii) deal-sourcing (Jul 2013-Jan 2014 Stern CMDS HK EFTA02674224/02681961); (iv) counsel-steering (Jan 5 2014 Karp introduction EFTA02579303). Architectural variation for Merkin: no heirs, so the estate layer is a charitable-remainder structure benefiting Caltech rather than a dynasty trust \u2014 but the fee-extraction and structural-capture mechanisms are identical.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband",
+        "courtlistener",
+        "littlesis",
+        "990",
+        "fec",
+        "propublica_nonprofit"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:29:23",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02356516",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02443933",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02470209",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02478189",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02496149",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02547991",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02579303",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02625213",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02670779",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02674224",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02681961",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02707648",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02711770",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10538,
+      "finding_type": "intelligence",
+      "summary": "DISAMBIGUATION OPEN \u2014 'Erez' identity contested between two readings. Reading A (original, this orchestrator's): 'Erez' is a Hebrew nickname for Jeffrey Epstein, used by David Stern in EFTA01147588/89 (Jan 21 2014) where Stern writes 'Erez,' in the salutation and the email is addressed ONLY to jeevacation@gmail.com; supports the finding that Epstein personally phoned Stern that morning to convey Heritage's reneging. Reading B (Agent G's): 'Erez' is a Heritage/Merkin-side executive who called Stern that morning, cited the RMB 1M clause, and whom Stern then addresses through a thread Epstein was mediating. Resolution pathway: (1) pull FULL header of EFTA01147588 \u2014 if only recipient is jeevacation@gmail.com, Reading A is correct; (2) find any other 'Erez' reference in Vol 11 corpus to establish a named Heritage-side person; (3) check whether Stern ever addresses Epstein elsewhere as 'Erez' or 'E'; (4) rmerkin@ca.rr.com or Merkin's office staff (Anne Wymer, Karen Vantrease, Susan) \u2014 does any have 'Erez' as handle? Recorded finding #10507 reflects Reading A \u2014 may need update. This is a high-priority disambiguation because it determines whether Epstein was the REFEREE of the Merkin-Stern deal or merely the INTRODUCER.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11",
+        "user_provided"
+      ],
+      "confidence": "low",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:29:47",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein-aetna",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147588",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01147589",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02681961",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11172,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS hunch (analysis-run-52, hyp-264): Bitfury Group UK board (4-of-4 directors) is single-table fiduciary convergence of SoftBank-caper named subject (des Pallieres), Trump 2.0 OCC technocrat (Brooks), Ukraine-sanctioned post-Soviet operator (Vavilov), Bitfury MENA runner (Kikvadze) \u2014 none of the 10 confirmed themes treats the board itself as a structural object. Brooks MSTR appointment Dec 20 2024 \u2192 SoftBank $50M PIPE into Cipher Mining Jan 30 2025 = 34 days.",
+      "detail": "EVIDENCE BUNDLE: Findings #11114 + #11130 + #11131. Theme 2 (UAE re-platform) names des Pallieres-OneIM separately. Theme 5 (Brooks crypto-banking scaffold) names Brooks framework separately. The single private board where they sit together is the structural object none of confirmed themes captures. Cap: synthesis/medium.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:26:58",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-52",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11114",
+          "source_quote": "Active UK directorship: BITFURY GROUP LIMITED (UK 11441275, appointed May 20 2021), co-directors Val Vavilov (Latvian co-founder), George Kikvadze (Georgian EVC), Brian P. Brooks (former US Acting Comptroller of the Currency under Trump)",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11130",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11131",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11173,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS hunch (analysis-run-52, hyp-265): Teodorani-Fabbri WRM Senior Adviser role at 51 Berkeley Square is unnamed corridor merging Roman elite pillar (Theme 7) + Vatican/Sloane Avenue litigation. ANIVAD Consulting Ltd (UK 11887450) incorporated 18 March 2019 \u2014 same month WRM advisory role surfaces. Italian press Feb-Mar 2026 has surfaced Teodorani-Epstein quotes but explicitly has NOT chained Teodorani-WRM-Vatican link.",
+      "detail": "EVIDENCE BUNDLE: Findings #850 (WRM-Teodorani at 51 Berkeley Square + Carlo Maggi-Teodorani co-directorship at Margherita Distribuzione + WRM Capinvest Ltd FCA-regulated UK 07990219); #851 (ANIVAD Consulting Ltd UK 11887450 inc 18 Mar 2019); #11132 (Italian press Feb-Mar 2026 has NOT linked Teodorani-WRM-Vatican); #11148 (Athena Capital v Holy See [2025] EWHC 355 (Comm) Knowles J judgment 21 Feb 2025 \u2014 Mincione won 29/31 declarations but court found communication did NOT meet good-faith standard; zero hits for Teodorani in judgment). Theme 7 (Roman elite pipeline) and Theme 8 (Mayfair-Geneva hedge-fund ecosystem) each capture a slice. Three-way merger Roman elite + Mayfair financial cluster + Vatican-Sloane litigation NOT in either theme. Cap: synthesis/medium.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:27:15",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-52",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11132",
+          "source_quote": "WRM GROUP / 51 BERKELEY SQUARE / ANIVAD CONSULTING \u2014 Italian press has NOT chained Teodorani's March 2019 WRM Senior Adviser onboarding to Mincione-Vatican-Sloane Avenue scandal",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11148",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-850",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-851",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11174,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS hunch (analysis-run-52, hyp-266): Akin Gump Strauss Hauer & Feld is unnamed three-front bridge \u2014 same firm spans Apollo-Black trust architecture (Pesner BRH Cayman, Fenn Caterpillar/Butterfly trust tax) + UAE FARA work (one of three primary UAE-FARA registered agents) + SoftBank-caper victim defense (MacDougall = Sama personal counsel). Three Akin Gump partners, three investigation-central threads, one firm.",
+      "detail": "EVIDENCE BUNDLE: Findings #2349 (Pesner Apollo founders BRH Holdings LP Cayman 8865 advisory team); #2351 (same); #1369/#1375 (Patrick Fenn Apollo trust tax, multi-party calls with Bob Bodian Mintz Levin + Alan Halperin Paul Weiss + Apollo in-house); #11106 (Mark MacDougall Akin Gump = Sama personal counsel during WSJ expos\u00e9 period per Semafor 9/20/2024); #2789 (Akin Gump/Bullpen Strategy Group is one of three primary UAE-FARA registered agents); #1771 (Akin Gump letter 11/19/2019 to SDNY responding to grand jury subpoena re Butterfly/Caterpillar Trust 2013/2017); #2910 (Epstein 11/30/2016 emailed BOTH Karp and Black on same thread asking 'aiken, deloitte pwc, paul weiss'). NOVELTY: Themes 2/4/5 don't name Akin Gump as a structural cross-thread bridge. Internal-conflict implications matter \u2014 were ethical walls in place; did partners cross-pollinate; did firm-level conflict-of-interest disclosures get filed? Cap: synthesis/medium.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:27:34",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-52",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11106",
+          "source_quote": "Mark MacDougall (Akin Gump Strauss Hauer & Feld) was Alok Sama's personal counsel during the WSJ expos\u00e9 period \u2014 fills a previously empty seat in our SoftBank caper cast",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-1369",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-1375",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-1771",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2349",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2789",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11175,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS hunch (analysis-run-52, hyp-267): Wachtel-Gold institutional channel = keystone institutional asset spanning 27 years (1992-2019) of continuous Epstein representation + alleged AUSA-insider prosecution-avoidance (Robert Gold ex-AUSA SDNY 1973-77 Official Corruption + Securities Fraud allegedly shielded Epstein from Towers Financial per Hoffenberg) + trust-debt forgiveness (Gold named in Trust One 2001) + public aviation co (William Wachtel chairs SKAS) + multi-generation operational pipeline (Schantz then Indyke). Schantz Dec 26 2003 FedEx from NYSG LLC to Bob Pepro at Ranieri & Co Uniondale NY (same firm Gold worked at 1998-2000) is previously unsynthesized cross-link.",
+      "detail": "EVIDENCE BUNDLE: Findings #2096 (Robert Gold full bio); #2102 (Gold-Wachtel synthesis with Hoffenberg Towers Financial allegation + Trust One debt forgiveness + Saker Aviation chair + Indyke pipeline); #2085 (Gold-Towers Financial allegation per Hoffenberg); #11099 (Wachtel & Masyr represented Epstein since at least 1992); #11116 (William B. Wachtel personally Epstein's NY Civil Court attorney 1997-1999 \u2014 name-partner doing routine eviction pleadings is professionally unusual); #11117 (Robert Gold AUSA SDNY 1973-77 Official Corruption + Securities Fraud; Gold named in Epstein's 2001 Trust One for debt forgiveness); #2031 (Schantz Dec 26 2003 FedEx EFTA01316638 to Bob Pepro at Ranieri & Co 50 Charles Lindbergh Blvd Uniondale NY); #2081 (Saker Aviation Services SKAS chaired by William B. Wachtel + Jesse Masyr); #2215 (Saker operated Downtown Manhattan Heliport 2008-2025); #1701 (Indyke negotiated Epstein S-76 helicopter purchase). NOVELTY: Existing findings are siloed; not framed as integrated rolling-SDNY-insider channel hypothesis. Cap: synthesis/medium.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:27:54",
+      "target_name": "Jeffrey Epstein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-52",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11099",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11116",
+          "source_quote": "A Columbia-trained name partner of a midtown boutique signing routine 20K/mo NY Civil Court eviction pleadings is professionally unusual",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-11117",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-1701",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2031",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2081",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2085",
+          "source_quote": "Gold 'kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out' on Towers Financial",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2096",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding-2102",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -12795,6 +13653,762 @@
       ]
     },
     {
+      "id": 4691,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Serguei Beloussov",
+      "relationship_type": "social",
+      "description": "Direct email correspondence Jan-Mar 2018, introduced by Masha Drokova. Discussed quantum computing, Minsky, algebraic topology, bio computing. Multiple scheduling attempts for in-person meetings. Beloussov appeared in Epstein March 2018 calendar.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:39",
+      "profile_id": "dfj-network",
+      "other_person": "Serguei Beloussov",
+      "other_person_slug": "serguei-beloussov",
+      "evidence": []
+    },
+    {
+      "id": 4699,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Masha Drokova",
+      "relationship_type": "social",
+      "description": "Drokova served as Epsteins publicist. 1627 appearances in DOJ Epstein file release. Exchanged intimate messages. Introduced Beloussov, managed scheduling.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 21:27:53",
+      "profile_id": "dfj-network",
+      "other_person": "Masha Drokova",
+      "other_person_slug": "masha-drokova",
+      "evidence": []
+    },
+    {
+      "id": 4781,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Ted Waitt",
+      "relationship_type": "social",
+      "description": "FBI memo (EFTA00129096) identifies Waitt as broker of Epstein-Gates introduction. Waitt connected to Epstein through Ghislaine Maxwell relationship and Foresight Institute.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:54:54",
+      "profile_id": "dfj-network",
+      "other_person": "Ted Waitt",
+      "other_person_slug": "ted-waitt",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00129096",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4849,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "social",
+      "description": "Jurvetson was in Epstein's target network by April 2009 (EFTA00774150 bios list), rated highly in Epstein personal notes January 2013 (EFTA00715319), and named as 'promotion and outreach advisor' for Epstein-funded 'New Methods Project' in September 2014 (EFTA00587739). Epstein was alerted to Jurvetson's November 2017 DFJ departure for sexual harassment (EFTA02567913). The FBI memo EFTA00129096 alleges Creer 'actively blackmailed' Jurvetson via SNCTM, making Jurvetson a victim embedded in both the Epstein network and Creer's alleged blackmail apparatus.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 02:48:27",
+      "profile_id": "epstein",
+      "other_person": "Steve Jurvetson",
+      "other_person_slug": "steve-jurvetson",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00715319",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00774150",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5145,
+      "person_a": "Jean-Luc Brunel",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:13:42",
+      "profile_id": "epstein",
+      "other_person": "Jean-Luc Brunel",
+      "other_person_slug": "jean-luc-brunel",
+      "evidence": []
+    },
+    {
+      "id": 5152,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "social",
+      "description": "Direct personal relationship: Zampolli forwarded articles to Epstein (2010), Epstein warned contacts about Zampolli (2011), Epstein patronized ID Models, jointly bid for Elite Model Management (2004)",
+      "strength": "strong",
+      "date_range": "2004-2011",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:17:08",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02418453",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02536145",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:entity-351728",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5162,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Ron Burkle",
+      "relationship_type": "social",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:41:16",
+      "profile_id": "zampolli",
+      "other_person": "Ron Burkle",
+      "other_person_slug": "ron-burkle",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "10055,10056,10057,10058",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5208,
+      "person_a": "Jean-Luc Brunel",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates) forwarded Karin Models sale/MC2 credit line correspondence to Epstein in May 2014. Epstein maintained financial oversight of Brunel operations through intermediaries.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:34:43",
+      "profile_id": "zampolli",
+      "other_person": "Jean-Luc Brunel",
+      "other_person_slug": "jean-luc-brunel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02584421",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5215,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "financial",
+      "description": "Joint business partners in 2004 bid to acquire Elite Model Management at bankruptcy auction. Epstein provided financial backing. Bid unsuccessful.",
+      "strength": "strong",
+      "date_range": "2004",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:35:27",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00090773",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00159321",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5260,
+      "person_a": "Amanda Ungaro",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Ungaro arrived US at 16-17 on Epstein's plane with agent Brunel",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:41",
+      "profile_id": "zampolli",
+      "other_person": "Amanda Ungaro",
+      "other_person_slug": "amanda-ungaro",
+      "evidence": []
+    },
+    {
+      "id": 5262,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "MC2 Model Management",
+      "relationship_type": "funds",
+      "description": "Epstein wired up to M to Brunel to launch MC2 in 2005; MC2 lost ~M 2006-2015",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:50",
+      "profile_id": "zampolli",
+      "other_person": "MC2 Model Management",
+      "other_person_slug": "mc2-model-management",
+      "evidence": []
+    },
+    {
+      "id": 5264,
+      "person_a": "Elite Model Management",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "Epstein provided financial backing for joint bid with Zampolli to acquire Elite in 2004",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:54",
+      "profile_id": "zampolli",
+      "other_person": "Elite Model Management",
+      "other_person_slug": "elite-model-management",
+      "evidence": []
+    },
+    {
+      "id": 5269,
+      "person_a": "Bill Clinton",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Clinton flew on Epstein's 727 (2002 Africa trip); multiple DOJ corpus references",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:38:11",
+      "profile_id": "zampolli",
+      "other_person": "Bill Clinton",
+      "other_person_slug": "bill-clinton",
+      "evidence": []
+    },
+    {
+      "id": 5394,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Merkin",
+      "relationship_type": "social",
+      "description": "2012-2017 direct email correspondence; Merkin initiated multiple check-ins; discussions on Stanford behavior engineering institute, USVI tax/FEMA investment, healthcare Trump opportunities; Merkin solicited investment advice from Epstein post-jail",
+      "strength": "strong",
+      "date_range": "2012-03-01:2017-09-30",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:32",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02339516",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02363782",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02396034",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02592395",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02720759",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5403,
+      "person_a": "George Church",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "Epstein donated M+ to Church Harvard lab 2010-2015",
+      "strength": "strong",
+      "date_range": "2010:2015",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:45:33",
+      "profile_id": "epstein-aetna",
+      "other_person": "George Church",
+      "other_person_slug": "george-church",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2026/02/06/politics/jeffrey-epstein-genetic-test-joseph-thakuria-harvard",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5450,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Merkin",
+      "relationship_type": "advisory",
+      "description": "Epstein acted as Merkin's informal estate-planning and tax adviser 2018-2019, sending his own will/trust as templates, coaching on pour-over structure, USVI CFC captive restructuring, and offering paid solution-crafting. Fits Leon Black / Wexner MO.",
+      "strength": "strong",
+      "date_range": "2010-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:52:51",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02502035",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02507089",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02547991",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02603264",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02625213",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02629226",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5452,
+      "person_a": "David Stern",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Epstein's 'man in the palace' go-between with Prince Andrew 2008-2019. Direct email traffic 2009-2019 (thousands of messages in DOJ Vol 11 / ~7,461 per Varsity/BTimes). Stern introduced to Ferguson via Epstein (EFTA02431144 Feb 2010). Epstein positioned Stern as 'your man in china' to Farkas (EFTA02569876). Stern asks Epstein for counsel on legal/litigation strategy (hf_to-be:434). Stern brokered Merkin/CMDS deal at Epstein's direction.",
+      "strength": "strong",
+      "date_range": "2008-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:20:44",
+      "profile_id": "epstein-aetna",
+      "other_person": "David Stern",
+      "other_person_slug": "david-stern",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02431144",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02538614",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02569876",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02674224",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02681961",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5466,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Paul Weiss Rifkind Wharton & Garrison LLP",
+      "relationship_type": "legal",
+      "description": "PW partners Alan Halperin (estate/trust), Richard Bronstein (tax), Greg Ezring (securities), Allan Arffa provided direct advice to Epstein personally 2011-2019; Epstein's accounting office paid PW invoices directly (EFTA02711770); contradicts PW's Feb 2026 public claim that they were only 'adverse' to Epstein representing Leon Black",
+      "strength": "strong",
+      "date_range": "2011-03-23..2019-03-03",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:10",
+      "profile_id": "epstein-aetna",
+      "other_person": "Paul Weiss Rifkind Wharton & Garrison LLP",
+      "other_person_slug": "paul-weiss-rifkind-wharton-garrison-llp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02356516",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02361821",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02449062",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02478189",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02519958",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02582807",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02671779",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02711770",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5463,
+      "person_a": "Brad S. Karp",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "advisory",
+      "description": "30+ direct emails 2014-Mar 2019; ~20+ in-person meetings at 9 E 71st; Karp advised Epstein on fighting 2008 plea reopening per Bloomberg; Karp said 'I've got some ideas' after Epstein's Mar 3 2019 'will need tough civil attny'",
+      "strength": "strong",
+      "date_range": "2014-01-05..2019-03-03",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:10",
+      "profile_id": "epstein-aetna",
+      "other_person": "Brad S. Karp",
+      "other_person_slug": "brad-s-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02213604",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02215334",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02236597",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02253155",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02261421",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02391370",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02391878",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02617307",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02631714",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5469,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Kathleen Ruemmler",
+      "relationship_type": "social",
+      "description": "Multiple in-person meetings at 9 E 71st 2014-2019, including May 19 2017 dinner co-hosted by Karp, Apr 5 2019 meeting with Steve Bannon + Anthony Scaramucci, May 21 2019 post-Miami-Herald visit; Epstein told Gates Foundation he was 'considering using Cathy Ruemmler to be the point legal person on this coast' (EFTA02714105 Jul 2014)",
+      "strength": "strong",
+      "date_range": "2014-07-15..2019-05-21",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:11",
+      "profile_id": "epstein-aetna",
+      "other_person": "Kathleen Ruemmler",
+      "other_person_slug": "kathleen-ruemmler",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02213572",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02213604",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02215487",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02222764",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02265721",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02280625",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02285675",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02387353",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5472,
+      "person_a": "Alan S. Halperin",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "legal",
+      "description": "Paul Weiss trusts-and-estates partner Halperin served as Epstein's personal estate-planning attorney 2013-2019: decanting strategy, GAT presentations, estate projections, bank-statement exhibits marked 'PRIVILEGED & CONFIDENTIAL/ATTORNEY-CLIENT COMMUNICATION'; also Epstein's lead on 2013 Deloitte sales-tax audit",
+      "strength": "strong",
+      "date_range": "2013-09-20..2017-01-02",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:11",
+      "profile_id": "epstein-aetna",
+      "other_person": "Alan S. Halperin",
+      "other_person_slug": "alan-s-halperin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240606",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02356516",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02361821",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02449062",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02463290",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02519958",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02671779",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5943,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Sultan Ahmed bin Sulayem",
+      "relationship_type": "intelligence",
+      "description": "Bin Sulayem replaced as DP World Chairman & CEO Feb 13 2026 after Epstein April 2009 emails surfaced including 'where are you? are you ok I loved the torture video.' Brokered correspondence between Epstein and Eduardo Teodorani-Fabbri ('\u00c8 uno di noi' line attributed via bin Sulayem channel). Confirms UAE cluster itself partially Epstein-compromised at senior level.",
+      "strength": "strong",
+      "date_range": "2009-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:36:50",
+      "profile_id": "epstein",
+      "other_person": "Sultan Ahmed bin Sulayem",
+      "other_person_slug": "sultan-ahmed-bin-sulayem",
+      "evidence": []
+    },
+    {
+      "id": 5962,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Svetlana Pozhidaeva",
+      "relationship_type": "employment",
+      "description": "Svetlana Pozhidaeva = Russian Federation citizen embedded as JEE-property staff (lived 9 E 71st + Paris apartment); Air France Apr 29 2014 EPSTEIN+POZHIDAEVA consecutive ticket numbers Centurion MZBJFF; model recruiter (Chiara Baschetti contact April 2015); Paris apartment manager; art-logistics handler (PIASA April 2015 \u20ac86,895.60); Russian network (SPIEF coordination May 2013, Russian Consulate visa April 2018). 100+ corpus emails 2012-2019.",
+      "strength": "strong",
+      "date_range": "2012-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 06:56:48",
+      "profile_id": "epstein",
+      "other_person": "Svetlana Pozhidaeva",
+      "other_person_slug": "svetlana-pozhidaeva",
+      "evidence": []
+    },
+    {
+      "id": 5964,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Karyna Shuliak",
+      "relationship_type": "familial",
+      "description": "Karyna Shuliak (n\u00e9e Pshenychna), Belarusian DOB 5/31/1989; long-term partner; received ~50% of 1953 Trust ($100M+) plus 32.73-carat diamond ring 'in contemplation of marriage' Aug 8 2019; Epstein's last external phone call Aug 9 2019. Married to DZIANIS SHULIAK (DB AML records); Indyke handled divorce affidavit March 2019. Interior Decorator JSC Interiors LLC $70K hired Mar 2 2015. Per existing finding #1414: Nov 28 2014 Boeing N908JE LSJ\u2192Bedford with Reid Hoffman + Joi Ito.",
+      "strength": "strong",
+      "date_range": "2011-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 06:56:48",
+      "profile_id": "epstein",
+      "other_person": "Karyna Shuliak",
+      "other_person_slug": "karyna-shuliak",
+      "evidence": []
+    },
+    {
+      "id": 5987,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Sultan Ahmed bin Sulayem",
+      "relationship_type": "social",
+      "description": "DOJ Epstein file release Feb 2026 confirmed sustained correspondence (2007-2009+); Massie confirmed bin Sulayem as Apr 24 2009 'torture video' email recipient; Epstein lobbied UK gov via Mandelson for DP World London Gateway 2009",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:19",
+      "profile_id": "epstein",
+      "other_person": "Sultan Ahmed bin Sulayem",
+      "other_person_slug": "sultan-ahmed-bin-sulayem",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bloomberg.com/news/features/2026-02-10/epstein-emails-show-dp-world-chairman-bin-sulayem-discussed-sex-business",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 46,
       "person_a": "International Peace Institute",
       "person_b": "Jeffrey Epstein",
@@ -15322,7 +16936,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0001916133",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1916133",
           "source_quote": null,
           "source_page": null
         }
@@ -16463,6 +18077,629 @@
       ]
     },
     {
+      "id": 4659,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Tim Draper",
+      "relationship_type": "financial",
+      "description": "Andra Capital/Draper Global fund pitched to Epstein as LP (Nov 2018). Unsuccessful.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:21",
+      "profile_id": "epstein",
+      "other_person": "Tim Draper",
+      "other_person_slug": "tim-draper",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00484600",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01017890",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4663,
+      "person_a": "Haydar Haba",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "Haba pitched Andra Capital/Draper Global fund to Epstein Aug-Nov 2018",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 03:28:22",
+      "profile_id": "epstein",
+      "other_person": "Haydar Haba",
+      "other_person_slug": "haydar-haba",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00480108",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01017890",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4672,
+      "person_a": "Brock Pierce",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Pierce emailed Epstein directly about Bitcoin/Adam Draper incubator May 2013.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-01 04:41:19",
+      "profile_id": "dfj-network",
+      "other_person": "Brock Pierce",
+      "other_person_slug": "brock-pierce",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00680781",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4744,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Nellie Bowles",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Nellie Bowles",
+      "other_person_slug": "nellie-bowles",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4745,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Neil Serebryany",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Neil Serebryany",
+      "other_person_slug": "neil-serebryany",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4740,
+      "person_a": "Alex Klokus",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Alex Klokus",
+      "other_person_slug": "alex-klokus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4741,
+      "person_a": "Bryan Johnson",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Bryan Johnson",
+      "other_person_slug": "bryan-johnson",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4742,
+      "person_a": "Jay Jideliov",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Jay Jideliov",
+      "other_person_slug": "jay-jideliov",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4743,
+      "person_a": "Daniel Schmachtenberger",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Daniel Schmachtenberger",
+      "other_person_slug": "daniel-schmachtenberger",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4746,
+      "person_a": "Bear Kittay",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Bear Kittay",
+      "other_person_slug": "bear-kittay",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4747,
+      "person_a": "Gunnar Lovelace",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Gunnar Lovelace",
+      "other_person_slug": "gunnar-lovelace",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4748,
+      "person_a": "Francis Pedraza",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:58",
+      "profile_id": "epstein",
+      "other_person": "Francis Pedraza",
+      "other_person_slug": "francis-pedraza",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4749,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Jesse Damiani",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Jesse Damiani",
+      "other_person_slug": "jesse-damiani",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4751,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Katya Fisher",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Katya Fisher",
+      "other_person_slug": "katya-fisher",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4753,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Samantha Stein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Samantha Stein",
+      "other_person_slug": "samantha-stein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4754,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Varya Russkova",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Varya Russkova",
+      "other_person_slug": "varya-russkova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4756,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Leo Ferrera",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Leo Ferrera",
+      "other_person_slug": "leo-ferrera",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4757,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Zoe Bernard",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Zoe Bernard",
+      "other_person_slug": "zoe-bernard",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4758,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Martin Nowak",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Martin Nowak",
+      "other_person_slug": "martin-nowak",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4750,
+      "person_a": "Dylan Love",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Dylan Love",
+      "other_person_slug": "dylan-love",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4752,
+      "person_a": "Aleszea Blanche",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "Aleszea Blanche",
+      "other_person_slug": "aleszea-blanche",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4755,
+      "person_a": "James Peyer",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Introduced by Masha Drokova (2017-2019)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-02 02:17:59",
+      "profile_id": "epstein",
+      "other_person": "James Peyer",
+      "other_person_slug": "james-peyer",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01010555",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4851,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Steve Jurvetson",
+      "relationship_type": "advisory",
+      "description": "Jurvetson listed as 'Promotion and outreach advisor' on Epstein's Foundational Questions in Measurement project (September 2014). Epstein was also on DFJ Growth 2013 investor prospect list (EFTA00652653). Epstein received Jurvetson DFJ ouster news Nov 14 2017 via Austin Hill.",
+      "strength": "medium",
+      "date_range": "2013-2017",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:10:15",
+      "profile_id": "epstein",
+      "other_person": "Steve Jurvetson",
+      "other_person_slug": "steve-jurvetson",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00587739",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00652653",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02567913",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 4852,
+      "person_a": "Austin Hill",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Austin Hill (Brudder Ventures, Montreal) had documented regular meetings with Epstein 2014-2017, including multiple Vancouver Fairmont meetings. Emailed Epstein the Recode article on Jurvetson's sexual harassment DFJ ouster the day it broke (Nov 14 2017).",
+      "strength": "medium",
+      "date_range": "2014-2017",
+      "verification_status": "unverified",
+      "created_at": "2026-04-03 03:10:20",
+      "profile_id": "epstein",
+      "other_person": "Austin Hill",
+      "other_person_slug": "austin-hill",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02567913",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02721404",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5127,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:12:33",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DailyBeast:Zampolli_Epstein_Link",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:351728",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5144,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:13:41",
+      "profile_id": "epstein",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": []
+    },
+    {
+      "id": 5176,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Mikhail Prokhorov",
+      "relationship_type": "social",
+      "description": "Epstein files show Prokhorov in Epstein contact network. Prokhorov sought Warren Buffett autograph through Epstein. Was among Russian billionaires Epstein helped with visas/introductions.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:44:52",
+      "profile_id": "zampolli",
+      "other_person": "Mikhail Prokhorov",
+      "other_person_slug": "mikhail-prokhorov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 377,
       "person_a": "Jeffrey Epstein",
       "person_b": "Nelson Peltz",
@@ -16603,6 +18840,71 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02698238",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5184,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Oleg Baibakov",
+      "relationship_type": "social",
+      "description": "Baibakov named in Oct 2018 emails to Epstein as 'killer' alongside Prokhorov. Baibakov's NYC presence (Time Warner Center condo) overlaps with Epstein's NY operations.",
+      "strength": "weak",
+      "date_range": "2018-10-25",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 00:52:14",
+      "profile_id": "zampolli",
+      "other_person": "Oleg Baibakov",
+      "other_person_slug": "oleg-baibakov",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02618736",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5268,
+      "person_a": "Bill Block",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Bill Block referenced in Oct 2018 email to Epstein as subject of mediation",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:38:07",
+      "profile_id": "zampolli",
+      "other_person": "Bill Block",
+      "other_person_slug": "bill-block",
+      "evidence": []
+    },
+    {
+      "id": 5854,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "John Phelan",
+      "relationship_type": "social",
+      "description": "Phelan was a passenger on Epstein's Boeing 727 N908JE for two flights bracketing a London trip 2006-02-27 (JFK->Luton) and 2006-03-03 (Luton->JFK). Per Phelan's friend (CNN), Phelan was invited by a Bear Stearns CEO and did not know it was Epstein's plane until arrival; Epstein pitched a tax concept to financiers on board; Phelan never interacted with Epstein again. Ten months before Epstein's first 2006 sex-charges arrest. Co-passenger: Jean-Luc Brunel; six redacted names.",
+      "strength": "weak",
+      "date_range": "2006-02-27..2006-03-03",
+      "verification_status": "unverified",
+      "created_at": "2026-04-30 03:10:00",
+      "profile_id": "parlatore",
+      "other_person": "John Phelan",
+      "other_person_slug": "john-phelan",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/John_C._Phelan",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2026/02/06/politics/phelan-epstein-flight",
           "source_quote": null,
           "source_page": null
         }
@@ -18423,6 +20725,14 @@
       "id": 2445
     },
     {
+      "date": "1999-01-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "US v. Epstein (96 CIV 8307) settlement disbursement: $355,370.52 in two Court-issued certified checks (#492385 + #492386) released 1/29/1999 \u2014 funds were re-disbursement of pre-existing court-managed escrow deposits from Epstein ($225K, Dec 1997) and Fisher (~$15K/mo from Apr 1998); 'Manuel Bermadez/Mermadez' was the SDNY cashier's-window runner (likely Berm\u00fadez), not a third-party payor",
+      "confidence": "high",
+      "id": 11098
+    },
+    {
       "date": "2000-03-30",
       "type": "finding",
       "finding_type": "legal",
@@ -18527,6 +20837,14 @@
       "id": 126
     },
     {
+      "date": "2004",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Joint business partners in 2004 bid to acquire Elite Model Management at bankruptcy auction. Epstein provided financial backing. Bid unsuccessful.",
+      "other_person": "Paolo Zampolli",
+      "id": 5215
+    },
+    {
       "date": "2004 to 2006-03",
       "type": "connection",
       "relationship_type": "corporate",
@@ -18541,6 +20859,14 @@
       "summary": "Epstein was the court-approved stalking horse bidder at $36M for the Gosman bankruptcy estate (Maison de l'Amitie, 515 N County Rd, Palm Beach) in Nov 2004. He claimed entitlement to a fee if outbid. Trump outbid him at $41.35M via Trump Properties LLC. Epstein wrote: 'I became the stalking horse bidder at 36 m. ie if someone bid higher I would receive a fee. trump buys the house at the telephone auction. only me trump and his friend pulty the developer.'",
       "confidence": "high",
       "id": 294
+    },
+    {
+      "date": "2004-2011",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Direct personal relationship: Zampolli forwarded articles to Epstein (2010), Epstein warned contacts about Zampolli (2011), Epstein patronized ID Models, jointly bid for Elite Model Management (2004)",
+      "other_person": "Paolo Zampolli",
+      "id": 5152
     },
     {
       "date": "2004-2019",
@@ -18597,6 +20923,14 @@
       "summary": "Epstein forced victim into sexual encounter with Associate 2, including strangulation",
       "confidence": "high",
       "id": 3240
+    },
+    {
+      "date": "2006-02-27..2006-03-03",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Phelan was a passenger on Epstein's Boeing 727 N908JE for two flights bracketing a London trip 2006-02-27 (JFK->Luton) and 2006-03-03 (Luton->JFK). Per Phelan's friend (CNN), Phelan was invited by a Bear Stearns CEO and did not know it was Epstein's plane until arrival; Epstein pitched a tax concept to financiers on board; Phelan never interacted with Epstein again. Ten months before Epstein's first 2006 sex-charges arrest. Co-passenger: Jean-Luc Brunel; six redacted names.",
+      "other_person": "John Phelan",
+      "id": 5854
     },
     {
       "date": "2006-10-19",
@@ -18759,6 +21093,22 @@
       "id": 1934
     },
     {
+      "date": "2008-2019",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Epstein's 'man in the palace' go-between with Prince Andrew 2008-2019. Direct email traffic 2009-2019 (thousands of messages in DOJ Vol 11 / ~7,461 per Varsity/BTimes). Stern introduced to Ferguson via Epstein (EFTA02431144 Feb 2010). Epstein positioned Stern as 'your man in china' to Farkas (EFTA02569876). Stern asks Epstein for counsel on legal/litigation strategy (hf_to-be:434). Stern brokered Merkin/CMDS deal at Epstein's direction.",
+      "other_person": "David Stern",
+      "id": 5452
+    },
+    {
+      "date": "2009-05-13",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "JPMorgan opened Hyperion Air Inc. account #4332 on 2009-01-23 while Epstein was serving 18-month sentence; Jes Staley personally decided to retain Epstein as PB client after the 2008 conviction in consultation with JPM General Counsel Stephen Cutler",
+      "confidence": "confirmed",
+      "id": 10403
+    },
+    {
       "date": "2009-09",
       "type": "finding",
       "finding_type": "communication",
@@ -18797,6 +21147,14 @@
       "description": "Decade-long personal friendship 2009-2019. Regular meetings in Rome, Paris, Palm Beach, NYC, NM ranch. Annual wine gifts. Teodorani is Agnelli family scion, SVP CNH Industrial.",
       "other_person": "Eduardo Teodorani-Fabbri",
       "id": 392
+    },
+    {
+      "date": "2009-2019",
+      "type": "connection",
+      "relationship_type": "intelligence",
+      "description": "Bin Sulayem replaced as DP World Chairman & CEO Feb 13 2026 after Epstein April 2009 emails surfaced including 'where are you? are you ok I loved the torture video.' Brokered correspondence between Epstein and Eduardo Teodorani-Fabbri ('\u00c8 uno di noi' line attributed via bin Sulayem channel). Confirms UAE cluster itself partially Epstein-compromised at senior level.",
+      "other_person": "Sultan Ahmed bin Sulayem",
+      "id": 5943
     },
     {
       "date": "2010",
@@ -18855,6 +21213,22 @@
       "id": 211
     },
     {
+      "date": "2010-2019",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Epstein acted as Merkin's informal estate-planning and tax adviser 2018-2019, sending his own will/trust as templates, coaching on pour-over structure, USVI CFC captive restructuring, and offering paid solution-crafting. Fits Leon Black / Wexner MO.",
+      "other_person": "Richard Merkin",
+      "id": 5450
+    },
+    {
+      "date": "2010:2015",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Epstein donated M+ to Church Harvard lab 2010-2015",
+      "other_person": "George Church",
+      "id": 5403
+    },
+    {
       "date": "2011",
       "type": "finding",
       "finding_type": "intelligence",
@@ -18877,6 +21251,30 @@
       "summary": "In email dated March 5, 2011, Epstein asked his investigators to determine whether a person of interest 'intersects with Marie Villafana, EJ Yera (Marie's husband) or any of the US attnys on the Rothstein case.' This demonstrates Epstein was actively monitoring AUSA Villafana's personal connections (her husband EJ Yera) and tracking cross-connections between SDFL federal prosecutions (his own case, the Rothstein Ponzi case, and implicitly other SDFL proceedings). This intelligence-gathering on his own prosecutor is consistent with the broader counter-surveillance operation evident in the Epstein emails.",
       "confidence": "high",
       "id": 2527
+    },
+    {
+      "date": "2011-03-23..2019-03-03",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "PW partners Alan Halperin (estate/trust), Richard Bronstein (tax), Greg Ezring (securities), Allan Arffa provided direct advice to Epstein personally 2011-2019; Epstein's accounting office paid PW invoices directly (EFTA02711770); contradicts PW's Feb 2026 public claim that they were only 'adverse' to Epstein representing Leon Black",
+      "other_person": "Paul Weiss Rifkind Wharton & Garrison LLP",
+      "id": 5466
+    },
+    {
+      "date": "2011-07-25",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Indyke email confirms Epstein ownership chain: 'Mr Epstein is sole member of FSF, LLC which is sole stockholder of freedom air'",
+      "confidence": "confirmed",
+      "id": 10395
+    },
+    {
+      "date": "2011-07-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Jeffrey Epstein personally wired $1,404,945 from JPMorgan Chase to IATS escrow on 2011-07-25 for the N162AE/N722JE transaction; IATS responded by demanding his passport and explanation of involvement",
+      "confidence": "confirmed",
+      "id": 10396
     },
     {
       "date": "2011-08-20",
@@ -18967,12 +21365,36 @@
       "id": 178
     },
     {
+      "date": "2011-2019",
+      "type": "connection",
+      "relationship_type": "familial",
+      "description": "Karyna Shuliak (n\u00e9e Pshenychna), Belarusian DOB 5/31/1989; long-term partner; received ~50% of 1953 Trust ($100M+) plus 32.73-carat diamond ring 'in contemplation of marriage' Aug 8 2019; Epstein's last external phone call Aug 9 2019. Married to DZIANIS SHULIAK (DB AML records); Indyke handled divorce affidavit March 2019. Interior Decorator JSC Interiors LLC $70K hired Mar 2 2015. Per existing finding #1414: Nov 28 2014 Boeing N908JE LSJ\u2192Bedford with Reid Hoffman + Joi Ito.",
+      "other_person": "Karyna Shuliak",
+      "id": 5964
+    },
+    {
       "date": "2012-01 to 2018-01",
       "type": "connection",
       "relationship_type": "social",
       "description": "Epstein inner circle tracked Thiel-Gawker saga. Kahn sent Thiel articles to Epstein. Gawker was investigating Epstein flight logs in Jan 2015 before Thiel destroyed the outlet. Osborne was active intermediary 2012-2013.",
       "other_person": "Peter Thiel",
       "id": 1312
+    },
+    {
+      "date": "2012-03-01:2017-09-30",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "2012-2017 direct email correspondence; Merkin initiated multiple check-ins; discussions on Stanford behavior engineering institute, USVI tax/FEMA investment, healthcare Trump opportunities; Merkin solicited investment advice from Epstein post-jail",
+      "other_person": "Richard Merkin",
+      "id": 5394
+    },
+    {
+      "date": "2012-03-28",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "John Duffy (CEO JPM US Private Bank) March 2012 email re Hyperion Air cash withdrawals: 'better fact pattern than I thought' \u2014 confirms JPM advised Epstein to route cash withdrawals through aviation account for compliance cover",
+      "confidence": "confirmed",
+      "id": 10402
     },
     {
       "date": "2012-2013",
@@ -18989,6 +21411,14 @@
       "description": "Epstein's last girlfriend. De facto property manager/Chief of Staff. 13,731 DOJ Vol 11 hits. $100M heiress (1953 Trust).",
       "other_person": "Karyna Shuliak",
       "id": 171
+    },
+    {
+      "date": "2012-2019",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Svetlana Pozhidaeva = Russian Federation citizen embedded as JEE-property staff (lived 9 E 71st + Paris apartment); Air France Apr 29 2014 EPSTEIN+POZHIDAEVA consecutive ticket numbers Centurion MZBJFF; model recruiter (Chiara Baschetti contact April 2015); Paris apartment manager; art-logistics handler (PIASA April 2015 \u20ac86,895.60); Russian network (SPIEF coordination May 2013, Russian Consulate visa April 2018). 100+ corpus emails 2012-2019.",
+      "other_person": "Svetlana Pozhidaeva",
+      "id": 5962
     },
     {
       "date": "2013",
@@ -19021,6 +21451,14 @@
       "summary": "GRM Box #004740697 (EFTA00300480 pp.51-55) retrieved from storage June 13, 2013, contains comprehensive civil litigation files: CMA vs JEE (correspondence, summons, complaint, motion to dismiss), Rosenfeldt vs. Rothstein, MJ vs Epstein (with affidavits of Richard Barnett, protective order barring contact, motion for preservation of evidence re US Attorneys Office correspondence, settlement agreement and confidentiality agreement). Also contains Epstein vs Rothstein redwelds #1-2 (privilege logs, docs produced by Scherer & Farmer, Cara Holmes docs, Second Amended Complaint Aug 22 2011, summary judgment hearing July 27 2012, Fowler bankruptcy withdrawal). At least 30+ redacted settlement agreements across 5 file cabinet drawers, covering Does 1-8, Jane Does 8/101/102, and multiple named cases (80802, 80656, 80811, 25129, 81092, 80119, 80232, 80380, 80381, 80994, 80591, 80893, 80469, 28051, 28058, 37319, 80736, 4D09-2254).",
       "confidence": "high",
       "id": 2484
+    },
+    {
+      "date": "2013-09-20..2017-01-02",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Paul Weiss trusts-and-estates partner Halperin served as Epstein's personal estate-planning attorney 2013-2019: decanting strategy, GAT presentations, estate projections, bank-statement exhibits marked 'PRIVILEGED & CONFIDENTIAL/ATTORNEY-CLIENT COMMUNICATION'; also Epstein's lead on 2013 Deloitte sales-tax audit",
+      "other_person": "Alan S. Halperin",
+      "id": 5472
     },
     {
       "date": "2013-09-26",
@@ -19063,6 +21501,14 @@
       "id": 177
     },
     {
+      "date": "2013-2017",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Jurvetson listed as 'Promotion and outreach advisor' on Epstein's Foundational Questions in Measurement project (September 2014). Epstein was also on DFJ Growth 2013 investor prospect list (EFTA00652653). Epstein received Jurvetson DFJ ouster news Nov 14 2017 via Austin Hill.",
+      "other_person": "Steve Jurvetson",
+      "id": 4851
+    },
+    {
       "date": "2013-2018",
       "type": "connection",
       "relationship_type": "financial",
@@ -19095,6 +21541,14 @@
       "id": 1442
     },
     {
+      "date": "2014-01-05..2019-03-03",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "30+ direct emails 2014-Mar 2019; ~20+ in-person meetings at 9 E 71st; Karp advised Epstein on fighting 2008 plea reopening per Bloomberg; Karp said 'I've got some ideas' after Epstein's Mar 3 2019 'will need tough civil attny'",
+      "other_person": "Brad S. Karp",
+      "id": 5463
+    },
+    {
       "date": "2014-01-19",
       "type": "finding",
       "finding_type": "financial",
@@ -19125,6 +21579,14 @@
       "summary": "Dechert Exhibit B documents 47 hedge/investment fund transactions from 5/2/2014 to 4/17/2019 flowing through Southern Financial LLC and Southern Trust Company Inc. Key fund recipients: Boothbay Multi Strategy/Absolute Strategies/Return (4 transactions, largest 10M), Valar Global Fund II/III LP (Peter Thiel, 14 transactions totaling ~28M), Tudor Futures Fund (13.5M in 2 txns), Joichi Ito/Neoteny 3 LP (4 txns, ~1.5M), Coatue Enterprises LLC (3 txns, 1.5M), Honeycomb Partners/Ventures (5 txns, ~34M), Kyara Investments I/III/IV LLC (including Blockstream and OH2 Labs, 3 txns), Blockchain Capital III/IV (15M in 3 txns), The 2017 Caterpillar Trust (10.5M+2.6M+1.9M). This is the complete investment deployment ledger for Epstein's DB accounts during the Black advisory period.",
       "confidence": "high",
       "id": 1592
+    },
+    {
+      "date": "2014-07-15..2019-05-21",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Multiple in-person meetings at 9 E 71st 2014-2019, including May 19 2017 dinner co-hosted by Karp, Apr 5 2019 meeting with Steve Bannon + Anthony Scaramucci, May 21 2019 post-Miami-Herald visit; Epstein told Gates Foundation he was 'considering using Cathy Ruemmler to be the point legal person on this coast' (EFTA02714105 Jul 2014)",
+      "other_person": "Kathleen Ruemmler",
+      "id": 5469
     },
     {
       "date": "2014-07-17",
@@ -19165,6 +21627,14 @@
       "summary": "CBP travel records show consistent USVI-Teterboro shuttle pattern post-2010. Primary airports: CBP-St Thomas VI Preclearance (inbound from islands), Teterboro Jet Aviation Airpt (private jet NJ), Palm Beach International, JFK, Newark. Less frequent: Bedford L G Hanscom Field (Boston area, visited 11/30/2014 and 12/11/2016), Seattle King Co Intl (3/20/2014), Westchester County Airport (4/20/2014), Anchorage Satellite Term (11/11/2003 - unusual), Vieques A Rivera-Rodriguez (12/23/2015), Albuquerque Intl (11/18/2015), San Juan Passenger Branch (transit 12/31/2002 and 1/2/2003, plus 7/5/2016 American Airlines). CBP-Long Island MacArthur APT appears 2017-2018.",
       "confidence": "high",
       "id": 1259
+    },
+    {
+      "date": "2014-2017",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Austin Hill (Brudder Ventures, Montreal) had documented regular meetings with Epstein 2014-2017, including multiple Vancouver Fairmont meetings. Emailed Epstein the Recode article on Jurvetson's sexual harassment DFJ ouster the day it broke (Nov 14 2017).",
+      "other_person": "Austin Hill",
+      "id": 4852
     },
     {
       "date": "2014-2019",
@@ -19229,6 +21699,14 @@
       "summary": "CHS reported to FBI that 'In the spring of 2015, President Trump had just been to Epstein's property for lunch.' This places a Trump visit to Epstein post-2008 conviction, during the pre-campaign period (Trump announced June 16, 2015). CHS also stated Epstein 'was very close to current President Donald Trump' and 'knew former President Bill Clinton.' The spring 2015 lunch claim is specific and testable against Secret Service logs and other records.",
       "confidence": "medium",
       "id": 1608
+    },
+    {
+      "date": "2015-04-19",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "April 19 2015 = 'Agnelli-attack day' \u2014 within 12 hours: targeting decision (10:20 AM 'great great great') \u2192 recruitment-bypass strategy ('not through Edu') \u2192 Gulf-channel briefing on EXOR's full 15B liquidity + Ferrari spin-off timing (10:12 PM to Jabor Y. Qatari). Parallel Cushman & Wakefield insider-information thread Apr 13-23 2015: Epstein demanded $100M finder's fee via STC Southern Trust Company USVI; TPG-led consortium bought Cushman for $2B announced May 11 2015",
+      "confidence": "confirmed",
+      "id": 11139
     },
     {
       "date": "2015-08 to 2019-03",
@@ -19655,6 +22133,14 @@
       "id": 811
     },
     {
+      "date": "2018-10-25",
+      "type": "connection",
+      "relationship_type": "social",
+      "description": "Baibakov named in Oct 2018 emails to Epstein as 'killer' alongside Prokhorov. Baibakov's NYC presence (Time Warner Center condo) overlaps with Epstein's NY operations.",
+      "other_person": "Oleg Baibakov",
+      "id": 5184
+    },
+    {
       "date": "2018-11-11",
       "type": "finding",
       "finding_type": "intelligence",
@@ -19941,6 +22427,14 @@
       "summary": "FBI placed TECS travel hit on Epstein generating automatic SILENT HIT alerts for every border crossing. EFTA00040581 (4/26/2019): FBI VCAC/Human Trafficking agent emailed confirming Epstein had 3 active US passports (469911707, 547017616, 566672615) and that travel hit was in place. SILENT HIT record P3N06596100A01 generated alerts forwarded to FBI NY agents on: 4/27/2019 (Teterboro), 4/28/2019 (Teterboro), 5/5/2019 (Teterboro), 5/18/2019 (Palm Beach), 6/3/2019, 6/10/2019, 6/11/2019, 6/14/2019, and 7/6/2019 (arrest day, QUERY MANIFEST 07:30). Alerts went to FBI NY VCAC/Human Trafficking squad and OGA (Other Government Agency) recipients.",
       "confidence": "confirmed",
       "id": 1398
+    },
+    {
+      "date": "2019-05-30",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "May 30 2019 Epstein\u2192Wolff email (HOUSE_OVERSIGHT_031684) explicitly links Rybolovlev to MBS via Salvator Mundi \u2014 frames the $450M sale as MBS payoff; Epstein cites Rybolovlev as the man who 'knows all'; bridges Bouvier-Rybolovlev-Geneva-Russia-Gulf-Trump axis to SoftBank-caper geography",
+      "confidence": "confirmed",
+      "id": 11124
     },
     {
       "date": "2019-06-07",

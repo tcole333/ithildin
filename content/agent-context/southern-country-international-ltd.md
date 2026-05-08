@@ -3,6 +3,8 @@
 **Stats**: 5 findings, 1 connections, 0 entities
 **Dossier**: /dossiers/southern-country-international-ltd
 
+> Southern Country International Ltd was a USVI-chartered international banking entity within Jeffrey Epstein's corporate network, licensed under Title 9, Chapter 25 of the Virgin Islands Code, that served as the international financial arm of the Southern Trust Company corporate family, managed by Richard Kahn and Erika Kellerhals, received estate transfers after Epstein's death, and was named as a target of a joint FBI/IRS-CI investigation opened in March 2020.
+
 ## Key Findings
 - **[financial/confirmed]** Southern Country International Ltd (SCI) was the offshore arm of the Southern Trust corporate family. Tax filing strategy discussed Sep 2015: Richard Kahn and accountant Jeanne Brennan consulted CPA Alan Dlugash on IRS Form 1120 business activity codes. Dlugash recommended code 525990 (Other Financial Vehicles) with activity 'Investments' rather than language including 'International Banking' which he believed 'may unnecessarily trigger an audit from IRS task force.' FTC (Financial Trust Company) used code 523900 (Other Financial Investment Activities). This shows deliberate tax classification to avoid IRS international banking scrutiny. SCI was also flagged in Charles Schwab AML investigation (Jul 2019) alongside STC, Southern Financial LLC, and Jeffrey Epstein — all accounts opened April 2019 (3 months before arrest) suggesting pre-arrest diversification away from Deutsche Bank. (2015-09) (Finding #1298)
 - **[financial/high]** Southern Country International Ltd was the subject of Charles Schwab AML investigation alongside STC, Southern Financial LLC, Jeffrey Epstein, and Richard Kahn. Opened Schwab accounts April 2019. This is the offshore (non-US) entity in the Southern Trust corporate family, likely incorporated in a foreign jurisdiction (Ltd designation). Its inclusion with the domestic Southern entities in bank records suggests it was used for international investment activity. (2019-04) (Finding #627)
@@ -12,3 +14,18 @@
 
 ## Top Connections
 - **Gratitude America Ltd** [corporate/strong]: Finding #66: Gratitude America is listed as one of Epstein's USVI entities in DOJ documents alongside: Great St Jim LLC, IGO Company LLC, J Epstein Virgin Islands 
+
+## Open Questions
+- The federal investigation opened March 3, 2020 named Southern Country International Bank as a target alongside the Epstein estate. What was the investigative status and disposition of that case following Geoffrey Berman's removal from SDNY in June 2020? Were grand jury subpoenas for Epstein's jail calls and related materials ever issued, and what did the IRS-CI component focus on?
+- SCI held a USVI international banking entity charter under Title 9, Chapter 25 — the Economic Development Commission framework. Was SCI ever actively licensed as a functioning bank, did it hold deposits or issue instruments, and were EDC tax benefits actually claimed? The existing record documents the charter purpose and the tax classification strategy but does not establish whether the banking license was operationally exercised.
+- The New York Times reported that Southern Country received millions from the Epstein estate in December 2019. The source documents show the $1,000 and $3,738 November 2019 payments via Neptune LLC/HBRK, and the $1 million December 2019 STC wire. What were the total post-death transfers into SCI, under what authority were they made by co-executors Kahn and Indyke, and what became of those funds after SCI's administrative dissolution?
+- Southern Country Opportunity Fund LLC was formed February 21, 2019 — five months before Epstein's arrest — with no stated purpose beyond 'Other, Other.' The entity was never transferred to good standing after Epstein's death and was administratively dissolved in December 2021. Was any activity conducted through this entity between formation and dissolution? Was it a vehicle for the Schwab account diversification occurring in April 2019?
+- Alan Dlugash recommended classifying SCI under code 525990 (Other Financial Vehicles) to avoid IRS international banking task force scrutiny. Were IRS Form 1120 filings ever made for SCI under that code? What were the entity's reported revenues, assets, and tax positions across its operational period, and did those filings reflect the post-death estate transfers documented in NYT reporting?
+- The original name Financial Strategy Group Ltd was also used for a Palm Beach corporation (FL P93000087814) in which Epstein was sole officer and registered agent, operating from 358 El Brillo Way and dissolved in 2000. Was the USVI entity's naming a deliberate reference to that prior Palm Beach entity, and were the two entities ever connected operationally or through common counterparties?
+
+## Applicable Models
+- jurisdictional-arbitrage
+- parallel-financial-system
+- charter-obscuration
+- tax-classification-strategy
+- post-mortem-continuity

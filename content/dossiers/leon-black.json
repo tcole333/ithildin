@@ -7,30 +7,33 @@
   ],
   "profile_ids": [
     "epstein",
+    "epstein-aetna",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.714369",
-  "last_updated": "2026-03-04T17:37:24",
+  "generated_at": "2026-05-07T23:07:36.026170",
+  "last_updated": "2026-05-07T04:36:50",
   "stats": {
-    "total_findings": 60,
-    "total_connections": 45,
+    "total_findings": 61,
+    "total_connections": 51,
     "total_entities": 12,
     "finding_types": {
       "financial": 43,
       "relationship": 8,
       "legal": 5,
-      "intelligence": 4
+      "intelligence": 4,
+      "identity": 1
     },
     "connection_types": {
-      "financial": 20,
+      "financial": 21,
       "advisory": 3,
       "corporate": 10,
-      "legal": 2,
+      "legal": 5,
       "intelligence": 4,
       "political": 3,
-      "social": 3
+      "controls": 1,
+      "social": 4
     },
-    "last_updated": "2026-03-04T17:37:24"
+    "last_updated": "2026-05-07T04:36:50"
   },
   "findings": [
     {
@@ -1314,7 +1317,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC Form 4 CIK 1032666",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1032666",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1361,6 +1364,39 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "CourtListener docket 67633736 and 60682827",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11136,
+      "finding_type": "identity",
+      "summary": "Leon Black opened Scimitar at ADGM Sept 2024 ('Elysium's first international office'); building credit platform 'Fortinbras' (Hamlet's foreign avenger who inherits the throne \u2014 naming signals successor-vehicle intent vs Apollo); Mubadala 49%-owns Apollo Asset Management \u2014 Apollo-Mubadala extended Nov 2024",
+      "detail": "Major confirmed migration to UAE re-platforming hypothesis. Sept 5 2024 Bloomberg: Leon Black opened ADGM family office 'Scimitar' (described as Elysium's first international office). Son Ben Black runs it alongside Abu Dhabi-based financier Asad Hussaini (Vice Chairman Peninsula Real Estate ADGM, anchor investor Yas Holding which is part of Royal Group/Tahnoon \u2014 meaning Hussaini was inside Royal Group capital perimeter BEFORE Scimitar formed). Building credit platform 'Fortinbras Enterprises LP' (Delaware, SEC-registered CRD# 330555 / IARD 317087, founded Oct 2020) \u2014 naming carries deliberate Shakespearean signal (Fortinbras = Hamlet's foreign avenger who inherits the throne after the Danish royal family's collapse). CORRECTION TO PRIOR FINDING: 'Mubadala 49%-owns Apollo Asset Management' framing could NOT be verified in any public source. Actual relationship is JVs and origination platforms, not equity ownership of the asset manager: (1) Jul 2020 Apollo Strategic Origination Partners (ASOP) $12B/3yr direct-lending vehicle Mubadala anchor + Apollo permanent capital. (2) Feb 2022 multi-billion partnership extension. (3) Jan 2023 Alpha Dhabi 20% + Mubadala 80% JV for global credit co-investment with Apollo. (4) Sept 2023 Mubadala Capital Solutions launched with Apollo backer. (5) Nov 11 2024 multi-year extension; $275B annual origination target by 2030; Omar Eraiqat (Mubadala Diversified Investments Deputy CEO) lead. (6) Dec 9 2025 Alpha Dhabi-Mubadala JV acquired Apollo's European Direct Lending portfolio ($0.6B in, ~$1.6B AUM, 39 obligors); Apollo continues to manage \u2014 portfolio-level pull, Abu Dhabi capital internalizing the book. APOLLO ADGM BRANCH (FSP #200013) opened June 29 2020 \u2014 3 months BEFORE Fortinbras was formed (Oct 2020) \u2014 institutional infrastructure for the entire pivot was being laid in parallel from inception. Fortinbras AUM only $122M per latest SEC ADV (sub-scale). Capital re-platforming has NOT yet visibly happened at SEC-registered entity. Watchlist: 2026 ADV amendment showing AUM >$1B = strong UAE re-platforming confirmation.",
+      "source_datasets": [
+        "bloomberg.com",
+        "zawya.com"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-09-05",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:36:10",
+      "target_name": "Leon Black",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bloomberg-2024-09-05-black-adgm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "zawya-2024-black-adgm",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -2301,6 +2337,175 @@
       ]
     },
     {
+      "id": 5464,
+      "person_a": "Brad S. Karp",
+      "person_b": "Leon Black",
+      "relationship_type": "legal",
+      "description": "Karp was Leon Black's personal counsel via Paul Weiss (Apollo chairman's longtime law firm); Karp handled Black's tax remediation (Forms 8865/8858/5471 for 2007-2014), Black's 2013 Will & Rev Trust, Black's Phaidon LLC loss-harvesting structure, and Black's M escrow request (rejected by PW's Birenboim)",
+      "strength": "strong",
+      "date_range": "2013-07-08..2019-03-03",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:10",
+      "profile_id": "epstein-aetna",
+      "other_person": "Brad S. Karp",
+      "other_person_slug": "brad-s-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240606",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02338103",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02386047",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02470209",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02478189",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02666795",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02707648",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5474,
+      "person_a": "Leon Black",
+      "person_b": "Richard J. Bronstein",
+      "relationship_type": "legal",
+      "description": "PW tax partner Bronstein Dec 12 2015 counseled Epstein on Leon Black's Phaidon Global LLC loss-harvesting / nonrecourse-note buyer structure; told Epstein 'everything is based only on what I believe to be Leon's best interests'",
+      "strength": "strong",
+      "date_range": "2015-12-12..",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:11",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard J. Bronstein",
+      "other_person_slug": "richard-j-bronstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02478189",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5473,
+      "person_a": "Alan S. Halperin",
+      "person_b": "Leon Black",
+      "relationship_type": "legal",
+      "description": "PW partner Halperin was Leon Black's estate-planning counsel; Oct 3 2016 preparing GAT/Estate Presentation for meeting with Black; Apr 20 2018 joined Karp-Black-Epstein lunch",
+      "strength": "strong",
+      "date_range": "2013-01-01..2018-04-20",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:11",
+      "profile_id": "epstein-aetna",
+      "other_person": "Alan S. Halperin",
+      "other_person_slug": "alan-s-halperin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240517",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240606",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240745",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02240755",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02449062",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5488,
+      "person_a": "Leon Black",
+      "person_b": "Melanoma Research Alliance Foundation",
+      "relationship_type": "controls",
+      "description": "Leon Black Director/Co-Founder, Debra Black Chair/Co-Founder. MRAF received $225K 2016 from Gratitude America (Epstein foundation) + $1.225M from Leon Black Foundation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:58:56",
+      "profile_id": "epstein-aetna",
+      "other_person": "Melanoma Research Alliance Foundation",
+      "other_person_slug": "melanoma-research-alliance-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990 officers 261636099",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "investigations/epstein/990-findings.md",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5942,
+      "person_a": "Leon Black",
+      "person_b": "Mubadala Investment Co.",
+      "relationship_type": "financial",
+      "description": "Mubadala 49%-owns Apollo Asset Management (Black's former firm). Black opened Scimitar at ADGM Sept 2024 ('Elysium's first international office'). Apollo-Mubadala extended Nov 2024. Dec 9 2025 Alpha Dhabi-Mubadala JV acquired European direct lending portfolio managed by Apollo (~$1.6B AUM pro forma). Watchlist: whether Black's Fortinbras credit platform secures Mubadala anchor.",
+      "strength": "strong",
+      "date_range": "2024-present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:36:50",
+      "profile_id": "epstein",
+      "other_person": "Mubadala Investment Co.",
+      "other_person_slug": "mubadala-investment-co",
+      "evidence": []
+    },
+    {
       "id": 16,
       "person_a": "Larry Summers",
       "person_b": "Leon Black",
@@ -2714,6 +2919,34 @@
       "evidence": []
     },
     {
+      "id": 5425,
+      "person_a": "Leon Black",
+      "person_b": "Richard Merkin",
+      "relationship_type": "social",
+      "description": "Sept 1 2014 'People to See' list places Dick Merkin and Leon Black (Apollo Global Management founder; central figure in epstein-aetna investigation) together as 2014 Sept 7th week scheduled visitors.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 03:46:49",
+      "profile_id": "epstein-aetna",
+      "other_person": "Richard Merkin",
+      "other_person_slug": "richard-merkin",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02517610",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02723383",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2086,
       "person_a": "David Petraeus",
       "person_b": "Leon Black",
@@ -2988,6 +3221,14 @@
       "id": 1585
     },
     {
+      "date": "2013-01-01..2018-04-20",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "PW partner Halperin was Leon Black's estate-planning counsel; Oct 3 2016 preparing GAT/Estate Presentation for meeting with Black; Apr 20 2018 joined Karp-Black-Epstein lunch",
+      "other_person": "Alan S. Halperin",
+      "id": 5473
+    },
+    {
       "date": "2013-02-15",
       "type": "finding",
       "finding_type": "financial",
@@ -3002,6 +3243,14 @@
       "summary": "Black Family Partners LP is the main investment vehicle for Leon Black's family wealth. As of 6/30/2013: BFP managed approx $1.95B in assets. Structure includes: Black 2006 Family Trust (71.5% interest), 1997 Black Family Trust (9.2%), Judah 2009 Trust (4.7%), LDB 2011 LLC (7.2%), Leon and Debra Black personal (7.4%). Trust income 2007-2012 from Apollo Credit Opportunity Fund: $161.7M; from BFP distributions: $195.4M. BFP extended lines of credit to Phaidon Global LLC (Black's publishing company). Epstein received detailed financial reports on all BFP activities.",
       "confidence": "high",
       "id": 8
+    },
+    {
+      "date": "2013-07-08..2019-03-03",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Karp was Leon Black's personal counsel via Paul Weiss (Apollo chairman's longtime law firm); Karp handled Black's tax remediation (Forms 8865/8858/5471 for 2007-2014), Black's 2013 Will & Rev Trust, Black's Phaidon LLC loss-harvesting structure, and Black's M escrow request (rejected by PW's Birenboim)",
+      "other_person": "Brad S. Karp",
+      "id": 5464
     },
     {
       "date": "2013-08",
@@ -3188,6 +3437,14 @@
       "id": 24
     },
     {
+      "date": "2015-12-12..",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "PW tax partner Bronstein Dec 12 2015 counseled Epstein on Leon Black's Phaidon Global LLC loss-harvesting / nonrecourse-note buyer structure; told Epstein 'everything is based only on what I believe to be Leon's best interests'",
+      "other_person": "Richard J. Bronstein",
+      "id": 5474
+    },
+    {
       "date": "2016",
       "type": "finding",
       "finding_type": "financial",
@@ -3338,6 +3595,22 @@
       "summary": "DOE V. BLACK (SDNY 1:23-cv-06418): A civil suit filed July 25, 2023 by 'Doe' against Leon Black in the Southern District of New York, assigned to Judge Jessica G.L. Clarke. Nature of suit: 360 (Personal Injury: Other). Cause: 28:1332pi (Diversity-Personal Injury). The case remains unterminated as of Feb 2026. This is a personal injury claim under diversity jurisdiction, consistent with sexual abuse allegations. Separately, Black v. Ganieva (SDNY 1:21-cv-08824, filed Oct 28, 2021) is a RICO suit filed BY Black against Guzel Ganieva, who had publicly accused Black of sexual assault and subsequently alleged extortion by Ganieva. The case went to the Second Circuit (filed Jul 14, 2022). These two cases represent the direct litigation fallout from the Epstein association -- the first an assault claim against Black, the second Black's attempt to counter-sue his accuser.",
       "confidence": "high",
       "id": 1496
+    },
+    {
+      "date": "2024-09-05",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Leon Black opened Scimitar at ADGM Sept 2024 ('Elysium's first international office'); building credit platform 'Fortinbras' (Hamlet's foreign avenger who inherits the throne \u2014 naming signals successor-vehicle intent vs Apollo); Mubadala 49%-owns Apollo Asset Management \u2014 Apollo-Mubadala extended Nov 2024",
+      "confidence": "confirmed",
+      "id": 11136
+    },
+    {
+      "date": "2024-present",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Mubadala 49%-owns Apollo Asset Management (Black's former firm). Black opened Scimitar at ADGM Sept 2024 ('Elysium's first international office'). Apollo-Mubadala extended Nov 2024. Dec 9 2025 Alpha Dhabi-Mubadala JV acquired European direct lending portfolio managed by Apollo (~$1.6B AUM pro forma). Watchlist: whether Black's Fortinbras credit platform secures Mubadala anchor.",
+      "other_person": "Mubadala Investment Co.",
+      "id": 5942
     },
     {
       "date": "2025-10",

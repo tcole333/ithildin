@@ -6,11 +6,11 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.941802",
-  "last_updated": "2026-03-06T18:24:25",
+  "generated_at": "2026-05-07T23:07:36.313791",
+  "last_updated": "2026-03-23T16:41:45",
   "stats": {
     "total_findings": 10,
-    "total_connections": 6,
+    "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
       "financial": 8,
@@ -20,13 +20,64 @@
     "connection_types": {
       "advisory": 1,
       "employment": 2,
+      "financial": 2,
       "familial": 1,
       "corporate": 1,
-      "financial": 1
+      "political": 1
     },
-    "last_updated": "2026-03-06T18:24:25"
+    "last_updated": "2026-03-23T16:41:45"
   },
   "findings": [
+    {
+      "id": 5042,
+      "finding_type": "financial",
+      "summary": "FEC: Helberg donated M to MAGA Inc., K+ to GOP committees while at Palantir/Founders Fund",
+      "detail": "FEC records show Helberg made major political donations: M to Make America Great Again Inc. (2024-07-10, employer listed as Palantir Technologies), K to Grow the Majority, .3K to NRCC, K each to SD/KY/NM/TX Republican parties, .15K to Servant Leadership Fund, K each to American Revival PAC and Warrior Diplomat PAC, .3K each to Mike Johnson and Michael Waltz. Employer listed variously as Palantir Technologies, Palantir, Founders Fund, Plantir Technologies (misspelled), and Outbound.",
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-07-10",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:17:05",
+      "target_name": "Jacob Helberg",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contributions database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4633,
+      "finding_type": "financial",
+      "summary": "Jacob Helberg retains hundreds of investments including SpaceX, OpenAI, Anduril, Palantir ties while serving as Under Secretary of State",
+      "detail": "Jacob Helberg confirmed as 22nd Under Secretary of State for Economic Growth, Energy, and Environment. Per May 2025 OGE Form 278e (electronically signed 01/24/2025), Helberg plans to retain investments in hundreds of companies spanning AI, defense, space tech, clean energy, fintech, drones, quantum computing. Key holdings: OpenAI, SpaceX, Anduril Industries, Neuralink, Stripe. Former Senior Advisor to Palantir CEO Alex Karp. Husband is Keith Rabois, managing director at Khosla Ventures (formerly Founders Fund GP). Many investments tied to Founders Fund and Khosla Ventures portfolios. Helberg admitted heightened risk of conflicts of interest in ethics disclosure. Confirmation hearing before Senate Foreign Relations Committee on June 10, 2025 reportedly 'advanced with no substantial discussion of his conflicts.'",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-10",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 18:30:54",
+      "target_name": "Jacob Helberg",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OGE Form 278e (signed 01/24/2025, Bloomberg link); Sludge 2025/06/12; Senate Foreign Relations Committee hearing 2025/06/10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4583,
       "finding_type": "financial",
@@ -53,31 +104,6 @@
       ]
     },
     {
-      "id": 4633,
-      "finding_type": "financial",
-      "summary": "Jacob Helberg retains hundreds of investments including SpaceX, OpenAI, Anduril, Palantir ties while serving as Under Secretary of State",
-      "detail": "Jacob Helberg confirmed as 22nd Under Secretary of State for Economic Growth, Energy, and Environment. Per May 2025 OGE Form 278e (electronically signed 01/24/2025), Helberg plans to retain investments in hundreds of companies spanning AI, defense, space tech, clean energy, fintech, drones, quantum computing. Key holdings: OpenAI, SpaceX, Anduril Industries, Neuralink, Stripe. Former Senior Advisor to Palantir CEO Alex Karp. Husband is Keith Rabois, managing director at Khosla Ventures (formerly Founders Fund GP). Many investments tied to Founders Fund and Khosla Ventures portfolios. Helberg admitted heightened risk of conflicts of interest in ethics disclosure. Confirmation hearing before Senate Foreign Relations Committee on June 10, 2025 reportedly 'advanced with no substantial discussion of his conflicts.'",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 18:30:54",
-      "target_name": "Jacob Helberg",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OGE Form 278e (signed 01/24/2025, Bloomberg link); Sludge 2025/06/12; Senate Foreign Relations Committee hearing 2025/06/10",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4637,
       "finding_type": "financial",
       "summary": "Jacob Helberg FEC records show dramatic political realignment: Biden bundler turned Trump megadonor with 1M MAGA donation",
@@ -96,31 +122,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC Schedule A receipts for contributor Jacob Helberg, Miami Beach FL; contribution_receipt_dates 2020-2024",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5042,
-      "finding_type": "financial",
-      "summary": "FEC: Helberg donated M to MAGA Inc., K+ to GOP committees while at Palantir/Founders Fund",
-      "detail": "FEC records show Helberg made major political donations: M to Make America Great Again Inc. (2024-07-10, employer listed as Palantir Technologies), K to Grow the Majority, .3K to NRCC, K each to SD/KY/NM/TX Republican parties, .15K to Servant Leadership Fund, K each to American Revival PAC and Warrior Diplomat PAC, .3K each to Mike Johnson and Michael Waltz. Employer listed variously as Palantir Technologies, Palantir, Founders Fund, Plantir Technologies (misspelled), and Outbound.",
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:17:05",
-      "target_name": "Jacob Helberg",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC individual contributions database",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -313,7 +314,7 @@
       "created_at": "2026-03-03 17:01:40",
       "profile_id": "tech-right",
       "other_person": "Palantir",
-      "other_person_slug": "palantir-technologies",
+      "other_person_slug": "palantir",
       "evidence": []
     },
     {
@@ -330,6 +331,28 @@
       "other_person": "Palantir Technologies",
       "other_person_slug": "palantir-technologies",
       "evidence": []
+    },
+    {
+      "id": 3510,
+      "person_a": "Jacob Helberg",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:45",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     },
     {
       "id": 2722,
@@ -404,10 +427,42 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3503,
+      "person_a": "David Sacks",
+      "person_b": "Jacob Helberg",
+      "relationship_type": "political",
+      "description": "Both in concurrent senior Trump 2 administration positions: Helberg as Under Secretary of State for Economic Growth, Sacks as White House AI & Cryptocurrency Czar. Both from SV tech ecosystem (Helberg: Google policy/CNAS/Founders Fund, Sacks: PayPal/Craft). Their positions create complementary tech policy coverage: Sacks on domestic AI, Helberg on international tech commerce.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:40",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": []
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-07-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC: Helberg donated M to MAGA Inc., K+ to GOP committees while at Palantir/Founders Fund",
+      "confidence": "confirmed",
+      "id": 5042
+    },
+    {
+      "date": "2025-06-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Jacob Helberg retains hundreds of investments including SpaceX, OpenAI, Anduril, Palantir ties while serving as Under Secretary of State",
+      "confidence": "high",
+      "id": 4633
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4637,
@@ -510,206 +565,5 @@
       "bridge-tax",
       "private-order"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Jacob Helberg",
-      "connections": [
-        {
-          "target": "Palantir",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Helberg served as Senior Advisor to CEO Alex Karp at Palantir. Now Under Secretary of State for Economic Growth. Donated $1M to Trump campaign + $3.9M to Trump-aligned PACs. Represents most direct Palantir-to-cabinet-level pipeline."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Senior Advisor to Palantir CEO Alex Karp; retains Palantir-connected investments while serving as Under Secretary of State"
-        },
-        {
-          "target": "Keith Rabois",
-          "type": "familial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Married 2018 (ceremony officiated by Sam Altman); Rabois is MD at Khosla Ventures / ex-Founders Fund GP; many of Helberg's investments tied to these funds"
-        },
-        {
-          "target": "Alex Karp",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "propublica:helberg-jacob",
-          "description": "Former Palantir executive. Helberg served as Senior Advisor to CEO Karp at Palantir from 9/2023-Present, earning $840K in consulting fees. Holds Palantir stock."
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "propublica:helberg-jacob",
-          "description": "Founders Fund carried interest. Helberg holds management positions and carried interest in Founders Fund V-VIII and Growth I/II -- Thiel's flagship VC firm. 20-30% profit share across funds."
-        }
-      ],
-      "secondHop": {
-        "Alex Karp": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir co-founder and CEO. Karp runs day-to-day operations, Thiel is chairman. Together met Israeli defense officials for IDF partnership."
-          },
-          {
-            "target": "Palantir Technologies",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Karp shifted from $360K Biden-Harris donor (2023) to $1M MAGA Inc donor (2024). Anti-immigration positions align with Trump policy. Palantir receives $900M+ in federal contracts under Trump 2."
-          },
-          {
-            "target": "David Petraeus",
-            "type": "social",
-            "strength": 0.7,
-            "description": "LittleSis records Petraeus and Alex Karp (Palantir CEO) as friends. Palantir was founded with CIA venture capital (In-Q-Tel) and has deep intelligence community connections. This friendship links Petraeus to the data analytics/surveillance sector."
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "corporate",
-            "strength": 0.2,
-            "description": "Indirect but structurally significant: Lewandowski has contract approval authority at DHS as final political appointee before Secretary Noem. Palantir (CEO: Alex Karp) was awarded up to $1B DHS blanket purchase agreement (Feb 2026). WSJ specifically asked Lewandowski about Palantir meetings; DHS denied his involvement. Connection is circumstantial but structurally important given Lewandowski's gatekeeper role on all DHS contracts >100K."
-          }
-        ],
-        "Keith Rabois": [
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Stanford Review, PayPal Mafia. Both libertarian activists since Stanford. Rabois later at Khosla Ventures, Founders Fund."
-          },
-          {
-            "target": "Palmer Luckey",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Coordinated FEC donations to same recipients: Yvette Herrell, Take Back The House 2022, WinRed. Both Founders Fund-connected."
-          },
-          {
-            "target": "Kenneth Howery",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Both Stanford contemporaries (Rabois attended around same time). Rabois was Partner at Founders Fund 2019-2024. Both part of PayPal extended network and Thiel orbit. Rabois also a prominent Trump-supporting tech figure."
-          }
-        ],
-        "Palantir": [
-          {
-            "target": "Thomas Williams",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation."
-          },
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI"
-          },
-          {
-            "target": "CBP",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Stephen Miller",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir has .3B+ in DoD contracts including .3B Maven Smart System and B Army Enterprise Agreement"
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

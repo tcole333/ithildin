@@ -8,7 +8,7 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.774809",
+  "generated_at": "2026-05-07T23:07:36.081849",
   "last_updated": "2026-03-04T17:01:22",
   "stats": {
     "total_findings": 33,
@@ -938,6 +938,31 @@
       ]
     },
     {
+      "id": 4890,
+      "finding_type": "financial",
+      "summary": "International Peace Institute Inc (Epstein donor recipient, UN-connected think tank) received two PPP loans totaling $1,295,670: $686,255 from JPMorgan Chase on May 1, 2020 (forgiven $693,129.75) and $609,415 on April 15, 2021 (forgiven $615,752.24). Address: 777 United Nations Plz Fl 4, New York NY 10017. NAICS 813410 (Civic/Social Organizations), 38-39 jobs.",
+      "detail": "IPI is a UN-affiliated think tank that received significant Epstein donations. Both PPP draws serviced by JPMorgan Chase, consistent with major nonprofit banking relationships. 38-39 employees suggests a medium-sized think tank operation. The UN Plaza address confirms its status as a UN-adjacent institution.",
+      "source_datasets": [
+        "sba_ppp"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2020-05-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 17:01:22",
+      "target_name": "International Peace Institute",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBA PPP FOIA dataset",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 87,
       "finding_type": "financial",
       "summary": "IPI financial trajectory shows decline coinciding with Epstein scandal. Revenue peaked at 11.87M in 2014, then declined: 2015 10.33M, 2016 8.47M, 2017 8.70M, 2018 8.39M, 2019 9.33M, 2020 3.93M (post-arrest collapse), 2021 10.77M (recovery from Soros), 2022 6.66M, 2023 5.04M. Assets fell from 16.37M (2014) to 6.91M (2023). The 2020 revenue drop of 58 percent is striking -- this was the year IPI commissioned the KPMG forensic review (Nov 2020). Open Society Foundations provided 1.5M (per LittleSis) after the scandal, likely to stabilize IPI. Rod-Larsen resigned as president by November 2020.",
@@ -1147,31 +1172,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA:negative_search_IPI",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4890,
-      "finding_type": "financial",
-      "summary": "International Peace Institute Inc (Epstein donor recipient, UN-connected think tank) received two PPP loans totaling $1,295,670: $686,255 from JPMorgan Chase on May 1, 2020 (forgiven $693,129.75) and $609,415 on April 15, 2021 (forgiven $615,752.24). Address: 777 United Nations Plz Fl 4, New York NY 10017. NAICS 813410 (Civic/Social Organizations), 38-39 jobs.",
-      "detail": "IPI is a UN-affiliated think tank that received significant Epstein donations. Both PPP draws serviced by JPMorgan Chase, consistent with major nonprofit banking relationships. 38-39 employees suggests a medium-sized think tank operation. The UN Plaza address confirms its status as a UN-adjacent institution.",
-      "source_datasets": [
-        "sba_ppp"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 17:01:22",
-      "target_name": "International Peace Institute",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SBA PPP FOIA dataset",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1766,6 +1766,14 @@
       "summary": "The April 5, 2019 donation of $150,000 from Gratitude America to IPI -- just 3 months before Epstein's July 6 arrest -- was facilitated by Bella Klein (Epstein's accounting staff). On April 4, 2019, Klein emailed Camilla Reksten-Monsen (Rod-Larsen's special assistant at IPI) requesting IPI bank instructions and 501c3 certification. Reksten-Monsen provided IPI's JPMorgan Chase account details. Klein responded: 'I will send check tomorrow AM' to IPI's offices at 777 UN Plaza (EFTA02282103). Klein preferred to 'send an overnight check or deliver check via messenger' rather than wire (EFTA02280923). This was the last Epstein-related donation to IPI. The timing -- April 2019, with SDNY investigation already underway -- raises questions about whether this was a final disbursement before anticipated legal proceedings.",
       "confidence": "high",
       "id": 84
+    },
+    {
+      "date": "2020-05-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "International Peace Institute Inc (Epstein donor recipient, UN-connected think tank) received two PPP loans totaling $1,295,670: $686,255 from JPMorgan Chase on May 1, 2020 (forgiven $693,129.75) and $609,415 on April 15, 2021 (forgiven $615,752.24). Address: 777 United Nations Plz Fl 4, New York NY 10017. NAICS 813410 (Civic/Social Organizations), 38-39 jobs.",
+      "confidence": "confirmed",
+      "id": 4890
     },
     {
       "date": "2020-11",

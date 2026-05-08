@@ -1,0 +1,366 @@
+{
+  "name": "NGINX Inc",
+  "slug": "nginx-inc",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.267772",
+  "last_updated": "2026-04-12T21:08:58",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "relationship": 2,
+      "document": 5,
+      "financial": 3,
+      "intelligence": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-12T21:08:58"
+  },
+  "findings": [
+    {
+      "id": 9819,
+      "finding_type": "identity",
+      "summary": "Four NGINX entities found in Delaware registry: NGINX SOFTWARE INC (DE #4978109, inc. 2011-05-04), BV NGINX LLC (DE #5019438, inc. 2011-08-02), NGINX INC (DE #5021656, inc. 2011-08-08), SG NGINX HOLDINGS LLC (DE #7070725, inc. 2018-09-24)",
+      "detail": "Three entities formed within 3 months in 2011 suggesting corporate reorganization during initial VC formation. SG NGINX Holdings formed Sep 2018, ~6 months before F5 acquisition announcement (Mar 2019), likely an acquisition vehicle. Registered agents: INCORP SERVICES INC (Software), THE COMPANY CORPORATION (Inc), CORPORATION SERVICE COMPANY (BV + SG). Delaware does not expose officer names; officers obtained via California and Washington registrations.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2011-05-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:29:34",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_de/4978109",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_de/5019438",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_de/5021656",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_de/7070725",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9825,
+      "finding_type": "relationship",
+      "summary": "Post-F5 acquisition officer transition: NGINX Software Inc (CA) officers address changed from 795 Folsom St 6th Floor SF (NGINX HQ) to 801 5th Avenue Seattle (F5 HQ). Joseph Patrick McDermott retained as CEO/CFO, Steven Irving Grieger as Secretary. Grieger also serves as Director of F5 Networks Limited UK, CFO of Lilac Cloud Inc, and CEO/President of Shape Security Inc -- all F5-controlled entities.",
+      "detail": "California registration (3379940) shows the address transition clearly. McDermott appears twice with SF address (CEO + CFO) and once with Seattle address (CFO). Grieger appears twice: secretary at SF address and secretary at Seattle address. Grieger's broader network: Director F5 Networks Limited UK, CFO Lilac Cloud Inc, agent Volterra Inc (all at 801 5th Ave Seattle). Also F5 Networks India Private Limited and F5 Networks Innovation Private Limited. Shape Security Inc (acquired by F5 2020): CEO, Director, President. Washington state NGINX Software registration (603364436) terminated 2020-06-03 confirming post-acquisition cleanup.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:31:00",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_ca/3379940",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:us_wa/603364436",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9900,
+      "finding_type": "document",
+      "summary": "2011 NGINX pitch deck (Exhibit A) names three founders: Igor Sysoev (author, principal architect), Maxim Konovalov (CEO), Andrey Alexeev (business development) \u2014 created Moscow/NYC 2011 while Sysoev/Konovalov still at Rambler",
+      "detail": "Court Exhibit A (Doc 141-1) is NGINX's 2011 VC pitch deck, marked 'Moscow/NYC, 2011 \u2014 proprietary and confidential.' The founders slide (p.11) lists: (1) Igor Sysoev \u2014 author, principal architect; (2) Maxim Konovalov \u2014 CEO; (3) Andrey Alexeev \u2014 business development. Created while Sysoev and Konovalov were still Rambler employees, proving pre-departure executive role formalization for a commercial entity. Andrey Alexeev appears as a third co-founder in the business development role.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:59:07",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 p.11, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9901,
+      "finding_type": "financial",
+      "summary": "2011 pitch deck requests Series A of $2,500,000; plans dual-jurisdiction company with Delaware entity (marketing/sales) and Moscow entity (management/engineers)",
+      "detail": "The financials slides (pp.17-18) request a Series A round of $2,500,000. Operating budgets cover payroll, marketing, and administrative costs. The company slide (p.12) specifies a dual-jurisdiction structure: legal entities in Delaware, United States (for marketing and sales) and Moscow, Russia (for management and engineers). Office plans: Moscow class B 70 sq meters, San Francisco class A or B 20 sq meters. Staff to include software developers, quality assurance, and technical support. This shows a fully articulated corporate structure and budget while the founders were still Rambler employees.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:00:04",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 pp.12,17-18, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9902,
+      "finding_type": "financial",
+      "summary": "2011 pitch deck exit slide names F5 as acquisition target alongside Cisco, Juniper, Brocade, Radware; maturity period 4-5 years \u2014 F5 actually acquired NGINX in 2019",
+      "detail": "The exit slide (p.20) lists four categories of potential acquirers: (1) Networking vendor: cisco, juniper, f5, brocade, radware; (2) Software vendor: citrix, parallels, emc/vmware; (3) Big corporation: ibm, oracle, hp; (4) Telco/ISP/CDN: at&t, level 3, comcast, akamai. Maturity period stated as 4-5 years. F5 Networks ultimately acquired NGINX Inc. in March 2019 for approximately $670M \u2014 exactly the category of exit contemplated in this 2011 deck. The fact that the founders identified their eventual acquirer 8 years in advance demonstrates sophisticated strategic planning.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:01:05",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 p.20, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9903,
+      "finding_type": "document",
+      "summary": "2011 pitch deck Q3 2011 plan: form and register companies, establish offices, hire senior developer + system engineer + QA; Q4 2011: release version 2.0 with new core, new API, dynamic modules",
+      "detail": "Plans 2011 slide (p.13) lays out a detailed timeline: Q3 2011 \u2014 form and register companies, establish offices, hire one senior developer + one system engineer + one QA engineer, revamp development process, book technical writer, gather customer opinion survey results, finalize nginx feature roadmap for 2011-2012. Q4 2011 \u2014 release version 2.0 (new core, new API, dynamic modules), negotiate technical support contracts with first customers, hire second senior developer. Plans 2012 slide (p.14): Q1 2012 version 2.1, hire three developers + one system engineer; Q2 2012 version 2.2; Q3 2012 version 2.3; Q4 2012 version 2.4 with video content transformation. This aggressive timeline was created while the founders were still employed at Rambler.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:01:45",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 pp.13-14, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9904,
+      "finding_type": "financial",
+      "summary": "2011 pitch deck revenue model: paid technical support subscriptions ($10K/yr for 8/5, $20K/yr for 24/7), custom development from $100K/FTE, CDN functionality, embedded versions for CPE vendors",
+      "detail": "Revenue model slides (pp.15-16) outline multiple revenue streams: (1) Technical support services for key accounts \u2014 subscription model with 8/5 and 24/7 tiers, prompt reaction time, case tracking; (2) New paid features (modules, custom features); (3) New products in partnership with software and hardware vendors \u2014 CDN functionality, embedded version for CPE vendors; (4) Partnerships \u2014 3rd party products featuring nginx, professional services, certifications. Pricing: technical support $10,000/year for 8/5, $20,000/year for 24/7. Custom development from $100,000 per FTE. Sales pitch: 'no product support can lead to no business for a serious web entrepreneur' and 'often there is a specific custom feature missing or their setup calls for more.' This is the commercial model that eventually became NGINX Plus.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:02:20",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 pp.15-16, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9905,
+      "finding_type": "document",
+      "summary": "2011 pitch deck: nginx crafted to handle 500 million page requests/day for a Russian search engine/portal; one core developer; development started spring 2002, version 0.1.0 October 2004, current version 0.9.5",
+      "detail": "History of development slide (p.8) reveals nginx was 'crafted to handle 500 million page requests per day for a Russian search engine/portal' \u2014 this is a clear reference to Rambler, where Sysoev was employed. The slide acknowledges 'one core developer' (Sysoev), a 'variety of 3rd party modules,' development starting spring 2002, version 0.1.0 released October 2004, and current version 0.9.5. The reference to building nginx for a 'Russian search engine/portal' while the deck simultaneously makes no mention of Rambler or any employment relationship is notable \u2014 the deck describes the product's Rambler origins without acknowledging any IP obligations.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:02:31",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 p.8, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9906,
+      "finding_type": "document",
+      "summary": "2011 pitch deck market data: nginx held 15.90% of top 1,000 sites, 6.42% of top 1M sites, 7.65% of 298M total web sites; named users include Facebook, Groupon, Hulu, Dropbox, WordPress, Yandex",
+      "detail": "Market share slide (p.5) presents: nginx at 15.90% of top 1,000 sites, 6.42% of top 1,000,000 sites, 7.65% of 298,002,705 total web sites. Pie chart shows Apache at 66%, Microsoft at 16%, Google at 9%, nginx at 2%, Other at 9% (overall market). A growth chart shows busiest sites using nginx growing from ~30,000 (Mar-09) to ~100,000 (Mar-12) on a steep upward trajectory. Who use nginx slide (p.6) names: Facebook, Groupon, Hulu, Dropbox, WordPress.com, SourceForge.net, Letitbit.net, TechCrunch.com, Yandex.ru. Competitors/alternatives slide (p.7): apache, apache traffic server, varnish, tornado, haproxy, lighttpd. Financial projections slide (p.19): targets 10% of top 1,000,000 sites within next 18 months.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:02:47",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 pp.5-7,19, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9907,
+      "finding_type": "intelligence",
+      "summary": "2011 pitch deck open-source-to-commercial strategy: keep open source development, grow community for brand/adoption, monetize through paid services, partnerships, certifications, and proprietary features",
+      "detail": "The deck articulates a classic open-core business model. Slide 9 (what is a team to do): keep open source nginx development, support/grow user community, with net result of promotion by word of mouth, nginx brand development, early adoption, additional source of interesting ideas. Slide 10 (commercial products): paid services and products, key accounts need featured and predictable product development and support, partnerships (3rd party products featuring nginx, professional services, certifications). Slide 4 (why nginx): speed, scalability, reliability, efficiency, simplicity. Slide 3 (nginx is): compact efficient high-performance web server, accelerated frontend for large web sites, web and mail hosting, content distribution networks, trusted software beyond many successful Internet companies. The strategy explicitly separates open source (community/brand) from commercial (paid support/features) \u2014 the boundary that later became the NGINX Plus product line.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 19:03:23",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court Exhibit A, Doc 141-1 pp.3-4,9-10, Lynwood v. Konovalov 3:20-cv-03778-MMC N.D.Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9941,
+      "finding_type": "relationship",
+      "summary": "Lynwood's RFPs identify 80+ named individuals and target a sophisticated pre-2012 commercialization network involving Cooley LLP, Bob Ippolito, Leonard Grayver, Alexander Korotkov, the Lars Group (larsgroup.ru), and investors from Runa Capital, EVentures, Greycroft, BV Capital, Goldman Sachs, and others",
+      "detail": "The definitions section names 80+ 'Identified Individuals' \u2014 Russian developers, executives, and associates. Key non-parties targeted in discovery include: Leon Zilber (Cooley LLP, leon.zilber@gmail.com / lzilber@cooley.com), Leonard Grayver (Grayver Law Group, lgrayver@gwtllp.com), Bob Ippolito (bob@redivi.com), Alexander Korotkov (pre-2012 commercialization agent), Babak Yaghmaie and Maureen O'Boyle (Cooley), Olga Prutkovskaya and Arthur Akopyan (Globtechfund), Kirill Sheynkman (sheynkman@greycroft.vc), Thomas Gieselmann, Charmaine Lee, Mathias Schilling (BV Capital), Serguei Beloussov (sb@acronis.com), Anton Klyachin (Salomons), and the Lars Group (Svetlana Belikina, Lyudmila Kim at larsgroup.ru). Investors defined include Runa Capital, EVentures, Greycroft, MSD Capital, Michael Dell, New Enterprise Associates, Aaron Levie, Index Ventures, Goldman Sachs, Infinity Ventures, Telstra Ventures, Thomas Gieselmann, Kirill Sheynkman, and Valhalla Partners.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:07:05",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Doc 103-2, Definitions sections (all four RFPs), Requests 155-172 (F5), 81-89 (Alexeev/Sysoev)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9953,
+      "finding_type": "document",
+      "summary": "Lynwood demanded complete NGINX development timeline: all source code, commits, authors, server locations, and IP addresses for every device used to develop NGINX from 2001-2020 \u2014 the core of the IP provenance dispute",
+      "detail": "The code provenance requests are among the most technically demanding in the filing. F5 RFP requests 108-109 demand documents identifying 'the creation date and time for each version, modification, commit or release' of F5 NGINX Products and NGINX Plus, including the author(s). Request 110 demands identification of 'any and all authors of any F5 NGINX Products.' Requests 123-126 demand production of the actual source code and executables for NGINX Open Source, NGINX Plus, Pre-Merger Commercial Offerings, and NGINX Documentation. Requests 142-149 demand the same from Sysoev. F5 RFP requests 161-165 probe the physical/digital infrastructure: all domains, internet addresses, server names, databases, storage devices, and hosted locations containing any NGINX software from January 2001 to December 2012, including IP addresses and physical locations. Request 163 specifically targets 'the dates, and times of day, and at what locations, and with what electronic devices, and with what resources' Sysoev or former Rambler employees allegedly developed NGINX. Sysoev RFP request 168 demands IP addresses of all development servers from January 2001 through December 31, 2011. The time split \u2014 pre-2012 vs post-2012 \u2014 is deliberate and maps to the period when Sysoev was a Rambler employee.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:08:58",
+      "target_name": "NGINX Inc",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 103-2, F5 RFP Requests 108-110, 123-126, 142-149, 161-165, Sysoev RFP Requests 67-70, 94, 168",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2011-05-04",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Four NGINX entities found in Delaware registry: NGINX SOFTWARE INC (DE #4978109, inc. 2011-05-04), BV NGINX LLC (DE #5019438, inc. 2011-08-02), NGINX INC (DE #5021656, inc. 2011-08-08), SG NGINX HOLDINGS LLC (DE #7070725, inc. 2018-09-24)",
+      "confidence": "confirmed",
+      "id": 9819
+    }
+  ]
+}

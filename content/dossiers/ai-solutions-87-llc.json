@@ -5,17 +5,17 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.965693",
+  "generated_at": "2026-05-07T23:07:36.350609",
   "last_updated": "2026-03-05T04:19:25",
   "stats": {
     "total_findings": 8,
     "total_connections": 5,
     "total_entities": 0,
     "finding_types": {
+      "relationship": 2,
       "financial": 2,
       "identity": 2,
-      "document": 2,
-      "relationship": 2
+      "document": 2
     },
     "connection_types": {
       "corporate": 5
@@ -23,6 +23,31 @@
     "last_updated": "2026-03-05T04:19:25"
   },
   "findings": [
+    {
+      "id": 5058,
+      "finding_type": "relationship",
+      "summary": "AI Solutions 87 shell network mapped: Behm (West Bend WI) operates AI Solutions 87 (ICE skip-tracing, NAICS 561611). Same NAICS 561611 is primary for Cyber Intel Service LLC (Derek Faircloth, Melbourne FL, CAGE 9JLR6). CIS Labs / Cyber Intel Service is parent of SDNexus DataOps LLC (WI S161072). DC Gravity LLC (WI D082686) formed one day earlier. All entities cluster around investigation/surveillance AI with SDVOSB status.",
+      "detail": "Entity ecosystem: (1) AI Solutions 87 LLC - FL L19000077469, Greg Behm, CAGE 8DQH0, HQ 4067 Sleeping Dragon Rd West Bend WI. (2) Cyber Intel Service LLC - FL L23000354944, Derek Faircloth, CAGE 9JLR6 + 9W7T7, SDVOSB, IC/law enforcement veterans, builds surveillance drones. (3) CIS Labs - subsidiary branding of Cyber Intel Service, parent of SDNexus. (4) SDNexus DataOps LLC - WI S161072, formed 2025-05-28. (5) DC Gravity LLC - WI D082686, formed 2025-05-27. Common thread: NAICS 561611, SDVOSB, AI/surveillance. Open question: Behm-Faircloth business relationship.",
+      "source_datasets": [
+        "sam_gov"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-28",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:19:25",
+      "target_name": "AI Solutions 87 LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov CAGE 8DQH0 and 9JLR6; cyberintelservice.com; cislabs.org; sdnexus.app",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4610,
       "finding_type": "financial",
@@ -219,31 +244,6 @@
           "assessment": null
         }
       ]
-    },
-    {
-      "id": 5058,
-      "finding_type": "relationship",
-      "summary": "AI Solutions 87 shell network mapped: Behm (West Bend WI) operates AI Solutions 87 (ICE skip-tracing, NAICS 561611). Same NAICS 561611 is primary for Cyber Intel Service LLC (Derek Faircloth, Melbourne FL, CAGE 9JLR6). CIS Labs / Cyber Intel Service is parent of SDNexus DataOps LLC (WI S161072). DC Gravity LLC (WI D082686) formed one day earlier. All entities cluster around investigation/surveillance AI with SDVOSB status.",
-      "detail": "Entity ecosystem: (1) AI Solutions 87 LLC - FL L19000077469, Greg Behm, CAGE 8DQH0, HQ 4067 Sleeping Dragon Rd West Bend WI. (2) Cyber Intel Service LLC - FL L23000354944, Derek Faircloth, CAGE 9JLR6 + 9W7T7, SDVOSB, IC/law enforcement veterans, builds surveillance drones. (3) CIS Labs - subsidiary branding of Cyber Intel Service, parent of SDNexus. (4) SDNexus DataOps LLC - WI S161072, formed 2025-05-28. (5) DC Gravity LLC - WI D082686, formed 2025-05-27. Common thread: NAICS 561611, SDVOSB, AI/surveillance. Open question: Behm-Faircloth business relationship.",
-      "source_datasets": [
-        "sam_gov"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 04:19:25",
-      "target_name": "AI Solutions 87 LLC",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SAM.gov CAGE 8DQH0 and 9JLR6; cyberintelservice.com; cislabs.org; sdnexus.app",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
     }
   ],
   "connections": [
@@ -389,7 +389,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-05-28",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "AI Solutions 87 shell network mapped: Behm (West Bend WI) operates AI Solutions 87 (ICE skip-tracing, NAICS 561611). Same NAICS 561611 is primary for Cyber Intel Service LLC (Derek Faircloth, Melbourne FL, CAGE 9JLR6). CIS Labs / Cyber Intel Service is parent of SDNexus DataOps LLC (WI S161072). DC Gravity LLC (WI D082686) formed one day earlier. All entities cluster around investigation/surveillance AI with SDVOSB status.",
+      "confidence": "medium",
+      "id": 5058
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4612,
@@ -480,75 +489,5 @@
       "complexity-as-credential",
       "enabler-gradient"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "AI Solutions 87 LLC",
-      "connections": [
-        {
-          "target": "Fraud Inc",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SAM:70CDCR26D00000006",
-          "description": "Both awarded ICE skip tracing IDIQs under same solicitation 26-SOL-DCR01, same date Dec 16 2025, same 51 offers, same approving official SWRAY7012, same contracting office 70CDCR"
-        },
-        {
-          "target": "Response AI Solutions LLC",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SAM:70CDCR26FR0000015",
-          "description": "Both awarded ICE skip tracing contracts Dec 16 2025 under solicitation 26-SOL-DCR01. Response AI also holds WEXMAC/TITUS task orders via Navy IDIQ N0002325D0075"
-        },
-        {
-          "target": "Gregory P Behm",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "FL Sunbiz L19000077469",
-          "description": "Behm is founder, CEO, and principal of AI Solutions 87 LLC (FL LLC formed Mar 2019, WI LLC formed Jan 2025)"
-        },
-        {
-          "target": "SDNexus DataOps LLC",
-          "type": "corporate",
-          "strength": 0.2,
-          "evidence_ref": "WI DFI A114809",
-          "description": "Both WI LLCs reportedly sharing same address at 4067 Sleeping Dragon Rd, West Bend WI. SDNexus formed May 28 2025, AI Solutions 87 WI filing Jan 8 2025."
-        },
-        {
-          "target": "DC Gravity LLC",
-          "type": "corporate",
-          "strength": 0.2,
-          "evidence_ref": "WI DFI A114809",
-          "description": "Both WI LLCs reportedly sharing same address at 4067 Sleeping Dragon Rd, West Bend WI. DC Gravity formed May 27 2025, AI Solutions 87 WI filing Jan 8 2025."
-        }
-      ],
-      "secondHop": {
-        "Fraud Inc": [
-          {
-            "target": "Response AI Solutions LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both awarded ICE skip tracing contracts under solicitation 26-SOL-DCR01, Dec 16 2025. Both self-certified small disadvantaged businesses from residential addresses"
-          }
-        ],
-        "Response AI Solutions LLC": [
-          {
-            "target": "ICE Enforcement and Removals",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Response AI Solutions received .5M task order from ICE ERO for 'surge law enforcement' in St. Paul via Navy WEXMAC vehicle, plus .7M DoD wrap-around in Chicago and .7M border storage"
-          }
-        ],
-        "DC Gravity LLC": [
-          {
-            "target": "SDNexus DataOps LLC",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Both WI LLCs formed on consecutive days (DC Gravity May 27, SDNexus May 28, 2025). Both reportedly share 4067 Sleeping Dragon Rd address with AI Solutions 87 LLC. Neither has federal contracts, web presence, or corporate registrations in other states."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

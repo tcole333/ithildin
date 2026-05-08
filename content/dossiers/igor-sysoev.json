@@ -1,0 +1,204 @@
+{
+  "name": "Igor Sysoev",
+  "slug": "igor-sysoev",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.428099",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 1,
+    "total_entities": 1,
+    "finding_types": {
+      "intelligence": 2,
+      "negative_result": 1,
+      "financial": 1,
+      "legal": 1
+    },
+    "connection_types": {
+      "corporate": 1
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9966,
+      "finding_type": "intelligence",
+      "summary": "Sysoev silence period 2012-2017: 11 commits over 5 years vs 281 in 2011 alone -- transition from developer to figurehead at corporate formation",
+      "detail": "Igor Sysoev's commit history shows a dramatic and permanent discontinuity in 2011-2012 coinciding exactly with NGINX Inc formation: 281 commits in 2011 (pre-departure) -> 8 commits in 2012 -> 0 in 2013 -> 0 in 2014 -> 1 in 2015 -> 2 in 2016 -> 0 in 2017. Total 5-year output: 11 commits. He remained CTO of NGINX Inc and later F5 until 2022 but contributed no meaningful code. This is the pattern of a founder who became an executive/figurehead post-commercialization -- or who was prohibited from or uninterested in contributing once the financial structure was in place. Sysoev's BVI company (Hogwarts United S.A., Pandora Papers) and his departure from coding parallel the company formation timeline.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2011-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:24:52",
+      "target_name": "Igor Sysoev",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-34,finding:9855,finding:9868",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9982,
+      "finding_type": "intelligence",
+      "summary": "Sysoev silence period 2012-2017: 11 commits over 5 years vs 281 in 2011 alone -- transition from developer to figurehead at corporate formation",
+      "detail": "Igor Sysoev's commit history shows a dramatic and permanent discontinuity in 2011-2012 coinciding exactly with NGINX Inc formation: 281 commits in 2011 (pre-departure) -> 8 commits in 2012 -> 0 in 2013 -> 0 in 2014 -> 1 in 2015 -> 2 in 2016 -> 0 in 2017. Total 5-year output: 11 commits. He remained CTO of NGINX Inc and later F5 until 2022 but contributed no meaningful code. Sysoev's BVI company (Hogwarts United S.A., Pandora Papers) and departure from coding parallel the company formation timeline.",
+      "source_datasets": "analysis_run",
+      "confidence": "high",
+      "date_of_event": "2011-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "target_name": "Igor Sysoev",
+      "profile_id": "nginx",
+      "evidence": []
+    },
+    {
+      "id": 9824,
+      "finding_type": "negative_result",
+      "summary": "Igor Sysoev not found as corporate officer in any US or global OpenCorporates records. The nginx creator was not a formal officer of NGINX Software Inc or NGINX Inc in Delaware, consistent with his role as Moscow-based CTO rather than US corporate officer.",
+      "detail": "OpenCorporates officer search for 'Igor Sysoev' returned 0 results. This is significant for the Russian influence question: Sysoev created nginx in 2002 while at Rambler, co-founded NGINX Inc to commercialize it, and served as CTO, but the US corporate filings show American and British officers managing the entities. His absence from corporate records suggests the US operation was deliberately structured with non-Russian officers, though this does not preclude informal influence.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:30:46",
+      "target_name": "Igor Sysoev",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenCorporates:officer_search/Igor_Sysoev",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9868,
+      "finding_type": "financial",
+      "summary": "Igor Sysoev is Ultimate Beneficial Owner of HOGWARTS UNITED S.A., a BVI company from Pandora Papers",
+      "detail": "ICIJ Offshore Leaks Database (Pandora Papers, Alcogal provider data through 2017) reveals Igor Sysoev as Ultimate Beneficial Owner of HOGWARTS UNITED S.A. (IBC RUC 555535), a British Virgin Islands Business Corporation incorporated 08-AUG-2003, status: Active. Registered at Yamraj Building, Market Square, Road Town, Tortola, BVI. Co-UBO is OLEG STRAZDING (Russian Federation). Sysoev address: UL. DENISE DAVYDOVA, 7-105 (Russia). The BVI entity predates NGINX Inc (2011) by 8 years.",
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:14:26",
+      "target_name": "Igor Sysoev",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:240029872",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:240054998",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9936,
+      "finding_type": "legal",
+      "summary": "Lynwood's RFP to Sysoev demands documents about concealing pre-2012 NGINX commercialization from Rambler, development using Rambler resources/servers, and his claim to be primary author of NGINX Open Source",
+      "detail": "Sysoev RFP is the most revealing about Lynwood's IP theft theory. Request 1-7 target Sysoev's Rambler employment terms, duties, compensation, work product policies, and confidentiality agreements. Requests 8-10 demand communications about Rambler servers hosting NGINX. Request 25 explicitly asks about 'efforts by you and/or any of the Co-Defendants to conceal the Pre-2012 NGINX Commercialization Efforts from Rambler.' Request 71 targets 'your claim that you are the primary author of NGINX Open Source.' Request 91 demands identification of all property removed from Rambler premises (Jan 2010-Dec 2013). Request 94 demands documents showing 'the dates, and times of day, and at what locations, and with what electronic devices, and with what resources, and with what other individuals or personnel, you allegedly developed NGINX Open Source, NGINX Plus and/or any Pre-Merger NGINX Commercial Offerings while you were employed by Rambler.' Request 143 asks about communications between Sysoev and Smirnoff concerning 'the destruction of computer servers located at Rambler facilities that contained NGINX Open Source, NGINX Documentation and/or related work product of Sysoev and others.' Request 160 demands email from igor@sysoev.ru and is@rambler-co.ru.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 21:06:31",
+      "target_name": "Igor Sysoev",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Doc 103-2 (Sysoev RFP), Requests 1-10, 25-26, 71, 73, 91, 94, 143, 160",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5103,
+      "person_a": "Igor Sysoev",
+      "person_b": "Oleg Strazding",
+      "relationship_type": "corporate",
+      "description": "Co-Ultimate Beneficial Owners of HOGWARTS UNITED S.A. (BVI, Pandora Papers, incorp 08-AUG-2003)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:16:40",
+      "profile_id": "nginx",
+      "other_person": "Oleg Strazding",
+      "other_person_slug": "oleg-strazding",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ:node:240029872",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "Ultimate Beneficial Owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "icij",
+      "entity_id": 3414,
+      "entity_name": "Hogwarts United S.A.",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2011-12-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Sysoev silence period 2012-2017: 11 commits over 5 years vs 281 in 2011 alone -- transition from developer to figurehead at corporate formation",
+      "confidence": "medium",
+      "id": 9966
+    },
+    {
+      "date": "2011-12-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Sysoev silence period 2012-2017: 11 commits over 5 years vs 281 in 2011 alone -- transition from developer to figurehead at corporate formation",
+      "confidence": "high",
+      "id": 9982
+    }
+  ]
+}

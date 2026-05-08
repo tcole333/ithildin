@@ -1,0 +1,234 @@
+{
+  "name": "Borr Drilling Ltd",
+  "slug": "borr-drilling-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.332902",
+  "last_updated": "2026-03-29T20:30:02",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 4,
+      "financial": 5
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-29T20:30:02"
+  },
+  "findings": [
+    {
+      "id": 8636,
+      "finding_type": "corporate",
+      "summary": "Borr Drilling Limited is incorporated in Bermuda as an exempted company under the Companies Act 1981; claims exemption from Bermuda Beneficial Ownership Act 2025 on the basis of NYSE listing",
+      "detail": "From 424B5 prospectus: 'The Beneficial Ownership Act 2025 (the BO Act) came into force on November 3, 2025 requiring certain legal persons in Bermuda to identify beneficial owners...For so long as our shares are listed on an appointed stock exchange (which includes the NYSE) we are exempted from the requirements of the BO Act, save for the requirement to confirm our exempted status with the Registrar of Companies in Bermuda.'",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2016-08-08",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8635,
+      "finding_type": "financial",
+      "summary": "DNB holds a dual role as Borr Drilling's lead equity underwriter and share lending counterparty (1.7M shares lent since 2023) \u2014 creating a structural conflict of interest in equity deal execution",
+      "detail": "The share lending agreement with DNB (disclosed in Note 23 of the 20-F, 1.7M shares outstanding as of Dec 31, 2025) enables DNB to support short selling or hedging activities while simultaneously acting as joint global coordinator on both 2025 equity offerings. This is a common but structurally conflicted arrangement in Nordic shipping/energy companies.",
+      "source_datasets": "edgar_20f_fy2025",
+      "confidence": "medium",
+      "date_of_event": "2023-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8632,
+      "finding_type": "financial",
+      "summary": "Borr Drilling completed two dilutive equity offerings in 2025: 50M shares at $2.05 in July ($102.5M) and 21M shares at $4.00 in December ($84M) \u2014 total 71M new shares raising $186.5M gross, representing ~23% dilution from pre-July 2025 share count",
+      "detail": "July 2025 offering (424B5 dated July 3): 50M shares at $2.05; required special general meeting Aug 6, 2025 to authorize additional shares; for general corporate purposes. December 2025 offering (424B5 dated Dec 9): 21M shares at $4.00; for Noble Corp acquisition.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2025-12-09",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8634,
+      "finding_type": "corporate",
+      "summary": "Borr Drilling listed on Euronext Growth Oslo on December 19, 2025 and plans full up-listing to Euronext Oslo B\u00f8rs in H1 2026 \u2014 likely catalyst for new European institutional equity raise",
+      "detail": "From 20-F: 'The Company expects to carry out a full up-listing on Euronext Oslo B\u00f8rs (Oslo Stock Exchange) within the first half of 2026.' The Oslo listing coincided with the December 2025 equity offering, and the Nordic-heavy underwriter roster (DNB Carnegie, Fearnley, Pareto) suggests deliberate access to Norwegian institutional and retail investors.",
+      "source_datasets": "edgar_20f_fy2025",
+      "confidence": "high",
+      "date_of_event": "2025-12-19",
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8628,
+      "finding_type": "financial",
+      "summary": "Borr Drilling faces a $1,258.6M debt maturity wall in 2028 \u2014 comprising $1,178.6M in 2028 Notes and $239.4M in Convertible Bonds due 2028, against operating cash flow of $251.9M/year and $379.7M cash on hand",
+      "detail": "Total debt $2,210M gross. Debt maturity schedule shows $143.6M in 2026, $143.6M in 2027, $1,258.6M in 2028, $42.6M in 2029, $621.6M in 2030. Interest payments consume $205.1M/year, leaving ~$47M net annual free cash after debt service. At this run-rate, organic retirement of the 2028 wall is not feasible without refinancing or equity dilution.",
+      "source_datasets": "edgar_20f_fy2025",
+      "confidence": "high",
+      "date_of_event": "2025-12-31",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8637,
+      "finding_type": "corporate",
+      "summary": "Fourteen Borr Drilling insiders filed Form 3 initial ownership statements on 2026-03-17 and 2026-03-18, then amended all of them on 2026-03-26 \u2014 the batch filing pattern and simultaneous amendment on 20-F filing date suggests a compliance trigger event, possibly the Oslo Euronext listing (Dec 2025) or preparation for full Oslo B\u00f8rs listing",
+      "detail": "The filing sequence is anomalous: all insiders appear to have filed forms on the same days, then amended them on the 20-F filing date. Drew Holdings filed a corrective SC 13G in Feb 2024 with similar 'inadvertent failure to file' language. A compliance-driven batch correction is the most likely explanation.",
+      "source_datasets": "edgar_form3",
+      "confidence": "medium",
+      "date_of_event": "2026-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8626,
+      "finding_type": "financial",
+      "summary": "Related Parties (Granular Capital + Drew Holdings + Magni Partners) collectively hold 75,758,028 shares (~24.7%) of Borr Drilling's 307,701,075 outstanding shares as of 2026-03-17",
+      "detail": "Quoted directly from 20-F risk factor section: 'the Related Parties (as defined below) collectively owned 75,758,028 of our common shares or approximately 24.7% of our total outstanding common shares.' Related Parties defined as Granular Capital Ltd, Drew Holdings Ltd and affiliates thereof including Magni Partners.",
+      "source_datasets": "edgar_20f_fy2025",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8629,
+      "finding_type": "corporate",
+      "summary": "Borr Drilling announced acquisition of 5 jack-up rigs from Fontis Finance Ltd for $287M through new 50/50 JV 'BC Ventures Limited' \u2014 financed by $237M non-recourse seller credit from Fontis (2.5yr, first lien on rigs) plus $25M cash from Borr",
+      "detail": "Press release in 6-K filed 2026-03-24. Five rigs: 2x Friede & Goldman JU-2000E + 3x LeTourneau Super 116-C, currently in Mexico. 50/50 JV with 'long-term well construction partner in Mexico' (likely CME). Expected close Q3 2026. CEO Bruno Morand quoted. Fontis Finance Ltd identity unknown.",
+      "source_datasets": "edgar_6k_20260324",
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8631,
+      "finding_type": "financial",
+      "summary": "Director Jeffrey Currie purchased 250,000 Borr Drilling shares at $5.31 in open-market transaction on 2026-03-24, bringing his total to 354,423 shares",
+      "detail": "Form 4 filed 2026-03-26 (accession 0001628280-26-021241). Transaction code P (purchase). This is Currie's second directorial action \u2014 he joined the Board Oct 2023 and also serves as Chief Strategy Officer, Energy Pathways at Carlyle Group.",
+      "source_datasets": "edgar_form4",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Borr Drilling Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2016-08-08",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Borr Drilling Limited is incorporated in Bermuda as an exempted company under the Companies Act 1981; claims exemption from Bermuda Beneficial Ownership Act 2025 on the basis of NYSE listing",
+      "confidence": "high",
+      "id": 8636
+    },
+    {
+      "date": "2023-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DNB holds a dual role as Borr Drilling's lead equity underwriter and share lending counterparty (1.7M shares lent since 2023) \u2014 creating a structural conflict of interest in equity deal execution",
+      "confidence": "medium",
+      "id": 8635
+    },
+    {
+      "date": "2025-12-09",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Borr Drilling completed two dilutive equity offerings in 2025: 50M shares at $2.05 in July ($102.5M) and 21M shares at $4.00 in December ($84M) \u2014 total 71M new shares raising $186.5M gross, representing ~23% dilution from pre-July 2025 share count",
+      "confidence": "high",
+      "id": 8632
+    },
+    {
+      "date": "2025-12-19",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Borr Drilling listed on Euronext Growth Oslo on December 19, 2025 and plans full up-listing to Euronext Oslo B\u00f8rs in H1 2026 \u2014 likely catalyst for new European institutional equity raise",
+      "confidence": "high",
+      "id": 8634
+    },
+    {
+      "date": "2025-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Borr Drilling faces a $1,258.6M debt maturity wall in 2028 \u2014 comprising $1,178.6M in 2028 Notes and $239.4M in Convertible Bonds due 2028, against operating cash flow of $251.9M/year and $379.7M cash on hand",
+      "confidence": "high",
+      "id": 8628
+    },
+    {
+      "date": "2026-01-01",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Fourteen Borr Drilling insiders filed Form 3 initial ownership statements on 2026-03-17 and 2026-03-18, then amended all of them on 2026-03-26 \u2014 the batch filing pattern and simultaneous amendment on 20-F filing date suggests a compliance trigger event, possibly the Oslo Euronext listing (Dec 2025) or preparation for full Oslo B\u00f8rs listing",
+      "confidence": "medium",
+      "id": 8637
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Related Parties (Granular Capital + Drew Holdings + Magni Partners) collectively hold 75,758,028 shares (~24.7%) of Borr Drilling's 307,701,075 outstanding shares as of 2026-03-17",
+      "confidence": "high",
+      "id": 8626
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Borr Drilling announced acquisition of 5 jack-up rigs from Fontis Finance Ltd for $287M through new 50/50 JV 'BC Ventures Limited' \u2014 financed by $237M non-recourse seller credit from Fontis (2.5yr, first lien on rigs) plus $25M cash from Borr",
+      "confidence": "high",
+      "id": 8629
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Director Jeffrey Currie purchased 250,000 Borr Drilling shares at $5.31 in open-market transaction on 2026-03-24, bringing his total to 354,423 shares",
+      "confidence": "high",
+      "id": 8631
+    }
+  ]
+}

@@ -6,29 +6,62 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.856806",
-  "last_updated": "2026-03-10T00:12:45",
+  "generated_at": "2026-05-07T23:07:36.129350",
+  "last_updated": "2026-03-23T18:47:59",
   "stats": {
-    "total_findings": 18,
-    "total_connections": 15,
+    "total_findings": 25,
+    "total_connections": 22,
     "total_entities": 6,
     "finding_types": {
-      "intelligence": 7,
-      "financial": 9,
+      "financial": 13,
+      "intelligence": 9,
       "identity": 1,
-      "relationship": 1
+      "relationship": 2
     },
     "connection_types": {
-      "financial": 5,
+      "financial": 7,
       "political": 3,
-      "corporate": 4,
+      "corporate": 5,
       "advisory": 1,
-      "employment": 1,
+      "controls": 3,
+      "employment": 2,
       "social": 1
     },
-    "last_updated": "2026-03-10T00:12:45"
+    "last_updated": "2026-03-23T18:47:59"
   },
   "findings": [
+    {
+      "id": 6467,
+      "finding_type": "financial",
+      "summary": "FEC donation record: Gracias donated ,000,000 to America PAC (Musk's super PAC) on 2024-06-28 (employer: Valor Equity Partners). Additionally donated ,000,000 to Keystone Renewal PAC via Antonio J. Gracias Revocable Trust on 2024-09-06. Donated ,000 total to Polaris National Security PAC (Oct and Nov 2024). Donated ,000,000 to MAGA INC on 2025-01-13. Also donated ,300 to Schiff for Senate and ,300 to Himes for Congress (Democratic candidates) in 2024 \u2014 bipartisan giving pattern. Total large donations 2024-2025: approx .1M.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-06-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:56:31",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=w2b-fec-gracias.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=w2b-fec-valor.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6412,
       "finding_type": "intelligence",
@@ -55,6 +88,156 @@
       ]
     },
     {
+      "id": 6468,
+      "finding_type": "intelligence",
+      "summary": "Wisconsin rally voter fraud claims and TRO issue: Gracias appeared at Green Bay Wisconsin rally March 30 2025 (ahead of state Supreme Court special election) alongside Musk. Made claims that 5+ million noncitizens received SSNs via EBE program and were on voter rolls. TRO issued March 20 blocked DOGE SSA data access \u2014 10 days before rally. On April 2 Gracias elaborated on Fox and Friends; April 4 on All-In podcast claimed 'well over a thousand voted' and his team had referred 57 cases for DOJ prosecution. Government lawyers stated Gracias 'never had access to SSA data or personally identifiable information.' Analysis likely occurred before March 20 TRO, raising question of whether data was retained post-TRO.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:56:43",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR:2025-04-11:doge-voter-fraud; NBC_News:gracias-doge-departure",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6451,
+      "finding_type": "intelligence",
+      "summary": "Antonio Gracias (entity #913), DOGE SSA staffer, publicly used SSA data to push voter fraud narratives. On April 2 2025, appeared on Fox and Friends claiming DOGE found 5+ million noncitizens with Social Security numbers, with thousands on voter rolls who voted, using data obtained via court-restricted access. He later downgraded the claim to only 57 cases referred for prosecution. He is one of two SSA DOGE staffers implicated in the voter data agreement/Hatch Act referral.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-04-02",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:54:37",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "npr:doge-ssa-voter-fraud-2025-04-11; DOJ-SSA-Notice-of-Corrections-Jan-16-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6482,
+      "finding_type": "financial",
+      "summary": "Gracias negotiated Lykos Therapeutics Series B takeover in January 2025 \u2014 contemporaneously with joining DOGE \u2014 while DOGE had embedded staff at FDA, which has jurisdiction over Lykos MDMA therapy NDA. Gracias Family Foundation led M Series B first close May 30 2025. Ethics expert stated: 'You can't be greasing the wheels and then say, OK, now I'm going to quit and go pursue that approval.'",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:10:50",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://evrimagaci.org/gpt/antonio-gracias-seizes-control-of-lykos-therapeutics-495243",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6492,
+      "finding_type": "intelligence",
+      "summary": "DOGE-Lykos/FDA conflict timeline summary: Gracias donated  to MAPS (2020),  to Harvard psychedelics research (2023). Met Rick Doblin at Burning Man (Summer 2024, months after August 2024 FDA rejection). Doblin contacted Gracias about takeover weeks after Burning Man. January 2025: Gracias and Christopher Hohn began Lykos recapitalization planning, just before Gracias formally joined DOGE. DOGE had embedded staff at FDA. May 30 2025:  Series B first close announced (Gracias Family Foundation lead). Late August 2025: Company rebranded as Resilient Pharmaceuticals. July 4 2025: Gracias resigned from DOGE. Gracias was not formally at DOGE at time of Series B close. DOGE and Lykos involvement overlapped by approximately Jan-May 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:11:57",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://evrimagaci.org/gpt/antonio-gracias-seizes-control-of-lykos-therapeutics-495243",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5471,
+      "finding_type": "financial",
+      "summary": "Antonio Gracias (CEO Valor Equity Partners, long-time Musk associate) worked in DOGE while simultaneously managing 17.5B in assets including hundreds of millions from public employee pension funds. AFL-CIO report (June 24, 2025) questioned fiduciary responsibility; AFT sent letters to 9 pension funds re ~1.8B invested with Valor. Jon Koval (VP) and Payton Rehling (VP Data Engineer) also at DOGE while employed by Valor. Gracias resigned DOGE July 4, 2025 after AFL-CIO due diligence pressure.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:48",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://prospect.org/2025/07/14/2025-07-14-afl-cio-report-is-doges-antonio-gracias-mishandling-retiree-investments/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6486,
+      "finding_type": "financial",
+      "summary": "AFT President Randi Weingarten sent letter July 2025 to nine public pension funds with .8 billion invested in Valor Equity Partners: CalPERS, CalSTRS, NYSTRS, Teachers Retirement System of City of New York, Teachers Retirement System of State of Illinois, and four others. AFT alleged Gracias and Valor employees Jon Koval and Payton Rehling abdicated fiduciary duties by spending time at DOGE. Letter invoked key person provisions in LP agreements, potentially entitling funds to cash payouts. After letter, Gracias resigned DOGE role July 4 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:11:17",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.aft.org/press-release/afts-weingarten-reacts-news-antonio-gracias-departure-doge",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4397,
       "finding_type": "financial",
       "summary": "Antonio Gracias (Valor Equity Partners, Tesla board 2007-2021) donated $1M to MAGA Inc Jan 2025, $1M to America PAC Jun 2024, $2M to Keystone Renewal PAC Sep 2024, $100K to Polaris National Security PAC Oct-Nov 2024. Also donated to bipartisan candidates including Schiff for Senate. Connected to Musk political network through Tesla board service and America PAC contributions.",
@@ -71,31 +254,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC individual contribution records for Antonio J. Gracias",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5471,
-      "finding_type": "financial",
-      "summary": "Antonio Gracias (CEO Valor Equity Partners, long-time Musk associate) worked in DOGE while simultaneously managing 17.5B in assets including hundreds of millions from public employee pension funds. AFL-CIO report (June 24, 2025) questioned fiduciary responsibility; AFT sent letters to 9 pension funds re ~1.8B invested with Valor. Jon Koval (VP) and Payton Rehling (VP Data Engineer) also at DOGE while employed by Valor. Gracias resigned DOGE July 4, 2025 after AFL-CIO due diligence pressure.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 22:30:48",
-      "target_name": "Antonio Gracias",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://prospect.org/2025/07/14/2025-07-14-afl-cio-report-is-doges-antonio-gracias-mishandling-retiree-investments/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -204,88 +362,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica DOGE Tracker",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6451,
-      "finding_type": "intelligence",
-      "summary": "Antonio Gracias (entity #913), DOGE SSA staffer, publicly used SSA data to push voter fraud narratives. On April 2 2025, appeared on Fox and Friends claiming DOGE found 5+ million noncitizens with Social Security numbers, with thousands on voter rolls who voted, using data obtained via court-restricted access. He later downgraded the claim to only 57 cases referred for prosecution. He is one of two SSA DOGE staffers implicated in the voter data agreement/Hatch Act referral.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:54:37",
-      "target_name": "Antonio Gracias",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "npr:doge-ssa-voter-fraud-2025-04-11; DOJ-SSA-Notice-of-Corrections-Jan-16-2026",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6467,
-      "finding_type": "financial",
-      "summary": "FEC donation record: Gracias donated ,000,000 to America PAC (Musk's super PAC) on 2024-06-28 (employer: Valor Equity Partners). Additionally donated ,000,000 to Keystone Renewal PAC via Antonio J. Gracias Revocable Trust on 2024-09-06. Donated ,000 total to Polaris National Security PAC (Oct and Nov 2024). Donated ,000,000 to MAGA INC on 2025-01-13. Also donated ,300 to Schiff for Senate and ,300 to Himes for Congress (Democratic candidates) in 2024 \u2014 bipartisan giving pattern. Total large donations 2024-2025: approx .1M.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:56:31",
-      "target_name": "Antonio Gracias",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.fec.gov/data/search/?q=w2b-fec-gracias.json",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "https://www.fec.gov/data/search/?q=w2b-fec-valor.json",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6468,
-      "finding_type": "intelligence",
-      "summary": "Wisconsin rally voter fraud claims and TRO issue: Gracias appeared at Green Bay Wisconsin rally March 30 2025 (ahead of state Supreme Court special election) alongside Musk. Made claims that 5+ million noncitizens received SSNs via EBE program and were on voter rolls. TRO issued March 20 blocked DOGE SSA data access \u2014 10 days before rally. On April 2 Gracias elaborated on Fox and Friends; April 4 on All-In podcast claimed 'well over a thousand voted' and his team had referred 57 cases for DOJ prosecution. Government lawyers stated Gracias 'never had access to SSA data or personally identifiable information.' Analysis likely occurred before March 20 TRO, raising question of whether data was retained post-TRO.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:56:43",
-      "target_name": "Antonio Gracias",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NPR:2025-04-11:doge-voter-fraud; NBC_News:gracias-doge-departure",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -402,31 +478,6 @@
       ]
     },
     {
-      "id": 6482,
-      "finding_type": "financial",
-      "summary": "Gracias negotiated Lykos Therapeutics Series B takeover in January 2025 \u2014 contemporaneously with joining DOGE \u2014 while DOGE had embedded staff at FDA, which has jurisdiction over Lykos MDMA therapy NDA. Gracias Family Foundation led M Series B first close May 30 2025. Ethics expert stated: 'You can't be greasing the wheels and then say, OK, now I'm going to quit and go pursue that approval.'",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-10 00:10:50",
-      "target_name": "Antonio Gracias",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://evrimagaci.org/gpt/antonio-gracias-seizes-control-of-lykos-therapeutics-495243",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6485,
       "finding_type": "relationship",
       "summary": "Gracias holds Director seat on Harmony Biosciences Holdings (NASDAQ: HRMY), a pharmaceutical company with multiple active FDA NDAs in 2025-2026 pipeline. Valor IV Pharma Holdings LLC (Valor subsidiary, EDGAR CIK 0001821186) holds 10%+ beneficial ownership stake per SC 13G/A filed November 2025. HRMY has WAKIX approved FDA products and five Phase 3 programs pending FDA action. This represents a second active FDA conflict beyond Lykos/Resilient.",
@@ -444,7 +495,14 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR CIK 0001495158 Form 4 filed 2025-05-16; CIK 0001821186 SCHEDULE 13G/A filed 2025-11-14",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1495158",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1821186",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -452,24 +510,49 @@
       ]
     },
     {
-      "id": 6486,
+      "id": 7188,
       "finding_type": "financial",
-      "summary": "AFT President Randi Weingarten sent letter July 2025 to nine public pension funds with .8 billion invested in Valor Equity Partners: CalPERS, CalSTRS, NYSTRS, Teachers Retirement System of City of New York, Teachers Retirement System of State of Illinois, and four others. AFT alleged Gracias and Valor employees Jon Koval and Payton Rehling abdicated fiduciary duties by spending time at DOGE. Letter invoked key person provisions in LP agreements, potentially entitling funds to cash payouts. After letter, Gracias resigned DOGE role July 4 2025.",
-      "detail": null,
+      "summary": "Gracias Family Foundation (EIN 853941297) holds $94.6M assets, granted $10M to Atreides Foundation Fund LP investment vehicle",
+      "detail": "Antonio J. Gracias Family Foundation (EIN 853941297, 500 W Madison St Ste 3700, Chicago IL 60661) established 2021. Officers: Antonio Gracias, Maria Gracias, James Star. 2021: revenue $165.4M, assets $167M. 2022: revenue $135M, assets $70.9M. 2023: revenue $4.9M, expenses $16.7M, assets $94.6M. 38 grants totaling $49.5M including $15M to Ortus Foundation (Sabrina Gracias-linked youth mental health nonprofit), $10M to Atreides Foundation Fund LP (a hedge fund investment vehicle, not a typical nonprofit), $9.2M to Harvard, $1.175M to Georgetown, $1.1M to University of Chicago.",
       "source_datasets": [
-        "web_search"
+        "990"
       ],
       "confidence": "high",
       "date_of_event": null,
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-10 00:11:17",
+      "created_at": "2026-03-23 18:44:52",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:853941297",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7189,
+      "finding_type": "relationship",
+      "summary": "Gracias is board director at Harmony Biosciences (HRMY) since Sept 2017, chairs Compensation Committee; Valor IV Pharma Holdings owns 6.6M shares (~11.6%)",
+      "detail": "Antonio Gracias serves as independent director of Harmony Biosciences Holdings Inc (NASDAQ: HRMY, CIK 1802665) since September 2017 and chairs the Compensation Committee. Valor IV Pharma Holdings LLC (CIK 1821186), through Valor Equity Partners fund structure, holds 6,618,033 shares of HRMY common stock as of August 28, 2025 (approximately 11.6% ownership). Valor Management LP sold 4,600,000 shares at $30.30/share on Nov 1-5, 2024 ($139.4M total). Juan Sabater is also a director linked to Valor entities. Gracias received 14,522 stock options at $34.23 exercise price on May 15, 2025 - during his active DOGE service period. HRMY is an FDA-regulated pharmaceutical company whose lead product WAKIX (pitolisant) requires ongoing FDA approval decisions.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:45:06",
       "target_name": "Antonio Gracias",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "https://www.aft.org/press-release/afts-weingarten-reacts-news-antonio-gracias-departure-doge",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1495158",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -477,10 +560,35 @@
       ]
     },
     {
-      "id": 6492,
-      "finding_type": "intelligence",
-      "summary": "DOGE-Lykos/FDA conflict timeline summary: Gracias donated  to MAPS (2020),  to Harvard psychedelics research (2023). Met Rick Doblin at Burning Man (Summer 2024, months after August 2024 FDA rejection). Doblin contacted Gracias about takeover weeks after Burning Man. January 2025: Gracias and Christopher Hohn began Lykos recapitalization planning, just before Gracias formally joined DOGE. DOGE had embedded staff at FDA. May 30 2025:  Series B first close announced (Gracias Family Foundation lead). Late August 2025: Company rebranded as Resilient Pharmaceuticals. July 4 2025: Gracias resigned from DOGE. Gracias was not formally at DOGE at time of Series B close. DOGE and Lykos involvement overlapped by approximately Jan-May 2025.",
-      "detail": null,
+      "id": 7190,
+      "finding_type": "financial",
+      "summary": "Gracias received HRMY stock options on May 15, 2025 while actively serving in DOGE at SSA (Feb-Jul 2025)",
+      "detail": "SEC Form 4 filed 2025-05-16 shows Antonio Gracias received 14,522 stock options in Harmony Biosciences (HRMY) at $34.23 exercise price on May 15, 2025, with expiration May 15, 2035. This occurred during his active DOGE tenure at SSA (approximately February to July 1, 2025). HRMY is an FDA-regulated pharmaceutical company. DOGE had embedded personnel at HHS and FDA during this same period. No OGE ethics agreement or financial disclosure has been publicly identified for Gracias's DOGE role.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:45:17",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1495158",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7192,
+      "finding_type": "financial",
+      "summary": "Gracias led $50M takeover of Lykos Therapeutics (MDMA therapy) in May 2025 while serving in DOGE; DOGE had staff at FDA",
+      "detail": "In May 2025, Antonio Gracias and British hedge fund billionaire Christopher Hohn led a $50M Series B funding round to take control of Lykos Therapeutics, a pharmaceutical company developing MDMA-assisted psychotherapy for PTSD. The FDA had rejected Lykos's MDMA therapy application in August 2024. Gracias met MAPS founder Rick Doblin at Burning Man in September 2024. By August 30, 2025, Gracias and Hohn assumed full control of Lykos with major leadership changes. This acquisition occurred during Gracias's active DOGE service (approximately Feb-Jul 2025). DOGE had embedded staff at HHS/FDA including access to payment and contracting systems. Ethics watchdogs POGO and CREW questioned whether former DOGE members should be seeking regulatory approval for companies they control. Lykos plans to resubmit FDA application.",
       "source_datasets": [
         "web_search"
       ],
@@ -488,13 +596,137 @@
       "date_of_event": null,
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-10 00:11:57",
+      "created_at": "2026-03-23 18:45:49",
       "target_name": "Antonio Gracias",
       "profile_id": "tech-right",
       "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://gizmodo.com/elon-musk-mdma-antonio-gracias-lykos-2000650994",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
         {
           "evidence_type": "file",
           "evidence_ref": "https://evrimagaci.org/gpt/antonio-gracias-seizes-control-of-lykos-therapeutics-495243",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.webpronews.com/elon-musk-ally-leads-mdma-therapy-push-for-ptsd-amid-fda-challenges/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7193,
+      "finding_type": "intelligence",
+      "summary": "Gracias DOGE tenure: volunteer at SSA Feb-Jul 2025, accessed SSA data, led immigration task force, referred 57 alleged voter fraud cases to DOJ",
+      "detail": "Antonio Gracias served as a high-ranking DOGE volunteer from approximately February 2025 to July 1, 2025, primarily embedded at SSA. He worked approximately 80 hours/week. Valor's private jet made 23 trips from Washington DC region Jan-Apr 2025 (40% of flights vs 8% prior year). He joined SSA alongside 8 other DOGE employees. SSA acting commissioner privately called them outsiders unfamiliar with nuances of SSA programs. Gracias led an immigration task force in coordination with DHS. He referred 57 alleged voter fraud cases to DOJ. He falsely claimed large numbers of immigrants were receiving Social Security cards and collecting benefits. He announced resignation July 4, 2025. No public OGE ethics agreement or financial disclosure identified.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:46:03",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nbcnews.com/politics/doge/high-ranking-doge-official-elon-musk-ally-antonio-gracias-left-governm-rcna220611",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://chicagomaroon.com/46790/news/uchicago-trustee-joins-doge-targets-social-security/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://prospect.org/2025/07/14/2025-07-14-afl-cio-report-is-doges-antonio-gracias-mishandling-retiree-investments/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7194,
+      "finding_type": "intelligence",
+      "summary": "FDA DOGE team lead identity not publicly disclosed; DOGE fired FDA employees reviewing Neuralink trials Feb 2025; DOGE accessed HHS payment systems Feb 5, 2025",
+      "detail": "The specific DOGE team lead at the FDA has not been publicly identified as of available reporting. However, DOGE operations at FDA included: (1) Feb 5, 2025 - DOGE gained access to HHS financial and CMS payment/contracting systems; (2) Feb 17, 2025 - DOGE agents fired FDA staff involved in ongoing clinical trials for Elon Musk's Neuralink; (3) DOGE cancelled 30 FDA leases claiming $30M savings; (4) FDA reinstated roughly a quarter of initial DOGE job cuts by July 2025; (5) DOGE directed significant staff reductions. Named DOGE staff with HHS access include Marko Elez (access to Medicare/Medicaid payment databases), Amy Gleason (acting DOGE administrator, HHS employee), Luke Farritor, Rachel Riley, Jeremy Lewin, and Clark Minor (NIH systems access). The lack of a publicly identified FDA DOGE lead is notable given the regulatory conflicts with Gracias's portfolio.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:46:17",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/fda-tech-officials-complied-with-doges-requests-for-data-the-staff-reductions-still-came/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/02/18/doge-fired-fda-employees-overseeing-elon-musk-neuralink/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/03/31/nx-s1-5345708/doge-data-access-labor-cfpb-hhs",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7196,
+      "finding_type": "financial",
+      "summary": "AFL-CIO report June 2025 found Valor's recent funds have below-median DPI ratios; Valor jet 40% DC flights Jan-Apr 2025 vs 8% prior year",
+      "detail": "The AFL-CIO published a report in June 2025 focused on Valor Equity Partners and DOGE. Key findings: (1) Many of Valor's more recent funds have not yet made any distributions and have below median performance on their distributions to paid-in capital (DPI) ratios; (2) Valor's private jet made 23 trips from Washington DC region between January and April 2025, representing 40% of all flights vs just 8% the prior year, raising concerns about divided attention from managing pension fund investments; (3) Gracias's DOGE work was described as potentially at odds with the interest of your fund and its beneficiaries; (4) Valor employees appear to be engaged in alternative pursuits unrelated to the management of their core business; (5) Valor may influence government contracts benefiting Anduril, a Valor portfolio company that is reportedly the only company that can qualify for $6B in border security technology funding.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:46:45",
+      "target_name": "Antonio Gracias",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://prospect.org/2025/07/14/2025-07-14-afl-cio-report-is-doges-antonio-gracias-mishandling-retiree-investments/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/antonio-gracias-afl-cio-report-midhandling-retiree-investment/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -703,6 +935,81 @@
       "evidence": []
     },
     {
+      "id": 3609,
+      "person_a": "Antonio Gracias",
+      "person_b": "Harmony Biosciences",
+      "relationship_type": "financial",
+      "description": "Board director since Sept 2017, chairs Compensation Committee; Valor IV Pharma Holdings owns 6.6M shares (~11.6%); received stock options during DOGE tenure May 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:47:03",
+      "profile_id": "tech-right",
+      "other_person": "Harmony Biosciences",
+      "other_person_slug": "harmony-biosciences",
+      "evidence": []
+    },
+    {
+      "id": 3610,
+      "person_a": "Antonio Gracias",
+      "person_b": "Lykos Therapeutics",
+      "relationship_type": "controls",
+      "description": "Led $50M Series B takeover May 2025 with Christopher Hohn; assumed full control Aug 2025; acquired during DOGE tenure",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:47:04",
+      "profile_id": "tech-right",
+      "other_person": "Lykos Therapeutics",
+      "other_person_slug": "lykos-therapeutics",
+      "evidence": []
+    },
+    {
+      "id": 3613,
+      "person_a": "Antonio Gracias",
+      "person_b": "Gracias Family Foundation",
+      "relationship_type": "controls",
+      "description": "Founder and officer; $94.6M assets; channeled $10M to Atreides Foundation Fund LP investment vehicle",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:47:09",
+      "profile_id": "tech-right",
+      "other_person": "Gracias Family Foundation",
+      "other_person_slug": "gracias-family-foundation",
+      "evidence": []
+    },
+    {
+      "id": 3614,
+      "person_a": "Antonio Gracias",
+      "person_b": "Valor Equity Partners",
+      "relationship_type": "controls",
+      "description": "Founder, CEO, and Chief Investment Officer; $17.5B AUM; manages $1.8B for 9 public pension funds",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:47:57",
+      "profile_id": "tech-right",
+      "other_person": "Valor Equity Partners",
+      "other_person_slug": "valor-equity-partners",
+      "evidence": []
+    },
+    {
+      "id": 3615,
+      "person_a": "Antonio Gracias",
+      "person_b": "DOGE",
+      "relationship_type": "employment",
+      "description": "High-ranking DOGE volunteer Feb-Jul 2025, embedded at SSA, led immigration task force, 80 hrs/week",
+      "strength": "strong",
+      "date_range": "2025-02 to 2025-07",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:47:59",
+      "profile_id": "tech-right",
+      "other_person": "DOGE",
+      "other_person_slug": "doge",
+      "evidence": []
+    },
+    {
       "id": 3019,
       "person_a": "AJG Growth Fund LLC",
       "person_b": "Antonio Gracias",
@@ -790,6 +1097,36 @@
       "other_person": "Rick Doblin",
       "other_person_slug": "rick-doblin",
       "evidence": []
+    },
+    {
+      "id": 3501,
+      "person_a": "Antonio Gracias",
+      "person_b": "David Sacks",
+      "relationship_type": "corporate",
+      "description": "Both early PayPal (Gracias board member, Sacks COO). Both pivoted to investment (Gracias->Valor Equity Partners, Sacks->Craft Ventures). Both now in Trump orbit: Gracias has DOGE position, Sacks is AI/Crypto Czar. Both donated to DNC and ActBlue (bipartisan hedging).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:30",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": []
+    },
+    {
+      "id": 3504,
+      "person_a": "Antonio Gracias",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "financial",
+      "description": "Both are defense-tech VC investors from the Thiel/Musk orbit. Gracias (Valor Equity Partners) and Lonsdale (8VC) have overlapping defense tech portfolios. Gracias served on Tesla board with Musk; Lonsdale co-founded Palantir with Thiel. Both now bridge private investment to government: Gracias via DOGE, Lonsdale via 8VC defense portfolio.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:44",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": []
     }
   ],
   "entities": [
@@ -862,12 +1199,76 @@
   ],
   "timeline": [
     {
+      "date": "2024-06-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FEC donation record: Gracias donated ,000,000 to America PAC (Musk's super PAC) on 2024-06-28 (employer: Valor Equity Partners). Additionally donated ,000,000 to Keystone Renewal PAC via Antonio J. Gracias Revocable Trust on 2024-09-06. Donated ,000 total to Polaris National Security PAC (Oct and Nov 2024). Donated ,000,000 to MAGA INC on 2025-01-13. Also donated ,300 to Schiff for Senate and ,300 to Himes for Congress (Democratic candidates) in 2024 \u2014 bipartisan giving pattern. Total large donations 2024-2025: approx .1M.",
+      "confidence": "confirmed",
+      "id": 6467
+    },
+    {
+      "date": "2025-02 to 2025-07",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "High-ranking DOGE volunteer Feb-Jul 2025, embedded at SSA, led immigration task force, 80 hrs/week",
+      "other_person": "DOGE",
+      "id": 3615
+    },
+    {
       "date": "2025-03-30",
       "type": "finding",
       "finding_type": "intelligence",
       "summary": "Antonio Gracias (CEO, Valor Equity Partners; DOGE SSA embedded operative) publicly claimed at a March 30 2025 Wisconsin rally with Musk that 5+ million noncitizens received Social Security numbers through an automatic system, and that thousands appeared on voter rolls in cooperative states with many having voted. These claims came 10 days after the March 20 TRO blocked DOGE access, raising questions about data retention and unauthorized use. State audits find noncitizen voting 'extremely rare.'",
       "confidence": "high",
       "id": 6412
+    },
+    {
+      "date": "2025-03-30",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Wisconsin rally voter fraud claims and TRO issue: Gracias appeared at Green Bay Wisconsin rally March 30 2025 (ahead of state Supreme Court special election) alongside Musk. Made claims that 5+ million noncitizens received SSNs via EBE program and were on voter rolls. TRO issued March 20 blocked DOGE SSA data access \u2014 10 days before rally. On April 2 Gracias elaborated on Fox and Friends; April 4 on All-In podcast claimed 'well over a thousand voted' and his team had referred 57 cases for DOJ prosecution. Government lawyers stated Gracias 'never had access to SSA data or personally identifiable information.' Analysis likely occurred before March 20 TRO, raising question of whether data was retained post-TRO.",
+      "confidence": "high",
+      "id": 6468
+    },
+    {
+      "date": "2025-04-02",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Antonio Gracias (entity #913), DOGE SSA staffer, publicly used SSA data to push voter fraud narratives. On April 2 2025, appeared on Fox and Friends claiming DOGE found 5+ million noncitizens with Social Security numbers, with thousands on voter rolls who voted, using data obtained via court-restricted access. He later downgraded the claim to only 57 cases referred for prosecution. He is one of two SSA DOGE staffers implicated in the voter data agreement/Hatch Act referral.",
+      "confidence": "high",
+      "id": 6451
+    },
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Gracias negotiated Lykos Therapeutics Series B takeover in January 2025 \u2014 contemporaneously with joining DOGE \u2014 while DOGE had embedded staff at FDA, which has jurisdiction over Lykos MDMA therapy NDA. Gracias Family Foundation led M Series B first close May 30 2025. Ethics expert stated: 'You can't be greasing the wheels and then say, OK, now I'm going to quit and go pursue that approval.'",
+      "confidence": "high",
+      "id": 6482
+    },
+    {
+      "date": "2025-05-30",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "DOGE-Lykos/FDA conflict timeline summary: Gracias donated  to MAPS (2020),  to Harvard psychedelics research (2023). Met Rick Doblin at Burning Man (Summer 2024, months after August 2024 FDA rejection). Doblin contacted Gracias about takeover weeks after Burning Man. January 2025: Gracias and Christopher Hohn began Lykos recapitalization planning, just before Gracias formally joined DOGE. DOGE had embedded staff at FDA. May 30 2025:  Series B first close announced (Gracias Family Foundation lead). Late August 2025: Company rebranded as Resilient Pharmaceuticals. July 4 2025: Gracias resigned from DOGE. Gracias was not formally at DOGE at time of Series B close. DOGE and Lykos involvement overlapped by approximately Jan-May 2025.",
+      "confidence": "high",
+      "id": 6492
+    },
+    {
+      "date": "2025-06-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Antonio Gracias (CEO Valor Equity Partners, long-time Musk associate) worked in DOGE while simultaneously managing 17.5B in assets including hundreds of millions from public employee pension funds. AFL-CIO report (June 24, 2025) questioned fiduciary responsibility; AFT sent letters to 9 pension funds re ~1.8B invested with Valor. Jon Koval (VP) and Payton Rehling (VP Data Engineer) also at DOGE while employed by Valor. Gracias resigned DOGE July 4, 2025 after AFL-CIO due diligence pressure.",
+      "confidence": "high",
+      "id": 5471
+    },
+    {
+      "date": "2025-07-04",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "AFT President Randi Weingarten sent letter July 2025 to nine public pension funds with .8 billion invested in Valor Equity Partners: CalPERS, CalSTRS, NYSTRS, Teachers Retirement System of City of New York, Teachers Retirement System of State of Illinois, and four others. AFT alleged Gracias and Valor employees Jon Koval and Payton Rehling abdicated fiduciary duties by spending time at DOGE. Letter invoked key person provisions in LP agreements, potentially entitling funds to cash payouts. After letter, Gracias resigned DOGE role July 4 2025.",
+      "confidence": "high",
+      "id": 6486
     }
   ],
   "curation": {
@@ -1125,284 +1526,6 @@
       "manufactured-dependency",
       "private-order",
       "narrative-shield"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Antonio Gracias",
-      "connections": [
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Gracias (longtime friend) manages AJG Growth Fund LLC holding Austin Proper Hotel condos and Tesla stock. Registered as Delaware entity."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC records for both donors",
-          "description": "Both donated to America PAC. Gracias served on Tesla board 2007-2021. Parallel MAGA-aligned political spending patterns."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Long-time Musk associate; CEO of Valor Equity Partners managing 17.5B including public pension funds; DOGE operative; resigned DOGE July 4 2025 after AFL-CIO pressure over fiduciary conflicts"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "FEC:GRACIAS_ANTONIO_MAGA_INC",
-          "description": "Valor Equity Partners founder, long-term Musk investor, former Tesla board member. Donated 1M to MAGA Inc. DOGE volunteer at SSA."
-        },
-        {
-          "target": "Jon Koval",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Valor Equity Partners CEO and VP, both assigned to SSA via DOGE"
-        },
-        {
-          "target": "America PAC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "FEC",
-          "description": "Gracias donated M to America PAC (Jun 2024), plus M to MAGA Inc (Jan 2025)"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "FEC",
-          "description": "Gracias (Valor Equity Partners CEO) mirrors Musk's political realignment: both shifted from Democratic to Republican giving 2022-2024"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": "npr.org:2025-04-11; Wisconsin rally March 30 2025; Valor Equity CEO embedded as DOGE SSA operative",
-          "description": null
-        },
-        {
-          "target": "Christopher Hohn",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://news.lykospbc.com/2025-05-30-Lykos-Series-B-Financing-First-Close-Completed",
-          "description": null
-        },
-        {
-          "target": "Javier Muniz",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Gracias led Series B recapitalization of Lykos; Muniz (former FDA reviewer, former MindMed VP R&D) appointed CMO of Resilient Pharmaceuticals (renamed Lykos) post-Series B June 2025"
-        },
-        {
-          "target": "AJG Growth Fund LLC",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Manages AJG Growth Fund LLC (holds Musk luxury assets) while serving as DOGE operative at SSA."
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Both connected to Musk/Thiel network. Gracias's Valor portfolio includes Anduril and SpaceX. Gracias served on DOGE. Howery's direct Valor M33 III LP holding claimed but unverified from open sources."
-        },
-        {
-          "target": "Aram Moghaddassi",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "npr.org:both DOGE SSA operatives; Moghaddassi as SSA CIO authorized NUMIDENT database upload",
-          "description": null
-        },
-        {
-          "target": "True the Vote",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": "DOJ-SSA-Notice-of-Corrections-Jan-16-2026",
-          "description": "SSA DOGE staffer who publicly used SSA data to make voter fraud claims. One of two staffers referred for Hatch Act violations related to voter data agreement with unnamed advocacy group."
-        },
-        {
-          "target": "Rick Doblin",
-          "type": "social",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Met at Burning Man Summer 2024. Doblin recruited Gracias for Lykos takeover weeks after meeting. Doblin backed Gracias control of Lykos and donated context: Gracias had donated M to MAPS 2020"
-        }
-      ],
-      "secondHop": {
-        "America PAC": [
-          {
-            "target": "Phil Cox",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Cox co-founded GP3 LLC which owns Blitz Canvassing LLC. Simultaneously operated America PAC starting July 2024. Directed 64.6M in PAC funds to his own subsidiary \u2014 25% of total PAC spending."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Musk is primary funder of America PAC (.8M in 2024-2025)"
-          },
-          {
-            "target": "United States of America Inc",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Circular financial flow: USA Inc donates .9M to America PAC, America PAC makes .3M in-kind to USA Inc"
-          },
-          {
-            "target": "Phil Cox",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Cox is GP3 co-founder/partner. GP3 subsidiary Blitz Canvassing received $64.6M from America PAC in 2024. Cox, Peck, Rexrode took guiding positions at America PAC in July 2024 while their company received the PAC's largest vendor payments."
-          },
-          {
-            "target": "Chris Young",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Young is Director and Treasurer of America PAC. Hired by Musk Aug 2024 to oversee PAC operations. Young audited Blitz canvassing tallies in NV. PAC spent $261M in 2024 cycle including $78.8M in-kind to Musk's USA Inc entity where Young is VP."
-          }
-        ],
-        "Aram Moghaddassi": [
-          {
-            "target": "Neuralink",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neuralink/X engineer assigned to Treasury, SSA, HHS, Labor, DHS (5 agencies)"
-          },
-          {
-            "target": "Charles Borges",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Elon Musk",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Moghaddassi described as longtime Musk ally by SSA CDO whistleblower complaint"
-          },
-          {
-            "target": "Edward Coristine",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both assigned to SSA; Moghaddassi as CIO granted Coristine and others USCIS database access"
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Kenneth Howery": [
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Founders Fund co-founders; Howery is Amb. to Denmark holding Founders Fund, Palantir, Neuralink, Tesla"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of Founders Fund. Howery holds carried interest in FF Management LLCs I-IV, Alpha Management. Thiel network placed Howery as Ambassador to Denmark."
-          },
-          {
-            "target": "Luke Nosek",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal co-founders, Founders Fund co-founders. Nosek left FF 2017 to start Gigafund (SpaceX-focused). Howery holds promissory notes from Gigafund Management Company LLC and Gigafund 0.2 LP $250M-500M."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
-          },
-          {
-            "target": "Stephen Oskoui",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Howery is LP investor in Gigafund 0.2 LP (1 of 4 investors, 250M-500M position) managed by Oskoui and Nosek"
-          }
-        ],
-        "True the Vote": [
-          {
-            "target": "Public Interest Legal Foundation",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "J. Christian Adams (PILF president) served as TTV counsel in 2013 Colorado voter roll cases; PILF is co-party in TTV v. IRS (DC Circuit, 2025-26)"
-          },
-          {
-            "target": "Eric Neff",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
-          },
-          {
-            "target": "Judicial Watch",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-03-30",
-        "label": "Antonio Gracias (CEO, Valor Equity Partners; DOGE SSA embedded operative) publicly claimed at a March 30 2025 Wisconsin rally with Musk that 5+ million noncitizens received Social Security numbers through an automatic system, and that thousands appeared on voter rolls in cooperative states with many having voted. These claims came 10 days after the March 20 TRO blocked DOGE access, raising questions about data retention and unauthorized use. State audits find noncitizen voting 'extremely rare.'",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6412
-      }
     ]
   }
 }

@@ -1,0 +1,362 @@
+{
+  "name": "Kanzhun Ltd",
+  "slug": "kanzhun-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.292186",
+  "last_updated": "2026-03-30T04:05:23",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 5,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate_structure": 3,
+      "regulatory": 2,
+      "financial": 3,
+      "governance": 1,
+      "insider_filing": 1,
+      "insider_trading": 1
+    },
+    "connection_types": {
+      "corporate": 5
+    },
+    "last_updated": "2026-03-30T04:05:23"
+  },
+  "findings": [
+    {
+      "id": 8605,
+      "finding_type": "corporate_structure",
+      "summary": "Kanzhun VIE: all revenue through Beijing Huapin Borui; nominees are CEO (99.5%) and financial director (0.5%); contractual arrangements updated January 2024",
+      "detail": "Kanzhun's operating revenues flow entirely through a VIE (Beijing Huapin Borui Network Technology Co., Ltd.) controlled via contractual arrangements. The VIE equity is held 99.5% by Peng Zhao (CEO) and 0.5% by Xu Yue (Financial Director) as nominees. The contractual arrangements were significantly updated in January 2024 to add a second WFOE party (Beijing Highland Wolf Technology Co., Ltd.) alongside Beijing Glorywolf Co., Ltd. Kanzhun (Cayman) holds no direct equity in the VIE. Investors in BZ ADSs are purchasing equity in a Cayman holding company, not the VIE.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2024-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8844,
+      "finding_type": "corporate_structure",
+      "summary": "Peng Zhao controls 65.4% of Kanzhun voting power via Class B shares as Chinese resident \u2014 FPI test structurally impossible to fail",
+      "detail": "FY2024 20-F discloses: 'Mr. Peng Zhao...beneficially owns all of our issued Class B ordinary shares. As of February 28, 2025, these Class B ordinary shares constituted 15.9% of our total issued and outstanding shares and 65.4% of the aggregate voting power of our total issued and outstanding shares.' Peng Zhao is a Chinese national residing in Beijing. Class B shares have 10 votes each vs. 1 vote for Class A.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-02-28",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8843,
+      "finding_type": "regulatory",
+      "summary": "Kanzhun self-identifies as FPI in FY2024 20-F; claims Section 16 exemption as of April 2025",
+      "detail": "Kanzhun's FY2024 20-F explicitly states: 'We are a foreign private issuer within the meaning of the rules under the Exchange Act.' Filed April 10, 2025 (acc. 0001410578-25-000682). Company also stated it was exempt from Section 16 insider reporting obligations at that time.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-10",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8607,
+      "finding_type": "financial",
+      "summary": "Kanzhun raised capital via 34.5M share secondary in June 2025 at HK$66 (~$8.41/share); stock now trading ~20% below that level",
+      "detail": "Kanzhun priced a secondary offering (company offering, not shareholder resale) of 34,500,000 Class A ordinary shares at HK$66 per share (approximately US$8.41/share, equivalent to US$16.82 per ADS). The offering consisted of an international offering of 31,050,000 shares and a Hong Kong public offering of 3,450,000 shares. Filed via 424B5 on 2025-06-24 and 2025-07-01. As of March 2026, BZ is trading at approximately $6.67\u20136.98, materially below the secondary offering price. The shelf registration enabling this offering (F-3ASR) was filed on 2022-12-16.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-06-24",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8602,
+      "finding_type": "governance",
+      "summary": "All 10 Kanzhun insiders filed initial Section 16 Form 3s simultaneously on 2026-03-17 \u2014 probable FPI status-change trigger",
+      "detail": "Nine Kanzhun insiders filed Form 3 (initial statement of beneficial ownership under Section 16) simultaneously on 2026-03-17, with a tenth (YU Haiyang) filing on 2026-03-19. All reference period of report 2026-03-17. Insiders: Zhao Peng Jonathan (CEO), Chen Xu (President), Zhang Kylen Tao (CTO), Wang Wenbei (Deputy CFO), WANG Xiehua (Director), Sun Yonggang (Director), Mu Yang (Director), Liu Hongyu (Director), Li Yan/Andy (Director), YU Haiyang (Director). This simultaneous mass filing is the signature of a first-time Section 16 compliance event, most likely triggered by Kanzhun losing Foreign Private Issuer status effective January 1, 2026 (after failing the June 30, 2025 FPI test). However, the company continues to file 6-K reports under the FPI rubric as of March 2026, creating ambiguity about whether the Section 16 filings are mandatory or voluntary.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8604,
+      "finding_type": "corporate_structure",
+      "summary": "Peng Zhao controls Kanzhun with 64%+ voting power through TECHWOLF LIMITED (BVI trust) holding all Class B super-voting shares",
+      "detail": "CEO Peng Zhao beneficially owns 100% of Class B ordinary shares of Kanzhun Ltd through TECHWOLF LIMITED, a BVI trust entity (registered: Start Chambers, Wickham's Cay II, PO Box 2221, Road Town, Tortola, British Virgin Islands) held by a trust established by Peng Zhao as settlor for the benefit of Zhao and his family. As of Form 3 (2026-03-17): 126,526,401 Class B shares + 640,000 Class A shares held indirectly via TECHWOLF. Class B shares carry 10 votes each. As of the June 2025 424B5, Zhao held 134,587,401 Class B shares (15.2% equity, 64.2% voting power). Approximately 8.06M Class B shares appear to have been converted to Class A between June 2025 and March 2026 with no announced 6-K disclosure.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8846,
+      "finding_type": "insider_filing",
+      "summary": "HFIA-driven Form 3 wave: 10 Kanzhun insiders file initial Section 16 reports on 2026-03-17/19 \u2014 all Beijing/HK based",
+      "detail": "10 Kanzhun insiders filed Form 3 (Initial Statement of Beneficial Ownership) on March 17-19, 2026, the first Section 16 filings ever for this issuer. Filers: Peng Jonathan Zhao (Director/Officer/10%+ owner), Kylen Tao Zhang (Director/Officer), Xu Chen (Director/Officer), Wenbei Wang, Yonggang Sun, Xiehua Wang, Yang Mu, Hongyu Liu, Yan (Andy) Li, and Haiyang YU (HK/Wanchai address, 0 shares owned). All Beijing-based except YU. This wave is consistent with HFIA (Holding Foreign Insiders Accountable Act) compliance deadline.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8608,
+      "finding_type": "financial",
+      "summary": "Kanzhun FY2025: revenue $1.18B +12.4%; Q4 net income +55.7%; MAU 60.7M +14.5%; strong operating cash flow",
+      "detail": "Kanzhun FY2025 financial results released via 6-K on 2026-03-18: Revenue RMB 8,267.5M (US$1,182.2M), +12.4% YoY; Q4 revenue RMB 2,078.5M (+14.0%); Q4 net income RMB 691.8M (+55.7%); Q4 adjusted net income RMB 905.9M (+25.4%); Average MAU FY2025 60.7M (+14.5%); Paid enterprise customers 6.8M (+11.5%); Q4 operating cash flow RMB 1,323.6M (+38.4%). Annual report for FY2025 not yet filed as of 2026-03-29.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8606,
+      "finding_type": "financial",
+      "summary": "Kanzhun running ~$5M/day buyback program starting March 20, 2026 \u2014 corporate repurchase began day after CEO's personal share sales",
+      "detail": "Kanzhun repurchased shares on five consecutive trading days: March 20 (733,918 @ $6.8028 = ~$5.0M), March 23 (744,950 @ $6.7104 = ~$5.0M), March 24 (748,552 @ $6.6796 = ~$5.0M), March 25 (748,460 @ $6.6803 = ~$5.0M), March 26 (506,252 @ $6.7529 = ~$3.4M). Total through March 26: approximately 3,482,132 shares for ~$23.4M. All repurchases disclosed via HKEX Next Day Disclosure Returns (filed via 6-K). CEO personally sold shares at $6.84 avg on March 18-19, one trading day before the corporate buybacks began. Buyback prices are materially below the June 2025 secondary offering price of ~$8.41/share.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-20",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8847,
+      "finding_type": "insider_trading",
+      "summary": "Six Kanzhun Form 4s (March 20-24, 2026) reflect RSU vesting transactions; no open-market sales identified",
+      "detail": "On March 24, 2026, five Form 4s were filed by Kanzhun insiders (accessions ending -033876, -033860, -033848, -033845, -033835), all reporting RSU vesting (transaction code M). Xu Chen's March 20 Form 4 also reports 4,702 RSU shares vesting at no cost. Consistent with routine equity compensation vesting cycle. No open-market sales identified in reviewed filings.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-24",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8845,
+      "finding_type": "regulatory",
+      "summary": "Kanzhun checks 'Form 20-F' on all 2026 6-K cover pages \u2014 self-certifies FPI status through at least March 27, 2026",
+      "detail": "Kanzhun's most recent Form 6-K (acc. 0001104659-26-035653, March 27, 2026) includes cover page check box: 'Indicate by check mark whether the registrant files or will file annual reports under cover of Form 20-F or Form 40-F. Form 20-F [x] Form 40-F []'. This self-certification is repeated on every 6-K from January 2026 onward.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Kanzhun Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4403,
+      "person_a": "Kanzhun Ltd",
+      "person_b": "Techfish Limited",
+      "relationship_type": "corporate",
+      "description": "Techfish Limited (HK) is a wholly owned subsidiary of KANZHUN LIMITED (Cayman) and the direct parent of two PRC WFOEs (Beijing Glorywolf Co., Ltd. and Beijing Highland Wolf Technology Co., Ltd.) that maintain contractual arrangements with the VIE.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Techfish Limited",
+      "other_person_slug": "techfish-limited",
+      "evidence": []
+    },
+    {
+      "id": 4398,
+      "person_a": "TECHWOLF LIMITED",
+      "person_b": "Kanzhun Ltd",
+      "relationship_type": "corporate",
+      "description": "TECHWOLF LIMITED holds 126,526,401 Class B ordinary shares plus 640,000 Class A shares of Kanzhun Ltd as of 2026-03-17. This is the primary indirect control vehicle for Peng Zhao's controlling stake.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "TECHWOLF LIMITED",
+      "other_person_slug": "techwolf-limited",
+      "evidence": []
+    },
+    {
+      "id": 4399,
+      "person_a": "Image Frame Investment (HK) Limited",
+      "person_b": "Kanzhun Ltd",
+      "relationship_type": "corporate",
+      "description": "Image Frame Investment (HK) Limited, a wholly owned subsidiary of Tencent Holdings Limited (HKSE: 0700), holds approximately 73,975,773 Class A ordinary shares of Kanzhun Ltd (~8.4% economic interest). Tencent is an early institutional investor in Kanzhun.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Image Frame Investment (HK) Limited",
+      "other_person_slug": "image-frame-investment-hk-limited",
+      "evidence": []
+    },
+    {
+      "id": 4402,
+      "person_a": "Capital World Investors",
+      "person_b": "Kanzhun Ltd",
+      "relationship_type": "corporate",
+      "description": "Capital World Investors (CWI), a division of Capital Research and Management Company, holds 79,737,670 Class A ordinary shares of Kanzhun Ltd (9.0% equity). CWI is the largest non-founder institutional shareholder. Last disclosed via SC 13G/A on 2024-02-13.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Capital World Investors",
+      "other_person_slug": "capital-world-investors",
+      "evidence": []
+    },
+    {
+      "id": 4614,
+      "person_a": "Peng Jonathan Zhao",
+      "person_b": "Kanzhun Ltd",
+      "relationship_type": "corporate",
+      "description": "Peng Zhao holds all 138,490,401 Class B ordinary shares, giving him 65.4% of voting power. He also beneficially owns Class A shares. His Form 3 (acc. 0001104659-26-029493) confirms Director, Officer, and 10%+ Owner status under HFIA.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "profile_id": "hfia",
+      "other_person": "Peng Jonathan Zhao",
+      "other_person_slug": "peng-jonathan-zhao",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Kanzhun VIE: all revenue through Beijing Huapin Borui; nominees are CEO (99.5%) and financial director (0.5%); contractual arrangements updated January 2024",
+      "confidence": "high",
+      "id": 8605
+    },
+    {
+      "date": "2025-02-28",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Peng Zhao controls 65.4% of Kanzhun voting power via Class B shares as Chinese resident \u2014 FPI test structurally impossible to fail",
+      "confidence": "high",
+      "id": 8844
+    },
+    {
+      "date": "2025-04-10",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Kanzhun self-identifies as FPI in FY2024 20-F; claims Section 16 exemption as of April 2025",
+      "confidence": "high",
+      "id": 8843
+    },
+    {
+      "date": "2025-06-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Kanzhun raised capital via 34.5M share secondary in June 2025 at HK$66 (~$8.41/share); stock now trading ~20% below that level",
+      "confidence": "high",
+      "id": 8607
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "All 10 Kanzhun insiders filed initial Section 16 Form 3s simultaneously on 2026-03-17 \u2014 probable FPI status-change trigger",
+      "confidence": "high",
+      "id": 8602
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Peng Zhao controls Kanzhun with 64%+ voting power through TECHWOLF LIMITED (BVI trust) holding all Class B super-voting shares",
+      "confidence": "high",
+      "id": 8604
+    },
+    {
+      "date": "2026-03-17",
+      "type": "finding",
+      "finding_type": "insider_filing",
+      "summary": "HFIA-driven Form 3 wave: 10 Kanzhun insiders file initial Section 16 reports on 2026-03-17/19 \u2014 all Beijing/HK based",
+      "confidence": "high",
+      "id": 8846
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Kanzhun FY2025: revenue $1.18B +12.4%; Q4 net income +55.7%; MAU 60.7M +14.5%; strong operating cash flow",
+      "confidence": "high",
+      "id": 8608
+    },
+    {
+      "date": "2026-03-20",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Kanzhun running ~$5M/day buyback program starting March 20, 2026 \u2014 corporate repurchase began day after CEO's personal share sales",
+      "confidence": "high",
+      "id": 8606
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "insider_trading",
+      "summary": "Six Kanzhun Form 4s (March 20-24, 2026) reflect RSU vesting transactions; no open-market sales identified",
+      "confidence": "medium",
+      "id": 8847
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Kanzhun checks 'Form 20-F' on all 2026 6-K cover pages \u2014 self-certifies FPI status through at least March 27, 2026",
+      "confidence": "high",
+      "id": 8845
+    }
+  ]
+}

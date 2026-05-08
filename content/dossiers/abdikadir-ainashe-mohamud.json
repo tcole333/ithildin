@@ -1,0 +1,402 @@
+{
+  "name": "Abdikadir Ainashe Mohamud",
+  "slug": "abdikadir-ainashe-mohamud",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.279290",
+  "last_updated": "2026-03-27T03:04:48",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 5,
+    "total_entities": 2,
+    "finding_types": {
+      "background": 4,
+      "corporate": 6,
+      "legal": 1
+    },
+    "connection_types": {
+      "corporate": 5
+    },
+    "last_updated": "2026-03-27T03:04:48"
+  },
+  "findings": [
+    {
+      "id": 8044,
+      "finding_type": "background",
+      "summary": "Abdikadir Ainashe Mohamud ('AK', 33) operated Abdikadir Mohamud Trucking Incorporated (MN corp, formed 2020-05-22, 1825 Elliot Ave S Minneapolis MN 55404, inactive) \u2014 a pre-fraud entity that preceded Tunyar Trading LLC (formed 2020-09-28) in his corporate footprint",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-05-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:45:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "mn_sos:d916d7e0-3e9c-ea11-919b-00155d32b905",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8063,
+      "finding_type": "background",
+      "summary": "Abdikadir Mohamud Trucking Incorporated (MN corp, GUID d916d7e0-3e9c-ea11-919b-00155d32b905) formed 2020-05-22 at 1825 Elliot Ave S Minneapolis MN 55404, inactive \u2014 pre-fraud corporate entity 4 months before Tunyar Trading LLC registration",
+      "detail": null,
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2020-05-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:53:15",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8069,
+      "finding_type": "corporate",
+      "summary": "GAB LOGISTICS LLC: Mohamud entity still Active/In Good Standing, renewed through 2026 post-guilty-plea",
+      "detail": "GAB LOGISTICS LLC (MN, GUID 76a6c0c8-d9d6-ec11-91bb-00155d32b93a) was filed 2022-05-18, four months before the September 2022 indictment. Mohamud is listed as both registered agent and manager at 2219 Oakland Ave S Ste 201, Minneapolis MN 55404. As of March 2026 the entity is Active/In Good Standing with renewal due 12/31/2026, meaning it was renewed in 2025 despite Mohamud's February 2025 guilty plea. A Registered Office/Agent amendment was filed 2022-07-21, two months before indictment. This is the only Mohamud-controlled entity still active.",
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2022-05-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8072,
+      "finding_type": "corporate",
+      "summary": "Mohamud's pre-indictment corporate cluster: SABA LOGISTICS (Jan 2022), Indian Ocean Partners (Apr 2022), GAB LOGISTICS (May 2022) all formed 2022 before Sept indictment",
+      "detail": "In the eight months before his September 2022 indictment, Mohamud registered three new entities: SABA LOGISTICS L.L.C. (2022-01-13, inactive, 912 E 24th St Suite B226, Minneapolis), Indian Ocean Partners L.L.C. (2022-04-09, inactive, 56 33rd Ave S Suite 360, St. Cloud MN), and GAB LOGISTICS LLC (2022-05-18, still active, 2219 Oakland Ave S Ste 201, Minneapolis). Combined with the two post-indictment entities (ABDIKADIR MOHOMUD LLC and Tunyar Transportation LLC), Mohamud's corporate activity accelerated in the period immediately surrounding his indictment.",
+      "source_datasets": "opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2022-05-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8071,
+      "finding_type": "corporate",
+      "summary": "United Care LLC at same Eagan apartment (Apt 9) as Tunyar Transportation, formed 8 months prior; agents Hussen Kelif and Faisal Adam",
+      "detail": "United Care LLC (MN, GUID 23ceaa28-d8bd-ed11-9069-00155d01c614) was filed 2023-03-08 at 3862 Ballantrae Rd Apt 9, Eagan MN 55122 \u2014 the same apartment unit used by Tunyar Transportation LLC eight months later. Registered agents: Hussen Kelif and Faisal Adam. Hussen Kelif is president of Markaz As-Sunna (mosque, Hopkins MN). Faisal Adam also organized Express Transport LLC (MN) and has a broad multi-state entity footprint. Neither name appears in FOF investigation corpus. United Care LLC was terminated 2025-01-16 (same day as ABDIKADIR MOHOMUD LLC).",
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2023-03-08",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8046,
+      "finding_type": "background",
+      "summary": "Post-indictment: Two additional Mohamud-linked entities formed after the Sept 2022 federal indictment \u2014 ABDIKADIR MOHOMUD LLC (alt spelling, 2023-05-15, 3110 Blaisdell Ave Minneapolis MN 55408, inactive) and Tunyar Transportation LLC (2023-11-11, 3862 Ballantrae Rd Apt 9 Eagan MN 55122, inactive) sharing the Tunyar brand; both inactive and never renewed",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-05-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:46:03",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "mn_sos:9c1b2e1b-5ff3-ed11-9072-00155d01c440,mn_sos:f096ca73-b780-ee11-9078-00155d01c440",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 8065,
+      "finding_type": "background",
+      "summary": "Two Mohamud-linked entities formed post-indictment: ABDIKADIR MOHOMUD LLC (2023-05-15, 3110 Blaisdell Ave Minneapolis MN 55408, GUID 9c1b2e1b-5ff3-ed11-9072-00155d01c440) and Tunyar Transportation LLC (2023-11-11, 3862 Ballantrae Rd Apt 9 Eagan MN 55122, GUID f096ca73-b780-ee11-9078-00155d01c440); both inactive and never renewed",
+      "detail": null,
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2023-05-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:53:15",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8067,
+      "finding_type": "corporate",
+      "summary": "ABDIKADIR MOHOMUD LLC: self-filed by Mohamud 8 months post-indictment",
+      "detail": "ABDIKADIR MOHOMUD LLC (MN, GUID 9c1b2e1b-5ff3-ed11-9072-00155d01c440) was filed 2023-05-15, eight months after Mohamud's September 2022 federal indictment. Mohamud himself is listed as both organizer and registered agent under a phonetic spelling variant (MOHOMUD vs MOHAMUD). Address is 3110 Blaisdell Ave, Minneapolis MN 55408, a residential apartment building. The entity was administratively terminated 2025-01-16 for non-renewal. No UCC filings, no government contracts found. Assessment: personal placeholder, not a nominee vehicle.",
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2023-05-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8068,
+      "finding_type": "corporate",
+      "summary": "Tunyar Transportation LLC: Tunyar brand reused at Eagan address shared with Kelif/Adam entities",
+      "detail": "Tunyar Transportation LLC (MN, GUID f096ca73-b780-ee11-9078-00155d01c440) was filed 2023-11-11, 14 months after indictment, at 3862 Ballantrae Rd Apt 9, Eagan MN 55122. No registered agent listed. The Tunyar brand is directly associated with Mohamud's primary fraud vehicle (Tunyar Trading LLC). The same apartment unit (Apt 9) was concurrently used by United Care LLC (March 2023), organized by Faisal Adam with Hussen Kelif as co-agent. Organizer of Tunyar Transportation unknown \u2014 original Articles of Organization not available from web portal. Terminated administratively 2025-01-21.",
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "medium",
+      "date_of_event": "2023-11-11",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8070,
+      "finding_type": "corporate",
+      "summary": "Fursad Fund nonprofit formed same day ABDIKADIR MOHOMUD LLC was terminated, with Mohamud as registered agent",
+      "detail": "Fursad Fund (MN Nonprofit Corp, GUID aa9b2775-2dd4-ef11-908d-00155d32b947, Statute 317A) was filed 2025-01-16 at STE 114, 3333 W Division St, Saint Cloud MN 56301 \u2014 the same day ABDIKADIR MOHOMUD LLC received its administrative termination. Abdikadir Mohamud is listed as registered agent. The Division St address is also used by CENTER FOR AFRICAN IMMIGRANTS & REFUGEES ORGANIZATION (CAIRO), for which Mohamud is also listed as agent. Mohamud pleaded guilty to wire fraud approximately one month later (February 2025). Formation pattern (replacement entity on termination day) is consistent with phoenix structuring.",
+      "source_datasets": "mn_sos,opencorporates",
+      "confidence": "high",
+      "date_of_event": "2025-01-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 7926,
+      "finding_type": "legal",
+      "summary": "Abdikadir Ainashe Mohamud ('AK') pleaded guilty to wire fraud; agreed to recommended 4-5 year sentence; forfeited Kelly's 19th Hole property + $378,207 from Tunyar Trading bank account; $3M restitution",
+      "detail": null,
+      "source_datasets": "doj_press_releases,media",
+      "confidence": "high",
+      "date_of_event": "2025-02-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-26 21:51:28",
+      "target_name": "Abdikadir Ainashe Mohamud",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 3957,
+      "person_a": "Abdikerm Abdelahi Eidleh",
+      "person_b": "Abdikadir Ainashe Mohamud",
+      "relationship_type": "corporate",
+      "description": "Mohamud paid $225,000+ in kickbacks to Eidleh through Tunyar Trading LLC for sponsoring Stigma-Free Willmar site. Mohamud pleaded guilty Feb 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-26 23:09:18",
+      "profile_id": "feeding-our-future",
+      "other_person": "Abdikerm Abdelahi Eidleh",
+      "other_person_slug": "abdikerm-abdelahi-eidleh",
+      "evidence": []
+    },
+    {
+      "id": 4047,
+      "person_a": "Abdi Nur Salah",
+      "person_b": "Abdikadir Ainashe Mohamud",
+      "relationship_type": "corporate",
+      "description": "Abdi Nur Salah and Abdikadir Ainashe Mohamud co-organized Five A's Projects LLC (2021-10-07) and jointly owned Kelly's 19th Hole (8432 Noble Ave N Brooklyn Park) through it \u2014 both forfeited the property in their 2025 guilty pleas",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:53:15",
+      "profile_id": "feeding-our-future",
+      "other_person": "Abdi Nur Salah",
+      "other_person_slug": "abdi-nur-salah",
+      "evidence": []
+    },
+    {
+      "id": 4051,
+      "person_a": "Abdikadir Ainashe Mohamud",
+      "person_b": "GAB LOGISTICS LLC",
+      "relationship_type": "corporate",
+      "description": "Mohamud is registered agent AND manager of GAB LOGISTICS LLC (filed May 2022, still active March 2026). Entity renewed through 2026 despite Mohamud's Feb 2025 guilty plea.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "profile_id": "feeding-our-future",
+      "other_person": "GAB LOGISTICS LLC",
+      "other_person_slug": "gab-logistics-llc",
+      "evidence": []
+    },
+    {
+      "id": 4052,
+      "person_a": "Abdikadir Ainashe Mohamud",
+      "person_b": "Fursad Fund",
+      "relationship_type": "corporate",
+      "description": "Mohamud is registered agent for Fursad Fund (MN nonprofit formed 2025-01-16, same day ABDIKADIR MOHOMUD LLC was terminated). Both Fursad Fund and CAIRO use same Saint Cloud address where Mohamud is agent.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 03:04:48",
+      "profile_id": "feeding-our-future",
+      "other_person": "Fursad Fund",
+      "other_person_slug": "fursad-fund",
+      "evidence": []
+    },
+    {
+      "id": 4049,
+      "person_a": "Abdulkadir Nur Salah",
+      "person_b": "Abdikadir Ainashe Mohamud",
+      "relationship_type": "corporate",
+      "description": "Abdulkadir Nur Salah owned 2722 Park Avenue (forfeited at guilty plea), which served as the registered office for Five A's Projects LLC where co-defendant Abdikadir Mohamud was co-organizer",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 02:53:15",
+      "profile_id": "feeding-our-future",
+      "other_person": "Abdulkadir Nur Salah",
+      "other_person_slug": "abdulkadir-nur-salah",
+      "evidence": []
+    }
+  ],
+  "entities": [
+    {
+      "role": "organizer",
+      "date_start": "2021-10",
+      "date_end": null,
+      "source": "mn_sos:f117b330-8627-ec11-91b3-00155d32b93a",
+      "entity_id": 1556,
+      "entity_name": "Five A's Projects LLC",
+      "entity_type": "llc",
+      "jurisdiction": "Minnesota",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "organizer",
+      "date_start": null,
+      "date_end": null,
+      "source": "mn_sos,doj",
+      "entity_id": 1754,
+      "entity_name": "Five A's Projects LLC",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2020-05-22",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Abdikadir Ainashe Mohamud ('AK', 33) operated Abdikadir Mohamud Trucking Incorporated (MN corp, formed 2020-05-22, 1825 Elliot Ave S Minneapolis MN 55404, inactive) \u2014 a pre-fraud entity that preceded Tunyar Trading LLC (formed 2020-09-28) in his corporate footprint",
+      "confidence": "high",
+      "id": 8044
+    },
+    {
+      "date": "2020-05-22",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Abdikadir Mohamud Trucking Incorporated (MN corp, GUID d916d7e0-3e9c-ea11-919b-00155d32b905) formed 2020-05-22 at 1825 Elliot Ave S Minneapolis MN 55404, inactive \u2014 pre-fraud corporate entity 4 months before Tunyar Trading LLC registration",
+      "confidence": "high",
+      "id": 8063
+    },
+    {
+      "date": "2022-05-18",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "GAB LOGISTICS LLC: Mohamud entity still Active/In Good Standing, renewed through 2026 post-guilty-plea",
+      "confidence": "high",
+      "id": 8069
+    },
+    {
+      "date": "2022-05-18",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Mohamud's pre-indictment corporate cluster: SABA LOGISTICS (Jan 2022), Indian Ocean Partners (Apr 2022), GAB LOGISTICS (May 2022) all formed 2022 before Sept indictment",
+      "confidence": "medium",
+      "id": 8072
+    },
+    {
+      "date": "2023-03-08",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "United Care LLC at same Eagan apartment (Apt 9) as Tunyar Transportation, formed 8 months prior; agents Hussen Kelif and Faisal Adam",
+      "confidence": "medium",
+      "id": 8071
+    },
+    {
+      "date": "2023-05-15",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Post-indictment: Two additional Mohamud-linked entities formed after the Sept 2022 federal indictment \u2014 ABDIKADIR MOHOMUD LLC (alt spelling, 2023-05-15, 3110 Blaisdell Ave Minneapolis MN 55408, inactive) and Tunyar Transportation LLC (2023-11-11, 3862 Ballantrae Rd Apt 9 Eagan MN 55122, inactive) sharing the Tunyar brand; both inactive and never renewed",
+      "confidence": "medium",
+      "id": 8046
+    },
+    {
+      "date": "2023-05-15",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Two Mohamud-linked entities formed post-indictment: ABDIKADIR MOHOMUD LLC (2023-05-15, 3110 Blaisdell Ave Minneapolis MN 55408, GUID 9c1b2e1b-5ff3-ed11-9072-00155d01c440) and Tunyar Transportation LLC (2023-11-11, 3862 Ballantrae Rd Apt 9 Eagan MN 55122, GUID f096ca73-b780-ee11-9078-00155d01c440); both inactive and never renewed",
+      "confidence": "medium",
+      "id": 8065
+    },
+    {
+      "date": "2023-05-15",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "ABDIKADIR MOHOMUD LLC: self-filed by Mohamud 8 months post-indictment",
+      "confidence": "high",
+      "id": 8067
+    },
+    {
+      "date": "2023-11-11",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Tunyar Transportation LLC: Tunyar brand reused at Eagan address shared with Kelif/Adam entities",
+      "confidence": "medium",
+      "id": 8068
+    },
+    {
+      "date": "2025-01-16",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Fursad Fund nonprofit formed same day ABDIKADIR MOHOMUD LLC was terminated, with Mohamud as registered agent",
+      "confidence": "high",
+      "id": 8070
+    },
+    {
+      "date": "2025-02-28",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Abdikadir Ainashe Mohamud ('AK') pleaded guilty to wire fraud; agreed to recommended 4-5 year sentence; forfeited Kelly's 19th Hole property + $378,207 from Tunyar Trading bank account; $3M restitution",
+      "confidence": "high",
+      "id": 7926
+    }
+  ]
+}

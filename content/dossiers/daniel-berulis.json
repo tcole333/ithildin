@@ -5,7 +5,7 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.987309",
+  "generated_at": "2026-05-07T23:07:36.399780",
   "last_updated": "2026-03-09T20:32:38",
   "stats": {
     "total_findings": 6,
@@ -40,6 +40,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "krebsonsecurity.com:2025-04:whistleblower-doge-siphoned-nlrb-case-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6400,
+      "finding_type": "intelligence",
+      "summary": "On March 11 2025, login attempts from Russian IP address 83.149.30.186 (Primorskiy Krai, Russia's Far East) targeted newly created DOGE accounts at NLRB. Over 20 login attempts, many within 15 minutes of account creation. Attempts used correct username and password. Blocked because NLRB does not allow overseas access. One account: DogeSA_2d5c3e0446f9@nlrb.microsoft.com",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:28:47",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -110,31 +135,6 @@
       "claim_type": "direct_quote",
       "verification_status": "unverified",
       "created_at": "2026-03-09 20:28:37",
-      "target_name": "Daniel Berulis",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6400,
-      "finding_type": "intelligence",
-      "summary": "On March 11 2025, login attempts from Russian IP address 83.149.30.186 (Primorskiy Krai, Russia's Far East) targeted newly created DOGE accounts at NLRB. Over 20 login attempts, many within 15 minutes of account creation. Attempts used correct username and password. Blocked because NLRB does not allow overseas access. One account: DogeSA_2d5c3e0446f9@nlrb.microsoft.com",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:28:47",
       "target_name": "Daniel Berulis",
       "profile_id": "tech-right",
       "evidence": [
@@ -264,6 +264,14 @@
       "id": 6429
     },
     {
+      "date": "2025-03-11",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "On March 11 2025, login attempts from Russian IP address 83.149.30.186 (Primorskiy Krai, Russia's Far East) targeted newly created DOGE accounts at NLRB. Over 20 login attempts, many within 15 minutes of account creation. Attempts used correct username and password. Blocked because NLRB does not allow overseas access. One account: DogeSA_2d5c3e0446f9@nlrb.microsoft.com",
+      "confidence": "confirmed",
+      "id": 6400
+    },
+    {
       "date": "2025-04-14",
       "type": "finding",
       "finding_type": "document",
@@ -373,52 +381,6 @@
       "private-order",
       "narrative-shield",
       "enabler-gradient"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Daniel Berulis",
-      "connections": [
-        {
-          "target": "Andrew Bakaj",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "whistlebloweraid.org:2025-04-14",
-          "description": null
-        },
-        {
-          "target": "Prem Aburvasamy",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "krebsonsecurity.com:2025-04:Aburvasamy is NLRB CIO; Berulis is security architect under him",
-          "description": null
-        },
-        {
-          "target": "Lasharn Hamilton",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "krebsonsecurity.com:2025-04:Hamilton is NLRB Director who claimed no 'official' prior DOGE contact day after Berulis went public",
-          "description": null
-        }
-      ],
-      "secondHop": {},
-      "depth": 1
-    },
-    "timeline_events": [
-      {
-        "date": "2025-03-03",
-        "label": "Krebs on Security forensic analysis of NLRB DOGE breach: DOGE operatives created accounts (DogeSA_2d5c3e0446f9@nlrb.microsoft.com; 'Whitesox, Chicago M.'; 'Dancehall, Jamaica R.') with tenant-admin privileges exempt from logging. Three external GitHub code libraries downloaded including one designed for 'proxy pool rotation for web scraping and brute forcing.' Microsoft Azure network watcher set to 'off' March 5. April 3-4: NLRB staff instructed to halt US-CERT reporting. April 14: administrative access stripped from IT staff same day NPR published story. NLRB director Lasharn Hamilton claimed no 'official' prior DOGE contact April 16.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6429
-      },
-      {
-        "date": "2025-04-14",
-        "label": "Daniel Berulis filed original whistleblower disclosure to Congress and US Office of Special Counsel on April 14 2025 via Whistleblower Aid (attorney: Andrew Bakaj). Primary document: 2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf. Supplemental disclosure added: physical intimidation (threatening note + drone surveillance photos taped to home door), additional forensic data. DOGE visited NLRB on April 16 2025 \u2014 the day after NPR reported the disclosure.",
-        "type": "document",
-        "evidence_ref": null,
-        "id": 6415
-      }
     ]
   }
 }

@@ -3,13 +3,14 @@
   "slug": "michael-wolff",
   "aliases": [],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "epstein-aetna"
   ],
-  "generated_at": "2026-03-11T18:36:07.898306",
-  "last_updated": "2026-02-17T04:24:25",
+  "generated_at": "2026-05-07T23:07:36.252842",
+  "last_updated": "2026-04-15T04:21:11",
   "stats": {
     "total_findings": 13,
-    "total_connections": 22,
+    "total_connections": 23,
     "total_entities": 1,
     "finding_types": {
       "communication": 7,
@@ -20,11 +21,11 @@
     "connection_types": {
       "intelligence": 4,
       "social": 4,
-      "advisory": 5,
+      "advisory": 6,
       "corporate": 8,
       "financial": 1
     },
-    "last_updated": "2026-02-17T04:24:25"
+    "last_updated": "2026-04-15T04:21:11"
   },
   "findings": [
     {
@@ -879,6 +880,34 @@
       ]
     },
     {
+      "id": 5475,
+      "person_a": "Brad S. Karp",
+      "person_b": "Michael Wolff",
+      "relationship_type": "advisory",
+      "description": "Attended Jan 31 2018 dinner with UN GA President Lajcak at Epstein's; Mar 23 2018 Wolff datebook: 'Also saw Brad Karp who is super menchy and offering much help on next book'; Jun 13 2018 Karp editing Wolff piece ('my suggested type of edits... will speak shortly to Michael')",
+      "strength": "medium",
+      "date_range": "2018-01-31..2018-06-13",
+      "verification_status": "unverified",
+      "created_at": "2026-04-15 04:21:11",
+      "profile_id": "epstein-aetna",
+      "other_person": "Brad S. Karp",
+      "other_person_slug": "brad-s-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02237194",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02244135",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 157,
       "person_a": "Juleanna Glover",
       "person_b": "Michael Wolff",
@@ -1008,6 +1037,14 @@
       "summary": "Wolff identified the Stormy Daniels story as a Bannon leak (Jan 13, 2018, email subject: Porn star, text: I think thats a Bannon leak). Epstein forwarded to Wolff a PageSix article about Bannon trying to get on Epsteins good side (Aug 2018). Wolff asked: Harmless. Do you think Bannon spilled? Epstein mentioned a doorman. Wolff advised: you should pay him off.",
       "confidence": "confirmed",
       "id": 212
+    },
+    {
+      "date": "2018-01-31..2018-06-13",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Attended Jan 31 2018 dinner with UN GA President Lajcak at Epstein's; Mar 23 2018 Wolff datebook: 'Also saw Brad Karp who is super menchy and offering much help on next book'; Jun 13 2018 Karp editing Wolff piece ('my suggested type of edits... will speak shortly to Michael')",
+      "other_person": "Brad S. Karp",
+      "id": 5475
     },
     {
       "date": "2018-06",

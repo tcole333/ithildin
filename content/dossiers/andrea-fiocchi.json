@@ -1,0 +1,725 @@
+{
+  "name": "Andrea Fiocchi",
+  "slug": "andrea-fiocchi",
+  "aliases": [],
+  "profile_ids": [
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.304850",
+  "last_updated": "2026-04-14T03:13:49",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 16,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 3,
+      "relationship": 3,
+      "financial": 1,
+      "legal": 1,
+      "negative_result": 1,
+      "background": 1
+    },
+    "connection_types": {
+      "employment": 2,
+      "corporate": 8,
+      "legal": 2,
+      "advisory": 4
+    },
+    "last_updated": "2026-04-14T03:13:49"
+  },
+  "findings": [
+    {
+      "id": 10225,
+      "finding_type": "identity",
+      "summary": "Fiocchi is dual US-Italy attorney with extensive European HNW client base in NYC luxury real estate",
+      "detail": "Andrea Fiocchi is equity partner at Reinhardt Savic Foley LLP (co-founded 2005 as Reinhardt LLP). Dual US-Italy national admitted in NY, SDNY, EDNY, and England and Wales. Specializes in expat law for foreign clients. ACRIS power-of-attorney records reveal a parade of European HNW clients in NYC luxury real estate: Saverio Bardoni (Italian address, 75 Wall St), Matilde Teresa Emanuela Filippi di Baldissero (Italian noble name, Turkish address, 167 E 82nd), Pierre Mozziconacci (French, 55 Wall St), Teresa Sapey (Spanish, 768 5th Ave/Olympic Tower), Zlatan Ibrahimovic (soccer star, 101 Leonard St), Giuseppe Cipriani (of Cipriani hospitality family, 114 Liberty St), Nazzarena Rossi (188 E 64th), Jose Federico Perez Intriago (c/o Reinhardt, 555 W 59th). Fiocchi also formed personal LLCs: A. Fiocchi LLC (DOS 3877059, 2009), Fiocchi Group LLC (DOS 4137612, 2011, active), Fiocchi/Thors LLC (DOS 3970422, 2010), Tallent and Fiocchi PC (DOS 3908093, 2010). His firm address moved from 44 Wall St 10th Fl to 200 Liberty St 27th Fl.",
+      "source_datasets": [
+        "acris",
+        "registry",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 14:13:52",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS PAT records (multiple doc IDs)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS DOS 3877059,4137612,3970422,3908093",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://rsf-llp.com/rsf-team/andrea-fiocchi/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10240,
+      "finding_type": "relationship",
+      "summary": "Andrea Fiocchi ranks #5 in betweenness centrality (0.141) with zero clustering coefficient despite degree 6. Perfect broker: neighbors include Reinhardt LLP, Domus Arbiter, Giuseppe Cipriani, Zlatan Ibrahimovic, Reinhardt Savic Foley LLP -- none connect to each other except through Fiocchi.",
+      "detail": "Fiocchi is the sole bridge between the legal/corporate entity cluster (Reinhardt LLP, Reinhardt Savic Foley LLP, Domus Arbiter Realty) and the social/celebrity network (Cipriani, Ibrahimovic). With only 1 finding against 6 connections, Fiocchi is critically under-investigated. Zero clustering is unique among high-degree nodes, indicating maximum brokerage.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:20:13",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-39",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10297,
+      "finding_type": "identity",
+      "summary": "Andrea Fiocchi: equity partner at Reinhardt Savic Foley LLP, dual US-Italy national, admitted in NY State, SDNY, EDNY, and England & Wales. Fluent in English, Italian, French. Specializes in corporate, commercial, real estate/construction law with focus on private equity investments, HNW investments, aircraft/yacht purchases, corporate structuring. Clients span construction, real estate, hospitality, food & wine, fashion, entertainment, finance. Secretary of Cairos USA Corp (FL, 2008, DE-incorporated).",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:00",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web:rsf-llp.com,FL:F08000003611",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10298,
+      "finding_type": "financial",
+      "summary": "ACRIS reveals Fiocchi handled 13+ NYC luxury real estate transactions (2009-2017) as power of attorney for international clients. Pattern: European/Latin American HNW individuals grant power of attorney to Fiocchi + Sarah Tallent at 44 Wall St. Clients include: Saverio Bardoni (Modena, Italy, 75 Wall St), Pierre Mozziconacci (Paris, 55 Wall St), Matilde Filippi di Baldissero (Istanbul, 167 E 82nd St), Andreas Gauger (Karlsruhe, Germany, 16 W 19th St), Jose Federico Perez Intriago (555 W 59th St), Nazzarena Rossi (188 E 64th St), Zlatan Ibrahimovic (101 Leonard St), Giuseppe Cipriani (114 Liberty St).",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:08",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2009021200562001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2009021701046001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2009120700906001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2010012001250001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2010042300458001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2010091900056001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013012200643001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015061900749001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2017091100932001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10311,
+      "finding_type": "relationship",
+      "summary": "CONFIRMED: Giuseppe Cipriani is a direct Fiocchi/Reinhardt client. ACRIS document 2017091100932001 (power of attorney, June 28, 2017): Cipriani, Giuseppe (110 East 42nd Street, NY) grants POA to Fiocchi, Andrea + Lovejoy, John J (both at 44 Wall Street 10th Floor) for 114 Liberty Street Unit 10. This connects the Cipriani hospitality empire directly to the Reinhardt LLP client network.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:50",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2017091100932001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10312,
+      "finding_type": "relationship",
+      "summary": "CONFIRMED: Zlatan Ibrahimovic is a direct Reinhardt LLP/Fiocchi client. ACRIS document 2015061900749001 (POA, March 19, 2015): Ibrahimovic, Zlatan (c/o Reinhardt LLP, 44 Wall St Fl 10) grants power of attorney to Fiocchi, Andrea at same address for 101 Leonard Street Unit 6B. Ibrahimovic used the law firm as his US mailing address. 101 Leonard is a luxury TriBeCa condo building.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:54",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015061900749001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10314,
+      "finding_type": "legal",
+      "summary": "CourtListener shows Fiocchi as attorney in 3 federal cases: (1) Nebiolo v. W.P. Lavori in Corso SRL (SDNY 1:17-cv-05679, diversity, July 2017 - terminated March 2018) \u2014 Italian fashion company dispute (Woolrich), firm listed as both 'Reinhardt LLP' and 'Reinhardt & Schachter, P.C.'; (2) Oryx Jet Limited v. Baroque Aviation LLC (SDNY 1:18-cv-05250, diversity, June 2018 - terminated Oct 2018) \u2014 private jet contract dispute, firm 'Reinhardt LLP'; (3) Corex S.p.A. v. Cargo Compass S.p.A. (EDNY 1:24-cv-03221, breach of contract/marine, April 2024 - pending) \u2014 Italian shipping companies dispute, firm 'Reinhardt Savic Foley LLP'. All three involve Italian/European corporate clients, confirming international practice focus.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:04:03",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:6127133",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:7124576",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:68488021",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10316,
+      "finding_type": "negative_result",
+      "summary": "Andrea Fiocchi has zero FEC donation records. No political contributions found. Given his HNW client base and NYC real estate focus, this is a deliberate choice to stay below the political radar \u2014 consistent with the zero-clustering compartmentalization pattern observed in network analysis.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:04:22",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:search_andrea_fiocchi",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10320,
+      "finding_type": "identity",
+      "summary": "ACRIS reveals Alan F. Fiocchi \u2014 likely a relative of Andrea \u2014 active in NYC real estate. Alan F. Fiocchi addresses: 111 Kent Avenue PH-B, Brooklyn (2014-2016), 151 West 28th Street 6W, NYC (2018-2021), 2010 Route 9, Garrison, NY (2020), and 260 Madison Avenue 17th Floor, NYC (business). Also appears as MGR of Fiocchi Family Farm LLC (FL, L22000144124) at 3326 Mary Street, Miami FL 33133 with Imane H. Fiocchi and Bowery F. Fiocchi. Giovanni Fiocchi appears as MGRM of Motto I LLC (FL, L09000039890) at 1691 Michigan Avenue, Miami Beach FL \u2014 same address as 'It's All About The Music Corp' (Reinhardt LLP client). Family network spans NYC-Miami with luxury real estate and entertainment connections.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:04:30",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014120600075001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2021081200663001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10350,
+      "finding_type": "background",
+      "summary": "Andrea Fiocchi (Reinhardt Savic Foley LLP) \u2014 NYSCEF attorney search (as counsel) returns 50+ active NY Supreme Court cases (page limit). Practice profile: predominantly Italian-commerce commercial disputes (Venini S.p.A., Fuzzi S.P.A., Farchioni Olii S.p.A., Simod S.p.A., Ca'D'Oro S.p.A., Maglitat S.R.L., Baroque Access, Fratelli Dinacci S.R.L., Bianca Marble), Cipriani-group multi-case representation (Cipriani USA, Cipriani Club 55, Cipriani 42nd Street \u2014 ~7 cases 2020-2026), Italian fashion/design imports, plus the Zampolli/Bayrock work (Douglas Elliman v Zampolli 153120/2015, Domus Arbiter v Bayrock 651970/2014). Fiocchi does NOT appear as a NYSCEF party in personal capacity (0 results for Andrea Fiocchi party search). He is the Italian-speaking NY commercial counsel of record for Cipriani, many Italian S.p.A./S.R.L. importers, and Zampolli's entity work.",
+      "detail": null,
+      "source_datasets": [
+        "nyscef"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 03:11:06",
+      "target_name": "Andrea Fiocchi",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYSCEF:attorney:Andrea Fiocchi",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5240,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "employment",
+      "description": "Co-founder and equity partner at Reinhardt LLP; Italian-American attorney specializing in RE and expat law",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "Reinhardt LLP",
+      "other_person_slug": "reinhardt-llp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5250,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Reinhardt LLP",
+      "relationship_type": "corporate",
+      "description": "Fiocchi co-founded Reinhardt LLP, dual US-Italy national, Italian expat real estate law",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:37:17",
+      "profile_id": "zampolli",
+      "other_person": "Reinhardt LLP",
+      "other_person_slug": "reinhardt-llp",
+      "evidence": []
+    },
+    {
+      "id": 5329,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Domus Arbiter Realty Corp",
+      "relationship_type": "legal",
+      "description": "Fiocchi/Reinhardt formed the 4 LLCs that purchased the 14 units Domus Arbiter had originally introduced to Trump SoHo",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 14:15:21",
+      "profile_id": "zampolli",
+      "other_person": "Domus Arbiter Realty Corp",
+      "other_person_slug": "domus-arbiter-realty-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS deeds",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Domus Arbiter v Bayrock",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5332,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Giuseppe Cipriani",
+      "relationship_type": "corporate",
+      "description": "Fiocchi acted as attorney for Cipriani in NYC real estate transaction (114 Liberty St)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 14:15:21",
+      "profile_id": "zampolli",
+      "other_person": "Giuseppe Cipriani",
+      "other_person_slug": "giuseppe-cipriani",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS PAT 2017091100932001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5333,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Zlatan Ibrahimovic",
+      "relationship_type": "corporate",
+      "description": "Fiocchi acted as attorney for Ibrahimovic in NYC real estate transaction (101 Leonard St)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 14:15:21",
+      "profile_id": "zampolli",
+      "other_person": "Zlatan Ibrahimovic",
+      "other_person_slug": "zlatan-ibrahimovic",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS PAT 2015061900749001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5357,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Giuseppe Cipriani",
+      "relationship_type": "advisory",
+      "description": "Attorney-client: Fiocchi held POA for Cipriani at 114 Liberty St Unit 10 (ACRIS 2017)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:38",
+      "profile_id": "zampolli",
+      "other_person": "Giuseppe Cipriani",
+      "other_person_slug": "giuseppe-cipriani",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2017091100932001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5358,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Zlatan Ibrahimovic",
+      "relationship_type": "advisory",
+      "description": "Attorney-client: Fiocchi held POA for Ibrahimovic at 101 Leonard St Unit 6B (ACRIS 2015)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:38",
+      "profile_id": "zampolli",
+      "other_person": "Zlatan Ibrahimovic",
+      "other_person_slug": "zlatan-ibrahimovic",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015061900749001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5359,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Dierk Reinhardt",
+      "relationship_type": "corporate",
+      "description": "Co-founders of Reinhardt LLP (2005), now Reinhardt Savic Foley LLP",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:39",
+      "profile_id": "zampolli",
+      "other_person": "Dierk Reinhardt",
+      "other_person_slug": "dierk-reinhardt",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web:newswire.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5360,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Sarah E. Tallent",
+      "relationship_type": "corporate",
+      "description": "Co-founders of Reinhardt LLP (2005); joint POA agents on 10+ ACRIS transactions 2009-2014",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:39",
+      "profile_id": "zampolli",
+      "other_person": "Sarah E. Tallent",
+      "other_person_slug": "sarah-e-tallent",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2009021200562001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5361,
+      "person_a": "Alberto Scaduto",
+      "person_b": "Andrea Fiocchi",
+      "relationship_type": "advisory",
+      "description": "Attorney-client: Scaduto is MGR of ES Global + F.S. Venture Group, both at Reinhardt LLP address",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:39",
+      "profile_id": "zampolli",
+      "other_person": "Alberto Scaduto",
+      "other_person_slug": "alberto-scaduto",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL:L08000021880",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5370,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Carlo Giovannetti",
+      "relationship_type": "corporate",
+      "description": "Fellow partners at Reinhardt Savic Foley LLP; Giovannetti licensed in Italy",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:07:25",
+      "profile_id": "zampolli",
+      "other_person": "Carlo Giovannetti",
+      "other_person_slug": "carlo-giovannetti",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web:newswire.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5380,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Reinhardt Savic Foley LLP",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 03:13:40",
+      "profile_id": "zampolli",
+      "other_person": "Reinhardt Savic Foley LLP",
+      "other_person_slug": "reinhardt-savic-foley-llp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NYSCEF:153120/2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5383,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Giampaolo Pozzo",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-14 03:13:49",
+      "profile_id": "zampolli",
+      "other_person": "Giampaolo Pozzo",
+      "other_person_slug": "giampaolo-pozzo",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NYSCEF:651970/2014:16",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5330,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Paolo Zampolli",
+      "relationship_type": "corporate",
+      "description": "Fiocchi formed 4 LLCs for Italian clients Zampolli was offered 6% commission to redirect from Domus Arbiter",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 14:15:21",
+      "profile_id": "zampolli",
+      "other_person": "Paolo Zampolli",
+      "other_person_slug": "paolo-zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Domus Arbiter v Bayrock court decision",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5342,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Giampiero Rispo",
+      "relationship_type": "corporate",
+      "description": "Fiocchi/Reinhardt formed the 4 LLCs that purchased 14 Trump SoHo units originally sourced by Rispo's Domus Arbiter. Zampolli allegedly diverted Rispo's Italian clients to purchase through Fiocchi's entity structure.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:26:29",
+      "profile_id": "zampolli",
+      "other_person": "Giampiero Rispo",
+      "other_person_slug": "giampiero-rispo",
+      "evidence": []
+    },
+    {
+      "id": 5363,
+      "person_a": "Andrea Fiocchi",
+      "person_b": "Giampiero Rispo",
+      "relationship_type": "advisory",
+      "description": "Both serve Italian HNW real estate clients in NYC; Rispo's Domus Arbiter clients were diverted through Zampolli to Trump SoHo units handled by Fiocchi/Reinhardt",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:39",
+      "profile_id": "zampolli",
+      "other_person": "Giampiero Rispo",
+      "other_person_slug": "giampiero-rispo",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013031800030001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

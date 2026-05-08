@@ -5,7 +5,7 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:08.006998",
+  "generated_at": "2026-05-07T23:07:36.433631",
   "last_updated": "2026-03-09T20:57:29",
   "stats": {
     "total_findings": 5,
@@ -44,6 +44,31 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6466,
+      "finding_type": "intelligence",
+      "summary": "NUMIDENT authorization: On June 25 2025, CIO officials obtained from Michael Russo authorization for John Solly to upload NUMIDENT production data to DOGE test cloud environment that lacked independent security controls and bypassed security protocols. NUMIDENT contains all SSA card application data: names, DOB, citizenship, race/ethnicity, parents names and SSNs \u2014 300+ million Americans.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:56:21",
+      "target_name": "Michael Russo",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CSO_Online:2025-08-27; FedScoop:numident-whistleblower",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -120,31 +145,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FedScoop:ssa-swaps-doge-cio; Nextgov:2025-03-25",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6466,
-      "finding_type": "intelligence",
-      "summary": "NUMIDENT authorization: On June 25 2025, CIO officials obtained from Michael Russo authorization for John Solly to upload NUMIDENT production data to DOGE test cloud environment that lacked independent security controls and bypassed security protocols. NUMIDENT contains all SSA card application data: names, DOB, citizenship, race/ethnicity, parents names and SSNs \u2014 300+ million Americans.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:56:21",
-      "target_name": "Michael Russo",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CSO_Online:2025-08-27; FedScoop:numident-whistleblower",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -271,6 +271,14 @@
       "summary": "Michael Russo (DOGE-affiliated, former SSA CIO Feb-March 2025) authorized John Solly to upload NUMIDENT production data to DOGE test cloud environment on June 25 2025 despite security objections",
       "confidence": "high",
       "id": 6398
+    },
+    {
+      "date": "2025-06-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "NUMIDENT authorization: On June 25 2025, CIO officials obtained from Michael Russo authorization for John Solly to upload NUMIDENT production data to DOGE test cloud environment that lacked independent security controls and bypassed security protocols. NUMIDENT contains all SSA card application data: names, DOB, citizenship, race/ethnicity, parents names and SSNs \u2014 300+ million Americans.",
+      "confidence": "high",
+      "id": 6466
     },
     {
       "date": "2025-09-26",
@@ -413,100 +421,6 @@
       "institutional-capture",
       "enabler-gradient",
       "procurement-capture"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Michael Russo",
-      "connections": [
-        {
-          "target": "Frank Bisignano",
-          "type": "social",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Bisignano personally appointed Russo as SSA CIO; 20-year industry friendship"
-        },
-        {
-          "target": "John Solly",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
-          "description": "Russo (SSA CIO) authorized Solly (DOGE-aligned) to upload NUMIDENT production data to test cloud environment June 25 2025"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "https://www.csoonline.com/article/4046997/whistleblower-doge-put-social-security-database-covering-300-million-americans-on-insecure-cloud.html",
-          "description": "Russo previously executive at payment processor for Musk's Starlink before becoming SSA CIO"
-        },
-        {
-          "target": "Elon Musk",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Russo CTO at Shift4 which processes Starlink payments; indirect employer-client link"
-        }
-      ],
-      "secondHop": {
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "John Solly": [
-          {
-            "target": "Aram Moghaddassi",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Moghaddassi (SSA CIO) requested provisional authorization for Solly's cloud operation; July 25 2025 issued Provisional Authorization to Operate"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-06-25",
-        "label": "Michael Russo (DOGE-affiliated, former SSA CIO Feb-March 2025) authorized John Solly to upload NUMIDENT production data to DOGE test cloud environment on June 25 2025 despite security objections",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6398
-      },
-      {
-        "date": "2025-09-26",
-        "label": "Michael Russo previously served as executive at payment processor for Starlink (Musk company) before becoming SSA CIO \u2014 raising conflict of interest concerns given Starlink installed at GSA without authorization",
-        "type": "relationship",
-        "evidence_ref": null,
-        "id": 6421
-      }
     ]
   }
 }

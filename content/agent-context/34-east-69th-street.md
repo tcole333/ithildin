@@ -2,6 +2,8 @@
 **Stats**: 9 findings, 2 connections, 0 entities
 **Dossier**: /dossiers/34-east-69th-street
 
+> A property held in US government custody as Iranian sovereign real estate that Epstein leased from the State Department at below-market terms, sublet without authorization generating a profit spread, and became the subject of federal litigation that produced under-oath financial testimony now absent from the public record.
+
 ## Key Findings
 - **[intelligence/medium]** 34 East 69th Street is a 5-story townhouse (21ft wide, 100ft deep) TWO BLOCKS from 9 East 71st Street. The property legally belongs to Iran, held in custody by the US under the Foreign Missions Act of 1982 (22 USC 4305(c)). OFM managed 16 custodial properties at inception, leasing them to generate maintenance funds. This is NOT the same mechanism as the Alavi/650 Fifth Ave forfeiture (OFAC/IEEPA). Epstein's lease began Feb 1, 1992 at $15K/month during James Baker's tenure as Secretary of State. Extended Aug 28, 1992 for 3 more years through Jan 31, 1997 with right of first refusal. The $15K/month for a 5-story UES townhouse was significantly below market even in 1992. No public reporting identifies who within OFM approved the lease or who referred Epstein. (1992-02-01) (Finding #2151)
 - **[legal/confirmed]** Before subletting to Ivan Fisher, Epstein negotiated with Xenophon Galinas to assign the lease. The Epstein-Galinas arrangement included payment to Epstein of $100,000 for improvements Epstein had made. Meanwhile, Galinas independently contacted OFM and secured a letter agreement (Apr 12, 1996) for a new 5-year lease at $16,000/month starting Feb 1, 1997 — expressly contingent on Epstein not exercising his right of first refusal for personal use. On Apr 16, 1996 Epstein notified OFM he intended to exercise his right of first refusal — then used that as pretext to sublet to Fisher at $20K/month instead. (1996-04-12) (Finding #2147)
@@ -16,3 +18,14 @@
 ## Top Connections
 - **Landon Thomas Jr.** [financial/strong]: Finding #100: Thomas provided Epstein with Trump intelligence and received Trump dirt in return. Dec 8 2015: Epstein offered photos of donald and girls in bikinis i
 - **CDE Inc** [corporate/strong]: Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti
+
+## Open Questions
+- Who within OFM approved Epstein's below-market lease in February 1992, and through what channel was Epstein referred to the custodial property program?
+- Was Epstein's deposition taken in 96 CIV 8307, and if so, where is the transcript? The USAO file, court file, and Nakano's recollection are inconsistent on this point.
+- Did Judge Chin's 1998 protective order, and the resulting inaccessibility of Epstein's financial discovery, affect investigative decisions made in the 2007-2008 Florida plea negotiation?
+- What was Epstein's stated business purpose for leasing a five-story Upper East Side townhouse two blocks from his primary residence, given that he did not appear to use it as residential space?
+- Were any of the twelve attorney-subtenants named in the Second Amended Complaint clients, associates, or contacts of Epstein beyond their tenancy in the Fisher sublease?
+
+## Applicable Models
+- private-order
+- narrative-shield

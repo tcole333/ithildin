@@ -5,11 +5,11 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.992359",
-  "last_updated": "2026-03-05T21:20:33",
+  "generated_at": "2026-05-07T23:07:36.406418",
+  "last_updated": "2026-03-23T21:21:30",
   "stats": {
     "total_findings": 6,
-    "total_connections": 3,
+    "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
       "relationship": 4,
@@ -17,37 +17,13 @@
     },
     "connection_types": {
       "employment": 1,
-      "corporate": 1,
-      "political": 1
+      "corporate": 2,
+      "political": 2,
+      "financial": 2
     },
-    "last_updated": "2026-03-05T21:20:33"
+    "last_updated": "2026-03-23T21:21:30"
   },
   "findings": [
-    {
-      "id": 4592,
-      "finding_type": "relationship",
-      "summary": "Michael Kratsios (OSTP Director, confirmed Mar 25 2025, 74-25) previously managed $106B DoD R&D budget as acting USD(R&E) 2020-21. Prior to government return, served at Scale AI (AI data labeling company with defense contracts). FEC records show $6,600 max donations to Blake Masters (Thiel-backed) via WinRed and direct, plus $2,900 to Blake Masters for Senate. Also donated $50 to RNC in 2008 while at Barclays Capital. Drives 'promote and protect' strategy for AI -- ingesting all federal data into AI models. No evidence of public divestiture from Scale AI interests.",
-      "detail": null,
-      "source_datasets": [
-        "fec"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 17:00:19",
-      "target_name": "Michael Kratsios",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC records; OSTP.gov; CSIS; Defense One Jul 2025; Wikipedia",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
     {
       "id": 4678,
       "finding_type": "relationship",
@@ -57,7 +33,7 @@
         "web_search"
       ],
       "confidence": "medium",
-      "date_of_event": null,
+      "date_of_event": "2025-03-25",
       "claim_type": "synthesis",
       "verification_status": "unverified",
       "created_at": "2026-03-03 19:33:21",
@@ -88,6 +64,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "michaelkratsios.com biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4592,
+      "finding_type": "relationship",
+      "summary": "Michael Kratsios (OSTP Director, confirmed Mar 25 2025, 74-25) previously managed $106B DoD R&D budget as acting USD(R&E) 2020-21. Prior to government return, served at Scale AI (AI data labeling company with defense contracts). FEC records show $6,600 max donations to Blake Masters (Thiel-backed) via WinRed and direct, plus $2,900 to Blake Masters for Senate. Also donated $50 to RNC in 2008 while at Barclays Capital. Drives 'promote and protect' strategy for AI -- ingesting all federal data into AI models. No evidence of public divestiture from Scale AI interests.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:00:19",
+      "target_name": "Michael Kratsios",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC records; OSTP.gov; CSIS; Defense One Jul 2025; Wikipedia",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -287,10 +288,100 @@
       "other_person": "David Sacks",
       "other_person_slug": "david-sacks",
       "evidence": []
+    },
+    {
+      "id": 3507,
+      "person_a": "Michael Kratsios",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:42",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2020",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3508,
+      "person_a": "Michael Kratsios",
+      "person_b": "Scale AI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:42",
+      "profile_id": "tech-right",
+      "other_person": "Scale AI",
+      "other_person_slug": "scale-ai",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:ScaleAI:FY2020-2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3814,
+      "person_a": "Michael Kratsios",
+      "person_b": "Sriram Krishnan",
+      "relationship_type": "political",
+      "description": "Kratsios is OSTP Director, Krishnan's direct superior. Co-authored AI Action Plan (Jul 2025). Kratsios is former Thiel Capital managing director \u2014 Krishnan is former a16z GP. Both VC-to-government pipeline.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:21:30",
+      "profile_id": "tech-right",
+      "other_person": "Sriram Krishnan",
+      "other_person_slug": "sriram-krishnan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MeriTalk Dec 2024; Science.org 2025; CNBC Dec 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3502,
+      "person_a": "Kenneth Howery",
+      "person_b": "Michael Kratsios",
+      "relationship_type": "corporate",
+      "description": "Both worked at Thiel-founded Clarium Capital Management LLC. Howery as co-founder, Kratsios as CFO/Chief Compliance Officer. Both later entered government: Howery as Ambassador to Sweden, Kratsios as OSTP CTO then DoD. Clarium served as the Thiel personnel pipeline to government.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:28:37",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": []
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Michael Kratsios: Thiel Capital CFO/CCO to US CTO to acting USD(R&E) to OSTP Director \u2014 quintessential Thiel-to-government pipeline spanning both Trump terms",
+      "confidence": "medium",
+      "id": 4678
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       5101,
@@ -401,101 +492,5 @@
         "description": "The co-movement of Kratsios and Ethan A. Klein from Scale AI to OSTP \u2014 a Managing Director and a former intern arriving at the same office \u2014 illustrates a sub-pattern within the revolving door structure: not just individual placement but cohort transfer from a single private employer to a single government office. This creates shared institutional memory and durable professional loyalty within the receiving agency."
       }
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Michael Kratsios",
-      "connections": [
-        {
-          "target": "Peter Thiel",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Kratsios spent 7 years at Thiel Capital (CFO/CCO/principal) before becoming US CTO, acting USD(R&E), and now OSTP Director \u2014 quintessential Thiel-to-government pipeline"
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "propublica:kratsios-michael",
-          "description": "Kratsios is OSTP Director; disclosure references Thiel; holds Scale AI"
-        },
-        {
-          "target": "David Sacks",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Sequential occupants of White House tech policy positions. Kratsios (CTO Trump 1.0), Sacks (AI/Crypto Czar Trump 2.0). Both from Thiel network."
-        }
-      ],
-      "secondHop": {
-        "David Sacks": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Stanford Review colleagues, co-authored Diversity Myth 1998, PayPal COO. Sacks now Trump AI/Crypto czar. Cross-invested (Craft in Palantir, FF in Yammer)"
-          },
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Rockbridge Network (Vance founder, Sacks speaker). Coordinated conservative donor network."
-          },
-          {
-            "target": "Bo Hines",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Sacks was WH AI and Crypto Czar; Hines reported to Sacks as ED of Crypto Council. After resignation, Hines retained advisory role to assist Sacks on AI. Sacks praised Hines on departure."
-          },
-          {
-            "target": "Bo Hines",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hines served under Sacks as Executive Director of WH Crypto Council (Jan-Aug 2025). Sacks was WH AI and Crypto Czar (SGE). After resignation, Hines remained as SGE assisting Sacks on AI policy while simultaneously working for Tether."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Both in Trump tech-government nexus \u2014 Michael as USD(R&E)/Pentagon CTO, Sacks as White House AI & Crypto Czar; both shape AI policy benefiting Silicon Valley over traditional defense"
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

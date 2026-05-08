@@ -5,24 +5,53 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.918950",
-  "last_updated": "2026-03-06T18:27:54",
+  "generated_at": "2026-05-07T23:07:36.203960",
+  "last_updated": "2026-03-23T19:01:16",
   "stats": {
-    "total_findings": 11,
-    "total_connections": 3,
+    "total_findings": 16,
+    "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
-      "financial": 5,
-      "intelligence": 6
+      "intelligence": 8,
+      "financial": 6,
+      "relationship": 2
     },
     "connection_types": {
-      "corporate": 1,
+      "corporate": 2,
       "employment": 1,
+      "contracts_with": 1,
+      "advisory": 1,
+      "funds": 2,
       "financial": 1
     },
-    "last_updated": "2026-03-06T18:27:54"
+    "last_updated": "2026-03-23T19:01:16"
   },
   "findings": [
+    {
+      "id": 5323,
+      "finding_type": "intelligence",
+      "summary": "LITTLE TECH AGENDA AS POLICY BLUEPRINT: Published July 5, 2024 by Andreessen and Horowitz. Core demands: (1) deregulate AI development, (2) favorable cryptocurrency regulation, (3) relax merger/acquisition oversight for tech startups, (4) reduce capital gains taxation. Observers note the agenda 'has gone from being the tail wagging to the dog barking' -- better predicts Trump admin policy than Trump's own statements. Led to creation of American Innovators Network (April 2025): registered lobbying group with Vanessa Day (fmr Paul Ryan senior adviser) as executive director. Members include a16z and Y Combinator. Federal lobbying surged to $3.53M in 2025 -- double 2024. a16z head of government affairs Collin McCune (hired from Rep McHenry staff) stated: 'Andreessen Horowitz is on the side of Little Tech.' The agenda provides ideological cover for commercial interests: deregulating AI benefits a16z's AI portfolio, crypto regulation benefits a16z's crypto fund, relaxed M&A benefits portfolio company exits.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-07-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:44",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "a16z.com/the-little-tech-agenda; Broadband Breakfast 2025-01-29; Axios Pro 2025-04-02; American Bazaar 2025-08-26; Read Sludge 2025-08-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4705,
       "finding_type": "financial",
@@ -118,31 +147,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://a16z.com/american-dynamism-50-2025/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5323,
-      "finding_type": "intelligence",
-      "summary": "LITTLE TECH AGENDA AS POLICY BLUEPRINT: Published July 5, 2024 by Andreessen and Horowitz. Core demands: (1) deregulate AI development, (2) favorable cryptocurrency regulation, (3) relax merger/acquisition oversight for tech startups, (4) reduce capital gains taxation. Observers note the agenda 'has gone from being the tail wagging to the dog barking' -- better predicts Trump admin policy than Trump's own statements. Led to creation of American Innovators Network (April 2025): registered lobbying group with Vanessa Day (fmr Paul Ryan senior adviser) as executive director. Members include a16z and Y Combinator. Federal lobbying surged to $3.53M in 2025 -- double 2024. a16z head of government affairs Collin McCune (hired from Rep McHenry staff) stated: 'Andreessen Horowitz is on the side of Little Tech.' The agenda provides ideological cover for commercial interests: deregulating AI benefits a16z's AI portfolio, crypto regulation benefits a16z's crypto fund, relaxed M&A benefits portfolio company exits.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 20:17:44",
-      "target_name": "Andreessen Horowitz",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "a16z.com/the-little-tech-agenda; Broadband Breakfast 2025-01-29; Axios Pro 2025-04-02; American Bazaar 2025-08-26; Read Sludge 2025-08-26",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -267,7 +271,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001540358, Q4 2024 through Q4 2025 (5 quarterly filings)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1540358",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -292,7 +296,177 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001540358, Q4 2024 through Q4 2025 (5 quarterly filings)",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1540358",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7245,
+      "finding_type": "relationship",
+      "summary": "a16z lobbying expanded from health issues to financial/securities/banking/science-tech, hired BGR Government Affairs and Cornerstone in 2024-2025",
+      "detail": "Senate LDA records show a16z lobbying activity: 2023-2024 lobbied on Health Issues/Medicare/Medicaid via McDermott+ LLC (10K/quarter). In Q4 2024, dramatically expanded: hired Cornerstone Government Affairs (100K) for Financial Institutions/Investments/Securities. In Q1 2025, added BGR Government Affairs (30K initially, then 80K/quarter) for Financial Institutions/Investments/Securities, Banking, and Science/Technology. By Q3 2025, running three simultaneous lobbying operations: McDermott+ (health), Cornerstone (80K/qtr, financial), BGR (80K/qtr, financial/tech/banking). Entity name changed from 'Andreessen Horowitz' to 'A16Z Capital Management FKA Andreessen Horowitz' and later 'A16Z Capital Management LLC (D/B/A Andreessen Horowitz) FKA AH Capital Mgmt'.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:22",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate LDA client search Andreessen Horowitz (20 filings)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7249,
+      "finding_type": "relationship",
+      "summary": "Scott Kupor, a16z managing partner, confirmed as OPM Director July 2025 - first VC firm executive to run federal personnel agency",
+      "detail": "Scott Kupor, managing partner at Andreessen Horowitz who helped build the firm from inception in 2009 to 45B+ AUM, was nominated by Trump in December 2024 as Director of the Office of Personnel Management. He resigned from a16z fund and board positions ahead of Senate confirmation hearing (April 2025, HSGAC). Confirmed by Senate and sworn in July 14, 2025. Remained passive investor in multiple a16z funds. OPM oversees 2.1M federal civilian employees. This places an a16z insider at the helm of federal hiring while a16z portfolio companies (Anduril, Shield AI, etc.) seek government contracts and a16z's Booz Allen partnership (Jan 2026, 400M commitment) aims to accelerate portfolio company government adoption.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:35",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov PN12-24 nomination record",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Fortune 2025-04-03: Kupor resigned from a16z funds/boards",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HSGAC prepared statement for confirmation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OPM.gov Director biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7252,
+      "finding_type": "financial",
+      "summary": "Booz Allen Hamilton committed 400M to a16z fund, became first-ever Technology Acceleration Partner for Governments (Jan 2026)",
+      "detail": "On January 12, 2026, Booz Allen Hamilton announced partnership with Andreessen Horowitz to accelerate commercial tech for government. Booz Allen committed 400M to a16z's late-stage venture fund and became the first-ever a16z Technology Acceleration Partner for Governments. Partnership focuses on AI, cybersecurity, warfare tech, autonomous systems, and electronic warfare. Booz Allen will work with a16z portfolio companies to prepare products for secure government networks and regulated environments. This creates a direct pipeline from a16z's 1.176B American Dynamism fund (Anduril, Shield AI, Saronic, Castelion) into government procurement via Booz Allen's 8.4B annual revenue government contracting operation.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:45",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Booz Allen Hamilton press release 2026-01-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Technology: Booz Allen commits 400M to a16z late-stage fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7269,
+      "finding_type": "intelligence",
+      "summary": "a16z American Dynamism fund (1.176B) positions a16z as primary VC pipeline for defense/national security procurement",
+      "detail": "a16z American Dynamism fund raised 1.176B focused on defense, aerospace, public safety, supply chain, industrials, manufacturing. Portfolio mirrors Pentagon priorities: Anduril Industries (autonomous defense, 2.36B federal contracts), Shield AI (military drones), Saronic Technologies (autonomous naval vessels), Castelion (hypersonic missiles), Hadrian (aerospace manufacturing), Apex Space (satellites), Applied Intuition (autonomous vehicle software for defense). In January 2026, a16z raised 15B across five funds total. With Booz Allen partnership (400M), Scott Kupor at OPM, Andreessen on HSAC, and FAIRSHAKE political spending (23.8M from founders alone), a16z has constructed a comprehensive influence architecture spanning venture capital, lobbying, political donations, government advisory positions, and executive branch appointments.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:33",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Benzinga: a16z doubles down on AI and defense",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch: a16z 15B raise Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z.com American Dynamism page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7297,
+      "finding_type": "intelligence",
+      "summary": "a16z has constructed comprehensive government influence architecture: HSAC seat, OPM director, 3 lobbying firms, 23.8M political donations, Booz Allen pipeline, American Dynamism fund",
+      "detail": "Synthesis of all findings reveals a16z has built a multi-layered government influence architecture: (1) ADVISORY: Marc Andreessen on HSAC since June 2025, participating in closed DHS operational discussions; (2) EXECUTIVE BRANCH: Scott Kupor as OPM Director (confirmed July 2025), overseeing 2.1M federal employees while maintaining passive a16z investments; (3) LOBBYING: Three simultaneous lobbying operations - McDermott+ (health), Cornerstone (financial/securities), BGR (financial/tech/banking); (4) POLITICAL SPENDING: Andreessen and Horowitz each gave 11.9M to FAIRSHAKE (23.8M total), plus hundreds of thousands to Republican candidates; (5) DEFENSE PIPELINE: American Dynamism fund (1.176B) backing Anduril (2.36B federal contracts), Shield AI, Saronic, Castelion; (6) PROCUREMENT BRIDGE: Booz Allen 400M partnership to accelerate a16z portfolio into government. This architecture creates potential conflicts: Andreessen advises DHS on security while a16z companies receive 861M+ in DHS contracts; Kupor oversees federal hiring while a16z companies seek government business.",
+      "source_datasets": [
+        "fec",
+        "lobbying",
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:16",
+      "target_name": "Andreessen Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "All findings 7240, 7243, 7245, 7249, 7252, 7256, 7269",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -332,6 +506,122 @@
       "evidence": []
     },
     {
+      "id": 3519,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "Cornerstone Government Affairs, Inc.",
+      "relationship_type": "contracts_with",
+      "description": "Lobbying firm representing a16z on technology/blockchain/crypto/energy issues, Q4 2024-present, K total LDA income",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:43",
+      "profile_id": "tech-right",
+      "other_person": "Cornerstone Government Affairs, Inc.",
+      "other_person_slug": "cornerstone-government-affairs-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:75557",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3646,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "HSAC",
+      "relationship_type": "advisory",
+      "description": "Marc Andreessen appointed to HSAC June 2025 by President Trump",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:58",
+      "profile_id": "tech-right",
+      "other_person": "HSAC",
+      "other_person_slug": "hsac",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov announcement 2025-06-24",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3649,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "Anduril Industries",
+      "relationship_type": "funds",
+      "description": "a16z investor in Anduril via American Dynamism fund; Anduril has 2.36B in federal contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:03",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z American Dynamism portfolio",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3650,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "Shield AI",
+      "relationship_type": "funds",
+      "description": "a16z investor in Shield AI via American Dynamism fund",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:05",
+      "profile_id": "tech-right",
+      "other_person": "Shield AI",
+      "other_person_slug": "shield-ai",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "a16z American Dynamism portfolio page",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3653,
+      "person_a": "Andreessen Horowitz",
+      "person_b": "Booz Allen Hamilton",
+      "relationship_type": "corporate",
+      "description": "Booz Allen became first-ever a16z Technology Acceleration Partner for Governments (Jan 2026), committed 400M to a16z late-stage fund",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:15",
+      "profile_id": "tech-right",
+      "other_person": "Booz Allen Hamilton",
+      "other_person_slug": "booz-allen-hamilton",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Booz Allen press release 2026-01-12",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3004,
       "person_a": "Andreessen Horowitz",
       "person_b": "Sam Corcos",
@@ -355,7 +645,16 @@
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-07-05",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "LITTLE TECH AGENDA AS POLICY BLUEPRINT: Published July 5, 2024 by Andreessen and Horowitz. Core demands: (1) deregulate AI development, (2) favorable cryptocurrency regulation, (3) relax merger/acquisition oversight for tech startups, (4) reduce capital gains taxation. Observers note the agenda 'has gone from being the tail wagging to the dog barking' -- better predicts Trump admin policy than Trump's own statements. Led to creation of American Innovators Network (April 2025): registered lobbying group with Vanessa Day (fmr Paul Ryan senior adviser) as executive director. Members include a16z and Y Combinator. Federal lobbying surged to $3.53M in 2025 -- double 2024. a16z head of government affairs Collin McCune (hired from Rep McHenry staff) stated: 'Andreessen Horowitz is on the side of Little Tech.' The agenda provides ideological cover for commercial interests: deregulating AI benefits a16z's AI portfolio, crypto regulation benefits a16z's crypto fund, relaxed M&A benefits portfolio company exits.",
+      "confidence": "high",
+      "id": 5323
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4705,
@@ -468,69 +767,5 @@
       "private-order",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Andreessen Horowitz",
-      "connections": [
-        {
-          "target": "Scott Kupor",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "First hire 2009; managing partner 16 years; resigned from 32 funds but passive investor in 38 others upon becoming OPM Director July 2025; planned 300K federal role elimination"
-        },
-        {
-          "target": "Scott Kupor",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "a16z first hire and managing partner became OPM Director July 2025, absorbed DOGE workforce functions"
-        },
-        {
-          "target": "Sam Corcos",
-          "type": "financial",
-          "strength": 0.7,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
-        }
-      ],
-      "secondHop": {
-        "Sam Corcos": [
-          {
-            "target": "Scott Kupor",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
-          },
-          {
-            "target": "DOGE",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
-          },
-          {
-            "target": "Clark Minor",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

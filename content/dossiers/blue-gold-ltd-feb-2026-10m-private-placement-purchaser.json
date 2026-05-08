@@ -1,0 +1,188 @@
+{
+  "name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+  "slug": "blue-gold-ltd-feb-2026-10m-private-placement-purchaser",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.375406",
+  "last_updated": "2026-03-30T04:05:23",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "regulatory": 2
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-30T04:05:23"
+  },
+  "findings": [
+    {
+      "id": 8832,
+      "finding_type": "financial",
+      "summary": "Kaela Ritchie provided $2M loan facility to BGL in January 2026 \u2014 identity and relationship unknown, creates 506(b) pre-existing relationship",
+      "detail": "Blue Gold Limited entered a Facility Agreement with Kaela Ritchie providing a $2,000,000 drawdown loan facility at 10% per annum. Maturing January 9, 2027. Maximum drawdown $500,000/week. No earlier relationship disclosed. Identity of Kaela Ritchie not disclosed in the filing.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-01-10",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8826,
+      "finding_type": "financial",
+      "summary": "Blue Gold Ltd $10M private placement at $4.00/share \u2014 purchaser identity undisclosed in SPA exhibit",
+      "detail": "Blue Gold Limited entered a Securities Purchase Agreement with an unnamed 'Purchaser' for 2,500,000 Class A ordinary shares at $4.00/share for gross proceeds of $10,000,000. Expected close on or before March 9, 2026. Proceeds for working capital, general corporate purposes, and to repay certain debt obligations. Rule 506(b) exemption. Filed as 6-K on Feb 26, 2026.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-23",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8827,
+      "finding_type": "financial",
+      "summary": "BGL private placement priced at 80% premium to market ($4.00 vs $2.22 on placement date)",
+      "detail": "BGL closing price on Feb 23, 2026 (placement date) was $2.22/share. The placement price of $4.00 represents an 80% premium over market price, which is highly abnormal for a private placement (which typically prices at a 10-20% discount).",
+      "source_datasets": "edgar,market_data",
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-23",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8834,
+      "finding_type": "financial",
+      "summary": "506(b) pre-existing relationship requirement narrows purchaser candidates to known BGL counterparties \u2014 Kaela Ritchie and 3i LP affiliates are strongest candidates",
+      "detail": "Rule 506(b) requires no general solicitation and a pre-existing substantive relationship with the purchaser. The set of parties with such a relationship includes: 3i LP, Tumim Stone Capital LLC, Kaela Ritchie, BCMP Services Limited, Resource Capital Fund VII LP, Think Katalyst LLC, City First, and Sameer Salgar. Tumim's equity commitment structure is VWAP-based and incompatible with fixed $4.00 pricing. Resource Capital Fund (mining PE) is possible but no update to 13G. Kaela Ritchie (recent lender) and 3i LP (existing creditor) are strongest candidates.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-02-23",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8828,
+      "finding_type": "regulatory",
+      "summary": "Blue Gold failed to file Form D for Feb 2026 $10M placement \u2014 Reg D compliance violation",
+      "detail": "No Form D has been filed with the SEC for the February 23, 2026 Rule 506(b) offering as of March 29, 2026. Form D is required within 15 calendar days of first sale. The only Form D on file (0001213900-25-092416, Sep 2025) covers only the 3i convertible note offering. This is at minimum a 5-day violation if placement closed March 9.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-02-26",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8830,
+      "finding_type": "financial",
+      "summary": "Securities Purchase Agreement filed with blank purchaser signature page \u2014 identity deliberately withheld",
+      "detail": "The SPA exhibit (Exhibit 10.1, file ea027838301ex10-1.htm) was filed as part of the Feb 26 6-K with the purchaser signature page left blank. Fields 'Name of Authorized Signatory', 'Title of Authorized Signatory', and 'Email Address of Authorized Signatory' are all empty. The Subscription Amount ($10,000,000) is stated but the purchaser entity is not identified.",
+      "source_datasets": "edgar",
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-26",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8829,
+      "finding_type": "regulatory",
+      "summary": "No Schedule 13D/13G filed for new ~6.6% BGL holder from Feb 2026 placement",
+      "detail": "The 2,500,000 shares purchased = ~6.6% of post-placement shares outstanding (37.6M). Any person acquiring >5% must file Schedule 13D or 13G. No such filing appears in EDGAR for a new large BGL holder as of March 29, 2026. This suggests either the placement has not closed, the purchaser is using multiple entities to stay below 5%, or a filing is overdue.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-03-29",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 04:05:23",
+      "target_name": "Blue Gold Ltd Feb 2026 $10M Private Placement Purchaser",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-01-10",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Kaela Ritchie provided $2M loan facility to BGL in January 2026 \u2014 identity and relationship unknown, creates 506(b) pre-existing relationship",
+      "confidence": "confirmed",
+      "id": 8832
+    },
+    {
+      "date": "2026-02-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Blue Gold Ltd $10M private placement at $4.00/share \u2014 purchaser identity undisclosed in SPA exhibit",
+      "confidence": "confirmed",
+      "id": 8826
+    },
+    {
+      "date": "2026-02-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "BGL private placement priced at 80% premium to market ($4.00 vs $2.22 on placement date)",
+      "confidence": "confirmed",
+      "id": 8827
+    },
+    {
+      "date": "2026-02-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "506(b) pre-existing relationship requirement narrows purchaser candidates to known BGL counterparties \u2014 Kaela Ritchie and 3i LP affiliates are strongest candidates",
+      "confidence": "medium",
+      "id": 8834
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Blue Gold failed to file Form D for Feb 2026 $10M placement \u2014 Reg D compliance violation",
+      "confidence": "medium",
+      "id": 8828
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Securities Purchase Agreement filed with blank purchaser signature page \u2014 identity deliberately withheld",
+      "confidence": "confirmed",
+      "id": 8830
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "No Schedule 13D/13G filed for new ~6.6% BGL holder from Feb 2026 placement",
+      "confidence": "medium",
+      "id": 8829
+    }
+  ]
+}

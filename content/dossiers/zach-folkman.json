@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.918134",
+  "generated_at": "2026-05-07T23:07:36.277799",
   "last_updated": "2026-02-26T18:48:43",
   "stats": {
     "total_findings": 12,
@@ -27,7 +27,7 @@
       "id": 3676,
       "finding_type": "legal",
       "summary": "Folkman Holding Enterprises LLC (WY, 2023-001252849) filed Apr 2023. HERRO LLC (WY, 2025-001706971) filed Jun 2025. Both use identical registered agent: Registered Agents Inc, 30 N Gould St Ste R, Sheridan WY 82801. HERRO LLC organized by Distributed Inc (115 W 27th St #10R, NY 10001).",
-      "detail": "Wyoming corporate registry reveals two entities sharing the same privacy-focused registered agent address: Folkman Holding Enterprises LLC (Active, formed April 12, 2023, perpetual term, annual reports filed through 2026) and HERRO LLC (Active, formed June 24, 2025, initial filing only). The shared RA address (30 N Gould St Ste R, Sheridan WY — Registered Agents Inc) suggests connected ownership. HERRO LLC was organized by Distributed Inc at a NYC address. Combined with Axiom Management Group LLC in Puerto Rico, Folkman has entities across at least 3 jurisdictions.",
+      "detail": "Wyoming corporate registry reveals two entities sharing the same privacy-focused registered agent address: Folkman Holding Enterprises LLC (Active, formed April 12, 2023, perpetual term, annual reports filed through 2026) and HERRO LLC (Active, formed June 24, 2025, initial filing only). The shared RA address (30 N Gould St Ste R, Sheridan WY \u2014 Registered Agents Inc) suggests connected ownership. HERRO LLC was organized by Distributed Inc at a NYC address. Combined with Axiom Management Group LLC in Puerto Rico, Folkman has entities across at least 3 jurisdictions.",
       "source_datasets": null,
       "confidence": "high",
       "date_of_event": null,
@@ -89,14 +89,21 @@
           "source_quote": null,
           "source_page": null,
           "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2095100",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
         }
       ]
     },
     {
       "id": 3698,
       "finding_type": "financial",
-      "summary": "Folkman co-founded Dough Finance (DeFi platform) which was hacked July 12, 2024 — .5M stolen, most investors uncompensated",
-      "detail": "Folkman and Chase Herro co-created Dough Finance, a DeFi application enabling leveraged crypto trading through 'looping.' On July 12, 2024, hackers exploited a code vulnerability and stole approximately .5M. Dough acknowledged the hack via Medium post on July 23, 2024. Only K was recovered, leaving approximately 2,700 users with major losses. Investor Jonathan Lopez filed federal lawsuit in Miami against Chase Herro alleging fraud, misrepresentation, breach of fiduciary duty, and FL securities violations after losing ~M (300 ETH worth K at time). Herro texted Lopez promising reimbursement but never delivered. Trial set for April 2026 in Miami federal court. Herro's attorneys argue Lopez was 'sophisticated investor.' Meanwhile Folkman and Herro moved to launch WLFI in September 2024 — just two months after the Dough hack.",
+      "summary": "Folkman co-founded Dough Finance (DeFi platform) which was hacked July 12, 2024 \u2014 .5M stolen, most investors uncompensated",
+      "detail": "Folkman and Chase Herro co-created Dough Finance, a DeFi application enabling leveraged crypto trading through 'looping.' On July 12, 2024, hackers exploited a code vulnerability and stole approximately .5M. Dough acknowledged the hack via Medium post on July 23, 2024. Only K was recovered, leaving approximately 2,700 users with major losses. Investor Jonathan Lopez filed federal lawsuit in Miami against Chase Herro alleging fraud, misrepresentation, breach of fiduciary duty, and FL securities violations after losing ~M (300 ETH worth K at time). Herro texted Lopez promising reimbursement but never delivered. Trial set for April 2026 in Miami federal court. Herro's attorneys argue Lopez was 'sophisticated investor.' Meanwhile Folkman and Herro moved to launch WLFI in September 2024 \u2014 just two months after the Dough hack.",
       "source_datasets": null,
       "confidence": "high",
       "date_of_event": null,
@@ -141,8 +148,8 @@
     {
       "id": 3700,
       "finding_type": "financial",
-      "summary": "FEC records show no political donations by Folkman from Puerto Rico. K donation by 'Zachary Folkman' in Miami FL to Stand for America PAC (June 2021) — listed as student",
-      "detail": "FEC donor search for 'Folkman, Zachary' returns 12 records. Potential match: FOLKMAN, ZACHARY from Miami FL, employer listed as 'STUDENT', occupation 'STUDENT', donated ,000 to Stand for America PAC on 2021-06-29. Stand for America PAC is a leadership PAC. The Miami address and 2021 date are consistent with Folkman's known Florida connections. However, listing occupation as 'student' at age ~34 is unusual — Folkman graduated from New York Law School in 2010. Other 'Folkman, Zachary' records are a UPS package handler in Redmond WA (small ActBlue donations 2015-2020) — likely different person. No FEC records from Puerto Rico.",
+      "summary": "FEC records show no political donations by Folkman from Puerto Rico. K donation by 'Zachary Folkman' in Miami FL to Stand for America PAC (June 2021) \u2014 listed as student",
+      "detail": "FEC donor search for 'Folkman, Zachary' returns 12 records. Potential match: FOLKMAN, ZACHARY from Miami FL, employer listed as 'STUDENT', occupation 'STUDENT', donated ,000 to Stand for America PAC on 2021-06-29. Stand for America PAC is a leadership PAC. The Miami address and 2021 date are consistent with Folkman's known Florida connections. However, listing occupation as 'student' at age ~34 is unusual \u2014 Folkman graduated from New York Law School in 2010. Other 'Folkman, Zachary' records are a UPS package handler in Redmond WA (small ActBlue donations 2015-2020) \u2014 likely different person. No FEC records from Puerto Rico.",
       "source_datasets": null,
       "confidence": "medium",
       "date_of_event": null,
@@ -164,8 +171,8 @@
     {
       "id": 3701,
       "finding_type": "financial",
-      "summary": "ALT5 Sigma Corp (ALTS, Nasdaq) serves as WLFI's public market vehicle — Folkman joined board Aug 2025, concurrent with WLFI takeover",
-      "detail": "ALT5 Sigma Corp (CIK 0000862861, NV corp, NV Business ID NV20181178042, IRS EIN 41-1454591) trades on Nasdaq as ALTS. Key timeline: Oct 16, 2025 — CEO Peter Tassiopoulos suspended; Oct 23, 2025 — former consultant caught downloading company files; Nov 4, 2025 — ALT5 sued consultant in DE Chancery Court; Nov 13, 2025 — Folkman filed Form 3 (director) and WLFI filed Schedule 13G. WLFI obtained 1M shares + 99M pre-funded warrants + 20M additional warrants. ALT5 also entered M loan agreement with WLFI, collateralized by WLFI tokens at 65% LTV. Principal offices: 325 E Warm Spring Rd Suite 102, Las Vegas NV 89119. Current board: Zachary Witkoff (Chairman), Tony Isaac, Zachary Folkman, Nael Hajjar, John Bitar, Dr. Adel Elmessiry, Tim Stanley.",
+      "summary": "ALT5 Sigma Corp (ALTS, Nasdaq) serves as WLFI's public market vehicle \u2014 Folkman joined board Aug 2025, concurrent with WLFI takeover",
+      "detail": "ALT5 Sigma Corp (CIK 0000862861, NV corp, NV Business ID NV20181178042, IRS EIN 41-1454591) trades on Nasdaq as ALTS. Key timeline: Oct 16, 2025 \u2014 CEO Peter Tassiopoulos suspended; Oct 23, 2025 \u2014 former consultant caught downloading company files; Nov 4, 2025 \u2014 ALT5 sued consultant in DE Chancery Court; Nov 13, 2025 \u2014 Folkman filed Form 3 (director) and WLFI filed Schedule 13G. WLFI obtained 1M shares + 99M pre-funded warrants + 20M additional warrants. ALT5 also entered M loan agreement with WLFI, collateralized by WLFI tokens at 65% LTV. Principal offices: 325 E Warm Spring Rd Suite 102, Las Vegas NV 89119. Current board: Zachary Witkoff (Chairman), Tony Isaac, Zachary Folkman, Nael Hajjar, John Bitar, Dr. Adel Elmessiry, Tim Stanley.",
       "source_datasets": null,
       "confidence": "confirmed",
       "date_of_event": null,
@@ -210,8 +217,8 @@
     {
       "id": 3704,
       "finding_type": "identity",
-      "summary": "Folkman entity network: Axiom Management Group (PR), Folkman Holding Enterprises (WY), HERRO LLC (WY) — connected via same registered agent",
-      "detail": "Folkman's known corporate entities: (1) Axiom Management Group LLC — PR Corp Register #420115-1511, formed Dec 21, 2018, Active, Domestic LLC. Address: Villas Del Mar Beach Resort, Apt H-302 Edificio H, Rio Grande PR 00745. Incorporator: Zachary Folkman. Also listed on WLFI Form D at 425 Carr 693 PMB 285, Dorado PR 00646. Managing Director position from 2019-present per SEC filing. (2) Folkman Holding Enterprises LLC — Wyoming LLC (2023-001252849), filed Apr 12, 2023, Active. Uses Registered Agents Inc (30 N Gould St Ste R, Sheridan WY 82801). (3) HERRO LLC — Wyoming LLC (2025-001706971), filed Jun 2025, organized by Distributed Inc (115 W 27th St #10R, NY 10001), uses same Registered Agents Inc address as Folkman Holding. The shared registered agent suggests coordinated entity management.",
+      "summary": "Folkman entity network: Axiom Management Group (PR), Folkman Holding Enterprises (WY), HERRO LLC (WY) \u2014 connected via same registered agent",
+      "detail": "Folkman's known corporate entities: (1) Axiom Management Group LLC \u2014 PR Corp Register #420115-1511, formed Dec 21, 2018, Active, Domestic LLC. Address: Villas Del Mar Beach Resort, Apt H-302 Edificio H, Rio Grande PR 00745. Incorporator: Zachary Folkman. Also listed on WLFI Form D at 425 Carr 693 PMB 285, Dorado PR 00646. Managing Director position from 2019-present per SEC filing. (2) Folkman Holding Enterprises LLC \u2014 Wyoming LLC (2023-001252849), filed Apr 12, 2023, Active. Uses Registered Agents Inc (30 N Gould St Ste R, Sheridan WY 82801). (3) HERRO LLC \u2014 Wyoming LLC (2025-001706971), filed Jun 2025, organized by Distributed Inc (115 W 27th St #10R, NY 10001), uses same Registered Agents Inc address as Folkman Holding. The shared registered agent suggests coordinated entity management.",
       "source_datasets": null,
       "confidence": "high",
       "date_of_event": null,
@@ -223,7 +230,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "PR Corp Register #420115-1511; WY SOS 2023-001252849; WY SOS 2025-001706971; SEC Form D/A CIK 0002043140",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -233,7 +240,7 @@
     {
       "id": 3705,
       "finding_type": "financial",
-      "summary": "Folkman's Puerto Rico residency consistent with Act 60 (formerly Act 22) tax incentive for individual investors — 0% capital gains tax",
+      "summary": "Folkman's Puerto Rico residency consistent with Act 60 (formerly Act 22) tax incentive for individual investors \u2014 0% capital gains tax",
       "detail": "Folkman resides in Dorado, Puerto Rico (WLFI Form D address: 425 Carr 693 PMB 285, Dorado PR 00646). Axiom Management Group was registered with address at Villas Del Mar Beach Resort, Rio Grande PR. Puerto Rico's Act 60 (formerly Act 22) offers individual investors who become bona fide residents 0% capital gains tax on gains accrued after becoming a PR resident. This is a widely-used tax strategy among crypto entrepreneurs. Per the Seattle Times, Folkman and Herro previously lived in the US Virgin Islands before moving to Puerto Rico. The USVI also offers significant tax incentives under the Economic Development Authority program. Folkman's formation of Axiom Management Group in PR in December 2018 is consistent with establishing PR tax residency for crypto activities beginning 'since 2016' per the SEC filing.",
       "source_datasets": null,
       "confidence": "medium",
@@ -246,7 +253,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC Form D/A CIK 0002043140; PR Act 60; Seattle Times 2024-10-07",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=2043140",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -257,7 +264,7 @@
       "id": 3706,
       "finding_type": "identity",
       "summary": "No ICIJ offshore leaks, no OpenSanctions matches, no NV/NJ/TX registry entities for Folkman personally. Negative searches across 6 registries.",
-      "detail": "Negative search results: (1) ICIJ Offshore Leaks — unavailable (neo4j not installed); (2) OpenSanctions — only hit is Roy Folkman (Israeli Knesset member, Kulanu party, b. 1975), no relation; (3) NV SOS — 0 results for 'Folkman'; (4) NJ Division of Revenue — only hit is Folkman Law Offices PC (Cherry Hill, NJ, formed 1998), Benjamin Folkman, no relation; (5) TX Comptroller — Folkman Trucking Inc, Folkman Properties LLC, Folkman Enterprises Inc, Folkmann Law Firm LLC — all appear unrelated (different zip codes, different business types); (6) crt.sh Certificate Transparency — only 'Zenger Folkman Company' (leadership consulting firm), unrelated. (7) No FEC donations from PR address.",
+      "detail": "Negative search results: (1) ICIJ Offshore Leaks \u2014 unavailable (neo4j not installed); (2) OpenSanctions \u2014 only hit is Roy Folkman (Israeli Knesset member, Kulanu party, b. 1975), no relation; (3) NV SOS \u2014 0 results for 'Folkman'; (4) NJ Division of Revenue \u2014 only hit is Folkman Law Offices PC (Cherry Hill, NJ, formed 1998), Benjamin Folkman, no relation; (5) TX Comptroller \u2014 Folkman Trucking Inc, Folkman Properties LLC, Folkman Enterprises Inc, Folkmann Law Firm LLC \u2014 all appear unrelated (different zip codes, different business types); (6) crt.sh Certificate Transparency \u2014 only 'Zenger Folkman Company' (leadership consulting firm), unrelated. (7) No FEC donations from PR address.",
       "source_datasets": null,
       "confidence": "high",
       "date_of_event": null,
@@ -269,7 +276,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions API; NV SOS; NJ Division of Revenue; TX Comptroller; crt.sh; FEC donor database",
+          "evidence_ref": "OpenSanctions:API",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -436,37 +443,37 @@
       }
     ],
     "curated_at": "2026-03-11T22:30:59.450292",
-    "lead": "<p>Zachary Folkman (born circa 1985) is a co-founder, Executive Officer, and Director of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> Inc (WLFI), a decentralized finance token-sale platform organized in 2024 with Donald Trump as named promoter [Finding #3694]. According to an SEC proxy filing, Folkman graduated from New York Law School in 2010 and has been active in the digital asset sector since 2016 [Finding #3693]. According to reporting by CoinDesk, the Seattle Times, and The New York Times, he previously operated under the alias “Zack Bauer” in the pickup artist industry, running Date Hotter Girls LLC and seminars affiliated with Real Social Dynamics [Finding #3693]. Puerto Rico corporate records show he maintains Axiom Management Group LLC (PR Corp #420115-1511, formed December 21, 2018) at the same Dorado, PR address listed on WLFI’s SEC Form D filings [Finding #3704].</p><p>Folkman is one of three members of WLF Holdco LLC’s Board of Managers alongside <a href=\"/dossiers/chase-herro\">Chase Herro</a> and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a>; no single manager holds unilateral authority to vote or dispose of securities [Finding #3694]. The WLFI SEC Form D/A filed July 2025 disclosed $6.1 million raised, with $5.97 million (97.3%) paid to named promoters, officers, and directors [Finding #3702]. Reuters reported in May 2025 that of approximately $550 million in total WLFI token sales, Folkman and Herro collected at least $30 million while the Trump family received approximately $400 million [Finding #3702]. According to SEC records, Folkman also holds a Director position at <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a> (Nasdaq: ALTS), with a Form 3 filed November 13, 2025 disclosing 1 million shares of beneficial interest held indirectly through WLFI [Finding #3694]. According to ALT5 proxy filings, he joined the board in August 2025, concurrent with WLFI’s acquisition of 1 million ALT5 shares, 99 million pre-funded warrants, and warrants for 20 million additional shares [Finding #3701].</p><p>Folkman and longtime business partner Chase Herro co-founded Dough Finance, a DeFi leveraged trading platform. According to the project’s own disclosure and subsequent media reporting, hackers exploited a code vulnerability on July 12, 2024 and stole approximately $1.8 million from roughly 2,700 users; most investors received no compensation [Finding #3698]. According to media reports, Folkman and Herro announced WLFI approximately two months later, in September 2024 [Finding #3698]. According to the Seattle Times and The New York Times (October 2024), Folkman and Herro shared a history of financial difficulties including an American Express lawsuit against Folkman for $16,000 in unpaid credit card bills, a $3,300 California tax debt, a 2017 client lawsuit for nonpayment (later withdrawn), and an unpaid-rent dispute in the US Virgin Islands that settled in 2019 [Finding #3699].</p>",
+    "lead": "<p>Zachary Folkman (born circa 1985) is a co-founder, Executive Officer, and Director of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> Inc (WLFI), a decentralized finance token-sale platform organized in 2024 with Donald Trump as named promoter [Finding #3694]. According to an SEC proxy filing, Folkman graduated from New York Law School in 2010 and has been active in the digital asset sector since 2016 [Finding #3693]. According to reporting by CoinDesk, the Seattle Times, and The New York Times, he previously operated under the alias \u201cZack Bauer\u201d in the pickup artist industry, running Date Hotter Girls LLC and seminars affiliated with Real Social Dynamics [Finding #3693]. Puerto Rico corporate records show he maintains Axiom Management Group LLC (PR Corp #420115-1511, formed December 21, 2018) at the same Dorado, PR address listed on WLFI\u2019s SEC Form D filings [Finding #3704].</p><p>Folkman is one of three members of WLF Holdco LLC\u2019s Board of Managers alongside <a href=\"/dossiers/chase-herro\">Chase Herro</a> and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a>; no single manager holds unilateral authority to vote or dispose of securities [Finding #3694]. The WLFI SEC Form D/A filed July 2025 disclosed $6.1 million raised, with $5.97 million (97.3%) paid to named promoters, officers, and directors [Finding #3702]. Reuters reported in May 2025 that of approximately $550 million in total WLFI token sales, Folkman and Herro collected at least $30 million while the Trump family received approximately $400 million [Finding #3702]. According to SEC records, Folkman also holds a Director position at <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a> (Nasdaq: ALTS), with a Form 3 filed November 13, 2025 disclosing 1 million shares of beneficial interest held indirectly through WLFI [Finding #3694]. According to ALT5 proxy filings, he joined the board in August 2025, concurrent with WLFI\u2019s acquisition of 1 million ALT5 shares, 99 million pre-funded warrants, and warrants for 20 million additional shares [Finding #3701].</p><p>Folkman and longtime business partner Chase Herro co-founded Dough Finance, a DeFi leveraged trading platform. According to the project\u2019s own disclosure and subsequent media reporting, hackers exploited a code vulnerability on July 12, 2024 and stole approximately $1.8 million from roughly 2,700 users; most investors received no compensation [Finding #3698]. According to media reports, Folkman and Herro announced WLFI approximately two months later, in September 2024 [Finding #3698]. According to the Seattle Times and The New York Times (October 2024), Folkman and Herro shared a history of financial difficulties including an American Express lawsuit against Folkman for $16,000 in unpaid credit card bills, a $3,300 California tax debt, a 2017 client lawsuit for nonpayment (later withdrawn), and an unpaid-rent dispute in the US Virgin Islands that settled in 2019 [Finding #3699].</p>",
     "system_role": "Co-founder, Executive Officer, and Director of World Liberty Financial Inc (WLFI), a DeFi token-sale platform launched in 2024 with Donald Trump as named promoter. Previously operated in pickup-artist marketing and multiple cryptocurrency ventures with long-term business partner Chase Herro. Based in Puerto Rico; holds a board seat at ALT5 Sigma Corp (Nasdaq: ALTS). Analysis covers WLFI governance and financial structure, prior venture history including the Dough Finance hack, corporate entity network across three jurisdictions, and revenue flows to named promoters.",
     "sections": [
       {
         "id": "wlfi-structure-and-role",
         "title": "World Liberty Financial: Structure and Role",
-        "content": "<p><a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> (WLFI) launched its token presale in September 2024, with Donald Trump as named promoter and Folkman as co-founder and Executive Officer [Finding #3694]. The governance structure places control of WLFI’s securities in WLF Holdco LLC, whose three-person Board of Managers — Folkman, <a href=\"/dossiers/chase-herro\">Chase Herro</a>, and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> — must act collectively to vote or dispose of shares [Finding #3694]. According to the WLFI Form D, Folkman’s Puerto Rico entity Axiom Management Group LLC is designated as a named promoter receiving 25% of net WLFI revenue, with DT Marks DEFI LLC (Trump’s entity) receiving the remaining 75%. The SEC Form D/A filed in July 2025 reported $6.1 million raised with $5.97 million disbursed to promoters, officers, and directors [Finding #3702]. According to Reuters, total token sales reached approximately $550 million by May 2025, with Herro and Folkman together collecting at least $30 million of that amount [Finding #3702].</p><p>According to ALT5 Sigma Corp proxy filings, WLFI entered into a $5 million loan agreement with <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a>, collateralized by WLFI tokens at 65% loan-to-value, as part of a broader acquisition of that Nasdaq-listed company [Finding #3701]. According to SEC records, Folkman filed his Form 3 as an ALT5 director on November 13, 2025, the same date WLFI filed Schedule 13G disclosing its ALT5 ownership stake [Finding #3701]. According to the same proxy filing, the reconstituted ALT5 board includes <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> as Chairman and Folkman as director, alongside five other nominees [Finding #3701].</p>",
+        "content": "<p><a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> (WLFI) launched its token presale in September 2024, with Donald Trump as named promoter and Folkman as co-founder and Executive Officer [Finding #3694]. The governance structure places control of WLFI\u2019s securities in WLF Holdco LLC, whose three-person Board of Managers \u2014 Folkman, <a href=\"/dossiers/chase-herro\">Chase Herro</a>, and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> \u2014 must act collectively to vote or dispose of shares [Finding #3694]. According to the WLFI Form D, Folkman\u2019s Puerto Rico entity Axiom Management Group LLC is designated as a named promoter receiving 25% of net WLFI revenue, with DT Marks DEFI LLC (Trump\u2019s entity) receiving the remaining 75%. The SEC Form D/A filed in July 2025 reported $6.1 million raised with $5.97 million disbursed to promoters, officers, and directors [Finding #3702]. According to Reuters, total token sales reached approximately $550 million by May 2025, with Herro and Folkman together collecting at least $30 million of that amount [Finding #3702].</p><p>According to ALT5 Sigma Corp proxy filings, WLFI entered into a $5 million loan agreement with <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a>, collateralized by WLFI tokens at 65% loan-to-value, as part of a broader acquisition of that Nasdaq-listed company [Finding #3701]. According to SEC records, Folkman filed his Form 3 as an ALT5 director on November 13, 2025, the same date WLFI filed Schedule 13G disclosing its ALT5 ownership stake [Finding #3701]. According to the same proxy filing, the reconstituted ALT5 board includes <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> as Chairman and Folkman as director, alongside five other nominees [Finding #3701].</p>",
         "viz": "ego_network"
       },
       {
         "id": "prior-ventures-and-dough-finance",
         "title": "Prior Ventures and the Dough Finance Hack",
-        "content": "<p>According to media reporting, Folkman and <a href=\"/dossiers/chase-herro\">Chase Herro</a> have operated as business partners across multiple ventures since approximately 2013, including The Nexus Group (social media advertising), Subify (a subscription platform incorporated in Puerto Rico in 2020), and various paid networking and e-commerce course offerings [Finding #3699]. According to media accounts, their most prominent shared venture before WLFI was Dough Finance, a DeFi protocol enabling leveraged crypto trading through looping strategies [Finding #3698].</p><p>According to a Dough Finance Medium post published July 23, 2024, an unidentified attacker exploited a code vulnerability on July 12, 2024 and stole approximately $1.8 million, with approximately $200,000 recovered, leaving an estimated 2,700 users without compensation [Finding #3698]. According to a federal lawsuit filed in Miami, investor Jonathan Lopez alleged fraud, misrepresentation, breach of fiduciary duty, and Florida securities violations against Herro after losing approximately $900,000 (300 ETH, valued at roughly $700,000 at the time of loss); court records indicate Herro had texted Lopez promising reimbursement but did not follow through, and trial was set for April 2026 [Finding #3698]. According to media reports, Folkman and Herro announced WLFI’s formation in September 2024, approximately eight weeks after the Dough Finance hack [Finding #3698].</p>",
+        "content": "<p>According to media reporting, Folkman and <a href=\"/dossiers/chase-herro\">Chase Herro</a> have operated as business partners across multiple ventures since approximately 2013, including The Nexus Group (social media advertising), Subify (a subscription platform incorporated in Puerto Rico in 2020), and various paid networking and e-commerce course offerings [Finding #3699]. According to media accounts, their most prominent shared venture before WLFI was Dough Finance, a DeFi protocol enabling leveraged crypto trading through looping strategies [Finding #3698].</p><p>According to a Dough Finance Medium post published July 23, 2024, an unidentified attacker exploited a code vulnerability on July 12, 2024 and stole approximately $1.8 million, with approximately $200,000 recovered, leaving an estimated 2,700 users without compensation [Finding #3698]. According to a federal lawsuit filed in Miami, investor Jonathan Lopez alleged fraud, misrepresentation, breach of fiduciary duty, and Florida securities violations against Herro after losing approximately $900,000 (300 ETH, valued at roughly $700,000 at the time of loss); court records indicate Herro had texted Lopez promising reimbursement but did not follow through, and trial was set for April 2026 [Finding #3698]. According to media reports, Folkman and Herro announced WLFI\u2019s formation in September 2024, approximately eight weeks after the Dough Finance hack [Finding #3698].</p>",
         "viz": "timeline"
       },
       {
         "id": "corporate-entity-network",
         "title": "Corporate Entity Network and Jurisdictional Footprint",
-        "content": "<p>Corporate registry records show Folkman’s documented entity footprint spans three jurisdictions [Finding #3704]. According to SEC filings, Axiom Management Group LLC (Puerto Rico Corp #420115-1511) was formed December 21, 2018, with Folkman listed as incorporator and Managing Director from 2019 to present [Finding #3704]. Its registered address is Villas Del Mar Beach Resort, Apt H-302 Edificio H, Rio Grande PR 00745; the WLFI Form D lists a separate Dorado, PR address. Folkman Holding Enterprises LLC was filed in Wyoming (SOS #2023-001252849) on April 12, 2023, using Registered Agents Inc at 30 N Gould St Ste R, Sheridan WY 82801 as registered agent [Finding #3676]. HERRO LLC, a Wyoming entity (SOS #2025-001706971) filed June 2025 and organized by Distributed Inc (115 W 27th St #10R, New York NY 10001), uses the same Registered Agents Inc address as Folkman Holding Enterprises [Finding #3676].</p><p>Analysis suggests Folkman’s Puerto Rico residency is consistent with the Act 60 program (formerly Act 22), which offers individual investors who become bona fide PR residents a 0% capital gains tax rate on gains accrued after establishing residency — a structure widely used among crypto entrepreneurs [Finding #3705]. According to the Seattle Times, Folkman and Herro previously resided in the US Virgin Islands, another territory offering significant tax incentives, before relocating to Puerto Rico [Finding #3705]. A review of records across Nevada, New Jersey, and Texas SOS registries returned no entities attributable to Folkman; ICIJ Offshore Leaks and OpenSanctions queries also returned no matches [Finding #3706].</p>",
+        "content": "<p>Corporate registry records show Folkman\u2019s documented entity footprint spans three jurisdictions [Finding #3704]. According to SEC filings, Axiom Management Group LLC (Puerto Rico Corp #420115-1511) was formed December 21, 2018, with Folkman listed as incorporator and Managing Director from 2019 to present [Finding #3704]. Its registered address is Villas Del Mar Beach Resort, Apt H-302 Edificio H, Rio Grande PR 00745; the WLFI Form D lists a separate Dorado, PR address. Folkman Holding Enterprises LLC was filed in Wyoming (SOS #2023-001252849) on April 12, 2023, using Registered Agents Inc at 30 N Gould St Ste R, Sheridan WY 82801 as registered agent [Finding #3676]. HERRO LLC, a Wyoming entity (SOS #2025-001706971) filed June 2025 and organized by Distributed Inc (115 W 27th St #10R, New York NY 10001), uses the same Registered Agents Inc address as Folkman Holding Enterprises [Finding #3676].</p><p>Analysis suggests Folkman\u2019s Puerto Rico residency is consistent with the Act 60 program (formerly Act 22), which offers individual investors who become bona fide PR residents a 0% capital gains tax rate on gains accrued after establishing residency \u2014 a structure widely used among crypto entrepreneurs [Finding #3705]. According to the Seattle Times, Folkman and Herro previously resided in the US Virgin Islands, another territory offering significant tax incentives, before relocating to Puerto Rico [Finding #3705]. A review of records across Nevada, New Jersey, and Texas SOS registries returned no entities attributable to Folkman; ICIJ Offshore Leaks and OpenSanctions queries also returned no matches [Finding #3706].</p>",
         "viz": null
       },
       {
         "id": "background-and-financial-history",
         "title": "Background and Prior Financial Record",
-        "content": "<p>According to SEC filings and media reports, Folkman attended Skidmore College and graduated from New York Law School in 2010 [Finding #3693] [Finding #3699]. According to reporting by CoinDesk, the Seattle Times, and The New York Times, before entering digital assets he operated under the alias ‘Zack Bauer’ in the pickup artist industry, running Date Hotter Girls LLC, which marketed seminars and publications including a book titled <em>Become the Ultimate Alpha Male</em>; he was also affiliated with Real Social Dynamics (RSD) [Finding #3693]. These outlets documented the alias and business history in reporting published between September and October 2024.</p><p>According to the Seattle Times and NYT (October 7, 2024), Folkman’s earlier career included financial difficulties: American Express sued him for $16,000 in unpaid credit card bills (the case was dismissed after AmEx missed a filing deadline); he owes $3,300 to California in tax debt; a 2017 client lawsuit for nonpayment was later withdrawn; and Folkman and Herro vacated a $5,000-per-month oceanside villa in the US Virgin Islands without paying approximately $20,000 in rent and causing approximately $5,000 in damages (settled 2019) [Finding #3699].</p><p>FEC records show donations totaling $13,200 (three contributions of $6,600, $3,300, and $3,300 to Team Stand for America, a DeSantis-affiliated committee) in 2023, with ‘Joe Folkman’ listed as employer and a Miami, Florida address [Finding #4279]. Earlier FEC records show small contributions from 2015 to 2020 under ‘Zachary Folkman’ in Redmond, Washington with UPS listed as employer — likely a different individual [Finding #4279]. FEC records show no donations from a Puerto Rico address for Folkman [Finding #3700].</p>",
+        "content": "<p>According to SEC filings and media reports, Folkman attended Skidmore College and graduated from New York Law School in 2010 [Finding #3693] [Finding #3699]. According to reporting by CoinDesk, the Seattle Times, and The New York Times, before entering digital assets he operated under the alias \u2018Zack Bauer\u2019 in the pickup artist industry, running Date Hotter Girls LLC, which marketed seminars and publications including a book titled <em>Become the Ultimate Alpha Male</em>; he was also affiliated with Real Social Dynamics (RSD) [Finding #3693]. These outlets documented the alias and business history in reporting published between September and October 2024.</p><p>According to the Seattle Times and NYT (October 7, 2024), Folkman\u2019s earlier career included financial difficulties: American Express sued him for $16,000 in unpaid credit card bills (the case was dismissed after AmEx missed a filing deadline); he owes $3,300 to California in tax debt; a 2017 client lawsuit for nonpayment was later withdrawn; and Folkman and Herro vacated a $5,000-per-month oceanside villa in the US Virgin Islands without paying approximately $20,000 in rent and causing approximately $5,000 in damages (settled 2019) [Finding #3699].</p><p>FEC records show donations totaling $13,200 (three contributions of $6,600, $3,300, and $3,300 to Team Stand for America, a DeSantis-affiliated committee) in 2023, with \u2018Joe Folkman\u2019 listed as employer and a Miami, Florida address [Finding #4279]. Earlier FEC records show small contributions from 2015 to 2020 under \u2018Zachary Folkman\u2019 in Redmond, Washington with UPS listed as employer \u2014 likely a different individual [Finding #4279]. FEC records show no donations from a Puerto Rico address for Folkman [Finding #3700].</p>",
         "viz": null
       },
       {
         "id": "key-relationships",
         "title": "Key Relationships",
-        "content": "<p><a href=\"/dossiers/chase-herro\">Chase Herro</a> is Folkman’s primary and longest-documented business partner. According to media reports and SEC filings, they co-founded WLFI, Dough Finance, Subify, The Nexus Group, and multiple other ventures [Finding #3699]. They are co-members of the WLF Holdco LLC Board of Managers and both designated Executive Officers and Directors of WLFI on the SEC Form D [Finding #3694]. HERRO LLC — a Wyoming entity filed in June 2025 using the same registered agent as Folkman Holding Enterprises — appears to be named for Herro, suggesting continued joint corporate activity [Finding #3676].</p><p><a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> is the third member of the WLF Holdco Board and serves as WLFI’s co-founder and CEO. According to ALT5 proxy filings, he also chairs <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a>’s board following the WLFI acquisition [Finding #3701]. His father, <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, a real estate developer and Trump’s Special Envoy to the Middle East, is named as a promoter on the WLFI Form D/A. According to media reporting, he served as the intermediary who introduced Folkman and Herro to the Trump family beginning around January 2024 [Finding #3699]. According to the WLFI promoter arrangement, Steve Witkoff’s entity WC Digital Fi LLC receives 50% of Folkman and Herro’s combined WLFI revenue share.</p><p>Donald Trump’s role in WLFI is that of named promoter. According to the WLFI Form D, DT Marks DEFI LLC receives 75% of net revenue while Folkman’s Axiom Management Group LLC receives 25% [Finding #3702]. According to available reporting, Folkman holds no documented direct pre-2024 relationship with Trump; his connection to the Trump network appears to run through <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a> [Finding #3699].</p>",
+        "content": "<p><a href=\"/dossiers/chase-herro\">Chase Herro</a> is Folkman\u2019s primary and longest-documented business partner. According to media reports and SEC filings, they co-founded WLFI, Dough Finance, Subify, The Nexus Group, and multiple other ventures [Finding #3699]. They are co-members of the WLF Holdco LLC Board of Managers and both designated Executive Officers and Directors of WLFI on the SEC Form D [Finding #3694]. HERRO LLC \u2014 a Wyoming entity filed in June 2025 using the same registered agent as Folkman Holding Enterprises \u2014 appears to be named for Herro, suggesting continued joint corporate activity [Finding #3676].</p><p><a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> is the third member of the WLF Holdco Board and serves as WLFI\u2019s co-founder and CEO. According to ALT5 proxy filings, he also chairs <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a>\u2019s board following the WLFI acquisition [Finding #3701]. His father, <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, a real estate developer and Trump\u2019s Special Envoy to the Middle East, is named as a promoter on the WLFI Form D/A. According to media reporting, he served as the intermediary who introduced Folkman and Herro to the Trump family beginning around January 2024 [Finding #3699]. According to the WLFI promoter arrangement, Steve Witkoff\u2019s entity WC Digital Fi LLC receives 50% of Folkman and Herro\u2019s combined WLFI revenue share.</p><p>Donald Trump\u2019s role in WLFI is that of named promoter. According to the WLFI Form D, DT Marks DEFI LLC receives 75% of net revenue while Folkman\u2019s Axiom Management Group LLC receives 25% [Finding #3702]. According to available reporting, Folkman holds no documented direct pre-2024 relationship with Trump; his connection to the Trump network appears to run through <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a> [Finding #3699].</p>",
         "viz": "ego_network"
       }
     ],
@@ -482,122 +489,5 @@
       "bridge-tax",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Zach Folkman",
-      "connections": [
-        {
-          "target": "Chase Herro",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders, executive officers, and directors of World Liberty Financial Inc per SEC Form D"
-        },
-        {
-          "target": "Zachary Witkoff",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-members of WLF Holdco LLC Board of Managers. Both directors of ALT5 Sigma Corp (Witkoff is Chairman). Witkoff is co-founder and CEO of WLFI."
-        },
-        {
-          "target": "Donald Trump",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Folkman is co-founder, Exec Officer, Director of WLFI. Trump is named promoter. DT Marks DEFI LLC (Trump entity) receives 75% of WLFI revenue; Axiom Management (Folkman entity) receives 25%. Both promoters on WLFI Form D."
-        },
-        {
-          "target": "Steven Witkoff",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Steven Witkoff (real estate developer, Trump Middle East envoy) is named promoter on WLFI Form D/A. Father of Zachary Witkoff. Connected Folkman/Herro to Trump family. Both promoters of WLFI."
-        }
-      ],
-      "secondHop": {
-        "Chase Herro": [
-          {
-            "target": "Donald Trump",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Herro donated $746K to Trump PACs July 2024, then co-founded WLFI with Trump family as promoters"
-          },
-          {
-            "target": "Zachary Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founders of 17+ companies since 2013 including Nexus Group (USVI), Dough Finance (DeFi), Axiom Management Group LLC (PR, WLFI revenue vehicle). Co-owners of WLFI receiving 12.5% each of net revenue."
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Witkoff introduced Herro to Trump family. WC Digital Fi LLC (Witkoff) receives 50% of Herro/Folkman WLFI share. Witkoff is longtime Trump donor, real estate developer, now Special Envoy."
-          },
-          {
-            "target": "Eric Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
-          },
-          {
-            "target": "Zachary Witkoff",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-members of WLF Holdco LLC Board of Managers. Both involved in WLFI operations."
-          }
-        ],
-        "Donald Trump": [
-          {
-            "target": "Tom Barrack",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
-          },
-          {
-            "target": "Jay Clayton",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
-          },
-          {
-            "target": "William Barr",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
-          },
-          {
-            "target": "Keith Davidson",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
-          },
-          {
-            "target": "Robert Kraft",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
-          }
-        ],
-        "Zachary Witkoff": [
-          {
-            "target": "Zak Folkman",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Both are directors/officers of WLFI and ALT5 Sigma Corp board nominees"
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

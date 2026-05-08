@@ -1,0 +1,635 @@
+{
+  "name": "Martin Jajan",
+  "slug": "martin-jajan",
+  "aliases": [],
+  "profile_ids": [
+    "zampolli"
+  ],
+  "generated_at": "2026-05-07T23:07:36.341451",
+  "last_updated": "2026-04-13T17:08:35",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 14,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "relationship": 1,
+      "background": 2,
+      "negative_result": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "legal": 7,
+      "controls": 3,
+      "contracts_with": 1,
+      "advisory": 1,
+      "owns": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-04-13T17:08:35"
+  },
+  "findings": [
+    {
+      "id": 10173,
+      "finding_type": "financial",
+      "summary": "Confirmed Soho 3310/3311/3203 LLC (Jajan-created) are the Khrapunov/Kudryashova Trump SoHo purchases funded via FBME Bank",
+      "detail": "ACRIS deeds 2013050100003001, 2013050100017001, 2013050100019001 show Soho 3311 LLC (unit 3311, $829K), Soho 3310 LLC (unit 3310, $1.41M), Soho 3203 LLC (unit 3203, $880K) purchased from Bayrock/Sapir on Apr 30, 2013. NY DOS confirms all 3 formed Apr 23, 2013 via JAJAN PLLC (110 Wall St, NYC). Per FT/OCCRP/Diplomat reporting, these are the Khrapunov family units (Viktor Khrapunov, ex-mayor of Almaty) with beneficial owner Elvira Kudryashova, funded through FBME Bank (Tanzania, sanctioned 2016). Felix Sater and Daniel Ridloff facilitated. Total $3.1M. All 3 sold within 1-2 years at slight loss. The 4 Moscow addresses crossed out on Trump SoHo deeds (per BuzzFeed) likely correspond to Jajan-handled transactions, not the Reinhardt/Domus Arbiter ones.",
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:09:01",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100019001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392327",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392334",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392497",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10243,
+      "finding_type": "relationship",
+      "summary": "Martin Jajan: key broker in Kazakh money laundering subnetwork. Degree 8, betweenness 0.061, low clustering (0.179). Connects Khrapunov family to Trump Organization and Felix Sater through SOHO 3203/3310/3311 LLC shell companies.",
+      "detail": "Jajan manages three SOHO-named LLCs connected to Trump Organization via him but not directly to each other. The Khrapunov family used these LLCs to purchase Trump SoHo units, allegedly laundering stolen Kazakh state funds. Only 1 finding against 8 connections -- the most under-investigated broker in the Kazakh cluster.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 16:20:22",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-39",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10284,
+      "finding_type": "background",
+      "summary": "Martin Ilan Jajan: B.A. Hofstra University, J.D. Brooklyn Law School, Certificate in International/Comparative Law from USD. Started career at Madrid-based Monereo Meyer & Marinel-Lo. NY bar member. Founder of Jajan & Associates PLLC (previously Jajan PLLC). Practice areas: international corporate law, international tax, real estate, trusts/estates. Member ABA International Law Section, Argentine-American/Spain-US/Brazilian-American Chambers of Commerce. Firm operates in English, Spanish, Portuguese. Office history: 175 W 12th St (2009) -> 30 Broad St 14th Fl (2013) -> 110 Wall St 11th Fl (2013) -> 40 Wall St Suite 2506 (2014-2023) -> 122 E 42nd St Suite 3705 (2024-present).",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:10",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:multiple,jajanlaw.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10286,
+      "finding_type": "financial",
+      "summary": "ACRIS records show 64 party records for Martin Jajan spanning 2009-2024. Predominantly party_type=2 (grantee/buyer representative), confirming his role as transactional attorney for real estate purchasers across NYC. Multiple 2013 transactions involve international buyers (addresses in Argentina, China, India, France) using NYC condo purchases -- consistent with international client base advertising. Properties span multiple Manhattan buildings: 15 William St, 40 Broad St, 203 W 81st, 330 E 38th, 322 W 57th, and 246 Spring St (Trump SoHo). All 2013 docs are type PAT (Power of Attorney), confirming Jajan acted as attorney-in-fact signing on behalf of foreign buyers.",
+      "detail": null,
+      "source_datasets": [
+        "acris"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:02:18",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:64_party_records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10299,
+      "finding_type": "financial",
+      "summary": "FL registry shows Martin Jajan as Manager/Authorized Person for at least 6 Florida real estate LLCs: RISE CONDOMINIUM 3302 LLC (FL L15000079123, inactive), MONACO 7C LLC (FL L22000019162, active), SANTA MARIA BRICKELL AVE 2406 LLC (FL L24000492180, active), PELORO 414 LLC (FL L15000183690, inactive), BISCAYNE BEACH 1406 LLC (FL L15000183691, inactive), THE BOND 2406 LLC (FL L15000183683, inactive). All are unit-specific condo LLCs (naming pattern: Building + Unit#), indicating Jajan created purchase vehicles for clients in Miami luxury condos (Biscayne Beach, The Bond, Peloro, Santa Maria, Monaco). Pattern extends well beyond Trump SoHo -- Jajan operated a systematic international buyer shell company creation practice across NYC and South Florida luxury real estate.",
+      "detail": null,
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:11",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL_Registry:L15000079123,L22000019162,L24000492180,L15000183690,L15000183691,L15000183683",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10303,
+      "finding_type": "background",
+      "summary": "FEC records show Martin I. Jajan (self-employed attorney, New York) donated $2,500 to WILDES FOR CONGRESS (C00404335, Democratic, NJ-09) on December 12, 2014. Michael Wildes is a well-known immigration attorney and former mayor of Englewood, NJ. Single recorded federal political donation.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:24",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=C00404335%2F2014-12-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10306,
+      "finding_type": "negative_result",
+      "summary": "CourtListener search for 'Jajan' as party returned 0 results. CourtListener search for 'Jajan' as attorney also returned 0 results. Despite handling over $100M in NYC real estate transactions (including $3.1M in Khrapunov-linked purchases), Jajan has never been named as a party in any federal litigation indexed by CourtListener, nor does he appear in the attorney-of-record database. No disciplinary actions visible. RECAP document search found 9 documents mentioning 'Martin Jajan' -- all in BTA Bank/Almaty litigation against Khrapunov family, where Jajan appears as a witness/document custodian rather than party.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:03:35",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener:search-party-Jajan,CourtListener:search-attorney-Jajan,CourtListener:recap-Martin-Jajan",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10329,
+      "finding_type": "financial",
+      "summary": "MONEY FLOW RECONSTRUCTION: $3.1M+ flowed from Elvira Kudryashova's Wells Fargo account to Martin Jajan's law firm (Jajan PLLC, 30 Broad St 14th Floor), who then created 3 shell LLCs (Soho 3310/3311/3203) and signed purchase deeds for 3 Trump SoHo units from Bayrock/Sapir and Bayrock/Zar Spring. The underlying funds originated from the Khrapunov family's offshore network processing ~$440M allegedly stolen from BTA Bank, routed through FBME Bank (Tanzania/Cyprus, sanctioned by US in 2016). Jajan served as the final US-side legal intermediary converting offshore funds into NYC real estate. All three purchases executed on same day (April 30, 2013) in a coordinated batch.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:06:56",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100019001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 10334,
+      "finding_type": "intelligence",
+      "summary": "CLUSTER SYNTHESIS: The Jajan-Khrapunov-Bayrock pipeline operated as follows: (1) ORIGIN: $440M allegedly stolen from BTA Bank by Mukhtar Ablyazov, routed through FBME Bank via 11+ offshore shells. (2) US ENTRY: $3.12M from Elvira Kudryashova's Wells Fargo account to Jajan PLLC. (3) CONVERSION: Jajan created 3 shell LLCs (Soho 3310/3311/3203), purchased 3 Trump SoHo units from Bayrock/Sapir+Bayrock/Zar Spring on single day (2013-04-30). (4) LIQUIDATION: All 3 units resold 2014-2015 at aggregate $94K loss to unrelated buyers (MT Trump Soho 3310 LLC, Heaven Frytl LLC, Joseph Adulamy). (5) LEGAL NEXUS: KazBay B.V. (Bayrock/Helvetic JV structured by Giuliani's Bracewell firm) connected Arif/Sater to Khrapunov family since 2007. (6) OUTCOME: Sater found liable for $52M in SDNY (2025). Jajan never charged or sued. The Zampolli connection: Bayrock contracted Zampolli/Paramount for 6% commissions to sell Trump SoHo units during this exact same period (2013), meaning Zampolli was actively selling in the same building where Khrapunov money was flowing through Jajan-created shells.",
+      "detail": null,
+      "source_datasets": [
+        "acris",
+        "courtlistener",
+        "web_search",
+        "gleif",
+        "registry",
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:08:35",
+      "target_name": "Martin Jajan",
+      "profile_id": "zampolli",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:multiple,CourtListener:multiple,OCCRP:steppe-to-soho,Siegelman-Medium:KazBay",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5241,
+      "person_a": "Martin Jajan",
+      "person_b": "SOHO 3310 LLC",
+      "relationship_type": "legal",
+      "description": "Jajan PLLC formed and served as SOP agent for Soho 3310 LLC (Khrapunov/Kudryashova buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "SOHO 3310 LLC",
+      "other_person_slug": "soho-3310-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392327",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5242,
+      "person_a": "Martin Jajan",
+      "person_b": "SOHO 3311 LLC",
+      "relationship_type": "legal",
+      "description": "Jajan PLLC formed and served as SOP agent for Soho 3311 LLC (Khrapunov/Kudryashova buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "SOHO 3311 LLC",
+      "other_person_slug": "soho-3311-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392497",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5243,
+      "person_a": "Martin Jajan",
+      "person_b": "SOHO 3203 LLC",
+      "relationship_type": "legal",
+      "description": "Jajan PLLC formed and served as SOP agent for Soho 3203 LLC (Khrapunov/Kudryashova buyer)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:10:02",
+      "profile_id": "zampolli",
+      "other_person": "SOHO 3203 LLC",
+      "other_person_slug": "soho-3203-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDOS:4392334",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5270,
+      "person_a": "Martin Jajan",
+      "person_b": "Trump Organization",
+      "relationship_type": "legal",
+      "description": "Jajan handled majority of 77% cash sales (M) to shell companies at Trump SoHo 2010-2013",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:38:15",
+      "profile_id": "zampolli",
+      "other_person": "Trump Organization",
+      "other_person_slug": "trump-organization",
+      "evidence": []
+    },
+    {
+      "id": 5272,
+      "person_a": "Elvira Kudryashova",
+      "person_b": "Martin Jajan",
+      "relationship_type": "legal",
+      "description": "Jajan's PLLC formed all 3 Khrapunov/Kudryashova Trump SoHo buyer LLCs (SOHO 3310/3311/3203)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:38:27",
+      "profile_id": "zampolli",
+      "other_person": "Elvira Kudryashova",
+      "other_person_slug": "elvira-kudryashova",
+      "evidence": []
+    },
+    {
+      "id": 5282,
+      "person_a": "Ilyas Khrapunov",
+      "person_b": "Martin Jajan",
+      "relationship_type": "legal",
+      "description": "Jajan PLLC formed shell companies for Khrapunov family Trump SoHo purchases",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:06",
+      "profile_id": "zampolli",
+      "other_person": "Ilyas Khrapunov",
+      "other_person_slug": "ilyas-khrapunov",
+      "evidence": []
+    },
+    {
+      "id": 5354,
+      "person_a": "Martin Jajan",
+      "person_b": "Soho 3310 LLC",
+      "relationship_type": "controls",
+      "description": "Created entity, listed as C/O address, signed all deeds as attorney-in-fact for Khrapunov/Kudryashova beneficial owners",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:29",
+      "profile_id": "zampolli",
+      "other_person": "Soho 3310 LLC",
+      "other_person_slug": "soho-3310-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014052901776001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5351,
+      "person_a": "Bayrock/Sapir Organization LLC",
+      "person_b": "Martin Jajan",
+      "relationship_type": "contracts_with",
+      "description": "Buyer's attorney on 3 Trump SoHo deed transfers from Bayrock/Sapir to Khrapunov shell LLCs, April 30 2013, totaling $3.12M",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:29",
+      "profile_id": "zampolli",
+      "other_person": "Bayrock/Sapir Organization LLC",
+      "other_person_slug": "bayrocksapir-organization-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100019001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5352,
+      "person_a": "Elvira Kudryashova",
+      "person_b": "Martin Jajan",
+      "relationship_type": "advisory",
+      "description": "Received $3.1M from Kudryashova Wells Fargo account, created Soho 3310/3311/3203 LLCs, signed purchase documents for 3 Trump SoHo units on her behalf",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:29",
+      "profile_id": "zampolli",
+      "other_person": "Elvira Kudryashova",
+      "other_person_slug": "elvira-kudryashova",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100017001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP:steppe-to-soho",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5355,
+      "person_a": "Martin Jajan",
+      "person_b": "Soho 3311 LLC",
+      "relationship_type": "controls",
+      "description": "Created entity, C/O address, signed purchase deed (2013) and sale deed to Joseph Adulamy (2015)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:30",
+      "profile_id": "zampolli",
+      "other_person": "Soho 3311 LLC",
+      "other_person_slug": "soho-3311-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100003001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2015102801155002",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5356,
+      "person_a": "Martin Jajan",
+      "person_b": "Soho 3203 LLC",
+      "relationship_type": "controls",
+      "description": "Created entity, C/O address, signed purchase deed (2013) and sale deed to Heaven Frytl LLC (2014)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:05:30",
+      "profile_id": "zampolli",
+      "other_person": "Soho 3203 LLC",
+      "other_person_slug": "soho-3203-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2013050100019001",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2014092901627001",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5368,
+      "person_a": "Jajan & Associates PLLC",
+      "person_b": "Martin Jajan",
+      "relationship_type": "owns",
+      "description": "Founder and Managing Partner of Jajan & Associates PLLC",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 17:06:24",
+      "profile_id": "zampolli",
+      "other_person": "Jajan & Associates PLLC",
+      "other_person_slug": "jajan-associates-pllc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "jajanlaw.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5205,
+      "person_a": "Martin Jajan",
+      "person_b": "Viktor Khrapunov",
+      "relationship_type": "financial",
+      "description": "Jajan received 3.1M from Wells Fargo account linked to Khrapunov family; signed purchase documents for 3 Trump SoHo apartments as buyer agent",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 02:34:09",
+      "profile_id": "zampolli",
+      "other_person": "Viktor Khrapunov",
+      "other_person_slug": "viktor-khrapunov",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BuzzFeed News 2018; OCCRP",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5283,
+      "person_a": "Felix Sater",
+      "person_b": "Martin Jajan",
+      "relationship_type": "legal",
+      "description": "Jajan handled majority of Trump SoHo shell company cash sales; Sater facilitated Khrapunov purchases",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-13 03:39:08",
+      "profile_id": "zampolli",
+      "other_person": "Felix Sater",
+      "other_person_slug": "felix-sater",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

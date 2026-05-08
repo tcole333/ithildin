@@ -3,25 +3,27 @@
   "slug": "enhanced-education",
   "aliases": [],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.849380",
-  "last_updated": "2026-02-17T04:24:24",
+  "generated_at": "2026-05-07T23:07:36.166144",
+  "last_updated": "2026-03-23T16:23:06",
   "stats": {
-    "total_findings": 19,
+    "total_findings": 20,
     "total_connections": 13,
     "total_entities": 0,
     "finding_types": {
       "financial": 14,
       "intelligence": 4,
-      "legal": 1
+      "legal": 1,
+      "relationship": 1
     },
     "connection_types": {
       "corporate": 6,
       "financial": 6,
       "social": 1
     },
-    "last_updated": "2026-02-17T04:24:24"
+    "last_updated": "2026-03-23T16:23:06"
   },
   "findings": [
     {
@@ -848,6 +850,31 @@
         {
           "evidence_type": "file",
           "evidence_ref": "IRS990:search-null/Enhanced-Education",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6918,
+      "finding_type": "relationship",
+      "summary": "Enhanced Education trust (degree 17, betweenness rank #8) is a major structural hole with zero findings - connects Gratitude America, IPI, Deutsche Bank, JPMorgan, and Southern Trust Company",
+      "detail": "Critical coverage gap: Enhanced Education is the 8th node in the graph (betweenness 0.1468) and 8th by degree (17 connections), yet has zero findings. Its connections span: financial institutions (Deutsche Bank Trust Americas, FirstBank Puerto Rico, JPMorgan Chase), Gratitude America Ltd, International Peace Institute, BV70 LLC, Southern Trust Company, ASU Foundation, and Valar Global Fund III LP. The trust appears to function as a financial intermediary between charitable entities and banking institutions. Neighbor density is 0.029 (near-perfect broker).",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:23:06",
+      "target_name": "Enhanced Education",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
           "source_quote": null,
           "source_page": null,
           "assessment": null

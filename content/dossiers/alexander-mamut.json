@@ -1,0 +1,315 @@
+{
+  "name": "Alexander Mamut",
+  "slug": "alexander-mamut",
+  "aliases": [],
+  "profile_ids": [
+    "nginx"
+  ],
+  "generated_at": "2026-05-07T23:07:36.397362",
+  "last_updated": "2026-04-12T23:49:33",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 1,
+      "relationship": 4,
+      "identity": 1
+    },
+    "connection_types": {
+      "controls": 1,
+      "corporate": 1,
+      "funds": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-04-12T23:49:33"
+  },
+  "findings": [
+    {
+      "id": 9884,
+      "finding_type": "intelligence",
+      "summary": "Mamut's systematic post-2022 rebranding: Both Lynwood Investments CY (renamed Hemma Investments CY, 2022-03-08) and Lynwood Retail UK (renamed Hemma Retail UK, 2022-03-09) were renamed within ONE DAY of each other, 12-13 days after the Ukraine invasion. Mamut Foundation was dissolved Aug 2022. This coordinated Lynwood-to-Hemma name change across Cyprus and UK entities simultaneously is a clear distancing operation as sanctions pressure intensified.",
+      "detail": null,
+      "source_datasets": [
+        "gleif",
+        "uk_companies_house"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2022-03-08",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:17:34",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF LEI 2534000YF50AB8Q6UU69 event 2022-03-08",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 07673642 previous name Lynwood Retail UK Limited ceased 2022-03-09",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9789,
+      "finding_type": "relationship",
+      "summary": "Sanctioned Russian oligarch, Rambler Group owner. Sanctioned by Canada (CA-SEMA) and Ukraine (UA-SA1644). Classified as role.rca (Russian-connected associate), oligarch, and person of interest. Listed in CAATSA 2018 oligarch report, Russian billionaires 2021, ACF bribetakers list. Dual Russian/Israeli citizenship. His control of Rambler Group connects the 2019 nginx raid directly to a Kremlin-adjacent oligarch.",
+      "detail": "OpenSanctions entity Q916992. DOB 1960-01-29. INN 770400355820. Born Moscow. Education: Moscow State University, Faculty of Law. Topics: role.rca, sanction, poi, role.oligarch. Datasets: wd_oligarchs, ru_billionaires_2021, ca_dfatd_sema_sanctions, ua_nsdc_sanctions, ru_acf_bribetakers, wikidata, ext_ru_egrul. No formal PEP role found but oligarch/RCA classification confirms proximity to Russian state power.",
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 16:56:29",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q916992",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9833,
+      "finding_type": "relationship",
+      "summary": "Mamut's Lynwood Investments CY Ltd (Cyprus-registered) was the actual entity that filed the copyright infringement claim against nginx in December 2019, not Rambler directly. Rambler Internet Holding ceded rights to bring IP claims to Lynwood. This means Mamut acted through his personal Cyprus investment vehicle, not through the Rambler corporate structure, suggesting personal initiative rather than purely corporate action. Mamut became part-owner of Rambler with Potanin in 2013, bought out Potanin's stake in 2016. Sberbank acquired 46.5% of Rambler in Aug 2019, leaving Mamut's A&NN with 46.5%. The nginx raid occurred in Dec 2019, six months after F5 Networks bought NGINX Inc for $670M in March 2019.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:49:47",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWDN 2019-12-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWDN 2020-10-29",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Meduza 2019-12-13",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Moscow Times 2019-12-13",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9879,
+      "finding_type": "identity",
+      "summary": "Mamut confirmed sanctioned: Canada (CA-SEMA) and Ukraine (UA-SA1644). OpenSanctions topics: role.rca (Russian close associate), sanction, poi (person of interest), role.oligarch. Datasets: wd_oligarchs, ru_billionaires_2021, ca_dfatd_sema_sanctions, ua_nsdc_sanctions, ru_acf_bribetakers. Citizenship: Russia, Israel, USSR. Russian INN: 770400355820. Education: Moscow State University Faculty of Law. Not on OFAC SDN list but named in 2018 CAATSA report on Russian oligarchs.",
+      "detail": null,
+      "source_datasets": [
+        "opensanctions",
+        "littlesis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:16:29",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 80839 and relationship 1935685 with CAATSA",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:entity",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9881,
+      "finding_type": "relationship",
+      "summary": "Mamut's UK/London network hub is Alastair Tulloch of Tulloch & Co (4 Hill Street, London W1J 5NE). Tulloch has 62+ UK company appointments spanning Mamut Foundation, Lebedev Foundation, Lebedev Holdings, Khodorkovsky Foundation, Golubovich Foundation, Grishin Foundation, Digital Sky Finance LLP (Yuri Milner's DST), Odnoklassniki (Russian social network), Evening Standard (Lebedev), Raisa Gorbachev Foundation, The Journalism Foundation, and DST Global Investments. This positions Tulloch as a critical professional intermediary for multiple Russian oligarchs in London, not just Mamut.",
+      "detail": null,
+      "source_datasets": [
+        "uk_companies_house"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:16:56",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House officer appointments for Alastair Tulloch (officer ID Qod3Th0I3c_qql3auGZ6KTz0KJc)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9891,
+      "finding_type": "relationship",
+      "summary": "Mamut's Cyprus directors on Hemma Retail UK: Rebecca David (Cypriot, Cyprus-resident, appointed 2018-06-06) and Margarita Maksimenkova (Russian, Cyprus-resident, appointed 2018-06-06, resigned 2022-03-09 -- same day as Lynwood-to-Hemma rename). Also Marina Groenberg (Swiss, director since 2011 on both Waterstones/Hemma Retail and Mamut Foundation). Maksimenkova's resignation coinciding with the rename date suggests she was the Mamut-connected director being removed during the distancing operation.",
+      "detail": null,
+      "source_datasets": [
+        "uk_companies_house"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:18:06",
+      "target_name": "Alexander Mamut",
+      "profile_id": "nginx",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House officers for 07673642",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 5107,
+      "person_a": "Alexander Mamut",
+      "person_b": "Lynwood Investments CY Ltd",
+      "relationship_type": "controls",
+      "description": "Mamut controls Lynwood Investments CY (now Hemma Investments CY) through A&NN structure. Lynwood was his personal nginx IP attack vehicle, not Rambler corporate.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 18:18:30",
+      "profile_id": "nginx",
+      "other_person": "Lynwood Investments CY Ltd",
+      "other_person_slug": "lynwood-investments-cy-ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF LEI records",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Bahamas Leaks Lynwood constellation",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5124,
+      "person_a": "Alexander Mamut",
+      "person_b": "Alastair Tulloch",
+      "relationship_type": "corporate",
+      "description": "Tulloch & Co (4 Hill Street, London) serves as professional intermediary for Mamut Foundation and other Mamut UK entities. Tulloch has 62+ UK company appointments spanning Mamut, Lebedev, Khodorkovsky, Milner/DST, Odnoklassniki, Golubovich, Grishin \u2014 a single London hub for multiple Russian oligarchs. Tulloch is a potential compelled disclosure point for all their London-facing structures.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Alastair Tulloch",
+      "other_person_slug": "alastair-tulloch",
+      "evidence": []
+    },
+    {
+      "id": 5099,
+      "person_a": "Alexander Mamut",
+      "person_b": "Day One Ventures",
+      "relationship_type": "funds",
+      "description": "Investor/owner of Day One Ventures per LittleSis. Listed by Bucher in fundraising pitch documents.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 17:50:39",
+      "profile_id": "nginx",
+      "other_person": "Day One Ventures",
+      "other_person_slug": "day-one-ventures",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationship 1935681",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post 2022-03-26",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5110,
+      "person_a": "Alexander Mamut",
+      "person_b": "Vladimir Evtushenkov",
+      "relationship_type": "financial",
+      "description": "Both are LittleSis-confirmed investors/owners of Day One Ventures. Both are sanctioned Russian oligarchs. Their co-investment in Bucher's fund is the documented connection. Open triad analysis (closure_score=0.60) suggests they may have direct business connections beyond Day One Ventures.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-12 23:49:33",
+      "profile_id": "nginx",
+      "other_person": "Vladimir Evtushenkov",
+      "other_person_slug": "vladimir-evtushenkov",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2022-03-08",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Mamut's systematic post-2022 rebranding: Both Lynwood Investments CY (renamed Hemma Investments CY, 2022-03-08) and Lynwood Retail UK (renamed Hemma Retail UK, 2022-03-09) were renamed within ONE DAY of each other, 12-13 days after the Ukraine invasion. Mamut Foundation was dissolved Aug 2022. This coordinated Lynwood-to-Hemma name change across Cyprus and UK entities simultaneously is a clear distancing operation as sanctions pressure intensified.",
+      "confidence": "medium",
+      "id": 9884
+    }
+  ]
+}

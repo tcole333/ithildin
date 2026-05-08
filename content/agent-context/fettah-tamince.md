@@ -1,7 +1,9 @@
 # Fettah Tamince
 **Aliases**: Tamince
-**Stats**: 7 findings, 7 connections, 2 entities
+**Stats**: 7 findings, 6 connections, 2 entities
 **Dossier**: /dossiers/fettah-tamince
+
+> Fettah Tamince is the founder and chairman of Rixos Hotels, a Turkey-based luxury hotel chain, whose executive office coordinated a spa training program at the request of mutual contact Sultan Bin Sulayem in June 2017 for women associated with Jeffrey Epstein's household staff.
 
 ## Key Findings
 - **[relationship/high]** Epstein had direct prior contact with Tamince: in Nov 2010, someone sent Epstein the contact info for Sebla, the secretary of Fettah Tamince, described as the owner of the hotel Rixos which we stayed at in Antalya Turkey. This confirms Epstein personally stayed at Rixos properties 7 years before the 2017 training program. (2010-11) (Finding #1192)
@@ -19,8 +21,18 @@
 - **Jeffrey Epstein** [social/medium]: None
 - **Jeffrey Epstein** [financial/medium]: None
 - **Sultan Bin Sulayem** [financial/medium]: None
-- **Sultan Bin Sulayem** [social/medium]: None
 
 ## Entity Roles
 - founder at Rixos Hotels (Turkey)
 - chairman at Rixos Hotels (Turkey)
+
+## Open Questions
+- Did Tamince receive, read, or act on any of the 30+ emails addressed to him regarding the 2017 training program, or were all communications handled exclusively by Sebla Soydan Bora without his knowledge?
+- What is the documented basis for the financial connection between Tamince and Sultan Bin Sulayem beyond the hotel arrangement — are there corporate co-ventures, shared investments, or payment flows that establish the financial tie?
+- Were there any prior or subsequent training programs at Rixos properties for Epstein-associated individuals, given that the 2010 contact establishes a relationship predating 2017?
+- Is there a relationship between Tamince's Rixos operations and Turkish state entities (sovereign wealth funds, Tourism Ministry contracts, or state-linked financiers) that would bear on the FARA absence noted in Finding #397?
+- Epstein asked whether a second assistant should be sent so "she will be teaching the others after she learns" — were additional individuals trained at Rixos or elsewhere using techniques from this program?
+
+## Applicable Models
+- {'id': 'enabler-gradient', 'rationale': 'Tamince\'s office provided a material service — training and accommodation — to Epstein through an established hospitality channel. The available evidence does not establish where on the enabler gradient Tamince falls: his PA\'s statement that she responded during his absence could place him in the "willfully blind" or "unwitting" category; the fact that his personal office received passport copies and coordinated directly could support a higher position on the gradient. The evidence is insufficient to resolve this without access to Tamince\'s internal communications or testimony.'}
+- {'id': 'bridge-tax', 'rationale': 'Sultan Bin Sulayem functioned as a bridge between Epstein and Tamince, leveraging his personal friendship with both to facilitate the 2017 arrangement. The Sulayem–Tamince–Epstein triangle is a documented instance of the bridge pattern: Sulayem held relationships with both parties and used that position to route a request that neither party would have addressed directly.'}

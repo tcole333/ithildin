@@ -1,0 +1,680 @@
+{
+  "name": "DOJ Civil Rights Division",
+  "slug": "doj-civil-rights-division",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.192416",
+  "last_updated": "2026-03-23T21:17:28",
+  "stats": {
+    "total_findings": 17,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 11,
+      "intelligence": 4,
+      "financial": 1,
+      "relationship": 1
+    },
+    "connection_types": {
+      "legal": 1,
+      "political": 1,
+      "contracts_with": 1,
+      "intelligence": 1
+    },
+    "last_updated": "2026-03-23T21:17:28"
+  },
+  "findings": [
+    {
+      "id": 7124,
+      "finding_type": "legal",
+      "summary": "Executive order framework for voter roll program: EO 14159 (Jan 20, 2025) directed SAVE access for voter verification. EO 14248 (March 25, 2025) ordered election integrity measures including proof-of-citizenship requirement. DOJ began sending demand letters to states in Spring 2025, requesting full unredacted voter rolls from at least 44 states and DC. Additional executive actions: DOJ Criminal Division also requested info-sharing meetings in multiple states (MI, OR, NM, RI, VT, PA, CT, VA, WI, AZ, NV) -- a parallel criminal enforcement track. FBI executed search warrant in Georgia Fulton County Jan 28, 2026 for 2020 election records. AG Bondi personally reiterated demand to Minnesota Jan 24, 2026.",
+      "detail": null,
+      "source_datasets": [
+        "brennan_center"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-20",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:43",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/research-reports/tracker-justice-department-requests-voter-information",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7110,
+      "finding_type": "intelligence",
+      "summary": "DOJ-DHS-SSA data pipeline for voter roll cross-referencing: DOJ shares state voter rolls received under MOU with DHS. DHS expanded SAVE (Systematic Alien Verification for Entitlements) database via Oct 31, 2025 SORN to accept bulk voter roll uploads. May 15, 2025 DHS-SSA agreement integrated SSA death database and citizenship fields into SAVE, adding hundreds of millions of records. SAVE now cross-references: full SSN, names, addresses, DOB, criminal records, immigration histories. States like TX and TN uploaded entire voter rolls into SAVE before SORN was published. Initial TX results: 96.3% confirmed citizens, 3.1% unresolved, 0.04% flagged noncitizen. TX county showed ~25% false positive rate for noncitizen flags.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:00",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/dhs-social-security-data-voter-citizenship-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7106,
+      "finding_type": "legal",
+      "summary": "DOJ Confidential MOU mechanism: 9-page template agreement requires states to provide complete unredacted VRL including full names, DOB, addresses, driver's license numbers, and last 4 SSN digits. States must remove flagged voters within 45 days and resubmit updated rolls. MOU permits sharing data with unnamed DOJ contractors for 'list maintenance verification procedures' with contractors not bound by agreement safeguards. MOU itself and all drafts/communications deemed 'confidential' under Section XII(F). Legal authorities cited: NVRA (52 USC 20501), NVRA Section 11 enforcement (52 USC 20510(a)), HAVA (52 USC 20901), HAVA enforcement (53 USC 21111), Civil Rights Act of 1960 Title III (52 USC 20701), and Privacy Act of 1974.",
+      "detail": null,
+      "source_datasets": [
+        "Stateline, Wisconsin DOJ MOU document"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:30:22",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7115,
+      "finding_type": "legal",
+      "summary": "MOU contractor loophole: Section IX of the MOU permits DOJ to share voter PII with 'a contractor with the Department of Justice who needs access to the VRL/Data information in order to perform duties related to the Department's list maintenance verification procedures.' Contractors are required to comply with Privacy Act per 5 USC 552a(m), but the MOU provides no framework for vetting contractors, no specification of who they are, and Brennan Center analysis found contractors are 'not bound by the safeguards in the agreement.' MOU also permits DOJ to present VRL data to 'a court, magistrate, or administrative tribunal' and share 'summary results.' No encryption requirement specified \u2014 only standard DOJ security protocols.",
+      "detail": null,
+      "source_datasets": [
+        "wisconsin_mou_document"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:43",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7321,
+      "finding_type": "legal",
+      "summary": "MOU Section IX permits DOJ to share voter PII (full names, DOB, addresses, DL numbers, SSN4) with 'a contractor' for 'list maintenance verification procedures' \u2014 contractor is not bound by the MOU's own data security safeguards and no framework exists for vetting contractors",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "stateline",
+        "brennan_center"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:09",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7322,
+      "finding_type": "legal",
+      "summary": "MOU Section IX data security safeguards (2FA, audit logging, encryption, endpoint protection, physical access controls, no copying to USB/external storage) apply only to 'any member of the Justice Department' \u2014 the contractor provision is a separate sentence authorizing data sharing without binding the contractor to these same safeguards",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:17",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7378,
+      "finding_type": "legal",
+      "summary": "MOU Section IX's only stated protection for contractor data access is that 'Recipients of information shall be required to comply with the requirements of the Privacy Act of 1974, as amended, pursuant to 5 USC 552a(m).' However, the MOU's own data security safeguards (2FA, audit logging, encryption, endpoint protection, physical access controls, USB restrictions) are phrased as applying only to 'any member of the Justice Department' \u2014 NOT to contractors. The Privacy Act reference is the weakest possible safeguard: it merely requires contractors to follow the same Privacy Act rules that already apply by default, adding no additional data security requirements.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:01",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7324,
+      "finding_type": "financial",
+      "summary": "Five-layer contractor stack processes federal identity verification data: IBM (M FALCON/VIS contract for E-Verify/SAVE transaction engine including Person Centric Entity Resolution), Peraton (M HART biometric system on AWS GovCloud), Palantir (M ImmigrationOS plus new USCIS VOWS platform), NEC Corporation (classified facial recognition algorithms for HART), Amazon AWS (hosting infrastructure). Any of these could be the unnamed 'contractor' in the MOU.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-18",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:28",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending contract data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7337,
+      "finding_type": "intelligence",
+      "summary": "Complete voter data pipeline architecture: States upload full voter rolls (name, DOB, address, DL#, SSN4) via JEFS to DOJ CRT \u2192 DOJ shares with DHS \u2192 DHS runs bulk searches through expanded SAVE system (powered by IBM VIS/FALCON) \u2192 SAVE queries SSA NUMIDENT database and immigration records \u2192 Person Centric Entity Resolution creates unified identity profiles \u2192 Results sent to DOJ \u2192 DOJ sends 45-day removal list to states. Contractor access occurs at multiple points in this pipeline.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-18",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:17",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/wp-content/uploads/2025/12/VRLData-Sharing-Agreement-DOJ-WI-2.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7501,
+      "finding_type": "intelligence",
+      "summary": "DOJ MOU contractor provision enables unnamed contractors to access state voter data: Draft DOJ MOU sent to 12+ states authorizes sharing voter registration list (VRL) data with 'a contractor' who needs access 'to perform duties related' to voter list maintenance verification. MOU does not name contractors, impose credentials requirements, or specify data protection measures. Wisconsin rejected the MOU; DOJ sued. Federal judge dismissed DOJ demand for California voter data as 'unprecedented and illegal' (Jan 2026). DOJ has sued at least 8 states for refusing voter data.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:14:38",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:stateline.org DOJ-WI-MOU-2025-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7107,
+      "finding_type": "legal",
+      "summary": "MOU state compliance map: Alaska signed Dec 19, 2025 (Carol Beecher, Director AK Division of Elections + Harmeet Dhillon). Texas signed Dec 23, 2025 (Jane Nelson, SoS office). 11 states expressed willingness at Dec 4 court hearing per Eric Neff (acting chief DOJ Voting Section): AL, MS, MO, MT, NE, SC, SD, TX, TN, UT, VA. Of these, MS, SD, and TN provided voter rolls WITHOUT signing MOUs. CO and WI publicly rejected and released MOU copies. DOJ offered MOUs to additional states: CO (Dec 1), KY (Dec 2), NJ (Dec 1), UT (Dec 2). DOJ has now sued 29 states and DC for refusing unredacted voter rolls.",
+      "detail": null,
+      "source_datasets": [
+        "stateline"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-19",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:30:34",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/2025/12/18/trumps-doj-offers-states-confidential-deal-to-wipe-voters-flagged-by-feds-as-ineligible/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7118,
+      "finding_type": "legal",
+      "summary": "DOJ legal strategy evolution: Initial requests (Spring-Summer 2025) cited NVRA and HAVA. By August 2025, DOJ added Civil Rights Act of 1960 to correspondence. After three district court dismissals rejected all three statutes (Jan-Feb 2026), DOJ's later lawsuits dropped NVRA and HAVA claims entirely, relying solely on CRA Section 20701 records inspection provision \u2014 a Jim Crow-era statute originally passed to protect Black voter registration records from destruction by Southern officials. This represents a novel reinterpretation: using a civil rights law designed to protect voting access as authority to demand comprehensive voter PII for potential removal purposes.",
+      "detail": null,
+      "source_datasets": [
+        "cnn"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-01-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:31:55",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://abc17news.com/politics/national-politics/cnn-us-politics/2026/01/14/a-jim-crow-era-civil-rights-law-is-central-to-the-trump-justice-departments-effort-to-clean-voter-rolls/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7507,
+      "finding_type": "intelligence",
+      "summary": "Bondi explicitly linked ICE enforcement operations to voter roll demands: In Jan 2026, hours after ICE shot and killed a man in Minneapolis, AG Bondi demanded Minnesota hand over voter rolls \u2014 first time administration explicitly tied immigration enforcement to voter data access. MN Secretary of State called it 'this ransom note.' Senate Democrats accused DOJ of seeking 'voter rolls as a condition to ending the dangerous recent deployment of ICE officers.' DOJ denied quid pro quo. This confirms operational linkage between DOJ voter data demands and DHS/ICE enforcement.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-01-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:17:28",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:CNN 2026-01-27 Bondi-Minnesota-voter-rolls",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7108,
+      "finding_type": "legal",
+      "summary": "Three federal courts dismissed DOJ voter roll lawsuits rejecting all three statutory bases. California (Judge unnamed, dismissed Jan 15, 2026 - called demands 'unprecedented and illegal'). Oregon (dismissed Feb 5, 2026). Michigan (Judge Hala Jarbou, Chief Judge W.D. Mich., 23-page order Feb 10, 2026 - ruled HAVA requires no disclosure, NVRA does not mandate VRL disclosure, CRA does not apply). DOJ appealed all three on Feb 25, 2026, seeking expedited 6th Circuit review of Michigan for resolution before Nov 2026 midterms. In later lawsuits DOJ dropped NVRA/HAVA claims entirely, relying solely on Civil Rights Act of 1960 records inspection provision.",
+      "detail": null,
+      "source_datasets": [
+        "nbc_news"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-02-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:30:48",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nbcnews.com/politics/elections/judge-dismisses-doj-lawsuit-seeking-michigan-voter-roll-data-rcna258465",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7131,
+      "finding_type": "legal",
+      "summary": "Complete DOJ voter roll lawsuit map (as of March 2026): 29 states and DC sued across 5 waves. Wave 1 (Sept 16, 2025): ME, OR. Wave 2 (Sept 25, 2025): CA, MI, MN, NH, NY, PA. Wave 3 (Dec 1-2, 2025): DE, MD, NM, RI, VT, WA. Wave 4 (Dec 11-18, 2025): CO, HI, MA, NV, GA (dismissed/refiled), IL, WI. Wave 5 (Jan-Feb 2026): CT, AZ, VA, KY, NJ, OK, UT. Three dismissed (CA Jan 15, OR Feb 5, MI Feb 10 \u2014 all 2026), all appealed Feb 25. CREW won FOIA injunction Feb 19 forcing DOJ to produce records on voter data collection. DOJ demanded full rolls from 44+ states; Criminal Division conducting parallel info-sharing meetings in 11 states.",
+      "detail": null,
+      "source_datasets": [
+        "brennan_center"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-02-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:34:04",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brennancenter.org/our-work/research-reports/tracker-justice-department-requests-voter-information",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7376,
+      "finding_type": "legal",
+      "summary": "Multiple FOIA lawsuits seeking DOJ voter data handling records: CREW v. DOJ (25-cv-04426, D.C., preliminary injunction granted Feb 19 2026 ordering expedited production) and American Oversight v. ICE/DOJ (26-00835, filed Mar 10 2026). Neither has obtained contractor identity records yet. Key unanswered questions: who is the 'contractor' referenced in MOU Section IX, what data security standards apply to them, whether Palantir or other tech firms have been given access.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:50",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:CREW lawsuit 25-cv-04426; American Oversight lawsuit 26-00835",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6931,
+      "finding_type": "relationship",
+      "summary": "Institutional graph reveals DOJ Civil Rights Division shares 2 alumni with PILF, creating a revolving door between the agency and the advocacy group now driving DOJ voter roll purge policy",
+      "detail": "Structural observation from institutional graph: DOJ Civil Rights Division and Public Interest Legal Foundation share 2 alumni. Cross-pillar analysis shows J. Christian Adams (government+legal, orchestrator score 21.29) and Robert Popper (government+legal, orchestrator score 18.11) both moved between DOJ and PILF. This is a documented revolving door. The open triad analysis also shows Cleta Mitchell and Hans von Spakovsky connected through PILF (closure score 0.72, advisory relationships). The CIA-Southern Trust Company link (2 shared alumni) is another notable institutional bridge.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:24:21",
+      "target_name": "DOJ Civil Rights Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3362,
+      "person_a": "DOJ Civil Rights Division",
+      "person_b": "Public Interest Legal Foundation",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:01:27",
+      "profile_id": "tech-right",
+      "other_person": "Public Interest Legal Foundation",
+      "other_person_slug": "public-interest-legal-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Democracy Docket; DOJ PA letter",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3560,
+      "person_a": "DHS SAVE Database",
+      "person_b": "DOJ Civil Rights Division",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:28",
+      "profile_id": "tech-right",
+      "other_person": "DHS SAVE Database",
+      "other_person_slug": "dhs-save-database",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateline.org/2025/09/12/doj-is-sharing-state-voter-roll-lists-with-homeland-security/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3719,
+      "person_a": "DOJ Civil Rights Division",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:28",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3807,
+      "person_a": "DHS SAVE System",
+      "person_b": "DOJ Civil Rights Division",
+      "relationship_type": "intelligence",
+      "description": "SAVE SORN routine uses permit sharing voter verification data with DOJ; DOJ simultaneously demanding state voter rolls via MOU",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:15:43",
+      "profile_id": "tech-right",
+      "other_person": "DHS SAVE System",
+      "other_person_slug": "dhs-save-system",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:SAVE SORN 2025-19735",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-01-20",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Executive order framework for voter roll program: EO 14159 (Jan 20, 2025) directed SAVE access for voter verification. EO 14248 (March 25, 2025) ordered election integrity measures including proof-of-citizenship requirement. DOJ began sending demand letters to states in Spring 2025, requesting full unredacted voter rolls from at least 44 states and DC. Additional executive actions: DOJ Criminal Division also requested info-sharing meetings in multiple states (MI, OR, NM, RI, VT, PA, CT, VA, WI, AZ, NV) -- a parallel criminal enforcement track. FBI executed search warrant in Georgia Fulton County Jan 28, 2026 for 2020 election records. AG Bondi personally reiterated demand to Minnesota Jan 24, 2026.",
+      "confidence": "medium",
+      "id": 7124
+    },
+    {
+      "date": "2025-10-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "DOJ-DHS-SSA data pipeline for voter roll cross-referencing: DOJ shares state voter rolls received under MOU with DHS. DHS expanded SAVE (Systematic Alien Verification for Entitlements) database via Oct 31, 2025 SORN to accept bulk voter roll uploads. May 15, 2025 DHS-SSA agreement integrated SSA death database and citizenship fields into SAVE, adding hundreds of millions of records. SAVE now cross-references: full SSN, names, addresses, DOB, criminal records, immigration histories. States like TX and TN uploaded entire voter rolls into SAVE before SORN was published. Initial TX results: 96.3% confirmed citizens, 3.1% unresolved, 0.04% flagged noncitizen. TX county showed ~25% false positive rate for noncitizen flags.",
+      "confidence": "medium",
+      "id": 7110
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOJ Confidential MOU mechanism: 9-page template agreement requires states to provide complete unredacted VRL including full names, DOB, addresses, driver's license numbers, and last 4 SSN digits. States must remove flagged voters within 45 days and resubmit updated rolls. MOU permits sharing data with unnamed DOJ contractors for 'list maintenance verification procedures' with contractors not bound by agreement safeguards. MOU itself and all drafts/communications deemed 'confidential' under Section XII(F). Legal authorities cited: NVRA (52 USC 20501), NVRA Section 11 enforcement (52 USC 20510(a)), HAVA (52 USC 20901), HAVA enforcement (53 USC 21111), Civil Rights Act of 1960 Title III (52 USC 20701), and Privacy Act of 1974.",
+      "confidence": "confirmed",
+      "id": 7106
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MOU contractor loophole: Section IX of the MOU permits DOJ to share voter PII with 'a contractor with the Department of Justice who needs access to the VRL/Data information in order to perform duties related to the Department's list maintenance verification procedures.' Contractors are required to comply with Privacy Act per 5 USC 552a(m), but the MOU provides no framework for vetting contractors, no specification of who they are, and Brennan Center analysis found contractors are 'not bound by the safeguards in the agreement.' MOU also permits DOJ to present VRL data to 'a court, magistrate, or administrative tribunal' and share 'summary results.' No encryption requirement specified \u2014 only standard DOJ security protocols.",
+      "confidence": "confirmed",
+      "id": 7115
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MOU Section IX permits DOJ to share voter PII (full names, DOB, addresses, DL numbers, SSN4) with 'a contractor' for 'list maintenance verification procedures' \u2014 contractor is not bound by the MOU's own data security safeguards and no framework exists for vetting contractors",
+      "confidence": "confirmed",
+      "id": 7321
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MOU Section IX data security safeguards (2FA, audit logging, encryption, endpoint protection, physical access controls, no copying to USB/external storage) apply only to 'any member of the Justice Department' \u2014 the contractor provision is a separate sentence authorizing data sharing without binding the contractor to these same safeguards",
+      "confidence": "high",
+      "id": 7322
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MOU Section IX's only stated protection for contractor data access is that 'Recipients of information shall be required to comply with the requirements of the Privacy Act of 1974, as amended, pursuant to 5 USC 552a(m).' However, the MOU's own data security safeguards (2FA, audit logging, encryption, endpoint protection, physical access controls, USB restrictions) are phrased as applying only to 'any member of the Justice Department' \u2014 NOT to contractors. The Privacy Act reference is the weakest possible safeguard: it merely requires contractors to follow the same Privacy Act rules that already apply by default, adding no additional data security requirements.",
+      "confidence": "high",
+      "id": 7378
+    },
+    {
+      "date": "2025-12-18",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Five-layer contractor stack processes federal identity verification data: IBM (M FALCON/VIS contract for E-Verify/SAVE transaction engine including Person Centric Entity Resolution), Peraton (M HART biometric system on AWS GovCloud), Palantir (M ImmigrationOS plus new USCIS VOWS platform), NEC Corporation (classified facial recognition algorithms for HART), Amazon AWS (hosting infrastructure). Any of these could be the unnamed 'contractor' in the MOU.",
+      "confidence": "medium",
+      "id": 7324
+    },
+    {
+      "date": "2025-12-18",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Complete voter data pipeline architecture: States upload full voter rolls (name, DOB, address, DL#, SSN4) via JEFS to DOJ CRT \u2192 DOJ shares with DHS \u2192 DHS runs bulk searches through expanded SAVE system (powered by IBM VIS/FALCON) \u2192 SAVE queries SSA NUMIDENT database and immigration records \u2192 Person Centric Entity Resolution creates unified identity profiles \u2192 Results sent to DOJ \u2192 DOJ sends 45-day removal list to states. Contractor access occurs at multiple points in this pipeline.",
+      "confidence": "medium",
+      "id": 7337
+    },
+    {
+      "date": "2025-12-18",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "DOJ MOU contractor provision enables unnamed contractors to access state voter data: Draft DOJ MOU sent to 12+ states authorizes sharing voter registration list (VRL) data with 'a contractor' who needs access 'to perform duties related' to voter list maintenance verification. MOU does not name contractors, impose credentials requirements, or specify data protection measures. Wisconsin rejected the MOU; DOJ sued. Federal judge dismissed DOJ demand for California voter data as 'unprecedented and illegal' (Jan 2026). DOJ has sued at least 8 states for refusing voter data.",
+      "confidence": "high",
+      "id": 7501
+    },
+    {
+      "date": "2025-12-19",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "MOU state compliance map: Alaska signed Dec 19, 2025 (Carol Beecher, Director AK Division of Elections + Harmeet Dhillon). Texas signed Dec 23, 2025 (Jane Nelson, SoS office). 11 states expressed willingness at Dec 4 court hearing per Eric Neff (acting chief DOJ Voting Section): AL, MS, MO, MT, NE, SC, SD, TX, TN, UT, VA. Of these, MS, SD, and TN provided voter rolls WITHOUT signing MOUs. CO and WI publicly rejected and released MOU copies. DOJ offered MOUs to additional states: CO (Dec 1), KY (Dec 2), NJ (Dec 1), UT (Dec 2). DOJ has now sued 29 states and DC for refusing unredacted voter rolls.",
+      "confidence": "medium",
+      "id": 7107
+    },
+    {
+      "date": "2026-01-14",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "DOJ legal strategy evolution: Initial requests (Spring-Summer 2025) cited NVRA and HAVA. By August 2025, DOJ added Civil Rights Act of 1960 to correspondence. After three district court dismissals rejected all three statutes (Jan-Feb 2026), DOJ's later lawsuits dropped NVRA and HAVA claims entirely, relying solely on CRA Section 20701 records inspection provision \u2014 a Jim Crow-era statute originally passed to protect Black voter registration records from destruction by Southern officials. This represents a novel reinterpretation: using a civil rights law designed to protect voting access as authority to demand comprehensive voter PII for potential removal purposes.",
+      "confidence": "medium",
+      "id": 7118
+    },
+    {
+      "date": "2026-01-27",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Bondi explicitly linked ICE enforcement operations to voter roll demands: In Jan 2026, hours after ICE shot and killed a man in Minneapolis, AG Bondi demanded Minnesota hand over voter rolls \u2014 first time administration explicitly tied immigration enforcement to voter data access. MN Secretary of State called it 'this ransom note.' Senate Democrats accused DOJ of seeking 'voter rolls as a condition to ending the dangerous recent deployment of ICE officers.' DOJ denied quid pro quo. This confirms operational linkage between DOJ voter data demands and DHS/ICE enforcement.",
+      "confidence": "high",
+      "id": 7507
+    },
+    {
+      "date": "2026-02-10",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Three federal courts dismissed DOJ voter roll lawsuits rejecting all three statutory bases. California (Judge unnamed, dismissed Jan 15, 2026 - called demands 'unprecedented and illegal'). Oregon (dismissed Feb 5, 2026). Michigan (Judge Hala Jarbou, Chief Judge W.D. Mich., 23-page order Feb 10, 2026 - ruled HAVA requires no disclosure, NVRA does not mandate VRL disclosure, CRA does not apply). DOJ appealed all three on Feb 25, 2026, seeking expedited 6th Circuit review of Michigan for resolution before Nov 2026 midterms. In later lawsuits DOJ dropped NVRA/HAVA claims entirely, relying solely on Civil Rights Act of 1960 records inspection provision.",
+      "confidence": "high",
+      "id": 7108
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Complete DOJ voter roll lawsuit map (as of March 2026): 29 states and DC sued across 5 waves. Wave 1 (Sept 16, 2025): ME, OR. Wave 2 (Sept 25, 2025): CA, MI, MN, NH, NY, PA. Wave 3 (Dec 1-2, 2025): DE, MD, NM, RI, VT, WA. Wave 4 (Dec 11-18, 2025): CO, HI, MA, NV, GA (dismissed/refiled), IL, WI. Wave 5 (Jan-Feb 2026): CT, AZ, VA, KY, NJ, OK, UT. Three dismissed (CA Jan 15, OR Feb 5, MI Feb 10 \u2014 all 2026), all appealed Feb 25. CREW won FOIA injunction Feb 19 forcing DOJ to produce records on voter data collection. DOJ demanded full rolls from 44+ states; Criminal Division conducting parallel info-sharing meetings in 11 states.",
+      "confidence": "medium",
+      "id": 7131
+    },
+    {
+      "date": "2026-03-10",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Multiple FOIA lawsuits seeking DOJ voter data handling records: CREW v. DOJ (25-cv-04426, D.C., preliminary injunction granted Feb 19 2026 ordering expedited production) and American Oversight v. ICE/DOJ (26-00835, filed Mar 10 2026). Neither has obtained contractor identity records yet. Key unanswered questions: who is the 'contractor' referenced in MOU Section IX, what data security standards apply to them, whether Palantir or other tech firms have been given access.",
+      "confidence": "high",
+      "id": 7376
+    }
+  ]
+}

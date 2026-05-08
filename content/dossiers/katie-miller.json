@@ -1,0 +1,415 @@
+{
+  "name": "Katie Miller",
+  "slug": "katie-miller",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.361489",
+  "last_updated": "2026-03-23T19:24:02",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 3,
+    "total_entities": 6,
+    "finding_types": {
+      "financial": 3,
+      "relationship": 1,
+      "background": 1,
+      "negative_result": 1,
+      "identity": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "familial": 1,
+      "employment": 1,
+      "corporate": 1
+    },
+    "last_updated": "2026-03-23T19:24:02"
+  },
+  "findings": [
+    {
+      "id": 7404,
+      "finding_type": "financial",
+      "summary": "Katie Miller chairs Stand for Us PAC (FEC ID C00873174, registered March 2024, Austin TX). PAC funded by Building America's Future (Musk dark money conduit). Same treasurer (Cabell Hobbs) serves both entities. Stand for Us spent over $400K to defeat WV lawmaker over 340B drug pricing program, with ads tying 340B to immigration.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-03-13",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:45",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:C00873174",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7407,
+      "finding_type": "relationship",
+      "summary": "Katie Miller served as spokesperson for RFK Jr. during HHS Secretary confirmation process (late 2024/early 2025) while simultaneously working for P2 Public Affairs and being named to DOGE. She also served on anti-340B pharmaceutical campaign through Stand for Us PAC, targeting Republican lawmakers who supported drug pricing programs.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:18",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "340breport.com",
+          "source_quote": " Katie Miller, key player in anti-340B dark money campaign, helping RFK Jr's HHS secretary bid",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7403,
+      "finding_type": "financial",
+      "summary": "Katie Miller simultaneously held paid role as principal at P2 Pathway Public Affairs (since 2021) while serving as DOGE communications director (Jan-May 2025). As special government employee, she was not required to disclose clients or conflicts. P2's sister firm GuidePost Strategies lobbies for defense contractors including General Dynamics, Honeywell, and General Atomics -- companies whose federal spending DOGE was reviewing.",
+      "detail": null,
+      "source_datasets": [
+        "thedailybeast,readsludge,opensecrets"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-02-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:36",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "thedailybeast.com/readsludge.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7405,
+      "finding_type": "background",
+      "summary": "Katie Miller joined Musk's xAI as communications manager after leaving DOGE in May 2025. She departed xAI in August 2025 to launch 'The Katie Miller Podcast' targeting conservative women. Her trajectory: BAF Senior Advisor (Sept 2024) -> DOGE Comms Director (Jan-May 2025) -> xAI Comms Manager (June-Aug 2025) -> podcast host (Aug 2025-present).",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:56",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "littlesis:2030388",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7413,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: (1) No FEC donor records matching our Katie Miller (all DC/VA Katie Millers are different people). (2) No FARA registrations. (3) No lobbying disclosure filings in her name. (4) No federal court cases involving our target. (5) No 990 officer records matching (common name yields many false positives in other states). (6) No corporate registry filings in DC/VA area. (7) No direct formal role at America First Legal or Conservative Partnership Institute found -- connection to AFL is indirect through husband Stephen Miller and Citizens for Sanity overlap. (8) No SEC EDGAR filings related to our target.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:02",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "fec/fara/courtlistener/990/registry/edgar",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5960,
+      "finding_type": "identity",
+      "summary": "DOGE Personnel: Katie Miller \u2014 Communications Director, Stephen Miller's wife, Pence press secretary",
+      "detail": "Katie Waldman Miller (b. Oct 1991, Fort Lauderdale, FL). University of Florida 2014. Career: NRSC (2014), comms director for Sen. Steve Daines (MT), DHS assistant press secretary (2017-2019), Sen. Martha McSally comms director (2019), VP Mike Pence press secretary (Sep 2019), Pence communications director (May 2020). DOGE role: communications director Jan-May 2025. After DOGE tenure elapsed, remained with Elon Musk's team. Also named to President's Intelligence Advisory Board (Feb 2025). Departed Musk's orbit Aug 2025, launched 'The Katie Miller Podcast' targeting conservative women, featuring guests like VP JD Vance and SecDef Pete Hegseth. Married to Stephen Miller, White House Deputy Chief of Staff for Policy.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:24:34",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Katie Miller; The Hill: Trump says Katie Miller will join DOGE (Dec 2024); CNN: The Millers \u2014 Washington power couple (Jun 2025); Gizmodo: Katie Miller leaves Elon to start podcast (Aug 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5964,
+      "finding_type": "financial",
+      "summary": "Katie Miller DOGE conflict: Stephen Miller holds $100K-250K Palantir stock while DOGE employs Palantir alumni",
+      "detail": "Katie Miller served as DOGE communications director (Jan-May 2025) while her husband Stephen Miller (White House Deputy Chief of Staff for Policy) disclosed $100,001-$250,000 in Palantir stock. Palantir is deeply embedded in ICE operations and other federal agencies Miller oversees in his policy role. At least three former Palantir employees also worked in DOGE. POGO (Project on Government Oversight) flagged this as a conflict of interest: Miller's deep involvement in ICE enforcement policy while holding Palantir stock, combined with his wife's DOGE communications role that shapes public narrative around government restructuring affecting Palantir's government client agencies. Katie Miller was also placed on the President's Intelligence Advisory Board (Feb 2025), adding another layer of access.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:24:47",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO: Stephen Miller's Financial Stake in ICE Contractor Palantir; CNN: The Millers \u2014 Washington power couple straddles Trump-Musk feud (Jun 2025); The Hill: Trump says Katie Miller will join DOGE (Dec 2024)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6003,
+      "finding_type": "intelligence",
+      "summary": "Katie Miller: DOGE comms director also placed on President's Intelligence Advisory Board (Feb 2025)",
+      "detail": "In February 2025, while serving as DOGE communications director, Katie Miller was also named to the President's Intelligence Advisory Board (PIAB). PIAB is a White House advisory body that provides the President with independent assessments of the intelligence community's effectiveness. This dual appointment \u2014 DOGE comms director shaping public narrative about government restructuring plus PIAB member with intelligence oversight access \u2014 is notable. Her husband Stephen Miller, as Deputy Chief of Staff for Policy, already had extensive policy influence. The Miller household thus had simultaneous access to: (1) DOGE operations and messaging (Katie), (2) White House policy apparatus (Stephen), (3) intelligence advisory function (Katie PIAB). Katie departed Musk's team by August 2025 to launch a conservative media venture.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:28:33",
+      "target_name": "Katie Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Katie Miller \u2014 named to PIAB Feb 2025; CNN: The Millers power couple (Jun 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3084,
+      "person_a": "Katie Miller",
+      "person_b": "Stephen Miller",
+      "relationship_type": "familial",
+      "description": "Married. Katie served as DOGE comms director while Stephen is White House Deputy Chief of Staff for Policy. Combined: DOGE messaging + WH policy + PIAB intelligence advisory",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:29:41",
+      "profile_id": "tech-right",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO: Stephen Miller conflicts",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Katie Miller",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3771,
+      "person_a": "Elon Musk",
+      "person_b": "Katie Miller",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:36",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "littlesis:2013088",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3773,
+      "person_a": "Katie Miller",
+      "person_b": "Phil Cox",
+      "relationship_type": "corporate",
+      "description": "Phil Cox leads P2 Pathway Public Affairs where Katie Miller is a principal (since 2021)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:23:50",
+      "profile_id": "tech-right",
+      "other_person": "Phil Cox",
+      "other_person_slug": "phil-cox",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "p2publicaffairs.com",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "principal",
+      "date_start": "2021",
+      "date_end": "",
+      "source": "p2publicaffairs.com",
+      "entity_id": 1020,
+      "entity_name": "P2 Pathway Public Affairs",
+      "entity_type": "llc",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "chair",
+      "date_start": "2024-03",
+      "date_end": "",
+      "source": "FEC:C00873174/340breport.com",
+      "entity_id": 1343,
+      "entity_name": "Stand for Us PAC",
+      "entity_type": "pac",
+      "jurisdiction": "TX",
+      "entity_status": "active"
+    },
+    {
+      "role": "senior advisor",
+      "date_start": "2024-09",
+      "date_end": "2024-12",
+      "source": "IRS 990/media reports",
+      "entity_id": 576,
+      "entity_name": "Building America's Future",
+      "entity_type": "nonprofit",
+      "jurisdiction": "US",
+      "entity_status": "active"
+    },
+    {
+      "role": "communications manager",
+      "date_start": "2025-06",
+      "date_end": "2025-08",
+      "source": "littlesis:2030388/fortune.com",
+      "entity_id": 627,
+      "entity_name": "xAI Corp",
+      "entity_type": "inc",
+      "jurisdiction": "NV",
+      "entity_status": "active"
+    },
+    {
+      "role": "Senior Advisor (Sept 2024)",
+      "date_start": null,
+      "date_end": null,
+      "source": "Sludge reporting, spouse of Stephen Miller, later joined DOGE",
+      "entity_id": 576,
+      "entity_name": "Building America's Future",
+      "entity_type": "nonprofit",
+      "jurisdiction": "US",
+      "entity_status": "active"
+    },
+    {
+      "role": "Principal",
+      "date_start": null,
+      "date_end": null,
+      "source": "Siegelman analysis",
+      "entity_id": 1020,
+      "entity_name": "P2 Pathway Public Affairs",
+      "entity_type": "llc",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2024-03-13",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Katie Miller chairs Stand for Us PAC (FEC ID C00873174, registered March 2024, Austin TX). PAC funded by Building America's Future (Musk dark money conduit). Same treasurer (Cabell Hobbs) serves both entities. Stand for Us spent over $400K to defeat WV lawmaker over 340B drug pricing program, with ads tying 340B to immigration.",
+      "confidence": "medium",
+      "id": 7404
+    },
+    {
+      "date": "2024-12",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Katie Miller served as spokesperson for RFK Jr. during HHS Secretary confirmation process (late 2024/early 2025) while simultaneously working for P2 Public Affairs and being named to DOGE. She also served on anti-340B pharmaceutical campaign through Stand for Us PAC, targeting Republican lawmakers who supported drug pricing programs.",
+      "confidence": "medium",
+      "id": 7407
+    },
+    {
+      "date": "2025-02-26",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Katie Miller simultaneously held paid role as principal at P2 Pathway Public Affairs (since 2021) while serving as DOGE communications director (Jan-May 2025). As special government employee, she was not required to disclose clients or conflicts. P2's sister firm GuidePost Strategies lobbies for defense contractors including General Dynamics, Honeywell, and General Atomics -- companies whose federal spending DOGE was reviewing.",
+      "confidence": "medium",
+      "id": 7403
+    },
+    {
+      "date": "2025-07-03",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Katie Miller joined Musk's xAI as communications manager after leaving DOGE in May 2025. She departed xAI in August 2025 to launch 'The Katie Miller Podcast' targeting conservative women. Her trajectory: BAF Senior Advisor (Sept 2024) -> DOGE Comms Director (Jan-May 2025) -> xAI Comms Manager (June-Aug 2025) -> podcast host (Aug 2025-present).",
+      "confidence": "high",
+      "id": 7405
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: (1) No FEC donor records matching our Katie Miller (all DC/VA Katie Millers are different people). (2) No FARA registrations. (3) No lobbying disclosure filings in her name. (4) No federal court cases involving our target. (5) No 990 officer records matching (common name yields many false positives in other states). (6) No corporate registry filings in DC/VA area. (7) No direct formal role at America First Legal or Conservative Partnership Institute found -- connection to AFL is indirect through husband Stephen Miller and Citizens for Sanity overlap. (8) No SEC EDGAR filings related to our target.",
+      "confidence": "high",
+      "id": 7413
+    }
+  ]
+}

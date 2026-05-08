@@ -1,0 +1,622 @@
+{
+  "name": "Voter Reference Foundation",
+  "slug": "voter-reference-foundation",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-05-07T23:07:36.277011",
+  "last_updated": "2026-03-24T14:18:12",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "relationship": 1,
+      "background": 1,
+      "legal": 3,
+      "intelligence": 2
+    },
+    "connection_types": {
+      "financial": 2,
+      "employment": 1,
+      "controls": 1,
+      "subsidiary_of": 1,
+      "political": 2
+    },
+    "last_updated": "2026-03-24T14:18:12"
+  },
+  "findings": [
+    {
+      "id": 7418,
+      "finding_type": "financial",
+      "summary": "VRF CORPORATE STRUCTURE: Voter Reference Foundation is not an independent nonprofit but a project of Restoration of America (EIN 472862042), a 501(c)(4) founded 2015 by Doug Truax. VRF staff (Swoboda K, Roman K, Benson K) appear on Restoration's 990. Restoration also controls Foundation for the Restoration of America Inc (EIN 862639600), a 501(c)(3) incorporated in Delaware. All three share address: 101 Marketside Ave Suite 404, Ponte Vedra FL 32081. Restoration revenue: .3M (2023), from K in 2019 -- 67,000% growth in 4 years. Foundation received .4M from National Christian Charitable Foundation in 2023, then granted K to VRF.",
+      "detail": null,
+      "source_datasets": [
+        "ProPublica Nonprofit Explorer, FL SOS Sunbiz"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:43",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:862639600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7422,
+      "finding_type": "financial",
+      "summary": "VRF GRANT NETWORK FROM RESTORATION OF AMERICA: Restoration of America (2023 990) made grants totaling .97M to 48+ entities. Top recipients: Susan B Anthony List .08M, Over the Horizon .61M, Liberty Initiative Fund M, American Principles Project .88M, Tea Party Patriots Action .61M, American Majority Action .54M, Fight Voter Fraud Inc K, Lawyers Democracy Fund K, Fair Courts America M, Protect Our Constitution K, CatholicVote/Fidelis K, League of American Workers K. The 501(c)(3) arm (Foundation for Restoration) granted: Be Good to Kids LLC .46M, American Majority Inc .25M, VRF K, School Board for Academic Excellence K, Fidelis Center for Law & Policy K.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:05",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:862639600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7423,
+      "finding_type": "relationship",
+      "summary": "VRF-ELECTION ENFORCEMENT NETWORK CONNECTIONS: (1) SUSAN B ANTHONY LIST: Received .08M (2023) + .23M (2021) + .73M (2022) = M+ from Restoration of America. SBA List launched the Election Transparency Initiative (ETI) with American Principles Project in Feb 2021, headed by Ken Cuccinelli (former DHS deputy secretary). Cuccinelli promoted VoteRef at ETI events. (2) AMERICAN PRINCIPLES PROJECT: Received .88M (2023) from Restoration; APP gave K directly to VRF LLC in 2022 plus K to Restoration in 2023 -- circular funding. (3) HERITAGE: ETI partners with Heritage Foundation political arm. (4) FIGHT VOTER FRAUD INC: Received .1M total from Restoration (2021-2023). (5) LAWYERS DEMOCRACY FUND: Received .4M total from Restoration (2021-2023).",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:17",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7429,
+      "finding_type": "background",
+      "summary": "VRF PERSONNEL: Key Restoration of America staffers connected to election enforcement and political activism. (1) Hayden Ludwig (K, Director of Research Operations): former Senior Investigative Researcher at Capital Research Center, published research attacking ERIC (interstate voter roll comparison system) and private election funding ('Zuckbucks'). CRC is a conservative watchdog that published reports used to justify ERIC withdrawal by Republican states. Ludwig moved from CRC to Restoration, bringing anti-ERIC research capacity. (2) David Langdon (Secretary of both Restoration and Foundation): also Director and Secretary of Centerline Action Inc (EIN 882307642), which gave K to Republican Governors Association and K to Republican State Leadership Committee in 2024. (3) Tom Mallon (Chairman): also board member of AMFA Foundation (EIN 582238056) and Altar Fly Fishing (EIN 843052840).",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:04",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:882307642",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7430,
+      "finding_type": "financial",
+      "summary": "NATIONAL CHRISTIAN CHARITABLE FOUNDATION -> VRF FUNDING: NCF Charitable Trust (donor-advised fund) gave .405M to Foundation for the Restoration of America in 2023 -- this was 89% of the Foundation's total .4M revenue. NCCF is one of the largest Christian donor-advised funds in the US, receiving M from NCF Charitable Trust in 2022. NCCF also gave .1M to Susan B Anthony List Education Fund (2020), .3M to SBA List Education Fund (2022). This means VRF's 501(c)(3) arm is almost entirely dependent on a single anonymous donor-advised fund flow from the National Christian Charitable Foundation.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:13",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:862639600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7427,
+      "finding_type": "legal",
+      "summary": "VRF PRIVACY LITIGATION: Atlas Data Privacy Corp sued Restoration of America (D.N.J. 1:24-cv-04324, filed 2024-03-28) over voter data practices. Case now on appeal in Third Circuit (25-1572, filed 2025-03-31). Related case Atlas Data Privacy Corp v. We Inform LLC (3d Cir 24-8047, terminated 2025-03-18). This suggests VRF's voter data publishing practices face legal challenges not just from state AGs but from privacy plaintiffs.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-03-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:50",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: 1:24-cv-04324 DNJ; 25-1572 3d Cir; 24-8047 3d Cir",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7420,
+      "finding_type": "financial",
+      "summary": "VRF-UIHLEIN FUNDING CHAIN: Richard Uihlein (Uline CEO) has donated .2M to Restoration PAC since 2015, including .2M in the 2024 cycle. Restoration PAC was created by Restoration Action (now Restoration of America), the 501(c)(4) that controls VRF. The constellation includes: Restoration PAC (super PAC), Restoration of America (501c4, .3M revenue), Foundation for the Restoration of America (501c3, .4M), Voter Reference Foundation (voter roll operation), and Fair Courts America (judicial PAC). This represents a single billionaire-funded political operation with a voter-data subsidiary.",
+      "detail": null,
+      "source_datasets": [
+        "fec, opensecrets"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2024-10-24",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:24:53",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7534,
+      "finding_type": "legal",
+      "summary": "VRF MULTI-STATE VOTER DATA LITIGATION: VRF LLC is actively suing state officials for voter roll data access in at least 3 states: (1) Voter Reference Foundation v. Torrez (D.N.M. 1:22-cv-00222, filed 2022-03-28, appealed to 10th Circuit 22-2101 and 24-2133/24-2141) \u2014 suing New Mexico SOS. (2) Voter Reference Foundation v. Schmidt (M.D. Pa. 1:24-cv-00294, filed 2024-02-19) \u2014 suing Pennsylvania official. (3) Voter Reference Foundation v. Galvin (D. Mass. 1:24-cv-12592, filed 2024-10-09) \u2014 suing Massachusetts SOS. Simultaneously defending privacy suit: Atlas Data Privacy Corp v. Restoration of America (D.N.J. 1:24-cv-04324, now on appeal to 3rd Circuit 25-1572) over VoteRef voter data publication.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:22:25",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.courtlistener.com/?q=22-cv-00222",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.courtlistener.com/?q=24-cv-00294",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.courtlistener.com/?q=24-cv-12592",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.courtlistener.com/?q=24-cv-04324",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7424,
+      "finding_type": "legal",
+      "summary": "VRF NVRA LITIGATION PATTERN: VRF filed NVRA voter roll access lawsuits mirroring PILF's strategy. (1) VRF v. Torrez (D.N.M., 2022): Sued NM AG after being referred for criminal investigation for publishing voter data. Won on NVRA preemption. 10th Circuit affirmed Nov 2025 that NVRA preempts state restrictions on voter data sharing. NM ordered to pay K in legal fees. (2) VRF v. Schmidt (M.D. Pa., 2024): Sued PA Secretary of State for voter roll access -- same defendant PILF sued in PILF v. Schmidt. (3) VRF v. Galvin (D. Mass., 2024): Sued Massachusetts Secretary of State for voter roll access. This is a parallel NVRA litigation track operating alongside PILF, Judicial Watch, and DOJ.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-11-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:25:30",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener: 22-cv-00222 DNM; 24-cv-00294 MDPA; 24-cv-12592 DMA; 24-2133 10th Cir",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7516,
+      "finding_type": "financial",
+      "summary": "VRF FUNDING CHAIN COMPLETE: Voter Reference Foundation LLC (EIN 87-2270144) received ,846 from Foundation for the Restoration of America (c3 arm) in 2023, and ,000 from American Principles Project in 2022. VRF is NOT an independent entity \u2014 it is a project of Restoration of America. Gina Swoboda (VRF Executive Director, K comp from ROA) is now running for Congress in AZ-01 (filed Oct 2025, candidate ID H6AZ01405). Richard Uihlein donated ,500 to her congressional campaign (Dec 2025 FEC filing). This represents a direct pipeline from dark money to electoral candidacy: Uihlein funds ROA, ROA pays Swoboda K, Swoboda builds name recognition through VRF voter data work, then runs for Congress with Uihlein's additional direct support.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:19:41",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:872270144",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:862639600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:H6AZ01405",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7435,
+      "finding_type": "intelligence",
+      "summary": "VRF-ELECTION ENFORCEMENT APPARATUS ROLE: VRF occupies a specific niche in the election enforcement apparatus as a voter roll DATA AGGREGATOR. While PILF sues for voter roll access and the DOJ demands it via MOUs, VRF acquires voter rolls from states, publishes them freely on VoteRef.com, and enables mass civilian voter roll challenges. VRF was named among 15 groups that Congress demanded records from regarding the DOGE-SSA voter data agreement (Jan 2026). The Cuccinelli-led ETI promotes VoteRef tools to grassroots activists. VRF's legal victories (NM K award, 10th Circuit NVRA preemption ruling) create precedents that benefit PILF and DOJ enforcement. VRF and PILF sued the same PA Secretary of State (Schmidt) under NVRA. Combined, the apparatus operates: Heritage/AAF provides framework -> PILF/JW/VRF file NVRA suits -> VRF publishes data -> EIN trains challengers -> DOJ follows with federal enforcement.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-01-28",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:27:00",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7671,
+      "finding_type": "intelligence",
+      "summary": "VoteRef publishes 106M voter records across 32 states using flawed methodology amplified through fake news network funded by Restoration PAC",
+      "detail": "VoteRef (Voter Reference Foundation) publishes voter rolls with names, birthdates, addresses, voting histories for 106M+ people across 32+ states. Claims 431K more ballots cast than voters in 2020 election. Election officials from 12+ states (both parties) said methodology fundamentally flawed: voter rolls are live databases constantly updated, time lag makes comparisons invalid. VoteRef findings amplified through Pipeline Media/Metric Media fake news sites funded by Restoration PAC. Pennsylvania demanded data removal (citing state law), New Mexico referred to AG for criminal investigation. MyPillow CEO Lindell endorsed. Connected to Cleta Mitchell EIN summit circuit.",
+      "source_datasets": [
+        "web_search",
+        "990"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:04",
+      "target_name": "Voter Reference Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSecrets Restoration PAC filing",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica VoteRef investigation 2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3781,
+      "person_a": "Susan B Anthony List",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:29",
+      "profile_id": "tech-right",
+      "other_person": "Susan B Anthony List",
+      "other_person_slug": "susan-b-anthony-list",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3782,
+      "person_a": "American Principles Project",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:30",
+      "profile_id": "tech-right",
+      "other_person": "American Principles Project",
+      "other_person_slug": "american-principles-project",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3888,
+      "person_a": "Gina Swoboda",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "employment",
+      "description": "Executive Director of VRF/VoteRef",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:12",
+      "profile_id": "tech-right",
+      "other_person": "Gina Swoboda",
+      "other_person_slug": "gina-swoboda",
+      "evidence": []
+    },
+    {
+      "id": 3890,
+      "person_a": "Doug Truax",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "controls",
+      "description": "Truax founded Restoration of America which owns VRF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:12",
+      "profile_id": "tech-right",
+      "other_person": "Doug Truax",
+      "other_person_slug": "doug-truax",
+      "evidence": []
+    },
+    {
+      "id": 3891,
+      "person_a": "Restoration of America",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "subsidiary_of",
+      "description": "VRF is an initiative of Restoration Action/PAC founded by Truax",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:18:12",
+      "profile_id": "tech-right",
+      "other_person": "Restoration of America",
+      "other_person_slug": "restoration-of-america",
+      "evidence": []
+    },
+    {
+      "id": 3780,
+      "person_a": "Public Interest Legal Foundation",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:28",
+      "profile_id": "tech-right",
+      "other_person": "Public Interest Legal Foundation",
+      "other_person_slug": "public-interest-legal-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:472862042",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3783,
+      "person_a": "Heritage Foundation",
+      "person_b": "Voter Reference Foundation",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:26:31",
+      "profile_id": "tech-right",
+      "other_person": "Heritage Foundation",
+      "other_person_slug": "heritage-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SBA Pro-Life America press release; Washington Examiner",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "VRF CORPORATE STRUCTURE: Voter Reference Foundation is not an independent nonprofit but a project of Restoration of America (EIN 472862042), a 501(c)(4) founded 2015 by Doug Truax. VRF staff (Swoboda K, Roman K, Benson K) appear on Restoration's 990. Restoration also controls Foundation for the Restoration of America Inc (EIN 862639600), a 501(c)(3) incorporated in Delaware. All three share address: 101 Marketside Ave Suite 404, Ponte Vedra FL 32081. Restoration revenue: .3M (2023), from K in 2019 -- 67,000% growth in 4 years. Foundation received .4M from National Christian Charitable Foundation in 2023, then granted K to VRF.",
+      "confidence": "high",
+      "id": 7418
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "VRF GRANT NETWORK FROM RESTORATION OF AMERICA: Restoration of America (2023 990) made grants totaling .97M to 48+ entities. Top recipients: Susan B Anthony List .08M, Over the Horizon .61M, Liberty Initiative Fund M, American Principles Project .88M, Tea Party Patriots Action .61M, American Majority Action .54M, Fight Voter Fraud Inc K, Lawyers Democracy Fund K, Fair Courts America M, Protect Our Constitution K, CatholicVote/Fidelis K, League of American Workers K. The 501(c)(3) arm (Foundation for Restoration) granted: Be Good to Kids LLC .46M, American Majority Inc .25M, VRF K, School Board for Academic Excellence K, Fidelis Center for Law & Policy K.",
+      "confidence": "high",
+      "id": 7422
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "VRF-ELECTION ENFORCEMENT NETWORK CONNECTIONS: (1) SUSAN B ANTHONY LIST: Received .08M (2023) + .23M (2021) + .73M (2022) = M+ from Restoration of America. SBA List launched the Election Transparency Initiative (ETI) with American Principles Project in Feb 2021, headed by Ken Cuccinelli (former DHS deputy secretary). Cuccinelli promoted VoteRef at ETI events. (2) AMERICAN PRINCIPLES PROJECT: Received .88M (2023) from Restoration; APP gave K directly to VRF LLC in 2022 plus K to Restoration in 2023 -- circular funding. (3) HERITAGE: ETI partners with Heritage Foundation political arm. (4) FIGHT VOTER FRAUD INC: Received .1M total from Restoration (2021-2023). (5) LAWYERS DEMOCRACY FUND: Received .4M total from Restoration (2021-2023).",
+      "confidence": "medium",
+      "id": 7423
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "VRF PERSONNEL: Key Restoration of America staffers connected to election enforcement and political activism. (1) Hayden Ludwig (K, Director of Research Operations): former Senior Investigative Researcher at Capital Research Center, published research attacking ERIC (interstate voter roll comparison system) and private election funding ('Zuckbucks'). CRC is a conservative watchdog that published reports used to justify ERIC withdrawal by Republican states. Ludwig moved from CRC to Restoration, bringing anti-ERIC research capacity. (2) David Langdon (Secretary of both Restoration and Foundation): also Director and Secretary of Centerline Action Inc (EIN 882307642), which gave K to Republican Governors Association and K to Republican State Leadership Committee in 2024. (3) Tom Mallon (Chairman): also board member of AMFA Foundation (EIN 582238056) and Altar Fly Fishing (EIN 843052840).",
+      "confidence": "medium",
+      "id": 7429
+    },
+    {
+      "date": "2023-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "NATIONAL CHRISTIAN CHARITABLE FOUNDATION -> VRF FUNDING: NCF Charitable Trust (donor-advised fund) gave .405M to Foundation for the Restoration of America in 2023 -- this was 89% of the Foundation's total .4M revenue. NCCF is one of the largest Christian donor-advised funds in the US, receiving M from NCF Charitable Trust in 2022. NCCF also gave .1M to Susan B Anthony List Education Fund (2020), .3M to SBA List Education Fund (2022). This means VRF's 501(c)(3) arm is almost entirely dependent on a single anonymous donor-advised fund flow from the National Christian Charitable Foundation.",
+      "confidence": "high",
+      "id": 7430
+    },
+    {
+      "date": "2024-03-28",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "VRF PRIVACY LITIGATION: Atlas Data Privacy Corp sued Restoration of America (D.N.J. 1:24-cv-04324, filed 2024-03-28) over voter data practices. Case now on appeal in Third Circuit (25-1572, filed 2025-03-31). Related case Atlas Data Privacy Corp v. We Inform LLC (3d Cir 24-8047, terminated 2025-03-18). This suggests VRF's voter data publishing practices face legal challenges not just from state AGs but from privacy plaintiffs.",
+      "confidence": "high",
+      "id": 7427
+    },
+    {
+      "date": "2024-10-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "VRF-UIHLEIN FUNDING CHAIN: Richard Uihlein (Uline CEO) has donated .2M to Restoration PAC since 2015, including .2M in the 2024 cycle. Restoration PAC was created by Restoration Action (now Restoration of America), the 501(c)(4) that controls VRF. The constellation includes: Restoration PAC (super PAC), Restoration of America (501c4, .3M revenue), Foundation for the Restoration of America (501c3, .4M), Voter Reference Foundation (voter roll operation), and Fair Courts America (judicial PAC). This represents a single billionaire-funded political operation with a voter-data subsidiary.",
+      "confidence": "medium",
+      "id": 7420
+    },
+    {
+      "date": "2025-03-31",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "VRF MULTI-STATE VOTER DATA LITIGATION: VRF LLC is actively suing state officials for voter roll data access in at least 3 states: (1) Voter Reference Foundation v. Torrez (D.N.M. 1:22-cv-00222, filed 2022-03-28, appealed to 10th Circuit 22-2101 and 24-2133/24-2141) \u2014 suing New Mexico SOS. (2) Voter Reference Foundation v. Schmidt (M.D. Pa. 1:24-cv-00294, filed 2024-02-19) \u2014 suing Pennsylvania official. (3) Voter Reference Foundation v. Galvin (D. Mass. 1:24-cv-12592, filed 2024-10-09) \u2014 suing Massachusetts SOS. Simultaneously defending privacy suit: Atlas Data Privacy Corp v. Restoration of America (D.N.J. 1:24-cv-04324, now on appeal to 3rd Circuit 25-1572) over VoteRef voter data publication.",
+      "confidence": "high",
+      "id": 7534
+    },
+    {
+      "date": "2025-11-25",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "VRF NVRA LITIGATION PATTERN: VRF filed NVRA voter roll access lawsuits mirroring PILF's strategy. (1) VRF v. Torrez (D.N.M., 2022): Sued NM AG after being referred for criminal investigation for publishing voter data. Won on NVRA preemption. 10th Circuit affirmed Nov 2025 that NVRA preempts state restrictions on voter data sharing. NM ordered to pay K in legal fees. (2) VRF v. Schmidt (M.D. Pa., 2024): Sued PA Secretary of State for voter roll access -- same defendant PILF sued in PILF v. Schmidt. (3) VRF v. Galvin (D. Mass., 2024): Sued Massachusetts Secretary of State for voter roll access. This is a parallel NVRA litigation track operating alongside PILF, Judicial Watch, and DOJ.",
+      "confidence": "high",
+      "id": 7424
+    },
+    {
+      "date": "2025-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "VRF FUNDING CHAIN COMPLETE: Voter Reference Foundation LLC (EIN 87-2270144) received ,846 from Foundation for the Restoration of America (c3 arm) in 2023, and ,000 from American Principles Project in 2022. VRF is NOT an independent entity \u2014 it is a project of Restoration of America. Gina Swoboda (VRF Executive Director, K comp from ROA) is now running for Congress in AZ-01 (filed Oct 2025, candidate ID H6AZ01405). Richard Uihlein donated ,500 to her congressional campaign (Dec 2025 FEC filing). This represents a direct pipeline from dark money to electoral candidacy: Uihlein funds ROA, ROA pays Swoboda K, Swoboda builds name recognition through VRF voter data work, then runs for Congress with Uihlein's additional direct support.",
+      "confidence": "medium",
+      "id": 7516
+    },
+    {
+      "date": "2026-01-28",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "VRF-ELECTION ENFORCEMENT APPARATUS ROLE: VRF occupies a specific niche in the election enforcement apparatus as a voter roll DATA AGGREGATOR. While PILF sues for voter roll access and the DOJ demands it via MOUs, VRF acquires voter rolls from states, publishes them freely on VoteRef.com, and enables mass civilian voter roll challenges. VRF was named among 15 groups that Congress demanded records from regarding the DOGE-SSA voter data agreement (Jan 2026). The Cuccinelli-led ETI promotes VoteRef tools to grassroots activists. VRF's legal victories (NM K award, 10th Circuit NVRA preemption ruling) create precedents that benefit PILF and DOJ enforcement. VRF and PILF sued the same PA Secretary of State (Schmidt) under NVRA. Combined, the apparatus operates: Heritage/AAF provides framework -> PILF/JW/VRF file NVRA suits -> VRF publishes data -> EIN trains challengers -> DOJ follows with federal enforcement.",
+      "confidence": "medium",
+      "id": 7435
+    }
+  ]
+}

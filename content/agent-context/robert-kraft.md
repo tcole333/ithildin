@@ -1,6 +1,8 @@
 # Robert Kraft
-**Stats**: 52 findings, 26 connections, 0 entities
+**Stats**: 52 findings, 19 connections, 0 entities
 **Dossier**: /dossiers/robert-kraft
+
+> Kraft illustrates how Epstein operated as a legal-services broker and intelligence collector among billionaire social networks without maintaining direct documentary contact. Epstein claimed knowledge of an undisclosed past issue concerning Kraft, placed his own attorney on Kraft's defense team, and used Kraft's name as social currency when proposing dinners to Bill Gates, while Kraft's seven-year Apollo board tenure positioned him adjacent to the firm's largest documented Epstein-related financial flows without documented oversight action.
 
 ## Key Findings
 - **[document/medium]** Exhaustive search of all local document databases found ZERO direct communication between Epstein and Robert Kraft. No emails, no phone records, no financial documents connecting them directly. However, Epstein tracked Kraft intensely through news articles (Nov 2017 Paradise Papers, Feb-May 2019 prostitution case) and discussed Kraft's situation with Barak, Wolff, Karp, and Bannon. The DOJ corpus contains zero results for 'Orchids of Asia'. All Kraft references are via forwarded news articles, not direct correspondence. (Finding #3509)
@@ -18,15 +20,28 @@
 
 ## Top Connections
 - **Leon Black** [corporate/strong]: Both served on Apollo Global Management board of directors during period of Black-Epstein payments
-- **Leon Black** [corporate/strong]: Co-directors on Apollo Global Management board 2014-2021. Kraft served as independent director; Black was Chairman/CEO. Both departed board simultaneously in 2021 during post-Epstein governance overhaul.
 - **Joshua Harris** [corporate/strong]: Co-directors on Apollo Global Management board. Harris as Managing Partner/co-founder, Kraft as independent director 2014-2021.
 - **Marc Rowan** [corporate/strong]: Co-directors on Apollo Global Management board. Rowan as Managing Partner/co-founder, Kraft as independent director 2014-2021. Rowan became CEO after Black's departure.
 - **A.B. Krongard** [corporate/strong]: Co-independent directors on Apollo Global Management board. Krongard joined 2011, Kraft 2014. Both served through the Black-Epstein period. Krongard (ex-CIA Executive Director) served on audit/conflicts committees; Kraft served on no committees.
 - **Jeffrey Epstein** [legal/strong]: Epstein facilitated Kraft's hiring of Jack Goldberger for 2019 solicitation case; possessed unknown 'past issue' about Kraft; discussed case with multiple contacts (Barak, Wolff, Bannon, Karp)
-- **Leon Black** [corporate/strong]: Co-directors on Apollo Global Management board (2014-2021). Both departed board in 2021 within weeks of each other following Epstein scandal revelations. Kraft was Independent Director on Conflicts Committee while Black was CEO/Chairman.
 - **Jack Goldberger** [legal/strong]: Goldberger served as Kraft's defense attorney in 2019 Orchids of Asia solicitation case. Goldberger was connected to Kraft through Epstein, who actively promoted the hire. Goldberger had previously been Epstein's own defense attorney for 2008 NPA.
 - **Donald Trump** [social/strong]: Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff.
-- **Brad Karp** [legal/strong]: Karp brokered Epstein's recommendation for Kraft's defense attorney Jack Goldberger after Florida spa charges Feb 2019
-- **Jeffrey Epstein** [legal/strong]: Epstein proactively offered to help Kraft find legal representation in FL spa case via Karp: 'if your buddy Kraft needs local palm rep. let me know'
-- **Jeffrey Epstein** [social/medium]: Epstein responded to Kraft arrest news with insider knowledge: 90 percent inaccurate wow. hes ok — implying personal contact with or knowledge of Kraft
-- ... and 14 more
+- **Brad Karp** [legal/medium]: Epstein and Karp discussed Kraft's legal situation casually ('oy'/'yuck'). Web sources indicate Karp was involved in suggesting Kraft needed 'the best there is' for legal representation. Karp is Chairman of Paul Weiss which represents Apollo/Leon Black.
+- **Ehud Barak** [social/medium]: Epstein forwarded article linking Kraft-Epstein-Trump to Barak Feb 25, 2019. Both Kraft and Barak are prominent in Israeli political/philanthropic circles. Kraft received Genesis Prize from Netanyahu; Barak is former Israeli PM with deep Epstein ties.
+- **Josh Harris** [corporate/medium]: Co-directors on Apollo Global Management board. Both NFL team owners (Kraft: Patriots; Harris: Commanders). Harris had extensive email exchanges with Epstein 2013-2016. Both appeared in 2014 list Epstein referenced when asking Bill Gates about potential business relationships.
+- **John Havens** [legal/medium]: Both charged in same FL prostitution sting (2019). Both had legal representation coordinated through Brad Karp/Epstein network. Both had charges dropped after video evidence suppressed.
+- **Richard Kahn** [social/weak]: Richard Kahn (HBRK Associates, 575 Lexington Ave NYC) forwarded Kraft arrest article to Epstein on day of charges. Kahn appears to be a regular Epstein correspondent who tracked news of mutual acquaintances.
+- ... and 7 more
+
+## Open Questions
+- What was the "past issue with Kraft that may come to light" that Epstein referenced in his text to Jack Goldberger on February 22, 2019, and does it relate to conduct predating the Orchids of Asia case?
+- Why was Kraft removed from Apollo's Conflicts Committee between his 2014 appointment and the 2020 proxy, and was this removal related to the Black-Epstein payments that the Conflicts Committee later investigated?
+- Did the 2014 Epstein-Gates dinner proposal involving Kraft, Harris, and Tepper result in an actual meeting, and what was the nature of any business or philanthropic arrangements discussed?
+- What is the full scope of Kraft's involvement with Hillman Solutions/Companies (41 SEC filings), and did this position derive from his Apollo board relationship or from independent investment?
+- What is the full context of the iMessage thread in HOUSE_OVERSIGHT_027585 referencing crisis-communications strategy around Kraft and Epstein coverage, and who were the participants?
+
+## Applicable Models
+- enabler-gradient
+- narrative-shield
+- bridge-tax
+- complexity-as-credential

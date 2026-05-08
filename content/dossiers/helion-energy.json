@@ -1,0 +1,316 @@
+{
+  "name": "Helion Energy",
+  "slug": "helion-energy",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.289054",
+  "last_updated": "2026-04-06T18:39:12",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 3,
+      "financial": 4,
+      "intellectual_property": 2,
+      "governance": 1,
+      "regulatory": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-04-06T18:39:12"
+  },
+  "findings": [
+    {
+      "id": 9467,
+      "finding_type": "corporate",
+      "summary": "Helion Energy Inc incorporated in Delaware (file #5361207) on 2013-07-02 with Corporation Service Company as registered agent.",
+      "detail": null,
+      "source_datasets": "opencorporates,delaware_registry",
+      "confidence": "high",
+      "date_of_event": "2013-07-02",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9675,
+      "finding_type": "financial",
+      "summary": "Helion Energy Inc received $3,971,263 ARPA-E grant (DEAR0000563) for fusion research 2015\u20132018 while Altman was executive chairman",
+      "detail": "USASpending award DEAR0000563: $3,971,263 to HELION ENERGY INC (UEI: HS69YQMCJKF5) from the Department of Energy (ARPA-E, CFDA 81.135), period 2015-09-28 to 2018-09-29. Program: ARPA-E ALPHA (Accelerating Low-cost Plasma Heating and Assembly). Project: 'Staged Magnetic Compression of FRC Targets to Fusion Conditions.' Recipient address at award: 8549 154th Ave NE, Redmond, WA 98052. Sam Altman has been Helion's executive chairman since 2015 \u2014 this ARPA-E grant was awarded in the same year he took that leadership role. This remains the only documented federal award to Helion Energy in USASpending.",
+      "source_datasets": "usaspending",
+      "confidence": "confirmed",
+      "date_of_event": "2015-09-28",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9472,
+      "finding_type": "financial",
+      "summary": "DOE/ARPA-E awarded Helion Energy Inc $3,971,263 (grant DEAR0000563, CFDA 81.135) for 'Staged Magnetic Compression of FRC Targets to Fusion Conditions', period 2015-09-28 to 2018-09-29. Recipient address: 8549 154th Ave NE, Redmond, WA 98052.",
+      "detail": null,
+      "source_datasets": "usaspending",
+      "confidence": "high",
+      "date_of_event": "2015-09-29",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9468,
+      "finding_type": "corporate",
+      "summary": "Helion Energy Inc registered as foreign profit corporation in Washington state (#603326702) with David Kirtley as registered agent at 1415 75th St SW, Everett, WA 98203-6257. Officers/governors: Sam Altman, David Kirtley, Chris Pihl, Ajay Royan.",
+      "detail": null,
+      "source_datasets": "opencorporates",
+      "confidence": "high",
+      "date_of_event": "2015-12-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9668,
+      "finding_type": "intellectual_property",
+      "summary": "Two MSNW LLC fusion patents were not transferred to Helion Energy \u2014 potential IP gap",
+      "detail": "MSNW LLC (the predecessor entity founded by plasma physicist John T. Slough) holds 6 fusion-related patents. Only 4 of these appear in Helion Energy's portfolio with recorded transfer dates. Patents 10760552 ('Apparatus, Systems and Methods for Establishing Plasma and Using Plasma in a Rotating Magnetic Field') and 9145874 show no subsequent assignment beyond the original Slough/Kirtley \u2192 MSNW LLC recording. These 2 patents remain assigned to MSNW LLC with no Helion transfer on record. Whether MSNW LLC is still active is unknown.",
+      "source_datasets": "uspto_odp",
+      "confidence": "high",
+      "date_of_event": "2019-01-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9669,
+      "finding_type": "intellectual_property",
+      "summary": "Helion Energy's patent portfolio is narrow and entirely dependent on one core inventor (John T. Slough) for early IP",
+      "detail": "Helion's 6-patent portfolio spans 2011\u20132023. The earliest 5 patents are all by John T. Slough (physicist, MSNW LLC founder), with only the 2023 patent (12418973) showing a broader team. Slough is not listed in current Helion leadership; his role in the company is unclear. Dependency on a single external inventor for foundational fusion IP is a potential risk factor. The 2019 MSNW \u2192 Helion assignment gives Helion rights to the Slough patents, but the 2 untransferred MSNW patents represent unresolved IP.",
+      "source_datasets": "uspto_odp",
+      "confidence": "medium",
+      "date_of_event": "2019-01-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9474,
+      "finding_type": "corporate",
+      "summary": "Middle Earth Holding LLC incorporated in Delaware (#7463824, 2019-06-12) and registered in WA (#604480110, 2019-06-28) with sole governor Dr. David E. Kirtley. Registered address is 1415 75th St SW, Everett, WA 98203 \u2014 identical to Helion Energy's current HQ. Likely a Kirtley property or asset holding vehicle; purpose not publicly disclosed.",
+      "detail": null,
+      "source_datasets": "opencorporates,delaware_registry",
+      "confidence": "high",
+      "date_of_event": "2019-06-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9469,
+      "finding_type": "financial",
+      "summary": "Helion raised $500M Series E in November 2021 at $3B valuation. Sam Altman personally led with $375M. Other investors: Dustin Moskovitz, Mithril Capital, Capricorn Investment Group. Additional $1.7B in milestone-tied commitments. No EDGAR Form D found for this offering.",
+      "detail": null,
+      "source_datasets": "cnbc,techcrunch,helionenergy_com",
+      "confidence": "high",
+      "date_of_event": "2021-11-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9470,
+      "finding_type": "financial",
+      "summary": "Helion raised $425M Series F in January 2025 at $5.4B post-money valuation. New investors: Lightspeed Venture Partners, SoftBank Vision Fund 2, unnamed university endowment. Existing investors: Sam Altman, Mithril Capital, Capricorn Investment Group, Good Ventures/Dustin Moskovitz, Nucor Corp, Reid Hoffman. Goodwin Law advised Helion. No EDGAR Form D found.",
+      "detail": null,
+      "source_datasets": "helionenergy_com,goodwinlaw_com",
+      "confidence": "high",
+      "date_of_event": "2025-01-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9473,
+      "finding_type": "governance",
+      "summary": "Sam Altman resigned from Helion Energy's board in March 2026 to remove governance conflict as OpenAI began commercial energy partnership negotiations with Helion. Altman retains financial interest and is recused from OpenAI-Helion deal negotiations. Altman had been Helion's executive chairman since 2015.",
+      "detail": null,
+      "source_datasets": "techcrunch,reuters",
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9471,
+      "finding_type": "regulatory",
+      "summary": "No SEC Form D filings found for Helion's Series E ($500M, Nov 2021) or Series F ($425M, Jan 2025). Only 2 Form D filings exist in EDGAR under CIK 0001615940, both from 2014-2015. Reg D offerings require Form D within 15 days of first sale. Gap may indicate filing under an unidentified entity, foreign offering structure, or non-compliance.",
+      "detail": null,
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-04-06",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:26:49",
+      "target_name": "Helion Energy",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 5003,
+      "person_a": "Sam Altman",
+      "person_b": "Helion Energy",
+      "relationship_type": "corporate",
+      "description": "Altman was Helion's executive board chairman from 2015 to March 2026 and its largest individual investor ($9.5M 2015, $375M 2021). OpenAI entered fusion energy discussions with Helion for potential 5GW supply deal. Altman resigned board Mar 2026 to clear conflict while retaining financial interest.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 5031,
+      "person_a": "MSNW LLC",
+      "person_b": "Helion Energy",
+      "relationship_type": "corporate",
+      "description": "MSNW LLC (John T. Slough's company) holds foundational fusion plasma patents. 4 of 6 MSNW patents transferred to Helion Energy 2019-01-04. 2 patents (10760552, 9145874) remain at MSNW LLC without recorded transfer to Helion.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:39:12",
+      "profile_id": "altman",
+      "other_person": "MSNW LLC",
+      "other_person_slug": "msnw-llc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2013-07-02",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Helion Energy Inc incorporated in Delaware (file #5361207) on 2013-07-02 with Corporation Service Company as registered agent.",
+      "confidence": "high",
+      "id": 9467
+    },
+    {
+      "date": "2015-09-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Helion Energy Inc received $3,971,263 ARPA-E grant (DEAR0000563) for fusion research 2015\u20132018 while Altman was executive chairman",
+      "confidence": "confirmed",
+      "id": 9675
+    },
+    {
+      "date": "2015-09-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DOE/ARPA-E awarded Helion Energy Inc $3,971,263 (grant DEAR0000563, CFDA 81.135) for 'Staged Magnetic Compression of FRC Targets to Fusion Conditions', period 2015-09-28 to 2018-09-29. Recipient address: 8549 154th Ave NE, Redmond, WA 98052.",
+      "confidence": "high",
+      "id": 9472
+    },
+    {
+      "date": "2015-12-23",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Helion Energy Inc registered as foreign profit corporation in Washington state (#603326702) with David Kirtley as registered agent at 1415 75th St SW, Everett, WA 98203-6257. Officers/governors: Sam Altman, David Kirtley, Chris Pihl, Ajay Royan.",
+      "confidence": "high",
+      "id": 9468
+    },
+    {
+      "date": "2019-01-04",
+      "type": "finding",
+      "finding_type": "intellectual_property",
+      "summary": "Two MSNW LLC fusion patents were not transferred to Helion Energy \u2014 potential IP gap",
+      "confidence": "high",
+      "id": 9668
+    },
+    {
+      "date": "2019-01-04",
+      "type": "finding",
+      "finding_type": "intellectual_property",
+      "summary": "Helion Energy's patent portfolio is narrow and entirely dependent on one core inventor (John T. Slough) for early IP",
+      "confidence": "medium",
+      "id": 9669
+    },
+    {
+      "date": "2019-06-12",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Middle Earth Holding LLC incorporated in Delaware (#7463824, 2019-06-12) and registered in WA (#604480110, 2019-06-28) with sole governor Dr. David E. Kirtley. Registered address is 1415 75th St SW, Everett, WA 98203 \u2014 identical to Helion Energy's current HQ. Likely a Kirtley property or asset holding vehicle; purpose not publicly disclosed.",
+      "confidence": "high",
+      "id": 9474
+    },
+    {
+      "date": "2021-11-05",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Helion raised $500M Series E in November 2021 at $3B valuation. Sam Altman personally led with $375M. Other investors: Dustin Moskovitz, Mithril Capital, Capricorn Investment Group. Additional $1.7B in milestone-tied commitments. No EDGAR Form D found for this offering.",
+      "confidence": "high",
+      "id": 9469
+    },
+    {
+      "date": "2025-01-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Helion raised $425M Series F in January 2025 at $5.4B post-money valuation. New investors: Lightspeed Venture Partners, SoftBank Vision Fund 2, unnamed university endowment. Existing investors: Sam Altman, Mithril Capital, Capricorn Investment Group, Good Ventures/Dustin Moskovitz, Nucor Corp, Reid Hoffman. Goodwin Law advised Helion. No EDGAR Form D found.",
+      "confidence": "high",
+      "id": 9470
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Sam Altman resigned from Helion Energy's board in March 2026 to remove governance conflict as OpenAI began commercial energy partnership negotiations with Helion. Altman retains financial interest and is recused from OpenAI-Helion deal negotiations. Altman had been Helion's executive chairman since 2015.",
+      "confidence": "high",
+      "id": 9473
+    },
+    {
+      "date": "2026-04-06",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "No SEC Form D filings found for Helion's Series E ($500M, Nov 2021) or Series F ($425M, Jan 2025). Only 2 Form D filings exist in EDGAR under CIK 0001615940, both from 2014-2015. Reg D offerings require Form D within 15 days of first sale. Gap may indicate filing under an unidentified entity, foreign offering structure, or non-compliance.",
+      "confidence": "medium",
+      "id": 9471
+    }
+  ]
+}

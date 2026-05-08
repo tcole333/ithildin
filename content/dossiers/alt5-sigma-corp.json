@@ -5,7 +5,7 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.999045",
+  "generated_at": "2026-05-07T23:07:36.414948",
   "last_updated": "2026-02-26T18:41:27",
   "stats": {
     "total_findings": 5,
@@ -46,7 +46,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 0000862861",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=862861",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -187,7 +187,7 @@
       "created_at": "2026-02-25 21:26:06",
       "profile_id": "epstein",
       "other_person": "Zach Witkoff",
-      "other_person_slug": "zachary-witkoff",
+      "other_person_slug": "zach-witkoff",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -392,140 +392,5 @@
       "disclosure-timing",
       "bridge-tax"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "ALT5 Sigma Corp",
-      "connections": [
-        {
-          "target": "Zach Witkoff",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "BusinessWire Aug 13 2025",
-          "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
-        },
-        {
-          "target": "World Liberty Financial",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "BusinessWire Aug 11 2025",
-          "description": "ALT5 received 7.3B WLFI tokens (valued at 1.5B) via registered direct offering Aug 2025. Zach Witkoff (WLFI co-founder) became ALT5 Chairman. Eric Trump became board observer. ALT5 primary asset is WLFI tokens. Creates circular value mechanism: WLFI issues tokens to ALT5, ALT5 holds them as treasury, inflating both valuations."
-        },
-        {
-          "target": "Jon Isaac",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC Litigation Release 25155",
-          "description": "Former CEO of JanOne Inc (now ALT5 Sigma). Under SEC fraud charges since 2021 for inflating earnings and secret stock sales at JanOne/Live Ventures. Left before 2024 rebrand but retains over 1M ALT5 shares. His brother Tony Isaac appointed Acting CEO of ALT5 in Nov 2025."
-        },
-        {
-          "target": "Eric Trump",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "CoinTelegraph Sep 10 2025",
-          "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
-        }
-      ],
-      "secondHop": {
-        "Eric Trump": [
-          {
-            "target": "World Liberty Financial",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Named Promoter on SEC Form D, public operational face of WLFI"
-          },
-          {
-            "target": "Tahnoon bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
-          },
-          {
-            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Eric Trump signed the Aryam Investment 1 deal giving Tahnoon 49% of WLFI for M, 4 days before inauguration. Later announced MGX-Binance USD1 settlement at Token2049 Dubai."
-          },
-          {
-            "target": "WLF Holdco LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump serves as manager on board of managers of WLF Holdco LLC. Signed the M Aryam Investment 1 deal on behalf of WLF. Address: c/o The Trump Organization, Jupiter FL 33477"
-          },
-          {
-            "target": "Chase Herro",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
-          }
-        ],
-        "World Liberty Financial": [
-          {
-            "target": "Donald Trump",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Named Promoter on SEC Form D. Revenue flows through DT Marks DEFI LLC at Trump Jupiter FL address"
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
-          },
-          {
-            "target": "Steve Witkoff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
-          },
-          {
-            "target": "MGX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
-          },
-          {
-            "target": "Trump Administration",
-            "type": "political",
-            "strength": 1.0,
-            "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
-          }
-        ],
-        "Zach Witkoff": [
-          {
-            "target": "Steve Witkoff",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
-          },
-          {
-            "target": "JD Vance",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
-          },
-          {
-            "target": "SC Financial Technologies",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
-          },
-          {
-            "target": "SC Financial Technologies LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy."
-          },
-          {
-            "target": "World Liberty Trust Company",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Proposed president/chairman/director of WLTC national trust bank"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

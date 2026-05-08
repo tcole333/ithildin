@@ -1,0 +1,12 @@
+# Five A's Projects LLC
+**Stats**: 7 findings, 0 connections, 0 entities
+**Dossier**: /dossiers/five-as-projects-llc
+
+## Key Findings
+- **[background/high]** Five A's Projects LLC (MN file 1262210500028, formed 2021-10-07, admin-terminated 2023-02-08) registered at 2722 Park Avenue Suite 100, Minneapolis MN 55407 — same building forfeited by Abdulkadir Nur Salah in his Jan 2025 guilty plea; one original filing, no amendments (2021-10-07) (Finding #8041)
+- **[background/high]** Five A's Projects LLC MN SOS filing: File Number 1262210500028, GUID f117b330-8627-ec11-91b3-00155d32b93a, formed 2021-10-07, admin-terminated 2023-02-08, registered 2722 Park Avenue Suite 100 Minneapolis MN 55407, no registered agent, no amendments (2021-10-07) (Finding #8060)
+- **[financial/high]** Five A's Projects LLC transferred more than $1M in FCNP funds to purchase Kelly's 19th Hole (8432 Noble Ave N, Brooklyn Park MN 55443) for $1M in October 2021; both co-organizers Abdi Nur Salah and Abdikadir Ainashe Mohamud forfeited this property in their respective Jan 2025 and Feb 2025 guilty pleas (2021-10-01) (Finding #8042)
+- **[financial/high]** Five A's Projects LLC received $1M+ in FCNP fraud proceeds from Tunyar Trading and used them to purchase Kelly's 19th Hole (8432 Noble Ave N Brooklyn Park MN 55443) for $1,000,000; both co-organizers Abdi Nur Salah and Abdikadir Mohamud forfeited the property in their 2025 guilty pleas (2021-10-01) (Finding #8061)
+- **[relationship/medium]** Five A's Projects LLC registered office (2722 Park Avenue Suite 100, Minneapolis MN) is the same building that Abdulkadir Nur Salah forfeited as part of his Jan 2025 guilty plea — creating a three-way link between all three FOF co-defendants (Abdi Nur Salah, Abdikadir Mohamud, Abdulkadir Nur Salah) through this single entity (2025-01-28) (Finding #8043)
+- **[relationship/medium]** Five A's Projects LLC registered at 2722 Park Avenue Suite 100 Minneapolis — the same 2722 Park Avenue South property forfeited by Abdulkadir Nur Salah at his Jan 2025 guilty plea — creating a structural three-way link between all three FOF co-defendants through this single entity and address (2025-01-28) (Finding #8062)
+- **[corporate/medium]** Five A's Projects LLC (Oct 2021) co-organized by Abdi Nur Salah and Abdikadir Mohamud — undocumented direct organizational link between two FOF co-conspirators (2021-10-07) (Finding #8037)

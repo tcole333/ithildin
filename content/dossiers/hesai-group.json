@@ -1,0 +1,306 @@
+{
+  "name": "Hesai Group",
+  "slug": "hesai-group",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.313169",
+  "last_updated": "2026-03-29T20:30:02",
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "governance": 5,
+      "financial": 4,
+      "corporate": 1
+    },
+    "connection_types": {
+      "corporate": 3
+    },
+    "last_updated": "2026-03-29T20:30:02"
+  },
+  "findings": [
+    {
+      "id": 8617,
+      "finding_type": "governance",
+      "summary": "Three co-founders formalized voting concert arrangement in April 2025, giving them effective majority (67.5%) voting control via dual-class WVR structure. Co-founders act as a unified voting bloc.",
+      "detail": "On April 24, 2025, Dr. Yifan Li, Dr. Kai Sun and Mr. Shaoqing Xiang entered into a Deed of Concert Party Arrangement. The parties agree to consult with each other and to exercise all voting rights and other powers of control available unanimously in relation to resolutions of the Issuer proposed to be passed. Aggregate shared voting power covers 27,163,892 shares (20.5% of total share count), but with 10-vote Class A shares, actual voting control is approximately 67.5% of all votes.",
+      "source_datasets": "edgar_sc13d",
+      "confidence": "high",
+      "date_of_event": "2025-04-24",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8624,
+      "finding_type": "governance",
+      "summary": "Standard China ADR regulatory risk disclosures present: HFCAA delisting risk, VIE structure risks, cross-border cash transfer restrictions, PRC government oversight. PCAOB inspection status currently cleared but subject to annual review.",
+      "detail": "The 424B5 prospectus supplement states Hesai faces HFCAA/PCAOB audit inspection risk, VIE/PRC regulatory risk, cross-border cash transfer restrictions, and risks of PRC government intervention. It also notes that 'Hesai Group is not a Chinese operating company, but a Cayman Islands holding company with operations mainly conducted by its subsidiaries based in mainland China.' Standard HFCAA disclosure states the PCAOB vacated its 2021 determination of inability to inspect Chinese auditors as of December 2022.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "medium",
+      "date_of_event": "2025-09-12",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8622,
+      "finding_type": "financial",
+      "summary": "Hesai's HKEx dual listing raised $385M in September 2025, underwritten primarily by Chinese state-linked banks. Cornerstone investors included Hillhouse's hedge fund arm (HHLR) and Grab Holdings.",
+      "detail": "Hesai listed on Hong Kong Stock Exchange (stock code 2525) on September 16, 2025, concurrent with NASDAQ ADS listing. Offering price HK$212.80 per Class B share (~$27.30 USD). Raised approximately HK$3B ($385M). Cornerstone investors committed ~$148M: HHLR Advisors (Hillhouse Capital hedge fund), Taikang Life Insurance, WT Asset Management, Grab Holdings, Hongda Group (HK), Commando Global Fund. Underwriters dominated by Chinese state-linked institutions: CICC (stabilizing manager), CMB International, ICBC International, BOC International, CCB International.",
+      "source_datasets": "edgar_424b5",
+      "confidence": "high",
+      "date_of_event": "2025-09-16",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8621,
+      "finding_type": "governance",
+      "summary": "Hesai EGM approved share re-designation, articles amendment, and broad issuance/buyback mandates with no shareholder opposition. Co-founders' 67.5% voting control ensured passage.",
+      "detail": "EGM at Suzhou on March 3, 2026 approved: (i) re-designation of 50M unissued shares as Class B; (ii) Third Amended Articles; (iii) general mandate to directors to issue new Class B shares; (iv) general mandate to directors to repurchase shares. Shares outstanding: 157,142,211 total (26,998,861 Class A + 130,143,350 Class B). No shareholder dissent recorded.",
+      "source_datasets": "edgar_6k",
+      "confidence": "high",
+      "date_of_event": "2026-03-03",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8618,
+      "finding_type": "financial",
+      "summary": "Hesai FY2025 operating income of RMB168.8M ($24.1M) is entirely offset by 'other operating income' of RMB181.4M likely including government subsidies. Core business is at operational breakeven despite record revenues.",
+      "detail": "Full year 2025: net revenues RMB3,027.6M ($432.9M, +46% YoY); gross margin 41.8% (down from 42.6%); operating income RMB168.8M ($24.1M); other operating income (net) RMB181.4M ($25.9M); net income RMB435.9M ($62.3M). Without the 'other operating income' line (primarily government subsidies), Hesai would have been operationally at breakeven or slightly negative.",
+      "source_datasets": "edgar_6k",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8619,
+      "finding_type": "financial",
+      "summary": "Hesai's net income is heavily supported by financial investment income, not operating cash generation. The company holds cash > market cap, resulting in negative enterprise value.",
+      "detail": "Net income of RMB435.9M ($62.3M) significantly exceeds operating income of RMB168.8M. The RMB267M gap is attributable to financial income from the company's large cash/investment holdings. The enterprise value per yfinance is -$1.06B, indicating cash and short-term investments substantially exceed market cap plus debt.",
+      "source_datasets": "yfinance,edgar_6k",
+      "confidence": "high",
+      "date_of_event": "2026-03-24",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8616,
+      "finding_type": "governance",
+      "summary": "Hesai entered related-party supply agreement with Sharpa (robotic actuators + LiDAR), controlled by the three co-founders. Transaction is below 5% ratio, so exempt from independent shareholder approval.",
+      "detail": "On March 25, 2026, Hesai entered into a Supply of Products Framework Agreement with Sharpa. Pursuant to the agreement, Hesai will supply LiDAR products and robotic actuators to Sharpa from time to time during the term commencing from March 25, 2026 to December 31, 2026. The Co-Founders together indirectly hold majority voting rights in Sharpa. Therefore, Sharpa is a connected person of the Company pursuant to Rule 14A.07(4) of the HKEx Listing Rules.",
+      "source_datasets": "edgar_6k",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8620,
+      "finding_type": "governance",
+      "summary": "Large RSU grants (157K each) to three co-founders issued one day after annual results release. Total director grants of ~477K RSUs worth approximately $10.9M at grant price.",
+      "detail": "On March 25, 2026, 785,356 RSUs were granted to 4 directors (157,000 to CEO Dr. Li; 157,000 to Chief Scientist Dr. Sun; 157,000 to CTO Mr. Xiang; 6,565 to independent director Dr. Wang) and 70 employees. Market price at grant: HK$178.20 per Class B ordinary share (approximately US$22.85). Grants came 1 day after annual results publication on March 24.",
+      "source_datasets": "edgar_form_4,edgar_6k",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8625,
+      "finding_type": "corporate",
+      "summary": "Hesai appears to have expanded into robotic actuator manufacturing for embodied AI applications, not previously disclosed. This expansion may reflect co-founders using Hesai's manufacturing capacity to serve their separately-owned Sharpa robotics company.",
+      "detail": "The 6-K disclosing the Sharpa connected transaction also mentions that Hesai will supply 'robotic actuators' to Sharpa and provide 'manufacturing and support services which relate to the integration of robotic actuators into Sharpa's dexterous hands and other embodied intelligence products.' Prior Hesai public filings position the company as a pure-play LiDAR manufacturer. This suggests Hesai has expanded into actuator manufacturing \u2014 a new product category not previously disclosed in EDGAR filings reviewed. The FY2025 20-F (not yet filed as of investigation date) will likely provide disclosure.",
+      "source_datasets": "edgar_6k",
+      "confidence": "medium",
+      "date_of_event": "2026-03-25",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8623,
+      "finding_type": "financial",
+      "summary": "HSAI declined 26.5% in 7 trading days around annual results release despite first-ever GAAP profitability. Stock now 32% below HKEx listing price, suggesting investor concerns about quality of earnings, gross margin compression, or macro pressures.",
+      "detail": "HSAI fell from approximately $25 (2026-03-18 form 3 date) to $18.44 (2026-03-27), a decline of approximately 26.5% over 7 trading days coinciding with the annual results release. This is despite the company reporting first-ever GAAP profitability (+46% revenue, +223% unit shipments). The stock is 32% below the HKEx listing price of $27.30.",
+      "source_datasets": "yfinance",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "confirmed",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Hesai Group",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4416,
+      "person_a": "Hesai Group",
+      "person_b": "Sharpa",
+      "relationship_type": "corporate",
+      "description": "Li Yifan, Kai Sun, and Xiang Shaoqing together hold majority voting rights in Sharpa (a robotics company developing dexterous hands and embodied intelligence). Hesai now supplies LiDAR and robotic actuators to Sharpa under a connected transaction agreement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Sharpa",
+      "other_person_slug": "sharpa",
+      "evidence": []
+    },
+    {
+      "id": 4418,
+      "person_a": "Hesai Group",
+      "person_b": "China International Capital Corporation (CICC)",
+      "relationship_type": "corporate",
+      "description": "CICC (China International Capital Corporation) acted as joint sponsor, joint global coordinator, and stabilizing manager for Hesai's HKEx dual listing in September 2025. CICC is majority state-owned and is China's largest investment bank.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "China International Capital Corporation (CICC)",
+      "other_person_slug": "china-international-capital-corporation-cicc",
+      "evidence": []
+    },
+    {
+      "id": 4417,
+      "person_a": "Hesai Group",
+      "person_b": "Grab Holdings Limited",
+      "relationship_type": "corporate",
+      "description": "HHLR Advisors (Hillhouse Capital hedge fund arm) committed as cornerstone investor in Hesai's HKEx September 2025 offering. Grab Holdings also participated as cornerstone investor and is now Hesai's exclusive Southeast Asia distributor.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Grab Holdings Limited",
+      "other_person_slug": "grab-holdings-limited",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-04-24",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Three co-founders formalized voting concert arrangement in April 2025, giving them effective majority (67.5%) voting control via dual-class WVR structure. Co-founders act as a unified voting bloc.",
+      "confidence": "high",
+      "id": 8617
+    },
+    {
+      "date": "2025-09-12",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Standard China ADR regulatory risk disclosures present: HFCAA delisting risk, VIE structure risks, cross-border cash transfer restrictions, PRC government oversight. PCAOB inspection status currently cleared but subject to annual review.",
+      "confidence": "medium",
+      "id": 8624
+    },
+    {
+      "date": "2025-09-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Hesai's HKEx dual listing raised $385M in September 2025, underwritten primarily by Chinese state-linked banks. Cornerstone investors included Hillhouse's hedge fund arm (HHLR) and Grab Holdings.",
+      "confidence": "high",
+      "id": 8622
+    },
+    {
+      "date": "2026-03-03",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Hesai EGM approved share re-designation, articles amendment, and broad issuance/buyback mandates with no shareholder opposition. Co-founders' 67.5% voting control ensured passage.",
+      "confidence": "high",
+      "id": 8621
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Hesai FY2025 operating income of RMB168.8M ($24.1M) is entirely offset by 'other operating income' of RMB181.4M likely including government subsidies. Core business is at operational breakeven despite record revenues.",
+      "confidence": "high",
+      "id": 8618
+    },
+    {
+      "date": "2026-03-24",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Hesai's net income is heavily supported by financial investment income, not operating cash generation. The company holds cash > market cap, resulting in negative enterprise value.",
+      "confidence": "high",
+      "id": 8619
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Hesai entered related-party supply agreement with Sharpa (robotic actuators + LiDAR), controlled by the three co-founders. Transaction is below 5% ratio, so exempt from independent shareholder approval.",
+      "confidence": "high",
+      "id": 8616
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Large RSU grants (157K each) to three co-founders issued one day after annual results release. Total director grants of ~477K RSUs worth approximately $10.9M at grant price.",
+      "confidence": "high",
+      "id": 8620
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Hesai appears to have expanded into robotic actuator manufacturing for embodied AI applications, not previously disclosed. This expansion may reflect co-founders using Hesai's manufacturing capacity to serve their separately-owned Sharpa robotics company.",
+      "confidence": "medium",
+      "id": 8625
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "HSAI declined 26.5% in 7 trading days around annual results release despite first-ever GAAP profitability. Stock now 32% below HKEx listing price, suggesting investor concerns about quality of earnings, gross margin compression, or macro pressures.",
+      "confidence": "high",
+      "id": 8623
+    }
+  ]
+}

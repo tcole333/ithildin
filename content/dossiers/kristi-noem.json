@@ -6,15 +6,15 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.990256",
+  "generated_at": "2026-05-07T23:07:36.404623",
   "last_updated": "2026-03-10T00:11:39",
   "stats": {
     "total_findings": 6,
     "total_connections": 4,
     "total_entities": 1,
     "finding_types": {
-      "financial": 5,
-      "intelligence": 1
+      "intelligence": 1,
+      "financial": 5
     },
     "connection_types": {
       "political": 3,
@@ -23,6 +23,31 @@
     "last_updated": "2026-03-10T00:11:39"
   },
   "findings": [
+    {
+      "id": 5850,
+      "finding_type": "intelligence",
+      "summary": "Fired as DHS Secretary March 5, 2026 after $220M ad campaign scandal; Mullin named replacement",
+      "detail": "Trump fired Kristi Noem as DHS Secretary on March 5, 2026 \u2014 first Cabinet secretary to leave post. Preceded by bipartisan Senate grilling over $220M taxpayer-funded ad campaign. Key dispute: Noem told Senate Trump approved the campaign; White House denied ('POTUS did not sign off on a 220 MILLION dollar ad campaign'). Sen. Markwayne Mullin named as replacement. Campaign bypassed competitive bidding via 'national emergency' at border.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:52:47",
+      "target_name": "Kristi Noem",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR; CNN; NBC News; Fox News reporting March 5, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4780,
       "finding_type": "financial",
@@ -40,31 +65,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.propublica.org/article/kristi-noem-political-donations-income-dark-money-dhs-ethics",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5850,
-      "finding_type": "intelligence",
-      "summary": "Fired as DHS Secretary March 5, 2026 after $220M ad campaign scandal; Mullin named replacement",
-      "detail": "Trump fired Kristi Noem as DHS Secretary on March 5, 2026 \u2014 first Cabinet secretary to leave post. Preceded by bipartisan Senate grilling over $220M taxpayer-funded ad campaign. Key dispute: Noem told Senate Trump approved the campaign; White House denied ('POTUS did not sign off on a 220 MILLION dollar ad campaign'). Sen. Markwayne Mullin named as replacement. Campaign bypassed competitive bidding via 'national emergency' at border.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-06 03:52:47",
-      "target_name": "Kristi Noem",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NPR; CNN; NBC News; Fox News reporting March 5, 2026",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -261,7 +261,16 @@
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-03-05",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Fired as DHS Secretary March 5, 2026 after $220M ad campaign scandal; Mullin named replacement",
+      "confidence": "confirmed",
+      "id": 5850
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4780,
@@ -373,116 +382,5 @@
       "enabler-gradient",
       "narrative-shield"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Kristi Noem",
-      "connections": [
-        {
-          "target": "Corey Lewandowski",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Lewandowski serves as unpaid SGE/de facto chief of staff to DHS Secretary Noem (Jan 2025-present). LittleSis records both a professional position (shadow chief of staff) and a personal relationship (paramour, since 2019). Lewandowski approves contracts and reviews policy before Noem signs. Alleged romantic relationship is 'Washington worst-kept secret' per multiple outlets; both deny it but Noem was questioned directly in March 2026 House hearings."
-        },
-        {
-          "target": "Troy Dean Edgar",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "propublica:edgar-troy-dean",
-          "description": "DHS Deputy Secretary / Secretary; Edgar holds Palantir, Raytheon, Tesla stock"
-        },
-        {
-          "target": "Leland Dudek",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Dudek signed two memoranda with Noem (DHS Secretary) authorizing Death Master File immigrant additions despite initially believing the action was illegal"
-        },
-        {
-          "target": "Aram Moghaddassi",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "wapo:2025-04-12; spokesman-review:2025-04-12",
-          "description": "Moghaddassi (DOGE SSA/DHS) coordinated with Noem (DHS Secretary) on Death Master File immigration enforcement scheme; Noem signed memoranda authorizing DMF additions"
-        }
-      ],
-      "secondHop": {
-        "Aram Moghaddassi": [
-          {
-            "target": "Neuralink",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Neuralink/X engineer assigned to Treasury, SSA, HHS, Labor, DHS (5 agencies)"
-          },
-          {
-            "target": "Charles Borges",
-            "type": "legal",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Elon Musk",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": ""
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Moghaddassi described as longtime Musk ally by SSA CDO whistleblower complaint"
-          },
-          {
-            "target": "Edward Coristine",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both assigned to SSA; Moghaddassi as CIO granted Coristine and others USCIS database access"
-          }
-        ],
-        "Corey Lewandowski": [
-          {
-            "target": "Rudy Giuliani",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-          },
-          {
-            "target": "Ed Brookover",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-          },
-          {
-            "target": "Mary Coen",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-          },
-          {
-            "target": "Jason Osborne",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-          },
-          {
-            "target": "Matt Mowers",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-          }
-        ],
-        "Leland Dudek": [
-          {
-            "target": "DOGE",
-            "type": "political",
-            "strength": 1.0,
-            "description": "SSA anti-fraud manager elevated to acting commissioner Feb 16 2025 after cooperating with DOGE; installed after Michelle King refused DOGE data access"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

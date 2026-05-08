@@ -6,25 +6,30 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.983881",
-  "last_updated": "2026-03-11T05:00:08",
+  "generated_at": "2026-05-07T23:07:36.257100",
+  "last_updated": "2026-03-24T14:16:09",
   "stats": {
-    "total_findings": 7,
-    "total_connections": 15,
+    "total_findings": 13,
+    "total_connections": 20,
     "total_entities": 3,
     "finding_types": {
-      "intelligence": 4,
-      "financial": 2,
-      "identity": 1
+      "intelligence": 5,
+      "financial": 5,
+      "identity": 1,
+      "relationship": 1,
+      "negative_result": 1
     },
     "connection_types": {
-      "financial": 3,
+      "financial": 4,
       "political": 8,
       "employment": 2,
-      "corporate": 1,
-      "familial": 1
+      "corporate": 2,
+      "familial": 1,
+      "shares_officer": 1,
+      "controls": 1,
+      "advisory": 1
     },
-    "last_updated": "2026-03-11T05:00:08"
+    "last_updated": "2026-03-24T14:16:09"
   },
   "findings": [
     {
@@ -238,6 +243,207 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7339,
+      "finding_type": "financial",
+      "summary": "Stephen Miller disclosed K-K Palantir stock while serving as deputy chief of staff shaping ICE enforcement policy using Palantir systems",
+      "detail": "Stephen Miller, deputy chief of staff and homeland security advisor, disclosed between 100,001 and 250,000 dollars in Palantir stock per his financial disclosure. His Jan 2021 disclosure did NOT list Palantir stock, meaning he acquired it between administrations. Miller is the architect of Trump immigration enforcement policy which relies on Palantir systems (ImmigrationOS, FALCON, ICM). Ethics experts say his involvement in ICE enforcement operations and financial stake in Palantir raises serious conflict of interest concerns. Virginia Canter of Democracy Defenders Fund: If he hasnt stepped over the line, hes just on the verge of it.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:28",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/stephen-miller-conflicts-of-interest",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.rollingstone.com/politics/politics-news/stephen-miller-financial-stake-palantir-ice-contractor-1235371343/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7617,
+      "finding_type": "financial",
+      "summary": "Miller received $202K salary from Rushmore Ventures Inc. for political consulting. Rushmore Ventures counted Trump 2024 campaign and Trump Vance 2025 transition committee among its clients. This was Miller's primary income source between AFL and returning to White House.",
+      "detail": "Per NOTUS reporting on Miller financial disclosure: Rushmore Ventures Inc. is a consulting firm through which Miller channeled campaign advisory work. LittleSis shows Rushmore Ventures Inc. as a position for Miller (entity 256353). This represents the financial pipeline between Miller's nonprofit work (AFL) and political campaign work.",
+      "source_datasets": [
+        "web_search",
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:09:45",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:256353",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.notus.org/money/stephen-miller-financial-bonus-white-house-america-first-legal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7619,
+      "finding_type": "financial",
+      "summary": "Miller sold stock holdings in Palantir, MP Materials, GE Aerospace, Amazon, Intel Corp in Aug 2025 after ethics concerns. Palantir holding was $100K-$250K. MP Materials sale ($50K-$100K) came after Trump admin announced lucrative deal with that company. White House claimed proactive divestiture but timeline shows months of delay.",
+      "detail": "POGO investigation revealed Miller held Palantir stock in child brokerage account while overseeing ICE policy that used Palantir systems. Palantir received $30M ICE contract for real-time deportation tracking. Miller eventually divested but only after public pressure. MP Materials sale timing raises additional concerns - sold after July 2025 announcement of Trump admin deal with the Las Vegas mining company.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:09:58",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.notus.org/trump-white-house/stephen-miller-dumps-defense-contractor-stocks",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigates/stephen-miller-conflicts-of-interest",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.whitehouse.gov/wp-content/uploads/2025/06/Miller-Stephen.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7621,
+      "finding_type": "intelligence",
+      "summary": "Miller micromanages immigration enforcement via daily 10am calls (including Saturdays). Personally issued ICE daily arrest quota of 3,000 (triple previous levels). Eliminated sensitive location protections for schools, churches, hospitals. Pushed DOJ to expand denaturalization programs with monthly quotas for stripping citizenship.",
+      "detail": "CNN Jan 2026 investigation documented Miller's operational control: daily conference calls demanding agency updates, pressure on senior officials delivering less-than-satisfactory results. Axios May 2025 reported Miller and Noem told ICE to supercharge arrests. The enforcement pattern resembles an occupying force: anonymity, unpredictability, visible violence. Miller also pushing denaturalization for decades-old paperwork discrepancies.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:09",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2025/05/28/immigration-ice-deportations-stephen-miller",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2026/01/29/politics/stephen-miller-trump-immigration-minneapolis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7624,
+      "finding_type": "relationship",
+      "summary": "LittleSis full relationship map (34 connections): Key network nodes include David Horowitz (mentor), John Tanton (anti-immigration network founder), Elon Musk, Richard Spencer (social), Chad Mizelle (ally), Heidi Stirrup (ally), Julia Hahn (professional), Center for Immigration Studies, Breitbart News. Positions: Deputy CoS, Project 2025, AFL, Rushmore Ventures, Trump Transition, Domestic Policy Council. Duke University graduate.",
+      "detail": "The LittleSis network reveals Miller sits at intersection of three networks: (1) Anti-immigration movement (Tanton network, CIS, FAIR), (2) Trump political operation (Rushmore Ventures, transition team, White House), (3) Tech-right financial nexus (Palantir ownership, Musk connection). Notable ally connections: Chad Mizelle (former DHS general counsel), Heidi Stirrup (WH liaison to DOJ). Anthony Salisbury reported to Miller. Weekly WH meetings attended by Jeffery Carroll, Kevin Donahue, Lindsey Appiah.",
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:10:23",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/miller-littlesis-rels.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:256353 (34 relationships)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7666,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS for Stephen Miller structured source searches: (1) FEC donor search for DC returns false positives (common name). No donations confirmed attributable to our Stephen Miller (not unusual for WH staff subject to ethics rules). (2) LDA lobbying: only result is Stephen L. Miller at America's Power (coal trade assoc) - different person. (3) FARA: no registrations. (4) No EDGAR filings under his name. (5) Miller FEC data is confounded by extremely common name - employer/address matching required.",
+      "detail": null,
+      "source_datasets": [
+        "fec",
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:16:09",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/miller-fec-dc.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-RYiZE775/miller-lobbying.json",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -268,7 +474,7 @@
       "created_at": "2026-03-04 01:31:14",
       "profile_id": "epstein",
       "other_person": "Palantir",
-      "other_person_slug": "palantir-technologies",
+      "other_person_slug": "palantir",
       "evidence": []
     },
     {
@@ -498,6 +704,109 @@
       ]
     },
     {
+      "id": 3552,
+      "person_a": "Russell Vought",
+      "person_b": "Stephen Miller",
+      "relationship_type": "shares_officer",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:14:29",
+      "profile_id": "tech-right",
+      "other_person": "Russell Vought",
+      "other_person_slug": "russell-vought",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS 990 EIN 862190372",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3694,
+      "person_a": "America First Legal Foundation",
+      "person_b": "Stephen Miller",
+      "relationship_type": "controls",
+      "description": "Stephen Miller is President and Executive Director of AFL, comp 266K",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:02:15",
+      "profile_id": "tech-right",
+      "other_person": "America First Legal Foundation",
+      "other_person_slug": "america-first-legal-foundation",
+      "evidence": []
+    },
+    {
+      "id": 3741,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Stephen Miller",
+      "relationship_type": "financial",
+      "description": "Miller holds K-K in Palantir stock (acquired after leaving Trump I) while directing immigration enforcement policy that relies on Palantir systems",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:59",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies Inc.",
+      "other_person_slug": "palantir-technologies-inc",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/stephen-miller-conflicts-of-interest",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3871,
+      "person_a": "Federation for American Immigration Reform",
+      "person_b": "Stephen Miller",
+      "relationship_type": "advisory",
+      "description": "Miller's anti-immigration ideology shaped by Tanton network (FAIR, CIS, NumbersUSA). John Tanton is FAIR founder and confirmed LittleSis connection to Miller. FAIR revenue spiked 145% in 2017 during peak Miller policy influence.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:27",
+      "profile_id": "tech-right",
+      "other_person": "Federation for American Immigration Reform",
+      "other_person_slug": "federation-for-american-immigration-reform",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:256353",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3872,
+      "person_a": "Rushmore Ventures Inc.",
+      "person_b": "Stephen Miller",
+      "relationship_type": "corporate",
+      "description": "Miller received $202K salary from Rushmore Ventures for consulting services to Trump 2024 campaign and transition committee. This was his consulting vehicle between AFL and White House.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:13:37",
+      "profile_id": "tech-right",
+      "other_person": "Rushmore Ventures Inc.",
+      "other_person_slug": "rushmore-ventures-inc",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.notus.org/money/stephen-miller-financial-bonus-white-house-america-first-legal",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2830,
       "person_a": "Palantir Technologies",
       "person_b": "Stephen Miller",
@@ -721,450 +1030,6 @@
       "bridge-tax",
       "private-order",
       "narrative-shield"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Stephen Miller",
-      "connections": [
-        {
-          "target": "Palantir Technologies",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-        },
-        {
-          "target": "Palantir",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-        },
-        {
-          "target": "Steve Bannon",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Alliance originated at 2012 dinner with Sessions. Miller sent 900+ emails to Breitbart as de facto assignment editor. Bannon recruited Miller to Trump campaign Jan 2016."
-        },
-        {
-          "target": "Gene Hamilton",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founders AFL. Both Sessions alumni. Miller (WH) and Hamilton (DHS/DOJ) were the two key Sessions staffers who coordinated immigration policy in Trump 1.0 largely without knowledge of other officials."
-        },
-        {
-          "target": "America First Legal Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller founded AFL in 2021, serves as President and Executive Director earning $527K. AFL is the litigation arm of his immigration enforcement policy apparatus."
-        },
-        {
-          "target": "Jeff Sessions",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller was Sessions Senate press secretary 2009, rose to chief of communications. Sessions was his entry to Washington and immigration policy. Both Miller and Hamilton served under Sessions."
-        },
-        {
-          "target": "John Zadrozny",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Zadrozny served as Miller proxy in government meetings, argued for zero refugee admissions per Miller's instructions. FAIR alumnus who carried out Miller's immigration agenda at USCIS."
-        },
-        {
-          "target": "Tom Homan",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
-        },
-        {
-          "target": "Russ Vought",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Vought was AFL board treasurer, now OMB Director. Both involved in Project 2025. Vought controls federal spending (including DHS/ICE budgets) while Miller controls immigration policy."
-        },
-        {
-          "target": "Elon Musk",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk donated $50M+ to Citizens for Sanity (run by AFL employees) in 2022. AFL's 2022 revenue spike to $44.4M aligns with this funding. Musk now runs DOGE, intersecting with Miller's DHS operations."
-        },
-        {
-          "target": "Katie Miller",
-          "type": "familial",
-          "strength": 1.0,
-          "evidence_ref": "POGO: Stephen Miller conflicts",
-          "description": "Married. Katie served as DOGE comms director while Stephen is White House Deputy Chief of Staff for Policy. Combined: DOGE messaging + WH policy + PIAB intelligence advisory"
-        },
-        {
-          "target": "Heather Honey",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "The Atlantic March 2026",
-          "description": "Miller directs weekly election enforcement meetings; Honey is DHS election integrity deputy"
-        },
-        {
-          "target": "Pam Bondi",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "The Atlantic March 2026",
-          "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
-        },
-        {
-          "target": "Building America's Future",
-          "type": "political",
-          "strength": 1.0,
-          "evidence_ref": "ReadSludge Dec 2025, Siegelman analysis",
-          "description": "Stephen Miller's wife Katie Miller served as BAF Senior Advisor Sept 2024 before joining DOGE. P2 Pathway Public Affairs (run by Generra Peck, Phil Cox, Katie Miller) received $210K from BAF."
-        },
-        {
-          "target": "Palantir Technologies",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Palantir's $30M ImmigrationOS contract builds the AI backbone for Miller's 3,000 arrests/day quota. System integrates across government databases for deportation targeting."
-        }
-      ],
-      "secondHop": {
-        "America First Legal Foundation": [
-          {
-            "target": "Russ Vought",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
-          },
-          {
-            "target": "Ed Corrigan",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "AFL board director. Also CEO of Conservative Partnership Institute. Led Trump transition domestic policy personnel selection, placing hundreds in government."
-          },
-          {
-            "target": "DonorsTrust",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DonorsTrust gave AFL $21.3M in 2024 (up from $3.2M in 2023). Anonymous dark money conduit providing 2/3 of AFL's revenue."
-          },
-          {
-            "target": "Reed Rubinstein",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Rubinstein served as AFL Senior Counselor, Director of Oversight & Investigations, then Senior VP earning $277K. Now confirmed as State Dept Legal Advisor 2025 - AFL-to-government pipeline."
-          },
-          {
-            "target": "Conservative Partnership Institute",
-            "type": "controls",
-            "strength": 1.0,
-            "description": "CPI incubated AFL, shared address 611 Pennsylvania Ave SE, 3 CPI personnel on AFL board (Meadows, Corrigan, Denton)"
-          }
-        ],
-        "Building America's Future": [
-          {
-            "target": "Citizens for Sanity",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "BAF paid CfS $43M in 2022 as Musk pass-through"
-          },
-          {
-            "target": "Elon Musk",
-            "type": "funds",
-            "strength": 1.0,
-            "description": "Musk provided $50M+ to BAF in 2022, likely $74.5M+ in 2024, est $100M+ total"
-          },
-          {
-            "target": "IMGE LLC",
-            "type": "contracts_with",
-            "strength": 1.0,
-            "description": "BAF paid IMGE LLC $14.4M in 2024 for digital/data services"
-          }
-        ],
-        "Elon Musk": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jeffrey Epstein",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
-          },
-          {
-            "target": "Jared Birchall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
-          }
-        ],
-        "Gene Hamilton": [
-          {
-            "target": "Jeff Sessions",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hamilton was Sessions general counsel on Senate Judiciary Committee. Both moved to Trump admin together. Hamilton described as second only to Miller in immigration policy knowledge and fervor."
-          }
-        ],
-        "Jeff Sessions": [
-          {
-            "target": "Matthew Whitaker",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Whitaker served as Sessions Chief of Staff at DOJ Oct 2017-Nov 2018, then became Acting AG after Sessions forced out. Now AFL board member and NATO Ambassador."
-          },
-          {
-            "target": "Ed Corrigan",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Corrigan ran Senate Steering Committee under Sessions as chairman. This predates and underpins the Miller network - Corrigan connected Sessions to the broader conservative movement infrastructure."
-          }
-        ],
-        "Palantir": [
-          {
-            "target": "Thomas Williams",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation."
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Emil Michael",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI"
-          },
-          {
-            "target": "CBP",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding."
-          }
-        ],
-        "Palantir Technologies": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-          },
-          {
-            "target": "ICE",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-          },
-          {
-            "target": "Alex Karp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-          },
-          {
-            "target": "Department of Defense",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir has .3B+ in DoD contracts including .3B Maven Smart System and B Army Enterprise Agreement"
-          }
-        ],
-        "Heather Honey": [
-          {
-            "target": "Cyber Ninjas",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Honey was Cyber Ninjas subcontractor during Arizona Maricopa County 2020 audit"
-          },
-          {
-            "target": "Cleta Mitchell",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Honey is VP on Mitchell's FAIR Elections Fund board; both in election integrity network"
-          },
-          {
-            "target": "Pam Bondi",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Bondi DOJ collects voter rolls and shares with DHS where Honey serves as Deputy Asst Sec of Election Integrity. Honey manages DHS side of the DOJ-DHS-SAVE voter data pipeline. Honey contradicted DHS spokesperson about data sharing occurring."
-          }
-        ],
-        "John Zadrozny": [
-          {
-            "target": "FAIR",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Zadrozny served as legislative counsel at Federation for American Immigration Reform (FAIR) in 2009 before Senate and government career. FAIR was founded by eugenicist John Tanton."
-          }
-        ],
-        "Pam Bondi": [
-          {
-            "target": "DOJ Voting Section",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-          },
-          {
-            "target": "Ed Martin",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
-          },
-          {
-            "target": "GEO Group",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
-          }
-        ],
-        "Russ Vought": [
-          {
-            "target": "Kash Patel",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both connected to Center for Renewing America: Vought as founder, Patel as Senior Fellow for National Security and Intelligence"
-          },
-          {
-            "target": "Jeffrey Clark",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both at CRA before entering govt; CRA funded Election Integrity Network"
-          },
-          {
-            "target": "Ken Cuccinelli",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Cuccinelli is Senior Fellow at Vought's Center for Renewing America; both Project 2025 authors; CRA staging ground for election enforcement personnel"
-          },
-          {
-            "target": "Center for Renewing America",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
-          }
-        ],
-        "Steve Bannon": [
-          {
-            "target": "Jeffrey Epstein",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "160+ emails, 526 jmail. Daily contact Jan 2018-Jul 2019. Bitcoin advisory, film collaboration, political intelligence exchange, USVI island, 100k payment."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Wolff served as intermediary. Forwarded WH intel Bannon->Wolff->Epstein. Proposed media project. Assessed leak risks."
-          },
-          {
-            "target": "Dan Fleuette",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Fleuette (doitfluet@protonmail.com) Bannon production coordinator. Shared American Carnage via Vimeo, coordinated USVI/Norway travel. ProtonMail user."
-          },
-          {
-            "target": "Sean Bannon",
-            "type": "familial",
-            "strength": 1.0,
-            "description": "Son. 210 A St NE Washington DC 20002. Apple Watch gift from Epstein Jan 2019. Film production."
-          },
-          {
-            "target": "Michael Wolff",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Wolff intermediary between Bannon and Epstein, forwarded communications and arranged meetings"
-          }
-        ],
-        "Tom Homan": [
-          {
-            "target": "GEO Group",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Consulting fees (at least $5K disclosed) 2023-2024; FBI sting recorded $50K cash acceptance Sept 2024"
-          },
-          {
-            "target": "Charles Sowell",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Homan consulted for Sowell's SE&M Solutions at $20K/month; Sowell used Homan connection to attract detention contract clients"
-          },
-          {
-            "target": "Mark Hall",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Hall is Homan's senior adviser in White House; previously Border911 board member; paid $50K by Sowell before entering government"
-          },
-          {
-            "target": "Michael Flynn",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Homan served as CEO of The America Project, co-founded by Flynn and Byrne"
-          },
-          {
-            "target": "GEO Group",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Homan consulted for GEO Care division before returning to DHS as Border Czar in Trump 2nd admin with ethics waiver"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2026-03-01",
-        "label": "White House deputy chief of staff Stephen Miller is the driving force behind HSI election investigations, with his office holding weekly meetings with both DHS and DOJ leadership on election enforcement plans.",
-        "type": "intelligence",
-        "evidence_ref": null,
-        "id": 6527
-      }
     ]
   }
 }

@@ -1,0 +1,214 @@
+{
+  "name": "Aurora Mobile Ltd",
+  "slug": "aurora-mobile-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.352779",
+  "last_updated": "2026-03-30T03:19:57",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "capital_structure": 3,
+      "financial": 1,
+      "ownership": 1,
+      "governance": 2,
+      "insider_transaction": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-30T03:19:57"
+  },
+  "findings": [
+    {
+      "id": 8731,
+      "finding_type": "capital_structure",
+      "summary": "Aurora Mobile ran two consecutive ATM programs via China Renaissance Securities (Hong Kong) Limited in 2025: 424B5 filed 2025-05-14 (up to $8M, ADS price $8.83) and 424B5 filed 2025-11-04 (up to $8M, ADS price $9.65), both under shelf registration 333-290371. Total potential dilution of $16M in ADS offerings.",
+      "detail": "Same sales agent (China Renaissance Securities HK), same 3% commission structure, both programs under the same shelf. Actual take-down amounts not confirmed from this review.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-11-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8730,
+      "finding_type": "financial",
+      "summary": "FY2025 financials (from 20-F): consolidated revenue RMB 290.2M (~$41.5M); consolidated net loss RMB 62.7M (~$9.0M); cash and equivalents RMB 168M (~$24.0M, up from ~$17M in FY2024); total consolidated equity RMB 99.4M (~$14.2M). VIE net liabilities RMB 150M (~$21.5M). VIE contributed 85.2% of external revenues.",
+      "detail": "Cash increase YoY consistent with equity raises (ATM programs). Equity effectively flat YoY despite cash raise \u2014 offset by ongoing losses.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8726,
+      "finding_type": "capital_structure",
+      "summary": "Aurora Mobile issued a 3-year warrant to PM Partners I LP (PAG Pegasus Fund) on 2026-02-11 covering 9,666,666 Class A shares (725,000 ADSs) at an exercise price of $13.80/ADS \u2014 85% premium over 10-day average ADS price of ~$7.43. Warrant was issued alongside a data analytics service agreement under which Aurora will provide services to PAG for service fees.",
+      "detail": "No cash was received by Aurora at issuance. Warrant expires 2029-02-10. Registration obligation (best efforts) fulfilled by F-3 filed 2026-03-27. The service agreement is the apparent commercial basis for the deal but its terms are not public.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-11",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8728,
+      "finding_type": "ownership",
+      "summary": "PAG's warrant ownership chain disclosed via Schedule 13G: PM Partners I LP (direct holder) \u2192 PM Partners GP I Limited (GP) \u2192 PAG Pegasus LLC (owner of GP) \u2192 Pacific Alliance Group Limited (ultimate controller). All four entities separately reported 9,666,666 shares beneficial ownership.",
+      "detail": "Percentage upon exercise: ~13.2% of Class A shares. Base share count used: 63,479,260 Class A as reported in 424B5 dated 2025-11-04.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8729,
+      "finding_type": "governance",
+      "summary": "Seven Form 3 initial beneficial ownership statements filed on 2026-03-16 under HFIA mandates: Weidong Luo (Director/Officer, 7.1M Class A + 17M Class B via KK Mobile Limited + 5,350 ADS); Shan-Nen Bong (Officer/CFO, no non-derivative securities); Qing Zhang (Officer, 20 ADS); Peter Si Ngai Yeung (45,736 ADS); John Koh (41,786 ADS); Hon Sang Lee (18,298 ADS); Kwok Hin Tang (15,282 ADS).",
+      "detail": "Roles of Yeung, Koh, Lee, and Tang not definitively specified in Form 3 checkbox fields \u2014 require 20-F Item 6 verification. All filers list company HQ address (Shenzhen Bay).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8725,
+      "finding_type": "insider_transaction",
+      "summary": "Hon Sang Lee sold 1,452 ADS at $7.00 per ADS on 2026-03-25, nine days after filing initial Form 3 on 2026-03-16 under HFIA obligations. Retained 16,846 ADS. Gross proceeds ~$10,164.",
+      "detail": "Transaction code S (open-market sale). The sale came within the first HFIA reporting window. Sub-$7.78 execution (vs $7.78 close on 2026-03-20). Form 4 filed 2026-03-27 (acc 0001104659-26-035707).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8727,
+      "finding_type": "capital_structure",
+      "summary": "F-3 filed 2026-03-27 registers 9,666,666 Class A shares (725,000 ADSs) for resale by PM Partners I LP upon warrant exercise. Represents 13.3% potential dilution to Class A shares. Warrant currently out of the money by 77% ($7.78 ADS spot vs $13.80 exercise price).",
+      "detail": "New registration statement (not a supplement to 333-290371). Filed same day as FY2025 20-F to incorporate current annual report by reference. Subject to completion; not yet effective.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8732,
+      "finding_type": "governance",
+      "summary": "Weidong Luo holds 17,000,189 Class B shares and 7,100,000 Class A shares indirectly via KK Mobile Limited, constituting the controlling stake in Aurora Mobile. Class B shares carry superior voting rights (likely 10:1 vs Class A), giving Luo estimated 70%+ voting control.",
+      "detail": "Confirmed via Form 3 filed 2026-03-16 (acc 0001104659-26-028025). 17M Class B = all Class B shares outstanding per 20-F cover page (17,000,189 Class B outstanding). Voting ratio needs confirmation from share capital exhibit.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Aurora Mobile Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-11-04",
+      "type": "finding",
+      "finding_type": "capital_structure",
+      "summary": "Aurora Mobile ran two consecutive ATM programs via China Renaissance Securities (Hong Kong) Limited in 2025: 424B5 filed 2025-05-14 (up to $8M, ADS price $8.83) and 424B5 filed 2025-11-04 (up to $8M, ADS price $9.65), both under shelf registration 333-290371. Total potential dilution of $16M in ADS offerings.",
+      "confidence": "high",
+      "id": 8731
+    },
+    {
+      "date": "2025-12-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FY2025 financials (from 20-F): consolidated revenue RMB 290.2M (~$41.5M); consolidated net loss RMB 62.7M (~$9.0M); cash and equivalents RMB 168M (~$24.0M, up from ~$17M in FY2024); total consolidated equity RMB 99.4M (~$14.2M). VIE net liabilities RMB 150M (~$21.5M). VIE contributed 85.2% of external revenues.",
+      "confidence": "high",
+      "id": 8730
+    },
+    {
+      "date": "2026-02-11",
+      "type": "finding",
+      "finding_type": "capital_structure",
+      "summary": "Aurora Mobile issued a 3-year warrant to PM Partners I LP (PAG Pegasus Fund) on 2026-02-11 covering 9,666,666 Class A shares (725,000 ADSs) at an exercise price of $13.80/ADS \u2014 85% premium over 10-day average ADS price of ~$7.43. Warrant was issued alongside a data analytics service agreement under which Aurora will provide services to PAG for service fees.",
+      "confidence": "high",
+      "id": 8726
+    },
+    {
+      "date": "2026-02-18",
+      "type": "finding",
+      "finding_type": "ownership",
+      "summary": "PAG's warrant ownership chain disclosed via Schedule 13G: PM Partners I LP (direct holder) \u2192 PM Partners GP I Limited (GP) \u2192 PAG Pegasus LLC (owner of GP) \u2192 Pacific Alliance Group Limited (ultimate controller). All four entities separately reported 9,666,666 shares beneficial ownership.",
+      "confidence": "high",
+      "id": 8728
+    },
+    {
+      "date": "2026-03-16",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Seven Form 3 initial beneficial ownership statements filed on 2026-03-16 under HFIA mandates: Weidong Luo (Director/Officer, 7.1M Class A + 17M Class B via KK Mobile Limited + 5,350 ADS); Shan-Nen Bong (Officer/CFO, no non-derivative securities); Qing Zhang (Officer, 20 ADS); Peter Si Ngai Yeung (45,736 ADS); John Koh (41,786 ADS); Hon Sang Lee (18,298 ADS); Kwok Hin Tang (15,282 ADS).",
+      "confidence": "high",
+      "id": 8729
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "insider_transaction",
+      "summary": "Hon Sang Lee sold 1,452 ADS at $7.00 per ADS on 2026-03-25, nine days after filing initial Form 3 on 2026-03-16 under HFIA obligations. Retained 16,846 ADS. Gross proceeds ~$10,164.",
+      "confidence": "high",
+      "id": 8725
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "capital_structure",
+      "summary": "F-3 filed 2026-03-27 registers 9,666,666 Class A shares (725,000 ADSs) for resale by PM Partners I LP upon warrant exercise. Represents 13.3% potential dilution to Class A shares. Warrant currently out of the money by 77% ($7.78 ADS spot vs $13.80 exercise price).",
+      "confidence": "high",
+      "id": 8727
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Weidong Luo holds 17,000,189 Class B shares and 7,100,000 Class A shares indirectly via KK Mobile Limited, constituting the controlling stake in Aurora Mobile. Class B shares carry superior voting rights (likely 10:1 vs Class A), giving Luo estimated 70%+ voting control.",
+      "confidence": "high",
+      "id": 8732
+    }
+  ]
+}

@@ -1,57 +1,32 @@
 {
   "name": "Kenneth Raymond Deayton",
   "slug": "kenneth-raymond-deayton",
-  "aliases": [
-    "Kenneth Deayton",
-    "Ken Deayton"
-  ],
+  "aliases": [],
   "profile_ids": [
+    "crml",
     "tech-right"
   ],
-  "generated_at": "2026-03-24T00:44:32.160021+00:00",
-  "last_updated": "2026-03-24T00:24:23",
+  "generated_at": "2026-05-07T23:07:36.138993",
+  "last_updated": "2026-03-24T23:37:50",
   "stats": {
-    "total_findings": 8,
-    "total_connections": 4,
-    "total_entities": 3,
+    "total_findings": 24,
+    "total_connections": 7,
+    "total_entities": 17,
     "finding_types": {
-      "identity": 3,
-      "relationship": 2,
-      "intelligence": 2,
-      "financial": 1
+      "identity": 9,
+      "relationship": 4,
+      "intelligence": 7,
+      "background": 4
     },
     "connection_types": {
-      "corporate": 2,
-      "financial": 2
+      "corporate": 3,
+      "financial": 2,
+      "controls": 1,
+      "owns": 1
     },
-    "last_updated": "2026-03-24T00:24:23"
+    "last_updated": "2026-03-24T23:37:50"
   },
   "findings": [
-    {
-      "id": 6342,
-      "finding_type": "identity",
-      "summary": "Kenneth Raymond Deayton is a CPA qualified in Australia and Hong Kong, practicing in HK since 1975. Career: 4 years HK Inland Revenue; 7 years HSBC head office tax consultant; 15 years Deloitte Touche Tohmatsu partner (corporate services). Founded Asian Financial Services Limited (sold to TMF Group). Co-founded The Hong Kong Trust Company Group. Currently Managing Director/CEO of Hong Kong Corporate Services Group (6F Wyndham Place, 40-44 Wyndham Street, Central HK). Listed as Corporate Insider for Nimble Holdings (0186.HK). Appeared in Panama Papers as shareholder of Newbury Investment Limited (BVI, inc. Sep 4, 1991) via Mossack Fonseca. Controls Swiss Commodity RE Limited which received 1.8M CRML shares worth $18M in Nov 2025 copper powder deal.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:23:14",
-      "target_name": "Kenneth Raymond Deayton",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hkcsgroup.com/ken-deayton/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
     {
       "id": 7313,
       "finding_type": "identity",
@@ -70,7 +45,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "ICIJ:Panama_Papers,ICIJ:Offshore_Leaks",
+          "evidence_ref": "ICIJ:12220983",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -103,6 +78,56 @@
       ]
     },
     {
+      "id": 7832,
+      "finding_type": "relationship",
+      "summary": "Director of META OCTAV GROUP (HK) LIMITED (formerly IFL, TCSP TC007309) \u2014 the same entity that provided nominee subscriber services for Swiss Commodity Re Limited (which Deayton controls per CRML F-3). Creates direct conflict: TCSP director on both sides of Swiss Commodity Re incorporation. Swiss Commodity Re used IFL-address-sharing entity (Wyndham Place, same floor as HKCS Group).",
+      "detail": null,
+      "source_datasets": [
+        "hk_companies_registry,edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 23:37:12",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6342,
+      "finding_type": "identity",
+      "summary": "Kenneth Raymond Deayton is a CPA qualified in Australia and Hong Kong, practicing in HK since 1975. Career: 4 years HK Inland Revenue; 7 years HSBC head office tax consultant; 15 years Deloitte Touche Tohmatsu partner (corporate services). Founded Asian Financial Services Limited (sold to TMF Group). Co-founded The Hong Kong Trust Company Group. Currently Managing Director/CEO of Hong Kong Corporate Services Group (6F Wyndham Place, 40-44 Wyndham Street, Central HK). Listed as Corporate Insider for Nimble Holdings (0186.HK). Appeared in Panama Papers as shareholder of Newbury Investment Limited (BVI, inc. Sep 4, 1991) via Mossack Fonseca. Controls Swiss Commodity RE Limited which received 1.8M CRML shares worth $18M in Nov 2025 copper powder deal.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:23:14",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 7314,
       "finding_type": "relationship",
       "summary": "Deayton's professional network (MarketScreener) connects him to Nimble Holdings, HSBC, Deloitte Touche Tohmatsu HK, Terra Capital PLC, and Asian Property Investments Ltd. His second-degree connections via co-directorships include Emerson Radio Corp (connected through Tak Kwong Hon, CEO), Sansui Electric Co Ltd, Singamas Container Holdings, CCT Fortis Holdings, and GBA Holdings. Co-directors include Tak Kwong Hon (10 shared connections), Ho Kit Lau (10 shared connections), and Manjit Singh Gill (5 shared connections). This positions Deayton within the HK-based corporate services network that services multiple HK-listed companies.",
@@ -120,7 +145,32 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "MarketScreener:Kenneth-Deayton",
+          "evidence_ref": "web:marketscreener.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7317,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Deayton is a veteran HK-based corporate services professional (CPA, Deloitte partner 15 years, HSBC 7 years, HK Inland Revenue 4 years) who controls Swiss Commodity Re Limited \u2014 the entity that sold 40kg of purportedly UHP copper powder to CRML for 2M shares (USD 20M). Key profile elements: (1) OFFSHORE HISTORY: Two BVI entities in ICIJ databases \u2014 Newbury Investment Limited (Panama Papers, shareholder from 1997, Mossack Fonseca) and Richmond Holdings BVI Ltd (Offshore Leaks, director 2001-2003, Portcullis Trustnet). (2) GRANDE HOLDINGS: Appointed INED and audit committee chairman of Grande Holdings (0186.HK, now Nimble Holdings) in May 2016 when it resumed trading after provisional liquidation. Grande owns 72.4% of Emerson Radio Corp. Replaced when board reconstituted Dec 2017. (3) CORPORATE SERVICES: Runs HK Corporate Services Group from 6F Wyndham Place, Central HK \u2014 same address used by Swiss Commodity Re. Founded Asian Financial Services Ltd (sold to TMF Group). Co-founded HK Trust Company Group. (4) NO DIRECT SAGE CONNECTION: No overlapping boards, companies, or professional networks between Deayton and Tony Sage found in any source. The CRML copper deal appears to be introduced through an unidentified intermediary. (5) COPPER PRICING ANOMALY: Market sources dispute the USD 1500-2500/g pricing for 99.96% purity; typical pricing is 2-3 orders of magnitude lower. (6) NEGATIVE RESULTS: No FEC donations, no US litigation, no lobbying disclosures, no FARA registrations, no OpenSanctions hits, no IRS 990 roles, no US corporate registry presence, no GLEIF LEI for Swiss Commodity Re.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:07:58",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -146,57 +196,21 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC:0001213900-26-023653,ICIJ:Panama_Papers",
+          "evidence_ref": "424B3 prospectus footnote 3 re: Swiss Commodity RE Limited",
           "source_quote": null,
           "source_page": null,
           "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6340,
-      "finding_type": "identity",
-      "summary": "Swiss Commodity Re Limited is controlled by Kenneth Raymond Deayton, who is co-founder and Managing Director/CEO of Hong Kong Corporate Services Group. The company's business address is the HK Corporate Services Group office: 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong. Despite the name 'Swiss', the entity is Hong Kong-based and uses a registered agent address, not an operational business address.",
-      "detail": null,
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:22:53",
-      "target_name": "Swiss Commodity Re Limited",
-      "profile_id": "tech-right",
-      "evidence": [
+        },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC:0001213900-26-023653",
+          "evidence_ref": "ICIJ Offshore Leaks Database node 12220983",
           "source_quote": null,
           "source_page": null,
           "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 7473,
-      "finding_type": "financial",
-      "summary": "Swiss Commodity Re holds 1.8M CRML shares from copper powder ASA - no 13D/G filing requirement (only 1.5pct ownership)",
-      "detail": "Per 424B3 prospectus (March 4, 2026), Swiss Commodity RE Limited holds 1,800,000 CRML ordinary shares (1.5pct of 122,074,807 outstanding). Malcolm Scott Macintyre holds 200,000 shares separately. Kenneth Raymond Deayton has voting and investment control over Swiss Commodity Re shares (per footnote 3). Shares were received under Asset Sale Agreement dated November 21, 2025, closed December 16, 2025. Since Swiss Commodity Re holds only 1.5pct, it is below the 5pct threshold requiring Schedule 13D or 13G filings. This means there is NO SEC ownership reporting mechanism that would reveal if they have sold any shares since the F-3 became effective March 4, 2026.",
-      "source_datasets": [
-        "edgar"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-23 20:56:31",
-      "target_name": "Kenneth Raymond Deayton",
-      "profile_id": "tech-right",
-      "evidence": [
+        },
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC:0001213900-26-023653",
+          "evidence_ref": "Macroaxis corporate insider data for 0186.HK",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -206,7 +220,7 @@
     {
       "id": 7569,
       "finding_type": "intelligence",
-      "summary": "DEAYTON SUPPLY CHAIN IMPLAUSIBILITY: Kenneth Deayton's professional background is corporate services -- company formation, tax compliance, bookkeeping, payroll, and virtual offices. His firm (Hong Kong Corporate Services Group) specializes in forming Hong Kong companies and WFOEs in China. There is no indication in his 50-year career of involvement in commodities trading, metals, mining, materials science, defense supply chains, or any activity that would plausibly result in possession of 40kg of ultra-high-purity copper powder.",
+      "summary": "DEAYTON SUPPLY CHAIN IMPLAUSIBILITY: Kenneth Deayton's professional background is corporate services -- company formation, tax compliance, bookkeeping, payroll, and virtual offices. His firm (Hong Kong Corporate Services Group) specializes in forming Hong Kong companies and WFOEs in China. There is no indication in his 50-year career of involvement in commodities trading, metals, mining, materials science, defense supply chains, or any activity that would plausibly result in possession of 40kg of ultra-high-purity copper powder. The description of Swiss Commodity Re as 'a long-only multi-generational European based single family office' is contradicted by: (a) the company is Hong Kong-registered, not European; (b) it is controlled by Deayton, an Australian CPA running a corporate services firm; (c) 'single family office' implies wealth management, not commodity storage; (d) no evidence of any commodities trading operations.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -221,7 +235,479 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "hkcsgroup.com,web_search",
+          "evidence_ref": "CRML press release: Swiss Commodity Re described as long-only multi-generational European family office",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Hong Kong Corporate Services Group about page: services list and Deayton biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ZoomInfo: Kenneth Deayton Managing Director HKCSG",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7573,
+      "finding_type": "relationship",
+      "summary": "Deayton directed Sprocket HK Ltd, Asian hub of Ubiquity Inc \u2014 a company whose SEC registration was revoked and whose CEO was convicted of securities fraud",
+      "detail": "Kenneth Raymond Deayton signed a Non-Exclusive Commercial Technology License Agreement as Director of Sprocket HK Limited (Hong Kong) with Ubiquity, Inc. (OTCQB: UBIQ) in March 2015. Sprocket HK was Ubiquity's central hub in Asia, with CEO James Tsiolis of Strategic Capital Management. Ubiquity subsequently had its stock registration REVOKED by the SEC (July 2017) for failure to provide financial information; interim CEO Nicholas Mitsakos pleaded guilty to securities and wire fraud (sentenced 30 months); and the auditor's report was found invalid (non-PCAOB-registered auditor). Sprocket HK appears in 14 Ubiquity SEC filings spanning 2015-2017. This is the second instance of Deayton directing an HK entity that transacted with a US-listed company facing fraud charges (first: Grande Holdings/Nimble Holdings during provisional liquidation in 2016). CRML makes three.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:49:58",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001538329-15-017890",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1538329/000114420415017890/v405344_ex10-1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7574,
+      "finding_type": "identity",
+      "summary": "Deayton directed 7 Samoa corporate formation entities per Paradise Papers \u2014 operates offshore corporate services professionally across HK, BVI, and Samoa",
+      "detail": "Beyond known BVI entities (Newbury Investment Ltd via Mossack Fonseca 1991, Richmond Holdings BVI Ltd via Portcullis Trustnet 2001-2003), ICIJ Paradise Papers reveal Deayton directed 7 Samoa-registered corporate formation entities, all appointed March 28, 2013: Intetrust Limited, Pacific Secretaries Limited, Trelawney Limited (#333), Danforth Limited (#329), Seatoun Limited (#334), Integroup Corporate Services Limited (#335), and Pacific Fund Management Limited (from Sep 30, 2014). Registered address: Flat A, 12/F, Block B, Rose Court, 115-117 Wong Nai Chung Road, Happy Valley, HK. Shared officers: Ngan Mui Fung (former, replaced by Deayton), James Anthony Wadham (resigned Oct 2013), Carmel Elizabeth Moore (former director/shareholder), Michael Ape (current director/shareholder from Sep 2014). Intetrust Limited is a shareholder of these entities. This establishes Deayton as a professional operator of offshore corporate formation services, not merely a user.",
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:50:10",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Offshore Leaks \u2014 Richmond Holdings BVI Ltd",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Panama Papers \u2014 Newbury Investment Limited BVI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Paradise Papers \u2014 Samoa corporate registry, 7 entity records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7584,
+      "finding_type": "identity",
+      "summary": "Deayton served as liquidator of World Congress on Ageing and Dementia in Chinese Communities Co. Limited (2008) \u2014 confirms professional role in winding up corporate entities",
+      "detail": "Per LexisNexis creditor notice (load date February 11, 2008): Deayton served as liquidator of World Congress on Ageing and Dementia in Chinese Communities Co. Limited. Creditors required to file proofs of debt by January 28, 2008 for dividend distribution. Deayton's address at the time: 38th Floor, Tower One, Lippo Centre, 89 Queensway, Hong Kong \u2014 a different office from his current 6F Wyndham Place, 40-44 Wyndham Street, Central HK address. This confirms his professional function as a corporate services provider who creates, manages, and winds up corporate entities. Combined with his roles as: (1) audit committee chair at Grande Holdings during provisional liquidation (2016), (2) director of Sprocket HK which partnered with SEC-revoked Ubiquity Inc (2015), (3) operator of 7 Samoa corporate formation entities, and (4) counterparty to the CRML copper powder deal via Swiss Commodity Re \u2014 Deayton's career profile is that of a professional facilitator who provides governance cover for distressed, questionable, or transitional corporate situations.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 02:52:49",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LexisNexis creditor notice, World Congress on Ageing and Dementia in Chinese Communities Co. Limited, load date February 11, 2008",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7587,
+      "finding_type": "identity",
+      "summary": "SHARED ADDRESS: Sprocket HK, Swiss Commodity Re, and HK Corporate Services Group all registered at 6F Wyndham Place, 40-44 Wyndham St, Central HK",
+      "detail": "Critical discovery: Sprocket HK Limited (Company No. 2208869, Ubiquity Inc partner), Swiss Commodity Re Limited (CRML copper powder counterparty), and Hong Kong Corporate Services Group (Deayton's firm) all share the exact same registered address: 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong. This confirms all three are Deayton-created/managed corporate vehicles. The address chain establishes that Deayton has been providing corporate infrastructure for US-listed company transactions through HK entities for at least a decade (Sprocket HK 2015, Swiss Commodity Re 2025). In both cases, Deayton's entity was counterparty to a transaction where the US-listed company received questionable value.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:14:17",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML 424B3 filed March 4, 2026 \u2014 Swiss Commodity Re address",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001538329-15-017890",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hongkongcorporateservices.com/ken-deayton/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7588,
+      "finding_type": "intelligence",
+      "summary": "Sprocket HK operational failure mirrors copper deal: received value (tech license), never paid counterparty, then Deayton cancelled their shares",
+      "detail": "Sprocket HK Limited (Deayton as Director, registered at his HKCSG office) entered a Non-Exclusive Commercial Technology License Agreement with Ubiquity Inc (March 2015). Terms: Ubiquity to receive 51% non-dilutable stake in Sprocket HK, $100K minimum payment, board seat for CEO Carmichael, 51% of gross proceeds. Outcome: Sprocket HK never paid the $100K, never issued the 51% stake, never provided the board seat, failed to provide financial information to auditors. Ubiquity terminated for material breach June 28, 2016. On August 15, 2016, a director of Sprocket HK (almost certainly Deayton) sent a letter CANCELLING Ubiquity's shares. Pattern parallel to CRML: Deayton's entity receives value and the counterparty gets nothing of substance. Additionally, Ubiquity's general counsel Gregg Jaclin was running a shell factory scheme (9 shells, 7 sold via reverse mergers) \u2014 permanently barred by SEC, criminally indicted. Ubiquity itself went public through a Jaclin reverse merger from Fermo Group Inc.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:14:25",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DOJ press release: Jaclin indictment",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=Ubiquity+10-Q+filed+2017+%E2%80%94+Sprocket+HK+termination+disclosure",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.prnewswire.com/news-releases/ubiquity-licenses-to-sprocket-hong-kong-300054837.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7598,
+      "finding_type": "identity",
+      "summary": "OpenCorporates reveals Sharpside Inc (Panama) with Mossack Fonseca as agent \u2014 third offshore service provider; plus NZ, California entities",
+      "detail": "OpenCorporates officer search reveals additional Deayton positions: (1) Sharpside Inc (Panama, #272087) \u2014 Presidente/Secretario/Director. Mossack Fonseca registered agent. Co-officers: Adrian John King, Lee Ching Yee Grace. Dissolved 2003. Third Mossack Fonseca connection (after Newbury Investment BVI and Richmond Holdings BVI via Portcullis Trustnet). (2) NZ Trust Company Ltd (#5505827) \u2014 Director 2014-2020, with co-director Carolyn Butler (also Signature Corporation). (3) International Finance NZ Ltd (#1529039) \u2014 Director 2018-2019, with James Wadham (Paradise Papers Samoa entities). (4) Monivae Properties Inc (California, #1586672) \u2014 CEO, address 12B 92 Pok Fu Lam Rd HK. Incorporated 1987, suspended by FTB 1995. Deayton family network: Matthew Stuart (NZ/Vietnam companies) and Paul Andrew (Myanmar/Cambodia/UK/NZ) also operate HK-based corporate vehicles.",
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 03:41:52",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates entity Panama #272087 Sharpside Inc",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenCorporates officer search: Kenneth Deayton, 5 positions",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7679,
+      "finding_type": "identity",
+      "summary": "Deayton is Director of Sprocket HK Limited \u2014 confirmed by SEC filing for Ubiquity Inc. 8-K (March 2015). Deayton signed as 'Director' of 'Sprocket HK Limited' in patent licensing agreement with Ubiquity Inc., dated March 16, 2015. Sprocket HK shares address with Swiss Commodity Re and HK Corporate Services Group at 6F Wyndham Place, 40-44 Wyndham Street, Central HK.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:38:54",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001538329-15-017890",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7681,
+      "finding_type": "identity",
+      "summary": "Deayton was appointed independent non-executive Director AND Chairman of the Audit Committee of Grande Holdings Limited (HKEX: 0186, now Nimble Holdings Company Limited) with effect from May 30, 2016. Grande Holdings controlled Emerson Radio Corp (NASDAQ: MSN) through S&T International Distribution Ltd. This directorship triggered Deayton's name appearing in Emerson Radio SC 13D/A filings at SEC.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:39:00",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-16-709935",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7692,
+      "finding_type": "background",
+      "summary": "Kenneth Deayton is MD/CEO of Hong Kong Corporate Services Group (HKCSG), 6F Wyndham Place, 44 Wyndham St, Central HK. CPA qualified in Australia and HK, practising HK since 1975. Career: HK Inland Revenue (4 yrs), HSBC tax consultant (7 yrs), Deloitte partner (15 yrs, corporate services head), founded Asian Financial Services Ltd (sold), founded HK Trust Company Group. No US court actions or FARA registrations found. Known Panama Papers connection (Newbury Investment Limited BVI via Mossack Fonseca) per prior investigation intelligence.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:40:25",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WEB:hongkongcorporateservices.com/ken-deayton",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7701,
+      "finding_type": "intelligence",
+      "summary": "ICIJ Panama Papers: Kenneth Raymond Deayton documented as shareholder of Newbury Investment Limited (BVI, incorporated 1991, Mossack Fonseca). Two shareholding periods: from September 1, 1997 and from August 15, 2002. Registered address: Unit F3, Goodview Garden, 24 Stubbs Road, Hong Kong. Separately identified as director of Richmond Holdings (BVI) Ltd from July 26, 2001 to April 30, 2003 (Portcullis Trustnet). Two distinct offshore entity relationships confirmed in Panama Papers and Offshore Leaks datasets.",
+      "detail": null,
+      "source_datasets": [
+        "icij"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:42:07",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://offshoreleaks.icij.org/nodes/12220983",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7702,
+      "finding_type": "intelligence",
+      "summary": "Nimble Holdings (0186.HK, formerly Grande Holdings) connection: Deayton documented as a corporate insider at 0186.HK. Nimble Holdings is an investment holding company operating in PRC property development, household appliances, IT services, and distribution. No metals or mining connection. Company is based in Tsuen Wan, Hong Kong. The company was formerly The Grande Holdings Limited, renamed to Nimble Holdings in February 2018.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:42:14",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.macroaxis.com/invest/manager/0186.HK--Kenneth-Deayton",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7708,
+      "finding_type": "intelligence",
+      "summary": "No Deayton-Sage link established through open web research. Searched for connections between Kenneth Deayton and Tony Sage, European Lithium, Cape Lambert, GreenMet, Rimbal, and Tanbreez. Zero results found. The fraud mechanism may rely on Deayton as a professional corporate services enabler (HK company formation specialist) rather than a direct business associate of Sage. HKCS Group and Asian Financial Services background positions Deayton as a provider of nominee corporate services, consistent with Swiss Commodity Re being a shelf/nominee entity created for the deal.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "low",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:43:21",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hongkongcorporateservices.com/ken-deayton/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7748,
+      "finding_type": "background",
+      "summary": "Kenneth Deayton appeared in SEC filings in 2016 as director of Grande Holdings Limited, connected to Emerson Radio Corp SC 13D",
+      "detail": "EDGAR full-text search for 'Kenneth Deayton' returned 4 results. The top two (scores 31.18 and 31.17) are Emerson Radio Corp (NASDAQ: MSN, CIK 0000032621) SC 13D and SC 13D/A filings from September 15, 2016. The SC 13D names Accolade (PTC) Inc. (CIK 0001680686, Kowloon, HK) and S&T International Distribution Ltd. (CIK 0001336951, Singapore). Deayton appeared in this context as Independent Non-Executive Director and Chairman of Audit Committee of Grande Holdings Limited (HKEX: 0186). This predates the CRML deal by 9 years and confirms Deayton's pattern of providing directorship/committee services to HK-listed companies.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:31:57",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/32621/000119312516709943/d243245dex991.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7751,
+      "finding_type": "background",
+      "summary": "Deayton biography: CPA (Australia/HK), ex-HSBC tax consultant, ex-Deloitte partner (15 yrs), founder HK Corporate Services Group \u2014 44 Wyndham Street, Central, HK",
+      "detail": "Sourced directly from hkcsgroup.com/ken-deayton. Full credentials: JP, CA(RMIT), B.Econ(Qld), FHKICPA, ACPAA. Career: HK Inland Revenue (4 yrs) \u2192 HSBC head office tax consultant (7 yrs) \u2192 Deloitte Touche Tohmatsu partner, corporate services (15 yrs) \u2192 Founded Asian Financial Services Ltd (sold to TMF Group) \u2192 Co-founded Hong Kong Trust Company Group \u2192 Founded/CEO HK Corporate Services Group. Address: 6/F Wyndham Place, 44 Wyndham Street, Central, HK. Residential: Unit F3, Goodview Garden, 24 Stubbs Road, HK. Email: k***@hkcsgroup.com. No metals or commodities background in any source.",
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:08",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hongkongcorporateservices.com/ken-deayton/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7756,
+      "finding_type": "background",
+      "summary": "Kenneth Deayton: CEO Hong Kong Corporate Services Group, Deloitte alum (15yr partner), ICIJ Panama Papers node, HK corporate formation specialist since 1975",
+      "detail": "Deayton's public profile at hongkongcorporateservices.com: CPA qualified Australia and HK, 4yr HK Inland Revenue, 7yr HSBC head office tax consultant, 15yr Deloitte Touche Tohmatsu partner overseeing corporate services division, founded Asian Financial Services Limited (sold), co-founded HK Trust Company Group, now CEO of Hong Kong Corporate Services Group (6/F Wyndham Place, 44 Wyndham St, Central HK). Address: info@hkcsgroup.com. ICIJ offshore leaks database contains his name as officer: icij.org/nodes/12220983. Swiss Commodity Re Limited (HK Co. 79047415) was incorporated Oct 30 2025 \u2014 22 days before the Nov 21 2025 CRML deal \u2014 with Deayton as director.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:32:34",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://offshoreleaks.icij.org/nodes/12220983",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7766,
+      "finding_type": "intelligence",
+      "summary": "Sprocket HK Limited: Deayton directorship in fraud-adjacent entity \u2014 Ubiquity Inc SEC proceeding 3-17884 for failure to file reports, Sprocket HK withheld financial information from auditors",
+      "detail": "Sprocket HK Limited was a licensee entity linked to Ubiquity Inc (OTC: UBIQ, SEC CIK 1538329). Ubiquity licensed its Sprocket product to Sprocket Hong Kong Limited in March 2015. The relationship collapsed when Sprocket HK and iWebgate (connected entity) 'failed to respond to numerous requests by Ubiquity and its auditors for financial information over an extended period of time in 2015 and 2016, which prevented auditors from completing financial audits.' Sprocket HK director sent letter cancelling Ubiquity's shares in August 2016. Ubiquity Inc faced SEC administrative proceeding 3-17884 for failure to file periodic reports \u2014 directly caused by Sprocket HK withholding financial data. Deayton was a director of Sprocket HK per investigation files. This pattern \u2014 creating legitimate-seeming HK entities that obstruct audit verification \u2014 is consistent with his role in Swiss Commodity Re.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 18:33:35",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "crml",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.prnewswire.com/news-releases/ubiquity-licenses-to-sprocket-hong-kong-300054837.html",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -235,36 +721,14 @@
       "person_a": "Kenneth Raymond Deayton",
       "person_b": "Nimble Holdings",
       "relationship_type": "corporate",
-      "description": "Independent non-executive director and audit committee chairman of Grande Holdings (now Nimble Holdings, 0186.HK), May 2016 to December 2017.",
+      "description": null,
       "strength": "strong",
-      "date_range": "2016-05 to 2017-12",
-      "verification_status": "unverified",
-      "created_at": "2026-03-23 19:04:15",
-      "profile_id": "tech-right",
-      "other_person": "Nimble Holdings",
-      "other_person_slug": null,
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC:0001193125-16-709935",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 3717,
-      "person_a": "Emerson Radio Corp",
-      "person_b": "Kenneth Raymond Deayton",
-      "relationship_type": "corporate",
-      "description": "Deayton served on the audit committee of Grande Holdings/Nimble Holdings, which owns 72.4% of Emerson Radio Corp (NYSE American: MSN).",
-      "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
-      "created_at": "2026-03-23 19:04:15",
+      "created_at": "2026-03-23 19:05:17",
       "profile_id": "tech-right",
-      "other_person": "Emerson Radio Corp",
-      "other_person_slug": null,
+      "other_person": "Nimble Holdings",
+      "other_person_slug": "nimble-holdings",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -279,11 +743,11 @@
       "person_a": "Critical Metals Corp",
       "person_b": "Kenneth Raymond Deayton",
       "relationship_type": "financial",
-      "description": "Swiss Commodity Re Limited, controlled by Deayton, received 1,800,000 CRML shares under Asset Sale Agreement dated November 21, 2025 for 40kg copper powder.",
+      "description": null,
       "strength": "strong",
       "date_range": null,
       "verification_status": "unverified",
-      "created_at": "2026-03-23 20:56:42",
+      "created_at": "2026-03-23 19:05:18",
       "profile_id": "tech-right",
       "other_person": "Critical Metals Corp",
       "other_person_slug": "critical-metals-corp",
@@ -297,18 +761,106 @@
       ]
     },
     {
+      "id": 3893,
+      "person_a": "Kenneth Raymond Deayton",
+      "person_b": "Swiss Commodity Re Limited",
+      "relationship_type": "controls",
+      "description": "SEC F-3/424B3 filing states Deayton 'may be deemed to have voting and investment control over the securities held by Swiss Commodity RE Limited'",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:43:43",
+      "profile_id": "tech-right",
+      "other_person": "Swiss Commodity Re Limited",
+      "other_person_slug": "swiss-commodity-re-limited",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1951089/000121390026023653/ea0279761-424b3_critical.htm",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3894,
+      "person_a": "Kenneth Raymond Deayton",
+      "person_b": "Newbury Investment Limited",
+      "relationship_type": "owns",
+      "description": "ICIJ Panama Papers: Deayton was shareholder of Newbury Investment Limited (BVI, Mossack Fonseca) from 1997 and 2002",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:43:43",
+      "profile_id": "tech-right",
+      "other_person": "Newbury Investment Limited",
+      "other_person_slug": "newbury-investment-limited",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://offshoreleaks.icij.org/nodes/12220983",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3910,
+      "person_a": "Cecile Civiale Vuillier",
+      "person_b": "Kenneth Raymond Deayton",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 23:37:50",
+      "profile_id": "tech-right",
+      "other_person": "Cecile Civiale Vuillier",
+      "other_person_slug": "cecile-civiale-vuillier",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HK_CR:1505",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3717,
+      "person_a": "Emerson Radio Corp",
+      "person_b": "Kenneth Raymond Deayton",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:05:17",
+      "profile_id": "tech-right",
+      "other_person": "Emerson Radio Corp",
+      "other_person_slug": "emerson-radio-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001193125-16-709935",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3766,
       "person_a": "Kenneth Raymond Deayton",
       "person_b": "Malcolm Scott Macintyre",
       "relationship_type": "financial",
-      "description": "Co-recipients of CRML shares under the same November 21, 2025 Asset Sale Agreement. Deayton's Swiss Commodity Re received 1.8M shares; Macintyre received 200,000 shares separately.",
+      "description": null,
       "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
-      "created_at": "2026-03-23 19:05:02",
+      "created_at": "2026-03-23 19:21:50",
       "profile_id": "tech-right",
       "other_person": "Malcolm Scott Macintyre",
-      "other_person_slug": null,
+      "other_person_slug": "malcolm-scott-macintyre",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -321,40 +873,219 @@
   ],
   "entities": [
     {
-      "role": "Managing Director / CEO / Co-founder",
+      "role": "Managing Director and CEO",
       "date_start": "2001",
       "date_end": null,
-      "source": "hkcsgroup.com/ken-deayton/",
+      "source": "web:hongkongcorporateservices.com",
       "entity_id": 873,
       "entity_name": "Hong Kong Corporate Services Group",
       "entity_type": "inc",
-      "jurisdiction": "Hong Kong",
+      "jurisdiction": "HK",
       "entity_status": "active"
     },
     {
-      "role": "Controller (voting and investment control)",
+      "role": "Director",
+      "date_start": "2008-03-06",
+      "date_end": null,
+      "source": "ICIJ:Offshore-Leaks",
+      "entity_id": 1499,
+      "entity_name": "MFC Supporters Club Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "bvi",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1492,
+      "entity_name": "Intetrust Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1493,
+      "entity_name": "Pacific Secretaries Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1494,
+      "entity_name": "Trelawney Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1495,
+      "entity_name": "Danforth Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1496,
+      "entity_name": "Seatoun Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2013-03-28",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1497,
+      "entity_name": "Integroup Corporate Services Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2014-09-30",
+      "date_end": null,
+      "source": "ICIJ:Paradise-Papers",
+      "entity_id": 1498,
+      "entity_name": "Pacific Fund Management Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "samoa",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Director",
+      "date_start": "2015",
+      "date_end": null,
+      "source": "SEC:0001538329-15-017890",
+      "entity_id": 1482,
+      "entity_name": "Sprocket HK Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "hk",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "Independent Non-Executive Director and Chairman of Audit Committee",
+      "date_start": "2016-05",
+      "date_end": null,
+      "source": "SEC:0001213900-16-709935",
+      "entity_id": 1483,
+      "entity_name": "Grande Holdings Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "hk",
+      "entity_status": "active"
+    },
+    {
+      "role": "independent non-executive director and chairman of audit committee",
+      "date_start": "2016-05-30",
+      "date_end": "2017-12",
+      "source": "SEC:0001193125-16-709935",
+      "entity_id": 1257,
+      "entity_name": "Kenneth Raymond Deayton",
+      "entity_type": "person",
+      "jurisdiction": "hk",
+      "entity_status": "active"
+    },
+    {
+      "role": "controller (voting/investment)",
       "date_start": "2025",
       "date_end": null,
       "source": "SEC:0001213900-26-023653",
       "entity_id": 843,
       "entity_name": "Swiss Commodity Re Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "Switzerland",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Director / CEO / Co-founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "hkcsgroup.com/ken-deayton/",
+      "entity_id": 873,
+      "entity_name": "Hong Kong Corporate Services Group",
       "entity_type": "inc",
+      "jurisdiction": "HK",
+      "entity_status": "active"
+    },
+    {
+      "role": "Controller (voting and investment control)",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC:0001213900-26-023653 (CRML 424B3 prospectus footnote 3)",
+      "entity_id": 843,
+      "entity_name": "Swiss Commodity Re Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "Switzerland",
+      "entity_status": "active"
+    },
+    {
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "HK Companies Registry company particulars for International Fiduciaries Limited / META OCTAV GROUP (HK) LIMITED",
+      "entity_id": 1510,
+      "entity_name": "META OCTAV GROUP (HK) LIMITED",
+      "entity_type": "ltd",
       "jurisdiction": "Hong Kong",
       "entity_status": "active"
     },
     {
-      "role": "Independent non-executive director and chairman of audit committee",
-      "date_start": "2016-05-30",
-      "date_end": "2017-12",
-      "source": "SEC:0001193125-16-709935",
-      "entity_id": 1257,
-      "entity_name": "Grande Holdings / Nimble Holdings (0186.HK)",
-      "entity_type": "inc",
+      "role": "director",
+      "date_start": null,
+      "date_end": null,
+      "source": "HK Companies Registry company particulars for WISE BUSINESS CONSULTING LIMITED",
+      "entity_id": 1509,
+      "entity_name": "WISE BUSINESS CONSULTING LIMITED",
+      "entity_type": "ltd",
       "jurisdiction": "Hong Kong",
       "entity_status": "active"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "1997-09-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Deayton appears in two ICIJ offshore leak databases: (1) Panama Papers \u2014 shareholder of Newbury Investment Limited (BVI, inc. Sep 4 1991) via Mossack Fonseca, with shareholding dates from Sep 1997 and Aug 2002. Registered address: Unit F, 7F CNT Tower, 338 Hennessy Rd, Wanchai HK. Deayton personal address in Panama Papers: Unit F3, Goodview Garden, 24 Stubbs Road, Hong Kong. (2) Offshore Leaks \u2014 director of Richmond Holdings (BVI) Ltd (inc. Jul 26 2001) via Portcullis Trustnet, serving Jul 2001 to Apr 2003. Two separate BVI entities through two separate service providers.",
+      "confidence": "confirmed",
+      "id": 7313
+    },
+    {
+      "date": "2016-05-30",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Deayton was appointed independent non-executive director and chairman of the audit committee of The Grande Holdings Limited (0186.HK, now Nimble Holdings) effective May 30, 2016, when the company resumed HKEX trading after provisional liquidation. Grande Holdings/Nimble Holdings owns 72.4% of Emerson Radio Corp (NYSE American: MSN) through subsidiaries S&T International Distribution Ltd and Grande N.A.K.S. Ltd. Deayton was replaced when the board was reconstituted in December 2017 under new controlling shareholder Tan Bingzhao.",
+      "confidence": "high",
+      "id": 7312
+    },
+    {
+      "date": "2025-10",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Director of META OCTAV GROUP (HK) LIMITED (formerly IFL, TCSP TC007309) \u2014 the same entity that provided nominee subscriber services for Swiss Commodity Re Limited (which Deayton controls per CRML F-3). Creates direct conflict: TCSP director on both sides of Swiss Commodity Re incorporation. Swiss Commodity Re used IFL-address-sharing entity (Wyndham Place, same floor as HKCS Group).",
+      "confidence": "medium",
+      "id": 7832
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       6342,
@@ -542,65 +1273,5 @@
       "enabler-gradient",
       "complexity-as-credential"
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Kenneth Raymond Deayton",
-      "connections": [
-        {
-          "target": "Swiss Commodity Re Limited",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "SEC:0001213900-26-023653",
-          "description": "Controller (voting and investment control)"
-        },
-        {
-          "target": "Hong Kong Corporate Services Group",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "hkcsgroup.com",
-          "description": "Managing Director / CEO / Co-founder"
-        },
-        {
-          "target": "Critical Metals Corp",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC:0001213900-26-023653",
-          "description": "Swiss Commodity Re received 1.8M CRML shares for copper powder"
-        },
-        {
-          "target": "Malcolm Scott Macintyre",
-          "type": "financial",
-          "strength": 0.5,
-          "evidence_ref": "SEC:0001213900-26-019356",
-          "description": "Co-recipient of CRML shares under same Asset Sale Agreement"
-        },
-        {
-          "target": "Nimble Holdings (0186.HK)",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": "SEC:0001193125-16-709935",
-          "description": "INED and audit committee chairman, May 2016 to December 2017"
-        }
-      ],
-      "secondHop": {
-        "Swiss Commodity Re Limited": [
-          {
-            "target": "Critical Metals Corp",
-            "type": "financial",
-            "description": "Received 1.8M CRML shares for 40kg copper powder"
-          }
-        ],
-        "Nimble Holdings (0186.HK)": [
-          {
-            "target": "Emerson Radio Corp",
-            "type": "corporate",
-            "description": "Owns 72.4% of Emerson Radio Corp through subsidiaries"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

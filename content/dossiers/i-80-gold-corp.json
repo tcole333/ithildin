@@ -1,0 +1,306 @@
+{
+  "name": "i-80 Gold Corp.",
+  "slug": "i-80-gold-corp",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.372793",
+  "last_updated": "2026-03-29T19:55:07",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 1,
+      "regulatory": 1,
+      "financial": 4,
+      "governance": 2
+    },
+    "connection_types": {
+      "corporate": 6
+    },
+    "last_updated": "2026-03-29T19:55:07"
+  },
+  "findings": [
+    {
+      "id": 8573,
+      "finding_type": "corporate",
+      "summary": "Orion Resource Partners holds tripartite conflict as ~9.8% shareholder, ~$95M creditor, and future offtake counterparty \u2014 primary governance risk",
+      "detail": "Orion Resource Partners (SC 13G/A filed November 14, 2024, accession 0000905148-24-003193) held approximately 42,000,000 shares of i-80 Gold as of September 30, 2024, representing approximately 9.8% of outstanding shares. Orion simultaneously holds a Convertible Loan (~$95M total including Gold Prepay and Silver Purchase agreements), has received multiple debt extensions and waivers, and holds a future offtake agreement (Orion Offtake Agreement commencing January 2029 when the Vox Offtake Agreement expires). This tripartite relationship \u2014 major creditor, ~10% shareholder, and future offtake counterparty \u2014 creates significant structural leverage over the Company.",
+      "source_datasets": "edgar,web_search",
+      "confidence": "high",
+      "date_of_event": "2024-11-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8569,
+      "finding_type": "regulatory",
+      "summary": "i-80 Gold transitioned from FPI (40-F) to US domestic filer (10-K) in 2025, triggering Section 16 insider reporting obligations for the first time",
+      "detail": "i-80 Gold Corp. filed its first Form 10-K (for fiscal year 2024) on April 1, 2025, having previously filed Form 40-F as a Foreign Private Issuer. The last 40-F was filed March 12, 2024 for fiscal year 2023. This transition confirmed the Company lost FPI status no later than June 30, 2024, triggering US Section 16 reporting obligations for all directors and officers. The first Form 3 (initial beneficial ownership) appeared on EDGAR on May 8, 2025.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-04-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8572,
+      "finding_type": "financial",
+      "summary": "Directors and officers participated in $12.6M concurrent private placement at public offering price ($0.50/unit) alongside $172.9M bought deal \u2014 CEO invested ~$647K, Chairman ~$100K",
+      "detail": "Concurrent with a $172.9M public bought deal offering (345.8M units at $0.50/unit), i-80 Gold closed a private placement to 'certain directors and officers' of 25.2M units at the same $0.50 price for gross proceeds of $12.6M. CEO Richard Young invested approximately $647,500 (1.295M units) and Chairman Ron Clayton invested $100,000 (200K units). Total insider participation was $12.6M. Each unit comprised one common share and one-half warrant (exercise $0.70, exp. November 16, 2027).",
+      "source_datasets": "edgar,web_search",
+      "confidence": "high",
+      "date_of_event": "2025-05-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8575,
+      "finding_type": "governance",
+      "summary": "Director John Seaman received only 78.8% vote approval at June 2025 AGM \u2014 lowest among all nominees, possibly reflecting governance concerns from Premier Gold legacy",
+      "detail": "At the Company's June 17, 2025 Annual General Meeting, director John Seaman received only 78.8% of votes in favor \u2014 significantly below the 90%+ approval typical for uncontested Canadian mining boards and the lowest among all seven nominees. Richard Young received 96.7%. The differential may reflect institutional shareholder concerns about governance continuity from the Premier Gold Mines era (Seaman was formerly Lead Director and CFO of Premier Gold, i-80's predecessor). Seaman chairs the Audit Committee and sits on the Compensation Committee.",
+      "source_datasets": "web_search",
+      "confidence": "medium",
+      "date_of_event": "2025-06-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8576,
+      "finding_type": "governance",
+      "summary": "Three new independent directors added February 1, 2026 \u2014 six weeks before $500M financing package closed; board refreshment appears timed to financing requirements",
+      "detail": "Three new independent directors \u2014 Ronald Butler Jr., Michael Jalonen, and Steven Yopps \u2014 were appointed effective February 1, 2026. Steven Yopps retired in 2025 after serving as VP Nevada Projects for AngloGold Ashanti. The appointments expanded the Board to nine members. Timing is notable: these appointments were made exactly six weeks before the Franco-Nevada royalty financing closed (March 16, 2026) and seven weeks before the gold prepay facility closed (March 24, 2026). Board refreshment as a condition of institutional financing is a common governance requirement.",
+      "source_datasets": "web_search,edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-02-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8574,
+      "finding_type": "financial",
+      "summary": "FY2025 net loss $198.8M on $95.2M revenue; zero mineral reserves defined at any Nevada property despite 4+ years as public company and $300M+ raised",
+      "detail": "Per the FY2025 Form 10-K (filed February 19, 2026, accession 0001628280-26-009886), i-80 Gold reported a net loss of $198.8M on revenue of $95.2M for fiscal year 2025, with cash used in operating activities of $83.6M. The Company has not defined any mineral reserves at any of its five Nevada properties despite more than four years as a public company and over $300M raised. All properties remain classified as exploration stage under SEC Regulation S-K 1300 despite active underground mining at Granite Creek and Archimedes.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8571,
+      "finding_type": "financial",
+      "summary": "Franco-Nevada acquired $250M NSR royalty on all i-80 Gold Nevada properties at 1.5% rising to 3.0% from 2031 \u2014 permanent escalating royalty burden on future gold production",
+      "detail": "Franco-Nevada U.S. Corporation acquired a net smelter return (NSR) royalty on all of i-80 Gold's Nevada properties for $250 million total consideration ($225M upfront at March 16, 2026 closing + $25M contingent on 2026 Mineral Point spending). The royalty rate is 1.5% initially, escalating to 3.0% beginning in 2031. This is a permanent royalty encumbrance on all five Nevada projects, representing a significant long-term production cost once the Company reaches its target of 300,000\u2013600,000+ oz/year.",
+      "source_datasets": "edgar,web_search",
+      "confidence": "high",
+      "date_of_event": "2026-03-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8570,
+      "finding_type": "financial",
+      "summary": "Nine Form 4 insider filings on 2026-03-27 for transaction date 2026-03-25, including 1,000,000-share open-market purchase at $1.40 ($1.4M), filed 48 hours after $150M gold prepay closed",
+      "detail": "On March 27, 2026, i-80 Gold Corp. filed 9 simultaneous Form 4 reports. Transaction date for the substantive purchases was March 25, 2026 \u2014 two days after the Company closed its $150 million gold prepayment facility with National Bank of Canada and Macquarie Bank (closed March 24, 2026). The largest disclosed transaction was 1,000,000 shares purchased at $1.40 per share ($1,400,000 total) by a single insider. A second insider purchased 6,500 shares at $1.40. The remaining 7 filings showed no transaction detail (likely compensation grants or non-cash items).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "target_name": "i-80 Gold Corp.",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4371,
+      "person_a": "Orion Resource Partners",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "Orion Resource Partners holds approximately 9.8% of i-80 Gold shares (as of Sept 30, 2024), a senior secured Convertible Loan (~$95M), and a future gold offtake agreement commencing January 2029. This tripartite relationship \u2014 shareholder, creditor, and offtake counterparty \u2014 creates a structural conflict of interest and gives Orion substantial leverage over corporate decisions.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "Orion Resource Partners",
+      "other_person_slug": "orion-resource-partners",
+      "evidence": []
+    },
+    {
+      "id": 4372,
+      "person_a": "Franco-Nevada U.S. Corporation",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "Franco-Nevada U.S. Corporation acquired a $250M NSR royalty on all of i-80 Gold's Nevada properties (closed March 16, 2026). Royalty rate is 1.5% initially, escalating to 3.0% from 2031. Franco-Nevada has first-call royalty rights on all Nevada gold production.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "Franco-Nevada U.S. Corporation",
+      "other_person_slug": "franco-nevada-us-corporation",
+      "evidence": []
+    },
+    {
+      "id": 4373,
+      "person_a": "National Bank of Canada",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "National Bank of Canada and Macquarie Bank Limited co-provided a $250M Gold Prepayment Facility to i-80 Gold (closed March 24, 2026; $150M initial advance + $100M accordion). i-80 obligated to deliver 39,978 oz gold over 30 months from January 2028.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "National Bank of Canada",
+      "other_person_slug": "national-bank-of-canada",
+      "evidence": []
+    },
+    {
+      "id": 4375,
+      "person_a": "Richard Young",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "Richard Young is both CEO and Director of i-80 Gold Corp. He has been an active open-market buyer of IAUX shares \u2014 purchasing approximately $2.4M+ in company stock across Feb 2025, May 2025, and March 2026. His purchases cluster around major financing events.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "Richard Young",
+      "other_person_slug": "richard-young",
+      "evidence": []
+    },
+    {
+      "id": 4376,
+      "person_a": "Vox Royalty Corp.",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "Vox Royalty Corp. holds an offtake agreement on i-80 Gold Nevada production through December 2028, after which the Orion Offtake Agreement commences. Vox's agreement was one of the original financing arrangements from the pre-recapitalization period.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "Vox Royalty Corp.",
+      "other_person_slug": "vox-royalty-corp",
+      "evidence": []
+    },
+    {
+      "id": 4377,
+      "person_a": "Auramet International, Inc.",
+      "person_b": "i-80 Gold Corp.",
+      "relationship_type": "corporate",
+      "description": "Auramet International, Inc. provides a $12M working capital prepayment facility to i-80 Gold under an 18-month amended master purchase and sale agreement (effective April 29, 2025). Auramet is a metals marketing and trading firm.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 19:55:07",
+      "profile_id": "hfia",
+      "other_person": "Auramet International, Inc.",
+      "other_person_slug": "auramet-international-inc",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2024-11-14",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Orion Resource Partners holds tripartite conflict as ~9.8% shareholder, ~$95M creditor, and future offtake counterparty \u2014 primary governance risk",
+      "confidence": "high",
+      "id": 8573
+    },
+    {
+      "date": "2025-04-01",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "i-80 Gold transitioned from FPI (40-F) to US domestic filer (10-K) in 2025, triggering Section 16 insider reporting obligations for the first time",
+      "confidence": "high",
+      "id": 8569
+    },
+    {
+      "date": "2025-05-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Directors and officers participated in $12.6M concurrent private placement at public offering price ($0.50/unit) alongside $172.9M bought deal \u2014 CEO invested ~$647K, Chairman ~$100K",
+      "confidence": "high",
+      "id": 8572
+    },
+    {
+      "date": "2025-06-17",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Director John Seaman received only 78.8% vote approval at June 2025 AGM \u2014 lowest among all nominees, possibly reflecting governance concerns from Premier Gold legacy",
+      "confidence": "medium",
+      "id": 8575
+    },
+    {
+      "date": "2026-02-01",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Three new independent directors added February 1, 2026 \u2014 six weeks before $500M financing package closed; board refreshment appears timed to financing requirements",
+      "confidence": "medium",
+      "id": 8576
+    },
+    {
+      "date": "2026-02-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FY2025 net loss $198.8M on $95.2M revenue; zero mineral reserves defined at any Nevada property despite 4+ years as public company and $300M+ raised",
+      "confidence": "high",
+      "id": 8574
+    },
+    {
+      "date": "2026-03-16",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Franco-Nevada acquired $250M NSR royalty on all i-80 Gold Nevada properties at 1.5% rising to 3.0% from 2031 \u2014 permanent escalating royalty burden on future gold production",
+      "confidence": "high",
+      "id": 8571
+    },
+    {
+      "date": "2026-03-25",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Nine Form 4 insider filings on 2026-03-27 for transaction date 2026-03-25, including 1,000,000-share open-market purchase at $1.40 ($1.4M), filed 48 hours after $150M gold prepay closed",
+      "confidence": "high",
+      "id": 8570
+    }
+  ]
+}

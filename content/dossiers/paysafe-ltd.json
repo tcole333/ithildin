@@ -1,0 +1,311 @@
+{
+  "name": "Paysafe Ltd",
+  "slug": "paysafe-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.388181",
+  "last_updated": "2026-03-29T20:30:02",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 4,
+      "financial": 3
+    },
+    "connection_types": {
+      "corporate": 8
+    },
+    "last_updated": "2026-03-29T20:30:02"
+  },
+  "findings": [
+    {
+      "id": 8613,
+      "finding_type": "corporate",
+      "summary": "Paysafe went public via Foley SPAC merger in 2021; pre-SPAC owners were Blackstone and CVC Capital Partners",
+      "detail": "Paysafe entered US markets via SPAC merger with Foley Trasimene Acquisition Corp. II (FTAC, CIK 0001818355). F-4 filed 2020-12-21 (acc 0001193125-20-323264), F-4/A filed 2021-02-01 and 2021-02-25. The SPAC deployed a hybrid UP-C structure with LLC units (Paysafe Bermuda Holdings LLC). Cannae Holdings participated via a Forward Purchase Agreement with FTAC. Pre-SPAC owners were Blackstone and CVC Capital Partners.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2021-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8612,
+      "finding_type": "corporate",
+      "summary": "Paysafe F-3 shelf registration (File No. 333-263910) registered ~540M shares for resale; last 424B3 was April 2022, no active takedown since",
+      "detail": "F-3 registration statement (File No. 333-263910, acc 0000950123-22-003641) converted from F-1. Registered for resale by selling securityholders: up to 490,637,819 common shares (includes 5M shares from private warrant exercise and 20,893,780 shares from LLC unit exchange privilege of Paysafe Bermuda Holdings LLC) plus 5,000,000 warrants. Also covered 48,900,825 shares from public warrant exercise. Final prospectus supplement 424B3 filed 2022-04-22. No new 424B3/424B5 filed since. Company pays registration costs but receives no proceeds from selling securityholder sales.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2022-03-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8609,
+      "finding_type": "corporate",
+      "summary": "Cannae Holdings and William P. Foley II fully exited Paysafe below 5% as of Nov 2025",
+      "detail": "Cannae Holdings, Inc. (Bryan D. Coy, CFO) and William P. Foley II jointly filed Schedule 13D/A Amendment No. 7 and Amendment No. 2 respectively on 2025-11-25, both stating 'the Reporting Persons are not the beneficial owners of more than five percent of the Common Shares of the Issuer.' This marks the completion of the SPAC sponsor's exit from Paysafe, approximately 4+ years after the January 2021 SPAC merger close.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-11-25",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8611,
+      "finding_type": "corporate",
+      "summary": "Paysafe board restructured Feb 2026: 2 resignations, 4 new directors appointed, board expanded to 12",
+      "detail": "6-K filed 2026-02-27 (acc 0001193125-26-079142) reports: Peter Rutland resigned (to non-voting observer status), Matthew Bryant resigned from board and Risk Oversight Committee. Four new directors were appointed: Rupert Keeley, Peter Thompson, Karin Timpone, Edward Wertheim. Board size expanded from 10 to 12. New committee chairs: Heiss (Audit), Brooker (Risk Oversight), Jabbour (Compensation), Keeley (Nominating & Governance). This restructuring triggered 20 mass Form 3 initial beneficial ownership reports filed 2026-03-18.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8614,
+      "finding_type": "financial",
+      "summary": "Paysafe CEO Lowthers holds legacy SPAC-era options at $34.92 and $69.84 \u2014 both deeply underwater at current ~$6.62 market price",
+      "detail": "CEO Bruce F. Lowthers Jr. holds 526,714 common shares directly plus legacy stock options at exercise prices of $34.92 and $69.84 (deeply underwater vs ~$6.62 current price). These options were likely granted at or near the SPAC-era market price. He also holds RSUs in multiple vesting tranches. He is both Director and Officer. Address: 5335 Gate Parkway, 4th Floor, Jacksonville FL 32256.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8610,
+      "finding_type": "financial",
+      "summary": "Paysafe CFO Richard Swales sold 34,618 shares in Feb-Mar 2026 at near-52-week-lows under 10b5-1 plan",
+      "detail": "Richard Swales (CFO, CIK 0001968537) filed Rule 144 Notice on 2026-03-19 disclosing sale of 18,849 common shares at $6.87 via Fidelity Brokerage Services LLC for total proceeds of $129,492.63. This sale occurred the day after Swales filed his initial Form 3 (2026-03-18, 43,140 shares). A prior sale of 15,769 shares on 2026-02-19 at ~$6.28 ($99,125.48) was also disclosed. The 10b5-1 plan was adopted on 2025-11-21. Total shares disposed in ~30 days: 34,618 for ~$228,618.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-19",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8615,
+      "finding_type": "financial",
+      "summary": "Paysafe carries ~$2.4B implied net debt; EV/MarketCap ratio ~7x signals significant leverage overhang from pre-SPAC LBO",
+      "detail": "Paysafe's enterprise value of ~$2.75B versus market cap of ~$380M (as of 2026-03-29) implies approximately $2.4B in net debt. This debt is attributed to the Blackstone/CVC LBO financing carried through the SPAC merger. Key borrowing entities include Paysafe Finance PLC and Paysafe Holdings (US) Corp. (Term Loan) and Paysafe Holdings UK Limited, Paysafe Holdings (US) Corp., and Paysafe Payment Processing Solutions LLC (Revolving Credit). The 52-week high of $18.15 vs current $6.62 represents a 63% decline.",
+      "source_datasets": "edgar,market",
+      "confidence": "medium",
+      "date_of_event": "2026-03-29",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "target_name": "Paysafe Ltd",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4404,
+      "person_a": "Paysafe Ltd",
+      "person_b": "Foley Trasimene Acquisition Corp. II (FTAC)",
+      "relationship_type": "corporate",
+      "description": "Paysafe went public via merger with FTAC (SPAC controlled by William P. Foley II and Cannae Holdings). F-4 filed 2020-12-21. Business combination closed 2021. Cannae held shares via forward purchase agreement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Foley Trasimene Acquisition Corp. II (FTAC)",
+      "other_person_slug": "foley-trasimene-acquisition-corp-ii-ftac",
+      "evidence": []
+    },
+    {
+      "id": 4405,
+      "person_a": "Cannae Holdings Inc",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "Cannae Holdings, Inc. (Foley's vehicle) was the primary SPAC sponsor investor in Paysafe via forward purchase agreement with FTAC. Cannae held a significant position post-merger and filed 7 Schedule 13D/A amendments tracking its progressive exit. Final exit below 5% confirmed 2025-11-25.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Cannae Holdings Inc",
+      "other_person_slug": "cannae-holdings-inc",
+      "evidence": []
+    },
+    {
+      "id": 4409,
+      "person_a": "Anthony M. Jabbour",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "Anthony Jabbour serves as chair of the Paysafe Compensation Committee. He was previously CEO of Black Knight (mortgage fintech) and Dun & Bradstreet under William Foley's ownership, establishing a direct Foley-network connection.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Anthony M. Jabbour",
+      "other_person_slug": "anthony-m-jabbour",
+      "evidence": []
+    },
+    {
+      "id": 4410,
+      "person_a": "Richard Swales",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "Richard Swales (CFO) has sold 34,618 shares ($228K) in Feb\u2013Mar 2026 under a 10b5-1 plan adopted Nov 2025. The timing \u2014 adopting plan when stock was ~$6-7 and selling at ~$6.28\u2013$6.87 near 52-week lows \u2014 warrants attention.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Richard Swales",
+      "other_person_slug": "richard-swales",
+      "evidence": []
+    },
+    {
+      "id": 4411,
+      "person_a": "Paysafe Group Holdings Limited",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "PGHL (Paysafe Group Holdings Limited, England & Wales) is the operating holdco through which Paysafe conducts its UK and EU-regulated payments business. The First Lien debt structure runs through PGHL subsidiaries including Paysafe Finance PLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Paysafe Group Holdings Limited",
+      "other_person_slug": "paysafe-group-holdings-limited",
+      "evidence": []
+    },
+    {
+      "id": 4406,
+      "person_a": "William P. Foley II",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "William P. Foley II was a director of Paysafe and controls Cannae Holdings and Trasimene Capital Management. He personally filed 13D/A filings for Paysafe. The 20-F refers to him as 'a former director' confirming departure from board.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "William P. Foley II",
+      "other_person_slug": "william-p-foley-ii",
+      "evidence": []
+    },
+    {
+      "id": 4407,
+      "person_a": "Blackstone Group",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "Blackstone Group was a pre-SPAC private equity owner of Paysafe (entered ~2017 alongside CVC Capital Partners). Registered up to 603M shares (pre-split) for resale under the F-1. Eli Nagler (Blackstone-connected) remains on the Paysafe board with 0 shares.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "Blackstone Group",
+      "other_person_slug": "blackstone-group",
+      "evidence": []
+    },
+    {
+      "id": 4408,
+      "person_a": "CVC Capital Partners",
+      "person_b": "Paysafe Ltd",
+      "relationship_type": "corporate",
+      "description": "CVC Capital Partners was a co-PE owner of Paysafe alongside Blackstone from ~2017. Shares were registered for resale under the F-1/F-3. Exit status not confirmed but no 13D/G visible for CVC.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-29 20:30:02",
+      "profile_id": "hfia",
+      "other_person": "CVC Capital Partners",
+      "other_person_slug": "cvc-capital-partners",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-01-01",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Paysafe went public via Foley SPAC merger in 2021; pre-SPAC owners were Blackstone and CVC Capital Partners",
+      "confidence": "high",
+      "id": 8613
+    },
+    {
+      "date": "2022-03-28",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Paysafe F-3 shelf registration (File No. 333-263910) registered ~540M shares for resale; last 424B3 was April 2022, no active takedown since",
+      "confidence": "high",
+      "id": 8612
+    },
+    {
+      "date": "2025-11-25",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Cannae Holdings and William P. Foley II fully exited Paysafe below 5% as of Nov 2025",
+      "confidence": "high",
+      "id": 8609
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Paysafe board restructured Feb 2026: 2 resignations, 4 new directors appointed, board expanded to 12",
+      "confidence": "high",
+      "id": 8611
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Paysafe CEO Lowthers holds legacy SPAC-era options at $34.92 and $69.84 \u2014 both deeply underwater at current ~$6.62 market price",
+      "confidence": "high",
+      "id": 8614
+    },
+    {
+      "date": "2026-03-19",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Paysafe CFO Richard Swales sold 34,618 shares in Feb-Mar 2026 at near-52-week-lows under 10b5-1 plan",
+      "confidence": "high",
+      "id": 8610
+    },
+    {
+      "date": "2026-03-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Paysafe carries ~$2.4B implied net debt; EV/MarketCap ratio ~7x signals significant leverage overhang from pre-SPAC LBO",
+      "confidence": "medium",
+      "id": 8615
+    }
+  ]
+}

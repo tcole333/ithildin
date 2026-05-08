@@ -1,0 +1,217 @@
+{
+  "name": "Christine Twait",
+  "slug": "christine-twait",
+  "aliases": [],
+  "profile_ids": [
+    "feeding-our-future"
+  ],
+  "generated_at": "2026-05-07T23:07:36.418574",
+  "last_updated": "2026-03-27T19:14:18",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 4,
+    "total_entities": 1,
+    "finding_types": {
+      "financial": 5
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 1
+    },
+    "last_updated": "2026-03-27T19:14:18"
+  },
+  "findings": [
+    {
+      "id": 8111,
+      "finding_type": "financial",
+      "summary": "FY2024 990 discloses $384,621 insider revolving loan from Christine Twait to Partners in Nutrition",
+      "detail": "The FY2024 Form 990 Schedule L insider transactions section lists Christine Twait as party to two identical entries: '$384,621 REVOLVING LOAN AGREEMENT' classified as a loan. Christine Twait is co-founder and former Executive Director. The nature (direction, terms, interest rate) of the loan is unclear from 990 data alone.",
+      "source_datasets": "propublica_990",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:07:58",
+      "target_name": "Christine Twait",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8150,
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 990 Schedule L: Christine Twait has $384,621 revolving loan with Partners in Nutrition while her apparent husband Aaron Twait serves as Board President",
+      "detail": "The FY2024 Form 990 Schedule L for Partners in Nutrition (EIN 47-4302258) lists Christine Twait as party to two insider loan transactions of $384,621 each (likely a duplicate entry) described as 'REVOLVING LOAN AGREEMENT'. The direction of the loan \u2014 whether Christine Twait is creditor or debtor \u2014 is not specified in the structured e-file data. This loan relationship coexists with Aaron Twait (Christine's apparent husband) serving as Board President. PIQC self-reports a conflict of interest policy (YES) but the revolving loan persists.",
+      "source_datasets": "propublica_990,irs_efile_990",
+      "confidence": "high",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "target_name": "Christine Twait",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8157,
+      "finding_type": "financial",
+      "summary": "Christine Twait / PIQC revolving loan: Twait is the LENDER \u2014 she loaned $384,621 to PIQC; $149,792 balance outstanding at FY2024 year-end. Board-approved, written agreement, no default. Interest rate undisclosed.",
+      "detail": "PIQC FY2024 Form 990 Schedule L Part II, column (d) marks 'X' under 'To' (loan to the organization). The balance sheet confirms: $149,792 appears on Line 22 (liabilities \u2014 payable to insiders), not Line 5 (receivables from insiders). Christine Twait is the creditor. PIQC is the borrower. Original principal $384,621; balance due $149,792; revolving loan agreement; board-approved; written agreement; not in default. Interest rate not disclosed in Schedule L, Schedule O, or supplemental narrative.",
+      "source_datasets": "propublica_990,irs_efile_990",
+      "confidence": "confirmed",
+      "date_of_event": "2024-09-30",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Christine Twait",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8158,
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 interest expense of $7,692 implies Twait loan carries approximately 2.6%\u20135.1% interest, but rate is not publicly disclosed",
+      "detail": "FY2024 Part IX Line 20 shows $7,692 interest expense. PIQC carries two interest-bearing liabilities: the Twait revolving loan ($149,792) and an unsecured note payable to unrelated party ($150,000, Line 24). If interest is split proportionally across both (~$300K total), implied rate is approximately 2.6%. If the full interest is attributable only to the Twait loan: approximately 5.1%. The actual rate is not disclosed. No comparison period provided.",
+      "source_datasets": "propublica_990,irs_efile_990",
+      "confidence": "medium",
+      "date_of_event": "2024-09-30",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Christine Twait",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 8159,
+      "finding_type": "financial",
+      "summary": "PIQC made no payment on the Christine Twait revolving loan in FY2024 despite $18.7M in liquid assets; balance frozen at $149,792 for two consecutive fiscal years; Aaron Twait (apparent husband, Board President) certified the 990",
+      "detail": "FY2023 Schedule L Part IV discloses 'PAYMENT OF REVOLVING LOAN AGREEMENT' as a business transaction with Christine Twait (amount blank). FY2024 Part IV has no entry for Christine Twait. The balance due was $149,792 at FY2023 year-end and remains $149,792 at FY2024 year-end \u2014 zero movement in two consecutive years. PIQC holds $18.7M in liquid assets (98.5% liquid per prior finding) and made no payments on the Twait loan during FY2024. Aaron Twait (Christine's apparent husband, Board President) signed the FY2024 990 certifying this debt.",
+      "source_datasets": "propublica_990,irs_efile_990",
+      "confidence": "medium",
+      "date_of_event": "2024-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 19:14:18",
+      "target_name": "Christine Twait",
+      "profile_id": "feeding-our-future",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4083,
+      "person_a": "Christine Twait",
+      "person_b": "Partners in Nutrition",
+      "relationship_type": "corporate",
+      "description": "Co-founder and former board member Christine Twait is party to a $384,621 revolving loan agreement with PIQC as disclosed in the FY2024 990 Schedule L insider transactions. Terms and direction of the loan are unclear.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 04:07:58",
+      "profile_id": "feeding-our-future",
+      "other_person": "Partners in Nutrition",
+      "other_person_slug": "partners-in-nutrition",
+      "evidence": []
+    },
+    {
+      "id": 4094,
+      "person_a": "Partners In Nutrition",
+      "person_b": "Christine Twait",
+      "relationship_type": "financial",
+      "description": "Christine Twait holds a $149,792 revolving insider loan to PIQC as of FY2024, four years after she co-founded Feeding Our Future while serving as PIQC co-ED. She is described as 'former board member' in FY2022 filings. The continuing financial relationship (insider loan) between PIQC and a key Feeding Our Future founder is a significant network connection.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "profile_id": "feeding-our-future",
+      "other_person": "Partners In Nutrition",
+      "other_person_slug": "partners-in-nutrition",
+      "evidence": []
+    },
+    {
+      "id": 3917,
+      "person_a": "Christine Twait",
+      "person_b": "Feeding Our Future",
+      "relationship_type": "corporate",
+      "description": "Christine Twait co-incorporated Feeding Our Future with Bock in November 2016 while both worked at Partners in Nutrition. She later fired Bock from Partners in Nutrition in 2018.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-26 18:48:45",
+      "profile_id": "feeding-our-future",
+      "other_person": "Feeding Our Future",
+      "other_person_slug": "feeding-our-future",
+      "evidence": []
+    },
+    {
+      "id": 4095,
+      "person_a": "Aaron Twait",
+      "person_b": "Christine Twait",
+      "relationship_type": "corporate",
+      "description": "Aaron Twait (current PIQC Board President) and Christine Twait (former PIQC co-ED, FoF co-founder, insider loan holder) share surname \u2014 possible family relationship. If confirmed, board control of PIQC's $18.8M in assets rests with a person related to a principal in the competing fraud scheme.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-27 15:46:55",
+      "profile_id": "feeding-our-future",
+      "other_person": "Aaron Twait",
+      "other_person_slug": "aaron-twait",
+      "evidence": []
+    }
+  ],
+  "entities": [
+    {
+      "role": "Co-founder; Board Member / Former Executive Director",
+      "date_start": null,
+      "date_end": null,
+      "source": "propublica_990,web_reporting",
+      "entity_id": 1788,
+      "entity_name": "Partners in Nutrition",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "FY2024 990 discloses $384,621 insider revolving loan from Christine Twait to Partners in Nutrition",
+      "confidence": "high",
+      "id": 8111
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 990 Schedule L: Christine Twait has $384,621 revolving loan with Partners in Nutrition while her apparent husband Aaron Twait serves as Board President",
+      "confidence": "high",
+      "id": 8150
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Christine Twait / PIQC revolving loan: Twait is the LENDER \u2014 she loaned $384,621 to PIQC; $149,792 balance outstanding at FY2024 year-end. Board-approved, written agreement, no default. Interest rate undisclosed.",
+      "confidence": "confirmed",
+      "id": 8157
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC FY2024 interest expense of $7,692 implies Twait loan carries approximately 2.6%\u20135.1% interest, but rate is not publicly disclosed",
+      "confidence": "medium",
+      "id": 8158
+    },
+    {
+      "date": "2024-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "PIQC made no payment on the Christine Twait revolving loan in FY2024 despite $18.7M in liquid assets; balance frozen at $149,792 for two consecutive fiscal years; Aaron Twait (apparent husband, Board President) certified the 990",
+      "confidence": "medium",
+      "id": 8159
+    }
+  ]
+}

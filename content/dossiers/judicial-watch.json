@@ -7,11 +7,11 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.928233",
-  "last_updated": "2026-03-11T05:01:27",
+  "generated_at": "2026-05-07T23:07:36.291101",
+  "last_updated": "2026-03-23T18:55:37",
   "stats": {
     "total_findings": 11,
-    "total_connections": 7,
+    "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
       "legal": 4,
@@ -23,9 +23,9 @@
       "controls": 1,
       "employment": 2,
       "political": 2,
-      "legal": 2
+      "legal": 3
     },
-    "last_updated": "2026-03-11T05:01:27"
+    "last_updated": "2026-03-23T18:55:37"
   },
   "findings": [
     {
@@ -72,6 +72,46 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Judicial Watch press releases; SCOTUS docket 25-379",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6644,
+      "finding_type": "legal",
+      "summary": "JW won SCOTUS standing ruling in Bost v. Illinois (Jan 2026, 7-2) - candidates now have automatic standing to challenge ballot-counting",
+      "detail": "Bost v. Illinois State Board of Elections (607 U.S. ___ (2026)): Filed by JW on behalf of Rep. Mike Bost and two presidential electors, challenging Illinois law allowing mail-in ballots received up to 14 days after Election Day. SCOTUS ruled 7-2 (Jan 14, 2026) that candidates have standing to challenge ballot-counting procedures regardless of whether they affect election outcome. Case remanded to lower courts on merits. Companion case Watson v. RNC (Mississippi 5-day grace period) is set for SCOTUS oral argument March 23, 2026 - this case will decide the merits of whether federal law preempts state post-Election Day ballot receipt rules. If Watson goes JW's way, it would invalidate grace periods in ~30 states.",
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:57:31",
+      "target_name": "Judicial Watch",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ballotpedia.org Watson v. RNC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "scotusblog.com Bost analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "supreme.justia.com/cases/federal/us/607/24-568",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -234,46 +274,6 @@
         {
           "evidence_type": "file",
           "evidence_ref": "judicialwatch.org/5m-names-cleaned-voter-rolls",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6644,
-      "finding_type": "legal",
-      "summary": "JW won SCOTUS standing ruling in Bost v. Illinois (Jan 2026, 7-2) - candidates now have automatic standing to challenge ballot-counting",
-      "detail": "Bost v. Illinois State Board of Elections (607 U.S. ___ (2026)): Filed by JW on behalf of Rep. Mike Bost and two presidential electors, challenging Illinois law allowing mail-in ballots received up to 14 days after Election Day. SCOTUS ruled 7-2 (Jan 14, 2026) that candidates have standing to challenge ballot-counting procedures regardless of whether they affect election outcome. Case remanded to lower courts on merits. Companion case Watson v. RNC (Mississippi 5-day grace period) is set for SCOTUS oral argument March 23, 2026 - this case will decide the merits of whether federal law preempts state post-Election Day ballot receipt rules. If Watson goes JW's way, it would invalidate grace periods in ~30 states.",
-      "source_datasets": [
-        "web_search",
-        "courtlistener"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-11 04:57:31",
-      "target_name": "Judicial Watch",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ballotpedia.org Watson v. RNC",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "scotusblog.com Bost analysis",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "supreme.justia.com/cases/federal/us/607/24-568",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -505,6 +505,28 @@
       ]
     },
     {
+      "id": 3620,
+      "person_a": "Judicial Watch",
+      "person_b": "Michael Bost",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:55:37",
+      "profile_id": "tech-right",
+      "other_person": "Michael Bost",
+      "other_person_slug": "michael-bost",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "supremecourt.gov/docket/24-568",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3304,
       "person_a": "America First Legal Foundation",
       "person_b": "Judicial Watch",
@@ -537,6 +559,14 @@
       "summary": "JW files amicus briefs supporting PILF NVRA cases, and vice versa. JW filed amicus in PILF v. Schmidt (PA voter rolls/SCOTUS) and PILF Michigan case. JW also filed amicus supporting Maine voter list access ruling. DOJ filed brief supporting PILF right to PA noncitizen voter records - demonstrating three-way coordination between JW, PILF, and DOJ.",
       "confidence": "medium",
       "id": 6661
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "JW won SCOTUS standing ruling in Bost v. Illinois (Jan 2026, 7-2) - candidates now have automatic standing to challenge ballot-counting",
+      "confidence": "confirmed",
+      "id": 6644
     }
   ],
   "curation": {

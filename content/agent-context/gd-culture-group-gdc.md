@@ -1,0 +1,20 @@
+# GD Culture Group (GDC)
+**Stats**: 9 findings, 5 connections, 0 entities
+**Dossier**: /dossiers/gd-culture-group-gdc
+
+## Key Findings
+- **[identity/confirmed]** GDC corporate history reveals serial shell company: (1) JM Global Holding Co - blank check SPAC, Delaware April 2015. (2) TMSR Holding Company - after reverse merger with Chinese recycling company. (3) Code Chain New Continent - another pivot. (4) GD Culture Group - name changed Jan 2023. CEO Xiaojian Wang (age 36) appointed April 2023, formerly VP Biz Dev at Foregrowth Inc Vancouver and interbank trader at China Minsheng Bank. CFO Zihao Zhao (30) formerly PwC Shanghai auditor. No officers or directors own any GDC stock. Company had .1M net loss in 2024 and received Nasdaq stockholders equity deficiency notice March 2025. (Finding #4161)
+- **[financial/confirmed]** GDC 5% beneficial ownership table as of Sep 8 2025 (DEF 14C) shows concentrated ownership by Chinese nationals and opaque offshore entities: Jiang Liu (9.29% 1.56M shares), ABOUT INVESTMENT PTE LTD (6.92% Singapore, sole director Li Jiaming at 1 Shenton Way), Gongzheng Xu (7.28% 1.22M shares), Qing Wang (7.28% 1.22M shares), VINER TOTAL INVESTMENTS FUND (6.64% 1.12M shares GP is Apollo Asset Management Ltd Hong Kong at 141 Des Voeux Road Central). None of these are the officers. All holdings acquired in 2025 -- the Dec 2024 10-K showed zero 5% holders. (Finding #4162)
+- **[financial/confirmed]** Vista Frontier Investments Limited identified as unnamed BVI investor in M crypto treasury deal (Finding #5053)
+- **[financial/confirmed]** GDC authorized 50x share increase (200M to 10B common, 20M to 1B preferred) to facilitate crypto deals (Finding #5055)
+- **[financial/high]** Gongzheng Xu (7.28% GDC shareholder) and Qing Wang (7.28%) sold unspecified software to GDC for .77M payable in 2.44M shares at .36/share on April 28-29, 2025 -- weeks before the M Vista Frontier agreement. Despite being described as sellers unaffiliated with the Company in the 8-K, both later appear as Pallas-related shareholders. Gongzheng Xu appears as 5% holder in the Sep 2025 DEF 14C but not in the Dec 2025 proxy. (Finding #4160)
+- **[financial/high]** GDC announced M crypto treasury to buy Bitcoin and TRUMP token via unnamed BVI investor (Finding #5029)
+- **[financial/high]** GDC acquired Pallas Capital Holding (BVI) with 7,500 Bitcoin (M) via all-share deal (Finding #5032)
+- **[financial/medium]** GDC Pallas acquisition was a related-party transaction where a BVI shell company incorporated June 30 2025 with zero operations and M in Bitcoin was exchanged for 39.2M GDC shares (233% dilution). Pallas directors Yan Wang (4.12%) and Qing Wang (7.28%) were pre-existing GDC shareholders. The 10-Q confirms Pallas had no operations except holding Bitcoin and was treated as an asset acquisition with excess fair value recorded as capital contribution. Bitcoin cost basis was M (roughly K per BTC). Despite receiving 16.6% of post-deal shares each, neither Yan Wang nor Qing Wang filed SC 13D. December 2025 proxy lists NO 5% beneficial owners despite multiple holders exceeding threshold. (Finding #4159)
+
+## Top Connections
+- **Yan Wang** [corporate/strong]: Pre-existing 4.12% shareholder who became director of Pallas Capital to facilitate M Bitcoin acquisition; no disclosed role at GDC
+- **Vista Frontier Investments Limited** [financial/strong]: BVI LLC committed to purchase up to M of GDC common stock at 90% of lowest 5-day VWAP; funds for Bitcoin and TRUMP token purchases
+- **Univest Securities LLC** [financial/strong]: Sole placement agent for all GDC capital raises 2023-2025; FINRA-sanctioned for AML failures in low-priced stocks
+- **VINER TOTAL INVESTMENTS FUND** [financial/medium]: Hong Kong-based fund (GP: Apollo Asset Management Ltd HK at 141 Des Voeux Road Central) holding 6.64% of GDC pre-Pallas deal
+- **ABOUT INVESTMENT PTE LTD** [financial/medium]: Singapore entity (sole director Li Jiaming at 1 Shenton Way) holding 6.92% of GDC pre-Pallas deal

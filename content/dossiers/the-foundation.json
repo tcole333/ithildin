@@ -6,25 +6,76 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.962414",
-  "last_updated": "2026-03-06T17:38:36",
+  "generated_at": "2026-05-07T23:07:36.322670",
+  "last_updated": "2026-03-23T18:58:24",
   "stats": {
-    "total_findings": 9,
-    "total_connections": 6,
+    "total_findings": 10,
+    "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "financial": 5,
-      "identity": 1,
       "intelligence": 1,
+      "financial": 6,
+      "identity": 1,
       "relationship": 2
     },
     "connection_types": {
       "financial": 2,
-      "corporate": 4
+      "corporate": 4,
+      "funds": 1
     },
-    "last_updated": "2026-03-06T17:38:36"
+    "last_updated": "2026-03-23T18:58:24"
   },
   "findings": [
+    {
+      "id": 5565,
+      "finding_type": "intelligence",
+      "summary": "The Foundation (TX 0804444372, inc 2022-02-11) is a Foreign Nonprofit Corporation also known as The X Foundation. Registered at 700 Milam Street Suite 1300 Houston TX. Officers: Birchall (president and director), RONALD F. GONG (secretary and director, PO BOX 341886), TERESA HOLLAND (treasurer and director, PO BOX 341886). Agent: GKL Registered Agents Inc (1200 Steck Ave Ste 200 Austin TX). This entity shares the PO BOX 341886 address pattern. The X Foundation naming suggests connection to X Corp (formerly Twitter). Gong and Holland are additional Musk network officers who warrant further investigation.",
+      "detail": null,
+      "source_datasets": [
+        "opencorporates"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-02-11",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:20:45",
+      "target_name": "The Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OC:us_tx/0804444372",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5599,
+      "finding_type": "financial",
+      "summary": "The Foundation (EIN 92-0742101, PO BOX 341886, Austin TX 78734) shares exact same PO Box as Musk Foundation. Filed as 501(c)(3) with ruling date 2023-04-01. NTEE code B20 (Education). 2023 990 shows revenue of .1M, expenses ,385, and assets of M. This is almost certainly the Musk-linked entity referred to as 'The Foundation' or 'The X Foundation' in corporate records. Birchall, Gong, and Holland are known officers.",
+      "detail": null,
+      "source_datasets": [
+        "990"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2023-04-01",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:34:58",
+      "target_name": "The Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:920742101",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4440,
       "finding_type": "financial",
@@ -65,56 +116,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ProPublica EIN 920742101; LittleSis entity 439493; IRS 990 2023",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5565,
-      "finding_type": "intelligence",
-      "summary": "The Foundation (TX 0804444372, inc 2022-02-11) is a Foreign Nonprofit Corporation also known as The X Foundation. Registered at 700 Milam Street Suite 1300 Houston TX. Officers: Birchall (president and director), RONALD F. GONG (secretary and director, PO BOX 341886), TERESA HOLLAND (treasurer and director, PO BOX 341886). Agent: GKL Registered Agents Inc (1200 Steck Ave Ste 200 Austin TX). This entity shares the PO BOX 341886 address pattern. The X Foundation naming suggests connection to X Corp (formerly Twitter). Gong and Holland are additional Musk network officers who warrant further investigation.",
-      "detail": null,
-      "source_datasets": [
-        "opencorporates"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:20:45",
-      "target_name": "The Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "OC:us_tx/0804444372",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5599,
-      "finding_type": "financial",
-      "summary": "The Foundation (EIN 92-0742101, PO BOX 341886, Austin TX 78734) shares exact same PO Box as Musk Foundation. Filed as 501(c)(3) with ruling date 2023-04-01. NTEE code B20 (Education). 2023 990 shows revenue of .1M, expenses ,385, and assets of M. This is almost certainly the Musk-linked entity referred to as 'The Foundation' or 'The X Foundation' in corporate records. Birchall, Gong, and Holland are known officers.",
-      "detail": null,
-      "source_datasets": [
-        "990"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 23:34:58",
-      "target_name": "The Foundation",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "990:920742101",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -247,6 +248,46 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7226,
+      "finding_type": "financial",
+      "summary": "The Foundation (EIN 920742101) received 192M+ from Musk Foundation in 2022-2023, holds 270M in assets, plans STEM school and university in Austin",
+      "detail": "The Foundation, a 501(c)(3) at PO Box 341886 Austin TX (NTEE code B20 - education), received enormous grants from Musk Foundation: 89.9M in 2022, 102.3M + 34.8M in 2023 (total ~227M). First-year 990 (tax period 2023-06) shows: Revenue 100.1M (99.9M contributions, 169K investment income), expenses only 25K, assets 202.9M. Latest BMF data shows assets of 270M and income of 138M. Care of Steven J Chidester (tax attorney at Withersworldwide). Trustees include Jared Birchall, Steven Chidester, Ronald Gong, and Teresa Holland (Catalyst Family Office). The Foundation plans to create Texas Institute of Technology and Science - STEM K-12 school plus university in Austin. Officers not yet in 990 bulk database. No compensation paid to officers.",
+      "source_datasets": [
+        "990",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:57:01",
+      "target_name": "The Foundation",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:EIN_920742101_The_Foundation_revenue_100110359_assets_202982507",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2023/12/13/elon-musk-donation-new-university-austin/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -372,10 +413,49 @@
       "other_person": "Jared Birchall",
       "other_person_slug": "jared-birchall",
       "evidence": []
+    },
+    {
+      "id": 3635,
+      "person_a": "Musk Foundation",
+      "person_b": "The Foundation",
+      "relationship_type": "funds",
+      "description": "Musk Foundation granted 227M+ to The Foundation across 2022-2023 (89.9M in 2022, 137M in 2023)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:24",
+      "profile_id": "tech-right",
+      "other_person": "Musk Foundation",
+      "other_person_slug": "musk-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:852133087",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2022-02-11",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "The Foundation (TX 0804444372, inc 2022-02-11) is a Foreign Nonprofit Corporation also known as The X Foundation. Registered at 700 Milam Street Suite 1300 Houston TX. Officers: Birchall (president and director), RONALD F. GONG (secretary and director, PO BOX 341886), TERESA HOLLAND (treasurer and director, PO BOX 341886). Agent: GKL Registered Agents Inc (1200 Steck Ave Ste 200 Austin TX). This entity shares the PO BOX 341886 address pattern. The X Foundation naming suggests connection to X Corp (formerly Twitter). Gong and Holland are additional Musk network officers who warrant further investigation.",
+      "confidence": "high",
+      "id": 5565
+    },
+    {
+      "date": "2023-04-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "The Foundation (EIN 92-0742101, PO BOX 341886, Austin TX 78734) shares exact same PO Box as Musk Foundation. Filed as 501(c)(3) with ruling date 2023-04-01. NTEE code B20 (Education). 2023 990 shows revenue of .1M, expenses ,385, and assets of M. This is almost certainly the Musk-linked entity referred to as 'The Foundation' or 'The X Foundation' in corporate records. Birchall, Gong, and Holland are known officers.",
+      "confidence": "medium",
+      "id": 5599
+    }
+  ],
   "curation": {
     "key_finding_ids": [
       4440,
@@ -486,90 +566,5 @@
         "rationale": "The Foundation's board is staffed entirely by members of Musk's private office network, with no external participants despite the stated educational mission. This governance pattern \u2014 Birchall as president of the charity while simultaneously heading the family office and serving as an officer at multiple operating companies \u2014 is consistent with the private-order model's description of cross-institutional coordination through a single trusted insider."
       }
     ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "The Foundation",
-      "connections": [
-        {
-          "target": "Musk Foundation",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "IRS 990 EIN 920742101",
-          "description": "Musk Foundation granted 137M to The Foundation in 2023, 100M seed in 2022. Both controlled by Birchall. The Foundation at same PO Box 341886 as Musk family office. 68% of Musk Foundation grants go to Musk-controlled entities."
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis entity 439493",
-          "description": "Birchall is president of The Foundation (EIN 92-0742101), which received $137M from Musk Foundation in 2023 and $470M in 2024"
-        },
-        {
-          "target": "Ronald F. Gong",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Secretary and director alongside Birchall and Teresa Holland. PO BOX 341886 Austin TX. Also known as The X Foundation."
-        },
-        {
-          "target": "Musk Foundation",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica 990 EIN 852133087, 920742101",
-          "description": "Both entities share PO BOX 341886, Austin TX 78734; The Foundation is Musk's education-focused 501c3 with M+ revenue"
-        },
-        {
-          "target": "Musk Foundation",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Musk Foundation sends 607M (2022-2024) to The Foundation which warehouses it at 0.03% expenditure rate"
-        },
-        {
-          "target": "Jared Birchall",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Birchall is President of The Foundation while also heading Excession LLC family office and serving as officer at Neuralink, xAI, Boring Company, and Foundation Security"
-        }
-      ],
-      "secondHop": {
-        "Jared Birchall": [
-          {
-            "target": "X.AI Holdings Corp",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall signed both Form D filings as Corporate Secretary of X.AI Holdings Corp"
-          },
-          {
-            "target": "Musk Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall controls Musk Foundation grantmaking and is president of The Foundation, the primary grant recipient"
-          },
-          {
-            "target": "Neuralink Corporation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as CFO and government POC on Neuralink SAM.gov registration (UEI JGGFP357J8B8). PSC codes indicate positioning for federal R&D medical contracts."
-          },
-          {
-            "target": "Red Planet Ventures I LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920034."
-          },
-          {
-            "target": "Red Planet Ventures II, LLC",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Birchall listed as manager per OpenCorporates. TX SoS 0805920052."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": []
   }
 }

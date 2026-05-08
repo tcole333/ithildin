@@ -1,0 +1,321 @@
+{
+  "name": "Arbe Robotics Ltd.",
+  "slug": "arbe-robotics-ltd",
+  "aliases": [],
+  "profile_ids": [
+    "hfia"
+  ],
+  "generated_at": "2026-05-07T23:07:36.352435",
+  "last_updated": "2026-03-30T03:19:57",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "corporate": 1,
+      "financial": 5,
+      "governance": 2
+    },
+    "connection_types": {
+      "controls": 1,
+      "corporate": 6
+    },
+    "last_updated": "2026-03-30T03:19:57"
+  },
+  "findings": [
+    {
+      "id": 8702,
+      "finding_type": "corporate",
+      "summary": "Arbe Robotics went public via SPAC merger with Industrial Tech Acquisitions Corp (ITAC). The SPAC legacy structure includes two outstanding warrant tranches totaling 16,263,732 shares: ~8.1M at $1.82 expiring 2027 and ~8.1M at $2.35 expiring 2029 \u2014 both deeply out of the money at the January 2026 offering price of $1.40.",
+      "detail": "Additionally 3,112,080 'ITAC Warrants' (issued to prior ITAC holders in connection with the IPO) remain outstanding. Total SPAC-legacy warrant overhang: ~19.4M shares. These warrants represent structural dilution from the SPAC deal that depresses the company's ability to raise equity at accretive prices. The company trades and has raised equity well below the warrant strike prices, suggesting these warrants may expire worthless.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2021-11-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8700,
+      "finding_type": "financial",
+      "summary": "Two unidentified filing entities (EDGAR CIK 1974078 and CIK 1976408) filed 18 Form 144 notices with respect to Arbe Robotics shares between December 2024 and December 2025, indicating sustained planned insider selling throughout the year.",
+      "detail": "CIK 1974078 filed at least 7 Form 144s across 2025 (Jan, Apr, May x3, Jun, Sep x3). CIK 1976408 filed multiple 144s in Dec 2024, Jan 2025, Apr 2025, and Dec 2025. Both CIKs could not be resolved to named entities via EDGAR company lookup (returned 404 \u2014 consistent with individual filer CIK format). The volume and frequency suggests these are institutional sponsors, VC backers, or SPAC founders with registered shares eligible for Rule 144 resale. Form 144 XML content was not accessible due to SEC rate limiting.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2025-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8696,
+      "finding_type": "financial",
+      "summary": "Arbe Robotics issued NIS 57.6M additional Series A Convertible Bonds to Israeli accredited investors on December 29, 2025, raising NIS 50.2M (~$15.7M gross) held in escrow. Total Series A bond outstanding: NIS 89.14M. Escrow release conditions must be met by December 31, 2026.",
+      "detail": "The Additional Series A Convertible Bonds have identical terms to the existing Series A bonds. Total escrowed proceeds across both tranches: ~$24.3M. The bonds are listed on TASE under symbol ARBE.C1. The Dec 2025 tranche is convertible to 6,044,071 Arbe ordinary shares; the prior tranche converts to 3,309,320 shares. An F-3 (File No. 333-292838) was filed Jan 20, 2026 and went effective Jan 29, 2026 to register these conversion shares.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2025-12-29",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8701,
+      "finding_type": "financial",
+      "summary": "The near-simultaneous filing of a 424B5 equity offering (Jan 27) and a new F-3 for TASE bond conversion shares (Jan 20) suggests Arbe Robotics was managing multiple dilution tracks concurrently. The F-3 conversion shares would compete with the 424B5 buyers in the secondary market once effective.",
+      "detail": "The F-3 (333-292838) became effective January 29, 2026 \u2014 just two days after the 424B5 closed. This means the 6,044,071 TASE bond conversion shares became eligible for public sale almost immediately after the underwritten offering closed. Combined with the 3,309,320 prior-tranche conversion shares already registered, a total of ~9.35M potential conversion shares were market-eligible. This adds to the stated overhangs (43M+ dilutive securities). The 90-day lock-up in the Underwriting Agreement contains 'certain exceptions' that may exempt the TASE conversion shares.",
+      "source_datasets": "edgar",
+      "confidence": "medium",
+      "date_of_event": "2026-01-20",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8695,
+      "finding_type": "financial",
+      "summary": "Arbe Robotics closed a $18.5M underwritten public offering on January 27, 2026: 13,225,000 shares at $1.40 (including full overallotment exercise), via Canaccord Genuity, Roth Capital, WestPark Capital. Net proceeds ~$17.2M after 6% underwriter commission. Company stated use: working capital and general corporate purposes.",
+      "detail": "The Jan 2026 offering was priced at $1.40/share, a ~17.6% discount to the Jan 23, 2026 Nasdaq close of $1.70. The over-allotment of 1,725,000 shares was exercised in full (confirmed in 6-K filed Jan 27, 2026). The 90-day lock-up expires ~April 27, 2026, coinciding with the CEO handoff to Ram Machness. Accession: 0001213900-26-007989 (424B5), 0001213900-26-008021 (6-K).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-01-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8697,
+      "finding_type": "governance",
+      "summary": "Arbe Robotics announced CEO transition on February 26, 2026: Ram Machness to assume CEO role effective April 1, 2026. Kobi Marenko (Jacob Marinka), co-founder, steps down to President role while remaining as director.",
+      "detail": "The announcement was made in a 6-K filed February 26, 2026, simultaneous with Q4/FY2025 earnings. Ram Machness filed a Form 3 on March 18, 2026 as 'Director + Officer' with 5,438 direct and 277,257 indirect shares. The CEO transition timing aligns with the expiry of the January 2026 offering 90-day lock-up (~April 27, 2026) and precedes the TASE bond escrow deadline (December 31, 2026).",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-02-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8699,
+      "finding_type": "governance",
+      "summary": "Ten Arbe Robotics insiders filed initial Form 3 ownership reports on March 18, 2026, triggered by HFIA Section 16 reporting obligations. Insiders include 7 director/officers and 3 directors holding an aggregate ~7.7M shares directly and indirectly.",
+      "detail": "Key holders: Noam Arkind (1,823,982 direct + 185,000 indirect), Jacob Marinka/Kobi Marenko (1,614,232 + 185,000), Yair Shamir (1,897,436 indirect only), Eugene Scott Crist (964,182 + 340,000 indirect), Ram Machness (5,438 + 277,257). Thilo Koslowski disclosed no shareholding. Karine Pinto Flomenboim (CFO) holds 110,626 + 45,000 shares. All filers use the company address: HaHashmonaim St. 107, Tel Aviv.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    },
+    {
+      "id": 8698,
+      "finding_type": "financial",
+      "summary": "Arbe Robotics 20-F (FY2025) reports net loss of $46.4M on $1.0M revenue for 2025; $49.3M loss on $0.8M revenue for 2024; $43.5M loss on $1.5M revenue for 2023. R&D expenses ~$34.8M in 2025. Working capital $38.9M as of December 31, 2025. Accumulated deficit $287.97M as of September 30, 2025.",
+      "detail": "The company has been R&D stage since 2017 and did not generate revenue until 2020. No product has achieved commercial-scale delivery. The 20-F states chipset expected to enter production 'later this year' (2026) but acknowledges prior production milestones were missed. Post-January 2026 offering, implied runway is ~15 months at current burn rate (to approximately Q2-Q3 2027), assuming escrowed TASE bond funds eventually accessible.",
+      "source_datasets": "edgar",
+      "confidence": "high",
+      "date_of_event": "2026-03-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "target_name": "Arbe Robotics Ltd.",
+      "profile_id": "hfia",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 4490,
+      "person_a": "Jacob Marinka",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "controls",
+      "description": "Jacob Marinka (Kobi Marenko) co-founded Arbe Robotics and served as CEO until April 1, 2026, when he transitioned to President role. Filed Form 3 as Director + Officer on March 18, 2026 with 1.8M shares.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Jacob Marinka",
+      "other_person_slug": "jacob-marinka",
+      "evidence": []
+    },
+    {
+      "id": 4491,
+      "person_a": "Ram Machness",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Ram Machness was named incoming CEO effective April 1, 2026, replacing Kobi Marenko. He filed Form 3 as Director + Officer. His low share count (5,438 direct) relative to founding team suggests he joined later or has fewer accumulated equity grants.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Ram Machness",
+      "other_person_slug": "ram-machness",
+      "evidence": []
+    },
+    {
+      "id": 4492,
+      "person_a": "Canaccord Genuity LLC",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Canaccord Genuity LLC served as sole bookrunner for the January 2026 424B5 underwritten offering ($18.5M gross). This represents a repeat engagement relationship \u2014 Canaccord also acted in the prior F-3 shelf registration cycle.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Canaccord Genuity LLC",
+      "other_person_slug": "canaccord-genuity-llc",
+      "evidence": []
+    },
+    {
+      "id": 4493,
+      "person_a": "Mishmeret Trust Company Ltd.",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Mishmeret Trust Company Ltd. is the trustee for the TASE Series A Convertible Bonds and custodian of ~$24.3M in escrowed proceeds. The December 31, 2026 escrow release deadline creates a principal-agent pressure point between the trustee and Arbe Robotics management.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Mishmeret Trust Company Ltd.",
+      "other_person_slug": "mishmeret-trust-company-ltd",
+      "evidence": []
+    },
+    {
+      "id": 4494,
+      "person_a": "Yair Shamir",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Yair Shamir holds 1,897,436 Arbe Robotics shares indirectly (through an entity per F1 footnote). As a director with purely indirect holdings, he likely represents a fund or institutional investor on the board.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Yair Shamir",
+      "other_person_slug": "yair-shamir",
+      "evidence": []
+    },
+    {
+      "id": 4495,
+      "person_a": "Eugene Scott Crist",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Eugene Scott Crist holds 964,182 direct + 340,000 indirect shares as an Arbe Robotics officer. The indirect holding via entity (footnote F1) suggests he may have a related investment vehicle co-investing alongside the company.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Eugene Scott Crist",
+      "other_person_slug": "eugene-scott-crist",
+      "evidence": []
+    },
+    {
+      "id": 4497,
+      "person_a": "Form 144 Filer CIK 1974078",
+      "person_b": "Arbe Robotics Ltd.",
+      "relationship_type": "corporate",
+      "description": "Unidentified Form 144 filer (EDGAR CIK 1974078) has filed 7+ sale notices against Arbe Robotics shares throughout 2025, suggesting a major pre-existing shareholder with a large registered position conducting systematic monetization.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-30 03:19:57",
+      "profile_id": "hfia",
+      "other_person": "Form 144 Filer CIK 1974078",
+      "other_person_slug": "form-144-filer-cik-1974078",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2021-11-04",
+      "type": "finding",
+      "finding_type": "corporate",
+      "summary": "Arbe Robotics went public via SPAC merger with Industrial Tech Acquisitions Corp (ITAC). The SPAC legacy structure includes two outstanding warrant tranches totaling 16,263,732 shares: ~8.1M at $1.82 expiring 2027 and ~8.1M at $2.35 expiring 2029 \u2014 both deeply out of the money at the January 2026 offering price of $1.40.",
+      "confidence": "high",
+      "id": 8702
+    },
+    {
+      "date": "2025-12-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Two unidentified filing entities (EDGAR CIK 1974078 and CIK 1976408) filed 18 Form 144 notices with respect to Arbe Robotics shares between December 2024 and December 2025, indicating sustained planned insider selling throughout the year.",
+      "confidence": "medium",
+      "id": 8700
+    },
+    {
+      "date": "2025-12-29",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Arbe Robotics issued NIS 57.6M additional Series A Convertible Bonds to Israeli accredited investors on December 29, 2025, raising NIS 50.2M (~$15.7M gross) held in escrow. Total Series A bond outstanding: NIS 89.14M. Escrow release conditions must be met by December 31, 2026.",
+      "confidence": "high",
+      "id": 8696
+    },
+    {
+      "date": "2026-01-20",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "The near-simultaneous filing of a 424B5 equity offering (Jan 27) and a new F-3 for TASE bond conversion shares (Jan 20) suggests Arbe Robotics was managing multiple dilution tracks concurrently. The F-3 conversion shares would compete with the 424B5 buyers in the secondary market once effective.",
+      "confidence": "medium",
+      "id": 8701
+    },
+    {
+      "date": "2026-01-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Arbe Robotics closed a $18.5M underwritten public offering on January 27, 2026: 13,225,000 shares at $1.40 (including full overallotment exercise), via Canaccord Genuity, Roth Capital, WestPark Capital. Net proceeds ~$17.2M after 6% underwriter commission. Company stated use: working capital and general corporate purposes.",
+      "confidence": "high",
+      "id": 8695
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Arbe Robotics announced CEO transition on February 26, 2026: Ram Machness to assume CEO role effective April 1, 2026. Kobi Marenko (Jacob Marinka), co-founder, steps down to President role while remaining as director.",
+      "confidence": "high",
+      "id": 8697
+    },
+    {
+      "date": "2026-03-18",
+      "type": "finding",
+      "finding_type": "governance",
+      "summary": "Ten Arbe Robotics insiders filed initial Form 3 ownership reports on March 18, 2026, triggered by HFIA Section 16 reporting obligations. Insiders include 7 director/officers and 3 directors holding an aggregate ~7.7M shares directly and indirectly.",
+      "confidence": "high",
+      "id": 8699
+    },
+    {
+      "date": "2026-03-27",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Arbe Robotics 20-F (FY2025) reports net loss of $46.4M on $1.0M revenue for 2025; $49.3M loss on $0.8M revenue for 2024; $43.5M loss on $1.5M revenue for 2023. R&D expenses ~$34.8M in 2025. Working capital $38.9M as of December 31, 2025. Accumulated deficit $287.97M as of September 30, 2025.",
+      "confidence": "high",
+      "id": 8698
+    }
+  ]
+}

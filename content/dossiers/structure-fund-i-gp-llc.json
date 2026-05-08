@@ -1,0 +1,222 @@
+{
+  "name": "Structure Fund I GP, LLC",
+  "slug": "structure-fund-i-gp-llc",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.411946",
+  "last_updated": "2026-04-06T20:13:09",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 2,
+    "total_entities": 1,
+    "finding_types": {
+      "corporate_structure": 2,
+      "network": 1,
+      "financial": 1,
+      "regulatory": 1,
+      "identity": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-04-06T20:13:09"
+  },
+  "findings": [
+    {
+      "id": 9734,
+      "finding_type": "corporate_structure",
+      "summary": "Structure Fund I has no Form D despite confirmed investment activity; likely personal vehicle for Altman and Mulherin",
+      "detail": "Structure Fund I GP, LLC and Structure Fund I LP were formed 52 days after OpenAI's recapitalization closed on October 28, 2025. The GP was incorporated in Delaware on December 19, the LP on December 31. Both registered in California on January 7, 2026. No SEC Form D has been filed as of April 2026 despite confirmed investment activity (Centivax Series B closed March 2026). Absence of Form D suggests either no outside LP capital was raised (personal vehicle) or filing was missed.",
+      "source_datasets": "opencorporates_us_de,opencorporates_us_ca",
+      "confidence": "high",
+      "date_of_event": "2025-12-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9736,
+      "finding_type": "network",
+      "summary": "Structure Fund I investment thesis: Mulherin-driven biotech focus (vaccines, gene editing); CT Corp agent links to Altman formation counsel network",
+      "detail": "Structure Fund I GP LLC and LP were registered in California using CT Corporation System as registered agent (same as post-recapitalization OpenAI Startup Fund entities and existing Altman family entities). This mirrors the pattern identified in finding #9599 suggesting shared outside counsel or formation service provider across Altman vehicles. The fund's biotech focus (Centivax universal vaccine, Preventive gene editing) suggests Mulherin's personal investment thesis is now being formalized into an institutional vehicle that bundles Altman's capital.",
+      "source_datasets": "opencorporates_us_ca,finsmes",
+      "confidence": "medium",
+      "date_of_event": "2026-01-07",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9733,
+      "finding_type": "financial",
+      "summary": "Structure Fund (Mulherin & Altman) led Centivax $37M Series B in March 2026 \u2014 first confirmed portfolio deal",
+      "detail": "Centivax, a South San Francisco-based universal flu vaccine company (Centi-Flu 01 in Phase 1), announced a $37M oversubscribed Series B round led by Structure Fund (Oliver Mulherin & Sam Altman). Co-investors include Meiji Seika Pharma, Sigmas Group, Kendall Capital Partners, and Stripe founders Patrick and John Collison. This is the first publicly confirmed deal executed through Structure Fund I LP. Structure Fund was not present in Centivax's prior $45M Series A (June 2025).",
+      "source_datasets": "prnewswire,finsmes,axios",
+      "confidence": "high",
+      "date_of_event": "2026-03-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9735,
+      "finding_type": "corporate_structure",
+      "summary": "Sam Altman confirmed as Structure Fund co-founder via press attribution; not named in corporate filings \u2014 Mulherin-as-nominal-manager pattern",
+      "detail": "Press coverage of the Centivax $37M Series B (finsmes.com, billionairereporter.com) identifies the lead investor as 'Structure Fund (Oliver Mulherin & Sam Altman).' Oliver Mulherin is listed as sole manager in California corporate filings. Sam Altman's role as beneficial co-founder is confirmed only through press attribution \u2014 not by corporate registry filings. Pattern mirrors Altman's use of Serralta as nominal manager for Apollo Projects and Mulherin as formal manager while Altman participates as beneficial owner.",
+      "source_datasets": "finsmes,opencorporates_us_ca",
+      "confidence": "high",
+      "date_of_event": "2026-03-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9740,
+      "finding_type": "regulatory",
+      "summary": "Structure Fund I LP deploying capital with no SEC Form D filing as of April 2026 \u2014 potential Regulation D compliance gap",
+      "detail": "Structure Fund I, L.P. (Delaware file 10456942, incorporated Dec 31 2025) has led at least one institutional investment round (Centivax, March 2026) but no Form D has been filed with the SEC as of April 2026. If the fund has accepted outside LP capital, Regulation D requires Form D filing within 15 days of first sale. Absence of filing could indicate: (a) fund is purely personal/family capital requiring no exemption disclosure, or (b) the fund has not yet formally raised from LPs despite deploying capital as lead investor. This warrants monitoring.",
+      "source_datasets": "investigation_db,edgar_company_search",
+      "confidence": "medium",
+      "date_of_event": "2026-04-06",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:13:09",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9384,
+      "finding_type": "identity",
+      "summary": "Structure Fund I GP LLC incorporated in Delaware 2025-12-19 file 10446191 and registered as foreign LLC in California 2026-01-07 B20260012553. Oliver Mulherin listed as sole manager. Registered address is agent service at 8595 Pelham Road Suite 400 309 Greenville SC 29615. GP structure suggests forthcoming LP fundraise.",
+      "detail": null,
+      "source_datasets": [
+        "OpenCorporates"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 16:49:02",
+      "target_name": "Structure Fund I GP, LLC",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:us_ca:B20260012553",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OC:us_de:10446191",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 4866,
+      "person_a": "Structure Fund I GP, LLC",
+      "person_b": "Hydrazine Capital Management, LLC",
+      "relationship_type": "corporate",
+      "description": "Structure Fund I GP LLC and Structure Fund I LP share their registered address (8595 Pelham Road Suite 400 #309 Greenville SC 29615) with all Hydrazine Capital entities, Apollo Projects entities, and all other Altman personal financial vehicles. Same CT Corp registered agents in both DE and CA. This is the Altman family office infrastructure cluster.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Hydrazine Capital Management, LLC",
+      "other_person_slug": "hydrazine-capital-management-llc",
+      "evidence": []
+    },
+    {
+      "id": 4865,
+      "person_a": "Oliver Mulherin",
+      "person_b": "Structure Fund I GP, LLC",
+      "relationship_type": "corporate",
+      "description": "Oliver Mulherin is the sole manager of Structure Fund I GP LLC. Mulherin married Sam Altman in January 2024, making him Altman's husband. Structure Fund I operates from the Altman family office address.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:12:10",
+      "profile_id": "altman",
+      "other_person": "Oliver Mulherin",
+      "other_person_slug": "oliver-mulherin",
+      "evidence": []
+    }
+  ],
+  "entities": [
+    {
+      "role": "General Partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "opencorporates_us_ca",
+      "entity_id": 2990,
+      "entity_name": "Structure Fund I, L.P.",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-12-19",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Structure Fund I has no Form D despite confirmed investment activity; likely personal vehicle for Altman and Mulherin",
+      "confidence": "high",
+      "id": 9734
+    },
+    {
+      "date": "2026-01-07",
+      "type": "finding",
+      "finding_type": "network",
+      "summary": "Structure Fund I investment thesis: Mulherin-driven biotech focus (vaccines, gene editing); CT Corp agent links to Altman formation counsel network",
+      "confidence": "medium",
+      "id": 9736
+    },
+    {
+      "date": "2026-03-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Structure Fund (Mulherin & Altman) led Centivax $37M Series B in March 2026 \u2014 first confirmed portfolio deal",
+      "confidence": "high",
+      "id": 9733
+    },
+    {
+      "date": "2026-03-30",
+      "type": "finding",
+      "finding_type": "corporate_structure",
+      "summary": "Sam Altman confirmed as Structure Fund co-founder via press attribution; not named in corporate filings \u2014 Mulherin-as-nominal-manager pattern",
+      "confidence": "high",
+      "id": 9735
+    },
+    {
+      "date": "2026-04-06",
+      "type": "finding",
+      "finding_type": "regulatory",
+      "summary": "Structure Fund I LP deploying capital with no SEC Form D filing as of April 2026 \u2014 potential Regulation D compliance gap",
+      "confidence": "medium",
+      "id": 9740
+    }
+  ]
+}

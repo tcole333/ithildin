@@ -1,0 +1,428 @@
+{
+  "name": "Altman investigation network",
+  "slug": "altman-investigation-network",
+  "aliases": [],
+  "profile_ids": [
+    "altman"
+  ],
+  "generated_at": "2026-05-07T23:07:36.165132",
+  "last_updated": "2026-04-06T20:15:56",
+  "stats": {
+    "total_findings": 20,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "relationship": 10,
+      "financial": 2,
+      "identity": 6,
+      "intelligence": 2
+    },
+    "connection_types": {},
+    "last_updated": "2026-04-06T20:15:56"
+  },
+  "findings": [
+    {
+      "id": 9565,
+      "finding_type": "relationship",
+      "summary": "Jennifer Serralta is structural bridge between Altman personal entities and OpenAI governance cluster \u2014 betweenness rank #10, only non-subject node with non-zero clustering coefficient",
+      "detail": "Serralta connects to Sam Altman (familial + corporate), ALTMAN HOLDCO LLC (corporate), 950 Lombard LLC (corporate), 8595 Pelham address node (corporate), and Michael Shetterly (corporate). Clustering coefficient 0.10 \u2014 highest of any non-subject node. Degree=5, betweenness=0.118, brokerage=0.90. The 2022-07-15 mass restructuring consolidated Altman financial architecture under her registered address. She is the one node whose removal would disconnect personal holding entities from the address cluster.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:50:23",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9567,
+      "finding_type": "financial",
+      "summary": "8595 Pelham Rd Suite 400 #309, Greenville SC hosts 48+ Altman-linked entities \u2014 shared commercial mailbox functioning as family office address for all Hydrazine Capital, Apollo Projects, Structure Fund, and personal holding vehicles",
+      "detail": "Graph node '8595 Pelham Road, Greenville, SC (Altman family office)' connects Tools for Humanity Corporation and feeds into the main 68-node component. Address documented hosting: 950 LOMBARD LLC, 9POINT VENTURES LLC, ALTMAN FAMILY LLC, ALTMAN HOLDCO LLC, APOLLO PROJECTS GP LLC, APOLLO PROJECTS LP, HYDRAZINE CAPITAL I/II/IV funds and GPs, HYDRAZINE CAPITAL II SPV LLC, Elfin Cove Capital LLC (Beckwith), Structure Fund I GP/LP, SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC, Uncommon Ventures, Amberley Properties, and more. Mass re-registration event on 2022-07-15 moved all entities to this address, suggesting Serralta took operational control of family office that day.",
+      "source_datasets": [
+        "analysis_run,registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:50:34",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9569,
+      "finding_type": "identity",
+      "summary": "Carmen Beckwith serves as CFO across all three Hydrazine Capital IAPD-registered entities and manages Elfin Cove Capital LLC at the same 8595 Pelham Rd address \u2014 zero graph degree, critical coverage gap",
+      "detail": "Beckwith signed Form ADV as CFO for Hydrazine Capital GP LLC (CRD 165781, signed 11/25/2024), Hydrazine Capital IV GP LLC (CRD 325716, signed 11/19/2024), and Hydrazine Capital Management LLC (CRD 332160, signed 03/25/2026). She also manages Elfin Cove Capital LLC (California B20250301289, inc. 2025-09-16) at the same 8595 Pelham Rd address using the same CT Corporation agent. Despite being CFO of Altman's primary VC vehicle family, Beckwith has zero connections in the graph and no prior investigation leads. Elfin Cove Capital and its purpose are entirely unknown.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:50:50",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9571,
+      "finding_type": "identity",
+      "summary": "Michael Shetterly manages Amberley Properties LLC (Altman's -38M SF compound expansion, Jan 2025) and is connected only to Jennifer Serralta in the graph \u2014 role, background, and broader network unknown",
+      "detail": "Amberley Properties LLC (CA #202464414739, inc. 2024-10-31) purchased 855 Chestnut St + 952/954 Lombard from estate of deceased SF couple for -38M in Jan 2025, expanding Altman's Russian Hill compound to 4 contiguous properties. Michael Shetterly listed as manager, registered at 8595 Pelham Rd Greenville SC. In the graph, Shetterly has exactly one edge: to Jennifer Serralta (corporate, medium strength). No other findings mention Shetterly, no leads exist for him, no public profile found. Despite managing a -38M real estate transaction for Altman, he is effectively invisible in the investigation.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:00",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9574,
+      "finding_type": "relationship",
+      "summary": "Graph density 0.018 with 14 structural holes \u2014 all high-degree nodes (Tools for Humanity, Microsoft, Hydrazine, Samuel Altman node) have brokerage score 1.0, indicating Altman mediates all connections and no sub-networks have formed independent links",
+      "detail": "All 14 structural hole nodes have neighbor_density=0.0 and brokerage_score=1.0 except Sam Altman (0.99) and Jennifer Serralta (0.90). This means neighbors of each hub do not know each other \u2014 every connection routes through the primary subject. The graph has 101 nodes, 90 edges, density 0.017822, and 14 connected components. The main component (68 nodes) contains all key entities. The lone clique (size 3) is Altman + Serralta + 950 Lombard LLC \u2014 a pure ownership triangle. This star topology suggests the investigation has primarily documented direct Altman relationships rather than lateral ties within his network.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:10",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9575,
+      "finding_type": "identity",
+      "summary": "OpenAI appears as 7 distinct entity nodes in the graph (OpenAI, OpenAI Inc., OpenAI Inc, OpenAI LP, OpenAI Group PBC, OpenAI GP LLC, OpenAI Foundation) \u2014 fragmentation masks centrality of OpenAI cluster, which collectively would rank #2 after Sam Altman",
+      "detail": "Graph nodes include: OpenAI (degree 1, betweenness 0), OpenAI Inc. (degree 3, betweenness 0.032), OpenAI Inc (degree 3, betweenness 0.032), OpenAI LP (degree 2, betweenness 0.075), OpenAI Group PBC (degree 2, betweenness 0.129), OpenAI GP LLC (degree 2, betweenness 0.010), OpenAI Foundation (degree 3, betweenness 0.086), OpenAI Startup Fund I LP, OpenAI Startup Fund GP I LLC, OpenAI OpCo LLC (separate component). Combined degree would be ~23 edges, placing OpenAI cluster above Tools for Humanity (degree 8). De-duplication of OpenAI entity variants is needed before centrality analysis can accurately reflect the governance cluster's structural importance.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:20",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9578,
+      "finding_type": "relationship",
+      "summary": "Greg Brockman ranks #2 in betweenness centrality (0.484) but has only 2 findings \u2014 highest-ratio coverage gap among named persons; bridges Musk-Altman and OpenAI governance to plaintiff networks",
+      "detail": "Brockman's betweenness (0.484) is second only to Sam Altman (0.850) and substantially above Elon Musk (0.452), OpenAI Inc (0.408), and Microsoft (0.376). Despite this, Brockman has only 2 findings and degree=2, suggesting the graph accurately reflects his positional importance (as a named party in Musk v. Altman litigation and former OpenAI President) without adequate documentary coverage. He bridges: (1) the Musk-Altman legal dispute to the broader OpenAI network and (2) OpenAI governance history to current structure. His departure from OpenAI (Aug 2024) and subsequent silence makes him a high-value but under-documented node.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:29",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9579,
+      "finding_type": "relationship",
+      "summary": "OpenAI lobbying cluster (Akin Gump, DLA Piper, David Schwietert, Jonathan Hiler, OpenAI OpCo) forms isolated 5-node component disconnected from main Altman network \u2014 no bridge to personal financial vehicle cluster documented",
+      "detail": "Component 3: Akin Gump Strauss Hauer & Feld, DLA Piper LLP (US), David Schwietert, Jonathan Hiler, OpenAI OpCo LLC. This is an entirely separate connected component from the 68-node main component. The lobbying cluster lacks any documented connection to Altman's personal entities (Hydrazine, Apollo Projects, family office). Similarly, the Troon Pacific component (Gregory Malin, Nigel Chanter, Impact Builders LLC, Eight Forty One LLC) appears in its own 5-node island. This isolation may reflect genuine separation or investigative coverage gap \u2014 lobbyists may connect through Altman himself rather than through documented entities.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:38",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9581,
+      "finding_type": "intelligence",
+      "summary": "88% of findings (160/181) have no thread assignment \u2014 cross-thread analysis understates actual actor overlap across the 6 investigation threads",
+      "detail": "Thread-tagged findings: Thread 1 (OpenAI Governance)=15, Thread 2 (Personal Financial Vehicles)=3, Thread 4 (AI Policy & Government)=1, Thread 6 (Mulherin & Family)=2. Thread-untagged: 160. The cross-thread actor analysis (which found only Sam Altman as a cross-thread actor) is therefore unreliable \u2014 most findings covering Hydrazine Capital, OpenAI governance, Helion Energy, and Tools for Humanity Corporation are not properly linked to their threads. Threads 3 (Venture Capital), 5 (Energy & Infrastructure), and 6 (Mulherin & Family) are effectively unrepresented in the thread-tagged corpus.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 17:51:47",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9582,
+      "finding_type": "relationship",
+      "summary": "Jennifer Serralta is structural bridge between Altman personal entities and OpenAI governance cluster \u2014 betweenness rank #10, only non-subject node with non-zero clustering coefficient",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9583,
+      "finding_type": "financial",
+      "summary": "8595 Pelham Rd Suite 400 #309 Greenville SC hosts 48+ Altman-linked entities \u2014 shared commercial mailbox functioning as family office address for all Hydrazine Capital, Apollo Projects, Structure Fund, and personal holding vehicles",
+      "detail": null,
+      "source_datasets": "analysis_run,registry",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9584,
+      "finding_type": "identity",
+      "summary": "Carmen Beckwith serves as CFO across all three Hydrazine Capital IAPD-registered entities and manages Elfin Cove Capital LLC at the same 8595 Pelham Rd address \u2014 zero graph degree, critical coverage gap",
+      "detail": null,
+      "source_datasets": "analysis_run,iapd",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9585,
+      "finding_type": "identity",
+      "summary": "Michael Shetterly manages Amberley Properties LLC (Altman SF compound expansion $14-38M, Jan 2025) and is connected only to Jennifer Serralta in the graph \u2014 role and background unknown",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9586,
+      "finding_type": "relationship",
+      "summary": "Graph density 0.018 with 14 structural holes \u2014 all high-degree nodes have brokerage score 1.0, star topology indicates investigation has primarily documented direct Altman relationships rather than lateral network ties",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9587,
+      "finding_type": "identity",
+      "summary": "OpenAI appears as 7 distinct entity nodes in the graph \u2014 fragmentation masks centrality; combined OpenAI cluster degree would be ~23, ranking above Tools for Humanity Corporation",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9588,
+      "finding_type": "relationship",
+      "summary": "Greg Brockman ranks #2 in betweenness centrality (0.484) but has only 2 findings \u2014 highest-ratio coverage gap among named persons; bridges Musk litigation to OpenAI governance",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9589,
+      "finding_type": "relationship",
+      "summary": "OpenAI lobbying cluster (Akin Gump, DLA Piper, Schwietert, Hiler, OpenAI OpCo) forms isolated 5-node component disconnected from main Altman network \u2014 no bridge to personal financial vehicle cluster documented",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9590,
+      "finding_type": "intelligence",
+      "summary": "88% of findings (160/181) have no thread assignment \u2014 cross-thread analysis understates actual actor overlap across the 6 investigation threads",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 18:08:57",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    },
+    {
+      "id": 9711,
+      "finding_type": "relationship",
+      "summary": "Investigation graph contains duplicated entity nodes inflating metrics: 'Sam Altman'/'Samuel Altman', 'Hydrazine Capital Management, LLC'/'Hydrazine Capital Management LLC', 'Tools for Humanity Corporation'/'Tools for Humanity Corp' each appear as separate nodes",
+      "detail": "Degree centrality: 'Samuel Altman' ranks #5 with degree=8, betweenness=0.1562 (rank #6). If merged with 'Sam Altman' (degree=46), the combined node would have degree~50. 'Hydrazine Capital Management, LLC' (degree=8) and 'Hydrazine Capital Management LLC' (degree=5) are separate nodes sharing some connections. Entity normalization is needed before further centrality analysis.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:06:30",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-33",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 9773,
+      "finding_type": "relationship",
+      "summary": "Investigation graph contains duplicated entity nodes inflating metrics: 'Sam Altman'/'Samuel Altman', 'Hydrazine Capital Management, LLC'/'Hydrazine Capital Management LLC', 'Tools for Humanity Corporation'/'Tools for Humanity Corp' each appear as separate nodes",
+      "detail": null,
+      "source_datasets": "analysis_run",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-04-06 20:15:56",
+      "target_name": "Altman investigation network",
+      "profile_id": "altman",
+      "evidence": []
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

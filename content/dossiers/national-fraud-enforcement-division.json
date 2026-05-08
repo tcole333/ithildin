@@ -5,20 +5,24 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.992789",
-  "last_updated": "2026-03-11T04:34:35",
+  "generated_at": "2026-05-07T23:07:36.268420",
+  "last_updated": "2026-03-23T16:57:43",
   "stats": {
-    "total_findings": 6,
-    "total_connections": 1,
+    "total_findings": 12,
+    "total_connections": 4,
     "total_entities": 0,
     "finding_types": {
-      "legal": 4,
-      "intelligence": 2
+      "legal": 6,
+      "intelligence": 5,
+      "background": 1
     },
     "connection_types": {
-      "political": 1
+      "employment": 1,
+      "controls": 1,
+      "political": 1,
+      "successor_to": 1
     },
-    "last_updated": "2026-03-11T04:34:35"
+    "last_updated": "2026-03-23T16:57:43"
   },
   "findings": [
     {
@@ -122,6 +126,157 @@
       ]
     },
     {
+      "id": 7005,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL SEQUENCE: DOGE disbanded Nov 24, 2025; NFED announced Jan 8, 2026 (45-day gap). During this window: DOJ filed Notice of Corrections Jan 16, 2026 acknowledging DOGE SSA data misconduct, and Hatch Act referrals for voter data agreement were pending at OSC. The gap coincides with the period when DOJ was formally acknowledging DOGE data access violations while simultaneously creating a new WH-adjacent enforcement division with nationwide fraud jurisdiction.",
+      "detail": null,
+      "source_datasets": [
+        "whitehouse.gov",
+        "nextgov.com"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-01-08",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:55:50",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "whitehouse.gov/fact-sheets/2026/01 nextgov.com/2025/11/doge-no-longer-centralized afscme.org/2025/doj-acknowledges-misconduct",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7009,
+      "finding_type": "legal",
+      "summary": "NFED REPORTING STRUCTURE enables WH data access channel: VP Vance stated AAG would operate 'out of the White House, under supervision of president and VP' with 'all benefits, resources, authority of a special counsel.' Later DOJ letter to Congress showed division reporting to DAG instead. McDonald testimony indicated he would report to AG Bondi and DAG Blanche. This WH reporting line is unprecedented for a DOJ division and mirrors DOGE's WH-centered data access model.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-01-08",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:56:15",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "arnoldporter.com/2026/01/trump-admin-fraud-enforcement time.com/7358715 courthousenews.com/trump-nominee-fraud-enforcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7016,
+      "finding_type": "legal",
+      "summary": "NFED STAFFING CONTRADICTIONS: Initial DOJ Jan 16, 2026 letter to Congress said NFED staffed with existing DOJ personnel, no new appropriations needed. Days later, Criminal Division AAG Tysen Duva announced NFED would hire its own staff once AAG confirmed. Duva also stated existing Fraud Section would remain entirely intact \u2014 not drawn down for NFED. This means NFED will build a parallel fraud prosecution team from scratch. Bloomberg reported DOJ plans to insulate criminal and civil fraud sections from the WH-run NFED initiative. NFED is thus not a reorganization of existing capacity but a new WH-supervised layer atop it.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-01-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:56:49",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "arnoldporter.com/2026/01 news.bloomberglaw.com/doj-fraud-staffers mayerbrown.com/2026/02",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7011,
+      "finding_type": "intelligence",
+      "summary": "DATA ACCESS CONTINUITY: DOGE-placed CIOs remain embedded in agencies after dissolution. Moghaddassi still SSA CIO as of Mar 2026. NUMIDENT cloud copy status unknown \u2014 SSA cannot confirm whether data persists on Cloudflare servers or in cloud environment. Whistleblower alleges former DOGE engineer retained database copies on thumb drive with 'God-level' SSA system access. Meanwhile, DOJ-DHS voter data pipeline operational: 33M+ voter records run through SAVE, DOJ sued 21+ states for voter rolls. The data access infrastructure DOGE built was not dismantled when DOGE dissolved.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-11",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:56:28",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "npr.org/2026/03/11 fedscoop.com/ssa-doge-cio theregister.com/2026/01/21 stateline.org/2025/09/12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7018,
+      "finding_type": "intelligence",
+      "summary": "HYPOTHESIS TEST RESULTS \u2014 DOGE-to-NFED capability transfer: (1) DIRECT PERSONNEL TRANSFER: NOT confirmed. No DOGE personnel have been publicly identified as joining NFED. McDonald's path was WWG co-chair to NFED nominee, not DOGE. Moghaddassi, Gracias (left July 2025), and other DOGE SSA staff have NOT been identified in NFED. (2) DATA ACCESS CONTINUITY: PARTIALLY confirmed. The data infrastructure DOGE built (NUMIDENT cloud copy, SAVE voter pipeline, agency CIO placements) persists post-dissolution and is available to DOJ/DHS without going through NFED specifically. (3) FUNCTIONAL CAPABILITY TRANSFER: CONFIRMED at institutional level. DOGE's voter data operations and SSA data access were not transferred TO NFED, but NFED was created in a landscape where these capabilities already existed and were institutionalized. The capability transfer is structural, not personnel-based.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:02",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:7005 finding:7007 finding:7009 finding:7011 finding:7013 finding:7016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7020,
+      "finding_type": "background",
+      "summary": "NEGATIVE RESULTS: (1) No evidence NFED planning predates DOGE dissolution by 6+ months \u2014 earliest public mention is Jan 8, 2026 announcement, just 45 days after Nov 24 dissolution. However, July 2025 DOJ-HHS False Claims Act Working Group and Aug 2025 Trade Fraud Task Force may be precursors. (2) No DOGE personnel have been publicly identified as NFED staff. (3) No evidence of direct database transfer from DOGE systems to NFED. (4) No evidence NFED has requested or obtained SSA data access. (5) NFED founding documents do NOT enumerate election fraud in jurisdiction. (6) No USASpending contracts found for NFED as of Mar 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:13",
+      "target_name": "National Fraud Enforcement Division",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:7005 finding:7018 web_search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6546,
       "finding_type": "intelligence",
       "summary": "New DOJ division created Jan 8 2026 by executive action. Unprecedented: AAG will report to President/VP and operate from WH (later org chart shows Deputy AG reporting). VP Vance says AAG has nationwide fraud jurisdiction. Initial focus MN (SNAP, housing, education, Medicaid) but also OH and CA. Colin McDonald nominated as AAG Jan 28 2026. No USASpending contracts found. Potential overlap with existing DOJ Fraud Section.",
@@ -205,6 +360,50 @@
   ],
   "connections": [
     {
+      "id": 3528,
+      "person_a": "Colin McDonald",
+      "person_b": "National Fraud Enforcement Division",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:42",
+      "profile_id": "tech-right",
+      "other_person": "Colin McDonald",
+      "other_person_slug": "colin-mcdonald",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:7007",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3529,
+      "person_a": "JD Vance",
+      "person_b": "National Fraud Enforcement Division",
+      "relationship_type": "controls",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:43",
+      "profile_id": "tech-right",
+      "other_person": "JD Vance",
+      "other_person_slug": "jd-vance",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:7009 finding:7013",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3298,
       "person_a": "National Fraud Enforcement Division",
       "person_b": "Pam Bondi",
@@ -218,6 +417,28 @@
       "other_person": "Pam Bondi",
       "other_person_slug": "pam-bondi",
       "evidence": []
+    },
+    {
+      "id": 3527,
+      "person_a": "DOGE",
+      "person_b": "National Fraud Enforcement Division",
+      "relationship_type": "successor_to",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:41",
+      "profile_id": "tech-right",
+      "other_person": "DOGE",
+      "other_person_slug": "doge",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:7005 finding:7022",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -253,6 +474,54 @@
       "summary": "NFED overlaps with existing DOJ fraud components: Criminal Division Fraud Section, Civil Division Commercial Litigation Branch (False Claims Act), and Public Integrity Section (election crimes). DOJ has not clarified whether existing fraud components will be shrunk, subsumed, or left intact. Simultaneously, Public Integrity Section gutted from 35-36 lawyers to 2-5, stripped of ability to file new cases or consult on Congressional cases. Election Crimes Branch (within PIN) traditional home of election fraud enforcement \u2014 its capacity severely diminished.",
       "confidence": "medium",
       "id": 6623
+    },
+    {
+      "date": "2026-01-08",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL SEQUENCE: DOGE disbanded Nov 24, 2025; NFED announced Jan 8, 2026 (45-day gap). During this window: DOJ filed Notice of Corrections Jan 16, 2026 acknowledging DOGE SSA data misconduct, and Hatch Act referrals for voter data agreement were pending at OSC. The gap coincides with the period when DOJ was formally acknowledging DOGE data access violations while simultaneously creating a new WH-adjacent enforcement division with nationwide fraud jurisdiction.",
+      "confidence": "medium",
+      "id": 7005
+    },
+    {
+      "date": "2026-01-08",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "NFED REPORTING STRUCTURE enables WH data access channel: VP Vance stated AAG would operate 'out of the White House, under supervision of president and VP' with 'all benefits, resources, authority of a special counsel.' Later DOJ letter to Congress showed division reporting to DAG instead. McDonald testimony indicated he would report to AG Bondi and DAG Blanche. This WH reporting line is unprecedented for a DOJ division and mirrors DOGE's WH-centered data access model.",
+      "confidence": "medium",
+      "id": 7009
+    },
+    {
+      "date": "2026-01-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "NFED STAFFING CONTRADICTIONS: Initial DOJ Jan 16, 2026 letter to Congress said NFED staffed with existing DOJ personnel, no new appropriations needed. Days later, Criminal Division AAG Tysen Duva announced NFED would hire its own staff once AAG confirmed. Duva also stated existing Fraud Section would remain entirely intact \u2014 not drawn down for NFED. This means NFED will build a parallel fraud prosecution team from scratch. Bloomberg reported DOJ plans to insulate criminal and civil fraud sections from the WH-run NFED initiative. NFED is thus not a reorganization of existing capacity but a new WH-supervised layer atop it.",
+      "confidence": "high",
+      "id": 7016
+    },
+    {
+      "date": "2026-03-11",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "DATA ACCESS CONTINUITY: DOGE-placed CIOs remain embedded in agencies after dissolution. Moghaddassi still SSA CIO as of Mar 2026. NUMIDENT cloud copy status unknown \u2014 SSA cannot confirm whether data persists on Cloudflare servers or in cloud environment. Whistleblower alleges former DOGE engineer retained database copies on thumb drive with 'God-level' SSA system access. Meanwhile, DOJ-DHS voter data pipeline operational: 33M+ voter records run through SAVE, DOJ sued 21+ states for voter rolls. The data access infrastructure DOGE built was not dismantled when DOGE dissolved.",
+      "confidence": "medium",
+      "id": 7011
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "HYPOTHESIS TEST RESULTS \u2014 DOGE-to-NFED capability transfer: (1) DIRECT PERSONNEL TRANSFER: NOT confirmed. No DOGE personnel have been publicly identified as joining NFED. McDonald's path was WWG co-chair to NFED nominee, not DOGE. Moghaddassi, Gracias (left July 2025), and other DOGE SSA staff have NOT been identified in NFED. (2) DATA ACCESS CONTINUITY: PARTIALLY confirmed. The data infrastructure DOGE built (NUMIDENT cloud copy, SAVE voter pipeline, agency CIO placements) persists post-dissolution and is available to DOJ/DHS without going through NFED specifically. (3) FUNCTIONAL CAPABILITY TRANSFER: CONFIRMED at institutional level. DOGE's voter data operations and SSA data access were not transferred TO NFED, but NFED was created in a landscape where these capabilities already existed and were institutionalized. The capability transfer is structural, not personnel-based.",
+      "confidence": "medium",
+      "id": 7018
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "NEGATIVE RESULTS: (1) No evidence NFED planning predates DOGE dissolution by 6+ months \u2014 earliest public mention is Jan 8, 2026 announcement, just 45 days after Nov 24 dissolution. However, July 2025 DOJ-HHS False Claims Act Working Group and Aug 2025 Trade Fraud Task Force may be precursors. (2) No DOGE personnel have been publicly identified as NFED staff. (3) No evidence of direct database transfer from DOGE systems to NFED. (4) No evidence NFED has requested or obtained SSA data access. (5) NFED founding documents do NOT enumerate election fraud in jurisdiction. (6) No USASpending contracts found for NFED as of Mar 2026.",
+      "confidence": "medium",
+      "id": 7020
     }
   ],
   "curation": {
@@ -335,84 +604,5 @@
       "private-order"
     ],
     "curated_at": "2026-03-11T23:03:09.554312"
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "National Fraud Enforcement Division",
-      "connections": [
-        {
-          "target": "Pam Bondi",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "NFED initial MN focus parallels Bondi voter roll demands to MN; both use fraud claims as lever for state election data"
-        }
-      ],
-      "secondHop": {
-        "Pam Bondi": [
-          {
-            "target": "Stephen Miller",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
-          },
-          {
-            "target": "DOJ Voting Section",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
-          },
-          {
-            "target": "Ed Martin",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
-          },
-          {
-            "target": "Harmeet Dhillon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
-          },
-          {
-            "target": "Eric Neff",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2026-01-08",
-        "label": "NFED created Jan 8, 2026 by White House announcement. New DOJ division with AAG-level leadership. Initial focus: Minnesota federal program fraud (Feeding Our Future, Housing Stabilization Services, Medicaid). 98 defendants charged (85 Somali descent), 64 convicted, 1750+ subpoenas, 130+ search warrants. Jurisdiction: fraud affecting federal programs, federally funded benefits, businesses, nonprofits, private citizens. Election fraud NOT mentioned in founding documents.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6619
-      },
-      {
-        "date": "2026-01-08",
-        "label": "NFED reporting structure contradictory: VP Vance stated AAG would operate 'out of the White House, under the supervision of the president and vice president' with 'all the benefits, resources, authority of a special counsel'. But AAG Jolene Ann Lauria's organizational chart to Congress showed division reporting to Deputy AG instead. McDonald testimony indicated he would report to AG Bondi and DAG Blanche. This WH reporting structure is unprecedented for a DOJ division and undermines traditional DOJ independence.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6621
-      },
-      {
-        "date": "2026-01-08",
-        "label": "NFED staffing contradictions: Administration initially said no new funding/attorneys needed, division staffed with existing DOJ personnel. But Criminal Division AAG Tysen Duva announced division would hire its own staff once AAG confirmed. DOJ lost 8% of workforce in 2025. Contradiction: claim of no new resources vs plan to hire. Meanwhile DOJ surging prosecution resources to Minnesota, doubling attorneys on fraud cases there.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6622
-      },
-      {
-        "date": "2026-01-08",
-        "label": "NFED overlaps with existing DOJ fraud components: Criminal Division Fraud Section, Civil Division Commercial Litigation Branch (False Claims Act), and Public Integrity Section (election crimes). DOJ has not clarified whether existing fraud components will be shrunk, subsumed, or left intact. Simultaneously, Public Integrity Section gutted from 35-36 lawyers to 2-5, stripped of ability to file new cases or consult on Congressional cases. Election Crimes Branch (within PIN) traditional home of election fraud enforcement \u2014 its capacity severely diminished.",
-        "type": "legal",
-        "evidence_ref": null,
-        "id": 6623
-      }
-    ]
   }
 }

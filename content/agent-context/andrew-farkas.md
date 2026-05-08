@@ -1,6 +1,8 @@
 # Andrew Farkas
-**Stats**: 9 findings, 10 connections, 4 entities
+**Stats**: 9 findings, 9 connections, 4 entities
 **Dossier**: /dossiers/andrew-farkas
+
+> Farkas occupied simultaneous fiduciary, financial, operational, and social positions within Epstein's network over a 14-year documented period: co-investor in a USVI tax-advantaged enterprise, co-trustee and named successor executor of estate instruments, intermediary for banking relationships, and regular personal contact from 2005 through 2019.
 
 ## Key Findings
 - **[relationship/confirmed]** Jonathan Farkas (Andrew's brother) also had direct email contact with Epstein (20+ emails in HF Parquet). Topics included Trump politics (Told you Barr would protect Trump known him for 50 years, April 2019), stock tips (apple at 110), women (Jeffrey please help me here is she a hooker, May 2017; Epstein: alcoholic, drugs, unstable, consumate liar. CAREFUL), and Adam Wyden/Elon Musk intro. Jonathan talks to Trump/Melania (Somers and I talked to trump and Melania last night). Andrew also photographed with Epstein front row at 10th annual Victoria's Secret fashion show Nov 9, 2005. (2005-11-09) (Finding #1224)
@@ -16,9 +18,8 @@
 ## Top Connections
 - **Richard Carrion** [corporate/strong]: USVI port/cruise terminal joint venture partners (Apr 2013). Socialized with USVI governors. Farkas attended Carrion wife funeral (Mar 2016).
 - **Jeffrey Epstein** [corporate/strong]: 50-50 partners in IGY-AYH St Thomas Holdings (American Yacht Harbor marina), acquired Jan 2007 for $25M from Sun Resorts via Island Global Yachting (IGY). Relationship included financial disputes over IGY management fees and extraction of $4.5M vs Epstein's $250K.
+- **Stephen Feinberg** [financial/strong]: Farkas emails to Epstein discuss Cerberus investments and project details, acting as intermediary
 - **Jeffrey Epstein** [financial/medium]: Farkas sent emails to Epstein via Florida Science Foundation alias, including recommendation letter and scheduled calls/meetings 2009-2014
-- **Jeffrey Epstein** [financial/medium]: None
-- **Jeffrey Epstein** [financial/medium]: None
 - **Jes Staley** [legal/medium]: None
 - **Jonathan Farkas** [familial/medium]: None
 - **IGO Company LLC** [financial/medium]: Farkas (Island Capital Group/IGY CEO) was Epstein's partner in AYH. IGO was registered at AYH address. Farkas and Epstein agreed to $200K distributions from AYH in April 2016. IGO may have held watercraft docked at the marina Farkas operated.
@@ -30,3 +31,14 @@
 - CEO at Island Capital Group LLC (TN)
 - 50% owner (via Island Global Yachting) at IGY-AYH St Thomas Holdings LLC (USVI)
 - principal at Island Global Yachting (NY)
+
+## Open Questions
+- Do the 2015 Cerberus-related fund transfers discussed in Epstein-Farkas emails reflect a continuing investment intermediary role beyond the AYH partnership, and if so, through what vehicles?
+- Was Farkas contacted by the estate's actual co-executors (Indyke and Kahn) after Epstein's 2019 death to exercise his successor executor designation, and did he play any role in the post-death estate administration?
+- Beyond the documented March 2019 Banco Popular account request, did Farkas facilitate additional banking or investment introductions for Epstein in the USVI through his Carrion partnership?
+- Does any documented communication record connect Farkas, Epstein, or Epstein's legal team to Cyrus Vance Jr.'s office around the time of the 2011 decision not to prosecute Epstein?
+
+## Applicable Models
+- enabler-gradient
+- jurisdictional-arbitrage
+- bridge-tax

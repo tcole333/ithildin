@@ -2,7 +2,7 @@
 **Stats**: 5 findings, 2 connections, 0 entities
 **Dossier**: /dossiers/hdi
 
-> HDI represents an unregistered influence pipeline connecting Congressional travel to both Epstein network access and Chinese state-linked institutions, exploiting the regulatory blind spot between nonprofit educational missions and foreign agent registration requirements.
+> HDI operated as an unregistered influence channel connecting Congressional travel to both Epstein network access and Chinese state-linked institutions, occupying the regulatory gap between nonprofit educational missions and foreign agent registration requirements.
 
 ## Key Findings
 - **[legal/medium]** Humpty Dumpty Institute has no FARA registration despite documented CCP/Taihe Institute ties with 12+ PLA members, 33+ Congress members on advisory board, and CODEL pipeline where Epstein could fill congressional delegation slots. Taihe Institute also absent from FARA. China has 276 FARA-registered foreign principals but neither HDI nor Taihe appears. This is a potential FARA violation given documented foreign government connections. (Finding #388)
