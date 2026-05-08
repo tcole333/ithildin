@@ -2,20 +2,723 @@
   "name": "Palantir Technologies",
   "slug": "palantir-technologies",
   "aliases": [
-    "Palantir"
+    "Palantir",
+    "Palantir Technologies Inc."
   ],
   "profile_ids": [
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.764916",
-  "last_updated": "2026-03-10T00:45:49",
+  "generated_at": "2026-05-07T23:07:35.998808",
+  "last_updated": "2026-05-08T01:33:31.346756",
   "stats": {
-    "total_findings": 58,
-    "total_connections": 34,
-    "total_entities": 0
+    "total_findings": 105,
+    "total_connections": 60,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 56,
+      "identity": 4,
+      "relationship": 7,
+      "background": 2,
+      "intelligence": 34,
+      "unknown": 1,
+      "negative_result": 1
+    },
+    "connection_types": {
+      "financial": 18,
+      "corporate": 11,
+      "intelligence": 3,
+      "employment": 18,
+      "contracts_with": 5,
+      "political": 2,
+      "advisory": 2,
+      "subsidiary_of": 1
+    },
+    "last_updated": "2026-05-08T01:33:31.346622"
   },
   "findings": [
+    {
+      "id": 6448,
+      "finding_type": "financial",
+      "summary": "Palantir SAM.gov entity registration: Legal name PALANTIR TECHNOLOGIES INC., UEI=FSY4LVSBGWB7, CAGE=470F5. Physical address: 518 17th St Ste 1015, Denver CO 80202. Mailing: 100 Hamilton Ave Ste 300, Palo Alto CA 94301. Incorporated Delaware 2003-05-06. Primary NAICS 513210 (Software Publishers). Registration active through 2027-02-12. No exclusions (not debarred).",
+      "detail": null,
+      "source_datasets": [
+        "sam"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2003-05-06",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:53:55",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM_BULK:FSY4LVSBGWB7",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4931,
+      "finding_type": "identity",
+      "summary": "Palantir Technologies UK Ltd & Eagle Ltd - UK Corporate Structure",
+      "detail": "Palantir operates two UK entities: (1) Palantir Technologies UK, Ltd. (07042994, incorporated 2009-10-14), and (2) Palantir Technologies UK - Eagle, Ltd. (10515288, incorporated 2016-12-07). Both at Birchin Court, 5th Floor, 19-25 Birchin Lane, London EC3V 9DU. Eagle is a wholly-owned subsidiary of Palantir UK, which is wholly owned by Palantir Technologies Inc. (Aventura, FL). Alex Karp served as director of both entities (2009-2021). Current directors include Ryan Douglas Taylor (American, Palantir COO). Sir Daniel Bethlehem (former FCO Legal Adviser) served as director 2013-2024.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2009-10-14",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:21:47",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 07042994",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 10515288",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4943,
+      "finding_type": "relationship",
+      "summary": "Sir Daniel Bethlehem - former FCO Legal Adviser served as Palantir UK director (2013-2024)",
+      "detail": "Sir Daniel Lincoln Bethlehem KCMG QC (DOB 6/1960) served as director of Palantir Technologies UK, Ltd. (07042994) from 2013-11-04 to 2024-03-10. Bethlehem was the UK Foreign and Commonwealth Office Legal Adviser (2006-2011), the top legal position in UK foreign policy. He also runs LPI Consultancy Ltd and Legal Policy International Ltd. His decade-long service on Palantir UK's board represents a significant revolving door between UK government legal establishment and US defense tech.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2013-11-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:23:33",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 07042994",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House officer cWEShJvh2wR96i6riJ2cPsVnvtU",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6961,
+      "finding_type": "background",
+      "summary": "BACKGROUND: Palantir's government contract growth has a legal precedent independent of FF alumni appointments. Palantir USG v. United States (1:16-cv-00784, Court of Federal Claims, filed Jun 30 2016) challenged Army's DCGS-A procurement as violating Federal Acquisition Streamlining Act. Judge Horn ruled in Palantir's favor Oct 2016, issuing permanent injunction. Federal Circuit affirmed 2018. This opened door for Palantir to win Army intelligence contract in Mar 2019. This legal victory \u2014 predating Trump admin influence \u2014 was a structural driver of Palantir's subsequent government growth. However, the scale and pace of expansion in FY2020 and FY2025 (coinciding with FF alumni appointments) goes beyond what the legal precedent alone explains.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": "2016-06-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:42:39",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener:1:16-cv-00784",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7046,
+      "finding_type": "financial",
+      "summary": "NIH holds three sequential sole-source Palantir IDIQs for N3C/NCATS scientific platforms totaling $193.9M ceiling: 75N95021D00029 ($59.5M, 2021), 75N95022D00025 ($65M, 2022), 75N95023D00027 ($69.4M, 2023, 100% utilized). All NOT COMPETED, single-award. Also on multi-award HHS SHARE BPA ($90M ceiling, $48.2M obligated). Total HHS spending: $209M. Key programs: N3C COVID enclave, NIDAP, PEPFAR, ARPA-H, FDA data.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2023-09-28",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:11:12",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_75N95023D00027_7529",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4682,
+      "finding_type": "intelligence",
+      "summary": "NATO acquired Palantir Maven Smart System in fastest-ever procurement (6 months), extending US military AI dominance to alliance-wide warfighting infrastructure",
+      "detail": "On March 25, 2025, NATO Communications and Information Agency (NCIA) finalized acquisition of Palantir Maven Smart System NATO (MSS NATO) for Allied Command Operations. The contract was one of NATO's most expeditious procurements \u2014 6 months from requirement to acquisition (sole-source). MSS pulls data from classified and public sources into a searchable database for AI-enabled battlefield operations. This follows the US DoD raising Palantir's MSS contract ceiling to USD 1.3B through 2029. The NATO Joint Warfare Centre has already trained on MSS integration. Separately, Palantir announced up to USD 1.5B investment in a UK defense headquarters. UK MOD awarded Palantir a GBP 240.6M direct-award contract (December 2025, no competitive tender). Five Eyes intelligence agencies have used Palantir since at least 2010 (per Snowden documents: GCHQ presentation noted 'faster analytics' and 'unexpected benefits'). Australia holds AUD 100M+ in Palantir contracts.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:33:47",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DefenseScoop (April 14, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NATO NCIA press release (March 25, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Intercept Snowden documents",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7493,
+      "finding_type": "intelligence",
+      "summary": "ImmigrationOS confirmed to ingest state voter roll data: Leaked documents obtained by 404 Media and confirmed by Biometric Update reveal ImmigrationOS pulls data from SSA, IRS, USCIS, and state voter rolls. The M sole-source contract (70CTD022FR0000170 modification, Apr 2025) tasks Palantir with building an 'end-to-end digital ecosystem that automates the lifecycle of deportation' with AI-based target prioritization via ELITE tool. System assigns confidence scores to addresses and generates enforcement dossiers.",
+      "detail": null,
+      "source_datasets": [
+        "biometricupdate",
+        "404media",
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-04-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:13:54",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7048,
+      "finding_type": "background",
+      "summary": "SAM.gov records identify key Palantir government business points of contact: Vincent Johnson (Govt Business POC across all 3 registrations), Akash Jain (Alt Govt POC, Palantir USG Palo Alto), Ryan Taylor (Alt Govt POC, Palantir Technologies Denver), Menaka Kalaskar (Past Performance POC across all), William Ho / Lori Baylor (Electronic POCs). Government business address listed at 1025 Thomas Jefferson St NW, Washington DC 20007.",
+      "detail": null,
+      "source_datasets": [
+        "sam_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-05-07",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:12:04",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov entity records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7040,
+      "finding_type": "financial",
+      "summary": "Maven Smart System (MSS) Production IDIQ (W911QX24D0012) ceiling increased from initial $480M (May 2024) to $1.275B (May 2025) due to 'growing demand'. Single-award, not competed. $292.7M obligated (23% of ceiling). Separate Maven CSO R&D contracts total $397.3M ceiling ($83.6M obligated). Maven is CDAO's primary AI platform for military intelligence fusion.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-05-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:34",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_W911QX24D0012_9700",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4673,
+      "finding_type": "financial",
+      "summary": "Palantir helping DOGE build IRS mega-database/unified API, triggering Wyden-AOC congressional inquiry over potential Privacy Act violations",
+      "detail": "Palantir is collaborating with Elon Musk's DOGE to build a 'mega API' for accessing IRS records. DOGE and Palantir representatives worked with dozens of career IRS engineers at a 'hackathon' to build a single API layer above all IRS databases. The project facilitates movement of IRS data to the cloud, enabling access to taxpayer details, tax returns, and employment data, while allowing cross-agency comparisons. On June 17, 2025, Senator Wyden and Rep. Ocasio-Cortez led a letter from 10 congressional Democrats demanding answers, arguing the project likely violates the Privacy Act and other federal laws. Signatories included Sens. Merkley, Markey, Warren, and Reps. Jacobs, Lee, McGovern, Tlaib, Tonko. Palantir's global director for privacy denied creating a 'master list' of data from multiple agencies, saying they are building a 'unified API' for the IRS.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:32:57",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Nextgov/FCW",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Finance Committee letter (June 17, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch (April 5, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5494,
+      "finding_type": "intelligence",
+      "summary": "Palantir-DOGE nexus: Palantir federal contracts nearly doubled to .5M in 2025. USASpending shows .4B lifetime contracts (DoD .3B, HHS M, DHS M, DOJ M, Treasury M). Key DOGE projects: (1) IRS 'mega API' hackathon to create centralized taxpayer data access, hosted on Palantir Foundry. (2) Treasury unified API layer contract. (3) M ICE 'ImmigrationOS' contract for deportation tracking. (4) Accenture/Palantir certifying 1,000 federal workers on Foundry. (5) Talks with SSA and Education to adopt Foundry. Several DOGE members were former Palantir employees. New federal CIOs at OMB, OPM, and DoE tied to Palantir or SpaceX. Congressional inquiry: 10 Democrats including Sen. Wyden and Rep. AOC wrote to Palantir CEO Alex Karp on June 17, 2025.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-17",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:04",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending data; Suffolk JHTL article; Senate Finance Committee letter; FedScoop; IT Magazine",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7038,
+      "finding_type": "financial",
+      "summary": "Army awarded Palantir sole-source $10B Enterprise Agreement (W519TC25D0039) on July 31, 2025 \u2014 consolidating 75 prior contracts (15 prime + 60 related) into single 10-year IDIQ. Not competed (Only One Source, FAR 6.302-1). As of March 2026, $382.8M obligated (3.8% of ceiling) across 19 task orders. Key programs: CDAO MSS ($227.6M), Army Vantage SaaS ($103.4M), FORSCOM ($52M), Weapons System 360 ($15.1M).",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:25",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_W519TC25D0039_9700",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7045,
+      "finding_type": "financial",
+      "summary": "IRS holds two Palantir BPAs for Lead Case Analytics totaling $257.1M ceiling: legacy BPA (2032H518A00029, $157.1M, 94.7% utilized, expired Sept 2025) and replacement (2023H225A00002, $100M, 47.2% utilized, through 2028). $196.0M total obligated across 26 task orders. Products: SNAP, NIT, Criminal Investigation O&M, Enterprise Data Platform, COVID response.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:11:02",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_2032H518A00029_2050, CONT_IDV_2023H225A00002_2050",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4671,
+      "finding_type": "intelligence",
+      "summary": "Palantir ImmigrationOS is a USD 30M sole-source AI platform for ICE deportation management with three functions: targeting prioritization, self-deportation tracking, and removal lifecycle management",
+      "detail": "In April 2025, ICE awarded Palantir a USD 30M sole-source contract for ImmigrationOS (Immigration Lifecycle Operating System). ICE justified no competitive bidding based on: (1) Palantir's 'deep institutional knowledge' from 12+ years of ICE work; (2) 'urgent and compelling need'; (3) six-month delivery requirement; (4) 'delays undercut executive orders.' Three functions: (a) streamline identification and apprehension of removal priorities; (b) track voluntary departures with 'near real-time visibility'; (c) optimize deportation logistics from identification to removal. Prototype due September 25, 2025, contract runs through September 2027. Total ICE spending on Palantir since 2014: USD 287M. Since January 2025: USD 81M+ in ICE contracts alone. ImmigrationOS replaces/expands on FALCON and ICM (Investigative Case Management) systems Palantir has operated for ICE since 2013.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-25",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:32:45",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "American Immigration Council",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios Denver (May 1, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Executive Gov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov contract 70CTD022FR0000170",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6953,
+      "finding_type": "financial",
+      "summary": "Palantir hit first billion-dollar federal contract year in FY2025 ($1.02B, +89% YoY from $541M). This coincided with three FF alumni/associates in senior government roles: Kratsios (OSTP Dir, confirmed Mar 2025), Emil Michael (USD(R&E), confirmed May 2025), and Helberg (Under Sec State, confirmed Oct 2025, retained Palantir Sr Advisor role). Key FY2025 contracts: Maven expansion to $1.3B ceiling (May 2025), Army $10B enterprise agreement (Jul 2025), DHS $1B+ BPA, ImmigrationOS $30M (Apr 2025). FY2025 Q4 alone was $448M \u2014 largest single quarter ever.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-30",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:40:39",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7043,
+      "finding_type": "financial",
+      "summary": "State Department awarded Palantir two single-award enterprise BPAs: original $99.6M (19AQMM22A0249, Sept 2022, 72.4% utilized) and expanded $410M replacement (19AQMM25A1228, Sept 2025). Combined ceiling $509.6M for 'Enterprise Data Management Platform'. $98.8M obligated across 10 task orders.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-30",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:53",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_19AQMM22A0249_1900, CONT_IDV_19AQMM25A1228_1900",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7497,
+      "finding_type": "financial",
+      "summary": "VOWS platform is narrow marriage fraud detection \u2014 NOT voter data processing: Three USCIS task orders (Phase 0: Oct 2025 ,999; Phase 1: Dec 2025 ,500; Phase 2: Feb 2026 ,500) for 'Vetting of Wedding-Based Schemes' platform. VOWS is designed to detect marriage fraud in immigration applications using USCIS marriage-based petition data, not voter rolls. Each phase priced just below K DHS review threshold (Noem policy). Parent BPA: 47QTCA24D004L.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-10-28",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:14:15",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70SBUR26F00000003_7003_47QTCA24D004L_4732",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7506,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Three-pathway voter data flow to Palantir systems identified. (1) DIRECT: ImmigrationOS documented as ingesting state voter rolls directly, per leaked 404 Media documents. (2) VIA SAVE: States upload voter rolls to SAVE for citizenship verification; SAVE SORN routine uses permit sharing with DHS components including ICE for 'law enforcement, immigration' purposes; Palantir operates ICM/ImmigrationOS on ICE data. (3) VIA DOJ MOU: DOJ demands unredacted voter rolls from states; MOU permits unnamed contractor access; Palantir holds M+ in DOJ contracts. USCIS official David Jennings stated SAVE 'does not refer noncitizens to ICE' and 'does not share case information with other agencies' \u2014 but SORN routine uses appear to contradict this. VOWS is NOT in this pipeline \u2014 it processes marriage fraud data, not voter data.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-10-31",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:15:21",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7327,
+      "finding_type": "intelligence",
+      "summary": "Palantir is the strongest candidate for the unnamed MOU contractor: already holds $145M ICE Investigative Case Management contract (70CTD022FR0000170), $30M ImmigrationOS contract pulling data from IRS/SSA/voter rolls, new USCIS VOWS platform contract (Oct 2025), and is building cross-agency IRS 'mega-database'. ImmigrationOS explicitly integrates voter records from states including PA and FL. Congressional letter (Wyden/AOC Jun 2025) demanded answers on Palantir's data consolidation role.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-18",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:39",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7508,
+      "finding_type": "intelligence",
+      "summary": "ELITE tool built on ImmigrationOS ingests HHS/Medicaid, DMV, utility, IRS, SSA, passport, LPR data for ICE targeting \u2014 voter roll status unclear at ELITE level: EFF Jan 2026 report documents ELITE (Enhanced Leads Identification & Targeting for Enforcement) as a Palantir map-based targeting app built on ImmigrationOS platform. Data sources confirmed via court testimony: DMV, Medicaid/HHS, utility records, SSA, IRS, passport, court records, license plate readers, data brokers (Thomson Reuters CLEAR). Each target gets dossier with 0-100 confidence score on address accuracy. ICE-CMS data sharing agreement covers ~80M Medicaid patients. While ImmigrationOS broadly documented as ingesting voter rolls (404 Media), ELITE-specific documentation does not explicitly list voter data.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-01-15",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:18:21",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:EFF 2026-01-15 Palantir-ELITE-report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7042,
+      "finding_type": "financial",
+      "summary": "DHS awarded Palantir a $1B single-award BPA (70RTAC26A00000001) on Feb 12, 2026, running through 2031. Allows CBP, ICE, USCIS, Secret Service, and other DHS components to acquire Palantir platforms without separate competitive bidding. Only $18.7M obligated so far (1.9%). Includes USCIS 'VOWS' vetting platform and Secret Service data modeling.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-02-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:44",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_70RTAC26A00000001_7001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7037,
+      "finding_type": "financial",
+      "summary": "Palantir holds 23 identified IDIQ/BPA contract vehicles with combined ceiling values of .3B. Of these, .0B in ceiling value is on Palantir-specific single-award vehicles (9.7% utilized at .36B obligated). The remaining .3B is on multi-award vehicles shared with other vendors.",
+      "detail": null,
+      "source_datasets": [
+        "USASpending.gov,SAM.gov"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:10:14",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending.gov CONT_IDV data, SAM.gov entity records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7047,
+      "finding_type": "intelligence",
+      "summary": "Of Palantir's single-award IDIQ/BPA vehicles, 8 of 15 were NOT COMPETED or sole-source. The three largest single-award vehicles \u2014 Army EA ($10B), Maven MSS ($1.275B), DHS BPA ($1B) \u2014 total $12.275B in ceiling. Army EA classified 'Only One Source' under FAR 6.302-1. Pattern: Palantir gains initial foothold via competed or small pilots, then expands via sole-source consolidation once it becomes incumbent.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-23",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:11:29",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending CONT_IDV_W519TC25D0039_9700",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7049,
+      "finding_type": "financial",
+      "summary": "Total USASpending obligations to Palantir across all agencies: DoD $2.435B (68%), HHS $405M (11%), DHS $320M (9%), DOJ $209M (6%), Treasury $196M (6%). Within DoD: Army dominates at $2.38B (98% of DoD), Air Force $642M, Navy $79M. DHS spending concentrated at ICE ($300M+) for FALCON and ICM (Investigative Case Management) platforms.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:12:14",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 2705,
       "finding_type": null,
@@ -339,98 +1042,6 @@
       ]
     },
     {
-      "id": 4671,
-      "finding_type": "intelligence",
-      "summary": "Palantir ImmigrationOS is a USD 30M sole-source AI platform for ICE deportation management with three functions: targeting prioritization, self-deportation tracking, and removal lifecycle management",
-      "detail": "In April 2025, ICE awarded Palantir a USD 30M sole-source contract for ImmigrationOS (Immigration Lifecycle Operating System). ICE justified no competitive bidding based on: (1) Palantir's 'deep institutional knowledge' from 12+ years of ICE work; (2) 'urgent and compelling need'; (3) six-month delivery requirement; (4) 'delays undercut executive orders.' Three functions: (a) streamline identification and apprehension of removal priorities; (b) track voluntary departures with 'near real-time visibility'; (c) optimize deportation logistics from identification to removal. Prototype due September 25, 2025, contract runs through September 2027. Total ICE spending on Palantir since 2014: USD 287M. Since January 2025: USD 81M+ in ICE contracts alone. ImmigrationOS replaces/expands on FALCON and ICM (Investigative Case Management) systems Palantir has operated for ICE since 2013.",
-      "source_datasets": [
-        "usaspending"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 19:32:45",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "American Immigration Council",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Axios Denver (May 1, 2025)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Executive Gov",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "USASpending.gov contract 70CTD022FR0000170",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4673,
-      "finding_type": "financial",
-      "summary": "Palantir helping DOGE build IRS mega-database/unified API, triggering Wyden-AOC congressional inquiry over potential Privacy Act violations",
-      "detail": "Palantir is collaborating with Elon Musk's DOGE to build a 'mega API' for accessing IRS records. DOGE and Palantir representatives worked with dozens of career IRS engineers at a 'hackathon' to build a single API layer above all IRS databases. The project facilitates movement of IRS data to the cloud, enabling access to taxpayer details, tax returns, and employment data, while allowing cross-agency comparisons. On June 17, 2025, Senator Wyden and Rep. Ocasio-Cortez led a letter from 10 congressional Democrats demanding answers, arguing the project likely violates the Privacy Act and other federal laws. Signatories included Sens. Merkley, Markey, Warren, and Reps. Jacobs, Lee, McGovern, Tlaib, Tonko. Palantir's global director for privacy denied creating a 'master list' of data from multiple agencies, saying they are building a 'unified API' for the IRS.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 19:32:57",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FedScoop",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "Nextgov/FCW",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Senate Finance Committee letter (June 17, 2025)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "TechCrunch (April 5, 2025)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 4681,
       "finding_type": "financial",
       "summary": "Palantir-DOGE personnel pipeline: multiple former Palantir employees hired into DOGE, including at OPM, GSA, DoE, and OMB, while Palantir wins billions in contracts from agencies DOGE restructures",
@@ -470,52 +1081,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Wikipedia DOGE network page",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4682,
-      "finding_type": "intelligence",
-      "summary": "NATO acquired Palantir Maven Smart System in fastest-ever procurement (6 months), extending US military AI dominance to alliance-wide warfighting infrastructure",
-      "detail": "On March 25, 2025, NATO Communications and Information Agency (NCIA) finalized acquisition of Palantir Maven Smart System NATO (MSS NATO) for Allied Command Operations. The contract was one of NATO's most expeditious procurements \u2014 6 months from requirement to acquisition (sole-source). MSS pulls data from classified and public sources into a searchable database for AI-enabled battlefield operations. This follows the US DoD raising Palantir's MSS contract ceiling to USD 1.3B through 2029. The NATO Joint Warfare Centre has already trained on MSS integration. Separately, Palantir announced up to USD 1.5B investment in a UK defense headquarters. UK MOD awarded Palantir a GBP 240.6M direct-award contract (December 2025, no competitive tender). Five Eyes intelligence agencies have used Palantir since at least 2010 (per Snowden documents: GCHQ presentation noted 'faster analytics' and 'unexpected benefits'). Australia holds AUD 100M+ in Palantir contracts.",
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-03 19:33:47",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Breaking Defense",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "DefenseScoop (April 14, 2025)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NATO NCIA press release (March 25, 2025)",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "The Intercept Snowden documents",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -869,71 +1434,7 @@
       "evidence": [
         {
           "evidence_type": "file",
-          "evidence_ref": "SEC EDGAR CIK 0001321655 Form 4 filings; Fortune 2/22/2025; Bloomberg 2/21/2025; secform4.com/insider-trading/1321655.htm",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4931,
-      "finding_type": "identity",
-      "summary": "Palantir Technologies UK Ltd & Eagle Ltd - UK Corporate Structure",
-      "detail": "Palantir operates two UK entities: (1) Palantir Technologies UK, Ltd. (07042994, incorporated 2009-10-14), and (2) Palantir Technologies UK - Eagle, Ltd. (10515288, incorporated 2016-12-07). Both at Birchin Court, 5th Floor, 19-25 Birchin Lane, London EC3V 9DU. Eagle is a wholly-owned subsidiary of Palantir UK, which is wholly owned by Palantir Technologies Inc. (Aventura, FL). Alex Karp served as director of both entities (2009-2021). Current directors include Ryan Douglas Taylor (American, Palantir COO). Sir Daniel Bethlehem (former FCO Legal Adviser) served as director 2013-2024.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 18:21:47",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 07042994",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 10515288",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 4943,
-      "finding_type": "relationship",
-      "summary": "Sir Daniel Bethlehem - former FCO Legal Adviser served as Palantir UK director (2013-2024)",
-      "detail": "Sir Daniel Lincoln Bethlehem KCMG QC (DOB 6/1960) served as director of Palantir Technologies UK, Ltd. (07042994) from 2013-11-04 to 2024-03-10. Bethlehem was the UK Foreign and Commonwealth Office Legal Adviser (2006-2011), the top legal position in UK foreign policy. He also runs LPI Consultancy Ltd and Legal Policy International Ltd. His decade-long service on Palantir UK's board represents a significant revolving door between UK government legal establishment and US defense tech.",
-      "source_datasets": [
-        "registry"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-04 18:23:33",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House 07042994",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "UK Companies House officer cWEShJvh2wR96i6riJ2cPsVnvtU",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1321655",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1009,32 +1510,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "analysis-run-10",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 5494,
-      "finding_type": "intelligence",
-      "summary": "Palantir-DOGE nexus: Palantir federal contracts nearly doubled to .5M in 2025. USASpending shows .4B lifetime contracts (DoD .3B, HHS M, DHS M, DOJ M, Treasury M). Key DOGE projects: (1) IRS 'mega API' hackathon to create centralized taxpayer data access, hosted on Palantir Foundry. (2) Treasury unified API layer contract. (3) M ICE 'ImmigrationOS' contract for deportation tracking. (4) Accenture/Palantir certifying 1,000 federal workers on Foundry. (5) Talks with SSA and Education to adopt Foundry. Several DOGE members were former Palantir employees. New federal CIOs at OMB, OPM, and DoE tied to Palantir or SpaceX. Congressional inquiry: 10 Democrats including Sen. Wyden and Rep. AOC wrote to Palantir CEO Alex Karp on June 17, 2025.",
-      "detail": null,
-      "source_datasets": [
-        "usaspending",
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 22:32:04",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "USASpending data; Suffolk JHTL article; Senate Finance Committee letter; FedScoop; IT Magazine",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1142,31 +1617,6 @@
       ]
     },
     {
-      "id": 6448,
-      "finding_type": "financial",
-      "summary": "Palantir SAM.gov entity registration: Legal name PALANTIR TECHNOLOGIES INC., UEI=FSY4LVSBGWB7, CAGE=470F5. Physical address: 518 17th St Ste 1015, Denver CO 80202. Mailing: 100 Hamilton Ave Ste 300, Palo Alto CA 94301. Incorporated Delaware 2003-05-06. Primary NAICS 513210 (Software Publishers). Registration active through 2027-02-12. No exclusions (not debarred).",
-      "detail": null,
-      "source_datasets": [
-        "sam"
-      ],
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:53:55",
-      "target_name": "Palantir Technologies",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SAM_BULK:FSY4LVSBGWB7",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6453,
       "finding_type": "financial",
       "summary": "IRS/Treasury-Palantir contract via DOGE channel: Treasury awarded Palantir a contract for a 'unified API layer' for IRS databases, aiming to create a single interface for all IRS data. Contract ID: CONT_AWD_692M1525F00024_6920_47QTCA24D004L_4732. Sam Corcos (DOGE special adviser to Treasury Secretary, later Treasury CIO) was described as 'a big fan of Palantir' who pushed to expand its IRS work. This makes the Palantir-Treasury connection a second simultaneous instance of a DOGE operative expanding contracts with their prior-employer's technology.",
@@ -1217,6 +1667,413 @@
       ]
     },
     {
+      "id": 6847,
+      "finding_type": "financial",
+      "summary": "CEO Alexander Karp incurred $17.2M in personal aircraft expenses charged to Palantir in 2025, up from $7.7M in 2024 \u2014 a 123% increase. Aircraft is beneficially owned by Karp.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:41:12",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6849,
+      "finding_type": "financial",
+      "summary": "Palantir FY2025: Revenue $4.475B (56% YoY growth). Government segment 54% ($2.42B), Commercial 46% ($2.06B). US revenue 74% ($3.3B, up 75% YoY). Total remaining deal value $11.2B (up 105%). Additional $12.3B in unfunded IDIQ government contracts. 954 customers (up from 711). Top 20 customers average $93.9M.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:41:32",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6850,
+      "finding_type": "identity",
+      "summary": "Palantir relocated headquarters to 19505 Biscayne Boulevard Suite 2350, Aventura FL 33180. Company incorporated in Delaware May 6, 2003. Jointly owned entity with HD Hyundai Co. Ltd. created in South Korea December 2022 (Palantir holds controlling interest).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:41:40",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6851,
+      "finding_type": "identity",
+      "summary": "Founder voting control structure: Stephen Cohen, Alexander Karp, and Peter Thiel control voting through Class F common stock held in Founder Voting Trust (Wilmington Trust as trustee) plus Class B (10 votes/share). Founders effectively control 49.999999% of voting power on all stockholder matters. Any two founders can defeat any stockholder action. Majority of founders determines vote direction.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:41:51",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6852,
+      "finding_type": "financial",
+      "summary": "Palantir insider selling: Form 4 filed 2026-03-04 shows approximately 2,000,000 shares sold on 2026-03-02 at prices ranging from $140.97 to $146.80 per share (approximately $289M total). Seller holds 34.26M + 20.82M Class A shares after sale. Multiple additional sales in Feb-March 2026 by directors and officers.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:42:24",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1321655",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6853,
+      "finding_type": "negative_result",
+      "summary": "Investigation coverage gap: Alexander Karp (CEO) and Stephen Cohen (co-founder) have zero findings in the investigation database despite holding combined voting control (with Thiel) of 49.999999% of Palantir. Peter Thiel has 96 findings and 74 connections. Alexander Moore (board director) also has zero coverage. The officer details are deferred to the proxy statement (DEF 14A).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 02:42:53",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6885,
+      "finding_type": "financial",
+      "summary": "FY2025 accounts receivable grew 81% ($575M to $1,042M) vs revenue growth of 56%. DSO expanded 73 to 85 days. $450M AR cash drain is largest working capital movement. Pattern coincides with rapid government contract scaling during DOGE era",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 03:13:04",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6886,
+      "finding_type": "financial",
+      "summary": "FY2025 SBC expense $684M (15.3% of revenue) plus $156M employer payroll taxes = $840M total. GAAP operating margin 32% vs adjusted 50% excluding SBC. SBC declining as % of revenue (24.1% FY2024 -> 15.3% FY2025) but absolute amount still exceeds half of GAAP net income",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 03:13:08",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6888,
+      "finding_type": "identity",
+      "summary": "Founder perpetual control: Class F shares guarantee Karp/Cohen/Thiel 49.999999% voting power regardless of economic ownership. Structure persists until death of last living founder (Cohen is 43). Thiel excluded portion of shares from founder agreement (<5% voting power). Three founders adopted 10b5-1 trading plans Nov-Dec 2025: Thiel 2M shares, Karp 360K, Moore 192K",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 03:13:14",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6889,
+      "finding_type": "financial",
+      "summary": "$12.3B in unfunded IDIQ government contract awards as of Dec 2025, NOT included in $11.2B remaining deal value. Filing explicitly warns DOGE spending cuts 'could impact our business.' Government shutdown occurred Q3 2025. US gov revenue $1.9B (42% of total)",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 03:13:17",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6890,
+      "finding_type": "financial",
+      "summary": "Palantir has $9.0B in federal NOLs and $3.5B gross deferred tax assets with $3.45B valuation allowance. Effective tax rate only 1.4% on $1.66B pre-tax income in FY2025. Company paid minimal cash taxes despite $1.6B net income",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 03:13:20",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001321655-26-000011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6908,
+      "finding_type": "financial",
+      "summary": "Procurement acceleration: Palantir federal spending grew 88.6% YoY (FY2024 $541.2M -> FY2025 $1.02B), exceeding 2x its own 3-year CAGR of 39.4%. This is approximately 6-9x the defense sector average growth rate of 10-15%.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 14:39:13",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASPENDING:PALANTIR TECHNOLOGIES INC.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6911,
+      "finding_type": "financial",
+      "summary": "Lobbying-contract timing correlation: Palantir lobbying spend increased 100% from $822K (2022) to $1.64M (2025), coinciding with a 171% increase in federal obligations ($376.8M to $1.02B). Lobbying issue focus shifted from DEF+HOM to DEF+SCI(science/tech), suggesting strategic repositioning toward AI/data analytics procurement. The lobbying increase preceded the sharpest contract growth (FY2024-2025).",
+      "detail": null,
+      "source_datasets": [
+        "senate_lda,usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 14:41:29",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:Palantir Technologies",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6913,
+      "finding_type": "financial",
+      "summary": "SEC-USASpending cross-check: Only 15-23% of Palantir total revenue appears in USASpending (rising from 15.6% in CY2023 to 22.8% in CY2025). With government segment estimated at ~60% of total revenue (~$2.7B in CY2025), USASpending captures only ~38% of government revenue. The ~$1.7B delta suggests substantial classified program revenue, subcontract revenue, international government contracts, or state/local government work not tracked in USASpending.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar,usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 14:44:29",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=PLTR+10-K+2026-02-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6915,
+      "finding_type": "relationship",
+      "summary": "Palantir Technologies is the top cross-thread connector spanning 7 of 10 investigation threads (2,3,4,6,8,11,14)",
+      "detail": "Graph analysis shows Palantir Technologies appears in threads: Emil Michael Conflicts (via Coatue), Musk/DOGE, Defense Tech, VC/Defense Investment, Ethics/Oversight, DOGE Operations, and Election Enforcement. With 39 findings across these threads, betweenness rank #9 (0.1376), and degree 16, Palantir functions as the primary institutional bridge across the entire investigation. This is structural: Palantir's defense contracts, political connections, and personnel placement create edges in nearly every thread.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:22:37",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7150,
+      "finding_type": "financial",
+      "summary": "Palantir federal contract obligations nearly doubled in FY2025: $1.02B (FY2025) vs $541M (FY2024), 89% YoY increase. FY2026 partial year already at $433M. Treasury/IRS spending specifically spiked from $24.9M (FY2024) to $72M (FY2025) \u2014 189% increase \u2014 coinciding with Corcos as Treasury CIO.",
+      "detail": "USASpending all-Palantir federal timeline: FY2022 $377M, FY2023 $348M, FY2024 $541M, FY2025 $1.021B, FY2026 partial $433M. Treasury-specific quarterly: FY2024 Q2 $0.7M, FY2024 Q4 $24.2M, FY2025 Q2 $9.7M, FY2025 Q3 $1.75M, FY2025 Q4 $60.5M. The FY2025 Q4 spike correlates with Sep 2025 $100M BPA award. Combined with $10B Army ESA (Aug 2025) and $1B Maven increase (May 2025), Palantir's government revenue trajectory shifted dramatically during the DOGE placement period.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:40:13",
+      "target_name": "Palantir Technologies",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending timeline query: Palantir Treasury quarterly FY2025 Q4 $60.5M",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending timeline query: Palantir all agencies FY2024 $541M, FY2025 $1.021B",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 424,
       "finding_type": "financial",
       "summary": "Palantir Technologies maintained massive lobbying presence: 516 total filings from 2006-present. Early lobbying (2006-2010) through Morgan and Cunningham LLC focused on Defense, Homeland Security, Intelligence, Law Enforcement, and SEC/Financial Securities applications. Later expanded to multiple registrants. Key lobbyist Bryan Cunningham (Morgan and Cunningham) handled defense/intel lobbying. Alexander Karp (CEO, 17 Epstein email exchanges) is NOT listed as a registered lobbyist in LDA records. Palantir lobbied to sell surveillance/analytics software to US intelligence community and DOD - the same capabilities relevant to tracking networks like Epstein's.",
@@ -1233,6 +2090,56 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "LDA:85acc144-1daf-4f92-b19e-48bc73e052ec",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7024,
+      "finding_type": "financial",
+      "summary": "Palantir received M in new contracts since January 2025 inauguration plus M additional award \u2014 M total during DOGE period. Concurrent with DOGE cutting .1B in DoD consulting contracts and .5B in IRS modernization. DOGE members are Palantir veterans, former Palantir employees installed as federal CIO. Democrats alleged Palantir IRS contract 'blatantly violates Privacy Act' notice/transparency requirements. Palantir's IRS mega-database designed to be shareable across federal agencies.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:43",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/modernization/2025/06/democrats-press-palantir-about-reported-creation-irs-mega-database/406144/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7004,
+      "finding_type": "financial",
+      "summary": "Palantir contract explosion concurrent with DOGE cuts: Army 10-year/B enterprise agreement (July 2025, consolidating 75 contracts); ICE ImmigrationOS M (April 2025); CDAO MSS task order .6M; USCIS VOWS platform (Oct 2025); Treasury unified API; ARPA-H M AI contract; VA M data platform. Federal contracts nearly doubled to .5M in 2025. DOGE operatives from Palantir (Barbaccia at OMB, Minor CTO at HHS/NIH, Mangaser) positioned at agencies that subsequently expanded Palantir deployments.",
+      "detail": null,
+      "source_datasets": [
+        "FedSavvy, USASpending, Axios, Fortune"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-08-05",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:55:47",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.fedsavvystrategies.com/palantir-federal/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1832,6 +2739,410 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7318,
+      "finding_type": "financial",
+      "summary": "Palantir federal contract portfolio totals .56B+ across five agencies: DOD .44B, HHS M, DHS M, DOJ M, Treasury/IRS M",
+      "detail": "USASpending data shows Palantir Technologies Inc. has received at minimum 3.56 billion in federal contracts. Recent awards accelerating: DOD Maven Smart System M (2024), CDAO task order M (2025-2029), Army Enterprise Agreement IDIQ W519TC25D0039 generating multiple task orders. DOD contracts awarded to both Palantir Technologies Inc. and Palantir USG Inc subsidiary.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:14:50",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient profile query 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7319,
+      "finding_type": "financial",
+      "summary": "DHS awards Palantir sole-source B BPA (Feb 2026) for department-wide AI/analytics deployment bypassing competitive bidding",
+      "detail": "DHS OCIO awarded Palantir a single-award Blanket Purchase Agreement with 5-year ceiling of 1 billion dollars for commercial software licenses, maintenance, and implementation services department-wide. NOT competed. All DHS agencies including ICE, CBP, USCIS, FEMA, CISA can acquire Palantir Gotham and Foundry platforms through task orders without separate competitive procurement. Consolidates Palantir as sole enterprise data analytics provider across DHS. Published February 2026.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:14:58",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://orangeslices.ai/dhs-ocio-inks-1-billion-bpa-with-palantir/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://siliconangle.com/2026/02/19/dhs-awards-palantir-1b-deploy-ai-data-analytics-platforms/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7320,
+      "finding_type": "intelligence",
+      "summary": "ImmigrationOS: Palantir M sole-source ICE contract to build immigration surveillance backbone integrating IRS, SSA, passport, and LPR data",
+      "detail": "ICE awarded Palantir 30M sole-source contract to build ImmigrationOS (Immigration Lifecycle Operating System). System designed to: (1) streamline identification/apprehension of removal targets, (2) track self-deportations with near real-time visibility, (3) optimize deportation logistics. Integrates passport data, Social Security records, IRS tax information, and license plate reader data into single operational platform. Prototype delivery Sep 25 2025, contract through Sep 2027. ICE added 25 AI use cases since summer 2025 including biometric identity confirmation and mobile device data processing. OpenAI also involved in some ICE AI applications.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:07",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://orangeslices.ai/dhs-ice-awards-30m-immigration-lifecycle-operating-system-immigrationos-sole-source-support-task-to-palantir/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/local/denver/2025/05/01/palantir-deportations-ice-immigration-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7323,
+      "finding_type": "financial",
+      "summary": "Palantir IRS contracts total M: Unified API, Compliance Hub analytics, Criminal Investigation TOIS, SNAP case selection, and data ontology mapping",
+      "detail": "20 IRS task orders identified via USASpending under BPA 2032H518A00029. Key programs: (1) Unified API (14.2M, Sep 2025) making IRS data accessible to any app via semantic layer, (2) Compliance Hub analytics models (13.3M, Sep 2025), (3) Enterprise Data Platform SNAP (11.8M, Jan 2025), (4) Criminal Investigation TOIS (8.3M, Sep 2024), (5) IRS data ontology mapping (2.75M, Apr 2025), (6) Workload ID/Case Selection Pilot (1.8M, Jan 2025), (7) LCA O&M support services. Also newer BPA 2023H225A00002 active from Sep 2025. Sen. Wyden and Rep. AOC demanded answers from Palantir CEO Alex Karp about IRS mega-database plans (Jun 17 2025 letter).",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:21",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending IRS-Palantir awards query 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finance.senate.gov/imo/media/doc/wyden_aoc_palantir_letter_061725.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7326,
+      "finding_type": "intelligence",
+      "summary": "IRS-ICE data sharing MOU (Apr 2025) enables taxpayer records to flow to immigration enforcement - 3 senior IRS officials resigned in protest",
+      "detail": "IRS finalized memorandum of understanding with ICE on April 7 2025 to share sensitive taxpayer information for deportation efforts. ICE can submit names and addresses of immigrants with final removal orders or under criminal investigation for cross-verification against tax records. Acting IRS Commissioner Melanie Krause resigned in protest. Chief Privacy Officers Kathleen Walters and Teresa Hunter also resigned over concerns the MOU violates taxpayer privacy law (26 USC 6103). Federal judge blocked further record-sharing Nov 2025, but DC Circuit declined to issue preliminary injunction Feb 2026. ProPublica reported IRS building vast system to share millions of taxpayers data with ICE. This creates direct pipeline from Palantir IRS Unified API to ImmigrationOS.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:15:35",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.epi.org/policywatch/ice-and-irs-reach-agreement-to-share-taxpayer-information-of-suspected-undocumented-immigrants/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/04/08/g-s1-59056/irs-dhs-information-sharing-deal-immigrants-tax-records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/trump-irs-share-tax-records-ice-dhs-deportations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7343,
+      "finding_type": "intelligence",
+      "summary": "USCIS VOWS platform: Palantir awarded 3-phase contract to build Vetting of Wedding-Based Schemes platform for marriage fraud detection",
+      "detail": "USCIS started contract with Palantir at end of Oct 2025 to implement Phase 0 of VOWS (Vetting of Wedding-Based Schemes) platform. Three phases identified in USASpending: Phase 0 (99,999.99, Oct-Dec 2025, award 70SBUR26F00000003), Phase 1 (99,500, Dec 2025-Jan 2026, 70SBUR26F00000026), Phase 2 (99,500, Feb-Mar 2026, 70SBUR26F00000055). All under USCIS sub-agency. This marks NEW relationship between Palantir and USCIS - previously Palantir only had contracts with ICE within DHS immigration system. Platform focused on detecting marriage and family-based petition fraud. Small contracts suggest prototype/pilot phase.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:40",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending USCIS Palantir contracts 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/12/09/palantir-new-contract-uscis-ice/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7348,
+      "finding_type": "financial",
+      "summary": "Palantir DHS ICE contracts total M: FALCON O&M (.8M+.3M+.9M), ICM (M+.6M), ImmigrationOS (M), Secret Service data modeling (.7M), USCIS VOWS (K)",
+      "detail": "16 Palantir DHS awards identified via USASpending. Key ICE programs: FALCON (Foreign Affairs, Law enforcement, and Counternarcotics) O&M support since 2011 across multiple contracts totaling ~84M. ICM (Investigative Case Management) 70CTD022FR0000170 is 145M (2022-2026) largest single DHS award. Earlier ICM contract 70CTD019FR0000268 was 43.6M (2019-2022). Also: Coast Guard COVID-19 readiness system (8.2M, 2020), FEMA healthcare studies (250K, 2024), US Secret Service data modeling (18.7M, Mar 2026 via new BPA 70RTAC26A00000001), and USCIS VOWS phases (299K total). Original Palantir-ICE relationship dates to 2011 HSI personnel support.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:54",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending DHS Palantir awards query 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7363,
+      "finding_type": "relationship",
+      "summary": "At least 8 Palantir alumni/stockholders identified in Trump administration: Barbaccia (Fed CIO), Minor (HHS CIO), Williams (OMB Defense), Bobba (OPM/DOGE), Edgar (DHS Deputy Sec), Law (DHS Under Sec), Ingrassia (DHS WH Liaison), Jancso (DOGE recruiter), Farritor (DOGE)",
+      "detail": "POGO Gold Rush investigation and Revolving Door Project documented extensive Palantir revolving door. Key positions: (1) Gregory Barbaccia - Federal CIO/OMB, ex-Palantir 10yr, also Chief Fed AI Officer, (2) Clark Minor - HHS CIO, ex-Palantir 13yr, (3) Thomas Williams - OMB Defense Division, spouse ex-Palantir with 2-10M stock, (4) Akash Bobba - OPM DOGE agent, ex-Palantir intern, (5) Troy Edgar - DHS Deputy Secretary, Palantir stockholder agreed to divest, (6) Robert Law - DHS Under Sec Strategy/Policy, Palantir stockholder agreed to divest, (7) Paul Ingrassia - DHS WH Liaison, Palantir stockholder, (8) Anthony Jancso - ex-Palantir DOGE recruiter, (9) Luke Farritor - DOGE agent. Additionally Stephen Miller holds 100-250K in Palantir stock. These appointees sit in agencies holding 3.56B in Palantir contracts.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:40",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/the-corporations-winning-big-under-trump-2-0/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/gold-rush-top-trump-officials-silicon-valley-ties",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7371,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Palantir holder-to-contract pipeline - appointees with financial ties occupy procurement authority at agencies holding .56B in Palantir contracts",
+      "detail": "Systematic revolving door pattern: (1) PROCUREMENT AUTHORITY: Barbaccia (ex-Palantir 10yr) as Federal CIO has FITARA sign-off over ALL federal IT projects. Minor (ex-Palantir 13yr) as HHS CIO oversees 405M in Palantir HHS contracts. Williams (OMB Defense) had undisclosed Palantir stock while overseeing DOD programs with 2.44B Palantir contracts. (2) POLICY AUTHORITY: Miller holds Palantir stock while directing immigration enforcement dependent on Palantir ImmigrationOS, FALCON, ICM. (3) DHS LEADERSHIP: Edgar (Deputy Sec), Law (Under Sec), Ingrassia (WH Liaison) all held Palantir stock at agency awarding 1B sole-source BPA. (4) DATA ACCESS: DOGE agents Bobba, Jancso, Farritor (Palantir-connected) accessing government IT. The Feb 2026 1B DHS BPA (during Barbacccias tenure) bypasses competitive bidding. No public Barbaccia ethics recusal identified.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:37",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending Palantir contract data 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/palantir-federal-agencies-government-data/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/gold-rush-top-trump-officials-silicon-valley-ties",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7377,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Palantir immigration enforcement data architecture - IRS Unified API + IRS-ICE MOU + ImmigrationOS creates unprecedented cross-agency surveillance pipeline",
+      "detail": "Three concurrent developments create an integrated immigration surveillance system: (1) Palantir IRS Unified API (14.2M contract, Sep 2025) standardizes ALL IRS data into semantic layer accessible to any application. (2) IRS-ICE MOU (Apr 2025) formally authorizes sharing taxpayer data with immigration enforcement - 3 senior IRS officials resigned in protest. (3) ImmigrationOS (30M contract) integrates passport, SSA, IRS, and LPR data into single ICE operational platform. Additionally: Palantir USCIS VOWS platform (299K) extends reach to marriage fraud detection, and Palantir Compliance Hub analytics (13.3M) creates IRS case selection models. The 1B DHS BPA (Feb 2026) removes procurement friction for all DHS agencies. Together these create a pipeline: IRS taxpayer data -> Unified API -> IRS-ICE MOU -> ImmigrationOS -> ICE field operations -> GEO Group/CoreCivic detention (combined 9.6B DHS contracts). Wyden/AOC Jun 2025 letter to Palantir CEO challenged legality under Privacy Act and 26 USC 6103.",
+      "source_datasets": [
+        "usaspending",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:54",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending IRS Palantir contracts 2026-03-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finance.senate.gov/imo/media/doc/wyden_aoc_palantir_letter_061725.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/trump-irs-share-tax-records-ice-dhs-deportations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7379,
+      "finding_type": "intelligence",
+      "summary": "ICE ELITE tool uses Palantir to ingest Medicaid data for 80M patients to generate deportation target dossiers with confidence scores",
+      "detail": "EFF report (Jan 15 2026) revealed Palantir-built tool called ELITE (Enhanced Leads Identification and Targeting for Enforcement) that populates map with potential deportation targets, generates dossiers with confidence scores on current address. Tool ingests Medicaid data and other government databases. ICE and CMS signed data-sharing agreement giving ICE access to personal data of nearly 80 million Medicaid patients. EFF sued to block use of Medicaid data for deportation. Documents released via 404 Media/Freedom of the Press Foundation FOIA lawsuit. Palantir responded with blog post 'Correcting the Record' disputing some EFF claims. Health experts warn chilling effect on immigrant families seeking healthcare.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:18",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2026/01/26/ice-allegedly-uses-palantir-tool-tracking-medicaid-data/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.eff.org/deeplinks/2026/01/report-ice-using-palantir-tool-feeds-medicaid-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7385,
+      "finding_type": "financial",
+      "summary": "US Secret Service awarded Palantir .65M 'data modeling' contract (Mar 2026) via new DHS BPA 70RTAC26A00000001 - first known USSS-Palantir task order",
+      "detail": "USASpending shows US Secret Service awarded Palantir 18,653,251.80 for 'DATA MODELING' contract (award 70US0926F2GSA2328) starting Mar 18 2026 through Mar 17 2027. This is a BPA Call under the new DHS-wide BPA 70RTAC26A00000001 (which is the 1B DHS BPA awarded Feb 2026). This appears to be the first significant USSS-Palantir task order, demonstrating the 1B BPA is already generating new agency relationships beyond ICE and CBP.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:54",
+      "target_name": "Palantir Technologies Inc.",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending award CONT_AWD_70US0926F2GSA2328_7009_70RTAC26A00000001_7001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -2201,6 +3512,253 @@
       "evidence": []
     },
     {
+      "id": 3480,
+      "person_a": "Gabe Sganga",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "employment",
+      "description": "Deployment Strategist at Palantir 4.5 years (2018-2022), national security focus. Previously USMC MARFORCYBER Cyberspace Operations Officer at Fort Meade (NSA/USCYBERCOM complex). Third confirmed Palantir alumnus at Forterra (with Philips and McGhan).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 02:45:31",
+      "profile_id": "tech-right",
+      "other_person": "Gabe Sganga",
+      "other_person_slug": "gabe-sganga",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Autonocast interview",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BreakLine Education post",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3481,
+      "person_a": "Mike McGhan",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "employment",
+      "description": "BD at Palantir 5.5 years (2017-2022), led Navy business. Previously Navy pilot and operational test pilot 11 years. Naval Academy grad. Third confirmed Palantir alumnus at Forterra.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 02:45:31",
+      "profile_id": "tech-right",
+      "other_person": "Mike McGhan",
+      "other_person_slug": "mike-mcghan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FAV Summit bio",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Org Forterra",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3507,
+      "person_a": "Michael Kratsios",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:42",
+      "profile_id": "tech-right",
+      "other_person": "Michael Kratsios",
+      "other_person_slug": "michael-kratsios",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2020",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3510,
+      "person_a": "Jacob Helberg",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:41:45",
+      "profile_id": "tech-right",
+      "other_person": "Jacob Helberg",
+      "other_person_slug": "jacob-helberg",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:timeline:Palantir:FY2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3581,
+      "person_a": "Palantir Technologies",
+      "person_b": "Sam Corcos",
+      "relationship_type": "financial",
+      "description": "Corcos as Treasury CIO oversaw $100M new IRS BPA to Palantir (Sep 2025) and $27.6M in immediate task orders, after canceling $1.5B in competing IRS modernization contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:48",
+      "profile_id": "tech-right",
+      "other_person": "Sam Corcos",
+      "other_person_slug": "sam-corcos",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending BPA 2023H225A00002",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3585,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": "10-year Palantir vet as Federal CIO with FITARA authority over all federal IT. No Palantir recusal. Palantir federal contracts doubled to $1.02B during his tenure.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:41:58",
+      "profile_id": "tech-right",
+      "other_person": "Gregory Barbaccia",
+      "other_person_slug": "gregory-barbaccia",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Gold Rush, USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3602,
+      "person_a": "Anduril Industries",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": "Consortium partners bidding for Golden Dome. Both Thiel-backed. Palantir has separate $10B Army enterprise contract; Anduril has $20B version.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:44:13",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": []
+    },
+    {
+      "id": 3641,
+      "person_a": "Joe Lonsdale",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "corporate",
+      "description": "Co-founded Palantir in 2004 with Peter Thiel, Alex Karp, Stephen Cohen, Nathan Gettings",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:48",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 68271",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3719,
+      "person_a": "DOJ Civil Rights Division",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:28",
+      "profile_id": "tech-right",
+      "other_person": "DOJ Civil Rights Division",
+      "other_person_slug": "doj-civil-rights-division",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3721,
+      "person_a": "ICE",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:16:30",
+      "profile_id": "tech-right",
+      "other_person": "ICE",
+      "other_person_slug": "ice",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3806,
+      "person_a": "DHS SAVE System",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 21:15:33",
+      "profile_id": "tech-right",
+      "other_person": "DHS SAVE System",
+      "other_person_slug": "dhs-save-system",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ref:USASpending CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2722,
       "person_a": "Jacob Helberg",
       "person_b": "Palantir Technologies",
@@ -2276,6 +3834,34 @@
       "evidence": []
     },
     {
+      "id": 3472,
+      "person_a": "Forterra",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "corporate",
+      "description": "Scott Philips (Forterra CIO) is early Palantir Forward Deployed Engineer alumnus. Defense tech talent pipeline from Palantir -> Vannevar Labs -> Forterra.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 00:42:59",
+      "profile_id": "tech-right",
+      "other_person": "Forterra",
+      "other_person_slug": "forterra",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Vannevar Labs website",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 2695,
       "person_a": "Palantir",
       "person_b": "Thomas Williams",
@@ -2306,6 +3892,21 @@
       "evidence": []
     },
     {
+      "id": 2698,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir",
+      "relationship_type": "employment",
+      "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:40",
+      "profile_id": "tech-right",
+      "other_person": "Gregory Barbaccia",
+      "other_person_slug": "gregory-barbaccia",
+      "evidence": []
+    },
+    {
       "id": 2761,
       "person_a": "Emil Michael",
       "person_b": "Palantir",
@@ -2318,6 +3919,21 @@
       "profile_id": "tech-right",
       "other_person": "Emil Michael",
       "other_person_slug": "emil-michael",
+      "evidence": []
+    },
+    {
+      "id": 2812,
+      "person_a": "Palantir",
+      "person_b": "Stephen Miller",
+      "relationship_type": "financial",
+      "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 01:31:14",
+      "profile_id": "epstein",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
       "evidence": []
     },
     {
@@ -2341,6 +3957,87 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3059,
+      "person_a": "Clark Minor",
+      "person_b": "Palantir",
+      "relationship_type": "employment",
+      "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:55:25",
+      "profile_id": "tech-right",
+      "other_person": "Clark Minor",
+      "other_person_slug": "clark-minor",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop; Bloomberg; ProPublica disclosure minor-clark",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3518,
+      "person_a": "Cornerstone Government Affairs, Inc.",
+      "person_b": "Palantir",
+      "relationship_type": "contracts_with",
+      "description": "Lobbying firm representing Palantir on Budget/Health Data Analytics issues, Q1 2023-present, K total LDA income",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:51:43",
+      "profile_id": "tech-right",
+      "other_person": "Cornerstone Government Affairs, Inc.",
+      "other_person_slug": "cornerstone-government-affairs-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:75557",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3524,
+      "person_a": "DOGE",
+      "person_b": "Palantir",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:03",
+      "profile_id": "tech-right",
+      "other_person": "DOGE",
+      "other_person_slug": "doge",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "agent:analysis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3597,
+      "person_a": "Palantir",
+      "person_b": "Shyam Sankar",
+      "relationship_type": "employment",
+      "description": "CTO of Palantir; holds stock and options worth over $200M; Palantir has over $1B in cumulative defense contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:43:04",
+      "profile_id": "tech-right",
+      "other_person": "Shyam Sankar",
+      "other_person_slug": "shyam-sankar",
+      "evidence": []
     },
     {
       "id": 2689,
@@ -2378,10 +4075,378 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 3738,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir Technologies Inc.",
+      "relationship_type": "employment",
+      "description": "Barbaccia employed at Palantir for 10 years (last 3 as head of intelligence/investigations) before becoming Federal CIO in Jan 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:51",
+      "profile_id": "tech-right",
+      "other_person": "Gregory Barbaccia",
+      "other_person_slug": "gregory-barbaccia",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/01/gregory-barbacia-named-federal-cio/402501/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3739,
+      "person_a": "Clark Minor",
+      "person_b": "Palantir Technologies Inc.",
+      "relationship_type": "employment",
+      "description": "Minor employed at Palantir for 13 years (Aug 2013-Apr 2024) as global head of cloud before becoming HHS CIO",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:53",
+      "profile_id": "tech-right",
+      "other_person": "Clark Minor",
+      "other_person_slug": "clark-minor",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/people/2025/05/palantir-alum-appointed-top-tech-role-hhs/405180/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3740,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Thomas Williams",
+      "relationship_type": "financial",
+      "description": "Williams spouse was Palantir employee; disclosed M-M Palantir stock via spouse; undisclosed M-M stock sale discovered",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:56",
+      "profile_id": "tech-right",
+      "other_person": "Thomas Williams",
+      "other_person_slug": "thomas-williams",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/gold-rush-top-trump-officials-silicon-valley-ties",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3741,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Stephen Miller",
+      "relationship_type": "financial",
+      "description": "Miller holds K-K in Palantir stock (acquired after leaving Trump I) while directing immigration enforcement policy that relies on Palantir systems",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:17:59",
+      "profile_id": "tech-right",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/stephen-miller-conflicts-of-interest",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3744,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Palantir USG Inc",
+      "relationship_type": "subsidiary_of",
+      "description": "Palantir USG Inc is the US government contracting subsidiary of Palantir Technologies Inc. Used for DOD contracts.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:04",
+      "profile_id": "tech-right",
+      "other_person": "Palantir USG Inc",
+      "other_person_slug": "palantir-usg-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending award records showing both entities",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3745,
+      "person_a": "Akash Bobba",
+      "person_b": "Palantir Technologies Inc.",
+      "relationship_type": "employment",
+      "description": "Bobba interned at Palantir before joining DOGE at OPM. Age 22. UC Berkeley MET program.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:06",
+      "profile_id": "tech-right",
+      "other_person": "Akash Bobba",
+      "other_person_slug": "akash-bobba",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.advocate.com/news/tech-bros-infiltrate-federal-government",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3746,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Troy Edgar",
+      "relationship_type": "financial",
+      "description": "DHS Deputy Secretary Edgar owned Palantir stock, agreed to divest per POGO reporting",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:07",
+      "profile_id": "tech-right",
+      "other_person": "Troy Edgar",
+      "other_person_slug": "troy-edgar",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/gold-rush-top-trump-officials-silicon-valley-ties",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3747,
+      "person_a": "Palantir Technologies Inc.",
+      "person_b": "Robert Law",
+      "relationship_type": "financial",
+      "description": "DHS Under Secretary for Strategy/Policy Law owned Palantir stock, agreed to divest",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:18:13",
+      "profile_id": "tech-right",
+      "other_person": "Robert Law",
+      "other_person_slug": "robert-law",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigations/gold-rush-top-trump-officials-silicon-valley-ties",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
   "timeline": [
+    {
+      "date": "2003-05-06",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir SAM.gov entity registration: Legal name PALANTIR TECHNOLOGIES INC., UEI=FSY4LVSBGWB7, CAGE=470F5. Physical address: 518 17th St Ste 1015, Denver CO 80202. Mailing: 100 Hamilton Ave Ste 300, Palo Alto CA 94301. Incorporated Delaware 2003-05-06. Primary NAICS 513210 (Software Publishers). Registration active through 2027-02-12. No exclusions (not debarred).",
+      "confidence": "confirmed",
+      "id": 6448
+    },
+    {
+      "date": "2009-10-14",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Palantir Technologies UK Ltd & Eagle Ltd - UK Corporate Structure",
+      "confidence": "confirmed",
+      "id": 4931
+    },
+    {
+      "date": "2013-11-04",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Sir Daniel Bethlehem - former FCO Legal Adviser served as Palantir UK director (2013-2024)",
+      "confidence": "confirmed",
+      "id": 4943
+    },
+    {
+      "date": "2016-06-30",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "BACKGROUND: Palantir's government contract growth has a legal precedent independent of FF alumni appointments. Palantir USG v. United States (1:16-cv-00784, Court of Federal Claims, filed Jun 30 2016) challenged Army's DCGS-A procurement as violating Federal Acquisition Streamlining Act. Judge Horn ruled in Palantir's favor Oct 2016, issuing permanent injunction. Federal Circuit affirmed 2018. This opened door for Palantir to win Army intelligence contract in Mar 2019. This legal victory \u2014 predating Trump admin influence \u2014 was a structural driver of Palantir's subsequent government growth. However, the scale and pace of expansion in FY2020 and FY2025 (coinciding with FF alumni appointments) goes beyond what the legal precedent alone explains.",
+      "confidence": "high",
+      "id": 6961
+    },
+    {
+      "date": "2023-09-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "NIH holds three sequential sole-source Palantir IDIQs for N3C/NCATS scientific platforms totaling $193.9M ceiling: 75N95021D00029 ($59.5M, 2021), 75N95022D00025 ($65M, 2022), 75N95023D00027 ($69.4M, 2023, 100% utilized). All NOT COMPETED, single-award. Also on multi-award HHS SHARE BPA ($90M ceiling, $48.2M obligated). Total HHS spending: $209M. Key programs: N3C COVID enclave, NIDAP, PEPFAR, ARPA-H, FDA data.",
+      "confidence": "high",
+      "id": 7046
+    },
+    {
+      "date": "2025-03-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "NATO acquired Palantir Maven Smart System in fastest-ever procurement (6 months), extending US military AI dominance to alliance-wide warfighting infrastructure",
+      "confidence": "medium",
+      "id": 4682
+    },
+    {
+      "date": "2025-04-17",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "ImmigrationOS confirmed to ingest state voter roll data: Leaked documents obtained by 404 Media and confirmed by Biometric Update reveal ImmigrationOS pulls data from SSA, IRS, USCIS, and state voter rolls. The M sole-source contract (70CTD022FR0000170 modification, Apr 2025) tasks Palantir with building an 'end-to-end digital ecosystem that automates the lifecycle of deportation' with AI-based target prioritization via ELITE tool. System assigns confidence scores to addresses and generates enforcement dossiers.",
+      "confidence": "high",
+      "id": 7493
+    },
+    {
+      "date": "2025-05-07",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "SAM.gov records identify key Palantir government business points of contact: Vincent Johnson (Govt Business POC across all 3 registrations), Akash Jain (Alt Govt POC, Palantir USG Palo Alto), Ryan Taylor (Alt Govt POC, Palantir Technologies Denver), Menaka Kalaskar (Past Performance POC across all), William Ho / Lori Baylor (Electronic POCs). Government business address listed at 1025 Thomas Jefferson St NW, Washington DC 20007.",
+      "confidence": "high",
+      "id": 7048
+    },
+    {
+      "date": "2025-05-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Maven Smart System (MSS) Production IDIQ (W911QX24D0012) ceiling increased from initial $480M (May 2024) to $1.275B (May 2025) due to 'growing demand'. Single-award, not competed. $292.7M obligated (23% of ceiling). Separate Maven CSO R&D contracts total $397.3M ceiling ($83.6M obligated). Maven is CDAO's primary AI platform for military intelligence fusion.",
+      "confidence": "medium",
+      "id": 7040
+    },
+    {
+      "date": "2025-06-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir helping DOGE build IRS mega-database/unified API, triggering Wyden-AOC congressional inquiry over potential Privacy Act violations",
+      "confidence": "medium",
+      "id": 4673
+    },
+    {
+      "date": "2025-06-17",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Palantir-DOGE nexus: Palantir federal contracts nearly doubled to .5M in 2025. USASpending shows .4B lifetime contracts (DoD .3B, HHS M, DHS M, DOJ M, Treasury M). Key DOGE projects: (1) IRS 'mega API' hackathon to create centralized taxpayer data access, hosted on Palantir Foundry. (2) Treasury unified API layer contract. (3) M ICE 'ImmigrationOS' contract for deportation tracking. (4) Accenture/Palantir certifying 1,000 federal workers on Foundry. (5) Talks with SSA and Education to adopt Foundry. Several DOGE members were former Palantir employees. New federal CIOs at OMB, OPM, and DoE tied to Palantir or SpaceX. Congressional inquiry: 10 Democrats including Sen. Wyden and Rep. AOC wrote to Palantir CEO Alex Karp on June 17, 2025.",
+      "confidence": "high",
+      "id": 5494
+    },
+    {
+      "date": "2025-07-31",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Army awarded Palantir sole-source $10B Enterprise Agreement (W519TC25D0039) on July 31, 2025 \u2014 consolidating 75 prior contracts (15 prime + 60 related) into single 10-year IDIQ. Not competed (Only One Source, FAR 6.302-1). As of March 2026, $382.8M obligated (3.8% of ceiling) across 19 task orders. Key programs: CDAO MSS ($227.6M), Army Vantage SaaS ($103.4M), FORSCOM ($52M), Weapons System 360 ($15.1M).",
+      "confidence": "high",
+      "id": 7038
+    },
+    {
+      "date": "2025-09-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "IRS holds two Palantir BPAs for Lead Case Analytics totaling $257.1M ceiling: legacy BPA (2032H518A00029, $157.1M, 94.7% utilized, expired Sept 2025) and replacement (2023H225A00002, $100M, 47.2% utilized, through 2028). $196.0M total obligated across 26 task orders. Products: SNAP, NIT, Criminal Investigation O&M, Enterprise Data Platform, COVID response.",
+      "confidence": "high",
+      "id": 7045
+    },
+    {
+      "date": "2025-09-25",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Palantir ImmigrationOS is a USD 30M sole-source AI platform for ICE deportation management with three functions: targeting prioritization, self-deportation tracking, and removal lifecycle management",
+      "confidence": "medium",
+      "id": 4671
+    },
+    {
+      "date": "2025-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir hit first billion-dollar federal contract year in FY2025 ($1.02B, +89% YoY from $541M). This coincided with three FF alumni/associates in senior government roles: Kratsios (OSTP Dir, confirmed Mar 2025), Emil Michael (USD(R&E), confirmed May 2025), and Helberg (Under Sec State, confirmed Oct 2025, retained Palantir Sr Advisor role). Key FY2025 contracts: Maven expansion to $1.3B ceiling (May 2025), Army $10B enterprise agreement (Jul 2025), DHS $1B+ BPA, ImmigrationOS $30M (Apr 2025). FY2025 Q4 alone was $448M \u2014 largest single quarter ever.",
+      "confidence": "medium",
+      "id": 6953
+    },
+    {
+      "date": "2025-09-30",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "State Department awarded Palantir two single-award enterprise BPAs: original $99.6M (19AQMM22A0249, Sept 2022, 72.4% utilized) and expanded $410M replacement (19AQMM25A1228, Sept 2025). Combined ceiling $509.6M for 'Enterprise Data Management Platform'. $98.8M obligated across 10 task orders.",
+      "confidence": "high",
+      "id": 7043
+    },
+    {
+      "date": "2025-10-28",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "VOWS platform is narrow marriage fraud detection \u2014 NOT voter data processing: Three USCIS task orders (Phase 0: Oct 2025 ,999; Phase 1: Dec 2025 ,500; Phase 2: Feb 2026 ,500) for 'Vetting of Wedding-Based Schemes' platform. VOWS is designed to detect marriage fraud in immigration applications using USCIS marriage-based petition data, not voter rolls. Each phase priced just below K DHS review threshold (Noem policy). Parent BPA: 47QTCA24D004L.",
+      "confidence": "confirmed",
+      "id": 7497
+    },
+    {
+      "date": "2025-10-31",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Three-pathway voter data flow to Palantir systems identified. (1) DIRECT: ImmigrationOS documented as ingesting state voter rolls directly, per leaked 404 Media documents. (2) VIA SAVE: States upload voter rolls to SAVE for citizenship verification; SAVE SORN routine uses permit sharing with DHS components including ICE for 'law enforcement, immigration' purposes; Palantir operates ICM/ImmigrationOS on ICE data. (3) VIA DOJ MOU: DOJ demands unredacted voter rolls from states; MOU permits unnamed contractor access; Palantir holds M+ in DOJ contracts. USCIS official David Jennings stated SAVE 'does not refer noncitizens to ICE' and 'does not share case information with other agencies' \u2014 but SORN routine uses appear to contradict this. VOWS is NOT in this pipeline \u2014 it processes marriage fraud data, not voter data.",
+      "confidence": "medium",
+      "id": 7506
+    },
+    {
+      "date": "2025-12-18",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Palantir is the strongest candidate for the unnamed MOU contractor: already holds $145M ICE Investigative Case Management contract (70CTD022FR0000170), $30M ImmigrationOS contract pulling data from IRS/SSA/voter rolls, new USCIS VOWS platform contract (Oct 2025), and is building cross-agency IRS 'mega-database'. ImmigrationOS explicitly integrates voter records from states including PA and FL. Congressional letter (Wyden/AOC Jun 2025) demanded answers on Palantir's data consolidation role.",
+      "confidence": "medium",
+      "id": 7327
+    },
+    {
+      "date": "2026-01-15",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "ELITE tool built on ImmigrationOS ingests HHS/Medicaid, DMV, utility, IRS, SSA, passport, LPR data for ICE targeting \u2014 voter roll status unclear at ELITE level: EFF Jan 2026 report documents ELITE (Enhanced Leads Identification & Targeting for Enforcement) as a Palantir map-based targeting app built on ImmigrationOS platform. Data sources confirmed via court testimony: DMV, Medicaid/HHS, utility records, SSA, IRS, passport, court records, license plate readers, data brokers (Thomson Reuters CLEAR). Each target gets dossier with 0-100 confidence score on address accuracy. ICE-CMS data sharing agreement covers ~80M Medicaid patients. While ImmigrationOS broadly documented as ingesting voter rolls (404 Media), ELITE-specific documentation does not explicitly list voter data.",
+      "confidence": "high",
+      "id": 7508
+    },
+    {
+      "date": "2026-02-12",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DHS awarded Palantir a $1B single-award BPA (70RTAC26A00000001) on Feb 12, 2026, running through 2031. Allows CBP, ICE, USCIS, Secret Service, and other DHS components to acquire Palantir platforms without separate competitive bidding. Only $18.7M obligated so far (1.9%). Includes USCIS 'VOWS' vetting platform and Secret Service data modeling.",
+      "confidence": "high",
+      "id": 7042
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir holds 23 identified IDIQ/BPA contract vehicles with combined ceiling values of .3B. Of these, .0B in ceiling value is on Palantir-specific single-award vehicles (9.7% utilized at .36B obligated). The remaining .3B is on multi-award vehicles shared with other vendors.",
+      "confidence": "medium",
+      "id": 7037
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Of Palantir's single-award IDIQ/BPA vehicles, 8 of 15 were NOT COMPETED or sole-source. The three largest single-award vehicles \u2014 Army EA ($10B), Maven MSS ($1.275B), DHS BPA ($1B) \u2014 total $12.275B in ceiling. Army EA classified 'Only One Source' under FAR 6.302-1. Pattern: Palantir gains initial foothold via competed or small pilots, then expands via sole-source consolidation once it becomes incumbent.",
+      "confidence": "medium",
+      "id": 7047
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Total USASpending obligations to Palantir across all agencies: DoD $2.435B (68%), HHS $405M (11%), DHS $320M (9%), DOJ $209M (6%), Treasury $196M (6%). Within DoD: Army dominates at $2.38B (98% of DoD), Air Force $642M, Navy $79M. DHS spending concentrated at ICE ($300M+) for FALCON and ICM (Investigative Case Management) platforms.",
+      "confidence": "high",
+      "id": 7049
+    },
     {
       "date": "2006",
       "type": "finding",
@@ -2389,6 +4454,22 @@
       "summary": "Palantir Technologies maintained massive lobbying presence: 516 total filings from 2006-present. Early lobbying (2006-2010) through Morgan and Cunningham LLC focused on Defense, Homeland Security, Intelligence, Law Enforcement, and SEC/Financial Securities applications. Later expanded to multiple registrants. Key lobbyist Bryan Cunningham (Morgan and Cunningham) handled defense/intel lobbying. Alexander Karp (CEO, 17 Epstein email exchanges) is NOT listed as a registered lobbyist in LDA records. Palantir lobbied to sell surveillance/analytics software to US intelligence community and DOD - the same capabilities relevant to tracking networks like Epstein's.",
       "confidence": "medium",
       "id": 424
+    },
+    {
+      "date": "2025-06-17",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir received M in new contracts since January 2025 inauguration plus M additional award \u2014 M total during DOGE period. Concurrent with DOGE cutting .1B in DoD consulting contracts and .5B in IRS modernization. DOGE members are Palantir veterans, former Palantir employees installed as federal CIO. Democrats alleged Palantir IRS contract 'blatantly violates Privacy Act' notice/transparency requirements. Palantir's IRS mega-database designed to be shareable across federal agencies.",
+      "confidence": "high",
+      "id": 7024
+    },
+    {
+      "date": "2025-08-05",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir contract explosion concurrent with DOGE cuts: Army 10-year/B enterprise agreement (July 2025, consolidating 75 contracts); ICE ImmigrationOS M (April 2025); CDAO MSS task order .6M; USCIS VOWS platform (Oct 2025); Treasury unified API; ARPA-H M AI contract; VA M data platform. Federal contracts nearly doubled to .5M in 2025. DOGE operatives from Palantir (Barbaccia at OMB, Minor CTO at HHS/NIH, Mangaser) positioned at agencies that subsequently expanded Palantir deployments.",
+      "confidence": "medium",
+      "id": 7004
     }
   ],
   "curation": {
@@ -2571,553 +4652,6 @@
       "bridge-tax",
       "complexity-as-credential",
       "private-order"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Palantir Technologies",
-      "connections": [
-        {
-          "target": "Department of Defense",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "USASpending",
-          "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
-        },
-        {
-          "target": "Stephen Miller",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
-        },
-        {
-          "target": "Peter Thiel",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
-        },
-        {
-          "target": "ICE",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
-        },
-        {
-          "target": "Alex Karp",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
-        },
-        {
-          "target": "Department of Defense",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir has .3B+ in DoD contracts including .3B Maven Smart System and B Army Enterprise Agreement"
-        },
-        {
-          "target": "DOGE",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
-        },
-        {
-          "target": "Israeli Defense Ministry",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Strategic partnership (Jan 2024) providing AI platforms including Gotham. Allegedly powers Lavender/Gospel/Where's Daddy targeting systems. Permanent desk at CMCC in southern Israel."
-        },
-        {
-          "target": "NATO",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "NATO acquired Maven Smart System in fastest-ever procurement (6 months, sole-source). Extends US military AI to alliance-wide warfighting. Joint Warfare Centre already training on MSS."
-        },
-        {
-          "target": "NHS England",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "GBP 330M Federated Data Platform contract (Nov 2023, 7 years). Rejected by 75%+ of hospital trusts. BMA urged doctors to pull back after ICE revelations. Heavily redacted contract."
-        },
-        {
-          "target": "NSA",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Snowden docs: Palantir helped build XKEYSCORE, deployed across 3 Five Eyes nations by 2010. GCHQ cited faster analytics. CIA In-Q-Tel provided initial USD 2M seed investment in 2005."
-        },
-        {
-          "target": "8VC",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "8VC investor in Palantir; Lonsdale co-founded Palantir; Alex Moore was Palantir employee #1"
-        },
-        {
-          "target": "ICE",
-          "type": "intelligence",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir provides complete ICE technology stack: FALCON (analytics), ICM (case management), ELITE (field targeting with Medicaid-fed confidence scores), ImmigrationOS (deportation lifecycle). Total ICE contracts $287M+ since 2014."
-        },
-        {
-          "target": "Jacob Helberg",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Helberg served as Senior Advisor to CEO Alex Karp at Palantir. Now Under Secretary of State for Economic Growth. Donated $1M to Trump campaign + $3.9M to Trump-aligned PACs. Represents most direct Palantir-to-cabinet-level pipeline."
-        },
-        {
-          "target": "Clark Minor",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir engineer deployed as DOGE CIO of HHS. HHS Medicaid data feeds Palantir ELITE targeting tool \u2014 direct conflict between CIO authority and Palantir commercial interest."
-        },
-        {
-          "target": "Gregory Barbaccia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
-        },
-        {
-          "target": "Akash Jain",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir USG President and CTO since 2005/2008. Single executive bridging defense (Maven, TITAN, Golden Dome) and immigration (ImmigrationOS, FALCON, ELITE) portfolios."
-        },
-        {
-          "target": "Greg Little",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "First CDAO head at Pentagon -> Palantir senior counselor (Aug 2023). CDAO oversees all DoD AI procurement including Maven contract."
-        },
-        {
-          "target": "David Spirk",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Pentagon CDO who co-created CDAO -> Palantir senior counselor (Jul 2022). Revolving door from AI procurement authority to Palantir."
-        },
-        {
-          "target": "Corey Lewandowski",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "ProPublica:2026-03-05",
-          "description": "DHS contract approval authority over Palantir 1B BPA, 30M ImmigrationOS, 139M ICM, 299K VOWS"
-        },
-        {
-          "target": "Kenneth Howery",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Howery is early personal investor in Palantir. Palantir Gotham is central C2 platform for Golden Dome missile defense. Palantir has billions in federal IC/DoD contracts. Greenland's Pituffik is critical Golden Dome node."
-        },
-        {
-          "target": "Gregory Barbaccia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
-        },
-        {
-          "target": "Clark Minor",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "13-yr Palantir veteran became HHS CIO May 2025, oversees largest civilian agency IT budget"
-        },
-        {
-          "target": "Jacob Helberg",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Senior Advisor to Palantir CEO Alex Karp; retains Palantir-connected investments while serving as Under Secretary of State"
-        },
-        {
-          "target": "Stephen Miller",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Palantir's $30M ImmigrationOS contract builds the AI backbone for Miller's 3,000 arrests/day quota. System integrates across government databases for deportation targeting."
-        },
-        {
-          "target": "ICE Skip Tracing Program",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Palantir ImmigrationOS provides the surveillance targeting platform that skip tracing bounty hunters then operationalize. Technology-to-enforcement pipeline: AI targeting plus privatized apprehension."
-        },
-        {
-          "target": "GEO Group",
-          "type": "intelligence",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "GEO subsidiary B.I. Inc provides SmartLINK monitoring ($2.2B contract). Palantir provides targeting/analytics. Together form surveillance-to-enforcement cycle: GEO monitors -> Palantir analyzes -> ICE arrests -> GEO detains."
-        },
-        {
-          "target": "a16z (Andreessen Horowitz)",
-          "type": "advisory",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Shyam Sankar (Palantir CTO) and Christian Brose (Anduril CSO) both attended a16z American Dynamism Summit 2026 alongside Pentagon procurement officials \u2014 direct convening where a16z portfolio CEO and Palantir leadership share a private investor-government access event"
-        },
-        {
-          "target": "Thomas Williams",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation."
-        },
-        {
-          "target": "Jacob Helberg",
-          "type": "advisory",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-        },
-        {
-          "target": "Emil Michael",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI"
-        },
-        {
-          "target": "CBP",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "https://siliconangle.com/2026/02/19/dhs-awards-palantir-1b-deploy-ai-data-analytics-platforms/",
-          "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding."
-        },
-        {
-          "target": "David Sacks",
-          "type": "political",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Sacks (AI/Crypto Czar) and Thiel (Palantir co-founder) are PayPal Mafia members. Sacks policy influence extends to defense AI procurement where Palantir holds $10B+ contracts."
-        },
-        {
-          "target": "Akash Bobba",
-          "type": "employment",
-          "strength": 0.7,
-          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
-          "description": "Palantir intern assigned to OPM, SSA, Education. Thiel ecosystem operative at 21."
-        }
-      ],
-      "secondHop": {
-        "8VC": [
-          {
-            "target": "Joe Lonsdale",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
-          },
-          {
-            "target": "Jack Moshkovich",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Partner at 8VC since 2018 (analyst->principal->partner Jan 2025), son of sanctioned Vadim Moshkovich"
-          },
-          {
-            "target": "Denis Aven",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Investor at 8VC since 2022, son of OFAC-sanctioned Petr Aven (Alfa Group)"
-          },
-          {
-            "target": "Joe Lonsdale",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Founder and Managing Partner of 8VC; sole executive officer on all Form D filings"
-          },
-          {
-            "target": "Anduril Industries",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "8VC early investor in Anduril; defense technology company with billion-dollar Pentagon contracts"
-          }
-        ],
-        "Alex Karp": [
-          {
-            "target": "Peter Thiel",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Palantir co-founder and CEO. Karp runs day-to-day operations, Thiel is chairman. Together met Israeli defense officials for IDF partnership."
-          },
-          {
-            "target": "Donald Trump",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Karp shifted from $360K Biden-Harris donor (2023) to $1M MAGA Inc donor (2024). Anti-immigration positions align with Trump policy. Palantir receives $900M+ in federal contracts under Trump 2."
-          },
-          {
-            "target": "David Petraeus",
-            "type": "social",
-            "strength": 0.7,
-            "description": "LittleSis records Petraeus and Alex Karp (Palantir CEO) as friends. Palantir was founded with CIA venture capital (In-Q-Tel) and has deep intelligence community connections. This friendship links Petraeus to the data analytics/surveillance sector."
-          },
-          {
-            "target": "Jacob Helberg",
-            "type": "corporate",
-            "strength": 0.7,
-            "description": "Former Palantir executive. Helberg served as Senior Advisor to CEO Karp at Palantir from 9/2023-Present, earning $840K in consulting fees. Holds Palantir stock."
-          },
-          {
-            "target": "Corey Lewandowski",
-            "type": "corporate",
-            "strength": 0.2,
-            "description": "Indirect but structurally significant: Lewandowski has contract approval authority at DHS as final political appointee before Secretary Noem. Palantir (CEO: Alex Karp) was awarded up to $1B DHS blanket purchase agreement (Feb 2026). WSJ specifically asked Lewandowski about Palantir meetings; DHS denied his involvement. Connection is circumstantial but structurally important given Lewandowski's gatekeeper role on all DHS contracts >100K."
-          }
-        ],
-        "Clark Minor": [
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts"
-          },
-          {
-            "target": "Gregory Barbaccia",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both are Palantir alumni now in senior federal IT roles (Minor: HHS CIO, Barbaccia: Federal CIO at OMB). Two simultaneous Palantir-to-government placements while Palantir federal contracts near doubled."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
-          },
-          {
-            "target": "Sam Corcos",
-            "type": "employment",
-            "strength": 0.7,
-            "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
-          }
-        ],
-        "Corey Lewandowski": [
-          {
-            "target": "Rudy Giuliani",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
-          },
-          {
-            "target": "Ed Brookover",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
-          },
-          {
-            "target": "Mary Coen",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
-          },
-          {
-            "target": "Jason Osborne",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
-          },
-          {
-            "target": "Matt Mowers",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
-          }
-        ],
-        "DOGE": [
-          {
-            "target": "Elon Musk",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
-          },
-          {
-            "target": "Stephen Feinberg",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
-          },
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
-          },
-          {
-            "target": "Pete Hegseth",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
-          },
-          {
-            "target": "Steve Davis",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Davis served as effective DOGE leader from GSA HQ while president of Boring Company -- continued asserting control after May 2025 departure"
-          }
-        ],
-        "Department of Defense": [
-          {
-            "target": "SpaceX",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield."
-          },
-          {
-            "target": "Elon Musk",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "SpaceX (Musk-owned) received $7.18B from DoD total, with $1.01B in new awards after Jan 20 2025 (DOGE inauguration). Concurrent with Musk heading DOGE, SpaceX DoD awards include NSSL Phase 3 ($1.16B), Starshield/Starlink subscriptions ($472M)."
-          },
-          {
-            "target": "Anduril Industries",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
-          }
-        ],
-        "Gregory Barbaccia": [
-          {
-            "target": "Palantir",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
-          },
-          {
-            "target": "Thomas Shedd",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
-          },
-          {
-            "target": "Thomas Williams",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
-          },
-          {
-            "target": "Sam Corcos",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
-          },
-          {
-            "target": "Allan Mangaser",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Both Palantir alums and Theorem alums now co-located in OMB CIO office. Barbaccia is Federal CIO, Mangaser is Senior Adviser to CIO."
-          }
-        ],
-        "Jacob Helberg": [
-          {
-            "target": "Palantir",
-            "type": "advisory",
-            "strength": 1.0,
-            "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations."
-          },
-          {
-            "target": "Keith Rabois",
-            "type": "familial",
-            "strength": 0.7,
-            "description": "Married 2018 (ceremony officiated by Sam Altman); Rabois is MD at Khosla Ventures / ex-Founders Fund GP; many of Helberg's investments tied to these funds"
-          },
-          {
-            "target": "Peter Thiel",
-            "type": "financial",
-            "strength": 0.7,
-            "description": "Founders Fund carried interest. Helberg holds management positions and carried interest in Founders Fund V-VIII and Growth I/II -- Thiel's flagship VC firm. 20-30% profit share across funds."
-          }
-        ],
-        "Peter Thiel": [
-          {
-            "target": "Sargon Capital Pty Ltd",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
-          },
-          {
-            "target": "Trae Stephens",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
-          },
-          {
-            "target": "Polymarket",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
-          },
-          {
-            "target": "Praxis",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
-          },
-          {
-            "target": "Ian Osborne",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
-          }
-        ],
-        "Stephen Miller": [
-          {
-            "target": "Steve Bannon",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Alliance originated at 2012 dinner with Sessions. Miller sent 900+ emails to Breitbart as de facto assignment editor. Bannon recruited Miller to Trump campaign Jan 2016."
-          },
-          {
-            "target": "Tom Homan",
-            "type": "political",
-            "strength": 1.0,
-            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
-          },
-          {
-            "target": "Palantir",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
-          },
-          {
-            "target": "Gene Hamilton",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Co-founders AFL. Both Sessions alumni. Miller (WH) and Hamilton (DHS/DOJ) were the two key Sessions staffers who coordinated immigration policy in Trump 1.0 largely without knowledge of other officials."
-          },
-          {
-            "target": "America First Legal Foundation",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Miller founded AFL in 2021, serves as President and Executive Director earning $527K. AFL is the litigation arm of his immigration enforcement policy apparatus."
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2006",
-        "label": "Palantir Technologies maintained massive lobbying presence: 516 total filings from 2006-present. Early lobbying (2006-2010) through Morgan and Cunningham LLC focused on Defense, Homeland Security, Intelligence, Law Enforcement, and SEC/Financial Securities applications. Later expanded to multiple registrants. Key lobbyist Bryan Cunningham (Morgan and Cunningham) handled defense/intel lobbying. Alexander Karp (CEO, 17 Epstein email exchanges) is NOT listed as a registered lobbyist in LDA records. Palantir lobbied to sell surveillance/analytics software to US intelligence community and DOD - the same capabilities relevant to tracking networks like Epstein's.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 424
-      }
     ]
   }
 }

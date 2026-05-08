@@ -16,8 +16,8 @@ REDIRECTS_PATH = DOSSIERS_DIR / "_redirects.json"
 
 def slugify(name: str) -> str:
     slug = name.lower().strip()
-    slug = re.sub(r"[^a-z0-9\\s-]", "", slug)
-    slug = re.sub(r"[\\s-]+", "-", slug)
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"[\s-]+", "-", slug)
     return slug.strip("-")
 
 
