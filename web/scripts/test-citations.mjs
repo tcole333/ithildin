@@ -146,6 +146,18 @@ run("ACRIS: extractEvidenceLinks resolves doc ID", () => {
   assert.match(links[0].url ?? "", /doc_id=2017021700466001/);
 });
 
+run("ACRIS: strips FT_ document-type prefix before building doc_id URL", () => {
+  const result = applyCitations("Recorded [ACRIS:FT_1690000317169].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "ACRIS 1690000317169");
+  assert.equal(
+    result.entries[0].url,
+    "https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=1690000317169",
+  );
+  const links = extractEvidenceLinks("ACRIS:FT_1690000317169");
+  assert.ok(links.some(l => l.url === "https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=1690000317169"));
+});
+
 // ---------------------------------------------------------------------------
 // CourtListener
 // ---------------------------------------------------------------------------
@@ -314,6 +326,41 @@ run("REG: extractEvidenceLinks resolves registry ref", () => {
   const links = extractEvidenceLinks("REG:FL:F08000003048");
   assert.equal(links.length, 1);
   assert.match(links[0].url ?? "", /sunbiz\.org/);
+});
+
+run("REG: GB jurisdiction links to Companies House", () => {
+  const result = applyCitations("See [REG:GB:11441275].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "GB 11441275");
+  assert.equal(result.entries[0].url, "https://find-and-update.company-information.service.gov.uk/company/11441275");
+});
+
+run("REG: GB jurisdiction handles OC (LLP) numbers", () => {
+  const result = applyCitations("See [REG:GB:OC379532].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, "https://find-and-update.company-information.service.gov.uk/company/OC379532");
+});
+
+// ---------------------------------------------------------------------------
+// Companies House (companies-house: prefix)
+// ---------------------------------------------------------------------------
+
+run("Companies House: resolves numeric company number", () => {
+  const result = applyCitations("See [companies-house:08150769].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "Companies House 08150769");
+  assert.equal(result.entries[0].url, "https://find-and-update.company-information.service.gov.uk/company/08150769");
+});
+
+run("Companies House: resolves OC (LLP) number, uppercased", () => {
+  const result = applyCitations("See [companies-house:oc377122].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, "https://find-and-update.company-information.service.gov.uk/company/OC377122");
+});
+
+run("Companies House: extractEvidenceLinks resolves company number", () => {
+  const links = extractEvidenceLinks("companies-house:12667034");
+  assert.ok(links.some(l => l.url === "https://find-and-update.company-information.service.gov.uk/company/12667034"));
 });
 
 // ---------------------------------------------------------------------------
@@ -669,6 +716,15 @@ run("ICIJ: extractEvidenceLinks resolves ICIJ ref", () => {
   assert.match(links[0].url ?? "", /offshoreleaks\.icij\.org\/nodes\/82004676/);
 });
 
+run("ICIJ: resolves dataset slug form to node URL", () => {
+  const result = applyCitations("See [icij-paradise-papers-56009779].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "ICIJ 56009779");
+  assert.equal(result.entries[0].url, "https://offshoreleaks.icij.org/nodes/56009779");
+  const links = extractEvidenceLinks("icij-paradise-papers-56009779");
+  assert.ok(links.some(l => l.url === "https://offshoreleaks.icij.org/nodes/56009779"));
+});
+
 // ---------------------------------------------------------------------------
 // Finding references
 // ---------------------------------------------------------------------------
@@ -840,7 +896,7 @@ run("getCitationHealthTier: returns skip for unknown prefixes", () => {
 // Registry: all 19 types resolve through applyCitations
 // ---------------------------------------------------------------------------
 
-run("Registry: all 28 types produce citation entries", () => {
+run("Registry: all 29 types produce citation entries", () => {
   const tokens = [
     "Finding #1",
     "EFTA02504960",
@@ -861,6 +917,7 @@ run("Registry: all 28 types produce citation entries", () => {
     "NM-SoS:1615137",
     "NY-SoS:2773652",
     "REG:FL:F08000003048",
+    "companies-house:08150769",
     "DS10",
     "KPMG:IPI",
     "LDA:Broidy Capital",
@@ -906,6 +963,7 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "NM-SoS:1615137", expectMin: 1 },
     { input: "NY-SoS:2773652", expectMin: 1 },
     { input: "REG:FL:F08000003048", expectMin: 1 },
+    { input: "companies-house:08150769", expectMin: 1 },
     { input: "DS10:GRATITUDE", expectMin: 1 },
     { input: "KPMG:IPI", expectMin: 1 },
     { input: "LDA:Broidy Capital", expectMin: 1 },

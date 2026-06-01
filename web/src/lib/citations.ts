@@ -298,6 +298,10 @@ function buildFaraUrl(_regNum: string): string {
   return "https://efile.fara.gov/docs/";
 }
 
+function buildCompaniesHouseUrl(companyNumber: string): string {
+  return `https://find-and-update.company-information.service.gov.uk/company/${companyNumber}`;
+}
+
 function buildRegistryUrl(jurisdiction: string, entityId: string): string {
   const builders: Record<string, (id: string) => string> = {
     FL: (id) => `https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=${id}`,
@@ -305,7 +309,11 @@ function buildRegistryUrl(jurisdiction: string, entityId: string): string {
     NM: () => "https://portal.sos.state.nm.us/BFS/online/CorporationBusinessSearch",
     DE: () => "https://icis.corp.delaware.gov/Ecorp/EntitySearch/NameSearch.aspx",
     USVI: () => "https://www.ltg.gov.vi/division-of-corporations/",
-    UK: (id) => `https://find-and-update.company-information.service.gov.uk/company/${id}`,
+    // GB (ISO country code) and UK both resolve to the UK Companies House
+    // public register; numeric (e.g. 08150769) and LLP/OC numbers (OC377122)
+    // both work against /company/{number}.
+    UK: buildCompaniesHouseUrl,
+    GB: buildCompaniesHouseUrl,
   };
   const normalizedJurisdiction = normalizeRegistryJurisdiction(jurisdiction);
   const builder = builders[normalizedJurisdiction];
@@ -1025,17 +1033,20 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "acris",
-    tokenPattern: "ACRIS:\\d{13,16}",
+    // The NYC ACRIS doc_id is the 13-16 digit number; some refs carry an
+    // "FT_" document-type prefix (ACRIS:FT_1690000317169) that is stripped
+    // before building the DocumentDetail URL.
+    tokenPattern: "ACRIS:(?:FT_)?\\d{13,16}",
     healthTier: "tier1",
     resolve(token) {
-      const match = token.match(/ACRIS:(\d{13,16})/i);
+      const match = token.match(/ACRIS:(?:FT_)?(\d{13,16})/i);
       if (!match) return null;
       const docId = match[1];
       return { key: `acris:${docId}`, label: `ACRIS ${docId}`, url: buildAcrisUrl(docId) };
     },
     extract(raw) {
-      return (raw.match(/ACRIS:\d{13,16}/gi) || []).map(ref => {
-        const docId = ref.replace(/ACRIS:/i, "");
+      return (raw.match(/ACRIS:(?:FT_)?\d{13,16}/gi) || []).map(ref => {
+        const docId = ref.replace(/ACRIS:(?:FT_)?/i, "");
         const url = buildAcrisUrl(docId);
         return { key: url, label: `ACRIS:${docId}`, url };
       });
@@ -1308,6 +1319,33 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
 	    },
   },
   {
+    // UK Companies House (companies-house:08150769, companies-house:OC377122).
+    // Numeric company numbers and 2-letter-prefixed LLP/SC/NI numbers both
+    // resolve against the public register at /company/{number}.
+    id: "companies_house",
+    tokenPattern: "companies-house:[A-Za-z]{0,2}\\d{6,8}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/companies-house:([A-Za-z]{0,2}\d{6,8})/i);
+      if (!match) return null;
+      const companyNumber = match[1].toUpperCase();
+      return {
+        key: `companies-house:${companyNumber}`,
+        label: `Companies House ${companyNumber}`,
+        url: buildCompaniesHouseUrl(companyNumber),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/companies-house:[A-Za-z]{0,2}\d{6,8}/gi) || []).flatMap(ref => {
+        const m = ref.match(/companies-house:([A-Za-z]{0,2}\d{6,8})/i);
+        if (!m) return [];
+        const companyNumber = m[1].toUpperCase();
+        const url = buildCompaniesHouseUrl(companyNumber);
+        return [{ key: url, label: `companies-house:${companyNumber}`, url }];
+      });
+    },
+  },
+  {
     id: "ds10",
     tokenPattern: "DS10(?::[A-Za-z0-9_-]+)?",
     healthTier: "label-only",
@@ -1491,10 +1529,13 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "icij",
-    tokenPattern: "ICIJ(?:-PP|-node)?[:\\s]\\d+",
+    // Two ref shapes both key the Offshore Leaks node id (the trailing
+    // number): the compact ICIJ:56009779 / ICIJ-PP 56009779 form and the
+    // dataset slug form icij-paradise-papers-56009779.
+    tokenPattern: "(?:ICIJ(?:-PP|-node)?[:\\s]\\d+|icij-[a-z-]+-\\d+)",
     healthTier: "tier2",
     resolve(token) {
-      const match = token.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i);
+      const match = token.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i) || token.match(/icij-[a-z-]+-(\d+)/i);
       if (!match) return null;
       const nodeId = match[1];
       return {
@@ -1504,8 +1545,9 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       };
     },
     extract(raw) {
-      return (raw.match(/ICIJ(?:-PP|-node)?[:\s]\d+/gi) || []).flatMap(ref => {
-        const m = ref.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i);
+      const finder = /ICIJ(?:-PP|-node)?[:\s]\d+|icij-[a-z-]+-\d+/gi;
+      return (raw.match(finder) || []).flatMap(ref => {
+        const m = ref.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i) || ref.match(/icij-[a-z-]+-(\d+)/i);
         if (!m) return [];
         const url = buildIcijUrl(m[1]);
         return [{ key: url, label: ref.trim(), url }];
