@@ -31,18 +31,23 @@ function run(name, fn) {
 // EFTA
 // ---------------------------------------------------------------------------
 
-run("EFTA: resolves token to jmail.world URL", () => {
+run("EFTA: resolves token to DOJ DataSet URL", () => {
   const result = applyCitations("See [EFTA02504960] for details.");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "EFTA02504960");
-  assert.equal(result.entries[0].url, "https://jmail.world/thread/EFTA02504960?view=inbox");
+  // EFTA02504960 falls in DataSet 11's Bates range.
+  assert.equal(
+    result.entries[0].url,
+    "https://www.justice.gov/epstein/files/DataSet%2011/EFTA02504960.pdf",
+  );
   assert.ok(result.entries[0].key.startsWith("efta:"));
+  assert.equal(result.entries[0].directLink, true);
 });
 
-run("EFTA: extractEvidenceLinks resolves EFTA ID", () => {
+run("EFTA: extractEvidenceLinks resolves EFTA ID to DOJ URL", () => {
   const links = extractEvidenceLinks("EFTA02504960");
   assert.equal(links.length, 1);
-  assert.match(links[0].url ?? "", /jmail\.world/);
+  assert.match(links[0].url ?? "", /justice\.gov\/epstein\/files\/DataSet%2011\/EFTA02504960\.pdf/);
 });
 
 run("EFTA: handles range notation (EFTA-EFTA)", () => {
@@ -590,12 +595,15 @@ run("URL: extractEvidenceLinks resolves raw URL", () => {
   assert.equal(links[0].label, "https://example.com/doc");
 });
 
-run("Rendered source citations link to platform source records", () => {
+run("Rendered EFTA citations link directly to DOJ, preserving the source record", () => {
   const result = applyCitations("See [EFTA02504960].");
   assert.equal(result.entries.length, 1);
-  assert.match(result.entries[0].url ?? "", /jmail\.world/);
+  // Gated DOJ PDFs can't embed, so the inline citation links straight out.
+  assert.match(result.entries[0].url ?? "", /justice\.gov\/epstein\/files\/DataSet%2011\//);
+  assert.equal(result.entries[0].directLink, true);
+  // The provenance record still exists and is reachable from the footnote.
   assert.match(result.entries[0].sourceRecordUrl ?? "", /^\/sources\//);
-  assert.match(result.markdown, /href="\/sources\//);
+  assert.match(result.markdown, /href="https:\/\/www\.justice\.gov\/epstein\/files\/DataSet%2011\/EFTA02504960\.pdf"/);
 });
 
 // ---------------------------------------------------------------------------

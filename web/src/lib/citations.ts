@@ -6,6 +6,7 @@ import jmailOverridesData from "../data/jmail-overrides.json";
 import clOverridesData from "../data/cl-overrides.json";
 import sourceUrlOverridesData from "../data/source-urls.json";
 import manualSourceRecordsData from "../data/source-records.json";
+import eftaDatasetRangesData from "../data/efta-dataset-ranges.json";
 import { loadFindingEvidenceMap } from "./findingEvidence";
 
 export type CitationLink = {
@@ -18,6 +19,10 @@ export type CitationLink = {
   sourceId?: string;
   sourceKind?: SourceKind;
   publishValid?: boolean;
+  // When true, inline/footnote links target the live URL directly instead of
+  // the internal /sources/[id] page. Used for gated external artifacts (e.g.
+  // DOJ EFTA PDFs) that cannot be embedded.
+  directLink?: boolean;
 };
 
 export type CitationEntry = CitationLink & {
@@ -273,6 +278,52 @@ const jmailOverrides: Record<string, string> = jmailOverridesData;
 function buildJmailUrl(id: string): string {
   if (jmailOverrides[id]) return jmailOverrides[id];
   return `${JMAIL_BASE}/${id}?view=inbox`;
+}
+
+const DOJ_EPSTEIN_BASE = "https://www.justice.gov/epstein/files";
+const eftaDatasetRanges: { dataset: number; lo: number; hi: number }[] = [
+  ...eftaDatasetRangesData.ranges,
+].sort((a, b) => a.lo - b.lo);
+
+export type EftaResolution = { url: string; dataset: number; inferred: boolean };
+
+// Maps an EFTA Bates id to its DOJ artifact URL. DataSets occupy contiguous,
+// non-overlapping number ranges (see scripts/build-efta-manifest.mjs), so the
+// dataset is found by range containment. Ids that fall in a gap between ranges
+// are assigned to the nearest dataset and flagged `inferred`.
+function resolveEftaDoj(id: string): EftaResolution | null {
+  const digits = id.replace(/^EFTA/i, "").match(/\d+/)?.[0];
+  if (!digits) return null;
+  const n = parseInt(digits, 10);
+  const padded = `EFTA${String(n).padStart(8, "0")}`;
+
+  let dataset: number | null = null;
+  let inferred = false;
+  for (const r of eftaDatasetRanges) {
+    if (n >= r.lo && n <= r.hi) {
+      dataset = r.dataset;
+      break;
+    }
+  }
+  if (dataset === null) {
+    let best = eftaDatasetRanges[0];
+    let bestDist = Infinity;
+    for (const r of eftaDatasetRanges) {
+      const dist = n < r.lo ? r.lo - n : n > r.hi ? n - r.hi : 0;
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = r;
+      }
+    }
+    dataset = best.dataset;
+    inferred = true;
+  }
+
+  return {
+    url: `${DOJ_EPSTEIN_BASE}/DataSet%20${dataset}/${padded}.pdf`,
+    dataset,
+    inferred,
+  };
 }
 
 function isExternalUrl(url?: string): boolean {
@@ -786,13 +837,14 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       if (eftaMatches.length > 1 && token.includes("-")) {
         label = `${first}-${eftaMatches[1].toUpperCase()}`;
       }
-      return { key: `efta:${label}`, label, url: buildJmailUrl(first) };
+      const doj = resolveEftaDoj(first);
+      return { key: `efta:${label}`, label, url: doj?.url, directLink: true };
     },
     extract(raw) {
       return (raw.match(/EFTA\d{6,}/gi) || []).map(id => {
         const normalized = id.toUpperCase();
-        const url = buildJmailUrl(normalized);
-        return { key: url, label: normalized, url };
+        const url = resolveEftaDoj(normalized)?.url;
+        return { key: `efta:${normalized}`, label: normalized, url, directLink: true };
       });
     },
   },
@@ -1623,6 +1675,7 @@ function resolveCitationToken(token: string, options: CitationOptions): RawCitat
     const record = buildSourceRecord(result, trimmed);
     return {
       ...sourceRecordToCitationLink(record, result.label, result.key),
+      directLink: result.directLink,
       kind: "source",
       targetKind: record.kind === "record_only" ? "source_record" : "artifact",
     };
@@ -1648,7 +1701,9 @@ function resolveCitationToken(token: string, options: CitationOptions): RawCitat
 function citationEntryToSuperscript(entry: CitationEntry): string {
   const href = entry.targetKind === "finding_popover"
     ? `#fn-${entry.number}`
-    : (entry.sourceRecordUrl || entry.url || `#fn-${entry.number}`);
+    : entry.directLink
+      ? (entry.url || entry.sourceRecordUrl || `#fn-${entry.number}`)
+      : (entry.sourceRecordUrl || entry.url || `#fn-${entry.number}`);
   const external = entry.targetKind !== "finding_popover" && isExternalUrl(href);
   const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
   return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${entry.number}" data-citation-key="${escapeHtml(entry.key)}" aria-label="Source ${entry.number}: ${escapeHtml(entry.label)}">${entry.number}</a></sup>`;
@@ -1998,7 +2053,9 @@ export function renderFootnotes(entries: CitationEntry[]): string {
     const number = entry.number;
     const href = entry.targetKind === "finding_popover"
       ? `#fn-${number}`
-      : (entry.sourceRecordUrl || entry.url);
+      : entry.directLink
+        ? (entry.url || entry.sourceRecordUrl)
+        : (entry.sourceRecordUrl || entry.url);
     if (!href) {
       return `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
     }
