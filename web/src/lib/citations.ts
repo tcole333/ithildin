@@ -232,6 +232,41 @@ function buildLittleSisUrl(entityId: string): string {
   return `https://littlesis.org/entities/${entityId}`;
 }
 
+function buildLittleSisRelationshipUrl(relationshipId: string): string {
+  return `https://littlesis.org/relationships/${relationshipId}`;
+}
+
+// Parses the many LittleSis reference shapes seen in the corpus:
+//   LittleSis:5617 / LittleSis_5617              (entity, colon/underscore)
+//   LittleSis 5617 / LittleSis entity 5617       (entity, whitespace ± keyword)
+//   LittleSis ID 5617                            (entity, "ID" keyword)
+//   LittleSis rel 2043488 / relationship 274178  (relationship)
+// A bare whitespace-separated entity id is ambiguous with a year in prose
+// (e.g. "donated per LittleSis 2010"), so without a disambiguating keyword
+// or colon/underscore it must be a non-year id of >=4 digits.
+function parseLittleSisRef(token: string): { key: string; label: string; url: string } | null {
+  const m = token.match(/LittleSis([\s:_]+)(?:(entity|id|rel(?:ationship)?)[\s:_#]*)?#?(\d+)/i);
+  if (!m) return null;
+  const separator = m[1];
+  const keyword = m[2];
+  const id = m[3];
+  if (keyword && /^rel/i.test(keyword)) {
+    return {
+      key: `littlesis-rel:${id}`,
+      label: `LittleSis relationship ${id}`,
+      url: buildLittleSisRelationshipUrl(id),
+    };
+  }
+  if (!keyword && /\s/.test(separator) && (id.length < 4 || /^(?:19|20)\d{2}$/.test(id))) {
+    return null;
+  }
+  return {
+    key: `littlesis:${id}`,
+    label: `LittleSis ${id}`,
+    url: buildLittleSisUrl(id),
+  };
+}
+
 function buildIcijUrl(nodeId: string): string {
   return `https://offshoreleaks.icij.org/nodes/${nodeId}`;
 }
@@ -1438,24 +1473,19 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "littlesis",
-    tokenPattern: "LittleSis[_:]?\\d+",
+    tokenPattern: "LittleSis(?:[\\s:_]+(?:entity|id|rel(?:ationship)?)[\\s:_#]*#?\\d+|[:_]+#?\\d+|\\s+#?(?!(?:19|20)\\d{2}(?!\\d))\\d{4,})",
     healthTier: "tier2",
     resolve(token) {
-      const match = token.match(/LittleSis[_:]?(\d+)/i);
-      if (!match) return null;
-      const entityId = match[1];
-      return {
-        key: `littlesis:${entityId}`,
-        label: `LittleSis ${entityId}`,
-        url: buildLittleSisUrl(entityId),
-      };
+      const parsed = parseLittleSisRef(token);
+      if (!parsed) return null;
+      return { key: parsed.key, label: parsed.label, url: parsed.url };
     },
     extract(raw) {
-      return (raw.match(/LittleSis[_:]\d+/gi) || []).flatMap(ref => {
-        const m = ref.match(/LittleSis[_:](\d+)/i);
-        if (!m) return [];
-        const url = buildLittleSisUrl(m[1]);
-        return [{ key: url, label: `LittleSis:${m[1]}`, url }];
+      const finder = /LittleSis[\s:_]+(?:(?:entity|id|rel(?:ationship)?)[\s:_#]*)?#?\d+/gi;
+      return (raw.match(finder) || []).flatMap(ref => {
+        const parsed = parseLittleSisRef(ref);
+        if (!parsed) return [];
+        return [{ key: parsed.url, label: parsed.label, url: parsed.url }];
       });
     },
   },

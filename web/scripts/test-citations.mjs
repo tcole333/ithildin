@@ -579,6 +579,67 @@ run("LittleSis: extractEvidenceLinks resolves entity ID", () => {
   assert.match(links[0].url ?? "", /littlesis\.org\/entities\/101661/);
 });
 
+run("LittleSis: resolves whitespace-separated entity ID", () => {
+  const result = applyCitations("See [LittleSis 5617].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, "https://littlesis.org/entities/5617");
+});
+
+run("LittleSis: resolves 'entity' keyword form", () => {
+  const links = extractEvidenceLinks("LittleSis entity 63898");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].url, "https://littlesis.org/entities/63898");
+});
+
+run("LittleSis: resolves 'ID' keyword form", () => {
+  const result = applyCitations("See [LittleSis ID 5617].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, "https://littlesis.org/entities/5617");
+});
+
+run("LittleSis: resolves 'rel' relationship form", () => {
+  const result = applyCitations("See [LittleSis rel 2043488].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "LittleSis relationship 2043488");
+  assert.equal(result.entries[0].url, "https://littlesis.org/relationships/2043488");
+});
+
+run("LittleSis: resolves full 'relationship' keyword form", () => {
+  const links = extractEvidenceLinks("LittleSis relationship 274178");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].url, "https://littlesis.org/relationships/274178");
+});
+
+run("LittleSis: whitespace year is not mistaken for an entity ID", () => {
+  // "LittleSis 2010" in prose is a year, not entity 2010 — it must never
+  // resolve to a littlesis.org link (a generic record_only card is fine).
+  const result = applyCitations("Brad donated per [LittleSis 2010].");
+  assert.ok(!result.entries.some(e => /littlesis\.org/.test(e.url ?? "")));
+  const links = extractEvidenceLinks("LittleSis 2010");
+  assert.ok(!links.some(l => /littlesis\.org/.test(l.url ?? "")));
+});
+
+run("LittleSis: explicit keyword overrides the year guard", () => {
+  const links = extractEvidenceLinks("LittleSis entity 2010");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].url, "https://littlesis.org/entities/2010");
+});
+
+run("LittleSis: bare 'relationships' word with no ID is not a citation", () => {
+  const links = extractEvidenceLinks("zero LittleSis relationships found");
+  assert.ok(!links.some(l => /littlesis\.org/.test(l.url ?? "")));
+});
+
+run("LittleSis: extracts entity ID amid multi-token evidence ref", () => {
+  const links = extractEvidenceLinks("ArcticToday / Politiken / LittleSis 82179");
+  assert.ok(links.some(l => l.url === "https://littlesis.org/entities/82179"));
+});
+
+run("LittleSis: entity ID stops at trailing parenthetical", () => {
+  const links = extractEvidenceLinks("LittleSis entity 68579 (Biden bundler 2008)");
+  assert.ok(links.some(l => l.url === "https://littlesis.org/entities/68579"));
+});
+
 // ---------------------------------------------------------------------------
 // ICIJ
 // ---------------------------------------------------------------------------
