@@ -571,7 +571,24 @@ def _ensure_schema(db):
             findings_added INTEGER,
             leads_created INTEGER,
             output_file TEXT,
-            error TEXT
+            error TEXT,
+            job_type TEXT,
+            lead_id INTEGER,
+            hypothesis_id INTEGER,
+            brief TEXT,
+            skill_name TEXT,
+            expected_artifacts TEXT,
+            priority TEXT,
+            timeout_seconds INTEGER,
+            cost_cap_usd REAL,
+            review_required INTEGER DEFAULT 0,
+            orchestrator TEXT,
+            backend TEXT DEFAULT 'claude',
+            task_contract_json TEXT,
+            staging_dir TEXT,
+            health_status TEXT,
+            health_detail TEXT,
+            last_artifact_at TIMESTAMP
         );
         CREATE INDEX IF NOT EXISTS idx_dispatch_status ON dispatch_runs(status);
         CREATE INDEX IF NOT EXISTS idx_dispatch_type ON dispatch_runs(run_type);
@@ -714,6 +731,25 @@ def _ensure_schema(db):
         ("findings", "agent_run_id TEXT"),
         ("connections", "agent_run_id TEXT"),
         ("entities", "agent_run_id TEXT"),
+        # dispatch_runs: ad-hoc live-DB ALTERs folded back here so existing DBs
+        # created from the old 15-column schema reconcile to the full live shape.
+        ("dispatch_runs", "job_type TEXT"),
+        ("dispatch_runs", "lead_id INTEGER"),
+        ("dispatch_runs", "hypothesis_id INTEGER"),
+        ("dispatch_runs", "brief TEXT"),
+        ("dispatch_runs", "skill_name TEXT"),
+        ("dispatch_runs", "expected_artifacts TEXT"),
+        ("dispatch_runs", "priority TEXT"),
+        ("dispatch_runs", "timeout_seconds INTEGER"),
+        ("dispatch_runs", "cost_cap_usd REAL"),
+        ("dispatch_runs", "review_required INTEGER DEFAULT 0"),
+        ("dispatch_runs", "orchestrator TEXT"),
+        ("dispatch_runs", "backend TEXT DEFAULT 'claude'"),
+        ("dispatch_runs", "task_contract_json TEXT"),
+        ("dispatch_runs", "staging_dir TEXT"),
+        ("dispatch_runs", "health_status TEXT"),
+        ("dispatch_runs", "health_detail TEXT"),
+        ("dispatch_runs", "last_artifact_at TIMESTAMP"),
     ]
     for table, column_def in _migrations:
         try:
