@@ -8,6 +8,7 @@ const {
   applyCitations,
   createCitationState,
   extractEvidenceLinks,
+  resolveSourceRecord,
   splitCitationGroup,
   getCitationHealthTier,
 } = jiti(citationsPath);
@@ -160,6 +161,33 @@ run("CL: extractEvidenceLinks resolves docket", () => {
   const links = extractEvidenceLinks("CL:69737684");
   assert.equal(links.length, 1);
   assert.match(links[0].url ?? "", /courtlistener\.com\/docket\/69737684/);
+});
+
+run("CourtListener opinion: explicit opinion/<id> resolves to opinion URL", () => {
+  const result = applyCitations("See [CourtListener:opinion/564802].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, "https://www.courtlistener.com/opinion/564802/");
+});
+
+run("CourtListener opinion: extractEvidenceLinks resolves explicit opinion ref", () => {
+  const links = extractEvidenceLinks("CourtListener:opinion/564802");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /courtlistener\.com\/opinion\/564802\//);
+});
+
+run("CourtListener bare numeric: NOT guessed as an opinion URL", () => {
+  // Bare "CourtListener:<id>" ids are unreliable in the corpus (junk like
+  // CourtListener:1 plus 8-digit docket-magnitude values), so they must never
+  // resolve to a fabricated opinion URL — they stay an honest record_only card.
+  const links = extractEvidenceLinks("CourtListener:68822588");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].sourceKind, "record_only");
+  assert.ok(!(links[0].url ?? "").includes("courtlistener.com"));
+});
+
+run("CourtListener junk numeric: small ids never link out", () => {
+  const links = extractEvidenceLinks("CourtListener:1");
+  assert.ok(links.every((link) => !(link.url ?? "").includes("courtlistener.com")));
 });
 
 run("NYSCEF_CASE: resolves encoded docket ID to NYSCEF URL", () => {
@@ -397,6 +425,45 @@ run("OpenSanctions: extractEvidenceLinks resolves entity", () => {
   assert.equal(links[0].url, "https://www.opensanctions.org/entities/Q125731/");
 });
 
+run("OpenSanctions: resolves dataset-prefixed canonical ID (NK- hash)", () => {
+  const result = applyCitations("See [OpenSanctions:NK-TLjnXcjHHZa2yULEzGNW65].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].sourceKind, "external");
+  assert.equal(
+    result.entries[0].url,
+    "https://www.opensanctions.org/entities/NK-TLjnXcjHHZa2yULEzGNW65/",
+  );
+});
+
+run("OpenSanctions: resolves dataset-prefixed canonical ID (ohchr- hash)", () => {
+  const id = "ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb";
+  const result = applyCitations(`See [OpenSanctions:${id}].`);
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].url, `https://www.opensanctions.org/entities/${id}/`);
+});
+
+run("OpenSanctions: garbage token does not emit a dead entity URL", () => {
+  // "search" is a UI path, not an entity ID — /entities/search/ 404s.
+  const result = applyCitations("See [OpenSanctions:search].");
+  for (const entry of result.entries) {
+    assert.ok(
+      !(entry.url ?? "").includes("opensanctions.org"),
+      `unexpected opensanctions.org link: ${entry.url}`,
+    );
+  }
+  // Malformed slugs (a search query, not an entity) also must not link out.
+  const slug = applyCitations("See [OpenSanctions:search-Darren-Indyke].");
+  for (const entry of slug.entries) {
+    assert.ok(!(entry.url ?? "").includes("opensanctions.org"));
+  }
+});
+
+run("OpenSanctions: prose mention does not become a citation", () => {
+  // "OpenSanctions search returned ..." is narrative, not a cite — no source card.
+  const result = applyCitations("OpenSanctions search returned 3 PEP hits.");
+  assert.equal(result.entries.length, 0);
+});
+
 // ---------------------------------------------------------------------------
 // DocumentCloud
 // ---------------------------------------------------------------------------
@@ -418,7 +485,7 @@ run("DocumentCloud: extractEvidenceLinks resolves doc ID", () => {
 // OffshoreAlert
 // ---------------------------------------------------------------------------
 
-run("OffshoreAlert: resolves slug to OffshoreAlert URL", () => {
+run("OffshoreAlert: resolves slug to hosted consent-order copy", () => {
   const result = applyCitations("See [OffshoreAlert:DB-Consent-Order-NYDFS].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "OffshoreAlert:DB-Consent-Order-NYDFS");
@@ -426,10 +493,42 @@ run("OffshoreAlert: resolves slug to OffshoreAlert URL", () => {
   assert.equal(result.entries[0].url, "/source-artifacts/nydfs-deutsche-bank-epstein-consent-order-2020.pdf");
 });
 
-run("OffshoreAlert: extractEvidenceLinks resolves slug", () => {
-  const links = extractEvidenceLinks("OffshoreAlert:Katlyn-Doe-v-Epstein");
-  assert.equal(links.length, 1);
-  assert.match(links[0].url ?? "", /offshorealert\.com\/Katlyn-Doe-v-Epstein/);
+run("OffshoreAlert: hosted primary copies resolve to local PDFs, never offshorealert.com", () => {
+  const hosted = {
+    "OffshoreAlert:Priscilla-Doe-v-Epstein": "/source-artifacts/priscilla-doe-v-epstein-estate-complaint.pdf",
+    "OffshoreAlert:Katlyn-Doe-v-Epstein": "/source-artifacts/katlyn-doe-v-epstein-estate-complaint.pdf",
+    "OffshoreAlert:Ali-Karimi-v-DB": "/source-artifacts/ali-karimi-v-deutsche-bank-class-action-complaint.pdf",
+    "OffshoreAlert:Madoff-Victims-SIPA-08-01789": "/source-artifacts/madoff-victims-sipa-08-01789.pdf",
+  };
+  for (const [token, pdf] of Object.entries(hosted)) {
+    const result = applyCitations(`See [${token}].`);
+    assert.equal(result.entries.length, 1, `${token} should resolve to one entry`);
+    assert.equal(result.entries[0].sourceKind, "hosted_copy", `${token} should be hosted_copy`);
+    assert.equal(result.entries[0].url, pdf, `${token} should point at hosted PDF`);
+  }
+});
+
+run("OffshoreAlert: un-hosted slug is honest record_only with no dead link", () => {
+  // Liquid Funding RoC PDF is ~43MB, over the Cloudflare 25 MiB per-file limit.
+  const result = applyCitations("See [OffshoreAlert:Liquid-Funding-RoC-EC29378].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].sourceKind, "record_only");
+  assert.ok(!(result.entries[0].url ?? "").includes("offshorealert.com"));
+});
+
+run("OffshoreAlert: extractEvidenceLinks never emits an offshorealert.com URL", () => {
+  for (const token of [
+    "OffshoreAlert:Katlyn-Doe-v-Epstein",
+    "OffshoreAlert:Liquid-Funding-RoC-EC29378",
+    "OffshoreAlert:Some-Unknown-Doc",
+  ]) {
+    for (const link of extractEvidenceLinks(token)) {
+      assert.ok(
+        !(link.url ?? "").includes("offshorealert.com"),
+        `${token} produced a dead offshorealert.com link: ${link.url}`,
+      );
+    }
+  }
 });
 
 // ---------------------------------------------------------------------------
@@ -810,6 +909,66 @@ run("source-urls.json: override file is loaded without error", () => {
   // For now, just verify extractEvidenceLinks still works (module loaded).
   const links = extractEvidenceLinks("some-unknown-ref");
   assert.ok(Array.isArray(links));
+});
+
+// ---------------------------------------------------------------------------
+// Provenance honesty: internal-artifact suppression (WS2) + honest text (WS4)
+// ---------------------------------------------------------------------------
+
+run("Internal artifact: temp/session path produces no source card", () => {
+  assert.equal(resolveSourceRecord("/tmp/osint-5RXDUfzR/ethics-agreement.txt"), null);
+  assert.equal(extractEvidenceLinks("/tmp/osint-5RXDUfzR/ethics-agreement.txt").length, 0);
+});
+
+run("Internal artifact: analysis-run handle produces no source card", () => {
+  assert.equal(resolveSourceRecord("analysis-run-1"), null);
+  assert.equal(extractEvidenceLinks("analysis-run-1").length, 0);
+});
+
+run("Internal artifact: finding-NNNN self-ref produces no source card", () => {
+  assert.equal(resolveSourceRecord("finding-11099"), null);
+  assert.equal(extractEvidenceLinks("finding-11099").length, 0);
+});
+
+run("Internal artifact: bare-numeric self-ref produces no source card", () => {
+  // Non-4-digit bare numbers (counters, finding ids) are suppressed; 4-digit
+  // years are carved out (see the UK-neutral-cite test below).
+  assert.equal(resolveSourceRecord("100"), null);
+  assert.equal(extractEvidenceLinks("100").length, 0);
+  assert.equal(resolveSourceRecord("11099"), null);
+});
+
+run("Internal artifact: 4-digit years are NOT suppressed (UK neutral cites)", () => {
+  // "[2014] EWHC 1887" etc. — suppressing the bare year would orphan the inline
+  // citation. Years stay resolvable (record_only), never private_internal.
+  for (const year of ["2014", "2022", "2025"]) {
+    const record = resolveSourceRecord(year);
+    assert.ok(record, `${year} should resolve to a record, not null`);
+    assert.notEqual(record.kind, "private_internal", `${year} must not be suppressed`);
+  }
+});
+
+run("record_only: honest access note, no 'held locally' language", () => {
+  const record = resolveSourceRecord("web:CNN-2019-04-02");
+  assert.ok(record, "web: ref should resolve to a record, not null");
+  assert.equal(record.kind, "record_only");
+  assert.equal(record.accessNote, "On file; no public URL is available for this source.");
+  assert.ok(!/held locally/i.test(record.accessNote));
+});
+
+run("Namespaced refs: web:/ref:/hf_ stay record_only, not suppressed", () => {
+  // These point at real (often public) sources that lack a captured URL.
+  // They must surface as honest record_only cards to preserve provenance —
+  // suppressing them as private_internal would hide the source entirely.
+  for (const token of [
+    "web:aegismalta.com",
+    "ref:American-Oversight-cyber-ninjas-emails",
+    "hf_notesbymuneeb:Gulen-audio-recording",
+  ]) {
+    const record = resolveSourceRecord(token);
+    assert.ok(record, `${token} should resolve to a record, not null`);
+    assert.equal(record.kind, "record_only", `${token} should be record_only`);
+  }
 });
 
 // ---------------------------------------------------------------------------

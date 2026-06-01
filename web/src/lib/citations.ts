@@ -183,6 +183,16 @@ function buildCourtListenerUrl(docketId: string): string {
   return `https://www.courtlistener.com/docket/${docketId}/`;
 }
 
+// Only the EXPLICIT "CourtListener:opinion/<id>" form maps to an opinion URL —
+// the data self-labels the entity type and the ids (e.g. 564802, 1583303) match
+// opinion-cluster magnitude. Bare "CourtListener:<id>" refs are NOT mapped: the
+// real values are a mix of junk (CourtListener:1 ×57, :2, :3, :13, :545) and
+// 8-digit 60-72M ids that are docket magnitude, not opinions — guessing a URL
+// would manufacture broken links, so bare refs stay record_only.
+function buildCourtListenerOpinionUrl(opinionId: string): string {
+  return `https://www.courtlistener.com/opinion/${opinionId}/`;
+}
+
 function buildNyscefCaseUrl(docketId: string): string {
   return `https://iapps.courts.state.ny.us/nyscef/CaseDetails?docketId=${encodeURIComponent(docketId)}`;
 }
@@ -199,12 +209,19 @@ function buildOpenSanctionsUrl(entityId: string): string {
   return `https://www.opensanctions.org/entities/${entityId}/`;
 }
 
-function buildDocumentCloudUrl(docId: string): string {
-  return `https://www.documentcloud.org/documents/${docId}`;
+// OpenSanctions entity pages exist only for canonical entity IDs. Prose words
+// ("search", "PEP", "ID", "API"), names, and malformed slugs ("search-Darren-Indyke",
+// "nginx_search") have no entity page and 404. Match the two real ID shapes:
+//   - Wikidata-derived:        Q125731
+//   - dataset-prefixed hashes: NK-TLjnXcjHHZa2yULEzGNW65, ohchr-e23c9d0f...
+function isOpenSanctionsEntityId(id: string): boolean {
+  if (/^Q\d+$/i.test(id)) return true;
+  if (/^[A-Za-z]{2,12}-[A-Za-z0-9]{16,}$/.test(id)) return true;
+  return false;
 }
 
-function buildOffshoreAlertUrl(slug: string): string {
-  return `https://www.offshorealert.com/${slug}/`;
+function buildDocumentCloudUrl(docId: string): string {
+  return `https://www.documentcloud.org/documents/${docId}`;
 }
 
 function buildMuckRockUrl(requestId: string): string {
@@ -448,6 +465,33 @@ function isPrivateInternalReference(token: string): boolean {
     || /^unified:/i.test(token);
 }
 
+// Evidence refs that are internal analysis artifacts, not sources at all:
+// pipeline temp paths and session workdirs, analysis-run handles, and
+// finding/bare-numeric self-references. These leak into finding_evidence rows
+// but must never render as "sources". Namespaced refs like web:/ref:/hf_ are
+// NOT included — they point at real (often public) sources that simply lack a
+// captured URL, so they stay record_only to preserve provenance, not hidden.
+function isInternalAnalysisArtifact(token: string): boolean {
+  const t = cleanToken(token);
+  if (!t) return false;
+  if (/^\/(?:tmp|var|private|users|home|opt|root)\//i.test(t)) return true; // absolute local paths
+  if (/\/osint-[A-Za-z0-9]+\//.test(t)) return true;                        // session workdirs
+  if (/^analysis-run\b/i.test(t)) return true;                              // pipeline run handles
+  if (/^finding-\d+$/i.test(t)) return true;                                // finding self-refs
+  // Bare-numeric self-refs (finding ids / counters) but NOT 4-digit years:
+  // "[2014]" etc. are the year component of UK neutral citations in prose
+  // (Kruppa v Benedetti [2014] EWHC 1887), so suppressing them would orphan
+  // an inline citation. 4-digit numbers already never yield evidence cards
+  // (see isMeaningfulFallbackSourceToken), so excluding them here is free.
+  if (/^\d+$/.test(t) && !/^\d{4}$/.test(t)) return true;
+  return false;
+}
+
+// Combined gate for refs that must not surface as a public source card.
+function isNonDisclosableInternalRef(token: string): boolean {
+  return isPrivateInternalReference(token) || isInternalAnalysisArtifact(token);
+}
+
 function isInternalReferenceKind(value: string): value is InternalReferenceKind {
   return ["finding", "connection", "entity", "lead", "thread"].includes(value.toLowerCase());
 }
@@ -523,7 +567,7 @@ function isInlineCitationToken(token: string): boolean {
 
 function isMeaningfulFallbackSourceToken(token: string, hasStructuredCandidates: boolean): boolean {
   const cleaned = cleanToken(token);
-  if (!cleaned || isPrivateInternalReference(cleaned)) return false;
+  if (!cleaned || isNonDisclosableInternalRef(cleaned)) return false;
   if (/^\d{4}$/.test(cleaned)) return false;
   if (/^(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{1,2}(?:,\s*\d{4})?$/i.test(cleaned)) {
     return false;
@@ -605,7 +649,7 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
       kind = "archived_copy";
     } else if (externalUrl) {
       kind = "external";
-    } else if (isPrivateInternalReference(rawToken)) {
+    } else if (isNonDisclosableInternalRef(rawToken)) {
       kind = "private_internal";
     } else {
       kind = "record_only";
@@ -632,9 +676,9 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
     accessNote: manual?.access_note
       || hint?.accessNote
       || (kind === "record_only"
-        ? "Held locally by Ithildin. No public artifact URL is currently available."
+        ? "On file; no public URL is available for this source."
         : kind === "private_internal"
-          ? "Internal reference. This item does not meet the public source-disclosure bar."
+          ? "Internal analysis reference — not a publicly disclosable source."
           : kind === "archived_copy"
             ? "Archived source artifact available."
           : "Public source artifact available."),
@@ -659,7 +703,7 @@ export function getSourceArtifactUrl(record: SourceRecord): string {
 
 export function resolveSourceRecord(rawToken: string): SourceRecord | null {
   const token = cleanToken(rawToken);
-  if (!token || isPrivateInternalReference(token)) return null;
+  if (!token || isNonDisclosableInternalRef(token)) return null;
 
   const known = resolveKnownSourceToken(token);
   if (known) {
@@ -1015,6 +1059,28 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     },
   },
   {
+    // Only the explicit "CourtListener:opinion/<id>" form (see
+    // buildCourtListenerOpinionUrl). Bare "CourtListener:<id>" is deliberately NOT
+    // matched — those ids are unreliable (junk + docket-magnitude values) and stay
+    // record_only rather than resolve to a guessed, likely-broken opinion URL.
+    id: "courtlistener_opinion",
+    tokenPattern: "CourtListener:opinion\\/\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(/^CourtListener:opinion\/(\d+)$/i);
+      if (!match) return null;
+      const opinionId = match[1];
+      return { key: `cl-opinion:${opinionId}`, label: `CourtListener opinion ${opinionId}`, url: buildCourtListenerOpinionUrl(opinionId) };
+    },
+    extract(raw) {
+      return (raw.match(/CourtListener:opinion\/\d+/gi) || []).map(ref => {
+        const opinionId = ref.replace(/CourtListener:opinion\//i, "");
+        const url = buildCourtListenerOpinionUrl(opinionId);
+        return { key: url, label: `CourtListener:opinion/${opinionId}`, url };
+      });
+    },
+  },
+  {
     id: "mj_caaf",
     tokenPattern: "MJ:\\d{2}-\\d{4}(?:\\/[A-Z]{2})?",
     healthTier: "tier1",
@@ -1276,11 +1342,11 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "opensanctions",
-    tokenPattern: "OpenSanctions[:\\s]+[A-Za-z0-9]+",
+    tokenPattern: "OpenSanctions[:\\s]+[A-Za-z0-9_-]+",
     healthTier: "tier1",
     resolve(token) {
-      const match = token.match(/OpenSanctions[:\s]+([A-Za-z0-9]+)/i);
-      if (!match) return null;
+      const match = token.match(/OpenSanctions[:\s]+([A-Za-z0-9_-]+)/i);
+      if (!match || !isOpenSanctionsEntityId(match[1])) return null;
       const entityId = match[1];
       return {
         key: `opensanctions:${entityId}`,
@@ -1289,9 +1355,9 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       };
     },
     extract(raw) {
-      return (raw.match(/OpenSanctions[:\s]+[A-Za-z0-9]+/gi) || []).flatMap(ref => {
-        const m = ref.match(/OpenSanctions[:\s]+([A-Za-z0-9]+)/i);
-        if (!m) return [];
+      return (raw.match(/OpenSanctions[:\s]+[A-Za-z0-9_-]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/OpenSanctions[:\s]+([A-Za-z0-9_-]+)/i);
+        if (!m || !isOpenSanctionsEntityId(m[1])) return [];
         const url = buildOpenSanctionsUrl(m[1]);
         return [{ key: url, label: `OpenSanctions:${m[1]}`, url }];
       });
@@ -1323,6 +1389,10 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     id: "offshorealert",
     tokenPattern: "OffshoreAlert:[A-Za-z0-9_-]+",
     healthTier: "tier3",
+    // OffshoreAlert article URLs are paywalled and the public slugs 404. We instead
+    // host local copies of the underlying primary documents (court filings, consent
+    // orders) keyed `offshorealert:<slug>` in source-records.json. Emit no URL so the
+    // record resolves to the hosted copy when present, else honest record_only.
     resolve(token) {
       const match = token.match(/OffshoreAlert:([A-Za-z0-9_-]+)/i);
       if (!match) return null;
@@ -1330,15 +1400,13 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       return {
         key: `offshorealert:${slug.toLowerCase()}`,
         label: `OffshoreAlert:${slug}`,
-        url: buildOffshoreAlertUrl(slug),
       };
     },
     extract(raw) {
       return (raw.match(/OffshoreAlert:[A-Za-z0-9_-]+/gi) || []).flatMap(ref => {
         const m = ref.match(/OffshoreAlert:([A-Za-z0-9_-]+)/i);
         if (!m) return [];
-        const url = buildOffshoreAlertUrl(m[1]);
-        return [{ key: url, label: `OffshoreAlert:${m[1]}`, url }];
+        return [{ key: `offshorealert:${m[1].toLowerCase()}`, label: `OffshoreAlert:${m[1]}` }];
       });
     },
   },

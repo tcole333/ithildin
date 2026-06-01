@@ -62,7 +62,7 @@ function createSourceRecordFromLink(link: CitationLink): SourceRecord | null {
     recordUrl: link.sourceRecordUrl || link.url || `/sources/${encodeURIComponent(link.sourceId)}`,
     sourceType: "source_record",
     accessNote: kind === "record_only"
-      ? "Held locally by Ithildin. No public artifact URL is currently available."
+      ? "On file; no public URL is available for this source."
       : "Public source artifact available.",
     publishValid: link.publishValid ?? true,
   };
