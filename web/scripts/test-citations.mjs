@@ -1044,6 +1044,49 @@ run("Internal artifact: analysis-run handle produces no source card", () => {
   assert.equal(extractEvidenceLinks("analysis-run-1").length, 0);
 });
 
+run("Internal artifact: analysis_run underscore variant is suppressed", () => {
+  assert.equal(resolveSourceRecord("analysis_run"), null);
+  assert.equal(extractEvidenceLinks("analysis_run").length, 0);
+});
+
+run("Internal artifact: bare #N internal ref produces no source card", () => {
+  assert.equal(resolveSourceRecord("#739110438"), null);
+  assert.equal(extractEvidenceLinks("#739110438").length, 0);
+  assert.equal(extractEvidenceLinks("#4").length, 0);
+});
+
+run("Internal artifact: #YYYY is NOT suppressed (neutral-citation year guard)", () => {
+  const record = resolveSourceRecord("#2014");
+  assert.ok(record, "#2014 should resolve to a record, not null");
+  assert.notEqual(record.kind, "private_internal");
+});
+
+run("Internal artifact: underscore redaction notation is NOT suppressed", () => {
+  // "[_____]" is legitimate redaction notation in source prose (e.g. an SEC
+  // filing blanking an investor name), not analyst junk — must not be treated
+  // as an internal artifact.
+  const record = resolveSourceRecord("_____");
+  assert.ok(record === null || record.kind !== "private_internal", "_____ must not be classified internal");
+});
+
+run("Internal artifact: inline artifact-only group renders as plain text", () => {
+  // [analysis_run] / [#4] in prose must not become a chip OR a raw [..] token.
+  for (const tok of ["analysis_run", "#4", "#739110438"]) {
+    const result = applyCitations(`As shown [${tok}] here.`);
+    assert.equal(result.entries.length, 0, `[${tok}] should produce no citation entry`);
+    assert.ok(!result.markdown.includes(`[${tok}]`), `[${tok}] bracket token should be stripped`);
+    assert.ok(!result.markdown.includes('class="citation"'), `[${tok}] should not render a citation chip`);
+  }
+});
+
+run("Internal artifact: real internal reference and source still render in brackets", () => {
+  const finding = applyCitations("See [Finding #6023].");
+  assert.equal(finding.entries.length, 1);
+  const source = applyCitations("See [companies-house:08150769].");
+  assert.equal(source.entries.length, 1);
+  assert.match(source.entries[0].url ?? "", /company-information\.service\.gov\.uk/);
+});
+
 run("Internal artifact: finding-NNNN self-ref produces no source card", () => {
   assert.equal(resolveSourceRecord("finding-11099"), null);
   assert.equal(extractEvidenceLinks("finding-11099").length, 0);

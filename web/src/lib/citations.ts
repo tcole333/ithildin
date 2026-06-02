@@ -519,8 +519,11 @@ function isInternalAnalysisArtifact(token: string): boolean {
   if (!t) return false;
   if (/^\/(?:tmp|var|private|users|home|opt|root)\//i.test(t)) return true; // absolute local paths
   if (/\/osint-[A-Za-z0-9]+\//.test(t)) return true;                        // session workdirs
-  if (/^analysis-run\b/i.test(t)) return true;                              // pipeline run handles
+  if (/^analysis[-_ ]?run\b/i.test(t)) return true;                         // pipeline run handles (analysis-run / analysis_run)
   if (/^finding-\d+$/i.test(t)) return true;                                // finding self-refs
+  // Bare "#<n>" internal refs (finding/connection/entity ids written without
+  // the keyword), but NOT "#YYYY" which could be a neutral-citation year.
+  if (/^#\d+$/.test(t) && !/^#\d{4}$/.test(t)) return true;
   // Bare-numeric self-refs (finding ids / counters) but NOT 4-digit years:
   // "[2014]" etc. are the year component of UK neutral citations in prose
   // (Kruppa v Benedetti [2014] EWHC 1887), so suppressing them would orphan
@@ -2102,6 +2105,15 @@ function renderInternalReferenceGroup(inner: string, options: CitationOptions, c
 function applyCitationReplacementsToText(text: string, options: CitationOptions, citationState: CitationState): string {
   const normalized = normalizeCitationPatterns(text);
   return normalized.replace(/\[([^\]]+)\]/g, (match, inner) => {
+    // A bracket group that is entirely internal analysis artifacts (e.g.
+    // [analysis_run], [#4], [_____]) is analyst shorthand that leaked into
+    // prose, not a citation. Render it as plain text so it neither fabricates
+    // a "source on file" card nor leaves a dangling/raw citation token.
+    const groupTokens = splitCitationGroup(inner);
+    if (groupTokens.length && groupTokens.every(isInternalAnalysisArtifact)) {
+      return inner;
+    }
+
     const citations = renderCitationSuperscripts(inner, options, citationState, match);
     if (citations !== match) return citations;
 
