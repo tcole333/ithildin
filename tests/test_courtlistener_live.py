@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import os
 import pytest
+import requests
 from pathlib import Path
 
 # Load .env
@@ -36,6 +37,25 @@ def client():
 # Known test fixtures
 BATTLE_DOCKET_ID = 5375813  # US v. Battle, Sr. (1:04-cr-20159)
 BATTLE_OPINION_CLUSTER = 2328330  # 473 F.Supp.2d 1185 (Rule 29 ruling)
+
+
+def _skip_on_upstream_outage(call):
+    """Run ``call()``; ``pytest.skip`` only on a *transient upstream* failure.
+
+    CourtListener's FJC integrated database intermittently fails to serve heavy
+    queries within the client's retry budget (504 / read timeout). That is a
+    CourtListener-availability condition, not a client defect, so skip rather
+    than fail. A real client/query bug surfaces as a 4xx or an assertion failure
+    and is NOT swallowed here.
+    """
+    try:
+        return call()
+    except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError) as e:
+        pytest.skip(f"CourtListener upstream unavailable: {e}")
+    except requests.exceptions.HTTPError as e:
+        if e.response is not None and e.response.status_code >= 500:
+            pytest.skip(f"CourtListener upstream {e.response.status_code}: {e}")
+        raise
 
 
 # ── Search API ────────────────────────────────────────────────
@@ -233,11 +253,15 @@ class TestFinancialDisclosures:
 class TestFJC:
     def test_search_by_defendant(self, client):
         """FJC uses istartswith, not icontains."""
-        results = client.search_fjc(defendant="Epstein", max_results=3)
+        results = _skip_on_upstream_outage(
+            lambda: client.search_fjc(defendant="Epstein", max_results=3)
+        )
         assert isinstance(results, list)
 
     def test_search_by_plaintiff(self, client):
-        results = client.search_fjc(plaintiff="United States", max_results=3)
+        results = _skip_on_upstream_outage(
+            lambda: client.search_fjc(plaintiff="United States", max_results=3)
+        )
         assert isinstance(results, list)
         assert len(results) > 0
 
@@ -266,14 +290,56 @@ class TestCareer:
 
 
 class TestErrorHandling:
-    def test_blocked_parties_endpoint_raises_permission_error(self, client):
-        """The /parties/ endpoint should raise PermissionError, not generic error."""
-        with pytest.raises(PermissionError, match="select user"):
-            client._request("GET", "parties/", params={"docket": BATTLE_DOCKET_ID})
+    """Access + error-handling behavior.
 
-    def test_blocked_docket_entries_raises_permission_error(self, client):
-        with pytest.raises(PermissionError, match="select user"):
-            client._request("GET", "docket-entries/", params={"docket": BATTLE_DOCKET_ID})
+    The /parties/ and /docket-entries/ endpoints were formerly gated behind
+    'select user' access (CourtListener returned 403 -> PermissionError). Our
+    token now has RECAP access, so they return data; verify that. The
+    403 -> PermissionError mapping is still covered by the mocked unit test
+    below, since it can no longer be triggered live.
+    """
+
+    def test_parties_endpoint_accessible(self, client):
+        resp = client._request("GET", "parties/", params={"docket": BATTLE_DOCKET_ID})
+        assert isinstance(resp, dict)
+        assert isinstance(resp.get("results"), list)
+
+    def test_docket_entries_endpoint_accessible(self, client):
+        resp = client._request("GET", "docket-entries/", params={"docket": BATTLE_DOCKET_ID})
+        assert isinstance(resp, dict)
+        assert isinstance(resp.get("results"), list)
+
+
+def test_403_maps_to_permission_error():
+    """Unit: a 403 response surfaces as PermissionError with a 'select user' hint.
+
+    Covers the defensive branch in _request() that can no longer be triggered
+    live now that our token has access to the formerly-gated endpoints. Mocks
+    transport to test our error mapping (isolated logic), not the API contract —
+    the live tests above verify the real contract.
+    """
+    from tools.courtlistener_api_client import CourtListenerClient
+
+    class _Resp:
+        status_code = 403
+        headers: dict = {}
+
+        def json(self):
+            return {}
+
+        def raise_for_status(self):
+            return None
+
+    class _Session:
+        headers: dict = {}
+
+        def request(self, *args, **kwargs):
+            return _Resp()
+
+    client = CourtListenerClient(token="dummy")
+    client.session = _Session()
+    with pytest.raises(PermissionError, match="select user"):
+        client._request("GET", "parties/", params={"docket": 1})
 
 
 # ── Audio (Oral Arguments) ───────────────────────────────────
