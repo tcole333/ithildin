@@ -902,6 +902,39 @@ def cmd_stats(args):
     db.close()
 
 
+def create_opensanctions_leads(lead_db, matches):
+    """Emit pending_triage leads for OpenSanctions sanctioned/PEP matches.
+
+    Routes through the canonical auto_leads.create_lead() emitter — which
+    hard-codes status='pending_triage' and writes the note to the lead_notes
+    table — instead of a raw INSERT into a nonexistent leads.notes column.
+    Dedupes on title via lead_exists(). Returns the number of leads created.
+    """
+    try:
+        from tools.auto_leads import create_lead, lead_exists, LeadLimitReached
+    except ImportError:
+        from auto_leads import create_lead, lead_exists, LeadLimitReached
+
+    created = 0
+    for m in matches:
+        topic_str = ", ".join(m["topics"])
+        title = f"OpenSanctions match: {m['our_name']} -> {m['os_caption']} ({topic_str})"
+        if lead_exists(lead_db, title):
+            continue
+        category = "person" if m.get("os_schema") == "Person" else "entity"
+        notes = (
+            f"Score: {m['score']}. OS ID: {m['os_id']}. Schema: {m['os_schema']}. "
+            f"Datasets: {', '.join(m['datasets'])}"
+        )
+        try:
+            create_lead(lead_db, title, category, "high", "agent:opensanctions_reconcile",
+                        target=m["our_name"], notes=notes)
+        except LeadLimitReached:
+            break
+        created += 1
+    return created
+
+
 def cmd_reconcile_ftm(args):
     """Fuzzy reconciliation of investigation.db entities against OpenSanctions.
 
@@ -1030,23 +1063,7 @@ def cmd_reconcile_ftm(args):
             from lead_tracker import get_db as get_inv_db
 
         lead_db = get_inv_db()
-        for m in sanctioned + peps:
-            topic_str = ", ".join(m["topics"])
-            title = f"OpenSanctions match: {m['our_name']} -> {m['os_caption']} ({topic_str})"
-            # Check for duplicate lead
-            existing = lead_db.execute(
-                "SELECT id FROM leads WHERE title = ?", (title,)
-            ).fetchone()
-            if existing:
-                continue
-            lead_db.execute("""
-                INSERT INTO leads (title, status, target_name, priority, notes, created_at)
-                VALUES (?, 'pending_triage', ?, 3, ?, datetime('now'))
-            """, (title, m["our_name"],
-                  f"Score: {m['score']}. OS ID: {m['os_id']}. Schema: {m['os_schema']}. "
-                  f"Datasets: {', '.join(m['datasets'])}"))
-            leads_created += 1
-
+        leads_created = create_opensanctions_leads(lead_db, sanctioned + peps)
         lead_db.commit()
         lead_db.close()
 
