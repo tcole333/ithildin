@@ -169,6 +169,21 @@ def generate_report():
         ),
     }
 
+    # ── Selector-pivot capability + breach aggregator ──────────────
+    sources["Selector Pivot"] = {
+        "description": "Fans one selector across free aggregators; emits pending_triage leads + entities. Gated leak adapters: Dehashed (live), IntelX (needs key)",
+        "query_tool": "tools/selector_pivot.py",
+        "status": "available",
+    }
+
+    dehashed_key = os.environ.get("DEHASHED_API_KEY")
+    sources["Dehashed"] = {
+        "description": "Breach/credential aggregator (v2; needs an ACTIVE search subscription). Check live: tools/query_dehashed.py balance",
+        "query_tool": "tools/query_dehashed.py",
+        "status": "configured" if dehashed_key else "no_api_key",
+        **({} if dehashed_key else {"start_cmd": "export DEHASHED_API_KEY=<key>"}),
+    }
+
     # Parquet files
     sources["HF Emails Parquet"] = {
         "description": "4,272 House Oversight emails",

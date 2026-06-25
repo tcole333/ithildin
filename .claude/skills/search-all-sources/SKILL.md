@@ -204,6 +204,25 @@ Search any investigation-specific corpus tools listed in `corpus_tools` from the
 
 Log each corpus tool search the same way as generic sources.
 
+### 1d. Selector Pivot & Breach Data (selectors, not just names)
+
+When the target is a **selector** (email, username, phone, domain, IP) rather than a person/entity name, fan it out in one call instead of querying sources individually:
+
+```bash
+# One selector -> linked selectors + candidate entities across aggregators (auto-logs to search_log)
+uv run python tools/selector_pivot.py run "<SELECTOR>" --output $WORKDIR/pivot.json
+# Include gated breach/leak adapters (Dehashed; consumes credits):
+uv run python tools/selector_pivot.py run "<EMAIL>" --type email --enable-paid --output $WORKDIR/pivot.json
+```
+
+Free adapters (opensanctions, gleif, icij, littlesis, crt.sh, maigret) run by default; `--enable-paid` adds Dehashed (breach/credential records, fires only on the seed selector) and IntelX. Emits `pending_triage` leads — **leak-sourced links cap at `medium` confidence; corroborate against a primary record before promotion.**
+
+Direct breach lookup (one selector, raw records):
+```bash
+uv run python tools/query_dehashed.py search --email "<EMAIL>" --output $WORKDIR/dehashed.json
+uv run python tools/query_dehashed.py balance   # remaining credits
+```
+
 ### 2. Log Each Search
 After each query, log it to prevent redundant future searches:
 ```python

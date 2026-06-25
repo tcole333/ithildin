@@ -40,6 +40,9 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `crtsh` | query_crtsh.py | crt.sh certificate transparency |
 | `wayback` | query_wayback.py | Wayback Machine |
 | `urlscan` | query_urlscan.py | URLScan.io |
+| `dehashed` | query_dehashed.py | DeHashed breach/credential aggregator (v2; needs active subscription) |
+| `intelx` | query_intelx.py | Intelligence X leak/paste/darkweb index (planned; gated) |
+| `leak_aggregator` | selector_pivot.py | Leak/breach aggregator provenance class — caps derived findings at `medium` |
 | `medicaid` | query_medicaid.py | Medicare/Medicaid spending |
 | `highergov` | query_highergov.py | HigherGov contracts/grants |
 | `documentcloud` | query_documentcloud.py | DocumentCloud |
@@ -917,6 +920,24 @@ python tools/query_opensanctions.py search "Oleg Deripaska" --topic sanction
 python tools/query_opensanctions.py pep-check "Ehud Barak"
 python tools/query_opensanctions.py match-entities  # All investigation entities
 ```
+
+### Selector Pivot (cross-aggregator selector fan-out)
+```bash
+# One selector (email/username/phone/domain/IP/name) -> linked selectors + candidate entities
+python tools/selector_pivot.py run "Gazprom" --type company --output out.json
+python tools/selector_pivot.py run "jane@example.com" --type email --enable-paid --output out.json  # +Dehashed/IntelX
+python tools/selector_pivot.py adapters --type name   # routing + availability
+```
+Free adapters (opensanctions, gleif, icij, littlesis, crt.sh, maigret) run by default; `--enable-paid` adds the gated leak adapters (Dehashed live, IntelX needs a key). Paid adapters fire only on the seed selector (bounds credit cost); discovered selectors re-pivot through free sources. Emits `pending_triage` leads + entities; leak-sourced findings cap at `medium`. Aggregators-only posture. Full notes: `docs/modules/network-sanctions.md`.
+
+### Dehashed (breach/credential aggregator — DEHASHED_API_KEY, active v2 subscription)
+```bash
+python tools/query_dehashed.py search --email "jane@example.com" --output out.json
+python tools/query_dehashed.py search --username jdoe --output out.json
+python tools/query_dehashed.py search --domain example.com --size 100 --output out.json
+python tools/query_dehashed.py balance   # remaining credits (~1 credit)
+```
+v2 needs an ACTIVE search subscription (not just a credit balance — a lapsed sub 401s). Single page by default (≈1 credit/call); `--paginate` to fetch more. `*` wildcard is server-broken — use `?`. Result fields come back as lists.
 
 ### Investigation-Specific Corpus (1,271 persons, 1.5M docs, REST API)
 ```bash

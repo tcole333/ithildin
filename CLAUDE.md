@@ -160,7 +160,7 @@ Orchestrate work from a single chat session using subagents. Skills like `/deep-
 ## Environment
 
 - **Always use `uv run python`** to invoke tools
-- Dehashed API: credits limited (468)
+- Dehashed API: v2 requires an ACTIVE search subscription (not just credits) — query via `tools/query_dehashed.py`; `tools/selector_pivot.py` fans a selector across aggregators (Dehashed/IntelX gated behind `--enable-paid`)
 - OpenCorporates API: basic tier (500 calls/month, 200/day max)
 - Key identifiers (emails, addresses, contacts): see `memory/key-identifiers.md`
 

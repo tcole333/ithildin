@@ -136,6 +136,9 @@ VALID_SOURCES = [
     "dsca", "lda", "fara_local",
     # Internal investigation cross-references
     "investigations",
+    # ── Selector-pivot leak/breach aggregators (provenance-opaque;
+    #    findings sourced here cap at `medium` until corroborated) ──
+    "leak_aggregator", "dehashed", "intelx",
     # ── Round 6 additions ──────────────────────────────────────
     # General news / wires
     "cnn", "bloomberg", "aljazeera", "gulfbusiness", "agbi",
