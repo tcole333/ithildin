@@ -763,9 +763,11 @@ def _create_enforcement_leads(matches):
 
     try:
         from tools.lead_tracker import get_db as get_inv_db
+        from tools.auto_leads import create_lead, lead_exists, LeadLimitReached
     except ImportError:
         try:
             from lead_tracker import get_db as get_inv_db
+            from auto_leads import create_lead, lead_exists, LeadLimitReached
         except ImportError:
             return 0
 
@@ -781,13 +783,8 @@ def _create_enforcement_leads(matches):
             f"({m['release_number']}, {m['source_type']})"
         )
 
-        # Check for existing lead with similar title
-        existing = inv_db.execute(
-            "SELECT id FROM leads WHERE title LIKE ? LIMIT 1",
-            (f"%{m['defendant_name'][:30]}%enforcement%",),
-        ).fetchone()
-
-        if existing:
+        # Dedup on title (the prior LIKE pattern never matched its own titles).
+        if lead_exists(inv_db, title):
             continue
 
         priority = "high" if m["match_score"] >= 0.95 else "medium"
@@ -799,17 +796,12 @@ def _create_enforcement_leads(matches):
         )
 
         try:
-            inv_db.execute(
-                """INSERT INTO leads (title, category, priority, status, source, notes, created_at)
-                   VALUES (?, 'enforcement', ?, 'pending_triage', 'agent:sec_enforcement_crossref', ?, datetime('now'))""",
-                (title, priority, notes),
-            )
-            created += 1
-        except Exception:
-            pass
-
-        if created >= 100:
+            create_lead(inv_db, title, "legal", priority,
+                        "agent:sec_enforcement_crossref",
+                        target=m["defendant_name"], notes=notes)
+        except LeadLimitReached:
             break
+        created += 1
 
     inv_db.commit()
     inv_db.close()
