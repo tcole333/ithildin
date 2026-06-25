@@ -91,6 +91,7 @@ class CourtListenerClient:
         self,
         token: Optional[str] = None,
         rate_limit: int = 5000,
+        timeout: int = 60,
     ):
         """
         Initialize the client.
@@ -98,6 +99,9 @@ class CourtListenerClient:
         Args:
             token: CourtListener API token (or set COURTLISTENER_TOKEN env var)
             rate_limit: Max requests per hour (default 5000)
+            timeout: Per-request timeout in seconds (default 60). Must exceed the
+                slowest legitimate response — the FJC database can take ~30s — so
+                that true hangs convert to a retryable Timeout instead of blocking.
         """
         self.token = token or os.environ.get("COURTLISTENER_TOKEN")
         if not self.token:
@@ -113,6 +117,7 @@ class CourtListenerClient:
 
         self.session.headers["User-Agent"] = "offshore-leaks-research/1.0"
         self.rate_limiter = RateLimiter(max_requests=rate_limit)
+        self.timeout = timeout
 
     def _request(
         self,
@@ -142,7 +147,7 @@ class CourtListenerClient:
         for attempt in range(retries):
             try:
                 response = self.session.request(
-                    method, url, params=params, json=json_body
+                    method, url, params=params, json=json_body, timeout=self.timeout
                 )
 
                 if response.status_code == 429:
@@ -162,6 +167,16 @@ class CourtListenerClient:
                         "'select user' access (contact mike@free.law). "
                         "Use the search API with field operators as a workaround."
                     )
+
+                # Retry transient server/gateway errors (502/503/504) with backoff.
+                if 500 <= response.status_code < 600 and attempt < retries - 1:
+                    wait = 2 ** attempt
+                    logger.warning(
+                        f"Server error {response.status_code} for {endpoint}, "
+                        f"retrying in {wait}s"
+                    )
+                    time.sleep(wait)
+                    continue
 
                 response.raise_for_status()
                 return response.json()
@@ -513,12 +528,13 @@ class CourtListenerClient:
         min_value: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """Search judge investment holdings. description__icontains searches by company name."""
+        """Search judge investment holdings. description__istartswith matches by
+        company-name prefix (CourtListener no longer allows contains/icontains lookups)."""
         params = {}
         if person_id:
             params["financial_disclosure__person"] = person_id
         if description:
-            params["description__icontains"] = description
+            params["description__istartswith"] = description
         if min_value:
             params["gross_value_code__gte"] = min_value
         return list(self._paginate("investments/", params, max_results))
@@ -529,12 +545,12 @@ class CourtListenerClient:
         source: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """Get gift disclosures. source__icontains searches by gift source."""
+        """Get gift disclosures. source__istartswith matches by gift-source prefix."""
         params = {}
         if person_id:
             params["financial_disclosure__person"] = person_id
         if source:
-            params["source__icontains"] = source
+            params["source__istartswith"] = source
         return list(self._paginate("gifts/", params, max_results))
 
     def get_debts(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
@@ -555,7 +571,7 @@ class CourtListenerClient:
         if person_id:
             params["financial_disclosure__person"] = person_id
         if source:
-            params["source_type__icontains"] = source
+            params["source_type__istartswith"] = source
         return list(self._paginate("non-investment-incomes/", params, max_results))
 
     def get_spouse_incomes(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
@@ -571,12 +587,12 @@ class CourtListenerClient:
         source: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """Get travel reimbursement disclosures. source__icontains searches by who paid."""
+        """Get travel reimbursement disclosures. source__istartswith matches by payer prefix."""
         params = {}
         if person_id:
             params["financial_disclosure__person"] = person_id
         if source:
-            params["source__icontains"] = source
+            params["source__istartswith"] = source
         return list(self._paginate("reimbursements/", params, max_results))
 
     def get_disclosure_positions(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
