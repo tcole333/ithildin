@@ -43,6 +43,33 @@ BANNED_BODY_PATTERNS = [
     r"\bmost\s+important\b",
 ]
 
+# Internal investigation-process references that must NOT appear in outward-facing
+# dossier prose. These leak the agent pipeline (waves/rounds/analysis-runs/skills)
+# into reader-facing text. High-precision: require a digit or process noun so legit
+# uses ("funding round", "waves of formation", "this analysis") don't match.
+INTERNAL_REF_PATTERNS = [
+    r"\banalysis[ _-]run(?:-\d+)?\b",                     # analysis-run, analysis_run, analysis-run-52
+    r"\bcross-lens\b",
+    r"\bmeta-synthesis\b",
+    r"\b(?:Round|Wave)[ -]?\d+\s+(?:[A-Z][A-Za-z]+ )?"   # "Round 6 synthesis", "Wave 3 systemic report"
+    r"(?:analytical |systemic |meta-)?(?:synthes|cross-lens|analysis|finding|evidence|record|"
+    r"report|claim|hypothes|framework|correction|prediction|takeaway|cycle|priorit|window|"
+    r"integration|docket|review|study|grid)",
+    r"\b(?:per|from|in|according to|noted in|identified in|documented in|established in|"
+    r"compiled in|reviewed in|confirmed in|flagged in|combined with the|cross-referenced with the)"
+    r"\s+(?:the\s+|a\s+|an\s+)?(?:same\s+)?(?:Round|Wave)[ -]?\d+\b",
+    r"\bAgents?\s+[A-G]\s*[-–]\s*[A-G]\b",                # Agents A-G
+    r"\bROUND[ -]?\d+\b",                                  # all-caps ROUND-6 headers
+    r"\b(?:discover-frameworks|systemic-analysis|deep-investigate|pursue-lead|triage-leads|"
+    r"generate-hunches|search-all-sources|timeline-analysis)\b",
+    r"\bpublication-readiness\b",
+    r"\binvestigation\s+(?:DB|database)\b",
+    r"\bthis analysis run\b",
+    r"\bhyp-\d+\b",
+    r"\bhypothesis\s+#\d+\b",
+    r"\bHUNCH\s*\(hypothesis",
+]
+
 # Valid viz values
 VALID_VIZ = {None, "ego_network", "timeline"}
 
@@ -247,6 +274,50 @@ def check_banned_phrases(dossier: dict) -> list[dict]:
                     "fixable": False,
                 })
 
+    return issues
+
+
+def check_internal_refs(dossier: dict) -> list[dict]:
+    """Check 7: Internal investigation-process references in outward-facing prose.
+
+    Flags wave/round/analysis-run/skill-name leakage (the agent pipeline showing
+    through into reader-facing text). BLOCKING in system_role/section-titles,
+    SHOULD_FIX in lead/section bodies and finding summaries/details.
+    """
+    issues = []
+    curation = dossier.get("curation", {})
+
+    # (label, raw_text, is_html, blocking)
+    blocks = []
+    if curation.get("system_role"):
+        blocks.append(("system_role", curation["system_role"], False, True))
+    for sec in curation.get("sections", []):
+        blocks.append((f"section title '{sec.get('title', '')}'", sec.get("title", ""), False, True))
+        blocks.append((f"section '{sec.get('title', sec.get('id'))}'", sec.get("content", ""), True, False))
+    if curation.get("lead"):
+        blocks.append(("lead", curation["lead"], True, False))
+    for i, q in enumerate(curation.get("open_questions", []) or []):
+        blocks.append((f"open_question[{i}]", q or "", False, False))
+    for f in dossier.get("findings", []):
+        for field in ("summary", "detail"):
+            if f.get(field):
+                blocks.append((f"finding #{f.get('id', '?')} {field}", f[field], False, False))
+
+    for label, raw, is_html, blocking in blocks:
+        if not isinstance(raw, str) or not raw:
+            continue
+        text = parse_html(raw).text if is_html else raw
+        for pattern in INTERNAL_REF_PATTERNS:
+            for m in re.finditer(pattern, text, re.IGNORECASE):
+                start = max(0, m.start() - 30)
+                end = min(len(text), m.end() + 30)
+                context = text[start:end].replace("\n", " ")
+                issues.append({
+                    "check": "internal_refs",
+                    "severity": "BLOCKING" if blocking else "SHOULD_FIX",
+                    "detail": f"Internal-process reference '{m.group()}' in {label}: ...{context}...",
+                    "fixable": False,
+                })
     return issues
 
 
@@ -575,6 +646,9 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
     link_issues, outbound_count = check_outbound_links(dossier)
     all_issues.extend(link_issues)
 
+    # Check 7: Internal-process references
+    all_issues.extend(check_internal_refs(dossier))
+
     # Categorize
     blocking = [i for i in all_issues if i["severity"] == "BLOCKING"]
     should_fix = [i for i in all_issues if i["severity"] == "SHOULD_FIX"]
@@ -590,6 +664,7 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
 
     missing_crosslinks = sum(1 for i in all_issues if i["check"] == "crosslinks")
     banned_count = sum(1 for i in all_issues if i["check"] == "banned_phrases")
+    internal_ref_count = sum(1 for i in all_issues if i["check"] == "internal_refs")
 
     return {
         "slug": slug,
@@ -603,6 +678,7 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
             "outbound_links": outbound_count,
             "orphan_citations": citation_metrics.get("orphan_citations", 0),
             "banned_phrases": banned_count,
+            "internal_refs": internal_ref_count,
             "missing_crosslinks": missing_crosslinks,
         },
     }
