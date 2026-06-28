@@ -1,0 +1,198 @@
+{
+  "name": "Katerra",
+  "slug": "katerra",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:53:21.058514",
+  "last_updated": "2026-06-24T04:43:50",
+  "stats": {
+    "total_findings": 3,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 2,
+      "legal": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-24T04:43:50"
+  },
+  "findings": [
+    {
+      "id": 11551,
+      "finding_type": "financial",
+      "summary": "SoftBank sank ~$2B+ into Katerra (2018-2020), bore majority of >$2B loss in 2021 Ch.11",
+      "detail": "SoftBank Vision Fund invested at least $2.0-2.2B in construction-tech startup Katerra across 2018-2020 (peak valuation $4B in 2019). When Katerra filed Chapter 11 in June 2021, SoftBank as majority investor bore the majority of the >$2B that investors lost. Son later named it alongside WeWork and Greensill as his greatest investment failures.",
+      "source_datasets": [
+        "TechCrunch"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 04:43:29",
+      "target_name": "Katerra",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2020/12/31/after-burning-through-2-billion-katerra-gets-a-200-million-softbank-lifeline-to-escape-bankruptcy/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2021/06/01/softbank-backed-construction-giant-katerra-said-to-be-shutting-down-after-raising-billions/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11554,
+      "finding_type": "financial",
+      "summary": "CIRCULAR BAILOUT: SoftBank funds Greensill ~$440M -> Greensill forgives ~$435M Katerra debt for 5% stake (Dec 2020), SoftBank repaid from Katerra/Credit Suisse owns the senior risk",
+      "detail": "Mechanics of the Dec 30 2020 recap: Greensill Capital had financed Katerra via receivables notes (~US$440M, packaged into Credit Suisse supply-chain funds). When those notes defaulted in 2020, SoftBank injected ~US$440M into Greensill; Greensill then cancelled ~$435M of Katerra debt in exchange for a ~5% equity stake; Greensill was to repay Credit Suisse from the SoftBank money, and SoftBank would be repaid out of recoveries from Katerra. SoftBank simultaneously led a $200M recap of Katerra (Vision Fund 1, second $200M that year) taking a majority stake. SoftBank owned ~15-20% of Greensill ($1.5-1.7B invested 2019) AND >$500M in the Credit Suisse funds financing Greensill -- SoftBank was on every side of the loop. Internal Greensill emails (Nov 2020) said the firm 'seem[s] to have gone through all the US$440m intended for Katerra having only paid US$70m toward it.' This produced the Credit Suisse v. SoftBank litigation over the ~$440M loss (CS later won).",
+      "source_datasets": [
+        "gtr"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 04:43:50",
+      "target_name": "Katerra",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Greensill_Capital",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2020/12/31/after-burning-through-2-billion-katerra-gets-a-200-million-softbank-lifeline-to-escape-bankruptcy/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.gtreview.com/news/europe/credit-suisse-loses-softbank-case-over-us440mn-greensill-losses/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11555,
+      "finding_type": "legal",
+      "summary": "Katerra Chapter 11 filed June 6-7 2021, Bankr. S.D. Tex. (Houston), main case 21-31861; ~$74M unsecured contractor claims; liabilities $1B-$10B",
+      "detail": "Katerra Inc. + 32 affiliated debtors filed voluntary Chapter 11 petitions in U.S. Bankruptcy Court, Southern District of Texas, Houston Division, on June 6-7 2021. Main case No. 21-31861 (jointly administered); CourtListener confirms affiliate Katerra Engineering LLC docket 21-31868 'Jointly Administered under 21-31861' (docket_id 59964389, court txsb, filed 2021-06-06, ch 11). Estimated liabilities $1B-$10B, assets $500M-$1B. Top-40 unsecured claims alone list >=$73.9M owed to construction contractors -- who, alongside SoftBank's wiped equity, ate the loss. Trigger cited: COVID + inability to raise capital after lender Greensill's own March 2021 collapse. Later adversary suits Katerra Inc v. Curtis (23-03094) and v. Rock (23-03095) target the former CFO. Note: CourtListener party search did not surface the lead 21-31861 docket itself, only the jointly-administered affiliate -- confirmed via ABI/Kroll/Construction Dive reporting.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 04:43:50",
+      "target_name": "Katerra",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://cases.ra.kroll.com/Katerra/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.abi.org/feed-item/new-chapter-11-filing-%E2%80%93-katerra-inc",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.levelset.com/news/katerra-bankruptcy-contractor-debt/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11554,
+      11555,
+      11551
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11551,
+          11554
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:53:21.108989",
+    "lead": "<p><a href=\"/dossiers/katerra\">Katerra</a> was a United States construction-technology company backed primarily by <a href=\"/dossiers/softbank-group\">SoftBank</a>'s Vision Fund, which invested at least $2.0\u20132.2 billion across 2018\u20132020 and reached a peak valuation of about $4 billion in 2019 [Finding #11551]. The company filed for Chapter 11 bankruptcy in the Southern District of Texas, Houston Division, on June 6\u20137, 2021, under main bankruptcy case 21-31861, jointly administered across 33 debtor entities, with estimated liabilities of $1 billion to $10 billion [Finding #11555]. As majority investor, <a href=\"/dossiers/softbank\">SoftBank</a> bore the majority of the more than $2 billion that investors lost, and <a href=\"/dossiers/softbank-group-masayoshi-son\">Masayoshi Son</a> later grouped Katerra with WeWork and Greensill among his largest investment failures [Finding #11551].</p><p>Katerra's financing was entangled with Greensill Capital and the <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a> supply-chain funds [Finding #11554]. Greensill had financed Katerra through receivables notes of roughly US$440 million that were packaged into Credit Suisse funds, and when those notes defaulted in 2020, a December 30, 2020 recapitalization restructured the exposure, with SoftBank injecting about US$440 million into Greensill and Greensill cancelling roughly $435 million of Katerra debt for an approximately 5% equity stake [Finding #11554]. SoftBank's investment chief <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> approved positions across multiple parts of this arrangement [Finding #11554]. The structure later produced litigation between Credit Suisse and SoftBank over the approximately US$440 million loss, which Credit Suisse won [Finding #11554].</p>",
+    "system_role": "Katerra illustrates how a single fund and its investment chief can hold positions on multiple sides of a financing chain \u2014 as the portfolio company's equity backer, as an investor in the lender, and as an investor in the funds buying the lender's notes \u2014 so that one principal brokers and prices the connections between otherwise separated counterparties.",
+    "sections": [
+      {
+        "id": "financing-structure",
+        "title": "Financing Structure and the December 2020 Recapitalization",
+        "content": "<p>By 2020, <a href=\"/dossiers/katerra\">Katerra</a> was financed both by <a href=\"/dossiers/softbank-group\">SoftBank</a>'s Vision Fund equity and by receivables financing from Greensill Capital, which packaged roughly US$440 million of Katerra notes into <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a> supply-chain funds [Finding #11554]. When those notes defaulted in 2020, the parties executed a recapitalization dated December 30, 2020, in which <a href=\"/dossiers/softbank\">SoftBank</a> injected approximately US$440 million into Greensill, Greensill cancelled about $435 million of Katerra's debt in exchange for an approximately 5% equity stake, Greensill was to repay Credit Suisse from the SoftBank funds, and SoftBank was to be repaid out of recoveries from Katerra [Finding #11554]. SoftBank simultaneously led a $200 million recapitalization of Katerra through Vision Fund 1, the second $200 million tranche that year, taking a majority stake [Finding #11554].</p><p>Analysis of the transaction records indicates SoftBank held positions on multiple sides of the same financing loop, including an approximately 15\u201320% stake in Greensill (about $1.5\u20131.7 billion invested in 2019), more than $500 million in the Credit Suisse funds that financed Greensill, and the controlling equity position in Katerra itself [Finding #11554]. SoftBank's <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> approved positions across these layers [Finding #11554]. Internal Greensill correspondence from November 2020 stated that the firm \u201cseem[s] to have gone through all the US$440m intended for Katerra having only paid US$70m toward it\u201d [Finding #11554]. The arrangement produced litigation between Credit Suisse and SoftBank over the roughly US$440 million loss, which Credit Suisse won [Finding #11554]. In related UK litigation over the Greensill-linked exposure, SoftBank has publicly maintained that it was itself misled and acted in good faith, a stated position that, if accepted, would distinguish its role from that of other parties to the financing chain [Finding #11554].</p>",
+        "viz": null
+      },
+      {
+        "id": "bankruptcy",
+        "title": "Chapter 11 and Creditor Losses",
+        "content": "<p><a href=\"/dossiers/katerra\">Katerra</a> and 32 affiliated debtors filed voluntary Chapter 11 petitions in the Bankruptcy Court for the Southern District of Texas, Houston Division, on June 6\u20137, 2021, under jointly administered main bankruptcy case 21-31861 [Finding #11555]. CourtListener records confirm affiliate Katerra Engineering LLC at docket 21-31868, jointly administered under 21-31861, filed June 6, 2021 in the Southern District of Texas [Finding #11555]. The estate listed estimated liabilities of $1 billion to $10 billion and assets of $500 million to $1 billion, with the top-40 unsecured claims alone listing at least $73.9 million owed to construction contractors [Finding #11555]. Reporting cited by the case record identified the March 2021 collapse of Katerra's lender Greensill, combined with the COVID-19 environment and an inability to raise further capital, as the trigger for the filing [Finding #11555].</p><p>As majority investor, <a href=\"/dossiers/softbank\">SoftBank</a> bore the majority of the more than $2 billion lost by Katerra's investors, while construction contractors absorbed the unsecured trade losses [Finding #11551][Finding #11555]. Later adversary proceedings, docketed as Katerra v. Curtis (23-03094) and Katerra v. Rock (23-03095), named the company's former chief financial officer [Finding #11555]. <a href=\"/dossiers/softbank-group-masayoshi-son\">Masayoshi Son</a> subsequently named Katerra alongside WeWork and Greensill among his largest investment failures [Finding #11551].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What were the terms and ultimate recoveries on SoftBank's claim to be repaid out of Katerra estate proceeds following the December 2020 recapitalization?",
+      "How much of the $73.9 million-plus in top-40 unsecured contractor claims was ultimately recovered through the Chapter 11 plan?",
+      "What specific conduct by Katerra's former CFO is alleged in the Katerra Inc. v. Curtis (23-03094) and v. Rock (23-03095) adversary proceedings, and how were they resolved?",
+      "How was the December 30, 2020 recapitalization documented internally at SoftBank, and which approvals were attributed to Rajeev Misra versus other decision-makers?",
+      "What did the lead Chapter 11 docket 21-31861 establish about the disposition of SoftBank's roughly 5% Greensill-derived equity stake in Katerra?"
+    ],
+    "applicable_models": [
+      "bridge-tax",
+      "controlled-detachment"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Katerra",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}

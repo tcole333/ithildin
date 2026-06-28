@@ -1,0 +1,193 @@
+{
+  "name": "Managed by Q",
+  "slug": "managed-by-q",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:53:21.268149",
+  "last_updated": "2026-06-22T07:23:25",
+  "stats": {
+    "total_findings": 3,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-22T07:23:25"
+  },
+  "findings": [
+    {
+      "id": 11458,
+      "finding_type": "financial",
+      "summary": "Managed by Q VC cap table: GV/RRE/Kapor/Homebrew raised ~$125-128M across 4 rounds before WeWork; sellers paid 56% cash / 44% AP-3 stock priced at WeWork's $47B peak",
+      "detail": "Managed by Q (founded 2013, CEO/co-founder Dan Teran) raised ~$125-128M pre-acquisition. Rounds (per Wikipedia/TheRealDeal/Crunchbase reporting): Seed (2013) Homebrew (Hunter Walk/Satya Patel); Series A 2015 ~$15M led by RRE Ventures (+Gary Vaynerchuk/Vayner-RSE, Fabrice Grinda/FJ Labs, Jessica Alba); Series B 2016 ~$25M with GV (Google Ventures) + Kapor Capital; Series C 2016 ~$30M GV + RRE (M.G. Siegler/GV joined board); Series C extension Jan 2019 ~$55M GV + RRE. Other holders: SV Angel, Greycroft, Slow Ventures, Sherpa Capital, Haystack/Semil Shah, Flight Ventures. WeWork's Apr 2019 consideration of $189.7M GAAP fair value = $107.5M cash (56.7%) + $82.0M Series AP-3 Preferred + $0.2M Class A options. NOTE the discrepancy: WeWork's S-1 also states the headline 'total contract price of $220.0 million to be paid in $100.0M cash and the remaining in Series AP-3' (line 14125), while press framed it as '$100M cash + $120M preferred stock priced at WeWork's $47B valuation.' The cash portion ($107.5M) was REAL money distributed to the cap table at the absolute peak; the AP-3 stock ($110/share original issue price, struck at the $47B mark) was the speculative portion that cratered. INFERENCE: the ~56% cash weighting meant Q's VCs (GV, RRE, Kapor, Homebrew) and Teran extracted over half the value in hard cash months before WeWork's Sept-Oct 2019 collapse \u2014 a near-perfect peak exit for the seed/Series A holders.",
+      "source_datasets": [
+        "WeWork S-1 (SEC EDGAR), The Real Deal, Wikipedia, TechCrunch, AlleyWatch"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:22:55",
+      "target_name": "Managed by Q",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/cgi-bin/browse-edgar",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therealdeal.com/new-york/2020/03/03/wework-sells-managed-by-q-to-rival-startup-at-90-discount/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Managed_by_Q",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11465,
+      "finding_type": "financial",
+      "summary": "Founder Dan Teran offered $23M to buy back Managed by Q from WeWork (Mar 2020) but lost to Eden's $25M because 'he couldn't get the funding together'; Eden gutted the team within a week",
+      "detail": "When SoftBank-controlled WeWork dumped non-core assets, co-founder/CEO Dan Teran tried to repurchase the company he built. The Real Deal (Mar 3 2020): Teran 'offered $23 million to WeWork to buy back the company' but his bid 'wasnt a viable offer because he couldnt get the funding together.' Rival Eden (a San Francisco competitor, one of Q's biggest rivals) won at $25M. AllWork/other reporting framed Teran+investors as seeking to buy back 'for less than $55 million' (a higher band), but the operative WeWork-facing bid was $23M cash. WeWork 'apparently better liked the proposal of an outside bidder' (TechCrunch). Within a week of closing, Eden laid off the Managed by Q team (TheRealDeal Mar 9 2020). FACT: the buyback failed on financing, not on price-by-much \u2014 Teran's $23M was only $2M shy of Eden's $25M. INFERENCE: a founder who 11 months earlier had been paid partly in WeWork paper could not assemble $23M cash to reclaim his own company at ~11% of its purchase price \u2014 a stark illustration of stock-for-acquisition value destruction.",
+      "source_datasets": [
+        "real_deal"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:25",
+      "target_name": "Managed by Q",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therealdeal.com/new-york/2020/03/03/wework-sells-managed-by-q-to-rival-startup-at-90-discount/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2020/03/03/confirmed-managed-by-q-sells-to-rival-eden-for-just-11-of-what-wework-paid-for-it-last-year/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therealdeal.com/new-york/2020/03/09/eden-slashes-jobs-at-managed-by-q-less-than-a-week-after-25m-purchase/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11466,
+      "finding_type": "financial",
+      "summary": "Extraction math: WeWork lost ~$155-162M net on Managed by Q in 11 months ($189.7M in, $28M out); $82M AP-3 stock cratered with WeWork's 83% valuation collapse while $107.5M cash exited the cap table at the peak",
+      "detail": "LOSS MATH (FACT, from filings + press): WeWork paid $189.7M GAAP fair value ($107.5M cash + $82.0M AP-3 + $0.2M options) Apr 2019; sold Mar 2020 to Eden for $28M total cash consideration ($2.5M heldback). Gross destruction $189.7M - $28M = ~$161.7M (~85% of value gone in 11 months). On WeWork's books: $145M goodwill impairment + $21M intangibles impairment booked in FY2019 (=$166M impaired same year as purchase), then a $10M accounting GAIN on the 2020 sale (because the asset had already been written down). The $166M same-year impairment is the smoking gun: WeWork recognized within months that it had recklessly overpaid \u2014 impairment equal to 87% of purchase price in the acquisition year itself. PEAK-CASH-OUT (INFERENCE, well-supported): the AP-3 preferred was struck at $110/share against WeWork's $47B Jan-2019 mark; by Oct 22-23 2019 SoftBank's rescue valued WeWork at under $8B \u2014 an ~83% haircut \u2014 rendering the $82M AP-3 worth a small fraction of face. But the $107.5M CASH was distributed to Q's cap table (GV, RRE, Kapor, Homebrew, Teran) at closing in spring 2019, BEFORE the Aug-2019 S-1 implosion. Net effect: Q's investors converted a private startup into >$107M hard cash at the precise top, transferring the downside (the cratering AP-3 + the entire $166M write-down) onto WeWork/SoftBank balance sheets. This fits the thread-8 'acquisition looting' pattern (cf. findings #11450, #11451): stock-funded M&A spree where sellers cash out in real money + overvalued paper at the peak and SoftBank eats the impairment.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:25",
+      "target_name": "Managed by Q",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2019/10/22/wework-47-billion-valuation-softbank-fiction.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11458,
+      11465,
+      11466
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11458,
+          11465,
+          11466
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:53:21.317139",
+    "lead": "<p>Managed by Q was a New York office-services and workplace-management startup founded in 2013 by chief executive Dan Teran. Before its acquisition it raised roughly $125\u2013128 million across four venture rounds from investors including GV (Google Ventures), RRE Ventures, Kapor Capital, and Homebrew [Finding #11458]. In April 2019 <a href=\"/dossiers/we-company\">The We Company</a> (WeWork) acquired Managed by Q for $189.7 million in GAAP fair value, of which $107.5 million was cash paid to the cap table and $82.0 million was Series AP-3 preferred stock struck against WeWork\u2019s $47 billion January 2019 valuation [SEC:0001813756-23-000016][Finding #11458].</p><p>WeWork recorded $166 million of impairment on the acquisition within the same fiscal year \u2014 $145 million of goodwill and $21 million of intangibles, equal to roughly 87 percent of the purchase price [SEC:0001813756-23-000016]. In March 2020 WeWork sold Managed by Q to the San Francisco competitor Eden for $28 million, after Teran\u2019s $23 million buy-back bid failed for lack of financing [Finding #11465]. Within a week of closing, Eden laid off the Managed by Q team [Finding #11465].</p><p>Cross-reference of the acquisition record indicates that Managed by Q was one of several WeWork purchases funded with a mix of cash and WeWork stock in which selling shareholders realized value before the company\u2019s 2019 valuation collapse; the intent behind the pricing is not established by the record [Finding #11466].</p>",
+    "system_role": "Managed by Q illustrates the mechanics of a stock-and-cash acquisition: venture sellers received cash and equity valued at an acquirer\u2019s peak mark, while the acquirer carried the subsequent impairment when that valuation fell.",
+    "sections": [
+      {
+        "id": "acquisition-terms",
+        "title": "Acquisition Terms",
+        "content": "<p>Managed by Q raised approximately $125\u2013128 million before its sale. Reported rounds included a 2013 seed from Homebrew, a 2015 Series A of about $15 million led by RRE Ventures, Series B and Series C rounds in 2016 backed by GV (Google Ventures) and Kapor Capital, and a January 2019 Series C extension of about $55 million from GV and RRE [Finding #11458]. Other holders on the cap table included SV Angel, Greycroft, Slow Ventures, and Sherpa Capital [Finding #11458].</p><p>In April 2019 <a href=\"/dossiers/we-company\">The We Company</a> acquired Managed by Q for a GAAP fair value of $189.7 million, composed of $107.5 million in cash (56.7 percent), $82.0 million in Series AP-3 preferred stock, and $0.2 million in Class A options [Finding #11458][SEC:0001813756-23-000016]. The Series AP-3 preferred carried a $110-per-share original issue price set against WeWork\u2019s $47 billion January 2019 valuation [Finding #11458]. WeWork\u2019s S-1 also described the transaction in terms of a total contract price of $220.0 million payable as $100.0 million cash plus Series AP-3 preferred [Finding #11458].</p>",
+        "viz": null
+      },
+      {
+        "id": "impairment-and-resale",
+        "title": "Impairment and Resale",
+        "content": "<p>WeWork recorded $166 million of impairment against the Managed by Q acquisition in fiscal 2019, the same year as the purchase: $145 million of goodwill and $21 million of intangible assets [SEC:0001813756-23-000016]. That impairment equaled roughly 87 percent of the $189.7 million purchase price [SEC:0001813756-23-000016]. Because the asset had already been written down, WeWork recorded an approximately $10 million accounting gain on the eventual sale [SEC:0001813756-23-000016].</p><p>In March 2020, after <a href=\"/dossiers/softbank\">SoftBank</a> moved its portfolio company WeWork to divest non-core assets, the company sold Managed by Q to the competitor Eden for $28 million in total cash consideration, with $2.5 million held back [Finding #11465]. Founder and chief executive Dan Teran offered $23 million to repurchase the company but, per The Real Deal, the bid was not viable because he could not assemble the financing; Eden\u2019s $25 million offer prevailed [Finding #11465]. Within a week of the closing, Eden laid off the Managed by Q staff [Finding #11465].</p>",
+        "viz": null
+      },
+      {
+        "id": "value-flow",
+        "title": "Distribution of Consideration and Loss",
+        "content": "<p>Analysis of the filings and contemporaneous reporting indicates that the $107.5 million cash portion was distributed to the Managed by Q cap table \u2014 including GV, RRE Ventures, Kapor Capital, Homebrew, and Teran \u2014 at the spring 2019 closing, before WeWork\u2019s August 2019 S-1 and the subsequent October 2019 valuation decline to under $8 billion in the rescue led by <a href=\"/dossiers/softbank\">SoftBank</a> [Finding #11466]. Analysis of the same record indicates the Series AP-3 preferred, struck at the $47 billion mark, lost most of its face value as WeWork\u2019s valuation fell by roughly 83 percent [Finding #11466].</p><p>Cross-reference of the purchase, impairment, and resale figures shows a gross decline of about $161.7 million between the $189.7 million paid and the $28 million realized on resale, with the $166 million same-year impairment recognized on WeWork\u2019s books [Finding #11466]. Cross-reference of the investigation record indicates this transaction sits alongside WeWork\u2019s purchases of <a href=\"/dossiers/conductor-inc\">Conductor</a> and other companies in a documented pattern of stock-funded acquisitions made during the tenure of WeWork co-founder <a href=\"/dossiers/adam-neumann\">Adam Neumann</a>, in which selling shareholders realized value at the peak valuation while the acquirer carried the write-downs [Finding #11466].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What were the per-investor cash allocations from the $107.5 million cash consideration across GV, RRE Ventures, Kapor Capital, Homebrew, and founder Dan Teran?",
+      "Do WeWork board or audit-committee records document the valuation analysis that produced the $189.7 million purchase price relative to the $166 million same-year impairment?",
+      "What were the precise terms and lockup provisions of the Series AP-3 preferred stock issued to Managed by Q shareholders?",
+      "Did any Managed by Q investor or officer hold a prior or concurrent relationship with WeWork or SoftBank decision-makers at the time of the April 2019 acquisition?"
+    ],
+    "applicable_models": []
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Managed by Q",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}
