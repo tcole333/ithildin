@@ -1,0 +1,168 @@
+{
+  "title": "WeWork: SoftBank capital in → insider extraction out (primary-sourced; WSJ-only items flagged)",
+  "note": "Amounts are as-paid/as-disclosed. PRIMARY = SEC filing or court record; SECONDARY = WSJ/press (flagged). The 2021 tender uses the as-transacted legacy basis ($19.19/share); the FY2021 10-K restates the same dollars at $23.23 post-de-SPAC (×0.8257). See finding #11497.",
+  "transactions": [
+    {
+      "date": "2017-08-01",
+      "from": "SoftBank Vision Fund",
+      "to": "WeWork",
+      "amount": 4400000000,
+      "type": "capital-in-equity",
+      "evidence_ref": "S-1 (CIK 1533523); Finding #11360",
+      "description": "PRIMARY. SoftBank Vision Fund equity into WeWork at a ~$20B valuation. First leg of ~$10.65B SoftBank committed since Jan 2017 (S-1)."
+    },
+    {
+      "date": "2019-01-01",
+      "from": "SoftBank Group",
+      "to": "WeWork",
+      "amount": 2000000000,
+      "type": "capital-in-equity",
+      "evidence_ref": "S-1; Finding #11360",
+      "description": "PRIMARY. ~$2B follow-on (primary + secondary purchases) at the ~$47B peak valuation."
+    },
+    {
+      "date": "2019-10-30",
+      "from": "SoftBank Group",
+      "to": "WeWork",
+      "amount": 1500000000,
+      "type": "capital-in-warrant",
+      "evidence_ref": "FY2022 10-K; Finding #11373",
+      "description": "PRIMARY. $1.5B accelerated '2019 Warrant' (price amended $133.15→$14.05). Part of the ~$9.5B Oct-2019 rescue."
+    },
+    {
+      "date": "2019-12-27",
+      "from": "SoftBank Group",
+      "to": "WeWork",
+      "amount": 2200000000,
+      "type": "capital-in-debt",
+      "evidence_ref": "FY2022 10-K; Finding #11387",
+      "description": "PRIMARY. $2.2B 5.00% Senior Unsecured Notes commitment (Dec 27 2019). Plus a $1.75B LC facility — the structure OneIM later joined."
+    },
+    {
+      "date": "2019-12-27",
+      "from": "WeWork",
+      "to": "SoftBank Group",
+      "amount": 853000000,
+      "type": "insider-warrant-value",
+      "evidence_ref": "EDGAR; Finding #11388",
+      "description": "PRIMARY. SoftBank received $0.01 'Penny Warrants' worth ~$853M at issuance ($569M unsecured-notes warrant + $284M 2020 LC warrant) — value transferred to SoftBank atop its cash."
+    },
+    {
+      "date": "2019-10-22",
+      "from": "SoftBank Group",
+      "to": "Adam Neumann",
+      "amount": 185000000,
+      "type": "insider-extraction",
+      "evidence_ref": "EDGAR; Finding #11385",
+      "description": "PRIMARY. $185M non-compete to Neumann, SBG-funded, recognized in full in 2019 (not the $50M Bloomberg later reported)."
+    },
+    {
+      "date": "2019-10-22",
+      "from": "SoftBank Group",
+      "to": "Adam Neumann",
+      "amount": 430000000,
+      "type": "insider-extraction-secondary",
+      "evidence_ref": "WSJ / Commercial Observer (NOT in any SEC filing); Findings #11420, #11392",
+      "description": "SECONDARY (WSJ-only). ~$430M non-recourse loan refinancing Neumann's personal margin line; SoftBank's sole remedy is the pledged shares — Neumann can walk away. NOT in any primary filing."
+    },
+    {
+      "date": "2021-04-15",
+      "from": "SoftBank Group",
+      "to": "Adam Neumann (We Holdings)",
+      "amount": 578400000,
+      "type": "insider-extraction-tender",
+      "evidence_ref": "424B3; Findings #11494, #11497",
+      "description": "PRIMARY. SoftBank bought 30,139,971 We Holdings shares @ $19.19 (legacy basis) = $578.4M in the Feb-2021 settlement tender. Of this, $428.3M was booked as expense = the premium SoftBank overpaid Neumann above fair value (Finding #11384)."
+    },
+    {
+      "date": "2021-02-25",
+      "from": "SoftBank Group",
+      "to": "Adam Neumann",
+      "amount": 105600000,
+      "type": "insider-extraction",
+      "evidence_ref": "424B3; Finding #11494",
+      "description": "PRIMARY. $105.6M settlement cash to Neumann (SBG-paid, no WeWork expense)."
+    },
+    {
+      "date": "2021-04-15",
+      "from": "SoftBank Group",
+      "to": "Early investors + employees (tender)",
+      "amount": 921600000,
+      "type": "tender-buyout",
+      "evidence_ref": "424B3; Findings #11379, #11493",
+      "description": "PRIMARY. Completed settlement tender = $921.6M total at $19.19/share (48,025,659 shares) — SoftBank cashing out early holders. The 2019 $3B tender at the same $19.19 floor was withdrawn April 2020 (triggering the Chancery suit)."
+    },
+    {
+      "date": "2017-12-01",
+      "from": "SoftBank Group",
+      "to": "Benchmark (Bruce Dunlevie)",
+      "amount": 315500000,
+      "type": "tender-buyout",
+      "evidence_ref": "SC 13D/A; Finding #11357, exit-map #11491",
+      "description": "PRIMARY/INFERENCE. Benchmark sold ~$315.5M into SoftBank's 2017+2019 tenders (got out whole); dumped the residual stub on the NYSE at ~$0.16–0.20 in Aug 2023."
+    },
+    {
+      "date": "2018-03-22",
+      "from": "WeWork",
+      "to": "Conductor sellers (Besmertnik et al.)",
+      "amount": 97800000,
+      "type": "acquisition-stock-as-currency",
+      "evidence_ref": "S-1; Findings #11438, #11461, #11472",
+      "description": "PRIMARY. $97.8M of the $113.6M Conductor purchase paid in Series AP-1 stock (86%) — to Neumann's Baruch classmate's company; NOT disclosed as related-party in the S-1; sold back to founders for ~$3.5M in 2019. Catalyst (a Conductor VC) won a surviving fraud claim over the inflated stock (2021 NY Slip Op 31796(U))."
+    },
+    {
+      "date": "2018-04-01",
+      "from": "WeWork",
+      "to": "Naked Hub sellers (Horsfield)",
+      "amount": 272700000,
+      "type": "acquisition-stock-as-currency",
+      "evidence_ref": "S-1; Findings #11439, #11452",
+      "description": "PRIMARY. $272.7M stock portion of the $480.3M Naked Hub purchase; folded into WeWork China. Board member John Zhao's Hony co-invested and received a 10M-share 'services' grant + a $200M related-party note."
+    },
+    {
+      "date": "2019-04-01",
+      "from": "WeWork",
+      "to": "Managed by Q VCs (RRE, GV, Kapor)",
+      "amount": 189700000,
+      "type": "acquisition-overpay",
+      "evidence_ref": "S-1 + 10-K; Findings #11441, #11458",
+      "description": "PRIMARY. $189.7M ($107.5M cash + $82M AP-3 stock); impaired $166M the SAME year (~87%); sold to Eden for $28M in 2020. VCs cashed out $107.5M at the peak."
+    },
+    {
+      "date": "2023-10-31",
+      "from": "SoftBank (SVF II-2)",
+      "to": "LC issuing banks (OneIM Fund I LP + Goldman)",
+      "amount": 1466955937,
+      "type": "lc-takeout-misra-both-sides",
+      "evidence_ref": "DNJ 23-19865; Findings #11403, #11409",
+      "description": "PRIMARY. SoftBank paid $1,466,955,937.39 to satisfy the entire LC facility (subrogation) — making the issuing banks whole, weeks before the Nov-6 filing. OneIM (Misra's fund) was a $470M-junior-tranche issuing bank while Misra ran the SoftBank Vision Fund that owned WeWork. The structure is PRIMARY; OneIM's ~$105M profit / 18-mo guarantee / 15% rate are SECONDARY (WSJ-only)."
+    },
+    {
+      "date": "2023-11-06",
+      "from": "Junior creditors, GUC, all equity",
+      "to": "(wiped)",
+      "amount": 0,
+      "type": "bankruptcy-zero-recovery",
+      "evidence_ref": "DNJ 23-19865; Findings #11406, #11407",
+      "description": "PRIMARY. Chapter 11: 3L notes, unsecured notes, general unsecured, and ALL equity recovered 0%. SoftBank (~60%) was wiped too — but uniquely retained an equity bridge by contributing claims. JPMorgan, the mutual funds, Hony, Harvard, and Zuckerman rode it to zero."
+    },
+    {
+      "date": "2024-05-30",
+      "from": "(estate)",
+      "to": "SoftBank (released claims)",
+      "amount": 33000000,
+      "type": "claims-extinguished",
+      "evidence_ref": "DNJ 23-19865; Findings #11413, #11418",
+      "description": "PRIMARY. The UCC's colorable estate claims against SoftBank (fraudulent transfer on the $2.4B Uptier; $300M insider preference; breach of loyalty 'both sides'; equitable subordination) were released for a $33M settlement — ~$350K net after fees, never adjudicated."
+    },
+    {
+      "date": "2024-06-11",
+      "from": "Cupar Grimmond (Yardi)",
+      "to": "Reorganized WeWork",
+      "amount": 400000000,
+      "type": "post-bankruptcy-control",
+      "evidence_ref": "DNJ 23-19865; Finding #11408",
+      "description": "PRIMARY. Yardi vehicle Cupar Grimmond took 80% control of Reorganized WeWork for ~$400M (~$500M implied equity — a 34.6% discount to PJT's $765M midpoint), beating Neumann/Flow's ~$650M bid."
+    }
+  ]
+}
