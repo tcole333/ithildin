@@ -1,0 +1,343 @@
+{
+  "name": "Credit Suisse Group AG",
+  "slug": "credit-suisse-group-ag",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:41:03.662279",
+  "last_updated": "2026-06-25T05:33:17",
+  "stats": {
+    "total_findings": 4,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "relationship": 1
+    },
+    "connection_types": {
+      "financial": 2
+    },
+    "last_updated": "2026-06-25T05:33:17"
+  },
+  "findings": [
+    {
+      "id": 11626,
+      "finding_type": "financial",
+      "summary": "CS as Greensill FUND-PACKAGER: CS launched & managed 4 supply-chain-finance funds (2017, ~$10B AUM) that BOUGHT Greensill's notes \u2014 but Greensill itself selected the claims and arranged its own insurance; CS had 'little knowledge and control' (FINMA). CS, not SoftBank, was the structurer of the offload vehicle.",
+      "detail": "FACT (FINMA primary, 28 Feb 2023): From 2017 Credit Suisse launched four supply-chain-finance (SCF) funds 'in collaboration with Greensill'; CS acted as ASSET MANAGER, distributing securities backed by SCF claims to qualified investors, ~$10B invested at the Mar-2021 closure with risk 'indicated as low'. FINMA found CS's asset-mgmt company 'had little knowledge and control over the specific claims' \u2014 GREENSILL ITSELF (not CS) selected/reviewed the actual claims, and CS 'left it to [Greensill] to arrange the insurance cover in its own name'. CS made 'partly false and overly positive statements' to regulators re claims selection. FINMA ordered CS to review ~500 major relationships at board level + document ~600 senior managers, and opened 4 enforcement proceedings vs former CS managers. STRUCTURING ROLE: this is the packaging engine \u2014 CS built and badged the fund wrapper that converted Greensill paper into 'low risk' notes for outside investors. BASE-RATE CAVEAT: CS was the era's dominant structured-products house, so its appearance as packager is partly selection effect, not necessarily intent. Dup-guard: collapse mechanics already in #11548-11558.",
+      "source_datasets": [
+        "FINMA; finews"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:31:58",
+      "target_name": "Credit Suisse Group AG",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finews.com/news/english-news/45322-cs-greensill-supply-chain-funds-subfunds",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finma.ch/en/news/2023/02/20230228-mm-greensill/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11628,
+      "finding_type": "financial",
+      "summary": "CS as Wirecard RISK-SPREADER: CS arranged the Oct-2019 'CB arb' that repackaged SoftBank's EUR900M Wirecard convertible into exchangeable notes (Argentum SPV; 1.9% coupon, EUR130 strike) and SOLD the credit risk to outside institutions \u2014 recovering SoftBank/Mubadala/insiders' principal at ~zero net capital. CS was the distribution channel, not the brains.",
+      "detail": "FACT: Sept/Oct 2019, one day after SoftBank signed the Wirecard tie-up, CS arranged sale of EUR900M notes EXCHANGEABLE into Wirecard shares via SPV Argentum Netherlands BV (#4291), collateralized by SoftBank's original convertible. Terms: 1.9% annual coupon, conversion strike EUR130. GlobalCapital called it a 'startling CB arb'/'structured equity' trade. MECHANIC (Bloomberg/finews): the convertible was 'first sold to Mubadala and a few SoftBank executives, incl Misra and Naheta, at generous prices and then immediately re-packaged and re-sold by Credit Suisse to a broader group of investors at substantially less attractive terms. Mubadala et al ended up getting Wirecard stakes \u2014 risk-free and for nothing.' KEY NUANCE: 'The loans were structured by SoftBank's former investment bankers and sold to institutional investors \u2014 via Credit Suisse' (finews). So the STRUCTURING brains were Misra/Naheta's ex-Deutsche-Bank team; CS was the risk-spreading CONDUIT 'on the hook for spreading risk to a wider public'. When Wirecard collapsed (Jun 2020) the notes fell to ~13.5c and outside bondholders bore the loss (Dutch auction Jul 2020). Dup-guard: #11606-11609 cover the deal + Argentum; this adds CS's specific arranger economics + the structurer-vs-conduit distinction. BASE-RATE CAVEAT: CB-arb repackaging via SPV is standard equity-linked desk product.",
+      "source_datasets": [
+        "GlobalCapital; bloomberg; finews"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:32:17",
+      "target_name": "Credit Suisse Group AG",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bnnbloomberg.ca/wirecard-linked-notes-to-be-unwound-after-insolvency-filing-1.1459418",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finews.com/news/english-news/41892-credit-suisse-softbank-masayoshi-son-wirecard-greensill-vision-fund-mubadala",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.globalcapital.com/article/b1h78pftzs998x/softbank-derisks-wirecard-investment-with-startling-cb-arb",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11631,
+      "finding_type": "relationship",
+      "summary": "VERDICT \u2014 CS is the COMMON OFFLOAD CONDUIT, not the architect: same bank packaged & sold the risk on BOTH SoftBank bag-passes (Wirecard Argentum 2019; Greensill SCF funds), plus Lombard-lent to Son personally & shared Gulf shareholders (Mubadala/Olayan). But the STRUCTURING brains were SoftBank's own ex-Deutsche-Bank team (Misra/Naheta) \u2014 CS was the distribution channel that ended up holding the bag.",
+      "detail": "SYNTHESIS across this pass: CREDIT SUISSE recurs as the risk-OFFLOAD conduit on two distinct SoftBank/Misra fraud-adjacent deals: (1) WIRECARD \u2014 arranged the Argentum CB-arb that resold insiders' convertible to outside bondholders (#11628); (2) GREENSILL \u2014 built/managed the 4 SCF funds (~$10B) that bought Greensill paper and into which SoftBank invested-then-redeemed (#11626, #11553). THREE FURTHER CS-SoftBank vectors: (a) CS was a Lombard lender to Masayoshi Son personally (alongside Julius Baer, Safra Sarasin, LGT; Son pledged ~40% of his stake across 19 managers); (b) shared anchor shareholders \u2014 Saudi PIF/Olayan (CS's longest-standing holders) and Mubadala (jointly ran a CS infra fund to 2017) overlap SoftBank's Gulf backers; (c) CS advised SoftBank on the Wirecard deal itself. VERDICT: CS IS the common bag-pass engineer in the narrow sense (same packager/distributor twice), and on BOTH deals CS \u2014 not the outside investors' counterparties \u2014 was structurally positioned to eat residual risk (it lost ~$2.3-3B on Greensill funds and $440M on Katerra notes; the Wirecard notes it placed cratered). CRUCIAL NUANCE / against the 'CS is the architect' reading: the STRUCTURING intelligence was SoftBank's OWN ex-Deutsche-Bank credit-desk diaspora (Misra ran DB global credit/securitization; Naheta ex-DB prop \u2014 cf #11586, #11588, #11619). finews: 'loans structured by SoftBank's former investment bankers and sold via Credit Suisse.' So Misra/Naheta are NOT ex-CS; CS was the go-to EXTERNAL packaging/distribution counterparty, not their alma mater. BASE-RATE CAVEAT (load-bearing): CS was the dominant structured-products & SCF-fund house of the 2017-2021 era and banker-to-the-Gulf-sovereigns; any large structured SoftBank trade would plausibly route through CS regardless of intent. The pattern is real and the common-conduit fact is solid, but 'CS engineered the frauds' overreaches the evidence \u2014 CS was the willing, conflicted, ultimately bag-holding distributor. CS's own Mar-2023 collapse/UBS takeover was driven by Greensill ($10B) + Archegos ($4.7B+); the SoftBank-Greensill loss was thus a DIRECT contributor to CS's demise (#11630).",
+      "source_datasets": [
+        "finews; FINMA; analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:32:41",
+      "target_name": "Credit Suisse Group AG",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finews.com/news/english-news/41892-credit-suisse-softbank-masayoshi-son-wirecard-greensill-vision-fund-mubadala",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finma.ch/en/news/2023/02/20230228-mm-greensill/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11633,
+      "finding_type": "financial",
+      "summary": "CS's DEMISE \u2014 SoftBank losses contributed: CS's Mar-2023 collapse / CHF3B UBS takeover was proximately caused by Greensill ($10B funds frozen) + Archegos ($4.7B+). The SoftBank-Greensill nexus was thus a DIRECT contributor. And CS LOST its $440M Greensill/Katerra claim vs SoftBank entirely (Virtuoso v SoftBank [2025] EWHC 2631, Lord Justice Miles, 15 Oct 2025) \u2014 the bag-holder got no recovery.",
+      "detail": "FACT: On 19 Mar 2023 the Swiss Federal Council/SNB/FINMA brokered UBS's takeover of CS for CHF3B (~$3.2B) all-stock, with CHF100B+ SNB liquidity + a CHF9B government loss guarantee; completed 12 Jun 2023. Proximate causes (Bloomberg/CEPR/swissinfo): Archegos (CS's losses \u2265$4.7B, Mar 2021) + Greensill (the $10B SCF funds frozen 1 Mar 2021, ~$2.3-3B investor losses). Both detonated the SAME WEEK in March 2021 and began the reputational/risk-mgmt spiral that ended two years later. THE SOFTBANK LINK TO CS'S DEATH: SoftBank was the largest single name across the frozen Greensill funds' exposures (4 of top-5; Katerra etc.), so the SoftBank-Greensill circular nexus is a direct contributor to the Greensill leg of CS's demise. POSTSCRIPT \u2014 CS got NOTHING: as successor-in-interest, Credit Suisse Virtuoso SICAV-SIF sued SoftBank under s.423 Insolvency Act 1986 for the $440M Katerra/Greensill loss; after a 5-week 2025 trial, the UK High Court ([2025] EWHC 2631 (Ch), Lord Justice Miles, judgment 15 Oct 2025) DISMISSED the claim in full \u2014 SoftBank acted in good faith, did not know/suspect Greensill would prejudice creditors, and 'positively believed' Greensill had already used the $440M to make CS whole. Charles Russell Speechlys: 'pyrrhic victory for Credit Suisse \u2014 no relief granted.' So the structurer/distributor absorbed the loss with no legal recourse. Dup-guard: collapse mechanics in #11556; this adds CS-demise causation + the final 2025 judgment outcome.",
+      "source_datasets": [
+        "wikipedia; courtlistener; quinnemanuel"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:02",
+      "target_name": "Credit Suisse Group AG",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Acquisition_of_Credit_Suisse_by_UBS",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.judiciary.uk/judgments/credit-suisse-v-softbank/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.quinnemanuel.com/the-firm/publications/english-high-court-trial-fully-vindicates-softbank-rejecting-credit-suisse-s-440m-claim-in-its-entirety/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 6108,
+      "person_a": "Credit Suisse Group AG",
+      "person_b": "Greensill Capital",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:17",
+      "profile_id": "softbank-caper",
+      "other_person": "Greensill Capital",
+      "other_person_slug": "greensill-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FINMA 2023; finding #11626 - CS packaged Greensill notes into SCF funds",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 6109,
+      "person_a": "Credit Suisse Group AG",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:17",
+      "profile_id": "softbank-caper",
+      "other_person": "Rajeev Misra",
+      "other_person_slug": "rajeev-misra",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finews; findings #11628,#11631 - CS recurring offload conduit on Misra-orbit deals",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11628,
+      11633,
+      11626,
+      11631
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          11631
+        ],
+        "connection_ids": [
+          6108,
+          6109
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11626,
+          11628,
+          11633
+        ],
+        "connection_ids": [
+          6108,
+          6109
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:41:03.915566",
+    "lead": "<p>Credit Suisse Group AG was a Swiss global investment bank that, in the <a href=\"/dossiers/softbank\">SoftBank</a> investigation, recurs as the external packaging and distribution counterparty on two <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>-adjacent transactions that moved credit risk from <a href=\"/dossiers/softbank-group\">SoftBank Group</a> and its insiders to outside investors. In October 2019 Credit Suisse arranged the sale of EUR900 million in notes exchangeable into Wirecard shares through the special-purpose vehicle Argentum Netherlands BV, repackaging a convertible first placed with Mubadala and a small group of SoftBank executives and reselling the credit risk to a broader set of institutions [Finding #11628]. From 2017 the bank launched and managed four supply-chain-finance funds, with roughly $10 billion invested at their March 2021 closure, that bought notes originated by Greensill Capital; Switzerland's financial regulator FINMA found that the bank's asset manager \"had little knowledge and control over the specific claims\" because Greensill itself selected the claims and arranged the insurance [Finding #11626].</p><p>Cross-reference of the investigation's findings indicates that Credit Suisse, rather than the outside investors' counterparties, was structurally positioned to absorb residual losses on both transactions; records show the bank recorded multi-billion-dollar Greensill fund losses and a $440 million loss on Greensill notes tied to the SoftBank-backed builder Katerra [Finding #11631]. The Greensill funds, frozen on 1 March 2021, together with the simultaneous Archegos losses, were proximate causes of the bank's March 2023 collapse and CHF3 billion takeover by UBS [Finding #11633]. According to the trade press, the structuring intelligence on the SoftBank trades came from SoftBank's own former <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> credit bankers, not from Credit Suisse [Finding #11631].</p><p>In the subsequent UK litigation, the High Court dismissed Credit Suisse's $440 million claim against SoftBank in full, finding that SoftBank had acted in good faith and did not know or suspect that Greensill would prejudice creditors (Virtuoso v SoftBank [2025] EWHC 2631 (Ch), 15 October 2025) [Finding #11633]. Cross-reference of the findings indicates that whether the bank's role across these deals was that of a knowing risk-engineer or a conflicted distributor that ultimately held the loss remains contested in the record [Finding #11631].</p>",
+    "system_role": "Credit Suisse illustrates how a dominant structured-products and supply-chain-finance house can serve as the external wrapper through which an originator converts concentrated credit exposure into tradeable instruments distributed to outside investors, while the distributing bank retains residual risk it does not fully control.",
+    "sections": [
+      {
+        "id": "key-relationships",
+        "title": "Role in the SoftBank Network",
+        "content": "<p>Within the <a href=\"/dossiers/softbank\">SoftBank</a> network, Credit Suisse appears as the external counterparty that packaged and distributed risk on transactions originated around <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> and <a href=\"/dossiers/softbank-group\">SoftBank Group</a>, rather than as the deal originator. The trade publication finews reported that the loans were \"structured by SoftBank's former investment bankers and sold to institutional investors \u2014 via Credit Suisse,\" placing the structuring role with SoftBank's own former Deutsche Bank credit-desk personnel and the distribution role with the bank [Finding #11628]. Misra led global credit and securitization at <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> before SoftBank, and analysis of the two deals indicates Credit Suisse was the go-to external packaging and distribution counterparty for that team rather than its former employer [Finding #11631].</p><p>The bank's relationship to Greensill Capital was that of fund manager and distributor: Credit Suisse built and badged the four supply-chain-finance funds that bought Greensill paper, while Greensill selected the underlying claims and arranged the insurance [Finding #11626]. Cross-reference of the investigation's findings characterizes Credit Suisse as the common offload conduit on both SoftBank transactions \u2014 the Wirecard Argentum repackaging in 2019 and the Greensill funds \u2014 while cautioning that the bank was the era's dominant structured-products house, so its recurrence as packager is partly a selection effect rather than evidence of design [Finding #11631]. According to the reporting reviewed in the case file, Credit Suisse was also a Lombard lender to <a href=\"/dossiers/softbank-group-masayoshi-son\">Masayoshi Son</a> personally and shared Gulf anchor shareholders overlapping SoftBank's backers, including investors connected to <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Abu Dhabi sovereign vehicles</a> [Finding #11631].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "financial-activity",
+        "title": "Transaction Structures and Losses",
+        "content": "<p>The Wirecard transaction was arranged in September and October 2019, one day after <a href=\"/dossiers/softbank\">SoftBank</a> signed its Wirecard tie-up. Credit Suisse arranged the sale of EUR900 million in notes exchangeable into Wirecard shares through the special-purpose vehicle Argentum Netherlands BV, carrying a 1.9 percent annual coupon and a EUR130 conversion strike, collateralized by SoftBank's original convertible [Finding #11628]. According to Bloomberg and finews, the convertible was first sold to Mubadala and a few <a href=\"/dossiers/softbank-group\">SoftBank Group</a> executives, including <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> and Akshay Naheta, at favorable prices, then repackaged and resold by Credit Suisse to a broader group of investors on less attractive terms; GlobalCapital described the arrangement as a \"startling CB arb\" [Finding #11628]. When Wirecard collapsed in June 2020 the notes fell to roughly 13.5 cents and outside bondholders bore the loss in a July 2020 unwinding [Finding #11628].</p><p>In the Greensill matter, Credit Suisse launched four supply-chain-finance funds from 2017 \"in collaboration with Greensill,\" acting as asset manager and distributing securities backed by supply-chain claims to qualified investors, with roughly $10 billion invested and the risk \"indicated as low\" at the March 2021 closure [Finding #11626]. FINMA, in its 28 February 2023 decision, found that the bank's asset-management company \"had little knowledge and control over the specific claims,\" that Greensill Capital itself selected and reviewed the claims and arranged the insurance in its own name, and that the bank had made \"partly false and overly positive statements\" to regulators; the regulator ordered remediation across roughly 500 major relationships and opened four enforcement proceedings against former managers [Finding #11626]. Cross-reference of the findings indicates that <a href=\"/dossiers/softbank-group\">SoftBank Group</a> was the largest single name across the frozen funds' exposures and that, according to WSJ reporting referenced in the case file, it redeemed its own funds before the freeze [Finding #11631].</p><p>The financial consequences for Credit Suisse were terminal. Cross-reference of the findings indicates the bank recorded Greensill fund losses and a $440 million loss on Greensill notes tied to Katerra [Finding #11631]. The freezing of the $10 billion Greensill funds on 1 March 2021, alongside Archegos losses exceeding $4.7 billion that detonated the same week, were proximate causes of the bank's 19 March 2023 emergency takeover by UBS for CHF3 billion, brokered with Swiss National Bank liquidity and a government loss guarantee and completed on 12 June 2023 [Finding #11633]. As successor-in-interest, Credit Suisse Virtuoso SICAV-SIF sued SoftBank under section 423 of the Insolvency Act 1986 for the $440 million loss; after a five-week trial, the UK High Court dismissed the claim in full, finding that <a href=\"/dossiers/softbank-group\">SoftBank Group</a> acted in good faith, did not know or suspect that Greensill would prejudice creditors, and \"positively believed\" Greensill had already used the $440 million to make the bank whole (Virtuoso v SoftBank [2025] EWHC 2631 (Ch), 15 October 2025) [Finding #11633].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What were the identities and loss exposures of the institutional investors who bought the Argentum exchangeable notes that Credit Suisse distributed in October 2019?",
+      "What internal Credit Suisse due-diligence records exist on the Greensill claim-selection and insurance arrangements that FINMA found the bank did not control?",
+      "What was the full set of Lombard lending terms between Credit Suisse and Masayoshi Son, and how did they interact with the bank's broader SoftBank exposure?",
+      "Did the four FINMA enforcement proceedings against former Credit Suisse managers produce findings that distinguish negligence from knowing misconduct on the supply-chain funds?",
+      "Beyond Katerra, which other SoftBank-linked names sat among the top exposures of the frozen Greensill supply-chain funds, and in what amounts?"
+    ],
+    "applicable_models": [
+      "enabler-gradient",
+      "complexity-as-credential"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Credit Suisse Group AG",
+      "connections": [
+        {
+          "target": "Greensill Capital",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "FINMA 2023; finding #11626 - CS packaged Greensill notes into SCF funds",
+          "description": null
+        },
+        {
+          "target": "Rajeev Misra",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "finews; findings #11628,#11631 - CS recurring offload conduit on Misra-orbit deals",
+          "description": null
+        }
+      ],
+      "secondHop": {
+        "Rajeev Misra": [
+          {
+            "target": "Reid Weingarten",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Weingarten evaluating potential legal representation of Rajeev Misra SoftBank Vision Fund as of Jan 25, 2019. Sought Epstein intelligence and endorsement before accepting engagement."
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "OneIM () backed by Tahnoon's Royal Group and Mubadala. Misra works closely with Tahnoon inner circle: Syed Basar Shueb (IHC), Sofia Lasky, Peng Xiao (G42). Misra serves as key financial intermediary between Son and Tahnoon."
+          },
+          {
+            "target": "Wirecard AG",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Misra was a substantial personal investor in the SoftBank pool that bought Wirecard's EUR900M convertible (Apr 2019); stood to make tens of millions; deal architected by his lieutenant Naheta"
+          },
+          {
+            "target": "Brad Karp",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Paul Weiss represented Misra in SoftBank matters; Karp confirmed to Epstein Jan 26 2019"
+          },
+          {
+            "target": "Alessandro Benedetti",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Misra paid Benedetti 500K via Barkmere Group BVI Apr 2015 for smear campaign. Benedetti expected exec position plus profit share. Falling out led to WSJ leak Feb 2020"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
+}

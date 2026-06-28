@@ -1,0 +1,320 @@
+{
+  "name": "Prem Parameswaran",
+  "slug": "prem-parameswaran",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:41:03.596765",
+  "last_updated": "2026-06-25T05:33:51",
+  "stats": {
+    "total_findings": 4,
+    "total_connections": 0,
+    "total_entities": 5,
+    "finding_types": {
+      "relationship": 2,
+      "legal": 1,
+      "background": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-25T05:33:51"
+  },
+  "findings": [
+    {
+      "id": 11624,
+      "finding_type": "relationship",
+      "summary": "Eros<->SoftBank-orbit network bridge: Eros Group CFO Prem Parameswaran and Rajeev Misra were both senior Deutsche Bank MDs ~2003-2008 (Parameswaran Americas Head Telecom/Media IB; Misra global credit) - the strongest under-explored Eros<->SoftBank-orbit link besides Misra's own board seat. Eros's 2013 NYSE IPO was led by DB + UBS (both Misra shops)",
+      "detail": "Network overlaps ranked: (1) Misra's own Eros directorship = strongest direct edge (finding #11623). (2) Parameswaran+Misra both senior DB MDs ~2003-2008 (institutional overlap FACT; personal acquaintance INFERENCE - different divisions, IB advisory vs markets). (3) Eros 2013 NYSE IPO bookrun by Deutsche Bank Securities (lead) + BofA ML + UBS Securities + Jefferies + Credit Suisse (F-1/A acc 0001171520-13-000674) - DB+UBS both Misra shops, institutional not personal. (4) Kasowitz Benson Torres = Eros securities-defense counsel (won SDNY dismissal 2017) - thematically echoes caper dirty-tricks pattern but NO Kasowitz node in softbank-caper orbit; a lead not a link. (5) STX merger (2020) advisors: Citi+Gibson Dunn (Eros), PJT Partners+Kirkland (STX), JPMorgan led $350M credit - notably ABSENT: DB, UBS, Centricus, Mubadala, PIF, Fortress, OneIM. Offshore clustering NOT supported - Eros IOM/BVI/Jersey/Dubai vehicles share no documented agent/address with Misra's ADGM/OneIM structures.",
+      "source_datasets": [
+        "finra",
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:10:52",
+      "target_name": "Prem Parameswaran",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://files.brokercheck.finra.org/individual/individual_1621594.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1532981&type=F-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11636,
+      "finding_type": "legal",
+      "summary": "Parameswaran (Eros CFO, #4306) was a NAMED 10(b)/Rule 10b-5 + Section 20(a) defendant whose claims SURVIVED the motion to dismiss: D.N.J. court (2021-04-20) found scienter for him on Eros's post-CARE-downgrade financial-strength misstatements. As Group CFO/President N.A./director he signed the SOX certifications attesting the Form 20-Fs fairly presented Eros's finances. Settled $25M cash (final approval 2023-11-28).",
+      "detail": "In re Eros Int'l PLC Sec. Litig., 2:19-cv-14125 (D.N.J.), opinion cluster 10188328 / opinion 10654922. Court: 'Deshpande and Parameswaran also signed SOX Certifications attesting that the Form 20-Fs had no material misstatements and/or omissions and also fairly presented the financial condition of Eros (Compl. para 119-20; 150-51).' On scienter: after CARE downgraded EIML's credit 10 notches to 'default' (June 5 2019), Eros's June 6 2019 press release claimed it 'have met and continue to meet all debt service commitments' \u2014 then <6 hrs later admitted EIML was late on loan interest. Court: 'the timing is sufficient for the Court to infer recklessness for Lulla and Parameswaran, given their position in the Company and because of the public nature of the downgrade.' Claims against him were SUSTAINED (not dismissed). Co-defendants: Eros, Kishore Lulla, Jyoti Deshpande. Class period 2017-07-28 to 2021-08-03.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:27",
+      "target_name": "Prem Parameswaran",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/api/rest/v4/opinions/10654922/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/15829584/in-re-eros-international-plc-securities-litigation/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11638,
+      "finding_type": "background",
+      "summary": "Parameswaran FULL verified career trail (FINRA CRD #1621594, 0 disclosures = clean BrokerCheck): Salomon Bros 1995-98 -> Goldman Sachs 1998-2002 -> DEUTSCHE BANK SECURITIES 2003-10-30 to 2012-10-10 (MD, Americas Head Media/Telecom IB) -> Jefferies 2012-2015 (Global Head Media/Telecom IB) -> Eros 2015-2022 -> Triller 2022-2025 (Pres CF/IR, then Pres&CFO) -> STONE POINT CAPITAL / SPC Capital Markets LLC from 2025-07-28 (MD, Capital Markets, Greenwich CT). Corrects prompt's '~2003-08' DB tenure: he stayed at DB to 2012.",
+      "detail": "FINRA employment history for CRD 1621594. DB registration 10/30/2003-10/10/2012 (firm 2525). Jefferies 10/12/2012-3/10/2015 (firm 2347). Current: SPC Capital Markets LLC (firm 304381, SEC 8-70350), 20 Horseneck Lane, Greenwich CT 06830, reg begin 7/28/2025 \u2014 this is Stone Point Capital's broker-dealer. Stone Point bio: 'Managing Director and member of the Capital Markets team... joined Stone Point in 2025.' RED-FLAG-COMPANY SCAN of the trail: Eros (receivables fraud, $25M settlement, SEBI ban of Eros India) is the one fraud-accused employer; Triller had repeated failed listings/liquidity issues but no fraud adjudication; Stone Point/Jefferies/Goldman/Salomon = mainstream. He is entity #4306; new entities Triller #4317, Stone Point #4318.",
+      "source_datasets": [
+        "finra",
+        "stone point"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:51",
+      "target_name": "Prem Parameswaran",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://brokercheck.finra.org/individual/summary/1621594",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.stonepoint.com/team/prem-parameswaran/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11639,
+      "finding_type": "relationship",
+      "summary": "VERDICT on the Parameswaran<->Misra Deutsche Bank bridge: INSTITUTIONAL CO-PRESENCE ONLY \u2014 NO documented personal or working relationship found. Overlap window is real and verified (both senior DB MDs 2003-10-30 to 2008-06 = ~4.7 yrs) but they sat in different verticals AND cities: Parameswaran = Americas Head Media/Telecom Investment Banking (NY, client M&A); Misra = Global Head Credit Trading/Securitization/Commodities (London, prop/structured credit). No source places them on a deal, committee, or reporting line together.",
+      "detail": "The bridge that DOES close is institutional, not personal: Eros's 2013 NYSE IPO was led by Deutsche Bank + UBS (both Misra shops), and Misra himself sat on Eros's board as a non-exec director (proposed 30 Oct 2014). So the Eros<->SoftBank-orbit link runs through (a) Misra's own board seat and (b) the DB/UBS underwriting franchise \u2014 NOT through a Parameswaran-Misra friendship. Honest reading: co-employment at a 78,000-person bank in non-adjacent groups is weak as a personal tie. Relation logged as colleague (#4306->#4260) flagged co-presence-only, alongside existing db_alumni_overlap.",
+      "source_datasets": [
+        "finra",
+        "inference"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:51",
+      "target_name": "Prem Parameswaran",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://brokercheck.finra.org/individual/summary/1621594",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Rajeev_Misra",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [
+    {
+      "role": "Managing Director & Americas Head, Media/Telecom Investment Banking, Deutsche Bank Securities",
+      "date_start": "2003-10-30",
+      "date_end": "2012-10-10",
+      "source": "finra",
+      "entity_id": 4306,
+      "entity_name": "Prem Parameswaran",
+      "entity_type": "person",
+      "jurisdiction": "USA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Global Head of Media & Telecom Investment Banking, Jefferies LLC",
+      "date_start": "2012-10-12",
+      "date_end": "2015-03-10",
+      "source": "finra",
+      "entity_id": 4306,
+      "entity_name": "Prem Parameswaran",
+      "entity_type": "person",
+      "jurisdiction": "USA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Group CFO / President North America / Director, Eros International Plc (named 10(b)/Rule 10b-5 + 20(a) defendant, D.N.J. 19-cv-14125)",
+      "date_start": "2015-05-28",
+      "date_end": "2022-10-01",
+      "source": "edgar",
+      "entity_id": 4306,
+      "entity_name": "Prem Parameswaran",
+      "entity_type": "person",
+      "jurisdiction": "USA",
+      "entity_status": "active"
+    },
+    {
+      "role": "President Corporate Finance & IR -> President & CFO, Triller Corp",
+      "date_start": "2022-10-14",
+      "date_end": "2025-01-01",
+      "source": "news",
+      "entity_id": 4306,
+      "entity_name": "Prem Parameswaran",
+      "entity_type": "person",
+      "jurisdiction": "USA",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Director, Capital Markets team, Stone Point Capital LLC (registered at SPC Capital Markets LLC)",
+      "date_start": "2025-07-28",
+      "date_end": null,
+      "source": "finra",
+      "entity_id": 4306,
+      "entity_name": "Prem Parameswaran",
+      "entity_type": "person",
+      "jurisdiction": "USA",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11636,
+      11638,
+      11624,
+      11639
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "USA"
+      ],
+      "officers": [
+        {
+          "role": "Managing Director & Americas Head, Media/Telecom Investment Banking, Deutsche Bank Securities",
+          "entity": "Prem Parameswaran",
+          "start": "2003-10-30",
+          "end": "2012-10-10"
+        },
+        {
+          "role": "Global Head of Media & Telecom Investment Banking, Jefferies LLC",
+          "entity": "Prem Parameswaran",
+          "start": "2012-10-12",
+          "end": "2015-03-10"
+        },
+        {
+          "role": "Group CFO / President North America / Director, Eros International Plc (named 10(b)/Rule 10b-5 + 20(a) defendant, D.N.J. 19-cv-14125)",
+          "entity": "Prem Parameswaran",
+          "start": "2015-05-28",
+          "end": "2022-10-01"
+        },
+        {
+          "role": "President Corporate Finance & IR -> President & CFO, Triller Corp",
+          "entity": "Prem Parameswaran",
+          "start": "2022-10-14",
+          "end": "2025-01-01"
+        },
+        {
+          "role": "Managing Director, Capital Markets team, Stone Point Capital LLC (registered at SPC Capital Markets LLC)",
+          "entity": "Prem Parameswaran",
+          "start": "2025-07-28",
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 4306,
+          "name": "Prem Parameswaran",
+          "type": "person",
+          "jurisdiction": "USA",
+          "role": "Managing Director & Americas Head, Media/Telecom Investment Banking, Deutsche Bank Securities"
+        }
+      ]
+    },
+    "section_suggestions": [
+      {
+        "id": "corporate-structure",
+        "title": "Corporate Structure",
+        "viz": null,
+        "finding_ids": [],
+        "connection_ids": [],
+        "guidance": "Narrative about corporate entities, roles, jurisdictions. Explain the structure and its purpose, not just list entities."
+      }
+    ],
+    "curated_at": "2026-06-28T17:41:03.868209",
+    "lead": "<p>Prem Parameswaran is an American media and telecommunications investment banker who served as Group Chief Financial Officer, President of North America, and a director of Eros International Plc from 2015 to 2022 [Finding #11638]. His career trail, verified through FINRA BrokerCheck (CRD #1621594, zero disclosures), runs Salomon Brothers (1995-1998), Goldman Sachs (1998-2002), <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> Securities (2003-2012, where he was Managing Director and Americas Head of Media/Telecom Investment Banking), Jefferies (2012-2015), Eros (2015-2022), Triller (2022-2025), and Stone Point Capital's broker-dealer SPC Capital Markets LLC from July 2025 [Finding #11638].</p><p>In the <a href=\"/dossiers/softbank-group\">SoftBank Group</a> investigation, Parameswaran is documented as a network bridge between Eros and the <a href=\"/dossiers/softbank\">SoftBank</a> orbit through his Deutsche Bank tenure, which overlapped that of <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, then Deutsche Bank's global head of credit trading and later a non-executive director of Eros [Finding #11624]. Analysis of FINRA records indicates the two were senior Deutsche Bank managing directors during an overlapping window of roughly October 2003 to mid-2008, but in different divisions and cities, and no source places them on a shared deal, committee, or reporting line [Finding #11639].</p><p>Parameswaran was a named defendant in the federal securities class action <i>In re Eros International Plc Securities Litigation</i> (D.N.J. 2:19-cv-14125); on April 20, 2021 the court declined to dismiss the Section 10(b)/Rule 10b-5 and Section 20(a) claims against him, finding the complaint adequately pleaded scienter as to financial-strength statements made after a June 2019 credit downgrade [Finding #11636]. The case settled for $25 million in cash, with final approval on November 28, 2023 [Finding #11636]. A settlement is not an adjudication of liability, and the court's ruling addressed only the sufficiency of the pleadings, not the merits.</p>",
+    "system_role": "Parameswaran illustrates how the Deutsche Bank media/telecom and credit franchises of the 2000s seeded the personnel and underwriting relationships that later connected Eros to the SoftBank orbit, and how a chief financial officer's signature on regulatory certifications places that officer at the center of securities litigation over a company's disclosures.",
+    "sections": [
+      {
+        "id": "career-trail",
+        "title": "Career and Corporate Roles",
+        "viz": null,
+        "content": "<p>Parameswaran's employment history is documented through FINRA BrokerCheck under CRD #1621594, which records zero disclosures [Finding #11638]. He began at Salomon Brothers (1995-1998), moved to Goldman Sachs (1998-2002), and then to <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> Securities, where FINRA records his registration from October 30, 2003 to October 10, 2012 as Managing Director and Americas Head of Media and Telecom Investment Banking [Finding #11638]. He next served as Global Head of Media and Telecom Investment Banking at Jefferies (October 2012 to March 2015) [Finding #11638].</p><p>From May 2015 to October 2022 Parameswaran was Group Chief Financial Officer, President of North America, and a director of Eros International Plc [Finding #11638]. He subsequently held the roles of President of Corporate Finance and Investor Relations and then President and Chief Financial Officer at Triller Corp (2022-2025) [Finding #11638]. Since July 28, 2025 FINRA records him at SPC Capital Markets LLC, the broker-dealer of Stone Point Capital, as a Managing Director on the Capital Markets team, based in Greenwich, Connecticut [Finding #11638]. A review of these employers found that Eros is the one fraud-accused employer in the trail; Triller had repeated failed listings and liquidity issues but no fraud adjudication, and the remaining firms are mainstream financial institutions [Finding #11638].</p>"
+      },
+      {
+        "id": "deutsche-bank-bridge",
+        "title": "Deutsche Bank Overlap with Rajeev Misra",
+        "viz": null,
+        "content": "<p>Within the <a href=\"/dossiers/softbank-group\">SoftBank Group</a> investigation, Parameswaran is logged as a network bridge connecting Eros to the <a href=\"/dossiers/softbank\">SoftBank</a> orbit through <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> [Finding #11624]. Both he and <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> were senior Deutsche Bank managing directors; Parameswaran led Americas media/telecom investment banking while Misra was global head of credit trading, securitization, and commodities [Finding #11624].</p><p>Analysis of FINRA records indicates the institutional overlap is real and verified, spanning roughly October 30, 2003 to mid-2008, but that the two sat in different verticals and cities, with Parameswaran in New York on client M&A advisory and Misra in London on proprietary and structured credit [Finding #11639]. According to that analysis, no source places them on a shared deal, committee, or reporting line, and the relationship is recorded as institutional co-presence only, not a documented personal or working tie [Finding #11639]. Analysis of the records indicates the documented Eros-to-SoftBank-orbit connection instead runs through Misra's own seat on the Eros board as a non-executive director and through Eros's 2013 NYSE initial public offering, which was led by Deutsche Bank with <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a> among the syndicate [Finding #11624][Finding #11639].</p>"
+      },
+      {
+        "id": "eros-securities-litigation",
+        "title": "Eros Securities Litigation",
+        "viz": null,
+        "content": "<p>Parameswaran was a named defendant in <i>In re Eros International Plc Securities Litigation</i>, 2:19-cv-14125 (D.N.J.) [Finding #11636]. The complaint alleged that, as Group CFO, President of North America, and a director, he signed Sarbanes-Oxley certifications attesting that Eros's Form 20-F annual reports contained no material misstatements or omissions and fairly presented the company's financial condition [Finding #11636]. On April 20, 2021 the court declined to dismiss the Section 10(b)/Rule 10b-5 and Section 20(a) claims against him, finding the pleadings adequate to infer recklessness: after the rating agency CARE downgraded an Eros subsidiary's credit ten notches to 'default' on June 5, 2019, Eros's June 6 press release stated it had met and continued to meet all debt-service commitments, then within hours acknowledged the subsidiary was late on loan interest [Finding #11636]. The court wrote that 'the timing is sufficient for the Court to infer recklessness for Lulla and Parameswaran, given their position in the Company and because of the public nature of the downgrade' [Finding #11636]. His co-defendants included Eros, Kishore Lulla, and Jyoti Deshpande, and the class period ran from July 28, 2017 to August 3, 2021 [Finding #11636].</p><p>The action settled for $25 million in cash, with final approval entered November 28, 2023 [Finding #11636]. The court's 2021 ruling resolved only whether the claims were adequately pleaded, not their merits, and the settlement was not an adjudication of liability against Parameswaran. The broader characterization of Eros as a company that round-tripped funds through shell distributors to fabricate receivables is drawn from analysis by India's securities regulator SEBI and by short-seller research, and is attributed to those sources rather than established as fact about Parameswaran personally.</p>"
+      }
+    ],
+    "open_questions": [
+      "Did Parameswaran and Rajeev Misra have any documented professional contact at Deutsche Bank beyond shared employment, such as a joint deal, internal committee, or reporting relationship?",
+      "What was the allocation of the $25 million Eros settlement across defendants, and did Parameswaran contribute personally or was payment covered by D&O insurance?",
+      "Did the SEBI findings on Eros India name or implicate Parameswaran specifically, or were they confined to the Indian entity and its executives?",
+      "What due-diligence role, if any, did Parameswaran's Deutsche Bank and Jefferies media/telecom franchises play in Eros's 2013 IPO and subsequent capital raises before he joined as CFO in 2015?",
+      "What is the scope of Parameswaran's current Capital Markets mandate at Stone Point Capital, and does it intersect with any entities in the SoftBank orbit?"
+    ],
+    "applicable_models": [
+      "enabler-gradient"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Prem Parameswaran",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}

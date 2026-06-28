@@ -1,0 +1,295 @@
+{
+  "name": "Conductor, Inc.",
+  "slug": "conductor-inc",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:41:03.724918",
+  "last_updated": "2026-06-22T07:23:28",
+  "stats": {
+    "total_findings": 4,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-22T07:23:28"
+  },
+  "findings": [
+    {
+      "id": 11438,
+      "finding_type": "financial",
+      "summary": "WeWork acquired Conductor Mar 2018 for $113.6M (only $15.8M cash; $97.8M in Series AP-1 Preferred Stock = 86% equity-funded); later divested/wound down",
+      "detail": "Closed March 2018, 100% equity, total consideration $113.6M: $15.8M CASH + $97.8M Series AP-1 Preferred Stock. ~86% of the price was paid in WeWork preferred equity, not cash. Subsequent: Conductor is listed among the non-core businesses WeWork divested (FY2022 10-K); management bought it back / it was spun out in late 2019 \u2014 no sale price disclosed in these filings (FLAG: divestiture proceeds not separately stated). The $97.8M preferred-stock consideration is the looting-relevant element: WeWork printed equity to buy a marketing-software company it then exited.",
+      "source_datasets": [
+        "sec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:16:25",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11461,
+      "finding_type": "financial",
+      "summary": "PRIMARY SOURCE (WeWork S-1, Note 6): Conductor bought Mar 22 2018 for $113.6M = $15.8M cash + $97.8M Series AP-1 Preferred Stock (86% equity-funded); $31.6M of AP-1 held back at closing",
+      "detail": "WeWork Companies Inc. S-1 (filed 2019-08-14, CIK 1533523), Note 6 to FY2018 consolidated financials: 'In March 2018, the Company completed the acquisition of 100% of the equity of Conductor, Inc. for a total consideration of $113.6 million. The total consideration included $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock. At closing, $0.2 million of the cash and $31.6 million of the Series AP-1 Preferred Stock acquisition consideration was held back.' Closing date Mar 22 2018. All holdbacks released by Jun 30 2019; WeWork received $0.2M purchase-price reduction (goodwill measurement adjustment). The AP-1 preferred was issued at WeWork's ~$21B private valuation. Press (Search Engine Land) reports total economic value ~$126M incl. a 'substantial' undisclosed earnout. Conductor had raised ~$60M of VC before the sale, so ~2x invested capital \u2014 but paid 86% in WeWork paper, not cash.",
+      "source_datasets": [
+        "sec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:03",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11467,
+      "finding_type": "financial",
+      "summary": "Dec 2019 spin-back: WeWork sold Conductor BACK to co-founders Besmertnik+Eizik+Jason Finger; price undisclosed by parties but reported ~$3.5M proceeds; founders/investors put in $15M, gave 250 employees majority via founder-class stock",
+      "detail": "Announced Dec 12, 2019. Buyers: Seth Besmertnik (CEO/co-founder), Selina Eizik (COO), Jason Finger (managing partner The Finger Group, Seamless founder \u2014 joins Conductor board). Parties 'declined to disclose terms' (TechCrunch/Marketing Dive). Bloomberg/Crain's reporting (relayed via Axios 2021) states WeWork 'paid $114 million... but sold it for just $3.5 million in proceeds.' Financing: Besmertnik + outside investors contributed ~$15M to fund operations; structure grants Conductor's ~250 employees ('250 employee co-founders') majority ownership via founder-preferred / founder-class stock \u2014 Besmertnik said employees own 'more than four times what they did when we sold the company' (pre-sale management owned <10%). So the buyback was financed by a fresh $15M equity injection from the same founder group, not a payment of $114M back to WeWork. WeWork co-CEO Artie Minson endorsed: 'we know Seth and leadership will continue to scale this business.' INFERENCE: the ~$3.5M proceeds figure is a press characterization of WeWork's recovery; it is NOT separately stated in WeWork SEC filings (the divestiture is immaterial and unbroken-out in the FY2019/2022 10-Ks).",
+      "source_datasets": [
+        "techcrunch"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:28",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2019/12/12/condutor-wework-buyout/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2021/11/16/marketing-company-conductor-raises-150-million",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11468,
+      "finding_type": "financial",
+      "summary": "Extraction math: WeWork paid $113.6M (86% its own AP-1 stock) for Conductor in 2018, recovered only ~$3.5M selling it back 21 months later = ~$110M+ destroyed; sellers cashed paper at the $21B-valuation peak, founders rebought the operating company cheap post-crash",
+      "detail": "Buy (Mar 2018): $113.6M total = $15.8M cash + $97.8M Series AP-1 Preferred (per S-1); ~$126M incl. earnout. Sell-back (Dec 2019): reported ~$3.5M proceeds to WeWork. Realized loss on the deal \u2248 $110M (vs $113.6M booked) to $122M (vs $126M economic). The $97.8M of AP-1 preferred was struck at WeWork's ~$21B valuation; WeWork's implied value collapsed toward ~$8B (SoftBank Oct-2019 rescue) \u2014 so the stock the Conductor sellers received in 2018 was worth a fraction by the time of the spin-back, BUT the sellers had already received the shares at the high mark (consideration fixed at closing). WHO PROFITED: (1) Conductor's VCs/founders, who received $97.8M of WeWork preferred in 2018 at peak valuation; (2) the founder group (Besmertnik/Eizik/Finger), who reacquired the operating business for a fresh $15M injection \u2014 a fraction of the $113.6M WeWork had paid. WeWork (and ultimately SoftBank/IPO-era investors) bore the loss. Part of a broader pattern (finding #11451): WeWork spent ~$1.17B on 16+ acquisitions, impaired ~$218M, recovered only ~$128M reselling \u2014 net destruction ~$634M on the divested cohort.",
+      "source_datasets": [
+        "sec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:28",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2021/11/16/marketing-company-conductor-raises-150-million",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11472,
+      "finding_type": "legal",
+      "summary": "Catalyst Investors et al. sued WeWork, Neumann & Minson for fraud over the Conductor stock-for-equity deal; 'tens of millions' in damages",
+      "detail": "Index 654377/2020, NY Cty Sup Ct, Commercial Div (Justice Joel M. Cohen). Plaintiffs: Catalyst Investors III LP, Catalyst Investors QP III LP, Blue Cloud Ventures II LP, IGC Fund VI LP (Conductor equity holders). Defendants: The We Company (renamed WeWork Inc. 10/14/2020), Adam Neumann (CEO), Arthur Minson (President/CFO). 2018 deal: WeWork acquired Conductor Inc. for $113.6M = $15.8M cash (to mgmt/employees) + $97.8M Series AP-1 Preferred Stock, valued at $72/share. Plaintiffs took stock exclusively. Three counts: (1) Common Law Fraud & Fraudulent Inducement; (2) Unjust Enrichment; (3) Negligent Misrepresentation.",
+      "source_datasets": "[\"NY Sup Ct\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:47:24",
+      "target_name": "The We Company",
+      "profile_id": "softbank-caper",
+      "evidence": null
+    },
+    {
+      "id": 11475,
+      "finding_type": "legal",
+      "summary": "Conductor target = Neumann's Baruch College classmate Seth Besmertnik; ~$98M stock deal NOT flagged as related-party in WeWork's 2019 S-1 (which DID disclose Neumann's $5.9M trademark & $20.9M property-lease self-dealing) \u2014 fits the stock-as-currency / undisclosed-related-party pattern. Litigation likely stayed by WeWork's Nov 2023 Chapter 11.",
+      "detail": "FACT: Neumann knew founder Seth Besmertnik from Baruch College (~2 decades prior); opinion states Neumann 'identified Conductor ... because he believed Conductor to have substantial value and because he was executing a bold play to secure technology acquisitions in anticipation of WeWork's planned IPO,' paying 'primarily with its own artificially-inflated stock.' INFERENCE: the $97.8M Series AP-1 stock paid to a CEO's classmate's company is the kind of related-party transaction WeWork's S-1 omitted while disclosing other Neumann self-dealing ($5.9M trademark 'We'; ~$20.9M to Neumann-owned landlords). STATUS: MTD order (5/26/2021) ordered an answer in 21 days + 6/29/2021 prelim conference; no public final judgment, settlement, or appeal located. WeWork Inc. filed Ch.11 on 11/6/2023 (Case 23-19865, D.N.J., 517 entities), which would stay this action against The We Company.",
+      "source_datasets": "[\"courtlistener\"]",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:47:54",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": null
+    },
+    {
+      "id": 11505,
+      "finding_type": "financial",
+      "summary": "Conductor's .8M cash went to MANAGEMENT/EMPLOYEES (incl. Besmertnik); VC plaintiffs got ONLY WeWork stock at /share \u2014 the structural asymmetry that burned the VCs but liquefied the founders",
+      "detail": "WeWork S-1 (filed Aug 2019, MD&A Note 6): 'In March 2018, the Company completed the acquisition of 100% of the equity of Conductor, Inc. for a total consideration of $113.6 million. The total consideration included $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock. At closing, $0.2 million of the cash and $31.6 million of the Series AP-1 Preferred Stock acquisition consideration was held back.' The NY court (Catalyst Invs. III v The We Co., 2021 NY Slip Op 31796(U)) recites that the $15.8M cash was 'paid to Conductor's management and employees,' while the plaintiff VCs (Catalyst Investors, Matrix Partners, FirstMark) 'received consideration exclusively in the form of WeWork stock,' valued at $72/share. INFERENCE: founders/management captured the cash leg; outside VCs absorbed 100% of the WeWork equity-price risk. WeWork stock later marked to ~$41.72/share in the parallel Prolific case and effectively to zero by the failed IPO \u2014 so the VC stock consideration collapsed while the founders' cash was locked in 2018.",
+      "source_datasets": "[\"WeWork S-1; NY Slip Op 31796(U); SearchEngineLand 2019-08\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:29:57",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": null
+    },
+    {
+      "id": 11471,
+      "finding_type": "relationship",
+      "summary": "NOT arm's-length: Conductor CEO Seth Besmertnik was Adam Neumann's college classmate/friend from Baruch College and 'each other's customers'; WeWork S-1 does NOT disclose Conductor as a related-party transaction (omission)",
+      "detail": "Multiple outlets report Besmertnik and Neumann attended Baruch College together, were 'good friends in college,' and were 'each other's customers' (Conductor was a WeWork vendor; WeWork a Conductor client). Analysts framed the 2018 purchase as Neumann 'bailing out a college friend's company using investors' money' \u2014 likened to 'Elon Musk bailing out SolarCity' \u2014 and cited it as a missed related-party red flag. Jason Finger (Seamless/GrubHub co-founder; managing partner The Finger Group; chairman Upper90) was Besmertnik's investor/advisor who urged and bankrolled the 2019 buyback and took a Conductor board seat \u2014 he is NOT documented as a WeWork board member, investor, or advisor (FACT: no WeWork-side role found; his tie is to Besmertnik/Conductor, not WeWork/Neumann). KEY OMISSION: WeWork's S-1 (CIK 1533523) discloses extensive Neumann self-dealing (real-estate leasebacks, the 'We' trademark $5.9M payment, loans) but does NOT list the Conductor acquisition among related-party transactions despite the Neumann-Besmertnik friendship \u2014 i.e., a friend's company was bought for $113.6M of WeWork stock without related-party disclosure. ASSESSMENT: arm's-length is doubtful on the BUY side (founder-to-founder friendship, no competitive process evident, 86% paid in WeWork's own inflated paper). The SELL-back was a distressed divestiture during WeWork's post-IPO collapse; the same founder bought his company back cheap \u2014 benefiting the founder/employee group, not a WeWork insider. No litigation found tying the two (CourtListener: no relevant Conductor/WeWork case).",
+      "source_datasets": "[\"moguldom\"]",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:45",
+      "target_name": "Conductor / Adam Neumann / Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": null
+    },
+    {
+      "id": 11517,
+      "finding_type": "relationship",
+      "summary": "Neumann<->Besmertnik = Baruch College friends ~2 decades pre-deal; NOT disclosed as related-party in S-1 though Neumann personally drove the acquisition \u2014 the conflicted-friendship core of the looting thread",
+      "detail": "FACT (Bloomberg/Crain's/Fortune): Neumann and Besmertnik met as students at Baruch College ~two decades before the deal; 'Conductor CEO Seth Besmertnik and WeWork CEO Adam Neumann had been friends since their days at Baruch College.' A month after the acquisition Besmertnik embraced Neumann onstage at an industry conference and Neumann greeted Conductor employees 'as family.' The Catalyst Slip Op records Neumann personally identified Conductor as a target in late 2017 ('executing a bold play to secure technology acquisitions in anticipation of WeWork's planned IPO'). FACT: the deal was NOT disclosed as a related-party transaction in the S-1 despite the personal relationship and Neumann's direct role. Fortune headline (2019-09-27) 'WeWork Founder Adam Neumann Is Out the Door \u2014 His Friends May Be Next' frames Conductor within Neumann's friend-enrichment pattern. No other Neumann<->Besmertnik dealing (Flow, personal investments) surfaced in this pass \u2014 Flow link is a LEAD. INFERENCE: Conductor functioned as a stock-currency acquisition that put $15.8M cash into a friend's management team while the friend retained the operating asset's reacquisition optionality \u2014 the friend was NOT burned like his VCs.",
+      "source_datasets": "[\"bloomberg\"]",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:30:45",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": null
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11438,
+      11461,
+      11467,
+      11468
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11438,
+          11461,
+          11467,
+          11468
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:41:03.987150",
+    "lead": "<p>Conductor, Inc. is a New York-based search-engine-optimization and marketing-software company that <a href=\"/dossiers/we-company\">The We Company</a> (WeWork) acquired in March 2018 and divested less than two years later. WeWork completed the purchase of 100% of Conductor's equity on March 22, 2018 for total consideration of $113.6 million, of which $15.8 million was cash and $97.8 million was Series AP-1 Preferred Stock, according to Note 6 of WeWork's August 2019 S-1 registration statement [Finding #11461][SEC:0001193125-19-220499]. Roughly 86% of the price was paid in WeWork preferred equity rather than cash, with $31.6 million of the stock consideration held back at closing [Finding #11461].</p><p>Conductor's chief executive and co-founder, Seth Besmertnik, had known WeWork chief executive <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> since they attended Baruch College together about two decades before the deal, and the acquisition was not listed among the related-party transactions disclosed in WeWork's S-1 despite that relationship and Neumann's direct role in selecting the target [Finding #11475][Finding #11471]. In December 2019, after WeWork's failed initial public offering and the collapse of its private valuation, WeWork sold Conductor back to a group led by Besmertnik; the parties declined to disclose terms, and press accounts placed WeWork's proceeds at roughly $3.5 million [Finding #11467].</p><p>A group of Conductor's former venture investors led by Catalyst Investors sued WeWork, Neumann, and president Arthur Minson in 2020, alleging fraud over the stock-funded deal; the claims survived a motion to dismiss in 2021 but have not been adjudicated on the merits [Finding #11472][Finding #11505].</p>",
+    "system_role": "Conductor documents how a privately held company used its own equity, marked at a high private valuation, as acquisition currency: the structure transferred price risk from cash-paid sellers to investors who took stock that later lost most of its value, and it sits at the boundary of the related-party disclosure regime that governs pre-IPO filings.",
+    "sections": [
+      {
+        "id": "acquisition-terms",
+        "title": "Acquisition by WeWork",
+        "viz": null,
+        "content": "<p><a href=\"/dossiers/we-company\">The We Company</a> completed its acquisition of 100% of Conductor's equity on March 22, 2018. Note 6 to WeWork's August 2019 S-1 states that the total consideration was $113.6 million, comprising $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock, with $0.2 million of the cash and $31.6 million of the stock held back at closing [Finding #11461][SEC:0001193125-19-220499]. About 86% of the consideration was therefore paid in WeWork preferred equity rather than cash [Finding #11438]. The Series AP-1 stock was issued while WeWork carried a private valuation of approximately $21 billion [Finding #11461]. Conductor had raised roughly $60 million of venture capital before the sale, and press coverage put the total economic value, including an undisclosed earnout, at about $126 million [Finding #11461].</p><p>A New York court later recited that the $15.8 million cash leg was paid to Conductor's management and employees, while the company's outside venture investors received their consideration exclusively in WeWork stock valued at $72 per share [Finding #11505]. The cash and equity legs thus accrued to different parties: management and employees received the cash, and the venture funds held the equity-price exposure [Finding #11505].</p>"
+      },
+      {
+        "id": "related-party-disclosure",
+        "title": "Related-Party Disclosure",
+        "viz": null,
+        "content": "<p>Conductor's chief executive and co-founder, Seth Besmertnik, had attended Baruch College with WeWork chief executive <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> about two decades before the transaction, a relationship reported by Bloomberg, Crain's, and Fortune [Finding #11517][Finding #11471]. WeWork's S-1 disclosed extensive Neumann self-dealing, including real-estate leasebacks, a $5.9 million payment for the \"We\" trademark, and loans, but did not list the Conductor acquisition among its related-party transactions [Finding #11475][Finding #11471]. The Catalyst opinion records that Neumann personally identified Conductor as a target in late 2017 as part of what the court described as a plan \"to secure technology acquisitions in anticipation of WeWork's planned IPO\" [Finding #11475]. Analysis of the S-1 against the documented friendship indicates the $97.8 million stock payment to a chief executive's college friend's company is the category of related-party transaction the filing omitted while disclosing others [Finding #11475].</p>"
+      },
+      {
+        "id": "catalyst-litigation",
+        "title": "Catalyst Investors Litigation",
+        "viz": null,
+        "content": "<p>In 2020, a group of Conductor's former equity holders led by Catalyst Investors III LP, joined by Blue Cloud Ventures II LP and IGC Fund VI LP, sued <a href=\"/dossiers/we-company\">The We Company</a>, <a href=\"/dossiers/adam-neumann\">Adam Neumann</a>, and president Arthur Minson in the Commercial Division of New York County Supreme Court, Index 654377/2020, before Justice Joel M. Cohen [Finding #11472]. The complaint pleaded common-law fraud and fraudulent inducement, unjust enrichment, and negligent misrepresentation, alleging that the venture investors took WeWork stock exclusively while management received the cash [Finding #11472]. The court's decision on the motion to dismiss, reported as 2021 NY Slip Op 31796(U) and entered May 26, 2021, allowed the action to proceed and ordered the defendants to answer [Finding #11475][Finding #11505]. Surviving a motion to dismiss tests only the sufficiency of the pleadings; it is not a finding of liability, and no public final judgment, settlement, or appeal had been located [Finding #11475]. WeWork's November 2023 Chapter 11 filing in the District of New Jersey would stay the action against the corporate defendant [Finding #11475].</p>"
+      },
+      {
+        "id": "divestiture",
+        "title": "2019 Divestiture",
+        "viz": null,
+        "content": "<p>WeWork announced on December 12, 2019 that it had sold Conductor back to a founder group led by Seth Besmertnik, chief operating officer Selina Eizik, and Jason Finger, the Seamless co-founder and managing partner of The Finger Group, who joined Conductor's board [Finding #11467]. The parties declined to disclose the terms; Bloomberg and Crain's reporting, relayed through Axios, stated that WeWork had \"paid $114 million\" but \"sold it for just $3.5 million in proceeds\" [Finding #11467]. The buyback was financed by a fresh equity injection of roughly $15 million from Besmertnik and outside investors rather than a repayment to WeWork, and the new structure granted Conductor's approximately 250 employees majority ownership through founder-class stock [Finding #11467]. WeWork has listed Conductor among the non-core businesses it divested, and the company's filings do not separately state the divestiture proceeds [Finding #11438].</p><p>Comparing the March 2018 consideration of $113.6 million against the reported December 2019 proceeds of about $3.5 million, analysis of the transactions indicates a realized loss on the WeWork side on the order of $110 million [Finding #11468]. Because the Series AP-1 consideration was fixed at closing, the Conductor sellers received WeWork stock at the firm's approximately $21 billion valuation, before WeWork's implied value fell sharply toward the roughly $8 billion level set in the October 2019 rescue led by <a href=\"/dossiers/softbank\">SoftBank</a>, its parent <a href=\"/dossiers/softbank-group\">SoftBank Group</a>, and chairman <a href=\"/dossiers/softbank-group-masayoshi-son\">Masayoshi Son</a>, according to that analysis [Finding #11468]. Analysis of WeWork's filings places Conductor within a broader pattern in which the firm spent about $1.17 billion on more than sixteen acquisitions and recovered far less on the businesses it later divested [Finding #11468].</p>"
+      }
+    ],
+    "open_questions": [
+      "What were the actual terms WeWork received in the December 2019 buyback, given that the ~$3.5 million proceeds figure is a press characterization not separately stated in WeWork's SEC filings?",
+      "Has the Catalyst Investors fraud action (Index 654377/2020) reached any final judgment, settlement, or dismissal following WeWork's 2023 Chapter 11 stay?",
+      "What was the value of the undisclosed earnout that press accounts said brought Conductor's total economic value to roughly $126 million?",
+      "Did any Conductor venture investor or founder dispose of WeWork Series AP-1 stock before the valuation collapse, and at what marks?",
+      "On what basis did WeWork's S-1 preparers exclude the Conductor acquisition from related-party disclosure despite the Neumann-Besmertnik relationship?"
+    ],
+    "applicable_models": []
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Conductor, Inc.",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}

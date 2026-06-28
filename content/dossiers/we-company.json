@@ -1,0 +1,1175 @@
+{
+  "name": "We Company",
+  "slug": "we-company",
+  "aliases": [
+    "WeWork",
+    "WeWork Inc.",
+    "WeWork Companies Inc.",
+    "The We Company"
+  ],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:41:03.458742",
+  "last_updated": "2026-06-22T06:21:24",
+  "stats": {
+    "total_findings": 40,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 27,
+      "legal": 7,
+      "document": 1,
+      "relationship": 4,
+      "negative_result": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-22T06:21:24"
+  },
+  "findings": [
+    {
+      "id": 11367,
+      "finding_type": "financial",
+      "summary": "WeWork S-1 (Aug 2019): net losses widened to .9B FY2018 on .82B revenue; H1 2019 loss /bin/zsh.9B on .54B revenue",
+      "detail": "Revenue: FY2016 $436,099K; FY2017 $886,004K; FY2018 $1,821,751K; H1-2018 $763,771K; H1-2019 $1,535,420K. Net loss: FY2016 $(429,690)K; FY2017 $(933,494)K; FY2018 $(1,927,419)K; H1-2018 $(722,892)K; H1-2019 $(904,652)K. Loss from operations FY2018 $(1,690,999)K. Net loss attributable to WeWork Companies Inc.: FY2018 $(1,610,792)K.",
+      "source_datasets": [
+        "SEC EDGAR S-1"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:20:32",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11368,
+      "finding_type": "financial",
+      "summary": "WeWork S-1 DROPPED the ridiculed 'Community-Adjusted EBITDA' metric, replacing it with 'Contribution Margin' (term appears 0 times in Aug 2019 S-1)",
+      "detail": "The notorious 'Community-Adjusted EBITDA' from the 2018 bond offering does not appear anywhere in the Aug 2019 S-1 or Sept 2019 S-1/A (grep count = 0 in both). It was replaced by 'contribution margin'. Contribution margin excluding non-cash straight-line lease cost: FY2018 $467,125K; H1-2019 $339,908K. Contribution margin INCLUDING straight-line lease cost (the more honest figure): FY2018 only $199,000K; H1-2019 $141,784K. The metric still adds back pre-opening, sales/marketing, G&A, growth/new-market, and D&A expenses to loss from operations.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:20:41",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11369,
+      "finding_type": "financial",
+      "summary": "WeWork S-1: accumulated deficit $3.999B; cash flow flipped from +$244M (2017) to -$177M (2018) operating, with $2.48B FY2018 / $2.36B H1-2019 used in investing",
+      "detail": "Accumulated deficit (pro forma balance sheet) = $(3,999,260)K (~$4.0B). Total equity (deficit) = $(2,299,404)K. Net cash from operating activities: FY2016 +$176,905K; FY2017 +$243,992K; FY2018 -$176,729K; H1-2018 -$84,363K; H1-2019 -$198,711K (operating cash flow turned negative in 2018). Net cash USED in investing: FY2016 $(818,525)K; FY2017 $(1,376,767)K; FY2018 $(2,475,798)K; H1-2019 $(2,362,773)K. Financing inflows FY2018 $2,658,469K and H1-2019 $3,430,258K kept the company afloat.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:20:46",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11372,
+      "finding_type": "financial",
+      "summary": "WeWork S-1: SoftBank entities invested/committed ~$10.65B since Jan 2017; S-1 warns it may need more capital 'which may not be available... at all'",
+      "detail": "Since Jan 1 2017, SoftBank Group Corp., SoftBank Vision Fund L.P. and affiliates ('SoftBank entities') invested or committed ~$10.65 billion in WeWork and subsidiaries. Includes $1.7B Series G (SBWW Investments Ltd), $1.0B 2018 convertible note (drawn 8/31/2018), $2.5B via SBWW Cayman (11/1/2018), and ~$1.65B in ChinaCo/JapanCo/PacificCo JVs. 2019 warrant: WeWork has right to receive $1.5B on April 3 2020. Going-concern-adjacent risk factor present (no formal substantial-doubt language since pre-IPO).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:20:56",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11374,
+      "finding_type": "legal",
+      "summary": "S-1/A Amdt 2 (Sept 13 2019) governance climbdown: Neumann super-voting cut 20:1 -> 10:1; sunsets to 1 vote on death/incapacity",
+      "detail": "After IPO backlash, Amendment No.2 reduced Adam Neumann's high-vote stock (Class B/C) from 20 votes/share to 10 votes/share. New sunset: voting power auto-decreases to 1 vote/share if Adam becomes permanently incapacitated or dies (previously only triggered if his high-vote holdings fell below 5% of capital). Other changes: lead independent director by year-end; board majority-independent with majority-independent committees; Frances Frei added + commitment to add another diverse director.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:01",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519244329/d804478ds1a.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11376,
+      "finding_type": "legal",
+      "summary": "S-1/A Amdt 2: WeWork unwound the ~$5.9M 'We' trademark payment to Neumann's WE Holdings LLC; partnership interests returned 'at Adam's direction'",
+      "detail": "In July 2019 WE Holdings LLC (Adam Neumann managing member) assigned residual 'we' family trademark rights to the Company (desired after early-2019 rebrand). In lieu of cash, the Company issued WE Holdings LLC partnership interests in the We Company Partnership with a fair market value of ~$5.9 million (per third-party appraisal). After public backlash, 'at Adam's direction' the issuance was unwound and the partnership interests returned. Governance summary lists it among Neumann concessions.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:10",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519244329/d804478ds1a.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11380,
+      "finding_type": "legal",
+      "summary": "S-1/A Amdt 2: succession 'committee' (incl. Rebekah Neumann) scrapped \u2014 board now picks CEO successor; 'No member of Adam's family will sit on our board'",
+      "detail": "Amendment No.2 removed the spousal/committee succession mechanism. New language: 'Any chief executive officer who succeeds Adam will be selected by our board of directors, acting as a group. We will not rely on a succession committee. Our board has the ability to remove our chief executive officer.' Also: 'No member of Adam's family will sit on our board.' Neumann further: gives company any profits from related real-estate (ARK) deals and will not enter future RE deals with the company; 1-year lock-up with underwriters; limited to selling <=10% of holdings in each of years 2 and 3 post-IPO. This reverses the prior structure in which Rebekah Neumann would have helped select a successor within 6 months of Adam's death.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:16",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519244329/d804478ds1a.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11382,
+      "finding_type": "document",
+      "summary": "WeWork filed Form RW (registration withdrawal) on 2019-09-30, formally pulling the IPO after the S-1/A governance climbdown failed to salvage demand",
+      "detail": "EDGAR CIK 1533523 filing history confirms: 2019-08-14 S-1; 2019-09-04 S-1/A; 2019-09-13 S-1/A Amendment No.2 (governance changes); then 2019-09-30 'RW \u2014 WITHDRAWAL REQUEST' (accession 000119312519258913, d808793drw.htm). The withdrawal came ~17 days after the governance concessions, confirming the IPO collapse despite the climbdown.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:24",
+      "target_name": "We Company",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519258913/d808793drw.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11352,
+      "finding_type": "financial",
+      "summary": "Neumann holding co held 100.1M Class B + 2.4M Class A pre-IPO; sole Neumann voting control",
+      "detail": "WE Holdings LLC: 100,128,232 Class B held of record + 1,500 junior preferred converting to Class B + 2,428,730 Class A (incl. preferred conversion) and 11,720,266 Class B held by others over which WE Holdings/Neumann hold irrevocable proxy. Adam Neumann has sole voting power over all WE Holdings shares; Neumann + Miguel McKelvey are managing members with shared dispositive power. Some Class B pledged as collateral for Neumann personal indebtedness. % of class and % voting columns LEFT BLANK in this draft S-1.",
+      "source_datasets": [
+        "SEC EDGAR S-1"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:18:56",
+      "target_name": "WE Holdings LLC (Adam Neumann)",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11353,
+      "finding_type": "financial",
+      "summary": "WeWork leased 4 buildings from landlord entities Neumann part-owned; paid $3.1M/$5.6M/$8.0M (2016-2018), $236.6M future minimum lease",
+      "detail": "The We Company was party to lease agreements for four commercial properties with landlord entities in which Adam Neumann held an ownership interest (4 of 528 locations as of June 1, 2019). Cash payments: $3.1M (2016), $5.6M (2017), $8.0M (2018), and $4.2M (H1 2019). WeWork received $11.6M in tenant-improvement reimbursements from the landlord entities in 2018. Future undiscounted minimum lease payments as of June 30, 2019 were ~$236.6M (0.5% of total lease commitments). For one property WeWork leased within a year of Neumann acquiring his interest; for the other three, the lease was signed the SAME DAY Neumann acquired his interest.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:19:06",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11354,
+      "finding_type": "financial",
+      "summary": "Neumann had $500M personal line of credit (UBS/JPM/Credit Suisse), ~$380M drawn, secured by Class B WeWork stock; plus $97.5M JPM credit",
+      "detail": "As of July 31, 2019 Adam Neumann held a personal line of credit of up to $500 million from UBS AG Stamford Branch, JPMorgan Chase Bank N.A. and Credit Suisse AG New York Branch, of which ~$380 million principal was outstanding. The LOC was secured by a pledge of Class B WeWork stock beneficially owned by Neumann. Separately, JPMorgan Chase made loans and extended credit to Neumann totaling $97.5 million across various lending products including mortgages secured by personal property (not secured by company stock). Note conflict: the same banks underwrote the IPO.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:19:06",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11384,
+      "finding_type": "financial",
+      "summary": "SoftBank bought $578M of Neumann's stock (24.9M shares @ $23.23) + paid him $106M settlement cash; WeWork booked $428M as expense",
+      "detail": "Per Feb 25, 2021 Settlement Agreement: (1) SBG/affiliates purchased 24,901,342 shares of Legacy WeWork Class B from WE Holdings LLC (Neumann's vehicle) at $23.23/share = aggregate $578 MILLION; WeWork recorded a $428M EXPENSE (excess of price paid over fair value, treated as deemed SBG capital contribution). (2) SEPARATELY, SBG and affiliates paid Neumann a settlement payment of $106 MILLION (no WeWork expense; did not benefit company). Neumann's Profits Interest Units became fully vested w/ $0 catch-up base ($102M restructuring charge). This is the 'Neumann-in' line that replaced the originally-reported ~$970M-to-Neumann tender allocation.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:29",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11385,
+      "finding_type": "financial",
+      "summary": "$185M paid to Neumann was a NON-COMPETE (not 'consulting'), funded by SBG affiliate, recognized in full in 2019 \u2014 NOT reduced in settlement",
+      "detail": "During 2019 an SBG affiliate entered a NON-COMPETE agreement with Neumann for a $185 MILLION cash payment: 50% paid initially, remaining 50% in twelve equal monthly installments. WeWork recorded the full $185M as a 2019 expense (deemed SBG capital contribution), in restructuring and other related costs. LABEL CORRECTION: the FY2022 10-K characterizes this as a NON-COMPETE fee, not a 'consulting fee.' It was recognized in FULL in 2019 and the 10-K shows NO reduction to ~$50M (separately, the 2021 Settlement non-compete states 'Legacy WeWork does not have any financial obligation to Mr. Neumann under this agreement').",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:29",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11392,
+      "finding_type": "financial",
+      "summary": "NEGATIVE CONFIRMATION: the FY2022 10-K + Oct-2021 13D do NOT contain a $430M non-recourse Neumann loan, a $500M JPMorgan-line repayment, or a $19.19/share tender price \u2014 those need other sources",
+      "detail": "Exhaustive grep of both docs found NO mention of: (a) a ~$430M NON-RECOURSE loan to Neumann collateralized by his WeWork shares \u2014 absent; the only recourse-loan items are unrelated 2018/2019 executive promissory notes ($20M / $2M). (b) A $500M repayment of Neumann's JPMorgan personal credit line \u2014 absent (no 'JPMorgan'/'JP Morgan' string anywhere). (c) $19.19/share tender price \u2014 the filings state $23.23/share for BOTH the 2020 and 2021 tenders; $19.19 does not appear. (d) A ~$970M tender allocation to Neumann \u2014 absent; Neumann was EXCLUDED from the 2021 tender and instead monetized via the $578M stock sale + $106M settlement + $185M (2019) non-compete. (e) A 2020 settlement ~$1.6B total \u2014 absent; the binding settlement is dated Feb 25, 2021 and the FY2022 10-K reports it as the $922M tender + $578M Neumann stock buy + $106M cash. The original-2019 economics (e.g. $430M loan, JPMorgan line, $185M as 'consulting') appear to derive from the Jan-2019/Oct-2019 deal commentary and press, NOT from this restated 10-K, which books the as-settled amounts. Flagging for corroboration from the 2019 SoftBank press release / WeWork S-1 / news coverage.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:22:33",
+      "target_name": "WeWork",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11402,
+      "finding_type": "financial",
+      "summary": "OneIM Fund I LP is an Issuing Bank on WeWork's Junior LC tranche ($470.0M principal / $552.0M outstanding) under the Dec 27, 2019 Credit Agreement",
+      "detail": "Per Tolley First-Day Declaration (D.N.J. 23-19865, Doc 21, filed 11/07/23), Goldman Sachs International Bank and OneIM Fund I LP plus other financial institutions are the Issuing Banks that issued LCs in two tranches under the Dec 27, 2019 LC Facility Credit Agreement. Capital-structure table lists Junior LC Facility: maturity Mar 7, 2025; $470.0M principal; $82.0M accrued interest/make-whole/fees; $552.0M outstanding. Senior LC Facility: maturity May 14, 2025; $988.3M principal; $1,077.2M outstanding. Junior-tranche admin agent = Kroll Agency Services Ltd; Senior-tranche admin/collateral agent = Goldman. The declaration does NOT state OneIM's individual dollar participation, a Feb-2023 entry date, an 18-month interest guarantee, or a ~15% rate for the LC \u2014 those are WSJ framings unconfirmed by this primary doc.",
+      "source_datasets": [
+        "DNJ 23-19865 first-day declaration"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:44:44",
+      "target_name": "One Investment Management",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 Doc 21 (Tolley Decl) p.18-19; Doc 43 Cash Collateral motion p.8",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11406,
+      "finding_type": "financial",
+      "summary": "WeWork Plan recovery table: secured LC/notes recovered 3-5% in equity; all junior debt, GUC, and equity got 0%",
+      "detail": "SUMMARY OF EXPECTED RECOVERIES (Amended Disclosure Stmt, Doc 1783, D.N.J. 23-19865). Class 1 Other Secured $0/NA; Class 2 Other Priority $0/100%; Class 3A Drawn DIP TLC $250M/7.17%; Class 3B Undrawn DIP TLC $421M/100.00%; Class 4A Prepetition LC Facility $949M/3.5%; Class 4B 1L Notes $1,163M/4.81%; Class 5 2L Notes $933M/3.07%; Class 6 3L Notes $313M/0%; Class 7 Unsecured Notes $180M/0%; Class 8 General Unsecured $520-590M/0%; Class 9 Go-Forward Guaranty reinstated/100%; Class 10/11 Intercompany 0% or 100%; Class 12 Parent Interests (equity) $0/0%; Class 13 Section 510(b) $0/0%. Total prepetition funded debt approx $4.2B ($4,218.9M).",
+      "source_datasets": [
+        "DNJ 23-19865 disclosure statement / confirmation"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:18",
+      "target_name": "WeWork Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Docket #1783 (Amended Disclosure Statement), pp.10-13, SUMMARY OF EXPECTED RECOVERIES table",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11407,
+      "finding_type": "financial",
+      "summary": "SoftBank's WeWork equity/junior position wiped to ~0% with all other equity, BUT SoftBank uniquely retained its equity by contributing claims",
+      "detail": "Under the RSA/Plan, all preexisting equity interests (Class 12 Parent Interests, 0% recovery) and all junior/unsecured debt (Classes 6,7,8 = 0%) were canceled. SoftBank had ~80% fully-diluted economic ownership pre-bankruptcy. The Plan canceled all other indebtedness and preexisting equity EXCEPT SoftBank's equity, which SoftBank retained by contributing claims. SoftBank had invested $4.4B initial + $2B + ~$5B 2019 Rescue Package ($1.1B 1L notes commitment, $2.2B unsecured notes, $1.75B LC facility) + $3B tender offer. In early-2023 Notes Exchange, SoftBank/Ad Hoc/Cupar canceled or equitized ~$1.5B of debt. WeWork emerged private; 80% control sold to Cupar Grimmond LLC (Yardi vehicle) via New Money Equity Distribution; SoftBank retained a residual minority equity stake alongside Cupar.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:35",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Docket #1783 pp.3-4 (RSA terms), p.71 (80% ownership), p.74 (funded debt); recovery table Class 12 = 0%",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11408,
+      "finding_type": "financial",
+      "summary": "Cupar Grimmond (Yardi vehicle) bought 80% control of Reorganized WeWork via the New Money Equity Distribution; provided $300M of $400M exit financing",
+      "detail": "The cornerstone of the Plan is the sale of control of 80% of Reorganized WeWork for cash. 'New Money Equity Distribution' = 80% of New Interests, allocated to Cupar. Cupar provided up to $37.5M (interim) + $300M (exit) of the new-money DIP, vs $12.5M + $100M from the Ad Hoc Group. Cupar Grimmond also held Series III 1L Notes ($175M delayed-draw commitment). Cupar is affiliated with Yardi Systems (WeWork Workplace software partner). Reorganized WeWork emerged as a private company, not listed.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:35",
+      "target_name": "Cupar Grimmond LLC",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Docket #1783 p.7 (DIP new money), pp.~26-27 (80% New Money Equity Distribution fn.13), p.74-75 (Series III 1L Notes to Cupar)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11409,
+      "finding_type": "financial",
+      "summary": "OneIM and Goldman (the LC Issuing Banks) were taken out by SoftBank: SVF paid/cash-collateralized the LC Facility via the Satisfaction Letter, leaving WeWork owing SoftBank ~$1.6B (subrogation)",
+      "detail": "LC Facility (Dec 27 2019 Credit Agreement) issuing banks = Goldman Sachs International Bank + OneIM Fund I LP + others, in two tranches (senior=Goldman agent; junior=Kroll agent). SoftBank Vision Fund II-2 L.P. ('SVF Obligor') was jointly/severally liable and SUBROGATED to the Issuing Banks' rights as it paid/cash-collateralized. Per the Satisfaction Letter (executed w/ Goldman, Kroll, OneIM): SVF paid ~$542.4M for the junior tranche, posted ~$873.9M cash collateral for the undrawn senior tranche, paid ~$50.6M fees, and pre-Satisfaction reimbursed ~$114.4M of drawn LCs. WeWork's total indebtedness to SVF-as-subrogee was NOT LESS THAN ~$1.6B; pro forma for DIP LC/TLC ~$958M (matches Class 4A $949M). Confirms OneIM/Goldman were made whole by SoftBank, not by WeWork. NOTE: The reported ~$105M OneIM early-repayment PROFIT does NOT appear in Doc #1783 or #2060 (WSJ Nov-2023 only).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:55",
+      "target_name": "OneIM Fund I LP",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Docket #1783 p.74-75, LC Facility section (Goldman/OneIM Issuing Banks; SVF Obligor subrogation; Satisfaction Letter figures)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11411,
+      "finding_type": "legal",
+      "summary": "WeWork Plan grants broad third-party releases protecting SoftBank, the DIP/LC lenders, Cupar, the Ad Hoc Group, and all their directors/officers; confirmed and approved in full by the court",
+      "detail": "Released Parties = Debtors, Reorganized Debtors, each Consenting Stakeholder (= SoftBank Parties, Ad Hoc Group, Cupar), DIP Lenders, Creditors' Committee + members, Agents, and each Related Party of the foregoing. 'Related Parties' expressly includes current and former directors, managers, officers, shareholders, investment/special committee members, equity holders, and affiliated funds \u2014 so SoftBank's and the lenders' directors/officers are released. Releasing Parties = Debtors + all consenting/non-opting-out claim holders. A 'Released Parties Exception Schedule' (Plan Supplement) carves out named individuals who are NOT released (Adam Neumann/Flow filed the Flow DS Objection, Docket 1752, and an examiner-motion alleging claims against the SoftBank Parties/Ad Hoc Group/Cupar re the restructuring). The Confirmation order (#2060, Third Amended Plan, filed 05/30/24) APPROVED both the Debtor Release and the Third-Party Release IN THEIR ENTIRETY as 'consensual' and 'integral.'",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:11",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Docket #1783 pp.~67-69 (Released/Releasing/Related Parties defs, Art VIII), pp.~120 (examiner/Flow allegations); Docket #2060 paras 54-56 (Third-Party Release approved in its entirety)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11412,
+      "finding_type": "legal",
+      "summary": "UCC alleges SoftBank sat on both sides of the May-2023 Uptier and structured every facet to benefit itself over creditors",
+      "detail": "Theory: breach of fiduciary duty of loyalty (controlling shareholder, both sides of the deal). Target transaction: 2023 Uptier Transactions. Alleged harm: SoftBank received $300M cash via redemption, cancelled a $200M secured-note purchase commitment, and took secured notes convertible to equity (unlike public noteholders), elevating its recovery at unsecured creditors' expense. UCC alleges, not adjudicated.",
+      "source_datasets": [
+        "DNJ 23-19865 UCC standing motion #1436"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:16",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11414,
+      "finding_type": "legal",
+      "summary": "UCC alleges the $300M SoftBank Redemption was an avoidable insider preference - SoftBank got paid at par before maturity, then relent the same $300M as first-lien debt collecting $6.25M in fees",
+      "detail": "Theory: avoidable preference (11 U.S.C. 547, SoftBank as statutory insider) plus the circular self-dealing. Target: SoftBank Redemption within 1 year of petition. Alleged harm: WeWork (a) terminated SoftBank's obligation to buy up to $500M secured notes ($300M already bought); (b) redeemed the $300M at par pre-maturity; (c) let SoftBank relend that same $300M as first-lien debt with $6.25M commitment fees; (d) swapped SoftBank's unsecured notes into equity-convertible secured notes. Preference recovery alone = 'hundreds of millions' into the estate. UCC alleges.",
+      "source_datasets": [
+        "DNJ 23-19865 UCC standing motion #1436"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:33",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11418,
+      "finding_type": "legal",
+      "summary": "RESOLUTION: the SoftBank estate claims were never adjudicated - they were extinguished via a $33M UCC Settlement (net to creditors as little as ~$350K after fees) and plan releases; the confirmed plan had each party waive all Avoidance Actions",
+      "detail": "The #1436 standing motion (Paul Hastings/Riker Danzig for the UCC; hearing set 3/20/2024) was resolved by the UCC Settlement embedded in the Third Amended Plan, confirmed 5/30/2024 (#2060, Judge John K. Sherwood). Terms: 'UCC Settlement Consideration' = $33,000,000 gross, but the 'UCC Settlement Deduction' (Ad Hoc noteholder expenses, trustee expenses, committee member expenses, and Paul Hastings/Riker Danzig professional fees) could reach $32,650,000 - so net 'UCC Settlement Proceeds' to 3L Notes + General Unsecured Claim holders could be ~$350K. Under the settlement 'each party shall waive its right to assert any Avoidance Actions' (killing the $300M redemption preference) and 'the Creditors' Committee shall support Confirmation.' The estate claims against SoftBank were thereby released for nominal value.",
+      "source_datasets": [
+        "DNJ 23-19865 confirmation order #2060"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:48:05",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #2060",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11420,
+      "finding_type": "financial",
+      "summary": "$430M Neumann loan IS non-recourse (share-secured only); confirmed by WSJ via Bloomberg/Commercial Observer, NOT in any SoftBank primary release",
+      "detail": "RESOLUTION of the $430M non-recourse question: The $430M is the loan Neumann owes SoftBank (surviving balance of the 2019 SoftBank $500M credit-line refinancing). It is NON-RECOURSE: SoftBank's only remedy on default is to seize the pledged WeWork shares; Neumann is not personally liable for any shortfall. Best sourcing: (1) Commercial Observer (Rizzi, Nov 9 2023) states the structure \u2014 'instead of being personally liable, Neumann could lose his shares of WeWork if he stops paying the loan back'; notes his shares fell from $500M (fall 2021) to ~$4M, so SoftBank 'worries he could elect to simply wash his hands of the stock and keep the rest of the loan.' (2) The literal phrase '$430 million non-recourse loan' traces to WSJ reporting, restated in Bloomberg/Yahoo and Commercial Observer. IMPORTANT HONESTY NOTE: '$430M non-recourse' is NOT in any SoftBank or WeWork PRIMARY filing/release \u2014 it is WSJ/secondary-sourced. SoftBank's own settlement releases (group.softbank 20210227 / 20210301) say terms are confidential / give only $1.6B aggregate. So: non-recourse status = WSJ-only / secondary, well-corroborated but NOT primary-confirmed.",
+      "source_datasets": [
+        "commercialobserver"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:48:07",
+      "target_name": "Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://commercialobserver.com/2023/11/softbank-wework-losses/ (Rizzi, Nov 9 2023); WSJ via https://finance.yahoo.com/news/softbank-settles-wework-lawsuit-neumann-233053246.html (Bloomberg, Huet/Feeley, Feb 26 2021)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11433,
+      "finding_type": "financial",
+      "summary": "WeWork bought Conductor 2018 for ~$113.6M ($16M cash + $98M stock @ $21B valuation); sold it BACK to founders Dec 2019 for ~$3.5M proceeds",
+      "detail": "Seller/founder: Seth Besmertnik (CEO) + Selina Eizik (COO). Consideration: ~$16M cash + ~$98M WeWork stock priced at the $21B-valuation peak. Dec 2019 buyback: Besmertnik, Eizik, Jason Finger (Finger Group / Seamless founder) repurchased; WeWork realized only ~$3.5M proceeds. Classic related-party stock-funded unwind: founders sold high for paper, bought back the operating company cheap after the stock cratered. Conductor later raised $150M (Nov 2021) as independent co.",
+      "source_datasets": [
+        "Marketing Dive, Search Engine Land, Demand Gen Report"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:15:50",
+      "target_name": "Conductor / Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.marketingdive.com/news/conductor-buys-content-firm-back-from-wework/569033/ ; https://searchengineland.com/conductor-becomes-an-employee-owned-firm-after-almost-two-years-under-wework-326363",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11434,
+      "finding_type": "financial",
+      "summary": "WeWork bought Managed by Q Apr 2019 for ~$220M (~$100M cash + rest WeWork stock); sold to rival Eden Mar 2020 for ~$25M (~11% of price)",
+      "detail": "Seller/founder: Dan Teran (CEO). Consideration: ~$100M cash + remainder in WeWork stock (sellers + investors heavily paid in WeWork paper that later cratered). Mar 2020: WeWork sold to direct competitor Eden for ~$25M = ~11% of what it paid 11 months earlier. Teran personally offered ~$23M to buy back the company but lost to Eden's $25M bid (founder spin-back attempt FAILED). Eden then laid off the Managed-by-Q team within a week.",
+      "source_datasets": [
+        "TechCrunch, Fortune, The Real Deal"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:15:50",
+      "target_name": "Managed by Q / Dan Teran",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://techcrunch.com/2020/03/03/confirmed-managed-by-q-sells-to-rival-eden-for-just-11-of-what-wework-paid-for-it-last-year/ ; https://fortune.com/2020/03/04/the-bitter-lesson-founders-can-learn-from-edens-acquisition-of-managed-by-q/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11438,
+      "finding_type": "financial",
+      "summary": "WeWork acquired Conductor Mar 2018 for $113.6M (only $15.8M cash; $97.8M in Series AP-1 Preferred Stock = 86% equity-funded); later divested/wound down",
+      "detail": "Closed March 2018, 100% equity, total consideration $113.6M: $15.8M CASH + $97.8M Series AP-1 Preferred Stock. ~86% of the price was paid in WeWork preferred equity, not cash. Subsequent: Conductor is listed among the non-core businesses WeWork divested (FY2022 10-K); management bought it back / it was spun out in late 2019 \u2014 no sale price disclosed in these filings (FLAG: divestiture proceeds not separately stated). The $97.8M preferred-stock consideration is the looting-relevant element: WeWork printed equity to buy a marketing-software company it then exited.",
+      "source_datasets": [
+        "sec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:16:25",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11439,
+      "finding_type": "financial",
+      "summary": "WeWork acquired Naked Hub Apr 2018 for $480.3M (cash + ChinaCo Class A Ordinary Shares + WeWork Class A Common Stock); stock contingent consideration swung $80.6M loss in 2018",
+      "detail": "Closed April 2018 via ChinaCo/PacificCo/WeWork Australia, 100% equity, total consideration $480.3M in cash + ChinaCo Class A Ordinary Shares + WeWork Class A Common Stock. The main tranche (NH Holdings) was $449.7M = $177.0M CASH + $272.7M STOCK (ChinaCo + WeWork shares); ~61% stock-funded. Heavy contingent-consideration-in-stock structure with anti-dilution: WeWork recorded a $(80.6)M loss in 2018 remeasuring the stock contingent consideration (then a $44.1M gain H1-2019). ChinaCo issued $44.0M additional shares in 2018 under anti-dilution. Largest single WeWork acquisition. Folded into ChinaCo, which was later deconsolidated (Oct 2020). The Asia roll-up that the stock-printing made possible.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:16:48",
+      "target_name": "naked Hub (Naked Hub Holdings)",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11445,
+      "finding_type": "financial",
+      "summary": "WeWork bought Naked Hub Apr 2018 (~$400M) into WeWork China; Sept 2020 sold majority of WeWork China to Trustbridge for ~$200M",
+      "detail": "Seller/founders of Naked Hub: Grant Horsfield & Delphine Yip-Horsfield (26 Greater-China centres). ~$400M, partly stock. INSIDER LINK: Hony Capital (John Zhao) and SoftBank had jointly put $500M (Jul 2017) into the dedicated WeWork China vehicle and Hony's Zhao publicly championed the Naked Hub deal; existing DB finding #11364 notes a $200M ChinaCo note. Sept 2020: WeWork sold majority control of WeWork China to growth investor Trustbridge Partners (Temasek/Trustbridge group) for ~$200M at a ~$1B implied valuation - effectively handing the China platform (including the $400M Naked Hub assets) to local PE for a fraction. Related-party co-investor (Hony) on the way in.",
+      "source_datasets": [
+        "CNBC, CNN, Caixin"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:17:08",
+      "target_name": "Naked Hub / WeWork China / Trustbridge",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2020/09/24/wework-sells-majority-stake-in-its-china-business-for-200-million-.html ; https://money.cnn.com/2018/04/12/technology/wework-naked-hub-coworking-space-china/index.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11450,
+      "finding_type": "relationship",
+      "summary": "Stock-funded M&A spree 2017-19 was an extraction vector: sellers paid in overvalued WeWork paper (peaked at $110/sh / $47B), then assets dumped 2020 at 11-90% losses; two related-party spin-backs to founders",
+      "detail": "MECHANISM (INFERENCE built on documented deals): Neumann used WeWork's SoftBank-inflated equity as acquisition currency. Sellers induced to take 50-90% stock at the $47B/$110-share mark (Prolific/Emamian litigation = direct evidence). When the IPO collapsed the stock to near-zero, sellers held worthless paper while WeWork dumped the operating businesses in 2020 at deep discounts: Managed by Q -89% ($220M->$25M), Conductor ($114M->$3.5M proceeds), Meetup (fraction of $156M), Flatiron+Designation+SecureSet (->$28.5M), Teem, WeWork China/Naked Hub (->$200M Trustbridge). RELATED-PARTY / SPIN-BACK ANGLE: Conductor sold BACK to founders Besmertnik/Eizik/Finger (insiders reacquired their company cheap post-crash); Managed-by-Q founder Teran attempted same ($23M bid, lost to Eden). INSIDER CO-INVESTOR: Hony Capital (board nexus via John Zhao) co-funded the China vehicle that absorbed Naked Hub. NET: who profited = SoftBank/Neumann liquidity events on the way up + founders who bought back cheap; who lost = WeWork balance sheet and stock-paid sellers/employees. Complements SEC-accounting view (goodwill writedowns) owned by parallel agent.",
+      "source_datasets": [
+        "CourtListener, TechCrunch, Fortune, Marketing Dive"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:17:25",
+      "target_name": "WeWork acquisition looting pattern (synthesis)",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "D.Del. 1:21-cv-00414 (Emamian) ; findings #11433,#11434,#11443-#11447",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11452,
+      "finding_type": "financial",
+      "summary": "Naked Hub Apr 2018: $480.3M total; ChinaCo arm $449.7M = $177.0M cash + $272.7M stock; contingent stock swung $(80.6)M loss in 2018",
+      "detail": "Per WeWork S-1 (filed Aug 2019): In April 2018 ChinaCo, PacificCo and WeWork Australia acquired 100% of naked Hub Holdings Ltd (China), naked Hub Vietnam, and naked Hub Australia from sellers (founders Grant & Delphine Horsfield; naked Hub was the co-working arm of Shanghai luxury-resort company Naked Retreats, founded 2015, ~8,000 members / 25 locations Shanghai-Beijing-Australia-HK-Vietnam). TOTAL consideration $480.3M. Breakdown: ChinaCo bought NH Holdings for $449.7M = $177.0M cash + $272.7M in ChinaCo Class A Ordinary Shares AND WeWork Class A Common Stock. At closing WeWork transferred $146.3M cash + $179.7M ChinaCo shares; holdback $15.9M cash; contingent $14.7M cash + $93.1M in ChinaCo shares/WeWork stock. PacificCo bought NH Vietnam for $14.4M cash; WeWork Australia bought NH Australia for $16.2M cash. The STOCK component blew up: due to anti-dilution provisions + rising ChinaCo/WeWork share fair value, WeWork booked a $(80.6)M loss in FY2018 on remeasuring contingent consideration payable in stock (offset $4.2M gain on cash portion); ChinaCo issued $44.0M of additional Class A Ordinary Shares under anti-dilution. WeWork issued the Class A common stock to sellers on June 7, 2019.",
+      "source_datasets": [
+        "WeWork S-1 (SEC EDGAR)"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:22:22",
+      "target_name": "Naked Hub",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499 (WeWork/We Company Form S-1, 2019); cached /tmp/osint-sbww-1782107986/2A-s1-clean.txt lines 11746-11760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11468,
+      "finding_type": "financial",
+      "summary": "Extraction math: WeWork paid $113.6M (86% its own AP-1 stock) for Conductor in 2018, recovered only ~$3.5M selling it back 21 months later = ~$110M+ destroyed; sellers cashed paper at the $21B-valuation peak, founders rebought the operating company cheap post-crash",
+      "detail": "Buy (Mar 2018): $113.6M total = $15.8M cash + $97.8M Series AP-1 Preferred (per S-1); ~$126M incl. earnout. Sell-back (Dec 2019): reported ~$3.5M proceeds to WeWork. Realized loss on the deal \u2248 $110M (vs $113.6M booked) to $122M (vs $126M economic). The $97.8M of AP-1 preferred was struck at WeWork's ~$21B valuation; WeWork's implied value collapsed toward ~$8B (SoftBank Oct-2019 rescue) \u2014 so the stock the Conductor sellers received in 2018 was worth a fraction by the time of the spin-back, BUT the sellers had already received the shares at the high mark (consideration fixed at closing). WHO PROFITED: (1) Conductor's VCs/founders, who received $97.8M of WeWork preferred in 2018 at peak valuation; (2) the founder group (Besmertnik/Eizik/Finger), who reacquired the operating business for a fresh $15M injection \u2014 a fraction of the $113.6M WeWork had paid. WeWork (and ultimately SoftBank/IPO-era investors) bore the loss. Part of a broader pattern (finding #11451): WeWork spent ~$1.17B on 16+ acquisitions, impaired ~$218M, recovered only ~$128M reselling \u2014 net destruction ~$634M on the divested cohort.",
+      "source_datasets": [
+        "sec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:28",
+      "target_name": "Conductor, Inc.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm ; https://www.axios.com/2021/11/16/marketing-company-conductor-raises-150-million",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11471,
+      "finding_type": "relationship",
+      "summary": "NOT arm's-length: Conductor CEO Seth Besmertnik was Adam Neumann's college classmate/friend from Baruch College and 'each other's customers'; WeWork S-1 does NOT disclose Conductor as a related-party transaction (omission)",
+      "detail": "Multiple outlets report Besmertnik and Neumann attended Baruch College together, were 'good friends in college,' and were 'each other's customers' (Conductor was a WeWork vendor; WeWork a Conductor client). Analysts framed the 2018 purchase as Neumann 'bailing out a college friend's company using investors' money' \u2014 likened to 'Elon Musk bailing out SolarCity' \u2014 and cited it as a missed related-party red flag. Jason Finger (Seamless/GrubHub co-founder; managing partner The Finger Group; chairman Upper90) was Besmertnik's investor/advisor who urged and bankrolled the 2019 buyback and took a Conductor board seat \u2014 he is NOT documented as a WeWork board member, investor, or advisor (FACT: no WeWork-side role found; his tie is to Besmertnik/Conductor, not WeWork/Neumann). KEY OMISSION: WeWork's S-1 (CIK 1533523) discloses extensive Neumann self-dealing (real-estate leasebacks, the 'We' trademark $5.9M payment, loans) but does NOT list the Conductor acquisition among related-party transactions despite the Neumann-Besmertnik friendship \u2014 i.e., a friend's company was bought for $113.6M of WeWork stock without related-party disclosure. ASSESSMENT: arm's-length is doubtful on the BUY side (founder-to-founder friendship, no competitive process evident, 86% paid in WeWork's own inflated paper). The SELL-back was a distressed divestiture during WeWork's post-IPO collapse; the same founder bought his company back cheap \u2014 benefiting the founder/employee group, not a WeWork insider. No litigation found tying the two (CourtListener: no relevant Conductor/WeWork case).",
+      "source_datasets": [
+        "moguldom"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:23:45",
+      "target_name": "Conductor / Adam Neumann / Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://moguldom.com/228623/too-white-to-catch-wework-ceo-steps-down-bailing-out-college-friends-seo-firm-was-a-ponzi-flag/ ; https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11476,
+      "finding_type": "relationship",
+      "summary": "Paul Weiss represented Adam Neumann PERSONALLY in the Oct 2019 SoftBank rescue, NOT WeWork or SoftBank",
+      "detail": "REFUTES the hypothesis that Karp/Paul Weiss were SoftBank's deal counsel. In the Oct 22, 2019 SoftBank rescue announcement, the legal-advisor roster was: Skadden=WeWork (company); Wilson Sonsini=WeWork Special Committee (Dunlevie+Frankfort); Weil Gotshal + Morrison & Foerster=SoftBank/SBG; Weil Gotshal=SoftBank Vision Fund; Paul Weiss=Adam Neumann personally. Paul Weiss appears nowhere as counsel to WeWork or SoftBank. Karp is not named in the press release.",
+      "source_datasets": [
+        "wework.com newsroom press release (2019-10-22)"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:57:18",
+      "target_name": "Paul Weiss",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.wework.com/newsroom/posts/wework-announces-significant-funding-from-softbank-group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11488,
+      "finding_type": "negative_result",
+      "summary": "Exhaustive corpus sweep: WeWork/Neumann do NOT touch the Epstein document network \u2014 all string hits are news clippings, pitch decks, or unrelated namesakes",
+      "detail": "Swept 31 terms x 5 corpora (Unified 70.8K docs/8.3K emails; LMSBAND 591K files; DOJ Vol11 331K pages; Epstein-20K 25.8K docs; DugganUSA API 403/unavailable). WeWork string hits: unified 1 email + 6 docs; LMSBAND 20; DOJ 4; 20K 6 \u2014 ALL false positives for a network connection. They reduce to three artifacts: (1) a Tunity investor pitch name-dropping 'WeWork CEO Adam Neumann' as a notable investor (HOUSE_OVERSIGHT_021100/020147, EFTA02522523); (2) a Vanity-Fair 'WeWork Hollywood' pop-up venue mention; (3) WeWork news clippings forwarded to Epstein (WSJ 'A $20 Billion Startup', Recode 'Big companies are fueling WeWork's growth', LMSBAND 266106/258020). 'neumann' is dominated by John von Neumann (CS essays) and unrelated people Michael/Ryan/Barbara Neumann (Barbara Neumann<->Jean-Luc Brunel real estate = prior known false positive). DECISIVE: unified entity co-occurrence for 'WeWork' = 0 entities (WeWork is not a node in Epstein's relationship graph); 'Neumann' co-occurrence = only 'Stewart Oldfield' (a contact-list artifact). Cast terms waterbridge/besmertnik/dunlevie/rebekah neumann/managed-by-q(as company) = zero real hits. benchmark/wellington/conductor/hony/harvard-management = common-word FTS false positives (fund 'benchmark', 'Wellington' school, musical 'conductor'). 'we company'/'we work' high counts (6749/11592 DOJ) are bag-of-words FTS noise, not the company. SoftBank/Misra DO appear in the corpus (the 'Softbank caper' email, Misra/Weingarten email) but NEVER co-occur with WeWork.",
+      "source_datasets": [
+        "Epstein corpora"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:00:13",
+      "target_name": "WeWork / Adam Neumann",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02522523",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_021100",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "corpus sweep: unified/doj/lmsband/20k (duggan 403)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11546,
+      "finding_type": "financial",
+      "summary": "OneIM Fund I LP joined the WeWork LC Facility as the sole 'Incoming Junior Tranche L/C Participant' via the Sixth Amendment dated Feb 15, 2023, providing a $120M increase that raised the Junior Tranche to $470M total; OneIM directly/immediately reimburses Goldman (junior issuer) for all junior disbursements, so it bears the full $470M junior exposure (= ~$542.6M reimbursed at satisfaction incl. interest/fees).",
+      "detail": "Sixth Amendment (Feb 15, 2023) preamble names 'ONEIM FUND I LP (the Incoming Junior Tranche L/C Participant)'. The amendment: (i) OneIM provides a $120,000,000 increase to the Junior Tranche L/C Commitments; (ii) Goldman (Junior Tranche Issuing Creditor) issues a $120M junior L/C; (iii) OneIM directly and immediately reimburses Goldman for all junior disbursements; (iv) junior termination date extended to Mar 7, 2025; junior interest margin raised from 6.50% to 9.90%. This brought the Junior Tranche from $350M (set by an earlier amendment) to $470M, and reduced the Senior Tranche to $960M. OneIM signs 'as the Junior Tranche L/C Participant' (definite article = sole junior participant) by its investment manager One Investment Management US LLC, signed by Andrew Langham, Chief Legal Officer. There is also an 'OneIM Disclosure and Waiver' dated as of the amendment date referenced in the consents. MECHANISM/REPLACEMENT: OneIM did NOT replace a prior junior bank \u2014 the Fifth Amendment (Dec 20, 2022) was senior-tranche-only (no Kroll, no junior parties); the junior tranche pre-Sixth-Amendment carried a $350M commitment funded under the A&R Reimbursement Agreement by SoftBank (SBG). Per the FY2022 10-K, the Sixth Amendment substituted SVF II for SBG on the junior reimbursement rights/obligations. So OneIM is the first third-party junior LC participant; before it, SoftBank itself backstopped the junior tranche. OneIM's exact junior commitment = $470,000,000 (the entire junior tranche); the Junior Tranche Reimbursement Obligations cap is $470M (or $500M with all-participant consent). This matches WSJ's '~Feb 2023' join. Per-participant dollar table (Schedule 1.1A, Annex F) is referenced but not itemized in the public EX-10.1.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-23 04:28:45",
+      "target_name": "OneIM Fund I LP \u2014 junior tranche commitment",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000119312523041483/d457495dex101.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11552,
+      "finding_type": "financial",
+      "summary": "The Vision Fund's ~$4.4B WeWork entry (2017) was sovereign-Gulf-backed; ~40% of VF1 losses on WeWork trace to PIF/Mubadala preferred+common capital",
+      "detail": "The Vision Fund (the vehicle holding PIF/Mubadala money, distinct from SoftBank Group direct) made its first WeWork investment in Aug 2017 \u2014 ~$4.4B ($1.1B primary into the $1.7B Series G + $3.3B secondary) at a ~$20B valuation. The markup to the notorious $47B valuation came at the Jan 2019 round. Across SoftBank Group + Vision Fund, total exposure reached >$13B equity + $5B debt; WeWork's 2023 bankruptcy plan valued the company at ~$750M \u2014 a near-total write-off. INFERENCE on sovereign-Gulf share: outside LPs (overwhelmingly PIF $45B + Mubadala $15B = $60B of ~$98.6B) supplied the great majority of Vision Fund capital, and SoftBank's own stake sat in subordinate common equity. Of the portion of WeWork losses borne specifically by the Vision Fund vehicle (as opposed to SoftBank Group's separate direct checks), a controlling majority was sovereign-Gulf money. Of every dollar of VF1 capital, ~$0.60+ was PIF/Mubadala; applied to the Vision Fund's multi-billion WeWork write-down, well over half \u2014 on the order of $2-3B+ of the Vision-Fund-specific WeWork loss \u2014 was ultimately Saudi/Abu Dhabi sovereign capital. NOTE the asymmetry: because PIF/Mubadala held preferred with a 7% coupon, the markup incentive that inflated WeWork was driven by the need to service THEIR coupon, yet they still bore the loss when the fiction collapsed. Cross-ref: #11403 (SVF II later paid $1.467B WeWork LC subrogation), #4245.",
+      "source_datasets": [
+        "agbi"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 04:43:38",
+      "target_name": "SoftBank Vision Fund I -> WeWork",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2019/10/22/wework-47-billion-valuation-softbank-fiction.html ; https://www.agbi.com/analysis/banking-finance/2024/10/japanese-fund-fails-to-deliver-for-gulf-investors/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11572,
+      "finding_type": "financial",
+      "summary": "WeWork disclosure statement (Doc 1783, p.126) confirms the bankruptcy look-back framework underlying the UCC's M SoftBank insider-preference theory: 90-day preference window for ordinary creditors, extended to 1 YEAR for insiders -- and SoftBank is a statutory insider",
+      "detail": "Doc 1783 (Amended Disclosure Statement, filed 04/29/24, Case 23-19865-JKS) p.126: certain pre-filing payments 'could be challenged ... as either a fraudulent conveyance or a preferential transfer ... made on or within 90 days before the date of filing of the bankruptcy petition or one year before the date of filing of the petition if the creditor, at the time of such transfer, was an insider.' This is the statutory basis (11 U.S.C. 547) for the UCC's M SoftBank Redemption preference claim (finding #11414, SoftBank as insider, redeemed at par pre-maturity within 1 yr of petition) and the OneIM/SVF .467B LC satisfaction on Oct 31 2023 (finding #11403, 6 days pre-petition, squarely in the 90-day window). The disclosure statement states only the legal standard; the enumerated insider payments (Q30) are in the PACER-gated SOFA (see #11571). NEW vs #11414: confirms the 1-year-for-insiders extension is the debtors' own stated framework, not merely a UCC allegation; and situates the Oct 31 2023 OneIM/SVF .467B transfer inside the 90-day preference window.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 23:22:06",
+      "target_name": "WeWork avoidance-action look-back window",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "/tmp/osint-sbww-1782107986/2H-1783.txt lines 7770-7788 (DNJ 23-19865 Doc 1783 p.126); cross-ref findings #11414, #11403",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11574,
+      "finding_type": "relationship",
+      "summary": "SYSTEMIC PATTERN: Goldman Sachs appears at >=4 independent WeWork roles: 2014 equity investor, senior+junior LC issuing bank, Schreiber margin lender, and home of WeWork-orbit GC Kathryn Ruemmler",
+      "detail": "Roles: (1) LENDER \u2014 Goldman Sachs International Bank is Senior+Junior Tranche LC issuing creditor on WeWork Dec-2019 LC Facility (and DIP LC agent in Ch.11, repped by Milbank). (2) MARGIN LENDER \u2014 Goldman Sachs Bank USA lent Joel Schreiber (WeWork first investor) $20M against 1.56M WeWork shares, won ~$19.5M judgment. (3) EQUITY INVESTOR \u2014 Goldman in WeWork 2014 $150M/Series D cohort. (4) PERSONNEL \u2014 Kathryn Ruemmler (now Goldman EVP/CLO/GC) is a documented Epstein-corpus contact bridging into Back-Channel Geometry. Significance: one bulge-bracket bank sits on both equity and debt sides of WeWork across the whole arc.",
+      "source_datasets": [
+        "edgar,courtlistener,analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 01:18:52",
+      "target_name": "Goldman Sachs (recurring WeWork enabler node)",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-54; #11545; #11423; #11429; #11427; #11481; #11432",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11582,
+      "finding_type": "financial",
+      "summary": "TEMPORAL PATTERN \u2014 connected parties exited WeWork in a tight cascade before the Nov-6-2023 Ch.11: OneIM/SoftBank LC satisfied Oct 31 (T-6d), Satisfaction Letter executed Oct 30 (T-7d), Benchmark dumped its stub Aug 15-16 (T-83/-82d). All three sit inside the bankruptcy 1-yr insider look-back; OneIM's Oct-31 transfer sits inside the 90-day preference window.",
+      "detail": "Curated event spine (finding #11403, #11492, #11572): 2023-08-15/16 Benchmark open-market NYSE sales to <0.1% (T-83/-82 days); 2023-10-30 Satisfaction Letter+Forbearance executed (T-7); 2023-10-31 SoftBank pays $1,466,955,937.39, OneIM junior LC + Goldman senior taken out, SoftBank subrogated (T-6); 2023-11-06 Ch.11. The Oct-31 satisfaction is squarely in the 11 U.S.C. 547 90-day preference window (per debtors' own disclosure-statement framework, Doc 1783 p.126, finding #11572); the 1-yr-for-insiders extension captures the whole sequence and SoftBank is a statutory insider. Innocent reading: routine pre-filing housekeeping/forbearance and an institutional VC marking a dead stub to zero. Coordination reading: the same 'connected party gets made whole / exits days before the blowup' pattern recurs across the portfolio (the Credit Suisse-Greensill funds).",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 01:21:00",
+      "target_name": "SoftBank/OneIM pre-collapse exit cascade",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-55",
+          "source_quote": "timeline cluster 2023-10-30 to 2023-11-08 = 4 events including OneIM LC satisfaction (T-6d) and Ch.11 filing",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11409,
+      11406,
+      11407,
+      11418,
+      11546,
+      11402,
+      11384,
+      11385,
+      11438,
+      11452,
+      11372,
+      11369,
+      11488,
+      11476,
+      11367
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11367,
+          11368,
+          11369,
+          11372
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          11374,
+          11376,
+          11380
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      }
+    ],
+    "curated_at": "2026-06-28T17:41:03.777008",
+    "lead": "<p>The We Company, operating as WeWork, is a workspace company founded in 2010 by <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> and Miguel McKelvey that leased commercial real estate and re-let it as flexible office space. From January 2017 onward it became the largest single bet of <a href=\"/dossiers/softbank-group\">SoftBank Group</a> and its Vision Fund; analysis of SoftBank's exposure indicates that by the time of the company's November 2023 bankruptcy it had committed capital on the order of $16 billion to WeWork [Finding #11552]. Its August 2019 S-1 disclosed a $3.999 billion accumulated deficit and a 2018 net loss of $1.93 billion on $1.82 billion of revenue, and the IPO was withdrawn on September 30, 2019 after a governance climbdown failed to revive investor demand [Finding #11369][Finding #11367][Finding #11382].</p><p>In the case file, WeWork is the vehicle through which a flow of <a href=\"/dossiers/softbank\">SoftBank</a> capital ran into the company while value moved outward to the people positioned to capture it. SoftBank's October 2019 rescue paid Neumann a $185 million non-compete fee, and a February 2021 settlement booked a $428 million expense on SoftBank's purchase of his shares plus a $106 million cash settlement payment [Finding #11385][Finding #11384]. WeWork acquired companies using its own stock priced at peak valuations, including Conductor ($113.6 million, 86% in stock) and Naked Hub ($480.3 million), several of which it later wrote down or sold back at a fraction of the price [Finding #11438][Finding #11452][Finding #11434]. One issuing bank on the junior tranche of WeWork's letter-of-credit facility was OneIM Fund I LP, the fund of <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, who was running the Vision Fund that owned WeWork [Finding #11546][Finding #11402].</p><p>WeWork filed for Chapter 11 in the District of New Jersey (No. 23-19865) on November 6, 2023. The plan's recovery table assigned zero recovery to the third-lien notes, the unsecured notes, general unsecured creditors, and all pre-existing equity, while SoftBank uniquely retained a position by contributing claims [Finding #11406][Finding #11407]. Six days before filing, SoftBank paid $1,466,955,937.39 to satisfy the letter-of-credit facility by subrogation, making the issuing banks whole [Finding #11409]. The official creditors' committee identified colorable estate claims against SoftBank, which were released in May 2024 for a $33 million settlement and never adjudicated [Finding #11418][Finding #11412]. A documentary tie between WeWork and <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> was not found; corpus sweeps of four document collections returned only false positives [Finding #11488].</p>",
+    "system_role": "WeWork shows how a single dominant capital provider can fund a private company through successive markups while insiders and connected sellers convert paper into liquidity ahead of a collapse, and how a bankruptcy can resolve competing claims among investors who occupied positions on more than one side of the same transactions.",
+    "sections": [
+      {
+        "id": "softbank-capitalization",
+        "title": "SoftBank Capitalization",
+        "viz": null,
+        "content": "<p>Beginning in January 2017, <a href=\"/dossiers/softbank-group\">SoftBank Group</a>, the <a href=\"/dossiers/softbank\">SoftBank</a> Vision Fund, and affiliated entities became WeWork's dominant capital source. The August 2019 S-1 stated that since January 1, 2017 these SoftBank entities had invested or committed approximately $10.65 billion in WeWork and its subsidiaries, including a $1.7 billion Series G, a $1.0 billion 2018 convertible note drawn on August 31, 2018, $2.5 billion via SBWW Cayman on November 1, 2018, and roughly $1.65 billion in the China, Japan, and Pacific joint ventures [Finding #11372]. Analysis of SoftBank's filings indicates the Vision Fund, the vehicle holding outside limited-partner capital, made its first WeWork investment of about $4.4 billion in August 2017 at a roughly $20 billion valuation [Finding #11552].</p><p>Analysis of the Vision Fund's limited-partner composition indicates that the great majority of its committed capital came from sovereign sources, principally Saudi Arabia's Public Investment Fund and Abu Dhabi's Mubadala, such that a large share of the WeWork losses ultimately rested with Gulf sovereign backers [Finding #11552]. The S-1 carried a capital-needs risk factor warning that additional financing might not be available 'at all,' even as financing inflows of $2.66 billion in 2018 and $3.43 billion in the first half of 2019 kept the company operating while its investing outflows reached $2.48 billion and $2.36 billion in the same periods [Finding #11372][Finding #11369].</p>"
+      },
+      {
+        "id": "founder-compensation-and-share-purchases",
+        "title": "Founder Compensation and Share Purchases",
+        "viz": null,
+        "content": "<p>Co-founder <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> held concentrated voting control through WE Holdings LLC, which held more than 100 million Class B shares and over which Neumann had sole voting power; some of those shares were pledged as collateral for his personal borrowing [Finding #11352]. As of July 31, 2019 he held a personal line of credit of up to $500 million from a syndicate of UBS, JPMorgan Chase, and <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse Group AG</a>, with roughly $380 million outstanding, secured by his WeWork stock; the same banks were underwriting the planned IPO [Finding #11354].</p><p>SoftBank's October 2019 rescue included a $185 million payment to Neumann that the FY2022 10-K characterizes as a non-compete fee, recognized in full in 2019 and funded by a <a href=\"/dossiers/softbank\">SoftBank</a> affiliate [Finding #11385]. A February 25, 2021 settlement provided that SoftBank purchased 24,901,342 of Neumann's WE Holdings shares at $23.23 per share, an aggregate of $578 million, of which WeWork recorded a $428 million expense as the excess over fair value, and SoftBank separately paid Neumann a $106 million settlement payment that did not benefit the company [Finding #11384]. Analysis of the FY2022 10-K and the October 2021 Schedule 13D indicates the widely reported ~$430 million non-recourse loan that refinanced Neumann's personal margin line appears in neither filing; it is sourced to WSJ and Commercial Observer reporting, which describe it as non-recourse, secured only by his pledged shares [Finding #11392][Finding #11420].</p><p>Related-party real-estate arrangements ran alongside the financing. WeWork leased four commercial properties from landlord entities in which Neumann held an interest, committing about $236.6 million in future minimum rent, with three of the four leases signed the day Neumann acquired his interest in the property [Finding #11353]. The company also issued WE Holdings LLC partnership interests valued at about $5.9 million for the 'we' family trademark before, under public pressure, the issuance was unwound 'at Adam's direction' [Finding #11376].</p>"
+      },
+      {
+        "id": "stock-funded-acquisitions",
+        "title": "Stock-Funded Acquisitions",
+        "viz": null,
+        "content": "<p>Between 2017 and 2019 WeWork acquired companies largely with its own stock, priced at the valuations it was then carrying. It acquired <a href=\"/dossiers/conductor-inc\">Conductor, Inc.</a> in March 2018 for $113.6 million, of which only $15.8 million was cash and $97.8 million was Series AP-1 preferred stock; the seller's chief executive, Seth Besmertnik, was Neumann's Baruch College classmate, and the transaction was not disclosed as a related-party transaction in the S-1 [Finding #11438][Finding #11471]. Conductor was sold back to its founders in December 2019 for about $3.5 million in proceeds to WeWork [Finding #11433]. Analysis of the transaction indicates a realized loss in the range of roughly $110 million, since the AP-1 preferred had been struck at WeWork's approximately $21 billion valuation before the company's implied value collapsed [Finding #11468].</p><p>The largest acquisition was Naked Hub in April 2018 for total consideration of $480.3 million through the China, Pacific, and Australia entities; the main tranche of $449.7 million was $177.0 million cash and $272.7 million in stock, leaving the deal roughly 61 percent stock-funded [Finding #11452][Finding #11439]. Hony Capital's John Zhao, who sat on WeWork's board, had co-invested in the WeWork China vehicle and publicly championed the Naked Hub deal; WeWork later sold majority control of WeWork China to Trustbridge Partners in September 2020 at a roughly $1 billion implied valuation [Finding #11445]. Managed by Q was acquired in April 2019 for about $220 million, roughly $100 million of it cash to venture investors, then sold to a competitor for about $25 million in March 2020 [Finding #11434]. Cross-reference of these transactions indicates a consistent structure in which sellers and connected parties received cash or liquid stock at peak valuations while the company absorbed the later write-downs [Finding #11450].</p>"
+      },
+      {
+        "id": "letter-of-credit-facility",
+        "title": "Letter-of-Credit Facility",
+        "viz": null,
+        "content": "<p>WeWork's December 27, 2019 credit agreement established a letter-of-credit facility that grew to about $1.25 billion senior and $470 million junior in principal terms [Finding #11402]. A Sixth Amendment dated February 15, 2023 named OneIM Fund I LP as the 'Incoming Junior Tranche L/C Participant,' under which OneIM provided a $120 million increase to the junior commitments, reimbursed Goldman for junior disbursements, extended the junior termination date to March 7, 2025, and raised the junior interest margin from 6.50 percent to 9.90 percent, bringing the junior tranche to $470 million [Finding #11546]. OneIM is the fund of <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, who at the time was running the <a href=\"/dossiers/softbank\">SoftBank</a> Vision Fund that owned WeWork [Finding #11402].</p><p>On October 31, 2023, weeks before the Chapter 11 filing, SoftBank \u2014 through its SVF II-2 obligor \u2014 paid $1,466,955,937.39 to satisfy the facility, becoming subrogated to the issuing banks' rights and making the junior and senior issuing banks, including OneIM and Goldman, whole [Finding #11409]. The widely reported figure that OneIM earned roughly $105 million on the position via an 18-month interest guarantee at about 15 percent, having entered in February 2023, is WSJ-only and is flagged as secondary; the structure of the facility and the $1.467 billion takeout are documented in the bankruptcy record [Finding #11409]. Cross-reference of the bankruptcy event spine indicates the October 31 satisfaction falls within the 90-day preference window described in the debtors' own disclosure statement, with the one-year insider window capturing the full sequence [Finding #11582][Finding #11572].</p>"
+      },
+      {
+        "id": "governance-and-the-withdrawn-ipo",
+        "title": "Governance and the Withdrawn IPO",
+        "viz": null,
+        "content": "<p>WeWork filed its S-1 on August 14, 2019 and an amended S-1/A on September 4, followed by Amendment No. 2 on September 13 [Finding #11382]. The August 2019 S-1 dropped the 'Community-Adjusted EBITDA' metric from its 2018 bond offering \u2014 the term appears zero times in the document \u2014 replacing it with a contribution margin that, when straight-line lease cost was included, fell to $199 million for 2018 against the $467 million figure reported excluding that cost [Finding #11368]. The filing disclosed a $3.999 billion accumulated deficit and operating cash flow that had turned negative in 2018 [Finding #11369].</p><p>Amendment No. 2 set out a series of governance concessions made after public criticism. Neumann's high-vote stock was reduced from 20 votes per share to 10, with the voting power set to fall to one vote per share on his death or permanent incapacity [Finding #11374]. The spousal-and-committee succession mechanism, under which Rebekah Neumann would have helped select a successor, was removed in favor of board selection, with the filing stating that 'No member of Adam's family will sit on our board' [Finding #11380]. The same amendment recorded the unwinding of the $5.9 million 'we' trademark issuance [Finding #11376]. WeWork filed a Form RW withdrawing the registration on September 30, 2019, roughly seventeen days after the governance changes, ending the IPO attempt [Finding #11382].</p>"
+      },
+      {
+        "id": "bankruptcy-and-claim-resolution",
+        "title": "Bankruptcy and Claim Resolution",
+        "viz": null,
+        "content": "<p>WeWork filed for Chapter 11 in the District of New Jersey, Case No. 23-19865, on November 6, 2023. The amended disclosure statement's recovery table assigned zero recovery to the third-lien notes, the unsecured notes, and general unsecured creditors, with the prepetition letter-of-credit facility recovering about 3.5 percent and the first-lien notes about 4.81 percent [Finding #11406]. All pre-existing equity was canceled at zero recovery, but <a href=\"/dossiers/softbank-group\">SoftBank Group</a>, which held roughly 80 percent fully diluted economic ownership, uniquely retained a position by contributing claims [Finding #11407]. The plan transferred 80 percent of the reorganized company to Cupar Grimmond, a vehicle affiliated with Yardi Systems, for up to about $400 million in new-money financing [Finding #11408].</p><p>The official creditors' committee identified estate claims against <a href=\"/dossiers/softbank\">SoftBank</a>, including a breach of the duty of loyalty for sitting on both sides of the 2023 uptier transaction and an avoidable insider preference under 11 U.S.C. 547 over a $300 million redemption [Finding #11412][Finding #11414]. The committee alleged, without adjudication, that SoftBank received $300 million in cash via redemption and took convertible secured notes that elevated its recovery at unsecured creditors' expense [Finding #11412]. Those claims were extinguished through a $33 million settlement and never ruled on by the court [Finding #11418]. The confirmed plan granted broad third-party releases protecting SoftBank, the lenders, Cupar, and the creditors' committee, extending to their directors, officers, and affiliated funds [Finding #11411].</p>"
+      },
+      {
+        "id": "documentary-scope",
+        "title": "Documentary Scope",
+        "viz": null,
+        "content": "<p>The investigation tested whether WeWork connects to the <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> document network and found no documentary tie. A sweep of 31 terms across five corpora \u2014 Unified, LMSBAND, a DOJ volume, a 20,000-document Epstein set, and the DugganUSA collection \u2014 returned string hits that all reduced to false positives, including an investor pitch name-dropping Neumann, a pop-up venue mention, and forwarded news clippings [Finding #11488]. On this record the relationship between WeWork and the wider case is structural \u2014 a shared cast and a shared private-ordering method \u2014 rather than documentary [Finding #11488].</p><p>That shared cast is documented in the deal counsel. In the October 22, 2019 <a href=\"/dossiers/softbank\">SoftBank</a> rescue, <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> represented <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> personally; WeWork itself used Skadden, the company's special committee used Wilson Sonsini, and SoftBank used Weil Gotshal and Morrison & Foerster [Finding #11476]. <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> appears on both the ownership side, as head of the Vision Fund that controlled WeWork, and the creditor side, through OneIM's participation in the letter-of-credit facility [Finding #11402][Finding #11546]. Goldman Sachs occupied multiple roles across WeWork \u2014 equity investor, letter-of-credit issuing bank, and margin lender to first investor <a href=\"/dossiers/joel-schreiber\">Joel Schreiber</a> \u2014 a pattern that cross-reference of the bankruptcy and litigation records sets out [Finding #11574].</p>"
+      }
+    ],
+    "open_questions": [
+      "What were the precise terms, lender, and outstanding balance of Neumann's reported ~$430 million non-recourse loan, which does not appear in any located SEC filing?",
+      "What economic return, if any, did OneIM Fund I LP realize on its junior letter-of-credit participation, given that the ~$105 million figure and ~15 percent rate are WSJ-only?",
+      "What was the net distribution to the creditors' committee after fees from the $33 million SoftBank settlement, and what discovery, if any, preceded the release of the both-sides claims?",
+      "Were any of the stock-funded acquisition counterparties (Conductor, Naked Hub, Managed by Q) able to monetize WeWork stock before the valuation collapsed, as distinct from receiving it at the peak mark?",
+      "What share of the Vision Fund's WeWork losses can be attributed to specific sovereign limited partners, given that SoftBank as a foreign issuer does not file the fund's LP coupon or composition with the SEC?"
+    ],
+    "applicable_models": [
+      "complexity-as-credential",
+      "controlled-detachment",
+      "enabler-gradient",
+      "private-order"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "We Company",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}
