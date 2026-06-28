@@ -3,12 +3,13 @@
   "slug": "softbank-group",
   "aliases": [],
   "profile_ids": [
-    "epstein"
+    "epstein",
+    "softbank-caper"
   ],
   "generated_at": "2026-05-07T23:07:36.274240",
-  "last_updated": "2026-02-26T20:48:16",
+  "last_updated": "2026-06-28T18:01:49.873621",
   "stats": {
-    "total_findings": 12,
+    "total_findings": 44,
     "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
@@ -21,7 +22,8 @@
       "advisory": 1,
       "corporate": 1
     },
-    "last_updated": "2026-02-26T20:48:16"
+    "last_updated": "2026-02-26T20:48:16",
+    "findings": 44
   },
   "findings": [
     {
@@ -425,6 +427,770 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 11360,
+      "finding_type": "financial",
+      "summary": "SoftBank entities invested/committed ~$10.65B in WeWork since Jan 2017 (incl. $1.7B Series G, $1.0B conv note, $2.5B + $1.5B warrants, tender offers); plus $180M Creator Fund",
+      "detail": "Since Jan 1 2017, SoftBank Group Corp., SoftBank Vision Fund L.P. and affiliates invested/committed ~$10.65 billion: $1.7B Series G (SBWW Investments Ltd); $1.65B in regional JVs (ChinaCo $400M+$250M, JapanCo $500M, PacificCo $500M); $1.3B 2017 tender; $1.0B 2018 convertible note (converted to 9,090,909 Series G-1 shares); $2.5B 2018 warrant (exercised for 22,727,273 Series G-1 shares); $1.0B 2019 tender; $1.5B 2019 warrant (payable April 3 2020, auto-exercised into Class A). Separately, SoftBank Group Capital Ltd is 99.99% owner of the Creator Fund and committed $180M ($50.7M funded as of June 30 2019), plus agreed to reimburse up to $80M for Creator Awards underwriting/production services.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:19:28",
+      "target_name": "SoftBank",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1533523/000119312519220499/d781982ds1.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11379,
+      "finding_type": "financial",
+      "summary": "2021 settlement tender ACTUALLY completed at $922M (not $1.5B) at $23.23/share; Neumann EXCLUDED from it",
+      "detail": "Per the Feb 25, 2021 Settlement Agreement, SVF II/SVF Cayman launched a NEW tender offer (March 10, 2021) and ACQUIRED $922 MILLION of Legacy WeWork equity securities at $23.23/share (the '2021 Tender Offer'). Closed in part Apr 12, 2021 and in full Apr 15, 2021; SVF Cayman acquired an aggregate 39,678,319 shares. WeWork recorded $48M total expense Q1 2021. Neumann, WE Holdings LLC and related parties were EXCLUDED (they sold separately to SBG \u2014 see separate finding). CORRECTION to thesis: completed tender = $922M, not ~$1.5B.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:12",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11387,
+      "finding_type": "financial",
+      "summary": "SoftBank committed up to $2.2B unsecured debt (Dec 27, 2019 Unsecured NPA, 5.00% Senior Notes) \u2014 drew full $2.2B by 2020-21; later split into $1.65B Series I + $550M Series II",
+      "detail": "Dec 27, 2019: Issuer, Co-Obligor, and StarBright WW LP (SBG affiliate, 'Notes Purchaser') entered the Master Senior Unsecured Notes NPA ('Unsecured NPA') \u2014 SBG to purchase up to $2.2 BILLION of 5.00% Senior Notes due 2025. Starting July 10, 2020, $2.2B issued in multiple closings. Mature July 10, 2025, 5.00%/yr \u2014 but because attached warrants obligate share issuance, IMPLIED interest rate at closing was ~11.69%. Dec 16, 2021 split: $1.65B Series I (held by SBG/StarBright) + $550M Series II (resold to public). Formalized SBG's Oct 2019 commitment.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:47",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11388,
+      "finding_type": "financial",
+      "summary": "SoftBank got $0.01 'Penny Warrants' worth $853M at issuance ($569M unsecured-notes warrant + $284M LC-facility warrant) for backing the 2019 debt",
+      "detail": "Two $0.01-exercise-price warrant tranches issued to SoftBank Obligor in Dec 2019 for the debt/LC backstop: (1) SoftBank Senior Unsecured Notes Warrant \u2014 71,541,399 shares of Series H-3/H-4 Pref, valued $569M at issuance; (2) 2020 LC Facility Warrant (for SoftBank providing credit support for the 2020 LC Facility) \u2014 35,770,699 shares, valued $284M. Collectively the 'Penny Warrants' / SoftBank Debt Financing Warrant Liability. Anti-dilution added 5,057,306 more warrants. SoftBank Debt Financing Warrant Liability totaled $419M as of Dec 31, 2020. A $343M loss on these two warrants ran through 2021 P&L. Total at-issuance warrant value to SoftBank on the 2019 rescue debt = ~$853M.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:21:47",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11389,
+      "finding_type": "financial",
+      "summary": "LC structure originates in the Dec 27, 2019 Credit Agreement; as of FY2022 = $1.25B Senior LC Tranche + $350M Junior LC Tranche, SoftBank/SVF II as co-obligor (the facility OneIM later joined in 2023)",
+      "detail": "Credit Agreement dated DECEMBER 27, 2019 (same day as the Unsecured NPA). As of Dec 31, 2022 it provided a $1.25 BILLION Senior LC Tranche (Senior LC Facility) + a $350 MILLION Junior LC Tranche. Outstanding: $1.1B of standby LCs under Senior LC Tranche (none drawn; $21M remaining availability); $350M drawn under Junior LC Tranche. SVF II is co-obligor on the Senior LC Tranche (substituted in for SBG via the Dec 2022 Fifth Amendment); SBG co-obligor on Junior LC Tranche. Feb 2023 (Sixth Amendment): Senior reduced toward $960M, Junior increased to $470M (extra $120M LC drawn in full). SoftBank paid LC fees (e.g. 7.045% Senior, per A&R Reimbursement Agreement). THIS is the pre-OneIM SoftBank LC backstop \u2014 facility sizes ~$1.25B senior + $350M junior.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:22:06",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000181375623000016/we-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11390,
+      "finding_type": "relationship",
+      "summary": "Rajeev Misra is a named director of SB Global Advisers Limited (the SVF II adviser / 13D reporting person) at de-SPAC \u2014 direct line from Misra to the WeWork LC backstop vehicle",
+      "detail": "Per WeWork SC 13D (filed Oct 2021, post-Business Combination): the SVF II reporting-person chain is SB WW Holdings (Cayman) Ltd / SVF II WW (DE) LLC / SVF II Holdings (DE) LLC / SVF II Aggregator (Jersey) L.P. / SoftBank Vision Fund II-2 L.P. / SB Global Advisers Limited. The DIRECTORS of SB Global Advisers Limited (the investment adviser entity, UK-organized, 69 Grosvenor Street, London) are Spencer Collins, RAJEEV MISRA, and Neil Hadley ('Related Persons'). Ties Misra directly to the entity that is the SVF II co-obligor on WeWork's Senior LC Tranche.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:22:06",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000119312521315504/d253756dsc13d.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11391,
+      "finding_type": "financial",
+      "summary": "At WeWork de-SPAC (Oct 2021), SoftBank beneficially owned ~48.1-48.5% of Class A; lead holder SB WW Holdings (Cayman) got 320.3M shares + a $0.01 First Warrant for 28.9M more",
+      "detail": "SC 13D (Issuer = WeWork Inc., formerly BowX Acquisition Corp; Business Combination closed Oct 20, 2021 via Merger Agreement dated March 25, 2021). Reporting persons: SB WW Holdings (Cayman) Limited; SVF II WW (DE) LLC; SVF II Holdings (DE) LLC; SVF II Aggregator (Jersey) L.P.; SoftBank Vision Fund II-2 L.P.; SB Global Advisers Limited. Beneficial ownership of Class A: 48.1% (SB WW Holdings alone) up to 48.5% (group), based on 696,492,801 Class A shares outstanding post-combination. Legacy WeWork shares converted 0.82619-for-1; SB WW Holdings received 320,298,461 Class A shares + the 'First Warrant' to purchase 28,948,838 shares at $0.01 (expires 10th anniversary). Stockholders Agreement: SB WW Holdings may designate 3 board nominees while holding >=50% of Class A. Item 4 purpose: acquired in connection with Business Combination; intend to review investment on continuing basis (boilerplate 13D control language).",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:22:19",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1813756/000119312521315504/d253756dsc13d.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11405,
+      "finding_type": "financial",
+      "summary": "Mar 17 2023 8-K: SoftBank (StarBright/SVF II) holds $1.65B unsecured notes + $500M 2025 Secured Notes; agreed to credit-support letter extending LC maturities; SoftBank capped at 49.9% voting power; $500M backstop on New First Lien Notes",
+      "detail": "WeWork 8-K filed 2023-03-17 (Transaction Support Agreement w/ SoftBank affiliates SVF II-2 L.P., StarBright WW LP, SVF II WW Holdings (Cayman), SVF II WW (DE) LLC, SVF Endurance (Cayman)). StarBright holds $1.65B of 5.00% Senior Notes due 2025 Series I ('SoftBank Unsecured Notes'), to be exchanged for 2L/3L exchangeable PIK notes + equity. SVF II holds $500M Senior Secured Notes due 2025 ('2025 Secured Notes') under Oct 20 2021 Secured NPA; $300M to roll into New First Lien Notes (SoftBank Rollover). SoftBank Holders agreed to a credit support letter extending maturities of the existing LC facilities. Governance: SoftBank takes all actions to keep voting limitations in place so long as it owns >49.9% of voting power. Separate $500M Backstop Commitment Agreement (Consenting Noteholders, not SoftBank) for New First Lien Notes w/ $25M premium. New First Lien Notes 15.00% PIK; 2L 11.00%; 3L 12.00%.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:45:17",
+      "target_name": "SoftBank Group Corp.",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WeWork 8-K 2023-03-17 https://www.sec.gov/Archives/edgar/data/1813756/000119312523073418/d474809d8k.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11407,
+      "finding_type": "financial",
+      "summary": "SoftBank's WeWork equity/junior position wiped to ~0% with all other equity, BUT SoftBank uniquely retained its equity by contributing claims",
+      "detail": "Under the RSA/Plan, all preexisting equity interests (Class 12 Parent Interests, 0% recovery) and all junior/unsecured debt (Classes 6,7,8 = 0%) were canceled. SoftBank had ~80% fully-diluted economic ownership pre-bankruptcy. The Plan canceled all other indebtedness and preexisting equity EXCEPT SoftBank's equity, which SoftBank retained by contributing claims. SoftBank had invested $4.4B initial + $2B + ~$5B 2019 Rescue Package ($1.1B 1L notes commitment, $2.2B unsecured notes, $1.75B LC facility) + $3B tender offer. In early-2023 Notes Exchange, SoftBank/Ad Hoc/Cupar canceled or equitized ~$1.5B of debt. WeWork emerged private; 80% control sold to Cupar Grimmond LLC (Yardi vehicle) via New Money Equity Distribution; SoftBank retained a residual minority equity stake alongside Cupar.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:35",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Docket #1783 pp.3-4 (RSA terms), p.71 (80% ownership), p.74 (funded debt); recovery table Class 12 = 0%",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11410,
+      "finding_type": "financial",
+      "summary": "Post-emergence, SoftBank entered a new 6-year Exit LC Facility for Reorganized WeWork and retained rights to the Exit LC SoftBank Cash Collateral (released only on change of control/refi/maturity); takes 62.5% of deposit interest",
+      "detail": "On the Effective Date, the Debtors and SoftBank Parties entered the Exit LC Facility (6-year term, dollar-for-dollar mandatory redemption on change of control). SoftBank retains rights to the 'Exit LC SoftBank Cash Collateral' (potentially equitizable), released to SoftBank only semi-annually as LCs expire/reduce, or in full on change of control/refinancing/6-yr maturity. Deposit interest on the aggregate Exit LC cash collateral: 37.5% to Reorganized Debtors, 62.5% to SoftBank (not available to Debtors). Confirmation order (#2060) notes Exit LC Facility Documents include 'cash to the SoftBank Parties post-emergence in satisfaction of the Undrawn DIP TLC Claims.' This is the SoftBank LC guarantee being continued/honored post-emergence.",
+      "source_datasets": "[\"edgar\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:46:55",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Docket #1783 pp.39-41 (Exit LC Facility terms IV.D.1); Docket #2060 p.~19 fn (Exit LC Facility approved; cash to SoftBank post-emergence)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11411,
+      "finding_type": "legal",
+      "summary": "WeWork Plan grants broad third-party releases protecting SoftBank, the DIP/LC lenders, Cupar, the Ad Hoc Group, and all their directors/officers; confirmed and approved in full by the court",
+      "detail": "Released Parties = Debtors, Reorganized Debtors, each Consenting Stakeholder (= SoftBank Parties, Ad Hoc Group, Cupar), DIP Lenders, Creditors' Committee + members, Agents, and each Related Party of the foregoing. 'Related Parties' expressly includes current and former directors, managers, officers, shareholders, investment/special committee members, equity holders, and affiliated funds \u2014 so SoftBank's and the lenders' directors/officers are released. Releasing Parties = Debtors + all consenting/non-opting-out claim holders. A 'Released Parties Exception Schedule' (Plan Supplement) carves out named individuals who are NOT released (Adam Neumann/Flow filed the Flow DS Objection, Docket 1752, and an examiner-motion alleging claims against the SoftBank Parties/Ad Hoc Group/Cupar re the restructuring). The Confirmation order (#2060, Third Amended Plan, filed 05/30/24) APPROVED both the Debtor Release and the Third-Party Release IN THEIR ENTIRETY as 'consensual' and 'integral.'",
+      "source_datasets": "[\"courtlistener\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:11",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Docket #1783 pp.~67-69 (Released/Releasing/Related Parties defs, Art VIII), pp.~120 (examiner/Flow allegations); Docket #2060 paras 54-56 (Third-Party Release approved in its entirety)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11412,
+      "finding_type": "legal",
+      "summary": "UCC alleges SoftBank sat on both sides of the May-2023 Uptier and structured every facet to benefit itself over creditors",
+      "detail": "Theory: breach of fiduciary duty of loyalty (controlling shareholder, both sides of the deal). Target transaction: 2023 Uptier Transactions. Alleged harm: SoftBank received $300M cash via redemption, cancelled a $200M secured-note purchase commitment, and took secured notes convertible to equity (unlike public noteholders), elevating its recovery at unsecured creditors' expense. UCC alleges, not adjudicated.",
+      "source_datasets": "[\"DNJ 23-19865 UCC standing motion #1436\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:16",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11413,
+      "finding_type": "legal",
+      "summary": "UCC alleges 2023 Uptier was a constructive/actual fraudulent transfer: $2.4B in new secured debt for only ~1/4 in new money, and SoftBank's 'new money' was just its recycled $300M redemption",
+      "detail": "Theory: fraudulent transfer (11 U.S.C. 544/548; NY DCL 279) - no reasonably equivalent value, debtor insolvent since 2019. Target: 2023 Uptier Transactions / SoftBank Redemption. Alleged harm: $2.4B newly created secured claims (incl ~$1.88B principal + ~$520M PIK/fees) leapfrogged ~$180M Unsecured Notes + landlords; WeWork got only ~1/4 of $2.4B in new money, and SoftBank's contribution was a recycle of the $300M it had just been paid in the redemption. UCC alleges.",
+      "source_datasets": "[\"DNJ 23-19865 UCC standing motion #1436\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:27",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11414,
+      "finding_type": "legal",
+      "summary": "UCC alleges the $300M SoftBank Redemption was an avoidable insider preference - SoftBank got paid at par before maturity, then relent the same $300M as first-lien debt collecting $6.25M in fees",
+      "detail": "Theory: avoidable preference (11 U.S.C. 547, SoftBank as statutory insider) plus the circular self-dealing. Target: SoftBank Redemption within 1 year of petition. Alleged harm: WeWork (a) terminated SoftBank's obligation to buy up to $500M secured notes ($300M already bought); (b) redeemed the $300M at par pre-maturity; (c) let SoftBank relend that same $300M as first-lien debt with $6.25M commitment fees; (d) swapped SoftBank's unsecured notes into equity-convertible secured notes. Preference recovery alone = 'hundreds of millions' into the estate. UCC alleges.",
+      "source_datasets": "[\"DNJ 23-19865 UCC standing motion #1436\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:33",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11416,
+      "finding_type": "legal",
+      "summary": "UCC seeks to equitably subordinate AND recharacterize as equity the full SoftBank claim stack (~$1.5B LC Facility + ~$763M Uptier Notes), arguing SoftBank acted as an equity holder throughout",
+      "detail": "Theory: equitable subordination (11 U.S.C. 510(c)) + recharacterization of debt to equity. Target: SoftBank Claims as of petition - ~$1.5B LC Facility claims (co-obligor/reimbursement), $306.25M Series II 1L Notes, $187.5M 2L Exchangeable Notes, $269.6M 3L Exchangeable Notes. Alleged harm/basis: SoftBank used insider control to convert unsecured into senior secured debt months before a bankruptcy it knew was imminent; footnote states discovery showed SoftBank 'was in a control position and was making decisions and investments from the viewpoint of an equity holder.' Success would drop these claims behind unsecured creditors. UCC alleges.",
+      "source_datasets": "[\"DNJ 23-19865 UCC standing motion #1436\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:46",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11417,
+      "finding_type": "legal",
+      "summary": "UCC alleges the 2019 MTA rescue was a 'bait-and-switch': SoftBank used it to seize 72% control then ordered Claure NOT to draw down the committed capital, steering WeWork back toward bankruptcy",
+      "detail": "Theory: breach of duty of loyalty (refusal to draw the 2019 Master Transaction Agreement capital commitments). Target: 2019 MTA rescue (incl ~$5B debt financing + $3B tender offer to buy out Neumann; SoftBank became LC co-obligor). Alleged harm: once SoftBank gained 72% control, Marcelo Claure received orders from SoftBank and Son not to draw all committed capital, returning WeWork to its pre-MTA liquidity crisis. The earlier $3B tender was pulled April 2020, settled Feb 2021 at a reduced ~$921M tender plus ~$106M cash + $578M equity purchase paid to Neumann. UCC alleges.",
+      "source_datasets": "[\"DNJ 23-19865 UCC standing motion #1436\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:47:53",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #1436-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11418,
+      "finding_type": "legal",
+      "summary": "RESOLUTION: the SoftBank estate claims were never adjudicated - they were extinguished via a $33M UCC Settlement (net to creditors as little as ~$350K after fees) and plan releases; the confirmed plan had each party waive all Avoidance Actions",
+      "detail": "The #1436 standing motion (Paul Hastings/Riker Danzig for the UCC; hearing set 3/20/2024) was resolved by the UCC Settlement embedded in the Third Amended Plan, confirmed 5/30/2024 (#2060, Judge John K. Sherwood). Terms: 'UCC Settlement Consideration' = $33,000,000 gross, but the 'UCC Settlement Deduction' (Ad Hoc noteholder expenses, trustee expenses, committee member expenses, and Paul Hastings/Riker Danzig professional fees) could reach $32,650,000 - so net 'UCC Settlement Proceeds' to 3L Notes + General Unsecured Claim holders could be ~$350K. Under the settlement 'each party shall waive its right to assert any Avoidance Actions' (killing the $300M redemption preference) and 'the Creditors' Committee shall support Confirmation.' The estate claims against SoftBank were thereby released for nominal value.",
+      "source_datasets": "[\"DNJ 23-19865 confirmation order #2060\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 06:48:05",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DNJ 23-19865 docket #2060",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11477,
+      "finding_type": "legal",
+      "summary": "SoftBank/SBG deal counsel in the Oct 2019 WeWork rescue was Weil Gotshal & Manges + Morrison & Foerster (NOT Paul Weiss)",
+      "detail": "Press release names Weil Gotshal & Manges + Morrison Foerster as legal advisor to SoftBank, and Weil Gotshal as legal advisor to the SoftBank Vision Fund. Corroborated by the 2021 S-4/424B3 'Background of the Business Combination' which repeatedly identifies 'Morrison & Foerster LLP, counsel to SBG'. Financial advisors: The Raine Group (lead, SoftBank); Lazard + Houlihan Lokey (SVF).",
+      "source_datasets": "[\"wework.com newsroom press release (2019-10-22); SEC 424B3 (BowX Acquisition / WeWork)\"]",
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 07:57:18",
+      "target_name": "SoftBank Group",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.wework.com/newsroom/posts/wework-announces-significant-funding-from-softbank-group ; 424B3 Background of the Business Combination (BowX/WeWork S-4)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11563,
+      "finding_type": "intelligence",
+      "summary": "QUICK-SCAN of other template matches: View, Fair, Zume, Wirecard -- bag-holder pattern recurs; only OYO/WeWork show the founder-margin-loan twist; Wirecard is the variant where SoftBank protected ITSELF and passed the bag to bond investors",
+      "detail": "Pattern-test of four more Vision Fund cases. VIEW INC (smart glass): $1.1B Series H 2018 at inflated mark, SPAC'd (ticker VIEW) Mar 2021, then accounting-restatement + net losses ($343M 2021, $337M 2022), heavy layoffs, near-delisting -- classic SoftBank-inflated mark cratering in public markets; no founder-loan element surfaced. FAIR.COM (car subscription): SoftBank led $385M Series B late 2018 at $1.2B; collapsed 2019-20, founder Scott Painter ousted and REPLACED BY A SOFTBANK CFA (Adam Hieber) -- SoftBank's ~1/3 equity wiped, assets sold to Shift for $15M; bag-holder, plus SoftBank-installs-its-own-operator motif. ZUME (pizza robots): ~$375-445M from Vision Fund 2018, pivoted to packaging, shut down insolvent ~2023 -- pure SoftBank loss, hype-funded. WIRECARD: $1B convertible bond Apr 2019 while Wirecard was already under fraud investigation; $2.1B accounting hole, CEO arrested, insolvency Jun 2020 -- BUT SoftBank converted to a hedging/bond structure (the bond was largely placed with outside investors, e.g. via a Credit Suisse-arranged note), so SoftBank limited its OWN exposure and passed the loss to others. So: View/Fair/Zume = SoftBank-as-bag-holder; OYO + WeWork = the founder-margin-loan twist; Wirecard = inverse, SoftBank offloads the bag.",
+      "source_datasets": "[\"crunchbase\"]",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-24 04:44:32",
+      "target_name": "SoftBank Vision Fund",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2019/12/19/softbank-fair-car-market-disruption/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.crunchbase.com/agtech-foodtech/softbank-hits-misses-robotics-zume/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.crunchbase.com/public/smart-glass-maker-view-softbank-spac/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2020/06/24/softbanks-1-billion-wirecard-investment-under-scrutiny.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 996,
+      "finding_type": "intelligence",
+      "summary": "WSJ REPORTING TIMELINE ESTABLISHED: (1) March 26, 2018 \u2014 WSJ published 'SoftBank Probes Who Was Behind Smear Campaign Against Top Executives' by Bradley Hope, first revealing Benedetti's role and SoftBank board investigation. (2) March 28, 2018 \u2014 Axios follow-up revealed Cambridge Analytica/SCL ties. (3) February 28, 2020 \u2014 WSJ published definitive expose naming Misra as orchestrator and K payment to Benedetti. CRITICAL CONCLUSION: Epstein's Jan 28, 2019 inquiry about Benedetti (EFTA02628256) was 10 months AFTER the March 2018 WSJ article. This was REACTIVE intelligence gathering about an already-public scandal, not proactive coordination.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2018-03-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:12:24",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02628256",
+          "source_quote": "Allesandro benedetti? (dated Jan 28, 2019, 10 months after WSJ March 26, 2018 article)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 997,
+      "finding_type": "intelligence",
+      "summary": "Epstein's SoftBank awareness: (1) Oct 14, 2016: Jabor Y. sent Epstein SoftBank press release, Epstein responded 'im aware, but its too much money. returns are generated on small amounts. otherwise its merely portfolio mgmt.' (2) Jan 3, 2017: Landon Thomas sent Epstein MBS/SoftBank Vision Fund article. (3) June 12, 2018: David Stern told Epstein he was meeting SoftBank COO Marcelo Claure in Tokyo. (4) Aug 12, 2018: FII speakers list with both Klein and Misra sent to Epstein. (5) Jan 28, 2019: Epstein asked Teodorani about Benedetti.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2016-10-14",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:12:29",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02446753",
+          "source_quote": "im aware, but its too much money. returns are generated on small amounts",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4246,
+      "finding_type": "financial",
+      "summary": "Deutsche Bank Special Situations team (Bryan Fingeroot, Daniel Sabba) sent investment recommendations directly to Epstein's jeevacation@gmail.com on Jan 20, 2015, via Vahe Stepanian. The 'Shopping List' included SoftBank (9984 JT) as a buy recommendation with DB target of 9500. This confirms DB was actively providing Epstein with equity research including SoftBank coverage.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:28:11",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02359644",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4247,
+      "finding_type": "communication",
+      "summary": "Jabor Yousuf Jassim Al Thani (Qatari businessman, United Group for Projects, Doha) sent Jeffrey Epstein a SoftBank press release link on Oct 14, 2016. Jabor met Epstein in person at 9 E 71st St (Nov 29, 2018). On Nov 11, 2018, Epstein introduced Jabor to Steve Bannon via email ('Steve jabor - jabor - steve'). The SoftBank link was sent just as Vision Fund was being assembled.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:28:20",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02446715; EFTA02617269; EFTA02264604; EFTA02235803",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4248,
+      "finding_type": "communication",
+      "summary": "Landon Thomas Jr (NYT financial reporter) sent Epstein 'Happy New Year' email on Jan 3, 2017 with link to Business Insider article about MBS/Saudi Prince and Japanese SoftBank B fund. Multiple copies exist (EFTA02364985, EFTA02663718, EFTA02663766, EFTA02364748, EFTA02364939). Thomas was a known Epstein media contact used for information management.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:28:27",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02364985; EFTA02663718",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4249,
+      "finding_type": "communication",
+      "summary": "David Stern (Epstein associate) emailed Epstein on June 12, 2018: 'Going to Tokyo tomorrow to meet Softbank COO (former Sprint Chairman)' - referring to Marcelo Claure. Stern also mentions wanting to 'go to North Korea to see No.1' and asks Epstein 'How?' about arranging via US channels. Multiple copies exist across the corpus.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:28:34",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02614349; EFTA02614189; EFTA02615713; EFTA02616701",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4298,
+      "finding_type": "intelligence",
+      "summary": "SoftBank lobbying history focused on Sprint acquisition (2012-2013), no recent AI/Stargate/crypto lobbying filings found",
+      "detail": "LDA Senate filings show SoftBank Corp (Japan) lobbied through Carmen Group Incorporated on Sprint acquisition approval (2012-2013 cycle). Issue descriptions: 'Approvals needed for acquisition of 70 percent of Sprint by SoftBank', 'Education and outreach related to cellular service acquisition'. Later filings: 'Advance mobile broadband infrastructure and wireless industry competition in US'. No lobbying filings found for AI, Stargate, crypto, or recent initiatives. No FARA registrations found for SoftBank.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:40:36",
+      "target_name": "SoftBank",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA search SoftBank (empty)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings for SoftBank Corp",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4310,
+      "finding_type": null,
+      "summary": "SoftBank Trump-Era Deal Inventory: ~$100B+ deployed across 7+ major transactions since Dec 2024",
+      "detail": "Complete inventory of SoftBank Trump-era deals (Dec 2024-Feb 2026): (1) $100B US investment pledge (Dec 16 2024 Mar-a-Lago); (2) Stargate AI JV $500B commitment $100B initial (Jan 21 2025 White House Day 1); (3) OpenAI $40B+ equity investment at $260B valuation (April-Dec 2025); (4) Twenty One Capital/XXI Bitcoin SPAC with Tether/Bitfinex/Cantor SoftBank via Stellar Beacon $900M (Apr 2025); (5) Ampere Computing $6.5B acquisition (announced Mar 2025 FTC cleared Nov 2025); (6) DigitalBridge $4B acquisition for AI infra (Dec 2025); (7) Crystal Land/Trump Industrial Parks on federal land using Japanese govt $550B trade deal funds; (8) SB Energy Ohio gas mega-plant $33B (Feb 2026). Each deal requires specific government action.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:46:02",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filings 2025; GDELT articles; S&C deal announcements; SoftBank Group press releases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4314,
+      "finding_type": null,
+      "summary": "SoftBank 2025 lobbying: 3 firms, $960K+ disclosed, extensive revolving door with GOP congressional staff",
+      "detail": "SoftBank retained three lobbying operations in 2025: (1) Miller Strategies LLC - $720K/year ($180K/quarter), lobbying on AI technology and energy policy. Lobbyists include James Grimm (former Chief Counsel to Rep Jim Jordan, Deputy Chief of Staff to Rep Darrell Issa) and Lucas Wallwork (former staff on House Energy and Commerce Committee, Special Assistant to Secretary of Energy). (2) Tiber Creek Group - $240K/year ($60K/quarter), AI issues. Added Nikole Burroughs in Q4 (former Senior Director House Asia-Pacific Subcommittee, Senior Advisor Office of Deputy Secretary of State 2014-2017). (3) SoftBank Group US in-house: Jeffrey Dressler (former National Security Advisor to Speaker Paul Ryan 2017-2019 and Majority Leader Kevin McCarthy 2015-2017) and Sean Callahan (former Deputy Chief of Staff to Rep Val Demings and Sen Mazie Hirono). Emily Christy (former Director Executive Office of the President 2007, Director Advocacy Center Commerce 2008-2009).",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:46:28",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings 2025 Q1-Q4 for SoftBank Group Corporation and SB Group US",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4315,
+      "finding_type": null,
+      "summary": "Ampere Computing $6.5B acquisition: FTC second request (July 2025) then cleared (Nov 2025), CFIUS review concurrent, completed Nov 26 2025",
+      "detail": "Timeline: Mar 19 2025 - SoftBank announces agreement to acquire Ampere Computing for $6.5B. Ampere designs ARM-based server processors licensed from SoftBank-owned Arm Holdings, creating vertical integration concern. July 2 2025 - FTC issues second request (rare in-depth probe, occurs in only 5-10% of reviewed deals), citing concern that SoftBank controlling both Arm IP and Ampere processor design could reduce competition in AI data center chips. Nov 17 2025 - FTC ends investigation, clearing the deal. Nov 26 2025 - SoftBank completes acquisition. CFIUS review was concurrent (SoftBank is Japanese). The FTC clearance under Trump-appointed commissioners occurred despite the clear vertical integration concern (Arm + Ampere). SoftBank previous CFIUS experience: Fortress acquisition 2017 required SoftBank to cede day-to-day operational control.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:46:41",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg reporting Jul 2025; Mobile World Live Nov 2025; SoftBank Group press release Mar 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4318,
+      "finding_type": null,
+      "summary": "Crystal Land/Trump Industrial Parks: SoftBank proposes building Trump-branded parks on federal land with $550B Japanese government funds",
+      "detail": "Project Crystal Land (internal SoftBank codename): Originally a $1T city concept for Arizona desert pitched to Commerce Secretary Howard Lutnick. Evolved into nationwide network of Trump-branded industrial parks on federal land. Key details: (1) Japan reached trade agreement in July 2025 to invest $550B in US in exchange for lower tariffs (15% rate). Under deal, US decides where funding goes and keeps 90% of profits once Japan recoups investment. (2) Howard Lutnick (Commerce Secretary) has been working with Dept of Interior on using federal land. (3) Funding could come as early as Q1 2026. (4) First concrete project: $33B Ohio gas mega-plant (Portsmouth Powered Land Project) announced Feb 2026, 9.2 GW, operated by SB Energy. Funded by Japan Bank for International Cooperation and Nippon Export and Investment Insurance. (5) Son talked to TSMC and Samsung; TSMC reportedly declined. This structure essentially converts Japanese sovereign capital into Trump administration patronage projects on public land.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:47:21",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Gizmodo Dec 2025; Bisnow Dec 2025; TechCrunch Feb 2026; WOUB Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4319,
+      "finding_type": null,
+      "summary": "Son-Trump relationship: systematic pattern of White House deal announcements creating mutual dependency since Dec 2016",
+      "detail": "Documented Son-Trump interactions: (1) Dec 6 2016 - Trump Tower NYC, Son pledges $50B/50K jobs (money came from Saudi-backed Vision Fund, yielded WeWork disaster). (2) May 2017 - Son follows Trump to Saudi Arabia for Vision Fund $93B launch. (3) Dec 16 2024 - Mar-a-Lago, Son pledges $100B/100K jobs (doubling 2016 pledge). (4) Jan 21 2025 - White House Day 1, Stargate $500B announcement with Altman and Ellison. (5) Ongoing 2025-2026 - Crystal Land/Trump Industrial Parks negotiations via Commerce Sec Lutnick. Pattern: Son arrives with a pledge number calibrated to be the largest announcement of the day, creating photo-op for Trump. In return, SoftBank receives regulatory forbearance (FTC cleared Ampere despite vertical integration concern), access to federal land, and positioning as preferred infrastructure partner. Son is the only foreign CEO to have appeared at both Trump inaugurations and both transition announcements. No FEC donations found for Son or SoftBank (as expected - foreign nationals cannot donate), making the deal flow itself the currency of the relationship.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:47:35",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Dec 2024; Fortune Jan 2025; CNN Money Dec 2016; FEC search results showing 0 donations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4320,
+      "finding_type": null,
+      "summary": "Stargate JV governance: SoftBank 40% / OpenAI 40% ownership, gridlocked over control, delayed by partner disputes",
+      "detail": "Stargate LLC structure: SoftBank and OpenAI each committed $19B initial capital and hold 40% ownership. Oracle and MGX (Abu Dhabi) each contributed $7B. SoftBank has financial responsibility, OpenAI has operational responsibility. Son is chairman. As of Aug 2025, Bloomberg reported the project had not started and no funds were raised for the full $500B. Disagreements between OpenAI, Oracle, and SoftBank over who would have ultimate control of planned data centers. Specific dispute over Texas campus governance, construction responsibilities, and allocation of infrastructure ownership. Yale antitrust expert noted the collaboration between AI rivals (OpenAI, Nvidia, Oracle) may violate 135 years of antitrust law. The JV essentially requires ongoing government forbearance from antitrust enforcement to function.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:47:47",
+      "target_name": "SoftBank Group / Masayoshi Son",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Stargate LLC; OpenAI press release; Tom's Hardware reporting; Fortune Nov 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -580,18 +1346,18 @@
   "timeline": [],
   "curation": {
     "key_finding_ids": [
-      4247,
-      4249,
-      4246,
-      4248,
-      997,
-      996,
       4103,
       4105,
       4110,
+      11360,
+      11411,
+      11412,
+      11413,
+      11414,
       4114,
-      4314,
-      4298
+      11390,
+      11563,
+      4111
     ],
     "key_identifiers": {
       "jurisdictions": [],
@@ -605,7 +1371,8 @@
         "viz": "ego_network",
         "finding_ids": [
           4074,
-          4131
+          4131,
+          11390
         ],
         "connection_ids": [
           2449,
@@ -614,10 +1381,7 @@
           2453,
           2580,
           2454,
-          2455,
-          1273,
-          1760,
-          2295
+          2455
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -634,19 +1398,34 @@
           4116,
           4117,
           4128,
-          4246
+          11360,
+          11379
         ],
         "connection_ids": [
           2449,
           2450,
           2451,
           2453,
-          2454,
-          1273,
-          1760,
-          2295
+          2454
         ],
         "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          11411,
+          11412,
+          11413,
+          11414,
+          11416,
+          11417,
+          11418,
+          11477
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
       },
       {
         "id": "intelligence-activity",
@@ -655,73 +1434,77 @@
         "finding_ids": [
           4111,
           4114,
-          997,
-          996,
-          4298
+          11563
         ],
         "connection_ids": [],
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
-      },
-      {
-        "id": "communications",
-        "title": "Communications",
-        "viz": null,
-        "finding_ids": [
-          4247,
-          4248,
-          4249
-        ],
-        "connection_ids": [],
-        "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-03-11T22:10:57.609563",
-    "lead": "<p>SoftBank Group is a Japanese multinational conglomerate led by founder and CEO Masayoshi Son, operating as one of the largest technology investment vehicles in the world. Since December 2024, Son has pledged over $100 billion in US investment commitments to the Trump administration and co-founded Stargate LLC, a $500 billion AI infrastructure joint venture announced on the first day of the second Trump presidency [Finding #4103]. SoftBank invested $40 billion in OpenAI to become its second-largest shareholder, acquired Ampere Computing for $6.5 billion, and co-launched <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a>, a Bitcoin treasury company with Tether and <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a> [Finding #4105] [Finding #4110].</p><p>The current US strategy parallels Son\u2019s December 2016 approach, when he pledged $50 billion to the newly elected Trump at Trump Tower. That earlier commitment was funded largely by Saudi sovereign capital through the $93 billion Vision Fund and generated public visibility, but also included the failed WeWork investment [Finding #4319]. The current portfolio marks a structural shift. Rather than portfolio investments, SoftBank appears to be assembling a vertically integrated AI stack from chip design through data center infrastructure to model deployment, with each layer requiring specific US government approvals [Finding #4112] [Finding #4114].</p><p>SoftBank surfaces repeatedly in the <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> documentary corpus. Email records indicate Epstein tracked SoftBank and Vision Fund developments through intermediaries including <a href=\"/dossiers/jabor-al-thani\">Jabor Al Thani</a>, <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, and <a href=\"/dossiers/david-stern\">David Stern</a>, though no evidence indicates direct Epstein-Son contact or investment [Finding #997].</p>",
-    "system_role": "SoftBank Group is a Japanese technology conglomerate that channels large-scale investment capital \u2014 primarily from Gulf sovereign wealth funds and Japanese government-backed financing \u2014 into US technology infrastructure, with major investment commitments announced in coordination with successive presidential administrations.",
+    "curated_at": "2026-06-28T18:01:49.973479",
+    "lead": "<p>SoftBank Group is a Japanese multinational conglomerate led by founder and CEO Masayoshi Son, operating as one of the largest technology investment vehicles in the world. Since December 2024, Son has pledged over $100 billion in US investment commitments to the Trump administration and co-founded <a href=\"/dossiers/stargate-llc\">Stargate LLC</a>, a $500 billion AI infrastructure joint venture announced on the first day of the second Trump presidency [Finding #4103]. <a href=\"/dossiers/softbank\">SoftBank</a> invested $40 billion in <a href=\"/dossiers/openai\">OpenAI</a> to become its second-largest shareholder, acquired Ampere Computing for $6.5 billion, and co-launched <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a>, a Bitcoin treasury company with Tether and <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a> [Finding #4105] [Finding #4110].</p><p>The current US strategy parallels Son\u2019s December 2016 approach, when he pledged $50 billion to the newly elected Trump at Trump Tower. Analysis of the record indicates that earlier commitment was funded largely by Saudi sovereign capital through the $93 billion Vision Fund and generated public visibility, but also included the failed WeWork investment [Finding #4319]. The current portfolio marks a structural shift. Analysis of the findings indicates that, rather than portfolio investments, SoftBank appears to be assembling a vertically integrated AI stack from chip design through data center infrastructure to model deployment, with each layer requiring specific US government approvals [Finding #4112] [Finding #4114].</p><p>SoftBank's earlier WeWork commitment, made through SoftBank Group Corp., the SoftBank Vision Fund and affiliated entities, totaled approximately $10.65 billion from January 2017 onward and a further $180 million Creator Fund commitment [Finding #11360]. The 2019 rescue financing, the company's October 2021 listing through a special-purpose acquisition company, and the November 2023 Chapter 11 case in the District of New Jersey (No. 23-19865) left SoftBank as the principal capital provider; the official creditors' committee later asserted estate claims against the SoftBank parties that were released for $33 million without adjudication [Finding #11407][Finding #11418].</p><p>SoftBank surfaces repeatedly in the <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> documentary corpus. Email records indicate Epstein tracked SoftBank and Vision Fund developments through intermediaries including <a href=\"/dossiers/jabor-al-thani\">Jabor Al Thani</a>, <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, and <a href=\"/dossiers/david-stern\">David Stern</a>, though no evidence indicates direct Epstein-Son contact or investment [Finding #997].</p>",
     "sections": [
       {
         "id": "trump-investment-architecture",
         "title": "Trump-Era Investment Architecture",
-        "content": "<p>Masayoshi Son\u2019s engagement with the Trump administration has followed a consistent sequence: publicly pledging large investment figures at presidential venues, then pursuing regulatory approvals for the underlying transactions. On December 16, 2024, Son pledged $100 billion in US investment at Mar-a-Lago, doubling his 2016 figure [Finding #4103]. Five weeks later, on Inauguration Day, he stood alongside Trump to announce the $500 billion Stargate project. Available records indicate no other foreign CEO appeared at both Trump transition events and both inauguration-adjacent announcements [Finding #4319].</p><p>The aggregate deal inventory since December 2024 includes: Stargate equity ($19 billion for a 40% stake), OpenAI investment ($40 billion, completed December 2025), the Ampere Computing acquisition ($6.5 billion), <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a> (approximately $1.7 billion in Bitcoin), the DigitalBridge acquisition ($4 billion), and SB Energy\u2019s Ohio gas mega-plant ($33 billion). Public filings indicate total confirmed deployment of approximately $58 billion, short of headline claims exceeding $100 billion standalone plus $500 billion through Stargate [Finding #4117] [Finding #4310].</p><p>Each of these transactions involves regulatory approvals from the Trump administration. Stargate requires expedited federal permits that Trump promised to investors committing over $1 billion. The Ampere acquisition needed both FTC and CFIUS clearance. Arm\u2019s global chip business depends on export control decisions. Project Crystal Land, Son\u2019s proposal to build Trump-branded industrial parks on federal land, would require Interior Department land allocation and is funded through the $550 billion Japan-US trade agreement framework [Finding #4114] [Finding #4318]. As a foreign national, Son cannot donate to US campaigns, and FEC records show only modest employee-level contributions from SoftBank staff [Finding #4131].</p>",
+        "content": "<p>Masayoshi Son\u2019s engagement with the Trump administration has followed a consistent sequence: publicly pledging large investment figures at presidential venues, then pursuing regulatory approvals for the underlying transactions. On December 16, 2024, Son pledged $100 billion in US investment at Mar-a-Lago, doubling his 2016 figure [Finding #4103]. Five weeks later, on Inauguration Day, he stood alongside Trump to announce the $500 billion Stargate project. Available records indicate no other foreign CEO appeared at both Trump transition events and both inauguration-adjacent announcements [Finding #4319].</p><p>The aggregate deal inventory since December 2024 includes: Stargate equity ($19 billion for a 40% stake), <a href=\"/dossiers/openai\">OpenAI</a> investment ($40 billion, completed December 2025), the Ampere Computing acquisition ($6.5 billion), <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a> (approximately $1.7 billion in Bitcoin), the DigitalBridge acquisition ($4 billion), and SB Energy\u2019s Ohio gas mega-plant ($33 billion). Public filings indicate total confirmed deployment of approximately $58 billion, and cross-reference of the record shows this falls short of headline claims exceeding $100 billion standalone plus $500 billion through Stargate [Finding #4117] [Finding #4310].</p><p>Each of these transactions involves regulatory approvals from the Trump administration. Stargate requires expedited federal permits that Trump promised to investors committing over $1 billion. The Ampere acquisition needed both FTC and CFIUS clearance. Arm\u2019s global chip business depends on export control decisions. Analysis of the findings indicates Project Crystal Land, Son\u2019s proposal to build Trump-branded industrial parks on federal land, would require Interior Department land allocation and is funded through the $550 billion Japan-US trade agreement framework [Finding #4114] [Finding #4318]. As a foreign national, Son cannot donate to US campaigns, and FEC records show only modest employee-level contributions from <a href=\"/dossiers/softbank\">SoftBank</a> staff [Finding #4131].</p>",
         "viz": null
       },
       {
         "id": "ai-vertical-integration",
         "title": "AI Vertical Integration and Stargate",
-        "content": "<p>Based on its recent acquisitions, SoftBank is assembling a vertically integrated AI infrastructure stack spanning chip design, data center construction, and model deployment. At the hardware layer, SoftBank owns approximately 90% of Arm Holdings (the dominant CPU architecture) and in November 2025 completed the $6.5 billion acquisition of Ampere Computing, which designs ARM-based server processors for AI data centers. The FTC issued a second request in July 2025 \u2014 a probe occurring in only 5-10% of reviewed deals \u2014 citing concern that controlling both Arm IP and Ampere processor design could reduce competition. Records indicate the investigation was dropped in November 2025 under Trump-appointed commissioners [Finding #4112] [Finding #4315].</p><p>At the infrastructure layer, Stargate LLC was structured with SoftBank and OpenAI each holding 40% equity ($19 billion initial commitment each), with Oracle and <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a> (Abu Dhabi) contributing $7 billion apiece. SoftBank holds financial responsibility while OpenAI holds operational control, and Son chairs the venture. As of mid-2025, the $500 billion headline figure remained largely aspirational, with disputes between partners over governance of the Texas campus, construction responsibilities, and infrastructure ownership delaying progress. A Yale antitrust expert noted the collaboration between AI rivals may violate established antitrust law, meaning the JV requires ongoing government forbearance to function [Finding #4320].</p><p>At the model layer, SoftBank invested $40 billion in OpenAI across two tranches \u2014 $7.5 billion in April 2025 and $22.5 billion in December 2025 \u2014 making it the largest single investor with an 11% stake, second only to Microsoft at 27.5%. To fund this, SoftBank sold its entire $5.83 billion Nvidia stake and partially monetized T-Mobile holdings, also using margin loans on Arm shares [Finding #4105]. The combined structure gives SoftBank positions across chip architecture, chip fabrication design, AI data center infrastructure, and equity in the leading AI model company \u2014 a level of vertical integration spanning the full AI supply chain.</p>",
+        "content": "<p>Based on its recent acquisitions, <a href=\"/dossiers/softbank\">SoftBank</a> is assembling a vertically integrated AI infrastructure stack spanning chip design, data center construction, and model deployment. At the hardware layer, SoftBank owns approximately 90% of Arm Holdings (the dominant CPU architecture) and in November 2025 completed the $6.5 billion acquisition of Ampere Computing, which designs ARM-based server processors for AI data centers. The FTC issued a second request in July 2025 \u2014 a probe occurring in only 5-10% of reviewed deals \u2014 citing concern that controlling both Arm IP and Ampere processor design could reduce competition. Records indicate the investigation was dropped in November 2025 under Trump-appointed commissioners [Finding #4112] [Finding #4315].</p><p>At the infrastructure layer, <a href=\"/dossiers/stargate-llc\">Stargate LLC</a> was structured with SoftBank and <a href=\"/dossiers/openai\">OpenAI</a> each holding 40% equity ($19 billion initial commitment each), with Oracle and <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a> (Abu Dhabi) contributing $7 billion apiece. SoftBank holds financial responsibility while OpenAI holds operational control, and Son chairs the venture. As of mid-2025, the $500 billion headline figure remained largely aspirational, with disputes between partners over governance of the Texas campus, construction responsibilities, and infrastructure ownership delaying progress. A Yale antitrust expert noted the collaboration between AI rivals may violate established antitrust law, meaning the JV requires ongoing government forbearance to function [Finding #4320].</p><p>At the model layer, SoftBank invested $40 billion in OpenAI across two tranches \u2014 $7.5 billion in April 2025 and $22.5 billion in December 2025 \u2014 making it the largest single investor with an 11% stake, second only to Microsoft at 27.5%. To fund this, SoftBank sold its entire $5.83 billion Nvidia stake and partially monetized T-Mobile holdings, also using margin loans on Arm shares [Finding #4105]. The combined structure gives SoftBank positions across chip architecture, chip fabrication design, AI data center infrastructure, and equity in the leading AI model company \u2014 a level of vertical integration spanning the full AI supply chain.</p>",
         "viz": null
       },
       {
         "id": "sovereign-wealth-nexus",
         "title": "Gulf Sovereign Wealth and the Tahnoon Nexus",
-        "content": "<p>SoftBank\u2019s capital structure has been intertwined with Gulf sovereign wealth since the Vision Fund era. Saudi Arabia\u2019s Public Investment Fund was the anchor limited partner in Vision Fund 1, committing $45 billion of the fund\u2019s $93 billion total, with Abu Dhabi\u2019s Mubadala providing additional capital. Together, Gulf sovereign entities supplied roughly two-thirds of the fund\u2019s capital [Finding #4109]. Though PIF did not reinvest in Vision Fund 2, the Gulf connection has continued through new channels.</p><p><a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, the Abu Dhabi AI investment fund launched by Mubadala and <a href=\"/dossiers/g42\">G42</a> in 2024 and chaired by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, committed $7 billion to Stargate for a 10% stake. Son and Tahnoon have met to discuss AI infrastructure, semiconductor strategy, and joint GPU deployment [Finding #4109]. The partnership extends to Stargate UAE, a 1-gigawatt data center campus in Abu Dhabi where SoftBank provides connectivity infrastructure and G42 operates the compute cluster alongside OpenAI and Oracle.</p><p>MGX also used $2 billion of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a>\u2019s USD1 stablecoin to finance an investment in Binance. While SoftBank has no direct connection to WLFI, both SoftBank and the Trump family\u2019s DeFi protocol draw capital from the same UAE sovereign ecosystem centered on Tahnoon [Finding #4128].</p>",
+        "content": "<p>SoftBank\u2019s capital structure has been intertwined with Gulf sovereign wealth since the Vision Fund era. Saudi Arabia\u2019s Public Investment Fund was the anchor limited partner in Vision Fund 1, committing $45 billion of the fund\u2019s $93 billion total, with Abu Dhabi\u2019s Mubadala providing additional capital. Analysis of the record indicates that, together, Gulf sovereign entities supplied roughly two-thirds of the fund\u2019s capital [Finding #4109]. Though PIF did not reinvest in Vision Fund 2, the Gulf connection has continued through new channels.</p><p><a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, the Abu Dhabi AI investment fund launched by Mubadala and <a href=\"/dossiers/g42\">G42</a> in 2024 and chaired by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, committed $7 billion to Stargate for a 10% stake. According to the investigation\u2019s synthesis, Son and Tahnoon have met to discuss AI infrastructure, semiconductor strategy, and joint GPU deployment [Finding #4109]. The partnership extends to Stargate UAE, a 1-gigawatt data center campus in Abu Dhabi where <a href=\"/dossiers/softbank\">SoftBank</a> provides connectivity infrastructure and G42 operates the compute cluster alongside <a href=\"/dossiers/openai\">OpenAI</a> and Oracle.</p><p>MGX also used $2 billion of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a>\u2019s USD1 stablecoin to finance an investment in Binance. While SoftBank has no direct connection to WLFI, cross-reference of the record indicates both SoftBank and the Trump family\u2019s DeFi protocol draw capital from the same UAE sovereign ecosystem centered on Tahnoon [Finding #4128].</p>",
         "viz": "ego_network"
       },
       {
         "id": "cantor-tether-crypto",
         "title": "Cantor-Tether-Bitcoin Axis",
-        "content": "<p>In April 2025, SoftBank joined Tether and <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a> to launch <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a>, a Bitcoin treasury company structured as a SPAC merger through Cantor Equity Partners. Tether contributed $1.6 billion in Bitcoin, Bitfinex $600 million, and SoftBank $900 million via a Delaware subsidiary called Stellar Beacon LLC. The company launched with 42,000 Bitcoin, making it the third-largest corporate holder globally. SoftBank subsequently purchased an additional 89.1 million shares for $780.6 million [Finding #4110].</p><p>Through Stellar Beacon, SoftBank holds 22.3% of Class A and 25.3% of Class B stock, giving it 25.3% voting power. Sullivan & Cromwell LLP, which also advises SoftBank on the Arm IPO and DigitalBridge acquisition, represented SoftBank in the transaction. The venture is chaired by <a href=\"/dossiers/brandon-lutnick\">Brandon Lutnick</a>, son of Commerce Secretary <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a>, who controls <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>. Cantor separately custodies more than $80 billion in US Treasury holdings for Tether, the stablecoin issuer that is Twenty One Capital\u2019s majority owner. This structure links SoftBank to the Lutnick family\u2019s dual role in government and finance, and to the stablecoin sector through Tether.</p>",
+        "content": "<p>In April 2025, <a href=\"/dossiers/softbank\">SoftBank</a> joined Tether and <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a> to launch <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a>, a Bitcoin treasury company structured as a SPAC merger through Cantor Equity Partners. Tether contributed $1.6 billion in Bitcoin, Bitfinex $600 million, and SoftBank $900 million via a Delaware subsidiary called Stellar Beacon LLC. The company launched with 42,000 Bitcoin, making it the third-largest corporate holder globally. SoftBank subsequently purchased an additional 89.1 million shares for $780.6 million [Finding #4110].</p><p>Through Stellar Beacon, SoftBank holds 22.3% of Class A and 25.3% of Class B stock, giving it 25.3% voting power. Sullivan & Cromwell LLP, which also advises SoftBank on the Arm IPO and DigitalBridge acquisition, represented SoftBank in the transaction. The venture is chaired by <a href=\"/dossiers/brandon-lutnick\">Brandon Lutnick</a>, son of Commerce Secretary <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a>, who controls <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>. Cantor separately custodies more than $80 billion in US Treasury holdings for Tether, the stablecoin issuer that is Twenty One Capital\u2019s majority owner. This structure links SoftBank to the Lutnick family\u2019s dual role in government and finance, and to the stablecoin sector through Tether.</p>",
         "viz": null
       },
       {
         "id": "epstein-corpus-connections",
         "title": "Epstein Documentary Record",
-        "content": "<p>SoftBank appears in the <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> documentary corpus through several channels, none of which indicate a direct financial relationship between Epstein and SoftBank or Son. On October 14, 2016, <a href=\"/dossiers/jabor-al-thani\">Jabor Al Thani</a>, a Qatari businessman, sent Epstein a SoftBank press release. According to the email record, Epstein replied that he was \u201caware\u201d but considered the Vision Fund \u201ctoo much money,\u201d adding that \u201creturns are generated on small amounts\u201d [Finding #997] [Finding #4247]. Jabor later met Epstein in person at 9 East 71st Street in November 2018, and Epstein introduced him to <a href=\"/dossiers/steve-bannon\">Steve Bannon</a> via email.</p><p>On January 3, 2017, <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, a New York Times financial reporter who functioned as an Epstein media contact, sent Epstein an article about Mohammed bin Salman and the SoftBank Vision Fund [Finding #4248]. On June 12, 2018, <a href=\"/dossiers/david-stern\">David Stern</a> emailed Epstein that he was traveling to Tokyo \u201cto meet Softbank COO\u201d \u2014 a reference to Marcelo Claure, who was also Sprint\u2019s chairman [Finding #4249]. Separately, <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a>\u2019s Special Situations team included SoftBank (ticker 9984 JT) on a \u201cShopping List\u201d of buy recommendations sent to Epstein\u2019s personal email in January 2015 [Finding #4246].</p><p>A further intersection involves the \u201cdark arts\u201d smear campaign against SoftBank executives. In January 2019, Epstein asked <a href=\"/dossiers/eduardo-teodorani-fabbri\">Eduardo Teodorani-Fabbri</a> about <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a>, the intermediary later identified as central to a campaign orchestrated by SoftBank executive <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> against rival executives. The timing places Epstein\u2019s inquiry ten months after the Wall Street Journal first reported on Benedetti\u2019s role in March 2018, suggesting reactive interest in a public scandal rather than prior coordination [Finding #996].</p>",
+        "content": "<p>SoftBank appears in the <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> documentary corpus through several channels, none of which indicate a direct financial relationship between Epstein and <a href=\"/dossiers/softbank\">SoftBank</a> or Son. On October 14, 2016, <a href=\"/dossiers/jabor-al-thani\">Jabor Al Thani</a>, a Qatari businessman, sent Epstein a SoftBank press release. According to the email record, Epstein replied that he was \u201caware\u201d but considered the Vision Fund \u201ctoo much money,\u201d adding that \u201creturns are generated on small amounts\u201d [Finding #997] [Finding #4247]. Jabor later met Epstein in person at 9 East 71st Street in November 2018, and Epstein introduced him to <a href=\"/dossiers/steve-bannon\">Steve Bannon</a> via email.</p><p>On January 3, 2017, <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, a New York Times financial reporter who functioned as an Epstein media contact, sent Epstein an article about Mohammed bin Salman and the SoftBank Vision Fund [Finding #4248]. On June 12, 2018, <a href=\"/dossiers/david-stern\">David Stern</a> emailed Epstein that he was traveling to Tokyo \u201cto meet Softbank COO\u201d \u2014 a reference to Marcelo Claure, who was also Sprint\u2019s chairman [Finding #4249]. Separately, <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a>\u2019s Special Situations team included SoftBank (ticker 9984 JT) on a \u201cShopping List\u201d of buy recommendations sent to Epstein\u2019s personal email in January 2015 [Finding #4246].</p><p>A further intersection involves the \u201cdark arts\u201d smear campaign against SoftBank executives. In January 2019, Epstein asked <a href=\"/dossiers/eduardo-teodorani-fabbri\">Eduardo Teodorani-Fabbri</a> about <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a>, the intermediary later identified as central to a campaign orchestrated by SoftBank executive <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> against rival executives. Analysis of the record indicates the timing places Epstein\u2019s inquiry ten months after the Wall Street Journal first reported on Benedetti\u2019s role in March 2018, suggesting reactive interest in a public scandal rather than prior coordination [Finding #996].</p>",
         "viz": null
       },
       {
         "id": "lobbying-influence",
         "title": "Lobbying and Political Influence Operations",
-        "content": "<p>SoftBank\u2019s Washington influence strategy has evolved from conventional K Street lobbying to direct executive access. During the 2012-2014 Sprint acquisition, records show SoftBank retained Carmen Group Inc and Polsinelli PC for lobbying focused on defense, telecommunications, and intelligence committees [Finding #4116]. No lobbying filings appeared for the subsequent decade, a gap consistent with a shift to personal presidential meetings as Son\u2019s primary access channel [Finding #4298].</p><p>That approach changed in 2025 as SoftBank\u2019s regulatory needs proliferated. The company retained three lobbying operations spending $960,000 or more annually. Miller Strategies LLC, at $720,000 per year, lobbied on AI technology and energy policy. Its lobbyists include James Grimm, former Chief Counsel to Representative Jim Jordan and Deputy Chief of Staff to Representative Darrell Issa, and Lucas Wallwork, former staff on the House Energy and Commerce Committee and Special Assistant to the Secretary of Energy. Tiber Creek Group, at $240,000 per year, focused on AI issues and added Nikole Burroughs, former Senior Director of the House Asia-Pacific Subcommittee [Finding #4314].</p><p>SoftBank\u2019s in-house government affairs team includes several former congressional and executive branch staff. Jeffrey Dressler, formerly National Security Advisor to Speaker Paul Ryan and Majority Leader Kevin McCarthy, heads the operation. Sean Callahan, formerly Deputy Chief of Staff to a Democratic senator, provides bipartisan reach. Emily Christy previously served in the Executive Office of the President and at the Commerce Department\u2019s Advocacy Center [Finding #4314]. The team\u2019s bipartisan composition complements Son\u2019s direct presidential engagement.</p>",
+        "content": "<p>SoftBank\u2019s Washington influence strategy has evolved from conventional K Street lobbying to direct executive access. During the 2012-2014 Sprint acquisition, records show <a href=\"/dossiers/softbank\">SoftBank</a> retained Carmen Group Inc and Polsinelli PC for lobbying focused on defense, telecommunications, and intelligence committees [Finding #4116]. No lobbying filings appeared for the subsequent decade, a gap that analysis suggests is consistent with a shift to personal presidential meetings as Son\u2019s primary access channel [Finding #4298].</p><p>That approach changed in 2025 as SoftBank\u2019s regulatory needs proliferated. The company retained three lobbying operations spending $960,000 or more annually. Miller Strategies LLC, at $720,000 per year, lobbied on AI technology and energy policy. Its lobbyists include James Grimm, former Chief Counsel to Representative Jim Jordan and Deputy Chief of Staff to Representative Darrell Issa, and Lucas Wallwork, former staff on the House Energy and Commerce Committee and Special Assistant to the Secretary of Energy. Tiber Creek Group, at $240,000 per year, focused on AI issues and added Nikole Burroughs, former Senior Director of the House Asia-Pacific Subcommittee [Finding #4314].</p><p>SoftBank\u2019s in-house government affairs team includes several former congressional and executive branch staff. Jeffrey Dressler, formerly National Security Advisor to Speaker Paul Ryan and Majority Leader Kevin McCarthy, heads the operation. Sean Callahan, formerly Deputy Chief of Staff to a Democratic senator, provides bipartisan reach. Emily Christy previously served in the Executive Office of the President and at the Commerce Department\u2019s Advocacy Center [Finding #4314]. The team\u2019s bipartisan composition complements Son\u2019s direct presidential engagement.</p>",
         "viz": null
       },
       {
         "id": "crystal-land",
         "title": "Project Crystal Land and Japanese State Capital",
-        "content": "<p>Project Crystal Land, SoftBank\u2019s internal codename for a proposed nationwide network of \u201cTrump Industrial Parks,\u201d is the largest in scope of Son\u2019s US ventures. Originally conceived as a $1 trillion high-tech city in the Arizona desert, the project evolved through negotiations with Commerce Secretary <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a> into a plan to manufacture semiconductors, fiber-optic cables, data center equipment, and AI chips on federal land across multiple US locations [Finding #4318].</p><p>The funding mechanism is distinctive. Japan reached a trade agreement in July 2025 to invest $550 billion in the US in exchange for lower tariff rates, a structure under which the US government selects where the funds are deployed and retains 90% of profits once Japan recoups its investment. SoftBank has positioned itself as the primary conduit for this sovereign capital flow, with backing from the Japan Bank for International Cooperation and Nippon Export and Investment Insurance. Records indicate the first project under this framework is the $33 billion Portsmouth Powered Land Project in Ohio, a 9.2-gigawatt gas mega-plant operated by SB Energy [Finding #4318] [Finding #4310].</p><p>If realized, Crystal Land would convert Japanese sovereign capital into Trump-administration-branded infrastructure on public land, with SoftBank as the intermediary. The project requires federal land allocation from the Department of the Interior, favorable trade terms from Commerce (led by Lutnick, whose son chairs <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a> alongside SoftBank), and technology partnerships that TSMC reportedly declined to provide [Finding #4111] [Finding #4318]. The project\u2019s dependence on approvals from multiple federal agencies underscores the regulatory exposure embedded in SoftBank\u2019s US investment strategy.</p>",
+        "content": "<p>Project Crystal Land, <a href=\"/dossiers/softbank\">SoftBank</a>\u2019s internal codename for a proposed nationwide network of \u201cTrump Industrial Parks,\u201d is the largest in scope of Son\u2019s US ventures. Originally conceived as a $1 trillion high-tech city in the Arizona desert, the project evolved through negotiations with Commerce Secretary <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a> into a plan to manufacture semiconductors, fiber-optic cables, data center equipment, and AI chips on federal land across multiple US locations [Finding #4318].</p><p>The funding mechanism is distinctive. Japan reached a trade agreement in July 2025 to invest $550 billion in the US in exchange for lower tariff rates, a structure under which the US government selects where the funds are deployed and retains 90% of profits once Japan recoups its investment. SoftBank has positioned itself as the primary conduit for this sovereign capital flow, with backing from the Japan Bank for International Cooperation and Nippon Export and Investment Insurance. Records indicate the first project under this framework is the $33 billion Portsmouth Powered Land Project in Ohio, a 9.2-gigawatt gas mega-plant operated by SB Energy [Finding #4318] [Finding #4310].</p><p>If realized, Crystal Land would convert Japanese sovereign capital into Trump-administration-branded infrastructure on public land, with SoftBank as the intermediary. The project requires federal land allocation from the Department of the Interior, favorable trade terms from Commerce (led by Lutnick, whose son chairs <a href=\"/dossiers/twenty-one-capital\">Twenty One Capital</a> alongside SoftBank), and technology partnerships that TSMC reportedly declined to provide [Finding #4111] [Finding #4318]. The project\u2019s dependence on approvals from multiple federal agencies underscores the regulatory exposure embedded in SoftBank\u2019s US investment strategy.</p>",
         "viz": null
+      },
+      {
+        "id": "wework-capitalization",
+        "title": "WeWork Capitalization and the 2019 Rescue",
+        "content": "<p>SoftBank's investment in <a href=\"/dossiers/we-company\">WeWork</a> began in January 2017 and grew across equity, convertible notes, warrants, and tender offers. According to WeWork's 2019 Form S-1, <a href=\"/dossiers/softbank\">SoftBank</a> Group Corp., SoftBank Vision Fund L.P. and affiliated entities had invested or committed approximately $10.65 billion since January 1, 2017, including a $1.7 billion Series G round through SBWW Investments Ltd, $1.65 billion in regional joint ventures, a $1.3 billion tender offer in 2017, a $1.0 billion convertible note in 2018 that converted into 9,090,909 Series G-1 shares, a $2.5 billion warrant exercised for 22,727,273 Series G-1 shares, a $1.0 billion tender offer in 2019, and a $1.5 billion warrant payable in April 2020 [Finding #11360]. SoftBank Group Capital Ltd separately owned 99.99% of the Creator Fund and committed $180 million to it, of which $50.7 million was funded as of June 30, 2019 [Finding #11360].</p><p>The October 2019 rescue restructured the relationship onto debt instruments. Under a Master Senior Unsecured Notes Purchase Agreement dated December 27, 2019, a SoftBank affiliate, StarBright WW LP, agreed to purchase up to $2.2 billion of 5.00% Senior Notes due 2025; the full $2.2 billion was issued in closings beginning July 10, 2020, and the notes were later split into a $1.65 billion Series I tranche held by SoftBank and a $550 million Series II tranche resold to the public [Finding #11387]. WeWork's filing recorded that, because attached warrants obligated share issuance, the implied interest rate at closing was approximately 11.69% [Finding #11387]. In connection with the same financing, SoftBank received two tranches of $0.01-exercise-price warrants \u2014 a Senior Unsecured Notes Warrant for 71,541,399 preferred shares valued at $569 million at issuance, and a 2020 Letter of Credit Facility Warrant for 35,770,699 shares valued at $284 million, together approximately $853 million in at-issuance value, recorded as the SoftBank Debt Financing Warrant Liability [Finding #11388].</p><p>A withdrawn 2019 tender offer was resolved through a February 25, 2021 settlement agreement. Under it, SoftBank's SVF II and SVF Cayman entities launched a new tender offer on March 10, 2021 and acquired $922 million of legacy WeWork equity securities at $23.23 per share, completing the purchase of an aggregate 39,678,319 shares by April 15, 2021 [Finding #11379]. <a href=\"/dossiers/adam-neumann\">Adam Neumann</a>, WE Holdings LLC and related parties were excluded from that tender offer and transacted separately with SoftBank Group [Finding #11379].</p>",
+        "viz": null
+      },
+      {
+        "id": "letter-of-credit-structure",
+        "title": "Letter-of-Credit Facility and SoftBank's Position",
+        "content": "<p>WeWork's letter-of-credit financing originated in a Credit Agreement dated December 27, 2019, the same day as the unsecured notes agreement. As of December 31, 2022, the facility provided a $1.25 billion Senior Letter of Credit Tranche and a $350 million Junior Letter of Credit Tranche, with $1.1 billion of standby letters of credit outstanding under the senior tranche and the full $350 million drawn under the junior tranche [Finding #11389]. <a href=\"/dossiers/softbank\">SoftBank</a> Vision Fund II was the co-obligor on the Senior Letter of Credit Tranche, having been substituted for SoftBank Group via the December 2022 Fifth Amendment, while SoftBank Group remained co-obligor on the junior tranche; SoftBank paid letter-of-credit fees, including a 7.045% rate on the senior tranche [Finding #11389].</p><p>Securities filings tie the facility's investment-adviser chain to a named SoftBank executive. In WeWork's Schedule 13D filed in October 2021 after the business combination, the SVF II reporting-person chain runs through SB Global Advisers Limited, a UK-organized entity at 69 Grosvenor Street, London, whose directors were Spencer Collins, <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, and Neil Hadley [Finding #11390]. That filing identifies SB Global Advisers as the adviser entity within the SVF II structure that served as co-obligor on WeWork's senior letter-of-credit tranche [Finding #11390].</p><p>WeWork became publicly listed on October 20, 2021 by merging with BowX Acquisition Corp, a special-purpose acquisition company. The Schedule 13D reported that SoftBank beneficially owned between 48.1% and 48.5% of WeWork's Class A common stock, based on 696,492,801 Class A shares outstanding; SB WW Holdings (Cayman) Limited received 320,298,461 Class A shares plus a warrant to purchase 28,948,838 shares at $0.01, and a Stockholders Agreement allowed SB WW Holdings to designate three board nominees while holding at least 50% of the Class A stock [Finding #11391]. In a March 17, 2023 transaction support agreement, SoftBank affiliates held $1.65 billion of the Senior Notes due 2025 and $500 million of Senior Secured Notes due 2025, agreed to extend the maturities of the existing letter-of-credit facilities, and committed to keep voting limitations in place so long as SoftBank owned more than 49.9% of WeWork's voting power [Finding #11405].</p>",
+        "viz": null
+      },
+      {
+        "id": "wework-bankruptcy-claims",
+        "title": "WeWork Bankruptcy and Creditors'-Committee Claims",
+        "content": "<p>WeWork filed for Chapter 11 protection in the District of New Jersey (No. 23-19865) in November 2023. Under the plan of reorganization, all preexisting equity interests and the junior and unsecured debt classes were canceled with zero recovery; <a href=\"/dossiers/softbank\">SoftBank</a>, which the plan documents described as holding roughly 80% fully-diluted economic ownership before the filing, retained its equity by contributing claims, while approximately 80% control of the reorganized company was sold to Cupar Grimmond LLC, a vehicle associated with Yardi [Finding #11407]. On the effective date, SoftBank and the debtors entered a six-year Exit Letter of Credit Facility under which SoftBank retained rights to the Exit LC SoftBank Cash Collateral, released only as letters of credit expired or on a change of control, refinancing, or maturity, and took 62.5% of deposit interest on the collateral [Finding #11410]. The confirmed plan granted broad third-party releases covering the SoftBank parties, the debtor-in-possession and letter-of-credit lenders, Cupar, the ad hoc group, and their directors and officers, which the confirmation order (Docket #2060, filed May 30, 2024) approved in their entirety as consensual [Finding #11411].</p><p>Before the releases took effect, the official creditors' committee sought standing to pursue estate claims against the SoftBank parties. In its standing motion (Docket #1436), the creditors' committee alleged that SoftBank sat on both sides of the May 2023 uptier transaction and breached a fiduciary duty of loyalty as a controlling shareholder, asserting that SoftBank received $300 million in cash through a redemption, canceled a $200 million secured-note purchase commitment, and took secured notes convertible to equity unavailable to public noteholders [Finding #11412]. The committee further alleged that the 2023 uptier was a constructive or actual fraudulent transfer that created approximately $2.4 billion in new secured claims for only about one-quarter of that amount in new money, with SoftBank's contribution being a recycle of the $300 million it had just received [Finding #11413]. The committee characterized the $300 million redemption as an avoidable insider preference, stating that SoftBank was paid at par before maturity and then re-lent the same $300 million as first-lien debt while collecting $6.25 million in commitment fees [Finding #11414].</p><p>The committee also moved to equitably subordinate and recharacterize as equity SoftBank's full claim stack \u2014 approximately $1.5 billion in letter-of-credit facility claims plus secured and exchangeable notes \u2014 arguing that discovery showed SoftBank acted from the viewpoint of an equity holder [Finding #11416]. In a separate allegation the committee described the 2019 Master Transaction Agreement rescue as a \"bait-and-switch,\" asserting that after SoftBank gained 72% control it directed Marcelo Claure not to draw the committed capital, returning WeWork to its earlier liquidity crisis [Finding #11417]. These claims were allegations in a standing motion and were never adjudicated [Finding #11412][Finding #11413][Finding #11414][Finding #11416][Finding #11417]. They were extinguished by a UCC settlement embedded in the Third Amended Plan, under which the $33 million gross settlement consideration was reduced by professional and committee expenses of up to $32.65 million, leaving net proceeds to unsecured and 3L noteholders potentially as low as approximately $350,000, and under which each party waived its right to assert avoidance actions [Finding #11418]. Deal counsel to SoftBank in the October 2019 rescue was Weil, Gotshal & Manges and Morrison & Foerster, identified in WeWork's press release and in the 2021 business-combination filing, which repeatedly named Morrison & Foerster as counsel to SoftBank Group [Finding #11477]; in this case <a href=\"/dossiers/paul-weiss\">Paul, Weiss</a> represented Neumann personally rather than SoftBank or WeWork [Finding #11477].</p><p>Analysis of four other Vision Fund holdings characterizes WeWork as one instance of a recurring outcome in which SoftBank absorbed losses on highly marked companies that then declined in public markets; the review of View Inc, Fair, Zume, and Wirecard treats WeWork and OYO as the cases involving founder margin loans, and Wirecard \u2014 where a 2019 convertible bond was placed largely with outside investors through a <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a>-arranged note \u2014 as the variant in which SoftBank limited its own exposure and passed the loss to others [Finding #11563].</p>",
+        "viz": "timeline"
       }
     ],
+    "system_role": "SoftBank Group is a Japanese technology conglomerate that channels large-scale investment capital \u2014 primarily from Gulf sovereign wealth funds and Japanese government-backed financing \u2014 into US technology infrastructure, with major investment commitments announced in coordination with successive presidential administrations.",
     "open_questions": [
       "What is the actual funding status of Stargate's $500 billion headline commitment, given that as of mid-2025 partners had not resolved governance disputes over the Texas campus and no funds had been raised for the full amount? [Finding #4320]",
       "What CFIUS conditions, if any, were attached to the Ampere Computing acquisition, and did SoftBank's simultaneous ~90% ownership of Arm Holdings factor into the FTC's decision to drop its second request? [Finding #4315]",
@@ -736,5 +1519,223 @@
       "jurisdictional-arbitrage",
       "complexity-as-credential"
     ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "SoftBank Group",
+      "connections": [
+        {
+          "target": "Cantor Fitzgerald",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC S-4 Twenty One Capital, Cantor press release 2025-04-23",
+          "description": "SoftBank and Cantor Fitzgerald co-founded Twenty One Capital (Bitcoin treasury company) via SPAC merger. SoftBank contributed $900M BTC initially, then bought additional $780M shares. Brandon Lutnick (son of Commerce Sec Howard Lutnick) chairs Cantor. Tether is third partner. Sullivan & Cromwell advised SoftBank."
+        },
+        {
+          "target": "Tether",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC filings Twenty One Capital, Cantor press release",
+          "description": "Co-investors in Twenty One Capital (Bitcoin treasury). Tether contributed $1.6B BTC, SoftBank $900M BTC via Stellar Beacon LLC. Tether is majority owner. Both connected via Cantor Fitzgerald (Cantor manages Tether's treasury, processes redemptions)."
+        },
+        {
+          "target": "MGX",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Stargate equity structure, Stargate UAE announcement, MGX Wikipedia",
+          "description": "Co-investors in Stargate LLC (SoftBank 40%, MGX 10%). Both participate in Stargate UAE with G42, Nvidia, Oracle, OpenAI, Cisco. MGX launched by Mubadala/G42 in 2024 with $100B AUM target. MGX also invested in OpenAI secondary sale. Both funded by Middle East sovereign wealth."
+        },
+        {
+          "target": "OpenAI",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SoftBank Group press release 2025-12-31, Stargate announcement",
+          "description": "SoftBank invested $40B in OpenAI (11% stake, 2nd largest shareholder). Co-founders of Stargate LLC (40% each). OpenAI has operational responsibility, SoftBank financial. $1B joint investment in SB Energy. SoftBank sold Nvidia stake to fund OpenAI investment."
+        },
+        {
+          "target": "Sullivan & Cromwell LLP",
+          "type": "advisory",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "S&C advises SoftBank on Arm IPO, Twenty One Capital, DigitalBridge, T-Mobile monetization; simultaneously advises OpenAI on Stargate and SB Energy"
+        },
+        {
+          "target": "Saudi PIF",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "PIF press releases 2016-2017, MENABYTES VF2 reporting",
+          "description": "Saudi PIF was anchor LP in Vision Fund 1 ($45B committed, ~$35B deployed). PIF and Mubadala together provided ~2/3 of VF1's $93B capital. PIF did NOT invest in Vision Fund 2. SoftBank forayed into Saudi Arabia in 2021. Vision Fund connected SoftBank to both Saudi and UAE sovereign wealth."
+        },
+        {
+          "target": "G42",
+          "type": "corporate",
+          "strength": 0.7,
+          "evidence_ref": "Stargate UAE announcement, G42 press release",
+          "description": "SoftBank and G42 are partners in Stargate UAE (1GW data center, 5GW campus in Abu Dhabi). SoftBank provides connectivity infrastructure, G42 operates compute cluster with OpenAI/Oracle. G42 chaired by Tahnoon. MGX (launched by Mubadala/G42) is SoftBank's co-investor in Stargate US."
+        }
+      ],
+      "secondHop": {
+        "Cantor Fitzgerald": [
+          {
+            "target": "US Commerce Department",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head."
+          },
+          {
+            "target": "Tether Operations Limited",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues."
+          },
+          {
+            "target": "Howard Lutnick",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address."
+          },
+          {
+            "target": "Tether Holdings Limited",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total)."
+          },
+          {
+            "target": "Parabridge International Services",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers."
+          }
+        ],
+        "G42": [
+          {
+            "target": "Martin Edelman",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "General counsel of G42. Board positions across multiple Tahnoon entities: MGX, MBZUAI, GlobalFoundries, Manchester City FC."
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Chairman and controlling shareholder of G42 since its founding in 2018"
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "G42 executives (Edelman, Peng Xiao) signed WLFI deal and took board seats. G42 personnel manage Aryam Investment 1."
+          },
+          {
+            "target": "Nvidia",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "G42 receives 100K advanced Nvidia chips/year under BIS-approved RTE framework; initial tranche 35K Blackwell GB300 chips"
+          },
+          {
+            "target": "Microsoft",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Microsoft $1.5B investment in G42 Apr 2024; $15.2B UAE data center investment Nov 2025"
+          }
+        ],
+        "MGX": [
+          {
+            "target": "World Liberty Financial",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
+          },
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi"
+          },
+          {
+            "target": "OpenAI",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'"
+          },
+          {
+            "target": "Mubadala Investment Co PJSC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "MGX is an Abu Dhabi tech investment vehicle backed by Mubadala sovereign wealth fund. MGX Fund Management (US) LLC is the US-registered entity."
+          },
+          {
+            "target": "Tahnoun bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm."
+          }
+        ],
+        "OpenAI": [
+          {
+            "target": "Oscar Health",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Oscar Health deploys OpenAI-powered AI agent Oswell for member healthcare support while Kushner is major OpenAI investor"
+          },
+          {
+            "target": "Josh Kushner",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Thrive Capital invested 1B+ in OpenAI across multiple rounds while OpenAI took stake in Thrive Holdings creating circular bidirectional investment"
+          },
+          {
+            "target": "Kevin Weil",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CPO of OpenAI, commissioned as D201 LTC 3 days before OpenAI received $200M Pentagon OTA"
+          },
+          {
+            "target": "Department of Defense",
+            "type": "contracts_with",
+            "strength": 1.0,
+            "description": "$200M prototype OTA from CDAO awarded June 16 2025 for frontier AI in warfighting and enterprise domains"
+          },
+          {
+            "target": "Sam Altman",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Altman is CEO of OpenAI. OpenAI's energy procurement needs (data center power) directly conflicted with Altman's Oklo chairmanship, prompting his April 2025 board resignation."
+          }
+        ],
+        "Tether": [
+          {
+            "target": "Twenty One Capital",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tether Investments S.A. de C.V. (El Salvador) is PIPE investor contributing Bitcoin to business combination"
+          },
+          {
+            "target": "Bo Hines",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CEO of Tether USA USAT stablecoin division, appointed Sep 2025, 22 days after White House resignation"
+          }
+        ],
+        "Saudi PIF": [
+          {
+            "target": "Affinity Partners",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Saudi PIF committed 2B to Affinity within weeks of launch despite advisory board opposing; 87M in fees paid with zero returns; Wyden: likely FARA-circumventing compensation scheme"
+          }
+        ],
+        "Sullivan & Cromwell LLP": [
+          {
+            "target": "Donald Trump",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "S&C co-chair Giuffra leads Trump criminal appeal; Jeffrey Wall (ex-Acting SG) argues Trump cases; Jay Clayton (ex-SEC Chair) returned to firm"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
   }
 }
