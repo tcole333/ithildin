@@ -8,15 +8,16 @@ Tools for searching document collections, email archives, entity databases, and 
 
 | Tool | Scope | Storage | Auth | Size |
 |------|-------|---------|------|------|
-| `ingest_kabasshouse.py` | **Most complete Epstein corpus** — DOJ DS1-12 + FBI + House, fully OCR'd + structured | Local SQLite (FTS5) | None | 1.42M docs, 10.6M entities, 49.7K txns |
-| `query_doj.py` | DOJ Vol 11 OCR'd pages | Local SQLite (FTS5) | None | 331K pages |
-| `query_lmsband.py` | LMSBAND Epstein Files | Local SQLite (FTS5) | None | 60K files, 851K entities |
+| `ingest_kabasshouse.py` | **PRIMARY — most complete Epstein corpus** — DOJ DS1-12 + FBI + House, fully OCR'd + structured | Local SQLite (FTS5) | None | 1.42M docs, 10.6M entities, 49.7K txns |
+| `query_doj.py` | DOJ Vol 11 OCR'd pages (FALLBACK — strict subset of kabasshouse) | Local SQLite (FTS5) | None | 331K pages |
+| `query_lmsband.py` | LMSBAND Epstein Files (text overlaps kabasshouse; unique structured financials) | Local SQLite (FTS5) | None | 60K files, 851K entities |
 | `query_unified.py` | Unified DB (emails + docs + entities) | Local SQLite (FTS5) | None | 70K docs, 56K entities |
 | `query_documentcloud.py` | DocumentCloud journalism archive | Remote API | None (public) | Millions of docs |
 | `query_muckrock.py` | MuckRock FOIA requests | Remote API | None (public) | 114K+ requests |
 | `query_investigations.py` | Ingested investigation PDF reports | Local SQLite (FTS5) | None | Varies |
 | `ingest_pdf.py` | PDF text extraction pipeline | Local SQLite (FTS5) | None | N/A (ingestion) |
 | `ingest_epstein_20k.py` | House Oversight 20K docs | Local SQLite (FTS5) | None | 25.8K docs |
+| `ingest_fbi_files.py` | FBI release + named exhibits (Flight Log, Contact Book) | Local SQLite (FTS5) | None | 8,150 docs |
 | `ingest_epstein_exposed.py` | EpsteinExposed.com corpus | Remote API + Local DB | None | 1.5M docs, 1.2K persons |
 
 **NOTE:** The first four tools are investigation-specific corpora (configured per investigation profile). DocumentCloud and MuckRock are general-purpose. The `ingest_epstein_*` tools are Epstein-investigation-specific.
@@ -58,6 +59,10 @@ generations (`<cfg>-N-of-M.parquet` canonical + a bare id-less `<cfg>-N.parquet`
 the `-of-` shards to avoid double-counting.
 
 ### query_doj.py -- DOJ Vol 11
+
+**FALLBACK only.** Every DOJ Vol 11 EFTA page is present in kabasshouse (verified 99.5%+ on
+cited ids) at equal-or-better OCR quality. Use for cross-checking a specific extraction, not
+as a primary search target. Note the DB lives at an external path outside this repo.
 
 ```bash
 uv run python tools/query_doj.py search "churkin ambassador" --limit 20 --context 200

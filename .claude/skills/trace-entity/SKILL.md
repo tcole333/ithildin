@@ -87,10 +87,10 @@ If matches found, trace the full graph:
 - What other entities share the same officers?
 - Which leak (Panama Papers, Paradise Papers, etc.) exposed it?
 
-### 3. DOJ Records
+### 3. Document Corpus (Kabasshouse primary)
 ```bash
-python tools/query_doj.py search "<ENTITY>" --limit 30 --output $WORKDIR/trace-doj.json
-python tools/duggan_search.py "<ENTITY>" -n 30 --output $WORKDIR/trace-duggan.json
+python tools/ingest_kabasshouse.py search "<ENTITY>" --limit 30 --json > $WORKDIR/trace-kabass.json
+python tools/ingest_kabasshouse.py entity "<ENTITY>" > $WORKDIR/trace-kabass-ent.txt
 ```
 
 Look for:

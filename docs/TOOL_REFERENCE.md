@@ -11,8 +11,10 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | Source Name | Tool(s) | Description |
 |-------------|---------|-------------|
 | `web_search` | WebSearch, WebFetch | Open web research |
-| `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus |
-| `duggan` | duggan_search.py | Duggan USA corpus |
+| `kabass` | ingest_kabasshouse.py | **PRIMARY Epstein corpus** — 1.42M OCR'd docs (DOJ DS1-12 + FBI + House) + structured layers. Same EFTA page in kabass + doj_vol11/lmsband = one source, not corroboration |
+| `fbi` | ingest_fbi_files.py | FBI release (8,150 docs) + named exhibits (Flight Log, Contact Book) |
+| `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus (fallback — subset of kabass) |
+| `duggan` | _(retired — tool removed 2026-06-29)_ | Duggan USA corpus — historical source name only; 42 findings cite it |
 | `lmsband` | query_lmsband.py | LMSBAND document corpus |
 | `unified_db` | query_unified.py | Unified document database |
 | `fec` | query_fec.py | FEC campaign finance |
@@ -253,11 +255,6 @@ uv run python scripts/populate_threads.py --stats      # show current assignment
 ```
 
 ## Document Corpus
-
-### DugganUSA (204K+ docs, all 12 DOJ datasets)
-```bash
-python tools/duggan_search.py "query" --output /tmp/results.json
-```
 
 ### DOJ Vol 11 (331K pages, FTS5, EFTA IDs)
 ```bash

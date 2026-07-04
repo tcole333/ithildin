@@ -222,36 +222,43 @@ threads:
     keywords: []
 
 # Document corpus tools specific to this investigation
+# Ordered by search priority: kabasshouse is the PRIMARY first stop for full-text;
+# the rest are complementary (structured layers) or fallback (subset re-OCRs).
 corpus_tools:
-  - tool: "tools/query_doj.py"
-    name: "DOJ Vol 11"
-    description: "331K OCR'd pages, FTS5, EFTA IDs"
-    commands: ["search", "efta", "count", "names"]
-
-  - tool: "tools/duggan_search.py"
-    name: "DugganUSA"
-    description: "204K+ docs, all 12 DOJ datasets"
-    commands: ["search"]
-
-  - tool: "tools/query_lmsband.py"
-    name: "LMSBAND"
-    description: "60K files, 851K entities"
-    commands: ["search", "entity", "file"]
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "PRIMARY: 1.42M OCR'd docs (DOJ DS1-12 + FBI + House), 10.6M entities, 49.7K financial txns, 5.8K curated gold docs"
+    commands: ["search", "doc", "entity", "financials", "curated"]
 
   - tool: "tools/query_unified.py"
     name: "Unified DB"
-    description: "70K docs, 56K entities, 107K triples"
+    description: "COMPLEMENTARY: 107K semantic triples, 45K co-occurrence edges, 8.3K parsed emails (relationships, not text redundancy)"
     commands: ["search", "entity", "related"]
+
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND"
+    description: "COMPLEMENTARY: structured financials (flights, positions, balances, CC statements); text search redundant with kabasshouse"
+    commands: ["search", "entity", "file"]
 
   - tool: "tools/ingest_epstein_20k.py"
     name: "Epstein Files 20K"
-    description: "25,800 House Oversight docs"
+    description: "25,800 House Oversight docs, distinct HOUSE_OVERSIGHT_* IDs"
     commands: ["search"]
+
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Files"
+    description: "8,150 FBI release docs + named exhibits (Flight Log, Contact Book, Maxwell Evidence List)"
+    commands: ["search", "overlap"]
 
   - tool: "tools/ingest_epstein_exposed.py"
     name: "EpsteinExposed"
     description: "Persons, documents, flights"
     commands: ["search-persons", "search-docs", "search-flights"]
+
+  - tool: "tools/query_doj.py"
+    name: "DOJ Vol 11"
+    description: "FALLBACK: 331K pages, strict subset of kabasshouse (external DB path); use for cross-checking only"
+    commands: ["search", "efta", "count", "names"]
 
 # Key investigation dates
 key_dates:
