@@ -125,6 +125,9 @@ def _get_db_standalone():
 
 VALID_SOURCES = [
     "web_search", "doj_vol11", "duggan", "lmsband", "unified_db",
+    # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
+    # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
+    "kabass", "fbi",
     "fec", "edgar", "courtlistener", "990", "registry",
     "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
     "gdelt", "aleph", "icij", "acris", "gleif", "opensanctions",
@@ -269,20 +272,60 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     except Exception:
         pass
 
+    # Precision-aware temporal columns (bare-year/month dates otherwise vanish
+    # from event_timeline date() range queries — see tools/date_normalize.py).
+    event_date_iso = date_precision = None
+    if date_of_event:
+        try:
+            from tools.date_normalize import normalize_date
+            event_date_iso, date_precision = normalize_date(date_of_event)
+        except Exception:
+            pass
+
     db = _get_db_standalone()
     sources_json = json.dumps(source_datasets) if source_datasets else None
+
+    # Warn on profile/thread drift (don't block — warn-only like VALID_SOURCES).
+    # A finding carries a GLOBAL thread_id but profiles number threads LOCALLY in
+    # config, so writing profile_id=X with a thread owned by profile Y silently
+    # mis-homes the record (see scripts/audit_profile_threads.py). Surface it at
+    # write time so new drift is caught before it accumulates.
+    if thread_id is not None and profile_id is not None:
+        try:
+            row = db.execute(
+                "SELECT profile_id FROM investigation_threads WHERE id = ?",
+                (thread_id,),
+            ).fetchone()
+            if row is not None:
+                thread_profile = row["profile_id"] if not isinstance(row, tuple) else row[0]
+                if thread_profile is not None and thread_profile != profile_id:
+                    print(
+                        f"WARNING: profile/thread drift — profile_id='{profile_id}' but "
+                        f"thread {thread_id} belongs to profile '{thread_profile}'. The "
+                        f"finding will be recorded as '{profile_id}'; if this profile numbers "
+                        f"threads locally, use its GLOBAL thread id (see "
+                        f"scripts/audit_profile_threads.py).",
+                        file=sys.stderr,
+                    )
+        except Exception:
+            pass
 
     cursor = db.execute("""
         INSERT INTO findings (target_name, finding_type, summary, detail,
                              source_datasets, confidence, date_of_event, lead_id,
                              claim_type, verification_status, thread_id,
                              quality_state, confidence_requested, profile_id,
-                             agent_run_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?)
+                             agent_run_id, event_date_iso, date_precision)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?, ?, ?)
     """, (target_name, finding_type, summary, detail,
           sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
-          profile_id, agent_run_id))
+          profile_id, agent_run_id, event_date_iso, date_precision))
     finding_id = cursor.lastrowid
+
+    # Link the finding to a canonical entity so it's visible to network/graph
+    # analysis (identity was historically string-only via target_name). Best-effort:
+    # a resolution failure must never block recording the finding.
+    _link_finding_entity(db, finding_id, target_name, agent_run_id=agent_run_id)
 
     if evidence_ids:
         for ev in evidence_ids:
@@ -642,6 +685,78 @@ def _ensure_entity(db, name, entity_type="unknown", source="auto:connect", agent
     return (res.entity_id, created)
 
 
+def _link_finding_entity(db, finding_id, target_name, mention_role="subject",
+                         agent_run_id=None):
+    """Best-effort link finding -> canonical entity in finding_entities.
+
+    Resolves target_name through the same alias->exact->fuzzy path connections use
+    (resolve_or_create_entity), so a finding's subject becomes a first-class graph
+    node instead of a bare string. Never raises: a resolver failure leaves the
+    finding recorded with only its target_name (dual-read fallback still works).
+    Skips silently if the finding_entities table doesn't exist (pre-migration DB).
+    """
+    if not target_name or not target_name.strip():
+        return None
+    try:
+        exists = db.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='finding_entities'"
+        ).fetchone()
+        if not exists:
+            return None
+        try:
+            from tools.entity_resolution import resolve_or_create_entity
+        except ImportError:
+            from entity_resolution import resolve_or_create_entity
+        res = resolve_or_create_entity(
+            db, target_name.strip(), entity_type="unknown",
+            source="auto:finding", agent_run_id=agent_run_id)
+        if res.entity_id is None:
+            return None
+        method = {"exact": "exact", "alias": "alias", "fuzzy": "fuzzy",
+                  "created": "created"}.get(res.action, res.action)
+        db.execute("""
+            INSERT OR IGNORE INTO finding_entities
+                (finding_id, entity_id, mention_role, raw_name,
+                 resolution_status, resolution_method, resolution_score)
+            VALUES (?, ?, ?, ?, 'asserted', ?, ?)
+        """, (finding_id, res.entity_id, mention_role, target_name.strip(),
+              method, getattr(res, "score", None)))
+        return res.entity_id
+    except Exception as e:
+        print(f"  (finding-entity link skipped: {e})", file=sys.stderr)
+        return None
+
+
+def relate_findings(from_finding_id, to_finding_id, relation_type,
+                    assessment=None, created_by=None):
+    """Record a typed relation between two findings (contradicts/corroborates/etc).
+
+    Replaces the prior practice of burying "contradicted by #NNNN" in
+    corrections.reason prose, making the claim graph queryable. Returns True on
+    insert. Idempotent via the UNIQUE constraint.
+    """
+    valid = {"contradicts", "corroborates", "supersedes",
+             "duplicates", "refines", "depends_on"}
+    if relation_type not in valid:
+        raise ValueError(f"relation_type must be one of {sorted(valid)}")
+    if from_finding_id == to_finding_id:
+        raise ValueError("a finding cannot relate to itself")
+    db = _get_db_standalone()
+    for fid in (from_finding_id, to_finding_id):
+        if not db.execute("SELECT 1 FROM findings WHERE id = ?", (fid,)).fetchone():
+            db.close()
+            raise ValueError(f"finding #{fid} does not exist")
+    db.execute("""
+        INSERT OR IGNORE INTO finding_relations
+            (from_finding_id, to_finding_id, relation_type, assessment, created_by)
+        VALUES (?, ?, ?, ?, ?)
+    """, (from_finding_id, to_finding_id, relation_type, assessment,
+          created_by or "findings_tracker"))
+    db.commit()
+    db.close()
+    return True
+
+
 def add_connection(person_a, person_b, relationship_type=None, description=None,
                    evidence_ids=None, strength="medium", date_range=None, finding_id=None,
                    profile_id=None, agent_run_id=None,
@@ -969,6 +1084,18 @@ def main():
     dispute_p.add_argument("id", type=int)
     dispute_p.add_argument("--reason", "-r", required=True)
     dispute_p.add_argument("--by", default="human")
+    dispute_p.add_argument("--contradicted-by", type=int, metavar="FINDING_ID",
+                           help="Record a structured 'contradicts' relation to this finding")
+
+    # relate — typed finding-to-finding relation (claim graph)
+    relate_p = subparsers.add_parser("relate", help="Record a typed relation between two findings")
+    relate_p.add_argument("from_id", type=int)
+    relate_p.add_argument("to_id", type=int)
+    relate_p.add_argument("--type", "-t", required=True, dest="relation_type",
+                          choices=["contradicts", "corroborates", "supersedes",
+                                   "duplicates", "refines", "depends_on"])
+    relate_p.add_argument("--assessment", "-a", help="Why the relation holds")
+    relate_p.add_argument("--by", default="human")
 
     # retract
     retract_p = subparsers.add_parser("retract", help="Retract a finding (cascades to connections)")
@@ -1122,6 +1249,15 @@ def main():
     elif args.command == "dispute":
         dispute_finding(args.id, reason=args.reason, corrected_by=args.by)
         print(f"Disputed finding #{args.id}: {args.reason}")
+        if getattr(args, "contradicted_by", None):
+            relate_findings(args.id, args.contradicted_by, "contradicts",
+                            assessment=args.reason, created_by=args.by)
+            print(f"  + recorded relation: #{args.id} contradicts #{args.contradicted_by}")
+
+    elif args.command == "relate":
+        relate_findings(args.from_id, args.to_id, args.relation_type,
+                        assessment=args.assessment, created_by=args.by)
+        print(f"Recorded: #{args.from_id} {args.relation_type} #{args.to_id}")
 
     elif args.command == "retract":
         if retract_finding(args.id, reason=args.reason, corrected_by=args.by):

@@ -453,17 +453,31 @@ def window_events(start_date, end_date, profile_id=None, all_profiles=False):
         ORDER BY event_date
     """, event_params).fetchall()]
 
-    # Also find findings with dates in this range
-    finding_conditions = ["date_of_event BETWEEN ? AND ?"]
-    finding_params = [start_date, end_date]
+    # Also find findings whose date interval OVERLAPS this range. Use the
+    # normalized event_date_iso (+ date_precision to widen year/month values to
+    # their full interval) so bare-year/month findings are visible; fall back to
+    # the raw text column only for rows the migration hasn't normalized.
+    # Overlap test: finding_start <= range_end AND finding_end >= range_start.
+    finding_conditions = [
+        "(CASE date_precision "
+        "  WHEN 'year'  THEN substr(event_date_iso,1,4)||'-01-01' "
+        "  WHEN 'month' THEN substr(event_date_iso,1,7)||'-01' "
+        "  ELSE event_date_iso END) <= ?",
+        "(CASE date_precision "
+        "  WHEN 'year'  THEN substr(event_date_iso,1,4)||'-12-31' "
+        "  WHEN 'month' THEN date(substr(event_date_iso,1,7)||'-01','+1 month','-1 day') "
+        "  ELSE event_date_iso END) >= ?",
+    ]
+    finding_params = [end_date, start_date]
     if resolved_profile:
         finding_conditions.append("profile_id = ?")
         finding_params.append(resolved_profile)
     findings = [dict(r) for r in db.execute(f"""
-        SELECT id, target_name, summary, confidence, date_of_event, created_at
+        SELECT id, target_name, summary, confidence, date_of_event,
+               event_date_iso, date_precision, created_at
         FROM findings
-        WHERE {' AND '.join(finding_conditions)}
-        ORDER BY date_of_event
+        WHERE event_date_iso IS NOT NULL AND {' AND '.join(finding_conditions)}
+        ORDER BY event_date_iso
     """, finding_params).fetchall()]
 
     db.close()
@@ -476,7 +490,8 @@ def near_finding(finding_id, days=14, profile_id=None, all_profiles=False):
     db = get_timeline_db()
     resolved_profile = _resolve_profile(profile_id, all_profiles)
 
-    finding_query = "SELECT id, target_name, summary, date_of_event, created_at FROM findings WHERE id = ?"
+    finding_query = ("SELECT id, target_name, summary, date_of_event, event_date_iso, "
+                     "date_precision, created_at FROM findings WHERE id = ?")
     finding_params = [finding_id]
     if resolved_profile:
         finding_query += " AND profile_id = ?"
@@ -486,7 +501,9 @@ def near_finding(finding_id, days=14, profile_id=None, all_profiles=False):
         db.close()
         return None
 
-    ref_date = finding["date_of_event"] or finding["created_at"][:10]
+    # Prefer the normalized ISO date; a raw bare-year like "2015" would make
+    # date(ref, '-N days') return year -4707 and silently match nothing.
+    ref_date = finding["event_date_iso"] or finding["created_at"][:10]
 
     event_query = """
         SELECT * FROM event_timeline
