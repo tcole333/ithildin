@@ -67,6 +67,17 @@ VALID_RELATIONSHIP_TYPES = [
     "successor_to", "shares_officer", "supplies",
 ]
 VALID_STRENGTHS = ["strong", "medium", "weak", "circumstantial"]
+try:
+    from tools.entity_tracker import VALID_ENTITY_TYPES
+except ImportError:
+    try:
+        from entity_tracker import VALID_ENTITY_TYPES
+    except ImportError:
+        VALID_ENTITY_TYPES = [
+            "person", "llc", "inc", "ltd", "corporation", "pllc", "trust",
+            "foundation", "nonprofit", "partnership", "fund", "association",
+            "government", "pac", "agency", "joint_venture", "shell", "unknown",
+        ]
 
 
 _schema_initialized = False
@@ -130,6 +141,8 @@ VALID_SOURCES = [
     "nyscef", "federal_register", "military_corrections",
     "military_justice",
     "sunat", "sunarp", "infogob", "oefa",
+    # House Oversight Committee congressional transcribed-interview transcripts
+    "house-oversight-transcripts-2026", "house_oversight",
     # Peru-specific primary sources
     "elperuano", "mindef", "seace", "contraloria",
     # US foreign-military-sales / lobbying primary sources
@@ -143,7 +156,7 @@ VALID_SOURCES = [
     # General news / wires
     "cnn", "bloomberg", "aljazeera", "gulfbusiness", "agbi",
     "ledgerinsights", "laraontheblock", "gulfnews", "thenationalnews",
-    "reuters", "ft", "wsj", "nyt",
+    "reuters", "ft", "wsj", "nyt", "letemps",
     # US government / regulator (additional)
     "sec_edgar", "occ", "treasury", "oge", "ogeforms", "sec_oig", "ftc",
     # Gulf-state primary
@@ -590,10 +603,55 @@ def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
 # ── Connections CRUD ─────────────────────────────────────────
 
 
+def _ensure_entity(db, name, entity_type="unknown", source="auto:connect", agent_run_id=None):
+    """Ensure a connection endpoint is backed by a row in the entities registry.
+
+    Enforces the invariant that no connection can exist without both endpoints
+    registered as entities — so graph/network analysis (auto_leads, analyze-network,
+    systemic-analysis) can see every node. Reuses any existing entity with the same
+    name (preferring a richer, jurisdiction-bearing row); otherwise inserts a stub.
+    The UNIQUE(name, jurisdiction) constraint can't dedupe NULL-jurisdiction stubs
+    (SQLite treats NULLs as distinct), so we check explicitly before inserting.
+    Resolution (alias -> exact -> fuzzy -> create) is delegated to
+    resolve_or_create_entity, so a near-duplicate spelling (e.g. "Acme L.L.C."
+    vs "Acme LLC") links to the existing row instead of spawning a stub.
+    Returns (entity_id, created). Enriching the matched row further is left to
+    entity_tracker / entity_dedup.
+    """
+    if not name or not name.strip():
+        return (None, False)
+    name = name.strip()
+    try:
+        from tools.entity_resolution import resolve_or_create_entity
+    except ImportError:
+        from entity_resolution import resolve_or_create_entity
+    res = resolve_or_create_entity(
+        db, name, entity_type=entity_type or "unknown", source=source, agent_run_id=agent_run_id
+    )
+    if res.entity_id is None:
+        return (None, False)
+    created = res.action == "created"
+    if created:
+        print(f"  + auto-registered entity #{res.entity_id}: {name} "
+              f"(type={entity_type or 'unknown'}, source={source}) — enrich via entity_tracker",
+              file=sys.stderr)
+    elif res.action == "fuzzy":
+        print(f"  ~ linked '{name}' to existing entity #{res.entity_id} "
+              f"('{res.matched_name}', fuzzy {res.score}) — recorded alias",
+              file=sys.stderr)
+    return (res.entity_id, created)
+
+
 def add_connection(person_a, person_b, relationship_type=None, description=None,
                    evidence_ids=None, strength="medium", date_range=None, finding_id=None,
-                   profile_id=None, agent_run_id=None):
-    """Add a connection between two persons/entities."""
+                   profile_id=None, agent_run_id=None,
+                   entity_a_type="unknown", entity_b_type="unknown"):
+    """Add a connection between two persons/entities.
+
+    Both endpoints are auto-registered in the entities table if not already present
+    (see _ensure_entity). Pass entity_a_type/entity_b_type to give freshly-created
+    stubs a real type instead of 'unknown'.
+    """
     if agent_run_id is None:
         agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     # Auto-detect profile_id from active investigation if not provided
@@ -609,6 +667,11 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         pass
 
     db = _get_db_standalone()
+
+    # Enforce the invariant: every connection endpoint is backed by an entity row.
+    # Done before the alphabetical swap so each name stays paired with its type.
+    _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
+    _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
 
     # Normalize: store alphabetically for dedup
     if person_a > person_b:
@@ -864,6 +927,10 @@ def main():
     conn_p.add_argument("--date-range")
     conn_p.add_argument("--finding-id", type=int)
     conn_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
+    conn_p.add_argument("--entity-a-type", choices=VALID_ENTITY_TYPES, default="unknown",
+                        help="Type for endpoint A if auto-registered as a new entity")
+    conn_p.add_argument("--entity-b-type", choices=VALID_ENTITY_TYPES, default="unknown",
+                        help="Type for endpoint B if auto-registered as a new entity")
 
     # connections
     conns_p = subparsers.add_parser("connections", help="Get connections for a node (person, org, or program)")
@@ -1007,6 +1074,8 @@ def main():
             description=args.description, evidence_ids=args.evidence,
             strength=args.strength, date_range=args.date_range, finding_id=args.finding_id,
             profile_id=getattr(args, "profile", None),
+            entity_a_type=getattr(args, "entity_a_type", "unknown"),
+            entity_b_type=getattr(args, "entity_b_type", "unknown"),
         )
         print(f"Created connection #{cid}: {args.person_a} <-> {args.person_b}")
 
