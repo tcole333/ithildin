@@ -1,0 +1,196 @@
+# Coscoluella / Reodica Network Investigation Profile
+# Bootstrapped 2026-05-31
+#
+# IMPORTANT: The foundational facts below are USER-PROVIDED and require
+# primary-source verification. Treat names, dates, and relationships as
+# investigative leads, not established fact, until corroborated.
+
+name: coscoluella
+primary_subject: "Ed Coscoluella & Rebecca Coscoluella"
+description: >
+  Investigation into Ed and Rebecca Coscolluela (correct spelling; DB slug remains
+  "coscoluella") and the Reodica family network. VERIFIED (Wave 1, 2026-05-31):
+  Rebecca R. Coscolluela (nee Reodica, b.1945 d.2020 Chatsworth CA) IS the sister of
+  Gie Reodica Marinese, who WAS bookkeeper at J. Epstein & Co Inc (457 Madison Ave,
+  NYC) — confirmed by 1999 FedEx airbills in the DOJ/LMSBAND corpus naming her as the
+  firm's shipping-account sender (EFTA00220010/220054/01319595/01319611). One airbill
+  ships from the Epstein office to recipient "Becky Cocolluela" = Rebecca herself.
+  "Jun Reodica" = Eminiano A. Reodica Jr., principal of the 1980s LA "Grand Wilshire
+  Group of Companies" auto-finance bank fraud (~$64-90M loss, 5 banks); fled 1988, lived
+  in Australia as "Roberto Coscolluela", arrested at LAX Nov 2012, sentenced 2017 to 10
+  yrs, died in custody 2021. CORRECTIONS to the originating account: (1) Jun is NOT a
+  blood sibling of Gie/Rebecca (different parents) — the shared "Coscolluela" name comes
+  from Jun's own alias, his 2nd wife Leticia Coscolluela, AND his CPA business associate
+  "Ed Coscolluela"; (2) the Chapter 11 trustee was Irving Sulmeyer, NOT Ed; Ed's
+  documented role was CPA on Reodica's dealership management team. KEYSTONE OPEN QUESTION:
+  is the doc-173 CPA "Ed Coscolluela" the same Ed who married Rebecca? If so, Ed is the
+  single bridge linking the Grand Wilshire fraud to the Epstein-bookkeeper household.
+
+# High-value persons for priority escalation in auto-lead generation (lowercase)
+key_persons:
+  # Correct spelling is "Coscolluela" (double-L); the user's "Coscoluella" kept as a search variant.
+  - "ed coscolluela"
+  - "ed coscoluella"
+  - "eduardo coscolluela"
+  - "edward coscoluella"
+  - "rebecca coscolluela"
+  - "rebecca coscoluella"
+  - "rebecca reodica"
+  - "leticia coscolluela"       # Jun Reodica's 2nd wife
+  - "roberto coscolluela"       # Jun Reodica's Australian alias
+  - "gie reodica marinese"
+  - "gie reodica"
+  - "gie marinese"
+  - "john marinese"             # Gie's husband
+  - "jun reodica"
+  - "eminiano reodica"          # Jun's legal name
+  - "marion lorico"             # Gie & Rebecca's other sister
+  - "reodica"
+
+# High-value addresses for priority escalation (none confirmed yet — agents populate)
+known_addresses: {}
+
+# Investigation threads for classifying leads and findings
+threads:
+  - id: 1
+    name: "Coscoluella Core"
+    description: "Ed & Rebecca directly — marriage, California residence, corporate entities, properties, identities"
+    targets:
+      - "ed coscoluella"
+      - "edward coscoluella"
+      - "rebecca coscoluella"
+      - "rebecca reodica"
+    keywords:
+      - "coscoluella"
+
+  - id: 2
+    name: "Grand Wilshire Fraud"
+    description: "Jun Reodica, the 1980s LA Grand Wilshire fraud, the related bankruptcy, Ed's reported trustee/advisory role, the flight abroad and ~2013 capture"
+    targets:
+      - "jun reodica"
+      - "grand wilshire"
+    keywords:
+      - "grand\\s+wilshire"
+      - "jun\\s+reodica"
+      - "trust\\s+deed"
+      - "ponzi"
+
+  - id: 3
+    name: "Reodica Family Network"
+    description: "The Reodica family as connective tissue — Gie, Rebecca, Jun, the Marinese marriage; family relationships and geographic dispersal (US / Philippines / Australia)"
+    targets:
+      - "reodica"
+      - "marinese"
+    keywords:
+      - "reodica"
+      - "marinese"
+
+  - id: 4
+    name: "Epstein Bookkeeping Nexus"
+    description: "Gie Reodica Marinese's reported role as an Epstein bookkeeper in the 1990s — which entities, what records, and the link to the active epstein investigation profile"
+    targets:
+      - "gie reodica marinese"
+      - "gie reodica"
+      - "gie marinese"
+    keywords:
+      - "epstein"
+      - "bookkeep"
+
+  - id: 5
+    name: "Las Vegas Operations"
+    description: "The Coscoluella consulting company, Nevada corporate registrations, current activity and residence"
+    targets:
+      - "coscoluella"
+    keywords:
+      - "las\\s+vegas"
+      - "\\bnevada\\b"
+      - "consulting"
+
+# Document corpus tools. The Epstein corpora are directly relevant here because
+# Gie Reodica Marinese reportedly kept Epstein's books — searching them for
+# Reodica / Marinese / Gie is a primary verification step.
+corpus_tools:
+  - tool: "tools/query_doj.py"
+    name: "DOJ Vol 11"
+    description: "331K OCR'd pages, FTS5, EFTA IDs — search Reodica/Marinese/Gie (Epstein bookkeeper link)"
+    commands: ["search", "efta", "count", "names"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND"
+    description: "60K files, 851K entities"
+    commands: ["search", "entity", "file"]
+  - tool: "tools/query_unified.py"
+    name: "Unified DB"
+    description: "70K docs, 56K entities, 107K triples"
+    commands: ["search", "entity", "related"]
+  - tool: "tools/ingest_epstein_20k.py"
+    name: "Epstein Files 20K"
+    description: "25,800 House Oversight docs"
+    commands: ["search"]
+  - tool: "tools/ingest_epstein_exposed.py"
+    name: "EpsteinExposed"
+    description: "Persons, documents, flights"
+    commands: ["search-persons", "search-docs", "search-flights"]
+
+# Key investigation dates. All UNVERIFIED approximations from the user's account —
+# anchored to representative dates so the timeline scaffolds; verify and correct.
+key_dates:
+  - date: "1984-01-01"
+    event: "Grand Wilshire Group bank fraud active in Los Angeles (1984-1988, per DOJ sentencing record)"
+    category: "operational"
+  - date: "1988-08-04"
+    event: "Grand Wilshire Group entities collapse / Chapter 11 bankruptcy (5 jointly-administered cases, LA 88-16590-CA et al.); Reodica flees the US"
+    category: "financial"
+  - date: "1988-10-01"
+    event: "Eminiano 'Jun' Reodica Jr. legally changes name to 'Roberto Abrian Coscolluela Jr.' in the Philippines"
+    category: "operational"
+  - date: "1990-01-01"
+    event: "Nine Grand Wilshire co-conspirators prosecuted (CR 90-440-LEW, CR 90-852-LEW), 18 USC 371/1344, all cooperate"
+    category: "legal"
+  - date: "1994-02-16"
+    event: "Reodica indicted in absentia, US v. Reodica 2:94-cr-00121-SJO (C.D. Cal); CourtListener docket 5859431"
+    category: "legal"
+  - date: "1999-01-01"
+    event: "Gie Marinese active as J. Epstein & Co Inc bookkeeper/shipping-account sender (FedEx airbills EFTA00220010/220054); ships to Rebecca 'Becky' Coscolluela and to Epstein's Palm Beach orbit"
+    category: "operational"
+  - date: "2000-03-05"
+    event: "Gie Reodica Marinese dies, Woodbridge NJ, age 47 (CONFIRMED)"
+    category: "milestone"
+  - date: "2012-11-27"
+    event: "Reodica arrested at LAX on an Australian passport (as Roberto Coscolluela) via fingerprint check; detention order 2012-12-12 (CONFIRMED, corrects user's ~2013)"
+    category: "legal"
+  - date: "2017-05-15"
+    event: "Reodica sentenced to 120 months (10 yrs) BOP; restitution $29.7M ordered (entry 180)"
+    category: "legal"
+  - date: "2019-09-18"
+    event: "Amended judgment cuts enforceable restitution to $66,933 by stipulation (entry 209)"
+    category: "legal"
+  - date: "2020-10-19"
+    event: "Rebecca Reodica Coscolluela dies, Chatsworth CA, age 75 (CONFIRMED)"
+    category: "milestone"
+  - date: "2021-03-17"
+    event: "Eminiano 'Jun' Reodica Jr. dies in federal custody, Texas, age 76 (CONFIRMED)"
+    category: "milestone"
+
+# Institutional pillars — kept modest; this is an obscure subject and most
+# structure will be discovered during investigation.
+seed_pillars:
+  - name: "Grand Wilshire"
+    pillar_type: "operations"
+    sub_type: "financial_services"
+    status: "dissolved"
+    significance: "Jun Reodica's 1980s Los Angeles fraud vehicle; subject of the bankruptcy proceedings Ed Coscoluella reportedly assisted with. Exact entity name and structure UNVERIFIED."
+  - name: "US Bankruptcy Court, Central District of California"
+    pillar_type: "government"
+    sub_type: "federal_court"
+    status: "active"
+    jurisdiction: "California"
+    significance: "Likely venue for the Grand Wilshire bankruptcy (LA-based fraud). Trustee/docket records would document Ed Coscoluella's role."
+
+# No dedicated document corpus with canonical IDs for this subject.
+evidence_id_prefix: ""
+
+# Two co-equal primary subjects — no single node to exclude.
+exclude_from_graph: ""
+
+# Source reliability overrides for this investigation.
+source_overrides: {}

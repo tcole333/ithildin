@@ -125,8 +125,15 @@ Connect target to peer group if structural relationships discovered:
 ```bash
 PYTHONPATH=. uv run python tools/findings_tracker.py connect \
   --person-a "<TARGET>" --person-b "<PEER>" \
-  --relationship "industry_peer" \
-  --detail "Same SIC <CODE>, compared in peer analysis"
+  --type corporate \
+  --description "Same SIC <CODE>, compared in peer analysis" \
+  --entity-a-type inc --entity-b-type inc
+```
+
+`connect` auto-registers any endpoint that isn't already an entity, but it can only guess `entity_type='unknown'` — so pass `--entity-a-type`/`--entity-b-type` (here `inc`) to type the companies correctly. For the richest graph, register each company explicitly with its jurisdiction so peer-group and shared-officer patterns are queryable:
+
+```bash
+uv run python tools/entity_tracker.py add-entity --name "<PEER>" --entity-type inc --jurisdiction <STATE> --source "edgar"
 ```
 
 ### 6. Create Leads

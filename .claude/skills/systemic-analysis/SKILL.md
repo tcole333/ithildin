@@ -187,9 +187,17 @@ Create connections between system members that aren't already recorded:
 uv run python tools/findings_tracker.py connect \
     --person-a "MEMBER_A" \
     --person-b "MEMBER_B" \
-    --type board_membership \
+    --type corporate \
     --description "Both serve on BOARD_NAME" \
     --finding-id FINDING_ID
+```
+
+**Register every system member as a structured entity — a connection alone is not enough.** `connect` auto-creates a bare `entity_type='unknown'` row for any endpoint not already registered (so no connection is ever orphaned), but that stub carries no type, jurisdiction, roles, or addresses — exactly the attributes systemic patterns (shared boards, common counsel, jurisdiction clustering) are built from. For each company, fund, or person in the system, register the real entity and its structure so those patterns surface in graph analysis:
+
+```bash
+uv run python tools/entity_tracker.py add-entity --name "MEMBER_A" --entity-type <person|inc|llc|fund|...> --jurisdiction <JUR> --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-role --entity-id <ID> --person-name "PERSON" --role "<director|officer|counsel|...>" --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-relation --entity-a-id <A> --entity-b-id <B> --relation-type "<shares_officer|co_investor|...>" --source "<SOURCE>"
 ```
 
 ### 11. Write Report

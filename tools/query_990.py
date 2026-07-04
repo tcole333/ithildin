@@ -73,6 +73,21 @@ def _has_fts():
         return False
 
 
+def _fts_query(s):
+    """Sanitize a user string into a safe FTS5 MATCH query.
+
+    Each whitespace-separated term is wrapped in double quotes so punctuation
+    (hyphens, colons, etc.) is tokenized as literal text instead of being parsed
+    as an FTS5 query operator — e.g. "PHILIPPINE-AMERICAN DEFENSE LEAGUE" would
+    otherwise raise 'no such column: AMERICAN'. Preserves implicit-AND-across-
+    terms semantics; embedded quotes are escaped by doubling.
+    """
+    terms = s.split()
+    if not terms:
+        return '""'
+    return " ".join('"' + t.replace('"', '""') + '"' for t in terms)
+
+
 def _fmt_amount(amt):
     if amt is None:
         return "$0"
@@ -100,7 +115,7 @@ def cmd_search(args):
             WHERE grants_fts MATCH ?
             ORDER BY g.cash_amount DESC
             LIMIT ?
-        """, (query, limit)).fetchall()
+        """, (_fts_query(query), limit)).fetchall()
         grants = [dict(r) for r in rows]
 
         rows = db.execute("""
@@ -108,7 +123,7 @@ def cmd_search(args):
             JOIN related_orgs_fts ON related_orgs_fts.rowid = r.id
             WHERE related_orgs_fts MATCH ?
             LIMIT ?
-        """, (query, limit)).fetchall()
+        """, (_fts_query(query), limit)).fetchall()
         related = [dict(r) for r in rows]
     else:
         # LIKE fallback
@@ -196,7 +211,7 @@ def cmd_recipient(args):
             WHERE grants_fts.recipient_name MATCH ?
             ORDER BY g.cash_amount DESC
             LIMIT ?
-        """, (name, limit)).fetchall()
+        """, (_fts_query(name), limit)).fetchall()
     else:
         rows = db.execute("""
             SELECT * FROM grants
@@ -350,7 +365,7 @@ def cmd_co_grantors(args):
             SELECT DISTINCT g.recipient_ein, g.recipient_name FROM grants g
             JOIN grants_fts ON grants_fts.rowid = g.id
             WHERE grants_fts.recipient_name MATCH ?
-        """, (name,)).fetchall()
+        """, (_fts_query(name),)).fetchall()
     else:
         recipients = db.execute("""
             SELECT DISTINCT recipient_ein, recipient_name FROM grants
