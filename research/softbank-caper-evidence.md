@@ -5,8 +5,8 @@
 Jeffrey Epstein served as a **private intelligence broker** connecting both sides of the SoftBank/Rajeev Misra honey trap scandal — a fact not reported in the WSJ's February 2020 expose or any subsequent coverage.
 
 **The WSJ story (two phases)**:
-- **March 2018**: Bradley Hope first reports SoftBank is probing a smear campaign against executives Nikesh Arora and Alok Sama. Axios reports Cambridge Analytica ties to operative Nicolas Giannakopoulos (March 28, 2018). The scandal is now public.
-- **February 2020**: Hope & Rob Copeland publish the full expose naming Rajeev Misra as the alleged orchestrator, Alessandro Benedetti as the central operative, and detailing the $500K payment via Barkmere Group Ltd (BVI), the honey trap in Tokyo, and K2 Intelligence's role.
+- **March 2018**: Bradley Hope, Alex Frangos and Jenny Strasburg first report SoftBank is probing a smear campaign against executives Nikesh Arora and Alok Sama ([WSJ, Mar 26 2018](https://www.wsj.com/articles/softbank-probes-who-was-behind-smear-campaign-against-top-executives-1522056600)). Axios reports Cambridge Analytica ties to operative Nicolas Giannakopoulos (March 28, 2018). The scandal is now public.
+- **February 2020**: Hope & Jenny Strasburg publish the full expose naming Rajeev Misra as the alleged orchestrator, Alessandro Benedetti as the central operative, and detailing the $500K payment via Barkmere Group Ltd (BVI), the honey trap in Tokyo, and K2 Intelligence's role ([WSJ, Feb 26 2020](https://www.wsj.com/articles/softbanks-rajeev-misra-used-campaign-of-sabotage-to-hobble-internal-rivals-11582743294)).
 
 **What's new**: Government-released documents show Epstein was the **shared intelligence node** between the law firm representing SoftBank (Paul Weiss / Brad Karp) and the attorney considering representing Misra (Steptoe & Johnson / Reid Weingarten) — while personally knowing the operative (Benedetti as his Paris neighbor since at least 2011). Karp resigned as Paul Weiss chairman on Feb 4, 2026, following the DOJ release of these documents.
 
@@ -29,6 +29,8 @@ All documents are from the DOJ's official Epstein release (justice.gov/epstein) 
 | EFTA02576024 | Oct 7, 2013 | Second Benedetti Paris reminder |
 | EFTA02297224 | Sep 25, 2013 | Benedetti on same day as Osborne breakfast, Summers lunch |
 | EFTA02575400 | Sep 26, 2013 | Paris contact list: Benedetti first name listed |
+| EFTA00688712 | May 10, 2014 | Unidentified woman → Epstein: report of approaching Nikesh Arora ("just googled him now"), posed Epstein's "unintended consequences" question |
+| EFTA00988842 | May 10, 2014 | Epstein → same woman: "call me when you wake" (reply to the Arora report) |
 | EFTA02446715 | Oct 14, 2016 | Jabor Al Thani → Epstein: SoftBank/MBS $100B fund article |
 | EFTA02617269 | Nov 11, 2018 | Epstein introduces Jabor to Steve Bannon |
 | EFTA02616157 | Nov 20, 2018 | Karp → Epstein: "Dealing with Ghosn crisis. Will step out shortly." |
@@ -189,6 +191,21 @@ This means Epstein knew Benedetti for at least **8 years** — 4 years before Mi
 
 ---
 
+## Pre-Existing Epstein–Arora Contact (May 2014, Not in WSJ)
+
+Separately from the Benedetti relationship, the documents show Epstein had his own line to the operation's eventual *target*, Nikesh Arora, about a year before the campaign began.
+
+- **May 10, 2014**: An **unidentified** woman emailed Epstein a report of approaching Arora at an evening social event — *"spoke to Nikesh Arora (just googled him now)…"* — adding that she had told him he would have time to answer *"the question i asked him (your question about unintended consequences)"*, i.e., a question Epstein had pre-briefed her to pose. Epstein replied *"call me when you wake."* (`EFTA00688712` — her inbound report; `EFTA00988842` — Epstein's reply.)
+
+This is the **earliest documented Epstein–Arora touchpoint**, roughly ten months before Misra and Benedetti are said to have met (early 2015).
+
+**Caveats — this is a thread, not a proven link:**
+- The woman's identity is **not recoverable**: her sender line is redacted in every released copy. (An earlier attempt to attribute the email to a specific associate was investigated and refuted; treat her as an *unidentified* Epstein emissary.)
+- There is **no documentary link** between this 2014 social approach and the 2015 Misra/Benedetti operation — different cast, a year earlier, and *"unintended consequences"* was a recurring Epstein intellectual prompt, not obviously a targeting instruction.
+- What it establishes: Epstein had **social access to, and an active interest in, Arora in 2014**, predating the SoftBank campaign. What it does *not* establish: any Epstein role in the campaign itself.
+
+---
+
 ## Karp Resignation Context
 
 Brad Karp resigned as Paul Weiss chairman on **February 4, 2026**, days after the DOJ released the Epstein email tranche containing these documents. During his tenure, Karp simultaneously:
@@ -237,7 +254,7 @@ All quoted text comes from government-released documents:
 - **ICIJ Paradise Papers**: Tree of Life Limited (Malta C67345) — public ICIJ database
 - **OCCRP Aleph**: Barkmere Limited (Cyprus HE 338259) — public corporate registry
 - **Senate LDA Filings**: Paul Weiss lobbying for Carlos Ghosn Bichara — public filings
-- **WSJ Reporting**: Bradley Hope & Rob Copeland, February 2020 — public record
+- **WSJ Reporting**: Bradley Hope & Jenny Strasburg, ["SoftBank's Rajeev Misra Used Campaign of Sabotage to Hobble Internal Rivals"](https://www.wsj.com/articles/softbanks-rajeev-misra-used-campaign-of-sabotage-to-hobble-internal-rivals-11582743294), Feb 26 2020; and Bradley Hope, Alex Frangos & Jenny Strasburg, ["SoftBank Probes Who Was Behind Smear Campaign Against Top Executives"](https://www.wsj.com/articles/softbank-probes-who-was-behind-smear-campaign-against-top-executives-1522056600), Mar 26 2018 — public record
 
 No information in this document requires any non-public access. All source documents are freely available.
 
@@ -250,6 +267,7 @@ No information in this document requires any non-public access. All source docum
 | Dec 2011 | Weingarten refers to Benedetti as Epstein's "Italian jewish neighbor on ave. foch" | EFTA00925685 |
 | Sep 2013 | Benedetti on Epstein's Paris contact list (same day as Osborne breakfast, Summers lunch) | EFTA02575276, EFTA02297224 |
 | Oct 2013 | Second Benedetti Paris reminder | EFTA02576024 |
+| May 2014 | Epstein directs an unidentified woman to approach Nikesh Arora socially and pose a pre-set question (earliest Epstein–Arora touchpoint; no link to the later op established) | EFTA00688712, EFTA00988842 |
 | Sep 2014 | Epstein meeting with "Jones Perry w/Shearman & Sterling" | EFTA02406149 |
 | Early 2015 | K2 Intelligence hired by Benedetti in London to investigate Arora/Sama | WSJ reporting |
 | Jul-Oct 2015 | Epstein reviewing "people on the ground in london" with Karp/Nardello (temporal overlap only) | EFTA02384875, EFTA02485450, EFTA02716245 |
@@ -258,7 +276,7 @@ No information in this document requires any non-public access. All source docum
 | Oct 2016 | Jabor sends Epstein SoftBank/MBS $100B fund news; Epstein: "too much money" | EFTA02446715 |
 | Jan 2017 | Landon Thomas sends MBS/SoftBank Vision Fund article to Epstein | EFTA02364985 |
 | May 2017 | Epstein complains to Summers about Michael Klein "attacking" him | EFTA02346026 |
-| **Mar 26, 2018** | **WSJ publishes first SoftBank smear campaign expose (Bradley Hope)** | **WSJ** |
+| **Mar 26, 2018** | **WSJ publishes first SoftBank smear campaign expose (Hope, Frangos & Strasburg)** | **WSJ** |
 | Mar 28, 2018 | Axios reveals Cambridge Analytica/SCL ties to Giannakopoulos | Axios |
 | Jun 2018 | David Stern meeting SoftBank COO Claure in Tokyo | EFTA02614349 |
 | Aug 2018 | FII 2018 speakers list (Misra + Klein + Claure + Sewing) sent to Epstein | EFTA02603142 |
@@ -275,5 +293,5 @@ No information in this document requires any non-public access. All source docum
 | **Jan 28, 2019** | **Epstein asks Teodorani: "Allesandro benedetti?"** | **EFTA02628256** |
 | Mar 30, 2019 | Epstein asks Karp about Kroll; Karp recommends Nardello | EFTA02637332 |
 | Jul 6, 2019 | Epstein arrested | Public record |
-| **Feb 28, 2020** | **WSJ definitive expose naming Misra (Hope & Copeland)** | **WSJ** |
+| **Feb 26-27, 2020** | **WSJ definitive expose naming Misra (Hope & Strasburg)** | **WSJ** |
 | **Feb 4, 2026** | **Karp resigns as Paul Weiss chairman** | **Public record** |

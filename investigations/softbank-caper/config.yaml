@@ -1,0 +1,345 @@
+# SoftBank Caper Investigation Profile
+# Formalized 2026-06-22 from prior research/ + content/ work (previously filed under the
+# epstein profile). Centers on the SoftBank Vision Fund private-order network and extends
+# it with the WeWork financial-extraction thesis.
+#
+# IMPORTANT: The WeWork "looting" thesis and the Epstein/Weingarten "planning" angle are
+# USER-PROVIDED hypotheses. Treat as investigative leads requiring primary-source
+# verification (SEC filings, court dockets), NOT established fact. The Epstein corpus has
+# been searched (Unified/DOJ/LMSBAND/Duggan) and returns NO direct WeWork/Neumann/Schreiber
+# linkage — the WeWork connection is structural (shared cast: Misra, Paul Weiss, Weingarten),
+# pending an exhaustive re-sweep.
+
+name: softbank-caper
+primary_subject: "SoftBank Vision Fund private-order network (Rajeev Misra)"
+description: >
+  Two linked operations run through the same private rails. (1) THE CAPER (2015-2019):
+  a dirty-tricks/smear campaign against SoftBank executives Nikesh Arora and Alok Sama,
+  allegedly orchestrated by Rajeev Misra via operative Alessandro Benedetti (~$500K wire
+  through a BVI shell), with Jeffrey Epstein documented as an undisclosed back-channel
+  between Brad Karp (Paul Weiss, SoftBank counsel) and Reid Weingarten (Steptoe, weighing
+  a Misra defense) in a Jan 2019 email window. (2) THE EXTRACTION (2017-2024, WeWork):
+  SoftBank put ~$16B into WeWork and lost ~$14B+, while insiders extracted value — Adam
+  Neumann (~$1.7B exit incl. a ~$430M NON-RECOURSE loan) and Misra himself, who sat on
+  BOTH sides (Vision Fund equity 2017 + his OneIM fund's $470M letter of credit in 2023,
+  SoftBank-guaranteed, repaid early for ~$105M profit). Thesis: the same private-order
+  machinery that ran the smear ran the looting. Counsel continuity (Paul Weiss) and the
+  near-total absence of FARA/LDA/litigation/SAR footprints are core to the pattern.
+
+# High-value persons for priority escalation in auto-lead generation (lowercase).
+key_persons:
+  - "rajeev misra"
+  - "adam neumann"
+  - "masayoshi son"
+  - "marcelo claure"
+  - "brad karp"
+  - "reid weingarten"
+  - "jeffrey epstein"
+  - "alessandro benedetti"
+  - "nikesh arora"
+  - "alok sama"
+  - "joel schreiber"
+  - "michael klein"
+  - "bruce dunlevie"
+  - "lewis frankfort"
+  - "bertrand des pallieres"
+  - "ron soffer"
+  - "eduardo teodorani-fabbri"
+  - "david tolley"
+  - "vivek ranadive"
+  - "rebekah neumann"
+
+known_addresses:
+  "avenue foch": "Epstein + Benedetti Paris neighbor street (Ave Foch)"
+  "115 w 18th": "WeWork early HQ, NYC"
+
+# Investigation threads for organizing leads and findings.
+threads:
+  - id: 1
+    name: "Smear Operation"
+    description: "The Arora/Sama dirty-tricks campaign: Benedetti, K2 Intelligence, the $500K BVI wire, planted media, the 2016 anonymous-shareholder letters"
+    targets:
+      - "alessandro benedetti"
+      - "nikesh arora"
+      - "alok sama"
+      - "nicolas giannakopoulos"
+      - "matteo bigazzi"
+    keywords:
+      - "honey\\s*trap"
+      - "k2\\s+intelligence"
+      - "barkmere"
+      - "smear"
+      - "shareholder\\s+letter"
+      - "standard\\s+chartered"
+
+  - id: 2
+    name: "Back-Channel Geometry"
+    description: "Epstein as undisclosed broker between Paul Weiss/Karp and Steptoe/Weingarten; the Jan 2019 email window; the Ghosn parallel mandate"
+    targets:
+      - "jeffrey epstein"
+      - "brad karp"
+      - "reid weingarten"
+      - "ron soffer"
+      - "carlos ghosn"
+    keywords:
+      - "softbank\\s+caper"
+      - "back.?channel"
+      - "ave\\.?\\s+foch"
+      - "ghosn|ghosen"
+      - "paul\\s+weiss"
+      - "steptoe"
+
+  - id: 3
+    name: "WeWork Extraction"
+    description: "The 2019 S-1 self-dealing, the SoftBank rescue, Neumann's exit package and non-recourse loan, related-party transactions"
+    targets:
+      - "adam neumann"
+      - "rebekah neumann"
+      - "we company"
+      - "wework"
+      - "we holdings"
+    keywords:
+      - "wework|we\\s+company|we\\s+holdings"
+      - "non.?recourse"
+      - "neumann"
+      - "community.?adjusted"
+      - "master\\s+transaction\\s+agreement"
+      - "tender\\s+offer"
+
+  - id: 4
+    name: "Misra Both Sides"
+    description: "Misra on both sides of WeWork: Vision Fund equity (2017) and OneIM's $470M letter of credit (2023); the SoftBank guarantee and ~$105M early-repayment profit"
+    targets:
+      - "rajeev misra"
+      - "one investment management"
+      - "oneim"
+      - "softbank vision fund"
+    keywords:
+      - "letter\\s+of\\s+credit"
+      - "one\\s*investment\\s*management|oneim"
+      - "vision\\s+fund"
+      - "guarantee"
+      - "both\\s+sides"
+
+  - id: 5
+    name: "Investor Money Flows"
+    description: "Who got paid: the 2014 cap table (JPM, T. Rowe, Wellington, Goldman, Harvard, Benchmark, Zuckerman), the 2021 de-SPAC PIPE, bankruptcy recoveries by class"
+    targets:
+      - "joel schreiber"
+      - "benchmark"
+      - "softbank group"
+      - "bowx"
+      - "jpmorgan"
+    keywords:
+      - "principal\\s+stockholders"
+      - "\\bpipe\\b"
+      - "recover(y|ies)"
+      - "cap\\s+table"
+      - "de.?spac|business\\s+combination"
+      - "schreiber"
+
+  - id: 6
+    name: "Counsel & Private Order"
+    description: "Law-firm mapping across the smear, the 2019 rescue, and the bankruptcy; the absence of FARA/LDA/public litigation/SAR as the signature of private order"
+    targets:
+      - "paul weiss"
+      - "steptoe & johnson"
+      - "kirkland & ellis"
+      - "morrison & foerster"
+      - "skadden"
+    keywords:
+      - "fara|lobbying\\s+disclosure|\\blda\\b"
+      - "special\\s+committee"
+      - "delaware\\s+chancery"
+      - "counsel|retain(ed|er)"
+
+  - id: 7
+    name: "OneIM Successor Platform"
+    description: "Misra's post-SoftBank platform: Mubadala/Royal Group anchoring, OneIM Acquisition Corp (NASDAQ:OIMAU), des Pallieres, the ADGM capital geography"
+    targets:
+      - "one investment management"
+      - "mubadala"
+      - "royal group"
+      - "bertrand des pallieres"
+      - "sheikh tahnoon"
+    keywords:
+      - "mubadala|royal\\s+group"
+      - "oimau|acquisition\\s+corp"
+      - "abu\\s+dhabi|adgm"
+      - "stargate"
+
+  - id: 8
+    name: "Acquisition Looting"
+    description: "WeWork's M&A as a value-extraction/related-party vector: overpayment, stock-funded deals that enriched insiders, related-party targets, and post-acquisition writedowns/spin-backs to founders"
+    targets:
+      - "meetup"
+      - "managed by q"
+      - "conductor"
+      - "flatiron school"
+      - "naked hub"
+      - "prolific interactive"
+    keywords:
+      - "acqui(re|sition|red)"
+      - "business\\s+combination"
+      - "goodwill|impairment"
+      - "divest|spin.?(off|back)"
+      - "purchase\\s+price"
+
+  - id: 9
+    name: "SoftBank Playbook"
+    description: "Is the WeWork extraction a one-off or the Vision Fund playbook? Pattern tests: Greensill (circular financing, Credit Suisse collapse), Katerra (Greensill-financed, circular bailout), OYO (founder margin-loan parallel to Neumann)"
+    targets:
+      - "greensill"
+      - "katerra"
+      - "oyo"
+      - "lex greensill"
+      - "ritesh agarwal"
+    keywords:
+      - "greensill|katerra|\\boyo\\b"
+      - "circular|round.?trip|supply.?chain finance"
+      - "founder financing|margin loan"
+      - "credit suisse"
+
+  - id: 10
+    name: "Sovereign Capital Backbone"
+    description: "The Gulf money behind the Vision Fund and its successor: PIF + Mubadala LP structure (the ~7% preferred coupon), the flow into WeWork, and Misra's Mubadala/Royal Group-anchored OneIM. NOTE: Mubadala/Tahnoon/MGX are already covered in the epstein profile — cite those, don't re-derive."
+    targets:
+      - "public investment fund"
+      - "mubadala"
+      - "royal group"
+      - "sheikh tahnoon"
+    keywords:
+      - "\\bpif\\b|public investment fund"
+      - "mubadala|royal group"
+      - "preferred (coupon|equity)|7%"
+      - "sovereign wealth|limited partner"
+
+  - id: 11
+    name: "Portfolio Fraud Nexus"
+    description: "SoftBank/Vision Fund/Misra proximity to convicted or alleged frauds among portfolio/adjacent companies: Wirecard (Naheta-architected ~$900M bet, risk passed to bondholders), FTX (VF investment; verify any Misra board role), Eros International (DISAMBIGUATE whether the 'Rajeev Misra' defendant in Maliarov v Eros is the same person). NOTE: investor/board-seat proximity != perpetrator — calibrate carefully; SoftBank was typically the bag-passer/victim, not the fraudster."
+    targets:
+      - "wirecard"
+      - "ftx"
+      - "akshay naheta"
+      - "eros international"
+    keywords:
+      - "wirecard|markus braun|marsalek"
+      - "\\bftx\\b|bankman.?fried|alameda"
+      - "eros international|maliarov"
+      - "accounting fraud|convicted fraud"
+
+# Document corpus tools (Epstein corpora, for the back-channel + sweep threads).
+corpus_tools:
+  - tool: "tools/query_doj.py"
+    name: "DOJ Vol 11"
+    description: "331K OCR'd pages, FTS5, EFTA IDs"
+    commands: ["search", "efta", "count", "names"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND"
+    description: "60K files, 851K entities"
+    commands: ["search", "entity", "file"]
+  - tool: "tools/query_unified.py"
+    name: "Unified DB"
+    description: "70K docs, 56K entities, 107K triples"
+    commands: ["search", "entity", "related"]
+  - tool: "tools/ingest_epstein_20k.py"
+    name: "Epstein Files 20K"
+    description: "25,800 House Oversight docs"
+    commands: ["search"]
+
+# Key investigation dates.
+key_dates:
+  - date: "2013-01-01"
+    event: "Joel Schreiber reportedly buys ~33% of WeWork for ~$15M (date to verify)"
+    category: "financial"
+  - date: "2015-04-15"
+    event: "Alleged ~$500K Misra wire via Standard Chartered to Barkmere Group BVI (WSJ)"
+    category: "financial"
+  - date: "2016-01-01"
+    event: "Anonymous-shareholder letters delivered to SoftBank board (Boies Schiller, Mintz & Gold)"
+    category: "legal"
+  - date: "2016-06-01"
+    event: "Nikesh Arora leaves SoftBank after smear campaign"
+    category: "operational"
+  - date: "2017-08-01"
+    event: "SoftBank Vision Fund invests in WeWork (~$4.4B)"
+    category: "financial"
+  - date: "2019-01-26"
+    event: "'The Softbank caper' email thread (Weingarten/Karp/Epstein)"
+    category: "operational"
+  - date: "2019-08-14"
+    event: "The We Company files S-1 for IPO"
+    category: "financial"
+  - date: "2019-09-30"
+    event: "WeWork withdraws IPO; Neumann ousted shortly after"
+    category: "financial"
+  - date: "2019-10-22"
+    event: "SoftBank rescue: ~$1.5B warrant, tender offer, $185M consulting fee, ~$430M non-recourse loan to Neumann"
+    category: "financial"
+  - date: "2020-04-07"
+    event: "Delaware Chancery: WeWork Special Committee & Neumann sue SoftBank over withdrawn tender"
+    category: "legal"
+  - date: "2021-02-26"
+    event: "SoftBank settlement; partial tender at $19.19/share"
+    category: "legal"
+  - date: "2021-10-21"
+    event: "WeWork goes public via BowX de-SPAC; $1.3B PIPE"
+    category: "financial"
+  - date: "2023-02-01"
+    event: "OneIM (Misra) lends $470M to WeWork via SoftBank-guaranteed letter of credit"
+    category: "financial"
+  - date: "2023-11-06"
+    event: "WeWork files Chapter 11 (District of New Jersey, 23-19865)"
+    category: "legal"
+  - date: "2023-10-01"
+    event: "SoftBank repays OneIM LC early (~halfway); OneIM books ~$105M profit"
+    category: "financial"
+  - date: "2026-01-13"
+    event: "OneIM Acquisition Corp prices $250M Nasdaq IPO (OIMAU)"
+    category: "financial"
+  - date: "2026-02-04"
+    event: "Brad Karp steps down as Paul Weiss chair after Epstein email release"
+    category: "milestone"
+
+# Institutional pillars.
+seed_pillars:
+  - name: "SoftBank Group"
+    pillar_type: "banking"
+    sub_type: "holding_company"
+    status: "active"
+    founded: "1981"
+  - name: "SoftBank Vision Fund"
+    pillar_type: "banking"
+    sub_type: "investment_fund"
+    status: "active"
+    founded: "2017"
+  - name: "One Investment Management"
+    pillar_type: "banking"
+    sub_type: "investment_fund"
+    status: "active"
+    founded: "2022"
+  - name: "Paul, Weiss, Rifkind, Wharton & Garrison"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1875"
+  - name: "Steptoe & Johnson"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1945"
+  - name: "Kirkland & Ellis"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1909"
+  - name: "Benchmark"
+    pillar_type: "banking"
+    sub_type: "venture_capital"
+    status: "active"
+    founded: "1995"
+  - name: "Mubadala Investment Company"
+    pillar_type: "government"
+    sub_type: "sovereign_wealth_fund"
+    status: "active"
+    founded: "2017"
