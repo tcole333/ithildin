@@ -171,6 +171,7 @@ For unexplored system nodes (e.g., the shared attorney, the common board, the co
 
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Systemic node: SYSTEM_NODE_NAME — shared by N members of GROUP" \
     --target "SYSTEM_NODE_NAME" \
     --category connection \
     --priority medium \

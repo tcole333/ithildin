@@ -154,6 +154,7 @@ uv run python tools/hypothesis_tracker.py add \
 **Create lead (only if hypothesis suggests specific new research):**
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Hunch: PATTERN — investigate SPECIFICS" \
     --target "INVESTIGATION_TARGET" \
     --category connection \
     --priority medium \
