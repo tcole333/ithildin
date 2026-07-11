@@ -140,6 +140,10 @@ function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
 
+function buildLaAssessorOwnershipUrl(ain: string): string {
+  return `https://portal.assessor.lacounty.gov/api/parcel_ownershiphistory?ain=${ain}`;
+}
+
 // DoD Boards of Review Reading Room — link to the service's BCMR/BCNR sub-index.
 // We can't deep-link into a specific PDF without knowing the year/category bucket,
 // so the citation lands on the relevant board's main folder; the agent CLI is the
@@ -1052,6 +1056,32 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const docId = ref.replace(/ACRIS:(?:FT_)?/i, "");
         const url = buildAcrisUrl(docId);
         return { key: url, label: `ACRIS:${docId}`, url };
+      });
+    },
+  },
+  {
+    id: "la_county_assessor",
+    tokenPattern: "LA-ASSESSOR:AIN-\\d{10}:OWNERSHIP",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/LA-ASSESSOR:AIN-(\d{10}):OWNERSHIP/i);
+      if (!match) return null;
+      const ain = match[1];
+      return {
+        key: `la-assessor:${ain}:ownership`,
+        label: `LA County Assessor AIN ${ain}`,
+        url: buildLaAssessorOwnershipUrl(ain),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/LA-ASSESSOR:AIN-\d{10}:OWNERSHIP/gi) || []).map(ref => {
+        const ain = ref.match(/AIN-(\d{10})/i)?.[1] ?? "";
+        const url = buildLaAssessorOwnershipUrl(ain);
+        return {
+          key: `la-assessor:${ain}:ownership`,
+          label: `LA-ASSESSOR:AIN-${ain}:OWNERSHIP`,
+          url,
+        };
       });
     },
   },

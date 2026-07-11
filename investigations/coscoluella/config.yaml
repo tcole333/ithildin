@@ -12,9 +12,11 @@ description: >
   "coscoluella") and the Reodica family network. VERIFIED (Wave 1, 2026-05-31):
   Rebecca R. Coscolluela (nee Reodica, b.1945 d.2020 Chatsworth CA) IS the sister of
   Gie Reodica Marinese, who WAS bookkeeper at J. Epstein & Co Inc (457 Madison Ave,
-  NYC) — confirmed by 1999 FedEx airbills in the DOJ/LMSBAND corpus naming her as the
-  firm's shipping-account sender (EFTA00220010/220054/01319595/01319611). One airbill
-  ships from the Epstein office to recipient "Becky Cocolluela" = Rebecca herself.
+  NYC) — confirmed by 1999 FedEx airbills in the Kabasshouse corpus naming her as the
+  firm's shipping-account sender. Canonical invoice EFTA01315380, page EFTA01315387,
+  records Gie sending airbill 806198480787 to "Becky Cocolluela" at 20021 Vintage St,
+  Chatsworth. Identifying Becky as Rebecca is a cross-source synthesis supported by
+  family and California corporate records placing Rebecca at that address.
   "Jun Reodica" = Eminiano A. Reodica Jr., principal of the 1980s LA "Grand Wilshire
   Group of Companies" auto-finance bank fraud (~$64-90M loss, 5 banks); fled 1988, lived
   in Australia as "Roberto Coscolluela", arrested at LAX Nov 2012, sentenced 2017 to 10
@@ -22,9 +24,11 @@ description: >
   blood sibling of Gie/Rebecca (different parents) — the shared "Coscolluela" name comes
   from Jun's own alias, his 2nd wife Leticia Coscolluela, AND his CPA business associate
   "Ed Coscolluela"; (2) the Chapter 11 trustee was Irving Sulmeyer, NOT Ed; Ed's
-  documented role was CPA on Reodica's dealership management team. KEYSTONE OPEN QUESTION:
-  is the doc-173 CPA "Ed Coscolluela" the same Ed who married Rebecca? If so, Ed is the
-  single bridge linking the Grand Wilshire fraud to the Epstein-bookkeeper household.
+  documented role was CPA on Reodica's dealership management team. KEYSTONE STATUS:
+  corporate, address, family-tree, and Terry York records now support at high-confidence
+  synthesis that the doc-173 CPA "Ed Coscolluela" was Eduardo S. Coscolluela Sr.,
+  Rebecca's husband. No single marriage, obituary, or CPA record independently proves
+  the full identity chain, so preserve that distinction in downstream claims.
 
 # High-value persons for priority escalation in auto-lead generation (lowercase)
 key_persons:
@@ -45,10 +49,14 @@ key_persons:
   - "jun reodica"
   - "eminiano reodica"          # Jun's legal name
   - "marion lorico"             # Gie & Rebecca's other sister
+  - "ramon coscolluela"         # Ambiguous same-name cluster; keep CA, NJ/FL, and TX records separate
   - "reodica"
 
-# High-value addresses for priority escalation (none confirmed yet — agents populate)
-known_addresses: {}
+# High-value addresses for priority escalation
+known_addresses:
+  "20021 vintage": "20021 Vintage St, Chatsworth CA 91311 — confirmed LA County parcel, long-running Coscolluela residence/corporate address, and destination of Gie's Jan. 7, 1999 Becky shipment (EFTA01315387); ownership chain remains unproved"
+  "23716 sandalwood": "23716 Sandalwood St, West Hills CA 91307 — real property identified in Ramon Coscolluela C.D. Cal. bankruptcy docket 1:02-bk-13355; secondary property history names Ramon S. Coscolluela; do not merge with the CA corporate agent without more identifiers"
+  "1010 adams": "1010 Adams Ave, Union NJ 07083 — Florida Sunbiz officer address for the younger Ramon L. Coscolluela / Bier Garden LLC cluster; distinct from the adult 1990 California agent"
 
 # Investigation threads for classifying leads and findings
 threads:
@@ -110,26 +118,30 @@ threads:
 # Gie Reodica Marinese reportedly kept Epstein's books — searching them for
 # Reodica / Marinese / Gie is a primary verification step.
 corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse"
+    description: "Primary full Epstein corpus (1.42M documents). Use its EFTA IDs as canonical; legacy LMSBAND/DOJ hits are duplicate cross-checks, not corroboration."
+    commands: ["search", "doc", "entity", "financials"]
   - tool: "tools/query_doj.py"
-    name: "DOJ Vol 11"
-    description: "331K OCR'd pages, FTS5, EFTA IDs — search Reodica/Marinese/Gie (Epstein bookkeeper link)"
+    name: "DOJ Vol 11 (legacy fallback)"
+    description: "Lower-coverage/lower-OCR subset used only to crosswalk older citations when Kabasshouse has no match."
     commands: ["search", "efta", "count", "names"]
   - tool: "tools/query_lmsband.py"
-    name: "LMSBAND"
-    description: "60K files, 851K entities"
-    commands: ["search", "entity", "file"]
+    name: "LMSBAND (legacy cross-check)"
+    description: "Older 60K-file index useful for legacy file IDs and OCR comparison; do not cite as independent corroboration of a Kabasshouse page."
+    commands: ["search", "entities", "file"]
   - tool: "tools/query_unified.py"
     name: "Unified DB"
-    description: "70K docs, 56K entities, 107K triples"
-    commands: ["search", "entity", "related"]
+    description: "Complementary parsed emails, entities, and triples; text copies overlapping Kabasshouse are redundant."
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
   - tool: "tools/ingest_epstein_20k.py"
     name: "Epstein Files 20K"
     description: "25,800 House Oversight docs"
     commands: ["search"]
   - tool: "tools/ingest_epstein_exposed.py"
     name: "EpsteinExposed"
-    description: "Persons, documents, flights"
-    commands: ["search-persons", "search-docs", "search-flights"]
+    description: "Complementary persons/flights index; document results may duplicate Kabasshouse EFTA records."
+    commands: ["search", "persons", "documents", "flights"]
 
 # Key investigation dates. All UNVERIFIED approximations from the user's account —
 # anchored to representative dates so the timeline scaffolds; verify and correct.
@@ -150,7 +162,7 @@ key_dates:
     event: "Reodica indicted in absentia, US v. Reodica 2:94-cr-00121-SJO (C.D. Cal); CourtListener docket 5859431"
     category: "legal"
   - date: "1999-01-01"
-    event: "Gie Marinese active as J. Epstein & Co Inc bookkeeper/shipping-account sender (FedEx airbills EFTA00220010/220054); ships to Rebecca 'Becky' Coscolluela and to Epstein's Palm Beach orbit"
+    event: "Gie Marinese active as J. Epstein & Co Inc bookkeeper/shipping-account sender; Kabasshouse invoice EFTA01315380/page EFTA01315387 records her Jan. 7 shipment to Becky Cocolluela at 20021 Vintage St"
     category: "operational"
   - date: "2000-03-05"
     event: "Gie Reodica Marinese dies, Woodbridge NJ, age 47 (CONFIRMED)"
