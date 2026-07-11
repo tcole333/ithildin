@@ -692,6 +692,40 @@ When planning research across a new area (e.g., a new investigation thread), fol
 
 This prevents the failure mode of exhaustively investigating every name that surfaces while still capturing enough to know what's worth pursuing.
 
+## Structured Analytic Techniques (ACH, Assumptions, Estimative Language)
+
+### When ACH Is Mandatory
+
+Analysis of Competing Hypotheses (ACH) is mandatory for any theory at the Coordination or Intent rungs of the Claim Ladder, and whenever two or more live rival explanations exist for the same phenomenon.
+
+### Competing-Set Discipline
+
+Hypotheses explaining one phenomenon share a short `--competition-group` slug. Register the best innocent explanation with `--as-null` as a full competing hypothesis, not as a prose aside. Score every relevant finding against every member of the set, then use `matrix` and `compete` to compare them. The verdict is the least-inconsistent hypothesis—the one with the least evidence against it—not the hypothesis with the most accumulated support. Confirming a hypothesis requires refuting its rivals, not merely accumulating confirming evidence.
+
+### Diagnosticity
+
+Evidence consistent with every hypothesis moves nothing; only evidence that discriminates among rivals is diagnostic. This complements the independence rule: the same document appearing in three databases is redundancy, not corroboration. Independence concerns whether evidence comes from genuinely separate sources; diagnosticity concerns whether that evidence distinguishes between explanations. Sound analysis requires both.
+
+### Key Assumptions Check
+
+Before promoting any hypothesis to `investigating`, and again before any article draft, list the assumptions that must hold for the leading hypothesis. For each assumption ask: What happens to the hypothesis if this is false? How would we know it is false? Record the answers and turn testable uncertainties into searches or leads.
+
+### Estimative Language Standard
+
+| Confidence | Kent-style probability / approved prose |
+|------------|------------------------------------------|
+| `confirmed` | established; documented |
+| `high` | almost certainly; very likely |
+| `medium` | likely; probably |
+| `low` | possibly; may |
+| `unverified` | unconfirmed; alleged |
+
+Prose may never outrun the weakest confidence tier in its citation chain. A conclusion dependent on a `medium` link cannot be described as "almost certainly," even if its other links are `high` or `confirmed`. The review-article skill enforces this standard.
+
+### Premortem
+
+Before publication of any major synthesis, conduct one pass assuming: **This thesis is wrong.** Name the most likely way the investigation fooled itself, identify which evidence or assumption enabled the error, and state the fastest check that could expose it.
+
 ## Red Lines
 
 - Don't fabricate evidence or connections that aren't in the data
