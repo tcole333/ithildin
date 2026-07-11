@@ -53,7 +53,9 @@ def _fetch(url):
 
 def search_orgs(query, state=None, page=0, limit=25):
     """Search nonprofit organizations by name."""
-    params = {"q": query, "page": page}
+    # ProPublica's API returns HTTP 404 when q contains a hyphen; the search is
+    # tokenized anyway, so replace hyphens with spaces (e.g. "PHILIPPINE-AMERICAN").
+    params = {"q": query.replace("-", " "), "page": page}
     if state:
         params["state[id]"] = state
     url = f"{BASE_URL}/search.json?{urllib.parse.urlencode(params)}"

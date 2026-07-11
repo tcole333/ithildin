@@ -67,10 +67,10 @@ Create `tools/query_<source>.py` following the standard pattern:
 - Consistent output formatting
 
 See existing wrappers for reference:
+- `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
 - `tools/query_doj.py` (SQLite + FTS5)
 - `tools/query_lmsband.py` (SQLite)
 - `tools/query_icij.py` (Neo4j)
-- `tools/duggan_search.py` (REST API)
 
 ### 5. Run Initial Investigation Search
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:

@@ -91,6 +91,11 @@ def get_db():
 
 def _ensure_schema(db):
     """Create all investigation tables if they don't exist."""
+    def reload_schema(connection):
+        """Invalidate SQLite's schema cache without replacing the caller's DB."""
+        row = connection.execute("PRAGMA schema_version").fetchone()
+        connection.execute(f"PRAGMA schema_version = {int(row[0]) + 1}")
+
     db.executescript("""
         -- ══════════════════════════════════════════════════════════
         -- SESSIONS: Audit trail for agent/human activity
@@ -799,12 +804,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                # Reconnect so SQLite reloads the compiled schema
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass  # Non-critical — Python validation still protects writes
 
@@ -828,11 +828,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 
@@ -856,11 +852,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 
@@ -880,11 +872,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 
@@ -904,21 +892,57 @@ def _ensure_schema(db):
             pass
 
     # Backfill profile_id for tech-right records (idempotent)
-    # Thread IDs 9-14 belong to tech-right profile; correct the default 'epstein' value
+    # Tech-right threads carry DHS/defense-tech work whose findings/leads/connections
+    # silently default to 'epstein' (the column default) when created without an
+    # explicit profile. Thread 15 ("DHS/Immigration Enforcement Nexus") is tech-right
+    # work whose row was itself mislabeled 'epstein' and whose id fell one slot outside
+    # the original hardcoded 9-14 window, so its 112 findings were never corrected.
+    # Fix that thread row first, then re-home every epstein-defaulted record on any
+    # thread the threads table declares tech-right. Deriving the thread list from
+    # investigation_threads (instead of a hardcoded tuple) covers 9-18 and any future
+    # tech-right thread without further code changes — the hardcoded window is the
+    # exact footgun that stranded thread 15.
     try:
-        updated = db.execute("""
+        db.execute("""
+            UPDATE investigation_threads SET profile_id = 'tech-right'
+            WHERE id = 15 AND COALESCE(profile_id, 'epstein') = 'epstein'
+              AND title LIKE '%DHS/Immigration Enforcement%'
+        """)
+        tr_threads = "SELECT id FROM investigation_threads WHERE profile_id = 'tech-right'"
+        updated = db.execute(f"""
             UPDATE findings SET profile_id = 'tech-right'
-            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+            WHERE thread_id IN ({tr_threads}) AND COALESCE(profile_id, 'epstein') = 'epstein'
         """).rowcount
-        updated += db.execute("""
+        updated += db.execute(f"""
             UPDATE leads SET profile_id = 'tech-right'
-            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+            WHERE thread_id IN ({tr_threads}) AND COALESCE(profile_id, 'epstein') = 'epstein'
         """).rowcount
-        updated += db.execute("""
-            UPDATE connections SET profile_id = 'tech-right'
-            WHERE finding_id IN (SELECT id FROM findings WHERE thread_id IN (9,10,11,12,13,14))
-              AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        # OR IGNORE: a thread-15 connection can duplicate an edge that already exists
+        # as tech-right (same person_a/person_b/relationship_type). Without OR IGNORE the
+        # idx_connections_unique violation would abort the whole transaction and silently
+        # roll back the findings/leads re-home above. Colliding rows stay epstein here and
+        # are removed as confirmed duplicates by the cross-profile dedup below.
+        updated += db.execute(f"""
+            UPDATE OR IGNORE connections SET profile_id = 'tech-right'
+            WHERE finding_id IN (SELECT id FROM findings WHERE thread_id IN ({tr_threads}))
+              AND COALESCE(profile_id, 'epstein') = 'epstein'
         """).rowcount
+        # Remove epstein-defaulted connections on tech-right threads that could not be
+        # re-homed because an identical tech-right edge already exists — they are exact
+        # duplicates, so dropping them leaves the canonical tech-right edge intact.
+        db.execute(f"""
+            DELETE FROM connections
+            WHERE finding_id IN (SELECT id FROM findings WHERE thread_id IN ({tr_threads}))
+              AND COALESCE(profile_id, 'epstein') = 'epstein'
+              AND EXISTS (
+                SELECT 1 FROM connections t
+                WHERE t.profile_id = 'tech-right'
+                  AND t.person_a = connections.person_a
+                  AND t.person_b = connections.person_b
+                  AND COALESCE(t.relationship_type, '') = COALESCE(connections.relationship_type, '')
+                  AND t.id <> connections.id
+              )
+        """)
         if updated > 0:
             db.commit()
     except (sqlite3.OperationalError, sqlite3.IntegrityError):

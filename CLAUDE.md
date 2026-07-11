@@ -70,7 +70,9 @@ Queue system: `scripts/queue_tools.py {status,pause,resume,submit,enqueue-triage
 
 ## Investigation Database
 
-All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables. Also: `infra_requests`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`.
+All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables (incl. `finding_entities` linking findings→canonical entities, `finding_relations` for contradicts/corroborates/supersedes). Also: `infra_requests`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`, `investigation_profiles`. Findings carry raw `date_of_event` + normalized `event_date_iso`/`date_precision` (`tools/date_normalize.py`).
+
+Epstein corpus-derived facts (temporal events, normalized financials, entity resolution) live in the regenerable sidecar **`datasets/epstein_derived.db`** — see `investigations/epstein/CLAUDE.md` and `tools/epstein_derived.py`.
 
 Lead lifecycle: `open -> in_progress -> completed | blocked | dead_end`
 Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
@@ -160,7 +162,7 @@ Orchestrate work from a single chat session using subagents. Skills like `/deep-
 ## Environment
 
 - **Always use `uv run python`** to invoke tools
-- Dehashed API: credits limited (468)
+- Dehashed API: v2 requires an ACTIVE search subscription (not just credits) — query via `tools/query_dehashed.py`; `tools/selector_pivot.py` fans a selector across aggregators (Dehashed/IntelX gated behind `--enable-paid`)
 - OpenCorporates API: basic tier (500 calls/month, 200/day max)
 - Key identifiers (emails, addresses, contacts): see `memory/key-identifiers.md`
 

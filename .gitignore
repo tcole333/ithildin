@@ -17,7 +17,8 @@ __pycache__/
 *.egg-info/
 
 # Data and databases
-data/
+data/*
+!data/nicknames.json
 !web/src/data/
 datasets/
 backups/
@@ -53,3 +54,7 @@ web/test-results/
 web/.playwright-cli/
 tmp/
 workbench-agents/
+
+# Python build artifacts
+__pycache__/
+*.pyc

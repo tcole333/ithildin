@@ -39,27 +39,26 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 Execute these in parallel where possible. **Use `--output` on all searches** to keep context lean:
 
 ```bash
-# DugganUSA API (204K+ docs)
-python tools/duggan_search.py "<QUERY>" -n 20 --output $WORKDIR/search-duggan.json
+# Kabasshouse (PRIMARY Epstein corpus: 1.42M docs, FTS5) — search this FIRST
+python tools/ingest_kabasshouse.py search "<QUERY>" --limit 20 --json > $WORKDIR/search-kabass.json
 
-# DOJ Vol 11 (331K pages, FTS5)
-python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
+# Kabasshouse entity mentions (10.6M typed NER rows)
+python tools/ingest_kabasshouse.py entity "<QUERY>" > $WORKDIR/search-kabass-ent.txt
 
-# LMSBAND (60K files text search)
-python tools/query_lmsband.py search "<QUERY>" --limit 20 --output $WORKDIR/search-lmsband.json
-
-# LMSBAND entities
-python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
-
-# Unified DB emails
+# Unified DB emails (parsed emails — complementary, not text-redundant)
 python tools/query_unified.py emails "<QUERY>" --limit 20 --output $WORKDIR/search-unified-email.json
 
-# Unified DB documents
-python tools/query_unified.py docs "<QUERY>" --limit 20 --output $WORKDIR/search-unified-docs.json
-
-# Unified DB entities
+# Unified DB entities + triples (relationship extraction)
 python tools/query_unified.py entities "<QUERY>" --output $WORKDIR/search-unified-ent.json
+
+# LMSBAND entities (complementary structured layers; text overlaps kabasshouse)
+python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
+
+# DOJ Vol 11 (FALLBACK — strict subset of kabasshouse; cross-check only)
+# python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
 ```
+
+**Kabasshouse is the primary Epstein full-text corpus.** DOJ Vol 11 / LMSBAND text search cover the same EFTA pages at lower OCR quality — hits there are redundant, not corroborating. (DugganUSA retired 2026-06-29; do not call `duggan_search.py`.)
 
 ```bash
 # Corporate Registry (FL, NY, more)
@@ -204,11 +203,30 @@ Search any investigation-specific corpus tools listed in `corpus_tools` from the
 
 Log each corpus tool search the same way as generic sources.
 
+### 1d. Selector Pivot & Breach Data (selectors, not just names)
+
+When the target is a **selector** (email, username, phone, domain, IP) rather than a person/entity name, fan it out in one call instead of querying sources individually:
+
+```bash
+# One selector -> linked selectors + candidate entities across aggregators (auto-logs to search_log)
+uv run python tools/selector_pivot.py run "<SELECTOR>" --output $WORKDIR/pivot.json
+# Include gated breach/leak adapters (Dehashed; consumes credits):
+uv run python tools/selector_pivot.py run "<EMAIL>" --type email --enable-paid --output $WORKDIR/pivot.json
+```
+
+Free adapters (opensanctions, gleif, icij, littlesis, crt.sh, maigret) run by default; `--enable-paid` adds Dehashed (breach/credential records, fires only on the seed selector) and IntelX. Emits `pending_triage` leads — **leak-sourced links cap at `medium` confidence; corroborate against a primary record before promotion.**
+
+Direct breach lookup (one selector, raw records):
+```bash
+uv run python tools/query_dehashed.py search --email "<EMAIL>" --output $WORKDIR/dehashed.json
+uv run python tools/query_dehashed.py balance   # remaining credits
+```
+
 ### 2. Log Each Search
 After each query, log it to prevent redundant future searches:
 ```python
 from tools.lead_tracker import log_search
-log_search("<QUERY>", "duggan", result_count)
+log_search("<QUERY>", "kabass", result_count)
 log_search("<QUERY>", "doj_vol11", result_count)
 log_search("<QUERY>", "lmsband", result_count)
 log_search("<QUERY>", "gleif", result_count)
@@ -261,8 +279,8 @@ SEARCH: "<QUERY>" across 7 sources
 [Unified triple] — Subject -> arranged meeting -> Target @ Location, date
 
 === SOURCE COVERAGE ===
-DugganUSA:    15 hits
-DOJ Vol 11:   8 hits
+Kabasshouse:  15 hits
+DOJ Vol 11:   8 hits (cross-check only — same EFTA pages as Kabasshouse)
 LMSBAND:      3 hits
 Unified:      5 hits
 Registry:     2 hits (FL, NY)

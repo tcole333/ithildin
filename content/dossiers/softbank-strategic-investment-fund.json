@@ -1,0 +1,232 @@
+{
+  "name": "SoftBank Strategic Investment Fund",
+  "slug": "softbank-strategic-investment-fund",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:53:21.371121",
+  "last_updated": "2026-06-25T05:34:06",
+  "stats": {
+    "total_findings": 3,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 2,
+      "legal": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-25T05:34:06"
+  },
+  "findings": [
+    {
+      "id": 11607,
+      "finding_type": "intelligence",
+      "summary": "BAG-PASSING: Credit Suisse repackaged SoftBank's EUR900M Wirecard convertible into exchangeable notes via SPV Argentum Netherlands BV (Oct 2019) and sold them to outside institutional investors at less attractive terms \u2014 letting SoftBank insiders + Mubadala recover principal, book tens of millions upfront, and put in ~zero net capital. Outside bondholders bore the loss when Wirecard collapsed",
+      "detail": "Sept/Oct 2019: Credit Suisse arranged sale of EUR900M notes exchangeable into Wirecard shares through SPV Argentum Netherlands BV, using SoftBank's original convertible as collateral, issued to institutional investors. GlobalCapital: this let SoftBank 'fund its entire investment without putting in a cent of its own money' while gaining 'tens of millions of upfront cash profits.' Any losses would 'in theory impact SoftBank's partners rather than the group itself.' At Wirecard's June 2020 collapse the Argentum notes cratered from ~73.5 to ~13.5 cents on the euro; post-insolvency they were unwound via a modified Dutch auction (~Jul 8 2020) overseen by Credit Suisse. This is the variant where SoftBank protected ITSELF and passed the bag to bond investors (cf #11563).",
+      "source_datasets": [
+        "bloomberg",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2019-10-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 04:00:43",
+      "target_name": "SoftBank Strategic Investment Fund",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bloomberg.com/news/articles/2020-07-01/wirecard-linked-notes-to-be-unwound-after-insolvency-filing-kc3pr6be",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2020/06/24/softbanks-1-billion-wirecard-investment-under-scrutiny.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.globalcapital.com/article/b1h78pftzs998x/softbank-derisks-wirecard-investment-with-startling-cb-arb",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11634,
+      "finding_type": "intelligence",
+      "summary": "SIF SCOPE: Wirecard is the ONLY deal documented as funded by the Strategic Investment Fund personal-coinvest pool. Despite targeted search of FT/Bloomberg/CNBC/WaPo, no second portfolio deal is reported as using the same Mubadala+executives-personal-money structure. The SIF was a single-trade special-purpose pool, not a multi-deal portfolio vehicle.",
+      "detail": "The Feb 2020 FT/Bloomberg reporting frames the SIF's Wirecard convertible as the PROOF-OF-CONCEPT track record marketed to raise a NEW, larger Abu Dhabi fund (see separate finding) \u2014 i.e. the SIF itself was not scaled into a portfolio; it was the demo. Vision Fund deals Naheta also led (Auto1, Roivant, Loggi, Energy Vault, Creditas, CMT, Nvidia, AutoStore) were Vision Fund / SoftBank balance sheet, NOT the personal pool. The later SB Northstar listed-equity book (PacBio, Roche, the 'Nasdaq Whale' options) was a SEPARATE vehicle and SoftBank/Son capital, not the SIF. So the honest answer to 'did the personal-coinvest pool extend beyond Wirecard?' is: the SIF itself, no \u2014 but the PATTERN of principals co-investing personally recurred in two adjacent structures (SB Northstar; the planned Misra/Naheta Abu Dhabi fund).",
+      "source_datasets": [
+        "cnbc",
+        "wikipedia",
+        "bloomberg",
+        "ft"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:33:08",
+      "target_name": "SoftBank Strategic Investment Fund",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Akshay_Naheta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bloomberg.com/news/articles/2020-02-16/softbank-fund-draws-investors-for-hedge-fund-style-vehicle-ft",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2020/06/24/softbanks-1-billion-wirecard-investment-under-scrutiny.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11641,
+      "finding_type": "legal",
+      "summary": "SIF DISCLOSURE/LITIGATION STATUS: No standalone SEC/court disclosure of the SIF as an entity was located. The German Bundestag Wirecard inquiry (2,129-page report, June 2021) documented SoftBank's EUR900m convertible and Naheta's role/diligence access, and a July 2022 finding (Irish Times/Business Standard, from the inquiry record) is that Wirecard FORGED client data to secure the SoftBank money. Scrutiny of the SIF/Northstar personal-coinvest structures came via investigative press (FT/Bloomberg/CNBC) and the Elliott Management activist pressure (Feb 2020), NOT a regulator action against the fund itself. Quinn Emanuel's CSV v. SoftBank complaint is WeWork-related and does not mention the SIF.",
+      "detail": "FACT: Bundestag inquiry report June 2021; Naheta agreed SoftBank could view Wirecard client data in Munich HQ. FACT (per inquiry record, July 2022): Wirecard forged/faked client data to obtain the EUR900m. FACT: no SEC registration or litigation naming 'SoftBank Strategic Investment Fund' found. FACT: SB Northstar's personal-stake conflict was an investor/governance controversy (Elliott pressure) and was wound down, not subject to a located enforcement action. NEGATIVE RESULT: targeted search did not surface any regulator, prosecutor, or civil claim directed at the SIF as a vehicle \u2014 the off-balance-sheet personal pool largely escaped formal legal scrutiny even as Wirecard itself was prosecuted.",
+      "source_datasets": [
+        "wikipedia",
+        "irishtimes"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-06-25 05:34:06",
+      "target_name": "SoftBank Strategic Investment Fund",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Wirecard_scandal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.business-standard.com/article/international/germany-s-wirecard-faked-client-data-to-gain-900-mn-from-softbank-report-122071100662_1.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.irishtimes.com/business/financial-services/2022/07/11/wirecard-forged-client-details-to-secure-900mn-investment-from-softbank/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2019-10-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "BAG-PASSING: Credit Suisse repackaged SoftBank's EUR900M Wirecard convertible into exchangeable notes via SPV Argentum Netherlands BV (Oct 2019) and sold them to outside institutional investors at less attractive terms \u2014 letting SoftBank insiders + Mubadala recover principal, book tens of millions upfront, and put in ~zero net capital. Outside bondholders bore the loss when Wirecard collapsed",
+      "confidence": "high",
+      "id": 11607
+    }
+  ],
+  "curation": {
+    "key_finding_ids": [
+      11607,
+      11641,
+      11634
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          11607,
+          11634
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-06-28T17:53:21.427340",
+    "lead": "<p>The <strong>SoftBank Strategic Investment Fund</strong> (SIF) was an off-balance-sheet co-investment pool associated with <a href=\"/dossiers/softbank-group\">SoftBank Group</a> through which principals invested personally rather than via the Vision Fund or <a href=\"/dossiers/softbank\">SoftBank</a>'s own balance sheet, according to reporting synthesized across financial outlets [Finding #11634]. Cross-reference of Financial Times, Bloomberg and CNBC reporting identifies <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, his Vision Fund colleague Akshay Naheta, and Abu Dhabi's Mubadala as the parties who put personal capital into the vehicle [Finding #11634]. According to that reporting, the only deal documented as funded through the SIF is the roughly &euro;900 million convertible bond SoftBank arranged in the German payments company Wirecard in April 2019 [Finding #11634].</p><p>In September and October 2019, <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a> repackaged that convertible into exchangeable notes issued through a Dutch special-purpose vehicle, Argentum Netherlands BV, and sold them to outside institutional investors [Finding #11607]. According to GlobalCapital, the structure let SoftBank-side investors recover principal and book upfront cash profit while putting in close to zero net capital, leaving any eventual loss with the outside bondholders [Finding #11607]. When Wirecard collapsed into insolvency in June 2020, the Argentum notes fell from about 73.5 to about 13.5 cents on the euro and were unwound through a modified Dutch auction overseen by Credit Suisse in July 2020 [Finding #11607].</p><p>Analysis of the available record indicates that no SEC registration, court action, or regulatory proceeding naming the SIF as an entity has been located, and the pool itself was not the target of a located enforcement action even as Wirecard was prosecuted [Finding #11641]. According to the inquiry record, Wirecard executives Markus Braun and Jan Marsalek were the parties charged and convicted, while Misra was an investor who was never charged and is not alleged to have participated in the fraud [Finding #11641]. Germany's Bundestag inquiry into the Wirecard scandal documented the &euro;900 million convertible and Naheta's diligence access, and according to inquiry-record reporting in July 2022, Wirecard forged client data to secure the SoftBank money [Finding #11641].</p>",
+    "system_role": "The SIF illustrates how an off-balance-sheet pool can let connected principals take a position, transfer the downside to outside investors through a repackaging vehicle, and exit a documented fraud exposure without becoming the subject of regulatory action directed at the pool itself.",
+    "sections": [
+      {
+        "id": "structure-and-participants",
+        "title": "Structure and Participants",
+        "content": "<p>According to reporting synthesized across the financial press, the SIF was a co-investment pool through which principals associated with <a href=\"/dossiers/softbank-group\">SoftBank Group</a> invested personal money, distinct from both the Vision Fund and <a href=\"/dossiers/softbank\">SoftBank</a>'s own balance sheet [Finding #11634]. Cross-reference of Financial Times, Bloomberg and CNBC reporting names <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, Akshay Naheta, and Abu Dhabi's sovereign investor Mubadala as participants in the vehicle [Finding #11634]. Mubadala is led by <a href=\"/dossiers/khaldoon-al-mubarak\">Khaldoon Al Mubarak</a>, and according to that reporting the same Gulf sovereign capital that anchored SoftBank's funds appears alongside the SoftBank-side principals in this pool [Finding #11634].</p><p>Cross-reference of the available reporting indicates that the SIF functioned as a single-trade special-purpose pool rather than a multi-deal portfolio vehicle, since targeted searches of the financial press identified no second deal funded through the same Mubadala-plus-executives personal-money structure [Finding #11634]. According to that analysis, Vision Fund deals Naheta also led, and the later SB Northstar listed-equity book, were separate vehicles drawing on SoftBank or Vision Fund capital rather than the personal pool [Finding #11634]. According to February 2020 reporting, the Wirecard convertible was framed as the track record marketed to raise a larger Abu Dhabi fund, which the analysis reads as indicating the SIF was treated as a demonstration of the structure rather than scaled into a portfolio [Finding #11634].</p>",
+        "viz": null
+      },
+      {
+        "id": "wirecard-convertible-and-risk-transfer",
+        "title": "The Wirecard Convertible and Risk Transfer",
+        "content": "<p>According to the synthesized reporting, the SIF's documented transaction was a roughly &euro;900 million convertible bond in the German payments processor Wirecard, arranged in April 2019 [Finding #11634]. In September and October 2019, <a href=\"/dossiers/credit-suisse-group-ag\">Credit Suisse</a> arranged the sale of &euro;900 million in notes exchangeable into Wirecard shares through the special-purpose vehicle Argentum Netherlands BV, using the original convertible as collateral and issuing the notes to outside institutional investors [Finding #11607]. According to GlobalCapital, the arrangement let <a href=\"/dossiers/softbank\">SoftBank</a>-side investors and Mubadala recover principal and book tens of millions in upfront cash profit while committing close to zero net capital, with any losses falling on the outside bondholders rather than the SoftBank group [Finding #11607].</p><p>When Wirecard filed for insolvency in June 2020, the Argentum notes fell from about 73.5 to about 13.5 cents on the euro and were unwound through a modified Dutch auction overseen by Credit Suisse around July 8, 2020, according to the reporting [Finding #11607]. According to that reporting, the structure placed the connected principals in a senior, tradeable position that was offloaded before the collapse while outside investors absorbed the loss [Finding #11607].</p>",
+        "viz": null
+      },
+      {
+        "id": "disclosure-and-legal-status",
+        "title": "Disclosure and Legal Status",
+        "content": "<p>Analysis of the available record indicates that no standalone SEC or court disclosure of the SIF as an entity was located, and targeted searching surfaced no regulator, prosecutor, or civil claim directed at the pool as a vehicle [Finding #11641]. According to that record, the Quinn Emanuel-filed CSV complaint against <a href=\"/dossiers/softbank\">SoftBank</a> concerns WeWork and does not mention the SIF [Finding #11641]. Analysis of the available record further indicates that scrutiny of the personal co-investment structures came through investigative press and the Elliott Management activist pressure of February 2020 rather than through formal action against the fund [Finding #11641].</p><p>According to the inquiry record, the underlying fraud was prosecuted at the company level: Wirecard executives Markus Braun and Jan Marsalek were the perpetrators, while <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> was an investor who was never charged and is not alleged to have committed fraud [Finding #11641]. According to Germany's Bundestag inquiry, whose report was published in June 2021, the &euro;900 million convertible was documented and Naheta agreed SoftBank could review Wirecard client data at the company's Munich headquarters [Finding #11641]. According to the Irish Times and Business Standard, citing the inquiry record in July 2022, Wirecard forged client data to obtain the &euro;900 million [Finding #11641].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What were the precise capital contributions and profit shares of each SIF participant (Misra, Naheta, Mubadala) in the Wirecard convertible?",
+      "Was the SIF a formally constituted legal entity, and in what jurisdiction was it domiciled?",
+      "Did any SIF participant face internal SoftBank governance review over the personal co-investment alongside a Vision Fund target?",
+      "What were the final recoveries, if any, for the outside investors who held the Argentum Netherlands BV exchangeable notes after the 2020 unwind?",
+      "Did the planned larger Abu Dhabi fund that the Wirecard trade was marketed to raise ever close, and under what structure?"
+    ],
+    "applicable_models": [
+      "complexity-as-credential"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "SoftBank Strategic Investment Fund",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": [
+      {
+        "date": "2019-10-01",
+        "label": "BAG-PASSING: Credit Suisse repackaged SoftBank's EUR900M Wirecard convertible into exchangeable notes via SPV Argentum Netherlands BV (Oct 2019) and sold them to outside institutional investors at less attractive terms \u2014 letting SoftBank insiders + Mubadala recover principal, book tens of millions upfront, and put in ~zero net capital. Outside bondholders bore the loss when Wirecard collapsed",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 11607
+      }
+    ]
+  }
+}

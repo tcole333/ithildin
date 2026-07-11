@@ -187,21 +187,23 @@ For each tool listed in the investigation profile's corpus_tools, run a search a
 
 For tools that support sub-commands (entities, cooccurrence, emails, docs, triples), run those additional queries as well.
 
-For EVERY document found, read the full text:
-.venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
+For EVERY document found, read the full text (kabasshouse holds the highest-quality OCR for any EFTA id):
+.venv/bin/python3 tools/ingest_kabasshouse.py doc EFTA_ID
 
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 RECORD findings using:
 .venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
   --summary "..." --evidence EFTA_ID --claim-type direct_quote \
-  --source-quote "EFTA_ID:exact quote" --sources doj_vol11 --confidence LEVEL
+  --source-quote "EFTA_ID:exact quote" --sources kabass --confidence LEVEL
+
+NOTE: the same EFTA page appearing in kabasshouse AND doj_vol11/lmsband is ONE source re-OCR'd, not corroboration — cite the source you actually read (usually kabass).
 
 Record connections using:
 .venv/bin/python3 tools/findings_tracker.py connect --person-a "..." --person-b "..." \
   --type TYPE --detail "..." --evidence EFTA_ID --confidence LEVEL
 
-If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 331K pages.
+If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 1.42M pages.
 
 PROACTIVE SOURCE DISCOVERY:
 As you search, be curious. If documents reference data sources we don't have tools for, or mention databases/registries/archives that could be queried, note them. For example:

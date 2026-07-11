@@ -1,0 +1,181 @@
+{
+  "name": "Selina Hospitality PLC",
+  "slug": "selina-hospitality-plc",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:53:21.164586",
+  "last_updated": "2026-06-22T08:54:14",
+  "stats": {
+    "total_findings": 3,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-22T08:54:14"
+  },
+  "findings": [
+    {
+      "id": 11537,
+      "finding_type": "financial",
+      "summary": "Selina went public via de-SPAC with BOA Acquisition Corp (Oct 27 2022) at ~$1.2B equity value; ticker SLNA on Nasdaq",
+      "detail": "BOA Acquisition Corp (CIK 1838544; NYSE BOAS) had ~$230M trust. Deal announced Dec 2 2021 at ~$1.2B pro-forma equity value. Financing stack: ~$55M PIPE (incl $15M sponsor backstop; investors South Light Capital, MORE Investment House, Sir Ronald Cohen) + $147.5M of 6% senior unsecured convertible notes due 2026 (conversion ~$11.50) + trust cash. Min cash condition cut from $70M to $55M in July 2022. Existing Selina holders kept ~71%. Combined co = Selina Hospitality PLC (CIK 1909417), a UK PLC / foreign private issuer (files 20-F/6-K). Special-meeting vote ~Oct 21 2022: 24,084,072 for / 1,697,930 against. Closed Oct 27 2022; trading SLNA / SLNAW.",
+      "source_datasets": [
+        "SEC EDGAR 8-K/425/DEFM14A; businesswire 2022-10-27; SPACInsider 2022-10-24"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:53:28",
+      "target_name": "Selina Hospitality PLC",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1909417",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1838544/000119312522271114/d395169d8k.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11539,
+      "finding_type": "financial",
+      "summary": "Selina collapsed post-SPAC: going-concern doubt by FY2022, $147.5M notes restructured Jan 2024 with new equity at $0.20/share, Osprey took 41.3% + board control, UK administration July 22 2024, delisted, assets sold to Collective Hospitality",
+      "detail": "Selina received only a fraction of the SPAC trust at close (heavy redemptions; min cash had been cut to $55M). FY2022 20-F (auditor Baker Tilly US): substantial-doubt going-concern paragraph; current assets $79.7M vs current liabilities $188.9M, financial debt $182.8M. Jan 2024 Note Restructuring: $132.8M of 2026 Notes exchanged for warrants + new 6% senior secured 2029 Notes; $14.7M Kibbutz (founder) Notes swapped for new debt/equity; Osprey Investments + Osprey purchased $28.0M of ordinary shares at $0.20/share (vs $10 SPAC unit). Osprey International Ltd (Cyprus; Osprey<-Newbridge<-Riverhead) ended at 155,777,897 shares = 41.3% of 378,418,620 shares, plus Jan 25 2024 Investor Rights Agreement giving it the right to designate a MAJORITY of the board, the chair, and majorities of key committees. Defaulted on $50M IDB Invest loan; missed ~$455K interest due 15 Jul 2024. Board declared 'no reasonable prospects' of avoiding insolvency; FTI Consulting (Johnson, Ballinger, Khaki) appointed Joint Administrators under UK Insolvency Act 1986 Para 22 Sch B1 on 22 Jul 2024; Form 25 delisting, Nasdaq suspension ~29 Jul 2024. Aug 22 2024 Collective Hospitality (Singapore) bought ~100 hotels in 22 countries + Remote Year out of administration (price undisclosed).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:53:55",
+      "target_name": "Selina Hospitality PLC",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1909417/000119312524032313/d718041dsc13d.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1909417/000149315224028632/form6-k.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sec.gov/Archives/edgar/data/1909417/000190941723000006/slna-20221231.htm",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11540,
+      "finding_type": "financial",
+      "summary": "WeWork-echo read: Selina is the SoftBank-FREE control case \u2014 a Neumann-orbit, narrative-driven 'experiential hospitality' de-SPAC that imploded WITHOUT any SoftBank capital, isolating the Neumann/hype pattern from the SoftBank funding pattern",
+      "detail": "INFERENCE/SYNTHESIS. Selina rhymes with WeWork structurally (charismatic Israeli founder narrative, 'asset-light' real-estate-as-tech pitch, millennial/digital-nomad lifestyle branding, Neumann money, blitzscaled site count, persistent losses, public-market debut at a rich headline valuation followed by ~99% destruction). But it diverges on the financier: WeWork was SoftBank's signature loss; Selina took NO SoftBank/Vision Fund money at any stage. The wipeout cascade falls hardest on SPAC retail (who bought ~$10 units; equity now worthless after delisting) and on 2026 noteholders forced into a 60%-haircut exchange. PROTECTED/RECAPITALIZED: the rescue financier Osprey (Cyprus) converted distress into 41.3% ownership + board control at $0.20/share, and founders' Kibbutz vehicle was handled inside the restructuring rather than via the open market. This is the same end-state as WeWork \u2014 late/retail capital absorbs the loss while insiders and the restructuring sponsor end up with the controlling equity \u2014 but reached without SoftBank, which is the analytically useful point for the softbank-caper thesis: it shows the value-extraction pattern is driven by the Neumann/SPAC/narrative mechanics, not specifically by SoftBank's checkbook. Caveat: no public evidence found that Neumann personally cashed OUT of Selina pre-collapse (unlike his WeWork stock sales); his ~8.4% appears to have ridden down. Treat the founder-enrichment-at-retail-expense parallel as partial, not proven, for Selina.",
+      "source_datasets": [
+        "calcalist"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:54:14",
+      "target_name": "Selina Hospitality PLC",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.calcalistech.com/ctechnews/article/skdi5y11v3",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11539,
+      11537,
+      11540
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11537,
+          11539,
+          11540
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:53:21.214679",
+    "lead": "<p><b>Selina Hospitality PLC</b> is a UK public limited company that operated an \"experiential hospitality\" chain of hostels and co-working sites aimed at digital-nomad and millennial travelers. It became publicly traded on the Nasdaq under the ticker SLNA on October 27, 2022, after a de-SPAC merger with BOA Acquisition Corp that valued the combined company at roughly $1.2 billion in pro-forma equity [Finding #11537]. Existing Selina holders retained approximately 71% of the company, and the financing stack combined a roughly $55 million PIPE, $147.5 million of 6% senior unsecured convertible notes due 2026, and residual SPAC trust cash after heavy redemptions [Finding #11537].</p><p>The company reported going-concern doubt in its FY2022 annual report and restructured the $147.5 million note program in January 2024, issuing new equity at $0.20 per share against the $10 SPAC unit price; the rescue financier Osprey Investments emerged with a 41.3% stake and the contractual right to designate a majority of the board [Finding #11539]. Selina defaulted on a $50 million IDB Invest loan, and after the board determined there was \"no reasonable prospects\" of avoiding insolvency, FTI Consulting was appointed joint administrators under the UK Insolvency Act 1986 on July 22, 2024 [Finding #11539]. The shares were delisted, and the operating assets \u2014 roughly 100 hotels across 22 countries plus the Remote Year business \u2014 were sold out of administration to Collective Hospitality in August 2024 [Finding #11539].</p><p>Within the <a href=\"/dossiers/we-company\">WeWork</a> phase of the softbank-caper investigation, Selina is examined as a control case for the de-SPAC trajectory observed at that company. According to analysis in the investigation, <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> held a reported stake of approximately 8.4% acquired in a 2018 round alongside the Abraaj Group, while the company took no <a href=\"/dossiers/softbank-group\">SoftBank Group</a> or Vision Fund capital at any stage [Finding #11540]. According to that analysis, Selina isolates the founder and narrative-driven SPAC mechanics from <a href=\"/dossiers/softbank\">SoftBank</a>'s funding role [Finding #11540].</p>",
+    "system_role": "Selina is used in the investigation as a comparison case: a de-SPAC hospitality company that followed the same hype-to-collapse trajectory as WeWork but without SoftBank financing, allowing the role of founder narrative and SPAC structure to be examined separately from the role of a single large backer.",
+    "sections": [
+      {
+        "id": "de-spac-and-collapse",
+        "title": "Public Listing and Collapse",
+        "viz": null,
+        "content": "<p>Selina entered the public markets through a merger with BOA Acquisition Corp, a special-purpose acquisition company (CIK 1838544) that held a trust of roughly $230 million [Finding #11537]. The deal was announced on December 2, 2021, at a pro-forma equity value of about $1.2 billion, and the financing structure layered a roughly $55 million PIPE \u2014 including a $15 million sponsor backstop and investors South Light Capital, MORE Investment House, and Sir Ronald Cohen \u2014 over $147.5 million of 6% senior unsecured convertible notes due 2026 with a conversion price near $11.50 [Finding #11537]. The minimum cash condition was reduced from $70 million to $55 million in July 2022 [Finding #11537]. A special-meeting vote on approximately October 21, 2022 passed 24,084,072 to 1,697,930, and the merger closed on October 27, 2022, with shares trading as SLNA and warrants as SLNAW [Finding #11537]. The combined company, Selina Hospitality PLC (CIK 1909417), was a UK public limited company and foreign private issuer filing on Forms 20-F and 6-K [Finding #11537].</p><p>Selina received only a fraction of the SPAC trust at closing because of heavy shareholder redemptions [Finding #11539]. Its FY2022 20-F, audited by Baker Tilly US, carried a substantial-doubt going-concern paragraph, with current assets of $79.7 million against current liabilities of $188.9 million and financial debt of $182.8 million [Finding #11539]. In January 2024 the company restructured its note program: $132.8 million of the 2026 notes were exchanged for warrants and new 6% senior secured notes due 2029, and $14.7 million of founder-affiliated Kibbutz notes were swapped for new debt and equity [Finding #11539]. Osprey Investments and Osprey purchased $28.0 million of ordinary shares at $0.20 per share \u2014 against the $10 SPAC unit price \u2014 leaving Osprey International Ltd, a Cyprus entity, holding 155,777,897 shares, or 41.3% of 378,418,620 shares outstanding [Finding #11539]. A January 25, 2024 Investor Rights Agreement gave Osprey the right to designate a majority of the board, the chair, and majorities of key committees [Finding #11539].</p><p>Selina subsequently defaulted on a $50 million IDB Invest loan and missed an interest payment of roughly $455,000 due July 15, 2024 [Finding #11539]. The board declared that there were \"no reasonable prospects\" of avoiding insolvency, and FTI Consulting was appointed joint administrators under Paragraph 22 of Schedule B1 to the UK Insolvency Act 1986 on July 22, 2024, followed by a Form 25 delisting and Nasdaq suspension around July 29, 2024 [Finding #11539]. On August 22, 2024, Collective Hospitality, a Singapore-based operator, acquired approximately 100 hotels in 22 countries along with the Remote Year business out of administration for an undisclosed price [Finding #11539].</p>"
+      },
+      {
+        "id": "comparison-to-wework",
+        "title": "Comparison Within the Investigation",
+        "viz": null,
+        "content": "<p>According to analysis in the softbank-caper investigation, Selina is a structural parallel to <a href=\"/dossiers/we-company\">WeWork</a> — the company associated with <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>'s SoftBank Vision Fund — sharing a founder-narrative, asset-light real-estate proposition with lifestyle branding, blitzscaled site growth, persistent losses, and a public-market debut at a high headline valuation followed by near-total equity destruction [Finding #11540]. According to that analysis, the point of divergence is the financier \u2014 WeWork was backed by <a href=\"/dossiers/softbank-group\">SoftBank Group</a> and its Vision Fund, while Selina took no <a href=\"/dossiers/softbank\">SoftBank</a> or Vision Fund capital at any stage [Finding #11540]. Cross-reference of the financing records in the investigation treats this contrast as isolating the founder and SPAC-narrative mechanics from SoftBank's specific funding role [Finding #11540].</p><p>According to the investigation's reading, the loss distribution at Selina fell hardest on SPAC retail holders, whose equity became worthless after delisting, and on 2026 noteholders pushed into a roughly 60% haircut exchange, while the rescue financier Osprey converted distress into a 41.3% controlling stake at $0.20 per share and founder-affiliated debt was handled inside the restructuring rather than the open market [Finding #11540]. Examination of the public record in the investigation found no evidence that <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> cashed out of Selina before its collapse, and analysis indicates his reported stake of approximately 8.4% lost its value alongside other equity holders, so the founder-enrichment parallel to WeWork is treated as partial rather than established [Finding #11540].</p>"
+      }
+    ],
+    "open_questions": [
+      "What were the terms and recovery, if any, for the 2026 convertible noteholders forced into the January 2024 exchange?",
+      "What is the ownership chain behind Osprey International Ltd (Cyprus), described as Osprey <- Newbridge <- Riverhead, and who are its beneficial owners?",
+      "What price did Collective Hospitality pay for Selina's roughly 100 hotels and the Remote Year business in the August 2024 administration sale?",
+      "What was the disposition of Adam Neumann's reported ~8.4% stake through the de-SPAC and restructuring, and did any affiliated vehicle receive treatment inside the restructuring?",
+      "Did any party recover on the defaulted $50 million IDB Invest loan, and what collateral or guarantees supported it?"
+    ],
+    "applicable_models": []
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Selina Hospitality PLC",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}

@@ -17,6 +17,7 @@ import argparse
 import re
 import sqlite3
 import sys
+from collections import namedtuple
 from pathlib import Path
 
 try:
@@ -117,6 +118,254 @@ def classify_confidence(score):
     elif score >= 82:
         return "possible"
     return None
+
+
+# ── Write-path resolve-or-create ─────────────────────────────
+#
+# The single guard that keeps duplicate entity rows from accruing. Ingestion
+# tools call resolve_or_create_entity() instead of a bare INSERT so a new name
+# is matched against the existing registry before a row is created.
+
+EntityResolution = namedtuple("EntityResolution", ["entity_id", "action", "matched_name", "score"])
+
+# Auto-match confidence. 97 == the "confirmed" tier in classify_confidence();
+# Sr/II father-son pairs score ~91 on token_sort_ratio and therefore stay distinct.
+DEFAULT_MATCH_THRESHOLD = 97
+
+# Entity types denoting a natural person (everything else is an organization).
+_PERSON_ENTITY_TYPES = {"person"}
+
+# Below this normalized length fuzzy matching is too noisy to trust (e.g. "x", "j").
+_MIN_FUZZY_LEN = 2
+
+
+def _entity_type_family(entity_type):
+    """Coarse family for compatibility checks. None == unknown/unconstrained."""
+    if not entity_type or entity_type == "unknown":
+        return None
+    return "person" if entity_type in _PERSON_ENTITY_TYPES else "org"
+
+
+def _jurisdiction_compatible(a, b):
+    """Two jurisdictions are compatible if either is unknown or they're equal."""
+    if not a or not b:
+        return True
+    return a.strip().lower() == b.strip().lower()
+
+
+def _pick_jurisdiction_match(rows, jurisdiction):
+    """Choose the best same-name row given the caller's jurisdiction, or None.
+
+    Prefers an equal jurisdiction, then a NULL-jurisdiction stub to enrich. If the
+    only same-name rows carry a *different* non-null jurisdiction, returns None so
+    the caller inserts a distinct row (distinct jurisdiction => possibly distinct
+    entity, matching the UNIQUE(name, jurisdiction) intent). When the caller gives
+    no jurisdiction, prefers a jurisdiction-bearing (richer) row.
+    """
+    if not rows:
+        return None
+    if jurisdiction:
+        jl = jurisdiction.strip().lower()
+        for r in rows:
+            if r["jurisdiction"] and r["jurisdiction"].strip().lower() == jl:
+                return r
+        for r in rows:
+            if not r["jurisdiction"]:
+                return r
+        return None
+    return sorted(rows, key=lambda r: (r["jurisdiction"] is None, r["id"]))[0]
+
+
+def _backfill_entity_scalars(db, row, *, entity_type=None, jurisdiction=None, ein=None, address=None):
+    """Fill NULL/empty scalar columns on an existing entity from new data.
+
+    Never overwrites an existing non-empty value. entity_type is only upgraded when
+    the stored type is unknown/NULL, so a richer ingest can promote a stub without
+    clobbering a deliberate classification. Does not commit.
+    """
+    updates = {}
+    for col, val in (("jurisdiction", jurisdiction), ("ein", ein), ("address", address)):
+        if val and not row[col]:
+            updates[col] = val
+    if entity_type and entity_type != "unknown" and (not row["entity_type"] or row["entity_type"] == "unknown"):
+        updates["entity_type"] = entity_type
+    if not updates:
+        return
+    sets = ", ".join(f"{c} = ?" for c in updates)
+    db.execute(f"UPDATE entities SET {sets} WHERE id = ?", (*updates.values(), row["id"]))
+
+
+def _record_variant_alias(db, *, canonical, alias, entity_id, entity_type):
+    """Record a fuzzy-discovered spelling as an alias so the exact cache resolves it next time."""
+    if not alias or not canonical or alias.strip().lower() == canonical.strip().lower():
+        return
+    alias_type = "person_variant" if _entity_type_family(entity_type) == "person" else "entity_variant"
+    db.execute(
+        "INSERT OR IGNORE INTO name_aliases (canonical_name, alias, alias_type, entity_id, created_by) "
+        "VALUES (?, ?, ?, ?, 'resolve_or_create')",
+        (canonical, alias.strip(), alias_type, entity_id),
+    )
+    # Best-effort: drop the in-process alias cache so name_resolver picks this up.
+    try:
+        from tools.name_resolver import invalidate_cache
+    except ImportError:
+        try:
+            from name_resolver import invalidate_cache
+        except ImportError:
+            invalidate_cache = None
+    if invalidate_cache:
+        invalidate_cache()
+
+
+def _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold):
+    """Return (row, score) for the best guard-passing fuzzy match, or None."""
+    from rapidfuzz import fuzz, process
+
+    rows = db.execute(
+        "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities"
+    ).fetchall()
+    candidates = []
+    norm_names = []
+    for r in rows:
+        cn = normalize_entity_name(r["name"])
+        if not cn:
+            continue
+        candidates.append(r)
+        norm_names.append(cn)
+    if not norm_names:
+        return None
+    fam = _entity_type_family(entity_type)
+    # Pull several so a guard-failing top hit doesn't mask a valid lower one.
+    for _cand_norm, score, idx in process.extract(
+        norm, norm_names, scorer=fuzz.token_sort_ratio, limit=5, score_cutoff=threshold
+    ):
+        row = candidates[idx]
+        if not _jurisdiction_compatible(jurisdiction, row["jurisdiction"]):
+            continue
+        cand_fam = _entity_type_family(row["entity_type"])
+        if fam and cand_fam and fam != cand_fam:
+            continue
+        return (row, score)
+    return None
+
+
+def _insert_entity(db, name, *, entity_type, jurisdiction, ein, address, status, source, notes, agent_run_id):
+    """INSERT a new entity row, tolerating a UNIQUE(name, jurisdiction) race."""
+    cols = ["name", "entity_type"]
+    vals = [name, entity_type or "unknown"]
+    for col, val in (
+        ("jurisdiction", jurisdiction), ("ein", ein), ("address", address),
+        ("status", status), ("source", source), ("notes", notes), ("agent_run_id", agent_run_id),
+    ):
+        if val is not None:
+            cols.append(col)
+            vals.append(val)
+    collist = ", ".join(cols)
+    placeholders = ", ".join("?" for _ in vals)
+    try:
+        cur = db.execute(f"INSERT INTO entities ({collist}) VALUES ({placeholders})", vals)
+        return EntityResolution(cur.lastrowid, "created", name, None)
+    except sqlite3.IntegrityError:
+        row = db.execute(
+            "SELECT id, name FROM entities WHERE name = ? AND COALESCE(jurisdiction, '') = COALESCE(?, '')",
+            (name, jurisdiction),
+        ).fetchone()
+        if row:
+            return EntityResolution(row["id"], "exact", row["name"], 100.0)
+        raise
+
+
+def resolve_or_create_entity(
+    db,
+    name,
+    *,
+    entity_type="unknown",
+    jurisdiction=None,
+    ein=None,
+    address=None,
+    status=None,
+    source=None,
+    notes=None,
+    agent_run_id=None,
+    threshold=DEFAULT_MATCH_THRESHOLD,
+    record_alias=True,
+    backfill=True,
+    use_aliases=True,
+):
+    """Resolve `name` to an existing entity, or insert a new one.
+
+    The write-path guard against duplicate entity rows. Resolution order:
+      1. alias  — name_aliases maps this name to a known entity_id (use_aliases)
+      2. exact  — an existing row has this exact name (jurisdiction-compatible)
+      3. fuzzy  — an existing row's normalized name matches at >= threshold
+                  (token_sort_ratio), subject to jurisdiction + person/org guards
+      4. create — otherwise INSERT a new row
+
+    On an exact/alias/fuzzy match, NULL scalar columns are backfilled from the
+    supplied data (never overwriting) when backfill=True. On a fuzzy match an
+    entity_variant/person_variant alias is recorded (record_alias=True) so the
+    exact path resolves this spelling next time.
+
+    To force a distinct row (e.g. `add-entity --force-new`), pass threshold > 100
+    (skip fuzzy) and use_aliases=False (ignore recorded aliases). The exact
+    UNIQUE(name, jurisdiction) constraint is always honored, so this never yields
+    a true duplicate of an identical (name, jurisdiction).
+
+    Does NOT commit — the caller owns the transaction. Returns an EntityResolution
+    (entity_id, action, matched_name, score); entity_id is None for a blank name.
+    """
+    if not name or not name.strip():
+        return EntityResolution(None, None, None, None)
+    name = name.strip()
+
+    # 1. Alias table (curated or previously auto-recorded variants).
+    if use_aliases:
+        arow = db.execute(
+            "SELECT canonical_name, entity_id FROM name_aliases "
+            "WHERE lower(alias) = lower(?) AND entity_id IS NOT NULL LIMIT 1",
+            (name,),
+        ).fetchone()
+        if arow and arow["entity_id"]:
+            if backfill:
+                erow = db.execute(
+                    "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities WHERE id = ?",
+                    (arow["entity_id"],),
+                ).fetchone()
+                if erow:
+                    _backfill_entity_scalars(db, erow, entity_type=entity_type,
+                                             jurisdiction=jurisdiction, ein=ein, address=address)
+            return EntityResolution(arow["entity_id"], "alias", arow["canonical_name"], 100.0)
+
+    # 2. Exact name match (jurisdiction-aware).
+    same_name = db.execute(
+        "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities WHERE name = ?",
+        (name,),
+    ).fetchall()
+    match = _pick_jurisdiction_match(same_name, jurisdiction)
+    if match:
+        if backfill:
+            _backfill_entity_scalars(db, match, entity_type=entity_type,
+                                     jurisdiction=jurisdiction, ein=ein, address=address)
+        return EntityResolution(match["id"], "exact", match["name"], 100.0)
+
+    # 3. Fuzzy normalized match.
+    norm = normalize_entity_name(name)
+    if threshold <= 100 and len(norm) >= _MIN_FUZZY_LEN:
+        fuzzy = _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold)
+        if fuzzy:
+            row, score = fuzzy
+            if backfill:
+                _backfill_entity_scalars(db, row, entity_type=entity_type,
+                                         jurisdiction=jurisdiction, ein=ein, address=address)
+            if record_alias:
+                _record_variant_alias(db, canonical=row["name"], alias=name,
+                                      entity_id=row["id"], entity_type=row["entity_type"])
+            return EntityResolution(row["id"], "fuzzy", row["name"], round(float(score), 1))
+
+    # 4. Create.
+    return _insert_entity(db, name, entity_type=entity_type, jurisdiction=jurisdiction,
+                          ein=ein, address=address, status=status, source=source,
+                          notes=notes, agent_run_id=agent_run_id)
 
 
 def cmd_scan(args):
@@ -425,6 +674,27 @@ def cmd_review(args):
     print(f"\n  Referenced in: {finding_count} findings, {connection_count} connections")
 
 
+def _merge_text(keep_notes, drop_notes, drop_id):
+    """Return keep_notes with drop_notes appended (tagged), unless already contained."""
+    keep_notes = (keep_notes or "").strip()
+    drop_notes = (drop_notes or "").strip()
+    if not drop_notes or drop_notes in keep_notes:
+        return keep_notes
+    tag = f"[merged from #{drop_id}] {drop_notes}"
+    return f"{keep_notes}\n{tag}".strip()
+
+
+def _merge_sources(keep_source, drop_source):
+    """Union comma-separated source lists, preserving order, de-duplicated."""
+    seen, out = set(), []
+    for chunk in (keep_source or ""), (drop_source or ""):
+        for s in (p.strip() for p in chunk.split(",")):
+            if s and s.lower() not in seen:
+                seen.add(s.lower())
+                out.append(s)
+    return ",".join(out)
+
+
 def cmd_merge(args):
     """Merge two entities — keep one, alias the other."""
     db = get_db()
@@ -479,6 +749,36 @@ def cmd_merge(args):
     if drop_rels_a + drop_rels_b:
         actions.append(f"  - Reassign {drop_rels_a + drop_rels_b} relations")
 
+    # 5. Repoint other FK references (name_aliases, institutional_pillars)
+    drop_aliases = db.execute(
+        "SELECT COUNT(*) FROM name_aliases WHERE entity_id = ?", (drop["id"],)
+    ).fetchone()[0]
+    if drop_aliases:
+        actions.append(f"  - Repoint {drop_aliases} name aliases (drop self-aliases)")
+    drop_pillars = db.execute(
+        "SELECT COUNT(*) FROM institutional_pillars WHERE entity_id = ?", (drop["id"],)
+    ).fetchone()[0]
+    if drop_pillars:
+        actions.append(f"  - Repoint {drop_pillars} institutional pillars")
+
+    # Preserve the dropped entity's notes/source into the kept entity — a merge
+    # must not silently discard intel. Union sources; append notes if not already
+    # contained. Also inherit a more-specific entity_type if keep is 'unknown'.
+    merged_notes = _merge_text(keep.get("notes"), drop.get("notes"), drop["id"])
+    merged_source = _merge_sources(keep.get("source"), drop.get("source"))
+    inherit_type = (
+        drop["entity_type"]
+        if keep["entity_type"] in (None, "", "unknown")
+        and drop["entity_type"] not in (None, "", "unknown")
+        else None
+    )
+    if merged_notes != (keep.get("notes") or ""):
+        actions.append(f"  - Merge notes from #{drop['id']} into #{keep['id']}")
+    if merged_source != (keep.get("source") or ""):
+        actions.append(f"  - Union sources -> '{merged_source}'")
+    if inherit_type:
+        actions.append(f"  - Adopt entity_type '{inherit_type}' from #{drop['id']}")
+
     for a in actions:
         print(a)
 
@@ -532,6 +832,35 @@ def cmd_merge(args):
         db.execute(
             "DELETE FROM entity_relations WHERE entity_a_id = ? OR entity_b_id = ?",
             (drop["id"], drop["id"]),
+        )
+
+        # Repoint name_aliases that referenced the dropped entity to the kept one,
+        # then drop any alias that now points at its own canonical name (self-alias).
+        # Without this the FK name_aliases.entity_id -> entities.id blocks the delete.
+        db.execute(
+            """UPDATE OR IGNORE name_aliases SET entity_id = ?, canonical_name = ?
+               WHERE entity_id = ?""",
+            (keep["id"], keep["name"], drop["id"]),
+        )
+        db.execute(
+            """DELETE FROM name_aliases
+               WHERE entity_id = ? OR alias = canonical_name""",
+            (drop["id"],),
+        )
+
+        # Repoint any institutional_pillars FK references
+        db.execute(
+            "UPDATE OR IGNORE institutional_pillars SET entity_id = ? WHERE entity_id = ?",
+            (keep["id"], drop["id"]),
+        )
+        db.execute(
+            "DELETE FROM institutional_pillars WHERE entity_id = ?", (drop["id"],)
+        )
+
+        # Preserve notes/source/type from the dropped entity into the kept one
+        db.execute(
+            "UPDATE entities SET notes = ?, source = ?, entity_type = ? WHERE id = ?",
+            (merged_notes, merged_source, inherit_type or keep["entity_type"], keep["id"]),
         )
 
         # Delete the dropped entity

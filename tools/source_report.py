@@ -103,13 +103,6 @@ def check_api(name, test_url=None, headers=None):
         req_headers = {"User-Agent": "OSINT-Research osint-research@proton.me"}
         if headers:
             req_headers.update(headers)
-        # DugganUSA requires Bearer token auth
-        if "dugganusa.com" in test_url:
-            api_key = os.environ.get("DUGGANUSA_API_KEY")
-            if api_key:
-                req_headers["Authorization"] = f"Bearer {api_key}"
-            else:
-                return {"status": "no_api_key", "start_cmd": "export DUGGANUSA_API_KEY=<key>"}
         req = Request(test_url, headers=req_headers)
         with urlopen(req, timeout=5) as resp:
             return {"status": "available" if resp.status == 200 else f"error:{resp.status}"}
@@ -124,11 +117,29 @@ def generate_report():
     sources = {}
 
     # Local SQLite databases
+    sources["Kabasshouse"] = {
+        "description": "PRIMARY Epstein corpus: 1.42M OCR'd docs (DOJ DS1-12 + FBI + House), 10.6M entities, 49.7K financial txns",
+        "query_tool": "tools/ingest_kabasshouse.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "kabasshouse_epstein.db",
+            "SELECT COUNT(*) FROM documents"
+        ),
+    }
+
     sources["DOJ Vol 11"] = {
-        "description": "331K OCR'd pages from DOJ Volume 11 release",
+        "description": "331K OCR'd pages from DOJ Volume 11 release (FALLBACK — subset of Kabasshouse)",
         "query_tool": "tools/query_doj.py",
         **check_sqlite(
             Path("/Users/travcole/projects/epstein-docs/output/documents.db"),
+            "SELECT COUNT(*) FROM documents"
+        ),
+    }
+
+    sources["FBI Files"] = {
+        "description": "8,150 FBI release docs + named exhibits (Flight Log, Contact Book)",
+        "query_tool": "tools/ingest_fbi_files.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "epstein_fbi_files.db",
             "SELECT COUNT(*) FROM documents"
         ),
     }
@@ -151,15 +162,6 @@ def generate_report():
         ),
     }
 
-    sources["Doc-Explorer"] = {
-        "description": "25K docs, 107K triples, 27K entities (RDF format)",
-        "query_tool": "sqlite3 (direct)",
-        **check_sqlite(
-            PROJECT_ROOT / "datasets" / "Epstein-doc-explorer" / "document_analysis.db",
-            "SELECT COUNT(*) FROM rdf_triples"
-        ),
-    }
-
     sources["Investigation DB"] = {
         "description": "Leads, findings, connections, search log, sessions",
         "query_tool": "tools/lead_tracker.py / tools/findings_tracker.py",
@@ -169,6 +171,21 @@ def generate_report():
         ),
     }
 
+    # ── Selector-pivot capability + breach aggregator ──────────────
+    sources["Selector Pivot"] = {
+        "description": "Fans one selector across free aggregators; emits pending_triage leads + entities. Gated leak adapters: Dehashed (live), IntelX (needs key)",
+        "query_tool": "tools/selector_pivot.py",
+        "status": "available",
+    }
+
+    dehashed_key = os.environ.get("DEHASHED_API_KEY")
+    sources["Dehashed"] = {
+        "description": "Breach/credential aggregator (v2; needs an ACTIVE search subscription). Check live: tools/query_dehashed.py balance",
+        "query_tool": "tools/query_dehashed.py",
+        "status": "configured" if dehashed_key else "no_api_key",
+        **({} if dehashed_key else {"start_cmd": "export DEHASHED_API_KEY=<key>"}),
+    }
+
     # Parquet files
     sources["HF Emails Parquet"] = {
         "description": "4,272 House Oversight emails",
@@ -176,10 +193,13 @@ def generate_report():
         **check_parquet(PROJECT_ROOT / "datasets" / "epstein-emails-hf" / "emails.parquet"),
     }
 
-    sources["FBI Files Parquet"] = {
-        "description": "8,150 FBI docs (Textract OCR)",
-        "query_tool": "pandas read_parquet()",
-        **check_parquet(PROJECT_ROOT / "datasets" / "svetfm_fbi_files.parquet"),
+    sources["FBI Files"] = {
+        "description": "8,150 FBI docs (Textract OCR, FTS5), EFTA IDs + named exhibits",
+        "query_tool": "tools/ingest_fbi_files.py {search,doc,stats,overlap}",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "epstein_fbi_files.db",
+            "SELECT COUNT(*) FROM documents"
+        ),
     }
 
     sources["Email Threads Parquet"] = {
@@ -383,12 +403,6 @@ def generate_report():
         sources["HigherGov"]["start_cmd"] = "export HIGHERGOV_API_KEY=<key>"
 
     # APIs
-    sources["DugganUSA API"] = {
-        "description": "329K+ docs across all 12 DOJ datasets",
-        "query_tool": "tools/duggan_search.py",
-        **check_api("DugganUSA", "https://analytics.dugganusa.com/api/v1/search?q=test&indexes=epstein_files&limit=1"),
-    }
-
     sources["LittleSis API"] = {
         "description": "Power network relationships (500+ Epstein connections pre-mapped)",
         "query_tool": "tools/query_littlesis.py",

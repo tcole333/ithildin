@@ -193,44 +193,39 @@ def cmd_add_entity(args):
     db = get_db()
     agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     try:
-        cursor = db.execute(
-            """
-            INSERT INTO entities (name, entity_type, jurisdiction, ein, status, source, notes, agent_run_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                args.name.strip(),
-                args.entity_type,
-                args.jurisdiction,
-                args.ein,
-                args.status,
-                args.source,
-                args.notes,
-                agent_run_id,
-            ),
-        )
-        entity_id = cursor.lastrowid
-        created = True
-    except sqlite3.IntegrityError:
-        row = db.execute(
-            """
-            SELECT id FROM entities
-            WHERE name = ? AND COALESCE(jurisdiction, '') = COALESCE(?, '')
-            """,
-            (args.name.strip(), args.jurisdiction),
-        ).fetchone()
-        if not row:
-            db.close()
-            raise
-        entity_id = row["id"]
-        created = False
+        from tools.entity_resolution import resolve_or_create_entity
+    except ImportError:
+        from entity_resolution import resolve_or_create_entity
+
+    # --force-new bypasses fuzzy + recorded aliases (exact UNIQUE still applies).
+    force_new = getattr(args, "force_new", False)
+    threshold = 101 if force_new else getattr(args, "match_threshold", 97)
+    res = resolve_or_create_entity(
+        db,
+        args.name,
+        entity_type=args.entity_type,
+        jurisdiction=args.jurisdiction,
+        ein=args.ein,
+        status=args.status,
+        source=args.source,
+        notes=args.notes,
+        agent_run_id=agent_run_id,
+        threshold=threshold,
+        use_aliases=not force_new,
+    )
     db.commit()
     db.close()
 
-    if created:
-        print(f"Created entity #{entity_id}: {args.name}")
-    else:
-        print(f"Entity already exists as #{entity_id}: {args.name}")
+    name = args.name.strip()
+    if res.action == "created":
+        print(f"Created entity #{res.entity_id}: {name}")
+    elif res.action == "fuzzy":
+        print(f"Matched existing entity #{res.entity_id} (fuzzy {res.score}): {res.matched_name}")
+        print(f"  Recorded alias '{name}' -> #{res.entity_id}. Use --force-new to insert a separate entity.")
+    elif res.action == "alias":
+        print(f"Resolved via alias to entity #{res.entity_id}: {res.matched_name}")
+    else:  # exact
+        print(f"Entity already exists as #{res.entity_id}: {name}")
 
 
 def cmd_add_role(args):
@@ -299,6 +294,102 @@ def cmd_add_relation(args):
     )
 
 
+def _relation_summary(r):
+    """One-line description of an entity_relations row (dict)."""
+    return (
+        f"#{r['id']}: entity {r['entity_a_id']} --{r['relation_type']}--> "
+        f"entity {r['entity_b_id']}"
+        + (f" [{r['description']}]" if r.get("description") else "")
+        + (f" (source: {r['source']})" if r.get("source") else "")
+    )
+
+
+def cmd_delete_relation(args):
+    """Delete an entity_relations edge, recording an audit entry in corrections.
+
+    Selection is by explicit --relation-id, or by the triple
+    (--entity-a-id, --entity-b-id, --relation-type). If a triple matches
+    multiple rows, the matches are listed and the caller must re-run with the
+    specific --relation-id (no silent mass delete).
+    """
+    have_triple = (
+        args.entity_a_id is not None
+        and args.entity_b_id is not None
+        and args.relation_type is not None
+    )
+    if args.relation_id is None and not have_triple:
+        print(
+            "Specify --relation-id, or all of --entity-a-id --entity-b-id --relation-type."
+        )
+        sys.exit(1)
+
+    db = get_db()
+
+    if args.relation_id is not None:
+        rows = db.execute(
+            "SELECT * FROM entity_relations WHERE id = ?", (args.relation_id,)
+        ).fetchall()
+        selector = f"relation-id {args.relation_id}"
+    else:
+        rows = db.execute(
+            """
+            SELECT * FROM entity_relations
+            WHERE entity_a_id = ? AND entity_b_id = ? AND relation_type = ?
+            ORDER BY id
+            """,
+            (args.entity_a_id, args.entity_b_id, args.relation_type.strip()),
+        ).fetchall()
+        selector = (
+            f"triple ({args.entity_a_id} --{args.relation_type}--> {args.entity_b_id})"
+        )
+
+    rows = [dict(r) for r in rows]
+
+    if not rows:
+        db.close()
+        print(f"No entity_relations edge matches {selector}.")
+        sys.exit(1)
+
+    if len(rows) > 1:
+        db.close()
+        print(f"{len(rows)} edges match {selector}; refusing to mass-delete. Matches:")
+        for r in rows:
+            print(f"  {_relation_summary(r)}")
+        print("Re-run with the specific --relation-id.")
+        sys.exit(1)
+
+    row = rows[0]
+
+    print(f"Delete Plan (matched via {selector}):")
+    print(f"  {_relation_summary(row)}")
+    print(f"  Reason: {args.reason}")
+
+    if args.dry_run:
+        print("\n  [DRY RUN] No changes made.")
+        db.close()
+        return
+
+    actor = args.actor or os.environ.get("ITHILDIN_AGENT_RUN_ID") or "human"
+
+    # Audit: record full deleted row contents in corrections before removal so
+    # the deletion is recoverable/traceable. correction_type='retraction' matches
+    # the CHECK constraint on the corrections table.
+    db.execute(
+        """
+        INSERT INTO corrections
+            (table_name, record_id, field_name, old_value, new_value,
+             reason, corrected_by, correction_type)
+        VALUES ('entity_relations', ?, 'deleted', ?, NULL, ?, ?, 'retraction')
+        """,
+        (row["id"], repr(row), args.reason, actor),
+    )
+    db.execute("DELETE FROM entity_relations WHERE id = ?", (row["id"],))
+    db.commit()
+    db.close()
+
+    print("\n  Deleted 1 edge; recorded audit entry in corrections.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Entity registry helper for investigation.db")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -312,7 +403,7 @@ def main():
     p.add_argument("entity_id", type=int)
     add_output_args(p)
 
-    p = sub.add_parser("add-entity", help="Insert an entity row")
+    p = sub.add_parser("add-entity", help="Insert an entity row (resolve-or-create: matches near-duplicates first)")
     p.add_argument("--name", required=True)
     p.add_argument("--entity-type", choices=VALID_ENTITY_TYPES, default="unknown")
     p.add_argument("--jurisdiction")
@@ -320,6 +411,10 @@ def main():
     p.add_argument("--status", default="active")
     p.add_argument("--source")
     p.add_argument("--notes")
+    p.add_argument("--force-new", action="store_true",
+                   help="Skip fuzzy auto-merge and recorded aliases; insert a new row unless an exact (name, jurisdiction) match exists")
+    p.add_argument("--match-threshold", type=int, default=97,
+                   help="Fuzzy auto-merge threshold, token_sort_ratio 0-100 (default 97 = near-exact)")
 
     p = sub.add_parser("add-role", help="Insert a person role for an entity")
     p.add_argument("--entity-id", type=int, required=True)
@@ -343,6 +438,20 @@ def main():
     p.add_argument("--description")
     p.add_argument("--source")
 
+    p = sub.add_parser(
+        "delete-relation",
+        help="Delete an entity-to-entity relationship edge (records an audit entry)",
+    )
+    p.add_argument("--relation-id", type=int,
+                   help="Row id of the entity_relations edge to delete")
+    p.add_argument("--entity-a-id", type=int,
+                   help="With --entity-b-id and --relation-type: select the edge by triple")
+    p.add_argument("--entity-b-id", type=int)
+    p.add_argument("--relation-type")
+    p.add_argument("--reason", required=True, help="Why this edge is being deleted (audited)")
+    p.add_argument("--actor", help="Who performed the deletion (default: agent run id or 'human')")
+    p.add_argument("--dry-run", action="store_true", help="Show what would be deleted without changing anything")
+
     args = parser.parse_args()
     if args.command == "lookup":
         cmd_lookup(args)
@@ -356,6 +465,8 @@ def main():
         cmd_add_address(args)
     elif args.command == "add-relation":
         cmd_add_relation(args)
+    elif args.command == "delete-relation":
+        cmd_delete_relation(args)
 
 
 if __name__ == "__main__":

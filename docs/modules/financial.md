@@ -74,8 +74,8 @@ uv run python tools/financial_ratios.py analyze $WORKDIR/income.json $WORKDIR/ba
 # With cash flow for quality metrics
 uv run python tools/financial_ratios.py analyze income.json balance.json --cashflow cashflow.json
 
-# Flag anomalies against configurable thresholds
-uv run python tools/financial_ratios.py analyze income.json balance.json --cashflow cf.json --flag-anomalies
+# Write the ratio analysis (including its anomaly flags) to a file
+uv run python tools/financial_ratios.py analyze income.json balance.json --cashflow cf.json --output ratios.json
 ```
 
 **Known quirks:** Matches XBRL concepts by suffix (e.g., `_AssetsCurrent`). Falls back to label substring matching if XBRL concepts are non-standard.

@@ -235,8 +235,7 @@ Connect infrastructure findings to the broader investigation:
 
 ```bash
 # Search for discovered domains/IPs/orgs in document corpus
-uv run python tools/query_doj.py search "<DISCOVERED_DOMAIN>" --limit 20 --output $WORKDIR/corpus-domain.json
-uv run python tools/duggan_search.py "<DISCOVERED_DOMAIN>" --output $WORKDIR/duggan-domain.json
+uv run python tools/ingest_kabasshouse.py search "<DISCOVERED_DOMAIN>" --limit 20 --json > $WORKDIR/corpus-domain.json
 uv run python tools/query_unified.py emails "<DISCOVERED_DOMAIN>" --limit 20 --output $WORKDIR/unified-domain-emails.json
 
 # Check corporate registries for hosting companies / registrants

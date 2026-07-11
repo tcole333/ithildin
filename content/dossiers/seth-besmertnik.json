@@ -1,0 +1,198 @@
+{
+  "name": "Seth Besmertnik",
+  "slug": "seth-besmertnik",
+  "aliases": [],
+  "profile_ids": [
+    "softbank-caper"
+  ],
+  "generated_at": "2026-06-28T17:53:21.480755",
+  "last_updated": "2026-06-22T08:30:45",
+  "stats": {
+    "total_findings": 4,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-06-22T08:30:45"
+  },
+  "findings": [
+    {
+      "id": 11505,
+      "finding_type": "financial",
+      "summary": "Conductor's .8M cash went to MANAGEMENT/EMPLOYEES (incl. Besmertnik); VC plaintiffs got ONLY WeWork stock at /share \u2014 the structural asymmetry that burned the VCs but liquefied the founders",
+      "detail": "WeWork S-1 (filed Aug 2019, MD&A Note 6): 'In March 2018, the Company completed the acquisition of 100% of the equity of Conductor, Inc. for a total consideration of $113.6 million. The total consideration included $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock. At closing, $0.2 million of the cash and $31.6 million of the Series AP-1 Preferred Stock acquisition consideration was held back.' The NY court (Catalyst Invs. III v The We Co., 2021 NY Slip Op 31796(U)) recites that the $15.8M cash was 'paid to Conductor's management and employees,' while the plaintiff VCs (Catalyst Investors, Matrix Partners, FirstMark) 'received consideration exclusively in the form of WeWork stock,' valued at $72/share. INFERENCE: founders/management captured the cash leg; outside VCs absorbed 100% of the WeWork equity-price risk. WeWork stock later marked to ~$41.72/share in the parallel Prolific case and effectively to zero by the failed IPO \u2014 so the VC stock consideration collapsed while the founders' cash was locked in 2018.",
+      "source_datasets": [
+        "WeWork S-1; NY Slip Op 31796(U); SearchEngineLand 2019-08"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:29:57",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1533523",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11508,
+      "finding_type": "financial",
+      "summary": "Round-trip: Besmertnik sold Conductor for $113.6M in Mar 2018 (founders+employees held only ~7%), let WeWork fund it 21 months, then bought it back Dec 2019 for ~$3.5M + $15M fresh capital, emerging with MAJORITY founder-class ownership",
+      "detail": "Founder/employee pre-sale ownership was ~7% (Besmertnik, per Bloomberg/Crain's: 'when the business was sold, Besmertnik and all the employees owned about 7% of the company'); the bulk of Conductor was owned by VCs (Catalyst, Matrix, FirstMark, Investor Growth Capital, Blue Cloud) who had put in >$60M. So of the $113.6M, Besmertnik's personal slice of the headline number was modest in % terms \u2014 BUT founders/mgmt took the $15.8M CASH leg (S-1 + Slip Op), insulating them from the stock collapse the VCs ate. In Dec 2019 Besmertnik + COO Selina Eizik + investor Jason Finger bought Conductor BACK from a desperate WeWork for ~$3.5M (price not public; per case filings) and injected ~$15M, restructuring so the team/employees hold a MAJORITY via founder-class stock \u2014 Besmertnik told press employees now own 'more than four times what they did when we sold the company.' NET ROUND-TRIP (INFERENCE): Besmertnik converted a ~7% minority of a VC-controlled company into majority control of the same operating business, after WeWork absorbed ~21 months of operating losses and the VCs absorbed the equity wipeout. Whether he was personally cash-positive depends on his undisclosed share of the $15.8M vs. the ~$3.5M+$15M he/his group put back in \u2014 but he unambiguously came out with vastly MORE CONTROL and a clean cap table.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:30:22",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WeWork S-1 Note 6; NY Slip Op 31796(U); Bloomberg/Crain's 2019-12-12; TechCrunch 2019-12-12; Fortune 2019-12-13",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11509,
+      "finding_type": "financial",
+      "summary": "No evidence Besmertnik dumped WeWork stock before the crash; founders' protection came from taking the CASH leg up front, not from a pre-crash secondary/tender sale",
+      "detail": "Unlike Neumann (who cashed out ~$700M via insider stock sales + loans ahead of the failed IPO, per the parallel Prolific complaint) and unlike the burned VCs who SUED, no public record shows Besmertnik personally selling WeWork Series AP-1 stock in a secondary or the Oct 2019 SoftBank tender. FACT: tender/secondary terms for individual Conductor holders were never disclosed. The founders' downside protection was STRUCTURAL \u2014 the $15.8M cash leg paid to management/employees at the 2018 close \u2014 not a timed market exit. INFERENCE: Besmertnik did not need to dump stock because (a) he took cash in 2018 and (b) by Dec 2019 he had pivoted to reacquiring the operating company rather than salvaging illiquid AP-1 paper. This distinguishes the FOUNDER (insulated + regained the asset) from his VCs (all-stock, wiped out, litigated to a surviving unjust-enrichment/negligent-misrep claim).",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:30:22",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY Slip Op 31796(U); Emamian v We Co. amended complaint (Neumann $700M cash-out); WeWork S-1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11517,
+      "finding_type": "relationship",
+      "summary": "Neumann<->Besmertnik = Baruch College friends ~2 decades pre-deal; NOT disclosed as related-party in S-1 though Neumann personally drove the acquisition \u2014 the conflicted-friendship core of the looting thread",
+      "detail": "FACT (Bloomberg/Crain's/Fortune): Neumann and Besmertnik met as students at Baruch College ~two decades before the deal; 'Conductor CEO Seth Besmertnik and WeWork CEO Adam Neumann had been friends since their days at Baruch College.' A month after the acquisition Besmertnik embraced Neumann onstage at an industry conference and Neumann greeted Conductor employees 'as family.' The Catalyst Slip Op records Neumann personally identified Conductor as a target in late 2017 ('executing a bold play to secure technology acquisitions in anticipation of WeWork's planned IPO'). FACT: the deal was NOT disclosed as a related-party transaction in the S-1 despite the personal relationship and Neumann's direct role. Fortune headline (2019-09-27) 'WeWork Founder Adam Neumann Is Out the Door \u2014 His Friends May Be Next' frames Conductor within Neumann's friend-enrichment pattern. No other Neumann<->Besmertnik dealing (Flow, personal investments) surfaced in this pass \u2014 Flow link is a LEAD. INFERENCE: Conductor functioned as a stock-currency acquisition that put $15.8M cash into a friend's management team while the friend retained the operating asset's reacquisition optionality \u2014 the friend was NOT burned like his VCs.",
+      "source_datasets": [
+        "bloomberg"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-06-22 08:30:45",
+      "target_name": "Seth Besmertnik",
+      "profile_id": "softbank-caper",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Bloomberg/Crain's 2019-12-12; Fortune 2019-09-27 & 2019-12-13; NY Slip Op 31796(U); WeWork S-1 (no related-party disclosure)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11505,
+      11508,
+      11517,
+      11509
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          11505,
+          11508,
+          11509
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-06-28T17:53:21.529955",
+    "lead": "<p>Seth Besmertnik is the founder and chief executive of <a href=\"/dossiers/conductor-inc\">Conductor, Inc.</a>, a search-engine-optimization software company that <a href=\"/dossiers/we-company\">WeWork</a> (The We Company) acquired in March 2018 for total consideration of $113.6 million, comprising $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock [Finding #11505][SEC:0001193125-19-220499]. Besmertnik had known WeWork co-founder <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> since the two were students at Baruch College roughly two decades before the deal [Finding #11517]. WeWork's 2019 S-1 registration statement did not disclose the Conductor acquisition as a related-party transaction despite the personal relationship and Neumann's direct role in identifying the target [Finding #11517][SEC:0001193125-19-220499].</p><p>Conductor's $15.8 million cash consideration was paid to the company's management and employees, including Besmertnik, while the outside venture investors received their consideration entirely in WeWork stock valued at $72 per share [Finding #11505]. After WeWork's failed initial public offering and the collapse of its share value, Besmertnik, chief operating officer Selina Eizik, and investor Jason Finger repurchased Conductor from WeWork in December 2019 for a reported $3.5 million in proceeds, injecting roughly $15 million in fresh capital and restructuring the company so employees held a majority through founder-class stock [Finding #11508].</p><p>No public record shows Besmertnik selling WeWork stock through a secondary sale or the October 2019 <a href=\"/dossiers/softbank\">SoftBank</a> tender, and the terms available to individual Conductor stockholders were never disclosed [Finding #11509]. Analysis of the transaction record indicates the founders' insulation from the share-price collapse came from the up-front cash leg of the 2018 sale rather than from a timed market exit [Finding #11509].</p>",
+    "system_role": "Besmertnik illustrates how an acquirer paying in its own equity can distribute outcomes asymmetrically among a target's stakeholders: management and employees received cash at closing while outside investors held illiquid acquirer stock that later lost most of its value.",
+    "sections": [
+      {
+        "id": "conductor-acquisition",
+        "title": "Conductor Acquisition and Consideration Structure",
+        "content": "<p>WeWork acquired 100% of the equity of <a href=\"/dossiers/conductor-inc\">Conductor, Inc.</a> in March 2018 for total consideration of $113.6 million, consisting of $15.8 million in cash and $97.8 million in Series AP-1 Preferred Stock, with $0.2 million of the cash and $31.6 million of the stock held back at closing [Finding #11505][SEC:0001193125-19-220499]. The $15.8 million cash portion was paid to Conductor's management and employees, a group that included founder Seth Besmertnik, while the venture investors received consideration exclusively in <a href=\"/dossiers/we-company\">WeWork</a> stock valued at $72 per share [Finding #11505]. That WeWork stock was later marked to approximately $41.72 per share in a parallel proceeding and fell toward zero after the company's failed initial public offering [Finding #11505]. The transaction record shows the cash leg paid to founders and management was fixed in 2018, while the value of the all-stock consideration held by the outside investors declined as WeWork's valuation collapsed [Finding #11505].</p>",
+        "viz": null
+      },
+      {
+        "id": "buyback",
+        "title": "December 2019 Repurchase",
+        "content": "<p>Founder and employee ownership of <a href=\"/dossiers/conductor-inc\">Conductor</a> at the time of the 2018 sale was approximately 7%, with the majority held by venture investors who had contributed more than $60 million [Finding #11508]. In December 2019, Besmertnik, chief operating officer Selina Eizik, and investor Jason Finger repurchased Conductor from <a href=\"/dossiers/we-company\">WeWork</a> for a reported $3.5 million in proceeds and injected roughly $15 million in new capital, restructuring the company so that employees held a majority through founder-class stock [Finding #11508]. Besmertnik stated publicly that employees came to own more than four times the equity they had held when the company was originally sold [Finding #11508]. Analysis of the sale and repurchase indicates the outcome converted a roughly 7% minority stake in a venture-controlled company into majority control of the same operating business, after WeWork had absorbed about 21 months of operating losses [Finding #11508]. Whether Besmertnik was personally cash-positive across the round trip depends on his undisclosed share of the 2018 cash consideration relative to the capital he and his group contributed in the 2019 repurchase [Finding #11508].</p>",
+        "viz": null
+      },
+      {
+        "id": "neumann-relationship",
+        "title": "Relationship with Adam Neumann",
+        "content": "<p>Besmertnik and <a href=\"/dossiers/adam-neumann\">Adam Neumann</a> met as students at Baruch College roughly two decades before WeWork acquired <a href=\"/dossiers/conductor-inc\">Conductor</a> [Finding #11517]. Reporting describes the two as friends since their college days, and a month after the acquisition Besmertnik appeared on stage with Neumann at an industry conference [Finding #11517]. The New York court record in the venture investors' litigation recites that Neumann personally identified Conductor as an acquisition target in late 2017 [Finding #11517]. The <a href=\"/dossiers/we-company\">WeWork</a> S-1 did not disclose the Conductor acquisition as a related-party transaction, although it did disclose other related-party dealings involving Neumann [Finding #11517][SEC:0001193125-19-220499]. Analysis of the deal structure indicates Conductor functioned as a stock-funded acquisition that placed cash with the management team of a longstanding personal contact of the acquirer's chief executive, while that team retained the ability to reacquire the operating asset [Finding #11517]. No other business dealing between Besmertnik and Neumann surfaced in the documentary record examined for this entry [Finding #11517].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "stock-disposition",
+        "title": "Disposition of WeWork Stock",
+        "content": "<p>No public record shows Besmertnik selling the WeWork Series AP-1 stock he received in the 2018 acquisition, whether through a secondary transaction or the October 2019 <a href=\"/dossiers/softbank\">SoftBank</a> tender offer, and the tender and secondary terms available to individual Conductor stockholders were never disclosed [Finding #11509]. According to the case record, this position differed from that of the venture investors, who received only WeWork stock and later sued, and from Neumann, who realized substantial proceeds through insider stock sales and loans ahead of the failed public offering [Finding #11509]. Analysis of the record indicates that the founders' protection from the share-price collapse derived from the up-front cash leg of the 2018 sale rather than from a timed disposition of stock, and that by December 2019 Besmertnik had moved to reacquire the operating company rather than to realize value from the illiquid preferred shares [Finding #11509].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What was Besmertnik's individual share of the $15.8 million cash consideration paid to Conductor management and employees at the 2018 closing?",
+      "What were the specific terms and amounts of capital each of Besmertnik, Selina Eizik, and Jason Finger contributed in the December 2019 repurchase?",
+      "Did Besmertnik hold or dispose of any WeWork Series AP-1 Preferred Stock, and on what terms, given that individual stockholder tender and secondary terms were never disclosed?",
+      "Why was the Conductor acquisition omitted from related-party disclosure in WeWork's S-1, and who made that disclosure determination?"
+    ],
+    "applicable_models": []
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Seth Besmertnik",
+      "connections": [],
+      "secondHop": {},
+      "depth": 1
+    },
+    "timeline_events": []
+  }
+}

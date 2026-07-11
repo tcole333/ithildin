@@ -222,9 +222,25 @@ uv run python tools/ingest_bic.py stats
 - **ftm_bridge.py generates deterministic IDs** from entity properties using UUID5. Re-exporting produces the same IDs, enabling stable cross-referencing.
 - **BIC-to-LEI mapping** enables chaining: find a bank's BIC, resolve to LEI, then use GLEIF to trace the ownership hierarchy.
 
+## Selector-Pivot Orchestrator
+
+`tools/selector_pivot.py` fans a single selector (email/username/phone/domain/IP/name/company) across the free aggregator set, normalizes results into a selector graph, and emits candidate entities + `pending_triage` leads.
+
+```bash
+uv run python tools/selector_pivot.py run "Gazprom" --type company --output $WORKDIR/p.json
+uv run python tools/selector_pivot.py run "acme.com" --type domain --dry-run --output $WORKDIR/p.json
+uv run python tools/selector_pivot.py adapters --type name   # routing + availability
+```
+
+- **Posture: aggregators-only** — queries index layers, never downloads raw dumps.
+- **Free adapters (default fan-out):** opensanctions (local), gleif, icij-reconcile, littlesis, crtsh, maigret. **Gated behind `--enable-paid`:** intelx (needs `INTELX_API_KEY`; phonebook paywalled), dehashed (needs an ACTIVE v2 search subscription, not just credits).
+- **Provenance is per-adapter.** Legitimate sources carry their own name; leak/breach adapters (dehashed/intelx) stamp `leak_aggregator` and cap any derived finding at `medium` (corroborate against a primary record before promotion).
+- Emits entities via `resolve_or_create_entity` + `pending_triage` leads via `auto_leads.create_lead`; the full selector graph lives in the `--output` artifact. Entity↔entity `connections` edges (for graph_tools bridge detection) are a planned phase-2 add.
+
 ## Skills That Use These Tools
 
 - `/deep-investigate` (Agent D -- Network & Sanctions Screening)
 - `/trace-entity` (corporate entity tracing through registries and offshore leaks)
 - `/investigate-person` (sanctions/PEP checks, relationship mapping)
 - `/systemic-analysis` (deep entity patterns, ownership chains)
+- selector-pivot orchestrator (`tools/selector_pivot.py`) — one selector → linked selectors + entities across aggregators
