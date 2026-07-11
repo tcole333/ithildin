@@ -12,6 +12,14 @@ Jeffrey Epstein served as a **private intelligence broker** connecting both side
 
 **Important framing note**: Because the SoftBank scandal was already public by March 2018, Epstein's January 2019 inquiries about Benedetti and Misra appear to be **reactive intelligence gathering** — he recognized he was connected to the principal players (Karp on the SoftBank side, Benedetti as his Avenue Foch neighbor) and positioned himself as a broker. This is still investigatively significant: it shows Epstein's intelligence brokerage MO in action, but as opportunistic positioning rather than original orchestration of the SoftBank operation.
 
+**Tokyo comparison correction**: The full WSJ account dates Benedetti's team
+dispatch and hotel honey-trap setup to **April 2015**. Epstein's Andaz Tokyo
+rooms were for May 22–30, later May 25–June 2, and the trip was canceled before
+arrival. A contemporaneous email shows the Andaz was selected through Joi Ito's
+assistant. The campaign hotel, exact lure-attempt day, bookers, women, and
+surveillance vendor remain unidentified; no shared hotel, traveler, or vendor is
+established. This residual uncertainty remains a lead, not affirmative overlap.
+
 ---
 
 ## Primary Source Documents
@@ -29,8 +37,12 @@ All documents are from the DOJ's official Epstein release (justice.gov/epstein) 
 | EFTA02576024 | Oct 7, 2013 | Second Benedetti Paris reminder |
 | EFTA02297224 | Sep 25, 2013 | Benedetti on same day as Osborne breakfast, Summers lunch |
 | EFTA02575400 | Sep 26, 2013 | Paris contact list: Benedetti first name listed |
-| EFTA00688712 | May 10, 2014 | Unidentified woman → Epstein: report of approaching Nikesh Arora ("just googled him now"), posed Epstein's "unintended consequences" question |
+| EFTA00688712 | May 10, 2014 | Redacted woman → Epstein: report of approaching Nikesh Arora ("just googled him now"), posed Epstein's "unintended consequences" question; sender is highly likely Svetlana Pozhidaeva (inferential, finding #11977) |
 | EFTA00988842 | May 10, 2014 | Epstein → same woman: "call me when you wake" (reply to the Arora report) |
+| EFTA01922492 | May 10, 2014 | DataSet10 duplicate of the same-night 04:28 report, restoring Nicholas, Eric, Todd, Inga and Keith Rubenstein |
+| EFTA00662591 / EFTA00633564 | Sep 27, 2014 | Same redacted sender reports meeting Emir Tamim; matching sender-header footprint links the May and September reports |
+| EFTA01918605 / EFTA00633898 | Jul 5, 2014 | Epstein reply and incoming field report about David Tepper; cross-production recipient text calibrates the matching header footprint to Svetlana Pozhidaeva |
+| EFTA01200920 | May 8, 2014 | AmEx itinerary books Epstein and Svetlana together Paris-CDG → JFK, arriving 4:15 p.m. (booking, not proof of boarding) |
 | EFTA02446715 | Oct 14, 2016 | Jabor Al Thani → Epstein: SoftBank/MBS $100B fund article |
 | EFTA02617269 | Nov 11, 2018 | Epstein introduces Jabor to Steve Bannon |
 | EFTA02616157 | Nov 20, 2018 | Karp → Epstein: "Dealing with Ghosn crisis. Will step out shortly." |
@@ -59,10 +71,10 @@ This is the core evidence. In 72 hours, Epstein contacted three parties on three
 - Epstein provides Paris phone number (011 331 441 70210) — he's operating from Paris
 
 ### Jan 25 (Friday)
-- Epstein spoke to Karp by phone about **Deutsche Bank matters** (confirmed by Epstein's note to Weingarten the next day: *"brad represent softbank, not rajeev, but did speak to him yesterday, re DB"*)
+- Karp told Epstein he had spoken to Misra the previous day. Epstein then summarized the situation to Weingarten as *"brad represent softbank, not rajeev, but did speak to him yesterday, re DB."* The pronoun structure and the abbreviation **`DB` remain unresolved**: the line may describe Karp's call with Misra or Epstein's call with Karp, and `DB` may mean Deutsche Bank, David Boies, or something else.
 - Weingarten → Epstein: *"Rajeev misra....softbank vision fund...any special jeffrey insights here?"*
 - Epstein → Weingarten: *"If he wants you to rep him. YES."*
-- Note: Karp was simultaneously advising Epstein on his own Deutsche Bank exposure AND representing SoftBank — the DB call was the existing channel Epstein then used to probe Misra's representation
+- Note: the documents prove a recent Karp–Misra contact and Epstein's representation-status inquiry. They do **not** establish the subject of the call or a campaign-information exchange.
 
 ### Jan 26 (Saturday)
 - Weingarten → Epstein: *"He wants me to hire him....thinking about using him on the Softbank caper."*
@@ -78,6 +90,7 @@ This is the core evidence. In 72 hours, Epstein contacted three parties on three
 ### Jan 28 (Monday)
 - Epstein → Eduardo Teodorani (CNH Industrial/Agnelli heir): *"Allesandro benedetti?"*
 - This is a one-line inquiry about the very operative who ran the SoftBank honey trap
+- No reply, follow-up, tasking, or campaign material is preserved; the timing is suggestive but does not establish coordination
 
 ---
 
@@ -90,7 +103,7 @@ This is the core evidence. In 72 hours, Epstein contacted three parties on three
 - Conducted entire Jan 24-28 operation FROM PARIS (phone number confirmed)
 - Had separate SoftBank intelligence from Gulf sources (Jabor Al Thani, Qatar)
 - Had SoftBank corporate access via David Stern (meeting COO Marcelo Claure in Tokyo, June 2018)
-- Wired $500K to Boies Schiller on Dec 18, 2018 — the same firm Giannakopoulos used to send the anonymous shareholder letter against Arora
+- Authorized a $500K wire to Boies on Dec. 18, 2018 as part of the Sarah Ransome settlement; Epstein's Deutsche Bank statement records the completed Dec. 19 transfer to Boies Schiller's Miami IOLTA account, and the parties dismissed Ransome's case the next day. This was a separate, adversarial matter almost three years after the anonymous SoftBank letter; no released record connects it to the 2016 engagement (`EFTA00283429`, `EFTA02612964`, `EFTA01288073`, SDNY Doc. 189; finding #12007).
 
 ### Brad Karp (Chairman, Paul Weiss)
 - Represented SoftBank (not Misra personally)
@@ -109,10 +122,11 @@ This is the core evidence. In 72 hours, Epstein contacted three parties on three
 ### Alessandro Benedetti
 - Italian businessman, Paris-based (Avenue Foch — same street as Epstein's property)
 - Central operative in the SoftBank honey trap per WSJ
-- Paid $500K via Barkmere Group Ltd (BVI) by Misra
+- Reportedly received a $500K payment from Misra through Barkmere Group Ltd (BVI); Misra denied it funded a campaign and described it as an oil investment
+- The best public Barkmere identity record is an aggregator index for BVI company no. 1010725, registered Feb. 14, 2006. Its 2015 controller, directors, registered agent, address, status, charges, and transaction history remain unknown; the 2006 date disproves the earlier inference that it was incorporated for the campaign (findings #12000, #12008–#12009).
 - Epstein's neighbor since at least 2011
 - On Epstein's Paris contact lists since 2013
-- Linked to Tree of Life Limited (Malta, ICIJ Paradise Papers) and Barkmere Limited (Cyprus)
+- Linked to Tree of Life Limited (Malta, ICIJ Paradise Papers). The similarly named Barkmere Limited (Cyprus HE 338259) is an O1 Properties subsidiary and a resolved name collision, not a documented Benedetti vehicle (finding #11992).
 - Connected to Cambridge Analytica operatives
 
 ### Rajeev Misra
@@ -128,10 +142,18 @@ This is the core evidence. In 72 hours, Epstein contacted three parties on three
 - LittleSis entity 1165: chairman of M. Klein & Company, Churchill Capital Corp SPAC empire, 663 EDGAR filings
 
 ### Boies Schiller Flexner LLP
-- BSF partner Matthew Schwartz sent the anonymous January 2016 shareholder letter against Arora on behalf of Giannakopoulos
-- Epstein wired $500K to Boies on Dec 18, 2018: *"on darrens instructions its ok to wire 500k to boies"* (EFTA02613052) — 5 weeks before the SoftBank caper emails
+- BSF partner Matthew Schwartz sent the January 2016 letter on behalf of unnamed Sprint shareholders and SoftBank ADR holders. Giannakopoulos was identified publicly three months later as one investor; he said he paid part of the BSF fees and that other investors paid their shares (Bloomberg, Apr. 22, 2016; finding #11990).
+- Later documents make Giannakopoulos/CH-Communication public-facing clients, while the WSJ reports that Benedetti selected BSF and arranged Giannakopoulos as the nominal shareholder. The remaining clients and contributors are still unidentified; no public retainer, invoice, trust ledger, or Barkmere-to-BSF wire has surfaced (finding #11991).
+- The executed settlement required Epstein to wire $500K to Boies/BSF as escrow agent in Ransome's SDNY case. Epstein authorized it Dec. 18; his bank statement records the Dec. 19 transfer to BSF's Miami IOLTA account; dismissal followed Dec. 20 (`EFTA00283429`, `EFTA02612964`, `EFTA01288073`, SDNY Doc. 189; finding #12007). This is affirmative evidence of a victim-settlement payment, not funding for the SoftBank matter.
 - David Boies personally communicated with Epstein about the Ransome settlement (Nov-Dec 2018)
 - BSF simultaneously represented Giuffre against Maxwell AND worked with Black Cube for Weinstein — a pattern of multi-axis conflicts
+
+### Silver Lake Partners
+- Arora's Silver Lake senior-adviser role was real and public before SoftBank: Colgate-Palmolive's [March 2012 SEC-filed proxy](https://www.sec.gov/Archives/edgar/data/21665/000093041312001866/c67781_def14a.htm) says he had served in that role since 2007.
+- CH Communication's February 2016 Sprint proposal used the dual role as an alleged conflict, claiming it could divert opportunities toward Silver Lake. The [SEC-hosted packet](https://www.sec.gov/divisions/corpfin/cf-noaction/14a-8/2016/chcommunication050416-14a8.pdf) proves the allegation was made; SEC staff allowed exclusion on eligibility/procedural grounds and did not decide its truth.
+- SoftBank's independent-board committee later said the tenure-related shareholder claims were without merit; that was an internal review assisted by outside counsel, not a court or SEC merits judgment ([SoftBank, June 20, 2016](https://group.softbank/en/news/press/20160620)).
+- No checked record identifies Silver Lake as a campaign funder, source, counsel, recipient, or operator. January 2013 Epstein emails concerning Silver Lake co-head Egon Durban establish separate adjacency only (findings #11679, #12022–#12025).
+- Robert Hirsh's Paul Weiss biography contains the phrase "Lehman real estate private equity business (now Silver Lake Partners)," but SEC and successor-firm records identify that business as **Silverpeak Real Estate Partners**. This is treated as a name error/negative control, not a Silver Lake bridge (finding #12031).
 
 ### David Stern (Asia Gateway / Epstein's European Investment Head)
 - Meeting SoftBank COO Marcelo Claure in Tokyo: *"Going to Tokyo tomorrow to meet Softbank COO (former Sprint Chairman)"* (EFTA02614349, June 12, 2018)
@@ -155,7 +177,7 @@ Epstein was the **only person** who simultaneously:
 6. Had direct SoftBank corporate access via David Stern (meeting COO Claure in Tokyo)
 7. Had Japan intelligence via Tom Pritzker ("can you ask around re why?")
 8. Instructed each side not to reveal his role to the other (*"dont mention my role with brad"*)
-9. Had a financial relationship with the law firm used in the anonymous shareholder letter (wired $500K to Boies Dec 2018)
+9. Had a separate adversarial settlement payment to the same law firm in Dec. 2018; this is institutional overlap, not evidence that he funded or directed the 2016 letter
 
 This is a classic intelligence brokerage position — sitting at the intersection of legal, corporate, and intelligence networks while controlling information flow between parties who don't know the others are involved.
 
@@ -171,7 +193,7 @@ The SoftBank honey trap shares structural parallels with Epstein's documented op
 | Law firm | Paul Weiss / Brad Karp | Paul Weiss / Brad Karp |
 | Intel firm | K2 Intelligence | Nardello & Co. (run through Karp) |
 | Media plants | The Independent (Hollingsworth) | NYT (Landon Thomas), Wolff book |
-| Payment vehicle | Barkmere Group Ltd (BVI) | Xitrans, STC, ERGO Ltd (BVI) |
+| Payment vehicle | Barkmere Group Ltd (BVI; WSJ-reported Benedetti control) | No matched BVI vehicle established. Southern Trust Company Inc. was USVI; Xitrans Finance Ltd was Rybolovlev-controlled; ERGO Ltd was a Bank Leumi wire recipient whose BVI status is not established. |
 | Honey traps | Women + cameras, Tokyo hotel | Documented coercion pattern |
 | Cambridge Analytica | Giannakopoulos = SCL Swiss agent | Bannon = CA chairman 2014-2016 |
 
@@ -195,12 +217,16 @@ This means Epstein knew Benedetti for at least **8 years** — 4 years before Mi
 
 Separately from the Benedetti relationship, the documents show Epstein had his own line to the operation's eventual *target*, Nikesh Arora, about a year before the campaign began.
 
-- **May 10, 2014**: An **unidentified** woman emailed Epstein a report of approaching Arora at an evening social event — *"spoke to Nikesh Arora (just googled him now)…"* — adding that she had told him he would have time to answer *"the question i asked him (your question about unintended consequences)"*, i.e., a question Epstein had pre-briefed her to pose. Epstein replied *"call me when you wake."* (`EFTA00688712` — her inbound report; `EFTA00988842` — Epstein's reply.)
+- **May 10, 2014**: A redacted woman emailed Epstein a report of approaching Arora at an evening social event — *"spoke to Nikesh Arora (just googled him now)…"* — adding that she had told him he would have time to answer *"the question i asked him (your question about unintended consequences)"*, i.e., a question Epstein had pre-briefed her to pose. Epstein replied *"call me when you wake."* (`EFTA00688712` — her inbound report; `EFTA00988842` — Epstein's reply.)
+- **Same event, 29 minutes earlier**: A second report says Nicholas arrived after 11 p.m., Eric had just learned he would not attend "the forum," Todd's father became angry when he learned the sender *"work[ed] for"* Epstein, and she met Inga and Keith Rubenstein. DataSet10/11 copies restore those names while leaving the sender blank (`EFTA00688709`, `EFTA01922492`, `EFTA02384069`; finding #11974).
+- **Sender assessment**: The woman is **highly likely Svetlana Pozhidaeva**, but the name remains an inference rather than an unredacted From field. At 160 dpi, the May reports' name/email redactions measure 219–220/290–291 pixels. The September 27 report about meeting Emir Tamim has the same footprint. A July 5 field report about meeting David Tepper has the same footprint, and its DataSet10 reply exposes the recipient as Svetlana Pozhidaeva (`EFTA00633898`, `EFTA01196037`, `EFTA00710301`, `EFTA01918605`). A named Svetlana message also has the same 219-pixel name and confidentiality-signature bars (`EFTA01196188`). The tested Stepanova, Osmanova, Silinskaya and Idzikowska headers materially differ (findings #11976–#11977).
+- **Contemporaneous location support**: An AmEx itinerary booked Epstein and Svetlana together from Paris to JFK on May 8, arriving 4:15 p.m. (`EFTA01200920`). This is a booking record, not proof that either passenger boarded.
 
 This is the **earliest documented Epstein–Arora touchpoint**, roughly ten months before Misra and Benedetti are said to have met (early 2015).
 
 **Caveats — this is a thread, not a proven link:**
-- The woman's identity is **not recoverable**: her sender line is redacted in every released copy. (An earlier attempt to attribute the email to a specific associate was investigated and refuted; treat her as an *unidentified* Epstein emissary.)
+- The sender identity is **probabilistic**: Pozhidaeva is the best-supported candidate (roughly 90–95% within the tested known-associate set), but a still-unknown person with the same display-name and email widths cannot be logically excluded. The earlier Stepanova attribution remains refuted.
+- Exact redaction dimensions are a source-string fingerprint, not independent proof of a person's legal identity. Duplicate productions are one underlying email, not corroborating witnesses.
 - There is **no documentary link** between this 2014 social approach and the 2015 Misra/Benedetti operation — different cast, a year earlier, and *"unintended consequences"* was a recurring Epstein intellectual prompt, not obviously a targeting instruction.
 - What it establishes: Epstein had **social access to, and an active interest in, Arora in 2014**, predating the SoftBank campaign. What it does *not* establish: any Epstein role in the campaign itself.
 
@@ -252,7 +278,7 @@ All quoted text comes from government-released documents:
 - **DOJ Epstein Files**: Available at justice.gov/epstein, EFTA-prefixed document IDs
 - **House Oversight Committee**: HOUSE_OVERSIGHT-prefixed document IDs
 - **ICIJ Paradise Papers**: Tree of Life Limited (Malta C67345) — public ICIJ database
-- **OCCRP Aleph**: Barkmere Limited (Cyprus HE 338259) — public corporate registry
+- **OCCRP Aleph + O1 Properties audited accounts + Cyprus Gazette**: registry identity and ownership records resolve Barkmere Limited (Cyprus HE 338259) as an inactive O1 subsidiary later merged into Goldflavour, not the BVI campaign payment vehicle
 - **Senate LDA Filings**: Paul Weiss lobbying for Carlos Ghosn Bichara — public filings
 - **WSJ Reporting**: Bradley Hope & Jenny Strasburg, ["SoftBank's Rajeev Misra Used Campaign of Sabotage to Hobble Internal Rivals"](https://www.wsj.com/articles/softbanks-rajeev-misra-used-campaign-of-sabotage-to-hobble-internal-rivals-11582743294), Feb 26 2020; and Bradley Hope, Alex Frangos & Jenny Strasburg, ["SoftBank Probes Who Was Behind Smear Campaign Against Top Executives"](https://www.wsj.com/articles/softbank-probes-who-was-behind-smear-campaign-against-top-executives-1522056600), Mar 26 2018 — public record
 
@@ -267,9 +293,12 @@ No information in this document requires any non-public access. All source docum
 | Dec 2011 | Weingarten refers to Benedetti as Epstein's "Italian jewish neighbor on ave. foch" | EFTA00925685 |
 | Sep 2013 | Benedetti on Epstein's Paris contact list (same day as Osborne breakfast, Summers lunch) | EFTA02575276, EFTA02297224 |
 | Oct 2013 | Second Benedetti Paris reminder | EFTA02576024 |
-| May 2014 | Epstein directs an unidentified woman to approach Nikesh Arora socially and pose a pre-set question (earliest Epstein–Arora touchpoint; no link to the later op established) | EFTA00688712, EFTA00988842 |
+| May 2014 | Epstein's redacted emissary, highly likely Svetlana Pozhidaeva, approaches Nikesh Arora socially and poses a pre-set question (earliest Epstein–Arora touchpoint; no link to the later op established) | EFTA00688712, EFTA00988842; findings #11976–#11977 |
+| Sep 2014 | The same sender-header fingerprint appears on a report about meeting Emir Tamim in New York during UNGA; this supports continuity of the Epstein-directed social-access role, not SoftBank-campaign coordination | EFTA00662591, EFTA00633564; [UN address record](https://webtv.un.org/en/asset/k15/k15pmqh7fi); findings #11976–#11977, #11981 |
 | Sep 2014 | Epstein meeting with "Jones Perry w/Shearman & Sterling" | EFTA02406149 |
 | Early 2015 | K2 Intelligence hired by Benedetti in London to investigate Arora/Sama | WSJ reporting |
+| Apr 2015 | Benedetti sends a team to Tokyo to set up the Arora honey trap; exact attempt day and hotel remain unnamed | WSJ reporting; finding #11966 |
+| May 2015 | Epstein's May 22–30 / May 25–June 2 Andaz itinerary is canceled before travel; hotel selection traces to Joi Ito's assistant | EFTA00349595, EFTA00347416, EFTA02078201; findings #11942, #11967–#11968 |
 | Jul-Oct 2015 | Epstein reviewing "people on the ground in london" with Karp/Nardello (temporal overlap only) | EFTA02384875, EFTA02485450, EFTA02716245 |
 | Jan 2016 | BSF (Boies Schiller) sends anonymous shareholder letter against Arora | WSJ reporting |
 | Jun 2016 | Arora leaves SoftBank after smear campaign | Public record |
@@ -284,7 +313,7 @@ No information in this document requires any non-public access. All source docum
 | Nov 19, 2018 | Ghosn arrested in Tokyo | Public record |
 | Nov 20, 2018 | Karp: "Dealing with Ghosn crisis. Will step out shortly." | EFTA02616157 |
 | Nov 30, 2018 | Epstein asks Pritzker about Ghosn; Pritzker advises strategy | EFTA02613045 |
-| Dec 18, 2018 | Epstein wires $500K to Boies | EFTA02613052 |
+| Dec 18–20, 2018 | Epstein authorizes and completes the $500K Ransome-settlement wire to BSF's IOLTA account; the case is dismissed the next day; no link to the 2016 BSF engagement | EFTA00283429, EFTA02612964, EFTA01288073; SDNY Doc. 189; finding #12007 |
 | Dec 26, 2018 | Epstein → Karp: "my guy had it right from day one" (re Ghosn) | EFTA02609109 |
 | Jan 24, 2019 | Epstein → Karp: "bring you up to date on google ghosen SIC and..." | EFTA02626768 |
 | **Jan 25, 2019** | **Weingarten asks Epstein about Misra; Epstein says "YES"** | **HOUSE_OVERSIGHT_028576** |
