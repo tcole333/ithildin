@@ -76,6 +76,68 @@ class TestConfidenceCapping:
         assert clamped is False
 
 
+class TestSourceConfidenceCapping:
+    @staticmethod
+    def _prepare_findings_schema(db):
+        cols = {row[1] for row in db.execute("PRAGMA table_info(findings)")}
+        for col in ("event_date_iso", "date_precision"):
+            if col not in cols:
+                db.execute(f"ALTER TABLE findings ADD COLUMN {col} TEXT")
+        db.commit()
+
+    @staticmethod
+    def _stored_confidence(db, finding_id):
+        return db.execute(
+            "SELECT confidence FROM findings WHERE id = ?", (finding_id,)
+        ).fetchone()["confidence"]
+
+    def test_aggregator_source_clamps_confirmed_to_medium(self, conn_db, capsys):
+        db, _ = conn_db
+        self._prepare_findings_schema(db)
+        from tools.findings_tracker import add_finding
+        finding_id = add_finding(
+            "Opaque Source", "s", source_datasets=["dehashed"],
+            claim_type="direct_quote", confidence="confirmed", profile_id="epstein",
+        )
+        assert self._stored_confidence(db, finding_id) == "medium"
+        assert "provenance-opaque source(s): dehashed" in capsys.readouterr().err
+
+    def test_non_aggregator_source_is_unaffected(self, conn_db, capsys):
+        db, _ = conn_db
+        self._prepare_findings_schema(db)
+        from tools.findings_tracker import add_finding
+        finding_id = add_finding(
+            "Primary Source", "s", source_datasets=["courtlistener"],
+            claim_type="direct_quote", confidence="confirmed", profile_id="epstein",
+        )
+        assert self._stored_confidence(db, finding_id) == "confirmed"
+        assert "provenance-opaque" not in capsys.readouterr().err
+
+    def test_claim_type_cap_still_applies(self, conn_db, capsys):
+        db, _ = conn_db
+        self._prepare_findings_schema(db)
+        from tools.findings_tracker import add_finding
+        finding_id = add_finding(
+            "Inference", "s", source_datasets=["courtlistener"],
+            claim_type="inference", confidence="confirmed", profile_id="epstein",
+        )
+        assert self._stored_confidence(db, finding_id) == "medium"
+        assert "max for claim_type='inference'" in capsys.readouterr().err
+
+    def test_lower_cap_wins_when_both_trigger(self, conn_db, capsys):
+        db, _ = conn_db
+        self._prepare_findings_schema(db)
+        from tools.findings_tracker import add_finding
+        finding_id = add_finding(
+            "Opaque Paraphrase", "s", source_datasets=["intelx"],
+            claim_type="paraphrase", confidence="confirmed", profile_id="epstein",
+        )
+        assert self._stored_confidence(db, finding_id) == "medium"
+        error = capsys.readouterr().err
+        assert "max for claim_type='paraphrase'" in error
+        assert "provenance-opaque source(s): intelx" in error
+
+
 # ── Finding Types ────────────────────────────────────────────
 
 class TestFindingTypes:

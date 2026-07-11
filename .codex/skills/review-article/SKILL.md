@@ -235,6 +235,10 @@ The skeptic pass checks that the article's argument is honest, not that it avoid
 - **Dramatic escalation**: narrative arc that amplifies beyond evidence gradient → **SHOULD FIX**
 - **Status inflation**: describing influence in terms that serve narrative over accuracy → **SHOULD FIX**
 
+#### Planted-Source / Deception Check
+
+For every claim resting on a single provenance chain or on an opposition-research, PR, or litigation artifact, verify that: (a) the article's language separates document authenticity from content truth; (b) the underlying finding or the article's caveats reflect a MOM/POP/MOSES/EVE pass; and (c) provenance-opaque aggregator material carries no more than `medium` weight. Any mismatch is a **BLOCKING** edit.
+
 **Not a problem in articles:**
 - Having a thesis or structural argument — that's the article's job
 - Drawing analytical conclusions from presented evidence — that's investigative journalism
