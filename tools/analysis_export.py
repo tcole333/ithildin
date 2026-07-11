@@ -57,6 +57,144 @@ def _resolve_profile(profile_id=None, all_profiles=False):
     return get_active_profile_id() or None
 
 
+def _label_key(value):
+    """Return a conservative lookup key for an entity/connection label.
+
+    Connections pre-date the canonical entity registry and therefore contain
+    spelling, case, and whitespace variants.  Export is read-only, so only
+    exact case/whitespace-insensitive matches and already-recorded aliases are
+    eligible for canonicalization; fuzzy matching belongs on the write/review
+    path, not in an analysis export.
+    """
+    if not value:
+        return ""
+    return " ".join(str(value).split()).casefold()
+
+
+def _load_safe_endpoint_map(db):
+    """Build a read-only raw-label -> canonical-entity map.
+
+    A label is returned only when every exact entity, recorded alias, and
+    finding-entity link for that normalized label resolves to the same target.
+    Ambiguous labels remain raw in the export.  This prevents an exporter from
+    silently performing a fuzzy merge while still honoring reviewed aliases
+    and canonical finding links.
+    """
+    entity_rows = [dict(r) for r in db.execute("""
+        SELECT id, name, entity_type, jurisdiction
+        FROM entities
+        ORDER BY id
+    """).fetchall()]
+    entities_by_id = {row["id"]: row for row in entity_rows}
+    entity_ids_by_name = defaultdict(list)
+    for row in entity_rows:
+        key = _label_key(row["name"])
+        if key:
+            entity_ids_by_name[key].append(row["id"])
+
+    def resolve_target(canonical_name, entity_id=None):
+        if entity_id in entities_by_id:
+            return entities_by_id[entity_id]
+        ids = entity_ids_by_name.get(_label_key(canonical_name), [])
+        if len(ids) == 1:
+            return entities_by_id[ids[0]]
+        if canonical_name and not ids:
+            # A curated alias may pre-date creation of its canonical entity.
+            return {
+                "id": None,
+                "name": " ".join(str(canonical_name).split()),
+                "entity_type": None,
+                "jurisdiction": None,
+            }
+        return None
+
+    candidates = defaultdict(dict)
+
+    def add_candidate(raw_label, target):
+        key = _label_key(raw_label)
+        if not key or not target:
+            return
+        target_key = (
+            "id", target["id"]
+        ) if target.get("id") is not None else (
+            "name", _label_key(target.get("name"))
+        )
+        candidates[key][target_key] = target
+
+    for row in entity_rows:
+        add_candidate(row["name"], row)
+
+    try:
+        alias_rows = db.execute("""
+            SELECT canonical_name, alias, entity_id
+            FROM name_aliases
+            ORDER BY id
+        """).fetchall()
+    except sqlite3.OperationalError:
+        alias_rows = []
+    for row in alias_rows:
+        add_candidate(
+            row["alias"],
+            resolve_target(row["canonical_name"], row["entity_id"]),
+        )
+
+    try:
+        finding_entity_rows = db.execute("""
+            SELECT fe.raw_name, e.id, e.name, e.entity_type, e.jurisdiction
+            FROM finding_entities fe
+            JOIN entities e ON e.id = fe.entity_id
+            WHERE fe.raw_name IS NOT NULL AND TRIM(fe.raw_name) <> ''
+              AND fe.resolution_status IN ('asserted', 'reviewed')
+            ORDER BY fe.finding_id, e.id
+        """).fetchall()
+    except sqlite3.OperationalError:
+        finding_entity_rows = []
+    for row in finding_entity_rows:
+        add_candidate(row["raw_name"], dict(row))
+
+    return {
+        key: next(iter(targets.values()))
+        for key, targets in candidates.items()
+        if len(targets) == 1
+    }
+
+
+def _canonical_endpoint(raw_label, endpoint_map):
+    """Resolve one endpoint without mutating the registry."""
+    target = endpoint_map.get(_label_key(raw_label))
+    if not target:
+        return raw_label, None, None, None
+    return (
+        target["name"],
+        target.get("id"),
+        target.get("entity_type"),
+        target.get("jurisdiction"),
+    )
+
+
+def _max_confidence(current, candidate):
+    """Return the stronger confidence using the explicit project ordering."""
+    if candidate is None:
+        return current
+    if current is None:
+        return candidate
+    current_rank = CONFIDENCE_ORDER.get(current, -1)
+    candidate_rank = CONFIDENCE_ORDER.get(candidate, -1)
+    if candidate_rank > current_rank:
+        return candidate
+    if candidate_rank < current_rank:
+        return current
+    # Unknown/equivalent labels get a deterministic, non-strength-bearing tie.
+    return min(current, candidate)
+
+
+def _primary_thread(thread_counts):
+    """Choose the modal assigned thread; break ties by the lowest thread id."""
+    if not thread_counts:
+        return None
+    return min(thread_counts, key=lambda thread_id: (-thread_counts[thread_id], thread_id))
+
+
 # ── Schema ────────────────────────────────────────────────────
 
 def _ensure_analysis_schema(db):
@@ -145,7 +283,15 @@ def fail_analysis_run(run_id, error_msg):
 # ── Export Functions ────────────────────────────────────────
 
 def export_connections_graph(profile_id=None, all_profiles=False):
-    """Export all connections as an edge list with metadata."""
+    """Export connections as a canonicalized, self-consistent edge list.
+
+    ``person_a``/``person_b`` are canonical entity labels when an exact entity,
+    reviewed alias, or canonical finding link resolves safely.  The original DB
+    values remain available as ``raw_person_a``/``raw_person_b``.  Node metadata
+    is emitted for actual edge endpoints only, including endpoints with no
+    findings, so ``node_count`` describes the graph rather than the findings
+    table.
+    """
     db = get_analysis_db()
     resolved = _resolve_profile(profile_id, all_profiles)
 
@@ -167,32 +313,111 @@ def export_connections_graph(profile_id=None, all_profiles=False):
             ORDER BY c.id
         """).fetchall()
 
-    edges = [dict(r) for r in rows]
+    endpoint_map = _load_safe_endpoint_map(db)
+    edges = []
+    node_state = {}
 
-    # Also get node metadata from findings
+    def register_node(label, raw_label, entity_id, entity_type, jurisdiction):
+        if label is None or label == "":
+            return
+        if label not in node_state:
+            node_state[label] = {
+                "target_name": label,
+                "entity_id": entity_id,
+                "entity_type": entity_type,
+                "jurisdiction": jurisdiction,
+                "raw_labels": set(),
+                "finding_count": 0,
+                "thread_counts": Counter(),
+                "max_confidence": None,
+            }
+        state = node_state[label]
+        if raw_label is not None:
+            state["raw_labels"].add(raw_label)
+        # An unresolved raw endpoint can share a display label with a resolved
+        # endpoint.  Enrich only missing identity fields; never overwrite one
+        # canonical ID with another.
+        if state["entity_id"] is None and entity_id is not None:
+            state["entity_id"] = entity_id
+            state["entity_type"] = entity_type
+            state["jurisdiction"] = jurisdiction
+
+    for row in rows:
+        edge = dict(row)
+        raw_a = edge["person_a"]
+        raw_b = edge["person_b"]
+        canonical_a, entity_a_id, entity_a_type, entity_a_jurisdiction = _canonical_endpoint(
+            raw_a, endpoint_map
+        )
+        canonical_b, entity_b_id, entity_b_type, entity_b_jurisdiction = _canonical_endpoint(
+            raw_b, endpoint_map
+        )
+        edge.update({
+            "raw_person_a": raw_a,
+            "raw_person_b": raw_b,
+            "person_a": canonical_a,
+            "person_b": canonical_b,
+            "entity_a_id": entity_a_id,
+            "entity_b_id": entity_b_id,
+        })
+        edges.append(edge)
+        register_node(
+            canonical_a, raw_a, entity_a_id, entity_a_type, entity_a_jurisdiction
+        )
+        register_node(
+            canonical_b, raw_b, entity_b_id, entity_b_type, entity_b_jurisdiction
+        )
+
+    # Aggregate findings in Python so aliases converge before confidence/thread
+    # rollups.  SQL MAX(confidence) is lexical (and therefore wrong), while a
+    # bare grouped thread_id is undefined in SQLite.
     if resolved:
-        targets = db.execute("""
-            SELECT target_name, COUNT(*) as finding_count,
-                   thread_id, MAX(confidence) as max_confidence
+        finding_rows = db.execute("""
+            SELECT id, target_name, thread_id, confidence
             FROM findings
             WHERE profile_id = ?
-            GROUP BY target_name
+            ORDER BY id
         """, (resolved,)).fetchall()
     else:
-        targets = db.execute("""
-            SELECT target_name, COUNT(*) as finding_count,
-                   thread_id, MAX(confidence) as max_confidence
+        finding_rows = db.execute("""
+            SELECT id, target_name, thread_id, confidence
             FROM findings
-            GROUP BY target_name
+            ORDER BY id
         """).fetchall()
-    node_meta = {r["target_name"]: dict(r) for r in targets}
+
+    for row in finding_rows:
+        canonical, _entity_id, _entity_type, _jurisdiction = _canonical_endpoint(
+            row["target_name"], endpoint_map
+        )
+        state = node_state.get(canonical)
+        if state is None:
+            # A finding target without an edge is not a graph endpoint.
+            continue
+        state["finding_count"] += 1
+        if row["thread_id"] is not None:
+            state["thread_counts"][row["thread_id"]] += 1
+        state["max_confidence"] = _max_confidence(
+            state["max_confidence"], row["confidence"]
+        )
+
+    node_meta = {}
+    for label in sorted(node_state, key=lambda value: (value.casefold(), value)):
+        state = node_state[label]
+        thread_counts = state.pop("thread_counts")
+        thread_ids = sorted(thread_counts)
+        state["raw_labels"] = sorted(
+            state["raw_labels"], key=lambda value: (value.casefold(), value)
+        )
+        state["thread_id"] = _primary_thread(thread_counts)
+        state["thread_ids"] = thread_ids
+        node_meta[label] = state
 
     db.close()
     return {
         "edges": edges,
         "edge_count": len(edges),
         "node_metadata": node_meta,
-        "node_count": len(node_meta),
+        "node_count": len(node_state),
     }
 
 
@@ -306,54 +531,80 @@ def export_entity_network(profile_id=None, all_profiles=False):
     """Export entity registry with roles, relations, and addresses.
 
     Entities are shared across profiles, but when profile-scoped, only
-    returns entities referenced by findings in that profile.
+    returns entities referenced by findings in that profile, entities reached
+    through the legacy role-name heuristic, and the opposite endpoints of
+    relations touching those entities.  Including both relation endpoints
+    keeps the exported network self-contained.
     """
     db = get_analysis_db()
     resolved = _resolve_profile(profile_id, all_profiles)
 
     if resolved:
-        # Scope to entities referenced by profile findings via person names
-        entities = [dict(r) for r in db.execute("""
-            SELECT DISTINCT e.id, e.name, e.entity_type, e.jurisdiction, e.status,
-                   e.ein, e.address, e.source, e.notes
+        # Canonical scope comes from finding_entities.  Retain the former
+        # role-name path as a compatibility supplement for legacy findings
+        # that pre-date canonical entity links.
+        base_rows = db.execute("""
+            SELECT DISTINCT fe.entity_id AS id
+            FROM finding_entities fe
+            JOIN findings f ON f.id = fe.finding_id
+            WHERE f.profile_id = ?
+            UNION
+            SELECT DISTINCT e.id
             FROM entities e
             JOIN entity_roles er ON er.entity_id = e.id
             WHERE er.person_name IN (
                 SELECT DISTINCT target_name FROM findings WHERE profile_id = ?
             )
-            ORDER BY e.id
-        """, (resolved,)).fetchall()]
-        entity_ids = {e["id"] for e in entities}
+        """, (resolved, resolved)).fetchall()
+        base_ids = {row["id"] for row in base_rows}
 
-        roles = [dict(r) for r in db.execute("""
-            SELECT entity_id, person_name, role, date_start, date_end, source
-            FROM entity_roles WHERE entity_id IN (
-                SELECT DISTINCT e.id FROM entities e
-                JOIN entity_roles er ON er.entity_id = e.id
-                WHERE er.person_name IN (
-                    SELECT DISTINCT target_name FROM findings WHERE profile_id = ?
-                )
-            )
-            ORDER BY entity_id
-        """, (resolved,)).fetchall()]
+        if base_ids:
+            placeholders = ",".join("?" for _ in base_ids)
+            base_params = list(base_ids)
+            relations = [dict(r) for r in db.execute("""
+                SELECT entity_a_id, entity_b_id, relation_type, description, source
+                FROM entity_relations
+                WHERE entity_a_id IN ({ids}) OR entity_b_id IN ({ids})
+                ORDER BY entity_a_id
+            """.format(ids=placeholders), base_params + base_params).fetchall()]
+        else:
+            relations = []
 
-        relations = [dict(r) for r in db.execute("""
-            SELECT entity_a_id, entity_b_id, relation_type, description, source
-            FROM entity_relations
-            WHERE entity_a_id IN ({ids}) OR entity_b_id IN ({ids})
-            ORDER BY entity_a_id
-        """.format(ids=",".join("?" for _ in entity_ids)),
-            list(entity_ids) + list(entity_ids)
-        ).fetchall()] if entity_ids else []
+        # Relations are unusable when one endpoint is absent from the entity
+        # list. Expand one hop so every emitted relation can be resolved.
+        entity_ids = set(base_ids)
+        for relation in relations:
+            entity_ids.add(relation["entity_a_id"])
+            entity_ids.add(relation["entity_b_id"])
 
-        addresses = [dict(r) for r in db.execute("""
-            SELECT entity_id, address, address_type, date_observed, source
-            FROM entity_addresses
-            WHERE entity_id IN ({ids})
-            ORDER BY entity_id
-        """.format(ids=",".join("?" for _ in entity_ids)),
-            list(entity_ids)
-        ).fetchall()] if entity_ids else []
+        if entity_ids:
+            placeholders = ",".join("?" for _ in entity_ids)
+            entity_params = list(entity_ids)
+            entities = [dict(r) for r in db.execute("""
+                SELECT id, name, entity_type, jurisdiction, status, ein,
+                       address, source, notes
+                FROM entities
+                WHERE id IN ({ids})
+                ORDER BY id
+            """.format(ids=placeholders), entity_params).fetchall()]
+
+            roles = [dict(r) for r in db.execute("""
+                SELECT entity_id, person_name, role, date_start, date_end, source
+                FROM entity_roles
+                WHERE entity_id IN ({ids})
+                ORDER BY entity_id
+            """.format(ids=placeholders), entity_params).fetchall()]
+
+            addresses = [dict(r) for r in db.execute("""
+                SELECT entity_id, address, address_type, date_observed, source
+                FROM entity_addresses
+                WHERE entity_id IN ({ids})
+                ORDER BY entity_id
+            """.format(ids=placeholders), entity_params).fetchall()]
+        else:
+            entities = []
+            roles = []
+            addresses = []
     else:
         entities = [dict(r) for r in db.execute("""
             SELECT id, name, entity_type, jurisdiction, status, ein, address, source, notes

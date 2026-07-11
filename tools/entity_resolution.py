@@ -695,6 +695,301 @@ def _merge_sources(keep_source, drop_source):
     return ",".join(out)
 
 
+def _table_exists(db, table_name):
+    """Return whether *table_name* exists in the connected database."""
+    return db.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?",
+        (table_name,),
+    ).fetchone() is not None
+
+
+def _alias_type_for_entity(entity_type):
+    """Use person aliases for people and entity aliases for everything else."""
+    return "person_variant" if (entity_type or "").lower() == "person" else "entity_variant"
+
+
+def _ensure_merge_alias(db, keep, drop, created_by):
+    """Make the dropped name resolve to the kept entity.
+
+    A pre-existing alias owned by a third entity is an identity conflict, not
+    something a merge should silently overwrite.  Existing aliases owned by
+    either merge participant (or not yet linked to an entity) are safe to
+    repoint.
+    """
+    if not _table_exists(db, "name_aliases"):
+        return 0
+
+    keep_id, drop_id = keep["id"], drop["id"]
+    keep_name, drop_name = keep["name"], drop["name"]
+    alias_type = _alias_type_for_entity(keep.get("entity_type"))
+
+    if drop_name.strip().lower() != keep_name.strip().lower():
+        matches = db.execute(
+            "SELECT * FROM name_aliases WHERE lower(alias) = lower(?) ORDER BY id",
+            (drop_name,),
+        ).fetchall()
+        conflicting = [
+            row for row in matches
+            if row["entity_id"] not in (None, keep_id, drop_id)
+        ]
+        if conflicting:
+            owner_ids = sorted({row["entity_id"] for row in conflicting})
+            raise ValueError(
+                f"alias '{drop_name}' already belongs to entity/entities {owner_ids}"
+            )
+
+        if matches:
+            for row in matches:
+                db.execute(
+                    """UPDATE name_aliases
+                       SET canonical_name = ?, entity_id = ?, alias_type = ?
+                       WHERE id = ?""",
+                    (keep_name, keep_id, alias_type, row["id"]),
+                )
+        else:
+            db.execute(
+                """INSERT INTO name_aliases
+                   (canonical_name, alias, alias_type, entity_id, created_by)
+                   VALUES (?, ?, ?, ?, ?)""",
+                (keep_name, drop_name, alias_type, keep_id, created_by),
+            )
+
+    # Repoint every other alias that named the dropped canonical entity.  The
+    # alias value is UNIQUE, so row-by-row updates cannot create duplicates;
+    # aliases equal to the kept canonical name would become useless self-links.
+    rows = db.execute(
+        """SELECT * FROM name_aliases
+           WHERE entity_id = ? OR lower(canonical_name) = lower(?)""",
+        (drop_id, drop_name),
+    ).fetchall()
+    conflicting_rows = [
+        row for row in rows
+        if row["entity_id"] not in (None, keep_id, drop_id)
+    ]
+    if conflicting_rows:
+        owner_ids = sorted({row["entity_id"] for row in conflicting_rows})
+        raise ValueError(
+            f"aliases for canonical name '{drop_name}' already belong to "
+            f"entity/entities {owner_ids}"
+        )
+    for row in rows:
+        if row["alias"].strip().lower() == keep_name.strip().lower():
+            db.execute("DELETE FROM name_aliases WHERE id = ?", (row["id"],))
+            continue
+        row_type = row["alias_type"]
+        if row_type != "entity_as_person":
+            row_type = alias_type
+        db.execute(
+            """UPDATE name_aliases
+               SET canonical_name = ?, entity_id = ?, alias_type = ?
+               WHERE id = ?""",
+            (keep_name, keep_id, row_type, row["id"]),
+        )
+
+    return len(matches) if drop_name.strip().lower() != keep_name.strip().lower() else 0
+
+
+_RESOLUTION_STATUS_RANK = {"candidate": 0, "asserted": 1, "reviewed": 2}
+
+
+def _merge_finding_entities(db, keep_id, drop_id):
+    """Repoint finding junction rows without losing unique-key collisions."""
+    if not _table_exists(db, "finding_entities"):
+        return 0
+
+    rows = db.execute(
+        "SELECT * FROM finding_entities WHERE entity_id = ?",
+        (drop_id,),
+    ).fetchall()
+    for row in rows:
+        existing = db.execute(
+            """SELECT * FROM finding_entities
+               WHERE finding_id = ? AND entity_id = ? AND mention_role = ?""",
+            (row["finding_id"], keep_id, row["mention_role"]),
+        ).fetchone()
+        if existing:
+            statuses = (existing["resolution_status"], row["resolution_status"])
+            status = max(
+                statuses,
+                key=lambda value: _RESOLUTION_STATUS_RANK.get(value, -1),
+            )
+            existing_rank = _RESOLUTION_STATUS_RANK.get(
+                existing["resolution_status"], -1
+            )
+            dropped_rank = _RESOLUTION_STATUS_RANK.get(
+                row["resolution_status"], -1
+            )
+            preferred, fallback = (
+                (row, existing) if dropped_rank > existing_rank else (existing, row)
+            )
+            scores = [
+                value for value in
+                (existing["resolution_score"], row["resolution_score"])
+                if value is not None
+            ]
+            db.execute(
+                """UPDATE finding_entities
+                   SET raw_name = ?, resolution_status = ?,
+                       resolution_method = ?, resolution_score = ?, created_at = ?
+                   WHERE finding_id = ? AND entity_id = ? AND mention_role = ?""",
+                (
+                    preferred["raw_name"] or fallback["raw_name"],
+                    status,
+                    preferred["resolution_method"] or fallback["resolution_method"],
+                    max(scores) if scores else None,
+                    min(existing["created_at"], row["created_at"]),
+                    row["finding_id"], keep_id, row["mention_role"],
+                ),
+            )
+        else:
+            db.execute(
+                """INSERT INTO finding_entities
+                   (finding_id, entity_id, mention_role, raw_name,
+                    resolution_status, resolution_method, resolution_score,
+                    created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    row["finding_id"], keep_id, row["mention_role"],
+                    row["raw_name"], row["resolution_status"],
+                    row["resolution_method"], row["resolution_score"],
+                    row["created_at"],
+                ),
+            )
+
+    db.execute("DELETE FROM finding_entities WHERE entity_id = ?", (drop_id,))
+    return len(rows)
+
+
+def _merge_entity_relations(db, keep_id, drop_id):
+    """Repoint relation endpoints, coalesce collisions, and skip self-edges."""
+    rows = db.execute(
+        """SELECT * FROM entity_relations
+           WHERE entity_a_id = ? OR entity_b_id = ?
+           ORDER BY id""",
+        (drop_id, drop_id),
+    ).fetchall()
+
+    for row in rows:
+        entity_a_id = keep_id if row["entity_a_id"] == drop_id else row["entity_a_id"]
+        entity_b_id = keep_id if row["entity_b_id"] == drop_id else row["entity_b_id"]
+        if entity_a_id == entity_b_id:
+            continue
+
+        existing = db.execute(
+            """SELECT * FROM entity_relations
+               WHERE entity_a_id = ? AND entity_b_id = ? AND relation_type = ?""",
+            (entity_a_id, entity_b_id, row["relation_type"]),
+        ).fetchone()
+        if existing:
+            description = _merge_text(
+                existing["description"], row["description"], drop_id
+            )
+            source = _merge_sources(existing["source"], row["source"])
+            db.execute(
+                "UPDATE entity_relations SET description = ?, source = ? WHERE id = ?",
+                (description, source, existing["id"]),
+            )
+        else:
+            db.execute(
+                """INSERT INTO entity_relations
+                   (entity_a_id, entity_b_id, relation_type, description, source)
+                   VALUES (?, ?, ?, ?, ?)""",
+                (
+                    entity_a_id, entity_b_id, row["relation_type"],
+                    row["description"], row["source"],
+                ),
+            )
+
+    db.execute(
+        "DELETE FROM entity_relations WHERE entity_a_id = ? OR entity_b_id = ?",
+        (drop_id, drop_id),
+    )
+    db.execute(
+        """DELETE FROM entity_relations
+           WHERE entity_a_id = entity_b_id AND entity_a_id = ?""",
+        (keep_id,),
+    )
+    return len(rows)
+
+
+def merge_entity_records(db, keep_id, drop_id, created_by="entity_resolution"):
+    """Merge two entity rows on an existing transaction-capable connection.
+
+    The caller owns commit/rollback.  Centralizing this operation keeps both
+    entity merge CLIs aligned with every entity foreign key in the current
+    schema.
+    """
+    if keep_id == drop_id:
+        raise ValueError("keep and drop entity IDs must differ")
+
+    keep_row = db.execute("SELECT * FROM entities WHERE id = ?", (keep_id,)).fetchone()
+    drop_row = db.execute("SELECT * FROM entities WHERE id = ?", (drop_id,)).fetchone()
+    if not keep_row or not drop_row:
+        missing = keep_id if not keep_row else drop_id
+        raise ValueError(f"entity #{missing} not found")
+    keep, drop = dict(keep_row), dict(drop_row)
+
+    # Detect alias ownership conflicts before changing any dependent rows.
+    _ensure_merge_alias(db, keep, drop, created_by)
+
+    role_count = db.execute(
+        "SELECT COUNT(*) FROM entity_roles WHERE entity_id = ?", (drop_id,)
+    ).fetchone()[0]
+    db.execute(
+        "UPDATE OR IGNORE entity_roles SET entity_id = ? WHERE entity_id = ?",
+        (keep_id, drop_id),
+    )
+    db.execute("DELETE FROM entity_roles WHERE entity_id = ?", (drop_id,))
+
+    address_count = db.execute(
+        "SELECT COUNT(*) FROM entity_addresses WHERE entity_id = ?", (drop_id,)
+    ).fetchone()[0]
+    db.execute(
+        "UPDATE OR IGNORE entity_addresses SET entity_id = ? WHERE entity_id = ?",
+        (keep_id, drop_id),
+    )
+    db.execute("DELETE FROM entity_addresses WHERE entity_id = ?", (drop_id,))
+
+    relation_count = _merge_entity_relations(db, keep_id, drop_id)
+    finding_entity_count = _merge_finding_entities(db, keep_id, drop_id)
+
+    pillar_count = 0
+    if _table_exists(db, "institutional_pillars"):
+        pillar_count = db.execute(
+            "SELECT COUNT(*) FROM institutional_pillars WHERE entity_id = ?",
+            (drop_id,),
+        ).fetchone()[0]
+        db.execute(
+            """UPDATE OR IGNORE institutional_pillars
+               SET entity_id = ? WHERE entity_id = ?""",
+            (keep_id, drop_id),
+        )
+        db.execute(
+            "DELETE FROM institutional_pillars WHERE entity_id = ?", (drop_id,)
+        )
+
+    merged_notes = _merge_text(keep.get("notes"), drop.get("notes"), drop_id)
+    merged_source = _merge_sources(keep.get("source"), drop.get("source"))
+    entity_type = keep.get("entity_type")
+    if entity_type in (None, "", "unknown") and drop.get("entity_type") not in (
+        None, "", "unknown"
+    ):
+        entity_type = drop["entity_type"]
+    db.execute(
+        "UPDATE entities SET notes = ?, source = ?, entity_type = ? WHERE id = ?",
+        (merged_notes, merged_source, entity_type, keep_id),
+    )
+    db.execute("DELETE FROM entities WHERE id = ?", (drop_id,))
+
+    return {
+        "roles": role_count,
+        "addresses": address_count,
+        "relations": relation_count,
+        "finding_entities": finding_entity_count,
+        "institutional_pillars": pillar_count,
+    }
+
+
 def cmd_merge(args):
     """Merge two entities — keep one, alias the other."""
     db = get_db()
@@ -749,7 +1044,20 @@ def cmd_merge(args):
     if drop_rels_a + drop_rels_b:
         actions.append(f"  - Reassign {drop_rels_a + drop_rels_b} relations")
 
-    # 5. Repoint other FK references (name_aliases, institutional_pillars)
+    # 5. Repoint other FK references
+    drop_finding_entities = (
+        db.execute(
+            "SELECT COUNT(*) FROM finding_entities WHERE entity_id = ?",
+            (drop["id"],),
+        ).fetchone()[0]
+        if _table_exists(db, "finding_entities")
+        else 0
+    )
+    if drop_finding_entities:
+        actions.append(
+            f"  - Repoint {drop_finding_entities} finding-entity links"
+        )
+
     drop_aliases = db.execute(
         "SELECT COUNT(*) FROM name_aliases WHERE entity_id = ?", (drop["id"],)
     ).fetchone()[0]
@@ -788,83 +1096,9 @@ def cmd_merge(args):
 
     # Execute merge
     try:
-        # Add alias
-        db.execute(
-            """INSERT OR IGNORE INTO name_aliases
-               (canonical_name, alias, alias_type, entity_id, created_by)
-               VALUES (?, ?, 'entity_variant', ?, 'entity_resolution')""",
-            (keep["name"], drop["name"], keep["id"]),
+        merge_entity_records(
+            db, keep["id"], drop["id"], created_by="entity_resolution"
         )
-
-        # Move roles (ignore duplicates)
-        db.execute(
-            """UPDATE OR IGNORE entity_roles SET entity_id = ?
-               WHERE entity_id = ?""",
-            (keep["id"], drop["id"]),
-        )
-        # Delete any that couldn't move due to unique constraint
-        db.execute("DELETE FROM entity_roles WHERE entity_id = ?", (drop["id"],))
-
-        # Move addresses (ignore duplicates)
-        db.execute(
-            """UPDATE OR IGNORE entity_addresses SET entity_id = ?
-               WHERE entity_id = ?""",
-            (keep["id"], drop["id"]),
-        )
-        db.execute("DELETE FROM entity_addresses WHERE entity_id = ?", (drop["id"],))
-
-        # Move relations
-        db.execute(
-            """UPDATE OR IGNORE entity_relations SET entity_a_id = ?
-               WHERE entity_a_id = ?""",
-            (keep["id"], drop["id"]),
-        )
-        db.execute(
-            """UPDATE OR IGNORE entity_relations SET entity_b_id = ?
-               WHERE entity_b_id = ?""",
-            (keep["id"], drop["id"]),
-        )
-        # Clean up any self-referencing relations
-        db.execute(
-            "DELETE FROM entity_relations WHERE entity_a_id = entity_b_id"
-        )
-        # Delete orphaned relations
-        db.execute(
-            "DELETE FROM entity_relations WHERE entity_a_id = ? OR entity_b_id = ?",
-            (drop["id"], drop["id"]),
-        )
-
-        # Repoint name_aliases that referenced the dropped entity to the kept one,
-        # then drop any alias that now points at its own canonical name (self-alias).
-        # Without this the FK name_aliases.entity_id -> entities.id blocks the delete.
-        db.execute(
-            """UPDATE OR IGNORE name_aliases SET entity_id = ?, canonical_name = ?
-               WHERE entity_id = ?""",
-            (keep["id"], keep["name"], drop["id"]),
-        )
-        db.execute(
-            """DELETE FROM name_aliases
-               WHERE entity_id = ? OR alias = canonical_name""",
-            (drop["id"],),
-        )
-
-        # Repoint any institutional_pillars FK references
-        db.execute(
-            "UPDATE OR IGNORE institutional_pillars SET entity_id = ? WHERE entity_id = ?",
-            (keep["id"], drop["id"]),
-        )
-        db.execute(
-            "DELETE FROM institutional_pillars WHERE entity_id = ?", (drop["id"],)
-        )
-
-        # Preserve notes/source/type from the dropped entity into the kept one
-        db.execute(
-            "UPDATE entities SET notes = ?, source = ?, entity_type = ? WHERE id = ?",
-            (merged_notes, merged_source, inherit_type or keep["entity_type"], keep["id"]),
-        )
-
-        # Delete the dropped entity
-        db.execute("DELETE FROM entities WHERE id = ?", (drop["id"],))
 
         db.commit()
         print(f"\n  Merge complete. Entity #{drop['id']} merged into #{keep['id']}.")
