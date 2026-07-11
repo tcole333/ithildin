@@ -7,6 +7,7 @@ CODEX_HOME_DIR="${CODEX_HOME:-$HOME/.codex}"
 ARGS=(
   --workspace "$ROOT_DIR"
   --skills-dir "$ROOT_DIR/.claude/skills"
+  --skills-dir "$ROOT_DIR/.codex/skills"
   --skills-dir "$CODEX_HOME_DIR/skills"
 )
 
