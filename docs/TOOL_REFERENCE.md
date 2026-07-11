@@ -187,10 +187,18 @@ python tools/findings_tracker.py audit 42 --table findings  # Show correction hi
 ```bash
 python tools/hypothesis_tracker.py add --title "USVI cluster suggests structural role" \
   --pattern-type structural --description "4 unrelated targets all have USVI entities 2012-2015" \
+  --competition-group "usvi-formation-cluster" \
   --predicted-evidence "Shared registered agent or formation attorney" \
   --search-plan "1. query_registry.py search USVI agent  2. ingest_usvi.py agent overlap"
-python tools/hypothesis_tracker.py list [--status proposed] [--pattern-type structural]
+python tools/hypothesis_tracker.py add --title "Routine industry clustering" --as-null \
+  --competition-group "usvi-formation-cluster" --description "H0 with its own falsification criterion"
+python tools/hypothesis_tracker.py list [--status proposed] [--pattern-type structural] \
+  [--competition-group usvi-formation-cluster]
 python tools/hypothesis_tracker.py show 5
+python tools/hypothesis_tracker.py evaluate --hypothesis-id 5 --finding-id 412 --assessment inconsistent
+python tools/hypothesis_tracker.py matrix [--competition-group usvi-formation-cluster]
+python tools/hypothesis_tracker.py compete [--competition-group usvi-formation-cluster]
+python tools/hypothesis_tracker.py diagnose
 python tools/hypothesis_tracker.py investigate --id 5 --lead-id 42
 python tools/hypothesis_tracker.py confirm --id 5 --evidence "findings:412,415" --reason "Shared agent confirmed"
 python tools/hypothesis_tracker.py refute --id 5 --evidence "findings:420" --reason "No overlap found"

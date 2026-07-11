@@ -670,6 +670,7 @@ After reading all 4 report files:
 6. **Collect infrastructure recommendations**: What new data sources, tools, or tool improvements did agents identify? Consolidate into actionable items.
 7. **Drill down selectively**: If a report mentions a critical finding, read the specific `--output` JSON for details. Do NOT read all JSON files — only the ones relevant to synthesis.
 8. **Flag gaps and anomalies**: What records should exist but don't? What contradictions appeared between agents' results? What factual questions remain unanswered? Record these as findings with `claim_type=synthesis` and `confidence=medium`, and spawn research leads for unresolved questions.
+9. **Run ACH competition**: Check `uv run python tools/hypothesis_tracker.py list`. When two or more hypotheses touch the target, run `matrix --competition-group <slug>` and `compete --competition-group <slug>` for each relevant competition group. Fold the rankings into the synthesis report as the hypotheses with **least evidence against**, never the most evidence for.
 11. **Check tool coverage**: Did agents actually use the full source list, or did they skip tools? Flag any sources that should have been checked but weren't, and note it in the summary.
 
 ### 4b. Ingest Agent Learnings

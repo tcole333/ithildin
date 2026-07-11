@@ -260,6 +260,8 @@ These route to `/analyze-filing`, `/analyze-contract`, and `/analyze-case` which
 
 ### 7. Check Stop Conditions
 
+**Disconfirmation Sweep (required before completion):** Run at least one search designed explicitly to refute the working hypothesis, not merely to complete source coverage. Record the query and result through the existing evidence/negative-results mechanism. A negative disconfirmation search is itself reportable evidence and must not be omitted because it found nothing.
+
 Stop investigating and move to completion when ANY of these is true:
 
 - **Mandatory sources exhausted with corroboration**: You've checked all mandatory sources for this target type and found corroborating evidence across 2+ independent sources.

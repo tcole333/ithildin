@@ -255,6 +255,10 @@ Flag:
 - Claims stated as fact where the evidence is thin (1 source, indirect) → **SHOULD FIX**
 - Missing confidence framing paragraph (brief statement of sources and epistemological stance before first evidentiary section) → **SHOULD FIX**
 
+#### Estimative-language consistency (blocking)
+
+Check every probability phrase against the cited findings' confidence tiers using the Kent mapping in `research/INVESTIGATIVE_METHODOLOGY.md`: `confirmed` = established/documented; `high` = almost certainly/very likely; `medium` = likely/probably; `low` = possibly/may; `unverified` = unconfirmed/alleged. Prose may not outrun the weakest confidence in its citation chain—for example, "almost certainly" is unsupported when any necessary link is `medium`. Flag every mismatch as a **BLOCKING** edit.
+
 **Not a problem**: An article that presents evidence and then draws a conclusion using assertion language. "The Golden Dome procurement structure produces a specific set of conditions" is an earned conclusion if the preceding sections document those conditions.
 
 ### 9. Temporal Accuracy Check
