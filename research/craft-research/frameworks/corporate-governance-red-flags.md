@@ -3,9 +3,9 @@ name: Corporate Governance Red Flags
 slug: corporate-governance-red-flags
 domain: org-theory
 source: "Bebchuk et al. (2009) 'Entrenchment Index'; ISS governance scoring; SMCI/Palantir prototype analysis (2026)"
-status: candidate
+status: adopted
 created: 2026-03-22
-grounding_findings: [6871, 6873, 6878, 6880, 6888]
+grounding_findings: [6871, 6873, 6878, 6880, 6888, 3923, 4210, 6882, 10554]
 related_models: [fiduciary-inversion, compliance-theater, manufactured-dependency]
 detection_keywords:
   - ["controlled company", "dual class", "founder", "family"]
@@ -86,3 +86,7 @@ SMCI compound score: ~12+ (auditor resignation 3 + adverse ICFR 3 + RPT material
 ## Limitations
 
 This framework identifies structural governance conditions that *enable* misconduct but does not prove misconduct occurred. Strong governance doesn't prevent fraud (Enron had an independent board), and weak governance doesn't guarantee fraud (many family-controlled companies operate honestly). The framework is a risk assessment tool that prioritizes investigation resources — high-scoring entities warrant deeper Tier 1 analysis, not immediate conclusions. Always pair governance assessment with financial analysis (accruals ratio, RPT scoring, cash flow divergence) to distinguish structural weakness from active exploitation.
+
+## Evaluation (2026-07-11)
+
+Promoted candidate → adopted. Grounding extended beyond the SMCI/Palantir prototypes to three further entities: the XXI/Twenty One Capital governance agreement handing Tether 4 of 7 board seats (F3923 — creditor/sponsor board capture variant), GD Culture Group's compound shell-vehicle profile including four name changes (F4210), insider 10b5-1 adoption by the CEO's spouse during the crisis window (F6882), and a late Form 3 by a new Allbirds director in the pre-pivot window (F10554 — the small-cap disclosure-hygiene variant). The compound-scoring logic (flags must co-occur, weighted by severity) held up in testing: it correctly does NOT fire on dual-class-only tech companies, and fires strongly on SMCI/GDC. Detection keywords already live; model_detector now loads this lens.

@@ -3,9 +3,9 @@ name: Cash Flow / Earnings Divergence
 slug: cash-flow-earnings-divergence
 domain: financial-crime
 source: "Sloan (1996) 'Accrual Reliability'; Dechow et al. (2011) 'Predicting Fraud'; Beneish M-Score; SMCI prototype analysis (2026)"
-status: candidate
+status: evaluated
 created: 2026-03-22
-grounding_findings: [6874]
+grounding_findings: [6874, 6881, 6886]
 related_models: [peripheral-collapse, fiduciary-inversion, compliance-theater]
 detection_keywords:
   - ["accruals ratio", "earnings quality", "cash conversion"]
@@ -46,3 +46,7 @@ In this investigation: SMCI reported $1.15B net income in FY2024 while generatin
 The accruals ratio is a screening tool, not a verdict. Many legitimate business conditions produce high accruals temporarily. The framework becomes powerful when combined with other indicators: high accruals + auditor change + related-party transactions + late filings = compound signal. In isolation, any single period of divergence proves nothing.
 
 Additionally, this framework measures earnings quality but cannot identify the *mechanism* of manipulation. A high accruals ratio tells you the earnings are low-quality but doesn't tell you whether the cause is aggressive revenue recognition, deferred expense recognition, inventory valuation, or some combination. Identifying the mechanism requires reading the financial statements and footnotes directly (via `/analyze-filing`).
+
+## Evaluation (2026-07-11)
+
+Promoted candidate → evaluated. New grounding: the $1.79B receivables factoring facility (F6881) as a divergence-masking mechanism (factoring converts receivables to cash, flattering operating cash flow while the underlying collection risk persists), and Palantir's $840M stock-based-compensation wedge between GAAP and adjusted profitability (F6886) as the disclosed-divergence variant. The canonical F6874 instance ($1.15B net income vs -$2.49B operating cash flow) remains the strongest single grounding. Held at evaluated: three grounded instances meet the floor but the lens needs application to a target outside the SMCI/Palantir screening cluster (WeWork's community-adjusted-EBITDA era is the obvious next test) before adoption.
