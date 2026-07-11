@@ -83,6 +83,16 @@ def _ensure_hypothesis_schema(db):
         CREATE INDEX IF NOT EXISTS idx_hem_finding ON hypothesis_evidence_matrix(finding_id);
     """)
 
+    # Additive migrations for databases created before ACH competition sets.
+    columns = {row["name"] for row in db.execute("PRAGMA table_info(hypotheses)")}
+    if "competition_group" not in columns:
+        db.execute("ALTER TABLE hypotheses ADD COLUMN competition_group TEXT")
+    if "is_null_hypothesis" not in columns:
+        db.execute(
+            "ALTER TABLE hypotheses ADD COLUMN is_null_hypothesis INTEGER DEFAULT 0"
+        )
+    db.commit()
+
 
 def get_hypothesis_db():
     """Get DB connection with hypothesis schema ensured."""
@@ -94,7 +104,8 @@ def get_hypothesis_db():
 # ── CRUD ────────────────────────────────────────────────────
 
 def add_hypothesis(title, pattern_type=None, description=None, predicted_evidence=None,
-                   search_plan=None, originated_from=None, thread_id=None):
+                   search_plan=None, originated_from=None, thread_id=None,
+                   competition_group=None, is_null_hypothesis=False):
     """Add a new hypothesis. Returns the hypothesis ID."""
     if pattern_type and pattern_type not in VALID_PATTERN_TYPES:
         print(f"ERROR: Invalid pattern_type '{pattern_type}'. Valid: {VALID_PATTERN_TYPES}")
@@ -103,17 +114,20 @@ def add_hypothesis(title, pattern_type=None, description=None, predicted_evidenc
     db = get_hypothesis_db()
     cursor = db.execute("""
         INSERT INTO hypotheses (title, description, pattern_type, predicted_evidence,
-                                search_plan, originated_from, thread_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+                                search_plan, originated_from, thread_id,
+                                competition_group, is_null_hypothesis)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (title, description, pattern_type, predicted_evidence,
-          search_plan, originated_from, thread_id))
+          search_plan, originated_from, thread_id, competition_group,
+          int(is_null_hypothesis)))
     hyp_id = cursor.lastrowid
     db.commit()
     db.close()
     return hyp_id
 
 
-def list_hypotheses(status=None, pattern_type=None, thread_id=None, limit=50):
+def list_hypotheses(status=None, pattern_type=None, thread_id=None,
+                    competition_group=None, limit=50):
     """List hypotheses with optional filters."""
     db = get_hypothesis_db()
     conditions = []
@@ -128,6 +142,9 @@ def list_hypotheses(status=None, pattern_type=None, thread_id=None, limit=50):
     if thread_id:
         conditions.append("thread_id = ?")
         params.append(int(thread_id))
+    if competition_group:
+        conditions.append("competition_group = ?")
+        params.append(competition_group)
 
     where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
     query = f"""
@@ -289,7 +306,7 @@ def evaluate_evidence(hypothesis_id, finding_id, assessment, assessed_by=None, n
     return True
 
 
-def get_ach_matrix():
+def get_ach_matrix(competition_group=None):
     """Build the full evidence×hypothesis matrix with scores.
 
     Returns dict with:
@@ -299,19 +316,28 @@ def get_ach_matrix():
     """
     db = get_hypothesis_db()
 
-    # Get active hypotheses (proposed/investigating)
-    hyps = db.execute("""
-        SELECT id, title, status FROM hypotheses
-        WHERE status IN ('proposed', 'investigating')
+    # Get active hypotheses (proposed/investigating), optionally within one set.
+    group_clause = " AND competition_group = ?" if competition_group else ""
+    group_params = (competition_group,) if competition_group else ()
+    hyps = db.execute(f"""
+        SELECT id, title, status, competition_group, is_null_hypothesis
+        FROM hypotheses
+        WHERE status IN ('proposed', 'investigating'){group_clause}
         ORDER BY id
-    """).fetchall()
+    """, group_params).fetchall()
+    hypothesis_ids = [h["id"] for h in hyps]
 
     # Get all evaluated findings
-    evals = db.execute("""
-        SELECT hypothesis_id, finding_id, assessment, assessed_by
-        FROM hypothesis_evidence_matrix
-        WHERE hypothesis_id IN (SELECT id FROM hypotheses WHERE status IN ('proposed', 'investigating'))
-    """).fetchall()
+    if hypothesis_ids:
+        placeholders = ",".join("?" for _ in hypothesis_ids)
+        evals = db.execute(f"""
+            SELECT hypothesis_id, finding_id, assessment, assessed_by
+            FROM hypothesis_evidence_matrix
+            WHERE hypothesis_id IN ({placeholders})
+            ORDER BY id
+        """, hypothesis_ids).fetchall()
+    else:
+        evals = []
 
     # Get unique finding IDs from evaluations
     finding_ids = sorted({e["finding_id"] for e in evals})
@@ -331,6 +357,19 @@ def get_ach_matrix():
             "assessed_by": e["assessed_by"],
         }
 
+    # Diagnostic evidence discriminates among at least two hypotheses in this set.
+    diagnosticity = {}
+    for fid in finding_ids:
+        assessments = [
+            matrix[(hid, fid)]["assessment"]
+            for hid in hypothesis_ids
+            if (hid, fid) in matrix
+        ]
+        if len(assessments) >= 2:
+            diagnosticity[fid] = "diagnostic" if len(set(assessments)) > 1 else "non_diagnostic"
+        else:
+            diagnosticity[fid] = "insufficient"
+
     # Score each hypothesis
     hypothesis_list = []
     for h in hyps:
@@ -346,16 +385,31 @@ def get_ach_matrix():
         # ACH inconsistency score: lower = stronger hypothesis
         total_evaluated = scores["consistent"] + scores["inconsistent"] + scores["neutral"]
         inconsistency_ratio = scores["inconsistent"] / max(total_evaluated, 1)
+        diagnostic_evidence = sum(
+            1 for fid in finding_ids
+            if (hid, fid) in matrix and diagnosticity[fid] == "diagnostic"
+            and matrix[(hid, fid)]["assessment"] != "not_applicable"
+        )
+        diagnostic_consistent = sum(
+            1 for fid in finding_ids
+            if (hid, fid) in matrix and diagnosticity[fid] == "diagnostic"
+            and matrix[(hid, fid)]["assessment"] == "consistent"
+        )
 
         hypothesis_list.append({
             "id": hid,
             "title": h["title"],
             "status": h["status"],
+            "competition_group": h["competition_group"],
+            "is_null_hypothesis": bool(h["is_null_hypothesis"]),
             "consistent": scores["consistent"],
             "inconsistent": scores["inconsistent"],
             "neutral": scores["neutral"],
             "not_applicable": scores["not_applicable"],
             "unevaluated": scores["unevaluated"],
+            "total_evaluated": total_evaluated,
+            "diagnostic_evidence": diagnostic_evidence,
+            "diagnostic_consistent": diagnostic_consistent,
             "inconsistency_ratio": round(inconsistency_ratio, 4),
         })
 
@@ -363,15 +417,16 @@ def get_ach_matrix():
         "hypotheses": hypothesis_list,
         "findings": findings,
         "matrix": {f"{k[0]},{k[1]}": v for k, v in matrix.items()},
+        "diagnosticity": {str(k): v for k, v in diagnosticity.items()},
     }
 
 
-def compete_hypotheses():
+def compete_hypotheses(competition_group=None):
     """Rank active hypotheses by inconsistency score (Heuer ACH method).
 
     Fewer inconsistencies = stronger hypothesis.
     """
-    data = get_ach_matrix()
+    data = get_ach_matrix(competition_group=competition_group)
     ranked = sorted(data["hypotheses"], key=lambda h: h["inconsistency_ratio"])
     return ranked
 
@@ -457,8 +512,10 @@ def _format_hypothesis(h, verbose=False):
     pt = f" [{h['pattern_type']}]" if h.get("pattern_type") else ""
     lead = f" lead=#{h['lead_id']}" if h.get("lead_id") else ""
     thread = f" T{h['thread_id']}" if h.get("thread_id") else ""
+    null_label = " [H0]" if h.get("is_null_hypothesis") else ""
+    group = f" group={h['competition_group']}" if h.get("competition_group") else ""
 
-    line = f"  [{icon}] #{h['id']:>3} {h['status']:<14}{pt}{thread}{lead}  {h['title']}"
+    line = f"  [{icon}] #{h['id']:>3} {h['status']:<14}{pt}{thread}{lead}{group}{null_label}  {h['title']}"
 
     if verbose and h.get("description"):
         line += f"\n         {h['description'][:200]}"
@@ -487,12 +544,16 @@ def main():
     p_add.add_argument("--search-plan")
     p_add.add_argument("--originated-from")
     p_add.add_argument("--thread-id", type=int)
+    p_add.add_argument("--competition-group")
+    p_add.add_argument("--as-null", action="store_true",
+                       help="Register as the null/innocent competing hypothesis")
 
     # list
     p_list = sub.add_parser("list", help="List hypotheses")
     p_list.add_argument("--status", choices=VALID_STATUSES)
     p_list.add_argument("--pattern-type", choices=VALID_PATTERN_TYPES)
     p_list.add_argument("--thread-id", type=int)
+    p_list.add_argument("--competition-group")
     p_list.add_argument("--limit", type=int, default=50)
     p_list.add_argument("-v", "--verbose", action="store_true")
     add_output_args(p_list)
@@ -544,10 +605,12 @@ def main():
 
     # matrix (ACH)
     p_matrix = sub.add_parser("matrix", help="Display the evidence×hypothesis ACH matrix")
+    p_matrix.add_argument("--competition-group")
     add_output_args(p_matrix)
 
     # compete (ACH)
     p_compete = sub.add_parser("compete", help="Rank hypotheses by ACH inconsistency score")
+    p_compete.add_argument("--competition-group")
     add_output_args(p_compete)
 
     # diagnose (ACH)
@@ -574,6 +637,8 @@ def main():
             search_plan=args.search_plan,
             originated_from=args.originated_from,
             thread_id=args.thread_id,
+            competition_group=args.competition_group,
+            is_null_hypothesis=args.as_null,
         )
         if hyp_id:
             print(f"Hypothesis #{hyp_id} created: {args.title}")
@@ -583,6 +648,7 @@ def main():
             status=args.status,
             pattern_type=args.pattern_type,
             thread_id=args.thread_id,
+            competition_group=args.competition_group,
             limit=args.limit,
         )
         if write_output(results, args, summary=f"hypotheses ({len(results)})"):
@@ -601,9 +667,11 @@ def main():
             sys.exit(1)
         if write_output(h, args, summary=f"hypothesis #{args.id}"):
             return
-        print(f"Hypothesis #{h['id']}: {h['title']}")
+        null_label = " [H0]" if h.get("is_null_hypothesis") else ""
+        print(f"Hypothesis #{h['id']}{null_label}: {h['title']}")
         print(f"  Status:       {h['status']}")
         print(f"  Pattern:      {h['pattern_type'] or 'unset'}")
+        print(f"  Competition:  {h.get('competition_group') or 'unset'}")
         print(f"  Thread:       {h['thread_id'] or 'unset'}")
         print(f"  Lead:         #{h['lead_id']}" if h.get('lead_id') else "  Lead:         none")
         print(f"  Origin:       {h['originated_from'] or 'manual'}")
@@ -657,7 +725,7 @@ def main():
                   f"with hypothesis #{args.hypothesis_id}")
 
     elif args.command == "matrix":
-        data = get_ach_matrix()
+        data = get_ach_matrix(competition_group=args.competition_group)
         if write_output(data, args, summary="ACH evidence-hypothesis matrix"):
             return
         if not data["hypotheses"]:
@@ -669,7 +737,8 @@ def main():
         # Header
         print(f"  {'Finding':<50} ", end="")
         for h in data["hypotheses"]:
-            print(f"H{h['id']:>3} ", end="")
+            prefix = "H0" if h["is_null_hypothesis"] else "H"
+            print(f"{prefix}{h['id']:>3} ", end="")
         print()
         print("  " + "-" * (50 + 5 * len(data["hypotheses"])))
         # Rows
@@ -684,28 +753,38 @@ def main():
                     print(f"  {char}  ", end="")
                 else:
                     print(f"  ?  ", end="")
-            print()
+            marker = "*" if data["diagnosticity"].get(str(f["id"])) == "diagnostic" else "·"
+            print(f" {marker}")
         # Summary
         print()
-        print(f"  {'Hypothesis':<50} {'Con':>4} {'Inc':>4} {'Neu':>4} {'Ratio':>6}")
-        print("  " + "-" * 70)
+        print("  * diagnostic evidence; · non-diagnostic or assessed against fewer than two hypotheses")
+        print(f"  {'Hypothesis':<50} {'Eval':>4} {'Inc':>4} {'Diag':>4} {'Ratio':>6}")
+        print("  " + "-" * 72)
         for h in sorted(data["hypotheses"], key=lambda x: x["inconsistency_ratio"]):
-            print(f"  H{h['id']}: {h['title'][:44]:<46} {h['consistent']:>4} "
-                  f"{h['inconsistent']:>4} {h['neutral']:>4} {h['inconsistency_ratio']:>6.2f}")
+            label = "[H0] " if h["is_null_hypothesis"] else ""
+            print(f"  H{h['id']}: {(label + h['title'])[:44]:<46} {h['total_evaluated']:>4} "
+                  f"{h['inconsistent']:>4} {h['diagnostic_evidence']:>4} {h['inconsistency_ratio']:>6.2f}")
 
     elif args.command == "compete":
-        ranked = compete_hypotheses()
+        ranked = compete_hypotheses(competition_group=args.competition_group)
         if write_output(ranked, args, summary="ACH hypothesis competition"):
             return
         if not ranked:
             print("No active hypotheses with evaluations.")
             return
         print(f"\nACH Hypothesis Competition (lower inconsistency = stronger)")
-        print(f"{'Rank':>4}  {'ID':>3}  {'Title':<45} {'Inc':>4} {'Con':>4} {'Ratio':>6}")
-        print("-" * 75)
+        print(f"{'Rank':>4}  {'ID':>3}  {'Title':<40} {'Eval':>4} {'Inc':>4} {'Diag':>4} {'Ratio':>6}")
+        print("-" * 79)
         for i, h in enumerate(ranked):
-            print(f"{i+1:>4}  {h['id']:>3}  {h['title'][:45]:<45} "
-                  f"{h['inconsistent']:>4} {h['consistent']:>4} {h['inconsistency_ratio']:>6.2f}")
+            title = ("[H0] " if h["is_null_hypothesis"] else "") + h["title"]
+            print(f"{i+1:>4}  {h['id']:>3}  {title[:40]:<40} "
+                  f"{h['total_evaluated']:>4} {h['inconsistent']:>4} "
+                  f"{h['diagnostic_evidence']:>4} {h['inconsistency_ratio']:>6.2f}")
+        leader = ranked[0]
+        if (leader["consistent"] > 0
+                and leader["diagnostic_consistent"] * 2 <= leader["consistent"]):
+            print("WARNING: Leading hypothesis is supported mostly by non-diagnostic evidence; "
+                  "the verdict is only least evidence against, not most evidence for.")
 
     elif args.command == "diagnose":
         disagreements = diagnose_disagreements()

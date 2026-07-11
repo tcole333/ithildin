@@ -139,22 +139,34 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
     --type cluster --value "CLUSTER_NAME" --created-by "agent:analyze-network"
 ```
 
-### 7. Generate Hypotheses
+### 7. Generate Hypotheses — ACH Discipline
 
-For structural observations that suggest deeper investigation. Every hypothesis MUST include:
-1. A **falsification criterion** — what evidence would disprove this?
-2. The **best innocent explanation** — what's the most plausible non-coordination reason?
-3. A **search plan** that would test the hypothesis via Layer 1 research
+For each structural observation, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "HYPOTHESIS" \
     --pattern-type structural \
-    --description "EVIDENCE AND REASONING. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
+    --competition-group "short-phenomenon-slug" \
+    --description "EVIDENCE AND REASONING. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "What we'd find if true" \
     --search-plan "Specific searches to test" \
     --originated-from "analysis:analyze-network"
+
+uv run python tools/hypothesis_tracker.py add \
+    --title "INNOCENT EXPLANATION" --as-null --pattern-type structural \
+    --competition-group "short-phenomenon-slug" \
+    --description "Best non-coordination explanation. FALSIFICATION: [what would disprove H0]." \
+    --predicted-evidence "If innocent, expect..." --search-plan "Specific tests of H0" \
+    --originated-from "analysis:analyze-network"
+
+# Score every supporting or contradicting finding M against EVERY hypothesis N in the group:
+uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-id M \
+    --assessment consistent|inconsistent|neutral|not_applicable --assessed-by "agent:analyze-network"
+uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
+
+Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
 
 ### 8. Create Leads for Gaps
 
