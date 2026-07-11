@@ -1,39 +1,40 @@
 # Barkmere Group Ltd — Corporate-Registry Crosswalk & Epstein-Overlap Test
 
-**Compiled:** 2026-07-02 | **Analyst run:** registry crosswalk agent (raw working file, not user-facing)
+**Compiled:** 2026-07-02 | **Updated:** 2026-07-09 (lead #49533) | **Analyst run:** registry crosswalk agent (raw working file, not user-facing)
 **Scope:** (a) fully document BARKMERE GROUP LTD (BVI); (b) test whether Alessandro Benedetti's offshore infrastructure intersects Jeffrey Epstein's shell infrastructure at any shared registered agent, nominee director, address, or incorporation service.
 
-**Sources queried:** ICIJ Offshore Leaks (Neo4j, local — Panama/Paradise/Pandora/Offshore Leaks), GLEIF, OpenSanctions (local bulk), unified `registry.db`, WebSearch (BVI FSC). **OpenCorporates was UNAVAILABLE** (API token rejected — "Invalid API token"), so no OpenCorporates cross-check was possible this run.
+**Sources queried:** i-BVI public company index; BVI FSC Public Search/terms pages; Virgin Islands Official Gazette web index; ICIJ Offshore Leaks reconciliation API and public entity pages; OCCRP Aleph cloud; GLEIF; OpenSanctions (local bulk); unified `registry.db`; CourtListener; OffshoreAlert public API; SEC EDGAR; and exact web searches of BVI/ECCS/BAILII/JCPC sources. **OpenCorporates remained unavailable** (invalid API token; public page presented hCaptcha). i-BVI is an aggregator, not an official ownership record.
 
 ---
 
 ## 1. BARKMERE GROUP LTD (BVI) — Registry Card
 
-**RESOLUTION: NEGATIVE.** No registry attributes were retrievable from any available source.
+**RESOLUTION: BASIC IDENTITY ONLY.** A public BVI company index now supplies a company number and registration date. No public person-level or service-provider fields were retrieved.
 
 | Attribute | Value | Source / Status |
 |-----------|-------|-----------------|
-| Formation date | **Not retrievable** | — |
+| Registration date | **14 February 2006** | i-BVI public index; aggregator, not certified extract |
 | Registered agent | **Not retrievable** | — |
 | Registered address | **Not retrievable** | — |
 | Directors / nominees | **Not retrievable** | — |
 | Status (active/struck) | **Not retrievable** | — |
-| Company number | **Not retrievable** | — |
+| Company number | **1010725** | i-BVI public index; aggregator, not certified extract |
 
-**What was checked and returned nothing:**
-- ICIJ Offshore Leaks full-text search "Barkmere" → **0 matches** (Entity/Officer/Intermediary).
-- ICIJ Reconciliation API "Barkmere Group Ltd" → only fuzzy false positives (top hit "AYESA GROUP LTD." 66.7, "KBO Capital Group" 47.6 — all noise, no true match).
-- GLEIF "Barkmere" → 1 hit, **"R. COOK HOLDINGS INC." in Barkmere, Québec (CA)** — a place-name coincidence (Barkmere is a Québec municipality), not the BVI entity.
-- OpenSanctions "Barkmere" → 0 results.
-- Local `registry.db` "Barkmere" → 0 entities.
-- WebSearch `"Barkmere Group" BVI` → no company hits; only generic BVI-registered-agent explainer pages.
+**What was checked:**
+- i-BVI exact record → **BARKMERE GROUP LTD., no. 1010725, registered 14 February 2006**. Its page exposes no status, director, shareholder, registered-agent, address, charge, or continuation field. Treat this only as an index lead.
+- ICIJ Reconciliation API "Barkmere Group Ltd" → only fuzzy false positives; "Barkmere" and "1010725" → **0 exact matches**. The public page for reconciled Alessandro Benedetti node **56105421** lists exactly one entity connection, Malta **Tree of Life Limited**, not Barkmere.
+- OCCRP Aleph cloud "Barkmere", exact name, and "1010725" → **0 results**.
+- GLEIF exact name/number → **0 results**; the broader place-name hit in Barkmere, Québec is unrelated.
+- OpenSanctions exact name/number → **0 results**.
+- Local `registry.db` exact name → **0 results**.
+- CourtListener, OffshoreAlert public API, SEC EDGAR, USAspending, LDA, and FARA exact-name searches → **0 true matches**.
+- Exact searches of BVI FSC publications, Virgin Islands Official Gazette PDFs, ECCS/BVI judgments, BAILII, JCPC, and The Gazette → **0 indexed Barkmere/1010725 notices**. The Gazette's own archive search requires login, so that negative is not exhaustive.
+- BVI FSC now advertises an official Public Search & BO Search portal. A later in-app-browser attempt reached the entity-search form, which requires a **Primary Email Address** together with entity number/name. No Barkmere query was submitted because no research email was authorised for transmission. Some certificates, records, or ownership requests may additionally require login, fees, or legal eligibility. No account was created and no purchase was made.
+- OpenCorporates API token remained invalid; the public page presented hCaptcha.
 
-**Interpretation (INFERENCE, not fact):** Barkmere Group Ltd's absence from *every* offshore leak (Panama 2016, Paradise 2017, Pandora 2021) plus all live indices is consistent with one or more of:
-1. Formation **after** the Pandora Papers document cutoff (~2018–2019), i.e. the entity post-dates all leaks — plausible given the receipt of Misra funds is dated **April 2015** but the entity could have been incorporated shortly before and simply never appeared in a leaked agent's book.
-2. Incorporation through a BVI registered agent whose files were **never** part of any leak (most BVI agents were not — Mossack Fonseca and Appleby are the leaked ones; Barkmere used neither, or used one whose records didn't leak).
-3. BVI's registry is **not publicly searchable for free**: beneficial ownership sits in the non-public BOSS/VIRRGIN system, and the FSC name-search portal (live since Dec 2025) requires a paid/registered account. Confirming Barkmere therefore requires either a paid BVI VIRRGIN search or a live OpenCorporates BVI (`vg`) query — **both blocked this run** (no OC token; no BVI paid access).
+**Interpretation (INFERENCE, not fact):** Company 1010725 predates the reported April 2015 payment by nine years. The earlier late-2014/purpose-built-shell inference is therefore wrong. The 2006 date does not identify who controlled the company in 2015: control could have changed, or the company could have remained with an original owner. Absence from the offshore-leak indexes is consistent with use of a BVI agent whose files were not leaked, but does not establish which agent was used or whether ownership changed.
 
-**Recommended next step to resolve:** restore a valid `OPENCORPORATES_API_KEY` and run `query_opencorporates.py entity vg <number>` / `search "Barkmere" --jurisdiction vg`; or commission a BVI VIRRGIN name search. The beneficial-control-by-Benedetti claim and the ~$500K April-2015 Misra transfer remain **DB-sourced assertions not independently corroborated by a registry record** as of this run.
+**Recommended next step to resolve:** use an authorised project/research email to conduct a lawful exact-number search for **1010725** in the BVI FSC Public Search portal and preserve the returned current name/status/type and any previous names. Then, if authorised and still material, obtain the official historical company report/list of directors/registered-agent and charge records. The WSJ remains the source for Benedetti control and the reported April-2015 transfer; the i-BVI card does not corroborate ownership or payment.
 
 ---
 
@@ -87,14 +88,14 @@ Mifsud's full `officer_of` set is Malta CSP boilerplate (LUX YACHT LTD, S & D AV
 
 | Overlap dimension | Finding | Verdict |
 |-------------------|---------|---------|
-| **Shared registered agent** | Benedetti = AEGIS Corporate Services (Malta) + unknown BVI agent for Barkmere/Youngstown/Satsu. Epstein = his own USVI/US administrators + (Nevis Zorro) Meridian Trust. No agent appears on both sides. | **NONE** |
-| **Shared nominee director** | Mifsud / Ledwon (Benedetti) never appear on any Epstein entity; Epstein's nominees (Indyke, Kahn, etc.) never appear on any Benedetti entity. | **NONE** |
-| **Shared specific address** | 123 Melita St (Benedetti-Malta) and PO Box 3483 R.G. Hodge Plaza (Benedetti-BVI) host no Epstein entity; no Epstein address appears on the Benedetti side. | **NONE** |
-| **Shared incorporation service** | Benedetti = AEGIS (Malta) + un-leaked BVI agent. Epstein = un-leaked US/USVI. No common CSP. | **NONE** |
+| **Shared registered agent** | Tree of Life used the Malta AEGIS/Mifsud service layer. Barkmere's BVI agent is unknown. No known agent appears on both the documented Malta and Epstein sides, but the Barkmere-specific test cannot yet be run. | **UNRESOLVED FOR BARKMERE** |
+| **Shared nominee director** | Mifsud/Ledwon do not appear on indexed Epstein entities. Barkmere's directors are unknown, so a Barkmere-specific nominee test is not possible. | **NO KNOWN MATCH; BARKMERE UNTESTED** |
+| **Shared specific address** | No indexed Epstein entity appears at Tree of Life's Malta addresses. No registered address is known for Barkmere itself; PO Box 3483 belongs to other Benedetti-associated BVI vehicles and must not be imputed to Barkmere. | **NO KNOWN MATCH; BARKMERE UNTESTED** |
+| **Shared incorporation service** | AEGIS/Mifsud is documented only for Tree of Life. Barkmere's incorporation service is unknown. | **UNRESOLVED FOR BARKMERE** |
 
-**BOTTOM LINE: NO OVERLAP (STRONG-confidence negative on the leaked/indexed data; caveated).** There is zero intersection between Benedetti's offshore infrastructure and Epstein's at agent, nominee, address, or incorporation-service level in any available dataset.
+**BOTTOM LINE: NO OVERLAP FOUND IN THE INDEXED DATA; THE KEY BARKMERE TEST REMAINS OPEN.** The available records do not show a common agent, nominee, address, or incorporation service. Because Barkmere's directors, agent, and address are all unknown, this is not a strong-confidence disproof of a shared-service-provider bridge.
 
-**Caveat on the negative:** the negative is only as strong as the coverage. Both sides are *thinly* represented in the leaks — Epstein is essentially absent from ICIJ, and Barkmere/Youngstown/Satsu are absent too (un-leaked BVI agent). A true test at the **BVI-agent** level (does Barkmere's registered agent also serve any Epstein BVI entity?) **cannot be run without live BVI/OpenCorporates access**, which failed this run. So: no overlap found, but the specific high-value test (shared BVI agent) is **UNTESTED**, not disproven.
+**Caveat on the negative:** both sides are thinly represented in the leaks. A true test at the **BVI-agent** level (does Barkmere's registered agent also serve an Epstein-linked BVI entity?) requires Barkmere's official historical registered-agent record. The public index does not provide it. So: no overlap found, but the specific high-value test is **UNTESTED**, not disproven.
 
 ---
 
@@ -113,12 +114,14 @@ Mifsud's full `officer_of` set is Malta CSP boilerplate (LUX YACHT LTD, S & D AV
 
 | Source | Status |
 |--------|--------|
-| ICIJ Offshore Leaks (Neo4j local) | **WORKING** — Neo4j up at :7689; search/entity/connections/reconcile all functional |
+| ICIJ Offshore Leaks | Reconciliation API and public entity pages **WORKING**; local Neo4j unavailable because Docker was not running. Public Benedetti node 56105421 resolved the needed edge denominator. |
 | GLEIF | **WORKING** |
 | OpenSanctions (local bulk) | **WORKING** |
 | Unified `registry.db` | **WORKING** |
-| WebSearch (BVI FSC) | **WORKING** but no Barkmere data (BVI registry not free-searchable) |
-| **OpenCorporates** | **FAILED — "Invalid API token".** No global/BVI cross-check possible. Blocks the one test that could resolve Barkmere and the shared-BVI-agent question. |
-| BVI VIRRGIN / FSC name search | **NOT ACCESSED** — requires paid/registered account (beneficial ownership non-public by BVI law) |
+| i-BVI index | **WORKING** — basic name/no./date only; aggregator, not ownership proof. |
+| BVI FSC Public Search | Portal and entity-search form reached; exact record **NOT RETRIEVED** because the form requires transmission of a Primary Email Address and none was authorised. |
+| Virgin Islands Official Gazette | Indexed exact-name/number searches returned zero; archive's own search requires login. |
+| **OpenCorporates** | **FAILED — "Invalid API token";** public page presented hCaptcha. It may corroborate basic indexed fields if coverage exists, but an official historical BVI file is still needed for the agent-level test. |
+| BVI official company documents / BO request | **NOT ACCESSED** — some records/requests require authentication, fees, and/or legal eligibility; no purchase or account creation was authorised. |
 
 **Nothing in this file is a fabricated registry attribute.** Every "Not retrievable" is exactly that — not retrieved from any available source.

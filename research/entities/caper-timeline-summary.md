@@ -43,14 +43,15 @@ smear campaign actually ran) largely *dark* on the cast.
    **first**, Fibak also present) landing in the same trip. Puts Benedetti squarely
    in Epstein's Paris orbit, alongside a Thiel intermediary and Summers.
 
-2. **2016-02-04 one-way NY→London ticket for a redacted Italian-passport traveler**
-   (`EFTA02363084`, `EFTA02704726`). AmEx/Centurion itinerary booked by Groff Jan 22
-   2016, Norwegian Air DY7016 JFK→Gatwick, **one-way**. The advisory "CITIZENS OF
-   ITALY MUST CARRY A VALID PASSPORT" leaks the passenger's nationality even though
-   the name is redacted. **Timing:** Jan 2016 is the exact month Boies Schiller sent
-   the anonymous shareholder letter against Arora. An Italian traveler flown one-way
-   NY→London on Epstein's card in the op-critical month is a strong circumstantial
-   hit — but the name is redacted; **not proven to be Benedetti.**
+2. **2016-02-02 Margherita Campello della Spina ticket reissue, NY→London**
+   (`EFTA00658109`, `EFTA00295321`, `EFTA00592625`, `EFTA02473661`). The Jan. 22
+   AmEx/Centurion booking originally placed the Italian-passport traveler on Norwegian
+   Air DY7016 JFK→Gatwick on Feb. 4. Cross-release copies expose passenger token
+   `CAMPE/M`, locator `UXSVSD`, and original ticket `7745475372`; a Feb. 1 invoice
+   reissues that same ticket for Feb. 2. Groff separately writes that **Margherita**
+   chose to return to London the next night. This resolves the traveler as Margherita
+   Campello della Spina, **not Benedetti**, and closes the former campaign-timing
+   inference. The documents prove ticketing and rescheduling, not boarding.
 
 3. **2015-09-19→22 London logistics + Nardello "people on the ground in london"**
    (`EFTA02487468`, `EFTA02485450`, `HOUSE_OVERSIGHT_023356`). Epstein coordinates a
@@ -85,22 +86,29 @@ with cast members:
 | 2017-10-27 | `EFTA02575145` | Summers on the SoftBank deputy: "aware and honest re Son … DO NOT REPEAT THIS INSIGHT" | Summers debriefs Epstein on Misra ("Najeev") post-FII Riyadh, flagged not-to-repeat |
 | 2019-01-21 | `HOUSE_OVERSIGHT_028580/028581` | "What number are you on? I won't talk sensitive [on email]" | Weingarten refuses to discuss on email |
 | 2019-01-22 | `HOUSE_OVERSIGHT_028578` | "i suggest we wait until face to face" (marked Privileged) | Explicit defer-to-in-person |
-| 2019-01-25 | `HOUSE_OVERSIGHT_028577` | "did speak to him yesterday, re DB" | Documents an **off-email Karp↔Misra call** (Jan 25) that leaves no content record |
-| 2019-01-26 | `HOUSE_OVERSIGHT_028577` | "obviously don't mention my role with brad till we both think it useful" | Concealment directive |
-| 2019-01-26 | `HOUSE_OVERSIGHT_028576` | Weingarten: "thinking about using him on the Softbank caper" → Epstein: "go slow" | Names the thread; operational caution |
+| 2019-01-25 | `HOUSE_OVERSIGHT_028577` | "did speak to him yesterday, re DB" | Documents a recent call, but the speaker/object and unexpanded `DB` matter are ambiguous; compare Karp's separate statement that he spoke to Misra |
+| 2019-01-26 | `HOUSE_OVERSIGHT_028577` | "obviously don't mention my role with brad till we both think it useful" | Requests that Weingarten's prospective role not yet be disclosed to Karp; reason unresolved |
+| 2019-01-26 | `HOUSE_OVERSIGHT_028576` | Weingarten: "thinking about using him on the Softbank caper" → Epstein: "go slow" | Names the thread; Epstein advises caution about the proposed Ron Soffer hire |
 | 2019-03-30 | `EFTA02637332` | Epstein: "is your go to investigators kroll?" → Karp: "I use Nardello" | Kroll-vs-Nardello sourcing, post-op |
 
 ## Conspicuous silences (dense-elsewhere periods that go dark)
 
-- **No Tokyo itinerary for Epstein.** Exact-phrase searches for "depart for tokyo"
-  return **0** scheduling/travel docs. Given the honey trap was staged in a Tokyo
-  hotel, Epstein's own calendar shows no Tokyo travel — his Tokyo access is entirely
-  **proxied** through David Stern (Jun 2018). Epstein was never on the ground.
+- **A Tokyo itinerary existed, but the trip was canceled before departure.** Primary
+  AmEx, Andaz, visa, and scheduling records show a planned Epstein trip with three
+  female assistants, first for May 22–30 and then May 25–June 2, 2015
+  (`EFTA00859559`, `EFTA00298778`, `EFTA01205859-65`, `EFTA00347746`). The program
+  concerned Loftwork/Digital Garage and Japanese media/startup meetings at the Andaz
+  Tokyo. On May 21 Epstein wrote "no cancel trip" and Groff forwarded, "Well there
+  you go. no Japan trip" (`EFTA00347416`); no travel occurred. No known Misra,
+  Benedetti, Arora, Sama, K2, Powerscourt, Giannakopoulos, or Barkmere node appears
+  in the itinerary. The defensible negative is therefore **no documented Epstein
+  travel to Tokyo or campaign-linked Tokyo activity**, not "no itinerary."
 - **2015–2016 op window is dark on the cast.** The smear campaign ran Jan 2015
   (K2 hired) → Jan 2016 (BSF letter) → Jun 2016 (Arora departs). Across that window
   the cast (Misra/Arora/Sama/Benedetti) is **absent** from Epstein's scheduling
   stratum. What fills 2015 instead is the Nardello/London material (op-adjacent
-  geography, unproven link) and one redacted Italian-passenger London ticket (Feb 2016).
+  geography, unproven link). The once-redacted February 2016 Italian-passenger ticket
+  has since resolved to Margherita Campello della Spina and is unrelated to Benedetti.
 - **2013 Paris is dense with Benedetti; 2015–2019 Paris scheduling drops the name.**
   Benedetti appears as a recurring calendar reminder in 2013, then vanishes from the
   scheduling stratum until the single Jan 28 2019 one-line "Allesandro benedetti?"
@@ -108,9 +116,10 @@ with cast members:
   show only the reactive 2019 inquiry.
 - **The substance is almost always redacted or absent.** The Oct 2015 Four Seasons
   meeting exists only as a transcript *cover email* — the transcript PDF itself is not
-  in corpus. The 2015-09-19 and 2016-02-04 London travelers are redacted. The Jan 25
-  2019 Karp↔Misra call left no content. Repeatedly we see the *logistics* of a contact
-  with the *content* stripped.
+  in corpus. The 2015-09-19 London traveler remains redacted; the February 2016
+  traveler has been resolved through cross-release ticket records. The Jan 25 2019
+  Karp↔Misra call left no content. Repeatedly we see the *logistics* of a contact with
+  the *content* stripped.
 
 ## What was searched and returned NOTHING (negative results)
 
@@ -164,9 +173,10 @@ yet?" intro (`unified:2496`) were kept as genuine tells.
   terms used. They likely sit in a corpus/volume not indexed here, or under a
   redacted sender that defeats name search. Worth a targeted pull if the raw doc IDs
   resolve elsewhere.
-- **The Feb 4 2016 London traveler's identity** is the highest-value redaction in the
-  set. The Italian-passport tell + one-way NY→London + op-critical month warrant a
-  passenger-manifest / airbill cross-check if flight-log data exists.
+- **The February 2016 London traveler is resolved.** LMSBAND copies expose the
+  `CAMPE/M` passenger token and ticket identifiers, while `EFTA02473661` names
+  Margherita as the traveler returning to London. The prior Benedetti inference is
+  falsified; only proof of actual boarding remains unavailable.
 - **`des pallieres`, `soffer`, `giannakopoulos`** returning zero across corpora is a
   real negative — if the caper's operatives touched Epstein's world, it was not by
   email under those names.
