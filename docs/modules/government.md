@@ -33,8 +33,8 @@ uv run python tools/query_usaspending.py subawards "Shield AI" --limit 25       
 uv run python tools/query_usaspending.py transactions "Anduril" --agency "Department of Defense"
 uv run python tools/query_usaspending.py covid "recipient name" --limit 20       # COVID relief awards
 uv run python tools/query_usaspending.py loans "recipient name"                  # Loan awards
-uv run python tools/query_usaspending.py geography --query "Palantir" --scope place_of_performance --geo-layer state
-uv run python tools/query_usaspending.py timeline --query "Palantir" --group fiscal_year
+uv run python tools/query_usaspending.py geography "Palantir" --scope place_of_performance --geo-layer state
+uv run python tools/query_usaspending.py timeline "Palantir" --group fiscal_year
 uv run python tools/query_usaspending.py top-recipients --agency "Department of Homeland Security" --limit 20
 uv run python tools/query_usaspending.py agencies --limit 20                     # Agency spending summary
 ```
@@ -54,7 +54,7 @@ uv run python tools/query_highergov.py contract --parent-award "N0002325D0075" -
 uv run python tools/query_highergov.py contract --vehicle-key 8751 --page-size 100
 uv run python tools/query_highergov.py contract --awardee-uei ZE2JVFS8ML75
 uv run python tools/query_highergov.py idv --vehicle-key 8751              # Indefinite Delivery Vehicles
-uv run python tools/query_highergov.py awardee --uei ZE2JVFS8ML75         # Awardee profile (or --cage)
+uv run python tools/query_highergov.py awardee --uei ZE2JVFS8ML75         # Awardee profile (use --cage CODE as an alternative)
 uv run python tools/query_highergov.py subcontract --awardee-uei ZE2JVFS8ML75
 uv run python tools/query_highergov.py partnership --awardee-key 509623647 # Teaming data
 uv run python tools/query_highergov.py vehicle --vehicle-key 8751          # Named vehicle details

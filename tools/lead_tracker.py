@@ -91,6 +91,11 @@ def get_db():
 
 def _ensure_schema(db):
     """Create all investigation tables if they don't exist."""
+    def reload_schema(connection):
+        """Invalidate SQLite's schema cache without replacing the caller's DB."""
+        row = connection.execute("PRAGMA schema_version").fetchone()
+        connection.execute(f"PRAGMA schema_version = {int(row[0]) + 1}")
+
     db.executescript("""
         -- ══════════════════════════════════════════════════════════
         -- SESSIONS: Audit trail for agent/human activity
@@ -799,12 +804,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                # Reconnect so SQLite reloads the compiled schema
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass  # Non-critical — Python validation still protects writes
 
@@ -828,11 +828,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 
@@ -856,11 +852,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 
@@ -880,11 +872,7 @@ def _ensure_schema(db):
                 )
                 db.execute("PRAGMA writable_schema=OFF")
                 db.commit()
-                db.close()
-                db = sqlite3.connect(str(DB_PATH))
-                db.row_factory = sqlite3.Row
-                db.execute("PRAGMA journal_mode=WAL")
-                db.execute("PRAGMA busy_timeout=5000")
+                reload_schema(db)
     except Exception:
         pass
 

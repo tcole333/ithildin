@@ -32,7 +32,7 @@ echo "Session workdir: $WORKDIR"
 
 ```bash
 # Look up CIK
-uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" --output $WORKDIR/edgar-lookup.json
+uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" > $WORKDIR/edgar-lookup.json
 
 # Get company metadata and recent filings
 uv run python tools/query_edgar.py company <CIK> --output $WORKDIR/edgar-company.json
@@ -48,13 +48,12 @@ Select the most relevant filing: most recent, or one matching a key_date from th
 This is the core LLM advantage — process the entire document, not just metadata.
 
 ```bash
-uv run python tools/query_edgar.py read "<FILING_URL>" --lines 10000 --output $WORKDIR/filing-full.txt
+uv run python tools/query_edgar.py read "<FILING_URL>" --lines 10000 > $WORKDIR/filing-full.txt
 ```
 
 For very large filings (>500KB), read in sections:
 ```bash
-uv run python tools/query_edgar.py read "<FILING_URL>" --lines 3000 --output $WORKDIR/filing-part1.txt
-uv run python tools/query_edgar.py read "<FILING_URL>" --lines 3000 --offset 3000 --output $WORKDIR/filing-part2.txt
+uv run python tools/query_edgar.py read "<FILING_URL>" --lines 6000 > $WORKDIR/filing-first-6000-lines.txt
 ```
 
 ### 3. Extract by Filing Type

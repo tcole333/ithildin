@@ -54,8 +54,8 @@ uv run python tools/query_courtlistener.py docket 16066603
 uv run python tools/query_courtlistener.py recap-search "motion to dismiss" --court nysd
 
 # Download RECAP document PDF
-uv run python tools/query_courtlistener.py download "https://storage.courtlistener.com/..." --output-file /tmp/doc.pdf
-uv run python tools/query_courtlistener.py download "recap/..." --output-file /tmp/doc.pdf --extract-text
+uv run python tools/query_courtlistener.py download "https://storage.courtlistener.com/..." /tmp/doc.pdf
+uv run python tools/query_courtlistener.py download "recap/..." /tmp/doc.pdf --extract-text
 
 # Full opinion text by opinion ID or cluster ID
 uv run python tools/query_courtlistener.py opinion 12345678 --lines 500
