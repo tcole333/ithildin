@@ -195,6 +195,8 @@ CONFIDENCE_CAPS = {
     "user_provided": "confirmed",   # human-supplied
 }
 _CONFIDENCE_ORDER = ["unverified", "low", "medium", "high", "confirmed"]
+PROVENANCE_OPAQUE_SOURCES = {"leak_aggregator", "dehashed", "intelx"}
+PROVENANCE_OPAQUE_CONFIDENCE_CAP = "medium"
 
 
 def _enforce_confidence_cap(claim_type, confidence):
@@ -209,6 +211,20 @@ def _enforce_confidence_cap(claim_type, confidence):
     conf_idx = _CONFIDENCE_ORDER.index(confidence) if confidence in _CONFIDENCE_ORDER else 2
     if conf_idx > cap_idx:
         return cap, True
+    return confidence, False
+
+
+def _enforce_source_confidence_cap(source_datasets, confidence):
+    """Clamp confidence for findings sourced from provenance-opaque aggregators.
+
+    Returns (clamped_confidence, was_clamped).
+    """
+    if not PROVENANCE_OPAQUE_SOURCES.intersection(source_datasets or []):
+        return confidence, False
+    cap_idx = _CONFIDENCE_ORDER.index(PROVENANCE_OPAQUE_CONFIDENCE_CAP)
+    conf_idx = _CONFIDENCE_ORDER.index(confidence) if confidence in _CONFIDENCE_ORDER else 2
+    if conf_idx > cap_idx:
+        return PROVENANCE_OPAQUE_CONFIDENCE_CAP, True
     return confidence, False
 
 
@@ -297,6 +313,13 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     if was_clamped:
         print(f"WARNING: Confidence clamped to '{confidence}' (max for claim_type='{claim_type}'). "
               f"See CONFIDENCE_CAPS in findings_tracker.py.", file=sys.stderr)
+
+    # Enforce provenance caps after claim-type caps so the lower cap wins
+    confidence, was_source_clamped = _enforce_source_confidence_cap(source_datasets, confidence)
+    if was_source_clamped:
+        opaque_sources = sorted(PROVENANCE_OPAQUE_SOURCES.intersection(source_datasets))
+        print(f"WARNING: Confidence clamped to '{confidence}' (max for provenance-opaque "
+              f"source(s): {', '.join(opaque_sources)}).", file=sys.stderr)
 
     # Warn on unknown source names (don't block — allows new sources without code changes)
     if source_datasets:

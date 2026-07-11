@@ -87,6 +87,10 @@ For each category of open observations:
 - Draft source_reliability updates for new source assessments
 - Note any sources that agents consistently flag as unreliable
 
+### 3a. Map Documented Failures
+
+Pull recent `corrections` rows and disputed or retracted findings. Map each incident to an entry in `research/KNOWN_FAILURE_MODES.md`; when none fits, propose a new catalog entry with the incident, named bias, corrective discipline, and reviewer question.
+
 ### 4. Draft Proposals
 
 For each actionable pattern, draft a specific proposal:
