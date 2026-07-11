@@ -48,6 +48,11 @@ import sqlite3
 import sys
 from pathlib import Path
 
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
+
 BASE_DIR = Path(__file__).parent.parent
 DB_PATH = BASE_DIR / "datasets" / "kabasshouse_epstein.db"
 PARQUET_DIR = BASE_DIR / "datasets" / "kabasshouse"
@@ -397,6 +402,11 @@ def cmd_search(args):
     params.append(args.limit)
     rows = db.execute(sql, params).fetchall()
 
+    results = [dict(r) for r in rows]
+    if write_output(results, args, summary=f"Kabasshouse search '{args.query}'"):
+        db.close()
+        return
+
     print(f"Search: '{args.query}' -- showing {len(rows)}")
     print()
     for r in rows:
@@ -406,7 +416,7 @@ def cmd_search(args):
         print(f"    {snip[:400]}")
         print()
     if args.json_out:
-        print(json.dumps([dict(r) for r in rows], indent=2, default=str))
+        print(json.dumps(results, indent=2, default=str))
     db.close()
 
 
@@ -570,6 +580,7 @@ def main():
     p.add_argument("--dataset")
     p.add_argument("--min-chars", type=int)
     p.add_argument("--json", dest="json_out", action="store_true")
+    add_output_args(p)
 
     p = subs.add_parser("doc", help="Retrieve a document's pages by file_key/id")
     p.add_argument("doc_id")

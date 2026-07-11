@@ -1,16 +1,15 @@
 ---
 name: curate-dossier
 description: Generate narrative wiki-style dossier curation with sectioned prose and contextual visualizations
-user_invocable: true
 ---
 
-# /curate-dossier
+# $curate-dossier
 
 Generate encyclopedic wiki-style narrative for dossier entries. Produces a `lead` (standalone summary) and data-driven `sections` (topical prose with embedded visualizations).
 
 ## Arguments
 
-- Required: target name (e.g., `/curate-dossier "Person Name"`)
+- Required: target name (e.g., `$curate-dossier "Person Name"`)
 - Optional `--batch N`: curate N dossiers with the most findings that lack narratives
 - Optional `--refresh`: regenerate narratives even if they already exist
 - Optional `--dry-run`: show section suggestions without generating
@@ -75,7 +74,7 @@ The lead should work for people, entities, AND events — adapt the structure to
 
 #### `system_role` (plain text, 1-2 sentences)
 
-What this entity reveals about how the network operates. The "lens onto the machine" principle.
+What this subject reveals about how power, money, or institutions operate. Use neutral, analytical language — no loaded terms ("operative," "dark money," "machine"). Describe the structural role or mechanism, not a judgment.
 
 #### `sections` (array of objects)
 
@@ -93,11 +92,11 @@ Each section has:
 
 1. **Use `section_suggestions` as your starting point** — the automated pipeline analyzed the data and suggested sections with relevant finding_ids and guidance. Follow the suggestions but you can rename titles, merge sections, or skip ones with insufficient data.
 
-2. **Sections are topical, not categorical** — "Key Relationships" not "Relationship Findings." "Financial Architecture" not "Financial Findings." The section title should describe what the reader will learn, not what database type the data came from.
+2. **Sections are topical, not categorical** — "Key Relationships" not "Relationship Findings." "Financial Architecture" not "Financial Findings." Section titles should be neutral and descriptive (what the reader will learn), not editorial or analytical ("The Integrated Machine," "The Pipeline").
 
 3. **Content is prose, not lists** — weave findings into narrative paragraphs. Don't list findings as bullet points. A reader should be able to read the section as a coherent essay.
 
-4. **Link to other dossiers** — when naming people or entities that have their own dossiers, use `<a href="/dossiers/SLUG">Name</a>`. This is what makes it a wiki — you navigate by following links.
+4. **Link to other dossiers (MANDATORY)** — when naming people or entities that have their own dossiers, use `<a href="/dossiers/SLUG">Name</a>`. This is what makes it a wiki. To find existing dossier slugs, check `content/dossiers/_index.json`. Every named person or organization that appears in the index MUST be linked on first mention in each section. This is a hard requirement — dossiers without cross-links fail review.
 
 5. **Use citation tokens for all evidence** — citations render as linked footnotes. Use the citation format below.
 
@@ -111,6 +110,8 @@ Each section has:
 
 8. **Don't repeat the lead** — sections go deeper on specific topics. The lead is the summary; sections are the detail.
 
+9. **Section order and length reflect importance, not evidence volume** — put the most structurally significant section first. A section with 3 high-confidence findings about a key relationship should come before (and may be longer than) a section with 20 findings about routine corporate filings. Ask: "What would a journalist, analyst, or researcher most need to understand about this subject?"
+
 #### `open_questions` (array of strings)
 
 3-5 specific, actionable investigative questions. Based on evidence gaps, not speculation.
@@ -118,6 +119,49 @@ Each section has:
 #### `applicable_models` (array of strings)
 
 Check `content/models/` for which analytical models apply. Use model IDs.
+
+### Editorial Standards
+
+Dossiers are reference material, not investigative journalism. Apply Wikipedia's core content policies.
+
+#### Importance vs. Evidence Density (CRITICAL)
+
+Finding count does NOT equal importance. The investigation may have deeply researched a minor corporate registration (producing 30 findings) while a structurally significant relationship has only 2 findings. **Do not let research depth distort the narrative.**
+
+- **Weight sections by actual significance, not finding count.** A section about someone's role on a key board may deserve more prominence than a section about a corporate filing we happened to investigate thoroughly.
+- **Don't lead with whatever has the most evidence.** Lead with what matters most to understanding this subject's role. A reader should come away understanding why this person/entity matters, not just which aspects we documented most.
+- **Don't inflate minor details.** If we have extensive evidence about a routine corporate address change, that doesn't make it a key section. Mention it where relevant and move on.
+- **Use domain judgment.** You understand power structures, finance, and institutions. Use that understanding to assess what's genuinely significant — don't defer to the data's shape.
+
+#### Neutral Point of View (CRITICAL)
+
+**Banned phrases** — do NOT use any of the following:
+- "raises questions" / "raises concerns"
+- "suggests" / "may indicate" / "appears to"
+- "striking" / "extraordinary" / "remarkable" / "unprecedented" (unless quoting a source)
+- "most significant" / "most consequential" / "most important"
+- "dark money" (unless quoting a specific source that uses the term — attribute it)
+- "machine" / "apparatus" / "operative" in section titles or system_role
+
+**Instead**: State documented facts and let the reader draw conclusions. If a characterization is relevant, attribute it: "Campaign finance watchdogs described the arrangement as 'dark money' [Finding #N]."
+
+**Section titles must be neutral and descriptive**: "Grant Distribution Network" not "The Dark Money Pipeline." "Personnel Transitions" not "The Revolving Door Machine."
+
+#### Claim Type Rules
+
+- `direct_quote` / `confirmed` findings → state as fact with citation
+- `paraphrase` / `high` confidence → state as fact with citation
+- `inference` / `medium` confidence → attribute: "Analysis of [source] indicates..."
+- `synthesis` → attribute: "Cross-reference of [N] findings shows..." — NEVER state synthesis as confirmed fact
+- Hypotheses → "Hypothesis #N proposes..." (never state as fact)
+
+**Synthesis sections**: If a section primarily synthesizes multiple findings into a structural conclusion, the prose must use attribution language throughout. Not "FAIR functions as a pass-through" but "Grant flow analysis indicates FAIR distributed funds from CPI to state-level organizations [Finding #N][Finding #M]."
+
+#### Evidence Quality
+
+- **Strong** (government filings, court documents, registries): cite as fact
+- **Moderate** (USASpending, FEC, API data): cite with source: "Federal spending records show..."
+- **Weak** (web search, news paraphrases): cite with publication: "According to [outlet]..."
 
 ### 5. Citation Format
 
@@ -168,16 +212,30 @@ If you run this from shell, avoid `python -c "..."` for large HTML strings. Doll
 
 ### 7. Quality Checks
 
-Before writing:
+Before writing, verify ALL of the following:
+
+**Cross-linking (HARD REQUIREMENT):**
+- [ ] Read `content/dossiers/_index.json` to get the list of existing dossier slugs
+- [ ] Every person/entity mentioned in the text that has a dossier slug is linked with `<a href="/dossiers/SLUG">Name</a>` on first mention per section
+- [ ] Count your cross-links — a well-connected dossier should have 5+ outbound links
+
+**Citations:**
+- [ ] Every factual claim has an inline citation in the same sentence
+- [ ] Sentence-local support: no factual sentence depends on citations in neighboring sentences
+- [ ] No orphan citations (citation tokens that don't correspond to actual findings/sources)
+
+**Tone (HARD REQUIREMENT):**
+- [ ] Grep your output for banned phrases: "raises questions," "suggests," "striking," "extraordinary," "remarkable," "unprecedented," "most significant," "most consequential," "dark money" (unattributed), "machine," "apparatus" (in titles)
+- [ ] Synthesis/inference claims are attributed ("Analysis indicates...") not stated as fact
+- [ ] Section titles are neutral and descriptive, not editorial
+- [ ] `system_role` uses no loaded terms
+
+**Structure:**
 - [ ] Lead is standalone — makes sense without reading sections
 - [ ] Every section has prose paragraphs, not bullet lists
-- [ ] People/entities mentioned link to their dossiers where they exist (`<a href="/dossiers/SLUG">Name</a>`)
-- [ ] **Every factual claim has an inline citation** — `[EFTAxxxxxx]`, `[Finding #N]`, etc.
-- [ ] Sentence-local support: no factual sentence depends on citations in neighboring sentences
-- [ ] No confidence inflation — inferences not stated as confirmed facts
+- [ ] Sections don't repeat the lead
 - [ ] Sections match what the data supports — don't force sections with thin evidence
 - [ ] Viz assignments are contextual — ego_network with relationships, timeline with chronological content
-- [ ] Tone is encyclopedic reference throughout — not narrative journalism, not data dump
 
 ## Batch Mode
 

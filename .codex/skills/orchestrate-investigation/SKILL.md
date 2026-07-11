@@ -1,10 +1,9 @@
 ---
 name: orchestrate-investigation
 description: Launch, supervise, review, and import staged investigation workers through the shared dispatcher control plane
-user_invocable: true
 ---
 
-# /orchestrate-investigation
+# $orchestrate-investigation
 
 **CONTROL PLANE ORCHESTRATOR** — Use this skill when you want Codex to act as the investigation foreman. Codex decides what to run, launches bounded workers through the shared dispatcher, monitors progress, reviews staged artifacts, and imports approved output. Worker execution still happens through repo-local Claude skills and the shared `scripts/dispatcher.py` backend.
 

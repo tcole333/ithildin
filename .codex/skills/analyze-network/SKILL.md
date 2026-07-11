@@ -1,10 +1,9 @@
 ---
 name: analyze-network
 description: Graph structure analysis — centrality, bridges, clusters, cross-thread actors, coverage gaps
-user_invocable: true
 ---
 
-# /analyze-network
+# $analyze-network
 
 **LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify structural patterns in the graph and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Do not apply analytical frameworks as interpretive lenses — use them only as pattern detectors. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`. Distinguish structural observations (fact: "Node X has high betweenness") from interpretive claims (theory: "Node X is a gatekeeper") — label them differently.
 
@@ -142,13 +141,16 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 7. Generate Hypotheses
 
-For structural observations that suggest deeper investigation:
+For structural observations that suggest deeper investigation. Every hypothesis MUST include:
+1. A **falsification criterion** — what evidence would disprove this?
+2. The **best innocent explanation** — what's the most plausible non-coordination reason?
+3. A **search plan** that would test the hypothesis via Layer 1 research
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "HYPOTHESIS" \
     --pattern-type structural \
-    --description "EVIDENCE AND REASONING" \
+    --description "EVIDENCE AND REASONING. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "What we'd find if true" \
     --search-plan "Specific searches to test" \
     --originated-from "analysis:analyze-network"

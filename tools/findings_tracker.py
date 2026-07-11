@@ -124,13 +124,13 @@ def _get_db_standalone():
 
 
 VALID_SOURCES = [
-    "web_search", "doj_vol11", "duggan", "lmsband", "unified_db",
+    "web_search", "doj", "nj_oag", "doj_vol11", "duggan", "lmsband", "unified_db",
     # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
     "kabass", "fbi",
     "fec", "edgar", "courtlistener", "990", "registry",
     "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
-    "gdelt", "aleph", "icij", "acris", "gleif", "opensanctions",
+    "gdelt", "aleph", "icij", "acris", "la_county_assessor", "gleif", "opensanctions",
     "shodan", "crtsh", "wayback", "urlscan", "medicaid",
     "analysis_run", "offshorealert", "uk_companies_house",
     "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
@@ -210,6 +210,51 @@ def _enforce_confidence_cap(claim_type, confidence):
     if conf_idx > cap_idx:
         return cap, True
     return confidence, False
+
+
+def _classify_evidence_ref(evidence_ref):
+    """Classify a stored evidence reference without treating URL paths as files."""
+    if evidence_ref.startswith("EFTA"):
+        return "efta"
+    if "://" in evidence_ref:
+        return "url"
+    if "/" in evidence_ref:
+        return "file"
+    return "ref"
+
+
+def _parse_source_quote_args(source_quote_args, evidence_ids):
+    """Map CLI ``ref:quote`` values to refs, including canonical refs with colons.
+
+    Match an explicitly supplied evidence ref first. This lets canonical tokens such
+    as ``FL-SunBiz:L10000130392`` retain their full key instead of being truncated
+    to ``FL-SunBiz`` by a first-colon split.
+    """
+    parsed = {}
+    evidence_ids = sorted(evidence_ids or [], key=len, reverse=True)
+    for value in source_quote_args or []:
+        ref = next((item for item in evidence_ids if value.startswith(f"{item}:")), None)
+        if ref is not None:
+            parsed[ref] = {"quote": value[len(ref) + 1:]}
+        elif ":" in value:
+            fallback_ref, quote = value.split(":", 1)
+            parsed[fallback_ref] = {"quote": quote}
+    return parsed
+
+
+def _normalize_event_date(raw_date):
+    """Normalize a finding date in both package and direct-script execution."""
+    if not raw_date:
+        return None, None
+    try:
+        try:
+            from tools.date_normalize import normalize_date
+        except ImportError:
+            from date_normalize import normalize_date
+        return normalize_date(raw_date)
+    except Exception as exc:
+        print(f"WARNING: Could not normalize finding date {raw_date!r}: {exc}", file=sys.stderr)
+        return None, None
 VALID_CORRECTION_TYPES = [
     "factual_error", "source_mismatch", "hallucination",
     "outdated", "refinement", "merge", "retraction",
@@ -274,13 +319,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
 
     # Precision-aware temporal columns (bare-year/month dates otherwise vanish
     # from event_timeline date() range queries — see tools/date_normalize.py).
-    event_date_iso = date_precision = None
-    if date_of_event:
-        try:
-            from tools.date_normalize import normalize_date
-            event_date_iso, date_precision = normalize_date(date_of_event)
-        except Exception:
-            pass
+    event_date_iso, date_precision = _normalize_event_date(date_of_event)
 
     db = _get_db_standalone()
     sources_json = json.dumps(source_datasets) if source_datasets else None
@@ -329,7 +368,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
 
     if evidence_ids:
         for ev in evidence_ids:
-            ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
+            ev_type = _classify_evidence_ref(ev)
             sq = source_quotes.get(ev, {}) if source_quotes else {}
             db.execute("""
                 INSERT OR IGNORE INTO finding_evidence
@@ -440,8 +479,19 @@ def update_finding(finding_id, field, new_value, reason, correction_type="refine
     """, (finding_id, field, str(old_value) if old_value is not None else None,
           str(new_value), reason, corrected_by, correction_type))
 
-    # Apply the update
-    db.execute(f"UPDATE findings SET {field} = ? WHERE id = ?", (new_value, finding_id))
+    # Apply the update. Keep derived temporal fields synchronized atomically.
+    if field == "date_of_event":
+        event_date_iso, date_precision = _normalize_event_date(new_value)
+        db.execute(
+            """
+            UPDATE findings
+            SET date_of_event = ?, event_date_iso = ?, date_precision = ?
+            WHERE id = ?
+            """,
+            (new_value, event_date_iso, date_precision, finding_id),
+        )
+    else:
+        db.execute(f"UPDATE findings SET {field} = ? WHERE id = ?", (new_value, finding_id))
     db.commit()
     db.close()
     return True
@@ -615,7 +665,7 @@ def get_provenance(finding_id):
     return result
 
 
-def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
+def search_findings(query, thread_id=None, profile_id=None, all_profiles=False, limit=30):
     """Full-text search across findings. Wraps terms in quotes for safety."""
     db = _get_db_standalone()
     safe_query = '"' + query.replace('"', '""') + '"'
@@ -637,8 +687,8 @@ def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
         JOIN findings ON findings.id = findings_fts.rowid
         WHERE {where}
         ORDER BY findings_fts.rank
-        LIMIT 30
-    """, params).fetchall()
+        LIMIT ?
+    """, params + [limit]).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -1062,6 +1112,7 @@ def main():
     search_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     search_p.add_argument("--profile", help="Investigation profile (default: active)")
     search_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
+    search_p.add_argument("--limit", type=int, default=30, help="Maximum results")
     add_output_args(search_p)
 
     # timeline
@@ -1148,13 +1199,10 @@ def main():
             sys.exit(1)
 
         # Parse source quotes from CLI (format: "ref:quote text")
-        source_quotes = None
-        if getattr(args, "source_quote", None):
-            source_quotes = {}
-            for sq in args.source_quote:
-                if ":" in sq:
-                    ref, quote = sq.split(":", 1)
-                    source_quotes[ref] = {"quote": quote}
+        source_quotes = _parse_source_quote_args(
+            getattr(args, "source_quote", None),
+            getattr(args, "evidence", None),
+        ) or None
 
         fid = add_finding(
             target_name=args.target, summary=args.summary, finding_type=args.finding_type,
@@ -1221,7 +1269,8 @@ def main():
     elif args.command == "search":
         results = search_findings(args.query, thread_id=getattr(args, "thread_id", None),
                                   profile_id=getattr(args, "profile", None),
-                                  all_profiles=getattr(args, "all_profiles", False))
+                                  all_profiles=getattr(args, "all_profiles", False),
+                                  limit=args.limit)
         if not write_output(results, args, summary=f"findings search '{args.query}': {len(results)} results"):
             if not results:
                 print(f"No findings matching '{args.query}'")

@@ -1,10 +1,9 @@
 ---
 name: trace-entity
 description: Follow corporate/financial entity through registrations, filings, and offshore records
-user_invocable: true
 ---
 
-# /trace-entity
+# $trace-entity
 
 **LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document corporate structures, officers, filings, and jurisdictions. Do not theorize about the purpose of structures — record what exists and let Layer 2 analysis agents interpret patterns. Record negative results from every registry checked.
 
@@ -12,7 +11,7 @@ Trace a corporate or financial entity through all available data sources to map 
 
 ## Arguments
 
-- Required: entity name (e.g., `/trace-entity Liquid Funding Ltd`)
+- Required: entity name (e.g., `$trace-entity Liquid Funding Ltd`)
 
 **Refer to `research/INVESTIGATIVE_METHODOLOGY.md` for the investigative mindset, especially the sections on deception patterns and incentive structures.**
 
@@ -87,10 +86,10 @@ If matches found, trace the full graph:
 - What other entities share the same officers?
 - Which leak (Panama Papers, Paradise Papers, etc.) exposed it?
 
-### 3. DOJ Records
+### 3. Document Corpus (Kabasshouse primary)
 ```bash
-python tools/query_doj.py search "<ENTITY>" --limit 30 --output $WORKDIR/trace-doj.json
-python tools/duggan_search.py "<ENTITY>" -n 30 --output $WORKDIR/trace-duggan.json
+python tools/ingest_kabasshouse.py search "<ENTITY>" --limit 30 --json > $WORKDIR/trace-kabass.json
+python tools/ingest_kabasshouse.py entity "<ENTITY>" > $WORKDIR/trace-kabass-ent.txt
 ```
 
 Look for:
@@ -127,6 +126,7 @@ python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --output $WORK
 python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
 python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
 
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (global corporate registries, leaks)
 python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
 python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WORKDIR/trace-aleph-org.json
@@ -135,8 +135,11 @@ python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WO
 python tools/query_courtlistener.py search "<ENTITY>" --output $WORKDIR/trace-cl.json
 python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-party.json
 
-# ProPublica 990 (if nonprofit)
-python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json
+# IRS 990 (if nonprofit — comprehensive view with officers, financials, grants)
+python tools/query_990.py lookup <EIN> --output $WORKDIR/trace-990-lookup.json   # if EIN known
+python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json     # if searching by name
+python tools/query_990.py officers <EIN> --output $WORKDIR/trace-990-officers.json
+python tools/query_990.py financials <EIN> --output $WORKDIR/trace-990-financials.json
 
 # UK Companies House (mandatory for UK entities/officers/addresses)
 python tools/ingest_uk_companies_house.py search "<ENTITY>" --output $WORKDIR/trace-uk-search.json
@@ -244,7 +247,7 @@ uv run python tools/entity_tracker.py add-relation   --entity-a-id <PARENT_ID>  
 uv run python tools/entity_tracker.py show <ENTITY_ID>
 ```
 
-Use allowed entity types: `llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown`.
+Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.
 
 ### 8. Create Entity Research File
 Create `research/entities/<entity-slug>.md`:

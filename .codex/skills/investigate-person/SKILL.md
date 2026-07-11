@@ -1,10 +1,9 @@
 ---
 name: investigate-person
 description: Comprehensive investigation of a named individual across all sources
-user_invocable: true
 ---
 
-# /investigate-person
+# $investigate-person
 
 **LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document what you find. Do not theorize, speculate, or apply analytical frameworks. If you notice a pattern, record the raw data — pattern recognition is for Layer 2 analysis agents. Record mundane facts (employer history, addresses, professional affiliations, board seats) even when they don't seem relevant. Record negative results from every source checked.
 
@@ -12,7 +11,7 @@ Deep-dive investigation of a named individual across all available data sources.
 
 ## Arguments
 
-- Required: person name (e.g., `/investigate-person Samantha Rose Stein`)
+- Required: person name (e.g., `$investigate-person Samantha Rose Stein`)
 
 **Read `research/INVESTIGATIVE_METHODOLOGY.md` before your first investigation.** This skill encodes that methodology.
 
@@ -108,7 +107,7 @@ ls research/persons/
 ```
 
 ### 2. Search All Sources
-Run `/search-all-sources <NAME>` to get comprehensive results across all datasets.
+Run `$search-all-sources <NAME>` to get comprehensive results across all datasets.
 
 Additionally, search for known aliases, maiden names, alternate transliterations, and associated email addresses if known. Try both formal names ("Terje Rod-Larsen") and informal references ("Terje", "Rod-Larsen", "TRL").
 
@@ -179,6 +178,21 @@ python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
 python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output $WORKDIR/inv-uk-officer-search.json
 python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output $WORKDIR/inv-uk-company-search.json
 ```
+
+### Nonprofit Board Positions (990)
+
+Check if the person serves on nonprofit boards — this reveals institutional affiliations not visible in corporate registries:
+
+```bash
+uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/inv-990-officers.json
+```
+
+If found on 2+ nonprofits, run a quick grant flow check for each:
+```bash
+uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --output $WORKDIR/inv-990-flow-<EIN>.json
+```
+
+Record each nonprofit board position as a finding with `--type relationship --sources 990`.
 
 ### 4. ICIJ Offshore Cross-Reference
 If Neo4j is running:
@@ -369,7 +383,7 @@ Create leads for:
 - **Record findings as you go**, not in a batch at the end
 
 ### Report File (when running as sub-agent)
-If spawned by `/deep-investigate` or a wave orchestrator, write a completion report:
+If spawned by `$deep-investigate` or a wave orchestrator, write a completion report:
 
 ```markdown
 ---

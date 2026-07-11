@@ -1,16 +1,15 @@
 ---
 name: add-registry
 description: Add a new state/country corporate registry to the unified registry system
-user_invocable: true
 ---
 
-# /add-registry
+# $add-registry
 
 Add a new state or country corporate registry as a data source, creating an ingester that feeds into the unified `registry.db` schema.
 
 ## Arguments
 
-- Required: jurisdiction identifier (e.g., `/add-registry florida`, `/add-registry usvi`, `/add-registry bermuda`)
+- Required: jurisdiction identifier (e.g., `$add-registry florida`, `$add-registry usvi`, `$add-registry bermuda`)
 
 ### Context Loading
 Load the active investigation context before executing:
@@ -204,7 +203,7 @@ Also search known_addresses from the investigation profile (loaded via `investig
 python tools/query_registry.py stats
 python tools/query_registry.py jurisdictions
 
-# Update CLAUDE.md data source inventory
+# Update both CLAUDE.md and AGENTS.md data source inventories
 # Update the search-all-sources skill to include registry queries
 ```
 

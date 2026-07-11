@@ -1,12 +1,11 @@
 ---
 name: dispatch
 description: Show queue depths and suggest which agents to launch next
-user_invocable: true
 ---
 
-# /dispatch
+# $dispatch
 
-Read-only queue depth reporter. Shows what needs attention and suggests which skills to run.
+**CONTROL PLANE** — Read-only queue depth reporter. Shows what needs attention and suggests which skills to run based on triage scheduler fields.
 
 Use `$orchestrate-investigation` for active control-plane work such as launching workers, reviewing staged artifacts, and importing approved outputs.
 
@@ -72,28 +71,33 @@ print(f'total_leads={total_leads}')
 "
 ```
 
-Then query tier distribution:
+Then query tier distribution and scheduler recommendations:
 
 ```bash
 uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 
-# Tier distribution (from tags)
-try:
-    tiers = db.execute(\"\"\"
-        SELECT tag_value, COUNT(*) as cnt
-        FROM tags
-        WHERE table_name='leads' AND tag_type='operational' AND tag_value LIKE 'tier:%'
-        GROUP BY tag_value
-    \"\"\").fetchall()
-    for t in tiers:
-        tier_name = t[0].replace('tier:', '')
-        print(f'tier_{tier_name}={t[1]}')
-except:
-    print('tier_scan=0')
-    print('tier_standard=0')
-    print('tier_deep_dive=0')
+# Depth tier distribution (from leads.depth_tier column)
+tiers = db.execute(\"\"\"
+    SELECT COALESCE(depth_tier, 'untiered') as tier, COUNT(*) as cnt
+    FROM leads WHERE status IN ('open', 'in_progress')
+    GROUP BY tier ORDER BY cnt DESC
+\"\"\").fetchall()
+for t in tiers:
+    print(f'tier_{t[0]}={t[1]}')
+
+# Scheduler recommendations (from triage)
+recs = db.execute(\"\"\"
+    SELECT recommended_skill, COUNT(*) as cnt,
+           GROUP_CONCAT(SUBSTR(title, 1, 40), '; ') as examples
+    FROM leads
+    WHERE status='open' AND recommended_skill IS NOT NULL
+    GROUP BY recommended_skill
+    ORDER BY cnt DESC
+\"\"\").fetchall()
+for r in recs:
+    print(f'recommended_{r[0]}={r[1]} (e.g. {r[2][:80]})')
 
 # Source coverage (from search_log)
 source_coverage = db.execute('SELECT source, COUNT(*) as cnt FROM search_log GROUP BY source ORDER BY cnt DESC LIMIT 10').fetchall()
@@ -117,9 +121,9 @@ Queue Status (<DATE>)
 ========================================
 
 NEEDS ACTION:
-  !! <N> leads pending triage           -> /triage-leads
-  !  <N> infra requests open            -> /build-infra
-  !  <N> high/critical leads ready      -> /pursue-lead or /deep-investigate
+  !! <N> leads pending triage           -> $triage-leads
+  !  <N> infra requests open            -> $build-infra
+  !  <N> high/critical leads ready      -> $pursue-lead or $deep-investigate
 
 BLOCKED:
      <N> leads waiting on infra
@@ -133,17 +137,25 @@ HEALTH:
    <N> unverified findings (aging >24h)
 
 ANALYSIS:
-   /analyze-network    +<N> findings since last run (threshold=50, cooldown=48h) [READY/wait]
-   /generate-hunches   +<N> findings since last run (threshold=50, cooldown=72h) [READY/wait]
-   /timeline-analysis  +<N> findings since last run (threshold=30, cooldown=72h) [READY/wait]
-   /systemic-analysis  +<N> findings since last run (threshold=50, cooldown=168h) [READY/wait]
+   $analyze-network    +<N> findings since last run (trigger: 50 new findings) [READY/wait]
+   $generate-hunches   +<N> findings since last run (trigger: 75 new findings) [READY/wait]
+   $timeline-analysis  +<N> findings since last run (trigger: 50 new findings) [READY/wait]
+   $systemic-analysis  +<N> findings since last run (trigger: 100 new findings) [READY/wait]
    Hypotheses: <N> proposed, <M> investigating
 
 INVESTIGATION DEPTH:
-   Tier 0 (scan):        <N> leads
-   Tier 1 (standard):    <N> leads
-   Tier 2 (deep dive):   <N> leads
-   Untiered:             <N> leads
+   scan:        <N> leads
+   standard:    <N> leads
+   deep_dive:   <N> leads
+   untiered:    <N> leads
+
+SCHEDULER RECOMMENDATIONS (stored slash-prefixed IDs):
+   /deep-investigate:    <N> leads (e.g. ...)
+   /investigate-person:  <N> leads (e.g. ...)
+   /trace-entity:        <N> leads (e.g. ...)
+   /trace-grants:        <N> leads (nonprofit funders/recipients)
+   /audit-contracts:     <N> leads (procurement cohort analysis)
+   /pursue-lead:         <N> leads (e.g. ...)
 
 SOURCE COVERAGE (search_log):
    <source>: <N> queries | <source>: <N> queries | ...
@@ -163,14 +175,14 @@ Based on queue depths, suggest which skills to run:
 
 | Condition | Suggestion |
 |-----------|-----------|
-| pending_triage > 0 | "Run `/triage-leads` to process <N> pending leads" |
-| infra_open > 0 | "Run `/build-infra` to work on <N> infra requests" |
-| high_crit > 0 and leads_in_progress == 0 | "Run `/pursue-lead` — <N> high-priority leads waiting" |
-| leads_open > 50 and pending_triage == 0 | "Run 2-3 `/pursue-lead` instances in parallel" |
+| pending_triage > 0 | "Run `$triage-leads` to process <N> pending leads" |
+| infra_open > 0 | "Run `$build-infra` to work on <N> infra requests" |
+| high_crit > 0 and leads_in_progress == 0 | "Run `$pursue-lead` — <N> high-priority leads waiting" |
+| leads_open > 50 and pending_triage == 0 | "Run 2-3 `$pursue-lead` instances in parallel" |
 | recent_findings == 0 | "Investigation stalled — no findings in 7 days" |
-| blocked_by_infra > 3 | "Infra bottleneck — <N> leads blocked. Prioritize `/build-infra`" |
-| analysis skill READY | "Run `/analyze-network` (or other ready skill) — <N> new findings to analyze" |
-| proposed hypotheses > 5 | "Hypotheses accumulating — run `/pursue-lead` on hypothesis-linked leads" |
+| blocked_by_infra > 3 | "Infra bottleneck — <N> leads blocked. Prioritize `$build-infra`" |
+| analysis skill has enough new findings | "Run `$analyze-network` (or other ready skill) — <N> new findings to analyze" |
+| proposed hypotheses > 5 | "Hypotheses accumulating — run `$pursue-lead` on hypothesis-linked leads" |
 
 ### 4. Optional: Show Top Leads
 
@@ -203,6 +215,6 @@ uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
 - It's designed to be run at the start of a session to decide what to work on
 - For launch/review/import lifecycle work, use `$orchestrate-investigation`
 - Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
-- Analysis skills have cooldown periods (48-168h) to prevent running too frequently
+- Analysis skills trigger based on new findings count, not time elapsed (analyze-network: 50, generate-hunches: 75, timeline-analysis: 50, systemic-analysis: 100)
 - Priority: data gathering > triage > analysis > post-processing
-- Multiple CC instances can each run `/dispatch` to see the same queue state
+- Multiple Codex tasks can each run `$dispatch` to see the same queue state

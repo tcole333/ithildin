@@ -1,10 +1,9 @@
 ---
 name: systemic-analysis
 description: Deep entity patterns beyond the primary subject — shared boards, co-investments, common counsel, jurisdiction clustering
-user_invocable: true
 ---
 
-# /systemic-analysis
+# $systemic-analysis
 
 **LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify systemic patterns and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Shared attributes (same jurisdiction, same industry, same donor pool) are often coincidental at baseline — always ask "what's the base rate?" before calling something a pattern. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
 
@@ -84,9 +83,10 @@ uv run python tools/query_edgar.py search "MEMBER_NAME" --output $WORKDIR/edgar-
 uv run python tools/query_edgar.py company CIK_NUMBER --output $WORKDIR/edgar-co-MEMBER.json
 ```
 
-**c) ProPublica 990 — Nonprofit board overlap**
+**c) IRS 990 — Nonprofit board overlap**
 ```bash
 uv run python tools/query_990.py search "MEMBER_NAME" --output $WORKDIR/990-MEMBER.json
+uv run python tools/query_990.py officer-search "MEMBER_NAME" --output $WORKDIR/990-officer-MEMBER.json
 ```
 
 **d) FEC — Political donation patterns**
@@ -149,13 +149,16 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 8. Generate Hypotheses
 
-For system-level coordination patterns:
+For system-level coordination patterns. Every hypothesis MUST include:
+1. A **falsification criterion** — what evidence would disprove this?
+2. The **best innocent explanation** — what's the most plausible non-coordination reason?
+3. A **search plan** that would test the hypothesis via Layer 1 research
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "SYSTEMIC HYPOTHESIS" \
     --pattern-type operational \
-    --description "SYSTEM PATTERN: N actors share X, suggesting Y" \
+    --description "SYSTEM PATTERN: N actors share X, suggesting Y. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "If coordinated, expect shared Z" \
     --search-plan "1. Check registry for shared agents  2. Search emails for inter-member communication  3. Cross-ref financial flows" \
     --originated-from "analysis:systemic-analysis"
@@ -183,9 +186,17 @@ Create connections between system members that aren't already recorded:
 uv run python tools/findings_tracker.py connect \
     --person-a "MEMBER_A" \
     --person-b "MEMBER_B" \
-    --type board_membership \
+    --type corporate \
     --description "Both serve on BOARD_NAME" \
     --finding-id FINDING_ID
+```
+
+**Register every system member as a structured entity — a connection alone is not enough.** `connect` auto-creates a bare `entity_type='unknown'` row for any endpoint not already registered (so no connection is ever orphaned), but that stub carries no type, jurisdiction, roles, or addresses — exactly the attributes systemic patterns (shared boards, common counsel, jurisdiction clustering) are built from. For each company, fund, or person in the system, register the real entity and its structure so those patterns surface in graph analysis:
+
+```bash
+uv run python tools/entity_tracker.py add-entity --name "MEMBER_A" --entity-type <person|inc|llc|fund|...> --jurisdiction <JUR> --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-role --entity-id <ID> --person-name "PERSON" --role "<director|officer|counsel|...>" --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-relation --entity-a-id <A> --entity-b-id <B> --relation-type "<shares_officer|co_investor|...>" --source "<SOURCE>"
 ```
 
 ### 11. Write Report

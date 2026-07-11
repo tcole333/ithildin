@@ -1800,9 +1800,28 @@ def log_search(query_text, source, result_count, session_id=None):
 
     Updates the dedup row (search_log) AND appends to immutable history
     (search_history) so audit trails are preserved even when the same
-    query is re-run with different result counts.
+    query is re-run with different result counts. ``session_id`` is optional;
+    when supplied it must be the integer ID of an existing row in ``sessions``.
+    Lead IDs, workdir names, agent labels, and arbitrary run identifiers are not
+    session IDs and should be omitted.
     """
     db = get_db()
+    if session_id is not None:
+        try:
+            session_id = int(session_id)
+        except (TypeError, ValueError):
+            db.close()
+            raise ValueError(
+                "session_id must be an integer ID from the sessions table; "
+                "omit it for searches not attached to a registered session"
+            )
+        exists = db.execute("SELECT 1 FROM sessions WHERE id = ?", (session_id,)).fetchone()
+        if not exists:
+            db.close()
+            raise ValueError(
+                f"session_id {session_id} is not registered in the sessions table; "
+                "omit it or create the session first"
+            )
     db.execute("""
         INSERT OR REPLACE INTO search_log (query_text, source, result_count, session_id)
         VALUES (?, ?, ?, ?)

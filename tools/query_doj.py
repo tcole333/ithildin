@@ -18,8 +18,10 @@ import sys
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.fts_query import literal_fts_query
 except ImportError:
     from output_util import add_output_args, write_output
+    from fts_query import literal_fts_query
 
 
 def _log(query, source, count):
@@ -58,7 +60,7 @@ def search(query, limit=20, context_chars=200):
         WHERE documents_fts MATCH ?
         ORDER BY rank
         LIMIT ?
-    """, (query, limit)).fetchall()
+    """, (literal_fts_query(query), limit)).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -80,7 +82,7 @@ def count_matches(query):
         SELECT COUNT(*) as cnt
         FROM documents_fts
         WHERE documents_fts MATCH ?
-    """, (query,)).fetchone()
+    """, (literal_fts_query(query),)).fetchone()
     db.close()
     return row[0]
 

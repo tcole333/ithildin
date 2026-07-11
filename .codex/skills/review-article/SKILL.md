@@ -1,20 +1,19 @@
 ---
 name: review-article
 description: Adversarial verification agent for investigative articles
-user_invocable: true
 ---
 
-# /review-article
+# $review-article
 
-Adversarial verification agent for investigative articles. Produces a structured verification report — the reviewer does NOT edit the article directly. The writer (Phase 4 of `/write-article`) applies fixes.
+Adversarial verification agent for investigative articles. Produces a structured verification report — the reviewer does NOT edit the article directly. The writer (Phase 4 of `$write-article`) applies fixes.
 
-**For dossiers, use `/review-dossiers` instead.** Articles and dossiers have different editorial standards. Articles are investigative journalism — they can have a thesis, analytical voice, and narrative structure. Dossiers are encyclopedic reference material — neutral, Wikipedia-standard, no editorializing.
+**For dossiers, use `$review-dossiers` instead.** Articles and dossiers have different editorial standards. Articles are investigative journalism — they can have a thesis, analytical voice, and narrative structure. Dossiers are encyclopedic reference material — neutral, Wikipedia-standard, no editorializing.
 
 ## Arguments
 
-- Required: path or cluster ID (e.g., `/review-article golden-dome-black-box` or `/review-article content/articles/golden-dome-black-box.mdx`)
+- Required: path or cluster ID (e.g., `$review-article golden-dome-black-box` or `$review-article content/articles/golden-dome-black-box.mdx`)
 - Optional `--backlinks-only`: just surface backlink candidates without full review
-- Optional `--workdir <path>`: write verification report to this directory (for `/write-article` integration)
+- Optional `--workdir <path>`: write verification report to this directory (for `$write-article` integration)
 - No arguments: list articles available for review
 
 ## Output
@@ -36,7 +35,7 @@ The reviewer produces `$WORKDIR/verification-report.md` (or outputs directly if 
 
 Articles are NOT dossiers. The review must apply the correct standard.
 
-| Dimension | Article Standard | Dossier Standard (use /review-dossiers) |
+| Dimension | Article Standard | Dossier Standard (use $review-dossiers) |
 |-----------|-----------------|----------------------------------------|
 | **Voice** | Investigative journalism — analytical, can have thesis | Encyclopedic — neutral, no thesis |
 | **Analytical claims** | Can state conclusions: "The system produces X" | Must attribute: "Analysis indicates..." |
@@ -86,7 +85,7 @@ Flag if:
 - Any `direct_quote`/`confirmed` finding cited in the article has a cross-check mismatch
 - Any EFTA ID cited in the article appears in an unresolved duplicate cluster
 
-These are **BLOCKING** when the article is in the `/write-article` pipeline, **SHOULD FIX** for standalone review.
+These are **BLOCKING** when the article is in the `$write-article` pipeline, **SHOULD FIX** for standalone review.
 
 ### 3. Claims Skeleton
 

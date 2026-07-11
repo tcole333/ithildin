@@ -1,10 +1,9 @@
 ---
 name: review-methodology
 description: Review operational learnings and propose methodology improvements
-user_invocable: true
 ---
 
-# /review-methodology
+# $review-methodology
 
 Analyze accumulated methodology observations from investigation agents. Detect patterns, cross-reference with infrastructure requests and methodology docs, and propose specific improvements. **Never auto-applies changes** — presents proposals for human review.
 
@@ -53,8 +52,8 @@ Read: research/INVESTIGATIVE_METHODOLOGY.md
 # Tool reference (check for undocumented tools mentioned in friction)
 Read: docs/TOOL_REFERENCE.md
 
-# CLAUDE.md (check tool table completeness)
-Read: CLAUDE.md
+# Agent guidance (check tool table completeness and parity)
+Read: CLAUDE.md and AGENTS.md
 ```
 
 ### 3. Analyze Observations
@@ -132,7 +131,7 @@ Related observations: [IDs]
 Format all proposals in a clear summary:
 
 ```markdown
-## /review-methodology — Results
+## $review-methodology — Results
 
 ### Statistics
 - Total open observations: X

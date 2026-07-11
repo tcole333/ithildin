@@ -35,8 +35,8 @@ never had (mostly the full DataSet 10 & 11), ~3x the LMSBAND coverage.
 ```bash
 uv run python tools/ingest_kabasshouse.py download            # pull ~1.3GB parquet from HF
 uv run python tools/ingest_kabasshouse.py ingest              # build SQLite + FTS5 (~6GB DB)
-uv run python tools/ingest_kabasshouse.py search "wexner trust" --limit 20
-uv run python tools/ingest_kabasshouse.py search "loan" --dataset DataSet10 --min-chars 200
+uv run python tools/ingest_kabasshouse.py search "wexner trust" --limit 20 --output "$WORKDIR/kabass-wexner.json"
+uv run python tools/ingest_kabasshouse.py search "loan" --dataset DataSet10 --min-chars 200 --output "$WORKDIR/kabass-loan.json"
 uv run python tools/ingest_kabasshouse.py doc EFTA01369264 --full     # all pages of a file_key
 uv run python tools/ingest_kabasshouse.py financials --cardholder Epstein --merchant "Bank of America"
 uv run python tools/ingest_kabasshouse.py entity "Wexner"             # entity-name aggregation
@@ -165,7 +165,7 @@ Requires `pymupdf` (`uv pip install pymupdf`). Use `--force` to re-ingest duplic
 ```bash
 uv run python tools/ingest_epstein_20k.py download     # From HuggingFace (teyler/epstein-files-20k)
 uv run python tools/ingest_epstein_20k.py ingest
-uv run python tools/ingest_epstein_20k.py search "Jeffrey Epstein" --limit 20
+uv run python tools/ingest_epstein_20k.py search "Jeffrey Epstein" --limit 20 --output "$WORKDIR/epstein20k.json"
 uv run python tools/ingest_epstein_20k.py doc HOUSE_OVERSIGHT_020367
 uv run python tools/ingest_epstein_20k.py stats
 uv run python tools/ingest_epstein_20k.py overlap       # Check overlap with DOJ Vol 11

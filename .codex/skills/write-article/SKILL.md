@@ -1,10 +1,9 @@
 ---
 name: write-article
 description: Generate a long-form investigative MDX article from a story cluster using a five-phase workflow (research dossier, structure, draft, verify, revise). Use for evidence-heavy article writing or major article rewrites.
-user_invocable: true
 ---
 
-# /write-article
+# $write-article
 
 Generate a deep-dive investigative article from a story cluster. Use this pipeline:
 
@@ -12,7 +11,7 @@ Phase 0 `research dossier` -> Phase 1 `structure` -> Phase 2 `draft` -> Phase 3 
 
 ## Arguments
 
-- Required: cluster ID (example: `/write-article <cluster-id>` — run `uv run python pipeline/story_clustering.py --list` for available clusters)
+- Required: cluster ID (example: `$write-article <cluster-id>` — run `uv run python pipeline/story_clustering.py --list` for available clusters)
 - Optional `--dry-run`: run only Phase 0 and stop after the dossier
 - No arguments: list available clusters
 
@@ -118,6 +117,8 @@ Track B: Financial/corporate/property
 ```
 uv run python tools/query_edgar.py search "<TARGET>" --size 20 --output "$WORKDIR/fin-edgar.json"
 uv run python tools/query_990.py search "<TARGET>" --output "$WORKDIR/fin-990.json"
+uv run python tools/query_990.py lookup <EIN> --output "$WORKDIR/fin-990-lookup.json"  # if EIN known
+uv run python tools/query_990.py financials <EIN> --output "$WORKDIR/fin-990-financials.json"  # revenue/expense trends
 uv run python tools/query_acris.py party "<TARGET>" --output "$WORKDIR/fin-acris.json"
 uv run python tools/parse_ds10_financials.py query --entity "<TARGET>" > "$WORKDIR/fin-ds10.txt"
 uv run python tools/query_fec.py donor "<TARGET>" --limit 20 --output "$WORKDIR/fin-fec-donor.json"
@@ -134,10 +135,12 @@ uv run python tools/query_fara.py search "<TARGET>" --limit 20 --output "$WORKDI
 uv run python tools/query_lobbying.py client "<TARGET>" --limit 20 --output "$WORKDIR/legal-lda-client.json"
 uv run python tools/query_lobbying.py registrant "<TARGET>" --limit 20 --output "$WORKDIR/legal-lda-registrant.json"
 uv run python tools/query_littlesis.py search "<TARGET>" --output "$WORKDIR/legal-littlesis.json"
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 uv run python tools/query_aleph.py search "<TARGET>" --schema Person --output "$WORKDIR/legal-aleph-person.json"
 uv run python tools/query_aleph.py search "<TARGET>" --schema Company --output "$WORKDIR/legal-aleph-company.json"
 uv run python tools/query_icij.py search "<TARGET>" --output "$WORKDIR/legal-icij.json"  # optional; requires Neo4j
 uv run python tools/query_opensanctions.py search "<TARGET>" --limit 20 --output "$WORKDIR/legal-sanctions.json"
+# DEPRECATED (March 2026): 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 uv run python tools/query_gdelt.py articles "<TARGET>" --limit 20 --timespan 3m --output "$WORKDIR/legal-gdelt.json"
 
 # Also perform web search for recent legal/news outcomes when contextual claims depend on it.
@@ -299,9 +302,7 @@ When evidence exemplifies an analytical model, insert a callout block:
 > Evidence: [CITATION_ID] — [Specific evidence from corpus supporting this model application]
 ```
 
-Available Tier 1 models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
-
-Available Tier 2 lenses (use for analysis/framing, reference in prose rather than callout blocks until promoted to Tier 1): sovereign-exception, personnel-pipeline, infrastructure-lock-in, temporal-arbitrage, depoliticization, dual-mandate, dual-state, agnotology, capital-conversion, regulatory-replacement. Full definitions in `research/craft-research/frameworks/`.
+Available models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
 
 ### Save and build
 
@@ -314,7 +315,7 @@ cd /Users/travcole/projects/osint-research/web && npx astro build 2>&1 | tail -5
 
 ## Phase 3: Verify
 
-Run `/review-article <cluster-id> --workdir $WORKDIR`. The reviewer writes `$WORKDIR/verification-report.md` with:
+Run `$review-article <cluster-id> --workdir $WORKDIR`. The reviewer writes `$WORKDIR/verification-report.md` with:
 
 - **BLOCKING** (must fix before publication)
 - **SHOULD FIX** (significant quality issues)
@@ -408,7 +409,7 @@ This returns all active story clusters with their IDs, titles, key angles, and r
 
 ## Readiness Criteria
 
-Checked in Phase 3 (`/review-article`):
+Checked in Phase 3 (`$review-article`):
 
 1. Every corpus claim has an evidence citation
 2. Every contextual claim is cited, softened, or flagged

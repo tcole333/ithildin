@@ -1,10 +1,9 @@
 ---
 name: deep-investigate
 description: Orchestrated multi-source investigation using parallel sub-agents
-user_invocable: true
 ---
 
-# /deep-investigate
+# $deep-investigate
 
 **CONTROL PLANE ORCHESTRATOR** — You are a planner, dispatcher, and coverage checker. You do NOT investigate directly. You assign source categories to parallel sub-agents, monitor their progress, synthesize their reports for corroboration/contradiction/gaps, and spawn follow-up leads. Sub-agents are Layer 1 research agents — they document facts, not theories.
 
@@ -12,8 +11,8 @@ Launch an orchestrated investigation of a person, entity, or topic using paralle
 
 ## Arguments
 
-- Required: target name or topic (e.g., `/deep-investigate Ron Soffer`, `/deep-investigate Barkmere Group Ltd`)
-- Optional context after the name: `/deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
+- Required: target name or topic (e.g., `$deep-investigate Ron Soffer`, `$deep-investigate Barkmere Group Ltd`)
+- Optional context after the name: `$deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
 
 ### Context Loading
 Load the active investigation context before executing:
@@ -47,7 +46,7 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 1. Assess the target and determine what's already known
 2. **Build a research plan** — identify which sources are relevant and assign them to agents
 3. Write focused prompts for parallel sub-agents (default ~6) with explicit source mandates
-4. Launch all sub-agents simultaneously using the Agent tool
+4. Launch all sub-agents simultaneously with `spawn_agent`
 5. Wait for all to complete
 6. Synthesize their results — identify corroboration, contradictions, and gaps
 7. Record final findings and spawn follow-up leads
@@ -71,7 +70,7 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 - `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/990-flow.json`
 - `uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/990-officers.json`
 
-If the flow output shows circular flows or 10+ network nodes, recommend `/trace-grants` for full network analysis as a parallel process.
+If the flow output shows circular flows or 10+ network nodes, recommend `$trace-grants` for full network analysis as a parallel process.
 
 **Step 2: Assign sources to agents.** The default 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. For custom multi-target plans, ensure each source appears in at least one agent's mandate. Create a table:
 
@@ -97,13 +96,13 @@ When investigating a new area with multiple targets, use the **Investigation Dep
 
 2. **Triage and prioritize** — Which targets are structurally important? Which have records to find? Which are central to the investigation's questions? Flag 2-4 targets for deep dives.
 
-3. **Deep dives on selected targets** — Run `/deep-investigate` (this skill, full 4-agent treatment) only on the highest-value targets.
+3. **Deep dives on selected targets** — Run `$deep-investigate` (this skill, full 4-agent treatment) only on the highest-value targets.
 
-4. **Standard investigation for the rest** — Medium-priority targets get `/pursue-lead` (single-agent, full source checklist). Low-priority targets stay as open leads for later.
+4. **Standard investigation for the rest** — Medium-priority targets get `$pursue-lead` (single-agent, full source checklist). Low-priority targets stay as open leads for later.
 
 When running the deep dives, choose between:
 
-**Option A: Run /deep-investigate per target** (preferred for 2-3 targets)
+**Option A: Run $deep-investigate per target** (preferred for 2-3 targets)
 - Each target gets the full 4-agent treatment with dedicated source coverage
 - Best source coverage, but uses more agents
 
@@ -117,7 +116,7 @@ When running the deep dives, choose between:
 
 ### 0. Session Setup — Prevent File Collisions
 
-Create a unique working directory for this investigation. This prevents parallel `/deep-investigate` runs from overwriting each other's temp files.
+Create a unique working directory for this investigation. This prevents parallel `$deep-investigate` runs from overwriting each other's temp files.
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
@@ -158,7 +157,7 @@ Write a **target briefing** — a 2-3 sentence summary of who/what this is and w
 
 ### 2. Launch Parallel Sub-Agents
 
-Use the Agent tool to launch all sub-agents simultaneously in a single message. Default to ~6 agents — adjust based on how many distinct source categories the target warrants. Each agent gets:
+Use `spawn_agent` to launch all independent sub-agents back-to-back before waiting. Default to ~6 agents — adjust based on how many distinct source categories the target warrants. Each agent gets:
 - The target briefing
 - Its specific source mandate
 - Instructions to record findings via the CLI tools
@@ -187,21 +186,23 @@ For each tool listed in the investigation profile's corpus_tools, run a search a
 
 For tools that support sub-commands (entities, cooccurrence, emails, docs, triples), run those additional queries as well.
 
-For EVERY document found, read the full text:
-.venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
+For EVERY document found, read the full text (kabasshouse holds the highest-quality OCR for any EFTA id):
+.venv/bin/python3 tools/ingest_kabasshouse.py doc EFTA_ID
 
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 RECORD findings using:
 .venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
   --summary "..." --evidence EFTA_ID --claim-type direct_quote \
-  --source-quote "EFTA_ID:exact quote" --sources doj_vol11 --confidence LEVEL
+  --source-quote "EFTA_ID:exact quote" --sources kabass --confidence LEVEL
+
+NOTE: the same EFTA page appearing in kabasshouse AND doj_vol11/lmsband is ONE source re-OCR'd, not corroboration — cite the source you actually read (usually kabass).
 
 Record connections using:
 .venv/bin/python3 tools/findings_tracker.py connect --person-a "..." --person-b "..." \
   --type TYPE --detail "..." --evidence EFTA_ID --confidence LEVEL
 
-If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 331K pages.
+If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 1.42M pages.
 
 PROACTIVE SOURCE DISCOVERY:
 As you search, be curious. If documents reference data sources we don't have tools for, or mention databases/registries/archives that could be queried, note them. For example:
@@ -344,7 +345,7 @@ As you search, be curious about data sources we're missing. If you discover:
 At the end of your investigation, list SOURCE GAPS and create infrastructure requests:
 uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" --type new_registry --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[REGISTRY]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
-If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update CLAUDE.md and /search-all-sources after.
+If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update both `CLAUDE.md` and `AGENTS.md`, then update $search-all-sources.
 
 BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
 
@@ -623,14 +624,14 @@ Use .venv/bin/python3 for all commands.
 
 ### 3. Wait for Agents and Read Reports
 
-**DO NOT use TaskOutput to retrieve agent results.** Agent transcripts are 10-50MB and will bloat context.
+**Do not retrieve full agent transcripts to collect results.** Agent transcripts are 10-50MB and will bloat context.
 
 Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`. Poll for completion, then read the reports.
 
 **CRITICAL: DB-first, report-second.** Sub-agents MUST write every factual discovery to `findings_tracker.py add` and every entity to `entity_tracker.py` BEFORE writing the report file. The report is a summary of what was already persisted to the database, NOT the primary record. If an agent discovers something and only writes it to the report file without recording it via the CLI tools, that information is lost when the tmp directory is cleaned up. The database is permanent; the report is ephemeral.
 
 ```
-# Launch all 4 agents with run_in_background=true
+# Launch all agents before waiting for any one agent
 # Each agent's prompt instructs it to write [WORKDIR]/report-agent-{a,b,c,d}.md
 
 # Poll for completion (check if report files exist)
@@ -646,7 +647,7 @@ Read("[WORKDIR]/report-agent-d.md")
 
 **Polling with Liveness Checks:**
 - Poll every 30 seconds for report files
-- If an agent has no report after 5 minutes, check its output tail (`TaskOutput` with `block=false`) to see if it's still actively working (making tool calls, writing output)
+- If an agent has no report after 5 minutes, check its state with `list_agents`; if needed, send a concise progress request with `send_message`
 - If the agent is still active (output growing), let it continue — complex targets take time
 - If the agent appears hung or crashed (no output change across 2+ checks), stop it and create a follow-up lead covering its assigned scope
 - Synthesize from whatever reports exist once all agents have either completed or been declared hung
@@ -680,7 +681,7 @@ for report in $WORKDIR/report-agent-*.md; do
 done
 ```
 
-This captures tool friction, surprise findings, and process insights for later `/review-methodology` analysis.
+This captures tool friction, surprise findings, and process insights for later `$review-methodology` analysis.
 
 ### 5. Record Synthesis Findings
 
@@ -697,7 +698,7 @@ If the sub-agents' individual findings combine to tell a larger story, record a 
 
 Create leads for:
 - New persons discovered across multiple agents
-- Entities that need their own `/deep-investigate`
+- Entities that need their own `$deep-investigate`
 - Financial trails requiring further tracing
 - Sources that weren't available (e.g., ICIJ Neo4j wasn't running)
 - Hypotheses generated by the synthesis
@@ -707,7 +708,7 @@ Create leads for:
 
 Format:
 ```
-## /deep-investigate [TARGET] — Results
+## $deep-investigate [TARGET] — Results
 
 ### Target Profile
 [1-2 sentences]
@@ -745,8 +746,8 @@ Format:
 
 **The #1 cause of session crashes is agent transcript bloat.** Follow these rules:
 
-1. **Never call TaskOutput on completed agents.** Read their report files instead.
-2. **Always use `run_in_background=true`** when launching agents.
+1. **Do not retrieve completed-agent transcripts.** Read their report files instead.
+2. **Launch all independent agents before waiting** so the research tracks run concurrently.
 3. **All searches use `--output [WORKDIR]/...`** — this keeps both the agent's AND your context lean.
 4. **Never `cat` or `Read` full document text** unless you need a specific quote. Read the `--output` JSON selectively.
 5. **Report files are disposable** — they live in `/tmp/` and don't persist across sessions.
@@ -757,12 +758,12 @@ If you encounter bugs in CLI tools (crashes, incorrect output, missing features)
 
 ## Notes
 
-- Launch all agents in a SINGLE message with multiple Agent tool calls — this maximizes parallelism
-- Each agent should be `subagent_type: "general-purpose"` with `run_in_background: true`
+- Launch independent agents back-to-back with `spawn_agent` before waiting — this maximizes parallelism
+- Give each agent a bounded task name and enough forked context to complete its assigned source category
 - The orchestrator does NOT search sources directly — that's the agents' job
 - Default to ~6 agents. Scale up or down based on source availability — this is soft guidance, not a hard cap.
 - For simple targets where only a few source categories are relevant, use fewer agents. For complex targets with many source categories, use more.
 - Agents MUST record their findings via the CLI tools, not just report them as text
-- **Agents write reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`** — orchestrator reads these, NOT TaskOutput
+- **Agents write reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`** — the orchestrator reads these instead of full transcripts
 - **Agents should be curious and proactive.** Don't just execute the search checklist mechanically — follow unexpected threads, investigate surprises, and identify infrastructure improvements. If a search reveals a data source we don't have, note it. If a tool could be extended to answer a question better, say so. The investigation platform should get stronger with every wave.
-- **Agents may build tools.** If an agent discovers a free, accessible data source during investigation and it would help answer the current question, the agent can build the integration tool (probe-before-code applies). Update CLAUDE.md and /search-all-sources after building.
+- **Agents may build tools.** If an agent discovers a free, accessible data source during investigation and it would help answer the current question, the agent can build the integration tool (probe-before-code applies). Update both `CLAUDE.md` and `AGENTS.md`, then update $search-all-sources.

@@ -1,10 +1,9 @@
 ---
 name: build-infra
 description: Build new data source tools and infrastructure from the infra request queue
-user_invocable: true
 ---
 
-# /build-infra
+# $build-infra
 
 Claim an infrastructure request and build the tool, or scan for infrastructure gaps and create requests.
 
@@ -28,7 +27,7 @@ Use these values instead of hardcoded names throughout this skill.
 
 Claim an open infra request, evaluate it, build the tool, test it, and complete.
 
-### Scan Mode (`/build-infra scan`)
+### Scan Mode (`$build-infra scan`)
 
 Audit the investigation platform for gaps and create infra requests.
 
@@ -149,7 +148,7 @@ uv run python -c "import json; d=json.load(open('/tmp/test-search.json')); print
 ### 5. Document and Complete
 
 Update documentation:
-1. Add tool to `CLAUDE.md` data sources section
+1. Add the tool to the `CLAUDE.md` and `AGENTS.md` data-source sections
 2. Add CLI examples to `docs/TOOL_REFERENCE.md`
 3. Update `memory/MEMORY.md` key tools table
 
@@ -157,7 +156,7 @@ Complete the request:
 ```bash
 uv run python tools/infra_tracker.py complete <ID> \
   --tool-file "tools/query_<source>.py" \
-  --files-modified tools/query_<source>.py CLAUDE.md docs/TOOL_REFERENCE.md \
+  --files-modified tools/query_<source>.py CLAUDE.md AGENTS.md docs/TOOL_REFERENCE.md \
   --summary "Built <source> integration. Covers X records. No auth required."
 ```
 
@@ -178,7 +177,7 @@ Check for:
 
 ### 2. Check Priority Sources
 
-Review the priority sources list in `CLAUDE.md` under "Priority Sources (Not Yet Integrated)".
+Review the priority sources list in `CLAUDE.md` and `AGENTS.md` under "Priority Sources (Not Yet Integrated)".
 Check `memory/MEMORY.md` for the "Priority Sources to Add" section.
 
 ### 3. Search Log Analysis
@@ -227,7 +226,7 @@ uv run python tools/infra_tracker.py add \
 
 Summarize what was found:
 ```
-## /build-infra scan — Results
+## $build-infra scan — Results
 
 ### Source Health
 - X tools healthy, Y with issues
@@ -252,7 +251,7 @@ Summarize what was found:
 3. **Evaluate**: Record results in infra_tracker
 4. **Build**: Write the tool only after confirming the endpoint
 5. **Test**: Verify against known targets
-6. **Document**: Update CLAUDE.md and TOOL_REFERENCE.md
+6. **Document**: Update CLAUDE.md, AGENTS.md, and TOOL_REFERENCE.md
 
 If probing fails (403, paywall, requires registration), record the failure and reject or block the request. Do not write speculative code.
 
