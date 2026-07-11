@@ -166,6 +166,7 @@ Include the competition output in the report. Describe its verdict as **least ev
 **Create lead (only if hypothesis suggests specific new research):**
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Hunch: PATTERN — investigate SPECIFICS" \
     --target "INVESTIGATION_TARGET" \
     --category connection \
     --priority medium \

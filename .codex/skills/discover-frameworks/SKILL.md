@@ -203,9 +203,12 @@ uv run python tools/hypothesis_tracker.py add \
 
 **Generate leads for unexplored areas:**
 ```bash
+# Pick the closest --category: person, entity, financial, document, digital,
+# connection, legal, intelligence, filing, contract, case
 uv run python tools/lead_tracker.py add \
+    --title "Framework [NAME]: investigate [WHAT]" \
     --target "INVESTIGATION_TARGET" \
-    --category analysis \
+    --category financial \
     --priority medium \
     --description "Framework [NAME] suggests investigating [WHAT]. Detection markers: [MARKERS]." \
     --source "analysis:discover-frameworks" \

@@ -174,6 +174,7 @@ For high-connectivity under-investigated nodes:
 
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Investigate NAME — high-centrality bridge with only M findings" \
     --target "NAME" \
     --category person \
     --priority high \
