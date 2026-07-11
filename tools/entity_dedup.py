@@ -347,8 +347,9 @@ def cmd_seed(args):
 
 
 def cmd_merge(args):
-    """Merge one entity into another (moves roles, addresses, relations)."""
+    """Merge one entity into another using the canonical merge implementation."""
     db = get_db()
+    _ensure_aliases_table(db)
 
     keep = db.execute("SELECT * FROM entities WHERE id = ?", (args.keep_id,)).fetchone()
     delete = db.execute("SELECT * FROM entities WHERE id = ?", (args.delete_id,)).fetchone()
@@ -364,39 +365,42 @@ def cmd_merge(args):
 
     print(f"Merging entity:{args.delete_id} ({delete['name']}) -> entity:{args.keep_id} ({keep['name']})")
 
-    tables = [
-        ("entity_roles", "entity_id"),
-        ("entity_addresses", "entity_id"),
-    ]
-    for table, col in tables:
-        count = db.execute(f"SELECT COUNT(*) FROM {table} WHERE {col} = ?", (args.delete_id,)).fetchone()[0]
-        if count:
-            if not args.dry_run:
-                db.execute(f"UPDATE OR IGNORE {table} SET {col} = ? WHERE {col} = ?", (args.keep_id, args.delete_id))
-                db.execute(f"DELETE FROM {table} WHERE {col} = ?", (args.delete_id,))
-            print(f"  Moved {count} {table} rows")
+    if args.dry_run:
+        finding_links = (
+            db.execute(
+                "SELECT COUNT(*) FROM finding_entities WHERE entity_id = ?",
+                (args.delete_id,),
+            ).fetchone()[0]
+            if db.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='finding_entities'"
+            ).fetchone()
+            else 0
+        )
+        print(f"  Would repoint {finding_links} finding_entities rows")
+        print("  [DRY RUN] No changes made")
+        db.close()
+        return
 
-    for col in ("entity_a_id", "entity_b_id"):
-        count = db.execute(f"SELECT COUNT(*) FROM entity_relations WHERE {col} = ?", (args.delete_id,)).fetchone()[0]
-        if count:
-            if not args.dry_run:
-                db.execute(f"UPDATE OR IGNORE entity_relations SET {col} = ? WHERE {col} = ?", (args.keep_id, args.delete_id))
-                db.execute(f"DELETE FROM entity_relations WHERE {col} = ?", (args.delete_id,))
-            print(f"  Moved {count} entity_relations ({col})")
+    try:
+        try:
+            from tools.entity_resolution import merge_entity_records
+        except ImportError:
+            from entity_resolution import merge_entity_records
 
-    # Update name_aliases pointing to the deleted entity
-    alias_count = db.execute("SELECT COUNT(*) FROM name_aliases WHERE entity_id = ?", (args.delete_id,)).fetchone()[0]
-    if alias_count:
-        if not args.dry_run:
-            db.execute("UPDATE name_aliases SET entity_id = ? WHERE entity_id = ?", (args.keep_id, args.delete_id))
-        print(f"  Moved {alias_count} name_aliases")
-
-    if not args.dry_run:
-        db.execute("DELETE FROM entities WHERE id = ?", (args.delete_id,))
+        summary = merge_entity_records(
+            db, args.keep_id, args.delete_id, created_by="entity_dedup"
+        )
         db.commit()
+        print(
+            "  Moved "
+            f"{summary['roles']} roles, {summary['addresses']} addresses, "
+            f"{summary['relations']} relations, "
+            f"{summary['finding_entities']} finding links"
+        )
         print(f"  Deleted entity:{args.delete_id}")
-    else:
-        print(f"  Would delete entity:{args.delete_id}")
+    except Exception as exc:
+        db.rollback()
+        print(f"  ERROR: {exc}")
 
     db.close()
 
