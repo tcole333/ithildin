@@ -1,12 +1,11 @@
 ---
 name: generate-hunches
 description: Emerging theme recognition — spot unexpected patterns across findings that suggest deeper investigation
-user_invocable: true
 ---
 
-# /generate-hunches
+# $generate-hunches
 
-**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Your job is to speculate, hypothesize, and identify patterns — but every theory MUST produce a testable prediction that gets queued as a research lead for Layer 1 agents (`/pursue-lead`, `/deep-investigate`). Theories without falsification criteria or testable predictions are not useful. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline` for framework usage rules.
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Your job is to speculate, hypothesize, and identify patterns — but every theory MUST produce a testable prediction that gets queued as a research lead for Layer 1 agents (`$pursue-lead`, `$deep-investigate`). Theories without falsification criteria or testable predictions are not useful. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline` for framework usage rules.
 
 Crawl through findings and entity data to spot emerging themes and recurring patterns that cross unexpected boundaries. NOT template-matching — genuine investigative intuition applied to accumulated data.
 
@@ -104,10 +103,26 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 - Look for unexpected names in orchestrator rankings — people who span banking + legal + government
 - Flag anyone with revolving_door score > 0
 
-**j) Missing pillar analysis**
+**j) Nonprofit funding network concentration**
+- Identify nonprofits mentioned in 3+ investigation threads via findings search
+- For each, run `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/hunch-990-flow-<EIN>.json` to see their funding constellation
+- Look for: same set of funders backing recipients across multiple threads (coordinated funding network)
+- Look for: circular flows between investigation-linked nonprofits (A funds B which funds A back)
+- Look for: shared officers across investigation-linked nonprofits via `uv run python tools/query_990.py shared-officers <EIN1> <EIN2> ... --output $WORKDIR/hunch-990-shared.json`
+- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — coordinated funding constellation"
+
+**k) Missing pillar analysis**
 - Run `uv run python tools/pillar_tracker.py gaps --person "NAME"` for key actors
 - If a known operator has no legal connections, that's suspicious — lawyers leave fewer traces
 - Example: "A key actor has banking, operations, philanthropy arcs but no legal firm arcs (despite using many firms)"
+
+**l) Procurement acceleration clustering**
+- Query USASpending timeline for companies with 3+ contract-related findings in the investigation
+- Run `uv run python tools/query_usaspending.py timeline "<COMPANY>" --output $WORKDIR/hunch-usa-<slug>.json` for each
+- Flag companies with >50% YoY contract growth in the most recent fiscal year
+- Cross-reference with lobbying data: `uv run python tools/query_lobbying.py client "<COMPANY>" --output $WORKDIR/hunch-lobby-<slug>.json`
+- Check for partnership overlaps: do accelerating companies team together on the same contract vehicles?
+- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — coordinated defense tech acceleration"
 
 ### 5. Novelty Filter (Critical)
 

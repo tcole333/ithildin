@@ -15,6 +15,7 @@ from tools.selector_pivot import (
     detect_selector_type,
     emit,
     select_adapters,
+    _prepare_workdir,
     _norm_dehashed,
     _norm_opensanctions,
 )
@@ -93,6 +94,13 @@ def test_emit_dry_run_makes_no_db_writes():
     assert out["dry_run"] is True
     assert out["leads"] == []
     assert out["entities"][0]["action"] == "DRY_RUN"
+
+
+def test_prepare_workdir_creates_caller_supplied_directory(tmp_path):
+    requested = tmp_path / "nested" / "pivot"
+    assert not requested.exists()
+    assert _prepare_workdir(requested) == str(requested)
+    assert requested.is_dir()
 
 
 def test_norm_opensanctions_parses(monkeypatch):

@@ -1,19 +1,18 @@
 ---
 name: landscape-scan
 description: Tier 0 landscape scan — map 10-30 targets quickly with 2-3 sources each, producing leads and a relationship map
-user_invocable: true
 ---
 
-# /landscape-scan
+# $landscape-scan
 
-**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. You are mapping a landscape, not investigating deeply. Record what you find, create leads for targets that warrant deeper investigation. Don't theorize or apply analytical frameworks — map the terrain and move on.
+**TIER 0: LANDSCAPE SCAN** — This is a terrain-mapping skill on the Research Plane. You are mapping a landscape quickly (2-3 sources per target), not investigating deeply. Record what you find, create leads for targets that warrant Tier 1 investigation. Don't theorize or apply analytical frameworks — map the terrain and move on.
 
 Quickly scan 10-30 targets in a new investigation area using 2-3 structured sources per target. The primary output is **leads** and a **relationship map**, not exhaustive findings. But don't suppress findings that are significant — the constraint is source breadth (fewer sources per target), not finding count.
 
 ## Arguments
 
-- Required: area description (e.g., `/landscape-scan DHS immigration enforcement contractors`)
-- Optional context: `/landscape-scan DHS immigration enforcement contractors — focus on private prison companies, ICE contracts, and revolving door between DHS and contractors`
+- Required: area description (e.g., `$landscape-scan DHS immigration enforcement contractors`)
+- Optional context: `$landscape-scan DHS immigration enforcement contractors — focus on private prison companies, ICE contracts, and revolving door between DHS and contractors`
 
 ### Context Loading
 Load the active investigation context before executing:
@@ -23,7 +22,7 @@ uv run python tools/investigation_context.py show
 
 ## Architecture
 
-You are a **single agent** scanning many targets quickly. Unlike `/deep-investigate` (4 parallel sub-agents per target), you cover breadth over depth.
+You are a **single agent** scanning many targets quickly. Unlike `$deep-investigate` (4 parallel sub-agents per target), you cover breadth over depth.
 
 **Key differences from deep-investigate:**
 - **Multiple targets** (10-30) in one session, not one
@@ -96,8 +95,12 @@ For each target, run **2-3 type-appropriate structured sources** plus WebSearch.
 **Nonprofit targets — pick 2-3:**
 - WebSearch (always)
 - 990s: `uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/scan-<N>-990.json`
+- 990 lookup: `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/scan-<N>-990-lookup.json`  (if EIN known)
+- 990 flow: `uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --output $WORKDIR/scan-<N>-990-flow.json`  (quick grant flow — depth 1 only)
 - EDGAR (if large): `uv run python tools/query_edgar.py search "<ENTITY>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
 - FEC (PAC affiliates): `uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/scan-<N>-fec.json`
+
+**Note:** For landscape scans, use `flow --depth 1` for quick funding insight. Don't run full `$trace-grants` (too deep for Tier 0). Escalate targets with circular flows or 10+ grant recipients to `$trace-grants`.
 
 **Government actor targets — pick 2-3:**
 - WebSearch (always)
@@ -171,15 +174,15 @@ After scanning all targets, create a triage summary:
 - Significant financial flows discovered
 
 **Recommend:**
-- **2-4 targets for deep dives** (`/deep-investigate`) — highest structural importance
-- **5-10 targets for standard investigation** (`/pursue-lead`) — strong signal, need full source coverage
+- **2-4 targets for deep dives** (`$deep-investigate`) — highest structural importance
+- **5-10 targets for standard investigation** (`$pursue-lead`) — strong signal, need full source coverage
 - **Remaining targets** — stay as open leads for later, or close as low-priority
 
 ### 8. Present Summary
 
 Format:
 ```
-## /landscape-scan <AREA> — Results
+## $landscape-scan <AREA> — Results
 
 ### Area Overview
 [2-3 sentences describing what was found]
@@ -224,7 +227,7 @@ Format:
 - **Record findings as you go**, not in a batch at the end
 - **Don't read full JSON files** unless you need specific details — the summary output is enough for landscape scanning
 - **Aim for < 50 tool calls** — you're scanning, not investigating
-- This skill runs as a single agent in one CC instance
+- This skill runs as a single agent in one Codex task
 
 ## Notes
 

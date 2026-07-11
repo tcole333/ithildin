@@ -1,16 +1,15 @@
 ---
 name: ingest-source
 description: Add a new data source to the investigation infrastructure
-user_invocable: true
 ---
 
-# /ingest-source
+# $ingest-source
 
 Onboard a new data source into the investigation platform.
 
 ## Arguments
 
-- Required: source identifier or URL (e.g., `/ingest-source tensonaut/EPSTEIN_FILES_20K`)
+- Required: source identifier or URL (e.g., `$ingest-source tensonaut/EPSTEIN_FILES_20K`)
 
 ## Process
 
@@ -67,10 +66,10 @@ Create `tools/query_<source>.py` following the standard pattern:
 - Consistent output formatting
 
 See existing wrappers for reference:
+- `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
 - `tools/query_doj.py` (SQLite + FTS5)
 - `tools/query_lmsband.py` (SQLite)
 - `tools/query_icij.py` (Neo4j)
-- `tools/duggan_search.py` (REST API)
 
 ### 5. Run Initial Investigation Search
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:
@@ -104,8 +103,8 @@ Add the new source to `tools/source_report.py`:
 - Add a check function call in `generate_report()`
 - Include query tool reference
 
-### 8. Update CLAUDE.md
-Add the new source to the Data Source Inventory section in CLAUDE.md.
+### 8. Update agent guidance
+Add the new source to the Data Source Inventory section in both `CLAUDE.md` and `AGENTS.md`.
 
 ### 9. Log the Ingestion
 Document what was ingested, record counts, any issues found.

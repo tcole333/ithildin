@@ -1,16 +1,15 @@
 ---
 name: init-investigation
 description: Initialize a new investigation profile — create config, seed threads, set active profile
-user_invocable: true
 ---
 
-# /init-investigation
+# $init-investigation
 
 Bootstrap a new investigation from a subject name or topic. Creates the YAML config, seeds the database, and sets the new profile as active.
 
 ## Arguments
 
-- Required: target name or topic (e.g., `/init-investigation "Sam Bankman-Fried"`)
+- Required: target name or topic (e.g., `$init-investigation "Sam Bankman-Fried"`)
 - Optional `--dry-run`: show what would be created without writing files
 - No arguments: show current active profile and available profiles
 
@@ -135,15 +134,15 @@ Good seed leads:
 - Check OFAC/sanctions lists
 - Search news/GDELT for media coverage patterns
 
-### 8. Create nested CLAUDE.md (optional)
+### 8. Create nested AGENTS.md (optional)
 
 If there's case-specific context that agents need (source reliability notes, corpus-specific search tips, known data quality issues), create:
 
 ```
-investigations/<slug>/CLAUDE.md
+investigations/<slug>/AGENTS.md
 ```
 
-This file is automatically loaded by the Claude Code harness when working in or below the investigation directory, providing investigation-specific agent instructions without requiring explicit reads.
+Codex automatically loads `AGENTS.md` files when working in or below the investigation directory, so the case-specific instructions apply without an explicit read.
 
 ### 9. Verify
 
@@ -160,4 +159,4 @@ Print a summary:
 - N key persons, N known addresses, N threads, N key dates, N seed pillars
 - N initial leads created
 - Active profile set to `<slug>`
-- Next steps: `/pursue-lead` or `/deep-investigate <name>` to begin
+- Next steps: `$pursue-lead` or `$deep-investigate <name>` to begin

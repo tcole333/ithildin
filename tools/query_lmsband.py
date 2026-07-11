@@ -20,8 +20,10 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.fts_query import literal_fts_query
 except ImportError:
     from output_util import add_output_args, write_output
+    from fts_query import literal_fts_query
 
 DB_PATH = Path(__file__).parent.parent / "datasets" / "lmsband_epstein_files.db"
 
@@ -44,19 +46,8 @@ def _has_fts(db):
 
 
 def _fts_query(query):
-    """Convert a natural language query to FTS5 syntax.
-
-    Handles phrase queries (quoted strings pass through) and
-    multi-word queries (converted to AND terms).
-    """
-    query = query.strip()
-    if query.startswith('"') and query.endswith('"'):
-        return query
-    # Multi-word: join with AND for FTS5
-    words = query.split()
-    if len(words) > 1:
-        return " AND ".join(words)
-    return query
+    """Convert natural-language input to punctuation-safe FTS5 terms."""
+    return literal_fts_query(query)
 
 
 def text_search(query, limit=20, dataset=None):

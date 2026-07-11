@@ -488,6 +488,13 @@ def _serialize_nodes(nodes):
     return [{"id": k, "type": v["type"], "sources": sorted(v["sources"])} for k, v in nodes.items()]
 
 
+def _prepare_workdir(workdir):
+    """Create caller-supplied scratch directories before adapters write files."""
+    path = Path(workdir)
+    path.mkdir(parents=True, exist_ok=True)
+    return str(path)
+
+
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
@@ -504,7 +511,7 @@ def cmd_run(args):
         return
 
     profile_id = investigation_context.get_active_profile_id()
-    workdir = args.workdir or tempfile.mkdtemp(prefix="selpivot-")
+    workdir = _prepare_workdir(args.workdir or tempfile.mkdtemp(prefix="selpivot-"))
 
     records, nodes, edges = pivot(selector, stype, args.depth, args.enable_paid, workdir)
     emission = emit(records, profile_id, args.dry_run)

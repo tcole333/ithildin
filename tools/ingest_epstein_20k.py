@@ -25,6 +25,11 @@ import sqlite3
 import sys
 from pathlib import Path
 
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
+
 # Increase CSV field size limit for large document texts
 csv.field_size_limit(sys.maxsize)
 
@@ -308,6 +313,15 @@ def cmd_search(args):
         count_params.append(args.min_chars)
 
     total = db.execute(count_sql, count_params).fetchone()[0]
+
+    results = [dict(r) for r in rows]
+    if write_output(
+        results,
+        args,
+        summary=f"Epstein Files 20K search '{args.query}': {total} matches",
+    ):
+        db.close()
+        return
 
     filters = []
     if args.prefix:
@@ -606,6 +620,7 @@ def main():
     p_s.add_argument("--prefix", help="Filter by source prefix (e.g. IMAGES-005, TEXT-001)")
     p_s.add_argument("--min-chars", type=int, help="Minimum document size in chars")
     p_s.add_argument("--json", dest="json_out", action="store_true", help="Output JSON")
+    add_output_args(p_s)
 
     # doc
     p_d = subs.add_parser("doc", help="Retrieve a specific document")

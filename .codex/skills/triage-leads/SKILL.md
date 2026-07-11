@@ -1,10 +1,11 @@
 ---
 name: triage-leads
 description: Process pending_triage leads — deduplicate, prioritize, link, and promote to open
-user_invocable: true
 ---
 
-# /triage-leads
+# $triage-leads
+
+**CONTROL PLANE** — This is a scheduling skill. Evaluate leads, assign depth tiers and recommended skills using rules from `tools/triage_policy.py`, and route work to the appropriate research agents. Do not investigate targets directly.
 
 Process a batch of `pending_triage` leads created by `auto_leads.py`. Deduplicates, reprioritizes, links related leads, and promotes to `open`.
 
@@ -147,6 +148,7 @@ If category is missing, infer from title/description:
 - "registry" / "entity" / "LLC" / "trust" keywords → `entity`
 - "address" / "property" keywords → `entity`
 - "financial" / "payment" / "transfer" → `financial`
+- "nonprofit" / "foundation" / "501(c)" / "grant" / "donor" / "grantee" / "dark money" / "donor-advised" → `nonprofit`
 - "connection" keywords → `connection`
 
 If target_name is obvious from the title but missing, fill it in.
@@ -173,9 +175,101 @@ Create `lead_relations` entries for related leads:
 INSERT OR IGNORE INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, 'related')
 ```
 
+#### 3f. Depth Tier Assignment
+
+Assign a `depth_tier` based on the target's structural position and information richness:
+
+| Signal | Depth Tier |
+|--------|-----------|
+| Target is a key_person from the investigation profile | `deep_dive` |
+| Target has 3+ entity_roles or 3+ connections already | `standard` (may escalate to `deep_dive`) |
+| Entity at a known_address from the profile | `standard` |
+| Nonprofit target appearing as filer/recipient in 990 grants to/from 3+ investigation entities | `standard` (may escalate to `deep_dive`) |
+| Generic cross-ref with no special signals | `scan` |
+| New person with 0 findings, not a key_person | `scan` |
+
+Query to assess structural position:
+```bash
+uv run python -c "
+import sqlite3
+db = sqlite3.connect('investigation.db')
+target = '<TARGET>'
+roles = db.execute('SELECT COUNT(*) FROM entity_roles WHERE person_name LIKE ?', (f'%{target}%',)).fetchone()[0]
+conns = db.execute('SELECT COUNT(*) FROM connections WHERE person_a LIKE ? OR person_b LIKE ?', (f'%{target}%', f'%{target}%')).fetchone()[0]
+findings = db.execute('SELECT COUNT(*) FROM findings WHERE target_name LIKE ?', (f'%{target}%',)).fetchone()[0]
+print(f'roles={roles} connections={conns} findings={findings}')
+"
+```
+
+#### 3g. Recommended Skill Assignment
+
+Based on depth_tier and category, set `recommended_skill`:
+
+Store slash-prefixed skill IDs in the database because `tools/triage_policy.py` and `scripts/dispatcher.py` match those exact values. Use `$skill-name` only when telling a Codex user how to invoke the skill.
+
+| Depth Tier + Category | Recommended Skill |
+|----------------------|-------------------|
+| `deep_dive` + person | `/deep-investigate` |
+| `deep_dive` + entity | `/deep-investigate` |
+| `standard` + person | `/investigate-person` |
+| `standard` + entity | `/trace-entity` |
+| `standard` + financial | `/pursue-lead` |
+| `*` + nonprofit | `/trace-grants` |
+| `*` + grant | `/trace-grants` |
+| `standard` + other | `/pursue-lead` |
+
+**Cohort escalation:** When 3+ contract-category leads exist for different companies in the same investigation thread, assign or suggest `/audit-contracts` for comparative procurement analysis instead of individual `/analyze-contract` runs.
+| `scan` + any | `/pursue-lead` |
+
+#### 3h. Thread Coverage Balancing
+
+Check thread coverage balance before finalizing priorities:
+
+```bash
+uv run python -c "
+import sqlite3
+db = sqlite3.connect('investigation.db')
+rows = db.execute('''
+    SELECT t.id, t.title,
+           (SELECT COUNT(*) FROM leads WHERE thread_id=t.id AND status IN ('open','in_progress')) as active_leads,
+           (SELECT COUNT(*) FROM findings WHERE thread_id=t.id) as finding_count
+    FROM investigation_threads t WHERE t.status='active'
+    ORDER BY finding_count ASC
+''').fetchall()
+for r in rows:
+    print(f'thread={r[0]} title={r[1]} active_leads={r[2]} findings={r[3]}')
+"
+```
+
+Threads with fewer findings AND fewer active leads get a priority boost (raise by one level, capped at `high`). This prevents popular threads from starving under-investigated threads.
+
+#### 3i. Stop Conditions
+
+Before promoting, check if the lead should be stopped rather than investigated:
+
+- **Target already exhaustively covered**: 10+ findings, no new angle in the lead description → dead-end with `stop_reason='exhaustively_covered'`
+- **Duplicate target at same depth**: An existing open/in_progress lead for the same target_name at the same or higher depth_tier → dead-end with `stop_reason='covered_by_lead_#N'`
+- **Budget throttle**: If more than 30 leads are open + in_progress for the same thread, only promote `high` and `critical` leads. Lower-priority leads stay in pending_triage until the queue drains.
+
+#### 3j. Record Triage Rationale
+
+For every lead processed, write a `triage_rationale` explaining the decision:
+
+```sql
+UPDATE leads SET triage_rationale=? WHERE id=?
+```
+
+Format: `"[ACTION]: [REASON]. depth_tier=[TIER], recommended_skill=[SKILL]"`
+
+Examples:
+- `"PROMOTED: Key person with 0 findings. depth_tier=deep_dive, recommended_skill=/deep-investigate"`
+- `"DEPRIORITIZED: 8 existing findings, no new angle. depth_tier=scan, recommended_skill=/pursue-lead"`
+- `"DEAD-ENDED: Duplicate of lead #1234 at standard tier"`
+- `"HELD: 35 leads active in thread 3, holding medium-priority leads until queue drains"`
+
 ### 4. Promote to Open
 
-For leads that pass triage (not deduped):
+For leads that pass triage (not deduped and not held), update all scheduler fields:
 
 ```bash
 uv run python -c "
@@ -184,14 +278,15 @@ from datetime import datetime
 db = sqlite3.connect('investigation.db')
 now = datetime.utcnow().isoformat()
 db.execute('''
-    UPDATE leads SET status='open', triaged_by='agent:triage', triaged_at=?, updated_at=?
+    UPDATE leads SET status='open', priority=?, depth_tier=?, recommended_skill=?,
+        triage_rationale=?, triaged_by='agent:triage', triaged_at=?, updated_at=?
     WHERE id=?
-''', (now, now, <LEAD_ID>))
+''', ('<PRIORITY>', '<DEPTH_TIER>', '<RECOMMENDED_SKILL>', '<RATIONALE>', now, now, <LEAD_ID>))
 db.commit()
 "
 ```
 
-If priority was adjusted:
+For leads that are dead-ended by stop conditions:
 ```bash
 uv run python -c "
 import sqlite3
@@ -199,9 +294,10 @@ from datetime import datetime
 db = sqlite3.connect('investigation.db')
 now = datetime.utcnow().isoformat()
 db.execute('''
-    UPDATE leads SET status='open', priority=?, triaged_by='agent:triage', triaged_at=?, updated_at=?
+    UPDATE leads SET status='dead_end', stop_reason=?, triage_rationale=?,
+        triaged_by='agent:triage', triaged_at=?, updated_at=?
     WHERE id=?
-''', ('<NEW_PRIORITY>', now, now, <LEAD_ID>))
+''', ('<STOP_REASON>', '<RATIONALE>', now, now, <LEAD_ID>))
 db.commit()
 "
 ```
@@ -211,16 +307,38 @@ db.commit()
 After processing the batch, summarize:
 
 ```
-## /triage-leads — Batch Results
+## $triage-leads — Batch Results
 
 ### Summary
 - Processed: X leads
 - Promoted to open: Y
 - Deduplicated (dead-ended): Z
-- Reprioritized: W
+- Stopped (exhaustively covered / duplicate depth): W
+- Held (queue throttle): V
+- Reprioritized: U
 
 ### Remaining Queue
 - N leads still pending triage
+
+### Depth Tier Distribution
+| Tier | Count |
+|------|-------|
+| scan | X |
+| standard | Y |
+| deep_dive | Z |
+
+### Skill Recommendations
+| Skill | Count | Example Targets |
+|-------|-------|----------------|
+| /deep-investigate | Z | [names] |
+| /investigate-person | W | [names] |
+| /trace-entity | V | [names] |
+| /pursue-lead | U | [names] |
+
+### Thread Balance
+| Thread | Active Leads | Findings | Status |
+|--------|-------------|----------|--------|
+| [name] | X | Y | [balanced/starved/saturated] |
 
 ### Deduplication Details
 | Lead # | Title | Duplicate Of | Action |
@@ -259,10 +377,14 @@ After processing the batch, summarize:
 The triage agent has **moderate autonomy**:
 - CAN dead-end clear duplicates without human approval
 - CAN adjust priorities up or down within the range (low ↔ high)
+- CAN assign depth_tier (scan, standard, deep_dive)
+- CAN assign recommended_skill based on depth_tier + category
+- CAN hold leads when thread queues are saturated (30+ active)
 - CAN enrich category and target_name fields
 - CAN create lead_relations links
 - CANNOT set priority to `critical` (reserved for human judgment)
 - CANNOT delete leads (only dead_end)
+- CANNOT escalate to `deep_dive` without structural evidence (3+ roles/connections or key_person status)
 
 Human reviews dead-ends periodically to catch false positives.
 

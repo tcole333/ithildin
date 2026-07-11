@@ -166,7 +166,7 @@ python tools/findings_tracker.py add --target "Rod-Larsen" --type financial \
   --source-quote "EFTA02336502:craft purchase 18M through bjorn"
 python tools/findings_tracker.py connect --person-a "PERSON_A" --person-b "PERSON_B" --type financial
 python tools/findings_tracker.py connections "PERSON_NAME" --depth 2
-python tools/findings_tracker.py search "gates foundation"
+python tools/findings_tracker.py search "gates foundation" --limit 20 --output /tmp/findings.json
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
 
@@ -1350,6 +1350,33 @@ uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-data
 
 Tracks operational learnings from investigation agents. Part of investigation.db.
 
+### papercut.py
+
+Small, memorable front door for friction observations. Use it at the moment a dead command, misleading error, stale instruction, missing check, or similar repository issue gets in the way. Entries remain available through `methodology_tracker.py`.
+
+```bash
+# Log a papercut (only the message is required)
+uv run python tools/papercut.py "query_doj.py reports a 404 for a valid document"
+
+# Include concise reproduction details
+uv run python tools/papercut.py "Unquoted glob was expanded by zsh" \
+  --command "rg --glob *.json term" --expected "Search nested JSON files" \
+  --context "Run from the repository root" --skill pursue-lead
+
+# Review the open cleanup queue
+uv run python tools/papercut.py --list [--limit 50]
+
+# Close after fixing the root cause, or dismiss with a documented reason
+uv run python tools/papercut.py --resolve <ID> --resolution "Quoted globs in agent examples; tests pass"
+uv run python tools/papercut.py --dismiss <ID> --reason "Duplicate of #12"
+
+# Consolidate duplicate reports
+uv run python tools/papercut.py --duplicate <ID> --of <CANONICAL_ID>
+
+# Hand substantial work to the infrastructure queue
+uv run python tools/papercut.py --promote <ID> --infra-id <INFRA_ID>
+```
+
 ### methodology_tracker.py
 
 ```bash
@@ -1366,6 +1393,8 @@ uv run python tools/methodology_tracker.py show <ID>
 uv run python tools/methodology_tracker.py acknowledge <ID>
 uv run python tools/methodology_tracker.py address <ID> --resolution "Added FTS5 phrase quoting"
 uv run python tools/methodology_tracker.py dismiss <ID> --reason "Duplicate of #3"
+uv run python tools/methodology_tracker.py duplicate <ID> --of <CANONICAL_ID>
+uv run python tools/methodology_tracker.py promote <ID> --infra-id <INFRA_ID>
 
 # Detect recurring patterns across observations
 uv run python tools/methodology_tracker.py patterns [--min-count 3]

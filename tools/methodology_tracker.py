@@ -15,6 +15,8 @@ Usage:
     python tools/methodology_tracker.py acknowledge <id>
     python tools/methodology_tracker.py address <id> --resolution "..."
     python tools/methodology_tracker.py dismiss <id> --reason "..."
+    python tools/methodology_tracker.py duplicate <id> --of <canonical-id>
+    python tools/methodology_tracker.py promote <id> --infra-id <infra-id>
     python tools/methodology_tracker.py patterns [--min-count 3]
     python tools/methodology_tracker.py ingest-report <report.md> [--skill ...] [--lead-id N]
     python tools/methodology_tracker.py stats
@@ -134,6 +136,66 @@ def update_status(obs_id, new_status, resolution=None):
         db.execute("""
             UPDATE methodology_observations SET status = ? WHERE id = ?
         """, (new_status, obs_id))
+    db.commit()
+    db.close()
+
+
+def mark_duplicate(obs_id, canonical_id):
+    """Mark an observation as a duplicate of another observation."""
+    if obs_id == canonical_id:
+        raise ValueError("an observation cannot duplicate itself")
+
+    db = get_db()
+    rows = db.execute(
+        "SELECT id, category, status FROM methodology_observations WHERE id IN (?, ?)",
+        (obs_id, canonical_id),
+    ).fetchall()
+    by_id = {row["id"]: row for row in rows}
+    missing = [item for item in (obs_id, canonical_id) if item not in by_id]
+    if missing:
+        db.close()
+        raise ValueError(f"observation(s) not found: {', '.join(map(str, missing))}")
+    if by_id[obs_id]["category"] != by_id[canonical_id]["category"]:
+        db.close()
+        raise ValueError("duplicate observations must have the same category")
+    if by_id[canonical_id]["status"] in {"duplicate", "dismissed"}:
+        db.close()
+        raise ValueError("canonical observation must not be duplicate or dismissed")
+
+    db.execute(
+        """
+        UPDATE methodology_observations
+        SET status = 'duplicate', resolution = ?
+        WHERE id = ?
+        """,
+        (f"Duplicate of observation #{canonical_id}", obs_id),
+    )
+    db.commit()
+    db.close()
+
+
+def promote_to_infra(obs_id, infra_id):
+    """Link an observation to an infrastructure request and acknowledge it."""
+    db = get_db()
+    observation = db.execute(
+        "SELECT id FROM methodology_observations WHERE id = ?", (obs_id,)
+    ).fetchone()
+    request = db.execute("SELECT id FROM infra_requests WHERE id = ?", (infra_id,)).fetchone()
+    if not observation:
+        db.close()
+        raise ValueError(f"observation #{obs_id} not found")
+    if not request:
+        db.close()
+        raise ValueError(f"infra request #{infra_id} not found")
+
+    db.execute(
+        """
+        UPDATE methodology_observations
+        SET status = 'acknowledged', related_infra_id = ?, resolution = ?
+        WHERE id = ?
+        """,
+        (infra_id, f"Promoted to infra request #{infra_id}", obs_id),
+    )
     db.commit()
     db.close()
 
@@ -336,6 +398,16 @@ def main():
     p_dis.add_argument("id", type=int)
     p_dis.add_argument("--reason", required=True, help="Why dismissed")
 
+    # duplicate
+    p_dup = sub.add_parser("duplicate", help="Mark observation as a duplicate")
+    p_dup.add_argument("id", type=int)
+    p_dup.add_argument("--of", type=int, required=True, dest="canonical_id")
+
+    # promote
+    p_promote = sub.add_parser("promote", help="Link observation to an infra request")
+    p_promote.add_argument("id", type=int)
+    p_promote.add_argument("--infra-id", type=int, required=True)
+
     # patterns
     p_pat = sub.add_parser("patterns", help="Detect recurring patterns")
     p_pat.add_argument("--min-count", type=int, default=3)
@@ -415,6 +487,20 @@ def main():
     elif args.command == "dismiss":
         update_status(args.id, "dismissed", resolution=args.reason)
         print(f"Observation #{args.id} dismissed: {args.reason}")
+
+    elif args.command == "duplicate":
+        try:
+            mark_duplicate(args.id, args.canonical_id)
+        except ValueError as exc:
+            parser.error(str(exc))
+        print(f"Observation #{args.id} marked duplicate of #{args.canonical_id}")
+
+    elif args.command == "promote":
+        try:
+            promote_to_infra(args.id, args.infra_id)
+        except ValueError as exc:
+            parser.error(str(exc))
+        print(f"Observation #{args.id} promoted to infra request #{args.infra_id}")
 
     elif args.command == "patterns":
         pats = detect_patterns(min_count=args.min_count)

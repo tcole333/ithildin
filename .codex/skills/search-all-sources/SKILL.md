@@ -1,18 +1,17 @@
 ---
 name: search-all-sources
-description: Fan-out search across all local and remote datasets
-user_invocable: true
+description: Targeted multi-source lookup across local and remote datasets
 ---
 
-# /search-all-sources
+# $search-all-sources
 
 **LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Report what each source returns. Do not interpret or apply frameworks.
 
-Search a term across every available data source in parallel. Deduplicates by EFTA ID where possible.
+Targeted multi-source lookup: search a specific name, entity, address, or term across relevant data sources. Use this as an **infrastructure primitive** when you need to quickly check what's available about a specific target — not as a default investigation strategy. For systematic investigation, use `$pursue-lead` or `$deep-investigate` instead.
 
 ## Arguments
 
-- Required: search term (e.g., `/search-all-sources churkin ambassador`)
+- Required: search term (e.g., `$search-all-sources churkin ambassador`)
 
 ### Context Loading
 Load the active investigation context before executing:
@@ -39,27 +38,26 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 Execute these in parallel where possible. **Use `--output` on all searches** to keep context lean:
 
 ```bash
-# DugganUSA API (204K+ docs)
-python tools/duggan_search.py "<QUERY>" -n 20 --output $WORKDIR/search-duggan.json
+# Kabasshouse (PRIMARY Epstein corpus: 1.42M docs, FTS5) — search this FIRST
+python tools/ingest_kabasshouse.py search "<QUERY>" --limit 20 --json > $WORKDIR/search-kabass.json
 
-# DOJ Vol 11 (331K pages, FTS5)
-python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
+# Kabasshouse entity mentions (10.6M typed NER rows)
+python tools/ingest_kabasshouse.py entity "<QUERY>" > $WORKDIR/search-kabass-ent.txt
 
-# LMSBAND (60K files text search)
-python tools/query_lmsband.py search "<QUERY>" --limit 20 --output $WORKDIR/search-lmsband.json
-
-# LMSBAND entities
-python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
-
-# Unified DB emails
+# Unified DB emails (parsed emails — complementary, not text-redundant)
 python tools/query_unified.py emails "<QUERY>" --limit 20 --output $WORKDIR/search-unified-email.json
 
-# Unified DB documents
-python tools/query_unified.py docs "<QUERY>" --limit 20 --output $WORKDIR/search-unified-docs.json
-
-# Unified DB entities
+# Unified DB entities + triples (relationship extraction)
 python tools/query_unified.py entities "<QUERY>" --output $WORKDIR/search-unified-ent.json
+
+# LMSBAND entities (complementary structured layers; text overlaps kabasshouse)
+python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
+
+# DOJ Vol 11 (FALLBACK — strict subset of kabasshouse; cross-check only)
+# python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
 ```
+
+**Kabasshouse is the primary Epstein full-text corpus.** DOJ Vol 11 / LMSBAND text search cover the same EFTA pages at lower OCR quality — hits there are redundant, not corroborating. (DugganUSA retired 2026-06-29; do not call `duggan_search.py`.)
 
 ```bash
 # Corporate Registry (FL, NY, more)
@@ -69,6 +67,7 @@ python tools/query_registry.py officers "<QUERY>" --output $WORKDIR/search-offic
 # UCC Filings (secured transactions, liens)
 python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
 
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (corporate registries, leaks, sanctions)
 python tools/query_aleph.py search "<QUERY>" --schema Person --output $WORKDIR/search-aleph-person.json
 python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/search-aleph-company.json
@@ -76,13 +75,13 @@ python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/
 # CourtListener (federal courts)
 python tools/query_courtlistener.py search "<QUERY>" --output $WORKDIR/search-cl.json
 
-# NYSCEF (manual opt-in only — guest search via real browser; do not include in unattended bulk fan-out)
-# NYSCEF Terms of Use prohibit mining and bot extraction. Use only for targeted state-court lookups.
-# python tools/query_nyscef.py search "<QUERY>" --limit 10 --output $WORKDIR/search-nyscef.json
-
-# ProPublica 990 (nonprofit filings)
+# IRS 990 Nonprofit Database (grants, officers, financials)
 python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
+# 990 officer positions (find person on nonprofit boards)
+python tools/query_990.py officer-search "<QUERY>" --output $WORKDIR/search-990-officers.json
+python tools/query_990.py financials <EIN> --output $WORKDIR/search-990-financials.json  # if EIN known
 
+# DEPRECATED (March 2026): 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 # GDELT (global news media — 3-month rolling window)
 python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/search-gdelt-art.json
 python tools/query_gdelt.py context "<QUERY>" --timespan 1w --limit 20 --output $WORKDIR/search-gdelt-ctx.json
@@ -134,6 +133,9 @@ python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10
 
 # OpenSanctions (PEP/sanctions check — if ingested)
 python tools/query_opensanctions.py search "<QUERY>" --limit 10
+
+# SEC Enforcement Actions (litigation releases, admin proceedings, AAERs)
+python tools/query_sec_enforcement.py search "<QUERY>" --limit 10
 
 # DS10 Deutsche Bank financial records (entity/counterparty search)
 python tools/parse_ds10_financials.py query --entity "<QUERY>"
@@ -200,17 +202,36 @@ Search any investigation-specific corpus tools listed in `corpus_tools` from the
 
 Log each corpus tool search the same way as generic sources.
 
+### 1d. Selector Pivot & Breach Data (selectors, not just names)
+
+When the target is a **selector** (email, username, phone, domain, IP) rather than a person/entity name, fan it out in one call instead of querying sources individually:
+
+```bash
+# One selector -> linked selectors + candidate entities across aggregators (auto-logs to search_log)
+uv run python tools/selector_pivot.py run "<SELECTOR>" --output $WORKDIR/pivot.json
+# Include gated breach/leak adapters (Dehashed; consumes credits):
+uv run python tools/selector_pivot.py run "<EMAIL>" --type email --enable-paid --output $WORKDIR/pivot.json
+```
+
+Free adapters (opensanctions, gleif, icij, littlesis, crt.sh, maigret) run by default; `--enable-paid` adds Dehashed (breach/credential records, fires only on the seed selector) and IntelX. Emits `pending_triage` leads — **leak-sourced links cap at `medium` confidence; corroborate against a primary record before promotion.**
+
+Direct breach lookup (one selector, raw records):
+```bash
+uv run python tools/query_dehashed.py search --email "<EMAIL>" --output $WORKDIR/dehashed.json
+uv run python tools/query_dehashed.py balance   # remaining credits
+```
+
 ### 2. Log Each Search
 After each query, log it to prevent redundant future searches:
 ```python
 from tools.lead_tracker import log_search
-log_search("<QUERY>", "duggan", result_count)
+log_search("<QUERY>", "kabass", result_count)
 log_search("<QUERY>", "doj_vol11", result_count)
 log_search("<QUERY>", "lmsband", result_count)
 log_search("<QUERY>", "gleif", result_count)
 log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
-log_search("<QUERY>", "nyscef", result_count)  # manual opt-in only
+log_search("<QUERY>", "sec_enforcement", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)
@@ -257,8 +278,8 @@ SEARCH: "<QUERY>" across 7 sources
 [Unified triple] — Subject -> arranged meeting -> Target @ Location, date
 
 === SOURCE COVERAGE ===
-DugganUSA:    15 hits
-DOJ Vol 11:   8 hits
+Kabasshouse:  15 hits
+DOJ Vol 11:   8 hits (cross-check only — same EFTA pages as Kabasshouse)
 LMSBAND:      3 hits
 Unified:      5 hits
 Registry:     2 hits (FL, NY)
@@ -286,21 +307,21 @@ Wayback:      12 hits (historical snapshots)
 URLScan:      2 hits (passive web scans)
 ```
 
-### 5. Analytical Assessment
+### 5. Observations
 
-Don't just present results — analyze them. Apply the investigative methodology from `research/INVESTIGATIVE_METHODOLOGY.md`:
+Flag factual observations from the results, keeping interpretation minimal:
 
-- **What did you expect to find vs. what you found?** Surprises are intelligence. If you searched for a known associate and found zero results in the investigation corpus, that absence is significant — it may mean concealment, document destruction, or that the relationship operated through channels the corpus didn't capture.
-- **Cross-bureaucratic correlation**: Results from independent sources (e.g., an EFTA email + an LMSBAND financial record + an ICIJ offshore entity) that converge on the same event or relationship are far more valuable than the same document appearing in 3 derivative databases.
-- **New names and entities**: Flag any previously unknown persons, email addresses, phone numbers, or corporate entities that appear in results. Each is a potential new investigation thread.
-- **Timeline patterns**: If results cluster around specific dates, note what was happening in the world then. A cluster of emails in May 2017 relates to Mueller's appointment. A cluster in June 2019 relates to the weeks before arrest.
+- **Corroboration**: Results found in 2+ independent source types. Note which sources agree.
+- **Contradictions**: Results from different sources that conflict. Note the specific discrepancy.
+- **Gaps**: Sources that returned zero results where you expected hits. Record the negative result.
+- **New names/entities**: Previously unknown persons, email addresses, or corporate entities. Flag each as a potential follow-up lead.
+- **Temporal clusters**: If results cluster around specific dates, note the date range and count. Do NOT interpret why — that's for Layer 2.
 
 ### 6. Suggest Follow-Up
 Based on results, suggest:
 - Whether findings warrant creating a lead
 - Which sources still need to be searched
 - Cross-references to investigate (e.g., "Maxim Churkin appears — worth investigating separately")
-- **Hypotheses generated by the search results** — what do these results suggest about the relationship or event?
 - **What's conspicuously absent** — what you expected but didn't find
 
 ## Tool Bug Reporting

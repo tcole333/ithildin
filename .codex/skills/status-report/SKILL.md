@@ -1,10 +1,9 @@
 ---
 name: status-report
 description: Generate investigation status summary — open leads, recent findings, source coverage
-user_invocable: true
 ---
 
-# /status-report
+# $status-report
 
 Generate a comprehensive status report of the investigation.
 

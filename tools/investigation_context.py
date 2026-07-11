@@ -240,6 +240,28 @@ def profile_to_dict(profile: InvestigationProfile) -> dict:
     return asdict(profile)
 
 
+def get_global_thread_ids(profile: InvestigationProfile) -> dict[int, int]:
+    """Map profile-local thread numbers to global investigation_threads IDs."""
+    if not profile.name or not profile.threads:
+        return {}
+    db = _get_db()
+    try:
+        rows = db.execute(
+            "SELECT id, title FROM investigation_threads WHERE profile_id = ?",
+            (profile.name,),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        rows = []
+    finally:
+        db.close()
+    global_by_title = {row["title"]: row["id"] for row in rows}
+    return {
+        int(thread["id"]): global_by_title[thread["name"]]
+        for thread in profile.threads
+        if thread.get("id") is not None and thread.get("name") in global_by_title
+    }
+
+
 # ── CLI ──────────────────────────────────────────────────────
 
 def cmd_show(args):
@@ -256,7 +278,11 @@ def cmd_show(args):
         return
 
     if args.json_out:
-        print(json.dumps(profile_to_dict(profile), indent=2))
+        data = profile_to_dict(profile)
+        global_thread_ids = get_global_thread_ids(profile)
+        for thread in data.get("threads", []):
+            thread["global_id"] = global_thread_ids.get(thread.get("id"))
+        print(json.dumps(data, indent=2))
         return
 
     print(f"Active Investigation: {profile.name}")
@@ -275,11 +301,14 @@ def cmd_show(args):
         print(f"  Exclude from Graph: {profile.exclude_from_graph}")
 
     if profile.threads:
+        global_thread_ids = get_global_thread_ids(profile)
         print("\n  Threads:")
         for t in profile.threads:
             tid = t.get("id", "?")
             tname = t.get("name", "unnamed")
-            print(f"    [{tid}] {tname}")
+            global_id = global_thread_ids.get(tid)
+            suffix = f" -> global {global_id}" if global_id is not None else " -> global unmapped"
+            print(f"    [local {tid}{suffix}] {tname}")
 
     if profile.corpus_tools:
         print("\n  Corpus Tools:")

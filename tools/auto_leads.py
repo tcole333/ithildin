@@ -675,15 +675,15 @@ def process_officer_escalation(db, dry_run=False):
 def process_filing_clusters(db, dry_run=False):
     """Find entities filed within 7 days of each other by the same officer/agent."""
     try:
-        # Get entities with known formation dates and officers
-        # Prefer date_formed (actual filing date) over created_at (DB ingestion time)
+        # Filing clusters require an actual formation date. Database ingestion
+        # time is not evidence that two entities were legally formed together.
         entities = db.execute("""
             SELECT e.id, e.name, e.jurisdiction,
                    MIN(er.person_name) as first_officer,
-                   COALESCE(e.date_formed, e.created_at) as formation_date
+                   e.date_formed as formation_date
             FROM entities e
             JOIN entity_roles er ON er.entity_id = e.id
-            WHERE COALESCE(e.date_formed, e.created_at) IS NOT NULL
+            WHERE e.date_formed IS NOT NULL
             GROUP BY e.id
         """).fetchall()
     except sqlite3.OperationalError:
@@ -697,6 +697,10 @@ def process_filing_clusters(db, dry_run=False):
     import datetime
 
     officer_entities = defaultdict(list)
+    try:
+        from tools.entity_resolution import normalize_entity_name
+    except ImportError:
+        from entity_resolution import normalize_entity_name
     for e in entities:
         officer = e["first_officer"].strip().lower() if e["first_officer"] else None
         if not officer:
@@ -710,6 +714,16 @@ def process_filing_clusters(db, dry_run=False):
     created = 0
     total = 0
     for officer, ents in officer_entities.items():
+        # Multiple source ingests can create separate rows for the same legal
+        # entity. Count a normalized entity name once per officer so those rows
+        # cannot manufacture a filing cluster.
+        unique_entities = {}
+        for ent in ents:
+            key = normalize_entity_name(ent[1]) or ent[1].strip().casefold()
+            current = unique_entities.get(key)
+            if current is None or (ent[0], ent[2]) < (current[0], current[2]):
+                unique_entities[key] = ent
+        ents = list(unique_entities.values())
         if len(ents) < 2:
             continue
         ents.sort(key=lambda x: x[0])

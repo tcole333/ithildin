@@ -1,10 +1,9 @@
 ---
 name: pursue-lead
 description: Pick up an open lead from investigation.db and investigate it to completion
-user_invocable: true
 ---
 
-# /pursue-lead
+# $pursue-lead
 
 **LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document what you find. Do not theorize, speculate, or apply analytical frameworks. If you notice a pattern, record the raw data — pattern recognition is for Layer 2 analysis agents. Record mundane facts (officer names, addresses, formation dates, filing numbers) even when they don't seem interesting. Record negative results from every source checked.
 
@@ -12,7 +11,7 @@ Claim and investigate the next highest-priority open lead. Operates fully autono
 
 ## Arguments
 
-- Optional lead ID: `/pursue-lead 42` to pursue a specific lead
+- Optional lead ID: `$pursue-lead 42` to pursue a specific lead
 - No arguments: automatically picks the highest-priority open lead
 
 ### Context Loading
@@ -44,7 +43,7 @@ WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 echo "Session workdir: $WORKDIR"
 ```
 
-Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files throughout this session. This prevents parallel `/pursue-lead` instances from overwriting each other's files.
+Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files throughout this session. This prevents parallel `$pursue-lead` instances from overwriting each other's files.
 
 ### 1. Select Lead
 If no specific ID given, use `claim-next` to atomically select and claim in one step (prevents race conditions with parallel agents):
@@ -63,8 +62,8 @@ python tools/lead_tracker.py claim <ID>
 ### 2. Classify Investigation Type
 Read the lead's description and category to determine the right approach:
 
-- **person** → Run `/investigate-person` workflow
-- **entity** → Run `/trace-entity` workflow
+- **person** → Run `$investigate-person` workflow
+- **entity** → Run `$trace-entity` workflow
 - **financial** → Focus on investigation corpus financial records, ICIJ offshore data
 - **document** → Focus on locating and analyzing specific documents
 - **digital** → Focus on email accounts, usernames, digital footprint
@@ -256,7 +255,7 @@ python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TY
   --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
 ```
 
-These route to `/analyze-filing`, `/analyze-contract`, and `/analyze-case` which read the full source documents — something discovery agents shouldn't spend time on.
+These route to `$analyze-filing`, `$analyze-contract`, and `$analyze-case` which read the full source documents — something discovery agents shouldn't spend time on.
 
 ### 7. Check Stop Conditions
 
@@ -325,12 +324,12 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 - **Prefer EFTA IDs** as canonical evidence references when available
 - **Create follow-ups generously**: If something looks interesting, create a lead for it
 - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
-- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update CLAUDE.md.
+- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update both `CLAUDE.md` and `AGENTS.md`.
 - **Extend existing tools when gaps appear**: If a query tool doesn't cover a jurisdiction you need, or a search tool misses a variant you tried manually, create an infra request with `--type tool_improvement`. Small enhancements compound across all future investigations.
 
 ## Context Management
 
-This skill can be run directly or dispatched as a subagent from an orchestrating session. Multiple `/pursue-lead` subagents can run in parallel — the DB claim mechanism (`claim-next`) prevents double-claiming. All subagents write to shared `investigation.db` (WAL mode handles concurrent writes).
+This skill can be run directly or dispatched as a subagent from an orchestrating session. Multiple `$pursue-lead` subagents can run in parallel — the DB claim mechanism (`claim-next`) prevents double-claiming. All subagents write to shared `investigation.db` (WAL mode handles concurrent writes).
 
 ### Output Discipline
 - **Use `--output $WORKDIR/...` on ALL search commands** to keep context lean

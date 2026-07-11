@@ -1,10 +1,9 @@
 ---
 name: discover-frameworks
 description: Discover, evaluate, and adopt analytical frameworks that deepen agent cognition and reader understanding
-user_invocable: true
 ---
 
-# /discover-frameworks
+# $discover-frameworks
 
 **LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Frameworks are pattern detectors, not interpretive lenses. Every framework MUST include falsification criteria and boundary conditions. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
 

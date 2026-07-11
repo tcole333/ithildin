@@ -1,10 +1,9 @@
 ---
 name: investigate-infra
 description: Passive digital infrastructure investigation — domains, IPs, certificates, DNS, hosting patterns
-user_invocable: true
 ---
 
-# /investigate-infra
+# $investigate-infra
 
 **LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document infrastructure observations (certificates, DNS, hosting) as facts. Do not theorize about intent — record what exists and let Layer 2 analysis agents interpret patterns.
 
@@ -16,10 +15,10 @@ Inspired by the [vmfunc/Persona investigation](https://vmfunc.re/blog/persona) m
 
 - Required: target (domain, IP, org name, or person name)
 - Examples:
-  - `/investigate-infra leadingthefuture.com`
-  - `/investigate-infra 198.202.211.1`
-  - `/investigate-infra org:"Example Trust Company"`
-  - `/investigate-infra "Person Name" — map digital footprint of known domains`
+  - `$investigate-infra leadingthefuture.com`
+  - `$investigate-infra 198.202.211.1`
+  - `$investigate-infra org:"Example Trust Company"`
+  - `$investigate-infra "Person Name" — map digital footprint of known domains`
 
 ## The Unseeing Discipline
 
@@ -235,8 +234,7 @@ Connect infrastructure findings to the broader investigation:
 
 ```bash
 # Search for discovered domains/IPs/orgs in document corpus
-uv run python tools/query_doj.py search "<DISCOVERED_DOMAIN>" --limit 20 --output $WORKDIR/corpus-domain.json
-uv run python tools/duggan_search.py "<DISCOVERED_DOMAIN>" --output $WORKDIR/duggan-domain.json
+uv run python tools/ingest_kabasshouse.py search "<DISCOVERED_DOMAIN>" --limit 20 --json > $WORKDIR/corpus-domain.json
 uv run python tools/query_unified.py emails "<DISCOVERED_DOMAIN>" --limit 20 --output $WORKDIR/unified-domain-emails.json
 
 # Check corporate registries for hosting companies / registrants
@@ -265,7 +263,7 @@ uv run python tools/findings_tracker.py add \
 uv run python tools/findings_tracker.py connect \
     --person-a "<ENTITY_A>" --person-b "<ENTITY_B>" \
     --type digital --strength medium \
-    --detail "Shared IP <IP>, same SSL cert covering both domains" \
+    --description "Shared IP <IP>, same SSL cert covering both domains" \
     --evidence "<CERT_HASH>"
 
 # Register entities for hosting companies, registrars, etc. if relevant
@@ -327,7 +325,7 @@ Create leads for:
 uv run python tools/lead_tracker.py add \
     --title "<LEAD_TITLE>" \
     --priority <PRIORITY> \
-    --lead-type digital \
+    --category digital \
     --description "<DESCRIPTION>" \
     --source "investigate-infra"
 ```
