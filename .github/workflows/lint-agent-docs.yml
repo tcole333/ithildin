@@ -5,6 +5,7 @@ on:
     paths:
       - ".claude/skills/**"
       - ".claude/commands/**"
+      - ".codex/skills/**"
       - "docs/**"
       - "research/**"
       - "scripts/validate_skills.py"
@@ -15,6 +16,7 @@ on:
     paths:
       - ".claude/skills/**"
       - ".claude/commands/**"
+      - ".codex/skills/**"
       - "docs/**"
       - "research/**"
       - "scripts/validate_skills.py"
@@ -35,6 +37,7 @@ jobs:
           uv run python scripts/validate_skills.py \
             --workspace "$GITHUB_WORKSPACE" \
             --skills-dir "$GITHUB_WORKSPACE/.claude/skills" \
+            --skills-dir "$GITHUB_WORKSPACE/.codex/skills" \
             --commands-dir "$GITHUB_WORKSPACE/.claude/commands" \
             --docs-dir "$GITHUB_WORKSPACE/docs" \
             --docs-dir "$GITHUB_WORKSPACE/research" \
