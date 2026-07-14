@@ -9,6 +9,7 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | Tool | Jurisdiction | Method | Auth | Data |
 |------|-------------|--------|------|------|
 | `query_registry.py` | All ingested | Local SQLite (registry.db) | None | Unified search across all ingested entities, officers, agents, UCC filings |
+| `registry_address_index.py` | All ingested | Generated local FTS5 sidecar | None | Principal, mailing, officer, and agent address fragments |
 | `ingest_florida.py` | FL | SFTP bulk (fixed-width) | Public creds | 3M+ entities, officers, agents, filings |
 | `query_california.py` | CA | Web scraping (bizfileonline) | MCP Playwright | Entity search, detail, history (Imperva WAF) |
 | `ingest_california.py` | CA | Azure APIM REST API | CA_SOS_API_KEY (free) | Keyword search, entity detail, ingest to registry.db |
@@ -56,7 +57,7 @@ uv run python tools/query_registry.py entity 42
 # Officer search (cross-jurisdiction)
 uv run python tools/query_registry.py officers "Darren Indyke" --limit 20
 
-# Address search (principal + mailing addresses)
+# Address search (principal, mailing, officer, and agent addresses)
 uv run python tools/query_registry.py address "457 Madison" --limit 20
 
 # Registered agent search
@@ -76,6 +77,40 @@ uv run python tools/query_registry.py stats
 uv run python tools/query_registry.py jurisdictions
 uv run python tools/query_registry.py ucc-stats
 ```
+
+### Generated Address Index
+
+The `address` subcommand uses the generated, contentless FTS5 trigram sidecar
+`datasets/registry_address_search.db`. It searches principal, mailing, officer,
+and agent addresses without adding tables or indexes to `registry.db`. Build it
+after the registry is created or updated:
+
+```bash
+uv run python tools/registry_address_index.py build --output /tmp/address-index-build.json
+uv run python tools/registry_address_index.py status
+uv run python tools/registry_address_index.py validate --output /tmp/address-index-validation.json
+```
+
+The builder normalizes case, accents, punctuation, and `P.O.` spacing using a
+versioned normalization contract. It streams into a same-directory temporary
+file, checks the source fingerprint and SQLite/FTS integrity, then publishes the
+complete file atomically. An existing sidecar is retained as `.bak` during a
+rebuild and can be restored with `registry_address_index.py rollback`. Build,
+publish, and rollback operations share an interprocess lifecycle lock; an
+overlapping operation fails without mutating either published file.
+
+Address queries keep the existing result buckets and alphabetical per-bucket
+limits, with row ID as the deterministic tie-breaker for equal names. Selectors
+must contain at least three normalized letters or digits.
+Missing, stale, or invalid sidecars fail with rebuild instructions; the command
+does not fall back to a full `registry.db` scan.
+
+The query route counts FTS candidates independently for each bucket. At 10,000
+or fewer candidates it materializes matching row IDs and sorts the joined base
+rows. Above 10,000 it walks the existing alphabetical base-name index and uses
+a correlated FTS `rowid + MATCH` constraint for membership, stopping at the
+requested limit. Both routes return the same strict global alphabetical top-N;
+the adaptive route never tests raw address columns with `LIKE` or another scan.
 
 ## When to Use State-Specific Tools
 
@@ -183,4 +218,5 @@ All state tools ingest into a shared `registry.db` with unified tables:
 - `registry_name_history` — tracks name changes over time
 - `ucc_filings` / `ucc_debtors` / `ucc_secured_parties` / `ucc_collateral` — UCC/lien data
 
-FTS5 full-text search indexes cover entity names, officer names, agent names, and addresses for fast cross-jurisdiction queries via `query_registry.py`.
+FTS5 full-text search indexes cover entity, officer, and agent names. Address
+fragments are served by the generated trigram sidecar described above.

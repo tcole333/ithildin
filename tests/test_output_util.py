@@ -12,6 +12,7 @@ from tools.output_util import substantive_result_count, write_output
         ({"registrants": [], "foreign_principals": []}, 0),
         ({"registrants": [{"id": 1}], "foreign_principals": [{"id": 2}]}, 2),
         ({"query": "missing", "entities": [], "exclusions": []}, 0),
+        ({"entities": [{}], "officers": [{}, {}], "agents": [{}, {}, {}]}, 6),
         ({"grants": [{"id": 1}], "related_orgs": [{"id": 2}, {"id": 3}]}, 3),
         ({"hits": {"total": {"value": 0}, "hits": []}}, 0),
         ({"hits": {"total": {"value": 2}, "hits": [{}, {}]}}, 2),

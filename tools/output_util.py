@@ -25,6 +25,7 @@ import json
 # their counts are summed. Nested wrappers cover responses such as EDGAR's
 # ``hits.hits`` shape.
 _RESULT_COLLECTION_KEYS = frozenset({
+    "agents",
     "articles",
     "data",
     "entities",
@@ -33,6 +34,7 @@ _RESULT_COLLECTION_KEYS = frozenset({
     "grants",
     "hits",
     "items",
+    "officers",
     "records",
     "registrants",
     "related_orgs",
