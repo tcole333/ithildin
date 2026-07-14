@@ -58,6 +58,46 @@ ENTITY_SUFFIXES = [
 PERSON_SUFFIXES = ["jr", "sr", "ii", "iii", "iv", "esq", "phd", "md"]
 PERSON_PREFIXES = ["mr", "mrs", "ms", "dr", "prof"]
 
+# Finding targets sometimes describe an analytical object rather than a named
+# person or organization (for example, "divorce property cluster"). Keep this
+# deliberately conservative: a descriptive domain word and an abstract head
+# word must both be present, and common legal/organizational endings are exempt.
+_ABSTRACT_TARGET_DESCRIPTORS = frozenset({
+    "address", "addresses", "contract", "divorce", "evidence", "filing",
+    "funding", "officer", "parcel", "parcels", "property", "properties",
+    "relationship", "search", "transaction", "transfer", "trust",
+})
+_ABSTRACT_TARGET_HEADS = frozenset({
+    "analysis", "cluster", "clusters", "comparison", "findings", "flags",
+    "map", "parcels", "pattern", "patterns", "portfolio", "results",
+    "schedule", "summary", "timeline",
+})
+_NAMED_ORGANIZATION_SUFFIX_RE = re.compile(
+    r"\b(?:association|bank|co\.?|company|corp\.?|corporation|foundation|"
+    r"inc\.?|incorporated|institute|llc|llp|lp|ltd\.?|partnership|plc|"
+    r"trust|university)\s*$",
+    re.IGNORECASE,
+)
+
+
+def is_abstract_entity_target(name):
+    """Return True for conservative analytical labels unsuitable as entities.
+
+    This is not a general named-entity recognizer. It catches target-label forms
+    that have repeatedly produced pseudo-entities while exempting names with a
+    conventional organization suffix. Explicitly typed or previously registered
+    entities are handled separately by ``resolve_or_create_entity``.
+    """
+    if not name or not name.strip():
+        return False
+    stripped = name.strip()
+    if _NAMED_ORGANIZATION_SUFFIX_RE.search(stripped):
+        return False
+    tokens = re.findall(r"[a-z0-9]+", stripped.casefold())
+    if len(tokens) < 2 or tokens[-1] not in _ABSTRACT_TARGET_HEADS:
+        return False
+    return bool(_ABSTRACT_TARGET_DESCRIPTORS.intersection(tokens))
+
 
 def get_db():
     db = sqlite3.connect(str(DB_PATH))
@@ -132,8 +172,15 @@ EntityResolution = namedtuple("EntityResolution", ["entity_id", "action", "match
 # Sr/II father-son pairs score ~91 on token_sort_ratio and therefore stay distinct.
 DEFAULT_MATCH_THRESHOLD = 97
 
-# Entity types denoting a natural person (everything else is an organization).
-_PERSON_ENTITY_TYPES = {"person"}
+# Entity types denoting a natural person.
+_PERSON_ENTITY_TYPES = {"individual", "person"}
+
+# Types that are graph nodes but not organizations. Unknown is excluded because
+# it cannot satisfy a "real organization" gate without additional evidence.
+_NON_ORGANIZATION_ENTITY_TYPES = _PERSON_ENTITY_TYPES | {
+    "address", "domain", "email", "financial_instrument", "nominee", "phone",
+    "political_role", "property", "role", "unknown", "website",
+}
 
 # Below this normalized length fuzzy matching is too noisy to trust (e.g. "x", "j").
 _MIN_FUZZY_LEN = 2
@@ -144,6 +191,13 @@ def _entity_type_family(entity_type):
     if not entity_type or entity_type == "unknown":
         return None
     return "person" if entity_type in _PERSON_ENTITY_TYPES else "org"
+
+
+def is_organization_entity_type(entity_type):
+    """Return whether a concrete entity type denotes an organization."""
+    if not entity_type:
+        return False
+    return entity_type.strip().casefold() not in _NON_ORGANIZATION_ENTITY_TYPES
 
 
 def _jurisdiction_compatible(a, b):
@@ -299,7 +353,8 @@ def resolve_or_create_entity(
       2. exact  — an existing row has this exact name (jurisdiction-compatible)
       3. fuzzy  — an existing row's normalized name matches at >= threshold
                   (token_sort_ratio), subject to jurisdiction + person/org guards
-      4. create — otherwise INSERT a new row
+      4. suppress — an unknown ``auto:finding`` target is an analytical label
+      5. create — otherwise INSERT a new row
 
     On an exact/alias/fuzzy match, NULL scalar columns are backfilled from the
     supplied data (never overwriting) when backfill=True. On a fuzzy match an
@@ -312,7 +367,8 @@ def resolve_or_create_entity(
     a true duplicate of an identical (name, jurisdiction).
 
     Does NOT commit — the caller owns the transaction. Returns an EntityResolution
-    (entity_id, action, matched_name, score); entity_id is None for a blank name.
+    (entity_id, action, matched_name, score); entity_id is None for a blank or
+    suppressed analytical target.
     """
     if not name or not name.strip():
         return EntityResolution(None, None, None, None)
@@ -362,7 +418,18 @@ def resolve_or_create_entity(
                                       entity_id=row["id"], entity_type=row["entity_type"])
             return EntityResolution(row["id"], "fuzzy", row["name"], round(float(score), 1))
 
-    # 4. Create.
+    # 4. Findings accept descriptive target labels for analytical grouping. Do
+    # not turn those labels into new unknown entities. Resolution runs first so
+    # a previously registered named entity remains linkable, while an explicitly
+    # typed entity bypasses this conservative auto-link safeguard.
+    if (
+        source == "auto:finding"
+        and _entity_type_family(entity_type) is None
+        and is_abstract_entity_target(name)
+    ):
+        return EntityResolution(None, "suppressed", name, None)
+
+    # 5. Create.
     return _insert_entity(db, name, entity_type=entity_type, jurisdiction=jurisdiction,
                           ein=ein, address=address, status=status, source=source,
                           notes=notes, agent_run_id=agent_run_id)

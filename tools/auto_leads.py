@@ -23,6 +23,8 @@ Triggers (findings-based):
 """
 
 import argparse
+import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -831,6 +833,73 @@ def _is_address_target(target):
     return False
 
 
+def _is_abstract_target(target):
+    """Use the shared entity-resolution guard for analytical target labels."""
+    try:
+        from tools.entity_resolution import is_abstract_entity_target
+    except ImportError:
+        from entity_resolution import is_abstract_entity_target
+    return is_abstract_entity_target(target)
+
+
+_CONTRACT_EVIDENCE_SOURCES = frozenset({
+    "contract_award", "fpds", "fpds_ng", "government_contract", "highergov",
+    "sam", "sam_bulk", "sam_gov", "usaspending",
+})
+
+
+def _has_contract_source_evidence(raw_sources):
+    """Return whether finding provenance includes a contract-record source."""
+    if not raw_sources:
+        return False
+    values = []
+    try:
+        parsed = json.loads(raw_sources)
+        values.extend(parsed if isinstance(parsed, list) else [parsed])
+    except (json.JSONDecodeError, TypeError):
+        values.append(raw_sources)
+
+    source_names = set()
+    for value in values:
+        for token in re.split(r"[,;\s]+", str(value)):
+            normalized = re.sub(r"[^a-z0-9]+", "_", token.casefold()).strip("_")
+            if normalized:
+                source_names.add(normalized)
+    return bool(source_names.intersection(_CONTRACT_EVIDENCE_SOURCES))
+
+
+def _finding_has_typed_organization(db, finding_id, target):
+    """Require a finding link or exact canonical target to a typed organization."""
+    try:
+        from tools.entity_resolution import is_organization_entity_type
+    except ImportError:
+        from entity_resolution import is_organization_entity_type
+
+    try:
+        linked = db.execute(
+            """SELECT e.entity_type
+               FROM finding_entities fe
+               JOIN entities e ON e.id = fe.entity_id
+               WHERE fe.finding_id = ?""",
+            (finding_id,),
+        ).fetchall()
+        if any(is_organization_entity_type(row["entity_type"]) for row in linked):
+            return True
+    except sqlite3.OperationalError:
+        pass
+
+    if not target:
+        return False
+    try:
+        rows = db.execute(
+            "SELECT entity_type FROM entities WHERE lower(trim(name)) = lower(trim(?))",
+            (target,),
+        ).fetchall()
+        return any(is_organization_entity_type(row["entity_type"]) for row in rows)
+    except sqlite3.OperationalError:
+        return False
+
+
 def process_findings_coverage_gaps(db, thread_ids, profile_id, dry_run=False):
     """Generate leads for finding targets with few findings and no open leads.
 
@@ -866,6 +935,12 @@ def process_findings_coverage_gaps(db, thread_ids, profile_id, dry_run=False):
 
         # Skip addresses masquerading as targets
         if _is_address_target(target):
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Skip analytical labels such as "divorce property cluster". These are
+        # useful finding groupings, but they are not subjects for investigation.
+        if _is_abstract_target(target):
             log_processed(db, "findings", row["latest_finding_id"], dedup_key)
             continue
 
@@ -942,14 +1017,12 @@ def process_contract_patterns(db, thread_ids, profile_id, dry_run=False):
 
     Scoped to the active profile's threads.
     """
-    import re
-
     if not thread_ids:
         return 0, 0
 
     placeholders = ",".join("?" * len(thread_ids))
     rows = db.execute(f"""
-        SELECT id, target_name, summary, detail, thread_id
+        SELECT id, target_name, summary, detail, source_datasets, thread_id
         FROM findings
         WHERE detail IS NOT NULL AND LENGTH(detail) > 50
           AND thread_id IN ({placeholders})
@@ -980,7 +1053,11 @@ def process_contract_patterns(db, thread_ids, profile_id, dry_run=False):
         # Flag residential address indicators
         residential_keywords = ["residential", "sleeping dragon", "home address",
                                 "single-family", "apartment", "condo"]
-        if any(kw in detail.lower() for kw in residential_keywords):
+        if (
+            any(kw in detail.lower() for kw in residential_keywords)
+            and _has_contract_source_evidence(row["source_datasets"])
+            and _finding_has_typed_organization(db, fid, target)
+        ):
             residential_flags.append((fid, target, row["thread_id"]))
 
     created = 0
@@ -1179,9 +1256,9 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
     from rapidfuzz import fuzz
 
     try:
-        from tools.entity_resolution import normalize_entity_name
+        from tools.entity_resolution import is_abstract_entity_target, normalize_entity_name
     except ImportError:
-        from entity_resolution import normalize_entity_name
+        from entity_resolution import is_abstract_entity_target, normalize_entity_name
 
     THRESHOLD = 85
 
@@ -1209,12 +1286,19 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
     # Load finding target names
     finding_targets = set()
     for r in db.execute("SELECT DISTINCT target_name FROM findings WHERE target_name IS NOT NULL").fetchall():
-        finding_targets.add(r["target_name"])
+        if not is_abstract_entity_target(r["target_name"]):
+            finding_targets.add(r["target_name"])
 
     created = 0
     for row in rows:
         name = row["name"]
         if not name or len(name.strip()) < 3:
+            log_processed(db, "entities", row["id"], "entity_crossref")
+            continue
+
+        # Quarantine any legacy pseudo-entities created before the finding-link
+        # guard existed. They should not generate fuzzy cross-reference leads.
+        if is_abstract_entity_target(name):
             log_processed(db, "entities", row["id"], "entity_crossref")
             continue
 
