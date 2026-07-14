@@ -441,17 +441,16 @@ python tools/ingest_newmexico.py search "Zorro Ranch"
 python tools/ingest_newmexico.py detail <internal_id>
 python tools/ingest_newmexico.py ingest-batch "Zorro"
 
-# California — bizfileonline web API (no auth, up to 500 results)
-# Requires MCP Playwright Chrome running (trigger with any browser_navigate call)
-python tools/query_california.py search "PARAFI CAPITAL"
-python tools/query_california.py search "QUERY" --status active --type corp
-python tools/query_california.py search "Apollo" --officer-last "BLACK"
-python tools/query_california.py search "726332" --by-number
-python tools/query_california.py entity 726332 --history --output /tmp/entity.json
-python tools/query_california.py entity C0726332 --output /tmp/entity.json
-python tools/query_california.py history 726332 --output /tmp/history.json
-python tools/query_california.py ingest 726332
-python tools/query_california.py ingest-search "QUERY" --limit 50
+# California — BizFile browser search (no auth, bounded to 1-500 results)
+# Requires Node.js + playwright/playwright-core + installed Google Chrome.
+# Uses one short-lived headed process and a dedicated local Imperva cache.
+uv run python tools/query_california.py runtime-check --output /tmp/ca-runtime.json
+uv run python tools/query_california.py probe --output /tmp/ca-probe.json
+uv run python tools/query_california.py search "PARAFI CAPITAL" --limit 25 --output /tmp/ca-search.json
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output /tmp/ca-number.json
+# Advanced filters, entity/history, and ingest commands are explicitly unavailable
+# until their self-contained browser flows are live-verified. This interactive tool
+# does not replace the weekly statewide bulk importer tracked by infra request #130.
 # Official API (needs CA_SOS_API_KEY — pending approval)
 # python tools/ingest_california.py search "PARAFI CAPITAL"
 

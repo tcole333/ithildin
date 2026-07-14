@@ -11,7 +11,7 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | `query_registry.py` | All ingested | Local SQLite (registry.db) | None | Unified search across all ingested entities, officers, agents, UCC filings |
 | `registry_address_index.py` | All ingested | Generated local FTS5 sidecar | None | Principal, mailing, officer, and agent address fragments |
 | `ingest_florida.py` | FL | SFTP bulk (fixed-width) | Public creds | 3M+ entities, officers, agents, filings |
-| `query_california.py` | CA | Web scraping (bizfileonline) | MCP Playwright | Entity search, detail, history (Imperva WAF) |
+| `query_california.py` | CA | BizFile UI + official search response | Node Playwright + Chrome | Bounded keyword/entity-number search (Imperva WAF) |
 | `ingest_california.py` | CA | Azure APIM REST API | CA_SOS_API_KEY (free) | Keyword search, entity detail, ingest to registry.db |
 | `ingest_newyork.py` | NY | Socrata SODA API (data.ny.gov) | None | 4.1M active corps, 20M filings, 17M addresses |
 | `query_texas.py` | TX | Comptroller data-search proxy | None | Franchise tax entities, officers, agents |
@@ -137,9 +137,28 @@ ingest-batch "QUERY"          # Same as ingest-search (naming varies)
 | **None** | query_registry, query_texas, query_newjersey, query_puertorico, ingest_newyork, ingest_colorado, ingest_newmexico, ingest_dc, query_france, query_israel, query_zefix |
 | **Free API key** | ingest_california (CA_SOS_API_KEY), ingest_uk_companies_house (COMPANIES_HOUSE_API_KEY) |
 | **Paid API key** | query_opencorporates, query_delaware, query_hongkong, query_cyprus (OPENCORPORATES_API_KEY — basic 500/mo, 200/day) |
-| **Node.js browser helper** | query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
-| **MCP Playwright** | query_california (WAF bypass), ingest_maryland (CAPTCHA) |
+| **Node.js browser helper** | query_california, query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
+| **MCP Playwright** | ingest_maryland (CAPTCHA) |
 | **Manual CAPTCHA** | ingest_maryland (reCAPTCHA v2 on first search), ingest_ohio (cf_clearance cookie) |
+
+California BizFile uses a short-lived headed Chrome process and a dedicated
+local profile to retain Imperva clearance. Check the runtime first, then issue a
+bounded keyword or normalized entity-number search:
+
+```bash
+uv run python tools/query_california.py runtime-check --output /tmp/ca-runtime.json
+uv run python tools/query_california.py probe --output /tmp/ca-probe.json
+uv run python tools/query_california.py search "APPLE" --limit 25 --output /tmp/ca-search.json
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output /tmp/ca-number.json
+```
+
+The helper requires Node.js, `playwright` or `playwright-core`, and installed
+Google Chrome. It launches one bounded operation per process and closes Chrome
+afterward; it does not attach to an MCP/Codex browser or start a daemon. Headless
+mode is not supported by the verified path because Imperva returns 403. Advanced
+filters, entity detail, history, and ingestion currently fail explicitly until
+their new-runtime flows are live-verified. Interactive search is not a substitute
+for the weekly statewide bulk importer tracked by infrastructure request #130.
 
 Nevada SilverFlume uses session-backed entity and history pages behind
 Incapsula. Verify the local runtime before searching, and warm the persistent
@@ -160,7 +179,7 @@ the Playwright browser with `npx playwright install chromium`.
 
 ## Known Quirks
 
-- **query_california.py** (web scraper): Imperva WAF blocks after first request per session. Unreliable for batch ops. Prefer `ingest_california.py` with API key.
+- **query_california.py**: Imperva can remount/detach the Angular search DOM. The helper retries that condition twice and otherwise returns actionable challenge guidance. Search is capped at 500 and defaults to 25; detail/history/ingest are not yet supported by the new runtime.
 - **ingest_florida.py**: Fixed-width COBOL-era format (1440 chars/record). SFTP creds are public: `Public / PubAccess1845!`
 - **ingest_newyork.py**: Three separate Socrata datasets. Officer names are in the filings dataset, not the main entity dataset.
 - **query_newjersey.py**: Free portal exposes only 5 fields (name, ID, city, type, date). No officers/agents. Paid portal has more but requires account.
