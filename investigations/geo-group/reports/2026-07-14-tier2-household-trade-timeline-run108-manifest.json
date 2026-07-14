@@ -1,0 +1,210 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 111,
+  "analysis_run_id": 108,
+  "skill_name": "timeline-analysis",
+  "secondary_skill": "generate-hunches",
+  "assessed_by": "agent:timeline-analysis:run-108",
+  "external_queries": 0,
+  "highergov_used": false,
+  "scope": "Verified-only Tier 2 timeline and novelty review of household-reportable GEO trades, portfolio cadence, matched DHS-action controls, and the Delaney chronology under hypotheses #351/#352.",
+  "accepted_finding_ids": [
+    12447,
+    12514,
+    12515,
+    12516,
+    12531,
+    12532,
+    12542,
+    12543,
+    12948,
+    12957
+  ],
+  "excluded_findings": [
+    {
+      "id": 12517,
+      "status": "unverified",
+      "reason": "The database-wide ACH tool includes the prior row, but the run108 verified-only verdict excludes it."
+    }
+  ],
+  "source_dependency_clusters": [
+    {
+      "name": "OGE_disclosures_and_derivations",
+      "finding_ids": [12514, 12515, 12516, 12948],
+      "boundary": "Related propositions from the annual report and PTR series are not four independent confirmations of ownership, control, or motive."
+    },
+    {
+      "name": "USAspending_DHS_action_ledger_and_derivations",
+      "finding_ids": [12531, 12532, 12542, 12543, 12957],
+      "boundary": "Period totals, cadence, proximity, and matched controls derive from a shared action-record family and are not independent causal samples."
+    },
+    {
+      "name": "GEO_SEC_activation_statements",
+      "finding_ids": [12447],
+      "boundary": "Company announcements establish public timing and claimed activations, not source-selection, notice, access, or trade instructions."
+    }
+  ],
+  "input_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-household-trade-control-test.md",
+      "sha256": "c0d9d884b25c40f0f752c6f2a1324a735032689db2575461eb7b1b670cd0ad1a",
+      "bytes": 15475
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-evidence-matrix.csv",
+      "sha256": "90bf96a7153658d83c1dbc10780933049637f9d1a48b926182c13ba1305c5b11",
+      "bytes": 12810
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-source-manifest.json",
+      "sha256": "d76ca8466e767b921c4fc11292c13c9a8c650bdbc884bf875754d798ff7bd5dc",
+      "bytes": 15676
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-build-summary.json",
+      "sha256": "dc6e179b35a9973a510352fa7935d32036e4c3e0b876d1663634b4486027d42a",
+      "bytes": 3396
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-trade-to-action-ledger.csv",
+      "sha256": "5ace353f60b1b722c1f64218a04c730017ce8ef80e00a2fe73ce3576bbd6816e",
+      "bytes": 20330,
+      "data_rows": 15
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-matched-same-weekday-controls.csv",
+      "sha256": "fce8c4bc1758efc9d452e3804934f8cde0d4a20a1b00041ad6aa506979b83e8e",
+      "bytes": 12058,
+      "data_rows": 198
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-window-control-summary.csv",
+      "sha256": "4d8283d3e33c5e68d509983ca6ae9767ca81a5c1c33e7bd164ce1e5ba02acb8f",
+      "bytes": 2171,
+      "data_rows": 40
+    }
+  ],
+  "required_analysis_exports": [
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/timeline.json",
+      "sha256": "5d1513c30d79b93592b998155566ec80454286774f298426c9e9521c3024d3c1",
+      "bytes": 205730
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/findings.json",
+      "sha256": "799b1bd2b6a176224482400cab3db56e8ae1c7d35bce70abb699a468a354767f",
+      "bytes": 497458
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/events.json",
+      "sha256": "1c717c133e0f3198eae45c63f1bcebe3308509d294fcf76df364eae5bfcfedbe",
+      "bytes": 4392
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/entities.json",
+      "sha256": "9aaa941890de0803e58927b6c3404dc84a30f5efc01f7671ea97c1e2e96e3492",
+      "bytes": 97218
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/connections.json",
+      "sha256": "e35c3151d1eecc50927dc47b4b3b46f90a858503943fc96406498faa35de2504",
+      "bytes": 62393
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/existing-hypotheses.json",
+      "sha256": "fae9ad2f8a6196365333dfae467d379b7c005f140274c8767c1cf69b903a34b4",
+      "bytes": 241583
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-tier2-household-trade-timeline-run108/analysis-exports/existing-tags.json",
+      "sha256": "aacfcfd2d86f83fdb4f4ff9457c8bced6481263fffdf9bef0c9b37a3f9bfd2f5",
+      "bytes": 21930
+    }
+  ],
+  "generated_outputs": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108.md",
+      "sha256": "c05d89f2199da01ce9ebecb9b79f475af3cbcc676a11935ab3b21100bcc2c6fe",
+      "bytes": 12170
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108-evidence-matrix.csv",
+      "sha256": "48635e144855bbc495ecee5ac6f525fba898b7f7e7933280cfb059c9dead2bb9",
+      "bytes": 3885,
+      "data_rows": 10
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108-ach.json",
+      "sha256": "cef49ec492def32371d678094c44f5920ae4bdfc2e86f33d0743ab950cb9f057",
+      "bytes": 7900
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108-compete.json",
+      "sha256": "d466f2a2bd3631588a87b738996fbadf16d77744bea8f6f236ba3fa41069c8ac",
+      "bytes": 951
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108-novelty.json",
+      "sha256": "0e14e5db51fd43d117ba6d6c5ab53edfc63a68cd69c5567cef6aa8ca367529d5",
+      "bytes": 2498
+    }
+  ],
+  "database_writes": {
+    "analysis_run": {
+      "id": 108,
+      "skill_name": "timeline-analysis",
+      "status": "completed",
+      "findings_at_start": 582,
+      "connections_at_start": 71,
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    },
+    "hypothesis_evidence_matrix": {
+      "assessed_by": "agent:timeline-analysis:run-108",
+      "evaluation_ids": [795, 796, 797, 798],
+      "rows": 4,
+      "assessments": {
+        "neutral": 4,
+        "consistent": 0,
+        "inconsistent": 0,
+        "not_applicable": 0
+      }
+    },
+    "new_findings": [],
+    "new_hypotheses": [],
+    "new_leads": [],
+    "new_tags": [],
+    "new_connections": [],
+    "new_entities": []
+  },
+  "verdicts": {
+    "351_vs_352": "exact tie on inconsistency: 0.0000 versus 0.0000; neither is least inconsistent over the other",
+    "portfolio_cadence": "non-diagnostic for ownership, control, discretion, motive, access, or knowledge",
+    "matched_action_controls": "broad action proximity is non-discriminating; controls do not establish routine management",
+    "delaney_interval": "live records discriminator, not current diagnostic evidence",
+    "new_hunch_or_lead": "none; existing hypothesis pair, lead #59356, human actions #69/#50, and infra request #152 cover the bounded test"
+  },
+  "interpretive_boundaries": [
+    "No spouse, dependent, beneficial owner, adviser, manager, or decision-maker is identified or inferred.",
+    "Same-account or same-report cadence does not prove discretion, automation, routine motive, or absence of knowledge.",
+    "Matched same-weekday controls overlap and are descriptive, not independent causal samples.",
+    "The event universe uses a symmetric +30-day post-trade buffer; the earliest trade remains left-censored for windows beyond seven days.",
+    "Public solicitation and a signed date do not establish evaluation, selection, approval, awardee notice, access, or trade-instruction chronology.",
+    "Temporal proximity is not causation, and modifications, closeouts, deobligations, and zero-dollar actions are not base awards."
+  ],
+  "integrity_checks": {
+    "json_parse": "passed",
+    "csv_parse_and_row_count": "passed: 10 rows",
+    "current_run_evaluations": "passed: four neutral rows for findings #12948/#12957 against hypotheses #351/#352",
+    "accepted_finding_status": "passed: all ten accepted findings verified",
+    "excluded_finding_status": "passed: #12517 remains unverified",
+    "hypothesis_status_preserved": "passed: #351/#352 remain investigating",
+    "analysis_run_status": "passed: completed",
+    "sqlite_quick_check": "ok",
+    "foreign_key_violation_count": 64,
+    "foreign_key_note": "Unchanged project baseline; run #108 introduced no new foreign-key violation."
+  }
+}

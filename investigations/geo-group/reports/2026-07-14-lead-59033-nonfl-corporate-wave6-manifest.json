@@ -1,0 +1,1021 @@
+{
+  "artifact": "2026-07-14-lead-59033-nonfl-corporate-wave6-manifest.json",
+  "generated_date": "2026-07-14",
+  "lead_id": 59033,
+  "profile": "geo-group",
+  "scope": "Recipient-level 2024-2025 GEO corporate political contributions outside Florida. This bounded wave recovered Georgia rows, tested Arizona, and freezes every other jurisdiction as an explicit gap.",
+  "database_writes": false,
+  "company_denominators": [
+    {
+      "year": 2024,
+      "jurisdiction": "GA",
+      "corporate_candidates": 67500,
+      "corporate_committees": 10000,
+      "corporate_total": 77500,
+      "source_file": "investigations/geo-group/sources/2026-07-14-lead-59033/geo-2024-political-activity-and-lobbying-report.pdf",
+      "source_url": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+      "pdf_text_quote": "Georgia | Candidates | Corporate $67,500; Committees | Corporate $10,000; GA Total | Corporate $77,500",
+      "pdf_text_lines": [
+        173,
+        174,
+        175,
+        176
+      ]
+    },
+    {
+      "year": 2025,
+      "jurisdiction": "GA",
+      "corporate_candidates": 50800,
+      "corporate_committees": 14000,
+      "corporate_total": 64800,
+      "source_file": "investigations/geo-group/sources/2026-07-14-lead-59033/geo-2025-political-activity-and-lobbying-report.pdf",
+      "source_url": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+      "pdf_text_quote": "Georgia | Candidates | Corporate $50,800; Committees | Corporate $14,000; GA Total | Corporate $64,800",
+      "pdf_text_lines": [
+        173,
+        174,
+        175,
+        176
+      ]
+    }
+  ],
+  "primary_queries": [
+    {
+      "system": "Georgia PeachFile public campaign-finance API",
+      "url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "method": "POST",
+      "request_body": {
+        "pageNumber": 1,
+        "pageSize": 100,
+        "sortBy": "Transaction Date",
+        "sortType": "desc",
+        "transactionTypeCode": "TCON",
+        "filerName": "",
+        "sourceName": "GEO",
+        "transactionAmountMax": null,
+        "sourceTypeCode": "TBSN",
+        "committeeType": "",
+        "electionID": "",
+        "reportName": "",
+        "toDate": "12/31/2025",
+        "fromDate": "01/01/2024",
+        "byState": "",
+        "electionType": "",
+        "electionYear": ""
+      },
+      "response_items": 2483,
+      "pages_reviewed": 25,
+      "page_size": 100,
+      "included_geo_family_rows": 15,
+      "included_strict_corporate_rows": 13,
+      "included_pac_label_ambiguity_rows": 2,
+      "false_positive_rule": "Exact GEO Group corporate/PCA payer names and/or 4955 Technology Way; excluded Geotoll, Inc. and Georgia/George lexical matches.",
+      "archive_note": "All 2,483 returned items are durably preserved across 25 page-level JSON archives under investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/. The files preserve JSON values losslessly from the combined retrieval and reconstruct each page request; they are not claimed as byte-for-byte raw HTTP bodies. The 15 selected records remain embedded below."
+    },
+    {
+      "system": "Georgia Ethics Commission legacy contribution search",
+      "url": "https://media.ethics.ga.gov/search/Campaign/Campaign_ByContributionsearchresults.aspx?Contributor=THE+GEO+GROUP",
+      "method": "GET plus ASP.NET postbacks",
+      "query": "Contributor=THE GEO GROUP",
+      "pages_reviewed": 17,
+      "rows_reviewed": 164,
+      "rows_dated_2024_or_2025": 0,
+      "interpretation": "Legacy/current transition or coverage gap; not a substantive zero."
+    },
+    {
+      "system": "Arizona Secretary of State See the Money / Spotlight",
+      "urls": [
+        "https://seethemoney.az.gov/Reporting/AdvancedSearch/",
+        "https://seethemoney.az.gov/Reporting/GetNEWDetailedTableData/",
+        "https://seethemoney.az.gov/Reporting/GetData?search=The%20GEO%20Group"
+      ],
+      "business_ids": [
+        1963397,
+        885514,
+        883862
+      ],
+      "result": "Autocomplete resolved exact GEO corporate payer records, but advanced/entity transaction endpoints returned empty data even for known PAC rows. Four official recipient PDFs reviewed contained PAC rows only.",
+      "interpretation": "Blocked endpoint/coverage gap; not a substantive zero."
+    }
+  ],
+  "reconciliation": {
+    "GA": {
+      "2024": {
+        "company_report_corporate_total": 77500,
+        "strict_primary_rows": 1,
+        "strict_primary_sum": 5000,
+        "pac_label_ambiguity_rows": 0,
+        "pac_label_ambiguity_sum": 0,
+        "strict_coverage_difference": 72500
+      },
+      "2025": {
+        "company_report_corporate_total": 64800,
+        "strict_primary_rows": 12,
+        "strict_primary_sum": 26000,
+        "pac_label_ambiguity_rows": 2,
+        "pac_label_ambiguity_sum": 2500,
+        "inclusive_primary_sum": 28500,
+        "strict_coverage_difference": 38800,
+        "inclusive_coverage_difference": 36300
+      }
+    }
+  },
+  "jurisdiction_coverage": [
+    {
+      "jurisdiction": "GA",
+      "years": "2024-2025",
+      "status": "verified_partial_primary_recovery",
+      "company_report_corporate_totals": {
+        "2024": 77500,
+        "2025": 64800
+      },
+      "recovered_strict_corporate": {
+        "2024": 5000,
+        "2025": 26000
+      },
+      "recovered_pac_label_ambiguity": {
+        "2024": 0,
+        "2025": 2500
+      },
+      "strict_coverage_difference": {
+        "2024": 72500,
+        "2025": 38800
+      },
+      "inclusive_coverage_difference_if_ambiguous_business_class_rows_counted": {
+        "2024": 72500,
+        "2025": 36300
+      },
+      "boundary": "Current PeachFile business-source API exhaustively paged for broad GEO string; legacy official search exhaustively paged for THE GEO GROUP. This bounded recovery does not establish full portal coverage."
+    },
+    {
+      "jurisdiction": "AZ",
+      "years": "2024-2025",
+      "status": "portal_endpoint_blocked_no_corporate_rows_recovered",
+      "company_report_corporate_totals": {
+        "2024": 70000,
+        "2025": 111000
+      },
+      "recovered_strict_corporate": {
+        "2024": 0,
+        "2025": 0
+      },
+      "boundary": "Official Spotlight autocomplete exposed exact business IDs 1963397, 885514, and 883862, but AdvancedSearch and GetNEWDetailedTableData returned empty data even for known PAC records. Four official recipient PDFs reviewed contained PAC rows only. Zero recovered is not a substantive zero."
+    },
+    {
+      "jurisdiction": "CO",
+      "years": "2024",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 35000
+      }
+    },
+    {
+      "jurisdiction": "IL",
+      "years": "2024-2025",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 2200,
+        "2025": 6500
+      }
+    },
+    {
+      "jurisdiction": "IN",
+      "years": "2024-2025",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 45000,
+        "2025": 39000
+      }
+    },
+    {
+      "jurisdiction": "NY",
+      "years": "2024",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 12000
+      }
+    },
+    {
+      "jurisdiction": "OK",
+      "years": "2024-2025",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 75000,
+        "2025": 45000
+      }
+    },
+    {
+      "jurisdiction": "CA",
+      "years": "2025",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2025": 1000
+      }
+    },
+    {
+      "jurisdiction": "NJ",
+      "years": "2025",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2025": 2000
+      }
+    },
+    {
+      "jurisdiction": "PA",
+      "years": "2025",
+      "status": "company_report_corporate_zero_not_queried",
+      "company_report_corporate_totals": {
+        "2025": 0
+      },
+      "note": "GEO report shows a 2025 GEO PAC candidate contribution, not a corporate contribution; this wave did not query the state portal."
+    },
+    {
+      "jurisdiction": "TX",
+      "years": "2024",
+      "status": "company_report_corporate_zero_not_queried",
+      "company_report_corporate_totals": {
+        "2024": 0
+      },
+      "note": "GEO report shows a 2024 GEO PAC candidate contribution, not a corporate contribution; this wave did not query the state portal."
+    },
+    {
+      "jurisdiction": "VA",
+      "years": "2024",
+      "status": "not_queried_in_bounded_wave",
+      "company_report_corporate_totals": {
+        "2024": 10000
+      },
+      "note": "Company total supplied by lead owner's reconciliation; not independently re-extracted in this wave."
+    }
+  ],
+  "source_records": [
+    {
+      "source_record_id": "GA-PeachFile-transactionId-194160",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":194160,\"guid\":\"758076e9-dde6-4316-b666-ad7b9a60a744\",\"transactionDate\":\"12/30/2025\",\"sourceName\":\"The GEO Group, Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Alan Powell Campaign\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":2000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1063,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 194160,
+        "guid": "758076e9-dde6-4316-b666-ad7b9a60a744",
+        "transactionDate": "12/30/2025",
+        "sourceName": "The GEO Group, Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Alan Powell Campaign",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 2000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1063,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-193001",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":193001,\"guid\":\"0fe0d472-b6be-4273-ad69-d05b8bbc6264\",\"transactionDate\":\"12/29/2025\",\"sourceName\":\"The GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Friends of Jon Burns\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":3300.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1259,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"General-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 193001,
+        "guid": "0fe0d472-b6be-4273-ad69-d05b8bbc6264",
+        "transactionDate": "12/29/2025",
+        "sourceName": "The GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Friends of Jon Burns",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 3300.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1259,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "General-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-193014",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":193014,\"guid\":\"19437752-7978-49d2-8508-128db4cf7a3a\",\"transactionDate\":\"12/29/2025\",\"sourceName\":\"The GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Friends of Jon Burns\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1700.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1259,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 193014,
+        "guid": "19437752-7978-49d2-8508-128db4cf7a3a",
+        "transactionDate": "12/29/2025",
+        "sourceName": "The GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Friends of Jon Burns",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1700.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1259,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-211137",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":211137,\"guid\":\"f7c20279-871c-44cd-b8d9-12a369071f8f\",\"transactionDate\":\"12/23/2025\",\"sourceName\":\"The Geo Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Burt Jones for Georgia\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":4000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1291,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431-3367\"}",
+      "selected_source_record": {
+        "transactionId": 211137,
+        "guid": "f7c20279-871c-44cd-b8d9-12a369071f8f",
+        "transactionDate": "12/23/2025",
+        "sourceName": "The Geo Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Burt Jones for Georgia",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 4000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1291,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431-3367"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-73062",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":73062,\"guid\":\"6385bcc2-a120-46c1-b58b-16b5968b272f\",\"transactionDate\":\"12/02/2025\",\"sourceName\":\"The GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Rob Leverett for State House\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":587,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"General-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 73062,
+        "guid": "6385bcc2-a120-46c1-b58b-16b5968b272f",
+        "transactionDate": "12/02/2025",
+        "sourceName": "The GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Rob Leverett for State House",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 587,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "General-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-190311",
+      "payer_class": "ambiguous_pac_name_filed_as_business",
+      "aggregation_eligible": false,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":190311,\"guid\":\"99fefbf8-85bb-45da-89a4-f648cfc9a5af\",\"transactionDate\":\"12/01/2025\",\"sourceName\":\"The GEO Group, Inc PAC\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Crowe for Georgia\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1279,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 190311,
+        "guid": "99fefbf8-85bb-45da-89a4-f648cfc9a5af",
+        "transactionDate": "12/01/2025",
+        "sourceName": "The GEO Group, Inc PAC",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Crowe for Georgia",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1279,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-107829",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":107829,\"guid\":\"3cad202a-caa4-4207-800c-7603a75928b8\",\"transactionDate\":\"11/25/2025\",\"sourceName\":\"The Geo Group Inc.\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Committee to Elect Robertson for Georgia\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":902,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431-3367\"}",
+      "selected_source_record": {
+        "transactionId": 107829,
+        "guid": "3cad202a-caa4-4207-800c-7603a75928b8",
+        "transactionDate": "11/25/2025",
+        "sourceName": "The Geo Group Inc.",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Committee to Elect Robertson for Georgia",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 902,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431-3367"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-149742",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":149742,\"guid\":\"451f7faf-8f2c-4fca-bba8-99950656570b\",\"transactionDate\":\"11/06/2025\",\"sourceName\":\"The Geo Group Inc Political Contribution Account\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"John F. Kennedy for Georgia\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":2500.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1315,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431-3367\"}",
+      "selected_source_record": {
+        "transactionId": 149742,
+        "guid": "451f7faf-8f2c-4fca-bba8-99950656570b",
+        "transactionDate": "11/06/2025",
+        "sourceName": "The Geo Group Inc Political Contribution Account",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "John F. Kennedy for Georgia",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 2500.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1315,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431-3367"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-154223",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":154223,\"guid\":\"62e3f903-66c2-418e-b86e-6fb2b0375b5a\",\"transactionDate\":\"11/06/2025\",\"sourceName\":\"The GEO Group Inc \",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Larry Walker for State Senate\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":2500.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1107,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 154223,
+        "guid": "62e3f903-66c2-418e-b86e-6fb2b0375b5a",
+        "transactionDate": "11/06/2025",
+        "sourceName": "The GEO Group Inc ",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Larry Walker for State Senate",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 2500.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1107,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-39935",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":39935,\"guid\":\"562aaefd-4d21-46ab-8af1-b5ba4ccf398d\",\"transactionDate\":\"10/06/2025\",\"sourceName\":\"The  GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Friends for Doreen Carter\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":2000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":1253,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boco Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 39935,
+        "guid": "562aaefd-4d21-46ab-8af1-b5ba4ccf398d",
+        "transactionDate": "10/06/2025",
+        "sourceName": "The  GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Friends for Doreen Carter",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 2000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 1253,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boco Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-50076",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":50076,\"guid\":\"6fd11468-9bc8-4b26-b3e2-0305de36bfef\",\"transactionDate\":\"09/30/2025\",\"sourceName\":\"The GEO Group, Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Anavitarte, Jason\",\"filerTypeDesc\":\"Candidate\",\"transactionAmount\":2500.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":863,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":\"\",\"transactionSourceCity\":\" Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 50076,
+        "guid": "6fd11468-9bc8-4b26-b3e2-0305de36bfef",
+        "transactionDate": "09/30/2025",
+        "sourceName": "The GEO Group, Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Anavitarte, Jason",
+        "filerTypeDesc": "Candidate",
+        "transactionAmount": 2500.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 863,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": "",
+        "transactionSourceCity": " Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-78572",
+      "payer_class": "ambiguous_pac_name_filed_as_business",
+      "aggregation_eligible": false,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":78572,\"guid\":\"801a040f-d330-4da7-b703-8731771719c3\",\"transactionDate\":\"09/24/2025\",\"sourceName\":\"The GEO Group, Inc  PAC\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Friends of John Corbett\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1500.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":915,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 78572,
+        "guid": "801a040f-d330-4da7-b703-8731771719c3",
+        "transactionDate": "09/24/2025",
+        "sourceName": "The GEO Group, Inc  PAC",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Friends of John Corbett",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1500.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 915,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-91017",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":91017,\"guid\":\"8d08ac6d-d312-43cf-bc9f-211c026dc06e\",\"transactionDate\":\"09/09/2025\",\"sourceName\":\"The Geo Group\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Al Williams For State Representative\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":2000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":981,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 91017,
+        "guid": "8d08ac6d-d312-43cf-bc9f-211c026dc06e",
+        "transactionDate": "09/09/2025",
+        "sourceName": "The Geo Group",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Al Williams For State Representative",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 2000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 981,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-133308",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":133308,\"guid\":\"b34f4ad7-fe2a-41af-aa8a-a991421b4ae4\",\"transactionDate\":\"09/09/2025\",\"sourceName\":\"the GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Committee to Elect Harold Jones II\",\"filerTypeDesc\":\"Campaign Committee\",\"transactionAmount\":1500.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"2026 Jan 31 CCDR\",\"filerReportId\":980,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2026\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 133308,
+        "guid": "b34f4ad7-fe2a-41af-aa8a-a991421b4ae4",
+        "transactionDate": "09/09/2025",
+        "sourceName": "the GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Committee to Elect Harold Jones II",
+        "filerTypeDesc": "Campaign Committee",
+        "transactionAmount": 1500.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "2026 Jan 31 CCDR",
+        "filerReportId": 980,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2026",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    },
+    {
+      "source_record_id": "GA-PeachFile-transactionId-100615",
+      "payer_class": "geo_corporate_legal_entity",
+      "aggregation_eligible": true,
+      "source_url": "https://api-peachfile.ethics.ga.gov/api/PublicTransactionDetails/GetTransactionDetails",
+      "exact_quote": "{\"transactionId\":100615,\"guid\":\"f18bc8ae-3735-49c8-88ab-a6c8f88835ff\",\"transactionDate\":\"12/27/2024\",\"sourceName\":\"The GEO Group Inc\",\"transactionSource\":\"Corporation / Business / Unregistered Committee\",\"filerName\":\"Jones, William B.\",\"filerTypeDesc\":\"Candidate\",\"transactionAmount\":5000.0,\"transactionTypeCodeDescription\":\"Contribution\",\"transactionStatusCode\":\"TFIL\",\"reportName\":\"Campaign Contribution Disclosure Report - Non-Election Year - January 31st (January and June)\",\"filerReportId\":811,\"filerReportVersionId\":1,\"parentTguid\":null,\"electionTypeDescription\":\"Primary-2018\",\"transactionSourceAddressLine1\":\"4955 Technology Way\",\"transactionSourceAddressLine2\":null,\"transactionSourceCity\":\"Boca Raton\",\"transactionSourceStateCode\":\"FL\",\"transactionSourceZipcode\":\"33431\"}",
+      "selected_source_record": {
+        "transactionId": 100615,
+        "guid": "f18bc8ae-3735-49c8-88ab-a6c8f88835ff",
+        "transactionDate": "12/27/2024",
+        "sourceName": "The GEO Group Inc",
+        "transactionSource": "Corporation / Business / Unregistered Committee",
+        "filerName": "Jones, William B.",
+        "filerTypeDesc": "Candidate",
+        "transactionAmount": 5000.0,
+        "transactionTypeCodeDescription": "Contribution",
+        "transactionStatusCode": "TFIL",
+        "reportName": "Campaign Contribution Disclosure Report - Non-Election Year - January 31st (January and June)",
+        "filerReportId": 811,
+        "filerReportVersionId": 1,
+        "parentTguid": null,
+        "electionTypeDescription": "Primary-2018",
+        "transactionSourceAddressLine1": "4955 Technology Way",
+        "transactionSourceAddressLine2": null,
+        "transactionSourceCity": "Boca Raton",
+        "transactionSourceStateCode": "FL",
+        "transactionSourceZipcode": "33431"
+      }
+    }
+  ],
+  "source_archive": {
+    "directory": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/",
+    "archive_index_path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/archive-index.json",
+    "archive_index_bytes": 14598,
+    "archive_index_sha256": "e037c081715b8be0a549288d90581a27c457013821de5a651c8df2199d2be095",
+    "peachfile_page_files": 25,
+    "peachfile_total_items": 2483,
+    "georgia_legacy_html_pages": 17,
+    "json_preservation_note": "The 25 page-level files preserve every JSON value from the combined 2,483-item retrieval and reconstruct each request with the correct pageNumber. They are not represented as byte-for-byte raw HTTP bodies.",
+    "files": [
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-advanced-search-2025-the-geo-group.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-advanced-search-page.html",
+        "bytes": 55184,
+        "sha256": "3dd0aff6b4a54ed38ab5cf3c3c8f0a28a8c258d3e580b24f7beefd5e204ea6e1",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-autocomplete-getdata-the-geo-group.json",
+        "bytes": 1117,
+        "sha256": "af24bebfd2ea369a91813269fa17ca9b0f79d5035052c678f32f4f1aaddce96e",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-1963397-2024.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-1963397-2025.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-883862-2024.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-883862-2025.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-885514-2024.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-885514-2025.json",
+        "bytes": 60,
+        "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8",
+        "category": "az_diagnostic"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-01.html",
+        "bytes": 39791,
+        "sha256": "1aa3fa3bd4db103adcb63d75c1b1261336461d0133314f369430929796228e5a",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-02.html",
+        "bytes": 41560,
+        "sha256": "4f450aed3e8c28c687469f5c0b3d0c6d3a099ee23c2999fa267d0a4590a80829",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-03.html",
+        "bytes": 40531,
+        "sha256": "62dee55e35661b0796fa1ab0fec91518344c063cba804cb093e2ab46b07b73a4",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-04.html",
+        "bytes": 40503,
+        "sha256": "ed85a5b194124c36cf3828d85f0966ee6730d7061bfdb154468ce298f4b5c403",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-05.html",
+        "bytes": 40473,
+        "sha256": "77e506c08fc48ffb6b0cb4973b30471cc2e8e99387cefae1e799bff45e37ee36",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-06.html",
+        "bytes": 40988,
+        "sha256": "eaddc78199644dae56ee891c6d587663e301be663ad8a2cbfd9e83688a8d6530",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-07.html",
+        "bytes": 40372,
+        "sha256": "6487eef039e174e50165de3a34d1bcc88ac0e8ed01ff9624ef82eb8dc8f0cd46",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-08.html",
+        "bytes": 40575,
+        "sha256": "fc881aae2d03b14c5bf39d4206fdc4bce7e47d502ccaff3590242816ea8419d7",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-09.html",
+        "bytes": 42295,
+        "sha256": "3cb71d2998cfbdda44c4cff86748d8518a3bcf52621b8f31a123b00e5fec261c",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-10.html",
+        "bytes": 42087,
+        "sha256": "81a6bc460f11a79b2d19b9416d71f1a31e753095cfd84c17648f6a29c57e58f8",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-11.html",
+        "bytes": 42022,
+        "sha256": "700a7a77f30c09d8b9728e5532ea381b9c431664edd22269ca389e072e77c164",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-12.html",
+        "bytes": 42298,
+        "sha256": "51d341ddc515413cc00c8c2af2c18216cb7df08253c76b48a1b38d5773a598ef",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-13.html",
+        "bytes": 40254,
+        "sha256": "c501a3186262916e692d61b4c66883c11d76561fb0866c5cf47b45ede4da438e",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-14.html",
+        "bytes": 41980,
+        "sha256": "b1e60080532fcc017f0968fb662776e9aac7f7195709360cc3e42536eb7db346",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-15.html",
+        "bytes": 41781,
+        "sha256": "da4ec64821c5557fd62bd1ab2e6df9feb4139f396a6b112e66279620d00397f2",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-16.html",
+        "bytes": 42318,
+        "sha256": "a6e73a98451b2a69fa9a95a42b3f6df3cd0cc9865728cf856c7430d946a0f9f9",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-17.html",
+        "bytes": 25426,
+        "sha256": "a133fbab90ac0823d4a937c95e0f049bdfd2161c954eee2dc2f373711c8d5d60",
+        "category": "ga_legacy_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-parsed-rows.json",
+        "bytes": 112124,
+        "sha256": "d2399fc526dded1339024354bb8661c32e72bdbb220872556f00529181439c5e",
+        "category": "ga_legacy_derived_rows"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-01.json",
+        "bytes": 177439,
+        "sha256": "9aa5b2d782e13f5d1f65790ecc45a27b1ea6745d4dcbd9a903570b9d2f9d201e",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-02.json",
+        "bytes": 176659,
+        "sha256": "7d9bcb8908832b68d8dec21cd0db32c927a706e26b97b62551240d4b3a5cf722",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-03.json",
+        "bytes": 176959,
+        "sha256": "2bf997f8f358c80b0263855e64e49df96b2db542fb387af6f3e0e0d27af8d157",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-04.json",
+        "bytes": 176805,
+        "sha256": "455fb2f0b7c25efdaa3311d438d29529b75c056944b84e5cd62d21b1417e4912",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-05.json",
+        "bytes": 177147,
+        "sha256": "2d4279378b55240c10aac11bfc4d543900da9a3b383f848cf67394e5a6d29424",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-06.json",
+        "bytes": 176464,
+        "sha256": "898e4f2f3fe64bd1e62b4c8ff84422acf05f9346a4227e95ab68ef6751cea7cb",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-07.json",
+        "bytes": 177109,
+        "sha256": "6dccf94f491a62afebc0e9ec53b6c9770bd39f7e2e82811a4b259839cf6e8dd8",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-08.json",
+        "bytes": 176687,
+        "sha256": "3f1436e08f2bbf662616b8df4675d99a5be4215e1e1f6410fc7a305f2051793e",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-09.json",
+        "bytes": 175679,
+        "sha256": "c2e0149b6d1390d270c9cd3fc3f204dc80e9e14ff8fc40115c5f05437c79feaa",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-10.json",
+        "bytes": 177743,
+        "sha256": "a2016339583d3441ba1b20bc80ce7c8915b7127636ab212e22601090c9b42b35",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-11.json",
+        "bytes": 178040,
+        "sha256": "d43441983d66f665116e1ab7541e6ebf72d0b5d2337cf77fb6e5b95b31e92c6b",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-12.json",
+        "bytes": 177807,
+        "sha256": "328df9b9143b59b5120501ad3ee25c92d4bc0d233ff6915d3fee647a55b0bcb0",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-13.json",
+        "bytes": 177959,
+        "sha256": "848afdee98d869542de727e6c422383050be0d48571a644dacd0fae54d839633",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-14.json",
+        "bytes": 177306,
+        "sha256": "6e223b2f1aee3f2ae4ca363d50b4ec79d6129dc63fd7a99e202834e1656c63d2",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-15.json",
+        "bytes": 178664,
+        "sha256": "9ba0d1eec3be902bc7cc7ffc87f3d37d910a0307a765378a0f0866de39efe612",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-16.json",
+        "bytes": 183256,
+        "sha256": "74c22068bedcc09f69e54e655f36c66b1437b55013ed0818ba24dd593c8ba937",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-17.json",
+        "bytes": 183774,
+        "sha256": "157e92882266b90887a472bf186019bbb5514581c227cd862c1032cf72c28256",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-18.json",
+        "bytes": 182409,
+        "sha256": "35a4ebe3c7308d902fd848caa1e14fe8344d7702ab1681c0be38a78022f4f38f",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-19.json",
+        "bytes": 183846,
+        "sha256": "a05a5cb91caeb0a50ff401ef41433a94795832c800cf6942d65017efa52f0c79",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-20.json",
+        "bytes": 185976,
+        "sha256": "c1547a64f403ca3a9dd6cbe702d121a5ba48253b16c660e9e618460fcb190104",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-21.json",
+        "bytes": 185416,
+        "sha256": "78eb58edf924c4d58e97e32220e1b5bc314d8b81ef8133d84c35d0c2c7aaefb2",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-22.json",
+        "bytes": 184926,
+        "sha256": "c6c82512c75f53fe9d7608eedfcc7c384ca0b6a2965681fc7ffce83bd45d5e13",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-23.json",
+        "bytes": 184632,
+        "sha256": "8c5390f2b206f2127cae3e22f42a8acda666f5dddc6bfc441680acb3868406c7",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-24.json",
+        "bytes": 183058,
+        "sha256": "441b5526ada03802ee4814b410428edd59103c91de43d10431e1c13a4576602f",
+        "category": "ga_peachfile_page"
+      },
+      {
+        "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-25.json",
+        "bytes": 151620,
+        "sha256": "a01bb5b20f44608d6f09f543082a33914562480c9512ca3de3328f4bdaf6c405",
+        "category": "ga_peachfile_page"
+      }
+    ]
+  },
+  "methodological_warnings": [
+    "Company reports are unaudited aggregate denominators, not recipient-level transaction records.",
+    "Company-minus-primary amounts are coverage differences, not accounting errors or proof of omitted reporting.",
+    "No party or office was inferred; Georgia API did not source-report those fields.",
+    "PeachFile filerTypeDesc is preserved but may not map to GEO report candidate/committee categories.",
+    "Two PAC-labelled payer rows were returned under the business/unregistered-committee source type and remain excluded from strict corporate aggregation.",
+    "Distinct transaction IDs and GUIDs were not collapsed, including the two Friends of Jon Burns transactions with different election types.",
+    "Not queried means unknown; portal failure means blocked. Neither is a zero."
+  ]
+}

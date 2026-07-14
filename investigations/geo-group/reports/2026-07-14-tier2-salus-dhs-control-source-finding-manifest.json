@@ -1,0 +1,104 @@
+{
+  "manifest_version": "1.0",
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "scope": "Verified-input Tier 2 systemic and hunch analysis of Salus as a non-GEO DHS procurement control",
+  "analysis_runs": {
+    "systemic_analysis": {"id": 111, "status": "completed"},
+    "generate_hunches": {"id": 112, "status": "completed"}
+  },
+  "external_queries": 0,
+  "highergov_used": false,
+  "finding_gate": {
+    "accepted_finding_ids": [12967, 12968, 12969, 12970, 12971, 12972, 12973, 12974, 12975],
+    "accepted_count": 9,
+    "accepted_verified_count": 9,
+    "accepted_retracted_count": 0,
+    "finding_evidence_rows": 30,
+    "finding_evidence_rows_with_nonempty_source_quote": 30,
+    "excluded_retracted_finding_ids": [12949, 12950, 12951, 12952, 12953, 12958, 12959, 12960, 12961, 12965, 12966],
+    "excluded_retracted_count": 11,
+    "prior_synthesis_finding_id": 12939,
+    "prior_synthesis_verified": true,
+    "prior_synthesis_action": "No correction, supersession, or new finding. The replacement set sharpens provenance and analytic boundaries without changing the bounded verdict."
+  },
+  "semantic_boundaries": [
+    "Salus is a non-GEO control; no Salus finding is scored against GEO-specific competition groups 335/336 or 337/338.",
+    "A non-GEO policy-responsive procurement path is an existence proof, not a department-wide base rate or explanation of GEO selection.",
+    "The OCI waiver documents agency risk treatment; it proves neither an actual conflict nor the absence of one.",
+    "The court observation concerning bad faith was administrative-record bounded and is not an exoneration.",
+    "GAO outcome-predictive ADR followed by withdrawal is not a GAO merits decision.",
+    "Article III standing, statutory standing, interested-party status, prejudice, and alternative merits discussion remain distinct.",
+    "The $1,409,688 evaluated scenario price is not the $915 million maximum, obligation, outlay, payment, profit, or revenue.",
+    "Finding 12975 is a bounded public/redacted no-bridge result, not proof of universal absence.",
+    "Congressional allegations and Salus responses are party or oversight positions, not adjudicated facts.",
+    "Zero structured subaward rows do not prove no subcontractors, CTAs, vendors, affiliates, or other partners."
+  ],
+  "source_archive_verification": {
+    "source_manifest_path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-source-manifest.json",
+    "source_manifest_sha256": "90d7a63d9b72f0c369d2f49ee3c2f430c5a366427289b8e41d9080b53289429e",
+    "source_root": "investigations/geo-group/sources/2026-07-14-lead-62736",
+    "source_files_checked": 93,
+    "source_hash_mismatches": 0,
+    "generated_input_artifacts_present": 3
+  },
+  "input_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-procurement-case.md",
+      "sha256": "df4b7085737862fae92c2714155b0827f9344cea59d7d374f2db8e773a62999b"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-evidence-matrix.csv",
+      "sha256": "a3f00521be7d56612bc43d036cadbc31fe3519bb69aa73ba27e3b91955870a51"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-systemic-analysis.md",
+      "sha256": "fcf19331e33549d8db61ea4e660f1d98a36b05cde90e06bfc5e519b4124ff344"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-ach.json",
+      "sha256": "589ff431f97f764360b626d5ccecfedf893309a41d858bba75381d171100913b"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-evidence-matrix.csv",
+      "sha256": "9988ae3fa74e7e1e7000648281085099d39cc00beb141c46da2543901b799271"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-source-manifest.json",
+      "sha256": "b513144c3669c30a3ccb68a87eb17bc5b1c781563518a2dcae001b2f2e5ffffb"
+    }
+  ],
+  "output_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-salus-dhs-control-systemic-analysis.md",
+      "sha256": "6defc91f1411c15adc04ea9a14d2c5c1c671c329387a8175cd548ff6ec1937e8"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-salus-dhs-control-evidence-matrix.csv",
+      "sha256": "e9e796016e137d3bbed39efc796915feac99f2d090ff0e27ce36bb6287486ccc"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-salus-dhs-control-ach.json",
+      "sha256": "7053e558f4e77e5d055400028bc94f73eec9d5ce7dbd0252ade96b7757f3702d"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-salus-dhs-control-novelty-decision.json",
+      "sha256": "86fdb977626d14eb672170cb4c2163b92cf47157f7d5c5ccbdb594d9bbe43423"
+    }
+  ],
+  "database_integrity": {
+    "quick_check": "ok",
+    "foreign_key_violation_count": 64,
+    "note": "Established pre-existing baseline and unchanged after completing runs 111 and 112; this analysis created no finding, hypothesis, lead, tag, connection, or assessment rows."
+  },
+  "database_write_decision": {
+    "findings_created": 0,
+    "hypotheses_created": 0,
+    "leads_created": 0,
+    "tags_created": 0,
+    "connections_created": 0,
+    "hypothesis_assessments_created": 0,
+    "reason": "No candidate passed the independent-context, novelty, applicability, and non-duplication gates. Existing human action 70 is the appropriate research path."
+  },
+  "self_hash_note": "This manifest intentionally does not contain its own hash."
+}

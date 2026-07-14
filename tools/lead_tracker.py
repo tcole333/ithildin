@@ -20,6 +20,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sqlite3
 import sys
 from datetime import datetime, timedelta, timezone
@@ -73,6 +74,216 @@ def _utcnow() -> datetime:
 
 
 _schema_initialized = False
+
+
+def _quote_sqlite_identifier(identifier):
+    """Quote an SQLite identifier that came from sqlite_master."""
+    return '"' + identifier.replace('"', '""') + '"'
+
+
+def _stale_leads_fk_tables(db):
+    """Return every user table whose FK metadata targets leads_old_backup."""
+    tables = []
+    rows = db.execute(
+        "SELECT name FROM sqlite_master "
+        "WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+    ).fetchall()
+    for row in rows:
+        table = row[0]
+        quoted_table = _quote_sqlite_identifier(table)
+        if any(
+            fk[2] == "leads_old_backup"
+            for fk in db.execute(f"PRAGMA foreign_key_list({quoted_table})")
+        ):
+            tables.append(table)
+    return tables
+
+
+def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
+    """Build CREATE TABLE SQL for a replacement without editing sqlite_master."""
+    table_identifier = re.escape(table)
+    table_pattern = re.compile(
+        rf"^\s*CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?"
+        rf'(?:"{table_identifier}"|`{table_identifier}`|\[{table_identifier}\]|{table_identifier})',
+        re.IGNORECASE,
+    )
+    rewritten, table_count = table_pattern.subn(
+        f"CREATE TABLE {_quote_sqlite_identifier(replacement_table)}",
+        table_sql,
+        count=1,
+    )
+    if table_count != 1:
+        raise sqlite3.OperationalError(
+            f"Could not rewrite CREATE TABLE statement for {table!r}"
+        )
+
+    stale_target = re.compile(
+        r'(\bREFERENCES\s+)'
+        r'(?:"leads_old_backup"|`leads_old_backup`|\[leads_old_backup\]|leads_old_backup)'
+        r'(?=\s*(?:\(|ON\b|MATCH\b|,|\)|$))',
+        re.IGNORECASE,
+    )
+    rewritten, fk_count = stale_target.subn(r'\1"leads"', rewritten)
+    if fk_count < 1:
+        raise sqlite3.OperationalError(
+            f"No stale leads foreign key found in CREATE TABLE statement for {table!r}"
+        )
+    return rewritten
+
+
+def _repair_stale_leads_foreign_keys(db):
+    """Atomically rebuild tables whose lead FKs target a removed backup table.
+
+    A historical leads-table migration caused SQLite to rewrite dependent foreign
+    keys to ``leads_old_backup``. Rebuilding each affected table keeps its current
+    columns and constraints, copies every row, restores user-created indexes and
+    triggers, and preserves the highest AUTOINCREMENT sequence value. The repair
+    is discovered from PRAGMA metadata and is therefore idempotent and complete
+    for every affected table, rather than a hard-coded list of known dependents.
+    """
+    affected_tables = _stale_leads_fk_tables(db)
+    if not affected_tables:
+        return []
+
+    # Changing foreign_keys is only effective outside a transaction. A single
+    # IMMEDIATE transaction makes the multi-table rebuild all-or-nothing.
+    db.commit()
+    foreign_keys_enabled = bool(db.execute("PRAGMA foreign_keys").fetchone()[0])
+    if foreign_keys_enabled:
+        db.execute("PRAGMA foreign_keys=OFF")
+
+    rebuilt = []
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        for table in affected_tables:
+            table_row = db.execute(
+                "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?",
+                (table,),
+            ).fetchone()
+            if not table_row or not table_row[0]:
+                raise sqlite3.OperationalError(f"Missing CREATE TABLE SQL for {table!r}")
+
+            dependent_objects = db.execute(
+                "SELECT type, name, sql FROM sqlite_master "
+                "WHERE tbl_name = ? AND type IN ('index', 'trigger') "
+                "AND sql IS NOT NULL ORDER BY type, name",
+                (table,),
+            ).fetchall()
+            old_columns = [
+                tuple(row)
+                for row in db.execute(
+                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(table)})"
+                ).fetchall()
+            ]
+            insert_columns = [row[1] for row in old_columns if row[6] == 0]
+            old_row_count = db.execute(
+                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(table)}"
+            ).fetchone()[0]
+
+            try:
+                old_sequences = [
+                    row[0]
+                    for row in db.execute(
+                        "SELECT seq FROM sqlite_sequence WHERE name = ?", (table,)
+                    ).fetchall()
+                ]
+            except sqlite3.OperationalError:
+                old_sequences = []
+
+            replacement = f"__fk_rebuild_{table}"
+            if db.execute(
+                "SELECT 1 FROM sqlite_master WHERE name = ?", (replacement,)
+            ).fetchone():
+                raise sqlite3.OperationalError(
+                    f"Refusing to overwrite existing migration object {replacement!r}"
+                )
+
+            db.execute(
+                _rewrite_table_sql_for_leads_fk(table, replacement, table_row[0])
+            )
+            quoted_columns = ", ".join(
+                _quote_sqlite_identifier(column) for column in insert_columns
+            )
+            db.execute(
+                f"INSERT INTO {_quote_sqlite_identifier(replacement)} ({quoted_columns}) "
+                f"SELECT {quoted_columns} FROM {_quote_sqlite_identifier(table)}"
+            )
+            copied_row_count = db.execute(
+                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(replacement)}"
+            ).fetchone()[0]
+            if copied_row_count != old_row_count:
+                raise sqlite3.IntegrityError(
+                    f"Row-count mismatch rebuilding {table}: "
+                    f"expected {old_row_count}, copied {copied_row_count}"
+                )
+
+            new_columns = [
+                tuple(row)
+                for row in db.execute(
+                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(replacement)})"
+                ).fetchall()
+            ]
+            if old_columns != new_columns:
+                raise sqlite3.IntegrityError(
+                    f"Column metadata changed while rebuilding {table}"
+                )
+
+            db.execute(f"DROP TABLE {_quote_sqlite_identifier(table)}")
+            db.execute(
+                f"ALTER TABLE {_quote_sqlite_identifier(replacement)} "
+                f"RENAME TO {_quote_sqlite_identifier(table)}"
+            )
+            for _object_type, _object_name, object_sql in dependent_objects:
+                db.execute(object_sql)
+
+            # CREATE/COPY/RENAME can create a new sqlite_sequence row while old
+            # migrations may have left duplicates. Preserve the highest value
+            # and normalize it to one row so IDs cannot move backwards.
+            try:
+                current_sequences = [
+                    row[0]
+                    for row in db.execute(
+                        "SELECT seq FROM sqlite_sequence WHERE name IN (?, ?)",
+                        (table, replacement),
+                    ).fetchall()
+                ]
+                sequences = old_sequences + current_sequences
+                db.execute(
+                    "DELETE FROM sqlite_sequence WHERE name IN (?, ?)",
+                    (table, replacement),
+                )
+                if sequences:
+                    db.execute(
+                        "INSERT INTO sqlite_sequence(name, seq) VALUES (?, ?)",
+                        (table, max(sequences)),
+                    )
+            except sqlite3.OperationalError:
+                pass  # No AUTOINCREMENT tables have created sqlite_sequence yet.
+
+            if any(
+                fk[2] == "leads_old_backup"
+                for fk in db.execute(
+                    f"PRAGMA foreign_key_list({_quote_sqlite_identifier(table)})"
+                )
+            ):
+                raise sqlite3.IntegrityError(
+                    f"Stale leads foreign key remained after rebuilding {table}"
+                )
+            rebuilt.append(table)
+
+        if _stale_leads_fk_tables(db):
+            raise sqlite3.IntegrityError(
+                "Stale leads_old_backup foreign keys remain after schema repair"
+            )
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        if foreign_keys_enabled:
+            db.execute("PRAGMA foreign_keys=ON")
+
+    return rebuilt
 
 
 def get_db():
@@ -856,26 +1067,6 @@ def _ensure_schema(db):
     except Exception:
         pass
 
-    # Fix stale FK: lead_id REFERENCES leads_old_backup -> leads
-    try:
-        import re as _re
-        schema = db.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name='findings'"
-        ).fetchone()
-        if schema and "leads_old_backup" in (schema[0] or ""):
-            new_sql = schema[0].replace('"leads_old_backup"', '"leads"')
-            if new_sql != schema[0]:
-                db.execute("PRAGMA writable_schema=ON")
-                db.execute(
-                    "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='findings'",
-                    (new_sql,)
-                )
-                db.execute("PRAGMA writable_schema=OFF")
-                db.commit()
-                reload_schema(db)
-    except Exception:
-        pass
-
     # Thread and profile indexes
     for idx_sql in [
         "CREATE INDEX IF NOT EXISTS idx_leads_thread ON leads(thread_id)",
@@ -1298,56 +1489,10 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass
 
-    # ── Fix lead_* foreign keys pointing to leads_old_backup ──
-    def _fk_points_to_backup(table):
-        try:
-            rows = db.execute(f"PRAGMA foreign_key_list({table})").fetchall()
-        except sqlite3.OperationalError:
-            return False
-        return any(r[2] == "leads_old_backup" for r in rows)
-
-    if _fk_points_to_backup("lead_notes"):
-        db.executescript("""
-            CREATE TABLE lead_notes_new (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                note TEXT NOT NULL,
-                session_id INTEGER REFERENCES sessions(id),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-            INSERT INTO lead_notes_new (id, lead_id, note, session_id, created_at)
-                SELECT id, lead_id, note, session_id, created_at FROM lead_notes;
-            DROP TABLE lead_notes;
-            ALTER TABLE lead_notes_new RENAME TO lead_notes;
-        """)
-
-    if _fk_points_to_backup("lead_evidence"):
-        db.executescript("""
-            CREATE TABLE lead_evidence_new (
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                evidence_type TEXT NOT NULL,
-                evidence_ref TEXT NOT NULL,
-                PRIMARY KEY (lead_id, evidence_ref)
-            );
-            INSERT INTO lead_evidence_new (lead_id, evidence_type, evidence_ref)
-                SELECT lead_id, evidence_type, evidence_ref FROM lead_evidence;
-            DROP TABLE lead_evidence;
-            ALTER TABLE lead_evidence_new RENAME TO lead_evidence;
-        """)
-
-    if _fk_points_to_backup("lead_relations"):
-        db.executescript("""
-            CREATE TABLE lead_relations_new (
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                related_lead_id INTEGER NOT NULL REFERENCES leads(id),
-                relation_type TEXT DEFAULT 'related',
-                PRIMARY KEY (lead_id, related_lead_id)
-            );
-            INSERT INTO lead_relations_new (lead_id, related_lead_id, relation_type)
-                SELECT lead_id, related_lead_id, relation_type FROM lead_relations;
-            DROP TABLE lead_relations;
-            ALTER TABLE lead_relations_new RENAME TO lead_relations;
-        """)
+    # Repair every dependent table that a historical leads migration rewrote to
+    # target leads_old_backup. This uses transactional table rebuilds instead of
+    # editing sqlite_master via PRAGMA writable_schema.
+    _repair_stale_leads_foreign_keys(db)
 
     db.commit()
     return db
@@ -1397,6 +1542,21 @@ def add_lead(title, description=None, category=None, priority="medium",
     db.commit()
     db.close()
     return lead_id
+
+
+def set_lead_depth_tier(lead_id, depth_tier):
+    """Keep the scheduler column in sync with the operational tier tag."""
+    if depth_tier not in {"scan", "standard", "deep_dive"}:
+        raise ValueError(f"Invalid depth tier: {depth_tier}")
+    db = get_db()
+    cursor = db.execute(
+        "UPDATE leads SET depth_tier = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (depth_tier, lead_id),
+    )
+    db.commit()
+    updated = cursor.rowcount > 0
+    db.close()
+    return updated
 
 
 def list_leads(status=None, priority=None, category=None, target=None, limit=50,
@@ -2065,12 +2225,20 @@ def main():
     # claim
     claim_p = subparsers.add_parser("claim", help="Claim a lead")
     claim_p.add_argument("id", type=int)
+    claim_p.add_argument(
+        "--agent", dest="claimed_by",
+        help="Agent or worker identifier recorded as the claimant",
+    )
 
     # claim-next (atomic select + claim)
     claim_next_p = subparsers.add_parser("claim-next", help="Atomically select and claim the next open lead")
     claim_next_p.add_argument("--category", choices=VALID_CATEGORIES)
     claim_next_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     claim_next_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Filter by depth tier")
+    claim_next_p.add_argument(
+        "--agent", dest="claimed_by",
+        help="Agent or worker identifier recorded as the claimant",
+    )
     add_output_args(claim_next_p)
 
     # note
@@ -2205,7 +2373,7 @@ def main():
             print(format_lead(lead, verbose=True))
 
     elif args.command == "claim":
-        if claim_lead(args.id):
+        if claim_lead(args.id, claimed_by=args.claimed_by):
             print(f"Claimed lead #{args.id}")
         else:
             print(f"Could not claim lead #{args.id} (may not be open)")
@@ -2215,6 +2383,7 @@ def main():
             category=getattr(args, "category", None),
             thread_id=getattr(args, "thread_id", None),
             depth_tier=getattr(args, "depth_tier", None),
+            claimed_by=getattr(args, "claimed_by", None),
         )
         if lead:
             lead_full = get_lead(lead["id"])
@@ -2423,6 +2592,9 @@ def main():
                     print()
 
     elif args.command == "tier":
+        if not set_lead_depth_tier(args.id, args.depth):
+            print(f"ERROR: Lead #{args.id} does not exist", file=sys.stderr)
+            raise SystemExit(2)
         try:
             from tools.tag_manager import add_tag, remove_tag
         except ImportError:

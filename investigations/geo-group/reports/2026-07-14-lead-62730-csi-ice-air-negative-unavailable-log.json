@@ -1,0 +1,85 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62730,
+  "as_of": "2026-07-14",
+  "negative_results": [
+    {
+      "question": "Which exact aircraft tails are currently assigned to CSI's ICE Air BPA/call?",
+      "result": "zero confirmed",
+      "reason": "BTS inventories establish carrier fleets, not contract assignments; public Classic Air filing redacts the replacement aircraft package; no ICE flight-leg/preflight record with N-number was located."
+    },
+    {
+      "question": "Does a primary federal record directly name GlobalX on BPA 70CDCR24A00000001 or call 70CDCR26FC0000001?",
+      "result": "not located",
+      "reason": "GlobalX directly confirms a CSI/U.S.-government contract through end-2026, while ICE identity is established only through composite congressional, state-government, and separately established CSI-prime evidence."
+    },
+    {
+      "question": "Does a primary record connect Eastern Air Express to CSI?",
+      "result": "not located",
+      "reason": "Massachusetts officially identifies Eastern as providing ICE flights and DOT establishes charter authority, but the reviewed primary files contain no unredacted CSI teaming/subcontract document."
+    },
+    {
+      "question": "Is Avelo a current ICE Air carrier?",
+      "result": "no",
+      "reason": "Avelo said its DHS-charter participation would end with the Mesa base closure on 2026-01-27."
+    },
+    {
+      "question": "Are Air Wisconsin or CSI's 13 acquired CRJ200s assigned to ICE Air?",
+      "result": "not established",
+      "reason": "SEC filings prove acquisition and closing only; no task order, teaming document, or operational record assigns the carrier or aircraft to ICE."
+    },
+    {
+      "question": "Can GEO Transport be classified as aircraft or flight-crew operator?",
+      "result": "no supporting evidence",
+      "reason": "The established role is security/air-operations support; no DOT/FAA carrier authority, aircraft inventory, or crew-employer evidence was located for GTI in this chain."
+    },
+    {
+      "question": "Did the public Classic Air protest disclose replacement carrier names, tails, or full teaming package?",
+      "result": "no",
+      "reason": "ECF 37 confirms that new commitments, airworthiness certificates, OpSpecs, and teaming agreements were submitted, but the identifying content is redacted."
+    }
+  ],
+  "unavailable_or_access_limited": [
+    {
+      "record": "Classic Air administrative-record Tabs 91, 92b, 94, and 101",
+      "status": "not publicly available in unredacted form",
+      "importance": "Likely decisive for replacement carrier and aircraft roster"
+    },
+    {
+      "record": "CSI response to the 2025-05-28 House Homeland Security letter",
+      "status": "not located",
+      "importance": "Letter requested subcontract agreements and monthly flights by subcontractor"
+    },
+    {
+      "record": "ICE FY2026 flight-leg and preflight aircraft-registration records for call 70CDCR26FC0000001",
+      "status": "not located",
+      "importance": "Would directly resolve operating carrier, N-number, and mission dates"
+    },
+    {
+      "record": "DOT order PDF attachment downloads from downloads.regulations.gov",
+      "status": "HTTP 403 during local retrieval",
+      "importance": "Regulations.gov API metadata and indexed official text were available; no ICE assignment would be proved by the certificates in any event"
+    },
+    {
+      "record": "Massachusetts governor release local archive",
+      "status": "HTTP 403 during direct curl retrieval",
+      "importance": "Official page and indexed text remained publicly searchable; URL is preserved in the source manifest"
+    }
+  ],
+  "next_action": {
+    "human_action_id": 71,
+    "type": "identity-neutral records request",
+    "related_lead_id": null,
+    "requested_fields": [
+      "operating carrier legal name and certificate",
+      "aircraft registration number/N-number",
+      "aircraft model",
+      "mission date and type",
+      "segregable Round-4 teaming and aircraft-package records"
+    ],
+    "excluded_fields": [
+      "individual crew names",
+      "personal identifiers"
+    ]
+  }
+}

@@ -224,6 +224,21 @@ class TestSchedulerFields:
         ).fetchone()[0]
         assert scan_row == 1  # only one standard lead
 
+    def test_set_lead_depth_tier_updates_scheduler_column(self, fresh_db):
+        db, _ = fresh_db
+        cursor = db.execute(
+            "INSERT INTO leads (title, status, priority) VALUES ('tier me', 'open', 'medium')"
+        )
+        lead_id = cursor.lastrowid
+        db.commit()
+
+        from tools.lead_tracker import set_lead_depth_tier
+
+        assert set_lead_depth_tier(lead_id, "standard") is True
+        assert db.execute(
+            "SELECT depth_tier FROM leads WHERE id = ?", (lead_id,)
+        ).fetchone()["depth_tier"] == "standard"
+
 
 # ── Dispatcher Routing ───────────────────────────────────────
 

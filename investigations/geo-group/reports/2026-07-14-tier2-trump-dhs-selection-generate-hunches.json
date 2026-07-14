@@ -1,0 +1,90 @@
+{
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "analysis_run_id": 103,
+  "scan_context": {
+    "findings_at_export": 541,
+    "entities_at_export": 270,
+    "connections_at_export": 71,
+    "existing_hypotheses_checked": 357,
+    "existing_tag_values_checked": 221,
+    "late_inputs_reviewed_after_export": [12926, 12928, 12929, 12930, 12934, 12935, 12936, 12937, 12938]
+  },
+  "required_gate": {
+    "independent_contexts": "three or more genuinely independent contexts",
+    "mechanism": "a distinct mechanism not already captured",
+    "prediction": "a falsifiable prediction",
+    "research_loop": "a concrete Layer-1 lead"
+  },
+  "result": {
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_tags": 0,
+    "decision": "No candidate passed every gate."
+  },
+  "candidate_decisions": [
+    {
+      "candidate": "Political access materially shaped GEO expansion or selection",
+      "independent_contexts": true,
+      "contexts": ["political money", "lobbying and governance", "former officials and consulting", "household holdings", "state recipients", "oversight chronology"],
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "Agency or award records would identify a relationship-linked request, specification, evaluation, approval, price decision, or intervention tied to a named GEO outcome.",
+      "novel": false,
+      "decision": "filtered",
+      "reason": "No observed relationship-to-decision bridge; the personnel/lobbying channel already overlaps hypotheses 337/338."
+    },
+    {
+      "candidate": "P00005 reinstatement was produced by protest settlement or political intervention",
+      "independent_contexts": false,
+      "contexts": ["ICE approval records", "Court of Federal Claims filings", "USAspending transaction record"],
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "Signed P00005, QAD-25-0230, or a settlement instrument would expressly link reinstatement to an exchange, approver rationale, or outside intervention.",
+      "novel": false,
+      "decision": "filtered",
+      "reason": "Three source families describe one procurement sequence; no political actor or causal link is observed. Existing human action 63 already seeks the decisive records."
+    },
+    {
+      "candidate": "State political payments formed a coordinated immigration-policy or procurement intervention channel",
+      "independent_contexts": true,
+      "contexts": ["Florida recipient records", "Georgia recipient records", "FEC payer filings", "company reports", "official office and policy records"],
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "Contribution requests, meetings, communications, or official decision records would connect a payer and recipient to a specific policy or procurement act.",
+      "novel": false,
+      "decision": "filtered",
+      "reason": "The accepted findings establish payer, recipient, reconciliation, and timing facts but no request, communication, intervention, or procurement authority."
+    },
+    {
+      "candidate": "GEO uses award-status-aware legal-entity selection for political payments",
+      "independent_contexts": true,
+      "distinct_mechanism": "unobserved internal payer-selection rule",
+      "falsifiable_prediction": "Approval packets or account records would show award-status comparisons; ordinary-account evidence or direct-awardee payer counterexamples would cut against the rule.",
+      "novel": false,
+      "decision": "existing competition updated, no new hypothesis",
+      "reason": "Already captured by hypotheses 357/358. Florida and Georgia parent-payer records are bounded counterexamples, making 358 least inconsistent at low-to-medium diagnostic weight."
+    },
+    {
+      "candidate": "Private-prime reporting obscures GEO downstream participation in the CSI→GTI air chain",
+      "independent_contexts": false,
+      "distinct_mechanism": "private-prime reporting and missing structured downstream rows",
+      "falsifiable_prediction": "Complete structured subaward fields would consistently identify GEO and reconcile to downstream amounts; missing rows despite independently documented subcontracts would support the gap.",
+      "novel": false,
+      "decision": "filtered; analogous non-applicable control",
+      "reason": "The evidence concerns one private-prime CSI→GTI chain. Hypotheses 341/342 are expressly IGSA/public-body-prime specific, so finding 12901 was not scored against them; one chain does not pass the three-context novelty gate for a new private-prime hypothesis."
+    },
+    {
+      "candidate": "Weak performance consequences insulated GEO expansion",
+      "independent_contexts": true,
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "CPARS, deductions, cure notices, option files, and source-selection records would show whether documented deficiencies were penalized, mitigated, or ignored.",
+      "novel": false,
+      "decision": "filtered",
+      "reason": "Already captured by hypotheses 335/336 and still depends on decision records."
+    }
+  ],
+  "new_hypothesis_gate_audit": {
+    "three_plus_contexts": "Several candidates passed.",
+    "distinct_mechanism": "No novel candidate passed.",
+    "falsifiable_prediction": "Predictions can be stated, but they test existing competitions or missing bridges.",
+    "concrete_new_layer1_lead": "No new lead was warranted because existing hypotheses, leads, and human action 63 already cover the testable gaps."
+  }
+}

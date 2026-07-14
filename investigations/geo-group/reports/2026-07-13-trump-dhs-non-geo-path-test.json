@@ -1,0 +1,580 @@
+{
+  "graph": "run 89 verified canonical focus with GEO removed",
+  "input_rule": "Both the connection and its attributed source finding must be verified. Connections #6347/#6348 are excluded because findings #12391/#12393 remain unverified. Guidepost Solutions is canonicalized to entity #4807, Guidepost Solutions LLC.",
+  "graph_summary": {
+    "nodes": 35,
+    "simple_edges": 34,
+    "density": 0.057142857,
+    "component_sizes": [
+      21,
+      11,
+      1,
+      1,
+      1
+    ]
+  },
+  "direct_non_geo_edges": [
+    {
+      "source": "Second Trump Administration",
+      "target": "Thomas D. Homan",
+      "length": 1,
+      "path": [
+        "Second Trump Administration",
+        "Thomas D. Homan"
+      ],
+      "edges": [
+        {
+          "a": "Second Trump Administration",
+          "b": "Thomas D. Homan",
+          "records": [
+            {
+              "id": 6377,
+              "type": "employment",
+              "date_range": "2025-01-20 to present",
+              "description": "The White House identifies Homan as White House Border Czar.",
+              "finding_id": 12511
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "guidepost_shared_firm_paths": [
+    {
+      "source": "Thomas D. Homan",
+      "target": "B.I. Incorporated",
+      "length": 2,
+      "path": [
+        "Thomas D. Homan",
+        "Guidepost Solutions LLC",
+        "B.I. Incorporated"
+      ],
+      "edges": [
+        {
+          "a": "Thomas D. Homan",
+          "b": "Guidepost Solutions LLC",
+          "records": [
+            {
+              "id": 6375,
+              "type": "advisory",
+              "date_range": null,
+              "description": "Homan's certified 2025 OGE Form 278e lists Guidepost Solutions LLC as a source of more than $5,000 in annual compensation for consulting services during the reporting period; exact amount, dates, and scope are not disclosed.",
+              "finding_id": 12505
+            }
+          ]
+        },
+        {
+          "a": "Guidepost Solutions LLC",
+          "b": "B.I. Incorporated",
+          "records": [
+            {
+              "id": 6346,
+              "type": "contracts_with",
+              "date_range": "through 2025-12-31",
+              "description": "Guidepost had a consulting agreement with B.I. Incorporated; GEO disclosed $420,000 paid under it in 2025 and that it ended December 31, 2025.",
+              "finding_id": 12462
+            }
+          ]
+        }
+      ],
+      "also_a_shortest_path": true
+    },
+    {
+      "source": "Thomas D. Homan",
+      "target": "Julie Myers Wood",
+      "length": 2,
+      "path": [
+        "Thomas D. Homan",
+        "Guidepost Solutions LLC",
+        "Julie Myers Wood"
+      ],
+      "edges": [
+        {
+          "a": "Thomas D. Homan",
+          "b": "Guidepost Solutions LLC",
+          "records": [
+            {
+              "id": 6375,
+              "type": "advisory",
+              "date_range": null,
+              "description": "Homan's certified 2025 OGE Form 278e lists Guidepost Solutions LLC as a source of more than $5,000 in annual compensation for consulting services during the reporting period; exact amount, dates, and scope are not disclosed.",
+              "finding_id": 12505
+            }
+          ]
+        },
+        {
+          "a": "Guidepost Solutions LLC",
+          "b": "Julie Myers Wood",
+          "records": [
+            {
+              "id": 6372,
+              "type": "employment",
+              "date_range": "2012 through at least 2014-07-02",
+              "description": "GEOs July 2014 Form 8-K states that Julie Myers Wood was then Chief Executive Officer of Guidepost Solutions after joining it in 2012.",
+              "finding_id": 12450
+            }
+          ]
+        }
+      ],
+      "also_a_shortest_path": true
+    }
+  ],
+  "guidepost_caveat": "Canonical entity #4807 creates non-GEO two-edge paths from Homan to B.I. Incorporated and Julie Myers Wood. The edges document separate relationships with the same firm; they do not establish a shared project, contemporaneous work, contact, or coordination.",
+  "shortest_examples_by_political_source": [
+    {
+      "source": "Donald J. Trump 2024 campaign",
+      "target": "Department of Homeland Security",
+      "length": 6,
+      "path": [
+        "Donald J. Trump 2024 campaign",
+        "Chris LaCivita",
+        "Christopher LaCivita Jr.",
+        "Checkmate Government Relations",
+        "White House Office",
+        "Ballard Partners",
+        "Department of Homeland Security"
+      ],
+      "edges": [
+        {
+          "a": "Donald J. Trump 2024 campaign",
+          "b": "Chris LaCivita",
+          "records": [
+            {
+              "id": 6385,
+              "type": "political",
+              "date_range": "2024",
+              "description": "The Trump campaign identified Chris LaCivita (the father, not Christopher LaCivita Jr.) as a senior campaign adviser.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Chris LaCivita",
+          "b": "Christopher LaCivita Jr.",
+          "records": [
+            {
+              "id": 6408,
+              "type": "familial",
+              "date_range": null,
+              "description": "Axios identifies Chris LaCivita Jr. as campaign co-manager Chris LaCivita's son; the Senate LDA and Checkmate team page identify Jr. as the GEO lobbyist and Checkmate Public Affairs Director.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Christopher LaCivita Jr.",
+          "b": "Checkmate Government Relations",
+          "records": [
+            {
+              "id": 6397,
+              "type": "employment",
+              "date_range": "2025-08-13 through 2026-05-04",
+              "description": "Checkmate identifies Chris LaCivita Jr. as Public Affairs Director, and the GEO LDA filings name Jr. as a lobbyist; this is not his father, Trump campaign adviser Chris LaCivita.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Checkmate Government Relations",
+          "b": "White House Office",
+          "records": [
+            {
+              "id": 6389,
+              "type": "political",
+              "date_range": "2026-Q1",
+              "description": "Checkmate amended GEO lobbying filings list the White House Office as an institutional contact; the filing does not identify an individual contacted person or meeting.",
+              "finding_id": 12509
+            }
+          ]
+        },
+        {
+          "a": "White House Office",
+          "b": "Ballard Partners",
+          "records": [
+            {
+              "id": 6399,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists the White House Office as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Ballard Partners",
+          "b": "Department of Homeland Security",
+          "records": [
+            {
+              "id": 6398,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists DHS as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Chris LaCivita",
+      "target": "Department of Homeland Security",
+      "length": 5,
+      "path": [
+        "Chris LaCivita",
+        "Christopher LaCivita Jr.",
+        "Checkmate Government Relations",
+        "White House Office",
+        "Ballard Partners",
+        "Department of Homeland Security"
+      ],
+      "edges": [
+        {
+          "a": "Chris LaCivita",
+          "b": "Christopher LaCivita Jr.",
+          "records": [
+            {
+              "id": 6408,
+              "type": "familial",
+              "date_range": null,
+              "description": "Axios identifies Chris LaCivita Jr. as campaign co-manager Chris LaCivita's son; the Senate LDA and Checkmate team page identify Jr. as the GEO lobbyist and Checkmate Public Affairs Director.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Christopher LaCivita Jr.",
+          "b": "Checkmate Government Relations",
+          "records": [
+            {
+              "id": 6397,
+              "type": "employment",
+              "date_range": "2025-08-13 through 2026-05-04",
+              "description": "Checkmate identifies Chris LaCivita Jr. as Public Affairs Director, and the GEO LDA filings name Jr. as a lobbyist; this is not his father, Trump campaign adviser Chris LaCivita.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Checkmate Government Relations",
+          "b": "White House Office",
+          "records": [
+            {
+              "id": 6389,
+              "type": "political",
+              "date_range": "2026-Q1",
+              "description": "Checkmate amended GEO lobbying filings list the White House Office as an institutional contact; the filing does not identify an individual contacted person or meeting.",
+              "finding_id": 12509
+            }
+          ]
+        },
+        {
+          "a": "White House Office",
+          "b": "Ballard Partners",
+          "records": [
+            {
+              "id": 6399,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists the White House Office as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Ballard Partners",
+          "b": "Department of Homeland Security",
+          "records": [
+            {
+              "id": 6398,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists DHS as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Christopher LaCivita Jr.",
+      "target": "Department of Homeland Security",
+      "length": 4,
+      "path": [
+        "Christopher LaCivita Jr.",
+        "Checkmate Government Relations",
+        "White House Office",
+        "Ballard Partners",
+        "Department of Homeland Security"
+      ],
+      "edges": [
+        {
+          "a": "Christopher LaCivita Jr.",
+          "b": "Checkmate Government Relations",
+          "records": [
+            {
+              "id": 6397,
+              "type": "employment",
+              "date_range": "2025-08-13 through 2026-05-04",
+              "description": "Checkmate identifies Chris LaCivita Jr. as Public Affairs Director, and the GEO LDA filings name Jr. as a lobbyist; this is not his father, Trump campaign adviser Chris LaCivita.",
+              "finding_id": 12710
+            }
+          ]
+        },
+        {
+          "a": "Checkmate Government Relations",
+          "b": "White House Office",
+          "records": [
+            {
+              "id": 6389,
+              "type": "political",
+              "date_range": "2026-Q1",
+              "description": "Checkmate amended GEO lobbying filings list the White House Office as an institutional contact; the filing does not identify an individual contacted person or meeting.",
+              "finding_id": 12509
+            }
+          ]
+        },
+        {
+          "a": "White House Office",
+          "b": "Ballard Partners",
+          "records": [
+            {
+              "id": 6399,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists the White House Office as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Ballard Partners",
+          "b": "Department of Homeland Security",
+          "records": [
+            {
+              "id": 6398,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists DHS as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Trump administrations",
+      "target": "Department of Homeland Security",
+      "length": 3,
+      "path": [
+        "Trump administrations",
+        "Pamela Bondi",
+        "Ballard Partners",
+        "Department of Homeland Security"
+      ],
+      "edges": [
+        {
+          "a": "Trump administrations",
+          "b": "Pamela Bondi",
+          "records": [
+            {
+              "id": 6381,
+              "type": "political",
+              "date_range": "2016 to present, in distinct roles",
+              "description": "The LDA filing reports Bondi's 2016-2017 transition and 2017 opioid-commission roles; DOJ says she joined the White House in 2019 and became attorney general in 2025.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Pamela Bondi",
+          "b": "Ballard Partners",
+          "records": [
+            {
+              "id": 6395,
+              "type": "employment",
+              "date_range": "2019-Q3",
+              "description": "Ballard Partners GEO lobbying filing names Bondi as a lobbyist; this edge identifies the registrant-person relationship and does not establish a particular government contact.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Ballard Partners",
+          "b": "Department of Homeland Security",
+          "records": [
+            {
+              "id": 6398,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists DHS as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Pamela Bondi",
+      "target": "Department of Homeland Security",
+      "length": 2,
+      "path": [
+        "Pamela Bondi",
+        "Ballard Partners",
+        "Department of Homeland Security"
+      ],
+      "edges": [
+        {
+          "a": "Pamela Bondi",
+          "b": "Ballard Partners",
+          "records": [
+            {
+              "id": 6395,
+              "type": "employment",
+              "date_range": "2019-Q3",
+              "description": "Ballard Partners GEO lobbying filing names Bondi as a lobbyist; this edge identifies the registrant-person relationship and does not establish a particular government contact.",
+              "finding_id": 12507
+            }
+          ]
+        },
+        {
+          "a": "Ballard Partners",
+          "b": "Department of Homeland Security",
+          "records": [
+            {
+              "id": 6398,
+              "type": "political",
+              "date_range": "2019-Q3",
+              "description": "The Ballard GEO lobbying filing lists DHS as an institutional contact; it does not identify a named official, meeting, or procurement intervention.",
+              "finding_id": 12507
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "household_degree_after_geo_removed": 0,
+  "component_membership": {
+    "Guidepost Solutions LLC": [
+      "B.I. Incorporated",
+      "CORNELL COMPANIES, INC.",
+      "CORRECTIONAL SERVICES CORPORATION",
+      "Charlton County, Georgia",
+      "Clearfield County, Pennsylvania",
+      "Daniel Ragsdale",
+      "David J. Venturella",
+      "Evangeline Parish Sheriff\u2019s Office",
+      "GEO CARE SERVICES, LLC",
+      "GEO Care",
+      "GEO Transport, Inc.",
+      "Guidepost Solutions LLC",
+      "Homeland Strategic Consulting, LLC",
+      "ICE Presidential Transition Office response",
+      "Julie Myers Wood",
+      "Karnes County, Texas",
+      "LaSalle Economic Development District",
+      "Matthew T. Albence",
+      "Second Trump Administration",
+      "Thomas D. Homan",
+      "U.S. Immigration and Customs Enforcement"
+    ],
+    "U.S. Immigration and Customs Enforcement": [
+      "B.I. Incorporated",
+      "CORNELL COMPANIES, INC.",
+      "CORRECTIONAL SERVICES CORPORATION",
+      "Charlton County, Georgia",
+      "Clearfield County, Pennsylvania",
+      "Daniel Ragsdale",
+      "David J. Venturella",
+      "Evangeline Parish Sheriff\u2019s Office",
+      "GEO CARE SERVICES, LLC",
+      "GEO Care",
+      "GEO Transport, Inc.",
+      "Guidepost Solutions LLC",
+      "Homeland Strategic Consulting, LLC",
+      "ICE Presidential Transition Office response",
+      "Julie Myers Wood",
+      "Karnes County, Texas",
+      "LaSalle Economic Development District",
+      "Matthew T. Albence",
+      "Second Trump Administration",
+      "Thomas D. Homan",
+      "U.S. Immigration and Customs Enforcement"
+    ],
+    "Second Trump Administration": [
+      "B.I. Incorporated",
+      "CORNELL COMPANIES, INC.",
+      "CORRECTIONAL SERVICES CORPORATION",
+      "Charlton County, Georgia",
+      "Clearfield County, Pennsylvania",
+      "Daniel Ragsdale",
+      "David J. Venturella",
+      "Evangeline Parish Sheriff\u2019s Office",
+      "GEO CARE SERVICES, LLC",
+      "GEO Care",
+      "GEO Transport, Inc.",
+      "Guidepost Solutions LLC",
+      "Homeland Strategic Consulting, LLC",
+      "ICE Presidential Transition Office response",
+      "Julie Myers Wood",
+      "Karnes County, Texas",
+      "LaSalle Economic Development District",
+      "Matthew T. Albence",
+      "Second Trump Administration",
+      "Thomas D. Homan",
+      "U.S. Immigration and Customs Enforcement"
+    ],
+    "Thomas D. Homan": [
+      "B.I. Incorporated",
+      "CORNELL COMPANIES, INC.",
+      "CORRECTIONAL SERVICES CORPORATION",
+      "Charlton County, Georgia",
+      "Clearfield County, Pennsylvania",
+      "Daniel Ragsdale",
+      "David J. Venturella",
+      "Evangeline Parish Sheriff\u2019s Office",
+      "GEO CARE SERVICES, LLC",
+      "GEO Care",
+      "GEO Transport, Inc.",
+      "Guidepost Solutions LLC",
+      "Homeland Strategic Consulting, LLC",
+      "ICE Presidential Transition Office response",
+      "Julie Myers Wood",
+      "Karnes County, Texas",
+      "LaSalle Economic Development District",
+      "Matthew T. Albence",
+      "Second Trump Administration",
+      "Thomas D. Homan",
+      "U.S. Immigration and Customs Enforcement"
+    ],
+    "Donald J. Trump 2024 campaign": [
+      "Ballard Partners",
+      "Checkmate Government Relations",
+      "Chris LaCivita",
+      "Christopher LaCivita Jr.",
+      "Department of Homeland Security",
+      "Donald J. Trump 2024 campaign",
+      "Justin J. Sayfie",
+      "Pamela Bondi",
+      "President's Commission on White House Fellowships",
+      "Trump administrations",
+      "White House Office"
+    ],
+    "Department of Homeland Security": [
+      "Ballard Partners",
+      "Checkmate Government Relations",
+      "Chris LaCivita",
+      "Christopher LaCivita Jr.",
+      "Department of Homeland Security",
+      "Donald J. Trump 2024 campaign",
+      "Justin J. Sayfie",
+      "Pamela Bondi",
+      "President's Commission on White House Fellowships",
+      "Trump administrations",
+      "White House Office"
+    ],
+    "Trump 2026 OGE disclosure household": [
+      "Trump 2026 OGE disclosure household"
+    ]
+  },
+  "conclusion": "The verified non-GEO graph contains a direct administration-to-Homan appointment edge and a Guidepost shared-firm path connecting Homan to B.I./Wood, but no campaign or household path to the ICE/procurement component. The campaign-to-DHS-department route joins a family edge and activity-level LDA institutional fields from different years and firm accounts. These structures show access/professional adjacency only; they do not establish person-level contact, coordination, procurement influence, or causation."
+}

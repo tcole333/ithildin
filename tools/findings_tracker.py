@@ -129,6 +129,10 @@ VALID_SOURCES = [
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
     "kabass", "fbi",
     "fec", "edgar", "courtlistener", "990", "registry",
+    # State political-finance, company disclosure, and legislative primary sources.
+    "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",
+    "geo_group_2024_political_activity_report",
+    "geo_group_2025_political_activity_report",
     "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
     "gdelt", "aleph", "icij", "acris", "la_county_assessor", "gleif", "opensanctions",
     "shodan", "crtsh", "wayback", "urlscan", "medicaid",
@@ -152,6 +156,11 @@ VALID_SOURCES = [
     "dsca", "lda", "fara_local",
     # Internal investigation cross-references
     "investigations",
+    # Attributed reporting claims promoted only after primary-evidence review.
+    "reporting",
+    "government_releases",
+    # Primary federal oversight and detention-review records.
+    "gao", "dhs_oig", "ice_odo", "ice_ddr", "ice_foia",
     # ── Selector-pivot leak/breach aggregators (provenance-opaque;
     #    findings sourced here cap at `medium` until corroborated) ──
     "leak_aggregator", "dehashed", "intelx",
@@ -280,7 +289,7 @@ VALID_CORRECTION_TYPES = [
 ALLOWED_CORRECT_FIELDS = {
     "summary", "detail", "target_name", "date_of_event",
     "confidence", "finding_type", "claim_type", "thread_id",
-    "source_datasets", "profile_id",
+    "source_datasets", "profile_id", "lead_id",
 }
 
 
@@ -521,8 +530,46 @@ def update_finding(finding_id, field, new_value, reason, correction_type="refine
 
 
 def verify_finding(finding_id, verified_by="human"):
-    """Mark a finding as verified by a human or agent."""
+    """Mark a finding as verified only when every evidence row has a quote.
+
+    Findings may be drafted before their provenance is complete, but the audit
+    contract requires at least one evidence reference and an exact source quote
+    for each reference before verification.  Enforce that boundary here so a
+    missing ``--source-quote`` cannot silently become a verified finding.
+    """
     db = _get_db_standalone()
+    finding = db.execute(
+        "SELECT id FROM findings WHERE id = ?",
+        (finding_id,),
+    ).fetchone()
+    if finding is None:
+        db.close()
+        raise ValueError(f"Finding #{finding_id} does not exist")
+
+    evidence = db.execute(
+        "SELECT evidence_ref, source_quote FROM finding_evidence WHERE finding_id = ?",
+        (finding_id,),
+    ).fetchall()
+    if not evidence:
+        db.close()
+        raise ValueError(
+            f"Finding #{finding_id} cannot be verified without at least one evidence reference"
+        )
+
+    missing_quotes = [
+        row["evidence_ref"]
+        for row in evidence
+        if not str(row["source_quote"] or "").strip()
+    ]
+    if missing_quotes:
+        db.close()
+        refs = ", ".join(missing_quotes[:3])
+        if len(missing_quotes) > 3:
+            refs += f", and {len(missing_quotes) - 3} more"
+        raise ValueError(
+            f"Finding #{finding_id} cannot be verified: missing source_quote for {refs}"
+        )
+
     now = datetime.now(timezone.utc).isoformat()
     db.execute("""
         UPDATE findings SET verification_status = 'verified', verified_by = ?, verified_at = ?
@@ -855,45 +902,54 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         pass
 
     db = _get_db_standalone()
+    try:
+        # Enforce the invariant: every connection endpoint is backed by an entity row.
+        # Done before the alphabetical swap so each name stays paired with its type.
+        _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
+        _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
 
-    # Enforce the invariant: every connection endpoint is backed by an entity row.
-    # Done before the alphabetical swap so each name stays paired with its type.
-    _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
-    _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
+        # Normalize: store alphabetically for dedup.
+        if person_a > person_b:
+            person_a, person_b = person_b, person_a
 
-    # Normalize: store alphabetically for dedup
-    if person_a > person_b:
-        person_a, person_b = person_b, person_a
+        db.execute("""
+            INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
+                                    strength, date_range, finding_id, profile_id, agent_run_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
+              profile_id, agent_run_id))
 
-    cursor = db.execute("""
-        INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
-                                strength, date_range, finding_id, profile_id, agent_run_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
-          profile_id, agent_run_id))
-    conn_id = cursor.lastrowid
-    if conn_id == 0:
-        # Duplicate — find the existing connection id
+        # INSERT OR IGNORE does not reset cursor.lastrowid when the row already
+        # exists. Endpoint registration above may therefore leave lastrowid set
+        # to an unrelated entity ID. Always resolve the canonical connection by
+        # the same key enforced by idx_connections_unique before writing evidence.
         existing = db.execute("""
             SELECT id FROM connections
             WHERE person_a = ? AND person_b = ?
               AND COALESCE(relationship_type, '') = COALESCE(?, '')
               AND COALESCE(profile_id, '') = COALESCE(?, '')
         """, (person_a, person_b, relationship_type, profile_id)).fetchone()
-        if existing:
-            conn_id = existing["id"]
-
-    if evidence_ids:
-        for ev in evidence_ids:
-            ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
-            db.execute(
-                "INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
-                (conn_id, ev_type, ev)
+        if existing is None:
+            raise sqlite3.IntegrityError(
+                "connection insert did not resolve a canonical row"
             )
+        conn_id = existing["id"]
 
-    db.commit()
-    db.close()
-    return conn_id
+        if evidence_ids:
+            for ev in evidence_ids:
+                ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
+                db.execute(
+                    "INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
+                    (conn_id, ev_type, ev)
+                )
+
+        db.commit()
+        return conn_id
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def get_connections(person, depth=1, relationship_type=None, profile_id=None,
@@ -1315,7 +1371,11 @@ def main():
                     print(f"  {f['date_of_event']}  {f['target_name']}: {f['summary']}")
 
     elif args.command == "verify":
-        verify_finding(args.id, verified_by=args.by)
+        try:
+            verify_finding(args.id, verified_by=args.by)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
         print(f"Verified finding #{args.id}")
 
     elif args.command == "dispute":

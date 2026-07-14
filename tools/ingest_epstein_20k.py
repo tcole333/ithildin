@@ -30,6 +30,11 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+try:
+    from tools.fts_query import literal_fts_query
+except ImportError:
+    from fts_query import literal_fts_query
+
 # Increase CSV field size limit for large document texts
 csv.field_size_limit(sys.maxsize)
 
@@ -266,8 +271,9 @@ def cmd_search(args):
     """FTS5 full-text search across all documents."""
     db = get_db()
 
-    # Build FTS5 query
-    query = args.query
+    # Treat ordinary selectors literally so names, emails, domains, and docket
+    # identifiers do not become accidental FTS5 syntax.
+    query = literal_fts_query(args.query)
 
     sql = """
         SELECT

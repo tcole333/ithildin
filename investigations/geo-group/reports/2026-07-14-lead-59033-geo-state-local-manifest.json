@@ -1,0 +1,556 @@
+{
+  "accepted_finding_ids": [
+    12935,
+    12936,
+    12937,
+    12938
+  ],
+  "as_of": "2026-07-14",
+  "database_evidence": [
+    {
+      "bytes": 2764,
+      "evidence_row_count": 3,
+      "finding_id": 12935,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12935-provenance.json",
+      "sha256": "4f06c8fee15b6e520e96e1e2bd4fa028260a8e26fbb4f28eed1dc9480f0b6a31",
+      "source_datasets": [
+        "florida_campaign_finance",
+        "florida_senate",
+        "investigations"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "bytes": 6450,
+      "evidence_row_count": 3,
+      "finding_id": 12936,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12936-provenance.json",
+      "sha256": "eb82594ce08721f2120b101d8d930be0a8cae078c2b49a63c6f49367a4a28c85",
+      "source_datasets": [
+        "fec",
+        "geo_group_2025_political_activity_report",
+        "investigations"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "bytes": 4503,
+      "evidence_row_count": 5,
+      "finding_id": 12937,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12937-provenance.json",
+      "sha256": "fb6a4b2253543d3416cc30bd232b2528eb8d132831d9f6d77c83f2067baf0b76",
+      "source_datasets": [
+        "florida_campaign_finance",
+        "geo_group_2024_political_activity_report",
+        "geo_group_2025_political_activity_report",
+        "investigations"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "bytes": 5187,
+      "evidence_row_count": 4,
+      "finding_id": 12938,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12938-provenance.json",
+      "sha256": "803d42243c0aee6e15fea46c0390b326a121d300614e66822cfded80a01df94b",
+      "source_datasets": [
+        "georgia_campaign_finance",
+        "geo_group_2024_political_activity_report",
+        "geo_group_2025_political_activity_report",
+        "investigations"
+      ],
+      "verification_status": "verified"
+    }
+  ],
+  "excluded_fec_rows": {
+    "count": 3,
+    "rationale": "California Secretary of State registration-fee rows, including two records filed with the typo 'SECRETARY OR STATE', are administrative fees/voids rather than political payments."
+  },
+  "high_confidence_state_fec_pac_matches": 22,
+  "lead_id": 59033,
+  "ledger_row_count": 1958,
+  "methodological_warnings": [
+    "Same-value/date Florida rows were not collapsed because report, amendment, and check IDs are absent.",
+    "Florida's state export covers statewide and multicounty filers, not county/municipal filing offices.",
+    "FEC payer-side Schedule B and state recipient-side PAC records may describe the same underlying payment.",
+    "GEO's political-activity reports state that they are unaudited company disclosures."
+  ],
+  "outputs": [
+    {
+      "bytes": 2537738,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-political-ledger.csv",
+      "sha256": "94b724062285c13a293295b761359140430cc1ac41eadbf2211248590b2ac73a"
+    },
+    {
+      "bytes": 20127,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-reconciliation.json",
+      "sha256": "215dbc9c71167f4610af7da0829296b7ec8d83e413a51578c5c0d02429794a18"
+    },
+    {
+      "bytes": 803392,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-quote-audit.csv",
+      "sha256": "6b2e3d52c0e938db25b66dd6ac92e5a050c083a3f550c2e5db5b038e5138b408"
+    },
+    {
+      "bytes": 2673,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-finding-support.json",
+      "sha256": "168b53083c991956ff0a084f132f9465e5f8bdac6000b40e07d0f09503935697"
+    },
+    {
+      "bytes": 10538,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-fec-pac-crosswalk.csv",
+      "sha256": "87778620c8c8fc3320f409b239b3ef0989d6dbfdec5fa724c37f9ce7b2f897a2"
+    },
+    {
+      "bytes": 3744,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-florida-ice-timing-crosswalk.csv",
+      "sha256": "f060e30c61d4e0606528b97c85ae9871587d75b19bfc836ea7358e27cb436548"
+    },
+    {
+      "bytes": 3073,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-recipient-office-policy-crosswalk.csv",
+      "sha256": "0619ef3178880c51be93b65e0435debc2c16384acd8c728cd95dd6d9a2758215"
+    },
+    {
+      "bytes": 18081,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-political-payments-report.md",
+      "sha256": "7ffbf76c57ce71a033d9714ed78e17f884789cd02d48ea9515ef9f83ef12cc35"
+    },
+    {
+      "bytes": 1486,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-novelty.json",
+      "sha256": "3b896b158e9ffeaa81791d4c7cc6574c2a102a37363e9b55f5e57cbe2211b888"
+    },
+    {
+      "bytes": 2764,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12935-provenance.json",
+      "sha256": "4f06c8fee15b6e520e96e1e2bd4fa028260a8e26fbb4f28eed1dc9480f0b6a31"
+    },
+    {
+      "bytes": 6450,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12936-provenance.json",
+      "sha256": "eb82594ce08721f2120b101d8d930be0a8cae078c2b49a63c6f49367a4a28c85"
+    },
+    {
+      "bytes": 4503,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12937-provenance.json",
+      "sha256": "fb6a4b2253543d3416cc30bd232b2528eb8d132831d9f6d77c83f2067baf0b76"
+    },
+    {
+      "bytes": 5187,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-finding-12938-provenance.json",
+      "sha256": "803d42243c0aee6e15fea46c0390b326a121d300614e66822cfded80a01df94b"
+    }
+  ],
+  "payer_class_row_counts": {
+    "ambiguous_pac_name_filed_as_business": 2,
+    "geo_corporate_legal_entity": 1106,
+    "geo_pac_ssf": 782,
+    "geo_pac_ssf_label": 68
+  },
+  "primary_urls": [
+    "https://dos.elections.myflorida.com/campaign-finance/contributions/",
+    "https://www.fec.gov/data/disbursements/?committee_id=C00382150",
+    "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+    "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "https://www.flsenate.gov/Offices/President",
+    "https://www.flsenate.gov/PublishedContent/Offices/2024-2026/President/Documents/TRUMP_Act.pdf",
+    "https://legacy.myfloridalegal.com/pages.nsf/Main/1515CE372E59D1E885256CC60071B1C4",
+    "https://donalds.house.gov/about/",
+    "https://www.flgov.com/eog/news/press/2025/governor-ron-desantis-announces-additional-memoranda-agreement-between-florida-law",
+    "https://www.flgov.com/eog/news/press/2025/governor-ron-desantis-highlights-floridas-leadership-immigration-enforcement",
+    "https://www.congress.gov/bill/119th-congress/house-bill/1/text"
+  ],
+  "retracted_finding_ids": [
+    12917,
+    12918,
+    12919,
+    12920,
+    12921,
+    12922,
+    12923,
+    12924,
+    12925,
+    12931,
+    12932,
+    12933
+  ],
+  "reused_audited_inputs": [
+    {
+      "bytes": 245964,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-57842-geo-fy25-fy26-action-matrix.csv",
+      "provenance": "lead 57842 exact-matched USAspending ICE action matrix",
+      "sha256": "a93b838afe17d66c69f1bfdff0c7e1ea95fc983d21f79aa23f804bed6fa51fbc"
+    },
+    {
+      "bytes": 31506,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-nonfl-corporate-wave6-ledger.csv",
+      "provenance": "visible-agent bounded non-Florida corporate contribution wave",
+      "sha256": "7aadbd298fd50786855ef4cbe21aac76a777ad9c3223e2dc6c7f28c395084ec2"
+    },
+    {
+      "bytes": 56151,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-nonfl-corporate-wave6-manifest.json",
+      "provenance": "visible-agent bounded non-Florida corporate contribution wave",
+      "sha256": "1937bac302825e8f6dc040848efbef9049121c48a3b7ca84d54da93021146560"
+    },
+    {
+      "bytes": 5337,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59033-nonfl-corporate-wave6-report.md",
+      "provenance": "visible-agent bounded non-Florida corporate contribution wave",
+      "sha256": "af5b8f9e1647e5b16eb6d10fc4cb3d4fef7f1e532d0d97b8ed11e7dcb8985fb2"
+    }
+  ],
+  "source_files": [
+    {
+      "bytes": 152353,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/az-2024-20E2E6A7-F125-472A-ACD4-6461C9B44831.pdf",
+      "sha256": "6e832f055d8a5428bb4eede8c0442e8f8e0238639c0c26cd1dc3c20743f0dcff"
+    },
+    {
+      "bytes": 135040,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/az-2024-6EB3F9E8-8BFC-4094-AD41-B52773674A54.pdf",
+      "sha256": "5ea15090a8a29ba5d6325f74f7f3208b3d2941a2c6f53bb495fe0b06a02ac384"
+    },
+    {
+      "bytes": 99458,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/az-2024-6F92C083-8C9E-42D7-859A-90A6D117AC48.pdf",
+      "sha256": "2b4111455d12f502c80573ecbc108a06c4428a661ff208cbe0010ce5fded0fa9"
+    },
+    {
+      "bytes": 150562,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/az-2024-CEBE61D2-23EA-4F10-B6E0-E59902A320B0.pdf",
+      "sha256": "ad9b9939826893dbee49e055e61f39b7a8403029a7a39239bbfaa1e2ec55e958"
+    },
+    {
+      "bytes": 59,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/az-advanced-search-known-record-negative-result.json",
+      "sha256": "db5d88ba42d45912154842ec4931bca68de42d73d43fb558f483d2d83ee844bd"
+    },
+    {
+      "bytes": 9374759,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fec-c00382150-all-disbursements-2015-2026.json",
+      "sha256": "2a27a0f28162ff647f180269570bc42e54558b5321b0e14cb2b24fc42fed226b"
+    },
+    {
+      "bytes": 100,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-bi-incorporated.txt",
+      "sha256": "0f351d4fde57fba90b7b081216aff94b1f31dca6d03009983a974d86416a6245"
+    },
+    {
+      "bytes": 252,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-acquisition.txt",
+      "sha256": "b1b8bb18e65c22c0ad014ecc221b31d7298b9312c0d54403d3a12586a4b3ffd9"
+    },
+    {
+      "bytes": 18936,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-care.txt",
+      "sha256": "82890b8b6b77208b4737e21e8caa6d11986abfa0c7569953c2534bafcaa22f9e"
+    },
+    {
+      "bytes": 100,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-corrections.txt",
+      "sha256": "0f351d4fde57fba90b7b081216aff94b1f31dca6d03009983a974d86416a6245"
+    },
+    {
+      "bytes": 100,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-pac.txt",
+      "sha256": "0f351d4fde57fba90b7b081216aff94b1f31dca6d03009983a974d86416a6245"
+    },
+    {
+      "bytes": 236,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-reentry.txt",
+      "sha256": "f244ed71ae02ddf3d7c8237dbe219609d44d1f84d01afbfc1b4d726d9d431577"
+    },
+    {
+      "bytes": 100,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-geo-secure.txt",
+      "sha256": "0f351d4fde57fba90b7b081216aff94b1f31dca6d03009983a974d86416a6245"
+    },
+    {
+      "bytes": 140984,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/fl-all-2015-2026-the-geo-group.txt",
+      "sha256": "187eab0cf490fc0e6019b2271b6ab084dbfb6173e772ebcba47316d982b98db9"
+    },
+    {
+      "bytes": 1414473,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/geo-2024-political-activity-and-lobbying-report.pdf",
+      "sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+    },
+    {
+      "bytes": 1646313,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/geo-2025-political-activity-and-lobbying-report.pdf",
+      "sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+    },
+    {
+      "bytes": 14598,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/archive-index.json",
+      "sha256": "e037c081715b8be0a549288d90581a27c457013821de5a651c8df2199d2be095"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-advanced-search-2025-the-geo-group.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 55184,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-advanced-search-page.html",
+      "sha256": "3dd0aff6b4a54ed38ab5cf3c3c8f0a28a8c258d3e580b24f7beefd5e204ea6e1"
+    },
+    {
+      "bytes": 1117,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-autocomplete-getdata-the-geo-group.json",
+      "sha256": "af24bebfd2ea369a91813269fa17ca9b0f79d5035052c678f32f4f1aaddce96e"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-1963397-2024.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-1963397-2025.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-883862-2024.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-883862-2025.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-885514-2024.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 60,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/az-entity-885514-2025.json",
+      "sha256": "d10e0ae1372a8d7262e07bae2e9fb0dc4607c585e2f7b2a252098114232834e8"
+    },
+    {
+      "bytes": 39791,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-01.html",
+      "sha256": "1aa3fa3bd4db103adcb63d75c1b1261336461d0133314f369430929796228e5a"
+    },
+    {
+      "bytes": 41560,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-02.html",
+      "sha256": "4f450aed3e8c28c687469f5c0b3d0c6d3a099ee23c2999fa267d0a4590a80829"
+    },
+    {
+      "bytes": 40531,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-03.html",
+      "sha256": "62dee55e35661b0796fa1ab0fec91518344c063cba804cb093e2ab46b07b73a4"
+    },
+    {
+      "bytes": 40503,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-04.html",
+      "sha256": "ed85a5b194124c36cf3828d85f0966ee6730d7061bfdb154468ce298f4b5c403"
+    },
+    {
+      "bytes": 40473,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-05.html",
+      "sha256": "77e506c08fc48ffb6b0cb4973b30471cc2e8e99387cefae1e799bff45e37ee36"
+    },
+    {
+      "bytes": 40988,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-06.html",
+      "sha256": "eaddc78199644dae56ee891c6d587663e301be663ad8a2cbfd9e83688a8d6530"
+    },
+    {
+      "bytes": 40372,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-07.html",
+      "sha256": "6487eef039e174e50165de3a34d1bcc88ac0e8ed01ff9624ef82eb8dc8f0cd46"
+    },
+    {
+      "bytes": 40575,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-08.html",
+      "sha256": "fc881aae2d03b14c5bf39d4206fdc4bce7e47d502ccaff3590242816ea8419d7"
+    },
+    {
+      "bytes": 42295,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-09.html",
+      "sha256": "3cb71d2998cfbdda44c4cff86748d8518a3bcf52621b8f31a123b00e5fec261c"
+    },
+    {
+      "bytes": 42087,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-10.html",
+      "sha256": "81a6bc460f11a79b2d19b9416d71f1a31e753095cfd84c17648f6a29c57e58f8"
+    },
+    {
+      "bytes": 42022,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-11.html",
+      "sha256": "700a7a77f30c09d8b9728e5532ea381b9c431664edd22269ca389e072e77c164"
+    },
+    {
+      "bytes": 42298,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-12.html",
+      "sha256": "51d341ddc515413cc00c8c2af2c18216cb7df08253c76b48a1b38d5773a598ef"
+    },
+    {
+      "bytes": 40254,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-13.html",
+      "sha256": "c501a3186262916e692d61b4c66883c11d76561fb0866c5cf47b45ede4da438e"
+    },
+    {
+      "bytes": 41980,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-14.html",
+      "sha256": "b1e60080532fcc017f0968fb662776e9aac7f7195709360cc3e42536eb7db346"
+    },
+    {
+      "bytes": 41781,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-15.html",
+      "sha256": "da4ec64821c5557fd62bd1ab2e6df9feb4139f396a6b112e66279620d00397f2"
+    },
+    {
+      "bytes": 42318,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-16.html",
+      "sha256": "a6e73a98451b2a69fa9a95a42b3f6df3cd0cc9865728cf856c7430d946a0f9f9"
+    },
+    {
+      "bytes": 25426,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-page-17.html",
+      "sha256": "a133fbab90ac0823d4a937c95e0f049bdfd2161c954eee2dc2f373711c8d5d60"
+    },
+    {
+      "bytes": 112124,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-legacy-the-geo-group-parsed-rows.json",
+      "sha256": "d2399fc526dded1339024354bb8661c32e72bdbb220872556f00529181439c5e"
+    },
+    {
+      "bytes": 177439,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-01.json",
+      "sha256": "9aa5b2d782e13f5d1f65790ecc45a27b1ea6745d4dcbd9a903570b9d2f9d201e"
+    },
+    {
+      "bytes": 176659,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-02.json",
+      "sha256": "7d9bcb8908832b68d8dec21cd0db32c927a706e26b97b62551240d4b3a5cf722"
+    },
+    {
+      "bytes": 176959,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-03.json",
+      "sha256": "2bf997f8f358c80b0263855e64e49df96b2db542fb387af6f3e0e0d27af8d157"
+    },
+    {
+      "bytes": 176805,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-04.json",
+      "sha256": "455fb2f0b7c25efdaa3311d438d29529b75c056944b84e5cd62d21b1417e4912"
+    },
+    {
+      "bytes": 177147,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-05.json",
+      "sha256": "2d4279378b55240c10aac11bfc4d543900da9a3b383f848cf67394e5a6d29424"
+    },
+    {
+      "bytes": 176464,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-06.json",
+      "sha256": "898e4f2f3fe64bd1e62b4c8ff84422acf05f9346a4227e95ab68ef6751cea7cb"
+    },
+    {
+      "bytes": 177109,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-07.json",
+      "sha256": "6dccf94f491a62afebc0e9ec53b6c9770bd39f7e2e82811a4b259839cf6e8dd8"
+    },
+    {
+      "bytes": 176687,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-08.json",
+      "sha256": "3f1436e08f2bbf662616b8df4675d99a5be4215e1e1f6410fc7a305f2051793e"
+    },
+    {
+      "bytes": 175679,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-09.json",
+      "sha256": "c2e0149b6d1390d270c9cd3fc3f204dc80e9e14ff8fc40115c5f05437c79feaa"
+    },
+    {
+      "bytes": 177743,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-10.json",
+      "sha256": "a2016339583d3441ba1b20bc80ce7c8915b7127636ab212e22601090c9b42b35"
+    },
+    {
+      "bytes": 178040,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-11.json",
+      "sha256": "d43441983d66f665116e1ab7541e6ebf72d0b5d2337cf77fb6e5b95b31e92c6b"
+    },
+    {
+      "bytes": 177807,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-12.json",
+      "sha256": "328df9b9143b59b5120501ad3ee25c92d4bc0d233ff6915d3fee647a55b0bcb0"
+    },
+    {
+      "bytes": 177959,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-13.json",
+      "sha256": "848afdee98d869542de727e6c422383050be0d48571a644dacd0fae54d839633"
+    },
+    {
+      "bytes": 177306,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-14.json",
+      "sha256": "6e223b2f1aee3f2ae4ca363d50b4ec79d6129dc63fd7a99e202834e1656c63d2"
+    },
+    {
+      "bytes": 178664,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-15.json",
+      "sha256": "9ba0d1eec3be902bc7cc7ffc87f3d37d910a0307a765378a0f0866de39efe612"
+    },
+    {
+      "bytes": 183256,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-16.json",
+      "sha256": "74c22068bedcc09f69e54e655f36c66b1437b55013ed0818ba24dd593c8ba937"
+    },
+    {
+      "bytes": 183774,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-17.json",
+      "sha256": "157e92882266b90887a472bf186019bbb5514581c227cd862c1032cf72c28256"
+    },
+    {
+      "bytes": 182409,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-18.json",
+      "sha256": "35a4ebe3c7308d902fd848caa1e14fe8344d7702ab1681c0be38a78022f4f38f"
+    },
+    {
+      "bytes": 183846,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-19.json",
+      "sha256": "a05a5cb91caeb0a50ff401ef41433a94795832c800cf6942d65017efa52f0c79"
+    },
+    {
+      "bytes": 185976,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-20.json",
+      "sha256": "c1547a64f403ca3a9dd6cbe702d121a5ba48253b16c660e9e618460fcb190104"
+    },
+    {
+      "bytes": 185416,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-21.json",
+      "sha256": "78eb58edf924c4d58e97e32220e1b5bc314d8b81ef8133d84c35d0c2c7aaefb2"
+    },
+    {
+      "bytes": 184926,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-22.json",
+      "sha256": "c6c82512c75f53fe9d7608eedfcc7c384ca0b6a2965681fc7ffce83bd45d5e13"
+    },
+    {
+      "bytes": 184632,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-23.json",
+      "sha256": "8c5390f2b206f2127cae3e22f42a8acda666f5dddc6bfc441680acb3868406c7"
+    },
+    {
+      "bytes": 183058,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-24.json",
+      "sha256": "441b5526ada03802ee4814b410428edd59103c91de43d10431e1c13a4576602f"
+    },
+    {
+      "bytes": 151620,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59033/nonfl-wave6/ga-peachfile-page-25.json",
+      "sha256": "a01bb5b20f44608d6f09f543082a33914562480c9512ca3de3328f4bdaf6c405"
+    }
+  ],
+  "source_stream_row_counts": {
+    "fec_schedule_b_geo_pac_nonfederal": 782,
+    "florida_campaign_finance_export": 1161,
+    "georgia_peachfile_campaign_finance_api": 15
+  }
+}

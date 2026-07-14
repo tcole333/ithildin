@@ -488,6 +488,9 @@ def export_timeline(start_date=None, end_date=None, profile_id=None,
     # Events
     e_conditions = []
     e_params = []
+    if resolved:
+        e_conditions.append("profile_id = ?")
+        e_params.append(resolved)
     if start_date:
         e_conditions.append("event_date >= ?")
         e_params.append(start_date)

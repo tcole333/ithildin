@@ -13,6 +13,7 @@ Usage:
     python tools/pillar_tracker.py show <id>
     python tools/pillar_tracker.py seed
     python tools/pillar_tracker.py arc --person "Leon Black" --pillar "Drexel Burnham Lambert" --role "Managing Director" --seniority senior --start 1977 --end 1990
+    python tools/pillar_tracker.py arc-delete <arc-id>
     python tools/pillar_tracker.py career "Leon Black"
     python tools/pillar_tracker.py event --pillar "Drexel Burnham Lambert" --date 1990-02-13 --type collapse --description "..."
     python tools/pillar_tracker.py events <pillar-name-or-id>
@@ -314,6 +315,35 @@ def add_arc(person_name, pillar_name, role, department=None, seniority=None,
         return None
     finally:
         db.close()
+
+
+def delete_arc(arc_id):
+    """Delete one career arc by ID. Returns True when a row was deleted."""
+    db = get_pillar_db()
+    arc = db.execute("""
+        SELECT ca.id, ca.person_name, ca.role, ip.name AS pillar_name
+        FROM career_arcs ca
+        JOIN institutional_pillars ip ON ip.id = ca.pillar_id
+        WHERE ca.id = ?
+    """, (arc_id,)).fetchone()
+    if arc is None:
+        db.close()
+        return False
+
+    try:
+        db.execute("DELETE FROM career_arcs WHERE id = ?", (arc_id,))
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+    print(
+        f"Deleted arc #{arc['id']}: {arc['person_name']} → "
+        f"{arc['pillar_name']} as {arc['role']}"
+    )
+    return True
 
 
 def get_career(person_name):
@@ -759,8 +789,21 @@ INSTITUTION_ALIASES = {
 }
 
 
-def _match_institution(name, db):
-    """Try to match a name to a registered pillar."""
+def _match_institution(name, db, entity_id=None):
+    """Match an institution by explicit entity link, exact name, or exact alias.
+
+    Substring matching is intentionally excluded. Short pillar names such as
+    CIA, FBI, SEC, MIT, EY, GS, and DB otherwise match unrelated entity names
+    (for example, the ``cia`` in ``Financial Trust Company``).
+    """
+    if entity_id is not None:
+        row = db.execute(
+            "SELECT id, name FROM institutional_pillars WHERE entity_id = ? ORDER BY id LIMIT 1",
+            (entity_id,),
+        ).fetchone()
+        if row:
+            return row["id"], row["name"]
+
     # Exact match
     row = db.execute(
         "SELECT id, name FROM institutional_pillars WHERE LOWER(name) = LOWER(?)", (name,)
@@ -777,13 +820,6 @@ def _match_institution(name, db):
         ).fetchone()
         if row:
             return row["id"], row["name"]
-
-    # Fuzzy: check if any pillar name is contained in the input or vice versa
-    all_pillars = db.execute("SELECT id, name FROM institutional_pillars").fetchall()
-    for p in all_pillars:
-        pname_lower = p["name"].lower()
-        if pname_lower in normalized or normalized in pname_lower:
-            return p["id"], p["name"]
 
     return None, None
 
@@ -916,7 +952,9 @@ def bootstrap(dry_run=False):
     """, (_exclude_name,)).fetchall()
 
     for er in entity_roles:
-        pillar_id, pillar_name = _match_institution(er["entity_name"], db)
+        pillar_id, pillar_name = _match_institution(
+            er["entity_name"], db, entity_id=er["entity_id"]
+        )
         if not pillar_id:
             continue
 
@@ -1116,6 +1154,10 @@ def main():
     p_arc.add_argument("--source")
     p_arc.add_argument("--notes")
 
+    # arc-delete
+    p_arc_delete = sub.add_parser("arc-delete", help="Delete one career arc by ID")
+    p_arc_delete.add_argument("arc_id", type=int)
+
     # career
     p_career = sub.add_parser("career", help="Show career timeline for a person")
     p_career.add_argument("person")
@@ -1260,6 +1302,11 @@ def main():
             connection_id=args.connection_id, source=args.source,
             notes=args.notes,
         )
+
+    elif args.command == "arc-delete":
+        if not delete_arc(args.arc_id):
+            print(f"Arc #{args.arc_id} not found")
+            sys.exit(1)
 
     elif args.command == "career":
         canonical, arcs = get_career(args.person)

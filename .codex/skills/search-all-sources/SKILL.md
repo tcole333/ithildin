@@ -103,6 +103,13 @@ python tools/query_icij.py search "<QUERY>"
 # Investigation reports (if investigations.db is populated)
 python tools/query_investigations.py search "<QUERY>" --limit 10
 
+# Versioned reporting knowledge layer (attributed secondary claims)
+uv run python tools/reporting_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-reporting.json
+uv run python tools/reporting_corpus.py claims "<QUERY>" --limit 20 --output $WORKDIR/search-reporting-claims.json
+
+# Primary DOJ/SEC government statements (not automatic proof of allegations)
+uv run python tools/government_release_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-government-releases.json
+
 # LittleSis relationship mapping
 python tools/query_littlesis.py search "<QUERY>"
 
@@ -232,6 +239,8 @@ log_search("<QUERY>", "gleif", result_count)
 log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
 log_search("<QUERY>", "sec_enforcement", result_count)
+log_search("<QUERY>", "reporting", result_count)
+log_search("<QUERY>", "government_releases", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)

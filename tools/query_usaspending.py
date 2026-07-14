@@ -19,6 +19,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import ssl
 import sys
 import time
@@ -355,7 +356,9 @@ def cmd_subawards(args):
         filters["recipient_search_text"] = [args.query]
 
     if args.award_id:
-        filters["award_id"] = args.award_id
+        # The live API returns HTTP 503 for its documented quoted exact-match
+        # form; send the PIID normally and enforce exactness on returned rows.
+        filters["award_ids"] = [args.award_id]
 
     if args.agency:
         filters["agencies"] = [{"type": "awarding", "tier": "toptier", "name": args.agency}]
@@ -364,28 +367,40 @@ def cmd_subawards(args):
     filters["award_type_codes"] = award_types
 
     data = {
+        "subawards": True,
+        "spending_level": "subawards",
         "filters": filters,
+        "fields": [
+            "Sub-Award ID", "Sub-Awardee Name", "Sub-Recipient UEI",
+            "Sub-Award Amount", "Sub-Award Date", "Sub-Award Description",
+            "Sub-Award Type", "Prime Award ID", "Prime Recipient Name",
+            "Prime Award Recipient UEI", "Awarding Agency", "Awarding Sub Agency",
+        ],
         "limit": args.limit,
         "page": args.page,
+        "sort": "Sub-Award Amount",
+        "order": "desc",
     }
 
-    result = _fetch_post("/subawards/", data)
+    result = _fetch_post("/search/spending_by_award/", data)
     if not result:
         return
 
     results = result.get("results", [])
-    total = result.get("page_metadata", {}).get("total", len(results))
+    if not _subaward_results_in_scope(results, args):
+        raise SystemExit(1)
+    total = len(results)
 
     if write_output(results, args, summary=f"USAspending subawards ({total} total)"):
         return
 
     print(f"Found {total} subawards (showing {len(results)}):")
     for r in results:
-        sub_name = r.get("recipient_name", "?")
-        amount = r.get("amount", 0)
-        date = r.get("action_date", "?")
-        desc = r.get("description", "")
-        prime_award = r.get("prime_award_generated_internal_id", "")
+        sub_name = r.get("Sub-Awardee Name", "?")
+        amount = r.get("Sub-Award Amount", 0)
+        date = r.get("Sub-Award Date", "?")
+        desc = r.get("Sub-Award Description", "")
+        prime_award = r.get("Prime Award ID", "")
 
         print(f"\n  {sub_name} | {_fmt_money(amount)} | {date}")
         if prime_award:
@@ -394,6 +409,56 @@ def cmd_subawards(args):
             print(f"    Desc: {desc[:120]}")
 
     print()
+
+
+def _normalized_scope_text(value):
+    """Normalize punctuation/case while retaining entity-name token order."""
+    return " ".join(re.findall(r"[A-Z0-9]+", str(value or "").upper()))
+
+
+def _subaward_results_in_scope(results, args):
+    """Fail closed if USAspending returns rows outside requested filters."""
+    mismatches = []
+    expected_uei = str(args.uei or "").strip().upper()
+    expected_name = _normalized_scope_text(args.query)
+    expected_award = str(args.award_id or "").strip().upper()
+    expected_agency = _normalized_scope_text(args.agency)
+
+    for row in results:
+        reasons = []
+        if expected_uei:
+            actual_uei = str(row.get("Sub-Recipient UEI") or "").strip().upper()
+            if actual_uei != expected_uei:
+                reasons.append(f"sub-recipient UEI {actual_uei or '<missing>'}")
+        elif expected_name:
+            actual_name = _normalized_scope_text(row.get("Sub-Awardee Name"))
+            if expected_name not in actual_name:
+                reasons.append(f"sub-awardee {actual_name or '<missing>'}")
+
+        if expected_award:
+            actual_award = str(row.get("Prime Award ID") or "").strip().upper()
+            if actual_award != expected_award:
+                reasons.append(f"prime award {actual_award or '<missing>'}")
+
+        if expected_agency:
+            actual_agency = _normalized_scope_text(row.get("Awarding Agency"))
+            if actual_agency != expected_agency:
+                reasons.append(f"awarding agency {actual_agency or '<missing>'}")
+
+        if reasons:
+            mismatches.append((row.get("Sub-Award ID", "<unknown>"), reasons))
+
+    if not mismatches:
+        return True
+
+    print(
+        f"ERROR: USAspending returned {len(mismatches)} out-of-scope subaward "
+        "row(s); refusing to emit potentially unfiltered results.",
+        file=sys.stderr,
+    )
+    for subaward_id, reasons in mismatches[:3]:
+        print(f"  {subaward_id}: {', '.join(reasons)}", file=sys.stderr)
+    return False
 
 
 def cmd_transactions(args):
@@ -419,12 +484,13 @@ def cmd_transactions(args):
     data = {
         "filters": filters,
         "fields": [
-            "Award ID", "Recipient Name", "Action Date", "Federal Action Obligation",
-            "Awarding Agency", "Awarding Sub Agency", "Award Type", "Description"
+            "Award ID", "Recipient Name", "Action Date", "Transaction Amount",
+            "Awarding Agency", "Awarding Sub Agency", "Award Type", "Transaction Description",
+            "Mod", "Recipient UEI", "NAICS", "PSC"
         ],
         "limit": args.limit,
         "page": args.page,
-        "sort": "Federal Action Obligation",
+        "sort": "Transaction Amount",
         "order": "desc"
     }
 
@@ -442,10 +508,10 @@ def cmd_transactions(args):
     for r in results:
         award_id = r.get("Award ID", "?")
         name = r.get("Recipient Name", "?")
-        amount = r.get("Federal Action Obligation", 0)
+        amount = r.get("Transaction Amount", 0)
         date = r.get("Action Date", "?")
         agency = r.get("Awarding Agency", "?")
-        desc = r.get("Description", "")
+        desc = r.get("Transaction Description", "")
 
         print(f"\n  {award_id} | {_fmt_money(amount)} | {date}")
         print(f"    Recipient: {name}")

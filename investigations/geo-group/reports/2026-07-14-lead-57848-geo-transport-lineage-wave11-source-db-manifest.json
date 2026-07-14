@@ -1,0 +1,125 @@
+{
+  "profile_id": "geo-group",
+  "lead_id": 57848,
+  "subject": "GEO Transport, Inc.",
+  "run_label": "2026-07-14-lead-57848-geo-transport-lineage-wave11",
+  "scope": "Legal-entity lineage and present federal-recipient identity; no broad contract-total reconstruction",
+  "source_root": "investigations/geo-group/sources/2026-07-14-lead-57848-geo-transport-lineage-wave11",
+  "sources": [
+    {
+      "family": "Florida Division of Corporations",
+      "official_record": "P07000109960",
+      "official_url": "https://search.sunbiz.org/Inquiry/corporationsearch/SearchResultDetail?aggregateId=domp-p07000109960-ff880f70-e6b4-4f83-b123-ff1508812ae0&directionType=PreviousList&inquirytype=EntityName&listNameOrder=GEOTRACK+P288840&searchNameOrder=GEOTRANSPORT+P070001099600&searchTerm=GEOTAP+LLC",
+      "files": [
+        "registry/registry-all-exact.json",
+        "registry/registry-fl-910340.json",
+        "registry/registry-fl-910340-filings.json",
+        "registry/sunbiz-live-detail-transcription.json"
+      ],
+      "query": "query_registry.py search/entity/filings; official live detail opened through interactive web retrieval",
+      "key_boundary": "No Events and No Name History are official Florida record labels, not universal negatives"
+    },
+    {
+      "family": "SEC EDGAR",
+      "official_records": [
+        "CIK 0001517753",
+        "accession 0000950123-11-056083 S-4/A",
+        "accession 0001193125-26-071747 Exhibit 21.1",
+        "accession 0001193125-26-071747 Exhibit 22.1"
+      ],
+      "files": [
+        "sec/sec-company-cik-0001517753.json",
+        "sec/sec-filings-cik-0001517753.json",
+        "sec/sec-2011-s4a-g26789asv4za.htm",
+        "sec/sec-geo-fy2025-ex21.html",
+        "sec/sec-geo-fy2025-ex22.html"
+      ],
+      "query": "query_edgar.py company/filings plus direct official-archive downloads",
+      "key_boundary": "Exhibit 21 says direct or indirect ownership; exact immediate parent is not disclosed"
+    },
+    {
+      "family": "SAM public entity extract",
+      "official_record": "UEI DFEKRCYPZD84 / CAGE 6PV86",
+      "files": [
+        "sam/sam-bulk-uei-DFEKRCYPZD84.json"
+      ],
+      "query": "ingest_sam.py entity-by-uei DFEKRCYPZD84",
+      "key_boundary": "Local March 2026 public extract; no live SAM quota consumed"
+    },
+    {
+      "family": "USAspending",
+      "official_records": [
+        "CONT_AWD_70CDCR21C00000005_7012_-NONE-_-NONE-",
+        "CONT_AWD_70CDCR26FR0000002_7012_70CDCR25D00000002_7012"
+      ],
+      "files": [
+        "usaspending/usaspending-awards-uei-DFEKRCYPZD84.json",
+        "usaspending/usaspending-ice-2021-contract-detail.json",
+        "usaspending/usaspending-ice-2026-order-detail.json"
+      ],
+      "query": "query_usaspending.py awards --uei DFEKRCYPZD84; award generated_unique_award_id",
+      "dependency_collapse": "Both ICE award details are one federal recipient/parent-recipient attribution chain",
+      "key_boundary": "No award-total finding added; existing finding #12474 controls the two-award total"
+    }
+  ],
+  "identifier_crosswalk": {
+    "florida_document_number": "P07000109960",
+    "ein": "56-2677868",
+    "sec_cik": "0001517753",
+    "sam_uei": "DFEKRCYPZD84",
+    "cage": "6PV86",
+    "usa_spending_parent_recipient_name": "THE GEO GROUP, INC.",
+    "usa_spending_parent_recipient_uei": "JMLKZZ1NL2Z6"
+  },
+  "database_writes": {
+    "lead_disposition": {
+      "id": 57848,
+      "status": "completed",
+      "stop_reason": "Exact legal identity, current status, officers/addresses, ultimate GEO continuity, and ICE recipient attribution resolved; exact immediate-parent rung remains undisclosed and was not inferred."
+    },
+    "findings_added_and_verified": [13057, 13058, 13059, 13060, 13061],
+    "finding_verifier": "lead-57848-primary-source-audit",
+    "entity_updated": {
+      "id": 4812,
+      "fields": ["jurisdiction", "ein", "address", "status", "source", "notes", "date_formed"]
+    },
+    "entity_roles_updated": [2585],
+    "entity_roles_added": [2613, 2614, 2615, 2616, 2617, 2618, 2619, 2620, 2621, 2622, 2623, 2624, 2625],
+    "entity_relation_updated": [843],
+    "entities_added": [],
+    "aliases_added": [],
+    "connections_added": [],
+    "relations_added": [],
+    "merges": [],
+    "papercuts_logged": [1056, 1058, 1059, 1060, 1061]
+  },
+  "controlled_existing_findings": {
+    "12382": "FY2025 Exhibit 21 subsidiary status",
+    "12474": "Two-award direct ICE universe and totals",
+    "12662": "GEO federal recipient registrations including GEO Transport UEI/CAGE",
+    "12909": "2021 emergency Haitian-migrant flight contract",
+    "12892": "CSI Aviation subcontract disclosure"
+  },
+  "artifacts": [
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-report.md",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-legal-lineage-timeline.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-registry-status-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-officer-address-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-negative-log.md",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-source-db-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-lead-57848-geo-transport-lineage-wave11-SHA256SUMS.txt"
+  ],
+  "explicit_non_actions": [
+    "No HigherGov use",
+    "No live SAM query",
+    "No quarantined user key use",
+    "No paid PACER",
+    "No headless worker",
+    "No auto_leads",
+    "No alias",
+    "No duplicate merge",
+    "No new entity",
+    "No speculative relationship",
+    "No immediate-parent assertion"
+  ]
+}

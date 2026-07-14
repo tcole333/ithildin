@@ -1,0 +1,872 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62736,
+  "scope": "Salus CSRO procurement, protest/litigation, antecedent experience, and bounded GEO/political-link checks",
+  "generated_date": "2026-07-14",
+  "source_root": "investigations/geo-group/sources/2026-07-14-lead-62736",
+  "source_count": 93,
+  "sources": [
+    {
+      "path": "courtlistener/cl-cafc-appeal-search.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-docket.json",
+      "sha256": "2813285d07943b3afab9cb05af6153c343c514552cc0410b710a06ec03ff065b",
+      "bytes": 2011,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-opinions.json",
+      "sha256": "188f66c009889ee13c51bdd87d561fd3789aaada06487037e0f21eaf2d66ef8a",
+      "bytes": 4517,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-recap-csi-salus.json",
+      "sha256": "52ab8d97ed12134c8634e443d7c3f9588ad7dfa49c9f486307dd5ea87ee0eedc",
+      "bytes": 61866,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-recap-docket-all.json",
+      "sha256": "b76edd6a9e418aba1a56beda9482945411e2c6230db74ddb374b534e16d1515b",
+      "bytes": 43884,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-recap-docket-all.tsv",
+      "sha256": "f7ddef353b4d789de3f247376f2e54ecf649768b8431c4a4d6fd6d1e4731866f",
+      "bytes": 7207,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/cl-unavailable.tsv",
+      "sha256": "42f90997eb993bb5b01001bf47b8b5607cdeda5e448a9a54701f61581d87455d",
+      "bytes": 3020,
+      "source_class": "primary_court_index",
+      "source_url": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "CourtListener search/docket metadata or bounded appeal search."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.10.0.pdf",
+      "sha256": "10b899b485bad76948188a6afb34295653afb4de917fae7811bfaa03e5325071",
+      "bytes": 18994,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/10/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.10.0.txt",
+      "sha256": "c43d5224cf98fbd033853c4deb9b97c1c9326cee0ef8f399fa871fe0454b75d3",
+      "bytes": 1077,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/10/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.17.0_2.ocr.pdf",
+      "sha256": "1bf33c4502d5256fa9b05cd7a8976578937c70fd7d373a4d7b53be883b20c258",
+      "bytes": 69125302,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/17/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.17.0_2.ocr.txt",
+      "sha256": "cb80d6fce3961fe2a1a5edbef7caa947855cb5227497663c95196387a218c381",
+      "bytes": 53809,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/17/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.17.0_2.pdf",
+      "sha256": "9a772925b627c6326efbeaa50806e0f8b24fd16df1129cb8ef86408d07a4d78f",
+      "bytes": 3527993,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/17/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.17.0_2.txt",
+      "sha256": "42900a5c274b0ef0e062f75a63f8da9c6fe60f61fb75dc211c778d00a322bc08",
+      "bytes": 2871,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/17/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.22.0.pdf",
+      "sha256": "8c2bc22e3198001386e8db9d99fd3249abc9f08ba7c1f21b748afedb4c0d03c7",
+      "bytes": 118208,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/22/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.22.0.txt",
+      "sha256": "28c3a1553471810682643f63cab7811b8727303b6665b60990e954acba04ef41",
+      "bytes": 2786,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/22/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.27.0.pdf",
+      "sha256": "7cf02e90f83e9d2d91c7c40c1784365b0187b909eef731d9098b301d70dab8d9",
+      "bytes": 120838,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/27/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.27.0.txt",
+      "sha256": "222c679a1c0faf2c7812eb0dec9b0303d69d6afab15a4386befe5b069ee615e3",
+      "bytes": 3343,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/27/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.29.0.pdf",
+      "sha256": "74934b3ca45e49390553e1f9068f927b0f38067ff1065a89135243cf86366105",
+      "bytes": 803134,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/29/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.29.0.txt",
+      "sha256": "58d30b1307fc80e1d0072ee25bfe1f05c5538bc09e8688fd3d743ee57d85bfaf",
+      "bytes": 3455,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/29/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.31.0.pdf",
+      "sha256": "5a8776702554dd7009a70c9e1433594713bbfca4bcdccf5504f2779cf228134b",
+      "bytes": 431245,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/31/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.31.0.txt",
+      "sha256": "6b863e62ab07147833ec23b23cb1dfdfc84887775c16f8fc36f51d12901c640b",
+      "bytes": 101971,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/31/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.34.0.pdf",
+      "sha256": "51d1863764447af4d1f35d867f61377b27f93168bd89e06df94e95a944ef83fe",
+      "bytes": 235918,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/34/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.34.0.txt",
+      "sha256": "7150dd9dd8114c8444b322379c82744c16adc7a313670e33f3b87fa078de4a82",
+      "bytes": 134999,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/34/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.34.1.pdf",
+      "sha256": "cbbc8184aba253eca00540508a24f8e3a55a804cc67ba8439e99ff933ed8d5e4",
+      "bytes": 81038,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/34/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.34.1.txt",
+      "sha256": "d97bf246a6e0102f25f9d048d736a3b2443c04abf8d647fb2c50be030185b951",
+      "bytes": 10720,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/34/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.35.0.pdf",
+      "sha256": "1efaa777bab6db5dc92f59981d93b7706462f03d4722499948496846121d998f",
+      "bytes": 337097,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/35/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.35.0.txt",
+      "sha256": "eb642b15ffa8fcf1328e65a84e5461de37a965fde1f0f55727daf958b4be14fa",
+      "bytes": 106260,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/35/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.37.0.pdf",
+      "sha256": "a4d70c4ad575809b1dcabef72971491ddff8b7f8a996194d0a802df72e1595a4",
+      "bytes": 452206,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/37/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.37.0.txt",
+      "sha256": "7edad1a37225484211f858c11efe44ca8e3a0b72cd1fbb7fd5a8415d435a0a46",
+      "bytes": 79737,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/37/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.37.1.pdf",
+      "sha256": "d284ad4541e280dec49dfb5fc88f0bedd8e124972a98ae5260c8bc07017c6b6c",
+      "bytes": 196743,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/37/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.37.1.txt",
+      "sha256": "7bae97df448313d08ce25ddca16b0c74ce62d81e499485ffa88c7140dd35bcc1",
+      "bytes": 17272,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/37/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.40.0.pdf",
+      "sha256": "d8e9d0da6513e47ef84e35d8734aa88553f782b2d28f68a063ddb50d89122a1f",
+      "bytes": 112250,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/40/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.40.0.txt",
+      "sha256": "1c32c4c356d516110e22f09961b23cd89fc971d5359279279b8198dbd41b7846",
+      "bytes": 3555,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/40/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.42.0.pdf",
+      "sha256": "ea1611bb569c1c734b2cd9495562e9694325dc621cf22625995ccab6ce924123",
+      "bytes": 102550,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/42/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.42.0.txt",
+      "sha256": "6210bda128c29230788fd4966f19538281a3c8f3c4c54f589e301d58d8ddda9d",
+      "bytes": 57542,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/42/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.45.0.pdf",
+      "sha256": "46b5d3415082ddf2cdb769964056e39616cdfa062447f4a326f2a3be1750b2f4",
+      "bytes": 350514,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/45/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.45.0.txt",
+      "sha256": "7200af8c37b4df26dae6fa392f68ef774ec95963393de0ec037adb208372cf72",
+      "bytes": 37724,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/45/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.48.0_1.pdf",
+      "sha256": "f993b8fc0a1e0a8a3034b0ac3a5dea88f2a7387348e591b6c5d39eec90cc19d4",
+      "bytes": 120025,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/48/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.48.0_1.txt",
+      "sha256": "78a9e585382e27542cd88b1fb9ac53111ae088d803d4ae7e9979861ff58bc7c1",
+      "bytes": 5157,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/48/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.51.0.pdf",
+      "sha256": "af65a962694a6bb796ce1af7361b6c9d07738d1e1d05f05c7aeaea43a70e2a63",
+      "bytes": 110131,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/51/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.51.0.txt",
+      "sha256": "5ed23fa77865ca2f0b577f8f80f42d77fd4ce45858b0895b163f7d36a80cfdcf",
+      "bytes": 3486,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/51/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.0.pdf",
+      "sha256": "c457032fd00722475c559802d37fc793dba1b755c6447fca03b613e7d9f40243",
+      "bytes": 106479,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.0.txt",
+      "sha256": "0120dd2e3053497db80c62c2d2f797ec79f4b408e790d3fcb8ea07d61554b102",
+      "bytes": 20768,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.1.pdf",
+      "sha256": "927f8554c9101f7aea85d7f450fe22e134d833ca90e32429e0c18b3d381f8394",
+      "bytes": 393480,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.1.txt",
+      "sha256": "62ae5787a214ffe517a13a8d90683843f0668c4d5f52b4c81d0da9c71b4f74f3",
+      "bytes": 448,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.2.pdf",
+      "sha256": "8008c9f78efb32dd44eb24114d242dc94a87c33c2951aecc598a2c30b04c622b",
+      "bytes": 879898,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.53.2.txt",
+      "sha256": "6637cf43feea15fe1ceceb1c1d02b759689546ac408c7e63dac51c867b8a30f1",
+      "bytes": 72358,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/53/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.57.0.pdf",
+      "sha256": "cea4c0e21b2081f69286d137d1db01532a052414ac0b298efa83b75a012d2857",
+      "bytes": 66174,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/57/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.57.0.txt",
+      "sha256": "38af1fcd01c2f0b404ff94edce482f2a6525f6978c43c3bb48548eaa63cd9a6c",
+      "bytes": 22856,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/57/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.59.0.pdf",
+      "sha256": "87e1acbf88827021cc01e5497fb200cad136a7697407849ba08998c79efe3fc0",
+      "bytes": 194416,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/59/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.59.0.txt",
+      "sha256": "a1902c884e750026934e079557a2a6fdfc67b70acc9fc27fa8645beaa717d9e6",
+      "bytes": 20776,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/59/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.60.0.pdf",
+      "sha256": "683aab1227d249231aae2a29bb0cc18d0f3fba707f14aee9d4d48458a7a79a6b",
+      "bytes": 195298,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/60/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.60.0.txt",
+      "sha256": "258f36b123ec40dc9cfd70b45baa24e58cb518efc0eacde67d67b2d2f847083a",
+      "bytes": 38429,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/60/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.63.0.pdf",
+      "sha256": "01b46c237c5c0c5134ec319326e789fbbb2a8730d89471fdbac3c18bb07d6778",
+      "bytes": 56279,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/63/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.63.0.txt",
+      "sha256": "4b58788409a1db347049366996c4bf1b4869c75f60b5f419b8853221ccff2aca",
+      "bytes": 8834,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/63/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.63.1.pdf",
+      "sha256": "fee98daff1173126bd89bb35470dcaf881d493529ab3f3af55b74dc266a02eef",
+      "bytes": 832279,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/63/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.63.1.txt",
+      "sha256": "d9e49050842b3e3db2873f36ce549a95ae44aeefa8a67de798710cda00d7b6ef",
+      "bytes": 25907,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/63/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.1.pdf",
+      "sha256": "0b92453e33239203e900f3dcdc75cbe50d6984e7acf2ec94939690a8eb6aab6b",
+      "bytes": 1055754,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.1.txt",
+      "sha256": "bf1fd45cc7569b3b6af2a5b29efe4946503d0cb296b5ce273e067dff7fcea312",
+      "bytes": 3511,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.2.ocr.pdf",
+      "sha256": "8cad9f32700212d85dc6394b556545aafd30a2c3ffc0008afa9062d9353bae18",
+      "bytes": 3555948,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.2.ocr.txt",
+      "sha256": "b6a4ff6538dff10e10f10f631968072e08df218ceaf6cf7a29051ac225b62650",
+      "bytes": 10528,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.2.pdf",
+      "sha256": "e076e792922cdd4069f1d6b4a1aab13881b3c22b2db669be1d8b6013c46d6129",
+      "bytes": 4481557,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.65.2.txt",
+      "sha256": "e1e4597fb313d873ba618689d13a7c674f61e5295491d7938bfdb4f85b93e776",
+      "bytes": 135973,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/65/2/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.68.0.pdf",
+      "sha256": "a1e202e2bc86dacfc8caa51ed92ea3820bf821a32e9336df683e7db760aee206",
+      "bytes": 113609,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/68/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.68.0.txt",
+      "sha256": "859e837c34c8d699b4158e5d6001038d5c5bce2be846f6d5ebfbb9fe61c735c6",
+      "bytes": 1116,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/68/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.70.0.pdf",
+      "sha256": "2c2f44c2700b53511f2287b3cf300d722a7ecc81ef702068a9ab88a0ab5241e3",
+      "bytes": 639418,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/70/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.70.0.txt",
+      "sha256": "675c19dd9431f92bde7f63040a72166ba2f43917089f733f8a08435a97d69850",
+      "bytes": 181694,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/70/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.9.1.pdf",
+      "sha256": "fbccced12aec98dae63fb32aed768335704dc217aa2156c4271d47b6eb9bd80d",
+      "bytes": 37920,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/9/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "courtlistener/gov.uscourts.uscfc.52685.9.1.txt",
+      "sha256": "3ccdbd5d2e77d0836cf28d2e84eb95308089c5193954263e8d68d0d994de60a5",
+      "bytes": 9080,
+      "source_class": "primary_court",
+      "source_url": "https://www.courtlistener.com/docket/71090317/9/1/csi-aviation-inc-v-united-states/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Public RECAP filing; .txt and .ocr derivatives are local extraction aids for the corresponding PDF."
+    },
+    {
+      "path": "fec/fec-bustos.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-cappel.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-employer-salus.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-prior-search.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-thind.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-walters-salus.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-william-a-walters.json",
+      "sha256": "922338c9e4fba290b4c8349fb0cab5a5723c613db5151996d7e665b3c8321aff",
+      "bytes": 72242,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "fec/fec-william-walters-iii.json",
+      "sha256": "299140c6859d95b1d235ebaaa8acd0a046462248894675e55028dda1e24efd65",
+      "bytes": 530700,
+      "source_class": "primary_government_campaign_finance_search",
+      "source_url": "https://api.open.fec.gov/developers/",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded exact-name/employer FEC API result; zero results are not universal negatives."
+    },
+    {
+      "path": "sam/sam-local-salus-llc.json",
+      "sha256": "9bc70493efc00e5e064fc1b80a65023e38883229a7864b9ca2f032753594a123",
+      "bytes": 84,
+      "source_class": "primary_government_entity_extract",
+      "source_url": "https://sam.gov/data-services/Entity%20Management/Public%20V2?privacy=Public",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Local query result from the March 2026 SAM Public Entity Management extract; no secret/API key included."
+    },
+    {
+      "path": "sam/sam-local-search.json",
+      "sha256": "b788e6841f58779e9706ee0b5c437e968cee2fab5ff3e63ed52fed33ca14a02d",
+      "bytes": 1959,
+      "source_class": "primary_government_entity_extract",
+      "source_url": "https://sam.gov/data-services/Entity%20Management/Public%20V2?privacy=Public",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Local query result from the March 2026 SAM Public Entity Management extract; no secret/API key included."
+    },
+    {
+      "path": "sec/sec-salus-three-term-search.json",
+      "sha256": "26657aea29a51b6d55d9ebb94e2b3c25c1924984b521410b1ed4de75ffa9a89d",
+      "bytes": 45212,
+      "source_class": "primary_government_filing_search",
+      "source_url": "https://efts.sec.gov/LATEST/search-index",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Bounded EDGAR full-text orientation search; search behavior is broader than an exact-phrase assertion."
+    },
+    {
+      "path": "usaspending/usa-awards-salus-uei.json",
+      "sha256": "4291d975ac8b7a812670b41e731171f1950cd154b9f20f46c0dcf7209e37d21a",
+      "bytes": 2092,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000018_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usa-csro-award-detail.json",
+      "sha256": "3bb50c7007d075fd61524e487b584409ed2d919e5c152b8f9a6a5db2f2b63f23",
+      "bytes": 8611,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000018_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usa-csro-order-0037-detail.json",
+      "sha256": "b429963cb893b3a0d0e653ba399fff16f8176465726338aa416c1c7737407e1d",
+      "bytes": 8435,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000037_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usa-csro-parent-detail.json",
+      "sha256": "1ac89ee330356ef78258ed3fd8ae75720aa5d0be742d802d854254cdc1dc57d1",
+      "bytes": 8120,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_IDV_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usa-salus-ice-70CDCR26P00000010-detail.json",
+      "sha256": "78cfdd1610beecd5c2e6197e5cd1334d11aca48c47edbebc7d0ef21c612ab92d",
+      "bytes": 6476,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70CDCR26P00000010_7012_-NONE-_-NONE-",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usa-transactions-salus-uei.json",
+      "sha256": "b02b13d1fc5fd851579134e66ce68aee30897af23cd7e2a2ce2cf7ef9a855913",
+      "bytes": 22371,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000018_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-advanced-subaward-csro.json",
+      "sha256": "dfba40606c2c13eb717076624daa9b62107b189d753e76813d33ee626d6188a6",
+      "bytes": 485,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000018_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-care-19AQMM23F0766-search.json",
+      "sha256": "30f5e4b5476a3aeb198e50e1ef2766ce92a331b592d81a7d3fea95ba51377146",
+      "bytes": 1005,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_19AQMM23F0766_1900_19AQMM19D0119_1900",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/subaward/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-care-salus-subaward-search.json",
+      "sha256": "188084708041fd06bd7ce23335b39f08c027b2eaf386ea0d4509ce0da39ea528",
+      "bytes": 885,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_19AQMM23F0766_1900_19AQMM19D0119_1900",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/subaward/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-care-subawards-detail.json",
+      "sha256": "40809b5213208774bfb2a5c0fb5b9703bb6d11cae9afaed91d374b75adbb3dfc",
+      "bytes": 272,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_19AQMM23F0766_1900_19AQMM19D0119_1900",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/subaward/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-csro-idv-transactions.json",
+      "sha256": "178d1404efc1199c546bbb0c34322fd04fa22aa3532f97675160080199ca31e9",
+      "bytes": 4591,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_IDV_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-csro-order18-transactions.json",
+      "sha256": "b43aa787d815b468c51d93d952fab2b3af8307543c5439b1d3f29a1f61434270",
+      "bytes": 10529,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000018_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    },
+    {
+      "path": "usaspending/usaspending-csro-order37-transactions.json",
+      "sha256": "437c34465fd944be1d5752d06d5340cd9a9a85dddbcd16d01ab781bdc7e2a419",
+      "bytes": 484,
+      "source_class": "primary_government_spending",
+      "source_url": "https://www.usaspending.gov/award/CONT_AWD_70RDA225FR0000037_7001_70RDA225D00000005_7001",
+      "retrieved_or_archived_date": "2026-07-14",
+      "note": "Official USAspending award/API snapshot."
+    }
+  ],
+  "generated_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-money-vehicle-matrix.csv",
+      "sha256": "c42af7b625847f11a4c9aa6a70ba023d4274add2fee95e08760001554115977b",
+      "bytes": 17981
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-protest-case-timeline.csv",
+      "sha256": "3b85ac74e444f388936a48dc5fcb157bc54fb78cf8e4b9f0a0571577ff3a20b1",
+      "bytes": 4057
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-evidence-matrix.csv",
+      "sha256": "a3f00521be7d56612bc43d036cadbc31fe3519bb69aa73ba27e3b91955870a51",
+      "bytes": 5363
+    }
+  ],
+  "metric_guardrails": [
+    "IDIQ ceiling/base-and-all-options is not an obligation, outlay, payment, profit, or revenue.",
+    "Award obligations and outlays are separate federal reporting metrics.",
+    "Transaction obligation changes are not invoices or payments.",
+    "The court-reported $1,409,688 evaluated price is a source-selection scenario, not an award value.",
+    "The separate ICE purchase order and CARE antecedent subaward are excluded from CSRO totals."
+  ],
+  "negative_result_guardrail": "No-GEO/no-political-bridge statements are bounded to the reviewed public, redacted, and structured records and are not proof of nonexistence."
+}

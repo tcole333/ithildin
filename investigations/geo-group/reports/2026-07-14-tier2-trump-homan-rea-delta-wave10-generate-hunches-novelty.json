@@ -1,0 +1,86 @@
+{
+  "analysis_date": "2026-07-14",
+  "analysis_run_id": 121,
+  "profile_id": "geo-group",
+  "thread_id": 112,
+  "scan_context": {
+    "profile_findings_exported": 623,
+    "thread_112_findings_exported": 101,
+    "entities_exported": 297,
+    "connection_edges_exported": 74,
+    "existing_hypotheses_checked": 357,
+    "existing_tag_values_checked": 222
+  },
+  "required_gate": {
+    "independent_contexts": "Three or more genuinely independent contexts.",
+    "mechanism": "A distinct mechanism not already captured.",
+    "prediction": "A falsifiable prediction.",
+    "research_loop": "A concrete nonduplicative Layer 1 route."
+  },
+  "candidate_decisions": [
+    {
+      "candidate": "Direct GEO-to-Homan access shows that political relationships produced favorable treatment.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "If access altered treatment, decision records should show Homan or OPLA directing a contracting officer, changing the merits analysis, authorizing payment, or reversing a denial.",
+      "decision": "filtered and counterevidenced on this matter",
+      "reason": "The acquired episode shows access and planned engagement but ends in three full denials and a DOJ contact referral."
+    },
+    {
+      "candidate": "The 2018 Homan contact is a bridge to Homan's later Guidepost relationship and B.I.'s Guidepost payments.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "A work scope, personnel schedule, invoice, payment ledger, email, calendar, or ethics record would connect the 2018 matter to the later engagement or route B.I. funds to Homan.",
+      "decision": "filtered",
+      "reason": "The 2018 government-side contact predates the documented 2023-2025 payment years and contains no Guidepost, B.I., payee, or personnel link. #12983 already captures the non-bridge."
+    },
+    {
+      "candidate": "GEO leadership donations explain Homan or OPLA access.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "Contribution, bundling, reimbursement, fundraiser, calendar, or communication records would connect a donor or committee to the REA request or agency handling.",
+      "decision": "filtered",
+      "reason": "No donor or political contribution appears anywhere in the acquired decision path. #12984/#12985 remain an identity-ledger context without an access or influence mechanism."
+    },
+    {
+      "candidate": "Homan's statement that ICE was working with DOJ proves DOJ assumed GEO's defense or approved reimbursement.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "A DOJ engagement letter, appearance, payment record, voucher, modification, or merits decision would document takeover or reimbursement.",
+      "decision": "filtered as a category error",
+      "reason": "The statement records agency tracking and path-finding. The later record confirms denials and only a DOJ points-of-contact referral."
+    },
+    {
+      "candidate": "The three denials prove that GEO political access never produces influence.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "Independent decisions across unrelated issue types and time periods would repeatedly show access without favorable action.",
+      "decision": "filtered as overgeneralization",
+      "reason": "The three letters are contract-level decisions within one coordinated 2018 REA episode. They are discriminating only for the named requests."
+    },
+    {
+      "candidate": "The Homan/OPLA episode reveals a procurement or policy influence channel.",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "prediction": "A solicitation, source-selection, award, option, capacity, policy, or price record would name the same actor or show an intervention.",
+      "decision": "filtered",
+      "reason": "The acquired matter concerns litigation-cost reimbursement under existing vehicles and identifies no procurement or policy decision."
+    }
+  ],
+  "real_null": {
+    "statement": "An incumbent contractor raised a high-stakes legal and cost concern through agency leadership and counsel; the agency engaged but contracting officers applied ordinary contract-administration rationales and denied relief.",
+    "least_inconsistent_existing_hypothesis": 338,
+    "falsification": "A direction, communication, payment, work scope, ethics record, modification, voucher, or decision file shows that a relationship actor caused different treatment.",
+    "database_creation": false,
+    "reason_not_created": "The ordinary compartmentalized-practice explanation already exists as #338, and this is one bounded episode rather than three independent contexts."
+  },
+  "result": {
+    "decision": "real null retained; no novel hunch",
+    "new_findings": 0,
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_tags": 0,
+    "new_connections": 0,
+    "new_entities": 0
+  }
+}

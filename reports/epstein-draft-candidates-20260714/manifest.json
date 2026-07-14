@@ -1,0 +1,62 @@
+{
+  "candidate_count": 2094,
+  "documents_scanned": 1258556,
+  "documents_scanned_by_dataset": {
+    "DataSet10": 385869,
+    "DataSet11": 327196,
+    "DataSet8": 8353,
+    "DataSet9": 531260,
+    "HouseOversightEstate": 5878
+  },
+  "evidence_type_counts": {
+    "blank_recipient": 175,
+    "draft_handoff": 201,
+    "explicit_draft_ui": 2,
+    "self_addressed": 1452,
+    "self_copy_with_others": 264
+  },
+  "family_count": 1508,
+  "generated_at": "2026-07-14T21:12:14.343960+00:00",
+  "known_example_presence": {
+    "EFTA00743144": true,
+    "EFTA00965059": true,
+    "EFTA00965766": true,
+    "EFTA00965773": true,
+    "EFTA00965784": true,
+    "EFTA01731558": true,
+    "EFTA01732698": true,
+    "EFTA01732911": true,
+    "EFTA01928275": true,
+    "EFTA01967528": true
+  },
+  "outputs": {
+    "csv": "reports/epstein-draft-candidates-20260714/candidates.csv",
+    "families_csv": "reports/epstein-draft-candidates-20260714/families.csv",
+    "jsonl": "reports/epstein-draft-candidates-20260714/candidates.jsonl",
+    "manifest": "reports/epstein-draft-candidates-20260714/manifest.json",
+    "review_markdown": "reports/epstein-draft-candidates-20260714/review.md"
+  },
+  "priority_counts": {
+    "broad": 1886,
+    "high": 11,
+    "medium": 197
+  },
+  "scan_datasets": [
+    "DataSet8",
+    "DataSet9",
+    "DataSet10",
+    "DataSet11",
+    "HouseOversightEstate"
+  ],
+  "scope_note": "Review-only extraction. No profile, lead, finding, connection, or derived-sidecar state was changed. Same-page re-OCRs and near-duplicate revisions are clustered as candidate families, not treated as corroboration.",
+  "signal_counts": {
+    "documentation_language": 2,
+    "explicit_draft_language": 328,
+    "formal_salutation": 29,
+    "handoff_language": 321,
+    "pressure_language": 55,
+    "public_statement_language": 22,
+    "third_party_voice": 10
+  },
+  "source_db": "datasets/kabasshouse_epstein.db"
+}

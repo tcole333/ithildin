@@ -1,0 +1,106 @@
+{
+  "as_of": "2026-07-14",
+  "profile": "geo-group",
+  "lead_id": 57842,
+  "analysis_run": 99,
+  "question": "What best explains the apparent FY2025-FY2026 GEO-linked DHS obligation acceleration?",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "title": "Cross-facility operational funding and successor-task actions",
+      "description": "The observed action totals are principally incremental funding, new/successor task actions, and bounded scope/capacity additions distributed across B.I. and multiple detention facilities.",
+      "falsification": "Official transaction action types show options, corrections, or closeouts account for most of the net totals, or the same-elapsed increase disappears after exact action-date comparison."
+    },
+    {
+      "id": "H0",
+      "title": "Fiscal-year-end batching alone",
+      "description": "The apparent increase is principally a September/fiscal-boundary artifact rather than a broader in-year funding pattern.",
+      "falsification": "A large non-year-end cluster and same-elapsed increase survive outside September across multiple programs/facilities."
+    },
+    {
+      "id": "H2",
+      "title": "Option, deobligation, or correction accounting artifact",
+      "description": "Explicit option exercises, reversals, corrections, or closeout entries create most of the apparent acceleration.",
+      "falsification": "Those action types are a small share while funding-only and initial task actions dominate."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "fact": "FY2025 net obligations were $811,725,043.26, 8.5532% above FY2024's $747,767,056.09.",
+      "H1": "consistent",
+      "H0": "consistent",
+      "H2": "neutral"
+    },
+    {
+      "id": "E2",
+      "fact": "September supplied 25.4681% of FY2025 net obligations and September 26-30 supplied 16.1476%.",
+      "H1": "neutral",
+      "H0": "consistent",
+      "H2": "neutral"
+    },
+    {
+      "id": "E3",
+      "fact": "January 21-28, 2026 supplied $262,845,644.26, or 40.5324% of FY2026-to-date net obligations, across seven facility/service categories.",
+      "H1": "consistent",
+      "H0": "inconsistent",
+      "H2": "inconsistent"
+    },
+    {
+      "id": "E4",
+      "fact": "FY2026 through July 9 was 25.1369% above the FY2025 same-elapsed window.",
+      "H1": "consistent",
+      "H0": "inconsistent",
+      "H2": "inconsistent"
+    },
+    {
+      "id": "E5",
+      "fact": "Funding-only plus new/base task actions accounted for 98.3474% of FY2025 net and 85.6478% of FY2026-to-date net.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "inconsistent"
+    },
+    {
+      "id": "E6",
+      "fact": "The ICE subset contained one explicit FY2025 option action ($11,894,500 at Tacoma) and no FY2026 option action through July 9.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "inconsistent"
+    },
+    {
+      "id": "E7",
+      "fact": "Gross deobligations were 0.8625% of FY2025 gross positive obligations and 0.4612% in FY2026 through July 9.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "inconsistent"
+    },
+    {
+      "id": "E8",
+      "fact": "Positive same-elapsed contributors included ISAP V skip tracing, North Lake, Adelanto, Delaney Hall, Tacoma, and GEO Transport, while ISAP IV, South Texas, and Montgomery declined.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "neutral"
+    },
+    {
+      "id": "E9",
+      "fact": "GEO's 2025 10-K separately reported an activation/transportation revenue bundle but stated that revenue-recognition timing may differ from invoicing.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "neutral"
+    },
+    {
+      "id": "E10",
+      "fact": "Parent IDV snapshots generally show zero parent obligations while task orders carry obligations and outlays; parent potential value is therefore not the action flow.",
+      "H1": "consistent",
+      "H0": "neutral",
+      "H2": "inconsistent"
+    }
+  ],
+  "score": {
+    "H1": {"consistent": 9, "inconsistent": 0, "neutral": 1},
+    "H0": {"consistent": 2, "inconsistent": 2, "neutral": 6},
+    "H2": {"consistent": 0, "inconsistent": 6, "neutral": 4}
+  },
+  "verdict": "H1 is least inconsistent as a bounded descriptive mechanism, not a political or service-demand causal finding. Fiscal timing materially affects FY2025, but it is insufficient by itself because the FY2026 concentration is in January and the same-elapsed increase survives. Explicit options and deobligation accounting do not explain most of the totals.",
+  "database_hypothesis_decision": "No hypothesis was registered. The surviving mechanism is directly measured action classification, not an unexplained correlation requiring a new theory."
+}

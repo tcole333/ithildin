@@ -1,0 +1,164 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62728,
+  "as_of": "2026-07-14",
+  "subject": "GEO Transport, Inc. (GTI) subcontract under CSI Aviation's ICE Air prime vehicles",
+  "measurement_rule": "Prime ceilings, prime obligations, prime outlays, subcontract forecasts, recognized revenue statements, invoices, and cash receipts are distinct measures and must not be added or substituted for one another.",
+  "prime_level": {
+    "bpa": {
+      "piid": "70CDCR24A00000001",
+      "prime": "CSI Aviation, Inc.",
+      "potential_ceiling_usd": 3600000000,
+      "measure": "potential authority",
+      "not": [
+        "obligation",
+        "outlay",
+        "CSI revenue",
+        "GEO revenue",
+        "GTI payment"
+      ]
+    },
+    "orders_and_calls": {
+      "source": "lead 57836 matrix",
+      "piids": [
+        "70CDCR23FR0000035",
+        "70CDCR24FR0000024",
+        "70CDCR24FC0000003",
+        "70CDCR25FR0000022",
+        "70CDCR26FC0000001"
+      ],
+      "measure": "current cumulative federal obligations and outlays to the prime level",
+      "not": [
+        "CSI-to-GTI obligation",
+        "CSI-to-GTI payment",
+        "GEO recognized revenue",
+        "GEO cash receipt"
+      ]
+    }
+  },
+  "geo_subcontract_claims": [
+    {
+      "period": "2023 emergency subcontract",
+      "amount_usd": 16000000,
+      "measure": "up-to forecast over nine months, conditional on the full term",
+      "realized": false,
+      "cash": false,
+      "source_date": "2023-08-15"
+    },
+    {
+      "period": "Q3 2023",
+      "amount_usd": null,
+      "measure": "GEO filed statement that GTI secure-transportation revenue increased and that the emergency ICE air contract was the primary driver",
+      "realized_revenue_effect": "qualitative",
+      "cash": "not disclosed",
+      "source_date": "2023-11-13"
+    },
+    {
+      "period": "Q4 2023",
+      "amount_usd": null,
+      "measure": "GEO filed statement that secure-transportation revenue increased year over year and that the ICE air-support contract was the primary driver",
+      "realized_revenue_effect": "qualitative",
+      "cash": "not disclosed",
+      "source_date": "2024-02-22"
+    },
+    {
+      "period": "five-year subcontract inclusive of option periods",
+      "amount_usd": 25000000,
+      "measure": "expected annualized revenue",
+      "realized": false,
+      "cash": false,
+      "source_date": "2024-05-13"
+    },
+    {
+      "period": "500,000-removal scenario",
+      "amount_usd_low": 40000000,
+      "amount_usd_high": 50000000,
+      "measure": "potential incremental annualized revenue scenario",
+      "realized": false,
+      "cash": false,
+      "source_date": "2025-03-20"
+    },
+    {
+      "period": "2025",
+      "amount_usd": null,
+      "measure": "GEO statement that support under the ICE air subcontract continued to steadily increase",
+      "realized_revenue_effect": "not quantified",
+      "cash": "not disclosed",
+      "source_date": "2026-02-12"
+    }
+  ],
+  "public_subaward_coverage": {
+    "endpoint": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+    "spending_level": "subawards",
+    "subawards": true,
+    "date_range": [
+      "2023-01-01",
+      "2026-07-14"
+    ],
+    "tests": [
+      {
+        "filter": "recipient_search_text=GEO Transport, Inc.",
+        "rows": 0
+      },
+      {
+        "filter": "recipient_search_text=DFEKRCYPZD84",
+        "rows": 0
+      },
+      {
+        "filter": "award_ids=five known CSI ICE Air orders/calls",
+        "rows": 0
+      }
+    ],
+    "interpretation": "public reporting/coverage result only; not evidence that the subcontract or payments did not exist"
+  },
+  "agency_held_record_map": [
+    {
+      "record": "DSLA flight invoice",
+      "cadence": "14-day invoice period",
+      "possible_financial_fields": [
+        "routes",
+        "hours",
+        "associated costs",
+        "flight log",
+        "ODCs"
+      ]
+    },
+    {
+      "record": "SHRC flight invoice",
+      "cadence": "single mission",
+      "possible_financial_fields": [
+        "flight hours",
+        "associated costs",
+        "ODCs"
+      ]
+    },
+    {
+      "record": "RPA Invoice Charter Air Template (ICAT)",
+      "custodians": [
+        "contracting officer's representative",
+        "ICE ERO RPA team"
+      ],
+      "support": "invoice supporting documentation and discrepancy corrections"
+    },
+    {
+      "record": "government-cancellation reimbursement claim",
+      "support": "receipts substantiating payment, expressly including payment receipts to subcontractors"
+    },
+    {
+      "record": "expedited SHRC additional-cost request",
+      "support": "invoices demonstrating additional subcontractor costs"
+    }
+  ],
+  "publicly_unresolved": [
+    "signed GTI-CSI subcontract",
+    "amendments or option-exercise notices",
+    "GTI invoices",
+    "CSI accounts-payable ledger",
+    "CSI-to-GTI payment or remittance records",
+    "GEO realized subcontract revenue amount",
+    "GEO cash receipts attributable to the subcontract",
+    "subcontract margin"
+  ],
+  "court_record_boundary": "The Classic Air administrative-record index identifies quotes, subcontractor memoranda, evaluations, responsibility records, and award documents, but the record is under protective order; the public index establishes record categories only.",
+  "security_redaction_boundary": "FOIA should exclude or permit redaction of passenger identities, itineraries, routes, tail numbers, crew identities, operational tactics, and security-sensitive details while preserving financial and vendor-identification fields where segregable."
+}

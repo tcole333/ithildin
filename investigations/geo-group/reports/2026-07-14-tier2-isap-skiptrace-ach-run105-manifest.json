@@ -1,0 +1,96 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 109,
+  "analysis_run_id": 105,
+  "assessed_by": "agent:generate-hunches:run-105",
+  "external_queries": 0,
+  "manifest_path": "investigations/geo-group/reports/2026-07-14-tier2-isap-skiptrace-ach-run105-manifest.json",
+  "scope": "Verified-only ACH refresh for hypotheses #347/#350 and #348/#349 using the completed lead #62587 package; no external queries.",
+  "accepted_finding_ids": [12467, 12494, 12495, 12496, 12497, 12941, 12942, 12943],
+  "excluded_finding_ids": {
+    "retracted": [12468],
+    "unverified": [12466, 12470, 12471, 12472, 12473]
+  },
+  "input_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62587-isap-v-skiptrace-acquisition-record.md",
+      "sha256": "57eaf931edabc91031e5262fb937b1bf71118e9822a9e5672fd0fbf930f29bfd",
+      "bytes": 10893
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62587-isap-v-skiptrace-evidence-matrix.csv",
+      "sha256": "1f6b705524e0b7f0602cae58671196bd58d07dabec6b7da59904c42a6fc2bb7c",
+      "bytes": 8913
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62587-isap-v-skiptrace-source-manifest.json",
+      "sha256": "305f04ea885d7383fc075c03c10a98ec61c4492360fb0ea3c779818216b9cbc4",
+      "bytes": 5973
+    }
+  ],
+  "generated_outputs": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-isap-skiptrace-ach-run105.md",
+      "sha256": "df99ab458932b0a5a86a2a2fa7d3a3f1b2c956d402dbf7d39ade40d94fd4f4f7",
+      "bytes": 11581
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-isap-skiptrace-ach-run105-evidence-matrix.csv",
+      "sha256": "86db8beb52d3ac1e921acdf1918c66092b399bb293c6a70be036822764c88383",
+      "bytes": 9256,
+      "data_rows": 36
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-isap-skiptrace-ach-run105.json",
+      "sha256": "8bbefd49e393fea7d75ed4ba49e783faf53436f6e54b162011bfe305f74e0da0",
+      "bytes": 6238
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-isap-skiptrace-ach-run105-novelty.json",
+      "sha256": "06118a8b68a5893d12d77096a81ed456771b69b0f0a319c61b13be7857786b47",
+      "bytes": 1636
+    }
+  ],
+  "database_writes": {
+    "analysis_run": {
+      "id": 105,
+      "skill_name": "generate-hunches",
+      "status": "completed",
+      "findings_at_start": 553,
+      "connections_at_start": 71,
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    },
+    "hypothesis_evidence_matrix": {
+      "assessed_by": "agent:generate-hunches:run-105",
+      "rows": 36,
+      "current_run_not_applicable_rows": 16,
+      "current_run_eligible_rows": 20
+    },
+    "new_findings": [],
+    "new_hypotheses": [],
+    "new_leads": [],
+    "new_tags": [],
+    "new_connections": [],
+    "new_entities": []
+  },
+  "verdicts": {
+    "347_vs_350": "tie; neither hypothesis is less inconsistent on eligible verified evidence",
+    "348_vs_349": "#349 least inconsistent only at the public SORN/process-design layers; project-level approval timing unresolved",
+    "pilot_item42_mapping": "not established and not inferred",
+    "new_hunch_or_lead": "none; existing hypotheses, leads #58687/#58689, and human action #67 already cover the falsification plan"
+  },
+  "integrity_checks": {
+    "json_parse": "passed",
+    "csv_parse_and_row_count": "passed: 36 rows",
+    "csv_to_database_evaluation_set": "passed: exact hypothesis_id/finding_id/assessment match",
+    "accepted_finding_status": "passed: all eight verified",
+    "excluded_finding_status": "passed: #12468 retracted and five prior attachments unverified",
+    "sqlite_quick_check": "ok",
+    "foreign_key_violation_count": 64,
+    "foreign_key_note": "Unchanged project baseline; run #105 introduced no new foreign-key violation."
+  }
+}

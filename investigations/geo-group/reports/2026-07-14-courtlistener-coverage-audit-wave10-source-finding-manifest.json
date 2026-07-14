@@ -1,0 +1,212 @@
+{
+  "generated_date": "2026-07-14",
+  "profile": "geo-group",
+  "thread_id": 113,
+  "scope": "Local-evidence audit of CourtListener/RECAP universe and completed GEO case-analysis artifacts; no new merits search",
+  "universe": {
+    "as_of": "2026-07-13",
+    "alias_rows": 75,
+    "normalized_query_groups": 67,
+    "candidate_records": 4597,
+    "exact_party_supported_dockets": 1494,
+    "identity_confirmed_geo_dockets": 1489,
+    "unresolved_same_name_party_dockets": 5,
+    "reference_only_records": 196,
+    "false_positive_query_records": 2907,
+    "identity_confirmed_with_recap_indicator": 1087,
+    "identity_confirmed_without_recap_or_opinion_indicator": 402,
+    "identity_confirmed_with_opinion_link": 17,
+    "active_api_shorthand": 177,
+    "unknown_status": 2,
+    "zero_exact_party_alias_rows": 44,
+    "reconciliation_equation": "1494 = 1489 + 1 Community Alternatives + 4 SECON"
+  },
+  "unresolved_same_name_records": [
+    {
+      "docket_id": 5549851,
+      "court": "nced",
+      "docket_number": "5:11-cv-00052",
+      "case_name": "Harris v. Community Alternatives",
+      "matched_alias": "Community Alternatives"
+    },
+    {
+      "docket_id": 19415800,
+      "court": "mssb",
+      "docket_number": "87-02647",
+      "case_name": "SECON, INC.",
+      "matched_alias": "SECON, Inc."
+    },
+    {
+      "docket_id": 19328834,
+      "court": "nced",
+      "docket_number": "3:90-cv-00009",
+      "case_name": "Secon, Inc. v. McCain Const. Co.",
+      "matched_alias": "SECON, Inc."
+    },
+    {
+      "docket_id": 33801649,
+      "court": "nceb",
+      "docket_number": "90-00281",
+      "case_name": "Secon, Inc. v. Creed",
+      "matched_alias": "SECON, Inc."
+    },
+    {
+      "docket_id": 33802281,
+      "court": "nceb",
+      "docket_number": "91-00001",
+      "case_name": "Secon, Inc. v. Barry",
+      "matched_alias": "SECON, Inc."
+    }
+  ],
+  "early_seed_relationship": {
+    "seed_inventory_dockets": 458,
+    "overlap_with_identity_confirmed_universe": 426,
+    "seed_records_outside_identity_confirmed_universe": 32,
+    "identity_confirmed_universe_records_not_in_seed": 1063,
+    "seed_selected_for_deep_read_flag_count": 7,
+    "interpretation": "The seed is not additive and not a superset; later targeted analyses expanded beyond its selected flag."
+  },
+  "cluster_database_records": [
+    {
+      "cluster": "universe",
+      "lead_ids": [59487],
+      "verified_finding_ids": [12617, 12618],
+      "human_action_ids": []
+    },
+    {
+      "cluster": "detainee labor and conditions core",
+      "lead_ids": [59489],
+      "verified_finding_ids": [12550, 12551, 12553, 12554, 12556, 12557, 12559, 12578, 12579, 12580, 12581, 12582, 12591],
+      "excluded_retracted_finding_ids": [12548, 12549, 12552, 12555, 12558, 12568, 12569, 12570, 12571, 12572, 12590],
+      "human_action_ids": []
+    },
+    {
+      "cluster": "Menocal current posture",
+      "lead_ids": [59578],
+      "verified_finding_ids": [12732, 12733, 12734],
+      "human_action_ids": [45]
+    },
+    {
+      "cluster": "Reid current death-case posture",
+      "lead_ids": [59676],
+      "verified_finding_ids": [12728, 12729, 12730, 12731],
+      "human_action_ids": [44]
+    },
+    {
+      "cluster": "Novoa",
+      "lead_ids": [59678],
+      "verified_finding_ids": [12779, 12780, 12781],
+      "human_action_ids": [57, 58]
+    },
+    {
+      "cluster": "Inslee and NWIPC inspection",
+      "lead_ids": [59856],
+      "verified_finding_ids": [12736, 12737, 12738, 12739, 12740, 12741, 12742, 12743, 12744, 12745],
+      "human_action_ids": [46, 47]
+    },
+    {
+      "cluster": "New Jersey and Delaney Hall",
+      "lead_ids": [59858],
+      "verified_finding_ids": [12760, 12761, 12762, 12763, 12764, 12765],
+      "human_action_ids": [49, 50, 51, 52]
+    },
+    {
+      "cluster": "Roycroft FCA",
+      "lead_ids": [59854],
+      "verified_finding_ids": [12768, 12769, 12770, 12771, 12772, 12773],
+      "human_action_ids": [54, 55, 56]
+    },
+    {
+      "cluster": "Burciaga FCA",
+      "lead_ids": [59716],
+      "verified_finding_ids": [12784, 12785, 12786, 12787, 12788],
+      "human_action_ids": [59]
+    },
+    {
+      "cluster": "Hartel securities and ICE defense-cost lead",
+      "lead_ids": [59509, 59718, 63588],
+      "verified_finding_ids": [12562, 12577, 12593, 12594, 12595, 12596, 12815, 12816, 12817],
+      "human_action_ids": []
+    },
+    {
+      "cluster": "employee wage",
+      "lead_ids": [59722],
+      "verified_finding_ids": [12824, 12825, 12826, 12827, 12828],
+      "human_action_ids": []
+    },
+    {
+      "cluster": "legacy commercial",
+      "lead_ids": [59720],
+      "verified_finding_ids": [12838, 12839, 12840, 12841, 12842, 12843, 12844, 12845],
+      "human_action_ids": []
+    },
+    {
+      "cluster": "Salus CSRO / CSI procurement comparator",
+      "lead_ids": [62736],
+      "verified_finding_ids": [12967, 12968, 12969, 12970, 12971, 12972, 12973, 12974, 12975],
+      "excluded_retracted_finding_ids": [12949, 12950, 12951, 12952, 12953, 12958, 12959, 12960, 12961, 12965, 12966],
+      "human_action_ids": [70]
+    }
+  ],
+  "audit_database_write": {
+    "lead_id": 63588,
+    "status": "open",
+    "priority": "high",
+    "category": "contract",
+    "thread_id": 113,
+    "profile": "geo-group",
+    "title": "Acquire ICE GEO detainee-labor defense-cost and equitable-adjustment record",
+    "evidence_rows": 3,
+    "finding_rows": 0,
+    "provenance_refs": [
+      "investigations/geo-group/reports/2026-07-14-hartel-geo-de63-case-analysis.md",
+      "CourtListener:17329078:DE45",
+      "CourtListener:17329078:DE46"
+    ],
+    "papercut_id": 1018
+  },
+  "source_artifacts": [
+    {"path": "investigations/geo-group/reports/2026-07-13-courtlistener-litigation-universe.md", "sha256": "6cf58c87cdb18e3d565ed4e06dd302cee899333f0767e87e21ffb17acbbeb58d"},
+    {"path": "investigations/geo-group/reports/2026-07-13-courtlistener-litigation-universe.csv", "sha256": "14dccde84c210e7732309dbe7dd691108a01a8a72d89cd766c9ae73afd7bffd2"},
+    {"path": "investigations/geo-group/reports/2026-07-13-courtlistener-litigation-universe.json", "sha256": "1fbd722e7131208a71c2f4578e74305102eb3262bfb130e1736e9f76d7f36916"},
+    {"path": "reports/geo-group-courtlistener-20260713/report.md", "sha256": "a550b519bca8a4ea06dde706892361508508052d7ff2abe5ef610088703f9c7e"},
+    {"path": "reports/geo-group-courtlistener-20260713/geo-courtlistener-dockets-deduplicated.csv", "sha256": "e2d52e772010119f07ace8f176cde1a330113be7a26684fc2e70558ff8a2869d"},
+    {"path": "investigations/geo-group/reports/2026-07-13-lead-59489-courtlistener-litigation-forensics.md", "sha256": "1b54974da9b53f3c1df8e9694201d715d4e38339da984ecbec1eae246db453ab"},
+    {"path": "investigations/geo-group/reports/2026-07-13-lead-59489-courtlistener-case-issue-matrix.md", "sha256": "d258f1ae031fd34fe40dce882b9ec607cd42260c341ca715aeb554d918dc1c97"},
+    {"path": "investigations/geo-group/reports/2026-07-13-menocal-post-scotus-merits-posture.md", "sha256": "06d7c482604a11fe86e0d6901e854d554cecdbcc926c2c04c4180047cff6704f"},
+    {"path": "investigations/geo-group/reports/2026-07-13-reid-geo-courtlistener-posture.md", "sha256": "f7e7f23508fa8010f2ada6a003aebc0340252c757aafafd16ce7b14b976a938e"},
+    {"path": "investigations/geo-group/reports/2026-07-13-reid-geo-courtlistener-manifest.json", "sha256": "1e8f706e000ad576606a36d9918abe3c112c5d1df95c8973a811dd81ff8d8fb4"},
+    {"path": "investigations/geo-group/reports/2026-07-13-geo-inslee-courtlistener-case-analysis.md", "sha256": "c8610f1decd10c3a4be3ac4ec6ce62d561b90564795ac6ff41ce4f869b1f9b88"},
+    {"path": "investigations/geo-group/reports/2026-07-13-geo-inslee-source-manifest.json", "sha256": "ef16810f676315e9d56169387b9f70ffeec07da304f2f4c9d55170fc1272a542"},
+    {"path": "investigations/geo-group/reports/2026-07-14-novoa-geo-post-nwauzor-case-analysis.md", "sha256": "3a5c316874273d9ad734fd04e76d3788614eb3113c1a0393a65d7bc6dc6d7d09"},
+    {"path": "investigations/geo-group/reports/2026-07-14-novoa-geo-post-nwauzor-source-manifest.json", "sha256": "7b245951a20c4ad0ea737fbcf4db499ab7815c1269604f8030a622e5eeff604d"},
+    {"path": "investigations/geo-group/reports/2026-07-14-burciaga-geo-fca-case-analysis.md", "sha256": "9e1b6f4062d0c73603a1ee4d7b12e22f70c1e7968cf5e1a9066e12e7ffe97c18"},
+    {"path": "investigations/geo-group/reports/2026-07-14-burciaga-geo-fca-source-manifest.json", "sha256": "5933df338daeb98ef2c6457fa877d8951ca6a325bfb8f1835d0ec857a9799f2a"},
+    {"path": "investigations/geo-group/reports/2026-07-14-roycroft-geo-fca-case-analysis.md", "sha256": "f4cd35117680c53ca37228523ca2d4b48da6ccf380a9fc8c53e277d5cf973100"},
+    {"path": "investigations/geo-group/reports/2026-07-14-roycroft-geo-fca-source-manifest.json", "sha256": "ddc2e0882148cb3c2aed2a72949f8f827f9df897b021a7731485f2980e03fc94"},
+    {"path": "investigations/geo-group/reports/2026-07-14-new-jersey-v-geo-delaney-hall-case-analysis.md", "sha256": "fc7fce7c8207c4f84f5d69a4eaa14ea940de5ec5f550d382d7b23814a9b26274"},
+    {"path": "investigations/geo-group/reports/2026-07-14-hartel-geo-de63-case-analysis.md", "sha256": "9daa1995dfdb4b8236d219f9330ba7bc7c7b0b2e3695b4b5bb396714c6948195"},
+    {"path": "investigations/geo-group/reports/2026-07-14-hartel-geo-de63-source-manifest.json", "sha256": "3d63604978ee72c6d420b3e392ac8d93acd2fe4e7f42f39e13f859688f230136"},
+    {"path": "investigations/geo-group/reports/2026-07-14-geo-legacy-commercial-courtlistener-analysis.md", "sha256": "d826eec5f22f307a6fabe78afde7e2c8becacde79cc6383807efe1d2249acf73"},
+    {"path": "investigations/geo-group/reports/2026-07-14-geo-legacy-commercial-source-manifest.json", "sha256": "a5f43852fff8c79de28a9e0189d1a2ad19cfa380a873b9fdc4f995ea400d9c7c"},
+    {"path": "investigations/geo-group/reports/2026-07-14-geo-systemic-employment-wage-case-analysis.md", "sha256": "50d1e64929d887247e0dd90bca85c8c54e453ed6ef0b6efaaf503d2b2ae85e6d"},
+    {"path": "investigations/geo-group/reports/2026-07-14-geo-systemic-employment-wage-source-manifest.json", "sha256": "c6f5a62e0ed1c077824dd0a819929cf9303e8ab9b0f25698063ffde56d97acaf"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-procurement-case.md", "sha256": "df4b7085737862fae92c2714155b0827f9344cea59d7d374f2db8e773a62999b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-source-manifest.json", "sha256": "90d7a63d9b72f0c369d2f49ee3c2f430c5a366427289b8e41d9080b53289429e"}
+  ],
+  "verification": {
+    "database_foreign_key_baseline": 64,
+    "database_foreign_key_after_write": 64,
+    "foreign_key_baseline_preserved": true,
+    "pragma_quick_check": "ok",
+    "highergov_used": false,
+    "external_case_queries_run": false,
+    "new_findings_created": 0
+  },
+  "generated_artifacts": [
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10.md",
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10-source-finding-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10-sha256.txt"
+  ]
+}

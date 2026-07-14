@@ -1,0 +1,399 @@
+{
+  "as_of": "2026-07-14",
+  "profile": "geo-group",
+  "lead_id": 59356,
+  "thread_id": 111,
+  "scope": "Public-record household-reportable GEO holdings/trades, ownership-control boundary, same-day portfolio cadence, and controlled comparison with DHS/GEO procurement actions.",
+  "integrity": {
+    "status": "pass",
+    "source_files": 46,
+    "ptr_text_extracts": 17,
+    "durable_build_inputs": true,
+    "expected_counts_verified": {
+      "annual_account7_parsed_rows": 10311,
+      "annual_geo_trades": 14,
+      "ptr_geo_trades": 1,
+      "total_geo_trades": 15,
+      "ptr_same_day_transaction_rows": 204,
+      "in_window_action_rows": 155,
+      "in_window_unique_action_dates": 112,
+      "in_window_base_action_rows": 18,
+      "matched_control_dates": 198,
+      "all_weekdays": 293
+    },
+    "control_cells_verified": [
+      {
+        "key": [
+          "all_actions",
+          14,
+          "trade_dates"
+        ],
+        "hits": 15,
+        "sample_size": 15
+      },
+      {
+        "key": [
+          "all_actions",
+          14,
+          "matched_same_weekday_controls"
+        ],
+        "hits": 198,
+        "sample_size": 198
+      },
+      {
+        "key": [
+          "all_actions",
+          14,
+          "all_weekdays"
+        ],
+        "hits": 292,
+        "sample_size": 293
+      },
+      {
+        "key": [
+          "base_actions",
+          14,
+          "trade_dates"
+        ],
+        "hits": 7,
+        "sample_size": 15
+      },
+      {
+        "key": [
+          "base_actions",
+          14,
+          "matched_same_weekday_controls"
+        ],
+        "hits": 128,
+        "sample_size": 198
+      },
+      {
+        "key": [
+          "base_actions",
+          14,
+          "all_weekdays"
+        ],
+        "hits": 186,
+        "sample_size": 293
+      }
+    ]
+  },
+  "database_result": {
+    "prior_findings_checked": [
+      12514,
+      12515,
+      12516,
+      12543
+    ],
+    "new_verified_findings": [
+      12948,
+      12957
+    ],
+    "lead_id": 59356,
+    "human_action_id": 69,
+    "papercut_ids": [
+      991,
+      995,
+      997
+    ],
+    "hypotheses_reviewed_unscored": [
+      351,
+      352
+    ]
+  },
+  "interpretive_boundaries": [
+    "The disclosure identifies a public filer and covered household universe, not the beneficial owner or trade decision maker for each row.",
+    "Family-member identities and account numbers are intentionally absent from the public form and were not reconstructed.",
+    "Same-day portfolio cadence does not prove discretion, automation, routine motive, or absence of knowledge.",
+    "Action-date proximity does not establish procurement initiation, evaluation, selection, notice, knowledge, trade instruction, or causation.",
+    "Base actions, modifications, deobligations, closeouts, obligations, outlays, payments, GEO revenue, and trade profits are distinct concepts.",
+    "No HigherGov API call or HigherGov source was used in this wave."
+  ],
+  "negative_coverage": [
+    "Seventeen official Trump PTRs were indexed and screened; one contained an exact GEO issuer hit.",
+    "No public OGE record reviewed identified the covered owner, trade decision maker, adviser/broker discretion, account number, share count, cost basis, or instruction time.",
+    "No reviewed public acquisition record supplied Delaney proposal, evaluation, selection, awardee-notice, or trade-instruction timestamps.",
+    "Live SAM wrapper calls failed silently and are recorded as papercut #991; indexed official SAM pages and official USAspending fields were used instead."
+  ],
+  "sources": [
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/Donald-J-Trump-2026-278ANNUAL.pdf",
+      "sha256": "84b5987e4c8a418188600bea1e1ba6b44e0d5735cdd757cee5aba551977ca402",
+      "bytes": 8319883
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/Donald-J-Trump-2026-278ANNUAL.txt",
+      "sha256": "7870ef1f8d913fdc54c7a2ef8032f6c846b8ba68f8dc5d1f4652a7ff6a679099",
+      "bytes": 10188108
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/OGE-278e-guide.html",
+      "sha256": "83b0507f98ed90eda8d034cbc960d5f8ee37dfb0f7444b96a708133051419156",
+      "bytes": 200650
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/OGE-Form-278e-blank.pdf",
+      "sha256": "90dd3da72f4913a45e0d07e6669cdcf824a6fd6c257717e736c2545eb5ef57b6",
+      "bytes": 3994653
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/OGE-Form-278e-blank.txt",
+      "sha256": "ef52d80fbe68c2f5844dc620ca0a0158ce330a4ec4d7fe4a56e38712814b0745",
+      "bytes": 52563
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/Trump-Donald-J-05.08.2026-278T-2.pdf",
+      "sha256": "00e56352e83731329841caedaa09328cd87ed02ec235c07058a3b351407479be",
+      "bytes": 13265804
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/Trump-Donald-J-05.08.2026-278T-2.txt",
+      "sha256": "51d2b19eb2687aa775088921e374e40818f30ab7ab7e52444e22615a0714120e",
+      "bytes": 1118340
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/oge-api-donald-trump-records.json",
+      "sha256": "04c71e86446f46720807325a99c642e35e616d82f7629f3cf683b025f6689969",
+      "bytes": 8569
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-01.txt",
+      "sha256": "37d01d55ada9111687cac6349cd8c6074c371407dec1a6e8825209ebe3f9159b",
+      "bytes": 351827
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-02.txt",
+      "sha256": "f8a0811a85ae3bdf4a4560dc7ee6a405a714e80a2262775fd3208b0669f09975",
+      "bytes": 465125
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-03.txt",
+      "sha256": "51d2b19eb2687aa775088921e374e40818f30ab7ab7e52444e22615a0714120e",
+      "bytes": 1118340
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-04.txt",
+      "sha256": "017bad0c130f2468a9f2859113a0fa1edac3d1daa337411555dbb7150cd2fe54",
+      "bytes": 63615
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-05.txt",
+      "sha256": "c9633c52bde63c8ba82acb75757a92796a1c85eaee9011d510d64ea531fe803a",
+      "bytes": 78048
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-06.txt",
+      "sha256": "29cf2237e2e71cd6f2ab27a1a3f1957d08bd7b1f54c51217a516a0ac4ba7257a",
+      "bytes": 75256
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-07.txt",
+      "sha256": "29c3f960c8f9db8bbde0659dfa2e242d5815e7beb3ed668a39186ff2a5e5909f",
+      "bytes": 42198
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-08.txt",
+      "sha256": "22ab99fef7e6c219d0dc3b59ac0572f2a5e35a41c3fcfd95cf02de193cf5dd2a",
+      "bytes": 79357
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-09.txt",
+      "sha256": "a36dd3519d8c51757b3bf32c9789209bbe10374c992eb09bd77d3a696b9ade81",
+      "bytes": 55366
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-10.txt",
+      "sha256": "4a600d10a426292f534726fdd162abb2320c50c660d9c87b62447233df9d075b",
+      "bytes": 16970
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-11.txt",
+      "sha256": "60827bc36370e4b67ffb000f1af1d03b0d989a91a5551f21f69e470e16b9e810",
+      "bytes": 24477
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-12.txt",
+      "sha256": "5acc56b3c9802d6c862e1e85366438b971e3768043cb48015d0142e4cf52b027",
+      "bytes": 33839
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-13.txt",
+      "sha256": "9dc598c5a2e3847371c7927c33c19e4ac02f691847bd91f329c3f1a80a9ac8a8",
+      "bytes": 22733
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-14.txt",
+      "sha256": "30481d099ce7fd7d81cac19df956b2ff5a011be3b43104693ae3020fce3c0667",
+      "bytes": 15838
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-15.txt",
+      "sha256": "7464067f5eeff60e7f62a0e201f344d65860720cad6d827083c974721c9f97ba",
+      "bytes": 68400
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-16.txt",
+      "sha256": "7ef22d8c836a7acde20dca006574edea696ba7c7b99fe731888a9af5859ee883",
+      "bytes": 22819
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-texts/trump-ptr-17.txt",
+      "sha256": "9a80108af8fcf673d3e5fbb15dec975ab18cd18f31f23c0881cbe97374886d89",
+      "bytes": 209223
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/oge/ptr-urls.tsv",
+      "sha256": "b5821a248cef2df42c322f5fa287f1b2f4ea042f2cad77f708741c703b285dc0",
+      "bytes": 2540
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/procurement/2026-07-13-dhs-wide-geo-award-actions.csv",
+      "sha256": "f296728dbed0c4d1fac3403430f78c5526f3a6520926caacded39d258a0f7ea7",
+      "bytes": 947555,
+      "data_rows": 1416
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/procurement/70CDCR25D00000007.json",
+      "sha256": "0f8df443c42c158ee373e0a4e48693462c27a889567a744924fe63c2ea7f2a1c",
+      "bytes": 7732
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/procurement/70CDCR25D00000009.json",
+      "sha256": "4351ad5436f41acc6f25d9bdb88bf707afb211ffb8fe0c6759c9a70abbced939",
+      "bytes": 7686
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/procurement/70CDCR25D00000062.json",
+      "sha256": "5268908509f3d94a7dcc974f50719fe696ee71323c31dedf7842ba3285ad6f10",
+      "bytes": 7840
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-02-27-0001193125-25-037537.txt",
+      "sha256": "14d37bcb33bb478281009df8211a3d7e0b0fd48e8c0ef35469aba3c3b86618f7",
+      "bytes": 4680
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-02-27-d886579dex991.txt",
+      "sha256": "b8f7ba45bf1d6784b27e7cfa25ee985b9d5f1278d3808678c11f2c3acb9f403a",
+      "bytes": 27574
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-03-20-0001193125-25-058290.txt",
+      "sha256": "387eac09347afcf141a7f6ef42d7a51e73a4fdad6ec5f112ea43d1171f1e329c",
+      "bytes": 4770
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-03-20-d889252dex991.txt",
+      "sha256": "aae32f5f260bb847302fb2c346017e139fb0abb807e2d1d8a45ffa3c35c9c91c",
+      "bytes": 32018
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-08-06-0001193125-25-173958.txt",
+      "sha256": "1c73d31cda61ec9539606a82c346b47479d8a52ee0325f9a5d3860d3d2eb11a9",
+      "bytes": 5988
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-08-06-d16032dex991.txt",
+      "sha256": "e61ef57ee68a28bf6c625fd6d2122257ed088293c86e81c9371b389a29cd0be2",
+      "bytes": 32377
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-11-06-0001193125-25-267980.txt",
+      "sha256": "212371aa34ae8f541ee7db5a54c2fcd01236e0add82ac3c4ea267df0d80135a5",
+      "bytes": 6054
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2025-11-06-d10858dex991.txt",
+      "sha256": "8d0dfb31564ff97b5b844137568451827890d2ef481efb2600d745125cb7c76f",
+      "bytes": 34742
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2026-02-12-0001193125-26-047556.txt",
+      "sha256": "eda3c64f0f78bd5f4b4242dca5617fb578b4efd48bbe289d670426e0c8d0eaf9",
+      "bytes": 4704
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2026-02-12-d88889dex991.txt",
+      "sha256": "7077d37415a90513d6826dd132486c15f78cb49c3ab259bc530cbe49728fcc92",
+      "bytes": 33059
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/2026-03-05-0001193125-26-094068.txt",
+      "sha256": "d0057ddcf3874efe2b5b3e9cf310c158ffeb1e50b73cbbc491732b7a31092455",
+      "bytes": 11199
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/edgar-10k-filings.json",
+      "sha256": "02bb45484e2f1152cb6d7c883e6ef53844f472b06bfcd6b2eab6ef04234c3e29",
+      "bytes": 3884
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/edgar-8k-filings.json",
+      "sha256": "7bc8e42afe6b309d5cf29c22f0b9ea108c09b6533e0ce6732492e081cffdc329",
+      "bytes": 8414
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/geo-2025-10k-read.txt",
+      "sha256": "1e5ea040ecf972414a93b12e27ec4f1632f9480f02f4d009015bc0dc699f446d",
+      "bytes": 898333
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/geo-2025-10k.html",
+      "sha256": "db2e73a5b9131f4bc9fb81140f8651b4f2e222981920508e88db8fa55e9fbb32",
+      "bytes": 7443797
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-59356/sec/geo-2025-10k.txt",
+      "sha256": "74d8be1cdba64227c5fb4f2ea78bd99196b1936d5688e2543380910f2cca50e9",
+      "bytes": 629792
+    }
+  ],
+  "generated_outputs": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-build-summary.json",
+      "sha256": "dc6e179b35a9973a510352fa7935d32036e4c3e0b876d1663634b4486027d42a",
+      "bytes": 3396
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-evidence-matrix.csv",
+      "sha256": "90bf96a7153658d83c1dbc10780933049637f9d1a48b926182c13ba1305c5b11",
+      "bytes": 12810,
+      "data_rows": 18
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-household-trade-control-test.md",
+      "sha256": "c0d9d884b25c40f0f752c6f2a1324a735032689db2575461eb7b1b670cd0ad1a",
+      "bytes": 15475
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-matched-same-weekday-controls.csv",
+      "sha256": "fce8c4bc1758efc9d452e3804934f8cde0d4a20a1b00041ad6aa506979b83e8e",
+      "bytes": 12058,
+      "data_rows": 198
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-trade-to-action-ledger.csv",
+      "sha256": "5ace353f60b1b722c1f64218a04c730017ce8ef80e00a2fe73ce3576bbd6816e",
+      "bytes": 20330,
+      "data_rows": 15
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59356-window-control-summary.csv",
+      "sha256": "4d8283d3e33c5e68d509983ca6ae9767ca81a5c1c33e7bd164ce1e5ba02acb8f",
+      "bytes": 2171,
+      "data_rows": 40
+    }
+  ],
+  "rebuild_scripts": [
+    {
+      "path": "scripts/build_geo_household_trades_lead.py",
+      "sha256": "5ba500a50be7333948b08b5863b74457c80d582eda25ee996bab71f71895b415",
+      "bytes": 15892
+    },
+    {
+      "path": "scripts/build_geo_household_trades_manifest.py",
+      "sha256": "a0581788643a253a8c8d1084c1ccc88c3d14e3d2f7f3ec3b2ba1a158a175898d",
+      "bytes": 7048
+    }
+  ]
+}

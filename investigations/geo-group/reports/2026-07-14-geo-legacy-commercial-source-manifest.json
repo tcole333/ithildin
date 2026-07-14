@@ -1,0 +1,203 @@
+{
+  "research_cutoff": "2026-07-14",
+  "lead_id": 59720,
+  "thread_id": 113,
+  "profile_id": "geo-group",
+  "inventory": {
+    "path": "reports/geo-group-courtlistener-20260713/geo-courtlistener-dockets-deduplicated.csv",
+    "sha256": "e2d52e772010119f07ace8f176cde1a330113be7a26684fc2e70558ff8a2869d",
+    "unique_dockets": 458
+  },
+  "sources": [
+    {
+      "case": "ARAMARK Correctional Services, LLC v. Community Education Centers, Inc.",
+      "document": "CourtListener docket detail with embedded FJC IDB record",
+      "date": "2010-08-02",
+      "url": "https://www.courtlistener.com/api/rest/v4/dockets/18003595/",
+      "sha256": "fe09bd641358854730732f79837be26698c02c60e518be4a379d419f7bc8fd84",
+      "availability": "Authenticated CourtListener API; no RECAP documents",
+      "key_fields": {
+        "procedural_progress": 4,
+        "disposition": 6,
+        "nature_of_judgement": 1,
+        "amount_received": 7240,
+        "judgment": 1
+      }
+    },
+    {
+      "case": "ARAMARK Correctional Services, LLC v. Community Education Centers, Inc.",
+      "document": "CourtListener FjcIntegratedDatabase model and code mappings",
+      "date": "2026-07-14 snapshot",
+      "url": "https://github.com/freelawproject/courtlistener/blob/main/cl/recap/models.py",
+      "sha256": "8e2994560d4e67b3c70a5c2b9589448cbd062ed590945ceb45b0899ec5611178",
+      "availability": "Open-source model; defines amount_received in thousands with non-uniform-use warning and maps codes 4/6/1/1"
+    },
+    {
+      "case": "ARAMARK Correctional Services, LLC v. Community Education Centers, Inc.",
+      "document": "Contemporary description of complaint theory",
+      "date": "2010-04-15",
+      "url": "https://www.prisonlegalnews.org/news/2010/apr/15/appalling-prison-and-jail-food-leaves-prisoners-hungry-for-justice/",
+      "sha256": "c499926d0d83788907f1135715f9022154e7d89da205a84397a0a03749e9e540",
+      "availability": "Secondary report; used only for complaint theory, not disposition"
+    },
+    {
+      "case": "Michael Gilliland v. Cornell Companies, Inc.",
+      "document": "ECF 50 memorandum opinion",
+      "date": "2008-11-10",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.txsd.507443/gov.uscourts.txsd.507443.50.0.pdf",
+      "sha256": "7c636178726aab85bb3b618bbc8bdb00b1d630817a91b62ccef95cf14ef13f15",
+      "availability": "RECAP; 39 pages; key pages visually checked"
+    },
+    {
+      "case": "Michael Gilliland v. Cornell Companies, Inc.",
+      "document": "CourtListener docket detail with embedded FJC IDB record",
+      "date": "2009-03-20",
+      "url": "https://www.courtlistener.com/api/rest/v4/dockets/5574540/",
+      "sha256": "c85e17caf47cfaf38da5e3939cc0f28ca6ef17e7b0b8ff9603bcc282fc714218",
+      "availability": "Authenticated CourtListener API; final dismissal document absent"
+    },
+    {
+      "case": "David N.T. Watson v. Community Education Centers, Inc. and John J. Clancy",
+      "document": "ECF 29 venue-transfer order",
+      "date": "2011-08-11",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.flmd.252964/gov.uscourts.flmd.252964.29.0.pdf",
+      "sha256": "b7ac55d43a15e49c3da9c2122f4cb99cc7407d31aa8384dc2a9e754237d4dd9e",
+      "availability": "RECAP; 12 pages; key pages visually checked"
+    },
+    {
+      "case": "David N.T. Watson v. Community Education Centers, Inc. and John J. Clancy",
+      "document": "New Jersey CourtListener docket detail with embedded FJC IDB record",
+      "date": "2012-10-03",
+      "url": "https://www.courtlistener.com/api/rest/v4/dockets/5791896/",
+      "sha256": "c738110a1615ca6fe4f26ca535af8f876821dc346bac730ee6e5a667d323c5e4",
+      "availability": "Authenticated CourtListener API; settlement documents absent"
+    },
+    {
+      "case": "Community Education Centers, Inc. v. McDougall",
+      "document": "CourtListener docket detail with embedded FJC IDB record",
+      "date": "2013-07-29",
+      "url": "https://www.courtlistener.com/api/rest/v4/dockets/12978030/",
+      "sha256": "9b08074677708a1447e592c8c27e82f4998ae4c7ff1cb5f583dce79e52059d9e",
+      "availability": "Authenticated CourtListener API; no RECAP docket entries or documents"
+    },
+    {
+      "case": "The GEO Group, Inc. v. HCC Life Insurance Company",
+      "document": "Removed state-court complaint, FLSD ECF 1-1",
+      "date": "2016-03-02",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.flsd.481115/gov.uscourts.flsd.481115.1.1.pdf",
+      "sha256": "4f908443fd705a8d710dba0bd4dfa7ba0382308198a584caf502136a160a1345",
+      "availability": "RECAP scan; forced OCR derivative used; key pages visually checked"
+    },
+    {
+      "case": "The GEO Group, Inc. v. HCC Life Insurance Company",
+      "document": "CourtListener docket-entry metadata including mediation and dismissal entries",
+      "date": "2017-06-06",
+      "url": "https://www.courtlistener.com/docket/13426410/the-geo-group-inc-v-hcc-life-insurance-company/",
+      "sha256": "4286f074d1ada63171c14f48a58472077992fde6e485c05a9d42f24ffc186dbf",
+      "availability": "Authenticated CourtListener API metadata; settlement agreement unavailable"
+    },
+    {
+      "case": "HCC Life Insurance Company Inc. v. The GEO Group, Inc. and GEO Corrections Holdings, Inc.",
+      "document": "GEO ECF 7 motion to dismiss or stay competing declaratory action",
+      "date": "2016-03-31",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.txsd.1340513/gov.uscourts.txsd.1340513.7.0.pdf",
+      "sha256": "5ca7e38b74ef060eea40ef5bfe4bfa5630e1ddf096a79e03b8359266ec72c397",
+      "availability": "RECAP; 10 pages"
+    },
+    {
+      "case": "HCC Life Insurance Company Inc. v. The GEO Group, Inc. and GEO Corrections Holdings, Inc.",
+      "document": "CourtListener docket-entry metadata including voluntary dismissal",
+      "date": "2016-07-20",
+      "url": "https://www.courtlistener.com/docket/4669735/hcc-life-insurance-company-inc-v-the-geo-group-inc/",
+      "sha256": "120ea2d8d8e37cef68affc9eedcd78e4f648816c5a5228bdc15d46f7272a30be",
+      "availability": "Authenticated CourtListener API metadata; complaint and dismissal PDFs unavailable"
+    },
+    {
+      "case": "Federal Judicial Center IDB methodology",
+      "document": "Integrated Database description",
+      "date": "2026-07-14 snapshot",
+      "url": "https://www.fjc.gov/research/idb",
+      "sha256": "a001f19bb2121d55e857128cb4e045f58c05cf5fc5b08cbd9468726cc0f009e8",
+      "availability": "Official FJC page; describes case-filing/termination data and codebooks"
+    },
+    {
+      "case": "GEO acquisition of Cornell Companies",
+      "document": "GEO Form 10-Q acquisition disclosure",
+      "date": "2011-11-07",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000923796/000119312511302441/d247088d10q.htm",
+      "sha256": null,
+      "availability": "Official SEC filing; states acquisition completed August 12, 2010"
+    },
+    {
+      "case": "GEO acquisition of Community Education Centers",
+      "document": "GEO Form 10-Q acquisition disclosure",
+      "date": "2017-05-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312517158609/d373712d10q.htm",
+      "sha256": null,
+      "availability": "Official SEC filing; states acquisition closed April 5, 2017 for $360 million"
+    }
+  ],
+  "qa": {
+    "visual_verification": [
+      "HCC complaint pages 1, 6, 8, and 10",
+      "Gilliland opinion pages 1, 2, and 38",
+      "Watson transfer order pages 1, 2, and 5"
+    ],
+    "fjc_amount_verification": "CourtListener model defines amount_received as dollars in thousands, not used uniformly; code mappings independently checked in the same model.",
+    "json_validated": true,
+    "csv_rectangularity_checked": true,
+    "clause_audit": {
+      "12838": {
+        "status": "pass",
+        "clauses": [
+          "API fields establish values 4/6/1/7240/1",
+          "model evidence maps procedural progress 4 to judgment on motion",
+          "model evidence maps disposition 6 to motion before trial",
+          "model evidence maps judgment nature 1 to monetary award only",
+          "model evidence maps judgment favor 1 to plaintiff",
+          "model evidence defines amount_received in thousands and preserves the non-uniform-use warning"
+        ]
+      },
+      "12840": {
+        "status": "pass",
+        "clauses": [
+          "docket quote establishes Settled in full",
+          "manifest evidence bounds the missing settlement agreement and payment to PACER 481115"
+        ]
+      },
+      "12842": {
+        "status": "pass",
+        "clauses": [
+          "API fields establish origin 5, disposition 13, and October 3, 2012 termination",
+          "model evidence maps origin 5 to transfer from another district and disposition 13 to settled",
+          "manifest evidence bounds the missing final settlement and payment to PACER 263514"
+        ]
+      },
+      "12845": {
+        "status": "pass",
+        "clauses": [
+          "API fields establish procedural progress 1 and disposition 12",
+          "model evidence maps procedural progress 1 to no court action before issue joined and disposition 12 to voluntarily dismissed",
+          "manifest evidence records zero RECAP entries/documents and bounds the missing docket to PACER 477174"
+        ]
+      }
+    }
+  },
+  "verified_finding_ids": [
+    12838,
+    12839,
+    12840,
+    12841,
+    12842,
+    12843,
+    12844,
+    12845
+  ],
+  "paid_document_gaps": [
+    "PACER 347944: ARAMARK complaint, dispositive motion/order, and final judgment",
+    "PACER 263514: Watson New Jersey final settlement/dismissal entries",
+    "PACER 507443: Gilliland entries after ECF 50 and final stipulation/order",
+    "PACER 477174: CEC v. McDougall entire docket, complaint, and dismissal",
+    "PACER 481115: HCC mediation/settlement materials and dismissal documents"
+  ]
+}

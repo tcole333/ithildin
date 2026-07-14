@@ -50,8 +50,10 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.fts_query import literal_fts_query
 except ImportError:
     from output_util import add_output_args, write_output
+    from fts_query import literal_fts_query
 
 BASE_DIR = Path(__file__).parent.parent
 DB_PATH = BASE_DIR / "datasets" / "kabasshouse_epstein.db"
@@ -391,7 +393,7 @@ def cmd_search(args):
         JOIN documents d ON d.rowid = documents_fts.rowid
         WHERE documents_fts MATCH ?
     """
-    params = [args.query]
+    params = [literal_fts_query(args.query)]
     if args.dataset:
         sql += " AND d.dataset = ?"
         params.append(args.dataset)

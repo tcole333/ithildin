@@ -34,6 +34,16 @@ import sqlite3
 import sys
 from pathlib import Path
 
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
+
+try:
+    from tools.fts_query import literal_fts_query
+except ImportError:
+    from fts_query import literal_fts_query
+
 BASE_DIR = Path(__file__).parent.parent
 DB_PATH = BASE_DIR / "datasets" / "epstein_fbi_files.db"
 PARQUET_PATH = BASE_DIR / "datasets" / "svetfm_fbi_files.parquet"
@@ -287,7 +297,7 @@ def cmd_ingest(args):
 def cmd_search(args):
     """FTS5 full-text search across all documents."""
     db = get_db()
-    query = args.query
+    query = literal_fts_query(args.query)
 
     sql = """
         SELECT
@@ -322,6 +332,15 @@ def cmd_search(args):
         count_sql += " AND d.char_count >= ?"
         count_params.append(args.min_chars)
     total = db.execute(count_sql, count_params).fetchone()[0]
+
+    results = [dict(r) for r in rows]
+    if write_output(
+        results,
+        args,
+        summary=f"FBI Epstein Files search '{args.query}': {total} matches",
+    ):
+        db.close()
+        return
 
     filt = f" (min_chars={args.min_chars})" if args.min_chars else ""
     print(f"Search: '{args.query}'{filt} -- {total} matches (showing {len(rows)})")
@@ -545,7 +564,7 @@ def main():
     p_s.add_argument("query", help="Search query (FTS5 syntax)")
     p_s.add_argument("--limit", type=int, default=20, help="Max results (default: 20)")
     p_s.add_argument("--min-chars", type=int, help="Minimum document size in chars")
-    p_s.add_argument("--json", dest="json_out", action="store_true", help="Output JSON")
+    add_output_args(p_s)
 
     p_d = subs.add_parser("doc", help="Retrieve a specific document")
     p_d.add_argument("doc_id", help="EFTA id (EFTA00000001 or 1) or named exhibit substring")

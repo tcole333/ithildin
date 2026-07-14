@@ -255,6 +255,16 @@ corpus_tools:
     description: "Persons, documents, flights"
     commands: ["search-persons", "search-docs", "search-flights"]
 
+  - tool: "tools/reporting_corpus.py"
+    name: "Epstein Reporting Knowledge Layer"
+    description: "Versioned reporting, attributed atomic claims, lineage, and primary-evidence verification gaps"
+    commands: ["search", "latest", "claims", "primary-gaps"]
+
+  - tool: "tools/government_release_corpus.py"
+    name: "DOJ and SEC Press Releases"
+    description: "Primary official agency statements; preserve allegation and disposition language"
+    commands: ["search", "show", "stats"]
+
   - tool: "tools/query_doj.py"
     name: "DOJ Vol 11"
     description: "FALLBACK: 331K pages, strict subset of kabasshouse (external DB path); use for cross-checking only"

@@ -187,14 +187,15 @@ def cmd_donor(args):
     max_pages = max(1, args.limit // 100 + 1)
     results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
 
+    total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
+
     if write_output(results[:args.limit], args, summary=f"FEC donor '{args.query}'"):
         return
     if args.json_out:
         print(json.dumps(results[:args.limit], indent=2, default=str))
         return
 
-    total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
     employer_note = f" at employer '{args.employer}'" if args.employer else ""
     print(f"Found {total} contributions from donors matching '{args.query}'{employer_note} (showing {min(len(results), args.limit)})")
     print()
@@ -229,14 +230,15 @@ def cmd_employer(args):
     max_pages = max(1, args.limit // 100 + 1)
     results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
 
+    total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
+
     if write_output(results[:args.limit], args, summary=f"FEC employer '{args.query}'"):
         return
     if args.json_out:
         print(json.dumps(results[:args.limit], indent=2, default=str))
         return
 
-    total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
     print(f"Found {total} contributions from employees of '{args.query}' (showing {min(len(results), args.limit)})")
     print()
 
@@ -485,11 +487,11 @@ def cmd_totals(args):
 
 def cmd_committee(args):
     """Look up committee details."""
-    results, _ = _fetch(f"/committees/{args.committee_id}/", {})
+    results, _ = _fetch(f"/committee/{args.committee_id}/", {})
 
     if not results:
         # Single entity endpoint returns differently
-        url = f"{BASE_URL}/committees/{args.committee_id}/?api_key={_get_api_key()}"
+        url = f"{BASE_URL}/committee/{args.committee_id}/?api_key={_get_api_key()}"
         req = Request(url, headers={"Accept": "application/json", "User-Agent": "OSINT-Research/1.0"})
         try:
             with urlopen(req, timeout=60) as resp:

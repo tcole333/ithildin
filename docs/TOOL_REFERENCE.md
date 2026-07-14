@@ -32,6 +32,8 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fara` | query_fara.py | FARA foreign agent registrations |
 | `littlesis` | query_littlesis.py | LittleSis relationship maps |
 | `gdelt` | query_gdelt.py | GDELT global news |
+| `reporting` | reporting_corpus.py | Reviewed reporting claims promoted only with quoted primary evidence |
+| `government_releases` | government_release_corpus.py | Primary DOJ and SEC press releases, versioned and full-text searchable |
 | `aleph` | query_aleph.py | OCCRP Aleph |
 | `icij` | query_icij.py | ICIJ offshore leaks |
 | `acris` | query_acris.py | NYC ACRIS property records |
@@ -82,6 +84,44 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 **Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
 
 ## Core Investigation Tools
+
+### Epstein Reporting Knowledge Layer
+
+```bash
+uv run python tools/reporting_corpus.py init
+uv run python tools/reporting_corpus.py discover-repository
+uv run python tools/reporting_corpus.py discover-gdelt '"Jeffrey Epstein"' --timespan 3m
+uv run python tools/reporting_corpus.py discover-feed URL --query Epstein
+uv run python tools/reporting_corpus.py ingest-candidates --limit 50
+uv run python tools/reporting_corpus.py import-file export.ris --source proquest
+uv run python tools/reporting_corpus.py search 'Southern Trust' --output "$WORKDIR/reporting.json"
+uv run python tools/reporting_corpus.py claims 'JPMorgan' --output "$WORKDIR/reporting-claims.json"
+uv run python tools/reporting_corpus.py primary-gaps --output "$WORKDIR/reporting-gaps.json"
+uv run python tools/reporting_corpus.py recover-archives --failed-candidates --limit 50 --store-text
+uv run python tools/reporting_corpus.py ingest-archive-url ORIGINAL_URL ARCHIVE_URL --store-text
+```
+
+Reporting claims remain attributed secondary-source assertions. `promote` refuses
+claims that have not been reviewed and linked to quoted primary evidence. Full
+workflow and licensed-database export guidance: `docs/modules/reporting.md`.
+Public archive recovery uses Wayback CDX first and Common Crawl WARC ranges as a
+fallback; archive.is snapshots can be supplied manually.
+
+### DOJ/SEC Primary Press Releases
+
+```bash
+uv run python tools/government_release_corpus.py init
+uv run python tools/government_release_corpus.py ingest-doj --max-pages 100
+uv run python tools/government_release_corpus.py discover-sec --start-year 1997
+uv run python tools/government_release_corpus.py fetch-sec --limit 500
+uv run python tools/government_release_corpus.py search 'money laundering' --agency DOJ --output "$WORKDIR/doj-releases.json"
+uv run python tools/government_release_corpus.py search 'JPMorgan' --agency SEC --output "$WORKDIR/sec-releases.json"
+```
+
+DOJ ingestion is resumable through `ingest_state`; a zero `--max-pages` completes
+all remaining API pages. SEC coverage is the complete official online archive:
+static yearly indexes for 1997–2011 and the newsroom index for 2012–present.
+See `docs/modules/government-releases.md`.
 
 ### Queue System (SQLite-first)
 ```bash
@@ -1255,6 +1295,9 @@ uv run python tools/pillar_tracker.py arc \
     --role "Managing Director" --seniority senior \
     --start 1977 --end 1990 --exit-type collapse \
     --source "Apollo prospectus"
+
+# Delete one audited career arc by ID
+uv run python tools/pillar_tracker.py arc-delete ARC_ID
 
 # View career timeline
 uv run python tools/pillar_tracker.py career "PERSON_NAME"

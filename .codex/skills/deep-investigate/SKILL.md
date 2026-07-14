@@ -634,8 +634,8 @@ Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md
 # Launch all agents before waiting for any one agent
 # Each agent's prompt instructs it to write [WORKDIR]/report-agent-{a,b,c,d}.md
 
-# Poll for completion (check if report files exist)
-Bash: ls -la [WORKDIR]/report-agent-*.md 2>/dev/null | wc -l
+# Poll for completion (check if report files exist; safe with zsh unmatched globs)
+Bash: find [WORKDIR] -maxdepth 1 -name 'report-agent-*.md' -type f | wc -l
 # Repeat every 30s until count = 4 OR timeout reached (see below)
 
 # Once all reports exist, read them:

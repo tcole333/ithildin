@@ -289,9 +289,14 @@ class CourtListenerClient:
         """
         params = {}
         if date_filed_after:
-            params["date_filed__gte"] = date_filed_after
+            # The search endpoint uses Solr-style ``filed_after`` /
+            # ``filed_before`` parameters. Django-filter names such as
+            # ``date_filed__gte`` are silently ignored by this endpoint,
+            # which makes bounded searches look successful while returning
+            # records from outside the requested interval.
+            params["filed_after"] = date_filed_after
         if date_filed_before:
-            params["date_filed__lte"] = date_filed_before
+            params["filed_before"] = date_filed_before
 
         return self.search(
             query,

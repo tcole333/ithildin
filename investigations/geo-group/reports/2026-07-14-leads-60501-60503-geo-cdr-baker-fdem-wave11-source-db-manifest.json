@@ -1,0 +1,81 @@
+{
+  "profile": "geo-group",
+  "thread_id": 114,
+  "research_date": "2026-07-14",
+  "workdir": "/tmp/osint-JelQbJAS",
+  "source_archive": "investigations/geo-group/sources/2026-07-14-leads-60501-60503-geo-cdr-baker-fdem-wave11",
+  "leads": [
+    {"id": 60501, "status": "blocked", "blocking_record": "operating agreement/member schedule or equivalent primary ownership record"},
+    {"id": 60503, "status": "blocked", "blocking_record": "signed PO terms/rates/modifications and PO-to-invoice/warrant crosswalk"}
+  ],
+  "new_findings": [
+    {"id": 13033, "event_date": "2026-01-07", "evidence": "FLAIR:SWDN:D6000294462", "source_family": "FDEM/FLAIR payment chain", "dependency_collapsed": true},
+    {"id": 13034, "event_date": "2026-01-26", "evidence": "FLAIR:SWDN:D6000330868", "source_family": "FDEM/FLAIR payment chain", "dependency_collapsed": true},
+    {"id": 13035, "event_date": "2026-05-11", "evidence": "FLAIR:SWDN:D6000512228", "source_family": "FDEM/FLAIR payment chain", "dependency_collapsed": true},
+    {"id": 13036, "event_date": "2026-06-29", "evidence": "FLAIR:SWDN:D6000601410", "source_family": "FDEM/FLAIR payment chain", "dependency_collapsed": true},
+    {"id": 13037, "event_date": "2026-06-29", "evidence": "FLAIR:SWDN:D6000601421", "source_family": "FDEM/FLAIR payment chain", "dependency_collapsed": true},
+    {"id": 13038, "event_date": "2026-07-14", "evidence": "FLAIR:VENDOR:F3941XXXXX:001", "source_family": "Florida FLAIR vendor file", "dependency_collapsed": false}
+  ],
+  "reused_findings": [12669, 12670, 12677, 12708],
+  "entity_writes": [
+    {"entity_id": 4980, "operation": "add-role", "role_id": 2580, "person_name": "J. David Donahue", "role": "Manager listed in 2025 filing; absent from 2026 annual report", "date_start": "2025-08-28", "date_end": "2026-04-29", "source": "Florida Division of Corporations L25000395700"},
+    {"entity_id": 4980, "operation": "add-role", "role_id": 2581, "person_name": "Carlos Duart", "role": "Manager", "date_start": "2025-08-28", "date_end": null, "source": "Florida Division of Corporations L25000395700"},
+    {"entity_id": 4980, "operation": "add-role", "role_id": 2582, "person_name": "Tina Vidal-Duart", "role": "Manager", "date_start": "2025-08-28", "date_end": null, "source": "Florida Division of Corporations L25000395700"},
+    {"entity_id": 4980, "operation": "add-address", "value": "11740 SW 80th Street, Suite 102, Miami, FL 33183-0000", "source": "FLAIR:VENDOR:F3941XXXXX:001"}
+  ],
+  "preexisting_entity_roles": [
+    {"entity_id": 4980, "role_id": 2579, "person_name": "George C. Zoley", "role": "Manager", "date_start": "2025-08-28", "source": "Florida Division of Corporations L25000395700", "write_status": "pre-existing; not added by this package"}
+  ],
+  "human_actions": [
+    {"id": 76, "lead": 60501, "status": "pending"},
+    {"id": 77, "lead": 60503, "status": "pending"}
+  ],
+  "new_entities": [],
+  "new_connections": [],
+  "new_infra_requests": [],
+  "new_leads": [],
+  "auto_leads_run": false,
+  "ownership_boundary": "No operating agreement/member schedule was recovered; CDR Maguire affiliation is not member proof.",
+  "contract_boundary": "FLAIR exports do not print PO-010844 or a line assignment, and posted expense-warrant fields do not establish cleared/cashed status.",
+  "source_families": [
+    {
+      "name": "FDEM/FLAIR payment chain",
+      "files": [
+        "flair/swdn-D6000294462.xlsx",
+        "flair/swdn-D6000294462-drilldown.xlsx",
+        "flair/swdn-D6000330868.xlsx",
+        "flair/swdn-D6000330868-drilldown.xlsx",
+        "flair/swdn-D6000512228.xlsx",
+        "flair/swdn-D6000512228-drilldown.xlsx",
+        "flair/swdn-D6000601410.xlsx",
+        "flair/swdn-D6000601410-drilldown.xlsx",
+        "flair/swdn-D6000601421.xlsx",
+        "flair/swdn-D6000601421-drilldown.xlsx",
+        "flair/transparency-geo-cdr-payments-fy26.html"
+      ],
+      "corroboration_count": 1,
+      "note": "Central SWDN, departmental drilldown, and Transparency Florida are redundant views of the same state accounting chain."
+    },
+    {
+      "name": "Florida FLAIR vendor file",
+      "files": ["flair/vendor-geo-cdr.xlsx"],
+      "corroboration_count": 1
+    },
+    {
+      "name": "Florida corporate registry",
+      "files": ["registry/registry-geo-cdr-exact.json", "registry/registry-geo-cdr-entity.json", "registry/registry-cdr-maguire-exact.json"],
+      "corroboration_count": 1
+    },
+    {
+      "name": "GEO SEC filing",
+      "files": ["contract/geo-2025q3-10q.html"],
+      "corroboration_count": 1
+    },
+    {
+      "name": "FDEM PO public-record production",
+      "files": ["contract/florida-2025-po-records.pdf", "contract/florida-2025-po-records.txt"],
+      "corroboration_count": 1,
+      "note": "PDF and extracted text are two representations of one document."
+    }
+  ]
+}

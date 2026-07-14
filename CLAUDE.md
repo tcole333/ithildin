@@ -74,6 +74,18 @@ All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findin
 
 Epstein corpus-derived facts (temporal events, normalized financials, entity resolution) live in the regenerable sidecar **`datasets/epstein_derived.db`** — see `investigations/epstein/CLAUDE.md` and `tools/epstein_derived.py`.
 
+Epstein reporting lives in **`datasets/epstein_reporting.db`** and is queried with
+`tools/reporting_corpus.py`. It stores versioned articles and attributed claims;
+reporting is not primary corroboration. Promote only reviewed claims with quoted
+primary evidence. Recover known URLs with Wayback/Common Crawl through
+`recover-archives`; archive hosts are retrieval paths, not independent sources.
+See `docs/modules/reporting.md`.
+
+DOJ and SEC press releases live in **`datasets/government_releases.db`** and are
+queried with `tools/government_release_corpus.py`. They are primary government
+statements, not independent proof of the allegations they announce. Preserve
+allegation/charge/conviction language exactly. See `docs/modules/government-releases.md`.
+
 Lead lifecycle: `open -> in_progress -> completed | blocked | dead_end`
 Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 

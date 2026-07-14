@@ -1,0 +1,144 @@
+{
+  "analysis_date": "2026-07-14",
+  "lead_id": 58137,
+  "analysis_run_id": 96,
+  "sources": [
+    {
+      "id": "SEC:000119312526116014",
+      "type": "primary corporate filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526116014/d923546ddef14a.htm",
+      "coverage": "GEO 2026 board and executive roster, 21-person group denominator, biographies, government-service dates, company join dates and role descriptions"
+    },
+    {
+      "id": "SEC:000114036126012100",
+      "type": "primary corporate filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/1070985/000114036126012100/ny20060006x1_def14a.htm",
+      "coverage": "CoreCivic 2026 current directors and executive officers, 18-person group denominator, Lappin and Hylton biographies"
+    },
+    {
+      "id": "CHRG-116hhrg43192",
+      "type": "primary congressional hearing record",
+      "url": "https://www.govinfo.gov/content/pkg/CHRG-116hhrg43192/pdf/CHRG-116hhrg43192.pdf",
+      "coverage": "MTC immigration-detention start in 2006; Scott Marquardt role; Rodney Cooper Texas-corrections career and 2009 LaSalle join"
+    },
+    {
+      "id": "CDIR-2014-02-18-DEPARTMENTS-4",
+      "type": "primary federal directory",
+      "url": "https://www.govinfo.gov/content/pkg/CDIR-2014-02-18/pdf/CDIR-2014-02-18-DEPARTMENTS-4.pdf",
+      "coverage": "Dan Joslin listed under BOP Human Resources Management in 2014"
+    },
+    {
+      "id": "CDIR-2016-02-12-DEPARTMENTS-4",
+      "type": "primary federal directory",
+      "url": "https://www.govinfo.gov/content/pkg/CDIR-2016-02-12/pdf/CDIR-2016-02-12-DEPARTMENTS-4.pdf",
+      "coverage": "Dan Joslin listed under BOP Human Resources Management"
+    },
+    {
+      "id": "Tarrant County MTC Letter 2024-02-14",
+      "type": "primary local-government correspondence",
+      "url": "https://agendamgmtprod.tarrantcountytx.gov/Meetings/GetDocument/?docId=324465&docPath=meetings%2F29106%2Fhistory%2F28934%2FSections%2F1164454%2Fitems%2F324684%2FSystemItemAttachment%2Ffd5d240d-569c-4ebb-b030-236bd5c31542.pdf",
+      "coverage": "Dan Joslin addressed as MTC Vice President in 2024"
+    },
+    {
+      "id": "GAO-08-6",
+      "type": "primary federal oversight report",
+      "url": "https://www.gao.gov/products/gao-08-6",
+      "coverage": "BOP contracting policy response under Harley Lappin; supports program-level procurement adjacency, not a specific award decision"
+    },
+    {
+      "id": "USCOURTS-gamd-7_23-cv-00024-5",
+      "type": "primary federal court order",
+      "url": "https://www.govinfo.gov/content/pkg/USCOURTS-gamd-7_23-cv-00024/pdf/USCOURTS-gamd-7_23-cv-00024-5.pdf",
+      "coverage": "LaSalle entity, ownership, management, accounting, and reporting-line evidence; record limitations on shared leadership"
+    },
+    {
+      "id": "LaSalle 2025 PREA audit",
+      "type": "company-hosted audit artifact",
+      "url": "https://drive.google.com/file/d/1X34eqEzQy0jXTJ-0ZFK6J3eOGnweMDcF/view?usp=sharing",
+      "local_file": "/tmp/osint-3saFvnVV/lasalle-rolling-plains-2025.pdf",
+      "coverage": "Current Brian Rodeen PREA role; agency CEO fields blank; organization-chart description"
+    },
+    {
+      "id": "LaSalle Human Rights",
+      "type": "current company webpage",
+      "url": "https://lasallecorrections.com/human-rights/",
+      "coverage": "Current public naming of Brian Rodeen and 2025 audit links"
+    },
+    {
+      "id": "Florida registry MTC F94000006200",
+      "type": "primary state corporate registry via local registry mirror",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=F94000006200",
+      "local_file": "/tmp/osint-3saFvnVV/registry-mtc-entity.json",
+      "coverage": "MTC legal officers Scott Marquardt, Daniel Marquardt and Michael P. Petrogeorge; not a complete senior-management roster"
+    },
+    {
+      "id": "Dan Joslin public professional biography",
+      "type": "secondary/self-reported professional profile",
+      "url": "https://theorg.com/org/management-training-corporation/org-chart/dan-joslin",
+      "coverage": "Reported MTC Vice President, Corrections start in 2016; used with lower confidence than government records"
+    }
+  ],
+  "bounded_negative_searches": [
+    {
+      "domains": ["oge.gov", "dhs.gov"],
+      "names": ["Matthew Albence", "Daniel Ragsdale", "Julie Myers Wood"],
+      "terms": ["ethics", "recusal", "waiver"],
+      "result": "No individual ethics agreement, recusal, waiver, or screening record located; ordinary government-role documents were returned."
+    },
+    {
+      "domains": ["oge.gov", "justice.gov", "oig.justice.gov", "gao.gov"],
+      "names": ["Harley Lappin", "Stacia Hylton", "Dan Joslin", "Rodney Cooper"],
+      "terms": ["ethics", "recusal", "waiver", "post-employment"],
+      "result": "No person-specific transition ethics record located; unrelated same-name and historical-role results excluded."
+    },
+    {
+      "domains": ["mtctrains.com", "lasallecorrections.com"],
+      "terms": ["leadership", "executive", "ICE", "DHS"],
+      "result": "No complete current senior-leadership roster or prior ICE/DHS biography located for either private company; no primary company or government source located supplied Dan Joslin's MTC join date."
+    }
+  ],
+  "bounded_scope_assessments": [
+    {
+      "finding_id": 12855,
+      "scope": "CoreCivic 2026 proxy roster",
+      "method": "Reviewed the 12 identified current-director biographies and the disclosed executive-officer table and biographies, accounting for the director/executive overlap to match the proxy's 18-person group denominator.",
+      "result": "No reviewed CoreCivic biography reported prior ICE or DHS service. This is a filing-bounded result, not proof that no undisclosed or lower-level service existed."
+    },
+    {
+      "finding_id": 12856,
+      "scope": "CoreCivic biographies for Harley Lappin and Stacia Hylton",
+      "method": "Compared each disclosed government-service biography against the nested role taxonomy.",
+      "result": "Lappin's disclosed service was at BOP and Hylton's was at USMS and the DOJ Federal Detention Trustee; neither biography reported ICE or DHS service."
+    },
+    {
+      "finding_id": 12857,
+      "scope": "Harley Lappin procurement-authority classification",
+      "method": "Reviewed the CoreCivic proxy biography and GAO-08-6 for role language and any named matter-specific decision.",
+      "result": "The sources establish program-level oversight of private facilities and contracts but do not identify Lappin as a contracting officer or source-selection official and do not tie him to a specific CoreCivic award decision."
+    },
+    {
+      "finding_id": 12858,
+      "scope": "Dan Joslin company-transition and ICE/DHS classification",
+      "method": "Reviewed the 2014 and 2016 federal directories, the 2024 Tarrant County MTC letter, the congressional hearing record, the MTC website, and bounded exact-name/domain searches.",
+      "result": "Primary records establish BOP Human Resources Management and a later MTC vice-president title; no primary source reviewed supplied the MTC join date, and no reviewed source reported prior ICE or DHS service."
+    },
+    {
+      "finding_id": 12859,
+      "scope": "Rodney Cooper role classification",
+      "method": "Applied the nested taxonomy to the congressional hearing record's stated 30-year Texas Department of Criminal Justice career.",
+      "result": "The disclosed service is state corrections; the reviewed record does not report prior ICE/DHS or federal acquisition service."
+    }
+  ],
+  "database_artifacts": {
+    "findings": [12855, 12856, 12857, 12858, 12859],
+    "hypotheses_evaluated": [337, 338],
+    "new_lead": 62429,
+    "analysis_run": 96
+  },
+  "limitations": [
+    "Three sources returning the same underlying filing would not be corroboration; each document is counted once.",
+    "No negative web search is treated as proof of absence.",
+    "MTC and LaSalle are not assigned prevalence percentages because their public disclosure regimes are not comparable to SEC registrants.",
+    "No source in this wave tied a named former official to a specific contract award decision benefiting the later employer."
+  ]
+}

@@ -1,0 +1,279 @@
+# J. Ezra Merkin / Epstein Connections Investigation Profile
+
+name: merkin
+primary_subject: "J. Ezra Merkin"
+description: >
+  Investigate J. Ezra Merkin's documented financial, business, philanthropic,
+  and social connections to Jeffrey Epstein and Epstein-adjacent investment
+  networks. Map Merkin's Ascot, Gabriel, and Ariel structures and his Madoff,
+  Cerberus, GMAC, and nonprofit relationships without treating network proximity
+  or appearance in released records as evidence of misconduct.
+
+key_persons:
+  - "j. ezra merkin"
+  - "j ezra merkin"
+  - "ezra merkin"
+  - "jeffrey epstein"
+  - "bernard madoff"
+  - "bernie madoff"
+  - "ruth madoff"
+  - "peter madoff"
+  - "frank dipascali"
+  - "david friehling"
+  - "irving picard"
+  - "andrew cuomo"
+  - "eric schneiderman"
+  - "andrew farkas"
+  - "stephen feinberg"
+  - "frank bruno"
+  - "mortimer zuckerman"
+  - "mort zuckerman"
+  - "elie wiesel"
+  - "hermann merkin"
+  - "lauren merkin"
+
+known_addresses:
+  "450 park avenue": "Merkin and Gabriel Capital business office identified in the 2009 New York Attorney General complaint"
+  "740 park avenue": "Merkin residence identified in the 2009 New York Attorney General complaint"
+
+threads:
+  - id: 1
+    name: "Epstein Contacts and Financial Linkages"
+    description: "Direct and indirect communications, meetings, introductions, investments, transactions, and intermediaries connecting Merkin to Epstein"
+    targets:
+      - "jeffrey epstein"
+      - "j. ezra merkin"
+      - "ezra merkin"
+      - "andrew farkas"
+    keywords:
+      - 'epstein'
+      - 'efta\d+'
+      - 'ascot.*epstein|epstein.*ascot'
+      - 'gabriel.*epstein|epstein.*gabriel'
+      - 'cerberus.*merkin|merkin.*cerberus'
+
+  - id: 2
+    name: "Ascot Gabriel Ariel and Madoff"
+    description: "Fund formation, investors, disclosures, fees, capital flows, due diligence, and the role of Bernard L. Madoff Investment Securities"
+    targets:
+      - "ascot partners"
+      - "ascot fund"
+      - "gabriel capital"
+      - "gabriel capital corporation"
+      - "ariel fund"
+      - "bernard l. madoff investment securities"
+      - "bernard madoff"
+    keywords:
+      - 'ascot\s+(partners|fund)'
+      - 'gabriel\s+capital'
+      - 'ariel\s+(capital|fund)'
+      - 'madoff|blmis'
+      - 'feeder\s+fund'
+      - 'split.strike\s+conversion'
+
+  - id: 3
+    name: "Cerberus GMAC and Co-Investments"
+    description: "Merkin's Cerberus and GMAC roles, shared investments, counterparties, governance positions, and Epstein-adjacent deal flow"
+    targets:
+      - "cerberus capital management"
+      - "cerberus"
+      - "gmac"
+      - "ally financial"
+      - "stephen feinberg"
+      - "frank bruno"
+      - "andrew farkas"
+    keywords:
+      - 'cerberus'
+      - '\bgmac\b|ally\s+financial'
+      - 'co.invest|coinvest'
+      - 'project\s+silver'
+      - 'feinberg|farkas|frank\s+bruno'
+
+  - id: 4
+    name: "Philanthropic and Institutional Network"
+    description: "Board service, donors, charities, schools, foundations, endowments, and conflicts involving nonprofit capital"
+    targets:
+      - "yeshiva university"
+      - "ramaz school"
+      - "fifth avenue synagogue"
+      - "elie wiesel foundation"
+      - "ujafederation of new york"
+    keywords:
+      - 'philanthrop|charit|non.?profit|foundation|endowment'
+      - 'yeshiva\s+university'
+      - 'ramaz'
+      - 'fifth\s+avenue\s+synagogue'
+      - 'wiesel'
+      - 'board\s+of\s+(trustees|directors)'
+
+  - id: 5
+    name: "Litigation Regulation and Restitution"
+    description: "Attorney General, bankruptcy-trustee, investor, and regulatory proceedings; settlements, restitution, and asset recovery"
+    targets:
+      - "new york attorney general"
+      - "irving picard"
+      - "securities investor protection corporation"
+      - "u.s. securities and exchange commission"
+    keywords:
+      - 'lawsuit|litigation|complaint|docket|settlement|restitution'
+      - 'martin\s+act'
+      - 'picard|sipc'
+      - 'attorney\s+general'
+      - 'bankruptcy|avoidance|clawback'
+
+  - id: 6
+    name: "Corporate Securities and Property Footprint"
+    description: "Corporate registrations, ownership, investment-adviser records, securities filings, property, UCC filings, and political contributions"
+    targets:
+      - "gabriel capital corporation"
+      - "spring mountain capital"
+      - "ascot partners"
+      - "ariel fund"
+    keywords:
+      - 'incorporat|limited\s+partnership|beneficial\s+owner'
+      - 'form\s+(adv|d|13f)|edgar|sec'
+      - 'property|deed|mortgage|acris|ucc'
+      - 'political\s+contribution|fec'
+      - 'spring\s+mountain\s+capital'
+
+  - id: 7
+    name: "Counterparties and Network Expansion"
+    description: "Investors, advisers, lawyers, accountants, bankers, family links, and newly identified bridges across Merkin's network"
+    targets:
+      - "mortimer zuckerman"
+      - "elie wiesel"
+      - "hermann merkin"
+      - "lauren merkin"
+    keywords:
+      - 'investor|limited\s+partner|counterpart|intermediar'
+      - 'lawyer|counsel|accountant|auditor|banker'
+      - 'family\s+office|family\s+foundation'
+      - 'zuckerman|wiesel|merkin\s+family'
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary full-text source for released DOJ, FBI, and House Epstein records"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Structured relationship, email, entity, and co-occurrence layer"
+    commands: ["search", "entity", "related"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Complementary structured financial, flight, balance, and position data"
+    commands: ["search", "entity", "file"]
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI releases and named exhibits, including flight logs and contact book"
+    commands: ["search", "overlap"]
+
+key_dates:
+  - date: "1989-01-01"
+    event: "Merkin began operating his own investment funds, initially including Ariel Capital, according to the New York Attorney General complaint"
+    category: "financial"
+  - date: "1990-01-01"
+    event: "Merkin began allocating Ariel and Gabriel capital to Bernard Madoff, according to the New York Attorney General complaint"
+    category: "financial"
+  - date: "1992-01-01"
+    event: "Ascot funds were formed as conduits to Bernard Madoff, according to the New York Attorney General complaint"
+    category: "financial"
+  - date: "2008-12-11"
+    event: "Bernard Madoff was arrested and the SEC filed its civil action"
+    category: "legal"
+  - date: "2009-04-06"
+    event: "New York Attorney General complaint against J. Ezra Merkin and Gabriel Capital Corporation was dated"
+    category: "legal"
+  - date: "2012-06-25"
+    event: "New York announced a settlement with Merkin providing more than $400 million for investors and charities"
+    category: "legal"
+  - date: "2019-07-06"
+    event: "Jeffrey Epstein was arrested at Teterboro"
+    category: "legal"
+
+seed_pillars:
+  - name: "Gabriel Capital Corporation"
+    pillar_type: "operations"
+    sub_type: "investment_manager"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "Delaware / New York"
+    significance: "Merkin-controlled manager for the Ascot and Ariel offshore funds and a central vehicle for reconstructing personnel, investors, and transactions."
+  - name: "Ascot Partners L.P."
+    pillar_type: "operations"
+    sub_type: "hedge_fund"
+    status: "unknown"
+    founded: "1992"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Merkin feeder fund that placed virtually all assets with Bernard Madoff, making it central to the financial and legal record."
+  - name: "Gabriel Capital L.P."
+    pillar_type: "operations"
+    sub_type: "hedge_fund"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Merkin fund whose investments and counterparties may overlap with Epstein-adjacent transactions and Cerberus."
+  - name: "Ariel Fund Limited"
+    pillar_type: "operations"
+    sub_type: "offshore_fund"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "Offshore / jurisdiction to verify"
+    significance: "Offshore fund managed through Gabriel Capital Corporation; its investors, service providers, and capital flows require reconstruction."
+  - name: "Bernard L. Madoff Investment Securities LLC"
+    pillar_type: "banking"
+    sub_type: "broker_dealer_investment_adviser"
+    status: "dissolved"
+    founded: "1960"
+    dissolved: "2008"
+    jurisdiction: "New York"
+    significance: "Recipient and purported manager of large portions of Ascot, Gabriel, and Ariel assets."
+  - name: "Cerberus Capital Management"
+    pillar_type: "banking"
+    sub_type: "private_equity_asset_manager"
+    status: "active"
+    founded: "1992"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Merkin served in a Cerberus-linked GMAC governance role and released Epstein records reference Cerberus investments involving Merkin."
+  - name: "GMAC LLC"
+    pillar_type: "banking"
+    sub_type: "financial_services_company"
+    status: "dissolved"
+    founded: "1919"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Cerberus-led acquisition and Merkin board role provide a major institutional bridge requiring governance and transaction analysis."
+  - name: "Office of the New York Attorney General"
+    pillar_type: "government"
+    sub_type: "state_regulator"
+    status: "active"
+    founded: "1777"
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "Primary source for the complaint, exhibits, settlement, and restitution record concerning Merkin's funds."
+  - name: "U.S. Department of Justice"
+    pillar_type: "government"
+    sub_type: "law_enforcement"
+    status: "active"
+    founded: "1870"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Custodian and releaser of Epstein records and a primary source for the Madoff criminal and victim-recovery record."
+  - name: "Yeshiva University"
+    pillar_type: "academia"
+    sub_type: "university"
+    status: "active"
+    founded: "1928"
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "A major nonprofit institution in Merkin's board and investment network and a key source for tracing philanthropic capital and governance."
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "j. ezra merkin"
+source_overrides: {}
+

@@ -188,7 +188,7 @@ def normalize_address(addr):
     return addr[:50]
 
 
-def process_new_addresses(db, dry_run=False):
+def process_new_addresses(db, dry_run=False, profile_id=None):
     """Generate leads for new entity addresses."""
     rows = db.execute("""
         SELECT ea.id, ea.entity_id, ea.address, ea.address_type, e.name as entity_name
@@ -248,7 +248,8 @@ def process_new_addresses(db, dry_run=False):
             print(f"  [DRY] Address lead ({priority}): {title}")
             seen_addresses[norm] = -1
         else:
-            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads", target=addr_display, notes=notes)
+            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads",
+                                  target=addr_display, notes=notes, profile_id=profile_id)
             seen_addresses[norm] = lead_id
             log_processed(db, "entity_addresses", row["id"], "address_search", lead_id)
             created += 1
@@ -256,7 +257,7 @@ def process_new_addresses(db, dry_run=False):
     return created, len(rows)
 
 
-def process_new_roles(db, dry_run=False):
+def process_new_roles(db, dry_run=False, profile_id=None):
     """Generate leads for new person-entity roles (search for person as officer elsewhere)."""
     rows = db.execute("""
         SELECT er.id, er.entity_id, er.person_name, er.role, e.name as entity_name
@@ -315,7 +316,8 @@ def process_new_roles(db, dry_run=False):
             print(f"  [DRY] Officer lead ({priority}): {title}")
             persons_seen[person_normalized] = -1
         else:
-            lead_id = create_lead(db, title, "person", priority, "agent:auto_leads", target=person.strip(), notes=notes)
+            lead_id = create_lead(db, title, "person", priority, "agent:auto_leads",
+                                  target=person.strip(), notes=notes, profile_id=profile_id)
             persons_seen[person_normalized] = lead_id
             log_processed(db, "entity_roles", row["id"], "officer_search", lead_id)
             created += 1
@@ -323,7 +325,7 @@ def process_new_roles(db, dry_run=False):
     return created, len(rows)
 
 
-def process_new_entities(db, dry_run=False):
+def process_new_entities(db, dry_run=False, profile_id=None):
     """Generate leads for new entities (search registries)."""
     rows = db.execute("""
         SELECT e.id, e.name, e.entity_type, e.jurisdiction
@@ -395,14 +397,15 @@ def process_new_entities(db, dry_run=False):
         if dry_run:
             print(f"  [DRY] Entity lead ({priority}): {title}")
         else:
-            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads", target=name.strip(), notes=notes)
+            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads",
+                                  target=name.strip(), notes=notes, profile_id=profile_id)
             log_processed(db, "entities", row["id"], "entity_search", lead_id)
             created += 1
 
     return created, len(rows)
 
 
-def process_new_connections(db, dry_run=False):
+def process_new_connections(db, dry_run=False, profile_id=None):
     """Generate leads for new connections where person has < 5 findings."""
     rows = db.execute("""
         SELECT c.id, c.person_a, c.person_b, c.relationship_type
@@ -463,7 +466,8 @@ def process_new_connections(db, dry_run=False):
             if dry_run:
                 print(f"  [DRY] Connection lead ({priority}): {title}")
             else:
-                lead_id = create_lead(db, title, "person", priority, "agent:auto_leads", target=person.strip(), notes=notes)
+                lead_id = create_lead(db, title, "person", priority, "agent:auto_leads",
+                                      target=person.strip(), notes=notes, profile_id=profile_id)
                 created += 1
 
         log_processed(db, "connections", row["id"], "connection_search")
@@ -471,7 +475,7 @@ def process_new_connections(db, dry_run=False):
     return created, len(rows)
 
 
-def process_alumni_clustering(db, dry_run=False):
+def process_alumni_clustering(db, dry_run=False, profile_id=None):
     """Generate leads when 3+ alumni of a dissolved institution cluster at the same destination."""
     try:
         # Get all dissolved/acquired institutions
@@ -515,14 +519,16 @@ def process_alumni_clustering(db, dry_run=False):
                 if existing:
                     log_processed(db, "institutional_pillars", inst["id"], dedup_key, existing)
                     continue
-                lead_id = create_lead(db, title, "connection", priority, "agent:auto_leads:alumni_cluster", notes=notes)
+                lead_id = create_lead(db, title, "connection", priority,
+                                      "agent:auto_leads:alumni_cluster", notes=notes,
+                                      profile_id=profile_id)
                 log_processed(db, "institutional_pillars", inst["id"], dedup_key, lead_id)
                 created += 1
 
     return created, total
 
 
-def process_pillar_gaps(db, dry_run=False):
+def process_pillar_gaps(db, dry_run=False, profile_id=None):
     """Generate leads for persons at 3+ institutions missing common pillar types."""
     try:
         # Persons with 3+ career arcs
@@ -565,7 +571,8 @@ def process_pillar_gaps(db, dry_run=False):
                 if existing:
                     continue
                 lead_id = create_lead(db, title, "connection", "medium", "agent:auto_leads:pillar_gap",
-                                      target=person["canonical_name"], notes=notes)
+                                      target=person["canonical_name"], notes=notes,
+                                      profile_id=profile_id)
                 created += 1
 
         log_processed(db, "persons", person["id"], dedup_key)
@@ -624,7 +631,7 @@ def _is_mass_market_agent(agent_name, db=None):
     return False
 
 
-def process_officer_escalation(db, dry_run=False):
+def process_officer_escalation(db, dry_run=False, profile_id=None):
     """Escalate priority for officers found at 3+ entities (serial director pattern)."""
     rows = db.execute("""
         SELECT person_name, COUNT(DISTINCT entity_id) as entity_count
@@ -662,7 +669,8 @@ def process_officer_escalation(db, dry_run=False):
             title = f"Serial director: {person.strip()} — officer at {entity_count} entities"
             notes = f"Found as officer at {entity_count} different entities. Pattern suggests nominee director or key network operative."
             if not dry_run:
-                create_lead(db, title, "person", "high", "agent:auto_leads:officer_escalation", target=person.strip(), notes=notes)
+                create_lead(db, title, "person", "high", "agent:auto_leads:officer_escalation",
+                            target=person.strip(), notes=notes, profile_id=profile_id)
             else:
                 print(f"  [DRY] Serial director (high): {title}")
             escalated += 1
@@ -672,7 +680,7 @@ def process_officer_escalation(db, dry_run=False):
     return escalated, total
 
 
-def process_filing_clusters(db, dry_run=False):
+def process_filing_clusters(db, dry_run=False, profile_id=None):
     """Find entities filed within 7 days of each other by the same officer/agent."""
     try:
         # Filing clusters require an actual formation date. Database ingestion
@@ -748,7 +756,7 @@ def process_filing_clusters(db, dry_run=False):
                         print(f"  [DRY] Filing cluster (high): {title}")
                     else:
                         create_lead(db, title, "entity", "high", "agent:auto_leads:filing_cluster",
-                                    target=officer.title(), notes=notes)
+                                    target=officer.title(), notes=notes, profile_id=profile_id)
                     created += 1
                     log_processed(db, "entities", 0, dedup_key)
             i = j if j > i + 1 else i + 1
@@ -756,7 +764,7 @@ def process_filing_clusters(db, dry_run=False):
     return created, total
 
 
-def process_jurisdiction_clusters(db, dry_run=False):
+def process_jurisdiction_clusters(db, dry_run=False, profile_id=None):
     """Find persons with 3+ entities in unusual jurisdictions."""
     # Jurisdictions that are commonly used for opacity
     UNUSUAL_JURISDICTIONS = {
@@ -801,7 +809,7 @@ def process_jurisdiction_clusters(db, dry_run=False):
             print(f"  [DRY] Jurisdiction cluster (medium): {title}")
         else:
             create_lead(db, title, "entity", "medium", "agent:auto_leads:jurisdiction_cluster",
-                        target=person.strip(), notes=notes)
+                        target=person.strip(), notes=notes, profile_id=profile_id)
         created += 1
         log_processed(db, "entity_roles", 0, dedup_key)
 
@@ -1163,7 +1171,7 @@ def process_connection_persons(db, thread_ids, profile_id, dry_run=False):
     return created, total
 
 
-def process_entity_crossref(db, dry_run=False):
+def process_entity_crossref(db, dry_run=False, profile_id=None):
     """Fuzzy-match newly ingested entities against existing entities/connections/findings.
 
     Inspired by Aleph/OpenAleph cross-reference on ingest.
@@ -1221,19 +1229,29 @@ def process_entity_crossref(db, dry_run=False):
         for eid, ename, enorm in entity_names:
             if eid == row["id"]:
                 continue
+            # Exact normalized identities are duplicate representations, not
+            # investigative cross-references. Fuzzy name variants remain useful.
+            if enorm == norm:
+                continue
             score = fuzz.token_sort_ratio(norm, enorm)
             if score >= THRESHOLD:
                 matches.append(("entity", eid, ename, score))
 
         # Match against connection persons
         for person in conn_persons:
-            score = fuzz.token_sort_ratio(norm, person.lower())
+            person_norm = normalize_entity_name(person)
+            if person_norm == norm:
+                continue
+            score = fuzz.token_sort_ratio(norm, person_norm)
             if score >= THRESHOLD:
                 matches.append(("connection_person", None, person, score))
 
         # Match against finding targets
         for target in finding_targets:
-            score = fuzz.token_sort_ratio(norm, target.lower())
+            target_norm = normalize_entity_name(target)
+            if target_norm == norm:
+                continue
+            score = fuzz.token_sort_ratio(norm, target_norm)
             if score >= THRESHOLD:
                 matches.append(("finding_target", None, target, score))
 
@@ -1260,7 +1278,8 @@ def process_entity_crossref(db, dry_run=False):
             else:
                 lead_id = create_lead(db, title, "entity", priority,
                                       "agent:auto_leads:entity_crossref",
-                                      target=name.strip(), notes=notes)
+                                      target=name.strip(), notes=notes,
+                                      profile_id=profile_id)
                 log_processed(db, "entities", row["id"], "entity_crossref", lead_id)
                 created += 1
         else:
@@ -1269,7 +1288,7 @@ def process_entity_crossref(db, dry_run=False):
     return created, len(rows)
 
 
-def process_person_crossref(db, dry_run=False):
+def process_person_crossref(db, dry_run=False, profile_id=None):
     """Fuzzy-match entity_roles person names against connections/findings."""
     from rapidfuzz import fuzz
 
@@ -1318,12 +1337,18 @@ def process_person_crossref(db, dry_run=False):
         matches = []
 
         for cp in conn_persons:
-            score = fuzz.token_sort_ratio(norm, normalize_person_name(cp))
+            cp_norm = normalize_person_name(cp)
+            if cp_norm == norm:
+                continue
+            score = fuzz.token_sort_ratio(norm, cp_norm)
             if score >= THRESHOLD:
                 matches.append(("connection", cp, score))
 
         for ft in finding_targets:
-            score = fuzz.token_sort_ratio(norm, ft.lower())
+            ft_norm = normalize_person_name(ft)
+            if ft_norm == norm:
+                continue
+            score = fuzz.token_sort_ratio(norm, ft_norm)
             if score >= THRESHOLD:
                 matches.append(("finding", ft, score))
 
@@ -1348,7 +1373,8 @@ def process_person_crossref(db, dry_run=False):
             else:
                 lead_id = create_lead(db, title, "person", priority,
                                       "agent:auto_leads:person_crossref",
-                                      target=person.strip(), notes=notes)
+                                      target=person.strip(), notes=notes,
+                                      profile_id=profile_id)
                 log_processed(db, "entity_roles", row["id"], "person_crossref", lead_id)
                 created += 1
         else:
@@ -1357,7 +1383,7 @@ def process_person_crossref(db, dry_run=False):
     return created, len(rows)
 
 
-def process_enforcement_check(db, dry_run=False):
+def process_enforcement_check(db, dry_run=False, profile_id=None):
     """Check new entities and connections against SEC enforcement defendants.
 
     Looks up newly added entities and connection persons in the SEC enforcement
@@ -1468,7 +1494,8 @@ def process_enforcement_check(db, dry_run=False):
             else:
                 lead_id = create_lead(db, title, "enforcement", priority,
                                       "agent:auto_leads:enforcement_check",
-                                      target=name.strip(), notes=notes)
+                                      target=name.strip(), notes=notes,
+                                      profile_id=profile_id)
                 log_processed(db, "entities", row["id"], "enforcement_check", lead_id)
                 created += 1
         else:
@@ -1522,7 +1549,8 @@ def process_enforcement_check(db, dry_run=False):
                 else:
                     lead_id = create_lead(db, title, "enforcement", priority,
                                           "agent:auto_leads:enforcement_check",
-                                          target=person.strip(), notes=notes)
+                                          target=person.strip(), notes=notes,
+                                          profile_id=profile_id)
                     created += 1
 
         log_processed(db, "connections", row["id"], "enforcement_check")
@@ -1559,65 +1587,66 @@ def cmd_run(args):
     results = {}
     stopped_early_reason = None
     try:
-        # --- Entity-based generators (unscoped — registry data is investigation-agnostic) ---
+        # Entity data remains globally shared, but every emitted lead belongs to
+        # the active profile that requested this cross-reference run.
 
         print("\n--- New Addresses ---")
-        c, t = process_new_addresses(db, args.dry_run)
+        c, t = process_new_addresses(db, args.dry_run, profile_name)
         results["addresses"] = (c, t)
         print(f"  {t} new addresses scanned, {c} leads created")
 
         print("\n--- New Officer Roles ---")
-        c, t = process_new_roles(db, args.dry_run)
+        c, t = process_new_roles(db, args.dry_run, profile_name)
         results["roles"] = (c, t)
         print(f"  {t} new roles scanned, {c} leads created")
 
         print("\n--- New Entities ---")
-        c, t = process_new_entities(db, args.dry_run)
+        c, t = process_new_entities(db, args.dry_run, profile_name)
         results["entities"] = (c, t)
         print(f"  {t} new entities scanned, {c} leads created")
 
         print("\n--- New Connections ---")
-        c, t = process_new_connections(db, args.dry_run)
+        c, t = process_new_connections(db, args.dry_run, profile_name)
         results["connections"] = (c, t)
         print(f"  {t} new connections scanned, {c} leads created")
 
         print("\n--- Alumni Clustering ---")
-        c, t = process_alumni_clustering(db, args.dry_run)
+        c, t = process_alumni_clustering(db, args.dry_run, profile_name)
         results["alumni_clustering"] = (c, t)
         print(f"  {t} institution pairs checked, {c} leads created")
 
         print("\n--- Pillar Gap Analysis ---")
-        c, t = process_pillar_gaps(db, args.dry_run)
+        c, t = process_pillar_gaps(db, args.dry_run, profile_name)
         results["pillar_gaps"] = (c, t)
         print(f"  {t} multi-institution persons checked, {c} leads created")
 
         print("\n--- Serial Director Detection ---")
-        c, t = process_officer_escalation(db, args.dry_run)
+        c, t = process_officer_escalation(db, args.dry_run, profile_name)
         results["officer_escalation"] = (c, t)
         print(f"  {t} multi-entity officers checked, {c} escalated/created")
 
         print("\n--- Filing Date Clusters ---")
-        c, t = process_filing_clusters(db, args.dry_run)
+        c, t = process_filing_clusters(db, args.dry_run, profile_name)
         results["filing_clusters"] = (c, t)
         print(f"  {t} officer filing groups checked, {c} leads created")
 
         print("\n--- Jurisdiction Clusters ---")
-        c, t = process_jurisdiction_clusters(db, args.dry_run)
+        c, t = process_jurisdiction_clusters(db, args.dry_run, profile_name)
         results["jurisdiction_clusters"] = (c, t)
         print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
 
         print("\n--- Entity Cross-Reference ---")
-        c, t = process_entity_crossref(db, args.dry_run)
+        c, t = process_entity_crossref(db, args.dry_run, profile_name)
         results["entity_crossref"] = (c, t)
         print(f"  {t} entities cross-referenced, {c} leads created")
 
         print("\n--- Person Cross-Reference ---")
-        c, t = process_person_crossref(db, args.dry_run)
+        c, t = process_person_crossref(db, args.dry_run, profile_name)
         results["person_crossref"] = (c, t)
         print(f"  {t} person names cross-referenced, {c} leads created")
 
         print("\n--- SEC Enforcement Check ---")
-        c, t = process_enforcement_check(db, args.dry_run)
+        c, t = process_enforcement_check(db, args.dry_run, profile_name)
         results["enforcement_check"] = (c, t)
         print(f"  {t} names checked against SEC enforcement DB, {c} leads created")
 

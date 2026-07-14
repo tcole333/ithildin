@@ -1,0 +1,197 @@
+{
+  "lead_id": 57788,
+  "as_of": "2026-07-14",
+  "sources": [
+    {
+      "source": "SEC 2017 Exhibit 21.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312517056831/d320699dex211.htm",
+      "coverage": "Lists GEO Acquisition II, Inc.; GEO Corrections Holdings, Inc.; and GEO Reentry Services, LLC as GEO subsidiaries.",
+      "result": "positive",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC 2024 Exhibit 21.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095017024023181/geo-ex21_1.htm",
+      "coverage": "Subsidiaries as of 2023-12-31; parent holds listed subsidiaries directly or indirectly 100% unless otherwise stated; lists GCH and Reentry.",
+      "result": "positive_with_omission_caveat",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC 2024 Exhibit 22.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095017024023181/geo-ex22_1.htm",
+      "coverage": "Lists Acquisition II, GCH, and Reentry as subsidiary guarantors; filed before the 2024 payment series.",
+      "result": "positive",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC 2025 Exhibit 21.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095017025029972/geo-ex21_1.htm",
+      "coverage": "Subsidiaries as of 2024-12-31; lists GCH and Reentry; smaller subsidiaries may be omitted.",
+      "result": "positive_with_omission_caveat",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC 2025 Exhibit 22.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095017025029972/geo-ex22_1.htm",
+      "coverage": "Lists Acquisition II, GCH, and Reentry as subsidiary guarantors.",
+      "result": "positive",
+      "tier": "primary"
+    },
+    {
+      "source": "FEC recipient filings reconstructed in lead 59037 ledger",
+      "artifact": "investigations/geo-group/reports/2026-07-14-lead-59037-geo-corporate-federal-committee-ledger.csv",
+      "coverage": "13 Acquisition II rows in 2024; 3 Acquisition II and 7 Reentry rows in 2025; exact images and transaction IDs preserved.",
+      "result": "positive",
+      "tier": "primary-derived"
+    },
+    {
+      "source": "FEC Trump-related political-money ledger",
+      "artifact": "investigations/geo-group/reports/2026-07-13-geo-trump-political-money-ledger.csv",
+      "coverage": "Two GCH Rebuilding America Now receipts and one GCH inaugural Form 13 donation; GEO PAC donor-side rows.",
+      "result": "positive",
+      "tier": "primary-derived"
+    },
+    {
+      "source": "FEC MUR 7180 matter page",
+      "url": "https://www.fec.gov/data/legal/matter-under-review/7180/",
+      "coverage": "Procedural votes and closure.",
+      "result": "positive",
+      "tier": "primary"
+    },
+    {
+      "source": "FEC MUR 7180 respondent response",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_15.pdf",
+      "coverage": "Respondent's entity, contract, REIT restructuring, holding-company, and intercompany-funds explanations.",
+      "result": "positive_respondent_advocacy",
+      "tier": "primary_party_submission"
+    },
+    {
+      "source": "FEC MUR 7180 Broussard/Weintraub statement",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_38.pdf",
+      "coverage": "Reasoning for probable cause based on integrated management, finances, and policies.",
+      "result": "positive_competing_commissioner_view",
+      "tier": "primary_official_record"
+    },
+    {
+      "source": "FEC MUR 7180 Dickerson/Cooksey/Trainor statement",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_39.pdf",
+      "coverage": "Reasoning against probable cause; contracts held by other named entities and rejection of OGC's theory.",
+      "result": "positive_competing_commissioner_view",
+      "tier": "primary_official_record"
+    },
+    {
+      "source": "Local SAM public extract exact-name queries",
+      "coverage": "Five entities tested. Exact matches: parent and Reentry. No exact match: GCH, Acquisition II, GEO PAC.",
+      "result": "2_positive_3_bounded_negative",
+      "tier": "primary_government_extract",
+      "live_sam_calls": 0,
+      "warning": "Current extract only; cannot determine status on every historical payment date."
+    },
+    {
+      "source": "Verified GEO federal-recipient identity map",
+      "artifact": "investigations/geo-group/reports/2026-07-13-geo-federal-recipient-identity-map.json",
+      "coverage": "14 verified GEO-related UEIs and unresolved SEC-only names.",
+      "result": "positive",
+      "tier": "primary-derived"
+    },
+    {
+      "source": "USAspending exact contract queries",
+      "coverage": "No exact direct contract matches for GCH, Acquisition II, Reentry, or GEO PAC; parent exact UEI expansion was not used for entity-level counting because the tool also returned affiliates.",
+      "result": "bounded_negative_for_four_entities",
+      "tier": "primary_government_api",
+      "warning": "Name matching and parent-UEI expansion can create false positives/negatives."
+    },
+    {
+      "source": "HigherGov exact UEI contract queries",
+      "coverage": "343 parent-UEI rows; 0 Reentry-UEI rows.",
+      "result": "positive_parent_negative_reentry",
+      "tier": "secondary_procurement_aggregator"
+    },
+    {
+      "source": "DHS-wide GEO award-action ledger",
+      "artifact": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv",
+      "coverage": "Exact recipient legal name/UEI, action dates, periods, award IDs, obligations, and USAspending award URLs. Payment-date overlap derived only from actions on or before each payment date.",
+      "result": "positive_parent_1128_actions_reentry_0",
+      "tier": "primary-derived"
+    },
+    {
+      "source": "USAspending subaward queries",
+      "coverage": "Exact-name queries returned 100 apparently unfiltered rows per entity; local exact-recipient post-filter found 0 matches in each returned page.",
+      "result": "tool_output_excluded",
+      "papercut_id": 923,
+      "warning": "Not treated as proof of no subaward."
+    }
+  ],
+  "pdf_visual_qa": {
+    "rendering": {
+      "tool": "pdftoppm",
+      "resolution_dpi": 150,
+      "format": "PNG",
+      "result": "All inspected pages were legible, correctly oriented, and free of clipping or overlap."
+    },
+    "documents": [
+      {
+        "document": "MUR 7180 respondent response",
+        "source_url": "https://www.fec.gov/files/legal/murs/7180/7180_15.pdf",
+        "local_source_path": "/tmp/osint-PpjCsojm/mur7180-15.pdf",
+        "sha256": "028f1e77d82a6ccd4ee1166748d35d02ff073019d7277118a8cf36eb8dcbf3e0",
+        "inspected_pdf_pages": [1, 2, 3, 4],
+        "printed_pages": [1, 2, 3, 4],
+        "bates": ["MUR718000106", "MUR718000107", "MUR718000108", "MUR718000109"],
+        "key_visual_checks": [
+          "Page 1: respondent's GCH-not-contractor and Reentry-subgrant-party assertions.",
+          "Page 2: acknowledged Rebuilding America Now check dates and amounts.",
+          "Page 3: Louisiana prime-grant/subaward chain and Cornell contract discussion.",
+          "Page 4: corporate hierarchy, 2013 REIT restructuring, taxable subsidiaries, and GCH holding-company status."
+        ],
+        "rendered_pages": [
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-15-response-01.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-15-response-02.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-15-response-03.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-15-response-04.png"
+        ]
+      },
+      {
+        "document": "Broussard/Weintraub statement of reasons",
+        "source_url": "https://www.fec.gov/files/legal/murs/7180/7180_38.pdf",
+        "local_source_path": "/tmp/osint-PpjCsojm/mur7180-38.pdf",
+        "sha256": "0a6b632912d8e4df3acf2d83a09920cef7e3faaea8297d3842c28746d2f9041a",
+        "inspected_pdf_pages": [1, 2, 3],
+        "bates": ["MUR718001090", "MUR718001091", "MUR718001092"],
+        "key_visual_checks": [
+          "Page 1: unanimous reason-to-believe statement, failure to find probable cause, and tightly-interwoven conclusion.",
+          "Page 2: separate-and-distinct analysis, $945,000 scope, and integrated-family reasoning.",
+          "Page 3: shared management, intertwined finances, uniform policies, and signed conclusion."
+        ],
+        "rendered_pages": [
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-38-broussard-weintraub-1.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-38-broussard-weintraub-2.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-38-broussard-weintraub-3.png"
+        ]
+      },
+      {
+        "document": "Dickerson/Cooksey/Trainor statement of reasons",
+        "source_url": "https://www.fec.gov/files/legal/murs/7180/7180_39.pdf",
+        "local_source_path": "/tmp/osint-PpjCsojm/mur7180-39.pdf",
+        "sha256": "785ed5286a85f751662f775abd788a8119d7c91c07115b52298b6fb147d783c7",
+        "inspected_pdf_pages": [1, 2],
+        "bates": ["MUR718001093", "MUR718001094"],
+        "key_visual_checks": [
+          "Page 1: Louisiana and Georgia named-contract evidence attributed to GCH's submissions.",
+          "Page 2: conclusion that GCH was not the named contract party and rejection of OGC's separate-and-distinct theory."
+        ],
+        "rendered_pages": [
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-39-dickerson-cooksey-trainor-1.png",
+          "/Users/travcole/projects/osint-research/investigations/geo-group/reports/2026-07-14-lead-57788-pdf-qa/mur7180-39-dickerson-cooksey-trainor-2.png"
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "Recipient political filings identify what the recipient reported; they do not prove the owner of the bank account or GEO's internal accounting rationale.",
+    "Current SAM data is not a historical registration snapshot.",
+    "The DHS action ledger is a bounded direct-prime action universe and does not prove absence from all federal subawards, grants, leases, intergovernmental arrangements, or renamed entities.",
+    "FEC MUR 7180 ended without an adjudicated violation; commissioner statements are competing legal views, not a court judgment.",
+    "GEO's MUR response is a party submission and is attributed as such."
+  ]
+}

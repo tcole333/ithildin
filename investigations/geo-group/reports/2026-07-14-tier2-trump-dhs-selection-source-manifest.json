@@ -1,0 +1,157 @@
+{
+  "manifest_version": "final-1",
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "status": "final",
+  "analysis_runs": {
+    "systemic_analysis": 104,
+    "generate_hunches": 103
+  },
+  "question": "Did political access or relationships materially shape GEO selection or expansion under Trump/DHS, versus policy and budget growth, incumbent vehicles, operational readiness, fiscal mechanics, channel boundaries, and ordinary regulated-sector practices?",
+  "outcome_axes": {
+    "aggregate_dhs_geo_expansion": "H0 substantially less inconsistent",
+    "vendor_facility_selection_and_terms": "Unresolved; H0 weakly less inconsistent",
+    "weighting_rule": "Source independence, causal proximity, metric fit, and coverage; not row counts."
+  },
+  "verification_audit": {
+    "matrix_rows": 25,
+    "accepted_input_finding_mentions": 119,
+    "accepted_unique_input_findings": 111,
+    "accepted_verified": 111,
+    "accepted_retracted_or_superseded": 0,
+    "input_leads": 20,
+    "retracted_excluded": 43,
+    "unverified_excluded": 16,
+    "verified_but_not_selected": 2,
+    "output_synthesis_finding": 12939,
+    "output_synthesis_finding_verified": true,
+    "db_quick_check": "ok"
+  },
+  "accepted_unique_input_finding_ids": [
+    12422, 12425, 12426, 12427, 12428, 12444, 12445, 12448,
+    12514, 12515, 12516, 12519, 12520, 12521, 12522, 12523, 12524, 12525,
+    12526, 12527, 12528, 12529, 12535, 12536, 12537, 12538, 12539, 12540, 12541,
+    12710, 12718, 12719, 12720, 12721, 12722, 12723, 12724, 12725, 12726,
+    12752, 12753, 12754, 12755, 12756, 12757, 12758, 12759, 12766, 12767,
+    12774, 12775, 12776, 12777, 12778,
+    12818, 12819, 12820, 12821, 12822, 12823,
+    12846, 12847, 12848, 12849, 12850, 12851, 12852, 12853, 12854,
+    12855, 12856, 12857, 12858, 12859, 12861, 12862, 12863, 12864, 12865,
+    12866, 12867, 12868, 12869, 12870, 12871, 12875, 12876, 12877,
+    12892, 12893, 12894, 12895, 12899,
+    12901, 12906, 12907, 12909, 12910, 12911, 12912, 12914, 12916,
+    12926, 12928, 12929, 12930, 12934, 12935, 12936, 12937, 12938
+  ],
+  "accepted_by_matrix_row": {
+    "D01": [12519, 12520, 12521, 12522, 12523, 12524, 12525],
+    "D02": [12752, 12753, 12754, 12755, 12756, 12757, 12758, 12759],
+    "D03": [12866, 12867],
+    "D04": [12869],
+    "D05": [12868],
+    "D06": [12870, 12871],
+    "D07": [12855, 12856, 12857, 12858, 12859],
+    "D08": [12526, 12527, 12528, 12529],
+    "D09": [12535, 12536, 12537, 12538, 12539, 12540, 12541],
+    "D10": [12724, 12725, 12726],
+    "D11": [12710, 12718, 12719, 12720, 12721, 12722, 12723],
+    "D12": [12514, 12515, 12516],
+    "D13": [12766, 12767, 12752, 12753, 12756, 12757, 12758, 12759],
+    "D14": [12721, 12869],
+    "D15": [12875, 12876, 12877],
+    "D16": [12862, 12863, 12864, 12865],
+    "D17": [12444, 12445, 12448, 12775, 12778],
+    "D18": [12774, 12776, 12777],
+    "D19": [12852, 12853, 12854],
+    "D20": [12846, 12847, 12848, 12849, 12850, 12851, 12861],
+    "D21": [12422, 12425, 12426, 12427, 12428, 12818, 12819, 12820, 12821, 12822, 12823],
+    "D22": [12892, 12893, 12894, 12895, 12899, 12901, 12906, 12907, 12909, 12910, 12911, 12912],
+    "D23": [12926, 12928, 12929, 12930, 12934],
+    "D24": [12914, 12916],
+    "D25": [12935, 12936, 12937, 12938]
+  },
+  "cross_row_reuse_not_additional_weight": {
+    "12721": ["D11", "D14"],
+    "12752": ["D02", "D13"],
+    "12753": ["D02", "D13"],
+    "12756": ["D02", "D13"],
+    "12757": ["D02", "D13"],
+    "12758": ["D02", "D13"],
+    "12759": ["D02", "D13"],
+    "12869": ["D04", "D14"]
+  },
+  "excluded_findings": {
+    "retracted": [
+      12440, 12751, 12872, 12873, 12874,
+      12878, 12879, 12880, 12881, 12882, 12883, 12884, 12885, 12886, 12887,
+      12888, 12889, 12890, 12891, 12896, 12897, 12898, 12900, 12902, 12903,
+      12904, 12905, 12908, 12913, 12915,
+      12917, 12918, 12919, 12920, 12921, 12922, 12923, 12924, 12925,
+      12927, 12931, 12932, 12933
+    ],
+    "unverified": [
+      12400, 12414, 12417, 12418, 12419, 12420, 12423, 12424,
+      12429, 12430, 12431, 12432, 12433, 12434, 12517, 12518
+    ],
+    "verified_but_not_selected": [
+      {
+        "id": 12401,
+        "reason": "Earlier Checkmate activity-level filing duplicated and was analytically superseded by the complete accepted Checkmate audit stream."
+      },
+      {
+        "id": 12421,
+        "reason": "Verified readiness statement was not selected as an independent causal input; the accepted performance-consequence stream already preserves the facility sequence without adding a duplicate vote."
+      }
+    ]
+  },
+  "input_lead_ids": [
+    57701, 57784, 57788, 57836, 57842, 57844, 57970, 58082, 58084, 58137,
+    58870, 58874, 58983, 58985, 59033, 59037, 59358, 59423, 61953, 62732
+  ],
+  "semantic_boundaries": [
+    "Salus CSRO is a separate non-GEO procurement and is neutral/not applicable to GEO or GTI selection; it is never H0 evidence for the GTI chain.",
+    "CSI to GTI is a private-prime subcontract chain, not an IGSA/public-body-prime chain; finding 12901 is not applicable to hypotheses 341/342.",
+    "P00005 chronology does not establish that a settlement caused reinstatement or that CSI/GTI terms were unchanged.",
+    "Florida and Georgia filed payer strings do not identify the funding bank account or internal payer-selection decision.",
+    "Revenue, obligations, outlays, ceilings, current award values, invoices, and subcontract forecasts are different metrics and are not added or treated as interchangeable."
+  ],
+  "competition_updates": {
+    "335_336": "no new assessments; inputs not relevant to applied performance consequences",
+    "337_338": "no new assessments; inputs do not identify personnel/consulting/lobbying coordination",
+    "341_342": "no new assessments; private-prime air chain is analogous but non-applicable to IGSA hypotheses",
+    "357_358": "findings 12937 and 12938 scored inconsistent with 357 and consistent with 358 at low-to-medium weight"
+  },
+  "novelty_decision": {
+    "required": "three or more independent contexts, distinct mechanism, falsifiable prediction, and concrete Layer-1 lead",
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "reason": "Candidates either lacked a relationship-to-decision mechanism, had only one applicable context, or duplicated existing competition groups."
+  },
+  "representative_source_packages": [
+    {"path": "investigations/geo-group/reports/2026-07-13-lead-58870-geo-trump-political-money.md", "sha256": "14adc7b25728163a22b858f98fea5297092181317d54aa6d1697804bd1b0dd3b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59037-source-coverage-manifest.json", "sha256": "784e6d19620970bcd37a1beb861ba79fca8a129e562eb1a7c64ba2970213d69c"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57701-source-coverage-manifest.json", "sha256": "06da12da68ef969c978225c3a8f17a4e5e6eaba8e5daac0dd5b7e995df1b8081"},
+    {"path": "investigations/geo-group/reports/2026-07-14-geo-ice-dhs-revolving-door-source-manifest.json", "sha256": "a8ea0ef78b1fe5c495cced610a995ee0a68449a3557d776cf35bf0cc8f0c986b"},
+    {"path": "investigations/geo-group/reports/2026-07-13-lead-58983-homan-geo-guidepost-consulting.md", "sha256": "4582fe19f17263d74290168845e48bae81e081b317073f8a8ee074d7fb11a936"},
+    {"path": "investigations/geo-group/reports/2026-07-13-lead-58985-venturella-ice-return-ethics.md", "sha256": "ba30ff4fbda74866820f5a10439170f4445e2872c4c3a269222861fa9a738388"},
+    {"path": "investigations/geo-group/reports/2026-07-13-ballard-geo-lobbying-contact-audit.md", "sha256": "16e5d4224149d6890294672732c2b35e4309f1751b3e064c459b272d244ad547"},
+    {"path": "investigations/geo-group/reports/2026-07-13-checkmate-geo-procurement-nexus.md", "sha256": "02be069bfecde4704310d7dd3443aeb8fd6125f0b978f6f33ad308c4221e8ada"},
+    {"path": "investigations/geo-group/reports/2026-07-13-trump-geo-investment-ownership-report.md", "sha256": "7be876786bf9e1f3cedde0633abf26bb86ae25500e27bc2667362553f59bdf67"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57788-source-coverage-manifest.json", "sha256": "ad44fd360e1bf7d083eaa20585abf6a346c08f45fc37456deeb1b0a6d9cd7ca3"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57842-geo-fy25-fy26-source-manifest.json", "sha256": "20dee568c8b366f0a9f1f61b5d38f95d251e46d33c80bcfac3467b80eca7a05f"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57844-geo-ice-revenue-source-manifest.json", "sha256": "36380e12589a63c7ea2c376e7ae333d2859c2f502fba1817c9fa0c215b8116fe"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-58082-corecivic-ice-source-manifest.json", "sha256": "38e01bca8a9f1b6160953936e034a160a25ea36a4daf594194a0dde448088973"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-58084-california-detention-competition-source-manifest.json", "sha256": "04939d22329acaea17e70b21f61f66e20b5b102389a6e1504f447e8efc961af8"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-61953-geo-ice-inspection-death-source-manifest.json", "sha256": "38ef26426dfef4ad1df1ce3f1ea5bc10de44cb01cbdc91654347f97d2aa42382"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57784-geo-ice-performance-consequence-manifest.json", "sha256": "0bd175a1a4e091ad781b75dad71b58c6fecd5dfdb0597dffd815a27c206baf2b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-source-manifest.json", "sha256": "86b4280f2ac5d3c3e36692649b54a82269b39dde464508ea59b03773bff812b6"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-62732-csi-air-p00005-reinstatement-source-manifest.json", "sha256": "8d4619a15fafc5fa8d13610af486df8e04af01a9632b0d9898e5dcb6063cb107"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-manifest.json", "sha256": "e08fdb2db50ee971b511e3972f6cde8a4e2bbf6657976e8340251617ed03cd88"}
+  ],
+  "output_files": [
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-evidence-matrix.csv", "sha256": "9988ae3fa74e7e1e7000648281085099d39cc00beb141c46da2543901b799271"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-systemic-analysis.md", "sha256": "fcf19331e33549d8db61ea4e660f1d98a36b05cde90e06bfc5e519b4124ff344"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-ach.json", "sha256": "589ff431f97f764360b626d5ccecfedf893309a41d858bba75381d171100913b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-generate-hunches.json", "sha256": "3414190fc01b53ed4886e1c3baff2f4f7384bf4f57df57c3eb84e7af937a2506"}
+  ],
+  "self_hash_note": "This manifest intentionally does not contain its own hash."
+}

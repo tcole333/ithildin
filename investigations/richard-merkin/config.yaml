@@ -1,0 +1,297 @@
+# Dr. Richard N. Merkin / Epstein Advisory Relationship Investigation
+
+name: richard-merkin
+primary_subject: "Richard N. Merkin, M.D."
+description: >
+  Investigate Dr. Richard "Dick" Merkin's documented relationship with Jeffrey
+  Epstein, including meetings and travel, estate and tax planning, captive
+  insurance and USVI proposals, Heritage Provider Network and Aetna strategy,
+  JPMorgan introductions and information flows, China healthcare-data deals,
+  scientific investment introductions, and the Caltech-linked estate concept.
+  Determine whether any payment, contract, formal engagement, or implemented
+  transaction resulted, without inferring misconduct from contact alone.
+
+key_persons:
+  - "richard n. merkin"
+  - "richard merkin"
+  - "dick merkin"
+  - "jeffrey epstein"
+  - "lesley groff"
+  - "sarah kellen"
+  - "ghislaine maxwell"
+  - "jes staley"
+  - "paul barrett"
+  - "brad karp"
+  - "alan halperin"
+  - "darren indyke"
+  - "richard kahn"
+  - "donald tang"
+  - "david stern"
+  - "adam goldston"
+  - "george church"
+  - "boris nikolic"
+  - "bill richardson"
+  - "bill gates"
+  - "seth lloyd"
+  - "ron burkle"
+  - "joe lonsdale"
+  - "gary winnick"
+  - "mark bertolini"
+
+known_addresses:
+  "3115 ocean front walk": "Merkin Family Foundation and Merkin-associated Marina del Rey address in nonprofit records"
+  "9 east 71": "Epstein Manhattan residence used for scheduled Merkin meetings"
+  "49 zorro ranch": "Epstein New Mexico ranch visited by Merkin in 2010"
+
+threads:
+  - id: 1
+    name: "Direct Communications Meetings and Travel"
+    description: "Emails, calls, calendars, gifts, in-person meetings, flights, island/ranch visits, and intermediaries connecting Merkin and Epstein"
+    targets:
+      - "richard merkin"
+      - "dick merkin"
+      - "jeffrey epstein"
+      - "lesley groff"
+      - "sarah kellen"
+    keywords:
+      - 'richard\s+(n\.?\s+)?merkin|dick\s+merkin'
+      - 'merkin.*epstein|epstein.*merkin'
+      - 'zorro\s+ranch|little\s+saint\s+james|9\s+east\s+71'
+      - 'n619kk|n15y'
+      - 'meeting|appointment|breakfast|lunch|tennis|fedex|ipad'
+
+  - id: 2
+    name: "Estate Tax and Captive Insurance Advice"
+    description: "Will and trust templates, pour-over mechanics, estate-tax modeling, USVI captive insurance, CFC structures, disaster-zone proposals, and tax-law intermediaries"
+    targets:
+      - "california institute of technology"
+      - "caltech"
+      - "alan halperin"
+      - "richard kahn"
+      - "darren indyke"
+    keywords:
+      - 'estate\s+(plan|tax|return)|will|trust|pour.over|grat'
+      - 'captive\s+insurance|controlled\s+foreign|\bcfc\b'
+      - 'virgin\s+islands|usvi|disaster\s+zone'
+      - 'tax\s+(problem|attorney|lawyer|advice)'
+      - 'caltech|cal\s+tech'
+
+  - id: 3
+    name: "Heritage Aetna and Healthcare Strategy"
+    description: "Epstein's advice concerning Heritage Provider Network, Aetna acquisition strategy, managed-care economics, ACA and Trump-era policy, and potential government/VA work"
+    targets:
+      - "heritage provider network"
+      - "heritage group"
+      - "regal medical group"
+      - "aetna"
+      - "mark bertolini"
+    keywords:
+      - 'heritage\s+(provider|group)|\bhpn\b|regal\s+medical'
+      - '\baetna\b|humana'
+      - 'sell\s+your\s+biz|100\s+million'
+      - 'obamacare|affordable\s+care|medicare\s+advantage'
+      - 'health\s*care|hospital|veterans|\bva\b'
+
+  - id: 4
+    name: "JPMorgan Banking and Investment Introductions"
+    description: "Jes Staley and JPMorgan introductions, disclosure of Epstein trading positions, Wells Fargo bond purchases, banking relationships, and other financial referrals"
+    targets:
+      - "jpmorgan chase"
+      - "jes staley"
+      - "paul barrett"
+      - "wells fargo"
+    keywords:
+      - 'jpmorgan|jp\s*morgan|private\s+bank'
+      - 'jes\s+staley|paul\s+barrett'
+      - 'wells\s+fargo|bond|trading\s+position'
+      - 'introduc|banker|portfolio|investment'
+
+  - id: 5
+    name: "China Healthcare Data and Science Investments"
+    description: "China Medical Data Services/Asia Gateway term sheets, Heritage counterparties, microbiome and genomics introductions, and scientific investment networks"
+    targets:
+      - "china medical data services"
+      - "asia gateway healthcare information technology"
+      - "david stern"
+      - "adam goldston"
+      - "george church"
+      - "joe lonsdale"
+      - "gary winnick"
+    keywords:
+      - 'china\s+medical\s+data|asia\s+gateway'
+      - 'healthcare\s+data|insurance\s+information\s+processing'
+      - 'senior\s+note|warrant|rmb|term\s+sheet'
+      - 'microbiome|genom|behavior\s+engineering'
+      - 'george\s+church|david\s+stern|adam\s+goldston|lonsdale|winnick'
+
+  - id: 6
+    name: "Caltech Science and Philanthropic Network"
+    description: "Caltech trusteeship, Merkin Family Foundation, biomedical philanthropy, Epstein's scientific salon, and the proposed estate beneficiary architecture"
+    targets:
+      - "california institute of technology"
+      - "caltech"
+      - "merkin family foundation"
+      - "heritage medical research institute"
+      - "broad institute"
+      - "seth lloyd"
+      - "boris nikolic"
+    keywords:
+      - 'caltech|california\s+institute\s+of\s+technology'
+      - 'merkin\s+family\s+foundation|heritage\s+medical\s+research'
+      - 'broad\s+institute|biomedical|science|physics|genetics'
+      - 'trustee|professorship|fellowship|prize|grant'
+
+  - id: 7
+    name: "Engagement Payments and Professional Intermediaries"
+    description: "Search for retainers, invoices, fees, payments, contracts, implemented structures, referrals to lawyers/accountants, and evidence that advice became a formal engagement"
+    targets:
+      - "southern trust company"
+      - "financial trust company"
+      - "paul weiss"
+      - "brad karp"
+      - "alan halperin"
+      - "richard kahn"
+      - "darren indyke"
+    keywords:
+      - 'invoice|fee|retainer|payment|wire|engagement|contract'
+      - 'not\s+inexpensive|joint\s+venture|commission|compensation'
+      - 'southern\s+trust|financial\s+trust|stc|ftc'
+      - 'paul\s+weiss|karp|halperin|indyke|kahn'
+      - 'implement|execute|formed|incorporat|accountant|attorney'
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary full-text source for released DOJ, FBI, and House Epstein records"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Structured relationship, email, entity, and co-occurrence layer"
+    commands: ["search", "entity", "related"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Complementary structured financial, flight, balance, and position data"
+    commands: ["search", "entity", "file"]
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI releases and named exhibits, including flight logs and contact book"
+    commands: ["search", "overlap"]
+
+key_dates:
+  - date: "2010-08-29"
+    event: "Merkin was scheduled to visit Epstein at Zorro Ranch after traveling to Santa Fe"
+    category: "operational"
+  - date: "2011-11-23"
+    event: "Merkin traveled from Opa-Locka to St. Thomas and was scheduled for helicopter transfer to Little Saint James"
+    category: "operational"
+  - date: "2012-09-16"
+    event: "Epstein complained to JPMorgan that Merkin bought Wells Fargo bonds after being told Epstein was buying them"
+    category: "financial"
+  - date: "2013-07-19"
+    event: "Los Angeles meeting in the China Medical Data Services / Asia Gateway healthcare-data investment process"
+    category: "financial"
+  - date: "2014-01-05"
+    event: "Epstein introduced Richard Merkin to Paul Weiss chairman Brad Karp"
+    category: "operational"
+  - date: "2015-07-03"
+    event: "Epstein urged Merkin to sell Heritage Provider Network in an Aetna-related strategy exchange"
+    category: "financial"
+  - date: "2017-09-30"
+    event: "Merkin asked Epstein about USVI-specific tax plans, investment opportunities, and FEMA after Hurricane Maria"
+    category: "financial"
+  - date: "2018-07-02"
+    event: "Epstein began detailed will, trust, estate-tax, and captive-insurance advice to Merkin"
+    category: "financial"
+  - date: "2018-08-30"
+    event: "Epstein used Caltech as an example beneficiary while advising Merkin on a pour-over will"
+    category: "financial"
+  - date: "2019-02-05"
+    event: "Epstein told Merkin he had an answer to Merkin's tax problem"
+    category: "financial"
+
+seed_pillars:
+  - name: "Heritage Provider Network"
+    pillar_type: "operations"
+    sub_type: "managed_care_network"
+    status: "active"
+    founded: "1979"
+    dissolved: null
+    jurisdiction: "California"
+    significance: "Merkin's principal healthcare enterprise and the subject of Epstein's business-sale and healthcare-policy advice."
+  - name: "Merkin Family Foundation"
+    pillar_type: "philanthropy"
+    sub_type: "private_foundation"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "California"
+    significance: "Merkin's principal disclosed philanthropic vehicle and a potential source for understanding estate and beneficiary planning."
+  - name: "California Institute of Technology"
+    pillar_type: "academia"
+    sub_type: "university"
+    status: "active"
+    founded: "1891"
+    dissolved: null
+    jurisdiction: "California"
+    significance: "Merkin serves as a trustee; Epstein used Caltech as a proposed blanket estate beneficiary in 2018 planning correspondence."
+  - name: "Heritage Medical Research Institute"
+    pillar_type: "philanthropy"
+    sub_type: "medical_research_nonprofit"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "California"
+    significance: "Merkin-controlled research nonprofit that anchors his biomedical grant and institutional network."
+  - name: "JPMorgan Chase"
+    pillar_type: "banking"
+    sub_type: "commercial_investment_bank"
+    status: "active"
+    founded: "2000"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Banking and introduction bridge involving Epstein, Jes Staley, Paul Barrett, and disclosure of Epstein's trading activity to Merkin."
+  - name: "Aetna Inc."
+    pillar_type: "operations"
+    sub_type: "health_insurer"
+    status: "dissolved"
+    founded: "1853"
+    dissolved: "2018"
+    jurisdiction: "Connecticut / United States"
+    significance: "Referenced in Epstein's advice to Merkin concerning Heritage Provider Network and acquisition strategy."
+  - name: "Paul Weiss Rifkind Wharton & Garrison LLP"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1875"
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "Epstein introduced Merkin to chairman Brad Karp; the firm's role in any implemented legal or estate structure requires verification."
+  - name: "China Medical Data Services Limited"
+    pillar_type: "operations"
+    sub_type: "healthcare_data_company"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "Hong Kong"
+    significance: "Target of the proposed $5 million Heritage-linked China healthcare-data investment discussed through Epstein's network."
+  - name: "U.S. Virgin Islands Government"
+    pillar_type: "government"
+    sub_type: "territorial_government"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "U.S. Virgin Islands"
+    significance: "Relevant to Epstein's proposed captive-insurance, exempt-company, disaster-zone, and regulatory strategies for Merkin."
+  - name: "U.S. Department of Justice"
+    pillar_type: "government"
+    sub_type: "law_enforcement"
+    status: "active"
+    founded: "1870"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Custodian and releaser of the EFTA records documenting the Merkin-Epstein relationship."
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "richard merkin"
+source_overrides: {}
+

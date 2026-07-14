@@ -1,0 +1,131 @@
+{
+  "as_of": "2026-07-14",
+  "profile": "geo-group",
+  "thread_id": 112,
+  "analysis_runs": {
+    "systemic_analysis": 91,
+    "generate_hunches": 92
+  },
+  "evidence_base": {
+    "primary_crosswalk_lead": 57788,
+    "findings": [12521, 12752, 12753, 12754, 12755, 12756, 12757, 12758, 12759, 12766, 12767],
+    "primary_documents": [
+      "FEC MUR 7180 matter page and documents 15, 38, 39",
+      "SEC Exhibits 21.1 and 22.1",
+      "FEC recipient filings in the lead 59037 and political-money ledgers",
+      "bounded SAM/USAspending/HigherGov/DHS award records in the lead 57788 crosswalk"
+    ],
+    "scoped_corporate_payment_rows": 26,
+    "cycles": [2016, 2024, 2025],
+    "payer_sequence": [
+      {"entity": "GEO Corrections Holdings, Inc.", "period": "2016"},
+      {"entity": "GEO Acquisition II, Inc.", "period": "2024 through 2025-06-11"},
+      {"entity": "GEO Reentry Services, LLC", "period": "2025-10-09 through 2025-12-11"}
+    ],
+    "parent": {
+      "entity": "The GEO Group, Inc.",
+      "uei": "JMLKZZ1NL2Z6",
+      "dhs_actions_2015_2026": 1128,
+      "active_ice_award_range_on_scoped_payment_dates": [6, 15]
+    }
+  },
+  "candidate_screen": [
+    {
+      "candidate": "The political payer is not the direct federal awardee.",
+      "novelty_gate": "fail",
+      "reason": "Merely restates verified finding #12766 and predicts no new record."
+    },
+    {
+      "candidate": "Political payers are drawn from the debt-guarantor subsidiary stack.",
+      "novelty_gate": "fail",
+      "reason": "All three appear in Exhibit 22, but the table contains roughly 62 guarantor rows. The high base rate makes the overlap non-diagnostic without a peer or nonpayer denominator."
+    },
+    {
+      "candidate": "The October 2025 switch to Reentry tracks its SAM activation or Trump-II award acceleration.",
+      "novelty_gate": "fail",
+      "reason": "The current SAM activation field is not a historical status snapshot, the first Reentry receipt predates the shown activation date, and one temporal coincidence cannot support a mechanism."
+    },
+    {
+      "candidate": "MUR 7180 alone caused GEO to stop using GCH and rotate later payers.",
+      "novelty_gate": "fail_as_standalone",
+      "reason": "Temporal order exists, but no contemporaneous post-MUR approval or causal record is available. MUR awareness is retained as one predicted record under the broader selection-rule hunch."
+    },
+    {
+      "candidate": "A recurring centralized selection step may compare proposed political payer entities by federal-award/legal status.",
+      "novelty_gate": "pass",
+      "reason": "The twice-changing payer across three independent contexts adds a mechanism not captured by finding #12766 and predicts concrete approval, legal-review, account, and future-behavior records."
+    }
+  ],
+  "novelty_assessment": {
+    "existing_hypotheses_checked": 200,
+    "existing_tag_values_checked": 219,
+    "analogous_existing_hypothesis_found": false,
+    "independent_contexts": 3,
+    "base_rate_control": "The guarantor overlap was rejected because approximately 62 entities are listed; no peer-company baseline yet exists for political payer rotation.",
+    "genuinely_new_mechanism": "A repeatable entity-selection rule, not the already-known payer/awardee split.",
+    "novelty_gate": "pass"
+  },
+  "falsifiability_assessment": {
+    "working_hypothesis_prediction": [
+      "Common parent-level approvers or counsel appear across payment packets from all three subsidiaries.",
+      "Payment-specific review refers to 52 U.S.C. 30119, MUR 7180, SAM, UEIs, contracts, or candidate-entity award status.",
+      "Historical or future payer changes continue to select entities with no exact direct-award match when a candidate payer's award status changes."
+    ],
+    "working_hypothesis_disconfirmation": [
+      "Payer identity follows longstanding bank-account ownership and ordinary nonpolitical cash activity without award-status review.",
+      "A full-cycle denominator shows direct-awardee corporate payers at comparable rates.",
+      "Payer transitions align with reorganizations or cash sweeps while award status remains unchanged or irrelevant."
+    ],
+    "null_prediction": [
+      "Each payer uses an established account also used for ordinary expenses.",
+      "Rotation aligns with segment cash, tax ownership, financing, guarantor, or reorganization changes.",
+      "Approval records contain ordinary authority and budget checks but no entity-level contractor-status comparison."
+    ],
+    "null_disconfirmation": [
+      "Repeated approval packets explicitly compare candidate payers by direct-award status.",
+      "Legal reviewers direct switches after award or MUR changes.",
+      "Payment-specific transfers fund otherwise inactive payer accounts and ordinary account explanations fail."
+    ],
+    "falsifiability_gate": "pass"
+  },
+  "ach_group": {
+    "competition_group": "geo-political-payer-selection-rule",
+    "working_hypothesis": {
+      "id": 357,
+      "title": "GEO applies an award-status-aware legal-entity selection step to corporate political payments",
+      "consistent": 7,
+      "inconsistent": 0,
+      "neutral": 3,
+      "not_applicable": 1,
+      "diagnostic_evidence": 2,
+      "diagnostic_consistent": 0,
+      "status": "proposed"
+    },
+    "null_hypothesis": {
+      "id": 358,
+      "title": "Ordinary cash management and REIT/legal separation explain GEO payer rotation without an award-status criterion",
+      "consistent": 9,
+      "inconsistent": 0,
+      "neutral": 1,
+      "not_applicable": 1,
+      "diagnostic_evidence": 2,
+      "diagnostic_consistent": 2,
+      "status": "proposed"
+    },
+    "least_evidence_against_verdict": "Formal tie: neither hypothesis has inconsistent evidence. H0 has the only diagnostic-consistent evidence currently scored, so the working hunch is not preferred. The record is unresolved until the predicted approval/account records or cross-cycle counterexamples are obtained.",
+    "matrix_artifact": "investigations/geo-group/reports/2026-07-14-tier2-geo-political-payer-selection-rule-evidence-matrix.csv"
+  },
+  "outputs": {
+    "hypothesis_ids": [357, 358],
+    "lead_id": 61546,
+    "new_finding_ids": [],
+    "human_action_id": 48,
+    "tags_created": 12
+  },
+  "hunch_gate": {
+    "passed": true,
+    "scope": "Passed for a testable research hypothesis only; did not pass as an evidentiary conclusion or misconduct theory.",
+    "prohibited_inferences": ["evasion", "illegality", "influence", "quid pro quo"],
+    "next_test": "Execute lead #61546 and human action #48 with symmetric searches for H1, H0, and counterexamples."
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "generated_on": "2026-07-14",
+  "analysis_runs": [
+    122,
+    123
+  ],
+  "question": "Do historical unused-bed payments and the FY25-to-FY26 YTD utilization shift distinguish H1 #335 from H0 #336?",
+  "competition_group": "geo-performance-consequence-gap",
+  "pre_wave11_snapshot_from_run_97": [
+    {
+      "hypothesis_id": 336,
+      "total_evaluated": 37,
+      "inconsistent": 5,
+      "inconsistency_ratio": 0.1351
+    },
+    {
+      "hypothesis_id": 335,
+      "total_evaluated": 37,
+      "inconsistent": 7,
+      "inconsistency_ratio": 0.1892
+    }
+  ],
+  "post_wave11_snapshot": [
+    {
+      "id": 336,
+      "title": "The oversight episodes are separate incidents handled through ordinary remedies and readiness purchasing",
+      "is_null": true,
+      "consistent": 15,
+      "inconsistent": 5,
+      "neutral": 18,
+      "not_applicable": 3,
+      "total_evaluated": 38,
+      "inconsistency_ratio": 0.1316
+    },
+    {
+      "id": 335,
+      "title": "ICE contract design and monitoring may insulate GEO operations from proportional financial consequences",
+      "is_null": false,
+      "consistent": 11,
+      "inconsistent": 7,
+      "neutral": 20,
+      "not_applicable": 3,
+      "total_evaluated": 38,
+      "inconsistency_ratio": 0.1842
+    }
+  ],
+  "new_assessments": [
+    {
+      "hypothesis_id": 335,
+      "finding_id": 13032,
+      "assessment": "neutral",
+      "assessed_by": "agent:systemic-analysis:run-122"
+    },
+    {
+      "hypothesis_id": 336,
+      "finding_id": 13032,
+      "assessment": "consistent",
+      "assessed_by": "agent:systemic-analysis:run-122"
+    }
+  ],
+  "dependency_collapse": {
+    "finding_group": [
+      13024,
+      13025,
+      13026,
+      13027
+    ],
+    "collapsed_to": 13032,
+    "reason": "Four facility rows share the same agency IIDS templates and the same two partial periods; treating them as four independent evidence sources would inflate diagnosticity."
+  },
+  "verdict": "H0 #336 remains least inconsistent, not confirmed. The later utilization group is consistent with surge readiness but does not refute H1 #335 or establish prior cost-effectiveness. Folkston non-enforcement and Tacoma's unresolved minimum response remain diagnostic for H1; ordinary closure/vendor-cost evidence and the non-GEO Torrance remedy remain diagnostic for H0.",
+  "ratio_warning": "Inconsistency ratios are row-level matrix summaries, not probabilities, likelihood ratios, or independent-source weights.",
+  "falsification": {
+    "335": "Matched QASP, invoice, CPARS, deduction, corrective-action and option files show routine severity- and utilization-proportionate consequences across GEO and non-GEO controls.",
+    "336": "Primary records across at least three independent chains show absent or nominal consequences, persistent unsupported minimums, or renewals/expansions despite comparable unresolved deficiencies after controlling for operational demand."
+  }
+}

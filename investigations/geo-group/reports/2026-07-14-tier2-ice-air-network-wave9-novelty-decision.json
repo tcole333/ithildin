@@ -1,0 +1,73 @@
+{
+  "analysis_date": "2026-07-14",
+  "analysis_run_id": 113,
+  "profile_id": "geo-group",
+  "candidate_pattern": "The ICE Air legal-prime/coordinator/operator/support layering produces a public reconstruction gap across recipient, subcontract, carrier, payment, and aircraft-assignment records.",
+  "novelty_gate": {
+    "three_or_more_verified_contexts": true,
+    "genuinely_surprising": false,
+    "new_diagnostic_mechanism": false,
+    "independent_of_existing_work": false,
+    "nonduplicative_layer1_search_plan": false,
+    "decision": "do_not_create_finding_hypothesis_lead_tag_or_connection"
+  },
+  "reasoning": [
+    "The practical gap is a new compact cross-layer description, but the verified evidence does not distinguish a new mechanism from ordinary prime/subcontract architecture, coverage limits, and redacted operational records.",
+    "Existing hypotheses #341/#342 already frame the broader legal-recipient versus downstream-visibility competition, although their empirical domain is GEO-linked IGSAs rather than ICE Air.",
+    "Completed leads #62728 and #62730 already sought the GTI-CSI payment record and current carrier/tail roster; open lead #62734 already tests whether Air Wisconsin changed ICE capacity; blocked lead #57974 already tests structured recipient/subaward attribution materiality.",
+    "Human action #71 already requests the decisive identity-neutral carrier, certificate, N-number, mission, and Round-4 records.",
+    "A new database hypothesis would need a new discriminator and a new Layer-1 lead. Neither exists after deduplication."
+  ],
+  "existing_objects": {
+    "hypotheses": [
+      {
+        "id": 341,
+        "title": "Federal recipient attribution leaves a material GEO IGSA exposure gap",
+        "relationship": "broader analogous visibility hypothesis; not reused as an ICE Air factual conclusion"
+      },
+      {
+        "id": 342,
+        "title": "Legal-prime reporting is accurate and creates no material visibility gap",
+        "relationship": "existing real null for the broader recipient-visibility phenomenon"
+      }
+    ],
+    "leads": [
+      {
+        "id": 62728,
+        "status": "completed",
+        "coverage": "GTI-CSI subcontract, options, invoices, payments, and realized revenue"
+      },
+      {
+        "id": 62730,
+        "status": "completed",
+        "coverage": "post-iAero carrier, aircraft, crew, vendor, and tail roster"
+      },
+      {
+        "id": 62734,
+        "status": "open",
+        "coverage": "Air Wisconsin acquisition and any actual ICE capacity/flight assignment"
+      },
+      {
+        "id": 57974,
+        "status": "blocked",
+        "coverage": "structured recipient/subaward attribution and downstream payment materiality in the broader GEO ICE network"
+      }
+    ],
+    "human_actions": [
+      {
+        "id": 71,
+        "status": "pending_or_current_database_state",
+        "coverage": "identity-neutral current carrier, certificate, N-number, mission, and Round-4 teaming/aircraft records"
+      }
+    ]
+  },
+  "database_creation_counts": {
+    "findings": 0,
+    "hypotheses": 0,
+    "leads": 0,
+    "tags": 0,
+    "connections": 0,
+    "entities": 0
+  },
+  "connection_boundary": "Unverified connections #6411-#6413 were excluded. Every role and edge in the artifacts is derived from verified findings or the two authoritative Wave 9 reports/manifests."
+}

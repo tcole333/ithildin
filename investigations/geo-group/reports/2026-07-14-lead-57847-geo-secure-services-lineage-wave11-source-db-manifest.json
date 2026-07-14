@@ -1,0 +1,138 @@
+{
+  "agent_run_id": "lead-57847-wave11",
+  "artifacts": [
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-report.md",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-legal-lineage-status-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-officer-role-address-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-parent-affiliate-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-negative-log.md",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-source-db-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-lead-57847-geo-secure-services-lineage-wave11-sha256.txt"
+  ],
+  "corroborating_sources": [
+    {
+      "boundary": "Document descriptions only; relevant underlying documents unavailable.",
+      "path": "investigations/geo-group/sources/2026-07-14-lead-57847-geo-secure-services-lineage-wave11/courtlistener/corporate-disclosure-search.json",
+      "source": "CourtListener RECAP search metadata"
+    }
+  ],
+  "database_actions": {
+    "addresses": [
+      1076,
+      1077,
+      1078,
+      1079,
+      1080,
+      1081
+    ],
+    "aliases": [
+      228,
+      229
+    ],
+    "entities": [
+      4811,
+      5146,
+      5165
+    ],
+    "existing_controls": [
+      12382,
+      12484,
+      12662,
+      12665,
+      12824
+    ],
+    "findings": [
+      13062,
+      13063,
+      13064
+    ],
+    "papercuts": [
+      1054,
+      1057,
+      1062,
+      1063
+    ],
+    "preserved_relation": 817,
+    "relations": [
+      860,
+      861
+    ],
+    "roles": [
+      2587,
+      2626,
+      2627,
+      2628,
+      2629,
+      2630,
+      2631,
+      2632,
+      2633,
+      2634,
+      2635,
+      2636,
+      2637,
+      2638
+    ]
+  },
+  "database_counts_at_build": {
+    "entities": 5096,
+    "entity_addresses": 1063,
+    "entity_relations": 822,
+    "entity_roles": 2549,
+    "findings": 13048,
+    "name_aliases": 149,
+    "search_log": 4390
+  },
+  "excluded": [
+    "award and contract analysis",
+    "wage-case analysis",
+    "facility operations",
+    "PACER purchase or paid registry retrieval"
+  ],
+  "lead_id": 57847,
+  "lead_status": "completed",
+  "primary_sources": [
+    {
+      "source": "Florida Division of Corporations",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=L12000160666"
+    },
+    {
+      "source": "Florida Division of Corporations",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=L22000531201"
+    },
+    {
+      "source": "Florida Division of Corporations",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=P12000083665"
+    },
+    {
+      "source": "Florida 2026 annual report",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/GetDocument?aggregateId=flal-l12000160666-e9e0a86b-50b0-45a6-ac14-e7b760b95ebd&formatType=PDF&transactionId=l12000160666-45b94f6e-16e9-4a7a-86c8-63bc01dc11e4"
+    },
+    {
+      "source": "SEC Exhibit 21.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-ex21_1.htm"
+    },
+    {
+      "source": "SEC Exhibit 22.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-ex22_1.htm"
+    },
+    {
+      "path": "investigations/geo-group/sources/2026-07-14-lead-57847-geo-secure-services-lineage-wave11/sam/sam-public-extract-gss.json",
+      "source": "SAM March 2026 public extract"
+    },
+    {
+      "finding_id": 12665,
+      "path": "investigations/geo-group/sources/2026-07-14-lead-57847-geo-secure-services-lineage-wave11/sam/sam-live-current-control.json",
+      "source": "Existing verified live SAM control"
+    }
+  ],
+  "profile": "geo-group",
+  "scope": "GEO Secure Services legal identity, formation/conversion/name history, current status, roles/addresses, GEO parent disclosure, GSS Holdings merger boundary, and SAM identity.",
+  "source_archive": "investigations/geo-group/sources/2026-07-14-lead-57847-geo-secure-services-lineage-wave11/",
+  "unresolved": [
+    "whether GEO's 100% ownership is direct or indirect",
+    "any intermediate owner",
+    "the precise party/substance of the 2017 zero-qualified-corporation merger event",
+    "any unobserved foreign qualification outside Florida"
+  ]
+}

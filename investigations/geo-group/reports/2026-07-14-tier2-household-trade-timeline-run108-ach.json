@@ -1,0 +1,196 @@
+{
+  "hypotheses": [
+    {
+      "id": 351,
+      "title": "Trump household GEO trades were active positioning around detention expansion",
+      "status": "investigating",
+      "competition_group": "geo-household-trading-expansion",
+      "is_null_hypothesis": false,
+      "consistent": 7,
+      "inconsistent": 0,
+      "neutral": 4,
+      "not_applicable": 0,
+      "unevaluated": 0,
+      "total_evaluated": 11,
+      "diagnostic_evidence": 2,
+      "diagnostic_consistent": 0,
+      "inconsistency_ratio": 0.0
+    },
+    {
+      "id": 352,
+      "title": "Trump household GEO trades were routine portfolio management unrelated to procurement",
+      "status": "investigating",
+      "competition_group": "geo-household-trading-expansion",
+      "is_null_hypothesis": true,
+      "consistent": 9,
+      "inconsistent": 0,
+      "neutral": 2,
+      "not_applicable": 0,
+      "unevaluated": 0,
+      "total_evaluated": 11,
+      "diagnostic_evidence": 2,
+      "diagnostic_consistent": 2,
+      "inconsistency_ratio": 0.0
+    }
+  ],
+  "findings": [
+    {
+      "id": 12447,
+      "target_name": "The GEO Group FY2025 ICE activation wave",
+      "summary": "GEO disclosed a sequence of FY2025 ICE activations: Delaney Hall awarded February 27, North Lake announced for immediate activation March 20, and D. Ray James activated under a contract modification effective June 6."
+    },
+    {
+      "id": 12514,
+      "target_name": "Donald J. Trump public financial disclosure / The GEO Group, Inc.",
+      "summary": "Donald J. Trump\u2019s 2026 annual public financial disclosure for report year 2025 lists a GEO Group security in Investment Account #7 valued at $50,001-$100,000 and $1,001-$2,500 in dividends."
+    },
+    {
+      "id": 12515,
+      "target_name": "Donald J. Trump periodic transaction disclosure / The GEO Group, Inc.",
+      "summary": "A periodic transaction report filed under Donald J. Trump reports a $15,001-$50,000 purchase of GEO Group securities on March 4, 2026 and marks that notification was received more than 30 days later."
+    },
+    {
+      "id": 12516,
+      "target_name": "Donald J. Trump annual disclosure / GEO Group transaction series",
+      "summary": "Trump\u2019s 2026 annual disclosure reports ten GEO Group purchases and four sales during 2025; summing only the disclosed value-category endpoints gives purchase bounds of $143,010-$445,000 and sale bounds of $67,004-$180,000."
+    },
+    {
+      "id": 12517,
+      "target_name": "The GEO Group, Inc. SEC ownership disclosures / Trump household-reportable interest",
+      "summary": "GEO\u2019s 2026 proxy identifies BlackRock and Vanguard as its only disclosed outside holders above 5% and does not identify Trump; that omission does not contradict the OGE-reported $50,001-$100,000 interest because GEO\u2019s proxy table covers directors, officers and known holders above 5%."
+    },
+    {
+      "id": 12531,
+      "target_name": "The GEO Group / Department of Homeland Security direct-prime procurement universe",
+      "summary": "After exact-key removal of parent/child overlaps, the normalized 14-UEI GEO universe contains 1,416 unique DHS prime-contract action rows across 222 award PIIDs and $6,356,699,228.62 in net action obligations from 2015-01-01 through 2026-07-13; ICE accounts for 1,362 actions/212 awards/$6,354,097,259.08 and CBP for 54 actions/10 awards/$2,601,969.54."
+    },
+    {
+      "id": 12532,
+      "target_name": "GEO DHS prime-contract action timing by presidential administration",
+      "summary": "Within the corrected 2015\u20132026 action ledger, ICE net action obligations were $478,295,618.46 before Trump I, $1,686,365,164.41 during Trump I, $2,900,292,455.05 during Biden, and $1,289,144,021.16 during Trump II through 2026-07-13; CBP totals for those periods were $458,026.46, $852,954.45, $934,664.66, and $356,323.97."
+    },
+    {
+      "id": 12542,
+      "target_name": "The GEO Group / DHS contract action pace by administration",
+      "summary": "Duration-normalized DHS GEO action frequency is only 7.3% higher in Trump II than Trump I through 2026-07-13, while net obligation pace is 106.8% higher because average obligation per action nearly doubled."
+    },
+    {
+      "id": 12543,
+      "target_name": "Trump disclosure household / The GEO Group / DHS action timeline",
+      "summary": "All 15 OGE-reported GEO transaction dates from 2025-01-30 through 2026-03-04 fall within 14 days of at least one GEO DHS action, but dense action cadence, household anonymity, modifications, and procurement lead times make the proximity non-discriminating."
+    },
+    {
+      "id": 12948,
+      "target_name": "Trump public financial disclosure household / The GEO Group",
+      "summary": "All 14 annual GEO transaction dates were part of broad Investment Account #7 activity; the March 4, 2026 PTR had 204 same-day transaction rows"
+    },
+    {
+      "id": 12957,
+      "target_name": "Trump public financial disclosure household / The GEO Group",
+      "summary": "DHS/GEO action-date proximity did not discriminate GEO trade dates from controls after separating base actions from modifications"
+    }
+  ],
+  "matrix": {
+    "351,12514": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12515": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12516": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12517": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12447": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12531": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12532": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12542": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12543": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12514": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12515": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12516": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12517": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12447": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12531": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12532": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12542": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "352,12543": {
+      "assessment": "consistent",
+      "assessed_by": "agent:timeline-analysis"
+    },
+    "351,12948": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis:run-108"
+    },
+    "352,12948": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis:run-108"
+    },
+    "351,12957": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis:run-108"
+    },
+    "352,12957": {
+      "assessment": "neutral",
+      "assessed_by": "agent:timeline-analysis:run-108"
+    }
+  },
+  "diagnosticity": {
+    "12447": "non_diagnostic",
+    "12514": "non_diagnostic",
+    "12515": "non_diagnostic",
+    "12516": "non_diagnostic",
+    "12517": "diagnostic",
+    "12531": "non_diagnostic",
+    "12532": "non_diagnostic",
+    "12542": "non_diagnostic",
+    "12543": "diagnostic",
+    "12948": "non_diagnostic",
+    "12957": "non_diagnostic"
+  }
+}

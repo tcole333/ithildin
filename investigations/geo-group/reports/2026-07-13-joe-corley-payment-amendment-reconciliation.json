@@ -1,0 +1,166 @@
+{
+  "profile_id": "geo-group",
+  "lead_id": 60026,
+  "as_of": "2026-07-13",
+  "base_igsa": "70CDCR18DIG000013",
+  "method": "analyze-contract",
+  "live_sam_used": false,
+  "conclusions": {
+    "latest_public_period_end": "2026-06-14",
+    "post_period_status": "unestablished; no later P00044 or extension located in the bounded county agenda search",
+    "bed_day_rate_effective_2026_05_01": 84.76,
+    "on_call_rate_effective_2026_05_01": 39.15,
+    "consolidated_transport_rate": null,
+    "consolidated_transport_rate_status": "redacted in P00041",
+    "first_retro_adjustment": {
+      "amount": 482237.02,
+      "period_start": "2025-06-15",
+      "period_end": "2026-03-31",
+      "supersedes_amount": 425201.59,
+      "increment": 57035.43,
+      "payment_status": "approved on task order if applicable; payment not proved"
+    },
+    "second_retro_adjustment": {
+      "amount": 50957.82,
+      "period_start": "2025-10-15",
+      "period_end": "2026-04-30",
+      "relationship_to_first": "separate",
+      "payment_status": "approved on task order if applicable; payment not proved"
+    },
+    "exclusive_beds": 1050,
+    "exclusive_beds_liability": "actual detainee days under written funded orders in the acquired record; no verified guaranteed-minimum payment",
+    "fund_222_fy2025": {
+      "revenue": 43194467,
+      "operations_expenditure": 43194467,
+      "agencies": ["ICE", "USMS"],
+      "ice_share": null,
+      "usms_share": null,
+      "geo_payee_amount": null,
+      "aggregation_rule": "one pass-through cycle; do not add revenue and expenditure"
+    },
+    "downstream_counterparty": {
+      "signed_2013_entity": "GEO Corrections and Detentions, LLC",
+      "corrected_2014_purchasing_payee": "GEO Group, Inc.",
+      "current_payee": null,
+      "assignment_proved": false,
+      "current_fee": null,
+      "historical_annual_fee": 500000,
+      "historical_monthly_installment": 41666.67
+    }
+  },
+  "transport_topology": {
+    "type": "cross-facility scope consolidation",
+    "joe_corley_prime": "Montgomery County",
+    "serving_facility": "Joe Corley Processing Center",
+    "facilities_served": [
+      "Joe Corley Processing Center",
+      "Montgomery Processing Center"
+    ],
+    "new_joe_corley_detention_prime_created": false,
+    "old_clins_deleted": ["0007", "0007a"],
+    "new_clins": {
+      "0007b": "consolidated monthly and mileage transportation; rates redacted; $0 obligation",
+      "0007c": "receipt-backed fuel reimbursement; NTE redacted; $0 obligation",
+      "0007d": "FTR travel reimbursement; NTE redacted; $0 obligation"
+    },
+    "independent_mpc_vehicle": "HSCEDM17D00009",
+    "independent_mpc_current_task_order": "70CDCR25FR0000097"
+  },
+  "task_order_snapshots": [
+    {
+      "piid": "70CDCR18FIGR00319",
+      "modification": "P00010",
+      "event_date": "2019-09-24",
+      "type": "obligation_increase",
+      "from": 25771068.35,
+      "change": 4513056.00,
+      "to": 30284124.35,
+      "prime": "MONTGOMERY COUNTY OF",
+      "finding_id": 12700
+    },
+    {
+      "piid": "70CDCR18FIGR00319",
+      "modification": "P00014",
+      "event_date": "2020-08-25",
+      "type": "deobligation",
+      "from": 35813427.79,
+      "change": -1886088.52,
+      "to": 33927339.27,
+      "prime": "MONTGOMERY COUNTY OF",
+      "finding_id": 12701
+    },
+    {
+      "piid": "70CDCR20FIGR00112",
+      "modification": "P00008",
+      "event_date": "2021-08-10",
+      "type": "deobligation",
+      "from": 9457145.00,
+      "change": -1054731.16,
+      "to": 8402413.84,
+      "prime": "MONTGOMERY COUNTY OF",
+      "finding_id": 12702
+    },
+    {
+      "piid": "70CDCR22FIGR00104",
+      "modification": "P00003",
+      "event_date": "2022-05-24",
+      "type": "rate_only_funding_unchanged",
+      "from": 1312239.19,
+      "change": 0.00,
+      "to": 1312239.19,
+      "prime": "MONTGOMERY COUNTY OF"
+    },
+    {
+      "piid": "70CDCR23FIGR00091",
+      "modification": "P00020",
+      "event_date": "2024-09-24",
+      "type": "deobligation_and_closeout",
+      "from": 28456656.51,
+      "change": -17108.69,
+      "to": 28439547.82,
+      "authorized_retro_invoice": 10185.41,
+      "authorized_retro_invoice_period": ["2024-01-15", "2024-03-06"],
+      "invoice_payment_proved": false,
+      "prime": "MONTGOMERY COUNTY OF",
+      "finding_id": 12703
+    }
+  ],
+  "non_aggregation_rules": [
+    "$425,201.59 is superseded by $482,237.02 and must not be added to it",
+    "$50,957.82 is a separate second REA adjustment",
+    "all P00041-P00043 base-modification CLIN obligations are $0.00",
+    "task-order obligations and deobligations are not county-to-GEO payments",
+    "authorized invoices are not proof of payment",
+    "Fund 222 revenue and expenditure are two sides of one mixed-agency cycle",
+    "rates, invoices, annual fund flows, obligations, and historical fees use incompatible accounting units",
+    "1,050 beds cannot be multiplied by a rate without verified actual detainee days"
+  ],
+  "search_coverage": {
+    "ice_foia_files": 11,
+    "montgomery_exact_piid_agenda_results": 22,
+    "montgomery_corley_agenda_results": 81,
+    "montgomery_po_2013455_results": 3,
+    "usaspending_county_dhs_awards": 0,
+    "usaspending_exact_award_id_batch_results": 0,
+    "highergov_task_order_results": 0,
+    "march_2025_check_register_exact_geo_hits": 0,
+    "limitations": [
+      "structured zeros do not disprove the primary county and ICE records",
+      "one-month check-register zero does not establish a year-wide absence",
+      "REAs and POCs do not identify the exact current county payee"
+    ]
+  },
+  "remaining_records": [
+    "FY2025 and FY2026 Joe Corley task-order PIIDs and complete modification chains",
+    "ICE invoices, acceptance records, and payment dates",
+    "Fund 222 general ledger, bank statements, and vendor disbursements",
+    "ICE/USMS revenue allocation",
+    "post-2013 county-GEO management amendments or assignment",
+    "current county administrative fee",
+    "successor or extension after 2026-06-14"
+  ],
+  "pending_human_action_id": 39,
+  "new_verified_finding_ids": [12696, 12697, 12698, 12699, 12700, 12701, 12702, 12703, 12704, 12705, 12706],
+  "retracted_source_quote_defect_ids": [12684, 12685, 12686, 12687, 12688, 12689, 12690, 12691, 12692, 12693, 12694],
+  "prior_controlling_finding_ids": [12620, 12621, 12622, 12623, 12624, 12625, 12626, 12627, 12628, 12629, 12660, 12661]
+}

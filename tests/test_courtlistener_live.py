@@ -6,7 +6,7 @@ with our auth token. They use a well-known case (US v. Battle, Sr.,
 1:04-cr-20159, S.D. Fla.) as a stable test fixture.
 
 Run: uv run pytest tests/test_courtlistener_live.py -v
-Skip: uv run pytest tests/test_courtlistener_live.py -v -k "not live"
+Skip with the rest of the network suite: uv run pytest -m "not live_data"
 """
 from __future__ import annotations
 
@@ -14,6 +14,8 @@ import os
 import pytest
 import requests
 from pathlib import Path
+
+pytestmark = pytest.mark.live_data
 
 # Load .env
 env_path = Path(__file__).resolve().parents[1] / ".env"

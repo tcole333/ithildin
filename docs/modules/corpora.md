@@ -19,8 +19,14 @@ Tools for searching document collections, email archives, entity databases, and 
 | `ingest_epstein_20k.py` | House Oversight 20K docs | Local SQLite (FTS5) | None | 25.8K docs |
 | `ingest_fbi_files.py` | FBI release + named exhibits (Flight Log, Contact Book) | Local SQLite (FTS5) | None | 8,150 docs |
 | `ingest_epstein_exposed.py` | EpsteinExposed.com corpus | Remote API + Local DB | None | 1.5M docs, 1.2K persons |
+| `reporting_corpus.py` | Versioned Epstein reporting + attributed claim genealogy | Local SQLite (FTS5) + discovery adapters | Public feeds/GDELT; licensed exports optional | Grows continuously |
+| `government_release_corpus.py` | DOJ and SEC official press releases | Local SQLite (FTS5) | None | DOJ API + SEC 1997-present online archive |
 
 **NOTE:** The first four tools are investigation-specific corpora (configured per investigation profile). DocumentCloud and MuckRock are general-purpose. The `ingest_epstein_*` tools are Epstein-investigation-specific.
+
+The reporting corpus is a secondary-source knowledge layer, not a primary corpus.
+See `docs/modules/reporting.md`; do not count repeated reporting as independent
+corroboration and do not promote a claim without quoted primary evidence.
 
 ## Subcommands & Examples
 

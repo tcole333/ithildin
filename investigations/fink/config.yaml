@@ -1,0 +1,240 @@
+# Joshua Fink Investigation Profile
+
+name: fink
+primary_subject: "Joshua Aaron Fink"
+description: >
+  Investigate Joshua Fink's documented relationship and network proximity to
+  Jeffrey Epstein, while mapping Fink's broader investment, corporate,
+  philanthropic, and family-linked institutional network. Treat appearance in
+  Epstein records as evidence of contact or proximity only; do not infer
+  misconduct without independent evidence.
+
+key_persons:
+  - "jeffrey epstein"
+  - "joshua fink"
+  - "josh fink"
+  - "joshua aaron fink"
+  - "laurence fink"
+  - "larry fink"
+  - "lori fink"
+  - "lana pozhidaeva"
+  - "peter mandelson"
+  - "lesley groff"
+  - "themasap khan"
+  - "william peter ryan"
+  - "paul durose"
+  - "matt drapkin"
+  - "shaun gordon"
+  - "gary mckinney"
+
+known_addresses:
+  "540 madison": "Enso Capital Management address shown in released 2012 correspondence"
+  "65 east 55": "Luma Group business address reported in current adviser records"
+  "217 east 70": "Luma Group/LumaBio address reported in 2023 SEC Form D filings"
+
+threads:
+  - id: 1
+    name: "Epstein Contact and Intermediaries"
+    description: "Direct and indirect communications, introductions, meetings, travel overlap, and deal flow involving Epstein"
+    targets:
+      - "jeffrey epstein"
+      - "lesley groff"
+      - "lana pozhidaeva"
+      - "peter mandelson"
+    keywords:
+      - "epstein"
+      - "jeevacation"
+      - "little saint james"
+      - "9 east 71"
+      - "contact.*book"
+      - "flight.*log"
+
+  - id: 2
+    name: "Enso Capital and Early Career"
+    description: "Enso's formation, investors, personnel, performance claims, closure or restructuring, and Fink's prior finance roles"
+    targets:
+      - "enso capital"
+      - "enso capital management"
+      - "paul durose"
+      - "matt drapkin"
+      - "shaun gordon"
+    keywords:
+      - 'enso\s+capital'
+      - "natural.resources"
+      - 'hedge\s+fund'
+      - 'tiger\s+management'
+      - "argonaut"
+      - 'morgan\s+stanley'
+
+  - id: 3
+    name: "Luma Group and Current Vehicles"
+    description: "Luma Group Advisor, LumaBio funds, affiliated entities, beneficial ownership, portfolio companies, and capital sources"
+    targets:
+      - "luma group advisor"
+      - "luma group"
+      - "lumabio"
+      - "themasap khan"
+      - "william peter ryan"
+    keywords:
+      - 'luma\s+group'
+      - "lumabio"
+      - 'crd\s*328200'
+      - "802-128958"
+      - 'exempt\s+reporting\s+adviser'
+
+  - id: 4
+    name: "Fink Family and BlackRock Boundary"
+    description: "Family capital, introductions, reputational spillover, and any documented institutional overlap with BlackRock"
+    targets:
+      - "laurence fink"
+      - "larry fink"
+      - "lori fink"
+      - "blackrock"
+    keywords:
+      - "blackrock"
+      - 'larry.s?\s+son'
+      - 'laurence\s+fink'
+      - 'family\s+(capital|office|investment)'
+
+  - id: 5
+    name: "Natural Resources and Cross-Border Deals"
+    description: "Mining, energy, commodities, SPAC, and cross-border transactions, including counterparties and financing chains"
+    targets:
+      - "gary mckinney"
+      - "reliance energy"
+      - "3roc"
+      - "riverstone"
+    keywords:
+      - 'reliance\s+energy'
+      - "3roc|3rock"
+      - "riverstone"
+      - "permian"
+      - "mining|mineral|commodit"
+      - "eritrea|congo|tanzania|mongolia|colombia"
+
+  - id: 6
+    name: "Corporate Regulatory and Litigation Footprint"
+    description: "Registrations, securities filings, adviser disclosures, litigation, property, political giving, and enforcement history"
+    targets:
+      - "joshua aaron fink"
+      - "enso capital management"
+      - "luma group advisor"
+    keywords:
+      - 'form\s+(adv|d|13f)'
+      - "sec|finra|iadp|crd"
+      - "lawsuit|litigation|complaint|docket"
+      - 'incorporat|beneficial\s+owner'
+      - 'political\s+contribution|fec'
+
+  - id: 7
+    name: "Philanthropic and Social Network"
+    description: "Board, donor, nonprofit, educational, and social relationships that connect Fink to institutions and deal networks"
+    targets:
+      - "the nature conservancy"
+      - "university of pennsylvania"
+    keywords:
+      - "philanthrop|foundation|donor|gift"
+      - 'nature\s+conservancy'
+      - 'university\s+of\s+pennsylvania|upenn'
+      - 'board\s+member|trustee'
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary full-text source for released DOJ, FBI, and House Epstein records"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Structured relationship, email, entity, and co-occurrence layer"
+    commands: ["search", "entity", "related"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Complementary structured financial, flight, balance, and position data"
+    commands: ["search", "entity", "file"]
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI releases and named exhibits, including flight logs and contact book"
+    commands: ["search", "overlap"]
+
+key_dates:
+  - date: "2011-03-28"
+    event: "Joshua Fink email and Epstein image were forwarded by an intermediary to Jeffrey Epstein (EFTA01868066)"
+    category: "operational"
+  - date: "2011-07-31"
+    event: "Peter Mandelson told Epstein he was aboard a boat in the Aegean with Josh Fink and asked whether Epstein knew him (EFTA01858946)"
+    category: "operational"
+  - date: "2012-11-21"
+    event: "An intermediary told Epstein that Fink had decided to close Enso Capital and discussed helping him choose a new platform (EFTA02393060)"
+    category: "financial"
+  - date: "2017-04-28"
+    event: "A Permian energy financing proposal naming Josh Fink as a financing and strategy lead was sent to Epstein (EFTA00454998)"
+    category: "financial"
+  - date: "2023-07-21"
+    event: "LumaBio I LP filed a Form D signed by Joshua Fink as founder"
+    category: "financial"
+  - date: "2025-03-31"
+    event: "Luma Group Advisor filed its annual Form ADV amendment (CRD 328200)"
+    category: "financial"
+
+seed_pillars:
+  - name: "Enso Capital Management LLC"
+    pillar_type: "operations"
+    sub_type: "hedge_fund_manager"
+    status: "unknown"
+    founded: "2002"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Fink's principal investment platform during the period covered by the released Epstein communications."
+  - name: "Luma Group Advisor LLC"
+    pillar_type: "operations"
+    sub_type: "investment_adviser"
+    status: "active"
+    founded: "2023"
+    dissolved: null
+    jurisdiction: "Delaware / New York"
+    significance: "Fink's current disclosed investment-adviser platform and control entity."
+  - name: "LumaBio I LP"
+    pillar_type: "operations"
+    sub_type: "private_fund"
+    status: "active"
+    founded: "2023"
+    dissolved: null
+    jurisdiction: "Delaware / Cayman-linked"
+    significance: "SEC-filed private fund vehicle founded by Fink and advised by Luma Group."
+  - name: "BlackRock"
+    pillar_type: "banking"
+    sub_type: "asset_manager"
+    status: "active"
+    founded: "1988"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Institution founded and led by Fink's father; investigate actual capital or personnel overlap without presuming institutional involvement."
+  - name: "U.S. Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    founded: "1934"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Primary source for adviser, private-placement, ownership, and public-company filings."
+  - name: "U.S. Department of Justice"
+    pillar_type: "government"
+    sub_type: "law_enforcement"
+    status: "active"
+    founded: "1870"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Custodian and releaser of the Epstein records that contain Fink-related references."
+  - name: "The Nature Conservancy"
+    pillar_type: "philanthropy"
+    sub_type: "environmental_nonprofit"
+    status: "active"
+    founded: "1951"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Publicly documented recipient of support from Fink and a potential bridge into his philanthropic network."
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "joshua fink"
+
+source_overrides: {}

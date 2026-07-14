@@ -25,10 +25,10 @@ Rate limit: 10 req/sec, 100K req/day. 10K records/month on base plan.
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode
 
 import requests
 
@@ -44,6 +44,22 @@ if _env_path.exists():
 BASE_URL = "https://www.highergov.com/api-external"
 
 
+class HigherGovAPIError(RuntimeError):
+    """A credential-safe error suitable for display by the CLI."""
+
+
+def redact_credentials(value: object, api_key: str | None = None) -> str:
+    """Remove API credentials from diagnostics before they reach a terminal."""
+    text = str(value)
+    if api_key:
+        text = text.replace(api_key, "[REDACTED]")
+    return re.sub(
+        r"(?i)([?&]api_key=)[^&\s\"'<>]+",
+        r"\1[REDACTED]",
+        text,
+    )
+
+
 def get_api_key(args_key: str | None = None) -> str:
     key = args_key or os.environ.get("HIGHERGOV_API_KEY")
     if not key:
@@ -53,19 +69,35 @@ def get_api_key(args_key: str | None = None) -> str:
 
 
 def api_get(endpoint: str, params: dict, api_key: str) -> dict:
+    params = params.copy()
     params["api_key"] = api_key
     # Remove None values
     params = {k: v for k, v in params.items() if v is not None}
     url = f"{BASE_URL}/{endpoint}/"
-    resp = requests.get(url, params=params, timeout=30)
+    try:
+        resp = requests.get(url, params=params, timeout=30)
+    except requests.RequestException as exc:
+        # Requests exceptions often embed the prepared URL, including query params.
+        # Do not expose their message; the exception class is sufficient context.
+        raise HigherGovAPIError(
+            f"HigherGov request failed ({type(exc).__name__})"
+        ) from None
     if resp.status_code == 403:
-        print("Error: Invalid API key", file=sys.stderr)
-        sys.exit(1)
+        raise HigherGovAPIError("Invalid API key")
     if resp.status_code == 400:
-        print(f"Error: Bad request — {resp.text}", file=sys.stderr)
-        sys.exit(1)
-    resp.raise_for_status()
-    return resp.json()
+        detail = redact_credentials(resp.text, api_key).strip()[:500]
+        suffix = f" — {detail}" if detail else ""
+        raise HigherGovAPIError(f"Bad request{suffix}")
+    try:
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise HigherGovAPIError(
+            f"HigherGov returned HTTP {resp.status_code} ({type(exc).__name__})"
+        ) from None
+    try:
+        return resp.json()
+    except ValueError:
+        raise HigherGovAPIError("HigherGov returned an invalid JSON response") from None
 
 
 def paginate_all(endpoint: str, params: dict, api_key: str, max_pages: int = 50) -> list:
@@ -467,8 +499,13 @@ def main():
     p.set_defaults(func=cmd_opportunity)
 
     args = parser.parse_args()
-    args.func(args)
+    try:
+        args.func(args)
+    except HigherGovAPIError as exc:
+        print(f"Error: {redact_credentials(exc)}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

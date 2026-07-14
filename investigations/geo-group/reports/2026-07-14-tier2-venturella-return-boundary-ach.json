@@ -1,0 +1,114 @@
+{
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "analysis_runs": {
+    "generate_hunches": 106,
+    "systemic_analysis": 107
+  },
+  "competition_group": "geo-venturella-return-boundary",
+  "question": "Does the corrected Venturella return chronology leave GEO-specific ethics and procurement-participation boundaries unresolved or potentially inadequate, versus adequate ordinary insulation through ended interests, ethics controls, and ICE acquisition structure?",
+  "legacy_premise_correction": {
+    "finding_12545_old_interpretation": "The 472-day and 429-day intervals were previously treated as a government-return separation boundary.",
+    "disposition": "stale and excluded from scoring",
+    "current_boundary": "Finding 12944 places Venturella at ICE as Senior Advisor to the Director by 2025-03-17, 45 days after the scheduled consultancy end and two days after scheduled vesting.",
+    "limits": [
+      "actual consultancy termination is not established",
+      "actual vesting, distribution, retention, sale, or divestiture is not established",
+      "exact ICE start date and appointment authority are not established"
+    ]
+  },
+  "operational_competitors": {
+    "355": {
+      "label": "unresolved or potentially inadequate GEO-specific boundary",
+      "literal_claim_limit": "The evidence supports unresolved adequacy, not an established absent, late, incomplete, or violated screen.",
+      "falsification": "Dated records show interests ended or were disposed, a comprehensive and timely GEO screen existed before ICE work, and matter-level routing shows no GEO participation."
+    },
+    "356": {
+      "label": "adequate ordinary insulation",
+      "innocent_explanation": true,
+      "falsification": "Records show an extension or residual GEO interest, a late or narrow screen, a waiver or authorization exposing a boundary, or personal participation or intervention in a named GEO matter."
+    }
+  },
+  "method": {
+    "input_gate": "verified GEO-profile findings only",
+    "external_queries": 0,
+    "assessor": "agent:systemic-analysis:run-107",
+    "assessment_ids": [771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792],
+    "rule": "Least evidence against, weighted by diagnosticity, independence, causal proximity, and coverage; row counts are not votes.",
+    "score_warning": "Inconsistency scores are ordinal results within this bounded matrix, not probabilities or confidence percentages."
+  },
+  "accepted_input_finding_ids": [12535, 12536, 12537, 12538, 12539, 12540, 12541, 12545, 12944, 12945, 12946],
+  "dependency_rules": {
+    "12536_12537_12538": "One SEC filing family; multiple propositions but not three independent votes.",
+    "12545": "Corrected derivative synthesis; not applicable to both hypotheses and zero independent weight. Use only for the May 2026 leadership-page boundary and stale-premise flag.",
+    "12945": "Independent court record but not applicable to the GEO-specific phenomenon.",
+    "12946": "Independent GEO litigation record but neutral because all material conduct is collective, not individual."
+  },
+  "current_run_results": {
+    "355": {
+      "consistent": 4,
+      "inconsistent": 0,
+      "neutral": 5,
+      "not_applicable": 2,
+      "total_evaluated": 9,
+      "diagnostic_evidence": 4,
+      "inconsistency_ratio": 0.0
+    },
+    "356": {
+      "consistent": 2,
+      "inconsistent": 1,
+      "neutral": 6,
+      "not_applicable": 2,
+      "total_evaluated": 9,
+      "diagnostic_evidence": 4,
+      "inconsistency_ratio": 0.1111
+    },
+    "least_inconsistent": 355,
+    "verdict": "#355 is least inconsistent only as an unresolved-boundary formulation. Missing decisive screening and participation records, plus the corrected timing, prevent #356's adequate-insulation premise from being the least inconsistent. No conflict or screen failure is established."
+  },
+  "diagnostic_rows": {
+    "12536": "Prior GEO proposal-development responsibility is consistent with a boundary question; neutral on whether controls were adequate.",
+    "12538": "Scheduled vesting two days before the documented ICE role leaves financial disposition unresolved; actual vesting is not established.",
+    "12541": "Public M&A/OAQ placement is consistent with structural insulation but not proof of Venturella-specific routing.",
+    "12944": "Directly contradicts the old 14-to-15-month return-separation premise while proving no overlap or participation."
+  },
+  "strongest_innocent_explanation": "The consultancy and relevant interests ended or were disposed before Venturella's ICE role; ordinary onboarding imposed appropriate controls; acquisition work was routed through M&A/OAQ; public gaps reflect agency-held personnel and ethics records; litigation appearances reflect office succession and collective representation.",
+  "key_assumptions": {
+    "355": [
+      "A GEO-specific boundary was legally or operationally material to Venturella's actual ICE duties.",
+      "The missing public records may correspond to absent, late, incomplete, or narrower controls rather than merely nonpublic records.",
+      "A relevant financial or prior-matter relationship persisted enough to require specific treatment."
+    ],
+    "356": [
+      "The consultancy actually ended without extension.",
+      "Scheduled vesting resulted in no relevant retained interest by the ICE return.",
+      "M&A/OAQ placement actually routed GEO matters away from Venturella.",
+      "A timely and sufficiently broad ethics screen existed and was followed."
+    ]
+  },
+  "missing_record_boundary": {
+    "human_action_64": "appointment, effective start, position and delegation records",
+    "human_action_65": "financial disclosure, ethics screen, recusal, waiver, authorization, divestiture and response records",
+    "human_action_66": "GEO-specific calendars, communications, acquisition roles, approval chains, decisions and routing records"
+  },
+  "broader_12939_retest": {
+    "political_access_relationship": "Strengthened temporal adjacency and ethics relevance.",
+    "named_procurement_decision_bridge": "No change; none established.",
+    "aggregate_expansion": "No change; H0 remains substantially less inconsistent in the full July 14 synthesis.",
+    "vendor_selection_and_terms": "Remains unresolved; the corrected chronology weakens one H0 substream but does not reverse the full-matrix result."
+  },
+  "output_synthesis_finding": {
+    "id": 12947,
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "verification_status": "verified",
+    "relations": [
+      "12947 refines corrected 12545",
+      "12947 refines 12939 without changing its broader verdict"
+    ]
+  },
+  "premortem": {
+    "most_likely_error": "Treating missing public ethics records as adverse evidence or close timing as proof of overlap.",
+    "fastest_check": "Obtain dated onboarding/ethics and financial-disposition records, then matter-level routing and participation records."
+  }
+}

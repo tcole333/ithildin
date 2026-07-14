@@ -1,6 +1,6 @@
 # Gratitude America Ltd
 **Aliases**: Gratitude America
-**Stats**: 44 findings, 72 connections, 0 entities
+**Stats**: 43 findings, 72 connections, 0 entities
 **Dossier**: /dossiers/gratitude-america-ltd
 
 > Gratitude America Ltd was a USVI-based 501(c)(3) private foundation that received $10 million from Leon Black and disbursed grants and consulting payments to academics, journalists, and researchers under Epstein's personal direction.
@@ -16,7 +16,7 @@
 - **[legal/confirmed]** Gratitude America Ltd (EIN 66-0789697) incorporated in USVI on April 25, 2012 as a 501(c)(3) private foundation. Registered address: 9053 Estate Thomas Suite 101, St Thomas VI 00802 (Royal Palms Professional Building). Also used address 6100 Red Hook Quarter B3, St Thomas USVI 00802. IRS ruling date September 2012. NTEE code T20 (Private Grantmaking Foundations). Books kept by Erika Kellerhals at USVI address. (2012-04-25) (Finding #23)
 
 ## Top Connections
-- **SEB Bank Lithuania** [financial/strong]: DS10: 1.85M wire Apr 3 2018 to SEB Lithuania
+- **SEB Bank Lithuania** [financial/strong]: EFTA01287550 documents a EUR 15,000 / USD 18,542.78 wire on Apr 3, 2018 from Gratitude America to NPO Baleto Teatras via SEB Bank Lithuania.
 - **International Peace Institute** [financial/strong]: Gratitude America granted $375,000 to IPI in 2017 per 990-PF Statement 5
 - **Kuhn Foundation** [financial/strong]: Gratitude America granted $150,000 to Kuhn Foundation in 2017 and $500,000 in 2018 (total $650,000) per 990-PF filings
 - **Humanity Plus** [financial/strong]: Gratitude America granted $100,000 to Humanity Plus (transhumanist organization) in 2018 per 990-PF

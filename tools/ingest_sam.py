@@ -31,8 +31,10 @@ import time
 from pathlib import Path
 
 try:
+    from tools.fts_query import literal_fts_query
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from fts_query import literal_fts_query
     from output_util import add_output_args, write_output
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -425,6 +427,7 @@ def cmd_search(args):
     """Search both entities and exclusions via FTS5."""
     db = get_db()
     query = args.query
+    fts_query = literal_fts_query(query)
     limit = args.limit
 
     entities = [dict(r) for r in db.execute("""
@@ -432,14 +435,14 @@ def cmd_search(args):
         JOIN sam_entities_fts ON sam_entities_fts.rowid = e.id
         WHERE sam_entities_fts MATCH ?
         ORDER BY rank LIMIT ?
-    """, (query, limit)).fetchall()]
+    """, (fts_query, limit)).fetchall()]
 
     exclusions = [dict(r) for r in db.execute("""
         SELECT e.*, rank FROM sam_exclusions e
         JOIN sam_exclusions_fts ON sam_exclusions_fts.rowid = e.id
         WHERE sam_exclusions_fts MATCH ?
         ORDER BY rank LIMIT ?
-    """, (query, limit)).fetchall()]
+    """, (fts_query, limit)).fetchall()]
 
     result = {"query": query, "entities": entities, "exclusions": exclusions}
     db.close()
@@ -453,6 +456,7 @@ def cmd_entity(args):
     """Search entity registrations via FTS5."""
     db = get_db()
     query = args.query
+    fts_query = literal_fts_query(query)
     limit = args.limit
 
     rows = [dict(r) for r in db.execute("""
@@ -460,7 +464,7 @@ def cmd_entity(args):
         JOIN sam_entities_fts ON sam_entities_fts.rowid = e.id
         WHERE sam_entities_fts MATCH ?
         ORDER BY rank LIMIT ?
-    """, (query, limit)).fetchall()]
+    """, (fts_query, limit)).fetchall()]
 
     result = {"query": query, "count": len(rows), "entities": rows}
     db.close()
@@ -473,6 +477,7 @@ def cmd_exclusion(args):
     """Search exclusions via FTS5."""
     db = get_db()
     query = args.query
+    fts_query = literal_fts_query(query)
     limit = args.limit
 
     rows = [dict(r) for r in db.execute("""
@@ -480,7 +485,7 @@ def cmd_exclusion(args):
         JOIN sam_exclusions_fts ON sam_exclusions_fts.rowid = e.id
         WHERE sam_exclusions_fts MATCH ?
         ORDER BY rank LIMIT ?
-    """, (query, limit)).fetchall()]
+    """, (fts_query, limit)).fetchall()]
 
     result = {"query": query, "count": len(rows), "exclusions": rows}
     db.close()

@@ -14,7 +14,11 @@ def literal_fts_query(query: str) -> str:
     if not query:
         return '""'
     # Preserve deliberately supplied FTS phrases and boolean expressions.
-    if '"' in query or re.search(r"\b(?:AND|OR|NOT|NEAR)\b", query, re.IGNORECASE):
+    # Treat only explicit uppercase operators as FTS syntax. Ordinary legal
+    # names frequently contain words such as "and"; returning those names
+    # unquoted exposes punctuation later in the string (for example a comma
+    # before LLC) to the FTS5 parser and can raise a syntax error.
+    if '"' in query or re.search(r"\b(?:AND|OR|NOT|NEAR)\b", query):
         return query
     terms = query.split()
     return " ".join(f'"{term.replace(chr(34), chr(34) * 2)}"' for term in terms)

@@ -1,0 +1,208 @@
+{
+  "lead_id": 57836,
+  "profile": "geo-group",
+  "as_of": "2026-07-14",
+  "subject": "GEO Transport / CSI Aviation / ICE Air contract chain",
+  "measurement_rule": "Dollar values are current cumulative USAspending snapshots unless explicitly marked as an action flow. Ceiling or potential authority, obligations, outlays, and GEO revenue are non-additive measures.",
+  "analysis_calculations": {
+    "three_direct_fss_order_obligation_sum": "258529725.25 + 324216615.92 + 562049742.00 = 1144796083.17; rounded to three decimal billions = $1.145 billion"
+  },
+  "evidence_boundaries": {
+    "salus_csro_geo_link": "No reviewed source establishes a GEO or GTI link to the Salus CSRO award; this is an explicit evidence-gap boundary, not proof of absence."
+  },
+  "entities": [
+    {
+      "name": "CSI AVIATION, INC",
+      "role": "ICE Air prime contractor and federal award recipient",
+      "uei": "D5BNEHB3UL89",
+      "cage": "1HTW5"
+    },
+    {
+      "name": "GEO TRANSPORT, INC.",
+      "role": "GEO wholly owned subsidiary; secure air-operation support/security subcontractor described by GEO",
+      "uei": "DFEKRCYPZD84",
+      "cage": "6PV86"
+    },
+    {
+      "name": "U.S. Immigration and Customs Enforcement",
+      "role": "awarding agency and mission owner"
+    },
+    {
+      "name": "Air carriers and operational vendors",
+      "role": "aircraft, pilots/crew, and other service components; current complete roster unresolved"
+    }
+  ],
+  "edges": [
+    {
+      "from": "U.S. Immigration and Customs Enforcement",
+      "to": "CSI AVIATION, INC",
+      "relationship": "prime award",
+      "instrument": "70CDCR24A00000001",
+      "confidence": "confirmed",
+      "boundary": "The BPA ceiling and order-level obligations are not CSI revenue and do not quantify GEO payments."
+    },
+    {
+      "from": "CSI AVIATION, INC",
+      "to": "GEO TRANSPORT, INC.",
+      "relationship": "secure air-operation support subcontract",
+      "instrument": "five-year subcontract inclusive of option periods announced 2024-03-12",
+      "confidence": "confirmed as to GEO's filed disclosure; exact subcontract document not public",
+      "boundary": "Mapping to the ICE BPA is supported by matching prime, customer, scope, and five-year term, but the subcontract itself does not publicly identify the BPA."
+    },
+    {
+      "from": "CSI AVIATION, INC",
+      "to": "Air carriers and operational vendors",
+      "relationship": "teaming/subcontract/vendor performance",
+      "confidence": "high",
+      "boundary": "iAero is historical; current complete roster and precise legal relationships are unresolved."
+    }
+  ],
+  "vehicles": [
+    {
+      "piid": "GS33F0025V",
+      "type": "GSA MAS/Federal Supply Schedule contract",
+      "recipient": "CSI AVIATION, INC",
+      "period": {
+        "start": "2009-03-10",
+        "ordering_end": "2029-03-09"
+      }
+    },
+    {
+      "piid": "70CDCR24A00000001",
+      "type": "ICE single-award BPA",
+      "parent": "GS33F0025V",
+      "recipient": "CSI AVIATION, INC",
+      "recipient_uei": "D5BNEHB3UL89",
+      "period": {
+        "start": "2024-03-08",
+        "end": "2029-03-07"
+      },
+      "money": [
+        {
+          "metric": "base_and_all_options_value",
+          "amount_usd": 3600000000.0,
+          "as_of": "2026-04-17",
+          "stock_or_flow": "potential ceiling authority stock"
+        },
+        {
+          "metric": "idv_level_obligation",
+          "amount_usd": 0.0,
+          "as_of": "2026-04-17",
+          "stock_or_flow": "current cumulative stock; orders carry money"
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "piid": "70CDCR23FR0000035",
+      "type": "MAS delivery order",
+      "parent": "GS33F0025V",
+      "description": "DAILY CHARTER FLIGHTS",
+      "action_date": "2023-06-30",
+      "period": {"start": "2023-07-03", "end": "2024-04-03"},
+      "money": [
+        {"metric": "total_obligation", "amount_usd": 258529725.25, "as_of": "2025-01-08", "stock_or_flow": "current cumulative stock"},
+        {"metric": "total_outlay", "amount_usd": 258529725.21, "as_of": "2025-01-08", "stock_or_flow": "current cumulative stock"},
+        {"metric": "base_and_all_options_value", "amount_usd": 283745409.82, "as_of": "2025-01-08", "stock_or_flow": "potential/current award-value stock"}
+      ]
+    },
+    {
+      "piid": "70CDCR24FR0000024",
+      "type": "MAS delivery order",
+      "parent": "GS33F0025V",
+      "description": "INTERIM CONTRACT FOR DAILY CHARTER FLIGHTS",
+      "action_date": "2024-04-01",
+      "period": {"start": "2024-04-04", "end": "2025-02-28"},
+      "money": [
+        {"metric": "total_obligation", "amount_usd": 324216615.92, "as_of": "2025-07-02", "stock_or_flow": "current cumulative stock"},
+        {"metric": "total_outlay", "amount_usd": 324216615.92, "as_of": "2025-07-02", "stock_or_flow": "current cumulative stock"},
+        {"metric": "base_and_all_options_value", "amount_usd": 359081496.13, "as_of": "2025-07-02", "stock_or_flow": "potential/current award-value stock"}
+      ]
+    },
+    {
+      "piid": "70CDCR24FC0000003",
+      "type": "BPA call",
+      "parent": "70CDCR24A00000001",
+      "description": "BPA CALL FOR AIR CHARTER SERVICES",
+      "action_date": "2024-03-11",
+      "period": {"start": "2024-03-19", "end": "2025-03-18"},
+      "money": [
+        {"metric": "total_obligation", "amount_usd": 0.0, "as_of": "2026-01-30", "stock_or_flow": "current cumulative stock after full termination/deobligation"},
+        {"metric": "base_and_all_options_value", "amount_usd": 0.0, "as_of": "2026-01-30", "stock_or_flow": "current award-value stock after closeout"}
+      ]
+    },
+    {
+      "piid": "70CDCR25FR0000022",
+      "type": "MAS delivery order",
+      "parent": "GS33F0025V",
+      "description": "DAILY SCHEDULED LARGE AIRCRAFT AND SPECIAL HIGH RISK CHARTER",
+      "action_date": "2025-02-27",
+      "period": {"start": "2025-03-01", "end": "2025-11-30", "potential_end": "2026-02-28"},
+      "money": [
+        {"metric": "total_obligation", "amount_usd": 562049742.0, "as_of": "2025-11-17", "stock_or_flow": "current cumulative stock"},
+        {"metric": "total_outlay", "amount_usd": 502609874.42, "as_of": "2025-11-17", "stock_or_flow": "current cumulative stock"},
+        {"metric": "base_and_all_options_value", "amount_usd": 585487947.87, "as_of": "2025-11-17", "stock_or_flow": "potential/current award-value stock"}
+      ]
+    },
+    {
+      "piid": "70CDCR26FC0000001",
+      "type": "BPA call",
+      "parent": "70CDCR24A00000001",
+      "description": "DEDICATED AND ON-DEMAND CHARTERED FLIGHT SERVICES UNDER ICE AIR",
+      "action_date": "2025-10-31",
+      "period": {"start": "2025-11-01", "end": "2026-10-31"},
+      "money": [
+        {"metric": "total_obligation", "amount_usd": 837608821.91, "as_of": "2026-05-28", "stock_or_flow": "current cumulative stock"},
+        {"metric": "total_outlay", "amount_usd": 552014353.78, "as_of": "2026-05-28", "stock_or_flow": "current cumulative stock"},
+        {"metric": "base_and_all_options_value", "amount_usd": 1500000000.0, "as_of": "2026-05-28", "stock_or_flow": "current/potential award-value authority stock"}
+      ]
+    }
+  ],
+  "bpa_lifecycle": [
+    {"date": "2024-03-08", "modification": "0", "event": "initial award", "evidence_class": "agency-certified record index and USAspending"},
+    {"date": "2024-03-19", "modification": "P00001", "event": "stop work", "evidence_class": "USAspending agency transaction description"},
+    {"date": "2025-01-31", "modification": "P00002", "event": "lift stop work", "evidence_class": "USAspending agency transaction description"},
+    {"date": "2025-02-28", "modification": "P00003", "event": "stop work because of Court of Federal Claims protest", "evidence_class": "USAspending agency transaction description"},
+    {"date": "2025-04-18", "modification": "P00004", "event": "full termination for convenience", "evidence_class": "agency modification exhibit and government status report"},
+    {"date": "2025-04-22", "event": "solicitation cancelled", "evidence_class": "government status report and agency screenshot exhibit"},
+    {"date": "2025-06-25", "modification": "P00005", "event": "terminated contract reinstated in whole", "evidence_class": "USAspending transaction description"},
+    {"date": "2025-10-30", "modification": "P00006", "event": "supplemental agreement within scope", "evidence_class": "USAspending transaction"},
+    {"date": "2025-11-17", "modification": "P00007", "event": "supplemental agreement within scope", "evidence_class": "USAspending transaction"},
+    {"date": "2026-04-17", "modification": "P00008", "event": "administrative action", "evidence_class": "USAspending transaction"}
+  ],
+  "geo_subcontract_disclosures": [
+    {
+      "date": "2024-03-12",
+      "fact": "GTI awarded a five-year ICE air-operations support subcontract, inclusive of option periods, under CSI's ICE prime",
+      "source": "GEO SEC-filed exhibit",
+      "confidence": "confirmed as company disclosure"
+    },
+    {
+      "date": "2023-07",
+      "fact": "GTI began air-operations support under a nine-month emergency CSI subcontract",
+      "source": "GEO SEC-filed exhibit",
+      "confidence": "confirmed as company disclosure"
+    },
+    {
+      "date": "2024-03-12",
+      "fact": "GEO expected approximately $25 million in annualized revenue",
+      "source": "GEO SEC-filed exhibit",
+      "confidence": "confirmed only as a forward-looking company estimate",
+      "boundary": "No inference of option exercise, realized revenue, or payment by CSI."
+    }
+  ],
+  "subaward_coverage": {
+    "source": "USAspending /api/v2/subawards/ exact award queries",
+    "queried_awards": ["70CDCR23FR0000035", "70CDCR24FR0000024", "70CDCR24FC0000003", "70CDCR25FR0000022", "70CDCR26FC0000001"],
+    "public_rows_returned": 0,
+    "interpretation": "reporting/coverage result only; not evidence that no subcontract existed"
+  },
+  "unresolved": [
+    "GTI subcontract face value, amendments, invoices, and realized payments",
+    "P00005 reinstatement rationale and substantive terms",
+    "current CSI carrier, aircraft, crew, and tail-number roster after iAero",
+    "primary support for GlobalX flight-share assertion",
+    "whether any GTI option periods have been exercised"
+  ]
+}

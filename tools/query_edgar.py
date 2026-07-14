@@ -267,10 +267,6 @@ def cmd_lookup(args):
     """Find CIK numbers for a company or person name."""
     query = " ".join(args.name)
 
-    # Strategy 1: Search company_tickers.json for exact/partial matches
-    print(f"Looking up: {query}")
-    print()
-
     tickers_url = "https://www.sec.gov/files/company_tickers.json"
     tickers_data = _request(tickers_url)
 
@@ -285,45 +281,36 @@ def cmd_lookup(args):
             if all(w in title for w in query_words):
                 matches.append(entry)
 
-    if matches:
-        # Deduplicate by CIK (same company can have multiple tickers)
-        seen_ciks = {}
-        for m in matches:
-            cik = m["cik_str"]
-            if cik not in seen_ciks:
-                seen_ciks[cik] = m
-            else:
-                # Append ticker
-                existing = seen_ciks[cik]
-                if m.get("ticker") and m["ticker"] not in existing.get("_tickers", existing.get("ticker", "")):
-                    existing.setdefault("_tickers", existing.get("ticker", ""))
-                    existing["_tickers"] += f", {m['ticker']}"
-
-        deduped = list(seen_ciks.values())
-        print(f"  Public companies ({len(deduped)} matches):")
-        for m in deduped[:20]:
-            cik = str(m["cik_str"]).zfill(10)
-            tickers = m.get("_tickers", m.get("ticker", ""))
-            print(f"    CIK {cik} | {tickers:<10} | {m['title']}")
-        print()
+    # Deduplicate by CIK (the same company can have multiple tickers).
+    public_by_cik = {}
+    for match in matches:
+        cik = str(match["cik_str"]).zfill(10)
+        company = public_by_cik.setdefault(
+            cik,
+            {"cik": cik, "title": match.get("title", ""), "tickers": []},
+        )
+        ticker = match.get("ticker")
+        if ticker and ticker not in company["tickers"]:
+            company["tickers"].append(ticker)
+    public_companies = list(public_by_cik.values())[:20]
 
     # Strategy 2: Use EFTS entity aggregation to find which entities
     # are most associated with this name in filing text
     efts_data = _request(EFTS_URL, {"q": f'"{query}"', "size": 0})
+    filing_mentions = []
     if efts_data:
         entity_agg = efts_data.get("aggregations", {}).get("entity_filter", {}).get("buckets", [])
         total = efts_data.get("hits", {}).get("total", {}).get("value", 0)
-
-        if entity_agg:
-            print(f"  Entities mentioning \"{query}\" in filings ({total:,} total filings):")
-            for b in entity_agg[:15]:
-                name_raw = b["key"]
-                # Extract CIK from display name
-                cik_match = re.search(r'CIK (\d+)', name_raw)
-                cik = cik_match.group(1).zfill(10) if cik_match else "?"
-                name_clean = re.sub(r'\s+\(CIK \d+\)', '', name_raw)
-                print(f"    CIK {cik} | {b['doc_count']:>5} filings | {name_clean}")
-            print()
+        for bucket in entity_agg[:15]:
+            name_raw = bucket["key"]
+            cik_match = re.search(r'CIK (\d+)', name_raw)
+            filing_mentions.append({
+                "cik": cik_match.group(1).zfill(10) if cik_match else None,
+                "name": re.sub(r'\s+\(CIK \d+\)', '', name_raw),
+                "filing_count": bucket["doc_count"],
+            })
+    else:
+        total = 0
 
     # Strategy 3: Search the submissions endpoint for person/company by name
     # (Browse EDGAR company search — returns XML/Atom)
@@ -340,39 +327,71 @@ def cmd_lookup(args):
         "output": "atom",
     }
     atom_data = _request(browse_url, browse_params, accept="application/atom+xml")
+    registered_entities = []
     if atom_data and isinstance(atom_data, bytes):
-        _parse_atom_results(atom_data)
+        registered_entities = _parse_atom_results(atom_data)
+
+    result = {
+        "query": query,
+        "public_companies": public_companies,
+        "filing_mentions_total": total,
+        "filing_mentions": filing_mentions,
+        "registered_entities": registered_entities,
+    }
+    if write_output(result, args, summary=f"EDGAR lookup '{query}'"):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(result, indent=2, default=str))
+        return
+
+    print(f"Looking up: {query}")
+    print()
+    if public_companies:
+        print(f"  Public companies ({len(public_companies)} matches):")
+        for company in public_companies:
+            tickers = ", ".join(company["tickers"])
+            print(f"    CIK {company['cik']} | {tickers:<10} | {company['title']}")
+        print()
+    if filing_mentions:
+        print(f"  Entities mentioning \"{query}\" in filings ({total:,} total filings):")
+        for mention in filing_mentions:
+            cik = mention["cik"] or "?"
+            print(f"    CIK {cik} | {mention['filing_count']:>5} filings | {mention['name']}")
+        print()
+    if registered_entities:
+        print(f"  EDGAR registered entities ({len(registered_entities)} matches):")
+        for entity in registered_entities:
+            extra = f" SIC:{entity['sic']}" if entity["sic"] else ""
+            extra += f" [{entity['state']}]" if entity["state"] else ""
+            print(f"    CIK {entity['cik']} | {entity['name']}{extra}")
+        print()
 
 
 def _parse_atom_results(atom_bytes):
-    """Parse EDGAR company search Atom XML results."""
+    """Parse EDGAR company search Atom XML results into dictionaries."""
+    results = []
     try:
         root = ET.fromstring(atom_bytes)
         # All elements are in the Atom namespace
         ns = "http://www.w3.org/2005/Atom"
         entries = root.findall(f"{{{ns}}}entry")
 
-        if entries:
-            print(f"  EDGAR registered entities ({len(entries)} matches):")
-            for entry in entries[:15]:
-                content = entry.find(f"{{{ns}}}content")
-                if content is None:
-                    continue
-                ci = content.find(f"{{{ns}}}company-info")
-                if ci is None:
-                    continue
-
-                cik = (ci.findtext(f"{{{ns}}}cik") or "?").strip().zfill(10)
-                name = (ci.findtext(f"{{{ns}}}name") or "?").strip()
-                sic = (ci.findtext(f"{{{ns}}}sic") or "").strip()
-                state = (ci.findtext(f"{{{ns}}}state-of-incorporation") or "").strip()
-
-                extra = f" SIC:{sic}" if sic else ""
-                extra += f" [{state}]" if state else ""
-                print(f"    CIK {cik} | {name}{extra}")
-            print()
+        for entry in entries[:15]:
+            content = entry.find(f"{{{ns}}}content")
+            if content is None:
+                continue
+            ci = content.find(f"{{{ns}}}company-info")
+            if ci is None:
+                continue
+            results.append({
+                "cik": (ci.findtext(f"{{{ns}}}cik") or "?").strip().zfill(10),
+                "name": (ci.findtext(f"{{{ns}}}name") or "?").strip(),
+                "sic": (ci.findtext(f"{{{ns}}}sic") or "").strip(),
+                "state": (ci.findtext(f"{{{ns}}}state-of-incorporation") or "").strip(),
+            })
     except ET.ParseError:
         pass
+    return results
 
 
 def cmd_company(args):
@@ -1041,6 +1060,7 @@ def main():
     # lookup
     p = sub.add_parser("lookup", help="Find CIK numbers for a company or person")
     p.add_argument("name", nargs="+", help="Company or person name")
+    add_output_args(p)
 
     # company
     p = sub.add_parser("company", help="Get company info by CIK")

@@ -27,6 +27,14 @@ except ImportError:
 PROJECT_ROOT = Path(__file__).parent.parent
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 DB_PATH = PROJECT_ROOT / "investigation.db"
+PROFILE_DATA_TABLES = (
+    "connections",
+    "event_timeline",
+    "financial_disclosures",
+    "findings",
+    "investigation_threads",
+    "leads",
+)
 
 
 @dataclass
@@ -145,7 +153,7 @@ def load_profile(name: str) -> InvestigationProfile:
 
 
 def _get_db():
-    """Get DB connection, ensuring investigation_config table exists."""
+    """Get DB connection, ensuring profile metadata is present and reconciled."""
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
@@ -157,8 +165,68 @@ def _get_db():
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS investigation_profiles (
+            profile_id   TEXT PRIMARY KEY,
+            display_name TEXT,
+            status       TEXT NOT NULL DEFAULT 'active',
+            created_at   TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    _reconcile_profile_catalog(db)
     db.commit()
     return db
+
+
+def _reconcile_profile_catalog(
+    db: sqlite3.Connection, *, include_data_profiles: bool = False
+) -> set[str]:
+    """Catalog every configured or data-bearing profile without deleting history.
+
+    YAML directories are the source of truth for profiles that can be activated.
+    Database-only profile IDs may still own historical records, so reconciliation
+    preserves and catalogs them rather than deleting or silently hiding them.
+    """
+    profile_ids = set()
+    if INVESTIGATIONS_DIR.exists():
+        profile_ids = {
+            directory.name
+            for directory in INVESTIGATIONS_DIR.iterdir()
+            if directory.is_dir()
+            and directory.name != "_template"
+            and (directory / "config.yaml").exists()
+        }
+
+    if include_data_profiles:
+        existing_tables = {
+            row["name"] if isinstance(row, sqlite3.Row) else row[0]
+            for row in db.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            ).fetchall()
+        }
+        for table in PROFILE_DATA_TABLES:
+            if table not in existing_tables:
+                continue
+            if "profile_id" not in {
+                column["name"] if isinstance(column, sqlite3.Row) else column[1]
+                for column in db.execute(f"PRAGMA table_info({table})").fetchall()
+            }:
+                continue
+            rows = db.execute(
+                f"SELECT DISTINCT profile_id FROM {table} "
+                "WHERE profile_id IS NOT NULL AND trim(profile_id) != ''"
+            ).fetchall()
+            profile_ids.update(
+                row["profile_id"] if isinstance(row, sqlite3.Row) else row[0]
+                for row in rows
+            )
+
+    db.executemany(
+        """INSERT OR IGNORE INTO investigation_profiles(profile_id, display_name)
+           VALUES (?, ?)""",
+        ((profile_id, profile_id) for profile_id in sorted(profile_ids)),
+    )
+    return profile_ids
 
 
 def get_active_profile_name() -> str:
@@ -213,25 +281,50 @@ def set_active_profile(name: str):
 
 
 def list_profiles() -> list[dict]:
-    """List all available investigation profiles."""
+    """List configured profiles plus visible database-only historical profiles."""
     profiles = []
-    if not INVESTIGATIONS_DIR.exists():
-        return profiles
+    configured_names = set()
+    if INVESTIGATIONS_DIR.exists():
+        for d in sorted(INVESTIGATIONS_DIR.iterdir()):
+            if d.is_dir() and d.name != "_template" and (d / "config.yaml").exists():
+                configured_names.add(d.name)
+                try:
+                    p = load_profile(d.name)
+                    profiles.append(
+                        {
+                            "name": d.name,
+                            "display_name": p.name,
+                            "primary_subject": p.primary_subject,
+                            "description": p.description,
+                            "threads": len(p.threads),
+                            "key_persons": len(p.key_persons),
+                            "corpus_tools": len(p.corpus_tools),
+                            "database_only": False,
+                        }
+                    )
+                except Exception as e:
+                    profiles.append(
+                        {"name": d.name, "error": str(e), "database_only": False}
+                    )
 
-    for d in sorted(INVESTIGATIONS_DIR.iterdir()):
-        if d.is_dir() and d.name != "_template" and (d / "config.yaml").exists():
-            try:
-                p = load_profile(d.name)
-                profiles.append({
-                    "name": p.name,
-                    "primary_subject": p.primary_subject,
-                    "description": p.description,
-                    "threads": len(p.threads),
-                    "key_persons": len(p.key_persons),
-                    "corpus_tools": len(p.corpus_tools),
-                })
-            except Exception as e:
-                profiles.append({"name": d.name, "error": str(e)})
+    db = _get_db()
+    _reconcile_profile_catalog(db, include_data_profiles=True)
+    db.commit()
+    catalog_rows = db.execute(
+        "SELECT profile_id, display_name, status FROM investigation_profiles ORDER BY profile_id"
+    ).fetchall()
+    db.close()
+    for row in catalog_rows:
+        if row["profile_id"] not in configured_names:
+            profiles.append(
+                {
+                    "name": row["profile_id"],
+                    "display_name": row["display_name"] or row["profile_id"],
+                    "status": row["status"],
+                    "database_only": True,
+                }
+            )
+    profiles.sort(key=lambda profile: profile["name"])
     return profiles
 
 
@@ -344,6 +437,8 @@ def cmd_list(args):
         marker = " *" if p["name"] == active_name else "  "
         if "error" in p:
             print(f"{marker}{p['name']} (ERROR: {p['error']})")
+        elif p.get("database_only"):
+            print(f"{marker}{p['name']} (database-only; no config; status: {p['status']})")
         else:
             print(f"{marker}{p['name']} — {p['primary_subject']} ({p.get('threads', 0)} threads, {p.get('key_persons', 0)} key persons)")
 

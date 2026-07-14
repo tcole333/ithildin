@@ -1,0 +1,67 @@
+{
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "analysis_run_id": 112,
+  "scan_context": {
+    "findings_exported": 582,
+    "entities_exported": 289,
+    "connection_nodes_exported": 50,
+    "connection_edges_exported": 71,
+    "existing_hypotheses_checked": 357,
+    "existing_tag_values_checked": 221,
+    "authorized_new_inputs": [12967, 12968, 12969, 12970, 12971, 12972, 12973, 12974, 12975],
+    "external_queries": 0
+  },
+  "required_gate": {
+    "independent_contexts": "three or more genuinely independent contexts",
+    "distinct_mechanism": "not already captured by existing policy, procurement, access, or reporting hypotheses",
+    "falsifiable_prediction": "specific evidence that could cut against the proposed pattern",
+    "research_loop": "a concrete non-duplicate Layer-1 lead"
+  },
+  "candidate_decisions": [
+    {
+      "candidate": "Trump-era DHS used unsolicited proposals, urgency authority, and OCI waivers as a general procurement architecture",
+      "independent_contexts": false,
+      "distinct_mechanism": true,
+      "falsifiable_prediction": "A cross-contractor acquisition-file sample would show repeated vendor-originated concepts, compressed limited competitions, OCI appearance findings, waivers, and awards after controlling for mission urgency and incumbent capability.",
+      "concrete_new_lead": false,
+      "decision": "filtered",
+      "reason": "The authorized evidence concerns one principal Salus procurement plus a later same-vendor award; that is not a three-context system pattern."
+    },
+    {
+      "candidate": "Political access shaped Salus ground rules, OCI waiver, or selection",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "The complete source-selection, contact, ethics, or compensation record would identify a relationship-linked request, instruction, specification, evaluation, waiver, or award intervention.",
+      "concrete_new_lead": false,
+      "decision": "filtered",
+      "reason": "No verified pre-award political bridge is observed; existing human action 70 already requests the decisive files, so a new lead would duplicate the research loop."
+    },
+    {
+      "candidate": "Competitive form masks vendor-originated specifications in DHS urgency procurements",
+      "independent_contexts": false,
+      "distinct_mechanism": true,
+      "falsifiable_prediction": "Similarity analysis, proposal revisions, market research, and evaluator records would show whether Salus-originated concepts constrained rivals after mitigation or whether DHS independently developed common requirements.",
+      "concrete_new_lead": false,
+      "decision": "filtered",
+      "reason": "The mechanism is testable but currently appears in only the Salus context, and human action 70 already targets the same records."
+    },
+    {
+      "candidate": "Salus and GEO were connected through DHS removal operations or political intermediaries",
+      "independent_contexts": false,
+      "distinct_mechanism": false,
+      "falsifiable_prediction": "Ownership, payment, subcontract, CTA, communications, or lobbying records would identify a concrete Salus-GEO edge.",
+      "concrete_new_lead": false,
+      "decision": "filtered",
+      "reason": "Finding 12975 is a bounded negative result; no positive edge or third independent context exists."
+    }
+  ],
+  "result": {
+    "new_hunches": 0,
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_tags": 0,
+    "decision": "No candidate passed every novelty gate.",
+    "db_write_decision": "No theory, finding, lead, tag, connection, or hypothesis assessment added. Existing human action 70 is the non-duplicate research path."
+  }
+}

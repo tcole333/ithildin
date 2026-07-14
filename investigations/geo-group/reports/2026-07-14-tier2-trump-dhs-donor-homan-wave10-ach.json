@@ -1,0 +1,158 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 112,
+  "analysis_runs": {
+    "systemic_analysis": 114,
+    "generate_hunches": 115
+  },
+  "question": "Do the donor identity ledger and Homan two-ledger result materially change the evidence that political access or relationships shaped a specific GEO DHS/ICE selection, expansion, term, or enforcement outcome?",
+  "input_gate": "verified, non-retracted, non-superseded findings and listed durable artifacts only",
+  "method": {
+    "verdict_rule": "least inconsistent, not most supported and not a probability",
+    "weighting": [
+      "source independence",
+      "causal proximity",
+      "temporal and tenure fit",
+      "metric fit",
+      "coverage boundaries"
+    ],
+    "dependency_rule": "Repeated filings, derived totals, multiple receipt rows, and refinement findings are collapsed into their underlying contexts. Donor scale is one identity-ledger context, not multiple mechanisms.",
+    "bounded_negative_rule": "A no-record result reduces support only within its stated source, selector, date, and public-availability scope."
+  },
+  "overarching_competitors": {
+    "H1": "Political access or relationships materially shaped one or more specific GEO DHS/ICE selections, expansion decisions, terms, or enforcement outcomes.",
+    "H0": "Public policy and budget growth, incumbent and ready capacity, pre-existing vehicles, ordinary fiscal and action mechanics, channel structure, and ordinary regulated-sector practice explain the observed expansion without a demonstrated relationship-to-decision pathway.",
+    "database_hypotheses_created": false,
+    "reason": "The umbrella competition overlaps existing #337/#338 and outcome-specific groups, and no new relationship-to-decision mechanism passed the novelty gate."
+  },
+  "four_dimensions": {
+    "access_relationship_breadth": {
+      "change": "materially broader",
+      "basis": "#12984 resolves 19 roster identities and $1,632,401.60 in gross personal source receipts; #12983 confirms Homan personal consulting sources and a separate B.I.-Guidepost corporate relationship.",
+      "causal_limit": "No meeting, request, access event, coordination, reimbursement, motive, or common assignment is established."
+    },
+    "temporal_contemporaneity_tenure": {
+      "change": "precision improved but decisive overlap remains unresolved",
+      "basis": "Homan's reporting window and B.I.-Guidepost years overlap broadly; donor cycles and dates are known.",
+      "limits": [
+        "#12984 is identity-scoped, not tenure-scoped",
+        "cycle 2026 is year-to-date through 2026-07-14",
+        "Homan's threshold year, service date, last-service date, and receivable status are absent"
+      ]
+    },
+    "named_decision_mechanism": {
+      "change": "no new mechanism",
+      "basis": "#12983 preserves two separate ledgers and no reviewed Homan personnel/payment bridge; #12984 expressly supports no motive or access inference."
+    },
+    "procurement_or_enforcement_outcome": {
+      "change": "none",
+      "basis": "No new finding names a facility, PIID, solicitation, evaluation, price, modification, option, capacity action, penalty, CPARS treatment, present-responsibility judgment, or enforcement choice linked to a relationship actor."
+    }
+  },
+  "dependency_clusters": [
+    {
+      "cluster": "donor_identity_ledger",
+      "findings": [12984, 12985],
+      "treatment": "One SEC/FEC identity-resolution and arithmetic context. #12985 is an exclusion/control inside the same method. The 19 identities, 1,335 receipts, and $302,940 literal committee-name subset do not become independent causal votes.",
+      "H1": "neutral on specific outcome causation",
+      "H0": "neutral"
+    },
+    {
+      "cluster": "homan_two_ledger",
+      "findings": [12983],
+      "replaces_for_weight": [12528],
+      "treatment": "OGE and SEC are independent official record families answering separate ledger questions, but the common Guidepost name does not corroborate a joined engagement. Count the non-bridge once.",
+      "H1": "low-to-medium inconsistent with the linked cross-function component",
+      "H0": "low-to-medium consistent with ordinary compartmentalization"
+    },
+    {
+      "cluster": "household_trade_control",
+      "findings": [12948, 12957],
+      "treatment": "Previously completed control update; neutral to both #351 and #352 and not new Wave 10 weight."
+    },
+    {
+      "cluster": "ice_air_visibility",
+      "artifact": "2026-07-14-tier2-ice-air-network-wave9-systemic-analysis.md",
+      "treatment": "Used only to define the missing-decision-record boundary. No political actor or relationship-to-selection bridge appears; ordinary architecture remains an assumption-bounded separate ACH result."
+    }
+  ],
+  "outcome_axes": {
+    "aggregate_dhs_geo_expansion": {
+      "prior": "H0 substantially less inconsistent",
+      "current": "H0 substantially less inconsistent",
+      "changed": false,
+      "reason": "The donor cluster has low causal proximity and no tenure denominator; the Homan cluster weakens rather than supplies a cross-function bridge."
+    },
+    "vendor_facility_selection_and_terms": {
+      "prior": "unresolved; H0 weakly less inconsistent",
+      "current": "unresolved; H0 weakly less inconsistent",
+      "changed": false,
+      "reason": "No source-selection, contact, price, ethics, routing, or approval record joins access to a named decision."
+    },
+    "enforcement_and_performance_consequences": {
+      "current": "unresolved at the named relationship-to-decision level",
+      "changed": false,
+      "reason": "The new inputs identify no enforcement request, penalty, CPARS treatment, option, present-responsibility, or applied-consequence decision."
+    }
+  },
+  "competition_updates": [
+    {
+      "competition_group": "geo-ice-expertise-channel",
+      "hypotheses": [337, 338],
+      "new_assessments": [805, 806],
+      "new_finding": 12983,
+      "raw_results": {
+        "337": {"evaluated": 49, "inconsistent": 12, "diagnostic": 31, "inconsistency_ratio": 0.2449},
+        "338": {"evaluated": 49, "inconsistent": 1, "diagnostic": 31, "inconsistency_ratio": 0.0204}
+      },
+      "least_inconsistent": 338,
+      "dependency_warning": "#12983 refines dependent #12528; its evidentiary force is replacement precision, not a second independent mechanism."
+    },
+    {
+      "competition_group": "geo-household-trading-expansion",
+      "hypotheses": [351, 352],
+      "new_assessments": [],
+      "raw_results": {
+        "351": {"evaluated": 11, "inconsistent": 0, "inconsistency_ratio": 0.0},
+        "352": {"evaluated": 11, "inconsistent": 0, "inconsistency_ratio": 0.0}
+      },
+      "least_inconsistent": "tie",
+      "reason": "#12948 and #12957 were already assessed neutral to both and no Wave 10 evidence identifies control, instruction, access, or an exact procurement milestone."
+    },
+    {
+      "competition_group": "geo-checkmate-detention-tasking",
+      "hypotheses": [353, 354],
+      "new_assessments": [],
+      "raw_results": {
+        "353": {"evaluated": 13, "inconsistent": 5, "inconsistency_ratio": 0.3846},
+        "354": {"evaluated": 13, "inconsistent": 0, "inconsistency_ratio": 0.0}
+      },
+      "least_inconsistent": 354
+    },
+    {
+      "competition_group": "geo-venturella-return-boundary",
+      "hypotheses": [355, 356],
+      "new_assessments": [],
+      "raw_results": {
+        "355": {"evaluated": 9, "inconsistent": 0, "inconsistency_ratio": 0.0},
+        "356": {"evaluated": 9, "inconsistent": 1, "inconsistency_ratio": 0.1111}
+      },
+      "least_inconsistent": 355,
+      "limit": "Only as an unresolved-boundary formulation; #12947 records no conflict, screen failure, participation, or named decision bridge and preserves #12939."
+    },
+    {
+      "competition_group": "geo-political-payer-selection-rule",
+      "hypotheses": [357, 358],
+      "new_assessments": [],
+      "raw_results": {
+        "357": {"evaluated": 14, "inconsistent": 2, "inconsistency_ratio": 0.1429},
+        "358": {"evaluated": 14, "inconsistent": 0, "inconsistency_ratio": 0.0}
+      },
+      "least_inconsistent": 358,
+      "reason": "Individual donor receipts do not test corporate treasury payer selection or award-status review."
+    }
+  ],
+  "prior_conclusion_changed": false,
+  "final_bounded_conclusion": "The donor ledger broadens access-adjacent evidence and the Homan result sharpens a non-bridge. They do not materially increase the evidence that political access shaped a specific GEO DHS/ICE selection, expansion, term, or enforcement outcome. Finding #12939 remains controlling."
+}

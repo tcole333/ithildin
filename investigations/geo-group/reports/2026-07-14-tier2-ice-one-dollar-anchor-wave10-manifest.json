@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-07-14",
+  "profile_id": "geo-group",
+  "analysis_runs": {
+    "generate_hunches": 117,
+    "systemic_analysis": 118
+  },
+  "boundary": {
+    "external_queries": 0,
+    "highergov_queries": 0,
+    "new_source_collection": false,
+    "hartel_findings_used_as_anchor_evidence": false
+  },
+  "required_inputs": {
+    "findings": [12986, 12779, 12780, 12781, 12556, 12557, 12559, 12553, 12554],
+    "additional_control_finding": [12402],
+    "existing_hypotheses": [335, 336],
+    "prior_reports": [
+      "investigations/geo-group/reports/2026-07-13-generate-hunches-litigation-contract-synthesis.md",
+      "investigations/geo-group/reports/2026-07-13-lead-59489-courtlistener-litigation-forensics.md",
+      "investigations/geo-group/reports/2026-07-14-novoa-geo-post-nwauzor-case-analysis.md"
+    ],
+    "contract_artifacts": [
+      "investigations/geo-group/sources/2026-07-14-lead-57786/karnes-county-igsa-11-0004-2010.pdf",
+      "investigations/geo-group/sources/2026-07-14-lead-57786/broward-contract-2009.pdf",
+      "investigations/geo-group/sources/2026-07-14-lead-57786/tacoma-contract-2010.pdf",
+      "investigations/geo-group/sources/2026-07-14-lead-63588-hartel-ice-defense-cost/recap/washington-de16-1-hscedm15d00015-contract.pdf",
+      "investigations/geo-group/sources/2026-07-14-lead-63588-hartel-ice-defense-cost/recap/menocal-de262-2-hscedm11d00003-contract.pdf"
+    ],
+    "historical_rate_artifacts": [
+      "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-ledger.csv",
+      "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-quotes.csv"
+    ]
+  },
+  "analysis_exports_root": "investigations/geo-group/sources/2026-07-14-tier2-ice-one-dollar-anchor-wave10/analysis-exports",
+  "artifacts": [
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-report.md",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-matrix.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-ach.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-novelty.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-ice-one-dollar-anchor-wave10-sha256.csv"
+  ],
+  "database_outputs": {
+    "hypotheses_created": [],
+    "leads_created": [],
+    "findings_created": [],
+    "tags_created": [],
+    "connections_created": [],
+    "result": "real_null"
+  },
+  "qa": {
+    "foreign_key_violation_baseline": 64,
+    "foreign_key_violation_final": 64,
+    "quick_check_final": "ok",
+    "analysis_runs_completed": [117, 118],
+    "json_validation": "passed",
+    "matrix_rows": 10
+  }
+}

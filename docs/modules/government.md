@@ -81,10 +81,12 @@ uv run python tools/query_sam.py entity "Palantir"
 uv run python tools/query_sam.py entity "Palantir" --status A --sections all
 
 # Exclusion search (debarments, suspensions)
-uv run python tools/query_sam.py exclusions "QUERY" --type Firm
+uv run python tools/query_sam.py exclusions "QUERY" --classification Firm
+uv run python tools/query_sam.py exclusions "QUERY" --type "Ineligible (Proceedings Completed)"
 
 # Contract awards (replaces FPDS, decommissioned Feb 2026)
 uv run python tools/query_sam.py contracts "RECIPIENT" --limit 25
+uv run python tools/query_sam.py contracts --piid PIID --date-signed-from 2025-09-01 --date-signed-to 2026-02-01
 
 # Opportunity/solicitation search
 uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/01/2025
@@ -92,7 +94,7 @@ uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/0
 
 **Auth:** Requires `SAM_API_KEY` (free at sam.gov -> Account Details -> API Key). Basic non-federal tier: 10 req/day. Request SAM role for 1,000/day.
 
-**Known quirks:** Extremely low rate limit on basic tier (10/day). Use `ingest_sam.py` for bulk queries instead.
+**Known quirks:** Extremely low rate limit on the basic non-federal personal tier (10/day). A SAM role raises the default to 1,000/day. Contract date flags accept ISO `YYYY-MM-DD` and convert it to the API's required `MM/DD/YYYY` format. Use `ingest_sam.py` for bulk entity and exclusion queries instead.
 
 ## ingest_sam.py — SAM.gov Bulk Data
 

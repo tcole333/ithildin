@@ -14,7 +14,7 @@ Auth: Requires SAM_API_KEY (free registration at sam.gov → Account Details →
 Usage:
     uv run python tools/query_sam.py entity "Palantir"
     uv run python tools/query_sam.py entity "Palantir" --status A --sections all
-    uv run python tools/query_sam.py exclusions "QUERY" --type Firm
+    uv run python tools/query_sam.py exclusions "QUERY" --classification Firm
     uv run python tools/query_sam.py contracts "RECIPIENT" --limit 25
     uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/01/2025
 """
@@ -24,15 +24,18 @@ import json
 import os
 import sys
 import time
-from urllib.parse import urlencode, quote
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
+from datetime import datetime
+
+import requests
 
 try:
+    from tools.env_loader import load_env_file
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from env_loader import load_env_file
     from output_util import add_output_args, write_output
 
+load_env_file()
 SAM_API_KEY = os.environ.get("SAM_API_KEY", "")
 
 ENTITY_BASE = "https://api.sam.gov/entity-information/v4"
@@ -41,6 +44,13 @@ CONTRACTS_BASE = "https://api.sam.gov/contract-awards/v1"
 OPPORTUNITIES_BASE = "https://api.sam.gov/opportunities/v2"
 
 RATE_LIMIT_DELAY = 1.5  # Conservative: 10 req/day on basic tier
+
+EXCLUSION_TYPES = (
+    "Ineligible (Proceedings Pending)",
+    "Ineligible (Proceedings Completed)",
+    "Prohibition/Restriction",
+    "Voluntary Exclusion",
+)
 
 
 def _check_api_key():
@@ -52,33 +62,54 @@ def _check_api_key():
 
 def _fetch(url, params=None):
     """Fetch from SAM.gov API with rate limiting."""
-    if params:
-        params["api_key"] = SAM_API_KEY
-    else:
-        params = {"api_key": SAM_API_KEY}
-
-    query = urlencode(params, doseq=True)
-    full_url = f"{url}?{query}"
-
-    req = Request(full_url, headers={
-        "Accept": "application/json",
+    request_params = dict(params or {})
+    request_params["api_key"] = SAM_API_KEY
+    headers = {
         "User-Agent": "OSINT-Research/1.0",
-    })
+    }
 
     try:
         time.sleep(RATE_LIMIT_DELAY)
-        with urlopen(req, timeout=60) as resp:
-            return json.loads(resp.read().decode())
-    except HTTPError as e:
-        body = e.read().decode()[:500]
-        if e.code == 429:
-            print("ERROR: Rate limit exceeded. Basic tier allows 10 requests/day.", file=sys.stderr)
-            print("Register for a SAM role to get 1,000/day.", file=sys.stderr)
+        response = requests.get(
+            url,
+            params=request_params,
+            headers=headers,
+            timeout=(10, 60),
+        )
+        response.raise_for_status()
+        if response.status_code == 204:
+            return {"totalRecords": 0}
+        return response.json()
+    except requests.HTTPError as e:
+        response = e.response
+        status_code = response.status_code if response is not None else None
+        body = response.text[:500] if response is not None else str(e)
+        if SAM_API_KEY:
+            body = body.replace(SAM_API_KEY, "[REDACTED]")
+        if status_code == 429:
+            print("ERROR: SAM.gov rate limit exceeded (HTTP 429).", file=sys.stderr)
+            print(
+                "Non-federal personal keys without a SAM role default to 10 requests/day; "
+                "a SAM role raises the default to 1,000/day.",
+                file=sys.stderr,
+            )
         else:
-            print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
+            print(f"ERROR: HTTP {status_code}: {body}", file=sys.stderr)
         return None
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
+    except requests.Timeout as e:
+        message = str(e)
+        if SAM_API_KEY:
+            message = message.replace(SAM_API_KEY, "[REDACTED]")
+        print(f"ERROR: SAM.gov request timed out: {message}", file=sys.stderr)
+        return None
+    except requests.RequestException as e:
+        message = str(e)
+        if SAM_API_KEY:
+            message = message.replace(SAM_API_KEY, "[REDACTED]")
+        print(f"ERROR: {message}", file=sys.stderr)
+        return None
+    except ValueError as e:
+        print(f"ERROR: Invalid JSON response: {e}", file=sys.stderr)
         return None
 
 
@@ -96,6 +127,63 @@ def _fmt_money(val):
         return f"${v:,.2f}"
     except (ValueError, TypeError):
         return str(val)
+
+
+def _contract_date(value):
+    """Validate an ISO CLI date and convert it to SAM's MM/DD/YYYY format."""
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").strftime("%m/%d/%Y")
+    except ValueError as e:
+        raise argparse.ArgumentTypeError(
+            f"invalid ISO date '{value}'; expected YYYY-MM-DD"
+        ) from e
+
+
+def _extract_records(result, keys, label):
+    """Return the first recognized list, failing closed on an unexpected schema."""
+    if not isinstance(result, dict):
+        print(
+            f"ERROR: SAM.gov {label} response was not a JSON object.",
+            file=sys.stderr,
+        )
+        return None
+
+    for key in keys:
+        if key not in result:
+            continue
+        records = result[key]
+        if isinstance(records, list):
+            return records
+        print(
+            f"ERROR: SAM.gov {label} response field '{key}' was not a list.",
+            file=sys.stderr,
+        )
+        return None
+
+    if "totalRecords" not in result:
+        expected = " or ".join(repr(key) for key in keys)
+        print(
+            f"ERROR: SAM.gov {label} response contained neither {expected} nor "
+            "'totalRecords'.",
+            file=sys.stderr,
+        )
+        return None
+
+    total = result["totalRecords"]
+    try:
+        has_records = int(total) > 0
+    except (TypeError, ValueError):
+        has_records = bool(total)
+
+    if has_records:
+        expected = " or ".join(repr(key) for key in keys)
+        print(
+            f"ERROR: SAM.gov {label} response reported {total} records but contained "
+            f"neither {expected}.",
+            file=sys.stderr,
+        )
+        return None
+    return []
 
 
 # ── Entity Management ───────────────────────────────────────
@@ -129,10 +217,12 @@ def cmd_entity(args):
         params["includeSections"] = "entityRegistration,coreData"
 
     result = _fetch(f"{ENTITY_BASE}/entities", params)
-    if not result:
-        return
+    if result is None:
+        return 1
 
-    entities = result.get("entityData", [])
+    entities = _extract_records(result, ("entityData",), "entity")
+    if entities is None:
+        return 1
     total = result.get("totalRecords", len(entities))
 
     if write_output(entities, args, summary=f"SAM.gov entities matching '{args.query or args.uei or args.cage}' ({total} total)"):
@@ -204,7 +294,7 @@ def cmd_exclusions(args):
     if args.classification:
         params["classification"] = args.classification  # Individual, Firm, Vessel, Special Entity Designation
     if args.type:
-        params["exclusionType"] = args.type  # Ineligible, Prohibition/Restriction, Voluntary
+        params["exclusionType"] = args.type
     if args.agency:
         params["excludingAgencyName"] = args.agency
     if args.state:
@@ -215,29 +305,37 @@ def cmd_exclusions(args):
         params["npi"] = args.npi
 
     result = _fetch(f"{EXCLUSIONS_BASE}/exclusions", params)
-    if not result:
-        return
+    if result is None:
+        return 1
 
-    exclusions = result.get("results", [])
+    exclusions = _extract_records(result, ("excludedEntity", "results"), "exclusions")
+    if exclusions is None:
+        return 1
     total = result.get("totalRecords", len(exclusions))
 
-    if write_output(exclusions, args, summary=f"SAM.gov exclusions matching '{args.query}' ({total} total)"):
+    search_term = args.query or args.uei or args.npi or args.agency or args.state or "all"
+    if write_output(exclusions, args, summary=f"SAM.gov exclusions matching '{search_term}' ({total} total)"):
         return
 
     print(f"Found {total} exclusion records:")
     for ex in exclusions:
-        name = ex.get("name", "Unknown")
-        classification = ex.get("classification", {}).get("classificationDesc", "?")
-        exclusion_type = ex.get("exclusionType", {}).get("exclusionTypeDesc", "?")
-        agency = ex.get("excludingAgency", {}).get("excludingAgencyName", "?")
+        details = ex.get("exclusionDetails", {})
+        identification = ex.get("exclusionIdentification", {})
+        actions = ex.get("exclusionActions", {}).get("listOfActions", [])
+        action = actions[0] if actions else {}
 
-        activation = ex.get("activationDate", "?")
-        termination = ex.get("terminationDate", "Active")
+        name = identification.get("entityName") or identification.get("exclusionName") or ex.get("name", "Unknown")
+        classification = details.get("classificationType") or ex.get("classification", {}).get("classificationDesc", "?")
+        exclusion_type = details.get("exclusionType") or ex.get("exclusionType", {}).get("exclusionTypeDesc", "?")
+        agency = details.get("excludingAgencyName") or ex.get("excludingAgency", {}).get("excludingAgencyName", "?")
 
-        addr = ex.get("address", {})
+        activation = action.get("activateDate") or ex.get("activationDate", "?")
+        termination = action.get("terminationDate") or ex.get("terminationDate") or "Active"
+
+        addr = ex.get("exclusionPrimaryAddress") or ex.get("address", {})
         city = addr.get("city", "")
-        state = addr.get("stateOrProvince", "")
-        country = addr.get("country", "")
+        state = addr.get("stateOrProvinceCode") or addr.get("stateOrProvince", "")
+        country = addr.get("countryCode") or addr.get("country", "")
 
         print(f"\n  {name} ({classification})")
         print(f"    Type: {exclusion_type}")
@@ -246,11 +344,11 @@ def cmd_exclusions(args):
         if city or state:
             print(f"    Location: {city}, {state} {country}")
 
-        uei = ex.get("ueiSAM", "")
+        uei = identification.get("ueiSAM") or ex.get("ueiSAM", "")
         if uei:
             print(f"    UEI: {uei}")
 
-        desc = ex.get("description", "")
+        desc = ex.get("exclusionOtherInformation", {}).get("additionalComments") or ex.get("description", "")
         if desc:
             print(f"    Description: {desc[:150]}")
 
@@ -291,10 +389,12 @@ def cmd_contracts(args):
     params["limit"] = args.limit
 
     result = _fetch(f"{CONTRACTS_BASE}/search", params)
-    if not result:
-        return
+    if result is None:
+        return 1
 
-    awards = result.get("data", [])
+    awards = _extract_records(result, ("awardSummary", "data"), "contract awards")
+    if awards is None:
+        return 1
     total = result.get("totalRecords", len(awards))
 
     if write_output(awards, args, summary=f"SAM.gov contracts for '{args.query or args.uei}' ({total} total)"):
@@ -305,20 +405,47 @@ def cmd_contracts(args):
         contract_id = a.get("contractId", {})
         core = a.get("coreData", {})
         details = a.get("awardDetails", {})
-        awardee = a.get("awardeeData", {})
+        awardee = details.get("awardeeData") or a.get("awardeeData", {})
 
         piid = contract_id.get("piid", "?")
-        agency = contract_id.get("contractingDepartmentName", "?")
-        sub_agency = contract_id.get("contractingOfficeName", "")
+        contracting = core.get("federalOrganization", {}).get("contractingInformation", {})
+        agency = (
+            contracting.get("contractingDepartment", {}).get("name")
+            or contract_id.get("contractingDepartmentName")
+            or contract_id.get("subtier", {}).get("name")
+            or "?"
+        )
+        sub_agency = (
+            contracting.get("contractingOffice", {}).get("name")
+            or contract_id.get("contractingOfficeName", "")
+        )
 
-        awardee_name = awardee.get("awardeeLegalBusinessName", "?")
-        awardee_uei = awardee.get("awardeeUniqueEntityId", "")
+        awardee_header = awardee.get("awardeeHeader", {})
+        awardee_uei_info = awardee.get("awardeeUEIInformation", {})
+        awardee_name = (
+            awardee_header.get("legalBusinessName")
+            or awardee_header.get("awardeeName")
+            or awardee.get("awardeeLegalBusinessName")
+            or "?"
+        )
+        awardee_uei = awardee_uei_info.get("uniqueEntityId") or awardee.get("awardeeUniqueEntityId", "")
 
-        dollars = core.get("dollarsObligated", 0)
-        date_signed = core.get("dateSigned", "?")
-        naics = core.get("naicsCode", "")
-        psc = core.get("productOrServiceCode", "")
-        desc = core.get("descriptionOfContractRequirement", "")
+        award_dates = details.get("dates", {})
+        award_dollars = details.get("dollars", {})
+        core_product = core.get("productOrServiceInformation", {})
+        detail_product = details.get("productOrServiceInformation", {})
+        principal_naics = core_product.get("principalNaics", [])
+        product_or_service = core_product.get("productOrService", {})
+
+        dollars = award_dollars.get("actionObligation", core.get("dollarsObligated", 0))
+        date_signed = award_dates.get("dateSigned") or core.get("dateSigned", "?")
+        naics = (
+            (principal_naics[0].get("code", "") if principal_naics else "")
+            or detail_product.get("idvNAICS", {}).get("code", "")
+            or core.get("naicsCode", "")
+        )
+        psc = product_or_service.get("code") or core.get("productOrServiceCode", "")
+        desc = detail_product.get("descriptionOfContractRequirement") or core.get("descriptionOfContractRequirement", "")
 
         print(f"\n  PIID: {piid} | {_fmt_money(dollars)} | {date_signed}")
         print(f"    Awardee: {awardee_name}" + (f" (UEI: {awardee_uei})" if awardee_uei else ""))
@@ -355,10 +482,12 @@ def cmd_opportunities(args):
         params["typeOfSetAside"] = args.set_aside
 
     result = _fetch(f"{OPPORTUNITIES_BASE}/search", params)
-    if not result:
-        return
+    if result is None:
+        return 1
 
-    opps = result.get("opportunitiesData", [])
+    opps = _extract_records(result, ("opportunitiesData",), "opportunity")
+    if opps is None:
+        return 1
     total = result.get("totalRecords", len(opps))
 
     if write_output(opps, args, summary=f"SAM.gov opportunities matching '{args.query}' ({total} total)"):
@@ -414,7 +543,7 @@ def main():
     p = sub.add_parser("exclusions", help="Search debarments, suspensions, exclusions")
     p.add_argument("query", nargs="?", help="Free text search (AND/OR/NOT/wildcard)")
     p.add_argument("--classification", choices=["Individual", "Firm", "Vessel", "Special Entity Designation"])
-    p.add_argument("--type", choices=["Ineligible", "Prohibition/Restriction", "Voluntary"],
+    p.add_argument("--type", choices=EXCLUSION_TYPES,
                    help="Exclusion type")
     p.add_argument("--agency", help="Excluding agency name")
     p.add_argument("--state", help="State/province code")
@@ -430,8 +559,10 @@ def main():
     p.add_argument("--naics", help="NAICS code")
     p.add_argument("--psc", help="Product/Service code")
     p.add_argument("--agency", help="Contracting department name")
-    p.add_argument("--date-signed-from", help="Date signed from (YYYY-MM-DD)")
-    p.add_argument("--date-signed-to", help="Date signed to (YYYY-MM-DD)")
+    p.add_argument("--date-signed-from", type=_contract_date,
+                   help="Date signed from (YYYY-MM-DD; converted for SAM.gov)")
+    p.add_argument("--date-signed-to", type=_contract_date,
+                   help="Date signed to (YYYY-MM-DD; converted for SAM.gov)")
     p.add_argument("--min-amount", type=float, help="Minimum dollars obligated")
     p.add_argument("--limit", type=int, default=25, help="Max results (default 25)")
     p.add_argument("--sections", help="Sections to include (or 'all')")
@@ -453,7 +584,6 @@ def main():
 
     # Default posted-to to today if not provided
     if args.command == "opportunities" and not args.posted_to:
-        from datetime import datetime
         args.posted_to = datetime.now().strftime("%m/%d/%Y")
 
     handlers = {
@@ -463,7 +593,10 @@ def main():
         "opportunities": cmd_opportunities,
     }
 
-    handlers[args.command](args)
+    status = handlers[args.command](args)
+    if status:
+        raise SystemExit(status)
+    return 0
 
 
 if __name__ == "__main__":

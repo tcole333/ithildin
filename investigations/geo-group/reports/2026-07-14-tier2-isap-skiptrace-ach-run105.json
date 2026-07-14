@@ -1,0 +1,122 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 109,
+  "analysis_run_id": 105,
+  "skill_name": "generate-hunches",
+  "assessed_by": "agent:generate-hunches:run-105",
+  "external_queries": 0,
+  "accepted_finding_ids": [12467, 12494, 12495, 12496, 12497, 12941, 12942, 12943],
+  "excluded_finding_ids": {
+    "retracted": [12468],
+    "unverified_prior_attachments": [12466, 12470, 12471, 12472, 12473]
+  },
+  "source_dependency_clusters": [
+    {
+      "cluster": "isap-task-action-and-package-boundary",
+      "finding_ids": [12467, 12941],
+      "independence_note": "Both rely partly on the same ISAP V action record; #12941 adds the preserved pre-award SAM attachment boundary."
+    },
+    {
+      "cluster": "carier-sorn-2024",
+      "finding_ids": [12494, 12495],
+      "independence_note": "Two propositions from one Federal Register notice; count as one substantive SORN cluster."
+    },
+    {
+      "cluster": "procurement-control-gates",
+      "finding_ids": [12496],
+      "independence_note": "Contract clauses establish prospective process gates, not approval completion."
+    },
+    {
+      "cluster": "public-pia-index-boundary",
+      "finding_ids": [12497],
+      "independence_note": "Bounded negative public-index observation; not a complete internal-record search."
+    },
+    {
+      "cluster": "geo-sec-contract-statements",
+      "finding_ids": [12942, 12943],
+      "independence_note": "Separate SEC-filed statements from the same company source family; contract identity and timing only."
+    }
+  ],
+  "competition_sets": [
+    {
+      "competition_group": "geo-bi-dual-skip-tracing-channels",
+      "hypotheses": [347, 350],
+      "tool_scores": {
+        "347": {"consistent": 3, "inconsistent": 0, "neutral": 1, "not_applicable": 5, "inconsistency_ratio": 0.0},
+        "350": {"consistent": 3, "inconsistent": 0, "neutral": 1, "not_applicable": 5, "inconsistency_ratio": 0.0}
+      },
+      "eligible_finding_ids": [12467, 12941, 12942, 12943],
+      "diagnostic_finding_ids": [],
+      "least_inconsistent": "tie",
+      "verdict": "Neither #347 nor #350 is less inconsistent on the verified current record.",
+      "strongest_innocent_explanation": "#347 remains the best innocent explanation: different case cohorts and ordinary procurement needs could place B.I. in both channels.",
+      "key_assumptions": [
+        "Item 42 and the separate vehicle use materially distinct case populations, units, workflows, and invoice structures.",
+        "B.I. has no cross-channel integration or preferential-allocation role not visible in current records.",
+        "The Q4 2025 pilot must not be mapped to item 42 without a PIID or signed scope."
+      ],
+      "falsification": {
+        "347": "Common cases, functions, data paths, or B.I.-specific integration across channels without a documented distinction.",
+        "350": "Signed scopes and allocation records establishing distinct populations, units, workflows, data paths, and ordinary peer allocation."
+      },
+      "missing_records": [
+        "Signed P00002-P00004 packages and post-award Attachment 4 item 42",
+        "Pilot PIID, scope, dates, results, and transition record",
+        "Separate-vehicle task SOWs and allocation/duplicate-control logs",
+        "Deliverables, acceptance records, invoices, and cross-channel data dictionaries"
+      ]
+    },
+    {
+      "competition_group": "geo-isap-privacy-governance-timing",
+      "hypotheses": [348, 349],
+      "tool_scores": {
+        "348": {"consistent": 2, "inconsistent": 2, "neutral": 2, "not_applicable": 3, "inconsistency_ratio": 0.3333},
+        "349": {"consistent": 3, "inconsistent": 0, "neutral": 3, "not_applicable": 3, "inconsistency_ratio": 0.0}
+      },
+      "eligible_finding_ids": [12494, 12495, 12496, 12497, 12942, 12943],
+      "raw_diagnostic_finding_ids": [12494, 12495, 12497],
+      "dependency_adjustment": "#12494 and #12495 are one CARIER SORN cluster, not two independent contradictions.",
+      "least_inconsistent": 349,
+      "verdict": "#349 is least inconsistent at the public SORN and process-design layers; project-level approval timing remains unresolved.",
+      "strongest_innocent_explanation": "Applicable public SORN coverage and ordinary internal PTA/PIA/ATO processes existed outside the public solicitation package.",
+      "key_assumptions": [
+        "ICE mapped the operative workflows to the 2024 CARIER SORN.",
+        "Required project decisions and authorizations preceded relevant CUI or PII processing.",
+        "A valid internal determination can exist without a newer public PIA index entry.",
+        "Company operational anchors are not precise first-processing or authorization dates."
+      ],
+      "falsification": {
+        "348": "Dated pre-production approvals expressly cover continuous location, commercial data, observation, retention, sharing, and human review.",
+        "349": "Production preceded a required review or authorization, an operative workflow was materially omitted, or a formal inadequacy or post-deployment remediation record exists."
+      },
+      "missing_records": [
+        "Project PTA and PIA update/non-update decision",
+        "SORN compatibility analysis and privacy-office approval",
+        "ATO, authorization boundary, privacy-control assessment, and risk acceptance",
+        "Data-flow/retention map and first case-transfer/query/production records"
+      ]
+    }
+  ],
+  "money_and_instrument_boundaries": [
+    "ISAP V task actions are distinct from the Q4 2025 pilot and the separate two-year vehicle unless primary records establish a mapping.",
+    "Action obligations are not award outlays, invoices, payments, recognized revenue, or potential company revenue.",
+    "The Q4 2025 pilot is not mapped to Attachment 4 item 42."
+  ],
+  "novelty_result": {
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_findings": 0,
+    "reason": "Existing hypotheses #347-#350, leads #58687/#58689, and human action #67 already contain the nonduplicative falsification plan."
+  },
+  "database_writes": {
+    "hypothesis_evaluations": 36,
+    "findings": 0,
+    "hypotheses": 0,
+    "leads": 0,
+    "tags": 0,
+    "connections": 0,
+    "entities": 0
+  }
+}
+

@@ -1,0 +1,253 @@
+{
+  "as_of": "2026-07-13",
+  "profile": "geo-group",
+  "lead_id": 60575,
+  "scope": {
+    "direct_geo_cbp_awards": 10,
+    "direct_geo_cbp_net_obligation_usd": 3129104.54,
+    "direct_geo_cbp_base_exercised_value_usd": 3139104.54,
+    "direct_geo_cbp_potential_value_usd": 4001324.35,
+    "outlay_coverage": {
+      "awards_with_non_null_outlays": 4,
+      "disclosed_outlays_for_those_four_usd": 667277.41,
+      "warning": "The outlay field is null for six awards. The disclosed subset must not be treated as a complete payment total."
+    },
+    "reported_subaward_count": 0,
+    "subaward_warning": "USAspending award-detail pages report zero subawards, but Val Verde county-to-GEO payments are an operating-agreement pass-through and do not appear as a reported federal subaward."
+  },
+  "denominator": {
+    "award_count": 10,
+    "detention_facility_chains": 5,
+    "service_only_chains": 1,
+    "facility_chain_ids": [
+      "RGV-EH",
+      "RGV-CB",
+      "RGV-BR",
+      "MAVERICK",
+      "VALVERDE"
+    ],
+    "service_chain_ids": [
+      "SVC-HYGIENE"
+    ],
+    "interpretation": "Seven PIIDs belong to a bundled Rio Grande Valley procurement family that touches three separate USMS-IGA facilities. One PIID maps to Maverick, one maps to Val Verde and is replaced by a county prime, and one is hygiene-only. Counts should be reported separately as awards, procurement families, and physical facility chains."
+  },
+  "chains": [
+    {
+      "chain_id": "RGV-EH",
+      "facility": "East Hidalgo Detention Center",
+      "location": "La Villa, Texas",
+      "iga": "79-12-0015",
+      "official_iga_snapshot": {
+        "per_diem_usd": 59.26,
+        "guard_transport_hourly_usd": 22.58,
+        "federal_beds": 1346,
+        "effective_signature_date": "2012-07-24",
+        "current_rate_warning": "This is the base IGA snapshot, not a current CBP rate. Later CBP actions say IGA/CBA rates changed but do not disclose the numeric rates."
+      },
+      "direct_awards": [
+        "HSBP1012C00101",
+        "HSBP9861659693",
+        "HSBP1016P00277",
+        "70B03C20P00000219",
+        "70B03C23P00000166",
+        "70B03C24C00000054",
+        "70B03C24P00000592"
+      ],
+      "mapping_note": "The first two awards are probable predecessors; HSBP1016P00277 is strongly mapped by La Villa and later Coastal Bend text; 70B03C20P00000219 expressly names East Hidalgo; the three later awards are East-Hidalgo-focused by place, Hidalgo CBA text, and continuity."
+    },
+    {
+      "chain_id": "RGV-CB",
+      "facility": "Coastal Bend Detention Center",
+      "location": "Robstown, Texas",
+      "iga": "79-12-0013",
+      "official_iga_snapshot": {
+        "per_diem_usd": 66.56,
+        "guard_transport_hourly_usd": 26.00,
+        "federal_beds": 1120,
+        "effective_signature_date": "2012-07-24",
+        "current_rate_warning": "Base IGA snapshot only."
+      },
+      "direct_awards": [
+        "HSBP1012C00101",
+        "HSBP9861659693",
+        "HSBP1016P00277",
+        "70B03C20P00000219"
+      ],
+      "mapping_note": "HSBP1016P00277 P00005 and 70B03C20P00000219 P00002 expressly name Coastal Bend. The two earlier predecessor mappings remain probable."
+    },
+    {
+      "chain_id": "RGV-BR",
+      "facility": "Brooks County Detention Center",
+      "location": "Falfurrias, Texas",
+      "iga": "79-07-0006",
+      "official_iga_snapshot": {
+        "per_diem_usd": 63.00,
+        "guard_transport_hourly_usd": 20.81,
+        "federal_beds": 500,
+        "effective_signature_date": null,
+        "current_rate_warning": "The signature date is not legible in the retrieved USMS copy; treat these as document-snapshot rates, not current rates."
+      },
+      "direct_awards": [
+        "HSBP1012C00101",
+        "HSBP9861659693",
+        "70B03C20P00000219"
+      ],
+      "mapping_note": "70B03C20P00000219 P00002 expressly names Brooks County. The two predecessor mappings remain probable."
+    },
+    {
+      "chain_id": "MAVERICK",
+      "facility": "Maverick County Detention Facility",
+      "location": "Eagle Pass, Texas",
+      "iga": "80-99-0219",
+      "official_iga_snapshot": {
+        "per_diem_usd": 52.50,
+        "facility_code": "6R7",
+        "effective_date": "2008-11-10",
+        "current_rate_warning": "The 2008 IGA modification rate is not necessarily the rate on the 2015-2016 CBP call."
+      },
+      "direct_awards": [
+        "HSBP1016J00076"
+      ],
+      "parent_bpa": "HSBP1012A00025",
+      "mapping_note": "Medium-confidence synthesis from the call's Eagle Pass/Maverick place, the GEO parent BPA for housing and lodging detainees, and the USMS IGA modification adding the Maverick County Detention Facility at Eagle Pass. The call itself does not spell out the facility name. Time-bounded SEC filings establish GEO's managed-only contract ended in 2013 and its ownership began with a 2017 acquisition, so the mapping does not prove GEO operator or owner status in 2016."
+    },
+    {
+      "chain_id": "VALVERDE",
+      "facility": "Val Verde County Detention Facility",
+      "location": "Del Rio, Texas",
+      "iga": "80-98-0061",
+      "official_iga_snapshot": {
+        "per_diem_usd": 56.00,
+        "guard_transport_hourly_usd": 18.75,
+        "federal_beds": 1516,
+        "effective_signature_date": "2013-02-25",
+        "current_rate_warning": "The current county-prime award incorporates later CBA/option changes; its current downstream numeric rate is not in the retrieved public record."
+      },
+      "direct_geo_awards": [
+        "70B03C25P00000029"
+      ],
+      "county_prime_awards": [
+        "HSBP1016P00342",
+        "HSBP1017P00039",
+        "HSBP1017P00268",
+        "70B03C18P00000083",
+        "70B03C19P00000247",
+        "70B03C20P00000252",
+        "70B03C22P00000141",
+        "70B03C23P00000211",
+        "70B03C25P00000150"
+      ],
+      "county_prime_current": {
+        "award_id": "70B03C25P00000150",
+        "recipient": "County of Val Verde",
+        "period_start": "2025-03-21",
+        "current_end": "2027-02-28",
+        "potential_end": "2030-02-28",
+        "net_obligation_usd": 11566.86,
+        "outlay_usd": 3154.37,
+        "potential_value_usd": 49911.25,
+        "competition": "NOT COMPETED",
+        "offers": 1
+      },
+      "historical_county_prime_net_obligations_usd": 894078.11,
+      "routing_assessment": {
+        "confidence": "high",
+        "claim_type": "synthesis",
+        "basis": [
+          "70B03C25P00000029 P00001 deobligates the direct GEO award and says to replace it with 03C25P0150.",
+          "70B03C25P00000150 starts on the same day, names County of Val Verde, and performs detention space in Del Rio.",
+          "The 2016 county package makes CBP HSBP1016P00342 a rider on USMS IGA 80-98-0061 at the Val Verde facility.",
+          "The 2015 county agreement says GEO operates the facility, submits monthly itemized invoices to the county, and the county remits payment to GEO.",
+          "GEO's current facility page says GEO was selected to design, build, finance and manage the facility; GEO's 2025 10-K lists the 1,407-bed facility as owned, under a perpetual USMS-IGA."
+        ],
+        "unresolved": "No current county-to-GEO agreement, county invoices, remittance amounts, fee split, or current numeric per-diem schedule was located."
+      }
+    },
+    {
+      "chain_id": "SVC-HYGIENE",
+      "facility": null,
+      "location": "Rio Grande Valley Border Patrol",
+      "iga": null,
+      "direct_awards": [
+        "HSBP1015P00762"
+      ],
+      "classification": "service-only; excluded from detention-facility denominator"
+    }
+  ],
+  "val_verde_2016_package": {
+    "award_id": "HSBP1016P00342",
+    "initial_funding_usd": 37303.32,
+    "added_funding_usd": 50000.00,
+    "documented_funded_ceiling_usd": 87303.32,
+    "final_net_obligation_usd": 41281.58,
+    "outlay_usd": null,
+    "pricing": {
+      "detention_bed_day_usd": 56.00,
+      "guard_hour_usd": 18.75,
+      "schedule_bed_days": 357,
+      "schedule_guard_hours": 450,
+      "schedule_guard_count": 2,
+      "schedule_mileage_rate_usd": 0.54,
+      "schedule_miles": 808
+    },
+    "warning": "The $87,303.32 figure is a funded ceiling shown in the order package, not an outlay or final obligation."
+  },
+  "tier2_recommendation": {
+    "rerun": true,
+    "reason": "A GEO-recipient-only scan misses the active Val Verde county prime even though the facility remains GEO-owned/managed and the historical county agreement routes monthly invoices to GEO.",
+    "targeted_scope": [
+      "Join CBP award places and descriptions to USMS IGA facility names/codes.",
+      "Include counties, authorities, and other public primes as recipients.",
+      "Join public-prime facilities to current private operators/owners using SEC filings, operator facility pages, and county agreements.",
+      "Link predecessor and successor PIIDs across recipient changes and same-day replacements.",
+      "Use facility chains, procurement families, and award counts as separate denominators."
+    ],
+    "seventh_comparable_public_prime_private_operator_dhs_chain_outside_ice": true
+  },
+  "sources": [
+    {
+      "type": "USAspending",
+      "url_template": "https://www.usaspending.gov/award/CONT_AWD_<PIID>_7014_-NONE-_-NONE-"
+    },
+    {
+      "type": "Val Verde County commissioners-court package",
+      "url": "https://www.valverdecounty.texas.gov/DocumentCenter/View/1718/16-July-11-2016-Commissioners-Court-Regular-Meetingpdf"
+    },
+    {
+      "type": "Val Verde County operating agreement",
+      "url": "https://www.valverdecounty.texas.gov/DocumentCenter/View/1320/31-November-09-2015-Commissioners-Court-Regular-Meetingpdf"
+    },
+    {
+      "type": "USMS IGA",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-Val-Verde-Correctional-Facility.pdf"
+    },
+    {
+      "type": "USMS IGA",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-East-Hidalgo-Detention-Center.pdf"
+    },
+    {
+      "type": "USMS IGA",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-Coastal-Bend-Detention-Center.pdf"
+    },
+    {
+      "type": "USMS IGA",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-Brooks-County-Detention-Center.pdf"
+    },
+    {
+      "type": "USMS IGA",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-Maverick-County-Tom-Bowles-Detention-Center.pdf"
+    },
+    {
+      "type": "SEC exhibit",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312515175072/d921856dex21.htm"
+    },
+    {
+      "type": "GEO facility page",
+      "url": "https://www.geogroup.com/facilities/val-verde-county-detention-facility/"
+    },
+    {
+      "type": "SAM opportunity page",
+      "url": "https://sam.gov/opp/056bdea3f8bc436a8c3a4b1a25176aae/view"
+    }
+  ]
+}

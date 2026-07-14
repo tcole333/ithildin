@@ -1,0 +1,118 @@
+{
+  "as_of": "2026-07-13",
+  "methodology_note": "Competition denominator is 228 unique USAspending-backed prime awards. The 51 parent IDVs and transaction actions are separate layers and excluded from that denominator. Latest-transaction competition fields can describe an order action and are not proof of how the parent vehicle was competed. Dollar statistics for prime awards use USAspending award totals; parent-IDV statistics use HigherGov linked-order obligations.",
+  "source_files": {
+    "prime_universe": "investigations/geo-group/reports/direct-ice-prime-award-universe-2026-07-13.csv",
+    "parent_idv_ledger": "investigations/geo-group/reports/direct-ice-idv-task-order-families-2026-07-13.csv",
+    "transaction_action_ledger": "investigations/geo-group/reports/direct-ice-usaspending-action-rows-2026-07-13.csv"
+  },
+  "layers": {
+    "prime_awards": 228,
+    "parent_idvs": 51,
+    "transaction_actions": 1864
+  },
+  "prime_awards": {
+    "count": 228,
+    "amount_field": "award_obligations_usaspending",
+    "amount": "7774205537.65",
+    "count_by_bucket": {
+      "full_open_multiple_offers": 25,
+      "full_open_offer_count_missing": 97,
+      "full_open_one_offer": 41,
+      "order_competition_one_offer": 3,
+      "other_or_ambiguous": 8,
+      "simplified_acquisition_offer_count_missing": 2,
+      "simplified_acquisition_one_offer": 23,
+      "sole_source_or_not_competed": 29
+    },
+    "amount_by_bucket": {
+      "full_open_multiple_offers": "402622746.25",
+      "full_open_offer_count_missing": "5864566754.40",
+      "full_open_one_offer": "950680363.48",
+      "order_competition_one_offer": "133643753.04",
+      "other_or_ambiguous": "61041545.75",
+      "simplified_acquisition_offer_count_missing": "200.16",
+      "simplified_acquisition_one_offer": "78827913.04",
+      "sole_source_or_not_competed": "282822261.53"
+    }
+  },
+  "parent_idvs": {
+    "count": 51,
+    "amount_field": "linked_order_obligations_highergov",
+    "amount": "7797879456.70",
+    "count_by_bucket": {
+      "competition_metadata_missing": 2,
+      "full_open_multiple_offers": 22,
+      "full_open_one_offer": 16,
+      "sole_source_or_not_competed": 11
+    },
+    "amount_by_bucket": {
+      "competition_metadata_missing": "79127409.22",
+      "full_open_multiple_offers": "3191509268.07",
+      "full_open_one_offer": "4247790396.85",
+      "sole_source_or_not_competed": "279452382.56"
+    }
+  },
+  "orders_or_calls": {
+    "count": 206,
+    "amount_field": "award_obligations_usaspending",
+    "amount": "7756116666.50",
+    "count_by_bucket": {
+      "full_open_multiple_offers": 24,
+      "full_open_offer_count_missing": 97,
+      "full_open_one_offer": 36,
+      "order_competition_one_offer": 3,
+      "other_or_ambiguous": 7,
+      "simplified_acquisition_offer_count_missing": 2,
+      "simplified_acquisition_one_offer": 21,
+      "sole_source_or_not_competed": 16
+    },
+    "amount_by_bucket": {
+      "full_open_multiple_offers": "402622746.25",
+      "full_open_offer_count_missing": "5864566754.40",
+      "full_open_one_offer": "939188592.94",
+      "order_competition_one_offer": "133643753.04",
+      "other_or_ambiguous": "59254315.80",
+      "simplified_acquisition_offer_count_missing": "200.16",
+      "simplified_acquisition_one_offer": "78827409.22",
+      "sole_source_or_not_competed": "278012894.69"
+    }
+  },
+  "standalone_awards": {
+    "count": 22,
+    "amount_field": "award_obligations_usaspending",
+    "amount": "18088871.15",
+    "count_by_bucket": {
+      "full_open_multiple_offers": 1,
+      "full_open_one_offer": 5,
+      "other_or_ambiguous": 1,
+      "simplified_acquisition_one_offer": 2,
+      "sole_source_or_not_competed": 13
+    },
+    "amount_by_bucket": {
+      "full_open_multiple_offers": "0.00",
+      "full_open_one_offer": "11491770.54",
+      "other_or_ambiguous": "1787229.95",
+      "simplified_acquisition_one_offer": "503.82",
+      "sole_source_or_not_competed": "4809366.84"
+    }
+  },
+  "offer_count_missing_awards": 107,
+  "offer_count_missing_share": 0.469298,
+  "one_offer_awards": 90,
+  "one_offer_share": 0.394737,
+  "broad_one_offer_not_competed_or_sole_source": {
+    "count": 100,
+    "award_obligations_usaspending": "1468017982.93",
+    "caution": "Over-inclusive screening cohort; one-offer orders and sole-source/not-competed awards are not equivalent acquisition facts.",
+    "orders_or_calls": 79,
+    "standalone_awards": 21,
+    "unique_parent_idvs": 24,
+    "order_count_by_parent_vehicle_competition_bucket": {
+      "competition_metadata_missing": 22,
+      "full_open_multiple_offers": 15,
+      "full_open_one_offer": 32,
+      "sole_source_or_not_competed": 10
+    }
+  }
+}

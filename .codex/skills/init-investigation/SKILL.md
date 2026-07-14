@@ -105,7 +105,7 @@ uv run python tools/investigation_context.py set <slug>
 ### 6. Seed Database
 
 ```bash
-uv run python tools/lead_tracker.py seed
+uv run python tools/lead_tracker.py thread seed
 uv run python tools/event_timeline.py seed
 uv run python tools/pillar_tracker.py seed
 ```

@@ -171,6 +171,24 @@ def generate_report():
         ),
     }
 
+    sources["Epstein Reporting Corpus"] = {
+        "description": "Versioned reporting, attributed claims, source lineage, and primary-evidence verification state",
+        "query_tool": "tools/reporting_corpus.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "epstein_reporting.db",
+            "SELECT COUNT(*) FROM reporting_item"
+        ),
+    }
+
+    sources["DOJ/SEC Government Releases"] = {
+        "description": "Versioned primary-government press releases: DOJ News API and SEC official archives",
+        "query_tool": "tools/government_release_corpus.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "government_releases.db",
+            "SELECT COUNT(*) FROM government_release"
+        ),
+    }
+
     # ── Selector-pivot capability + breach aggregator ──────────────
     sources["Selector Pivot"] = {
         "description": "Fans one selector across free aggregators; emits pending_triage leads + entities. Gated leak adapters: Dehashed (live), IntelX (needs key)",
@@ -470,6 +488,13 @@ def generate_report():
         "description": "Historical web snapshots — timeline reconstruction, removed content detection",
         "query_tool": "tools/query_wayback.py",
         **check_api("Wayback", "https://web.archive.org/cdx/search/cdx?url=example.com&output=json&limit=1"),
+    }
+
+    # Common Crawl index (reporting archive fallback)
+    sources["Common Crawl Index"] = {
+        "description": "Public web crawl index and WARC retrieval — reporting archive fallback",
+        "query_tool": "tools/reporting_corpus.py recover-archives --provider commoncrawl",
+        **check_api("Common Crawl", "https://index.commoncrawl.org/collinfo.json"),
     }
 
     # FDIC BankFind

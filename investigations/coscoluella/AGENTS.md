@@ -39,7 +39,7 @@ A 6-agent wave ran the originating account against primary sources. Status:
 - **Ramon Coscolluela disambiguation:** keep four records separate pending identifiers: the 1990 California corporate agent (#4242), the 2002 C.D. Cal. debtor tied to 23716 Sandalwood (#4524), the 2009–2010 Union NJ/Florida operator (#4520), and the 2018–2020 N.D. Texas defendant (#4523). Hypothesis #308 tests only the NJ/FL→Texas identity; no kinship to Ed/Rebecca is established. Human action #29 queues the unavailable C.D. Cal. schedules.
 
 ### Tooling gaps surfaced
-DugganUSA remains behind an auth wall (infra req #123), Nevada recorder/name history still requires a browser/recaptcha-capable session, and LA County's online systems do not expose owner names or the grantor/grantee index. CA SOS/OpenCorporates records were recovered through later work, so the earlier blanket CA-registry blocker is historical rather than current.
+DugganUSA was retired on 2026-06-29 after its endpoint permanently returned HTTP 403; infra request #123 was rejected because DOJ Vol 11, LMSBAND, and Unified retain the underlying DOJ datasets. Nevada recorder/name history still requires a browser/recaptcha-capable session, and LA County's online systems do not expose owner names or the grantor/grantee index. CA SOS/OpenCorporates records were recovered through later work, so the earlier blanket CA-registry blocker is historical rather than current.
 
 ## Central Structural Assessment
 

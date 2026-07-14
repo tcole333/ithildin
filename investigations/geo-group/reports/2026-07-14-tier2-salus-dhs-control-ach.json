@@ -1,0 +1,64 @@
+{
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "analysis_run_id": 111,
+  "scope": "Salus Worldwide Solutions Corp. as a non-GEO control for Trump-era DHS procurement mechanics",
+  "input_finding_ids": [12967, 12968, 12969, 12970, 12971, 12972, 12973, 12974, 12975],
+  "excluded_retracted_finding_ids": [12949, 12950, 12951, 12952, 12953, 12958, 12959, 12960, 12961, 12965, 12966],
+  "method": {
+    "verdict_language": "least inconsistent, never most supported and never a probability",
+    "weighting": "source independence, causal proximity, metric fit, and coverage; not row counts",
+    "control_boundary": "Salus is a non-GEO control and is not scored against GEO-specific hypothesis groups",
+    "generality_gate": "one vendor and one principal procurement sequence do not establish a department-wide base rate"
+  },
+  "analytical_rivals": {
+    "P": {
+      "label": "policy-responsive procurement channel",
+      "description": "Policy and mission urgency created demand; Salus supplied an unsolicited concept and antecedent experience; DHS used limited competition, comparative evaluation, OCI review/waiver, and urgency authority. This permits process flaws and unresolved OCI risk.",
+      "falsification": "Contemporaneous records show that mission need, invitee selection, evaluation, waiver, or award depended materially on a political relationship rather than the documented policy, capability, price, and procurement rationales."
+    },
+    "A": {
+      "label": "political-access or favor channel",
+      "description": "An unobserved political relationship or favor materially affected Salus ground rules, waiver, evaluation, timing, or selection.",
+      "falsification": "Complete source-selection, contact, ethics, compensation, and decision records show no relationship-linked intervention and document independent mission, capability, competition, price, and legal-review reasons for the material decisions."
+    }
+  },
+  "assessments": [
+    {"finding_id": 12967, "P": "consistent", "A": "neutral", "diagnostic_weight": "medium", "note": "Facial limited competition and urgency are expected under P but do not reveal who shaped scope or invitees."},
+    {"finding_id": 12968, "P": "neutral", "A": "neutral", "diagnostic_weight": "none", "note": "Money stocks measure scale, not selection causation."},
+    {"finding_id": 12969, "P": "consistent", "A": "neutral", "diagnostic_weight": "medium-low", "note": "Comparative technical and evaluated-price results make an ordinary selection channel plausible but do not test subtler ground-rule influence."},
+    {"finding_id": 12970, "P": "consistent", "A": "consistent", "diagnostic_weight": "none", "note": "Both rivals predict an OCI appearance and formal response; the waiver proves neither absence nor actuality of conflict."},
+    {"finding_id": 12971, "P": "neutral", "A": "neutral", "diagnostic_weight": "none", "note": "GAO issued no merits decision and the COFC dispositions do not adjudicate the political-access explanation."},
+    {"finding_id": 12972, "P": "consistent", "A": "neutral", "diagnostic_weight": "low", "note": "A later same-vendor urgency award shows repeated mechanism use but is not an independent contractor context."},
+    {"finding_id": 12973, "P": "consistent", "A": "neutral", "diagnostic_weight": "medium-low", "note": "Antecedent experience supplies a capability rationale, subject to the unresolved LLC/Corp. legal bridge."},
+    {"finding_id": 12974, "P": "neutral", "A": "neutral", "diagnostic_weight": "none", "note": "Downstream reporting opacity is compatible with both rivals."},
+    {"finding_id": 12975, "P": "consistent", "A": "inconsistent within reviewed public/redacted coverage", "diagnostic_weight": "medium-low", "note": "No verified pre-award political bridge was located; the result does not reach private, sealed, protected, or unidentified channels."}
+  ],
+  "least_inconsistent_reading": {
+    "salus_public_record": "P is less inconsistent than A for the publicly documented Salus award.",
+    "confidence_boundary": "coverage-bounded; not an exoneration, probability, or finding of universal absence",
+    "reason": "The closest records identify policy timing, limited competition, comparative technical and evaluated-price results, antecedent capability, and formal OCI treatment, while the bounded public review identifies no pre-award political bridge.",
+    "residual_uncertainty": "Vendor-originated ground rules, the scope of OCI mitigation, political contacts, and source-selection details remain incompletely observable."
+  },
+  "central_questions": {
+    "general_architecture": "Salus proves that this policy-responsive urgency path existed outside GEO, but one vendor and a later same-vendor award do not establish a general Trump-era DHS architecture or base rate.",
+    "diagnostic_evidence": "The four-offer evaluation and bounded no-bridge result lean toward P; the OCI waiver is two-sided and non-diagnostic; later allegations, party denials, threshold holdings, and GAO ADR do not resolve causation.",
+    "effect_on_finding_12939": "No verdict change. Aggregate expansion remains H0 substantially less inconsistent; GEO vendor/facility selection remains unresolved with H0 weakly less inconsistent; no named GEO decision bridge is added or removed."
+  },
+  "court_posture_guardrails": {
+    "gao": "Outcome-predictive ADR followed by withdrawal; no merits decision.",
+    "article_iii": "Primary dismissal ground and distinct from statutory standing.",
+    "statutory_standing": "Alternative dismissal ground and distinct from Article III standing.",
+    "interested_party_and_prejudice": "Further alternative disposition; not a general adjudication of every procurement criticism.",
+    "bad_faith_observation": "Record-bounded observation while denying judicial notice; not exoneration."
+  },
+  "database_actions": {
+    "hypotheses_created": 0,
+    "hypothesis_assessments_created": 0,
+    "findings_created": 0,
+    "leads_created": 0,
+    "tags_created": 0,
+    "reason": "The non-GEO control sharpens an existing bounded interpretation but does not pass the novelty or applicability gates for a new database theory or GEO-specific ACH score."
+  },
+  "best_next_discriminator": "Complete source-selection and procurement-integrity file: signed RFP/amendments, market research, proposal revision history, invitee selection, similarity analysis, OCI investigation/mitigation/waiver, technical and price evaluations, award decision, contact logs, ethics/recusal records, and person-attributed communications. Existing human action 70 already seeks these materials."
+}

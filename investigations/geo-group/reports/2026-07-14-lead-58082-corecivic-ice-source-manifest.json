@@ -1,0 +1,150 @@
+{
+  "profile": "geo-group",
+  "lead_id": 58082,
+  "generated_at": "2026-07-14T00:00:00-04:00",
+  "scope": "Direct prime contract actions where recipient UEI HJGMJN1JKL46 and awarding subtier is U.S. Immigration and Customs Enforcement; FY2024, FY2025, and FY2026 YTD through 2026-07-14. IGSA pass-through revenue is excluded from the direct-prime totals.",
+  "row_counts": {
+    "contract_transactions": 145,
+    "california_city_idv_actions": 6
+  },
+  "fiscal_year_obligations": {
+    "2024": "179444877.48",
+    "2025": "305768541.63",
+    "2026": "233597591.47"
+  },
+  "fiscal_year_gross_positive_actions": {
+    "2024": "181381133.46",
+    "2025": "309946453.37",
+    "2026": "234008095.77"
+  },
+  "fiscal_year_deobligations": {
+    "2024": "-1936255.98",
+    "2025": "-4177911.74",
+    "2026": "-410504.30"
+  },
+  "fy2025_yoy_change": "126323664.15",
+  "calendar_year_obligations": {
+    "2024": "179216891.33",
+    "2025": "266391160.57"
+  },
+  "calendar_2025_yoy_growth_pct": "48.6418",
+  "late_fy2025_actions": {
+    "window": "2025-09-26 through 2025-09-30",
+    "all_corecivic_direct_ice_obligations": "80338431.54",
+    "share_of_fy2025_net_obligations_pct": "26.2743",
+    "share_of_yoy_change_pct": "63.5973",
+    "california_city_plus_midwest": "51235282.25"
+  },
+  "california_city_snapshot_as_of_extract": {
+    "fy2025_action_obligations": "49152682.25",
+    "task_family_lifetime_obligations": "108378766.24",
+    "task_family_lifetime_outlays": "48474853.63",
+    "outlay_field_warning": "USAspending bulk rows expose an extraction-time cumulative overall-award outlay, repeated across transaction rows. It is not a transaction outlay and cannot be summed across modifications or attributed to FY2025."
+  },
+  "sources": [
+    {
+      "source": "USAspending transaction download",
+      "url": "https://api.usaspending.gov/api/v2/download/transactions/",
+      "retrieved": "2026-07-14",
+      "request_scope": "CoreCivic UEI HJGMJN1JKL46; ICE subtier; action dates 2023-10-01 through 2026-07-14; A/B/C/D contract action types",
+      "raw_zip_sha256": "eca1be87ed12365f9b130b3e2c2917274a1496eeb1b76fd78399c3ac8a456df1"
+    },
+    {
+      "source": "USAspending California City IDV transaction download",
+      "url": "https://api.usaspending.gov/api/v2/download/transactions/",
+      "retrieved": "2026-07-14",
+      "request_scope": "Award ID 70CDCR25D00000010; IDV action types; action dates 2025-04-01 through 2026-07-14",
+      "raw_zip_sha256": "588a50832fca5cf32782dd10f342f3cd19340553041d47caf40b9b58aa1d7cc2"
+    },
+    {
+      "source": "USAspending award detail",
+      "url": "https://api.usaspending.gov/api/v2/awards/CONT_IDV_70CDCR25D00000010_7012/",
+      "retrieved": "2026-07-14",
+      "local_sha256": "1710472aed2fcf8bf4adbee57d2f66387ebb7fcf80c39a88bb9cbda9ac1d4fc7"
+    },
+    {
+      "source": "HigherGov IDV record",
+      "url": "https://www.highergov.com/idv/70CDCR25D00000010/",
+      "retrieved": "2026-07-14",
+      "local_sha256": "dd21191feccc15ce04ad6557ab3cbb9b76164bd8775f55bd996e5b09c5ad3839"
+    },
+    {
+      "source": "SAM entity registration (local key-backed tool)",
+      "citation": "SAM:HJGMJN1JKL46",
+      "retrieved": "2026-07-14",
+      "local_sha256": "2aeb30bb11dd70f6d75437e1c41776004403cc1c246b10eefc9ecf1e9374fb0c"
+    },
+    {
+      "source": "CoreCivic 2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1070985/000119312526060669/cxw-20251231.htm",
+      "retrieved": "2026-07-14"
+    },
+    {
+      "source": "CoreCivic 2025 annual report to security holders (PDF)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1070985/000114036126012102/ny20060006x3_ars.pdf",
+      "retrieved": "2026-07-14",
+      "pdf_sha256": "33df2e94495cdf9d2641c6f38b6f5168cd126a9afefcf26680f5f7a50a728825",
+      "visually_inspected_pdf_pages_zero_based": [
+        17,
+        74,
+        78
+      ],
+      "visual_result": "Legible; no clipping, overlap, broken tables, or rendering defects on decisive pages."
+    }
+  ],
+  "acquisition_file_coverage": {
+    "public_fields_found": [
+      "letter contract",
+      "undefinitized action",
+      "not competed",
+      "only one source",
+      "one offer",
+      "urgency (FAR 6.302-2)",
+      "firm fixed price",
+      "no solicitation identifier",
+      "Federal Business Opportunities not applicable",
+      "definitized 2025-09-26 under FAR 52.216-25",
+      "ordering period extended through 2027-08-31"
+    ],
+    "not_found_in_sources_searched": [
+      "signed justification and approval",
+      "market-research memorandum",
+      "acquisition plan",
+      "alternative-facility analysis",
+      "price-negotiation memorandum",
+      "CLIN pricing or per-diem schedule"
+    ],
+    "negative_scope": "No such documents were exposed by the USAspending award/transaction endpoints, HigherGov's award/opportunity results, the local SAM entity lookup, ICE/DHS public web search, or CoreCivic SEC filings. This is not evidence the documents do not exist."
+  },
+  "human_action": {
+    "id": 53,
+    "title": "Obtain ICE California City acquisition file and pricing documents",
+    "related_lead_id": null,
+    "lead_reference_location": "notes only"
+  },
+  "limitations": [
+    "Direct-prime analysis excludes ICE IGSAs in which a state or local government is the federal recipient and CoreCivic is paid downstream.",
+    "USAspending transaction rows provide obligation actions, not transaction-level outlays. Overall-award outlays are current snapshots and repeat across modifications.",
+    "Award potential values and ceilings are not obligations and were not added to fiscal-year spending.",
+    "SEC calendar-year facility revenue cannot be compared as if it were federal fiscal-year obligations; the accounting periods and recognition rules differ.",
+    "Expected annual revenue per design bed is a normalization of company guidance, not a contractual per-diem rate."
+  ],
+  "artifacts": {
+    "2026-07-14-lead-58082-corecivic-ice-acceleration.md": {
+      "sha256": "f3401e7908807d253a88dccf137e091d82fc6d69c8b66ac9b3d73e481783755c",
+      "bytes": 13552
+    },
+    "2026-07-14-lead-58082-corecivic-direct-ice-transactions.csv": {
+      "sha256": "71be1fb6b166085d518fe1507d0b0226cc2f34e3bfee5a91f160d14937906882",
+      "bytes": 86281
+    },
+    "2026-07-14-lead-58082-corecivic-facility-decomposition.csv": {
+      "sha256": "5497f9bc4169bd4583334871e63459c1311a1ce0c038e68ef82bd71e9820f82a",
+      "bytes": 2001
+    },
+    "2026-07-14-lead-58082-california-city-idv-actions.csv": {
+      "sha256": "0d75afd7530bb4842009edee150fa2c7770ef88e64cb2330bb740a38866d4535",
+      "bytes": 2849
+    }
+  }
+}

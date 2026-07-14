@@ -1,0 +1,106 @@
+{
+  "profile": "geo-group",
+  "lead_id": 57693,
+  "audit_date": "2026-07-14",
+  "scope": "Canonical federal-recipient names, aliases, UEIs, CAGEs, SAM registration fields, parent/subsidiary attribution, and material predecessor/acquisition lineage for GEO contract searches.",
+  "canonical_artifacts": {
+    "csv": "investigations/geo-group/reports/2026-07-13-geo-federal-recipient-identity-map.csv",
+    "json": "investigations/geo-group/reports/2026-07-13-geo-federal-recipient-identity-map.json",
+    "narrative": "investigations/geo-group/reports/2026-07-13-geo-federal-recipient-identity-map.md"
+  },
+  "audit_results": {
+    "recipient_rows": 14,
+    "local_sam_exact_uei_matches": 12,
+    "local_sam_exact_uei_nonmatches": [
+      "TLDCDE29G781",
+      "LTXHRJ986LF3"
+    ],
+    "highergov_exact_uei_matches": 14,
+    "uei_cage_mismatches": 0,
+    "live_sam_calls": 0,
+    "highergov_hierarchy_anomalies": [
+      {
+        "uei": "ZBJYBK7M9A44",
+        "name": "GEO MANAGEMENT SERVICES INC",
+        "issue": "HigherGov returns the entity itself as its parent; primary SEC subsidiary evidence controls."
+      },
+      {
+        "uei": "LTXHRJ986LF3",
+        "name": "CORRECTIONAL SERVICES CORPORATION",
+        "issue": "HigherGov legal_business_name is null, but clean name, UEI, CAGE, awardee key 13276025, and GEO parent key 10000076 are populated."
+      }
+    ]
+  },
+  "primary_sources": [
+    {
+      "id": "SEC:GEO:FY2025:EX22.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-ex22_1.htm",
+      "role": "Exact 60-name current subsidiary-guarantor denominator."
+    },
+    {
+      "id": "SAM:MONTHLY_PUBLIC_EXTRACT:2026-03",
+      "role": "Exact local UEI lookups, registration fields, and bounded current-extract nonmatches; 12 of 14 recipient UEIs matched."
+    },
+    {
+      "id": "USASPENDING:GEO:DHS:2015-2026:EXACT_RECIPIENT_LEDGER",
+      "path": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv",
+      "role": "Exact recipient-name/UEI/CAGE usage, DHS action counts, components, awards, and dates after parent/child overlap removal."
+    },
+    {
+      "id": "SEC:GEO:2003-10-21:WACKENHUT_NAME_CHANGE",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095014403011842/g85438e8vk.htm",
+      "quote": "shareholders will be asked to approve a change in the corporate name of WCC from “Wackenhut Corrections Corporation” to “The Geo Group, Inc.”"
+    },
+    {
+      "id": "SEC:GEO:2005:CSC_ACQUISITION",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000095014406002484/g00277e10vk.htm",
+      "quote": "On November 4, 2005, we completed the acquisition of Correctional Services Corporation, or CSC"
+    },
+    {
+      "id": "SEC:CORNELL:2010-08-12:MERGER",
+      "url": "https://www.sec.gov/Archives/edgar/data/1016152/000095012310078898/g24407e8vk.htm",
+      "quote": "As a result of the Merger, Cornell became a wholly-owned subsidiary of GEO."
+    },
+    {
+      "id": "SEC:GEO:2011:BI_ACQUISITION",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312512090269/d259590d10k.htm",
+      "quote": "On February 10, 2011, GEO completed its previously announced acquisition of BI"
+    },
+    {
+      "id": "SEC:GEO:2017-04-06:CEC_ACQUISITION",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312517119998/d375388d8k.htm",
+      "quote": "GEO announced the closing of its acquisition of Community Education Centers"
+    },
+    {
+      "id": "SEC:GEO:2026:GEO_CARE_FORMER_NAME",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526022602/d85667dex101.htm",
+      "quote": "GEO CARE SERVICES, LLC (f/k/a GEO CARE, LLC), as a Guarantor"
+    }
+  ],
+  "secondary_cross_check": {
+    "source": "HigherGov awardee API",
+    "query": "Fourteen exact --uei lookups on 2026-07-14",
+    "result": "All 14 UEIs returned one awardee row; all CAGEs matched the canonical map. Thirteen rows supplied legal_business_name; the legacy Correctional Services Corporation row supplied clean_name instead."
+  },
+  "bounded_negatives": [
+    "Cornell Companies and Correctional Services Corporation are absent from the March 2026 current SAM public extract; this does not establish their complete historical registration states.",
+    "Forty-eight exact FY2025 Exhibit 22 identities did not resolve in the bounded current SAM/14-UEI recipient sources; this is not proof that no historical, indirect, or differently named registration exists.",
+    "GEO Corrections Holdings, Inc. remains name-only in the reviewed exact current SAM and USAspending sources; follow-up lead #60299 preserves the gap."
+  ],
+  "known_limits": [
+    "The March 2026 local extract is stale for fields updated later in 2026. The canonical map retains the already-audited July 13 live SAM status supplement for GEO Care Services and GEO Secure Services; this closure audit did not repeat those calls.",
+    "USAspending parent-UEI searches can expand affiliates. Exact UEI/name post-filtering and transaction deduplication are required before counting.",
+    "HigherGov is a secondary cross-check and does not override primary SEC corporate lineage or SAM/USAspending recipient identity."
+  ],
+  "supporting_verified_findings": [
+    12531,
+    12534,
+    12662,
+    12663,
+    12664,
+    12665,
+    12666,
+    12773
+  ],
+  "residual_follow_up_lead": 60299
+}

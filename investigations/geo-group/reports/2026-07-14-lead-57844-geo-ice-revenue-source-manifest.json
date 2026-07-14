@@ -1,0 +1,221 @@
+{
+  "profile": "geo-group",
+  "lead_id": 57844,
+  "created": "2026-07-14",
+  "sources": [
+    {
+      "id": "SEC-GEO-2025-10K",
+      "title": "The GEO Group, Inc. 2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm",
+      "publisher": "U.S. Securities and Exchange Commission",
+      "source_type": "primary issuer filing",
+      "filed": "2026-02-25",
+      "accessed": "2026-07-14",
+      "download_sha256": "db2e73a5b9131f4bc9fb81140f8651b4f2e222981920508e88db8fa55e9fbb32",
+      "extracted_text_sha256": "1e5ea040ecf972414a93b12e27ec4f1632f9480f02f4d009015bc0dc699f446d",
+      "supports": [
+        "$2.631549bn consolidated revenue",
+        "47.6% ICE customer share and 66.6% three-agency aggregate",
+        "9% ISAP share",
+        "segment/source revenue totals",
+        "$152.4m activation bundle and $93.4m expense bundle",
+        "revenue-recognition policy",
+        "$15.1m facility rental income",
+        "ownership and customer identity of named activations"
+      ],
+      "exact_quotes": [
+        "(In thousands, except per share data) Revenues $ 2,631,549",
+        "with the BOP accounting for 2.6% and 3.1% of our total consolidated revenues for 2025 and 2024, respectively, ICE accounting for 47.6% and 41.5% of our total consolidated revenues for 2025 and 2024, respectively, and the U.S. Marshals Service accounting for 15.9% and 17.2% of our total consolidated revenues for 2025 and 2024, respectively.",
+        "ICE accounting for 47.6% and 41.5% of our total consolidated revenues for 2025 and 2024, respectively",
+        "In addition, our ISAP contract accounted for 9%, 10% and 14% of our consolidated revenues for the years ended December 31, 2025, 2024 and 2023, respectively.",
+        "The timing of revenue recognition may differ from the timing of invoicing to customers.",
+        "Revenues for U.S. Secure Services increased by $222.6 million in 2025 compared to 2024 due to aggregate net increases of $152.4 million related to the activations of our new contracts at our company-owned Delaney Hall, North Lake and D. Ray James facilities as well as our managed-only contract at the North Florida Detention Center and new transportation contracts.",
+        "Rental income, included in Revenues, for leased facilities for the years ended December 31, 2025, 2024 and 2023 was approximately $15.1 million, $15.0 million and $11.4 million, respectively."
+      ],
+      "limitation": "The printed BOP, ICE, and USMS component shares sum to 66.1%, while the same paragraph reports a 66.6% aggregate; the separate concentration table reports 67%."
+    },
+    {
+      "id": "USASPENDING-GEO-DHS-ACTION-LEDGER",
+      "title": "DHS-wide GEO award-action ledger across 14 verified UEIs",
+      "path": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv",
+      "source_type": "official USAspending API-derived local artifact",
+      "local_sha256": "f296728dbed0c4d1fac3403430f78c5526f3a6520926caacded39d258a0f7ea7",
+      "supports": [
+        "124 CY2025 ICE actions totaling $699,338,118.97",
+        "recipient and program-class decomposition",
+        "zero CY2025 direct ICE actions for 12 of 14 UEIs, including GEO Transport"
+      ],
+      "limitation": "Action-date obligations are not outlays, cash, service-period expense, or recognized revenue; this artifact has no transaction-level outlay field."
+    },
+    {
+      "id": "GEO-14-UEI-IDENTITY-MAP",
+      "title": "GEO federal-recipient identity map",
+      "path": "investigations/geo-group/reports/2026-07-13-geo-federal-recipient-identity-map.json",
+      "source_type": "primary-source reconciled local identity artifact",
+      "local_sha256": "0d962a293c31187e719a95d47a24bf15c77a769e0acb1cc95b6f94f63eece811",
+      "supports": [
+        "14 verified federal recipient registrations/legacy award identities",
+        "canonical UEIs for GEO parent, B.I., and GEO Transport"
+      ]
+    },
+    {
+      "id": "GEO-ICE-IGSA-SIX-CHAIN",
+      "title": "GEO-linked ICE IGSA nine-facility/six-chain crosswalk",
+      "path": "investigations/geo-group/reports/ice-igsa-nine-facility-chain-2026-07-13.json",
+      "source_type": "primary-source reconciled contract and local-audit artifact",
+      "local_sha256": "cd4f1e457e837a354db0f8fef5076d78b72eb74266a31ab9dffb54f6a3cffaee",
+      "supports": [
+        "nine facility rows, six public-prime chains, and 11,361 physical beds",
+        "nonadditive LaSalle, Clearfield, Evangeline, and Montgomery accounting amounts",
+        "absence of a compatible six-chain obligation or downstream GEO-receipt total"
+      ]
+    },
+    {
+      "id": "NORTH-FLORIDA-REIMBURSEMENT-TRACE",
+      "title": "EMW-2025-DS-05000 / North Florida reimbursement trace",
+      "path": "investigations/geo-group/reports/2026-07-14-emw-2025-ds-05000-north-florida-reimbursement-trace.json",
+      "source_type": "primary federal/state payment reconciliation artifact",
+      "local_sha256": "6d259adaa6e12c1e89cba5b481d74a72d688012b6751dc108f42ccb89f8ad0f8",
+      "supports": [
+        "$28,897,523.51 of FY2025-26 Florida vendor payments",
+        "$58,292,145 FEMA award-wide outlay",
+        "absence of a public transaction-level allocation joining the two"
+      ]
+    },
+    {
+      "id": "TIER2-GEO-CORECIVIC-PROCUREMENT",
+      "title": "GEO/CoreCivic ICE procurement synthesis",
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-geo-corecivic-ice-procurement-synthesis.md",
+      "source_type": "comparative analysis over official action ledgers",
+      "local_sha256": "e32ea5a3c6bfccc14bcce0bf781a0eaee7bf5fa4c9e23e480d70542233ef8abc",
+      "supports": [
+        "calendar-versus-fiscal-year boundary",
+        "GEO parent and B.I. recipient hierarchy",
+        "obligation metric discipline"
+      ]
+    },
+    {
+      "id": "CORECIVIC-CY2025-ICE-REVENUE-BRIDGE",
+      "title": "CoreCivic CY2025 ICE revenue bridge",
+      "path": "investigations/geo-group/reports/2026-07-14-lead-58086-corecivic-ice-revenue-bridge.md",
+      "source_type": "completed comparative methodology artifact",
+      "local_sha256": "a34f6e68b745edc4809b7174406cffb8f85ccd45c6e9325b3d66e20f2f9d8bd3",
+      "supports": [
+        "typed-metric comparison method",
+        "rule against adding obligations, local cash, and SEC revenue",
+        "facility-level disclosure-floor terminology"
+      ]
+    }
+  ],
+  "calculation_quotes": [
+    "DIRECT-ICE-CY2025: $527,827,186.25 GEO parent + $171,510,932.72 B.I. = $699,338,118.97 action-date obligations across 124 actions.",
+    "ICE-REVENUE-POINT: $2,631,549,000 x 47.6% = $1,252,617,324; this is a point estimate from a reported rounded share.",
+    "CONTEXT-RATIO: $699,338,118.97 / $1,252,617,324 = 55.8301%; the $553,279,205.03 arithmetic difference is not attributable to IGSAs or any facility.",
+    "ISAP-POINT: $2,631,549,000 x 9% = $236,839,410; $159,536,432.72 / $236,839,410 = 67.3606%, a different-metric context ratio.",
+    "SEC-INTERNAL-CHECK: 2.6% BOP + 47.6% ICE + 15.9% USMS = 66.1%, not the 66.6% aggregate printed in the same paragraph.",
+    "$2,631,549,000 x 47.6% = $1,252,617,324; 2.6% + 47.6% + 15.9% = 66.1%, not the printed 66.6% aggregate.",
+    "115 GEO parent actions totaling $527,827,186.25 + 9 B.I. actions totaling $171,510,932.72 = 124 CY2025 ICE actions totaling $699,338,118.97.",
+    "$508,878,952.25 detention + $9,414,567.00 transportation/removal + $9,533,667.00 other/unresolved + $159,536,432.72 ISAP/electronic monitoring + $11,974,500.00 skip tracing = $699,338,118.97.",
+    "Six CY2025 B.I. actions classified ICE ISAP/electronic monitoring sum to $159,536,432.72; three skip-tracing actions sum to $11,974,500.00.",
+    "$2,631,549,000 x 9% = $236,839,410; $159,536,432.72 / $236,839,410 = 67.3606%, a different-metric context ratio.",
+    "$699,338,118.97 / $1,252,617,324 = 55.8301%; the $553,279,205.03 arithmetic difference is not attributable to IGSAs or any facility."
+  ],
+  "finding_evidence_quote_index": [
+    {
+      "finding_id": 12862,
+      "evidence_ref": "BRIDGE-CALC-ICE-POINT",
+      "quote": "$2,631,549,000 x 47.6% = $1,252,617,324; 2.6% + 47.6% + 15.9% = 66.1%, not the printed 66.6% aggregate.",
+      "durable_source": "investigations/geo-group/reports/2026-07-14-lead-57844-geo-ice-revenue-bridge.json"
+    },
+    {
+      "finding_id": 12862,
+      "evidence_ref": "SEC-GEO-2025-AGENCY-SUM",
+      "quote": "three federal governmental agencies with correctional and detention responsibilities, the BOP, ICE, and the U.S. Marshals Service, accounted for 66.6% and 61.8% of our total consolidated revenues for the year ended December 31, 2025 and 2024, respectively",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12862,
+      "evidence_ref": "SEC-GEO-2025-ICE-SHARE",
+      "quote": "ICE accounting for 47.6% and 41.5% of our total consolidated revenues for 2025 and 2024, respectively",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12862,
+      "evidence_ref": "SEC-GEO-2025-CONSOLIDATED-REVENUE",
+      "quote": "(In thousands, except per share data) Revenues $ 2,631,549",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12862,
+      "evidence_ref": "SEC-GEO-2025-AGENCY-COMPONENTS",
+      "quote": "with the BOP accounting for 2.6% and 3.1% of our total consolidated revenues for 2025 and 2024, respectively, ICE accounting for 47.6% and 41.5% of our total consolidated revenues for 2025 and 2024, respectively, and the U.S. Marshals Service accounting for 15.9% and 17.2% of our total consolidated revenues for 2025 and 2024, respectively.",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12863,
+      "evidence_ref": "USASPENDING-GEO-CY2025-ICE-CALC",
+      "quote": "115 GEO parent actions totaling $527,827,186.25 + 9 B.I. actions totaling $171,510,932.72 = 124 CY2025 ICE actions totaling $699,338,118.97.",
+      "durable_source": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv"
+    },
+    {
+      "finding_id": 12863,
+      "evidence_ref": "USASPENDING-GEO-CY2025-PROGRAM-CALC",
+      "quote": "$508,878,952.25 detention + $9,414,567.00 transportation/removal + $9,533,667.00 other/unresolved + $159,536,432.72 ISAP/electronic monitoring + $11,974,500.00 skip tracing = $699,338,118.97.",
+      "durable_source": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv"
+    },
+    {
+      "finding_id": 12864,
+      "evidence_ref": "BRIDGE-CALC-ISAP-CONTEXT",
+      "quote": "$2,631,549,000 x 9% = $236,839,410; $159,536,432.72 / $236,839,410 = 67.3606%, a different-metric context ratio.",
+      "durable_source": "investigations/geo-group/reports/2026-07-14-lead-57844-geo-ice-revenue-bridge.json"
+    },
+    {
+      "finding_id": 12864,
+      "evidence_ref": "SEC-GEO-2025-ISAP-SHARE",
+      "quote": "our ISAP contract accounted for 9%, 10% and 14% of our consolidated revenues for the years ended December 31, 2025, 2024 and 2023, respectively.",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12864,
+      "evidence_ref": "USASPENDING-BI-CY2025-ISAP-CALC",
+      "quote": "Six CY2025 B.I. actions classified ICE ISAP/electronic monitoring sum to $159,536,432.72; three skip-tracing actions sum to $11,974,500.00.",
+      "durable_source": "investigations/geo-group/reports/2026-07-13-dhs-wide-geo-award-actions.csv"
+    },
+    {
+      "finding_id": 12865,
+      "evidence_ref": "BRIDGE-CALC-DIRECT-CONTEXT",
+      "quote": "$699,338,118.97 / $1,252,617,324 = 55.8301%; the $553,279,205.03 arithmetic difference is not attributable to IGSAs or any facility.",
+      "durable_source": "investigations/geo-group/reports/2026-07-14-lead-57844-geo-ice-revenue-bridge.json"
+    },
+    {
+      "finding_id": 12865,
+      "evidence_ref": "IGSA-SIX-CHAIN-BOUND",
+      "quote": "No defensible six-chain federal obligation total or downstream GEO-receipt total can be calculated from the acquired records.",
+      "durable_source": "investigations/geo-group/reports/ice-igsa-nine-facility-chain-2026-07-13.md"
+    },
+    {
+      "finding_id": 12865,
+      "evidence_ref": "NORTH-FLORIDA-PAYMENT-BOUND",
+      "quote": "$28,897,523.51 is a state-paid vendor amount—not a FEMA-funded amount.",
+      "durable_source": "investigations/geo-group/reports/2026-07-14-emw-2025-ds-05000-north-florida-reimbursement-trace.md"
+    },
+    {
+      "finding_id": 12865,
+      "evidence_ref": "SEC-GEO-2025-ACTIVATION-BUNDLE",
+      "quote": "aggregate net increases of $152.4 million related to the activations of our new contracts at our company-owned Delaney Hall, North Lake and D. Ray James facilities as well as our managed-only contract at the North Florida Detention Center and new transportation contracts.",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    },
+    {
+      "finding_id": 12865,
+      "evidence_ref": "SEC-GEO-2025-REVENUE-TIMING",
+      "quote": "The timing of revenue recognition may differ from the timing of invoicing to customers. GEO records a receivable when services are performed which are due from its customers based on the passage of time.",
+      "durable_source": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+    }
+  ],
+  "method_notes": [
+    "Primary records control over aggregator summaries.",
+    "Calendar-year action dates are aligned to calendar-year SEC revenue, but the underlying accounting events remain different.",
+    "Obligations, outlays, local receipts, remittances, rates, ceilings, capacities, and revenue are typed separately.",
+    "No API keys, tokens, or secrets are included."
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "competition_group": "geo-performance-consequence-gap",
+  "analysis_runs": [97, 98],
+  "generated_at": "2026-07-14",
+  "method": "Analysis of Competing Hypotheses; rank means least evidence against, not most evidence for",
+  "focused_test": {
+    "H1_id": 335,
+    "H1": "Aggregate ICE compliance grades compress component-level and repeat-deficiency variation and may weaken or delay proportional contractual consequences.",
+    "H0_id": 336,
+    "H0": "The grade/component distinction is an ordinary corrective framework and observed remedies reflect facility-specific severity and readiness.",
+    "falsification_H1": "Facility administration records show that component and repeat deficiencies routinely trigger proportionate UCAP, deductions, CPARS treatment, option decisions, or other consequences despite a compliant aggregate grade.",
+    "falsification_H0": "Across multiple independent facilities, primary administration records show persistent or repeated deficiencies, absent or nominal consequences, and continuation or capacity growth after controlling for operational need and contract type."
+  },
+  "denominator": {
+    "inspection_events": 78,
+    "death_reviews_or_reports": 24,
+    "compliant_grade_family_events": 58,
+    "compliant_grade_with_deficient_components": 42,
+    "compliant_grade_with_explicit_zero_deficient_components": 12,
+    "compliant_grade_component_status_not_stated_or_ambiguous": 4,
+    "monthly_no_noncompliance_statements": 16,
+    "conditional_preoccupancy_not_selected": 2,
+    "deep_dive_issue_none": 1,
+    "explicit_noncompliance_with_mitigation": 1,
+    "events_with_repeat_deficiency_language": 12,
+    "events_with_explicit_action_plan_mitigation_or_corrective_language": 6
+  },
+  "database_competition_before_run_97": [
+    {
+      "hypothesis_id": 335,
+      "consistent": 9,
+      "inconsistent": 4,
+      "neutral": 19,
+      "not_applicable": 2,
+      "total_evaluated": 32,
+      "inconsistency_ratio": 0.125
+    },
+    {
+      "hypothesis_id": 336,
+      "consistent": 10,
+      "inconsistent": 5,
+      "neutral": 17,
+      "not_applicable": 2,
+      "total_evaluated": 32,
+      "inconsistency_ratio": 0.1562
+    }
+  ],
+  "new_database_assessments": [
+    {"finding_id": 12846, "H1": "consistent", "H0": "consistent", "diagnostic": false, "reason": "Mesa Verde directly shows a compliant grade with seven deficient components, while the same document exposes rather than hides the component detail."},
+    {"finding_id": 12847, "H1": "consistent", "H0": "neutral", "diagnostic": true, "reason": "Northwest directly shows a compliant grade with seven deficient components and a repeat deficiency, but does not state the contract response."},
+    {"finding_id": 12848, "H1": "inconsistent", "H0": "consistent", "diagnostic": true, "reason": "Golden State received Not Selected and conditional action-plan treatment rather than an aggregate compliant grade."},
+    {"finding_id": 12849, "H1": "inconsistent", "H0": "consistent", "diagnostic": true, "reason": "Desert View received Not Selected and conditional action-plan treatment rather than an aggregate compliant grade."},
+    {"finding_id": 12850, "H1": "inconsistent", "H0": "consistent", "diagnostic": true, "reason": "Karnes expressly identified a noncompliance and mitigation instead of compressing it into a compliant grade."},
+    {"finding_id": 12851, "H1": "not_applicable", "H0": "not_applicable", "diagnostic": false, "reason": "The Gonzalez record is a separate death-review evidence class and expressly disclaims deficiency-to-death causation."}
+  ],
+  "aggregate_evidence_review": [
+    {"evidence_id": "D1", "evidence": "Forty-two of 58 compliant-grade-family events separately report deficient components across 13 facilities from 2018 through 2022.", "H1": "consistent", "H0": "consistent", "diagnostic": false, "note": "This establishes descriptive grade/component divergence, but the component detail remained visible in the inspection record."},
+    {"evidence_id": "D2", "evidence": "Twelve compliant-grade events explicitly report zero deficient components, four leave component status unstated or ambiguous, 16 Karnes reports state no area of noncompliance, and one deep-dive record lists no issue.", "H1": "inconsistent", "H0": "consistent", "diagnostic": true, "note": "These controls prevent treating every compliant grade as compressed adverse evidence."},
+    {"evidence_id": "D3", "evidence": "Two pre-occupancy records list Recommended Rating: Not Selected and condition compliance on action plans, procedures, and policy revisions.", "H1": "inconsistent", "H0": "consistent", "diagnostic": true},
+    {"evidence_id": "D4", "evidence": "One Karnes report expressly identifies Personal Hygiene noncompliance and prescribes mitigation.", "H1": "inconsistent", "H0": "consistent", "diagnostic": true},
+    {"evidence_id": "D5", "evidence": "Twelve events across eight facilities contain repeat-deficiency language.", "H1": "consistent", "H0": "neutral", "diagnostic": true, "note": "Recurrence raises a durability question, but the inspection documents alone do not establish the remedy path."},
+    {"evidence_id": "D6", "evidence": "No literal UCAP appears in the 138 linked inspection artifacts; six events contain narrower action-plan, mitigation, or corrective language.", "H1": "neutral", "H0": "neutral", "diagnostic": false, "note": "The public inspection artifact set is not the complete contract-administration file."},
+    {"evidence_id": "D7", "evidence": "Folkston staffing penalties were attempted but not enforced and full funding continued; ICE later cited vendor-paid overtime and the recommendation is closed.", "H1": "consistent", "H0": "consistent", "diagnostic": true, "note": "The non-enforcement supports H1, while vendor-borne corrective cost and closure support H0."},
+    {"evidence_id": "D8", "evidence": "Northwest's minimum recommendation remained unresolved/open and ODO later found repeats after a completed UCAP; a later task extension and added funding do not state how performance was treated.", "H1": "consistent", "H0": "inconsistent", "diagnostic": true},
+    {"evidence_id": "D9", "evidence": "Golden State's minimum recommendation and South Texas's housing-readiness recommendation are publicly closed, although the revised economics are not public.", "H1": "inconsistent", "H0": "consistent", "diagnostic": true},
+    {"evidence_id": "D10", "evidence": "ISAP contract/QASP records authorize deductions and credits, and non-GEO Torrance shows ICE can disclose a 25 percent billing penalty and minimum reduction.", "H1": "neutral", "H0": "consistent", "diagnostic": true, "note": "Authority and a comparator do not establish actual GEO-facility application rates."},
+    {"evidence_id": "D11", "evidence": "Later extensions, funding, capacity, and emergency-bed actions generally do not disclose inspection-performance treatment.", "H1": "neutral", "H0": "neutral", "diagnostic": false},
+    {"evidence_id": "D12", "evidence": "Twenty-three public death summaries are timeline/medical records, and the Gonzalez full review preserves an explicit noncausation caveat.", "H1": "not_applicable", "H0": "not_applicable", "diagnostic": false}
+  ],
+  "database_competition_after_run_97": [
+    {
+      "rank": 1,
+      "hypothesis_id": 336,
+      "consistent": 14,
+      "inconsistent": 5,
+      "neutral": 18,
+      "not_applicable": 3,
+      "total_evaluated": 37,
+      "diagnostic_evidence": 19,
+      "diagnostic_consistent": 11,
+      "inconsistency_ratio": 0.1351
+    },
+    {
+      "rank": 2,
+      "hypothesis_id": 335,
+      "consistent": 11,
+      "inconsistent": 7,
+      "neutral": 19,
+      "not_applicable": 3,
+      "total_evaluated": 37,
+      "diagnostic_evidence": 19,
+      "diagnostic_consistent": 8,
+      "inconsistency_ratio": 0.1892
+    }
+  ],
+  "verdict": "H0 #336 is currently least inconsistent, not confirmed. The denominator establishes a descriptive grade/component distinction but does not establish that the aggregate grade weakened a contractual consequence. Folkston and Northwest remain important H1 exceptions that require the nonpublic administration records already requested.",
+  "prohibited_inferences": [
+    "No causal inference from an inspection grade to a later award, extension, capacity action, payment, death, or medical outcome.",
+    "No inference that absence of a public UCAP, CPARS record, invoice deduction, or penalty means none existed.",
+    "No claim that GEO's grade/component distribution differs from a non-GEO base rate; a comparable full denominator has not been built."
+  ]
+}

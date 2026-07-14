@@ -187,7 +187,13 @@ function scanDossierFindings(detailMap: RawFindingDetailMap): void {
   const files = readdirSync(dir).filter((file) => file.endsWith(".json") && !file.startsWith("_"));
   for (const fileName of files) {
     const dossier = JSON.parse(readFileSync(resolve(dir, fileName), "utf-8"));
-    Object.assign(detailMap, buildRawFindingDetailMapFromItems(dossier?.findings || []));
+    Object.assign(
+      detailMap,
+      buildRawFindingDetailMapFromItems([
+        ...(dossier?.findings || []),
+        ...(dossier?.citation_findings || []),
+      ]),
+    );
   }
 }
 
@@ -306,7 +312,10 @@ export function loadArticleFindingCatalog(slug: string): FindingCatalog {
 }
 
 export function loadDossierFindingCatalog(dossier: any): FindingCatalog {
-  return catalogFromFindingItems(dossier?.findings || []);
+  return catalogFromFindingItems([
+    ...(dossier?.findings || []),
+    ...(dossier?.citation_findings || []),
+  ]);
 }
 
 export function loadFindingEvidenceMap(options: CatalogOptions = {}): FindingEvidenceMap {

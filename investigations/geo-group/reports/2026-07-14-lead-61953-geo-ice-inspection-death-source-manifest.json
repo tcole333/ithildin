@@ -1,0 +1,2000 @@
+{
+  "profile": "geo-group",
+  "lead_id": 61953,
+  "generated_at": "2026-07-14T07:13:27.277435+00:00",
+  "method": "Document-by-document quote extraction from the complete lead 57703 ICE inspection/death-review denominator, with Apple Vision OCR for image-only pages and period-aware award labels from the audited GEO/DHS contract ledger.",
+  "coverage": {
+    "inspection_events": 78,
+    "inspection_artifact_associations": 138,
+    "unique_inspection_pdfs": 137,
+    "unique_inspection_content_hashes": 136,
+    "death_reviews": 24,
+    "unique_official_pdf_urls": 161,
+    "unique_content_hashes": 160,
+    "successful_downloads": 161,
+    "failed_downloads": 0,
+    "ocr_documents": 66
+  },
+  "inspection_outcomes": {
+    "Meets Standards": 55,
+    "Acceptable": 1,
+    "Meets Standard": 2,
+    "No areas of noncompliance identified": 16,
+    "Deep-dive recommendations; Issue(s) column: None": 1,
+    "Not Selected in SIS; conditional compliance after action-plan completion": 2,
+    "One area of noncompliance identified": 1
+  },
+  "inspection_control_classes": {
+    "compliant_grade_with_component_deficiencies": 42,
+    "no_noncompliance_identified": 16,
+    "compliant_grade_component_status_not_stated": 4,
+    "deep_dive_recommendations_no_issue": 1,
+    "compliant_grade_no_component_deficiencies": 12,
+    "conditional_preoccupancy_action_plans": 2,
+    "one_noncompliance_with_mitigation": 1
+  },
+  "death_control_classes": {
+    "full_death_review_with_deficiencies_and_explicit_noncausation_caveat": 1,
+    "timeline_linkage_only_no_standards_adjudication": 23
+  },
+  "separation_rules": [
+    "overall inspection grades and component deficiencies are independent fields",
+    "a Meets Standards recommendation is not recoded as zero deficient components",
+    "zero standards rated Does Not Meet, or a statement that no component was rated Does Not Meet, is not recoded as zero deficient components unless the source explicitly says no deficient components/deficiencies",
+    "inspection observations, OIG findings, adjudicated court findings, and death-review conclusions remain different evidence classes",
+    "death location remains separate from prior custody and transfer locations",
+    "the 23 current death summaries are not recoded as standards inspections",
+    "no medical or custodial causation is inferred; explicit source caveats are preserved",
+    "no financial consequence is inferred; applied remedy language routes to completed lead 57784 or a nonduplicative follow-up"
+  ],
+  "award_period_caveat": "Award labels are period-aware routing labels, not proof that a particular task order funded the inspected building or caused any inspection outcome. County/parish IGSAs and direct ICE IDIQs remain distinct.",
+  "duplicate_content_note": "Two Karnes official inspection URLs (kcrcFIR_073019.pdf and kcrcFinalInspReport_07-30-2019.pdf) have the same SHA-256; both indexed event associations remain represented, while content-hash counts disclose the duplication.",
+  "visual_qa": {
+    "method": "Representative source pages rendered with Poppler and visually compared to extracted/OCR text.",
+    "checked": [
+      "Mesa Verde 2018 cover-letter p.2 (rating table/deficient components)",
+      "Golden State 2020 cover-letter p.3 (conditional action-plan language)",
+      "Karnes 2021-06 inspection p.2 (Personal Hygiene noncompliance/mitigation)",
+      "Northwest 2022 cover-letter p.2 (rating table/deficient components/repeat)",
+      "Gonzalez-Gadba review pp.1,18,23 (causation caveat, death location/cause, PBNDS review, corrective action)"
+    ]
+  },
+  "source_files": [
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/120519_KCRC_Ed_Child_Dev.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6c8bb03bacd4a78169ba029ee963514aa2df0de76119a36a89c0a20238229803",
+      "bytes": 30768,
+      "pages": 1,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 619,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/ADLNTCA21_CL_11-3-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "652b9196a0c79eb8bfec5265e1fc8e35caa3782b4a5ced8e4c6c685fb7b14a8a",
+      "bytes": 447495,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 4626,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/ADLNTCA21_SIS_11-3-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "4cab4eec2e47f4f734636e6cc10c4e32de5491b59093598e35045a51e8e826b8",
+      "bytes": 1352371,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13809,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/CADESVI21_CL_11-5-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c0476619c43626d74ff48fb6c537269c83a225e98c649cce5e1d796ecdc6a363",
+      "bytes": 637211,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 7242,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/CADESVI21_SIS_11-5-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "29922de10ef6e27acab8fc93b1cb8dbd01660ce0ed316d552a94f5b059ecd7de",
+      "bytes": 1350683,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13797,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/DesertViewAnnexCA _CL_10-29-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "fc1e3961959c2466c85bca952af99b9ed856c88bee354e6619ae3f4026f931a4",
+      "bytes": 224950,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3728,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/DesertViewAnnexCA_SIS_10-29-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ced2fd1ce703cd9c92dee7e2609821e97cfb4834034c3fbf039e1f489fcdff41",
+      "bytes": 240363,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 13982,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FIPCAGA20_CL_10-09-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "84ac96c217470f4944ec0d26dc08debe141e4dc0961d30a5d8952fec27e28181",
+      "bytes": 246310,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7714,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FIPCAGA20_SIS_10-09-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "9763da5dcfd97a600552575b02aa02999d6b5f3a542b38e7e8ef532e598f9552",
+      "bytes": 235677,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14155,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FIPCAGA21-FolkstonIPCAnnex-CL-07-30-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "38a84c82f4988596e23333fd2071cd44b89b64a92dbb3f783593a02a2491cad6",
+      "bytes": 873961,
+      "pages": 5,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 10441,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FIPCAGA21-FolkstonIPCAnnex-SIS-07-30-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "934fa6cba80fc96fc957b7a393eaf674a6780115973d6ed8ebfaedcd18b28253",
+      "bytes": 1066871,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14254,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FolkstonProcCtr_CL_10-07-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "4ecf1be3de3471b83b0cfd56163069b268e34794cf8fa7289ff3b4993c53cd0d",
+      "bytes": 267147,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7023,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/FolkstonProcCtr_SIS_10-7-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "64e664deb23cec78202a4aa764e4ecb469c7c231c93e1fd29082d51e90683272",
+      "bytes": 235423,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14193,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/GoldenStateAnnex_CL_10-16-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "8ffa9a87dd3fe8dd7b6ffe48ed46a84fb6a4ae26b7c42ca1cc65e17c25021016",
+      "bytes": 225190,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4765,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/GoldenStateAnnex_SIS_10-16-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "e38853449bd7cb765a229dc49f92d2c082417fed4773be77ab01a30700c5ff07",
+      "bytes": 232060,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 13973,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/JAMESGA21-FolkstonIPC-CL-07-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "84f9892790534f49c5b1463a720fab6c2d033d02788ec3683dd374c792e55c58",
+      "bytes": 900966,
+      "pages": 5,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 10676,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/JAMESGA21-FolkstonIPC-SIS-07-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "651afcff19eaaf892cabe75756834c00eca5f1134bac9727f32e70688eebf8b1",
+      "bytes": 1103420,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14139,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MesaVerdeDFCA_CL_06-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "73ba93ef7b64e5608e010e75ad3ea0e0228ee5d4818943215068e80fa87f4228",
+      "bytes": 111894,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4989,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MesaVerdeDFCA_SIS_06-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6aaf2d9cbd3647e777d5a8d671418925db0698e715bb1531a6230321c52e9dc3",
+      "bytes": 102847,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 8548,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MesaVerdeDF_CL_10-14-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "251fd1fb965e3537665a392990f1f75ec568ccc7807c1c5b6292d21ffa2cccb3",
+      "bytes": 253875,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5740,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MesaVerdeDF_SIS_10-14-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "76be79776fb8282e10e093bec76894c10575f0fce3caf30fec23fbae4523cb18",
+      "bytes": 234487,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14076,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MontgomeryProcCtrTX_CL_12-20-18.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d5ba83cd0d5961f5b36b0f2d37544cdd94067497ec53c5df706a4f98371aeccc",
+      "bytes": 115754,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7319,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/MontgomeryProcCtrTX_SIS_12-20-18.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d5ef2f0dd1aa4413516e10133e85efc77286b782e94572ac5fdecb137ad68e9b",
+      "bytes": 103656,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 9336,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestDetCntr_CL_05-13-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "375d9a110b404800ad61373c68b4afa74056b8679f33d8e7d127b2bc08a57a60",
+      "bytes": 845208,
+      "pages": 5,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8549,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestDetCntr_SIS_05-13-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "447142f26e7984b399244415e66aaad415dcceb872800e674f4810701ca62a5c",
+      "bytes": 1094430,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14050,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestDetCtrWA_CL_05_16_2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "66ad716341c6c19c9b2c7ebcd1e072f37e391078302220a31faca08599a562da",
+      "bytes": 111062,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5604,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestDetCtrWA_SIS_05_16_2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c4fc1db41f3839f2d2b4d1062a8e0955e7d4eaa9e16f9de655c38a53b7d1ecb4",
+      "bytes": 104167,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 10382,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestICEProcssCtr_CL_05-12-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6a3f8b0f9340c3954e9fe94c72fc1ec62fc059c76e2e1f20f1d7c533cee0d7ff",
+      "bytes": 817372,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 9633,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/NorthwestICEProcssCtr_SIS_05-12-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "f2d076c2691417ead9311f07e632f881b531ccc0d4fbfd8731aa458b55e3458e",
+      "bytes": 1412976,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14521,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/STCDFTX21-SouthTexasIPC-CoverLtr.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "aeacdc75aa29b1998d1ab006fc12f2d46a02ab5368531bf49192bb334a563db1",
+      "bytes": 1050241,
+      "pages": 6,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 12563,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/STCDFTX21-SouthTexasIPC-SIS.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "fca8c0dc80f2ac66e69dfc17e842b8057aa8d80784f68339436a6981f6cfddc3",
+      "bytes": 1051131,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13987,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/WCCPBFL_CL_10-31-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c3117affe8b548cbfa50750603377bc4800408d32c2d0624eb8cb6b602c914a9",
+      "bytes": 256107,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5538,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/WCCPBFL_SIS_10-31-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "b00d5edb4e69b2e8ca64a22701d6ab8fa98a41507ae791d3c9511a542da74ce3",
+      "bytes": 273863,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14136,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEastCa_CL_10_11_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "3670ecdd16b40869ac559abc17050a831ba3a36dba23bf86140b74fc0d55a24e",
+      "bytes": 113018,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7214,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEastCa_SIS_10_11_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "483730c5e9b5e68193e31019b1d34dda2d7695726402425db40cdf1ab7726e14",
+      "bytes": 100129,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7909,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEast_CL_11-20-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0b867914c060658afe35f5ce069ec4eebe0c7c30ca32f7002832fe92faa45123",
+      "bytes": 237885,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5671,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEast_CL_11-21-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "29e5470b80ec746845875326afc91f366f79f1d6bacd47f8263f16bd84d1a9de",
+      "bytes": 238738,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6257,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEast_SIS_11-20-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "3c340466799576aef3a4210d517186a75e1a8ea3d66097e84d3e55e2e51e9601",
+      "bytes": 246261,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14369,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoEast_SIS_11-21-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "93df4ef0316a1823617aa424d552a31b8be3485b7d58f0fb0b0885c14ef8c5ef",
+      "bytes": 265539,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14324,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWestCa_CL_10_11_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0d06dad848b6a70546c958d0c149530ed9bd5f39b16eafdf6d886fbf7d15e58d",
+      "bytes": 111706,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6963,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWestCa_SIS_10_11_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "20dcd1e9dd2e1cbe26d61929c8cd2a505e3cc48564e001074ab15d3b9ce095d6",
+      "bytes": 101869,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 9932,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWest_CL_11-18-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d1b34632edbd35a1a480801da95ebb554c478f0ad0f1bdc08c23488b89ed6fcd",
+      "bytes": 237016,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5310,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWest_CL_11-21-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6377a0647df50a3553593fed640e71f339fa81c2b4e81147348c4d0ff69f01de",
+      "bytes": 253774,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5761,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWest_SIS_11-18-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "2f59f81d933a644de3e3328485693c44b3dd1862eeaa2d66b68de45b565cc6e0",
+      "bytes": 247623,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14361,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/adelantoWest_SIS_11-21-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "1ac752b1961c2e6724d05dbbdb45e0b9af1cdbbb516700913f6b07547f93eb07",
+      "bytes": 269522,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14324,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraAnnex_CL_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d70d913520f69b2b093e421f3d18f338007294ee1bfec8942b2331ce4e9d7011",
+      "bytes": 710113,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8363,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraAnnex_SIS_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "5ba2d28837cac11aa8404ab9282d4cc12036c72a5ad563b02f7bd858ca19c1a3",
+      "bytes": 1403480,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14392,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraCDF_CL_01-27-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "8ffb23f40b8d77ae875dca57132e7a4c3bad7ded50bc8cb440815816cf9c46b4",
+      "bytes": 285469,
+      "pages": 6,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 13641,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraCDF_CL_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "f1f821420b76b417b689fef23be9880aea233f3eaecfe566fd86d3923558bcd9",
+      "bytes": 620118,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6911,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraCDF_SIS_01-27-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "11aeda58d388d8f5779a18fab06b16cdc8c105d5c08fa087b07f4f80cfab804a",
+      "bytes": 347070,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14181,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraCDF_SIS_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "fb9f1a0f31435e07a4bd460526fe2241e95b354e70127d8d5c3f81bbfecafa1d",
+      "bytes": 1400690,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14330,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraProcCtrAnnex_CL_11-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ef51f9f8b5e993d49da6dd445dfc74df90e07134e416b33acfb55294d09aa6da",
+      "bytes": 121039,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 9411,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraProcCtrAnnex_SIS_11-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ffa00529433692874d9f4e36e528a13617300b85bf07997f40c410c673b99275",
+      "bytes": 267244,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14478,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraProcCtr_CL_11-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "35f7fdb751388101208f39f3c760375158285836405d08cade8b68cf87c24713",
+      "bytes": 206740,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 10668,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/auroraProcCtr_SIS_11-27-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "90919d35bf7f42a7b9cec280732f9ada3471c8d18ab07c1c5b34e400d0c15a84",
+      "bytes": 266165,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14439,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/browardTransCntrFL_CL_10-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "3fdabe335387d6e7d7d04f654e885474e5a36717a2e8fbcb39e8b0eeaca72eeb",
+      "bytes": 537211,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 5997,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/browardTransCntrFL_SIS_10-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "41c250d6411614b040276dcce41a00b2dffdff2c4163b2f4d5955d57c154319b",
+      "bytes": 1397008,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14442,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/browardTransCntr_CL_09-24-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "f7bed3166571f234a2550b6dc1e093875617ab7617aeae9540010a0a6a15b1ac",
+      "bytes": 240021,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6630,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/browardTransCntr_SIS_09-24-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c44944b3028ff339ca58e7ef4de5beff2edd5122bf13771b0c67f859bb1ea6ba",
+      "bytes": 234295,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14102,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/denverCdfCo_CL_10_04_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "895a339bde658fb4d5433d87aee787db25e4962da4e67d04289dd13405dd66ef",
+      "bytes": 155457,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7250,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/denverCdfCo_SIS_10_04_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ed7e20cfdb4e3b2a252c9b7102d131d564cb5259c7178da38f5840a881133326",
+      "bytes": 104154,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 10662,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/desertViewAnnex_CL_03-24-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "177e0a7a5953f8b7edf595473b4c1fb2c85c95591d8144e30caba6a156ff09f3",
+      "bytes": 719802,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8492,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/desertViewAnnex_SIS_03-24-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "92cdd532a11cf9b36c8a74822a450941fbeea358be71e5ef5b99bf90fafa6ab1",
+      "bytes": 1059824,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13662,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonIPCAnnex_CL_07-28-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "63faa46cf4b52c9fee786ba71f22ce94f65309b51567230b01bbeeae4849844f",
+      "bytes": 882185,
+      "pages": 5,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 10604,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonIPCAnnex_SIS_07-28-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0a587d97ce5e18e1446df4c89ef9622c046feb32f493ac800049bcf0d4e0083f",
+      "bytes": 1397230,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14447,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonIPCMain_CL_07-28-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "848b978163a2cc36c2c90d346b64bc22ab6f53d31e9008e4baae8fbe4e12c449",
+      "bytes": 765479,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 9299,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonIPCMain_SIS_07-28-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ad707ebf983bdf460412a413d213eaae2209f6015388ff643d12bfad70977609",
+      "bytes": 1398794,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14473,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonProcCenterGA_CL_06-06-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "56402cf0297659e9676f385bb6de6ef292b2401c228c39447acfeaecd83cd66b",
+      "bytes": 107371,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5267,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkstonProcCenterGA_SIS_06-06-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "54de5bbdcccb4c6b2963918c2b44ce32a622ec4f0811cc0db5cd5a992a1cc6b8",
+      "bytes": 102899,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 8756,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkston_CL_06-06-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "acf1c9b9b4defec7aba51df7908d72958969c01ec21db9d663da16eb06c5ee0c",
+      "bytes": 110942,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4932,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/folkston_SIS_06-06-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "110181ac98bcabcad299edcf64314a77403607186041080b26f51e19bfdc689f",
+      "bytes": 103106,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 8811,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/goldenStateAnnex_CL_03-17-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "f21ae7ca1f5ad73374422692d3b27048aaff52635dfdf36b8c8cc84b6db1a092",
+      "bytes": 758557,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 9105,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/goldenStateAnnex_CL_10-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ffd728cd5389b95188d336d098658657fdd6bae214ed6aada61a04240a426684",
+      "bytes": 728623,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8772,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/goldenStateAnnex_SIS_03-17-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "e45b626f437809195de50327bdff2bec483a5a50520d9b78cbb29ec66d731848",
+      "bytes": 1026934,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13729,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/goldenStateAnnex_SIS_10-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "a67747ab1cb90ce31d0bb2bc27d5f4de89eab868fb49ddf82512060b463a7ce6",
+      "bytes": 1358794,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13820,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/jenaLaSalleLa_CL_09_27_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "5794a36a74a1f4cf9b3cb6af37f96d2259f18474674ce4a4553cc5768a49a4eb",
+      "bytes": 100450,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5749,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/jenaLaSalleLa_SIS_09_27_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "240917b8ff655ad16b9a6ac36cea84667773d3b441febfce530ef5de8b78f622",
+      "bytes": 75793,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 8216,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/jenaLaSalle_CL_09-26-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "78a21889d05f5fa825336dc14200bcdc536053f7620ca0f5a818426a1639ff81",
+      "bytes": 235142,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4771,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/jenaLaSalle_SIS_09-26-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "60810539be3f18adf5a110a692d1356980fedd2cdd4ef721cbf75e7d66bd4110",
+      "bytes": 264996,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14217,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/joeCorleyProcCTR_CL_12-18-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "b01632e7e69d5defc7a8f1539991d871eb62d536e79e8ae6f2bcf3279840ceb4",
+      "bytes": 234043,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4671,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/joeCorleyProcCTR_SIS_12-18-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "297a7f2549f982cba372b5dec8260c9e7fffde750023b118f6311d1342981a5d",
+      "bytes": 292741,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14140,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/joeCorleyProcCntrTX_CL_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "63ffc735fa11a8f1ffe4f7d97110c4cd94ebe119f93e4409aecb70cc918c2a77",
+      "bytes": 1323281,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 4803,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/joeCorleyProcCntrTX_SIS_10-28-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "bdc1eb956013b63f5e065f914333ee5cc0cad2d1bd332751cf5261f2d87c75d6",
+      "bytes": 1391116,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14392,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_01112021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "834595aaba0bf10d7ae62ea1364ddc783bb14f5a49943a5b6dfcd9b9eb322976",
+      "bytes": 332534,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 3081,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_01182022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "36bbdc071cf4da5488ebb5879c7b5e0a70e3937c64cd222f2da1e8e31d5de8d5",
+      "bytes": 214220,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3040,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_03082021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ef58c751b656d5c011d217f5135ef2c76e88c55c219c86efa77f4389d516361a",
+      "bytes": 356414,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 3086,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_04192021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "e2d4e7b743f5cab90af613544b2fa8a4f9eb52ea510bd9ccab34b72f9fdd6831",
+      "bytes": 362399,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 3036,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_06072021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "abc1d284d64f25c01dc72ca7abc560e89cd5c8c0b65dc5c3b58b38e1567d62f4",
+      "bytes": 360452,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 3345,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_07272021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "87c6672d88fb27e2da853bc3a40d7f6c0dd604fcb4b68d2357e4e7340e914332",
+      "bytes": 398597,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 3463,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_073019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0c9773b9e463f629ec0f977f240349d4181da8b28eb658bd7738345d67e6a99f",
+      "bytes": 339870,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2475,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_091019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "43960834fd78be576f07ff57145a5396efbebecb5222d55b9a9668ea3aae9766",
+      "bytes": 264476,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2681,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_09142021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6dc63cc73c94e88f95605e9d215504f6b918e32081df798406acccd0dd009651",
+      "bytes": 214610,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3033,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_09172020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c1bdae320f250fa17495955fa014c8f736668b9d20b380d75d879ffc27507447",
+      "bytes": 359639,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2744,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_110619.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "666114f58222187861669a768ba7a72b0b10ba2e8bf4545f314c0ea3a43c718d",
+      "bytes": 265610,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2505,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_11162020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "440b018ba6d6b46a3bdc6dd94c68f8d4f7a75f16dbf6b9ed60903c3ff0d54466",
+      "bytes": 364731,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2956,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFIR_11302021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "035aca867c4922d926f2de980a926d6dfbd94edfca4555494f2d748cfb733e2d",
+      "bytes": 213487,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3039,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFinalInspReport_06-11-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "7d04de85bf36ed7db96cc5e5d7ca3535e6856238ecb11bcea64700cf91191c24",
+      "bytes": 334199,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2498,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcFinalInspReport_07-30-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0c9773b9e463f629ec0f977f240349d4181da8b28eb658bd7738345d67e6a99f",
+      "bytes": 339870,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2475,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcReportOne01212020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d427a114c0fa70ca49ed26d00956c2a862c0a0e0e492903d332b326e95a29f4c",
+      "bytes": 344196,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2571,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/kcrcReportOne02252020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "656ec16ab6ece8cf4a2a81565726ad5ccc7308d4c361504b87dad588ccafa3b9",
+      "bytes": 359401,
+      "pages": 2,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 2617,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/laSalleIPC_CL_09-23-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "7a8832dd8d7827e379406d7d41f641e656072ef1f807992880a81172721b29c6",
+      "bytes": 1964057,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 5941,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/laSalleIPC_SIS_09-23-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "a9ddec5036f807ad6c47372cde3625edd681dd1285dde477c4d70518eb43295a",
+      "bytes": 1078541,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14497,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDFCA_CL_06_28_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "09d008ee628cef00f0d89ad17ed27a8f3261a7f807c18caeb704bf021f717f66",
+      "bytes": 492798,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 5261,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDFCA_SIS_06_28_2018.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "a9853e2205750e313fefdee8eeb4c0e239d1afb551f30e80a4911ac50d49fb86",
+      "bytes": 634805,
+      "pages": 5,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8694,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDF_CL_06-16-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "0dc169c94e75835cc79daed271883fb1a279e15a9fc18a5b7b8655c589b673a3",
+      "bytes": 572660,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6245,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDF_CL_06-24-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "be7a16d8960fe4bd58e8690d67cff3bae7d7366ee2f112ead8700d347cbb6ab5",
+      "bytes": 702393,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 8264,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDF_SIS_06-16-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "3dfb63c7f00f9ad552d0bbaf4cd33f8129a479c06301d6cac024cc4ea3fb09fe",
+      "bytes": 1403123,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14486,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/mesaVerdeDF_SIS_06-24-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "e3d0ad0242c60f6fcf67e7e523bd49ac3429b6dc4c093d76f710de29e4ec0e09",
+      "bytes": 1105938,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14260,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryCDF_CL_12-16-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "44540308f159c79e46fb2d2e19edc9c4f87a0fa19ed4ca9ca2ddfa0c854bb892",
+      "bytes": 257438,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6362,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryCDF_CL_12-19-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "84e163aea30cf4bfb17d980d0bc13ad1ffa48a43ffc4b99a2ab2cd4502490e08",
+      "bytes": 209257,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6126,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryCDF_SIS_12-16-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "258f216f025501c4f6f5fbb14c0ae92b11dad2139daf49b7ffb53199611ff270",
+      "bytes": 296387,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14161,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryCDF_SIS_12-19-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "5aef210133906eec7615dd671ddc07d207895b3c9879ae890f4c0c796e0e14ec",
+      "bytes": 265011,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14317,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryPC_CL_12-17-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d0a57e403b4f26bd19ab6ddfa7a29789d108d8b3da9fa189146bb7133f9c65d5",
+      "bytes": 648738,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 7328,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/montgomeryPC_SIS_12-17-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "1890026f2f4d388fc1abd1689d5ad2f7beab8dbf6dc46103e51a25fc26f43caa",
+      "bytes": 2776847,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14558,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/moshannonValleyProcCntr_CL_03-03-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "4340b063c4aed08815804e7d925a695a44cf62f97e8fe177fddb03015a36bd0b",
+      "bytes": 602926,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6445,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/moshannonValleyProcCntr_SIS_03-03-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "2d54b53a214070a398db86896843b51f12123f6e77ad65de3a0d7279bcf82477",
+      "bytes": 1560406,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14088,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/pinePrairieLA_CL_04_25_2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c7704e328ac7c66b9b25d4c8821914c21acd7b691f85c32be7088d025a139418",
+      "bytes": 106902,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5259,
+      "association_count": 2
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/pinePrairieLA_CL_11-05-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "dc0a3185fb0a2ca381cd743c18a3f5180dbc614f33cfd8ecd7aff6c6441e0212",
+      "bytes": 255596,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5554,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/pinePrairieLA_SIS_11-05-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "9ea3b716b5de1d04c21159e53cb6ae15e31edeab0b935af27aed2d28e152d572",
+      "bytes": 235107,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14185,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/pinePrairieProcCntr_CL_04-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "7a02cc46312739e02aa6058e9bf81ca883dfbf32c9638de031b41146b24183ec",
+      "bytes": 519734,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6008,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/pinePrairieProcCntr_SIS_04-21-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "574d7a1239680409b598b24c375a612087d79351b8ee8c511f41c044be66df25",
+      "bytes": 1095035,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14104,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeDetCenter_CL_03-14-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "28eca7b7a4ac77d3255243b40386e3cb0d53fb8e755eee8571bc146dd457617d",
+      "bytes": 145216,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4562,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeDetCenter_SIS_03-14-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "199b3f404190963accf17b1b40f05dd9a3b0104bca687e4460abae296a84a727",
+      "bytes": 99698,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7316,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeDetCtr_CL_03-10-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "c36a70684d80d33652bfdbf2d4ece97a4dac034b4bab7852e23bdb7833badcff",
+      "bytes": 440295,
+      "pages": 3,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 4659,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeDetCtr_SIS_03-10-2021.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "326ce0c91301b1b40a0c3038f048068eb27f0b0e870f4f9fea35934e4dea2dc5",
+      "bytes": 1080576,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 13733,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeProcCntrTX_CL_03-12-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "a44fbf08cebc1dc8c1f40e8aa65e69907341aee423e0b19e4693585dc9f204ad",
+      "bytes": 281587,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5169,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeProcCntrTX_SIS_03-12-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "3129c5df3c5e5dd8eb129a90c8bf92d21739a43429f440ebac23104247027ef8",
+      "bytes": 233915,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14145,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeProcCntr_CL_03-10-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "d24d7a4a963a7d0b00465bf8ec2f923b8a1cf6ef93bce47d78f4e747af629340",
+      "bytes": 570566,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6189,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/rioGrandeProcCntr_SIS_03-10-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "057402520f4157c4b3a972efd219006ce4d77d390b3c2859c19655c857d8d915",
+      "bytes": 1399608,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14530,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/sTexasICE_ProcCntr_CL_02-17-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "01ce1667b223948b307d174bdf8b386ce39eb4b182792d82480efe6ae365dcf3",
+      "bytes": 644200,
+      "pages": 4,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 6982,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/sTexasICE_ProcCntr_SIS_02-17-2022.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6dbb74b5b50188875eaf88fa68ca3d0c4d214bc1c6e51dc875354e8590deeb76",
+      "bytes": 1412020,
+      "pages": 9,
+      "extraction_method": "apple_vision_ocr",
+      "text_nonspace_chars": 14603,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southLAPC_LA_CL_12-11-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "968a1b3923fa084475f7a1f2c19c9cf8f0a2b3c8635d6f4fc799f553e6511316",
+      "bytes": 236210,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6231,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southLAPC_LA_SIS_12-11-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "2b3029f6a1ceec891dbf045622dff2f72188ead1593954f815ee4d31c77a8548",
+      "bytes": 345310,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14120,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southLouisianaProcCenter_CL_11-07-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "12c597a5999d3b4cb4939dd2eead5a01f5915711098c08d20e1bae95b37f00c5",
+      "bytes": 282651,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5784,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southLouisianaProcCenter_SIS_11-07-2019.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "6464e0fd346db157c55c715e1b346fa63c7d21a28b0ac2b655415f09a6899d85",
+      "bytes": 274475,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 13651,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southTexasIPC_CL_02-27-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "b16bee82f23bd3e482e5623dcb8ef6694a7549f25641f797784c6c0eb8b5bd22",
+      "bytes": 113851,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 6069,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/facilityInspections/southTexasIPC_SIS_02-27-2020.pdf",
+      "source_types": [
+        "inspection"
+      ],
+      "sha256": "ff79ce5780c1ee4d60f232252b55618b41710f13fe6d0d9f31586cbb0ef2e87b",
+      "bytes": 273734,
+      "pages": 9,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 14304,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/dderGabrielGarciaAviles.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "2e32126f054b8fd6acffb6f723ed5256a627a563f372bd69502782f9615fb90d",
+      "bytes": 162710,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4722,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrAHNChoungWoong.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "7fdfd7663cd0ef63704ce8f6ac2ee4541fa9c764d96172ac41e1654bf1800cff",
+      "bytes": 71883,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 10126,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrAmarMergensana.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "51a5c212f22591a650de4a4e0a08961148dbd78f70eef72020b0dc19a7ae7a63",
+      "bytes": 37390,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5785,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrArriagoSantoyaPedro.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "6ef5fa532ddd6d8ee8bd3d7a36f1a628d13efac5ace6a531a8ab4ec6de9f28cc",
+      "bytes": 34858,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4299,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrChaofengGe.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "16ae3ce233413f74c19c14978f2e80f4bbfb27fbeb43ee246dcc39425f042f07",
+      "bytes": 151123,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 2783,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrDanielCharlesLeo.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "3baff3551e5acc67d9a2a767077a92dcb788dedcd63ae6546754e59fd1de3f05",
+      "bytes": 166522,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7009,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrEscobarMejiaCarlosErnesto.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "88325047061bc120f3964623287a9900facc67248d59710a28a0aeddf0f1df54",
+      "bytes": 68965,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5461,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrFarias-FariasEdixondelJesus.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "48b03d57ea954728ed370b4e5b01739483f78d511ea38171c7e9b94ff1c662e0",
+      "bytes": 164869,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7866,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrFernandoSabongerGarcia.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "dc56f637b708e116b733cbfb922c1a20fbdfc1e063962bc569a10c243d1b2880",
+      "bytes": 206356,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7781,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrFranciscoGasparAndres.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "74369c5d988ad86fd27a05266d65db75e53c82af62204491be1ddb3961aa709e",
+      "bytes": 169085,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 7305,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrFranklineOkpu.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "7e0d64415c44774f6b3ee45f0dbf9eb269f6cc1c8520eee3544c13b9df97d086",
+      "bytes": 160906,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4032,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrGonzalez.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "dd28f25dd98652bc33563d8d790923306cde5faa7c09fc3ba5e2dd66d0b1e18b",
+      "bytes": 382446,
+      "pages": 24,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 64396,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrIsmaelUribeAyala.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "f9fbf8b514c8b47fa93d5ae0df467661874acec65ddd6952f554346300a119b5",
+      "bytes": 157491,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3263,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrKaiYinWong.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "b56ab098574d702e9cca206a33cdfa5252a9f44a99d2e377e9221e9c093ae4fb",
+      "bytes": 175669,
+      "pages": 5,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 10174,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrKuanHuiLee.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "aea5ea0d29f6286aa31c5e989d97edd1ead70fecc883967e97b25c9b96e8f6a4",
+      "bytes": 47985,
+      "pages": 4,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 8999,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrLuisNunezCaceres.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "24f577a129810b745453f5d85ba59191c1bbde3da176c0170641374364287910",
+      "bytes": 120226,
+      "pages": 1,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 2042,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrMarieAngeBlaise.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "f1835680a45db596e7e1ca2ed9eaff9ddc6d0748a3294c8eb97ce2f3eafb2e4a",
+      "bytes": 199486,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4993,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrMelvinCaleroMendoza.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "5f6a78c73311b60fa75cb2d889bc41a0f253579a3148d71749809e57dc19f7ca",
+      "bytes": 163140,
+      "pages": 3,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 5546,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddrSinghJaspar.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "91a2152ba3e2c7e4adbfd75ec1bea6c102d9de33c8da848a0bf8368529503319",
+      "bytes": 152812,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3743,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddr_ABDULKADIRFouadSaeed.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "b2016311901c962c06a5d1c44a021e499b137487dcd2a844a290dde36d253f72",
+      "bytes": 123290,
+      "pages": 1,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 2258,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddr_Balderramos-Torres.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "c196115468fe4f8e48819a3f3c7ea8afe5382cc3f6d971c4660c324f6daa70e5",
+      "bytes": 35024,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 4325,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddr_GUTIERREZReyes.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "c1a1d74ed23b609a809ad1a3f642e12d40bd5345d3ca295e2433f1fb11507ebf",
+      "bytes": 125308,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 2730,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddr_MONTEJOPeteSumalo.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "2419a172a8aa20b15eec70a4c8f3825a2ead72cd09401678552e80306d9b81f6",
+      "bytes": 121228,
+      "pages": 1,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 1720,
+      "association_count": 1
+    },
+    {
+      "official_url": "https://www.ice.gov/doclib/foia/reports/ddr_RAMOSSolanoJoseGuadalupe.pdf",
+      "source_types": [
+        "death_review"
+      ],
+      "sha256": "7f7cf82a4c2c3cd5da524812ebffe9e0e9872e941fc4ec1ef2adff4537b0b8df",
+      "bytes": 150641,
+      "pages": 2,
+      "extraction_method": "pdftotext",
+      "text_nonspace_chars": 3521,
+      "association_count": 1
+    }
+  ],
+  "artifacts": [
+    "2026-07-14-lead-61953-geo-ice-inspection-death-coverage.csv",
+    "2026-07-14-lead-61953-geo-ice-inspection-death-source-manifest.json"
+  ]
+}

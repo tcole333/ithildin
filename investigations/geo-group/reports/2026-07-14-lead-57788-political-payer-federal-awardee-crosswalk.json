@@ -1,0 +1,167 @@
+{
+  "lead_id": 57788,
+  "profile": "geo-group",
+  "thread_id": 112,
+  "as_of": "2026-07-14",
+  "hypotheses": {
+    "H1": "Subsidiaries with no exact direct-award match in the bounded records serve as the named political payers.",
+    "H0": "Ordinary treasury, accounting, tax, and legal separation explains entity choice.",
+    "assessment": "The descriptive portion of H1 is supported: all 26 scoped corporate-payment rows name subsidiaries, while the parent is the direct ICE/DHS awardee. The causal or avoidance component of H1 is not established. H0 has the stronger documented explanation because SEC filings and GEO's MUR 7180 response identify distinct subsidiaries, a 2013 REIT restructuring, holding-company functions, and separate contracting entities. GEO's response is advocacy rather than independent adjudication, so H0 is supported but not proved as the reason for each payment."
+  },
+  "scope": {
+    "corporate_payment_rows": 26,
+    "arithmetic_context_usd": 4265000,
+    "warning": "The arithmetic context combines super-PAC receipts, hybrid-PAC non-contribution-account receipts, and inaugural donations. It is not one legal contribution stream or a complete GEO political-spending total.",
+    "periods": ["2016", "2024", "2025"],
+    "award_action_window": "2015-01-01 through 2026-07-13"
+  },
+  "entities": [
+    {
+      "entity_id": 5038,
+      "canonical_legal_name": "GEO Corrections Holdings, Inc.",
+      "entity_class": "corporate subsidiary",
+      "political_records": {
+        "rows": 3,
+        "dates": ["2016-08-19", "2016-11-01", "2016-12-10"],
+        "scoped_amount_usd": 475000,
+        "streams": ["Rebuilding America Now super-PAC receipts", "58th Presidential Inaugural Committee Form 13 donation"],
+        "broader_mur_context": "A 2021 statement by Commissioners Broussard and Weintraub says MUR 7180 involved $945,000 in GCH contributions to federal political committees. This crosswalk does not reconstruct every one of those payments."
+      },
+      "identity": {
+        "sec": "Listed as a GEO subsidiary in 2017 Exhibit 21.1 and as a guarantor subsidiary in 2024/2025 Exhibit 22.1.",
+        "mur_respondent_position": "Wholly owned parent subsidiary and holding company; GEO Reentry Services was its subsidiary/sole-member LLC during the relevant period.",
+        "current_sam_exact_match": false,
+        "uei": null,
+        "cage": null
+      },
+      "contracts": {
+        "exact_direct_award_match": false,
+        "dhs_action_count_2015_2026": 0,
+        "parent_active_ice_awards_on_dates": {"2016-08-19": 7, "2016-11-01": 7, "2016-12-10": 6},
+        "qualification": "Current SAM and bounded award negatives do not prove no historical registration or differently named award. MUR 7180 contains competing commissioner views about whether GCH was sufficiently separate from affiliated federal contractors."
+      }
+    },
+    {
+      "entity_id": 5030,
+      "canonical_legal_name": "GEO Acquisition II, Inc.",
+      "entity_class": "corporate subsidiary",
+      "political_records": {
+        "rows": 16,
+        "date_start": "2024-02-09",
+        "date_end": "2025-06-11",
+        "scoped_amount_usd": 2375000,
+        "year_totals_usd": {"2024": 2125000, "2025": 250000},
+        "payer_variants": ["GEO ACQUISITION II INC", "GEO ACQUISITION II INC.", "GEO ACQUISTION II INC."]
+      },
+      "identity": {
+        "sec": "Listed as a GEO subsidiary in 2017 Exhibit 21.1 and as a guarantor subsidiary in 2024/2025 Exhibit 22.1.",
+        "current_sam_exact_match": false,
+        "uei": null,
+        "cage": null
+      },
+      "contracts": {
+        "exact_direct_award_match": false,
+        "dhs_action_count_2015_2026": 0,
+        "parent_active_ice_award_range_on_dates": [10, 15],
+        "qualification": "Bounded exact-name/current-registration result; not proof of no historical or differently named award."
+      }
+    },
+    {
+      "entity_id": 4874,
+      "canonical_legal_name": "GEO Reentry Services, LLC",
+      "entity_class": "corporate subsidiary",
+      "political_records": {
+        "rows": 7,
+        "date_start": "2025-10-09",
+        "date_end": "2025-12-11",
+        "scoped_amount_usd": 1415000,
+        "payer_variants": ["GEO REENTRY SERVICES LLC", "GEO REENTRY SERVICES"]
+      },
+      "identity": {
+        "sec": "Listed as a GEO subsidiary in 2017, 2024, and 2025 filings; guarantor subsidiary in Exhibits 22.1.",
+        "current_sam_exact_match": true,
+        "federal_legal_business_name": "GEO REENTRY SERVICES LLC",
+        "uei": "CLKXSJLN8EN1",
+        "cage": "7G0N6",
+        "registration_date": "2017-07-28",
+        "current_extract_activation_date": "2025-10-14",
+        "current_extract_expiration_date": "2026-10-14",
+        "historical_status_warning": "The current extract does not establish the registration's precise status on every payment date."
+      },
+      "contracts": {
+        "exact_direct_award_match": false,
+        "highergov_exact_uei_contract_count": 0,
+        "usaspending_exact_name_or_uei_contract_count": 0,
+        "dhs_action_count_2015_2026": 0,
+        "parent_active_ice_awards_on_all_scoped_dates": 14,
+        "mur_2015_subgrant_context": "GEO's MUR response said a $266,666 Louisiana agreement was a state contract funded from a federal prime grant, not a federal contract with Reentry. That is the respondent's legal/factual position, not an independent adjudication."
+      }
+    },
+    {
+      "entity_id": 5031,
+      "canonical_legal_name": "The GEO Group, Inc. Political Action Committee",
+      "entity_class": "employee-funded separate segregated fund",
+      "fec_committee_id": "C00382150",
+      "political_records": {
+        "routine_pac_stream": "Verified through donor-side Schedule B records in the underlying political-money ledger.",
+        "conflicted_form13": {
+          "date": "2024-12-11",
+          "amount_usd": 500000,
+          "recipient": "Trump Vance Inaugural Committee, Inc.",
+          "recipient_reported_payer": "THE GEO GROUP, INC. POLITICAL ACTION COMMITTEE",
+          "donor_side_match": false,
+          "treatment": "Committee-reported payer label only; payer stream unresolved and not reassigned to PAC or corporate treasury."
+        }
+      },
+      "contracts": {"sam_expected": false, "exact_direct_award_match": false, "dhs_action_count_2015_2026": 0}
+    },
+    {
+      "entity_id": 1290,
+      "canonical_legal_name": "The GEO Group, Inc.",
+      "entity_class": "public-company parent and federal awardee",
+      "identity": {
+        "current_sam_exact_match": true,
+        "federal_legal_business_name": "THE GEO GROUP, INC.",
+        "uei": "JMLKZZ1NL2Z6",
+        "cage": "3JMR1",
+        "registration_date": "2003-09-29",
+        "current_extract_expiration_date": "2027-01-23"
+      },
+      "political_records": {
+        "verified_parent_treasury_payment_rows_in_scoped_ledger": 0,
+        "recipient_abbreviation_rule": "Rows reported as THE GEO GROUP or THE GEO GROUP, INC. were not treated as parent treasury when donor-side GEO PAC Schedule B records matched recipient, amount, and date.",
+        "company_report_rule": "GEO company aggregate political reports do not establish which legal treasury entity paid each recipient."
+      },
+      "contracts": {
+        "exact_direct_award_match": true,
+        "highergov_exact_uei_contract_count_in_query": 343,
+        "dhs_action_count_2015_2026": 1128,
+        "ice_recipient": true,
+        "parent_active_ice_award_count_range_on_scoped_payment_dates": [6, 15]
+      }
+    }
+  ],
+  "mur_7180": {
+    "procedural_result": "The FEC voted 5-0 to find reason to believe GCH violated the federal-contractor prohibition. In 2021 it deadlocked 3-3 on probable cause and separately 3-3 on no probable cause, then voted 6-0 to close the file.",
+    "adjudication_boundary": "No final probable-cause finding, adjudicated violation, or civil penalty resulted.",
+    "competing_views": [
+      "Commissioners Broussard and Weintraub concluded GCH's management, finances, and policies were tightly interwoven with affiliated contractors.",
+      "Commissioners Dickerson, Cooksey, and Trainor concluded the named contracts were held by other legal entities and rejected OGC's separate-and-distinct theory as a basis for enforcement."
+    ]
+  },
+  "tier2_hunch_gate": {
+    "candidate": "GEO changed political-payment subsidiary labels across cycles while the parent remained the central ICE/DHS awardee.",
+    "novelty": "moderate",
+    "magnitude": "high within scoped records",
+    "network_centrality": "high because the parent UEI is the dominant direct ICE/DHS recipient",
+    "primary_source_support": "multi-source: FEC, SEC, SAM, USAspending-derived action records",
+    "causal_support": "absent",
+    "gate": "advance_as_hypothesis_only",
+    "next_required_records": [
+      "GEO corporate treasury/check-register entries and bank account owner for each payment",
+      "board or officer authorizations naming the paying entity and business rationale",
+      "intercompany transfer and allocation entries immediately before each payment",
+      "historical SAM registration snapshots and complete recipient/award lineage for each subsidiary"
+    ]
+  }
+}

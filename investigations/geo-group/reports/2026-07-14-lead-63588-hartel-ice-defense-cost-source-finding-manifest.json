@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-07-14",
+  "profile_id": "geo-group",
+  "lead_id": 63588,
+  "thread_id": 113,
+  "source_root": "investigations/geo-group/sources/2026-07-14-lead-63588-hartel-ice-defense-cost",
+  "sources": [
+    {
+      "id": "S01",
+      "path": "recap/novoa-de231-2-zoley-may30-letter.pdf",
+      "canonical_ref": "Novoa v. GEO, C.D. Cal. 5:17-cv-02514, DE 231-2",
+      "role": "court-filed May 30, 2018 Zoley letter",
+      "provenance": "RECAP; ICE FOIA Bates 2018-ICLI-00052 3404 / ICE-FOIA2018_0001357"
+    },
+    {
+      "id": "S02",
+      "path": "recap/novoa-de231-4-ice-denials-edge-response.pdf",
+      "canonical_ref": "Novoa v. GEO, C.D. Cal. 5:17-cv-02514, DE 231-4",
+      "role": "July 23 ICE email, three June 21 denials, July 9 Edge response",
+      "provenance": "RECAP; ICE FOIA Bates 2018-ICLI-00052 6053-6062"
+    },
+    {
+      "id": "S03",
+      "path": "ice-foia/stevens-ice-2018-icli-00052-selected-records.pdf",
+      "canonical_ref": "ICE FOIA 2018-ICLI-00052 selected records",
+      "role": "unredacted ICE agency emails and denial text",
+      "provenance": "ICE-produced FOIA packet mirrored by Deportation Research Clinic; Bates-matched to RECAP"
+    },
+    {
+      "id": "S04",
+      "path": "recap/menocal-de262-2-hscedm11d00003-contract.pdf",
+      "canonical_ref": "Menocal v. GEO, D. Colo. 1:14-cv-02887, DE 262-2",
+      "role": "Aurora HSCEDM-11-D-00003 contract exhibit",
+      "provenance": "RECAP court exhibit"
+    },
+    {
+      "id": "S05",
+      "path": "recap/washington-de16-1-hscedm15d00015-contract.pdf",
+      "canonical_ref": "Washington v. GEO, W.D. Wash. 3:17-cv-05806, DE 16-1",
+      "role": "Northwest HSCEDM-15-D-00015 contract exhibit",
+      "provenance": "RECAP court exhibit; OCR sidecar visually checked"
+    },
+    {
+      "id": "S06",
+      "path": "recap/novoa-de193-2-eroigsa110003-igsa.pdf",
+      "canonical_ref": "Novoa v. GEO, C.D. Cal. 5:17-cv-02514, DE 193-2",
+      "role": "Adelanto EROIGSA-11-0003 IGSA exhibit",
+      "provenance": "RECAP court exhibit; missing contract page 44(a) disclosed"
+    },
+    {
+      "id": "S07",
+      "path": "muckrock/2019-ICFO-39006-no-records-response.pdf",
+      "canonical_ref": "ICE FOIA 2019-ICFO-39006",
+      "role": "initial no-record response",
+      "provenance": "MuckRock-hosted agency response; superseded in coverage significance by appeal/remand"
+    },
+    {
+      "id": "S08",
+      "path": "muckrock/2020-ICAP-00213-remand-production.pdf",
+      "canonical_ref": "ICE FOIA appeal 2020-ICAP-00213",
+      "role": "appeal/remand production with withheld pages",
+      "provenance": "MuckRock-hosted agency production"
+    },
+    {
+      "id": "S09",
+      "path": "usaspending-hscedm11d00003-transactions.json",
+      "canonical_ref": "USAspending spending_by_transaction exact ID HSCEDM11D00003",
+      "role": "55 IDV action descriptions",
+      "provenance": "USAspending public API queried 2026-07-14"
+    },
+    {
+      "id": "S10",
+      "path": "usaspending-hscedm15d00015-transactions.json",
+      "canonical_ref": "USAspending spending_by_transaction exact ID HSCEDM15D00015",
+      "role": "51 IDV action descriptions",
+      "provenance": "USAspending public API queried 2026-07-14"
+    },
+    {
+      "id": "S11",
+      "path": "usaspending-eroigsa110003-transactions.json",
+      "canonical_ref": "USAspending spending_by_transaction exact ID EROIGSA110003",
+      "role": "zero-result response",
+      "provenance": "USAspending public API queried 2026-07-14"
+    },
+    {
+      "id": "S12",
+      "path": "cbca-cda-cases-index.html",
+      "canonical_ref": "CBCA published CDA cases index",
+      "role": "published appeal coverage check",
+      "provenance": "official cbca.gov index downloaded 2026-07-14"
+    }
+  ],
+  "active_findings": [
+    {"id": 13004, "source_ids": ["S01"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13005, "source_ids": ["S03"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13006, "source_ids": ["S03"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13007, "source_ids": ["S03"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13008, "source_ids": ["S02"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13009, "source_ids": ["S05"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13010, "source_ids": ["S04"], "status": "verified", "claim_type": "direct_quote"},
+    {"id": 13015, "source_ids": ["S03"], "status": "verified", "claim_type": "direct_quote", "cross_thread_relation": "refines finding 12511 in thread 112", "evidence_refs": ["ICE-FOIA2018-5705", "ICE-FOIA2018-5369"]},
+    {"id": 13014, "source_ids": ["S06"], "status": "verified", "claim_type": "direct_quote"}
+  ],
+  "retracted_provenance_corrections": {
+    "finding_ids": [12996, 12997, 12998, 12999, 13000, 13001, 13002, 13003, 13011, 13012, 13013],
+    "reason": "Initial source_quote labels did not match evidence_ref; later replacements with incomplete or unattached quotes were retracted. Active records were recreated with exact evidence-path keys and quotes covering all material propositions before verification."
+  },
+  "non_finding_conclusions": [
+    "The arithmetic sum of the three ICE-described REAs is 2662654.03 USD; this is not a payment.",
+    "No acquired source establishes payment, compensating modification, reconsideration grant, CDA appeal, voucher, or DOJ takeover; this remains a coverage-bounded negative result."
+  ]
+}
