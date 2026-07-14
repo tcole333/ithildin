@@ -1317,14 +1317,20 @@ def audit_finding_evidence(finding_id=None, profile_id=None, all_profiles=False)
         db.close()
 
 
-def get_unverified(limit=50):
-    """Get findings that haven't been human-verified yet."""
+def get_unverified(limit=50, profile_id=None, all_profiles=False):
+    """Get unverified findings in the active or explicitly selected profile."""
     db = _get_db_standalone()
-    rows = db.execute("""
+    conditions = ["f.verification_status = 'unverified'"]
+    params = []
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("f.profile_id = ?")
+        params.append(resolved_profile)
+    rows = db.execute(f"""
         SELECT f.*, GROUP_CONCAT(fe.evidence_ref, ', ') as evidence_refs
         FROM findings f
         LEFT JOIN finding_evidence fe ON fe.finding_id = f.id
-        WHERE f.verification_status = 'unverified'
+        WHERE {' AND '.join(conditions)}
         GROUP BY f.id
         ORDER BY
             CASE f.confidence
@@ -1334,7 +1340,7 @@ def get_unverified(limit=50):
             END,
             f.created_at DESC
         LIMIT ?
-    """, (limit,)).fetchall()
+    """, (*params, limit)).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -2679,6 +2685,7 @@ def main():
     )
     audit_p.add_argument("--correction-type", choices=VALID_CORRECTION_TYPES)
     audit_p.add_argument("--limit", type=int, default=50)
+    add_output_args(audit_p)
 
     # provenance
     prov_p = subparsers.add_parser("provenance", help="Show full provenance chain for a finding")
@@ -2688,6 +2695,8 @@ def main():
     # unverified
     unverified_p = subparsers.add_parser("unverified", help="List unverified findings")
     unverified_p.add_argument("--limit", type=int, default=50)
+    unverified_p.add_argument("--profile", help="Profile (default: active)")
+    unverified_p.add_argument("--all-profiles", action="store_true")
     add_output_args(unverified_p)
 
     # stats
@@ -3108,9 +3117,13 @@ def main():
             correction_type=getattr(args, "correction_type", None),
             limit=args.limit,
         )
-        if not corrections:
-            print("No corrections found.")
-        else:
+        structured = write_output(
+            corrections, args, summary=f"correction history: {len(corrections)} entries"
+        )
+        if not structured and getattr(args, "json_out", False):
+            print(json.dumps(corrections, indent=2, default=str))
+            structured = True
+        if not structured and corrections:
             print(f"Correction history ({len(corrections)} entries):")
             for c in corrections:
                 print(f"  [{c['created_at']}] {c['table_name']}#{c['record_id']}.{c['field_name']}")
@@ -3119,6 +3132,8 @@ def main():
                 print(f"    New: {c['new_value']}")
                 print(f"    Reason: {c['reason']}")
                 print()
+        elif not structured:
+            print("No corrections found.")
 
     elif args.command == "provenance":
         prov = get_provenance(args.id)
@@ -3180,8 +3195,18 @@ def main():
                     print(f"  {conn['person_a']} <-> {conn['person_b']} [{conn.get('relationship_type', '?')}] (verif: {vstat})")
 
     elif args.command == "unverified":
-        findings = get_unverified(limit=args.limit)
-        if not write_output(findings, args, summary=f"unverified findings: {len(findings)}"):
+        findings = get_unverified(
+            limit=args.limit,
+            profile_id=args.profile,
+            all_profiles=args.all_profiles,
+        )
+        structured = write_output(
+            findings, args, summary=f"unverified findings: {len(findings)}"
+        )
+        if not structured and getattr(args, "json_out", False):
+            print(json.dumps(findings, indent=2, default=str))
+            structured = True
+        if not structured:
             if not findings:
                 print("All findings verified!")
             else:

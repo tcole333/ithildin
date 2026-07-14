@@ -311,7 +311,8 @@ new canonical edge.
 
 ### Audit & Verification
 ```bash
-python tools/findings_tracker.py unverified             # List findings needing human review
+uv run python tools/findings_tracker.py unverified --profile epstein --output "$WORKDIR/unverified.json"
+uv run python tools/findings_tracker.py unverified --all-profiles --json
 python tools/findings_tracker.py provenance 42           # Full provenance chain for finding #42
 python tools/findings_tracker.py verify 42               # Mark as human-verified
 python tools/findings_tracker.py dispute 42 --reason "Quote doesn't match source"
@@ -320,7 +321,7 @@ python tools/findings_tracker.py correct 42 --field summary --value "New text" -
 # source_datasets corrections must be a JSON array of supported tokens
 uv run python tools/findings_tracker.py correct 42 --field source_datasets \
   --value '["courtlistener","registry"]' --reason "Normalize provenance tokens"
-python tools/findings_tracker.py audit 42 --table findings  # Show correction history
+uv run python tools/findings_tracker.py audit 42 --table findings --json  # Show correction history
 ```
 
 ## Analysis Tools
