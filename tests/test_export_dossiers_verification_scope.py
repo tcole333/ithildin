@@ -54,14 +54,16 @@ def dossier_db() -> sqlite3.Connection:
             verification_status TEXT,
             created_at TEXT,
             verified_at TEXT,
-            profile_id TEXT
+            profile_id TEXT,
+            finding_id INTEGER
         );
         CREATE TABLE connection_evidence (
             connection_id INTEGER,
             evidence_type TEXT,
             evidence_ref TEXT,
             source_quote TEXT,
-            source_page TEXT
+            source_page TEXT,
+            assessment TEXT
         );
         CREATE TABLE name_aliases (canonical_name TEXT, alias TEXT);
         CREATE TABLE entities (
@@ -109,15 +111,32 @@ def dossier_db() -> sqlite3.Connection:
         """
         INSERT INTO connections (
             id, person_a, person_b, relationship_type, description, strength,
-            date_range, verification_status, created_at, verified_at, profile_id
+            date_range, verification_status, created_at, verified_at, profile_id,
+            finding_id
         ) VALUES (?, 'Alpha Person', ?, 'professional', ?, 'strong', ?, ?, ?, ?,
-                  'test-profile')
+                  'test-profile', ?)
         """,
         [
-            (11, "Verified Contact", "Verified connection", "2024-01", "verified", "2024-01-06", "2024-03-01"),
-            (12, "Unverified Contact", "Unverified connection", "2024-02", "unverified", "2024-01-07", None),
-            (13, "Disputed Contact", "Disputed connection", "2024-03", "disputed", "2024-01-08", None),
-            (14, "Retracted Contact", "Retracted connection", "2024-04", "retracted", "2024-01-09", "2024-04-02"),
+            (11, "Verified Contact", "Verified connection", "2024-01", "verified", "2024-01-06", "2024-03-01", 1),
+            (12, "Unverified Contact", "Unverified connection", "2024-02", "unverified", "2024-01-07", None, None),
+            (13, "Disputed Contact", "Disputed connection", "2024-03", "disputed", "2024-01-08", None, None),
+            (14, "Retracted Contact", "Retracted connection", "2024-04", "retracted", "2024-01-09", "2024-04-02", None),
+            (15, "No Evidence Contact", "Stale verified connection with no evidence", "2024-05", "verified", "2024-01-10", "2024-02-15", None),
+            (16, "Unverified Upstream Contact", "Stale verified connection", "2024-06", "verified", "2024-01-11", "2024-02-16", 2),
+            (17, "Unquoted Contact", "Stale verified evidence", "2024-07", "verified", "2024-01-12", "2024-02-17", None),
+        ],
+    )
+    conn.executemany(
+        """
+        INSERT INTO connection_evidence (
+            connection_id, evidence_type, evidence_ref, source_quote, source_page,
+            assessment
+        ) VALUES (?, 'url', ?, ?, NULL, NULL)
+        """,
+        [
+            (11, "https://example.test/verified-connection", "Exact connection quote"),
+            (16, "https://example.test/unverified-upstream", "Exact upstream edge quote"),
+            (17, "https://example.test/unquoted", None),
         ],
     )
     conn.commit()
@@ -182,10 +201,14 @@ def test_research_override_includes_non_retracted_states(
     )
 
     assert [finding["id"] for finding in dossier["findings"]] == [1, 2, 3]
-    assert [connection["id"] for connection in dossier["connections"]] == [11, 12, 13]
+    assert [connection["id"] for connection in dossier["connections"]] == [
+        11, 12, 13, 15, 16, 17,
+    ]
     assert dossier["stats"]["total_findings"] == 3
-    assert dossier["stats"]["total_connections"] == 3
-    assert {event["id"] for event in dossier["timeline"]} == {1, 2, 3, 11, 12, 13}
+    assert dossier["stats"]["total_connections"] == 6
+    assert {event["id"] for event in dossier["timeline"]} == {
+        1, 2, 3, 11, 12, 13, 15, 16, 17,
+    }
     assert dossier["export_options"] == {"include_unverified": True}
 
 

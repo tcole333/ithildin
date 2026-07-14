@@ -286,6 +286,147 @@ def _repair_stale_leads_foreign_keys(db):
     return rebuilt
 
 
+def _connection_dedup_rows(db):
+    """Return duplicate connection IDs mapped to the deterministic MIN(id) row."""
+    return db.execute("""
+        SELECT c.id AS duplicate_id, canon.id AS canonical_id
+        FROM connections c
+        JOIN (
+            SELECT MIN(id) AS id, person_a, person_b,
+                   COALESCE(relationship_type, '') AS rt,
+                   COALESCE(profile_id, '') AS pid
+            FROM connections
+            GROUP BY person_a, person_b,
+                     COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+        ) canon
+          ON canon.person_a = c.person_a
+         AND canon.person_b = c.person_b
+         AND canon.rt = COALESCE(c.relationship_type, '')
+         AND canon.pid = COALESCE(c.profile_id, '')
+        WHERE c.id <> canon.id
+        ORDER BY canon.id, c.id
+    """).fetchall()
+
+
+def _metadata_is_populated(value):
+    return value is not None and str(value).strip() != ""
+
+
+def _row_value(row, name, index):
+    """Read sqlite3.Row or the tuple rows used by direct schema tests."""
+    try:
+        return row[name]
+    except (TypeError, IndexError):
+        return row[index]
+
+
+def _merge_duplicate_connection_rows(db):
+    """Merge legacy duplicate edges without losing provenance or audit history.
+
+    The oldest edge remains canonical. Evidence unique to a duplicate is rehomed;
+    same-ref metadata fills canonical blanks in duplicate-ID order. When two
+    populated values conflict, the deterministic canonical value stays current
+    and the discarded legacy value is retained in an immutable merge correction.
+    """
+    duplicates = _connection_dedup_rows(db)
+    for duplicate in duplicates:
+        duplicate_id = _row_value(duplicate, "duplicate_id", 0)
+        canonical_id = _row_value(duplicate, "canonical_id", 1)
+
+        # Both edge and composite evidence corrections use the connection ID as
+        # record_id. Rehome them before deleting either legacy child or parent.
+        db.execute("""
+            UPDATE corrections SET record_id=?
+            WHERE record_id=?
+              AND table_name IN ('connections', 'connection_evidence')
+        """, (canonical_id, duplicate_id))
+
+        evidence_rows = db.execute("""
+            SELECT * FROM connection_evidence
+            WHERE connection_id=? ORDER BY evidence_ref
+        """, (duplicate_id,)).fetchall()
+        for evidence in evidence_rows:
+            evidence_ref = _row_value(evidence, "evidence_ref", 2)
+            canonical = db.execute("""
+                SELECT source_quote, source_page, assessment
+                FROM connection_evidence
+                WHERE connection_id=? AND evidence_ref=?
+            """, (canonical_id, evidence_ref)).fetchone()
+            if canonical is None:
+                db.execute("""
+                    UPDATE connection_evidence SET connection_id=?
+                    WHERE connection_id=? AND evidence_ref=?
+                """, (canonical_id, duplicate_id, evidence_ref))
+                continue
+
+            canonical_values = {
+                field: _row_value(canonical, field, index)
+                for index, field in enumerate(
+                    ("source_quote", "source_page", "assessment")
+                )
+            }
+            for evidence_index, field in enumerate(
+                ("source_quote", "source_page", "assessment"), start=3
+            ):
+                retained = canonical_values.get(field)
+                incoming = _row_value(evidence, field, evidence_index)
+                retained_populated = _metadata_is_populated(retained)
+                incoming_populated = _metadata_is_populated(incoming)
+                if not retained_populated and incoming_populated:
+                    db.execute(
+                        f"UPDATE connection_evidence SET {field}=? "
+                        "WHERE connection_id=? AND evidence_ref=?",
+                        (incoming, canonical_id, evidence_ref),
+                    )
+                    db.execute("""
+                        INSERT INTO corrections (
+                            table_name, record_id, record_key, field_name,
+                            old_value, new_value, reason, corrected_by,
+                            correction_type
+                        ) VALUES (
+                            'connection_evidence', ?, ?, ?, ?, ?, ?, ?, 'merge'
+                        )
+                    """, (
+                        canonical_id, evidence_ref, field, retained, incoming,
+                        f"Filled canonical provenance from duplicate connection #{duplicate_id}",
+                        "schema:connection-dedup",
+                    ))
+                    canonical_values[field] = incoming
+                elif (
+                    retained_populated and incoming_populated
+                    and retained != incoming
+                ):
+                    db.execute("""
+                        INSERT INTO corrections (
+                            table_name, record_id, record_key, field_name,
+                            old_value, new_value, reason, corrected_by,
+                            correction_type
+                        ) VALUES (
+                            'connection_evidence', ?, ?, ?, ?, ?, ?, ?, 'merge'
+                        )
+                    """, (
+                        canonical_id, evidence_ref, field, incoming, retained,
+                        f"Preserved conflicting provenance from duplicate connection #{duplicate_id}; "
+                        f"canonical connection #{canonical_id} retained its deterministic value",
+                        "schema:connection-dedup",
+                    ))
+
+            db.execute("""
+                DELETE FROM connection_evidence
+                WHERE connection_id=? AND evidence_ref=?
+            """, (duplicate_id, evidence_ref))
+
+    if duplicates:
+        db.executemany(
+            "DELETE FROM connections WHERE id=?",
+            [(_row_value(row, "duplicate_id", 0),) for row in duplicates],
+        )
+    return [
+        (_row_value(row, "duplicate_id", 0), _row_value(row, "canonical_id", 1))
+        for row in duplicates
+    ]
+
+
 def get_db():
     """Get a database connection, creating schema if needed."""
     global _schema_initialized
@@ -911,6 +1052,7 @@ def _ensure_schema(db):
         # Provenance fields on connection_evidence
         ("connection_evidence", "source_quote TEXT"),
         ("connection_evidence", "source_page TEXT"),
+        ("connection_evidence", "assessment TEXT"),
         # Investigation thread assignment
         ("leads", "thread_id INTEGER REFERENCES investigation_threads(id)"),
         ("findings", "thread_id INTEGER REFERENCES investigation_threads(id)"),
@@ -1163,59 +1305,32 @@ def _ensure_schema(db):
             or "coalesce(profile_id" not in existing_sql
         )
         if needs_migration:
-            db.execute("DROP INDEX IF EXISTS idx_connections_unique")
-            # Remove duplicate connections, keeping the oldest (smallest id) per group.
-            # Group by coalesced values so NULLs are deduplicated correctly.
-            # Temporarily disable FK checks for safe dedup migration.
-            # PRAGMA foreign_keys must be set outside a transaction.
             db.commit()
-            db.execute("PRAGMA foreign_keys=OFF")
-
-            # Copy evidence from duplicate connections to canonical (MIN id).
-            # INSERT OR IGNORE handles the case where canonical already has
-            # the same evidence_ref — no data is lost.
-            db.execute("""
-                INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref, source_quote, source_page)
-                SELECT canon.id, ce.evidence_type, ce.evidence_ref, ce.source_quote, ce.source_page
-                FROM connection_evidence ce
-                JOIN connections c ON c.id = ce.connection_id
-                JOIN (
-                    SELECT MIN(id) as id, person_a, person_b,
-                           COALESCE(relationship_type, '') as rt, COALESCE(profile_id, '') as pid
-                    FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                ) canon ON canon.person_a = c.person_a AND canon.person_b = c.person_b
-                    AND canon.rt = COALESCE(c.relationship_type, '')
-                    AND canon.pid = COALESCE(c.profile_id, '')
-                WHERE ce.connection_id != canon.id
-            """)
-            # Remove evidence rows pointing at duplicates (already copied above)
-            db.execute("""
-                DELETE FROM connection_evidence WHERE connection_id NOT IN (
-                    SELECT MIN(id) FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                )
-            """)
-            # Now safe to delete duplicate connections
-            db.execute("""
-                DELETE FROM connections WHERE id NOT IN (
-                    SELECT MIN(id) FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                )
-            """)
-            db.execute("PRAGMA foreign_keys=ON")
-            db.execute("""
-                CREATE UNIQUE INDEX idx_connections_unique
-                ON connections(
-                    person_a,
-                    person_b,
-                    COALESCE(relationship_type, ''),
-                    COALESCE(profile_id, '')
-                )
-            """)
-            db.commit()
+            foreign_keys_enabled = bool(db.execute("PRAGMA foreign_keys").fetchone()[0])
+            if foreign_keys_enabled:
+                db.execute("PRAGMA foreign_keys=OFF")
+            try:
+                db.execute("BEGIN IMMEDIATE")
+                db.execute("DROP INDEX IF EXISTS idx_connections_unique")
+                _merge_duplicate_connection_rows(db)
+                db.execute("""
+                    CREATE UNIQUE INDEX idx_connections_unique
+                    ON connections(
+                        person_a,
+                        person_b,
+                        COALESCE(relationship_type, ''),
+                        COALESCE(profile_id, '')
+                    )
+                """)
+                db.commit()
+            except Exception:
+                db.rollback()
+                raise
+            finally:
+                if foreign_keys_enabled:
+                    db.execute("PRAGMA foreign_keys=ON")
     except sqlite3.OperationalError:
-        pass
+        raise
 
     # Widen connections.relationship_type CHECK constraint to include entity types.
     # SQLite can't ALTER CHECK constraints, so we rebuild the table if needed.

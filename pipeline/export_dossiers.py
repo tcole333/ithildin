@@ -31,6 +31,14 @@ except ImportError:
     def get_active_profile_id():
         return ""
 
+try:
+    from tools.findings_tracker import validate_connection_publication
+except ImportError:
+    try:
+        from findings_tracker import validate_connection_publication
+    except ImportError:
+        validate_connection_publication = None
+
 
 def _resolve_profile(profile_id=None, all_profiles=False):
     """Resolve profile_id: explicit > active profile > None."""
@@ -318,7 +326,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
             f"""
             SELECT c.id, c.person_a, c.person_b, c.relationship_type, c.description,
                    c.strength, c.date_range, c.verification_status, c.created_at,
-                   c.verified_at, c.profile_id
+                   c.verified_at, c.profile_id, c.finding_id
             FROM connections c
             WHERE (c.person_a = ? OR c.person_b = ?) AND {connection_visibility}{profile_cond.replace('f.', 'c.')}
             ORDER BY
@@ -336,6 +344,15 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
             seen_conn_ids.add(row["id"])
 
             connection = dict(row)
+            if not include_unverified:
+                if validate_connection_publication is None:
+                    raise RuntimeError(
+                        "Connection publication validator could not be imported"
+                    )
+                try:
+                    validate_connection_publication(conn, row)
+                except ValueError:
+                    continue
             # Resolve the "other person" to their canonical name
             raw_other = row["person_b"] if row["person_a"] == name else row["person_a"]
             other_person = _resolve(raw_other, raw_to_canonical)
@@ -344,7 +361,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
 
             evidence = conn.execute(
                 """
-                SELECT evidence_type, evidence_ref, source_quote, source_page
+                SELECT evidence_type, evidence_ref, source_quote, source_page, assessment
                 FROM connection_evidence
                 WHERE connection_id = ?
                 """,

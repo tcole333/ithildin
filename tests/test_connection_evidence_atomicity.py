@@ -33,7 +33,10 @@ def connection_db(monkeypatch, tmp_path):
             date_range TEXT,
             finding_id INTEGER,
             profile_id TEXT,
-            agent_run_id TEXT
+            agent_run_id TEXT,
+            verification_status TEXT DEFAULT 'unverified',
+            verified_by TEXT,
+            verified_at TEXT
         );
         CREATE UNIQUE INDEX idx_connections_unique ON connections(
             person_a,
@@ -45,7 +48,23 @@ def connection_db(monkeypatch, tmp_path):
             connection_id INTEGER NOT NULL REFERENCES connections(id),
             evidence_type TEXT NOT NULL,
             evidence_ref TEXT NOT NULL,
+            source_quote TEXT,
+            source_page TEXT,
+            assessment TEXT,
             PRIMARY KEY (connection_id, evidence_ref)
+        );
+        CREATE TABLE corrections (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            table_name TEXT NOT NULL,
+            record_id INTEGER NOT NULL,
+            record_key TEXT,
+            field_name TEXT NOT NULL,
+            old_value TEXT,
+            new_value TEXT,
+            reason TEXT NOT NULL,
+            corrected_by TEXT,
+            correction_type TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         CREATE TRIGGER reject_test_evidence
         BEFORE INSERT ON connection_evidence

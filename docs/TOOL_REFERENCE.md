@@ -250,6 +250,65 @@ resolvable EFTA OCR and text files. Remote URLs, binary files, and canonical
 references without a local resolver remain usable; `evidence-audit` counts
 those spans as `unchecked` rather than treating them as mismatches.
 
+### Audited Connection Evidence & Verification
+```bash
+# Create or idempotently enrich a canonical edge with quote/page/assessment provenance
+uv run python tools/findings_tracker.py connect \
+  --person-a "PERSON_A" --person-b "ORGANIZATION_B" --type legal \
+  --evidence CourtListener:docket/69737684 \
+  --source-quote "CourtListener:docket/69737684:Exact language from the filing" \
+  --source-page "CourtListener:docket/69737684:p. 12" \
+  --assessment "CourtListener:docket/69737684:Names both endpoints"
+
+# Add, correct, or delete evidence with immutable correction rows
+uv run python tools/findings_tracker.py connection-evidence-add 7 \
+  --ref CourtListener:docket/69737684 \
+  --source-quote "Exact language from the filing" --source-page "p. 12" \
+  --assessment "Names both endpoints" --reason "Attach primary filing" --by analyst
+uv run python tools/findings_tracker.py connection-evidence-correct 7 \
+  --ref CourtListener:docket/69737684 --field source_quote \
+  --value "Corrected exact language" --reason "Fix transcription" --by analyst
+uv run python tools/findings_tracker.py connection-evidence-delete 7 \
+  --ref CourtListener:docket/69737684 --reason "Superseded evidence" --by analyst
+
+# Verification is the publication gate: every evidence row needs a quote and valid ref
+uv run python tools/findings_tracker.py connection-unverified --profile epstein
+uv run python tools/findings_tracker.py connection-verify 7 --by analyst
+uv run python tools/findings_tracker.py connections "PERSON_A" --verified-only
+
+# Audited edge lifecycle and provenance
+uv run python tools/findings_tracker.py connection-correct 7 \
+  --field description --value "Corrected relationship description" \
+  --reason "Clarify edge" --by analyst
+uv run python tools/findings_tracker.py connection-dispute 7 \
+  --reason "Relationship is contested" --by analyst
+uv run python tools/findings_tracker.py connection-retract 7 \
+  --reason "Edge was unsupported" --by analyst
+uv run python tools/findings_tracker.py connection-audit 7
+uv run python tools/findings_tracker.py connection-provenance 7 \
+  --output /tmp/connection-7-provenance.json
+```
+
+Initial connection creation remains draft-friendly. Enriching an existing
+canonical edge is atomic and audited; identical repeats are no-ops, while a
+conflicting non-empty quote/page/assessment must use
+`connection-evidence-correct` with a reason. Any substantive edge or evidence
+change resets a verified connection to `unverified`; correcting a field to its
+current normalized value is an explicit no-op and creates no audit row. Initial
+verification appends immutable status history, while repeating verification on
+an already verified, still-publishable edge preserves its reviewer, timestamp,
+and audit history. Retraction is final for this workflow: a retracted edge cannot
+be disputed or verified without a future explicit restoration workflow. If an edge cites
+`finding_id`, that finding must also be verified before the edge can be
+verified. The `--verified-only` publication view revalidates current evidence,
+so legacy rows carrying a stale `verified` status are excluded without silently
+rewriting their lifecycle state. Public dossier export uses that same current
+evidence and upstream-finding validator; research export with
+`--include-unverified` remains non-retracted rather than publication-gated.
+Endpoint names are not directly correctable
+because they define the canonical edge key; retract the old edge and create a
+new canonical edge.
+
 ### Audit & Verification
 ```bash
 python tools/findings_tracker.py unverified             # List findings needing human review
