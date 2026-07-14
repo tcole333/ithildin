@@ -17,7 +17,7 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | `query_michigan.py` | MI | LARA portal API (Cloudflare WAF) | Node.js browser helper | Entities, officers via browser bypass |
 | `query_newjersey.py` | NJ | HTML form scraping | None | Name/ID search only (no officers in free portal) |
 | `query_massachusetts.py` | MA | ASP.NET WebForms (Imperva WAF) | Node.js browser helper | Entity, officers, agent, name changes |
-| `query_nevada.py` | NV | SilverFlume portal (Incapsula WAF) | Node.js browser helper | Officers, agents, stock info, filing history |
+| `query_nevada.py` | NV | SilverFlume portal (Incapsula WAF) | Playwright/Chrome browser helper | Officers, agents, filing history, name history |
 | `query_wyoming.py` | WY | WyoBiz ASP.NET (F5 WAF + CAPTCHA) | Node.js browser helper | Key crypto-LLC state; parties, agents, filings |
 | `query_tennessee_corps.py` | TN | TNCaB portal (Cloudflare Turnstile) | Node.js browser helper | Officers, agents, filings, standing |
 | `query_puertorico.py` | PR | REST API (rceapi.estado.pr.gov) | None | Act 60 entities; officers, agents, articles, filings |
@@ -105,6 +105,23 @@ ingest-batch "QUERY"          # Same as ingest-search (naming varies)
 | **Node.js browser helper** | query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
 | **MCP Playwright** | query_california (WAF bypass), ingest_maryland (CAPTCHA) |
 | **Manual CAPTCHA** | ingest_maryland (reCAPTCHA v2 on first search), ingest_ohio (cf_clearance cookie) |
+
+Nevada SilverFlume uses session-backed entity and history pages behind
+Incapsula. Verify the local runtime before searching, and warm the persistent
+browser session if the portal presents a challenge:
+
+```bash
+uv run python tools/query_nevada.py runtime-check
+uv run python tools/query_nevada.py warmup
+uv run python tools/query_nevada.py probe --output /tmp/nv-probe.json
+uv run python tools/query_nevada.py search "APOLLO" --limit 25 --output /tmp/nv-search.json
+uv run python tools/query_nevada.py entity E0125332010-5 --output /tmp/nv-entity.json
+```
+
+The helper requires Node.js, the `playwright` or `playwright-core` package, and
+Google Chrome by default. `runtime-check` reports actionable installation errors
+without opening a browser. Set `NV_BROWSER_CHANNEL=chromium` only after installing
+the Playwright browser with `npx playwright install chromium`.
 
 ## Known Quirks
 
