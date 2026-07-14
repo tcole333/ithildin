@@ -46,9 +46,11 @@ uv run python tools/query_edgar.py filings 0001411494 --form "DEF 14A"
 # Insider transactions (Forms 3/4/5)
 uv run python tools/query_edgar.py insider 0001411494 --limit 30
 
-# Fetch and read filing content (HTML stripped to text)
+# Fetch and read filing content (table-aware HTML extraction)
 uv run python tools/query_edgar.py read "https://www.sec.gov/Archives/edgar/data/..."
 uv run python tools/query_edgar.py read "https://www.sec.gov/Archives/edgar/data/..." --lines 200
+uv run python tools/query_edgar.py read "https://www.sec.gov/Archives/edgar/data/..." --find "Malcolm Scott Macintyre" --context 3
+uv run python tools/query_edgar.py read "https://www.sec.gov/Archives/edgar/data/..." --output "$WORKDIR/filing.json"
 
 # Extract structured sections from 10-K/10-Q (uses edgartools)
 uv run python tools/query_edgar.py sections PLTR --section mda
@@ -62,6 +64,8 @@ uv run python tools/query_edgar.py sections PLTR --form 10-Q --section balance
 - EFTS search ignores the `size` param server-side (returns up to 100); the tool slices client-side.
 - `--sort date` and `--sort date-asc` are client-side sorts on the returned results.
 - `sections` command requires the `edgartools` package.
+- `read` previews 500 lines by default. Use repeatable `--find` for late-file matches or `--output` for the complete extracted text, including table footnotes.
+- Direct filing retrieval uses declared SEC identity headers, bounded retries, and a 25 MB response limit. If an individual official Archive document returns 403, the tool makes one bounded attempt to extract that document from the accession's official complete-submission `.txt` file. It never uses this fallback for 429 rate-control responses or non-SEC hosts.
 
 ## financial_ratios.py — Ratio Analysis
 

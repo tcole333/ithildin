@@ -35,13 +35,17 @@ Usage:
 """
 
 import argparse
+import gzip
 import html
 import json
+import os
 import re
 import sys
 import time
 import xml.etree.ElementTree as ET
-from urllib.parse import urlencode, quote_plus
+import zlib
+from html.parser import HTMLParser
+from urllib.parse import urlencode, quote_plus, urlparse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -69,14 +73,73 @@ USER_AGENT = "OSINT-Research osint-research@proton.me"
 # Rate limiting
 _last_request = 0.0
 MIN_INTERVAL = 0.11  # 10 req/sec max
+MAX_FILING_BYTES = 25 * 1024 * 1024
+MAX_REQUEST_ATTEMPTS = 3
+_TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
 
 
-def _request(url, params=None, accept="application/json"):
-    """Make a rate-limited request to SEC. Returns parsed JSON or raw bytes."""
+class SecRequestError(RuntimeError):
+    """A bounded SEC retrieval failed after applying request policy."""
+
+    def __init__(self, message, *, url, status=None):
+        super().__init__(message)
+        self.url = url
+        self.status = status
+
+
+def _wait_for_request_slot():
+    """Apply the shared SEC fair-access request interval."""
     global _last_request
     elapsed = time.time() - _last_request
     if elapsed < MIN_INTERVAL:
         time.sleep(MIN_INTERVAL - elapsed)
+
+
+def _decode_response_body(raw, content_encoding, max_bytes):
+    """Decode supported HTTP compression and enforce the expanded-size cap."""
+    encoding = (content_encoding or "").split(",", 1)[0].strip().casefold()
+    try:
+        if encoding == "gzip":
+            raw = gzip.decompress(raw)
+        elif encoding == "deflate":
+            try:
+                raw = zlib.decompress(raw)
+            except zlib.error:
+                raw = zlib.decompress(raw, -zlib.MAX_WBITS)
+    except (OSError, zlib.error) as error:
+        raise SecRequestError(
+            f"SEC returned invalid {encoding} content: {error}", url="<response>"
+        ) from error
+    if max_bytes is not None and len(raw) > max_bytes:
+        raise SecRequestError(
+            f"SEC response exceeded the {max_bytes:,}-byte safety limit",
+            url="<response>",
+        )
+    return raw
+
+
+def _retry_delay(error, attempt):
+    """Return a bounded Retry-After/backoff delay for a transient response."""
+    retry_after = error.headers.get("Retry-After") if error.headers else None
+    try:
+        return min(max(float(retry_after), MIN_INTERVAL), 5.0)
+    except (TypeError, ValueError):
+        return min(0.5 * (2 ** attempt), 5.0)
+
+
+def _request(
+    url,
+    params=None,
+    accept="application/json",
+    *,
+    max_bytes=None,
+    raise_errors=False,
+    max_attempts=MAX_REQUEST_ATTEMPTS,
+):
+    """Make a compliant, bounded SEC request. Returns parsed JSON or raw bytes."""
+    global _last_request
+    if max_attempts < 1:
+        raise ValueError("max_attempts must be positive")
 
     if params:
         url += "?" + urlencode(params, doseq=True)
@@ -84,29 +147,67 @@ def _request(url, params=None, accept="application/json"):
     headers = {
         "User-Agent": USER_AGENT,
         "Accept": accept,
+        "Accept-Encoding": "gzip, deflate",
     }
 
-    req = Request(url, headers=headers)
-    try:
-        with urlopen(req, timeout=30) as resp:
+    for attempt in range(max_attempts):
+        _wait_for_request_slot()
+        req = Request(url, headers=headers)
+        try:
+            with urlopen(req, timeout=30) as resp:
+                _last_request = time.time()
+                read_limit = max_bytes + 1 if max_bytes is not None else None
+                raw = resp.read(read_limit)
+                if max_bytes is not None and len(raw) > max_bytes:
+                    raise SecRequestError(
+                        f"SEC response exceeded the {max_bytes:,}-byte safety limit",
+                        url=url,
+                    )
+                raw = _decode_response_body(
+                    raw, resp.headers.get("Content-Encoding", ""), max_bytes
+                )
+                content_type = resp.headers.get("Content-Type", "")
+                if accept == "application/json" or "json" in content_type:
+                    return json.loads(raw.decode())
+                return raw
+        except HTTPError as error:
             _last_request = time.time()
-            raw = resp.read()
-            content_type = resp.headers.get("Content-Type", "")
-            if accept == "application/json" or "json" in content_type:
-                return json.loads(raw.decode())
-            return raw
-    except HTTPError as e:
-        if e.code == 403:
-            print("ERROR: 403 Forbidden — SEC requires User-Agent with contact info", file=sys.stderr)
-        elif e.code == 404:
-            print(f"ERROR: 404 Not Found — {url}", file=sys.stderr)
-        else:
-            body = e.read().decode()[:500]
-            print(f"ERROR: HTTP {e.code} from SEC: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        print(f"ERROR: Cannot reach SEC: {e.reason}", file=sys.stderr)
-        return None
+            if error.code in _TRANSIENT_HTTP_STATUSES and attempt + 1 < max_attempts:
+                time.sleep(_retry_delay(error, attempt))
+                continue
+            if error.code == 403:
+                message = (
+                    "403 Forbidden from SEC despite the declared User-Agent; "
+                    "check fair-access throttling before retrying"
+                )
+            elif error.code == 404:
+                message = f"404 Not Found — {url}"
+            else:
+                body = error.read().decode(errors="replace")[:500]
+                message = f"HTTP {error.code} from SEC: {body}"
+            wrapped = SecRequestError(message, url=url, status=error.code)
+            if raise_errors:
+                raise wrapped from error
+            print(f"ERROR: {message}", file=sys.stderr)
+            return None
+        except URLError as error:
+            _last_request = time.time()
+            if attempt + 1 < max_attempts:
+                time.sleep(min(0.5 * (2 ** attempt), 5.0))
+                continue
+            message = f"Cannot reach SEC: {error.reason}"
+            wrapped = SecRequestError(message, url=url)
+            if raise_errors:
+                raise wrapped from error
+            print(f"ERROR: {message}", file=sys.stderr)
+            return None
+        except SecRequestError:
+            if raise_errors:
+                raise
+            error = sys.exc_info()[1]
+            print(f"ERROR: {error}", file=sys.stderr)
+            return None
+    return None
 
 
 def _filing_url(cik, adsh, doc_name=""):
@@ -120,24 +221,234 @@ def _filing_url(cik, adsh, doc_name=""):
     return ""
 
 
+class _FilingHTMLTextExtractor(HTMLParser):
+    """Collect filing text while retaining table cells and footnote markers."""
+
+    _SKIP_TAGS = {"script", "style", "noscript"}
+    _BLOCK_TAGS = {
+        "address", "article", "blockquote", "div", "footer", "h1", "h2",
+        "h3", "h4", "h5", "h6", "header", "li", "p", "pre", "section",
+        "table", "tr",
+    }
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self.skip_depth = 0
+
+    def _separator(self, value):
+        if self.parts and not self.parts[-1].endswith(value):
+            self.parts.append(value)
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.casefold()
+        if tag in self._SKIP_TAGS:
+            self.skip_depth += 1
+            return
+        if self.skip_depth:
+            return
+        if tag == "br":
+            self._separator("\n")
+        elif tag in self._BLOCK_TAGS:
+            self._separator("\n")
+
+    def handle_endtag(self, tag):
+        tag = tag.casefold()
+        if tag in self._SKIP_TAGS:
+            self.skip_depth = max(0, self.skip_depth - 1)
+            return
+        if self.skip_depth:
+            return
+        if tag in {"td", "th"}:
+            self._separator("\t")
+        elif tag in self._BLOCK_TAGS:
+            self._separator("\n")
+
+    def handle_data(self, data):
+        if not self.skip_depth and data:
+            self.parts.append(data)
+
+
 def _strip_html(text):
-    """Strip HTML tags and decode entities. Simple but effective for SEC filings."""
-    # Remove script/style blocks
-    text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', text, flags=re.DOTALL | re.IGNORECASE)
-    # Remove HTML comments
-    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
-    # Replace block elements with newlines
-    text = re.sub(r'<(?:br|p|div|tr|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
-    # Remove remaining tags
-    text = re.sub(r'<[^>]+>', '', text)
-    # Decode HTML entities
-    text = html.unescape(text)
-    # Collapse whitespace
-    text = re.sub(r'[ \t]+', ' ', text)
-    text = re.sub(r'\n\s*\n', '\n\n', text)
-    # Strip leading/trailing whitespace per line
-    lines = [line.strip() for line in text.split('\n')]
-    return '\n'.join(lines)
+    """Extract complete readable HTML text, including table footnotes."""
+    parser = _FilingHTMLTextExtractor()
+    parser.feed(text)
+    parser.close()
+    extracted = html.unescape("".join(parser.parts)).replace("\xa0", " ")
+    lines = []
+    previous_blank = True
+    for raw_line in extracted.splitlines():
+        line = re.sub(r"[ \t\f\v]+", " ", raw_line).strip()
+        if line:
+            lines.append(line)
+            previous_blank = False
+        elif not previous_blank:
+            lines.append("")
+            previous_blank = True
+    while lines and not lines[-1]:
+        lines.pop()
+    return "\n".join(lines)
+
+
+def _complete_submission_location(url):
+    """Return the official complete-submission URL and requested filename."""
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in {"sec.gov", "www.sec.gov"}:
+        return None
+    parts = parsed.path.split("/")
+    if len(parts) != 7 or [part.casefold() for part in parts[1:4]] != [
+        "archives", "edgar", "data"
+    ]:
+        return None
+    _empty, _archives, _edgar, _data, cik, accession, filename, *extra = parts
+    if extra or not cik.isdigit() or not re.fullmatch(r"\d{18}", accession):
+        return None
+    if not filename or filename.casefold().endswith(".txt"):
+        return None
+    dashed_accession = f"{accession[:10]}-{accession[10:12]}-{accession[12:]}"
+    submission_url = (
+        f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/"
+        f"{dashed_accession}.txt"
+    )
+    return submission_url, filename
+
+
+def _extract_submission_document(data, filename):
+    """Extract one named document from an SEC complete-submission SGML file."""
+    submission = data.decode("utf-8", errors="replace")
+    for match in re.finditer(r"(?is)<DOCUMENT>(.*?)</DOCUMENT>", submission):
+        block = match.group(1)
+        filename_match = re.search(r"(?im)^<FILENAME>\s*([^\r\n<]+)", block)
+        if not filename_match or filename_match.group(1).strip().casefold() != filename.casefold():
+            continue
+        text_match = re.search(r"(?is)<TEXT>\s*(.*?)(?:</TEXT>|$)", block)
+        if not text_match:
+            break
+        return text_match.group(1).encode("utf-8")
+    raise SecRequestError(
+        f"Complete submission did not contain requested document {filename!r}",
+        url=filename,
+    )
+
+
+def _fetch_filing_document(url, *, max_bytes=MAX_FILING_BYTES):
+    """Fetch a filing, using its official complete submission after direct 403."""
+    try:
+        data = _request(
+            url,
+            accept="text/html,application/xhtml+xml,text/plain,application/xml",
+            max_bytes=max_bytes,
+            raise_errors=True,
+        )
+        return data, "http"
+    except SecRequestError as error:
+        location = _complete_submission_location(url)
+        if error.status != 403 or not location:
+            raise
+        submission_url, filename = location
+        try:
+            submission = _request(
+                submission_url,
+                accept="text/plain",
+                max_bytes=max_bytes,
+                raise_errors=True,
+            )
+            return _extract_submission_document(submission, filename), "submission-text"
+        except SecRequestError as fallback_error:
+            raise SecRequestError(
+                f"Direct filing request failed ({error}); complete-submission fallback "
+                f"also failed ({fallback_error})",
+                url=url,
+                status=error.status,
+            ) from fallback_error
+
+
+def _extract_document_text(data):
+    """Decode a fetched filing without discarding table or footnote text."""
+    text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else str(data)
+    stripped = text.lstrip()
+    if stripped.startswith("<?xml") or stripped.startswith("<XML>"):
+        text = re.sub(r"<[^>]+>", " ", text)
+        text = html.unescape(text)
+        return re.sub(r"[ \t]+", " ", text)
+    if re.search(r"<(?:html|body|table|div|p)\b", text[:5000], re.IGNORECASE):
+        return _strip_html(text)
+    return text
+
+
+def _line_matches(lines, terms, *, context=2, max_matches=20):
+    """Return bounded line-context matches from the complete extracted text."""
+    matches = []
+    for term in terms or []:
+        needle = term.casefold()
+        for index, line in enumerate(lines):
+            if needle not in line.casefold():
+                continue
+            start = max(0, index - context)
+            end = min(len(lines), index + context + 1)
+            matches.append({
+                "term": term,
+                "line": index + 1,
+                "context": [
+                    {"line": offset + 1, "text": lines[offset]}
+                    for offset in range(start, end)
+                ],
+            })
+            if len(matches) >= max_matches:
+                return matches
+    return matches
+
+
+def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
+    """Write full filing text or display a bounded preview/match context."""
+    if args.lines < 1:
+        raise ValueError("--lines must be positive")
+    context = getattr(args, "context", 2)
+    max_matches = getattr(args, "max_matches", 20)
+    if context < 0 or max_matches < 1:
+        raise ValueError("--context must be non-negative and --max-matches positive")
+    lines = text.splitlines()
+    matches = _line_matches(
+        lines,
+        getattr(args, "find", None),
+        context=context,
+        max_matches=max_matches,
+    )
+    result = {
+        "title": title,
+        "url": url,
+        "retrieval": retrieval,
+        "characters": len(text),
+        "line_count": len(lines),
+        "matches": matches,
+        "text": text,
+    }
+    if write_output(result, args, summary=title):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(result, indent=2, default=str))
+        return
+
+    print(f"─── {title} ({len(text):,} chars; {len(lines):,} lines; {retrieval}) ───")
+    print()
+    if getattr(args, "find", None):
+        if not matches:
+            print(f"No matches for: {', '.join(args.find)}")
+            return
+        for match in matches:
+            print(f"[match {match['term']!r} at line {match['line']}]")
+            for item in match["context"]:
+                marker = ">" if item["line"] == match["line"] else " "
+                print(f"{marker} {item['line']:>6}: {item['text']}")
+            print()
+        if len(matches) >= max_matches:
+            print(f"... match display capped at {max_matches}")
+        return
+
+    for line in lines[:args.lines]:
+        print(line)
+    if len(lines) > args.lines:
+        print(f"\n... ({len(lines) - args.lines} more lines; use --output for full text)")
 
 
 # ─── Commands ────────────────────────────────────────────────────────────────
@@ -743,10 +1054,9 @@ def _get_edgartools_filing(ticker_or_cik, form="10-K", index=0):
 def cmd_read(args):
     """Fetch and display clean, readable text from a SEC filing.
 
-    Uses edgartools for iXBRL-aware text extraction. Falls back to raw HTML
-    stripping for non-standard URLs.
+    Ticker reads use edgartools. URL reads fetch the official document directly
+    and use a table-aware parser so late filing footnotes remain available.
     """
-    # If given a ticker/CIK + form, use edgartools directly
     if hasattr(args, "ticker") and args.ticker:
         try:
             filing, company = _get_edgartools_filing(
@@ -756,70 +1066,35 @@ def cmd_read(args):
                 print(f"ERROR: No {args.form_type or '10-K'} filings found for {args.ticker}", file=sys.stderr)
                 return
             text = filing.text()
-            print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ({len(text):,} chars) ───")
-            print()
-            lines = text.split("\n")
-            for line in lines[:args.lines]:
-                print(line)
-            if len(lines) > args.lines:
-                print(f"\n... ({len(lines) - args.lines} more lines, use --lines {len(lines)} to see all)")
+            _emit_filing_text(
+                text,
+                args,
+                title=f"{filing.form} filed {filing.filing_date} | {company.name}",
+                url=getattr(filing, "homepage_url", None),
+            )
             return
-        except Exception as e:
-            print(f"WARNING: edgartools failed ({e}), falling back to raw fetch", file=sys.stderr)
+        except Exception as error:
+            print(f"ERROR: edgartools failed: {error}", file=sys.stderr)
+            raise SystemExit(2) from error
 
-    # URL-based read: try edgartools first for accession-based URLs, then fall back
     url = args.url if hasattr(args, "url") and args.url else None
     if not url:
         print("ERROR: Provide a URL or use --ticker", file=sys.stderr)
-        return
+        raise SystemExit(2)
 
-    # Try edgartools accession number extraction from URL
     try:
-        import os
-        os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
-        # Extract accession from URL pattern: /data/<CIK>/<ACCESSION>/
-        m = re.search(r"/data/(\d+)/([\d-]+)/", url)
-        if m:
-            cik, accession_raw = m.group(1), m.group(2)
-            from edgar import find
-            company = find(int(cik))
-            if company:
-                filings = company.get_filings()
-                for f in filings[:50]:  # check recent filings
-                    if accession_raw in (f.accession_no or "").replace("-", ""):
-                        text = f.text()
-                        print(f"─── {f.form} filed {f.filing_date} | {company.name} ({len(text):,} chars) ───")
-                        print()
-                        lines = text.split("\n")
-                        for line in lines[:args.lines]:
-                            print(line)
-                        if len(lines) > args.lines:
-                            print(f"\n... ({len(lines) - args.lines} more lines)")
-                        return
-    except Exception as e:
-        print(f"WARNING: edgartools URL parse failed ({e}), falling back to raw fetch", file=sys.stderr)
-
-    # Raw HTML fallback (original implementation)
-    data = _request(url, accept="text/html")
-    if not data:
-        return
-    text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else str(data)
-    if text.strip().startswith("<?xml") or text.strip().startswith("<XML>"):
-        text = re.sub(r'<[^>]+>', ' ', text)
-        text = html.unescape(text)
-    elif "<html" in text.lower()[:500] or "<body" in text.lower()[:500]:
-        text = _strip_html(text)
-    lines = text.split('\n')
-    while lines and not lines[0].strip():
-        lines.pop(0)
-    total_lines = len(lines)
-    show_lines = lines[:args.lines]
-    print(f"─── Filing Content ({total_lines} lines, showing {len(show_lines)}) ───")
-    print()
-    for line in show_lines:
-        print(line)
-    if total_lines > args.lines:
-        print(f"\n... ({total_lines - args.lines} more lines, use --lines {total_lines} to see all)")
+        data, retrieval = _fetch_filing_document(url)
+        text = _extract_document_text(data)
+        _emit_filing_text(
+            text,
+            args,
+            title="Filing Content",
+            url=url,
+            retrieval=retrieval,
+        )
+    except (SecRequestError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2) from error
 
 
 def _get_financial_statement(obj, stmt_type):
@@ -1091,6 +1366,14 @@ def main():
     p.add_argument("--ticker", help="Ticker or CIK (uses edgartools for clean extraction)")
     p.add_argument("--form-type", default="10-K", help="Form type when using --ticker (default: 10-K)")
     p.add_argument("--lines", type=int, default=500, help="Number of lines to show (default: 500)")
+    p.add_argument(
+        "--find",
+        action="append",
+        help="Find text in the complete filing and show bounded context (repeatable)",
+    )
+    p.add_argument("--context", type=int, default=2, help="Context lines around --find matches (default: 2)")
+    p.add_argument("--max-matches", type=int, default=20, help="Maximum --find matches to display (default: 20)")
+    add_output_args(p)
 
     # sections (structured section extraction via edgartools)
     p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text or structured financials)")
