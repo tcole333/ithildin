@@ -26,6 +26,7 @@ except ImportError:
 try:
     from tools.methodology_tracker import (
         add_observation,
+        count_observations,
         get_observation,
         list_observations,
         mark_duplicate,
@@ -35,6 +36,7 @@ try:
 except ImportError:
     from methodology_tracker import (
         add_observation,
+        count_observations,
         get_observation,
         list_observations,
         mark_duplicate,
@@ -63,17 +65,19 @@ def format_description(
 
 def _print_open(limit: int, *, output: str | None = None) -> None:
     observations = list_observations(category="friction", status="open", limit=limit)
+    total = count_observations(category="friction", status="open")
+    scope = f"showing {len(observations)} of {total} open papercuts"
     if write_output(
         observations,
         argparse.Namespace(output=output),
-        summary="open papercuts",
+        summary=scope,
     ):
         return
     if not observations:
         print("No open papercuts")
         return
 
-    print(f"Open papercuts ({len(observations)})")
+    print(f"Open papercuts ({scope})")
     for item in observations:
         print(f"#{item['id']}  {item['description']}")
 

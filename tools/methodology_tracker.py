@@ -112,6 +112,25 @@ def list_observations(category=None, status=None, limit=50, oldest_first=False):
     return [dict(r) for r in rows]
 
 
+def count_observations(category=None, status=None):
+    """Count observations using the same category/status filters as list_observations."""
+    db = get_db()
+    conditions = []
+    params = []
+    if category:
+        conditions.append("category = ?")
+        params.append(category)
+    if status:
+        conditions.append("status = ?")
+        params.append(status)
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    total = db.execute(
+        f"SELECT COUNT(*) FROM methodology_observations {where}", params
+    ).fetchone()[0]
+    db.close()
+    return total
+
+
 def get_observation(obs_id):
     """Get a single observation by ID."""
     db = get_db()
