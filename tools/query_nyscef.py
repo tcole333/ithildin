@@ -48,6 +48,18 @@ HELPER_PATH = Path(__file__).parent / "_nyscef_browser_helper.js"
 HARD_LIMIT = 50
 BASE_URL = "https://iapps.courts.state.ny.us/nyscef"
 
+_UNAVAILABLE_SEARCH_STATUSES = frozenset(
+    {"blocked", "challenged", "error", "failed", "failure", "unavailable"}
+)
+_CHALLENGE_MESSAGE_MARKERS = (
+    "to continue, please check the box below",
+    "captcha",
+    "verify you are human",
+    "checking your browser",
+    "enable javascript and cookies to continue",
+    "cloudflare challenge",
+)
+
 
 def _run_helper(command, payload, timeout=180):
     """Run the NYSCEF browser helper through npx so Playwright is available."""
@@ -163,6 +175,62 @@ def _filter_documents(documents, args):
     return filtered
 
 
+def _normalize_search_response(data):
+    """Mark NYSCEF anti-bot responses as unavailable, not empty searches."""
+    if not isinstance(data, dict):
+        return data
+
+    status = str(data.get("status") or "").strip().lower()
+    challenge_status = str(data.get("challenge_status") or "").strip().lower()
+    message = " ".join(
+        str(data.get(key) or "") for key in ("message", "error")
+    ).lower()
+    challenged = (
+        status == "challenged"
+        or challenge_status == "challenged"
+        or any(marker in message for marker in _CHALLENGE_MESSAGE_MARKERS)
+    )
+    unavailable = (
+        data.get("available") is False
+        or data.get("source_available") is False
+        or status in _UNAVAILABLE_SEARCH_STATUSES
+        or bool(data.get("error"))
+        or challenged
+    )
+    if not unavailable:
+        return data
+
+    normalized = dict(data)
+    normalized["available"] = False
+    normalized["source_available"] = False
+    normalized["status"] = "unavailable"
+    normalized.setdefault("criteria", [])
+    normalized.setdefault("results", [])
+    if challenged:
+        normalized["challenge_status"] = "challenged"
+        normalized.setdefault("reason", "captcha_or_anti_bot_challenge")
+    return normalized
+
+
+def _handle_unavailable_search(data, args, label):
+    """Emit a structured unavailable response before result logging."""
+    if not isinstance(data, dict) or data.get("available") is not False:
+        return False
+
+    detail = data.get("challenge_status") or data.get("status") or "unavailable"
+    if write_output(data, args, summary=f"{label} ({detail})"):
+        return True
+
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, default=str))
+        return True
+
+    message = data.get("message") or data.get("error") or data.get("reason")
+    suffix = f": {message}" if message else ""
+    print(f"{label} unavailable ({detail}){suffix}", file=sys.stderr)
+    return True
+
+
 def _print_search_results(results, criteria):
     if criteria:
         print("Criteria:")
@@ -219,6 +287,10 @@ def cmd_search(args):
         print("Search failed")
         return
 
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF search"):
+        return
+
     results = data.get("results", [])
     log_search(args.query or args.business_name or "[manual]", "nyscef", len(results))
 
@@ -249,6 +321,10 @@ def cmd_case(args):
         print("Case search failed")
         return
 
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF case search"):
+        return
+
     results = data.get("results", [])
     log_search(args.query, "nyscef", len(results))
 
@@ -272,6 +348,10 @@ def cmd_new_cases(args):
     data = _run_helper("new-cases", payload)
     if not data:
         print("New-case search failed")
+        return
+
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF new-cases search"):
         return
 
     results = data.get("results", [])
