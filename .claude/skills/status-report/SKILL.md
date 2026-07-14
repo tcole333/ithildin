@@ -13,7 +13,7 @@ Generate a comprehensive status report of the investigation.
 1. Run `uv run python tools/investigation_context.py show` to display the active investigation profile
 2. Run `uv run python tools/lead_tracker.py stats` to get lead statistics
 3. Run `uv run python tools/findings_tracker.py stats` to get finding statistics
-4. Run `uv run python tools/source_report.py` to check data source availability
+4. Run `uv run python tools/source_report.py report` to check data source availability
 5. Run `uv run python tools/lead_tracker.py list --status open --priority critical --limit 10` for critical leads
 6. Run `uv run python tools/lead_tracker.py list --status open --priority high --limit 10` for high-priority leads
 7. Run `uv run python tools/lead_tracker.py list --status in_progress --limit 10` for in-progress leads

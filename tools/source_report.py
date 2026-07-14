@@ -5,8 +5,9 @@ Data source coverage report for the OSINT investigation platform.
 Lists all available data sources, record counts, and status.
 
 Usage:
-    python tools/source_report.py
-    python tools/source_report.py --json
+    uv run python tools/source_report.py report
+    uv run python tools/source_report.py --json report
+    uv run python tools/source_report.py  # backwards-compatible alias for report
 """
 
 import argparse
@@ -673,6 +674,8 @@ def main():
     parser.add_argument("-j", "--json", action="store_true")
     sub = parser.add_subparsers(dest="command")
 
+    sub.add_parser("report", help="Generate the full data-source coverage report")
+
     # check <source_name>
     check_p = sub.add_parser("check", help="Quick health check for a single source")
     check_p.add_argument("source_name", help="Source name (case-insensitive, partial match)")
@@ -690,6 +693,8 @@ def main():
                 print(f"     {result['note']}")
         return
 
+    # Keep the historical bare invocation as an alias, while giving workflows
+    # an explicit command that cannot be confused with the single-source check.
     sources = generate_report()
 
     if args.json:

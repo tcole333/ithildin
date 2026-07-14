@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from tools import lead_tracker, papercut
@@ -48,6 +50,26 @@ def test_log_list_and_resolve_papercut(papercut_db, monkeypatch, capsys):
     monkeypatch.setattr("sys.argv", ["papercut.py", "--list"])
     papercut.main()
     assert "No open papercuts" in capsys.readouterr().out
+
+
+def test_list_writes_structured_json_output(papercut_db, monkeypatch, capsys, tmp_path):
+    monkeypatch.setattr("sys.argv", ["papercut.py", "Tool emitted a misleading error"])
+    papercut.main()
+    capsys.readouterr()
+
+    output = tmp_path / "papercuts.json"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["papercut.py", "--list", "--limit", "1", "--output", str(output)],
+    )
+    papercut.main()
+
+    payload = json.loads(output.read_text())
+    assert len(payload) == 1
+    assert payload[0]["id"] == 1
+    assert payload[0]["category"] == "friction"
+    assert payload[0]["description"] == "Tool emitted a misleading error"
+    assert capsys.readouterr().out == f"1 results (open papercuts) saved to {output}\n"
 
 
 def test_resolve_requires_resolution(papercut_db, monkeypatch):

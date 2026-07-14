@@ -19,6 +19,11 @@ import os
 import sys
 
 try:
+    from tools.output_util import write_output
+except ImportError:
+    from output_util import write_output
+
+try:
     from tools.methodology_tracker import (
         add_observation,
         get_observation,
@@ -56,8 +61,14 @@ def format_description(
     return " | ".join(parts)
 
 
-def _print_open(limit: int) -> None:
+def _print_open(limit: int, *, output: str | None = None) -> None:
     observations = list_observations(category="friction", status="open", limit=limit)
+    if write_output(
+        observations,
+        argparse.Namespace(output=output),
+        summary="open papercuts",
+    ):
+        return
     if not observations:
         print("No open papercuts")
         return
@@ -89,6 +100,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--target", help="Investigation target")
     parser.add_argument("--list", action="store_true", help="List open papercuts")
     parser.add_argument("--limit", type=int, default=50, help="Maximum items to list")
+    parser.add_argument(
+        "--output",
+        metavar="FILE",
+        help="Write --list results as JSON to FILE (prints a 1-line summary to stdout)",
+    )
     parser.add_argument("--resolve", type=int, metavar="ID", help="Mark a papercut addressed")
     parser.add_argument("--resolution", help="Root-cause fix that addressed the papercut")
     parser.add_argument("--dismiss", type=int, metavar="ID", help="Dismiss a papercut")
@@ -117,9 +133,11 @@ def main() -> None:
             "provide exactly one of MESSAGE, --list, --resolve ID, --dismiss ID, "
             "--duplicate ID, or --promote ID"
         )
+    if args.output and not args.list:
+        parser.error("--output requires --list")
 
     if args.list:
-        _print_open(args.limit)
+        _print_open(args.limit, output=args.output)
         return
 
     if args.resolve is not None:
