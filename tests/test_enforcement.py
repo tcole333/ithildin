@@ -98,6 +98,8 @@ class TestSourceConfidenceCapping:
         finding_id = add_finding(
             "Opaque Source", "s", source_datasets=["dehashed"],
             claim_type="direct_quote", confidence="confirmed", profile_id="epstein",
+            evidence_ids=["DEHASHED:test-record"],
+            source_quotes={"DEHASHED:test-record": {"quote": "Exact source text"}},
         )
         assert self._stored_confidence(db, finding_id) == "medium"
         assert "provenance-opaque source(s): dehashed" in capsys.readouterr().err
@@ -109,6 +111,8 @@ class TestSourceConfidenceCapping:
         finding_id = add_finding(
             "Primary Source", "s", source_datasets=["courtlistener"],
             claim_type="direct_quote", confidence="confirmed", profile_id="epstein",
+            evidence_ids=["COURTLISTENER:test-record"],
+            source_quotes={"COURTLISTENER:test-record": {"quote": "Exact source text"}},
         )
         assert self._stored_confidence(db, finding_id) == "confirmed"
         assert "provenance-opaque" not in capsys.readouterr().err

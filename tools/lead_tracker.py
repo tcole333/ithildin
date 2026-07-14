@@ -893,6 +893,8 @@ def _ensure_schema(db):
         ("findings", "verified_at TIMESTAMP"),
         ("findings", "quality_state TEXT DEFAULT 'unchecked'"),
         ("findings", "confidence_requested TEXT"),
+        ("findings", "event_date_iso TEXT"),
+        ("findings", "date_precision TEXT"),
         # Provenance fields on finding_evidence
         ("finding_evidence", "source_quote TEXT"),               # exact text from source supporting claim
         ("finding_evidence", "source_page TEXT"),                # page/line/section within source
@@ -916,6 +918,9 @@ def _ensure_schema(db):
         ("finding_evidence", "email_sender TEXT"),
         ("finding_evidence", "email_date TEXT"),
         ("finding_evidence", "chain_position INTEGER"),
+        # Composite-key child rows (notably finding_evidence) use record_key
+        # alongside record_id in the shared immutable corrections audit trail.
+        ("corrections", "record_key TEXT"),
         # Investigation profile scoping
         ("leads", "profile_id TEXT"),
         ("findings", "profile_id TEXT"),
@@ -979,6 +984,8 @@ def _ensure_schema(db):
         "CREATE INDEX IF NOT EXISTS idx_findings_agent_run ON findings(agent_run_id)",
         "CREATE INDEX IF NOT EXISTS idx_connections_agent_run ON connections(agent_run_id)",
         "CREATE INDEX IF NOT EXISTS idx_entities_agent_run ON entities(agent_run_id)",
+        "CREATE INDEX IF NOT EXISTS idx_corrections_table_record_key "
+        "ON corrections(table_name, record_id, record_key)",
     ]:
         try:
             db.execute(idx_sql)

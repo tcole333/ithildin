@@ -18,12 +18,15 @@ def _verification_db(monkeypatch, tmp_path):
         """
         CREATE TABLE findings (
             id INTEGER PRIMARY KEY,
+            claim_type TEXT DEFAULT 'inference',
+            source_datasets TEXT DEFAULT '["courtlistener"]',
             verification_status TEXT,
             verified_by TEXT,
             verified_at TEXT
         );
         CREATE TABLE finding_evidence (
             finding_id INTEGER,
+            evidence_type TEXT DEFAULT 'ref',
             evidence_ref TEXT,
             source_quote TEXT
         );
@@ -66,12 +69,12 @@ def test_verify_rejects_evidence_without_source_quote(monkeypatch, tmp_path):
     db.execute("INSERT INTO findings (id, verification_status) VALUES (1, 'unverified')")
     db.execute(
         "INSERT INTO finding_evidence (finding_id, evidence_ref, source_quote) VALUES (1, ?, NULL)",
-        ("primary-record.pdf",),
+        ("COURTLISTENER:primary-record",),
     )
     db.commit()
     db.close()
 
-    with pytest.raises(ValueError, match="missing source_quote.*primary-record.pdf"):
+    with pytest.raises(ValueError, match="missing source_quote.*COURTLISTENER:primary-record"):
         verify_finding(1, verified_by="test")
 
     db = sqlite3.connect(db_path)
@@ -88,8 +91,8 @@ def test_verify_accepts_only_fully_quoted_evidence(monkeypatch, tmp_path):
     db.executemany(
         "INSERT INTO finding_evidence (finding_id, evidence_ref, source_quote) VALUES (2, ?, ?)",
         [
-            ("record-a.pdf", "Exact source language A"),
-            ("record-b.pdf", "Exact source language B"),
+            ("COURTLISTENER:record-a", "Exact source language A"),
+            ("COURTLISTENER:record-b", "Exact source language B"),
         ],
     )
     db.commit()

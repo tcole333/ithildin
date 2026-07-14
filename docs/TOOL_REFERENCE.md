@@ -210,6 +210,46 @@ python tools/findings_tracker.py search "gates foundation" --limit 20 --output /
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
 
+New finding writes require `--sources` to contain supported source tokens. A
+`direct_quote` also requires at least one `--evidence` reference and a non-empty
+`--source-quote` for every reference. HTTP(S) references are stored as `url`;
+canonical references such as `CourtListener:docket/69737684` remain `ref` even
+when their source-specific key contains `/`. Explicit/path-like local file
+references must exist. Relative file references resolve from the repository
+root so their meaning does not depend on the caller's working directory.
+
+### Audited Finding Evidence CRUD
+```bash
+# Add evidence (direct_quote findings require --source-quote)
+uv run python tools/findings_tracker.py evidence-add 42 \
+  --ref CourtListener:docket/69737684 \
+  --source-quote "Exact language from the filing" \
+  --source-page "p. 12" --reason "Attach primary filing" --by analyst
+
+# Correct one evidence field; evidence_ref changes automatically reclassify its type
+uv run python tools/findings_tracker.py evidence-correct 42 \
+  --ref CourtListener:docket/69737684 --field source_quote \
+  --value "Corrected exact language" --reason "Fix transcription" --by analyst
+
+# Delete evidence while retaining its full pre-delete audit snapshot
+uv run python tools/findings_tracker.py evidence-delete 42 \
+  --ref CourtListener:docket/69737684 --reason "Superseded by certified filing" --by analyst
+
+# Report legacy violations before correction; this never modifies finding/evidence rows
+uv run python tools/findings_tracker.py evidence-audit --profile epstein --output /tmp/evidence-audit.json
+uv run python tools/findings_tracker.py evidence-audit --finding-id 42
+
+# Inspect the immutable correction trail for one composite-key evidence row
+uv run python tools/findings_tracker.py audit 42 --table finding_evidence \
+  --record-key CourtListener:docket/69737684
+```
+
+Evidence mutations are atomic and invalidate an already verified finding back
+to `unverified`, requiring fresh review. Quote spans are checked against locally
+resolvable EFTA OCR and text files. Remote URLs, binary files, and canonical
+references without a local resolver remain usable; `evidence-audit` counts
+those spans as `unchecked` rather than treating them as mismatches.
+
 ### Audit & Verification
 ```bash
 python tools/findings_tracker.py unverified             # List findings needing human review
@@ -218,6 +258,9 @@ python tools/findings_tracker.py verify 42               # Mark as human-verifie
 python tools/findings_tracker.py dispute 42 --reason "Quote doesn't match source"
 python tools/findings_tracker.py retract 42 --reason "Hallucinated by agent"  # Cascades to connections
 python tools/findings_tracker.py correct 42 --field summary --value "New text" --reason "Amount was 15M not 18M"
+# source_datasets corrections must be a JSON array of supported tokens
+uv run python tools/findings_tracker.py correct 42 --field source_datasets \
+  --value '["courtlistener","registry"]' --reason "Normalize provenance tokens"
 python tools/findings_tracker.py audit 42 --table findings  # Show correction history
 ```
 
