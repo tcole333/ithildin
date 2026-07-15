@@ -1315,6 +1315,20 @@ SELECT e.name, r.person_name, r.role FROM entities e JOIN entity_roles r ON e.id
 SELECT e.name FROM entities e JOIN entity_addresses a ON e.id = a.entity_id WHERE a.address LIKE '%ADDRESS%';
 ```
 
+Use the tracker for reviewed metadata corrections. The field whitelist excludes
+`name`, IDs, creation metadata, and agent provenance; identity changes belong in
+the alias and merge workflows below. Every effective correction requires a
+reason and appends the old and new values to `corrections`.
+
+```bash
+uv run python tools/entity_tracker.py lookup --name "ENTITY"
+uv run python tools/entity_tracker.py show 3720 --output "$WORKDIR/entity-3720.json"
+uv run python tools/entity_tracker.py correct 3720 --field notes \
+  --value "Reviewed canonical notes" \
+  --reason "Replace stale summary after primary-evidence review" --by analyst
+uv run python tools/findings_tracker.py audit 3720 --table entities --json
+```
+
 ### Entity Dedup / Name Aliases
 ```bash
 # Seed known person/entity variant aliases
