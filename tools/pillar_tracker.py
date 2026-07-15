@@ -36,8 +36,7 @@ import math
 import re
 import sqlite3
 import sys
-from collections import Counter, defaultdict
-from pathlib import Path
+from collections import defaultdict
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -1353,12 +1352,12 @@ def main():
         if args.dry_run:
             print("[DRY RUN — no changes will be saved]\n")
         stats = bootstrap(dry_run=args.dry_run)
-        print(f"\nBootstrap results:")
+        print("\nBootstrap results:")
         print(f"  Persons created: {stats['persons_created']}")
         print(f"  Career arcs created: {stats['arcs_created']}")
         print(f"  Arcs skipped (duplicate/unmatched): {stats['arcs_skipped']}")
         if stats["unmatched"][:10]:
-            print(f"\n  Unmatched connections (first 10):")
+            print("\n  Unmatched connections (first 10):")
             for u in stats["unmatched"][:10]:
                 print(f"    {u}")
         if args.dry_run:
@@ -1367,7 +1366,7 @@ def main():
     elif args.command == "rebootstrap":
         print("Rebootstrap: Clearing and re-mining with alias-aware resolution...")
         stats = rebootstrap()
-        print(f"\nRebootstrap results:")
+        print("\nRebootstrap results:")
         print(f"  Persons created: {stats['persons_created']}")
         print(f"  Career arcs created: {stats['arcs_created']}")
         print(f"  Arcs skipped: {stats['arcs_skipped']}")
@@ -1522,11 +1521,11 @@ def main():
         print(f"  Career arcs:    {s['career_arcs']}")
         print(f"  Pillar events:  {s['pillar_events']}")
         print(f"  Pillar scores:  {s['pillar_scores']}")
-        print(f"\n  By type:")
+        print("\n  By type:")
         for t, c in s["by_type"].items():
             print(f"    {t:<20} {c}")
         if s["top_institutions"]:
-            print(f"\n  Top institutions by arcs:")
+            print("\n  Top institutions by arcs:")
             for inst in s["top_institutions"]:
                 print(f"    {inst['name']:<40} {inst['arcs']} arcs")
 
