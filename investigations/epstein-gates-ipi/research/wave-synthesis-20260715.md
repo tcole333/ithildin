@@ -95,10 +95,10 @@ outgoing grants** — a pure operating recipient, **not a pass-through or condui
 that removes circular-flow and re-granting from the table. Two red-flag refutations:
 the **Greentree Foundation** $122,915 "contractor" line is an IPI→Greentree
 *venue/vendor* payment (modeled as `supplies`, connection 6483), the opposite of a
-circular grant; and the Epstein inflows are **donor-side-invisible** — Gratitude
-America Ltd's 990 (EIN 66-0789697) lists 21 grants, **none to IPI** — so KPMG's
-~$650K+$150K sits only on IPI's books (a transparency gap, not proof of
-concealment; lead 70056 to name the actual donor vehicles). Revenue **peaked in
+circular grant. (This section originally reported the Epstein inflows as
+"donor-side-invisible" — that finding, 13524, was **wrong and has been superseded**
+by wave-2 lead 70056; see §W2 below. Gratitude America's 990-PFs *do* report IPI;
+the apparent absence was a local-index coverage gap.) Revenue **peaked in
 2014** ($11.87M, the Gates-launch year) with expenses exceeding revenue most
 years. The donor-concentration note resolves toward **state money, not Gates**: in
 2016 a single foreign government supplied ~62% (~$5.24M, >4× Gates that year).
@@ -107,6 +107,72 @@ officers between funders and IPI. Open threads: Rød-Larsen's 2012–2019 Part V
 compensation (lead 70054, needs 990 PDFs), the FAFO Institute's overlap with
 Norway's funding and Rød-Larsen's Norwegian network, and deconfliction of a second
 "International Peace Institute" EIN (42-1311908) seen in the FTS index.
+
+## §W2 — Wave 2 (grant reconciliation, consultant channel, Rød-Larsen entanglement)
+
+A second orchestrated wave recovered four stale critical leads the crashed
+session had locked, and pursued them plus the two tier-2 follow-ons. Five Codex
+tier-1 agents + one Claude tier-2 network agent; ~40 net-new findings imported.
+
+- **The controlling grant documents are confirmed absent, not merely unlocated
+  (lead 68417, findings 13658–13664).** After 215 corpus queries the $2.5M→$5.5M
+  amendment, the January 31 2014 approved narrative/milestones/budget, and all four
+  required progress/final reports are absent from the released corpus — and the
+  recovered OPP1096058 execution package is a *blank budget-narrative template* that
+  references but does not contain the Jan-31 exhibits. Corpus search is exhausted; a
+  `physical_records` request to Gates/IPI for the native grant-management files is
+  the only remaining path (logged as a human action).
+
+- **The consultant channel is Mark Shaw / STATT — security-adjacent, not
+  intelligence (lead 68419, findings 13679–13685; connections 6489–6491).** Mark
+  Shaw is fully identified (STATT Consulting director, Hong Kong co. 1474694; ten
+  years at UNODC; now executive director of the Global Initiative Against
+  Transnational Organized Crime). STATT is a **government-facing research and
+  strategic-communications consultancy** with documented UK Foreign Office and
+  Australian border-security (anti-people-smuggling) contracts — the best match for
+  the $16,408 Nigeria/Somalia consultant line. Discipline held: intelligence-agency
+  status and tasking were **explicitly not established**, and the Sahan/STATT
+  conflation was refuted. No invoice-level payee exists in the corpus.
+
+- **Gates-specific restricted-fund actuals are not recoverable from public records
+  (lead 68421, findings 13716–13719).** IPI's org-wide restricted roll-forward
+  reconciles exactly ($4.398M open + $12.132M recognized − $13.485M released −
+  $95K other = $2.951M close) but is not a Gates subledger; no annual release is
+  attributable to Gates, and the audits/990s never name Gates or polio. Attributing
+  any IPI expense to Gates money would violate the fungibility discipline. The two
+  $256,968 grants are INV-009501 (2019) and INV-016206 (2020).
+
+- **The Epstein donor vehicles are named, and finding 13524 was corrected (lead
+  70056, findings 13703–13712; connection 6492).** KPMG's $650K came from exactly
+  two Epstein-controlled vehicles: **Enhanced Education** (= J. Epstein Virgin
+  Islands Foundation, EIN 66-0585379) $125K in 2011, and **Gratitude America Ltd**
+  (EIN 66-0789697) $525K across 2017–2019. Epstein directly ordered the payments
+  ("rich, please send 150k to ipi. from gratitude"). Primary 990-PFs (SHA-256
+  verified) show Gratitude *did* report IPI ($375K/2017, $150K/2019) — **superseding
+  the trace-trace finding 13524**, whose negative was a local-index gap. C.O.U.Q.,
+  Financial Trust, and the other 56 KPMG-scope entities are excluded as payors.
+
+- **Rød-Larsen's salary was not Gates-driven, but a personal-benefit layer is new
+  (lead 70054, findings 13720–13727).** Full 2012–2019 Form 990 compensation ledger
+  (SHA-256 verified): $514K–$598K/yr, with **no upward break** at the Gates grants
+  (comp fell 14% in the peak 2014 year; Gates-pay↔comp correlation −0.695). The
+  major discovery is an Epstein→Rød-Larsen personal-benefit layer **outside IPI's
+  books and outside KPMG's ledger scope**: a **$130,000 personal loan** (2013), an
+  **Oslo apartment bought at "less than half its value"** with a contested NOK 4M
+  Epstein contribution, plus monogrammed shoes, children's computers, 2018 Apple
+  Watches ("Gift from Jeffrey Epstein"), a home-health invoice paid "from jee
+  personal," and Paris/NYC/island hospitality. All held under strict money-status
+  discipline. This materially strengthens the allocation-and-access broker model:
+  Epstein personally financially entangled the IPI President.
+
+- **Network structure (Claude tier-2, findings 13602–13603; connections
+  6487–6488; leads 70553, 70555).** The 22-edge graph was three disconnected
+  components until the two missing IPI-official edges (Rød-Larsen↔IPI,
+  Pfanzelter↔IPI) were added. Secondary bridges (Epstein excluded per config):
+  **Rød-Larsen, Ruemmler, Southern Trust** — all articulation points. Top
+  under-documented structural nodes: Pfanzelter (lead 70553), the Ariane↔EdR hole
+  (lead 70555). It also surfaced a real `graph_tools` profile-scope bug (flagged as
+  a platform task) that inflated the graph 22→97 edges.
 
 ## Complementary work from the parallel session (not this wave)
 
@@ -118,11 +184,17 @@ Thiel / Sunstein / Kerrey** (~13391), plus lead 68823 document-routing.
 
 ## Still pending
 
-- Fold sections 1–7 above into `master.md` once the parallel session's rewrite
-  settles (avoid an edit collision on the live file).
-- Pursue the tier-2 open leads: Rød-Larsen 2012–2019 compensation (70054),
-  Epstein donor-vehicle identification (70056), and the FAFO Institute Norwegian-
-  network overlap.
+- Fold sections 1–7 and §W2 above into `master.md` once the parallel session's
+  rewrite settles (avoid an edit collision on the live file). Note the loan /
+  half-price-apartment / donor-vehicle material is substantive enough to warrant
+  its own master.md subsections.
+- Open leads worth a wave 3: **68823** document-routing hunch (8 findings already
+  attached from the crashed session, never completed), **68431** Norwegian/public-
+  funder accounting (not yet pursued), **70553** Pfanzelter (0 findings, a bridge),
+  **70555** Ariane↔EdR edge, plus the FAFO Institute Norwegian-network overlap and
+  the second "International Peace Institute" EIN (42-1311908) deconfliction.
+- Records-access (human): the Gates/IPI grant-management files for OPP1096058 /
+  OPP1100586 (logged), and the CIA FOIA for the Ruemmler medal (logged wave 1).
 
 *Note: `tools/query_990.py cross-ref` hangs indefinitely — it stalled and killed
 the first tier-2 agent, and left 3-day zombie processes (since reaped). Use
