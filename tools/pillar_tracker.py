@@ -1030,6 +1030,7 @@ def seed():
     db = get_pillar_db()
     created = 0
     skipped = 0
+    invalid = 0
 
     for entry in pillars:
         if isinstance(entry, dict):
@@ -1045,6 +1046,15 @@ def seed():
             # Legacy tuple format
             name, ptype, sub_type, status, founded, dissolved, jurisdiction, significance = entry
 
+        if ptype not in VALID_PILLAR_TYPES:
+            print(f"WARNING: seed pillar '{name}': invalid pillar_type '{ptype}'. Valid: {VALID_PILLAR_TYPES}")
+            invalid += 1
+            continue
+        if status not in VALID_STATUSES:
+            print(f"WARNING: seed pillar '{name}': invalid status '{status}'. Valid: {VALID_STATUSES}")
+            invalid += 1
+            continue
+
         try:
             db.execute("""
                 INSERT INTO institutional_pillars
@@ -1052,12 +1062,21 @@ def seed():
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """, (name, ptype, sub_type, status, founded, dissolved, jurisdiction, significance))
             created += 1
-        except sqlite3.IntegrityError:
-            skipped += 1
+        except sqlite3.IntegrityError as exc:
+            # Only a UNIQUE violation on the name is a true dedup; anything else
+            # (CHECK, NOT NULL) means the seed entry is bad and must be surfaced.
+            if "UNIQUE constraint failed" in str(exc):
+                skipped += 1
+            else:
+                print(f"WARNING: seed pillar '{name}' rejected: {exc}")
+                invalid += 1
 
     db.commit()
     db.close()
-    print(f"Seed complete: {created} created, {skipped} already existed")
+    summary = f"Seed complete: {created} created, {skipped} already existed"
+    if invalid:
+        summary += f", {invalid} invalid (see warnings above)"
+    print(summary)
     return created
 
 
