@@ -13,6 +13,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `web_search` | WebSearch, WebFetch | Open web research |
 | `kabass` | ingest_kabasshouse.py | **PRIMARY Epstein corpus** — 1.42M OCR'd docs (DOJ DS1-12 + FBI + House) + structured layers. Same EFTA page in kabass + doj_vol11/lmsband = one source, not corroboration |
 | `fbi` | ingest_fbi_files.py | FBI release (8,150 docs) + named exhibits (Flight Log, Contact Book) |
+| `efta` | EFTA evidence references | Underlying DOJ-released EFTA document; copies or re-OCRs in kabass/LMSBAND/DOJ corpora remain one source, not corroboration |
 | `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus (fallback — subset of kabass) |
 | `duggan` | _(retired — tool removed 2026-06-29)_ | Duggan USA corpus — historical source name only; 42 findings cite it |
 | `lmsband` | query_lmsband.py | LMSBAND document corpus |
@@ -20,6 +21,8 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fec` | query_fec.py | FEC campaign finance |
 | `edgar` | query_edgar.py | SEC EDGAR filings |
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
+| `supreme_court` | supremecourt.gov | Official U.S. Supreme Court dockets, filings, and opinions |
+| `finra` | query_finra.py | FINRA BrokerCheck records |
 | `nyscef` | query_nyscef.py | NYSCEF New York state court records |
 | `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
@@ -81,7 +84,23 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `military_corrections` | query_military_corrections.py | DoD BCMR/BCNR Reading Room (boards.law.af.mil) — redacted decisions of all four service correction boards |
 | `elperuano` | query_elperuano.py, ingest_elperuano.py | Diario Oficial El Peruano (Peru) — gazette search, document fetch, daily bulletin |
 
-**Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
+**Important**: Use these exact names. `findings_tracker.py` requires at least one
+supported source and rejects unknown names. If you need a new source name, add it
+to `VALID_SOURCES` in `tools/findings_tracker.py`.
+
+Configured corpus tools and legacy findings may expose the following explicit
+aliases. `findings_tracker.py` stores their canonical value; all other unknown
+tokens still fail validation.
+
+| Alias(es) | Canonical source |
+|------------|------------------|
+| `kabasshouse` | `kabass` |
+| `unified`, `unified_epstein` | `unified_db` |
+| `house_20k`, `epstein_20k` | `house_oversight` |
+| `fbi-files`, `fbi_files`, `fbi_epstein`, `fbi_epstein_files` | `fbi` |
+| `epstein_reporting` | `reporting` |
+| `query_investigations` | `investigations_db` |
+| `scotus` | `supreme_court` |
 
 ## Core Investigation Tools
 

@@ -136,8 +136,8 @@ VALID_SOURCES = [
     "web_search", "doj", "nj_oag", "doj_vol11", "duggan", "lmsband", "unified_db",
     # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
-    "kabass", "fbi",
-    "fec", "edgar", "courtlistener", "990", "registry",
+    "kabass", "fbi", "efta",
+    "fec", "edgar", "courtlistener", "supreme_court", "finra", "990", "registry",
     # State political-finance, company disclosure, and legislative primary sources.
     "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",
     "geo_group_2024_political_activity_report",
@@ -201,6 +201,24 @@ VALID_SOURCES = [
     "companies_house", "fca", "london_gazette", "charity_commission",
     "bailii", "ewhc",
 ]
+
+# Curated compatibility names used by configured corpus tools and older findings.
+# These are explicit aliases rather than fuzzy normalization: an unregistered token
+# must still fail validation so provenance labels cannot silently drift.
+SOURCE_ALIASES = {
+    "kabasshouse": "kabass",
+    "unified": "unified_db",
+    "unified_epstein": "unified_db",
+    "house_20k": "house_oversight",
+    "epstein_20k": "house_oversight",
+    "fbi-files": "fbi",
+    "fbi_files": "fbi",
+    "fbi_epstein": "fbi",
+    "fbi_epstein_files": "fbi",
+    "epstein_reporting": "reporting",
+    "query_investigations": "investigations_db",
+    "scotus": "supreme_court",
+}
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
 
@@ -316,7 +334,7 @@ def _validate_source_datasets(source_datasets):
     for token in source_datasets:
         if not isinstance(token, str) or not token.strip():
             raise ValueError("source_datasets entries must be non-empty strings")
-        token = token.strip()
+        token = SOURCE_ALIASES.get(token.strip(), token.strip())
         if token not in VALID_SOURCES:
             raise ValueError(
                 f"Unsupported source token '{token}'. Add it to VALID_SOURCES before using it."

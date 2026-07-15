@@ -52,6 +52,56 @@ def test_new_findings_require_source_token_array_and_supported_tokens(evidence_d
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
 
 
+@pytest.mark.parametrize(
+    ("source_tokens", "canonical_tokens"),
+    [
+        (["unified", "fbi-files"], ["unified_db", "fbi"]),
+        (["unified", "fbi_files"], ["unified_db", "fbi"]),
+        (["kabasshouse", "unified_epstein"], ["kabass", "unified_db"]),
+        (
+            ["house_20k", "fbi_epstein", "epstein_reporting"],
+            ["house_oversight", "fbi", "reporting"],
+        ),
+        (["query_investigations"], ["investigations_db"]),
+        (["scotus"], ["supreme_court"]),
+    ],
+)
+def test_configured_corpus_source_aliases_are_stored_canonically(
+    evidence_db, source_tokens, canonical_tokens
+):
+    db, _ = evidence_db
+    finding_id = _add_draft(source_datasets=source_tokens)
+    stored = db.execute(
+        "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
+    ).fetchone()[0]
+    assert json.loads(stored) == canonical_tokens
+
+
+@pytest.mark.parametrize("source_token", ["finra", "efta", "supreme_court"])
+def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token):
+    db, _ = evidence_db
+    finding_id = _add_draft(source_datasets=[source_token])
+    stored = db.execute(
+        "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
+    ).fetchone()[0]
+    assert json.loads(stored) == [source_token]
+
+
+def test_alias_and_canonical_source_are_deduplicated(evidence_db):
+    db, _ = evidence_db
+    finding_id = _add_draft(source_datasets=["unified", "unified_db"])
+    stored = db.execute(
+        "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
+    ).fetchone()[0]
+    assert json.loads(stored) == ["unified_db"]
+
+
+def test_source_alias_targets_are_registered_canonical_tokens():
+    assert set(findings_tracker.SOURCE_ALIASES.values()) <= set(
+        findings_tracker.VALID_SOURCES
+    )
+
+
 def test_direct_quote_write_is_atomic_and_requires_quoted_evidence(evidence_db):
     db, _ = evidence_db
     with pytest.raises(ValueError, match="at least one evidence"):
