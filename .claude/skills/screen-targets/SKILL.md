@@ -52,7 +52,7 @@ For each ticker, run the extraction pipeline. **If any step fails for a company 
 
 ```bash
 # Resolve ticker to CIK
-uv run python tools/query_edgar.py lookup "TICKER"
+uv run python tools/query_edgar.py lookup "TICKER" --output "$WORKDIR/<ticker>-lookup.json"
 
 # Extract 3 financial statements
 uv run python tools/query_edgar.py sections TICKER --section income_statement --output $WORKDIR/<ticker>-income.json
@@ -66,7 +66,29 @@ uv run python tools/financial_ratios.py analyze \
   --output $WORKDIR/<ticker>-ratios.json
 ```
 
-### 3. Event Correlation (optional, if key_dates available)
+### 3. Regulatory Cross-Check (per target)
+
+Resolve the SEC registrant's exact legal name from the company artifact, then
+run read-only target checks:
+
+```bash
+uv run python tools/query_sec_enforcement.py defendant "<EXACT_LEGAL_NAME>" \
+  --output "$WORKDIR/<ticker>-sec-enforcement.json"
+uv run python tools/query_finra.py search "<EXACT_LEGAL_NAME>" --type firm --limit 10 \
+  --output "$WORKDIR/<ticker>-finra-firms.json"
+```
+
+The SEC command uses exact normalized matching by default. If it returns zero,
+run `defendant --fuzzy` only for documented aliases and label those results as
+candidates pending review. FINRA search is also candidate discovery: confirm an
+exact firm identity/CRD with `detail <ID> --type firm` before reporting it.
+Preserve allegation, charge, settlement, and conviction language exactly.
+
+Record regulatory counts/status separately in the matrix; do not silently add
+them to the financial-anomaly score. If either source is unavailable, report
+that coverage gap rather than treating it as zero results.
+
+### 4. Event Correlation (optional, if key_dates available)
 
 If the investigation profile has key_dates, export them and correlate:
 
@@ -83,7 +105,7 @@ json.dump(cfg.get('key_dates', []), open('$WORKDIR/key-dates.json', 'w'), defaul
 uv run python tools/query_market.py correlate TICKER --events $WORKDIR/key-dates.json --window 5 --output $WORKDIR/<ticker>-correlation.json
 ```
 
-### 4. Score and Rank
+### 5. Score and Rank
 
 Read each `<ticker>-ratios.json` file and score:
 
@@ -98,22 +120,28 @@ Read each `<ticker>-ratios.json` file and score:
 - Score 2-3: **Monitor** → note in output, no lead
 - Score 0-1: **Clean** → note in output
 
-### 5. Record Findings
+### 6. Record Findings
 
 For each HIGH-severity anomaly, record a finding:
 ```bash
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "COMPANY NAME" \
   --summary "Financial screening: <anomaly description>" \
+  --detail "Computed anomaly and ratio inputs; see <ticker>-ratios.json" \
   --type financial \
   --evidence "SEC:CIK<NUM>:<ACCESSION>" \
   --claim-type synthesis \
-  --source-quote "SEC:CIK<NUM>:Automated ratio analysis from financial statements" \
+  --source-quote "SEC:CIK<NUM>:<ACCESSION>:<EXACT_SOURCE_ROWS_USED_WITH_PERIODS_AND_VALUES>" \
   --sources edgar \
   --confidence medium
 ```
 
-### 6. Create Leads
+Use the exact load-bearing filing rows or footnote excerpt as the source quote;
+the analysis method belongs in `--detail`, not in `--source-quote`. Record a
+regulatory finding only after opening the exact SEC action or confirmed FINRA
+firm record and preserving its source text.
+
+### 7. Create Leads
 
 For companies scoring ≥ 4:
 ```bash
@@ -124,18 +152,18 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
   --evidence "SEC:CIK<NUM>:<ACCESSION>"
 ```
 
-### 7. Output
+### 8. Output
 
 Present results as a scored matrix:
 
 ```
 ## /screen-targets Results — <N> Companies Screened
 
-| # | Ticker | Company | CIK | Anomalies | Score | Top Flag | Recommendation |
-|---|--------|---------|-----|-----------|-------|----------|----------------|
-| 1 | SMCI | Super Micro Computer | 1375365 | 3 | 7 | Earnings/cash divergence | Deep Dive |
-| 2 | RKLB | Rocket Lab | ... | 1 | 2 | Margin compression | Monitor |
-| 3 | PLTR | Palantir | 1321655 | 1 | 3 | AR outpacing revenue | Monitor |
+| # | Ticker | Company | CIK | Anomalies | Score | SEC exact actions | FINRA status | Top Flag | Recommendation |
+|---|--------|---------|-----|-----------|-------|-------------------|--------------|----------|----------------|
+| 1 | SMCI | Super Micro Computer | 1375365 | 3 | 7 | 1 | exact firm | Earnings/cash divergence | Deep Dive |
+| 2 | RKLB | Rocket Lab | ... | 1 | 2 | 0 | no exact firm | Margin compression | Monitor |
+| 3 | PLTR | Palantir | 1321655 | 1 | 3 | unavailable | candidate only | AR outpacing revenue | Monitor |
 
 ### Event Correlation Summary (if available)
 | Ticker | Notable Events | Biggest Move | Event |
@@ -150,6 +178,7 @@ Present results as a scored matrix:
 ## Stop Conditions
 
 - All targets processed (or skipped with documented reason)
+- SEC exact and FINRA firm checks completed per target, or coverage gaps recorded
 - Anomaly findings recorded for all HIGH-severity items
 - Leads created for all companies scoring ≥ 4
 - Output table complete
