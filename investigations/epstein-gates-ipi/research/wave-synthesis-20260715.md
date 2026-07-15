@@ -86,6 +86,28 @@ Summers-Mongolia, Puri-Hoffman, Ruemmler-EdR, and the Rød-Larsen fee. Net-new: 
 May 2013 **Stern-Farkas China introduction chain** and a **failed/non-monetized
 introduction base rate** to guard against survivorship bias in the pattern claim.
 
+### 7. Tier-2 grant-network trace refutes the conduit and Greentree flags
+Claude tier-2 · findings 13521, 13524, 13526, 13527, 13528 · connections 6483,
+6484 · leads 70054, 70056
+
+IPI's own EIN (**03-0213226**, 501(c)(3), NTEE Q400) confirms it makes **zero
+outgoing grants** — a pure operating recipient, **not a pass-through or conduit**;
+that removes circular-flow and re-granting from the table. Two red-flag refutations:
+the **Greentree Foundation** $122,915 "contractor" line is an IPI→Greentree
+*venue/vendor* payment (modeled as `supplies`, connection 6483), the opposite of a
+circular grant; and the Epstein inflows are **donor-side-invisible** — Gratitude
+America Ltd's 990 (EIN 66-0789697) lists 21 grants, **none to IPI** — so KPMG's
+~$650K+$150K sits only on IPI's books (a transparency gap, not proof of
+concealment; lead 70056 to name the actual donor vehicles). Revenue **peaked in
+2014** ($11.87M, the Gates-launch year) with expenses exceeding revenue most
+years. The donor-concentration note resolves toward **state money, not Gates**: in
+2016 a single foreign government supplied ~62% (~$5.24M, >4× Gates that year).
+Checked-and-not-found: no circular flows, no pass-through behavior, no shared
+officers between funders and IPI. Open threads: Rød-Larsen's 2012–2019 Part VII
+compensation (lead 70054, needs 990 PDFs), the FAFO Institute's overlap with
+Norway's funding and Rød-Larsen's Norwegian network, and deconfliction of a second
+"International Peace Institute" EIN (42-1311908) seen in the FTS index.
+
 ## Complementary work from the parallel session (not this wave)
 
 Independently landed on this profile during the wave and worth cross-linking:
@@ -96,7 +118,12 @@ Thiel / Sunstein / Kerrey** (~13391), plus lead 68823 document-routing.
 
 ## Still pending
 
-- **Claude tier-2 grant-network trace** (IPI 990 cross-reference) was still
-  running at synthesis time; fold its funding-map output in on completion.
-- Fold sections 1–6 above into `master.md` once the parallel session's rewrite
+- Fold sections 1–7 above into `master.md` once the parallel session's rewrite
   settles (avoid an edit collision on the live file).
+- Pursue the tier-2 open leads: Rød-Larsen 2012–2019 compensation (70054),
+  Epstein donor-vehicle identification (70056), and the FAFO Institute Norwegian-
+  network overlap.
+
+*Note: `tools/query_990.py cross-ref` hangs indefinitely — it stalled and killed
+the first tier-2 agent, and left 3-day zombie processes (since reaped). Use
+bounded `query_990` subcommands wrapped in `timeout` instead.*
