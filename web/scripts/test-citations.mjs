@@ -130,6 +130,23 @@ run("990: extractEvidenceLinks resolves EIN", () => {
 });
 
 // ---------------------------------------------------------------------------
+// CMS Open Payments
+// ---------------------------------------------------------------------------
+
+run("OPENPAYMENTS: resolves covered-recipient profile ID", () => {
+  const result = applyCitations("Per [OPENPAYMENTS:704135].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "CMS Open Payments profile 704135");
+  assert.equal(result.entries[0].url, "https://openpaymentsdata.cms.gov/physician/704135");
+});
+
+run("OPENPAYMENTS: extractEvidenceLinks resolves profile ID", () => {
+  const links = extractEvidenceLinks("OPENPAYMENTS:704135");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].url, "https://openpaymentsdata.cms.gov/physician/704135");
+});
+
+// ---------------------------------------------------------------------------
 // ACRIS
 // ---------------------------------------------------------------------------
 

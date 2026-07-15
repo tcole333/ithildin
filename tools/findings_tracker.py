@@ -137,7 +137,8 @@ VALID_SOURCES = [
     # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
     "kabass", "fbi", "efta",
-    "fec", "edgar", "courtlistener", "supreme_court", "finra", "990", "registry",
+    "fec", "edgar", "courtlistener", "supreme_court", "finra", "openpayments",
+    "990", "registry",
     # State political-finance, company disclosure, and legislative primary sources.
     "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",
     "geo_group_2024_political_activity_report",

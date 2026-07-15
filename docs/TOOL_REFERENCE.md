@@ -23,6 +23,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
 | `supreme_court` | supremecourt.gov | Official U.S. Supreme Court dockets, filings, and opinions |
 | `finra` | query_finra.py | FINRA BrokerCheck records |
+| `openpayments` | query_openpayments.py | CMS Open Payments covered-recipient profiles and company-reported payment summaries |
 | `nyscef` | query_nyscef.py | NYSCEF New York state court records |
 | `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
@@ -830,6 +831,29 @@ uv run python tools/query_medicare.py search "Enkeshafi"
 uv run python tools/query_medicare.py provider 1003000126
 uv run python tools/query_medicare.py search "Health" --limit 20
 ```
+
+### CMS Open Payments (industry payments to clinicians, no auth)
+```bash
+# Discover current stable dataset IDs and official bulk CSV links.
+uv run python tools/query_openpayments.py datasets --query "2025 General" --output FILE
+
+# Exact covered-recipient lookup by last name or NPI. Add first name/state to disambiguate.
+uv run python tools/query_openpayments.py search MERKIN --first-name MICHAEL --state NY --output FILE
+uv run python tools/query_openpayments.py search 1952494221 --output FILE
+
+# Reporting-company and nature-of-payment summaries for one CMS profile ID.
+uv run python tools/query_openpayments.py payments 704135 --year all --output FILE
+uv run python tools/query_openpayments.py payments 704135 --year 2025 --output FILE
+
+# Bounded exact-match access to any dataset returned by `datasets` (maximum 500 rows).
+uv run python tools/query_openpayments.py query DATASET_UUID \
+  --where covered_recipient_profile_id=704135 --limit 25 --output FILE
+```
+
+The tool uses CMS's current DKAN API at `openpaymentsdata.cms.gov/api/1`. It reports the
+server's total count and whether the local page is truncated. Full CSV URLs are returned
+as catalog metadata, but bulk data is not downloaded automatically. Profile results emit
+the canonical citation form `OPENPAYMENTS:<profile_id>`.
 
 ### CourtListener (federal courts — COURTLISTENER_TOKEN in .env, 17 commands)
 ```bash

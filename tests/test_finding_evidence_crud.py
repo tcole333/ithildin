@@ -77,7 +77,9 @@ def test_configured_corpus_source_aliases_are_stored_canonically(
     assert json.loads(stored) == canonical_tokens
 
 
-@pytest.mark.parametrize("source_token", ["finra", "efta", "supreme_court"])
+@pytest.mark.parametrize(
+    "source_token", ["finra", "efta", "supreme_court", "openpayments"]
+)
 def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token):
     db, _ = evidence_db
     finding_id = _add_draft(source_datasets=[source_token])

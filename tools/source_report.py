@@ -372,6 +372,16 @@ def generate_report():
         ),
     }
 
+    sources["CMS Open Payments"] = {
+        "description": "Drug/device company payments and ownership interests reported for covered recipients (no auth)",
+        "query_tool": "tools/query_openpayments.py",
+        **check_api(
+            "CMS Open Payments",
+            "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/"
+            "6ed6ae76-2999-49da-b0b2-d7df150ac754",
+        ),
+    }
+
     # SBA PPP Loans (bulk parquet)
     sources["SBA PPP Loans"] = {
         "description": "~11M PPP/EIDL loans — borrower, address, lender, NAICS, forgiveness",

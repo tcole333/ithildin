@@ -13,6 +13,7 @@ Tools for federal spending analysis, contract intelligence, SAM.gov entity regis
 | `query_sam.py` | SAM.gov API | `SAM_API_KEY` (free) | No | 10 req/day (basic); 1K/day (SAM role) |
 | `ingest_sam.py` | SAM.gov bulk extracts | None | `datasets/sam.db` (874K entities, 167K exclusions) | N/A (local) |
 | `query_medicare.py` | CMS Data API | None | No | ~10 req/sec |
+| `query_openpayments.py` | CMS Open Payments DKAN API | None | No | 5 req/sec self-imposed |
 | `query_medicaid.py` | Local DuckDB over Parquet | None | 227M rows, $1.09T (T-MSIS 2018-2024) | N/A (local) |
 | `query_ppp.py` | Local DuckDB over Parquet | None | ~11M PPP loan records | N/A (local) |
 | `query_federal_register.py` | Federal Register API | None | 7-day local response cache (`datasets/fr_cache.db`) | ~1 req/sec self-imposed |
@@ -126,6 +127,33 @@ uv run python tools/query_medicare.py stats
 ```
 
 **Known quirks:** CMS API filtering is often exact-match or prefix-based. Last name searches must be uppercase. NPI searches are numeric-only. Default dataset is 2023.
+
+## query_openpayments.py — CMS Open Payments
+
+Primary-source payment and ownership disclosures reported by drug and medical-device
+companies. The tool uses CMS's current DKAN catalog and bounded datastore API; no API
+key is required. Find the covered-recipient profile first, then query reporting-entity
+and nature-of-payment summaries by CMS profile ID.
+
+```bash
+uv run python tools/query_openpayments.py datasets --query "2025 General" --output /tmp/op-datasets.json
+uv run python tools/query_openpayments.py search MERKIN --first-name MICHAEL --state NY --output /tmp/op-profiles.json
+uv run python tools/query_openpayments.py search 1952494221 --output /tmp/op-npi.json
+uv run python tools/query_openpayments.py payments 704135 --year all --output /tmp/op-payments.json
+uv run python tools/query_openpayments.py payments 704135 --year 2025 --output /tmp/op-2025.json
+uv run python tools/query_openpayments.py query DATASET_UUID \
+  --where covered_recipient_profile_id=704135 --limit 25 --output /tmp/op-query.json
+```
+
+**Known quirks:** Profile searches are exact matches; last and first names are normalized
+to uppercase. `payments --year all` covers the detailed search era beginning in 2019 and
+returns two summary types: payments grouped by reporting entity and payments grouped by
+nature. Results include CMS counts and a `truncated` flag, and every call is capped at
+500 rows per dataset. The `datasets` command exposes official `download.cms.gov` CSV
+URLs, but the tool never downloads them automatically because detailed annual files can
+be very large. Use program year rather than publication year (`2025` data was published
+June 30, 2026). Cite a covered-recipient profile as `OPENPAYMENTS:<profile_id>`; for
+example, `OPENPAYMENTS:704135` resolves to the official CMS physician page.
 
 ## query_medicaid.py — Medicaid T-MSIS (DuckDB)
 

@@ -112,7 +112,7 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 |--------|-------|-----------|
 | **Financial** | EDGAR, ratios, market data, SEC enforcement, 990 nonprofits, FDIC, FINRA | `docs/modules/financial.md` |
 | **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
-| **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, PPP | `docs/modules/government.md` |
+| **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, CMS Open Payments, PPP | `docs/modules/government.md` |
 | **Legal** | CourtListener, NYSCEF, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
 | **Political** | FEC, lobbying, FARA, Congress, GovInfo | `docs/modules/political.md` |
 | **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |

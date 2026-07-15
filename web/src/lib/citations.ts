@@ -136,6 +136,10 @@ function build990Url(ein: string): string {
   return `https://projects.propublica.org/nonprofits/organizations/${ein}`;
 }
 
+function buildOpenPaymentsUrl(profileId: string): string {
+  return `https://openpaymentsdata.cms.gov/physician/${profileId}`;
+}
+
 function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
@@ -456,6 +460,7 @@ function guessSourceType(value: string): string {
   if (/^(?:SEC\s+)?CIK\b/i.test(token)) return "securities_filing";
   if (/^(?:SEC\s+)?(?:EDGAR\s+)?ADSH\b/i.test(token)) return "securities_filing";
   if (/^990:/i.test(token)) return "tax_filing";
+  if (/^OPENPAYMENTS:/i.test(token)) return "healthcare_payment_record";
   if (/^ACRIS:/i.test(token)) return "property_record";
   if (/^(CL|CourtListener)/i.test(token)) return "court_record";
   if (/^NYSCEF_CASE:/i.test(token)) return "court_record";
@@ -1035,6 +1040,28 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const ein = ref.replace(/990:/i, "");
         const url = build990Url(ein);
         return { key: url, label: `990:${ein}`, url };
+      });
+    },
+  },
+  {
+    id: "openpayments",
+    tokenPattern: "OPENPAYMENTS:\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/OPENPAYMENTS:(\d+)/i);
+      if (!match) return null;
+      const profileId = match[1];
+      return {
+        key: `openpayments:${profileId}`,
+        label: `CMS Open Payments profile ${profileId}`,
+        url: buildOpenPaymentsUrl(profileId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/OPENPAYMENTS:\d+/gi) || []).map(ref => {
+        const profileId = ref.replace(/OPENPAYMENTS:/i, "");
+        const url = buildOpenPaymentsUrl(profileId);
+        return { key: url, label: `OPENPAYMENTS:${profileId}`, url };
       });
     },
   },
