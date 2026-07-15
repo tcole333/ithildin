@@ -24,6 +24,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `supreme_court` | supremecourt.gov | Official U.S. Supreme Court dockets, filings, and opinions |
 | `finra` | query_finra.py | FINRA BrokerCheck records |
 | `openpayments` | query_openpayments.py | CMS Open Payments covered-recipient profiles and company-reported payment summaries |
+| `senate_finance` | query_senate_finance.py | Official Senate Finance Committee releases, investigations, and attachments |
 | `nyscef` | query_nyscef.py | NYSCEF New York state court records |
 | `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
@@ -331,6 +332,9 @@ new canonical edge.
 
 ### Audit & Verification
 ```bash
+uv run python tools/findings_tracker.py add --target "TARGET" \
+  --summary "Evidence-backed claim" --sources courtlistener \
+  --output "$WORKDIR/created-finding.json"  # JSON includes the committed finding ID
 uv run python tools/findings_tracker.py unverified --profile epstein --output "$WORKDIR/unverified.json"
 uv run python tools/findings_tracker.py unverified --all-profiles --json
 python tools/findings_tracker.py provenance 42           # Full provenance chain for finding #42
@@ -341,6 +345,10 @@ python tools/findings_tracker.py correct 42 --field summary --value "New text" -
 # source_datasets corrections must be a JSON array of supported tokens
 uv run python tools/findings_tracker.py correct 42 --field source_datasets \
   --value '["courtlistener","registry"]' --reason "Normalize provenance tokens"
+uv run python tools/findings_tracker.py relate 42 43 --type refines \
+  --assessment "Finding 42 narrows the earlier claim"
+uv run python tools/findings_tracker.py relation-delete 42 43 --type refines \
+  --reason "Accidental relation to the wrong concurrently created finding" --by analyst
 uv run python tools/findings_tracker.py audit 42 --table findings --json  # Show correction history
 ```
 
@@ -1066,6 +1074,19 @@ python tools/query_lobbying.py lobbyist "Weingarten"
 python tools/query_lobbying.py filings --client "Apollo Global" --year 2018
 ```
 
+### Senate Finance Committee Archive (no auth)
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_senate_finance.py search "media-based ministries" \
+  --limit 20 --output "$WORKDIR/sfc-search.json"
+uv run python tools/query_senate_finance.py item \
+  /ranking-members-news/grassley-releases-review-of-tax-issues-raised-by-media-based-ministries \
+  --output "$WORKDIR/sfc-item.json"
+```
+Searches the official `finance.senate.gov` archive with a 100-result maximum.
+`item` extracts the article text and official related-file links. Results include
+`SENATE_FINANCE:<path>` evidence references for the citation system.
+
 ### FARA Foreign Agents (bulk CSV → investigation.db)
 ```bash
 python tools/query_fara.py download && python tools/query_fara.py ingest
@@ -1318,6 +1339,9 @@ uv run python tools/entity_dedup.py stats
 
 # Merge entity table records (moves roles, addresses, relations)
 uv run python tools/entity_dedup.py merge --keep-id 2 --delete-id 134
+# Replace stale/contradictory notes with a reviewed canonical note during merge
+uv run python tools/entity_dedup.py merge --keep-id 2 --delete-id 134 \
+  --replacement-notes 'Identity confirmed by reviewed primary records.'
 
 # Remove an alias
 uv run python tools/entity_dedup.py remove-alias --alias "Barak"

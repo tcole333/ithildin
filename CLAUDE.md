@@ -116,7 +116,7 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
 | **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, CMS Open Payments, PPP | `docs/modules/government.md` |
 | **Legal** | CourtListener, NYSCEF, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
-| **Political** | FEC, lobbying, FARA, Congress, GovInfo | `docs/modules/political.md` |
+| **Political** | FEC, lobbying, FARA, Congress, GovInfo, Senate Finance archives | `docs/modules/political.md` |
 | **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |
 | **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
 | **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |

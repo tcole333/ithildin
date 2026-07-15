@@ -140,6 +140,14 @@ function buildOpenPaymentsUrl(profileId: string): string {
   return `https://openpaymentsdata.cms.gov/physician/${profileId}`;
 }
 
+function buildSenateFinanceUrl(path: string): string {
+  const normalized = cleanToken(path).replace(/^\/+/, "");
+  if (!normalized || normalized.split("/").some(segment => segment === "..")) {
+    return "https://www.finance.senate.gov/search/";
+  }
+  return `https://www.finance.senate.gov/${normalized}`;
+}
+
 function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
@@ -1062,6 +1070,28 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const profileId = ref.replace(/OPENPAYMENTS:/i, "");
         const url = buildOpenPaymentsUrl(profileId);
         return { key: url, label: `OPENPAYMENTS:${profileId}`, url };
+      });
+    },
+  },
+  {
+    id: "senate_finance",
+    tokenPattern: "SENATE_FINANCE:[A-Za-z0-9._~%/-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(/SENATE_FINANCE:([A-Za-z0-9._~%/-]+)/i);
+      if (!match) return null;
+      const path = match[1].replace(/^\/+/, "");
+      return {
+        key: `senate-finance:${path}`,
+        label: `SENATE_FINANCE:${path}`,
+        url: buildSenateFinanceUrl(path),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/SENATE_FINANCE:[A-Za-z0-9._~%/-]+/gi) || []).map(ref => {
+        const path = ref.replace(/SENATE_FINANCE:/i, "").replace(/^\/+/, "");
+        const url = buildSenateFinanceUrl(path);
+        return { key: `senate-finance:${path}`, label: `SENATE_FINANCE:${path}`, url };
       });
     },
   },

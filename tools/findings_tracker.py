@@ -138,6 +138,7 @@ VALID_SOURCES = [
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
     "kabass", "fbi", "efta",
     "fec", "edgar", "courtlistener", "supreme_court", "finra", "openpayments",
+    "senate_finance",
     "990", "registry",
     # State political-finance, company disclosure, and legislative primary sources.
     "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",

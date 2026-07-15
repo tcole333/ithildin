@@ -78,7 +78,8 @@ def test_configured_corpus_source_aliases_are_stored_canonically(
 
 
 @pytest.mark.parametrize(
-    "source_token", ["finra", "efta", "supreme_court", "openpayments"]
+    "source_token",
+    ["finra", "efta", "supreme_court", "openpayments", "senate_finance"],
 )
 def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token):
     db, _ = evidence_db
