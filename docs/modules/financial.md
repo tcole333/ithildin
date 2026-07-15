@@ -115,6 +115,11 @@ uv run python tools/query_sec_enforcement.py stats --by-year
 uv run python tools/query_sec_enforcement.py cross-ref --auto-leads --dry-run
 ```
 
+`cross-ref` uses exact person/entity matches after canonical normalization; it
+does not perform fuzzy matching. Use `defendant --fuzzy --threshold N` for a
+bounded approximate lookup. This keeps cross-reference auto-leads restricted to
+exact normalized matches.
+
 **Prerequisite:** Run `uv run python tools/ingest_sec_enforcement.py ingest` first to build the database.
 
 ## ingest_sec_enforcement.py — SEC Enforcement Ingest

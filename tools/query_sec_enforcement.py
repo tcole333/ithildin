@@ -594,7 +594,7 @@ def cmd_stats(args):
 
 
 def cmd_cross_ref(args):
-    """Cross-reference enforcement defendants against investigation.db and registry.db."""
+    """Cross-reference defendants by exact normalized name against local databases."""
     db = get_db()
     dry_run = args.dry_run
 
@@ -862,8 +862,14 @@ def main():
     add_output_args(p)
 
     # cross-ref
-    p = sub.add_parser("cross-ref", help="Match against investigation.db and registry.db")
-    p.add_argument("--threshold", type=int, default=85, help="Match threshold (0-100)")
+    p = sub.add_parser(
+        "cross-ref",
+        help="Exact normalized matches against investigation.db and registry.db",
+        description=(
+            "Cross-reference SEC defendants using exact normalized names. "
+            "Use the defendant command for bounded fuzzy matching."
+        ),
+    )
     p.add_argument("--auto-leads", action="store_true", help="Generate investigation leads")
     p.add_argument("--dry-run", action="store_true", help="Preview without writing")
     add_output_args(p)
