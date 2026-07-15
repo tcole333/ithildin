@@ -290,6 +290,11 @@ def cmd_lobbyist(args):
         params = {"lobbyist_name": args.query}
         results, total = _paginate("/filings/", params, max_results=args.limit)
         _log(args.query, "lobbying", total)
+        if write_output(results, args, summary=f"LDA lobbyist '{args.query}'"):
+            return
+        if args.json_out:
+            print(json.dumps(results, indent=2, default=str))
+            return
         print(f"Found {total} filings with lobbyist '{args.query}' (showing {len(results)})")
         print()
         for f in results:

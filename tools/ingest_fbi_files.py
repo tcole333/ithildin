@@ -341,6 +341,10 @@ def cmd_search(args):
     ):
         db.close()
         return
+    if args.json_out:
+        print(json.dumps(results, indent=2, default=str))
+        db.close()
+        return
 
     filt = f" (min_chars={args.min_chars})" if args.min_chars else ""
     print(f"Search: '{args.query}'{filt} -- {total} matches (showing {len(rows)})")
@@ -355,9 +359,6 @@ def cmd_search(args):
             snippet = snippet[:400] + "..."
         print(f"    {snippet}")
         print()
-
-    if args.json_out:
-        print(json.dumps([dict(r) for r in rows], indent=2, default=str))
 
     db.close()
 

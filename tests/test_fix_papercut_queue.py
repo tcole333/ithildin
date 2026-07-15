@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 import sqlite3
 import sys
 
@@ -122,6 +123,72 @@ def test_fbi_search_writes_json_output(tmp_path, monkeypatch, capsys):
 
     assert json.loads(output.read_text())[0]["bates_number"] == "EFTA1"
     assert capsys.readouterr().out.count("\n") == 1
+
+
+def test_fbi_search_json_stdout_has_no_human_prefix(
+    tmp_path, monkeypatch, capsys
+):
+    from tools import ingest_fbi_files
+
+    db_path = tmp_path / "fbi.db"
+    db = _db(db_path)
+    db.executescript("""
+        CREATE TABLE documents (
+            id INTEGER PRIMARY KEY, bates_number TEXT, efta_id TEXT,
+            char_count INTEGER, word_count INTEGER, confidence REAL, text TEXT
+        );
+        CREATE VIRTUAL TABLE documents_fts USING fts5(
+            bates_number, text, content=documents, content_rowid=id
+        );
+        INSERT INTO documents VALUES (1, 'EFTA1', 'EFTA1', 11, 2, 0.9, 'hello world');
+        INSERT INTO documents_fts(documents_fts) VALUES ('rebuild');
+    """)
+    db.close()
+    monkeypatch.setattr(ingest_fbi_files, "DB_PATH", db_path)
+
+    ingest_fbi_files.cmd_search(
+        argparse.Namespace(
+            query="absent", limit=5, min_chars=None,
+            output=None, json_out=True,
+        )
+    )
+
+    assert json.loads(capsys.readouterr().out) == []
+
+
+def test_lobbyist_zero_results_honors_output(tmp_path, monkeypatch, capsys):
+    from tools import query_lobbying
+
+    monkeypatch.setattr(
+        query_lobbying, "_fetch", lambda endpoint, params=None: {"results": []}
+    )
+    monkeypatch.setattr(
+        query_lobbying,
+        "_paginate",
+        lambda endpoint, params, max_results=100: ([], 0),
+    )
+    monkeypatch.setattr(query_lobbying, "_log", lambda *args: None)
+    output = tmp_path / "lobbyist.json"
+
+    query_lobbying.cmd_lobbyist(
+        argparse.Namespace(
+            query="Nobody Here", limit=20,
+            output=str(output), json_out=False,
+        )
+    )
+
+    assert json.loads(output.read_text()) == []
+    assert capsys.readouterr().out.count("\n") == 1
+
+
+def test_pursue_lead_specific_id_uses_supported_show_command():
+    skill = (
+        Path(__file__).parents[1]
+        / ".codex/skills/pursue-lead/SKILL.md"
+    ).read_text()
+
+    assert "uv run python tools/lead_tracker.py show <ID>" in skill
+    assert "lead_tracker.py search --id" not in skill
 
 
 def test_fbi_search_treats_email_punctuation_as_literal(tmp_path, monkeypatch):
