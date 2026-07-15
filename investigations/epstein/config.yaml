@@ -233,12 +233,12 @@ corpus_tools:
   - tool: "tools/query_unified.py"
     name: "Unified DB"
     description: "COMPLEMENTARY: 107K semantic triples, 45K co-occurrence edges, 8.3K parsed emails (relationships, not text redundancy)"
-    commands: ["search", "entity", "related"]
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
 
   - tool: "tools/query_lmsband.py"
     name: "LMSBAND"
     description: "COMPLEMENTARY: structured financials (flights, positions, balances, CC statements); text search redundant with kabasshouse"
-    commands: ["search", "entity", "file"]
+    commands: ["search", "entities", "file"]
 
   - tool: "tools/ingest_epstein_20k.py"
     name: "Epstein Files 20K"

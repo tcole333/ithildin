@@ -146,15 +146,15 @@ corpus_tools:
   - tool: "tools/query_unified.py"
     name: "Unified Epstein Relationship Database"
     description: "Structured relationship, email, entity, and co-occurrence layer"
-    commands: ["search", "entity", "related"]
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
   - tool: "tools/query_lmsband.py"
     name: "LMSBAND Structured Epstein Data"
     description: "Complementary structured financial, flight, balance, and position data"
-    commands: ["search", "entity", "file"]
+    commands: ["search", "entities", "file"]
   - tool: "tools/ingest_fbi_files.py"
     name: "FBI Epstein Files"
     description: "FBI releases and named exhibits, including flight logs and contact book"
-    commands: ["search", "overlap"]
+    commands: ["search", "doc", "overlap"]
 
 key_dates:
   - date: "2011-03-28"

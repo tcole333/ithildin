@@ -1,8 +1,17 @@
 import sqlite3
+from pathlib import Path
 
 import yaml
 
 from tools import investigation_context
+
+
+REPO_ROOT = Path(__file__).parents[1]
+KNOWN_CORPUS_COMMANDS = {
+    "tools/query_unified.py": {"emails", "docs", "entities", "triples", "cooccurrence", "stats"},
+    "tools/query_lmsband.py": {"search", "entities", "cooccurrence", "file", "stats"},
+    "tools/ingest_fbi_files.py": {"download", "ingest", "search", "doc", "stats", "overlap"},
+}
 
 
 def _write_profile(root, name, primary_subject):
@@ -59,3 +68,33 @@ def test_profile_catalog_reconciliation_is_idempotent(monkeypatch, tmp_path):
         "SELECT COUNT(*) FROM investigation_profiles WHERE profile_id = 'configured'"
     ).fetchone()[0] == 1
     db.close()
+
+
+def test_profile_corpus_metadata_only_advertises_supported_commands():
+    for config_path in sorted((REPO_ROOT / "investigations").glob("*/config.yaml")):
+        config = yaml.safe_load(config_path.read_text()) or {}
+        for corpus_tool in config.get("corpus_tools", []):
+            tool = corpus_tool.get("tool")
+            supported = KNOWN_CORPUS_COMMANDS.get(tool)
+            if supported is None:
+                continue
+            advertised = set(corpus_tool.get("commands", []))
+            assert advertised <= supported, (
+                f"{config_path}: {tool} advertises unsupported commands "
+                f"{sorted(advertised - supported)}"
+            )
+
+
+def test_fink_profile_exposes_current_unified_and_fbi_workflows():
+    config = yaml.safe_load(
+        (REPO_ROOT / "investigations/fink/config.yaml").read_text()
+    )
+    commands = {
+        corpus_tool["tool"]: corpus_tool["commands"]
+        for corpus_tool in config["corpus_tools"]
+    }
+
+    assert commands["tools/query_unified.py"] == [
+        "emails", "docs", "entities", "triples", "cooccurrence"
+    ]
+    assert commands["tools/ingest_fbi_files.py"] == ["search", "doc", "overlap"]

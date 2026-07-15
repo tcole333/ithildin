@@ -181,11 +181,11 @@ corpus_tools:
   - tool: "tools/query_unified.py"
     name: "Unified Epstein Relationship Database"
     description: "Structured relationship, email, entity, and co-occurrence layer"
-    commands: ["search", "entity", "related"]
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
   - tool: "tools/query_lmsband.py"
     name: "LMSBAND Structured Epstein Data"
     description: "Complementary structured financial, flight, balance, and position data; duplicate EFTA pages are not independent corroboration"
-    commands: ["search", "entity", "file"]
+    commands: ["search", "entities", "file"]
   - tool: "tools/ingest_epstein_20k.py"
     name: "House Oversight Epstein Files"
     description: "House Oversight document release with HOUSE_OVERSIGHT canonical IDs"
