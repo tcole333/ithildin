@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 """
-California Secretary of State corporate registry tool.
+California Secretary of State subscription-API registry tool.
 
 Uses the CA SoS BE Public Search API (Azure APIM) at calico.sos.ca.gov.
 Requires a free subscription key from https://calicodev.sos.ca.gov/signup
+
+Key approval is not immediate or operationally dependable. If a key has not
+already been issued, use query_california.py for bounded public BizFile searches
+or order the logged-in weekly bulk archive described in infra request #130.
 
 Endpoints:
   - BusinessEntityDetails: Lookup by entity number
   - BusinessEntityKeywordSearch: Search by keyword (top 150 results)
 
 Usage:
-    python tools/ingest_california.py search "PARAFI CAPITAL"
-    python tools/ingest_california.py search "Epstein" --begins-with
-    python tools/ingest_california.py search "Apollo" --date-start 1990-01-01 --date-end 2020-12-31
-    python tools/ingest_california.py search-number 202150010654
-    python tools/ingest_california.py detail 202150010654
-    python tools/ingest_california.py ingest-entity 202150010654
-    python tools/ingest_california.py ingest-batch "Epstein"
+    uv run python tools/ingest_california.py search "PARAFI CAPITAL"
+    uv run python tools/ingest_california.py search "Epstein" --begins-with
+    uv run python tools/ingest_california.py search-number 202150010654
+    uv run python tools/ingest_california.py detail 202150010654
+    uv run python tools/ingest_california.py ingest-entity 202150010654
+    uv run python tools/ingest_california.py ingest-batch "Epstein"
 """
 
 import argparse
@@ -25,7 +28,7 @@ import os
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -97,7 +100,17 @@ def _get_api_key(args=None):
         key = os.environ.get("CA_SOS_API_KEY")
     if not key:
         print("ERROR: CA SoS API key required. Set CA_SOS_API_KEY in .env or use --api-key", file=sys.stderr)
-        print("Register at: https://calicodev.sos.ca.gov/signup", file=sys.stderr)
+        print("Developer portal: https://calicodev.sos.ca.gov/signup", file=sys.stderr)
+        print(
+            "Key approval may be delayed. For bounded keyless public searches, "
+            "use: uv run python tools/query_california.py search \"NAME\" --limit 25",
+            file=sys.stderr,
+        )
+        print(
+            "For repeatable bulk ingestion, use the logged-in BizFile weekly "
+            "bulk-order route tracked by infra request #130.",
+            file=sys.stderr,
+        )
         sys.exit(1)
     return key
 
@@ -330,7 +343,7 @@ def cmd_search_number(args):
     elif isinstance(data, list):
         entities_raw = data
     else:
-        print(f"Unexpected response format", file=sys.stderr)
+        print("Unexpected response format", file=sys.stderr)
         return
 
     entities = [_parse_entity(r) for r in entities_raw]
@@ -375,7 +388,7 @@ def cmd_ingest_entity(args):
     elif isinstance(data, dict) and "EntityID" in data:
         raw = data
     else:
-        print(f"Unexpected response format", file=sys.stderr)
+        print("Unexpected response format", file=sys.stderr)
         return
 
     entity_id = _upsert_entity(db, raw)
@@ -413,7 +426,7 @@ def cmd_ingest_batch(args):
 
     print(f"Ingesting {len(entities_raw)} CA entities matching '{args.query}'")
     for i, r in enumerate(entities_raw):
-        entity_id = _upsert_entity(db, r)
+        _upsert_entity(db, r)
         print(f"  [{i+1}/{len(entities_raw)}] {r.get('EntityName')} (CA #{r.get('EntityID')})")
 
     db.commit()

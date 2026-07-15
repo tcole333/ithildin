@@ -78,6 +78,7 @@ try {{
     assert result.returncode == 7
     assert "non-JSON HTML" in result.stderr
     assert "Imperva challenge" in result.stderr
+    assert "probe command" in result.stderr
     assert "Unexpected token" not in result.stderr
 
 

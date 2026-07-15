@@ -135,7 +135,7 @@ ingest-batch "QUERY"          # Same as ingest-search (naming varies)
 | Requirement | Tools |
 |------------|-------|
 | **None** | query_registry, query_texas, query_newjersey, query_puertorico, ingest_newyork, ingest_colorado, ingest_newmexico, ingest_dc, query_france, query_israel, query_zefix |
-| **Free API key** | ingest_california (CA_SOS_API_KEY), ingest_uk_companies_house (COMPANIES_HOUSE_API_KEY) |
+| **Free API key** | ingest_california (CA_SOS_API_KEY; approval may be delayed), ingest_uk_companies_house (COMPANIES_HOUSE_API_KEY) |
 | **Paid API key** | query_opencorporates, query_delaware, query_hongkong, query_cyprus (OPENCORPORATES_API_KEY — basic 500/mo, 200/day) |
 | **Node.js browser helper** | query_california, query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
 | **MCP Playwright** | ingest_maryland (CAPTCHA) |
@@ -146,10 +146,11 @@ local profile to retain Imperva clearance. Check the runtime first, then issue a
 bounded keyword or normalized entity-number search:
 
 ```bash
-uv run python tools/query_california.py runtime-check --output /tmp/ca-runtime.json
-uv run python tools/query_california.py probe --output /tmp/ca-probe.json
-uv run python tools/query_california.py search "APPLE" --limit 25 --output /tmp/ca-search.json
-uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output /tmp/ca-number.json
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_california.py runtime-check --output "$WORKDIR/ca-runtime.json"
+uv run python tools/query_california.py probe --output "$WORKDIR/ca-probe.json"
+uv run python tools/query_california.py search "APPLE" --limit 25 --output "$WORKDIR/ca-search.json"
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output "$WORKDIR/ca-number.json"
 ```
 
 The helper requires Node.js, `playwright` or `playwright-core`, and installed
@@ -159,6 +160,11 @@ mode is not supported by the verified path because Imperva returns 403. Advanced
 filters, entity detail, history, and ingestion currently fail explicitly until
 their new-runtime flows are live-verified. Interactive search is not a substitute
 for the weekly statewide bulk importer tracked by infrastructure request #130.
+Do not block California research on a pending developer-key application: use
+this keyless bounded search for individual entities. For repeatable bulk work,
+log into BizFile and order `BE Bulk Order - Weekly Data & Images` (free); a
+`BE Bulk Order Master Unload of Data` costs $100 and is needed for a complete
+baseline before weekly deltas can keep it current.
 
 Nevada SilverFlume uses session-backed entity and history pages behind
 Incapsula. Verify the local runtime before searching, and warm the persistent

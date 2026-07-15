@@ -182,8 +182,8 @@ function parseSearchBody(body, contentType = '') {
         if (/html/i.test(contentType) || /^\s*</.test(body)) {
             throw new Error(
                 'official business search returned non-JSON HTML, likely an ' +
-                'Imperva challenge; retry in headed Chrome and complete any ' +
-                'visible challenge'
+                'Imperva challenge; run the probe command in headed Chrome to ' +
+                'refresh clearance, then retry the search'
             );
         }
         throw new Error(`official business search returned invalid JSON: ${error.message}`);
@@ -225,7 +225,7 @@ async function search(page, query, requestedLimit) {
         } catch (error) {
             lastError = error;
             if (attempt < MAX_DOM_ATTEMPTS &&
-                /detached|Timeout|not attached|stabilize|Imperva|non-JSON HTML|challenge/i
+                /detached|Timeout|not attached|stabilize/i
                     .test(error.message)) {
                 await page.waitForTimeout(750);
                 continue;
