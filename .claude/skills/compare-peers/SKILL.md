@@ -77,8 +77,13 @@ uv run python tools/financial_ratios.py compare \
 Read the comparison output. Key fields:
 - `matrix`: ratio values for each company
 - `medians`: group median for each ratio
-- `outliers`: companies with ratios >2 standard deviations from median
+- `outliers`: flagged values with `sample_size`, `outlier_score`, `threshold`, and `score_method`
 - `anomaly_counts`: number of outlier flags per company
+
+Interpret the method exactly as reported. With at least five non-null values,
+the score is deviation from the median divided by population standard deviation
+and the threshold is 2.0. With two to four values, it is a small-cohort
+heuristic using half the observed range and a 1.5 threshold—not a z-score.
 
 ### 4. Generate Forensic Hypotheses
 
@@ -86,7 +91,7 @@ For each statistical outlier flagged in the comparison, generate a hypothesis:
 
 **Every hypothesis MUST include:**
 
-1. **The observation**: "[Company] has [ratio] of [X] vs peer median of [Y] (z=[Z])"
+1. **The observation**: "[Company] has [ratio] of [X] vs peer median of [Y] (score=[Z], n=[N], method=[METHOD])"
 2. **Forensic hypothesis**: What might explain this deviation beyond business model differences?
 3. **Best innocent explanation**: The most plausible non-concerning reason
 4. **Falsification criterion**: What evidence would disprove the concerning interpretation?
@@ -113,13 +118,17 @@ For each notable outlier (forensically significant, not just business-model-diff
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "<COMPANY>" \
   --summary "Peer comparison: <ratio> is <value> vs industry median <median> (<direction> outlier)" \
+  --detail "Outlier score <SCORE>, n=<N>, method=<SCORE_METHOD>, threshold=<THRESHOLD>" \
   --type financial \
   --evidence "SEC:CIK<NUM>:<ACCESSION>" \
   --claim-type synthesis \
-  --source-quote "Automated peer comparison across <N> companies in <sector>" \
+  --source-quote "SEC:CIK<NUM>:<ACCESSION>:<EXACT_SOURCE_ROWS_USED_WITH_PERIODS_AND_VALUES>" \
   --sources edgar \
   --confidence medium
 ```
+
+The quote must preserve the exact load-bearing filing rows or footnote excerpt;
+put the calculation method in `--detail`, never in `--source-quote`.
 
 Connect target to peer group if structural relationships discovered:
 ```bash

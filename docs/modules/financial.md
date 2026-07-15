@@ -81,9 +81,13 @@ uv run python tools/financial_ratios.py analyze income.json balance.json --cashf
 
 # Write the ratio analysis (including its anomaly flags) to a file
 uv run python tools/financial_ratios.py analyze income.json balance.json --cashflow cf.json --output ratios.json
+
+# Compare the latest ratio period across companies
+uv run python tools/financial_ratios.py compare $WORKDIR/*-ratios.json \
+  --output $WORKDIR/comparison.json
 ```
 
-**Known quirks:** Matches XBRL concepts by suffix (e.g., `_AssetsCurrent`). Falls back to label substring matching if XBRL concepts are non-standard.
+**Known quirks:** Matches XBRL concepts by suffix (e.g., `_AssetsCurrent`). Falls back to label substring matching if XBRL concepts are non-standard. Peer outliers with at least five non-null values use median deviation divided by population standard deviation at a 2.0 threshold. Cohorts of two to four use median deviation divided by half the observed range at a 1.5 threshold; output labels this small-sample heuristic explicitly and includes its sample size.
 
 ## query_market.py — Market Data
 

@@ -31,7 +31,7 @@ echo "Session workdir: $WORKDIR"
 
 ```bash
 # Look up CIK
-uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" > $WORKDIR/edgar-lookup.json
+uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" --output "$WORKDIR/edgar-lookup.json"
 
 # Get company metadata and recent filings
 uv run python tools/query_edgar.py company <CIK> --output $WORKDIR/edgar-company.json
@@ -45,15 +45,26 @@ Select the most relevant filing: most recent, or one matching a key_date from th
 ### 2. Read the Full Filing
 
 This is the core LLM advantage — process the entire document, not just metadata.
+Acquire the complete extracted text through the tool's structured-output path;
+`--lines` only controls terminal previews and is not a full-read mechanism.
 
 ```bash
-uv run python tools/query_edgar.py read "<FILING_URL>" --lines 10000 > $WORKDIR/filing-full.txt
+uv run python tools/query_edgar.py read "<FILING_URL>" \
+  --output "$WORKDIR/filing-full.json"
+jq '{url, retrieval, characters, line_count}' "$WORKDIR/filing-full.json"
+jq -r '.text' "$WORKDIR/filing-full.json" > "$WORKDIR/filing-full.txt"
 ```
 
-For very large filings (>500KB), read in sections:
+For large filings, split the saved complete text into sequential chunks, read
+every chunk, and track the highest line covered against `line_count`:
+
 ```bash
-uv run python tools/query_edgar.py read "<FILING_URL>" --lines 6000 > $WORKDIR/filing-first-6000-lines.txt
+split -l 2000 -d -a 4 "$WORKDIR/filing-full.txt" "$WORKDIR/filing-chunk-"
+ls "$WORKDIR"/filing-chunk-*
 ```
+
+Use repeatable `read --find TERM --context N` calls only to revisit targeted
+passages; they do not replace the sequential full-text pass.
 
 ### 3. Extract by Filing Type
 
@@ -244,7 +255,7 @@ uv run python tools/lead_tracker.py add \
 - All extraction checklist items checked for the filing type
 - All discovered names cross-referenced against investigation DB
 - Insider transactions analyzed (if person-related investigation)
-- Filing fully read (not just first 100 lines)
+- Complete artifact saved; every sequential chunk read through the recorded `line_count`
 
 ## What Makes This Skill Valuable
 
@@ -256,4 +267,3 @@ An LLM agent reads the **entire document** and cross-references **every name** a
 - Officers who also appear in other investigation targets
 - Litigation disclosures that reveal ongoing enforcement actions
 - Insider trading patterns around key investigation dates
-

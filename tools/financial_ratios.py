@@ -121,10 +121,6 @@ def compute_ratios(income, balance, cashflow=None):
     gross_profit = _find_item(inc_items, "GrossProfit")
     operating_income = _find_item(inc_items, "OperatingIncomeLoss")
     net_income = _find_item(inc_items, "NetIncomeLoss", "ProfitLoss")
-    total_opex = _find_item(inc_items, "OperatingExpenses")
-    rd_expense = _find_item(inc_items, "ResearchAndDevelopmentExpense")
-    sga_expense = _find_item(inc_items, "SellingGeneralAndAdministrativeExpense")
-    ga_expense = _find_item(inc_items, "GeneralAndAdministrativeExpense")
     interest_expense = _find_item(inc_items, "InterestExpense", "InterestExpenseNonoperating")
 
     # Balance sheet (exact concept suffixes to avoid partial matches)
@@ -133,16 +129,12 @@ def compute_ratios(income, balance, cashflow=None):
     total_liabilities = _find_item(bs_items, "Liabilities")
     total_current_liab = _find_item(bs_items, "LiabilitiesCurrent")
     total_equity = _find_item(bs_items, "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest", "StockholdersEquity")
-    cash = _find_item(bs_items, "CashAndCashEquivalentsAtCarryingValue")
     receivables = _find_item(bs_items, "AccountsReceivableNetCurrent")
     inventory = _find_item(bs_items, "InventoryNet")
     goodwill = _find_item(bs_items, "Goodwill")
-    accounts_payable = _find_item(bs_items, "AccountsPayableCurrent")
 
     # Cash flow
     operating_cf = _find_item(cf_items, "NetCashProvidedByUsedInOperatingActivities")
-    investing_cf = _find_item(cf_items, "NetCashProvidedByUsedInInvestingActivities")
-    financing_cf = _find_item(cf_items, "NetCashProvidedByUsedInFinancingActivities")
     depreciation = _find_item(cf_items, "DepreciationDepletionAndAmortization", "DepreciationAmortizationAndAccretionNet")
 
     # Label-based fallback for concepts that vary across companies
@@ -169,11 +161,9 @@ def compute_ratios(income, balance, cashflow=None):
         tl = _val(total_liabilities, period)
         tcl = _val(total_current_liab, period)
         te = _val(total_equity, period)
-        c = _val(cash, period)
         ar = _val(receivables, period)
         inv = _val(inventory, period)
         gw = _val(goodwill, period)
-        ap = _val(accounts_payable, period)
         ocf = _val(operating_cf, period)
         dep = _val(depreciation, period)
         ie = _val(interest_expense, period)
@@ -543,20 +533,22 @@ def compare_multiple(ratio_files):
             # Use standard deviation for larger groups
             mean = sum(vals) / n
             variance = sum((v - mean) ** 2 for v in vals) / n
-            stdev = variance ** 0.5
+            scale = variance ** 0.5
             threshold = 2.0
+            method = "median_deviation_over_population_stddev"
         else:
             # Range-based for small groups
             val_range = max(vals) - min(vals)
-            stdev = val_range / 2 if val_range > 0 else 1
+            scale = val_range / 2 if val_range > 0 else 1
             threshold = 1.5
+            method = "median_deviation_over_half_range"
 
-        if stdev == 0:
+        if scale == 0:
             continue
 
         for company, value in values.items():
-            z = (value - median) / stdev
-            if abs(z) >= threshold:
+            score = (value - median) / scale
+            if abs(score) >= threshold:
                 direction = "above" if value > median else "below"
                 note = FORENSIC_NOTES.get(key, {}).get(direction, "")
                 outliers.append({
@@ -564,7 +556,10 @@ def compare_multiple(ratio_files):
                     "ratio": key,
                     "value": round(value, 2),
                     "median": round(median, 2),
-                    "z_score": round(z, 2),
+                    "outlier_score": round(score, 2),
+                    "score_method": method,
+                    "threshold": threshold,
+                    "sample_size": n,
                     "direction": direction,
                     "forensic_note": note,
                 })
@@ -630,7 +625,12 @@ def cmd_compare(args):
     if outliers:
         print(f"\n  {len(outliers)} OUTLIERS:")
         for o in outliers:
-            print(f"    {o['company']:20s} {o['ratio']:25s} {o['value']:>8.1f} vs median {o['median']:>8.1f} (z={o['z_score']:+.1f})")
+            print(
+                f"    {o['company']:20s} {o['ratio']:25s} {o['value']:>8.1f} "
+                f"vs median {o['median']:>8.1f} "
+                f"(score={o['outlier_score']:+.1f}, n={o['sample_size']}, "
+                f"method={o['score_method']})"
+            )
             if o.get("forensic_note"):
                 print(f"    {'':20s} → {o['forensic_note']}")
     else:
