@@ -532,15 +532,19 @@ python tools/ingest_newmexico.py ingest-batch "Zorro"
 # California — BizFile browser search (no auth, bounded to 1-500 results)
 # Requires Node.js + playwright/playwright-core + installed Google Chrome.
 # Uses one short-lived headed process and a dedicated local Imperva cache.
-uv run python tools/query_california.py runtime-check --output /tmp/ca-runtime.json
-uv run python tools/query_california.py probe --output /tmp/ca-probe.json
-uv run python tools/query_california.py search "PARAFI CAPITAL" --limit 25 --output /tmp/ca-search.json
-uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output /tmp/ca-number.json
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_california.py runtime-check --output "$WORKDIR/ca-runtime.json"
+uv run python tools/query_california.py probe --output "$WORKDIR/ca-probe.json"
+uv run python tools/query_california.py search "PARAFI CAPITAL" --limit 25 --output "$WORKDIR/ca-search.json"
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output "$WORKDIR/ca-number.json"
 # Advanced filters, entity/history, and ingest commands are explicitly unavailable
 # until their self-contained browser flows are live-verified. This interactive tool
 # does not replace the weekly statewide bulk importer tracked by infra request #130.
 # Official API (needs CA_SOS_API_KEY — pending approval)
-# python tools/ingest_california.py search "PARAFI CAPITAL"
+# uv run python tools/ingest_california.py search "PARAFI CAPITAL"
+# Do not wait on a pending key: use query_california.py for bounded public
+# searches. Logged-in BizFile offers free weekly BE deltas; the complete master
+# unload is $100 and should precede weekly updates for statewide coverage.
 
 # Texas Comptroller — franchise tax entity search (no auth)
 python tools/query_texas.py search "QUERY" --output /tmp/tx-results.json
