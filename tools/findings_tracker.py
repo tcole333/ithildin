@@ -543,6 +543,14 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     if source_quotes is not None and not isinstance(source_quotes, dict):
         raise ValueError("source_quotes must map each evidence_ref to quote metadata")
     source_quotes = source_quotes or {}
+    unknown_metadata_refs = set(source_quotes) - set(evidence_ids)
+    if unknown_metadata_refs:
+        raise ValueError(
+            "Evidence metadata supplied for refs not present in evidence_ids: "
+            + ", ".join(sorted(unknown_metadata_refs))
+        )
+    if len(set(evidence_ids)) != len(evidence_ids):
+        raise ValueError("evidence_ids contains duplicate references")
     if claim_type == "direct_quote" and not evidence_ids:
         raise ValueError("direct_quote findings require at least one evidence reference")
 
@@ -2417,8 +2425,6 @@ def format_finding(finding, verbose=False):
     ftype = finding.get("finding_type") or "?"
     date = finding.get("date_of_event", "")
     date_str = f" ({date})" if date else ""
-    claim = finding.get("claim_type", "?")
-
     line = f"{conf}{verif} #{finding['id']:>4} [{ftype:>13}] {finding['target_name']}: {finding['summary']}{date_str}"
 
     if verbose:
@@ -2815,13 +2821,12 @@ def main():
                   "(e.g., --sources web_search, --sources fec edgar).", file=sys.stderr)
             sys.exit(1)
 
-        # Parse source quotes from CLI (format: "ref:quote text")
-        source_quotes = _parse_source_quote_args(
-            getattr(args, "source_quote", None),
-            getattr(args, "evidence", None),
-        ) or None
-
         try:
+            # Parse source quotes from CLI (format: "ref:quote text")
+            source_quotes = _parse_source_quote_args(
+                getattr(args, "source_quote", None),
+                getattr(args, "evidence", None),
+            ) or None
             fid = add_finding(
                 target_name=args.target, summary=args.summary, finding_type=args.finding_type,
                 detail=args.detail, evidence_ids=args.evidence, source_datasets=args.sources,
@@ -3274,7 +3279,6 @@ def main():
                         print(f"    Quote: \"{ev['source_quote']}\"")
                     if ev.get("email_sender"):
                         sender = ev["email_sender"]
-                        recip = ""
                         date_str = f" ({ev['email_date']})" if ev.get("email_date") else ""
                         pos = ev.get("chain_position")
                         pos_str = f", chain position {pos}" if pos is not None else ""
@@ -3373,18 +3377,18 @@ def main():
             print(f"Total findings: {stats['total_findings']}")
             print(f"Total connections: {stats['total_connections']}")
             if stats.get("by_type"):
-                print(f"\nBy type:")
+                print("\nBy type:")
                 for t, c in sorted(stats["by_type"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {t or '(none)'}: {c}")
             if stats.get("by_confidence"):
-                print(f"\nBy confidence:")
+                print("\nBy confidence:")
                 for conf, c in sorted(stats["by_confidence"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {conf or '(none)'}: {c}")
             if stats.get("top_targets"):
-                print(f"\nTop targets:")
+                print("\nTop targets:")
                 for name, c in stats["top_targets"].items():
                     print(f"  {name}: {c}")
-            print(f"\nAudit status:")
+            print("\nAudit status:")
             print(f"  Verified: {verified}")
             print(f"  Unverified: {unverified_ct}")
             print(f"  Disputed: {disputed}")

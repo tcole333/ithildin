@@ -52,6 +52,75 @@ def test_new_findings_require_source_token_array_and_supported_tokens(evidence_d
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
 
 
+def test_new_finding_rejects_unknown_metadata_and_duplicate_evidence_refs(
+    evidence_db,
+):
+    db, _ = evidence_db
+    ref = "COURTLISTENER:record/1"
+    with pytest.raises(ValueError, match="refs not present in evidence_ids.*LABEL"):
+        _add_draft(
+            evidence_ids=[ref],
+            source_quotes={"LABEL": {"quote": "Exact excerpt"}},
+        )
+    with pytest.raises(ValueError, match="duplicate references"):
+        _add_draft(evidence_ids=[ref, ref])
+
+    assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+    assert db.execute("SELECT COUNT(*) FROM finding_evidence").fetchone()[0] == 0
+
+
+@pytest.mark.parametrize(
+    ("evidence", "source_quotes", "error"),
+    [
+        (
+            ["https://primary.example/record"],
+            ["LABEL:Exact excerpt"],
+            "refs not present in evidence_ids: LABEL",
+        ),
+        (
+            ["COURTLISTENER:record/1"],
+            [
+                "COURTLISTENER:record/1:First excerpt",
+                "COURTLISTENER:record/1:Second excerpt",
+            ],
+            "Duplicate quote metadata for evidence 'COURTLISTENER:record/1'",
+        ),
+    ],
+)
+def test_add_cli_rejects_invalid_source_quote_mapping_atomically(
+    evidence_db, monkeypatch, capsys, evidence, source_quotes, error
+):
+    db, _ = evidence_db
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "add",
+            "--target",
+            "Temp Target",
+            "--summary",
+            "Invalid evidence metadata",
+            "--evidence",
+            *evidence,
+            "--source-quote",
+            *source_quotes,
+            "--sources",
+            "courtlistener",
+            "--profile",
+            "test",
+        ],
+    )
+
+    with pytest.raises(SystemExit) as exc:
+        findings_tracker.main()
+
+    assert exc.value.code == 2
+    assert error in capsys.readouterr().err
+    assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+    assert db.execute("SELECT COUNT(*) FROM finding_evidence").fetchone()[0] == 0
+
+
 @pytest.mark.parametrize(
     ("source_tokens", "canonical_tokens"),
     [
