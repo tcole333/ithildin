@@ -29,17 +29,17 @@ Use these values instead of hardcoded names throughout this skill.
 If the subject is UK-based, has UK company ties, uses a UK address, or appears as a UK officer/director/PSC, **Companies House is mandatory**. Do not close a UK person trace without checking:
 
 ```bash
-python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output $WORKDIR/inv-uk-officer-search.json
-python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output $WORKDIR/inv-uk-company-search.json
+uv run python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output "$WORKDIR/inv-uk-officer-search.json"
+uv run python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output "$WORKDIR/inv-uk-company-search.json"
 ```
 
 For each relevant company returned, pull:
 
 ```bash
-python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output $WORKDIR/inv-uk-company-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output $WORKDIR/inv-uk-officers-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output $WORKDIR/inv-uk-psc-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output $WORKDIR/inv-uk-filings-<COMPANY_NUMBER>.json
+uv run python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-company-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-officers-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-psc-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-filings-<COMPANY_NUMBER>.json"
 ```
 
 Record negative results if the API returns no officer/company matches.
@@ -98,10 +98,10 @@ Record notable web findings as lead notes before proceeding to dataset searches.
 ### 1. Check Existing Knowledge
 ```bash
 # Check if we already have findings on this person
-python tools/findings_tracker.py list --target "<NAME>" --output $WORKDIR/inv-findings.json
+uv run python tools/findings_tracker.py list --target "<NAME>" --output $WORKDIR/inv-findings.json
 
 # Check for existing leads
-python tools/lead_tracker.py search "<NAME>" --output $WORKDIR/inv-leads.json
+uv run python tools/lead_tracker.py search "<NAME>" --output $WORKDIR/inv-leads.json
 
 # Check if person has a research file
 ls research/persons/
@@ -115,69 +115,69 @@ Additionally, search for known aliases, maiden names, alternate transliterations
 ### 3. Entity Co-occurrence Analysis
 ```bash
 # Who appears alongside this person?
-python tools/query_lmsband.py cooccurrence "<NAME>" --top 30 --output $WORKDIR/inv-lmsband-coocc.json
-python tools/query_unified.py cooccurrence "<NAME>" --top 30 --output $WORKDIR/inv-unified-coocc.json
+uv run python tools/query_lmsband.py cooccurrence "<NAME>" --top 30 --output $WORKDIR/inv-lmsband-coocc.json
+uv run python tools/query_unified.py cooccurrence "<NAME>" --top 30 --output $WORKDIR/inv-unified-coocc.json
 
 # What are the RDF triples involving this person?
-python tools/query_unified.py triples --actor "<NAME>" --limit 30 --output $WORKDIR/inv-unified-triples-actor.json
-python tools/query_unified.py triples --target "<NAME>" --limit 30 --output $WORKDIR/inv-unified-triples-target.json
+uv run python tools/query_unified.py triples --actor "<NAME>" --limit 30 --output $WORKDIR/inv-unified-triples-actor.json
+uv run python tools/query_unified.py triples --target "<NAME>" --limit 30 --output $WORKDIR/inv-unified-triples-target.json
 ```
 
 ### 3b. LittleSis Relationship Mapping
 ```bash
 # Pre-mapped relationships with amounts, dates, categories
-python tools/query_littlesis.py search "<NAME>" --output $WORKDIR/inv-littlesis.json
+uv run python tools/query_littlesis.py search "<NAME>" --output $WORKDIR/inv-littlesis.json
 # If found, get their entity ID and pull relationships:
-python tools/query_littlesis.py relationships <ID> --limit 50 --output $WORKDIR/inv-littlesis-rels.json
-python tools/query_littlesis.py relationships <ID> --category 5 --output $WORKDIR/inv-littlesis-donations.json  # Donations
-python tools/query_littlesis.py relationships <ID> --category 1 --output $WORKDIR/inv-littlesis-positions.json  # Positions
-python tools/query_littlesis.py connections <ID> --output $WORKDIR/inv-littlesis-connections.json
+uv run python tools/query_littlesis.py relationships <ID> --limit 50 --output $WORKDIR/inv-littlesis-rels.json
+uv run python tools/query_littlesis.py relationships <ID> --category 5 --output $WORKDIR/inv-littlesis-donations.json  # Donations
+uv run python tools/query_littlesis.py relationships <ID> --category 1 --output $WORKDIR/inv-littlesis-positions.json  # Positions
+uv run python tools/query_littlesis.py connections <ID> --output $WORKDIR/inv-littlesis-connections.json
 ```
 
 ### 3c. SEC EDGAR Search
 ```bash
 # Find the person's CIK (if they're a public company insider)
-python tools/query_edgar.py lookup "<NAME>" --output $WORKDIR/inv-edgar-lookup.json
+uv run python tools/query_edgar.py lookup "<NAME>" --output $WORKDIR/inv-edgar-lookup.json
 
 # Mentions in SEC filings (proxy statements, 10-K, enforcement)
-python tools/query_edgar.py search "<NAME>" --size 20 --facets --output $WORKDIR/inv-edgar-search.json
-python tools/query_edgar.py search "<NAME>" "{primary_subject}" --size 10 --output $WORKDIR/inv-edgar-subject.json
+uv run python tools/query_edgar.py search "<NAME>" --size 20 --facets --output $WORKDIR/inv-edgar-search.json
+uv run python tools/query_edgar.py search "<NAME>" "{primary_subject}" --size 10 --output $WORKDIR/inv-edgar-subject.json
 
 # If CIK found — insider transactions reveal ownership positions
-python tools/query_edgar.py insider <CIK> --detail --limit 10 --output $WORKDIR/inv-edgar-insider.json
+uv run python tools/query_edgar.py insider <CIK> --detail --limit 10 --output $WORKDIR/inv-edgar-insider.json
 
 # Read specific filings that look relevant
-python tools/query_edgar.py read "<FILING_URL>" --lines 200
+uv run python tools/query_edgar.py read "<FILING_URL>" --lines 200
 ```
 
 ### 3d. Political, Property & Registration Records
 ```bash
 # FEC donations (political influence mapping)
-python tools/query_fec.py donor "<NAME>" --limit 20 --output $WORKDIR/inv-fec-donor.json
-python tools/query_fec.py employer "<KNOWN_EMPLOYER>" --output $WORKDIR/inv-fec-employer.json
+uv run python tools/query_fec.py donor "<NAME>" --limit 20 --output $WORKDIR/inv-fec-donor.json
+uv run python tools/query_fec.py employer "<KNOWN_EMPLOYER>" --output $WORKDIR/inv-fec-employer.json
 
 # NYC ACRIS property records (if NYC connection)
-python tools/query_acris.py party "<NAME>" --output $WORKDIR/inv-acris.json
+uv run python tools/query_acris.py party "<NAME>" --output $WORKDIR/inv-acris.json
 
 # Federal lobbying disclosures
-python tools/query_lobbying.py lobbyist "<NAME>" --output $WORKDIR/inv-lobbying.json
+uv run python tools/query_lobbying.py lobbyist "<NAME>" --output $WORKDIR/inv-lobbying.json
 
 # FARA foreign agent registrations (if foreign connections)
-python tools/query_fara.py search "<NAME>" --output $WORKDIR/inv-fara.json
+uv run python tools/query_fara.py search "<NAME>" --output $WORKDIR/inv-fara.json
 
 # Federal contracts & grants (companies they lead or are associated with)
-python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --output $WORKDIR/inv-usaspending.json
-python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --grants --output $WORKDIR/inv-usaspending-grants.json
+uv run python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --output $WORKDIR/inv-usaspending.json
+uv run python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --grants --output $WORKDIR/inv-usaspending-grants.json
 
 # SAM.gov exclusions (debarment/suspension check)
-python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusions.json
+uv run python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusions.json
 
 # SAM.gov Bulk (local SQLite — 874K entities, 167K exclusions, no API limit)
-python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
+uv run python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
 
 # UK Companies House (mandatory for UK-linked subjects)
-python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output $WORKDIR/inv-uk-officer-search.json
-python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output $WORKDIR/inv-uk-company-search.json
+uv run python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output "$WORKDIR/inv-uk-officer-search.json"
+uv run python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output "$WORKDIR/inv-uk-company-search.json"
 ```
 
 ### Nonprofit Board Positions (990)
@@ -211,7 +211,7 @@ uv run python tools/query_icij.py connections <EXACT_NODE_ID> \
 ### 5. Email Analysis (if applicable)
 ```bash
 # Check HF parquet for email correspondence
-python -c "
+uv run python -c "
 import pandas as pd
 df = pd.read_parquet('datasets/emails.parquet')  # Use investigation-specific email corpus if available
 mask = df.apply(lambda r: '<NAME>'.lower() in str(r).lower(), axis=1)
@@ -226,7 +226,7 @@ for _, row in hits.head(20).iterrows():
 ### 6. Record Findings
 For each notable discovery (all provenance fields required by hooks):
 ```bash
-python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "<NAME>" \
     --summary "What the evidence shows — one line" \
     --type <TYPE> \
@@ -242,7 +242,7 @@ python tools/findings_tracker.py add \
 
 Record connections to known network:
 ```bash
-python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "<NAME>" --person-b "<CONNECTED_PERSON>" \
     --type <RELATIONSHIP> --strength <LEVEL> \
     --evidence <EFTA_IDS>

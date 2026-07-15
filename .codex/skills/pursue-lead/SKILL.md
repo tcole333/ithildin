@@ -126,7 +126,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 ### 4b. Execute Searches
 Run queries against relevant sources. For each search:
 1. Query the source
-2. Log the search: `python tools/lead_tracker.py` (use log_search function)
+2. Log the search: `uv run python tools/lead_tracker.py` (use log_search function)
 3. Record notable results as notes on the lead
 4. If a definitive finding is discovered, create a finding in findings_tracker
 
@@ -158,7 +158,7 @@ This is especially important when:
 ### 5. Record Findings
 For each confirmed discovery (all provenance fields required by hooks):
 ```bash
-python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "<TARGET_NAME>" \
     --summary "One-line summary of what the evidence shows" \
     --type communication \
@@ -181,7 +181,7 @@ python tools/findings_tracker.py add \
 
 If the finding reveals a relationship:
 ```bash
-python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "<PERSON_A>" --person-b "<PERSON_B>" \
     --type financial --strength strong \
     --evidence <EVIDENCE_REF> \
@@ -228,7 +228,7 @@ Check registered pillars: `uv run python tools/pillar_tracker.py list --type ban
 ### 6. Spawn Follow-Up Leads
 When investigation reveals new threads worth pursuing:
 ```bash
-python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --title "Investigate Samantha Stein ProtonMail communications" \
     --category person \
     --priority high \
@@ -244,15 +244,15 @@ Agents should freely create follow-up leads at whatever priority they judge appr
 
 ```bash
 # SEC filing worth reading in full
-python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
+uv run python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
   --category filing --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Government contract worth tracing
-python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
+uv run python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
   --category contract --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Court case worth deep reading
-python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
+uv run python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
   --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
 ```
 
@@ -273,18 +273,22 @@ Do NOT stop because you "found enough" — stop because sources are exhausted or
 
 ### 8. Complete the Lead
 ```bash
-python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
+uv run python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
 ```
 
 If the lead is a dead end:
 ```bash
-python tools/lead_tracker.py dead-end <ID> "Explanation of why"
+uv run python tools/lead_tracker.py dead-end <ID> "Explanation of why"
 ```
 
-If blocked (e.g., Neo4j not running, API down):
+If blocked by a hard access barrier after exhausting public alternatives:
 ```bash
-python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-reference"
+uv run python tools/lead_tracker.py block <ID> "Required primary record is behind unavailable authenticated or paid access"
 ```
+
+Do not block solely because local ICIJ Neo4j is unavailable. Run the official
+remote ICIJ search and first-hop workflow first; missing local Neo4j limits only
+depth greater than one and should be recorded as a narrower coverage gap.
 
 ## Investigative Mindset
 

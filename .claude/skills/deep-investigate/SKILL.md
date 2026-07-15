@@ -132,13 +132,13 @@ Before launching agents, gather what's already known:
 
 ```bash
 # Existing findings
-.venv/bin/python3 tools/findings_tracker.py search "<TARGET>"
+uv run python tools/findings_tracker.py search "<TARGET>"
 
 # Existing leads
-.venv/bin/python3 tools/lead_tracker.py search "<TARGET>"
+uv run python tools/lead_tracker.py search "<TARGET>"
 
 # Existing entity records
-.venv/bin/python3 -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 for r in db.execute('SELECT id, name FROM entities WHERE name LIKE ?', ('%TARGET%',)).fetchall():
@@ -183,27 +183,30 @@ IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JS
 
 REQUIRED SEARCHES:
 For each tool listed in the investigation profile's corpus_tools, run a search against "[TARGET]" and any name variants. Use --output [WORKDIR]/a-<tool-name>.json for each. Example pattern:
-  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-<tool-name>.json
+  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-<tool-name>.json
 
 For tools that support sub-commands (entities, cooccurrence, emails, docs, triples), run those additional queries as well.
 
 For EVERY document found, read the full text (kabasshouse holds the highest-quality OCR for any EFTA id):
-.venv/bin/python3 tools/ingest_kabasshouse.py doc EFTA_ID
+uv run python tools/ingest_kabasshouse.py doc EFTA_ID
 
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 RECORD findings using:
-.venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
+uv run python tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
   --summary "..." --evidence EFTA_ID --claim-type direct_quote \
   --source-quote "EFTA_ID:exact quote" --sources kabass --confidence LEVEL
 
 NOTE: the same EFTA page appearing in kabasshouse AND doj_vol11/lmsband is ONE source re-OCR'd, not corroboration — cite the source you actually read (usually kabass).
 
 Record connections using:
-.venv/bin/python3 tools/findings_tracker.py connect --person-a "..." --person-b "..." \
-  --type TYPE --detail "..." --evidence EFTA_ID --confidence LEVEL
+uv run python tools/findings_tracker.py connect --person-a "..." --person-b "..." \
+  --type TYPE --description "..." --evidence EFTA_ID \
+  --source-quote "EFTA_ID:exact quote" --strength STRENGTH
 
-If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 1.42M pages.
+If zero results: record the exact corpus, query, filters, and covered scope as a
+bounded negative observation. No hit in a large corpus is not proof that the
+underlying fact or relationship does not exist.
 
 PROACTIVE SOURCE DISCOVERY:
 As you search, be curious. If documents reference data sources we don't have tools for, or mention databases/registries/archives that could be queried, note them. For example:
@@ -250,7 +253,7 @@ leads_spawned: [count]
 - [Process gap] missing infrastructure
 - [Source quality] data source reliability notes
 
-Use .venv/bin/python3 for all commands.
+Use uv run python for all commands.
 ```
 
 #### Agent B: Corporate, Financial & Property Records
@@ -271,65 +274,65 @@ IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JS
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
 Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-<tool-name>.json
+  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-<tool-name>.json
 For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (do ALL of these — use --output on every search):
 
 CORPORATE REGISTRIES:
-1. .venv/bin/python3 tools/query_registry.py search "[TARGET]" --output [WORKDIR]/b-registry.json
-2. .venv/bin/python3 tools/query_registry.py officers "[TARGET]" --output [WORKDIR]/b-officers.json
-3. .venv/bin/python3 tools/query_registry.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-addr.json  (if applicable)
+1. uv run python tools/query_registry.py search "[TARGET]" --output [WORKDIR]/b-registry.json
+2. uv run python tools/query_registry.py officers "[TARGET]" --output [WORKDIR]/b-officers.json
+3. uv run python tools/query_registry.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-addr.json  (if applicable)
 
 SEC EDGAR:
-4. .venv/bin/python3 tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
-5. .venv/bin/python3 tools/query_edgar.py lookup "[TARGET]"
-6. .venv/bin/python3 tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
+4. uv run python tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
+5. uv run python tools/query_edgar.py lookup "[TARGET]"
+6. uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
 
 PROPERTY (NYC):
-7. .venv/bin/python3 tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
+7. uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
 
 CAMPAIGN FINANCE:
-8. .venv/bin/python3 tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
-9. .venv/bin/python3 tools/query_fec.py employer "[TARGET]" --output [WORKDIR]/b-fec-emp.json  (if entity)
+8. uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
+9. uv run python tools/query_fec.py employer "[TARGET]" --output [WORKDIR]/b-fec-emp.json  (if entity)
 
 NONPROFITS:
-10. .venv/bin/python3 tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
-10a. .venv/bin/python3 tools/query_990.py lookup <EIN> --output [WORKDIR]/b-990-lookup.json  (if EIN known — comprehensive view)
-10b. .venv/bin/python3 tools/query_990.py officers <EIN> --output [WORKDIR]/b-990-officers.json  (board + staff)
-10c. .venv/bin/python3 tools/query_990.py financials <EIN> --output [WORKDIR]/b-990-financials.json  (revenue/expense trends)
+10. uv run python tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
+10a. uv run python tools/query_990.py lookup <EIN> --output [WORKDIR]/b-990-lookup.json  (if EIN known — comprehensive view)
+10b. uv run python tools/query_990.py officers <EIN> --output [WORKDIR]/b-990-officers.json  (board + staff)
+10c. uv run python tools/query_990.py financials <EIN> --output [WORKDIR]/b-990-financials.json  (revenue/expense trends)
 
 LOBBYING:
-11. .venv/bin/python3 tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json
-12. .venv/bin/python3 tools/query_lobbying.py registrant "[TARGET]" --output [WORKDIR]/b-lda-reg.json
-13. .venv/bin/python3 tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/b-lda-lob.json
+11. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json
+12. uv run python tools/query_lobbying.py registrant "[TARGET]" --output [WORKDIR]/b-lda-reg.json
+13. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/b-lda-lob.json
 
 FOREIGN AGENTS:
-14. .venv/bin/python3 tools/query_fara.py search "[TARGET]" --output [WORKDIR]/b-fara.json
+14. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/b-fara.json
 
 UCC FILINGS:
-15. .venv/bin/python3 tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
+15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
 
 FAA AIRCRAFT:
-16. .venv/bin/python3 tools/ingest_faa.py search "[TARGET]"
+16. uv run python tools/ingest_faa.py search "[TARGET]"
 
 GLEIF (corporate hierarchy — financial entities):
-17. .venv/bin/python3 tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
-18. If LEI found: .venv/bin/python3 tools/query_gleif.py hierarchy <LEI> --output [WORKDIR]/b-gleif-hier.json
+17. uv run python tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
+18. If LEI found: uv run python tools/query_gleif.py hierarchy <LEI> --output [WORKDIR]/b-gleif-hier.json
 
 UK COMPANIES HOUSE (if API key configured):
-19. .venv/bin/python3 tools/ingest_uk_companies_house.py search "[TARGET]" --limit 10
-20. If found: .venv/bin/python3 tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER>
-21. If found: .venv/bin/python3 tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER>
+19. uv run python tools/ingest_uk_companies_house.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-uk-companies.json
+20. If found: uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output [WORKDIR]/b-uk-officers.json
+21. If found: uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output [WORKDIR]/b-uk-psc.json
 
 OPENSANCTIONS (PEP/sanctions check — if ingested):
-22. .venv/bin/python3 tools/query_opensanctions.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-sanctions.json
+22. uv run python tools/query_opensanctions.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-sanctions.json
 
 USVI CORPORATE REGISTRY:
-23. .venv/bin/python3 tools/ingest_usvi.py search "[TARGET]"
+23. uv run python tools/ingest_usvi.py search "[TARGET]"
 
 DS10 DEUTSCHE BANK FINANCIAL RECORDS:
-24. .venv/bin/python3 tools/parse_ds10_financials.py query --entity "[TARGET]"
+24. uv run python tools/parse_ds10_financials.py query --entity "[TARGET]"
 
 For each hit, investigate further (e.g., read SEC filings, pull 990 details, check filing histories).
 
@@ -387,7 +390,7 @@ leads_spawned: [count]
 - [Process gap] missing infrastructure
 - [Source quality] data source reliability notes
 
-Use .venv/bin/python3 for all commands.
+Use uv run python for all commands.
 ```
 
 #### Agent C: Legal & Court Records
@@ -408,20 +411,20 @@ IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JS
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
 Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-<tool-name>.json
+  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-<tool-name>.json
 For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
 COURTLISTENER (federal courts — use --output on ALL):
-1. .venv/bin/python3 tools/query_courtlistener.py search --party "[TARGET]" --output [WORKDIR]/c-cl-party.json
-2. .venv/bin/python3 tools/query_courtlistener.py cases "[TARGET]" --output [WORKDIR]/c-cl-cases.json
-3. .venv/bin/python3 tools/query_courtlistener.py search "[TARGET]" --type o --output [WORKDIR]/c-cl-opinions.json
-4. If any dockets found: .venv/bin/python3 tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
-5. For important opinions: .venv/bin/python3 tools/query_courtlistener.py opinion <OPINION_ID> --lines 500
-6. For citation graph: .venv/bin/python3 tools/query_courtlistener.py citations <OPINION_ID> --output [WORKDIR]/c-cl-citations.json
-7. RECAP documents: .venv/bin/python3 tools/query_courtlistener.py recap-search "[TARGET]" --output [WORKDIR]/c-cl-recap.json
-8. FJC database: .venv/bin/python3 tools/query_courtlistener.py fjc --defendant "[TARGET]" --output [WORKDIR]/c-cl-fjc.json
+1. uv run python tools/query_courtlistener.py search --party "[TARGET]" --output [WORKDIR]/c-cl-party.json
+2. uv run python tools/query_courtlistener.py cases "[TARGET]" --output [WORKDIR]/c-cl-cases.json
+3. uv run python tools/query_courtlistener.py search "[TARGET]" --type o --output [WORKDIR]/c-cl-opinions.json
+4. If any dockets found: uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
+5. For important opinions: uv run python tools/query_courtlistener.py opinion <OPINION_ID> --lines 500
+6. For citation graph: uv run python tools/query_courtlistener.py citations <OPINION_ID> --output [WORKDIR]/c-cl-citations.json
+7. RECAP documents: uv run python tools/query_courtlistener.py recap-search "[TARGET]" --output [WORKDIR]/c-cl-recap.json
+8. FJC database: uv run python tools/query_courtlistener.py fjc --defendant "[TARGET]" --output [WORKDIR]/c-cl-fjc.json
 
 For each case found:
 - What is the nature of the case?
@@ -432,16 +435,16 @@ For each case found:
 - What RECAP documents are available? (download key filings with `download` command)
 
 FARA (deep check):
-6. .venv/bin/python3 tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json
-7. If found: .venv/bin/python3 tools/query_fara.py detail <REG_NUM> --output [WORKDIR]/c-fara-detail.json
+6. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json
+7. If found: uv run python tools/query_fara.py detail <REG_NUM> --output [WORKDIR]/c-fara-detail.json
 
 LOBBYING (deep check):
-8. .venv/bin/python3 tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/c-lda-lob.json
-9. .venv/bin/python3 tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/c-lda-client.json
-10. If filings found: .venv/bin/python3 tools/query_lobbying.py filings --client "[TARGET]" --output [WORKDIR]/c-lda-filings.json
+8. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/c-lda-lob.json
+9. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/c-lda-client.json
+10. If filings found: uv run python tools/query_lobbying.py filings --client "[TARGET]" --output [WORKDIR]/c-lda-filings.json
 
 INVESTIGATION REPORTS (ingested PDFs):
-11. .venv/bin/python3 tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
+11. uv run python tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
 
 RECORD all findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) (e.g., --sources courtlistener fara lobbying). Record connections between the target and any investigation-network persons discovered in litigation.
 
@@ -493,7 +496,7 @@ leads_spawned: [count]
 - [Process gap] missing infrastructure
 - [Source quality] data source reliability notes
 
-Use .venv/bin/python3 for all commands.
+Use uv run python for all commands.
 ```
 
 #### Agent D: Network, OSINT & Open Web
@@ -516,21 +519,21 @@ IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JS
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
 Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-<tool-name>.json
+  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-<tool-name>.json
 For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
 LITTLESIS (relationship mapping):
-1. .venv/bin/python3 tools/query_littlesis.py search "[TARGET]" --output [WORKDIR]/d-ls-search.json
-2. If found: .venv/bin/python3 tools/query_littlesis.py entity <ID> --output [WORKDIR]/d-ls-entity.json
-3. If found: .venv/bin/python3 tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
+1. uv run python tools/query_littlesis.py search "[TARGET]" --output [WORKDIR]/d-ls-search.json
+2. If found: uv run python tools/query_littlesis.py entity <ID> --output [WORKDIR]/d-ls-entity.json
+3. If found: uv run python tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
 
 OCCRP ALEPH (corporate registries, leaks, sanctions):
 # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
-4. .venv/bin/python3 tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
-5. .venv/bin/python3 tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
-6. If found: .venv/bin/python3 tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json
+4. uv run python tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
+5. uv run python tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
+6. If found: uv run python tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json
 
 ICIJ OFFSHORE LEAKS (official remote service; no local database required):
 7. uv run python tools/query_icij.py search "[TARGET]" --output [WORKDIR]/d-icij.json
@@ -551,18 +554,18 @@ INVESTIGATION-SPECIFIC OSINT (search any investigation-specific tools from the p
 13. Run any investigation-specific OSINT tools listed in the profile's corpus_tools that Agent A didn't cover.
 
 INFRASTRUCTURE RECON (DNS, SSL certs, hosting, historical web):
-14. .venv/bin/python3 tools/query_shodan.py domain "[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-domain.json  (if domain known)
-15. .venv/bin/python3 tools/query_shodan.py search "ssl:[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-ssl.json  (if domain known)
-16. .venv/bin/python3 tools/query_shodan.py host [TARGET_IP] --output [WORKDIR]/d-shodan-host.json  (if IP known)
-17. .venv/bin/python3 tools/query_crtsh.py search "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh.json  (cert transparency — subdomain enum)
-18. .venv/bin/python3 tools/query_crtsh.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh-timeline.json
-19. .venv/bin/python3 tools/query_wayback.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback.json  (historical snapshots)
-20. .venv/bin/python3 tools/query_wayback.py first "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback-first.json
-21. .venv/bin/python3 tools/query_urlscan.py search "domain:[TARGET_DOMAIN]" --output [WORKDIR]/d-urlscan.json  (tech stack, linked domains)
+14. uv run python tools/query_shodan.py domain "[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-domain.json  (if domain known)
+15. uv run python tools/query_shodan.py search "ssl:[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-ssl.json  (if domain known)
+16. uv run python tools/query_shodan.py host [TARGET_IP] --output [WORKDIR]/d-shodan-host.json  (if IP known)
+17. uv run python tools/query_crtsh.py search "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh.json  (cert transparency — subdomain enum)
+18. uv run python tools/query_crtsh.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh-timeline.json
+19. uv run python tools/query_wayback.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback.json  (historical snapshots)
+20. uv run python tools/query_wayback.py first "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback-first.json
+21. uv run python tools/query_urlscan.py search "domain:[TARGET_DOMAIN]" --output [WORKDIR]/d-urlscan.json  (tech stack, linked domains)
 
 GDELT (global news):
-22. .venv/bin/python3 tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
-23. .venv/bin/python3 tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
+22. uv run python tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
+23. uv run python tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
 
 RECORD all findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) (e.g., --sources web_search littlesis gdelt). Web sources should use claim-type "paraphrase" with the URL as evidence and --sources web_search. Record connections to any network-connected persons identified in the investigation profile or discovered during research.
 
@@ -620,7 +623,7 @@ leads_spawned: [count]
 - [Process gap] missing infrastructure
 - [Source quality] data source reliability notes
 
-Use .venv/bin/python3 for all commands.
+Use uv run python for all commands.
 ```
 
 ### 3. Wait for Agents and Read Reports
@@ -690,7 +693,7 @@ This captures tool friction, surprise findings, and process insights for later `
 If the sub-agents' individual findings combine to tell a larger story, record a synthesis finding:
 
 ```bash
-.venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
+uv run python tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
   --summary "SYNTHESIS: [what the combined evidence shows]" \
   --evidence [ALL_EVIDENCE_REFS] --claim-type synthesis \
   --source-quote "[REF]:key supporting fact" --sources analysis_run --confidence medium

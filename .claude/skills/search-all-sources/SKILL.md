@@ -40,52 +40,52 @@ Execute these in parallel where possible. **Use `--output` on all searches** to 
 
 ```bash
 # Kabasshouse (PRIMARY Epstein corpus: 1.42M docs, FTS5) — search this FIRST
-python tools/ingest_kabasshouse.py search "<QUERY>" --limit 20 --json > $WORKDIR/search-kabass.json
+uv run python tools/ingest_kabasshouse.py search "<QUERY>" --limit 20 --json > $WORKDIR/search-kabass.json
 
 # Kabasshouse entity mentions (10.6M typed NER rows)
-python tools/ingest_kabasshouse.py entity "<QUERY>" > $WORKDIR/search-kabass-ent.txt
+uv run python tools/ingest_kabasshouse.py entity "<QUERY>" > $WORKDIR/search-kabass-ent.txt
 
 # Unified DB emails (parsed emails — complementary, not text-redundant)
-python tools/query_unified.py emails "<QUERY>" --limit 20 --output $WORKDIR/search-unified-email.json
+uv run python tools/query_unified.py emails "<QUERY>" --limit 20 --output $WORKDIR/search-unified-email.json
 
 # Unified DB entities + triples (relationship extraction)
-python tools/query_unified.py entities "<QUERY>" --output $WORKDIR/search-unified-ent.json
+uv run python tools/query_unified.py entities "<QUERY>" --output $WORKDIR/search-unified-ent.json
 
 # LMSBAND entities (complementary structured layers; text overlaps kabasshouse)
-python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
+uv run python tools/query_lmsband.py entities "<QUERY>" --output $WORKDIR/search-lmsband-ent.json
 
 # DOJ Vol 11 (FALLBACK — strict subset of kabasshouse; cross-check only)
-# python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
+# uv run python tools/query_doj.py search "<QUERY>" --limit 20 --output $WORKDIR/search-doj.json
 ```
 
 **Kabasshouse is the primary Epstein full-text corpus.** DOJ Vol 11 / LMSBAND text search cover the same EFTA pages at lower OCR quality — hits there are redundant, not corroborating. (DugganUSA retired 2026-06-29; do not call `duggan_search.py`.)
 
 ```bash
 # Corporate Registry (FL, NY, more)
-python tools/query_registry.py search "<QUERY>" --output $WORKDIR/search-registry.json
-python tools/query_registry.py officers "<QUERY>" --output $WORKDIR/search-officers.json
+uv run python tools/query_registry.py search "<QUERY>" --output $WORKDIR/search-registry.json
+uv run python tools/query_registry.py officers "<QUERY>" --output $WORKDIR/search-officers.json
 
 # UCC Filings (secured transactions, liens)
-python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
+uv run python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
 
 # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (corporate registries, leaks, sanctions)
-python tools/query_aleph.py search "<QUERY>" --schema Person --output $WORKDIR/search-aleph-person.json
-python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/search-aleph-company.json
+uv run python tools/query_aleph.py search "<QUERY>" --schema Person --output $WORKDIR/search-aleph-person.json
+uv run python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/search-aleph-company.json
 
 # CourtListener (federal courts)
-python tools/query_courtlistener.py search "<QUERY>" --output $WORKDIR/search-cl.json
+uv run python tools/query_courtlistener.py search "<QUERY>" --output $WORKDIR/search-cl.json
 
 # IRS 990 Nonprofit Database (grants, officers, financials)
-python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
+uv run python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
 # 990 officer positions (find person on nonprofit boards)
-python tools/query_990.py officer-search "<QUERY>" --output $WORKDIR/search-990-officers.json
-python tools/query_990.py financials <EIN> --output $WORKDIR/search-990-financials.json  # if EIN known
+uv run python tools/query_990.py officer-search "<QUERY>" --output $WORKDIR/search-990-officers.json
+uv run python tools/query_990.py financials <EIN> --output $WORKDIR/search-990-financials.json  # if EIN known
 
 # DEPRECATED (March 2026): 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 # GDELT (global news media — 3-month rolling window)
-python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/search-gdelt-art.json
-python tools/query_gdelt.py context "<QUERY>" --timespan 1w --limit 20 --output $WORKDIR/search-gdelt-ctx.json
+uv run python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/search-gdelt-art.json
+uv run python tools/query_gdelt.py context "<QUERY>" --timespan 1w --limit 20 --output $WORKDIR/search-gdelt-ctx.json
 ```
 
 Search the official ICIJ remote service; local Neo4j is only needed for graph
@@ -105,94 +105,101 @@ uv run python tools/query_icij.py search "<QUERY>" \
 # WebSearch: "<QUERY> court filing"
 
 # Investigation reports (if investigations.db is populated)
-python tools/query_investigations.py search "<QUERY>" --limit 10
+uv run python tools/query_investigations.py search "<QUERY>" --limit 10
+
+# Versioned reporting knowledge layer (attributed secondary claims)
+uv run python tools/reporting_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-reporting.json
+uv run python tools/reporting_corpus.py claims "<QUERY>" --limit 20 --output $WORKDIR/search-reporting-claims.json
+
+# Primary DOJ/SEC government statements (not automatic proof of allegations)
+uv run python tools/government_release_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-government-releases.json
 
 # LittleSis relationship mapping
-python tools/query_littlesis.py search "<QUERY>"
+uv run python tools/query_littlesis.py search "<QUERY>"
 
 # SEC EDGAR full-text search (with aggregation facets for network mapping)
-python tools/query_edgar.py search "<QUERY>" --size 10 --facets
+uv run python tools/query_edgar.py search "<QUERY>" --size 10 --facets
 
 # FAA Registry (if ingested — aviation-related queries)
-python tools/ingest_faa.py search "<QUERY>"
+uv run python tools/ingest_faa.py search "<QUERY>"
 
 # NYC ACRIS property records
-python tools/query_acris.py party "<QUERY>"
+uv run python tools/query_acris.py party "<QUERY>"
 
 # FEC campaign finance
-python tools/query_fec.py donor "<QUERY>" --limit 20
+uv run python tools/query_fec.py donor "<QUERY>" --limit 20
 
 # Federal lobbying disclosures
-python tools/query_lobbying.py client "<QUERY>"
+uv run python tools/query_lobbying.py client "<QUERY>"
 
 # FARA foreign agents
-python tools/query_fara.py search "<QUERY>"
+uv run python tools/query_fara.py search "<QUERY>"
 
 # GLEIF corporate hierarchy (LEI records — financial entities only)
-python tools/query_gleif.py search "<QUERY>" --limit 10
+uv run python tools/query_gleif.py search "<QUERY>" --limit 10
 
 # UK Companies House (if API key configured)
-python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10
-python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10
+uv run python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-companies.json"
+uv run python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-officers.json"
 
 # OpenSanctions (PEP/sanctions check — if ingested)
-python tools/query_opensanctions.py search "<QUERY>" --limit 10
+uv run python tools/query_opensanctions.py search "<QUERY>" --limit 10
 
 # SEC Enforcement Actions (litigation releases, admin proceedings, AAERs)
-python tools/query_sec_enforcement.py search "<QUERY>" --limit 10
+uv run python tools/query_sec_enforcement.py search "<QUERY>" --limit 10
 
 # DS10 Deutsche Bank financial records (entity/counterparty search)
-python tools/parse_ds10_financials.py query --entity "<QUERY>"
+uv run python tools/parse_ds10_financials.py query --entity "<QUERY>"
 
 # USVI corporate registry (Catalyst web scraper — search only, no bulk)
-python tools/ingest_usvi.py search "<QUERY>"
+uv run python tools/ingest_usvi.py search "<QUERY>"
 
 # DC DLCP (ArcGIS FeatureServer — 492K entities, no auth)
-python tools/ingest_dc.py search "<QUERY>" --output $WORKDIR/search-dc.json
+uv run python tools/ingest_dc.py search "<QUERY>" --output $WORKDIR/search-dc.json
 
 # California SoS bizfileonline (web API, up to 500 results, needs MCP Playwright Chrome)
-python tools/query_california.py search "<QUERY>" --output $WORKDIR/search-ca-sos.json
+uv run python tools/query_california.py search "<QUERY>" --output $WORKDIR/search-ca-sos.json
 
 # Texas Comptroller (franchise tax entities — no auth)
-python tools/query_texas.py search "<QUERY>" --output $WORKDIR/search-tx.json
+uv run python tools/query_texas.py search "<QUERY>" --output $WORKDIR/search-tx.json
 
 # Michigan LARA (business registry — Playwright browser helper, Cloudflare WAF)
-python tools/query_michigan.py search "<QUERY>" --contains --output $WORKDIR/search-mi.json
+uv run python tools/query_michigan.py search "<QUERY>" --contains --output $WORKDIR/search-mi.json
 
 # New Jersey Division of Revenue (business entity name search — no detail pages)
-python tools/query_newjersey.py search "<QUERY>" --output $WORKDIR/search-nj.json
+uv run python tools/query_newjersey.py search "<QUERY>" --output $WORKDIR/search-nj.json
 
 # Massachusetts Corporations Division (Playwright browser helper, Incapsula WAF)
-python tools/query_massachusetts.py search "<QUERY>" --output $WORKDIR/search-ma.json
+uv run python tools/query_massachusetts.py search "<QUERY>" --output $WORKDIR/search-ma.json
 
 # Shodan (infrastructure recon — DNS, SSL certs, hosting, org footprint — paid plan)
-python tools/query_shodan.py search "ssl:<QUERY>" --output $WORKDIR/search-shodan-ssl.json
-python tools/query_shodan.py domain "<QUERY>" --output $WORKDIR/search-shodan-domain.json
+uv run python tools/query_shodan.py search "ssl:<QUERY>" --output $WORKDIR/search-shodan-ssl.json
+uv run python tools/query_shodan.py domain "<QUERY>" --output $WORKDIR/search-shodan-domain.json
 
 # crt.sh Certificate Transparency (subdomain enum, cert timeline — free, no auth)
-python tools/query_crtsh.py search "<QUERY>" --output $WORKDIR/search-crtsh.json
+uv run python tools/query_crtsh.py search "<QUERY>" --output $WORKDIR/search-crtsh.json
 
 # Wayback Machine (historical web snapshots — free, no auth)
-python tools/query_wayback.py timeline "<QUERY>" --output $WORKDIR/search-wayback.json
+uv run python tools/query_wayback.py timeline "<QUERY>" --output $WORKDIR/search-wayback.json
 
 # URLScan.io (passive web scans — tech stacks, linked domains — free)
-python tools/query_urlscan.py search "domain:<QUERY>" --output $WORKDIR/search-urlscan.json
+uv run python tools/query_urlscan.py search "domain:<QUERY>" --output $WORKDIR/search-urlscan.json
 
 # OffshoreAlert (29K+ offshore court cases, articles, MLATs, regulatory actions)
-python tools/offshorealert_search.py search "<QUERY>" -v --output $WORKDIR/search-offshorealert.json
+uv run python tools/offshorealert_search.py search "<QUERY>" -v --output $WORKDIR/search-offshorealert.json
 
 # USAspending (federal contracts, grants, loans — no auth)
-python tools/query_usaspending.py awards "<QUERY>" --output $WORKDIR/search-usaspending-contracts.json
-python tools/query_usaspending.py awards "<QUERY>" --grants --output $WORKDIR/search-usaspending-grants.json
-python tools/query_usaspending.py subawards "<QUERY>" --output $WORKDIR/search-usaspending-subs.json
+uv run python tools/query_usaspending.py awards "<QUERY>" --output $WORKDIR/search-usaspending-contracts.json
+uv run python tools/query_usaspending.py awards "<QUERY>" --grants --output $WORKDIR/search-usaspending-grants.json
+uv run python tools/query_usaspending.py subawards "<QUERY>" --output $WORKDIR/search-usaspending-subs.json
 
 # SAM.gov API (entity registrations, exclusions/debarments — requires SAM_API_KEY)
-python tools/query_sam.py entity "<QUERY>" --output $WORKDIR/search-sam-entity.json
-python tools/query_sam.py exclusions "<QUERY>" --output $WORKDIR/search-sam-exclusions.json
-python tools/query_sam.py contracts "<QUERY>" --output $WORKDIR/search-sam-contracts.json
+uv run python tools/query_sam.py entity "<QUERY>" --output $WORKDIR/search-sam-entity.json
+uv run python tools/query_sam.py exclusions "<QUERY>" --output $WORKDIR/search-sam-exclusions.json
+uv run python tools/query_sam.py contracts "<QUERY>" --output $WORKDIR/search-sam-contracts.json
 
 # SAM.gov Bulk (874K entities, 167K exclusions — local SQLite, no API limit)
-python tools/ingest_sam.py search "<QUERY>" --output $WORKDIR/search-sam-bulk.json
+uv run python tools/ingest_sam.py search "<QUERY>" --output $WORKDIR/search-sam-bulk.json
 ```
 
 ### 1c. Investigation Corpus Tools (from profile)
@@ -201,7 +208,7 @@ Search any investigation-specific corpus tools listed in `corpus_tools` from the
 
 ```bash
 # Example — the actual tools depend on the investigation profile's corpus_tools list:
-# python tools/<corpus_tool>.py search "<QUERY>" --limit 10 --output $WORKDIR/search-<source>.json
+# uv run python tools/<corpus_tool>.py search "<QUERY>" --limit 10 --output $WORKDIR/search-<source>.json
 ```
 
 Log each corpus tool search the same way as generic sources.
@@ -236,6 +243,8 @@ log_search("<QUERY>", "gleif", result_count)
 log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
 log_search("<QUERY>", "sec_enforcement", result_count)
+log_search("<QUERY>", "reporting", result_count)
+log_search("<QUERY>", "government_releases", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)

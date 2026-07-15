@@ -67,8 +67,8 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 
 ### 1. Check Existing Knowledge
 ```bash
-python tools/findings_tracker.py search "<ENTITY>" --output $WORKDIR/trace-findings.json
-python tools/lead_tracker.py search "<ENTITY>" --output $WORKDIR/trace-leads.json
+uv run python tools/findings_tracker.py search "<ENTITY>" --output $WORKDIR/trace-findings.json
+uv run python tools/lead_tracker.py search "<ENTITY>" --output $WORKDIR/trace-leads.json
 ls research/entities/
 ```
 
@@ -98,8 +98,8 @@ If matches found, trace the full graph:
 
 ### 3. Document Corpus (Kabasshouse primary)
 ```bash
-python tools/ingest_kabasshouse.py search "<ENTITY>" --limit 30 --json > $WORKDIR/trace-kabass.json
-python tools/ingest_kabasshouse.py entity "<ENTITY>" > $WORKDIR/trace-kabass-ent.txt
+uv run python tools/ingest_kabasshouse.py search "<ENTITY>" --limit 30 --json > $WORKDIR/trace-kabass.json
+uv run python tools/ingest_kabasshouse.py entity "<ENTITY>" > $WORKDIR/trace-kabass-ent.txt
 ```
 
 Look for:
@@ -109,47 +109,47 @@ Look for:
 
 ### 4. LMSBAND / Unified DB
 ```bash
-python tools/query_lmsband.py search "<ENTITY>" --limit 20 --output $WORKDIR/trace-lmsband.json
-python tools/query_lmsband.py entities "<ENTITY>" --output $WORKDIR/trace-lmsband-ent.json
-python tools/query_unified.py docs "<ENTITY>" --limit 20 --output $WORKDIR/trace-unified-docs.json
-python tools/query_unified.py triples --target "<ENTITY>" --output $WORKDIR/trace-unified-triples.json
+uv run python tools/query_lmsband.py search "<ENTITY>" --limit 20 --output $WORKDIR/trace-lmsband.json
+uv run python tools/query_lmsband.py entities "<ENTITY>" --output $WORKDIR/trace-lmsband-ent.json
+uv run python tools/query_unified.py docs "<ENTITY>" --limit 20 --output $WORKDIR/trace-unified-docs.json
+uv run python tools/query_unified.py triples --target "<ENTITY>" --output $WORKDIR/trace-unified-triples.json
 ```
 
 ### 5. Entity Co-occurrence
 ```bash
-python tools/query_lmsband.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-lmsband-coocc.json
-python tools/query_unified.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-unified-coocc.json
+uv run python tools/query_lmsband.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-lmsband-coocc.json
+uv run python tools/query_unified.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-unified-coocc.json
 ```
 
 ### 6. Corporate Registries & External APIs
 ```bash
 # Unified corporate registry (FL, NY, more)
-python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/trace-registry.json
-python tools/query_registry.py officers "<ENTITY>" --output $WORKDIR/trace-registry-officers.json
-python tools/query_registry.py address "<KNOWN_ADDRESS>" --output $WORKDIR/trace-registry-addr.json
-python tools/query_registry.py agent "<ENTITY>" --output $WORKDIR/trace-registry-agent.json
-python tools/query_registry.py filings <registry_entity_id> --output $WORKDIR/trace-registry-filings.json
+uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/trace-registry.json
+uv run python tools/query_registry.py officers "<ENTITY>" --output $WORKDIR/trace-registry-officers.json
+uv run python tools/query_registry.py address "<KNOWN_ADDRESS>" --output $WORKDIR/trace-registry-addr.json
+uv run python tools/query_registry.py agent "<ENTITY>" --output $WORKDIR/trace-registry-agent.json
+uv run python tools/query_registry.py filings <registry_entity_id> --output $WORKDIR/trace-registry-filings.json
 
 # UCC Filings (secured transactions, liens, creditor relationships)
-python tools/query_registry.py ucc-search "<ENTITY>" --output $WORKDIR/trace-ucc.json
-python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --output $WORKDIR/trace-ucc-debtor.json
-python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
-python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
+uv run python tools/query_registry.py ucc-search "<ENTITY>" --output $WORKDIR/trace-ucc.json
+uv run python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --output $WORKDIR/trace-ucc-debtor.json
+uv run python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
+uv run python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
 
 # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (global corporate registries, leaks)
-python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
-python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WORKDIR/trace-aleph-org.json
+uv run python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
+uv run python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WORKDIR/trace-aleph-org.json
 
 # CourtListener (legal proceedings)
-python tools/query_courtlistener.py search "<ENTITY>" --output $WORKDIR/trace-cl.json
-python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-party.json
+uv run python tools/query_courtlistener.py search "<ENTITY>" --output $WORKDIR/trace-cl.json
+uv run python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-party.json
 
 # IRS 990 (if nonprofit — comprehensive view with officers, financials, grants)
-python tools/query_990.py lookup <EIN> --output $WORKDIR/trace-990-lookup.json   # if EIN known
-python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json     # if searching by name
-python tools/query_990.py officers <EIN> --output $WORKDIR/trace-990-officers.json
-python tools/query_990.py financials <EIN> --output $WORKDIR/trace-990-financials.json
+uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/trace-990-lookup.json   # if EIN known
+uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json     # if searching by name
+uv run python tools/query_990.py officers <EIN> --output $WORKDIR/trace-990-officers.json
+uv run python tools/query_990.py financials <EIN> --output $WORKDIR/trace-990-financials.json
 
 # UK Companies House (mandatory for UK entities/officers/addresses)
 uv run python tools/ingest_uk_companies_house.py search "<ENTITY>" --output "$WORKDIR/trace-uk-search.json"
@@ -159,50 +159,50 @@ uv run python tools/ingest_uk_companies_house.py officer-search "<ENTITY>" --out
 ### 6b. External APIs & Web Research
 ```bash
 # LittleSis (relationship/board mapping)
-python tools/query_littlesis.py search "<ENTITY>" --output $WORKDIR/trace-littlesis.json
-python tools/query_littlesis.py relationships <ID> --category 10 --output $WORKDIR/trace-littlesis-ownership.json
+uv run python tools/query_littlesis.py search "<ENTITY>" --output $WORKDIR/trace-littlesis.json
+uv run python tools/query_littlesis.py relationships <ID> --category 10 --output $WORKDIR/trace-littlesis-ownership.json
 
 # SEC EDGAR (mentions in public filings + ownership disclosures)
-python tools/query_edgar.py lookup "<ENTITY>" --output $WORKDIR/trace-edgar-lookup.json
-python tools/query_edgar.py search "<ENTITY>" --size 10 --facets --output $WORKDIR/trace-edgar.json
-python tools/query_edgar.py search "<ENTITY>" --forms "SC 13D" --output $WORKDIR/trace-edgar-13d.json
-python tools/query_edgar.py filings <CIK> --form "DEF 14A" --output $WORKDIR/trace-edgar-proxy.json
+uv run python tools/query_edgar.py lookup "<ENTITY>" --output $WORKDIR/trace-edgar-lookup.json
+uv run python tools/query_edgar.py search "<ENTITY>" --size 10 --facets --output $WORKDIR/trace-edgar.json
+uv run python tools/query_edgar.py search "<ENTITY>" --forms "SC 13D" --output $WORKDIR/trace-edgar-13d.json
+uv run python tools/query_edgar.py filings <CIK> --form "DEF 14A" --output $WORKDIR/trace-edgar-proxy.json
 
 # FAA Registry (if aircraft/aviation entity)
-python tools/ingest_faa.py search "<ENTITY>" --output $WORKDIR/trace-faa.json
+uv run python tools/ingest_faa.py search "<ENTITY>" --output $WORKDIR/trace-faa.json
 
 # Investigation reports (if populated)
-python tools/query_investigations.py search "<ENTITY>" --limit 10 --output $WORKDIR/trace-investigations.json
+uv run python tools/query_investigations.py search "<ENTITY>" --limit 10 --output $WORKDIR/trace-investigations.json
 ```
 
 ```bash
 # NYC property records (if NYC entity)
-python tools/query_acris.py party "<ENTITY>" --output $WORKDIR/trace-acris.json
-python tools/query_acris.py batch-entities   # Cross-ref all investigation entities
+uv run python tools/query_acris.py party "<ENTITY>" --output $WORKDIR/trace-acris.json
+uv run python tools/query_acris.py batch-entities   # Cross-ref all investigation entities
 
 # FEC (donations from entity employees)
-python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/trace-fec.json
+uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/trace-fec.json
 
 # Lobbying (was entity a client or registrant?)
-python tools/query_lobbying.py client "<ENTITY>" --output $WORKDIR/trace-lobbying-client.json
-python tools/query_lobbying.py registrant "<ENTITY>" --output $WORKDIR/trace-lobbying-registrant.json
+uv run python tools/query_lobbying.py client "<ENTITY>" --output $WORKDIR/trace-lobbying-client.json
+uv run python tools/query_lobbying.py registrant "<ENTITY>" --output $WORKDIR/trace-lobbying-registrant.json
 
 # FARA (foreign agent registration)
-python tools/query_fara.py search "<ENTITY>" --output $WORKDIR/trace-fara.json
+uv run python tools/query_fara.py search "<ENTITY>" --output $WORKDIR/trace-fara.json
 
 # Federal contracts & grants (USAspending — no auth)
-python tools/query_usaspending.py awards "<ENTITY>" --output $WORKDIR/trace-usaspending-contracts.json
-python tools/query_usaspending.py awards "<ENTITY>" --grants --output $WORKDIR/trace-usaspending-grants.json
-python tools/query_usaspending.py subawards "<ENTITY>" --output $WORKDIR/trace-usaspending-subs.json
-python tools/query_usaspending.py timeline "<ENTITY>" --group fiscal_year --output $WORKDIR/trace-usaspending-timeline.json
+uv run python tools/query_usaspending.py awards "<ENTITY>" --output $WORKDIR/trace-usaspending-contracts.json
+uv run python tools/query_usaspending.py awards "<ENTITY>" --grants --output $WORKDIR/trace-usaspending-grants.json
+uv run python tools/query_usaspending.py subawards "<ENTITY>" --output $WORKDIR/trace-usaspending-subs.json
+uv run python tools/query_usaspending.py timeline "<ENTITY>" --group fiscal_year --output $WORKDIR/trace-usaspending-timeline.json
 
 # SAM.gov API (entity registration, exclusions — requires SAM_API_KEY)
-python tools/query_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-entity.json
-python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-sam-exclusions.json
+uv run python tools/query_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-entity.json
+uv run python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-sam-exclusions.json
 
 # SAM.gov Bulk (874K entities, 167K exclusions — local SQLite, no API limit)
-python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
-python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
+uv run python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
+uv run python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
 ```
 
 Web research:
@@ -214,7 +214,7 @@ Web research:
 ### 7. Record Findings
 For each entity discovered in the ownership chain (provenance fields required):
 ```bash
-python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "<ENTITY>" \
     --type financial \
     --summary "What the evidence shows" \
@@ -227,7 +227,7 @@ python tools/findings_tracker.py add \
 
 Record ownership/corporate connections:
 ```bash
-python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "<ENTITY>" --person-b "<OWNER/OFFICER>" \
     --type corporate --strength strong \
     --evidence <IDS>

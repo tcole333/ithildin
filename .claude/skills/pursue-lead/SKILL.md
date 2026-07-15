@@ -49,15 +49,16 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 ### 1. Select Lead
 If no specific ID given, use `claim-next` to atomically select and claim in one step (prevents race conditions with parallel agents):
 ```bash
-python tools/lead_tracker.py claim-next
+uv run python tools/lead_tracker.py claim-next
 ```
 To filter by category or thread:
 ```bash
-python tools/lead_tracker.py claim-next --category person --thread-id 1
+uv run python tools/lead_tracker.py claim-next --category person --thread-id 1
 ```
-If a specific lead ID was given, claim it directly:
+If a specific lead ID was given, claim it directly and then load its details:
 ```bash
-python tools/lead_tracker.py claim <ID>
+uv run python tools/lead_tracker.py claim <ID>
+uv run python tools/lead_tracker.py show <ID>
 ```
 
 ### 2. Classify Investigation Type
@@ -126,7 +127,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 ### 4b. Execute Searches
 Run queries against relevant sources. For each search:
 1. Query the source
-2. Log the search: `python tools/lead_tracker.py` (use log_search function)
+2. Log the search: `uv run python tools/lead_tracker.py` (use log_search function)
 3. Record notable results as notes on the lead
 4. If a definitive finding is discovered, create a finding in findings_tracker
 
@@ -158,7 +159,7 @@ This is especially important when:
 ### 5. Record Findings
 For each confirmed discovery (all provenance fields required by hooks):
 ```bash
-python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "<TARGET_NAME>" \
     --summary "One-line summary of what the evidence shows" \
     --type communication \
@@ -181,7 +182,7 @@ python tools/findings_tracker.py add \
 
 If the finding reveals a relationship:
 ```bash
-python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "<PERSON_A>" --person-b "<PERSON_B>" \
     --type financial --strength strong \
     --evidence <EVIDENCE_REF> \
@@ -228,7 +229,7 @@ Check registered pillars: `uv run python tools/pillar_tracker.py list --type ban
 ### 6. Spawn Follow-Up Leads
 When investigation reveals new threads worth pursuing:
 ```bash
-python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --title "Investigate Samantha Stein ProtonMail communications" \
     --category person \
     --priority high \
@@ -244,15 +245,15 @@ Agents should freely create follow-up leads at whatever priority they judge appr
 
 ```bash
 # SEC filing worth reading in full
-python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
+uv run python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
   --category filing --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Government contract worth tracing
-python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
+uv run python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
   --category contract --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Court case worth deep reading
-python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
+uv run python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
   --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
 ```
 
@@ -273,18 +274,22 @@ Do NOT stop because you "found enough" — stop because sources are exhausted or
 
 ### 8. Complete the Lead
 ```bash
-python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
+uv run python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
 ```
 
 If the lead is a dead end:
 ```bash
-python tools/lead_tracker.py dead-end <ID> "Explanation of why"
+uv run python tools/lead_tracker.py dead-end <ID> "Explanation of why"
 ```
 
-If blocked (e.g., Neo4j not running, API down):
+If blocked by a hard access barrier after exhausting public alternatives:
 ```bash
-python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-reference"
+uv run python tools/lead_tracker.py block <ID> "Required primary record is behind unavailable authenticated or paid access"
 ```
+
+Do not block solely because local ICIJ Neo4j is unavailable. Run the official
+remote ICIJ search and first-hop workflow first; missing local Neo4j limits only
+depth greater than one and should be recorded as a narrower coverage gap.
 
 ## Investigative Mindset
 
@@ -327,7 +332,7 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 - **Prefer EFTA IDs** as canonical evidence references when available
 - **Create follow-ups generously**: If something looks interesting, create a lead for it
 - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
-- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update CLAUDE.md.
+- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update both `CLAUDE.md` and `AGENTS.md`.
 - **Extend existing tools when gaps appear**: If a query tool doesn't cover a jurisdiction you need, or a search tool misses a variant you tried manually, create an infra request with `--type tool_improvement`. Small enhancements compound across all future investigations.
 
 ## Context Management
