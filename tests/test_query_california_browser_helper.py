@@ -58,6 +58,29 @@ def test_california_helper_rejects_unbounded_limit_before_browser_launch() -> No
     assert "--limit must be an integer from 1 to 500" in result.stderr
 
 
+def test_california_helper_classifies_waf_html_before_json_parse() -> None:
+    script = f"""
+const helper = require({json.dumps(str(HELPER))});
+try {{
+  helper.parseSearchBody('<html>Request unsuccessful. Incapsula</html>', 'text/html');
+}} catch (error) {{
+  process.stderr.write(error.message);
+  process.exit(7);
+}}
+"""
+    result = subprocess.run(
+        ["node", "-e", script],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 7
+    assert "non-JSON HTML" in result.stderr
+    assert "Imperva challenge" in result.stderr
+    assert "Unexpected token" not in result.stderr
+
+
 def test_python_search_bridge_preserves_bounded_result_shape(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -175,6 +175,21 @@ function parseSearchResponse(raw, requestedLimit) {
     };
 }
 
+function parseSearchBody(body, contentType = '') {
+    try {
+        return JSON.parse(body);
+    } catch (error) {
+        if (/html/i.test(contentType) || /^\s*</.test(body)) {
+            throw new Error(
+                'official business search returned non-JSON HTML, likely an ' +
+                'Imperva challenge; retry in headed Chrome and complete any ' +
+                'visible challenge'
+            );
+        }
+        throw new Error(`official business search returned invalid JSON: ${error.message}`);
+    }
+}
+
 async function search(page, query, requestedLimit) {
     let lastError = null;
     for (let attempt = 1; attempt <= MAX_DOM_ATTEMPTS; attempt += 1) {
@@ -202,11 +217,16 @@ async function search(page, query, requestedLimit) {
             if (response.status() !== 200) {
                 throw new Error(`official business search returned HTTP ${response.status()}`);
             }
-            return parseSearchResponse(await response.json(), requestedLimit);
+            const headers = await response.allHeaders();
+            const raw = parseSearchBody(
+                await response.text(), headers['content-type'] || ''
+            );
+            return parseSearchResponse(raw, requestedLimit);
         } catch (error) {
             lastError = error;
             if (attempt < MAX_DOM_ATTEMPTS &&
-                /detached|Timeout|not attached|stabilize/i.test(error.message)) {
+                /detached|Timeout|not attached|stabilize|Imperva|non-JSON HTML|challenge/i
+                    .test(error.message)) {
                 await page.waitForTimeout(750);
                 continue;
             }
@@ -268,8 +288,12 @@ async function main() {
     process.stdout.write(JSON.stringify(result));
 }
 
-main().catch(error => {
-    const prefix = error instanceof RuntimeDependencyError ? 'RUNTIME ERROR' : 'ERROR';
-    process.stderr.write(`${prefix}: ${error.message}\n`);
-    process.exit(1);
-});
+if (require.main === module) {
+    main().catch(error => {
+        const prefix = error instanceof RuntimeDependencyError ? 'RUNTIME ERROR' : 'ERROR';
+        process.stderr.write(`${prefix}: ${error.message}\n`);
+        process.exit(1);
+    });
+}
+
+module.exports = { parseSearchBody };

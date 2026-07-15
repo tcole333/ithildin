@@ -15,7 +15,6 @@ import base64
 import json
 import os
 import sqlite3
-import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
