@@ -14,6 +14,7 @@ Usage:
 """
 
 import argparse
+import json
 import re
 import sqlite3
 import sys
@@ -979,12 +980,15 @@ def _merge_entity_relations(db, keep_id, drop_id):
     return len(rows)
 
 
-def merge_entity_records(db, keep_id, drop_id, created_by="entity_resolution"):
+def merge_entity_records(
+    db, keep_id, drop_id, created_by="entity_resolution", replacement_notes=None
+):
     """Merge two entity rows on an existing transaction-capable connection.
 
     The caller owns commit/rollback.  Centralizing this operation keeps both
     entity merge CLIs aligned with every entity foreign key in the current
-    schema.
+    schema. When replacement_notes is provided, it becomes the canonical note
+    and both pre-merge notes are retained in the corrections audit trail.
     """
     if keep_id == drop_id:
         raise ValueError("keep and drop entity IDs must differ")
@@ -1035,13 +1039,42 @@ def merge_entity_records(db, keep_id, drop_id, created_by="entity_resolution"):
             "DELETE FROM institutional_pillars WHERE entity_id = ?", (drop_id,)
         )
 
-    merged_notes = _merge_text(keep.get("notes"), drop.get("notes"), drop_id)
+    merged_notes = (
+        str(replacement_notes).strip()
+        if replacement_notes is not None
+        else _merge_text(keep.get("notes"), drop.get("notes"), drop_id)
+    )
     merged_source = _merge_sources(keep.get("source"), drop.get("source"))
     entity_type = keep.get("entity_type")
     if entity_type in (None, "", "unknown") and drop.get("entity_type") not in (
         None, "", "unknown"
     ):
         entity_type = drop["entity_type"]
+    if replacement_notes is not None:
+        prior_notes = json.dumps(
+            {
+                "keep_entity_id": keep_id,
+                "keep_notes": keep.get("notes"),
+                "drop_entity_id": drop_id,
+                "drop_notes": drop.get("notes"),
+            },
+            sort_keys=True,
+        )
+        db.execute(
+            """
+            INSERT INTO corrections (
+                table_name, record_id, field_name, old_value, new_value,
+                reason, corrected_by, correction_type
+            ) VALUES ('entities', ?, 'notes', ?, ?, ?, ?, 'merge')
+            """,
+            (
+                keep_id,
+                prior_notes,
+                merged_notes,
+                f"Canonical notes supplied while merging entity #{drop_id}",
+                created_by,
+            ),
+        )
     db.execute(
         "UPDATE entities SET notes = ?, source = ?, entity_type = ? WHERE id = ?",
         (merged_notes, merged_source, entity_type, keep_id),
@@ -1139,7 +1172,12 @@ def cmd_merge(args):
     # Preserve the dropped entity's notes/source into the kept entity — a merge
     # must not silently discard intel. Union sources; append notes if not already
     # contained. Also inherit a more-specific entity_type if keep is 'unknown'.
-    merged_notes = _merge_text(keep.get("notes"), drop.get("notes"), drop["id"])
+    replacement_notes = getattr(args, "replacement_notes", None)
+    merged_notes = (
+        replacement_notes.strip()
+        if replacement_notes is not None
+        else _merge_text(keep.get("notes"), drop.get("notes"), drop["id"])
+    )
     merged_source = _merge_sources(keep.get("source"), drop.get("source"))
     inherit_type = (
         drop["entity_type"]
@@ -1147,7 +1185,9 @@ def cmd_merge(args):
         and drop["entity_type"] not in (None, "", "unknown")
         else None
     )
-    if merged_notes != (keep.get("notes") or ""):
+    if replacement_notes is not None:
+        actions.append(f"  - Replace canonical notes for #{keep['id']}")
+    elif merged_notes != (keep.get("notes") or ""):
         actions.append(f"  - Merge notes from #{drop['id']} into #{keep['id']}")
     if merged_source != (keep.get("source") or ""):
         actions.append(f"  - Union sources -> '{merged_source}'")
@@ -1164,7 +1204,11 @@ def cmd_merge(args):
     # Execute merge
     try:
         merge_entity_records(
-            db, keep["id"], drop["id"], created_by="entity_resolution"
+            db,
+            keep["id"],
+            drop["id"],
+            created_by="entity_resolution",
+            replacement_notes=replacement_notes,
         )
 
         db.commit()
@@ -1275,6 +1319,13 @@ def main():
     p = sub.add_parser("merge", help="Merge two entities (keep one, alias the other)")
     p.add_argument("keep_id", type=int, help="Entity ID to keep")
     p.add_argument("drop_id", type=int, help="Entity ID to merge in and delete")
+    p.add_argument(
+        "--replacement-notes",
+        help=(
+            "Replace the kept entity's notes instead of appending both pre-merge notes; "
+            "use when the old notes conflict with the resolved identity"
+        ),
+    )
     p.add_argument("--dry-run", action="store_true", help="Show plan without executing")
 
     # stats

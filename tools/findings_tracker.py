@@ -1553,6 +1553,52 @@ def relate_findings(from_finding_id, to_finding_id, relation_type,
     return True
 
 
+def delete_finding_relation(from_finding_id, to_finding_id, relation_type,
+                            reason, corrected_by=None):
+    """Delete one finding relation while retaining its full audit snapshot."""
+    if not str(reason or "").strip():
+        raise ValueError("An audit reason is required to delete a finding relation")
+
+    db = _get_db_standalone()
+    try:
+        relation = db.execute(
+            """
+            SELECT * FROM finding_relations
+            WHERE from_finding_id = ? AND to_finding_id = ? AND relation_type = ?
+            """,
+            (from_finding_id, to_finding_id, relation_type),
+        ).fetchone()
+        if relation is None:
+            raise ValueError(
+                f"finding relation #{from_finding_id} {relation_type} "
+                f"#{to_finding_id} does not exist"
+            )
+
+        snapshot = json.dumps(dict(relation), sort_keys=True, default=str)
+        db.execute(
+            """
+            INSERT INTO corrections (
+                table_name, record_id, field_name, old_value, new_value,
+                reason, corrected_by, correction_type
+            ) VALUES ('finding_relations', ?, '__row__', ?, NULL, ?, ?, 'retraction')
+            """,
+            (
+                relation["id"],
+                snapshot,
+                reason.strip(),
+                corrected_by or "findings_tracker",
+            ),
+        )
+        db.execute("DELETE FROM finding_relations WHERE id = ?", (relation["id"],))
+        db.commit()
+        return relation["id"]
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
 def _connection_evidence_snapshot(row):
     """Return the provenance fields stored in a connection evidence audit snapshot."""
     values = dict(row)
@@ -2438,6 +2484,7 @@ def main():
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
     add_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
+    add_output_args(add_p)
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -2687,6 +2734,21 @@ def main():
     relate_p.add_argument("--assessment", "-a", help="Why the relation holds")
     relate_p.add_argument("--by", default="human")
 
+    relation_delete_p = subparsers.add_parser(
+        "relation-delete",
+        aliases=["unrelate"],
+        help="Delete one finding relation while retaining an audit snapshot",
+    )
+    relation_delete_p.add_argument("from_id", type=int)
+    relation_delete_p.add_argument("to_id", type=int)
+    relation_delete_p.add_argument(
+        "--type", "-t", required=True, dest="relation_type",
+        choices=["contradicts", "corroborates", "supersedes",
+                 "duplicates", "refines", "depends_on"],
+    )
+    relation_delete_p.add_argument("--reason", "-r", required=True)
+    relation_delete_p.add_argument("--by", default="human")
+
     # retract
     retract_p = subparsers.add_parser("retract", help="Retract a finding (cascades to connections)")
     retract_p.add_argument("id", type=int)
@@ -2772,7 +2834,12 @@ def main():
         except ValueError as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             raise SystemExit(2)
-        print(f"Created finding #{fid}: {args.target} - {args.summary}")
+        created = {"id": fid, "target_name": args.target, "summary": args.summary}
+        if not write_output(created, args, summary=f"created finding #{fid}"):
+            if getattr(args, "json_out", False):
+                print(json.dumps(created, indent=2))
+            else:
+                print(f"Created finding #{fid}: {args.target} - {args.summary}")
 
     elif args.command == "list":
         findings = list_findings(
@@ -3125,6 +3192,20 @@ def main():
         relate_findings(args.from_id, args.to_id, args.relation_type,
                         assessment=args.assessment, created_by=args.by)
         print(f"Recorded: #{args.from_id} {args.relation_type} #{args.to_id}")
+
+    elif args.command in {"relation-delete", "unrelate"}:
+        try:
+            relation_id = delete_finding_relation(
+                args.from_id, args.to_id, args.relation_type,
+                reason=args.reason, corrected_by=args.by,
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(
+            f"Deleted finding relation #{relation_id}: "
+            f"#{args.from_id} {args.relation_type} #{args.to_id}"
+        )
 
     elif args.command == "retract":
         if retract_finding(args.id, reason=args.reason, corrected_by=args.by):

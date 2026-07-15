@@ -1,5 +1,6 @@
 """Regression tests for entity merges across canonical junction tables."""
 
+import json
 import sqlite3
 from types import SimpleNamespace
 
@@ -75,6 +76,17 @@ def _seed_merge_db(path):
             entity_id INTEGER NOT NULL REFERENCES entities(id),
             pillar_id INTEGER NOT NULL,
             UNIQUE(entity_id, pillar_id)
+        );
+        CREATE TABLE corrections (
+            id INTEGER PRIMARY KEY,
+            table_name TEXT NOT NULL,
+            record_id INTEGER NOT NULL,
+            field_name TEXT NOT NULL,
+            old_value TEXT,
+            new_value TEXT,
+            reason TEXT NOT NULL,
+            corrected_by TEXT,
+            correction_type TEXT
         );
 
         INSERT INTO entities VALUES
@@ -221,4 +233,51 @@ def test_merge_rejects_alias_owned_by_third_entity(tmp_path):
     assert db.execute(
         "SELECT COUNT(*) FROM finding_entities WHERE entity_id=2"
     ).fetchone()[0] == 2
+    db.close()
+
+
+@pytest.mark.parametrize("command", ["entity_resolution", "entity_dedup"])
+def test_merge_can_replace_contradictory_legacy_notes(
+    tmp_path, monkeypatch, command
+):
+    path = tmp_path / f"replacement-notes-{command}.db"
+    _seed_merge_db(path)
+    replacement = "Identity confirmed by reviewed primary records."
+
+    if command == "entity_resolution":
+        monkeypatch.setattr(entity_resolution, "DB_PATH", path)
+        entity_resolution.cmd_merge(
+            SimpleNamespace(
+                keep_id=1,
+                drop_id=2,
+                dry_run=False,
+                replacement_notes=replacement,
+            )
+        )
+    else:
+        monkeypatch.setattr(entity_dedup, "DB_PATH", path)
+        entity_dedup.cmd_merge(
+            SimpleNamespace(
+                keep_id=1,
+                delete_id=2,
+                dry_run=False,
+                replacement_notes=replacement,
+            )
+        )
+
+    db = sqlite3.connect(path)
+    row = db.execute("SELECT notes FROM entities WHERE id=1").fetchone()
+    assert row[0] == replacement
+    assert "keep notes" not in row[0]
+    assert "drop notes" not in row[0]
+    correction = db.execute(
+        "SELECT * FROM corrections WHERE table_name='entities' AND record_id=1"
+    ).fetchone()
+    assert correction is not None
+    assert correction[3] == "notes"
+    prior = json.loads(correction[4])
+    assert prior["keep_notes"] == "keep notes"
+    assert prior["drop_notes"] == "drop notes"
+    assert correction[5] == replacement
+    assert correction[8] == "merge"
     db.close()
