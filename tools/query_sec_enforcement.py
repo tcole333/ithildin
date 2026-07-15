@@ -21,15 +21,16 @@ Usage:
 """
 
 import argparse
-import json
 import sqlite3
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 try:
+    from tools.fts_query import literal_fts_query
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from fts_query import literal_fts_query
     from output_util import add_output_args, write_output
 
 # ---------------------------------------------------------------------------
@@ -72,6 +73,7 @@ def cmd_search(args):
     """FTS5 search across respondent text and release numbers."""
     db = get_db()
     query = args.query
+    fts_query = literal_fts_query(query)
 
     conditions = []
     params = []
@@ -102,7 +104,7 @@ def cmd_search(args):
             {where}
             ORDER BY ea.date_published DESC
             LIMIT ?""",
-        [query] + params + [args.limit],
+        [fts_query] + params + [args.limit],
     ).fetchall()
 
     results = [dict(r) for r in rows]
@@ -208,7 +210,8 @@ def _fuzzy_defendant_search(db, name, threshold):
         try:
             from entity_resolution import normalize_person_name
         except ImportError:
-            normalize_person_name = lambda x: x.lower().strip()
+            def normalize_person_name(value):
+                return value.lower().strip()
 
     norm = normalize_person_name(name)
 
@@ -569,7 +572,7 @@ def cmd_stats(args):
     if write_output(results, args, summary="SEC enforcement stats"):
         return
 
-    print(f"SEC Enforcement Database")
+    print("SEC Enforcement Database")
     print(f"  Actions:          {results['total_actions']:,}")
     for src, cnt in sorted(results["by_source"].items()):
         print(f"    {src:12s} {cnt:,}")
@@ -580,7 +583,7 @@ def cmd_stats(args):
     print(f"  Date range:       {results['date_range'][0]} to {results['date_range'][1]}")
 
     if args.by_year and "by_year" in results:
-        print(f"\n  Actions by year:")
+        print("\n  Actions by year:")
         for year, cnt in sorted(results["by_year"].items(), reverse=True):
             print(f"    {year}: {cnt:,}")
 
@@ -593,7 +596,6 @@ def cmd_stats(args):
 def cmd_cross_ref(args):
     """Cross-reference enforcement defendants against investigation.db and registry.db."""
     db = get_db()
-    threshold = args.threshold
     dry_run = args.dry_run
 
     # Gather names to check from investigation.db and registry.db
@@ -682,7 +684,7 @@ def cmd_cross_ref(args):
 
     db.close()
 
-    if write_output(matches, args, summary=f"SEC enforcement cross-ref"):
+    if write_output(matches, args, summary="SEC enforcement cross-ref"):
         return
 
     if not matches:
