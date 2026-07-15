@@ -1,0 +1,39 @@
+{
+  "analysis_date": "2026-07-14",
+  "analysis_run_id": 105,
+  "novelty_gate": {
+    "already_known": true,
+    "three_or_more_independent_contexts": false,
+    "new_falsifiable_mechanism": false,
+    "nonduplicative_search_plan": false,
+    "decision": "do_not_create_hypothesis_or_lead"
+  },
+  "existing_competition_sets": [
+    {
+      "hypothesis_ids": [347, 350],
+      "competition_group": "geo-bi-dual-skip-tracing-channels",
+      "existing_lead_id": 58687,
+      "coverage": "Matched item-42/separate-vehicle cases, units, data paths, allocation, and invoices."
+    },
+    {
+      "hypothesis_ids": [348, 349],
+      "competition_group": "geo-isap-privacy-governance-timing",
+      "existing_lead_id": 58689,
+      "coverage": "Approval-versus-production chronology for PTA, PIA, SORN, ATO, data flow, retention, and risk acceptance."
+    }
+  ],
+  "existing_human_action": {
+    "id": 67,
+    "status": "pending",
+    "coverage": "ISAP V item 42, P00002-P00004, pilot/transition mapping, case allocation and duplicate controls, privacy decisions, authorization, operational start, acceptance, and invoices."
+  },
+  "synthesis_finding_decision": {
+    "created": false,
+    "reason": "The privacy ranking is already substantively captured by verified findings #12494-#12497 and the completed lead #58689 chronology; #62587 adds anchors but no decisive approval or scope record. A new finding would be redundant."
+  },
+  "systemic_analysis_decision": {
+    "run_created": false,
+    "reason": "No verified 3+ actor shared-infrastructure pattern emerged from this narrow two-channel procurement and governance comparison."
+  }
+}
+

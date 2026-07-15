@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-07-14",
+  "analysis_runs": [94, 95],
+  "prior_run_revisited": 84,
+  "result": "no_new_hunch",
+  "counts": {
+    "candidate_patterns_tested": 5,
+    "three_context_recurrences": 1,
+    "candidates_passing_all_filters": 0,
+    "hypotheses_created": 0,
+    "leads_created": 0,
+    "findings_created": 0,
+    "tags_created": 0
+  },
+  "candidates": [
+    {
+      "candidate": "Adjudicated GEO detainee-labor rulings coexist with continued ICE facility award actions",
+      "independent_contexts": 3,
+      "contexts": [
+        "Tacoma/Nwauzor-Washington: affirmed final lower-court monetary and injunctive judgment",
+        "Aurora/Menocal: nonfinal adverse contractor-defense and contract-enforceability rulings",
+        "Adelanto/Novoa: nonfinal partial California liability followed by a stay"
+      ],
+      "recurrence_filter": "pass",
+      "novelty_filter": "fail",
+      "mechanism_filter": "fail",
+      "decision": "filtered",
+      "reason": "Corrected Novoa findings 12779-12781 supply the third adjudicated context missing in run 84, but the observable fact is continuity, not its cause. It substantially overlaps hypotheses 335/336, and no public responsibility, CPARS, legal-review, option, source-selection, or suspension/debarment decision record distinguishes insulation from incumbent capacity and ordinary contract administration."
+    },
+    {
+      "candidate": "ICE contractual non-direction of detainee wages is a repeated liability hinge",
+      "independent_contexts": 2,
+      "contexts": ["Aurora/Menocal", "Adelanto/Novoa"],
+      "recurrence_filter": "fail",
+      "novelty_filter": "fail",
+      "decision": "filtered",
+      "reason": "Menocal and Novoa independently document GEO wage discretion, but Tacoma's adjudication rests on Washington wage law and is not a third identical direction-versus-discretion holding. The proposition is already explicit in existing case findings."
+    },
+    {
+      "candidate": "Adverse litigation milestones produce no immediate ICE action-ledger contraction",
+      "independent_contexts": 3,
+      "recurrence_filter": "pass_descriptively",
+      "novelty_filter": "fail",
+      "discrimination_filter": "fail",
+      "decision": "filtered",
+      "reason": "Finding 12619 already records that none of 12 eligible exact-date facility events was Holm-significant for 90-day action-count change, net-obligation change, or action proximity. The result is non-discriminating and cannot support a new causal theory."
+    },
+    {
+      "candidate": "Oversight deficiencies and contract continuity reveal a uniform no-consequence regime",
+      "independent_contexts": 6,
+      "recurrence_filter": "pass",
+      "novelty_filter": "fail",
+      "mechanism_filter": "fail",
+      "decision": "filtered",
+      "reason": "The evidence is mixed rather than uniform: Folkston documents non-enforcement and Northwest unresolved/repeat issues, while South Texas and Golden State document ordinary closure responses and Adelanto supplies a later no-findings control. Existing hypotheses 335/336 already encode the competing explanations."
+    },
+    {
+      "candidate": "Litigation-risk treatment is compartmentalized from facility procurement",
+      "independent_contexts": 3,
+      "recurrence_filter": "pass_as_prediction",
+      "novelty_filter": "uncertain",
+      "falsifiability_filter": "fail_on_public_record",
+      "decision": "not_registered",
+      "reason": "This is a genuinely testable mechanism only in nonpublic or FOIA-retrieved responsibility, legal-review, CPARS, acquisition-plan, source-selection, option, cure, and suspension/debarment files. Existing human actions 38, 60, and 61 plus infrastructure request 150 already commission the relevant records, so a duplicate hunch or lead would add no work."
+    }
+  ],
+  "controls_applied": [
+    "1,489-docket discovery denominator is not an adverse-outcome rate",
+    "high-value deep reads are selection-biased and cannot estimate prevalence",
+    "district, appellate, rehearing, and Supreme Court proceedings in one dispute family are collapsed",
+    "final judgment, nonfinal partial liability, defense rulings, stays, and allegations are not equated",
+    "CourtListener/RECAP coverage is contribution-dependent",
+    "award actions are obligations, not payments, invoices, deductions, or revenue",
+    "incumbent owned-facility capacity and pre-existing parent vehicles are strong null explanations",
+    "annual task-order and incremental-funding cycles are controlled through finding 12619",
+    "later capacity, extension, and funding actions are neutral without decision rationale",
+    "compliant, no-findings, and ordinary-closure records are retained as negative controls"
+  ],
+  "reconsideration_trigger": "Reconsider a distinct litigation-procurement hypothesis only if primary decision records across at least three independent facilities show a repeated, non-routine treatment of adjudicated liability after controlling for posture, capacity need, contract vehicle, option cycle, performance record, and non-GEO comparators."
+}

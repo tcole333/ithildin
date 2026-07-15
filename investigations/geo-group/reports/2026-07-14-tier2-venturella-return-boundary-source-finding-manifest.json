@@ -1,0 +1,205 @@
+{
+  "manifest_version": "final-1",
+  "profile": "geo-group",
+  "generated_at": "2026-07-14T09:49:10Z",
+  "algorithm": "SHA-256",
+  "manifest_excludes_self": true,
+  "scope": "Tier 2 re-score of Venturella hypotheses 355 and 356 using only verified GEO-profile findings and completed lead 59360 artifacts; no external source query",
+  "external_queries": 0,
+  "analysis_runs": {
+    "106": {
+      "skill": "generate-hunches",
+      "status": "completed",
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    },
+    "107": {
+      "skill": "systemic-analysis",
+      "status": "completed",
+      "findings_created": 1,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    }
+  },
+  "accepted_input_finding_ids": [
+    12535,
+    12536,
+    12537,
+    12538,
+    12539,
+    12540,
+    12541,
+    12545,
+    12944,
+    12945,
+    12946
+  ],
+  "accepted_input_audit": [
+    {"id": 12535, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 58985, "assessment_role": "neutral leadership-page chronology"},
+    {"id": 12536, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 58985, "assessment_role": "diagnostic but SEC-family dependent"},
+    {"id": 12537, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 58985, "assessment_role": "non-diagnostic SEC-family scope and scheduled end"},
+    {"id": 12538, "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "lead_id": 58985, "assessment_role": "diagnostic but SEC-family dependent; actual vesting excluded"},
+    {"id": 12539, "verification_status": "verified", "claim_type": "paraphrase", "confidence": "high", "lead_id": 58985, "assessment_role": "neutral bounded OGE coverage"},
+    {"id": 12540, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 58985, "assessment_role": "neutral office-level framework"},
+    {"id": 12541, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 58985, "assessment_role": "diagnostic H0-consistent public procurement structure"},
+    {"id": 12545, "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "lead_id": null, "assessment_role": "corrected dependency-only; not applicable to both; old 472/429-day return interpretation excluded"},
+    {"id": 12944, "verification_status": "verified", "claim_type": "paraphrase", "confidence": "high", "lead_id": 59360, "assessment_role": "diagnostic corrected return boundary"},
+    {"id": 12945, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 59360, "assessment_role": "not applicable non-GEO official-capacity case"},
+    {"id": 12946, "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed", "lead_id": 59360, "assessment_role": "neutral collective GEO litigation record"}
+  ],
+  "comparison_not_input": {
+    "12939": {
+      "verification_status": "verified",
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "role": "broader Trump/DHS conclusion re-tested after the narrow ACH; not used as evidence in the narrow scoring"
+    }
+  },
+  "excluded_findings": {
+    "12506": "Verified but refined and substantively duplicated by 12535 and 12536; excluded to prevent double counting.",
+    "12939": "A comparison output, not an input to the narrow competition.",
+    "all_unverified_or_retracted": "Excluded by the input gate."
+  },
+  "finding_12545_correction_boundary": {
+    "correction_ids": [7889, 7890],
+    "superseding_relation_id": 319,
+    "superseding_finding_id": 12944,
+    "accepted_use": "May 2026 top-leadership-page transition and explicit stale-premise marker only",
+    "excluded_use": "The 472-day and 429-day intervals are not a government-return separation boundary and receive zero evidentiary weight."
+  },
+  "current_run_assessments": {
+    "assessed_by": "agent:systemic-analysis:run-107",
+    "count": 22,
+    "ids": [771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792],
+    "hypotheses": [355, 356],
+    "findings": [12535, 12536, 12537, 12538, 12539, 12540, 12541, 12545, 12944, 12945, 12946],
+    "history_preserved": true,
+    "result": {
+      "355": {"inconsistency_ratio": 0.0, "ordinal_rank": 1},
+      "356": {"inconsistency_ratio": 0.1111, "ordinal_rank": 2}
+    },
+    "score_limit": "Ordinal bounded-matrix inconsistency scores, not probabilities or confidence percentages."
+  },
+  "output_synthesis_finding": {
+    "id": 12947,
+    "verification_status": "verified",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "verified_by": "agent:systemic-analysis:run-107",
+    "relation_ids": [322, 323],
+    "relations": [
+      {"type": "refines", "to_finding_id": 12545},
+      {"type": "refines", "to_finding_id": 12939}
+    ],
+    "limit": "Least-inconsistent unresolved boundary only; no conflict, screen failure, recusal failure, procurement participation, or named decision bridge established."
+  },
+  "novelty_gate": {
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_tags": 0,
+    "new_connections": 0,
+    "reason": "The corrected timing changes an existing competition but adds no distinct mechanism; hypotheses 355/356 and human actions 64-66 already cover the testable records."
+  },
+  "human_action_boundary": {
+    "ids": [64, 65, 66],
+    "status": "pending",
+    "lead_reference": "Lead #59360 preserved in notes",
+    "database_repair": "Invalid related_lead_id values were cleared because the column points to stale leads_old_backup; foreign-key violations returned from 67 to the prior baseline of 64.",
+    "root_cause_papercut": 983
+  },
+  "database_audit": {
+    "quick_check": "ok",
+    "foreign_key_violations": 64,
+    "foreign_key_baseline": 64,
+    "hypothesis_correction_papercut": 986
+  },
+  "database_write_counts": {
+    "scope_note": "Logical application-level writes in this Tier 2 wave; internal FTS trigger effects and no-op schema guards are excluded.",
+    "analysis_run_rows_inserted": 2,
+    "analysis_run_rows_completed": 2,
+    "hypothesis_evidence_matrix_rows_inserted": 22,
+    "findings_rows_inserted": 1,
+    "finding_evidence_rows_inserted": 3,
+    "finding_verification_updates": 1,
+    "finding_relation_rows_inserted": 2,
+    "human_action_rows_updated_for_stale_fk": 3,
+    "papercut_observations_inserted": 1,
+    "hypothesis_rows_inserted": 0,
+    "lead_rows_inserted": 0,
+    "tag_rows_inserted": 0,
+    "connection_rows_inserted": 0
+  },
+  "input_files": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59360-venturella-post-return-participation-ethics.md",
+      "bytes": 14152,
+      "sha256": "0110e3462341ded789d2091d36c4dc8a8fb51372968c677b098a36e4d34d8fe5"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59360-venturella-authority-participation-ethics-matrix.csv",
+      "bytes": 4953,
+      "sha256": "0bb9b2754568a58e1ba46b869f5c96f006d090d4ee24198013cc97aeb7e9200d"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59360-venturella-negative-coverage-log.csv",
+      "bytes": 5272,
+      "sha256": "a3887144729f8de516d669d04808e93609a2998eb26ce40924132c976a515410"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59360-venturella-source-manifest.json",
+      "bytes": 8690,
+      "sha256": "3db562f62124d9e80bc603d272ef5a619ebec29755e0e1eca78fd538b2727f45"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-13-lead-58985-venturella-ice-return-ethics.md",
+      "bytes": 10398,
+      "sha256": "ba30ff4fbda74866820f5a10439170f4445e2872c4c3a269222861fa9a738388"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-13-lead-58985-venturella-source-matrix.csv",
+      "bytes": 4786,
+      "sha256": "1276a471b77c3a78d2a5611c531a33e00dd2f8cbdef4b184a44755c3f45792d4"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-systemic-analysis.md",
+      "bytes": 17485,
+      "sha256": "fcf19331e33549d8db61ea4e660f1d98a36b05cde90e06bfc5e519b4124ff344"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-ach.json",
+      "bytes": 7486,
+      "sha256": "589ff431f97f764360b626d5ccecfedf893309a41d858bba75381d171100913b"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-source-manifest.json",
+      "bytes": 10725,
+      "sha256": "b513144c3669c30a3ccb68a87eb17bc5b1c781563518a2dcae001b2f2e5ffffb"
+    }
+  ],
+  "output_files": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-venturella-return-boundary-systemic-analysis.md",
+      "bytes": 12721,
+      "sha256": "26aeb83ed8939936b7d9b5d00081eb57147eaa4ce40335568a0e770a576faab7"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-venturella-return-boundary-evidence-matrix.csv",
+      "bytes": 4122,
+      "sha256": "c266b49f25314749065c690138fe1aced258a099f43f48a99f4264be27d1caba"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-venturella-return-boundary-ach.json",
+      "bytes": 7008,
+      "sha256": "43f748d39f39c871d4d4c116e7a983655795b3aebb866ca528676c0e4b1e742b"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-venturella-return-boundary-novelty-decision.json",
+      "bytes": 3491,
+      "sha256": "c31a437a6f30d19f0149958698092b54e63a2391c28fe4ce11e85d71c943032c"
+    }
+  ],
+  "self_hash_note": "This manifest intentionally does not contain its own hash."
+}

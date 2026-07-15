@@ -5,8 +5,9 @@ Data source coverage report for the OSINT investigation platform.
 Lists all available data sources, record counts, and status.
 
 Usage:
-    python tools/source_report.py
-    python tools/source_report.py --json
+    uv run python tools/source_report.py report
+    uv run python tools/source_report.py --json report
+    uv run python tools/source_report.py  # backwards-compatible alias for report
 """
 
 import argparse
@@ -14,7 +15,6 @@ import base64
 import json
 import os
 import sqlite3
-import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -168,6 +168,24 @@ def generate_report():
         **check_sqlite(
             PROJECT_ROOT / "investigation.db",
             "SELECT COUNT(*) FROM leads"
+        ),
+    }
+
+    sources["Epstein Reporting Corpus"] = {
+        "description": "Versioned reporting, attributed claims, source lineage, and primary-evidence verification state",
+        "query_tool": "tools/reporting_corpus.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "epstein_reporting.db",
+            "SELECT COUNT(*) FROM reporting_item"
+        ),
+    }
+
+    sources["DOJ/SEC Government Releases"] = {
+        "description": "Versioned primary-government press releases: DOJ News API and SEC official archives",
+        "query_tool": "tools/government_release_corpus.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "government_releases.db",
+            "SELECT COUNT(*) FROM government_release"
         ),
     }
 
@@ -353,6 +371,16 @@ def generate_report():
         ),
     }
 
+    sources["CMS Open Payments"] = {
+        "description": "Drug/device company payments and ownership interests reported for covered recipients (no auth)",
+        "query_tool": "tools/query_openpayments.py",
+        **check_api(
+            "CMS Open Payments",
+            "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/"
+            "6ed6ae76-2999-49da-b0b2-d7df150ac754",
+        ),
+    }
+
     # SBA PPP Loans (bulk parquet)
     sources["SBA PPP Loans"] = {
         "description": "~11M PPP/EIDL loans — borrower, address, lender, NAICS, forgiveness",
@@ -436,6 +464,15 @@ def generate_report():
         **check_api("LDA", "https://lda.senate.gov/api/v1/filings/?page_size=1"),
     }
 
+    sources["Senate Finance Committee Archive"] = {
+        "description": "Official committee releases, investigations, and primary-source attachments",
+        "query_tool": "tools/query_senate_finance.py",
+        **check_api(
+            "Senate Finance",
+            "https://www.finance.senate.gov/search/?q=tax&page=1",
+        ),
+    }
+
     # FARA Foreign Agents
     fara_info = check_sqlite(
         PROJECT_ROOT / "investigation.db",
@@ -470,6 +507,13 @@ def generate_report():
         "description": "Historical web snapshots — timeline reconstruction, removed content detection",
         "query_tool": "tools/query_wayback.py",
         **check_api("Wayback", "https://web.archive.org/cdx/search/cdx?url=example.com&output=json&limit=1"),
+    }
+
+    # Common Crawl index (reporting archive fallback)
+    sources["Common Crawl Index"] = {
+        "description": "Public web crawl index and WARC retrieval — reporting archive fallback",
+        "query_tool": "tools/reporting_corpus.py recover-archives --provider commoncrawl",
+        **check_api("Common Crawl", "https://index.commoncrawl.org/collinfo.json"),
     }
 
     # FDIC BankFind
@@ -648,6 +692,8 @@ def main():
     parser.add_argument("-j", "--json", action="store_true")
     sub = parser.add_subparsers(dest="command")
 
+    sub.add_parser("report", help="Generate the full data-source coverage report")
+
     # check <source_name>
     check_p = sub.add_parser("check", help="Quick health check for a single source")
     check_p.add_argument("source_name", help="Source name (case-insensitive, partial match)")
@@ -665,6 +711,8 @@ def main():
                 print(f"     {result['note']}")
         return
 
+    # Keep the historical bare invocation as an alias, while giving workflows
+    # an explicit command that cannot be confused with the single-source check.
     sources = generate_report()
 
     if args.json:

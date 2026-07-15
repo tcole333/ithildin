@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-14T05:55:00Z",
+  "profile": "geo-group",
+  "lead_id": 60299,
+  "sources": [
+    {
+      "source_id": "sunbiz:P12000103643",
+      "source_type": "primary_state_registry",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=P12000103643",
+      "retrieved_at": "2026-07-14",
+      "supports": ["legal name", "active status", "formation date", "EIN", "addresses", "no name history", "2024 merger result"]
+    },
+    {
+      "source_id": "sunbiz:P17000042350",
+      "source_type": "primary_state_registry",
+      "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchByNumber?searchNumber=P17000042350",
+      "retrieved_at": "2026-07-14",
+      "supports": ["GEO Operations, Inc. identity", "formation", "inactive status", "2024 merger into GCH"]
+    },
+    {
+      "source_id": "sec:submissions:CIK0001578145",
+      "source_type": "primary_federal_filing_index",
+      "url": "https://data.sec.gov/submissions/CIK0001578145.json",
+      "retrieved_at": "2026-07-14",
+      "supports": ["GCH CIK 0001578145", "EIN 461972528", "Florida", "formerNames empty", "historical address", "31 recent co-registrant filings"]
+    },
+    {
+      "source_id": "sec:CIK0001578146:exclusion",
+      "source_type": "primary_federal_filing_index",
+      "url": "https://data.sec.gov/submissions/CIK0001578146.json",
+      "retrieved_at": "2026-07-14",
+      "supports": ["CIK 0001578146 belongs to GEO Leasing, LLC", "former name GEO Operations, LLC", "exclusion from GCH"]
+    },
+    {
+      "source_id": "sec:0001193125-12-500268",
+      "source_type": "primary_sec_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312512500268/d451366d8k.htm",
+      "retrieved_at": "2026-07-14",
+      "supports": ["December 2012 REIT reorganization context"]
+    },
+    {
+      "source_id": "sec:0001193125-14-330726:EX-10.1",
+      "source_type": "primary_sec_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312514330726/d783514dex101.htm",
+      "retrieved_at": "2026-07-14",
+      "supports": ["GEO owns 100% of GCH", "GCH owns operating subsidiaries", "GCH and parent as borrowers"]
+    },
+    {
+      "source_id": "sec:0001193125-21-065641:EX-4.1",
+      "source_type": "primary_sec_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312521065641/d85561dex41.htm",
+      "retrieved_at": "2026-07-14",
+      "supports": ["GCH as note issuer", "capital-markets role"]
+    },
+    {
+      "source_id": "sam:public_extract:2026-03-01",
+      "source_type": "primary_federal_registration_extract",
+      "retrieved_at": "2026-07-14",
+      "query_method": "local SQLite FTS and exact post-filter; no live SAM call",
+      "supports": ["zero exact GCH registration", "address denominators", "zero exact GEO Operations registration", "GEO Reentry UEI CLKXSJLN8EN1 and CAGE 7G0N6"]
+    },
+    {
+      "source_id": "usaspending:ASST_NON_2013CZBX0023_015:subaward:4",
+      "source_type": "primary_federal_spending_data",
+      "url": "https://www.usaspending.gov/award/ASST_NON_2013CZBX0023_015/",
+      "retrieved_at": "2026-07-14",
+      "query_method": "POST /api/v2/search/spending_by_award/ with spending_level=subawards; custom search download with 113 columns",
+      "supports": ["$266,666 amount", "2015-02-01 action date", "GEO Reentry Services, LLC recipient", "UEI CLKXSJLN8EN1", "DUNS 079805752", "621 NW 53rd Street address", "Louisiana prime recipient", "DOJ OJP prime award"]
+    },
+    {
+      "source_id": "usaspending:bounded-negative:GCH",
+      "source_type": "primary_federal_spending_data",
+      "retrieved_at": "2026-07-14",
+      "query_method": "recipient autocomplete, spending_by_award, spending_by_transaction, and advanced subaward search",
+      "result_count": 0,
+      "supports": ["no current exact GCH recipient/award/transaction/subaward"]
+    },
+    {
+      "source_id": "usaspending:bounded-negative:DUNS079242241",
+      "source_type": "primary_federal_spending_data",
+      "retrieved_at": "2026-07-14",
+      "query_method": "deprecated recipient DUNS list, current recipient list, autocomplete, award, transaction, and advanced subaward search",
+      "result_count": 0,
+      "supports": ["legacy identifier absent from current official database endpoints"]
+    },
+    {
+      "source_id": "highergov:awardee_parent:10000076",
+      "source_type": "commercial_government_contract_aggregator",
+      "retrieved_at": "2026-07-14",
+      "query_method": "awardee parent_key=10000076, page_size=100",
+      "result_count": 15,
+      "supports": ["no GCH row in returned GEO parent hierarchy", "no GEO Operations row"]
+    },
+    {
+      "source_id": "fec:MUR7180:complaint",
+      "source_type": "primary_federal_enforcement_record_party_submission",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_01.pdf",
+      "retrieved_at": "2026-07-14",
+      "supports": ["legacy USAspending profile label", "DUNSNumber 079242241 in cited URL", "$266,666 allegation"]
+    },
+    {
+      "source_id": "fec:MUR7180:response",
+      "source_type": "primary_federal_enforcement_record_party_submission",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_15.pdf",
+      "retrieved_at": "2026-07-14",
+      "supports": ["sworn holding-company description", "GEO Reentry Louisiana contract", "Cornell D. Ray James contract", "GCH no-government-contract assertion"]
+    },
+    {
+      "source_id": "fec:MUR7180:factual_legal_analysis",
+      "source_type": "primary_federal_enforcement_analysis",
+      "url": "https://www.fec.gov/files/legal/murs/7180/7180_19.pdf",
+      "retrieved_at": "2026-07-14",
+      "supports": ["contract copy confirmed GEO Reentry and Louisiana as parties", "Louisiana record did not demonstrate GCH contractor status", "separate NLRB representations remained unresolved", "reason-to-believe posture"]
+    },
+    {
+      "source_id": "wayback:20180227150159:legacy_usaspending_profile",
+      "source_type": "web_archive",
+      "url": "https://web.archive.org/web/20180227150159id_/https://www.usaspending.gov/transparency/Pages/RecipientProfile.aspx?DUNSNumber=079242241&FiscalYear=2015",
+      "retrieved_at": "2026-07-14",
+      "supports": ["legacy profile shell existed", "DUNS and fiscal-year parameters", "application data loaded through separate uncaptured iframes"]
+    }
+  ],
+  "known_tool_limitations": [
+    "The March 2026 SAM public extract is current-state evidence, not a full CCR-era history.",
+    "Court/agency party submissions distinguish allegations and sworn company assertions from independently adjudicated facts.",
+    "The Wayback capture preserved the legacy USAspending page shell but not the iframe backend response that would identify the historical profile owner.",
+    "The generic /api/v2/subawards/ wrapper ignored recipient and award filters; the controlling result came from the documented advanced-search and custom-download endpoints. Papercut #937 records the defect."
+  ]
+}

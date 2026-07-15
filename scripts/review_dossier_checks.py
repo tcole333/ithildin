@@ -104,11 +104,36 @@ FINDING_REF_RE = re.compile(r"Finding\s*#?\s*(\d+)", re.IGNORECASE)
 ATTRIBUTION_RE = re.compile(
     r"(?:analysis\s+(?:of|indicates|suggests)|"
     r"cross-?reference\s+of|"
+    r"cross-?reference\s+(?:shows|documents|indicates|found)|"
+    r"(?:review|comparison)\s+(?:found|shows|documents|indicates|identifies)|"
     r"(?:grant|fund|financial)\s+flow\s+analysis|"
     r"review\s+of\s+(?:the\s+)?(?:records?|filings?|documents?)|"
     r"examination\s+of|"
     r"according\s+to|"
-    r"records?\s+(?:show|indicate|reveal)|"
+    r"(?:records?|documents?|sources?|evidence|filings?|agreement|petition|docket|"
+    r"biography|report|messages?|correspondence|invoice|memoranda?)\s+"
+    r"(?:(?:do|does|did|can|could)\s+not\s+)?"
+    r"(?:show|indicate|reveal|document|establish|prove|identify|name|list|state|"
+    r"contain|support|resolve|trace|attribute|place)|"
+    r"(?:released|reviewed|located|public|federal|archived|contemporaneous|cited)\s+"
+    r"(?:records?|documents?|messages?|emails?|filings?|docket|agreement|petition|"
+    r"invoice|report|biography|materials?|files?|roster)|"
+    r"(?:records?|documents?|sources?|evidence|filings?|agreement|petition|docket|"
+    r"biography|report|messages?|correspondence|invoice|memoranda?|files?|response|"
+    r"export|sequence|exchange|entry|appearance|matter)\b.{0,120}?\b"
+    r"(?:show|shows|indicate|indicates|reveal|reveals|document|documents|establish|"
+    r"establishes|prove|proves|identify|identifies|name|names|list|lists|state|states|"
+    r"contain|contains|include|includes|support|supports|resolve|resolves|trace|traces|"
+    r"attribute|attributes|place|places|appear|appears|reach|reaches|reached|label|"
+    r"labels|involve|involves|leave|leaves|connect|connects|connected|accept|accepts|"
+    r"accepted|date|dates|dated|is|are|was|were)\b|"
+    r"\b(?:appear|appears)\s+in\s+(?:a|the)\s+(?:separate\s+)?(?:filing|record|docket)\b|"
+    r"\bon\s+(?:the\s+)?cited\s+pages\b|"
+    r"\b(?:wrote|told|asked|replied|answered|said|stated|reported|forwarded|sent|"
+    r"listed|named|recorded|identified|described|billed|retained|relayed)\b|"
+    r"\b(?:it|they|this|that|these|those)\s+(?:do|does|did|can|could)\s+not\s+"
+    r"(?:show|establish|prove|identify|document|support|resolve|trace|name)|"
+    r"\b(?:supported|bounded)\s+(?:conclusion|identity\s+match)\b|"
     r"hypothesis\s+#?\d+\s+proposes?)",
     re.IGNORECASE,
 )
@@ -141,6 +166,8 @@ class TextExtractor(HTMLParser):
         if tag == "a" and self._in_link:
             self.links[self._link_slug] = self._link_text.strip()
             self._in_link = False
+        if tag in {"p", "li", "div", "section", "h1", "h2", "h3", "br"}:
+            self.text_parts.append(" ")
 
     def handle_data(self, data):
         self.text_parts.append(data)
@@ -342,6 +369,17 @@ def check_structure(dossier: dict) -> list[dict]:
             "fixable": False,
         })
 
+    applicable_models = curation.get("applicable_models", [])
+    if not isinstance(applicable_models, list) or any(
+        not isinstance(model_id, str) for model_id in applicable_models
+    ):
+        issues.append({
+            "check": "structure",
+            "severity": "BLOCKING",
+            "detail": "curation.applicable_models must be an array of string model IDs",
+            "fixable": False,
+        })
+
     for sec in curation.get("sections", []):
         content = sec.get("content", "")
         title = sec.get("title", sec.get("id", "unknown"))
@@ -368,16 +406,48 @@ def check_structure(dossier: dict) -> list[dict]:
     return issues
 
 
-def check_citations(dossier: dict) -> list[dict]:
+def load_global_finding_statuses(db_path: Path = DB_PATH) -> dict[int, str]:
+    """Return canonical verification states for globally citable findings."""
+    if not db_path.exists():
+        return {}
+    try:
+        with sqlite3.connect(str(db_path)) as db:
+            return {
+                int(row[0]): str(row[1] or "unverified")
+                for row in db.execute("SELECT id, verification_status FROM findings")
+            }
+    except sqlite3.Error:
+        return {}
+
+
+def load_global_finding_ids(db_path: Path = DB_PATH) -> set[int]:
+    """Return finding IDs available to the website's global citation catalog."""
+    return set(load_global_finding_statuses(db_path))
+
+
+def check_citations(
+    dossier: dict,
+    global_finding_ids: set[int] | None = None,
+    global_finding_statuses: dict[int, str] | None = None,
+) -> tuple[list[dict], dict]:
     """Check 4: Citation coverage — % of factual sentences with inline citations."""
     issues = []
     curation = dossier.get("curation", {})
     total_sentences = 0
     cited_sentences = 0
     orphan_citations = []
+    non_verified_citations = []
 
-    # Collect all finding IDs for orphan check
-    finding_ids = {f["id"] for f in dossier.get("findings", [])}
+    # Dossier pages merge their local catalog with the global finding catalog,
+    # including the investigation.db fallback. A cross-target finding citation is
+    # therefore valid even when that finding is not embedded in this dossier JSON.
+    dossier_finding_records = [
+        *dossier.get("findings", []),
+        *dossier.get("citation_findings", []),
+    ]
+    finding_ids = {f["id"] for f in dossier_finding_records}
+    if global_finding_ids is not None:
+        finding_ids.update(global_finding_ids)
 
     blocks = []
     if curation.get("lead"):
@@ -402,6 +472,21 @@ def check_citations(dossier: dict) -> list[dict]:
             fid = int(m.group(1))
             if fid not in finding_ids:
                 orphan_citations.append(f"Finding #{fid} in {label}")
+            elif global_finding_statuses is not None:
+                status = global_finding_statuses.get(fid)
+                if status is None:
+                    status = next(
+                        (
+                            str(f.get("verification_status") or "unverified")
+                            for f in dossier_finding_records
+                            if f.get("id") == fid
+                        ),
+                        "unverified",
+                    )
+                if status != "verified":
+                    non_verified_citations.append(
+                        f"Finding #{fid} in {label} has status {status}"
+                    )
 
     coverage = (cited_sentences / total_sentences * 100) if total_sentences > 0 else 0
 
@@ -431,7 +516,19 @@ def check_citations(dossier: dict) -> list[dict]:
             "fixable": False,
         })
 
-    return issues, {"supported_pct": round(coverage, 1), "orphan_citations": len(orphan_citations)}
+    for citation in sorted(set(non_verified_citations)):
+        issues.append({
+            "check": "citations",
+            "severity": "BLOCKING",
+            "detail": f"Non-verified citation: {citation}",
+            "fixable": False,
+        })
+
+    return issues, {
+        "supported_pct": round(coverage, 1),
+        "orphan_citations": len(orphan_citations),
+        "non_verified_citations": len(set(non_verified_citations)),
+    }
 
 
 def check_claim_compliance(dossier: dict) -> list[dict]:
@@ -441,7 +538,10 @@ def check_claim_compliance(dossier: dict) -> list[dict]:
 
     # Build map of finding_id -> claim_type
     claim_map = {}
-    for f in dossier.get("findings", []):
+    for f in [
+        *dossier.get("findings", []),
+        *dossier.get("citation_findings", []),
+    ]:
         claim_map[f["id"]] = f.get("claim_type", "")
 
     blocks = []
@@ -636,7 +736,12 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
     all_issues.extend(check_structure(dossier))
 
     # Check 4: Citations
-    citation_issues, citation_metrics = check_citations(dossier)
+    global_finding_statuses = load_global_finding_statuses()
+    citation_issues, citation_metrics = check_citations(
+        dossier,
+        global_finding_ids=set(global_finding_statuses),
+        global_finding_statuses=global_finding_statuses,
+    )
     all_issues.extend(citation_issues)
 
     # Check 5: Claim compliance
@@ -677,6 +782,9 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
             "supported_pct": citation_metrics.get("supported_pct", 0),
             "outbound_links": outbound_count,
             "orphan_citations": citation_metrics.get("orphan_citations", 0),
+            "non_verified_citations": citation_metrics.get(
+                "non_verified_citations", 0
+            ),
             "banned_phrases": banned_count,
             "internal_refs": internal_ref_count,
             "missing_crosslinks": missing_crosslinks,

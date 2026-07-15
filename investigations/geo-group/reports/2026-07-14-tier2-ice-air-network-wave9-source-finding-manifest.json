@@ -1,0 +1,355 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 110,
+  "analysis_run_id": 113,
+  "scope": "Verified-only Tier 2 systemic/ACH synthesis of the Wave 9 ICE Air operating architecture. No external query and no HigherGov use.",
+  "accepted_finding_ids": [
+    12892,
+    12893,
+    12894,
+    12895,
+    12899,
+    12901,
+    12906,
+    12907,
+    12909,
+    12910,
+    12911,
+    12912,
+    12976,
+    12977,
+    12978,
+    12979,
+    12980,
+    12981
+  ],
+  "accepted_finding_status_check": "18 of 18 verified",
+  "excluded_database_records": [
+    {
+      "id": 12908,
+      "table": "findings",
+      "status": "retracted",
+      "reason": "The #12906-#12912 numeric interval contains retracted #12908; verified corrected #12910 is used instead."
+    },
+    {
+      "ids": [6411, 6412, 6413],
+      "table": "connections",
+      "status": "unverified",
+      "reason": "Edges were derived from verified findings and authoritative reports rather than these connection rows."
+    }
+  ],
+  "finding_evidence_export": [
+    {
+      "finding_id": 12892,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+          "evidence_tuple_sha256": "0b563b33ebbcfcec7ee7a9182061304b3e91c906d88e93a16fbe76fb0adf11fb"
+        }
+      ]
+    },
+    {
+      "finding_id": 12893,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+          "evidence_tuple_sha256": "4ed23758effc6454d312f3423b801e57c257622405034a405375f8b96198ed8b"
+        }
+      ]
+    },
+    {
+      "finding_id": 12894,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+          "evidence_tuple_sha256": "03c029953f1265c4317d5082d0e4386cbf7dfed68d4918cdd464ed48a75b453a"
+        }
+      ]
+    },
+    {
+      "finding_id": 12895,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_IDV_70CDCR24A00000001_7012/",
+          "evidence_tuple_sha256": "df9580187c6368f87c96c29d3ffc3f44dc43795c32e198c76d7716fd0cac0a65"
+        }
+      ]
+    },
+    {
+      "finding_id": 12899,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR26FC0000001_7012_70CDCR24A00000001_7012/",
+          "evidence_tuple_sha256": "674734d272027a56f36c654aa88c1a6d8e79a3c2799b7fd38f218e13659ad23f"
+        }
+      ]
+    },
+    {
+      "finding_id": 12901,
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/subawards/",
+          "evidence_tuple_sha256": "e7b570c0e24ccf20a9a9fbb390b03cd44a91cad6701c6132f93f2343c45c9e32"
+        }
+      ]
+    },
+    {
+      "finding_id": 12906,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.0.pdf",
+          "evidence_tuple_sha256": "57aa4f17877a4dc594633cf78126f34fd04d918b89e1ccee94879bbbf47761e0"
+        },
+        {
+          "ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.1.pdf",
+          "evidence_tuple_sha256": "9ec971690960e6877b3b3eebb4387debe395449f9f5f93551bbcde6ef0e8c7ab"
+        }
+      ]
+    },
+    {
+      "finding_id": 12907,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/transactions/",
+          "evidence_tuple_sha256": "d3ecbc31e33a8487e7ff18b15a41ed4dbad9bc757bf0dc769d4df8ea2f510d56"
+        }
+      ]
+    },
+    {
+      "finding_id": 12909,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR21C00000005_7012_-NONE-_-NONE-/",
+          "evidence_tuple_sha256": "1d16f19ed7e9aee85e5f2ee309be6d902ca0a8c90766978a4c4a7cad98d9f013"
+        }
+      ]
+    },
+    {
+      "finding_id": 12910,
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR23FR0000035_7012_GS33F0025V_4730/",
+          "evidence_tuple_sha256": "fad01a09798bd93698dbdd8b5209dc7d7865d491ff736f5d2c124dc60c303271"
+        },
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR24FR0000024_7012_GS33F0025V_4730/",
+          "evidence_tuple_sha256": "f1997b0e2ff530bc242ea402657262d3953221c8df491364dfacc6c71086780a"
+        },
+        {
+          "ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR25FR0000022_7012_GS33F0025V_4730/",
+          "evidence_tuple_sha256": "9e7cd882394fcd39694d339814461ca1e73e47d28dd638b6111366bc7defca51"
+        },
+        {
+          "ref": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-chain-matrix.json",
+          "evidence_tuple_sha256": "479b8b49f85acb9ed237195169bfff4018fd67b8dde406806dd7f93596ca23a0"
+        }
+      ]
+    },
+    {
+      "finding_id": 12911,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24A00000001-Charter-Flight-BPA.pdf",
+          "evidence_tuple_sha256": "7d0424c2ad2d14396acf796a18f0cf0c194c9c0176c2eda197fad106796f3ccb"
+        }
+      ]
+    },
+    {
+      "finding_id": 12912,
+      "claim_type": "direct_quote",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://democrats-homeland.house.gov/imo/media/doc/2025-05-28-t-weh-letter_to_csi_aviation.pdf",
+          "evidence_tuple_sha256": "4d3f72cf5fda90b38ec6eade9aeb66ef7f1e0278c3ef0497bbf546ff4976f202"
+        }
+      ]
+    },
+    {
+      "finding_id": 12976,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/1846084/000119312526098353/jetmf-ex99_2.htm",
+          "evidence_tuple_sha256": "ad46463d6e39614dfc15286e859e069b0022edf4d30b48bb13952b5c9a6e75ba"
+        }
+      ]
+    },
+    {
+      "finding_id": 12977,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/1846084/000119312526093148/jetmf-20251231.htm",
+          "evidence_tuple_sha256": "81551cfb597d270005eb47e34eb23d191bdf813ff8e2bd7ca93fd9932c59a2fc"
+        }
+      ]
+    },
+    {
+      "finding_id": 12978,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://www.mass.gov/news/governor-healey-demands-private-airlines-stop-providing-deportation-flights-to-ice-at-expense-of-taxpayers",
+          "evidence_tuple_sha256": "fc03ec58b5d7609ed6ca269ed4a5ad8ddce3b39fec872bf43fadaa89cf0905e4"
+        }
+      ]
+    },
+    {
+      "finding_id": 12979,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/899394/000119312525324816/d59857d8k.htm",
+          "evidence_tuple_sha256": "d7f63a7a83f0130b619e16f75c5f599c0d1b558298967fa7990d8b20e56f38c7"
+        }
+      ]
+    },
+    {
+      "finding_id": 12980,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "evidence": [
+        {
+          "ref": "https://www.sec.gov/Archives/edgar/data/899394/000119312526014391/d23873d8k.htm",
+          "evidence_tuple_sha256": "1924c26663b00dd1ff54224e858de4dd3f22b9d569571eb80a85f2bc2b1a8f03"
+        }
+      ]
+    },
+    {
+      "finding_id": 12981,
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "https://www.courtlistener.com/docket/69649350/classic-air-charter-inc-v-united-states/",
+          "evidence_tuple_sha256": "3f6e8384e26db1101bb4a7f85d6eab63899c0f81286b5fbad80cdcd167b8568f"
+        }
+      ]
+    }
+  ],
+  "evidence_tuple_hash_rule": "SHA-256 of evidence_type + newline + evidence_ref + newline + exact source_quote + newline + source_page-or-empty, encoded UTF-8.",
+  "input_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-chain.md",
+      "sha256": "ebd6321676d8acc3b591451d0307d89c943f270771c726098a503586d696a999",
+      "bytes": 11179
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-chain-matrix.json",
+      "sha256": "96f433cec0ed6f5cf6d9f0bab9d1298932fe3d323e4940235648cba80e94f9bd",
+      "bytes": 10296
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-source-manifest.json",
+      "sha256": "86b4280f2ac5d3c3e36692649b54a82269b39dde464508ea59b03773bff812b6",
+      "bytes": 19921
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62730-csi-ice-air-current-carrier-roster.md",
+      "sha256": "9938247d3b84d40f72b3981247d615dd048a0934394485b84ed243a7d9eea81e",
+      "bytes": 13282
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62730-csi-ice-air-carrier-aircraft-authority-matrix.json",
+      "sha256": "25369b6a24f5d1026c9ba70b7772c3a893ce7b99b660f35ee353aca68c437d9f",
+      "bytes": 5179
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62730-csi-ice-air-negative-unavailable-log.json",
+      "sha256": "ef344f2e0249a708d3b85458384a9f3b30f846d33d0c9a8683466c14809f4c1a",
+      "bytes": 4148
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62730-csi-ice-air-source-manifest.json",
+      "sha256": "4f8e1da654b99a41473a291e3508ec850fe5dd93597d12bc12356371e81f80a6",
+      "bytes": 10516
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62730-csi-ice-air-source-sha256sums.txt",
+      "sha256": "616704de75781e153ba988bc72ad0cb3e8b22f586984bb7d1da6a4a6a5eed018",
+      "bytes": 6022
+    }
+  ],
+  "generated_outputs": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-evidence-matrix.csv",
+      "sha256": "c8930cb892749fe3681956e22421a564e269e0f35351787f6dc2e166910633ef",
+      "bytes": 7511,
+      "data_rows": 20
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-ach.json",
+      "sha256": "84c3457c7688f49df423fe05254431961b43c822b2a1e2065ff1343751701315",
+      "bytes": 9071
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-novelty-decision.json",
+      "sha256": "615555bfbb467468db38226a843e705ca92e2276531d0a9c2f43e76c1b734fa7",
+      "bytes": 3380
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-systemic-analysis.md",
+      "sha256": "998926f8ceff0998661ea02134a307649c53434871ce09ef93b3faf76bd69470",
+      "bytes": 14038
+    }
+  ],
+  "database_writes": {
+    "analysis_run": {
+      "id": 113,
+      "skill_name": "systemic-analysis",
+      "status": "completed",
+      "findings_at_start": 590,
+      "connections_at_start": 74,
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0,
+      "report_path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-systemic-analysis.md"
+    },
+    "new_findings": [],
+    "new_hypotheses": [],
+    "new_leads": [],
+    "new_tags": [],
+    "new_connections": [],
+    "new_entities": []
+  },
+  "integrity_checks": {
+    "json_parse": "passed for ACH and novelty artifacts before manifest creation",
+    "csv_parse_and_row_count": "passed: 20 rows",
+    "csv_score_reconciliation": "passed: H1 5 consistent/9 inconsistent/6 neutral; H0 14 consistent/0 inconsistent/6 neutral",
+    "accepted_finding_status": "passed: all 18 verified",
+    "retracted_finding_exclusion": "passed: #12908 is retracted and excluded",
+    "sqlite_quick_check": "ok",
+    "foreign_key_violation_count": 64,
+    "foreign_key_note": "Unchanged project baseline; run #113 introduced no new foreign-key violation."
+  },
+  "verdict": "H0 is least inconsistent. The gap is a reconstruction/measurement limitation, not evidence of concealment on the verified Wave 9 record."
+}

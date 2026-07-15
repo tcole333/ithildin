@@ -1,0 +1,213 @@
+{
+  "generated_on": "2026-07-13",
+  "corrected_on": "2026-07-14",
+  "geo_pac_denominator": {
+    "by_cycle_refund_events_absolute": {
+      "2016": 11095.57,
+      "2018": 23500.0,
+      "2020": 3000.0,
+      "2022": 10423.28,
+      "2024": 5000.0,
+      "2026": 2250.0
+    },
+    "by_cycle_schedule_b_signed": {
+      "2016": 737940.0,
+      "2018": 787200.0,
+      "2020": 724200.0,
+      "2022": 509750.0,
+      "2024": 643500.0,
+      "2026": 228000.0
+    },
+    "federal_schedule_b_rows_actual_dates_2015_2026": 730,
+    "federal_schedule_b_signed_after_negative_entries": 3630590.0,
+    "line_16_refund_event_rows": 20,
+    "line_16_refund_events_absolute": 55268.85,
+    "party_buckets_schedule_b_signed": {
+      "democratic_fec_tagged": 142140.0,
+      "other_party_fec_tagged": 1000.0,
+      "party_unlabeled_other": 1368700.0,
+      "republican_fec_tagged_other": 1513750.0,
+      "rnc": 155000.0,
+      "trump_aligned_jfc": 450000.0
+    },
+    "refund_event_net_denominator": 3575321.15,
+    "trump_jfc_share_of_refund_event_net_pct": 12.5863,
+    "trump_jfc_share_of_signed_schedule_b_pct": 12.3947
+  },
+  "lead_id": 58870,
+  "legal_boundary": {
+    "corporate": "GEO Corrections Holdings receipts are a distinct corporate stream. Rebuilding America Now was a pro-Trump super PAC; the inaugural committee donation is not a campaign contribution.",
+    "geo_pac": "Employee-funded separate segregated fund; company may provide lawful administrative support. Do not call its disbursements corporate treasury contributions.",
+    "individual": "Exact employer strings support a probabilistic association with GEO, not corporate funding, reimbursement, coordination, or company policy.",
+    "mur_7180": "The FEC voted 5-0 in 2018 to find reason to believe GEO Corrections Holdings violated the federal-contractor contribution prohibition. In 2021 it deadlocked 3-3 on probable cause and separately 3-3 on no probable cause, then voted 6-0 to close the file; no final probable-cause finding or civil penalty resulted."
+  },
+  "negative_results": [
+    "No GEO PAC Schedule B contribution to Save America C00762591, MAGA Action C00771477, MAGA Again C00790477, MAGA Inc C00825851, Never Surrender C00828541, Trump nominee fund C00867275, or Trump National JFC C00873893 in the covered records.",
+    "No GEO-named refund found in Rebuilding America Now Schedule B for 2016-2017; complete export contained 1,059 rows."
+  ],
+  "supersessions": [
+    {
+      "corrected_on": "2026-07-14",
+      "supersedes": "No GEO-named or Zoley-named receipt found in targeted FEC Form 13 searches for Trump Vance Inaugural Committee C00894162.",
+      "new_record": "Amended Form 13 reports THE GEO GROUP, INC. POLITICAL ACTION COMMITTEE, $500,000, received 2024-12-11, transaction F132.147237991.",
+      "source": "https://docquery.fec.gov/pdf/858/202507319779596858/202507319779596858.pdf",
+      "payer_stream": "unresolved",
+      "boundary": "No matching GEO PAC Schedule B disbursement was found. The recipient label does not prove corporate treasury funding or a verified/lawful GEO PAC outflow, and the $500,000 is not added to primary_totals."
+    }
+  ],
+  "primary_totals": {
+    "arithmetic_context_total_separate_legal_streams": 1426296.28,
+    "geo_corporate_2017_trump_inaugural": 250000.0,
+    "geo_corporate_pro_trump_super_pac": 225000.0,
+    "geo_pac_direct_trump_jfcs": 450000.0,
+    "individual_bounded_resolved_trump_committees_net": 501296.28,
+    "individual_exact_geo_employer_trump_committees_net": 389696.28,
+    "individual_identity_resolved_executive_typo_exception_net": 111600.0,
+    "political_committee_context_total_excluding_inaugural": 1176296.28,
+    "rnc_separate_from_trump_specific": 155000.0
+  },
+  "profile": "geo-group",
+  "scope": "2015-01-01 through 2026-07-13 available filings; records dated through 2026-12-31 allowed but none projected",
+  "source_files": [
+    "/tmp/osint-m26mARG8/fec-candidates-donald-trump.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00003418.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00382150.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00580100.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00618371.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00618389.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00762591.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00770941.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00771477.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00790477.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00825851.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00828541.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00867275.json",
+    "/tmp/osint-m26mARG8/fec-committee-C00873893.json",
+    "/tmp/osint-m26mARG8/fec-committees-geo-group.json",
+    "/tmp/osint-m26mARG8/fec-committees-maga.json",
+    "/tmp/osint-m26mARG8/fec-committees-trump.json",
+    "/tmp/osint-m26mARG8/fec-corp-probe.json",
+    "/tmp/osint-m26mARG8/fec-corporate-donor-geo-corrections.json",
+    "/tmp/osint-m26mARG8/fec-corporate-donor-geo-group.json",
+    "/tmp/osint-m26mARG8/fec-corporate-donor-the-geo-group.json",
+    "/tmp/osint-m26mARG8/fec-donor-daniel-ragsdale.json",
+    "/tmp/osint-m26mARG8/fec-donor-george-zoley.json",
+    "/tmp/osint-m26mARG8/fec-donor-matthew-albence.json",
+    "/tmp/osint-m26mARG8/fec-donor-shayn-march.json",
+    "/tmp/osint-m26mARG8/fec-employer-geo-group-count-min1000.json",
+    "/tmp/osint-m26mARG8/fec-employer-geo-group-count-min500.json",
+    "/tmp/osint-m26mARG8/fec-employer-geo-group-count.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disb-count-2016.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disb-count-2018.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disb-count-2022.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disb-count-2024.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disb-count-2026.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2016.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2018.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2020.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2022.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2024.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-disbursements-2026.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-receipts-count-2016.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-receipts-count-2018.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-receipts-count-2022.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-receipts-count-2026.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2016.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2018.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2020.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2022.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2024.json",
+    "/tmp/osint-m26mARG8/fec-geo-pac-refunds-2026.json",
+    "/tmp/osint-m26mARG8/fec-inaugural-C00629584-geo-refunds.json",
+    "/tmp/osint-m26mARG8/fec-inaugural-C00629584-geo.json",
+    "/tmp/osint-m26mARG8/fec-inaugural-C00629584-zoley.json",
+    "/tmp/osint-m26mARG8/fec-inaugural-C00894162-geo.json",
+    "/tmp/osint-m26mARG8/fec-inaugural-C00894162-zoley.json",
+    "/tmp/osint-m26mARG8/fec-ran-all-disbursements.json",
+    "/tmp/osint-m26mARG8/fec-ran-geo-corrections-receipts.json",
+    "/tmp/osint-m26mARG8/fec-ran-geo-corrections-refunds.json",
+    "/tmp/osint-m26mARG8/fec-ran-trump-independent-expenditures.json",
+    "/tmp/osint-m26mARG8/fec-relevant-committee-universe.json",
+    "/tmp/osint-m26mARG8/fec-target-C00580100-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00580100-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00580100-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618371-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618371-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618371-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618389-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618389-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00618389-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00762591-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00762591-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00762591-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00770941-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00770941-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00770941-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00771477-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00771477-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00771477-geo-employer.json",
+    "/tmp/osint-m26mARG8/fec-target-C00790477-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00790477-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00825851-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00825851-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00828541-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00828541-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00867275-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00867275-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00867937-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00867937-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-target-C00873893-geo-contributor.json",
+    "/tmp/osint-m26mARG8/fec-target-C00873893-geo-employer-all.json",
+    "/tmp/osint-m26mARG8/fec-test-one-target.json",
+    "/tmp/osint-m26mARG8/fec-trump-candidate-committees.json",
+    "/tmp/osint-m26mARG8/fec-trump-committees-filtered.json"
+  ],
+  "thread_id": 112,
+  "trump_stream_breakdowns": {
+    "geo_pac_by_committee": {
+      "C00618389": 350000.0,
+      "C00770941": 15000.0,
+      "C00867937": 85000.0
+    },
+    "individual_exact_employer_by_committee": {
+      "C00580100": 2786.62,
+      "C00618371": 8574.72,
+      "C00618389": 300000.0,
+      "C00770941": 49060.0,
+      "C00867937": 25000.0,
+      "C00873893": 4274.94
+    },
+    "individual_exact_employer_rows": 275,
+    "individual_identity_resolved_executive_exception_by_committee": {
+      "C00618389": 100000.0,
+      "C00770941": 11600.0
+    },
+    "individual_identity_resolved_executive_exception_rows": 2,
+    "individual_target_committees_with_no_exact_employer_direct_receipts": [
+      {
+        "committee_id": "C00762591",
+        "committee_name": "SAVE AMERICA"
+      },
+      {
+        "committee_id": "C00771477",
+        "committee_name": "MAKE AMERICA GREAT AGAIN ACTION INC"
+      },
+      {
+        "committee_id": "C00790477",
+        "committee_name": "MAKE AMERICA GREAT AGAIN, AGAIN! INC"
+      },
+      {
+        "committee_id": "C00825851",
+        "committee_name": "MAKE AMERICA GREAT AGAIN INC"
+      },
+      {
+        "committee_id": "C00828541",
+        "committee_name": "NEVER SURRENDER INC"
+      },
+      {
+        "committee_id": "C00867275",
+        "committee_name": "DONALD J TRUMP REPUBLICAN NOMINEE FUND 2024"
+      }
+    ]
+  }
+}

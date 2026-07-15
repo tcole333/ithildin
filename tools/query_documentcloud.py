@@ -36,7 +36,7 @@ import json
 import os
 import sys
 import time
-from urllib.parse import urlencode, quote
+from urllib.parse import parse_qs, quote, urlencode, urlparse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -140,6 +140,41 @@ def _format_doc_row(doc):
     return doc_id, title, pages, source, org, created
 
 
+def _search_response_in_scope(data, query, project_id=None):
+    """Verify the API actually executed a scoped full-text search."""
+    results = data.get("results")
+    if (
+        not isinstance(results, list)
+        or not isinstance(data.get("count"), int)
+        or not isinstance(data.get("escaped"), bool)
+    ):
+        print(
+            "ERROR: DocumentCloud returned a non-search response; refusing "
+            "potentially unfiltered documents.",
+            file=sys.stderr,
+        )
+        return False
+
+    next_url = data.get("next")
+    if next_url:
+        parsed = urlparse(next_url)
+        next_params = parse_qs(parsed.query)
+        query_preserved = next_params.get("q") == [query]
+        project_preserved = not project_id or (
+            next_params.get("project") == [str(project_id)]
+            or next_params.get("projects") == [str(project_id)]
+        )
+        if not parsed.path.endswith("/documents/search/") or not query_preserved or not project_preserved:
+            print(
+                "ERROR: DocumentCloud pagination dropped the search scope; "
+                "refusing potentially unfiltered documents.",
+                file=sys.stderr,
+            )
+            return False
+
+    return True
+
+
 # ── Commands ───────────────────────────────────────────────────────────
 
 
@@ -153,7 +188,7 @@ def cmd_search(args):
     if project_id:
         params["project"] = project_id
 
-    url = f"{API_BASE}documents/?{urlencode(params)}"
+    url = f"{API_BASE}documents/search/?{urlencode(params)}"
 
     all_results = []
     page_num = 0
@@ -165,6 +200,8 @@ def cmd_search(args):
         data = _request(url)
         if not data:
             break
+        if not _search_response_in_scope(data, query, project_id):
+            raise SystemExit(1)
 
         results = data.get("results", [])
         if not results:

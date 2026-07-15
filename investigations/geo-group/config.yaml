@@ -1,0 +1,334 @@
+# The GEO Group — Government Contract and Corporate Network Investigation
+
+name: "geo-group"
+
+primary_subject: "The GEO Group, Inc. (NYSE: GEO)"
+
+description: >
+  Broad investigation of The GEO Group, Inc., its subsidiaries, executives,
+  facilities, financing, political network, litigation, and government-facing
+  operations. The priority workstream is a transaction-level reconstruction of
+  Immigration and Customs Enforcement (ICE) awards: recipient aliases and UEIs,
+  parent/child and local pass-through contracts, facilities, vehicles, task
+  orders, modifications, subcontractors, procurement offices, performance,
+  oversight findings, lobbying, and policy-linked timing.
+  Public-company identifiers: CIK 0000923796; SEC file 1-14260; EIN 65-0043078.
+
+key_persons:
+  - "george c. zoley"
+  - "george zoley"
+  - "shayn p. march"
+  - "shayn march"
+  - "paul laird"
+  - "matthew t. albence"
+  - "matthew albence"
+  - "daniel ragsdale"
+  - "david o. meehan"
+  - "david meehan"
+  - "scott a. schipma"
+  - "ronald a. brack"
+  - "julie myers wood"
+  - "scott m. kernan"
+  - "jack brewer"
+  - "donna arduin kauranen"
+  - "thomas c. bartzokis"
+  - "lindsay l. koren"
+  - "brian r. evans"
+  - "brian evans"
+
+known_addresses:
+  "4955 technology way": "The GEO Group headquarters, Boca Raton, Florida"
+  "621 nw 53rd street": "Historical GEO/affiliate Boca Raton corporate address; verify entity and date"
+
+threads:
+  - id: 1
+    name: "ICE Detention Contracts & Facilities"
+    description: "ICE/DHS detention awards, facility-specific task orders and modifications, local-government pass-throughs, performance, capacity, and revenue."
+    targets:
+      - "u.s. immigration and customs enforcement"
+      - "immigration and customs enforcement"
+      - "geo secure services"
+      - "geo corrections holdings"
+      - "geo group"
+    keywords:
+      - "\bice\b"
+      - "detention"
+      - "ero"
+      - "detainee"
+      - "intergovernmental.service.agreement"
+      - "igsa"
+      - "guaranteed.minimum"
+      - "per.diem"
+      - "bed.capacity"
+
+  - id: 2
+    name: "Electronic Monitoring & ISAP"
+    description: "BI Incorporated, Intensive Supervision Appearance Program, electronic monitoring, case management, technology, data, and related task orders."
+    targets:
+      - "bi incorporated"
+      - "b.i. incorporated"
+      - "intensive supervision appearance program"
+      - "isap"
+    keywords:
+      - "electronic.monitoring"
+      - "ankle.monitor"
+      - "gps.monitoring"
+      - "alternatives.to.detention"
+      - "case.management"
+      - "isap"
+
+  - id: 3
+    name: "Procurement Vehicles, Entities & Money Flow"
+    description: "Recipient aliases, UEIs/CAGEs, PIIDs, IDVs, task orders, transactions, subawards, subcontractors, contracting offices, and obligation timelines across federal, state, and local channels."
+    targets:
+      - "geo transport"
+      - "geo care"
+      - "geo acquisition"
+      - "geo corrections holdings"
+    keywords:
+      - "contract"
+      - "award"
+      - "piid"
+      - "uei"
+      - "cage"
+      - "task.order"
+      - "idv"
+      - "subaward"
+      - "subcontract"
+      - "modification"
+      - "obligation"
+
+  - id: 4
+    name: "Corporate Structure, Governance & Finance"
+    description: "Public-company filings, subsidiaries, executives and directors, related parties, debt, lenders, real estate, revenue concentration, auditor, and investor disclosures."
+    targets:
+      - "the geo group inc"
+      - "geo group inc"
+      - "geo corrections holdings inc"
+      - "geo secure services llc"
+      - "geo care inc"
+    keywords:
+      - "10-k"
+      - "proxy"
+      - "subsidiar"
+      - "related.party"
+      - "credit.agreement"
+      - "government.revenue"
+      - "revenue.concentration"
+      - "beneficial.ownership"
+
+  - id: 5
+    name: "Lobbying, Campaign Finance & Policy Influence"
+    description: "Federal and state lobbying, campaign contributions, trade groups, consultants, revolving-door ties, procurement-policy advocacy, and timing around contract actions."
+    targets:
+      - "geo group political action committee"
+      - "geo group pac"
+      - "geo group inc. political action committee"
+    keywords:
+      - "lobby"
+      - "campaign.contribution"
+      - "political.action.committee"
+      - "revolving.door"
+      - "lda"
+      - "fec"
+      - "appropriation"
+
+  - id: 6
+    name: "Litigation, Oversight & Detention Conditions"
+    description: "Court cases, DHS OIG/GAO/ICE inspections, deaths and medical care, labor and detainee-work claims, use of force, regulatory actions, allegations, findings, and remediation."
+    targets:
+      - "department of homeland security office of inspector general"
+      - "government accountability office"
+      - "office of detention oversight"
+    keywords:
+      - "oig"
+      - "gao"
+      - "inspection"
+      - "oversight"
+      - "wrongful.death"
+      - "forced.labor"
+      - "detainee.work"
+      - "medical.care"
+      - "use.of.force"
+      - "lawsuit"
+      - "settlement"
+
+  - id: 7
+    name: "State, Local & International Operations"
+    description: "Non-ICE corrections and community-reentry contracts, state/local intermediaries, international operations, property entities, facility ownership, and cross-jurisdiction networks."
+    targets:
+      - "geo reentry services"
+      - "geo continuum of care"
+      - "geo australia"
+    keywords:
+      - "state.contract"
+      - "county"
+      - "municipal"
+      - "reentry"
+      - "correctional"
+      - "international"
+      - "property.owner"
+
+corpus_tools: []
+
+key_dates:
+  - date: "1984-01-01"
+    event: "Wackenhut Corrections Corporation, GEO's predecessor, begins operations; exact incorporation/operating date to verify"
+    category: "milestone"
+  - date: "2003-11-18"
+    event: "SEC company metadata marks the end of the Wackenhut Corrections Corp. former-name period"
+    category: "milestone"
+  - date: "2024-04-18"
+    event: "Current credit agreement and $1.275 billion notes refinancing"
+    category: "financial"
+  - date: "2025-02-27"
+    event: "GEO announces 15-year ICE Delaney Hall award"
+    category: "operational"
+  - date: "2025-03-20"
+    event: "GEO announces North Lake ICE activation"
+    category: "operational"
+  - date: "2025-06-06"
+    event: "D. Ray James/Folkston ICE contract modification becomes effective"
+    category: "operational"
+  - date: "2025-10-01"
+    event: "New ICE ISAP base period begins"
+    category: "operational"
+  - date: "2025-12-16"
+    event: "BI Incorporated ICE skip-tracing contract begins"
+    category: "operational"
+  - date: "2026-01-20"
+    event: "GEO revolving credit facility increases to $550 million"
+    category: "financial"
+  - date: "2026-03-01"
+    event: "George C. Zoley resumes the Chief Executive Officer role"
+    category: "operational"
+  - date: "2026-04-01"
+    event: "Shayn P. March becomes Chief Financial Officer"
+    category: "operational"
+  - date: "2026-04-28"
+    event: "Current seven-member GEO board is elected"
+    category: "milestone"
+
+seed_pillars:
+  - name: "The GEO Group, Inc."
+    pillar_type: "operations"
+    sub_type: "public_company"
+    status: "active"
+    founded: "1984"
+    dissolved: null
+    jurisdiction: "Florida / U.S. public issuer"
+    significance: "Primary subject and consolidated parent; NYSE ticker GEO."
+
+  - name: "GEO Secure Services, LLC"
+    pillar_type: "operations"
+    sub_type: "detention_and_corrections"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Core secure-services contracting entity and likely recipient alias for detention awards; legal structure and UEIs require verification."
+
+  - name: "BI Incorporated"
+    pillar_type: "operations"
+    sub_type: "electronic_monitoring"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "GEO subsidiary associated with ICE alternatives-to-detention and electronic-monitoring work."
+
+  - name: "GEO Transport, Inc."
+    pillar_type: "operations"
+    sub_type: "secure_transport"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Florida"
+    significance: "Wholly owned secure-transport subsidiary and a required recipient-name variant for federal award research."
+
+  - name: "GEO Corrections Holdings, Inc."
+    pillar_type: "operations"
+    sub_type: "holding_company"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Florida"
+    significance: "Wholly owned subsidiary and co-borrower under GEO's credit facility; relevant to guarantees, liens, and entity resolution."
+
+  - name: "U.S. Immigration and Customs Enforcement"
+    pillar_type: "government"
+    sub_type: "contracting_agency"
+    status: "active"
+    founded: "2003"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Priority customer and contracting component whose awards, facilities, inspections, and policy changes anchor the investigation."
+
+  - name: "U.S. Department of Homeland Security"
+    pillar_type: "government"
+    sub_type: "cabinet_department"
+    status: "active"
+    founded: "2002"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "ICE's parent department and source of procurement, inspector-general, privacy, and policy records."
+
+  - name: "U.S. Department of Justice"
+    pillar_type: "government"
+    sub_type: "cabinet_department"
+    status: "active"
+    founded: "1870"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Oversees the Federal Bureau of Prisons and U.S. Marshals Service, important comparison customers and legal actors."
+
+  - name: "U.S. Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    founded: "1934"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Primary source for GEO's ownership, subsidiaries, executives, material contracts, risks, revenue, debt, and related-party disclosures."
+
+  - name: "U.S. Government Accountability Office"
+    pillar_type: "government"
+    sub_type: "legislative_audit"
+    status: "active"
+    founded: "1921"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Primary oversight source for immigration detention procurement, alternatives to detention, and contract-management issues."
+
+  - name: "Grant Thornton LLP"
+    pillar_type: "accounting"
+    sub_type: "independent_auditor"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "GEO's independent auditor since 2006, according to the 2026 proxy."
+
+  - name: "Citizens Bank, N.A."
+    pillar_type: "banking"
+    sub_type: "administrative_agent"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Administrative agent for GEO's secured credit facility, including its $550 million revolver."
+
+  - name: "Guidepost Solutions LLC"
+    pillar_type: "operations"
+    sub_type: "consulting_firm"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Employer of GEO director and former ICE head Julie Myers Wood; disclosed BI consulting relationship ended December 31, 2025."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "The GEO Group, Inc."
+
+source_overrides: {}

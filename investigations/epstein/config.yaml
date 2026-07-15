@@ -233,12 +233,12 @@ corpus_tools:
   - tool: "tools/query_unified.py"
     name: "Unified DB"
     description: "COMPLEMENTARY: 107K semantic triples, 45K co-occurrence edges, 8.3K parsed emails (relationships, not text redundancy)"
-    commands: ["search", "entity", "related"]
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
 
   - tool: "tools/query_lmsband.py"
     name: "LMSBAND"
     description: "COMPLEMENTARY: structured financials (flights, positions, balances, CC statements); text search redundant with kabasshouse"
-    commands: ["search", "entity", "file"]
+    commands: ["search", "entities", "file"]
 
   - tool: "tools/ingest_epstein_20k.py"
     name: "Epstein Files 20K"
@@ -254,6 +254,16 @@ corpus_tools:
     name: "EpsteinExposed"
     description: "Persons, documents, flights"
     commands: ["search-persons", "search-docs", "search-flights"]
+
+  - tool: "tools/reporting_corpus.py"
+    name: "Epstein Reporting Knowledge Layer"
+    description: "Versioned reporting, attributed atomic claims, lineage, and primary-evidence verification gaps"
+    commands: ["search", "latest", "claims", "primary-gaps"]
+
+  - tool: "tools/government_release_corpus.py"
+    name: "DOJ and SEC Press Releases"
+    description: "Primary official agency statements; preserve allegation and disposition language"
+    commands: ["search", "show", "stats"]
 
   - tool: "tools/query_doj.py"
     name: "DOJ Vol 11"

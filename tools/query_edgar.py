@@ -35,13 +35,16 @@ Usage:
 """
 
 import argparse
+import gzip
 import html
 import json
 import re
 import sys
 import time
 import xml.etree.ElementTree as ET
-from urllib.parse import urlencode, quote_plus
+import zlib
+from html.parser import HTMLParser
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -69,14 +72,74 @@ USER_AGENT = "OSINT-Research osint-research@proton.me"
 # Rate limiting
 _last_request = 0.0
 MIN_INTERVAL = 0.11  # 10 req/sec max
+MAX_FILING_BYTES = 25 * 1024 * 1024
+MAX_SUBMISSIONS_BYTES = 25 * 1024 * 1024
+MAX_REQUEST_ATTEMPTS = 3
+_TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
 
 
-def _request(url, params=None, accept="application/json"):
-    """Make a rate-limited request to SEC. Returns parsed JSON or raw bytes."""
+class SecRequestError(RuntimeError):
+    """A bounded SEC retrieval failed after applying request policy."""
+
+    def __init__(self, message, *, url, status=None):
+        super().__init__(message)
+        self.url = url
+        self.status = status
+
+
+def _wait_for_request_slot():
+    """Apply the shared SEC fair-access request interval."""
     global _last_request
     elapsed = time.time() - _last_request
     if elapsed < MIN_INTERVAL:
         time.sleep(MIN_INTERVAL - elapsed)
+
+
+def _decode_response_body(raw, content_encoding, max_bytes):
+    """Decode supported HTTP compression and enforce the expanded-size cap."""
+    encoding = (content_encoding or "").split(",", 1)[0].strip().casefold()
+    try:
+        if encoding == "gzip":
+            raw = gzip.decompress(raw)
+        elif encoding == "deflate":
+            try:
+                raw = zlib.decompress(raw)
+            except zlib.error:
+                raw = zlib.decompress(raw, -zlib.MAX_WBITS)
+    except (OSError, zlib.error) as error:
+        raise SecRequestError(
+            f"SEC returned invalid {encoding} content: {error}", url="<response>"
+        ) from error
+    if max_bytes is not None and len(raw) > max_bytes:
+        raise SecRequestError(
+            f"SEC response exceeded the {max_bytes:,}-byte safety limit",
+            url="<response>",
+        )
+    return raw
+
+
+def _retry_delay(error, attempt):
+    """Return a bounded Retry-After/backoff delay for a transient response."""
+    retry_after = error.headers.get("Retry-After") if error.headers else None
+    try:
+        return min(max(float(retry_after), MIN_INTERVAL), 5.0)
+    except (TypeError, ValueError):
+        return min(0.5 * (2 ** attempt), 5.0)
+
+
+def _request(
+    url,
+    params=None,
+    accept="application/json",
+    *,
+    max_bytes=None,
+    raise_errors=False,
+    max_attempts=MAX_REQUEST_ATTEMPTS,
+):
+    """Make a compliant, bounded SEC request. Returns parsed JSON or raw bytes."""
+    global _last_request
+    if max_attempts < 1:
+        raise ValueError("max_attempts must be positive")
 
     if params:
         url += "?" + urlencode(params, doseq=True)
@@ -84,29 +147,67 @@ def _request(url, params=None, accept="application/json"):
     headers = {
         "User-Agent": USER_AGENT,
         "Accept": accept,
+        "Accept-Encoding": "gzip, deflate",
     }
 
-    req = Request(url, headers=headers)
-    try:
-        with urlopen(req, timeout=30) as resp:
+    for attempt in range(max_attempts):
+        _wait_for_request_slot()
+        req = Request(url, headers=headers)
+        try:
+            with urlopen(req, timeout=30) as resp:
+                _last_request = time.time()
+                read_limit = max_bytes + 1 if max_bytes is not None else None
+                raw = resp.read(read_limit)
+                if max_bytes is not None and len(raw) > max_bytes:
+                    raise SecRequestError(
+                        f"SEC response exceeded the {max_bytes:,}-byte safety limit",
+                        url=url,
+                    )
+                raw = _decode_response_body(
+                    raw, resp.headers.get("Content-Encoding", ""), max_bytes
+                )
+                content_type = resp.headers.get("Content-Type", "")
+                if accept == "application/json" or "json" in content_type:
+                    return json.loads(raw.decode())
+                return raw
+        except HTTPError as error:
             _last_request = time.time()
-            raw = resp.read()
-            content_type = resp.headers.get("Content-Type", "")
-            if accept == "application/json" or "json" in content_type:
-                return json.loads(raw.decode())
-            return raw
-    except HTTPError as e:
-        if e.code == 403:
-            print("ERROR: 403 Forbidden — SEC requires User-Agent with contact info", file=sys.stderr)
-        elif e.code == 404:
-            print(f"ERROR: 404 Not Found — {url}", file=sys.stderr)
-        else:
-            body = e.read().decode()[:500]
-            print(f"ERROR: HTTP {e.code} from SEC: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        print(f"ERROR: Cannot reach SEC: {e.reason}", file=sys.stderr)
-        return None
+            if error.code in _TRANSIENT_HTTP_STATUSES and attempt + 1 < max_attempts:
+                time.sleep(_retry_delay(error, attempt))
+                continue
+            if error.code == 403:
+                message = (
+                    "403 Forbidden from SEC despite the declared User-Agent; "
+                    "check fair-access throttling before retrying"
+                )
+            elif error.code == 404:
+                message = f"404 Not Found — {url}"
+            else:
+                body = error.read().decode(errors="replace")[:500]
+                message = f"HTTP {error.code} from SEC: {body}"
+            wrapped = SecRequestError(message, url=url, status=error.code)
+            if raise_errors:
+                raise wrapped from error
+            print(f"ERROR: {message}", file=sys.stderr)
+            return None
+        except URLError as error:
+            _last_request = time.time()
+            if attempt + 1 < max_attempts:
+                time.sleep(min(0.5 * (2 ** attempt), 5.0))
+                continue
+            message = f"Cannot reach SEC: {error.reason}"
+            wrapped = SecRequestError(message, url=url)
+            if raise_errors:
+                raise wrapped from error
+            print(f"ERROR: {message}", file=sys.stderr)
+            return None
+        except SecRequestError:
+            if raise_errors:
+                raise
+            error = sys.exc_info()[1]
+            print(f"ERROR: {error}", file=sys.stderr)
+            return None
+    return None
 
 
 def _filing_url(cik, adsh, doc_name=""):
@@ -120,27 +221,324 @@ def _filing_url(cik, adsh, doc_name=""):
     return ""
 
 
+def _submission_file_overlaps(file_info, start=None, end=None):
+    """Return whether an SEC submissions-history segment can match a date range."""
+    filing_from = file_info.get("filingFrom") or ""
+    filing_to = file_info.get("filingTo") or ""
+    if start and filing_to and filing_to < start:
+        return False
+    if end and filing_from and filing_from > end:
+        return False
+    return True
+
+
+def _append_filing_records(
+    records,
+    filings,
+    *,
+    cik,
+    form_filters,
+    start=None,
+    end=None,
+    limit=None,
+    seen_accessions=None,
+):
+    """Append matching rows from an SEC columnar filings object."""
+    forms = filings.get("form", [])
+    dates = filings.get("filingDate", [])
+    accessions = filings.get("accessionNumber", [])
+    primary_docs = filings.get("primaryDocument", [])
+    descriptions = filings.get("primaryDocDescription", [])
+    seen_accessions = seen_accessions if seen_accessions is not None else set()
+    examined = 0
+
+    for i, form in enumerate(forms):
+        if limit is not None and len(records) >= limit:
+            break
+        examined += 1
+        if form_filters and not any(
+            form == form_filter or form.startswith(form_filter)
+            for form_filter in form_filters
+        ):
+            continue
+
+        filing_date = dates[i] if i < len(dates) else "?"
+        if start and filing_date < start:
+            continue
+        if end and filing_date > end:
+            continue
+
+        accession = accessions[i] if i < len(accessions) else ""
+        if accession and accession in seen_accessions:
+            continue
+        if accession:
+            seen_accessions.add(accession)
+        primary_document = primary_docs[i] if i < len(primary_docs) else ""
+        description = descriptions[i] if i < len(descriptions) else ""
+        records.append({
+            "date": filing_date,
+            "form": form,
+            "accession": accession,
+            "primary_document": primary_document,
+            "description": description,
+            "url": _filing_url(cik, accession, primary_document),
+        })
+
+    return examined
+
+
+class _FilingHTMLTextExtractor(HTMLParser):
+    """Collect filing text while retaining table cells and footnote markers."""
+
+    _SKIP_TAGS = {"script", "style", "noscript"}
+    _BLOCK_TAGS = {
+        "address", "article", "blockquote", "div", "footer", "h1", "h2",
+        "h3", "h4", "h5", "h6", "header", "li", "p", "pre", "section",
+        "table", "tr",
+    }
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self.skip_depth = 0
+
+    def _separator(self, value):
+        if self.parts and not self.parts[-1].endswith(value):
+            self.parts.append(value)
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.casefold()
+        if tag in self._SKIP_TAGS:
+            self.skip_depth += 1
+            return
+        if self.skip_depth:
+            return
+        if tag == "br":
+            self._separator("\n")
+        elif tag in self._BLOCK_TAGS:
+            self._separator("\n")
+
+    def handle_endtag(self, tag):
+        tag = tag.casefold()
+        if tag in self._SKIP_TAGS:
+            self.skip_depth = max(0, self.skip_depth - 1)
+            return
+        if self.skip_depth:
+            return
+        if tag in {"td", "th"}:
+            self._separator("\t")
+        elif tag in self._BLOCK_TAGS:
+            self._separator("\n")
+
+    def handle_data(self, data):
+        if not self.skip_depth and data:
+            self.parts.append(data)
+
+
 def _strip_html(text):
-    """Strip HTML tags and decode entities. Simple but effective for SEC filings."""
-    # Remove script/style blocks
-    text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', text, flags=re.DOTALL | re.IGNORECASE)
-    # Remove HTML comments
-    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
-    # Replace block elements with newlines
-    text = re.sub(r'<(?:br|p|div|tr|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
-    # Remove remaining tags
-    text = re.sub(r'<[^>]+>', '', text)
-    # Decode HTML entities
-    text = html.unescape(text)
-    # Collapse whitespace
-    text = re.sub(r'[ \t]+', ' ', text)
-    text = re.sub(r'\n\s*\n', '\n\n', text)
-    # Strip leading/trailing whitespace per line
-    lines = [line.strip() for line in text.split('\n')]
-    return '\n'.join(lines)
+    """Extract complete readable HTML text, including table footnotes."""
+    parser = _FilingHTMLTextExtractor()
+    parser.feed(text)
+    parser.close()
+    extracted = html.unescape("".join(parser.parts)).replace("\xa0", " ")
+    lines = []
+    previous_blank = True
+    for raw_line in extracted.splitlines():
+        line = re.sub(r"[ \t\f\v]+", " ", raw_line).strip()
+        if line:
+            lines.append(line)
+            previous_blank = False
+        elif not previous_blank:
+            lines.append("")
+            previous_blank = True
+    while lines and not lines[-1]:
+        lines.pop()
+    return "\n".join(lines)
+
+
+def _complete_submission_location(url):
+    """Return the official complete-submission URL and requested filename."""
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in {"sec.gov", "www.sec.gov"}:
+        return None
+    parts = parsed.path.split("/")
+    if len(parts) != 7 or [part.casefold() for part in parts[1:4]] != [
+        "archives", "edgar", "data"
+    ]:
+        return None
+    _empty, _archives, _edgar, _data, cik, accession, filename, *extra = parts
+    if extra or not cik.isdigit() or not re.fullmatch(r"\d{18}", accession):
+        return None
+    if not filename or filename.casefold().endswith(".txt"):
+        return None
+    dashed_accession = f"{accession[:10]}-{accession[10:12]}-{accession[12:]}"
+    submission_url = (
+        f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/"
+        f"{dashed_accession}.txt"
+    )
+    return submission_url, filename
+
+
+def _extract_submission_document(data, filename):
+    """Extract one named document from an SEC complete-submission SGML file."""
+    submission = data.decode("utf-8", errors="replace")
+    for match in re.finditer(r"(?is)<DOCUMENT>(.*?)</DOCUMENT>", submission):
+        block = match.group(1)
+        filename_match = re.search(r"(?im)^<FILENAME>\s*([^\r\n<]+)", block)
+        if not filename_match or filename_match.group(1).strip().casefold() != filename.casefold():
+            continue
+        text_match = re.search(r"(?is)<TEXT>\s*(.*?)(?:</TEXT>|$)", block)
+        if not text_match:
+            break
+        return text_match.group(1).encode("utf-8")
+    raise SecRequestError(
+        f"Complete submission did not contain requested document {filename!r}",
+        url=filename,
+    )
+
+
+def _fetch_filing_document(url, *, max_bytes=MAX_FILING_BYTES):
+    """Fetch a filing, using its official complete submission after direct 403."""
+    try:
+        data = _request(
+            url,
+            accept="text/html,application/xhtml+xml,text/plain,application/xml",
+            max_bytes=max_bytes,
+            raise_errors=True,
+        )
+        return data, "http"
+    except SecRequestError as error:
+        location = _complete_submission_location(url)
+        if error.status != 403 or not location:
+            raise
+        submission_url, filename = location
+        try:
+            submission = _request(
+                submission_url,
+                accept="text/plain",
+                max_bytes=max_bytes,
+                raise_errors=True,
+            )
+            return _extract_submission_document(submission, filename), "submission-text"
+        except SecRequestError as fallback_error:
+            raise SecRequestError(
+                f"Direct filing request failed ({error}); complete-submission fallback "
+                f"also failed ({fallback_error})",
+                url=url,
+                status=error.status,
+            ) from fallback_error
+
+
+def _extract_document_text(data):
+    """Decode a fetched filing without discarding table or footnote text."""
+    text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else str(data)
+    stripped = text.lstrip()
+    if stripped.startswith("<?xml") or stripped.startswith("<XML>"):
+        text = re.sub(r"<[^>]+>", " ", text)
+        text = html.unescape(text)
+        return re.sub(r"[ \t]+", " ", text)
+    if re.search(r"<(?:html|body|table|div|p)\b", text[:5000], re.IGNORECASE):
+        return _strip_html(text)
+    return text
+
+
+def _line_matches(lines, terms, *, context=2, max_matches=20):
+    """Return bounded line-context matches from the complete extracted text."""
+    matches = []
+    for term in terms or []:
+        needle = term.casefold()
+        for index, line in enumerate(lines):
+            if needle not in line.casefold():
+                continue
+            start = max(0, index - context)
+            end = min(len(lines), index + context + 1)
+            matches.append({
+                "term": term,
+                "line": index + 1,
+                "context": [
+                    {"line": offset + 1, "text": lines[offset]}
+                    for offset in range(start, end)
+                ],
+            })
+            if len(matches) >= max_matches:
+                return matches
+    return matches
+
+
+def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
+    """Write full filing text or display a bounded preview/match context."""
+    if args.lines < 1:
+        raise ValueError("--lines must be positive")
+    context = getattr(args, "context", 2)
+    max_matches = getattr(args, "max_matches", 20)
+    if context < 0 or max_matches < 1:
+        raise ValueError("--context must be non-negative and --max-matches positive")
+    lines = text.splitlines()
+    matches = _line_matches(
+        lines,
+        getattr(args, "find", None),
+        context=context,
+        max_matches=max_matches,
+    )
+    result = {
+        "title": title,
+        "url": url,
+        "retrieval": retrieval,
+        "characters": len(text),
+        "line_count": len(lines),
+        "matches": matches,
+        "text": text,
+    }
+    if write_output(result, args, summary=title):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(result, indent=2, default=str))
+        return
+
+    print(f"─── {title} ({len(text):,} chars; {len(lines):,} lines; {retrieval}) ───")
+    print()
+    if getattr(args, "find", None):
+        if not matches:
+            print(f"No matches for: {', '.join(args.find)}")
+            return
+        for match in matches:
+            print(f"[match {match['term']!r} at line {match['line']}]")
+            for item in match["context"]:
+                marker = ">" if item["line"] == match["line"] else " "
+                print(f"{marker} {item['line']:>6}: {item['text']}")
+            print()
+        if len(matches) >= max_matches:
+            print(f"... match display capped at {max_matches}")
+        return
+
+    for line in lines[:args.lines]:
+        print(line)
+    if len(lines) > args.lines:
+        print(f"\n... ({len(lines) - args.lines} more lines; use --output for full text)")
 
 
 # ─── Commands ────────────────────────────────────────────────────────────────
+
+
+def _normalize_efts_forms(forms):
+    """Remove amendment filters already covered by a selected root form.
+
+    EFTS root-form filters such as ``D`` and ``S-1`` already include their
+    ``/A`` amendments. Sending both makes the backend combine the root and
+    exact-form clauses, which excludes the unamended filings.
+    """
+    if not forms:
+        return forms
+    selected = [form.strip() for form in forms.split(",") if form.strip()]
+    selected_names = {form.casefold() for form in selected}
+    return ",".join(
+        form
+        for form in selected
+        if not (
+            form.casefold().endswith("/a")
+            and form[:-2].casefold() in selected_names
+        )
+    )
 
 
 def cmd_search(args):
@@ -157,7 +555,7 @@ def cmd_search(args):
     if args.end:
         params["enddt"] = args.end
     if args.forms:
-        params["forms"] = args.forms
+        params["forms"] = _normalize_efts_forms(args.forms)
 
     data = _request(EFTS_URL, params)
     if not data:
@@ -235,7 +633,6 @@ def _print_facets(aggs, total):
 
     entity_agg = aggs.get("entity_filter", {}).get("buckets", [])
     form_agg = aggs.get("form_filter", {}).get("buckets", [])
-    sic_agg = aggs.get("sic_filter", {}).get("buckets", [])
     state_agg = aggs.get("biz_states_filter", {}).get("buckets", [])
 
     if entity_agg:
@@ -267,10 +664,6 @@ def cmd_lookup(args):
     """Find CIK numbers for a company or person name."""
     query = " ".join(args.name)
 
-    # Strategy 1: Search company_tickers.json for exact/partial matches
-    print(f"Looking up: {query}")
-    print()
-
     tickers_url = "https://www.sec.gov/files/company_tickers.json"
     tickers_data = _request(tickers_url)
 
@@ -285,45 +678,36 @@ def cmd_lookup(args):
             if all(w in title for w in query_words):
                 matches.append(entry)
 
-    if matches:
-        # Deduplicate by CIK (same company can have multiple tickers)
-        seen_ciks = {}
-        for m in matches:
-            cik = m["cik_str"]
-            if cik not in seen_ciks:
-                seen_ciks[cik] = m
-            else:
-                # Append ticker
-                existing = seen_ciks[cik]
-                if m.get("ticker") and m["ticker"] not in existing.get("_tickers", existing.get("ticker", "")):
-                    existing.setdefault("_tickers", existing.get("ticker", ""))
-                    existing["_tickers"] += f", {m['ticker']}"
-
-        deduped = list(seen_ciks.values())
-        print(f"  Public companies ({len(deduped)} matches):")
-        for m in deduped[:20]:
-            cik = str(m["cik_str"]).zfill(10)
-            tickers = m.get("_tickers", m.get("ticker", ""))
-            print(f"    CIK {cik} | {tickers:<10} | {m['title']}")
-        print()
+    # Deduplicate by CIK (the same company can have multiple tickers).
+    public_by_cik = {}
+    for match in matches:
+        cik = str(match["cik_str"]).zfill(10)
+        company = public_by_cik.setdefault(
+            cik,
+            {"cik": cik, "title": match.get("title", ""), "tickers": []},
+        )
+        ticker = match.get("ticker")
+        if ticker and ticker not in company["tickers"]:
+            company["tickers"].append(ticker)
+    public_companies = list(public_by_cik.values())[:20]
 
     # Strategy 2: Use EFTS entity aggregation to find which entities
     # are most associated with this name in filing text
     efts_data = _request(EFTS_URL, {"q": f'"{query}"', "size": 0})
+    filing_mentions = []
     if efts_data:
         entity_agg = efts_data.get("aggregations", {}).get("entity_filter", {}).get("buckets", [])
         total = efts_data.get("hits", {}).get("total", {}).get("value", 0)
-
-        if entity_agg:
-            print(f"  Entities mentioning \"{query}\" in filings ({total:,} total filings):")
-            for b in entity_agg[:15]:
-                name_raw = b["key"]
-                # Extract CIK from display name
-                cik_match = re.search(r'CIK (\d+)', name_raw)
-                cik = cik_match.group(1).zfill(10) if cik_match else "?"
-                name_clean = re.sub(r'\s+\(CIK \d+\)', '', name_raw)
-                print(f"    CIK {cik} | {b['doc_count']:>5} filings | {name_clean}")
-            print()
+        for bucket in entity_agg[:15]:
+            name_raw = bucket["key"]
+            cik_match = re.search(r'CIK (\d+)', name_raw)
+            filing_mentions.append({
+                "cik": cik_match.group(1).zfill(10) if cik_match else None,
+                "name": re.sub(r'\s+\(CIK \d+\)', '', name_raw),
+                "filing_count": bucket["doc_count"],
+            })
+    else:
+        total = 0
 
     # Strategy 3: Search the submissions endpoint for person/company by name
     # (Browse EDGAR company search — returns XML/Atom)
@@ -340,39 +724,71 @@ def cmd_lookup(args):
         "output": "atom",
     }
     atom_data = _request(browse_url, browse_params, accept="application/atom+xml")
+    registered_entities = []
     if atom_data and isinstance(atom_data, bytes):
-        _parse_atom_results(atom_data)
+        registered_entities = _parse_atom_results(atom_data)
+
+    result = {
+        "query": query,
+        "public_companies": public_companies,
+        "filing_mentions_total": total,
+        "filing_mentions": filing_mentions,
+        "registered_entities": registered_entities,
+    }
+    if write_output(result, args, summary=f"EDGAR lookup '{query}'"):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(result, indent=2, default=str))
+        return
+
+    print(f"Looking up: {query}")
+    print()
+    if public_companies:
+        print(f"  Public companies ({len(public_companies)} matches):")
+        for company in public_companies:
+            tickers = ", ".join(company["tickers"])
+            print(f"    CIK {company['cik']} | {tickers:<10} | {company['title']}")
+        print()
+    if filing_mentions:
+        print(f"  Entities mentioning \"{query}\" in filings ({total:,} total filings):")
+        for mention in filing_mentions:
+            cik = mention["cik"] or "?"
+            print(f"    CIK {cik} | {mention['filing_count']:>5} filings | {mention['name']}")
+        print()
+    if registered_entities:
+        print(f"  EDGAR registered entities ({len(registered_entities)} matches):")
+        for entity in registered_entities:
+            extra = f" SIC:{entity['sic']}" if entity["sic"] else ""
+            extra += f" [{entity['state']}]" if entity["state"] else ""
+            print(f"    CIK {entity['cik']} | {entity['name']}{extra}")
+        print()
 
 
 def _parse_atom_results(atom_bytes):
-    """Parse EDGAR company search Atom XML results."""
+    """Parse EDGAR company search Atom XML results into dictionaries."""
+    results = []
     try:
         root = ET.fromstring(atom_bytes)
         # All elements are in the Atom namespace
         ns = "http://www.w3.org/2005/Atom"
         entries = root.findall(f"{{{ns}}}entry")
 
-        if entries:
-            print(f"  EDGAR registered entities ({len(entries)} matches):")
-            for entry in entries[:15]:
-                content = entry.find(f"{{{ns}}}content")
-                if content is None:
-                    continue
-                ci = content.find(f"{{{ns}}}company-info")
-                if ci is None:
-                    continue
-
-                cik = (ci.findtext(f"{{{ns}}}cik") or "?").strip().zfill(10)
-                name = (ci.findtext(f"{{{ns}}}name") or "?").strip()
-                sic = (ci.findtext(f"{{{ns}}}sic") or "").strip()
-                state = (ci.findtext(f"{{{ns}}}state-of-incorporation") or "").strip()
-
-                extra = f" SIC:{sic}" if sic else ""
-                extra += f" [{state}]" if state else ""
-                print(f"    CIK {cik} | {name}{extra}")
-            print()
+        for entry in entries[:15]:
+            content = entry.find(f"{{{ns}}}content")
+            if content is None:
+                continue
+            ci = content.find(f"{{{ns}}}company-info")
+            if ci is None:
+                continue
+            results.append({
+                "cik": (ci.findtext(f"{{{ns}}}cik") or "?").strip().zfill(10),
+                "name": (ci.findtext(f"{{{ns}}}name") or "?").strip(),
+                "sic": (ci.findtext(f"{{{ns}}}sic") or "").strip(),
+                "state": (ci.findtext(f"{{{ns}}}state-of-incorporation") or "").strip(),
+            })
     except ET.ParseError:
         pass
+    return results
 
 
 def cmd_company(args):
@@ -459,18 +875,13 @@ def cmd_filings(args):
     cik = args.cik.lstrip("0").zfill(10)
     url = f"{SUBMISSIONS_URL}/CIK{cik}.json"
 
-    data = _request(url)
+    data = _request(url, max_bytes=MAX_SUBMISSIONS_BYTES)
     if not data:
         return
 
     name = data.get("name", "?")
     cik_display = data.get("cik", "")
     recent = data.get("filings", {}).get("recent", {})
-    forms = recent.get("form", [])
-    dates = recent.get("filingDate", [])
-    accessions = recent.get("accessionNumber", [])
-    primary_docs = recent.get("primaryDocument", [])
-    descriptions = recent.get("primaryDocDescription", [])
 
     # Support comma-separated form types and prefix matching
     form_filters = []
@@ -478,32 +889,51 @@ def cmd_filings(args):
         form_filters = [f.strip() for f in args.form.split(",")]
 
     records = []
-    total_recent = len(forms)
-    for i in range(len(forms)):
-        form = forms[i] if i < len(forms) else "?"
-        if form_filters:
-            # Match exact or prefix (e.g., "DEF" matches "DEF 14A", "DEFA14A")
-            if not any(form == f or form.startswith(f) for f in form_filters):
-                continue
+    seen_accessions = set()
+    total_recent = len(recent.get("form", []))
+    _append_filing_records(
+        records,
+        recent,
+        cik=cik_display,
+        form_filters=form_filters,
+        start=args.start,
+        end=args.end,
+        seen_accessions=seen_accessions,
+    )
 
-        filing_date = dates[i] if i < len(dates) else "?"
-        if args.start and filing_date < args.start:
+    historical_files_fetched = 0
+    historical_filings_examined = 0
+    files = data.get("filings", {}).get("files", [])
+    files = sorted(
+        files,
+        key=lambda file_info: file_info.get("filingTo") or "",
+        reverse=True,
+    )
+    for file_info in files:
+        if len(records) >= args.limit:
+            break
+        if not _submission_file_overlaps(file_info, args.start, args.end):
             continue
-        if args.end and filing_date > args.end:
+        filename = file_info.get("name")
+        if not filename:
             continue
-
-        acc = accessions[i] if i < len(accessions) else ""
-        doc = primary_docs[i] if i < len(primary_docs) else ""
-        desc = descriptions[i] if i < len(descriptions) else ""
-        doc_url = _filing_url(cik_display, acc, doc)
-        records.append({
-            "date": filing_date,
-            "form": form,
-            "accession": acc,
-            "primary_document": doc,
-            "description": desc,
-            "url": doc_url,
-        })
+        historical = _request(
+            f"{SUBMISSIONS_URL}/{filename}",
+            max_bytes=MAX_SUBMISSIONS_BYTES,
+        )
+        if not historical:
+            break
+        historical_files_fetched += 1
+        historical_filings_examined += _append_filing_records(
+            records,
+            historical,
+            cik=cik_display,
+            form_filters=form_filters,
+            start=args.start,
+            end=args.end,
+            limit=args.limit,
+            seen_accessions=seen_accessions,
+        )
 
     data_out = {
         "company_name": name,
@@ -515,6 +945,8 @@ def cmd_filings(args):
             "limit": args.limit,
         },
         "total_recent_filings": total_recent,
+        "historical_files_fetched": historical_files_fetched,
+        "historical_filings_examined": historical_filings_examined,
         "matched_filings": len(records),
         "filings": records[:args.limit],
     }
@@ -541,7 +973,7 @@ def cmd_filings(args):
             print(f"    {filing['url']}")
         count += 1
 
-    print(f"\nShowing {count} filings" + (f" (of {len(records)} matched / {len(forms)} recent)" if not form_filters else f" (of {len(records)} matched)"))
+    print(f"\nShowing {count} filings" + (f" (of {len(records)} matched / {total_recent} recent)" if not form_filters else f" (of {len(records)} matched)"))
 
 
 def cmd_insider(args):
@@ -724,10 +1156,9 @@ def _get_edgartools_filing(ticker_or_cik, form="10-K", index=0):
 def cmd_read(args):
     """Fetch and display clean, readable text from a SEC filing.
 
-    Uses edgartools for iXBRL-aware text extraction. Falls back to raw HTML
-    stripping for non-standard URLs.
+    Ticker reads use edgartools. URL reads fetch the official document directly
+    and use a table-aware parser so late filing footnotes remain available.
     """
-    # If given a ticker/CIK + form, use edgartools directly
     if hasattr(args, "ticker") and args.ticker:
         try:
             filing, company = _get_edgartools_filing(
@@ -737,70 +1168,35 @@ def cmd_read(args):
                 print(f"ERROR: No {args.form_type or '10-K'} filings found for {args.ticker}", file=sys.stderr)
                 return
             text = filing.text()
-            print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ({len(text):,} chars) ───")
-            print()
-            lines = text.split("\n")
-            for line in lines[:args.lines]:
-                print(line)
-            if len(lines) > args.lines:
-                print(f"\n... ({len(lines) - args.lines} more lines, use --lines {len(lines)} to see all)")
+            _emit_filing_text(
+                text,
+                args,
+                title=f"{filing.form} filed {filing.filing_date} | {company.name}",
+                url=getattr(filing, "homepage_url", None),
+            )
             return
-        except Exception as e:
-            print(f"WARNING: edgartools failed ({e}), falling back to raw fetch", file=sys.stderr)
+        except Exception as error:
+            print(f"ERROR: edgartools failed: {error}", file=sys.stderr)
+            raise SystemExit(2) from error
 
-    # URL-based read: try edgartools first for accession-based URLs, then fall back
     url = args.url if hasattr(args, "url") and args.url else None
     if not url:
         print("ERROR: Provide a URL or use --ticker", file=sys.stderr)
-        return
+        raise SystemExit(2)
 
-    # Try edgartools accession number extraction from URL
     try:
-        import os
-        os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
-        # Extract accession from URL pattern: /data/<CIK>/<ACCESSION>/
-        m = re.search(r"/data/(\d+)/([\d-]+)/", url)
-        if m:
-            cik, accession_raw = m.group(1), m.group(2)
-            from edgar import find
-            company = find(int(cik))
-            if company:
-                filings = company.get_filings()
-                for f in filings[:50]:  # check recent filings
-                    if accession_raw in (f.accession_no or "").replace("-", ""):
-                        text = f.text()
-                        print(f"─── {f.form} filed {f.filing_date} | {company.name} ({len(text):,} chars) ───")
-                        print()
-                        lines = text.split("\n")
-                        for line in lines[:args.lines]:
-                            print(line)
-                        if len(lines) > args.lines:
-                            print(f"\n... ({len(lines) - args.lines} more lines)")
-                        return
-    except Exception as e:
-        print(f"WARNING: edgartools URL parse failed ({e}), falling back to raw fetch", file=sys.stderr)
-
-    # Raw HTML fallback (original implementation)
-    data = _request(url, accept="text/html")
-    if not data:
-        return
-    text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else str(data)
-    if text.strip().startswith("<?xml") or text.strip().startswith("<XML>"):
-        text = re.sub(r'<[^>]+>', ' ', text)
-        text = html.unescape(text)
-    elif "<html" in text.lower()[:500] or "<body" in text.lower()[:500]:
-        text = _strip_html(text)
-    lines = text.split('\n')
-    while lines and not lines[0].strip():
-        lines.pop(0)
-    total_lines = len(lines)
-    show_lines = lines[:args.lines]
-    print(f"─── Filing Content ({total_lines} lines, showing {len(show_lines)}) ───")
-    print()
-    for line in show_lines:
-        print(line)
-    if total_lines > args.lines:
-        print(f"\n... ({total_lines - args.lines} more lines, use --lines {total_lines} to see all)")
+        data, retrieval = _fetch_filing_document(url)
+        text = _extract_document_text(data)
+        _emit_filing_text(
+            text,
+            args,
+            title="Filing Content",
+            url=url,
+            retrieval=retrieval,
+        )
+    except (SecRequestError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2) from error
 
 
 def _get_financial_statement(obj, stmt_type):
@@ -958,7 +1354,7 @@ def cmd_sections(args):
                 for line in lines:
                     print(line)
                 if len(text.split("\n")) > args.lines:
-                    print(f"\n... (truncated, use --lines to see more)")
+                    print("\n... (truncated, use --lines to see more)")
             else:
                 # Try bracket access
                 try:
@@ -1013,9 +1409,9 @@ def cmd_sections(args):
         else:
             print(f"  {label}: not available")
 
-    print(f"\nUse --section <name> to extract a specific section")
-    print(f"  Text:       business, risk, mda, legal")
-    print(f"  Financial:  balance_sheet, income_statement, cashflow_statement")
+    print("\nUse --section <name> to extract a specific section")
+    print("  Text:       business, risk, mda, legal")
+    print("  Financial:  balance_sheet, income_statement, cashflow_statement")
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -1028,7 +1424,13 @@ def main():
     # search
     p = sub.add_parser("search", help="Full-text search across SEC filings")
     p.add_argument("query", nargs="+", help="Search terms (multiple terms are AND'd)")
-    p.add_argument("--forms", help="Filter by form types (e.g., '10-K,DEF 14A')")
+    p.add_argument(
+        "--forms",
+        help=(
+            "Filter by form types (e.g., '10-K,DEF 14A'); a base form already "
+            "includes its /A amendments"
+        ),
+    )
     p.add_argument("--start", help="Start date (YYYY-MM-DD)")
     p.add_argument("--end", help="End date (YYYY-MM-DD)")
     p.add_argument("--size", type=int, default=20, help="Number of results (max ~100)")
@@ -1041,6 +1443,7 @@ def main():
     # lookup
     p = sub.add_parser("lookup", help="Find CIK numbers for a company or person")
     p.add_argument("name", nargs="+", help="Company or person name")
+    add_output_args(p)
 
     # company
     p = sub.add_parser("company", help="Get company info by CIK")
@@ -1048,7 +1451,7 @@ def main():
     add_output_args(p)
 
     # filings
-    p = sub.add_parser("filings", help="Get filings by CIK")
+    p = sub.add_parser("filings", help="Get recent and historical filings by CIK")
     p.add_argument("cik", help="CIK number")
     p.add_argument("--form", help="Filter by form type(s), comma-separated (e.g., 10-K,DEF)")
     p.add_argument("--limit", type=int, default=30)
@@ -1071,6 +1474,14 @@ def main():
     p.add_argument("--ticker", help="Ticker or CIK (uses edgartools for clean extraction)")
     p.add_argument("--form-type", default="10-K", help="Form type when using --ticker (default: 10-K)")
     p.add_argument("--lines", type=int, default=500, help="Number of lines to show (default: 500)")
+    p.add_argument(
+        "--find",
+        action="append",
+        help="Find text in the complete filing and show bounded context (repeatable)",
+    )
+    p.add_argument("--context", type=int, default=2, help="Context lines around --find matches (default: 2)")
+    p.add_argument("--max-matches", type=int, default=20, help="Maximum --find matches to display (default: 20)")
+    add_output_args(p)
 
     # sections (structured section extraction via edgartools)
     p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text or structured financials)")

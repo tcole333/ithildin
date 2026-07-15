@@ -758,12 +758,16 @@ def cmd_ingest_insolvency(args):
             finding_type="legal",
             summary=summary,
             detail=detail,
-            source_datasets="UK Companies House Insolvency API",
+            source_datasets=["companies_house"],
             confidence="confirmed",
             date_of_event=date_str or None,
             evidence_ids=[source_url],
             claim_type="direct_quote",
-            source_quotes=[f"Insolvency case #{case_number}, type: {case_type}"],
+            source_quotes={
+                source_url: {
+                    "quote": f"Insolvency case #{case_number}, type: {case_type}"
+                }
+            },
         )
         print(f"  Finding #{finding_id}: {summary}")
         count += 1

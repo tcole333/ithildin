@@ -1,0 +1,37 @@
+{
+  "as_of": "2026-07-14",
+  "profile": "geo-group",
+  "lead_id": 57842,
+  "candidate": "GEO-linked FY2025-FY2026 obligation acceleration is primarily a cross-facility funding/new-task pattern rather than explicit options or deobligation accounting.",
+  "gates": {
+    "three_independent_contexts": {
+      "pass": true,
+      "basis": "B.I./ISAP, North Lake, Adelanto/Desert View, Tacoma, Aurora, Delaney Hall, Mesa/Golden, South Texas, and other facilities are separately represented."
+    },
+    "surprise_or_correction": {
+      "pass": true,
+      "basis": "The user-facing label 'option actions' is corrected by official action types: only three of 215 DHS rows were explicit option exercises, and only one was an ICE action."
+    },
+    "falsifiable": {
+      "pass": true,
+      "basis": "The complete 215-row matrix can be rerun against the official transaction endpoint and fails if action types or exact joins change."
+    },
+    "causal_mechanism": {
+      "pass": false,
+      "basis": "Action labels and timing do not identify why ICE chose funding levels, whether capacity was occupied, or whether a political actor influenced an action."
+    },
+    "distinct_from_existing_hypotheses": {
+      "pass": false,
+      "basis": "The result is a measured procurement decomposition, not a distinct speculative theory; existing #343-#345 concern CoreCivic and existing GEO records leads already cover invoice/rate/revenue gaps."
+    }
+  },
+  "decision": {
+    "create_synthesis_findings": true,
+    "create_new_hypothesis": false,
+    "create_follow_up_lead": true,
+    "follow_up_lead_id": 62587,
+    "follow_up_scope": "Recover ISAP V task-order Attachment 4/pricing item 42 and P00002-P00004 acquisition files to determine the funded unit, quantity, and scope basis of the $86,361,425 skip-tracing additions.",
+    "duplicate_controls": [57838, 62481, 60206, 60208],
+    "reason": "The action-type and timing result is new and bounded. The only nonduplicate unresolved scope question is the missing ISAP V item-42 package; invoice/revenue and facility rate/occupancy gaps are already assigned."
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62730,
+  "created": "2026-07-14",
+  "sources": [
+    {
+      "id": "SEC:GlobalX-2025-results-ex99-2",
+      "tier": "primary_company_filed_with_sec",
+      "url": "https://www.sec.gov/Archives/edgar/data/1846084/000119312526098353/jetmf-ex99_2.htm",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/sec/globalx-2025-results-ex99-2.html",
+      "sha256": "6474ce2290a740688aa7aad5a2f327d7ad7dea2f9789a1da03362fcd937c019d",
+      "quote": "We also extended our CSI Aviation contract with the U.S. government through the end of 2026 and secured a one-year extension under the Civil Reserve Air Fleet program.",
+      "proves": "Direct current GlobalX-CSI U.S.-government contract edge through end-2026",
+      "limitation": "Does not name ICE, BPA/call, route, aircraft, or crew"
+    },
+    {
+      "id": "SEC:GlobalX-2025-10K",
+      "tier": "primary_regulatory_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/1846084/000119312526093148/jetmf-20251231.htm",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/sec/globalx-2025-10k.html",
+      "sha256": "a5f03350479034fd42c81d04ce8127d76fe52061c0b8005aaa6e9f457d816e9f",
+      "quote": "Global Crossing Airlines Group Inc. operates a US Part 121 domestic flag and supplemental airline using the Airbus A320 family of aircraft. GlobalX's business model is to (1) provide services on an Aircraft, Crew, Maintenance and Insurance basis using wet lease contracts to airlines whereby we provide aircraft, crew, maintenance and insurance to customers.",
+      "proves": "GlobalX is an actual aircraft/crew operator and describes its ACMI role",
+      "limitation": "Does not assign specific aircraft or crews to ICE/CSI"
+    },
+    {
+      "id": "COURTLISTENER:Classic-Air-ECF37",
+      "tier": "primary_court_filing_party_pleading",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.37.0.pdf",
+      "courtlistener": "https://www.courtlistener.com/docket/69649350/37/classic-air-charter-inc-v-united-states/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/court/classic-air-ecf37-amended-complaint.pdf",
+      "sha256": "afef9c730b0890b20538bbf3a209c13789e4205dd1bf588c5817e66fc5628627",
+      "quote": "During Round 4 Discussions conducted in October 2024, CSI submitted new Letters of Commitment, new Airworthiness Certificates, new OpSpecs, and new Teaming Agreements.",
+      "proves": "Party pleading says replacement operational documentation existed",
+      "limitation": "Allegation/quotation from redacted administrative record; no public carrier names or tails; not a merits holding"
+    },
+    {
+      "id": "DHS:SOW-70CDCR24A00000001",
+      "tier": "primary_federal_contract",
+      "url": "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24A00000001-Charter-Flight-BPA.pdf",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/dhs/ice-air-bpa-sow.pdf",
+      "sha256": "52a7239e69687e3e9095defb538b3c20bffb863f6dfad499da74af559b1b2b39",
+      "quotes": [
+        "The contractor is responsible for all acts and omissions and all performance by their teaming partners and any subcontractors that the prime relies on to perform the work.",
+        "Contractor shall provide no fewer than 12 DSLA aircraft for exclusive availability and use under this contract for flights every day (Monday — Friday), 52 weeks per year.",
+        "No later than 12 hours prior to each scheduled departure time, the contractor shall provide the following information to the COR: the aircraft registration number, crew identification, and crew qualifications."
+      ],
+      "proves": "Prime responsibility, fleet scale, and existence of authoritative preflight registration records",
+      "limitation": "Public SOW does not name current carriers or tails"
+    },
+    {
+      "id": "HOUSE-HOMELAND:2025-05-28-CSI-letter",
+      "tier": "primary_congressional_letter_with_reporting_derived_claim",
+      "url": "https://democrats-homeland.house.gov/imo/media/doc/2025-05-28-t-weh-letter_to_csi_aviation.pdf",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/congress/2025-05-28-house-letter-csi.pdf",
+      "sha256": "63c385b314bbba632ff249a479a918ab11f9b724a60bb96abb5d514021fae666",
+      "quote": "Over the past year, one CSI Aviation subcontractor, GlobalX, operated 74 percent of ICE's removal flights.",
+      "proves": "Congressional committee made the assertion and sought the underlying subcontract records",
+      "limitation": "Sentence expressly relies on media reports; not independent primary corroboration of the 74 percent figure"
+    },
+    {
+      "id": "MASS-GOV:2026-01-08-ICE-airlines",
+      "tier": "primary_official_state_statement",
+      "url": "https://www.mass.gov/news/governor-healey-demands-private-airlines-stop-providing-deportation-flights-to-ice-at-expense-of-taxpayers",
+      "local_path": null,
+      "sha256": null,
+      "quote": "Today, Governor Maura Healey is demanding that two private airline companies stop providing flights for U.S. Immigration and Customs Enforcement (ICE). In her letter to the top executives of GlobalX Airlines and Eastern Air Express...",
+      "proves": "Official state characterization of GlobalX and Eastern as ICE flight providers",
+      "limitation": "Not an ICE award, task order, or CSI teaming record; local fetch returned HTTP 403"
+    },
+    {
+      "id": "DOT:Order-2021-9-10-GlobalX",
+      "tier": "primary_federal_regulatory_record",
+      "url": "https://downloads.regulations.gov/DOT-OST-2020-0042-0034/attachment_2.pdf",
+      "metadata_local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/dot/DOT-OST-2020-0042-0034-document.json",
+      "metadata_sha256": "db90d3fe2a5ce90da0e33e1c07f60ff70ed57310462b918d7a8c16c646a79e19",
+      "quote": "reissues to Global Crossing certificates of public convenience and necessity authorizing it to engage in interstate and foreign charter air transportation of persons, property, and mail",
+      "proves": "GlobalX operating authority",
+      "limitation": "Does not prove a CSI/ICE assignment; PDF attachment fetch returned HTTP 403"
+    },
+    {
+      "id": "DOT:Order-2024-10-1-Eastern",
+      "tier": "primary_federal_regulatory_record",
+      "url": "https://downloads.regulations.gov/DOT-OST-2016-0029-0021/attachment_1.pdf",
+      "metadata_local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/dot/DOT-OST-2016-0029-0021-document.json",
+      "metadata_sha256": "12c8d69b2f51903ceb93566570517f037f37db331852509ee8f714fc1bd94345",
+      "quote": "EASTERN AIR EXPRESS, LLC is authorized to engage in foreign charter air transportation of persons, property, and mail.",
+      "proves": "Eastern operating authority",
+      "limitation": "Does not prove a CSI/ICE assignment; PDF attachment fetch returned HTTP 403"
+    },
+    {
+      "id": "BTS:Form41-B43-2025",
+      "tier": "primary_federal_carrier_report_dataset",
+      "url": "https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FJI",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/dot/bts-form41-b43-2025/T_F41SCHEDULE_B43.csv",
+      "sha256": "c74ec7fd3996fcc4ff98a9e80b76da1cc1699f92fbf743269cbf7fb6686c85a4",
+      "proves": "Reported operator fleet inventory, models, seats, serials, and operating status",
+      "limitation": "Does not identify government customer, CSI contract, mission, or contract assignment"
+    },
+    {
+      "id": "SEC:Harbor-CSI-Air-Wisconsin-agreements",
+      "tier": "primary_regulatory_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/899394/000119312525324816/d59857d8k.htm",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/sec/harbor-csi-air-wisconsin-sale-agreements-8k.html",
+      "sha256": "112c1533766ca56c326f06b4749f37f369f372dfc67e3afcf27da169e76d1179",
+      "quotes": [
+        "AWAC agreed to sell to CSI all of its right, title and interest in and to 100% of the issued and outstanding membership interests of Air Wisconsin Airlines LLC.",
+        "On December 10, 2025, the Company entered into an Asset Purchase Agreement with CSI providing for the Company's sale of 13 Bombardier model CL-600-2B19 CRJ200 aircraft and inventory of certain expendable parts to CSI."
+      ],
+      "proves": "CSI's planned carrier and aircraft acquisition",
+      "limitation": "Does not assign the assets to ICE"
+    },
+    {
+      "id": "SEC:Harbor-CSI-Air-Wisconsin-closing",
+      "tier": "primary_regulatory_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/899394/000119312526014391/d23873d8k.htm",
+      "local_path": "investigations/geo-group/sources/2026-07-14-lead-62730/sec/harbor-csi-air-wisconsin-closing-8k.html",
+      "sha256": "50d88ddac3448d1021f2b8e4b19a305df72ae2a6f7aa043377f450991537d920",
+      "quote": "The Company received approval from the Department of Transportation for the Sale on January 5, 2026, and the remaining conditions to closing were satisfied on January 9, 2026.",
+      "proves": "Acquisition closing and DOT approval",
+      "limitation": "Does not assign Air Wisconsin or aircraft to ICE"
+    },
+    {
+      "id": "AP:2025-08-27-flight-monitoring",
+      "tier": "secondary_reporting_with_monitoring_data",
+      "url": "https://apnews.com/article/f61941d31adf43a6a01cccc720f3bb01",
+      "local_path": null,
+      "sha256": null,
+      "quote": "About 80% are operated by three airlines: GlobalX, Eastern Air Express and Avelo Airlines.",
+      "proves": "AP reported the monitor's attribution for the period",
+      "limitation": "Monitoring-derived and historical; not a contract or task-order record"
+    },
+    {
+      "id": "CBS:Avelo-2026-exit",
+      "tier": "secondary_reporting_with_company_quote",
+      "url": "https://www.cbsnews.com/news/avelo-stops-ice-deportation-flights/",
+      "local_path": null,
+      "sha256": null,
+      "quote": "Avelo will close the base at [Mesa Gateway Airport] on January 27 and will conclude participation in the DHS charter program.",
+      "proves": "Company spokesperson's announced end date",
+      "limitation": "Secondary publication of company statement; no CSI subcontract attached"
+    }
+  ],
+  "database_records": {
+    "findings": [12976, 12977, 12978, 12979, 12980, 12981],
+    "connections": [6411, 6412, 6413],
+    "human_action": 71,
+    "papercut": 1014
+  }
+}

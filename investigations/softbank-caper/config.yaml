@@ -237,11 +237,11 @@ corpus_tools:
   - tool: "tools/query_lmsband.py"
     name: "LMSBAND"
     description: "60K files, 851K entities"
-    commands: ["search", "entity", "file"]
+    commands: ["search", "entities", "file"]
   - tool: "tools/query_unified.py"
     name: "Unified DB"
     description: "70K docs, 56K entities, 107K triples"
-    commands: ["search", "entity", "related"]
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
   - tool: "tools/ingest_epstein_20k.py"
     name: "Epstein Files 20K"
     description: "25,800 House Oversight docs"

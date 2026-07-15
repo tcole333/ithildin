@@ -1,0 +1,126 @@
+{
+  "research_date": "2026-07-14",
+  "profile": "geo-group",
+  "lead_id": 60505,
+  "skill": "analyze-contract",
+  "verdict": {
+    "state_vendor_payments_proven": true,
+    "state_vendor_payments_usd": 28897523.51,
+    "federal_allocation_to_north_florida_proven": false,
+    "classification": "affirmative state-payment result; bounded negative federal allocation result",
+    "tier2_effect": "Does not add a proven DHS pass-through context or change the six-chain Tier 2 denominator; creates a specific state-mediated context and allocation target."
+  },
+  "federal_award": {
+    "fain": "EMW-2025-DS-05000",
+    "generated_unique_award_id": "ASST_NON_EMW-2025-DS-05000_070",
+    "recipient": "State of Florida Division of Emergency Management",
+    "recipient_uei": "N6KVCUU7LC61",
+    "assistance_listing": "97.158",
+    "method": "COST REIMBURSEMENT",
+    "effective_date": "2025-09-30",
+    "performance_start": "2025-06-01",
+    "performance_end": "2027-07-31",
+    "obligation_usd": 608400000.00,
+    "total_outlay_usd": 58292145.00,
+    "subaward_count": 0,
+    "initial_holds": [
+      {
+        "article": 55,
+        "amount_usd": 608400000.00,
+        "purpose": "Environmental Planning and Historic Preservation approval",
+        "activity": "Per Diem"
+      },
+      {
+        "article": 56,
+        "amount_usd": 608400000.00,
+        "purpose": "Detailed cost breakdown and justification"
+      }
+    ],
+    "initial_award_facility_names": [],
+    "source": "USCA11:25-12873:Doc91:Ex3:pp32-65"
+  },
+  "state_purchase_order": {
+    "po": "PO-010844",
+    "issue_date": "2025-10-17",
+    "buyer": "Florida Division of Emergency Management",
+    "supplier": "GEO-CDR BAKER, LLC",
+    "authorized_total_usd": 100357654.76,
+    "procurement_method": "O2",
+    "mission": "00354",
+    "visible_lines": ["Monthly rate", "Mobilization"],
+    "finding_id": 12677,
+    "limitation": "Authorized value, not payment or federal reimbursement."
+  },
+  "state_vendor_payments": {
+    "fiscal_year": "2025-26",
+    "budget_entity": "31700100",
+    "appropriation_category": "105163",
+    "appropriation_title": "Illegal Migration",
+    "fund": "2398",
+    "fund_title": "Emergency Preparedness and Response Fund",
+    "object": "139900",
+    "object_title": "Contractual Services, Other",
+    "vendor_as_printed": "GEO|CDR BAKER, LLC",
+    "payments": [
+      {"date": "2026-01-07", "statewide_document": "D6000294462", "amount_usd": 5000000.00},
+      {"date": "2026-01-26", "statewide_document": "D6000330868", "amount_usd": 7946471.23},
+      {"date": "2026-05-11", "statewide_document": "D6000512228", "amount_usd": 7946471.23},
+      {"date": "2026-06-29", "statewide_document": "D6000601410", "amount_usd": 7946471.23},
+      {"date": "2026-06-29", "statewide_document": "D6000601421", "amount_usd": 58109.82}
+    ],
+    "payment_count": 5,
+    "total_usd": 28897523.51,
+    "share_of_po_authorized_percent": 28.794538,
+    "unshown_authorized_value_usd": 71460131.25,
+    "finding_id": 12708,
+    "relation_id": 849,
+    "limitation": "The payment page does not print PO-010844, mission 00354, an invoice number, or EMW-2025-DS-05000."
+  },
+  "state_budget_context": {
+    "appropriated_approved_released_usd": 567968917.00,
+    "operational_disbursements_usd": 563967423.96,
+    "contracted_services_usd": 530534556.85,
+    "contractual_services_other_usd": 528109662.62,
+    "amendments": [
+      {"id": "B0024", "amount_usd": 11903978.00},
+      {"id": "B0114", "amount_usd": 89560780.00},
+      {"id": "B0519", "amount_usd": 311734025.00},
+      {"id": "B0791", "amount_usd": 45319031.00},
+      {"id": "B1048", "amount_usd": 18006053.00},
+      {"id": "B1060", "amount_usd": 91445050.00}
+    ],
+    "limitation": "Aggregate state authority and spending cannot be treated as federal award allocation."
+  },
+  "allocation_gap": {
+    "finding_id": 12709,
+    "missing_records": [
+      "approved revised FEMA budget or amendment naming North Florida",
+      "FEMA-GO payment request underlying the 58,292,145 dollar drawdown",
+      "facility and cost-category schedule",
+      "FDEM reimbursement workpapers matching the five statewide documents",
+      "PO-010844 signed terms, invoice, voucher, or warrant crosswalk",
+      "SF-425 or grant ledger allocating federal reimbursement by facility"
+    ],
+    "search_results": {
+      "usaspending_subaward_count": 0,
+      "highergov_exact_grant_filter_count": 0,
+      "florida_facts_po_exact_count": 0,
+      "florida_facts_vendor_exact_count": 0,
+      "transparency_florida_fy2026_27_vendor_payment_count": 0
+    }
+  },
+  "findings": [12707, 12708, 12709],
+  "relations": {
+    "state_vendor_payment": 849,
+    "purchase_order_buyer": 848,
+    "deleted_predecessor_relation": 846,
+    "relation_correction_audit": 7610
+  },
+  "sources": [
+    "https://earthjustice.org/wp-content/uploads/2026/01/2026-01-07-91-25-12873-motion-to-supplement-the-record-.pdf",
+    "https://www.usaspending.gov/award/ASST_NON_EMW-2025-DS-05000_070/",
+    "https://www.transparencyflorida.gov/OperatingBudget/Ledger.aspx?FY=26&BE=31700100&AC=105163&Fund=2398&LI=*****&OB=Y&SC=F",
+    "https://www.transparencyflorida.gov/Disbursements/DisbByVendorPmt.aspx?FY=26&Obj=139900&DisbDate=0000&BE=31700100&AC=105163&Fund=2398&FundType=&LI=*****&AmtType=O&Vend=GEO%7cCDR+BAKER%2c+LLC&ObjSrch=&ST=&OB=Y&SC=F",
+    "https://media.unicornriot.ninja/wp-content/uploads/2026/01/florida-immigrant-operations-Requested_2025_POs-re.pdf"
+  ]
+}

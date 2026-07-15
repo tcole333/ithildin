@@ -147,22 +147,34 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
     --type systemic --value "GROUP_NAME" --created-by "agent:systemic-analysis"
 ```
 
-### 8. Generate Hypotheses
+### 8. Generate Hypotheses — ACH Discipline
 
-For system-level coordination patterns. Every hypothesis MUST include:
-1. A **falsification criterion** — what evidence would disprove this?
-2. The **best innocent explanation** — what's the most plausible non-coordination reason?
-3. A **search plan** that would test the hypothesis via Layer 1 research
+For each system-level pattern, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "SYSTEMIC HYPOTHESIS" \
     --pattern-type operational \
-    --description "SYSTEM PATTERN: N actors share X, suggesting Y. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
+    --competition-group "short-phenomenon-slug" \
+    --description "SYSTEM PATTERN: N actors share X, suggesting Y. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "If coordinated, expect shared Z" \
     --search-plan "1. Check registry for shared agents  2. Search emails for inter-member communication  3. Cross-ref financial flows" \
     --originated-from "analysis:systemic-analysis"
+
+uv run python tools/hypothesis_tracker.py add \
+    --title "INNOCENT EXPLANATION" --as-null --pattern-type operational \
+    --competition-group "short-phenomenon-slug" \
+    --description "Best non-coordination explanation. FALSIFICATION: [what would disprove H0]." \
+    --predicted-evidence "If innocent, expect..." --search-plan "Specific tests of H0" \
+    --originated-from "analysis:systemic-analysis"
+
+# Score every supporting or contradicting finding M against EVERY hypothesis N in the group:
+uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-id M \
+    --assessment consistent|inconsistent|neutral|not_applicable --assessed-by "agent:systemic-analysis"
+uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
+
+Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
 
 ### 9. Create Leads
 
@@ -170,6 +182,7 @@ For unexplored system nodes (e.g., the shared attorney, the common board, the co
 
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Systemic node: SYSTEM_NODE_NAME — shared by N members of GROUP" \
     --target "SYSTEM_NODE_NAME" \
     --category connection \
     --priority medium \

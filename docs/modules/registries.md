@@ -9,15 +9,16 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | Tool | Jurisdiction | Method | Auth | Data |
 |------|-------------|--------|------|------|
 | `query_registry.py` | All ingested | Local SQLite (registry.db) | None | Unified search across all ingested entities, officers, agents, UCC filings |
+| `registry_address_index.py` | All ingested | Generated local FTS5 sidecar | None | Principal, mailing, officer, and agent address fragments |
 | `ingest_florida.py` | FL | SFTP bulk (fixed-width) | Public creds | 3M+ entities, officers, agents, filings |
-| `query_california.py` | CA | Web scraping (bizfileonline) | MCP Playwright | Entity search, detail, history (Imperva WAF) |
+| `query_california.py` | CA | BizFile UI + official search response | Node Playwright + Chrome | Bounded keyword/entity-number search (Imperva WAF) |
 | `ingest_california.py` | CA | Azure APIM REST API | CA_SOS_API_KEY (free) | Keyword search, entity detail, ingest to registry.db |
 | `ingest_newyork.py` | NY | Socrata SODA API (data.ny.gov) | None | 4.1M active corps, 20M filings, 17M addresses |
 | `query_texas.py` | TX | Comptroller data-search proxy | None | Franchise tax entities, officers, agents |
 | `query_michigan.py` | MI | LARA portal API (Cloudflare WAF) | Node.js browser helper | Entities, officers via browser bypass |
 | `query_newjersey.py` | NJ | HTML form scraping | None | Name/ID search only (no officers in free portal) |
 | `query_massachusetts.py` | MA | ASP.NET WebForms (Imperva WAF) | Node.js browser helper | Entity, officers, agent, name changes |
-| `query_nevada.py` | NV | SilverFlume portal (Incapsula WAF) | Node.js browser helper | Officers, agents, stock info, filing history |
+| `query_nevada.py` | NV | SilverFlume portal (Incapsula WAF) | Playwright/Chrome browser helper | Officers, agents, filing history, name history |
 | `query_wyoming.py` | WY | WyoBiz ASP.NET (F5 WAF + CAPTCHA) | Node.js browser helper | Key crypto-LLC state; parties, agents, filings |
 | `query_tennessee_corps.py` | TN | TNCaB portal (Cloudflare Turnstile) | Node.js browser helper | Officers, agents, filings, standing |
 | `query_puertorico.py` | PR | REST API (rceapi.estado.pr.gov) | None | Act 60 entities; officers, agents, articles, filings |
@@ -56,7 +57,7 @@ uv run python tools/query_registry.py entity 42
 # Officer search (cross-jurisdiction)
 uv run python tools/query_registry.py officers "Darren Indyke" --limit 20
 
-# Address search (principal + mailing addresses)
+# Address search (principal, mailing, officer, and agent addresses)
 uv run python tools/query_registry.py address "457 Madison" --limit 20
 
 # Registered agent search
@@ -76,6 +77,40 @@ uv run python tools/query_registry.py stats
 uv run python tools/query_registry.py jurisdictions
 uv run python tools/query_registry.py ucc-stats
 ```
+
+### Generated Address Index
+
+The `address` subcommand uses the generated, contentless FTS5 trigram sidecar
+`datasets/registry_address_search.db`. It searches principal, mailing, officer,
+and agent addresses without adding tables or indexes to `registry.db`. Build it
+after the registry is created or updated:
+
+```bash
+uv run python tools/registry_address_index.py build --output /tmp/address-index-build.json
+uv run python tools/registry_address_index.py status
+uv run python tools/registry_address_index.py validate --output /tmp/address-index-validation.json
+```
+
+The builder normalizes case, accents, punctuation, and `P.O.` spacing using a
+versioned normalization contract. It streams into a same-directory temporary
+file, checks the source fingerprint and SQLite/FTS integrity, then publishes the
+complete file atomically. An existing sidecar is retained as `.bak` during a
+rebuild and can be restored with `registry_address_index.py rollback`. Build,
+publish, and rollback operations share an interprocess lifecycle lock; an
+overlapping operation fails without mutating either published file.
+
+Address queries keep the existing result buckets and alphabetical per-bucket
+limits, with row ID as the deterministic tie-breaker for equal names. Selectors
+must contain at least three normalized letters or digits.
+Missing, stale, or invalid sidecars fail with rebuild instructions; the command
+does not fall back to a full `registry.db` scan.
+
+The query route counts FTS candidates independently for each bucket. At 10,000
+or fewer candidates it materializes matching row IDs and sorts the joined base
+rows. Above 10,000 it walks the existing alphabetical base-name index and uses
+a correlated FTS `rowid + MATCH` constraint for membership, stopping at the
+requested limit. Both routes return the same strict global alphabetical top-N;
+the adaptive route never tests raw address columns with `LIKE` or another scan.
 
 ## When to Use State-Specific Tools
 
@@ -100,15 +135,57 @@ ingest-batch "QUERY"          # Same as ingest-search (naming varies)
 | Requirement | Tools |
 |------------|-------|
 | **None** | query_registry, query_texas, query_newjersey, query_puertorico, ingest_newyork, ingest_colorado, ingest_newmexico, ingest_dc, query_france, query_israel, query_zefix |
-| **Free API key** | ingest_california (CA_SOS_API_KEY), ingest_uk_companies_house (COMPANIES_HOUSE_API_KEY) |
+| **Free API key** | ingest_california (CA_SOS_API_KEY; approval may be delayed), ingest_uk_companies_house (COMPANIES_HOUSE_API_KEY) |
 | **Paid API key** | query_opencorporates, query_delaware, query_hongkong, query_cyprus (OPENCORPORATES_API_KEY — basic 500/mo, 200/day) |
-| **Node.js browser helper** | query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
-| **MCP Playwright** | query_california (WAF bypass), ingest_maryland (CAPTCHA) |
+| **Node.js browser helper** | query_california, query_michigan, query_massachusetts, query_nevada, query_wyoming, query_tennessee_corps |
+| **MCP Playwright** | ingest_maryland (CAPTCHA) |
 | **Manual CAPTCHA** | ingest_maryland (reCAPTCHA v2 on first search), ingest_ohio (cf_clearance cookie) |
+
+California BizFile uses a short-lived headed Chrome process and a dedicated
+local profile to retain Imperva clearance. Check the runtime first, then issue a
+bounded keyword or normalized entity-number search:
+
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_california.py runtime-check --output "$WORKDIR/ca-runtime.json"
+uv run python tools/query_california.py probe --output "$WORKDIR/ca-probe.json"
+uv run python tools/query_california.py search "APPLE" --limit 25 --output "$WORKDIR/ca-search.json"
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output "$WORKDIR/ca-number.json"
+```
+
+The helper requires Node.js, `playwright` or `playwright-core`, and installed
+Google Chrome. It launches one bounded operation per process and closes Chrome
+afterward; it does not attach to an MCP/Codex browser or start a daemon. Headless
+mode is not supported by the verified path because Imperva returns 403. Advanced
+filters, entity detail, history, and ingestion currently fail explicitly until
+their new-runtime flows are live-verified. Interactive search is not a substitute
+for the weekly statewide bulk importer tracked by infrastructure request #130.
+Do not block California research on a pending developer-key application: use
+this keyless bounded search for individual entities. For repeatable bulk work,
+log into BizFile and order `BE Bulk Order - Weekly Data & Images` (free); a
+`BE Bulk Order Master Unload of Data` costs $100 and is needed for a complete
+baseline before weekly deltas can keep it current.
+
+Nevada SilverFlume uses session-backed entity and history pages behind
+Incapsula. Verify the local runtime before searching, and warm the persistent
+browser session if the portal presents a challenge:
+
+```bash
+uv run python tools/query_nevada.py runtime-check
+uv run python tools/query_nevada.py warmup
+uv run python tools/query_nevada.py probe --output /tmp/nv-probe.json
+uv run python tools/query_nevada.py search "APOLLO" --limit 25 --output /tmp/nv-search.json
+uv run python tools/query_nevada.py entity E0125332010-5 --output /tmp/nv-entity.json
+```
+
+The helper requires Node.js, the `playwright` or `playwright-core` package, and
+Google Chrome by default. `runtime-check` reports actionable installation errors
+without opening a browser. Set `NV_BROWSER_CHANNEL=chromium` only after installing
+the Playwright browser with `npx playwright install chromium`.
 
 ## Known Quirks
 
-- **query_california.py** (web scraper): Imperva WAF blocks after first request per session. Unreliable for batch ops. Prefer `ingest_california.py` with API key.
+- **query_california.py**: Imperva can remount/detach the Angular search DOM. The helper retries that condition twice and otherwise returns actionable challenge guidance. Search is capped at 500 and defaults to 25; detail/history/ingest are not yet supported by the new runtime.
 - **ingest_florida.py**: Fixed-width COBOL-era format (1440 chars/record). SFTP creds are public: `Public / PubAccess1845!`
 - **ingest_newyork.py**: Three separate Socrata datasets. Officer names are in the filings dataset, not the main entity dataset.
 - **query_newjersey.py**: Free portal exposes only 5 fields (name, ID, city, type, date). No officers/agents. Paid portal has more but requires account.
@@ -166,4 +243,5 @@ All state tools ingest into a shared `registry.db` with unified tables:
 - `registry_name_history` — tracks name changes over time
 - `ucc_filings` / `ucc_debtors` / `ucc_secured_parties` / `ucc_collateral` — UCC/lien data
 
-FTS5 full-text search indexes cover entity names, officer names, agent names, and addresses for fast cross-jurisdiction queries via `query_registry.py`.
+FTS5 full-text search indexes cover entity, officer, and agent names. Address
+fragments are served by the generated trigram sidecar described above.

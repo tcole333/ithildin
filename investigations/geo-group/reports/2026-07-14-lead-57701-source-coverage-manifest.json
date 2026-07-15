@@ -1,0 +1,763 @@
+{
+  "as_of": "2026-07-14",
+  "lead_id": 57701,
+  "analysis_run_id": 100,
+  "primary_sources": [
+    {
+      "id": "GEO-2025-POLITICAL-REPORT",
+      "type": "primary company disclosure, unaudited",
+      "url": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+      "coverage": "2025 corporate and GEO PAC aggregate contributions; federal/state-local/527 categories; jurisdiction totals; federal and state/local consultant rosters; federal/state-local lobbying totals; internal approval process; Day 1 Alliance and chambers",
+      "limitation": "GEO states that the report is unaudited and does not itemize direct-lobbying payment recipients or state/local political recipients."
+    },
+    {
+      "id": "GEO-2024-POLITICAL-REPORT",
+      "type": "primary company disclosure, unaudited",
+      "url": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+      "coverage": "2024 comparison denominators and rosters",
+      "limitation": "Same company-report and recipient-itemization limits as 2025."
+    },
+    {
+      "id": "Senate-LDA-2024-2026-GEO-series",
+      "type": "primary federal lobbying filings",
+      "url": "https://lda.senate.gov/api/v1/filings/?client_name=GEO%20GROUP",
+      "durability": "Exact excerpts used in findings are preserved in finding_evidence_quote_index below. No ephemeral local path is a required source artifact.",
+      "coverage": "Filing income/expenses, effective/termination dates, issue descriptions, activity-level entity fields, lobbyists, and covered-position disclosures",
+      "limitation": "Entity and lobbyist arrays are activity-level and do not create person-to-entity contacts. A rate-limit response made the first broad pull partial; exact registrant/client pulls filled Avant and Continental but Johnson Velasquez and ML Strategies remain incomplete."
+    },
+    {
+      "id": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+      "type": "primary Q2 2025 GEO self-filed LD-2",
+      "url": "https://lda.senate.gov/filings/public/filing/f894274f-dbd5-4ca7-93b4-c505fb54a6a3/print/",
+      "coverage": "340,000 expense field; H.R. 1; ICE, immigration-enforcement and alternatives-to-detention issues; House/Senate/OMB/ICE entity fields; Richard Hoar"
+    },
+    {
+      "id": "PLAW-119publ21",
+      "type": "primary enacted statute",
+      "url": "https://www.govinfo.gov/link/plaw/119/public/21",
+      "coverage": "July 4, 2025 enactment and 45 billion ICE detention-capacity appropriation"
+    },
+    {
+      "id": "SEC:000119312526116014",
+      "type": "primary SEC proxy",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312526116014/d923546ddef14a.htm",
+      "coverage": "Matthew Albence company title and ICE role; broader current leadership baseline"
+    },
+    {
+      "id": "FEC-GEO-PAC-and-recipient-series",
+      "type": "primary federal political filings",
+      "coverage": "PAC, corporate-subsidiary, inaugural, hybrid-PAC, 527 and individual streams; recipient/donor-side conflicts; amendments and refunds",
+      "durable_reports": [
+        "2026-07-13-lead-58870-geo-trump-political-money.md",
+        "2026-07-14-lead-59037-geo-corporate-federal-committee-reconciliation.md",
+        "2026-07-14-lead-57788-political-payer-federal-awardee-crosswalk.md"
+      ]
+    },
+    {
+      "id": "OGE-Trump-Homan-series",
+      "type": "primary federal ethics disclosures",
+      "coverage": "Trump-household-reportable GEO securities and transactions; Homan compensated consulting-source entries",
+      "durable_reports": [
+        "2026-07-13-trump-geo-investment-ownership-report.md",
+        "2026-07-13-lead-58983-homan-geo-guidepost-consulting.md"
+      ]
+    },
+    {
+      "id": "ICE-SEC-Venturella-series",
+      "type": "primary agency and SEC records",
+      "coverage": "Venturella ICE return, GEO proposal/renewal consulting, role dates and public ethics-record gaps",
+      "durable_report": "2026-07-13-lead-58985-venturella-ice-return-ethics.md"
+    }
+  ],
+  "existing_work_inventory": [
+    {
+      "topic": "political money and legal-stream separation",
+      "reports": [
+        "2026-07-13-lead-58870-geo-trump-political-money.md",
+        "2026-07-14-lead-59037-geo-corporate-federal-committee-reconciliation.md",
+        "2026-07-14-lead-57788-political-payer-federal-awardee-crosswalk.md",
+        "2026-07-14-tier2-geo-political-payer-selection-rule.md"
+      ],
+      "deduplication": "Reused corrected totals and payer classifications; did not re-pull the FEC transaction universe."
+    },
+    {
+      "topic": "Ballard account and Trump-I role overlap",
+      "reports": ["2026-07-13-ballard-geo-lobbying-contact-audit.md"],
+      "deduplication": "Reused complete 18-filing chronology and bounded DHS/OMB contact tests."
+    },
+    {
+      "topic": "Checkmate account and LaCivita correction",
+      "reports": ["2026-07-13-checkmate-geo-procurement-nexus.md"],
+      "deduplication": "Reused six-filing latest-amendment chronology and the father/son identity correction."
+    },
+    {
+      "topic": "Homan, Venturella, Trump-household holdings and corrected network",
+      "reports": [
+        "2026-07-13-lead-58983-homan-geo-guidepost-consulting.md",
+        "2026-07-13-lead-58985-venturella-ice-return-ethics.md",
+        "2026-07-13-trump-geo-investment-ownership-report.md",
+        "2026-07-13-analyze-network-generate-hunches-trump-dhs-corrected-run89-90.md"
+      ],
+      "deduplication": "Preserved the corrected Guidepost and LaCivita topology; did not reuse superseded run-81 metrics."
+    },
+    {
+      "topic": "former-official peer baseline",
+      "reports": ["2026-07-14-geo-ice-dhs-revolving-door-peer-baseline.md"],
+      "deduplication": "Reused 3/21 GEO versus 0/18 CoreCivic ICE/DHS snapshot and the broader former-corrections null evidence."
+    }
+  ],
+  "coverage_boundaries": [
+    {
+      "id": "albence-approval-boundary",
+      "statement": "The sources identify the title-based approval chain and Albence as titleholder; they do not identify the approver on any particular payment packet, contact, lobbying activity, policy, or procurement."
+    },
+    {
+      "id": "lda-attribution-boundary",
+      "statement": "LD-2 issue, lobbyist, and government-entity fields are reported at the activity level; a filing does not by itself identify an individual communication, a client position, a procurement request, or a resulting decision."
+    },
+    {
+      "id": "lda-company-total-nonreconciliation",
+      "statement": "Company-reported IRC 162(e) totals and LDA registrant-income/self-filer-expense fields use different reporting constructs; first-tier and sublobbyist records also create double-count risk."
+    },
+    {
+      "id": "state-ledger-boundary",
+      "statement": "The company tables provide jurisdiction/category aggregates but not recipient-level state/local identities; existing lead #59033 is the nonduplicate recipient-level audit."
+    },
+    {
+      "id": "trade-independence",
+      "statement": "The 2024 and 2025 statements are successive unaudited company reports; they are a longitudinal disclosure series, not independent corroboration of association fund use."
+    },
+    {
+      "id": "consultant-dependency",
+      "statement": "The company roster and LDA records are complementary, not independent proof of contacts: the roster identifies retained firms; LDA identifies filings, issue/entity fields, lobbyists, and historical covered positions."
+    },
+    {
+      "id": "h-r-1-independence",
+      "statement": "The LDA filing and Public Law 119-21 are two records for one temporal-overlap synthesis, not two independent contexts of influence."
+    },
+    {
+      "id": "jvg-ml-gap",
+      "statement": "Exact-name LDA queries did not resolve a GEO filing for Johnson Velasquez Group, and the reviewed ML Strategies result page did not supply a GEO match; both are bounded coverage gaps, not proof of no registration or activity."
+    },
+    {
+      "id": "award-specific-gap",
+      "statement": "No reviewed public record ties a named donor, lobbyist, former official, trade association, consultant, or household security transaction to a specific source-selection act, contracting-officer decision, award instruction, or procurement-integrity communication."
+    }
+  ],
+  "existing_unresolved_leads": [
+    {"id": 59033, "gap": "recipient-level state/local corporate and GEO PAC ledger, 2015-2026"},
+    {"id": 59112, "gap": "Homan/Guidepost/GEO Care work scopes, fees, payment route and screening"},
+    {"id": 59228, "gap": "Venturella appointment/delegation instrument"},
+    {"id": 59230, "gap": "Venturella agency-held disclosure and ethics screening"},
+    {"id": 61546, "gap": "full-cycle political-payer entity-selection test"},
+    {"id": 62429, "gap": "BOP ethics/procurement screening for Lappin and Joslin peer transitions"}
+  ],
+  "new_findings": [12866, 12867, 12868, 12869, 12870, 12871],
+  "source_snapshot_hashes": [
+    {
+      "source": "GEO-2025-POLITICAL-REPORT",
+      "sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542",
+      "hashed_representation": "official PDF retrieved for this audit"
+    },
+    {
+      "source": "GEO-2024-POLITICAL-REPORT",
+      "sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3",
+      "hashed_representation": "official PDF retrieved for this audit"
+    },
+    {
+      "source": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+      "sha256": "0f37ae2128b4c69a8332b1a20e0f82f7fad0fb64b5fa842a1b75caa4c6fd047c",
+      "hashed_representation": "official Senate print HTML"
+    },
+    {
+      "source": "LDA:7143c6d9-93ec-47f5-b6a9-0d0614f08963",
+      "sha256": "823e6807de3f175ae502d4dde7cb2386af5b369f696ecc4f24b93cda86752915",
+      "hashed_representation": "official Senate print HTML"
+    },
+    {
+      "source": "LDA:f6c887b7-d95c-4e38-9238-f819daaf6aa5",
+      "sha256": "e551938674676bb4b1f7f5e67b83c276d6bb3dbef0a4e080e62d39fa1d3f0510",
+      "hashed_representation": "official Senate print HTML"
+    },
+    {
+      "source": "LDA:9406d834-f40a-46ea-aa57-0c147a4d125d",
+      "sha256": "60fd02f37ab24fb22a0552dcfdcbb19de805fe2f197dbbdbb6d784a58910778e",
+      "hashed_representation": "official Senate print HTML"
+    },
+    {
+      "source": "LDA:a40f2539-930f-469b-a4c4-2a1beec2b368",
+      "sha256": "c454bfb0e33e527ea76092ba2a8ec17e9a23213e4542bd8d69fcc8fcb125ef85",
+      "hashed_representation": "official Senate print HTML"
+    },
+    {
+      "source": "PLAW-119publ21",
+      "sha256": "84000b07c382db50ead04ce65b70983e2dcd699a931d80cd3d2edac584e9004d",
+      "hashed_representation": "official GovInfo HTML"
+    }
+  ],
+  "finding_evidence_quote_index": [
+  {
+    "finding_id": 12866,
+    "evidence_type": "analysis",
+    "evidence_ref": "ANALYSIS:lead-57701-lobbying-growth-arithmetic",
+    "source_quote": "Federal: ($2,428,006 / $1,065,000) - 1 = 127.98%; state/local: ($2,943,330 / $2,905,672) - 1 = 1.30%; total growth = $1,400,664, of which $1,363,006 was federal.",
+    "quote_sha256": "108f00e205bb758b475ffdf2fd5a0437a57e3562727d326abbf79b92ba10e6df",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Mechanical arithmetic from the two company reports; not an independent source."
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:state-local-lobbying",
+    "source_quote": "State / Local                                                                                 $2,905,672",
+    "quote_sha256": "2fcf68927cd7daf59bc5a2d5d741fc5dc9fa32470e3f403a8902de5ffa3edc86",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:total-lobbying",
+    "source_quote": "  Total                                                                                       $3,970,672",
+    "quote_sha256": "63c381384f42c408f9cac90f4095cc5f2a754ebac554ba2935b872b041ae0049",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:irc-method",
+    "source_quote": "consultant government relations professionals for direct lobbying (as defined by the Internal Revenue Code (IRC) 162(e)).",
+    "quote_sha256": "bd7e6b6c0c21d5963d7edeefe979a1633aa34e42e019f0d2e19f448560af08f0",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal method phrase; does not equate the company total to LDA amounts.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:state-local-lobbying",
+    "source_quote": "State / Local                                                                                $2,943,330",
+    "quote_sha256": "449d3dbaf96ca9b38bf6eb862ae07a596e4ffe332e37400d539f541ddb474b7c",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:total-lobbying",
+    "source_quote": "  Total                                                                                      $5,371,336",
+    "quote_sha256": "19f8e68da0a2198ce2d4c7e23265d8439d34e366b8dbbf5312af91285ea96762",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:unaudited",
+    "source_quote": "The report has not been audited and GEO undertakes no obligation to issue any updates or corrections, except as required by law.",
+    "quote_sha256": "13bf5fa445741c9436c5a1879adb2a78d2b74545507c82ee7ac3dcc1edebc602",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal disclosure caveat.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#lda-company-total-nonreconciliation",
+    "source_quote": "Company-reported IRC 162(e) totals and LDA registrant-income/self-filer-expense fields use different reporting constructs; first-tier and sublobbyist records also create double-count risk.",
+    "quote_sha256": "8611d5908e5c5c104af2d2be35ab704e932c5914bf084f7bfdcbf6a4c80a1317",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Method boundary; no cross-system sum was used."
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "source_quote": "Federal                                                                                      $2,428,006",
+    "quote_sha256": "8e012e17cfd729fe3d43247c4334eb276d9e2ab138a465bcb76fd9a41f633101",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12866,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+    "source_quote": "Federal                                                                                       $1,065,000",
+    "quote_sha256": "691d7af38e9a57d3c287fb032b1667218a285d714fba2f224f5fcb601411ff56",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "analysis",
+    "evidence_ref": "ANALYSIS:lead-57701-contribution-shift-arithmetic",
+    "source_quote": "State/local change: $2,253,400 - $969,700 = $1,283,700 (+132.38%); federal/national change: $1,722,000 - $2,538,500 = -$816,500; Florida corporate share of 2025 total state/local corporate-plus-PAC category: $1,922,600 / $2,253,400 = 85.32%.",
+    "quote_sha256": "06c4dcac915e8a28c51649bcd49f4368e0c4ea91769960f76da0d04ab19588b4",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Mechanical arithmetic; no causal or recipient attribution inference."
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:federal-national-total",
+    "source_quote": "Federal / National Candidates and Committees                                              $2,538,500",
+    "quote_sha256": "4337a2ab3463e32f7b217a6a1f95f675cb306769057f7bf31ad11a15d6e0f69c",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:florida-total",
+    "source_quote": "contributions/)                        FL Total                     -         $564,500",
+    "quote_sha256": "be15a30689a89d50a313ee8820b3261e3d6c1e00271122ed46f73467cc1c70fe",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:pac-total",
+    "source_quote": "GEO PAC                                                                                     $467,000",
+    "quote_sha256": "df8f02022c7f5f7ad19b7e803ec509ab6b1e048d11d2d9ab1a8a081b47f7d8a8",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:state-local-total",
+    "source_quote": "State / Local Candidates and Committees                                                     $969,700",
+    "quote_sha256": "65ee47dd62d08c9d0a1a23ee838703ccf72abc309a8e7ce0f4aded3505669f2e",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:federal-national-total",
+    "source_quote": "Federal / National Candidates and Committees                                                 $1,722,000",
+    "quote_sha256": "eeead1594816e49ead35a3c63fc8de3baaff19eae0a2a9bf3dd28b2e370b27fd",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:florida-total",
+    "source_quote": "contributions/)                       FL Total                      -       $1,922,600",
+    "quote_sha256": "a4bf4a98cafdf2da2e0f89822159e5df4760fd94c07cae83d8142a4e8eb9297d",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:pac-total",
+    "source_quote": "GEO PAC                                                                                        $208,500",
+    "quote_sha256": "1a8af1cd357b5623d5cd8ecd62f00523dcf511943c312cd9c45310198018e26a",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:state-local-total",
+    "source_quote": "State / Local Candidates and Committees                                                      $2,253,400",
+    "quote_sha256": "cdb22881fab741e2ef54df472cc65250a172dd44482d6697f6bc591dd17f61c8",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal table row.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#state-ledger-boundary",
+    "source_quote": "The company tables provide jurisdiction/category aggregates but not recipient-level state/local identities; existing lead #59033 is the nonduplicate recipient-level audit.",
+    "quote_sha256": "11df4fe02ca391b3cba147fa3bf7f5a9275bbc3b95ecf0d3ae3bc228c28edb03",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Exact coverage boundary."
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "source_quote": "Corporate                                                                                    $4,216,900",
+    "quote_sha256": "2440efc68428cbc4a6fcf4718961d136391e2434fd57a7634eabce8896d750ce",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12867,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+    "source_quote": "Corporate                                                                                 $3,556,200",
+    "quote_sha256": "9792ff2617ee515be628d5dedaad98b60e65678367b39ad690103eb7130b4f24",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:contribution-request-approval",
+    "source_quote": "The authorized company representative requesting the political contribution will provide a completed Political Contribution Request Form, and any appropriate supplementary documentation, to the Senior Vice President, Client Relations for approval.",
+    "quote_sha256": "a8963bad7c7734563335036ef76f9a76e8007a55a9ff2172328f923a443523d1",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal approval step.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:counsel-and-executive-approval",
+    "source_quote": "Once the Political Contribution Request Form has been signed by the Senior Vice President, Client Relations, all requests must be routed to the General Counsel’s office. The political contribution is reviewed by in-house and outside counsel to ensure compliance with applicable laws.",
+    "quote_sha256": "b48ee60fa9b349bd4671ac96a311364be9df828806a6c9f212ea21f80c174ada",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal counsel-routing step.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:in-house-lobbyist",
+    "source_quote": "In 2023, GEO hired an in-house lobbyist and the position reports directly to GEO’s Client Relations Department.",
+    "quote_sha256": "86bc0a026dba884ebf8809b762fcc18ccfd84bbfc16a5a43f56e0c2779d0872e",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal reporting-line statement.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:threshold",
+    "source_quote": "any requests of more than $500 must also be approved by the CEO and the CFO.",
+    "quote_sha256": "b63b5279072ff0ae554e6e20143d90a221389b2d85242b1a5d8b347d80e3fa5c",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal threshold step.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#albence-approval-boundary",
+    "source_quote": "The sources identify the title-based approval chain and Albence as titleholder; they do not identify the approver on any particular payment packet, contact, lobbying activity, policy, or procurement.",
+    "quote_sha256": "940a8777a44868328681eaf8af84cd7a250c14506f19864fd8f187c53c7cf167",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Exact scope boundary."
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "source_quote": "including expenditures for external entities who advocate on GEO’s behalf. Any such advocacy requires prior approval of GEO’s Senior Vice President, Client Relations; is overseen and managed by GEO’s Client Relations Department; and is conducted in accordance with applicable law.",
+    "quote_sha256": "c345f0d3863e903dee67ddf1d91e6fbe864ecc16bf8a53210c9f613d0d4b2ebe",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12868,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312526116014/d923546ddef14a.htm",
+    "source_quote": "Mr. Albence joined GEO in 2022 as Senior Vice President of Client Relations. From May 2012 to August 2020, Mr. Albence served in several positions at U.S. Immigration and Customs Enforcement, culminating as the Acting Director.",
+    "quote_sha256": "7e211f17e53845e1d7ee6b44992c7bec7d8786cae9bdfed2264f7c5a044b25b4",
+    "source_snapshot_id": "SEC:000119312526116014",
+    "assessment": ""
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "ref",
+    "evidence_ref": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3:entities",
+    "source_quote": "U.S. SENATE, U.S. HOUSE OF REPRESENTATIVES, U.S. Immigration & Customs Enforcement (ICE), Office of Management & Budget (OMB)",
+    "quote_sha256": "87d8e3da1ba5622fa232da16b35691b465d963e38ed62992d281a3ddaf9545bf",
+    "source_snapshot_id": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+    "assessment": "Literal activity-level government-entity values.",
+    "source_snapshot_sha256": "0f37ae2128b4c69a8332b1a20e0f82f7fad0fb64b5fa842a1b75caa4c6fd047c"
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "ref",
+    "evidence_ref": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3:expenses",
+    "source_quote": "340,000.00",
+    "quote_sha256": "37cb8fdc34a92b19f28210ec88d0665caf9889175141dbb56f72765325d67546",
+    "source_snapshot_id": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+    "assessment": "Literal expense field.",
+    "source_snapshot_sha256": "0f37ae2128b4c69a8332b1a20e0f82f7fad0fb64b5fa842a1b75caa4c6fd047c"
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "ref",
+    "evidence_ref": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3:lobbyist",
+    "source_quote": "Richard Hoar",
+    "quote_sha256": "5fed5cbd8b3cd6bd068a64f310e4f8f3e4e3246f952d743544ee99fe92ba6ea4",
+    "source_snapshot_id": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+    "assessment": "Literal lobbyist name.",
+    "source_snapshot_sha256": "0f37ae2128b4c69a8332b1a20e0f82f7fad0fb64b5fa842a1b75caa4c6fd047c"
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#h-r-1-independence",
+    "source_quote": "The LDA filing and Public Law 119-21 are two records for one temporal-overlap synthesis, not two independent contexts of influence.",
+    "quote_sha256": "39319883d8ff71abc6f3554041c6f7c3225a7ed27590a09074710d48381f948b",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Dependency label."
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#lda-attribution-boundary",
+    "source_quote": "LD-2 issue, lobbyist, and government-entity fields are reported at the activity level; this filing does not identify an individual communication, GEO's position on H.R. 1, a procurement request, or a resulting decision.",
+    "quote_sha256": "d62a3d70478bd71bc81fb9e7b1842050ec4eca2e3cc49347b0e49d6042d94746",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Exact attribution boundary."
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "url",
+    "evidence_ref": "https://lda.senate.gov/filings/public/filing/f894274f-dbd5-4ca7-93b4-c505fb54a6a3/print/",
+    "source_quote": "Homeland Security Appropriations, H.R. 4213; One Big Beautiful Bill Act, H.R. 1; Issues related to: ICE, immigration enforcement, and alternatives to detention",
+    "quote_sha256": "1766d94a1794226ac53a6d380ac3e41d7d15dd5198b186ff4217644cf47fc5ad",
+    "source_snapshot_id": "LDA:f894274f-dbd5-4ca7-93b4-c505fb54a6a3",
+    "assessment": "",
+    "source_snapshot_sha256": "0f37ae2128b4c69a8332b1a20e0f82f7fad0fb64b5fa842a1b75caa4c6fd047c"
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm#appropriation",
+    "source_quote": "$45,000,000,000, for single adult alien detention capacity and family residential center capacity.",
+    "quote_sha256": "db25e4b8131420dff67431f194e3e71ec09218e542635d7a66854677e1ca7526",
+    "source_snapshot_id": "PLAW-119publ21",
+    "assessment": "Literal appropriation amount and purpose.",
+    "source_snapshot_sha256": "84000b07c382db50ead04ce65b70983e2dcd699a931d80cd3d2edac584e9004d"
+  },
+  {
+    "finding_id": 12869,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm#date",
+    "source_quote": "Approved July 4, 2025.",
+    "quote_sha256": "dfc65f365a78357e7312ffc5e7fb62cefff77bfb7d9b9df3eeb746aa494c161d",
+    "source_snapshot_id": "PLAW-119publ21",
+    "assessment": "Literal enactment date.",
+    "source_snapshot_sha256": "84000b07c382db50ead04ce65b70983e2dcd699a931d80cd3d2edac584e9004d"
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:chambers",
+    "source_quote": "The aggregate payments to these state and local Chambers of Commerce totaled $57,890, of which an estimated 31 percent, or $17,680, was not tax deductible as a result of this portion being used for lobbying purposes.",
+    "quote_sha256": "11545d9dea7a38d71f800ba525958fdc5ee8624456491295ad1c5a82e58baed4",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "Literal company estimate.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:chambers",
+    "source_quote": "The aggregate payments to these state and local Chambers of Commerce totaled $77,542, of which an estimated 23 percent, or $17,650, was not tax deductible as a result of this portion being used for lobbying purposes.",
+    "quote_sha256": "95af944ac6ef8d4edfa61dc491666aa383c32777de4c2024324e86eceaf0f920",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Literal company estimate.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "ref",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:model-legislation",
+    "source_quote": "GEO is not a member of any tax-exempt organizations that write or endorse model legislation. In 2025, GEO did not make any payments to any tax-exempt organizations that write or endorse model legislation.",
+    "quote_sha256": "99b1d4f969d2582732c2494e9b749b7c2fc0eafbcbc609f4a30a124d4185b095",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "Company representation; not independently audited.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#trade-independence",
+    "source_quote": "The 2024 and 2025 statements are successive unaudited company reports; they are a longitudinal disclosure series, not independent corroboration of association fund use.",
+    "quote_sha256": "fc228e499b6fd09c13ddd7baad112cb7cbd3fc6aad29850eefcca89b6e31bf76",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Dependency label."
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "source_quote": "In 2025, GEO made payments of $100,000 to the Day 1 Alliance, none of which was used for lobbying purposes.",
+    "quote_sha256": "be4c6740c710e1c903454451932ac9cb365736e3e811f64d2f932d604da9eddb",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12870,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+    "source_quote": "In 2024, GEO made payments of $100,000 to the Day 1 Alliance, none of which was used for lobbying purposes.",
+    "quote_sha256": "af1c53688ed59a65eaa04408018dd9b543b1a7faf7b31b4c1945bb61822d1fa6",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "analysis",
+    "evidence_ref": "GEO-2024-POLITICAL-REPORT:federal-roster-extraction",
+    "source_quote": "Bradley Arant Boult Cummings LLP | Avant Bishop Washington & Black LLC | Continental Strategies, LLC | The Da Vinci Group | Navigators Global LLC | State Federal Strategies",
+    "quote_sha256": "925c52da4e5b6c7e0a760212eadcf536a22524c6e3aea3d56c158ad631dd22da",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Transcribed from the 2024 federal roster; preserves plural Strategies.",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "analysis",
+    "evidence_ref": "GEO-2025-POLITICAL-REPORT:federal-roster-extraction",
+    "source_quote": "Bradley Arant Boult Cummings LLP | Avant Bishop Washington & Black LLC | Continental Strategy LLC | The Da Vinci Group | Navigators Global LLC | State Federal Strategies | Checkmate Government Relations | Johnson Velasquez Group, LLC | ML Strategies",
+    "quote_sha256": "267e8f8619dfd83dc9824fa0d101857ebc7ea75a28c666a7e3bd9b0bd6470e2f",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Transcribed from the 2025 federal roster; pipes are delimiters, not quotation punctuation.",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "ref",
+    "evidence_ref": "LDA:a40f2539-930f-469b-a4c4-2a1beec2b368:rahim-role",
+    "source_quote": "Special Asst. Office of the Executive Secretariat",
+    "quote_sha256": "6d29053ec2c81262d11c956ea001b2dc6b161a579e631c1c64883dcfc9c1662a",
+    "source_snapshot_id": "LDA:a40f2539-930f-469b-a4c4-2a1beec2b368",
+    "assessment": "Literal covered-position field.",
+    "source_snapshot_sha256": "c454bfb0e33e527ea76092ba2a8ec17e9a23213e4542bd8d69fcc8fcb125ef85"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#consultant-dependency",
+    "source_quote": "The company roster and LDA records are complementary, not independent proof of contacts: the roster identifies retained firms; LDA identifies filings, issue/entity fields, lobbyists, and historical covered positions.",
+    "quote_sha256": "f737ad59c9047f408a8a21ff61c6aa9e386c19975ec1b552b6ba3d538878235f",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Dependency label."
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#jvg-ml-gap",
+    "source_quote": "Exact-name LDA queries did not resolve a GEO filing for Johnson Velasquez Group, and the reviewed ML Strategies result page did not supply a GEO match; both are bounded coverage gaps, not proof of no registration or activity.",
+    "quote_sha256": "d03f263c22293d8cc6328d110e66ee2ad9cef1d228ea22d5620bc8a13fbecd8c",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Bounded query result."
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "analysis",
+    "evidence_ref": "REPORT:2026-07-14-lead-57701-source-coverage-manifest.json#lda-attribution-boundary",
+    "source_quote": "LDA covered-position fields report historical service, while activity-level lobbyist and government-entity arrays do not assign a communication, request, result, or procurement authority to a named person.",
+    "quote_sha256": "9f38b92d1806f7961b4156be55c7b527b0b58183fb024d15964b4affd3f50584",
+    "source_snapshot_id": "lead-57701-analysis-or-boundary",
+    "assessment": "Exact attribution boundary."
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://lda.senate.gov/filings/public/filing/7143c6d9-93ec-47f5-b6a9-0d0614f08963/print/",
+    "source_quote": "Chief of Staff - Rep. Bennie G. Thompson; Staff Director - House Committee on Homeland Security",
+    "quote_sha256": "43453690681bb8225d6f4cf16715c91ca004f316e52f9a456850d2e87399cd66",
+    "source_snapshot_id": "LDA:7143c6d9-93ec-47f5-b6a9-0d0614f08963",
+    "assessment": "Historical covered-position disclosure; not a contact record.",
+    "source_snapshot_sha256": "823e6807de3f175ae502d4dde7cb2386af5b369f696ecc4f24b93cda86752915"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://lda.senate.gov/filings/public/filing/9406d834-f40a-46ea-aa57-0c147a4d125d/print/",
+    "source_quote": "Former Chief of Staff to Marco Rubio",
+    "quote_sha256": "9708c02a2ea251c197016887bc8103ee2b7c61fb3a24e17ac203778776a9ab68",
+    "source_snapshot_id": "LDA:9406d834-f40a-46ea-aa57-0c147a4d125d",
+    "assessment": "Literal covered-position field for Alberto Martinez.",
+    "source_snapshot_sha256": "60fd02f37ab24fb22a0552dcfdcbb19de805fe2f197dbbdbb6d784a58910778e"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://lda.senate.gov/filings/public/filing/a40f2539-930f-469b-a4c4-2a1beec2b368/print/",
+    "source_quote": "Principal Deputy Asst. Secretary, Treasury Dept.; Deputy Asst. Secretary, Treasury Dept.; Senior Counsel, House Financial Services Cmte.; Associate Director, The White House; Confidential Asst., Office of Management & Budget; Writer, The White House",
+    "quote_sha256": "dcbc692057bd625c734ce933747390fddb5fdad24fd5faae82378c3ce8890ded",
+    "source_snapshot_id": "LDA:a40f2539-930f-469b-a4c4-2a1beec2b368",
+    "assessment": "Historical covered-position disclosures; not contact records.",
+    "source_snapshot_sha256": "c454bfb0e33e527ea76092ba2a8ec17e9a23213e4542bd8d69fcc8fcb125ef85"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://lda.senate.gov/filings/public/filing/f6c887b7-d95c-4e38-9238-f819daaf6aa5/print/",
+    "source_quote": "US OAS Ambassador",
+    "quote_sha256": "b0b6383a8f5b8cba1e6e8ef08fe9630acc147ee66e383a8aafd27f1735ea6e0b",
+    "source_snapshot_id": "LDA:f6c887b7-d95c-4e38-9238-f819daaf6aa5",
+    "assessment": "Literal covered-position field for Carlos Trujillo.",
+    "source_snapshot_sha256": "e551938674676bb4b1f7f5e67b83c276d6bb3dbef0a4e080e62d39fa1d3f0510"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+    "source_quote": "Registered Firm (2025)",
+    "quote_sha256": "ac80eaef94422e8fff4222d20b1acf02e07aa7ee3d2d01d6da7dddae05ec5a19",
+    "source_snapshot_id": "GEO-2025-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "6909aff8e2d6d03871ea32b6c687e954525bfddc37962d89d74c6cb7c9a24542"
+  },
+  {
+    "finding_id": 12871,
+    "evidence_type": "url",
+    "evidence_ref": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+    "source_quote": "Registered Firm (2024)",
+    "quote_sha256": "b80ffc9f1ca4d26433d0cfe584f49f4edf413267cbc9e4777a764701d34d28ec",
+    "source_snapshot_id": "GEO-2024-POLITICAL-REPORT",
+    "assessment": "",
+    "source_snapshot_sha256": "ded923981022b1fd2a2f403a1327c2a5832ae1af1711361b6c39a437d892ecf3"
+  }
+],
+  "quote_audit": {
+    "status": "passed",
+    "finding_ids": [
+      12866,
+      12867,
+      12868,
+      12869,
+      12870,
+      12871
+    ],
+    "db_rows": 55,
+    "manifest_rows": 55,
+    "exact_equal_rows": 55,
+    "missing_rows": 0,
+    "extra_rows": 0,
+    "blank_db_rows": 0,
+    "blank_manifest_rows": 0,
+    "quote_hash_mismatch_rows": 0,
+    "assessment_multiset_mismatch_rows": 0,
+    "tmp_path_occurrences": 0,
+    "external_literal_substring_rows_passed": 41,
+    "external_literal_substring_rows_failed": 0,
+    "analysis_or_reused_verified_rows_skipped": 14,
+    "method": "Exact DB-to-manifest multiset comparison over finding_id, evidence_type, evidence_ref, and source_quote; exact assessment multiset comparison; SHA-256 recomputation for every source_quote; literal normalized-substring checks against retained primary-source extracts; no whitespace normalization in DB-to-manifest equality."
+  }
+}

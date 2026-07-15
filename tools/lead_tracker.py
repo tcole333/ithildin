@@ -18,8 +18,8 @@ Usage:
 """
 
 import argparse
-import json
 import os
+import re
 import sqlite3
 import sys
 from datetime import datetime, timedelta, timezone
@@ -73,6 +73,357 @@ def _utcnow() -> datetime:
 
 
 _schema_initialized = False
+
+
+def _quote_sqlite_identifier(identifier):
+    """Quote an SQLite identifier that came from sqlite_master."""
+    return '"' + identifier.replace('"', '""') + '"'
+
+
+def _stale_leads_fk_tables(db):
+    """Return every user table whose FK metadata targets leads_old_backup."""
+    tables = []
+    rows = db.execute(
+        "SELECT name FROM sqlite_master "
+        "WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+    ).fetchall()
+    for row in rows:
+        table = row[0]
+        quoted_table = _quote_sqlite_identifier(table)
+        if any(
+            fk[2] == "leads_old_backup"
+            for fk in db.execute(f"PRAGMA foreign_key_list({quoted_table})")
+        ):
+            tables.append(table)
+    return tables
+
+
+def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
+    """Build CREATE TABLE SQL for a replacement without editing sqlite_master."""
+    table_identifier = re.escape(table)
+    table_pattern = re.compile(
+        rf"^\s*CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?"
+        rf'(?:"{table_identifier}"|`{table_identifier}`|\[{table_identifier}\]|{table_identifier})',
+        re.IGNORECASE,
+    )
+    rewritten, table_count = table_pattern.subn(
+        f"CREATE TABLE {_quote_sqlite_identifier(replacement_table)}",
+        table_sql,
+        count=1,
+    )
+    if table_count != 1:
+        raise sqlite3.OperationalError(
+            f"Could not rewrite CREATE TABLE statement for {table!r}"
+        )
+
+    stale_target = re.compile(
+        r'(\bREFERENCES\s+)'
+        r'(?:"leads_old_backup"|`leads_old_backup`|\[leads_old_backup\]|leads_old_backup)'
+        r'(?=\s*(?:\(|ON\b|MATCH\b|,|\)|$))',
+        re.IGNORECASE,
+    )
+    rewritten, fk_count = stale_target.subn(r'\1"leads"', rewritten)
+    if fk_count < 1:
+        raise sqlite3.OperationalError(
+            f"No stale leads foreign key found in CREATE TABLE statement for {table!r}"
+        )
+    return rewritten
+
+
+def _repair_stale_leads_foreign_keys(db):
+    """Atomically rebuild tables whose lead FKs target a removed backup table.
+
+    A historical leads-table migration caused SQLite to rewrite dependent foreign
+    keys to ``leads_old_backup``. Rebuilding each affected table keeps its current
+    columns and constraints, copies every row, restores user-created indexes and
+    triggers, and preserves the highest AUTOINCREMENT sequence value. The repair
+    is discovered from PRAGMA metadata and is therefore idempotent and complete
+    for every affected table, rather than a hard-coded list of known dependents.
+    """
+    affected_tables = _stale_leads_fk_tables(db)
+    if not affected_tables:
+        return []
+
+    # Changing foreign_keys is only effective outside a transaction. A single
+    # IMMEDIATE transaction makes the multi-table rebuild all-or-nothing.
+    db.commit()
+    foreign_keys_enabled = bool(db.execute("PRAGMA foreign_keys").fetchone()[0])
+    if foreign_keys_enabled:
+        db.execute("PRAGMA foreign_keys=OFF")
+
+    rebuilt = []
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        for table in affected_tables:
+            table_row = db.execute(
+                "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?",
+                (table,),
+            ).fetchone()
+            if not table_row or not table_row[0]:
+                raise sqlite3.OperationalError(f"Missing CREATE TABLE SQL for {table!r}")
+
+            dependent_objects = db.execute(
+                "SELECT type, name, sql FROM sqlite_master "
+                "WHERE tbl_name = ? AND type IN ('index', 'trigger') "
+                "AND sql IS NOT NULL ORDER BY type, name",
+                (table,),
+            ).fetchall()
+            old_columns = [
+                tuple(row)
+                for row in db.execute(
+                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(table)})"
+                ).fetchall()
+            ]
+            insert_columns = [row[1] for row in old_columns if row[6] == 0]
+            old_row_count = db.execute(
+                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(table)}"
+            ).fetchone()[0]
+
+            try:
+                old_sequences = [
+                    row[0]
+                    for row in db.execute(
+                        "SELECT seq FROM sqlite_sequence WHERE name = ?", (table,)
+                    ).fetchall()
+                ]
+            except sqlite3.OperationalError:
+                old_sequences = []
+
+            replacement = f"__fk_rebuild_{table}"
+            if db.execute(
+                "SELECT 1 FROM sqlite_master WHERE name = ?", (replacement,)
+            ).fetchone():
+                raise sqlite3.OperationalError(
+                    f"Refusing to overwrite existing migration object {replacement!r}"
+                )
+
+            db.execute(
+                _rewrite_table_sql_for_leads_fk(table, replacement, table_row[0])
+            )
+            quoted_columns = ", ".join(
+                _quote_sqlite_identifier(column) for column in insert_columns
+            )
+            db.execute(
+                f"INSERT INTO {_quote_sqlite_identifier(replacement)} ({quoted_columns}) "
+                f"SELECT {quoted_columns} FROM {_quote_sqlite_identifier(table)}"
+            )
+            copied_row_count = db.execute(
+                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(replacement)}"
+            ).fetchone()[0]
+            if copied_row_count != old_row_count:
+                raise sqlite3.IntegrityError(
+                    f"Row-count mismatch rebuilding {table}: "
+                    f"expected {old_row_count}, copied {copied_row_count}"
+                )
+
+            new_columns = [
+                tuple(row)
+                for row in db.execute(
+                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(replacement)})"
+                ).fetchall()
+            ]
+            if old_columns != new_columns:
+                raise sqlite3.IntegrityError(
+                    f"Column metadata changed while rebuilding {table}"
+                )
+
+            db.execute(f"DROP TABLE {_quote_sqlite_identifier(table)}")
+            db.execute(
+                f"ALTER TABLE {_quote_sqlite_identifier(replacement)} "
+                f"RENAME TO {_quote_sqlite_identifier(table)}"
+            )
+            for _object_type, _object_name, object_sql in dependent_objects:
+                db.execute(object_sql)
+
+            # CREATE/COPY/RENAME can create a new sqlite_sequence row while old
+            # migrations may have left duplicates. Preserve the highest value
+            # and normalize it to one row so IDs cannot move backwards.
+            try:
+                current_sequences = [
+                    row[0]
+                    for row in db.execute(
+                        "SELECT seq FROM sqlite_sequence WHERE name IN (?, ?)",
+                        (table, replacement),
+                    ).fetchall()
+                ]
+                sequences = old_sequences + current_sequences
+                db.execute(
+                    "DELETE FROM sqlite_sequence WHERE name IN (?, ?)",
+                    (table, replacement),
+                )
+                if sequences:
+                    db.execute(
+                        "INSERT INTO sqlite_sequence(name, seq) VALUES (?, ?)",
+                        (table, max(sequences)),
+                    )
+            except sqlite3.OperationalError:
+                pass  # No AUTOINCREMENT tables have created sqlite_sequence yet.
+
+            if any(
+                fk[2] == "leads_old_backup"
+                for fk in db.execute(
+                    f"PRAGMA foreign_key_list({_quote_sqlite_identifier(table)})"
+                )
+            ):
+                raise sqlite3.IntegrityError(
+                    f"Stale leads foreign key remained after rebuilding {table}"
+                )
+            rebuilt.append(table)
+
+        if _stale_leads_fk_tables(db):
+            raise sqlite3.IntegrityError(
+                "Stale leads_old_backup foreign keys remain after schema repair"
+            )
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        if foreign_keys_enabled:
+            db.execute("PRAGMA foreign_keys=ON")
+
+    return rebuilt
+
+
+def _connection_dedup_rows(db):
+    """Return duplicate connection IDs mapped to the deterministic MIN(id) row."""
+    return db.execute("""
+        SELECT c.id AS duplicate_id, canon.id AS canonical_id
+        FROM connections c
+        JOIN (
+            SELECT MIN(id) AS id, person_a, person_b,
+                   COALESCE(relationship_type, '') AS rt,
+                   COALESCE(profile_id, '') AS pid
+            FROM connections
+            GROUP BY person_a, person_b,
+                     COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+        ) canon
+          ON canon.person_a = c.person_a
+         AND canon.person_b = c.person_b
+         AND canon.rt = COALESCE(c.relationship_type, '')
+         AND canon.pid = COALESCE(c.profile_id, '')
+        WHERE c.id <> canon.id
+        ORDER BY canon.id, c.id
+    """).fetchall()
+
+
+def _metadata_is_populated(value):
+    return value is not None and str(value).strip() != ""
+
+
+def _row_value(row, name, index):
+    """Read sqlite3.Row or the tuple rows used by direct schema tests."""
+    try:
+        return row[name]
+    except (TypeError, IndexError):
+        return row[index]
+
+
+def _merge_duplicate_connection_rows(db):
+    """Merge legacy duplicate edges without losing provenance or audit history.
+
+    The oldest edge remains canonical. Evidence unique to a duplicate is rehomed;
+    same-ref metadata fills canonical blanks in duplicate-ID order. When two
+    populated values conflict, the deterministic canonical value stays current
+    and the discarded legacy value is retained in an immutable merge correction.
+    """
+    duplicates = _connection_dedup_rows(db)
+    for duplicate in duplicates:
+        duplicate_id = _row_value(duplicate, "duplicate_id", 0)
+        canonical_id = _row_value(duplicate, "canonical_id", 1)
+
+        # Both edge and composite evidence corrections use the connection ID as
+        # record_id. Rehome them before deleting either legacy child or parent.
+        db.execute("""
+            UPDATE corrections SET record_id=?
+            WHERE record_id=?
+              AND table_name IN ('connections', 'connection_evidence')
+        """, (canonical_id, duplicate_id))
+
+        evidence_rows = db.execute("""
+            SELECT * FROM connection_evidence
+            WHERE connection_id=? ORDER BY evidence_ref
+        """, (duplicate_id,)).fetchall()
+        for evidence in evidence_rows:
+            evidence_ref = _row_value(evidence, "evidence_ref", 2)
+            canonical = db.execute("""
+                SELECT source_quote, source_page, assessment
+                FROM connection_evidence
+                WHERE connection_id=? AND evidence_ref=?
+            """, (canonical_id, evidence_ref)).fetchone()
+            if canonical is None:
+                db.execute("""
+                    UPDATE connection_evidence SET connection_id=?
+                    WHERE connection_id=? AND evidence_ref=?
+                """, (canonical_id, duplicate_id, evidence_ref))
+                continue
+
+            canonical_values = {
+                field: _row_value(canonical, field, index)
+                for index, field in enumerate(
+                    ("source_quote", "source_page", "assessment")
+                )
+            }
+            for evidence_index, field in enumerate(
+                ("source_quote", "source_page", "assessment"), start=3
+            ):
+                retained = canonical_values.get(field)
+                incoming = _row_value(evidence, field, evidence_index)
+                retained_populated = _metadata_is_populated(retained)
+                incoming_populated = _metadata_is_populated(incoming)
+                if not retained_populated and incoming_populated:
+                    db.execute(
+                        f"UPDATE connection_evidence SET {field}=? "
+                        "WHERE connection_id=? AND evidence_ref=?",
+                        (incoming, canonical_id, evidence_ref),
+                    )
+                    db.execute("""
+                        INSERT INTO corrections (
+                            table_name, record_id, record_key, field_name,
+                            old_value, new_value, reason, corrected_by,
+                            correction_type
+                        ) VALUES (
+                            'connection_evidence', ?, ?, ?, ?, ?, ?, ?, 'merge'
+                        )
+                    """, (
+                        canonical_id, evidence_ref, field, retained, incoming,
+                        f"Filled canonical provenance from duplicate connection #{duplicate_id}",
+                        "schema:connection-dedup",
+                    ))
+                    canonical_values[field] = incoming
+                elif (
+                    retained_populated and incoming_populated
+                    and retained != incoming
+                ):
+                    db.execute("""
+                        INSERT INTO corrections (
+                            table_name, record_id, record_key, field_name,
+                            old_value, new_value, reason, corrected_by,
+                            correction_type
+                        ) VALUES (
+                            'connection_evidence', ?, ?, ?, ?, ?, ?, ?, 'merge'
+                        )
+                    """, (
+                        canonical_id, evidence_ref, field, incoming, retained,
+                        f"Preserved conflicting provenance from duplicate connection #{duplicate_id}; "
+                        f"canonical connection #{canonical_id} retained its deterministic value",
+                        "schema:connection-dedup",
+                    ))
+
+            db.execute("""
+                DELETE FROM connection_evidence
+                WHERE connection_id=? AND evidence_ref=?
+            """, (duplicate_id, evidence_ref))
+
+    if duplicates:
+        db.executemany(
+            "DELETE FROM connections WHERE id=?",
+            [(_row_value(row, "duplicate_id", 0),) for row in duplicates],
+        )
+    return [
+        (_row_value(row, "duplicate_id", 0), _row_value(row, "canonical_id", 1))
+        for row in duplicates
+    ]
 
 
 def get_db():
@@ -682,6 +1033,8 @@ def _ensure_schema(db):
         ("findings", "verified_at TIMESTAMP"),
         ("findings", "quality_state TEXT DEFAULT 'unchecked'"),
         ("findings", "confidence_requested TEXT"),
+        ("findings", "event_date_iso TEXT"),
+        ("findings", "date_precision TEXT"),
         # Provenance fields on finding_evidence
         ("finding_evidence", "source_quote TEXT"),               # exact text from source supporting claim
         ("finding_evidence", "source_page TEXT"),                # page/line/section within source
@@ -698,6 +1051,7 @@ def _ensure_schema(db):
         # Provenance fields on connection_evidence
         ("connection_evidence", "source_quote TEXT"),
         ("connection_evidence", "source_page TEXT"),
+        ("connection_evidence", "assessment TEXT"),
         # Investigation thread assignment
         ("leads", "thread_id INTEGER REFERENCES investigation_threads(id)"),
         ("findings", "thread_id INTEGER REFERENCES investigation_threads(id)"),
@@ -705,6 +1059,9 @@ def _ensure_schema(db):
         ("finding_evidence", "email_sender TEXT"),
         ("finding_evidence", "email_date TEXT"),
         ("finding_evidence", "chain_position INTEGER"),
+        # Composite-key child rows (notably finding_evidence) use record_key
+        # alongside record_id in the shared immutable corrections audit trail.
+        ("corrections", "record_key TEXT"),
         # Investigation profile scoping
         ("leads", "profile_id TEXT"),
         ("findings", "profile_id TEXT"),
@@ -768,6 +1125,8 @@ def _ensure_schema(db):
         "CREATE INDEX IF NOT EXISTS idx_findings_agent_run ON findings(agent_run_id)",
         "CREATE INDEX IF NOT EXISTS idx_connections_agent_run ON connections(agent_run_id)",
         "CREATE INDEX IF NOT EXISTS idx_entities_agent_run ON entities(agent_run_id)",
+        "CREATE INDEX IF NOT EXISTS idx_corrections_table_record_key "
+        "ON corrections(table_name, record_id, record_key)",
     ]:
         try:
             db.execute(idx_sql)
@@ -848,26 +1207,6 @@ def _ensure_schema(db):
                 db.execute("PRAGMA writable_schema=ON")
                 db.execute(
                     "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='entities'",
-                    (new_sql,)
-                )
-                db.execute("PRAGMA writable_schema=OFF")
-                db.commit()
-                reload_schema(db)
-    except Exception:
-        pass
-
-    # Fix stale FK: lead_id REFERENCES leads_old_backup -> leads
-    try:
-        import re as _re
-        schema = db.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name='findings'"
-        ).fetchone()
-        if schema and "leads_old_backup" in (schema[0] or ""):
-            new_sql = schema[0].replace('"leads_old_backup"', '"leads"')
-            if new_sql != schema[0]:
-                db.execute("PRAGMA writable_schema=ON")
-                db.execute(
-                    "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='findings'",
                     (new_sql,)
                 )
                 db.execute("PRAGMA writable_schema=OFF")
@@ -965,59 +1304,32 @@ def _ensure_schema(db):
             or "coalesce(profile_id" not in existing_sql
         )
         if needs_migration:
-            db.execute("DROP INDEX IF EXISTS idx_connections_unique")
-            # Remove duplicate connections, keeping the oldest (smallest id) per group.
-            # Group by coalesced values so NULLs are deduplicated correctly.
-            # Temporarily disable FK checks for safe dedup migration.
-            # PRAGMA foreign_keys must be set outside a transaction.
             db.commit()
-            db.execute("PRAGMA foreign_keys=OFF")
-
-            # Copy evidence from duplicate connections to canonical (MIN id).
-            # INSERT OR IGNORE handles the case where canonical already has
-            # the same evidence_ref — no data is lost.
-            db.execute("""
-                INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref, source_quote, source_page)
-                SELECT canon.id, ce.evidence_type, ce.evidence_ref, ce.source_quote, ce.source_page
-                FROM connection_evidence ce
-                JOIN connections c ON c.id = ce.connection_id
-                JOIN (
-                    SELECT MIN(id) as id, person_a, person_b,
-                           COALESCE(relationship_type, '') as rt, COALESCE(profile_id, '') as pid
-                    FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                ) canon ON canon.person_a = c.person_a AND canon.person_b = c.person_b
-                    AND canon.rt = COALESCE(c.relationship_type, '')
-                    AND canon.pid = COALESCE(c.profile_id, '')
-                WHERE ce.connection_id != canon.id
-            """)
-            # Remove evidence rows pointing at duplicates (already copied above)
-            db.execute("""
-                DELETE FROM connection_evidence WHERE connection_id NOT IN (
-                    SELECT MIN(id) FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                )
-            """)
-            # Now safe to delete duplicate connections
-            db.execute("""
-                DELETE FROM connections WHERE id NOT IN (
-                    SELECT MIN(id) FROM connections
-                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
-                )
-            """)
-            db.execute("PRAGMA foreign_keys=ON")
-            db.execute("""
-                CREATE UNIQUE INDEX idx_connections_unique
-                ON connections(
-                    person_a,
-                    person_b,
-                    COALESCE(relationship_type, ''),
-                    COALESCE(profile_id, '')
-                )
-            """)
-            db.commit()
+            foreign_keys_enabled = bool(db.execute("PRAGMA foreign_keys").fetchone()[0])
+            if foreign_keys_enabled:
+                db.execute("PRAGMA foreign_keys=OFF")
+            try:
+                db.execute("BEGIN IMMEDIATE")
+                db.execute("DROP INDEX IF EXISTS idx_connections_unique")
+                _merge_duplicate_connection_rows(db)
+                db.execute("""
+                    CREATE UNIQUE INDEX idx_connections_unique
+                    ON connections(
+                        person_a,
+                        person_b,
+                        COALESCE(relationship_type, ''),
+                        COALESCE(profile_id, '')
+                    )
+                """)
+                db.commit()
+            except Exception:
+                db.rollback()
+                raise
+            finally:
+                if foreign_keys_enabled:
+                    db.execute("PRAGMA foreign_keys=ON")
     except sqlite3.OperationalError:
-        pass
+        raise
 
     # Widen connections.relationship_type CHECK constraint to include entity types.
     # SQLite can't ALTER CHECK constraints, so we rebuild the table if needed.
@@ -1298,56 +1610,10 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass
 
-    # ── Fix lead_* foreign keys pointing to leads_old_backup ──
-    def _fk_points_to_backup(table):
-        try:
-            rows = db.execute(f"PRAGMA foreign_key_list({table})").fetchall()
-        except sqlite3.OperationalError:
-            return False
-        return any(r[2] == "leads_old_backup" for r in rows)
-
-    if _fk_points_to_backup("lead_notes"):
-        db.executescript("""
-            CREATE TABLE lead_notes_new (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                note TEXT NOT NULL,
-                session_id INTEGER REFERENCES sessions(id),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-            INSERT INTO lead_notes_new (id, lead_id, note, session_id, created_at)
-                SELECT id, lead_id, note, session_id, created_at FROM lead_notes;
-            DROP TABLE lead_notes;
-            ALTER TABLE lead_notes_new RENAME TO lead_notes;
-        """)
-
-    if _fk_points_to_backup("lead_evidence"):
-        db.executescript("""
-            CREATE TABLE lead_evidence_new (
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                evidence_type TEXT NOT NULL,
-                evidence_ref TEXT NOT NULL,
-                PRIMARY KEY (lead_id, evidence_ref)
-            );
-            INSERT INTO lead_evidence_new (lead_id, evidence_type, evidence_ref)
-                SELECT lead_id, evidence_type, evidence_ref FROM lead_evidence;
-            DROP TABLE lead_evidence;
-            ALTER TABLE lead_evidence_new RENAME TO lead_evidence;
-        """)
-
-    if _fk_points_to_backup("lead_relations"):
-        db.executescript("""
-            CREATE TABLE lead_relations_new (
-                lead_id INTEGER NOT NULL REFERENCES leads(id),
-                related_lead_id INTEGER NOT NULL REFERENCES leads(id),
-                relation_type TEXT DEFAULT 'related',
-                PRIMARY KEY (lead_id, related_lead_id)
-            );
-            INSERT INTO lead_relations_new (lead_id, related_lead_id, relation_type)
-                SELECT lead_id, related_lead_id, relation_type FROM lead_relations;
-            DROP TABLE lead_relations;
-            ALTER TABLE lead_relations_new RENAME TO lead_relations;
-        """)
+    # Repair every dependent table that a historical leads migration rewrote to
+    # target leads_old_backup. This uses transactional table rebuilds instead of
+    # editing sqlite_master via PRAGMA writable_schema.
+    _repair_stale_leads_foreign_keys(db)
 
     db.commit()
     return db
@@ -1372,31 +1638,68 @@ def add_lead(title, description=None, category=None, priority="medium",
         except Exception:
             pass
 
+    related_leads = list(dict.fromkeys(related_leads or []))
     db = get_db()
-    cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id))
-    lead_id = cursor.lastrowid
+    try:
+        if related_leads:
+            placeholders = ",".join("?" for _ in related_leads)
+            existing_ids = {
+                row[0]
+                for row in db.execute(
+                    f"SELECT id FROM leads WHERE id IN ({placeholders})",
+                    related_leads,
+                ).fetchall()
+            }
+            missing_ids = [lead_id for lead_id in related_leads if lead_id not in existing_ids]
+            if missing_ids:
+                raise ValueError(
+                    "Related lead IDs do not exist: "
+                    + ", ".join(str(lead_id) for lead_id in missing_ids)
+                    + ". --related accepts lead IDs, not finding IDs."
+                )
 
-    if evidence:
-        for ev in evidence:
-            ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
-            db.execute(
-                "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
-                (lead_id, ev_type, ev)
-            )
+        cursor = db.execute("""
+            INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id))
+        lead_id = cursor.lastrowid
 
-    if related_leads:
+        if evidence:
+            for ev in evidence:
+                ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
+                db.execute(
+                    "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
+                    (lead_id, ev_type, ev)
+                )
+
         for rel_id in related_leads:
             db.execute(
                 "INSERT OR IGNORE INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, 'related')",
                 (lead_id, rel_id)
             )
 
+        db.commit()
+        return lead_id
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def set_lead_depth_tier(lead_id, depth_tier):
+    """Keep the scheduler column in sync with the operational tier tag."""
+    if depth_tier not in {"scan", "standard", "deep_dive"}:
+        raise ValueError(f"Invalid depth tier: {depth_tier}")
+    db = get_db()
+    cursor = db.execute(
+        "UPDATE leads SET depth_tier = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (depth_tier, lead_id),
+    )
     db.commit()
+    updated = cursor.rowcount > 0
     db.close()
-    return lead_id
+    return updated
 
 
 def list_leads(status=None, priority=None, category=None, target=None, limit=50,
@@ -2039,7 +2342,10 @@ def main():
     add_p.add_argument("--source", "-s")
     add_p.add_argument("--target")
     add_p.add_argument("--evidence", "-e", nargs="+")
-    add_p.add_argument("--related", "-r", nargs="+", type=int)
+    add_p.add_argument(
+        "--related", "-r", nargs="+", type=int,
+        help="Existing lead IDs to relate to the new lead (not finding IDs)",
+    )
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
     add_p.add_argument("--recommended-skill", help="Recommended skill for this lead")
@@ -2065,12 +2371,20 @@ def main():
     # claim
     claim_p = subparsers.add_parser("claim", help="Claim a lead")
     claim_p.add_argument("id", type=int)
+    claim_p.add_argument(
+        "--agent", dest="claimed_by",
+        help="Agent or worker identifier recorded as the claimant",
+    )
 
     # claim-next (atomic select + claim)
     claim_next_p = subparsers.add_parser("claim-next", help="Atomically select and claim the next open lead")
     claim_next_p.add_argument("--category", choices=VALID_CATEGORIES)
     claim_next_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     claim_next_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Filter by depth tier")
+    claim_next_p.add_argument(
+        "--agent", dest="claimed_by",
+        help="Agent or worker identifier recorded as the claimant",
+    )
     add_output_args(claim_next_p)
 
     # note
@@ -2132,7 +2446,7 @@ def main():
     add_output_args(stale_p)
 
     # recover-stale — reset stale leads to open
-    recover_p = subparsers.add_parser("recover-stale", help="Reset stale leads to open")
+    subparsers.add_parser("recover-stale", help="Reset stale leads to open")
 
     # triage-log — review triage decisions
     tlog_p = subparsers.add_parser("triage-log", help="Review triage decisions (dead-ends and promotions)")
@@ -2162,7 +2476,7 @@ def main():
     thread_add_p = thread_sub.add_parser("add", help="Create a thread")
     thread_add_p.add_argument("--title", required=True)
     thread_add_p.add_argument("--description")
-    thread_seed_p = thread_sub.add_parser("seed", help="Seed initial investigation threads")
+    thread_sub.add_parser("seed", help="Seed initial investigation threads")
 
     args = parser.parse_args()
 
@@ -2205,7 +2519,7 @@ def main():
             print(format_lead(lead, verbose=True))
 
     elif args.command == "claim":
-        if claim_lead(args.id):
+        if claim_lead(args.id, claimed_by=args.claimed_by):
             print(f"Claimed lead #{args.id}")
         else:
             print(f"Could not claim lead #{args.id} (may not be open)")
@@ -2215,6 +2529,7 @@ def main():
             category=getattr(args, "category", None),
             thread_id=getattr(args, "thread_id", None),
             depth_tier=getattr(args, "depth_tier", None),
+            claimed_by=getattr(args, "claimed_by", None),
         )
         if lead:
             lead_full = get_lead(lead["id"])
@@ -2307,15 +2622,15 @@ def main():
             print(f"Total connections: {stats['total_connections']}")
 
             if stats.get("leads_by_status"):
-                print(f"\nLeads by status:")
+                print("\nLeads by status:")
                 for s, c in sorted(stats["leads_by_status"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {s or '(none)'}: {c}")
             if stats.get("open_by_priority"):
-                print(f"\nOpen/in-progress by priority:")
+                print("\nOpen/in-progress by priority:")
                 for p, c in sorted(stats["open_by_priority"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {p or '(none)'}: {c}")
             if stats.get("leads_by_category"):
-                print(f"\nLeads by category:")
+                print("\nLeads by category:")
                 for cat, c in sorted(stats["leads_by_category"].items(), key=lambda x: (x[0] is None, x[0])):
                     print(f"  {cat or '(none)'}: {c}")
 
@@ -2337,14 +2652,14 @@ def main():
             if stats.get('stale_leads', 0) > 0:
                 queues.append(f"{stats['stale_leads']} stale leads (lease expired) → recover-stale")
             if queues:
-                print(f"\nQueues:")
+                print("\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
 
             if args.session_stats:
                 sessions = get_session_stats(limit=10)
                 if sessions:
-                    print(f"\nRecent session performance:")
+                    print("\nRecent session performance:")
                     print(f"  {'ID':>5} {'Agent':<20} {'Skill':<20} {'F':>3} {'C':>3} {'L':>3} {'R':>3}")
                     for s in sessions:
                         print(f"  {s['id']:>5} {(s['agent_id'] or '?')[:20]:<20} {(s['skill_invoked'] or '?')[:20]:<20} "
@@ -2418,11 +2733,14 @@ def main():
                     if r.get('triage_rationale'):
                         print(f"        rationale: {r['triage_rationale']}")
                     else:
-                        print(f"        rationale: (MISSING)")
+                        print("        rationale: (MISSING)")
                     print(f"        triaged_by={r.get('triaged_by') or '?'}  at={r.get('triaged_at') or '?'}")
                     print()
 
     elif args.command == "tier":
+        if not set_lead_depth_tier(args.id, args.depth):
+            print(f"ERROR: Lead #{args.id} does not exist", file=sys.stderr)
+            raise SystemExit(2)
         try:
             from tools.tag_manager import add_tag, remove_tag
         except ImportError:

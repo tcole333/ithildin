@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-14T05:55:00Z",
+  "profile": "geo-group",
+  "lead_id": 60299,
+  "subject": {
+    "canonical_entity_id": 5038,
+    "legal_name": "GEO Corrections Holdings, Inc.",
+    "entity_type": "corporation",
+    "jurisdiction": "Florida",
+    "status": "active",
+    "formation_date": "2012-12-26",
+    "identifiers": {
+      "florida_document_number": "P12000103643",
+      "ein": "46-1972528",
+      "sec_cik": "0001578145",
+      "uei": null,
+      "cage": null,
+      "duns": null
+    },
+    "name_history": [],
+    "name_history_status": "No Name History in Florida record; empty formerNames array in SEC submission record",
+    "known_name_variants": [
+      {
+        "name": "GEO CORRECTIONS HOLDING INC",
+        "type": "reporting_variant",
+        "former_legal_name": false
+      }
+    ],
+    "addresses": [
+      {
+        "address": "One Park Place, 621 NW 53rd Street, Suite 700, Boca Raton, FL 33487",
+        "period": "historical",
+        "sources": ["SEC", "FEC MUR 7180"]
+      },
+      {
+        "address": "4955 Technology Way, Boca Raton, FL 33431",
+        "period": "current",
+        "sources": ["Florida Division of Corporations"]
+      }
+    ]
+  },
+  "identifier_dispositions": [
+    {
+      "identifier_type": "SEC_CIK",
+      "value": "0001578145",
+      "entity": "GEO Corrections Holdings, Inc.",
+      "status": "verified"
+    },
+    {
+      "identifier_type": "SEC_CIK",
+      "value": "0001578146",
+      "entity": "GEO Leasing, LLC (formerly GEO Operations, LLC)",
+      "status": "excluded_from_subject"
+    },
+    {
+      "identifier_type": "DUNS",
+      "value": "079242241",
+      "entity": null,
+      "status": "unresolved_legacy_profile_key",
+      "attach_to_subject": false,
+      "reason": "Appears in the URL of a legacy USAspending profile described by an FEC complainant as GCH; current official endpoints return no row and the archived shell did not preserve its application data."
+    },
+    {
+      "identifier_type": "DUNS",
+      "value": "079805752",
+      "entity": "GEO Reentry Services, LLC",
+      "status": "verified_other_entity",
+      "attach_to_subject": false
+    },
+    {
+      "identifier_type": "UEI",
+      "value": "CLKXSJLN8EN1",
+      "entity": "GEO Reentry Services, LLC",
+      "status": "verified_other_entity",
+      "attach_to_subject": false
+    },
+    {
+      "identifier_type": "CAGE",
+      "value": "7G0N6",
+      "entity": "GEO Reentry Services, LLC",
+      "status": "verified_other_entity",
+      "attach_to_subject": false
+    }
+  ],
+  "corporate_lineage_events": [
+    {
+      "date": "2012-12-26",
+      "event": "formation",
+      "entity": "GEO Corrections Holdings, Inc.",
+      "source": "Florida document P12000103643"
+    },
+    {
+      "date": "2013-03-01",
+      "event": "first_exact_sec_subsidiary_exhibit_located",
+      "entity": "GEO Corrections Holdings, Inc.",
+      "source": "SEC accession 0001193125-13-087892, Exhibit 21.1"
+    },
+    {
+      "date": "2017-10-17",
+      "event": "reinstatement_after_administrative_dissolution",
+      "entity": "GEO Corrections Holdings, Inc.",
+      "source": "Florida Sunbiz bulk event record"
+    },
+    {
+      "date": "2024-12-30",
+      "event": "surviving_corporation_in_merger",
+      "entity": "GEO Corrections Holdings, Inc.",
+      "predecessor_entity_id": 5059,
+      "predecessor": "GEO Operations, Inc.",
+      "predecessor_florida_document_number": "P17000042350",
+      "filing_date": "2024-12-18",
+      "source": "Florida Sunbiz reciprocal merger event records"
+    }
+  ],
+  "recipient_attribution_resolutions": [
+    {
+      "historical_claimed_recipient": "GEO Corrections Holdings, Inc.",
+      "historical_profile_key": "DUNS 079242241",
+      "amount": 266666.0,
+      "action_date": "2015-02-01",
+      "prime_award_id": "2013CZBX0023",
+      "awarding_agency": "Department of Justice / Office of Justice Programs",
+      "prime_recipient": "Louisiana Department of Public Safety and Corrections",
+      "resolved_subrecipient": "GEO Reentry Services, LLC",
+      "resolved_subrecipient_uei": "CLKXSJLN8EN1",
+      "resolved_subrecipient_duns": "079805752",
+      "resolution_status": "verified_other_entity",
+      "subject_was_recipient": false
+    },
+    {
+      "facility": "D. Ray James Detention Facility",
+      "resolved_contract_entity": "Cornell Companies, Inc.",
+      "resolution_status": "sworn_company_affidavit",
+      "subject_was_recipient": false,
+      "caveat": "The FEC separately treated GCH's earlier NLRB representations as unresolved evidence that GCH may have been a contractor."
+    }
+  ],
+  "bounded_searches": [
+    {
+      "source": "SAM public entity extract",
+      "snapshot": "2026-03-01",
+      "selector": "exact GCH legal name and singular variant",
+      "result_count": 0
+    },
+    {
+      "source": "SAM public entity extract",
+      "snapshot": "2026-03-01",
+      "selector": "4955 Technology Way",
+      "result_count": 11,
+      "subject_matches": 0
+    },
+    {
+      "source": "SAM public entity extract",
+      "snapshot": "2026-03-01",
+      "selector": "621 NW 53rd Street",
+      "result_count": 2,
+      "subject_matches": 0
+    },
+    {
+      "source": "USAspending API",
+      "selector": "exact GCH name: recipient, prime award, transaction, advanced subaward",
+      "date_range": "2007-10-01/2026-07-14",
+      "result_count": 0
+    },
+    {
+      "source": "USAspending API",
+      "selector": "DUNS 079242241: recipient, prime award, transaction, advanced subaward",
+      "result_count": 0
+    },
+    {
+      "source": "HigherGov API",
+      "selector": "awardee parent_key 10000076",
+      "result_count": 15,
+      "subject_matches": 0
+    }
+  ],
+  "conclusion": {
+    "distinct_gch_uei_verified": false,
+    "distinct_gch_cage_verified": false,
+    "distinct_gch_duns_verified": false,
+    "awards_resolved_under_other_geo_entities": true,
+    "merger_exposed_hidden_federal_identifier": false,
+    "residual_gap": "Owner of obsolete USAspending profile key/DUNS 079242241 requires an archived CCR/SAM or legacy Treasury backend record."
+  }
+}

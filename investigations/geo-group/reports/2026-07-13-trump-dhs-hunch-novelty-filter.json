@@ -1,0 +1,155 @@
+{
+  "run": 90,
+  "findings_scanned_at_run_start": 333,
+  "connections_in_profile": 69,
+  "verified_connections_scanned": 67,
+  "canonical_nodes_scanned": 45,
+  "existing_hypotheses_checked": 355,
+  "existing_tag_values_checked": 217,
+  "novelty_rule": "Require at least three independent contexts, a genuinely surprising mechanism, a nonduplicate ACH pair, and a concrete Layer-1 plan.",
+  "candidates": [
+    {
+      "pattern": "Campaign/family\u2013Checkmate\u2013White House\u2013Ballard\u2013DHS non-GEO path",
+      "contexts": [
+        {
+          "finding_ids": [
+            12710
+          ],
+          "context": "father/son and campaign/Checkmate identity"
+        },
+        {
+          "finding_ids": [
+            12718,
+            12719,
+            12723
+          ],
+          "context": "2025-2026 Checkmate account"
+        },
+        {
+          "finding_ids": [
+            12724,
+            12725,
+            12726
+          ],
+          "context": "2017-2021 Ballard account and bounded records"
+        }
+      ],
+      "three_context_gate": "pass",
+      "novelty": "fail",
+      "reason": "The path joins separate years and firm accounts through activity-level institutional fields; it is already tested by #337/#338 and #353/#354 and supplies no person-attributed contact or coordination mechanism."
+    },
+    {
+      "pattern": "Former-ICE personnel, consulting, and later administration roles form an expertise channel",
+      "contexts": [
+        {
+          "finding_ids": [
+            12385,
+            12456
+          ],
+          "context": "Albence"
+        },
+        {
+          "finding_ids": [
+            12386,
+            12457
+          ],
+          "context": "Ragsdale"
+        },
+        {
+          "finding_ids": [
+            12387,
+            12388,
+            12450,
+            12462
+          ],
+          "context": "Wood/Guidepost"
+        },
+        {
+          "finding_ids": [
+            12505,
+            12528
+          ],
+          "context": "Homan/Guidepost"
+        },
+        {
+          "finding_ids": [
+            12506,
+            12537,
+            12541,
+            12545
+          ],
+          "context": "Venturella"
+        }
+      ],
+      "three_context_gate": "pass",
+      "novelty": "fail",
+      "reason": "Canonical Guidepost now supplies a non-GEO Homan\u2013Guidepost\u2013B.I./Wood path, but the underlying relationships occur in separate disclosed contexts and do not establish a shared project. The broader pattern is already tested by #337/#338 and #355/#356."
+    },
+    {
+      "pattern": "Trump household investment plus political-money and DHS award timing",
+      "contexts": [
+        {
+          "finding_ids": [
+            12514,
+            12515,
+            12516
+          ],
+          "context": "OGE household holdings/events"
+        },
+        {
+          "finding_ids": [
+            12519,
+            12520,
+            12521,
+            12522,
+            12523,
+            12524,
+            12525
+          ],
+          "context": "political-money event layer"
+        },
+        {
+          "finding_ids": [
+            12530,
+            12531,
+            12532,
+            12542,
+            12543
+          ],
+          "context": "DHS procurement event layer"
+        }
+      ],
+      "three_context_gate": "pass",
+      "novelty": "fail",
+      "reason": "Already commissioned under competing hypotheses #351/#352 and open lead #59356; the household node has degree zero after GEO is removed."
+    },
+    {
+      "pattern": "Ballard OMB access records identify a hidden GEO procurement route",
+      "contexts": [
+        {
+          "finding_ids": [
+            12724
+          ],
+          "context": "complete LDA series"
+        },
+        {
+          "finding_ids": [
+            12725
+          ],
+          "context": "bounded DHS no-record response"
+        },
+        {
+          "finding_ids": [
+            12726
+          ],
+          "context": "OMB visit entries"
+        }
+      ],
+      "three_context_gate": "pass",
+      "novelty": "fail",
+      "reason": "The visit files lack client and purpose; completed lead #59423 already applied the falsifier and found no person-attributed procurement intervention."
+    }
+  ],
+  "hunch_pairs_created": 0,
+  "layer1_leads_created": 0
+}

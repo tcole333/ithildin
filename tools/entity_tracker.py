@@ -39,6 +39,25 @@ VALID_ENTITY_TYPES = [
     "unknown",
 ]
 
+ENTITY_CORRECT_FIELDS = {
+    "address",
+    "ein",
+    "entity_type",
+    "jurisdiction",
+    "notes",
+    "source",
+    "status",
+}
+VALID_CORRECTION_TYPES = {
+    "factual_error",
+    "source_mismatch",
+    "hallucination",
+    "outdated",
+    "refinement",
+    "merge",
+    "retraction",
+}
+
 
 def get_db():
     db = sqlite3.connect(str(DB_PATH))
@@ -294,6 +313,104 @@ def cmd_add_relation(args):
     )
 
 
+def correct_entity_field(
+    entity_id, field, value, reason, corrected_by=None, correction_type="refinement"
+):
+    """Correct one whitelisted entity field and append an immutable audit row.
+
+    Entity names are deliberately excluded: identity changes must use the alias
+    and merge workflows so dependent graph rows are not silently orphaned.
+    Empty values clear nullable metadata, but entity_type and status must remain
+    non-empty.
+    """
+    if field not in ENTITY_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct entity field '{field}'. Allowed: "
+            f"{', '.join(sorted(ENTITY_CORRECT_FIELDS))}"
+        )
+    reason = str(reason or "").strip()
+    if not reason:
+        raise ValueError("An audit reason is required to correct an entity")
+    if correction_type not in VALID_CORRECTION_TYPES:
+        raise ValueError(
+            f"Unsupported correction type '{correction_type}'. Allowed: "
+            f"{', '.join(sorted(VALID_CORRECTION_TYPES))}"
+        )
+
+    normalized_value = str(value).strip() if value is not None else ""
+    if field == "entity_type":
+        normalized_value = normalized_value.lower()
+        if normalized_value not in VALID_ENTITY_TYPES:
+            raise ValueError(
+                f"entity_type must be one of {', '.join(VALID_ENTITY_TYPES)}"
+            )
+    elif field == "status" and not normalized_value:
+        raise ValueError("status cannot be blank")
+    elif not normalized_value:
+        normalized_value = None
+
+    db = get_db()
+    try:
+        entity = db.execute(
+            f"SELECT id, {field} FROM entities WHERE id = ?", (entity_id,)
+        ).fetchone()
+        if entity is None:
+            raise ValueError(f"Entity #{entity_id} does not exist")
+        old_value = entity[field]
+        if old_value == normalized_value:
+            return False
+
+        actor = (
+            corrected_by
+            or os.environ.get("ITHILDIN_AGENT_RUN_ID")
+            or "human"
+        )
+        db.execute(
+            """
+            INSERT INTO corrections (
+                table_name, record_id, field_name, old_value, new_value,
+                reason, corrected_by, correction_type
+            ) VALUES ('entities', ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                entity_id,
+                field,
+                old_value,
+                normalized_value,
+                reason,
+                actor,
+                correction_type,
+            ),
+        )
+        db.execute(
+            f"UPDATE entities SET {field} = ? WHERE id = ?",
+            (normalized_value, entity_id),
+        )
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def cmd_correct(args):
+    changed = correct_entity_field(
+        args.entity_id,
+        args.field,
+        args.value,
+        args.reason,
+        corrected_by=args.by,
+        correction_type=args.correction_type,
+    )
+    if changed:
+        print(f"Corrected entity #{args.entity_id}.{args.field}")
+        print(f"  Reason: {args.reason.strip()}")
+    else:
+        print(f"Entity #{args.entity_id}.{args.field} already has that value; no change.")
+
+
 def _relation_summary(r):
     """One-line description of an entity_relations row (dict)."""
     return (
@@ -439,6 +556,26 @@ def main():
     p.add_argument("--source")
 
     p = sub.add_parser(
+        "correct",
+        help="Correct a canonical entity metadata field with an immutable audit row",
+    )
+    p.add_argument("entity_id", type=int)
+    p.add_argument("--field", "-f", required=True, choices=sorted(ENTITY_CORRECT_FIELDS))
+    p.add_argument(
+        "--value",
+        "-v",
+        required=True,
+        help="Replacement value; empty clears nullable metadata",
+    )
+    p.add_argument("--reason", "-r", required=True)
+    p.add_argument("--by", help="Reviewer (default: agent run id or human)")
+    p.add_argument(
+        "--correction-type",
+        choices=sorted(VALID_CORRECTION_TYPES),
+        default="refinement",
+    )
+
+    p = sub.add_parser(
         "delete-relation",
         help="Delete an entity-to-entity relationship edge (records an audit entry)",
     )
@@ -465,6 +602,12 @@ def main():
         cmd_add_address(args)
     elif args.command == "add-relation":
         cmd_add_relation(args)
+    elif args.command == "correct":
+        try:
+            cmd_correct(args)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
     elif args.command == "delete-relation":
         cmd_delete_relation(args)
 

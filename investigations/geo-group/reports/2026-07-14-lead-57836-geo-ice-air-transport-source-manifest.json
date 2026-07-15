@@ -1,0 +1,278 @@
+{
+  "lead_id": 57836,
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "purpose": "Durable URL, provenance, hash, and exact-quote manifest. Temporary work paths are intentionally excluded.",
+  "sources": [
+    {
+      "id": "SEC:GEO-2024-03-12-EX99.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+      "source_class": "primary company disclosure filed with SEC",
+      "evidence_class": "company statement, not government contract instrument",
+      "quotes": [
+        "On March 12, 2024, we announced that our wholly-owned subsidiary, GEO Transport, Inc. (\"GTI\") has been awarded a five-year contract, inclusive of option periods, to provide air operations support services on behalf of U.S. Immigration and Customs Enforcement (\"ICE\"), as a subcontractor to CSI Aviation, Inc. (\"CSI Aviation\") which has been selected by ICE as the prime contractor.",
+        "GTI first began providing air operations support services to ICE as a subcontractor to CSI Aviation, under a nine-month emergency contract starting in July of 2023.",
+        "The new five-year contract is expected to generate approximately $25 million in annualized revenues for GEO."
+      ],
+      "limits": "Five years includes option periods. The forecast is not realized revenue and does not show option exercise or GTI payments."
+    },
+    {
+      "id": "SEC:GEO-2024-Q3-EX99.2",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312524257285/d788860dex992.htm",
+      "source_class": "primary company disclosure filed with SEC",
+      "evidence_class": "filed earnings-call transcript",
+      "quotes": [
+        "our GTI Transportation Division also provides secure air operation support for ICE as a subcontractor under a five-year prime contract held by CSI Aviation."
+      ],
+      "limits": "GEO described security/support, not aircraft or flight-crew operation."
+    },
+    {
+      "id": "COFC:25-286-ECF28",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.28.0.pdf",
+      "courtlistener_docket": "https://www.courtlistener.com/docket/69649350/classic-air-charter-inc-v-united-states/",
+      "sha256": "afa76cf1eac76d97fa650cb7c15fe7b260316a6d1c7cf349fcf134230041bb6a",
+      "source_class": "government filing in Court of Federal Claims",
+      "evidence_class": "agency-certified administrative-record index",
+      "quotes": [
+        "Contract No. 70CDCR24A00000001 Awarded to CSI Aviation (March 8, 2024)"
+      ],
+      "limits": "The attached index identifies records; it does not make the plaintiff's merits allegations court findings."
+    },
+    {
+      "id": "COFC:25-286-ECF37",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.37.0.pdf",
+      "courtlistener_docket": "https://www.courtlistener.com/docket/69649350/classic-air-charter-inc-v-united-states/",
+      "sha256": "afef9c730b0890b20538bbf3a209c13789e4205dd1bf588c5817e66fc5628627",
+      "source_class": "party filing in Court of Federal Claims",
+      "evidence_class": "amended complaint; allegations unless independently supported",
+      "quotes": [
+        "The RFQ sought a single-award multi-billion-dollar BPA for Daily Scheduled Large Aircraft (\"DSLA\") flights and Special High-Risk Charter (\"SHRC\") flights to support ICE Air Operations.",
+        "CSI proposed a total price of $3,219,226,171.80, exclusive of FAR 52.217-8, and received an award with a maximum value of $3.6 billion if all options were exercised."
+      ],
+      "limits": "Price, evaluation, iAero, corrective-action, and bridge-contract descriptions are party assertions unless corroborated by an agency record. The protest ended without a merits ruling."
+    },
+    {
+      "id": "COFC:25-286-ECF42",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.0.pdf",
+      "sha256": "956f07b33e9c1b7e9647c8eedccdbfb43222aa6f0356599cf6a068a28bf8fc49",
+      "source_class": "government filing in Court of Federal Claims",
+      "evidence_class": "government status report",
+      "quotes": [
+        "On April 18, 2025, Immigration and Customs Enforcement (ICE) terminated the award to CSI Aviation, Inc., that is the subject of this protest, and on April 22, 2025, ICE cancelled the solicitation."
+      ]
+    },
+    {
+      "id": "COFC:25-286-ECF42-1",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.1.pdf",
+      "sha256": "31f1ad3535a12b236ef42c2f0f7e322b79991ae3a2a87cc73a9001c74a96bb4b",
+      "source_class": "agency records reproduced as court exhibit",
+      "evidence_class": "contract modifications and agency cancellation screenshot",
+      "quotes": [
+        "This BPA is hereby terminated for convenience, in its entirety, effective immediately, pursuant to FAR 52.212-4(l).",
+        "This call order is hereby terminated for convenience, in its entirety, effective immediately, pursuant to FAR 52.212-4(l)."
+      ],
+      "visual_qa": "Pages 1, 3, and 5 were rendered with Poppler and visually inspected."
+    },
+    {
+      "id": "DHS:SOW-70CDCR24A00000001",
+      "url": "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24A00000001-Charter-Flight-BPA.pdf",
+      "sha256": "52a7239e69687e3e9095defb538b3c20bffb863f6dfad499da74af559b1b2b39",
+      "source_class": "DHS-released procurement document",
+      "evidence_class": "official statement of work",
+      "quotes": [
+        "The period of performance is anticipated to be a base year of 12 months, including 30-days for transitioning, and four one-year option periods, not to exceed five years.",
+        "Provide no fewer than 12 aircraft for DSLA flights capable of transporting a minimum of 148 adult detainees",
+        "IAO is projecting a minimum of 31 flights per week with 11,300 annual flight hours and a maximum. of 66 flights per week including six flights on the weekend with 24,000 annual flight hours.",
+        "The contractor is responsible for all acts and omissions and all performance by their teaming partners and any subcontractors that the prime relies on to perform the work."
+      ],
+      "visual_qa": "Pages 5 and 6 were rendered with Poppler and visually inspected."
+    },
+    {
+      "id": "DHS:CALL-70CDCR24FC0000003",
+      "url": "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24FC0000003-Charter-Flight-Initial-Order.pdf",
+      "sha256": "1bf9c3fdbeb863f6a3e8616da65a217e82494fe7467ada714591df7f75e60006",
+      "source_class": "DHS-released procurement document",
+      "evidence_class": "official initial call documentation"
+    },
+    {
+      "id": "USASPENDING:IDV-70CDCR24A00000001",
+      "url": "https://api.usaspending.gov/api/v2/awards/CONT_IDV_70CDCR24A00000001_7012/",
+      "sha256": "eb1305dcd94210220b26cfbe8a418d3f3654354cfe0942a54a32312a87e04a6d",
+      "source_class": "official federal spending API snapshot",
+      "evidence_class": "structured agency-reported award data",
+      "exact_fields": {
+        "recipient_name": "CSI AVIATION, INC",
+        "recipient_uei": "D5BNEHB3UL89",
+        "description": "THIS BPA IS FOR AIR CHARTER SERVICES",
+        "period_start": "2024-03-08",
+        "period_end": "2029-03-07",
+        "total_obligation": 0.0,
+        "base_and_all_options_value": 3600000000.0,
+        "last_modified_date": "2026-04-17"
+      },
+      "limits": "$3.6 billion is potential ceiling authority, not GEO or CSI revenue."
+    },
+    {
+      "id": "USASPENDING:IDV-70CDCR24A00000001-TRANSACTIONS",
+      "url": "https://api.usaspending.gov/api/v2/transactions/",
+      "method": "POST with award_id=CONT_IDV_70CDCR24A00000001_7012",
+      "sha256": "8c5eb71390e24ad8d0bc01346d0f5d2ab94eff610f53cb20d64a05cb316f5f85",
+      "source_class": "official federal spending API snapshot",
+      "evidence_class": "structured agency-reported action history",
+      "exact_fields": [
+        {"action_date": "2024-03-19", "modification_number": "P00001", "description": "THE PURPOSE OF THIS MOD IS TO STOP WORK."},
+        {"action_date": "2025-01-31", "modification_number": "P00002", "description": "THE PURPOSE OF THIS MOD IS TO LIFT THE STOP WORK."},
+        {"action_date": "2025-02-28", "modification_number": "P00003", "description": "THE PURPOSE OF THIS MODIFICATION IS TO STOP WORK ON AIR CHARTER SERVICES DUE TO A PROTEST AT THE COURT OF FEDERAL CLAIMS."},
+        {"action_date": "2025-04-18", "modification_number": "P00004", "action_type_description": "TERMINATE FOR CONVENIENCE (COMPLETE OR PARTIAL)"},
+        {"action_date": "2025-06-25", "modification_number": "P00005", "description": "THIS MODIFICATION IS TO REINSTATE THE TERMINATED CONTRACT IN WHOLE."}
+      ]
+    },
+    {
+      "id": "USASPENDING:ORDER-SNAPSHOTS",
+      "url_pattern": "https://api.usaspending.gov/api/v2/awards/{generated_unique_award_id}/",
+      "source_class": "official federal spending API snapshots",
+      "evidence_class": "structured agency-reported current cumulative values",
+      "snapshots": [
+        {"piid": "70CDCR23FR0000035", "sha256": "172201558ecb070179ee7a04dd6ad0ccffabea738fd904b493e903c113ddfe3e", "last_modified": "2025-01-08"},
+        {"piid": "70CDCR24FR0000024", "sha256": "230b6ee0144d37eb8ff911377ac23ff718b7d684e77d1c7a7a88a0ac6df4be6d", "last_modified": "2025-07-02"},
+        {"piid": "70CDCR24FC0000003", "sha256": "7bdf175610877ac4297248248e3b20d68cc9f8af9aa563a071db7dcdf5dbe4a4", "last_modified": "2026-01-30"},
+        {"piid": "70CDCR25FR0000022", "sha256": "d24954f083f767ed118647c442ce85eaa97467c07844cdff7880e5ab0eedde03", "last_modified": "2025-11-17"},
+        {"piid": "70CDCR26FC0000001", "sha256": "0d76d0c913f24b88df7f804683ba0e2c7f82fb48415a57a2f0dc6c629062e384", "last_modified": "2026-05-28"}
+      ],
+      "limits": "Each amount is a cumulative stock at the snapshot's last-modified date; transaction actions are flows."
+    },
+    {
+      "id": "USASPENDING:SUBAWARD-EXACT-QUERIES",
+      "url": "https://api.usaspending.gov/api/v2/subawards/",
+      "source_class": "official federal spending API query result",
+      "evidence_class": "negative reporting/coverage result",
+      "queried_piids": ["70CDCR23FR0000035", "70CDCR24FR0000024", "70CDCR24FC0000003", "70CDCR25FR0000022", "70CDCR26FC0000001"],
+      "returned_rows_each": 0,
+      "sha256_each": "87733b7dbdfb2a69cbb43af20190830d036c2da46cc8b6fb212d95e9a83e0a18",
+      "limits": "Zero public rows is not evidence that no subcontract existed."
+    },
+    {
+      "id": "HOUSE-DHS:2025-05-28-CSI",
+      "url": "https://democrats-homeland.house.gov/imo/media/doc/2025-05-28-t-weh-letter_to_csi_aviation.pdf",
+      "sha256": "63c385b314bbba632ff249a479a918ab11f9b724a60bb96abb5d514021fae666",
+      "source_class": "congressional oversight letter",
+      "evidence_class": "official correspondence attributing a statement to media reports",
+      "quotes": [
+        "According to media reports, removal flights operated by charter carriers under CSI Aviation’s contracts have increased in number—and are expected to continue increasing.",
+        "Over the past year, one CSI Aviation subcontractor, GlobalX, operated 74 percent of ICE’s removal flights."
+      ],
+      "limits": "Not a primary operator contract or flight record."
+    },
+    {
+      "id": "COFC:25-1338-ECF70",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.52685/gov.uscourts.uscfc.52685.70.0.pdf",
+      "courtlistener_docket": "https://www.courtlistener.com/docket/71090317/csi-aviation-inc-v-united-states/",
+      "sha256": "2c2f44c2700b53511f2287b3cf300d722a7ecc81ef702068a9ab88a0ab5241e3",
+      "source_class": "reported Court of Federal Claims opinion",
+      "evidence_class": "court-recited administrative record and court holdings",
+      "quotes": [
+        "CSI highlighted how it is \"the Prime Contractor for all ICE Air Operations flights,\" and that CSI therefore believed it is \"well-positioned to support [DHS’s] new program quickly.\"",
+        "The Court concludes that CSI has failed to demonstrate that it had a substantial chance of receiving the contract award and thus lacks standing to challenge the procurement."
+      ],
+      "limits": "The CSRO award is separate from the ICE Air BPA. The opinion does not connect GEO or GTI to Salus."
+    }
+  ],
+  "db_finding_evidence_index": [
+    {
+      "finding_id": 12892,
+      "evidence_ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+      "source_quote": "On March 12, 2024, we announced that our wholly-owned subsidiary, GEO Transport, Inc. (\"GTI\") has been awarded a five-year contract, inclusive of option periods, to provide air operations support services on behalf of U.S. Immigration and Customs Enforcement (\"ICE\"), as a subcontractor to CSI Aviation, Inc. (\"CSI Aviation\") which has been selected by ICE as the prime contractor."
+    },
+    {
+      "finding_id": 12893,
+      "evidence_ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+      "source_quote": "GTI first began providing air operations support services to ICE as a subcontractor to CSI Aviation, under a nine-month emergency contract starting in July of 2023."
+    },
+    {
+      "finding_id": 12894,
+      "evidence_ref": "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+      "source_quote": "The new five-year contract is expected to generate approximately $25 million in annualized revenues for GEO."
+    },
+    {
+      "finding_id": 12895,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_IDV_70CDCR24A00000001_7012/",
+      "source_quote": "{\"recipient_name\":\"CSI AVIATION, INC\",\"recipient_uei\":\"D5BNEHB3UL89\",\"start_date\":\"2024-03-08\",\"end_date\":\"2029-03-07\",\"total_obligation\":0.0,\"base_and_all_options_value\":3600000000.0}"
+    },
+    {
+      "finding_id": 12906,
+      "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.1.pdf",
+      "source_quote": "This BPA is hereby terminated for convenience, in its entirety, effective immediately, pursuant to FAR 52.212-4(l)."
+    },
+    {
+      "finding_id": 12906,
+      "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.42.0.pdf",
+      "source_quote": "On April 18, 2025, Immigration and Customs Enforcement (ICE) terminated the award to CSI Aviation, Inc., that is the subject of this protest, and on April 22, 2025, ICE cancelled the solicitation."
+    },
+    {
+      "finding_id": 12907,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/transactions/",
+      "source_quote": "{\"action_date\":\"2025-06-25\",\"modification_number\":\"P00005\",\"description\":\"THIS CONTRACT VEHICLE PROVIDES AIR CHARTER SERVICES TO FACILITATE REQUIRED DEPARTURE OF DETAINEES FROM THE U.S. AS ORDERED IN REMOVAL PROCEEDINGS.  THIS MODIFICATION IS TO REINSTATE THE TERMINATED CONTRACT IN WHOLE.\"}"
+    },
+    {
+      "finding_id": 12910,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR23FR0000035_7012_GS33F0025V_4730/",
+      "source_quote": "{\"type_description\":\"DELIVERY ORDER\",\"piid\":\"70CDCR23FR0000035\",\"description\":\"DAILY CHARTER FLIGHTS\",\"total_obligation\":258529725.25,\"period_start\":\"2023-07-03\",\"period_end\":\"2024-04-03\",\"parent_award\":{\"idv_type_description\":\"FSS\",\"piid\":\"GS33F0025V\"}}"
+    },
+    {
+      "finding_id": 12910,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR24FR0000024_7012_GS33F0025V_4730/",
+      "source_quote": "{\"type_description\":\"DELIVERY ORDER\",\"piid\":\"70CDCR24FR0000024\",\"description\":\"INTERIM CONTRACT FOR DAILY CHARTER FLIGHTS\",\"total_obligation\":324216615.92,\"period_start\":\"2024-04-04\",\"period_end\":\"2025-02-28\",\"parent_award\":{\"idv_type_description\":\"FSS\",\"piid\":\"GS33F0025V\"}}"
+    },
+    {
+      "finding_id": 12910,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR25FR0000022_7012_GS33F0025V_4730/",
+      "source_quote": "{\"type_description\":\"DELIVERY ORDER\",\"piid\":\"70CDCR25FR0000022\",\"description\":\"THE PURPOSE OF THIS TASK ORDER IS TO PROVIDE DAILY SCHEDULED LARGE AIRCRAFT & SPECIAL HIGH RISK CHARTER FLIGHTS TO FACILITATE ICE'S ENFORCEMENT AND REMOVAL OPERATIONS OF ILLEGAL ALIENS.\",\"total_obligation\":562049742.0,\"period_start\":\"2025-03-01\",\"period_end\":\"2025-11-30\",\"parent_award\":{\"idv_type_description\":\"FSS\",\"piid\":\"GS33F0025V\"}}"
+    },
+    {
+      "finding_id": 12910,
+      "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-57836-geo-ice-air-transport-chain-matrix.json",
+      "source_quote": "258529725.25 + 324216615.92 + 562049742.00 = 1144796083.17; rounded to three decimal billions = $1.145 billion"
+    },
+    {
+      "finding_id": 12899,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR26FC0000001_7012_70CDCR24A00000001_7012/",
+      "source_quote": "{\"piid\":\"70CDCR26FC0000001\",\"total_obligation\":837608821.91,\"total_outlay\":552014353.78,\"base_and_all_options\":1500000000.0,\"last_modified_date\":\"2026-05-28\"}"
+    },
+    {
+      "finding_id": 12911,
+      "evidence_ref": "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24A00000001-Charter-Flight-BPA.pdf",
+      "source_quote": "The contractor is responsible for all acts and omissions and all performance by their teaming partners and any subcontractors that the prime relies on to perform the work."
+    },
+    {
+      "finding_id": 12901,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/subawards/",
+      "source_quote": "{\"queried_piids\":[\"70CDCR23FR0000035\",\"70CDCR24FR0000024\",\"70CDCR24FC0000003\",\"70CDCR25FR0000022\",\"70CDCR26FC0000001\"],\"returned_rows_each\":0}"
+    },
+    {
+      "finding_id": 12912,
+      "evidence_ref": "https://democrats-homeland.house.gov/imo/media/doc/2025-05-28-t-weh-letter_to_csi_aviation.pdf",
+      "source_quote": "According to media reports, removal flights operated by charter carriers under CSI Aviation’s contracts have increased in number—and are expected to continue increasing.3 Over the past year, one CSI Aviation subcontractor, GlobalX, operated 74 percent of ICE’s removal flights.4"
+    },
+    {
+      "finding_id": 12916,
+      "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.52685/gov.uscourts.uscfc.52685.70.0.pdf",
+      "source_quote": "On January 23, 2025 — three days after the issuance of EOs 14159 and 14165 — Salus submitted an unsolicited proposal to DHS’s Office of Procurement Operations"
+    },
+    {
+      "finding_id": 12914,
+      "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.52685/gov.uscourts.uscfc.52685.70.0.pdf",
+      "source_quote": "this Court’s careful examination of the administrative record did not yield any evidence of bad faith or unfair dealings"
+    },
+    {
+      "finding_id": 12909,
+      "evidence_ref": "https://api.usaspending.gov/api/v2/awards/CONT_AWD_70CDCR21C00000005_7012_-NONE-_-NONE-/",
+      "source_quote": "{\"piid\":\"70CDCR21C00000005\",\"recipient_name\":\"GEO TRANSPORT, INC.\",\"recipient_uei\":\"DFEKRCYPZD84\",\"description\":\"EMERGENCY HAITIAN MIGRANTS FLIGHT SERVICES\",\"total_obligation\":4773531.7,\"period_start\":\"2021-09-22\",\"period_end\":\"2021-10-05\"}"
+    }
+  ],
+  "excluded": [
+    {
+      "source": "HigherGov proprietary subcontract capture",
+      "reason": "Not used for reported dollar values because official public USAspending/FSRS rows were absent and the proprietary figures could not be independently validated."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "as_of": "2026-07-13",
+  "working_unique_prime_instruments": 256,
+  "primary_usaspending_unique_awards": 228,
+  "highergov_legacy_supplement_instruments": 28,
+  "primary_usaspending_cumulative_award_obligations": 7774205537.65,
+  "working_highergov_total_obligations": 7896705593.45,
+  "highergov_legacy_supplement_obligations": 121970964.53,
+  "usaspending_action_rows": 1864,
+  "usaspending_action_net": 7542303243.21,
+  "usaspending_award_minus_action_gap": 231902294.43999958,
+  "ice_idvs": 51,
+  "reported_positive_subaward_awards": 0,
+  "standalone_awards": 33,
+  "entity_breakdown": [
+    {
+      "recipient_legal_name": "B.I. INCORPORATED",
+      "instruments": 27,
+      "obligations_highergov": 2485749878.19,
+      "usaspending_instruments": 27,
+      "usaspending_award_obligations": 2485749878.19
+    },
+    {
+      "recipient_legal_name": "CORNELL COMPANIES, INC.",
+      "instruments": 13,
+      "obligations_highergov": 35952.200000000004,
+      "usaspending_instruments": 13,
+      "usaspending_award_obligations": 35952.200000000004
+    },
+    {
+      "recipient_legal_name": "CORRECTIONAL SERVICES CORPORATION",
+      "instruments": 11,
+      "obligations_highergov": 19565800.5,
+      "usaspending_instruments": 3,
+      "usaspending_award_obligations": 5959800.5
+    },
+    {
+      "recipient_legal_name": "GEO CARE SERVICES, LLC",
+      "instruments": 10,
+      "obligations_highergov": 19003220.259999998,
+      "usaspending_instruments": 10,
+      "usaspending_award_obligations": 19003220.259999998
+    },
+    {
+      "recipient_legal_name": "GEO TRANSPORT, INC.",
+      "instruments": 2,
+      "obligations_highergov": 15157987.29,
+      "usaspending_instruments": 2,
+      "usaspending_award_obligations": 15157987.29
+    },
+    {
+      "recipient_legal_name": "THE GEO GROUP, INC.",
+      "instruments": 193,
+      "obligations_highergov": 5357192755.01,
+      "usaspending_instruments": 173,
+      "usaspending_award_obligations": 5248298699.21
+    }
+  ],
+  "coverage_notes": [
+    "USAspending is the official primary API and its parent-UEI hierarchy returned 228 ICE awards from 2004 onward.",
+    "HigherGov supplied 28 additional pre-2007 legacy instruments not returned by USAspending award search; these require primary archive validation.",
+    "SAM Contract Awards returned 4,599 parent-UEI action/modification records across all agencies in a prior live run; the basic daily quota prevented full pagination in this run.",
+    "Award obligations, transaction-action sums, potential values, revenue, ceilings, outlays, and remaining funds are different measures and are not interchangeable."
+  ]
+}

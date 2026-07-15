@@ -351,6 +351,14 @@ def cmd_merge(args):
     db = get_db()
     _ensure_aliases_table(db)
 
+    replacement_notes = getattr(args, "replacement_notes", None)
+    if replacement_notes is not None:
+        replacement_notes = replacement_notes.strip()
+        if not replacement_notes:
+            print("ERROR: replacement notes must contain non-whitespace text")
+            db.close()
+            return
+
     keep = db.execute("SELECT * FROM entities WHERE id = ?", (args.keep_id,)).fetchone()
     delete = db.execute("SELECT * FROM entities WHERE id = ?", (args.delete_id,)).fetchone()
 
@@ -388,7 +396,11 @@ def cmd_merge(args):
             from entity_resolution import merge_entity_records
 
         summary = merge_entity_records(
-            db, args.keep_id, args.delete_id, created_by="entity_dedup"
+            db,
+            args.keep_id,
+            args.delete_id,
+            created_by="entity_dedup",
+            replacement_notes=replacement_notes,
         )
         db.commit()
         print(
@@ -475,6 +487,13 @@ def main():
     p_merge = sub.add_parser("merge", help="Merge entity records")
     p_merge.add_argument("--keep-id", type=int, required=True)
     p_merge.add_argument("--delete-id", type=int, required=True)
+    p_merge.add_argument(
+        "--replacement-notes",
+        help=(
+            "Replace the kept entity's notes instead of appending both pre-merge notes; "
+            "use when the old notes conflict with the resolved identity"
+        ),
+    )
     p_merge.add_argument("--dry-run", action="store_true")
 
     p_stats = sub.add_parser("stats", help="Alias and collision stats")

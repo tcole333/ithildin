@@ -30,7 +30,7 @@ echo "Session workdir: $WORKDIR"
 
 ```bash
 # Search by recipient name (USASpending)
-uv run python tools/query_usaspending.py awards --recipient "<NAME>" --output $WORKDIR/usa-awards.json
+uv run python tools/query_usaspending.py awards "<NAME>" --output $WORKDIR/usa-awards.json
 
 # Search by recipient (HigherGov — richer detail)
 uv run python tools/query_highergov.py contract --awardee-uei <UEI> --output $WORKDIR/hg-contracts.json
@@ -85,10 +85,10 @@ uv run python tools/entity_tracker.py add-entity --name "<SUB_NAME>" --entity-ty
 
 ```bash
 # Transaction-level payment history
-uv run python tools/query_usaspending.py transactions --award-id <AWARD_ID> --sort obligation_desc --output $WORKDIR/transactions.json
+uv run python tools/query_usaspending.py award <AWARD_ID> --output $WORKDIR/transactions.json
 
 # Spending trends over time
-uv run python tools/query_usaspending.py timeline --recipient "<NAME>" --output $WORKDIR/timeline.json
+uv run python tools/query_usaspending.py timeline "<NAME>" --output $WORKDIR/timeline.json
 ```
 
 Read the transaction data and map:
@@ -141,7 +141,7 @@ Analyze:
 uv run python tools/query_sam.py entity --uei <UEI> --output $WORKDIR/sam-entity.json
 
 # Debarment/suspension check
-uv run python tools/query_sam.py exclusions --name "<NAME>" --output $WORKDIR/sam-exclusions.json
+uv run python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/sam-exclusions.json
 
 # Local bulk data (faster, more fields)
 uv run python tools/ingest_sam.py entity-by-uei <UEI> --output $WORKDIR/sam-bulk.json
@@ -164,7 +164,7 @@ uv run python tools/entity_tracker.py lookup --name "<CONTRACTOR>"
 uv run python tools/findings_tracker.py search "<CONTRACTOR>" --output $WORKDIR/xref.json
 
 # Geographic analysis — where was the work performed?
-uv run python tools/query_usaspending.py geography --recipient "<NAME>" --output $WORKDIR/geography.json
+uv run python tools/query_usaspending.py geography "<NAME>" --output $WORKDIR/geography.json
 ```
 
 Flag:

@@ -1,0 +1,267 @@
+{
+  "title": "GEO-linked ICE IGSA nine-facility chain crosswalk",
+  "as_of": "2026-07-13",
+  "profile": "geo-group",
+  "lead_id": 57695,
+  "method": "analyze-contract",
+  "denominator": {
+    "sec_ice_igsa_facility_rows": 9,
+    "independent_federal_local_geo_chains": 6,
+    "unique_public_primes": 6,
+    "unique_piid_or_predecessor_families": 6,
+    "sec_listed_physical_capacity": 11361,
+    "capacity_scope": "Sum of the nine distinct SEC facility-table capacities. It is not an ICE bed guarantee; Joe Corley's ICE-exclusive commitment is 1,050 of 1,517 physical beds."
+  },
+  "aggregation_rules": [
+    "Alexandria Staging and Central Louisiana share the LaSalle EDD chain.",
+    "D. Ray James and Folkston share the Charlton County chain.",
+    "Pine Prairie and South Louisiana share the Evangeline Parish Sheriff chain.",
+    "Shared-chain annual amounts must be counted once, not once per facility row.",
+    "Annual local fund flows, unit rates, monthly rates, task-order adjustments, and administrative fees are incompatible measures and are not summed.",
+    "No six-chain federal obligation total or GEO-receipt total is supported by the acquired records."
+  ],
+  "baseline_comparison": {
+    "prior_five_path_reports": [
+      "igsa-five-facility-waterfall-2026-07-13.csv",
+      "igsa-recipient-attribution-payment-gap-2026-07-13.md",
+      "igsa-terms-control-2026-07-13.md"
+    ],
+    "prior_scope": "Five chain paths covering eight of the nine SEC ICE-IGSA facility rows.",
+    "new_scope": "Joe Corley Processing Center adds the ninth facility row and sixth independent chain.",
+    "new_primary_records": [
+      "ICE 70CDCR18DIG000013 base/P00001",
+      "Montgomery County public copy of ICE P00040",
+      "Montgomery County-GEO 2013 operating agreement and first amendment",
+      "Montgomery County FY2025 Annual Comprehensive Financial Report"
+    ],
+    "new_financial_observations": [
+      "FY2025 mixed ICE+USMS Fund 222 revenue and operations expenditure of $43,194,467 each",
+      "Effective 2025-11-01 bed-day rate of $82.56",
+      "Effective 2025-11-01 transportation rate of $228,019.07 per month",
+      "Discrete retroactive task-order payment of $8,137.37",
+      "Historical 2013 county administrative fee of $500,000 per year"
+    ]
+  },
+  "facility_rows": [
+    {
+      "facility": "Karnes County Immigration Processing Center",
+      "capacity": 1328,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "KARNES",
+      "shared_chain": false
+    },
+    {
+      "facility": "Alexandria Staging Facility",
+      "capacity": 400,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "LASALLE",
+      "shared_chain": true
+    },
+    {
+      "facility": "Central Louisiana ICE Processing Center",
+      "capacity": 1160,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "LASALLE",
+      "shared_chain": true
+    },
+    {
+      "facility": "D. Ray James Correctional Facility",
+      "capacity": 1868,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "CHARLTON",
+      "shared_chain": true
+    },
+    {
+      "facility": "Folkston ICE Processing Center",
+      "capacity": 1118,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "CHARLTON",
+      "shared_chain": true
+    },
+    {
+      "facility": "Moshannon Valley Processing Center",
+      "capacity": 1876,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "CLEARFIELD",
+      "shared_chain": false
+    },
+    {
+      "facility": "Pine Prairie ICE Processing Center",
+      "capacity": 1094,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "EVANGELINE",
+      "shared_chain": true
+    },
+    {
+      "facility": "South Louisiana ICE Processing Center",
+      "capacity": 1000,
+      "sec_customer": "ICE-IGA",
+      "chain_id": "EVANGELINE",
+      "shared_chain": true
+    },
+    {
+      "facility": "Joe Corley Processing Center",
+      "capacity": 1517,
+      "sec_customer": "USMS / ICE; ICE IGSA independently verified",
+      "chain_id": "MONTGOMERY",
+      "shared_chain": false
+    }
+  ],
+  "chains": {
+    "KARNES": {
+      "facilities": ["Karnes County Immigration Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "Karnes County",
+      "current_piid": "70CDCR24DIG000018",
+      "predecessor_piid": "EROIGSA-11-0004",
+      "geo_role": "GEO ownership/operation is disclosed in the SEC facility table; the exact downstream GEO legal entity is unresolved because the county-GEO instrument was not acquired.",
+      "terms": "Base obligates $0; performance requires funded annual task orders; subcontract flow-down and CLIN-supported invoices required.",
+      "amounts": {
+        "base_obligation": 0,
+        "task_order_amount": null,
+        "downstream_geo_amount": null
+      },
+      "amount_scope": "The zero is the base action only and is not an estimate of spending.",
+      "findings": [12404, 12410, 12442],
+      "missing": ["funded task orders", "county-GEO agreement and amendments", "invoice packages", "payment history", "current rates and fee"]
+    },
+    "LASALLE": {
+      "facilities": ["Alexandria Staging Facility", "Central Louisiana ICE Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "LaSalle Economic Development District",
+      "current_piid": "DROIGSA-07-0015",
+      "predecessor_piid": null,
+      "geo_role": "ICE modification identifies Geo Group as Sub-K; local agreement passes operating duties and the ICE per diem to The GEO Group, Inc.",
+      "terms": "Same ICE per diem and same ICE-originated price adjustment; ICE/LEDD inspections; local term linked to continuing IGSA; 2010 tiered administrative fee.",
+      "amounts": {
+        "fiscal_year": 2023,
+        "ice_revenue": 39802562,
+        "geo_labeled_expenditure": 39802794,
+        "administrative_geo_income": 180000,
+        "expenditure_minus_revenue": 232
+      },
+      "amount_scope": "Same-year audited line items for one shared chain. The $232 mismatch prevents an exact same-dollar pass-through claim; fee is separate.",
+      "findings": [12407, 12410, 12435, 12436, 12437],
+      "missing": ["federal base and task orders", "post-2010 local amendments", "monthly invoices and checks", "$232 reconciliation"]
+    },
+    "CHARLTON": {
+      "facilities": ["D. Ray James Correctional Facility", "Folkston ICE Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "County of Charlton",
+      "current_piid": "EROIGSA-17-0002",
+      "predecessor_piid": null,
+      "geo_role": "ICE P00022 identifies GEO as subcontractor; county agreements assign facility operation to GEO.",
+      "terms": "P00022 period 2022-02-16 through 2027-02-15; county quarterly audit; bilateral 30-day convenience termination; compensation and county fee publicly redacted.",
+      "amounts": {
+        "federal_amount": null,
+        "downstream_geo_amount": null,
+        "county_fee": null
+      },
+      "amount_scope": "No attributable amount recovered.",
+      "findings": [12405, 12410, 12439],
+      "missing": ["federal base and task orders", "payment history", "unredacted compensation schedules", "county ledger and invoices", "later amendments"]
+    },
+    "CLEARFIELD": {
+      "facilities": ["Moshannon Valley Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "County of Clearfield",
+      "current_piid": "70CDCR21DIG000012",
+      "predecessor_piid": null,
+      "geo_role": "ICE modification says The GEO Group, Inc. submitted the October 2024 request for equitable adjustment.",
+      "terms": "P00014-P00016 approve rate changes effective 2024-09-29; public values are redacted.",
+      "amounts": {
+        "year": 2024,
+        "geo_ice_pass_through_account": 4687231,
+        "administrative_fee_from_geo": 166667,
+        "administrative_fee_budget_2025": 200000,
+        "administrative_fee_budget_2026": 200000
+      },
+      "amount_scope": "County budget accounts only. Direction/sign of $4,687,231 is unresolved; it is not an established ICE-to-GEO payment and is not netted with the fee.",
+      "findings": [12408, 12410, 12441],
+      "missing": ["federal base and task orders", "county-GEO agreement and amendments", "general ledger and checks", "invoices", "accounting-sign explanation"]
+    },
+    "EVANGELINE": {
+      "facilities": ["Pine Prairie ICE Processing Center", "South Louisiana ICE Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "Evangeline Parish Sheriff's Office",
+      "current_piid": "EROIGSA-15-0006",
+      "predecessor_piid": null,
+      "geo_role": "ICE modifications identify GEO as subcontractor; local audit ties the Prisoner Maintenance Fund to the parish-GEO agreement.",
+      "terms": "Reviewed modifications extend performance through 2025-06-28 and address wage/rate adjustments; amounts are redacted.",
+      "amounts": {
+        "fiscal_year": 2024,
+        "fund_inmates_additions": 39454943,
+        "fund_other_settlements_reductions": 39454943,
+        "accounts_payable": 5648971
+      },
+      "amount_scope": "Fiduciary fund lines for one shared chain. The transaction lines do not independently name ICE as payer or GEO as payee.",
+      "findings": [12406, 12410, 12438],
+      "missing": ["federal base and task orders", "local GEO agreement and amendments", "payer/payee ledger", "checks or EFTs", "fee and rate schedules"]
+    },
+    "MONTGOMERY": {
+      "facilities": ["Joe Corley Processing Center"],
+      "federal_buyer": "U.S. Immigration and Customs Enforcement",
+      "public_prime": "County of Montgomery",
+      "public_prime_uei": "DR3UM2VRE4D7",
+      "public_prime_cage": "48W46",
+      "current_piid": "70CDCR18DIG000013",
+      "predecessor_piid": "DROIGSA-08-0030",
+      "geo_role": "P00040 says GEO submitted the county's REA/SCA adjustment; the 2013 county contract names GEO Corrections and Detentions, LLC as operator.",
+      "terms": "Written funded orders only; actual-detainee-day payment basis; 1,050 ICE-exclusive beds; public P00040 period ends 2026-01-14; 2013 local agreement passes the same ICE/USMS per diem to GEO net of the county fee.",
+      "amounts": {
+        "fiscal_year_2025_mixed_ice_usms_revenue": 43194467,
+        "fiscal_year_2025_mixed_ice_usms_operations_expenditure": 43194467,
+        "bed_day_rate_effective_2025_11_01": 82.56,
+        "monthly_transportation_rate_effective_2025_11_01": 228019.07,
+        "retroactive_task_order_payment": 8137.37,
+        "historical_2013_annual_administrative_fee": 500000
+      },
+      "amount_scope": "The FY2025 fund combines ICE and USMS; rates are not expenditures; retroactive payment is discrete; $500,000 is historical and not presumed current. None are summed.",
+      "structured_coverage": {
+        "highergov_exact_award_id": [],
+        "usaspending_exact_legal_recipient_dhs": [],
+        "sam_local_entity_match": {
+          "uei": "DR3UM2VRE4D7",
+          "cage": "48W46",
+          "legal_business_name": "COUNTY OF MONTGOMERY"
+        },
+        "live_sam_award_query": "not run"
+      },
+      "findings": [12410, 12620, 12621, 12622, 12623, 12624, 12625, 12626, 12627, 12628, 12629, 12660, 12661],
+      "missing": ["current task orders", "invoices and payment history", "post-2013 county-GEO amendments", "current county fee", "ICE/USMS allocation within Fund 222"]
+    }
+  },
+  "document_acquisition_leads": [
+    {
+      "lead_id": 57966,
+      "scope": "Missing base instruments, task orders, local operator agreements, amendments, control and fee terms for the original five paths."
+    },
+    {
+      "lead_id": 57974,
+      "scope": "Payment attribution, ledgers, invoices, checks/EFTs, FSRS and federal obligation reconciliation for the original five paths."
+    },
+    {
+      "lead_id": 60026,
+      "scope": "Current Joe Corley ICE task orders, invoices, and post-2013 county-GEO amendments."
+    }
+  ],
+  "verification": {
+    "verified_by": "agent:geo_igsa_visible",
+    "existing_findings_verified": [12404, 12405, 12406, 12407, 12408, 12410, 12435, 12436, 12437, 12438, 12439, 12441, 12442],
+    "new_findings_verified": [12620, 12621, 12622, 12623, 12624, 12625, 12626, 12627, 12628, 12629, 12660, 12661],
+    "left_unverified": [12443],
+    "reason_left_unverified": "The exact API payloads are preserved in finding evidence, but the original five-chain raw temp outputs were not durable in this run and were not personally re-executed."
+  },
+  "primary_source_urls": {
+    "sec_2025_10k": "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm",
+    "karnes_ice": "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR24DIG000018_BASE-P00001_KarnesCoResidentialCntr_IGSA_KarnesCityTX.pdf",
+    "charlton_ice": "https://www.ice.gov/doclib/foia/detFacContracts/EROIGSA170002_P00022_FolkstonIPC_CharlstonCo_IGSA_FolkstonGA.pdf",
+    "evangeline_ice": "https://www.ice.gov/doclib/foia/detFacContracts/EROIGSA150006_P00034-37_SouthLouisiana_PinePrairieLA.pdf",
+    "lasalle_ice": "https://www.ice.gov/doclib/foia/detFacContracts/DROIGSA-07-0015_P00050-P00051.pdf",
+    "moshannon_ice": "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR21DIG000012_P00014-16_MoshannonValleyPC_PA.pdf",
+    "joe_corley_ice_base": "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR18DIG000013_P00001_JoeCorleyDet_IGSA_ConroeTX.pdf",
+    "joe_corley_p00040": "https://public.destinyhosted.com/montgdocs/2025/CCREG/20251209_1578/28487_Joe_Corley_5.1.1-P00040-70CDCR18DIG000013.pdf",
+    "joe_corley_county_geo": "https://cdn.muckrock.com/foia_files/2017/05/16/Contract_with_GEO_Group2.pdf",
+    "montgomery_fy2025_acfr": "https://public.destinyhosted.com/montgdocs/2026/CCREG/20260326_1585/29154_Annual_Comprehensive_Financial_Report_2025.pdf"
+  }
+}

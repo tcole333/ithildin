@@ -1,0 +1,194 @@
+{
+  "profile": "geo-group",
+  "analysis_run_id": 93,
+  "skill": "audit-contracts",
+  "competition_group": "corecivic-fy2025-ice-acceleration",
+  "evidence_cutoff": "2026-07-14",
+  "method": "ACH by least evidence against; consistent counts do not by themselves rank hypotheses",
+  "denominator_correction": {
+    "finding_ids_corrected": [12413, 12449],
+    "prior_label": "GEO parent direct-recipient row",
+    "correct_label": "USAspending GEO parent hierarchy, including B.I. Incorporated",
+    "fy2024": {
+      "consolidated_hierarchy": "747403018.30",
+      "geo_legal_recipient": "459086420.56",
+      "bi_incorporated": "288316597.74"
+    },
+    "fy2025": {
+      "consolidated_hierarchy": "811728540.32",
+      "geo_legal_recipient": "621386485.36",
+      "bi_incorporated": "190342054.96"
+    },
+    "interpretive_rule": "The hierarchy row and B.I. row are not independent peers and must not both be used to calculate an independent cohort baseline."
+  },
+  "hypotheses": [
+    {
+      "id": 343,
+      "is_null": false,
+      "status": "investigating",
+      "title": "A few CoreCivic-specific new or noncompeted activations account for disproportionate FY2025 growth",
+      "run_93_assessment": "Raw concentration prediction is met; persistence after capacity/rate/service adjustment is unresolved.",
+      "consistent": 6,
+      "inconsistent": 0,
+      "neutral": 4,
+      "not_applicable": 0,
+      "unevaluated": 5,
+      "total_evaluated": 10,
+      "inconsistency_ratio": 0.0
+    },
+    {
+      "id": 344,
+      "is_null": true,
+      "status": "investigating",
+      "title": "Sector-wide urgent demand was allocated broadly in proportion to ready detention capacity",
+      "run_93_assessment": "H0 is preserved and receives new coarse design-capacity support; ready-bed, rate, geography, service, activation-date, occupancy, and channel controls remain incomplete.",
+      "consistent": 5,
+      "inconsistent": 0,
+      "neutral": 5,
+      "not_applicable": 0,
+      "unevaluated": 5,
+      "total_evaluated": 10,
+      "inconsistency_ratio": 0.0
+    },
+    {
+      "id": 345,
+      "is_null": false,
+      "status": "investigating",
+      "title": "Federal fiscal obligation timing exaggerates CoreCivic's FY2025 acceleration",
+      "run_93_assessment": "Material fiscal-boundary effects are supported, but calendar actions remain obligations rather than service-period-aligned outlays or expenses.",
+      "consistent": 5,
+      "inconsistent": 0,
+      "neutral": 3,
+      "not_applicable": 1,
+      "unevaluated": 6,
+      "total_evaluated": 8,
+      "inconsistency_ratio": 0.0
+    }
+  ],
+  "run_93_evidence_matrix_updates": [
+    {
+      "finding_id": 12782,
+      "hypothesis_id": 343,
+      "assessment": "neutral",
+      "exact_basis": "CoreCivic new direct-site FY2025 obligations/design bed 20858.2472; GEO 21671.0258; a 3.8967% difference. The proxy lacks the remaining controls specified by hypothesis 343."
+    },
+    {
+      "finding_id": 12782,
+      "hypothesis_id": 344,
+      "assessment": "consistent",
+      "exact_basis": "CoreCivic new direct-site FY2025 obligations/design bed 20858.2472; GEO 21671.0258; the near-parity coarse proxy is consistent with capacity-scaled allocation but does not confirm ready-capacity proportionality."
+    },
+    {
+      "finding_id": 12782,
+      "hypothesis_id": 345,
+      "assessment": "not_applicable",
+      "exact_basis": "The design-bed calculation does not measure fiscal timing or service-period alignment."
+    }
+  ],
+  "decisive_or_bounded_evidence": [
+    {
+      "finding_id": 12775,
+      "claim": "CoreCivic exact FY2025 direct-ICE increase is 126323664.15; California City and Midwest contribute 74943682.25, or 59.3267%."
+    },
+    {
+      "finding_id": 12774,
+      "claim": "California City was a one-offer, not-competed, only-one-source urgency letter contract and was definitized on 2025-09-26 for a two-year ordering period."
+    },
+    {
+      "finding_id": 12777,
+      "claim": "The bounded public search did not expose the signed J&A, market research, alternatives analysis, price memorandum, CLIN schedule, or exceptional-circumstances determination; this is not evidence the records do not exist."
+    },
+    {
+      "finding_id": 12778,
+      "claim": "Six 2025-09-26 through 2025-09-30 CoreCivic actions total 80338431.54; calendar-action growth is 48.6418% versus fiscal-year growth of 70.3969%."
+    },
+    {
+      "finding_id": 12449,
+      "claim": "GEO and CoreCivic had multiple activations, while 50621001.76 of MTC's 50621251.76 FY2025 direct total was tied to Imperial task orders; IGSA activations are omitted from direct-recipient ledgers."
+    },
+    {
+      "finding_id": 12782,
+      "claim": "CoreCivic received 74943682.25 across 3593 new-site design beds and GEO received 60678872.24 across 2800, producing 20858.2472 and 21671.0258 per design bed."
+    },
+    {
+      "finding_id": 12727,
+      "claim": "Seven DHS public-prime/private-operator chains are verified, establishing recipient-route heterogeneity but not a uniform downstream amount."
+    }
+  ],
+  "least_evidence_against_result": {
+    "ranking": "tie",
+    "reason": "Hypotheses 343, 344, and 345 each have zero inconsistent evaluations. Supportive-cell counts do not break an ACH tie.",
+    "preserve_h0": true,
+    "prohibited_inferences": [
+      "favoritism",
+      "political influence",
+      "coordination",
+      "procurement illegality",
+      "improper fiscal-year timing"
+    ]
+  },
+  "missing_california_city_file_discriminators": [
+    {
+      "record": "signed J&A and approval",
+      "tests": ["serious injury and urgency rationale", "one-source basis", "period beyond one year", "approval chronology"]
+    },
+    {
+      "record": "market research and alternative-facility analysis",
+      "tests": ["ready-bed availability", "GEO/MTC/public alternatives", "geography and service fit", "time needed for competition"]
+    },
+    {
+      "record": "IGCE, CLIN schedule, and price-negotiation memorandum",
+      "tests": ["fixed/startup/per-diem components", "peer price benchmarking", "transport and medical scope", "future-period funding"]
+    },
+    {
+      "record": "definitization schedule and contractor proposal",
+      "tests": ["September 2025 value increase", "two-year ordering structure", "cost/pricing support", "service-period allocation"]
+    },
+    {
+      "record": "exceptional-circumstances determination",
+      "tests": ["documented basis for an urgency period beyond one year", "successor-competition timing"]
+    }
+  ],
+  "novelty_gate": {
+    "result": "no_new_hunch",
+    "candidates": [
+      {
+        "candidate": "near-parity direct new-site obligations per design bed",
+        "novel": true,
+        "falsifiable": true,
+        "independent_audited_contexts": 2,
+        "three_context_threshold_met": false,
+        "existing_hypothesis_overlap": [344],
+        "disposition": "recorded as finding 12782 and used to update H0; no new hypothesis"
+      },
+      {
+        "candidate": "GEO parent-hierarchy/B.I. denominator overlap",
+        "novel": true,
+        "falsifiable": true,
+        "independent_audited_contexts": 1,
+        "three_context_threshold_met": false,
+        "existing_hypothesis_overlap": [],
+        "disposition": "methodological correction to findings 12413 and 12449; not a causal hunch"
+      },
+      {
+        "candidate": "direct-prime versus public-prime/IGSA visibility",
+        "novel": false,
+        "falsifiable": true,
+        "independent_audited_contexts": 7,
+        "three_context_threshold_met": true,
+        "existing_hypothesis_overlap": [341, 342],
+        "disposition": "already covered by findings 12668 and 12727; no duplicate hypothesis"
+      }
+    ]
+  },
+  "database_outputs": {
+    "finding_created": 12782,
+    "findings_corrected": [12413, 12449],
+    "findings_verified_in_run": [12413, 12415, 12444, 12445, 12446, 12447, 12448, 12449, 12782],
+    "hypotheses_created": [],
+    "leads_created": [],
+    "human_actions_created": [],
+    "existing_human_action": 53,
+    "existing_infra_request": 152
+  }
+}

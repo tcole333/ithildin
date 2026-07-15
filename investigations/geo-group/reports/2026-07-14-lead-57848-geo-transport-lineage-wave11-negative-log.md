@@ -1,0 +1,15 @@
+# GEO Transport lineage negative and boundary log
+
+- Florida's live official detail for document `P07000109960`, retrieved July 14, 2026, states **No Events** and **No Name History**. This is a Florida registry-record boundary, not proof that no transaction or unrecorded event occurred elsewhere.
+- The SEC submissions record for CIK `0001517753` has an empty `formerNames` array. This corroborates the absence of an SEC-recorded former name but is not independent proof that no historical trade name existed.
+- The March 2026 SAM public extract lists `dba_name: null`. No DBA alias was added.
+- The unified registry exact-name search returned only the Florida record. Because the local registry is not a complete census of all foreign qualifications, this was not converted into a claim that GEO Transport is registered only in Florida.
+- The unified registry filing-history table returned zero rows for registry entity `910340`, while the live Sunbiz page lists annual-report images for 2008 through 2025. The live record controls; the local filing-history gap was not interpreted as an absence of filings.
+- The live Sunbiz page was accessible through the interactive web retrieval tool, but direct `curl` returned HTTP 403. The official-page transcription and the independently ingested Florida bulk record are archived; papercut `#1056` records the access limitation.
+- The Florida bulk ingester captures only six embedded officer slots even though the companion principal file and live page contain fourteen current listed officers. The live official titles control; papercut `#1059` records the continuation-record ingestion gap.
+- The current SEC submissions metadata still displays `621 Northwest 53rd Street, Suite 700, Boca Raton, FL 33487`, while current Sunbiz, SAM, and USAspending records use `4955 Technology Way`. The older SEC filer address was retained in the status matrix but not promoted as the current entity address.
+- Exhibit 21 establishes direct-or-indirect ultimate ownership by GEO but does not disclose the exact immediate-parent rung. Exhibit 22 establishes subsidiary-guarantor status, not immediate ownership. USAspending's parent-recipient field establishes federal recipient grouping. The immediate parent remains unresolved.
+- The two USAspending ICE records were dependency-collapsed as one legal-recipient attribution chain. Existing finding `#12474` controls the two-award total; this trace does not restate or recompute contract totals.
+- Shared headquarters, an officer listing, and a parent-recipient field were not treated as evidence that any listed officer personally participated in a contract or operational decision.
+- Corporate Creations Network Inc. is a mass-market registered agent. Its appearance was not treated as a probative relationship and no new agent entity or connection was created.
+- No case-only alias, duplicate merge, new entity, new speculative connection, HigherGov query, live SAM query, paid PACER lookup, headless worker, or `auto_leads` run was performed.

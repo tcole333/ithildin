@@ -1,0 +1,534 @@
+version: 1
+updated: 2026-07-12
+
+archives:
+  wayback:
+    endpoint: https://web.archive.org/cdx/search/cdx
+    mode: automatic
+    purpose: Exact-URL version discovery and replay
+  commoncrawl:
+    endpoint: https://index.commoncrawl.org/collinfo.json
+    mode: automatic_fallback
+    purpose: Exact-URL WARC recovery when Wayback has no substantive replay
+  archive_is:
+    endpoint: https://archive.is/
+    mode: manual_url_only
+    purpose: User-supplied snapshot links; no dependable public API
+
+# The initial backfill scans only Epstein-specific material. Other investigation
+# profiles contain thousands of unrelated news links and would pollute this corpus.
+repository_seed_paths:
+  - investigations/epstein
+  - research
+  - content/articles
+  - content/dossiers
+
+# Reproducible URL inventories for stories that automated discovery misses,
+# especially publisher URLs whose paths contain only opaque article IDs.
+candidate_seed_files:
+  - investigations/epstein/reporting_historical_seed.jsonl
+  - investigations/epstein/reporting_multilingual_seed.jsonl
+  - investigations/epstein/reporting_early_seed.jsonl
+  - investigations/epstein/reporting_palm_beach_post_archive_seed.jsonl
+  - investigations/epstein/reporting_historical_2009_2018_seed.jsonl
+  - investigations/epstein/reporting_date_backfill_seed.jsonl
+
+discovery_pages:
+  - url: https://www.antaranews.com/tag/jeffrey-epstein
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.antaranews.com/tag/jeffrey-epstein/2
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.antaranews.com/tag/jeffrey-epstein/3
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.antaranews.com/tag/jeffrey-epstein/4
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.antaranews.com/tag/jeffrey-epstein/5
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.antaranews.com/tag/jeffrey-epstein/6
+    publisher: ANTARA News
+    language: id
+    queries: [Epstein, Maxwell]
+    link_regex: /berita/
+  - url: https://www.aajtak.in/topic/jeffrey-epstein
+    publisher: AajTak
+    language: hi
+    queries: [एपस्टीन, Epstein, मैक्सवेल]
+    link_regex: /story/
+  - url: https://telex.hu/cimke/epstein
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=2
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=3
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=4
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=5
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=6
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=7
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://telex.hu/cimke/epstein-aktak?oldal=8
+    publisher: Telex
+    language: hu
+    queries: [Epstein, Maxwell]
+  - url: https://www.digi24.ro/eticheta/dosarele-epstein
+    publisher: Digi24
+    language: ro
+    queries: [Epstein, Maxwell]
+    link_regex: /stiri/
+  - url: https://www.digi24.ro/eticheta/dosarele-epstein?p=2
+    publisher: Digi24
+    language: ro
+    queries: [Epstein, Maxwell]
+    link_regex: /stiri/
+  - url: https://www.novinky.cz/tag/jeffrey-epstein-15232
+    publisher: Novinky.cz
+    language: cs
+    queries: [Epstein, Maxwell]
+    link_regex: /clanek/
+  - url: https://www.kathimerini.gr/tag/tzefri-epstain/
+    publisher: Kathimerini
+    language: el
+    queries: [Επσταϊν, Έπσταϊν, Μάξγουελ]
+  - url: https://www.in.gr/tags/tzefri-epstain/
+    publisher: in.gr
+    language: el
+    queries: [Επσταϊν, Έπσταϊν, Μάξγουελ]
+    link_regex: /20[0-9]{2}/
+  - url: https://wyborcza.pl/0%2C128956.html?tag=Ghislaine+Maxwell
+    publisher: Gazeta Wyborcza
+    language: pl
+    queries: [Epstein, Maxwell]
+  - url: https://wiadomosci.onet.pl/ghislaine-maxwell
+    publisher: Onet
+    language: pl
+    queries: [Epstein, Maxwell]
+  - url: https://nos.nl/collectie/14014-nasleep-epstein-schandaal
+    publisher: NOS Nieuws
+    language: nl
+    queries: [Epstein, Maxwell]
+    link_regex: /artikel/
+  - url: https://www.tagesschau.de/thema/jeffrey_epstein
+    publisher: Tagesschau
+    language: de
+    queries: [Epstein, Maxwell]
+    link_regex: \.html$
+  - url: https://www.zeit.de/thema/jeffrey-epstein
+    publisher: Die Zeit
+    language: de
+    queries: [Epstein, Maxwell]
+    link_regex: zeit\.de/
+  - url: https://www.infobae.com/tag/jeffrey-epstein/
+    publisher: Infobae
+    language: es
+    queries: [Epstein, Maxwell]
+    link_regex: /20[0-9]{2}/
+  - url: https://www.avisen.dk/s%C3%B8g/epstein/1
+    publisher: Avisen.dk
+    language: da
+    queries: [Epstein]
+  - url: https://www.aa.com.tr/tr/epstein-belgeleri
+    publisher: Anadolu Ajansı
+    language: tr
+    queries: [Epstein]
+    link_regex: /tr/
+  - url: https://www.kommersant.ru/search/results?search_query=%D0%AD%D0%BF%D1%88%D1%82%D0%B5%D0%B9%D0%BD
+    publisher: Kommersant
+    language: ru
+    queries: [Эпштейн, Epstein, Максвелл]
+    link_regex: /doc/
+  - url: https://www.independentarabia.com/search/site/%D8%A5%D8%A8%D8%B3%D8%AA%D9%8A%D9%86
+    publisher: Independent Arabia
+    language: ar
+    queries: [إبستين, ابستين, Epstein, Maxwell]
+    link_regex: /node/
+  - url: https://www.miamiherald.com/topics/jeffrey-epstein/
+    publisher: Miami Herald
+    language: en
+    queries: [epstein, maxwell]
+  - url: https://apnews.com/search?q=Jeffrey%20Epstein
+    publisher: Associated Press
+    language: en
+    queries: [epstein, maxwell]
+    link_regex: /article/
+  - url: https://www.cbsnews.com/tag/jeffrey-epstein/
+    publisher: CBS News
+    language: en
+    queries: [epstein, maxwell]
+    link_regex: /(news|video)/
+  - url: https://www.lemonde.fr/affaire-epstein/
+    publisher: Le Monde
+    language: fr
+    queries: [epstein, maxwell]
+  - url: https://www1.folha.uol.com.br/folha-topicos/jeffrey-epstein/
+    publisher: Folha de S.Paulo
+    language: pt
+    queries: [epstein, maxwell]
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-4.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-5.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-6.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-7.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-8.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-9.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-10.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-11.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-12.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-13.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-14.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-15.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-16.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-17.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-18.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-19.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-20.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://oglobo.globo.com/tudo-sobre/personalidade/jeffrey-epstein/index/feed/pagina-21.ghtml
+    publisher: O Globo
+    language: pt
+    queries: [epstein, maxwell]
+    link_regex: \.ghtml$
+  - url: https://www.theguardian.com/us-news/jeffrey-epstein
+    publisher: The Guardian
+    language: en
+    queries: [epstein, maxwell]
+  - url: https://elpais.com/noticias/jeffrey-edward-epstein/
+    publisher: El País
+    language: es
+    queries: [epstein, maxwell]
+  - url: https://www.repubblica.it/protagonisti/jeffrey_epstein/
+    publisher: La Repubblica
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.corriere.it/argomenti/epstein/
+    publisher: Corriere della Sera
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.corriere.it/argomenti/epstein/2/
+    publisher: Corriere della Sera
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.corriere.it/argomenti/epstein/3/
+    publisher: Corriere della Sera
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.corriere.it/argomenti/epstein/4/
+    publisher: Corriere della Sera
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.corriere.it/argomenti/epstein/5/
+    publisher: Corriere della Sera
+    language: it
+    queries: [epstein, maxwell]
+  - url: https://www.ynet.co.il/topics/%D7%92%27%D7%A4%D7%A8%D7%99_%D7%90%D7%A4%D7%A9%D7%98%D7%99%D7%99%D7%9F
+    publisher: Ynet
+    language: he
+    queries: [אפשטיין, מקסוול, epstein, maxwell]
+    link_regex: /article/
+  - url: https://udn.com/search/word/2/%E8%89%BE%E6%99%AE%E6%96%AF%E5%9D%A6
+    publisher: United Daily News
+    language: zh
+    queries: [艾普斯坦, epstein, maxwell]
+    link_regex: /news/story/
+
+# Within these tightly scoped files, reporting may be useful operational context
+# even when "Epstein" is not repeated in the sentence surrounding the link.
+contextual_seed_paths:
+  - investigations/epstein
+  - research/softbank-caper-evidence.md
+  - research/RELATED_INVESTIGATIONS.md
+
+# Discovery terms are intentionally broader than "Jeffrey Epstein". They are
+# inputs for periodic searches and licensed-database queries, not factual claims.
+search_terms:
+  core:
+    - '"Jeffrey Epstein"'
+    - '"Ghislaine Maxwell" AND Epstein'
+    - 'Epstein AND ("Southern Trust" OR "Financial Trust")'
+    - 'Epstein AND (JPMorgan OR "Deutsche Bank")'
+    - 'Epstein AND (Wexner OR "Leon Black")'
+    - 'Epstein AND (USVI OR "Virgin Islands")'
+  multilingual:
+    - '"Jeffrey Epstein" OR "affaire Epstein"'
+    - '"Jeffrey Epstein" OR "caso Epstein"'
+    - '"Jeffrey Epstein" OR "Fall Epstein"'
+    - '"Jeffrey Epstein" OR "Epstein-saken" OR "Epstein-fallet"'
+    - '"Jeffrey Epstein" OR "zaak-Epstein"'
+    - '"Jeffrey Epstein" OR "caso Epstein" OR "caso de Epstein"'
+    - '"Jeffrey Epstein" OR "Джеффри Эпштейн"'
+    - '"Jeffrey Epstein" OR "ג׳פרי אפשטיין"'
+    - '"Jeffrey Epstein" OR "جيفري إبستين"'
+    - '"Jeffrey Epstein" OR "ジェフリー・エプスタイン"'
+    - '"Jeffrey Epstein" OR "제프리 엡스타인"'
+    - '"Jeffrey Epstein" OR "杰弗里·爱泼斯坦" OR "愛潑斯坦"'
+    - '"Jeffrey Epstein" OR "afera Epsteina"'
+    - '"Jeffrey Epstein" OR "Epstein davası"'
+    - '"Jeffrey Epstein" OR "Τζέφρι Έπσταϊν"'
+
+# This is a discovery allowlist, not an endorsement. Source-level assessments
+# can be refined in the database; item- and author-level caveats remain separate.
+publishers:
+  - {domain: miamiherald.com, name: Miami Herald, country: US, language: en, source_type: secondary_quality, reliability_notes: "Core Perversion of Justice investigation; verify each claim against primary evidence."}
+  - {domain: palmbeachpost.com, name: Palm Beach Post, country: US, language: en, source_type: secondary_quality}
+  - {domain: nytimes.com, name: New York Times, country: US, language: en, source_type: secondary_compromised, reliability_notes: "Apply author-level review.", epstein_connection: "Landon Thomas Jr. acted as a deal broker while covering Epstein."}
+  - {domain: wsj.com, name: Wall Street Journal, country: US, language: en, source_type: secondary_quality}
+  - {domain: bloomberg.com, name: Bloomberg, country: US, language: en, source_type: secondary_quality}
+  - {domain: reuters.com, name: Reuters, country: GB, language: en, source_type: wire_service}
+  - {domain: apnews.com, name: Associated Press, country: US, language: en, source_type: wire_service}
+  - {domain: washingtonpost.com, name: Washington Post, country: US, language: en, source_type: secondary_quality}
+  - {domain: propublica.org, name: ProPublica, country: US, language: en, source_type: secondary_quality}
+  - {domain: cnn.com, name: CNN, country: US, language: en, source_type: broadcast}
+  - {domain: cbsnews.com, name: CBS News, country: US, language: en, source_type: broadcast}
+  - {domain: nbcnews.com, name: NBC News, country: US, language: en, source_type: broadcast}
+  - {domain: abcnews.go.com, name: ABC News, country: US, language: en, source_type: broadcast}
+  - {domain: npr.org, name: NPR, country: US, language: en, source_type: broadcast}
+  - {domain: cnbc.com, name: CNBC, country: US, language: en, source_type: broadcast}
+  - {domain: politico.com, name: Politico, country: US, language: en, source_type: secondary_quality}
+  - {domain: axios.com, name: Axios, country: US, language: en, source_type: secondary_quality}
+  - {domain: vanityfair.com, name: Vanity Fair, country: US, language: en, source_type: secondary_quality}
+  - {domain: newyorker.com, name: The New Yorker, country: US, language: en, source_type: secondary_quality}
+  - {domain: thedailybeast.com, name: The Daily Beast, country: US, language: en, source_type: secondary_quality}
+  - {domain: theintercept.com, name: The Intercept, country: US, language: en, source_type: secondary_quality}
+  - {domain: dropsitenews.com, name: Drop Site News, country: US, language: en, source_type: secondary_quality}
+  - {domain: realclearinvestigations.com, name: RealClearInvestigations, country: US, language: en, source_type: secondary_quality}
+  - {domain: businessinsider.com, name: Business Insider, country: US, language: en, source_type: secondary_quality}
+  - {domain: forbes.com, name: Forbes, country: US, language: en, source_type: secondary_quality}
+  - {domain: fortune.com, name: Fortune, country: US, language: en, source_type: trade_press}
+  - {domain: theguardian.com, name: The Guardian, country: GB, language: en, source_type: secondary_quality}
+  - {domain: bbc.com, name: BBC, country: GB, language: en, source_type: broadcast}
+  - {domain: bbc.co.uk, name: BBC, country: GB, language: en, source_type: broadcast}
+  - {domain: ft.com, name: Financial Times, country: GB, language: en, source_type: secondary_quality}
+  - {domain: independent.co.uk, name: The Independent, country: GB, language: en, source_type: secondary_quality}
+  - {domain: telegraph.co.uk, name: The Telegraph, country: GB, language: en, source_type: secondary_quality}
+  - {domain: timesofisrael.com, name: Times of Israel, country: IL, language: en, source_type: secondary_quality}
+  - {domain: haaretz.com, name: Haaretz, country: IL, language: en, source_type: secondary_quality}
+  - {domain: lemonde.fr, name: Le Monde, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: mediapart.fr, name: Mediapart, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: france24.com, name: France 24, country: FR, language: fr, source_type: broadcast}
+  - {domain: liberation.fr, name: Libération, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: lefigaro.fr, name: Le Figaro, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: leparisien.fr, name: Le Parisien, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: radiofrance.fr, name: Radio France, country: FR, language: fr, source_type: broadcast}
+  - {domain: franceinfo.fr, name: Franceinfo, country: FR, language: fr, source_type: broadcast}
+  - {domain: tf1info.fr, name: TF1 Info, country: FR, language: fr, source_type: broadcast}
+  - {domain: blast-info.fr, name: Blast, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: challenges.fr, name: Challenges, country: FR, language: fr, source_type: trade_press}
+  - {domain: euronews.com, name: Euronews, country: EU, language: multilingual, source_type: broadcast}
+  - {domain: france.tv, name: France Télévisions, country: FR, language: fr, source_type: broadcast}
+  - {domain: ouest-france.fr, name: Ouest-France, country: FR, language: fr, source_type: secondary_quality}
+  - {domain: rfi.fr, name: RFI, country: FR, language: multilingual, source_type: broadcast}
+  - {domain: letemps.ch, name: Le Temps, country: CH, language: fr, source_type: secondary_quality}
+  - {domain: spiegel.de, name: Der Spiegel, country: DE, language: de, source_type: secondary_quality}
+  - {domain: sueddeutsche.de, name: Süddeutsche Zeitung, country: DE, language: de, source_type: secondary_quality}
+  - {domain: zeit.de, name: Die Zeit, country: DE, language: de, source_type: secondary_quality}
+  - {domain: tagesschau.de, name: Tagesschau, country: DE, language: de, source_type: broadcast}
+  - {domain: dw.com, name: Deutsche Welle, country: DE, language: multilingual, source_type: broadcast}
+  - {domain: repubblica.it, name: La Repubblica, country: IT, language: it, source_type: secondary_quality}
+  - {domain: corriere.it, name: Corriere della Sera, country: IT, language: it, source_type: secondary_quality}
+  - {domain: nrc.nl, name: NRC, country: NL, language: nl, source_type: secondary_quality}
+  - {domain: volkskrant.nl, name: de Volkskrant, country: NL, language: nl, source_type: secondary_quality}
+  - {domain: aftenposten.no, name: Aftenposten, country: NO, language: 'no', source_type: secondary_quality}
+  - {domain: nrk.no, name: NRK, country: NO, language: 'no', source_type: broadcast}
+  - {domain: vg.no, name: VG, country: NO, language: 'no', source_type: secondary_quality}
+  - {domain: dn.no, name: Dagens Næringsliv, country: NO, language: 'no', source_type: trade_press}
+  - {domain: svt.se, name: SVT Nyheter, country: SE, language: sv, source_type: broadcast}
+  - {domain: dn.se, name: Dagens Nyheter, country: SE, language: sv, source_type: secondary_quality}
+  - {domain: dr.dk, name: DR Nyheder, country: DK, language: da, source_type: broadcast}
+  - {domain: politiken.dk, name: Politiken, country: DK, language: da, source_type: secondary_quality}
+  - {domain: yle.fi, name: Yle, country: FI, language: multilingual, source_type: broadcast}
+  - {domain: elpais.com, name: El País, country: ES, language: es, source_type: secondary_quality}
+  - {domain: clarin.com, name: Clarín, country: AR, language: es, source_type: secondary_quality}
+  - {domain: lanacion.com.ar, name: La Nación, country: AR, language: es, source_type: secondary_quality}
+  - {domain: eluniversal.com.mx, name: El Universal, country: MX, language: es, source_type: secondary_quality}
+  - {domain: publico.pt, name: Público, country: PT, language: pt, source_type: secondary_quality}
+  - {domain: folha.uol.com.br, name: Folha de S.Paulo, country: BR, language: pt, source_type: secondary_quality}
+  - {domain: oglobo.globo.com, name: O Globo, country: BR, language: pt, source_type: secondary_quality}
+  - {domain: ynet.co.il, name: Ynet, country: IL, language: he, source_type: secondary_quality}
+  - {domain: jpost.com, name: Jerusalem Post, country: IL, language: en, source_type: secondary_quality}
+  - {domain: aljazeera.net, name: Al Jazeera Arabic, country: QA, language: ar, source_type: broadcast}
+  - {domain: alarabiya.net, name: Al Arabiya, country: AE, language: ar, source_type: broadcast}
+  - {domain: independentarabia.com, name: Independent Arabia, country: SA, language: ar, source_type: secondary_quality}
+  - {domain: meduza.io, name: Meduza, country: LV, language: ru, source_type: secondary_quality}
+  - {domain: novayagazeta.eu, name: Novaya Gazeta Europe, country: EU, language: ru, source_type: secondary_quality}
+  - {domain: asahi.com, name: The Asahi Shimbun, country: JP, language: ja, source_type: secondary_quality}
+  - {domain: mainichi.jp, name: Mainichi Shimbun, country: JP, language: ja, source_type: secondary_quality}
+  - {domain: nikkei.com, name: Nikkei, country: JP, language: ja, source_type: trade_press}
+  - {domain: koreatimes.co.kr, name: The Korea Times, country: KR, language: ko, source_type: secondary_quality}
+  - {domain: thehindu.com, name: The Hindu, country: IN, language: en, source_type: secondary_quality}
+  - {domain: indianexpress.com, name: The Indian Express, country: IN, language: en, source_type: secondary_quality}
+  - {domain: abc.net.au, name: ABC News Australia, country: AU, language: en, source_type: broadcast}
+  - {domain: smh.com.au, name: Sydney Morning Herald, country: AU, language: en, source_type: secondary_quality}
+  - {domain: cbc.ca, name: CBC News, country: CA, language: en, source_type: broadcast}
+  - {domain: theglobeandmail.com, name: The Globe and Mail, country: CA, language: en, source_type: secondary_quality}
+  - {domain: icij.org, name: ICIJ, country: US, language: en, source_type: secondary_quality}
+  - {domain: occrp.org, name: OCCRP, country: global, language: en, source_type: secondary_quality}
+  - {domain: nature.com, name: Nature, country: GB, language: en, source_type: academic}
+  - {domain: time.com, name: TIME, country: US, language: en, source_type: secondary_quality}
+  - {domain: theatlantic.com, name: The Atlantic, country: US, language: en, source_type: secondary_quality}
+  - {domain: telemundo.com, name: Telemundo, country: US, language: es, source_type: broadcast}
+  - {domain: nymag.com, name: New York Magazine, country: US, language: en, source_type: secondary_quality}
+  - {domain: thesmokinggun.com, name: The Smoking Gun, country: US, language: en, source_type: document_publisher}
+  - {domain: forbesjapan.com, name: Forbes Japan, country: JP, language: ja, source_type: trade_press}
+  - {domain: afpbb.com, name: AFPBB News, country: JP, language: ja, source_type: wire_service}
+  - {domain: itmedia.co.jp, name: ITmedia News, country: JP, language: ja, source_type: trade_press}
+  - {domain: jbpress.ismedia.jp, name: JBpress, country: JP, language: ja, source_type: secondary_quality}
+  - {domain: cnn.co.jp, name: CNN Japan, country: JP, language: ja, source_type: broadcast}
+  - {domain: president.jp, name: President Online, country: JP, language: ja, source_type: secondary_quality}
+  - {domain: newsdig.tbs.co.jp, name: TBS News Dig, country: JP, language: ja, source_type: broadcast}
+  - {domain: wpb.shueisha.co.jp, name: Shūkan Playboy News, country: JP, language: ja, source_type: magazine}
+  - {domain: news.nate.com, name: Nate News, country: KR, language: ko, source_type: aggregator, reliability_notes: "Preserve original outlet lineage; aggregator delivery is not independent corroboration."}
+  - {domain: elnuevoherald.com, name: El Nuevo Herald, country: US, language: es, source_type: secondary_quality}
+  - {domain: elmundo.es, name: El Mundo, country: ES, language: es, source_type: secondary_quality}
+  - {domain: lavanguardia.com, name: La Vanguardia, country: ES, language: es, source_type: secondary_quality}
+  - {domain: elconfidencial.com, name: El Confidencial, country: ES, language: es, source_type: secondary_quality}
+  - {domain: infobae.com, name: Infobae, country: AR, language: es, source_type: secondary_quality}
+  - {domain: eltiempo.com, name: El Tiempo, country: CO, language: es, source_type: secondary_quality}
+  - {domain: latercera.com, name: La Tercera, country: CL, language: es, source_type: secondary_quality}
+  - {domain: elcomercio.pe, name: El Comercio, country: PE, language: es, source_type: secondary_quality}
+  - {domain: larepublica.pe, name: La República, country: PE, language: es, source_type: secondary_quality}
+  - {domain: estadao.com.br, name: O Estado de S. Paulo, country: BR, language: pt, source_type: secondary_quality}
+  - {domain: g1.globo.com, name: G1, country: BR, language: pt, source_type: broadcast}
+  - {domain: expresso.pt, name: Expresso, country: PT, language: pt, source_type: secondary_quality}
+  - {domain: nzz.ch, name: Neue Zürcher Zeitung, country: CH, language: de, source_type: secondary_quality}
+  - {domain: tagesanzeiger.ch, name: Tages-Anzeiger, country: CH, language: de, source_type: secondary_quality}
+  - {domain: derstandard.at, name: Der Standard, country: AT, language: de, source_type: secondary_quality}
+  - {domain: diepresse.com, name: Die Presse, country: AT, language: de, source_type: secondary_quality}
+  - {domain: lesoir.be, name: Le Soir, country: BE, language: fr, source_type: secondary_quality}
+  - {domain: rtbf.be, name: RTBF, country: BE, language: fr, source_type: broadcast}
+  - {domain: wyborcza.pl, name: Gazeta Wyborcza, country: PL, language: pl, source_type: secondary_quality}
+  - {domain: tvn24.pl, name: TVN24, country: PL, language: pl, source_type: broadcast}
+  - {domain: wiadomosci.onet.pl, name: Onet, country: PL, language: pl, source_type: secondary_quality}
+  - {domain: idnes.cz, name: iDNES, country: CZ, language: cs, source_type: secondary_quality}
+  - {domain: aktualne.cz, name: Aktuálně.cz, country: CZ, language: cs, source_type: secondary_quality}
+  - {domain: novinky.cz, name: Novinky.cz, country: CZ, language: cs, source_type: secondary_quality}
+  - {domain: telex.hu, name: Telex, country: HU, language: hu, source_type: secondary_quality}
+  - {domain: digi24.ro, name: Digi24, country: RO, language: ro, source_type: broadcast}
+  - {domain: hotnews.ro, name: HotNews.ro, country: RO, language: ro, source_type: secondary_quality}
+  - {domain: aajtak.in, name: AajTak, country: IN, language: hi, source_type: broadcast}
+  - {domain: newskosh.com, name: NewsKosh, country: IN, language: hi, source_type: aggregator, reliability_notes: "Preserve original outlet lineage; aggregator delivery is not independent corroboration."}
+  - {domain: antaranews.com, name: ANTARA News, country: ID, language: id, source_type: wire_service}
+  - {domain: kompas.com, name: Kompas.com, country: ID, language: id, source_type: secondary_quality}
+  - {domain: kathimerini.gr, name: Kathimerini, country: GR, language: el, source_type: secondary_quality}
+  - {domain: in.gr, name: in.gr, country: GR, language: el, source_type: secondary_quality}
+  - {domain: hurriyet.com.tr, name: Hürriyet, country: TR, language: tr, source_type: secondary_quality}
+  - {domain: cumhuriyet.com.tr, name: Cumhuriyet, country: TR, language: tr, source_type: secondary_quality}
+  - {domain: rbc.ru, name: RBC, country: RU, language: ru, source_type: secondary_compromised, reliability_notes: "Verify politically sensitive claims independently; Russian media environment is heavily constrained."}
+  - {domain: kommersant.ru, name: Kommersant, country: RU, language: ru, source_type: secondary_compromised, reliability_notes: "Verify politically sensitive claims independently; Russian media environment is heavily constrained."}
+  - {domain: nhk.or.jp, name: NHK, country: JP, language: ja, source_type: broadcast}
+  - {domain: yna.co.kr, name: Yonhap News Agency, country: KR, language: ko, source_type: wire_service}
+  - {domain: scmp.com, name: South China Morning Post, country: HK, language: en, source_type: secondary_quality}
+  - {domain: rthk.hk, name: RTHK, country: HK, language: multilingual, source_type: broadcast}
+  - {domain: ltn.com.tw, name: Liberty Times, country: TW, language: zh, source_type: secondary_quality}
+  - {domain: udn.com, name: United Daily News, country: TW, language: zh, source_type: secondary_quality}
+  - {domain: straitstimes.com, name: The Straits Times, country: SG, language: en, source_type: secondary_quality}
+  - {domain: rappler.com, name: Rappler, country: PH, language: en, source_type: secondary_quality}
+  - {domain: hindustantimes.com, name: Hindustan Times, country: IN, language: en, source_type: secondary_quality}
+  - {domain: timesofindia.indiatimes.com, name: Times of India, country: IN, language: en, source_type: secondary_quality}
+  - {domain: news24.com, name: News24, country: ZA, language: en, source_type: secondary_quality}
+  - {domain: nation.africa, name: Nation Africa, country: KE, language: en, source_type: secondary_quality}
+  - {domain: kyivindependent.com, name: Kyiv Independent, country: UA, language: en, source_type: secondary_quality}

@@ -22,6 +22,8 @@ Case-specific context for agents working on the Epstein investigation profile. T
 | FBI Files | `ingest_fbi_files.py` | 8,150 docs | FBI release (Textract OCR, FTS5), EFTA IDs + named exhibits (Flight Log, Contact Book, Evidence List from US v. Maxwell). Source key: `fbi` |
 | EpsteinExposed | `ingest_epstein_exposed.py` | Persons, docs, flights | Person profiles/aliases; orthogonal to document corpora |
 | DOJ Vol 11 | `query_doj.py` | 331K OCR'd pages | FALLBACK — strict subset of Kabasshouse. DB at `~/projects/epstein-docs/output/documents.db` (external path) |
+| Reporting knowledge layer | `reporting_corpus.py` | Continuously updated | Versioned reporting, atomic attributed claims, source lineage, and primary-evidence review. Secondary claims are not findings. |
+| DOJ/SEC releases | `government_release_corpus.py` | DOJ API + SEC 1997-present | Versioned official press releases; primary evidence of agency statements, not automatic proof of allegations. |
 
 **Same EFTA page in multiple corpora = one source re-OCR'd, NOT corroboration.** Cite the corpus you actually read (usually `kabass`).
 
@@ -39,6 +41,17 @@ Normalized, **regenerable** analysis layer built from the corpora. Schema contra
 | **Provenance** | sqlite (`epstein_derived.db`) | `evidence_item` (1.42M pages) / `evidence_representation` / `source_crosswalk` (591K LMSBAND EFTA edges). |
 
 A derived fact becomes a curated finding ONLY via `findings_tracker.py add` (never a direct cross-DB write) — it then gets confidence caps, evidence, and a `finding_entities` link.
+
+## Reporting Sidecar (`datasets/epstein_reporting.db`)
+
+Use `tools/reporting_corpus.py` for historical backfill, current monitoring,
+licensed RIS/CSV/JSONL imports, article versioning, claim genealogy, and primary
+evidence gaps. Never treat multiple rewrites of one report as corroboration.
+Use `recover-archives` for known vanished/paywalled URLs: Wayback and Common
+Crawl are retrieval paths for the original outlet, not independent sources.
+`promote` enforces a reviewed claim plus quoted primary evidence before creating
+a finding. Source inventory: `reporting_sources.yaml`; workflow:
+`docs/modules/reporting.md`.
 
 ## Source Reliability Overrides
 
@@ -69,4 +82,3 @@ These files contain detailed investigation context. Read on demand, not every se
 | `investigations/epstein/wave-results.md` | Detailed wave findings (W1-W12 + K&E) |
 | `investigations/epstein/investigation-context.md` | Wave summaries, critical intelligence, registry findings |
 | `investigations/epstein/990-findings.md` | IRS 990 grant breakdowns (71 filings, 219 grants, $30.6M) |
-

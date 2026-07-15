@@ -2,31 +2,27 @@
 """
 California Secretary of State — bizfileonline web API tool.
 
-KNOWN LIMITATION: Imperva WAF intermittently blocks API calls after the first
-request in a session. Works for single lookups when MCP Chrome has a fresh page
-load, but unreliable for batch operations. Prefer ingest_california.py with
-CA_SOS_API_KEY when available.
+KNOWN LIMITATION: Imperva WAF is intermittent. The verified search path runs one
+bounded operation in a short-lived, headed Chrome process and retains clearance
+in a dedicated local browser profile. It does not provide statewide bulk data;
+request #130 separately tracks the weekly California SOS bulk importer.
 
-Drives the CA SoS bizfileonline.sos.ca.gov Angular UI via CDP connection to
-MCP Playwright's Chrome browser. Imperva WAF blocks direct HTTP and page.evaluate
-fetch calls; only requests routed through Angular's HttpClient pass.
-
-Requires: MCP Playwright server running (provides Chrome with valid Imperva session).
+Requires: Node.js, the Node playwright/playwright-core package, and Google Chrome.
 
 Usage:
-    python tools/query_california.py search "PARAFI CAPITAL"
-    python tools/query_california.py search "Epstein" --type corp
-    python tools/query_california.py search "Apollo" --officer-last "BLACK"
-    python tools/query_california.py entity 7175908
-    python tools/query_california.py entity C0726332 --history
-    python tools/query_california.py history C0726332
-    python tools/query_california.py ingest 7175908
-    python tools/query_california.py ingest-search "Epstein" --limit 50
+    uv run python tools/query_california.py runtime-check
+    uv run python tools/query_california.py probe --output /tmp/ca-probe.json
+    uv run python tools/query_california.py search "PARAFI CAPITAL" --limit 25
+    uv run python tools/query_california.py search C0726332 --by-number --limit 5
+
+Entity detail, history, advanced filters, and ingestion remain explicit
+unsupported commands until those flows are live-verified with the new runtime.
 """
 
 import argparse
 import json
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -59,6 +55,7 @@ except ImportError:
 # ══════════════════════════════════════════════════════════
 
 BASE_URL = "https://bizfileonline.sos.ca.gov"
+HELPER_PATH = Path(__file__).parent / "_ca_browser_helper.js"
 
 SEARCH_TYPE_MAP = {
     "keyword": "1",
@@ -150,6 +147,51 @@ REGISTRY_STATUS_MAP = {
 _pw_instance = None
 _cdp_browser = None
 _page = None
+
+
+def _run_helper(args_list, timeout=120):
+    """Run one bounded Node browser-helper command and return its JSON."""
+    if not HELPER_PATH.is_file():
+        print(f"ERROR: California browser helper not found: {HELPER_PATH}", file=sys.stderr)
+        return None
+    node = shutil.which("node")
+    if not node:
+        print("ERROR: Node.js runtime not found in PATH.", file=sys.stderr)
+        print("  Install Node.js, then run: npm install playwright", file=sys.stderr)
+        return None
+    try:
+        result = subprocess.run(
+            [node, str(HELPER_PATH), *args_list],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        print("ERROR: California browser helper timed out", file=sys.stderr)
+        return None
+    except OSError as error:
+        print(f"ERROR: Could not start California browser helper: {error}", file=sys.stderr)
+        return None
+    if result.stderr:
+        print(result.stderr.rstrip(), file=sys.stderr)
+    if result.returncode != 0:
+        return None
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        print(f"ERROR: Invalid JSON from California browser helper: {error}", file=sys.stderr)
+        return None
+
+
+def _unsupported_live_command(command):
+    print(
+        f"ERROR: California BizFile '{command}' is not available through the new "
+        "self-contained runtime yet. Only runtime-check, probe, and bounded search "
+        "have been live-verified. Detail/history ingestion remains tracked by "
+        "infrastructure request #157; weekly statewide ingestion is request #130.",
+        file=sys.stderr,
+    )
+    raise SystemExit(2)
 
 
 def _find_cdp_port():
@@ -550,25 +592,54 @@ def _parse_history(data):
 # SEARCH COMMAND
 # ══════════════════════════════════════════════════════════
 
-def cmd_search(args):
-    """Search CA business entities via bizfileonline."""
-    page = _get_page()
+def cmd_runtime_check(args):
+    """Verify the self-contained Node, Playwright, and Chrome runtime."""
+    data = _run_helper(["runtime-check"], timeout=30)
+    if not data:
+        raise SystemExit(1)
+    if write_output(data, args, summary="CA BizFile browser runtime check"):
+        return
+    print("California BizFile browser runtime is ready")
+    print(f"  Node: {data.get('node', '?')}")
+    print(f"  Playwright: {data.get('playwright_module', '?')}")
+    print(f"  Browser: {data.get('browser_channel', '?')}")
+    print(f"  Executable: {data.get('browser_executable', '?')}")
+    print(f"  Cache: {data.get('cache_dir', '?')}")
 
+
+def cmd_probe(args):
+    """Probe the official search DOM without submitting a query."""
+    data = _run_helper(["probe"])
+    if not data:
+        raise SystemExit(1)
+    if write_output(data, args, summary="CA BizFile search DOM probe"):
+        return
+    print(json.dumps(data, indent=2))
+
+
+def cmd_search(args):
+    """Search CA business entities through the bounded Node browser helper."""
+    if (
+        args.status != "all"
+        or args.type
+        or args.officer_first
+        or args.officer_middle
+        or args.officer_last
+    ):
+        print(
+            "ERROR: Advanced California search filters have not been verified "
+            "with the self-contained browser runtime. Use a bounded keyword or "
+            "entity-number search.",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
     query = args.query
     if args.by_number:
         query = _normalize_entity_number(query)
-
-    data = _ui_search(
-        page,
-        query,
-        status=args.status,
-        filing_type=args.type or "all",
-        officer_first=args.officer_first or "",
-        officer_middle=args.officer_middle or "",
-        officer_last=args.officer_last or "",
-    )
-
-    results = _parse_search_results(data)
+    data = _run_helper(["search", query, "--limit", str(args.limit)])
+    if not data:
+        raise SystemExit(1)
+    results = data.get("results", [])
 
     log_search(args.query, "ca_bizfile", len(results))
 
@@ -612,6 +683,7 @@ def _is_entity_number(value):
 
 def cmd_entity(args):
     """Get entity detail — accepts entity number (e.g. C0726332, 726332)."""
+    _unsupported_live_command("entity")
     page = _get_page()
 
     # Search by entity number (with normalization) and click the result.
@@ -653,6 +725,7 @@ def cmd_entity(args):
 
 def cmd_history(args):
     """Get filing history by entity/record number."""
+    _unsupported_live_command("history")
     page = _get_page()
 
     resp = _search_and_get_detail(
@@ -898,6 +971,7 @@ def _ingest_entity_data(db, detail_data, history_data=None,
 
 def cmd_ingest(args):
     """Ingest a single entity into registry.db."""
+    _unsupported_live_command("ingest")
     page = _get_page()
 
     resp = _search_and_get_detail(
@@ -929,6 +1003,7 @@ def cmd_ingest(args):
 
 def cmd_ingest_search(args):
     """Search and ingest matching entities into registry.db."""
+    _unsupported_live_command("ingest-search")
     page = _get_page()
 
     data = _ui_search(
@@ -1014,6 +1089,12 @@ def main():
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
+    p = sub.add_parser("runtime-check", help="Verify Node/Playwright/Chrome runtime")
+    add_output_args(p)
+
+    p = sub.add_parser("probe", help="Probe the official BizFile search DOM")
+    add_output_args(p)
+
     # search
     p = sub.add_parser("search", help="Search CA entities (up to 500 results)")
     p.add_argument("query", help="Entity name or number")
@@ -1032,6 +1113,10 @@ def main():
     p.add_argument("--officer-first", help="Officer first name filter")
     p.add_argument("--officer-middle", help="Officer middle name filter")
     p.add_argument("--officer-last", help="Officer last name filter")
+    p.add_argument(
+        "--limit", type=int, choices=range(1, 501), default=25,
+        metavar="N", help="Maximum results to return (1-500; default: 25)",
+    )
     add_output_args(p)
 
     # entity
@@ -1072,6 +1157,8 @@ def main():
         args.json_out = False
 
     handlers = {
+        "runtime-check": cmd_runtime_check,
+        "probe": cmd_probe,
         "search": cmd_search,
         "entity": cmd_entity,
         "history": cmd_history,

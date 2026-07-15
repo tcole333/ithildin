@@ -246,6 +246,9 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
     """Build EgoNetwork component props from dossier connections."""
     center = dossier["name"]
     connections = []
+    include_unverified = bool(
+        dossier.get("export_options", {}).get("include_unverified", False)
+    )
 
     for conn in dossier.get("connections", []):
         strength_str = conn.get("strength", "weak")
@@ -268,11 +271,16 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
             db.row_factory = sqlite3.Row
             first_hop_names = [c["target"] for c in connections[:20]]
             placeholders = ",".join("?" * len(first_hop_names))
+            verification_predicate = (
+                "COALESCE(c.verification_status, 'unverified') != 'retracted'"
+                if include_unverified
+                else "c.verification_status = 'verified'"
+            )
             rows = db.execute(
                 f"""
                 SELECT c.person_a, c.person_b, c.relationship_type, c.strength, c.description
                 FROM connections c
-                WHERE c.verification_status != 'retracted'
+                WHERE {verification_predicate}
                   AND (c.person_a IN ({placeholders}) OR c.person_b IN ({placeholders}))
                 ORDER BY CASE c.strength
                     WHEN 'strong' THEN 1 WHEN 'medium' THEN 2

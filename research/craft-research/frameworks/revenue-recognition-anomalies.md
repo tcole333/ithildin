@@ -3,9 +3,9 @@ name: Revenue Recognition Anomalies
 slug: revenue-recognition-anomalies
 domain: financial-crime
 source: "Beneish (1999) 'Detection of Earnings Manipulation'; Schilit & Perler, 'Financial Shenanigans' (2018); ASC 606 implementation patterns; SMCI/Palantir prototype analysis (2026)"
-status: candidate
+status: evaluated
 created: 2026-03-22
-grounding_findings: [6877, 6885]
+grounding_findings: [6877, 6885, 11712, 11508, 6876]
 related_models: [crisis-front-running, fiduciary-inversion, compliance-theater]
 detection_keywords:
   - ["channel stuffing", "bill and hold", "side letter", "right of return"]
@@ -46,3 +46,7 @@ In this investigation: Palantir Technologies showed receivables growing 81% agai
 ## Limitations
 
 This framework detects *possible* manipulation through quantitative signals but cannot distinguish between manipulation and legitimate business dynamics without qualitative analysis. A company entering a new market segment with longer payment terms will show DSO expansion that looks identical to channel stuffing in the numbers alone. Always pair quantitative detection with qualitative investigation: read the footnotes, understand the business model change, and verify whether the accounting change has an economic explanation.
+
+## Evaluation (2026-07-11)
+
+Promoted candidate → evaluated. New grounding beyond the SMCI/Palantir prototype: Katerra internally identified improper revenue recognition in its Renovations LLC business (F11712) — the first *confirmed* manipulation instance rather than a statistical signal; the Conductor round-trip sale/repurchase (F11508); and SMCI margin compression while revenue tripled (F6876). Tested against the softbank-caper Portfolio Fraud Nexus (thread 86) and the SMCI/Palantir screens: the lens discriminates (fires on Katerra/SMCI, does not fire on ordinary growth findings). Held at evaluated rather than adopted because the grounded instances remain concentrated in two clusters; adopt after it proves out on a third independent target.

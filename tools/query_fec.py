@@ -77,6 +77,28 @@ if env_path.exists():
             os.environ.setdefault(key.strip(), val.strip().strip('"'))
 
 BASE_URL = "https://api.open.fec.gov/v1"
+REQUEST_TIMEOUT_SECONDS = 60
+
+
+class FECRequestError(RuntimeError):
+    """A bounded FEC API failure that is safe to report to CLI callers."""
+
+    def __init__(self, message, *, kind, http_status=None):
+        super().__init__(message)
+        self.kind = kind
+        self.http_status = http_status
+
+    def as_payload(self):
+        payload = {
+            "status": "error",
+            "source": "fec",
+            "error": str(self),
+            "error_type": self.kind,
+            "results": [],
+        }
+        if self.http_status is not None:
+            payload["http_status"] = self.http_status
+        return payload
 
 
 def _get_api_key():
@@ -106,15 +128,24 @@ def _fetch(endpoint, params, max_pages=1):
         })
 
         try:
-            with urlopen(req, timeout=60) as resp:
+            with urlopen(req, timeout=REQUEST_TIMEOUT_SECONDS) as resp:
                 data = json.loads(resp.read().decode())
         except HTTPError as e:
-            body = e.read().decode()[:500]
-            print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-            break
+            raise FECRequestError(
+                f"FEC API returned HTTP {e.code}",
+                kind="http_error",
+                http_status=e.code,
+            ) from None
         except URLError as e:
-            print(f"ERROR: {e.reason}", file=sys.stderr)
-            break
+            raise FECRequestError(
+                f"FEC API request failed: {e.reason}",
+                kind="network_error",
+            ) from None
+        except TimeoutError:
+            raise FECRequestError(
+                f"FEC API request timed out after {REQUEST_TIMEOUT_SECONDS} seconds",
+                kind="timeout",
+            ) from None
 
         results = data.get("results", [])
         all_results.extend(results)
@@ -187,14 +218,15 @@ def cmd_donor(args):
     max_pages = max(1, args.limit // 100 + 1)
     results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
 
+    total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
+
     if write_output(results[:args.limit], args, summary=f"FEC donor '{args.query}'"):
         return
     if args.json_out:
         print(json.dumps(results[:args.limit], indent=2, default=str))
         return
 
-    total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
     employer_note = f" at employer '{args.employer}'" if args.employer else ""
     print(f"Found {total} contributions from donors matching '{args.query}'{employer_note} (showing {min(len(results), args.limit)})")
     print()
@@ -229,14 +261,15 @@ def cmd_employer(args):
     max_pages = max(1, args.limit // 100 + 1)
     results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
 
+    total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
+
     if write_output(results[:args.limit], args, summary=f"FEC employer '{args.query}'"):
         return
     if args.json_out:
         print(json.dumps(results[:args.limit], indent=2, default=str))
         return
 
-    total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
     print(f"Found {total} contributions from employees of '{args.query}' (showing {min(len(results), args.limit)})")
     print()
 
@@ -485,11 +518,11 @@ def cmd_totals(args):
 
 def cmd_committee(args):
     """Look up committee details."""
-    results, _ = _fetch(f"/committees/{args.committee_id}/", {})
+    results, _ = _fetch(f"/committee/{args.committee_id}/", {})
 
     if not results:
         # Single entity endpoint returns differently
-        url = f"{BASE_URL}/committees/{args.committee_id}/?api_key={_get_api_key()}"
+        url = f"{BASE_URL}/committee/{args.committee_id}/?api_key={_get_api_key()}"
         req = Request(url, headers={"Accept": "application/json", "User-Agent": "OSINT-Research/1.0"})
         try:
             with urlopen(req, timeout=60) as resp:
@@ -720,8 +753,16 @@ def main():
         "candidate": cmd_candidate,
         "batch-persons": cmd_batch_persons,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except FECRequestError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        payload = exc.as_payload()
+        if not write_output(payload, args, summary=f"FEC {args.command} failed") and args.json_out:
+            print(json.dumps(payload, indent=2))
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

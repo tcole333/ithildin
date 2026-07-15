@@ -1,0 +1,125 @@
+{
+  "analysis_date": "2026-07-14",
+  "analysis_run_id": 113,
+  "profile_id": "geo-group",
+  "thread_id": 110,
+  "competition_group": "ice-air-public-chain-visibility",
+  "persistence": "artifact_only_after_novelty_gate",
+  "hypotheses": [
+    {
+      "artifact_id": "H1",
+      "is_null": false,
+      "title": "The layered ICE Air chain creates a visibility failure beyond ordinary prime/subcontract structure and routine lawful redaction",
+      "description": "The combined public-recipient, subaward, operator, asset, and support records systematically fail to expose downstream economic and operational attribution in a way ordinary contracting and ordinary redaction do not adequately explain. This is a visibility hypothesis, not an allegation of illegality, intent, or improper concealment.",
+      "falsification": "Falsified if the governing award files show that CSI is accurately reported as the legal recipient; downstream reporting obligations were satisfied or did not apply; participant disclosures and ordinary joins recover the material support/operator layers; and redactions map to documented, segregability-tested procurement, proprietary, privacy, safety, or operational grounds while internal rosters reconcile to performance and payments.",
+      "predicted_evidence": "Mandatory-but-missing or materially incomplete FSRS reports; inconsistent recipient/vendor ledgers; releasable carrier or payment fields withheld without a supported basis; irreconcilable operator, tail, invoice, and asset records; or repeated omission of material downstream amounts after ordinary structured joins."
+    },
+    {
+      "artifact_id": "H0",
+      "is_null": true,
+      "title": "Ordinary prime/subcontract architecture plus routine lawful redaction and reporting limits adequately explains the public record",
+      "description": "ICE properly reports CSI as the legal prime and order recipient; CSI coordinates a full service using carriers and support vendors; participants and official sources disclose some downstream roles; public subaward coverage is incomplete or inapplicable; and operational/proprietary records are lawfully redacted or not routinely published.",
+      "falsification": "Falsified if applicable reporting rules required material subcontract disclosure that was not made; agency records cannot reconcile the listed carriers, aircraft, invoices, and performance; redaction logs fail to identify a sustainable basis or ignore segregable identity-neutral fields; or downstream payments and roles remain materially unrecoverable even from the ordinary contract, FSRS, invoice, and COR records that should contain them.",
+      "predicted_evidence": "A complete accountable prime record; FSRS reports or a documented exemption/non-applicability determination; internally complete operator/tail/preflight records; ordinary vendor invoices and subcontract-consent files; and supported redactions with segregable release of non-sensitive carrier, certificate, aircraft, and aggregate payment fields."
+    }
+  ],
+  "row_level_scores": {
+    "H1": {
+      "consistent": 5,
+      "inconsistent": 9,
+      "neutral": 6,
+      "total": 20
+    },
+    "H0": {
+      "consistent": 14,
+      "inconsistent": 0,
+      "neutral": 6,
+      "total": 20
+    }
+  },
+  "dependency_clusters": [
+    {
+      "cluster": "geo_sec_2024",
+      "members": [12892, 12893, 12894],
+      "treatment": "one issuer/document family; not three independent contradictions"
+    },
+    {
+      "cluster": "usaspending_prime_and_orders",
+      "members": [12895, 12899, 12910],
+      "treatment": "one federal reporting family; multiple instruments but not independent source corroboration"
+    },
+    {
+      "cluster": "bpa_lifecycle",
+      "members": [12906, 12907],
+      "treatment": "paired termination/reinstatement chronology; neutral on downstream visibility"
+    },
+    {
+      "cluster": "globalx_sec",
+      "members": [12976, 12977],
+      "treatment": "same issuer family; direct contract edge and general operator capability are distinct propositions but not independent corroboration"
+    },
+    {
+      "cluster": "air_wisconsin_acquisition",
+      "members": [12979, 12980],
+      "treatment": "agreement and closing sequence; ownership only"
+    },
+    {
+      "cluster": "replacement_and_preflight_gap",
+      "members": [12981, "R-SOW-PREFLIGHT", "R-ZERO-TAILS"],
+      "treatment": "one unresolved operational-record gap; zero tails is a result derived from the same missing/redacted record layer"
+    }
+  ],
+  "verdict": {
+    "least_inconsistent": "H0",
+    "confidence": "medium",
+    "statement": "H0 is least inconsistent, not confirmed. The public record has a practical reconstruction gap, but the current verified evidence does not make that gap diagnostically attributable to anything beyond ordinary prime/subcontract architecture, coverage limits, and redacted operational records.",
+    "important_limit": "The record does not establish that every redaction is lawful or that every reporting obligation was satisfied; those are untested assumptions of H0, not findings."
+  },
+  "diagnostic_evidence": {
+    "against_H1": [
+      "CSI is directly visible as the legal BPA/order recipient (#12895, #12899, #12910).",
+      "GEO publicly disclosed GTI's CSI subcontract and a bounded annualized revenue estimate (#12892-#12894).",
+      "GlobalX publicly disclosed a current CSI/U.S.-government contract through 2026 (#12976).",
+      "An official state source names GlobalX and Eastern as ICE flight providers (#12978), while the House letter names GlobalX beneath CSI with a reporting-derived limitation (#12912).",
+      "GTI appears in federal recipient data when it is actually the legal prime on a separate direct contract (#12909)."
+    ],
+    "not_currently_diagnostic": [
+      "Zero public subaward rows (#12901) without a reporting-duty, exemption, waiver, or correction record.",
+      "Redacted replacement carrier/aircraft documents (#12981) without the redaction basis or segregability analysis.",
+      "Zero confirmed tails, because fleet inventories and authority do not prove assignment and the decisive operational records are missing.",
+      "Eastern's official ICE edge without a CSI edge (#12978), because both a separate legal path and an undisclosed ordinary subcontract remain possible.",
+      "CSI's ownership of Air Wisconsin/13 CRJ200s (#12979-#12980), because capability is not assignment."
+    ]
+  },
+  "exact_discriminators": [
+    {
+      "record": "FSRS applicability and compliance file for the five exact orders/calls",
+      "supports_H1_if": "reporting was mandatory and material subcontract rows are missing, incomplete, or inconsistent without a documented correction",
+      "supports_H0_if": "reports reconcile or the file documents a valid exemption, non-applicability determination, or other ordinary coverage reason"
+    },
+    {
+      "record": "Unredacted or segregable Classic Air administrative-record Tabs 91, 92b, 94, and 101 plus the withholding/redaction basis",
+      "supports_H1_if": "identity-neutral carrier, certificate, aircraft, or aggregate commitment fields were withheld without a sustainable basis or conflict with actual performance",
+      "supports_H0_if": "the package reconciles to performance and redactions are supported, limited, and segregability-tested"
+    },
+    {
+      "record": "CSI-GTI subcontract, current carrier teaming/subcontract agreements, consent file, amendments, invoices, and vendor ledger",
+      "supports_H1_if": "material payees, roles, or amounts cannot be reconciled to required reports and ordinary company/agency records",
+      "supports_H0_if": "the chain and payments reconcile to the legal-prime record and ordinary downstream accounting"
+    },
+    {
+      "record": "Call 70CDCR26FC0000001 preflight and flight-leg records with operating-carrier certificate, N-number, mission date/type, and no personal crew identifiers",
+      "supports_H1_if": "required records are absent, internally inconsistent, or identity-neutral fields remain unjustifiably unavailable",
+      "supports_H0_if": "the authoritative roster exists, reconciles to operators and invoices, and only legitimately sensitive fields are withheld"
+    },
+    {
+      "record": "CSI's response and production to the 2025-05-28 House Homeland Security letter",
+      "supports_H1_if": "the production reveals material undisclosed layers or unexplained discrepancies",
+      "supports_H0_if": "subcontracts and monthly counts reconcile to the prime, carrier disclosures, and ICE records"
+    }
+  ],
+  "premortem": {
+    "if_verdict_is_wrong": "The analysis may be over-crediting voluntary company disclosures and treating unknown reporting/redaction rules as benign. A visible edge can coexist with material hidden payments or operational substitutions.",
+    "fastest_check": "Obtain the FSRS applicability/compliance file and an identity-neutral extract of the current flight-leg/preflight roster, then reconcile both to CSI's vendor ledger and carrier invoices."
+  }
+}

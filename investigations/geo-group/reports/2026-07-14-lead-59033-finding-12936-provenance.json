@@ -1,0 +1,63 @@
+{
+  "id": 12936,
+  "target_name": "The GEO Group, Inc. Political Action Committee",
+  "finding_type": "financial",
+  "summary": "GEO 2025 state/local GEO PAC total of $61,500 exactly matches gross-positive Schedule B payments in Arizona, Oklahoma, and Pennsylvania; signed net is $56,000 after $5,500 of negative adjustments.",
+  "detail": "GEO official 2025 State / Local table reports GEO PAC amounts of $43,000 in Arizona, $17,500 in Oklahoma, and $1,000 in Pennsylvania. C00382150 Schedule B line-29 rows contain the same positive jurisdiction totals. Three Arizona negatives total $3,000 and one Oklahoma negative is $2,500, leaving signed net of $56,000. The result establishes the gross-positive convention for this 2025 table only.",
+  "source_datasets": "[\"fec\", \"geo_group_2025_political_activity_report\", \"investigations\"]",
+  "confidence": "medium",
+  "date_of_event": "2025-12-31",
+  "lead_id": 59033,
+  "created_at": "2026-07-14 08:51:53",
+  "claim_type": "synthesis",
+  "verification_status": "verified",
+  "verified_by": "agent:geo-lead59033",
+  "verified_at": "2026-07-14T08:53:55.859202+00:00",
+  "thread_id": 112,
+  "quality_state": "unchecked",
+  "confidence_requested": "medium",
+  "profile_id": "geo-group",
+  "agent_run_id": null,
+  "event_date_iso": "2025-12-31",
+  "date_precision": "day",
+  "evidence": [
+    {
+      "finding_id": 12936,
+      "evidence_type": "file",
+      "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-59033-geo-state-local-finding-support.json",
+      "source_quote": "  \"geo_pac_2025_reconciliation\": {\n    \"company_state_local_geo_pac_total\": 61500.0,\n    \"fec_aggregate\": {\n      \"gross_positive\": 61500.0,\n      \"negative_adjustments\": -5500.0,\n      \"signed_net\": 56000.0\n    },\n    \"jurisdictions\": {\n      \"AZ\": {\n        \"company_geo_pac\": 43000.0,\n        \"fec_gross_positive\": 43000.0,\n        \"fec_negative_adjustments\": -3000.0,\n        \"fec_signed_net\": 40000.0\n      },\n      \"OK\": {\n        \"company_geo_pac\": 17500.0,\n        \"fec_gross_positive\": 17500.0,\n        \"fec_negative_adjustments\": -2500.0,\n        \"fec_signed_net\": 15000.0\n      },\n      \"PA\": {\n        \"company_geo_pac\": 1000.0,\n        \"fec_gross_positive\": 1000.0,\n        \"fec_negative_adjustments\": 0.0,\n        \"fec_signed_net\": 1000.0\n      }\n    }\n  },",
+      "source_page": null,
+      "assessment": null,
+      "email_sender": null,
+      "email_date": null,
+      "chain_position": null,
+      "source_reliability": null
+    },
+    {
+      "finding_id": 12936,
+      "evidence_type": "file",
+      "evidence_ref": "investigations/geo-group/sources/2026-07-14-lead-59033/fec-c00382150-all-disbursements-2015-2026.json",
+      "source_quote": "    \"conduit_committee_street2\": null,\n    \"conduit_committee_zip\": null,\n    \"disbursement_amount\": -2500.0,\n    \"disbursement_date\": \"2025-03-20\",\n    \"disbursement_description\": \"VOID - CONTRIBUTION TO STATE COMMITTEE\",\n    \"disbursement_purpose_category\": \"OTHER\",\n    \"disbursement_type\": null,\n    \"disbursement_type_description\": null,",
+      "source_page": null,
+      "assessment": null,
+      "email_sender": null,
+      "email_date": null,
+      "chain_position": null,
+      "source_reliability": null
+    },
+    {
+      "finding_id": 12936,
+      "evidence_type": "file",
+      "evidence_ref": "investigations/geo-group/sources/2026-07-14-lead-59033/geo-2025-political-activity-and-lobbying-report.pdf",
+      "source_quote": "\fState / Local                        Type                GEO PAC        Corporate\n                                     Candidates               $43,000               --\nArizona\n(https://azsos.gov/elections/        Committees                     -         $111,000\ncampaign-finance-reporting)           AZ Total                $43,000         $111,000\n                                     Candidates                     -                -\nCalifornia\n(https://www.sos.ca.gov/campaign- Committees                        -           $1,000\nlobbying)                          CA Total                         -           $1,000\nFlorida                              Candidates                     -       $1,007,600\n(https://dos.elections.myflorida.                                   -         $915,000\ncom/campaign-finance/                Committees\ncontributions/)                       FL Total                      -       $1,922,600\n                                     Candidates                     -          $50,800\nGeorgia                                                             -          $14,000\n(https://efile.ethics.ga.gov/#/index) Committees\n                                       GA Total                     -          $64,800\nIllinois                              Candidates                    -           $6,500\n(https://www.elections.il.gov/       Committees                     -                -\nCampaignDisclosure)                   IL Total                      -           $6,500\nIndiana                              Candidates                     -          $25,000\n(https://www.in.gov/sos/elections/   Committees                     -          $14,000\ncampaign-finance/)                    IN Total                      -          $39,000\nNew Jersey                           Candidates                     -           $2,000\n(https://www.elec.nj.gov/                                           -                -\npublicinformation/searchdatabase.    Committees\nhtm)                                  NJ Total                      -           $2,000\nOklahoma                             Candidates               $17,500                -\n(https://pay.apps.ok.gov/ethics/crs/ Committees                     -          $45,000\nindex.php)                            OK Total                $17,500          $45,000\nPennsylvania                         Candidates                $1,000                -\n(https://www.pa.gov/agencies/dos/                                   -                -\nprograms/voting-and-elections/       Committees\ncampaign-finance)                     PA Total                 $1,000                -",
+      "source_page": null,
+      "assessment": null,
+      "email_sender": null,
+      "email_date": null,
+      "chain_position": null,
+      "source_reliability": null
+    }
+  ],
+  "corrections": [],
+  "connections": []
+}

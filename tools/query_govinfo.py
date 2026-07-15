@@ -177,7 +177,7 @@ def cmd_search(args):
     output = {"total": total, "query": args.query, "collection": args.collection, "results": results}
 
     collection_label = args.collection or "all"
-    log_search(f"govinfo_{collection_label.lower()}", args.query, total)
+    log_search(args.query, f"govinfo_{collection_label.lower()}", total)
 
     if not write_output(output, args, summary=f"GovInfo '{args.query}' ({collection_label}, {total} total)"):
         print(f"GovInfo: {total} results for '{args.query}' in {collection_label}")
@@ -194,7 +194,7 @@ def cmd_document(args):
             print(f"  {data['message']}", file=sys.stderr)
         sys.exit(1)
 
-    log_search("govinfo_document", f"doc:{args.package_id}", 1)
+    log_search(f"doc:{args.package_id}", "govinfo_document", 1)
 
     if not write_output(data, args, summary=f"GovInfo document {args.package_id}"):
         title = data.get("title", "?")
@@ -233,7 +233,7 @@ def cmd_hearing(args):
     if granules and "granules" in granules:
         data["granules"] = granules["granules"]
 
-    log_search("govinfo_hearing", f"hearing:{args.package_id}", 1)
+    log_search(f"hearing:{args.package_id}", "govinfo_hearing", 1)
 
     if not write_output(data, args, summary=f"GovInfo hearing {args.package_id}"):
         title = data.get("title", "?")
@@ -322,7 +322,7 @@ def cmd_ingest(args):
         print(result.stderr, file=sys.stderr)
 
     Path(tmp_path).unlink(missing_ok=True)
-    log_search("govinfo_ingest", f"ingest:{args.package_id}", 1)
+    log_search(f"ingest:{args.package_id}", "govinfo_ingest", 1)
 
 
 def cmd_ingest_search(args):
@@ -356,7 +356,7 @@ def cmd_ingest_search(args):
             continue
 
     collection_label = args.collection or "all"
-    log_search(f"govinfo_{collection_label.lower()}", f"ingest-search:{args.query}", total)
+    log_search(f"ingest-search:{args.query}", f"govinfo_{collection_label.lower()}", total)
     print(f"\nIngested {ingested}/{len(results)} documents.")
 
 

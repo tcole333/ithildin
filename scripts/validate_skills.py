@@ -3,6 +3,7 @@
 
 Default targets:
 - .claude/skills (repo)
+- .codex/skills (repo mirror)
 - $HOME/.codex/skills
 
 Optional targets:
@@ -10,11 +11,19 @@ Optional targets:
 - arbitrary markdown docs directories
 
 Checks include:
-- Required frontmatter keys (for skills/commands, when configured)
+- SKILL.md frontmatter is valid YAML with only allowed keys (base keys from the
+  skill-creator plugin spec plus repo conventions such as `user_invocable`),
+  a kebab-case `name`, and a sane `description`
+- Required frontmatter keys (for commands, when configured)
 - No duplicate `uv run uv run`
 - Optional warning for `.venv/bin/python*` and bare `python tools/...`
 - Command snippets reference existing scripts (when concrete, not templated)
 - Long flags appear in `--help` output for the script/subcommand (best effort)
+
+Use this instead of the skill-creator plugin's quick_validate.py: that script
+hardcodes its frontmatter allowlist (name, description, license, allowed-tools,
+metadata, compatibility), has no extension mechanism, and therefore rejects
+this repo's required `user_invocable` key.
 """
 
 from __future__ import annotations
@@ -29,9 +38,26 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+import yaml
+
 
 FENCED_BLOCK_RE = re.compile(r"```(?:bash|sh|zsh|shell)?\n(.*?)```", re.DOTALL | re.IGNORECASE)
 LONG_OPT_RE = re.compile(r"--[A-Za-z0-9][A-Za-z0-9-]*")
+SKILL_FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
+
+# Base allowlist mirrors ALLOWED_PROPERTIES in the skill-creator plugin's
+# quick_validate.py. Repo keys are conventions of this repo the plugin does not
+# know about: `user_invocable` is required on .claude skills by convention and
+# intentionally absent from the .codex mirror tree.
+BASE_ALLOWED_SKILL_KEYS = frozenset(
+    {"name", "description", "license", "allowed-tools", "metadata", "compatibility"}
+)
+REPO_ALLOWED_SKILL_KEYS = frozenset({"user_invocable"})
+ALLOWED_SKILL_KEYS = BASE_ALLOWED_SKILL_KEYS | REPO_ALLOWED_SKILL_KEYS
+
+MAX_SKILL_NAME_LENGTH = 64
+MAX_SKILL_DESCRIPTION_LENGTH = 1024
+MAX_SKILL_COMPATIBILITY_LENGTH = 500
 
 
 @dataclass
@@ -42,7 +68,7 @@ class Issue:
     message: str
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate skill, command, and markdown docs")
     parser.add_argument(
         "--skills-dir",
@@ -79,12 +105,14 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Include hidden skill directories such as .system",
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def default_skill_dirs() -> list[Path]:
+    cwd = Path(os.getcwd())
     return [
-        Path(os.getcwd()) / ".claude" / "skills",
+        cwd / ".claude" / "skills",
+        cwd / ".codex" / "skills",
         Path.home() / ".codex" / "skills",
     ]
 
@@ -133,6 +161,103 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], int]:
         k, v = line.split(":", 1)
         fm[k.strip()] = v.strip()
     return fm, body_start_line
+
+
+def validate_skill_frontmatter(text: str) -> list[str]:
+    """Plugin-equivalent SKILL.md frontmatter validation with repo keys allowed.
+
+    Returns a list of error messages; an empty list means the frontmatter is
+    valid. Checks mirror the skill-creator plugin's quick_validate.py, with
+    ALLOWED_SKILL_KEYS extended by this repo's conventions.
+    """
+    if not text.startswith("---"):
+        return ["No YAML frontmatter found"]
+    match = SKILL_FRONTMATTER_RE.match(text)
+    if not match:
+        return ["Invalid frontmatter format (missing closing '---')"]
+    try:
+        frontmatter = yaml.safe_load(match.group(1))
+    except yaml.YAMLError as exc:
+        return [f"Invalid YAML in frontmatter: {exc}"]
+    if not isinstance(frontmatter, dict):
+        return ["Frontmatter must be a YAML dictionary"]
+
+    errors: list[str] = []
+    unexpected = {str(key) for key in frontmatter} - ALLOWED_SKILL_KEYS
+    if unexpected:
+        errors.append(
+            f"Unexpected frontmatter key(s): {', '.join(sorted(unexpected))}. "
+            f"Allowed: {', '.join(sorted(ALLOWED_SKILL_KEYS))}"
+        )
+    errors.extend(_skill_name_errors(frontmatter))
+    errors.extend(_skill_description_errors(frontmatter))
+    errors.extend(_skill_compatibility_errors(frontmatter))
+    errors.extend(_skill_user_invocable_errors(frontmatter))
+    return errors
+
+
+def _skill_name_errors(frontmatter: dict) -> list[str]:
+    if "name" not in frontmatter:
+        return ["Missing `name` in frontmatter"]
+    name = frontmatter["name"]
+    if not isinstance(name, str):
+        return [f"`name` must be a string, got {type(name).__name__}"]
+    name = name.strip()
+    if not name:
+        return ["`name` must not be empty"]
+    errors: list[str] = []
+    if not re.fullmatch(r"[a-z0-9-]+", name):
+        errors.append(f"Name '{name}' should be kebab-case (lowercase letters, digits, hyphens)")
+    elif name.startswith("-") or name.endswith("-") or "--" in name:
+        errors.append(f"Name '{name}' cannot start/end with hyphen or contain consecutive hyphens")
+    if len(name) > MAX_SKILL_NAME_LENGTH:
+        errors.append(
+            f"Name is too long ({len(name)} characters). Maximum is {MAX_SKILL_NAME_LENGTH}."
+        )
+    return errors
+
+
+def _skill_description_errors(frontmatter: dict) -> list[str]:
+    if "description" not in frontmatter:
+        return ["Missing `description` in frontmatter"]
+    description = frontmatter["description"]
+    if not isinstance(description, str):
+        return [f"`description` must be a string, got {type(description).__name__}"]
+    description = description.strip()
+    if not description:
+        return ["`description` must not be empty"]
+    errors: list[str] = []
+    if "<" in description or ">" in description:
+        errors.append("Description cannot contain angle brackets (< or >)")
+    if len(description) > MAX_SKILL_DESCRIPTION_LENGTH:
+        errors.append(
+            f"Description is too long ({len(description)} characters). "
+            f"Maximum is {MAX_SKILL_DESCRIPTION_LENGTH}."
+        )
+    return errors
+
+
+def _skill_compatibility_errors(frontmatter: dict) -> list[str]:
+    compatibility = frontmatter.get("compatibility")
+    if compatibility is None:
+        return []
+    if not isinstance(compatibility, str):
+        return [f"`compatibility` must be a string, got {type(compatibility).__name__}"]
+    if len(compatibility) > MAX_SKILL_COMPATIBILITY_LENGTH:
+        return [
+            f"Compatibility is too long ({len(compatibility)} characters). "
+            f"Maximum is {MAX_SKILL_COMPATIBILITY_LENGTH}."
+        ]
+    return []
+
+
+def _skill_user_invocable_errors(frontmatter: dict) -> list[str]:
+    user_invocable = frontmatter.get("user_invocable")
+    if user_invocable is None:
+        return []
+    if not isinstance(user_invocable, bool):
+        return [f"`user_invocable` must be a boolean, got {type(user_invocable).__name__}"]
+    return []
 
 
 def join_line_continuations(block: str) -> list[str]:
@@ -236,12 +361,16 @@ def lint_markdown_file(
     include_hidden: bool,  # kept for signature symmetry and future use
     help_cache: dict[tuple[str, str | None], set[str]],
     required_frontmatter_fields: tuple[str, ...] | None,
+    skill_frontmatter: bool = False,
 ) -> list[Issue]:
     del include_hidden
     issues: list[Issue] = []
     text = md_file.read_text(encoding="utf-8", errors="replace")
 
-    if required_frontmatter_fields is not None:
+    if skill_frontmatter:
+        for message in validate_skill_frontmatter(text):
+            issues.append(Issue("ERROR", md_file, 1, message))
+    elif required_frontmatter_fields is not None:
         fm, _ = parse_frontmatter(text)
         if not fm:
             issues.append(Issue("ERROR", md_file, 1, "Missing or malformed YAML frontmatter"))
@@ -379,8 +508,8 @@ def print_report(issues: list[Issue]) -> None:
     print(f"\nSummary: {errors} errors, {warns} warnings")
 
 
-def main() -> int:
-    args = parse_args()
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
     workspace = Path(args.workspace).resolve()
     skill_dirs = [Path(p).expanduser() for p in (args.skills_dir or [str(p) for p in default_skill_dirs()])]
     command_dirs = [Path(p).expanduser() for p in (args.commands_dir or [])]
@@ -408,7 +537,8 @@ def main() -> int:
                     require_uv=args.require_uv,
                     include_hidden=args.include_hidden,
                     help_cache=help_cache,
-                    required_frontmatter_fields=("name", "description"),
+                    required_frontmatter_fields=None,
+                    skill_frontmatter=True,
                 )
             )
 

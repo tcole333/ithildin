@@ -692,6 +692,40 @@ When planning research across a new area (e.g., a new investigation thread), fol
 
 This prevents the failure mode of exhaustively investigating every name that surfaces while still capturing enough to know what's worth pursuing.
 
+## Structured Analytic Techniques (ACH, Assumptions, Estimative Language)
+
+### When ACH Is Mandatory
+
+Analysis of Competing Hypotheses (ACH) is mandatory for any theory at the Coordination or Intent rungs of the Claim Ladder, and whenever two or more live rival explanations exist for the same phenomenon.
+
+### Competing-Set Discipline
+
+Hypotheses explaining one phenomenon share a short `--competition-group` slug. Register the best innocent explanation with `--as-null` as a full competing hypothesis, not as a prose aside. Score every relevant finding against every member of the set, then use `matrix` and `compete` to compare them. The verdict is the least-inconsistent hypothesis—the one with the least evidence against it—not the hypothesis with the most accumulated support. Confirming a hypothesis requires refuting its rivals, not merely accumulating confirming evidence.
+
+### Diagnosticity
+
+Evidence consistent with every hypothesis moves nothing; only evidence that discriminates among rivals is diagnostic. This complements the independence rule: the same document appearing in three databases is redundancy, not corroboration. Independence concerns whether evidence comes from genuinely separate sources; diagnosticity concerns whether that evidence distinguishes between explanations. Sound analysis requires both.
+
+### Key Assumptions Check
+
+Before promoting any hypothesis to `investigating`, and again before any article draft, list the assumptions that must hold for the leading hypothesis. For each assumption ask: What happens to the hypothesis if this is false? How would we know it is false? Record the answers and turn testable uncertainties into searches or leads.
+
+### Estimative Language Standard
+
+| Confidence | Kent-style probability / approved prose |
+|------------|------------------------------------------|
+| `confirmed` | established; documented |
+| `high` | almost certainly; very likely |
+| `medium` | likely; probably |
+| `low` | possibly; may |
+| `unverified` | unconfirmed; alleged |
+
+Prose may never outrun the weakest confidence tier in its citation chain. A conclusion dependent on a `medium` link cannot be described as "almost certainly," even if its other links are `high` or `confirmed`. The review-article skill enforces this standard.
+
+### Premortem
+
+Before publication of any major synthesis, conduct one pass assuming: **This thesis is wrong.** Name the most likely way the investigation fooled itself, identify which evidence or assumption enabled the error, and state the fastest check that could expose it.
+
 ## Red Lines
 
 - Don't fabricate evidence or connections that aren't in the data
@@ -700,3 +734,36 @@ This prevents the failure mode of exhaustively investigating every name that sur
 - Do follow the evidence wherever it leads, even if it contradicts initial assumptions
 - Do document uncertainty — "this suggests X but could also mean Y" is more honest than false confidence
 - Do distinguish between confirmed facts, strong inferences, and speculative hypotheses
+
+## Deception & Source Authenticity
+
+### The Two-Axis Rule
+
+**"Authentic document" and "true content" are independent judgments.** An authentic court exhibit can contain false allegations. A genuine leak can be selectively curated to mislead. Findings must never let document authenticity stand in for the truth of the claims inside it.
+
+The canonical in-house case is the anti-Sama dossier: the documents are authentic primary-source records of a paid operative's campaign, but their content consists of allegations against Sama that the target denied. The evidence establishes that the allegations were made and circulated; it does not, by itself, establish that they were true.
+
+### When a Deception Check Is Mandatory
+
+Run a deception check when any one of these triggers is present:
+
+- A claim rests on a single provenance chain.
+- The material is an opposition-research, public-relations, or litigation artifact produced to influence an audience or outcome.
+- The source is a breach or leak aggregator with opaque provenance.
+- The material surfaced suspiciously on the timeline, such as immediately before a deal vote or filing deadline.
+- Believing the material materially benefits an identifiable party.
+
+### MOM / POP / MOSES / EVE
+
+Use the deception-detection checklist from the CIA's *Tradecraft Primer* (2009) and Heuer & Pherson (2010), adapted for OSINT ingestion:
+
+- **MOM — Motive, Opportunity, Means:** Who had the motive, opportunity, and means to plant, curate, alter, or otherwise shape this material?
+- **POP — Past Opposition Practices:** Has this actor or network run information operations before? Document what is known, including uncertainty and negative results.
+- **MOSES — My Own Sources:** Could the channel that delivered the material be manipulated? Examine aggregator provenance, SEO-planted pages, honeypot leaks, cutouts, and other delivery paths.
+- **EVE — Evaluation of Evidence:** Test internal consistency, metadata, chain of custody, and corroboration by independent, non-derivative sources. The same document mirrored in three databases is redundancy, not corroboration.
+
+See the Tier 3 row **"Deception detection (MOM/POP/MOSES/EVE)"** in `research/craft-research/framework-references.md` for the framework reference.
+
+### Disposition Rule
+
+Material that fails the checklist, or for which the checklist cannot be completed, may still be ingested. Treat it as a lead-bearing artifact rather than a conclusion: record any finding that relies on it as `claim_type=inference` with `confidence=medium` at most, include an explicit deception-risk note in the finding detail, and generate a corroboration lead. Preserve the material and its provenance, but do not promote its allegations merely because the artifact itself is authentic.

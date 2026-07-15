@@ -1,0 +1,209 @@
+{
+  "created": "2026-07-14",
+  "profile": "geo-group",
+  "scope": "Tier 2 systemic and ACH audit of Wave 8 CY2025 revenue visibility",
+  "external_queries": 0,
+  "highergov_used": false,
+  "credentials_included": false,
+  "analysis_runs": [
+    {
+      "id": 109,
+      "skill_name": "systemic-analysis",
+      "status": "completed",
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    },
+    {
+      "id": 110,
+      "skill_name": "generate-hunches",
+      "status": "completed",
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    }
+  ],
+  "input_artifacts": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-13-tier2-seven-chain-dhs-systemic-synthesis.md",
+      "bytes": 12334,
+      "sha256": "5010ea88be1214a88b3438dc923bd51e49a5eed177bfb0528aefd96182d3d391"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-13-tier2-systemic-contract-architecture.md",
+      "bytes": 13539,
+      "sha256": "07033af7d45ed783992c5b3a80ceb1eb7aff398da4361c9052cbefe47922f4b1"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-report.md",
+      "bytes": 14725,
+      "sha256": "1c26d8d80da36ec993e62df3d9cb62bcdce3a46decf28a6b6d9bfa53cdc03a12"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-evidence-matrix.csv",
+      "bytes": 8231,
+      "sha256": "506f03f4c103153786217ec902544740d8e0c196436d79f00c1a08ced2a04d65"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-reconciliation.json",
+      "bytes": 9376,
+      "sha256": "ed58976d8a528d92214d834ab6097e51e77e629e90b3cc15eaf8958653a82ed4"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-source-manifest.json",
+      "bytes": 14884,
+      "sha256": "154c2725fc36bad03605716c7eeb733c719f0a5d6c72b75f67a4b79cf20a4fb5"
+    }
+  ],
+  "finding_snapshots": [
+    {
+      "id": 12962,
+      "verification_status": "verified",
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "summary": "GEO's sequential CY2025 activation/transport revenue-change disclosures reconcile to a derived $2.7m Q1, reported $17.5m Q2, reported $55.8m Q3, and derived $76.4m Q4, totaling $152.4m; the bundle is not ICE-only or facility-level revenue.",
+      "tier2_classification": "neutral measurement control",
+      "independent_igsa_contexts_added": 0,
+      "evidence_refs": [
+        "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-quarterly-ledger.csv",
+        "https://www.sec.gov/Archives/edgar/data/923796/000095017025104173/geo-20250630.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312525269401/geo-20250930.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+      ]
+    },
+    {
+      "id": 12963,
+      "verification_status": "verified",
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "summary": "The 34 direct-prime awards with GEO/B.I. CY2025 ICE actions show $2.124bn in current award-life obligations and $1.939bn in current award-life outlays across the 32 awards reporting outlays; two missing outlay fields are not zero and none of these snapshots is a CY2025 cash measure.",
+      "tier2_classification": "neutral measurement control",
+      "independent_igsa_contexts_added": 0,
+      "evidence_refs": [
+        "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-award-snapshot-ledger.csv",
+        "investigations/geo-group/sources/2026-07-14-lead-62481/usaspending/usaspending-task-award-details.json"
+      ]
+    },
+    {
+      "id": 12964,
+      "verification_status": "verified",
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "summary": "Across the fully parsed 2025 quarterly filings, 2025 Form 10-K, and Q1 2026 filing/results exhibit, the public record did not supply a CY2025 ICE customer subledger that bridges recognized revenue to contracts, facilities, invoices, receivables, outlays, or local remittances.",
+      "tier2_classification": "broader public contract-to-ledger boundary; neutral to IGSA-specific materiality pair",
+      "independent_igsa_contexts_added": 0,
+      "compatible_igsa_downstream_dollar_observations_added": 0,
+      "evidence_refs": [
+        "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-evidence-matrix.csv",
+        "investigations/geo-group/reports/2026-07-14-lead-62481-geo-cy2025-ice-revenue-reconciliation.json",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312526071747/geo-20251231.htm"
+      ]
+    }
+  ],
+  "hypothesis_snapshots": [
+    {
+      "id": 341,
+      "title": "Federal recipient attribution leaves a material GEO IGSA exposure gap",
+      "status": "proposed",
+      "competition_group": "geo-igsa-recipient-visibility",
+      "post_audit": {
+        "consistent": 20,
+        "inconsistent": 0,
+        "neutral": 31,
+        "not_applicable": 10,
+        "inconsistency_ratio": 0.0
+      }
+    },
+    {
+      "id": 342,
+      "title": "Legal-prime reporting is accurate and creates no material visibility gap",
+      "status": "proposed",
+      "competition_group": "geo-igsa-recipient-visibility",
+      "post_audit": {
+        "consistent": 8,
+        "inconsistent": 5,
+        "neutral": 38,
+        "not_applicable": 10,
+        "inconsistency_ratio": 0.098
+      }
+    }
+  ],
+  "ach_writes": [
+    {
+      "id": 799,
+      "hypothesis_id": 341,
+      "finding_id": 12962,
+      "assessment": "neutral"
+    },
+    {
+      "id": 800,
+      "hypothesis_id": 342,
+      "finding_id": 12962,
+      "assessment": "neutral"
+    },
+    {
+      "id": 801,
+      "hypothesis_id": 341,
+      "finding_id": 12963,
+      "assessment": "neutral"
+    },
+    {
+      "id": 802,
+      "hypothesis_id": 342,
+      "finding_id": 12963,
+      "assessment": "neutral"
+    },
+    {
+      "id": 803,
+      "hypothesis_id": 341,
+      "finding_id": 12964,
+      "assessment": "neutral",
+      "reassesses_row": 793
+    },
+    {
+      "id": 804,
+      "hypothesis_id": 342,
+      "finding_id": 12964,
+      "assessment": "neutral",
+      "reassesses_row": 794
+    }
+  ],
+  "novelty_decision": {
+    "new_synthesis_finding_created": false,
+    "new_hypothesis_created": false,
+    "new_lead_created": false,
+    "reason": "The contract-to-ledger observability boundary is already represented by hypotheses #341/#342 and verified findings #12668/#12727; Wave 8 adds no third independent visibility context or compatible six-chain downstream-dollar measure."
+  },
+  "outputs": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-revenue-visibility-systemic-ach.md",
+      "bytes": 9594,
+      "sha256": "16109dd8754eb6ad1a5a97b4568f2816693c31a00361531d22d6c864570ceac2"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-revenue-visibility-evidence-matrix.csv",
+      "bytes": 1088,
+      "sha256": "c9940f3c479f0203697edce1ab26ff395753eb526ae142b406eddef841b4f1eb"
+    },
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-tier2-revenue-visibility-novelty-decision.json",
+      "bytes": 2300,
+      "sha256": "13c12a0b943528cb51cacad212ca03663eb8472a567ded0a147976eb8b6d262c"
+    }
+  ],
+  "integrity": {
+    "lead_62481_source_manifest_entries_verified": 55,
+    "lead_62481_source_manifest_hash_failures": 0,
+    "database_quick_check": "ok",
+    "foreign_key_violations": 64,
+    "established_foreign_key_baseline": 64,
+    "foreign_key_delta": 0,
+    "finding_rows_verified": 3,
+    "assessment_rows_written": 6,
+    "unverified_active_ach_cells": 0,
+    "papercut_logged": 1007
+  },
+  "bounded_verdict": "Finding #12964 is a broader public contract-to-ledger visibility boundary, not new IGSA-specific evidence of financial materiality. Hypothesis #341 remains least evidence against for the recipient-name mechanism only; materiality remains unresolved, and neither #341 nor #342 changes status."
+}

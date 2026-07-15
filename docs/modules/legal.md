@@ -104,6 +104,10 @@ uv run python tools/query_courtlistener.py fjc --plaintiff "United States" --nos
 uv run python tools/query_courtlistener.py fjc --defendant "Epstein" --limit 50
 ```
 
+FJC searches use one bounded request attempt because this upstream endpoint can
+be much slower than the other CourtListener APIs. A timeout exits nonzero with
+a concise diagnostic; narrow the party prefix or add a date range before retrying.
+
 ### Known Quirks
 
 - The `opinion` command tries the opinion ID first, then falls back to treating it as a cluster ID (fetches first sub-opinion from the cluster).

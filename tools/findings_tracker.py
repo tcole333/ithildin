@@ -8,7 +8,14 @@ Usage:
     python tools/findings_tracker.py add --target "Rod-Larsen" --type financial --summary "..." --detail "..."
     python tools/findings_tracker.py list [--target "Rod-Larsen"] [--type financial]
     python tools/findings_tracker.py show 42
+    python tools/findings_tracker.py evidence-add 42 --ref SOURCE:ID --source-quote "..." --reason "..."
+    python tools/findings_tracker.py evidence-correct 42 --ref SOURCE:ID --field source_quote --value "..." --reason "..."
+    python tools/findings_tracker.py evidence-delete 42 --ref SOURCE:ID --reason "..."
+    python tools/findings_tracker.py evidence-audit [--finding-id 42] [--output /tmp/evidence-audit.json]
     python tools/findings_tracker.py connect --person-a "Epstein" --person-b "Rod-Larsen" --type financial
+    python tools/findings_tracker.py connection-evidence-add 7 --ref SOURCE:ID --source-quote "..." --reason "..."
+    python tools/findings_tracker.py connection-verify 7 --by analyst
+    python tools/findings_tracker.py connection-provenance 7 [--output /tmp/connection-7.json]
     python tools/findings_tracker.py connections "Epstein" [--depth 2]
     python tools/findings_tracker.py search "gates foundation"
     python tools/findings_tracker.py timeline [--target "Rod-Larsen"] [--start 2016-01-01] [--end 2019-12-31]
@@ -18,10 +25,12 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sqlite3
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
@@ -127,8 +136,14 @@ VALID_SOURCES = [
     "web_search", "doj", "nj_oag", "doj_vol11", "duggan", "lmsband", "unified_db",
     # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
-    "kabass", "fbi",
-    "fec", "edgar", "courtlistener", "990", "registry",
+    "kabass", "fbi", "efta",
+    "fec", "edgar", "courtlistener", "supreme_court", "finra", "openpayments",
+    "senate_finance",
+    "990", "registry",
+    # State political-finance, company disclosure, and legislative primary sources.
+    "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",
+    "geo_group_2024_political_activity_report",
+    "geo_group_2025_political_activity_report",
     "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
     "gdelt", "aleph", "icij", "acris", "la_county_assessor", "gleif", "opensanctions",
     "shodan", "crtsh", "wayback", "urlscan", "medicaid",
@@ -152,6 +167,11 @@ VALID_SOURCES = [
     "dsca", "lda", "fara_local",
     # Internal investigation cross-references
     "investigations",
+    # Attributed reporting claims promoted only after primary-evidence review.
+    "reporting",
+    "government_releases",
+    # Primary federal oversight and detention-review records.
+    "gao", "dhs_oig", "ice_odo", "ice_ddr", "ice_foia",
     # ── Selector-pivot leak/breach aggregators (provenance-opaque;
     #    findings sourced here cap at `medium` until corroborated) ──
     "leak_aggregator", "dehashed", "intelx",
@@ -183,6 +203,24 @@ VALID_SOURCES = [
     "companies_house", "fca", "london_gazette", "charity_commission",
     "bailii", "ewhc",
 ]
+
+# Curated compatibility names used by configured corpus tools and older findings.
+# These are explicit aliases rather than fuzzy normalization: an unregistered token
+# must still fail validation so provenance labels cannot silently drift.
+SOURCE_ALIASES = {
+    "kabasshouse": "kabass",
+    "unified": "unified_db",
+    "unified_epstein": "unified_db",
+    "house_20k": "house_oversight",
+    "epstein_20k": "house_oversight",
+    "fbi-files": "fbi",
+    "fbi_files": "fbi",
+    "fbi_epstein": "fbi",
+    "fbi_epstein_files": "fbi",
+    "epstein_reporting": "reporting",
+    "query_investigations": "investigations_db",
+    "scotus": "supreme_court",
+}
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
 
@@ -195,6 +233,26 @@ CONFIDENCE_CAPS = {
     "user_provided": "confirmed",   # human-supplied
 }
 _CONFIDENCE_ORDER = ["unverified", "low", "medium", "high", "confirmed"]
+PROVENANCE_OPAQUE_SOURCES = {"leak_aggregator", "dehashed", "intelx"}
+PROVENANCE_OPAQUE_CONFIDENCE_CAP = "medium"
+REPO_ROOT = Path(__file__).resolve().parent.parent
+LOCAL_EVIDENCE_SUFFIXES = {
+    ".csv", ".doc", ".docx", ".html", ".htm", ".json", ".md", ".pdf",
+    ".png", ".jpg", ".jpeg", ".tif", ".tiff", ".txt", ".xml", ".xlsx",
+}
+TEXT_EVIDENCE_SUFFIXES = {".csv", ".html", ".htm", ".json", ".md", ".txt", ".xml"}
+EVIDENCE_CORRECT_FIELDS = {
+    "evidence_ref", "source_quote", "source_page", "assessment",
+    "email_sender", "email_date", "chain_position",
+}
+EFTA_ONLY_EVIDENCE_FIELDS = {"email_sender", "email_date", "chain_position"}
+CONNECTION_EVIDENCE_CORRECT_FIELDS = {
+    "evidence_ref", "source_quote", "source_page", "assessment",
+}
+ALLOWED_CONNECTION_CORRECT_FIELDS = {
+    "relationship_type", "description", "strength", "date_range",
+    "finding_id", "profile_id", "valid_from", "valid_until",
+}
 
 
 def _enforce_confidence_cap(claim_type, confidence):
@@ -212,19 +270,179 @@ def _enforce_confidence_cap(claim_type, confidence):
     return confidence, False
 
 
+def _enforce_source_confidence_cap(source_datasets, confidence):
+    """Clamp confidence for findings sourced from provenance-opaque aggregators.
+
+    Returns (clamped_confidence, was_clamped).
+    """
+    if not PROVENANCE_OPAQUE_SOURCES.intersection(source_datasets or []):
+        return confidence, False
+    cap_idx = _CONFIDENCE_ORDER.index(PROVENANCE_OPAQUE_CONFIDENCE_CAP)
+    conf_idx = _CONFIDENCE_ORDER.index(confidence) if confidence in _CONFIDENCE_ORDER else 2
+    if conf_idx > cap_idx:
+        return PROVENANCE_OPAQUE_CONFIDENCE_CAP, True
+    return confidence, False
+
+
 def _classify_evidence_ref(evidence_ref):
-    """Classify a stored evidence reference without treating URL paths as files."""
-    if evidence_ref.startswith("EFTA"):
+    """Classify evidence without treating canonical refs or URL paths as files."""
+    evidence_ref = str(evidence_ref or "").strip()
+    if re.fullmatch(r"EFTA\d+", evidence_ref, flags=re.IGNORECASE):
         return "efta"
-    if "://" in evidence_ref:
+    parsed = urlparse(evidence_ref)
+    if parsed.scheme.lower() in {"http", "https"}:
         return "url"
-    if "/" in evidence_ref:
+    if parsed.scheme.lower() == "file":
+        return "file"
+    # Canonical source references frequently contain slash-delimited subkeys
+    # (for example CourtListener:docket/69737684). They are reproducible IDs,
+    # not local paths, and must remain valid without a filesystem probe.
+    if re.fullmatch(r"[A-Za-z][A-Za-z0-9_.-]*:[^\s]+", evidence_ref):
+        return "ref"
+    path = Path(evidence_ref).expanduser()
+    if (
+        path.is_absolute()
+        or evidence_ref.startswith(("./", "../", "~/"))
+        or "/" in evidence_ref
+        or "\\" in evidence_ref
+        or path.suffix.lower() in LOCAL_EVIDENCE_SUFFIXES
+    ):
         return "file"
     return "ref"
 
 
-def _parse_source_quote_args(source_quote_args, evidence_ids):
-    """Map CLI ``ref:quote`` values to refs, including canonical refs with colons.
+def _local_evidence_path(evidence_ref):
+    """Resolve a local evidence ref relative to the repository, not process cwd."""
+    value = str(evidence_ref or "").strip()
+    parsed = urlparse(value)
+    if parsed.scheme.lower() == "file":
+        value = unquote(parsed.path)
+    path = Path(value).expanduser()
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path.resolve(strict=False)
+
+
+def _validate_source_datasets(source_datasets):
+    """Return a canonical source-token list or raise for unsupported shapes/tokens."""
+    if isinstance(source_datasets, str) or not isinstance(source_datasets, (list, tuple)):
+        raise ValueError(
+            "source_datasets must be a JSON-array-compatible list of supported source tokens"
+        )
+    if not source_datasets:
+        raise ValueError("source_datasets must contain at least one supported source token")
+
+    normalized = []
+    for token in source_datasets:
+        if not isinstance(token, str) or not token.strip():
+            raise ValueError("source_datasets entries must be non-empty strings")
+        token = SOURCE_ALIASES.get(token.strip(), token.strip())
+        if token not in VALID_SOURCES:
+            raise ValueError(
+                f"Unsupported source token '{token}'. Add it to VALID_SOURCES before using it."
+            )
+        if token not in normalized:
+            normalized.append(token)
+    return normalized
+
+
+def _parse_stored_source_datasets(raw_value):
+    """Parse the JSON stored in findings.source_datasets and validate its tokens."""
+    try:
+        parsed = json.loads(raw_value) if isinstance(raw_value, str) else raw_value
+    except (TypeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"source_datasets is not valid JSON: {exc}") from exc
+    return _validate_source_datasets(parsed)
+
+
+def _validate_evidence_ref(evidence_ref, stored_type=None):
+    """Validate a new/published evidence reference and return its canonical type."""
+    if not isinstance(evidence_ref, str) or not evidence_ref.strip():
+        raise ValueError("evidence_ref must be a non-empty string")
+    evidence_ref = evidence_ref.strip()
+    expected_type = _classify_evidence_ref(evidence_ref)
+    if stored_type is not None and stored_type != expected_type:
+        raise ValueError(
+            f"Evidence ref '{evidence_ref}' is stored as '{stored_type}' but must be "
+            f"'{expected_type}'"
+        )
+    if expected_type == "file":
+        path = _local_evidence_path(evidence_ref)
+        if not path.is_file():
+            raise ValueError(
+                f"Local evidence file does not exist or is not a file: {evidence_ref} "
+                f"(resolved to {path})"
+            )
+    return expected_type
+
+
+def _normalize_quote_text(value):
+    """Normalize layout/OCR whitespace while preserving the quoted words."""
+    return re.sub(r"\s+", " ", str(value or "")).strip().casefold()
+
+
+def _load_evidence_text(evidence_ref, evidence_type):
+    """Resolve locally available source text for non-network span validation.
+
+    Returns ``(text, status_detail)``. A ``None`` text means the source has no
+    local resolver; it is not a mismatch and therefore does not block a write.
+    """
+    if evidence_type == "efta":
+        try:
+            try:
+                from tools.parse_email_chain import get_ocr_text
+            except ImportError:
+                from parse_email_chain import get_ocr_text
+            text = get_ocr_text(evidence_ref.upper())
+        except Exception as exc:
+            return None, f"EFTA corpus unavailable: {exc}"
+        return (text, "EFTA OCR") if text else (None, "EFTA document unavailable locally")
+
+    if evidence_type == "file":
+        path = _local_evidence_path(evidence_ref)
+        if path.suffix.lower() not in TEXT_EVIDENCE_SUFFIXES:
+            return None, f"span extraction unsupported for {path.suffix or 'this file type'}"
+        try:
+            return path.read_text(encoding="utf-8", errors="replace"), str(path)
+        except OSError as exc:
+            return None, f"local text unavailable: {exc}"
+
+    return None, f"no local span resolver for evidence_type={evidence_type}"
+
+
+def _check_source_quote_span(evidence_ref, source_quote, evidence_type=None):
+    """Return matched/mismatch/unchecked for an exact quote against local text."""
+    if not str(source_quote or "").strip():
+        return "missing", "source_quote is empty"
+    evidence_type = evidence_type or _classify_evidence_ref(evidence_ref)
+    text, detail = _load_evidence_text(evidence_ref, evidence_type)
+    if text is None:
+        return "unchecked", detail
+    if _normalize_quote_text(source_quote) in _normalize_quote_text(text):
+        return "matched", detail
+    return "mismatch", f"source_quote was not found in {detail}"
+
+
+def _validate_evidence_payload(evidence_ref, source_quote=None, *, claim_type=None,
+                               stored_type=None, require_quote=False):
+    """Validate reference/type/existence and any locally resolvable quote span."""
+    evidence_type = _validate_evidence_ref(evidence_ref, stored_type=stored_type)
+    needs_quote = require_quote or claim_type == "direct_quote"
+    if needs_quote and not str(source_quote or "").strip():
+        raise ValueError(
+            f"{claim_type or 'Published'} evidence '{evidence_ref}' requires a non-empty source_quote"
+        )
+    if str(source_quote or "").strip():
+        span_status, detail = _check_source_quote_span(
+            evidence_ref, source_quote, evidence_type=evidence_type
+        )
+        if span_status == "mismatch":
+            raise ValueError(f"Evidence '{evidence_ref}' failed exact quote validation: {detail}")
+    return evidence_type
+
+
+def _parse_evidence_field_args(values, evidence_ids, field_name):
+    """Map CLI ``ref:value`` entries to evidence metadata without truncating refs.
 
     Match an explicitly supplied evidence ref first. This lets canonical tokens such
     as ``FL-SunBiz:L10000130392`` retain their full key instead of being truncated
@@ -232,14 +450,41 @@ def _parse_source_quote_args(source_quote_args, evidence_ids):
     """
     parsed = {}
     evidence_ids = sorted(evidence_ids or [], key=len, reverse=True)
-    for value in source_quote_args or []:
+    for value in values or []:
         ref = next((item for item in evidence_ids if value.startswith(f"{item}:")), None)
         if ref is not None:
-            parsed[ref] = {"quote": value[len(ref) + 1:]}
+            field_value = value[len(ref) + 1:]
         elif ":" in value:
-            fallback_ref, quote = value.split(":", 1)
-            parsed[fallback_ref] = {"quote": quote}
+            fallback_ref, field_value = value.split(":", 1)
+            ref = fallback_ref
+        else:
+            continue
+        if ref in parsed:
+            raise ValueError(
+                f"Duplicate {field_name} metadata for evidence '{ref}'. "
+                "Each --evidence reference stores one value per metadata field; "
+                "combine the excerpts explicitly or use separate evidence refs."
+            )
+        parsed[ref] = {field_name: field_value}
     return parsed
+
+
+def _parse_source_quote_args(source_quote_args, evidence_ids):
+    """Map CLI ``ref:quote`` values to refs, including canonical refs with colons."""
+    return _parse_evidence_field_args(source_quote_args, evidence_ids, "quote")
+
+
+def _merge_evidence_metadata(evidence_ids, *metadata_maps):
+    """Merge independently parsed quote/page/assessment maps for known refs."""
+    merged = {ref: {} for ref in evidence_ids or []}
+    for metadata in metadata_maps:
+        for ref, values in (metadata or {}).items():
+            if ref not in merged:
+                raise ValueError(
+                    f"Evidence metadata supplied for '{ref}', but that ref is not in --evidence"
+                )
+            merged[ref].update(values)
+    return merged
 
 
 def _normalize_event_date(raw_date):
@@ -264,7 +509,7 @@ VALID_CORRECTION_TYPES = [
 ALLOWED_CORRECT_FIELDS = {
     "summary", "detail", "target_name", "date_of_event",
     "confidence", "finding_type", "claim_type", "thread_id",
-    "source_datasets", "profile_id",
+    "source_datasets", "profile_id", "lead_id",
 }
 
 
@@ -286,11 +531,36 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     """
     if agent_run_id is None:
         agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
-    if not source_datasets:
+    if claim_type not in VALID_CLAIM_TYPES:
         raise ValueError(
-            "source_datasets is required. Provide the data source(s) that produced this finding "
-            "(e.g., ['web_search'], ['fec'], ['edgar', 'registry'])."
+            f"Unsupported claim_type '{claim_type}'. Allowed: {', '.join(VALID_CLAIM_TYPES)}"
         )
+    source_datasets = _validate_source_datasets(source_datasets)
+    if evidence_ids is None:
+        evidence_ids = []
+    elif isinstance(evidence_ids, str) or not isinstance(evidence_ids, (list, tuple)):
+        raise ValueError("evidence_ids must be a list of evidence references")
+    if source_quotes is not None and not isinstance(source_quotes, dict):
+        raise ValueError("source_quotes must map each evidence_ref to quote metadata")
+    source_quotes = source_quotes or {}
+    if claim_type == "direct_quote" and not evidence_ids:
+        raise ValueError("direct_quote findings require at least one evidence reference")
+
+    evidence_rows = []
+    for evidence_ref in evidence_ids:
+        quote_data = source_quotes.get(evidence_ref, {})
+        if quote_data is None:
+            quote_data = {}
+        if not isinstance(quote_data, dict):
+            raise ValueError(
+                f"source_quotes['{evidence_ref}'] must be a metadata mapping"
+            )
+        evidence_type = _validate_evidence_payload(
+            evidence_ref,
+            quote_data.get("quote"),
+            claim_type=claim_type,
+        )
+        evidence_rows.append((str(evidence_ref).strip(), evidence_type, quote_data))
 
     # Enforce confidence caps by claim type
     confidence, was_clamped = _enforce_confidence_cap(claim_type, confidence)
@@ -298,13 +568,12 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         print(f"WARNING: Confidence clamped to '{confidence}' (max for claim_type='{claim_type}'). "
               f"See CONFIDENCE_CAPS in findings_tracker.py.", file=sys.stderr)
 
-    # Warn on unknown source names (don't block — allows new sources without code changes)
-    if source_datasets:
-        for src in source_datasets:
-            if src not in VALID_SOURCES:
-                print(f"WARNING: Unknown source '{src}'. Known sources: {', '.join(sorted(VALID_SOURCES)[:10])}... "
-                      f"(If this is a new source, consider adding it to VALID_SOURCES in findings_tracker.py)",
-                      file=sys.stderr)
+    # Enforce provenance caps after claim-type caps so the lower cap wins
+    confidence, was_source_clamped = _enforce_source_confidence_cap(source_datasets, confidence)
+    if was_source_clamped:
+        opaque_sources = sorted(PROVENANCE_OPAQUE_SOURCES.intersection(source_datasets))
+        print(f"WARNING: Confidence clamped to '{confidence}' (max for provenance-opaque "
+              f"source(s): {', '.join(opaque_sources)}).", file=sys.stderr)
 
     # Auto-detect profile_id from active investigation if not provided
     if profile_id is None:
@@ -349,39 +618,42 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         except Exception:
             pass
 
-    cursor = db.execute("""
-        INSERT INTO findings (target_name, finding_type, summary, detail,
-                             source_datasets, confidence, date_of_event, lead_id,
-                             claim_type, verification_status, thread_id,
-                             quality_state, confidence_requested, profile_id,
-                             agent_run_id, event_date_iso, date_precision)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?, ?, ?)
-    """, (target_name, finding_type, summary, detail,
-          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
-          profile_id, agent_run_id, event_date_iso, date_precision))
-    finding_id = cursor.lastrowid
+    try:
+        cursor = db.execute("""
+            INSERT INTO findings (target_name, finding_type, summary, detail,
+                                 source_datasets, confidence, date_of_event, lead_id,
+                                 claim_type, verification_status, thread_id,
+                                 quality_state, confidence_requested, profile_id,
+                                 agent_run_id, event_date_iso, date_precision)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?, ?, ?)
+        """, (target_name, finding_type, summary, detail,
+              sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
+              profile_id, agent_run_id, event_date_iso, date_precision))
+        finding_id = cursor.lastrowid
 
-    # Link the finding to a canonical entity so it's visible to network/graph
-    # analysis (identity was historically string-only via target_name). Best-effort:
-    # a resolution failure must never block recording the finding.
-    _link_finding_entity(db, finding_id, target_name, agent_run_id=agent_run_id)
+        # Link the finding to a canonical entity so it's visible to network/graph
+        # analysis (identity was historically string-only via target_name). Best-effort:
+        # a resolution failure must never block recording the finding.
+        _link_finding_entity(db, finding_id, target_name, agent_run_id=agent_run_id)
 
-    if evidence_ids:
-        for ev in evidence_ids:
-            ev_type = _classify_evidence_ref(ev)
-            sq = source_quotes.get(ev, {}) if source_quotes else {}
+        for evidence_ref, evidence_type, quote_data in evidence_rows:
             db.execute("""
-                INSERT OR IGNORE INTO finding_evidence
+                INSERT INTO finding_evidence
                     (finding_id, evidence_type, evidence_ref, source_quote,
                      source_page, assessment, email_sender)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (finding_id, ev_type, ev,
-                  sq.get("quote"), sq.get("page"), sq.get("assessment"),
-                  email_sender if ev_type == "efta" else None))
+            """, (finding_id, evidence_type, evidence_ref,
+                  quote_data.get("quote"), quote_data.get("page"),
+                  quote_data.get("assessment"),
+                  email_sender if evidence_type == "efta" else None))
 
-    db.commit()
-    db.close()
-    return finding_id
+        db.commit()
+        return finding_id
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def _resolve_profile(profile_id=None, all_profiles=False):
@@ -454,6 +726,258 @@ def get_finding(finding_id):
     return result
 
 
+def _evidence_snapshot(row):
+    """Return the provenance fields stored in an evidence audit snapshot."""
+    values = dict(row)
+    return {
+        key: values.get(key)
+        for key in (
+            "evidence_type", "evidence_ref", "source_quote", "source_page",
+            "assessment", "email_sender", "email_date", "chain_position",
+        )
+    }
+
+
+def _record_evidence_correction(db, finding_id, evidence_ref, field_name,
+                                old_value, new_value, reason, corrected_by,
+                                correction_type="refinement"):
+    """Append an immutable correction row for a composite-key evidence record."""
+    if not str(reason or "").strip():
+        raise ValueError("An audit reason is required for evidence changes")
+
+    def serialize(value):
+        if isinstance(value, (dict, list, tuple)):
+            return json.dumps(value, sort_keys=True, default=str)
+        return str(value) if value is not None else None
+
+    db.execute("""
+        INSERT INTO corrections (
+            table_name, record_id, record_key, field_name, old_value, new_value,
+            reason, corrected_by, correction_type
+        ) VALUES ('finding_evidence', ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        finding_id, evidence_ref, field_name, serialize(old_value),
+        serialize(new_value), reason.strip(), corrected_by, correction_type,
+    ))
+
+
+def _invalidate_verified_finding(db, finding, reason, corrected_by):
+    """Require fresh human review after evidence supporting a verified claim changes."""
+    if finding["verification_status"] != "verified":
+        return
+    db.execute("""
+        INSERT INTO corrections (
+            table_name, record_id, field_name, old_value, new_value,
+            reason, corrected_by, correction_type
+        ) VALUES ('findings', ?, 'verification_status', 'verified', 'unverified',
+                  ?, ?, 'refinement')
+    """, (
+        finding["id"],
+        f"Evidence changed and requires re-verification: {reason}",
+        corrected_by,
+    ))
+    db.execute("""
+        UPDATE findings
+        SET verification_status = 'unverified', verified_by = NULL, verified_at = NULL
+        WHERE id = ?
+    """, (finding["id"],))
+
+
+def add_finding_evidence(finding_id, evidence_ref, *, source_quote=None,
+                         source_page=None, assessment=None, email_sender=None,
+                         email_date=None, chain_position=None, reason,
+                         corrected_by="human"):
+    """Add one evidence row and its correction audit entry atomically."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        finding = db.execute(
+            "SELECT id, claim_type, verification_status FROM findings WHERE id = ?",
+            (finding_id,),
+        ).fetchone()
+        if finding is None:
+            raise ValueError(f"Finding #{finding_id} does not exist")
+        evidence_ref = str(evidence_ref or "").strip()
+        evidence_type = _validate_evidence_payload(
+            evidence_ref, source_quote, claim_type=finding["claim_type"]
+        )
+        if db.execute(
+            "SELECT 1 FROM finding_evidence WHERE finding_id = ? AND evidence_ref = ?",
+            (finding_id, evidence_ref),
+        ).fetchone():
+            raise ValueError(
+                f"Evidence '{evidence_ref}' already exists on finding #{finding_id}"
+            )
+        if chain_position is not None:
+            chain_position = int(chain_position)
+        snapshot = {
+            "evidence_type": evidence_type,
+            "evidence_ref": evidence_ref,
+            "source_quote": source_quote,
+            "source_page": source_page,
+            "assessment": assessment,
+            "email_sender": email_sender if evidence_type == "efta" else None,
+            "email_date": email_date if evidence_type == "efta" else None,
+            "chain_position": chain_position if evidence_type == "efta" else None,
+        }
+        db.execute("""
+            INSERT INTO finding_evidence (
+                finding_id, evidence_type, evidence_ref, source_quote, source_page,
+                assessment, email_sender, email_date, chain_position
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            finding_id, snapshot["evidence_type"], snapshot["evidence_ref"],
+            snapshot["source_quote"], snapshot["source_page"], snapshot["assessment"],
+            snapshot["email_sender"], snapshot["email_date"], snapshot["chain_position"],
+        ))
+        _record_evidence_correction(
+            db, finding_id, evidence_ref, "__row__", None, snapshot,
+            reason, corrected_by,
+        )
+        _invalidate_verified_finding(db, finding, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def correct_finding_evidence(finding_id, evidence_ref, field, new_value, *,
+                             reason, correction_type="refinement",
+                             corrected_by="human"):
+    """Correct one evidence field and append its audit entry atomically."""
+    if field not in EVIDENCE_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct evidence field '{field}'. Allowed: "
+            f"{', '.join(sorted(EVIDENCE_CORRECT_FIELDS))}"
+        )
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        finding = db.execute(
+            "SELECT id, claim_type, verification_status FROM findings WHERE id = ?",
+            (finding_id,),
+        ).fetchone()
+        if finding is None:
+            raise ValueError(f"Finding #{finding_id} does not exist")
+        row = db.execute(
+            "SELECT * FROM finding_evidence WHERE finding_id = ? AND evidence_ref = ?",
+            (finding_id, evidence_ref),
+        ).fetchone()
+        if row is None:
+            raise ValueError(
+                f"Evidence '{evidence_ref}' does not exist on finding #{finding_id}"
+            )
+        if field in EFTA_ONLY_EVIDENCE_FIELDS and row["evidence_type"] != "efta":
+            raise ValueError(
+                f"Cannot correct {field} on non-EFTA evidence '{evidence_ref}'. "
+                "EFTA email metadata is only valid when evidence_type='efta'."
+            )
+        old_ref = row["evidence_ref"]
+        old_value = row[field]
+        candidate = dict(row)
+        if field == "chain_position" and new_value not in (None, ""):
+            new_value = int(new_value)
+        elif new_value == "" and field != "evidence_ref":
+            new_value = None
+        if field == "evidence_ref":
+            new_value = str(new_value or "").strip()
+        candidate[field] = new_value
+        candidate["evidence_type"] = _validate_evidence_payload(
+            candidate["evidence_ref"], candidate.get("source_quote"),
+            claim_type=finding["claim_type"],
+        )
+        if field == "evidence_ref" and candidate["evidence_type"] != "efta":
+            populated_efta_fields = sorted(
+                name
+                for name in EFTA_ONLY_EVIDENCE_FIELDS
+                if candidate.get(name) not in (None, "")
+            )
+            if populated_efta_fields:
+                fields = ", ".join(populated_efta_fields)
+                raise ValueError(
+                    f"Cannot change EFTA evidence '{old_ref}' to non-EFTA ref "
+                    f"'{candidate['evidence_ref']}' while EFTA-only metadata remains: "
+                    f"{fields}. Clear each field first with an audited "
+                    "evidence-correct --value '' operation, then retry the ref change."
+                )
+
+        if field == "evidence_ref":
+            db.execute("""
+                UPDATE finding_evidence
+                SET evidence_ref = ?, evidence_type = ?
+                WHERE finding_id = ? AND evidence_ref = ?
+            """, (new_value, candidate["evidence_type"], finding_id, old_ref))
+        else:
+            db.execute(
+                f"UPDATE finding_evidence SET {field} = ? "
+                "WHERE finding_id = ? AND evidence_ref = ?",
+                (new_value, finding_id, old_ref),
+            )
+        _record_evidence_correction(
+            db, finding_id, old_ref, field, old_value, new_value,
+            reason, corrected_by, correction_type,
+        )
+        _invalidate_verified_finding(db, finding, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def delete_finding_evidence(finding_id, evidence_ref, *, reason,
+                            corrected_by="human"):
+    """Delete one evidence row while retaining an immutable audit snapshot."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        finding = db.execute(
+            "SELECT id, claim_type, verification_status FROM findings WHERE id = ?",
+            (finding_id,),
+        ).fetchone()
+        if finding is None:
+            raise ValueError(f"Finding #{finding_id} does not exist")
+        row = db.execute(
+            "SELECT * FROM finding_evidence WHERE finding_id = ? AND evidence_ref = ?",
+            (finding_id, evidence_ref),
+        ).fetchone()
+        if row is None:
+            raise ValueError(
+                f"Evidence '{evidence_ref}' does not exist on finding #{finding_id}"
+            )
+        evidence_count = db.execute(
+            "SELECT COUNT(*) FROM finding_evidence WHERE finding_id = ?",
+            (finding_id,),
+        ).fetchone()[0]
+        if finding["claim_type"] == "direct_quote" and evidence_count <= 1:
+            raise ValueError(
+                "Cannot delete the last evidence row from a direct_quote finding; "
+                "correct its claim_type first"
+            )
+        snapshot = _evidence_snapshot(row)
+        db.execute(
+            "DELETE FROM finding_evidence WHERE finding_id = ? AND evidence_ref = ?",
+            (finding_id, evidence_ref),
+        )
+        _record_evidence_correction(
+            db, finding_id, evidence_ref, "__row__", snapshot, None,
+            reason, corrected_by, correction_type="retraction",
+        )
+        _invalidate_verified_finding(db, finding, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
 def update_finding(finding_id, field, new_value, reason, correction_type="refinement",
                    corrected_by=None):
     """Update a finding field with correction audit trail. Returns True on success."""
@@ -463,50 +987,145 @@ def update_finding(finding_id, field, new_value, reason, correction_type="refine
             f"Allowed: {', '.join(sorted(ALLOWED_CORRECT_FIELDS))}"
         )
 
+    if not str(reason or "").strip():
+        raise ValueError("A correction reason is required")
+
     db = _get_db_standalone()
-    finding = db.execute("SELECT * FROM findings WHERE id = ?", (finding_id,)).fetchone()
-    if not finding:
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        finding = db.execute("SELECT * FROM findings WHERE id = ?", (finding_id,)).fetchone()
+        if not finding:
+            db.rollback()
+            return False
+
+        stored_value = new_value
+        if field == "source_datasets":
+            stored_value = json.dumps(_parse_stored_source_datasets(new_value))
+        elif field == "claim_type":
+            if new_value not in VALID_CLAIM_TYPES:
+                raise ValueError(
+                    f"Unsupported claim_type '{new_value}'. Allowed: {', '.join(VALID_CLAIM_TYPES)}"
+                )
+            if new_value == "direct_quote":
+                evidence = db.execute(
+                    "SELECT evidence_type, evidence_ref, source_quote "
+                    "FROM finding_evidence WHERE finding_id = ?",
+                    (finding_id,),
+                ).fetchall()
+                if not evidence:
+                    raise ValueError(
+                        "Cannot set claim_type=direct_quote without at least one evidence row"
+                    )
+                for row in evidence:
+                    _validate_evidence_payload(
+                        row["evidence_ref"], row["source_quote"],
+                        claim_type="direct_quote", stored_type=row["evidence_type"],
+                    )
+
+        old_value = finding[field] if field in finding.keys() else None
+        db.execute("""
+            INSERT INTO corrections (table_name, record_id, field_name, old_value, new_value,
+                                    reason, corrected_by, correction_type)
+            VALUES ('findings', ?, ?, ?, ?, ?, ?, ?)
+        """, (finding_id, field, str(old_value) if old_value is not None else None,
+              str(stored_value), reason, corrected_by, correction_type))
+
+        # Apply the update. Keep derived temporal fields synchronized atomically.
+        if field == "date_of_event":
+            event_date_iso, date_precision = _normalize_event_date(stored_value)
+            db.execute(
+                """
+                UPDATE findings
+                SET date_of_event = ?, event_date_iso = ?, date_precision = ?
+                WHERE id = ?
+                """,
+                (stored_value, event_date_iso, date_precision, finding_id),
+            )
+        else:
+            db.execute(
+                f"UPDATE findings SET {field} = ? WHERE id = ?",
+                (stored_value, finding_id),
+            )
+        if field in {"claim_type", "source_datasets"}:
+            _invalidate_verified_finding(db, finding, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
         db.close()
-        return False
-
-    old_value = finding[field] if field in finding.keys() else None
-
-    # Record the correction
-    db.execute("""
-        INSERT INTO corrections (table_name, record_id, field_name, old_value, new_value,
-                                reason, corrected_by, correction_type)
-        VALUES ('findings', ?, ?, ?, ?, ?, ?, ?)
-    """, (finding_id, field, str(old_value) if old_value is not None else None,
-          str(new_value), reason, corrected_by, correction_type))
-
-    # Apply the update. Keep derived temporal fields synchronized atomically.
-    if field == "date_of_event":
-        event_date_iso, date_precision = _normalize_event_date(new_value)
-        db.execute(
-            """
-            UPDATE findings
-            SET date_of_event = ?, event_date_iso = ?, date_precision = ?
-            WHERE id = ?
-            """,
-            (new_value, event_date_iso, date_precision, finding_id),
-        )
-    else:
-        db.execute(f"UPDATE findings SET {field} = ? WHERE id = ?", (new_value, finding_id))
-    db.commit()
-    db.close()
-    return True
 
 
 def verify_finding(finding_id, verified_by="human"):
-    """Mark a finding as verified by a human or agent."""
+    """Mark a finding verified only when its provenance satisfies publication gates.
+
+    Findings may be drafted before their provenance is complete, but the audit
+    contract requires valid source tokens, at least one evidence reference, and
+    an exact source quote for each reference before verification. Locally
+    resolvable quote spans must match; remote/canonical references remain
+    publishable but are reported as unchecked by ``evidence-audit``.
+    """
     db = _get_db_standalone()
-    now = datetime.now(timezone.utc).isoformat()
-    db.execute("""
-        UPDATE findings SET verification_status = 'verified', verified_by = ?, verified_at = ?
-        WHERE id = ?
-    """, (verified_by, now, finding_id))
-    db.commit()
-    db.close()
+    try:
+        finding = db.execute(
+            "SELECT id, claim_type, source_datasets FROM findings WHERE id = ?",
+            (finding_id,),
+        ).fetchone()
+        if finding is None:
+            raise ValueError(f"Finding #{finding_id} does not exist")
+        try:
+            _parse_stored_source_datasets(finding["source_datasets"])
+        except ValueError as exc:
+            raise ValueError(
+                f"Finding #{finding_id} cannot be verified: {exc}"
+            ) from exc
+
+        evidence = db.execute(
+            "SELECT evidence_type, evidence_ref, source_quote "
+            "FROM finding_evidence WHERE finding_id = ?",
+            (finding_id,),
+        ).fetchall()
+        if not evidence:
+            raise ValueError(
+                f"Finding #{finding_id} cannot be verified without at least one evidence reference"
+            )
+
+        missing_quotes = [
+            row["evidence_ref"]
+            for row in evidence
+            if not str(row["source_quote"] or "").strip()
+        ]
+        if missing_quotes:
+            refs = ", ".join(missing_quotes[:3])
+            if len(missing_quotes) > 3:
+                refs += f", and {len(missing_quotes) - 3} more"
+            raise ValueError(
+                f"Finding #{finding_id} cannot be verified: missing source_quote for {refs}"
+            )
+        for row in evidence:
+            try:
+                _validate_evidence_payload(
+                    row["evidence_ref"], row["source_quote"],
+                    claim_type=finding["claim_type"], stored_type=row["evidence_type"],
+                    require_quote=True,
+                )
+            except ValueError as exc:
+                raise ValueError(
+                    f"Finding #{finding_id} cannot be verified: {exc}"
+                ) from exc
+
+        now = datetime.now(timezone.utc).isoformat()
+        db.execute("""
+            UPDATE findings SET verification_status = 'verified', verified_by = ?, verified_at = ?
+            WHERE id = ?
+        """, (verified_by, now, finding_id))
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def dispute_finding(finding_id, reason, corrected_by=None):
@@ -585,7 +1204,8 @@ def retract_finding(finding_id, reason, corrected_by=None):
     return True
 
 
-def get_corrections(table_name=None, record_id=None, correction_type=None, limit=50):
+def get_corrections(table_name=None, record_id=None, record_key=None,
+                    correction_type=None, limit=50):
     """Get correction audit trail with optional filters."""
     db = _get_db_standalone()
     conditions = []
@@ -597,6 +1217,9 @@ def get_corrections(table_name=None, record_id=None, correction_type=None, limit
     if record_id is not None:
         conditions.append("record_id = ?")
         params.append(record_id)
+    if record_key is not None:
+        conditions.append("record_key = ?")
+        params.append(record_key)
     if correction_type:
         conditions.append("correction_type = ?")
         params.append(correction_type)
@@ -610,14 +1233,133 @@ def get_corrections(table_name=None, record_id=None, correction_type=None, limit
     return [dict(r) for r in rows]
 
 
-def get_unverified(limit=50):
-    """Get findings that haven't been human-verified yet."""
+def audit_finding_evidence(finding_id=None, profile_id=None, all_profiles=False):
+    """Report legacy provenance violations without modifying finding/evidence rows."""
     db = _get_db_standalone()
-    rows = db.execute("""
+    try:
+        conditions = []
+        params = []
+        if finding_id is not None:
+            conditions.append("id = ?")
+            params.append(finding_id)
+        resolved_profile = _resolve_profile(profile_id, all_profiles)
+        if resolved_profile:
+            conditions.append("profile_id = ?")
+            params.append(resolved_profile)
+        where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        findings = db.execute(
+            f"SELECT id, claim_type, verification_status, source_datasets, profile_id "
+            f"FROM findings {where} ORDER BY id",
+            params,
+        ).fetchall()
+        if finding_id is not None and not findings:
+            raise ValueError(f"Finding #{finding_id} does not exist in the selected profile scope")
+
+        issues = []
+        evidence_scanned = 0
+        span_counts = {"matched": 0, "mismatch": 0, "unchecked": 0, "missing": 0}
+
+        def issue(finding, code, message, *, severity="error", evidence_ref=None):
+            item = {
+                "finding_id": finding["id"],
+                "profile_id": finding["profile_id"],
+                "severity": severity,
+                "code": code,
+                "message": message,
+            }
+            if evidence_ref is not None:
+                item["evidence_ref"] = evidence_ref
+            issues.append(item)
+
+        for finding in findings:
+            try:
+                _parse_stored_source_datasets(finding["source_datasets"])
+            except ValueError as exc:
+                issue(finding, "invalid_source_datasets", str(exc))
+
+            evidence = db.execute(
+                "SELECT * FROM finding_evidence WHERE finding_id = ? ORDER BY evidence_ref",
+                (finding["id"],),
+            ).fetchall()
+            evidence_scanned += len(evidence)
+            if not evidence:
+                severity = (
+                    "error"
+                    if finding["claim_type"] == "direct_quote"
+                    or finding["verification_status"] == "verified"
+                    else "warning"
+                )
+                issue(
+                    finding, "missing_evidence",
+                    "Finding has no evidence references", severity=severity,
+                )
+                continue
+
+            for row in evidence:
+                ref = row["evidence_ref"]
+                expected_type = _classify_evidence_ref(ref)
+                if row["evidence_type"] != expected_type:
+                    issue(
+                        finding, "evidence_type_mismatch",
+                        f"Stored as {row['evidence_type']!r}; expected {expected_type!r}",
+                        evidence_ref=ref,
+                    )
+                try:
+                    _validate_evidence_ref(ref)
+                except ValueError as exc:
+                    issue(
+                        finding, "invalid_evidence_ref", str(exc), evidence_ref=ref,
+                    )
+
+                quote = row["source_quote"]
+                span_status, span_detail = _check_source_quote_span(
+                    ref, quote, evidence_type=expected_type
+                )
+                span_counts[span_status] += 1
+                if span_status == "missing":
+                    severity = (
+                        "error"
+                        if finding["claim_type"] == "direct_quote"
+                        or finding["verification_status"] == "verified"
+                        else "warning"
+                    )
+                    issue(
+                        finding, "missing_source_quote",
+                        "Evidence has no non-empty source_quote",
+                        severity=severity, evidence_ref=ref,
+                    )
+                elif span_status == "mismatch":
+                    issue(
+                        finding, "source_quote_mismatch", span_detail,
+                        evidence_ref=ref,
+                    )
+
+        return {
+            "report_only": True,
+            "findings_scanned": len(findings),
+            "evidence_scanned": evidence_scanned,
+            "issue_count": len(issues),
+            "span_checks": span_counts,
+            "issues": issues,
+        }
+    finally:
+        db.close()
+
+
+def get_unverified(limit=50, profile_id=None, all_profiles=False):
+    """Get unverified findings in the active or explicitly selected profile."""
+    db = _get_db_standalone()
+    conditions = ["f.verification_status = 'unverified'"]
+    params = []
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("f.profile_id = ?")
+        params.append(resolved_profile)
+    rows = db.execute(f"""
         SELECT f.*, GROUP_CONCAT(fe.evidence_ref, ', ') as evidence_refs
         FROM findings f
         LEFT JOIN finding_evidence fe ON fe.finding_id = f.id
-        WHERE f.verification_status = 'unverified'
+        WHERE {' AND '.join(conditions)}
         GROUP BY f.id
         ORDER BY
             CASE f.confidence
@@ -627,7 +1369,7 @@ def get_unverified(limit=50):
             END,
             f.created_at DESC
         LIMIT ?
-    """, (limit,)).fetchall()
+    """, (*params, limit)).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -646,6 +1388,11 @@ def get_provenance(finding_id):
     ).fetchall()]
     result["corrections"] = [dict(c) for c in db.execute(
         "SELECT * FROM corrections WHERE table_name = 'findings' AND record_id = ? ORDER BY created_at",
+        (finding_id,)
+    ).fetchall()]
+    result["evidence_corrections"] = [dict(c) for c in db.execute(
+        "SELECT * FROM corrections WHERE table_name = 'finding_evidence' "
+        "AND record_id = ? ORDER BY created_at",
         (finding_id,)
     ).fetchall()]
     result["connections"] = [dict(c) for c in db.execute(
@@ -807,9 +1554,566 @@ def relate_findings(from_finding_id, to_finding_id, relation_type,
     return True
 
 
+def delete_finding_relation(from_finding_id, to_finding_id, relation_type,
+                            reason, corrected_by=None):
+    """Delete one finding relation while retaining its full audit snapshot."""
+    if not str(reason or "").strip():
+        raise ValueError("An audit reason is required to delete a finding relation")
+
+    db = _get_db_standalone()
+    try:
+        relation = db.execute(
+            """
+            SELECT * FROM finding_relations
+            WHERE from_finding_id = ? AND to_finding_id = ? AND relation_type = ?
+            """,
+            (from_finding_id, to_finding_id, relation_type),
+        ).fetchone()
+        if relation is None:
+            raise ValueError(
+                f"finding relation #{from_finding_id} {relation_type} "
+                f"#{to_finding_id} does not exist"
+            )
+
+        snapshot = json.dumps(dict(relation), sort_keys=True, default=str)
+        db.execute(
+            """
+            INSERT INTO corrections (
+                table_name, record_id, field_name, old_value, new_value,
+                reason, corrected_by, correction_type
+            ) VALUES ('finding_relations', ?, '__row__', ?, NULL, ?, ?, 'retraction')
+            """,
+            (
+                relation["id"],
+                snapshot,
+                reason.strip(),
+                corrected_by or "findings_tracker",
+            ),
+        )
+        db.execute("DELETE FROM finding_relations WHERE id = ?", (relation["id"],))
+        db.commit()
+        return relation["id"]
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def _connection_evidence_snapshot(row):
+    """Return the provenance fields stored in a connection evidence audit snapshot."""
+    values = dict(row)
+    return {
+        key: values.get(key)
+        for key in (
+            "evidence_type", "evidence_ref", "source_quote", "source_page", "assessment",
+        )
+    }
+
+
+def _record_connection_evidence_correction(
+    db, connection_id, evidence_ref, field_name, old_value, new_value,
+    reason, corrected_by, correction_type="refinement",
+):
+    """Append an immutable audit row for composite-key connection evidence."""
+    if not str(reason or "").strip():
+        raise ValueError("An audit reason is required for connection evidence changes")
+
+    def serialize(value):
+        if isinstance(value, (dict, list, tuple)):
+            return json.dumps(value, sort_keys=True, default=str)
+        return str(value) if value is not None else None
+
+    db.execute("""
+        INSERT INTO corrections (
+            table_name, record_id, record_key, field_name, old_value, new_value,
+            reason, corrected_by, correction_type
+        ) VALUES ('connection_evidence', ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        connection_id, evidence_ref, field_name, serialize(old_value),
+        serialize(new_value), reason.strip(), corrected_by, correction_type,
+    ))
+
+
+def _record_connection_correction(db, connection_id, field_name, old_value,
+                                  new_value, reason, corrected_by,
+                                  correction_type="refinement"):
+    """Append an immutable audit row for a connection field/status change."""
+    if not str(reason or "").strip():
+        raise ValueError("An audit reason is required for connection changes")
+    db.execute("""
+        INSERT INTO corrections (
+            table_name, record_id, field_name, old_value, new_value,
+            reason, corrected_by, correction_type
+        ) VALUES ('connections', ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        connection_id, field_name,
+        str(old_value) if old_value is not None else None,
+        str(new_value) if new_value is not None else None,
+        reason.strip(), corrected_by, correction_type,
+    ))
+
+
+def _invalidate_verified_connection(db, connection, reason, corrected_by):
+    """Reset a verified edge after provenance or substantive edge data changes."""
+    if connection["verification_status"] != "verified":
+        return
+    _record_connection_correction(
+        db, connection["id"], "verification_status", "verified", "unverified",
+        f"Connection provenance changed and requires re-verification: {reason}",
+        corrected_by,
+    )
+    db.execute("""
+        UPDATE connections
+        SET verification_status='unverified', verified_by=NULL, verified_at=NULL
+        WHERE id=?
+    """, (connection["id"],))
+
+
+def add_connection_evidence(connection_id, evidence_ref, *, source_quote=None,
+                            source_page=None, assessment=None, reason,
+                            corrected_by="human"):
+    """Add one connection evidence row and its audit entry atomically."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        evidence_ref = str(evidence_ref or "").strip()
+        evidence_type = _validate_evidence_payload(evidence_ref, source_quote)
+        if db.execute(
+            "SELECT 1 FROM connection_evidence WHERE connection_id=? AND evidence_ref=?",
+            (connection_id, evidence_ref),
+        ).fetchone():
+            raise ValueError(
+                f"Evidence '{evidence_ref}' already exists on connection #{connection_id}"
+            )
+        snapshot = {
+            "evidence_type": evidence_type,
+            "evidence_ref": evidence_ref,
+            "source_quote": source_quote,
+            "source_page": source_page,
+            "assessment": assessment,
+        }
+        db.execute("""
+            INSERT INTO connection_evidence (
+                connection_id, evidence_type, evidence_ref,
+                source_quote, source_page, assessment
+            ) VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            connection_id, evidence_type, evidence_ref,
+            source_quote, source_page, assessment,
+        ))
+        _record_connection_evidence_correction(
+            db, connection_id, evidence_ref, "__row__", None, snapshot,
+            reason, corrected_by,
+        )
+        _invalidate_verified_connection(db, connection, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def correct_connection_evidence(connection_id, evidence_ref, field, new_value, *,
+                                reason, correction_type="refinement",
+                                corrected_by="human"):
+    """Correct one connection evidence field and audit the mutation atomically."""
+    if field not in CONNECTION_EVIDENCE_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct connection evidence field '{field}'. Allowed: "
+            f"{', '.join(sorted(CONNECTION_EVIDENCE_CORRECT_FIELDS))}"
+        )
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        row = db.execute(
+            "SELECT * FROM connection_evidence WHERE connection_id=? AND evidence_ref=?",
+            (connection_id, evidence_ref),
+        ).fetchone()
+        if row is None:
+            raise ValueError(
+                f"Evidence '{evidence_ref}' does not exist on connection #{connection_id}"
+            )
+        old_ref = row["evidence_ref"]
+        old_value = row[field]
+        if new_value == "" and field != "evidence_ref":
+            new_value = None
+        if field == "evidence_ref":
+            new_value = str(new_value or "").strip()
+        if old_value == new_value:
+            db.rollback()
+            return False
+        candidate = dict(row)
+        candidate[field] = new_value
+        candidate["evidence_type"] = _validate_evidence_payload(
+            candidate["evidence_ref"], candidate.get("source_quote")
+        )
+
+        if field == "evidence_ref":
+            db.execute("""
+                UPDATE connection_evidence
+                SET evidence_ref=?, evidence_type=?
+                WHERE connection_id=? AND evidence_ref=?
+            """, (new_value, candidate["evidence_type"], connection_id, old_ref))
+        else:
+            db.execute(
+                f"UPDATE connection_evidence SET {field}=? "
+                "WHERE connection_id=? AND evidence_ref=?",
+                (new_value, connection_id, old_ref),
+            )
+        _record_connection_evidence_correction(
+            db, connection_id, old_ref, field, old_value, new_value,
+            reason, corrected_by, correction_type,
+        )
+        _invalidate_verified_connection(db, connection, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def delete_connection_evidence(connection_id, evidence_ref, *, reason,
+                               corrected_by="human"):
+    """Delete connection evidence while preserving its complete audit snapshot."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        row = db.execute(
+            "SELECT * FROM connection_evidence WHERE connection_id=? AND evidence_ref=?",
+            (connection_id, evidence_ref),
+        ).fetchone()
+        if row is None:
+            raise ValueError(
+                f"Evidence '{evidence_ref}' does not exist on connection #{connection_id}"
+            )
+        snapshot = _connection_evidence_snapshot(row)
+        db.execute(
+            "DELETE FROM connection_evidence WHERE connection_id=? AND evidence_ref=?",
+            (connection_id, evidence_ref),
+        )
+        _record_connection_evidence_correction(
+            db, connection_id, evidence_ref, "__row__", snapshot, None,
+            reason, corrected_by, correction_type="retraction",
+        )
+        _invalidate_verified_connection(db, connection, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def validate_connection_publication(db, connection):
+    """Raise when an edge's current evidence/upstream provenance is not publishable.
+
+    This intentionally accepts an open database connection so every publication
+    surface can apply the exact same current-state gate without copying policy.
+    Lifecycle status is checked by the caller: verification uses this while an
+    edge is still unverified, whereas public readers first select verified rows.
+    """
+    if connection["finding_id"] is not None:
+        finding = db.execute(
+            "SELECT verification_status FROM findings WHERE id=?",
+            (connection["finding_id"],),
+        ).fetchone()
+        if finding is None:
+            raise ValueError(
+                f"references missing finding #{connection['finding_id']}"
+            )
+        if finding["verification_status"] != "verified":
+            raise ValueError(
+                f"upstream finding #{connection['finding_id']} is not verified"
+            )
+    evidence = db.execute(
+        "SELECT * FROM connection_evidence WHERE connection_id=? ORDER BY evidence_ref",
+        (connection["id"],),
+    ).fetchall()
+    if not evidence:
+        raise ValueError("has no evidence")
+    for row in evidence:
+        _validate_evidence_payload(
+            row["evidence_ref"], row["source_quote"],
+            stored_type=row["evidence_type"], require_quote=True,
+        )
+    return True
+
+
+def get_connection(connection_id):
+    """Return one connection with evidence, audit history, and upstream finding."""
+    db = _get_db_standalone()
+    try:
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            return None
+        result = dict(connection)
+        result["evidence"] = [dict(row) for row in db.execute(
+            "SELECT * FROM connection_evidence WHERE connection_id=? ORDER BY evidence_ref",
+            (connection_id,),
+        ).fetchall()]
+        result["corrections"] = [dict(row) for row in db.execute(
+            "SELECT * FROM corrections WHERE table_name='connections' AND record_id=? "
+            "ORDER BY created_at,id",
+            (connection_id,),
+        ).fetchall()]
+        result["evidence_corrections"] = [dict(row) for row in db.execute(
+            "SELECT * FROM corrections WHERE table_name='connection_evidence' "
+            "AND record_id=? ORDER BY created_at,id",
+            (connection_id,),
+        ).fetchall()]
+        result["upstream_finding"] = None
+        if result.get("finding_id") is not None:
+            finding = db.execute(
+                "SELECT id,target_name,summary,verification_status FROM findings WHERE id=?",
+                (result["finding_id"],),
+            ).fetchone()
+            result["upstream_finding"] = dict(finding) if finding else None
+        for evidence in result["evidence"]:
+            reliability = db.execute(
+                "SELECT * FROM source_reliability "
+                "WHERE ? LIKE '%' || source_name || '%'",
+                (evidence["evidence_ref"],),
+            ).fetchone()
+            evidence["source_reliability"] = dict(reliability) if reliability else None
+        result["publication_ready"] = False
+        result["publication_error"] = None
+        if result.get("verification_status") != "verified":
+            result["publication_error"] = (
+                f"connection status is {result.get('verification_status') or 'unverified'}"
+            )
+        else:
+            try:
+                validate_connection_publication(db, connection)
+                result["publication_ready"] = True
+            except ValueError as exc:
+                result["publication_error"] = str(exc)
+        return result
+    finally:
+        db.close()
+
+
+def get_connection_provenance(connection_id):
+    """Alias for the complete audited connection representation."""
+    return get_connection(connection_id)
+
+
+def verify_connection(connection_id, verified_by="human"):
+    """Publish a connection only after every evidence row passes provenance gates."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        if connection["verification_status"] == "retracted":
+            raise ValueError(f"Connection #{connection_id} is retracted and cannot be verified")
+        try:
+            validate_connection_publication(db, connection)
+        except ValueError as exc:
+            detail = str(exc)
+            if detail.startswith("upstream finding"):
+                detail = "cannot be verified until " + detail
+            raise ValueError(
+                f"Connection #{connection_id} cannot be verified: {detail}"
+            ) from exc
+        if connection["verification_status"] == "verified":
+            db.rollback()
+            return False
+        now = datetime.now(timezone.utc).isoformat()
+        _record_connection_correction(
+            db, connection_id, "verification_status",
+            connection["verification_status"], "verified",
+            "Connection evidence and upstream provenance passed publication validation",
+            verified_by, correction_type="refinement",
+        )
+        db.execute("""
+            UPDATE connections
+            SET verification_status='verified', verified_by=?, verified_at=?
+            WHERE id=?
+        """, (verified_by, now, connection_id))
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def dispute_connection(connection_id, reason, corrected_by="human"):
+    """Mark a connection disputed with an immutable status correction."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        if connection["verification_status"] == "retracted":
+            raise ValueError(
+                f"Connection #{connection_id} is retracted and cannot be disputed"
+            )
+        if connection["verification_status"] == "disputed":
+            db.rollback()
+            return False
+        _record_connection_correction(
+            db, connection_id, "verification_status",
+            connection["verification_status"], "disputed", reason, corrected_by,
+            correction_type="factual_error",
+        )
+        now = datetime.now(timezone.utc).isoformat()
+        db.execute("""
+            UPDATE connections
+            SET verification_status='disputed', verified_by=?, verified_at=?
+            WHERE id=?
+        """, (corrected_by, now, connection_id))
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def retract_connection(connection_id, reason, corrected_by="human"):
+    """Retract a connection without deleting its edge or provenance."""
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        if connection["verification_status"] == "retracted":
+            db.rollback()
+            return False
+        _record_connection_correction(
+            db, connection_id, "verification_status",
+            connection["verification_status"], "retracted", reason, corrected_by,
+            correction_type="retraction",
+        )
+        now = datetime.now(timezone.utc).isoformat()
+        db.execute("""
+            UPDATE connections
+            SET verification_status='retracted', verified_by=?, verified_at=?
+            WHERE id=?
+        """, (corrected_by, now, connection_id))
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def correct_connection(connection_id, field, new_value, reason, *,
+                       correction_type="refinement", corrected_by="human"):
+    """Correct an auditable connection field while preserving canonical endpoints."""
+    if field not in ALLOWED_CONNECTION_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct connection field '{field}'. Allowed: "
+            f"{', '.join(sorted(ALLOWED_CONNECTION_CORRECT_FIELDS))}. "
+            "Endpoint corrections require retracting this edge and creating a new canonical edge."
+        )
+    if field == "relationship_type" and new_value not in VALID_RELATIONSHIP_TYPES:
+        raise ValueError(f"Unsupported relationship_type '{new_value}'")
+    if field == "strength" and new_value not in VALID_STRENGTHS:
+        raise ValueError(f"Unsupported strength '{new_value}'")
+    if field == "finding_id":
+        new_value = None if new_value in (None, "") else int(new_value)
+    elif new_value == "":
+        new_value = None
+
+    db = _get_db_standalone()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        connection = db.execute(
+            "SELECT * FROM connections WHERE id=?", (connection_id,)
+        ).fetchone()
+        if connection is None:
+            raise ValueError(f"Connection #{connection_id} does not exist")
+        if field == "finding_id" and new_value is not None:
+            if not db.execute("SELECT 1 FROM findings WHERE id=?", (new_value,)).fetchone():
+                raise ValueError(f"Finding #{new_value} does not exist")
+        old_value = connection[field]
+        if old_value == new_value:
+            db.rollback()
+            return False
+        _record_connection_correction(
+            db, connection_id, field, old_value, new_value,
+            reason, corrected_by, correction_type,
+        )
+        db.execute(
+            f"UPDATE connections SET {field}=? WHERE id=?",
+            (new_value, connection_id),
+        )
+        _invalidate_verified_connection(db, connection, reason, corrected_by)
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def get_unverified_connections(limit=50, profile_id=None, all_profiles=False):
+    """Return unverified connections with their attached evidence refs."""
+    db = _get_db_standalone()
+    try:
+        conditions = ["COALESCE(c.verification_status, 'unverified')='unverified'"]
+        params = []
+        resolved_profile = _resolve_profile(profile_id, all_profiles)
+        if resolved_profile:
+            conditions.append("c.profile_id=?")
+            params.append(resolved_profile)
+        where = " AND ".join(conditions)
+        rows = db.execute(f"""
+            SELECT c.*, GROUP_CONCAT(ce.evidence_ref, ', ') AS evidence_refs
+            FROM connections c
+            LEFT JOIN connection_evidence ce ON ce.connection_id=c.id
+            WHERE {where}
+            GROUP BY c.id
+            ORDER BY c.created_at DESC, c.id DESC
+            LIMIT ?
+        """, params + [limit]).fetchall()
+        return [dict(row) for row in rows]
+    finally:
+        db.close()
+
+
 def add_connection(person_a, person_b, relationship_type=None, description=None,
                    evidence_ids=None, strength="medium", date_range=None, finding_id=None,
-                   profile_id=None, agent_run_id=None,
+                   profile_id=None, agent_run_id=None, source_quotes=None,
                    entity_a_type="unknown", entity_b_type="unknown"):
     """Add a connection between two persons/entities.
 
@@ -819,6 +2123,38 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
     """
     if agent_run_id is None:
         agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
+    if relationship_type is not None and relationship_type not in VALID_RELATIONSHIP_TYPES:
+        raise ValueError(f"Unsupported relationship_type '{relationship_type}'")
+    if strength not in VALID_STRENGTHS:
+        raise ValueError(f"Unsupported strength '{strength}'")
+    if evidence_ids is None:
+        evidence_ids = []
+    elif isinstance(evidence_ids, str) or not isinstance(evidence_ids, (list, tuple)):
+        raise ValueError("evidence_ids must be a list of evidence references")
+    if source_quotes is not None and not isinstance(source_quotes, dict):
+        raise ValueError("source_quotes must map each evidence_ref to provenance metadata")
+    source_quotes = source_quotes or {}
+    unknown_metadata_refs = set(source_quotes) - set(evidence_ids)
+    if unknown_metadata_refs:
+        raise ValueError(
+            "Evidence metadata supplied for refs not present in evidence_ids: "
+            + ", ".join(sorted(unknown_metadata_refs))
+        )
+    if len(set(evidence_ids)) != len(evidence_ids):
+        raise ValueError("evidence_ids contains duplicate references")
+    evidence_rows = []
+    for ref in evidence_ids:
+        metadata = source_quotes.get(ref) or {}
+        if not isinstance(metadata, dict):
+            raise ValueError(f"source_quotes['{ref}'] must be a metadata mapping")
+        metadata = {
+            "quote": metadata.get("quote") or None,
+            "page": metadata.get("page") or None,
+            "assessment": metadata.get("assessment") or None,
+        }
+        evidence_type = _validate_evidence_payload(ref, metadata["quote"])
+        evidence_rows.append((str(ref).strip(), evidence_type, metadata))
+
     # Auto-detect profile_id from active investigation if not provided
     if profile_id is None:
         profile_id = _detect_active_profile()
@@ -832,49 +2168,121 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         pass
 
     db = _get_db_standalone()
+    try:
+        # Enforce the invariant: every connection endpoint is backed by an entity row.
+        # Done before the alphabetical swap so each name stays paired with its type.
+        _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
+        _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
 
-    # Enforce the invariant: every connection endpoint is backed by an entity row.
-    # Done before the alphabetical swap so each name stays paired with its type.
-    _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
-    _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
+        # Normalize: store alphabetically for dedup.
+        if person_a > person_b:
+            person_a, person_b = person_b, person_a
 
-    # Normalize: store alphabetically for dedup
-    if person_a > person_b:
-        person_a, person_b = person_b, person_a
+        insert_cursor = db.execute("""
+            INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
+                                    strength, date_range, finding_id, profile_id, agent_run_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
+              profile_id, agent_run_id))
+        connection_created = insert_cursor.rowcount == 1
 
-    cursor = db.execute("""
-        INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
-                                strength, date_range, finding_id, profile_id, agent_run_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
-          profile_id, agent_run_id))
-    conn_id = cursor.lastrowid
-    if conn_id == 0:
-        # Duplicate — find the existing connection id
+        # INSERT OR IGNORE does not reset cursor.lastrowid when the row already
+        # exists. Endpoint registration above may therefore leave lastrowid set
+        # to an unrelated entity ID. Always resolve the canonical connection by
+        # the same key enforced by idx_connections_unique before writing evidence.
         existing = db.execute("""
-            SELECT id FROM connections
+            SELECT * FROM connections
             WHERE person_a = ? AND person_b = ?
               AND COALESCE(relationship_type, '') = COALESCE(?, '')
               AND COALESCE(profile_id, '') = COALESCE(?, '')
         """, (person_a, person_b, relationship_type, profile_id)).fetchone()
-        if existing:
-            conn_id = existing["id"]
-
-    if evidence_ids:
-        for ev in evidence_ids:
-            ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
-            db.execute(
-                "INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
-                (conn_id, ev_type, ev)
+        if existing is None:
+            raise sqlite3.IntegrityError(
+                "connection insert did not resolve a canonical row"
             )
+        conn_id = existing["id"]
+        evidence_changed = False
+        audit_actor = agent_run_id or "findings_tracker:connect"
+        audit_reason = "Connection evidence enriched via idempotent connect"
 
-    db.commit()
-    db.close()
-    return conn_id
+        for evidence_ref, evidence_type, metadata in evidence_rows:
+            current = db.execute(
+                "SELECT * FROM connection_evidence "
+                "WHERE connection_id=? AND evidence_ref=?",
+                (conn_id, evidence_ref),
+            ).fetchone()
+            if current is None:
+                cursor = db.execute("""
+                    INSERT OR IGNORE INTO connection_evidence (
+                        connection_id, evidence_type, evidence_ref,
+                        source_quote, source_page, assessment
+                    ) VALUES (?, ?, ?, ?, ?, ?)
+                """, (
+                    conn_id, evidence_type, evidence_ref,
+                    metadata["quote"], metadata["page"], metadata["assessment"],
+                ))
+                if cursor.rowcount == 1:
+                    evidence_changed = True
+                    if not connection_created:
+                        snapshot = {
+                            "evidence_type": evidence_type,
+                            "evidence_ref": evidence_ref,
+                            "source_quote": metadata["quote"],
+                            "source_page": metadata["page"],
+                            "assessment": metadata["assessment"],
+                        }
+                        _record_connection_evidence_correction(
+                            db, conn_id, evidence_ref, "__row__", None, snapshot,
+                            audit_reason, audit_actor,
+                        )
+                    continue
+                current = db.execute(
+                    "SELECT * FROM connection_evidence "
+                    "WHERE connection_id=? AND evidence_ref=?",
+                    (conn_id, evidence_ref),
+                ).fetchone()
+
+            for metadata_key, column in (
+                ("quote", "source_quote"),
+                ("page", "source_page"),
+                ("assessment", "assessment"),
+            ):
+                incoming = metadata[metadata_key]
+                if incoming is None:
+                    continue
+                stored = current[column]
+                if stored == incoming:
+                    continue
+                if stored is not None:
+                    raise ValueError(
+                        f"Connection #{conn_id} evidence '{evidence_ref}' already has a "
+                        f"different {column}; use connection-evidence-correct with an audit reason"
+                    )
+                db.execute(
+                    f"UPDATE connection_evidence SET {column}=? "
+                    "WHERE connection_id=? AND evidence_ref=?",
+                    (incoming, conn_id, evidence_ref),
+                )
+                _record_connection_evidence_correction(
+                    db, conn_id, evidence_ref, column, stored, incoming,
+                    audit_reason, audit_actor,
+                )
+                evidence_changed = True
+
+        if not connection_created and evidence_changed:
+            _invalidate_verified_connection(db, existing, audit_reason, audit_actor)
+
+        db.commit()
+        return conn_id
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def get_connections(person, depth=1, relationship_type=None, profile_id=None,
-                    all_profiles=False):
+                    all_profiles=False, verification_status=None):
     """Get all connections for a person, optionally multi-hop."""
     db = _get_db_standalone()
     resolved_profile = _resolve_profile(profile_id, all_profiles)
@@ -897,12 +2305,20 @@ def get_connections(person, depth=1, relationship_type=None, profile_id=None,
         if resolved_profile:
             conditions.append("profile_id = ?")
             params.append(resolved_profile)
+        if verification_status:
+            conditions.append("verification_status = ?")
+            params.append(verification_status)
 
         where = " AND ".join(conditions)
         rows = db.execute(f"SELECT * FROM connections WHERE {where}", params).fetchall()
 
         next_layer = set()
         for row in rows:
+            if verification_status == "verified":
+                try:
+                    validate_connection_publication(db, row)
+                except ValueError:
+                    continue
             conn = dict(row)
             conn_key = (conn["person_a"], conn["person_b"], conn.get("relationship_type"))
             if conn_key not in visited:
@@ -1037,9 +2453,15 @@ def format_finding(finding, verbose=False):
 
 def format_connection(conn):
     strength_markers = {"strong": "===", "medium": "---", "weak": "- -", "circumstantial": "..."}
+    verification_markers = {"verified": "V", "unverified": "?", "disputed": "D", "retracted": "X"}
     marker = strength_markers.get(conn["strength"], "---")
     rtype = conn.get("relationship_type", "?")
-    return f"  {conn['person_a']} {marker}[{rtype}]{marker} {conn['person_b']}"
+    connection_status = conn.get("verification_status", "unverified")
+    verification = verification_markers.get(connection_status, "?")
+    return (
+        f"  [{verification}] #{conn.get('id', '?')} {conn['person_a']} "
+        f"{marker}[{rtype}]{marker} {conn['person_b']} ({connection_status})"
+    )
 
 
 def main():
@@ -1063,6 +2485,7 @@ def main():
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
     add_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
+    add_output_args(add_p)
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -1081,6 +2504,56 @@ def main():
     show_p.add_argument("id", type=int)
     add_output_args(show_p)
 
+    # audited finding-evidence CRUD
+    evidence_add_p = subparsers.add_parser(
+        "evidence-add", help="Add finding evidence with an immutable audit entry"
+    )
+    evidence_add_p.add_argument("id", type=int, help="Finding ID")
+    evidence_add_p.add_argument("--ref", required=True, dest="evidence_ref")
+    evidence_add_p.add_argument("--source-quote")
+    evidence_add_p.add_argument("--source-page")
+    evidence_add_p.add_argument("--assessment")
+    evidence_add_p.add_argument("--email-sender")
+    evidence_add_p.add_argument("--email-date")
+    evidence_add_p.add_argument("--chain-position", type=int)
+    evidence_add_p.add_argument("--reason", "-r", required=True)
+    evidence_add_p.add_argument("--by", default="human")
+
+    evidence_correct_p = subparsers.add_parser(
+        "evidence-correct", help="Correct finding evidence with an immutable audit entry"
+    )
+    evidence_correct_p.add_argument("id", type=int, help="Finding ID")
+    evidence_correct_p.add_argument("--ref", required=True, dest="evidence_ref")
+    evidence_correct_p.add_argument(
+        "--field", "-f", required=True, choices=sorted(EVIDENCE_CORRECT_FIELDS)
+    )
+    evidence_correct_p.add_argument(
+        "--value", "-v", required=True,
+        help="Replacement value; use an empty string to clear nullable metadata",
+    )
+    evidence_correct_p.add_argument("--reason", "-r", required=True)
+    evidence_correct_p.add_argument(
+        "--correction-type", choices=VALID_CORRECTION_TYPES, default="refinement"
+    )
+    evidence_correct_p.add_argument("--by", default="human")
+
+    evidence_delete_p = subparsers.add_parser(
+        "evidence-delete", help="Delete finding evidence while retaining its audit snapshot"
+    )
+    evidence_delete_p.add_argument("id", type=int, help="Finding ID")
+    evidence_delete_p.add_argument("--ref", required=True, dest="evidence_ref")
+    evidence_delete_p.add_argument("--reason", "-r", required=True)
+    evidence_delete_p.add_argument("--by", default="human")
+
+    evidence_audit_p = subparsers.add_parser(
+        "evidence-audit",
+        help="Report provenance violations without modifying findings or evidence",
+    )
+    evidence_audit_p.add_argument("--finding-id", type=int)
+    evidence_audit_p.add_argument("--profile", help="Investigation profile (default: active)")
+    evidence_audit_p.add_argument("--all-profiles", action="store_true")
+    add_output_args(evidence_audit_p)
+
     # connect
     conn_p = subparsers.add_parser("connect", help="Add a connection between any two nodes (persons, orgs, programs)")
     conn_p.add_argument("--person-a", "--node-a", "-a", required=True)
@@ -1088,6 +2561,18 @@ def main():
     conn_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
     conn_p.add_argument("--description", "-d")
     conn_p.add_argument("--evidence", "-e", nargs="+")
+    conn_p.add_argument(
+        "--source-quote", nargs="+",
+        help="ref:quote pairs for connection evidence",
+    )
+    conn_p.add_argument(
+        "--source-page", nargs="+",
+        help="ref:page/location pairs for connection evidence",
+    )
+    conn_p.add_argument(
+        "--assessment", nargs="+",
+        help="ref:assessment pairs explaining how evidence supports the edge",
+    )
     conn_p.add_argument("--strength", choices=VALID_STRENGTHS, default="medium")
     conn_p.add_argument("--date-range")
     conn_p.add_argument("--finding-id", type=int)
@@ -1097,6 +2582,104 @@ def main():
     conn_p.add_argument("--entity-b-type", choices=VALID_ENTITY_TYPES, default="unknown",
                         help="Type for endpoint B if auto-registered as a new entity")
 
+    connection_evidence_add_p = subparsers.add_parser(
+        "connection-evidence-add",
+        help="Add connection evidence with an immutable audit entry",
+    )
+    connection_evidence_add_p.add_argument("id", type=int, help="Connection ID")
+    connection_evidence_add_p.add_argument("--ref", required=True, dest="evidence_ref")
+    connection_evidence_add_p.add_argument("--source-quote")
+    connection_evidence_add_p.add_argument("--source-page")
+    connection_evidence_add_p.add_argument("--assessment")
+    connection_evidence_add_p.add_argument("--reason", "-r", required=True)
+    connection_evidence_add_p.add_argument("--by", default="human")
+
+    connection_evidence_correct_p = subparsers.add_parser(
+        "connection-evidence-correct",
+        help="Correct connection evidence with an immutable audit entry",
+    )
+    connection_evidence_correct_p.add_argument("id", type=int, help="Connection ID")
+    connection_evidence_correct_p.add_argument("--ref", required=True, dest="evidence_ref")
+    connection_evidence_correct_p.add_argument(
+        "--field", "-f", required=True,
+        choices=sorted(CONNECTION_EVIDENCE_CORRECT_FIELDS),
+    )
+    connection_evidence_correct_p.add_argument(
+        "--value", "-v", required=True,
+        help="Replacement value; use an empty string to clear nullable metadata",
+    )
+    connection_evidence_correct_p.add_argument("--reason", "-r", required=True)
+    connection_evidence_correct_p.add_argument(
+        "--correction-type", choices=VALID_CORRECTION_TYPES, default="refinement"
+    )
+    connection_evidence_correct_p.add_argument("--by", default="human")
+
+    connection_evidence_delete_p = subparsers.add_parser(
+        "connection-evidence-delete",
+        help="Delete connection evidence while retaining its audit snapshot",
+    )
+    connection_evidence_delete_p.add_argument("id", type=int, help="Connection ID")
+    connection_evidence_delete_p.add_argument("--ref", required=True, dest="evidence_ref")
+    connection_evidence_delete_p.add_argument("--reason", "-r", required=True)
+    connection_evidence_delete_p.add_argument("--by", default="human")
+
+    connection_verify_p = subparsers.add_parser(
+        "connection-verify", help="Verify a connection after provenance validation"
+    )
+    connection_verify_p.add_argument("id", type=int)
+    connection_verify_p.add_argument("--by", default="human")
+
+    connection_dispute_p = subparsers.add_parser(
+        "connection-dispute", help="Mark a connection disputed with an audit reason"
+    )
+    connection_dispute_p.add_argument("id", type=int)
+    connection_dispute_p.add_argument("--reason", "-r", required=True)
+    connection_dispute_p.add_argument("--by", default="human")
+
+    connection_retract_p = subparsers.add_parser(
+        "connection-retract", help="Retract a connection without deleting provenance"
+    )
+    connection_retract_p.add_argument("id", type=int)
+    connection_retract_p.add_argument("--reason", "-r", required=True)
+    connection_retract_p.add_argument("--by", default="human")
+
+    connection_correct_p = subparsers.add_parser(
+        "connection-correct", help="Correct an auditable connection field"
+    )
+    connection_correct_p.add_argument("id", type=int)
+    connection_correct_p.add_argument(
+        "--field", "-f", required=True,
+        choices=sorted(ALLOWED_CONNECTION_CORRECT_FIELDS),
+    )
+    connection_correct_p.add_argument("--value", "-v", required=True)
+    connection_correct_p.add_argument("--reason", "-r", required=True)
+    connection_correct_p.add_argument(
+        "--correction-type", choices=VALID_CORRECTION_TYPES, default="refinement"
+    )
+    connection_correct_p.add_argument("--by", default="human")
+
+    connection_audit_p = subparsers.add_parser(
+        "connection-audit", help="Show connection and connection-evidence corrections"
+    )
+    connection_audit_p.add_argument("id", type=int)
+    connection_audit_p.add_argument("--record-key", help="Optional evidence_ref filter")
+    connection_audit_p.add_argument("--limit", type=int, default=50)
+    add_output_args(connection_audit_p)
+
+    connection_provenance_p = subparsers.add_parser(
+        "connection-provenance", help="Show the full provenance chain for a connection"
+    )
+    connection_provenance_p.add_argument("id", type=int)
+    add_output_args(connection_provenance_p)
+
+    connection_unverified_p = subparsers.add_parser(
+        "connection-unverified", help="List connections awaiting verification"
+    )
+    connection_unverified_p.add_argument("--limit", type=int, default=50)
+    connection_unverified_p.add_argument("--profile", help="Profile (default: active)")
+    connection_unverified_p.add_argument("--all-profiles", action="store_true")
+    add_output_args(connection_unverified_p)
+
     # connections
     conns_p = subparsers.add_parser("connections", help="Get connections for a node (person, org, or program)")
     conns_p.add_argument("person", metavar="NODE")
@@ -1104,6 +2687,10 @@ def main():
     conns_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
     conns_p.add_argument("--profile", help="Investigation profile (default: active)")
     conns_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
+    conns_p.add_argument(
+        "--verified-only", action="store_true",
+        help="Publication view: include only evidence-validated verified edges",
+    )
     add_output_args(conns_p)
 
     # search
@@ -1148,6 +2735,21 @@ def main():
     relate_p.add_argument("--assessment", "-a", help="Why the relation holds")
     relate_p.add_argument("--by", default="human")
 
+    relation_delete_p = subparsers.add_parser(
+        "relation-delete",
+        aliases=["unrelate"],
+        help="Delete one finding relation while retaining an audit snapshot",
+    )
+    relation_delete_p.add_argument("from_id", type=int)
+    relation_delete_p.add_argument("to_id", type=int)
+    relation_delete_p.add_argument(
+        "--type", "-t", required=True, dest="relation_type",
+        choices=["contradicts", "corroborates", "supersedes",
+                 "duplicates", "refines", "depends_on"],
+    )
+    relation_delete_p.add_argument("--reason", "-r", required=True)
+    relation_delete_p.add_argument("--by", default="human")
+
     # retract
     retract_p = subparsers.add_parser("retract", help="Retract a finding (cascades to connections)")
     retract_p.add_argument("id", type=int)
@@ -1157,9 +2759,17 @@ def main():
     # correct
     correct_p = subparsers.add_parser("correct", help="Correct a field with audit trail")
     correct_p.add_argument("id", type=int)
-    correct_p.add_argument("--field", "-f", required=True,
-                           help="Field to correct (summary, detail, target_name, date_of_event, etc.)")
-    correct_p.add_argument("--value", "-v", required=True, help="New value")
+    correct_p.add_argument(
+        "--field", "-f", required=True, choices=sorted(ALLOWED_CORRECT_FIELDS),
+        help="Finding field to correct",
+    )
+    correct_p.add_argument(
+        "--value", "-v", required=True,
+        help=(
+            "New value; source_datasets requires a JSON array such as "
+            "'[\"courtlistener\"]'"
+        ),
+    )
     correct_p.add_argument("--reason", "-r", required=True, help="Why the correction was needed")
     correct_p.add_argument("--correction-type", choices=VALID_CORRECTION_TYPES, default="refinement")
     correct_p.add_argument("--by", default="human")
@@ -1168,8 +2778,13 @@ def main():
     audit_p = subparsers.add_parser("audit", help="Show correction history")
     audit_p.add_argument("id", type=int, nargs="?", help="Finding ID (omit for all)")
     audit_p.add_argument("--table", default="findings")
+    audit_p.add_argument(
+        "--record-key",
+        help="Composite child-row key (for finding_evidence, the evidence_ref)",
+    )
     audit_p.add_argument("--correction-type", choices=VALID_CORRECTION_TYPES)
     audit_p.add_argument("--limit", type=int, default=50)
+    add_output_args(audit_p)
 
     # provenance
     prov_p = subparsers.add_parser("provenance", help="Show full provenance chain for a finding")
@@ -1179,6 +2794,8 @@ def main():
     # unverified
     unverified_p = subparsers.add_parser("unverified", help="List unverified findings")
     unverified_p.add_argument("--limit", type=int, default=50)
+    unverified_p.add_argument("--profile", help="Profile (default: active)")
+    unverified_p.add_argument("--all-profiles", action="store_true")
     add_output_args(unverified_p)
 
     # stats
@@ -1204,17 +2821,26 @@ def main():
             getattr(args, "evidence", None),
         ) or None
 
-        fid = add_finding(
-            target_name=args.target, summary=args.summary, finding_type=args.finding_type,
-            detail=args.detail, evidence_ids=args.evidence, source_datasets=args.sources,
-            confidence=args.confidence, date_of_event=args.date, lead_id=args.lead_id,
-            claim_type=getattr(args, "claim_type", "inference"),
-            source_quotes=source_quotes,
-            thread_id=getattr(args, "thread_id", None),
-            email_sender=getattr(args, "email_sender", None),
-            profile_id=getattr(args, "profile", None),
-        )
-        print(f"Created finding #{fid}: {args.target} - {args.summary}")
+        try:
+            fid = add_finding(
+                target_name=args.target, summary=args.summary, finding_type=args.finding_type,
+                detail=args.detail, evidence_ids=args.evidence, source_datasets=args.sources,
+                confidence=args.confidence, date_of_event=args.date, lead_id=args.lead_id,
+                claim_type=getattr(args, "claim_type", "inference"),
+                source_quotes=source_quotes,
+                thread_id=getattr(args, "thread_id", None),
+                email_sender=getattr(args, "email_sender", None),
+                profile_id=getattr(args, "profile", None),
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        created = {"id": fid, "target_name": args.target, "summary": args.summary}
+        if not write_output(created, args, summary=f"created finding #{fid}"):
+            if getattr(args, "json_out", False):
+                print(json.dumps(created, indent=2))
+            else:
+                print(f"Created finding #{fid}: {args.target} - {args.summary}")
 
     elif args.command == "list":
         findings = list_findings(
@@ -1243,21 +2869,277 @@ def main():
                 for c in finding["connections"]:
                     print(format_connection(c))
 
-    elif args.command == "connect":
-        cid = add_connection(
-            person_a=args.person_a, person_b=args.person_b, relationship_type=args.rel_type,
-            description=args.description, evidence_ids=args.evidence,
-            strength=args.strength, date_range=args.date_range, finding_id=args.finding_id,
-            profile_id=getattr(args, "profile", None),
-            entity_a_type=getattr(args, "entity_a_type", "unknown"),
-            entity_b_type=getattr(args, "entity_b_type", "unknown"),
+    elif args.command == "evidence-add":
+        try:
+            add_finding_evidence(
+                args.id, args.evidence_ref,
+                source_quote=args.source_quote, source_page=args.source_page,
+                assessment=args.assessment, email_sender=args.email_sender,
+                email_date=args.email_date, chain_position=args.chain_position,
+                reason=args.reason, corrected_by=args.by,
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(f"Added evidence to finding #{args.id}: {args.evidence_ref}")
+
+    elif args.command == "evidence-correct":
+        try:
+            correct_finding_evidence(
+                args.id, args.evidence_ref, args.field, args.value,
+                reason=args.reason, correction_type=args.correction_type,
+                corrected_by=args.by,
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(
+            f"Corrected evidence on finding #{args.id}: "
+            f"{args.evidence_ref}.{args.field}"
         )
+
+    elif args.command == "evidence-delete":
+        try:
+            delete_finding_evidence(
+                args.id, args.evidence_ref, reason=args.reason, corrected_by=args.by
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(f"Deleted evidence from finding #{args.id}: {args.evidence_ref}")
+
+    elif args.command == "evidence-audit":
+        try:
+            report = audit_finding_evidence(
+                finding_id=args.finding_id,
+                profile_id=args.profile,
+                all_profiles=args.all_profiles,
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        summary = (
+            f"finding evidence audit: {report['issue_count']} issues across "
+            f"{report['findings_scanned']} findings"
+        )
+        if not write_output(report, args, summary=summary):
+            print("Finding evidence audit (REPORT ONLY — no data changed)")
+            print(
+                f"  Findings: {report['findings_scanned']}  "
+                f"Evidence: {report['evidence_scanned']}  Issues: {report['issue_count']}"
+            )
+            spans = report["span_checks"]
+            print(
+                "  Quote spans: "
+                f"matched={spans['matched']} mismatch={spans['mismatch']} "
+                f"unchecked={spans['unchecked']} missing={spans['missing']}"
+            )
+            for item in report["issues"]:
+                ref = f" [{item['evidence_ref']}]" if item.get("evidence_ref") else ""
+                print(
+                    f"  {item['severity'].upper()} finding #{item['finding_id']}{ref} "
+                    f"{item['code']}: {item['message']}"
+                )
+
+    elif args.command == "connect":
+        try:
+            evidence_metadata = _merge_evidence_metadata(
+                args.evidence,
+                _parse_evidence_field_args(args.source_quote, args.evidence, "quote"),
+                _parse_evidence_field_args(args.source_page, args.evidence, "page"),
+                _parse_evidence_field_args(args.assessment, args.evidence, "assessment"),
+            )
+            cid = add_connection(
+                person_a=args.person_a, person_b=args.person_b,
+                relationship_type=args.rel_type,
+                description=args.description, evidence_ids=args.evidence,
+                strength=args.strength, date_range=args.date_range,
+                finding_id=args.finding_id,
+                profile_id=getattr(args, "profile", None),
+                source_quotes=evidence_metadata,
+                entity_a_type=getattr(args, "entity_a_type", "unknown"),
+                entity_b_type=getattr(args, "entity_b_type", "unknown"),
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
         print(f"Created connection #{cid}: {args.person_a} <-> {args.person_b}")
+
+    elif args.command == "connection-evidence-add":
+        try:
+            add_connection_evidence(
+                args.id, args.evidence_ref,
+                source_quote=args.source_quote, source_page=args.source_page,
+                assessment=args.assessment, reason=args.reason, corrected_by=args.by,
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(f"Added evidence to connection #{args.id}: {args.evidence_ref}")
+
+    elif args.command == "connection-evidence-correct":
+        try:
+            changed = correct_connection_evidence(
+                args.id, args.evidence_ref, args.field, args.value,
+                reason=args.reason, correction_type=args.correction_type,
+                corrected_by=args.by,
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if changed:
+            print(
+                f"Corrected connection #{args.id} evidence "
+                f"{args.evidence_ref}.{args.field}"
+            )
+        else:
+            print(
+                f"Connection #{args.id} evidence {args.evidence_ref}.{args.field} "
+                "already has that value"
+            )
+
+    elif args.command == "connection-evidence-delete":
+        try:
+            delete_connection_evidence(
+                args.id, args.evidence_ref, reason=args.reason, corrected_by=args.by
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(f"Deleted evidence from connection #{args.id}: {args.evidence_ref}")
+
+    elif args.command == "connection-verify":
+        try:
+            changed = verify_connection(args.id, verified_by=args.by)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if changed:
+            print(f"Verified connection #{args.id}")
+        else:
+            print(f"Connection #{args.id} is already verified")
+
+    elif args.command == "connection-dispute":
+        try:
+            changed = dispute_connection(args.id, args.reason, corrected_by=args.by)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if changed:
+            print(f"Disputed connection #{args.id}: {args.reason}")
+        else:
+            print(f"Connection #{args.id} is already disputed")
+
+    elif args.command == "connection-retract":
+        try:
+            changed = retract_connection(args.id, args.reason, corrected_by=args.by)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if changed:
+            print(f"Retracted connection #{args.id}: {args.reason}")
+        else:
+            print(f"Connection #{args.id} is already retracted")
+
+    elif args.command == "connection-correct":
+        try:
+            changed = correct_connection(
+                args.id, args.field, args.value, args.reason,
+                correction_type=args.correction_type, corrected_by=args.by,
+            )
+        except (ValueError, sqlite3.IntegrityError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if changed:
+            print(f"Corrected connection #{args.id}.{args.field}")
+        else:
+            print(f"Connection #{args.id}.{args.field} already has that value")
+
+    elif args.command == "connection-audit":
+        connection = get_connection(args.id)
+        if connection is None:
+            print(f"Connection #{args.id} not found.", file=sys.stderr)
+            raise SystemExit(1)
+        report = {
+            "connection_id": args.id,
+            "connection_corrections": (
+                [] if args.record_key else get_corrections(
+                    table_name="connections", record_id=args.id, limit=args.limit
+                )
+            ),
+            "evidence_corrections": get_corrections(
+                table_name="connection_evidence", record_id=args.id,
+                record_key=args.record_key, limit=args.limit,
+            ),
+        }
+        if not write_output(report, args, summary=f"connection #{args.id} audit"):
+            rows = report["connection_corrections"] + report["evidence_corrections"]
+            if not rows:
+                print("No connection corrections found.")
+            for correction in rows:
+                key = (
+                    f"[{correction['record_key']}]"
+                    if correction.get("record_key") else ""
+                )
+                print(
+                    f"[{correction['created_at']}] {correction['table_name']}"
+                    f"#{correction['record_id']}{key}.{correction['field_name']}: "
+                    f"{correction['old_value']} -> {correction['new_value']}"
+                )
+                print(f"  Reason: {correction['reason']}")
+
+    elif args.command == "connection-provenance":
+        provenance = get_connection_provenance(args.id)
+        if provenance is None:
+            print(f"Connection #{args.id} not found.", file=sys.stderr)
+            raise SystemExit(1)
+        if not write_output(provenance, args, summary=f"connection #{args.id} provenance"):
+            print(f"=== Provenance for Connection #{args.id} ===")
+            print(format_connection(provenance))
+            if provenance.get("description"):
+                print(f"Description: {provenance['description']}")
+            if provenance.get("upstream_finding"):
+                finding = provenance["upstream_finding"]
+                print(
+                    f"Upstream finding: #{finding['id']} "
+                    f"({finding['verification_status']}) {finding['summary']}"
+                )
+            print(f"Evidence ({len(provenance['evidence'])}):")
+            for evidence in provenance["evidence"]:
+                print(f"  [{evidence['evidence_type']}] {evidence['evidence_ref']}")
+                if evidence.get("source_quote"):
+                    print(f"    Quote: \"{evidence['source_quote']}\"")
+                if evidence.get("source_page"):
+                    print(f"    Page/Loc: {evidence['source_page']}")
+                if evidence.get("assessment"):
+                    print(f"    Assessment: {evidence['assessment']}")
+            print(
+                f"Corrections: {len(provenance['corrections'])} connection, "
+                f"{len(provenance['evidence_corrections'])} evidence"
+            )
+
+    elif args.command == "connection-unverified":
+        connections = get_unverified_connections(
+            limit=args.limit, profile_id=args.profile,
+            all_profiles=args.all_profiles,
+        )
+        if not write_output(
+            connections, args,
+            summary=f"unverified connections: {len(connections)}",
+        ):
+            if not connections:
+                print("No unverified connections found.")
+            for connection in connections:
+                print(format_connection(connection))
+                print(f"    Evidence: {connection.get('evidence_refs') or 'none'}")
 
     elif args.command == "connections":
         conns = get_connections(args.person, depth=args.depth, relationship_type=args.rel_type,
                                profile_id=getattr(args, "profile", None),
-                               all_profiles=getattr(args, "all_profiles", False))
+                               all_profiles=getattr(args, "all_profiles", False),
+                               verification_status=(
+                                   "verified" if getattr(args, "verified_only", False) else None
+                               ))
         if not write_output(conns, args, summary=f"connections for '{args.person}': {len(conns)} results"):
             if not conns:
                 print(f"No connections found for '{args.person}'")
@@ -1292,7 +3174,11 @@ def main():
                     print(f"  {f['date_of_event']}  {f['target_name']}: {f['summary']}")
 
     elif args.command == "verify":
-        verify_finding(args.id, verified_by=args.by)
+        try:
+            verify_finding(args.id, verified_by=args.by)
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
         print(f"Verified finding #{args.id}")
 
     elif args.command == "dispute":
@@ -1307,6 +3193,20 @@ def main():
         relate_findings(args.from_id, args.to_id, args.relation_type,
                         assessment=args.assessment, created_by=args.by)
         print(f"Recorded: #{args.from_id} {args.relation_type} #{args.to_id}")
+
+    elif args.command in {"relation-delete", "unrelate"}:
+        try:
+            relation_id = delete_finding_relation(
+                args.from_id, args.to_id, args.relation_type,
+                reason=args.reason, corrected_by=args.by,
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(
+            f"Deleted finding relation #{relation_id}: "
+            f"#{args.from_id} {args.relation_type} #{args.to_id}"
+        )
 
     elif args.command == "retract":
         if retract_finding(args.id, reason=args.reason, corrected_by=args.by):
@@ -1331,12 +3231,17 @@ def main():
         corrections = get_corrections(
             table_name=args.table,
             record_id=args.id,
+            record_key=getattr(args, "record_key", None),
             correction_type=getattr(args, "correction_type", None),
             limit=args.limit,
         )
-        if not corrections:
-            print("No corrections found.")
-        else:
+        structured = write_output(
+            corrections, args, summary=f"correction history: {len(corrections)} entries"
+        )
+        if not structured and getattr(args, "json_out", False):
+            print(json.dumps(corrections, indent=2, default=str))
+            structured = True
+        if not structured and corrections:
             print(f"Correction history ({len(corrections)} entries):")
             for c in corrections:
                 print(f"  [{c['created_at']}] {c['table_name']}#{c['record_id']}.{c['field_name']}")
@@ -1345,6 +3250,8 @@ def main():
                 print(f"    New: {c['new_value']}")
                 print(f"    Reason: {c['reason']}")
                 print()
+        elif not structured:
+            print("No corrections found.")
 
     elif args.command == "provenance":
         prov = get_provenance(args.id)
@@ -1387,6 +3294,18 @@ def main():
                     print(f"  [{c['created_at']}] {c['correction_type']}: {c['field_name']}")
                     print(f"    {c['old_value']} -> {c['new_value']}")
                     print(f"    Reason: {c['reason']}")
+            if prov["evidence_corrections"]:
+                print(
+                    f"\n--- Evidence Corrections "
+                    f"({len(prov['evidence_corrections'])}) ---"
+                )
+                for c in prov["evidence_corrections"]:
+                    print(
+                        f"  [{c['created_at']}] {c['correction_type']}: "
+                        f"{c.get('record_key', '?')}.{c['field_name']}"
+                    )
+                    print(f"    {c['old_value']} -> {c['new_value']}")
+                    print(f"    Reason: {c['reason']}")
             if prov["connections"]:
                 print(f"\n--- Connections ({len(prov['connections'])}) ---")
                 for conn in prov["connections"]:
@@ -1394,8 +3313,18 @@ def main():
                     print(f"  {conn['person_a']} <-> {conn['person_b']} [{conn.get('relationship_type', '?')}] (verif: {vstat})")
 
     elif args.command == "unverified":
-        findings = get_unverified(limit=args.limit)
-        if not write_output(findings, args, summary=f"unverified findings: {len(findings)}"):
+        findings = get_unverified(
+            limit=args.limit,
+            profile_id=args.profile,
+            all_profiles=args.all_profiles,
+        )
+        structured = write_output(
+            findings, args, summary=f"unverified findings: {len(findings)}"
+        )
+        if not structured and getattr(args, "json_out", False):
+            print(json.dumps(findings, indent=2, default=str))
+            structured = True
+        if not structured:
             if not findings:
                 print("All findings verified!")
             else:

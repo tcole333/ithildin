@@ -535,15 +535,28 @@ def cmd_reimbursements(args):
 
 def cmd_fjc(args):
     """Search the FJC Integrated Database (federal case metadata)."""
+    try:
+        from requests.exceptions import Timeout
+    except ImportError:  # pragma: no cover - requests is a project dependency
+        Timeout = TimeoutError
+
     client = _client()
-    results = client.search_fjc(
-        plaintiff=args.plaintiff,
-        defendant=args.defendant,
-        nature_of_suit=args.nos,
-        date_filed_after=args.after,
-        date_filed_before=args.before,
-        max_results=args.limit,
-    )
+    try:
+        results = client.search_fjc(
+            plaintiff=args.plaintiff,
+            defendant=args.defendant,
+            nature_of_suit=args.nos,
+            date_filed_after=args.after,
+            date_filed_before=args.before,
+            max_results=args.limit,
+        )
+    except Timeout:
+        print(
+            "ERROR: CourtListener FJC search timed out after one bounded "
+            "request; try a narrower name or date range.",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
     query_desc = args.plaintiff or args.defendant or "all"
     _log(query_desc, "courtlistener_fjc", len(results))
     if write_output(results, args, summary=f"FJC search: {len(results)} results"):

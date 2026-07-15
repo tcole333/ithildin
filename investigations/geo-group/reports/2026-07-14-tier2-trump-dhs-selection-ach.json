@@ -1,0 +1,119 @@
+{
+  "profile": "geo-group",
+  "created": "2026-07-14",
+  "analysis_run_id": 104,
+  "question": "Did political access or relationships materially shape GEO selection or expansion under Trump/DHS, versus policy and budget growth, incumbent vehicles, operational readiness, fiscal mechanics, channel boundaries, and ordinary regulated-sector practices?",
+  "method": {
+    "rule": "Weight source independence, causal proximity, metric fit, and coverage; never treat rows or repeated filings as votes.",
+    "verdict_language": "least inconsistent, not most supported and not a probability",
+    "finding_gate": "verified and not retracted or superseded",
+    "matrix_path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-evidence-matrix.csv"
+  },
+  "overarching_competitors": {
+    "H1": "Political access or relationships materially shaped one or more GEO selections or expansion decisions.",
+    "H0": "Public policy and budget growth, incumbent and ready capacity, pre-existing vehicles, ordinary action and fiscal mechanics, channel boundaries, and regulated-sector practice explain observed expansion without a demonstrated relationship-to-decision pathway.",
+    "database_hypotheses_created": false,
+    "reason_not_created": "The umbrella H1 overlaps existing hypotheses 337/338 and lacks an observed relationship-to-decision mechanism; it does not pass the novelty gate. The H0 mechanisms are already captured in existing procurement analyses."
+  },
+  "outcome_axes": {
+    "aggregate_dhs_geo_expansion": {
+      "reading": "H0 is substantially less inconsistent",
+      "highest_weight_H0_streams": [
+        "D14 public policy and budget surge",
+        "D15 exact GEO obligation-action mechanics",
+        "D17 CoreCivic peer acceleration",
+        "D19 constrained incumbent/readiness competition",
+        "D22 prime-to-subcontract channel boundary",
+        "D23 documented P00005 reinstatement mechanics"
+      ],
+      "H1_relevant_but_lower_proximity_streams": [
+        "D01-D06 political money, lobbying, governance, and access capacity",
+        "D07-D09 former-official and consulting relationships",
+        "D12 household-reportable GEO securities",
+        "D25 named state recipients and timing"
+      ],
+      "reasoning": "Independent policy, federal action, peer-company, solicitation, and channel records directly identify demand and posting mechanisms. Political records establish scale and adjacency but no accepted record links a relationship actor to a named expansion decision.",
+      "limits": "This does not prove political influence was absent or explain every obligation, facility activation, or subcontract."
+    },
+    "vendor_facility_selection_and_terms": {
+      "reading": "Unresolved; H0 is weakly less inconsistent",
+      "H0_relevant_streams": [
+        "D10 bounded Ballard contact audit",
+        "D11 Checkmate chronology and pre-existing vehicle controls",
+        "D18 ready-capacity peer control",
+        "D19 negotiated competition with practical readiness constraints"
+      ],
+      "H1_relevant_streams": [
+        "D05 Albence internal approval gate",
+        "D07 GEO-specific ICE leadership concentration",
+        "D09 Venturella proposal/renewal background and return to ICE",
+        "D25 named political recipients"
+      ],
+      "reasoning": "Ready capacity, older vehicles, competition structure, and bounded contact negatives provide partial ordinary explanations. The access pathways remain testable, but no accepted source connects one to a named evaluation, price, modification, option, or source-selection act.",
+      "decisive_missing_records": [
+        "source-selection and price-negotiation files",
+        "person-attributed contact and work-assignment records",
+        "ethics, recusal, and screening records",
+        "signed P00005 and QAD-25-0230 decision package",
+        "Classic Air settlement instrument and unavailable court filings"
+      ]
+    }
+  },
+  "controls": {
+    "Salus_CSRO": "neutral and not applicable to GEO or GTI selection; never counted as H0 evidence for the GTI chain",
+    "P00005": "high confidence in chronology and public action fields, low confidence in causal inference; settlement timing is not proof that settlement caused reinstatement",
+    "state_payer_strings": "filed payer identity is not proof of bank-account ownership or an internal payer-selection decision"
+  },
+  "existing_competition_groups": [
+    {
+      "group": "geo-performance-consequence-gap",
+      "hypotheses": [335, 336],
+      "new_assessments_in_run_104": [],
+      "reason": "P00005 and state political records do not show applied performance consequences.",
+      "least_inconsistent": 336,
+      "results": {
+        "335": {"total_evaluated": 37, "inconsistent": 7, "diagnostic_evidence": 19, "inconsistency_ratio": 0.1892},
+        "336": {"total_evaluated": 37, "inconsistent": 5, "diagnostic_evidence": 19, "inconsistency_ratio": 0.1351}
+      }
+    },
+    {
+      "group": "geo-ice-expertise-channel",
+      "hypotheses": [337, 338],
+      "new_assessments_in_run_104": [],
+      "reason": "The new inputs do not identify coordination among personnel, consulting, and lobbying functions.",
+      "least_inconsistent": 338,
+      "results": {
+        "337": {"total_evaluated": 48, "inconsistent": 11, "diagnostic_evidence": 30, "inconsistency_ratio": 0.2292},
+        "338": {"total_evaluated": 48, "inconsistent": 1, "diagnostic_evidence": 30, "inconsistency_ratio": 0.0208}
+      }
+    },
+    {
+      "group": "geo-igsa-recipient-visibility",
+      "hypotheses": [341, 342],
+      "new_assessments_in_run_104": [],
+      "boundary": "CSI→GTI is a private-prime subcontract, not an IGSA/public-body-prime chain. Its zero public subaward result is an analogous but non-applicable control and was not scored against 341/342.",
+      "least_inconsistent": 341,
+      "results": {
+        "341": {"total_evaluated": 48, "inconsistent": 0, "diagnostic_evidence": 26, "inconsistency_ratio": 0.0},
+        "342": {"total_evaluated": 48, "inconsistent": 5, "diagnostic_evidence": 26, "inconsistency_ratio": 0.1042}
+      }
+    },
+    {
+      "group": "geo-political-payer-selection-rule",
+      "hypotheses": [357, 358],
+      "new_assessments_in_run_104": [
+        {"finding_id": 12937, "hypothesis_id": 357, "assessment": "inconsistent"},
+        {"finding_id": 12937, "hypothesis_id": 358, "assessment": "consistent"},
+        {"finding_id": 12938, "hypothesis_id": 357, "assessment": "inconsistent"},
+        {"finding_id": 12938, "hypothesis_id": 358, "assessment": "consistent"}
+      ],
+      "boundary": "Florida and Georgia are separate state filing contexts, but their parent-payer strings carry only low-to-medium diagnostic weight and reveal neither bank account nor intent.",
+      "least_inconsistent": 358,
+      "results": {
+        "357": {"total_evaluated": 14, "inconsistent": 2, "diagnostic_evidence": 4, "inconsistency_ratio": 0.1429},
+        "358": {"total_evaluated": 14, "inconsistent": 0, "diagnostic_evidence": 4, "inconsistency_ratio": 0.0}
+      }
+    }
+  ],
+  "final_bounded_conclusion": "Accepted public records establish political access and conflict-relevant relationships but do not show that those relationships materially shaped a specific GEO selection or expansion. H0 is substantially less inconsistent for aggregate expansion; vendor/facility selection and terms remain unresolved, with H0 only weakly less inconsistent."
+}

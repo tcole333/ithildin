@@ -1,0 +1,129 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62730,
+  "as_of": "2026-07-14",
+  "question": "Which carriers, aircraft, crews, vendors, and authorities can be assigned to CSI Aviation's current ICE Air work after iAero?",
+  "roster_result": {
+    "confirmed_current_direct_csi_carriers": [
+      "Global Crossing Airlines, Inc. (GlobalX)"
+    ],
+    "official_current_ice_carriers_without_primary_csi_edge": [
+      "Eastern Air Express, LLC"
+    ],
+    "historical_not_current": [
+      "TEM Enterprises dba Avelo Airlines (DHS-charter work ended 2026-01-27)"
+    ],
+    "current_csi_owned_carrier_without_ice_assignment": [
+      "Air Wisconsin Airlines LLC"
+    ],
+    "confirmed_current_csi_ice_tails": [],
+    "confirmed_named_csi_ice_crew": []
+  },
+  "carrier_edges": [
+    {
+      "carrier": "Global Crossing Airlines, Inc. (GlobalX)",
+      "edge": "GlobalX -> CSI Aviation -> U.S. government",
+      "status": "current_direct_confirmed",
+      "through": "2026-12-31",
+      "ice_status": "composite_high_confidence",
+      "operator_role": "Part 121 A320-family operator; ACMI supplies aircraft, crew, maintenance, and insurance",
+      "limits": "SEC statement does not name ICE, BPA/call, route, aircraft, or crew"
+    },
+    {
+      "carrier": "Eastern Air Express, LLC",
+      "edge": "Eastern -> ICE",
+      "status": "official_state_source_high_confidence",
+      "csi_status": "unresolved",
+      "operator_role": "DOT-authorized foreign charter carrier",
+      "limits": "No reviewed primary CSI teaming agreement or ICE flight/tail record"
+    },
+    {
+      "carrier": "TEM Enterprises dba Avelo Airlines",
+      "edge": "Avelo -> DHS/ICE charter program",
+      "status": "historical",
+      "date_range": ["2025-05-12", "2026-01-27"],
+      "csi_status": "reporting_derived_not_primary",
+      "limits": "Excluded from current roster"
+    },
+    {
+      "carrier": "Air Wisconsin Airlines LLC",
+      "edge": "CSI Aviation owns Air Wisconsin",
+      "status": "current_direct_confirmed",
+      "since": "2026-01-09",
+      "ice_status": "not_established",
+      "assets": "13 CRJ200 aircraft acquired under a related asset purchase agreement",
+      "limits": "Ownership/capability is not an ICE assignment; ordinary CRJ200 capacity is below the 148-adult DSLA minimum"
+    }
+  ],
+  "aircraft_observations_not_assignments": [
+    {
+      "operator": "Eastern Air Express, LLC",
+      "source": "BTS 2025 Form 41 Schedule B-43",
+      "fleet_records": 18,
+      "operating_status_y": 15,
+      "compatible_examples": [
+        {"tail": "N660CP", "model": "737-7BD", "seats": 148},
+        {"tail": "N668CP", "model": "737-76N", "seats": 148},
+        {"tail": "N959BP", "model": "737-7BD", "seats": 148}
+      ],
+      "assignment_status": "not_assigned_to_ice_or_csi"
+    },
+    {
+      "operator": "TEM Enterprises dba Avelo Airlines",
+      "source": "BTS 2025 Form 41 Schedule B-43",
+      "fleet_records": 22,
+      "operating_status_y": 22,
+      "historically_reported_operation_examples": [
+        {"tail": "N801XT", "model": "737-86N", "seats": 189},
+        {"tail": "N802XT", "model": "737-8F2", "seats": 189},
+        {"tail": "N803XT", "model": "737-8F2", "seats": 189}
+      ],
+      "assignment_status": "bts_proves_fleet_only; no_current_ice_assignment"
+    },
+    {
+      "operator": "GlobalX",
+      "source": "BTS 2025 Form 41 Schedule B-43",
+      "fleet_records": 0,
+      "assignment_status": "no_b43_row; use SEC and DOT authority only"
+    }
+  ],
+  "authority_map": [
+    {
+      "subject": "ICE Air BPA",
+      "authority": "BPA SOW 70CDCR24A00000001",
+      "proves": "Prime responsibility for teaming partners/subcontractors; at least 12 DSLA aircraft; minimum 148 adults; aircraft registration and crew qualification reporting",
+      "does_not_prove": "Current operator names or tails"
+    },
+    {
+      "subject": "GlobalX",
+      "authority": "DOT Order 2021-9-10",
+      "proves": "Interstate and foreign charter authority; GlobalX trade name",
+      "does_not_prove": "ICE/CSI assignment"
+    },
+    {
+      "subject": "Eastern Air Express",
+      "authority": "DOT Order 2024-10-1",
+      "proves": "Foreign charter authority",
+      "does_not_prove": "ICE/CSI assignment or tails"
+    },
+    {
+      "subject": "CSI replacement package",
+      "authority": "Classic Air ECF 37, quoting redacted administrative record",
+      "proves": "CSI submitted replacement commitments, airworthiness certificates, OpSpecs, and teaming agreements in October 2024",
+      "does_not_prove": "Replacement carrier identities or aircraft because public filing is redacted"
+    }
+  ],
+  "reporting_only_candidates_not_promoted": [
+    "Bighorn Airways",
+    "Key Lime Air",
+    "Omni Air International",
+    "Journey Aviation",
+    "World Atlantic Airlines",
+    "Gryphon Air"
+  ],
+  "vendor_role_boundary": {
+    "GEO Transport / GEO Group": "security and air-operations support beneath CSI; no evidence of Part 121 aircraft or crew operation",
+    "CSI Aviation": "ICE prime and air-charter coordinator; acquired Air Wisconsin in January 2026",
+    "GlobalX": "confirmed aircraft/crew operator under direct CSI U.S.-government contract"
+  }
+}

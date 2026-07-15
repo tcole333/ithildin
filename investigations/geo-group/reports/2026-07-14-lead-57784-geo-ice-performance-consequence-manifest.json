@@ -1,0 +1,94 @@
+{
+  "lead_id": 57784,
+  "generated_at": "2026-07-14T06:29:46.741539+00:00",
+  "method": "Quote-reviewed oversight rows joined to public corrective-status, contract-action, extension, renewal, and capacity records. Missing private contract-administration records remain explicit unknowns.",
+  "coverage": {
+    "matrix_rows": 31,
+    "distinct_facilities_or_systemic_scope": 9,
+    "distinct_reports": 19,
+    "evidentiary_roles": {
+      "adverse_or_systemic_observation": 20,
+      "control_or_counterevidence": 11
+    },
+    "consequence_classes": {
+      "corrective_follow_up_no_public_financial_effect": 1,
+      "aggregate_corrective_response_no_facility_financial_effect": 2,
+      "planned_sar_with_later_recurrence": 1,
+      "closed_readiness_response_minimum_preserved": 2,
+      "documented_penalty_non_enforcement_with_operational_cost": 2,
+      "open_contract_correction_plus_later_extension": 2,
+      "mixed_corrective_status_no_public_financial_effect": 2,
+      "closed_minimum_update_terms_not_public": 2,
+      "mixed_corrective_status_plus_later_capacity_increase": 2,
+      "non_substantiation_control": 1,
+      "later_no_findings_control": 1,
+      "completed_prior_ucap_new_deficiencies_later_capacity_increase": 3,
+      "completed_ucap_repeat_deficiencies_plus_later_extension": 3,
+      "mixed_compliance_control_later_contracting": 1,
+      "causation_caveat_control": 1,
+      "systemwide_not_facility_attributable": 5
+    }
+  },
+  "separation_rules": [
+    "absence in reviewed public sources is not absence of a consequence",
+    "USAspending obligation actions do not expose invoice-level credits, offsets, deductions, or CPARS treatment",
+    "continuation, extension, renewal, or capacity growth is neutral unless a source links it to performance treatment",
+    "compliant findings, non-substantiation, and causation caveats remain controls",
+    "facility, award, task, and IGSA-chain counts are not interchangeable"
+  ],
+  "audited_findings": [
+    12422,
+    12425,
+    12426,
+    12427,
+    12428,
+    12789,
+    12790,
+    12792,
+    12793,
+    12794,
+    12795,
+    12796,
+    12797,
+    12798,
+    12799,
+    12800,
+    12801,
+    12802,
+    12803,
+    12804,
+    12805,
+    12806,
+    12818,
+    12819,
+    12820,
+    12821,
+    12822,
+    12823
+  ],
+  "record_acquisition": {
+    "human_action_38": "Existing Golden State minimum/invoice package",
+    "human_action_60": "Direct-facility QASP, deficiency, invoice, CPARS, and option/capacity package",
+    "human_action_61": "Folkston ICE/Charlton discrepancy, deduction, and staffing-closeout package",
+    "infra_request_150": "Existing ISAP/Golden/Folkston contract-administration request"
+  },
+  "input_files": [
+    {
+      "path": "investigations/geo-group/reports/2026-07-14-lead-57703-geo-ice-oversight-matrix.csv",
+      "sha256": "31263f396380b636b6620510dd2fa56b3db14b9280511e703a0da490a0b6762e"
+    },
+    {
+      "path": "investigations/geo-group/reports/direct-ice-usaspending-action-rows-2026-07-13.csv",
+      "sha256": "770ac3c401157c38a14a1ab2ea1f20d440ed16849e8b3420fc793315855d13ee"
+    },
+    {
+      "path": "investigations/geo-group/reports/direct-ice-idv-task-order-families-2026-07-13.csv",
+      "sha256": "195210ef0bbc18db60e6e5723bb429476e90895f0984804af1a24fefdee9ed8b"
+    }
+  ],
+  "output_files": [
+    "2026-07-14-lead-57784-geo-ice-performance-consequence-matrix.csv",
+    "2026-07-14-lead-57784-geo-ice-performance-consequence-ach.json",
+    "2026-07-14-lead-57784-geo-ice-performance-consequence-report.md"
+  ]
+}

@@ -34,7 +34,7 @@ Treat each as a lead to confirm or refute against primary sources. Label finding
 
 ### Tooling gaps surfaced
 
-DugganUSA remains behind an auth wall (infra req #123), Nevada recorder/name history still requires a browser/recaptcha-capable session, and LA County's online systems do not expose owner names or the grantor/grantee index. CA SOS/OpenCorporates records were recovered through later work, so the earlier blanket CA-registry blocker is historical rather than current.
+DugganUSA was retired on 2026-06-29 after its endpoint permanently returned HTTP 403; infra request #123 was rejected because DOJ Vol 11, LMSBAND, and Unified retain the underlying DOJ datasets. Nevada recorder/name history still requires a browser/recaptcha-capable session, and LA County's online systems do not expose owner names or the grantor/grantee index. CA SOS/OpenCorporates records were recovered through later work, so the earlier blanket CA-registry blocker is historical rather than current.
 
 ## Central Structural Assessment
 

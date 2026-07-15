@@ -1,0 +1,128 @@
+{
+  "generated_on": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 113,
+  "analysis_runs": {
+    "systemic_analysis": 116,
+    "generate_hunches": 119
+  },
+  "scope": "Bounded hunch generation over authenticated completed GEO CourtListener/RECAP case reports, verified findings, the completed coverage audit, and existing hypotheses; no new court search",
+  "scan_statistics": {
+    "thread_findings_scanned": 186,
+    "entities_exported": 298,
+    "entity_relations_exported": 36,
+    "connection_nodes_exported": 54,
+    "connection_edges_exported": 74,
+    "existing_hypotheses_checked": 357,
+    "relevant_hypotheses_after_keyword_thread_gate": 22,
+    "existing_tag_values_checked": 222,
+    "authenticated_coverage_manifest_sources_verified": 27,
+    "candidate_patterns_tested": 7,
+    "candidates_producing_new_systemic_findings": 1,
+    "candidates_surviving_all_hunch_filters": 0
+  },
+  "filters": [
+    "already captured in a finding, prior synthesis, or existing hypothesis",
+    "three or more independent contexts rather than multiple proceedings in one dispute family",
+    "not an obvious consequence of federal-contractor litigation",
+    "genuinely surprising to an investigator familiar with the portfolio",
+    "distinguishes coordination from ordinary aligned incentives or legal advocacy",
+    "produces a nonduplicative Layer-1 research plan",
+    "preserves holding, allegation, contract-text, party-position, and inference boundaries"
+  ],
+  "candidates": [
+    {
+      "candidate": "Issue-specific allocation of GEO and ICE control recurs across detainee labor and facility inspection",
+      "independent_contexts": 5,
+      "contexts": ["Nwauzor/Washington", "Menocal", "Novoa", "Inslee/NWIPC inspection", "Delaney Hall"],
+      "recurrence_filter": "pass",
+      "novelty_filter": "fail",
+      "surprise_filter": "fail",
+      "decision": "filtered",
+      "reason": "The mechanism is already explicit in findings 12557, 12737, 12741-12744, 12762, and 12780 and in the completed detainee-labor and inspection case reports. Registering it would relabel existing work rather than commission a new test."
+    },
+    {
+      "candidate": "GEO repeatedly uses Yearsley, preemption, intergovernmental immunity, and federal-control arguments across disputes",
+      "independent_contexts": 5,
+      "contexts": ["Nwauzor/Washington", "Menocal", "Novoa", "Inslee", "Delaney Hall"],
+      "recurrence_filter": "pass",
+      "novelty_filter": "fail",
+      "coordination_filter": "fail",
+      "decision": "filtered",
+      "reason": "Repeated use of available federal-contractor doctrines is expected advocacy. Holdings vary, and Delaney Hall is only an unadjudicated party position. No common agency instruction or counsel-direction record was recovered."
+    },
+    {
+      "candidate": "Federal litigation positions are organizationally compartmentalized across ICE, DOJ, and procurement actors",
+      "independent_contexts": 3,
+      "contexts": ["Inslee federal amicus", "Nwauzor appellate amicus/CVSG posture", "Delaney Hall DOJ Statement of Interest"],
+      "recurrence_filter": "pass narrowly",
+      "novelty_filter": "uncertain",
+      "surprise_filter": "fail",
+      "decision": "filtered",
+      "reason": "The observed variation is real but ordinary for issue-specific government litigation. ICE/OPLA awareness and planned engagement followed by adverse contracting-officer decisions further separates access from favorable coordination. No agency memoranda, common referral chain, or contradictory instruction establishes an internal compartmentalization mechanism."
+    },
+    {
+      "candidate": "GEO shifts detainee-labor defense costs to ICE through reimbursement, indemnity, or equitable adjustment",
+      "independent_contexts": 1,
+      "claimed_facilities": ["Aurora", "NWIPC", "Adelanto"],
+      "recurrence_filter": "pass only as one coordinated three-vehicle batch",
+      "primary_evidence_filter": "pass",
+      "novelty_filter": "pass as bounded synthesis finding",
+      "hunch_filter": "fail",
+      "decision": "finding_created_hunch_filtered",
+      "reason": "Authenticated records show GEO requested reimbursement and DOJ defense and ICE denied all three REAs in full; the Northwest contract separately assigned litigation cost to GEO. Finding 13016 records that June 2018 allocation. The evidence does not show a recurring successful cost shift, permanent bar, later payment, or portfolio-wide policy, so no new hypothesis or lead is warranted. Lead 63588 is completed."
+    },
+    {
+      "candidate": "GEO follows a uniform inspection-access resistance policy across federal detention facilities",
+      "independent_contexts": 2,
+      "contexts": ["NWIPC", "Delaney Hall"],
+      "recurrence_filter": "fail",
+      "uniformity_filter": "fail",
+      "decision": "filtered",
+      "reason": "NWIPC produced adjudicated access orders and area carveouts; Delaney Hall inspection occurred and the emergency motion was withdrawn; a Washington L&I comparison ended in stipulated access. The record shows contested boundaries, not one proven policy."
+    },
+    {
+      "candidate": "Subsidiary and legacy-entity structure compartmentalizes litigation liability away from GEO parent operations",
+      "independent_contexts": 2,
+      "contexts": ["Roycroft/Cornell", "Burciaga"],
+      "recurrence_filter": "fail",
+      "intent_filter": "fail",
+      "decision": "filtered",
+      "reason": "Roycroft is a pre-acquisition attribution problem and Burciaga lacks the payer and contract. Neither establishes deliberate risk routing, and there are fewer than three independent, properly attributed contexts."
+    },
+    {
+      "candidate": "Adverse GEO litigation is structurally compartmentalized from ICE procurement and contract consequences",
+      "independent_contexts": 3,
+      "contexts": ["Tacoma", "Aurora", "Adelanto"],
+      "recurrence_filter": "pass descriptively",
+      "novelty_filter": "fail",
+      "mechanism_filter": "fail",
+      "decision": "filtered",
+      "reason": "This substantially duplicates hypotheses 335/336 and completed runs 94/95. Finding 12619 already records the non-discriminating action-timing test, while the required responsibility, CPARS, legal-review, option, invoice, and deduction records are already commissioned."
+    }
+  ],
+  "new_database_records": {
+    "findings": [13016],
+    "hypotheses": [],
+    "leads": [],
+    "tags": [],
+    "entities": [],
+    "connections": []
+  },
+  "existing_records_reused": {
+    "hypothesis_competition": [335, 336],
+    "analysis_runs": [83, 94, 95],
+    "completed_leads": [63588],
+    "human_actions": [45, 46, 47, 49, 50, 51, 57, 59, 60, 61, 70],
+    "infra_requests": [150]
+  },
+  "reconsideration_triggers": [
+    "Authenticated ICE/GEO litigation-direction or common-counsel instructions across three independent facility contexts",
+    "Complete contracts showing express ICE direction of the challenged practice rather than reimbursement or baseline standards",
+    "Later authenticated reimbursement, compensating modification, appeal, voucher, or DOJ representation that reverses or materially qualifies the June 2018 denials",
+    "A common access-control clause and internal implementation policy producing the same adjudicated result at three facilities",
+    "Responsibility, CPARS, source-selection, option, or suspension/debarment records showing non-routine litigation treatment after matched controls"
+  ],
+  "result": "one_new_systemic_finding_zero_new_hunches",
+  "interpretation": "The portfolio supports a bounded systemic description—control is allocated by actual direction, practice, space, and contract-administration decision. Newly authenticated records show a 2018 three-vehicle request-and-denial mechanism, not reimbursement or coordinated insulation. The remaining hunch candidates either duplicate existing records or fail recurrence, intent, or attribution gates."
+}

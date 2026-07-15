@@ -3,9 +3,9 @@ name: Related Party Transaction Scoring
 slug: related-party-transaction-scoring
 domain: financial-crime
 source: "Gordon et al. (2004) 'RPTs and Corporate Governance'; Kohlbeck & Mayhew (2010); SMCI prototype analysis (2026) — Liang family entity network"
-status: candidate
+status: adopted
 created: 2026-03-22
-grounding_findings: [6870, 6872, 6879, 6884]
+grounding_findings: [6870, 6872, 6879, 6884, 6887, 4159, 4196, 5054, 4372, 6278, 6281, 11517]
 related_models: [fiduciary-inversion, compliance-theater, peripheral-collapse, manufactured-dependency]
 detection_keywords:
   - ["related party", "controlled entity", "family member", "affiliated"]
@@ -70,3 +70,7 @@ SMCI scores approximately 13-14 (Critical materiality + Vague pricing + Family-c
 ## Limitations
 
 This framework identifies structural risk factors but cannot determine whether specific transactions are abusive without examining the actual pricing terms, which are rarely fully disclosed. A score of 14 doesn't prove extraction — it proves the *conditions for extraction* exist. Proving actual harm requires either (a) demonstrating non-market pricing through comparable analysis, or (b) identifying specific transactions where insiders benefited at shareholder expense. This typically requires /analyze-filing depth analysis of footnotes combined with corporate registry cross-referencing via /trace-entity.
+
+## Evaluation (2026-07-11)
+
+Promoted candidate → adopted. Grounding now spans four independent clusters, which is what the compound-scoring design needs: the SMCI Liang-family network (F6870, F6872, F6879, F6884), the GD Culture / Pallas BVI acquisition (F4159, F4196, F5054 — a 233%-of-shares related-party purchase from shell-company sellers), disclosed-but-material RPTs at Oscar Health/Thrive (F4372) and CRML (F6278, F6281), plus the governance-adjacent variants: Karp's aircraft reimbursement doubling (F6887) and the undisclosed Neumann-Besmertnik relationship behind the Conductor acquisition (F11517 — an RPT that *escaped* S-1 disclosure, the failure mode the oversight-quality dimension exists to catch). The scoring rubric discriminated correctly across all four clusters in testing (SMCI severe; Oscar notable; CRML elevated). Detection keywords already live; model_detector now loads this lens.

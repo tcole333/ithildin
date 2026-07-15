@@ -1,0 +1,74 @@
+{
+  "manifest_version": "1.0",
+  "generated_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 112,
+  "analysis_runs": {
+    "systemic_analysis": 114,
+    "generate_hunches": 115
+  },
+  "input_gate": {
+    "verification_status": "verified only",
+    "retracted": "excluded",
+    "superseded": "excluded",
+    "highergov_used": false,
+    "external_searches_in_wave10": 0
+  },
+  "selected_findings": [
+    {"id": 12939, "role": "controlling prior Tier 2 synthesis", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12947, "role": "current Venturella narrow-boundary control preserving #12939", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12948, "role": "household portfolio-cadence control", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12957, "role": "household matched action-date control", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12983, "role": "Homan personal-source and B.I.-Guidepost corporate two-ledger result", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12984, "role": "SEC-bounded donor identity ledger", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false},
+    {"id": 12985, "role": "donor identity ambiguity exclusion control", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium", "retracted": false, "superseded": false}
+  ],
+  "finding_dependencies": [
+    {"finding": 12983, "relation": "supersedes retracted pre-verification #12982 and refines #12528; #12983 replaces #12528 for dependency weight rather than adding a second Homan/Guidepost context"},
+    {"finding": 12984, "relation": "one identity-scoped donor ledger; people, rows, totals, refunds, and committee classifications are dependent outputs of the same method"},
+    {"finding": 12985, "relation": "method control within #12984's donor identity cluster; not an additional political-access context"},
+    {"finding": 12947, "relation": "refines #12939 on Venturella timing without changing the broader verdict"},
+    {"findings": [12948, 12957], "relation": "previously completed household trade controls; neutral to #351/#352 and not new Wave 10 causal weight"}
+  ],
+  "ice_air_verified_findings_used_only_for_decision_visibility": [
+    12892, 12893, 12894, 12895, 12899, 12901, 12906, 12907, 12909, 12910, 12911, 12912, 12976, 12977, 12978, 12979, 12980, 12981
+  ],
+  "input_artifacts": [
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-systemic-analysis.md", "sha256": "fcf19331e33549d8db61ea4e660f1d98a36b05cde90e06bfc5e519b4124ff344"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-ach.json", "sha256": "589ff431f97f764360b626d5ccecfedf893309a41d858bba75381d171100913b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-evidence-matrix.csv", "sha256": "9988ae3fa74e7e1e7000648281085099d39cc00beb141c46da2543901b799271"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-source-manifest.json", "sha256": "b513144c3669c30a3ccb68a87eb17bc5b1c781563518a2dcae001b2f2e5ffffb"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-report.md", "sha256": "e28b4e770a3bf63ab9817b94565d401716dead4d7cf08496f78bbdd9d2fdb5b6"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-identity-row-matrix.csv", "sha256": "03a263a3fb8e52c9e50dc4e04a9dd743e1e12238da6cffdc7204ba269b7ec0d9"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-source-finding-manifest.json", "sha256": "3263598fbc3cda6412c06f9eeb452cd08032b8fb3914339dbc0f5f91b7af5f40"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59112-homan-guidepost-payment-ethics.md", "sha256": "aa61c08136bd7ffdafb2b88a0aed2420af3e95f3eca95518d2590331df57b32b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59112-homan-payment-ethics-matrix.csv", "sha256": "78c1131c36879986690abfe0c8bfac76c414fefb2d3246100cf3ba0354b0034c"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59112-homan-source-manifest.json", "sha256": "edf60066dbb9a4067e4880d7e593163dfb7074bd800ec866fb5cc91019768f82"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-household-trade-timeline-run108.md", "sha256": "c05d89f2199da01ce9ebecb9b79f475af3cbcc676a11935ab3b21100bcc2c6fe"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-venturella-return-boundary-systemic-analysis.md", "sha256": "26aeb83ed8939936b7d9b5d00081eb57147eaa4ce40335568a0e770a576faab7"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-ice-air-network-wave9-systemic-analysis.md", "sha256": "998926f8ceff0998661ea02134a307649c53434871ce09ef93b3faf76bd69470"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-geo-political-payer-selection-rule.md", "sha256": "c49369e5603f06f5d8b9b1758eb21eff1288f5de4f41584fb50bcf49359b055b"}
+  ],
+  "database_writes": {
+    "hypothesis_evidence_matrix": [
+      {"id": 805, "hypothesis_id": 337, "finding_id": 12983, "assessment": "inconsistent", "assessed_by": "agent:systemic-analysis:run-114"},
+      {"id": 806, "hypothesis_id": 338, "finding_id": 12983, "assessment": "consistent", "assessed_by": "agent:systemic-analysis:run-114"}
+    ],
+    "findings_created": 0,
+    "hypotheses_created": 0,
+    "leads_created": 0,
+    "tags_created": 0,
+    "connections_created": 0,
+    "entities_created": 0
+  },
+  "output_artifacts": [
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-systemic-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-evidence-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-ach.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-generate-hunches-novelty.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-source-finding-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-sha256sums.txt"
+  ],
+  "output_checksum_ledger": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-sha256sums.txt",
+  "self_hash_note": "This manifest does not contain output hashes. The separate checksum ledger hashes all output artifacts except itself."
+}

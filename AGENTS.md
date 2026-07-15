@@ -109,12 +109,25 @@ All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findin
 
 Epstein corpus-derived facts (temporal events, normalized financials, entity resolution) live in the regenerable sidecar **`datasets/epstein_derived.db`** — see `investigations/epstein/AGENTS.md` and `tools/epstein_derived.py`.
 
+Epstein reporting lives in **`datasets/epstein_reporting.db`** and is queried with
+`tools/reporting_corpus.py`. It stores versioned articles and attributed claims;
+reporting is not primary corroboration. Promote only reviewed claims with quoted
+primary evidence. See `docs/modules/reporting.md`.
+
+DOJ and SEC press releases live in **`datasets/government_releases.db`** and are
+queried with `tools/government_release_corpus.py`. They are primary government
+statements, not independent proof of the allegations they announce. Preserve
+allegation/charge/conviction language exactly. See `docs/modules/government-releases.md`.
+
 Lead lifecycle: `open -> in_progress -> completed | blocked | dead_end`
 Auto-leads: `pending_triage -> open` (via `$triage-leads`) or `-> dead_end`
 
 ### Conventions
 - Always use `uv run python` to invoke tools (not bare `python`)
+- Lint changed Python files with `uv run ruff check <files>`; the full legacy tree is not yet lint-clean.
 - Always use `--output FILE` for search results. **Session isolation**: `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`, all temp files in `$WORKDIR/`
+- **Shell-safe evidence text**: zsh expands dollar-prefixed values inside double-quoted arguments before Python sees them. For tracker summaries, details, quotes, and notes containing currency, use a structured file/input mode when available or a properly escaped single-quoted argument; verify the persisted text before continuing.
+- In zsh, `status` is a reserved read-only parameter. Capture command results with a different name such as `exit_code=$?`.
 - Check search_log before querying: `from tools.lead_tracker import check_searched`. When calling `log_search`, omit `session_id` unless it is the integer ID of an existing `sessions` row; lead IDs, workdir names, and agent labels are not session IDs.
 
 ### Core CLI (full examples in docs/TOOL_REFERENCE.md)
@@ -135,9 +148,9 @@ Auto-leads: `pending_triage -> open` (via `$triage-leads`) or `-> dead_end`
 |--------|-------|-----------|
 | **Financial** | EDGAR, ratios, market data, SEC enforcement, 990 nonprofits, FDIC, FINRA | `docs/modules/financial.md` |
 | **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
-| **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, PPP | `docs/modules/government.md` |
+| **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, CMS Open Payments, PPP | `docs/modules/government.md` |
 | **Legal** | CourtListener, NYSCEF, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
-| **Political** | FEC, lobbying, FARA, Congress, GovInfo | `docs/modules/political.md` |
+| **Political** | FEC, lobbying, FARA, Congress, GovInfo, Senate Finance archives | `docs/modules/political.md` |
 | **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |
 | **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
 | **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |

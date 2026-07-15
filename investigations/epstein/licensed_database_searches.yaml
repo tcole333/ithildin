@@ -1,0 +1,103 @@
+version: 1
+updated_at: 2026-07-11
+purpose: >-
+  Reproducible discovery and coverage log for licensed news indexes. This file
+  stores search strategy and aggregate counts, not licensed article text.
+
+access:
+  institution: Georgia Institute of Technology
+  directory: https://libguides.library.gatech.edu/az/databases
+  policy: https://www.library.gatech.edu/about/eresource-policies
+  policy_note: >-
+    Use licensed databases for searching, gap analysis, and limited academic
+    review. Resolve selected citations to sources whose terms permit ingestion.
+
+available_news_databases:
+  - name: ProQuest News & Newspapers
+    url: https://www.proquest.com/news/?accountid=11107
+    strengths: Global, U.S., international, historical newspapers, newswires, and transcripts
+  - name: Nexis Uni
+    url: https://go.openathens.net/redirector/gatech.edu?url=http://www.nexisuni.com/
+    strengths: Newspapers, broadcasts, newswires, blogs, business profiles, and legal material
+  - name: Factiva
+    url: https://global.factiva.com/
+    strengths: Global business news and publisher overlap checks
+  - name: Access World News
+    url: https://infoweb.newsbank.com/apps/news?p=AWNB
+    strengths: Local, national, international, broadcast, and video coverage
+  - name: News (Gale OneFile)
+    url: http://infotrac.galegroup.com/itweb/gainstoftech?db=STND
+    strengths: Newspapers, broadcasts, images, and transcripts
+  - name: Newspaper Source Plus
+    url: https://search.ebscohost.com/login.aspx?profile=ehost&authtype=ip,shib&custid=git1&defaultdb=n5h
+    strengths: Regional, national, and international newspapers and newswires
+
+searches:
+  - searched_at: 2026-07-11
+    database: ProQuest News & Newspapers
+    query: '"Jeffrey Epstein"'
+    scope: all 47 cross-searched news databases; full record/full text default
+    result_count: 199393
+    interpretation: >-
+      High-recall mention universe dominated by syndication, transcripts, and
+      contextual mentions; useful as an upper bound, not an article count.
+  - searched_at: 2026-07-11
+    database: ProQuest News & Newspapers
+    query: 'NOFT("Jeffrey Epstein")'
+    scope: indexed fields excluding full text
+    result_count: 15004
+    source_facets:
+      newspapers: 7399
+      magazines: 45
+      trade_journals: 153
+      audio_video: 54
+      scholarly_journals: 1
+    decade_facets:
+      1960s: 1
+      1970s: 0
+      1980s: 14
+      1990s: 17
+      2000s: 232
+      2010s: 4373
+      2020s: 10367
+    interpretation: >-
+      Best broad discovery set for material substantially about Epstein. Early
+      decades are small enough for citation-by-citation gap review.
+  - searched_at: 2026-07-11
+    database: ProQuest News & Newspapers
+    query: 'TI("Jeffrey Epstein")'
+    scope: title field
+    result_count: 11597
+    source_facets:
+      newspapers: 5254
+      magazines: 36
+      trade_journals: 149
+      audio_video: 4
+      scholarly_journals: 1
+    decade_facets:
+      1960s: 1
+      1970s: 0
+      1980s: 0
+      1990s: 0
+      2000s: 8
+      2010s: 3013
+      2020s: 8575
+    interpretation: >-
+      High-precision title set but still contains many syndicated versions. Use
+      it to identify reporting series and corrections, not independent sources.
+
+next_queries:
+  - database: ProQuest News & Newspapers
+    query: 'NOFT("Jeffrey Epstein")'
+    date_range: 1960-01-01/2009-12-31
+    purpose: Review the 264 pre-2010 indexed records for early-reporting gaps
+  - database: ProQuest News & Newspapers
+    query: 'NOFT(Epstein AND (Wexner OR Maxwell OR "Palm Beach" OR Dershowitz OR Brunel))'
+    date_range: 1990-01-01/2018-12-31
+    purpose: Recover network-focused stories whose titles omit Jeffrey's full name
+  - database: Nexis Uni
+    query: '"Jeffrey Epstein"'
+    purpose: Compare coverage and locate broadcast/newswire records absent from ProQuest
+  - database: Factiva
+    query: '"Jeffrey Epstein"'
+    purpose: Compare international and business-publication coverage

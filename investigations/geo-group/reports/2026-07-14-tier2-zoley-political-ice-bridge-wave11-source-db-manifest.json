@@ -1,0 +1,147 @@
+{
+  "manifest_version": "1.0",
+  "generated_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "threads": [111, 112, 113],
+  "analysis_runs": {
+    "systemic_analysis": 124,
+    "generate_hunches": 125
+  },
+  "input_gate": {
+    "verification_status": "verified only for substantive analysis",
+    "retracted": "excluded",
+    "superseded": "excluded",
+    "external_searches_in_wave11": 0,
+    "layer1_queries_in_wave11": 0,
+    "highergov_used": false,
+    "sam_used": false,
+    "pacer_or_recap_queries_in_wave11": 0,
+    "subject_contact": false
+  },
+  "database_snapshot": {
+    "systemic_run_start": {
+      "profile_findings": 657,
+      "profile_connections": 75,
+      "source": "analysis_runs.id=124"
+    },
+    "local_export_after_concurrent_activity": {
+      "profile_findings": 663,
+      "verified_profile_findings": 475,
+      "profile_entities": 332,
+      "profile_entity_relations": 40,
+      "profile_entity_roles": 33,
+      "total_hypotheses": 357,
+      "active_nonstale_hypotheses": 353,
+      "tag_values_listed_by_tool": 222
+    },
+    "concurrency_note": "Other agents added profile records after run #124 started. Wave 11 remained frozen to the selected finding IDs and durable artifacts below; later additions did not enter the substantive analysis."
+  },
+  "selected_findings": [
+    {"id": 12523, "role": "earlier bounded individual Trump-committee receipt synthesis including two identity-resolved Zoley typo exceptions", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 12939, "role": "controlling prior dependency-weighted Trump/DHS selection synthesis", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 12984, "role": "broader SEC-bounded GEO leadership donor ledger control", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 12985, "role": "identity ambiguity exclusion control refining #12523", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13004, "role": "May 2018 Zoley DOJ-defense and reimbursement request in the shared dispute episode", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13015, "role": "senior ICE awareness and OPLA-meeting posture in the shared dispute episode", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13039, "role": "Zoley proxy identity bridge", "verification_status": "verified", "claim_type": "inference", "confidence": "medium"},
+    {"id": 13040, "role": "2026 proxy beneficial ownership", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13041, "role": "2025 compensation and retirement balance", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13042, "role": "2025 pre-arranged estate-planning sale programs", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13043, "role": "2026 gifts to grandchild trusts and disclaimer of interest/control", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13044, "role": "sixteen active Florida officer-code entities", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13045, "role": "six inactive Florida officer-code entities", "verification_status": "verified", "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13046, "role": "uncompensated GEO Group Foundation presidency", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13047, "role": "Boca Raton parcel co-ownership", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13048, "role": "central corporate decision role and day-to-day Adelanto disclaimer in the Novoa declaration", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13049, "role": "one Adelanto-government meeting and one ICE equitable-adjustment meeting in the shared dispute episode", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13050, "role": "2020 House Homeland Security testimony and Adelanto incident acknowledgment", "verification_status": "verified", "claim_type": "direct_quote", "confidence": "confirmed"}
+  ],
+  "selected_finding_relations": [
+    {
+      "from": 12985,
+      "to": 12523,
+      "relation_type": "refines",
+      "treatment": "Identity control refines the earlier political-money ledger; it is not a second independent political-money context."
+    },
+    {
+      "from": 13015,
+      "to": 12511,
+      "relation_type": "refines",
+      "treatment": "Adds contemporaneous ICE awareness without implying favorable action; counted within the shared 2018 dispute episode."
+    }
+  ],
+  "selected_hypotheses": [
+    {"id": 335, "competition_group": "geo-performance-consequence-gap", "status": "proposed", "wave11_action": "no assessment"},
+    {"id": 336, "competition_group": "geo-performance-consequence-gap", "status": "proposed", "wave11_action": "no assessment"},
+    {"id": 337, "competition_group": "geo-ice-expertise-channel", "status": "proposed", "wave11_action": "no assessment"},
+    {"id": 338, "competition_group": "geo-ice-expertise-channel", "status": "proposed", "wave11_action": "no assessment; prior least-inconsistent reading preserved"},
+    {"id": 357, "competition_group": "geo-political-payer-selection-rule", "status": "proposed", "wave11_action": "no assessment"},
+    {"id": 358, "competition_group": "geo-political-payer-selection-rule", "status": "proposed", "wave11_action": "no assessment; prior least-inconsistent reading preserved"}
+  ],
+  "dependency_groups": [
+    {"id": "sec_governance_insider", "findings": [13039, 13040, 13041, 13042, 13043]},
+    {"id": "fl_registry_officer_family", "findings": [13044, 13045]},
+    {"id": "foundation_role", "findings": [13046]},
+    {"id": "personal_assets", "findings": [13041, 13042, 13043, 13047]},
+    {"id": "fec_personal_money", "findings": [12523, 12984, 12985]},
+    {"id": "vwp_defense_cost_dispute", "findings": [13004, 13015, 13048, 13049]},
+    {"id": "house_public_oversight", "findings": [13050]},
+    {"id": "prior_controlling_synthesis", "findings": [12939]}
+  ],
+  "input_artifacts": [
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-report.md", "sha256": "7708c26515fa9fe4a603a3f480c3c03ef3f8c69751b05960da853e4fc50c3ade"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-coverage-matrix.csv", "sha256": "fd4da58f2af0a3efb7b1a1ee371003f9f1e3acf67bacabe744423062e291c59a"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-entity-role-ownership-matrix.csv", "sha256": "204c82da37602fd3a3c8645488d1887f86115d97b2bf26bcedb2617e19ef07aa"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-transaction-compensation-timeline.csv", "sha256": "3f09338edca0662766b8206e91df16f7852437debf5d0e77a2a5d519ac998b57"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-source-manifest.json", "sha256": "0497f1370818b47918abe7d249067ec52c8c0aad087daa40d43dacb51de7d998"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-negative-log.md", "sha256": "86f23c6aa87c6d36754bb2bfed1c6eb930b4b5bfdc3607f3268b6e62f7cf6482"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-report.md", "sha256": "e28b4e770a3bf63ab9817b94565d401716dead4d7cf08496f78bbdd9d2fdb5b6"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-person-summary.csv", "sha256": "653e4021ecb5c7eed0a71fa937f17b099cb84eb03dbdbc0b0d6bf588144083a1"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-source-finding-manifest.json", "sha256": "3263598fbc3cda6412c06f9eeb452cd08032b8fb3914339dbc0f5f91b7af5f40"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-63588-hartel-ice-defense-cost-report.md", "sha256": "928e3bff19dbf8f56fec7b3e510b327a8a030c091a5aba184452879ef6cb220e"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-63588-hartel-ice-defense-cost-clause-timeline-matrix.json", "sha256": "4a56f9db7f3a3a83f7f53863b2a26de7e7efaa41d47f7f4f145821da5fd76558"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-63588-hartel-ice-defense-cost-source-finding-manifest.json", "sha256": "45d68b7b53d4914503ab7c4bd11a3f681584a3e69a159f837424127e49f6bf5e"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57784-geo-ice-performance-consequence-report.md", "sha256": "54a55afee910b076664764b5680c0dbe5796e8aace18266d3709da436e707677"},
+    {"path": "investigations/geo-group/reports/2026-07-14-lead-57784-geo-ice-performance-consequence-ach.json", "sha256": "e28d23dd9c7a627908d3737bd9ad1114c4c3e7c712e867365cf4d5e5c0acee21"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-geo-political-payer-selection-rule.md", "sha256": "c49369e5603f06f5d8b9b1758eb21eff1288f5de4f41584fb50bcf49359b055b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-geo-political-payer-selection-rule-ach.json", "sha256": "504afb7551cf8ac8f30394a37408c6fa2dd571af404dfd8a983cff6c81426cad"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-systemic-analysis.md", "sha256": "fcf19331e33549d8db61ea4e660f1d98a36b05cde90e06bfc5e519b4124ff344"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-selection-ach.json", "sha256": "589ff431f97f764360b626d5ccecfedf893309a41d858bba75381d171100913b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-systemic-analysis.md", "sha256": "9158dac9a952b54942da7dd16206b70acea2d521ca087adb2d104e734304585b"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-ach.json", "sha256": "f046683b88c2a58522f13ed6ac74ebe86ede1a2e10eb3cc31dd31fb4bf00f715"},
+    {"path": "investigations/geo-group/reports/2026-07-14-tier2-trump-dhs-donor-homan-wave10-generate-hunches-novelty.json", "sha256": "20113acf9c9632aec54e780930d5a11ee3b9ff0ae7548b64ee5aaa75081d0ad2"}
+  ],
+  "database_writes": {
+    "analysis_run_records": [124, 125],
+    "addressed_administrative_friction_observations": [
+      {
+        "id": 1053,
+        "status": "addressed",
+        "disposition": "Mistaken assumption that analysis runs used a standalone CLI; selected skills correctly specify tools.analysis_export functions."
+      },
+      {
+        "id": 1055,
+        "status": "addressed",
+        "disposition": "Mistaken assumption that quick_check named a script; final QA correctly used SQLite PRAGMA quick_check."
+      }
+    ],
+    "findings_created": 0,
+    "hypotheses_created": 0,
+    "leads_created": 0,
+    "tags_created": 0,
+    "connections_created": 0,
+    "entities_created": 0,
+    "hypothesis_evidence_assessments_created": 0,
+    "auto_leads_run": false
+  },
+  "output_artifacts": [
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-systemic-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-dependency-weighted-evidence-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-ach.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-generate-hunches-novelty.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-source-db-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-sha256sums.txt"
+  ],
+  "output_checksum_ledger": "investigations/geo-group/reports/2026-07-14-tier2-zoley-political-ice-bridge-wave11-sha256sums.txt",
+  "self_hash_note": "The manifest does not contain output hashes. The separate checksum ledger hashes every output artifact except itself."
+}

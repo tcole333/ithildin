@@ -1,0 +1,359 @@
+{
+  "manifest_version": "1.1",
+  "generated_date": "2026-07-14",
+  "cutoff_date": "2026-07-14",
+  "profile": "geo-group",
+  "thread_id": 113,
+  "source_bundle_root": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10",
+  "scope": {
+    "requested_docket_ids": [70844088, 72097949, 73178988],
+    "related_docket_ids": [73114403],
+    "purpose": "Resolve residual GEO medical/death candidates, identify true issue and parties, assess facility/government nexus, classify posture, and record missing-document boundaries."
+  },
+  "findings": [
+    {
+      "id": 12992,
+      "case": "Patterson v. The GEO Group, Inc.",
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "verification_status": "verified",
+      "verified_by": "geo-residual-medical-cases-wave10",
+      "verified_at": "2026-07-14T11:55:09.341115+00:00",
+      "thread_id": 113,
+      "source_ids": ["PATTERSON_DOCKET", "PATTERSON_ENTRIES", "PATTERSON_JUSTIA"]
+    },
+    {
+      "id": 12993,
+      "case": "Gabriel Alejandro Garcia et al. v. The GEO Group, Inc. et al.",
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "verification_status": "verified",
+      "verified_by": "geo-residual-medical-cases-wave10-archival-qa",
+      "verified_at": "2026-07-14T12:05:19.923588+00:00",
+      "thread_id": 113,
+      "source_ids": ["GARCIA_DOCKET", "GARCIA_ENTRIES", "GARCIA_COVER", "GARCIA_OSC"],
+      "evidence_qa": "The stored docket-metadata quotation now transcribes the dated ECF 27 Dismiss, ECF 28 Extension of Time to Amend, ECF 29 Order, and ECF 32 Joint Report descriptions and preserves is_available=false/is_sealed=null for the unavailable ECF 27-29 documents."
+    },
+    {
+      "id": 12994,
+      "case": "Okoroafor v. The GEO Group Inc. — duplicate disposition",
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "verification_status": "verified",
+      "verified_by": "geo-residual-medical-cases-wave10",
+      "verified_at": "2026-07-14T11:55:09.330533+00:00",
+      "thread_id": 113,
+      "source_ids": ["OKOROAFOR_DUP_DOCKET", "OKOROAFOR_DUP_ORDER", "OKOROAFOR_MAIN_ENTRIES"]
+    },
+    {
+      "id": 12995,
+      "case": "Okoroafor v. The GEO Group Inc. — main employment action",
+      "claim_type": "paraphrase",
+      "confidence": "high",
+      "verification_status": "verified",
+      "verified_by": "geo-residual-medical-cases-wave10-archival-qa",
+      "verified_at": "2026-07-14T12:05:19.880823+00:00",
+      "thread_id": 113,
+      "source_ids": ["OKOROAFOR_MAIN_COMPLAINT", "OKOROAFOR_MAIN_ENTRIES"],
+      "evidence_qa": "The stored complaint quotation now includes the exact NWIPC employment sentence and the exact headings of all five pleaded causes, with source pages recorded as PDF pp. 4 and 14-19."
+    }
+  ],
+  "leads": [
+    {
+      "id": 63730,
+      "title": "Retrieve Garcia wrongful-death complaint and partial-dismissal order — C.D. Cal. 5:25-cv-03614",
+      "priority": "high",
+      "status": "open",
+      "thread_id": 113,
+      "source_ids": ["GARCIA_DOCKET", "GARCIA_ENTRIES", "GARCIA_OSC", "ICE_GARCIA_AVILES"]
+    }
+  ],
+  "post_wave_auto_lead_dispositions": [
+    {
+      "ids": [63795, 63797],
+      "status": "dead_end",
+      "reason": "Reciprocal fuzzy-match pair for Northwest ICE contract HSCEDM-15-D-00015; both labels contain the same exact contract identifier and represent an entity-resolution alias, not a separate investigative lead."
+    },
+    {
+      "ids": [63796, 63798],
+      "status": "dead_end",
+      "reason": "Reciprocal fuzzy-match pair for Adelanto IGSA EROIGSA-11-0003; both labels contain the same exact contract identifier and represent an entity-resolution alias, not a separate investigative lead."
+    }
+  ],
+  "sources": [
+    {
+      "id": "PATTERSON_DOCKET",
+      "authority": "primary docket metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/dockets/70844088/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/patterson-courtlistener-docket-70844088.json",
+      "sha256": "7cdc04170826b7e1a9304bfe32dc8747ff00be6906d956b999e22f945fd32cdd",
+      "role": "case identity, cause, nature of suit, and caption",
+      "retained_in_repository": true
+    },
+    {
+      "id": "PATTERSON_ENTRIES",
+      "authority": "primary docket-entry metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/docket-entries/?docket=70844088",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/patterson-courtlistener-docket-entries-70844088.json",
+      "sha256": "a0c15ba6e12688560d77f0f720e37869f67e56334196f20340ce88799fce4388",
+      "role": "documents indexed by CourtListener and the API staleness boundary",
+      "retained_in_repository": true
+    },
+    {
+      "id": "PATTERSON_RECAP_SEARCH",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=1%3A25-cv-03984&type=rd&court=gand",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/patterson-courtlistener-recap-search-70844088.json",
+      "sha256": "51b1bf2903b7acc0d306d0a648758a6cfa3418ae734ceebc40c69767cba010d5",
+      "role": "free-RECAP document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "PATTERSON_JUSTIA",
+      "authority": "secondary public docket mirror",
+      "canonical_url": "https://dockets.justia.com/docket/georgia/gandce/1%3A2025cv03984/346649",
+      "local_path": null,
+      "sha256": null,
+      "role": "September 10 stay/administrative-closure entry and December 9 status-report listing",
+      "retained_in_repository": false,
+      "archive_status": "Direct archival retrieval returned HTTP 403 on 2026-07-14; no HTML capture or substitute was created.",
+      "papercut_id": 1026
+    },
+    {
+      "id": "GARCIA_DOCKET",
+      "authority": "primary docket metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/dockets/72097949/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-docket-72097949.json",
+      "sha256": "3c045bd99d1c4f840db5096e31f559ef3829b955b58500d87d2f55717fa870b8",
+      "role": "case identity, jurisdiction, cause, activity, and termination fields",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_ENTRIES",
+      "authority": "primary docket-entry metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/docket-entries/?docket=72097949",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-docket-entries-72097949.json",
+      "sha256": "2add73b1e49524c3c3a4802bfff2386800b4d54619a6dda9f4bafa2a4cdf8495",
+      "role": "procedural chronology, missing-document availability, and is_sealed null boundary",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_SEARCH",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-72097949.json",
+      "sha256": "5b69f9609b72f4341599589a45cc0f6fbb90512e3870bd5ac065e3470dc14aca",
+      "role": "exact-docket free-RECAP availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_AMEND",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614+amend&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-amend.json",
+      "sha256": "93023743e7c4e28fcc425c62883aeb60963a24d363c7b613ba9366bffc17c0ae",
+      "role": "targeted amendment-document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_DEATH",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614+death&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-death.json",
+      "sha256": "45524a6dda6d6700ed0ee74567a65f40b0d6533b1ce1246c707b4560ea9ed4b9",
+      "role": "targeted death-document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_DISMISS",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614+dismiss&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-dismiss.json",
+      "sha256": "2362bfd48a57890056a27c25a44277f4768cc92c317d8432fae24b5e52f93cc6",
+      "role": "targeted dismissal-document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_NEGLIGENCE",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614+negligence&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-negligence.json",
+      "sha256": "3f908f5217ac470aa25a853bba675d923e9ee6271f94a019548b89293fb13413",
+      "role": "targeted negligence-document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_RECAP_RULE26",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=5%3A25-cv-03614+Rule26&type=rd&court=cacd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-recap-search-rule26.json",
+      "sha256": "58b8a93e2d33e2e537766785fe691f22069394afe1cb91b0fe9ef52bf55e445b",
+      "role": "targeted Rule 26 document availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_OSC_CLUSTER",
+      "authority": "primary CourtListener opinion-cluster metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/clusters/10917261/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-opinion-cluster-10917261.json",
+      "sha256": "f0a574db7def4a727c7704038541f253b4c878b2a22208d29d3dce746b865b4d",
+      "role": "links the June 30 document to docket 72097949 and opinion 11384796",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_OSC_JSON",
+      "authority": "primary court-order text and CourtListener metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/opinions/11384796/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-courtlistener-opinion-11384796.json",
+      "sha256": "cc56072132ec8b4ebbc3cf9498641bb3f770059b248f140c7afe7e80a6df1e6d",
+      "role": "June 30 order full text and source PDF path",
+      "retained_in_repository": true,
+      "note": "CourtListener's public opinion-page title is citation-derived and unrelated; the underlying document caption is C.D. Cal. EDCV 25-03614-KK-DTBx."
+    },
+    {
+      "id": "GARCIA_COVER",
+      "authority": "party-filed federal civil cover sheet",
+      "canonical_url": "https://www.courtlistener.com/docket/72097949/1/1/gabriel-alejandro-garcia-v-the-geo-group-inc/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-civil-cover-sheet-ecf1-attachment1.pdf",
+      "sha256": "c0704906848ece272aff56ee6130ed64d921e90f5c43593db3a79741623a5677",
+      "role": "party names, corporate defendants, and filer-characterized causes; not proof of allegations",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_OSC",
+      "authority": "primary court order",
+      "canonical_url": "https://www.courtlistener.com/docket/72097949/30/gabriel-alejandro-garcia-v-the-geo-group-inc/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-order-to-show-cause-ecf30.pdf",
+      "sha256": "e68fba596a15f5ad33a4f8a4eed2df7ffd66dca5fdb59c03250c172506c23e40",
+      "role": "June 30 Rule 26 show-cause order; not a merits ruling",
+      "retained_in_repository": true
+    },
+    {
+      "id": "ICE_GARCIA_AVILES",
+      "authority": "primary official government report",
+      "canonical_url": "https://www.ice.gov/doclib/foia/reports/detaineeDeaths/Garcia-Aviles_Gabriel.pdf",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/garcia-ice-detainee-death-report.pdf",
+      "sha256": "2e32126f054b8fd6acffb6f723ed5256a627a563f372bd69502782f9615fb90d",
+      "role": "identity, ICE custody, transfer to Adelanto, and death dates; no civil-causation or compliance conclusion",
+      "retained_in_repository": true
+    },
+    {
+      "id": "GARCIA_LAIST_IDENTITY",
+      "authority": "secondary reporting",
+      "canonical_url": "https://laist.com/brief/news/politics/lawsuit-alleges-inhumane-conditions-at-ice-adelanto-facility",
+      "local_path": null,
+      "sha256": null,
+      "role": "identifies Mariel Garcia as Gabriel Garcia-Aviles's daughter and connects reporting to the Adelanto lawsuit; identity bridge only",
+      "retained_in_repository": false
+    },
+    {
+      "id": "GARCIA_SFCHRONICLE_IDENTITY",
+      "authority": "secondary reporting",
+      "canonical_url": "https://www.sfchronicle.com/projects/2026/ice-detention-deaths/",
+      "local_path": null,
+      "sha256": null,
+      "role": "identifies Gabriel Alejandro Garcia as Gabriel Garcia Aviles's son; identity bridge only",
+      "retained_in_repository": false
+    },
+    {
+      "id": "OKOROAFOR_DUP_DOCKET",
+      "authority": "primary docket metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/dockets/73178988/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-duplicate-courtlistener-docket-73178988.json",
+      "sha256": "5583707389c29602ac5a3c6997774a4ad949182b12941dcbe4f10cbe976f3e6b",
+      "role": "duplicate case identity and cause metadata",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_DUP_ENTRIES",
+      "authority": "primary docket-entry metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/docket-entries/?docket=73178988",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-duplicate-courtlistener-docket-entries-73178988.json",
+      "sha256": "9e53f8e463cb6c6d6340e04e8ff04c1412487d5fb604496c1a398c8fd88dfb01",
+      "role": "duplicate-docket filing chronology and document availability",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_DUP_RECAP_SEARCH",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=3%3A26-cv-05375&type=rd&court=wawd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-duplicate-courtlistener-recap-search-73178988.json",
+      "sha256": "b8c2134e5380d09c41bdd28b401cdb46de84e970f4482bbf2d9475d278215677",
+      "role": "duplicate-docket free-RECAP availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_DUP_COMPLAINT",
+      "authority": "party-filed complaint in duplicate docket",
+      "canonical_url": "https://www.courtlistener.com/docket/73178988/1/okoroafor-v-the-geo-group-inc/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-duplicate-complaint-ecf1.pdf",
+      "sha256": "764d7c03a4c2bbe8a0c1f6cc562d1862e414bea1b2a5568bc322c83fef351004",
+      "role": "pleaded employment claims; allegations only",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_DUP_ORDER",
+      "authority": "primary court order",
+      "canonical_url": "https://www.courtlistener.com/docket/73178988/5/okoroafor-v-the-geo-group-inc/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-duplicate-dismissal-order-ecf5.pdf",
+      "sha256": "72e2d43fa763ede671f4aea05cc2409e3ff861361c7107f3e83fb89fcde1a895",
+      "role": "duplicate dismissal without prejudice and fee refund; non-merits disposition",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_MAIN_CASE_SEARCH",
+      "authority": "primary CourtListener case-search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=3%3A26-cv-05307&type=r&court=wawd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-main-courtlistener-case-search-73114403.json",
+      "sha256": "0cb2f5e948ec80f5b58b6c9e031c80bf7c9e53d5de5c833a3e96d9234558d131",
+      "role": "main-case identity and complaint availability",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_MAIN_ENTRIES",
+      "authority": "primary docket-entry metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/docket-entries/?docket=73114403",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-main-courtlistener-docket-entries-73114403.json",
+      "sha256": "5c73fea3bbe4b4e8148dbff2a3132f3d777ac79e3525ddd7995a8e413cf1874d",
+      "role": "main-action answer and scheduling posture through July 2, 2026",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_MAIN_RECAP_SEARCH",
+      "authority": "primary RECAP search metadata",
+      "canonical_url": "https://www.courtlistener.com/api/rest/v4/search/?q=3%3A26-cv-05307&type=rd&court=wawd",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-main-courtlistener-recap-search-73114403.json",
+      "sha256": "090936348dedda165da253ac333780a1468c0bdad0973b40734c774f237742c9",
+      "role": "main-action free-RECAP availability search",
+      "retained_in_repository": true
+    },
+    {
+      "id": "OKOROAFOR_MAIN_COMPLAINT",
+      "authority": "party-filed complaint",
+      "canonical_url": "https://www.courtlistener.com/docket/73114403/1/okoroafor-v-the-geo-group-inc/",
+      "local_path": "investigations/geo-group/sources/2026-07-14-geo-residual-medical-cases-wave10/okoroafor-main-complaint-ecf1.pdf",
+      "sha256": "60cc78712ee669bb15c1b095d4287d353e9185305f0dbcacd9d463f2aedc406b",
+      "role": "operative pleaded employment claims and workplace nexus; allegations only",
+      "retained_in_repository": true
+    }
+  ],
+  "interpretive_limits": [
+    "Three services returning the same docket or filing are redundancy, not corroboration.",
+    "Party-filed complaints and civil cover sheets state allegations and filer characterizations, not adjudicated facts.",
+    "The official ICE report proves the recorded custody/transfer/death facts only; it does not prove civil causation or compliance.",
+    "The Garcia lawsuit-to-decedent bridge is high-confidence but depends on secondary family-identity reporting until the complaint is retrieved.",
+    "Administrative closure, duplicate dismissal without prejudice, and an order to show cause are not merits determinations."
+  ],
+  "archival_qa": {
+    "primary_capture_count": 25,
+    "primary_captures_retained": 25,
+    "secondary_pages_not_archived": ["PATTERSON_JUSTIA", "GARCIA_LAIST_IDENTITY", "GARCIA_SFCHRONICLE_IDENTITY"],
+    "ledger_command": "shasum -a 256 -c investigations/geo-group/reports/2026-07-14-geo-residual-medical-cases-wave10-sha256.txt"
+  },
+  "database_qa": {
+    "expected_foreign_key_baseline": 64,
+    "final_quick_check": "ok",
+    "final_foreign_key_count": 64,
+    "baseline_changed": false
+  }
+}

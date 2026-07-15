@@ -29,6 +29,19 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+try:
+    from tools.registry_address_index import (
+        DEFAULT_INDEX_PATH as ADDRESS_INDEX_PATH,
+        RegistryAddressIndexError,
+        search_addresses,
+    )
+except ImportError:
+    from registry_address_index import (
+        DEFAULT_INDEX_PATH as ADDRESS_INDEX_PATH,
+        RegistryAddressIndexError,
+        search_addresses,
+    )
+
 DB_PATH = Path(__file__).parent.parent / "registry.db"
 
 
@@ -603,45 +616,21 @@ def cmd_officers(args):
 
 
 def cmd_address(args):
-    """Search entities and officers by address."""
-    db = get_db()
+    """Search entity, officer, and agent addresses through the trigram sidecar."""
+    try:
+        data = search_addresses(
+            args.query,
+            args.limit,
+            source_path=DB_PATH,
+            index_path=ADDRESS_INDEX_PATH,
+        )
+    except RegistryAddressIndexError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
-    pattern = f"%{args.query}%"
-
-    # Search entity addresses
-    entity_rows = db.execute("""
-        SELECT * FROM registry_entities
-        WHERE principal_address LIKE ?
-           OR mailing_address LIKE ?
-        ORDER BY entity_name
-        LIMIT ?
-    """, [pattern, pattern, args.limit]).fetchall()
-
-    # Search officer addresses
-    officer_rows = db.execute("""
-        SELECT o.*, re.entity_name, re.source_jurisdiction
-        FROM registry_officers o
-        JOIN registry_entities re ON o.entity_id = re.id
-        WHERE o.address LIKE ?
-        ORDER BY o.officer_name
-        LIMIT ?
-    """, [pattern, args.limit]).fetchall()
-
-    # Search agent addresses
-    agent_rows = db.execute("""
-        SELECT a.*, re.entity_name, re.source_jurisdiction
-        FROM registry_agents a
-        JOIN registry_entities re ON a.entity_id = re.id
-        WHERE a.address LIKE ?
-        ORDER BY a.agent_name
-        LIMIT ?
-    """, [pattern, args.limit]).fetchall()
-
-    data = {
-        "entities": [dict(r) for r in entity_rows],
-        "officers": [dict(r) for r in officer_rows],
-        "agents": [dict(r) for r in agent_rows],
-    }
+    entity_rows = data["entities"]
+    officer_rows = data["officers"]
+    agent_rows = data["agents"]
     if write_output(data, args, summary=f"address search '{args.query}'"):
         return
 

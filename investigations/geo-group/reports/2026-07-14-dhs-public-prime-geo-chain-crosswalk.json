@@ -1,0 +1,150 @@
+{
+  "profile": "geo-group",
+  "lead_id": 60824,
+  "as_of": "2026-07-14",
+  "scope": "DHS public-prime/private-GEO-operator detention chains missed by recipient-name filters",
+  "search_universe": {
+    "action_date_start": "2007-10-01",
+    "action_date_end": "2026-07-14",
+    "dhs_naics_922140_rows": 202,
+    "dhs_psc_x1ff_rows": 41,
+    "cbp_keyword_rows": {
+      "detention": 139,
+      "detainee": 485,
+      "jail": 36,
+      "lodging": 740
+    },
+    "deduplicated_awards": 1490,
+    "unique_recipients": 543,
+    "public_name_heuristic_awards": 163,
+    "public_name_heuristic_recipients": 64
+  },
+  "denominators": {
+    "verified_dhs_public_prime_private_geo_operator_chains": 7,
+    "unique_physical_facilities_across_verified_chains_and_four_direct_geo_cbp_comparators": 11,
+    "additional_probable_public_prime_awards": 1,
+    "additional_probable_procurement_families": 1,
+    "additional_probable_public_prime_chains": 1,
+    "additional_physical_facilities": 0,
+    "conditional_result": "If HSBP1012P00868 identifies facility code 6R7, 742 Highway 131, or the 688-bed Maverick County Detention Facility, verified public-prime chains increase to 8 and physical facilities remain 11."
+  },
+  "maverick_roles_at_probable_2012_award": {
+    "piid": "HSBP1012P00868",
+    "signed_action_date": "2012-09-14",
+    "usaspending_period_start_date": "2012-09-15",
+    "highergov_period_start_date": "2012-09-14",
+    "legal_prime": "County of Maverick",
+    "operator": "The GEO Group only if the named service site was the 688-bed Maverick County Detention Facility",
+    "owner": "Maverick County",
+    "award_description": "DETENTION SPACE",
+    "place_of_performance": {
+      "city": "Eagle Pass",
+      "county": "Maverick",
+      "state": "TX",
+      "zip": "78852-5109"
+    },
+    "psc": "X1FF",
+    "naics": "561210",
+    "base_action_obligation_usd": 7181.50,
+    "current_net_obligation_usd": 5758.75,
+    "outlays_usd": null,
+    "downstream_payment_to_geo_usd": null,
+    "county_retained_fee_usd": null,
+    "award_rate_usd": null,
+    "geo_award_revenue_usd": null,
+    "facility_mapping_confidence": "probable synthesis / medium confidence / not verified",
+    "unresolved_alternative": "Maverick County Tom Bowles Detention Center or another county service site"
+  },
+  "maverick_timeline": [
+    {
+      "date": "2005-08-01",
+      "piid": "HSBP1005P07705",
+      "disposition": "excluded",
+      "reason": "Award predates documented GEO operation and has no facility description."
+    },
+    {
+      "date": "2008-11-10",
+      "document": "USMS IGA 80-99-0219 modification 1",
+      "fact": "Added Maverick County Detention Facility at 742 Highway 131, code 6R7, document-snapshot per diem $52.50."
+    },
+    {
+      "date": "2012-07-26",
+      "piid": "HSBP20120027801393",
+      "disposition": "excluded from Maverick denominator",
+      "reason": "Recipient is County of Maverick but USAspending codes performance to Del Rio, Val Verde County."
+    },
+    {
+      "date": "2012-09-14",
+      "piid": "HSBP1012P00868",
+      "signed_action_date": "2012-09-14",
+      "usaspending_period_start_date": "2012-09-15",
+      "highergov_period_start_date": "2012-09-14",
+      "disposition": "probable chain",
+      "reason": "County-prime detention-space award in Eagle Pass/Maverick overlaps GEO managed-only operation; award does not name facility."
+    },
+    {
+      "date": "2013-11-01",
+      "document": "GEO 2013 Q3 10-Q and fiscal-2013 10-K",
+      "fact": "GEO terminated its managed-only contract for the county-owned 688-bed Maverick facility."
+    },
+    {
+      "date": "2014-07-21",
+      "piid": "HSBP1014P00452",
+      "period_start_date": "2014-05-25",
+      "signed_action_date": "2014-07-21",
+      "disposition": "excluded",
+      "reason": "Award begins after GEO's management termination."
+    },
+    {
+      "date": "2017-03-06",
+      "document": "GEO 2017 Q1 10-Q",
+      "fact": "GEO acquired the idle 688-bed Maverick County Detention Center for approximately $15 million."
+    }
+  ],
+  "prior_finding_qualification": {
+    "finding_id": 12717,
+    "still_valid_for": "Medium-confidence facility mapping of direct-GEO call HSBP1016J00076 to Maverick",
+    "not_valid_for": "Proof that GEO operated or owned the facility in 2016",
+    "time_boundary": "GEO terminated managed-only operation on 2013-11-01 and acquired the then-idle facility on 2017-03-06"
+  },
+  "resolved_name_collisions": [
+    {
+      "piid": "HSCEDM08P00062",
+      "candidate": "City of Aurora",
+      "resolution": "Award place is Aurora CO 80012; GEO Aurora ICE property is 80010."
+    },
+    {
+      "piid": "HSCEDM08P00055",
+      "candidate": "City of Burlington",
+      "resolution": "Award place is Burlington CO; GEO filing hits are Burlington MA community programs; award net obligation is zero."
+    },
+    {
+      "piid": "HSBP1016P00143",
+      "candidate": "Hidalgo County",
+      "resolution": "Award place is Edinburg 78542; GEO East Hidalgo and Coastal Bend properties are La Villa 78562 and Robstown 78380."
+    },
+    {
+      "piid": "70B03C25F00001321",
+      "candidate": "Montgomery County Detention Center",
+      "resolution": "Recipient is a New York local entity and performance is Vermont; not Joe Corley in Texas."
+    }
+  ],
+  "targeted_bounded_negatives": [
+    "Crystal City Correctional Center",
+    "San Luis Regional Detention Center",
+    "Zapata County",
+    "La Salle County Regional Detention Center",
+    "Imperial County Jail",
+    "Taylor County Detention Center",
+    "San Bernardino County Jail",
+    "Yuma County Detention Center",
+    "Cascade County Detention Center",
+    "Albany County Correctional Facility",
+    "Clinton County Jail",
+    "Coos County Jail",
+    "Franklin County Jail",
+    "Rensselaer County Jail",
+    "Schenectady County Jail"
+  ],
+  "required_falsifier_record": "Original and modification package for HSBP1012P00868 naming the facility, address, IGA, facility code, or invoice recipient."
+}

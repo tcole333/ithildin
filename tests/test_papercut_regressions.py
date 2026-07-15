@@ -21,6 +21,9 @@ def test_literal_fts_query_handles_email_and_domain_punctuation(tmp_path, monkey
     assert literal_fts_query(email) == '"ch.communication.sa@gmail.com"'
     assert literal_fts_query('"exact phrase"') == '"exact phrase"'
     assert literal_fts_query("alpha OR beta") == "alpha OR beta"
+    assert literal_fts_query("GEO Corrections and Detention, LLC") == (
+        '"GEO" "Corrections" "and" "Detention," "LLC"'
+    )
     assert query_lmsband._fts_query(email) == '"ch.communication.sa@gmail.com"'
 
     doj_path = tmp_path / "doj.db"
@@ -164,6 +167,59 @@ def test_findings_search_limit_and_date_correction_stay_consistent(tmp_path, mon
         if name not in columns:
             db.execute(f"ALTER TABLE findings ADD COLUMN {name} TEXT")
     db.commit()
+    db.close()
+
+
+def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
+    from tools import findings_tracker, lead_tracker
+
+    db_path = tmp_path / "investigation.db"
+    monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    monkeypatch.setattr(findings_tracker, "DB_PATH", db_path)
+    db = lead_tracker.get_db()
+    columns = {row["name"] for row in db.execute("PRAGMA table_info(findings)")}
+    for name in ("event_date_iso", "date_precision"):
+        if name not in columns:
+            db.execute(f"ALTER TABLE findings ADD COLUMN {name} TEXT")
+    lead_id = db.execute(
+        "INSERT INTO leads (title, profile_id) VALUES (?, ?)",
+        ("CourtListener universe", "test"),
+    ).lastrowid
+    db.commit()
+    db.close()
+    monkeypatch.setattr(findings_tracker, "_schema_initialized", True)
+
+    finding_id = findings_tracker.add_finding(
+        "Target",
+        "Verified finding created before its lead link was supplied",
+        source_datasets=["courtlistener"],
+        profile_id="test",
+    )
+
+    assert findings_tracker.update_finding(
+        finding_id,
+        "lead_id",
+        lead_id,
+        "Attach the source lead",
+        corrected_by="test",
+    )
+
+    db = findings_tracker.get_db()
+    row = db.execute(
+        "SELECT lead_id FROM findings WHERE id = ?",
+        (finding_id,),
+    ).fetchone()
+    correction = db.execute(
+        """
+        SELECT old_value, new_value
+        FROM corrections
+        WHERE table_name = 'findings' AND record_id = ? AND field_name = 'lead_id'
+        """,
+        (finding_id,),
+    ).fetchone()
+    assert row["lead_id"] == lead_id
+    assert tuple(correction) == (None, str(lead_id))
     db.close()
     monkeypatch.setattr(findings_tracker, "_schema_initialized", True)
 

@@ -1,0 +1,190 @@
+{
+  "manifest_version": 1,
+  "lead_id": 57786,
+  "profile_id": "geo-group",
+  "thread_id": 110,
+  "generated_on": "2026-07-14",
+  "artifacts": [
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates.md",
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-ledger.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-quotes.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-unavailable.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-sha256.csv"
+  ],
+  "sources": {
+    "directory": "investigations/geo-group/sources/2026-07-14-lead-57786",
+    "file_count": 56,
+    "hash_algorithm": "SHA-256",
+    "hash_ledger": "investigations/geo-group/reports/2026-07-14-lead-57786-historical-ice-rates-sha256.csv",
+    "source_set_sha256": "c9b744190c7e7b3eb4bcd683f7908366dc5da46a6c5760bbad064c17e445d3e3",
+    "source_set_digest_method": "SHA-256 of sorted UTF-8 records path + NUL + file_sha256 + newline",
+    "hash_ledger_self_excluded": true
+  },
+  "findings": [
+    {
+      "id": 12986,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "verification_status": "verified",
+      "summary": "The 2010 Karnes IGSA priced the first 480 detainees at $68.75 and detainees 481-600 at $56.48; Article III separately called 480 the minimum bed availability and limited liability to actual detainee days, while Article I made the start of minimum payments dependent on Attachment 7.",
+      "evidence": [
+        {
+          "ref": "ICE-CONTRACT:EROIGSA-11-0004#pdf-p4",
+          "quote": "Bed Day Rate – per detainee for the first 480 $ 68.75 per detainee; Bed Day Rate – per detainee for the 481-600 $ 56.48 per detainee. The attached Ramp-Up plan (Attachment (7)) indicates when ICE is required to start paying at the minimum requirements."
+        },
+        {
+          "ref": "ICE-CONTRACT:EROIGSA-11-0004#pdf-p5",
+          "quote": "The Service Provider shall provide male beds on a space available basis, with minimum availability of 480 beds. ICE will be financially liable only for the actual detainee days as defined in Paragraph C of Article III."
+        }
+      ]
+    },
+    {
+      "id": 12987,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "verification_status": "verified",
+      "summary": "A 2009 GEO task-order modification labeled 1,146 adult detainees as guaranteed housing and a separate above-guarantee tier as 758 maximum.",
+      "evidence": [
+        {
+          "ref": "ICE-CONTRACT:HSCEDM-09-F-00001-P00007#pdf-p20",
+          "quote": "ADULT DETAINEES 1146 GUARANTEED HOUSING; ADULT DETAINEES ABOVE GUARANTEED MINIMUM 758 MAX"
+        }
+      ]
+    },
+    {
+      "id": 12988,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "verification_status": "verified",
+      "summary": "The Pearsall performance work statement required staffing for an estimated 1,000 adults and 20 juveniles and at least five female officers per shift excluding transportation.",
+      "evidence": [
+        {
+          "ref": "ICE-CONTRACT:ACD-4-C-0001#pdf-p12",
+          "quote": "Base year adult male detainees - 850 beds; Base Year Adult female detainees - 150 beds; Juveniles 20 beds."
+        },
+        {
+          "ref": "ICE-CONTRACT:ACD-4-C-0001#pdf-p19",
+          "quote": "The contractor shall, at all times, staff the facility to accommodate the estimated population of 1000 adult and 20 juvenile detainees. The contractor shall provide a minimum of five (5) female officers per shift excluding transportation."
+        }
+      ]
+    },
+    {
+      "id": 12989,
+      "claim_type": "direct_quote",
+      "confidence": "confirmed",
+      "verification_status": "verified",
+      "summary": "GEO states that it provides ICE support services at the Karnes Center under an IGSA between Karnes County and ICE.",
+      "evidence": [
+        {
+          "ref": "SEC:923796-2025-10K-KARNES",
+          "quote": "GEO provides support services for ICE at the Karnes Center under an IGSA between Karnes County and ICE, that is effective through August 2029."
+        }
+      ]
+    },
+    {
+      "id": 12990,
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "verification_status": "verified",
+      "summary": "Retrieved current ICE modifications preserve bed-day, guarantee and staffing-plan fields but redact the values needed for a like-for-like historical rate comparison.",
+      "evidence": [
+        {
+          "ref": "ICE-CONTRACT:70CDCR21D00000004-P00011#pdf-p2",
+          "quote": "Facility Operations Charge Monthly Usage Rate is increased from [redacted] to [redacted]. Transportation — Guaranteed Minimum Miles and Guard Hours ... Monthly Rate of [redacted] is increased by [redacted]."
+        },
+        {
+          "ref": "ICE-CONTRACT:70CDCR22D00000001-P00011#pdf-p2",
+          "quote": "Update Attachment 25 — Aurora Staffing Plan, dated 3 June 2024. Change Item 2001C ... Bed Day Rate. As a result of this modification, the rate for this CLIN has changed. From: [redacted] To: [redacted]."
+        },
+        {
+          "ref": "ICE-CONTRACT:HSCEDM-15-D-00015-P00049#pdf-p2",
+          "quote": "To incorporate staffing plan for [redacted] Guaranteed Minimum (GM) Beds; To change Guaranteed Minimum [redacted] Bed Day Rate from [redacted] by [redacted] to [redacted]; To incorporate staffing plan for [redacted] Full capacity Beds."
+        }
+      ]
+    },
+    {
+      "id": 12991,
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "verification_status": "verified",
+      "summary": "A single GEO/ICE modification under ACD-4-C-0001 and HSCEDM-09-F-00001 uses ‘South Texas Detention Cent’ in its funding-purpose text and ‘SOUTHWEST TEXAS DETENTION COMPLEX’ for the continuation-sheet delivery location at 566 Veterans Drive, Pearsall, supporting that the names are variants for the same contracted facility.",
+      "evidence": [
+        {
+          "ref": "ICE-CONTRACT:HSCEDM-09-F-00001-P00001#pdf-p5-p6",
+          "quote": "MODIFICATION OF CONTRACT/ORDER NO. ACD-4-C-0001 / HSCEDM-09-F-00001. The purpose of this modification is to provide funding for the South Texas Detention Cent ... Delivery Location Code: DROPEARSALL / SOUTHWEST TEXAS DETENTION COMPLEX / 566 VETERAN'S DRIVE / PEARSALL TX 78061 USA."
+        }
+      ]
+    }
+  ],
+  "database_writes": {
+    "lead_57786": {
+      "status": "completed",
+      "finding_ids": [12986, 12987, 12988, 12989, 12990, 12991]
+    },
+    "findings": {
+      "ids": [12986, 12987, 12988, 12989, 12990, 12991],
+      "thread_id": 110,
+      "all_verified": true,
+      "all_evidence_rows_quote_backed": true
+    },
+    "entity_identity_cleanup": {
+      "kept_entity_id": 5126,
+      "deleted_entity_id": 5127,
+      "canonical_name": "South Texas Detention Complex",
+      "alias_id": 224,
+      "alias": "Southwest Texas Detention Complex",
+      "alias_type": "entity_variant",
+      "supporting_finding_id": 12991
+    },
+    "auto_leads": {
+      "63627": {
+        "status": "completed",
+        "finding_ids": [12991]
+      },
+      "63628": {
+        "status": "dead_end",
+        "duplicate_of": 63627
+      },
+      "relation": {
+        "lead_id": 63628,
+        "related_lead_id": 63627,
+        "relation_type": "duplicate_of"
+      },
+      "dedup_log_id": 497
+    },
+    "human_action": {
+      "id": 74,
+      "status": "pending",
+      "action_type": "foia_request",
+      "priority": "medium",
+      "related_lead_id": null,
+      "scope": "Narrow request for unredacted current GEO/ICE bed-day CLIN schedule pages."
+    },
+    "papercuts": {
+      "open": [1017],
+      "resolved": [1020]
+    }
+  },
+  "qa": {
+    "sqlite_quick_check": "ok",
+    "foreign_key_check_rows": 64,
+    "foreign_key_baseline_rows": 64,
+    "foreign_key_baseline_unchanged": true,
+    "finding_ids_verified": [12986, 12987, 12988, 12989, 12990, 12991],
+    "csv_widths": {
+      "ledger": 33,
+      "quotes": 10,
+      "unavailable": 9,
+      "sha256": 4
+    },
+    "csv_data_rows": {
+      "ledger": 34,
+      "quotes": 25,
+      "unavailable": 14
+    },
+    "prohibited_source_guard": "pass",
+    "current_like_for_like_rate_comparison_performed": false,
+    "current_like_for_like_rate_comparison_reason": "Current recovered GEO/ICE schedule values are redacted; USAspending award totals are not comparable unit prices."
+  }
+}

@@ -1,0 +1,364 @@
+# Brad S. Karp Investigation Profile
+
+name: "brad-karp"
+primary_subject: "Brad S. Karp"
+description: >
+  Person-centric investigation of former Paul, Weiss chairman Brad S. Karp,
+  tracing his documented relationships, legal mandates, information flows,
+  referral networks, private-investigation contacts, political activity,
+  corporate roles, and February 2026 departure from firm leadership. The
+  investigation tests where personal communications overlapped client matters
+  or professional duties while distinguishing documented contact from claims
+  of confidentiality, privilege, or ethics breaches that require mandate- and
+  client-specific primary evidence.
+
+key_persons:
+  - "brad karp"
+  - "brad s karp"
+  - "brad s. karp"
+  - "jeffrey epstein"
+  - "lesley groff"
+  - "leon black"
+  - "marc rowan"
+  - "joshua harris"
+  - "alan halperin"
+  - "brad wechsler"
+  - "patrick fenn"
+  - "steven pesner"
+  - "bob bodian"
+  - "reid weingarten"
+  - "rajeev misra"
+  - "carlos ghosn"
+  - "ron soffer"
+  - "richard merkin"
+  - "kathryn ruemmler"
+  - "kathy ruemmler"
+  - "michael wolff"
+  - "greg ezring"
+  - "connie collingsworth"
+  - "bill gates"
+  - "darren indyke"
+  - "richard kahn"
+  - "scott barshay"
+  - "roberta karp"
+  - "robbie karp"
+  - "david karp"
+  - "meredith karp"
+
+known_addresses:
+  "1285 avenue of the americas": "Paul, Weiss New York office during much of the period under review"
+  "115 central park west": "Karp-associated Manhattan residence appearing in public records; continuing association requires verification"
+  "9 east 71": "Epstein Manhattan residence used for documented Karp meetings and social events"
+  "10 park avenue": "Manhattan property appearing in Karp family estate/property records"
+
+threads:
+  - id: 1
+    name: "Karp-Epstein Direct Relationship"
+    description: "Reconstruct direct emails, calls, calendars, meals, introductions, family contacts, and in-person meetings between Karp and Epstein, with exact dates and canonical document references. Contact alone is not evidence of misconduct."
+    targets:
+      - "brad karp"
+      - "brad s. karp"
+      - "jeffrey epstein"
+      - "lesley groff"
+      - "kathryn ruemmler"
+      - "michael wolff"
+      - "darren indyke"
+    keywords:
+      - "brad(ley)?\\s+(s\\.?\\s+)?karp"
+      - "karp.*epstein|epstein.*karp"
+      - "9\\s+(east|e)\\s+71|dinner|lunch|breakfast|calendar"
+      - "friend(s|ship)?|coming\\s+solo|woody\\s+allen"
+
+  - id: 2
+    name: "Paul Weiss Mandates and Information Flows"
+    description: "Map Paul, Weiss representations and Karp communications matter by matter, identify the client and engagement scope, and test whether information shared outside each team was public, authorized, confidential, privileged, or operational."
+    targets:
+      - "paul weiss"
+      - "paul, weiss, rifkind, wharton & garrison"
+      - "alan halperin"
+      - "greg ezring"
+      - "scott barshay"
+      - "richard zabel"
+    keywords:
+      - "paul[,]?\\s*weiss|\\bpw\\b"
+      - "attorney.client|privileg|confidential|engagement|retainer|client"
+      - "matter|mandate|conflict|waiver|informed consent"
+      - "general counsel|outside counsel|legal advice"
+
+  - id: 3
+    name: "Apollo Black Tax and Financial Network"
+    description: "Trace Karp and Paul, Weiss work involving Leon Black, Apollo and its co-founders, including tax remediation, service agreements, escrow proposals, Caesars-related exchanges, professional-fee allocation, and later internal-review scope."
+    targets:
+      - "leon black"
+      - "apollo global management"
+      - "marc rowan"
+      - "joshua harris"
+      - "brad wechsler"
+      - "alan halperin"
+      - "patrick fenn"
+      - "steven pesner"
+      - "bob bodian"
+      - "dechert"
+    keywords:
+      - "apollo|leon\\s+black|black\\s+family"
+      - "8865|8858|5471|reasonable\\s+cause"
+      - "escrow|service\\s+agreement|aiken|akin\\s+gump|deloitte|pwc"
+      - "caesars|athene|phaidon|tax\\s+(letter|filing|remediation)"
+
+  - id: 4
+    name: "SoftBank Ghosn and Transnational Legal Channel"
+    description: "Reconstruct the 2018-2019 Ghosn and SoftBank/Misra exchanges among Karp, Epstein, Reid Weingarten and related actors; identify each law firm's mandate and the sources, direction, timing, and use of nonpublic information."
+    targets:
+      - "carlos ghosn"
+      - "rajeev misra"
+      - "softbank"
+      - "nissan"
+      - "renault"
+      - "reid weingarten"
+      - "ron soffer"
+      - "steptoe"
+    keywords:
+      - "ghosn|ghosen|nissan|renault|tokyo"
+      - "softbank|rajeev\\s+misra|softbank\\s+caper"
+      - "weingarten|ron\\s+soffer|steptoe"
+      - "on\\s+call\\s+with\\s+doj|my\\s+guy|re\\s+db"
+
+  - id: 5
+    name: "Private Investigations and Reputation Operations"
+    description: "Identify Karp's use, recommendation, or coordination of private investigators and crisis teams, including Nardello and Kroll references, and distinguish ordinary litigation support from surveillance, intelligence collection, or reputation operations."
+    targets:
+      - "nardello & co"
+      - "nardello"
+      - "kroll"
+      - "guzel ganieva"
+      - "david boies"
+      - "kathy boies"
+    keywords:
+      - "nardello|kroll|private\\s+investigator|investigators"
+      - "surveillance|covert|recording|transcript|subjects"
+      - "crisis\\s+management|reputation|opposition\\s+research"
+      - "ganieva|boies"
+
+  - id: 6
+    name: "Corporate Referral Property and Family Network"
+    description: "Map Karp's board and corporate roles, professional referrals, property records, philanthropy-related introductions, and family-linked entities while resolving same-name people before making connections."
+    targets:
+      - "xero"
+      - "richard merkin"
+      - "heritage provider network"
+      - "bill & melinda gates foundation"
+      - "bill gates"
+      - "connie collingsworth"
+      - "greg ezring"
+      - "roberta karp"
+      - "david karp"
+      - "meredith karp"
+    keywords:
+      - "xero|board\\s+(seat|member|call)|director"
+      - "gates\\s+foundation|donor.advised|greg\\s+ezring|collingsworth"
+      - "richard\\s+merkin|heritage\\s+(group|provider)"
+      - "115\\s+central\\s+park\\s+west|10\\s+park\\s+avenue|executor|deed|acr[i]?s"
+
+  - id: 7
+    name: "Political Influence Public Accountability and Succession"
+    description: "Verify Karp's campaign-finance activity, political and institutional relationships, Paul, Weiss's March 2025 executive-order settlement, public explanations of the released correspondence, leadership succession, and Karp's post-chair roles."
+    targets:
+      - "scott barshay"
+      - "donald trump"
+      - "paul weiss"
+      - "federal election commission"
+    keywords:
+      - "campaign\\s+contribution|donor|bundler|actblue|fec"
+      - "executive\\s+order|settlement|40\\s+million|pro\\s+bono"
+      - "resign|step(ped)?\\s+down|chair|succession|barshay"
+      - "statement|apology|ethics|disciplin|investigation"
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary full-text source for released DOJ, FBI, and House records; first stop for Karp-Epstein document searches"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Structured relationship, email, entity, and co-occurrence layer"
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Complementary structured financial, flight, balance, and position data; duplicate EFTA pages are not independent corroboration"
+    commands: ["search", "entities", "file"]
+  - tool: "tools/ingest_epstein_20k.py"
+    name: "House Oversight Epstein Files"
+    description: "House Oversight document release with HOUSE_OVERSIGHT canonical IDs"
+    commands: ["search"]
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI releases and named exhibits, including EFTA records and contact/flight material"
+    commands: ["search", "overlap"]
+  - tool: "tools/reporting_corpus.py"
+    name: "Epstein Reporting Knowledge Layer"
+    description: "Versioned secondary reporting and attributed claims; use for leads and promote only after primary-evidence review"
+    commands: ["search", "claims", "sources", "promote"]
+
+key_dates:
+  - date: "2008-01-01"
+    event: "Karp reportedly began serving as chair of Paul, Weiss; precise effective date and governance record require verification"
+    category: "milestone"
+  - date: "2014-01-05"
+    event: "Epstein introduced Richard Merkin to Karp in released correspondence"
+    category: "operational"
+  - date: "2014-07-09"
+    event: "Released correspondence documents an Epstein-facilitated Gates Foundation referral to Karp and Paul, Weiss partners"
+    category: "operational"
+  - date: "2015-07-21"
+    event: "Released scheduling records place Karp and family contacts at an Epstein-hosted dinner; attendee identities require exact-document verification"
+    category: "operational"
+  - date: "2016-03-03"
+    event: "Released correspondence records Karp requesting that Paul, Weiss consider a $2 million escrow arrangement on Leon Black's behalf"
+    category: "financial"
+  - date: "2016-11-30"
+    event: "Epstein emailed Karp and Leon Black together about professional-service payments involving Paul, Weiss and other firms"
+    category: "financial"
+  - date: "2016-12-11"
+    event: "Karp forwarded Epstein correspondence concerning a Joshua Harris tax-letter call among multiple law firms"
+    category: "legal"
+  - date: "2018-11-20"
+    event: "Karp told Epstein he was dealing with the Ghosn crisis one day after Ghosn's arrest"
+    category: "legal"
+  - date: "2018-11-30"
+    event: "Karp and Epstein exchanged messages about Ghosn information while Karp referenced a DOJ call"
+    category: "operational"
+  - date: "2018-12-26"
+    event: "Karp told Epstein after returning from Tokyo that Epstein's Ghosn source had been accurate"
+    category: "operational"
+  - date: "2019-01-26"
+    event: "Karp and Epstein exchanged messages about Ghosn and Karp's relationship to Rajeev Misra/SoftBank"
+    category: "operational"
+  - date: "2019-03-30"
+    event: "Karp recommended Nardello over Kroll for the type of investigative matter Epstein described"
+    category: "operational"
+  - date: "2019-07-06"
+    event: "Epstein was arrested in New York, ending the known pre-arrest Karp-Epstein contact period under review"
+    category: "legal"
+  - date: "2025-03-21"
+    event: "Paul, Weiss announced an agreement with the Trump administration concerning an executive order; verify Karp's decision-making role and the agreement's implementation from primary records"
+    category: "political"
+  - date: "2026-02-04"
+    event: "Karp stepped down as Paul, Weiss chair after public release and reporting on Karp-Epstein correspondence; causal and governance claims require primary verification"
+    category: "milestone"
+
+seed_pillars:
+  - name: "Paul, Weiss, Rifkind, Wharton & Garrison LLP"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1875"
+    dissolved: null
+    jurisdiction: "New York / United States"
+    significance: "Karp's principal institution and the locus for representations, governance, conflicts, referrals, and information-flow questions."
+  - name: "Apollo Global Management"
+    pillar_type: "banking"
+    sub_type: "alternative_asset_manager"
+    status: "active"
+    founded: "1990"
+    dissolved: null
+    jurisdiction: "Delaware / New York"
+    significance: "Paul, Weiss and Karp-related work involving Leon Black, Apollo co-founders, tax remediation, and the later Black-Epstein review forms a central evidence cluster."
+  - name: "Black Family Office"
+    pillar_type: "operations"
+    sub_type: "family_office"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "Operational bridge among Leon Black, Epstein, Karp, Paul, Weiss, tax advisers, payment structures, and professional-service records."
+  - name: "Nardello & Co."
+    pillar_type: "intelligence"
+    sub_type: "corporate_intelligence_firm"
+    status: "active"
+    founded: "2003"
+    dissolved: null
+    jurisdiction: "New York / International"
+    significance: "Private-investigation firm Karp recommended in released correspondence and a target for matter-by-matter tasking and client analysis."
+  - name: "Kroll"
+    pillar_type: "intelligence"
+    sub_type: "corporate_intelligence_firm"
+    status: "active"
+    founded: "1972"
+    dissolved: null
+    jurisdiction: "United States / International"
+    significance: "Comparator and possible investigation vendor referenced in the Karp-Epstein exchange about investigators."
+  - name: "Steptoe LLP"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1945"
+    dissolved: null
+    jurisdiction: "Washington, D.C. / United States"
+    significance: "Reid Weingarten's firm and the other side of the January 2019 SoftBank/Misra back-channel that Epstein appeared to mediate."
+  - name: "SoftBank Group"
+    pillar_type: "banking"
+    sub_type: "holding_company"
+    status: "active"
+    founded: "1981"
+    dissolved: null
+    jurisdiction: "Japan"
+    significance: "Client/mandate context for Karp's January 2019 Misra exchange and the broader legal-channel questions."
+  - name: "Nissan Motor Co."
+    pillar_type: "operations"
+    sub_type: "automotive_company"
+    status: "active"
+    founded: "1933"
+    dissolved: null
+    jurisdiction: "Japan"
+    significance: "Institutional context for the Ghosn crisis and the source, direction, and use of information exchanged in late 2018 and early 2019."
+  - name: "U.S. Department of Justice"
+    pillar_type: "government"
+    sub_type: "law_enforcement"
+    status: "active"
+    founded: "1870"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Custodian/releaser of core records and an institution referenced contemporaneously in the Ghosn correspondence."
+  - name: "Xero Limited"
+    pillar_type: "operations"
+    sub_type: "software_company"
+    status: "active"
+    founded: "2006"
+    dissolved: null
+    jurisdiction: "New Zealand"
+    significance: "Reported Karp board role requiring verification and mapping against his wider corporate and investment network."
+  - name: "Bill & Melinda Gates Foundation"
+    pillar_type: "philanthropy"
+    sub_type: "private_foundation"
+    status: "active"
+    founded: "2000"
+    dissolved: null
+    jurisdiction: "Washington / United States"
+    significance: "Subject of a documented Epstein-facilitated referral to Karp and Paul, Weiss partners that tests how the professional-introduction network operated."
+  - name: "Heritage Provider Network"
+    pillar_type: "operations"
+    sub_type: "managed_care_network"
+    status: "active"
+    founded: "1979"
+    dissolved: null
+    jurisdiction: "California"
+    significance: "Richard Merkin's principal enterprise and the context for Epstein's 2014 introduction of Merkin to Karp."
+  - name: "Federal Election Commission"
+    pillar_type: "government"
+    sub_type: "campaign_finance_regulator"
+    status: "active"
+    founded: "1974"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Primary source for verifying Karp's contributions, committees, dates, employers, and political-network patterns."
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "Brad S. Karp"
+
+source_overrides:
+  generated_dossiers:
+    trust: "tertiary"
+    note: "Useful discovery summaries, but verify every assertion against the linked finding and underlying evidence before reuse."
+  reporting_corpus:
+    trust: "secondary"
+    note: "Attributed reporting is a lead layer, not primary corroboration; promote only after exact primary-source review."

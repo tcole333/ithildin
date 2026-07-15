@@ -48,15 +48,16 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 ### 1. Select Lead
 If no specific ID given, use `claim-next` to atomically select and claim in one step (prevents race conditions with parallel agents):
 ```bash
-python tools/lead_tracker.py claim-next
+uv run python tools/lead_tracker.py claim-next
 ```
 To filter by category or thread:
 ```bash
-python tools/lead_tracker.py claim-next --category person --thread-id 1
+uv run python tools/lead_tracker.py claim-next --category person --thread-id 1
 ```
-If a specific lead ID was given, claim it directly:
+If a specific lead ID was given, claim it directly and then load its details:
 ```bash
-python tools/lead_tracker.py claim <ID>
+uv run python tools/lead_tracker.py claim <ID>
+uv run python tools/lead_tracker.py show <ID>
 ```
 
 ### 2. Classify Investigation Type
@@ -258,6 +259,8 @@ python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TY
 These route to `$analyze-filing`, `$analyze-contract`, and `$analyze-case` which read the full source documents — something discovery agents shouldn't spend time on.
 
 ### 7. Check Stop Conditions
+
+**Disconfirmation Sweep (required before completion):** Run at least one search designed explicitly to refute the working hypothesis, not merely to complete source coverage. Record the query and result through the existing evidence/negative-results mechanism. A negative disconfirmation search is itself reportable evidence and must not be omitted because it found nothing.
 
 Stop investigating and move to completion when ANY of these is true:
 

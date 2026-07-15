@@ -54,6 +54,12 @@ def _fetch(params, timeout=30):
     except HTTPError as e:
         print(f"ERROR: crt.sh returned {e.code}", file=sys.stderr)
         sys.exit(1)
+    except TimeoutError:
+        print(
+            f"ERROR: crt.sh did not respond within {timeout}s; retry later",
+            file=sys.stderr,
+        )
+        sys.exit(1)
     except URLError as e:
         print(f"ERROR: Network error: {e.reason}", file=sys.stderr)
         sys.exit(1)

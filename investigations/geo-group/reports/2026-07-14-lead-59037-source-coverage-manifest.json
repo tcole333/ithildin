@@ -1,0 +1,136 @@
+{
+  "lead_id": 59037,
+  "profile": "geo-group",
+  "retrieved_or_checked_on": "2026-07-14",
+  "coverage_status": "complete_for_bounded_reconciliation_with_unresolved_residuals",
+  "sources": [
+    {
+      "source": "GEO 2024 Political Activity and Lobbying Report",
+      "authority": "primary_corporate",
+      "status": "complete",
+      "url": "https://www.geogroup.com/media/tufn44mo/geo-political-activity-and-lobbying-report-_2024_.pdf",
+      "scope": "Corporate and GEO PAC aggregate contributions by recipient category",
+      "key_evidence": "Federal/National Committees: GEO PAC $225,000; Corporate $2,150,000. National 527: Corporate $515,000.",
+      "visual_qa": "PDF page 6 of the file (printed page -5-) visibly confirms Corporate Committees $2,150,000 and the separate Corporate 527 row $515,000.",
+      "limitation": "Unaudited aggregate report; no recipient-level corporate ledger."
+    },
+    {
+      "source": "GEO 2025 Political Activity and Lobbying Report",
+      "authority": "primary_corporate",
+      "status": "complete",
+      "url": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+      "scope": "Corporate and GEO PAC aggregate contributions by recipient category",
+      "key_evidence": "Federal/National Committees: GEO PAC $95,000; Corporate $1,575,000. National 527: Corporate $450,000.",
+      "visual_qa": "PDF page 6 of the file (printed page -5-) visibly confirms Corporate Committees $1,575,000 and the separate Corporate 527 row $450,000.",
+      "limitation": "Unaudited aggregate report; no recipient-level corporate ledger."
+    },
+    {
+      "source": "FEC processed Schedule A recipient receipts",
+      "authority": "primary_government_recipient_filing",
+      "status": "complete_bounded_search",
+      "url": "https://www.fec.gov/data/receipts/",
+      "scope": "2024 and 2025 actual receipt dates; contributor-name searches for GEO and named subsidiaries; Florida/Boca Raton organization filters; latest processed amendments",
+      "results": {
+        "2024_eligible_rows": 13,
+        "2024_eligible_gross_usd": 2125000,
+        "2025_eligible_rows": 10,
+        "2025_eligible_gross_usd": 1665000
+      },
+      "name_variants_tested": [
+        "GEO",
+        "THE GEO GROUP",
+        "GEO GROUP INC",
+        "GEO ACQUISITION II",
+        "GEO ACQUISTION II",
+        "GEO REENTRY SERVICES",
+        "GEO SECURE SERVICES",
+        "GEO CARE",
+        "GEO CORRECTIONS",
+        "BI INCORPORATED",
+        "B.I. INCORPORATED"
+      ],
+      "limitation": "Recipient-reported data may abbreviate or misidentify the payer; differently named affiliates outside the tested universe may remain."
+    },
+    {
+      "source": "FEC committee registration metadata",
+      "authority": "primary_government_recipient_filing",
+      "status": "complete",
+      "url": "https://www.fec.gov/data/committees/",
+      "scope": "Committee type and federal registration for all included recipients",
+      "committee_ids": [
+        "C00504530",
+        "C00571703",
+        "C00825851",
+        "C00841130",
+        "C00867036",
+        "C00879072",
+        "C00892471",
+        "C00893537",
+        "C00916924"
+      ],
+      "result": "All included recipients are FEC-registered federal committees. No included recipient is a state/local-only committee or an IRS 527-only organization."
+    },
+    {
+      "source": "FEC processed Schedule B recipient disbursements/refunds",
+      "authority": "primary_government_recipient_filing",
+      "status": "complete_bounded_negative",
+      "url": "https://www.fec.gov/data/disbursements/",
+      "scope": "Exact GEO-named payees/refund recipients for every included committee",
+      "result": "No exact GEO-named refund or reversal found in the searched recipient committee Schedule B records.",
+      "limitation": "The FEC name filter is fuzzy; result was post-filtered to exact THE GEO/GEO prefixes. Absence does not prove no off-ledger repayment."
+    },
+    {
+      "source": "GEO PAC Schedule B and committee totals",
+      "authority": "primary_government_donor_filing",
+      "status": "complete_for_targeted_cross_checks",
+      "url": "https://www.fec.gov/data/committee/C00382150/",
+      "scope": "Disambiguation of recipient-abbreviated corporate names and testing of PAC-labeled anomalous receipts",
+      "results": [
+        "Matched the $1,000 Tom Barrett receipt to GEO PAC's 2024 check.",
+        "Matched the $25,000 Advance the Senate receipt to GEO PAC contributor ID C00382150 and Schedule B check.",
+        "Matched the $1,000 Lance Gooden receipt to GEO PAC's same-date 2025 check.",
+        "Found no matching GEO PAC Schedule B disbursement to Trump Vance Inaugural Committee for the $500,000 Form 13 receipt.",
+        "Found no matching GEO PAC Schedule B disbursement to American Liberty Foundation for the $250,000 PAC-labeled line-17 receipt."
+      ],
+      "limitation": "An unmatched recipient label does not authorize reassignment to corporate treasury."
+    },
+    {
+      "source": "Trump Vance Inaugural Committee amended FEC Form 13",
+      "authority": "primary_government_recipient_filing",
+      "status": "complete",
+      "url": "https://docquery.fec.gov/pdf/858/202507319779596858/202507319779596858.pdf",
+      "scope": "Current located amended donor disclosure",
+      "result": "Reports THE GEO GROUP, INC. POLITICAL ACTION COMMITTEE, $500,000, received 2024-12-11, transaction F132.147237991.",
+      "visual_qa": "PDF page 279 of 327 visibly shows THE GEO GROUP, INC. POLITICAL ACTION COMMITTEE, 4955 Technology Way, receipt date 12/11/2024, amount $500,000, and transaction F132.147237991.",
+      "classification": "Inaugural donation reported on Form 13, not a federal campaign contribution.",
+      "limitation": "Recipient donor label conflicts with the absence of a matching GEO PAC Schedule B disbursement; payer stream unresolved and excluded from the corporate denominator."
+    },
+    {
+      "source": "FEC Form 4 convention/host committee receipts",
+      "authority": "primary_government_recipient_filing",
+      "status": "complete_bounded_negative",
+      "url": "https://www.fec.gov/press/resources-journalists/convention-committees-and-host-committees/",
+      "scope": "Processed Schedule A contributor-name universe for GEO corporate variants in 2024",
+      "result": "No eligible GEO corporate Form 4 host- or convention-committee receipt appeared in the retrieved GEO recipient universe.",
+      "limitation": "Bounded by tested legal names and processed FEC data."
+    },
+    {
+      "source": "GEO company disclosure of National 527 organizations",
+      "authority": "primary_corporate",
+      "status": "applicable_but_separate_bucket",
+      "url": "https://www.geogroup.com/geo-2025-political-activity-and-lobbying-report/",
+      "scope": "Republican Governors Association; Republican Attorneys General Association; GOPAC; Republican State Leadership Committee",
+      "result": "Company reports separate corporate 527 totals of $515,000 for 2024 and $450,000 for 2025, without recipient-level amounts.",
+      "treatment": "Excluded from the Federal/National Committees denominators. IRS 527/8872 recipient-level allocation was not used to force either reconciliation because the company explicitly separates the bucket and does not publish the allocation."
+    }
+  ],
+  "not_applicable_or_excluded_streams": [
+    "Individual employees and executives",
+    "Employee-funded GEO PAC contributions except as disambiguation cross-checks",
+    "State/local candidates and committees",
+    "National 527 organizations reported in a separate GEO row",
+    "Inaugural donations reported on Form 13",
+    "Host/convention donations reported on Form 4 unless a GEO corporate row was located"
+  ],
+  "unresolved_primary_source_need": "GEO's recipient-level corporate treasury ledger, bank/check register, general-ledger coding, or an attested schedule mapping each 2024 and 2025 payment to the company's report categories."
+}

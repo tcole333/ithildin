@@ -1,0 +1,168 @@
+{
+  "profile": "geo-group",
+  "lead_id": 58086,
+  "as_of": "2026-07-14",
+  "subject": "CoreCivic, Inc.",
+  "currency": "USD",
+  "sec_calendar_2025": {
+    "ice_revenue": 770700000.0,
+    "revenue_recognition_note": "Fixed monthly revenue is recorded in the month earned; fixed per-diem revenue is based on applicable rates and populations housed or guaranteed.",
+    "named_facilities": [
+      {
+        "facility": "Dilley Immigration Processing Center",
+        "channel": "IGSA/local prime",
+        "federal_prime": "City of Dilley",
+        "revenue": 118100000.0
+      },
+      {
+        "facility": "West Tennessee Detention Facility",
+        "channel": "IGSA/local prime",
+        "federal_prime": "Town of Mason",
+        "revenue": 13000000.0
+      },
+      {
+        "facility": "Farmville Detention Center",
+        "channel": "IGSA/local prime",
+        "federal_prime": "Prince Edward County",
+        "federal_prime_uei": "C6KGF5S6JJK6",
+        "revenue": 21800000.0
+      },
+      {
+        "facility": "California City Immigration Processing Center",
+        "channel": "direct ICE",
+        "revenue": 39200000.0
+      },
+      {
+        "facility": "Midwest Regional Reception Center",
+        "channel": "direct ICE",
+        "revenue": 14800000.0
+      }
+    ],
+    "named_facility_floor": 206900000.0,
+    "named_facility_floor_pct": 26.846,
+    "direct_named_revenue": 54000000.0,
+    "direct_named_pct": 7.007,
+    "igsa_named_revenue": 152900000.0,
+    "igsa_named_pct": 19.839,
+    "unitemized_facility_residual": 563800000.0,
+    "unitemized_facility_residual_pct": 73.154,
+    "interpretation": "The named-facility total is a disclosure floor. The residual is unitemized, not an undercount."
+  },
+  "official_direct_award_context": {
+    "recipient_uei": "HJGMJN1JKL46",
+    "cy2025_ice_obligations_action_date": 266391160.57,
+    "obligations_to_sec_revenue_pct": 34.566,
+    "classification": "different-metric context ratio; not revenue coverage",
+    "source_artifact": "2026-07-14-lead-58082-corecivic-direct-ice-transactions.csv"
+  },
+  "west_tennessee": {
+    "piid": "70CDCR25DIG000021",
+    "federal_prime": "Town of Mason",
+    "federal_prime_uei": "EHF4LTQ7T5R4",
+    "operator_subcontractor": "CoreCivic, Inc.",
+    "period_of_performance": {
+      "start": "2025-08-15",
+      "end": "2030-08-14"
+    },
+    "beds": 600,
+    "town_administrative_fee": {
+      "amount_per_detainee_day": 1.0,
+      "formula": "$1.00 x detainees x days in month"
+    },
+    "ordering_period_1_rates": {
+      "monthly_facility_operating_charge": 2557134.97,
+      "bed_day_rate_1_450": 5.5,
+      "bed_day_rate_451_600": 62.88,
+      "bed_day_rate_601_plus": 159.0,
+      "fixed_monthly_transportation": 259844.0,
+      "included_monthly_miles": 27352,
+      "overage_per_mile": 9.5,
+      "rate_scenario_at_600_beds_365_days_excluding_transport": 35031674.64,
+      "classification": "rate-derived scenario; not obligation, payment, ceiling, or revenue"
+    },
+    "base_award_obligated_amount": 0.0,
+    "funding_note": "The IGSA states that task orders identify requirements and obligate funds; the $0 base document does not establish that task orders or invoices were unfunded.",
+    "calendar_2025_municipal_cash": {
+      "ice_receipts": [
+        {
+          "posting_date": "2025-12-01",
+          "ledger_label": "ACH Deposit ICE TREAS 310-October",
+          "amount": 2821131.21
+        },
+        {
+          "posting_date": "2025-12-01",
+          "ledger_label": "ACH Deposit ICE TREAS 310-November",
+          "amount": 1544794.92
+        },
+        {
+          "posting_date": "2025-12-30",
+          "ledger_label": "ACH Deposit ICE TREAS 310-TOWN OF MASON",
+          "amount": 2828526.91
+        }
+      ],
+      "ice_receipts_total": 7194453.04,
+      "corecivic_remittances": [
+        {
+          "posting_date": "2025-12-01",
+          "ledger_label": "CoreCivic Inc Payment - November",
+          "amount": 2819813.97
+        },
+        {
+          "posting_date": "2025-12-19",
+          "ledger_label": "CoreCivic Inc Payment - December",
+          "amount": 1544794.92
+        }
+      ],
+      "corecivic_remittances_total": 4364608.89,
+      "year_end_account_balance": 2830269.94,
+      "correction_entries_excluded": "Equal and opposite $1,544,794.92 entries dated 2025-12-01 cancel.",
+      "interpretation": "Cash receipts and remittances lag accounting revenue; do not add these amounts to the $13.0m SEC facility revenue."
+    }
+  },
+  "dilley": {
+    "piid": "70CDCR18DIG000012",
+    "modification": "P00032",
+    "federal_prime": "City of Dilley",
+    "federal_prime_uei": "WBGGJJW2K3D8",
+    "displayed_modification_obligation": 0.0,
+    "sec_calendar_2025_facility_revenue": 118100000.0,
+    "local_audit": {
+      "fiscal_year_end": "2025-09-30",
+      "corecivic_fund_current_year_revenue": 0.0,
+      "beginning_balance": 949806.0,
+      "transfer_to_general_fund": 949806.0,
+      "ending_balance": 0.0
+    },
+    "limit": "No complete gross federal-receipt or CoreCivic-remittance ledger was located."
+  },
+  "farmville": {
+    "piid": "70CDCR24DIG000006",
+    "federal_prime": "Prince Edward County",
+    "federal_prime_uei": "C6KGF5S6JJK6",
+    "sec_calendar_2025_facility_revenue": 21800000.0,
+    "corecivic_acquisition_date": "2025-07-01",
+    "displayed_p00003_modification_obligation": 0.0,
+    "local_ledger_status": "No public County check register, task-order ledger, or CY2025 remittance schedule located.",
+    "recipient_correction": "The current ICE modification names Prince Edward County, not the Town of Farmville, as contractor."
+  },
+  "transcor": {
+    "uei": "JJERE5VNFPL9",
+    "sec_treatment": "Included in CoreCivic Safety segment; ICE-specific revenue not disaggregated.",
+    "cy2025_direct_dhs_awards_found": 0,
+    "highergov_lifetime_subawards": {
+      "count": 25,
+      "amount": 22933799.33,
+      "latest_action_year": 2024,
+      "latest_year_amount": 2829431.85
+    },
+    "interpretation": "Supplemental historical aggregator records only; no CY2025 amount is additive to CoreCivic ICE revenue."
+  },
+  "caveats": [
+    "Obligations, outlays, local cash, rates, ceilings, and SEC revenue are different measures.",
+    "A $0 base or modification obligation does not negate funded task orders or later payments.",
+    "Municipal posting labels are not necessarily service-period allocations.",
+    "Negative award-query results are bounded by recipient identifiers and tested dates.",
+    "The unitemized SEC residual must not be allocated without facility-level evidence."
+  ]
+}
+

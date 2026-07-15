@@ -1,0 +1,153 @@
+{
+  "profile": "geo-group",
+  "lead_id": 60824,
+  "created": "2026-07-14",
+  "findings_created": [12746, 12747, 12749, 12750],
+  "finding_retracted_and_replaced": {
+    "retracted": 12748,
+    "replacement": 12750,
+    "reason": "Shell interpolation stripped a dollar amount from the first stored version; replacement was exact-string audited before verification."
+  },
+  "prior_finding_refined": {
+    "finding_id": 12717,
+    "scope_after_refinement": "Medium-confidence facility mapping only; not evidence of 2016 operator or owner status"
+  },
+  "sources": [
+    {
+      "source_id": "usa-search-universe",
+      "publisher": "USAspending.gov",
+      "type": "official federal award API",
+      "url": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "queries": [
+        "DHS contracts, NAICS 922140, 2007-10-01 through 2026-07-14",
+        "DHS contracts, PSC X1FF, 2007-10-01 through 2026-07-14",
+        "CBP contracts, keywords detention/detainee/jail/lodging, 2007-10-01 through 2026-07-14"
+      ],
+      "result_boundary": "1490 deduplicated awards in union; public-recipient heuristic produced 163 awards/64 recipients",
+      "role": "candidate acquisition and negative-control universe"
+    },
+    {
+      "source_id": "usa-HSBP1012P00868",
+      "publisher": "USAspending.gov",
+      "type": "official award detail",
+      "url": "https://www.usaspending.gov/award/CONT_AWD_HSBP1012P00868_7014_-NONE-_-NONE-/",
+      "facts": [
+        "Legal recipient County of Maverick",
+        "Description DETENTION SPACE",
+        "Eagle Pass/Maverick County place of performance",
+        "Current net obligation $5758.75"
+      ],
+      "local_snapshot_sha256": "51ec04ceddf8ce637269982e87c672d66bdc69f7e500d719fe131432f8d7cc36"
+    },
+    {
+      "source_id": "highergov-HSBP1012P00868",
+      "publisher": "HigherGov",
+      "type": "award-data cross-check",
+      "url": "https://www.highergov.com/contract/HSBP1012P00868/",
+      "facts": [
+        "Base start 2012-09-14",
+        "PSC X1FF",
+        "NAICS 561210",
+        "Sole source / one offer",
+        "Current award value and obligation $5758.75"
+      ],
+      "local_snapshot_sha256": "2947efee901aa14253dd9286d01e209248207177d59ffaabec5029d3fccb22b5"
+    },
+    {
+      "source_id": "sam-local-county-maverick",
+      "publisher": "SAM.gov local bulk mirror",
+      "type": "local entity registration",
+      "url": null,
+      "facts": [
+        "UEI NGDWKRNDM8C5",
+        "CAGE 42LG6",
+        "Legal business name COUNTY OF MAVERICK",
+        "Eagle Pass address"
+      ],
+      "network_policy": "Local SAM only; no live SAM API call",
+      "local_snapshot_sha256": "3ef2a1b1deb397266daa50a492136a7e138ed38fe7758aa388e78333b027994b"
+    },
+    {
+      "source_id": "usms-iga-80-99-0219",
+      "publisher": "U.S. Marshals Service",
+      "type": "official IGA PDF",
+      "url": "https://www.usmarshals.gov/sites/default/files/media/document/IGA-Texas-Maverick-County-Tom-Bowles-Detention-Center.pdf",
+      "pages_read": "all 12 PDF pages",
+      "pages_visually_inspected": [1, 3, 11],
+      "facts": [
+        "County is local-government party",
+        "IGA originally covers Tom Bowles facility",
+        "Modification adds Maverick County Detention Facility at 742 Highway 131",
+        "Facility code 6R7",
+        "Document-snapshot per diem $52.50"
+      ],
+      "limitation": "IGA does not identify HSBP1012P00868 and its $52.50 rate is not proven for that award"
+    },
+    {
+      "source_id": "geo-fy2012-10k",
+      "publisher": "U.S. Securities and Exchange Commission / The GEO Group",
+      "type": "official SEC filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312513087892/d493925d10k.htm",
+      "filed": "2013-03-01",
+      "facts": [
+        "Maverick County Detention Facility listed as 688 beds",
+        "Customer USMS/BOP",
+        "Local detention",
+        "Ownership/operating classification Manage Only"
+      ],
+      "local_snapshot_sha256": "346ecb7ca25f2608d69e64a1fb5e9b5ae5b21146b4323bbee8aa0906f2769093"
+    },
+    {
+      "source_id": "geo-2013q3-10q",
+      "publisher": "U.S. Securities and Exchange Commission / The GEO Group",
+      "type": "official SEC filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312513435227/d626700d10q.htm",
+      "filed": "2013-11-08",
+      "fact": "GEO terminated the managed-only contract for the county-owned 688-bed Maverick County Detention Center on 2013-11-01",
+      "local_snapshot_sha256": "eb376ee3cfd15f564d0bdebcb5e9304e7b1eb8a27f6494a63482635abcf6c8fc"
+    },
+    {
+      "source_id": "geo-2017q1-10q",
+      "publisher": "U.S. Securities and Exchange Commission / The GEO Group",
+      "type": "official SEC filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312517158609/d373712d10q.htm",
+      "filed": "2017-05-04",
+      "fact": "GEO acquired the idle 688-bed Maverick County Detention Center on 2017-03-06 for approximately $15 million",
+      "local_snapshot_sha256": "c7c828f94610e2ba4a1585477316dcd9eb6bb30354952b503a6c25409b05cecf"
+    },
+    {
+      "source_id": "geo-2022-property-exhibit",
+      "publisher": "U.S. Securities and Exchange Commission / The GEO Group",
+      "type": "official SEC exhibit",
+      "url": "https://www.sec.gov/Archives/edgar/data/923796/000119312522230195/d392591dex43.htm",
+      "facts": [
+        "Aurora ICE Processing Center address and ZIP 80010",
+        "East Hidalgo Detention Center address in La Villa 78562",
+        "Coastal Bend Detention Center address in Robstown 78380",
+        "Eagle Pass Detention Facility address at 742 Highway 131"
+      ],
+      "role": "name-collision and facility-address controls"
+    },
+    {
+      "source_id": "edgar-control-searches",
+      "publisher": "U.S. Securities and Exchange Commission",
+      "type": "official full-text filing search",
+      "url": "https://efts.sec.gov/LATEST/search-index",
+      "searched_forms": ["10-K", "10-Q", "8-K"],
+      "date_range": "2000-01-01 through 2026-07-14",
+      "result": "No GEO filing hit for 15 exact candidate facility names; Zapata County generic search returned unrelated issuers and no GEO hit in first 100 results",
+      "limitation": "Bounded negative only"
+    }
+  ],
+  "decisive_missing_source": {
+    "document": "Original and modification package for HSBP1012P00868",
+    "needed_fields": [
+      "facility name",
+      "street address",
+      "USMS IGA number",
+      "facility code",
+      "invoice/remittance instructions",
+      "bed-day or rate detail"
+    ]
+  }
+}

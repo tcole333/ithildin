@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-07-14",
+  "analysis_runs": [117, 118],
+  "registration_status": "real_null_no_hypotheses_registered",
+  "competition_group_candidate": "ice-one-dollar-economic-anchor",
+  "candidates": [
+    {
+      "label": "H1",
+      "title": "ICE's $1 reimbursement allowance behaviorally anchored GEO detainee pay",
+      "description": "The nominal reimbursement amount influenced GEO to set pay at or near $1 even though the contract did not impose a legal ceiling.",
+      "falsification": "Across comparable facilities, reimbursement changes do not predict pay; GEO/non-GEO operators routinely pay different amounts under the same allowance; internal decision records do not use the ICE rate as the pay reference."
+    },
+    {
+      "label": "H0",
+      "title": "The $1 line was a common administrative allowance and GEO's pay decisions were independently discretionary",
+      "description": "Common ICE policy/template language explains the repeated allowance; GEO retained discretion and chose pay based on contractor economics, policy, and local law.",
+      "falsification": "Internal GEO/ICE records explicitly use the reimbursement amount as the compensation reference; pay moves with reimbursement within facilities; independent operators converge on $1 only when the allowance is present and diverge when it changes."
+    }
+  ],
+  "evidence_assessments": [
+    {"evidence": "Karnes, Broward, and Tacoma repeat a nominal $1 work-program line", "refs": ["12986", "ICE-CONTRACT:HSCEDM-09-D-00006#pdf-p2", "ICE-CONTRACT:HSCEDM-10-D-00001#pdf-p4"], "H1": "consistent", "H0": "consistent", "discrimination": "low", "reason": "Both anchoring and common-template explanations predict repeated schedule language."},
+    {"evidence": "Tacoma clauses say actual cost of $1 per detainee-day and require CO approval above the displayed amount", "refs": ["RECAP:Washington-DE16-1#pdf-p6"], "H1": "consistent", "H0": "consistent", "discrimination": "low", "reason": "The language allocates reimbursement/contract authority but does not reveal why GEO chose its pay rate."},
+    {"evidence": "Menocal held ICE neither required nor capped GEO pay at $1", "refs": ["12557"], "H1": "neutral", "H0": "consistent", "discrimination": "high", "reason": "This defeats a legal-ceiling or mechanical-control theory; a softer behavioral anchor remains possible but unobserved."},
+    {"evidence": "Novoa held ICE did not restrict higher pay and GEO controlled wages", "refs": ["12780"], "H1": "neutral", "H0": "consistent", "discrimination": "high", "reason": "Independent court/facility confirms discretion but does not observe the contractor's internal reference point."},
+    {"evidence": "Another GEO facility reportedly paid as much as $4 while ICE reimbursed at $1", "refs": ["Menocal doc 380 background via 2026-07-13 lead-59489 report"], "H1": "inconsistent", "H0": "consistent", "discrimination": "medium", "reason": "Within-firm deviation weighs against mechanical determinism; unidentified facility and lack of full ledger limit weight."},
+    {"evidence": "Menocal found GEO's standardized $1 agreement unenforceable", "refs": ["12559"], "H1": "consistent", "H0": "consistent", "discrimination": "low", "reason": "Observed $1 choice is explained by either candidate and does not identify causation."},
+    {"evidence": "Tacoma final liability and reported profits", "refs": ["12553", "12554"], "H1": "neutral", "H0": "consistent", "discrimination": "medium", "reason": "Large private economics supply an independent cost-minimization incentive; holdings do not decide anchoring."},
+    {"evidence": "Common ICE/PBNDS/template ancestry and repeated option-year wording", "refs": ["contract matrix"], "H1": "inconsistent", "H0": "consistent", "discrimination": "high", "reason": "The recurrence count is not independent; a common administrative parent explains it without behavioral influence."},
+    {"evidence": "No reimbursement-change/pay-change time series or peer-operator comparison is in the assigned record", "refs": ["bounded input audit"], "H1": "neutral", "H0": "neutral", "discrimination": "none", "reason": "Missing evidence is a research gap, not affirmative evidence for either candidate."}
+  ],
+  "summary": {
+    "least_evidence_against": "H0",
+    "H1_inconsistent_items": 2,
+    "H0_inconsistent_items": 0,
+    "caveat": "Least inconsistent is not confirmation. H1 remains logically possible as an unobserved behavioral effect.",
+    "registration_decision": "Do not register. The evidence has only two direct, independent no-cap/control adjudications and no third causal context; schedule repetition is dependency-confounded."
+  }
+}
+

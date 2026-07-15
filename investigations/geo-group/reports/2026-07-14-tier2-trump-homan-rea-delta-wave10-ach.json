@@ -1,0 +1,151 @@
+{
+  "analysis_date": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 112,
+  "analysis_runs": {
+    "systemic_analysis": 120,
+    "generate_hunches": 121
+  },
+  "question": "Does direct GEO-to-Homan contact, planned OPLA counsel engagement, and Homan/DOJ tracking materially change the ordinary-access explanation or create a bridge to Guidepost, donations, procurement, policy influence, or favorable treatment?",
+  "input_gate": "Verified, non-retracted findings and durable artifacts only; no external query, HigherGov, PACER, or headless agent use.",
+  "verdict_rule": "Least inconsistent, dependency weighted, coverage bounded, and not a probability.",
+  "episode_competitors": {
+    "H1": {
+      "statement": "GEO's relationship or political access caused favorable handling of the voluntary-work-program litigation-cost requests or supplies a bridge to a broader influence channel.",
+      "falsification": "Direct access is followed by independent merits review and adverse decisions grounded in ordinary contract terms, with no political, payment, personnel, procurement, or policy intervention."
+    },
+    "H0": {
+      "statement": "GEO used ordinary incumbent-contractor access to raise a high-stakes legal and cost issue; ICE legal leadership engaged while contracting officers independently applied the contracts and denied relief.",
+      "falsification": "A communication, instruction, work scope, payment route, donor contact, ethics record, modification, voucher, or decision file shows that a relationship actor directed or altered the outcome."
+    },
+    "database_creation": false,
+    "reason": "The episode-specific pair overlaps existing hypotheses #337/#338 and does not satisfy the three-independent-context novelty gate."
+  },
+  "evidence_clusters": [
+    {
+      "cluster": "direct_access",
+      "findings": [13015],
+      "establishes": "Direct matter-specific GEO access to ICE Director Homan, planned OPLA counsel engagement, and separate Homan/DOJ tracking language.",
+      "diagnosticity": "Neutral at the access stage because both influence and ordinary-engagement accounts permit contact.",
+      "limits": "No meeting outcome, direction to a contracting officer, political motive, reimbursement, DOJ takeover, procurement action, or favorable decision."
+    },
+    {
+      "cluster": "request",
+      "findings": [13004],
+      "establishes": "A formal request for DOJ defense and reimbursement and GEO's $15-$20 million forecast.",
+      "diagnosticity": "Neutral; a request authenticates the ask, not entitlement or result."
+    },
+    {
+      "cluster": "three_vehicle_denial_episode",
+      "findings": [13005, 13006, 13007, 13008],
+      "contract_controls": [13009, 13010, 13014],
+      "amounts": {
+        "aurora": 1928433.38,
+        "northwest_tacoma": 595160.69,
+        "adelanto": 139059.96,
+        "total_requested": 2662654.03
+      },
+      "establishes": "Three full June 21 denials and a final July response with only a DOJ contact referral.",
+      "diagnosticity": "Counterevidence to favorable treatment on this specific matter; low-weight consistent with ordinary contract administration.",
+      "dependency_rule": "One coordinated agency episode with three contract-level decisions. The recurrence increases outcome robustness but is not three independent causal votes."
+    },
+    {
+      "cluster": "later_homan_guidepost_ledgers",
+      "findings": [12983],
+      "establishes": "Separate Homan OGE and B.I.-Guidepost corporate ledgers.",
+      "diagnosticity": "No bridge. The 2018 government-side access does not identify Homan on the later B.I. engagement or route payments to him."
+    },
+    {
+      "cluster": "donor_identity_ledger",
+      "findings": [12984, 12985],
+      "establishes": "Identity-scoped personal receipt breadth and one attribution control.",
+      "diagnosticity": "Neutral. No donor, contribution, reimbursement, bundling, calendar, or political request enters the REA path."
+    }
+  ],
+  "bridge_tests": {
+    "guidepost": {
+      "result": "not established",
+      "reason": "The 2018 agency contact predates documented 2023-2025 B.I.-Guidepost payment years and has no common work scope, personnel record, invoice, payee route, or communication."
+    },
+    "donations": {
+      "result": "not established",
+      "reason": "No contribution, donor, committee, fundraiser, reimbursement, or political request appears in the decision path."
+    },
+    "procurement_or_award": {
+      "result": "not established",
+      "reason": "The matter concerns litigation-cost reimbursement under existing vehicles, not solicitation, source selection, award, option, or capacity selection."
+    },
+    "policy_influence": {
+      "result": "not established",
+      "reason": "Tracking litigation and working with DOJ on a path is agency attention, not adoption of a GEO policy request."
+    },
+    "favorable_treatment": {
+      "result": "counterevidenced on the named requests",
+      "reason": "All three REAs were denied in full; the later DOJ language was a contact referral rather than representation or payment."
+    }
+  },
+  "existing_competition_update": {
+    "competition_group": "geo-ice-expertise-channel",
+    "hypotheses": [337, 338],
+    "new_assessments": [
+      {
+        "id": 807,
+        "hypothesis_id": 337,
+        "finding_id": 13015,
+        "assessment": "neutral"
+      },
+      {
+        "id": 808,
+        "hypothesis_id": 338,
+        "finding_id": 13015,
+        "assessment": "neutral"
+      },
+      {
+        "id": 809,
+        "hypothesis_id": 337,
+        "finding_id": 13008,
+        "assessment": "neutral"
+      },
+      {
+        "id": 810,
+        "hypothesis_id": 338,
+        "finding_id": 13008,
+        "assessment": "consistent"
+      }
+    ],
+    "raw_results_after_update": {
+      "337": {
+        "evaluated": 51,
+        "inconsistent": 12,
+        "diagnostic": 32,
+        "inconsistency_ratio": 0.2353
+      },
+      "338": {
+        "evaluated": 51,
+        "inconsistent": 1,
+        "diagnostic": 32,
+        "inconsistency_ratio": 0.0196
+      }
+    },
+    "least_inconsistent": 338,
+    "dependency_warning": "The two assessed findings are stages of one REA episode. Raw database counts are not independent causal weights."
+  },
+  "effect_on_prior_conclusion": {
+    "finding_12939_changed": false,
+    "access_record": "materially stronger and now direct for this 2018 matter",
+    "influence_record": "unchanged; no direction or changed decision is established",
+    "aggregate_expansion": "unchanged; H0 remains substantially less inconsistent",
+    "vendor_facility_selection_and_terms": "unchanged and unresolved; no selection record enters this episode",
+    "specific_rea_outcome": "ordinary-access H0 is less inconsistent because the observed result was three full denials"
+  },
+  "result": {
+    "new_findings": 0,
+    "new_hypotheses": 0,
+    "new_leads": 0,
+    "new_tags": 0,
+    "new_connections": 0,
+    "new_entities": 0,
+    "final_bounded_conclusion": "Direct Homan-level access is proven for one 2018 legal-cost episode, but no influence bridge is. The acquired path ends in three final denials, making the episode counterevidence to favorable treatment on those requests and low-weight support for ordinary compartmentalized engagement. It does not prove absence of influence elsewhere."
+  }
+}
+

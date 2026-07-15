@@ -85,7 +85,7 @@ def add_observation(category, description, skill=None, lead_id=None,
     return obs_id
 
 
-def list_observations(category=None, status=None, limit=50):
+def list_observations(category=None, status=None, limit=50, oldest_first=False):
     """List observations with optional filters."""
     db = get_db()
     conditions = []
@@ -98,17 +98,37 @@ def list_observations(category=None, status=None, limit=50):
         params.append(status)
 
     where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    order_by = "created_at ASC, id ASC" if oldest_first else "created_at DESC, id DESC"
     rows = db.execute(f"""
         SELECT id, category, description, source_skill, source_lead_id,
                source_agent, target_name, status, resolution,
                related_infra_id, created_at
         FROM methodology_observations
         {where}
-        ORDER BY created_at DESC
+        ORDER BY {order_by}
         LIMIT ?
     """, params + [limit]).fetchall()
     db.close()
     return [dict(r) for r in rows]
+
+
+def count_observations(category=None, status=None):
+    """Count observations using the same category/status filters as list_observations."""
+    db = get_db()
+    conditions = []
+    params = []
+    if category:
+        conditions.append("category = ?")
+        params.append(category)
+    if status:
+        conditions.append("status = ?")
+        params.append(status)
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    total = db.execute(
+        f"SELECT COUNT(*) FROM methodology_observations {where}", params
+    ).fetchone()[0]
+    db.close()
+    return total
 
 
 def get_observation(obs_id):
@@ -329,19 +349,20 @@ def ingest_report(filepath, skill=None, lead_id=None):
     report_lead_id = lead_id
 
     # Parse Learnings section
-    learn_match = re.search(r'^## Learnings\s*\n(.*?)(?=^## |\Z)', text,
+    learn_match = re.search(r'^## Learnings(?:\s*/[^\n]*)?\s*\n(.*?)(?=^## |\Z)', text,
                             re.MULTILINE | re.DOTALL)
     if not learn_match:
         return []
 
     inserted = []
-    for match in re.finditer(r'^- \[([^\]]+)\]\s*(.+)$', learn_match.group(1),
-                             re.MULTILINE):
-        label = match.group(1).strip()
-        description = match.group(2).strip()
-        category = CATEGORY_MAP.get(label)
-        if not category:
-            continue
+    bullet_pattern = re.compile(
+        r'^-\s+(?:\[([^\]]+)\]|\*\*([^*]+?):\*\*|([^:\n]+):)\s*(.+)$',
+        re.MULTILINE,
+    )
+    for match in bullet_pattern.finditer(learn_match.group(1)):
+        label = next(value for value in match.groups()[:3] if value).strip()
+        description = match.group(4).strip()
+        category = CATEGORY_MAP.get(label, "methodology")
 
         obs_id = add_observation(
             category=category,
@@ -378,6 +399,10 @@ def main():
     p_list.add_argument("--category", choices=VALID_CATEGORIES)
     p_list.add_argument("--status", choices=VALID_STATUSES)
     p_list.add_argument("--limit", type=int, default=50)
+    p_list.add_argument(
+        "--oldest-first", action="store_true",
+        help="Return the oldest matching observations first",
+    )
     add_output_args(p_list)
 
     # show
@@ -440,6 +465,7 @@ def main():
             category=args.category,
             status=args.status,
             limit=args.limit,
+            oldest_first=args.oldest_first,
         )
         if write_output(obs, args, summary=f"observations ({len(obs)})"):
             return

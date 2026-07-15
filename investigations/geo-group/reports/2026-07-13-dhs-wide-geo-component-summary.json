@@ -1,0 +1,544 @@
+{
+  "as_of": "2026-07-13",
+  "profile": "geo-group",
+  "lead_id": 58876,
+  "thread_id": 110,
+  "scope": {
+    "action_date_start_inclusive": "2015-01-01",
+    "action_date_end_inclusive": "2026-07-13",
+    "award_types": "federal prime contracts/actions; separate grant and subaward checks",
+    "administration_windows": {
+      "pre_Trump_I": "2015-01-01 through 2017-01-19",
+      "Trump_I": "2017-01-20 through 2021-01-19",
+      "Biden": "2021-01-20 through 2025-01-19",
+      "Trump_II": "2025-01-20 through 2026-07-13"
+    }
+  },
+  "supersedes_preliminary_checkpoint": {
+    "preliminary_raw_ice_action_count": 1586,
+    "preliminary_raw_ice_net_action_obligations": 8552736402.9,
+    "reason": "The parent UEI expanded child recipients, and separate child-UEI queries duplicated rows.",
+    "status": "Do not use the preliminary figure."
+  },
+  "deduplication": {
+    "key_fields": [
+      "Award ID",
+      "Mod",
+      "Action Date",
+      "Transaction Amount",
+      "Transaction Description",
+      "Recipient UEI",
+      "Awarding Sub Agency"
+    ],
+    "raw_action_rows": 1640,
+    "unique_action_rows": 1416,
+    "parent_child_overlap_or_exact_duplicate_rows_removed": 224,
+    "hash": "SHA-256 of the JSON-serialized key tuple, stored in the CSV"
+  },
+  "corrected_totals": {
+    "unique_action_rows": 1416,
+    "unique_awards_with_actions": 222,
+    "net_action_obligations": 6356699228.62
+  },
+  "recipient_universe": [
+    {
+      "legal_name": "B.I. INCORPORATED",
+      "uei": "PKK6L9KLMYR5",
+      "cage": "3CUH9",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 166
+    },
+    {
+      "legal_name": "COMMUNITY EDUCATION CENTERS, INC.",
+      "uei": "K197TCMH5UB5",
+      "cage": "3YET9",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "CORNELL COMPANIES, INC.",
+      "uei": "TLDCDE29G781",
+      "cage": "3MTH6",
+      "basis": "legacy USAspending award recipient; Cornell Companies Inc. also appears in GEO 2025 Exhibit 22",
+      "dhs_action_count": 24
+    },
+    {
+      "legal_name": "CORRECTIONAL SERVICES CORPORATION",
+      "uei": "LTXHRJ986LF3",
+      "cage": "3KGQ1",
+      "basis": "legacy USAspending award recipient; Correctional Services Corporation LLC appears in GEO 2025 Exhibit 22",
+      "dhs_action_count": 3
+    },
+    {
+      "legal_name": "GEO CARE SERVICES, LLC",
+      "uei": "G6XJKMJUNB91",
+      "cage": "7D4M5",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 92
+    },
+    {
+      "legal_name": "GEO CARE, INC",
+      "uei": "J8LEF6VCY967",
+      "cage": "15A51",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO CPM INC",
+      "uei": "XHRVS1L8YE54",
+      "cage": "99YL8",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO MANAGEMENT SERVICES INC",
+      "uei": "ZBJYBK7M9A44",
+      "cage": "7T8J8",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO REENTRY INC",
+      "uei": "KDQ3R3N44ZJ1",
+      "cage": "7CUD5",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO REENTRY OF ALASKA, INC.",
+      "uei": "FNT5N5HMB9A7",
+      "cage": "7G0K5",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO REENTRY SERVICES LLC",
+      "uei": "CLKXSJLN8EN1",
+      "cage": "7G0N6",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO SECURE SERVICES, LLC",
+      "uei": "JLG3JBCL4CC7",
+      "cage": "7G0P0",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 0
+    },
+    {
+      "legal_name": "GEO TRANSPORT, INC.",
+      "uei": "DFEKRCYPZD84",
+      "cage": "6PV86",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 3
+    },
+    {
+      "legal_name": "THE GEO GROUP, INC.",
+      "uei": "JMLKZZ1NL2Z6",
+      "cage": "3JMR1",
+      "basis": "current March 2026 SAM public extract; GEO headquarters address or known BI subsidiary",
+      "dhs_action_count": 1128
+    }
+  ],
+  "unresolved_name_only_entities": [
+    {
+      "name": "GEO Corrections Holdings, Inc.",
+      "sec_status": "listed in GEO 2025 Exhibit 22",
+      "sam_and_usaspending_status": "no exact current local/live SAM registration and no exact USAspending recipient/award match"
+    },
+    {
+      "name": "GEO Corrections and Detention / GEO Corrections & Detention",
+      "sec_status": "not an exact legal name in GEO 2025 Exhibit 22",
+      "sam_and_usaspending_status": "no exact current local SAM or USAspending recipient/award match"
+    }
+  ],
+  "by_component_and_administration": [
+    {
+      "component": "CBP",
+      "administration_period": "Biden",
+      "action_count": 18,
+      "unique_awards_with_actions": 7,
+      "net_action_obligations": 934664.66
+    },
+    {
+      "component": "CBP",
+      "administration_period": "Trump_I",
+      "action_count": 19,
+      "unique_awards_with_actions": 4,
+      "net_action_obligations": 852954.45
+    },
+    {
+      "component": "CBP",
+      "administration_period": "Trump_II",
+      "action_count": 7,
+      "unique_awards_with_actions": 3,
+      "net_action_obligations": 356323.97
+    },
+    {
+      "component": "CBP",
+      "administration_period": "pre_Trump_I",
+      "action_count": 10,
+      "unique_awards_with_actions": 5,
+      "net_action_obligations": 458026.46
+    },
+    {
+      "component": "ICE",
+      "administration_period": "Biden",
+      "action_count": 511,
+      "unique_awards_with_actions": 101,
+      "net_action_obligations": 2900292455.05
+    },
+    {
+      "component": "ICE",
+      "administration_period": "Trump_I",
+      "action_count": 445,
+      "unique_awards_with_actions": 132,
+      "net_action_obligations": 1686365164.41
+    },
+    {
+      "component": "ICE",
+      "administration_period": "Trump_II",
+      "action_count": 177,
+      "unique_awards_with_actions": 43,
+      "net_action_obligations": 1289144021.16
+    },
+    {
+      "component": "ICE",
+      "administration_period": "pre_Trump_I",
+      "action_count": 229,
+      "unique_awards_with_actions": 44,
+      "net_action_obligations": 478295618.46
+    }
+  ],
+  "by_component_and_program": [
+    {
+      "component": "CBP",
+      "program_class": "CBP detainee hygiene services",
+      "action_count": 7,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 2711.07
+    },
+    {
+      "component": "CBP",
+      "program_class": "CBP detention/jail space",
+      "action_count": 47,
+      "unique_awards_with_actions": 9,
+      "net_action_obligations": 2599258.47
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE ISAP/electronic monitoring",
+      "action_count": 161,
+      "unique_awards_with_actions": 25,
+      "net_action_obligations": 2094008396.27
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE detention services",
+      "action_count": 1016,
+      "unique_awards_with_actions": 147,
+      "net_action_obligations": 3884198529.73
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE family case management",
+      "action_count": 56,
+      "unique_awards_with_actions": 6,
+      "net_action_obligations": 9699432.14
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE other/unresolved",
+      "action_count": 114,
+      "unique_awards_with_actions": 36,
+      "net_action_obligations": 240231929.15
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE skip tracing",
+      "action_count": 5,
+      "unique_awards_with_actions": 2,
+      "net_action_obligations": 87985925.0
+    },
+    {
+      "component": "ICE",
+      "program_class": "ICE transportation/removal services",
+      "action_count": 10,
+      "unique_awards_with_actions": 5,
+      "net_action_obligations": 37973046.79
+    }
+  ],
+  "component_coverage": [
+    {
+      "component": "DHS headquarters / OPO / departmental management",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "ICE",
+      "verified_direct_prime_action_tie": true,
+      "action_count": 1362,
+      "unique_awards": 212,
+      "net_action_obligations": 6354097259.08,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "CBP",
+      "verified_direct_prime_action_tie": true,
+      "action_count": 54,
+      "unique_awards": 10,
+      "net_action_obligations": 2601969.54,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "USCIS",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "FEMA",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "FPS / NPPD / CISA",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "TSA",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "U.S. Secret Service",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "U.S. Coast Guard",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "FLETC",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    },
+    {
+      "component": "other DHS components",
+      "verified_direct_prime_action_tie": false,
+      "action_count": 0,
+      "unique_awards": 0,
+      "net_action_obligations": 0,
+      "scope_note": "bounded to the normalized 14-UEI universe and exact-name gaps described below"
+    }
+  ],
+  "cbp_awards": [
+    {
+      "award_id": "70B03C20P00000219",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 6,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 300680.69
+    },
+    {
+      "award_id": "70B03C20P00000219",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_I",
+      "action_count": 3,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 285100.85
+    },
+    {
+      "award_id": "70B03C23P00000166",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 4,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 299910.38
+    },
+    {
+      "award_id": "70B03C23P00000166",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_II",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": -157611.7
+    },
+    {
+      "award_id": "70B03C24C00000054",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 2,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 333462.46
+    },
+    {
+      "award_id": "70B03C24C00000054",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_II",
+      "action_count": 5,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 523835.52
+    },
+    {
+      "award_id": "70B03C24P00000592",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 3,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 31955.33
+    },
+    {
+      "award_id": "70B03C25P00000029",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 9899.85
+    },
+    {
+      "award_id": "70B03C25P00000029",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_II",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": -9899.85
+    },
+    {
+      "award_id": "HSBP1012C00101",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_I",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": -72053.06
+    },
+    {
+      "award_id": "HSBP1012C00101",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "pre_Trump_I",
+      "action_count": 3,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 191700.0
+    },
+    {
+      "award_id": "HSBP1015P00762",
+      "program_class": "CBP detainee hygiene services",
+      "administration_period": "Biden",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": -28737.58
+    },
+    {
+      "award_id": "HSBP1015P00762",
+      "program_class": "CBP detainee hygiene services",
+      "administration_period": "Trump_I",
+      "action_count": 4,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 1448.65
+    },
+    {
+      "award_id": "HSBP1015P00762",
+      "program_class": "CBP detainee hygiene services",
+      "administration_period": "pre_Trump_I",
+      "action_count": 2,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 30000.0
+    },
+    {
+      "award_id": "HSBP1016J00076",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "pre_Trump_I",
+      "action_count": 3,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 12427.0
+    },
+    {
+      "award_id": "HSBP1016P00277",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Biden",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": -12506.47
+    },
+    {
+      "award_id": "HSBP1016P00277",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "Trump_I",
+      "action_count": 11,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 638458.01
+    },
+    {
+      "award_id": "HSBP1016P00277",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "pre_Trump_I",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 207498.18
+    },
+    {
+      "award_id": "HSBP9861659693",
+      "program_class": "CBP detention/jail space",
+      "administration_period": "pre_Trump_I",
+      "action_count": 1,
+      "unique_awards_with_actions": 1,
+      "net_action_obligations": 16401.28
+    }
+  ],
+  "cbp_award_level_obligations": 3129104.54,
+  "grants_assistance_check": {
+    "uei_queries": 14,
+    "contractor_affiliate_grant_rows": 0,
+    "result": "No DHS grant awards returned for the normalized UEI universe."
+  },
+  "subaward_check": {
+    "canonical_status": "unresolved: query_usaspending subaward filters returned unrelated identical result sets; papercut #827",
+    "highergov_cross_check": "No subcontract rows returned for GEO parent, BI Incorporated, or GEO Care Services UEIs; secondary and not universe-complete."
+  },
+  "sam_cross_check": {
+    "live_contract_query": "70B03C24C00000054 returned 7 action/modification records consistent with CBP/Border Enforcement Contracting Division and GEO parent UEI/CAGE",
+    "live_entity_query": "GEO Corrections returned zero active exact-name records"
+  },
+  "highergov_cbp_cross_check": {
+    "queried_awards": 10,
+    "matched_awards": 9,
+    "unmatched_awards": [
+      "HSBP1016J00076"
+    ],
+    "role": "secondary hierarchy/value cross-check only; USAspending/SAM remain canonical"
+  },
+  "limitations": [
+    "Direct recipient data do not capture county/parish/state IGSAs where a GEO affiliate operates below a public prime unless a reported subaward identifies the affiliate.",
+    "The broken canonical subaward query prevents a complete subcontract negative; this is an unresolved data gap, not proof of no subcontract work.",
+    "Current SAM public extracts omit some legacy award recipients and do not resolve a UEI for GEO Corrections Holdings.",
+    "Net action obligations include positive obligations, deobligations, and zero-dollar modifications; they are not award ceiling, outlays, payments, company revenue, or guaranteed value.",
+    "An award can have actions in more than one administration window and is counted once in each applicable period's unique-award field."
+  ]
+}

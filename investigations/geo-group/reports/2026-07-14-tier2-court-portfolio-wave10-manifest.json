@@ -1,0 +1,101 @@
+{
+  "generated_on": "2026-07-14",
+  "profile_id": "geo-group",
+  "thread_id": 113,
+  "scope": "Bounded Tier-2 systemic-analysis followed by generate-hunches over the completed GEO CourtListener/RECAP litigation portfolio and the authenticated Hartel defense-cost record; no broad new court search.",
+  "analysis_runs": [
+    {
+      "id": 116,
+      "skill": "systemic-analysis",
+      "status": "completed",
+      "findings_created": 1,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    },
+    {
+      "id": 119,
+      "skill": "generate-hunches",
+      "status": "completed",
+      "findings_created": 0,
+      "hypotheses_created": 0,
+      "leads_created": 0,
+      "tags_created": 0
+    }
+  ],
+  "database_records_created": {
+    "findings": [13016],
+    "hypotheses": [],
+    "leads": [],
+    "tags": [],
+    "entities": [],
+    "connections": []
+  },
+  "finding_13016": {
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "verification_status": "verified",
+    "date_of_event": "2018-06-21",
+    "event_date_iso": "2018-06-21",
+    "date_precision": "day",
+    "thread_id": 113,
+    "profile_id": "geo-group",
+    "basis_findings": [13004, 13005, 13006, 13007, 13008, 13009, 13010, 13014, 13015],
+    "bounded_claim": "ICE denied in full three June 2018 GEO defense-cost requests across Aurora, Northwest, and Adelanto totaling USD 2,662,654.03; Northwest separately assigned litigation responsibility and cost to GEO. This does not establish a permanent bar or exclude later nonpublic action."
+  },
+  "database_records_reused": {
+    "thread_findings_scanned": 186,
+    "existing_hypotheses_checked": 357,
+    "hypothesis_competition": [335, 336],
+    "prior_analysis_runs": [83, 94, 95],
+    "completed_leads": [63588],
+    "human_actions": [45, 46, 47, 49, 50, 51, 57, 59, 60, 61, 70],
+    "infra_requests": [150],
+    "retracted_records_excluded": [13013]
+  },
+  "source_artifacts": [
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10.md",
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-courtlistener-coverage-audit-wave10-source-finding-manifest.json",
+    "investigations/geo-group/reports/2026-07-13-lead-59489-courtlistener-litigation-forensics.md",
+    "investigations/geo-group/reports/2026-07-13-menocal-post-scotus-merits-posture.md",
+    "investigations/geo-group/reports/2026-07-13-geo-inslee-courtlistener-case-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-novoa-geo-post-nwauzor-case-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-new-jersey-v-geo-delaney-hall-case-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-hartel-geo-de63-case-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-roycroft-geo-fca-case-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-burciaga-geo-fca-case-analysis.md",
+    "reports/geo-group-courtlistener-20260713/report.md",
+    "investigations/geo-group/reports/2026-07-14-lead-62736-salus-csro-procurement-case.md",
+    "investigations/geo-group/reports/2026-07-14-systemic-litigation-contract-continuity-report.md",
+    "investigations/geo-group/reports/2026-07-14-systemic-litigation-contract-continuity-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-systemic-litigation-contract-continuity-ach.json",
+    "investigations/geo-group/reports/2026-07-14-systemic-litigation-contract-continuity-novelty.json",
+    "investigations/geo-group/reports/2026-07-13-generate-hunches-litigation-contract-synthesis.md",
+    "investigations/geo-group/reports/2026-07-13-litigation-procurement-timeline-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-lead-63588-hartel-ice-defense-cost-report.md",
+    "investigations/geo-group/reports/2026-07-14-lead-63588-hartel-ice-defense-cost-source-finding-manifest.json"
+  ],
+  "hartel_primary_source_root": "investigations/geo-group/sources/2026-07-14-lead-63588-hartel-ice-defense-cost",
+  "outputs": [
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-systemic-analysis.md",
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-mechanism-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-ach.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-novelty-report.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-manifest.json",
+    "investigations/geo-group/reports/2026-07-14-tier2-court-portfolio-wave10-sha256.csv"
+  ],
+  "evidence_boundaries": {
+    "holdings": "Court holdings are separated from party positions and allegations in the mechanism matrix.",
+    "coordination": "Repeated legal labels, agency awareness, meeting access, and DOJ contacts are not treated as coordinated conduct.",
+    "cost_allocation": "The authenticated June 2018 requests and denials establish a sampled decision point, not a permanent rule or proof of no later payment.",
+    "family_counting": "Multiple proceedings in one dispute family are not counted as independent contexts."
+  },
+  "qa": {
+    "coverage_manifest_sha_entries_reverified": 27,
+    "mechanism_matrix_data_rows": 18,
+    "mechanism_matrix_columns": 14,
+    "foreign_key_baseline_rows": 64,
+    "papercut_logged": 1028
+  }
+}

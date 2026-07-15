@@ -4,6 +4,7 @@
 This compares:
 1) findings[*].evidence against finding_evidence rows
 2) connections[*].evidence against connection_evidence rows
+3) factual/source-corrected finding fields against canonical findings values
 
 Rows are canonicalized with pipeline/evidence_refs.py so packed refs are expanded
 and ordering differences do not produce false positives.
@@ -36,6 +37,13 @@ class Mismatch:
     record_id: int
     dossier_rows: int
     db_rows: int
+
+
+@dataclass(frozen=True)
+class CorrectedFieldMismatch:
+    dossier: str
+    record_id: int
+    field_name: str
 
 
 def normalize_text(value: object) -> str:
@@ -95,6 +103,37 @@ def load_connection_evidence_map(conn: sqlite3.Connection) -> dict[int, list[dic
     return {cid: canonicalize_evidence_rows(items) for cid, items in grouped.items()}
 
 
+def load_finding_map(conn: sqlite3.Connection) -> dict[int, dict]:
+    return {
+        int(row["id"]): dict(row)
+        for row in conn.execute("SELECT * FROM findings").fetchall()
+    }
+
+
+def load_corrected_finding_fields(conn: sqlite3.Connection) -> dict[int, set[str]]:
+    grouped: dict[int, set[str]] = defaultdict(set)
+    rows = conn.execute(
+        """
+        SELECT record_id, field_name
+        FROM corrections
+        WHERE table_name = 'findings'
+          AND correction_type IN ('factual_error', 'source_mismatch')
+        """
+    ).fetchall()
+    for row in rows:
+        grouped[int(row["record_id"])].add(row["field_name"])
+    return dict(grouped)
+
+
+def normalize_canonical_value(field_name: str, value: object) -> object:
+    if field_name == "source_datasets" and isinstance(value, str):
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value
+    return value
+
+
 def iter_dossier_paths(dossier_dir: Path, only: list[str]) -> list[Path]:
     all_paths = sorted(p for p in dossier_dir.glob("*.json") if not p.name.startswith("_"))
     if not only:
@@ -119,8 +158,14 @@ def iter_dossier_paths(dossier_dir: Path, only: list[str]) -> list[Path]:
     return resolved
 
 
-def check_sync(dossier_paths: list[Path], finding_map: dict[int, list[dict]], connection_map: dict[int, list[dict]]) -> list[Mismatch]:
-    mismatches: list[Mismatch] = []
+def check_sync(
+    dossier_paths: list[Path],
+    finding_evidence_map: dict[int, list[dict]],
+    connection_map: dict[int, list[dict]],
+    canonical_findings: dict[int, dict],
+    corrected_finding_fields: dict[int, set[str]],
+) -> list[Mismatch | CorrectedFieldMismatch]:
+    mismatches: list[Mismatch | CorrectedFieldMismatch] = []
 
     for path in dossier_paths:
         dossier = json.loads(path.read_text())
@@ -132,7 +177,7 @@ def check_sync(dossier_paths: list[Path], finding_map: dict[int, list[dict]], co
                 continue
             fid = int(fid)
             dossier_rows = canonicalize_evidence_rows(list(finding.get("evidence") or []))
-            db_rows = finding_map.get(fid, [])
+            db_rows = finding_evidence_map.get(fid, [])
             if sorted_tuples(dossier_rows, "finding") != sorted_tuples(db_rows, "finding"):
                 mismatches.append(
                     Mismatch(
@@ -143,6 +188,21 @@ def check_sync(dossier_paths: list[Path], finding_map: dict[int, list[dict]], co
                         db_rows=len(db_rows),
                     )
                 )
+
+            canonical = canonical_findings.get(fid)
+            marked_fields = set(finding.get("canonical_corrected_fields") or [])
+            for field_name in sorted(marked_fields | corrected_finding_fields.get(fid, set())):
+                if canonical is None or field_name not in canonical:
+                    mismatches.append(
+                        CorrectedFieldMismatch(dossier_name, fid, field_name)
+                    )
+                    continue
+                dossier_value = normalize_canonical_value(field_name, finding.get(field_name))
+                canonical_value = normalize_canonical_value(field_name, canonical[field_name])
+                if dossier_value != canonical_value:
+                    mismatches.append(
+                        CorrectedFieldMismatch(dossier_name, fid, field_name)
+                    )
 
         for connection in dossier.get("connections", []):
             cid = connection.get("id")
@@ -206,9 +266,19 @@ def main() -> int:
             conn.close()
             return 0
         dossier_paths = iter_dossier_paths(dossier_dir, args.dossier)
-        finding_map = load_finding_evidence_map(conn)
+        finding_evidence_map = load_finding_evidence_map(conn)
         connection_map = load_connection_evidence_map(conn)
-        mismatches = check_sync(dossier_paths, finding_map, connection_map)
+        canonical_findings = load_finding_map(conn) if "findings" in tables else {}
+        corrected_finding_fields = (
+            load_corrected_finding_fields(conn) if "corrections" in tables else {}
+        )
+        mismatches = check_sync(
+            dossier_paths,
+            finding_evidence_map,
+            connection_map,
+            canonical_findings,
+            corrected_finding_fields,
+        )
     finally:
         conn.close()
 
@@ -221,6 +291,12 @@ def main() -> int:
         f"{len(mismatches)} mismatches."
     )
     for mismatch in mismatches[: args.limit]:
+        if isinstance(mismatch, CorrectedFieldMismatch):
+            print(
+                f"- {mismatch.dossier} finding#{mismatch.record_id}: "
+                f"corrected field {mismatch.field_name!r} differs from canonical DB"
+            )
+            continue
         print(
             f"- {mismatch.dossier} {mismatch.block_type}#{mismatch.record_id}: "
             f"dossier_rows={mismatch.dossier_rows} db_rows={mismatch.db_rows}"

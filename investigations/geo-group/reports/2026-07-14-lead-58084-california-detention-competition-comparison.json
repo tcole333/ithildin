@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-07-14",
+  "lead_id": 58084,
+  "solicitation_id": "70CDCR20R00000002",
+  "classification": {
+    "procedure": "full_and_open_negotiated",
+    "sole_source": false,
+    "one_offer_interpretation": "USAspending records the one-offer value on each IDIQ award. Separate proposals and two awardees make the fields consistent with the respective requirements, but do not prove that interpretation; absent proposal logs, they cannot safely be read as one total proposal across the entire four-requirement procurement.",
+    "competitive_effect_assessment": "The facility scale, geographic radii, existing-or-renovatable-facility rule, exclusion of new construction, 60-day readiness, detailed physical-plant requirements, and relevant-past-performance factor likely constrained the practical bidder pool.",
+    "improper_restriction_established": false,
+    "confidence": "medium"
+  },
+  "notice_timeline": [
+    {"posted_date": "2019-10-17", "event": "initial_solicitation", "due_date": "2019-10-31"},
+    {"posted_date": "2019-10-23", "event": "amendment_and_qa", "due_date": "2019-10-31"},
+    {"posted_date": "2019-10-25", "event": "final_substantive_amendments_and_qa_part_3", "due_date": "2019-10-31"},
+    {"posted_date": "2019-10-30", "event": "deadline_extension", "due_date": "2019-11-04T12:00:00-05:00"}
+  ],
+  "requirement_changes": {
+    "B": {
+      "initial_approximate_population": 1400,
+      "final_approximate_population": 2100,
+      "absolute_change": 700,
+      "percent_change": 50.0,
+      "radius_miles": 50
+    },
+    "D": {
+      "initial_approximate_population": 1950,
+      "final_approximate_population": 2800,
+      "absolute_change": 850,
+      "percent_change": 43.589744,
+      "initial_radius_miles": 75,
+      "final_radius_miles": 100
+    }
+  },
+  "awards": [
+    {
+      "facility": "Imperial Regional Detention Facility",
+      "recipient": "MANAGEMENT & TRAINING CORPORATION",
+      "uei": "G58ZEJ7HJGM1",
+      "idv_piid": "70CDCR20D00000006",
+      "requirement_alignment": "A",
+      "date_signed": "2019-12-19",
+      "current_period_end": "2029-12-19",
+      "competition": {
+        "extent": "FULL AND OPEN COMPETITION",
+        "procedure": "NEGOTIATED PROPOSAL/QUOTE",
+        "offers_received": 1,
+        "record_scope": "field recorded on individual IDIQ award; relationship to requirement-level proposal count not proven without proposal log"
+      },
+      "solicitation_scope": {
+        "approximate_population": 700,
+        "population_components": {"male": 640, "female": 60},
+        "radius_miles": 50,
+        "reference_location": "1150 E Birch St, Calexico, CA 92231",
+        "minimum_beds_per_offered_facility": 250
+      },
+      "public_pricing_quantities": {
+        "p00005_label": "Detention Services Guaranteed Minimum up to 640 beds",
+        "bed_day_rates": "redacted",
+        "actual_occupancy": null
+      },
+      "vehicle_metric": {
+        "metric": "current_base_and_all_options_value",
+        "amount_usd": 774996361.52,
+        "as_of": "2026-07-14",
+        "not_equivalent_to": ["obligation", "outlay", "invoice", "recognized_revenue", "occupancy"]
+      },
+      "idv_obligations_usd": 0.0,
+      "fy2025_task": {
+        "piid": "70CDCR25FR0000012",
+        "performance_start": "2024-12-20",
+        "performance_end": "2025-12-19",
+        "obligations_usd": 47203837.48,
+        "outlays_usd": 46799471.42
+      },
+      "selected_modifications": [
+        {"modification": "P00005", "action_date": "2021-03-17", "vehicle_value_change_usd": 940400, "description": "Increased guaranteed-minimum and above-guaranteed-minimum bed-day rates"},
+        {"modification": "P00008", "action_date": "2022-03-02", "vehicle_value_change_usd": 1100000, "description": "Unit prices changed after equitable adjustment"},
+        {"modification": "P00009", "action_date": "2022-03-09", "vehicle_value_change_usd": 334300, "description": "Unit prices changed for virtual attorney visitation"},
+        {"modification": "P00012", "action_date": "2023-01-23", "vehicle_value_change_usd": 16400000, "description": "Unit prices changed after equitable adjustment"},
+        {"modification": "P00016", "action_date": "2024-08-07", "vehicle_value_change_usd": 21500000, "description": "Equitable adjustment tied to Service Contract Act wage determination"},
+        {"modification": "P00017", "action_date": "2024-12-18", "vehicle_value_change_usd": 0, "description": "Exercised Option Year 1"},
+        {"modification": "P00019", "action_date": "2025-04-15", "vehicle_value_change_usd": 4000000, "description": "Adjusted option-period transportation and medical rates"},
+        {"modification": "P00025", "action_date": "2026-04-14", "vehicle_value_change_usd": 50900000, "description": "Equitable adjustment and added case-processing specialists"}
+      ]
+    },
+    {
+      "facility": "Otay Mesa Detention Center",
+      "recipient": "CORECIVIC, INC.",
+      "uei": "HJGMJN1JKL46",
+      "idv_piid": "70CDCR20D00000007",
+      "requirement_alignment": "B",
+      "date_signed": "2019-12-19",
+      "current_period_end": "2029-12-19",
+      "competition": {
+        "extent": "FULL AND OPEN COMPETITION",
+        "procedure": "NEGOTIATED PROPOSAL/QUOTE",
+        "offers_received": 1,
+        "record_scope": "field recorded on individual IDIQ award; relationship to requirement-level proposal count not proven without proposal log"
+      },
+      "solicitation_scope": {
+        "approximate_population": 2100,
+        "population_components": {"male": 1700, "female": 400},
+        "radius_miles": 50,
+        "reference_location": "880 Front St, San Diego, CA 92101",
+        "minimum_beds_per_offered_facility": 250
+      },
+      "public_pricing_quantities": {
+        "task_order_bed_tiers": ["beds 1-750", "beds 751 and above"],
+        "guard_hours_per_year_visible_in_p00020": 60000,
+        "transportation_nte_miles_per_year_visible_in_p00022": 180000,
+        "bed_day_and_service_rates": "redacted",
+        "actual_occupancy": null
+      },
+      "vehicle_metric": {
+        "metric": "current_base_and_all_options_value",
+        "amount_usd": 2493727956.18,
+        "as_of": "2026-07-14",
+        "not_equivalent_to": ["obligation", "outlay", "invoice", "recognized_revenue", "occupancy"]
+      },
+      "idv_obligations_usd": 0.0,
+      "fy2025_task": {
+        "piid": "70CDCR25FR0000011",
+        "performance_start": "2024-12-20",
+        "performance_end": "2025-12-19",
+        "obligations_usd": 114347542.62,
+        "outlays_usd": 114412050.47
+      },
+      "selected_modifications": [
+        {"modification": "P00004", "action_date": "2020-06-10", "vehicle_value_change_usd": 243700000, "description": "Added medical services for San Diego AOR"},
+        {"modification": "P00008", "action_date": "2021-04-16", "vehicle_value_change_usd": 2100000, "description": "Service Contract Act equitable adjustment"},
+        {"modification": "P00014", "action_date": "2022-02-14", "vehicle_value_change_usd": 73200000, "description": "Service Contract Act equitable adjustment"},
+        {"modification": "P00017", "action_date": "2023-03-21", "vehicle_value_change_usd": 19100000, "description": "Unit-price change after wage-determination equitable adjustment"},
+        {"modification": "P00020", "action_date": "2024-06-12", "vehicle_value_change_usd": 2800000, "description": "Incorporated updated rates"},
+        {"modification": "P00021", "action_date": "2024-12-18", "vehicle_value_change_usd": 0, "description": "Exercised Option Year 1"},
+        {"modification": "P00022", "action_date": "2025-03-03", "vehicle_value_change_usd": 6900000, "description": "Wage-determination rate changes with task-order equitable adjustment"},
+        {"modification": "P00026", "action_date": "2026-01-14", "vehicle_value_change_usd": -759300, "description": "Reduced detention bed-day rate"},
+        {"modification": "P00028", "action_date": "2026-05-12", "vehicle_value_change_usd": 67400000, "description": "Added case-processing specialists and one-time virtual-attorney-visitation booth upgrade"}
+      ]
+    }
+  ],
+  "comparisons": {
+    "current_vehicle_value_ratio_corecivic_to_mtc": 3.217729,
+    "fy2025_task_obligation_ratio_corecivic_to_mtc": 2.422420,
+    "occupancy_ratio": null,
+    "occupancy_gap_reason": "Solicitation estimates, guaranteed-minimum quantities, and pricing tiers are not actual occupancy; no ADP, daily-manifest, invoice-quantity, or billed-bed-day dataset was recovered."
+  },
+  "missing_decisional_records": [
+    "acquisition_plan",
+    "market_research",
+    "independent_government_cost_estimate",
+    "industry_day_attendance_and_interested_vendor_list",
+    "question_submitter_identities",
+    "proposal_log_and_offer_count_by_requirement",
+    "bidder_withdrawal_or_no_bid_communications",
+    "technical_and_price_evaluations",
+    "SSEB_or_SSAC_reports",
+    "price_negotiation_memorandum_and_one_offer_price_reasonableness_determination",
+    "source_selection_decision",
+    "award_notices_and_debriefing_records",
+    "unredacted_original_and_current_pricing_schedules",
+    "facility_level_ADP_daily_manifests_invoice_quantities_or_billed_bed_days"
+  ]
+}

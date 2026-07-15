@@ -1,0 +1,123 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2035,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-ambiguity-negative-log.md",
+      "sha256": "2c92b3e30800b928dcce9e74fc33d07a2b0a107410a1c7fb003dbcde97151d3d"
+    },
+    {
+      "bytes": 5328,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-committee-summary.csv",
+      "sha256": "94245b3ffd48480dc960e3c1e0ffed3811edeadd49ad7a02a07ca6517a446cba"
+    },
+    {
+      "bytes": 162,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-cycle-summary.csv",
+      "sha256": "1cb24033f6ad9a8bf63b4296150ec428abd9f467eae75e443644d344b719d4e8"
+    },
+    {
+      "bytes": 3033767,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-identity-row-matrix.csv",
+      "sha256": "03a263a3fb8e52c9e50dc4e04a9dd743e1e12238da6cffdc7204ba269b7ec0d9"
+    },
+    {
+      "bytes": 459,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-party-class-summary.csv",
+      "sha256": "b7c531aff920f3e3839958d9ca766f4010c8131a3551dc205d6c4c3386274cee"
+    },
+    {
+      "bytes": 4756,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-person-summary.csv",
+      "sha256": "653e4021ecb5c7eed0a71fa937f17b099cb84eb03dbdbc0b0d6bf588144083a1"
+    },
+    {
+      "bytes": 3254,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-refund-ledger.csv",
+      "sha256": "ef35ec250b432d2dd3205389045615e17fabf1e640214fc0e55eea3f51780eab"
+    },
+    {
+      "bytes": 6842,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-report.md",
+      "sha256": "e28b4e770a3bf63ab9817b94565d401716dead4d7cf08496f78bbdd9d2fdb5b6"
+    },
+    {
+      "bytes": 1469,
+      "path": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-summary.json",
+      "sha256": "dd310efaaf5738ad57206237952ba5ef02d9e4cd132d7772cfaf35e54619aae5"
+    }
+  ],
+  "coverage": {
+    "cycle_2026": "year-to-date through 2026-07-14; not a completed equal-duration cycle",
+    "fec_schedule_a": "cycles 2016, 2018, 2020, 2022, 2024, 2026 for all names; targeted 2014 C00458844 query for refund linkage",
+    "fec_schedule_b": "same six cycles by recipient for all 20 names; transaction-level resolution of plausible matches",
+    "identity_boundary": "common-name or employer-only mismatches excluded; 1,467 identity-retained rows comprise confirmed and high statuses, not all confirmed",
+    "net_boundary": "six source-linked refunds totaling $8,476.90 subtracted; unmatched confirmed $2,200 refund preserved but non-subtractive",
+    "state_records": "Florida official portal blocked by Cloudflare; no browser backend; no state zero asserted",
+    "tenure": "identity-scoped, not tenure-scoped; some retained receipts predate GEO employment/board service and no in-tenure subtotal is inferred",
+    "universe": "20 SEC-bounded current/former executives and directors"
+  },
+  "findings": [
+    {
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-report.md",
+          "evidence_type": "file",
+          "source_quote": "The FEC pass produced 4,548 candidate rows. Identity controls retain 1,467; the memo/transfer-safe source rule retains 1,335 individual-receipt rows totaling $1,632,401.60 gross."
+        },
+        {
+          "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-summary.json",
+          "evidence_type": "file",
+          "source_quote": "\"source_linked_refunds\": \"8476.9\""
+        }
+      ],
+      "id": 12984,
+      "lead_id": 59035,
+      "profile_id": "geo-group",
+      "summary": "SEC-bounded GEO leadership universe yields 19 identities with retained federal receipt rows and $1,632,401.60 in gross source receipts",
+      "target_name": "GEO executive and director federal political receipts",
+      "thread_id": 112,
+      "verification_status": "verified",
+      "verified_by": "geo_donor_identity_wave9"
+    },
+    {
+      "claim_type": "synthesis",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-ambiguity-negative-log.md",
+          "evidence_type": "file",
+          "source_quote": "Paul Laird's Los Angeles `GEO GROUP / PROFESSOR` and Redondo Beach `GEO / PROFESSIONAL` records remain unresolved because geography and occupation conflict with the SEC-documented GEO operations career; exact employer text alone was not accepted."
+        },
+        {
+          "evidence_ref": "investigations/geo-group/sources/2026-07-14-lead-59035/fec/fec-donor-paul-laird-2020.json",
+          "evidence_type": "file",
+          "source_quote": "\"contributor_city\": \"LOS ANGELES\""
+        },
+        {
+          "evidence_ref": "investigations/geo-group/sources/2026-07-14-lead-59035/sec/geo-2026-def14a.html",
+          "evidence_type": "file",
+          "source_quote": "Paul Laird \u2014 Mr. Laird joined GEO in 2015 and has over 38 years of correctional experience."
+        }
+      ],
+      "id": 12985,
+      "lead_id": 59035,
+      "profile_id": "geo-group",
+      "summary": "The $3,000 Los Angeles GEO GROUP / PROFESSOR Trump Victory receipt remains unresolved and is excluded from the GEO executive donor ledger",
+      "target_name": "Paul Laird federal donor identity boundary",
+      "thread_id": 112,
+      "verification_status": "verified",
+      "verified_by": "geo_donor_identity_wave9"
+    }
+  ],
+  "generated_at": "2026-07-14T11:31:26Z",
+  "lead_id": 59035,
+  "profile": "geo-group",
+  "source_archive": {
+    "checksum_ledger": "investigations/geo-group/reports/2026-07-14-lead-59035-geo-donor-manifest.sha256",
+    "file_count": 262,
+    "path": "investigations/geo-group/sources/2026-07-14-lead-59035"
+  },
+  "thread_id": 112
+}

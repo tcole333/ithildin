@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from tools import lead_tracker, papercut
@@ -35,7 +37,7 @@ def test_log_list_and_resolve_papercut(papercut_db, monkeypatch, capsys):
     monkeypatch.setattr("sys.argv", ["papercut.py", "--list"])
     papercut.main()
     listed = capsys.readouterr().out
-    assert "Open papercuts (1)" in listed
+    assert "Open papercuts (showing 1 of 1 open papercuts)" in listed
     assert "Tool emitted a misleading error" in listed
 
     monkeypatch.setattr(
@@ -48,6 +50,47 @@ def test_log_list_and_resolve_papercut(papercut_db, monkeypatch, capsys):
     monkeypatch.setattr("sys.argv", ["papercut.py", "--list"])
     papercut.main()
     assert "No open papercuts" in capsys.readouterr().out
+
+
+def test_list_writes_structured_json_output(papercut_db, monkeypatch, capsys, tmp_path):
+    monkeypatch.setattr("sys.argv", ["papercut.py", "Tool emitted a misleading error"])
+    papercut.main()
+    capsys.readouterr()
+
+    output = tmp_path / "papercuts.json"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["papercut.py", "--list", "--limit", "1", "--output", str(output)],
+    )
+    papercut.main()
+
+    payload = json.loads(output.read_text())
+    assert len(payload) == 1
+    assert payload[0]["id"] == 1
+    assert payload[0]["category"] == "friction"
+    assert payload[0]["description"] == "Tool emitted a misleading error"
+    assert capsys.readouterr().out == (
+        f"1 results (showing 1 of 1 open papercuts) saved to {output}\n"
+    )
+
+
+def test_list_reports_total_when_limit_truncates_queue(
+    papercut_db, monkeypatch, capsys, tmp_path
+):
+    for number in range(3):
+        monkeypatch.setattr("sys.argv", ["papercut.py", f"Papercut {number}"])
+        papercut.main()
+        capsys.readouterr()
+
+    output = tmp_path / "limited.json"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["papercut.py", "--list", "--limit", "1", "--output", str(output)],
+    )
+    papercut.main()
+
+    assert len(json.loads(output.read_text())) == 1
+    assert "showing 1 of 3 open papercuts" in capsys.readouterr().out
 
 
 def test_resolve_requires_resolution(papercut_db, monkeypatch):

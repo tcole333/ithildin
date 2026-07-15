@@ -9,7 +9,7 @@ The site uses Incapsula WAF, so a Node.js browser helper
 Data available: entity name, entity number, NV Business ID, type, status,
 formation date, termination date, jurisdiction, registered agent (name/status/
 address), officers (president/secretary/treasurer/director with addresses),
-filing history, name history, stock information.
+filing history, and name history.
 
 Usage:
     python tools/query_nevada.py probe
@@ -22,9 +22,9 @@ Usage:
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 try:
@@ -97,7 +97,13 @@ def _run_helper(args_list, timeout=120):
         print("  Ensure _nv_browser_helper.js is in tools/", file=sys.stderr)
         return None
 
-    cmd = ["node", str(HELPER_PATH)] + args_list
+    node = shutil.which("node")
+    if not node:
+        print("ERROR: Node.js runtime not found in PATH.", file=sys.stderr)
+        print("  Install Node.js, then run: npm install playwright", file=sys.stderr)
+        return None
+
+    cmd = [node, str(HELPER_PATH)] + args_list
 
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
@@ -113,6 +119,9 @@ def _run_helper(args_list, timeout=120):
         return json.loads(result.stdout)
     except subprocess.TimeoutExpired:
         print("ERROR: Browser helper timed out", file=sys.stderr)
+        return None
+    except OSError as e:
+        print(f"ERROR: Could not start browser helper: {e}", file=sys.stderr)
         return None
     except json.JSONDecodeError as e:
         print(f"ERROR: Invalid JSON from browser helper: {e}", file=sys.stderr)
@@ -169,19 +178,47 @@ def _normalize_type(raw_type):
 # PROBE
 # ══════════════════════════════════════════════════════════
 
+def cmd_runtime_check(args):
+    """Verify the Node.js, Playwright, and browser dependencies."""
+    data = _run_helper(["runtime-check"], timeout=30)
+    if not data:
+        print("Nevada browser runtime check failed", file=sys.stderr)
+        raise SystemExit(1)
+
+    if write_output(data, args, summary="NV SOS browser runtime check"):
+        return
+
+    print("Nevada browser runtime is ready")
+    print(f"  Node: {data.get('node', '?')}")
+    print(f"  Playwright: {data.get('playwright_module', '?')}")
+    print(f"  Browser: {data.get('browser_channel', '?')}")
+    print(f"  Executable: {data.get('browser_executable', '?')}")
+
+
 def cmd_warmup(args):
     """Open browser for manual Incapsula challenge solving."""
+    if not HELPER_PATH.exists():
+        print(f"ERROR: Browser helper not found at {HELPER_PATH}", file=sys.stderr)
+        return
+    node = shutil.which("node")
+    if not node:
+        print("ERROR: Node.js runtime not found in PATH.", file=sys.stderr)
+        print("  Install Node.js, then run: npm install playwright", file=sys.stderr)
+        return
+
     print("Opening NV SOS browser for warmup...")
     print("  Solve any Incapsula/CAPTCHA challenge in the browser window.")
     print("  Press Enter in the terminal when done.")
     print()
     # Run warmup interactively (not captured — user needs to see stdin prompt)
-    cmd = ["node", str(HELPER_PATH), "warmup"]
+    cmd = [node, str(HELPER_PATH), "warmup"]
     try:
         subprocess.run(cmd, timeout=300)
         print("\nWarmup complete. Cookies cached for future requests.")
     except subprocess.TimeoutExpired:
         print("\nWarmup timed out after 5 minutes.")
+    except OSError as e:
+        print(f"\nCould not start browser helper: {e}", file=sys.stderr)
     except KeyboardInterrupt:
         print("\nWarmup cancelled.")
 
@@ -255,6 +292,7 @@ def cmd_search(args):
     helper_args = ["search", args.query]
     if args.mode:
         helper_args.extend(["--mode", args.mode])
+    helper_args.extend(["--limit", str(args.limit or 25)])
 
     data = _run_helper(helper_args)
     if not data:
@@ -560,6 +598,7 @@ def cmd_ingest_search(args):
     helper_args = ["search", args.query]
     if args.mode:
         helper_args.extend(["--mode", args.mode])
+    helper_args.extend(["--limit", str(args.limit or 20)])
 
     data = _run_helper(helper_args)
     if not data or "error" in data:
@@ -644,6 +683,10 @@ def main():
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
+    # runtime-check
+    p = sub.add_parser("runtime-check", help="Verify Node.js, Playwright, and Chrome")
+    add_output_args(p)
+
     # warmup
     sub.add_parser("warmup", help="Open browser to solve Incapsula challenge (caches cookies)")
 
@@ -682,6 +725,7 @@ def main():
         args.json_out = False
 
     handlers = {
+        "runtime-check": cmd_runtime_check,
         "warmup": cmd_warmup,
         "probe": cmd_probe,
         "search": cmd_search,

@@ -13,6 +13,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `web_search` | WebSearch, WebFetch | Open web research |
 | `kabass` | ingest_kabasshouse.py | **PRIMARY Epstein corpus** — 1.42M OCR'd docs (DOJ DS1-12 + FBI + House) + structured layers. Same EFTA page in kabass + doj_vol11/lmsband = one source, not corroboration |
 | `fbi` | ingest_fbi_files.py | FBI release (8,150 docs) + named exhibits (Flight Log, Contact Book) |
+| `efta` | EFTA evidence references | Underlying DOJ-released EFTA document; copies or re-OCRs in kabass/LMSBAND/DOJ corpora remain one source, not corroboration |
 | `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus (fallback — subset of kabass) |
 | `duggan` | _(retired — tool removed 2026-06-29)_ | Duggan USA corpus — historical source name only; 42 findings cite it |
 | `lmsband` | query_lmsband.py | LMSBAND document corpus |
@@ -20,6 +21,10 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fec` | query_fec.py | FEC campaign finance |
 | `edgar` | query_edgar.py | SEC EDGAR filings |
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
+| `supreme_court` | supremecourt.gov | Official U.S. Supreme Court dockets, filings, and opinions |
+| `finra` | query_finra.py | FINRA BrokerCheck records |
+| `openpayments` | query_openpayments.py | CMS Open Payments covered-recipient profiles and company-reported payment summaries |
+| `senate_finance` | query_senate_finance.py | Official Senate Finance Committee releases, investigations, and attachments |
 | `nyscef` | query_nyscef.py | NYSCEF New York state court records |
 | `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
@@ -32,6 +37,8 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fara` | query_fara.py | FARA foreign agent registrations |
 | `littlesis` | query_littlesis.py | LittleSis relationship maps |
 | `gdelt` | query_gdelt.py | GDELT global news |
+| `reporting` | reporting_corpus.py | Reviewed reporting claims promoted only with quoted primary evidence |
+| `government_releases` | government_release_corpus.py | Primary DOJ and SEC press releases, versioned and full-text searchable |
 | `aleph` | query_aleph.py | OCCRP Aleph |
 | `icij` | query_icij.py | ICIJ offshore leaks |
 | `acris` | query_acris.py | NYC ACRIS property records |
@@ -79,9 +86,63 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `military_corrections` | query_military_corrections.py | DoD BCMR/BCNR Reading Room (boards.law.af.mil) — redacted decisions of all four service correction boards |
 | `elperuano` | query_elperuano.py, ingest_elperuano.py | Diario Oficial El Peruano (Peru) — gazette search, document fetch, daily bulletin |
 
-**Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
+**Important**: Use these exact names. `findings_tracker.py` requires at least one
+supported source and rejects unknown names. If you need a new source name, add it
+to `VALID_SOURCES` in `tools/findings_tracker.py`.
+
+Configured corpus tools and legacy findings may expose the following explicit
+aliases. `findings_tracker.py` stores their canonical value; all other unknown
+tokens still fail validation.
+
+| Alias(es) | Canonical source |
+|------------|------------------|
+| `kabasshouse` | `kabass` |
+| `unified`, `unified_epstein` | `unified_db` |
+| `house_20k`, `epstein_20k` | `house_oversight` |
+| `fbi-files`, `fbi_files`, `fbi_epstein`, `fbi_epstein_files` | `fbi` |
+| `epstein_reporting` | `reporting` |
+| `query_investigations` | `investigations_db` |
+| `scotus` | `supreme_court` |
 
 ## Core Investigation Tools
+
+### Epstein Reporting Knowledge Layer
+
+```bash
+uv run python tools/reporting_corpus.py init
+uv run python tools/reporting_corpus.py discover-repository
+uv run python tools/reporting_corpus.py discover-gdelt '"Jeffrey Epstein"' --timespan 3m
+uv run python tools/reporting_corpus.py discover-feed URL --query Epstein
+uv run python tools/reporting_corpus.py ingest-candidates --limit 50
+uv run python tools/reporting_corpus.py import-file export.ris --source proquest
+uv run python tools/reporting_corpus.py search 'Southern Trust' --output "$WORKDIR/reporting.json"
+uv run python tools/reporting_corpus.py claims 'JPMorgan' --output "$WORKDIR/reporting-claims.json"
+uv run python tools/reporting_corpus.py primary-gaps --output "$WORKDIR/reporting-gaps.json"
+uv run python tools/reporting_corpus.py recover-archives --failed-candidates --limit 50 --store-text
+uv run python tools/reporting_corpus.py ingest-archive-url ORIGINAL_URL ARCHIVE_URL --store-text
+```
+
+Reporting claims remain attributed secondary-source assertions. `promote` refuses
+claims that have not been reviewed and linked to quoted primary evidence. Full
+workflow and licensed-database export guidance: `docs/modules/reporting.md`.
+Public archive recovery uses Wayback CDX first and Common Crawl WARC ranges as a
+fallback; archive.is snapshots can be supplied manually.
+
+### DOJ/SEC Primary Press Releases
+
+```bash
+uv run python tools/government_release_corpus.py init
+uv run python tools/government_release_corpus.py ingest-doj --max-pages 100
+uv run python tools/government_release_corpus.py discover-sec --start-year 1997
+uv run python tools/government_release_corpus.py fetch-sec --limit 500
+uv run python tools/government_release_corpus.py search 'money laundering' --agency DOJ --output "$WORKDIR/doj-releases.json"
+uv run python tools/government_release_corpus.py search 'JPMorgan' --agency SEC --output "$WORKDIR/sec-releases.json"
+```
+
+DOJ ingestion is resumable through `ingest_state`; a zero `--max-pages` completes
+all remaining API pages. SEC coverage is the complete official online archive:
+static yearly indexes for 1997–2011 and the newsroom index for 2012–present.
+See `docs/modules/government-releases.md`.
 
 ### Queue System (SQLite-first)
 ```bash
@@ -170,15 +231,125 @@ python tools/findings_tracker.py search "gates foundation" --limit 20 --output /
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
 
+New finding writes require `--sources` to contain supported source tokens. A
+`direct_quote` also requires at least one `--evidence` reference and a non-empty
+`--source-quote` for every reference. HTTP(S) references are stored as `url`;
+canonical references such as `CourtListener:docket/69737684` remain `ref` even
+when their source-specific key contains `/`. Explicit/path-like local file
+references must exist. Relative file references resolve from the repository
+root so their meaning does not depend on the caller's working directory.
+
+### Audited Finding Evidence CRUD
+```bash
+# Add evidence (direct_quote findings require --source-quote)
+uv run python tools/findings_tracker.py evidence-add 42 \
+  --ref CourtListener:docket/69737684 \
+  --source-quote "Exact language from the filing" \
+  --source-page "p. 12" --reason "Attach primary filing" --by analyst
+
+# Correct one evidence field; evidence_ref changes automatically reclassify its type
+uv run python tools/findings_tracker.py evidence-correct 42 \
+  --ref CourtListener:docket/69737684 --field source_quote \
+  --value "Corrected exact language" --reason "Fix transcription" --by analyst
+
+# Delete evidence while retaining its full pre-delete audit snapshot
+uv run python tools/findings_tracker.py evidence-delete 42 \
+  --ref CourtListener:docket/69737684 --reason "Superseded by certified filing" --by analyst
+
+# Report legacy violations before correction; this never modifies finding/evidence rows
+uv run python tools/findings_tracker.py evidence-audit --profile epstein --output /tmp/evidence-audit.json
+uv run python tools/findings_tracker.py evidence-audit --finding-id 42
+
+# Inspect the immutable correction trail for one composite-key evidence row
+uv run python tools/findings_tracker.py audit 42 --table finding_evidence \
+  --record-key CourtListener:docket/69737684
+```
+
+Evidence mutations are atomic and invalidate an already verified finding back
+to `unverified`, requiring fresh review. Quote spans are checked against locally
+resolvable EFTA OCR and text files. Remote URLs, binary files, and canonical
+references without a local resolver remain usable; `evidence-audit` counts
+those spans as `unchecked` rather than treating them as mismatches.
+
+### Audited Connection Evidence & Verification
+```bash
+# Create or idempotently enrich a canonical edge with quote/page/assessment provenance
+uv run python tools/findings_tracker.py connect \
+  --person-a "PERSON_A" --person-b "ORGANIZATION_B" --type legal \
+  --evidence CourtListener:docket/69737684 \
+  --source-quote "CourtListener:docket/69737684:Exact language from the filing" \
+  --source-page "CourtListener:docket/69737684:p. 12" \
+  --assessment "CourtListener:docket/69737684:Names both endpoints"
+
+# Add, correct, or delete evidence with immutable correction rows
+uv run python tools/findings_tracker.py connection-evidence-add 7 \
+  --ref CourtListener:docket/69737684 \
+  --source-quote "Exact language from the filing" --source-page "p. 12" \
+  --assessment "Names both endpoints" --reason "Attach primary filing" --by analyst
+uv run python tools/findings_tracker.py connection-evidence-correct 7 \
+  --ref CourtListener:docket/69737684 --field source_quote \
+  --value "Corrected exact language" --reason "Fix transcription" --by analyst
+uv run python tools/findings_tracker.py connection-evidence-delete 7 \
+  --ref CourtListener:docket/69737684 --reason "Superseded evidence" --by analyst
+
+# Verification is the publication gate: every evidence row needs a quote and valid ref
+uv run python tools/findings_tracker.py connection-unverified --profile epstein
+uv run python tools/findings_tracker.py connection-verify 7 --by analyst
+uv run python tools/findings_tracker.py connections "PERSON_A" --verified-only
+
+# Audited edge lifecycle and provenance
+uv run python tools/findings_tracker.py connection-correct 7 \
+  --field description --value "Corrected relationship description" \
+  --reason "Clarify edge" --by analyst
+uv run python tools/findings_tracker.py connection-dispute 7 \
+  --reason "Relationship is contested" --by analyst
+uv run python tools/findings_tracker.py connection-retract 7 \
+  --reason "Edge was unsupported" --by analyst
+uv run python tools/findings_tracker.py connection-audit 7
+uv run python tools/findings_tracker.py connection-provenance 7 \
+  --output /tmp/connection-7-provenance.json
+```
+
+Initial connection creation remains draft-friendly. Enriching an existing
+canonical edge is atomic and audited; identical repeats are no-ops, while a
+conflicting non-empty quote/page/assessment must use
+`connection-evidence-correct` with a reason. Any substantive edge or evidence
+change resets a verified connection to `unverified`; correcting a field to its
+current normalized value is an explicit no-op and creates no audit row. Initial
+verification appends immutable status history, while repeating verification on
+an already verified, still-publishable edge preserves its reviewer, timestamp,
+and audit history. Retraction is final for this workflow: a retracted edge cannot
+be disputed or verified without a future explicit restoration workflow. If an edge cites
+`finding_id`, that finding must also be verified before the edge can be
+verified. The `--verified-only` publication view revalidates current evidence,
+so legacy rows carrying a stale `verified` status are excluded without silently
+rewriting their lifecycle state. Public dossier export uses that same current
+evidence and upstream-finding validator; research export with
+`--include-unverified` remains non-retracted rather than publication-gated.
+Endpoint names are not directly correctable
+because they define the canonical edge key; retract the old edge and create a
+new canonical edge.
+
 ### Audit & Verification
 ```bash
-python tools/findings_tracker.py unverified             # List findings needing human review
+uv run python tools/findings_tracker.py add --target "TARGET" \
+  --summary "Evidence-backed claim" --sources courtlistener \
+  --output "$WORKDIR/created-finding.json"  # JSON includes the committed finding ID
+uv run python tools/findings_tracker.py unverified --profile epstein --output "$WORKDIR/unverified.json"
+uv run python tools/findings_tracker.py unverified --all-profiles --json
 python tools/findings_tracker.py provenance 42           # Full provenance chain for finding #42
 python tools/findings_tracker.py verify 42               # Mark as human-verified
 python tools/findings_tracker.py dispute 42 --reason "Quote doesn't match source"
 python tools/findings_tracker.py retract 42 --reason "Hallucinated by agent"  # Cascades to connections
 python tools/findings_tracker.py correct 42 --field summary --value "New text" --reason "Amount was 15M not 18M"
-python tools/findings_tracker.py audit 42 --table findings  # Show correction history
+# source_datasets corrections must be a JSON array of supported tokens
+uv run python tools/findings_tracker.py correct 42 --field source_datasets \
+  --value '["courtlistener","registry"]' --reason "Normalize provenance tokens"
+uv run python tools/findings_tracker.py relate 42 43 --type refines \
+  --assessment "Finding 42 narrows the earlier claim"
+uv run python tools/findings_tracker.py relation-delete 42 43 --type refines \
+  --reason "Accidental relation to the wrong concurrently created finding" --by analyst
+uv run python tools/findings_tracker.py audit 42 --table findings --json  # Show correction history
 ```
 
 ## Analysis Tools
@@ -187,10 +358,18 @@ python tools/findings_tracker.py audit 42 --table findings  # Show correction hi
 ```bash
 python tools/hypothesis_tracker.py add --title "USVI cluster suggests structural role" \
   --pattern-type structural --description "4 unrelated targets all have USVI entities 2012-2015" \
+  --competition-group "usvi-formation-cluster" \
   --predicted-evidence "Shared registered agent or formation attorney" \
   --search-plan "1. query_registry.py search USVI agent  2. ingest_usvi.py agent overlap"
-python tools/hypothesis_tracker.py list [--status proposed] [--pattern-type structural]
+python tools/hypothesis_tracker.py add --title "Routine industry clustering" --as-null \
+  --competition-group "usvi-formation-cluster" --description "H0 with its own falsification criterion"
+python tools/hypothesis_tracker.py list [--status proposed] [--pattern-type structural] \
+  [--competition-group usvi-formation-cluster]
 python tools/hypothesis_tracker.py show 5
+python tools/hypothesis_tracker.py evaluate --hypothesis-id 5 --finding-id 412 --assessment inconsistent
+python tools/hypothesis_tracker.py matrix [--competition-group usvi-formation-cluster]
+python tools/hypothesis_tracker.py compete [--competition-group usvi-formation-cluster]
+python tools/hypothesis_tracker.py diagnose
 python tools/hypothesis_tracker.py investigate --id 5 --lead-id 42
 python tools/hypothesis_tracker.py confirm --id 5 --evidence "findings:412,415" --reason "Shared agent confirmed"
 python tools/hypothesis_tracker.py refute --id 5 --evidence "findings:420" --reason "No overlap found"
@@ -350,19 +529,22 @@ python tools/ingest_newmexico.py search "Zorro Ranch"
 python tools/ingest_newmexico.py detail <internal_id>
 python tools/ingest_newmexico.py ingest-batch "Zorro"
 
-# California — bizfileonline web API (no auth, up to 500 results)
-# Requires MCP Playwright Chrome running (trigger with any browser_navigate call)
-python tools/query_california.py search "PARAFI CAPITAL"
-python tools/query_california.py search "QUERY" --status active --type corp
-python tools/query_california.py search "Apollo" --officer-last "BLACK"
-python tools/query_california.py search "726332" --by-number
-python tools/query_california.py entity 726332 --history --output /tmp/entity.json
-python tools/query_california.py entity C0726332 --output /tmp/entity.json
-python tools/query_california.py history 726332 --output /tmp/history.json
-python tools/query_california.py ingest 726332
-python tools/query_california.py ingest-search "QUERY" --limit 50
+# California — BizFile browser search (no auth, bounded to 1-500 results)
+# Requires Node.js + playwright/playwright-core + installed Google Chrome.
+# Uses one short-lived headed process and a dedicated local Imperva cache.
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_california.py runtime-check --output "$WORKDIR/ca-runtime.json"
+uv run python tools/query_california.py probe --output "$WORKDIR/ca-probe.json"
+uv run python tools/query_california.py search "PARAFI CAPITAL" --limit 25 --output "$WORKDIR/ca-search.json"
+uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output "$WORKDIR/ca-number.json"
+# Advanced filters, entity/history, and ingest commands are explicitly unavailable
+# until their self-contained browser flows are live-verified. This interactive tool
+# does not replace the weekly statewide bulk importer tracked by infra request #130.
 # Official API (needs CA_SOS_API_KEY — pending approval)
-# python tools/ingest_california.py search "PARAFI CAPITAL"
+# uv run python tools/ingest_california.py search "PARAFI CAPITAL"
+# Do not wait on a pending key: use query_california.py for bounded public
+# searches. Logged-in BizFile offers free weekly BE deltas; the complete master
+# unload is $100 and should precede weekly updates for statewide coverage.
 
 # Texas Comptroller — franchise tax entity search (no auth)
 python tools/query_texas.py search "QUERY" --output /tmp/tx-results.json
@@ -662,6 +844,29 @@ uv run python tools/query_medicare.py provider 1003000126
 uv run python tools/query_medicare.py search "Health" --limit 20
 ```
 
+### CMS Open Payments (industry payments to clinicians, no auth)
+```bash
+# Discover current stable dataset IDs and official bulk CSV links.
+uv run python tools/query_openpayments.py datasets --query "2025 General" --output FILE
+
+# Exact covered-recipient lookup by last name or NPI. Add first name/state to disambiguate.
+uv run python tools/query_openpayments.py search MERKIN --first-name MICHAEL --state NY --output FILE
+uv run python tools/query_openpayments.py search 1952494221 --output FILE
+
+# Reporting-company and nature-of-payment summaries for one CMS profile ID.
+uv run python tools/query_openpayments.py payments 704135 --year all --output FILE
+uv run python tools/query_openpayments.py payments 704135 --year 2025 --output FILE
+
+# Bounded exact-match access to any dataset returned by `datasets` (maximum 500 rows).
+uv run python tools/query_openpayments.py query DATASET_UUID \
+  --where covered_recipient_profile_id=704135 --limit 25 --output FILE
+```
+
+The tool uses CMS's current DKAN API at `openpaymentsdata.cms.gov/api/1`. It reports the
+server's total count and whether the local page is truncated. Full CSV URLs are returned
+as catalog metadata, but bulk data is not downloaded automatically. Profile results emit
+the canonical citation form `OPENPAYMENTS:<profile_id>`.
+
 ### CourtListener (federal courts — COURTLISTENER_TOKEN in .env, 17 commands)
 ```bash
 # Search with field operators (party, firm, attorney, judge, docket number)
@@ -872,6 +1077,19 @@ python tools/query_lobbying.py client "Apollo Global"
 python tools/query_lobbying.py lobbyist "Weingarten"
 python tools/query_lobbying.py filings --client "Apollo Global" --year 2018
 ```
+
+### Senate Finance Committee Archive (no auth)
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_senate_finance.py search "media-based ministries" \
+  --limit 20 --output "$WORKDIR/sfc-search.json"
+uv run python tools/query_senate_finance.py item \
+  /ranking-members-news/grassley-releases-review-of-tax-issues-raised-by-media-based-ministries \
+  --output "$WORKDIR/sfc-item.json"
+```
+Searches the official `finance.senate.gov` archive with a 100-result maximum.
+`item` extracts the article text and official related-file links. Results include
+`SENATE_FINANCE:<path>` evidence references for the citation system.
 
 ### FARA Foreign Agents (bulk CSV → investigation.db)
 ```bash
@@ -1101,6 +1319,20 @@ SELECT e.name, r.person_name, r.role FROM entities e JOIN entity_roles r ON e.id
 SELECT e.name FROM entities e JOIN entity_addresses a ON e.id = a.entity_id WHERE a.address LIKE '%ADDRESS%';
 ```
 
+Use the tracker for reviewed metadata corrections. The field whitelist excludes
+`name`, IDs, creation metadata, and agent provenance; identity changes belong in
+the alias and merge workflows below. Every effective correction requires a
+reason and appends the old and new values to `corrections`.
+
+```bash
+uv run python tools/entity_tracker.py lookup --name "ENTITY"
+uv run python tools/entity_tracker.py show 3720 --output "$WORKDIR/entity-3720.json"
+uv run python tools/entity_tracker.py correct 3720 --field notes \
+  --value "Reviewed canonical notes" \
+  --reason "Replace stale summary after primary-evidence review" --by analyst
+uv run python tools/findings_tracker.py audit 3720 --table entities --json
+```
+
 ### Entity Dedup / Name Aliases
 ```bash
 # Seed known person/entity variant aliases
@@ -1125,6 +1357,9 @@ uv run python tools/entity_dedup.py stats
 
 # Merge entity table records (moves roles, addresses, relations)
 uv run python tools/entity_dedup.py merge --keep-id 2 --delete-id 134
+# Replace stale/contradictory notes with a reviewed canonical note during merge
+uv run python tools/entity_dedup.py merge --keep-id 2 --delete-id 134 \
+  --replacement-notes 'Identity confirmed by reviewed primary records.'
 
 # Remove an alias
 uv run python tools/entity_dedup.py remove-alias --alias "Barak"
@@ -1247,6 +1482,9 @@ uv run python tools/pillar_tracker.py arc \
     --role "Managing Director" --seniority senior \
     --start 1977 --end 1990 --exit-type collapse \
     --source "Apollo prospectus"
+
+# Delete one audited career arc by ID
+uv run python tools/pillar_tracker.py arc-delete ARC_ID
 
 # View career timeline
 uv run python tools/pillar_tracker.py career "PERSON_NAME"

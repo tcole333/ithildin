@@ -1,0 +1,153 @@
+{
+  "lead_id": 57846,
+  "profile": "geo-group",
+  "run": "wave11",
+  "as_of": "2026-07-14",
+  "scope": "B.I. Incorporated legal identity, corporate lineage, registry status, holding entities, officers, addresses, and GEO acquisition mechanics",
+  "source_root": "investigations/geo-group/sources/2026-07-14-lead-57846-bi-incorporated-lineage-wave11",
+  "primary_sources": [
+    {
+      "ref": "CO_SOS:19871356363",
+      "files": [
+        "registry/co-bi-entity-raw.json",
+        "registry/co-bi-incorporated.json",
+        "registry/co-bi-transaction-history.json"
+      ],
+      "supports": "exact legal name, Colorado entity ID, formation date, good standing, current principal/agent, amendment and merger-event history"
+    },
+    {
+      "ref": "FL-SunBiz:F95000000233",
+      "files": [
+        "registry/fl-bi-search.json",
+        "registry/fl-bi-entity-detail.json",
+        "registry/fl-bi-filings.json"
+      ],
+      "supports": "Florida foreign qualification, FEI, Colorado formation state, active bulk status, officer/agent snapshot; live-page limitation recorded"
+    },
+    {
+      "ref": "SEC:0000950123-10-116753",
+      "files": [
+        "sec/sec-2010-12-28-geo-8k.html",
+        "sec/sec-2010-12-21-merger-agreement-ex2-1.html",
+        "sec/sec-2010-12-21-acquisition-release-ex99-1.html",
+        "sec/sec-2010-12-28-complete-submission.txt",
+        "sec/sec-2010-12-28-bi-acquisition-index.json"
+      ],
+      "supports": "merger parties, BII survival, planned wholly owned GEO status, announced consideration"
+    },
+    {
+      "ref": "SEC:0001193125-12-090269",
+      "files": ["sec/sec-geo-2011-10k.html"],
+      "supports": "2011 closing, BII ownership of BI, surviving corporation, reported closing consideration"
+    },
+    {
+      "ref": "SEC:0000950123-11-056083",
+      "files": ["sec/sec-geo-2011-s4a.html"],
+      "supports": "BII/BHC/BI historical ownership chain, jurisdictions, EINs, financial statements, and 2011 signatory snapshots"
+    },
+    {
+      "ref": "SEC:0001193125-26-071747:EX-21.1/EX-22.1",
+      "files": [
+        "sec/sec-geo-fy2025-ex21.html",
+        "sec/sec-geo-fy2025-ex22.html"
+      ],
+      "supports": "current disclosed BI subsidiary status, punctuation bridge, and current named subsidiary guarantors"
+    },
+    {
+      "ref": "SEC:CIK:0001517754/5/8",
+      "files": [
+        "sec/sec-company-0001517754.json",
+        "sec/sec-company-0001517755.json",
+        "sec/sec-company-0001517758.json"
+      ],
+      "supports": "SEC entity names, CIKs, EINs, incorporation states, and co-registrant addresses"
+    },
+    {
+      "ref": "SAM:UEI:PKK6L9KLMYR5",
+      "files": ["sam/sam-bi-uei.json"],
+      "supports": "federal legal name, UEI, CAGE, entity start date, Colorado incorporation, registration dates, and physical address; contact fields not reported"
+    }
+  ],
+  "database_operations": {
+    "canonical_entity_backfill": [4810],
+    "legacy_duplicates_preserved": [4861, 5155],
+    "entities_created": [5159, 5160, 5161],
+    "auto_finding_entities_created_and_excluded_from_legal_lineage": [
+      {
+        "id": 5162,
+        "name": "BII Holding Corporation / Behavioral Holding Corp. / B.I. Incorporated",
+        "source": "auto:finding",
+        "entity_type": "unknown",
+        "trigger_finding_id": 13053
+      },
+      {
+        "id": 5163,
+        "name": "B.I. Incorporated corporate lineage",
+        "source": "auto:finding",
+        "entity_type": "unknown",
+        "trigger_finding_id": 13054
+      },
+      {
+        "id": 5164,
+        "name": "B.I. Incorporated identity resolution",
+        "source": "auto:finding",
+        "entity_type": "unknown",
+        "trigger_finding_id": 13056
+      }
+    ],
+    "auto_finding_entity_boundary": "Rows 5162-5164 are compound analytical target nodes created automatically by findings_tracker. They are not canonical legal entities, are excluded from the legal lineage, and were not renamed, enriched, related, merged, or deleted in this audit repair.",
+    "aliases_created": [226, 227],
+    "addresses_created": [1072, 1073, 1074, 1075],
+    "relations_created": [855, 856, 857, 858, 859],
+    "findings_created_and_verified": [13051, 13052, 13053, 13054, 13055, 13056],
+    "existing_findings_reused": [12382, 12783],
+    "existing_findings_newly_verified": [12382],
+    "merge_or_delete_operations": []
+  },
+  "papercuts": {
+    "1050": "open: live Sunbiz managed challenge",
+    "1051": "open: findings source-key aliases",
+    "1052": "resolved: missing SEC URL-row quote on finding 12382",
+    "1064": "open: compound finding targets can auto-create analytical entity rows that require explicit exclusion from legal-entity lineage"
+  },
+  "reports": [
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-report.md",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-legal-lineage-timeline.csv",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-registry-status-matrix.csv",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-officer-role-address-matrix.csv",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-negative-log.md",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-source-db-manifest.json",
+    "2026-07-14-lead-57846-bi-incorporated-lineage-wave11-sha256.txt"
+  ],
+  "qa": {
+    "json_files_parsed": 20,
+    "csv_files_parsed": 3,
+    "html_files_parsed": 7,
+    "csv_dimensions": {
+      "officer-role-address-matrix": {
+        "data_rows": 17,
+        "columns": 8
+      },
+      "legal-lineage-timeline": {
+        "data_rows": 28,
+        "columns": 7
+      },
+      "registry-status-matrix": {
+        "data_rows": 9,
+        "columns": 10
+      }
+    },
+    "source_assertions": {
+      "colorado_entity_id": "19871356363",
+      "colorado_transaction_rows": 62,
+      "colorado_survivor_merger_rows": 5,
+      "sam_uei": "PKK6L9KLMYR5",
+      "sam_entity_start_date": "1978-09-28",
+      "sec_lineage_and_acquisition_phrases_found": true
+    },
+    "sqlite_quick_check": "ok",
+    "foreign_key_check_rows": 64,
+    "foreign_key_check_note": "Unchanged pre-existing repository baseline; no new task-scoped FK violations were introduced."
+  },
+  "auto_leads_run": false
+}

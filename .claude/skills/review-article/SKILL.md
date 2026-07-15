@@ -236,6 +236,10 @@ The skeptic pass checks that the article's argument is honest, not that it avoid
 - **Dramatic escalation**: narrative arc that amplifies beyond evidence gradient → **SHOULD FIX**
 - **Status inflation**: describing influence in terms that serve narrative over accuracy → **SHOULD FIX**
 
+#### Planted-Source / Deception Check
+
+For every claim resting on a single provenance chain or on an opposition-research, PR, or litigation artifact, verify that: (a) the article's language separates document authenticity from content truth; (b) the underlying finding or the article's caveats reflect a MOM/POP/MOSES/EVE pass; and (c) provenance-opaque aggregator material carries no more than `medium` weight. Any mismatch is a **BLOCKING** edit.
+
 **Not a problem in articles:**
 - Having a thesis or structural argument — that's the article's job
 - Drawing analytical conclusions from presented evidence — that's investigative journalism
@@ -254,6 +258,10 @@ Flag:
 - Claims stated as fact that have NO evidentiary support in the article → **BLOCKING**
 - Claims stated as fact where the evidence is thin (1 source, indirect) → **SHOULD FIX**
 - Missing confidence framing paragraph (brief statement of sources and epistemological stance before first evidentiary section) → **SHOULD FIX**
+
+#### Estimative-language consistency (blocking)
+
+Check every probability phrase against the cited findings' confidence tiers using the Kent mapping in `research/INVESTIGATIVE_METHODOLOGY.md`: `confirmed` = established/documented; `high` = almost certainly/very likely; `medium` = likely/probably; `low` = possibly/may; `unverified` = unconfirmed/alleged. Prose may not outrun the weakest confidence in its citation chain—for example, "almost certainly" is unsupported when any necessary link is `medium`. Flag every mismatch as a **BLOCKING** edit.
 
 **Not a problem**: An article that presents evidence and then draws a conclusion using assertion language. "The Golden Dome procurement structure produces a specific set of conditions" is an earned conclusion if the preceding sections document those conditions.
 

@@ -1,0 +1,28 @@
+{
+  "analysis_run_ids": {
+    "systemic_analysis": 101,
+    "timeline_analysis": 102
+  },
+  "as_of": "2026-07-14",
+  "independent_contexts": [
+    "GEO company political-activity disclosures",
+    "Florida recipient-side campaign-finance export",
+    "Georgia recipient-side PeachFile campaign-finance records",
+    "FEC payer-side GEO PAC Schedule B filings",
+    "official office and immigration-policy records",
+    "exact-matched USAspending ICE procurement actions from lead 57842"
+  ],
+  "lead_id": 59033,
+  "novelty_gate": {
+    "ach_required": false,
+    "distinct_falsifiable_causal_mechanism_identified": false,
+    "three_or_more_independent_contexts": true,
+    "reason": "The new evidence establishes reconciliation conventions, recipient identity, and timing, but no request, communication, decision path, procurement intervention, or other distinct causal mechanism."
+  },
+  "null_explanation": "Ordinary political giving, company/state/FEC reporting differences, and independently timed state policy and federal procurement activity remain compatible with the evidence.",
+  "hypothesis_created": false,
+  "premortem": {
+    "fastest_check": "Obtain original Florida reports/check identifiers and GEO internal contribution approval/check-register records, then test exact source period and duplicate treatment before interpreting any residual.",
+    "most_likely_error": "Treating source-coverage/category differences or temporal overlap as evidence of influence."
+  }
+}

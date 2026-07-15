@@ -138,22 +138,36 @@ For each potential pattern found, apply these filters:
 
 For each pattern that passes the novelty filter:
 
-**Create hypothesis (must include falsification criteria):**
+**ACH discipline (required competing set):** Choose a short slug naming the phenomenon. Register both the working hypothesis and its best innocent explanation as first-class competitors; each needs its own falsification criterion.
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "EMERGING PATTERN" \
     --pattern-type emerging_theme \
-    --description "WHAT: description. EVIDENCE: 3+ data points. WHY INTERESTING: what it implies. FALSIFICATION: What evidence would disprove this? What innocent explanation exists? What baseline comparison makes this notable (or not)?" \
+    --competition-group "short-phenomenon-slug" \
+    --description "WHAT: description. EVIDENCE: 3+ data points. WHY INTERESTING: what it implies. FALSIFICATION: What evidence would disprove this?" \
     --predicted-evidence "If this pattern is real, we should also find..." \
     --search-plan "1. Specific search command  2. Another specific search  3. Cross-reference check" \
     --originated-from "analysis:generate-hunches"
+
+uv run python tools/hypothesis_tracker.py add \
+    --title "INNOCENT EXPLANATION" --as-null \
+    --pattern-type emerging_theme --competition-group "short-phenomenon-slug" \
+    --description "Best innocent explanation. FALSIFICATION: What evidence would disprove this explanation?" \
+    --predicted-evidence "If innocent, expect..." --search-plan "Specific tests of H0" \
+    --originated-from "analysis:generate-hunches"
+
+# For every cited supporting or contradicting finding M, score it against EVERY hypothesis N in the group:
+uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-id M \
+    --assessment consistent|inconsistent|neutral|not_applicable --assessed-by "agent:generate-hunches"
+uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
 
-**Disconfirmation requirement:** Every hypothesis MUST include a falsification criterion — what would prove it wrong. Also include the best innocent explanation for the observed pattern. If you cannot articulate what would disprove the hypothesis, it is unfalsifiable and should not be recorded.
+Include the competition output in the report. Describe its verdict as **least evidence against**, never "most evidence for." If you cannot articulate what would disprove either hypothesis, do not record the set.
 
 **Create lead (only if hypothesis suggests specific new research):**
 ```bash
 uv run python tools/lead_tracker.py add \
+    --title "Hunch: PATTERN — investigate SPECIFICS" \
     --target "INVESTIGATION_TARGET" \
     --category connection \
     --priority medium \

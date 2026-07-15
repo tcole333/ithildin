@@ -18,7 +18,7 @@ Turn logged friction into verified fixes, deduplicated records, or linked infras
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 uv run python tools/methodology_tracker.py list \
-  --category friction --status open --limit 500 \
+  --category friction --status open --oldest-first --limit 500 \
   --output "$WORKDIR/open-friction.json"
 uv run python tools/methodology_tracker.py list \
   --category process_gap --status open --limit 500 \

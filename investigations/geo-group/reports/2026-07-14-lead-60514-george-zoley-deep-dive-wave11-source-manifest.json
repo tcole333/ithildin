@@ -1,0 +1,73 @@
+{
+  "run": "2026-07-14-lead-60514-george-zoley-deep-dive-wave11",
+  "profile_id": "geo-group",
+  "lead_id": 60514,
+  "canonical_identity": {
+    "entity_id": 4802,
+    "name": "George C. Zoley",
+    "alias_row_id": 225,
+    "alias": "George Zoley",
+    "preserved_duplicate_entity_id": 1313,
+    "duplicate_merged_or_deleted": false
+  },
+  "source_archive": "investigations/geo-group/sources/2026-07-14-lead-60514-george-zoley-deep-dive-wave11",
+  "primary_sources": [
+    {"ref": "SEC:0001193125-26-116014", "path": "sec/sec-geo-2026-def14a.html", "use": "identity, roles, ownership, compensation, retirement"},
+    {"ref": "SEC:0000950170-25-033575", "path": "sec/raw/2025-03-05-4-0000950170-25-033575.xml", "use": "restricted stock and tax surrender"},
+    {"ref": "SEC:0000950170-25-112540", "path": "sec/raw/2025-09-02-4-0000950170-25-112540.xml", "use": "completed August estate-planning program"},
+    {"ref": "SEC:0001193125-25-200204", "path": "sec/raw/2025-09-10-4-A-0001193125-25-200204.xml", "use": "corrected September 5 sale"},
+    {"ref": "SEC:0001193125-25-200213", "path": "sec/raw/2025-09-10-4-0001193125-25-200213.xml", "use": "completed September estate-planning program"},
+    {"ref": "SEC:0001193125-26-078710", "path": "sec/raw/2026-02-26-4-0001193125-26-078710.xml", "use": "250,000 restricted-share grant"},
+    {"ref": "SEC:0001193125-26-094556", "path": "sec/raw/2026-03-05-4-0001193125-26-094556.xml", "use": "vesting and withholding"},
+    {"ref": "SEC:0001193125-26-098830", "path": "sec/raw/2026-03-09-4-0001193125-26-098830.xml", "use": "200,000 award and withholding"},
+    {"ref": "SEC:0001193125-26-276155", "path": "sec/raw/2026-06-18-4-0001193125-26-276155.xml", "use": "three 100,000-share gifts and interest/control disclaimer"},
+    {"ref": "FL-SUNBIZ:George-Zoley-officers-2026-07-14", "path": "registry/registry-officers-george-zoley.json", "use": "22 exact officer rows; 16 active and 6 inactive"},
+    {"ref": "IRS990:27-4034030:2023", "path": "nonprofit/irs990-geo-group-foundation-officers.json", "use": "foundation president role"},
+    {"ref": "PBCPAO:06434729100170160:2025", "path": "property/pbcpao-parcel-06434729100170160.html", "use": "official owner names, sale, and valuation"},
+    {"ref": "RECAP:Novoa-DE231-5", "path": "court/novoa-de231-5-zoley-declaration.pdf", "use": "sworn corporate-role and government-meeting statements"},
+    {"ref": "USGPO:CHRG-116hhrg43192", "path": "political/congress-house-hearing-43192.pdf", "use": "official House testimony"}
+  ],
+  "control_sources": [
+    {"path": "controls/prior-fec-sha-check.txt", "use": "prior donor-ledger integrity control; 272/272 OK"}
+  ],
+  "findings": [
+    {"id": 13039, "thread_id": 111, "claim_type": "inference", "confidence": "medium"},
+    {"id": 13040, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13041, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13042, "thread_id": 111, "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13043, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13044, "thread_id": 111, "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13045, "thread_id": 111, "claim_type": "synthesis", "confidence": "medium"},
+    {"id": 13046, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13047, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13048, "thread_id": 111, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13049, "thread_id": 112, "claim_type": "direct_quote", "confidence": "confirmed"},
+    {"id": 13050, "thread_id": 112, "claim_type": "direct_quote", "confidence": "confirmed"}
+  ],
+  "entities_created": [5145, 5146, 5147, 5148, 5149, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158],
+  "roles_created": [2583, 2584, 2585, 2586, 2587, 2588, 2589, 2590, 2591, 2592, 2593, 2594, 2595, 2596, 2597, 2598, 2599, 2600, 2601, 2602, 2603, 2604, 2605, 2606, 2607, 2608, 2609, 2610, 2612],
+  "preexisting_role_control": 2579,
+  "connections_created": [],
+  "followup_leads_created": [],
+  "auto_leads_run": false,
+  "papercuts_logged": [1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1049],
+  "qa": {
+    "json_parse": "pass",
+    "csv_parse": "pass: coverage 17 rows; role/ownership 32 rows; timeline 13 rows",
+    "pdf_parse": "pass: Novoa declaration 5 pages; House hearing 142 pages",
+    "sqlite_quick_check": "ok",
+    "foreign_key_check_before": 64,
+    "foreign_key_check_after": 64,
+    "verified_findings": 12,
+    "missing_source_quotes": 0,
+    "registry_status_counts": {"active": 16, "inactive": 6},
+    "prior_fec_manifest": "272/272 OK"
+  },
+  "reports": [
+    "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-report.md",
+    "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-coverage-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-entity-role-ownership-matrix.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-transaction-compensation-timeline.csv",
+    "investigations/geo-group/reports/2026-07-14-lead-60514-george-zoley-deep-dive-wave11-negative-log.md"
+  ]
+}

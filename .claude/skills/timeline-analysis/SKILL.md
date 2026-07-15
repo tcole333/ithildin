@@ -145,22 +145,34 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2 \
     --type temporal --value "PATTERN_NAME" --created-by "agent:timeline-analysis"
 ```
 
-### 8. Generate Hypotheses
+### 8. Generate Hypotheses — ACH Discipline
 
-For unexplained timing correlations. Every hypothesis MUST include:
-1. A **falsification criterion** — what evidence would disprove this?
-2. The **best innocent explanation** — what's the most plausible non-coordination reason?
-3. A **search plan** that would test the hypothesis via Layer 1 research
+For each unexplained timing correlation, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "TEMPORAL HYPOTHESIS" \
     --pattern-type temporal \
-    --description "PATTERN observed in WINDOW. Involves: TARGETS. Correlation with: EVENT. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
+    --competition-group "short-phenomenon-slug" \
+    --description "PATTERN observed in WINDOW. Involves: TARGETS. Correlation with: EVENT. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "If coordinated, expect shared communication or intermediary" \
     --search-plan "1. Check email corpus for TARGETS in WINDOW  2. Check entity formations  3. Cross-ref financial records" \
     --originated-from "analysis:timeline-analysis"
+
+uv run python tools/hypothesis_tracker.py add \
+    --title "INNOCENT EXPLANATION" --as-null --pattern-type temporal \
+    --competition-group "short-phenomenon-slug" \
+    --description "Best non-coordination explanation. FALSIFICATION: [what would disprove H0]." \
+    --predicted-evidence "If innocent, expect..." --search-plan "Specific tests of H0" \
+    --originated-from "analysis:timeline-analysis"
+
+# Score every supporting or contradicting finding M against EVERY hypothesis N in the group:
+uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-id M \
+    --assessment consistent|inconsistent|neutral|not_applicable --assessed-by "agent:timeline-analysis"
+uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
+
+Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
 
 ### 8b. Create Research Leads from Hypotheses
 

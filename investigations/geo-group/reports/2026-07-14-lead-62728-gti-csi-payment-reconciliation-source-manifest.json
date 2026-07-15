@@ -1,0 +1,194 @@
+{
+  "profile": "geo-group",
+  "lead_id": 62728,
+  "created": "2026-07-14",
+  "purpose": "Primary-source manifest for a bounded reconciliation of CSI prime money, GTI subcontract forecasts, GEO revenue-recognition statements, and unavailable payment records.",
+  "archive_root": "investigations/geo-group/sources/2026-07-14-lead-62728",
+  "hash_manifest": "investigations/geo-group/sources/2026-07-14-lead-62728/sha256sums.txt",
+  "sources": [
+    {
+      "source": "SEC EDGAR",
+      "class": "primary company filing",
+      "urls": [
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312523213449/d599165dex992.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312523276064/d463245dex992.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312524042879/d791768dex992.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312524137288/d751772dex991.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312525058290/d889252dex991.htm",
+        "https://www.sec.gov/Archives/edgar/data/923796/000119312526047556/d88889dex991.htm"
+      ],
+      "local_paths": [
+        "sec/2023-08-15-EX-99.2-0001193125-23-213449-d599165dex992.htm",
+        "sec/2023-11-13-EX-99.2-0001193125-23-276064-d463245dex992.htm",
+        "sec/2024-02-22-EX-99.2-0001193125-24-042879-d791768dex992.htm",
+        "sec/2024-05-13-EX-99.1-0001193125-24-137288-d751772dex991.htm",
+        "sec/2025-03-20-EX-99.1-0001193125-25-058290-d889252dex991.htm",
+        "sec/2026-02-12-EX-99.1-0001193125-26-047556-d88889dex991.htm",
+        "sec/edgar-geo-filings-2023-2026.json",
+        "sec/edgar-air-operations-support-geo.json",
+        "sec/edgar-csi-aviation.json"
+      ],
+      "key_quotes": [
+        {
+          "date": "2023-08-15",
+          "quote": "Our GTI Transportation Division also recently entered into an emergency contract to provide air operations support for ICE, which is expected to generate up to approximately $16 million in revenues over a nine-month period, assuming the contract runs through its full term."
+        },
+        {
+          "date": "2023-11-13",
+          "quote": "Our third quarter results reflect an increase in our GTI secure transportation revenues. This increase was primarily driven by our new emergency contract to provide air operations in support for ICE."
+        },
+        {
+          "date": "2024-02-22",
+          "quote": "The increase in our secure transportation segment was primarily driven by our new contract to provide air operation support for ICE, which was activated in the third quarter of 2023."
+        },
+        {
+          "date": "2024-05-13",
+          "quote": "The new five-year contract is expected to generate approximately $25 million in annualized revenues for GEO."
+        },
+        {
+          "date": "2026-02-12",
+          "quote": "the support services that we provide under our ICE air transportation subcontract continued to steadily increase throughout 2025."
+        }
+      ],
+      "boundary": "Company statements are primary evidence of what GEO publicly represented, not independent proof of payment or cash collection."
+    },
+    {
+      "source": "USAspending advanced award search",
+      "class": "primary federal spending database",
+      "endpoint": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "documentation": "https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/search/spending_by_award.md",
+      "common_payload": {
+        "subawards": true,
+        "spending_level": "subawards",
+        "award_type_codes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "time_period": [
+          {
+            "start_date": "2023-01-01",
+            "end_date": "2026-07-14"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "filter": "recipient_search_text=GEO Transport, Inc.",
+          "local_path": "usaspending/usaspending-advanced-subaward-gti-name.json",
+          "rows": 0
+        },
+        {
+          "filter": "recipient_search_text=DFEKRCYPZD84",
+          "local_path": "usaspending/usaspending-advanced-subaward-gti-uei.json",
+          "rows": 0
+        },
+        {
+          "filter": "award_ids=70CDCR23FR0000035,70CDCR24FR0000024,70CDCR24FC0000003,70CDCR25FR0000022,70CDCR26FC0000001",
+          "local_path": "usaspending/usaspending-advanced-subaward-five-primes.json",
+          "rows": 0
+        }
+      ],
+      "boundary": "Structured reporting absence only; not proof that a subcontract or payment did not exist."
+    },
+    {
+      "source": "DHS released ICE Air procurement documents",
+      "class": "primary agency records",
+      "urls": [
+        "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24A00000001-Charter-Flight-BPA.pdf",
+        "https://www.dhs.gov/sites/default/files/2025-05/25_0423_cpo_ICE-Contract-70CDCR24FC0000003-Charter-Flight-Initial-Order.pdf"
+      ],
+      "local_paths": [
+        "dhs/70CDCR24A00000001-sow.pdf",
+        "dhs/70CDCR24A00000001-sow.txt",
+        "dhs/70CDCR24FC0000003-initial-order.pdf",
+        "dhs/70CDCR24FC0000003-initial-order.txt",
+        "dhs/dhs-invoice-subcontract-relevant.txt"
+      ],
+      "key_quotes": [
+        "The ICAT must be completed in its entirety in the established format and submitted including invoice supporting documentation.",
+        "Any invoice discrepancies must be corrected prior to final submission.",
+        "The Government will not reimburse the contractor for any costs invoiced that are not substantiated by receipt of payment (including payment receipts to subcontractors).",
+        "DSLA actual flight hour costs shall be invoiced based on actual flight time using a fixed flight hour rate (wet lease) to include ... security crew."
+      ],
+      "boundary": "The SOW establishes record architecture and contract requirements; it does not identify GTI in a particular invoice or prove a CSI-to-GTI payment."
+    },
+    {
+      "source": "CourtListener/RECAP",
+      "class": "primary court docket and filed administrative-record index",
+      "case": "Classic Air Charter, Inc. v. United States, No. 1:25-cv-00286 (Fed. Cl.)",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.uscfc.51624/gov.uscourts.uscfc.51624.28.0.pdf",
+      "local_paths": [
+        "courtlistener/classic-air-all-docs.json",
+        "courtlistener/classic-air-docket.json",
+        "courtlistener/classic-air-ecf28-ar-index.pdf",
+        "courtlistener/classic-air-ecf28-ar-index.txt",
+        "courtlistener/classic-air-ecf28-ar-index-relevant.txt",
+        "courtlistener/courtlistener-geo-transport-csi.json",
+        "courtlistener/courtlistener-geo-transport-subcontract-invoice.json",
+        "courtlistener/courtlistener-csi-subcontract-invoice.json"
+      ],
+      "coverage": "The public index inventories CSI quotes, a subcontractor memorandum, evaluations, responsibility documents, and the award. The administrative record is under protective order; no public GTI payment exhibit was found.",
+      "boundary": "Index is evidence of record categories only, not the content of sealed materials."
+    },
+    {
+      "source": "SAM public entity extract",
+      "class": "primary federal registration data",
+      "local_paths": [
+        "sam/sam-bulk-csi.json",
+        "sam/sam-bulk-gti.json"
+      ],
+      "entities": [
+        {
+          "name": "CSI AVIATION, INC",
+          "uei": "D5BNEHB3UL89",
+          "cage": "1HTW5"
+        },
+        {
+          "name": "GEO TRANSPORT, INC.",
+          "uei": "DFEKRCYPZD84",
+          "cage": "6PV86"
+        }
+      ],
+      "live_api_status": "HTTP 429 rate limit; not retried",
+      "boundary": "Entity identity only; no subcontract or payment term."
+    },
+    {
+      "source": "Florida UCC official search",
+      "class": "primary state filing index",
+      "url": "https://floridaucc.com/search",
+      "query": "OrganizationDebtorName exact/standard search for GEO TRANSPORT INC, all statuses",
+      "local_paths": [
+        "florida-ucc/fl-ucc-gti-exact-all.json",
+        "florida-ucc/201002996072.json",
+        "florida-ucc/201308765671.json",
+        "florida-ucc/201402100947.json",
+        "florida-ucc/202202734048.json",
+        "florida-ucc/202202763153.json",
+        "florida-ucc/202401045587.json",
+        "florida-ucc/202401048454.json"
+      ],
+      "result": "Seven filings; listed secured parties are Alter Domus, Ankura Trust, or Citizens Bank. CSI Aviation is not listed.",
+      "boundary": "General financing coverage only; no inference about subcontract payment or nonpayment."
+    }
+  ],
+  "discarded_or_excluded": [
+    {
+      "source": "tools/query_usaspending.py subawards generic wrapper output",
+      "reason": "Name and UEI filters returned the same unrelated 100-row corpus; wrapper did not provide reliable recipient-filtered coverage. Papercut 978 logged."
+    },
+    {
+      "source": "Florida UCC proximity search",
+      "reason": "Returned 400 noisy near-name rows; exact-name result was sufficient and controlling."
+    },
+    {
+      "source": "sealed Classic Air administrative-record documents",
+      "reason": "Not publicly accessible; only the public index is used."
+    },
+    {
+      "source": "HigherGov",
+      "reason": "Explicitly excluded from this task."
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "lead_id": 59037,
+  "profile": "geo-group",
+  "thread_id": 112,
+  "completed_through": "2026-07-14",
+  "status": "unreconciled_residuals_preserved",
+  "scope": "GEO company-reported corporate Federal/National Committees denominators for 2024 and 2025; employee-funded GEO PAC, individuals, state/local, 527, convention-host, and inaugural streams are separately classified",
+  "years": {
+    "2024": {
+      "company_reported_corporate_federal_national_committees_usd": 2150000,
+      "eligible_fec_recipient_reported_gross_usd": 2125000,
+      "eligible_fec_recipient_reported_refunds_usd": 0,
+      "eligible_fec_recipient_reported_net_usd": 2125000,
+      "reconciliation_delta_itemized_minus_company_usd": -25000,
+      "unresolved_company_residual_usd": 25000,
+      "itemized_coverage_percent": 98.83720930232558,
+      "unresolved_percent_of_company_denominator": 1.1627906976744187,
+      "eligible_transaction_count": 13,
+      "eligible_recipient_count": 5,
+      "donor_legal_entities": [
+        "GEO ACQUISITION II INC",
+        "GEO ACQUISITION II INC.",
+        "GEO ACQUISTION II INC."
+      ],
+      "recipient_totals_usd": {
+        "C00825851|MAKE AMERICA GREAT AGAIN INC.": 1000000,
+        "C00504530|CLF": 450000,
+        "C00571703|SLF PAC": 400000,
+        "C00867036|RIGHT FOR AMERICA": 250000,
+        "C00879072|OKLAHOMA VICTORY COMMITTEE": 25000
+      },
+      "recipient_filing_classification_totals_usd": {
+        "federal_ie_only_committee_contribution_or_receipt_lines": 1675000,
+        "federal_hybrid_pac_non_contribution_account_line_17": 450000
+      },
+      "bucket_tests": {
+        "all_included_recipients_are_fec_registered_federal_committees": true,
+        "included_state_or_local_committees": 0,
+        "included_irs_527_only_organizations": 0,
+        "included_inaugural_donations": 0,
+        "included_convention_host_form_4_donations": 0
+      },
+      "result": "The primary recipient filings leave $25,000 of GEO's company-reported denominator unitemized. No recipient, refund, reversal, or lawful reclassification was found that closes the gap."
+    },
+    "2025": {
+      "company_reported_corporate_federal_national_committees_usd": 1575000,
+      "eligible_fec_recipient_reported_gross_usd": 1665000,
+      "eligible_fec_recipient_reported_refunds_usd": 0,
+      "eligible_fec_recipient_reported_net_usd": 1665000,
+      "reconciliation_delta_itemized_minus_company_usd": 90000,
+      "unresolved_itemized_overrun_usd": 90000,
+      "itemized_coverage_percent": 105.71428571428571,
+      "unresolved_percent_of_company_denominator": 5.714285714285714,
+      "eligible_transaction_count": 10,
+      "eligible_recipient_count": 6,
+      "donor_legal_entities": [
+        "GEO ACQUISITION II INC.",
+        "GEO REENTRY SERVICES LLC",
+        "GEO REENTRY SERVICES"
+      ],
+      "recipient_totals_usd": {
+        "C00892471|MAGA INC.": 1000000,
+        "C00504530|CLF": 400000,
+        "C00571703|SLF PAC": 150000,
+        "C00841130|RESTORE OUR NATION (RON PAC)": 100000,
+        "C00893537|FIRST PRINCIPLES PAC": 5000,
+        "C00916924|CONSERVATIVE LEADERSHIP FOR FLORIDA": 10000
+      },
+      "clf_split_receipt_check": {
+        "2025-05-28": {
+          "amount_usd": 150,
+          "image_number": "202510279792025505",
+          "sub_id": "4121020251297765123",
+          "amendment_indicator": "N",
+          "memo": "NON CONTRIBUTION ACCOUNT"
+        },
+        "2025-06-11": {
+          "amount_usd": 149850,
+          "image_number": "202510279792025549",
+          "sub_id": "4121020251297765255",
+          "amendment_indicator": "N",
+          "memo": "NON CONTRIBUTION ACCOUNT"
+        },
+        "combined_usd": 150000,
+        "treatment": "Both are distinct positive recipient-filed receipts; neither is a refund, fee, or amendment reversal."
+      },
+      "recipient_filing_classification_totals_usd": {
+        "federal_ie_only_committee_contribution_lines": 160000,
+        "federal_hybrid_pac_non_contribution_or_non_federal_line_17": 1505000
+      },
+      "bucket_tests": {
+        "all_included_recipients_are_fec_registered_federal_committees": true,
+        "conservative_leadership_for_florida_fec_type": "Super PAC (Independent Expenditure-Only)",
+        "included_state_or_local_committees": 0,
+        "included_irs_527_only_organizations": 0,
+        "included_inaugural_donations": 0,
+        "included_convention_host_form_4_donations": 0
+      },
+      "result": "The primary recipient filings exceed GEO's company-reported denominator by $90,000. No exact GEO-named recipient refund, reversal, or non-federal recipient reclassification was found to net or move the excess."
+    }
+  },
+  "excluded_or_conflicted_records": [
+    {
+      "year": 2024,
+      "amount_usd": 1000,
+      "recipient": "TOM BARRETT FOR CONGRESS",
+      "reason": "Recipient abbreviated the donor as THE GEO GROUP, but GEO PAC Schedule B reports the corresponding check; employee-funded PAC stream."
+    },
+    {
+      "year": 2024,
+      "amount_usd": 25000,
+      "recipient": "ADVANCE THE SENATE",
+      "reason": "Recipient identifies contributor_id C00382150 and GEO PAC Schedule B reports the matching check; employee-funded PAC stream."
+    },
+    {
+      "year": 2024,
+      "amount_usd": 500000,
+      "recipient": "TRUMP VANCE INAUGURAL COMMITTEE, INC.",
+      "reason": "Form 13 labels donor THE GEO GROUP, INC. POLITICAL ACTION COMMITTEE; no matching GEO PAC Schedule B disbursement found. It is an inaugural donation, not a campaign contribution, and payer stream remains unresolved."
+    },
+    {
+      "year": 2025,
+      "amount_usd": 1000,
+      "recipient": "LANCE GOODEN FOR CONGRESS COMMITTEE",
+      "reason": "Two recipient API rows share one image; GEO PAC Schedule B reports one corresponding $1,000 check on the same date. Employee-funded PAC stream and API duplicate excluded."
+    },
+    {
+      "year": 2025,
+      "amount_usd": 250000,
+      "recipient": "AMERICAN LIBERTY FOUNDATION",
+      "reason": "Recipient line 17 labels donor THE GEO GROUP, INC. PAC, but no matching GEO PAC Schedule B disbursement was found. Payer stream remains unresolved and was not reassigned to corporate treasury."
+    }
+  ],
+  "separate_company_report_buckets": {
+    "2024_corporate_national_527_usd": 515000,
+    "2025_corporate_national_527_usd": 450000,
+    "named_527_organizations_both_years": [
+      "Republican Governors Association",
+      "Republican Attorneys General Association",
+      "GOPAC",
+      "Republican State Leadership Committee"
+    ],
+    "treatment": "Excluded from the corporate Federal/National Committees denominators because GEO reports 527 organizations as a separate row and does not publish per-recipient amounts."
+  },
+  "refund_test": {
+    "recipient_committee_ids": [
+      "C00504530",
+      "C00571703",
+      "C00825851",
+      "C00841130",
+      "C00867036",
+      "C00879072",
+      "C00892471",
+      "C00893537",
+      "C00916924"
+    ],
+    "exact_geo_named_schedule_b_refunds_found": 0,
+    "qualification": "Bounded negative result from recipient Schedule B searches; absence in searched records does not prove no off-ledger repayment or later correction."
+  },
+  "method_boundaries": [
+    "Recipient FEC filings establish what recipients reported, not GEO's internal payment-date accounting or an audited company ledger.",
+    "The ledger preserves filing-year transaction dates and processed amendments; it does not combine election-cycle aggregates across years.",
+    "No residual was forced by assigning a PAC-labeled, inaugural, state/local, 527, or unresolved payment to corporate treasury.",
+    "Federal filing classification describes the recipient's FEC line, memo, receipt type, and committee registration. It is not a final adjudication of source permissibility or federal-contractor law."
+  ]
+}

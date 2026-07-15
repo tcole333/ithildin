@@ -13,6 +13,7 @@ Tools for campaign finance, lobbying disclosures, foreign agent registrations, c
 | `query_fara.py` | efile.fara.gov bulk CSV | None | 5 req/10 sec | Registrants, foreign principals, short forms, document URLs |
 | `query_congress.py` | Congress.gov API (api.congress.gov) | CONGRESS_API_KEY (free) | 5,000/hour | Members, committees, nominations, committee reports, CRS |
 | `query_govinfo.py` | GovInfo / GPO (api.govinfo.gov) | GOVINFO_API_KEY (free, falls back to DEMO_KEY) | ~1,000/hour (DEMO_KEY) | Hearings (CHRG), committee reports (CRPT), GAO reports, CRS, bills |
+| `query_senate_finance.py` | U.S. Senate Finance Committee archive (finance.senate.gov) | None | 0.5 sec/request; at most 100 results | Committee releases, investigations, article text, primary-source attachments |
 | `ingest_propublica_disclosures.py` | ProPublica Trump Team Disclosures | None (web scrape) | 1 req/sec (polite) | 1,573 appointees, 3,196 documents, 116,699 assets |
 
 ## Subcommands and Examples
@@ -131,6 +132,26 @@ uv run python tools/query_govinfo.py ingest-search "Epstein" --collection CHRG -
 
 Available collections: `BILLS`, `CHRG` (hearings, 1997+), `CRPT` (committee reports), `GAOREPORTS`, `CPRT`, `CDOC`, `USCOURTS`.
 
+### `query_senate_finance.py` — Senate Finance Committee Archive
+
+```bash
+# Search the committee's indexed archive (bounded to 100 results)
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_senate_finance.py search "media-based ministries" \
+  --limit 20 --output "$WORKDIR/sfc-search.json"
+
+# Read one official release and list its primary-source attachments
+uv run python tools/query_senate_finance.py item \
+  /ranking-members-news/grassley-releases-review-of-tax-issues-raised-by-media-based-ministries \
+  --output "$WORKDIR/sfc-item.json"
+```
+
+Results include canonical `finance.senate.gov` URLs and stable evidence references
+such as `SENATE_FINANCE:ranking-members-news/<slug>` and
+`SENATE_FINANCE:download/<slug>`. The site search is relevance-ranked and may
+match OCR text inside historical PDFs, so review the returned title and snippet
+before treating a hit as responsive evidence.
+
 ### `ingest_propublica_disclosures.py` — Financial Disclosures
 
 ```bash
@@ -162,6 +183,7 @@ uv run python tools/ingest_propublica_disclosures.py stats
 | `query_fara.py` | None | Bulk CSV downloads, no auth. Rate limit: 5 req/10 sec. |
 | `query_congress.py` | `CONGRESS_API_KEY` | Free at [api.congress.gov/sign-up](https://api.congress.gov/sign-up/). Required. |
 | `query_govinfo.py` | `GOVINFO_API_KEY` | Free at [api.data.gov](https://api.data.gov/signup/). Falls back to `DEMO_KEY`. |
+| `query_senate_finance.py` | None | Official public committee archive; no account or key required. |
 | `ingest_propublica_disclosures.py` | None | Web scraping of ProPublica's SvelteKit app. Rate: 1 req/sec. |
 
 ## Known Quirks
@@ -171,6 +193,7 @@ uv run python tools/ingest_propublica_disclosures.py stats
 - **query_fara.py**: Requires two-step setup (`download` then `ingest`). CSV files are ISO-8859-1 encoded, not UTF-8. Data stored locally in investigation.db after ingest.
 - **query_congress.py**: Bill search and CRS search delegate to GovInfo (full-text search). Built-in 0.3s rate-limit delay between requests.
 - **query_govinfo.py**: The `/search` endpoint requires POST with JSON body (not GET). Collection filtering uses query string syntax: `"Deutsche Bank collection:CHRG"`. Built-in 0.5s rate-limit delay.
+- **query_senate_finance.py**: Reads only official `https://www.finance.senate.gov` HTML pages. Search is bounded to 100 results and the tool does not download attachments; use the returned official file URLs after reviewing the parent page.
 - **ingest_propublica_disclosures.py**: Parses SvelteKit's compact `__data.json` format with pointer-based node references. Cache stored at `/tmp/propublica-cache`. Covers Trump administration appointees (1,573 people, 116K assets).
 
 ## Skills That Use These Tools
