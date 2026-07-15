@@ -70,7 +70,7 @@ See existing wrappers for reference:
 - `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
 - `tools/query_doj.py` (SQLite + FTS5)
 - `tools/query_lmsband.py` (SQLite)
-- `tools/query_icij.py` (Neo4j)
+- `tools/query_icij.py` (official remote service; optional local Neo4j traversal)
 
 ### 5. Run Initial Investigation Search
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:

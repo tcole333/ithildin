@@ -239,10 +239,10 @@ def generate_report():
         **check_directory(PROJECT_ROOT / "datasets" / "epstein-archive" / "data" / "emails" / "ehud_barak_emails"),
     }
 
-    # Neo4j
-    sources["ICIJ Offshore Leaks"] = {
-        "description": "~800K offshore entities (Neo4j)",
-        "query_tool": "tools/query_icij.py",
+    # Optional local Neo4j for deeper/bulk graph traversal.
+    sources["ICIJ Local Neo4j (optional)"] = {
+        "description": "Optional local graph for depth > 1 and bulk Cypher",
+        "query_tool": "tools/query_icij.py --local",
         **check_neo4j(),
     }
 
@@ -643,10 +643,10 @@ def generate_report():
         sources["Congress.gov"]["status"] = "no_api_key"
         sources["Congress.gov"]["start_cmd"] = "export CONGRESS_API_KEY=<key> (free at https://api.congress.gov/sign-up/)"
 
-    # ICIJ Reconciliation API (no auth needed)
-    sources["ICIJ Reconciliation API"] = {
-        "description": "Match entity names against 810K+ offshore entities (no Neo4j needed)",
-        "query_tool": "tools/query_icij.py reconcile / reconcile-all",
+    # Primary ICIJ path: remote reconciliation plus public first-hop node pages.
+    sources["ICIJ Offshore Leaks"] = {
+        "description": "810K+ remote records with bounded first-hop graph (no Neo4j)",
+        "query_tool": "tools/query_icij.py search / entity / connections / officers",
         **check_api("ICIJ Reconcile", "https://offshoreleaks.icij.org/api/v1/reconcile"),
     }
 

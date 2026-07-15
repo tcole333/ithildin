@@ -196,10 +196,16 @@ uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --outp
 Record each nonprofit board position as a finding with `--type relationship --sources 990`.
 
 ### 4. ICIJ Offshore Cross-Reference
-If Neo4j is running:
+
+Use the official ICIJ remote service. Review reconciliation candidates, then
+use an exact numeric node ID for entity details or first-hop traversal:
+
 ```bash
-python tools/query_icij.py search "<NAME>"
-python tools/query_icij.py search "<KNOWN_ENTITY>"  # If associated companies known
+uv run python tools/query_icij.py search "<NAME>" --output "$WORKDIR/inv-icij-person.json"
+uv run python tools/query_icij.py search "<KNOWN_ENTITY>" --type Entity \
+  --output "$WORKDIR/inv-icij-entity.json"
+uv run python tools/query_icij.py connections <EXACT_NODE_ID> \
+  --output "$WORKDIR/inv-icij-connections.json"
 ```
 
 ### 5. Email Analysis (if applicable)

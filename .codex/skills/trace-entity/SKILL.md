@@ -73,10 +73,20 @@ ls research/entities/
 ```
 
 ### 2. ICIJ Offshore Leaks (Primary)
+
+Search the official remote service first. Review candidates and pass the exact
+numeric node ID to traversal commands so a fuzzy name cannot select an entity:
+
 ```bash
-python tools/query_icij.py search "<ENTITY>"
-python tools/query_icij.py officers "<ENTITY>"
-python tools/query_icij.py connections "<ENTITY>" --depth 2
+uv run python tools/query_icij.py search "<ENTITY>" --type Entity \
+  --output "$WORKDIR/trace-icij-search.json"
+uv run python tools/query_icij.py officers <EXACT_NODE_ID> \
+  --output "$WORKDIR/trace-icij-officers.json"
+uv run python tools/query_icij.py connections <EXACT_NODE_ID> \
+  --output "$WORKDIR/trace-icij-connections.json"
+# Optional local Neo4j for deeper traversal:
+uv run python tools/query_icij.py connections <EXACT_NODE_ID> --depth 2 --local \
+  --output "$WORKDIR/trace-icij-depth2.json"
 ```
 
 If matches found, trace the full graph:

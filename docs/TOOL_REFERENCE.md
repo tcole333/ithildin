@@ -1115,9 +1115,16 @@ python tools/query_aleph.py entity <id>
 python tools/query_aleph.py expand <id>
 ```
 
-### ICIJ Offshore Leaks (Neo4j, needs `./scripts/start_icij_db.sh`)
+### ICIJ Offshore Leaks (official remote API/pages; no auth)
 ```bash
-python tools/query_icij.py search "QUERY"
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_icij.py search "QUERY" --output "$WORKDIR/icij-search.json"
+uv run python tools/query_icij.py entity NODE_ID --output "$WORKDIR/icij-entity.json"
+uv run python tools/query_icij.py connections NODE_ID --output "$WORKDIR/icij-connections.json"
+uv run python tools/query_icij.py officers NODE_ID --output "$WORKDIR/icij-officers.json"
+# Optional local Neo4j for deeper traversal only:
+uv run python tools/query_icij.py connections NODE_ID --depth 2 --local \
+  --output "$WORKDIR/icij-connections-depth2.json"
 ```
 
 ## External APIs

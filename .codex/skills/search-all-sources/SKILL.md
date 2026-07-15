@@ -87,9 +87,12 @@ python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/sear
 python tools/query_gdelt.py context "<QUERY>" --timespan 1w --limit 20 --output $WORKDIR/search-gdelt-ctx.json
 ```
 
-If ICIJ Neo4j is running:
+Search the official ICIJ remote service; local Neo4j is only needed for graph
+depth greater than one:
+
 ```bash
-python tools/query_icij.py search "<QUERY>"
+uv run python tools/query_icij.py search "<QUERY>" \
+  --output "$WORKDIR/search-icij.json"
 ```
 
 ### 1b. Web & External API Sources
@@ -297,7 +300,7 @@ CourtListener: 1 hit
 990:          0 hits
 UCC:          0 hits
 GDELT:        12 hits (articles), 8 hits (context)
-ICIJ:         0 hits (not searched — Neo4j not running)
+ICIJ:         0 hits (official remote search completed)
 GLEIF:        2 hits (LEI records)
 UK CH:        0 hits (not searched — no API key)
 OpenSanctions: 1 hit (PEP match)
