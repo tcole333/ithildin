@@ -1,10 +1,15 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from scripts import build_geo_cy2025_ice_revenue_reconciliation as builder
 
 
 def test_external_output_dir_writes_complete_reconciliation(tmp_path):
+    if not builder.SOURCE_DIR.is_dir():
+        pytest.skip(f"GEO lead-62481 source archive not available at {builder.SOURCE_DIR}")
+
     outputs = builder.build(tmp_path)
 
     reconciliation = json.loads(outputs["reconciliation"].read_text())
