@@ -124,6 +124,7 @@ Auto-leads: `pending_triage -> open` (via `$triage-leads`) or `-> dead_end`
 
 ### Conventions
 - Always use `uv run python` to invoke tools (not bare `python`)
+- Lint changed Python files with `uv run ruff check <files>`; the full legacy tree is not yet lint-clean.
 - Always use `--output FILE` for search results. **Session isolation**: `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`, all temp files in `$WORKDIR/`
 - **Shell-safe evidence text**: zsh expands dollar-prefixed values inside double-quoted arguments before Python sees them. For tracker summaries, details, quotes, and notes containing currency, use a structured file/input mode when available or a properly escaped single-quoted argument; verify the persisted text before continuing.
 - In zsh, `status` is a reserved read-only parameter. Capture command results with a different name such as `exit_code=$?`.

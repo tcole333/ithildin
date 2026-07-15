@@ -18,7 +18,6 @@ Usage:
 """
 
 import argparse
-import json
 import os
 import re
 import sqlite3
@@ -2447,7 +2446,7 @@ def main():
     add_output_args(stale_p)
 
     # recover-stale — reset stale leads to open
-    recover_p = subparsers.add_parser("recover-stale", help="Reset stale leads to open")
+    subparsers.add_parser("recover-stale", help="Reset stale leads to open")
 
     # triage-log — review triage decisions
     tlog_p = subparsers.add_parser("triage-log", help="Review triage decisions (dead-ends and promotions)")
@@ -2477,7 +2476,7 @@ def main():
     thread_add_p = thread_sub.add_parser("add", help="Create a thread")
     thread_add_p.add_argument("--title", required=True)
     thread_add_p.add_argument("--description")
-    thread_seed_p = thread_sub.add_parser("seed", help="Seed initial investigation threads")
+    thread_sub.add_parser("seed", help="Seed initial investigation threads")
 
     args = parser.parse_args()
 
@@ -2623,15 +2622,15 @@ def main():
             print(f"Total connections: {stats['total_connections']}")
 
             if stats.get("leads_by_status"):
-                print(f"\nLeads by status:")
+                print("\nLeads by status:")
                 for s, c in sorted(stats["leads_by_status"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {s or '(none)'}: {c}")
             if stats.get("open_by_priority"):
-                print(f"\nOpen/in-progress by priority:")
+                print("\nOpen/in-progress by priority:")
                 for p, c in sorted(stats["open_by_priority"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {p or '(none)'}: {c}")
             if stats.get("leads_by_category"):
-                print(f"\nLeads by category:")
+                print("\nLeads by category:")
                 for cat, c in sorted(stats["leads_by_category"].items(), key=lambda x: (x[0] is None, x[0])):
                     print(f"  {cat or '(none)'}: {c}")
 
@@ -2653,14 +2652,14 @@ def main():
             if stats.get('stale_leads', 0) > 0:
                 queues.append(f"{stats['stale_leads']} stale leads (lease expired) → recover-stale")
             if queues:
-                print(f"\nQueues:")
+                print("\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
 
             if args.session_stats:
                 sessions = get_session_stats(limit=10)
                 if sessions:
-                    print(f"\nRecent session performance:")
+                    print("\nRecent session performance:")
                     print(f"  {'ID':>5} {'Agent':<20} {'Skill':<20} {'F':>3} {'C':>3} {'L':>3} {'R':>3}")
                     for s in sessions:
                         print(f"  {s['id']:>5} {(s['agent_id'] or '?')[:20]:<20} {(s['skill_invoked'] or '?')[:20]:<20} "
@@ -2734,7 +2733,7 @@ def main():
                     if r.get('triage_rationale'):
                         print(f"        rationale: {r['triage_rationale']}")
                     else:
-                        print(f"        rationale: (MISSING)")
+                        print("        rationale: (MISSING)")
                     print(f"        triaged_by={r.get('triaged_by') or '?'}  at={r.get('triaged_at') or '?'}")
                     print()
 

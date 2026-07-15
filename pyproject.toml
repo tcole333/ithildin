@@ -26,3 +26,8 @@ markers = [
   "live_data: tests that require live/local large data stores",
   "slow: slower-running tests",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.21",
+]
