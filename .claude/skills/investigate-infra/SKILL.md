@@ -37,7 +37,12 @@ Strip the abstractions. At every step ask:
 
 This is defamiliarization applied to infrastructure. The educated eye sees "a website." The unseeing eye sees a certificate issued 3 days before the entity was publicly announced, served from a Google Cloud instance in a region inconsistent with the stated business location, with a CSP header that whitelists an analytics endpoint belonging to a different company entirely.
 
-**Negative results are primary intelligence.** The absence of expected infrastructure is often more revealing than its presence. A billion-dollar fund with a single-page Squarespace site. A "technology company" with no GitHub presence. A domain registered in 2015 that first resolves in 2019. These gaps are evidence.
+**Negative results are coverage observations, not automatic proof of absence.**
+They can be revealing, but record the exact source/query, observation time,
+result cap or pagination, known coverage limits, and plausible alternatives. A
+bounded Shodan, crt.sh, URLScan, or Wayback query supports “this search returned
+none,” not “the infrastructure does not exist.” Make a definitive absence claim
+only when an authoritative source's coverage is demonstrably complete.
 
 ## Process
 
@@ -250,15 +255,20 @@ uv run python tools/findings_tracker.py search "<IP_ADDRESS>" --output $WORKDIR/
 Infrastructure findings are first-class intelligence:
 
 ```bash
-# Record infrastructure mapping
+# Record each discrete primary observation separately when its exact source row
+# supports the whole claim. Then record the cross-source conclusion as synthesis.
 uv run python tools/findings_tracker.py add \
     --target "<TARGET>" \
     --type digital \
     --summary "Infrastructure: <DOMAIN> resolves to <IP> on <PROVIDER>, cert issued <DATE>, CSP reveals <VENDORS>" \
-    --evidence "<SHODAN_URL_OR_CERT_HASH>" \
-    --claim-type direct_quote \
-    --source-quote "Shodan:host <IP> shows port 443 with CN=<DOMAIN>, org=<ORG>" \
-    --confidence confirmed
+    --detail "Cross-source conclusion from DNS, certificate, and HTTP observations" \
+    --evidence "<DNS_EVIDENCE_REF>" "<CERT_EVIDENCE_REF>" "<HTTP_EVIDENCE_REF>" \
+    --claim-type synthesis \
+    --source-quote "<DNS_EVIDENCE_REF>:<EXACT_DNS_ROW>" \
+    --source-quote "<CERT_EVIDENCE_REF>:<EXACT_CERT_ROW>" \
+    --source-quote "<HTTP_EVIDENCE_REF>:<EXACT_HTTP_HEADER>" \
+    --sources shodan crtsh web \
+    --confidence medium
 
 # Record infrastructure connections
 uv run python tools/findings_tracker.py connect \
@@ -337,62 +347,62 @@ Paid plan has 99 query credits. Use them wisely — check `info` first.
 
 ```bash
 # Organization search
-uv run python tools/query_shodan.py search "org:\"<NAME>\""
+uv run python tools/query_shodan.py search "org:\"<NAME>\"" --output "$WORKDIR/cheat-shodan-org.json"
 
 # SSL certificate search
-uv run python tools/query_shodan.py search "ssl:\"<DOMAIN>\""
-uv run python tools/query_shodan.py search "ssl.cert.subject.O:\"<ORG>\""
-uv run python tools/query_shodan.py search "ssl.cert.subject.CN:\"<CN>\""
+uv run python tools/query_shodan.py search "ssl:\"<DOMAIN>\"" --output "$WORKDIR/cheat-shodan-ssl-domain.json"
+uv run python tools/query_shodan.py search "ssl.cert.subject.O:\"<ORG>\"" --output "$WORKDIR/cheat-shodan-ssl-org.json"
+uv run python tools/query_shodan.py search "ssl.cert.subject.CN:\"<CN>\"" --output "$WORKDIR/cheat-shodan-ssl-cn.json"
 
 # HTTP content/header search
-uv run python tools/query_shodan.py search "http.title:\"<TITLE>\""
-uv run python tools/query_shodan.py search "http.html:\"<STRING>\""
-uv run python tools/query_shodan.py search "http.favicon.hash:<HASH>"
+uv run python tools/query_shodan.py search "http.title:\"<TITLE>\"" --output "$WORKDIR/cheat-shodan-title.json"
+uv run python tools/query_shodan.py search "http.html:\"<STRING>\"" --output "$WORKDIR/cheat-shodan-html.json"
+uv run python tools/query_shodan.py search "http.favicon.hash:<HASH>" --output "$WORKDIR/cheat-shodan-favicon.json"
 
 # Technology-specific
-uv run python tools/query_shodan.py search "product:\"<PRODUCT>\" org:\"<ORG>\""
-uv run python tools/query_shodan.py search "port:<PORT> org:\"<ORG>\""
+uv run python tools/query_shodan.py search "product:\"<PRODUCT>\" org:\"<ORG>\"" --output "$WORKDIR/cheat-shodan-product.json"
+uv run python tools/query_shodan.py search "port:<PORT> org:\"<ORG>\"" --output "$WORKDIR/cheat-shodan-port.json"
 
 # Network range
-uv run python tools/query_shodan.py search "net:<CIDR>"
-uv run python tools/query_shodan.py search "asn:AS<NUMBER>"
+uv run python tools/query_shodan.py search "net:<CIDR>" --output "$WORKDIR/cheat-shodan-net.json"
+uv run python tools/query_shodan.py search "asn:AS<NUMBER>" --output "$WORKDIR/cheat-shodan-asn.json"
 
 # Count-only (saves credits)
-uv run python tools/query_shodan.py search "org:\"<NAME>\"" --count-only --facets "port,country"
+uv run python tools/query_shodan.py search "org:\"<NAME>\"" --count-only --facets "port,country" --output "$WORKDIR/cheat-shodan-count.json"
 ```
 
 ## crt.sh Cheatsheet
 
 ```bash
-uv run python tools/query_crtsh.py search <DOMAIN>              # All certs for domain
-uv run python tools/query_crtsh.py search <DOMAIN> --subdomains # Subdomain certs (wildcard)
-uv run python tools/query_crtsh.py search "Org Name" --org      # Certs by organization name
-uv run python tools/query_crtsh.py subdomains <DOMAIN>          # Unique subdomain list
-uv run python tools/query_crtsh.py timeline <DOMAIN>            # Issuance timeline + issuer stats
-uv run python tools/query_crtsh.py cert <ID>                    # Specific cert by crt.sh ID
+uv run python tools/query_crtsh.py search <DOMAIN> --output "$WORKDIR/cheat-crtsh-domain.json"
+uv run python tools/query_crtsh.py search <DOMAIN> --subdomains --output "$WORKDIR/cheat-crtsh-wildcards.json"
+uv run python tools/query_crtsh.py search "Org Name" --org --output "$WORKDIR/cheat-crtsh-org.json"
+uv run python tools/query_crtsh.py subdomains <DOMAIN> --output "$WORKDIR/cheat-crtsh-subdomains.json"
+uv run python tools/query_crtsh.py timeline <DOMAIN> --output "$WORKDIR/cheat-crtsh-timeline.json"
+uv run python tools/query_crtsh.py cert <ID> --output "$WORKDIR/cheat-crtsh-cert.json"
 ```
 
 ## Wayback Machine Cheatsheet
 
 ```bash
-uv run python tools/query_wayback.py first <DOMAIN>                              # First known capture
-uv run python tools/query_wayback.py timeline <DOMAIN> --monthly                 # Capture frequency
-uv run python tools/query_wayback.py snapshots <DOMAIN> --from 2019 --to 2020   # Filtered snapshots
-uv run python tools/query_wayback.py snapshots "*.<DOMAIN>" --subdomains         # All subdomains
-uv run python tools/query_wayback.py diff <DOMAIN> --from 20190101 --to 20200101 # Unique content versions
-uv run python tools/query_wayback.py fetch <URL> --timestamp 20190715            # Retrieve archived page
+uv run python tools/query_wayback.py first <DOMAIN> --output "$WORKDIR/cheat-wayback-first.json"
+uv run python tools/query_wayback.py timeline <DOMAIN> --monthly --output "$WORKDIR/cheat-wayback-timeline.json"
+uv run python tools/query_wayback.py snapshots <DOMAIN> --from 2019 --to 2020 --output "$WORKDIR/cheat-wayback-snapshots.json"
+uv run python tools/query_wayback.py snapshots "*.<DOMAIN>" --subdomains --output "$WORKDIR/cheat-wayback-subdomains.json"
+uv run python tools/query_wayback.py diff <DOMAIN> --from 20190101 --to 20200101 --output "$WORKDIR/cheat-wayback-diff.json"
+uv run python tools/query_wayback.py fetch <URL> --timestamp 20190715 --output "$WORKDIR/cheat-wayback-fetch.json"
 ```
 
 ## URLScan.io Cheatsheet
 
 ```bash
-uv run python tools/query_urlscan.py search "domain:<DOMAIN>"                    # Domain scans
-uv run python tools/query_urlscan.py search "ip:<IP>"                            # IP scans
-uv run python tools/query_urlscan.py search "page.title:<TITLE>"                 # Title search
-uv run python tools/query_urlscan.py search "server:cloudflare AND domain:<D>"   # Combined filters
-uv run python tools/query_urlscan.py result <UUID>                               # Full scan details
-uv run python tools/query_urlscan.py technologies <UUID>                         # Detected tech stack
-uv run python tools/query_urlscan.py links <UUID>                                # All contacted domains/IPs
+uv run python tools/query_urlscan.py search "domain:<DOMAIN>" --output "$WORKDIR/cheat-urlscan-domain.json"
+uv run python tools/query_urlscan.py search "ip:<IP>" --output "$WORKDIR/cheat-urlscan-ip.json"
+uv run python tools/query_urlscan.py search "page.title:<TITLE>" --output "$WORKDIR/cheat-urlscan-title.json"
+uv run python tools/query_urlscan.py search "server:cloudflare AND domain:<D>" --output "$WORKDIR/cheat-urlscan-combined.json"
+uv run python tools/query_urlscan.py result <UUID> --output "$WORKDIR/cheat-urlscan-result.json"
+uv run python tools/query_urlscan.py technologies <UUID> --output "$WORKDIR/cheat-urlscan-tech.json"
+uv run python tools/query_urlscan.py links <UUID> --output "$WORKDIR/cheat-urlscan-links.json"
 ```
 
 ## Context Management
@@ -433,7 +443,9 @@ shodan_credits_used: [count]
 - [What two "separate" things turned out to be connected]
 
 ## Negative Results
-- [Expected infrastructure that wasn't found]
+| Source | Exact query + time | Cap/pages | Result | Coverage limits / alternatives | Supported conclusion |
+|---|---|---|---|---|---|
+| [source] | [query, UTC time] | [limit/pagination] | [bounded result] | [known gaps] | [weakest supported absence statement] |
 
 ## Follow-Up Leads
 - Lead #X: [description]
