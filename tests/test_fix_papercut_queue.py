@@ -191,6 +191,14 @@ def test_pursue_lead_specific_id_uses_supported_show_command():
     assert "lead_tracker.py search --id" not in skill
 
 
+def test_agent_guidance_warns_about_zsh_currency_and_status_parameter():
+    root = Path(__file__).parents[1]
+    for filename in ("AGENTS.md", "CLAUDE.md"):
+        guidance = (root / filename).read_text()
+        assert "zsh expands dollar-prefixed values" in guidance
+        assert "exit_code=$?" in guidance
+
+
 def test_fbi_search_treats_email_punctuation_as_literal(tmp_path, monkeypatch):
     from tools import ingest_fbi_files
 
