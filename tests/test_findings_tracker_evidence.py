@@ -58,6 +58,22 @@ def test_source_quote_parser_preserves_colons_in_canonical_ref():
     }
 
 
+def test_source_quote_parser_rejects_duplicate_quote_for_same_ref():
+    evidence = ["COURTLISTENER:primary-record"]
+
+    with pytest.raises(
+        ValueError,
+        match="Duplicate quote metadata for evidence 'COURTLISTENER:primary-record'",
+    ):
+        _parse_source_quote_args(
+            [
+                "COURTLISTENER:primary-record:first excerpt",
+                "COURTLISTENER:primary-record:second excerpt",
+            ],
+            evidence,
+        )
+
+
 def test_normalize_event_date_populates_iso_and_precision():
     assert _normalize_event_date("2010-12-22") == ("2010-12-22", "day")
     assert _normalize_event_date(None) == (None, None)

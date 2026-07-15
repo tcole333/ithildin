@@ -451,10 +451,19 @@ def _parse_evidence_field_args(values, evidence_ids, field_name):
     for value in values or []:
         ref = next((item for item in evidence_ids if value.startswith(f"{item}:")), None)
         if ref is not None:
-            parsed[ref] = {field_name: value[len(ref) + 1:]}
+            field_value = value[len(ref) + 1:]
         elif ":" in value:
             fallback_ref, field_value = value.split(":", 1)
-            parsed[fallback_ref] = {field_name: field_value}
+            ref = fallback_ref
+        else:
+            continue
+        if ref in parsed:
+            raise ValueError(
+                f"Duplicate {field_name} metadata for evidence '{ref}'. "
+                "Each --evidence reference stores one value per metadata field; "
+                "combine the excerpts explicitly or use separate evidence refs."
+            )
+        parsed[ref] = {field_name: field_value}
     return parsed
 
 
