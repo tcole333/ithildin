@@ -196,6 +196,7 @@ class CourtListenerClient:
         endpoint: str,
         params: Optional[dict] = None,
         max_results: Optional[int] = None,
+        retries: int = 3,
     ) -> Iterator[dict]:
         """
         Paginate through API results.
@@ -204,6 +205,8 @@ class CourtListenerClient:
             endpoint: API endpoint
             params: Query parameters
             max_results: Maximum results to return
+            retries: Request attempts per page. Slow endpoints can lower this
+                to keep the overall command within a bounded wait.
 
         Yields:
             Individual result objects
@@ -212,7 +215,7 @@ class CourtListenerClient:
         count = 0
 
         while True:
-            data = self._request("GET", endpoint, params)
+            data = self._request("GET", endpoint, params, retries=retries)
 
             for result in data.get("results", []):
                 yield result
@@ -645,7 +648,14 @@ class CourtListenerClient:
             params["district"] = district
         if class_action is not None:
             params["class_action"] = str(class_action).lower()
-        return list(self._paginate("fjc-integrated-database/", params, max_results))
+        # FJC queries can consume the full per-request timeout. Do not multiply
+        # that wait with the generic three-attempt retry policy: callers can
+        # retry deliberately with a narrower query after one bounded attempt.
+        return list(
+            self._paginate(
+                "fjc-integrated-database/", params, max_results, retries=1
+            )
+        )
 
     # =========================================================================
     # Audio / Oral Arguments
