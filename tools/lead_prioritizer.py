@@ -16,7 +16,6 @@ Usage:
 
 import argparse
 import json
-import sqlite3
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -68,9 +67,18 @@ def _get_source_coverage(db):
     """).fetchall()
     coverage = defaultdict(set)
     for r in rows:
-        if r["source_datasets"]:
-            for src in r["source_datasets"].split(","):
-                coverage[r["target_name"]].add(src.strip())
+        raw = r["source_datasets"]
+        if not raw:
+            continue
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            parsed = None
+        tokens = parsed if isinstance(parsed, list) else str(raw).split(",")
+        for src in tokens:
+            src = str(src).strip()
+            if src:
+                coverage[r["target_name"]].add(src)
     return coverage
 
 
@@ -93,7 +101,7 @@ def _get_upstream_references(db):
     """).fetchall()
 
     ref_count = defaultdict(int)
-    target_names = {l["target_name"] for l in leads if l["target_name"]}
+    target_names = {row["target_name"] for row in leads if row["target_name"]}
 
     for name in target_names:
         # Count other leads that mention this name
@@ -232,8 +240,8 @@ def cluster_leads(db, top=20):
 
     # Group by target_name
     groups = defaultdict(list)
-    for l in leads:
-        groups[l["target_name"]].append(dict(l))
+    for row in leads:
+        groups[row["target_name"]].append(dict(row))
 
     # Sort by cluster size
     clusters = []
@@ -243,7 +251,7 @@ def cluster_leads(db, top=20):
                 "target": target,
                 "lead_count": len(cluster_leads),
                 "leads": cluster_leads,
-                "categories": list({l["category"] for l in cluster_leads if l.get("category")}),
+                "categories": list({row["category"] for row in cluster_leads if row.get("category")}),
             })
 
     return clusters[:top]
@@ -319,7 +327,7 @@ def main():
         print(f"  Target: {target}")
         print(f"  Priority: {lead['priority']} | Thread: {lead['thread_id']}")
         print(f"\n  Total Score: {score:.4f}")
-        print(f"\n  Breakdown:")
+        print("\n  Breakdown:")
         weights = {
             "connectivity": 0.25, "coverage_gap": 0.20, "source_diversity": 0.15,
             "thread_balance": 0.15, "upstream_value": 0.15, "priority_bonus": 0.10,
@@ -333,7 +341,7 @@ def main():
         degree = connectivity.get(target, 0)
         sources = source_coverage.get(target, set())
         refs = upstream_refs.get(target, 0)
-        print(f"\n  Context:")
+        print("\n  Context:")
         print(f"    Findings: {findings} | Connections: {degree} | Sources: {len(sources)}")
         print(f"    Referenced by {refs} other leads")
 
@@ -341,13 +349,13 @@ def main():
         db = get_db()
         clusters = cluster_leads(db, top=args.top)
         db.close()
-        if write_output(clusters, args, summary=f"lead clusters"):
+        if write_output(clusters, args, summary="lead clusters"):
             return
         print(f"\nLead Clusters ({len(clusters)} targets with 2+ leads):")
         for c in clusters:
             print(f"\n  {c['target']} ({c['lead_count']} leads) — categories: {', '.join(c['categories'])}")
-            for l in c["leads"][:5]:
-                print(f"    #{l['id']}: {l['title'][:60]}")
+            for item in c["leads"][:5]:
+                print(f"    #{item['id']}: {item['title'][:60]}")
             if len(c["leads"]) > 5:
                 print(f"    ... +{len(c['leads']) - 5} more")
 
