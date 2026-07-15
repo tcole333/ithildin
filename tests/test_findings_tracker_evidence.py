@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 
 import pytest
 
@@ -72,6 +73,20 @@ def test_source_quote_parser_rejects_duplicate_quote_for_same_ref():
             ],
             evidence,
         )
+
+
+def test_correct_help_lists_source_datasets_and_json_value_format(
+    monkeypatch, capsys
+):
+    monkeypatch.setattr(sys, "argv", ["findings_tracker.py", "correct", "--help"])
+
+    with pytest.raises(SystemExit) as exc:
+        findings_tracker.main()
+
+    assert exc.value.code == 0
+    help_text = capsys.readouterr().out
+    assert "source_datasets" in help_text
+    assert "JSON array" in help_text
 
 
 def test_normalize_event_date_populates_iso_and_precision():

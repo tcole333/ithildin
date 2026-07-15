@@ -2695,9 +2695,17 @@ def main():
     # correct
     correct_p = subparsers.add_parser("correct", help="Correct a field with audit trail")
     correct_p.add_argument("id", type=int)
-    correct_p.add_argument("--field", "-f", required=True,
-                           help="Field to correct (summary, detail, target_name, date_of_event, etc.)")
-    correct_p.add_argument("--value", "-v", required=True, help="New value")
+    correct_p.add_argument(
+        "--field", "-f", required=True, choices=sorted(ALLOWED_CORRECT_FIELDS),
+        help="Finding field to correct",
+    )
+    correct_p.add_argument(
+        "--value", "-v", required=True,
+        help=(
+            "New value; source_datasets requires a JSON array such as "
+            "'[\"courtlistener\"]'"
+        ),
+    )
     correct_p.add_argument("--reason", "-r", required=True, help="Why the correction was needed")
     correct_p.add_argument("--correction-type", choices=VALID_CORRECTION_TYPES, default="refinement")
     correct_p.add_argument("--by", default="human")
