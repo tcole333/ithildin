@@ -1639,31 +1639,53 @@ def add_lead(title, description=None, category=None, priority="medium",
         except Exception:
             pass
 
+    related_leads = list(dict.fromkeys(related_leads or []))
     db = get_db()
-    cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id))
-    lead_id = cursor.lastrowid
+    try:
+        if related_leads:
+            placeholders = ",".join("?" for _ in related_leads)
+            existing_ids = {
+                row[0]
+                for row in db.execute(
+                    f"SELECT id FROM leads WHERE id IN ({placeholders})",
+                    related_leads,
+                ).fetchall()
+            }
+            missing_ids = [lead_id for lead_id in related_leads if lead_id not in existing_ids]
+            if missing_ids:
+                raise ValueError(
+                    "Related lead IDs do not exist: "
+                    + ", ".join(str(lead_id) for lead_id in missing_ids)
+                    + ". --related accepts lead IDs, not finding IDs."
+                )
 
-    if evidence:
-        for ev in evidence:
-            ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
-            db.execute(
-                "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
-                (lead_id, ev_type, ev)
-            )
+        cursor = db.execute("""
+            INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id))
+        lead_id = cursor.lastrowid
 
-    if related_leads:
+        if evidence:
+            for ev in evidence:
+                ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
+                db.execute(
+                    "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
+                    (lead_id, ev_type, ev)
+                )
+
         for rel_id in related_leads:
             db.execute(
                 "INSERT OR IGNORE INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, 'related')",
                 (lead_id, rel_id)
             )
 
-    db.commit()
-    db.close()
-    return lead_id
+        db.commit()
+        return lead_id
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def set_lead_depth_tier(lead_id, depth_tier):
@@ -2321,7 +2343,10 @@ def main():
     add_p.add_argument("--source", "-s")
     add_p.add_argument("--target")
     add_p.add_argument("--evidence", "-e", nargs="+")
-    add_p.add_argument("--related", "-r", nargs="+", type=int)
+    add_p.add_argument(
+        "--related", "-r", nargs="+", type=int,
+        help="Existing lead IDs to relate to the new lead (not finding IDs)",
+    )
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
     add_p.add_argument("--recommended-skill", help="Recommended skill for this lead")
