@@ -34,6 +34,16 @@ Audit the investigation platform for gaps and create infra requests.
 
 ## Targeted Mode Process
 
+### 0. Session Setup
+
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+echo "Session workdir: $WORKDIR"
+```
+
+Use this directory for every probe/test artifact so parallel builders cannot
+overwrite one another.
+
 ### 1. Select Request
 
 ```bash
@@ -104,8 +114,8 @@ Follow existing tool patterns. Reference similar tools in `tools/` for structure
 <Source Name> integration for OSINT investigation.
 
 Usage:
-    python tools/query_<source>.py search "query"
-    python tools/query_<source>.py entity <id>
+    uv run python tools/query_<source>.py search "query"
+    uv run python tools/query_<source>.py entity <id>
 """
 import argparse
 import sys
@@ -137,27 +147,34 @@ if __name__ == "__main__":
 Run the tool against known targets to verify (use key_persons from the investigation profile):
 ```bash
 # Test basic search
-uv run python tools/query_<source>.py search "{TARGET}" --output /tmp/test-search.json
+uv run python tools/query_<source>.py search "{TARGET}" --output "$WORKDIR/test-search.json"
 
 # Test with known entities
-uv run python tools/query_<source>.py search "{TARGET}" --output /tmp/test-entity.json
+uv run python tools/query_<source>.py search "{TARGET}" --output "$WORKDIR/test-entity.json"
 
 # Verify output format
-uv run python -c "import json; d=json.load(open('/tmp/test-search.json')); print(len(d), type(d))"
+uv run python - "$WORKDIR/test-search.json" <<'PY'
+import json, sys
+d = json.load(open(sys.argv[1]))
+print(len(d), type(d))
+PY
 ```
 
 ### 5. Document and Complete
 
 Update documentation:
-1. Add tool to `CLAUDE.md` data sources section
-2. Add CLI examples to `docs/TOOL_REFERENCE.md`
-3. Update `memory/MEMORY.md` key tools table
+1. Add the tool to the relevant `docs/modules/*.md` source module and `docs/TOOL_REFERENCE.md`
+2. Update `CLAUDE.md` and `AGENTS.md` source inventories when the new source changes their overview
+3. Add its citation type to `web/src/lib/citations.ts`, or add one-off URL mappings to `web/src/data/source-urls.json`
+4. Update `tools/source_report.py` when the source has a health/readiness check
+5. Update every workflow skill that should call the tool in both `.claude` and `.codex` trees
+6. Update `memory/MEMORY.md` only when its durable key-tools summary is affected
 
 Complete the request:
 ```bash
 uv run python tools/infra_tracker.py complete <ID> \
   --tool-file "tools/query_<source>.py" \
-  --files-modified tools/query_<source>.py CLAUDE.md docs/TOOL_REFERENCE.md \
+  --files-modified tools/query_<source>.py docs/modules/<module>.md docs/TOOL_REFERENCE.md web/src/lib/citations.ts \
   --summary "Built <source> integration. Covers X records. No auth required."
 ```
 
@@ -178,7 +195,7 @@ Check for:
 
 ### 2. Check Priority Sources
 
-Review the priority sources list in `CLAUDE.md` under "Priority Sources (Not Yet Integrated)".
+Review the priority sources list in `CLAUDE.md` and `AGENTS.md` under "Priority Sources (Not Yet Integrated)".
 Check `memory/MEMORY.md` for the "Priority Sources to Add" section.
 
 ### 3. Search Log Analysis
@@ -252,12 +269,12 @@ Summarize what was found:
 3. **Evaluate**: Record results in infra_tracker
 4. **Build**: Write the tool only after confirming the endpoint
 5. **Test**: Verify against known targets
-6. **Document**: Update CLAUDE.md and TOOL_REFERENCE.md
+6. **Document**: Update the canonical module, tool reference, citations, source health, and affected skills
 
 If probing fails (403, paywall, requires registration), record the failure and reject or block the request. Do not write speculative code.
 
 ## Context Management
 
-- Use `--output /tmp/...` on all search commands
+- Use `--output "$WORKDIR/..."` on all search commands
 - Keep tool code focused — one source per tool file
 - Reuse `output_util.py` for consistent output handling
