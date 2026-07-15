@@ -65,6 +65,7 @@ uv run python tools/query_edgar.py sections PLTR --form 10-Q --section balance
 - `--sort date` and `--sort date-asc` are client-side sorts on the returned results.
 - `sections` command requires the `edgartools` package.
 - `read` previews 500 lines by default. Use repeatable `--find` for late-file matches or `--output` for the complete extracted text, including table footnotes.
+- `filings` follows the SEC submissions metadata into older history segments, newest first, only until it reaches `--limit`. Date filters skip segments whose published date range cannot match, and each submissions response is capped at 25 MB.
 - Direct filing retrieval uses declared SEC identity headers, bounded retries, and a 25 MB response limit. If an individual official Archive document returns 403, the tool makes one bounded attempt to extract that document from the accession's official complete-submission `.txt` file. It never uses this fallback for 429 rate-control responses or non-SEC hosts.
 
 ## financial_ratios.py — Ratio Analysis

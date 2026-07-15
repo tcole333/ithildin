@@ -31,6 +31,7 @@ _RESULT_COLLECTION_KEYS = frozenset({
     "entities",
     "exclusions",
     "foreign_principals",
+    "filings",
     "grants",
     "hits",
     "items",

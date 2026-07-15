@@ -10,6 +10,7 @@ from tools.output_util import substantive_result_count, write_output
     ("payload", "expected"),
     [
         ({"registrants": [], "foreign_principals": []}, 0),
+        ({"filings": [{"accession": "0001"}, {"accession": "0002"}]}, 2),
         ({"registrants": [{"id": 1}], "foreign_principals": [{"id": 2}]}, 2),
         ({"query": "missing", "entities": [], "exclusions": []}, 0),
         ({"entities": [{}], "officers": [{}, {}], "agents": [{}, {}, {}]}, 6),

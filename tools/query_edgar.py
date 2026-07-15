@@ -74,6 +74,7 @@ USER_AGENT = "OSINT-Research osint-research@proton.me"
 _last_request = 0.0
 MIN_INTERVAL = 0.11  # 10 req/sec max
 MAX_FILING_BYTES = 25 * 1024 * 1024
+MAX_SUBMISSIONS_BYTES = 25 * 1024 * 1024
 MAX_REQUEST_ATTEMPTS = 3
 _TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
 
@@ -219,6 +220,72 @@ def _filing_url(cik, adsh, doc_name=""):
     elif cik_clean and adsh:
         return f"https://www.sec.gov/Archives/edgar/data/{cik_clean}/{adsh_path}/"
     return ""
+
+
+def _submission_file_overlaps(file_info, start=None, end=None):
+    """Return whether an SEC submissions-history segment can match a date range."""
+    filing_from = file_info.get("filingFrom") or ""
+    filing_to = file_info.get("filingTo") or ""
+    if start and filing_to and filing_to < start:
+        return False
+    if end and filing_from and filing_from > end:
+        return False
+    return True
+
+
+def _append_filing_records(
+    records,
+    filings,
+    *,
+    cik,
+    form_filters,
+    start=None,
+    end=None,
+    limit=None,
+    seen_accessions=None,
+):
+    """Append matching rows from an SEC columnar filings object."""
+    forms = filings.get("form", [])
+    dates = filings.get("filingDate", [])
+    accessions = filings.get("accessionNumber", [])
+    primary_docs = filings.get("primaryDocument", [])
+    descriptions = filings.get("primaryDocDescription", [])
+    seen_accessions = seen_accessions if seen_accessions is not None else set()
+    examined = 0
+
+    for i, form in enumerate(forms):
+        if limit is not None and len(records) >= limit:
+            break
+        examined += 1
+        if form_filters and not any(
+            form == form_filter or form.startswith(form_filter)
+            for form_filter in form_filters
+        ):
+            continue
+
+        filing_date = dates[i] if i < len(dates) else "?"
+        if start and filing_date < start:
+            continue
+        if end and filing_date > end:
+            continue
+
+        accession = accessions[i] if i < len(accessions) else ""
+        if accession and accession in seen_accessions:
+            continue
+        if accession:
+            seen_accessions.add(accession)
+        primary_document = primary_docs[i] if i < len(primary_docs) else ""
+        description = descriptions[i] if i < len(descriptions) else ""
+        records.append({
+            "date": filing_date,
+            "form": form,
+            "accession": accession,
+            "primary_document": primary_document,
+            "description": description,
+            "url": _filing_url(cik, accession, primary_document),
+        })
+
+    return examined
 
 
 class _FilingHTMLTextExtractor(HTMLParser):
@@ -789,18 +856,13 @@ def cmd_filings(args):
     cik = args.cik.lstrip("0").zfill(10)
     url = f"{SUBMISSIONS_URL}/CIK{cik}.json"
 
-    data = _request(url)
+    data = _request(url, max_bytes=MAX_SUBMISSIONS_BYTES)
     if not data:
         return
 
     name = data.get("name", "?")
     cik_display = data.get("cik", "")
     recent = data.get("filings", {}).get("recent", {})
-    forms = recent.get("form", [])
-    dates = recent.get("filingDate", [])
-    accessions = recent.get("accessionNumber", [])
-    primary_docs = recent.get("primaryDocument", [])
-    descriptions = recent.get("primaryDocDescription", [])
 
     # Support comma-separated form types and prefix matching
     form_filters = []
@@ -808,32 +870,51 @@ def cmd_filings(args):
         form_filters = [f.strip() for f in args.form.split(",")]
 
     records = []
-    total_recent = len(forms)
-    for i in range(len(forms)):
-        form = forms[i] if i < len(forms) else "?"
-        if form_filters:
-            # Match exact or prefix (e.g., "DEF" matches "DEF 14A", "DEFA14A")
-            if not any(form == f or form.startswith(f) for f in form_filters):
-                continue
+    seen_accessions = set()
+    total_recent = len(recent.get("form", []))
+    _append_filing_records(
+        records,
+        recent,
+        cik=cik_display,
+        form_filters=form_filters,
+        start=args.start,
+        end=args.end,
+        seen_accessions=seen_accessions,
+    )
 
-        filing_date = dates[i] if i < len(dates) else "?"
-        if args.start and filing_date < args.start:
+    historical_files_fetched = 0
+    historical_filings_examined = 0
+    files = data.get("filings", {}).get("files", [])
+    files = sorted(
+        files,
+        key=lambda file_info: file_info.get("filingTo") or "",
+        reverse=True,
+    )
+    for file_info in files:
+        if len(records) >= args.limit:
+            break
+        if not _submission_file_overlaps(file_info, args.start, args.end):
             continue
-        if args.end and filing_date > args.end:
+        filename = file_info.get("name")
+        if not filename:
             continue
-
-        acc = accessions[i] if i < len(accessions) else ""
-        doc = primary_docs[i] if i < len(primary_docs) else ""
-        desc = descriptions[i] if i < len(descriptions) else ""
-        doc_url = _filing_url(cik_display, acc, doc)
-        records.append({
-            "date": filing_date,
-            "form": form,
-            "accession": acc,
-            "primary_document": doc,
-            "description": desc,
-            "url": doc_url,
-        })
+        historical = _request(
+            f"{SUBMISSIONS_URL}/{filename}",
+            max_bytes=MAX_SUBMISSIONS_BYTES,
+        )
+        if not historical:
+            break
+        historical_files_fetched += 1
+        historical_filings_examined += _append_filing_records(
+            records,
+            historical,
+            cik=cik_display,
+            form_filters=form_filters,
+            start=args.start,
+            end=args.end,
+            limit=args.limit,
+            seen_accessions=seen_accessions,
+        )
 
     data_out = {
         "company_name": name,
@@ -845,6 +926,8 @@ def cmd_filings(args):
             "limit": args.limit,
         },
         "total_recent_filings": total_recent,
+        "historical_files_fetched": historical_files_fetched,
+        "historical_filings_examined": historical_filings_examined,
         "matched_filings": len(records),
         "filings": records[:args.limit],
     }
@@ -871,7 +954,7 @@ def cmd_filings(args):
             print(f"    {filing['url']}")
         count += 1
 
-    print(f"\nShowing {count} filings" + (f" (of {len(records)} matched / {len(forms)} recent)" if not form_filters else f" (of {len(records)} matched)"))
+    print(f"\nShowing {count} filings" + (f" (of {len(records)} matched / {total_recent} recent)" if not form_filters else f" (of {len(records)} matched)"))
 
 
 def cmd_insider(args):
@@ -1343,7 +1426,7 @@ def main():
     add_output_args(p)
 
     # filings
-    p = sub.add_parser("filings", help="Get filings by CIK")
+    p = sub.add_parser("filings", help="Get recent and historical filings by CIK")
     p.add_argument("cik", help="CIK number")
     p.add_argument("--form", help="Filter by form type(s), comma-separated (e.g., 10-K,DEF)")
     p.add_argument("--limit", type=int, default=30)
