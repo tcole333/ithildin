@@ -1,0 +1,336 @@
+# Investigation Profile: Epstein-Gates-IPI
+
+name: "epstein-gates-ipi"
+
+primary_subject: "Epstein-Gates-IPI funding and information network"
+
+description: >
+  Forensic investigation of Jeffrey Epstein's intermediary role between the
+  Bill & Melinda Gates Foundation and the International Peace Institute (IPI),
+  including grant design, actual expenditures, field operations in Afghanistan,
+  Pakistan, Nigeria, and Somalia, information flows, and the program's proximity
+  to the CIA's 2013 decision and 2014 public pledge to stop using vaccination
+  programs or vaccine-derived genetic material for intelligence purposes.
+
+key_persons:
+  - "jeffrey epstein"
+  - "bill gates"
+  - "william h gates iii"
+  - "melinda gates"
+  - "terje rod-larsen"
+  - "terje rød-larsen"
+  - "mona juul"
+  - "boris nikolic"
+  - "robert rosen"
+  - "amy carter"
+  - "max gasteen"
+  - "paul facchini"
+  - "kumi kato"
+  - "apoorva mallya"
+  - "lawrence summers"
+  - "larry summers"
+  - "john brennan"
+  - "lisa monaco"
+  - "kathryn ruemmler"
+  - "kathy ruemmler"
+  - "neil eggleston"
+  - "shakil afridi"
+  - "laurie garrett"
+  - "michael klag"
+  - "ariane de rothschild"
+
+known_addresses:
+  "777 united nations plaza": "International Peace Institute headquarters, New York"
+  "500 fifth avenue north": "Bill & Melinda Gates Foundation headquarters, Seattle"
+  "9 east 71": "Jeffrey Epstein's New York residence"
+  "9 e 71": "Jeffrey Epstein's New York residence"
+  "457 madison": "Epstein-linked New York office cluster"
+
+threads:
+  - id: 1
+    name: "Intermediary Role and Program Control"
+    description: "How Epstein introduced, shaped, branded, negotiated, and monitored the Gates-IPI relationship while remaining outside public-facing materials"
+    targets:
+      - "jeffrey epstein"
+      - "terje rod-larsen"
+      - "bill gates"
+      - "robert rosen"
+      - "boris nikolic"
+    keywords:
+      - "strasbourg"
+      - "invaluable"
+      - "no reference.*gates"
+      - "name should not"
+      - "formal engagement"
+      - "follow.?up"
+
+  - id: 2
+    name: "Grant Ledger and Actual Expenditures"
+    description: "Proposal versions, executed agreements, amendments, disbursements, budget-to-actual schedules, invoices, consultants, and overhead allocation"
+    targets:
+      - "gates foundation"
+      - "international peace institute"
+      - "ipi"
+      - "opportunity fund"
+    keywords:
+      - "opp1100586"
+      - "opp1096058"
+      - "inv-007752"
+      - "budget"
+      - "invoice"
+      - "consultant"
+      - "disbursement"
+      - "general operating support"
+      - "progress report"
+      - "final report"
+
+  - id: 3
+    name: "Country Field Operations and Deliverables"
+    description: "Activities, local partners, travel, meetings, surveys, access mapping, conflict analysis, and outputs in Afghanistan, Pakistan, Nigeria, and Somalia"
+    targets:
+      - "afghanistan"
+      - "pakistan"
+      - "nigeria"
+      - "somalia"
+      - "nexus centre"
+      - "nexus center"
+    keywords:
+      - "polio eradication"
+      - "fieldwork"
+      - "field mission"
+      - "local partner"
+      - "representation"
+      - "survey"
+      - "access map"
+      - "militant"
+      - "taliban"
+      - "al.?shabaab"
+
+  - id: 4
+    name: "Information Flows and Sensitive Reporting"
+    description: "Who received raw assessments, operational updates, confidential reporting, and access to local or state contacts"
+    targets:
+      - "terje rod-larsen"
+      - "jeffrey epstein"
+      - "pakistan army"
+      - "pakistan intelligence"
+      - "gates foundation"
+    keywords:
+      - "confidential information"
+      - "upon request"
+      - "army contacts"
+      - "intelligence"
+      - "intermediar"
+      - "assurance"
+      - "situation assessment"
+
+  - id: 5
+    name: "CIA Vaccination Policy and White House Timeline"
+    description: "The CIA's fake vaccination operation, the August 2013 Brennan policy, the May 2014 Monaco disclosure, and whether White House Counsel or Kathryn Ruemmler had any documented role"
+    targets:
+      - "central intelligence agency"
+      - "cia"
+      - "john brennan"
+      - "lisa monaco"
+      - "kathryn ruemmler"
+      - "kathy ruemmler"
+      - "neil eggleston"
+      - "shakil afridi"
+    keywords:
+      - "vaccination.*intelligence"
+      - "operational use.*vaccination"
+      - "genetic material"
+      - "dna.*vaccin"
+      - "public health deans"
+      - "white house counsel"
+      - "august 2013"
+      - "may 16,? 2014"
+
+  - id: 6
+    name: "Institutional Funding Platform"
+    description: "Whether IPI functioned as a reusable, donor-facing financing, convening, field-access, and honorarium platform across Gates, Epstein, state, and other patron relationships"
+    targets:
+      - "international peace institute"
+      - "norwegian ministry of foreign affairs"
+      - "norad"
+      - "lawrence summers"
+      - "mongolia advisory board"
+      - "enhanced education"
+    keywords:
+      - "honorarium"
+      - "advisory board"
+      - "restricted grant"
+      - "cost allocation"
+      - "pass.?through"
+      - "donor"
+      - "ministry of foreign affairs"
+
+  - id: 7
+    name: "Comparative Routing and Leverage Model"
+    description: "Test the limited functional analogy to BCCI: private allocation, access, discretion, sensitive information, and deniable relationship infrastructure without assuming Epstein operated a bank or intelligence service"
+    targets:
+      - "bcci"
+      - "bank of credit and commerce international"
+      - "leon black"
+      - "josh harris"
+    keywords:
+      - "shadow program officer"
+      - "allocation.*access"
+      - "off.?books"
+      - "leverage"
+      - "restructur"
+      - "information asymmetry"
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary Epstein full-text corpus; use EFTA IDs as canonical references"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Parsed emails, entities, semantic triples, and co-occurrence relationships"
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
+
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Structured financial, flight, balance, and entity layers; text overlaps Kabasshouse"
+    commands: ["search", "entities", "file"]
+
+  - tool: "tools/ingest_epstein_20k.py"
+    name: "House Oversight Epstein Files"
+    description: "Distinct House Oversight release"
+    commands: ["search"]
+
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI release and named exhibits"
+    commands: ["search", "overlap"]
+
+  - tool: "tools/reporting_corpus.py"
+    name: "Epstein Reporting Knowledge Layer"
+    description: "Versioned reporting and attributed claims; not primary corroboration"
+    commands: ["search", "claims", "primary-gaps"]
+
+  - tool: "tools/government_release_corpus.py"
+    name: "DOJ and SEC Press Releases"
+    description: "Official agency statements"
+    commands: ["search", "show", "stats"]
+
+key_dates:
+  - date: "2011-07-11"
+    event: "Public reporting exposes the CIA-backed fake vaccination campaign used in the bin Laden hunt"
+    category: "media"
+  - date: "2013-01-06"
+    event: "Public-health school deans ask President Obama to pledge that health programs will not be used for intelligence"
+    category: "political"
+  - date: "2013-03-27"
+    event: "Gates hears IPI presentation in Strasbourg; later described by Gates staff as invaluable"
+    category: "operational"
+  - date: "2013-04-23"
+    event: "Robert Rosen says Gates plans to formalize an IPI engagement after the Strasbourg discussion"
+    category: "operational"
+  - date: "2013-09-04"
+    event: "IPI circulates five-year $20 million polio/security and Peace & Health proposal"
+    category: "financial"
+  - date: "2013-10-01"
+    event: "Approximate month of Gates Foundation $2.5 million IPI general-operating-support grant OPP1100586; exact execution date remains to be verified"
+    category: "financial"
+  - date: "2014-04-21"
+    event: "White House announces Neil Eggleston will replace departing White House Counsel Kathryn Ruemmler"
+    category: "political"
+  - date: "2014-05-16"
+    event: "Lisa Monaco tells public-health deans that CIA policy bars operational use of vaccination programs and vaccine-derived genetic material"
+    category: "political"
+  - date: "2014-05-19"
+    event: "CIA vaccination-cover prohibition becomes public through news reporting"
+    category: "media"
+  - date: "2014-05-30"
+    event: "Terje Rød-Larsen forwards Epstein a sensitive Pakistan operational update involving army contacts, intermediaries, and reception of the CIA policy"
+    category: "operational"
+  - date: "2014-10-23"
+    event: "Kathryn Ruemmler sends Epstein her draft statement withdrawing from attorney-general consideration and asks for his thoughts"
+    category: "political"
+  - date: "2015-01-08"
+    event: "Kathryn Ruemmler tells Epstein that John Brennan presented her a CIA Agency Medal that morning"
+    category: "milestone"
+
+seed_pillars:
+  - name: "Bill & Melinda Gates Foundation"
+    pillar_type: "philanthropy"
+    sub_type: "private_foundation"
+    status: "active"
+    founded: "2000"
+    jurisdiction: "Washington, United States"
+    significance: "Source of the grants and direct requester of political/security analysis and high-level access"
+
+  - name: "International Peace Institute"
+    pillar_type: "operations"
+    sub_type: "international_policy_nonprofit"
+    status: "active"
+    founded: "1970"
+    jurisdiction: "New York, United States"
+    significance: "Grant recipient, field-research platform, convener, and producer of public and confidential analysis"
+
+  - name: "Nexus Centre for Peace and Health"
+    pillar_type: "operations"
+    sub_type: "program_center"
+    status: "unknown"
+    founded: null
+    jurisdiction: "New York, United States"
+    significance: "IPI program vehicle for linking health access, security analysis, peacebuilding, and country fieldwork"
+
+  - name: "Central Intelligence Agency"
+    pillar_type: "intelligence"
+    sub_type: "foreign_intelligence_service"
+    status: "active"
+    founded: "1947"
+    jurisdiction: "United States"
+    significance: "Its fake vaccination operation created the trust crisis the IPI polio work addressed; any direct connection to IPI remains unproven"
+
+  - name: "National Security Council"
+    pillar_type: "government"
+    sub_type: "executive_policy_body"
+    status: "active"
+    founded: "1947"
+    jurisdiction: "United States"
+    significance: "Lisa Monaco publicly communicated the CIA policy; likely policy channel to distinguish from the White House Counsel's Office"
+
+  - name: "White House Counsel's Office"
+    pillar_type: "legal"
+    sub_type: "executive_legal_office"
+    status: "active"
+    founded: null
+    jurisdiction: "United States"
+    significance: "Kathryn Ruemmler's office during the internal policy decision; no role in the vaccination decision is presently documented"
+
+  - name: "World Health Organization"
+    pillar_type: "government"
+    sub_type: "multilateral_health_agency"
+    status: "active"
+    founded: "1948"
+    jurisdiction: "International"
+    significance: "Central polio-eradication institution and external benchmark for country activity and outbreak timelines"
+
+  - name: "Norwegian Ministry of Foreign Affairs"
+    pillar_type: "government"
+    sub_type: "foreign_ministry"
+    status: "active"
+    founded: "1905"
+    jurisdiction: "Norway"
+    significance: "Major IPI funder and potential source of audited budgets, cost-allocation records, and overlapping program documentation"
+
+  - name: "Edmond de Rothschild Group"
+    pillar_type: "banking"
+    sub_type: "private_bank"
+    status: "active"
+    founded: "1953"
+    jurisdiction: "Switzerland"
+    significance: "A separate 2014 Epstein-Ruemmler referral and DOJ-negotiation channel that provides a strong comparison for the private allocation-and-access broker model"
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "Jeffrey Epstein"
+
+source_overrides:
+  "NYT / Landon Thomas Jr.": "Extreme caution: Thomas acted as a deal intermediary while covering Epstein"
+  "Michael Wolff": "Treat as a participant in Epstein's information operations, not independent corroboration"
