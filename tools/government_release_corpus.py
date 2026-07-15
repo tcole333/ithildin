@@ -228,7 +228,10 @@ def finish_run(db, run_id, seen, changed, cursor_end, error=None):
 
 def cmd_init(args):
     db = connect(args.db)
-    print(f"Initialized {args.db}; schema {db.execute("SELECT value FROM schema_meta WHERE key='schema_version'").fetchone()[0]}")
+    schema_version = db.execute(
+        "SELECT value FROM schema_meta WHERE key='schema_version'"
+    ).fetchone()[0]
+    print(f"Initialized {args.db}; schema {schema_version}")
 
 
 def cmd_ingest_doj(args):

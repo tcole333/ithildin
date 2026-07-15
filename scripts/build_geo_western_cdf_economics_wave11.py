@@ -364,6 +364,7 @@ def build_report(facility_rows: list[dict[str, object]], finding_ids: list[int])
         award_lines.append(
             f"| {spec['facility']} / `{spec['task']}` | {row['task_performance_start']} to {row['task_performance_end']} | ${Decimal(str(row['task_cumulative_obligation_snapshot'])):,.2f} | ${Decimal(str(row['task_cumulative_outlay_snapshot'])):,.2f} |"
         )
+    award_table = "\n".join(award_lines)
 
     return f"""# Western GEO contract detention facility economics
 
@@ -416,7 +417,7 @@ The FY25 task accumulated $117,431,349.50 in obligations and $114,161,655.04 in 
 
 ## Award and transaction measures
 
-{"\n".join(award_lines)}
+{award_table}
 
 The four first rows are the most recently completed or closed predecessor tasks recovered for each facility; the four later rows are successor/current tasks aligned to the FY26 context. Values are current cumulative snapshots in the archived USAspending response, not cash paid within the workbook's occupancy period. Outlays can slightly exceed obligations in public snapshots (Aurora and Desert View predecessor tasks); this pass preserves the reported figures and does not recast the difference as an overpayment.
 
