@@ -38,14 +38,13 @@ import argparse
 import gzip
 import html
 import json
-import os
 import re
 import sys
 import time
 import xml.etree.ElementTree as ET
 import zlib
 from html.parser import HTMLParser
-from urllib.parse import urlencode, quote_plus, urlparse
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -521,6 +520,27 @@ def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
 # ─── Commands ────────────────────────────────────────────────────────────────
 
 
+def _normalize_efts_forms(forms):
+    """Remove amendment filters already covered by a selected root form.
+
+    EFTS root-form filters such as ``D`` and ``S-1`` already include their
+    ``/A`` amendments. Sending both makes the backend combine the root and
+    exact-form clauses, which excludes the unamended filings.
+    """
+    if not forms:
+        return forms
+    selected = [form.strip() for form in forms.split(",") if form.strip()]
+    selected_names = {form.casefold() for form in selected}
+    return ",".join(
+        form
+        for form in selected
+        if not (
+            form.casefold().endswith("/a")
+            and form[:-2].casefold() in selected_names
+        )
+    )
+
+
 def cmd_search(args):
     """Full-text search across all SEC filings."""
     # Build query — join multiple terms, quote multi-word terms
@@ -535,7 +555,7 @@ def cmd_search(args):
     if args.end:
         params["enddt"] = args.end
     if args.forms:
-        params["forms"] = args.forms
+        params["forms"] = _normalize_efts_forms(args.forms)
 
     data = _request(EFTS_URL, params)
     if not data:
@@ -613,7 +633,6 @@ def _print_facets(aggs, total):
 
     entity_agg = aggs.get("entity_filter", {}).get("buckets", [])
     form_agg = aggs.get("form_filter", {}).get("buckets", [])
-    sic_agg = aggs.get("sic_filter", {}).get("buckets", [])
     state_agg = aggs.get("biz_states_filter", {}).get("buckets", [])
 
     if entity_agg:
@@ -1335,7 +1354,7 @@ def cmd_sections(args):
                 for line in lines:
                     print(line)
                 if len(text.split("\n")) > args.lines:
-                    print(f"\n... (truncated, use --lines to see more)")
+                    print("\n... (truncated, use --lines to see more)")
             else:
                 # Try bracket access
                 try:
@@ -1390,9 +1409,9 @@ def cmd_sections(args):
         else:
             print(f"  {label}: not available")
 
-    print(f"\nUse --section <name> to extract a specific section")
-    print(f"  Text:       business, risk, mda, legal")
-    print(f"  Financial:  balance_sheet, income_statement, cashflow_statement")
+    print("\nUse --section <name> to extract a specific section")
+    print("  Text:       business, risk, mda, legal")
+    print("  Financial:  balance_sheet, income_statement, cashflow_statement")
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -1405,7 +1424,13 @@ def main():
     # search
     p = sub.add_parser("search", help="Full-text search across SEC filings")
     p.add_argument("query", nargs="+", help="Search terms (multiple terms are AND'd)")
-    p.add_argument("--forms", help="Filter by form types (e.g., '10-K,DEF 14A')")
+    p.add_argument(
+        "--forms",
+        help=(
+            "Filter by form types (e.g., '10-K,DEF 14A'); a base form already "
+            "includes its /A amendments"
+        ),
+    )
     p.add_argument("--start", help="Start date (YYYY-MM-DD)")
     p.add_argument("--end", help="End date (YYYY-MM-DD)")
     p.add_argument("--size", type=int, default=20, help="Number of results (max ~100)")
