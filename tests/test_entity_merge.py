@@ -281,3 +281,23 @@ def test_merge_can_replace_contradictory_legacy_notes(
     assert correction[5] == replacement
     assert correction[8] == "merge"
     db.close()
+
+
+def test_merge_rejects_blank_replacement_notes_before_mutating(tmp_path):
+    path = tmp_path / "blank-replacement-notes.db"
+    _seed_merge_db(path)
+    db = sqlite3.connect(path)
+    db.row_factory = sqlite3.Row
+    entity_count = db.execute("SELECT COUNT(*) FROM entities").fetchone()[0]
+
+    with pytest.raises(ValueError, match="non-whitespace"):
+        entity_resolution.merge_entity_records(
+            db, 1, 2, created_by="test", replacement_notes="   "
+        )
+
+    assert db.execute("SELECT COUNT(*) FROM entities").fetchone()[0] == entity_count
+    assert db.execute("SELECT COUNT(*) FROM corrections").fetchone()[0] == 0
+    assert db.execute(
+        "SELECT COUNT(*) FROM finding_entities WHERE entity_id=2"
+    ).fetchone()[0] == 2
+    db.close()

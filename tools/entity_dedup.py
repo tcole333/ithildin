@@ -351,6 +351,14 @@ def cmd_merge(args):
     db = get_db()
     _ensure_aliases_table(db)
 
+    replacement_notes = getattr(args, "replacement_notes", None)
+    if replacement_notes is not None:
+        replacement_notes = replacement_notes.strip()
+        if not replacement_notes:
+            print("ERROR: replacement notes must contain non-whitespace text")
+            db.close()
+            return
+
     keep = db.execute("SELECT * FROM entities WHERE id = ?", (args.keep_id,)).fetchone()
     delete = db.execute("SELECT * FROM entities WHERE id = ?", (args.delete_id,)).fetchone()
 
@@ -392,7 +400,7 @@ def cmd_merge(args):
             args.keep_id,
             args.delete_id,
             created_by="entity_dedup",
-            replacement_notes=getattr(args, "replacement_notes", None),
+            replacement_notes=replacement_notes,
         )
         db.commit()
         print(

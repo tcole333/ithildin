@@ -992,6 +992,10 @@ def merge_entity_records(
     """
     if keep_id == drop_id:
         raise ValueError("keep and drop entity IDs must differ")
+    if replacement_notes is not None:
+        replacement_notes = str(replacement_notes).strip()
+        if not replacement_notes:
+            raise ValueError("replacement notes must contain non-whitespace text")
 
     keep_row = db.execute("SELECT * FROM entities WHERE id = ?", (keep_id,)).fetchone()
     drop_row = db.execute("SELECT * FROM entities WHERE id = ?", (drop_id,)).fetchone()
@@ -1040,7 +1044,7 @@ def merge_entity_records(
         )
 
     merged_notes = (
-        str(replacement_notes).strip()
+        replacement_notes
         if replacement_notes is not None
         else _merge_text(keep.get("notes"), drop.get("notes"), drop_id)
     )
@@ -1173,8 +1177,14 @@ def cmd_merge(args):
     # must not silently discard intel. Union sources; append notes if not already
     # contained. Also inherit a more-specific entity_type if keep is 'unknown'.
     replacement_notes = getattr(args, "replacement_notes", None)
+    if replacement_notes is not None:
+        replacement_notes = replacement_notes.strip()
+        if not replacement_notes:
+            print("\n  ERROR: replacement notes must contain non-whitespace text")
+            db.close()
+            return
     merged_notes = (
-        replacement_notes.strip()
+        replacement_notes
         if replacement_notes is not None
         else _merge_text(keep.get("notes"), drop.get("notes"), drop["id"])
     )
