@@ -49,6 +49,15 @@ try:
 except ImportError:
     from lead_tracker import get_db
 
+try:
+    from tools.analysis_export import (
+        complete_analysis_run,
+        fail_analysis_run,
+        start_analysis_run,
+    )
+except ImportError:
+    from analysis_export import complete_analysis_run, fail_analysis_run, start_analysis_run
+
 VALID_PILLAR_TYPES = [
     "banking", "legal", "accounting", "government",
     "media", "operations", "intelligence", "philanthropy",
@@ -1450,14 +1459,19 @@ def main():
     elif args.command == "score":
         run_id = None
         if args.cache:
-            db = get_pillar_db()
-            cursor = db.execute("INSERT INTO pillar_scores (person_id, person_name, score_type, score_value) VALUES (0, '_run_marker', 'orchestrator', 0)")
-            run_id = cursor.lastrowid
-            db.execute("DELETE FROM pillar_scores WHERE id = ?", (run_id,))
-            db.commit()
-            db.close()
+            run_id = start_analysis_run("pillar_tracker:score")
 
-        results = compute_scores(person_name=args.person, top=args.top, run_id=run_id)
+        try:
+            results = compute_scores(person_name=args.person, top=args.top, run_id=run_id)
+        except Exception as exc:
+            if run_id is not None:
+                fail_analysis_run(run_id, str(exc))
+            raise
+        if run_id is not None:
+            complete_analysis_run(
+                run_id,
+                notes=f"Cached {len(results)} orchestrator score rows",
+            )
         if write_output(results, args, summary=f"orchestrator scores ({len(results)})"):
             return
         print(f"\nOrchestrator Scores (top {args.top})")
