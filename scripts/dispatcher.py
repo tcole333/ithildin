@@ -2012,6 +2012,35 @@ def resolve_entity_id(db: sqlite3.Connection, record: dict[str, Any]) -> int:
     return int(cursor.lastrowid)
 
 
+def normalize_source_datasets_value(value: Any) -> str | None:
+    """Serialize worker-supplied source_datasets to a JSON-array string.
+
+    Workers emit lists, JSON-array strings, or bare comma-joined strings
+    ("edgar,parazero_20f_2026"). findings_tracker requires the stored column
+    to be a JSON array, so normalize the shape here; token-level registry
+    validation stays in findings_tracker's write paths.
+    """
+    if value is None:
+        return None
+    if isinstance(value, (list, tuple)):
+        candidates: list[Any] = list(value)
+    else:
+        raw = str(value).strip()
+        if not raw:
+            return None
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            parsed = None
+        candidates = parsed if isinstance(parsed, list) else raw.split(",")
+    tokens: list[str] = []
+    for candidate in candidates:
+        token = str(candidate).strip()
+        if token and token not in tokens:
+            tokens.append(token)
+    return json.dumps(tokens) if tokens else None
+
+
 def import_findings(
     db: sqlite3.Connection,
     records: list[dict[str, Any]],
@@ -2047,7 +2076,9 @@ def import_findings(
                 "finding_type": record.get("finding_type") or record.get("type"),
                 "summary": summary,
                 "detail": record.get("detail"),
-                "source_datasets": record.get("source_datasets") or record.get("sources"),
+                "source_datasets": normalize_source_datasets_value(
+                    record.get("source_datasets") or record.get("sources")
+                ),
                 "confidence": record.get("confidence", "medium"),
                 "date_of_event": record.get("date_of_event") or record.get("date"),
                 "lead_id": record.get("lead_id"),
