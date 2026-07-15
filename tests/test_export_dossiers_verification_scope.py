@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import json
 import sqlite3
+from pathlib import Path
 
 import pytest
 
@@ -332,6 +334,23 @@ def test_public_export_excludes_internal_only_verified_findings(
         {"lead": "<p>External [Finding #1], internal [Finding #5].</p>"},
     )
     assert [finding["id"] for finding in citation_findings] == [1]
+
+
+def test_alias_slug_supplies_curation_when_canonical_file_is_missing(
+    tmp_path: Path,
+) -> None:
+    alias_path = tmp_path / "legacy-name.json"
+    alias_path.write_text(
+        json.dumps({"curation": {"lead": "<p>Reviewed narrative.</p>"}})
+    )
+
+    curation = export_dossiers._load_existing_curation(
+        tmp_path,
+        tmp_path / "canonical-name.json",
+        ["Canonical Name", "Legacy Name"],
+    )
+
+    assert curation == {"lead": "<p>Reviewed narrative.</p>"}
 
 
 def test_ego_network_second_hop_respects_export_scope(

@@ -246,6 +246,39 @@ def _can_skip_incremental(existing: dict, dossier: dict,
     return bool(existing_last and new_last and existing_last >= new_last)
 
 
+def _load_existing_curation(
+    output_dir: Path,
+    canonical_path: Path,
+    all_names: list[str],
+) -> dict | None:
+    """Load curation from the canonical dossier or one of its alias files.
+
+    Older exports sometimes used an alias slug as the canonical page. When a
+    later export canonicalizes that target, retain the edited narrative from
+    the old page instead of silently publishing an uncurated replacement.
+    """
+    candidate_paths = [canonical_path]
+    candidate_paths.extend(
+        output_dir / f"{slugify(name)}.json"
+        for name in all_names
+        if slugify(name) != canonical_path.stem
+    )
+
+    seen: set[Path] = set()
+    for path in candidate_paths:
+        if path in seen or not path.exists():
+            continue
+        seen.add(path)
+        try:
+            existing = json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError, TypeError):
+            continue
+        curation = existing.get("curation")
+        if isinstance(curation, dict) and curation:
+            return curation
+    return None
+
+
 def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list[str],
                   profile_id: str | None = None,
                   include_unverified: bool = False) -> dict:
@@ -606,11 +639,15 @@ def main():
             except json.JSONDecodeError:
                 existing = None
 
-        # Preserve curated prose, then materialize its verified citation records
+        # Preserve curated prose, including from a legacy alias-slug page, then
+        # materialize its verified citation records
         # into a static-only catalog. The deployed site does not ship the ignored
         # investigation database used as a local development fallback.
-        if existing and existing.get("curation"):
-            dossier["curation"] = existing["curation"]
+        existing_curation = _load_existing_curation(
+            args.output_dir, out_path, all_names
+        )
+        if existing_curation:
+            dossier["curation"] = existing_curation
         dossier["citation_findings"] = load_citation_findings(
             conn, dossier.get("curation")
         )
