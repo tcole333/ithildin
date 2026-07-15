@@ -202,6 +202,10 @@ VALID_SOURCES = [
     # UK registries / regulators / courts
     "companies_house", "fca", "london_gazette", "charity_commission",
     "bailii", "ewhc",
+    # Recurring real sources first seen in legacy 2026-03/04 dispatcher imports
+    "iapd",          # SEC Investment Adviser Public Disclosure
+    "mn_sos",        # Minnesota Secretary of State business registry
+    "judiciary_uk",  # UK judiciary published judgments
 ]
 
 # Curated compatibility names used by configured corpus tools and older findings.
@@ -220,6 +224,55 @@ SOURCE_ALIASES = {
     "epstein_reporting": "reporting",
     "query_investigations": "investigations_db",
     "scotus": "supreme_court",
+    # ── Variant spellings from legacy 2026-03/04 dispatcher imports ──
+    # (normalized by scripts/migrate_source_datasets_json.py; kept here so
+    # future adds converge on the canonical token)
+    "websearch": "web_search",
+    "web": "web_search",
+    "open_web": "web_search",
+    "web_fetch": "web_search",
+    "web_news": "web_search",
+    "web_reporting": "web_search",
+    "web_open_source": "web_search",
+    "live_web_crawl": "web_search",
+    "media": "web_search",
+    "media_reports": "web_search",
+    "news": "web_search",
+    "web_cnn": "cnn",
+    "irs_990": "990",
+    "irs990": "990",
+    "irs_990_xml": "990",
+    "irs_efile_990": "990",
+    "propublica_990": "990",
+    "propublica_nonprofit_explorer": "990",
+    "courtlistener_recap": "courtlistener",
+    "florida_sunbiz": "fl_sunbiz",
+    "florida_sos": "fl_sunbiz",
+    "california_sos": "ca_sos",
+    "wyoming_sos": "wy_sos",
+    "companies_house_uk": "uk_companies_house",
+    "companies_house_gb": "uk_companies_house",
+    "senate_lda": "lda",
+    "crt_sh": "crtsh",
+    "occrp": "aleph",
+    "sec_filings": "edgar",
+    "uspto": "patents",
+    "uspto_odp": "patents",
+    "uspto_trademark": "patents",
+    "investigation_db": "investigations_db",
+    "investigation.db": "investigations_db",
+    "findings_db": "investigations_db",
+    "findings_tracker": "investigations_db",
+    "graph_tools": "analysis_run",
+    "graph_tools:analysis_run_37": "analysis_run",
+    "connections_graph": "analysis_run",
+    "coverage_matrix": "analysis_run",
+    "mn_sos_mblsportal": "mn_sos",
+    "mn_sos_mbls_portal": "mn_sos",
+    "mn_sos_direct": "mn_sos",
+    "uk_judiciary": "judiciary_uk",
+    "sec_iapd": "iapd",
+    "iapd_firm_search": "iapd",
 }
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
@@ -323,8 +376,15 @@ def _local_evidence_path(evidence_ref):
     return path.resolve(strict=False)
 
 
-def _validate_source_datasets(source_datasets):
-    """Return a canonical source-token list or raise for unsupported shapes/tokens."""
+def _validate_source_datasets(source_datasets, *, allow_unregistered=False):
+    """Return a canonical source-token list or raise for unsupported shapes/tokens.
+
+    Write paths (add/correct) must call this strictly so unregistered labels
+    cannot enter the database. Read paths (verify/evidence-audit) pass
+    ``allow_unregistered=True``: historical rows may carry preserved ad-hoc
+    labels (e.g. ``parazero_20f_2026`` from pre-validation dispatcher imports),
+    which remain format-checked and alias-normalized but are not rejected.
+    """
     if isinstance(source_datasets, str) or not isinstance(source_datasets, (list, tuple)):
         raise ValueError(
             "source_datasets must be a JSON-array-compatible list of supported source tokens"
@@ -337,7 +397,7 @@ def _validate_source_datasets(source_datasets):
         if not isinstance(token, str) or not token.strip():
             raise ValueError("source_datasets entries must be non-empty strings")
         token = SOURCE_ALIASES.get(token.strip(), token.strip())
-        if token not in VALID_SOURCES:
+        if token not in VALID_SOURCES and not allow_unregistered:
             raise ValueError(
                 f"Unsupported source token '{token}'. Add it to VALID_SOURCES before using it."
             )
@@ -346,13 +406,13 @@ def _validate_source_datasets(source_datasets):
     return normalized
 
 
-def _parse_stored_source_datasets(raw_value):
+def _parse_stored_source_datasets(raw_value, *, allow_unregistered=False):
     """Parse the JSON stored in findings.source_datasets and validate its tokens."""
     try:
         parsed = json.loads(raw_value) if isinstance(raw_value, str) else raw_value
     except (TypeError, json.JSONDecodeError) as exc:
         raise ValueError(f"source_datasets is not valid JSON: {exc}") from exc
-    return _validate_source_datasets(parsed)
+    return _validate_source_datasets(parsed, allow_unregistered=allow_unregistered)
 
 
 def _validate_evidence_ref(evidence_ref, stored_type=None):
@@ -1000,7 +1060,10 @@ def update_finding(finding_id, field, new_value, reason, correction_type="refine
 
         stored_value = new_value
         if field == "source_datasets":
-            stored_value = json.dumps(_parse_stored_source_datasets(new_value))
+            # Strict: corrections are a write path — no unregistered tokens.
+            stored_value = json.dumps(
+                _parse_stored_source_datasets(new_value, allow_unregistered=False)
+            )
         elif field == "claim_type":
             if new_value not in VALID_CLAIM_TYPES:
                 raise ValueError(
@@ -1061,8 +1124,11 @@ def verify_finding(finding_id, verified_by="human"):
     """Mark a finding verified only when its provenance satisfies publication gates.
 
     Findings may be drafted before their provenance is complete, but the audit
-    contract requires valid source tokens, at least one evidence reference, and
-    an exact source quote for each reference before verification. Locally
+    contract requires well-formed source tokens, at least one evidence
+    reference, and an exact source quote for each reference before
+    verification. Historical rows may carry preserved unregistered source
+    labels; those stay verifiable (evidence-audit reports them as warnings)
+    while malformed source_datasets still block verification. Locally
     resolvable quote spans must match; remote/canonical references remain
     publishable but are reported as unchecked by ``evidence-audit``.
     """
@@ -1075,7 +1141,9 @@ def verify_finding(finding_id, verified_by="human"):
         if finding is None:
             raise ValueError(f"Finding #{finding_id} does not exist")
         try:
-            _parse_stored_source_datasets(finding["source_datasets"])
+            _parse_stored_source_datasets(
+                finding["source_datasets"], allow_unregistered=True
+            )
         except ValueError as exc:
             raise ValueError(
                 f"Finding #{finding_id} cannot be verified: {exc}"
@@ -1273,9 +1341,20 @@ def audit_finding_evidence(finding_id=None, profile_id=None, all_profiles=False)
 
         for finding in findings:
             try:
-                _parse_stored_source_datasets(finding["source_datasets"])
+                stored_tokens = _parse_stored_source_datasets(
+                    finding["source_datasets"], allow_unregistered=True
+                )
             except ValueError as exc:
                 issue(finding, "invalid_source_datasets", str(exc))
+            else:
+                unregistered = [t for t in stored_tokens if t not in VALID_SOURCES]
+                if unregistered:
+                    issue(
+                        finding, "unregistered_source_token",
+                        "Preserved legacy source label(s) not in VALID_SOURCES: "
+                        + ", ".join(unregistered),
+                        severity="warning",
+                    )
 
             evidence = db.execute(
                 "SELECT * FROM finding_evidence WHERE finding_id = ? ORDER BY evidence_ref",
@@ -2417,7 +2496,6 @@ def format_finding(finding, verbose=False):
     ftype = finding.get("finding_type") or "?"
     date = finding.get("date_of_event", "")
     date_str = f" ({date})" if date else ""
-    claim = finding.get("claim_type", "?")
 
     line = f"{conf}{verif} #{finding['id']:>4} [{ftype:>13}] {finding['target_name']}: {finding['summary']}{date_str}"
 
@@ -3274,7 +3352,6 @@ def main():
                         print(f"    Quote: \"{ev['source_quote']}\"")
                     if ev.get("email_sender"):
                         sender = ev["email_sender"]
-                        recip = ""
                         date_str = f" ({ev['email_date']})" if ev.get("email_date") else ""
                         pos = ev.get("chain_position")
                         pos_str = f", chain position {pos}" if pos is not None else ""
@@ -3373,18 +3450,18 @@ def main():
             print(f"Total findings: {stats['total_findings']}")
             print(f"Total connections: {stats['total_connections']}")
             if stats.get("by_type"):
-                print(f"\nBy type:")
+                print("\nBy type:")
                 for t, c in sorted(stats["by_type"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {t or '(none)'}: {c}")
             if stats.get("by_confidence"):
-                print(f"\nBy confidence:")
+                print("\nBy confidence:")
                 for conf, c in sorted(stats["by_confidence"].items(), key=lambda x: (x[0] is None, x[0] or '')):
                     print(f"  {conf or '(none)'}: {c}")
             if stats.get("top_targets"):
-                print(f"\nTop targets:")
+                print("\nTop targets:")
                 for name, c in stats["top_targets"].items():
                     print(f"  {name}: {c}")
-            print(f"\nAudit status:")
+            print("\nAudit status:")
             print(f"  Verified: {verified}")
             print(f"  Unverified: {unverified_ct}")
             print(f"  Disputed: {disputed}")
