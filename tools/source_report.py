@@ -465,6 +465,15 @@ def generate_report():
         **check_api("LDA", "https://lda.senate.gov/api/v1/filings/?page_size=1"),
     }
 
+    sources["Senate Finance Committee Archive"] = {
+        "description": "Official committee releases, investigations, and primary-source attachments",
+        "query_tool": "tools/query_senate_finance.py",
+        **check_api(
+            "Senate Finance",
+            "https://www.finance.senate.gov/search/?q=tax&page=1",
+        ),
+    }
+
     # FARA Foreign Agents
     fara_info = check_sqlite(
         PROJECT_ROOT / "investigation.db",
