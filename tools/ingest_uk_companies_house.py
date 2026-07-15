@@ -38,13 +38,18 @@ import sqlite3
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 # Add tools dir to path
 sys.path.insert(0, str(Path(__file__).parent))
 from query_registry import get_db, _rebuild_fts
+
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
 
 # Load .env
 env_path = Path(__file__).parent.parent / ".env"
@@ -61,6 +66,24 @@ BASE_URL = "https://api.company-information.service.gov.uk"
 # Use 0.6s delay for ~1.67/sec with headroom.
 REQUEST_DELAY = 0.6
 _last_request_time = 0.0
+
+
+def _emit_output(data, args, summary):
+    """Emit one structured result mode before any human-readable output."""
+    if write_output(data, args, summary=summary):
+        return True
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, default=str))
+        return True
+    return False
+
+
+def _add_display_output_args(parser):
+    """Add standard output flags without breaking the legacy global --json."""
+    add_output_args(parser)
+    for action in parser._actions:
+        if action.dest == "json_out":
+            action.default = argparse.SUPPRESS
 
 
 def _get_api_key():
@@ -285,7 +308,11 @@ def cmd_search(args):
     """Search companies by name."""
     data = _request("/search/companies", {"q": args.query, "items_per_page": args.limit})
     if not data:
+        if _emit_output(data, args, f"UK company search '{args.query}'"):
+            return
         print("No results or API error.")
+        return
+    if _emit_output(data, args, f"UK company search '{args.query}'"):
         return
 
     items = data.get("items", [])
@@ -319,15 +346,16 @@ def cmd_search(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(data, indent=2, default=str))
-
 
 def cmd_company(args):
     """Get full company profile."""
     data = _request(f"/company/{args.number}")
     if not data:
+        if _emit_output(data, args, f"UK company {args.number}"):
+            return
         print(f"Company {args.number} not found.")
+        return
+    if _emit_output(data, args, f"UK company {args.number}"):
         return
 
     name = data.get("company_name", "?")
@@ -369,7 +397,6 @@ def cmd_company(args):
     if accounts:
         next_due = accounts.get("next_due", "")
         last_made = accounts.get("last_accounts", {}).get("made_up_to", "")
-        acc_type = accounts.get("accounting_reference_date", {})
         if next_due:
             print(f"    Accounts next due: {next_due}")
         if last_made:
@@ -391,13 +418,13 @@ def cmd_company(args):
 
     print()
 
-    if args.json_out:
-        print(json.dumps(data, indent=2, default=str))
-
 
 def cmd_officers(args):
     """List officers for a company."""
     items = _paginate(f"/company/{args.number}/officers", max_results=args.limit)
+
+    if _emit_output(items, args, f"UK company officers {args.number}"):
+        return
 
     if not items:
         print(f"No officers found for company {args.number}.")
@@ -446,9 +473,6 @@ def cmd_officers(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(items, indent=2, default=str))
-
 
 def cmd_psc(args):
     """List persons with significant control for a company."""
@@ -456,6 +480,9 @@ def cmd_psc(args):
         f"/company/{args.number}/persons-with-significant-control",
         max_results=args.limit,
     )
+
+    if _emit_output(items, args, f"UK company PSC {args.number}"):
+        return
 
     if not items:
         print(f"No PSC records found for company {args.number}.")
@@ -511,9 +538,6 @@ def cmd_psc(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(items, indent=2, default=str))
-
 
 def cmd_filings(args):
     """Get filing history for a company."""
@@ -521,6 +545,9 @@ def cmd_filings(args):
         f"/company/{args.number}/filing-history",
         max_results=args.limit,
     )
+
+    if _emit_output(items, args, f"UK company filings {args.number}"):
+        return
 
     if not items:
         print(f"No filing history found for company {args.number}.")
@@ -560,15 +587,16 @@ def cmd_filings(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(items, indent=2, default=str))
-
 
 def cmd_officer_search(args):
     """Search for officers by name across all companies."""
     data = _request("/search/officers", {"q": args.name, "items_per_page": args.limit})
     if not data:
+        if _emit_output(data, args, f"UK officer search '{args.name}'"):
+            return
         print("No results or API error.")
+        return
+    if _emit_output(data, args, f"UK officer search '{args.name}'"):
         return
 
     items = data.get("items", [])
@@ -612,9 +640,6 @@ def cmd_officer_search(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(data, indent=2, default=str))
-
 
 def cmd_officer_appointments(args):
     """List all appointments for a specific officer ID."""
@@ -622,6 +647,9 @@ def cmd_officer_appointments(args):
         f"/officers/{args.officer_id}/appointments",
         max_results=args.limit,
     )
+
+    if _emit_output(items, args, f"UK officer appointments {args.officer_id}"):
+        return
 
     if not items:
         print(f"No appointments found for officer {args.officer_id}.")
@@ -655,15 +683,16 @@ def cmd_officer_appointments(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(items, indent=2, default=str))
-
 
 def cmd_insolvency(args):
     """Get insolvency cases for a company."""
     data = _request(f"/company/{args.number}/insolvency")
     if not data:
+        if _emit_output(data, args, f"UK company insolvency {args.number}"):
+            return
         print(f"No insolvency data for company {args.number} (may not have any cases).")
+        return
+    if _emit_output(data, args, f"UK company insolvency {args.number}"):
         return
 
     company = _request(f"/company/{args.number}")
@@ -696,9 +725,6 @@ def cmd_insolvency(args):
                 print(f"      Address: {addr}")
 
         print()
-
-    if args.json_out:
-        print(json.dumps(data, indent=2, default=str))
 
 
 def cmd_ingest_insolvency(args):
@@ -850,8 +876,6 @@ def _upsert_officers(db, entity_id, officers):
         role = o.get("officer_role", "")
         appointed = o.get("appointed_on", "")
         resigned = o.get("resigned_on", "")
-        nationality = o.get("nationality", "")
-        occupation = o.get("occupation", "")
 
         # Build title from role
         title = role.replace("-", " ").title() if role else None
@@ -909,7 +933,6 @@ def _upsert_psc(db, entity_id, psc_items):
         if not name:
             continue
 
-        kind = p.get("kind", "")
         ceased = p.get("ceased_on", "")
         notified = p.get("notified_on", "")
         natures = p.get("natures_of_control", [])
@@ -1191,35 +1214,42 @@ def main():
     p = sub.add_parser("search", help="Search companies by name")
     p.add_argument("query")
     p.add_argument("--limit", type=int, default=20)
+    _add_display_output_args(p)
 
     # company
     p = sub.add_parser("company", help="Get full company profile")
     p.add_argument("number", help="Company number (e.g. 12345678)")
+    _add_display_output_args(p)
 
     # officers
     p = sub.add_parser("officers", help="List officers for a company")
     p.add_argument("number", help="Company number")
     p.add_argument("--limit", type=int, default=100)
+    _add_display_output_args(p)
 
     # psc
     p = sub.add_parser("psc", help="List persons with significant control")
     p.add_argument("number", help="Company number")
     p.add_argument("--limit", type=int, default=50)
+    _add_display_output_args(p)
 
     # filings
     p = sub.add_parser("filings", help="Filing history for a company")
     p.add_argument("number", help="Company number")
     p.add_argument("--limit", type=int, default=50)
+    _add_display_output_args(p)
 
     # officer-search
     p = sub.add_parser("officer-search", help="Search officers by name across all companies")
     p.add_argument("name")
     p.add_argument("--limit", type=int, default=20)
+    _add_display_output_args(p)
 
     # officer-appointments
     p = sub.add_parser("officer-appointments", help="All appointments for one officer")
     p.add_argument("officer_id", help="Officer ID (from officers or officer-search output)")
     p.add_argument("--limit", type=int, default=100)
+    _add_display_output_args(p)
 
     # ingest-entity
     p = sub.add_parser("ingest-entity", help="Ingest a company + officers + PSC into registry.db")
@@ -1228,6 +1258,7 @@ def main():
     # insolvency
     p = sub.add_parser("insolvency", help="Get insolvency cases for a company")
     p.add_argument("number", help="Company number")
+    _add_display_output_args(p)
 
     # ingest-insolvency
     p = sub.add_parser("ingest-insolvency", help="Ingest insolvency data as findings")

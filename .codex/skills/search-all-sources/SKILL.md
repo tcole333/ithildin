@@ -135,8 +135,8 @@ python tools/query_fara.py search "<QUERY>"
 python tools/query_gleif.py search "<QUERY>" --limit 10
 
 # UK Companies House (if API key configured)
-python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10
-python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10
+uv run python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-companies.json"
+uv run python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-officers.json"
 
 # OpenSanctions (PEP/sanctions check — if ingested)
 python tools/query_opensanctions.py search "<QUERY>" --limit 10

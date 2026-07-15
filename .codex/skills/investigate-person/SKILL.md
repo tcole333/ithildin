@@ -28,17 +28,17 @@ Use these values instead of hardcoded names throughout this skill.
 If the subject is UK-based, has UK company ties, uses a UK address, or appears as a UK officer/director/PSC, **Companies House is mandatory**. Do not close a UK person trace without checking:
 
 ```bash
-python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output $WORKDIR/inv-uk-officer-search.json
-python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output $WORKDIR/inv-uk-company-search.json
+uv run python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output "$WORKDIR/inv-uk-officer-search.json"
+uv run python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output "$WORKDIR/inv-uk-company-search.json"
 ```
 
 For each relevant company returned, pull:
 
 ```bash
-python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output $WORKDIR/inv-uk-company-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output $WORKDIR/inv-uk-officers-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output $WORKDIR/inv-uk-psc-<COMPANY_NUMBER>.json
-python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output $WORKDIR/inv-uk-filings-<COMPANY_NUMBER>.json
+uv run python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-company-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-officers-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-psc-<COMPANY_NUMBER>.json"
+uv run python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output "$WORKDIR/inv-uk-filings-<COMPANY_NUMBER>.json"
 ```
 
 Record negative results if the API returns no officer/company matches.
@@ -175,8 +175,8 @@ python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusio
 python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
 
 # UK Companies House (mandatory for UK-linked subjects)
-python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output $WORKDIR/inv-uk-officer-search.json
-python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output $WORKDIR/inv-uk-company-search.json
+uv run python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output "$WORKDIR/inv-uk-officer-search.json"
+uv run python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output "$WORKDIR/inv-uk-company-search.json"
 ```
 
 ### Nonprofit Board Positions (990)

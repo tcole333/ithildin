@@ -627,12 +627,14 @@ python tools/ingest_panama.py search "QUERY"
 python tools/ingest_panama.py ingest-batch "QUERY" --expand
 
 # UK Companies House (needs API key)
-python tools/ingest_uk_companies_house.py search "QUERY"
-python tools/ingest_uk_companies_house.py company 12345678
-python tools/ingest_uk_companies_house.py officers 12345678
-python tools/ingest_uk_companies_house.py psc 12345678
-python tools/ingest_uk_companies_house.py officer-search "PERSON_NAME"
-python tools/ingest_uk_companies_house.py ingest-batch "Apollo"
+# Read-only commands accept --output FILE for isolated JSON results.
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/ingest_uk_companies_house.py search "QUERY" --output "$WORKDIR/uk-search.json"
+uv run python tools/ingest_uk_companies_house.py company 12345678 --output "$WORKDIR/uk-company.json"
+uv run python tools/ingest_uk_companies_house.py officers 12345678 --output "$WORKDIR/uk-officers.json"
+uv run python tools/ingest_uk_companies_house.py psc 12345678 --output "$WORKDIR/uk-psc.json"
+uv run python tools/ingest_uk_companies_house.py officer-search "PERSON_NAME" --output "$WORKDIR/uk-officer-search.json"
+uv run python tools/ingest_uk_companies_house.py ingest-batch "Apollo"
 
 # Israeli Corporations Authority (720K+ companies, no auth)
 python tools/query_israel.py search "Carbyne" --output /tmp/israel-carbyne.json

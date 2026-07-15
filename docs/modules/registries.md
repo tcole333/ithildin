@@ -40,6 +40,8 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | `ingest_ucc_florida.py` | FL (UCC) | SFTP bulk (fixed-width) | Public creds | Federal tax liens (~99% IRS); NOT commercial UCC |
 | `ingest_ucc_newmexico.py` | NM (UCC) | REST API (enterprise.sos.nm.gov) | None | Debtor/secured party search, filing detail |
 
+UK Companies House read-only commands (`search`, `company`, `officers`, `psc`, `filings`, `officer-search`, `officer-appointments`, and `insolvency`) support `--output FILE` for structured JSON artifacts.
+
 ## Unified Interface: `query_registry.py`
 
 Prefer this tool over jurisdiction-specific tools. Searches all previously ingested data in `registry.db`.
