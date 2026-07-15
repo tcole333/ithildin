@@ -65,9 +65,16 @@ Read the flow JSON. Key fields:
 - `stats`: Node count, edge count, total flow volume
 
 **Record findings for:**
-- Every circular flow (claim-type: `direct_quote`, confidence: `confirmed` — this is directly from IRS filings)
-- Top 5 edges by amount (claim-type: `direct_quote`, confidence: `confirmed`)
-- Nodes that are both funders and recipients (`type: "both"`) — these are pass-through entities
+- Every circular flow (`claim-type: synthesis`, confidence: `medium` — the tool derives this from two or more filing rows)
+- Top 5 aggregate edges by amount (`claim-type: synthesis`, confidence: `medium`)
+- Nodes that are both funders and recipients (`type: "both"`) as **candidate** pass-through entities (`claim-type: synthesis`, confidence: `medium`)
+
+Preserve the primary evidence beneath each synthesis. For every load-bearing filing,
+attach an exact Schedule I/Part VII source row or verbatim XML/PDF span that includes
+the names, amount, year, and role used in the calculation. A tool label such as
+"Schedule I grant records" is method metadata, not a `source_quote`. A single raw
+filing row may be recorded separately as `direct_quote`/`confirmed` only when its
+stored quote is verbatim and the summary makes no aggregate or network inference.
 
 ### 4. Detect Shared Officers
 
@@ -87,7 +94,7 @@ For each of the top 3-5 recipients, find who else funds them:
 uv run python tools/query_990.py co-grantors "RECIPIENT NAME" --output $WORKDIR/cograntors-<N>.json
 ```
 
-This reveals the **funding constellation** around each recipient. If the same set of funders appears for multiple recipients, that's a coordinated funding network.
+This reveals the **funding constellation** around each recipient. If the same set of funders appears for multiple recipients, treat it as a coordination hypothesis, not proof. Test alternative explanations such as shared program area, geography, grant cycle, intermediary advice, or independently similar donor criteria.
 
 ### 6. Red Flag Analysis
 
@@ -115,35 +122,39 @@ Match all entities in the grant network against investigation.db. **This is wher
 # Circular flow finding
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "<ORG_A>" \
-  --summary "Circular grant flow: <ORG_A> sent <$X> to <ORG_B>, which sent <$Y> back. Net flow: <$Z> toward <DIRECTION>" \
+  --summary "Circular grant flow: <ORG_A> sent USD <AMOUNT_A> to <ORG_B>, which sent USD <AMOUNT_B> back. Net flow: USD <NET_AMOUNT> toward <DIRECTION>" \
   --type financial \
-  --evidence "990:<EIN_A>,990:<EIN_B>" \
-  --claim-type direct_quote \
-  --source-quote "990:<EIN>:Schedule I grant records FY<YEARS>" \
+  --evidence "990:<EIN_A>" "990:<EIN_B>" \
+  --claim-type synthesis \
+  --source-quote \
+    "990:<EIN_A>:<exact Schedule I row or verbatim XML/PDF span showing A→B, amount, and year>" \
+    "990:<EIN_B>:<exact Schedule I row or verbatim XML/PDF span showing B→A, amount, and year>" \
   --sources 990 \
-  --confidence confirmed
+  --confidence medium
 
-# Grant flow finding
+# Aggregate grant flow finding
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "<FUNDER>" \
-  --summary "Grant: <FUNDER> sent <$AMOUNT> to <RECIPIENT> over <N> grants (<YEARS>)" \
+  --summary "Grant: <FUNDER> sent USD <AMOUNT> to <RECIPIENT> over <N> grants (<YEARS>)" \
   --type financial \
   --evidence "990:<FILER_EIN>" \
-  --claim-type direct_quote \
-  --source-quote "990:<FILER_EIN>:Schedule I grants to <RECIPIENT>" \
+  --claim-type synthesis \
+  --source-quote "990:<FILER_EIN>:<exact source-row serialization or verbatim span for every load-bearing grant, including recipient, amount, and year>" \
   --sources 990 \
-  --confidence confirmed
+  --confidence medium
 
-# Shared officer finding
+# Shared officer finding (synthesis across filings)
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "<PERSON_NAME>" \
   --summary "<PERSON> serves as officer at <N> organizations in grant network: <ORG1>, <ORG2>, ..." \
   --type relationship \
-  --evidence "990:<EIN1>,990:<EIN2>" \
-  --claim-type direct_quote \
-  --source-quote "990:<EIN>:Part VII officer/director listing" \
+  --evidence "990:<EIN1>" "990:<EIN2>" \
+  --claim-type synthesis \
+  --source-quote \
+    "990:<EIN1>:<exact Part VII row or verbatim XML/PDF span naming the person, title, and year at ORG1>" \
+    "990:<EIN2>:<exact Part VII row or verbatim XML/PDF span naming the person, title, and year at ORG2>" \
   --sources 990 \
-  --confidence confirmed
+  --confidence medium
 ```
 
 Register entities:
@@ -158,7 +169,7 @@ PYTHONPATH=. uv run python tools/entity_tracker.py add-entity \
 ```bash
 # Undiscovered entity in the network
 PYTHONPATH=. uv run python tools/lead_tracker.py add \
-  --title "Trace grants: <ORG> — received <$AMOUNT> from <FUNDER>, unknown to investigation" \
+  --title "Trace grants: <ORG> — received USD <AMOUNT> from <FUNDER>, unknown to investigation" \
   --category entity --priority medium \
   --target "<ORG NAME>" --source "agent:trace-grants" \
   --evidence "990:<FILER_EIN>"
@@ -221,15 +232,15 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
 
 ## Key Analytical Patterns
 
-**Circular flows**: Money cycling between two entities inflates both organizations' activity levels. If A sends $60M to B and B sends $260M back, B is effectively a fundraising arm of A (or vice versa). The net direction reveals who controls the flow.
+**Circular flows**: Reciprocal transfers can inflate both organizations' reported activity and may indicate regranting, pass-through behavior, fiscal sponsorship, returned funds, or coordinated funding. If A sends $60M to B and B sends $260M back, the net direction measures the net transfer in the observed rows; it does **not** establish control or make one entity the other's fundraising arm. Treat control as a hypothesis and test grant purposes, transaction timing, governance authority, agreements, and the best innocent explanation.
 
 **Hub-and-spoke topology**: One central funder (Donors Trust) distributing to many recipients is a donor-advised fund pattern. The hub anonymizes the original donor.
 
-**Pass-through entities**: Organizations with type "both" (large incoming AND outgoing grants) but low program expenses are conduits, not operating nonprofits.
+**Pass-through entities**: Organizations with type "both" (large incoming AND outgoing grants) and low program expenses are candidate conduits, not proven pass-throughs. Alternatives include grantmaking foundations, fiscal sponsors, pooled funds, accounting differences, or a temporary campaign. Verify purpose descriptions, timing, governance, and retained assets before classifying the organization.
 
-**501(c)(4) opacity**: 501(c)(4) organizations file 990-N (postcard) or full 990 but these are NOT publicly available via ProPublica/IRS bulk data. They appear as *recipients* in other orgs' Schedule I but their own grant-making is invisible. When you hit a (c)(4), note the opacity gap.
+**501(c)(4) coverage is form-specific**: IRS TEOS and ProPublica include 501(c)(4) organizations that file Form 990 or 990-EZ, so query the organization before declaring an opacity gap. If only Form 990-N exists for a year, detailed finances and outgoing grants are unavailable for that year. If a full return exists, inspect it normally. Separately note that contributor identities are often not publicly disclosed for non-private-foundation filers and that recipient-EIN coverage can be incomplete. State the exact missing form, year, field, or identity rather than treating every 501(c)(4) as invisible.
 
-**Shared officers as structural bridges**: Two "independent" nonprofits sharing an officer are functionally coordinated. The officer is the bridge — they carry institutional knowledge, donor relationships, and strategic direction between organizations.
+**Shared officers as structural bridges**: A shared officer creates possible governance or information overlap, but does not by itself prove functional coordination. Verify that the records refer to the same person, that service periods overlap, and that the role carried relevant authority. Test alternatives such as a common professional director, accountant, legal adviser, affiliate structure, or non-overlapping tenure before advancing a coordination hypothesis.
 
 ## Stop Conditions
 
@@ -240,4 +251,3 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
 - Red flags checked for starting entity + top recipients
 - Cross-reference against investigation.db complete
 - All findings recorded, leads spawned for undiscovered entities
-
