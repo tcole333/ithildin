@@ -45,7 +45,10 @@ jobs:
         working-directory: web
         continue-on-error: true  # TODO: remove after backfilling source_datasets for CRML findings
 
-      - run: python3 scripts/check_dossier_evidence_sync.py
+      # investigation.db is intentionally local and ignored, so a database-sync
+      # comparison cannot run from a clean Actions checkout. Release review runs
+      # this check locally for every changed dossier; the citation tests below
+      # validate that the committed static export is self-contained in CI.
 
       - run: npm run lint:citations:changed -- --base-ref "${{ github.event.before }}" --head-ref "${{ github.sha }}"
         working-directory: web
