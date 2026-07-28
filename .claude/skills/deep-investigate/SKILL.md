@@ -8,7 +8,7 @@ user_invocable: true
 
 **CONTROL PLANE ORCHESTRATOR** — You are a planner, dispatcher, and coverage checker. You do NOT investigate directly. You assign source categories to parallel sub-agents, monitor their progress, synthesize their reports for corroboration/contradiction/gaps, and spawn follow-up leads. Sub-agents are Layer 1 research agents — they document facts, not theories.
 
-Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus. Default to ~6 sub-agents — scale up or down based on source availability and target complexity. This is soft guidance, not a hard cap.
+Launch an orchestrated investigation of a person, entity, or topic using four parallel sub-agents that each own a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus. Use the four-agent report contract below; for a smaller target, omit an unnecessary track and update the expected report set before launch.
 
 ## Arguments
 
@@ -35,7 +35,12 @@ findings compound across investigations and surface connections later.
 
 ### Documentation Thoroughness
 Sub-agents MUST:
-- **Record negative results.** "Searched CourtListener for X, zero cases found" is a finding. Absence from authoritative sources is investigatively significant.
+- **Record scoped negative results.** Put every zero-result query, filter, date
+  range, source, and coverage limitation in `search_log` and the agent report.
+  Create a durable negative finding only when the source is authoritative for
+  the question, identity resolution is sound, the searched scope is bounded,
+  and the result artifact supplies the required evidence and source quote. A
+  zero is never proof that the underlying fact or relationship does not exist.
 - **Record mundane facts.** Officer names, registered agent addresses, formation dates, filing numbers, EINs — even when boring. These become critical during cross-referencing.
 - **Record baseline comparisons.** "GEO Group's 695% profit increase" means nothing without "vs. industry average of X%." Always seek the denominator.
 - **Check ALL required sources for the target type** — not just the ones most likely to return results. See tool checklists in each agent prompt below.
@@ -46,7 +51,7 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 1. Assess the target and determine what's already known
 2. **Build a research plan** — identify which sources are relevant and assign them to agents
-3. Write focused prompts for parallel sub-agents (default ~6) with explicit source mandates
+3. Write focused prompts for four parallel sub-agents with explicit source mandates
 4. Launch all sub-agents simultaneously using the Agent tool
 5. Wait for all to complete
 6. Synthesize their results — identify corroboration, contradictions, and gaps
@@ -60,8 +65,8 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 | Target Type | Critical Sources (must check) |
 |-------------|-------------------------------|
-| **Person** | CourtListener, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions, GDELT |
-| **Corporation** | State registries (DE/NY/FL/CA/TX + incorporation state), EDGAR (10-K, proxy), USASpending, SAM.gov, CourtListener, lobbying, FARA, GLEIF |
+| **Person** | CourtListener, state/local court catalog, property/recorder catalog, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions |
+| **Corporation** | State registries, property/recorder catalog, federal and state/local court sources, EDGAR (10-K, proxy), USASpending, SAM.gov, lobbying, FARA, GLEIF |
 | **Nonprofit** | IRS 990 (lookup, grants, officers, financials, red-flags), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
 | **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
 | **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
@@ -73,7 +78,7 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 If the flow output shows circular flows or 10+ network nodes, recommend `/trace-grants` for full network analysis as a parallel process.
 
-**Step 2: Assign sources to agents.** The default 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. For custom multi-target plans, ensure each source appears in at least one agent's mandate. Create a table:
+**Step 2: Assign sources to agents.** The 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. Give each source category one persistence owner: other agents may flag cross-category records in their reports, but they do not repeat that owner's searches or create duplicate findings. For custom multi-target plans, ensure each source appears in exactly one primary mandate. Create a table:
 
 ```
 | Source | Agent |
@@ -158,11 +163,11 @@ Write a **target briefing** — a 2-3 sentence summary of who/what this is and w
 
 ### 2. Launch Parallel Sub-Agents
 
-Use the Agent tool to launch all sub-agents simultaneously in a single message. Default to ~6 agents — adjust based on how many distinct source categories the target warrants. Each agent gets:
+Use the Agent tool to launch the four independent sub-agents simultaneously in a single message. If the plan intentionally uses fewer tracks, define that exact expected report set before launch. Each agent gets:
 - The target briefing
 - Its specific source mandate
 - Instructions to record findings via the CLI tools
-- The reminder: "Zero results is investigatively valuable — record negative searches too"
+- The reminder: "Record zero-result searches with their exact scope and limitations; create a finding only when the bounded negative meets the evidence standard"
 - **CRITICAL: Use `--output [WORKDIR]/<agent>-<query>.json` on ALL search commands** to keep context lean. Read the JSON files only when you need specific details.
 
 #### Agent A: Document Corpus
@@ -258,7 +263,7 @@ Use uv run python for all commands.
 
 #### Agent B: Corporate, Financial & Property Records
 
-**Sources**: Corporate Registry (FL/NY/NM/PA/UK/USVI), SEC EDGAR, NYC ACRIS, FEC, IRS 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
+**Sources**: Corporate registries, the property/recorder source catalog and adapters, SEC EDGAR, FEC, IRS 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
 
 **Prompt template**:
 ```
@@ -272,10 +277,11 @@ YOUR MANDATE: Search ALL corporate, financial, property, and regulatory database
 
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-<tool-name>.json
-For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
+CORPUS OWNERSHIP:
+Agent A owns corpus searches and corpus-derived findings. Do not repeat Agent
+A's corpus baseline or persist a second finding from the same corpus evidence.
+If a structured record points to a potentially new corpus document, put the
+reference and question in this report for parent reconciliation.
 
 REQUIRED SEARCHES (do ALL of these — use --output on every search):
 
@@ -286,11 +292,18 @@ CORPORATE REGISTRIES:
 
 SEC EDGAR:
 4. uv run python tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
-5. uv run python tools/query_edgar.py lookup "[TARGET]"
+5. uv run python tools/query_edgar.py lookup "[TARGET]" --output [WORKDIR]/b-edgar-lookup.json
 6. uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
 
-PROPERTY (NYC):
-7. uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
+PROPERTY AND RECORDER RECORDS:
+7. uv run python tools/public_records_search_plan.py "[TARGET]" --output [WORKDIR]/b-public-record-plan.json
+8. uv run python tools/query_property.py owner "[TARGET]" --output [WORKDIR]/b-property-owner.json
+9. uv run python tools/query_property.py sources --output [WORKDIR]/b-property-sources.json
+10. If an address is known:
+    uv run python tools/query_property.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-property-address.json
+11. Follow source IDs and operations from the plan with `query_property.py --source`
+    for direct adapters or `public_records_actions.py plan` for account, request,
+    purchase, formal-feed, or physical-office routes.
 
 CAMPAIGN FINANCE:
 8. uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
@@ -314,7 +327,7 @@ UCC FILINGS:
 15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
 
 FAA AIRCRAFT:
-16. uv run python tools/ingest_faa.py search "[TARGET]"
+16. uv run python tools/ingest_faa.py search "[TARGET]" --output [WORKDIR]/b-faa.json
 
 GLEIF (corporate hierarchy — financial entities):
 17. uv run python tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
@@ -349,7 +362,10 @@ As you search, be curious about data sources we're missing. If you discover:
 At the end of your investigation, list SOURCE GAPS and create infrastructure requests:
 uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" --type new_registry --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[REGISTRY]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
-If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update CLAUDE.md and /search-all-sources after.
+If you find a data source that would immediately help, probe only enough to
+verify the public endpoint and create the infrastructure request above. Do not
+implement it during this research wave; `/build-infra` owns the claimed build,
+tests, documentation, citations, source-health update, and completion.
 
 BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
 
@@ -395,7 +411,7 @@ Use uv run python for all commands.
 
 #### Agent C: Legal & Court Records
 
-**Sources**: CourtListener (dockets, opinions, parties, judges), FARA (detailed review), LDA Lobbying (detailed review)
+**Sources**: CourtListener (dockets, opinions, parties, judges), the state/local court source catalog and normalized sidecar, FARA (detailed review), LDA Lobbying (detailed review)
 
 **Prompt template**:
 ```
@@ -409,10 +425,11 @@ YOUR MANDATE: Search ALL legal and court databases for this target. You are look
 
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-<tool-name>.json
-For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
+CORPUS OWNERSHIP:
+Agent A owns corpus searches and corpus-derived findings. Do not repeat Agent
+A's corpus baseline or persist a second finding from the same corpus evidence.
+If a legal record points to a potentially new corpus document, put the
+reference and question in this report for parent reconciliation.
 
 REQUIRED SEARCHES (use --output on all):
 
@@ -421,10 +438,18 @@ COURTLISTENER (federal courts — use --output on ALL):
 2. uv run python tools/query_courtlistener.py cases "[TARGET]" --output [WORKDIR]/c-cl-cases.json
 3. uv run python tools/query_courtlistener.py search "[TARGET]" --type o --output [WORKDIR]/c-cl-opinions.json
 4. If any dockets found: uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
-5. For important opinions: uv run python tools/query_courtlistener.py opinion <OPINION_ID> --lines 500
+5. For important opinions: uv run python tools/query_courtlistener.py opinion <OPINION_ID> --lines 500 --output [WORKDIR]/c-cl-opinion-<OPINION_ID>.json
 6. For citation graph: uv run python tools/query_courtlistener.py citations <OPINION_ID> --output [WORKDIR]/c-cl-citations.json
 7. RECAP documents: uv run python tools/query_courtlistener.py recap-search "[TARGET]" --output [WORKDIR]/c-cl-recap.json
 8. FJC database: uv run python tools/query_courtlistener.py fjc --defendant "[TARGET]" --output [WORKDIR]/c-cl-fjc.json
+
+STATE AND LOCAL COURTS:
+9. uv run python tools/public_records_search_plan.py "[TARGET]" --output [WORKDIR]/c-public-record-plan.json
+10. uv run python tools/query_state_courts.py search "[TARGET]" --output [WORKDIR]/c-state-courts.json
+11. uv run python tools/query_state_courts.py sources --output [WORKDIR]/c-state-court-sources.json
+12. Follow source IDs and operations from the plan with
+    `query_state_courts.py --source` when a direct route exists, or render the
+    catalog-backed work with `public_records_actions.py plan`.
 
 For each case found:
 - What is the nature of the case?
@@ -448,7 +473,10 @@ INVESTIGATION REPORTS (ingested PDFs):
 
 RECORD all findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) (e.g., --sources courtlistener fara lobbying). Record connections between the target and any investigation-network persons discovered in litigation.
 
-Zero court results for a person who should have them (e.g., a practicing attorney) is notable — record it.
+A court zero is notable only when the selected CourtListener field matches the
+person's expected role, identity resolution is sound, and the query/date/court
+scope is recorded. Put ordinary zeroes in `search_log` and this report; create
+a finding only when the bounded result meets the evidence standard.
 
 PROACTIVE SOURCE DISCOVERY:
 As you search court records, look for:
@@ -456,7 +484,7 @@ As you search court records, look for:
 - Specific dockets referenced in documents that should be ingested (PACER dockets, SDNY exhibits)
 - Legal databases that would help (state bar records, judicial disclosure databases, arbitration records)
 - Government investigation reports or hearing transcripts not yet in our investigations.db
-If you find a new court system or legal database with a public API, create an infrastructure request. If it's simple enough, build the tool:
+If you find a new court system or legal database with a public API, verify the endpoint and create an infrastructure request. Do not build it during this research wave; `/build-infra` owns implementation:
 uv run python tools/infra_tracker.py add --title "Integrate [COURT/DATABASE]" --type new_source --description "Discovered during [TARGET] investigation. [Details, URL, access method]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
 BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
@@ -517,10 +545,11 @@ YOUR MANDATE: Search ALL network mapping, offshore leak, and open web sources fo
 
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-Search corpus tools listed in the investigation profile. For each corpus tool, run:
-  uv run python tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-<tool-name>.json
-For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
+CORPUS OWNERSHIP:
+Agent A owns corpus searches and corpus-derived findings. Do not repeat Agent
+A's corpus baseline or persist a second finding from the same corpus evidence.
+If a network or web record points to a potentially new corpus document, put
+the reference and question in this report for parent reconciliation.
 
 REQUIRED SEARCHES (use --output on all):
 
@@ -582,7 +611,7 @@ You have the widest view of any agent because you search the open web. As you re
 For each new source discovered:
 1. Note: name, URL, data type, access method, relevance to investigation
 2. Create an infrastructure lead if it has broad investigative value
-3. If it's a free API with clear documentation, you may build the integration tool yourself — probe first, confirm it works, then write `tools/query_[source].py` or `tools/ingest_[source].py`
+3. If it has a plausible public endpoint, probe only enough to verify access and include those probe results in the infrastructure request. Do not implement it during this research wave; `/build-infra` owns implementation and validation.
 
 uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] web research. URL: [URL]. Data: [WHAT]. Access: [HOW]. Value: [WHY]." --source-name "[SOURCE]" --source-url "[URL]" --priority [high/medium] --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
@@ -672,7 +701,7 @@ After reading all 4 report files:
 5. **Map the network**: Who does this target connect to? Draw the relationship map.
 6. **Collect infrastructure recommendations**: What new data sources, tools, or tool improvements did agents identify? Consolidate into actionable items.
 7. **Drill down selectively**: If a report mentions a critical finding, read the specific `--output` JSON for details. Do NOT read all JSON files — only the ones relevant to synthesis.
-8. **Flag gaps and anomalies**: What records should exist but don't? What contradictions appeared between agents' results? What factual questions remain unanswered? Record these as findings with `claim_type=synthesis` and `confidence=medium`, and spawn research leads for unresolved questions.
+8. **Flag gaps and anomalies**: What records should exist but don't? What contradictions appeared between agents' results? What factual questions remain unanswered? Put unresolved gaps in the report and spawn research leads. Create a negative synthesis finding only when the missing record expectation, identity resolution, exact searched scope, and evidence artifact satisfy the bounded-negative standard; use `claim_type=synthesis` and `confidence=medium`.
 9. **Run ACH competition**: Check `uv run python tools/hypothesis_tracker.py list`. When two or more hypotheses touch the target, run `matrix --competition-group <slug>` and `compete --competition-group <slug>` for each relevant competition group. Fold the rankings into the synthesis report as the hypotheses with **least evidence against**, never the most evidence for.
 11. **Check tool coverage**: Did agents actually use the full source list, or did they skip tools? Flag any sources that should have been checked but weren't, and note it in the summary.
 
@@ -766,9 +795,9 @@ If you encounter bugs in CLI tools (crashes, incorrect output, missing features)
 - Launch all agents in a SINGLE message with multiple Agent tool calls — this maximizes parallelism
 - Each agent should be `subagent_type: "general-purpose"` with `run_in_background: true`
 - The orchestrator does NOT search sources directly — that's the agents' job
-- Default to ~6 agents. Scale up or down based on source availability — this is soft guidance, not a hard cap.
-- For simple targets where only a few source categories are relevant, use fewer agents. For complex targets with many source categories, use more.
+- Use the four-agent report contract by default. For simple targets, use fewer agents only after defining the exact expected report set.
+- For complex targets, create follow-up waves rather than adding uncollected agents to the current four-report wave.
 - Agents MUST record their findings via the CLI tools, not just report them as text
 - **Agents write reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`** — orchestrator reads these, NOT TaskOutput
 - **Agents should be curious and proactive.** Don't just execute the search checklist mechanically — follow unexpected threads, investigate surprises, and identify infrastructure improvements. If a search reveals a data source we don't have, note it. If a tool could be extended to answer a question better, say so. The investigation platform should get stronger with every wave.
-- **Agents may build tools.** If an agent discovers a free, accessible data source during investigation and it would help answer the current question, the agent can build the integration tool (probe-before-code applies). Update CLAUDE.md and /search-all-sources after building.
+- **Agents do not build tools during the research wave.** They may verify a public endpoint and create a detailed infrastructure request; `/build-infra` is the single implementation owner.

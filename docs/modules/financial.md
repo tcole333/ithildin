@@ -8,7 +8,7 @@ Tools for SEC filings, financial ratios, market data, nonprofit analysis, and en
 
 | Tool | Source | Auth | Local Data | Rate Limit |
 |------|--------|------|------------|------------|
-| `query_edgar.py` | SEC EDGAR EFTS + submissions API | None (User-Agent with contact required) | No | 10 req/sec |
+| `query_edgar.py` (`query_sec.py` compatibility alias) | SEC EDGAR EFTS + submissions API | None (User-Agent with contact required) | No | 10 req/sec |
 | `financial_ratios.py` | Offline computation | None | Reads JSON from query_edgar | N/A |
 | `query_market.py` | yfinance (Yahoo Finance) | None | No | Be polite (0.5s between multi-ticker) |
 | `query_sec_enforcement.py` | Local SQLite (`datasets/sec_enforcement.db`) | None | Yes | N/A |

@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import io
 import json
-import sqlite3
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlsplit
 
@@ -41,7 +40,6 @@ from tools.reporting_corpus import (
     cmd_audit_relevance,
     cmd_ingest_candidates,
     cmd_search,
-    align_candidate_canonical,
     candidate_url_variants,
     extract_page_links,
     is_navigation_link,
@@ -1273,6 +1271,13 @@ def test_promotion_requires_and_preserves_quoted_primary_evidence(tmp_path, monk
     monkeypatch.setattr("tools.lead_tracker._schema_initialized", False)
     monkeypatch.setattr("tools.findings_tracker.DB_PATH", core_path)
     monkeypatch.setattr("tools.findings_tracker._schema_initialized", False)
+    monkeypatch.setattr(
+        "tools.findings_tracker._load_evidence_text",
+        lambda evidence_ref, evidence_type: (
+            "Context before Quoted primary text and context after.",
+            "fixture EFTA OCR",
+        ),
+    )
     from tools.lead_tracker import get_db
     core = get_db()
     cols = {row[1] for row in core.execute("PRAGMA table_info(findings)")}

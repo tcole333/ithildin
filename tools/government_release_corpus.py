@@ -26,9 +26,11 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 try:
+    from tools.fts_query import literal_fts_query
     from tools.government_releases import DEFAULT_DB_PATH, connect, content_hash, refresh_fts
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from fts_query import literal_fts_query
     from government_releases import DEFAULT_DB_PATH, connect, content_hash, refresh_fts
     from output_util import add_output_args, write_output
 
@@ -479,7 +481,8 @@ def cmd_fetch_sec(args):
 
 def cmd_search(args):
     db=connect(args.db,create=False)
-    agency_clause=" AND r.agency=?" if args.agency else ""; params=[args.query]
+    agency_clause=" AND r.agency=?" if args.agency else ""
+    params=[literal_fts_query(args.query)]
     if args.agency: params.append(args.agency)
     params.append(args.limit)
     rows=db.execute(f"""SELECT r.id,r.agency,r.source_ref,r.release_number,r.title,r.published_at,

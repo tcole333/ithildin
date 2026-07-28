@@ -88,6 +88,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 **Person leads:**
 - [ ] Investigation corpus (all corpus_tools from profile)
 - [ ] CourtListener (federal litigation: `query_courtlistener.py search --party "NAME"`, `cases`, `opinions`)
+- [ ] Property/recorder and state/local court plan (`public_records_search_plan.py`, then the unified routers and catalog routes it selects)
 - [ ] FEC donations (`query_fec.py donor`)
 - [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
 - [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
@@ -106,6 +107,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
 - [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
 - [ ] CourtListener (`query_courtlistener.py search --party "ENTITY"` — litigation involving entity)
+- [ ] Property/recorder and state/local court plan (`public_records_search_plan.py`, `query_property.py`, `query_state_courts.py`)
 - [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
 - [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
 - [ ] FARA (`query_fara.py search` — foreign principal registrations)
@@ -119,15 +121,41 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] FEC (political spending by entity + executives)
 - [ ] USASpending (contract/grant awards)
 - [ ] DS10 financial records (`parse_ds10_financials.py query`)
-- [ ] ACRIS property records (`query_acris.py party`)
+- [ ] Property and recorder records (`public_records_search_plan.py`, then `query_property.py` and selected catalog routes)
 - [ ] UCC filings (`query_registry.py ucc-search`)
 - [ ] GLEIF hierarchy
 - [ ] CourtListener (financial litigation, SEC enforcement)
 
 ### 4b. Execute Searches
+For person, entity, financial, property, or litigation leads, build the
+capability-driven public-record plan before choosing a jurisdiction-specific
+route:
+
+```bash
+uv run python tools/public_records_search_plan.py "<TARGET>" \
+  --output "$WORKDIR/lead-public-record-plan.json"
+uv run python tools/query_property.py owner "<TARGET>" \
+  --output "$WORKDIR/lead-property.json"
+uv run python tools/query_state_courts.py search "<TARGET>" \
+  --output "$WORKDIR/lead-state-courts.json"
+```
+
+Use the plan's source IDs and operations with the unified routers for direct
+adapters. When the catalog describes an account, request, purchase, formal
+feed, or physical-office route, render the concrete work with
+`public_records_actions.py plan`. Treat local-cache misses and acquisition
+states as coverage information rather than source-authoritative zero results.
+
 Run queries against relevant sources. For each search:
 1. Query the source
-2. Log the search: `uv run python tools/lead_tracker.py` (use log_search function)
+2. Log the search with the current function signature:
+   ```python
+   from tools.lead_tracker import log_search
+   log_search("<query text>", "<source>", result_count)
+   ```
+   Pass `session_id=` only when it is the integer ID of an existing `sessions`
+   row; a lead ID is not a session ID. Use `lead_tracker.py note <LEAD_ID> ...`
+   when the search also needs a lead-specific audit note.
 3. Record notable results as notes on the lead
 4. If a definitive finding is discovered, create a finding in findings_tracker
 
@@ -332,7 +360,7 @@ depth greater than one and should be recorded as a narrower coverage gap.
 - **Prefer EFTA IDs** as canonical evidence references when available
 - **Create follow-ups generously**: If something looks interesting, create a lead for it
 - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
-- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update both `CLAUDE.md` and `AGENTS.md`.
+- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, probe only enough to verify the public endpoint and create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. Do not implement the integration during research; `/build-infra` owns the claimed build, tests, documentation, citation support, source-health update, and completion.
 - **Extend existing tools when gaps appear**: If a query tool doesn't cover a jurisdiction you need, or a search tool misses a variant you tried manually, create an infra request with `--type tool_improvement`. Small enhancements compound across all future investigations.
 
 ## Context Management

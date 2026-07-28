@@ -92,9 +92,6 @@ def cmd_merge(args):
     f_count = db.execute(
         "SELECT COUNT(*) FROM findings WHERE target_name = ?", (alias,)
     ).fetchone()[0]
-    f_slash = db.execute(
-        "SELECT COUNT(*) FROM findings WHERE target_name LIKE ?", (f"{canonical} / %",)
-    ).fetchone()[0]
     c_a = db.execute(
         "SELECT COUNT(*) FROM connections WHERE person_a = ?", (alias,)
     ).fetchone()[0]
@@ -104,7 +101,6 @@ def cmd_merge(args):
 
     print(f"Merge: '{alias}' -> '{canonical}'")
     print(f"  Findings to update: {f_count}")
-    print(f"  Slash-variant findings to normalize: {f_slash}")
     print(f"  Connections (person_a) to update: {c_a}")
     print(f"  Connections (person_b) to update: {c_b}")
 
@@ -123,11 +119,6 @@ def cmd_merge(args):
         "UPDATE findings SET target_name = ? WHERE target_name = ?",
         (canonical, alias),
     )
-    if f_slash:
-        db.execute(
-            "UPDATE findings SET target_name = ? WHERE target_name LIKE ?",
-            (canonical, f"{canonical} / %"),
-        )
     # Delete connections that would become duplicates after rename
     db.execute(
         """DELETE FROM connections WHERE person_a = ? AND id IN (
@@ -228,7 +219,7 @@ def _preview_connection_dupes(db, alias, canonical):
             print(f"    {alias_conn['person_a']} <-> {alias_conn['person_b']} (id={alias_conn['id']}, profile={alias_conn['profile_id']})")
             for e in existing:
                 print(f"      already exists: id={e['id']}, profile={e['profile_id']}")
-        print(f"\n  Run dedup-connections after merge to clean up.")
+        print("\n  Run dedup-connections after merge to clean up.")
 
 
 def _show_connection_dupes(db, name):
@@ -342,7 +333,7 @@ def cmd_show(args):
         "FROM findings WHERE target_name LIKE ? GROUP BY target_name",
         (f"%{name}%",),
     ).fetchall()
-    print(f"\nFindings:")
+    print("\nFindings:")
     for v in variants:
         print(f"  '{v['target_name']}': {v['cnt']} findings (profiles: {v['profiles']})")
 
@@ -365,7 +356,7 @@ def cmd_show(args):
         (name, name, f"%{name}%"),
     ).fetchall()
     if entities:
-        print(f"\nEntities:")
+        print("\nEntities:")
         for e in entities:
             print(f"  #{e['id']} {e['name']} ({e['entity_type']})")
 

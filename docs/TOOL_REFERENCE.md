@@ -11,10 +11,11 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | Source Name | Tool(s) | Description |
 |-------------|---------|-------------|
 | `web_search` | WebSearch, WebFetch | Open web research |
-| `kabass` | ingest_kabasshouse.py | **PRIMARY Epstein corpus** — 1.42M OCR'd docs (DOJ DS1-12 + FBI + House) + structured layers. Same EFTA page in kabass + doj_vol11/lmsband = one source, not corroboration |
+| `kabass` | ingest_kabasshouse.py | **PRIMARY Epstein corpus** — 1,424,673 OCR document/page records (one distinct file_key per row in the current snapshot) + structured layers. Same EFTA page in kabass + doj_vol11/lmsband = one source, not corroboration |
 | `fbi` | ingest_fbi_files.py | FBI release (8,150 docs) + named exhibits (Flight Log, Contact Book) |
 | `efta` | EFTA evidence references | Underlying DOJ-released EFTA document; copies or re-OCRs in kabass/LMSBAND/DOJ corpora remain one source, not corroboration |
 | `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus (fallback — subset of kabass) |
+| `justice_gov` | justice.gov | Official Department of Justice pages and documents |
 | `duggan` | _(retired — tool removed 2026-06-29)_ | Duggan USA corpus — historical source name only; 42 findings cite it |
 | `lmsband` | query_lmsband.py | LMSBAND document corpus |
 | `unified_db` | query_unified.py | Unified document database |
@@ -22,6 +23,8 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `edgar` | query_edgar.py | SEC EDGAR filings |
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
 | `supreme_court` | supremecourt.gov | Official U.S. Supreme Court dockets, filings, and opinions |
+| `mn_court_appeals` | mncourts.gov | Official Minnesota Court of Appeals opinions |
+| `fjc` | query_courtlistener.py fjc | Federal Judicial Center Integrated Database |
 | `finra` | query_finra.py | FINRA BrokerCheck records |
 | `openpayments` | query_openpayments.py | CMS Open Payments covered-recipient profiles and company-reported payment summaries |
 | `senate_finance` | query_senate_finance.py | Official Senate Finance Committee releases, investigations, and attachments |
@@ -29,7 +32,9 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
 | `registry` | query_registry.py | Unified corporate registry |
+| `fdacs` | FDACS Check-A-Charity | Florida charity registrations and official attachments |
 | `usaspending` | query_usaspending.py | USASpending federal contracts/grants |
+| `fpds` | query_fpds.py | FPDS-NG contract actions incl. createdBy/approvedBy workflow fields |
 | `federal_register` | query_federal_register.py | Federal Register documents (rules, notices, presidential docs) |
 | `sam_gov` | query_sam.py | SAM.gov API |
 | `sam_bulk` | ingest_sam.py | SAM.gov bulk data (local SQLite) |
@@ -64,6 +69,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fl_sunbiz` | query_florida.py, ingest_florida.py | Florida SunBiz |
 | `ny_dos` | query_nydos.py | New York DOS |
 | `ca_sos` | query_california.py | California SOS |
+| `co_sos` | Colorado Secretary of State | Colorado business registry |
 | `tx_comptroller` | query_texas.py | Texas Comptroller |
 | `mi_lara` | query_michigan.py | Michigan LARA |
 | `nj_rev` | query_newjersey.py | New Jersey Revenue |
@@ -83,7 +89,14 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `panama_rp` | query_panama.py | Panama public registry |
 | `zefix` | query_zefix.py | Swiss commercial registry |
 | `patents` | query_patents.py | USPTO patent search & ownership tracing |
+| `trademarks` | query_trademarks.py | USPTO trademark search, ownership blocks, and goods/services |
 | `military_corrections` | query_military_corrections.py | DoD BCMR/BCNR Reading Room (boards.law.af.mil) — redacted decisions of all four service correction boards |
+| `ecfr` | ecfr.gov | Electronic Code of Federal Regulations |
+| `nlrb` | nlrb.gov | National Labor Relations Board records |
+| `usms` | usmarshals.gov | U.S. Marshals Service records |
+| `massachusetts_governor` | mass.gov/governor | Massachusetts governor official releases and records |
+| `val_verde_county` | valverdecounty.texas.gov | Val Verde County official records |
+| `internet_archive` | archive.org | Preserved public web pages and documents |
 | `elperuano` | query_elperuano.py, ingest_elperuano.py | Diario Oficial El Peruano (Peru) — gazette search, document fetch, daily bulletin |
 
 **Important**: Use these exact names. `findings_tracker.py` requires at least one
@@ -96,13 +109,24 @@ tokens still fail validation.
 
 | Alias(es) | Canonical source |
 |------------|------------------|
-| `kabasshouse` | `kabass` |
+| `kabasshouse`, `Kabasshouse Epstein Corpus` | `kabass` |
 | `unified`, `unified_epstein` | `unified_db` |
+| `SEC EDGAR` | `edgar` |
+| `ds10` | `ds10_financial` |
+| `doj_epstein_files` | `doj` |
 | `house_20k`, `epstein_20k` | `house_oversight` |
 | `fbi-files`, `fbi_files`, `fbi_epstein`, `fbi_epstein_files` | `fbi` |
 | `epstein_reporting` | `reporting` |
 | `query_investigations` | `investigations_db` |
 | `scotus` | `supreme_court` |
+| `scotus_filing` | `supreme_court` |
+| `courtlistener_recap` | `courtlistener` |
+| `sam` | `sam_gov` |
+| `sam_local`, `sam_public_extract` | `sam_bulk` |
+| `florida_sunbiz` | `fl_sunbiz` |
+| `colorado_sos` | `co_sos` |
+| `justice.gov` | `justice_gov` |
+| `ecfr.gov` | `ecfr` |
 
 ## Core Investigation Tools
 
@@ -337,11 +361,14 @@ uv run python tools/findings_tracker.py add --target "TARGET" \
   --output "$WORKDIR/created-finding.json"  # JSON includes the committed finding ID
 uv run python tools/findings_tracker.py unverified --profile epstein --output "$WORKDIR/unverified.json"
 uv run python tools/findings_tracker.py unverified --all-profiles --json
-python tools/findings_tracker.py provenance 42           # Full provenance chain for finding #42
-python tools/findings_tracker.py verify 42               # Mark as human-verified
-python tools/findings_tracker.py dispute 42 --reason "Quote doesn't match source"
-python tools/findings_tracker.py retract 42 --reason "Hallucinated by agent"  # Cascades to connections
-python tools/findings_tracker.py correct 42 --field summary --value "New text" --reason "Amount was 15M not 18M"
+uv run python tools/findings_tracker.py provenance 42    # Full provenance chain
+# `verify ID [--by REVIEWER]` is the complete verification interface; it does
+# not take generic `--status` or `--notes` options.
+uv run python tools/findings_tracker.py verify 42 --by analyst
+uv run python tools/findings_tracker.py dispute 42 --reason "Quote doesn't match source"
+uv run python tools/findings_tracker.py retract 42 --reason "Hallucinated by agent"  # Cascades
+uv run python tools/findings_tracker.py correct 42 --field summary \
+  --value "New text" --reason "Amount was 15M not 18M"
 # source_datasets corrections must be a JSON array of supported tokens
 uv run python tools/findings_tracker.py correct 42 --field source_datasets \
   --value '["courtlistener","registry"]' --reason "Normalize provenance tokens"
@@ -438,9 +465,10 @@ uv run python scripts/populate_threads.py --stats      # show current assignment
 ### DOJ Vol 11 (331K pages, FTS5, EFTA IDs)
 ```bash
 python tools/query_doj.py search "query" -n 50 --output /tmp/results.json
+python tools/query_doj.py download "https://www.justice.gov/epstein/files/DataSet%209/EFTA00634292.pdf" --output /tmp/EFTA00634292.pdf
 ```
 
-### LMSBAND (60K files, 851K entities)
+### LMSBAND (591,286 files, 1,693,889 entity mentions)
 ```bash
 python tools/query_lmsband.py search "query" --output /tmp/results.json
 python tools/query_lmsband.py entities "name" --output /tmp/results.json
@@ -630,6 +658,7 @@ python tools/ingest_panama.py ingest-batch "QUERY" --expand
 # Read-only commands accept --output FILE for isolated JSON results.
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 uv run python tools/ingest_uk_companies_house.py search "QUERY" --output "$WORKDIR/uk-search.json"
+# Use --broad only for legacy token-based discovery; default search is phrase-sensitive.
 uv run python tools/ingest_uk_companies_house.py company 12345678 --output "$WORKDIR/uk-company.json"
 uv run python tools/ingest_uk_companies_house.py officers 12345678 --output "$WORKDIR/uk-officers.json"
 uv run python tools/ingest_uk_companies_house.py psc 12345678 --output "$WORKDIR/uk-psc.json"
@@ -744,7 +773,252 @@ uv run python tools/query_patents.py enrich --threshold 85       # Auto-enrich
 Requires `USPTO_API_KEY` in `.env` (register at https://data.uspto.gov/myodp, requires ID.me).
 Uses the USPTO Open Data Portal API (60 req/min). Results cached in `datasets/patents.db`.
 
+### USPTO Trademarks (mark ownership + goods/services — no auth)
+```bash
+# Cite trademark findings with source token `trademarks` (not `patents`).
+uv run python tools/query_trademarks.py mark "HC STANDARD"                  # Exact phrase by default
+uv run python tools/query_trademarks.py mark "HC STANDARD" --loose          # Broad OR-style site search
+uv run python tools/query_trademarks.py mark "HC STANDARD" --include-pseudo # Also phrase-match pseudo-marks
+uv run python tools/query_trademarks.py owner "Global Emergency Resources"  # Registrant and later-owner blocks
+uv run python tools/query_trademarks.py serial 85877492
+uv run python tools/query_trademarks.py goods "asset tracking" --live-only --class 042
+uv run python tools/query_trademarks.py mark "HC STANDARD" --from-file saved-response.json
+```
+The default mark query uses `match_phrase` on the wordmark. The USPTO site's loose query OR-matches
+terms and can return tens of thousands of irrelevant hits for a multi-word search, so use `--loose`
+only when broader recall is intentional. Console and JSON results preserve every `ownerFullText`
+entry, including both `(REGISTRANT)` and `(LAST LISTED OWNER)` lines that expose ownership transfers.
+USPTO patents and trademarks are different registers; use `query_patents.py` and source token
+`patents` for patents, and `query_trademarks.py` and source token `trademarks` for trademarks.
+
 ## Public Records
+
+### Property and state/local-court control plane
+
+Source facts, capabilities, routes, reviewed access decisions, terms snapshots,
+and probe history live in `datasets/public_records_catalog.db`. Adapters and
+planners read that shared state rather than maintaining separate source
+switches.
+
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/seed_public_records_catalog.py --json
+uv run python tools/public_records_catalog.py list --domain property --json
+uv run python tools/public_records_catalog.py list --domain court --json
+uv run python tools/public_records_catalog.py show us-nc-onemap-parcels --json
+uv run python tools/public_records_catalog.py health --json
+uv run python tools/public_records_monitor.py plan us-nc-onemap-parcels \
+    --output "$WORKDIR/public-record-monitor-plan.json"
+uv run python tools/public_records_monitor.py history us-nc-onemap-parcels \
+    --output "$WORKDIR/nc-probe-history.json"
+uv run python tools/public_records_store.py init
+uv run python tools/public_records_store.py stats
+```
+
+`ok`, true `no_results`, `partial`, `rate_limited`, `human_required`,
+`terms_blocked`, `restricted`, `unavailable`, and `source_changed` remain
+separate result states. Shared HTTP families provide Socrata and ArcGIS
+pagination/cursors; the bulk family provides release manifests, resumable
+transfer, hashes, and ZIP inspection/extraction. There is no platform-wide
+`maximum_records_per_run` compatibility setting; caller limits and endpoint
+page-size mechanics remain explicit.
+
+### Nationwide source census and priority
+
+```bash
+uv run python tools/public_records_census.py seed
+uv run python tools/public_records_census.py stats --json
+uv run python tools/public_records_census.py claim --domain property --state FL \
+    --by source-researcher --output "$WORKDIR/claimed-source.json"
+uv run python tools/public_records_census.py associate 17 \
+    --source-id us-example-source --coverage '{"counties":["001"]}' \
+    --coverage-gaps '["other county systems unassessed"]' --by source-researcher
+uv run python tools/public_records_census.py assess-coverage 17 \
+    --status partial --gaps '["local systems still unassessed"]' \
+    --by source-researcher
+uv run python tools/public_records_priority.py recompute --by methodology-review
+uv run python tools/public_records_priority.py metrics \
+    --output "$WORKDIR/public-record-priority.json"
+uv run python tools/public_records_priority.py explain 17 \
+    --output "$WORKDIR/public-record-target-17.json"
+```
+
+The census tracks jurisdiction/record-role discovery, multiple source
+associations, service-area evidence, and explicit coverage gaps. Source
+discovery and coverage assessment are separate states. Priority stores
+benefit, feasibility, and risk independently, with an auditable basis for every
+recomputation.
+
+### Unified query routers and search planning
+
+The routers search normalized sidecars by default. A named source dispatches
+through its registered adapter when available and otherwise returns the
+cataloged route state.
+
+```bash
+uv run python tools/query_property.py sources --jurisdiction 37 \
+    --output "$WORKDIR/property-sources.json"
+uv run python tools/query_property.py owner "SMITH" --output "$WORKDIR/property-local.json"
+uv run python tools/query_property.py owner "SMITH" --source us-nc-onemap-parcels \
+    --county-fips 005 --limit 25 --output "$WORKDIR/property-nc.json"
+uv run python tools/query_property.py parcel 3013467134 --source us-nc-onemap-parcels \
+    --county-fips 005 --geometry --ingest --output "$WORKDIR/property-nc-parcel.json"
+
+uv run python tools/query_state_courts.py sources --jurisdiction 36 \
+    --output "$WORKDIR/court-sources.json"
+uv run python tools/query_state_courts.py search "EXAMPLE LLC" \
+    --output "$WORKDIR/court-local.json"
+uv run python tools/query_state_courts.py search "EXAMPLE LLC" --source us-ny-nyscef \
+    --jurisdiction 36 --output "$WORKDIR/nyscef-human-action.json"
+
+uv run python tools/public_records_search_plan.py "Example Holdings LLC" \
+    --alias "Example Holdings" --address "100 Main St, Albany, NY" \
+    --jurisdiction 36 --output "$WORKDIR/public-record-search-plan.json"
+```
+
+Normalized data live in `datasets/property_records.db` and
+`datasets/state_court_records.db`. Cite retained records with
+`PROPERTY:<source>/<jurisdiction>/<kind>/<native-id>` or
+`STATECOURT:<source>/<court>/<case>/<kind>[/<native-id>]`. See
+`docs/modules/property.md` and `docs/modules/legal.md`.
+
+### Property adapter pilots
+
+```bash
+# North Carolina OneMap: owner/address/parcel/geometry
+uv run python tools/query_nc_property.py owner "SMITH" --county-fips 005 \
+    --limit 25 --output "$WORKDIR/nc-owner.json"
+uv run python tools/query_nc_property.py parcel 3013467134 --county-fips 005 \
+    --geometry --output "$WORKDIR/nc-parcel.json"
+
+# Cook County Parcel Universe: PIN history/geography/tax districts
+uv run python tools/query_cook_property.py parcel 01-01-106-009-1001 \
+    --output "$WORKDIR/cook-parcel.json"
+
+# Maryland statewide assessments: address/parcel; current owner names are
+# source-withheld and represented as such
+uv run python tools/query_md_property.py address "7 TRAYMORE RD" \
+    --output "$WORKDIR/md-address.json"
+uv run python tools/query_md_property.py parcel 04030311078580 \
+    --output "$WORKDIR/md-parcel.json"
+
+# Florida DOR official assessment-roll and GIS releases
+uv run python tools/query_fl_dor_property.py manifest --type sdf \
+    --county Baker --year 2026 --output "$WORKDIR/fl-baker-manifest.json"
+uv run python tools/query_fl_dor_property.py probe --type gis-pin \
+    --county 12 --year 2026 --output "$WORKDIR/fl-gis-probe.json"
+uv run python tools/query_fl_dor_property.py dry-run --type nal \
+    --county Baker --destination "$WORKDIR/fl-dor" \
+    --output "$WORKDIR/fl-transfer-plan.json"
+
+# MassGIS official municipal snapshots
+uv run python tools/query_massgis_property.py manifest --town GOSNOLD \
+    --output "$WORKDIR/massgis-manifest.json"
+uv run python tools/query_massgis_property.py probe --town GOSNOLD \
+    --output "$WORKDIR/massgis-probe.json"
+uv run python tools/query_massgis_property.py download --town GOSNOLD \
+    --destination "$WORKDIR/massgis-gosnold.zip" --dry-run \
+    --output "$WORKDIR/massgis-transfer-plan.json"
+
+# Harris Central Appraisal District official manifests and bulk archives
+uv run python tools/query_harris_property.py manifest --year 2026 \
+    --output "$WORKDIR/hcad-2026-manifest.json"
+uv run python tools/query_harris_property.py probe --year 2026 \
+    --artifact Real_acct_owner.zip \
+    --output "$WORKDIR/hcad-owner-probe.json"
+uv run python tools/query_harris_property.py dry-run --year 2026 \
+    --artifact Real_acct_owner.zip --destination "$WORKDIR/hcad" \
+    --output "$WORKDIR/hcad-owner-transfer-plan.json"
+```
+
+NYC ACRIS and East Baton Rouge commands are listed later in this reference.
+See `docs/modules/property.md` for each pilot's source coverage and canonical
+record semantics.
+
+### Retention, artifacts, extraction, and entity candidates
+
+```bash
+# Retain any canonical property result envelope; mapped sources also receive
+# structured parcel/instrument projections
+uv run python tools/ingest_property_records.py ingest \
+    --input "$WORKDIR/property-result.json" \
+    --output "$WORKDIR/property-ingest.json"
+
+# Source-specific NC compatibility command
+uv run python tools/ingest_property_records.py nc-onemap \
+    --input "$WORKDIR/nc-parcel.json" --output "$WORKDIR/nc-ingest.json"
+
+# Retain any canonical state/local-court result envelope
+uv run python tools/ingest_state_court_records.py ingest \
+    "$WORKDIR/court-result.json" --output "$WORKDIR/court-ingest.json"
+
+# Store and verify source bytes
+uv run python tools/public_records_artifacts.py put "$WORKDIR/filing.pdf" \
+    --source-id us-example-court \
+    --canonical-ref "STATECOURT:us-example-court/circuit/CV-42/document/7" \
+    --output "$WORKDIR/filing-artifact.json"
+uv run python tools/public_records_artifacts.py verify \
+    --output "$WORKDIR/public-record-artifact-check.json"
+
+# Validate/import extracted fields and manage the append-only review queue
+uv run python tools/public_records_extract.py validate \
+    "$WORKDIR/filing-extraction.json" \
+    --output "$WORKDIR/filing-validation.json"
+uv run python tools/public_records_extract.py ingest \
+    "$WORKDIR/filing-extraction.json" \
+    --output "$WORKDIR/filing-extraction-ingest.json"
+uv run python tools/public_records_extract.py queue \
+    --output "$WORKDIR/public-record-review.json"
+
+# Generate explainable property/instrument/court-party entity candidates
+uv run python tools/public_records_entity_candidates.py generate \
+    --output "$WORKDIR/public-record-entity-candidates.json"
+uv run python tools/public_records_entity_candidates.py list --status open \
+    --output "$WORKDIR/open-public-record-candidates.json"
+```
+
+### Catalog-backed source actions and evaluation
+
+```bash
+# Render a formal-feed/account/request/paid/physical-access action
+uv run python tools/public_records_actions.py plan us-in-iocs-bulk \
+    --operation obtain_feed --selector "civil case metadata" \
+    --output "$WORKDIR/indiana-feed-plan.json"
+
+# Add the structured action to investigation.db when it should be tracked
+uv run python tools/public_records_actions.py enqueue us-ny-nyscef \
+    --operation fetch_document --selector "156728/2019 document 42" \
+    --output "$WORKDIR/nyscef-document-action.json"
+
+# ACRIS selected-image/copy route from an index document ID
+uv run python tools/public_records_actions.py plan us-nyc-acris-images \
+    --operation open_selected_image --selector 2017021700466001 \
+    --output "$WORKDIR/acris-image-plan.json"
+
+# Recorder product candidates (catalog/action routes, not query adapters)
+uv run python tools/public_records_actions.py plan \
+    us-fl-miami-dade-official-records --operation request_bulk_files \
+    --selector "Miami-Dade deed index" \
+    --output "$WORKDIR/miami-recorder-plan.json"
+uv run python tools/public_records_actions.py plan \
+    us-tx-harris-clerk-real-property --operation request_bulk_index \
+    --selector "Harris County real-property index" \
+    --output "$WORKDIR/harris-recorder-plan.json"
+
+# Targeted court and compiled-data candidates
+uv run python tools/public_records_actions.py plan us-pa-ujs-public-dockets \
+    --operation fetch_docket_sheet --selector "CP-00-CR-0000042-2026" \
+    --output "$WORKDIR/pennsylvania-docket-plan.json"
+uv run python tools/public_records_actions.py plan us-md-aoc-court-data \
+    --operation request_court_data --selector "civil judgments" \
+    --output "$WORKDIR/maryland-court-data-plan.json"
+
+# Adapter/extraction/triage gold-set evaluation
+uv run python tools/public_records_eval.py template \
+    --output "$WORKDIR/public-record-eval-template.json"
+uv run python tools/public_records_eval.py run "$WORKDIR/public-record-gold.json" \
+    --output "$WORKDIR/public-record-eval.json"
+```
 
 ### SEC EDGAR (full-text search, no auth, needs User-Agent)
 ```bash
@@ -765,17 +1039,33 @@ Look up relevant CIKs for current investigation targets via `query_edgar.py look
 uv run python tools/query_usaspending.py search "QUERY"                      # Recipient autocomplete
 uv run python tools/query_usaspending.py awards "RECIPIENT" --limit 20       # Contract awards
 uv run python tools/query_usaspending.py awards "RECIPIENT" --grants         # Grant awards
-uv run python tools/query_usaspending.py award CONT_AWD_123_456             # Full award detail by ID
+uv run python tools/query_usaspending.py award 70CDCR26FR0000002            # Full award detail; plain PIID resolves first
 uv run python tools/query_usaspending.py recipient "QUERY"                   # Recipient profile + agency breakdown
 uv run python tools/query_usaspending.py subawards "RECIPIENT"               # Subcontractor/subgrantee data
 uv run python tools/query_usaspending.py transactions "RECIPIENT" --date-range 2020-01-01,2024-12-31
+uv run python tools/query_usaspending.py transactions --uei JMLKZZ1NL2Z6 \
+    --agency "U.S. Immigration and Customs Enforcement" --agency-tier subtier --output /tmp/transactions.json
 uv run python tools/query_usaspending.py timeline "RECIPIENT" --group fiscal_year  # Spending trend
 uv run python tools/query_usaspending.py geography "RECIPIENT" --geo-layer state   # Geographic distribution
 uv run python tools/query_usaspending.py top-recipients --agency "Department of Defense" --limit 10
 uv run python tools/query_usaspending.py agencies --limit 10                 # List top-tier federal agencies
 uv run python tools/query_usaspending.py covid "QUERY"                       # COVID-19 relief awards
 uv run python tools/query_usaspending.py loans "QUERY"                       # Loan awards (PPP, EIDL, etc.)
+# Transaction-level keyword search — sees scope added by modification, which award search cannot
+uv run python tools/query_usaspending.py transactions-keyword "skip tracing" --all-pages --output /tmp/hits.json
+uv run python tools/query_usaspending.py transactions-keyword "wellness check" --naics 561611 --psc R799 \
+    --agency "U.S. Immigration and Customs Enforcement" --agency-tier subtier --output /tmp/ice.json
 ```
+
+### FPDS-NG (contract actions + workflow/approval fields — no auth)
+```bash
+# Only source for createdBy / lastModifiedBy / approvedBy. Cite as source token `fpds`.
+uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --output /tmp/actions.json
+uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --max-pages 5 --output /tmp/vendor.json
+uv run python tools/query_fpds.py piid PIID --from-file saved-feed.xml       # offline parse of saved XML
+```
+Workflow-field keys are camelCase (`createdBy`, `lastModifiedBy`, `approvedBy`) while most other keys are
+snake_case; snake_case reads of those three silently return `None`. See `docs/modules/government.md`.
 
 ### Federal Register (rules, notices, presidential documents — no auth)
 ```bash
@@ -886,6 +1176,7 @@ uv run python tools/query_courtlistener.py party "PERSON_NAME" --court flsd --ou
 # Opinions and full text
 uv run python tools/query_courtlistener.py opinions "QUERY" --court ca2 --semantic --output FILE
 uv run python tools/query_courtlistener.py opinion 12345 --lines 1000
+# Auto mode treats IDs as clusters first; use --id-type opinion for a known raw opinion ID.
 
 # Citation graph
 uv run python tools/query_courtlistener.py citations <OPINION_ID> --output FILE
@@ -956,16 +1247,18 @@ uv run python tools/query_military_justice.py case-detail "24-0156/AR" --output 
 - **CGCCA** (`uscg.mil/.../CGCCA-Opinions/`): returns 403 to non-browser User-Agents (Akamai/CDN). Use `--user-agent` override with a real browser UA, or query the FindLaw mirror at `caselaw.findlaw.com/court/u-s-coa-gua-crt-cri-app`.
 - All HTTP and PDF responses are cached in `datasets/military_justice_cache.db` (SQLite WAL). Default rate limit is 1 req/sec per host (`--rate-limit` to override).
 
-### NYSCEF (New York state courts — browser-backed guest search, low-volume use)
+### NYSCEF (New York state courts — structured human action)
+
+The cataloged source `us-ny-nyscef` currently dispatches as
+`human_required`; these commands write the requested criteria and official
+manual-search URLs without launching a browser:
+
 ```bash
-uv run python tools/query_nyscef.py search "Jeffrey Epstein" --output FILE
-uv run python tools/query_nyscef.py search "Bennet Moskowitz" --attorney --output FILE
-uv run python tools/query_nyscef.py search "Golden Nugget Atlantic City LLC" --business --limit 10 --output FILE
-uv run python tools/query_nyscef.py case 156728/2019 --output FILE
-uv run python tools/query_nyscef.py new-cases --court "New York County Supreme Court" --date 2019-07-10 --output FILE
-uv run python tools/query_nyscef.py detail <DOCKET_ID> --output FILE
-uv run python tools/query_nyscef.py documents <DOCKET_ID> --limit 20 --output FILE
-uv run python tools/query_nyscef.py download <DOC_INDEX> /tmp/nyscef-doc.pdf
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_nyscef.py search "Jeffrey Epstein" --output "$WORKDIR/nyscef-search.json"
+uv run python tools/query_nyscef.py case 156728/2019 --output "$WORKDIR/nyscef-case.json"
+uv run python tools/query_nyscef.py documents <DOCKET_ID> --limit 20 \
+    --output "$WORKDIR/nyscef-documents.json"
 ```
 
 ### IRS 990 Nonprofit Database (unified tool)
@@ -1035,23 +1328,37 @@ python tools/ingest_990_bulk.py stats                        # DB stats + proces
 
 ### NYC ACRIS (property records, SODA API)
 ```bash
-python tools/query_acris.py party "PERSON_NAME"
-python tools/query_acris.py address --borough 1 --block 1386 --lot 10  # 9 E 71st
-python tools/query_acris.py history --property-name "71st"
-python tools/query_acris.py batch-entities
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_acris.py party "PERSON_NAME" --output "$WORKDIR/acris-party.json"
+uv run python tools/query_acris.py address --borough 1 --block 1386 --lot 10 \
+    --output "$WORKDIR/acris-address.json"
+uv run python tools/query_acris.py history --property-name "71st" \
+    --output "$WORKDIR/acris-history.json"
+uv run python tools/query_acris.py batch-entities --output "$WORKDIR/acris-batch.json"
 ```
+Remote commands return the canonical public-record envelope with enriched
+document, party, legal, master, and remark joins. Use `--cursor` for the next
+page and `--catalog-db` to inspect an alternate catalog.
 
 ### Louisiana Property Records (SODA API, East Baton Rouge)
 ```bash
-python tools/query_la_property.py owner "LANDRY" --parish ebr
-python tools/query_la_property.py address "HIGHLAND" --parish ebr
-python tools/query_la_property.py parcel "030-7623-7" --parish ebr        # formatted
-python tools/query_la_property.py parcel "3076237" --parish ebr           # numeric
-python tools/query_la_property.py details "3076237" --parish ebr          # cross-dataset
-python tools/query_la_property.py adjudicated "WILLIAMS" --parish ebr     # tax-defaulted
-python tools/query_la_property.py parishes                                # list supported
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/query_la_property.py owner "LANDRY" --parish ebr \
+    --output "$WORKDIR/ebr-owner.json"
+uv run python tools/query_la_property.py address "HIGHLAND" --parish ebr \
+    --output "$WORKDIR/ebr-address.json"
+uv run python tools/query_la_property.py parcel "030-7623-7" --parish ebr \
+    --output "$WORKDIR/ebr-parcel.json"
+uv run python tools/query_la_property.py details "3076237" --parish ebr \
+    --output "$WORKDIR/ebr-details.json"
+uv run python tools/query_la_property.py adjudicated "WILLIAMS" --parish ebr \
+    --output "$WORKDIR/ebr-adjudicated.json"
+uv run python tools/query_la_property.py parishes --output "$WORKDIR/ebr-parishes.json"
 ```
-Datasets: Tax Roll (owner names, values, legal), Tax Parcel (owner, address, values, GeoJSON), Property Info (address, zoning, land use), Adjudicated (tax-defaulted). Accepts assessment numbers with or without dashes.
+Datasets: Tax Roll (owner names, values, legal), Tax Parcel (owner, address,
+values, GeoJSON), Property Info (address, zoning, land use), and Adjudicated
+(tax-defaulted). Remote commands return canonical source-aware envelopes and
+accept assessment numbers with or without dashes.
 
 ### FEC Campaign Finance (API key in .env)
 ```bash
@@ -1172,12 +1479,36 @@ python tools/ingest_epstein_exposed.py flights --passenger "PERSON_NAME" --year 
 python tools/ingest_epstein_exposed.py match-entities
 ```
 
-### MuckRock FOIA (project #507, no auth)
-```bash
-python tools/query_muckrock.py project 507
-python tools/query_muckrock.py request 78799  # USMS
-python tools/query_muckrock.py download 78799 --dir datasets/muckrock
+### MuckRock FOIA (API v2, authenticated; default project #507)
+
+Requires a normal MuckRock account in the repo-local `.env`. The official
+wrapper manages API-v2 access and refresh tokens:
+
+```dotenv
+MUCKROCK_USERNAME=your_username
+MUCKROCK_PASSWORD=your_password
 ```
+
+```bash
+uv run python tools/query_muckrock.py project 507
+uv run python tools/query_muckrock.py request 78799  # USMS
+uv run python tools/query_muckrock.py download 78799 --dir datasets/muckrock
+uv run python tools/query_muckrock.py search "Jeffrey Epstein" --limit 25
+uv run python tools/query_muckrock.py agencies "Federal Bureau"
+uv run python tools/query_muckrock.py crawl-index --output /tmp/muckrock-crawl.json
+uv run python tools/query_muckrock.py crawl-index --max-pages 1 --output /tmp/muckrock-sample.json
+uv run python tools/query_muckrock.py index-stats --output /tmp/muckrock-stats.json
+uv run python tools/query_muckrock.py index-search "GEO Group" --without-documentcloud --responses-only --output /tmp/muckrock-index.json
+uv run python tools/query_muckrock.py unlinked-files "private prison" --limit 50 --output /tmp/muckrock-unlinked.json
+```
+
+`crawl-index` creates the resumable `datasets/muckrock_index.db` catalog of
+public requests, communication bodies, file metadata, agencies, jurisdictions,
+and request/file linkages. `unlinked-files` searches all three text layers and
+returns incoming response attachments whose MuckRock `doc_id` is blank. Treat
+that as no direct DocumentCloud linkage, not proof that no separately uploaded
+duplicate exists. Local `index-search`, `unlinked-files`, and `index-stats` do
+not require API credentials after the index has been built.
 
 ### DocumentCloud (project #216915, no auth)
 ```bash

@@ -14,7 +14,8 @@ Usage:
     python tools/query_lobbying.py client "Humpty Dumpty Institute"
     python tools/query_lobbying.py registrant "Epstein"
     python tools/query_lobbying.py lobbyist "Weingarten"
-    python tools/query_lobbying.py filings --client "International Peace Institute" --type ld2
+    python tools/query_lobbying.py filings --client "International Peace Institute"
+    python tools/query_lobbying.py filings --client "International Peace Institute" --type Q1
     python tools/query_lobbying.py contributions "International Peace Institute"
 """
 
@@ -23,14 +24,16 @@ import gzip
 import json
 import sys
 import time
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.search_log_util import canonical_search_key
 except ImportError:
     from output_util import add_output_args, write_output
+    from search_log_util import canonical_search_key
 
 
 def _log(query, source, count):
@@ -43,6 +46,21 @@ def _log(query, source, count):
 
 
 BASE_URL = "https://lda.senate.gov/api/v1"
+LDA_SOURCE = "lobbying"
+
+
+def _record_search(mode, count, query=None, **filters):
+    """Log one LDA operation with a stable mode/filter key."""
+    _log(
+        canonical_search_key(mode, query, **filters),
+        LDA_SOURCE,
+        count,
+    )
+
+
+class LDARequestError(RuntimeError):
+    """Raised when the Senate LDA API did not return a usable response."""
+
 
 # Filing type codes
 FILING_TYPES = {
@@ -67,7 +85,7 @@ FILING_TYPES = {
 }
 
 
-def _fetch(endpoint, params=None):
+def _fetch(endpoint, params=None, *, opener=None, sleeper=None, max_attempts=2):
     """Fetch from LDA API."""
     if params is None:
         params = {}
@@ -81,26 +99,36 @@ def _fetch(endpoint, params=None):
         "User-Agent": "OSINT-Research/1.0",
     })
 
-    try:
-        with urlopen(req, timeout=60) as resp:
-            return json.loads(resp.read().decode())
-    except TimeoutError:
-        print(f"ERROR: Request timed out (60s). LDA API may be slow — try again.", file=sys.stderr)
-        return None
-    except HTTPError as e:
-        raw = e.read()
+    opener = opener or urlopen
+    sleeper = sleeper or time.sleep
+    for attempt in range(max_attempts):
         try:
-            body = gzip.decompress(raw).decode()[:500]
-        except Exception:
+            with opener(req, timeout=60) as resp:
+                return json.loads(resp.read().decode())
+        except TimeoutError as exc:
+            raise LDARequestError(
+                "Request timed out (60s). LDA API may be slow — try again."
+            ) from exc
+        except HTTPError as exc:
+            raw = exc.read()
             try:
-                body = raw.decode()[:500]
+                body = gzip.decompress(raw).decode()[:500]
             except Exception:
-                body = str(raw[:200])
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return None
+                try:
+                    body = raw.decode()[:500]
+                except Exception:
+                    body = str(raw[:200])
+            if exc.code == 429 and attempt + 1 < max_attempts:
+                try:
+                    retry_after = float(exc.headers.get("Retry-After", "1"))
+                except (TypeError, ValueError):
+                    retry_after = 1.0
+                sleeper(min(max(retry_after, 0.0), 60.0))
+                continue
+            raise LDARequestError(f"HTTP {exc.code}: {body}") from exc
+        except URLError as exc:
+            raise LDARequestError(str(exc.reason)) from exc
+    raise LDARequestError("LDA request failed without a response")
 
 
 def _paginate(endpoint, params, max_results=100):
@@ -173,8 +201,12 @@ def _print_filing(f):
             lobbyists = act.get("lobbyists", [])
             if lobbyists:
                 names = []
-                for l in lobbyists:
-                    lob = l.get("lobbyist", l) if isinstance(l, dict) else {}
+                for lobbyist_item in lobbyists:
+                    lob = (
+                        lobbyist_item.get("lobbyist", lobbyist_item)
+                        if isinstance(lobbyist_item, dict)
+                        else {}
+                    )
                     if isinstance(lob, dict):
                         first = lob.get("first_name", "")
                         last = lob.get("last_name", "")
@@ -200,7 +232,7 @@ def cmd_client(args):
         params["filing_year"] = args.year
 
     results, total = _paginate("/filings/", params, max_results=args.limit)
-    _log(args.query, "lobbying", total)
+    _record_search("client", total, args.query, year=args.year)
 
     if write_output(results, args, summary=f"LDA client '{args.query}'"):
         return
@@ -222,7 +254,7 @@ def cmd_registrant(args):
         params["filing_year"] = args.year
 
     results, total = _paginate("/filings/", params, max_results=args.limit)
-    _log(args.query, "lobbying", total)
+    _record_search("registrant", total, args.query, year=args.year)
 
     if write_output(results, args, summary=f"LDA registrant '{args.query}'"):
         return
@@ -246,7 +278,7 @@ def cmd_lobbyist(args):
     if data and data.get("results"):
         results = data["results"]
         total = data.get("count", len(results))
-        _log(args.query, "lobbying", total)
+        _record_search("lobbyist", total, args.query)
 
         if write_output(results[:args.limit], args, summary=f"LDA lobbyist '{args.query}'"):
             return
@@ -255,8 +287,12 @@ def cmd_lobbyist(args):
             return
         print(f"Found {total} lobbyists matching '{args.query}' (showing {min(len(results), args.limit)})")
         print()
-        for l in results[:args.limit]:
-            lobbyist = l.get("lobbyist", l) if isinstance(l, dict) else {}
+        for lobbyist_result in results[:args.limit]:
+            lobbyist = (
+                lobbyist_result.get("lobbyist", lobbyist_result)
+                if isinstance(lobbyist_result, dict)
+                else {}
+            )
             if isinstance(lobbyist, dict):
                 first = lobbyist.get("first_name", "")
                 last = lobbyist.get("last_name", "")
@@ -270,7 +306,11 @@ def cmd_lobbyist(args):
 
             print(f"  {full_name or '?'}")
             print(f"    ID: {lob_id}")
-            registrant = l.get("registrant") if isinstance(l, dict) else None
+            registrant = (
+                lobbyist_result.get("registrant")
+                if isinstance(lobbyist_result, dict)
+                else None
+            )
             if registrant and isinstance(registrant, dict):
                 print(f"    Registrant: {registrant.get('name', '?')}")
             print()
@@ -289,7 +329,7 @@ def cmd_lobbyist(args):
         # Fall back to filings search by lobbyist_name
         params = {"lobbyist_name": args.query}
         results, total = _paginate("/filings/", params, max_results=args.limit)
-        _log(args.query, "lobbying", total)
+        _record_search("lobbyist", total, args.query)
         if write_output(results, args, summary=f"LDA lobbyist '{args.query}'"):
             return
         if args.json_out:
@@ -315,6 +355,14 @@ def cmd_filings(args):
 
     results, total = _paginate("/filings/", params, max_results=args.limit)
 
+    _record_search(
+        "filings",
+        total,
+        client=args.client,
+        registrant=args.registrant,
+        filing_type=args.type.upper() if args.type else None,
+        year=args.year,
+    )
     if write_output(results, args, summary="LDA filings search"):
         return
     if args.json_out:
@@ -344,6 +392,7 @@ def cmd_contributions(args):
     params = {"registrant_name": args.query}
     results, total = _paginate("/contributions/", params, max_results=args.limit)
 
+    _record_search("contributions", total, args.query)
     if write_output(results, args, summary=f"LDA contributions '{args.query}'"):
         return
     if args.json_out:
@@ -386,6 +435,12 @@ def cmd_contributions(args):
         if short and len(short) >= 3:
             params = {"registrant_name": short}
             results, total = _paginate("/contributions/", params, max_results=args.limit)
+            _record_search(
+                "contributions_fallback",
+                total,
+                short,
+                original_query=args.query,
+            )
             if results:
                 print(f"Partial match: {total} reports for registrant starting with '{short}'")
                 print()
@@ -448,8 +503,13 @@ def main():
         "filings": cmd_filings,
         "contributions": cmd_contributions,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except LDARequestError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -75,6 +75,44 @@ def test_source_quote_parser_rejects_duplicate_quote_for_same_ref():
         )
 
 
+def test_add_cli_accumulates_repeated_source_quote_flags(monkeypatch):
+    captured = {}
+
+    def fake_add_finding(**kwargs):
+        captured.update(kwargs)
+        return 99
+
+    monkeypatch.setattr(findings_tracker, "add_finding", fake_add_finding)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "add",
+            "--target",
+            "Target",
+            "--summary",
+            "Summary",
+            "--sources",
+            "courtlistener",
+            "--evidence",
+            "REF1",
+            "REF2",
+            "--source-quote",
+            "REF1:first excerpt",
+            "--source-quote",
+            "REF2:second excerpt",
+        ],
+    )
+
+    findings_tracker.main()
+
+    assert captured["source_quotes"] == {
+        "REF1": {"quote": "first excerpt"},
+        "REF2": {"quote": "second excerpt"},
+    }
+
+
 def test_correct_help_lists_source_datasets_and_json_value_format(
     monkeypatch, capsys
 ):

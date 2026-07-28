@@ -27,4 +27,4 @@ do
   fi
 done
 
-uv run python "$ROOT_DIR/scripts/validate_skills.py" "${ARGS[@]}" "$@"
+uv run --no-sync python "$ROOT_DIR/scripts/validate_skills.py" "${ARGS[@]}" "$@"

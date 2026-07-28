@@ -40,39 +40,28 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths throughout this sess
 ### 1. Check Queue Depth
 
 ```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-total = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='pending_triage'\").fetchone()[0]
-by_cat = db.execute(\"SELECT category, COUNT(*) FROM leads WHERE status='pending_triage' GROUP BY category ORDER BY COUNT(*) DESC\").fetchall()
-print(f'Pending triage: {total}')
-for cat, cnt in by_cat: print(f'  {cat}: {cnt}')
-"
+uv run python tools/lead_tracker.py stats \
+  --output "$WORKDIR/triage-stats.json"
 ```
+
+Read `pending_triage` from that profile-scoped artifact. The active profile is
+applied by default; use an explicit `--profile <PROFILE_ID>` if the session has
+captured a profile ID and must be insulated from later global-profile changes.
 
 If zero leads pending, report that and exit.
 
 ### 2. Claim Batch
 
 ```bash
-uv run python -c "
-import sqlite3, json
-db = sqlite3.connect('investigation.db')
-rows = db.execute('''
-    SELECT id, title, description, category, priority, source, target_name, created_at
-    FROM leads WHERE status='pending_triage'
-    ORDER BY
-        CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 WHEN 'low' THEN 3 END,
-        created_at ASC
-    LIMIT 20
-''').fetchall()
-leads = [dict(zip([d[0] for d in rows[0].description] if hasattr(rows[0], 'description') else ['id','title','description','category','priority','source','target_name','created_at'], r)) for r in rows] if rows else []
-json.dump([dict(r) for r in rows], open('$WORKDIR/triage-batch.json','w'), indent=2, default=str)
-print(f'Claimed {len(rows)} leads for triage')
-" --output $WORKDIR/triage-batch.json
+uv run python tools/lead_tracker.py list \
+  --status pending_triage \
+  --limit 20 \
+  --output "$WORKDIR/triage-batch.json"
 ```
 
-Or more simply, use the Python API directly within your analysis.
+This list is profile-scoped by default and preserves the tracker’s priority and
+age ordering. Use the same explicit `--profile <PROFILE_ID>` captured during
+session setup when concurrent work could change the shared active profile.
 
 ### 3. For Each Lead, Apply Triage Rules
 
@@ -88,19 +77,14 @@ uv run python tools/lead_tracker.py search "<LEAD_TITLE_KEYWORDS>" --output $WOR
 
 Also check by target_name:
 ```bash
-uv run python -c "
-import sqlite3, json
-db = sqlite3.connect('investigation.db')
-db.row_factory = sqlite3.Row
-rows = db.execute('''
-    SELECT id, title, status, priority, target_name
-    FROM leads
-    WHERE target_name LIKE ? AND status != 'pending_triage' AND id != ?
-''', ('%<TARGET>%', <LEAD_ID>)).fetchall()
-json.dump([dict(r) for r in rows], open('$WORKDIR/triage-target-dupes.json','w'), indent=2)
-print(f'{len(rows)} existing leads for this target')
-"
+uv run python tools/lead_tracker.py list \
+  --target "<TARGET>" \
+  --limit 50 \
+  --output "$WORKDIR/triage-target-dupes.json"
 ```
+
+Exclude the current lead and unrelated `pending_triage` rows while reviewing
+the artifact. The tracker applies the active or explicit profile scope.
 
 **If near-duplicate found** (same target + similar title/description):
 - Dead-end the triage lead with reason "Duplicate of lead #X"
@@ -159,17 +143,14 @@ If target_name is obvious from the title but missing, fill it in.
 Find leads sharing the same target or closely related targets:
 
 ```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-# Find leads with same target
-rows = db.execute('''
-    SELECT id, title FROM leads
-    WHERE target_name = ? AND id != ? AND status IN ('open','in_progress','pending_triage')
-''', ('<TARGET>', <LEAD_ID>)).fetchall()
-for r in rows: print(f'Related: #{r[0]} {r[1]}')
-"
+uv run python tools/lead_tracker.py list \
+  --target "<TARGET>" \
+  --limit 50 \
+  --output "$WORKDIR/triage-related.json"
 ```
+
+Review active and pending rows other than the current lead from this
+profile-scoped artifact.
 
 Create `lead_relations` entries for related leads:
 ```sql

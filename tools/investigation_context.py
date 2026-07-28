@@ -24,6 +24,11 @@ try:
 except ImportError:
     yaml = None
 
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
+
 PROJECT_ROOT = Path(__file__).parent.parent
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 DB_PATH = PROJECT_ROOT / "investigation.db"
@@ -178,6 +183,16 @@ def _get_db():
     return db
 
 
+def _get_read_db():
+    """Open profile state without schema/catalog writes during ordinary reads."""
+    if not DB_PATH.exists():
+        return _get_db()
+    db = sqlite3.connect(str(DB_PATH), timeout=30)
+    db.row_factory = sqlite3.Row
+    db.execute("PRAGMA busy_timeout=5000")
+    return db
+
+
 def _reconcile_profile_catalog(
     db: sqlite3.Connection, *, include_data_profiles: bool = False
 ) -> set[str]:
@@ -231,7 +246,7 @@ def _reconcile_profile_catalog(
 
 def get_active_profile_name() -> str:
     """Get the name of the active investigation profile from DB."""
-    db = _get_db()
+    db = _get_read_db()
     row = db.execute(
         "SELECT value FROM investigation_config WHERE key = 'active_profile'"
     ).fetchone()
@@ -337,7 +352,7 @@ def get_global_thread_ids(profile: InvestigationProfile) -> dict[int, int]:
     """Map profile-local thread numbers to global investigation_threads IDs."""
     if not profile.name or not profile.threads:
         return {}
-    db = _get_db()
+    db = _get_read_db()
     try:
         rows = db.execute(
             "SELECT id, title FROM investigation_threads WHERE profile_id = ?",
@@ -370,11 +385,13 @@ def cmd_show(args):
         print("Use: uv run python tools/investigation_context.py set <name>")
         return
 
-    if args.json_out:
+    if args.json_out or args.output:
         data = profile_to_dict(profile)
         global_thread_ids = get_global_thread_ids(profile)
         for thread in data.get("threads", []):
             thread["global_id"] = global_thread_ids.get(thread.get("id"))
+        if write_output(data, args, summary=f"investigation profile {profile.name}"):
+            return
         print(json.dumps(data, indent=2))
         return
 
@@ -448,7 +465,7 @@ def main():
     sub = parser.add_subparsers(dest="command")
 
     show_p = sub.add_parser("show", help="Show active investigation profile")
-    show_p.add_argument("--json", action="store_true", dest="json_out", help="Output as JSON")
+    add_output_args(show_p)
 
     set_p = sub.add_parser("set", help="Set active investigation profile")
     set_p.add_argument("name", help="Profile name (directory under investigations/)")

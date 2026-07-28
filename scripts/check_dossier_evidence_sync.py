@@ -23,11 +23,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "investigation.db"
 DOSSIER_DIR = REPO_ROOT / "content" / "dossiers"
+REDIRECTS_FILE = "_redirects.json"
 
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from pipeline.evidence_refs import canonicalize_evidence_rows
+from pipeline.evidence_refs import canonicalize_evidence_rows  # noqa: E402
 
 
 @dataclass(frozen=True)
@@ -125,6 +126,32 @@ def load_corrected_finding_fields(conn: sqlite3.Connection) -> dict[int, set[str
     return dict(grouped)
 
 
+def load_dossier_redirects(dossier_dir: Path) -> dict[str, str]:
+    redirects_path = dossier_dir / REDIRECTS_FILE
+    if not redirects_path.exists():
+        return {}
+    payload = json.loads(redirects_path.read_text())
+    if not isinstance(payload, dict):
+        raise ValueError(f"Dossier redirects must be a JSON object: {redirects_path}")
+    return {
+        str(alias).strip(): str(canonical).strip()
+        for alias, canonical in payload.items()
+        if str(alias).strip() and str(canonical).strip()
+    }
+
+
+def resolve_dossier_redirect(slug: str, redirects: dict[str, str]) -> str:
+    resolved = slug
+    seen: set[str] = set()
+    while resolved in redirects:
+        if resolved in seen:
+            chain = " -> ".join([*seen, resolved])
+            raise ValueError(f"Dossier redirect cycle while resolving {slug}: {chain}")
+        seen.add(resolved)
+        resolved = redirects[resolved]
+    return resolved
+
+
 def normalize_canonical_value(field_name: str, value: object) -> object:
     if field_name == "source_datasets" and isinstance(value, str):
         try:
@@ -140,21 +167,28 @@ def iter_dossier_paths(dossier_dir: Path, only: list[str]) -> list[Path]:
         return all_paths
 
     by_name = {p.name: p for p in all_paths}
+    redirects = load_dossier_redirects(dossier_dir)
     resolved: list[Path] = []
+    seen_paths: set[Path] = set()
     for value in only:
         raw = value.strip()
         if not raw:
             continue
-        if raw.endswith(".json"):
-            key = Path(raw).name
-            if key not in by_name:
-                raise FileNotFoundError(f"Dossier file not found: {raw}")
-            resolved.append(by_name[key])
-            continue
-        slug_name = f"{raw}.json"
+        requested_slug = Path(raw).stem if raw.endswith(".json") else raw
+        canonical_slug = resolve_dossier_redirect(requested_slug, redirects)
+        slug_name = f"{canonical_slug}.json"
         if slug_name not in by_name:
-            raise FileNotFoundError(f"Dossier slug not found: {raw}")
-        resolved.append(by_name[slug_name])
+            if canonical_slug != requested_slug:
+                raise FileNotFoundError(
+                    f"Dossier redirect {requested_slug!r} points to missing canonical "
+                    f"slug {canonical_slug!r}"
+                )
+            kind = "file" if raw.endswith(".json") else "slug"
+            raise FileNotFoundError(f"Dossier {kind} not found: {raw}")
+        path = by_name[slug_name]
+        if path not in seen_paths:
+            resolved.append(path)
+            seen_paths.add(path)
     return resolved
 
 

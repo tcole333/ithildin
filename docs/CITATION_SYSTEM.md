@@ -22,7 +22,9 @@ Writers include citations as inline tokens in content:
 | `[SEC:accession]` | `[SEC:0001193125-15-266790]` | SEC EDGAR filing |
 | `[EDGAR:accession]` | `[EDGAR:0001193125-15-266790]` | SEC EDGAR filing (alias) |
 | `[990:EIN]` | `[990:133095231]` | ProPublica Nonprofit Explorer |
+| `[PROPERTY:source/jurisdiction/kind/id]` | `[PROPERTY:us-nc-onemap-parcels/37005/parcel/3013467134]` | Canonical property record; official source URL when registered |
 | `[ACRIS:docid]` | `[ACRIS:2008012900966001]` | NYC property record |
+| `[STATECOURT:source/court/case/kind]` | `[STATECOURT:us-ny-nyscef/ny-supreme/CV-2026-1/case]` | Canonical state/local-court record; official source URL when registered |
 | `[CL:docket]` | `[CL:4608967]` | CourtListener docket |
 | `[FEC:committee]` | `[FEC:C00431569]` | FEC committee page |
 | `[FARA:num]` | `[FARA:6071]` | FARA registration |
@@ -154,6 +156,10 @@ Run:
 cd web
 npm run report:support-coverage
 # or
+npm run report:support-coverage:changed
+# compare a revision to the current staged/unstaged/untracked worktree
+npm run report:support-coverage:changed -- --base-ref HEAD --head-ref WORKTREE
+# or compare two revisions
 npm run report:support-coverage:changed -- --base-ref <BASE> --head-ref <HEAD>
 ```
 
@@ -165,6 +171,22 @@ Output is JSON (stdout only), non-blocking by design in V1:
 - `orphan_citations_count`
 - `orphan_citations`
 - `source_fanout` (source node key → dependent span count)
+
+### Focused Citation Validation
+
+Use `npm run check:citations:focused` while changing citation resolution or
+rendering. It runs the citation unit and snapshot suites without making an
+unrelated legacy corpus finding look like a regression in the focused change.
+
+For content edits, run `npm run lint:citations:changed:strict`; it checks the
+staged, unstaged, and untracked article/dossier files in the worktree. Use
+`-- --base-ref <BASE> --head-ref <HEAD>` to check a commit range, or
+`-- --base-ref HEAD --head-ref WORKTREE` to spell out worktree scope.
+
+`npm run lint:citations` remains the full release gate. Do not create or update
+a blanket baseline to hide existing errors; fix the affected content or use a
+narrow, expiring entry in `src/data/citation-exceptions.json` when an exception
+is independently justified.
 
 ## Usage in Skills
 
@@ -250,6 +272,24 @@ To add a new citation type (e.g., `[HUDOC:001-234567]`), add **one object** to `
 ```
 
 That's it. No other files need to change for the citation engine to recognize the new type.
+
+### Public-record source landing URLs
+
+`PROPERTY:` and `STATECOURT:` tokens carry a canonical source ID as their
+first path segment. `web/src/data/source-urls.json` can register that source's
+official landing URL using:
+
+```json
+{
+  "PROPERTY_SOURCE:us-nc-onemap-parcels": "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/MapServer/1",
+  "STATECOURT_SOURCE:us-ny-nyscef": "https://iapps.courts.state.ny.us/nyscef/CaseSearch"
+}
+```
+
+The rendered citation keeps the complete canonical record label and links to
+the registered source page. It does not synthesize a parcel, case, or document
+deep link from source-native identifiers. An unregistered source ID remains a
+record-only citation.
 
 ### Generic URL Override (`source-urls.json`)
 

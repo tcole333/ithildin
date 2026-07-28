@@ -16,11 +16,10 @@ Usage:
 """
 
 import argparse
-import json
 import sqlite3
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -346,11 +345,15 @@ def cmd_search_single(args):
     """Search for a single entity name."""
     db = get_db()
     matches = search_fl_entities(db, args.query, limit=args.limit)
+    if write_output(
+        {"query": args.query, "results": matches},
+        args,
+        summary=f"Florida SunBiz search '{args.query}'",
+    ):
+        return
     print(f"Found {len(matches)} FL entities matching '{args.query}'")
     for m in matches:
         print(format_entity(m))
-    if args.output:
-        write_output({"query": args.query, "results": matches}, args.output)
 
 
 def main():

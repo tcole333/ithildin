@@ -5,9 +5,6 @@ routing, triage policy, and schema repairs from the refactor.
 """
 from __future__ import annotations
 
-import sqlite3
-from pathlib import Path
-
 import pytest
 
 # ── Fixtures ─────────────────────────────────────────────────
@@ -441,8 +438,7 @@ class TestConnectionEntityEnforcement:
 # ── Profile/Thread Drift Guard ───────────────────────────────
 
 class TestProfileThreadGuard:
-    """add_finding warns (never raises) when profile_id disagrees with the
-    thread's owning profile — new-drift tripwire, warn-only like VALID_SOURCES."""
+    """add_finding resolves local IDs and rejects cross-profile global IDs."""
 
     def _seed_threads(self, db):
         # Bring the temp DB's findings table up to production schema: the v2
@@ -462,23 +458,38 @@ class TestProfileThreadGuard:
         )
         db.commit()
 
-    def test_drift_warns_but_records(self, conn_db, capsys):
+    def test_drift_is_rejected_before_insert(self, conn_db):
         db, _ = conn_db
         self._seed_threads(db)
         from tools.findings_tracker import add_finding
-        fid = add_finding(
-            "Drift Target", "s", source_datasets=["web_search"],
-            thread_id=900, profile_id="epstein",
+        with pytest.raises(ValueError, match="belongs to profile 'tech-right'"):
+            add_finding(
+                "Drift Target", "s", source_datasets=["web_search"],
+                thread_id=900, profile_id="epstein",
+            )
+        assert db.execute(
+            "SELECT COUNT(*) FROM findings WHERE target_name = 'Drift Target'"
+        ).fetchone()[0] == 0
+
+    def test_profile_local_thread_id_maps_to_global(
+        self, conn_db, monkeypatch
+    ):
+        db, _ = conn_db
+        self._seed_threads(db)
+        monkeypatch.setattr(
+            "tools.findings_tracker._profile_thread_id_map",
+            lambda profile_id: {7: 901} if profile_id == "epstein" else {},
         )
-        err = capsys.readouterr().err
-        assert "profile/thread drift" in err
-        assert "tech-right" in err
-        # Finding is still recorded (warn-only) with the requested profile_id.
+        from tools.findings_tracker import add_finding
+        fid = add_finding(
+            "Mapped Target", "s", source_datasets=["web_search"],
+            thread_id=7, profile_id="epstein",
+        )
         row = db.execute(
             "SELECT profile_id, thread_id FROM findings WHERE id = ?", (fid,)
         ).fetchone()
         assert row["profile_id"] == "epstein"
-        assert row["thread_id"] == 900
+        assert row["thread_id"] == 901
 
     def test_matching_profile_is_silent(self, conn_db, capsys):
         db, _ = conn_db

@@ -725,7 +725,7 @@ def cmd_filings(args):
     for f in filings:
         desc = f["description"] or f["filing_type"] or "?"
         date = f["filing_date"] or "?"
-        eff = f""
+        eff = ""
         if f["effective_date"] and f["effective_date"] != f["filing_date"]:
             eff = f" (effective: {f['effective_date']})"
         name_note = ""
@@ -1059,6 +1059,17 @@ def cmd_ucc_party(args):
                 LIMIT ?
             """, [f"%{args.name}%", args.limit]).fetchall()
 
+        serialized = [dict(row) for row in rows]
+        if write_output(
+            serialized,
+            args,
+            summary=f"ucc secured-party search '{args.name}'",
+        ):
+            return
+        if getattr(args, "json_out", False):
+            print(json.dumps(serialized, indent=2, default=str))
+            return
+
         print(f"Found {len(rows)} secured party records matching '{args.name}'")
         print()
         for r in rows:
@@ -1097,6 +1108,17 @@ def cmd_ucc_party(args):
                 LIMIT ?
             """, [f"%{args.name}%", args.limit]).fetchall()
 
+        serialized = [dict(row) for row in rows]
+        if write_output(
+            serialized,
+            args,
+            summary=f"ucc debtor search '{args.name}'",
+        ):
+            return
+        if getattr(args, "json_out", False):
+            print(json.dumps(serialized, indent=2, default=str))
+            return
+
         print(f"Found {len(rows)} debtor records matching '{args.name}'")
         print()
         for r in rows:
@@ -1123,7 +1145,7 @@ def cmd_ucc_stats(args):
     total_parties = db.execute("SELECT COUNT(*) FROM ucc_secured_parties").fetchone()[0]
     total_collateral = db.execute("SELECT COUNT(*) FROM ucc_collateral").fetchone()[0]
 
-    print(f"UCC Filing Statistics")
+    print("UCC Filing Statistics")
     print(f"  Total filings: {total_filings:,}")
     print(f"  Total debtors: {total_debtors:,}")
     print(f"  Total secured parties: {total_parties:,}")

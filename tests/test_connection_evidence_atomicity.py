@@ -127,6 +127,24 @@ def test_duplicate_connection_resolves_canonical_id_after_stale_lastrowid(connec
     db.close()
 
 
+def test_directional_connection_preserves_requested_endpoint_order(connection_db):
+    connection_id = findings_tracker.add_connection(
+        "Zeta Owner",
+        "Alpha Subsidiary",
+        relationship_type="owns",
+        profile_id="test-profile",
+    )
+
+    db = sqlite3.connect(connection_db)
+    row = db.execute(
+        "SELECT person_a, person_b, relationship_type FROM connections WHERE id = ?",
+        (connection_id,),
+    ).fetchone()
+    db.close()
+
+    assert row == ("Zeta Owner", "Alpha Subsidiary", "owns")
+
+
 def test_repeat_attachment_is_idempotent_and_adds_new_evidence(connection_db):
     first_id = findings_tracker.add_connection(
         "Gamma",

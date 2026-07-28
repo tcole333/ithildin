@@ -45,6 +45,7 @@ def _log(query, source, count):
 
 
 BASE_URL = "https://littlesis.org/api"
+TRANSIENT_HTTP_CODES = {500, 502, 503, 504}
 
 CATEGORIES = {
     1: "Position",
@@ -63,7 +64,7 @@ CATEGORIES = {
 
 
 def _request(path, params=None, retries=4):
-    """Make an API request to LittleSis with retry on 503."""
+    """Make an API request to LittleSis with retry on transient server errors."""
     url = f"{BASE_URL}{path}"
     if params:
         url += "?" + urlencode(params, doseq=True)
@@ -79,9 +80,12 @@ def _request(path, params=None, retries=4):
             with urlopen(req, timeout=30) as resp:
                 return json.loads(resp.read().decode())
         except HTTPError as e:
-            if e.code == 503 and attempt < retries - 1:
+            if e.code in TRANSIENT_HTTP_CODES and attempt < retries - 1:
                 wait = 3 * (attempt + 1)  # 3, 6, 9s — LittleSis is aggressive
-                print(f"  503 from LittleSis, retrying in {wait}s...", file=sys.stderr)
+                print(
+                    f"  HTTP {e.code} from LittleSis, retrying in {wait}s...",
+                    file=sys.stderr,
+                )
                 time.sleep(wait)
                 continue
             if e.code == 404:
@@ -166,8 +170,6 @@ def cmd_search(args):
         return
 
     entities = data.get("data", [])
-    meta = data.get("meta", {})
-    total = meta.get("pageCount", len(entities))
     _log(args.query, "littlesis", len(entities))
 
     if write_output(data, args, summary=f"LittleSis search '{args.query}'"):

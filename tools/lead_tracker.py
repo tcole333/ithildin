@@ -63,6 +63,29 @@ def _resolve_profile(profile_id=None, all_profiles=False):
     return _detect_active_profile()
 
 
+def _profile_thread_id_map(profile_id):
+    """Return configured local-thread ID -> global database ID for a profile."""
+    try:
+        from tools.profile_threads import profile_thread_id_map
+    except ImportError:
+        from profile_threads import profile_thread_id_map
+    return profile_thread_id_map(profile_id)
+
+
+def _resolve_lead_thread_id(db, thread_id, profile_id):
+    """Resolve or validate a lead's profile-scoped thread ID."""
+    try:
+        from tools.profile_threads import resolve_profile_thread_id
+    except ImportError:
+        from profile_threads import resolve_profile_thread_id
+    return resolve_profile_thread_id(
+        db,
+        thread_id,
+        profile_id,
+        local_thread_ids=lambda: _profile_thread_id_map(profile_id),
+    )
+
+
 VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence", "filing", "contract", "case"]
 VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 VALID_STATUSES = ["open", "pending_triage", "in_progress", "completed", "blocked", "dead_end"]
@@ -96,6 +119,21 @@ def _stale_leads_fk_tables(db):
         ):
             tables.append(table)
     return tables
+
+
+def _drop_stale_leads_fts_triggers(db):
+    """Drop named lead FTS triggers when a migration left them on another table."""
+    trigger_names = ("leads_ai", "leads_ad", "leads_au")
+    placeholders = ", ".join("?" for _ in trigger_names)
+    rows = db.execute(
+        "SELECT name, tbl_name FROM sqlite_master "
+        f"WHERE type = 'trigger' AND name IN ({placeholders})",
+        trigger_names,
+    ).fetchall()
+    stale_names = [row[0] for row in rows if row[1] != "leads"]
+    for trigger_name in stale_names:
+        db.execute(f"DROP TRIGGER {_quote_sqlite_identifier(trigger_name)}")
+    return stale_names
 
 
 def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
@@ -1462,6 +1500,13 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass
 
+    # A historical leads-table migration renamed the original table to
+    # leads_old_backup. SQLite carried these named triggers with it, so the
+    # IF NOT EXISTS statements below could not attach replacements to `leads`.
+    # Dropping only misattached names lets us recreate them and rebuild the
+    # external-content index once.
+    stale_leads_fts_triggers = _drop_stale_leads_fts_triggers(db)
+
     # FTS sync triggers for leads
     for trigger_sql in [
         """CREATE TRIGGER IF NOT EXISTS leads_ai AFTER INSERT ON leads BEGIN
@@ -1483,6 +1528,9 @@ def _ensure_schema(db):
             db.execute(trigger_sql)
         except sqlite3.OperationalError:
             pass
+
+    if stale_leads_fts_triggers:
+        db.execute("INSERT INTO leads_fts(leads_fts) VALUES('rebuild')")
 
     # FTS sync triggers for findings
     for trigger_sql in [
@@ -1622,6 +1670,17 @@ def _ensure_schema(db):
 # ── Lead CRUD ────────────────────────────────────────────────
 
 
+def _classify_lead_evidence_ref(evidence_ref):
+    """Classify a lead evidence reference without mistaking URL slashes for files."""
+    if evidence_ref.startswith("EFTA"):
+        return "efta"
+    if "://" in evidence_ref:
+        return "url"
+    if "/" in evidence_ref:
+        return "file"
+    return "ref"
+
+
 def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
              thread_id=None, profile_id=None, depth_tier=None,
@@ -1641,6 +1700,7 @@ def add_lead(title, description=None, category=None, priority="medium",
     related_leads = list(dict.fromkeys(related_leads or []))
     db = get_db()
     try:
+        thread_id = _resolve_lead_thread_id(db, thread_id, profile_id)
         if related_leads:
             placeholders = ",".join("?" for _ in related_leads)
             existing_ids = {
@@ -1666,7 +1726,7 @@ def add_lead(title, description=None, category=None, priority="medium",
 
         if evidence:
             for ev in evidence:
-                ev_type = "efta" if ev.startswith("EFTA") else "file" if "/" in ev else "url" if "://" in ev else "ref"
+                ev_type = _classify_lead_evidence_ref(ev)
                 db.execute(
                     "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
                     (lead_id, ev_type, ev)
@@ -1700,6 +1760,54 @@ def set_lead_depth_tier(lead_id, depth_tier):
     updated = cursor.rowcount > 0
     db.close()
     return updated
+
+
+def assign_lead_thread(lead_id, thread_id):
+    """Attach or move an existing lead to a compatible investigation thread."""
+    db = get_db()
+    try:
+        lead = db.execute(
+            "SELECT id, profile_id, thread_id FROM leads WHERE id = ?", (lead_id,)
+        ).fetchone()
+        if not lead:
+            raise ValueError(f"Lead #{lead_id} does not exist")
+        thread_id = _resolve_lead_thread_id(
+            db, thread_id, lead["profile_id"]
+        )
+        thread = db.execute(
+            "SELECT id, profile_id, title FROM investigation_threads WHERE id = ?",
+            (thread_id,),
+        ).fetchone()
+        if not thread:
+            raise ValueError(f"Investigation thread #{thread_id} does not exist")
+        if (
+            lead["profile_id"]
+            and thread["profile_id"]
+            and lead["profile_id"] != thread["profile_id"]
+        ):
+            raise ValueError(
+                f"Lead #{lead_id} belongs to profile {lead['profile_id']!r}, but "
+                f"thread #{thread_id} belongs to {thread['profile_id']!r}"
+            )
+
+        db.execute(
+            "UPDATE leads SET thread_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+            (thread_id, lead_id),
+        )
+        db.execute(
+            "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+            (
+                lead_id,
+                f"Assigned to investigation thread #{thread_id}: {thread['title']}",
+            ),
+        )
+        db.commit()
+        return True
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
 
 
 def list_leads(status=None, priority=None, category=None, target=None, limit=50,
@@ -1750,10 +1858,18 @@ def list_leads(status=None, priority=None, category=None, target=None, limit=50,
     return [dict(r) for r in rows]
 
 
-def get_lead(lead_id):
+def get_lead(lead_id, profile_id=None):
     """Get a single lead with notes, evidence, and relations."""
     db = get_db()
-    lead = db.execute("SELECT * FROM leads WHERE id = ?", (lead_id,)).fetchone()
+    if profile_id is None:
+        lead = db.execute(
+            "SELECT * FROM leads WHERE id = ?", (lead_id,)
+        ).fetchone()
+    else:
+        lead = db.execute(
+            "SELECT * FROM leads WHERE id = ? AND profile_id = ?",
+            (lead_id, profile_id),
+        ).fetchone()
     if not lead:
         db.close()
         return None
@@ -1780,17 +1896,28 @@ def get_lead(lead_id):
     return result
 
 
-def claim_lead(lead_id, session_id=None, claimed_by=None, lease_hours=2):
+def claim_lead(
+    lead_id,
+    session_id=None,
+    claimed_by=None,
+    lease_hours=2,
+    profile_id=None,
+):
     """Mark a lead as in_progress with a lease."""
     db = get_db()
     now = _utcnow()
     now_iso = now.isoformat()
     lease_until = (now + timedelta(hours=lease_hours)).isoformat()
+    profile_clause = " AND profile_id = ?" if profile_id is not None else ""
+    params = [now_iso, claimed_by, now_iso, lease_until, lead_id]
+    if profile_id is not None:
+        params.append(profile_id)
     cursor = db.execute(
         """UPDATE leads SET status = 'in_progress', updated_at = ?,
            claimed_by = ?, claimed_at = ?, lease_until = ?
-           WHERE id = ? AND status = 'open'""",
-        (now_iso, claimed_by, now_iso, lease_until, lead_id)
+           WHERE id = ? AND status = 'open'"""
+        + profile_clause,
+        params,
     )
     if cursor.rowcount != 1:
         db.close()
@@ -1893,7 +2020,7 @@ def add_note(lead_id, note, session_id=None):
 def add_evidence_to_lead(lead_id, evidence_ref, evidence_type=None):
     """Add an evidence reference to a lead."""
     if not evidence_type:
-        evidence_type = "efta" if evidence_ref.startswith("EFTA") else "file" if "/" in evidence_ref else "url" if "://" in evidence_ref else "ref"
+        evidence_type = _classify_lead_evidence_ref(evidence_ref)
     db = get_db()
     db.execute(
         "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) VALUES (?, ?, ?)",
@@ -1919,7 +2046,10 @@ def block_lead(lead_id, reason):
     """Mark a lead as blocked."""
     db = get_db()
     now = _utcnow().isoformat()
-    db.execute("UPDATE leads SET status = 'blocked', updated_at = ? WHERE id = ?", (now, lead_id))
+    db.execute(
+        "UPDATE leads SET status = 'blocked', stop_reason = ?, updated_at = ? WHERE id = ?",
+        (reason, now, lead_id),
+    )
     db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)", (lead_id, f"BLOCKED: {reason}"))
     db.commit()
     db.close()
@@ -1968,8 +2098,19 @@ def reopen_lead(lead_id):
     db = get_db()
     now = _utcnow().isoformat()
     db.execute(
-        "UPDATE leads SET status = 'open', updated_at = ?, completed_at = NULL WHERE id = ?",
-        (now, lead_id)
+        """
+        UPDATE leads
+        SET status = 'open',
+            updated_at = ?,
+            completed_at = NULL,
+            claimed_by = NULL,
+            claimed_at = NULL,
+            lease_until = NULL,
+            stop_reason = NULL,
+            blocked_by_infra_id = NULL
+        WHERE id = ?
+        """,
+        (now, lead_id),
     )
     db.commit()
     db.close()
@@ -2025,17 +2166,24 @@ def list_stale_leads():
     return [dict(r) for r in rows]
 
 
-def search_leads(query, profile_id=None, all_profiles=False):
-    """Full-text search across lead content. Wraps terms in quotes for safety."""
+def search_leads(query, profile_id=None, all_profiles=False, limit=30):
+    """Full-text search across lead content using safe AND-token matching."""
     db = get_db()
     resolved_profile = _resolve_profile(profile_id, all_profiles)
-    # Quote the query to handle special FTS5 characters (hyphens, etc.)
-    safe_query = '"' + query.replace('"', '""') + '"'
+    # Quote each token independently. Quoting the entire input makes a name such
+    # as "Brad Karp" miss "Brad S. Karp"; independent quoted terms preserve FTS
+    # safety while allowing intervening initials and punctuation.
+    tokens = re.findall(r"\w+", query, flags=re.UNICODE)
+    if not tokens:
+        db.close()
+        return []
+    safe_query = " AND ".join(f'"{token}"' for token in tokens)
     params = [safe_query]
     profile_clause = ""
     if resolved_profile:
         profile_clause = " AND leads.profile_id = ?"
         params.append(resolved_profile)
+    params.append(max(1, int(limit)))
     rows = db.execute(f"""
         SELECT leads.*, leads_fts.rank
         FROM leads_fts
@@ -2043,7 +2191,7 @@ def search_leads(query, profile_id=None, all_profiles=False):
         WHERE leads_fts MATCH ?
         {profile_clause}
         ORDER BY leads_fts.rank
-        LIMIT 30
+        LIMIT ?
     """, params).fetchall()
     db.close()
     return [dict(r) for r in rows]
@@ -2241,7 +2389,8 @@ def get_stats(profile_id=None, all_profiles=False):
     # Recent activity
     stats["recently_completed"] = db.execute(
         f"SELECT COUNT(*) FROM leads"
-        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} completed_at > datetime('now', '-7 days')",
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} "
+        "status = 'completed' AND completed_at > datetime('now', '-7 days')",
         lead_params,
     ).fetchone()[0]
     stats["recent_findings"] = db.execute(
@@ -2254,6 +2403,11 @@ def get_stats(profile_id=None, all_profiles=False):
     stats["total_searches"] = db.execute("SELECT COUNT(*) FROM search_log").fetchone()[0]
     rows = db.execute("SELECT source, COUNT(*) as cnt FROM search_log GROUP BY source").fetchall()
     stats["searches_by_source"] = {r["source"]: r["cnt"] for r in rows}
+    # search_log predates investigation profiles and has no profile_id. Keep
+    # reporting the useful repository-wide totals, but label their scope so a
+    # profile-filtered stats payload cannot imply that they belong to that
+    # investigation.
+    stats["search_scope"] = "global"
 
     # Sessions
     stats["total_sessions"] = db.execute("SELECT COUNT(*) FROM sessions").fetchone()[0]
@@ -2347,6 +2501,7 @@ def main():
         help="Existing lead IDs to relate to the new lead (not finding IDs)",
     )
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
+    add_p.add_argument("--profile", help="Override active investigation profile")
     add_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
     add_p.add_argument("--recommended-skill", help="Recommended skill for this lead")
 
@@ -2366,6 +2521,7 @@ def main():
     # show
     show_p = subparsers.add_parser("show", help="Show lead details")
     show_p.add_argument("id", type=int)
+    show_p.add_argument("--profile", help="Require the lead to belong to this profile")
     add_output_args(show_p)
 
     # claim
@@ -2374,6 +2530,9 @@ def main():
     claim_p.add_argument(
         "--agent", dest="claimed_by",
         help="Agent or worker identifier recorded as the claimant",
+    )
+    claim_p.add_argument(
+        "--profile", help="Require the lead to belong to this profile"
     )
 
     # claim-next (atomic select + claim)
@@ -2421,6 +2580,7 @@ def main():
     search_p.add_argument("query")
     search_p.add_argument("--profile", help="Override active investigation profile")
     search_p.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
+    search_p.add_argument("--limit", type=int, default=30)
     add_output_args(search_p)
 
     # next
@@ -2476,6 +2636,11 @@ def main():
     thread_add_p = thread_sub.add_parser("add", help="Create a thread")
     thread_add_p.add_argument("--title", required=True)
     thread_add_p.add_argument("--description")
+    thread_assign_p = thread_sub.add_parser(
+        "assign", help="Attach or move an existing lead to a thread"
+    )
+    thread_assign_p.add_argument("lead_id", type=int)
+    thread_assign_p.add_argument("thread_id", type=int)
     thread_sub.add_parser("seed", help="Seed initial investigation threads")
 
     args = parser.parse_args()
@@ -2490,6 +2655,7 @@ def main():
             priority=args.priority, source=args.source, target_name=args.target,
             evidence=args.evidence, related_leads=args.related,
             thread_id=getattr(args, "thread_id", None),
+            profile_id=getattr(args, "profile", None),
             depth_tier=getattr(args, "depth_tier", None),
             recommended_skill=getattr(args, "recommended_skill", None),
         )
@@ -2511,15 +2677,26 @@ def main():
                     print(format_lead(lead, verbose=args.verbose))
 
     elif args.command == "show":
-        lead = get_lead(args.id)
+        lead = get_lead(args.id, profile_id=args.profile)
         if not lead:
-            print(f"Lead #{args.id} not found.")
+            scope = f" in profile '{args.profile}'" if args.profile else ""
+            print(f"Lead #{args.id} not found{scope}.")
             sys.exit(1)
         if not write_output(lead, args, summary=f"lead #{args.id}"):
             print(format_lead(lead, verbose=True))
 
     elif args.command == "claim":
-        if claim_lead(args.id, claimed_by=args.claimed_by):
+        if args.profile and not get_lead(args.id, profile_id=args.profile):
+            print(
+                f"Lead #{args.id} not found in profile '{args.profile}'.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        if claim_lead(
+            args.id,
+            claimed_by=args.claimed_by,
+            profile_id=args.profile,
+        ):
             print(f"Claimed lead #{args.id}")
         else:
             print(f"Could not claim lead #{args.id} (may not be open)")
@@ -2577,6 +2754,7 @@ def main():
             args.query,
             profile_id=getattr(args, "profile", None),
             all_profiles=getattr(args, "all_profiles", False),
+            limit=args.limit,
         )
         if not write_output(results, args, summary=f"lead search '{args.query}': {len(results)} results"):
             if not results:
@@ -2636,7 +2814,10 @@ def main():
 
             print(f"\nCompleted in last 7 days: {stats['recently_completed']}")
             print(f"Findings in last 7 days: {stats['recent_findings']}")
-            print(f"Total searches logged: {stats['total_searches']}")
+            search_label = "Total searches logged"
+            if stats.get("profile_id") and stats.get("search_scope") == "global":
+                search_label += " (global)"
+            print(f"{search_label}: {stats['total_searches']}")
             print(f"Total sessions: {stats['total_sessions']}")
 
             # Queue status
@@ -2829,6 +3010,15 @@ def main():
             db.commit()
             db.close()
             print(f"Created thread #{cursor.lastrowid}: {args.title}")
+
+        elif args.thread_command == "assign":
+            db.close()
+            try:
+                assign_lead_thread(args.lead_id, args.thread_id)
+            except ValueError as exc:
+                print(f"ERROR: {exc}", file=sys.stderr)
+                sys.exit(1)
+            print(f"Assigned lead #{args.lead_id} to thread #{args.thread_id}")
 
         elif args.thread_command == "seed":
             try:

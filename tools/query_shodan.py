@@ -25,9 +25,8 @@ import argparse
 import json
 import os
 import sys
-import time
 from pathlib import Path
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -175,7 +174,17 @@ def cmd_search(args):
         params["page"] = args.page
         data = _fetch("/shodan/host/search", params)
 
-    if write_output(data, args, summary=f"search '{args.query}'"):
+    returned_count = (
+        data.get("total", 0)
+        if args.count_only
+        else len(data.get("matches", []))
+    )
+    if write_output(
+        data,
+        args,
+        summary=f"search '{args.query}'",
+        result_count=returned_count,
+    ):
         return
 
     if getattr(args, "json_out", False):
@@ -240,7 +249,7 @@ def cmd_domain(args):
     if subdomains:
         print(f"Subdomains: {', '.join(sorted(subdomains))}")
 
-    print(f"\nDNS Records:")
+    print("\nDNS Records:")
     for record in data.get("data", []):
         rtype = record.get("type", "?")
         subdomain = record.get("subdomain", "@") or "@"
@@ -256,7 +265,12 @@ def cmd_dns_resolve(args):
     hostnames = args.hostnames.replace(" ", "")
     data = _fetch("/dns/resolve", {"hostnames": hostnames})
 
-    if write_output(data, args, summary=f"dns-resolve {hostnames}"):
+    if write_output(
+        data,
+        args,
+        summary=f"dns-resolve {hostnames}",
+        result_count=len(data),
+    ):
         return
 
     if getattr(args, "json_out", False):
@@ -272,7 +286,12 @@ def cmd_reverse_dns(args):
     ips = args.ips.replace(" ", "")
     data = _fetch("/dns/reverse", {"ips": ips})
 
-    if write_output(data, args, summary=f"reverse-dns {ips}"):
+    if write_output(
+        data,
+        args,
+        summary=f"reverse-dns {ips}",
+        result_count=len(data),
+    ):
         return
 
     if getattr(args, "json_out", False):
@@ -290,7 +309,12 @@ def cmd_ssl_cert(args):
     params = {"query": query, "page": 1}
     data = _fetch("/shodan/host/search", params)
 
-    if write_output(data, args, summary=f"ssl-cert {args.domain}"):
+    if write_output(
+        data,
+        args,
+        summary=f"ssl-cert {args.domain}",
+        result_count=len(data.get("matches", [])),
+    ):
         return
 
     if getattr(args, "json_out", False):

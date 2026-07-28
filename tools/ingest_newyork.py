@@ -20,16 +20,20 @@ Usage:
 import argparse
 import json
 import os
+import sqlite3
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
-# Add tools dir to path
-sys.path.insert(0, str(Path(__file__).parent))
-from query_registry import get_db, _rebuild_fts
+try:
+    from tools.output_util import add_output_args, write_output
+    from tools.query_registry import _rebuild_fts, get_db
+except ImportError:
+    from output_util import add_output_args, write_output
+    from query_registry import _rebuild_fts, get_db
 
 # Load .env for optional app token
 env_path = Path(__file__).parent.parent / ".env"
@@ -100,6 +104,9 @@ def cmd_search(args):
     where = f"upper(current_entity_name) LIKE upper('%{args.query}%')"
     results = _soda_request(ACTIVE_CORPS_ID, {"$where": where}, limit=args.limit)
 
+    if write_output(results, args, summary=f"New York entity search '{args.query}'"):
+        return
+
     print(f"Found {len(results)} NY entities matching '{args.query}'")
     print()
     for r in results:
@@ -153,14 +160,13 @@ def cmd_search(args):
 
         print()
 
-    if args.json_out:
-        print(json.dumps(results, indent=2, default=str))
-
-
 def cmd_search_officers(args):
     """Search by CEO/officer name across active corporations."""
     where = f"upper(chairman_name) LIKE upper('%{args.name}%')"
     results = _soda_request(ACTIVE_CORPS_ID, {"$where": where}, limit=args.limit)
+
+    if write_output(results, args, summary=f"New York officer search '{args.name}'"):
+        return
 
     print(f"Found {len(results)} entities with CEO/Chairman matching '{args.name}'")
     print()
@@ -188,6 +194,9 @@ def cmd_search_address(args):
     ]
     where = " OR ".join(clauses)
     results = _soda_request(ACTIVE_CORPS_ID, {"$where": where}, limit=args.limit)
+
+    if write_output(results, args, summary=f"New York address search '{args.query}'"):
+        return
 
     print(f"Found {len(results)} entities with address matching '{args.query}'")
     print()
@@ -441,16 +450,19 @@ def main():
     p = sub.add_parser("search", help="Search active corporations by name")
     p.add_argument("query")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # search-officers
     p = sub.add_parser("search-officers", help="Search by CEO name")
     p.add_argument("name")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # search-address
     p = sub.add_parser("search-address", help="Search by address")
     p.add_argument("query")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # ingest-entity
     p = sub.add_parser("ingest-entity", help="Ingest specific entity by DOS ID")

@@ -19,9 +19,7 @@ Usage:
 
 import argparse
 import json
-import sqlite3
 import sys
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -127,7 +125,7 @@ def add_hypothesis(title, pattern_type=None, description=None, predicted_evidenc
 
 
 def list_hypotheses(status=None, pattern_type=None, thread_id=None,
-                    competition_group=None, limit=50):
+                    competition_group=None, profile_id=None, limit=50):
     """List hypotheses with optional filters."""
     db = get_hypothesis_db()
     conditions = []
@@ -145,6 +143,11 @@ def list_hypotheses(status=None, pattern_type=None, thread_id=None,
     if competition_group:
         conditions.append("competition_group = ?")
         params.append(competition_group)
+    if profile_id:
+        conditions.append(
+            "thread_id IN (SELECT id FROM investigation_threads WHERE profile_id = ?)"
+        )
+        params.append(profile_id)
 
     where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
     query = f"""
@@ -197,7 +200,7 @@ def investigate_hypothesis(hyp_id, lead_id):
 def resolve_hypothesis(hyp_id, resolution, evidence=None, reason=None, resolved_by=None):
     """Confirm or refute a hypothesis."""
     if resolution not in ("confirmed", "refuted"):
-        print(f"ERROR: Resolution must be 'confirmed' or 'refuted'")
+        print("ERROR: Resolution must be 'confirmed' or 'refuted'")
         return False
 
     db = get_hypothesis_db()
@@ -306,7 +309,79 @@ def evaluate_evidence(hypothesis_id, finding_id, assessment, assessed_by=None, n
     return True
 
 
-def get_ach_matrix(competition_group=None):
+def remove_evaluation(
+    hypothesis_id,
+    finding_id,
+    *,
+    assessed_by=None,
+    reason,
+    removed_by="human",
+):
+    """Remove one erroneous ACH assessment with an immutable audit snapshot."""
+    reason = str(reason or "").strip()
+    if not reason:
+        raise ValueError("An audit reason is required")
+
+    db = get_hypothesis_db()
+    try:
+        conditions = ["hypothesis_id = ?", "finding_id = ?"]
+        params = [hypothesis_id, finding_id]
+        if assessed_by is not None:
+            conditions.append("assessed_by IS ?")
+            params.append(assessed_by)
+        rows = db.execute(
+            "SELECT * FROM hypothesis_evidence_matrix WHERE "
+            + " AND ".join(conditions)
+            + " ORDER BY id",
+            params,
+        ).fetchall()
+        if not rows:
+            raise ValueError(
+                f"No ACH assessment found for hypothesis #{hypothesis_id} "
+                f"and finding #{finding_id}"
+            )
+        if len(rows) > 1:
+            assessors = ", ".join(
+                repr(row["assessed_by"] or "<unspecified>") for row in rows
+            )
+            raise ValueError(
+                "Multiple ACH assessments match; pass --assessed-by to select "
+                f"one of: {assessors}"
+            )
+
+        row = dict(rows[0])
+        db.execute(
+            """
+            INSERT INTO corrections (
+                table_name, record_id, record_key, field_name, old_value,
+                new_value, reason, corrected_by, correction_type
+            ) VALUES (
+                'hypothesis_evidence_matrix', ?, ?, 'assessment', ?, NULL,
+                ?, ?, 'retraction'
+            )
+            """,
+            (
+                row["id"],
+                f"{hypothesis_id}:{finding_id}:{row['assessed_by'] or ''}",
+                json.dumps(row, sort_keys=True, default=str),
+                reason,
+                removed_by,
+            ),
+        )
+        db.execute(
+            "DELETE FROM hypothesis_evidence_matrix WHERE id = ?",
+            (row["id"],),
+        )
+        db.commit()
+        return row
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
+def get_ach_matrix(competition_group=None, hypothesis_ids=None):
     """Build the full evidence×hypothesis matrix with scores.
 
     Returns dict with:
@@ -316,26 +391,35 @@ def get_ach_matrix(competition_group=None):
     """
     db = get_hypothesis_db()
 
-    # Get active hypotheses (proposed/investigating), optionally within one set.
-    group_clause = " AND competition_group = ?" if competition_group else ""
-    group_params = (competition_group,) if competition_group else ()
+    # Get active hypotheses (proposed/investigating), optionally within one set
+    # or limited to explicitly requested IDs.
+    conditions = ["status IN ('proposed', 'investigating')"]
+    params = []
+    if competition_group:
+        conditions.append("competition_group = ?")
+        params.append(competition_group)
+    if hypothesis_ids:
+        placeholders = ",".join("?" for _ in hypothesis_ids)
+        conditions.append(f"id IN ({placeholders})")
+        params.extend(hypothesis_ids)
+    where = " AND ".join(conditions)
     hyps = db.execute(f"""
         SELECT id, title, status, competition_group, is_null_hypothesis
         FROM hypotheses
-        WHERE status IN ('proposed', 'investigating'){group_clause}
+        WHERE {where}
         ORDER BY id
-    """, group_params).fetchall()
-    hypothesis_ids = [h["id"] for h in hyps]
+    """, params).fetchall()
+    selected_hypothesis_ids = [h["id"] for h in hyps]
 
     # Get all evaluated findings
-    if hypothesis_ids:
-        placeholders = ",".join("?" for _ in hypothesis_ids)
+    if selected_hypothesis_ids:
+        placeholders = ",".join("?" for _ in selected_hypothesis_ids)
         evals = db.execute(f"""
             SELECT hypothesis_id, finding_id, assessment, assessed_by
             FROM hypothesis_evidence_matrix
             WHERE hypothesis_id IN ({placeholders})
             ORDER BY id
-        """, hypothesis_ids).fetchall()
+        """, selected_hypothesis_ids).fetchall()
     else:
         evals = []
 
@@ -362,7 +446,7 @@ def get_ach_matrix(competition_group=None):
     for fid in finding_ids:
         assessments = [
             matrix[(hid, fid)]["assessment"]
-            for hid in hypothesis_ids
+            for hid in selected_hypothesis_ids
             if (hid, fid) in matrix
         ]
         if len(assessments) >= 2:
@@ -431,20 +515,24 @@ def compete_hypotheses(competition_group=None):
     return ranked
 
 
-def diagnose_disagreements():
+def diagnose_disagreements(competition_group=None):
     """Find findings where different assessors disagree on the same hypothesis."""
     db = get_hypothesis_db()
+    group_clause = "WHERE h.competition_group = ?" if competition_group else ""
+    params = (competition_group,) if competition_group else ()
     # Find hypothesis-finding pairs with multiple assessors giving different assessments
-    rows = db.execute("""
-        SELECT hypothesis_id, finding_id,
-               GROUP_CONCAT(DISTINCT assessment) as assessments,
-               GROUP_CONCAT(DISTINCT assessed_by) as assessors,
-               COUNT(DISTINCT assessment) as n_assessments
-        FROM hypothesis_evidence_matrix
-        GROUP BY hypothesis_id, finding_id
-        HAVING COUNT(DISTINCT assessment) > 1
+    rows = db.execute(f"""
+        SELECT hem.hypothesis_id, hem.finding_id,
+               GROUP_CONCAT(DISTINCT hem.assessment) as assessments,
+               GROUP_CONCAT(DISTINCT hem.assessed_by) as assessors,
+               COUNT(DISTINCT hem.assessment) as n_assessments
+        FROM hypothesis_evidence_matrix hem
+        JOIN hypotheses h ON h.id = hem.hypothesis_id
+        {group_clause}
+        GROUP BY hem.hypothesis_id, hem.finding_id
+        HAVING COUNT(DISTINCT hem.assessment) > 1
         ORDER BY n_assessments DESC
-    """).fetchall()
+    """, params).fetchall()
 
     disagreements = []
     for r in rows:
@@ -554,6 +642,7 @@ def main():
     p_list.add_argument("--pattern-type", choices=VALID_PATTERN_TYPES)
     p_list.add_argument("--thread-id", type=int)
     p_list.add_argument("--competition-group")
+    p_list.add_argument("--profile", help="Filter by investigation profile")
     p_list.add_argument("--limit", type=int, default=50)
     p_list.add_argument("-v", "--verbose", action="store_true")
     add_output_args(p_list)
@@ -603,8 +692,26 @@ def main():
     p_eval.add_argument("--assessed-by")
     p_eval.add_argument("--notes")
 
+    p_unevaluate = sub.add_parser(
+        "unevaluate",
+        aliases=["remove-evaluation"],
+        help="Remove one erroneous ACH assessment with an audit snapshot",
+    )
+    p_unevaluate.add_argument("--hypothesis-id", type=int, required=True)
+    p_unevaluate.add_argument("--finding-id", type=int, required=True)
+    p_unevaluate.add_argument("--assessed-by")
+    p_unevaluate.add_argument("--reason", required=True)
+    p_unevaluate.add_argument("--by", default="human")
+
     # matrix (ACH)
     p_matrix = sub.add_parser("matrix", help="Display the evidence×hypothesis ACH matrix")
+    p_matrix.add_argument(
+        "hypothesis_ids",
+        nargs="*",
+        type=int,
+        metavar="HYPOTHESIS_ID",
+        help="Optional hypothesis IDs to include",
+    )
     p_matrix.add_argument("--competition-group")
     add_output_args(p_matrix)
 
@@ -615,6 +722,7 @@ def main():
 
     # diagnose (ACH)
     p_diag = sub.add_parser("diagnose", help="Show where assessors disagree on evidence")
+    p_diag.add_argument("--competition-group")
     add_output_args(p_diag)
 
     # search
@@ -649,6 +757,7 @@ def main():
             pattern_type=args.pattern_type,
             thread_id=args.thread_id,
             competition_group=args.competition_group,
+            profile_id=args.profile,
             limit=args.limit,
         )
         if write_output(results, args, summary=f"hypotheses ({len(results)})"):
@@ -724,15 +833,35 @@ def main():
             print(f"Evaluated: finding #{args.finding_id} is {args.assessment} "
                   f"with hypothesis #{args.hypothesis_id}")
 
+    elif args.command in ("unevaluate", "remove-evaluation"):
+        try:
+            removed = remove_evaluation(
+                args.hypothesis_id,
+                args.finding_id,
+                assessed_by=args.assessed_by,
+                reason=args.reason,
+                removed_by=args.by,
+            )
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        print(
+            f"Removed ACH assessment #{removed['id']}: finding "
+            f"#{args.finding_id} vs hypothesis #{args.hypothesis_id}"
+        )
+
     elif args.command == "matrix":
-        data = get_ach_matrix(competition_group=args.competition_group)
+        data = get_ach_matrix(
+            competition_group=args.competition_group,
+            hypothesis_ids=args.hypothesis_ids,
+        )
         if write_output(data, args, summary="ACH evidence-hypothesis matrix"):
             return
         if not data["hypotheses"]:
             print("No active hypotheses with evaluations. Use 'evaluate' to score findings.")
             return
         # Display matrix
-        print(f"\nACH Evidence×Hypothesis Matrix")
+        print("\nACH Evidence×Hypothesis Matrix")
         print(f"  {len(data['hypotheses'])} active hypotheses, {len(data['findings'])} evaluated findings\n")
         # Header
         print(f"  {'Finding':<50} ", end="")
@@ -752,7 +881,7 @@ def main():
                     char = assessment_chars.get(data["matrix"][key]["assessment"], "?")
                     print(f"  {char}  ", end="")
                 else:
-                    print(f"  ?  ", end="")
+                    print("  ?  ", end="")
             marker = "*" if data["diagnosticity"].get(str(f["id"])) == "diagnostic" else "·"
             print(f" {marker}")
         # Summary
@@ -772,7 +901,7 @@ def main():
         if not ranked:
             print("No active hypotheses with evaluations.")
             return
-        print(f"\nACH Hypothesis Competition (lower inconsistency = stronger)")
+        print("\nACH Hypothesis Competition (lower inconsistency = stronger)")
         print(f"{'Rank':>4}  {'ID':>3}  {'Title':<40} {'Eval':>4} {'Inc':>4} {'Diag':>4} {'Ratio':>6}")
         print("-" * 79)
         for i, h in enumerate(ranked):
@@ -787,7 +916,9 @@ def main():
                   "the verdict is only least evidence against, not most evidence for.")
 
     elif args.command == "diagnose":
-        disagreements = diagnose_disagreements()
+        disagreements = diagnose_disagreements(
+            competition_group=args.competition_group
+        )
         if write_output(disagreements, args, summary="ACH disagreements"):
             return
         if not disagreements:
@@ -822,7 +953,7 @@ def main():
         print(f"  Superseded:     {s['status_superseded']}")
         print(f"  Stale:          {s['status_stale']}")
         print(f"  Linked to leads: {s['linked_to_leads']}")
-        print(f"\nBy pattern type:")
+        print("\nBy pattern type:")
         for pt in VALID_PATTERN_TYPES:
             count = s.get(f"pattern_{pt}", 0)
             if count:

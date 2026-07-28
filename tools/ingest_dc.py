@@ -37,7 +37,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, urlencode
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 # Add tools dir to path
@@ -97,6 +97,10 @@ MAX_RESULTS = 100
 # ---------------------------------------------------------------------------
 # HTTP helpers
 # ---------------------------------------------------------------------------
+
+class DCSourceUnavailable(RuntimeError):
+    """Raised when the DC registry cannot return an authoritative response."""
+
 
 def _fetch_json(url, timeout=60, delay=None):
     """Fetch JSON from a URL with retries."""
@@ -189,12 +193,13 @@ def arcgis_query(where, limit=MAX_RESULTS, offset=0):
     }
     url = f"{ARCGIS_BASE}/query?{urlencode(params)}"
     data = _fetch_json(url, delay=REQUEST_DELAY)
-    if not data:
-        return []
+    if data is None:
+        raise DCSourceUnavailable("DC ArcGIS registry request failed")
 
     if "error" in data:
-        print(f"ArcGIS error: {data['error'].get('message', data['error'])}", file=sys.stderr)
-        return []
+        error = data["error"]
+        message = error.get("message", error) if isinstance(error, dict) else error
+        raise DCSourceUnavailable(f"DC ArcGIS registry error: {message}")
 
     return [f["attributes"] for f in data.get("features", [])]
 
@@ -208,9 +213,13 @@ def arcgis_count(where):
     }
     url = f"{ARCGIS_BASE}/query?{urlencode(params)}"
     data = _fetch_json(url, delay=REQUEST_DELAY)
-    if data:
-        return data.get("count", 0)
-    return 0
+    if data is None:
+        raise DCSourceUnavailable("DC ArcGIS registry count request failed")
+    if "error" in data:
+        error = data["error"]
+        message = error.get("message", error) if isinstance(error, dict) else error
+        raise DCSourceUnavailable(f"DC ArcGIS registry error: {message}")
+    return data.get("count", 0)
 
 
 def search_by_name(query, entity_type=None, status=None, limit=MAX_RESULTS):
@@ -608,12 +617,16 @@ def cmd_search(args):
         }
         status_filter = status_map.get(args.status, args.status)
 
-    results_raw = search_by_name(
-        args.query,
-        entity_type=type_filter,
-        status=status_filter,
-        limit=args.limit,
-    )
+    try:
+        results_raw = search_by_name(
+            args.query,
+            entity_type=type_filter,
+            status=status_filter,
+            limit=args.limit,
+        )
+    except DCSourceUnavailable as error:
+        print(f"ERROR: {error}; search was not logged as a zero-result query", file=sys.stderr)
+        raise SystemExit(2) from error
     results = [_normalize_record(r) for r in results_raw]
     total = len(results)
 
@@ -701,8 +714,8 @@ def cmd_ingest_entity(args):
         # Try to find UUID from CorpOnline
         # The GLOBALID from ArcGIS is NOT the same as the CorpOnline UUID
         # We need to search CorpOnline to get the UUID
-        print(f"  Enrichment from CorpOnline not available without UUID.")
-        print(f"  Use 'detail <uuid>' after finding UUID from corponline.dlcp.dc.gov")
+        print("  Enrichment from CorpOnline not available without UUID.")
+        print("  Use 'detail <uuid>' after finding UUID from corponline.dlcp.dc.gov")
 
     db.commit()
     try:
@@ -781,13 +794,13 @@ def cmd_stats(args):
     if write_output(stats, args, summary="DC registry stats"):
         return
 
-    print(f"DC Corporate Registry Statistics")
+    print("DC Corporate Registry Statistics")
     print(f"  Total entities:  {total:,}")
     print(f"  Active:          {active:,}")
     print(f"  Revoked:         {revoked:,}")
     print(f"  Dissolved:       {dissolved:,}")
     print(f"  Other:           {total - active - revoked - dissolved:,}")
-    print(f"\n  Source: DC DLCP Open Data ArcGIS FeatureServer")
+    print("\n  Source: DC DLCP Open Data ArcGIS FeatureServer")
 
     # Registry.db stats
     try:
@@ -832,7 +845,7 @@ def _print_detail(entity):
     """Print full detail from CorpOnline API."""
     name = entity.get("businessName", "?")
     num = entity.get("entityNumber", "?")
-    print(f"=== DC Entity Detail ===")
+    print("=== DC Entity Detail ===")
     print(f"  Name: {name}")
     print(f"  File No: {num}")
     print(f"  UUID: {entity.get('idBusiness', '?')}")

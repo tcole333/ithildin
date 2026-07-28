@@ -5,7 +5,7 @@ import sys
 
 import pytest
 
-from tools import entity_tracker, lead_tracker
+from tools import entity_resolution, entity_tracker, lead_tracker
 
 
 @pytest.fixture
@@ -75,6 +75,35 @@ def test_correct_entity_can_clear_nullable_metadata_with_audit(entity_db):
     assert correction["new_value"] is None
 
 
+def test_resolve_existing_stub_unions_source_and_appends_notes(entity_db):
+    db = entity_tracker.get_db()
+    db.execute(
+        "UPDATE entities SET source = 'auto:connect', notes = NULL WHERE id = 1"
+    )
+
+    result = entity_resolution.resolve_or_create_entity(
+        db,
+        "Canonical Person",
+        entity_type="person",
+        source="louisiana_legislative_auditor",
+        notes="Officer identity confirmed in audit 00005485.",
+    )
+    entity_resolution.resolve_or_create_entity(
+        db,
+        "Canonical Person",
+        entity_type="person",
+        source="louisiana_legislative_auditor",
+        notes="Officer identity confirmed in audit 00005485.",
+    )
+    db.commit()
+    db.close()
+
+    assert result.action == "exact"
+    row = _row(entity_db, "SELECT source, notes FROM entities WHERE id=1")
+    assert row["source"] == "auto:connect,louisiana_legislative_auditor"
+    assert row["notes"] == "Officer identity confirmed in audit 00005485."
+
+
 @pytest.mark.parametrize("field", ["id", "name", "created_at", "agent_run_id"])
 def test_correct_entity_rejects_identity_and_system_fields(entity_db, field):
     with pytest.raises(ValueError, match="Cannot correct entity field"):
@@ -116,6 +145,39 @@ def test_correct_missing_entity_is_atomic(entity_db):
     assert _row(entity_db, "SELECT COUNT(*) AS n FROM corrections")["n"] == 0
 
 
+def test_correct_jurisdiction_collision_points_to_merge_workflow(entity_db):
+    db = sqlite3.connect(entity_db)
+    db.execute(
+        """
+        INSERT INTO entities (
+            id, name, entity_type, jurisdiction, status, source
+        ) VALUES (2, 'Canonical Person', 'person', 'Delaware', 'active',
+                  'registry')
+        """
+    )
+    db.commit()
+    db.close()
+
+    with pytest.raises(ValueError) as exc:
+        entity_tracker.correct_entity_field(
+            1,
+            "jurisdiction",
+            "Delaware",
+            "Refine jurisdiction from official record",
+        )
+
+    message = str(exc.value)
+    assert "duplicate entity #2" in message
+    assert (
+        "entity_dedup.py merge --keep-id 2 --delete-id 1 --dry-run"
+        in message
+    )
+    assert _row(entity_db, "SELECT jurisdiction FROM entities WHERE id=1")[
+        "jurisdiction"
+    ] == "US"
+    assert _row(entity_db, "SELECT COUNT(*) AS n FROM corrections")["n"] == 0
+
+
 def test_entity_correct_cli_uses_audited_path(entity_db, monkeypatch, capsys):
     monkeypatch.setattr(
         sys,
@@ -143,3 +205,25 @@ def test_entity_correct_cli_uses_audited_path(entity_db, monkeypatch, capsys):
     )
     correction = _row(entity_db, "SELECT * FROM corrections WHERE record_id=1")
     assert correction["corrected_by"] == "cli-reviewer"
+
+
+@pytest.mark.parametrize(
+    "lookup_args",
+    [
+        ["Canonical Person"],
+        ["--name", "Canonical Person"],
+    ],
+)
+def test_entity_lookup_accepts_positional_and_flag_names(
+    entity_db, monkeypatch, capsys, lookup_args
+):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["entity_tracker.py", "lookup", *lookup_args],
+    )
+
+    entity_tracker.main()
+
+    output = capsys.readouterr().out
+    assert "Found 1 entities matching 'Canonical Person'" in output

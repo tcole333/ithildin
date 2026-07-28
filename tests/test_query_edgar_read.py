@@ -98,6 +98,47 @@ def test_read_find_searches_beyond_preview(monkeypatch, capsys):
     assert "match 'Party M'" in displayed
 
 
+def test_read_find_output_bounds_minified_inline_xbrl_context(
+    monkeypatch, tmp_path
+):
+    term = "government investigation"
+    filing = (
+        "<html><body><div>Heading</div><div>"
+        + ("A" * 100_000)
+        + term
+        + ("B" * 100_000)
+        + "</div></body></html>"
+    )
+    monkeypatch.setattr(
+        query_edgar,
+        "_fetch_filing_document",
+        lambda *_args, **_kwargs: (filing.encode(), "http"),
+    )
+    output = tmp_path / "matches.json"
+
+    query_edgar.cmd_read(
+        _read_args(
+            output=str(output),
+            find=[term],
+            context=5,
+        )
+    )
+
+    result = json.loads(output.read_text())
+    assert result["line_count"] == 2
+    assert result["text_included"] is False
+    assert "text" not in result
+    assert result["matches"][0]["column"] > 100_000
+    context = result["matches"][0]["context"]
+    assert any(term in item["text"] for item in context)
+    assert all(
+        len(item["text"]) <= query_edgar.MAX_MATCH_CONTEXT_CHARS
+        for item in context
+    )
+    assert any(item.get("truncated") for item in context)
+    assert output.stat().st_size < 5_000
+
+
 def test_request_declares_identity_and_decodes_gzip(monkeypatch):
     compressed = gzip.compress(b"filing content")
     captured = {}

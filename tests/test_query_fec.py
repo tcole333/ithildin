@@ -66,6 +66,7 @@ def test_timeout_writes_audit_artifact_and_exits_nonzero(monkeypatch, tmp_path, 
         "urlopen",
         lambda request, timeout: (_ for _ in ()).throw(TimeoutError("timed out")),
     )
+    monkeypatch.setattr(query_fec.time, "sleep", lambda _delay: None)
     monkeypatch.setattr(query_fec, "_log", lambda *args: logged.append(args))
     monkeypatch.setattr(
         sys,
@@ -111,6 +112,7 @@ def test_http_failure_is_not_converted_to_zero_results(monkeypatch):
         "urlopen",
         lambda request, timeout: (_ for _ in ()).throw(error),
     )
+    monkeypatch.setattr(query_fec.time, "sleep", lambda _delay: None)
 
     with pytest.raises(query_fec.FECRequestError) as exc_info:
         query_fec._fetch("/schedules/schedule_a/", {"contributor_name": "Example"})
@@ -118,3 +120,39 @@ def test_http_failure_is_not_converted_to_zero_results(monkeypatch):
     assert exc_info.value.kind == "http_error"
     assert exc_info.value.http_status == 504
     assert str(exc_info.value) == "FEC API returned HTTP 504"
+
+
+def test_transient_http_failure_is_retried(monkeypatch):
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def read(self):
+            return b'{"results": [{"sub_id": "1"}], "pagination": {}}'
+
+    def fake_open(request, timeout):
+        calls.append((request.full_url, timeout))
+        if len(calls) == 1:
+            raise HTTPError(
+                request.full_url,
+                502,
+                "Bad Gateway",
+                {"Retry-After": "0"},
+                io.BytesIO(),
+            )
+        return Response()
+
+    monkeypatch.setattr(query_fec, "urlopen", fake_open)
+    monkeypatch.setattr(query_fec.time, "sleep", lambda _delay: None)
+
+    results, _pagination = query_fec._fetch(
+        "/schedules/schedule_b/", {"committee_id": "C00811166"}
+    )
+
+    assert results == [{"sub_id": "1"}]
+    assert len(calls) == 2

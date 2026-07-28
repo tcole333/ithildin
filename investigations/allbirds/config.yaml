@@ -1,17 +1,19 @@
-# Allbirds / NewBird AI — GPU Pivot Forensics
+# Smartbird / Allbirds / NewBird AI — GPU Pivot Forensics
 # Investigating the April 15, 2026 rebrand of Allbirds (BIRD) from a failing
 # sustainable footwear company to "NewBird AI," a purported GPU-as-a-Service
-# provider, following a $50M convertible financing. Pattern-matches classic
+# provider, followed by the current SEC registrant name Smartbird, Inc.
+# Pattern-matches classic
 # distressed-company-to-hot-sector pump (compare: Long Blockchain 2017).
 
 name: "allbirds"
 
-primary_subject: "Allbirds, Inc. (NASDAQ: BIRD) / NewBird AI"
+primary_subject: "Smartbird, Inc. (NASDAQ: BIRD; formerly Allbirds, Inc.; announced as NewBird AI)"
 
 description: >
-  Financial forensics investigation of Allbirds, Inc. (NASDAQ: BIRD) and its
-  April 15, 2026 rebrand to "NewBird AI" — a pivot from struggling sustainable
-  footwear retailer to purported "GPU-as-a-Service" AI compute provider.
+  Financial forensics investigation of Smartbird, Inc. (NASDAQ: BIRD; SEC CIK
+  0001653909), formerly Allbirds, Inc., and the April 15, 2026 "NewBird AI"
+  rebrand announcement — a pivot from struggling sustainable footwear retailer
+  to purported "GPU-as-a-Service" AI compute provider.
   The announcement triggered a ~600% one-day stock surge (from ~$3 to ~$16.99)
   on a $50M convertible financing from an undisclosed institutional investor.
   Investigation focuses on: (1) who is the undisclosed convertible counterparty
@@ -22,7 +24,9 @@ description: >
   (4) how the pattern compares to Long Island Iced Tea -> Long Blockchain Corp
   (2017), which resulted in SEC insider-trading charges against three
   individuals and delisting in 2021. CIK: 0001785450. Ticker: BIRD.
-  Delaware incorporation; HQ San Francisco, CA.
+  Delaware incorporation; HQ San Francisco, CA. Current SEC submissions identify
+  the registrant as Smartbird, Inc.; Allbirds and NewBird AI remain historical
+  search aliases.
 
 # Key persons - officers, directors, founders, placement agent principals.
 # Lowercase for auto-classification. Priority escalation triggers.
@@ -56,9 +60,11 @@ known_addresses:
 # Investigation threads - six thematic pillars for organizing leads.
 threads:
   - id: 1
-    name: "AI Pivot Transaction"
-    description: "The April 15 2026 $50M convertible facility, NewBird AI rebrand, stated GPU-as-a-Service plan. Deal terms, conversion triggers, stockholder vote."
+    name: "AI Pivot Transaction and Smartbird Rename"
+    description: "The April 15 2026 $50M convertible facility, announced NewBird AI rebrand, current Smartbird, Inc. identity, and stated GPU-as-a-Service plan. Deal terms, conversion triggers, stockholder vote."
     targets:
+      - "smartbird"
+      - "smartbird inc"
       - "newbird ai"
       - "newbird"
       - "gpu-as-a-service"
@@ -192,6 +198,9 @@ key_dates:
   - date: "2026-04-15"
     event: "$50M convertible financing announced with undisclosed institutional investor; rebrand to NewBird AI / GPU-as-a-Service pivot; BIRD stock +582% close at $16.99"
     category: "financial"
+  - date: "2026-07-01"
+    event: "Current SEC submissions identify the registrant as Smartbird, Inc. (CIK 0001653909), preserving Allbirds and NewBird AI as historical names"
+    category: "milestone"
   - date: "2026-04-24"
     event: "Proxy statement deadline for shoe-asset-sale vote"
     category: "milestone"
@@ -211,23 +220,32 @@ key_dates:
 
 # Institutional pillars - the structural backbone of the investigation
 seed_pillars:
-  - name: "Allbirds, Inc."
+  - name: "Smartbird, Inc."
     pillar_type: "operations"
     sub_type: "public_company"
     status: "active"
     founded: "2015"
     dissolved: null
     jurisdiction: "Delaware"
-    significance: "Primary subject. Publicly traded on NASDAQ as BIRD since Nov 2021. Planning to rename to NewBird AI."
+    significance: "Current SEC registrant name for NASDAQ:BIRD, CIK 0001653909. Formerly Allbirds, Inc.; NewBird AI was the announced April 2026 transition name."
+
+  - name: "Allbirds, Inc."
+    pillar_type: "operations"
+    sub_type: "public_company"
+    status: "inactive"
+    founded: "2015"
+    dissolved: null
+    jurisdiction: "Delaware"
+    significance: "Historical issuer name for current Smartbird, Inc. Publicly traded on NASDAQ as BIRD since November 2021."
 
   - name: "NewBird AI"
     pillar_type: "operations"
     sub_type: "planned_entity"
-    status: "active"
+    status: "inactive"
     founded: "2026"
     dissolved: null
     jurisdiction: "Delaware"
-    significance: "Planned new corporate identity following April 2026 pivot. Announced target business: GPU-as-a-Service and AI-native cloud solutions."
+    significance: "Announced April 2026 transition name and GPU-as-a-Service identity; current SEC submissions instead identify the registrant as Smartbird, Inc."
 
   - name: "American Exchange Group"
     pillar_type: "operations"

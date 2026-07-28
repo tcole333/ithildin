@@ -194,6 +194,15 @@ const clOverrides: Record<string, string> = clOverridesData;
 const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
 const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceRecordsData;
 
+function buildPublicRecordSourceUrl(
+  domain: "PROPERTY" | "STATECOURT",
+  canonicalBody: string,
+): string | undefined {
+  const sourceId = canonicalBody.split("/", 1)[0]?.toLowerCase();
+  if (!sourceId) return undefined;
+  return sourceUrlOverrides[`${domain}_SOURCE:${sourceId}`];
+}
+
 function buildCourtListenerUrl(docketId: string): string {
   if (clOverrides[docketId]) return clOverrides[docketId];
   return `https://www.courtlistener.com/docket/${docketId}/`;
@@ -241,7 +250,7 @@ function buildDocumentCloudUrl(docId: string): string {
 }
 
 function buildMuckRockUrl(requestId: string): string {
-  return `https://www.muckrock.com/foi/${requestId}/`;
+  return `https://www.muckrock.com/foi/request/${requestId}/`;
 }
 
 function buildLittleSisUrl(entityId: string): string {
@@ -469,7 +478,9 @@ function guessSourceType(value: string): string {
   if (/^(?:SEC\s+)?(?:EDGAR\s+)?ADSH\b/i.test(token)) return "securities_filing";
   if (/^990:/i.test(token)) return "tax_filing";
   if (/^OPENPAYMENTS:/i.test(token)) return "healthcare_payment_record";
+  if (/^PROPERTY:/i.test(token)) return "property_record";
   if (/^ACRIS:/i.test(token)) return "property_record";
+  if (/^STATECOURT:/i.test(token)) return "court_record";
   if (/^(CL|CourtListener)/i.test(token)) return "court_record";
   if (/^NYSCEF_CASE:/i.test(token)) return "court_record";
   if (/^FEC:/i.test(token)) return "campaign_finance_record";
@@ -1096,6 +1107,35 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     },
   },
   {
+    id: "property",
+    tokenPattern: "PROPERTY:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PROPERTY:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `property:${canonicalBody}`,
+        label: `PROPERTY:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("PROPERTY", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/PROPERTY:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^PROPERTY:/i, "");
+        return {
+          key: `property:${canonicalBody}`,
+          label: `PROPERTY:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("PROPERTY", canonicalBody),
+        };
+      });
+    },
+  },
+  {
     id: "acris",
     // The NYC ACRIS doc_id is the 13-16 digit number; some refs carry an
     // "FT_" document-type prefix (ACRIS:FT_1690000317169) that is stripped
@@ -1173,6 +1213,35 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const docket = m[2].toUpperCase();
         const url = buildMilitaryCorrectionsUrl(service);
         return [{ key: `bcmr:${service}:${docket}`, label: `BCMR:${service}:${docket}`, url }];
+      });
+    },
+  },
+  {
+    id: "statecourt",
+    tokenPattern: "STATECOURT:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^STATECOURT:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `statecourt:${canonicalBody}`,
+        label: `STATECOURT:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/STATECOURT:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^STATECOURT:/i, "");
+        return {
+          key: `statecourt:${canonicalBody}`,
+          label: `STATECOURT:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
       });
     },
   },

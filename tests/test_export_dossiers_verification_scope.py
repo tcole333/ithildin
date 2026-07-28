@@ -232,6 +232,28 @@ def test_target_threshold_uses_the_requested_verification_scope(
     assert targets == [("Alpha Person", ["Alpha Person"])]
 
 
+def test_single_target_profile_mismatch_is_rejected_before_export(
+    dossier_db: sqlite3.Connection,
+) -> None:
+    scoped = export_dossiers.export_target(
+        dossier_db,
+        "Alpha Person",
+        ["Alpha Person"],
+        profile_id="wrong-profile",
+    )
+    assert scoped["stats"]["total_findings"] == 0
+    assert scoped["stats"]["total_connections"] == 0
+
+    with pytest.raises(ValueError, match="refusing to write an empty dossier"):
+        export_dossiers._validate_target_profile_scope(
+            dossier_db,
+            "Alpha Person",
+            ["Alpha Person"],
+            scoped,
+            "wrong-profile",
+        )
+
+
 def test_incremental_skip_requires_matching_scope_and_record_membership(
     dossier_db: sqlite3.Connection,
 ) -> None:

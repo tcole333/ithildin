@@ -82,7 +82,7 @@ def test_officer_search_writes_raw_api_response(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(
         ingest_uk_companies_house,
         "_request",
-        lambda path, params=None: response,
+        lambda path, params=None, **kwargs: response,
     )
     output = tmp_path / "officers.json"
 
@@ -131,7 +131,7 @@ def test_json_mode_is_not_contaminated_by_human_output(monkeypatch, capsys):
     monkeypatch.setattr(
         ingest_uk_companies_house,
         "_request",
-        lambda path, params=None: response,
+        lambda path, params=None, **kwargs: response,
     )
 
     ingest_uk_companies_house.cmd_search(
@@ -143,4 +143,74 @@ def test_json_mode_is_not_contaminated_by_human_output(monkeypatch, capsys):
         )
     )
 
-    assert json.loads(capsys.readouterr().out) == response
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["total_results"] == 0
+    assert payload["items"] == []
+    assert payload["search_mode"] == "company_name_includes"
+
+
+def test_company_search_uses_phrase_sensitive_advanced_endpoint(
+    tmp_path, monkeypatch
+):
+    captured = {}
+
+    def fake_request(path, params=None, **kwargs):
+        captured.update(path=path, params=params, kwargs=kwargs)
+        return {
+            "total_results": 1,
+            "items": [
+                {
+                    "company_name": "J EZRA MERKIN LIMITED",
+                    "company_number": "01234567",
+                    "company_status": "active",
+                    "registered_office_address": {"locality": "London"},
+                }
+            ],
+        }
+
+    monkeypatch.setattr(ingest_uk_companies_house, "_request", fake_request)
+    output = tmp_path / "companies.json"
+
+    ingest_uk_companies_house.cmd_search(
+        argparse.Namespace(
+            query="J Ezra Merkin",
+            limit=20,
+            broad=False,
+            output=str(output),
+            json_out=False,
+        )
+    )
+
+    payload = json.loads(output.read_text())
+    assert captured["path"] == "/advanced-search/companies"
+    assert captured["params"] == {
+        "company_name_includes": "J Ezra Merkin",
+        "size": 20,
+    }
+    assert payload["search_mode"] == "company_name_includes"
+    assert payload["items"][0]["title"] == "J EZRA MERKIN LIMITED"
+    assert payload["items"][0]["address"] == {"locality": "London"}
+
+
+def test_company_search_can_opt_into_legacy_broad_search(tmp_path, monkeypatch):
+    captured = {}
+
+    def fake_request(path, params=None, **kwargs):
+        captured.update(path=path, params=params, kwargs=kwargs)
+        return {"total_results": 10000, "items": []}
+
+    monkeypatch.setattr(ingest_uk_companies_house, "_request", fake_request)
+    output = tmp_path / "companies.json"
+
+    ingest_uk_companies_house.cmd_search(
+        argparse.Namespace(
+            query="J Ezra Merkin",
+            limit=20,
+            broad=True,
+            output=str(output),
+            json_out=False,
+        )
+    )
+
+    assert captured["path"] == "/search/companies"
+    assert captured["params"] == {"q": "J Ezra Merkin", "items_per_page": 20}

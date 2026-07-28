@@ -194,12 +194,25 @@ def test_workflow_fk_rebuild_preserves_rows_objects_sequences_and_fts(tmp_path):
         "(title, action_type, related_lead_id) VALUES ('Valid link', 'other', ?)",
         (lead_id,),
     )
+    db.execute(
+        "INSERT INTO infra_requests "
+        "(title, description, request_type, related_lead_id) "
+        "VALUES ('Valid request link', 'Current lead FK', 'tool_fix', ?)",
+        (lead_id,),
+    )
     db.commit()
     with pytest.raises(sqlite3.IntegrityError):
         db.execute(
             "INSERT INTO human_actions "
             "(title, action_type, related_lead_id) VALUES "
             "('Invalid link', 'other', 999999)"
+        )
+    db.rollback()
+    with pytest.raises(sqlite3.IntegrityError):
+        db.execute(
+            "INSERT INTO infra_requests "
+            "(title, description, request_type, related_lead_id) "
+            "VALUES ('Invalid request link', 'Missing lead FK', 'tool_fix', 999999)"
         )
     db.rollback()
     assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -251,4 +264,89 @@ def test_rebuild_discovers_non_hardcoded_stale_fk_table(tmp_path):
         "SELECT name FROM sqlite_master WHERE type = 'index' "
         "AND name = 'idx_custom_queue_status'"
     ).fetchone() == ("idx_custom_queue_status",)
+    db.close()
+
+
+def test_schema_repairs_lead_fts_triggers_left_on_backup_table(tmp_path):
+    db = sqlite3.connect(tmp_path / "stale-lead-fts.db")
+    db.row_factory = sqlite3.Row
+    lead_tracker._ensure_schema(db)
+
+    early_id = db.execute(
+        "INSERT INTO leads (title, status) VALUES ('Indexed early token', 'open')"
+    ).lastrowid
+    db.commit()
+    assert [
+        row[0]
+        for row in db.execute(
+            "SELECT rowid FROM leads_fts WHERE leads_fts MATCH 'early'"
+        ).fetchall()
+    ] == [early_id]
+
+    db.executescript(
+        """
+        DROP TRIGGER leads_ai;
+        DROP TRIGGER leads_ad;
+        DROP TRIGGER leads_au;
+        CREATE TABLE leads_old_backup AS SELECT * FROM leads WHERE 0;
+        CREATE TRIGGER leads_ai AFTER INSERT ON leads_old_backup BEGIN
+            INSERT INTO leads_fts(rowid, title, description, findings, target_name)
+            VALUES (new.id, new.title, COALESCE(new.description,''),
+                    COALESCE(new.findings,''), COALESCE(new.target_name,''));
+        END;
+        CREATE TRIGGER leads_ad AFTER DELETE ON leads_old_backup BEGIN
+            INSERT INTO leads_fts(
+                leads_fts, rowid, title, description, findings, target_name
+            )
+            VALUES ('delete', old.id, old.title, COALESCE(old.description,''),
+                    COALESCE(old.findings,''), COALESCE(old.target_name,''));
+        END;
+        CREATE TRIGGER leads_au AFTER UPDATE ON leads_old_backup BEGIN
+            INSERT INTO leads_fts(
+                leads_fts, rowid, title, description, findings, target_name
+            )
+            VALUES ('delete', old.id, old.title, COALESCE(old.description,''),
+                    COALESCE(old.findings,''), COALESCE(old.target_name,''));
+            INSERT INTO leads_fts(rowid, title, description, findings, target_name)
+            VALUES (new.id, new.title, COALESCE(new.description,''),
+                    COALESCE(new.findings,''), COALESCE(new.target_name,''));
+        END;
+        """
+    )
+    late_id = db.execute(
+        "INSERT INTO leads (title, status) VALUES ('Previously missing token', 'open')"
+    ).lastrowid
+    db.commit()
+    assert db.execute(
+        "SELECT rowid FROM leads_fts WHERE leads_fts MATCH 'previously'"
+    ).fetchall() == []
+
+    lead_tracker._ensure_schema(db)
+
+    triggers = db.execute(
+        "SELECT name, tbl_name FROM sqlite_master "
+        "WHERE type='trigger' AND name IN ('leads_ai', 'leads_ad', 'leads_au') "
+        "ORDER BY name"
+    ).fetchall()
+    assert [tuple(row) for row in triggers] == [
+        ("leads_ad", "leads"),
+        ("leads_ai", "leads"),
+        ("leads_au", "leads"),
+    ]
+    assert [
+        row[0]
+        for row in db.execute(
+            "SELECT rowid FROM leads_fts WHERE leads_fts MATCH 'previously'"
+        ).fetchall()
+    ] == [late_id]
+
+    newest_id = db.execute(
+        "INSERT INTO leads (title, status) VALUES ('Trigger continuity token', 'open')"
+    ).lastrowid
+    assert [
+        row[0]
+        for row in db.execute(
+            "SELECT rowid FROM leads_fts WHERE leads_fts MATCH 'continuity'"
+        ).fetchall()
+    ] == [newest_id]
     db.close()

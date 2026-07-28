@@ -17,18 +17,19 @@ Usage:
 """
 
 import argparse
-import os
 import sqlite3
 import sys
-from datetime import datetime
 from pathlib import Path
 
 # We'll import paramiko lazily since it might not be installed
 DATA_DIR = Path(__file__).parent.parent / "datasets" / "fl_sunbiz"
 
-# Add parent to path for registry DB access
-sys.path.insert(0, str(Path(__file__).parent))
-from query_registry import get_db, _rebuild_fts
+try:
+    from tools.output_util import add_output_args, write_output
+    from tools.query_registry import _rebuild_fts, format_entity, get_db
+except ImportError:
+    from output_util import add_output_args, write_output
+    from query_registry import _rebuild_fts, format_entity, get_db
 
 # ── Fixed-width field definitions for corporate data file ──
 # (start_pos_0indexed, length, field_name)
@@ -222,7 +223,7 @@ def cmd_download(args):
                 remote_path = f"{ag_dir}/corprindata.zip"
                 local_path = local_dir / "corprindata.zip"
                 if local_path.exists() and not args.force:
-                    print(f"  Skipping corprindata.zip (already exists)")
+                    print("  Skipping corprindata.zip (already exists)")
                 else:
                     attr = sftp.stat(remote_path)
                     size_mb = attr.st_size / (1024 * 1024)
@@ -546,9 +547,15 @@ def cmd_search(args):
         ORDER BY entity_name LIMIT 20
     """, [f"%{args.query}%"]).fetchall()
 
+    records = [dict(row) for row in rows]
+    if write_output(
+        {"query": args.query, "results": records},
+        args,
+        summary=f"Florida SunBiz search '{args.query}'",
+    ):
+        return
     print(f"Found {len(rows)} FL entities matching '{args.query}'")
     for r in rows:
-        from query_registry import format_entity
         print(format_entity(r))
         print()
 
@@ -566,6 +573,7 @@ def main():
 
     p = sub.add_parser("search", help="Quick search FL entities")
     p.add_argument("query")
+    add_output_args(p)
 
     args = parser.parse_args()
     handlers = {

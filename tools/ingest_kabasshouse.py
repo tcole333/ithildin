@@ -3,10 +3,11 @@
 Ingest and query the kabasshouse/epstein-data dataset.
 
 The most complete single downloadable Epstein corpus as of mid-2026:
-~1.42M logical documents (2.84M page-level rows) fully OCR'd, spanning DOJ
-DataSets 1-12 + FBI Vault + House Oversight, plus structured layers not present
-in our other corpora (financial transactions, named entities, curated "gold"
-docs, communication/investigative records).
+1,424,673 OCR document/page records in the current local snapshot, each with a
+distinct file_key, spanning DOJ DataSets 1-12 + FBI Vault + House Oversight,
+plus structured layers not present in our other corpora (financial
+transactions, named entities, curated "gold" docs,
+communication/investigative records).
 
 Canonical remote: https://huggingface.co/datasets/kabasshouse/epstein-data
   (Parquet, CC-BY-4.0, last modified 2026-03-01)
@@ -424,6 +425,7 @@ def cmd_search(args):
 
 def cmd_doc(args):
     db = get_db()
+    resolved_embedded = False
     rows = db.execute(
         "SELECT * FROM documents WHERE file_key = ? OR id = ? "
         "ORDER BY page_number", [args.doc_id, args.doc_id]
@@ -434,9 +436,50 @@ def cmd_doc(args):
             [f"%{args.doc_id}%"]
         ).fetchall()
     if not rows:
+        try:
+            rows = db.execute(
+                """
+                SELECT d.*
+                FROM documents_fts
+                JOIN documents d ON d.rowid = documents_fts.rowid
+                WHERE documents_fts MATCH ?
+                  AND instr(d.full_text, ?) > 0
+                ORDER BY d.file_key, d.page_number
+                LIMIT 50
+                """,
+                (literal_fts_query(args.doc_id), args.doc_id),
+            ).fetchall()
+        except sqlite3.OperationalError:
+            # Small/legacy test databases may predate the FTS table. The
+            # production corpus uses FTS, so the full scan is only a fallback.
+            rows = db.execute(
+                """
+                SELECT * FROM documents
+                WHERE instr(full_text, ?) > 0
+                ORDER BY file_key, page_number
+                LIMIT 50
+                """,
+                (args.doc_id,),
+            ).fetchall()
+        resolved_embedded = bool(rows)
+    if not rows:
         print(f"Document not found: {args.doc_id}")
         db.close()
         sys.exit(1)
+    results = [dict(row) for row in rows]
+    if resolved_embedded:
+        parent_keys = sorted({row["file_key"] for row in rows})
+        for result in results:
+            result["requested_page_id"] = args.doc_id
+            result["resolved_via"] = "embedded_page_marker"
+        print(
+            f"Resolved page marker {args.doc_id} inside parent "
+            f"document(s): {', '.join(parent_keys)}",
+            file=sys.stderr,
+        )
+    if write_output(results, args, summary=f"Kabasshouse document '{args.doc_id}'"):
+        db.close()
+        return
     for r in rows:
         print(f"=== {r['file_key']} (page {r['page_number']}) ===")
         print(f"ds {r['dataset']} | {r['document_type'] or '-'} | {r['date'] or '-'} | "
@@ -463,27 +506,37 @@ def cmd_financials(args):
     sql += " LIMIT ?"
     params.append(args.limit)
     rows = db.execute(sql, params).fetchall()
-    print(f"Transactions: {len(rows)}")
-    for r in rows:
-        print(f"  {r['transaction_date'] or '-'}  {r['amount'] or '-'} {r['currency'] or ''}  "
-              f"{r['merchant_name'] or r['merchant_raw'] or '-'}  "
-              f"[{r['cardholder'] or '-'} | {r['file_key']}]")
-    if args.json_out:
-        print(json.dumps([dict(r) for r in rows], indent=2, default=str))
+    results = [dict(row) for row in rows]
     db.close()
+    if write_output(results, args, summary="Kabasshouse financial transactions"):
+        return
+    if args.json_out:
+        print(json.dumps(results, indent=2, default=str))
+        return
+    print(f"Transactions: {len(results)}")
+    for row in results:
+        print(
+            f"  {row['transaction_date'] or '-'}  "
+            f"{row['amount'] or '-'} {row['currency'] or ''}  "
+            f"{row['merchant_name'] or row['merchant_raw'] or '-'}  "
+            f"[{row['cardholder'] or '-'} | {row['file_key']}]"
+        )
 
 
 def cmd_entity(args):
     db = get_db()
     rows = db.execute(
-        "SELECT entity_type, value, normalized_value, COUNT(*) AS n "
+        "SELECT entity_type, "
+        "COALESCE(NULLIF(TRIM(normalized_value), ''), value) AS entity_value, "
+        "COUNT(*) AS n "
         "FROM entities WHERE value LIKE ? OR normalized_value LIKE ? "
-        "GROUP BY entity_type, normalized_value ORDER BY n DESC LIMIT ?",
+        "GROUP BY entity_type, entity_value "
+        "ORDER BY n DESC, entity_type, entity_value LIMIT ?",
         [f"%{args.name}%", f"%{args.name}%", args.limit]
     ).fetchall()
     print(f"Entity matches for '{args.name}': {len(rows)}")
     for r in rows:
-        print(f"  [{r['entity_type']}] {r['normalized_value'] or r['value']}  x{r['n']}")
+        print(f"  [{r['entity_type']}] {r['entity_value']}  x{r['n']}")
     db.close()
 
 
@@ -512,14 +565,17 @@ def cmd_curated(args):
 
 def cmd_stats(args):
     db = get_db()
-    print(f"=== kabasshouse/epstein-data ===")
+    print("=== kabasshouse/epstein-data ===")
     print(f"  Database: {DB_PATH}")
     print(f"  DB size: {DB_PATH.stat().st_size / 1024 / 1024:.1f} MB")
     print()
     docs = db.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
     keys = db.execute("SELECT COUNT(DISTINCT file_key) FROM documents").fetchone()[0]
     chars = db.execute("SELECT SUM(char_count) FROM documents").fetchone()[0] or 0
-    print(f"Documents: {docs:,} page-rows across {keys:,} unique file_keys")
+    print(
+        f"Document/page records: {docs:,} across "
+        f"{keys:,} distinct file_keys"
+    )
     print(f"  Total OCR text: {chars/1e6:.0f}M chars")
     print("  By dataset:")
     for r in db.execute(
@@ -584,16 +640,22 @@ def main():
     p.add_argument("--json", dest="json_out", action="store_true")
     add_output_args(p)
 
-    p = subs.add_parser("doc", help="Retrieve a document's pages by file_key/id")
+    p = subs.add_parser(
+        "doc",
+        aliases=["document"],
+        help="Retrieve a document's pages by file_key/id",
+    )
     p.add_argument("doc_id")
     p.add_argument("--full", action="store_true")
     p.add_argument("--chars", type=int, default=2000)
+    add_output_args(p)
 
     p = subs.add_parser("financials", help="Query financial_transactions")
     p.add_argument("--cardholder")
     p.add_argument("--merchant")
     p.add_argument("--limit", type=int, default=30)
     p.add_argument("--json", dest="json_out", action="store_true")
+    add_output_args(p)
 
     p = subs.add_parser("entity", help="Entity lookup")
     p.add_argument("name")
@@ -612,7 +674,7 @@ def main():
         sys.exit(1)
     {
         "download": cmd_download, "ingest": cmd_ingest, "search": cmd_search,
-        "doc": cmd_doc, "financials": cmd_financials, "entity": cmd_entity,
+        "doc": cmd_doc, "document": cmd_doc, "financials": cmd_financials, "entity": cmd_entity,
         "curated": cmd_curated, "stats": cmd_stats, "overlap": cmd_overlap,
     }[args.command](args)
 

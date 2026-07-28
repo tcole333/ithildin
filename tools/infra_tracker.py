@@ -21,10 +21,8 @@ Usage:
 
 import argparse
 import json
-import sqlite3
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -320,16 +318,18 @@ def block_lead_on_infra(lead_id, infra_id, reason=None):
     """Block a lead because it depends on an infra request."""
     db = get_db()
     now = _utcnow().isoformat()
-    db.execute(
-        "UPDATE leads SET status = 'blocked', blocked_by_infra_id = ?, updated_at = ? WHERE id = ?",
-        (infra_id, now, lead_id)
-    )
-    note = f"Blocked: waiting on infra request #{infra_id}"
+    stop_reason = f"Waiting on infra request #{infra_id}"
     if reason:
-        note += f" — {reason}"
+        stop_reason += f" — {reason}"
+    db.execute(
+        """UPDATE leads
+           SET status = 'blocked', blocked_by_infra_id = ?, stop_reason = ?, updated_at = ?
+           WHERE id = ?""",
+        (infra_id, stop_reason, now, lead_id),
+    )
     db.execute(
         "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
-        (lead_id, note)
+        (lead_id, f"Blocked: {stop_reason}"),
     )
     db.commit()
     db.close()

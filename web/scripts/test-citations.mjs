@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
-import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { createJiti } from "jiti";
 
 const jiti = createJiti(import.meta.url);
-const citationsPath = resolve("./src/lib/citations.ts");
+const citationsPath = fileURLToPath(
+  new URL("../src/lib/citations.ts", import.meta.url),
+);
 const {
   applyCitations,
   createCitationState,
@@ -194,6 +196,172 @@ run("ACRIS: strips FT_ document-type prefix before building doc_id URL", () => {
   );
   const links = extractEvidenceLinks("ACRIS:FT_1690000317169");
   assert.ok(links.some(l => l.url === "https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=1690000317169"));
+});
+
+const propertySourceFixtures = [
+  {
+    sourceId: "us-nc-onemap-parcels",
+    jurisdiction: "37005",
+    kind: "parcel",
+    nativeId: "3013467134",
+    url: "https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/MapServer/1",
+  },
+  {
+    sourceId: "us-fl-dor-property-roll",
+    jurisdiction: "12",
+    kind: "bulk_release",
+    nativeId: "nal-2026-01",
+    url: "https://www.floridarevenue.com/property/Pages/DataPortal_RequestAssessmentRollGISData.aspx",
+  },
+  {
+    sourceId: "us-fl-miami-dade-official-records",
+    jurisdiction: "12086",
+    kind: "instrument",
+    nativeId: "CFN-2026-42",
+    url: "https://www.miamidadeclerk.gov/clerk/commercial-data-services.page",
+  },
+  {
+    sourceId: "us-ma-massgis-parcels",
+    jurisdiction: "25",
+    kind: "bulk_release",
+    nativeId: "GOSNOLD-2026",
+    url: "https://www.mass.gov/info-details/massgis-data-property-tax-parcels",
+  },
+  {
+    sourceId: "us-il-cook-parcel-universe",
+    jurisdiction: "17031",
+    kind: "parcel_snapshot",
+    nativeId: "01-01-106-009-1001",
+    url: "https://datacatalog.cookcountyil.gov/Property-Taxation/Assessor-Parcel-Universe/nj4t-kc8j",
+  },
+  {
+    sourceId: "us-md-sdat-property-hidden",
+    jurisdiction: "24005",
+    kind: "parcel",
+    nativeId: "04030311078580",
+    url: "https://opendata.maryland.gov/Business-and-Economy/Maryland-Real-Property-Assessments_Hidden-Property/ed4q-f8tm",
+  },
+  {
+    sourceId: "us-nyc-acris",
+    jurisdiction: "36061",
+    kind: "instrument",
+    nativeId: "2017021700466001",
+    url: "https://www.nyc.gov/site/finance/property/acris.page",
+  },
+  {
+    sourceId: "us-nyc-acris-images",
+    jurisdiction: "36061",
+    kind: "document_image",
+    nativeId: "2017021700466001",
+    url: "https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentImageView",
+  },
+  {
+    sourceId: "us-la-ebr-property",
+    jurisdiction: "22033",
+    kind: "parcel",
+    nativeId: "030-7623-7",
+    url: "https://data.brla.gov/",
+  },
+  {
+    sourceId: "us-tx-harris-clerk-real-property",
+    jurisdiction: "48201",
+    kind: "instrument",
+    nativeId: "RP-2026-42",
+    url: "https://www.cclerk.hctx.net/PublicRecords.aspx",
+  },
+  {
+    sourceId: "us-tx-harris-hcad-property",
+    jurisdiction: "48201",
+    kind: "bulk_release",
+    nativeId: "2026-Real_acct_owner.zip",
+    url: "https://hcad.org/pdata/pdata-property-downloads.html/",
+  },
+];
+
+for (const fixture of propertySourceFixtures) {
+  run(`PROPERTY: ${fixture.sourceId} resolves to its official source`, () => {
+    const ref = `PROPERTY:${fixture.sourceId}/${fixture.jurisdiction}/${fixture.kind}/${fixture.nativeId}`;
+    const result = applyCitations(`Recorded [${ref}].`);
+    assert.equal(result.entries.length, 1);
+    assert.equal(result.entries[0].label, ref);
+    assert.equal(result.entries[0].openUrl, fixture.url);
+    assert.equal(result.entries[0].sourceKind, "external");
+  });
+}
+
+run("PROPERTY: unmapped source remains an honest record-only citation", () => {
+  const ref = "PROPERTY:us-example-county/99999/parcel/APN-123";
+  const result = applyCitations(`Recorded [${ref}].`);
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].sourceKind, "record_only");
+  assert.equal(result.entries[0].openUrl, undefined);
+});
+
+const stateCourtSourceFixtures = [
+  [
+    "us-courtlistener-api",
+    "https://wiki.free.law/c/courtlistener/help/api/rest/v4/overview",
+  ],
+  ["us-ny-nyscef", "https://iapps.courts.state.ny.us/nyscef/CaseSearch"],
+  [
+    "us-pa-ujs-public-dockets",
+    "https://ujsportal.pacourts.us/Home/CaseInformation",
+  ],
+  [
+    "us-pa-aopc-bulk",
+    "https://www.pacourts.us/Storage/media/pdfs/20211119/145411-amendedecrpolicyeffective1.1.22.pdf",
+  ],
+  ["us-md-case-search", "https://casesearch.mdcourts.gov/casesearch/"],
+  [
+    "us-md-aoc-court-data",
+    "https://www.mdcourts.gov/judicialrecords/recordsrequests",
+  ],
+  ["us-de-courtconnect", "https://courts.delaware.gov/docket.aspx"],
+  [
+    "us-dc-superior-eaccess",
+    "https://www.dccourts.gov/superior-court/superior-court-case-search",
+  ],
+  ["us-in-iocs-bulk", "https://www.in.gov/courts/iocs/statistics/bulk-data/"],
+  [
+    "us-wi-wcca-rest",
+    "https://www.wicourts.gov/courts/resources/docs/RESTagreementpaid.pdf",
+  ],
+  [
+    "us-mn-court-bulk",
+    "https://mncourts.gov/help-topics/court-statistics/bulk-data",
+  ],
+  [
+    "us-nc-rpa-courts",
+    "https://www.nccourts.gov/services/remote-public-access-program/rpa-online-access",
+  ],
+  ["us-az-eaccess", "https://www.azcourts.gov/eaccess/eAccess-Information"],
+  [
+    "us-or-ojcin",
+    "https://www.courts.oregon.gov/services/online/Pages/ojcin-signup.aspx",
+  ],
+  ["us-wa-jis-link", "https://www.courts.wa.gov/jislink/?fa=jislink.home"],
+  ["us-tx-researchtx", "https://research.txcourts.gov/"],
+];
+
+for (const [sourceId, url] of stateCourtSourceFixtures) {
+  run(`STATECOURT: ${sourceId} resolves to its source landing page`, () => {
+    const ref = `STATECOURT:${sourceId}/example-court/CV-2026-1/case`;
+    const result = applyCitations(`Recorded [${ref}].`);
+    assert.equal(result.entries.length, 1);
+    assert.equal(result.entries[0].label, ref);
+    assert.equal(result.entries[0].openUrl, url);
+    assert.equal(result.entries[0].sourceKind, "external");
+    assert.ok(!(result.entries[0].openUrl ?? "").includes("CV-2026-1"));
+  });
+}
+
+run("STATECOURT: unmapped source remains record-only", () => {
+  const ref = "STATECOURT:us-example-courts/example-court/CV-2026-1/case";
+  const links = extractEvidenceLinks(ref);
+  assert.equal(links.length, 1);
+  assert.equal(links[0].label, ref);
+  assert.equal(links[0].sourceKind, "record_only");
+  assert.equal(links[0].openUrl, undefined);
 });
 
 // ---------------------------------------------------------------------------
@@ -624,20 +792,20 @@ run("MuckRock: resolves request ID to MuckRock URL", () => {
   const result = applyCitations("See [MUCKROCK:78799].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "MuckRock 78799");
-  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/78799/");
+  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/request/78799/");
 });
 
 run("MuckRock: resolves request ID with filename", () => {
   const result = applyCitations("See [MUCKROCK:78799/Docs.redacted.pdf].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "MuckRock 78799/Docs.redacted.pdf");
-  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/78799/");
+  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/request/78799/");
 });
 
 run("MuckRock: extractEvidenceLinks resolves request", () => {
   const links = extractEvidenceLinks("MUCKROCK:80009/2019-083151_RC.pdf");
   assert.equal(links.length, 1);
-  assert.match(links[0].url ?? "", /muckrock\.com\/foi\/80009/);
+  assert.match(links[0].url ?? "", /muckrock\.com\/foi\/request\/80009/);
 });
 
 // ---------------------------------------------------------------------------
@@ -921,6 +1089,8 @@ run("getCitationHealthTier: returns correct tier for known prefixes", () => {
   assert.equal(getCitationHealthTier("fara:6458"), "tier3");
   assert.equal(getCitationHealthTier("lda:Broidy Capital"), "tier2");
   assert.equal(getCitationHealthTier("kpmg:IPI"), "label-only");
+  assert.equal(getCitationHealthTier("property:source/parcel/id"), "label-only");
+  assert.equal(getCitationHealthTier("statecourt:source/case/id"), "label-only");
   assert.equal(getCitationHealthTier("finding:2108"), "label-only");
 });
 
@@ -944,7 +1114,9 @@ run("Registry: all 29 types produce citation entries", () => {
     "CIK 0001823896",
     "SEC EDGAR ADSH 0001193125-23-045802",
     "990:660789697",
+    "PROPERTY:us-nc-onemap-parcels/37005/parcel/3013467134",
     "ACRIS:2017021700466001",
+    "STATECOURT:us-example-courts/example-court/CV-2026-1/case",
     "CL:69737684",
     "NYSCEF_CASE:abc%2F123",
     "FEC:C00352732",
@@ -990,7 +1162,9 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "CIK 0001823896", expectMin: 1 },
     { input: "SEC EDGAR ADSH 0001193125-23-045802", expectMin: 1 },
     { input: "990:660789697", expectMin: 1 },
+    { input: "PROPERTY:us-nc-onemap-parcels/37005/parcel/3013467134", expectMin: 1 },
     { input: "ACRIS:2017021700466001", expectMin: 1 },
+    { input: "STATECOURT:us-example-courts/example-court/CV-2026-1/case", expectMin: 1 },
     { input: "CL:69737684", expectMin: 1 },
     { input: "NYSCEF_CASE:abc%2F123", expectMin: 1 },
     { input: "FEC:C00352732", expectMin: 1 },

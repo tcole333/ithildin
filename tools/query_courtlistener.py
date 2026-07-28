@@ -17,13 +17,21 @@ Usage:
 import argparse
 import json
 import os
+import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.search_log_util import canonical_search_key
 except ImportError:
     from output_util import add_output_args, write_output
+    from search_log_util import canonical_search_key
+
+
+COURTLISTENER_SOURCE = "courtlistener"
 
 
 def _log(query, source, count):
@@ -33,6 +41,15 @@ def _log(query, source, count):
         log_search(query, source, count)
     except Exception:
         pass
+
+
+def _record_search(mode, count, query=None, **filters):
+    """Log one CourtListener operation with a stable mode/filter key."""
+    _log(
+        canonical_search_key(mode, query, **filters),
+        COURTLISTENER_SOURCE,
+        count,
+    )
 
 
 # Load .env
@@ -55,6 +72,30 @@ def _client():
         print("ERROR: COURTLISTENER_TOKEN not set in .env", file=sys.stderr)
         sys.exit(1)
     return CourtListenerClient(token=token)
+
+
+def _report_pagination(client, requested_limit):
+    """Explain when an upstream result count is below the requested ceiling."""
+    metadata = getattr(client, "last_pagination", None)
+    if not metadata:
+        return
+    returned = metadata["returned"]
+    upstream_count = metadata["upstream_count"]
+    pages = metadata["pages"]
+    if metadata["upstream_ended_early"]:
+        print(
+            "WARNING: CourtListener pagination ended without a next link after "
+            f"{returned} of {upstream_count} reported results across {pages} page(s).",
+            file=sys.stderr,
+        )
+    elif requested_limit and returned < requested_limit:
+        reported = upstream_count if upstream_count is not None else returned
+        print(
+            "INFO: CourtListener pagination complete: returned "
+            f"{returned} of {reported} upstream results across {pages} page(s); "
+            f"--limit {requested_limit} is a ceiling, not a promised result count.",
+            file=sys.stderr,
+        )
 
 
 def cmd_search(args):
@@ -91,8 +132,18 @@ def cmd_search(args):
         max_results=args.limit,
         **kwargs,
     )
+    _report_pagination(client, args.limit)
 
-    _log(query, "courtlistener", len(results))
+    _record_search(
+        "search",
+        len(results),
+        query,
+        search_type=args.type,
+        court=args.court,
+        after=getattr(args, "after", None),
+        before=getattr(args, "before", None),
+        semantic=bool(getattr(args, "semantic", False)),
+    )
 
     if write_output(results, args, summary=f"CourtListener search '{query}'"):
         return
@@ -130,7 +181,14 @@ def cmd_cases(args):
         date_filed_before=args.before,
         max_results=args.limit,
     )
-    _log(args.query, "courtlistener", len(results))
+    _record_search(
+        "cases",
+        len(results),
+        args.query,
+        court=args.court,
+        after=args.after,
+        before=args.before,
+    )
 
     if write_output(results, args, summary=f"CourtListener cases '{args.query}': {len(results)} results"):
         return
@@ -186,7 +244,12 @@ def cmd_party(args):
     """Search for cases by party name (uses search API field operators)."""
     client = _client()
     results = client.search_by_party(args.name, court=args.court, max_results=args.limit)
-    _log(args.name, "courtlistener_party", len(results))
+    _record_search(
+        "party",
+        len(results),
+        args.name,
+        court=args.court,
+    )
 
     if write_output(results, args, summary=f"CourtListener party search '{args.name}': {len(results)} results"):
         return
@@ -231,7 +294,13 @@ def cmd_opinions(args):
         max_results=args.limit,
         **kwargs,
     )
-    _log(args.query, "courtlistener_opinions", len(results))
+    _record_search(
+        "opinions",
+        len(results),
+        args.query,
+        court=args.court,
+        semantic=bool(getattr(args, "semantic", False)),
+    )
 
     if write_output(results, args, summary=f"CourtListener opinions '{args.query}': {len(results)} results"):
         return
@@ -262,7 +331,7 @@ def cmd_judge(args):
     """Search judges."""
     client = _client()
     judges = client.search_judges(name=args.name, max_results=args.limit)
-    _log(args.name, "courtlistener_judge", len(judges))
+    _record_search("judge", len(judges), args.name)
 
     if write_output(judges, args, summary=f"CourtListener judges '{args.name}': {len(judges)} results"):
         return
@@ -288,7 +357,7 @@ def cmd_disclosures(args):
         max_results=args.limit,
     )
 
-    if write_output(results, args, summary=f"CourtListener disclosures"):
+    if write_output(results, args, summary="CourtListener disclosures"):
         return
     if getattr(args, "json_out", False):
         print(json.dumps(results, indent=2, default=str))
@@ -300,39 +369,55 @@ def cmd_disclosures(args):
         person = d.get("person", "?")
         print(f"  Year {year} — Person ID: {person}")
         if d.get("has_been_extracted"):
-            print(f"    Extracted: Yes")
+            print("    Extracted: Yes")
         print()
 
 
 def cmd_opinion(args):
     """Fetch full opinion text by opinion ID or cluster ID."""
     client = _client()
-    try:
-        opinion = client.get_opinion(args.opinion_id)
-    except Exception:
-        # Try as cluster ID
+    id_type = getattr(args, "id_type", "auto")
+
+    # Search results and citations normally expose cluster IDs. Numeric cluster
+    # and opinion ID spaces overlap, so trying the opinion endpoint first can
+    # silently return an unrelated case. Prefer clusters in auto mode; callers
+    # with a known raw opinion ID can force the opinion endpoint.
+    opinion = None
+    if id_type in {"auto", "cluster"}:
         try:
-            import requests
-            token = os.environ.get("COURTLISTENER_TOKEN", "")
-            headers = {"Authorization": f"Token {token}"} if token else {}
-            r = requests.get(
-                f"https://www.courtlistener.com/api/rest/v4/clusters/{args.opinion_id}/",
-                headers=headers,
-            )
-            r.raise_for_status()
-            cluster = r.json()
-            # Get the first opinion from the cluster
+            cluster = client.get_cluster(args.opinion_id)
             opinion_urls = cluster.get("sub_opinions", [])
             if opinion_urls:
                 oid = opinion_urls[0].rstrip("/").split("/")[-1]
                 opinion = client.get_opinion(int(oid))
-            else:
-                print("No opinions found in this cluster.", file=sys.stderr)
-                return
-        except Exception as e:
-            print(f"ERROR: Could not fetch opinion: {e}", file=sys.stderr)
-            return
+        except Exception as exc:
+            if id_type == "cluster":
+                print(
+                    f"ERROR: Could not fetch opinion cluster: {exc}",
+                    file=sys.stderr,
+                )
+                raise SystemExit(1)
 
+    if opinion is None and id_type in {"auto", "opinion"}:
+        try:
+            opinion = client.get_opinion(args.opinion_id)
+        except Exception as exc:
+            print(f"ERROR: Could not fetch opinion: {exc}", file=sys.stderr)
+            raise SystemExit(1)
+
+    if opinion is None:
+        print(
+            f"ERROR: CourtListener cluster #{args.opinion_id} contains no opinions.",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+
+    _record_search(
+        "opinion",
+        1,
+        str(args.opinion_id),
+        id_type=id_type,
+    )
     if write_output(opinion, args, summary=f"CourtListener opinion #{args.opinion_id}"):
         return
 
@@ -351,7 +436,7 @@ def cmd_opinion(args):
 
     # Strip HTML if needed
     if text.startswith("<"):
-        import re, html as html_mod
+        import html as html_mod
         text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', text, flags=re.DOTALL | re.IGNORECASE)
         text = re.sub(r'<(?:br|p|div|tr|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
         text = re.sub(r'<[^>]+>', '', text)
@@ -365,9 +450,6 @@ def cmd_opinion(args):
     if len(lines) > args.lines:
         print(f"\n... ({len(lines) - args.lines} more lines)")
 
-    _log(str(args.opinion_id), "courtlistener_opinion", 1)
-
-
 def cmd_recap_search(args):
     """Search RECAP documents for a case. Uses the search API (type=rd)."""
     client = _client()
@@ -377,7 +459,14 @@ def cmd_recap_search(args):
         court=args.court,
         max_results=args.limit,
     )
+    _report_pagination(client, args.limit)
 
+    _record_search(
+        "recap_search",
+        len(results),
+        args.query,
+        court=args.court,
+    )
     if write_output(results, args, summary=f"RECAP doc search '{args.query}': {len(results)} results"):
         return
 
@@ -400,7 +489,90 @@ def cmd_recap_search(args):
             print(f"       Docket: https://www.courtlistener.com{docket_url}")
         print()
 
-    _log(args.query, "courtlistener_recap", len(results))
+def _extract_pages_pymupdf(pdf_path):
+    try:
+        import pymupdf as fitz
+    except ImportError:
+        import fitz
+
+    doc = fitz.open(pdf_path)
+    try:
+        return [page.get_text() for page in doc]
+    finally:
+        doc.close()
+
+
+def _extract_pages_pdftotext(pdf_path):
+    executable = shutil.which("pdftotext")
+    if not executable:
+        raise FileNotFoundError("pdftotext is not installed or not on PATH")
+    completed = subprocess.run(
+        [executable, "-layout", str(pdf_path), "-"],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or f"exit status {completed.returncode}"
+        raise RuntimeError(f"pdftotext failed: {detail}")
+    pages = completed.stdout.split("\f")
+    if pages and not pages[-1].strip():
+        pages.pop()
+    return pages or [""]
+
+
+def _extract_pdf_pages(pdf_path):
+    """Extract PDF pages with PyMuPDF, then the installed Poppler fallback."""
+    pymupdf_error = None
+    try:
+        return "pymupdf", _extract_pages_pymupdf(pdf_path), None
+    except Exception as exc:
+        pymupdf_error = exc
+
+    try:
+        return (
+            "pdftotext",
+            _extract_pages_pdftotext(pdf_path),
+            str(pymupdf_error),
+        )
+    except Exception as pdftotext_error:
+        raise RuntimeError(
+            "PDF text extraction failed with both PyMuPDF "
+            f"({pymupdf_error}) and pdftotext ({pdftotext_error})"
+        ) from pdftotext_error
+
+
+def _extraction_quality(pages):
+    chars_per_page = [
+        len(re.sub(r"\s+", "", page or ""))
+        for page in pages
+    ]
+    page_count = len(chars_per_page)
+    text_chars = sum(chars_per_page)
+    substantive_pages = sum(chars >= 300 for chars in chars_per_page)
+    needs_ocr = (
+        text_chars < 100
+        or (
+            page_count >= 3
+            and (
+                text_chars / page_count < 200
+                or substantive_pages / page_count < 0.25
+            )
+        )
+    )
+    return {
+        "page_count": page_count,
+        "text_chars": text_chars,
+        "substantive_pages": substantive_pages,
+        "needs_ocr": needs_ocr,
+    }
+
+
+def _write_extracted_text(text_path, pages):
+    page_break = "\n--- PAGE BREAK ---\n"
+    text = page_break.join((page or "").rstrip() for page in pages)
+    Path(text_path).write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
 def cmd_download(args):
@@ -426,20 +598,38 @@ def cmd_download(args):
     size_kb = os.path.getsize(outpath) / 1024
     print(f"Downloaded {size_kb:.0f}KB to {outpath}")
 
-    # If it's a PDF and the user wants text extraction, try pymupdf
-    if outpath.endswith(".pdf") and args.extract_text:
+    # If it's a PDF and the user wants text extraction, prefer PyMuPDF and
+    # fall back to the installed Poppler command-line extractor.
+    if outpath.casefold().endswith(".pdf") and args.extract_text:
+        text_path = str(Path(outpath).with_suffix(".txt"))
         try:
-            import fitz  # pymupdf
-            doc = fitz.open(outpath)
-            text_path = outpath.replace(".pdf", ".txt")
-            with open(text_path, "w") as f:
-                for page in doc:
-                    f.write(page.get_text())
-                    f.write("\n--- PAGE BREAK ---\n")
-            print(f"Extracted text ({doc.page_count} pages) to {text_path}")
-            doc.close()
-        except ImportError:
-            print("WARNING: pymupdf not installed, cannot extract text. Install with: uv add pymupdf", file=sys.stderr)
+            method, pages, fallback_reason = _extract_pdf_pages(outpath)
+            _write_extracted_text(text_path, pages)
+        except RuntimeError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            raise SystemExit(1) from None
+
+        quality = _extraction_quality(pages)
+        if method == "pdftotext":
+            print(
+                "INFO: PyMuPDF unavailable or failed; used pdftotext fallback"
+                + (f" ({fallback_reason})" if fallback_reason else ""),
+                file=sys.stderr,
+            )
+        print(
+            f"Extracted text via {method} "
+            f"({quality['page_count']} pages, "
+            f"{quality['text_chars']} non-whitespace chars) to {text_path}"
+        )
+        if quality["needs_ocr"]:
+            print(
+                "WARNING: Low-text PDF extraction "
+                f"({quality['text_chars']} chars across "
+                f"{quality['page_count']} pages; "
+                f"{quality['substantive_pages']} substantive pages). "
+                "The PDF likely needs OCR.",
+                file=sys.stderr,
+            )
 
 
 def cmd_citations(args):
@@ -448,7 +638,11 @@ def cmd_citations(args):
     citing = client.get_citing_opinions(args.cluster_id, max_results=args.limit)
     cited_by = client.get_cited_by_opinion(args.cluster_id, max_results=args.limit)
     result = {"cluster_id": args.cluster_id, "cites": citing, "cited_by": cited_by}
-    _log(str(args.cluster_id), "courtlistener_citations", len(citing) + len(cited_by))
+    _record_search(
+        "citations",
+        len(citing) + len(cited_by),
+        str(args.cluster_id),
+    )
     if write_output(result, args, summary=f"Citations for cluster #{args.cluster_id}: cites={len(citing)} cited_by={len(cited_by)}"):
         return
     print(f"=== Citation Graph for Cluster #{args.cluster_id} ===")
@@ -464,8 +658,8 @@ def cmd_resolve_cite(args):
     """Resolve citation text to CourtListener cluster IDs."""
     client = _client()
     result = client.resolve_citations(args.text)
-    _log(args.text[:80], "courtlistener_cite_resolve", 1)
-    if write_output(result, args, summary=f"Citation resolution"):
+    _record_search("resolve_cite", 1, args.text[:80])
+    if write_output(result, args, summary="Citation resolution"):
         return
     print(json.dumps(result, indent=2, default=str))
 
@@ -474,7 +668,7 @@ def cmd_cluster(args):
     """Get opinion cluster details."""
     client = _client()
     cluster = client.get_cluster(args.cluster_id)
-    _log(str(args.cluster_id), "courtlistener_cluster", 1)
+    _record_search("cluster", 1, str(args.cluster_id))
     if write_output(cluster, args, summary=f"Cluster #{args.cluster_id}"):
         return
     print(f"=== Cluster #{args.cluster_id} ===")
@@ -497,7 +691,12 @@ def cmd_investments(args):
         description=args.query,
         max_results=args.limit,
     )
-    _log(args.query, "courtlistener_investments", len(results))
+    _record_search(
+        "investments",
+        len(results),
+        args.query,
+        person_id=getattr(args, "person_id", None),
+    )
     if write_output(results, args, summary=f"Investment search '{args.query}': {len(results)} results"):
         return
     print(f"Found {len(results)} investment records matching '{args.query}'")
@@ -519,7 +718,12 @@ def cmd_reimbursements(args):
         source=args.query,
         max_results=args.limit,
     )
-    _log(args.query, "courtlistener_reimbursements", len(results))
+    _record_search(
+        "reimbursements",
+        len(results),
+        args.query,
+        person_id=getattr(args, "person_id", None),
+    )
     if write_output(results, args, summary=f"Reimbursement search '{args.query}': {len(results)} results"):
         return
     print(f"Found {len(results)} reimbursement records matching '{args.query}'")
@@ -558,7 +762,16 @@ def cmd_fjc(args):
         )
         raise SystemExit(1)
     query_desc = args.plaintiff or args.defendant or "all"
-    _log(query_desc, "courtlistener_fjc", len(results))
+    _record_search(
+        "fjc",
+        len(results),
+        query_desc,
+        plaintiff=args.plaintiff,
+        defendant=args.defendant,
+        nature_of_suit=args.nos,
+        after=args.after,
+        before=args.before,
+    )
     if write_output(results, args, summary=f"FJC search: {len(results)} results"):
         return
     print(f"Found {len(results)} FJC records")
@@ -599,7 +812,7 @@ def cmd_career(args):
         "political_affiliations": affiliations,
     }
 
-    _log(args.name, "courtlistener_career", len(positions))
+    _record_search("career", len(positions), args.name)
     if write_output(result, args, summary=f"Career for {args.name}: {len(positions)} positions"):
         return
 
@@ -709,6 +922,15 @@ def main():
     # opinion — full text by ID
     p = sub.add_parser("opinion", help="Fetch full opinion text by ID")
     p.add_argument("opinion_id", type=int, help="Opinion ID or cluster ID")
+    p.add_argument(
+        "--id-type",
+        choices=["auto", "cluster", "opinion"],
+        default="auto",
+        help=(
+            "Interpret the ID as a cluster or raw opinion ID. Auto (default) "
+            "checks the cluster endpoint first because the numeric ID spaces overlap."
+        ),
+    )
     p.add_argument("--lines", type=int, default=500, help="Max lines to show")
     add_output_args(p)
 
@@ -723,7 +945,11 @@ def main():
     p = sub.add_parser("download", help="Download a RECAP document PDF")
     p.add_argument("url", help="Full URL or filepath_local from RECAP")
     p.add_argument("output_file", help="Local path to save the PDF")
-    p.add_argument("--extract-text", action="store_true", help="Extract text via pymupdf")
+    p.add_argument(
+        "--extract-text",
+        action="store_true",
+        help="Extract text via PyMuPDF, falling back to pdftotext",
+    )
 
     # citations — citation graph
     p = sub.add_parser("citations", help="Citation graph for an opinion cluster")

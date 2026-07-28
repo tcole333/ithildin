@@ -78,6 +78,8 @@ if env_path.exists():
 
 BASE_URL = "https://api.open.fec.gov/v1"
 REQUEST_TIMEOUT_SECONDS = 60
+MAX_RETRIES = 2
+TRANSIENT_HTTP_STATUS = {429, 500, 502, 503, 504}
 
 
 class FECRequestError(RuntimeError):
@@ -127,25 +129,41 @@ def _fetch(endpoint, params, max_pages=1):
             "User-Agent": "OSINT-Research/1.0",
         })
 
-        try:
-            with urlopen(req, timeout=REQUEST_TIMEOUT_SECONDS) as resp:
-                data = json.loads(resp.read().decode())
-        except HTTPError as e:
-            raise FECRequestError(
-                f"FEC API returned HTTP {e.code}",
-                kind="http_error",
-                http_status=e.code,
-            ) from None
-        except URLError as e:
-            raise FECRequestError(
-                f"FEC API request failed: {e.reason}",
-                kind="network_error",
-            ) from None
-        except TimeoutError:
-            raise FECRequestError(
-                f"FEC API request timed out after {REQUEST_TIMEOUT_SECONDS} seconds",
-                kind="timeout",
-            ) from None
+        for attempt in range(MAX_RETRIES + 1):
+            try:
+                with urlopen(req, timeout=REQUEST_TIMEOUT_SECONDS) as resp:
+                    data = json.loads(resp.read().decode())
+                break
+            except HTTPError as e:
+                if e.code in TRANSIENT_HTTP_STATUS and attempt < MAX_RETRIES:
+                    retry_after = e.headers.get("Retry-After") if e.headers else None
+                    try:
+                        delay = float(retry_after) if retry_after else 2**attempt
+                    except ValueError:
+                        delay = 2**attempt
+                    time.sleep(min(max(delay, 0.5), 30))
+                    continue
+                raise FECRequestError(
+                    f"FEC API returned HTTP {e.code}",
+                    kind="http_error",
+                    http_status=e.code,
+                ) from None
+            except URLError as e:
+                if attempt < MAX_RETRIES:
+                    time.sleep(2**attempt)
+                    continue
+                raise FECRequestError(
+                    f"FEC API request failed: {e.reason}",
+                    kind="network_error",
+                ) from None
+            except TimeoutError:
+                if attempt < MAX_RETRIES:
+                    time.sleep(2**attempt)
+                    continue
+                raise FECRequestError(
+                    f"FEC API request timed out after {REQUEST_TIMEOUT_SECONDS} seconds",
+                    kind="timeout",
+                ) from None
 
         results = data.get("results", [])
         all_results.extend(results)
@@ -243,9 +261,9 @@ def cmd_donor(args):
             unique_cities.add(city.upper())
 
     if len(unique_employers) > 3 or len(unique_cities) > 5:
-        print(f"  WARNING: Multiple distinct donors may share this name.")
+        print("  WARNING: Multiple distinct donors may share this name.")
         print(f"  Unique employers: {len(unique_employers)} | Unique cities: {len(unique_cities)}")
-        print(f"  Cross-reference employer/address before recording findings.")
+        print("  Cross-reference employer/address before recording findings.")
         print()
 
     for r in results[:args.limit]:

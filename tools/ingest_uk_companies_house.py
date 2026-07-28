@@ -111,7 +111,7 @@ def _make_auth_header(api_key):
     return f"Basic {encoded}"
 
 
-def _request(path, params=None, retry=0):
+def _request(path, params=None, retry=0, not_found=None):
     """Make an authenticated API request with rate limiting.
 
     Returns parsed JSON or None on error.
@@ -145,7 +145,7 @@ def _request(path, params=None, retry=0):
             wait = (2 ** retry) * 5
             print(f"  Rate limited (429). Waiting {wait}s before retry {retry + 1}...", file=sys.stderr)
             time.sleep(wait)
-            return _request(path, params, retry + 1)
+            return _request(path, params, retry + 1, not_found=not_found)
         if e.code == 401:
             print(
                 "ERROR: Authentication failed (401). Your API key may be invalid.\n"
@@ -154,7 +154,7 @@ def _request(path, params=None, retry=0):
             )
             return None
         if e.code == 404:
-            return None
+            return not_found
         body = ""
         try:
             body = e.read().decode()[:500]
@@ -306,12 +306,43 @@ def _map_status(company_status):
 
 def cmd_search(args):
     """Search companies by name."""
-    data = _request("/search/companies", {"q": args.query, "items_per_page": args.limit})
+    broad = getattr(args, "broad", False)
+    if broad:
+        data = _request(
+            "/search/companies",
+            {"q": args.query, "items_per_page": args.limit},
+        )
+    else:
+        data = _request(
+            "/advanced-search/companies",
+            {"company_name_includes": args.query, "size": args.limit},
+            not_found={"items": [], "total_results": 0},
+        )
     if not data:
         if _emit_output(data, args, f"UK company search '{args.query}'"):
             return
         print("No results or API error.")
         return
+
+    if not broad:
+        # Advanced search uses company_name/registered_office_address while the
+        # ordinary search endpoint uses title/address. Normalize both to the
+        # legacy artifact shape used by downstream tools.
+        normalized_items = []
+        for item in data.get("items", []):
+            normalized = dict(item)
+            normalized["title"] = item.get("company_name") or item.get("title")
+            normalized["address"] = (
+                item.get("registered_office_address") or item.get("address") or {}
+            )
+            normalized_items.append(normalized)
+        data = {
+            **data,
+            "items": normalized_items,
+            "search_mode": "company_name_includes",
+            "query": args.query,
+        }
+
     if _emit_output(data, args, f"UK company search '{args.query}'"):
         return
 
@@ -1214,6 +1245,11 @@ def main():
     p = sub.add_parser("search", help="Search companies by name")
     p.add_argument("query")
     p.add_argument("--limit", type=int, default=20)
+    p.add_argument(
+        "--broad",
+        action="store_true",
+        help="Use the legacy token-based search instead of phrase-sensitive name search",
+    )
     _add_display_output_args(p)
 
     # company

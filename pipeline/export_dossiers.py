@@ -7,7 +7,6 @@ producing one dossier per canonical target instead of split pages.
 
 import argparse
 import json
-import os
 import re
 import sqlite3
 import sys
@@ -553,6 +552,54 @@ def get_targets(conn: sqlite3.Connection, min_findings: int = 5,
     return targets
 
 
+def _validate_target_profile_scope(
+    conn: sqlite3.Connection,
+    canonical_name: str,
+    all_names: list[str],
+    dossier: dict,
+    profile_id: str | None,
+) -> None:
+    """Reject a single-target export when another profile owns its records."""
+    if profile_id is None:
+        return
+    stats = dossier["stats"]
+    if stats["total_findings"] or stats["total_connections"]:
+        return
+
+    placeholders = ",".join("?" * len(all_names))
+    owning_profiles = {
+        row["profile_id"]
+        for row in conn.execute(
+            f"""
+            SELECT DISTINCT profile_id
+            FROM findings
+            WHERE target_name IN ({placeholders})
+              AND profile_id IS NOT NULL
+            """,
+            all_names,
+        ).fetchall()
+    }
+    owning_profiles.update(
+        row["profile_id"]
+        for row in conn.execute(
+            f"""
+            SELECT DISTINCT profile_id
+            FROM connections
+            WHERE (person_a IN ({placeholders}) OR person_b IN ({placeholders}))
+              AND profile_id IS NOT NULL
+            """,
+            all_names + all_names,
+        ).fetchall()
+    )
+    if owning_profiles and profile_id not in owning_profiles:
+        owners = ", ".join(sorted(owning_profiles))
+        raise ValueError(
+            f"Target {canonical_name!r} has no exportable records in profile "
+            f"{profile_id!r}, but records exist in: {owners}. Use the correct "
+            "--profile or --all-profiles; refusing to write an empty dossier."
+        )
+
+
 def main():
     parser = argparse.ArgumentParser(description="Export dossiers from investigation.db")
     parser.add_argument("--target", help="Export a single target")
@@ -628,6 +675,19 @@ def main():
             profile_id=resolved_profile,
             include_unverified=args.include_unverified,
         )
+        if args.target:
+            try:
+                _validate_target_profile_scope(
+                    conn,
+                    canonical,
+                    all_names,
+                    dossier,
+                    resolved_profile,
+                )
+            except ValueError as error:
+                conn.close()
+                print(f"ERROR: {error}", file=sys.stderr)
+                raise SystemExit(2) from error
         out_path = args.output_dir / f"{dossier['slug']}.json"
 
         dossier_for_index = dossier

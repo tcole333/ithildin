@@ -15,39 +15,35 @@ Usage:
 """
 
 import argparse
-import json
-import os
 import sys
 import time
-from pathlib import Path
 
 import requests
 
 try:
     from tools.env_loader import load_env_file
-    from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from tools.output_util import add_output_args, write_output
 except ImportError:
     from env_loader import load_env_file
-    from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from output_util import add_output_args, write_output
 
 API_BASE = "https://api.opencorporates.com/v0.4"
 JURISDICTION = "us_de"  # Delaware
 RATE_LIMIT_DELAY = 0.5  # 500ms between requests to avoid rate limits
 
 load_env_file()
-
-
-def get_api_key():
-    """Get OpenCorporates API key from environment."""
-    key = os.getenv("OPENCORPORATES_API_KEY")
-    if not key:
-        print("ERROR: OPENCORPORATES_API_KEY environment variable not set", file=sys.stderr)
-        print("Get a free research key: https://opencorporates.com/api_accounts/new", file=sys.stderr)
-        print("Or set: export OPENCORPORATES_API_KEY=your_key_here", file=sys.stderr)
-        sys.exit(1)
-    return key
 
 
 def api_request(endpoint, params=None):
@@ -66,16 +62,9 @@ def api_request(endpoint, params=None):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 401:
-            print(f"ERROR: Invalid API token. Check your OPENCORPORATES_API_KEY", file=sys.stderr)
-        elif e.response.status_code == 429:
-            print(f"ERROR: Rate limit exceeded. Free tier: 200/month, 50/day", file=sys.stderr)
-        else:
-            print(f"HTTP {e.response.status_code}: {e.response.text}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_http_error(e.response.status_code)
     except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_transport_error(e)
 
 
 def search_companies(query, inactive=False, per_page=30, page=1):

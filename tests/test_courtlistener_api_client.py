@@ -1,5 +1,7 @@
 """Unit tests for CourtListener request construction."""
 
+from types import SimpleNamespace
+
 import pytest
 import requests
 
@@ -95,3 +97,63 @@ def test_fjc_timeout_is_concise_and_does_not_write_output(
         "ERROR: CourtListener FJC search timed out after one bounded request; "
         "try a narrower name or date range.\n"
     )
+
+
+def test_opinion_auto_prefers_cluster_when_numeric_ids_collide(
+    monkeypatch, tmp_path
+):
+    calls = []
+
+    class CollisionClient:
+        def get_cluster(self, cluster_id):
+            calls.append(("cluster", cluster_id))
+            return {
+                "id": cluster_id,
+                "sub_opinions": [
+                    "https://www.courtlistener.com/api/rest/v4/opinions/8495830/"
+                ],
+            }
+
+        def get_opinion(self, opinion_id):
+            calls.append(("opinion", opinion_id))
+            return {"id": opinion_id, "plain_text": "Correct cluster opinion text."}
+
+    output = tmp_path / "opinion.json"
+    monkeypatch.setattr(query_courtlistener, "_client", CollisionClient)
+
+    query_courtlistener.cmd_opinion(
+        SimpleNamespace(
+            opinion_id=8523350,
+            id_type="auto",
+            lines=100,
+            output=str(output),
+            json_out=False,
+        )
+    )
+
+    assert calls == [("cluster", 8523350), ("opinion", 8495830)]
+    assert output.read_text().find('"id": 8495830') >= 0
+
+
+def test_opinion_id_type_can_force_raw_opinion_lookup(monkeypatch, tmp_path):
+    calls = []
+
+    class OpinionClient:
+        def get_opinion(self, opinion_id):
+            calls.append(opinion_id)
+            return {"id": opinion_id, "plain_text": "Raw opinion text."}
+
+    output = tmp_path / "opinion.json"
+    monkeypatch.setattr(query_courtlistener, "_client", OpinionClient)
+
+    query_courtlistener.cmd_opinion(
+        SimpleNamespace(
+            opinion_id=8523350,
+            id_type="opinion",
+            lines=100,
+            output=str(output),
+            json_out=False,
+        )
+    )
+
+    assert calls == [8523350]

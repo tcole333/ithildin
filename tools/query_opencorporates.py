@@ -22,35 +22,34 @@ Usage:
 
 import argparse
 import json
-import os
 import sys
 import time
-from pathlib import Path
 
 import requests
 
 try:
     from tools.env_loader import load_env_file
-    from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from tools.output_util import add_output_args, write_output
 except ImportError:
     from env_loader import load_env_file
-    from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from output_util import add_output_args, write_output
 
 API_BASE = "https://api.opencorporates.com/v0.4"
 RATE_LIMIT_DELAY = 0.5
 
 load_env_file()
-
-
-def get_api_key():
-    """Get OpenCorporates API key from environment."""
-    key = os.getenv("OPENCORPORATES_API_KEY")
-    if not key:
-        print("ERROR: OPENCORPORATES_API_KEY not set", file=sys.stderr)
-        sys.exit(1)
-    return key
 
 
 def api_request(endpoint, params=None):
@@ -67,21 +66,13 @@ def api_request(endpoint, params=None):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 401:
-            print("ERROR: Invalid API token", file=sys.stderr)
-        elif e.response.status_code == 403:
-            print("ERROR: Access denied — may need a paid plan for this endpoint", file=sys.stderr)
-        elif e.response.status_code == 429:
-            print("ERROR: Rate limit exceeded", file=sys.stderr)
-        elif e.response.status_code == 404:
+        status_code = e.response.status_code
+        if status_code == 404:
             print(f"ERROR: Not found: {endpoint}", file=sys.stderr)
             return None
-        else:
-            print(f"HTTP {e.response.status_code}: {e.response.text[:200]}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_http_error(status_code)
     except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_transport_error(e)
 
 
 def _parse_company(company):
@@ -351,8 +342,6 @@ def main():
     if not args.command:
         parser.print_help()
         sys.exit(1)
-
-    output_file = getattr(args, "output", None)
 
     if args.command == "search":
         results = search_companies(

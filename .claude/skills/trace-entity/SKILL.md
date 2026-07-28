@@ -1,6 +1,6 @@
 ---
 name: trace-entity
-description: Follow corporate/financial entity through registrations, filings, and offshore records
+description: Follow a corporate or financial entity through registries, property, court, financial, and offshore records
 user_invocable: true
 ---
 
@@ -177,9 +177,23 @@ uv run python tools/query_investigations.py search "<ENTITY>" --limit 10 --outpu
 ```
 
 ```bash
-# NYC property records (if NYC entity)
+# Reproducible property -> recorder -> court plan
+uv run python tools/public_records_search_plan.py "<ENTITY>" \
+  --address "<KNOWN_ADDRESS>" \
+  --output "$WORKDIR/trace-public-record-plan.json"
+
+# Normalized property and state/local-court observations
+uv run python tools/query_property.py owner "<ENTITY>" \
+  --output "$WORKDIR/trace-property-owner.json"
+uv run python tools/query_property.py address "<KNOWN_ADDRESS>" \
+  --output "$WORKDIR/trace-property-address.json"
+uv run python tools/query_state_courts.py search "<ENTITY>" \
+  --output "$WORKDIR/trace-state-courts.json"
+
+# NYC ACRIS recorder records when the plan identifies a NYC connection
 uv run python tools/query_acris.py party "<ENTITY>" --output $WORKDIR/trace-acris.json
-uv run python tools/query_acris.py batch-entities   # Cross-ref all investigation entities
+uv run python tools/query_acris.py batch-entities \
+  --output "$WORKDIR/trace-acris-batch.json"
 
 # FEC (donations from entity employees)
 uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/trace-fec.json
@@ -205,6 +219,13 @@ uv run python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-s
 uv run python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
 uv run python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
 ```
+
+Follow the public-record plan's source capabilities with the matching direct
+adapter for addresses, parcels, instruments, cases, docket entries, and
+documents. For an account, formal feed, request, paid product, or physical
+office route, render the concrete work with `public_records_actions.py plan`,
+passing the source ID, operation, and selector from the plan. Preserve route
+and barrier states in source coverage rather than recording them as zero hits.
 
 Web research:
 - WebSearch: `"<ENTITY>" site:opencorporates.com`
@@ -256,6 +277,13 @@ uv run python tools/entity_tracker.py add-relation   --entity-a-id <PARENT_ID>  
 
 # Inspect consolidated entity view
 uv run python tools/entity_tracker.py show <ENTITY_ID>
+
+# Generate and inspect explainable links from public-record sidecars.
+uv run python tools/public_records_entity_candidates.py generate \
+  --output "$WORKDIR/trace-public-record-candidates.json"
+uv run python tools/public_records_entity_candidates.py list --status open \
+  --name "<ENTITY>" \
+  --output "$WORKDIR/trace-public-record-candidates-for-entity.json"
 ```
 
 Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.

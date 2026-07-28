@@ -70,7 +70,18 @@ Queue system: `scripts/queue_tools.py {status,pause,resume,submit,enqueue-triage
 
 ## Investigation Database
 
-All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables (incl. `finding_entities` linking findings→canonical entities, `finding_relations` for contradicts/corroborates/supersedes). Also: `infra_requests`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`, `investigation_profiles`. Findings carry raw `date_of_event` + normalized `event_date_iso`/`date_precision` (`tools/date_normalize.py`).
+All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables (incl. `finding_evidence` for evidence refs/source quotes, `finding_entities` linking findings→canonical entities, and `finding_relations` for contradicts/corroborates/supersedes). Profile ownership lives on each scoped row's `profile_id`; there is no `investigation_entity_links` table or `findings.evidence` column. Also: `infra_requests`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`, `investigation_profiles`. Findings carry raw `date_of_event` + normalized `event_date_iso`/`date_precision` (`tools/date_normalize.py`).
+
+For direct read-only audits, use the live column names: finding text is
+`findings.target_name`, `findings.summary`, and `findings.detail`; findings link
+to leads through `findings.lead_id` (there is no `lead_findings` table); lead
+notes live in `lead_notes`; and search queries live in `search_log.query_text`
+with `source` and `result_count`. Prefer tracker commands when they expose the
+needed view.
+For direct entity/network/ACH audits, canonical entity classification lives in
+`entities.entity_type` and `entities.status`; connection type lives in
+`connections.relationship_type`; and hypothesis assessments live in
+`hypothesis_evidence_matrix` (not `hypothesis_evidence`).
 
 Epstein corpus-derived facts (temporal events, normalized financials, entity resolution) live in the regenerable sidecar **`datasets/epstein_derived.db`** — see `investigations/epstein/CLAUDE.md` and `tools/epstein_derived.py`.
 
@@ -93,8 +104,27 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - Always use `uv run python` to invoke tools (not bare `python`)
 - Lint changed Python files with `uv run ruff check <files>`; the full legacy tree is not yet lint-clean.
 - Always use `--output FILE` for search results. **Session isolation**: `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`, all temp files in `$WORKDIR/`
+- Python puts a temporary script's directory, not the shell working directory,
+  on `sys.path`. When a script under `$WORKDIR` imports repository modules, run
+  it from the repository root as `PYTHONPATH="$PWD" uv run python "$WORKDIR/script.py"`.
+- On macOS, pass OCR tools a canonical `realpath`/`/private/tmp` input path;
+  Tesseract/Leptonica may fail through the `/tmp` symlink. Empty OCR is not
+  evidence of an empty page: inspect the render. If `pdftoppm` renders black
+  blocks, retry with `pdftocairo`; a Fontconfig warning alone is non-fatal only
+  after the output is visually verified.
+- Before parsing an untrusted bulk CSV with `csv.DictReader`, raise
+  `csv.field_size_limit` to a deliberate safe bound and inspect the actual
+  header before writing joins; do not assume a field name from another export.
 - **Shell-safe evidence text**: zsh expands dollar-prefixed values inside double-quoted arguments before Python sees them. For tracker summaries, details, quotes, and notes containing currency, use a structured file/input mode when available or a properly escaped single-quoted argument; verify the persisted text before continuing.
-- In zsh, `status` is a reserved read-only parameter. Capture command results with a different name such as `exit_code=$?`.
+- Quote URLs, query strings, and literal paths or patterns passed to shell
+  commands: zsh interprets `?`, `&`, and unmatched globs before the tool runs.
+  Use braced expansions such as `"${quote}: suffix"` when punctuation follows a
+  variable. Do not rely on scalar word splitting in zsh; store repeated command
+  arguments in an array and expand them as `"${args[@]}"`.
+- In zsh, `status` is a reserved read-only parameter. Capture command results
+  with a different name such as `exit_code=$?`. The `path` parameter is tied to
+  `PATH`; use a task-specific name such as `file_path`, because assigning to
+  `path` in a loop can disable command lookup.
 - Check search_log before querying: `from tools.lead_tracker import check_searched`
 
 ### Core CLI (full examples in docs/TOOL_REFERENCE.md)
@@ -177,9 +207,13 @@ Orchestrate work from a single chat session using subagents. Skills like `/deep-
 ## Environment
 
 - **Always use `uv run python`** to invoke tools
+- The project does not depend on `python-dotenv`. For a bounded credential-presence
+  check or a new wrapper, call `tools.env_loader.load_env_file()`; never print the
+  credential value.
 - Dehashed API: v2 requires an ACTIVE search subscription (not just credits) — query via `tools/query_dehashed.py`; `tools/selector_pivot.py` fans a selector across aggregators (Dehashed/IntelX gated behind `--enable-paid`)
 - OpenCorporates API: basic tier (500 calls/month, 200/day max)
-- Key identifiers (emails, addresses, contacts): see `memory/key-identifiers.md`
+- Store investigation-specific identifiers in the relevant profile config or
+  `investigations/<name>/AGENTS.md`; do not rely on an untracked shared memory file.
 
 ## Ethical Guidelines
 

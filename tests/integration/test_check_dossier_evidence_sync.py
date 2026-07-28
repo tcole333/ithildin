@@ -61,6 +61,32 @@ def test_check_sync_reports_mismatch(copy_fixture_db, copy_fixture_tree, run_pyt
 
 @pytest.mark.integration
 @pytest.mark.real_fixture
+def test_check_sync_resolves_redirect_alias(
+    copy_fixture_db,
+    copy_fixture_tree,
+    run_python_script,
+) -> None:
+    db_path = copy_fixture_db("check_sync_investigation.db")
+    dossier_dir = copy_fixture_tree("dossiers")
+    (dossier_dir / "_redirects.json").write_text(
+        json.dumps({"legacy-check-sync": "check-sync"})
+    )
+
+    result = run_python_script(
+        "scripts/check_dossier_evidence_sync.py",
+        "--db-path",
+        str(db_path),
+        "--dossier-dir",
+        str(dossier_dir),
+        "--dossier",
+        "legacy-check-sync",
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    assert "1 file(s) checked, 0 mismatches" in result.stdout
+
+
+@pytest.mark.integration
+@pytest.mark.real_fixture
 def test_check_sync_reports_corrected_field_drift(
     copy_fixture_db,
     copy_fixture_tree,

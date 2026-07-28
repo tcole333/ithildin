@@ -45,6 +45,7 @@ from urllib.error import HTTPError, URLError
 
 # Add tools dir to path
 sys.path.insert(0, str(Path(__file__).parent))
+from output_util import add_output_args, write_output
 from query_registry import get_db, _rebuild_fts
 
 BASE_URL = "https://www.corporationsandtrademarks.vi.gov"
@@ -452,6 +453,13 @@ def cmd_search(args):
 
     results, total, update_url, vikey = _parse_search_results(html)
 
+    if write_output(
+        results,
+        args,
+        summary=f"USVI registry search '{args.query}': {total} matches",
+    ):
+        return
+
     print(f"Found {total} USVI entities matching '{args.query}'")
     print()
     for r in results:
@@ -497,7 +505,10 @@ def cmd_detail(args):
         print("TIP: If the entity isn't in registry.db yet, use --name 'Entity Name' to search first")
         return
 
-    print(f"=== USVI Entity Detail ===")
+    if write_output(detail, args, summary=f"USVI entity {args.entity_id}"):
+        return
+
+    print("=== USVI Entity Detail ===")
     print()
 
     # Core fields
@@ -546,7 +557,7 @@ def cmd_detail(args):
     # Status history
     history = detail.get("_status_history", [])
     if history:
-        print(f"\n  Status History:")
+        print("\n  Status History:")
         for h in history:
             start = re.sub(r"\s+[A-Z][a-z]+ \d+ \d{4}.*$", "", h["start"])
             end = re.sub(r"\s+[A-Z][a-z]+ \d+ \d{4}.*$", "", h["end"])
@@ -623,7 +634,7 @@ def cmd_ingest_batch(args):
             fresh_opener = _make_opener()
             fresh_html = _fetch(fresh_opener, url)
             if not fresh_html:
-                print(f"    FAILED to re-establish search session")
+                print("    FAILED to re-establish search session")
                 continue
 
             fresh_results, _, fresh_update_url, fresh_vikey = _parse_search_results(fresh_html)
@@ -645,7 +656,7 @@ def cmd_ingest_batch(args):
                 fresh_target["click_node"], query,
             )
             if not detail:
-                print(f"    FAILED to get detail")
+                print("    FAILED to get detail")
                 continue
 
             detail["_search_data"] = r
@@ -751,11 +762,8 @@ def _upsert_entity(db, detail):
     if purpose in ("", " "):
         purpose = None
 
-    # Sub-type
-    subtype = detail.get("Business Entity Sub-Type", "")
-
     # Source URL
-    source_url = f"https://www.corporationsandtrademarks.vi.gov/CorporationSearch"
+    source_url = "https://www.corporationsandtrademarks.vi.gov/CorporationSearch"
 
     # Build raw_data for storage
     raw_data = json.dumps(detail, indent=2, default=str)
@@ -831,7 +839,6 @@ def _upsert_entity(db, detail):
     if agent_name:
         agent_phys = detail.get("Physical Address", "")
         agent_mail = detail.get("Mailing Address", "")
-        agent_email = detail.get("Email Address", "")
 
         # Parse agent address for city/state/zip
         agent_city = None
@@ -899,6 +906,7 @@ def main():
         action="store_true",
         help="Use 'Contains' mode (default: 'Starts With')",
     )
+    add_output_args(p)
 
     # detail
     p = sub.add_parser("detail", help="Fetch full detail by entity identifier")
@@ -907,6 +915,7 @@ def main():
         "--name",
         help="Entity name hint for search (needed if entity not yet in registry.db)",
     )
+    add_output_args(p)
 
     # ingest-entity
     p = sub.add_parser(

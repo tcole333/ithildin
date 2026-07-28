@@ -1,0 +1,843 @@
+schema_version: 1
+submitted_by: roadmap-implementation
+sources:
+  - source_id: us-nyc-acris
+    name: NYC ACRIS
+    domain: property
+    roles: [recorder, instrument_index]
+    authority: New York City Department of Finance
+    operator: New York City Department of Finance
+    jurisdiction_geoids: ["36005", "36047", "36061", "36081"]
+    official_url: https://www.nyc.gov/site/finance/property/acris.page
+    platform_family: socrata_soda
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: optional_app_token
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_redactions_preserved
+    coverage_start: "1966"
+    update_cadence: source_managed
+    stable_keys: [document_id]
+    adapter_family: socrata_soda
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_parties
+      - search_parcels
+      - fetch_instrument
+      - sync
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official NYC Open Data Socrata resource endpoints are documented public APIs with a 50000-row page size; coverage comprises Bronx, Brooklyn, Manhattan, and Queens.
+      limits:
+        maximum_page_size: 50000
+        require_complete_pagination: true
+
+  - source_id: us-nyc-acris-images
+    name: NYC ACRIS Document Images and Copy Services
+    domain: property
+    roles: [recorder, document_portal, copy_service]
+    authority: New York City Department of Finance
+    operator: New York City Department of Finance
+    jurisdiction_geoids: ["36005", "36047", "36061", "36081"]
+    official_url: https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentImageView
+    platform_family: browser_and_subscription_service
+    access_class: C
+    automation_disposition: not_applicable
+    authentication: none_for_public_viewer
+    fees: copy_and_certification_specific
+    redistribution: source_terms_apply
+    protected_record_policy: source_record_state_preserved
+    coverage_start: "1966"
+    update_cadence: source_managed
+    stable_keys: [document_id, image_page]
+    adapter_family: human_action
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - open_selected_image
+      - order_copy
+      - request_subscription_specs
+    access_review:
+      access_class: C
+      automation_disposition: not_applicable
+      reviewed_by: roadmap-implementation
+      review_basis: Official DOF pages expose document images through the ACRIS viewer; the live viewer's bandwidth notice directs automated or high-volume acquisition to City Register subscription data services.
+      limits:
+        available_routes:
+          - selective_public_viewer
+          - city_register_subscription_data_service
+
+  - source_id: us-fl-miami-dade-official-records
+    name: Miami-Dade Official Records Commercial Data Services
+    domain: property
+    roles: [recorder, instrument_index, document_images]
+    authority: Miami-Dade Clerk of the Court and Comptroller
+    operator: Miami-Dade Clerk of the Court and Comptroller
+    jurisdiction_geoids: ["12086"]
+    official_url: https://www.miamidadeclerk.gov/clerk/commercial-data-services.page
+    platform_family: licensed_api_and_ftp
+    access_class: D
+    automation_disposition: unclear
+    authentication: registered_prepaid_account
+    fees: api_units_and_monthly_folders
+    redistribution: agreement_controls
+    protected_record_policy: source_record_state_preserved
+    coverage_start: product_specific
+    update_cadence: daily_weekly_and_monthly_products
+    stable_keys: [clerk_file_number, book, page, document_image_id]
+    adapter_family: licensed_recorder_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_instruments
+      - fetch_instrument
+      - fetch_document
+      - request_bulk_files
+      - sync
+
+  - source_id: us-tx-harris-clerk-real-property
+    name: Harris County Clerk Real Property Records
+    domain: property
+    roles: [recorder, instrument_index, document_images]
+    authority: Harris County Clerk
+    operator: Harris County Clerk
+    jurisdiction_geoids: ["48201"]
+    official_url: https://www.cclerk.hctx.net/PublicRecords.aspx
+    platform_family: public_search_and_licensed_bulk
+    access_class: D
+    automation_disposition: unclear
+    authentication: account_or_data_sales_arrangement
+    fees: copy_and_bulk_product_specific
+    redistribution: agreement_controls
+    protected_record_policy: source_redactions_preserved
+    coverage_start: images_from_1960_11_01
+    update_cadence: daily_ftp_or_custom_date_range
+    stable_keys: [file_number, film_code, volume, page]
+    adapter_family: licensed_recorder_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_grantor_grantee
+      - search_legal_description
+      - fetch_instrument
+      - fetch_document
+      - request_bulk_index
+      - request_bulk_images
+      - sync
+
+  - source_id: us-tx-harris-hcad-property
+    name: Harris Central Appraisal District Public Data
+    domain: property
+    roles: [assessment, ownership, improvements, deeds, hearings]
+    authority: Harris Central Appraisal District
+    operator: Harris Central Appraisal District
+    jurisdiction_geoids: ["48201"]
+    official_url: https://hcad.org/pdata/pdata-property-downloads.html/
+    platform_family: official_json_manifest_and_bulk_zip
+    access_class: A
+    automation_disposition: allowed
+    authentication: none
+    fees: none
+    redistribution: not_stated_on_download_page
+    protected_record_policy: publisher_output_preserved
+    coverage_start: "2005"
+    update_cadence: source_managed
+    stable_keys: [tax_year, account_number]
+    adapter_family: http_bulk_manifest
+    adapter_version: 1
+    last_verified_at: "2026-07-28T20:38:19Z"
+    source_status: active
+    capabilities:
+      - list_releases
+      - resolve_manifest
+      - probe_artifact
+      - download_bulk
+    endpoints:
+      tax_years: https://hcad.org/actions/hcad-pdata/default/get-tax-years
+      certification: https://hcad.org/actions/hcad-pdata/default/get-certification-flag
+      downloads: https://hcad.org/actions/hcad-pdata/default/get-property-downloads
+    schema_reference: https://hcad.org/assets/uploads/pdf/pdataCodebook.pdf
+    probe_evidence:
+      tax_year: 2026
+      certification_status: preliminary
+      source_last_updated_date: "2026-07-26"
+      artifact: Real_acct_owner.zip
+      http_status: 206
+      content_length: 210533035
+      sample_bytes: 4096
+      sample_sha256: 385618ab4cb4b7612cc9cbbf5d84b4b25380aaf79e436f6cdfeac5e47df727cd
+      signature_hex: "504b0304"
+    access_review:
+      access_class: A
+      automation_disposition: allowed
+      reviewed_by: roadmap-implementation
+      review_basis: Official HCAD Public Data pages publish direct ZIP downloads through public JSON manifest endpoints; a metadata and 4 KiB range probe succeeded without authentication.
+      limits: {}
+
+  - source_id: us-la-ebr-property
+    name: East Baton Rouge Parish Property Open Data
+    domain: property
+    roles: [assessment, parcel_geometry, tax_status]
+    authority: City of Baton Rouge and Parish of East Baton Rouge
+    operator: City of Baton Rouge Open Data
+    jurisdiction_geoids: ["22033"]
+    official_url: https://data.brla.gov/
+    platform_family: socrata_soda
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: optional_app_token
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_redactions_preserved
+    coverage_start: source_specific
+    update_cadence: source_managed
+    stable_keys: [assessment_number, tax_year]
+    adapter_family: socrata_soda
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_owner
+      - search_address
+      - fetch_parcel
+      - search_tax_default
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official parish Socrata resource endpoints are documented public query APIs; preserve source limits and dataset-specific coverage.
+      limits:
+        maximum_page_size: 50000
+        require_complete_pagination: true
+
+  - source_id: us-nc-onemap-parcels
+    name: North Carolina OneMap Parcels
+    domain: property
+    roles: [assessment, parcel_geometry, sales]
+    authority: North Carolina Center for Geographic Information and Analysis
+    operator: North Carolina OneMap
+    jurisdiction_geoids: ["37"]
+    official_url: https://services.nconemap.gov/secure/rest/services/NC1Map_Parcels/MapServer/1
+    platform_family: arcgis_rest
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: none
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_redactions_preserved
+    coverage_start: source_specific
+    update_cadence: source_managed
+    stable_keys: [county_geoid, native_parcel_id, revised_date]
+    adapter_family: arcgis_rest
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_owner
+      - search_address
+      - fetch_parcel
+      - fetch_geometry
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official ArcGIS layer metadata advertises Query/Map/Data and pagination; a bounded live query returned documented parcel fields without authentication.
+      limits:
+        maximum_page_size: 5000
+        require_complete_pagination: true
+        preserve_geometry_disclaimer: true
+
+  - source_id: us-il-cook-parcel-universe
+    name: Cook County Assessor Parcel Universe
+    domain: property
+    roles: [parcel_index, parcel_geography, tax_district_history]
+    authority: Cook County Assessor's Office
+    operator: Cook County Assessor's Office Data Department
+    jurisdiction_geoids: ["17031"]
+    official_url: https://datacatalog.cookcountyil.gov/Property-Taxation/Assessor-Parcel-Universe/nj4t-kc8j
+    platform_family: socrata_soda
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: optional_app_token
+    fees: none
+    redistribution: not_stated_in_dataset_metadata
+    protected_record_policy: source_field_omissions_preserved
+    coverage_start: "1999"
+    update_cadence: biweekly
+    stable_keys: [pin, tax_year, row_id]
+    adapter_family: socrata_soda
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - fetch_parcel
+      - list_history
+      - probe
+    probe_evidence:
+      metadata_sha256: 7123576c8b0e91c4690b9c43b36f7e347d80d85fc999f51c8dbfb5990318a3fb
+      sample_sha256: 17417c877720a38241a034957ddac5877df1027d6ce0d1f252683ea8e555ce6a
+      dataset_id: nj4t-kc8j
+      columns: 124
+      owner_name_fields_present: false
+      street_address_fields_present: false
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official Cook County Socrata metadata and a bounded resource query returned historical parcel rows without authentication; the dataset metadata identifies countywide parcel coverage and biweekly publication.
+      limits:
+        maximum_page_size: 50000
+        require_complete_pagination: true
+
+  - source_id: us-md-sdat-property-hidden
+    name: Maryland Real Property Assessments_Hidden Property Owner Names
+    domain: property
+    roles: [assessment, parcel_index, situs_address, sales]
+    authority: Maryland State Department of Assessments and Taxation and Maryland Department of Planning
+    operator: Maryland Department of Information Technology
+    jurisdiction_geoids: ["24"]
+    official_url: https://opendata.maryland.gov/Business-and-Economy/Maryland-Real-Property-Assessments_Hidden-Property/ed4q-f8tm
+    platform_family: socrata_soda
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: optional_app_token
+    fees: none
+    redistribution: public_domain
+    protected_record_policy: owner_names_withheld_by_source
+    coverage_start: source_specific
+    update_cadence: monthly
+    stable_keys: [account_id]
+    adapter_family: socrata_soda
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_address
+      - fetch_parcel
+      - search_sales
+      - preserve_withheld_owner_state
+      - probe
+    probe_evidence:
+      metadata_sha256: 1b808d59db040ff38349bc5e1c1a1cd397b415f519629de01b534f29f434984f
+      sample_sha256: 22b492ee7ffbd70c455ea6a08bd5536f9506b2fd392c897b2ddd1854d1e0c9f3
+      dataset_id: ed4q-f8tm
+      columns: 222
+      license: Public Domain
+      current_owner_name_fields_present: false
+      historical_grantor_fields_present: true
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official Maryland Socrata metadata identifies the statewide assessment dataset as Public Domain and Hidden Property Owner Names; a bounded resource query returned parcel, address, and assessment fields without authentication while the 222-column schema omitted current-owner names.
+      limits:
+        maximum_page_size: 50000
+        require_complete_pagination: true
+        preserve_owner_visibility_state: withheld_by_source
+
+  - source_id: us-fl-dor-property-roll
+    name: Florida DOR Property Roll and GIS
+    domain: property
+    roles: [assessment, parcel_geometry, sales]
+    authority: Florida Department of Revenue
+    operator: Florida Department of Revenue
+    jurisdiction_geoids: ["12"]
+    official_url: https://www.floridarevenue.com/property/Pages/DataPortal_RequestAssessmentRollGISData.aspx
+    platform_family: official_sharepoint_bulk
+    access_class: A
+    automation_disposition: allowed
+    authentication: none
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_published_confidentiality_omissions_preserved
+    coverage_start: current_nal_sdf_and_gis_from_2005
+    update_cadence: current_roll_replacement_and_annual_gis
+    stable_keys: [county_dor_number, dataset_type, assessment_year, submission_stage, artifact_filename]
+    adapter_family: fl_dor_bulk
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - list_releases
+      - probe
+      - download_snapshot
+      - sync
+    access_review:
+      access_class: A
+      automation_disposition: allowed
+      reviewed_by: roadmap-implementation
+      review_basis: Official Florida DOR pages link public tax-roll and GIS directories; the public SharePoint API lists release and file metadata without authentication, and bounded direct-file probes returned ZIP metadata and byte ranges.
+
+  - source_id: us-ma-massgis-parcels
+    name: MassGIS Standardized Property Tax Parcels
+    domain: property
+    roles: [assessment, parcel_geometry]
+    authority: Massachusetts Bureau of Geographic Information
+    operator: MassGIS
+    jurisdiction_geoids: ["25"]
+    official_url: https://www.mass.gov/info-details/massgis-data-property-tax-parcels
+    platform_family: official_bulk
+    access_class: A
+    automation_disposition: allowed
+    authentication: none
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_redactions_preserved
+    coverage_start: source_specific
+    update_cadence: monthly_municipal_and_semiannual_statewide_snapshots
+    stable_keys: [municipality, native_parcel_id, fiscal_year]
+    adapter_family: bulk_property_roll
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - list_releases
+      - probe
+      - download_snapshot
+      - sync
+      - fetch_parcel
+      - fetch_geometry
+    access_review:
+      access_class: A
+      automation_disposition: allowed
+      reviewed_by: roadmap-implementation
+      review_basis: Official MassGIS documentation publishes free municipal and statewide parcel downloads, and its official L3_PARCEL_FTP_LINKS layer returns direct ZIP URLs without authentication. A bounded HEAD and range probe verified byte-range support and the source-provided SHA-256 metadata on a municipal archive.
+
+  - source_id: us-courtlistener-api
+    name: CourtListener and RECAP API
+    domain: court
+    roles: [legal_aggregator, opinion_archive, federal_docket_archive]
+    authority: Source courts and the federal PACER system
+    operator: Free Law Project
+    jurisdiction_geoids: ["US"]
+    official_url: https://wiki.free.law/c/courtlistener/help/api/rest/v4/overview
+    platform_family: documented_rest
+    access_class: B
+    automation_disposition: allowed_with_limits
+    authentication: api_token
+    fees: membership_and_account_tier_specific
+    license_or_terms_url: https://www.courtlistener.com/terms/
+    redistribution: record_and_membership_terms_apply
+    protected_record_policy: source_removal_and_court_restrictions_apply
+    coverage_start: corpus_specific
+    update_cadence: source_managed
+    stable_keys: [courtlistener_resource_type, courtlistener_resource_id]
+    adapter_family: courtlistener_rest
+    adapter_version: 4
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_cases
+      - search_opinions
+      - list_docket_entries
+      - fetch_document
+    access_review:
+      access_class: B
+      automation_disposition: allowed_with_limits
+      reviewed_by: roadmap-implementation
+      review_basis: Official REST v4 documentation recommends token authentication for programmatic access and publishes concurrent rolling rate limits; account or membership entitlements may further constrain access.
+      limits:
+        requests_per_minute: 5
+        requests_per_hour: 50
+        requests_per_day: 125
+        authentication_required: true
+        obey_account_specific_entitlements: true
+
+  - source_id: us-ny-nyscef
+    name: New York State Courts Electronic Filing
+    domain: court
+    roles: [court, clerk, document_portal]
+    authority: New York State Unified Court System
+    operator: New York State Unified Court System
+    jurisdiction_geoids: ["36"]
+    official_url: https://iapps.courts.state.ny.us/nyscef/CaseSearch
+    platform_family: browser_portal
+    access_class: C
+    automation_disposition: prohibited
+    authentication: guest_or_account
+    fees: source_specific
+    license_or_terms_url: https://iappscontent.courts.state.ny.us/NYSCEF/live/termsOfUse.htm
+    redistribution: prohibited_without_permission
+    protected_record_policy: source_restrictions_preserved
+    coverage_start: source_specific
+    update_cadence: source_managed
+    stable_keys: [court_id, raw_case_number, docket_id]
+    adapter_family: human_action
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: active
+    capabilities:
+      - search_cases
+      - list_docket_entries
+      - fetch_document
+    access_review:
+      access_class: C
+      automation_disposition: prohibited
+      reviewed_by: roadmap-implementation
+      review_basis: NYSCEF Terms of Use clauses 8 and 9 state that data mining and access by automated programs for extracting data are prohibited; the currently represented route is the interactive browser portal, and any UCS-provided feed can be cataloged as a separate capability.
+
+  - source_id: us-pa-ujs-public-dockets
+    name: Pennsylvania UJS Public Web Docket Sheets
+    domain: court
+    roles: [court_administration, case_metadata, docket_sheets]
+    authority: Unified Judicial System of Pennsylvania
+    operator: Administrative Office of Pennsylvania Courts
+    jurisdiction_geoids: ["42"]
+    official_url: https://ujsportal.pacourts.us/Home/CaseInformation
+    platform_family: browser_portal
+    access_class: C
+    automation_disposition: unclear
+    authentication: none_for_public_dockets
+    fees: none
+    redistribution: public_access_policy_controls
+    protected_record_policy: source_exclusions_preserved
+    coverage_start: court_system_specific
+    update_cadence: source_managed
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: targeted_court_discovery
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_cases
+      - fetch_case
+      - fetch_docket_sheet
+      - list_scheduled_events
+
+  - source_id: us-pa-aopc-bulk
+    name: Pennsylvania AOPC Electronic Case Record Bulk Requests
+    domain: court
+    roles: [court_administration, bulk_case_metadata]
+    authority: Unified Judicial System of Pennsylvania
+    operator: Administrative Office of Pennsylvania Courts
+    jurisdiction_geoids: ["42"]
+    official_url: https://www.pacourts.us/Storage/media/pdfs/20211119/145411-amendedecrpolicyeffective1.1.22.pdf
+    platform_family: compiled_data_request
+    access_class: D
+    automation_disposition: unclear
+    authentication: request_and_data_arrangement
+    fees: request_specific
+    redistribution: public_access_policy_controls
+    protected_record_policy: policy_exclusions_preserved
+    coverage_start: system_specific
+    update_cadence: arrangement_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - request_bulk_distribution
+      - sync
+      - apply_deletions
+
+  - source_id: us-md-case-search
+    name: Maryland Judiciary Case Search and Record Portal
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: Maryland Judiciary
+    operator: Maryland Administrative Office of the Courts
+    jurisdiction_geoids: ["24"]
+    official_url: https://casesearch.mdcourts.gov/casesearch/
+    platform_family: browser_portal
+    access_class: C
+    automation_disposition: unclear
+    authentication: public_agreement_or_registered_account
+    fees: none_for_public_case_search
+    redistribution: maryland_access_rules_apply
+    protected_record_policy: source_shielding_and_sealing_state_preserved
+    coverage_start: court_and_case_type_specific
+    update_cadence: source_managed
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: targeted_court_discovery
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_cases
+      - fetch_case
+      - list_docket_entries
+
+  - source_id: us-md-aoc-court-data
+    name: Maryland AOC Court Data Requests and Subscriptions
+    domain: court
+    roles: [court_administration, bulk_case_metadata, judgments]
+    authority: Maryland Judiciary
+    operator: Maryland Administrative Office of the Courts
+    jurisdiction_geoids: ["24"]
+    official_url: https://www.mdcourts.gov/judicialrecords/recordsrequests
+    platform_family: court_data_request_and_subscription
+    access_class: D
+    automation_disposition: unclear
+    authentication: request_or_subscription
+    fees: request_and_subscription_specific
+    redistribution: agreement_and_access_rules_apply
+    protected_record_policy: source_exclusions_preserved
+    coverage_start: request_specific
+    update_cadence: arrangement_specific
+    stable_keys: [court_id, raw_case_number, judgment_id]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - request_court_data
+      - request_bulk_judgments
+      - sync
+      - apply_deletions
+
+  - source_id: us-de-courtconnect
+    name: Delaware CourtConnect Civil Case Search
+    domain: court
+    roles: [court, case_metadata, docket_entries]
+    authority: Delaware Courts
+    operator: Delaware Courts
+    jurisdiction_geoids: ["10"]
+    official_url: https://courts.delaware.gov/docket.aspx
+    platform_family: browser_portal
+    access_class: C
+    automation_disposition: unclear
+    authentication: none
+    fees: none
+    redistribution: source_terms_apply
+    protected_record_policy: source_record_state_preserved
+    coverage_start: court_specific
+    update_cadence: source_managed
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: targeted_court_discovery
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_cases
+      - fetch_case
+      - list_docket_entries
+      - search_judgments
+
+  - source_id: us-dc-superior-eaccess
+    name: District of Columbia Superior Court Case Search and eAccess
+    domain: court
+    roles: [court, case_metadata, docket_entries, document_portal]
+    authority: District of Columbia Courts
+    operator: District of Columbia Superior Court
+    jurisdiction_geoids: ["11"]
+    official_url: https://www.dccourts.gov/superior-court/superior-court-case-search
+    platform_family: browser_portal
+    access_class: C
+    automation_disposition: unclear
+    authentication: anonymous_or_source_specific
+    fees: none_for_public_search
+    redistribution: source_terms_apply
+    protected_record_policy: source_record_state_preserved
+    coverage_start: case_type_and_division_specific
+    update_cadence: source_managed
+    stable_keys: [court_id, raw_case_number, native_document_id]
+    adapter_family: targeted_court_discovery
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities:
+      - search_cases
+      - fetch_case
+      - list_docket_entries
+      - fetch_document
+
+  - source_id: us-in-iocs-bulk
+    name: Indiana Office of Court Services Bulk Data
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: Indiana Judicial Branch
+    operator: Indiana Office of Court Services
+    jurisdiction_geoids: ["18"]
+    official_url: https://www.in.gov/courts/iocs/statistics/bulk-data/
+    platform_family: licensed_bulk
+    access_class: D
+    automation_disposition: unclear
+    authentication: application_and_agreement
+    fees: source_specific
+    redistribution: agreement_controls
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: agreement_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [sync, search_cases, list_docket_entries]
+
+  - source_id: us-wi-wcca-rest
+    name: Wisconsin Circuit Court Access REST Subscription
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: Wisconsin Court System
+    operator: Consolidated Court Automation Programs
+    jurisdiction_geoids: ["55"]
+    official_url: https://www.wicourts.gov/courts/resources/docs/RESTagreementpaid.pdf
+    platform_family: licensed_rest
+    access_class: D
+    automation_disposition: unclear
+    authentication: subscription_agreement
+    fees: source_specific
+    redistribution: agreement_controls
+    protected_record_policy: correction_and_destruction_directions_apply
+    coverage_start: county_cms_specific
+    update_cadence: agreement_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [sync, apply_deletions, search_cases, list_docket_entries]
+
+  - source_id: us-mn-court-bulk
+    name: Minnesota Judicial Branch Bulk Data
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: Minnesota Judicial Branch
+    operator: Minnesota Judicial Branch
+    jurisdiction_geoids: ["27"]
+    official_url: https://mncourts.gov/help-topics/court-statistics/bulk-data
+    platform_family: licensed_bulk
+    access_class: D
+    automation_disposition: unclear
+    authentication: signed_agreement
+    fees: source_specific
+    redistribution: agreement_controls
+    protected_record_policy: replacement_and_deletion_rules_apply
+    coverage_start: extract_specific
+    update_cadence: agreement_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [sync, apply_deletions, search_cases]
+
+  - source_id: us-nc-rpa-courts
+    name: North Carolina Remote Public Access
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: North Carolina Administrative Office of the Courts
+    operator: North Carolina Administrative Office of the Courts
+    jurisdiction_geoids: ["37"]
+    official_url: https://www.nccourts.gov/services/remote-public-access-program/rpa-online-access
+    platform_family: licensed_remote_access
+    access_class: D
+    automation_disposition: unclear
+    authentication: license_and_user_ids
+    fees: transaction_and_setup
+    redistribution: agreement_controls
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: service_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [search_cases, search_judgments, sync]
+
+  - source_id: us-az-eaccess
+    name: Arizona eAccess
+    domain: court
+    roles: [court_administration, case_metadata, document_portal]
+    authority: Arizona Judicial Branch
+    operator: Arizona Administrative Office of the Courts
+    jurisdiction_geoids: ["04"]
+    official_url: https://www.azcourts.gov/eaccess/eAccess-Information
+    platform_family: licensed_court_portal
+    access_class: D
+    automation_disposition: unclear
+    authentication: paid_account
+    fees: source_specific
+    redistribution: agreement_controls
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: service_specific
+    stable_keys: [court_id, raw_case_number, native_document_id]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [search_cases, list_docket_entries, fetch_document, sync]
+
+  - source_id: us-or-ojcin
+    name: Oregon Judicial Case Information Network
+    domain: court
+    roles: [court_administration, case_metadata, document_portal]
+    authority: Oregon Judicial Department
+    operator: Oregon Judicial Department
+    jurisdiction_geoids: ["41"]
+    official_url: https://www.courts.oregon.gov/services/online/Pages/ojcin-signup.aspx
+    platform_family: licensed_court_portal
+    access_class: D
+    automation_disposition: unclear
+    authentication: paid_subscription
+    fees: tiered
+    redistribution: agreement_controls
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: service_specific
+    stable_keys: [court_id, raw_case_number, native_document_id]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [search_cases, list_docket_entries, fetch_document, sync]
+
+  - source_id: us-wa-jis-link
+    name: Washington JIS-Link
+    domain: court
+    roles: [court_administration, case_metadata]
+    authority: Washington Courts
+    operator: Administrative Office of the Courts
+    jurisdiction_geoids: ["53"]
+    official_url: https://www.courts.wa.gov/jislink/?fa=jislink.home
+    platform_family: licensed_remote_access
+    access_class: D
+    automation_disposition: unclear
+    authentication: paid_account_or_dissemination_contract
+    fees: source_specific
+    redistribution: dissemination_policy_controls
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: service_specific
+    stable_keys: [court_id, raw_case_number]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [search_cases, list_docket_entries, sync]
+
+  - source_id: us-tx-researchtx
+    name: re:SearchTX
+    domain: court
+    roles: [court_administration, case_metadata, document_portal]
+    authority: Texas Office of Court Administration
+    operator: Texas Office of Court Administration and contracted platform operator
+    jurisdiction_geoids: ["48"]
+    official_url: https://research.txcourts.gov/
+    platform_family: licensed_court_portal
+    access_class: D
+    automation_disposition: unclear
+    authentication: account_and_permission
+    fees: document_fees
+    redistribution: permission_required
+    protected_record_policy: court_rule_controls
+    coverage_start: source_specific
+    update_cadence: service_specific
+    stable_keys: [court_id, raw_case_number, native_document_id]
+    adapter_family: licensed_court_feed
+    adapter_version: 1
+    last_verified_at: "2026-07-28T00:00:00Z"
+    source_status: candidate
+    capabilities: [search_cases, list_docket_entries, fetch_document]

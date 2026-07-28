@@ -52,6 +52,27 @@ def test_new_findings_require_source_token_array_and_supported_tokens(evidence_d
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
 
 
+def test_add_cli_declares_sources_as_required(monkeypatch, capsys):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "add",
+            "--target",
+            "Missing Source Target",
+            "--summary",
+            "Missing source should fail in argparse",
+        ],
+    )
+
+    with pytest.raises(SystemExit) as exc:
+        findings_tracker.main()
+
+    assert exc.value.code == 2
+    assert "the following arguments are required: --sources" in capsys.readouterr().err
+
+
 def test_new_finding_rejects_unknown_metadata_and_duplicate_evidence_refs(
     evidence_db,
 ):
@@ -126,6 +147,10 @@ def test_add_cli_rejects_invalid_source_quote_mapping_atomically(
     [
         (["unified", "fbi-files"], ["unified_db", "fbi"]),
         (["unified", "fbi_files"], ["unified_db", "fbi"]),
+        (["nydos"], ["ny_dos"]),
+        (["SEC EDGAR", "ds10"], ["edgar", "ds10_financial"]),
+        (["Kabasshouse Epstein Corpus"], ["kabass"]),
+        (["doj_epstein_files"], ["doj"]),
         (["kabasshouse", "unified_epstein"], ["kabass", "unified_db"]),
         (
             ["house_20k", "fbi_epstein", "epstein_reporting"],
@@ -148,7 +173,18 @@ def test_configured_corpus_source_aliases_are_stored_canonically(
 
 @pytest.mark.parametrize(
     "source_token",
-    ["finra", "efta", "supreme_court", "openpayments", "senate_finance"],
+    [
+        "finra",
+        "sec",
+        "efta",
+        "supreme_court",
+        "openpayments",
+        "senate_finance",
+        "ny_ag",
+        "sipc",
+        "dmhc",
+        "caltech",
+    ],
 )
 def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token):
     db, _ = evidence_db

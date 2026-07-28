@@ -14,6 +14,7 @@ are added by the /curate-dossier skill and are NOT touched by this script.
 
 import argparse
 import json
+import re
 import sqlite3
 import sys
 from collections import defaultdict
@@ -33,6 +34,95 @@ SECTION_THRESHOLD = 2
 
 def _utcnow() -> str:
     return datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+
+
+def _slugify(value: str) -> str:
+    slug = value.lower().strip()
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"[\s-]+", "-", slug)
+    return slug.strip("-")
+
+
+def _name_tokens(value: str) -> tuple[str, ...]:
+    return tuple(re.findall(r"[a-z0-9]+", value.casefold()))
+
+
+def _load_redirects(dossier_dir: Path) -> dict[str, str]:
+    path = dossier_dir / "_redirects.json"
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    if not isinstance(payload, dict):
+        raise ValueError(f"Dossier redirects must be a JSON object: {path}")
+    return {
+        str(alias).strip(): str(canonical).strip()
+        for alias, canonical in payload.items()
+        if str(alias).strip() and str(canonical).strip()
+    }
+
+
+def _resolve_redirect(slug: str, redirects: dict[str, str]) -> str:
+    current = slug
+    seen: set[str] = set()
+    while current in redirects:
+        if current in seen:
+            raise ValueError(f"Dossier redirect cycle while resolving {slug!r}")
+        seen.add(current)
+        current = redirects[current]
+    return current
+
+
+def resolve_dossier_path(dossier_dir: Path, target: str) -> Path | None:
+    """Resolve a slug, redirect alias, dossier name, or unambiguous long-form name."""
+    dossier_paths = sorted(
+        path for path in dossier_dir.glob("*.json") if not path.name.startswith("_")
+    )
+    by_slug = {path.stem: path for path in dossier_paths}
+
+    target_slug = _slugify(target)
+    canonical_slug = _resolve_redirect(target_slug, _load_redirects(dossier_dir))
+    if canonical_slug in by_slug:
+        return by_slug[canonical_slug]
+
+    target_folded = target.casefold().strip()
+    loaded: list[tuple[Path, dict]] = []
+    for path in dossier_paths:
+        try:
+            dossier = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            continue
+        loaded.append((path, dossier))
+        names = [dossier.get("name", ""), *(dossier.get("aliases") or [])]
+        if any(str(name).casefold().strip() == target_folded for name in names):
+            return path
+
+    # Long legal names are sometimes more specific than the public dossier
+    # display name (for example, "Paul Weiss" versus the full firm name).
+    # Resolve only an unambiguous token-prefix match with at least two tokens.
+    target_tokens = _name_tokens(target)
+    prefix_matches: list[tuple[int, Path]] = []
+    for path, dossier in loaded:
+        names = [path.stem.replace("-", " "), dossier.get("name", "")]
+        names.extend(dossier.get("aliases") or [])
+        best_length = 0
+        for name in names:
+            candidate_tokens = _name_tokens(str(name))
+            if (
+                len(candidate_tokens) >= 2
+                and len(candidate_tokens) < len(target_tokens)
+                and target_tokens[: len(candidate_tokens)] == candidate_tokens
+            ):
+                best_length = max(best_length, len(candidate_tokens))
+        if best_length:
+            prefix_matches.append((best_length, path))
+
+    if not prefix_matches:
+        return None
+    longest = max(length for length, _path in prefix_matches)
+    best_paths = {path for length, path in prefix_matches if length == longest}
+    if len(best_paths) == 1:
+        return best_paths.pop()
+    return None
 
 
 def _score_finding(f: dict, connection_counts: dict[int, int]) -> float:
@@ -445,23 +535,9 @@ def main():
 
     dossier_files: list[Path] = []
     if args.target:
-        slug_path = args.dossier_dir / f"{args.target.lower().replace(' ', '-')}.json"
-        if slug_path.exists():
-            dossier_files.append(slug_path)
-        else:
-            for p in args.dossier_dir.glob("*.json"):
-                if p.name.startswith("_"):
-                    continue
-                try:
-                    d = json.loads(p.read_text())
-                    if d.get("name", "").lower() == args.target.lower():
-                        dossier_files.append(p)
-                        break
-                    if args.target.lower() in [a.lower() for a in d.get("aliases", [])]:
-                        dossier_files.append(p)
-                        break
-                except json.JSONDecodeError:
-                    continue
+        dossier_path = resolve_dossier_path(args.dossier_dir, args.target)
+        if dossier_path is not None:
+            dossier_files.append(dossier_path)
         if not dossier_files:
             print(f"No dossier found for: {args.target}", file=sys.stderr)
             sys.exit(1)

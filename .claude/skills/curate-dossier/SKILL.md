@@ -254,7 +254,7 @@ After writing, run support-coverage metrics:
 
 ```bash
 cd /Users/travcole/projects/osint-research/web
-npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
+npm run report:support-coverage:changed -- --base-ref HEAD --head-ref WORKTREE
 ```
 
 Inspect unsupported sentences, orphan citations, and source fanout before publishing.

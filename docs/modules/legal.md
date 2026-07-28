@@ -8,11 +8,180 @@ Tools for US federal/state court dockets, opinions, judge research, and European
 
 | Tool | Source | Auth | Local Data | Rate Limit |
 |------|--------|------|------------|------------|
+| `query_state_courts.py` | Unified state/local-court router | Catalog-reviewed per source | `datasets/state_court_records.db` | Source-specific; local by default |
+| `public_records_search_plan.py` | Cross-domain property/recorder/court planner | None | Reads catalog and investigation context | Local |
+| `public_records_actions.py` | Formal-feed, account, paid, request, and physical-access work planner | Catalog route metadata | `human_actions` in `investigation.db` | Local |
+| `public_records_store.py` | Normalized state/local-court evidence sidecar | None | `datasets/state_court_records.db` | Local |
+| `ingest_state_court_records.py` | Adapter-neutral court-envelope ingester | None | `datasets/state_court_records.db` | Local |
 | `query_courtlistener.py` | CourtListener/RECAP API (v4) | `COURTLISTENER_TOKEN` in .env | No | Reasonable (API token required) |
-| `query_nyscef.py` | NYSCEF guest portal (browser-backed form workflow) | None | No | Low-volume manual use only |
+| `query_nyscef.py` | NYSCEF portal adapter | Catalog-selected route | No | Source-specific |
 | `query_hudoc.py` | HUDOC REST API (undocumented) | None | No | 0.5s between requests |
 | `query_military_corrections.py` | DoD Boards of Review Reading Room (boards.law.af.mil) | None | `.cache/military_corrections.db` (SQLite + FTS5) | 2.0s between requests (~0.5 req/sec) |
 | `query_military_justice.py` | CAAF + ACCA + NMCCA + AFCCA + CGCCA (HTML/PDF scraping) | None | `datasets/military_justice_cache.db` (SQLite WAL) | 1 req/sec per host (configurable) |
+
+## Unified state/local-court interface
+
+`query_state_courts.py` searches normalized local observations by default and
+reads the public-records catalog when a named live source is selected. The
+result envelope keeps true zeroes, partial coverage, human actions, terms
+blocks, unavailable sources, and later restrictions distinct.
+
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+# Inspect cataloged coverage and reviewed access
+uv run python tools/query_state_courts.py sources --jurisdiction 36 \
+  --output "$WORKDIR/state-court-sources.json"
+
+# Search the normalized local sidecar
+uv run python tools/query_state_courts.py search "EXAMPLE LLC" \
+  --output "$WORKDIR/state-court-search.json"
+uv run python tools/query_state_courts.py case "2025-CV-000001" \
+  --court-id example-circuit \
+  --output "$WORKDIR/state-court-case.json"
+uv run python tools/query_state_courts.py docket "2025-CV-000001" \
+  --court-id example-circuit \
+  --output "$WORKDIR/state-court-docket.json"
+uv run python tools/query_state_courts.py documents "2025-CV-000001" \
+  --court-id example-circuit \
+  --output "$WORKDIR/state-court-documents.json"
+
+# NYSCEF currently resolves to its catalogued human route
+uv run python tools/query_state_courts.py search "EXAMPLE LLC" \
+  --source us-ny-nyscef --jurisdiction 36 \
+  --output "$WORKDIR/nyscef-human-action.json"
+```
+
+The router reports the current catalog state for each selected source. A
+successful query with no matching cases is `no_results`; account, feed,
+human-action, unavailable, and changed-source routes retain their own result
+states instead of being collapsed into a false zero. The normalized court
+sidecar preserves courts, cases, parties, attorneys and representations,
+judicial assignments, docket entries, events, document artifacts, source
+snapshots, and restriction events.
+
+The court store keeps each source-native access, assertion, and restriction
+label alongside its canonical category. Known variants such as
+`made_nonpublic` and `destroyed` map to serving states, while unfamiliar values
+remain queryable through `other` or `unknown` instead of aborting ingestion.
+
+Local sidecar presence in one court or jurisdiction does not establish
+coverage elsewhere. A miss in an observed scope is `partial`; a miss outside
+observed scope is `unavailable`. Both carry machine-readable scope counts,
+matching snapshot evidence, and catalog/action route guidance. An exact
+source-query snapshot can support `no_results` when its source, jurisdiction or
+court, selector, date filters, and completion state match the request. An exact
+known case or document identifier with a non-public current access state
+returns `restricted` plus a minimal restriction tombstone; case contents,
+parties, docket text, document paths, and artifact bytes are not served in that
+tombstone.
+
+Canonical state/local-court citations use:
+
+```text
+STATECOURT:<source_id>/<court_id>/<case_number>/<record_kind>[/<native_id>]
+```
+
+Generic `STATECOURT:` references link to the official source landing page when
+that source ID is registered. They do not invent a case-detail URL. Other
+source IDs remain record-only. Later source restriction events update current
+serving state while preserving the observation and audit history.
+
+## Formal feeds and source actions
+
+The catalog includes candidate formal court-data programs in Pennsylvania,
+Maryland, Indiana, Wisconsin, Minnesota, North Carolina, Arizona, Oregon,
+Washington, and Texas. It also includes targeted public-portal candidates for
+Pennsylvania UJS, Maryland Case Search, Delaware CourtConnect, and DC Superior
+Court eAccess. These are catalog/action routes, not implemented query adapters.
+Their entries preserve the official program URL, advertised capabilities,
+authentication or agreement route, fees, update model, and record-policy
+metadata. Inspect those facts before deciding which route fits the
+investigation:
+
+```bash
+uv run python tools/public_records_catalog.py list --domain court --json
+uv run python tools/public_records_catalog.py show us-pa-ujs-public-dockets --json
+uv run python tools/public_records_catalog.py show us-md-case-search --json
+uv run python tools/public_records_catalog.py show us-in-iocs-bulk --json
+uv run python tools/public_records_catalog.py show us-wi-wcca-rest --json
+```
+
+`public_records_actions.py` turns any catalog route into a reproducible plan.
+`enqueue` adds the same structured request to `human_actions`, deduplicated by
+its action fingerprint.
+
+```bash
+uv run python tools/public_records_actions.py plan us-in-iocs-bulk \
+  --operation obtain_feed --selector "civil case metadata" \
+  --requested-field case_number --requested-field party_name \
+  --output "$WORKDIR/indiana-feed-plan.json"
+uv run python tools/public_records_actions.py enqueue us-az-eaccess \
+  --operation fetch_document --selector "CV2026-000042" \
+  --court-or-office "Maricopa County Superior Court" \
+  --output "$WORKDIR/arizona-document-action.json"
+uv run python tools/public_records_actions.py plan us-pa-ujs-public-dockets \
+  --operation fetch_docket_sheet --selector "CP-00-CR-0000042-2026" \
+  --output "$WORKDIR/pennsylvania-docket-plan.json"
+uv run python tools/public_records_actions.py plan us-md-aoc-court-data \
+  --operation request_court_data --selector "civil judgments" \
+  --output "$WORKDIR/maryland-court-data-plan.json"
+uv run python tools/public_records_actions.py list --status pending \
+  --output "$WORKDIR/pending-public-record-actions.json"
+```
+
+This keeps source-specific acquisition facts in the catalog and action record,
+while query adapters remain focused on search and normalization.
+
+## Court sidecar ingestion
+
+Every valid `public-records-result/1.0` envelope can be retained as an immutable
+source snapshot. `ok` and `partial` envelopes may also project canonical case
+records into courts, cases, parties, attorneys, representations, judicial
+assignments, docket entries, events, documents, and restriction events.
+Barrier and zero-result envelopes remain useful source observations even when
+there are no case rows to project.
+
+```bash
+uv run python tools/ingest_state_court_records.py ingest \
+  "$WORKDIR/court-result.json" \
+  --output "$WORKDIR/court-ingest.json"
+```
+
+Re-ingesting the same envelope is idempotent. The summary reports its snapshot
+ID, source status, projected row counts, artifact hash, and canonical
+`STATECOURT:` references.
+
+## Cross-domain planning and document evidence
+
+Build a reproducible search plan when litigation may be connected to a person,
+entity, address, parcel, lender, recorder instrument, or legal description:
+
+```bash
+uv run python tools/public_records_search_plan.py "Example Holdings LLC" \
+  --alias "Example Holdings" \
+  --address "100 Main St, Albany, NY" \
+  --jurisdiction 36 \
+  --output "$WORKDIR/example-records-plan.json"
+```
+
+The plan inventories every cataloged property and court source and emits
+dependency-aware query templates. It includes sources reached through APIs,
+bulk files, accounts, formal feeds, requests, and physical offices; the source
+entry carries the current route and capabilities.
+
+For court filings, retain the source bytes in
+`public_records_artifacts.py`, add OCR or parsed-text representations, and
+ingest field-level extraction through `public_records_extract.py`. Evidence
+rows can point to an artifact hash, representation, page, region, and exact
+quote. Deterministic checks cover dates, amounts, identifiers, quoted text, and
+the extraction schema; model or rule provenance stays attached to the derived
+representation.
+
+After court parties and property/instrument parties are in their sidecars,
+`public_records_entity_candidates.py generate` produces explainable candidates
+against investigation entities and aliases. Review its retained name, address,
+and identifier signals, then use `decide --action accept|reject|reopen|undo`
+to record the resolution history.
 
 ## query_courtlistener.py — CourtListener/RECAP
 
@@ -59,6 +228,8 @@ uv run python tools/query_courtlistener.py download "recap/..." /tmp/doc.pdf --e
 
 # Full opinion text by opinion ID or cluster ID
 uv run python tools/query_courtlistener.py opinion 12345678 --lines 500
+# Auto mode checks the cluster endpoint first because cluster/opinion numeric IDs
+# overlap. For a known raw opinion API ID, add: --id-type opinion
 
 # Opinion cluster details (citation count, precedential status)
 uv run python tools/query_courtlistener.py cluster 98765
@@ -111,7 +282,9 @@ a concise diagnostic; narrow the party prefix or add a date range before retryin
 ### Known Quirks
 
 - The `opinion` command tries the opinion ID first, then falls back to treating it as a cluster ID (fetches first sub-opinion from the cluster).
-- `download` with `--extract-text` requires `pymupdf` (`uv add pymupdf`).
+- `download --extract-text` prefers PyMuPDF and automatically falls back to
+  Poppler `pdftotext`. It exits nonzero if neither extractor works and warns
+  when the resulting text density indicates that the PDF likely needs OCR.
 - The `search` command supports field operators: `party:`, `firm:`, `attorney:`, `assignedTo:`, `docketNumber:` -- these can be combined with free text.
 - `--semantic` enables vector-based semantic search (slower but finds conceptual matches).
 - Court codes use CourtListener format: `nysd` (S.D.N.Y.), `ca2` (2nd Circuit), `scotus`, etc.
@@ -119,37 +292,38 @@ a concise diagnostic; narrow the party prefix or add a date range before retryin
 
 ## query_nyscef.py — New York State Courts Electronic Filing
 
-Guest-access NY state-court docket search through the live NYSCEF portal. The portal exposes server-rendered form workflows, not a public JSON API, so `query_nyscef.py` uses a real browser session to perform the same search flow a human guest user would use.
+NYSCEF exposes a server-rendered guest portal rather than a public search API.
+`query_nyscef.py` reads its route from the central source catalog. The current
+review returns a structured `human_required` result with the requested criteria
+and official URLs. Route facts can be updated centrally, and the same commands
+consume them without a second environment-variable switch.
+
+Canonical official pages:
+
+- Guest search: <https://iapps.courts.state.ny.us/nyscef/CaseSearch>
+- Terms of Use: <https://iappscontent.courts.state.ny.us/NYSCEF/live/termsOfUse.htm>
+- FAQ: <https://iappscontent.courts.state.ny.us/nyscef/live/faq.htm>
+- Court-record help: <https://www.nycourts.gov/help/representing-yourself-court/getting-court-records-case-information>
 
 ```bash
-# Party / attorney name search
-uv run python tools/query_nyscef.py search "Jeffrey Epstein" --limit 10
-uv run python tools/query_nyscef.py search "Bennet Moskowitz" --attorney
-uv run python tools/query_nyscef.py search "Golden Nugget Atlantic City LLC" --business --limit 10
-uv run python tools/query_nyscef.py search "Jeffrey Epstein" --county "New York" --after 2019-01-01
+# Search using the current catalog route
+uv run python tools/query_nyscef.py search "Jeffrey Epstein" \
+  --county "New York" --after 2019-01-01 \
+  --output "$WORKDIR/nyscef-human-action.json"
 
-# Case-number search
-uv run python tools/query_nyscef.py case 156728/2019
-uv run python tools/query_nyscef.py case 2020-04629
-
-# New filings by court and date
-uv run python tools/query_nyscef.py new-cases --court "New York County Supreme Court" --date 2019-07-10
-
-# Case detail and document list (use docket_id from search results)
-uv run python tools/query_nyscef.py detail AcfkebAfF6itr8YHo86mUQ==
-uv run python tools/query_nyscef.py documents AcfkebAfF6itr8YHo86mUQ== --limit 20
-uv run python tools/query_nyscef.py documents AcfkebAfF6itr8YHo86mUQ== --motion 002
-
-# Download a filing PDF (doc_index from documents output)
-uv run python tools/query_nyscef.py download f0TLN3SKZ/mR_PLUS_Xfj5Dbefw== /tmp/petition.pdf
+# Case and document routes
+uv run python tools/query_nyscef.py case 156728/2019 \
+  --output "$WORKDIR/nyscef-case-action.json"
+uv run python tools/query_nyscef.py documents OPAQUE_DOCKET_ID \
+  --output "$WORKDIR/nyscef-documents-action.json"
 ```
 
-### Known Quirks
+### Access notes
 
-- Guest search is fronted by Cloudflare. The tool launches a headed browser and may briefly show a challenge page.
+- Inspect the current decision with
+  `uv run python tools/public_records_catalog.py show us-ny-nyscef --json`.
 - Public search works by HTML form POST -> redirect -> server-side result pages. No public JSON endpoint was confirmed during discovery.
 - Search results link into `DocumentList?docketId=...` pages, `CaseDetails?docketId=...` pages, and `ViewDocument?docIndex=...` PDF endpoints.
-- NYSCEF's official FAQ Terms of Use say data may not be mined or sold and the site may not be accessed by a bot for extracting data. Use this tool for targeted, low-volume research only.
 - Many cases and filings remain unavailable to guests; NYSCEF shows those as restricted rows rather than returning case detail.
 
 ## query_military_justice.py — Military Justice Appellate Courts
@@ -317,15 +491,23 @@ Roughly 685 AFBCMR / 4,250 ABCMR / 3,510 BCNR decisions per recent year, plus ~2
 - The tool pulls a docket identifier from the PDF filename via service-specific regex; falls back to the bare filename stem if the pattern misses.
 - The Navy/SECNAV BCNR site (`secnav.navy.mil/mra/bcnr`) blocks automated requests behind an F5/BIG-IP defender; the Air Force-hosted mirror is the canonical machine-readable copy.
 - ARBA (`arba.army.pentagon.mil`) and the Coast Guard Legal page (`uscg.mil/Resources/Legal/...`) are unreachable from automated fetchers (timeouts / 403). Again, the AF-hosted mirror is the workaround.
-- PDF text extraction uses `pymupdf` (already required by `query_courtlistener.py download --extract-text`). Some redacted PDFs are scanned images with no text layer — those rows show `text_chars=0` and won't appear in keyword/attorney searches. OCR is out of scope for this tool.
+- PDF text extraction uses PyMuPDF when available. CourtListener downloads also
+  support Poppler `pdftotext` as a fallback. Some redacted PDFs are scanned
+  images with no useful text layer — those rows show `text_chars=0` and won't
+  appear in keyword/attorney searches. OCR is out of scope for this tool.
+- Before using `ocrmypdf --skip-text` on a mixed court exhibit, inspect each
+  page's extracted text. A tiny footer or court page number makes an otherwise
+  image-only page count as text-bearing and can skip the scanned body. For a
+  bounded affected excerpt, use `--force-ocr` and verify the replacement text
+  against the rendered pages.
 
 ## Skills Using These Tools
 
 | Skill | Tools Used |
 |-------|-----------|
-| `/analyze-case` | `query_courtlistener.py` (docket, recap-search, opinion, citations, party), `query_nyscef.py` (state-court search/detail/documents), `query_military_justice.py` (case-detail, caaf-opinion) |
-| `/deep-investigate` (Agent C) | `query_courtlistener.py` (search, cases, party, opinions, judge, disclosures, investments), `query_nyscef.py` (targeted NY state-court guest search), `query_military_justice.py` (search, attorney) |
-| `/investigate-person` | `query_courtlistener.py` (party, search), `query_nyscef.py` (search), `query_hudoc.py` (search), `query_military_justice.py` (attorney) |
+| `/analyze-case` | `query_courtlistener.py` (docket, recap-search, opinion, citations, party), `query_state_courts.py` (case/docket/documents), `public_records_actions.py` (catalog routes), `query_military_justice.py` (case-detail, caaf-opinion) |
+| `/deep-investigate` (Agent C) | `query_courtlistener.py`, `query_state_courts.py`, `public_records_search_plan.py`, `public_records_actions.py`, `query_military_justice.py` |
+| `/investigate-person` | `public_records_search_plan.py`, `query_state_courts.py`, `query_courtlistener.py`, `query_hudoc.py`, `query_military_justice.py`, `public_records_entity_candidates.py` |
 | `/systemic-analysis` | `query_courtlistener.py` (fjc, investments, reimbursements) |
 | `/investigate-person` (mil. counsel) | `query_military_corrections.py attorney "<NAME>"` to surface BCMR/BCNR petitions where a target appears as petitioner counsel |
 | `/deep-investigate` (mil. service members) | `query_military_corrections.py keyword`, `decision` for promotion-list challenges, OER/EER corrections, separation appeals |
@@ -339,10 +521,11 @@ Roughly 685 AFBCMR / 4,250 ABCMR / 3,510 BCNR decisions per recent year, plus ~2
 4. `download <URL> --extract-text` -- get document text
 
 ### New York state-court search
-1. `query_nyscef.py search "Entity Name"` -- guest search by party name
-2. `query_nyscef.py case 156728/2019` -- direct case-number lookup
-3. `query_nyscef.py detail <DOCKET_ID>` -- caption, parties, counsel, judge
-4. `query_nyscef.py documents <DOCKET_ID>` -- filing list + PDF links
+1. `public_records_search_plan.py "Entity Name" --jurisdiction 36` -- build the property/recorder/court plan
+2. `query_state_courts.py sources --jurisdiction 36` -- inspect the current catalog routes and capabilities
+3. `query_state_courts.py search "Entity Name"` -- search normalized retained observations
+4. `query_nyscef.py search "Entity Name"` -- return the current NYSCEF route with the requested criteria
+5. `public_records_actions.py plan us-ny-nyscef --operation fetch_document --selector "<CASE/DOCUMENT>"` -- render the concrete source action
 
 ### Judicial conflict-of-interest check
 1. `judge "Judge Name"` -- get person ID

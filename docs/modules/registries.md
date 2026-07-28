@@ -41,6 +41,8 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | `ingest_ucc_newmexico.py` | NM (UCC) | REST API (enterprise.sos.nm.gov) | None | Debtor/secured party search, filing detail |
 
 UK Companies House read-only commands (`search`, `company`, `officers`, `psc`, `filings`, `officer-search`, `officer-appointments`, and `insolvency`) support `--output FILE` for structured JSON artifacts.
+Company `search` uses the phrase-sensitive advanced name endpoint by default;
+add `--broad` only when token-based discovery is intentional.
 
 ## Unified Interface: `query_registry.py`
 

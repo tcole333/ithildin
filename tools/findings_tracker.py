@@ -62,6 +62,15 @@ def _detect_active_profile():
         pass
     return None
 
+
+def _profile_thread_id_map(profile_id):
+    """Return configured local-thread ID -> global database ID for a profile."""
+    try:
+        from tools.profile_threads import profile_thread_id_map
+    except ImportError:
+        from profile_threads import profile_thread_id_map
+    return profile_thread_id_map(profile_id)
+
 VALID_FINDING_TYPES = [
     "communication", "financial", "relationship", "identity",
     "location", "document", "legal", "intelligence",
@@ -75,6 +84,14 @@ VALID_RELATIONSHIP_TYPES = [
     "owns", "controls", "funds", "subsidiary_of", "contracts_with",
     "successor_to", "shares_officer", "supplies",
 ]
+DIRECTIONAL_RELATIONSHIP_TYPES = {
+    "controls",
+    "funds",
+    "owns",
+    "subsidiary_of",
+    "successor_to",
+    "supplies",
+}
 VALID_STRENGTHS = ["strong", "medium", "weak", "circumstantial"]
 try:
     from tools.entity_tracker import VALID_ENTITY_TYPES
@@ -133,29 +150,40 @@ def _get_db_standalone():
 
 
 VALID_SOURCES = [
-    "web_search", "doj", "nj_oag", "doj_vol11", "duggan", "lmsband", "unified_db",
+    "web_search", "doj", "justice_gov", "nj_oag", "doj_vol11", "duggan", "lmsband", "unified_db",
     # Kabasshouse consolidated Epstein corpus (PRIMARY full-text) + FBI release.
     # Same EFTA page in kabass + doj_vol11/lmsband = one source re-OCR'd, not corroboration.
     "kabass", "fbi", "efta",
-    "fec", "edgar", "courtlistener", "supreme_court", "finra", "openpayments",
+    "fec", "edgar", "sec", "sec_iapd", "courtlistener", "supreme_court",
+    "mn_court_appeals", "fjc",
+    "finra", "openpayments", "asic_financial_advisers",
+    "ny_ag", "sipc", "dmhc", "caltech", "nlrb",
     "senate_finance",
-    "990", "registry",
+    "990", "registry", "fdacs",
     # State political-finance, company disclosure, and legislative primary sources.
     "florida_campaign_finance", "florida_senate", "georgia_campaign_finance",
     "geo_group_2024_political_activity_report",
     "geo_group_2025_political_activity_report",
     "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
+    # FPDS-NG ATOM feed (fpds.gov). Sole source for contract-action workflow
+    # fields (createdBy/lastModifiedBy/approvedBy) — USASpending omits them and
+    # HigherGov returns them null, so those tokens must not stand in for it.
+    "fpds",
     "gdelt", "aleph", "icij", "acris", "la_county_assessor", "gleif", "opensanctions",
     "shodan", "crtsh", "wayback", "urlscan", "medicaid",
     "analysis_run", "offshorealert", "uk_companies_house",
-    "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
-    "wy_sos", "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
+    "ca_sos", "co_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
+    "wy_sos", "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp", "wa_registry",
     "usvi", "ds10_financial", "ucc", "florida_ucc", "faa", "sam_bulk",
     "highergov", "documentcloud", "muckrock", "fincen",
     "opencorporates", "zefix", "hudoc", "france_sirene",
     "panama_rp", "patents", "investigations_db", "fdic",
-    "propublica_disclosures", "propublica_congress", "ppp",
-    "govinfo", "congress_gov", "sec_enforcement", "bisbase",
+    # USPTO trademark register (tmsearch.uspto.gov). A separate registry from
+    # `patents` (PatentsView/ODP) — it carries mark ownership and assignment
+    # history, so the two tokens are not interchangeable.
+    "trademarks",
+    "propublica_disclosures", "propublica_congress", "irs_teos", "ppp",
+    "govinfo", "congress_gov", "sec_enforcement", "bisbase", "ecfr",
     "nyscef", "federal_register", "military_corrections",
     "military_justice",
     "sunat", "sunarp", "infogob", "oefa",
@@ -163,6 +191,9 @@ VALID_SOURCES = [
     "house-oversight-transcripts-2026", "house_oversight",
     # Peru-specific primary sources
     "elperuano", "mindef", "seace", "contraloria",
+    # Israel primary sources: TASE MAYA disclosure system, Corporations
+    # Authority registry (data.gov.il), and Israeli business media.
+    "tase_maya", "israel_registry", "calcalist", "globes_il",
     # US foreign-military-sales / lobbying primary sources
     "dsca", "lda", "fara_local",
     # Internal investigation cross-references
@@ -170,8 +201,22 @@ VALID_SOURCES = [
     # Attributed reporting claims promoted only after primary-evidence review.
     "reporting",
     "government_releases",
-    # Primary federal oversight and detention-review records.
-    "gao", "dhs_oig", "ice_odo", "ice_ddr", "ice_foia",
+    # White House election-integrity document release (2026-07-16):
+    # declassified IC/FBI/DHS records + 2026-authored summaries, archived with
+    # hashes under datasets/wh_election_integrity/. Primary government records,
+    # but selectively released/redacted — corroborate externally where possible.
+    "wh_election_integrity",
+    # Primary federal/state/local oversight, legal, privacy, and detention records.
+    "gao", "dhs", "dhs_oig", "dhs_pia", "oversight_gov", "ssa_oig", "us_code",
+    "usms", "massachusetts_governor", "val_verde_county",
+    "ice_odo", "ice_ddr", "ice_foia", "ice_detention_statistics",
+    "louisiana_legislative_auditor", "montgomery_county_tx",
+    # Court and adjudicative records not covered by the structured court tools.
+    "cadc", "indiana_mycase", "justia", "icc_arbitration", "dominica_cbiu",
+    "uk_judiciary", "ca_superior_court",
+    # First-party pages without a recurring source-specific registry key. The
+    # exact organization and page must remain in the evidence URL.
+    "official_website", "internet_archive",
     # ── Selector-pivot leak/breach aggregators (provenance-opaque;
     #    findings sourced here cap at `medium` until corroborated) ──
     "leak_aggregator", "dehashed", "intelx",
@@ -189,7 +234,7 @@ VALID_SOURCES = [
     "apollo", "nasdaq", "oracle", "openai", "softbank", "oklo",
     "palantir", "kkr", "blackstone", "blackrock", "ares", "carlyle",
     "gs", "citi", "jpmorgan", "ms", "chubb", "omv", "borouge",
-    "anthropic", "xai", "crusoe", "lancium",
+    "anthropic", "xai", "crusoe", "lancium", "paul_weiss", "exor",
     # Crypto / blockchain
     "theblock", "dune", "etherscan", "solscan", "bitfury",
     "anchorage", "circle", "coinbase", "binance", "blockchain_com",
@@ -209,8 +254,13 @@ VALID_SOURCES = [
 # must still fail validation so provenance labels cannot silently drift.
 SOURCE_ALIASES = {
     "kabasshouse": "kabass",
+    "kabasshouse epstein corpus": "kabass",
     "unified": "unified_db",
     "unified_epstein": "unified_db",
+    "nydos": "ny_dos",
+    "sec edgar": "edgar",
+    "ds10": "ds10_financial",
+    "doj_epstein_files": "doj",
     "house_20k": "house_oversight",
     "epstein_20k": "house_oversight",
     "fbi-files": "fbi",
@@ -220,7 +270,46 @@ SOURCE_ALIASES = {
     "epstein_reporting": "reporting",
     "query_investigations": "investigations_db",
     "scotus": "supreme_court",
+    "scotus_filing": "supreme_court",
+    "courtlistener_recap": "courtlistener",
+    "senate_lda": "lda",
+    "oge_form_278e": "oge",
+    "ice.gov": "dhs",
+    "justice.gov": "justice_gov",
+    "ecfr.gov": "ecfr",
+    "oge.gov": "oge",
+    "gao.gov": "gao",
+    "uscode.house.gov": "us_code",
+    "supremecourt.gov": "supreme_court",
+    "montgomery_county": "montgomery_county_tx",
+    "irs_990_xml": "990",
+    "irs_index": "990",
+    "irs990": "990",
+    "doj_epstein": "doj",
+    "congress": "congress_gov",
+    "sam": "sam_gov",
+    "sam_local": "sam_bulk",
+    "sam_public_extract": "sam_bulk",
+    "florida_sunbiz": "fl_sunbiz",
+    "colorado_sos": "co_sos",
+    "england_wales_high_court": "ewhc",
+    "california-superior-court": "ca_superior_court",
+    "california_superior_court": "ca_superior_court",
+    "judiciary.uk": "uk_judiciary",
+    "paulweiss": "paul_weiss",
+    "paulweiss_official": "paul_weiss",
+    "paul_weiss_press_release": "paul_weiss",
+    "exor.com": "exor",
+    "harvard_clp": "official_website",
+    "5rb.com": "official_website",
+    "web_official": "official_website",
 }
+SOURCE_VOCABULARY_GUIDANCE = (
+    "For a one-off first-party organization page, use 'official_website' and "
+    "preserve the exact URL in --evidence. Do not use a search engine, browser, "
+    "or direct-URL retrieval method as the source. Run "
+    "'findings_tracker.py sources' to list canonical tokens and aliases."
+)
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
 
@@ -336,10 +425,17 @@ def _validate_source_datasets(source_datasets):
     for token in source_datasets:
         if not isinstance(token, str) or not token.strip():
             raise ValueError("source_datasets entries must be non-empty strings")
-        token = SOURCE_ALIASES.get(token.strip(), token.strip())
+        raw_token = token.strip()
+        token = SOURCE_ALIASES.get(raw_token.casefold(), raw_token.casefold())
         if token not in VALID_SOURCES:
+            token_guidance = SOURCE_VOCABULARY_GUIDANCE
+            if token.startswith("fec_mur_"):
+                token_guidance = (
+                    "Use 'fec' for FEC matters and preserve the MUR number and "
+                    f"document URL in --evidence. {SOURCE_VOCABULARY_GUIDANCE}"
+                )
             raise ValueError(
-                f"Unsupported source token '{token}'. Add it to VALID_SOURCES before using it."
+                f"Unsupported source token '{token}'. {token_guidance}"
             )
         if token not in normalized:
             normalized.append(token)
@@ -353,6 +449,20 @@ def _parse_stored_source_datasets(raw_value):
     except (TypeError, json.JSONDecodeError) as exc:
         raise ValueError(f"source_datasets is not valid JSON: {exc}") from exc
     return _validate_source_datasets(parsed)
+
+
+def _resolve_finding_thread_id(db, thread_id, profile_id):
+    """Resolve or validate a finding's profile-scoped thread ID."""
+    try:
+        from tools.profile_threads import resolve_profile_thread_id
+    except ImportError:
+        from profile_threads import resolve_profile_thread_id
+    return resolve_profile_thread_id(
+        db,
+        thread_id,
+        profile_id,
+        local_thread_ids=lambda: _profile_thread_id_map(profile_id),
+    )
 
 
 def _validate_evidence_ref(evidence_ref, stored_type=None):
@@ -458,7 +568,10 @@ def _parse_evidence_field_args(values, evidence_ids, field_name):
             fallback_ref, field_value = value.split(":", 1)
             ref = fallback_ref
         else:
-            continue
+            raise ValueError(
+                f"Invalid {field_name} metadata {value!r}. "
+                "Expected '<evidence_ref>:<value>'."
+            )
         if ref in parsed:
             raise ValueError(
                 f"Duplicate {field_name} metadata for evidence '{ref}'. "
@@ -567,6 +680,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
             evidence_ref,
             quote_data.get("quote"),
             claim_type=claim_type,
+            require_quote="quote" in quote_data,
         )
         evidence_rows.append((str(evidence_ref).strip(), evidence_type, quote_data))
 
@@ -601,30 +715,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     db = _get_db_standalone()
     sources_json = json.dumps(source_datasets) if source_datasets else None
 
-    # Warn on profile/thread drift (don't block — warn-only like VALID_SOURCES).
-    # A finding carries a GLOBAL thread_id but profiles number threads LOCALLY in
-    # config, so writing profile_id=X with a thread owned by profile Y silently
-    # mis-homes the record (see scripts/audit_profile_threads.py). Surface it at
-    # write time so new drift is caught before it accumulates.
-    if thread_id is not None and profile_id is not None:
-        try:
-            row = db.execute(
-                "SELECT profile_id FROM investigation_threads WHERE id = ?",
-                (thread_id,),
-            ).fetchone()
-            if row is not None:
-                thread_profile = row["profile_id"] if not isinstance(row, tuple) else row[0]
-                if thread_profile is not None and thread_profile != profile_id:
-                    print(
-                        f"WARNING: profile/thread drift — profile_id='{profile_id}' but "
-                        f"thread {thread_id} belongs to profile '{thread_profile}'. The "
-                        f"finding will be recorded as '{profile_id}'; if this profile numbers "
-                        f"threads locally, use its GLOBAL thread id (see "
-                        f"scripts/audit_profile_threads.py).",
-                        file=sys.stderr,
-                    )
-        except Exception:
-            pass
+    thread_id = _resolve_finding_thread_id(db, thread_id, profile_id)
 
     try:
         cursor = db.execute("""
@@ -807,7 +898,10 @@ def add_finding_evidence(finding_id, evidence_ref, *, source_quote=None,
             raise ValueError(f"Finding #{finding_id} does not exist")
         evidence_ref = str(evidence_ref or "").strip()
         evidence_type = _validate_evidence_payload(
-            evidence_ref, source_quote, claim_type=finding["claim_type"]
+            evidence_ref,
+            source_quote,
+            claim_type=finding["claim_type"],
+            require_quote=source_quote is not None,
         )
         if db.execute(
             "SELECT 1 FROM finding_evidence WHERE finding_id = ? AND evidence_ref = ?",
@@ -2182,8 +2276,12 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
         _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
 
-        # Normalize: store alphabetically for dedup.
-        if person_a > person_b:
+        # Symmetric relationships use canonical endpoint ordering for dedup.
+        # Directional verbs must retain caller order or their meaning reverses.
+        if (
+            relationship_type not in DIRECTIONAL_RELATIONSHIP_TYPES
+            and person_a > person_b
+        ):
             person_a, person_b = person_b, person_a
 
         insert_cursor = db.execute("""
@@ -2481,17 +2579,38 @@ def main():
     add_p.add_argument("--type", "-t", choices=VALID_FINDING_TYPES, dest="finding_type")
     add_p.add_argument("--detail", "-d")
     add_p.add_argument("--evidence", "-e", nargs="+")
-    add_p.add_argument("--sources", nargs="+")
+    add_p.add_argument(
+        "--sources",
+        nargs="+",
+        required=True,
+        help=(
+            "Canonical provenance tokens. Run 'findings_tracker.py sources' "
+            "for the registry; use official_website for one-off first-party pages."
+        ),
+    )
     add_p.add_argument("--confidence", "-c", choices=VALID_CONFIDENCE, default="medium")
     add_p.add_argument("--date")
     add_p.add_argument("--lead-id", type=int)
     add_p.add_argument("--claim-type", choices=VALID_CLAIM_TYPES, default="inference")
-    add_p.add_argument("--source-quote", nargs="+",
-                       help="ref:quote pairs, e.g. 'EFTA02336502:craft purchase 18M'")
+    add_p.add_argument(
+        "--source-quote",
+        nargs="+",
+        action="extend",
+        help=(
+            "ref:quote pairs (repeatable). Each evidence ref stores one quote; "
+            "combine multiple excerpts explicitly."
+        ),
+    )
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
     add_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
     add_output_args(add_p)
+
+    sources_p = subparsers.add_parser(
+        "sources",
+        help="List canonical provenance tokens and compatibility aliases",
+    )
+    add_output_args(sources_p)
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -2568,15 +2687,17 @@ def main():
     conn_p.add_argument("--description", "-d")
     conn_p.add_argument("--evidence", "-e", nargs="+")
     conn_p.add_argument(
-        "--source-quote", nargs="+",
-        help="ref:quote pairs for connection evidence",
+        "--source-quote",
+        nargs="+",
+        action="extend",
+        help="repeatable ref:quote pairs; one combined quote per evidence ref",
     )
     conn_p.add_argument(
-        "--source-page", nargs="+",
+        "--source-page", nargs="+", action="extend",
         help="ref:page/location pairs for connection evidence",
     )
     conn_p.add_argument(
-        "--assessment", nargs="+",
+        "--assessment", nargs="+", action="extend",
         help="ref:assessment pairs explaining how evidence supports the edge",
     )
     conn_p.add_argument("--strength", choices=VALID_STRENGTHS, default="medium")
@@ -2701,7 +2822,12 @@ def main():
 
     # search
     search_p = subparsers.add_parser("search", help="Full-text search")
-    search_p.add_argument("query")
+    search_p.add_argument("query", nargs="?", help="Finding text to search")
+    search_p.add_argument(
+        "--query",
+        dest="query_option",
+        help="Finding text to search (compatibility form)",
+    )
     search_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     search_p.add_argument("--profile", help="Investigation profile (default: active)")
     search_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
@@ -2735,9 +2861,21 @@ def main():
     relate_p = subparsers.add_parser("relate", help="Record a typed relation between two findings")
     relate_p.add_argument("from_id", type=int)
     relate_p.add_argument("to_id", type=int)
-    relate_p.add_argument("--type", "-t", required=True, dest="relation_type",
-                          choices=["contradicts", "corroborates", "supersedes",
-                                   "duplicates", "refines", "depends_on"])
+    relate_p.add_argument(
+        "--type",
+        "--relation-type",
+        "-t",
+        required=True,
+        dest="relation_type",
+        choices=[
+            "contradicts",
+            "corroborates",
+            "supersedes",
+            "duplicates",
+            "refines",
+            "depends_on",
+        ],
+    )
     relate_p.add_argument("--assessment", "-a", help="Why the relation holds")
     relate_p.add_argument("--by", default="human")
 
@@ -2814,13 +2952,27 @@ def main():
     if not args.command:
         parser.print_help()
         sys.exit(1)
+    if args.command == "search":
+        args.query = args.query_option or args.query
+        if not args.query:
+            parser.error("search requires QUERY or --query QUERY")
 
-    if args.command == "add":
-        if not args.sources:
-            print("ERROR: --sources is required. Specify the data source(s) that produced this finding "
-                  "(e.g., --sources web_search, --sources fec edgar).", file=sys.stderr)
-            sys.exit(1)
+    if args.command == "sources":
+        vocabulary = {
+            "canonical": sorted(VALID_SOURCES),
+            "aliases": dict(sorted(SOURCE_ALIASES.items())),
+            "guidance": SOURCE_VOCABULARY_GUIDANCE,
+        }
+        if write_output(vocabulary, args, summary="source vocabulary"):
+            return
+        print("Canonical source tokens:")
+        print("  " + "\n  ".join(vocabulary["canonical"]))
+        print("\nCompatibility aliases:")
+        for alias, canonical in vocabulary["aliases"].items():
+            print(f"  {alias} -> {canonical}")
+        print(f"\n{SOURCE_VOCABULARY_GUIDANCE}")
 
+    elif args.command == "add":
         try:
             # Parse source quotes from CLI (format: "ref:quote text")
             source_quotes = _parse_source_quote_args(

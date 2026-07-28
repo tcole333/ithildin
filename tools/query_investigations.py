@@ -19,8 +19,10 @@ import sys
 from pathlib import Path
 
 try:
+    from tools.fts_query import literal_fts_query
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from fts_query import literal_fts_query
     from output_util import add_output_args, write_output
 
 DB_PATH = Path(__file__).parent.parent / "datasets" / "investigations.db"
@@ -40,9 +42,7 @@ def get_db():
 def cmd_search(args):
     """FTS5 search across all ingested investigation reports."""
     db = get_db()
-
-    query_parts = [args.query]
-    params = [args.query, args.limit]
+    fts_query = literal_fts_query(args.query)
 
     # Base search query with snippets
     sql = """
@@ -62,15 +62,14 @@ def cmd_search(args):
 
     if args.category:
         sql += " AND d.category = ?"
-        params = [args.query, args.category, args.limit]
         sql += " ORDER BY rank LIMIT ?"
     else:
         sql += " ORDER BY rank LIMIT ?"
 
     if args.category:
-        rows = db.execute(sql, [args.query, args.category, args.limit]).fetchall()
+        rows = db.execute(sql, [fts_query, args.category, args.limit]).fetchall()
     else:
-        rows = db.execute(sql, [args.query, args.limit]).fetchall()
+        rows = db.execute(sql, [fts_query, args.limit]).fetchall()
 
     data = [dict(r) for r in rows]
 

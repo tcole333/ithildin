@@ -2,8 +2,7 @@
 /**
  * NYSCEF guest-search browser helper.
  *
- * Uses a headed Chrome/Chromium session and drives the real browser DOM because
- * NYSCEF guest search is a server-rendered form flow, not a public API.
+ * tools/query_nyscef.py selects this adapter from the central source catalog.
  *
  * Usage:
  *   node tools/_nyscef_browser_helper.js search-name '{"first_name":"Jeffrey","last_name":"Epstein"}'
@@ -19,18 +18,29 @@ const path = require("path");
 
 const BASE_URL = "https://iapps.courts.state.ny.us/nyscef";
 const DEFAULT_PAGE_SIZE = 25;
+const GUEST_SEARCH_URL = `${BASE_URL}/CaseSearch`;
 
 let chromium;
-try {
-  chromium = require("playwright").chromium;
-} catch {
+
+function loadChromium() {
   try {
-    chromium = require("playwright-core").chromium;
+    return require("playwright").chromium;
   } catch {
-    process.stderr.write(
-      "ERROR: playwright package not found. Install with: npm install -g playwright or run through npx.\n",
-    );
-    process.exit(1);
+    try {
+      return require("playwright-core").chromium;
+    } catch {
+      throw new Error(
+        "playwright package not found.",
+      );
+    }
+  }
+}
+
+class PortalChallengeError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "PortalChallengeError";
+    this.code = "NYSCEF_PORTAL_CHALLENGED";
   }
 }
 
@@ -127,11 +137,7 @@ function parseRepresentatives(rawText) {
 }
 
 async function launchBrowser() {
-  const launchOptions = {
-    headless: false,
-    args: ["--disable-blink-features=AutomationControlled"],
-    ignoreDefaultArgs: ["--enable-automation"],
-  };
+  const launchOptions = { headless: false };
 
   try {
     const browser = await chromium.launch({
@@ -156,29 +162,25 @@ async function getPage(context) {
 }
 
 async function waitForPortal(page) {
-  let prompted = false;
-  for (let attempt = 0; attempt < 60; attempt += 1) {
-    await page.waitForTimeout(1000);
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    if (attempt > 0) await page.waitForTimeout(500);
     const title = await page.title().catch(() => "");
     const body = await page.locator("body").innerText().catch(() => "");
     const signal = `${title}\n${body.slice(0, 500)}`;
 
     if (
-      !/Just a moment/i.test(title) &&
-      /(Case Search|Case Search Results|Case Details|Document List|NYSCEF)/i.test(signal)
+      /Just a moment|Checking your browser/i.test(title) ||
+      /Enable JavaScript and cookies to continue|verify you are human|captcha/i.test(body)
     ) {
-      return true;
+      throw new PortalChallengeError(
+        "NYSCEF presented an anti-bot challenge; automated access stopped without attempting to bypass it.",
+      );
     }
 
     if (
-      (/Just a moment/i.test(title) || /Enable JavaScript and cookies to continue/i.test(body)) &&
-      attempt >= 5 &&
-      !prompted
+      /(Case Search|Case Search Results|Case Details|Document List|NYSCEF)/i.test(signal)
     ) {
-      process.stderr.write(
-        "\n  Cloudflare challenge detected. If a browser window opened, complete any prompt.\n\n",
-      );
-      prompted = true;
+      return true;
     }
   }
   return false;
@@ -188,7 +190,7 @@ async function gotoPortal(page, url) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 120000 });
   const ready = await waitForPortal(page);
   if (!ready) {
-    throw new Error("NYSCEF did not become ready. Cloudflare challenge may not have cleared.");
+    throw new Error("NYSCEF did not reach an expected official portal page.");
   }
 }
 
@@ -721,6 +723,7 @@ async function main() {
     process.exit(1);
   }
 
+  chromium = loadChromium();
   const { browser, context } = await launchBrowser();
   const page = await getPage(context);
 
@@ -750,6 +753,22 @@ async function main() {
 }
 
 main().catch((error) => {
+  if (error.code === "NYSCEF_PORTAL_CHALLENGED") {
+    process.stdout.write(
+      `${JSON.stringify({
+        source: "nyscef",
+        status: "challenged",
+        challenge_status: "challenged",
+        available: false,
+        source_available: false,
+        reason: "captcha_or_anti_bot_challenge",
+        message: error.message,
+        criteria: [],
+        results: [],
+      })}\n`,
+    );
+    return;
+  }
   process.stderr.write(`ERROR: ${error.message}\n`);
   process.exit(1);
 });

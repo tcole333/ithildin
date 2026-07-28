@@ -13,8 +13,14 @@ Usage:
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
+import tempfile
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -34,6 +40,8 @@ def _log(query, source, count):
 
 
 DB_PATH = "/Users/travcole/projects/epstein-docs/output/documents.db"
+DOJ_EPSTEIN_HOSTS = {"justice.gov", "www.justice.gov"}
+MAX_PDF_BYTES = 500 * 1024 * 1024
 
 
 def get_db():
@@ -102,6 +110,75 @@ def get_names(bates_id):
     return None
 
 
+def download_epstein_pdf(url, output_path, *, opener=None):
+    """Download one public DOJ Epstein PDF through the age-verification gate."""
+    parsed = urlparse(url)
+    if (
+        parsed.scheme != "https"
+        or parsed.hostname not in DOJ_EPSTEIN_HOSTS
+        or not parsed.path.casefold().startswith("/epstein/files/")
+        or not parsed.path.casefold().endswith(".pdf")
+    ):
+        raise ValueError(
+            "download URL must be an official HTTPS justice.gov/epstein/files/*.pdf"
+        )
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    request = Request(
+        url,
+        headers={
+            "Accept": "application/pdf",
+            "Cookie": "justiceGovAgeVerified=true",
+            "User-Agent": "Ithildin Research research@example.com",
+        },
+    )
+    opener = opener or urlopen
+    temp_path = None
+    total = 0
+    try:
+        with opener(request, timeout=60) as response:
+            content_type = response.headers.get("Content-Type", "")
+            prefix = response.read(5)
+            if "text/html" in content_type.casefold() or prefix != b"%PDF-":
+                raise ValueError(
+                    "DOJ returned a non-PDF response; age verification or the "
+                    "document URL may have changed"
+                )
+            with tempfile.NamedTemporaryFile(
+                mode="wb",
+                prefix=f".{output_path.name}.",
+                suffix=".tmp",
+                dir=output_path.parent,
+                delete=False,
+            ) as handle:
+                temp_path = Path(handle.name)
+                handle.write(prefix)
+                total = len(prefix)
+                while True:
+                    chunk = response.read(1024 * 1024)
+                    if not chunk:
+                        break
+                    total += len(chunk)
+                    if total > MAX_PDF_BYTES:
+                        raise ValueError(
+                            f"DOJ PDF exceeds the {MAX_PDF_BYTES:,}-byte safety limit"
+                        )
+                    handle.write(chunk)
+        os.replace(temp_path, output_path)
+        temp_path = None
+    finally:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+
+    return {
+        "url": url,
+        "output": str(output_path),
+        "content_type": content_type,
+        "bytes": total,
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Query DOJ Vol 11 (331K OCR'd pages)")
     subparsers = parser.add_subparsers(dest="command")
@@ -128,6 +205,14 @@ def main():
     # names
     n = subparsers.add_parser("names", help="Get extracted names from document")
     n.add_argument("bates_id")
+
+    # download
+    d = subparsers.add_parser(
+        "download",
+        help="Download a public DOJ Epstein PDF through the age gate",
+    )
+    d.add_argument("url", help="Official justice.gov/epstein/files/*.pdf URL")
+    d.add_argument("--output", required=True, help="Destination PDF path")
 
     args = parser.parse_args()
 
@@ -188,6 +273,17 @@ def main():
                 print(names)
         else:
             print(f"No extracted names for {args.bates_id}")
+
+    elif args.command == "download":
+        try:
+            result = download_epstein_pdf(args.url, args.output)
+        except (HTTPError, URLError, OSError, ValueError) as error:
+            print(f"ERROR: {error}", file=sys.stderr)
+            raise SystemExit(2) from error
+        print(
+            f"Downloaded DOJ PDF ({result['bytes']:,} bytes) to "
+            f"{result['output']}"
+        )
 
 
 if __name__ == "__main__":

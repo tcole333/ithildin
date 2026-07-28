@@ -64,14 +64,16 @@ PERSON_PREFIXES = ["mr", "mrs", "ms", "dr", "prof"]
 # deliberately conservative: a descriptive domain word and an abstract head
 # word must both be present, and common legal/organizational endings are exempt.
 _ABSTRACT_TARGET_DESCRIPTORS = frozenset({
-    "address", "addresses", "contract", "divorce", "evidence", "filing",
-    "funding", "officer", "parcel", "parcels", "property", "properties",
-    "relationship", "search", "transaction", "transfer", "trust",
+    "address", "addresses", "contract", "corporate", "director", "disclosure",
+    "divorce", "document", "evidence", "filing", "funding", "identity", "officer",
+    "parcel", "parcels", "property", "properties", "record", "relationship",
+    "search", "transaction", "transfer", "transition", "trust",
 })
 _ABSTRACT_TARGET_HEADS = frozenset({
     "analysis", "cluster", "clusters", "comparison", "findings", "flags",
-    "map", "parcels", "pattern", "patterns", "portfolio", "results",
-    "schedule", "summary", "timeline",
+    "household", "lineage", "map", "office", "parcels", "pattern", "patterns",
+    "portfolio", "response", "results", "schedule", "series", "summary",
+    "timeline", "resolution",
 })
 _NAMED_ORGANIZATION_SUFFIX_RE = re.compile(
     r"\b(?:association|bank|co\.?|company|corp\.?|corporation|foundation|"
@@ -79,6 +81,14 @@ _NAMED_ORGANIZATION_SUFFIX_RE = re.compile(
     r"trust|university)\s*$",
     re.IGNORECASE,
 )
+_FEC_COMMITTEE_TARGET_RE = re.compile(
+    r"^(?P<base>.+?)\s*\((?P<identifier>C\d{8})\)\s*$",
+    re.IGNORECASE,
+)
+
+
+class EntityResolutionAmbiguity(ValueError):
+    """Raised when an auto-link target maps to multiple plausible entities."""
 
 
 def is_abstract_entity_target(name):
@@ -92,6 +102,8 @@ def is_abstract_entity_target(name):
     if not name or not name.strip():
         return False
     stripped = name.strip()
+    if re.search(r"\s+/\s+", stripped):
+        return True
     if _NAMED_ORGANIZATION_SUFFIX_RE.search(stripped):
         return False
     tokens = re.findall(r"[a-z0-9]+", stripped.casefold())
@@ -231,12 +243,89 @@ def _pick_jurisdiction_match(rows, jurisdiction):
     return sorted(rows, key=lambda r: (r["jurisdiction"] is None, r["id"]))[0]
 
 
-def _backfill_entity_scalars(db, row, *, entity_type=None, jurisdiction=None, ein=None, address=None):
-    """Fill NULL/empty scalar columns on an existing entity from new data.
+def _resolve_fec_qualified_finding_target(db, name):
+    """Resolve ``Committee Name (C########)`` without creating a compound row.
+
+    A target suffix is useful context for a finding, but it is not part of the
+    committee's canonical name. Prefer a candidate whose stored provenance
+    contains the identifier, otherwise accept a sole PAC row. Multiple plausible
+    rows require review rather than an arbitrary jurisdiction-based choice.
+    """
+    qualified = _FEC_COMMITTEE_TARGET_RE.fullmatch(name)
+    if not qualified:
+        return None
+
+    base = qualified.group("base").strip()
+    identifier = qualified.group("identifier").upper()
+    candidates = db.execute(
+        """
+        SELECT id, name, entity_type, jurisdiction, ein, address, source, notes
+        FROM entities
+        WHERE lower(name) = lower(?)
+        ORDER BY id
+        """,
+        (base,),
+    ).fetchall()
+
+    identifier_matches = [
+        row
+        for row in candidates
+        if identifier.casefold()
+        in " ".join(
+            str(row[field] or "")
+            for field in ("ein", "source", "notes")
+        ).casefold()
+    ]
+    if len(identifier_matches) == 1:
+        row = identifier_matches[0]
+        return EntityResolution(
+            row["id"], "qualified_identifier", row["name"], 100.0
+        )
+    if len(identifier_matches) > 1:
+        candidates = identifier_matches
+    else:
+        pac_candidates = [
+            row
+            for row in candidates
+            if (row["entity_type"] or "").casefold() == "pac"
+        ]
+        if len(pac_candidates) == 1:
+            row = pac_candidates[0]
+            return EntityResolution(
+                row["id"], "qualified_identifier", row["name"], 100.0
+            )
+        if pac_candidates:
+            candidates = pac_candidates
+
+    if candidates:
+        candidate_ids = ", ".join(f"#{row['id']}" for row in candidates)
+        raise EntityResolutionAmbiguity(
+            f"FEC-qualified target {name!r} matches multiple canonical "
+            f"entities ({candidate_ids}); review and record an explicit alias "
+            f"for {identifier} before linking"
+        )
+
+    return EntityResolution(None, "suppressed_identifier", base, None)
+
+
+def _backfill_entity_scalars(
+    db,
+    row,
+    *,
+    entity_type=None,
+    jurisdiction=None,
+    ein=None,
+    address=None,
+    source=None,
+    notes=None,
+):
+    """Fill or enrich scalar metadata on an existing entity from new data.
 
     Never overwrites an existing non-empty value. entity_type is only upgraded when
     the stored type is unknown/NULL, so a richer ingest can promote a stub without
-    clobbering a deliberate classification. Does not commit.
+    clobbering a deliberate classification. Provenance sources are unioned and new
+    notes are appended once, so resolving an auto-created stub does not discard the
+    later authoritative context. Does not commit.
     """
     updates = {}
     for col, val in (("jurisdiction", jurisdiction), ("ein", ein), ("address", address)):
@@ -244,6 +333,19 @@ def _backfill_entity_scalars(db, row, *, entity_type=None, jurisdiction=None, ei
             updates[col] = val
     if entity_type and entity_type != "unknown" and (not row["entity_type"] or row["entity_type"] == "unknown"):
         updates["entity_type"] = entity_type
+    if source and (not source.startswith("auto:") or not row["source"]):
+        merged_source = _merge_sources(row["source"], source)
+        if merged_source != (row["source"] or ""):
+            updates["source"] = merged_source
+    if notes:
+        existing_notes = (row["notes"] or "").strip()
+        incoming_notes = notes.strip()
+        if incoming_notes and incoming_notes not in existing_notes:
+            updates["notes"] = (
+                f"{existing_notes}\n{incoming_notes}".strip()
+                if existing_notes
+                else incoming_notes
+            )
     if not updates:
         return
     sets = ", ".join(f"{c} = ?" for c in updates)
@@ -277,7 +379,8 @@ def _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold):
     from rapidfuzz import fuzz, process
 
     rows = db.execute(
-        "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities"
+        "SELECT id, name, entity_type, jurisdiction, ein, address, source, notes "
+        "FROM entities"
     ).fetchall()
     candidates = []
     norm_names = []
@@ -385,24 +488,46 @@ def resolve_or_create_entity(
         if arow and arow["entity_id"]:
             if backfill:
                 erow = db.execute(
-                    "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities WHERE id = ?",
+                    "SELECT id, name, entity_type, jurisdiction, ein, address, source, notes "
+                    "FROM entities WHERE id = ?",
                     (arow["entity_id"],),
                 ).fetchone()
                 if erow:
                     _backfill_entity_scalars(db, erow, entity_type=entity_type,
-                                             jurisdiction=jurisdiction, ein=ein, address=address)
+                                             jurisdiction=jurisdiction, ein=ein, address=address,
+                                             source=source, notes=notes)
             return EntityResolution(arow["entity_id"], "alias", arow["canonical_name"], 100.0)
+
+    # Identifier-bearing finding targets carry useful context but should never
+    # create a second canonical entity whose name includes the identifier.
+    if (
+        source == "auto:finding"
+        and _entity_type_family(entity_type) is None
+    ):
+        qualified = _resolve_fec_qualified_finding_target(db, name)
+        if qualified is not None:
+            return qualified
 
     # 2. Exact name match (jurisdiction-aware).
     same_name = db.execute(
-        "SELECT id, name, entity_type, jurisdiction, ein, address FROM entities WHERE name = ?",
+        "SELECT id, name, entity_type, jurisdiction, ein, address, source, notes "
+        "FROM entities WHERE name = ?",
         (name,),
     ).fetchall()
     match = _pick_jurisdiction_match(same_name, jurisdiction)
     if match:
+        if (
+            source == "auto:finding"
+            and _entity_type_family(entity_type) is None
+            and is_abstract_entity_target(name)
+            and _entity_type_family(match["entity_type"]) is None
+            and (match["source"] or "").startswith("auto:finding")
+        ):
+            return EntityResolution(None, "suppressed", name, None)
         if backfill:
             _backfill_entity_scalars(db, match, entity_type=entity_type,
-                                     jurisdiction=jurisdiction, ein=ein, address=address)
+                                     jurisdiction=jurisdiction, ein=ein, address=address,
+                                     source=source, notes=notes)
         return EntityResolution(match["id"], "exact", match["name"], 100.0)
 
     # 3. Fuzzy normalized match.
@@ -413,7 +538,8 @@ def resolve_or_create_entity(
             row, score = fuzzy
             if backfill:
                 _backfill_entity_scalars(db, row, entity_type=entity_type,
-                                         jurisdiction=jurisdiction, ein=ein, address=address)
+                                         jurisdiction=jurisdiction, ein=ein, address=address,
+                                         source=source, notes=notes)
             if record_alias:
                 _record_variant_alias(db, canonical=row["name"], alias=name,
                                       entity_id=row["id"], entity_type=row["entity_type"])
@@ -533,7 +659,7 @@ def cmd_scan(args):
         print(json.dumps(results, indent=2))
         return
 
-    print(f"\nEntity Resolution Scan")
+    print("\nEntity Resolution Scan")
     print(f"{'='*70}")
     print(f"Total entities: {len(entities)}")
     print(f"Existing aliases: {alias_count}")
@@ -632,7 +758,7 @@ def cmd_scan_registry(args):
         print(json.dumps(results, indent=2))
         return
 
-    print(f"\nRegistry Cross-Match")
+    print("\nRegistry Cross-Match")
     print(f"{'='*70}")
     print(f"Investigation persons: {len(person_names)}")
     print(f"Registry officers (unique): {len(officer_names)}")
@@ -1110,7 +1236,7 @@ def cmd_merge(args):
 
     keep, drop = dict(keep), dict(drop)
 
-    print(f"\nMerge Plan:")
+    print("\nMerge Plan:")
     print(f"  KEEP: #{keep['id']} {keep['name']} ({keep['entity_type']}, {keep['jurisdiction']})")
     print(f"  DROP: #{drop['id']} {drop['name']} ({drop['entity_type']}, {drop['jurisdiction']})")
 
@@ -1280,7 +1406,7 @@ def cmd_stats(args):
         print(json.dumps(results, indent=2))
         return
 
-    print(f"\nEntity Resolution Stats")
+    print("\nEntity Resolution Stats")
     print(f"{'='*50}")
     print(f"  Total entities:          {total_entities}")
     print(f"  Total name aliases:      {total_aliases}")
@@ -1288,15 +1414,15 @@ def cmd_stats(args):
     print(f"  Entities with addresses: {with_addresses}")
 
     if alias_types:
-        print(f"\n  Alias Types:")
+        print("\n  Alias Types:")
         for r in alias_types:
             print(f"    {r['alias_type']:20s} {r['cnt']:5d}")
 
-    print(f"\n  Entity Types:")
+    print("\n  Entity Types:")
     for r in entity_types:
         print(f"    {r['entity_type']:20s} {r['cnt']:5d}")
 
-    print(f"\n  Top Jurisdictions:")
+    print("\n  Top Jurisdictions:")
     for r in jurisdictions:
         j = r["jurisdiction"] or "(none)"
         print(f"    {j:20s} {r['cnt']:5d}")

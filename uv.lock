@@ -871,6 +871,7 @@ dependencies = [
     { name = "pyarrow" },
     { name = "pydriller" },
     { name = "pytest" },
+    { name = "python-muckrock" },
     { name = "pyyaml" },
     { name = "yfinance" },
 ]
@@ -890,6 +891,7 @@ requires-dist = [
     { name = "pyarrow", specifier = ">=23.0.1" },
     { name = "pydriller", specifier = ">=2.9" },
     { name = "pytest", specifier = ">=8.3.5" },
+    { name = "python-muckrock", specifier = ">=2.3.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "yfinance", specifier = ">=0.2.36" },
 ]
@@ -1250,6 +1252,37 @@ wheels = [
 ]
 
 [[package]]
+name = "python-muckrock"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "python-dateutil" },
+    { name = "python-squarelet" },
+    { name = "ratelimit" },
+    { name = "requests" },
+    { name = "token-bucket" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f6/59/a24bc5de1ba0f83faa75105e695e3bc6e88576f7e18624aa181dc188034a/python_muckrock-2.3.0.tar.gz", hash = "sha256:a7833bac051255c7953abd0dcad9a04813136c5b0a8ee9022740c92e96f782e0", size = 44197, upload-time = "2026-06-15T23:45:21.385Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/61/70e618bf0cc4f3a833180fbeb7c779a01cbfa38adbeda7eb6698291ee343/python_muckrock-2.3.0-py3-none-any.whl", hash = "sha256:88c4715699059245af01f97adbbd65fa93273adf3d3855c24955726dc1a9f922", size = 33653, upload-time = "2026-06-15T23:45:20.349Z" },
+]
+
+[[package]]
+name = "python-squarelet"
+version = "0.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ratelimit" },
+    { name = "requests" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0c/59/1772bd6653ad364e01e1eaa266a984e1cf9fd3a7911cdafa48a277225d28/python_squarelet-0.3.1.tar.gz", hash = "sha256:1b198cbd0e880b7487f5f49b9fb705bf7b416ef97db5cde38d95263f90f25f75", size = 17357, upload-time = "2026-04-24T18:40:06.709Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/ae/e511470ccdb33c291d918b64f5e8cd9daf567c252768288095dc73f179e2/python_squarelet-0.3.1-py3-none-any.whl", hash = "sha256:bb9860baf9efc1352e036ce87f97f8e1840bbc5781c61c74a35a499e77444f62", size = 18540, upload-time = "2026-04-24T18:40:05.403Z" },
+]
+
+[[package]]
 name = "pytz"
 version = "2026.1.post1"
 source = { registry = "https://pypi.org/simple" }
@@ -1405,6 +1438,12 @@ wheels = [
 ]
 
 [[package]]
+name = "ratelimit"
+version = "2.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ab/38/ff60c8fc9e002d50d48822cc5095deb8ebbc5f91a6b8fdd9731c87a147c9/ratelimit-2.2.1.tar.gz", hash = "sha256:af8a9b64b821529aca09ebaf6d8d279100d766f19e90b5059ac6a718ca6dee42", size = 5251, upload-time = "2018-12-17T18:55:49.675Z" }
+
+[[package]]
 name = "requests"
 version = "2.32.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1521,6 +1560,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/01/68/97ac72dd781301d6a52140066c68400c96f1a91f69737959e414844749b0/textdistance-4.6.3.tar.gz", hash = "sha256:d6dabc50b4ea832cdcf0e1e6021bd0c7fcd9ade155888d79bb6a3c31fce2dc6f", size = 32710, upload-time = "2024-07-16T09:34:54.09Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c6/c2/c62601c858010b0513a6434b9be19bd740533a6e861eddfd30b7258d92a0/textdistance-4.6.3-py3-none-any.whl", hash = "sha256:0cb1b2cc8e3339ddc3e0f8c870e49fb49de6ecc42a718917308b3c971f34aa56", size = 31263, upload-time = "2024-07-16T09:34:51.082Z" },
+]
+
+[[package]]
+name = "token-bucket"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/17/bf09fd3373ff3098151978ca2abde0b125589459a4724885731f7f877c0c/token_bucket-0.4.0.tar.gz", hash = "sha256:80f94bbe85be8f5adccd51330c26d07e6efdf6e154657cf107f7e65ce510d886", size = 11998, upload-time = "2026-06-12T19:32:43.692Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c6/85/0a9e1f712f1be611f6ca9db2849925c483bcda41674412013e27e3fcd0a0/token_bucket-0.4.0-py3-none-any.whl", hash = "sha256:16a90125a696b9e22e3e2f20ea9060a5abf07572bf91500142e3b3747d30e568", size = 9869, upload-time = "2026-06-12T19:32:42.569Z" },
 ]
 
 [[package]]

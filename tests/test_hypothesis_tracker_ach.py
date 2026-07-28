@@ -1,3 +1,4 @@
+import json
 import sqlite3
 
 import pytest
@@ -59,6 +60,38 @@ def test_competition_group_filters_list_matrix_and_compete(ach_db):
     assert [h["id"] for h in ranked] == [h1]
 
 
+def test_list_filters_hypotheses_by_thread_profile(ach_db, monkeypatch, capsys):
+    db = hypothesis_tracker.get_hypothesis_db()
+    db.executemany(
+        "INSERT INTO investigation_threads (title, profile_id) VALUES (?, ?)",
+        [("Alpha thread", "alpha"), ("Beta thread", "beta")],
+    )
+    thread_ids = [
+        row["id"]
+        for row in db.execute(
+            "SELECT id FROM investigation_threads ORDER BY id DESC LIMIT 2"
+        ).fetchall()[::-1]
+    ]
+    db.commit()
+    db.close()
+
+    alpha = hypothesis_tracker.add_hypothesis("Alpha hypothesis", thread_id=thread_ids[0])
+    hypothesis_tracker.add_hypothesis("Beta hypothesis", thread_id=thread_ids[1])
+
+    assert [
+        row["id"] for row in hypothesis_tracker.list_hypotheses(profile_id="alpha")
+    ] == [alpha]
+
+    monkeypatch.setattr(
+        "sys.argv",
+        ["hypothesis_tracker.py", "list", "--profile", "alpha"],
+    )
+    hypothesis_tracker.main()
+    output = capsys.readouterr().out
+    assert "Alpha hypothesis" in output
+    assert "Beta hypothesis" not in output
+
+
 def test_null_hypothesis_is_labeled_in_all_ach_views(ach_db, monkeypatch, capsys):
     h0 = hypothesis_tracker.add_hypothesis(
         "Routine overlap", competition_group="overlap", is_null_hypothesis=True
@@ -109,3 +142,41 @@ def test_legacy_no_group_path_includes_all_active_hypotheses(ach_db):
 
     assert {h["id"] for h in matrix["hypotheses"]} == {ungrouped, grouped}
     assert {h["id"] for h in ranked} == {ungrouped, grouped}
+
+
+def test_remove_evaluation_is_atomic_and_audited(ach_db):
+    hypothesis_id = hypothesis_tracker.add_hypothesis("Correction candidate")
+    hypothesis_tracker.evaluate_evidence(
+        hypothesis_id,
+        1,
+        "inconsistent",
+        assessed_by="mistaken-agent",
+        notes="Wrong finding selected",
+    )
+
+    removed = hypothesis_tracker.remove_evaluation(
+        hypothesis_id,
+        1,
+        assessed_by="mistaken-agent",
+        reason="Assessment was attached to the wrong finding",
+        removed_by="reviewer",
+    )
+
+    assert removed["assessment"] == "inconsistent"
+    db = hypothesis_tracker.get_hypothesis_db()
+    assert db.execute(
+        "SELECT COUNT(*) FROM hypothesis_evidence_matrix "
+        "WHERE hypothesis_id = ? AND finding_id = ?",
+        (hypothesis_id, 1),
+    ).fetchone()[0] == 0
+    correction = db.execute(
+        "SELECT * FROM corrections "
+        "WHERE table_name = 'hypothesis_evidence_matrix'"
+    ).fetchone()
+    db.close()
+    assert correction["record_id"] == removed["id"]
+    assert correction["record_key"] == f"{hypothesis_id}:1:mistaken-agent"
+    assert json.loads(correction["old_value"])["notes"] == "Wrong finding selected"
+    assert correction["reason"] == "Assessment was attached to the wrong finding"
+    assert correction["corrected_by"] == "reviewer"
+    assert correction["correction_type"] == "retraction"

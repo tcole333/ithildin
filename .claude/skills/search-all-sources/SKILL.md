@@ -105,7 +105,13 @@ uv run python tools/query_icij.py search "<QUERY>" \
 # WebSearch: "<QUERY> court filing"
 
 # Investigation reports (if investigations.db is populated)
-uv run python tools/query_investigations.py search "<QUERY>" --limit 10
+uv run python tools/query_investigations.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-investigations.json"
+
+# MuckRock local request/communication/file index (if datasets/muckrock_index.db exists)
+# Prioritize agency-response attachments with no direct DocumentCloud linkage.
+uv run python tools/query_muckrock.py unlinked-files "<QUERY>" --limit 20 --output "$WORKDIR/search-muckrock-unlinked.json"
+# Broader local search, including DocumentCloud-linked files and outbound attachments:
+uv run python tools/query_muckrock.py index-search "<QUERY>" --limit 20 --output "$WORKDIR/search-muckrock-index.json"
 
 # Versioned reporting knowledge layer (attributed secondary claims)
 uv run python tools/reporting_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-reporting.json
@@ -115,44 +121,62 @@ uv run python tools/reporting_corpus.py claims "<QUERY>" --limit 20 --output $WO
 uv run python tools/government_release_corpus.py search "<QUERY>" --limit 20 --output $WORKDIR/search-government-releases.json
 
 # LittleSis relationship mapping
-uv run python tools/query_littlesis.py search "<QUERY>"
+uv run python tools/query_littlesis.py search "<QUERY>" --output "$WORKDIR/search-littlesis.json"
 
 # SEC EDGAR full-text search (with aggregation facets for network mapping)
-uv run python tools/query_edgar.py search "<QUERY>" --size 10 --facets
+uv run python tools/query_edgar.py search "<QUERY>" --size 10 --facets --output "$WORKDIR/search-edgar.json"
 
 # FAA Registry (if ingested — aviation-related queries)
-uv run python tools/ingest_faa.py search "<QUERY>"
+uv run python tools/ingest_faa.py search "<QUERY>" --output "$WORKDIR/search-faa.json"
 
-# NYC ACRIS property records
-uv run python tools/query_acris.py party "<QUERY>"
+# Build the property -> recorder -> court plan from the target, active profile,
+# known addresses, aliases, and every cataloged source capability.
+uv run python tools/public_records_search_plan.py "<QUERY>" \
+  --output "$WORKDIR/search-public-record-plan.json"
+
+# Unified property records (normalized local observations by default)
+uv run python tools/query_property.py owner "<QUERY>" --output "$WORKDIR/search-property.json"
+uv run python tools/query_property.py sources \
+  --output "$WORKDIR/search-property-sources.json"
+
+# Unified state/local court records and source inventory
+uv run python tools/query_state_courts.py search "<QUERY>" --output "$WORKDIR/search-state-courts.json"
+uv run python tools/query_state_courts.py sources \
+  --output "$WORKDIR/search-state-court-sources.json"
+
+# If the plan selects a catalog route such as an account, formal feed, paid
+# product, request, or physical office, render the concrete acquisition action.
+uv run python tools/public_records_actions.py plan <SOURCE_ID> \
+  --operation <OPERATION> --selector "<QUERY>" \
+  --output "$WORKDIR/search-public-record-action.json"
 
 # FEC campaign finance
-uv run python tools/query_fec.py donor "<QUERY>" --limit 20
+uv run python tools/query_fec.py donor "<QUERY>" --limit 20 --output "$WORKDIR/search-fec.json"
 
 # Federal lobbying disclosures
-uv run python tools/query_lobbying.py client "<QUERY>"
+uv run python tools/query_lobbying.py client "<QUERY>" --output "$WORKDIR/search-lobbying.json"
 
 # FARA foreign agents
-uv run python tools/query_fara.py search "<QUERY>"
+uv run python tools/query_fara.py search "<QUERY>" --output "$WORKDIR/search-fara.json"
 
 # GLEIF corporate hierarchy (LEI records — financial entities only)
-uv run python tools/query_gleif.py search "<QUERY>" --limit 10
+uv run python tools/query_gleif.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-gleif.json"
 
 # UK Companies House (if API key configured)
 uv run python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-companies.json"
 uv run python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10 --output "$WORKDIR/search-uk-officers.json"
 
 # OpenSanctions (PEP/sanctions check — if ingested)
-uv run python tools/query_opensanctions.py search "<QUERY>" --limit 10
+uv run python tools/query_opensanctions.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-opensanctions.json"
 
 # SEC Enforcement Actions (litigation releases, admin proceedings, AAERs)
-uv run python tools/query_sec_enforcement.py search "<QUERY>" --limit 10
+uv run python tools/query_sec_enforcement.py search "<QUERY>" --limit 10 --output "$WORKDIR/search-sec-enforcement.json"
 
 # DS10 Deutsche Bank financial records (entity/counterparty search)
-uv run python tools/parse_ds10_financials.py query --entity "<QUERY>"
+uv run python tools/parse_ds10_financials.py query --entity "<QUERY>" > "$WORKDIR/search-ds10.txt"
 
 # USVI corporate registry (Catalyst web scraper — search only, no bulk)
-uv run python tools/ingest_usvi.py search "<QUERY>"
+uv run python tools/ingest_usvi.py search "<QUERY>" > "$WORKDIR/search-usvi.txt"
 
 # DC DLCP (ArcGIS FeatureServer — 492K entities, no auth)
 uv run python tools/ingest_dc.py search "<QUERY>" --output $WORKDIR/search-dc.json
@@ -202,6 +226,14 @@ uv run python tools/query_sam.py contracts "<QUERY>" --output $WORKDIR/search-sa
 uv run python tools/ingest_sam.py search "<QUERY>" --output $WORKDIR/search-sam-bulk.json
 ```
 
+Use the public-record plan's dependency order and capability labels to choose
+direct adapters for addresses, parcels, recorder parties, case numbers, docket
+entries, and documents. If an acquisition action should be tracked in the
+investigation, rerun the rendered action with
+`public_records_actions.py enqueue`. Preserve each result's source ID, status,
+coverage, continuation, and warnings; a non-query route or unavailable source
+is source coverage information, not a zero-result search.
+
 ### 1c. Investigation Corpus Tools (from profile)
 
 Search any investigation-specific corpus tools listed in `corpus_tools` from the investigation profile. These are data sources tied to the active investigation (e.g., specialized document corpora, FOIA collections, case-specific databases). Run each tool listed in the profile that hasn't already been searched:
@@ -245,6 +277,8 @@ log_search("<QUERY>", "opensanctions", result_count)
 log_search("<QUERY>", "sec_enforcement", result_count)
 log_search("<QUERY>", "reporting", result_count)
 log_search("<QUERY>", "government_releases", result_count)
+log_search("<QUERY>", "property_records", result_count)
+log_search("<QUERY>", "state_court_records", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)
@@ -267,9 +301,10 @@ log_search("<QUERY>", "sam_bulk", result_count)
 ```
 
 ### 3. Deduplicate Results
-- Group results by EFTA ID where available
-- Note which sources returned each result
-- Flag results found in 3+ sources as high-confidence corroboration
+- Group results by canonical evidence ID or underlying record before counting sources
+- Treat mirrors, re-OCRs, and multiple indexes of the same document as redundant coverage, not corroboration
+- Note which sources returned each deduplicated result
+- Flag a claim as corroborated only when 2+ independent underlying records support it
 - Flag results from only 1 source as needing verification
 
 ### 4. Present Consolidated Results
@@ -278,13 +313,13 @@ Format:
 ```
 SEARCH: "<QUERY>" across 7 sources
 
-=== CORROBORATED (3+ sources) ===
-<DOC_ID_1> — [Source A, Source B, Source C]
+=== CORROBORATED (2+ independent records) ===
+<CLAIM_1> — [Independent record A, Independent record B]
   Description of corroborated finding
 
-=== MULTI-SOURCE (2 sources) ===
-<DOC_ID_2> — [Source A, Source D]
-  Description of multi-source finding
+=== REDUNDANT / MULTI-INDEX COVERAGE ===
+<DOC_ID_2> — [Index A, mirror B, re-OCR C]
+  One underlying document; useful cross-check, not corroboration
 
 === SINGLE-SOURCE ===
 [Source file #12345] — <QUERY> mentioned in document
@@ -298,6 +333,8 @@ Unified:      5 hits
 Registry:     2 hits (FL, NY)
 Aleph:        4 hits
 CourtListener: 1 hit
+Property records: 2 hits (list source IDs and jurisdictions)
+State/local courts: 1 hit (or report human_required/terms_blocked/unavailable)
 990:          0 hits
 UCC:          0 hits
 GDELT:        12 hits (articles), 8 hits (context)
@@ -343,6 +380,6 @@ If you encounter bugs in CLI tools (crashes, incorrect output, missing features)
 
 ## Context Management
 
-- **All searches above already use `--output`** — this is critical for keeping context lean
+- **All searches above use `--output` or explicit `$WORKDIR` redirection** — this is critical for keeping context lean
 - **Do NOT `cat` or `Read` the output JSON files unless you need specific details** for a finding
 - If spawned as a sub-agent, write results to `$WORKDIR/report-search-<query-slug>.md` using the consolidated results format from section 4 above.

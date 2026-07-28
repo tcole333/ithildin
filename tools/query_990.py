@@ -26,10 +26,11 @@ Usage:
 """
 
 import argparse
-import json
 import sqlite3
 import sys
 from collections import defaultdict
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
 from pathlib import Path
 
 try:
@@ -59,6 +60,115 @@ def get_db():
     db = sqlite3.connect(str(DB_PATH), timeout=30)
     db.row_factory = sqlite3.Row
     return db
+
+
+def _organization_name(db, ein):
+    """Return the best locally available nonprofit name for an EIN."""
+    lookups = (
+        ("financials", "ein", "filer_name", "tax_year"),
+        ("filings", "ein", "filer_name", "tax_year"),
+        ("grants", "filer_ein", "filer_name", "tax_year"),
+        ("grants", "recipient_ein", "recipient_name", "tax_year"),
+    )
+    for table, ein_column, name_column, order_column in lookups:
+        row = db.execute(
+            f"""
+            SELECT {name_column} AS name
+            FROM {table}
+            WHERE {ein_column} = ?
+              AND {name_column} IS NOT NULL
+              AND trim({name_column}) != ''
+            ORDER BY {order_column} DESC
+            LIMIT 1
+            """,
+            (ein,),
+        ).fetchone()
+        if row:
+            return row["name"]
+    return ein
+
+
+def _latest_meaningful_financial(db, ein):
+    """Prefer the latest row carrying financial values over a newer zero stub."""
+    return db.execute(
+        """
+        SELECT *
+        FROM financials
+        WHERE ein = ?
+        ORDER BY
+            CASE WHEN
+                COALESCE(total_revenue, 0) != 0 OR
+                COALESCE(total_expenses, 0) != 0 OR
+                COALESCE(program_expenses, 0) != 0 OR
+                COALESCE(total_assets_eoy, 0) != 0
+            THEN 0 ELSE 1 END,
+            tax_year DESC
+        LIMIT 1
+        """,
+        (ein,),
+    ).fetchone()
+
+
+def _has_local_ein_data(db, ein):
+    """Return whether any local bulk table has a record for an EIN."""
+    lookups = (
+        ("financials", "ein"),
+        ("filings", "ein"),
+        ("grants", "filer_ein"),
+        ("grants", "recipient_ein"),
+        ("officers", "ein"),
+        ("checklist_flags", "ein"),
+    )
+    for table, column in lookups:
+        row = db.execute(
+            f"SELECT 1 FROM {table} WHERE {column} = ? LIMIT 1",
+            (ein,),
+        ).fetchone()
+        if row:
+            return True
+    return False
+
+
+def _fetch_propublica_org_silent(ein):
+    """Fetch optional ProPublica enrichment without duplicating CLI output."""
+    if not _pp_get_org:
+        return None
+    with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+        return _pp_get_org(ein)
+
+
+def _propublica_financial(pp_data):
+    """Normalize the latest ProPublica filing carrying financial values."""
+    if not pp_data:
+        return None
+    organization = pp_data.get("organization", {})
+    filings = sorted(
+        pp_data.get("filings_with_data", []),
+        key=lambda filing: filing.get("tax_prd_yr") or 0,
+        reverse=True,
+    )
+    for filing in filings:
+        values = (
+            filing.get("totrevenue"),
+            filing.get("totfuncexpns"),
+            filing.get("totassetsend"),
+        )
+        if not any(value not in {None, 0} for value in values):
+            continue
+        return {
+            "object_id": filing.get("object_id"),
+            "ein": str(organization.get("ein") or ""),
+            "filer_name": organization.get("name"),
+            "tax_year": filing.get("tax_prd_yr"),
+            "return_type": filing.get("formtype"),
+            "total_revenue": filing.get("totrevenue"),
+            "total_expenses": filing.get("totfuncexpns"),
+            "program_expenses": None,
+            "total_assets_eoy": filing.get("totassetsend"),
+            "program_expense_ratio": None,
+            "source": "propublica_nonprofit_explorer",
+        }
+    return None
 
 
 def _has_fts():
@@ -621,14 +731,14 @@ def cmd_lookup(args):
     """Comprehensive view of a nonprofit: metadata + financials + officers + grants."""
     db = get_db()
     ein = args.ein.replace("-", "")
+    has_local_data = _has_local_ein_data(db, ein)
 
     result = {"ein": ein}
 
     # ProPublica org metadata (NTEE, subsection, ruling date, address)
     pp_data = None
     if _pp_get_org:
-        print("Fetching org metadata from ProPublica...")
-        pp_data = _pp_get_org(ein)
+        pp_data = _fetch_propublica_org_silent(ein)
         if pp_data:
             org = pp_data.get("organization", {})
             result["metadata"] = {
@@ -643,13 +753,33 @@ def cmd_lookup(args):
                 "foundation_code": org.get("foundation_code"),
             }
 
+    if not has_local_data and not pp_data:
+        print(
+            f"Error: no local IRS 990 data for EIN {ein}, and optional "
+            "ProPublica enrichment returned no data",
+            file=sys.stderr,
+        )
+        db.close()
+        raise SystemExit(2)
+
     # Latest financials from bulk DB
-    fin = db.execute("""
-        SELECT * FROM financials WHERE ein = ? ORDER BY tax_year DESC LIMIT 1
-    """, (ein,)).fetchone()
+    local_fin = _latest_meaningful_financial(db, ein)
+    local_fin = dict(local_fin) if local_fin else None
+    pp_fin = _propublica_financial(pp_data)
+    if pp_fin and (
+        not local_fin
+        or (pp_fin.get("tax_year") or 0) >= (local_fin.get("tax_year") or 0)
+    ):
+        fin = pp_fin
+    else:
+        fin = local_fin
     if fin:
         f = dict(fin)
-        org_name = f.get("filer_name", result.get("metadata", {}).get("name", ein))
+        org_name = (
+            f.get("filer_name")
+            or result.get("metadata", {}).get("name")
+            or _organization_name(db, ein)
+        )
         result["org_name"] = org_name
         print(f"\n{'='*60}")
         print(f"{org_name} (EIN {ein})")
@@ -667,7 +797,7 @@ def cmd_lookup(args):
         print(f"    Assets:   {_fmt_amount(f.get('total_assets_eoy')):>14}")
         result["financials"] = f
     else:
-        org_name = result.get("metadata", {}).get("name", ein)
+        org_name = result.get("metadata", {}).get("name") or _organization_name(db, ein)
         result["org_name"] = org_name
         print(f"\n{org_name} (EIN {ein})")
         print("  No financials in bulk DB")
@@ -717,11 +847,14 @@ def cmd_lookup(args):
     if flags:
         f = dict(flags)
         alerts = []
-        if f.get("excess_benefit_transaction"): alerts.append("Excess benefit transaction reported")
-        if not f.get("conflict_of_interest_policy"): alerts.append("No conflict of interest policy")
-        if not f.get("whistleblower_policy"): alerts.append("No whistleblower policy")
+        if f.get("excess_benefit_transaction"):
+            alerts.append("Excess benefit transaction reported")
+        if not f.get("conflict_of_interest_policy"):
+            alerts.append("No conflict of interest policy")
+        if not f.get("whistleblower_policy"):
+            alerts.append("No whistleblower policy")
         if alerts:
-            print(f"\n  ALERTS:")
+            print("\n  ALERTS:")
             for a in alerts:
                 print(f"    - {a}")
 
@@ -739,7 +872,7 @@ def cmd_filings(args):
         print("ProPublica module not available — cannot fetch filing list", file=sys.stderr)
         return
 
-    data = _pp_get_org(ein)
+    data = _fetch_propublica_org_silent(ein)
     if not data:
         print(f"No data found for EIN {ein}")
         return
@@ -752,7 +885,8 @@ def cmd_filings(args):
         print(f"\n  Filings with data ({len(filings_data)}):")
         for f in filings_data:
             yr = f.get("tax_prd_yr", "?")
-            form = f.get("formtype", "?")
+            form_value = f.get("formtype", "?")
+            form = "?" if form_value is None else str(form_value)
             rev = f.get("totrevenue", 0)
             exp = f.get("totfuncexpns", 0)
             pdf = f.get("pdf_url", "")
@@ -807,11 +941,16 @@ def cmd_officers(args):
         print(f"\n  {latest_year} ({len(latest)} officers):")
         for o in latest:
             roles = []
-            if o["is_director"]: roles.append("DIR")
-            if o["is_officer"]: roles.append("OFF")
-            if o["is_key_employee"]: roles.append("KEY")
-            if o["is_highest_comp"]: roles.append("HCE")
-            if o["is_former"]: roles.append("FMR")
+            if o["is_director"]:
+                roles.append("DIR")
+            if o["is_officer"]:
+                roles.append("OFF")
+            if o["is_key_employee"]:
+                roles.append("KEY")
+            if o["is_highest_comp"]:
+                roles.append("HCE")
+            if o["is_former"]:
+                roles.append("FMR")
             role_str = ",".join(roles) if roles else ""
             print(f"    {o['person_name']:35s} {o['title']:25s} "
                   f"comp: {_fmt_amount(o['total_comp']):>12s}  [{role_str}]")
@@ -925,11 +1064,6 @@ def cmd_red_flags(args):
         SELECT * FROM insider_transactions WHERE ein = ? ORDER BY amount DESC
     """, (ein,)).fetchall()
 
-    # Schedule J (high comp detail)
-    comp_detail = db.execute("""
-        SELECT * FROM compensation_detail WHERE ein = ? ORDER BY total_comp_from_org DESC LIMIT 10
-    """, (ein,)).fetchall()
-
     org_name = fin["filer_name"] if fin else ein
     print(f"\nRed-flag analysis: {org_name} (EIN {ein})")
 
@@ -973,7 +1107,7 @@ def cmd_red_flags(args):
         print(f"    Assets EOY:             {_fmt_amount(f.get('total_assets_eoy'))}")
 
     if officers:
-        print(f"\n  TOP COMPENSATED OFFICERS:")
+        print("\n  TOP COMPENSATED OFFICERS:")
         total_exp = fin["total_expenses"] if fin and fin["total_expenses"] else 0
         for o in [dict(r) for r in officers[:10]]:
             comp = o["total_comp"]
@@ -1017,7 +1151,7 @@ def cmd_red_flags(args):
         for a in alerts:
             print(f"    • {a}")
     else:
-        print(f"\n  No red flags detected.")
+        print("\n  No red flags detected.")
 
     result = {"ein": ein, "org_name": org_name, "alerts": alerts}
     write_output(result, args, summary=f"990 red-flags for EIN {ein}")
@@ -1067,8 +1201,7 @@ def cmd_flow(args):
     min_amount = args.min_amount
 
     # Get seed name
-    seed_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (seed_ein,)).fetchone()
-    seed_name = seed_row["filer_name"] if seed_row else seed_ein
+    seed_name = _organization_name(db, seed_ein)
 
     visited = set()
     raw_edges = []  # (from_ein, from_name, to_ein, to_name, total, count, years)
@@ -1096,8 +1229,7 @@ def cmd_flow(args):
                     ORDER BY total DESC LIMIT ?
                 """, (ein, min_amount, limit)).fetchall()
 
-                filer_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (ein,)).fetchone()
-                filer_name = filer_name_row["filer_name"] if filer_name_row else ein
+                filer_name = _organization_name(db, ein)
 
                 for r in rows:
                     raw_edges.append({
@@ -1120,8 +1252,7 @@ def cmd_flow(args):
                     ORDER BY total DESC LIMIT ?
                 """, (ein, min_amount, limit)).fetchall()
 
-                recip_name_row = db.execute("SELECT recipient_name FROM grants WHERE recipient_ein = ? LIMIT 1", (ein,)).fetchone()
-                recip_name = recip_name_row["recipient_name"] if recip_name_row else ein
+                recip_name = _organization_name(db, ein)
 
                 for r in rows:
                     raw_edges.append({
@@ -1147,13 +1278,11 @@ def cmd_flow(args):
             WHERE filer_ein = ? AND recipient_ein = ? AND cash_amount >= ?
         """, (from_ein, to_ein, min_amount)).fetchone()
         if row and row["total"] and row["total"] > 0:
-            from_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (from_ein,)).fetchone()
-            to_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (to_ein,)).fetchone()
             raw_edges.append({
                 "from_ein": from_ein,
-                "from_name": from_name_row["filer_name"] if from_name_row else from_ein,
+                "from_name": _organization_name(db, from_ein),
                 "to_ein": to_ein,
-                "to_name": to_name_row["filer_name"] if to_name_row else to_ein,
+                "to_name": _organization_name(db, to_ein),
                 "amount": row["total"], "grant_count": row["cnt"],
                 "years": sorted(set(int(y) for y in (row["years"] or "").split(",") if y)),
             })
@@ -1283,10 +1412,22 @@ def cmd_shared_officers(args):
 
     db.close()
 
-    # Group by normalized name
+    def officer_match_key(name):
+        """Normalize titles/punctuation and ignore only interior middle initials."""
+        tokens = normalize_person_name(name).split()
+        if len(tokens) >= 3:
+            tokens = [
+                token
+                for index, token in enumerate(tokens)
+                if index in {0, len(tokens) - 1} or len(token) > 1
+            ]
+        return " ".join(tokens)
+
+    # Group by normalized name. Preserve all observed spellings so the
+    # middle-initial heuristic remains visible in the output.
     by_person = defaultdict(list)
     for r in rows:
-        key = normalize_person_name(r["person_name"])
+        key = officer_match_key(r["person_name"])
         by_person[key].append(dict(r))
 
     # Filter to people appearing in 2+ of the specified EINs
@@ -1306,7 +1447,13 @@ def cmd_shared_officers(args):
                     "years_active": sorted(set(r["tax_year"] for r in ein_records)),
                 })
             shared.append({
-                "name": records[0]["person_name"],
+                "name": max(
+                    (record["person_name"] for record in records),
+                    key=lambda name: (len(name.split()), len(name)),
+                ),
+                "name_variants": sorted(
+                    {record["person_name"] for record in records}
+                ),
                 "normalized": norm_name,
                 "org_count": len(unique_eins),
                 "organizations": orgs,

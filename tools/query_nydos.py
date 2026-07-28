@@ -45,9 +45,9 @@ except ImportError:
             pass
 
 try:
-    from tools.query_registry import get_db, _rebuild_fts
+    from tools.query_registry import get_db
 except ImportError:
-    from query_registry import get_db, _rebuild_fts
+    from query_registry import get_db
 
 
 # ══════════════════════════════════════════════════════════
@@ -330,7 +330,7 @@ def cmd_entity(args):
         sop_name = sop.get("name") or ""
         sop_addr = _format_address(sop)
         if sop_name or sop_addr:
-            print(f"\n    Service of Process:")
+            print("\n    Service of Process:")
             if sop_name:
                 print(f"      Name: {sop_name}")
             if sop_addr:
@@ -370,7 +370,7 @@ def cmd_entity(args):
     # Stock Info
     stocks = data.get("stockShareInfoList", [])
     if stocks:
-        print(f"\n    Stock Information:")
+        print("\n    Stock Information:")
         for s in stocks:
             print(f"      {s.get('stockTypeDescriptor', '?')}: {s.get('quantity', '?')} shares @ ${s.get('stockValue', '?')}")
 
@@ -428,7 +428,6 @@ def cmd_filings(args):
         date = f.get("fileDate", "")[:10] if f.get("fileDate") else "?"
         doc_type = f.get("documentType", "?")
         file_num = f.get("fileNumber", "")
-        pages = f.get("pageCount", "")
         print(f"  {date}: {doc_type}" + (f" [{file_num}]" if file_num else ""))
         if f.get("amendmentDescription"):
             print(f"    Amendment: {f['amendmentDescription']}")
@@ -500,6 +499,46 @@ STATUS_MAP = {
 }
 
 
+def _sync_registry_entity_fts(db, old_row, entity_id):
+    """Replace one registry entity's FTS terms without rebuilding the corpus."""
+    if old_row is not None:
+        db.execute(
+            """
+            INSERT INTO registry_entities_fts(
+                registry_entities_fts, rowid, entity_name,
+                principal_address, purpose
+            ) VALUES ('delete', ?, ?, ?, ?)
+            """,
+            [
+                old_row["id"],
+                old_row["entity_name"],
+                old_row["principal_address"],
+                old_row["purpose"],
+            ],
+        )
+    new_row = db.execute(
+        """
+        SELECT id, entity_name, principal_address, purpose
+        FROM registry_entities
+        WHERE id = ?
+        """,
+        [entity_id],
+    ).fetchone()
+    db.execute(
+        """
+        INSERT INTO registry_entities_fts(
+            rowid, entity_name, principal_address, purpose
+        ) VALUES (?, ?, ?, ?)
+        """,
+        [
+            new_row["id"],
+            new_row["entity_name"],
+            new_row["principal_address"],
+            new_row["purpose"],
+        ],
+    )
+
+
 def _ingest_entity_to_registry(db, dos_id, entity_name=None):
     """Fetch entity from DOS API and ingest into registry.db. Returns entity_id or None."""
     # Fetch detail
@@ -543,13 +582,38 @@ def _ingest_entity_to_registry(db, dos_id, entity_name=None):
 
     source_url = f"https://apps.dos.ny.gov/publicInquiry/EntityDisplay?dosID={dos_id}"
 
+    old_fts_row = db.execute(
+        """
+        SELECT id, entity_name, principal_address, purpose
+        FROM registry_entities
+        WHERE source_jurisdiction = 'ny' AND source_id = ?
+        """,
+        [str(dos_id)],
+    ).fetchone()
+
     db.execute("""
-        INSERT OR REPLACE INTO registry_entities (
+        INSERT INTO registry_entities (
             source_jurisdiction, source_id, entity_name, entity_type, status,
             formation_date, dissolution_date, principal_address, principal_city,
             principal_state, principal_zip, principal_country,
             state_of_formation, purpose, source_url, raw_data
         ) VALUES ('ny', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(source_jurisdiction, source_id) DO UPDATE SET
+            entity_name = excluded.entity_name,
+            entity_type = excluded.entity_type,
+            status = excluded.status,
+            formation_date = excluded.formation_date,
+            dissolution_date = excluded.dissolution_date,
+            principal_address = excluded.principal_address,
+            principal_city = excluded.principal_city,
+            principal_state = excluded.principal_state,
+            principal_zip = excluded.principal_zip,
+            principal_country = excluded.principal_country,
+            state_of_formation = excluded.state_of_formation,
+            purpose = excluded.purpose,
+            source_url = excluded.source_url,
+            raw_data = excluded.raw_data,
+            updated_at = CURRENT_TIMESTAMP
     """, [
         str(dos_id), name, etype, status, filed_date,
         inactive_date or None,
@@ -569,6 +633,7 @@ def _ingest_entity_to_registry(db, dos_id, entity_name=None):
         [str(dos_id)]
     ).fetchone()
     entity_id = row[0]
+    _sync_registry_entity_fts(db, old_fts_row, entity_id)
 
     # CEO as officer
     ceo = detail.get("ceo", {})
@@ -577,7 +642,7 @@ def _ingest_entity_to_registry(db, dos_id, entity_name=None):
         ceo_street = (ceo_addr.get("streetAddress1") or ceo_addr.get("streetAddress") or "").strip()
         ceo_line2 = (ceo_addr.get("addressLine2") or "").strip()
         try:
-            db.execute("""
+            cursor = db.execute("""
                 INSERT OR IGNORE INTO registry_officers
                 (entity_id, officer_name, title, officer_type, address, city, state, zip)
                 VALUES (?, ?, 'CEO', 'person', ?, ?, ?, ?)
@@ -588,6 +653,22 @@ def _ingest_entity_to_registry(db, dos_id, entity_name=None):
                 (ceo_addr.get("state") or "").strip() or None,
                 (ceo_addr.get("zipCode") or "").strip() or None,
             ])
+            if cursor.rowcount:
+                officer = db.execute(
+                    """
+                    SELECT id, officer_name, address
+                    FROM registry_officers
+                    WHERE id = ?
+                    """,
+                    [cursor.lastrowid],
+                ).fetchone()
+                db.execute(
+                    """
+                    INSERT INTO registry_officers_fts(rowid, officer_name, address)
+                    VALUES (?, ?, ?)
+                    """,
+                    [officer["id"], officer["officer_name"], officer["address"]],
+                )
         except sqlite3.IntegrityError:
             pass
 
@@ -655,10 +736,6 @@ def cmd_ingest(args):
     entity_id = _ingest_entity_to_registry(db, args.dos_id)
     if entity_id:
         db.commit()
-        try:
-            _rebuild_fts(db)
-        except Exception:
-            pass
         row = db.execute("SELECT entity_name FROM registry_entities WHERE id=?", [entity_id]).fetchone()
         name = row[0] if row else "?"
         print(f"Ingested: {name} (DOS ID: {args.dos_id}, registry ID: {entity_id})")
@@ -711,10 +788,6 @@ def cmd_ingest_search(args):
             db.commit()
 
     db.commit()
-    try:
-        _rebuild_fts(db)
-    except Exception:
-        pass
 
     # Log ingest
     try:

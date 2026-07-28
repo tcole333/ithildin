@@ -507,7 +507,6 @@ def clean_entity_name(name):
         'SOI I I tERN TRUST': 'SOUTHERN TRUST COMPANY, INC.',
         'DARREN K. 1NDYKE': 'DARREN K. INDYKE PLLC',
         'JEGE. INC': 'JEGE, INC',
-        'JEGE. LLC': 'JEGE, LLC',
         'JEGE, LLC': 'JEGE, LLC',
         'JECTE, LLC': 'JEGE, LLC',
         'JECTE. LLC': 'JEGE, LLC',
@@ -564,7 +563,11 @@ def parse_db_statement(file_id, filename, text):
         text[:2000], re.DOTALL | re.IGNORECASE
     )
     if holder_block:
-        lines = [l.strip() for l in holder_block.group(1).strip().split('\n') if l.strip()]
+        lines = [
+            line.strip()
+            for line in holder_block.group(1).strip().split('\n')
+            if line.strip()
+        ]
         if lines:
             # First non-empty line is the entity name
             candidate = lines[0]
@@ -1114,7 +1117,6 @@ def parse_fedwire(file_id, filename, text):
         header = wire_blocks[i]
         block = wire_blocks[i + 1] if i + 1 < len(wire_blocks) else ''
 
-        is_credit = 'CREDIT' in header.upper()
         is_debit = 'DEBIT' in header.upper()
 
         # Extract date
@@ -1161,11 +1163,9 @@ def parse_fedwire(file_id, filename, text):
 
         # Extract banks
         sending_bank = None
-        receiving_bank = None
         sb_match = re.search(r"Sending\s+Bank\s+Receiving\s+Bank\s*\n\s*([A-Z][A-Z\s.,&\'\-/]+?)(?:\s{2,}|\n)([A-Z][A-Z\s.,&\'\-/]+)", block)
         if sb_match:
             sending_bank = sb_match.group(1).strip()
-            receiving_bank = sb_match.group(2).strip()
 
         # Determine direction
         if is_debit:
@@ -2449,19 +2449,43 @@ def query_large(db, min_amount, limit=100):
     print(f"\n  {len(rows)} transactions")
 
 
-def query_counterparty(db, counterparty, limit=50):
+def query_counterparty(
+    db,
+    counterparty,
+    limit=50,
+    date_start=None,
+    date_end=None,
+):
     """Query transactions involving a specific counterparty (not the Epstein entity)."""
     print(f"=== Counterparty: {counterparty} ===\n")
 
-    rows = db.execute("""
+    conditions = [
+        """(
+            (sender LIKE ? AND receiver NOT LIKE ?)
+            OR (receiver LIKE ? AND sender NOT LIKE ?)
+        )"""
+    ]
+    params = [
+        f"%{counterparty}%",
+        f"%{counterparty}%",
+        f"%{counterparty}%",
+        f"%{counterparty}%",
+    ]
+    if date_start:
+        conditions.append("tx_date >= ?")
+        params.append(date_start)
+    if date_end:
+        conditions.append("tx_date <= ?")
+        params.append(date_end)
+    params.append(limit)
+
+    rows = db.execute(f"""
         SELECT tx_date, direction, amount, currency, sender, receiver, bank, efta_id
         FROM ds10_transactions
-        WHERE (sender LIKE ? AND receiver NOT LIKE ?)
-           OR (receiver LIKE ? AND sender NOT LIKE ?)
+        WHERE {" AND ".join(conditions)}
         ORDER BY amount DESC
         LIMIT ?
-    """, (f'%{counterparty}%', f'%{counterparty}%',
-          f'%{counterparty}%', f'%{counterparty}%', limit)).fetchall()
+    """, params).fetchall()
 
     for r in rows:
         sender = (r[4] or 'UNKNOWN')[:35]
@@ -2609,12 +2633,18 @@ def main():
     elif args.command == 'query':
         if args.entity:
             query_entity(db, args.entity, args.limit or 50)
+        elif args.counterparty:
+            query_counterparty(
+                db,
+                args.counterparty,
+                args.limit or 50,
+                date_start=args.date_start,
+                date_end=args.date_end,
+            )
         elif args.date_start and args.date_end:
             query_date_range(db, args.date_start, args.date_end, args.limit or 100)
         elif args.amount_min:
             query_large(db, args.amount_min, args.limit or 100)
-        elif args.counterparty:
-            query_counterparty(db, args.counterparty, args.limit or 50)
         else:
             print("ERROR: query requires --entity, --date-start/--date-end, --amount-min, or --counterparty")
             sys.exit(1)

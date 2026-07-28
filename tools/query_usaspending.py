@@ -14,6 +14,7 @@ Usage:
     uv run python tools/query_usaspending.py recipient "Palantir Technologies"
     uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC." --limit 10
     uv run python tools/query_usaspending.py uei "RN99S3S7N977"
+    uv run python tools/query_usaspending.py transactions-keyword "skip tracing" --all-pages
 """
 
 import argparse
@@ -22,7 +23,7 @@ import os
 import re
 import ssl
 import sys
-import time
+from datetime import date
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -53,6 +54,32 @@ IDV_AWARD_TYPES = ["IDV_A", "IDV_B", "IDV_B_A", "IDV_B_B", "IDV_B_C", "IDV_C", "
 
 # COVID-19 Disaster Emergency Fund Codes (DEFC)
 COVID_DEFC = ["L", "M", "N", "O", "P", "U", "V"]
+ADVANCED_SEARCH_LIMIT_MAX = 100
+
+
+def _advanced_search_limit(value):
+    """Validate page sizes accepted by USAspending advanced-search endpoints."""
+    try:
+        limit = int(value)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError("limit must be an integer") from exc
+    if not 1 <= limit <= ADVANCED_SEARCH_LIMIT_MAX:
+        raise argparse.ArgumentTypeError(
+            f"limit must be between 1 and {ADVANCED_SEARCH_LIMIT_MAX}"
+        )
+    return limit
+
+
+def _agency_filter(args):
+    """Build an awarding-agency filter with an explicit hierarchy tier."""
+    agency = getattr(args, "agency", None)
+    if not agency:
+        return None
+    return {
+        "type": "awarding",
+        "tier": getattr(args, "agency_tier", None) or "toptier",
+        "name": agency,
+    }
 
 def _fetch_post(endpoint, data):
     """Fetch from USAspending API using POST."""
@@ -180,15 +207,9 @@ def cmd_recipient(args):
 
     # Use the first match
     recipient = search_result["results"][0]
-    # The profile API often needs a hash, but sometimes works with UEI
-    # Let's try to get more details via search/recipient
-    
     recipient_name = recipient.get("recipient_name")
     uei = recipient.get("uei")
-    print(f"Recipient: {recipient_name}")
-    print(f"UEI: {uei}")
-    print("-" * 40)
-    
+
     # Get spending over time for this recipient
     spending_data = {
         "filters": {
@@ -199,9 +220,31 @@ def cmd_recipient(args):
     
     # Spending by agency
     agency_spending = _fetch_post("/search/spending_by_category/awarding_agency/", spending_data)
-    if agency_spending and agency_spending.get("results"):
+    agency_results = (
+        agency_spending.get("results", [])
+        if isinstance(agency_spending, dict)
+        else []
+    )
+    summary = {
+        "recipient": recipient,
+        "spending_by_agency": agency_results,
+    }
+    if write_output(
+        summary,
+        args,
+        summary=f"USAspending recipient summary for '{args.query}'",
+    ):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(summary, indent=2))
+        return
+
+    print(f"Recipient: {recipient_name}")
+    print(f"UEI: {uei}")
+    print("-" * 40)
+    if agency_results:
         print("Spending by Agency:")
-        for r in agency_spending["results"][:5]:
+        for r in agency_results[:5]:
             print(f"  {r.get('name')}: ${r.get('amount', 0):,.2f}")
     
     print("\nUse 'awards' command to see individual contract details.")
@@ -252,8 +295,7 @@ def cmd_covid(args):
 
     print(f"Found {len(results)} COVID-19 relief awards:")
     for r in results:
-        amount_val = r.get('Award Amount')
-        if amount_val is None: amount_val = 0
+        amount_val = r.get('Award Amount') or 0
         amt = f"${float(amount_val):,.2f}"
         print(f"  {r.get('Award ID')} | {amt} | {r.get('Recipient Name')}")
         print(f"    Agency: {r.get('Awarding Agency')}")
@@ -288,8 +330,7 @@ def cmd_loans(args):
     
     print(f"Found {len(results)} loan awards:")
     for r in results:
-        amount_val = r.get('Award Amount')
-        if amount_val is None: amount_val = 0
+        amount_val = r.get('Award Amount') or 0
         amt = f"${float(amount_val):,.2f}"
         print(f"  {r.get('Award ID')} | {amt} | {r.get('Recipient Name')}")
         print(f"    Agency: {r.get('Awarding Agency')}")
@@ -311,13 +352,99 @@ def _fmt_money(val):
         return str(val)
 
 
-def cmd_award_detail(args):
-    """Get full detail for a specific award by generated_unique_award_id or internal ID."""
-    result = _fetch_get(f"/awards/{args.award_id}/")
-    if not result:
-        return
+def _is_generated_award_identifier(award_id):
+    """Return whether an identifier can be sent directly to the detail API."""
+    return award_id.isdigit() or award_id.startswith(("CONT_", "ASST_"))
 
-    if write_output(result, args, summary=f"USAspending award detail {args.award_id}"):
+
+def _resolve_piid(piid):
+    """Resolve one exact procurement PIID to a generated award identifier."""
+    exact_matches = []
+    unavailable_groups = 0
+    for award_types in (CONTRACT_AWARD_TYPES, IDV_AWARD_TYPES):
+        payload = {
+            "filters": {
+                # The download endpoint has rejected quoted exact-match IDV
+                # filters upstream. Search without quotes, then enforce exact
+                # PIID equality on every candidate below.
+                "award_ids": [piid],
+                "award_type_codes": award_types,
+            },
+            "fields": [
+                "Award ID",
+                "Recipient Name",
+                "Awarding Agency",
+                "Awarding Sub Agency",
+                "Contract Award Type",
+            ],
+            "limit": ADVANCED_SEARCH_LIMIT_MAX,
+            "page": 1,
+        }
+        response = _fetch_post("/search/spending_by_award/", payload)
+        if response is None:
+            unavailable_groups += 1
+            continue
+        for row in response.get("results", []):
+            if str(row.get("Award ID") or "").strip().upper() != piid.upper():
+                continue
+            generated_id = (
+                row.get("generated_internal_id")
+                or row.get("generated_unique_award_id")
+                or row.get("internal_id")
+            )
+            if generated_id is not None:
+                exact_matches.append((str(generated_id), row))
+
+    unique_matches = {}
+    for generated_id, row in exact_matches:
+        unique_matches.setdefault(generated_id, row)
+
+    if unavailable_groups:
+        print(
+            f"ERROR: Could not resolve PIID {piid} because "
+            f"{unavailable_groups} USAspending award search request(s) failed.",
+            file=sys.stderr,
+        )
+        return None
+    if len(unique_matches) == 1:
+        return next(iter(unique_matches))
+    if not unique_matches:
+        print(
+            f"ERROR: No exact USAspending award matched PIID {piid}. "
+            "Run the 'awards' command to inspect candidate identifiers.",
+            file=sys.stderr,
+        )
+        return None
+
+    print(
+        f"ERROR: PIID {piid} matched {len(unique_matches)} awards. "
+        "Pass one generated_unique_award_id explicitly:",
+        file=sys.stderr,
+    )
+    for generated_id, row in unique_matches.items():
+        agency = row.get("Awarding Agency") or "unknown agency"
+        recipient = row.get("Recipient Name") or "unknown recipient"
+        print(
+            f"  {generated_id} | {agency} | {recipient}",
+            file=sys.stderr,
+        )
+    return None
+
+
+def cmd_award_detail(args):
+    """Get full detail for a generated award identifier or exact plain PIID."""
+    requested_id = str(args.award_id).strip()
+    award_id = requested_id
+    if not _is_generated_award_identifier(requested_id):
+        award_id = _resolve_piid(requested_id)
+        if award_id is None:
+            raise SystemExit(1)
+
+    result = _fetch_get(f"/awards/{award_id}/")
+    if not result:
+        raise SystemExit(1)
+
+    if write_output(result, args, summary=f"USAspending award detail {requested_id}"):
         return
 
     print(f"Award: {result.get('generated_unique_award_id', 'N/A')}")
@@ -360,8 +487,9 @@ def cmd_subawards(args):
         # form; send the PIID normally and enforce exactness on returned rows.
         filters["award_ids"] = [args.award_id]
 
-    if args.agency:
-        filters["agencies"] = [{"type": "awarding", "tier": "toptier", "name": args.agency}]
+    agency_filter = _agency_filter(args)
+    if agency_filter:
+        filters["agencies"] = [agency_filter]
 
     award_types = GRANT_AWARD_TYPES if args.grants else CONTRACT_AWARD_TYPES
     filters["award_type_codes"] = award_types
@@ -470,8 +598,9 @@ def cmd_transactions(args):
     elif args.query:
         filters["recipient_search_text"] = [args.query]
 
-    if args.agency:
-        filters["agencies"] = [{"type": "awarding", "tier": "toptier", "name": args.agency}]
+    agency_filter = _agency_filter(args)
+    if agency_filter:
+        filters["agencies"] = [agency_filter]
 
     if args.date_range:
         parts = args.date_range.split(",")
@@ -499,12 +628,94 @@ def cmd_transactions(args):
         return
 
     results = result.get("results", [])
-    total = result.get("page_metadata", {}).get("total", len(results))
+    page_metadata = result.get("page_metadata")
+    if not isinstance(page_metadata, dict):
+        page_metadata = {}
+    reported_total = page_metadata.get("total")
+    returned_recipients = sorted(
+        {
+            (
+                str(row.get("Recipient UEI") or "").strip() or None,
+                str(row.get("Recipient Name") or "").strip() or None,
+            )
+            for row in results
+        },
+        key=lambda item: ((item[1] or ""), (item[0] or "")),
+    )
+    requested_uei = str(args.uei or "").strip().upper()
+    returned_ueis = {
+        str(uei).upper()
+        for uei, _name in returned_recipients
+        if uei
+    }
+    scope_expansion_observed = (
+        any(uei != requested_uei for uei in returned_ueis)
+        if requested_uei and returned_ueis
+        else None
+    )
+    output = {
+        "query": {
+            "recipient_name": args.query,
+            "recipient_uei": args.uei,
+            "agency": args.agency,
+            "agency_tier": (
+                getattr(args, "agency_tier", None) or "toptier"
+                if args.agency
+                else None
+            ),
+            "recipient_scope_expansion_observed": scope_expansion_observed,
+            "recipient_scope_note": (
+                "USAspending recipient_search_text can return affiliated "
+                "recipient records. Compare returned_recipients with the "
+                "requested UEI before combining queries."
+            ),
+        },
+        "pagination": {
+            "requested_page": args.page,
+            "requested_limit": args.limit,
+            "returned_count": len(results),
+            "reported_total": reported_total,
+            "has_next": page_metadata.get("hasNext"),
+            "next_page": page_metadata.get("next"),
+            "raw": page_metadata,
+        },
+        "returned_recipients": [
+            {"recipient_uei": uei, "recipient_name": name}
+            for uei, name in returned_recipients
+        ],
+        "results": results,
+        "messages": result.get("messages", []),
+    }
 
-    if write_output(results, args, summary=f"USAspending transactions ({total} total)"):
+    summary = (
+        f"USAspending transactions (page {args.page}, "
+        f"{len(results)} returned"
+    )
+    if reported_total is not None:
+        summary += f", {reported_total} reported total"
+    else:
+        summary += ", overall total not reported"
+    summary += ")"
+    if write_output(output, args, summary=summary, result_count=len(results)):
         return
 
-    print(f"Found {total} transactions (showing {len(results)}):")
+    if reported_total is None:
+        print(
+            f"Returned {len(results)} transactions on page {args.page}; "
+            "USAspending did not report an overall total."
+        )
+    else:
+        print(f"Found {reported_total} transactions (showing {len(results)}):")
+    if scope_expansion_observed:
+        print(
+            f"WARNING: Requested UEI {args.uei} returned other recipient "
+            "UEIs; this result set includes affiliated recipient records."
+        )
+        for recipient in output["returned_recipients"]:
+            print(
+                f"  {recipient['recipient_uei'] or 'N/A'} | "
+                f"{recipient['recipient_name'] or 'N/A'}"
+            )
     for r in results:
         award_id = r.get("Award ID", "?")
         name = r.get("Recipient Name", "?")
@@ -520,6 +731,145 @@ def cmd_transactions(args):
             print(f"    Desc: {desc[:120]}")
 
     print()
+
+
+def _transactions_keyword_payload(args, page):
+    """Build the verified USAspending transaction-keyword request shape."""
+    filters = {
+        "time_period": [
+            {"start_date": args.start, "end_date": args.end}
+        ],
+        "award_type_codes": CONTRACT_AWARD_TYPES,
+        "keywords": [args.keyword],
+    }
+
+    # spending_by_transaction takes bare code strings here; the
+    # {"naics_code": ..., "is_primary": ...} object form used by the award
+    # endpoints is rejected with HTTP 422 (verified live 2026-07-27).
+    if args.naics:
+        filters["naics_codes"] = [args.naics]
+    if args.psc:
+        filters["psc_codes"] = [args.psc]
+    agency_filter = _agency_filter(args)
+    if agency_filter:
+        filters["agencies"] = [agency_filter]
+
+    return {
+        "filters": filters,
+        "fields": [
+            "Award ID",
+            "Recipient Name",
+            "Transaction Amount",
+            "Action Date",
+            "Mod",
+            "Awarding Sub Agency",
+            "naics_code",
+            "Transaction Description",
+        ],
+        "sort": "Action Date",
+        "order": "asc",
+        "limit": args.limit,
+        "page": page,
+    }
+
+
+def _load_transactions_keyword_file(path):
+    """Load one saved spending_by_transaction response."""
+    try:
+        with open(path) as fixture_file:
+            response = json.load(fixture_file)
+    except (OSError, json.JSONDecodeError) as exc:
+        print(
+            f"ERROR: Could not read USAspending response {path}: {exc}",
+            file=sys.stderr,
+        )
+        return None
+
+    if not isinstance(response, dict) or not isinstance(
+        response.get("results"), list
+    ):
+        print(
+            "ERROR: Saved USAspending response must contain a results list",
+            file=sys.stderr,
+        )
+        return None
+    return response
+
+
+def _fmt_transaction_amount(value):
+    if value is None:
+        return "N/A"
+    try:
+        return f"${float(value):,.2f}"
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def _print_keyword_transactions(results):
+    if not results:
+        print("No USAspending keyword transactions found.")
+        return
+
+    for row in results:
+        action_date = row.get("Action Date", "?")
+        award_id = row.get("Award ID", "?")
+        recipient = row.get("Recipient Name", "?")
+        amount = _fmt_transaction_amount(row.get("Transaction Amount"))
+        modification = row.get("Mod") or "0"
+        description = row.get("Transaction Description") or ""
+        if len(description) > 120:
+            description = f"{description[:117]}..."
+        print(
+            f"{action_date} | {award_id} | {recipient} | "
+            f"{amount} | Mod {modification} | {description}"
+        )
+
+
+def cmd_transactions_keyword(args):
+    """Search transaction descriptions by keyword, including modifications."""
+    if args.from_file:
+        response = _load_transactions_keyword_file(args.from_file)
+        if response is None:
+            return
+        results = response.get("results", [])
+    else:
+        results = []
+        page_cap = 50 if args.all_pages else 1
+        for page in range(1, page_cap + 1):
+            payload = _transactions_keyword_payload(args, page)
+            response = _fetch_post(
+                "/search/spending_by_transaction/", payload
+            )
+            if not response:
+                return
+            results.extend(response.get("results", []))
+            has_next = bool(
+                response.get("page_metadata", {}).get("hasNext")
+            )
+            if not args.all_pages or not has_next:
+                break
+            if page == page_cap:
+                print(
+                    "WARNING: Stopped after the 50-page safety cap "
+                    "while USAspending still reported another page.",
+                    file=sys.stderr,
+                )
+
+    if write_output(
+        results,
+        args,
+        summary=(
+            f"USAspending transactions matching '{args.keyword}' "
+            f"({len(results)} returned)"
+        ),
+    ):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(results, indent=2))
+        return
+
+    print(f"Found {len(results)} transactions matching '{args.keyword}':")
+    _print_keyword_transactions(results)
 
 
 def cmd_spending_by_geography(args):
@@ -560,7 +910,6 @@ def cmd_spending_by_geography(args):
     for r in results[:args.limit]:
         name = r.get("display_name", r.get("shape_code", "?"))
         amount = r.get("aggregated_amount", 0)
-        count = r.get("per_capita", "")
         if amount > 0:
             print(f"  {name}: {_fmt_money(amount)}")
 
@@ -615,7 +964,10 @@ def cmd_top_recipients(args):
     if args.agency:
         filters["agencies"] = [{"type": "awarding", "tier": "toptier", "name": args.agency}]
     if args.naics:
-        filters["naics_codes"] = [{"naics_code": args.naics, "is_primary": True}]
+        filters["naics_codes"] = {
+            "require": [args.naics],
+            "exclude": [],
+        }
     if args.date_range:
         parts = args.date_range.split(",")
         if len(parts) == 2:
@@ -640,7 +992,7 @@ def cmd_top_recipients(args):
     if write_output(results, args, summary=f"Top {len(results)} recipients"):
         return
 
-    print(f"Top recipients:")
+    print("Top recipients:")
     for i, r in enumerate(results, 1):
         name = r.get("name", "?")
         amount = r.get("amount", 0)
@@ -657,13 +1009,13 @@ def cmd_agencies(args):
 
     results = result.get("results", result) if isinstance(result, dict) else result
 
-    if write_output(results, args, summary=f"USAspending toptier agencies"):
+    if write_output(results, args, summary="USAspending toptier agencies"):
         return
 
     if isinstance(results, list):
         # Sort by budget
         results.sort(key=lambda x: x.get("budget_authority_amount", 0) or 0, reverse=True)
-        print(f"Top agencies by budget authority:")
+        print("Top agencies by budget authority:")
         for a in results[:args.limit]:
             name = a.get("agency_name", "?")
             abbr = a.get("abbreviation", "")
@@ -695,7 +1047,13 @@ def main():
 
     # Award detail
     p = sub.add_parser("award", help="Get full detail for a specific award")
-    p.add_argument("award_id", help="Award ID (generated_unique_award_id or internal ID)")
+    p.add_argument(
+        "award_id",
+        help=(
+            "Plain PIID (resolved first), generated_unique_award_id, "
+            "or legacy internal ID"
+        ),
+    )
     add_output_args(p)
 
     # Recipient Profile
@@ -708,9 +1066,26 @@ def main():
     p.add_argument("query", nargs="?", help="Recipient name")
     p.add_argument("--uei", help="Recipient UEI")
     p.add_argument("--award-id", help="Filter by prime award ID")
-    p.add_argument("--agency", help="Filter by awarding agency name")
+    p.add_argument(
+        "--agency",
+        help=(
+            "Filter by awarding agency name; use --agency-tier subtier "
+            "for a component name"
+        ),
+    )
+    p.add_argument(
+        "--agency-tier",
+        choices=["toptier", "subtier"],
+        default="toptier",
+        help="Hierarchy tier for --agency (default: toptier)",
+    )
     p.add_argument("--grants", action="store_true", help="Search grant subawards")
-    p.add_argument("--limit", type=int, default=20, help="Max results")
+    p.add_argument(
+        "--limit",
+        type=_advanced_search_limit,
+        default=20,
+        help="Results per page (1-100; default: 20)",
+    )
     p.add_argument("--page", type=int, default=1, help="Page number")
     add_output_args(p)
 
@@ -718,11 +1093,75 @@ def main():
     p = sub.add_parser("transactions", help="Search individual transaction records")
     p.add_argument("query", nargs="?", help="Recipient name")
     p.add_argument("--uei", help="Recipient UEI")
-    p.add_argument("--agency", help="Filter by awarding agency name")
+    p.add_argument(
+        "--agency",
+        help=(
+            "Filter by awarding agency name; use --agency-tier subtier "
+            "for a component name"
+        ),
+    )
+    p.add_argument(
+        "--agency-tier",
+        choices=["toptier", "subtier"],
+        default="toptier",
+        help="Hierarchy tier for --agency (default: toptier)",
+    )
     p.add_argument("--date-range", help="Date range: YYYY-MM-DD,YYYY-MM-DD")
     p.add_argument("--grants", action="store_true", help="Search grant transactions")
-    p.add_argument("--limit", type=int, default=20, help="Max results")
+    p.add_argument(
+        "--limit",
+        type=_advanced_search_limit,
+        default=20,
+        help="Results per page (1-100; default: 20)",
+    )
     p.add_argument("--page", type=int, default=1, help="Page number")
+    add_output_args(p)
+
+    # Transactions by keyword
+    p = sub.add_parser(
+        "transactions-keyword",
+        help="Search transaction descriptions by keyword",
+    )
+    p.add_argument("keyword", help="Keyword or phrase")
+    p.add_argument(
+        "--start",
+        default="2015-10-01",
+        help="Start date (default: 2015-10-01)",
+    )
+    p.add_argument(
+        "--end",
+        default=date.today().isoformat(),
+        help="End date (default: today)",
+    )
+    p.add_argument("--naics", help="Filter by primary NAICS code")
+    p.add_argument("--psc", help="Filter by product/service code")
+    p.add_argument("--agency", help="Filter by awarding agency name")
+    p.add_argument(
+        "--agency-tier",
+        choices=["toptier", "subtier"],
+        default="toptier",
+        help=(
+            "Tier for --agency: toptier takes a department name such as "
+            "Department of Homeland Security, subtier a component such as "
+            "U.S. Immigration and Customs Enforcement (default: toptier)"
+        ),
+    )
+    p.add_argument(
+        "--limit",
+        type=_advanced_search_limit,
+        default=100,
+        help="Results per page (1-100; default: 100)",
+    )
+    p.add_argument(
+        "--all-pages",
+        action="store_true",
+        help="Fetch every page, capped at 50",
+    )
+    p.add_argument(
+        "--from-file",
+        metavar="PATH",
+        help="Render a saved API response instead of fetching",
+    )
     add_output_args(p)
 
     # Spending by geography
@@ -782,6 +1221,7 @@ def main():
         "recipient": cmd_recipient,
         "subawards": cmd_subawards,
         "transactions": cmd_transactions,
+        "transactions-keyword": cmd_transactions_keyword,
         "geography": cmd_spending_by_geography,
         "timeline": cmd_spending_over_time,
         "top-recipients": cmd_top_recipients,
