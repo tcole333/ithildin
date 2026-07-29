@@ -1063,9 +1063,15 @@ uv run python tools/query_usaspending.py transactions-keyword "wellness check" -
 uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --output /tmp/actions.json
 uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --max-pages 5 --output /tmp/vendor.json
 uv run python tools/query_fpds.py piid PIID --from-file saved-feed.xml       # offline parse of saved XML
+uv run python tools/query_fpds.py search 'VENDOR_UEI:UEI' --with-metadata --output /tmp/vendor.json
 ```
 Workflow-field keys are camelCase (`createdBy`, `lastModifiedBy`, `approvedBy`) while most other keys are
-snake_case; snake_case reads of those three silently return `None`. See `docs/modules/government.md`.
+snake_case; snake_case reads of those three silently return `None`.
+
+Rows carry `record_type`: `award` for a dated contract action, `IDV` for the vehicle those actions are
+placed against. A vendor whose only presence is an IDV base award still has contracting history — do not
+read an absent `award` row as a first-time entrant. Hitting `--max-pages` truncates results: the tool warns
+on stderr, exits 2, and sets `truncated` in `--with-metadata` output. See `docs/modules/government.md`.
 
 ### Federal Register (rules, notices, presidential documents — no auth)
 ```bash

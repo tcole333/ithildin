@@ -68,11 +68,27 @@ separation of duties (did one user create *and* approve an award?).
 uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --output /tmp/actions.json
 uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --max-pages 5 --output /tmp/vendor.json
 uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --from-file saved-feed.xml   # offline parse
+uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --with-metadata --output /tmp/v.json
 ```
 
 **Known quirks:**
 - One `<entry>` per contract action, so a base award and each modification are separate rows; filter on
   `modification_number` to isolate the base action.
+- The feed has **two payload roots**, reported as `record_type`. `award` is a dated contract action;
+  `IDV` is the indefinite-delivery vehicle those actions are placed against. Roughly 10% of rows in a
+  DHS vendor slice are IDVs, and for some vendors the IDV *is* the flagship instrument — the $1.596B UAC
+  IDIQ `70CDCR26D00000045` is an IDV row. Treating "no dated action" as "no contracting history" will
+  call an incumbent a first-time entrant; screen on `record_type` instead.
+- IDVs carry no parent vehicle and no completion dates, so `referenced_idv_piid`, `transaction_number`,
+  `current_completion_date` and `ultimate_completion_date` are null on those rows. Their period bound is
+  `lastDateToOrder`, which is deliberately not aliased into a completion-date field. An IDV's ceiling
+  reads from `base_and_all_options_value`; its `action_obligation` is usually `0`.
+- A `record_type` of `null` means FPDS used a payload root this tool does not know. The CLI warns on
+  stderr; treat those rows as unparsed rather than empty.
+- **Paging truncates silently at the source.** A fetch stopping at `--max-pages` while the feed still
+  offers a next page returns a partial set — at the default of 10 that is 100 rows. The tool now warns on
+  stderr, exits 2, and sets `truncated`/`next_url`/`pages_fetched` under `--with-metadata`. Never derive
+  an earliest-action or first-seen date from a truncated fetch; raise `--max-pages` until it exits 0.
 - Parsed keys are mixed case: snake_case for most fields but **camelCase for the workflow fields**
   (`createdBy`, `lastModifiedBy`, `approvedBy`). Reading them with snake_case names silently yields `None`,
   which looks identical to missing data.
