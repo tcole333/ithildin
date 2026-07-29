@@ -6,6 +6,16 @@ The public ATOM feed exposes FPDS workflow fields that are absent from many
 other procurement APIs, including the users who created, modified, and
 approved an action.
 
+The feed carries two payload roots. A <award> holds a dated contract action;
+an <IDV> holds the indefinite-delivery vehicle those actions are placed
+against. Both are parsed into the same record shape, tagged by ``record_type``,
+so that a vehicle's base award is never mistaken for an absent record. IDVs
+have no referenced IDV and no completion dates, so those fields stay null.
+
+Fetches stop at --max-pages. When the feed still offers another page at that
+point the results are incomplete: the tool warns on stderr, marks
+``truncated`` in --with-metadata output, and exits 2.
+
 API: https://www.fpds.gov/ezsearch/FEEDS/ATOM
 Auth: None.
 
@@ -14,10 +24,11 @@ Usage:
     uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64'
     uv run python tools/query_fpds.py piid 70CDCR26FR0000014 \
         --from-file saved-feed.xml --output actions.json
+    uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' \
+        --with-metadata --output actions.json
 """
 
 import argparse
-import json
 import os
 import socket
 import ssl
@@ -25,6 +36,7 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from typing import NamedTuple
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -55,10 +67,28 @@ FPDS_NS = "https://www.fpds.gov/FPDS"
 NS = {"atom": ATOM_NS, "fpds": FPDS_NS}
 REQUEST_TIMEOUT = 60
 MAX_ATTEMPTS = 3
+EXIT_TRUNCATED = 2
+
+# The payload root an entry uses, paired with the identifier wrapper that root
+# nests its PIID under. Awards use awardID/awardContractID; vehicles use
+# contractID/IDVID. Order matters only in that the first match wins.
+RECORD_ROOTS = (
+    ("award", "awardID", "awardContractID"),
+    ("IDV", "contractID", "IDVID"),
+)
 
 
 class FPDSError(RuntimeError):
     """A clear, user-facing FPDS request or parsing failure."""
+
+
+class FetchResult(NamedTuple):
+    """Parsed actions plus the paging state that produced them."""
+
+    actions: list
+    pages_fetched: int
+    truncated: bool
+    next_url: str | None
 
 
 def _local_name(tag):
@@ -116,20 +146,34 @@ def _description(element):
     return element.attrib.get("description")
 
 
+def _find_payload(entry):
+    """Return ``(payload, record_type, contract_id)`` for one Atom entry.
+
+    Returns ``(None, None, None)`` for an entry whose root is neither an award
+    nor an IDV, which keeps an unrecognized root visible as a null
+    ``record_type`` rather than silently emitting an all-null record.
+    """
+    for record_type, id_wrapper, id_element in RECORD_ROOTS:
+        payload = _first_descendant(entry, record_type)
+        if payload is None:
+            continue
+        wrapper = _first_descendant(payload, id_wrapper)
+        return payload, record_type, _first_descendant(wrapper, id_element)
+    return None, None, None
+
+
 def _parse_entry(entry):
     """Convert one Atom entry into a stable, audit-friendly record."""
-    award = _first_descendant(entry, "award")
-    award_id = _first_descendant(award, "awardID")
-    contract_id = _first_descendant(award_id, "awardContractID")
-    referenced_idv = _first_descendant(award_id, "referencedIDVID")
-    dates = _first_descendant(award, "relevantContractDates")
-    dollar_values = _first_descendant(award, "dollarValues")
-    total_values = _first_descendant(award, "totalDollarValues")
-    vendor = _first_descendant(award, "vendor")
+    payload, record_type, contract_id = _find_payload(entry)
+    referenced_idv = _first_descendant(payload, "referencedIDVID")
+    dates = _first_descendant(payload, "relevantContractDates")
+    dollar_values = _first_descendant(payload, "dollarValues")
+    total_values = _first_descendant(payload, "totalDollarValues")
+    vendor = _first_descendant(payload, "vendor")
     uei_info = _first_descendant(vendor, "vendorUEIInformation")
-    contract_data = _first_descendant(award, "contractData")
-    product_info = _first_descendant(award, "productOrServiceInformation")
-    transaction_info = _first_descendant(award, "transactionInformation")
+    contract_data = _first_descendant(payload, "contractData")
+    product_info = _first_descendant(payload, "productOrServiceInformation")
+    transaction_info = _first_descendant(payload, "transactionInformation")
 
     agency = _direct_child(contract_id, "agencyID")
     action_type = _first_descendant(contract_data, "contractActionType")
@@ -137,6 +181,7 @@ def _parse_entry(entry):
     naics = _first_descendant(product_info, "principalNAICSCode")
 
     return {
+        "record_type": record_type,
         "title": _child_text(entry, "title"),
         "feed_modified": _child_text(entry, "modified"),
         "piid": _child_text(contract_id, "PIID"),
@@ -296,11 +341,18 @@ def _feed_url(query):
     return f"{BASE_URL}?{urlencode(params)}"
 
 
-def fetch_actions(query, max_pages=10):
-    """Fetch and parse ATOM pages, respecting the feed's next links."""
+def fetch_feed(query, max_pages=10):
+    """Fetch and parse ATOM pages, reporting whether the page cap truncated.
+
+    A feed that still offers a rel=next link when the cap is reached has more
+    records than were returned. Callers deriving an extremum — an earliest
+    action date, a first-seen vendor — must not treat such a result as the
+    vendor's complete history.
+    """
     actions = []
     next_url = _feed_url(query)
     seen_urls = set()
+    pages_fetched = 0
 
     for page_number in range(1, max_pages + 1):
         if next_url in seen_urls:
@@ -312,10 +364,19 @@ def fetch_actions(query, max_pages=10):
         xml_data = _fetch_atom_page(next_url)
         page_actions, next_url = parse_atom(xml_data)
         actions.extend(page_actions)
+        pages_fetched = page_number
         if not next_url:
             break
 
-    return actions
+    return FetchResult(actions, pages_fetched, bool(next_url), next_url)
+
+
+def fetch_actions(query, max_pages=10):
+    """Fetch actions as a plain list, discarding paging state.
+
+    Use ``fetch_feed`` when the caller must know the results were truncated.
+    """
+    return fetch_feed(query, max_pages=max_pages).actions
 
 
 def load_actions(path):
@@ -344,6 +405,7 @@ def print_actions(actions):
         return
 
     headers = (
+        ("TYPE", 5),
         ("MOD", 8),
         ("SIGNED", 10),
         ("ACTION OBLIGATION", 18),
@@ -358,6 +420,7 @@ def print_actions(actions):
     for action in actions:
         signed = (action.get("signed_date") or "")[:10]
         values = (
+            (action.get("record_type") or "?", 5),
             (action.get("modification_number") or "", 8),
             (signed, 10),
             (_fmt_money(action.get("action_obligation")), 18),
@@ -370,6 +433,20 @@ def print_actions(actions):
         if len(description) > 72:
             description = f"{description[:69]}..."
         print(f"{row} | {description}")
+
+
+def _output_payload(result, query, args):
+    """Wrap results with the paging provenance a downstream script needs."""
+    return {
+        "query": query,
+        "source": args.from_file or BASE_URL,
+        "record_count": len(result.actions),
+        "pages_fetched": result.pages_fetched,
+        "max_pages": None if args.from_file else args.max_pages,
+        "truncated": result.truncated,
+        "next_url": result.next_url,
+        "actions": result.actions,
+    }
 
 
 def _positive_int(value):
@@ -390,6 +467,14 @@ def _add_common_args(parser):
         type=_positive_int,
         default=10,
         help="Maximum ATOM pages to fetch (default: 10)",
+    )
+    parser.add_argument(
+        "--with-metadata",
+        action="store_true",
+        help=(
+            "Wrap results in an object carrying query, paging and truncated "
+            "fields instead of emitting a bare list"
+        ),
     )
     add_output_args(parser)
 
@@ -426,21 +511,43 @@ def main():
 
     try:
         if args.from_file:
-            actions = load_actions(args.from_file)
+            result = FetchResult(load_actions(args.from_file), 1, False, None)
         else:
-            actions = fetch_actions(query, max_pages=args.max_pages)
+            result = fetch_feed(query, max_pages=args.max_pages)
     except FPDSError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
-    if write_output(actions, args, summary=f"FPDS actions for {query}"):
-        return 0
-    if getattr(args, "json_out", False):
-        print(json.dumps(actions, indent=2))
-        return 0
+    actions = result.actions
+    unrecognized = sum(1 for row in actions if row["record_type"] is None)
+    if unrecognized:
+        print(
+            f"WARNING: {unrecognized} of {len(actions)} entries used an "
+            "unrecognized FPDS payload root and parsed to null fields",
+            file=sys.stderr,
+        )
+    if result.truncated:
+        print(
+            f"WARNING: stopped at the --max-pages limit of {args.max_pages} "
+            f"while the feed still offered another page. These {len(actions)} "
+            "records are a partial set; raise --max-pages before deriving "
+            "earliest-action or first-seen dates from them.",
+            file=sys.stderr,
+        )
+
+    payload = _output_payload(result, query, args) if args.with_metadata else actions
+    exit_code = EXIT_TRUNCATED if result.truncated else 0
+
+    if write_output(
+        payload,
+        args,
+        summary=f"FPDS actions for {query}",
+        result_count=len(actions),
+    ):
+        return exit_code
 
     print_actions(actions)
-    return 0
+    return exit_code
 
 
 if __name__ == "__main__":
