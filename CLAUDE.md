@@ -146,7 +146,7 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Financial** | EDGAR, ratios, market data, SEC enforcement, 990 nonprofits, FDIC, FINRA | `docs/modules/financial.md` |
 | **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
 | **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, CMS Open Payments, PPP | `docs/modules/government.md` |
-| **Legal** | CourtListener, NYSCEF, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
+| **Legal** | CourtListener, NYSCEF, Franklin CIO, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
 | **Political** | FEC, lobbying, FARA, Congress, GovInfo, Senate Finance archives | `docs/modules/political.md` |
 | **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |
 | **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
@@ -217,4 +217,8 @@ Orchestrate work from a single chat session using subagents. Skills like `/deep-
 
 ## Ethical Guidelines
 
-Open-source intelligence using publicly released government documents, court filings, and public-domain datasets. Do not access non-public systems. Do not contact investigation subjects. Document provenance for all findings.
+Open-source intelligence using publicly available material — government records, court filings, corporate registries, and published datasets. This includes leaked or hacked datasets that have already been published by journalists, transparency organizations, or public archives (e.g. ICIJ, OCCRP, DDoSecrets). Working with such already-published material is a legitimate, widely-used investigative practice and is in scope.
+
+The line is between analyzing what others have already made public and acquiring non-public data yourself — the former is in scope, the latter is not. Do not acquire non-public data through unauthorized access: no intrusion into non-public systems, no active scanning or exploitation of target hosts, no circumventing authentication.
+
+Do not contact investigation subjects. Handle personal information in leaked datasets responsibly: use it only for legitimate investigative purposes, minimize incidental PII, and treat anonymously-sourced material as lead-generation that requires corroboration against independent primary sources — never `confirmed` on its own. Document provenance for all findings.

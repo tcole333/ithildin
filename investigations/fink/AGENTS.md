@@ -27,8 +27,9 @@ middle name, firm, address, or other strong identifier.
 - Investigate Laurence "Larry" Fink and BlackRock only where evidence shows a
   capital, personnel, introduction, governance, or deal connection to Joshua
   Fink. Family relationship alone does not establish institutional involvement.
-- Focus on public records and public-domain corpora. Do not contact subjects or
-  access non-public systems.
+- Focus on public records and published corpora, including already-published
+  leaked/hacked datasets. Do not contact subjects, intrude into non-public
+  systems, or run active scans.
 - Separate the historical Enso Capital Management LLC from unrelated firms
   currently using the Enso Capital name.
 
