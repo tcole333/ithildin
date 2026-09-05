@@ -1,0 +1,1097 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-04T04:04:21.930891+00:00",
+  "scope": "Seven older saved UCC filing histories from initial pilot; offline reconciliation only. Current portal/index baseline is unchanged.",
+  "reviewer_task": "ucc_sample_retail",
+  "summary": {
+    "original_histories_text_reviewed": 7,
+    "saved_history_entries_reviewed": 11,
+    "listed_pdfs": 11,
+    "original_pdfs_with_prior_complete_visual_review_reconciled": 1,
+    "pending_original_pdfs": 6,
+    "pending_amendment_pdfs": 4,
+    "source_files_matching_original_manifest": 7,
+    "current_index_queries_complete_unchanged": 96,
+    "lapsed_index_queries_complete_unchanged": 0
+  },
+  "queue_integration": {
+    "applied": false,
+    "reason": "Current boston_ucc_filing_review.py --decisions accepts holder identity decisions only, not analyst history/document review records. Separate ledger preserves richer review states without silently changing aggregate/dashboard or flattening unresolved work.",
+    "base_queue_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/filing-review-queue.json",
+    "base_queue_sha256": "fffe43866afa021ccfb58d129af639b2b6caedfcf7232a264d8686647c13e19e"
+  },
+  "supporting_snapshot_files": [
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/README.md",
+      "sha256": "3fa8cae0db6c748813692942d9c32476abe5ab3eac9c1a858fcaf1ba13ac8c0d"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/review.csv",
+      "sha256": "b3ba27c756c6434c3a65b18606b80a485abc3c6bd87272fd4a149d31c1366209"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+      "sha256": "fd009bbb6bdf43c63dc6bcebdad0677a6d400c5052296b89daa7ede82dfec463"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/filing-review-queue.json",
+      "sha256": "fffe43866afa021ccfb58d129af639b2b6caedfcf7232a264d8686647c13e19e"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/ucc-access-block.json",
+      "sha256": "687f2b4969826d9ec6e42c3b52de1dc1932e01c522141c639517ca1fb14474e6"
+    }
+  ],
+  "reviews": [
+    {
+      "review_id": "OFFLINE-MA-UCC-201960725790-2026-09-04",
+      "original_filing_number": "201960725790",
+      "holder_id": "BH-f5bf7ba839137914",
+      "roster_license_number": "LB-101973",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:43:38.715630+00:00",
+      "captured_history_entry_count": 2,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": null,
+      "party_inventory_limitation": "No independent claim that all source parties/addresses were captured; CUA shorthand may omit fields.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "Same normalized corporate debtor name as the roster; historical 330 Newbury Street differs from current 255 Newbury Street. This review does not establish corporate or license continuity."
+        ]
+      },
+      "collateral_review_state": "displayed_text_reviewed_pdf_unverified",
+      "collateral_classification": "blanket_personal_property",
+      "interpretation": "The saved Northern Bank history describes broad personal property, not a specifically identified liquor license. Do not merge it with the companion license-specific original 201960725880.",
+      "source_quote": "This financing statement covers, and it is intended to cover, all personal property of the Debtor.",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725790.json",
+        "sha256": "e03040ff529964c756ab5bbbee8da328a2c2c0fb8bd2966012e25f8389c51ba4",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/19",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:43:38.715630+00:00",
+        "capture_type": "parsed_query_tool_history",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+        "original_page_provenance_as_saved": [
+          {
+            "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+            "sha256": "16daa0b41201ff5f172b23b55404c9df52ce32bcb2305e4fe93a27b7bb037fb8"
+          }
+        ],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "201960725790",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2019-12-18T11:40:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "330 NEWBURY STREET",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n330 NEWBURY STREET\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "NORTHERN BANK & TRUST COMPANY",
+              "address_lines": [
+                "275 MISHAWUM ROAD",
+                "WOBURN MA 01801"
+              ],
+              "corporation_type": null,
+              "raw_text": "NORTHERN BANK & TRUST COMPANY\n275 MISHAWUM ROAD\nWOBURN MA 01801"
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        },
+        {
+          "filing_number": "202414183890",
+          "action_as_recorded": "Continuation",
+          "filing_datetime_local_as_recorded": "2024-10-10T15:36:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "330 NEWBURY STREET",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n330 NEWBURY STREET\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "NORTHERN BANK & TRUST COMPANY",
+              "address_lines": [
+                "275 MISHAWUM ROAD",
+                "WOBURN MA 01801"
+              ],
+              "corporation_type": null,
+              "raw_text": "NORTHERN BANK & TRUST COMPANY\n275 MISHAWUM ROAD\nWOBURN MA 01801"
+            }
+          ],
+          "collateral_text_available": false,
+          "evidence_pointer": "/filings/1"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "201960725790",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2019/1218/000000000/8563/201960725790_1.pdf",
+          "filename": "201960725790_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725790.json",
+            "sha256": "e03040ff529964c756ab5bbbee8da328a2c2c0fb8bd2966012e25f8389c51ba4",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/19",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:43:38.715630+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+                "sha256": "16daa0b41201ff5f172b23b55404c9df52ce32bcb2305e4fe93a27b7bb037fb8"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        },
+        {
+          "filing_number": "202414183890",
+          "role": "amendment",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2024/1010/000000000/4676/202414183890_1.pdf",
+          "filename": "202414183890_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725790.json",
+            "sha256": "e03040ff529964c756ab5bbbee8da328a2c2c0fb8bd2966012e25f8389c51ba4",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/19",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:43:38.715630+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676w8JGy5sPfmb.ooFAi8Kj4S",
+                "sha256": "16daa0b41201ff5f172b23b55404c9df52ce32bcb2305e4fe93a27b7bb037fb8"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/1/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_original_pdf_and_verify_attachment_completeness",
+        "review_continuation_pdf_202414183890",
+        "resolve_historical_premises_and_license_continuity"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag."
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-201960725880-2026-09-04",
+      "original_filing_number": "201960725880",
+      "holder_id": "BH-f5bf7ba839137914",
+      "roster_license_number": "LB-101973",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:49:24.651263+00:00",
+      "captured_history_entry_count": 2,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": null,
+      "party_inventory_limitation": "No independent claim that all source parties/addresses were captured; CUA shorthand may omit fields.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "Historical ABCC identifier 89702-PK-0116 is not the current Boston roster identifier LB-101973; continuity remains unverified.",
+          "Historical UCC address 330 Newbury Street differs from current roster 255 Newbury Street.",
+          "The separate March 26, 2026 board grant does not establish a new loan or reconcile the license identifiers."
+        ]
+      },
+      "collateral_review_state": "prior_original_visual_review_reconciled",
+      "collateral_classification": "specific_historical_liquor_license",
+      "interpretation": "The saved original explicitly identifies an alcoholic-beverages store license and a December 17, 2019 pledge/security agreement with Northern Bank. The prior root visual-review note verifies the single-page original; its continuation PDF remains unreviewed.",
+      "source_quote": "ALCOHOLIC BEVERAGES, LICENSE NUMBER 89702-PK-0116",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725880-cua-observed.json",
+        "sha256": "d3596ca2798d260271ad02bc8c28d55fedfedac8050fcc62402b10da94dc6cb2",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/20",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:49:24.651263+00:00",
+        "capture_type": "cua_history_transcription",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676wZntBXRJBCbR4kckpRuk.A",
+        "original_page_provenance_as_saved": [],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "201960725880",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2019-12-18T11:40:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "330 NEWBURY ST, BOSTON MA 02115"
+              ]
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "NORTHERN BANK & TRUST COMPANY",
+              "address_lines": []
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        },
+        {
+          "filing_number": "202414184220",
+          "action_as_recorded": "Continuation",
+          "filing_datetime_local_as_recorded": "2024-10-10T15:36:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [],
+          "secured_parties_as_saved": [],
+          "collateral_text_available": false,
+          "evidence_pointer": "/filings/1"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "201960725880",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2019/1218/000000000/8564/201960725880_1.pdf",
+          "filename": "201960725880_1.pdf",
+          "page_count_as_saved": null,
+          "pdf_review_state": "complete_original_visual_review_reconciled",
+          "opening_state": "opened_in_prior_in_app_review",
+          "reviewed_in_this_pass": false,
+          "review_scope": "Entire single-page original, based on explicit prior visual-inspection note",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725880-cua-observed.json",
+            "sha256": "d3596ca2798d260271ad02bc8c28d55fedfedac8050fcc62402b10da94dc6cb2",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/20",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:49:24.651263+00:00",
+            "capture_type": "cua_history_transcription",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676wZntBXRJBCbR4kckpRuk.A",
+            "original_page_provenance_as_saved": [],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": false,
+          "page_count_from_prior_visual_note": 1,
+          "review_evidence_pointer": "/pdf_visual_inspection_note",
+          "review_evidence_quote": "Root viewed the single-page original UCC-1 in the in-app browser and confirmed the debtor, secured party, filing number/date, alcoholic-beverages license identifier and referenced security agreement. No local PDF artifact was obtained."
+        },
+        {
+          "filing_number": "202414184220",
+          "role": "amendment",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2024/1010/000000000/4690/202414184220_1.pdf",
+          "filename": "202414184220_1.pdf",
+          "page_count_as_saved": null,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-201960725880-cua-observed.json",
+            "sha256": "d3596ca2798d260271ad02bc8c28d55fedfedac8050fcc62402b10da94dc6cb2",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/20",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:49:24.651263+00:00",
+            "capture_type": "cua_history_transcription",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676wZntBXRJBCbR4kckpRuk.A",
+            "original_page_provenance_as_saved": [],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/1/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_continuation_pdf_202414184220",
+        "resolve_historical_premises_and_license_identifier_continuity"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag.",
+      "license_identifier_as_recorded": "89702-PK-0116",
+      "referenced_security_agreement_date": "2019-12-17"
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-202516533430-2026-09-04",
+      "original_filing_number": "202516533430",
+      "holder_id": "BH-f5bf7ba839137914",
+      "roster_license_number": "LB-101973",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:42:48.002651+00:00",
+      "captured_history_entry_count": 2,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": false,
+      "party_inventory_limitation": "Derivative evidence copy: incidental individual co-debtor data omitted; original public viewer URLs retained.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "The original lists SK Wine and Liquors Inc, SK Pizza Inc, and Bauer Wine and Spirits as business debtors; these names must not be collapsed into one legal entity.",
+          "Historical 330 Newbury Street differs from current roster 255 Newbury Street.",
+          "Saved derivative intentionally omits incidental individual co-debtors; it cannot certify a complete party inventory or identify the deleted party."
+        ]
+      },
+      "collateral_review_state": "unresolved_missing_history_collateral",
+      "collateral_classification": "collateral_unresolved_original_pdf_required",
+      "interpretation": "The saved history names C T Corporation as representative, not an identified underlying lender. Collateral arrays are empty. DebtorDelete is recorded on April 14, 2026, but the displayed business-party list repeats across both entries; its effect on SK Wine and Liquors cannot be determined from the saved summary.",
+      "source_quote": "C T CORPORATION SYSTEM, AS REPRESENTATIVE",
+      "source_quote_pointer": "/filings/0/secured_parties/0/name",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202516533430.json",
+        "sha256": "5b6458668c9086cb33aac9f2d7f2dc56b99303fbf2d45ff0ab25fe6eb9ffeb15",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/21",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:42:48.002651+00:00",
+        "capture_type": "parsed_query_tool_history",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+        "original_page_provenance_as_saved": [
+          {
+            "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+            "sha256": "e1915acc43e66043452ac7d1c54654779915faf45c49c1493bb1dc7d4a305aa6"
+          }
+        ],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "202516533430",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2025-01-17T13:59:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK PIZZA INC",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK PIZZA INC\n330 NEWBURY ST\nBOSTON MA 02115"
+            },
+            {
+              "name": "BAUER WINE AND SPIRITS",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "BAUER WINE AND SPIRITS\n330 NEWBURY ST\nBOSTON MA 02115"
+            },
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n330 NEWBURY ST\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "C T CORPORATION SYSTEM, AS REPRESENTATIVE",
+              "address_lines": [
+                "330 N BRAND BLVD, SUITE 700; ATTN: SPRS",
+                "GLENDALE CA 91203"
+              ],
+              "corporation_type": null,
+              "raw_text": "C T CORPORATION SYSTEM, AS REPRESENTATIVE\n330 N BRAND BLVD, SUITE 700; ATTN: SPRS\nGLENDALE CA 91203"
+            }
+          ],
+          "collateral_text_available": false,
+          "evidence_pointer": "/filings/0"
+        },
+        {
+          "filing_number": "202631151100",
+          "action_as_recorded": "DebtorDelete",
+          "filing_datetime_local_as_recorded": "2026-04-14T15:02:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK PIZZA INC",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK PIZZA INC\n330 NEWBURY ST\nBOSTON MA 02115"
+            },
+            {
+              "name": "BAUER WINE AND SPIRITS",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "BAUER WINE AND SPIRITS\n330 NEWBURY ST\nBOSTON MA 02115"
+            },
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "330 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n330 NEWBURY ST\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "C T CORPORATION SYSTEM, AS REPRESENTATIVE",
+              "address_lines": [
+                "330 N BRAND BLVD, SUITE 700; ATTN: SPRS",
+                "GLENDALE CA 91203"
+              ],
+              "corporation_type": null,
+              "raw_text": "C T CORPORATION SYSTEM, AS REPRESENTATIVE\n330 N BRAND BLVD, SUITE 700; ATTN: SPRS\nGLENDALE CA 91203"
+            }
+          ],
+          "collateral_text_available": false,
+          "evidence_pointer": "/filings/1"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "202516533430",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2025/0117/002979486/0016/202516533430_1.pdf",
+          "filename": "202516533430_1.pdf",
+          "page_count_as_saved": 2,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202516533430.json",
+            "sha256": "5b6458668c9086cb33aac9f2d7f2dc56b99303fbf2d45ff0ab25fe6eb9ffeb15",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/21",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:42:48.002651+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+                "sha256": "e1915acc43e66043452ac7d1c54654779915faf45c49c1493bb1dc7d4a305aa6"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        },
+        {
+          "filing_number": "202631151100",
+          "role": "amendment",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2026/0414/000000000/6507/202631151100_1.pdf",
+          "filename": "202631151100_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202516533430.json",
+            "sha256": "5b6458668c9086cb33aac9f2d7f2dc56b99303fbf2d45ff0ab25fe6eb9ffeb15",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/21",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:42:48.002651+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676woQ2l4XKYxzVRu3Khf_IqQ",
+                "sha256": "e1915acc43e66043452ac7d1c54654779915faf45c49c1493bb1dc7d4a305aa6"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/1/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_two_page_original_pdf_for_collateral",
+        "review_amendment_pdf_202631151100_and_identify_deleted_debtor",
+        "identify_underlying_secured_creditor_if_disclosed",
+        "resolve_historical_premises_and_post_amendment_target_status"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag.",
+      "party_amendment_effect": "DebtorDelete recorded; which debtor was deleted and whether target remains subject are unresolved from saved derivative."
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-202630298860-2026-09-04",
+      "original_filing_number": "202630298860",
+      "holder_id": "BH-f5bf7ba839137914",
+      "roster_license_number": "LB-101973",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:43:20.329993+00:00",
+      "captured_history_entry_count": 2,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": false,
+      "party_inventory_limitation": "Derivative evidence copy: incidental individual co-debtor data omitted; original public viewer URLs retained.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "Corporate debtor name and 255 Newbury Street match the roster at the business level; legal identity and all-party completeness are not independently certified.",
+          "Saved derivative intentionally omits incidental individual co-debtors."
+        ]
+      },
+      "collateral_review_state": "displayed_text_reviewed_pdf_unverified",
+      "collateral_classification": "blanket_assets_with_recorded_termination",
+      "interpretation": "The saved original names Liberty Capital Management and broad all-assets collateral. TerminationSecuredParty 202630725870 is recorded March 31, 2026. This is distinct from Northern Bank’s license-specific filing and is not evidence of an ongoing debt balance.",
+      "source_quote": "All assets of the Debtor including, but not limited to, any and all equipment, fixtures, inventory, accounts",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202630298860.json",
+        "sha256": "5ac27622efc48355214ff10265b9216c43e69c7b88d7ac3f54cb9e6edc6856ca",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/22",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:43:20.329993+00:00",
+        "capture_type": "parsed_query_tool_history",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+        "original_page_provenance_as_saved": [
+          {
+            "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+            "sha256": "94e45da281d6ce2063b79964ce101449c2c43f49bacdb92c68beb4e90f843bc1"
+          }
+        ],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "202630298860",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2026-03-13T10:09:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "255 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n255 NEWBURY ST\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "LIBERTY CAPITAL MANAGEMENT",
+              "address_lines": [
+                "200 MIDDLESEX ESSEX TPKE, SUITE 308",
+                "ISELIN NJ 08830"
+              ],
+              "corporation_type": null,
+              "raw_text": "LIBERTY CAPITAL MANAGEMENT\n200 MIDDLESEX ESSEX TPKE, SUITE 308\nISELIN NJ 08830"
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        },
+        {
+          "filing_number": "202630725870",
+          "action_as_recorded": "TerminationSecuredParty",
+          "filing_datetime_local_as_recorded": "2026-03-31T13:02:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "SK WINE AND LIQUORS INC",
+              "address_lines": [
+                "255 NEWBURY ST",
+                "BOSTON MA 02115"
+              ],
+              "corporation_type": null,
+              "raw_text": "SK WINE AND LIQUORS INC\n255 NEWBURY ST\nBOSTON MA 02115"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "LIBERTY CAPITAL MANAGEMENT",
+              "address_lines": [
+                "200 MIDDLESEX ESSEX TPKE, SUITE 308",
+                "ISELIN NJ 08830"
+              ],
+              "corporation_type": null,
+              "raw_text": "LIBERTY CAPITAL MANAGEMENT\n200 MIDDLESEX ESSEX TPKE, SUITE 308\nISELIN NJ 08830"
+            }
+          ],
+          "collateral_text_available": false,
+          "evidence_pointer": "/filings/1"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "202630298860",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2026/0313/000000000/9356/202630298860_1.pdf",
+          "filename": "202630298860_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202630298860.json",
+            "sha256": "5ac27622efc48355214ff10265b9216c43e69c7b88d7ac3f54cb9e6edc6856ca",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/22",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:43:20.329993+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+                "sha256": "94e45da281d6ce2063b79964ce101449c2c43f49bacdb92c68beb4e90f843bc1"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        },
+        {
+          "filing_number": "202630725870",
+          "role": "amendment",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2026/0331/000000000/8403/202630725870_1.pdf",
+          "filename": "202630725870_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/sk-202630298860.json",
+            "sha256": "5ac27622efc48355214ff10265b9216c43e69c7b88d7ac3f54cb9e6edc6856ca",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/22",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:43:20.329993+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676zzzfOexhgieJdxfaFa0HWw",
+                "sha256": "94e45da281d6ce2063b79964ce101449c2c43f49bacdb92c68beb4e90f843bc1"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/1/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_original_pdf_and_verify_attachment_completeness",
+        "review_termination_pdf_202630725870"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag."
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-202293005740-2026-09-04",
+      "original_filing_number": "202293005740",
+      "holder_id": "BH-0f0e2d58c99312c5",
+      "roster_license_number": "LB-99457",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:42:41.537459+00:00",
+      "captured_history_entry_count": 1,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": null,
+      "party_inventory_limitation": "No independent claim that all source parties/addresses were captured; CUA shorthand may omit fields.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "The corporate debtor name matches the roster normalization. The history gives a business mailing address at 76 Summer Street, sixth floor; a mailing address is not a license-premises identifier."
+        ]
+      },
+      "collateral_review_state": "displayed_text_reviewed_pdf_unverified",
+      "collateral_classification": "equipment_and_associated_services",
+      "interpretation": "North Star Leasing, a division of Peoples Bank, is the recorded secured party. Displayed collateral identifies restaurant/refrigeration equipment and AV/theatrical/architectural lighting equipment and associated services, with invoice/proposal references. No particular alcoholic-beverages license is identified in the saved text.",
+      "source_quote": "Restaurant Equipment from Johnson-Lancaster including:",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202293005740.json",
+        "sha256": "da212e350fd701aaca16c3b6c398bb2833166f4a2f5d27b8a83e79eb1bc2234d",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/24",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:42:41.537459+00:00",
+        "capture_type": "parsed_query_tool_history",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676yUtmFOEPHHNEqQFUahcH9O",
+        "original_page_provenance_as_saved": [
+          {
+            "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676yUtmFOEPHHNEqQFUahcH9O",
+            "sha256": "2dce3be75d470523584c25355c85f6109465b3d3ff724b809693985ec37b8dbb"
+          }
+        ],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "202293005740",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2022-10-06T12:46:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "CMG CP1, LLC",
+              "address_lines": [
+                "76 SUMMER STREET 6TH FLOOR",
+                "BOSTON MA 02110"
+              ],
+              "corporation_type": null,
+              "raw_text": "CMG CP1, LLC\n76 SUMMER STREET 6TH FLOOR\nBOSTON MA 02110"
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "NORTH STAR LEASING A DIVISION OF PEOPLES BANK",
+              "address_lines": [
+                "PO BOX 4505",
+                "BURLINGTON VT 05406"
+              ],
+              "corporation_type": null,
+              "raw_text": "NORTH STAR LEASING A DIVISION OF PEOPLES BANK\nPO BOX 4505\nBURLINGTON VT 05406"
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "202293005740",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2022/1006/000000000/9577/202293005740_1.pdf",
+          "filename": "202293005740_1.pdf",
+          "page_count_as_saved": 1,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202293005740.json",
+            "sha256": "da212e350fd701aaca16c3b6c398bb2833166f4a2f5d27b8a83e79eb1bc2234d",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/24",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:42:41.537459+00:00",
+            "capture_type": "parsed_query_tool_history",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676yUtmFOEPHHNEqQFUahcH9O",
+            "original_page_provenance_as_saved": [
+              {
+                "url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676yUtmFOEPHHNEqQFUahcH9O",
+                "sha256": "2dce3be75d470523584c25355c85f6109465b3d3ff724b809693985ec37b8dbb"
+              }
+            ],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_original_pdf_and_verify_attachment_completeness"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag."
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-202398472870-2026-09-04",
+      "original_filing_number": "202398472870",
+      "holder_id": "BH-0f0e2d58c99312c5",
+      "roster_license_number": "LB-99457",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:51:47.992744+00:00",
+      "captured_history_entry_count": 1,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": null,
+      "party_inventory_limitation": "No independent claim that all source parties/addresses were captured; CUA shorthand may omit fields.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "Corporate debtor name matches the roster normalization; this short CUA capture preserves no party street addresses."
+        ]
+      },
+      "collateral_review_state": "displayed_text_reviewed_attachment_pending",
+      "collateral_classification": "equipment_displayed_schedule_a_unread",
+      "interpretation": "The saved text names lighting/AV equipment and two February 3, 2023 invoices, then directs the reader to Schedule A. The prior capture explicitly says Schedule A was not read; the attachment could add detail and is still required.",
+      "source_quote": "LED Lighting and Audio Visual Equipment",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202398472870-cua-observed.json",
+        "sha256": "1d8743548dfccbeb01966c01dd2641b4f558a5eb6f8e4ddd25d9419a1ab903c6",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/26",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:51:47.992744+00:00",
+        "capture_type": "cua_history_transcription",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676z3NDqd7r0hYrp1MLHWhLxw",
+        "original_page_provenance_as_saved": [],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "202398472870",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2023-03-07T15:28:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "CMG CP1, LLC",
+              "address_lines": []
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "NORTH STAR LEASING A DIVISION OF PEOPLES BANK",
+              "address_lines": []
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "202398472870",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2023/0307/000000000/8027/202398472870_1.pdf",
+          "filename": null,
+          "page_count_as_saved": null,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202398472870-cua-observed.json",
+            "sha256": "1d8743548dfccbeb01966c01dd2641b4f558a5eb6f8e4ddd25d9419a1ab903c6",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/26",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:51:47.992744+00:00",
+            "capture_type": "cua_history_transcription",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676z3NDqd7r0hYrp1MLHWhLxw",
+            "original_page_provenance_as_saved": [],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "read_original_pdf_and_schedule_a_all_pages",
+        "capture_missing_party_addresses_and_compare_entity"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag.",
+      "attachment_evidence": {
+        "pointer": "/classification",
+        "quote": "Equipment collateral in displayed text; Schedule A not read."
+      }
+    },
+    {
+      "review_id": "OFFLINE-MA-UCC-202300127090-2026-09-04",
+      "original_filing_number": "202300127090",
+      "holder_id": "BH-0f0e2d58c99312c5",
+      "roster_license_number": "LB-99457",
+      "reviewed_at": "2026-09-04T04:04:21.930891+00:00",
+      "review_method": "Read all preserved history entries, party fields and collateral; reconciled original first-pass report and visual notes; no source/PDF fetch in this pass.",
+      "history_text_review_state": "reviewed_saved_history_text",
+      "fresh_source_retrieval": false,
+      "source_as_of": "2026-09-04T00:51:47.992744+00:00",
+      "captured_history_entry_count": 1,
+      "all_saved_entries_read": true,
+      "index_filing_numbers_absent_from_saved_history": [],
+      "party_inventory_complete": null,
+      "party_inventory_limitation": "No independent claim that all source parties/addresses were captured; CUA shorthand may omit fields.",
+      "party_match": {
+        "status": "normalized_corporate_name_match_as_previously_reported",
+        "entity_identity_independently_certified": false,
+        "historical_or_license_continuity_caveats": [
+          "Corporate debtor name matches the roster normalization; this short CUA capture preserves no party street addresses."
+        ]
+      },
+      "collateral_review_state": "displayed_text_reviewed_pdf_unverified",
+      "collateral_classification": "blanket_property_generic_licenses",
+      "interpretation": "Eastern Bank is the recorded secured party. Displayed collateral covers broad personal/fixture property and generic licenses/permits, without identifying a liquor license. The separate July 11, 2024 board grant supplies license-pledge evidence; it does not change what this UCC text says.",
+      "source_quote": "All personal and fixture property of every kind and nature",
+      "source_quote_pointer": "/filings/0/collateral/0",
+      "source": {
+        "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202300127090-cua-observed.json",
+        "sha256": "27900cfd6f552df716fbce8b96b56e71ff74ce74c071489db91a54c1b05d1b67",
+        "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+        "source_manifest_pointer": "/files/25",
+        "source_manifest_sha256_matches": true,
+        "captured_at": "2026-09-04T00:51:47.992744+00:00",
+        "capture_type": "cua_history_transcription",
+        "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676ynE4B5AEUEI8pMxpg.JOWA",
+        "original_page_provenance_as_saved": [],
+        "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval."
+      },
+      "events": [
+        {
+          "filing_number": "202300127090",
+          "action_as_recorded": "InitialFiling",
+          "filing_datetime_local_as_recorded": "2023-05-01T11:13:00",
+          "source_timestamp_has_timezone": false,
+          "debtor_parties_as_saved": [
+            {
+              "name": "CMG CP1, LLC",
+              "address_lines": []
+            }
+          ],
+          "secured_parties_as_saved": [
+            {
+              "name": "EASTERN BANK",
+              "address_lines": []
+            }
+          ],
+          "collateral_text_available": true,
+          "evidence_pointer": "/filings/0"
+        }
+      ],
+      "document_reviews": [
+        {
+          "filing_number": "202300127090",
+          "role": "original",
+          "viewer_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearchViewPDF.aspx?Path=DRIVE1/2023/0501/000000000/4433/202300127090_1.pdf",
+          "filename": null,
+          "page_count_as_saved": null,
+          "pdf_review_state": "review_not_evidenced_in_saved_material",
+          "opening_state": "not_established",
+          "reviewed_in_this_pass": false,
+          "review_scope": "No completed visual/text PDF review established by saved evidence",
+          "evidence": {
+            "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/evidence/ucc/ucc-cmg-202300127090-cua-observed.json",
+            "sha256": "27900cfd6f552df716fbce8b96b56e71ff74ce74c071489db91a54c1b05d1b67",
+            "source_manifest_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/source-manifest.json",
+            "source_manifest_pointer": "/files/25",
+            "source_manifest_sha256_matches": true,
+            "captured_at": "2026-09-04T00:51:47.992744+00:00",
+            "capture_type": "cua_history_transcription",
+            "history_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCFilingHistory.aspx?sysvalue=ORIhMVYRub09EF9n4TWp2bWv29yOvpV3KZBkFFJ676ynE4B5AEUEI8pMxpg.JOWA",
+            "original_page_provenance_as_saved": [],
+            "note": "The JSON hash verifies the unchanged saved artifact. A stored page hash is provenance, not a locally available HTML page or fresh retrieval.",
+            "pointer": "/filings/0/documents/0"
+          },
+          "pending": true
+        }
+      ],
+      "pending_actions": [
+        "review_original_pdf_and_verify_attachment_completeness",
+        "capture_missing_party_addresses_and_compare_entity"
+      ],
+      "all_documents_reviewed": false,
+      "current_lien_enforceability": "not_established",
+      "loan_principal": "not_established",
+      "outstanding_balance": "not_established",
+      "separate_board_event_not_equated_to_new_loan": true,
+      "queue_merge_note": "Import as an analyst review of saved history text while preserving the listed pending collateral, party-amendment and PDF work. Do not replace this with an unconditional completed-history/documents flag."
+    }
+  ],
+  "limitations": [
+    "Review date is not a new source-observation date; saved sources were captured September 3, 2026 local time.",
+    "No network, UCC/API calls, original PDF retrieval, profile/finding writes, or aggregate/dashboard changes were performed.",
+    "Public financing statements and amendments do not establish outstanding balances, current enforceability or numbers of loans.",
+    "An empty collateral array means collateral was not captured in that history field, not that the financing statement has no collateral.",
+    "All missing/unverified original and amendment PDFs remain pending; no PDF exemption is inferred from available HTML collateral."
+  ]
+}

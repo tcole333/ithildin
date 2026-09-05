@@ -1,0 +1,148 @@
+report-01-tax-wealth.md	Leaked IRS bulk microdata (returns + information returns + trade-level records)	9
+report-01-tax-wealth.md	Public securities filings (SEC: 13F, Form 4, prospectuses)	6
+report-01-tax-wealth.md	Official agency statistics (IRS Data Books, JCT, aggregate analyses)	5
+report-01-tax-wealth.md	Litigation records (dockets, AG suits, DOJ complaints, Tax Court)	6
+report-01-tax-wealth.md	FOIA/FOIL records (NYC tax appeals, Treasury emails, NZ OIA file)	3
+report-01-tax-wealth.md	Interviews incl. insiders (ex-IRS 50+, ex-Susquehanna, land trusts, experts)	9
+report-01-tax-wealth.md	Wealth/valuation reference lists (Forbes)	3
+report-01-tax-wealth.md	Third-party leaked business records (NBA financials)	1
+report-01-tax-wealth.md	Deal/promotional documents (placement memos)	1
+report-01-tax-wealth.md	Machine-readable web artifacts (robots directives)	1
+report-01-tax-wealth.md	Property/deed records	2
+report-01-tax-wealth.md	denominator-construction (build the unpublished universe/base, then compute rates)	5
+report-01-tax-wealth.md	silo-join-on-hard-identifier (person/asset/property/year)	6
+report-01-tax-wealth.md	two-books-diff (same facts, two audiences/periods)	3
+report-01-tax-wealth.md	outlier-in-microdata (zero-tax years, impossible balances, character mismatch)	4
+report-01-tax-wealth.md	policy-shadow-measurement (measure what the owner won't publish)	3
+report-01-tax-wealth.md	temporal-correlation (money in → provision out; trade windows)	3
+report-01-tax-wealth.md	substitution-pair detection (economic twin swapped for legal non-twin)	2
+report-01-tax-wealth.md	valuation-multiple screening (transacted vs claimed value)	2
+report-01-tax-wealth.md	legislative-diff-to-beneficiary join	1 (deep)
+report-01-tax-wealth.md	hotspot-mapping-from-model-data	1
+report-01-tax-wealth.md	compliance-artifact inspection (machine-readable intent)	1
+report-01-tax-wealth.md	de-anonymization-by-fact-join	1
+report-02-judicial-ethics.md	Federal financial-disclosure filings (Free Law Project / CourtListener corpus) — always as the anti-join target	travel, real-estate, tuition, Alito, 38-vacations, Koch, self-policing, delicate-matter (+ the database)
+report-02-judicial-ethics.md	Service-staff / insider human networks (crew, pilots, caterers, lodge staff, school admins, network ex-employees, confidential court sources)	travel, tuition, Alito, yacht-tax, 38-vacations, Koch, Leo, NC
+report-02-judicial-ethics.md	FOIA / open-records outputs (USMS detail records, AO/Judicial Conference files, state licenses, university emails, disciplinary/appointment files)	Alito, 38-vacations, self-policing, SC (+ origins: the founding "raft" of requests)
+report-02-judicial-ethics.md	Flight records (FAA registry + trackers + charter identification)	travel, Alito, 38-vacations, Koch
+report-02-judicial-ethics.md	Litigation dockets as document troves (school bankruptcy, tax court, John Doe archive, SCOTUS dockets)	tuition, Alito, 38-vacations, Leo
+report-02-judicial-ethics.md	Photo/social OSINT + physical artifacts (Instagram, plane-spotter video, paintings, embroidered polos, photo albums)	travel, Alito, 38-vacations
+report-02-judicial-ethics.md	disclosure-gap-triangulation (reconstructed benefit ledger anti-joined to filings)	travel, real-estate, tuition, Alito, 38-vacations, Koch
+report-02-judicial-ethics.md	guest-manifest-reconstruction (NEW: rebuild who-was-there at closed venues from staff, photos, licenses, artifacts)	travel, Alito, 38-vacations, Koch
+report-02-judicial-ethics.md	silo-join-on-hard-identifier (parcel ID, tail number, officer-of-record, deal amount)	real-estate, Seid, travel, 38-vacations
+report-02-judicial-ethics.md	denominator-construction (full roster/ledger before rates: "38", "75% lay judges")	38-vacations, SC
+report-02-judicial-ethics.md	prior-disclosure-precedent-diff (NEW: subject's own earlier filings prove rule knowledge)	tuition (Dixon), Koch (2008 speech)
+report-02-judicial-ethics.md	named-cohort-tracing (membership roll as benefactor/alumni universe)	38-vacations (Horatio Alger), Leo (FedSoc pipeline)
+report-02-judicial-ethics.md	protective-detail-records-reconstruction (NEW: security/advance logistics as shadow itinerary)	38-vacations
+report-03-dark-money.md	IRS Form 990 family (990/990-EZ/990-PF, Schedules B/C/I/L, applications 1023/1024)	9
+report-03-dark-money.md	FEC / state campaign-finance filings	7
+report-03-dark-money.md	Litigation & enforcement records (dockets, depositions, settlements, unsealed exhibits, FTC/DOJ actions)	7
+report-03-dark-money.md	Leaked / windfall internal documents	4
+report-03-dark-money.md	FOIA / records requests	4
+report-03-dark-money.md	Constructed corpora (crowdsourced extraction, instrumented collection, AV monitoring)	4
+report-03-dark-money.md	Corporate registries (state SoS, foreign registries)	3
+report-03-dark-money.md	Expert adjudication panels (tax-law professors converting facts into legal significance)	4
+report-03-dark-money.md	two-books-diff (incl. application-vs-conduct variant)	6
+report-03-dark-money.md	grant-chain-tracing	4
+report-03-dark-money.md	enforcement-denominator / policy-shadow-measurement	4
+report-03-dark-money.md	silo-join-on-hard-identifier (EIN/officer/address/vendor)	4
+report-03-dark-money.md	crowdsourced-document-liberation / adversarial-instrumentation	3
+report-03-dark-money.md	internal-rulebook-acquisition	3
+report-03-dark-money.md	expenditure-composition-ratio	2
+report-03-dark-money.md	temporal-correlation	2
+report-03-dark-money.md	new-entity-first-filing-watch	1 (high leverage)
+report-05-criminal-justice.md	Bulk administrative microdata (FOIA'd or published ledgers: scores, tickets, complaints, homicide reports, citations)	7
+report-05-criminal-justice.md	Court records at case level (dockets, opinions, transcripts, bankruptcy filings)	8
+report-05-criminal-justice.md	The institution's own internal records (lab retests, personnel files, internal-affairs tapes, SOPs/rulebooks, the algorithm itself)	7
+report-05-criminal-justice.md	Litigation-derived records (depositions, settlements, civil-suit files)	5
+report-05-criminal-justice.md	Census/population denominators	4
+report-05-criminal-justice.md	Affected-cohort interviews	7
+report-05-criminal-justice.md	Crowdsourced/constructed corpora & field observation	2
+report-05-criminal-justice.md	Denominator-construction (per-capita/per-roster rates by race, geography, or institution)	6
+report-05-criminal-justice.md	Two-books-diff family (sanction-outcome diff; retest ledger; self-report vs. independent estimate; substantiation vs. discipline)	5
+report-05-criminal-justice.md	Named-cohort-tracing (follow N affected people/cases to outcomes)	5
+report-05-criminal-justice.md	Internal-rulebook-acquisition (the SOP, the questionnaire, the score matrix, the boilerplate settlement)	4
+report-05-criminal-justice.md	Silo-join-on-hard-identifier (name+DOB or case number across systems)	3
+report-05-criminal-justice.md	Statute/charge-validity-audit (does the legal predicate exist?)	3
+report-05-criminal-justice.md	Ground-truth-construction	2 deep
+report-05-criminal-justice.md	Process-timing-analysis (adjudication vs. evidence timestamps; ex parte rates)	2
+report-05-criminal-justice.md	Outlier-in-aggregate + zero-report anomaly	3
+report-05-criminal-justice.md	Crowdsourced-case-aggregation	1
+report-06-corporate-consumer.md	Bulk local court dockets (suits, judgments, garnishments, warrants, lis pendens)	6
+report-06-corporate-consumer.md	Interviews with former insiders (employees, franchisees, ex-officials)	8
+report-06-corporate-consumer.md	Internal corporate documents (board decks, strategy memos, training materials, emails, call audio)	5
+report-06-corporate-consumer.md	Subject's own public commercial artifacts (website code, marketing, earnings calls, SEC filings)	5
+report-06-corporate-consumer.md	Records-law acquisitions (FOIA/FOIL: IRS comms, FTC complaint corpus, NYC tax appeals)	3
+report-06-corporate-consumer.md	Nonprofit/political money disclosures (990s, FEC, FCC political files, lobbying, campaign finance)	5
+report-06-corporate-consumer.md	Commercial/proprietary datasets via partnership or purchase (ADP, CoStar, Advertising Analytics, premium quotes)	4
+report-06-corporate-consumer.md	Census/demographic join layers	3
+report-06-corporate-consumer.md	Crowdsourced tips and callouts	3
+report-06-corporate-consumer.md	Constructed test personas / mystery shopping	2
+report-06-corporate-consumer.md	Field observation (courtrooms)	1
+report-06-corporate-consumer.md	Pre-existing litigation records mined for evidence	3
+report-06-corporate-consumer.md	denominator-construction (bulk records → per-capita rates)	4
+report-06-corporate-consumer.md	plaintiff-frequency-inversion (rank filers, not defendants)	3
+report-06-corporate-consumer.md	two-books-diff (same fact, two authorities/audiences)	3
+report-06-corporate-consumer.md	internal-rulebook-acquisition	3
+report-06-corporate-consumer.md	temporal-correlation (money/action timelines)	3
+report-06-corporate-consumer.md	crowdsourced-case-aggregation	3
+report-06-corporate-consumer.md	vendor-brag-mining (marketing/earnings-call self-incrimination)	2
+report-06-corporate-consumer.md	mystery-shopper-walkthrough / fixed-persona pricing	2
+report-06-corporate-consumer.md	geocoded-disparity-join	2
+report-06-corporate-consumer.md	related-party price benchmarking (nonprofit spend → insider vendor)	2
+report-06-corporate-consumer.md	procedural-artifact-forensics (contempt/bail/lis pendens as countable instruments)	2
+report-06-corporate-consumer.md	site-forensics (subject's own web assets)	1 deep
+report-06-corporate-consumer.md	price-to-risk-join	1
+report-06-corporate-consumer.md	third-party-data-custodian-query	1
+report-06-corporate-consumer.md	regulator-complaint-corpus-mining (FOIA'd FTC/CFPB complaints)	1
+report-06-corporate-consumer.md	geographic-concentration-analysis (vendor/market share in a submarket)	1
+report-07-gov-spending.md	Federal spending/procurement microdata (FPDS, USASpending, SBA loan-level, Treasury reports)	6
+report-07-gov-spending.md	Leaked/insider internal documents (after-action reviews, evaluations, investigation reports, emails)	5
+report-07-gov-spending.md	State/local public-records requests (governor's offices, economic-development agencies)	3
+report-07-gov-spending.md	State business registries / incorporation records	3
+report-07-gov-spending.md	Census/eligibility statistical recomputation	3
+report-07-gov-spending.md	Field observation (site visits, auctions, on-ground verification)	4
+report-07-gov-spending.md	County courthouse records (deeds, partition/court files)	1 (deep)
+report-07-gov-spending.md	Insider interviews at scale	10
+report-07-gov-spending.md	Official watchdog corpora (GAO/IG/NTSB) as public warning layer	2
+report-07-gov-spending.md	Litigation/enforcement records for principal history	3
+report-07-gov-spending.md	entity-age-vs-award-diff	3
+report-07-gov-spending.md	silo-join-on-hard-identifier	4
+report-07-gov-spending.md	two-books-diff	3
+report-07-gov-spending.md	eligibility-recompute + designation-list-diff (new)	2
+report-07-gov-spending.md	temporal-correlation	3
+report-07-gov-spending.md	denominator-construction	4
+report-07-gov-spending.md	benefit-cap-clustering (new)	1 (strong)
+report-07-gov-spending.md	category-geography-implausibility (new)	1
+report-07-gov-spending.md	beneficiary-reverse-engineering	3
+report-07-gov-spending.md	warnings-ledger-construction (new)	1 (deep)
+report-07-gov-spending.md	pass-through-fee-stacking (new)	1
+report-07-gov-spending.md	procurement-justification-text-mining (new)	1
+report-07-gov-spending.md	named-cohort-tracing	2
+report-07-gov-spending.md	block-grant-diversion-accounting (new)	1
+report-07-gov-spending.md	single-originator-concentration (new)	1
+report-07-gov-spending.md	ground-truth-vs-claimed-output (new)	2
+report-07-gov-spending.md	related-party-price-benchmarking (new)	1
+report-07-gov-spending.md	longitudinal-ledger-construction (new)	1
+report-08-environment-labor-tech.md	Agency bulk/self-reported data & models (RSEI, TRI, Landsat, USDA, USBR, claims data)	9
+report-08-environment-labor-tech.md	Constructed interaction with the subject's live system (purchases, quotes, scrapes, extensions)	5
+report-08-environment-labor-tech.md	Public-records/FOIA productions (emails, inspection files, water tests, CAD data)	4
+report-08-environment-labor-tech.md	Statute/rulemaking text used as data	4
+report-08-environment-labor-tech.md	Field observation + named-victim casework	8
+report-08-environment-labor-tech.md	Commercial data (CoStar, Rhodium, insurance rate data)	3
+report-08-environment-labor-tech.md	Insider/whistleblower accounts	3
+report-08-environment-labor-tech.md	Litigation records	2
+report-08-environment-labor-tech.md	Commissioned original science	1
+report-08-environment-labor-tech.md	platform-experiment / constructed-interaction probe (ad-purchase-probe, mystery-shopper-price-probe, self-preferencing-audit, remediation-audit)	4
+report-08-environment-labor-tech.md	hotspot-mapping-from-model-data → dormant-public-model-operationalization	2
+report-08-environment-labor-tech.md	cross-jurisdiction-comparison (50-state codification)	2
+report-08-environment-labor-tech.md	denominator-construction / claims-microdata rate ratios	2
+report-08-environment-labor-tech.md	two-books-diff (allocated vs. actual flow; user-view vs. advertiser-view; public statements vs. internal emails; 10-K silence vs. incident record)	4
+report-08-environment-labor-tech.md	records-request-email-reconstruction (multi-agency FOIA fan-out)	1 strong
+report-08-environment-labor-tech.md	remote-sensing-time-series	2
+report-08-environment-labor-tech.md	vendor-concentration-analysis	1
+report-08-environment-labor-tech.md	instrumented-crowdsourcing	2
+report-08-environment-labor-tech.md	subsidy-incentive-join	1
+report-08-environment-labor-tech.md	silo-join-on-hard-identifier (facility→schools; brand→GVA incidents; agency codes→claims)	3
+report-08-environment-labor-tech.md	case-accumulation-against-official-denial	1
+report-08-environment-labor-tech.md	obstruction-as-confirmation	1

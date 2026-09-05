@@ -1,0 +1,22 @@
+import sqlite3
+from pathlib import Path
+from pipeline.export_network import export_network
+p=Path('/tmp/osint-SXYkyRSJ/network-fixture.sqlite')
+c=sqlite3.connect(p)
+c.executescript('''
+CREATE TABLE entities(id INTEGER,name TEXT,entity_type TEXT,jurisdiction TEXT,status TEXT);
+CREATE TABLE connections(id INTEGER,person_a TEXT,person_b TEXT,relationship_type TEXT,description TEXT,strength TEXT,date_range TEXT,verification_status TEXT,profile_id TEXT);
+CREATE TABLE entity_roles(entity_id INTEGER,person_name TEXT,role TEXT,date_start TEXT,date_end TEXT);
+CREATE TABLE entity_relations(entity_a_id INTEGER,entity_b_id INTEGER,relation_type TEXT,description TEXT);
+CREATE TABLE findings(target_name TEXT,verification_status TEXT);
+''')
+c.executemany('INSERT INTO connections VALUES(?,?,?,?,?,?,?,?,?)',[
+(1,'Person A','Person B','alleged_payment','Unverified payment allegation','weak','2020','unverified','profile-a'),
+(2,'Person A','Person B','co_attendance','Verified conference attendance','strong','2021','verified','profile-b'),
+])
+c.commit();c.close()
+network=export_network(p)
+print(network['edges'])
+assert network['edges'][0]['relationship_type']=='alleged_payment'
+assert network['edges'][0]['verified'] is True
+assert network['edges'][0]['profile_ids']==['profile-a','profile-b']

@@ -1,0 +1,201 @@
+{
+  "verified_on": "2026-09-04",
+  "test_scope": [
+    "tests/test_query_massachusetts_ucc.py",
+    "tests/test_boston_license_review.py",
+    "tests/test_boston_ucc_cua_bridge.py",
+    "tests/test_boston_ucc_runner.py",
+    "tests/test_boston_ucc_filing_review.py"
+  ],
+  "tests_passed": 82,
+  "execution_note": "81 tests passed in the filesystem/network sandbox. The one integration test requires binding 127.0.0.1; it passed separately with local-server permission. No external UCC requests were made by these tests.",
+  "ruff": "Passed for the five Python tools and five scoped test files.",
+  "browser_validation": "Root visually inspected the dashboard and its explicit access-block coverage. In-app evidence saving was verified with actual captured batches. Dashboard action/outcome filters and source links were separately tested.",
+  "live_collection_state": "Paused pending supported bulk access under the published terms. One same-IAB search form load succeeded; no new debtor or filing-document request was submitted. Result/document access remain unverified. 96 current queries remain complete; 1,348 current and 1,444 lapsed queries remain pending.",
+  "persistent_batch_transport": "Implemented and tested offline; no live parity probe performed because source access was blocked. This is not end-to-end live validation of the new batch mode.",
+  "offline_access_status_and_reconciliation_update": {
+    "verified_at": "2026-09-04T04:15:10.980291+00:00",
+    "historical_live_collection_state": "Stopped after explicit source Access Denied/Error 15; 96 current holder queries preserved.",
+    "historical_test_evidence_preserved": "The preceding 82-test result, browser-validation account and persistent-transport validation describe their original run; they were not rerun or reclassified by this update.",
+    "collection_status": "paused_pending_supported_bulk_access",
+    "ucc_collection_paused": true,
+    "ucc_current_access_denial": false,
+    "historical_access_denial_preserved": true,
+    "checks": [
+      "Rebuilt review-data.json, license-review.csv and dashboard.html offline.",
+      "Original coverage values, license conclusions and group assignments unchanged; access-state flags updated separately.",
+      "Seven source reconciliation records preserved exactly, bound by holder ID plus original filing number and explicit roster license.",
+      "Base filing-review-queue.json remains byte-for-byte unchanged and retains 19 imported prior-history reviews.",
+      "Current status and historical denial SHA256 references match their unchanged source artifacts.",
+      "Offline DOM assertions checked the new banner, terms/access/inquiry links, all seven history cards and material identity/document caveats.",
+      "Ruff passed for build_review_data.py and build_dashboard.py; generated JavaScript passed Node syntax validation."
+    ],
+    "invariants": {
+      "status": "passed",
+      "current_queries_complete": 96,
+      "current_queries_pending": 1348,
+      "lapsed_queries_pending": 1444,
+      "license_rows": 1520,
+      "reconciled_histories": 7,
+      "reconciled_history_entries": 11,
+      "prior_complete_original_pdf": 1,
+      "pending_original_pdfs": 6,
+      "pending_amendment_pdfs": 4,
+      "base_filing_queue_unchanged": true,
+      "original_coverage_and_license_conclusions_unchanged": true,
+      "historical_block_sha256": "687f2b4969826d9ec6e42c3b52de1dc1932e01c522141c639517ca1fb14474e6",
+      "collection_status_sha256": "12ccac17d2c38804929fb325c1a0d82b4ebbd10b336302665dafbd37590afe62",
+      "reconciliation_sha256": "56128bb9d8aa4965aa4b6720a2ecdd3ce80eb8052b1607db1a6c211f0e7731ef"
+    },
+    "browser_or_network_requests_in_update": 0,
+    "paid_calls_or_messages_sent": 0,
+    "visual_dashboard_validation": "Not performed in this update; the root task will inspect the local dashboard separately.",
+    "qc_artifact_directory": "/tmp/osint-ucc-access-status-7ysl9k43"
+  },
+  "offline_cohort_and_operator_integration": {
+    "verified_at": "2026-09-04T04:31:46.867849+00:00",
+    "source_label_cohorts": "Exhaustive exact license-ID mapping, inventory/CSV/generator hashes, source-row hashes and canonical ID/class/scope/source-row projection hash verified.",
+    "source_label_only_caveat": "Categories and literal flags do not determine transferability, acquisition route, price, ownership or control.",
+    "ownership_review_source": "../ownership/evidence/large-operator-follow-up/root-integration-review.json",
+    "checks": [
+      "All eight accepted raw match objects and nine new unassigned assessment objects deeply equal the reviewed ownership source.",
+      "Prior groups and two prior assessments remain unchanged; candidate Areas records are unassigned and retain historical PAI/continuity evidence.",
+      "Dated Avolta Advent minority-shareholder and 2020 joint-venture observations remain qualified; no new PE numerator cases.",
+      "Nine category options plus All, original 49 source-class options plus All, and four restriction-wording states plus All validated offline.",
+      "Filter combinations validated for airport/class, innholder/restriction, core versus boundary retail, and Restricted versus Unrestricted or ambiguous Rest.",
+      "Original transfer/pledge, ownership-interest, reconciliation and UCC index coverage remain separate and unchanged.",
+      "Generated dashboard JSON matches review-data.json; CSV has 1,520 rows and current 83-reviewed/5-PE counts."
+    ],
+    "regression_tests": {
+      "file": "tests/test_boston_license_review_report.py",
+      "tests_passed": 11,
+      "scope": "Explicit analyst true survives an unverified DBA caveat; explicit false excludes a match; non-booleans including string false are rejected; legacy status fallback remains compatible.",
+      "papercut_resolved": 2663
+    },
+    "ruff": "Passed for build_review_data.py, build_dashboard.py and the focused regression test.",
+    "javascript": "Generated script passed Node syntax and offline filter/DOM assertions; no browser used by this agent.",
+    "invariants": {
+      "license_rows": 1520,
+      "source_label_segments": 9,
+      "affiliated": 72,
+      "reviewed": 83,
+      "reviewed_unresolved": 11,
+      "represented_groups": 17,
+      "pe_affiliated": 5,
+      "pe_groups": 2,
+      "accepted_raw_matches_preserved": 8,
+      "unassigned_raw_assessments_preserved": 9,
+      "original_groups_and_assessments_unchanged": true,
+      "current_ucc_complete": 96,
+      "current_ucc_pending": 1348,
+      "lapsed_ucc_pending": 1444,
+      "board_events_unchanged": 307,
+      "reconciled_saved_histories": 7,
+      "base_filing_queue_unchanged": true,
+      "cohort_sha256": "b568287c90bef4b0e92c6f5338c0030eb2e438cc277794461d7ed7c1610f46f1",
+      "ownership_after_sha256": "f0e7c843e16f67341daee85e49fec53704ee4cb545a9a7b476c66dae55b4aa81",
+      "status": "passed"
+    },
+    "network_or_paid_calls": 0,
+    "prior_2024_corpus_integrated": false,
+    "historical_82_test_result_preserved": true,
+    "qc_artifact_directory": "/tmp/osint-license-cohort-integration-aqp7k8sd"
+  },
+  "offline_extended_history_and_notices_integration": {
+    "status": "passed",
+    "canonical_files_unchanged": 8,
+    "benchmark_files_unchanged": 16,
+    "original_source_documents_hashes_unchanged": 64,
+    "raw_event_fields_preserved": 1115,
+    "source_hash_intersections": [
+      {
+        "left_window_id": "2020-2023",
+        "right_window_id": "2024-2026",
+        "shared_source_sha256": []
+      }
+    ],
+    "combined_ledgers": {
+      "review-board-events-combined.json": {
+        "records": 780,
+        "review_joined": 727,
+        "distinct_review_ids": 412
+      },
+      "review-ownership-interest-events-combined.json": {
+        "records": 301,
+        "review_joined": 215,
+        "distinct_review_ids": 182
+      },
+      "review-ownership-interest-notices-combined.json": {
+        "records": 14,
+        "review_joined": 6,
+        "distinct_review_ids": 6
+      },
+      "review-history-notices-combined.json": {
+        "records": 19,
+        "review_joined": 12,
+        "distinct_review_ids": 12
+      },
+      "review-history-proposals-combined.json": {
+        "records": 1,
+        "review_joined": 0,
+        "distinct_review_ids": 0
+      }
+    },
+    "judgment_notices": {
+      "source": 13,
+      "integrated_observations": 8,
+      "integrated_license_ids": 7,
+      "outside_review": 5
+    },
+    "ownership": {
+      "affiliations": 72,
+      "reviewed": 83,
+      "unresolved_reviewed": 11,
+      "groups": 17,
+      "documented_pe_affiliations": 5,
+      "documented_pe_groups": 2
+    },
+    "ucc_search_states": {
+      "current": {
+        "complete": 96,
+        "pending": 1348
+      },
+      "lapsed": {
+        "pending": 1444
+      }
+    },
+    "csv_rows": 1520,
+    "filing_queue_hash_unchanged": true,
+    "files": {
+      "review-data.json": "fc4f5719479d5200c726a69d0d03445a0ea03feeccfba0f61e71e23d98fc9cd4",
+      "dashboard.html": "7bd4bac76fc4a416e59c979d7abae403abbfbb43db60794b237274c4c57ce832",
+      "license-review.csv": "5252ded528e774a5f446288d0c29d2f208fba15db4a6db21b8fbb554af96ac15",
+      "build_review_data.py": "332f9ed4809eb36b32630131cf0e1a863ccbfa98ea5fc4e50ed3802c448b0efb",
+      "build_dashboard.py": "0a3b2f44817b7a4bec574b0dac362da55cd38b7b856b9a19ad9e565d1698362c"
+    },
+    "verified_at": "2026-09-04T05:01:00.239279+00:00",
+    "focused_tests": "17 passed: tests/test_boston_license_review_report.py",
+    "lint": "Ruff passed on both builders and the focused test file",
+    "javascript": "Node syntax, all9 cohort filters, access banner and links,7 reconciled histories, source-window counts,8 judgment notice cards and Airport5-affiliations/1-group rendering passed offline.",
+    "network_or_paid_calls": false,
+    "scope": "Integrates only finalized qa_complete2020\u20132023 source window alongside immutable2024\u20132026 baseline. Independent supplemental notice ledger remains separate; no lifetime-history, closing, current-debt or historical-equity inference.",
+    "source_readiness_sha256": "569aec0a3aeff6fa1c69b63dffadfc855378c041a8125927da647de014b333ae",
+    "independent_prior_window_quality_review": "transfer-corpus/prior-2024/quality-review/README.md",
+    "judgment_ledger_sha256": "3f38ecdd826faa4048d62ce20866182bf79391ac88489b6acb37ac5d142427a7",
+    "papercuts_resolved": [
+      2664,
+      2665
+    ],
+    "local_validation_scripts_directory": "/private/tmp/osint-history-integration-44cyhh85",
+    "durable_audit_file": "history-integration-validation.json",
+    "historical_82_test_result_preserved": true
+  },
+  "root_final_browser_validation": {
+    "artifact": "final-browser-validation.json",
+    "sha256": "4deb212acebd96401bb6866d7597139fbc6aafacca5f025eb322fff0a7485570",
+    "status": "passed",
+    "verified_at": "2026-09-04T05:05:00.781196+00:00",
+    "papercut_resolved": 2666,
+    "note": "Final notice wording and local browser inspection; no source/data/ownership/UCC coverage change."
+  }
+}

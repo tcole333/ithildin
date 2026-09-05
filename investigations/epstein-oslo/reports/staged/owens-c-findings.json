@@ -1,0 +1,158 @@
+[
+  {
+    "target_name": "Jeffrey Epstein / Wayne Owens 2018 roster",
+    "summary": "The two 2018 Wayne Owens search hits are duplicate releases of one unlabeled Epstein self-forwarded name roster, not two lists or a contact export.",
+    "detail": "HOUSE_OVERSIGHT_019871 and EFTA02540965-EFTA02540967 reproduce the same January 8, 2018 email from Jeffrey Epstein to himself, subject 'Fwd: radical breakthrough.' The body mixes idea fragments and an unlabeled sequence of living and deceased names. It contains no phone, email, address, or export fields. The artifact establishes that Epstein typed Wayne Owens's name in 2018, sixteen years after Owens died; it does not establish contact, travel, a memorial purpose, or a chronology.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "kabasshouse",
+      "house_oversight_20k"
+    ],
+    "date_of_event": "2018-01-08",
+    "source_quote": "kashoggi, bunker hunt. george mitchell . wayne owens. prince andrew.",
+    "evidence_refs": [
+      "HOUSE_OVERSIGHT_019871",
+      "EFTA02540965",
+      "EFTA02540966",
+      "EFTA02540967"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Jeffrey Epstein / Wayne Owens cold-fusion claim",
+    "summary": "In October 2009 Epstein claimed he had opposed congressional cold-fusion funding, invoked Wayne Owens, and said he had met the head of the LDS Church.",
+    "detail": "The four released renderings are one Jeffrey Epstein-Al Seckel thread, not independent corroboration. Epstein incorrectly called Owens a Utah senator; Owens was a House member and later Senate candidate. The email is primary evidence that Epstein made the claim and associated Owens with the funding episode. It does not independently prove a meeting, an Epstein-Owens interaction, or influence over the funding decision.",
+    "claim_type": "direct_quote",
+    "confidence": "confirmed",
+    "source_datasets": [
+      "kabasshouse"
+    ],
+    "date_of_event": "2009-10-01",
+    "source_quote": "wayne owens senator from utah,, i was there an argues against, it, had ot meet with the head of the mormon church.",
+    "evidence_refs": [
+      "EFTA02437604",
+      "EFTA02437605",
+      "EFTA02437606",
+      "EFTA02437607",
+      "EFTA00740161",
+      "EFTA00884559",
+      "EFTA00770891"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Jeffrey Epstein / S. Daniel Abraham access channel",
+    "summary": "Epstein used David Mitchell in October 2009 to seek a favorable word from S. Daniel 'Danny' Abraham with Palm Beach State Attorney Michael McAuliffe.",
+    "detail": "Epstein told Mitchell that McAuliffe could be a hindrance or help, said he was told McAuliffe was close to Danny Abraham, and asked Mitchell to seek a good word. Mitchell replied by offering to arrange a meeting at Danny's house. Two days later an incoming message said Danny knew Epstein had called that morning and would be told he rang. The official Congressional Record independently uses 'Danny Abraham' for S. Daniel Abraham, former SlimFast chairman. The messages establish an attempted intermediary and call channel; they do not show Abraham responding, contacting McAuliffe, or acting on Epstein's behalf.",
+    "claim_type": "direct_quote",
+    "confidence": "confirmed",
+    "source_datasets": [
+      "kabasshouse",
+      "congressional_record"
+    ],
+    "date_of_event": "2009-10-07 to 2009-10-09",
+    "source_quote": "if you feel comfortable, would you ask danny to put in a good word",
+    "evidence_refs": [
+      "EFTA02437722",
+      "EFTA02438042",
+      "EFTA00740391",
+      "EFTA00740394",
+      "EFTA00771111",
+      "EFTA00740396",
+      "https://www.congress.gov/108/crec/2003/01/07/CREC-2003-01-07.pdf"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Jeffrey Epstein / Wayne Owens FEC contribution correction",
+    "summary": "FEC records support one $1,000 Jeffrey Epstein contribution to Wayne Owens's committee on June 22, 1990, not two distinct contributions.",
+    "detail": "The two API rows for EPSTEIN, JEFFREY are identical in every substantive field and differ only in sub_id. Both share date, amount, New York 10022, employer field INVESTMENT BANKER, committee C00199992, image 90014024488, and link_id 3032920021022026785. They are one underlying Schedule A transaction duplicated in the API. This corrects the earlier Owens-A staged finding that treated the two sub_ids as distinct gifts. The contribution establishes a direct political-financial edge but not travel funding, a quid pro quo, or a particular fundraiser host.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "fec_schedule_a"
+    ],
+    "date_of_event": "1990-06-22",
+    "source_quote": "EPSTEIN, JEFFREY | 1990-06-22 | 1000 | WAYNE OWENS FOR CONGRESS COMMITTEE | 90014024488",
+    "evidence_refs": [
+      "FEC:C00199992:image:90014024488",
+      "FEC:link_id:3032920021022026785",
+      "FEC:sub_id:3061920110002393468",
+      "FEC:sub_id:3061920110002393469",
+      "https://www.fec.gov/data/receipts/individual-contributions/?committee_id=C00199992&contributor_name=EPSTEIN%2C%20JEFFREY&min_date=01%2F01%2F1987&max_date=12%2F31%2F1993",
+      "https://www.fec.gov/data/committee/C00199992/?cycle=1990"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Wayne Owens committee / Abraham-Epstein donor sequence",
+    "summary": "Owens's committee reported $1,000 from S. Daniel Abraham in 1988 and $1,000 from Jeffrey Epstein in 1990, with same-page donor clusters around each receipt.",
+    "detail": "On September 26, 1988 the committee reported $1,000 each from S. Daniel Abraham and Tammy Abraham, both New York 10021 and on image 88013625347. On June 22, 1990 image 90014024488 reports $1,000 each from Jeffrey Epstein, Mark L. Epstein, and David Jan Mitchell; exact duplicate API loads for Jeffrey and Mitchell were collapsed. The rows establish a shared committee and page/date clustering. They do not identify a host, bundler, family relationships, or prove that David Jan Mitchell is Epstein's later correspondent David Mitchell.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "fec_schedule_a"
+    ],
+    "date_of_event": "1988-09-26 to 1990-06-22",
+    "source_quote": "ABRAHAM, S DANIEL | 1988-09-26 | 1000; EPSTEIN, JEFFREY | 1990-06-22 | 1000",
+    "evidence_refs": [
+      "FEC:C00199992:image:88013625347",
+      "FEC:C00199992:image:90014024488",
+      "https://www.fec.gov/data/committee/C00199992/?cycle=1990"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "J. Epstein Foundation / Epstein Interests identity and peace grants",
+    "summary": "J. Epstein Foundation and Epstein Interests were successive names of EIN 13-3643429; its FY2003 return reports an unrestricted $10,000 grant to Seeds of Peace.",
+    "detail": "The return for the fiscal year ending May 31, 1999 names J. EPSTEIN FOUNDATION and EIN 13-3643429. The return for the fiscal year ending May 31, 2001 checks Name change and names EPSTEIN INTERESTS with the same EIN. The FY2003 grant schedule lists Seeds of Peace, Harvard Hillel, and the American Jewish Committee. This corrects any treatment of J. Epstein Foundation and Epstein Interests as separate vehicles. The Seeds of Peace line establishes peace-adjacent giving but does not connect the vehicle to CMEP, Owens, Abraham, or Oslo.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "irs_990_pf",
+      "guidestar",
+      "foundation_center_archive"
+    ],
+    "date_of_event": "1999-05-31 to 2003-05-31",
+    "source_quote": "J. EPSTEIN FOUNDATION | 13-3643429; EPSTEIN INTERESTS | Name change; Seeds of Peace | Unrestricted | 10,000",
+    "evidence_refs": [
+      "https://pdf.guidestar.org/PDF_Images/1999/133/643/1999-133643429-1-F.pdf",
+      "https://pdf.guidestar.org/PDF_Images/2001/133/643/2001-133643429-1-F.pdf",
+      "https://990s.foundationcenter.org/990pf_pdf_archive/133/133643429/133643429_200305_990PF.pdf",
+      "https://projects.propublica.org/nonprofits/organizations/133643429"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Epstein-vehicle peace/MENA grant roster",
+    "summary": "Thirty-nine inspectable Epstein-vehicle grant schedules contain no CMEP, Abraham, Owens, or Middle East Development Bank line, while documenting grants to Seeds of Peace, Save Darfur Coalition, and International Peace Institute.",
+    "detail": "The located record consists of 41 filing-year artifacts across EINs 13-3643429, 13-3996471, 66-0585379, and 66-0789697: 39 full return scans, one partial Enhanced Education return whose recipient schedule is missing, and one structured 2020 no-grant Gratitude America year. Exact/variant target searches across the 39 schedules returned zero CMEP, S. Daniel/Danny Abraham, Wayne Owens, or Middle East Development Bank grantee. Positive peace-adjacent lines include Epstein Interests to Seeds of Peace $10,000, C.O.U.Q. to Save Darfur Coalition $150,000, Gratitude America to IPI $375,000 in 2017 and $150,000 in 2019, plus an Enhanced Education summary listing IPI $125,000. This is a bounded schedule null and does not rule out missing returns, intermediaries, reimbursements, or non-charitable payments.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "irs_990_pf",
+      "propublica_nonprofit_explorer",
+      "foundation_center_archive",
+      "guidestar",
+      "kabasshouse"
+    ],
+    "date_of_event": "1998-06-23 to 2019-04-05",
+    "source_quote": "Seeds of Peace | 10,000; Save Darfur Coalition | 150,000; International Peace Institute Inc | 375,000",
+    "evidence_refs": [
+      "https://990s.foundationcenter.org/990pf_pdf_archive/133/133643429/133643429_200305_990PF.pdf",
+      "https://990s.foundationcenter.org/990pf_pdf_archive/133/133996471/133996471_200702_990PF.pdf",
+      "https://990s.foundationcenter.org/990pf_pdf_archive/660/660789697/660789697_201712_990PF.pdf",
+      "https://projects.propublica.org/nonprofits/organizations/660789697",
+      "EFTA01119775"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  }
+]

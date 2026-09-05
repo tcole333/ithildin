@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "completed_at": "2026-09-04T04:52:45.560296+00:00",
+  "result": "passed_no_correction_requests",
+  "readiness_state": "qa_complete",
+  "readiness_sha256": "569aec0a3aeff6fa1c69b63dffadfc855378c041a8125927da647de014b333ae",
+  "source_and_baseline_summary": {
+    "source_entries": 91,
+    "unique_source_ids": 91,
+    "unique_pdf_sha256": 89,
+    "unique_pdf_pages": 906,
+    "duplicate_pdf_groups": [
+      [
+        "BLB-2020-09-10",
+        "BLB-2020-09-10-v2"
+      ],
+      [
+        "BLB-2021-04-08-v1",
+        "BLB-2021-04-08-v2"
+      ]
+    ],
+    "original_64_source_hash_overlap": 0,
+    "readiness_files_verified": 11,
+    "baseline_files_unchanged": 24
+  },
+  "spot_check_summary": {
+    "purposeful_cases": 8,
+    "source_documents": 8,
+    "unique_pages_visually_inspected": 9,
+    "consolidated_rows_spot_checked": 9,
+    "issues": 0
+  },
+  "consumer_caveats": [
+    "12 notice rows use decision_bearing=true for acknowledgments/directives; use ledger/action subtype and board_granted_application to count approved applications."
+  ],
+  "canonical_files_edited": false,
+  "network_calls": 0,
+  "readiness_hashes_unchanged_at_completion": true,
+  "frozen_baseline_hashes_unchanged_at_completion": true,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "48cee85c2b4e9b7bdd0fba05a6a994152d2cbdf190b924d778dc2aa6ecc55cca",
+      "bytes": 4087
+    },
+    {
+      "path": "frozen-canonical-baseline-manifest.json",
+      "sha256": "28bc953b30186758acf51a7d54b2c51f5bde15e161a202c15712e35deb74ee90",
+      "bytes": 245811
+    },
+    {
+      "path": "purposeful-spot-checks.json",
+      "sha256": "68d62549cb91fa947b84b432cea1126d6649a5390f2e34c41741913d382fd55c",
+      "bytes": 16184
+    },
+    {
+      "path": "renders/BLB-2020-12-03-p8.png",
+      "sha256": "620e1fcb648a476d4ae755d0e207151cf3f076db8e32a8c5f7d94e2053182104",
+      "bytes": 202437
+    },
+    {
+      "path": "renders/BLB-2021-04-20-p1.png",
+      "sha256": "1767b0052ff3d686f058d24dd7cdf5e40dd5ad0968b5fe6d246a531aeb41c588",
+      "bytes": 381315
+    },
+    {
+      "path": "renders/BLB-2021-09-02-p1.png",
+      "sha256": "7d2305ca313d2bb51fdc8814c68f0834e260a70e6c5f86b5c3705672277f83c4",
+      "bytes": 224743
+    },
+    {
+      "path": "renders/BLB-2022-03-24-p19.png",
+      "sha256": "adf3722e5b342f951e4367c3617b2af1371a166564662eb447136a89f217db3f",
+      "bytes": 208432
+    },
+    {
+      "path": "renders/BLB-2022-10-26-p9.png",
+      "sha256": "76cbf9579a0d741826a270fd95959fa76b30d4139261a89985f4172ecfdc225d",
+      "bytes": 267779
+    },
+    {
+      "path": "renders/BLB-2023-01-05-p10.png",
+      "sha256": "3306c15a5832911b5ef108c806dcb6049b2af595287f76a876ee6016fd825e22",
+      "bytes": 218197
+    },
+    {
+      "path": "renders/BLB-2023-08-17-p1.png",
+      "sha256": "96e523a37b43c0a8d0c17f0491d98e04ec3598c63e0440623dbf4a883a6932fa",
+      "bytes": 210709
+    },
+    {
+      "path": "renders/BLB-2023-08-17-p4.png",
+      "sha256": "e061d5c20d0fb258c2e9be39882309c288dc558fab2f440eaf889b5282bbaa69",
+      "bytes": 164350
+    },
+    {
+      "path": "renders/BLB-2023-09-14-p11.png",
+      "sha256": "80b6aac8be35609925f354c65a3a3537447b04d6b407bc336d2a4a7d631d906d",
+      "bytes": 230139
+    },
+    {
+      "path": "source-hash-audit.json",
+      "sha256": "19e3436c69cde50d7a0d328802d38fae3ebcee28fd135834978ec7bf82ce827f",
+      "bytes": 75230
+    },
+    {
+      "path": "source-reference-audit.json",
+      "sha256": "88ad4cda4c9d4e3510aeb475cb9d30cd771f2fce8ef4d576c51649d56fb6af68",
+      "bytes": 6874
+    }
+  ]
+}

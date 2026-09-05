@@ -1,0 +1,106 @@
+{
+  "contract_fields": [
+    "event_id",
+    "property_key",
+    "property_label",
+    "municipality",
+    "county",
+    "parcel_id",
+    "event_date",
+    "date_precision",
+    "date_basis",
+    "event_type",
+    "from_party",
+    "from_capacity",
+    "to_party",
+    "to_capacity",
+    "consideration_usd",
+    "loan_amount_usd",
+    "registry",
+    "book_page",
+    "instrument_id",
+    "evidence_status",
+    "source_url",
+    "source_ref",
+    "source_quote",
+    "finding_ids",
+    "notes"
+  ],
+  "schema_version": "hassan-boston-wave2-v1",
+  "retrieved_from_local_evidence": "2026-09-04",
+  "online_searches_this_task": 0,
+  "initial_wave_files_modified": false,
+  "event_count": 395,
+  "property_count": 62,
+  "exact_boston_pid_count": 54,
+  "unique_recorded_instruments": 32,
+  "event_types": {
+    "mortgage_index_candidate": 4,
+    "foreclosure_deed_index_candidate": 2,
+    "deed_index_candidate": 12,
+    "unit_deed_index_candidate": 1,
+    "assessment_observation": 147,
+    "municipal_permit": 197,
+    "deed_recorded": 6,
+    "demolition_permit": 3,
+    "court_order": 8,
+    "mortgage_recorded": 1,
+    "lien_index_candidate": 5,
+    "development_approval": 1,
+    "trust_agreement_index_candidate": 1,
+    "foreclosure_deed_recorded": 1,
+    "attachment_recorded": 2,
+    "financing_statement_index_candidate": 1,
+    "tax_lien_index_candidate": 1,
+    "alleged_family_agreement": 1,
+    "case_disposition": 1
+  },
+  "inputs": {
+    "evidence/properties/assessment-observations.json": {
+      "path": "investigations/hassan-boston/evidence/properties/assessment-observations.json",
+      "sha256": "bceeac619afb47c880d46e630a409cce380d67d819c990884788cee9f39776a2"
+    },
+    "evidence/properties/parcel-inventory-fy2026.json": {
+      "path": "investigations/hassan-boston/evidence/properties/parcel-inventory-fy2026.json",
+      "sha256": "85ffa8dced535f5694acebfbea7e000237eddb2696812d02370eae913d01f2e3"
+    },
+    "evidence/properties/permit-observations.json": {
+      "path": "investigations/hassan-boston/evidence/properties/permit-observations.json",
+      "sha256": "a76ed02b82f27b9ada1632cced2b6b40cce04b0df2ca1524664219e6fa7720bd"
+    },
+    "evidence/properties/citation-map.json": {
+      "path": "investigations/hassan-boston/evidence/properties/citation-map.json",
+      "sha256": "4f061bd769d969290f99d464ffcdd4d340cb82650d6735e3e8958ed6743b3b6b"
+    },
+    "evidence/deeds-finance/instrument-ledger.csv": {
+      "path": "investigations/hassan-boston/evidence/deeds-finance/instrument-ledger.csv",
+      "sha256": "a7c19c9cd8f59292ac444386910543b27e75026b350a2a9c59ceda22869b4158"
+    },
+    "evidence/deeds-finance/scan-observations.md": {
+      "path": "investigations/hassan-boston/evidence/deeds-finance/scan-observations.md",
+      "sha256": "41b06d567d09bebd47b85c02584b8510e2083f7e33f94db7e0565feb0c87626d"
+    },
+    "evidence/deeds-finance/index-selected-transcription.txt": {
+      "path": "investigations/hassan-boston/evidence/deeds-finance/index-selected-transcription.txt",
+      "sha256": "6d13b615f7ec7a87940cfd6d72f0b4f830a0374c3c06063a80fa650dce5943a6"
+    },
+    "evidence/identities/name-variants.csv": {
+      "path": "investigations/hassan-boston/evidence/identities/name-variants.csv",
+      "sha256": "9a3c6bbc23196c234e91deb003d4afb5ff95893b54a8e2d213a9b834389ce462"
+    },
+    "evidence/litigation/fienberg-2010-opinion.txt": {
+      "path": "investigations/hassan-boston/evidence/litigation/fienberg-2010-opinion.txt",
+      "sha256": "eca3279de06a5c8f29ac6472ea367c0b97b847261003c5c828cfff7e67b3beb2"
+    },
+    "evidence/wave2/suffolk/scan-observations.md": {
+      "path": "investigations/hassan-boston/evidence/wave2/suffolk/scan-observations.md",
+      "sha256": "8ad8babdc4a7b082f618af57c41f05c15ca368e019fc44fc8e3951773ec97e7b"
+    }
+  },
+  "notes": [
+    "No title interval inferred from an assessment, permit, corporate officer, mortgage, index-only row, or pleading.",
+    "Multi-parcel instruments share instrument_id; monetary sums require transaction-level deduplication.",
+    "1993 deed 17988/312: all three original pages reviewed by source owner; three parcels; consideration 1925000; executed 1992-12-23 and recorded 1993-01-15.",
+    "Property units/addresses in unresolved candidates are internal matching details; avoid identifying them as subject residences."
+  ]
+}

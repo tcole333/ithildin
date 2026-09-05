@@ -1,43 +1,44 @@
-# Serguei Kouzmine
+# Serguei Kouzmine — unresolved identity split
+
+> **Editorial identity hold (2026-07-15):** This dossier contains two internally coherent but not yet bridged source streams: **(A) Sergey/Serguei Khouzmine in Spanish Operation Troika records** and **(B) Serguei Kouzmine, the U.S.-based QWave/Fintech investor and Constructor University executive**. No matching date of birth, address, spouse, employer, education record, or other stable identifier was found across the streams; the DOB in EFTA00129096 is redacted. Treat them as separate people unless primary evidence establishes continuity. Graph entities are now split as `Sergey Khouzmine (Spanish Troika record)` and `Serguei Kouzmine (QWave/Fintech)`.
 
 ## Identity
-- **Full name**: Sergey Vladimirovich Kouzmine (also: Kuzmin, Kuzmine)
-- **DOB**: ~1963 (estimated from 1991 company formation and career timeline)
-- **Aliases**: Sergei Kuzmin, Serguei V. Kouzmine, Sergey Kuzmine
-- **Education**: PhD Nuclear Physics (Budker Institute of Nuclear Physics, Siberian Branch, Russian Academy of Sciences, 1999); MS Physics (Novosibirsk State University); MBA (University of Chicago Booth School of Business)
-- **Citizenships**: Russia, possibly US permanent resident
-- **Known addresses**: 3445 Stratford Rd #3902, Atlanta, GA 30308 (via Kouzmine Serguei V Revocable Trust); also Evanston IL, Grantville GA, Chicago IL, Pompano Beach FL; formerly Calle Asmagui 156, Urbanizacion Rocio de Nagueles, Marbella, Spain
+- **Spanish-record person**: Sergey/Serguei Khouzmine/Kouzmine; no DOB located; Spanish materials identify a Marbella residence and associates but no QWave, Centice, Ritzio, Fintech Ventures, Beloussov, U.S. education, or U.S. address.
+- **U.S./QWave person**: Serguei Kouzmine; a 2002 SEC biography says age 38 (approximately 1963/64), University of Chicago MBA, Russian nuclear-physics doctorate, and Evanston, Illinois address. A 2025 Constructor biography repeats the rare education pattern and Fintech Ventures history.
+- **Aliases/transliterations**: Sergei/Sergey/Serguei Kuzmin/Kuzmine/Kouzmine are not unique identifiers and must not be used alone to merge records.
+- **Citizenship/immigration**: Not established by the reviewed primary records.
+- **Addresses**: Keep U.S. corporate/property addresses with the QWave person and Calle Asmagui 156, Marbella with the Spanish-record person; do not combine them as one movement history.
 - **LinkedIn**: Two profiles -- Kennesaw GA, Pompano Beach FL
-- **OpenSanctions status**: NOT listed (significant -- despite documented OCG leadership and Spanish arrest warrant, operates freely in US and Europe)
+- **OpenSanctions status**: No matching listing found in the recorded search. The sources reviewed for lead #35191 did not independently establish a current Spanish warrant.
 - **ICIJ Offshore Leaks**: "Kuzmin Alexander" (Russia, possibly related) -- shareholder of Bertonix Enterprises Limited (BVI)
 
 ## Summary
 
-Serguei Kouzmine is the most consequential figure in the DFJ network investigation. He maintains a dual identity: (1) a documented leader of the Tambovskaya-Malyshevskaya organized crime group, one of Russia's most powerful mafia organizations, named alongside Gennady Petrov and Alexander Malyshev in the Spanish Operation Troika indictment; and (2) a PhD physicist, University of Chicago MBA, Northwestern University faculty member, venture capital fund manager, FDIC-chartered bank founding investor, and now President of Constructor University (Bremen, Germany).
+The name Serguei/Sergey Kouzmine appears in two source streams. Spanish prosecutors alleged an "Estructura Kouzmine" in Operation Troika; the Audiencia Nacional declared that person *en rebeldía* and expressly did not try him in Sentencia 36/2018. Separate U.S. corporate and biographical sources identify a physicist, venture investor, and university executive associated with QWave, Centice, Fintech Ventures, and Constructor University. The technology entities do not appear in the Spanish accusation or judgment, and the reviewed records do not establish that the two people are the same.
 
-The Spanish prosecution (488-page indictment, D.P. 321/06) documents Kouzmine as the "expert on economics" of the triumvirate, controlling at least 7 Spanish companies, offshore entities in Panama, Liechtenstein, Liberia, BVI, and Cyprus, and participating in approximately EUR 50 million in money laundering operations (1998-2007). He escaped arrest during the June 2008 Spanish raids and was tried in absentia. While 17 co-defendants were acquitted in October 2018 (two after confessing guilt), Kouzmine was never acquitted -- he was never present for trial. He was also detained in 1992 in St. Petersburg as part of the Malyshev-led criminal gang and faced SDNY federal criminal charges (1:95-cr-00846, 1995-2000).
+The prosecution accusation attributes an economic role and a multi-jurisdiction corporate structure to Kouzmine. It alleges Spanish, Panamanian, Liechtenstein, Liberian/BVI, and Russian entities and labels transfers through them as laundering. Sentencia 36/2018 found that Kouzmine controlled several Spanish and Panamanian entities, but it did not find the illicit origin of his assets proved. The EUR 50 million figure describes broader Operation Troika allegations and should not be attributed solely to the Kouzmine structure. The 17 defendants before the court were acquitted; Kouzmine was not tried. Leonid Khazine and Mikhail Rebo entered partial conformities, but the court rejected them as insufficient and acquitted both.
 
-His connection to the DFJ network runs through QWave Capital, a quantum technology VC fund he co-founded in 2012 with Serguei Beloussov (Acronis founder). QWave invested in Centice Corp, where Kouzmine and Frank Creer (DFJ network officer, CEO of Draper Hero Institute) sat together on the board of directors. The FBI ARMS Reach memo (Operation Trip Knot) identifies the Creer-Kouzmine-Beloussov-QWave pathway as a vehicle for money funneling and political access, drawing explicit parallels to Epstein's MIT funding model. Masha Drokova, simultaneously Epstein's publicist and QWave Capital's publicist, served as the human bridge between these networks.
+The independently verified DFJ-adjacent chain is narrower: QWave sources identify the U.S./QWave Kouzmine and Serguei Beloussov in fund leadership; a QWave release identifies Centice as a portfolio company; an SEC Form D/A lists Kouzmine and Frank Creer as Centice directors; and SEC records link Creer to Zone Venture Fund, a DFJ Network affiliate. EFTA00129096 additionally states that Drokova publicized QWave and that Creer/Jurvetson invested through DFJ Capital, but no independent fund or employment record was located for those claims. Drokova's emails directly prove that she introduced Beloussov—not Kouzmine—to Epstein in January 2018. No direct Kouzmine-Epstein communication was found.
 
 ## Key Findings
 
-1. **Tambovskaya-Malyshevskaya leadership**: Named as one of four top leaders alongside Petrov, Malyshev, and Izgilov in the 488-page Spanish indictment (D.P. 321/06, 2015). Controlled his own operational structure ("Estructura Kouzmine") with subordinates including Leonid Khazine, Olena Boyko, Kiril Yudashev, and Spanish lawyers. [Finding #9038]
+1. **Prosecution allegation of leadership**: Spanish prosecutors named Kouzmine as a leading economic figure and alleged an "Estructura Kouzmine" involving Leonid Khazine, Olena Boyko, Kiril Yudashev, Antonio de Fortuny, and Francisco Ocaña. This was an accusation, not a conviction. [Findings #9038, #13512]
 
 2. **1992 St. Petersburg arrest**: Detained September 5, 1992 alongside Petrov, Malyshev, and Mustafin as part of criminal gang (bandidaje) led by Malyshev. Approximately 30 persons arrested. Petrov and Kouzmine had coincided in Russian prison. Later acquitted in 1994/1995 Russian proceedings. [Finding #9046]
 
-3. **SDNY federal criminal case (1:95-cr-00846)**: Filed September 20, 1995 before Judge Lewis A. Kaplan. Kouzmine was defendant #4, indicating multiple co-defendants. Case ran until March 2000. Co-defendant Goulnar Esjanova's matter terminated Oct 1996. Five-year duration and SDNY venue suggest serious federal charges. Charges unknown -- case not available on PACER. [Finding #8940]
+3. **Misattributed SDNY case corrected**: The published opinion and RECAP docket for 1:95-cr-00846 name lead defendant Phillipe/Phillippe Kouzmine, not Serguei. Defendant number 4 was Goulnar Esjanova. No stable identifier reviewed connects Phillipe to the QWave co-founder, so this case must not be included in Serguei Kouzmine's legal history. [Findings #13580, #13587]
 
-4. **Operation Troika escape**: Kouzmine escaped arrest during the June 2008 Spanish raids targeting the Tambovskaya-Malyshevskaya network. Approximately "several dozen persons" arrested on money laundering and criminal organization charges. Tried in absentia. NOT acquitted. [Findings #9015, #9054]
+4. **Operation Troika procedure**: The court record lists Kouzmine among persons declared *en rebeldía* and expressly says he was not tried in Sentencia 36/2018. The judgment therefore neither convicted nor acquitted him. [Findings #9015, #9054, #13510]
 
-5. **Confessions by co-defendants**: Leonid Khazine admitted managing companies in interests of Kouzmine in Spain, Panama, Liberia, and BVI, and confirmed "money from Kuzmin's criminal activities passed through the companies." Mikhail Rebo confessed for Malyshev. Both were still acquitted by Spanish court, which ruled criminal origin of funds "not proven." [Finding #9049]
+5. **Partial conformities rejected**: Leonid Khazine and Mikhail Rebo accepted parts of the prosecution account, but the court held the partial conformities insufficient. Khazine only said he believed Kouzmine's assets had criminal origin and identified no predicate offense; Rebo's evidence concerned Malyshev and Solovieva. Both were acquitted. [Findings #9049, #13511]
 
 6. **Bank Rossiya co-founder**: Per NHC/TBCA report, Kouzmine was co-founder and shareholder of Bank Rossiya, designated by US Treasury (April 2018) as "personal bank for senior Russian government officials." Other shareholders include members of Putin's inner circle from the Ozero Dacha Cooperative. [Finding #9050]
 
 7. **JV Petrodin casino (Putin-licensed, 1991)**: Kouzmine and Petrov held 65% of JV Petrodin casino via BHM company, with Dyna AB holding 35%. Casino proceeds capitalized Bank Rossiya. Putin personally licensed the casino while deputy mayor of St. Petersburg. [Finding #9012]
 
-8. **QWave Capital co-founder (2012)**: Co-founded with Beloussov. Fund reportedly has over $300M. Invested in quantum technology: ID Quantique (Switzerland, quantum encryption), Nano-Meta Technologies (Purdue spinout), Clifton, and Centice Corp. Offices in Moscow, Boston, NYC. [Finding #8945]
+8. **QWave Capital leadership (2012)**: Independent coverage names the U.S./QWave Kouzmine as founding/managing partner and Beloussov as venture partner. A QWave release identifies Centice, Nano-Meta, and Clifton as its initial portfolio and says the initial round totaled USD 7 million across the three companies. The prior USD 300 million figure was not substantiated and is withdrawn. [Findings #13672, #13673]
 
-9. **Centice Corp board with Frank Creer**: SEC filings confirm Kouzmine and Creer are co-directors at Centice Corp (CIK 1415617, Delaware, Morrisville NC). Other directors: Vladimir Yakushev, Aidar Gabidullin. This is the nexus entity connecting Tambovskaya organized crime to the DFJ venture capital network. [Finding #8909]
+9. **Centice Corp board with Frank Creer**: An SEC filing lists the U.S./QWave Kouzmine and Creer as Centice directors. This establishes a shared board role only. It does not connect the Spanish Troika allegations to DFJ because continuity between the Spanish-record and QWave people remains unresolved. [Finding #13670]
 
 10. **Affinity Bank founding investor**: Integral to securing FDIC/state banking charters for Affinity Bank (FDIC #57264, chartered 2002, Atlanta GA). Served as board member. Bank sold to Newton Federal in 2020 for $40.3M. [Finding #9108]
 
@@ -45,13 +46,13 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 
 12. **Ritzio Entertainment Group CEO (2002-2006)**: Grew Oleg Boyko's gambling empire revenues from $40M to $1.25B. 1,000+ outlets across 15 countries. Collapsed after Putin's 2006 gambling ban. [Finding #9020]
 
-13. **Animaccord Animation Studio founder (2008)**: Producer of "Masha and the Bear" -- 100+ billion YouTube views, broadcasts in 150+ countries. Sold to UFG. Serves as legitimate business / reputation laundering vehicle. [Finding #8942]
+13. **Animaccord Animation Studio**: Public biographies associate the U.S./QWave Kouzmine with Animaccord. The previous characterization as a "reputation laundering vehicle" was unsupported inference and is withdrawn. [Finding #8942]
 
-14. **Constructor University President (2025)**: Appointed president of Constructor University (formerly Jacobs University Bremen), acquired by Beloussov through SIT Holding. Placed at German academic institution despite documented OCG background. [Entity roles]
+14. **Constructor University President (2025)**: Appointed president of Constructor University (formerly Jacobs University Bremen), acquired by Beloussov through SIT Holding. The Spanish prosecution allegations and the later university role arise from separate source streams. [Entity roles]
 
-15. **EUR 50M money laundering scale**: Spanish indictment documents approximately EUR 50 million in financial operations (1998-2007) across 500 bank accounts spanning Liberia, Panama, Liechtenstein, Cyprus, Switzerland, Spain, Russia. Methods: fictitious loans, consulting services, authorized capital increases, inter-partner loans, offshore transfers. [Finding #9024]
+15. **Broader Troika allegation scale**: TBCA describes the prosecution's broader Operation Troika accusation as covering approximately EUR 50 million in operations. That figure is not a court finding and is not specific to the Kouzmine structure. [Finding #9024]
 
-16. **Not on any Western sanctions list**: Despite documented Tambovskaya leadership, Spanish arrest warrant, Bank Rossiya co-founding, and KoronaPay sanctioning, Kouzmine personally operates freely in the US and Europe. [Finding #8948]
+16. **No personal sanctions match found**: The recorded OpenSanctions search found no matching personal listing. This is a negative search result, not proof of legal status or freedom of movement. [Finding #8948]
 
 ## Entity Affiliations
 
@@ -99,17 +100,17 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 
 | Person | Relationship | Strength | Evidence |
 |--------|-------------|----------|----------|
-| Gennady Petrov | Social/Criminal | Strong | Co-leaders Tambovskaya. Both arrested 1992. Adjacent Marbella homes. Co-founded companies. Petrov sanctioned (Ukraine). |
-| Alexander Malyshev | Social/Criminal | Strong | Co-leaders Tambovskaya. Both arrested 1992. Both Marbella settlers. |
-| Serguei Beloussov | Corporate/Financial | Strong | QWave Capital co-founders. Nano-Meta co-directors. Constructor University. |
-| Frank Creer | Corporate | Strong | Co-directors at Centice Corp (SEC filing). QWave Capital network. |
-| Oleg Boyko | Corporate/Financial | Strong | Ritzio Entertainment, Fintech Ventures, Finstar Financial Group. Multi-decade partnership. |
-| Masha Drokova | Corporate | Medium | Drokova was QWave Capital publicist. |
-| Leonid Khazine | Criminal/Corporate | Strong | Managed Kouzmine's offshore companies. Confessed guilt. BVI entities co-managed. |
+| Gennady Petrov | Spanish-record allegation | Unresolved | Spanish/Russian archival materials allege joint activity with the Spanish-record Kouzmine. Do not propagate this edge to the QWave person. |
+| Alexander Malyshev | Spanish-record allegation | Unresolved | Archival prosecution material associates Malyshev with the Spanish-record Kouzmine; not a QWave-person edge. |
+| Serguei Beloussov | Corporate | Strong | Independently documented QWave roles and Nano-Meta co-directorship with the QWave/Fintech person. [#6492] |
+| Frank Creer | Corporate | Strong | Shared Centice board role with the QWave/Fintech person; no broader personal relationship inferred. [#6493] |
+| Oleg Boyko | Corporate | Medium | Regulator records place Boyko and the QWave/Fintech person within the Ritzio/Cadillac Jack structure. The claim that they co-founded both Ritzio and Fintech Ventures remains memo-attributed. [#6495] |
+| Masha Drokova | No direct Kouzmine edge | None established | Emails prove Drokova introduced Beloussov to Epstein. The QWave-publicist claim appears in EFTA00129096, but no direct Drokova-Kouzmine contact was found. |
+| Leonid Khazine | Corporate | Strong | Co-founded Inversiones Finanzas Inmuebles and supported Kouzmine's Spanish operations. His partial conformity was rejected as insufficient; he was acquitted. |
 | Viktor Gavrilenkov | Criminal/Corporate | Strong | Co-founded Spanish companies. Tambovskaya operations. Adjacent Marbella properties. |
-| Oznur Bell | Corporate | Medium | Appointed Kouzmine as Constructor University president. |
-| Steve Jurvetson | Financial (indirect) | Medium | Through DFJ Capital -> QWave Capital investment chain (FBI memo). |
-| Maxim Stepanov | Financial | Strong | Incorporator of United Alliance Ltd (Hot Springs AR), received Kouzmine network funds. Professional shell company creator linked to OCG. |
+| Oznur Bell | Corporate | Medium | Constructor appointment concerns the QWave/Fintech person; it is not evidence of an organized-crime link. |
+| Steve Jurvetson | Memo-only indirect claim | Circumstantial | EFTA00129096 states a DFJ-to-QWave investment chain; no independent fund record was located. |
+| Maxim Stepanov | Corporate lead | Unresolved | Incorporated an Arkansas United Alliance entity at the address named in the accusation. The transfer appears in the Petrov/Vesper section, not the Kouzmine structure, so no Kouzmine link is established. |
 | Vladislav Reznik | Political/Financial | Medium | Both Bank Rossiya shareholders. Both Operation Troika co-defendants. Reznik is State Duma deputy. |
 
 ## Financial Activity
@@ -118,15 +119,13 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 - **JV Petrodin casino proceeds** -> Bank Rossiya capitalization (Putin-licensed 1991)
 - **Alpha-Handelsgesellschaft MbH (Germany, 1991)**: VAT carousel fraud >EUR 20M (co-founded with Salikov, convicted)
 - **500 bank accounts** across the network
-- **EUR 50M** in documented money laundering (1998-2007)
-- **Specific flows documented in indictment**:
+- **Approximately EUR 50M** in broader Operation Troika prosecution allegations (1998-2007); not a court finding and not specific to Kouzmine
+- **Specific flows alleged within the Kouzmine section**:
   - Sandronella Real SA (Panama) -> Tomillo Inversiones SL via Solbank
   - Eporoyal SA (Panama) -> Casasol Investment SL via Solbank
   - Cyrillic transfers: 637,138 USD to Tomillo + 662,904 USD to Casasol
-  - Vesper Finance -> OOO Dom Na Kazansergey: 2,418,024 USD (2004)
-  - United Alliance Ltd (Hot Springs, AR): 200,000 USD (2004) via Lateko Bank Latvia
-  - Kingsway Technology LLC (Washington DC): 65,000 EUR (2005) via Banque Generale du Luxembourg
-  - Vesper Finance -> Liniya Svyazi (St. Petersburg, Bank Rossiya): 525,000 USD (2003)
+  - Kost de Inversiones -> related Spanish companies: documented totals of EUR 73,000 (2004), EUR 445,800 (2005), and EUR 136,800 (2006)
+  - Related entities -> Kost de Inversiones: documented totals of EUR 41,000 (2001), EUR 190,000 (2002), EUR 60,000 (2005), and EUR 570,842 (2006)
   - Namur Properties: Merkin Ltd transferred 50,000 EUR + 40,000 EUR (2006)
   - Namur held 24.5% in a Russian company and participated in several offshore companies, each owning a ship
 - **Bearer share certificates** for Panama companies held by Sunbridge Anstalt (Liechtenstein)
@@ -135,7 +134,7 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 ### Post-Troika Financial Operations (2008-present)
 - **Ritzio Entertainment**: $40M -> $1.25B revenues (2002-2006, 1000+ outlets, 15 countries)
 - **Affinity Bank**: Founding investor, sold to Newton Federal 2020 for $40.3M
-- **QWave Capital**: Reportedly >$300M fund
+- **QWave Capital**: Public launch coverage described a planned USD 100 million fund; a June 2013 issuer release said USD 7 million had been invested across its first three portfolio companies. No basis was found for the prior "over USD 300 million" claim.
 - **GROUNDFLOOR Finance**: Led $5M Series A, board seat with 10% Series A threshold
 - **IOU Financial**: Led CAD 4.4M investment + CAD 1.5M private placement (7.5M shares)
 - **KoronaPay/CFT Group**: Co-founded, now US-sanctioned for Russian money transfers during Ukraine war
@@ -146,14 +145,13 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 | Case | Court/Agency | Date | Status | Notes |
 |------|-------------|------|--------|-------|
 | St. Petersburg Case 534530 | Russia | 1992-09-05 | Acquitted 1994/95 | Detained with Petrov/Malyshev for bandidaje |
-| United States v. Kouzmine | SDNY 1:95-cr-00846 | 1995-09-20 | Terminated 2000-03-27 | Defendant #4. Judge Kaplan. 5-year duration. Charges unknown. |
 | Diligencias Previas 1235/2000 | Juzgado Instruccion 6, Marbella | 2000 | -- | Money laundering investigation triggered by Hisparue SL |
-| Operation Troika (D.P. 321/06) | Audiencia Nacional, Spain | 2008-2018 | Escaped; tried in absentia; NOT acquitted | Principal target. 488-page indictment. |
+| Operation Troika (D.P. 321/06) | Audiencia Nacional, Spain | 2008-2018 | Declared *en rebeldía*; not tried in Sentencia 36/2018 | Prosecutors accused a named Kouzmine structure; the judgment did not adjudicate him. |
 | KoronaPay/CFT Group sanctions | US Treasury | -- | Active | US-sanctioned for facilitating Russian money transfers |
 
 ## Intelligence Indicators
 
-1. **Tambovskaya-Malyshevskaya leadership**: Named as one of the "troika" leadership alongside Petrov and Malyshev. Commanded ~2,000 members at peak (1991-1992). Malyshev handled force, Petrov managed government contacts, Kuzmin served as economics expert.
+1. **Prosecution leadership allegation**: Spanish prosecutors described Kouzmine as part of a "troika" alongside Petrov and Malyshev and attributed an economic role to him. Sentencia 36/2018 did not try Kouzmine.
 
 2. **Bank Rossiya co-founder**: US Treasury-designated (April 2018) as "personal bank for senior Russian government officials." Putin's inner circle from Ozero Dacha Cooperative among shareholders.
 
@@ -161,15 +159,15 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 
 4. **EUROPOL/SIRENE alert**: Belgian police communicated that Gavrilenkov, Petrov, and Kouzmine were "known to Belgian police services for money laundering."
 
-5. **FBI Operation Trip Knot**: FBI WFO Squad CR05 identifies QWave Capital (Kouzmine co-founded) as vehicle for money funneling and political access. Links Kouzmine to Creer blackmail allegations.
+5. **FBI Operation Trip Knot allegation**: FBI WFO Squad CR05 recorded an allegation that QWave Capital served as a vehicle for money funneling and political access. The memo is an intelligence/vetting record, not a charging document.
 
 6. **KoronaPay sanctions**: Co-founded entity now sanctioned for facilitating Russian wartime money transfers.
 
 7. **Russian Quantum Center**: Kouzmine was president 2012-2013. Now US-sanctioned (OFAC SDN, Sept 15, 2022) for "acting on behalf of Russian government."
 
-8. **Constructor University**: Now president of German academic institution (formerly Jacobs University Bremen), acquired by Beloussov. Potential platform for technology access or talent recruitment.
+8. **Constructor University**: The university appointment is a documented role of the U.S./QWave person. No evidence reviewed supports characterizing it as a platform for illicit technology access or recruitment.
 
-9. **NOT personally sanctioned**: Despite everything above, Kouzmine is not on any Western sanctions list and operates freely in the US and Europe.
+9. **No personal sanctions match found**: The recorded search found no matching listing; it does not establish current travel or legal status.
 
 ## Timeline
 
@@ -181,13 +179,11 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 | 1991 | Bank Rossiya co-founded |
 | 1992-09-05 | Arrested in St. Petersburg with Petrov, Malyshev, Mustafin (~30 arrested) |
 | 1994/1995 | Acquitted of bandidaje in Russian proceedings |
-| 1995-09-20 | SDNY criminal case filed (1:95-cr-00846) |
 | ~1996 | Settled in Marbella, Spain (adjacent properties with Petrov, Gavrilenkov) |
 | 1996 | Founded Ikstessav Investments SL |
 | 1997 | Co-founded Hisparue SL with Petrov and Gavrilenkov |
-| 1998-2007 | ~EUR 50M money laundering through 500 bank accounts across jurisdictions |
+| 1998-2007 | Broader Operation Troika prosecution allegations covered approximately EUR 50M in operations; not specific to Kouzmine and not adjudicated as laundering |
 | 1999 | PhD Nuclear Physics conferred (Budker Institute) |
-| 2000-03-27 | SDNY case terminates |
 | 2002 | Founded/chartered Affinity Bank (Atlanta) |
 | 2002-2006 | CEO Ritzio Entertainment ($40M -> $1.25B) |
 | 2008-06 | Operation Troika raids -- Kouzmine escapes arrest |
@@ -198,10 +194,10 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 | 2014 | Director at Nano-Meta Technologies and Centice Corp (with Creer) |
 | 2015 | Board member at GROUNDFLOOR Finance |
 | 2016-2019 | Board member at IOU Financial (Montreal) |
-| 2018-10 | Spanish court acquits 17 co-defendants (Kouzmine not present, not acquitted) |
+| 2018-10 | Spanish court acquits the 17 defendants tried; Kouzmine was declared *en rebeldía* and expressly not tried |
 | 2020 | Affinity Bank sold to Newton Federal for $40.3M |
 | 2022-09-15 | Russian Quantum Center placed on OFAC SDN list |
-| 2025 | Appointed President of Constructor University (Bremen) |
+| 2025 | U.S./QWave person appointed President of Constructor University (Bremen) |
 
 ## Source Coverage
 
@@ -211,10 +207,10 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 | NHC/TBCA Report (March 2021) | Yes | 46 pages | Bank Rossiya, Troika context |
 | SEC EDGAR | Yes | Multiple Form D filings | Centice, Nano-Meta, GROUNDFLOOR, IOU |
 | FDIC | Yes | Affinity Bank #57264 | Bank founding confirmed |
-| CourtListener | Yes | SDNY 1:95-cr-00846 | Criminal case confirmed, charges unknown |
+| CourtListener | Yes | SDNY 1:95-cr-00846 | Case concerns Phillipe/Phillippe Kouzmine; no stable identifier connects him to Serguei |
 | OpenSanctions | Yes | NOT listed | Significant absence |
 | ICIJ Offshore Leaks | Partial | "Kuzmin Alexander" BVI entity | Possibly related |
-| PACER | Not available | SDNY case | Cannot retrieve -- case too old or sealed |
+| PACER/RECAP | Partial | SDNY case | Public docket metadata and opinion recovered; Phillipe's terminal order and superseding indictment remain unavailable |
 | FBI memo (EFTA00129096) | Yes | Direct reference | QWave Capital, political access |
 | DOJ Epstein corpus | Yes | 0 direct | Kouzmine not directly in corpus |
 | LittleSis | Not searched | -- | -- |
@@ -227,40 +223,35 @@ His connection to the DFJ network runs through QWave Capital, a quantum technolo
 
 | ID | Title | Priority |
 |----|-------|----------|
-| 35189 | Kouzmine-Beloussov-QWave: Russian organized crime to Silicon Valley VC pipeline | Critical |
-| 35177 | PACER lookup: United States v. Kouzmine (SDNY 1:95-cr-00846) | Critical |
+| 35189 | Kouzmine-Beloussov-QWave identity and corporate-chain audit | Completed |
 | 35191 | Operation Troika full indictment review -- TBCA archives | Critical |
 | 35630 | Map Midland Consult's 194 ICIJ offshore entities for Kouzmine/QWave/DFJ overlap | Critical |
 | 35184 | Centice Corp board -- full investigation of Creer-Kouzmine nexus entity | High |
 | 35193 | Beloussov due diligence -- did he know Kouzmine's mafia ties? | High |
-| 35253 | PACER: Pull full docket for United States v. Kouzmine (SDNY) | High |
 | 35315 | Trace Beloussov-Kouzmine personal relationship timeline | High |
 | 35337 | Identify Centice Corp directors Vladimir Yakushev and Aidar Gabidullin | High |
 | 35349 | Boyko-Beloussov connection via Kouzmine | High |
-| 35355 | Kouzmine SDNY federal criminal case -- obtain charges | High |
-| 35600 | Maxim Stepanov -- Russian agent at Hot Springs AR address receiving Kouzmine funds | High |
+| 35600 | Maxim Stepanov / United Alliance source-attribution check (no Kouzmine flow established) | High |
 | 35627 | Investigate other Stepanov shell companies at 835 Central Ave Suite 402F | High |
 | 35754 | Confirm Gabidullin and Yakushev on Centice Corp Form D director listings | High |
 | 35760 | Investigate Administral Anstalt ICIJ entities | High |
 | 35762 | Cross-reference Midland Consult 194 ICIJ entities against Kouzmine entity names | High |
 | 35255 | Trace IBS Development Corp (Kouzmine president since 2008) | Medium |
-| 35257 | Investigate Goulnar Esjanova -- SDNY co-defendant | Medium |
 | 35261 | ICIJ Offshore Leaks: Search Kouzmine when Neo4j running | Medium |
 | 35265 | Investigate Vladimir Yakushev and Aidar Gabidullin -- Centice Corp co-directors | Medium |
 | 35723 | Identify virtual office at 1000 Connecticut Ave NW, Washington DC (pre-2007) | Medium |
 | 35768 | Review Alvarado Castillo 100 UK shell companies for Kouzmine/Petrov flows | Medium |
 | 35267 | Constructor University: Did Novoselov replace Kouzmine? | Low |
-| 35497 | Kouzmine SDNY case -- not available on PACER | Low |
 
 ## What's Missing
 
-- **SDNY criminal charges unknown**: Case 1:95-cr-00846 ran for 5 years (1995-2000) before Judge Kaplan. Not available on PACER. Could be sealed, too old for electronic records, or restricted. Co-defendant Goulnar Esjanova also unresearched.
+- **SDNY identity correction**: Case 1:95-cr-00846 concerns Phillipe/Phillippe Kouzmine. The reviewed sources provide no stable identifier connecting him to Serguei; it should remain outside this dossier unless a primary record establishes continuity.
 - **Full ICIJ search not run**: Neo4j not running. "Kuzmin Alexander" BVI entity found but full network not mapped. 194 Midland Consult entities and Administral Anstalt entities not cross-referenced.
-- **How Kouzmine entered the US**: Despite 1992 Russian arrest, 1995 SDNY case, and 2008 Spanish arrest warrant, he holds US property, US bank directorships, and US VC fund positions. Immigration/visa pathway unknown.
+- **How Kouzmine entered the US**: Corporate and property records place him in U.S. roles, but the immigration/visa pathway is unknown. Current Spanish warrant status was not established by the records reviewed for lead #35191.
 - **Current sanctions evasion**: KoronaPay sanctioned but Kouzmine personally not sanctioned. How?
 - **Centice Corp co-directors**: Vladimir Yakushev and Aidar Gabidullin unidentified. Gabidullin is also Director on FL branch filing.
 - **IBS Development Corp purpose**: Kouzmine has been president since 2008. Entity structure and purpose unknown.
 - **Full Boyko-Kouzmine financial relationship**: Multi-decade partnership spanning Ritzio, Finstar, Fintech Ventures, Invest AG. Full scope of financial flows not mapped.
 - **Kouzmine role in Bank Rossiya**: When he divested, how much equity, who replaced him.
-- **Troika indictment cross-references**: The 488-page indictment predates QWave/Centice/DFJ entities but the financial methods and offshore structures are identical. Same Swiss lawyer (Dr. Wissmann), same Liechtenstein administrators (Administral Anstalt).
-- **Constructor University appointment**: How did a Tambovskaya leader become president of a German university? What vetting was performed?
+- **Troika-to-tech overlap**: Full-text review found no QWave, Centice, Ritzio, or Fintech Ventures mention in either Spanish PDF. Any identity or network bridge must be established with independent corporate records; the Spanish record itself does not supply it.
+- **Identity bridge**: Before treating the Constructor University appointee as the Spanish Troika person, obtain a stable identifier shared across the two source streams (for example DOB, passport/national ID, spouse, or contemporaneous address).

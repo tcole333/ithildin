@@ -1,0 +1,43 @@
+import json, sqlite3
+from pathlib import Path
+from collections import Counter
+root = Path('/Users/travcole/projects/osint-research')
+conn = sqlite3.connect(f'file:{root / "investigation.db"}?mode=ro', uri=True)
+conn.row_factory = sqlite3.Row
+statuses = {str(row['id']): dict(row) for row in conn.execute('SELECT id, verification_status, summary FROM findings')}
+changed_status = []
+changed_summary = 0
+finding_ids = []
+for path in (root / 'content/dossiers').glob('*.json'):
+    if path.name.startswith('_'): continue
+    data = json.loads(path.read_text())
+    for finding in data.get('findings', []) + data.get('citation_findings', []):
+        fid = str(finding.get('id'))
+        finding_ids.append(fid)
+        if fid not in statuses: continue
+        if finding.get('verification_status') != statuses[fid]['verification_status']:
+            changed_status.append((str(path.relative_to(root)),fid,finding.get('verification_status'),statuses[fid]['verification_status']))
+        if finding.get('summary') != statuses[fid]['summary']: changed_summary += 1
+print('Dossier finding instances:', len(finding_ids), 'unique:', len(set(finding_ids)))
+print('Dossier DB status mismatches:',len(changed_status), 'summary mismatches:',changed_summary)
+print('Status mismatch counts:',dict(Counter((x[2],x[3]) for x in changed_status)))
+print('retracted examples:',[x for x in changed_status if x[3]=='retracted'][:10])
+network=json.loads((root/'content/network.json').read_text())
+print('Network:',network['stats'])
+print('verified statuses:',dict(Counter(e.get('verified') for e in network['edges'])))
+print('unscoped edges:',sum(not e.get('profile_ids') for e in network['edges']))
+print('profile edges:',dict(Counter(pid for e in network['edges'] for pid in e.get('profile_ids',[]))))
+articles=list((root/'content/articles').glob('*.mdx'))
+search=json.loads((root/'web/public/content/search-index.json').read_text())
+actual={f'article:{p.stem}' for p in articles}|{f'dossier:{p.stem}' for p in (root/'content/dossiers').glob('*.json') if not p.name.startswith('_')}
+indexed={d['id'] for d in search if d['type'] in ('article','dossier')}
+print('search missing ids:',sorted(actual-indexed))
+print('search stale ids:',sorted(indexed-actual))
+article_mismatches=[]
+for p in articles:
+    text=p.read_text(); head=text.split('---')[1] if text.startswith('---') else ''
+    vals=dict(line.split(':',1) for line in head.splitlines() if ':' in line)
+    cluster=vals.get('cluster','').strip().strip('\"\'')
+    if cluster and cluster!=p.stem: article_mismatches.append((p.stem,cluster))
+print('Article cluster slug mismatches:',article_mismatches)
+print('Ego V2 identical:',(root/'web/src/components/EgoNetwork.tsx').read_bytes()==(root/'web/src/components/EgoNetworkV2.tsx').read_bytes())

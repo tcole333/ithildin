@@ -1,0 +1,124 @@
+{
+  "schema_version": "public-records-result/1.0",
+  "retrieved_at": "2026-09-04T14:20:06Z",
+  "status": "ok",
+  "query": {
+    "schema_version": "public-records-query/1.0",
+    "source": {
+      "source_id": "us-ma-massgis-parcels",
+      "name": "MassGIS Standardized Property Tax Parcels",
+      "source_role": "assessment_parcel_geometry_bulk",
+      "base_url": "https://services9.arcgis.com/2ynJbr9BE17vXxR8/ArcGIS/rest/services/MassGIS_L3_Parcels_gdb/FeatureServer/2",
+      "dataset_id": "L3_PARCEL_FTP_LINKS",
+      "metadata": {
+        "authority": "Massachusetts Bureau of Geographic Information",
+        "coverage": "351 Massachusetts municipalities",
+        "release_scope": "municipality"
+      }
+    },
+    "jurisdiction": {
+      "jurisdiction_id": "us-ma",
+      "name": "Massachusetts",
+      "country_code": "US",
+      "state_code": "MA",
+      "county_fips": null,
+      "locality": null,
+      "metadata": {
+        "state_fips": "25"
+      }
+    },
+    "query": {
+      "operation": "manifest",
+      "parameters": {
+        "town": "HULL"
+      },
+      "requested_limit": 50,
+      "cursor": null,
+      "metadata": {}
+    },
+    "fingerprint": "a5134fd4e0097fbbaca1356bdf1da10a8b2c8627380f9a84799f81cca3034e5f"
+  },
+  "records": [
+    {
+      "canonical_ref": "PROPERTY:us-ma-massgis-parcels/25/bulk_release/M142%3AFY2024",
+      "town": "HULL",
+      "town_id": 142,
+      "assessor_fiscal_year": 2024,
+      "release_kind": "snapshot",
+      "manifest": {
+        "source_id": "us-ma-massgis-parcels",
+        "dataset_id": "MassGIS-L3-Parcels",
+        "release": {
+          "release_id": "M142:FY2024",
+          "kind": "snapshot",
+          "effective_at": null,
+          "base_release_id": null,
+          "sequence": null,
+          "coverage": {
+            "assessor_fiscal_year": 2024,
+            "municipality": "HULL",
+            "town_id": 142
+          }
+        },
+        "artifacts": [
+          {
+            "artifact_id": "shapefile",
+            "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/shapefiles/l3parcels/L3_SHP_M142_HULL.zip",
+            "filename": "L3_SHP_M142_HULL.zip",
+            "media_type": "application/zip",
+            "archive_format": "zip",
+            "expected_size": null,
+            "expected_sha256": null,
+            "etag": null,
+            "last_modified": null,
+            "metadata": {
+              "assessor_fiscal_year": 2024,
+              "municipality": "HULL",
+              "town_id": 142
+            }
+          },
+          {
+            "artifact_id": "file_geodatabase",
+            "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/gdbs/l3parcels/M142_parcels_gdb.zip",
+            "filename": "M142_parcels_gdb.zip",
+            "media_type": "application/zip",
+            "archive_format": "zip",
+            "expected_size": null,
+            "expected_sha256": null,
+            "etag": null,
+            "last_modified": null,
+            "metadata": {
+              "assessor_fiscal_year": 2024,
+              "municipality": "HULL",
+              "town_id": 142
+            }
+          }
+        ],
+        "schema": {
+          "logical_components": [
+            "L3_ASSESS",
+            "L3_LUT",
+            "L3_MISC_POLY",
+            "L3_OTHLEG_POLY",
+            "L3_TAXPAR_POLY",
+            "L3_UC_LUT"
+          ],
+          "parcel_assessment_join_key": "LOC_ID",
+          "source_description": "https://www.mass.gov/info-details/massgis-data-property-tax-parcels",
+          "standard": "MassGIS Digital Parcel Standard Level 3"
+        },
+        "metadata": {
+          "source_manifest_object_id": 247,
+          "source_manifest_schema_fingerprint": "39a8dbfac09dc1c51843335b9f1efaae56cc872d09d6aefa726b2937038592bf",
+          "source_note": null
+        },
+        "schema_fingerprint": "d3d60c48ea00cd6830777b6a6124d3f0eefc36abaad384dec79bc479a81d97e0",
+        "manifest_fingerprint": "df04913a8dd625bae7e1fd50a3a81e5a8d832996ec6afb03292218a0f0bbab45"
+      }
+    }
+  ],
+  "next_cursor": null,
+  "raw_artifact_refs": [],
+  "warnings": [],
+  "errors": []
+}

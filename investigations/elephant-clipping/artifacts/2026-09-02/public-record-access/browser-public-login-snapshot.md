@@ -1,0 +1,42 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e3]:
+    - paragraph [ref=f1e9] [cursor=pointer]: MONSTERLAB
+    - generic [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - heading "Welcome Back" [level=2] [ref=f1e15]
+        - paragraph [ref=f1e16]: Login to your account and continue the motion
+      - generic [ref=f1e18]:
+        - group [ref=f1e19]:
+          - generic [ref=f1e20]: Email Address
+          - textbox "Email Address" [ref=f1e22]:
+            - /placeholder: you@example.com
+        - group [ref=f1e24]:
+          - generic [ref=f1e25]: PASSWORD
+          - generic [ref=f1e26]
+        - link "Forgot Key?" [ref=f1e34] [cursor=pointer]:
+          - /url: /forgot-password
+        - button "LOGIN" [ref=f1e35] [cursor=pointer]
+      - paragraph [ref=f1e40]: Or continue with
+      - generic [ref=f1e41]:
+        - button "Sign in with Passkey" [ref=f1e42] [cursor=pointer]
+        - button "Sign in with Google" [ref=f1e47] [cursor=pointer]
+        - button "Sign in with Discord" [ref=f1e50] [cursor=pointer]
+      - paragraph [ref=f1e53]:
+        - text: New?
+        - link "REGISTER HERE" [ref=f1e54] [cursor=pointer]:
+          - /url: /signup
+    - contentinfo [ref=f1e55]:
+      - generic [ref=f1e57]:
+        - link "TERMS" [ref=f1e58] [cursor=pointer]:
+          - /url: /terms
+        - generic [ref=f1e59]: /
+        - link "PRIVACY" [ref=f1e60] [cursor=pointer]:
+          - /url: /privacy
+  - alert [ref=f1e61]: /login
+  - generic:
+    - region "Notifications-top"
+    - region "Notifications-top-left"
+    - region "Notifications-top-right"
+    - region "Notifications-bottom-left"
+    - region "Notifications-bottom"
+    - region "Notifications-bottom-right"

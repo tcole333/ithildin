@@ -1,0 +1,69 @@
+"""Bounded workflow reproductions, using only synthetic/scratch records."""
+import json
+import sqlite3
+from pathlib import Path
+from unittest.mock import patch
+
+from scripts import review_dossier_checks as reviews
+from tools import lead_tracker
+
+workdir = Path('/tmp/osint-SXYkyRSJ')
+scratch = workdir / 'workflow-repro.db'
+db = sqlite3.connect(scratch)
+db.execute('CREATE TABLE IF NOT EXISTS search_log (id INTEGER PRIMARY KEY, query_text TEXT, source TEXT, result_count INTEGER, searched_at TEXT)')
+db.execute('DELETE FROM search_log')
+db.execute('INSERT INTO search_log VALUES (1, ?, ?, 0, ?)', ('Synthetic Entity', 'synthetic_source', '2001-01-01 00:00:00'))
+db.execute('CREATE TABLE IF NOT EXISTS findings (id INTEGER PRIMARY KEY, date_of_event TEXT, event_date_iso TEXT, date_precision TEXT)')
+db.execute('DELETE FROM findings')
+db.execute('INSERT INTO findings VALUES (1, NULL, NULL, NULL)')
+db.execute('UPDATE findings SET date_of_event = ? WHERE id = ?', ('2020-02-03', 1))
+date_row = db.execute('SELECT * FROM findings').fetchone()
+db.commit()
+db.close()
+
+def scratch_connection():
+    connection = sqlite3.connect(scratch)
+    connection.row_factory = sqlite3.Row
+    return connection
+
+with patch.object(lead_tracker, 'get_db', scratch_connection):
+    cached = lead_tracker.check_searched('Synthetic Entity', 'synthetic_source')
+
+link_names = ['Example A', 'Example B', 'Example C', 'Example D', 'Example E']
+index = {name: name.lower().replace(' ', '-') for name in link_names}
+links = ', '.join(f'<a href="/dossiers/{slug}">{name}</a>' for name, slug in index.items())
+dossier = {
+    'slug': 'synthetic-subject', 'name': 'Synthetic Subject',
+    'findings': [{'id': 1, 'claim_type': 'direct_quote', 'confidence': 'confirmed',
+                  'verification_status': 'verified',
+                  'summary': 'Synthetic Subject opened a company in 2020.',
+                  'detail': 'This synthetic evidence says nothing about crime.'}],
+    'curation': {
+        'lead': '<p>Synthetic Subject was convicted of fraud [Finding #1].</p>',
+        'system_role': 'Business owner',
+        'sections': [{'id': 'background', 'title': 'Background', 'viz': None,
+                      'content': f'<p>Synthetic Subject bribed officials at {links} [Finding #1].</p>'}],
+        'applicable_models': [],
+    },
+}
+with patch.object(reviews, 'load_dossier', return_value=dossier), patch.object(
+    reviews, 'load_global_finding_statuses', return_value={1: 'verified'}
+):
+    review = reviews.run_checks('synthetic-subject', name_to_slug=index)
+
+result = {
+    'date_backfill': dict(zip(['id', 'date_of_event', 'event_date_iso', 'date_precision'], date_row)),
+    'stale_search_returned': cached,
+    'synthetic_dossier': dossier,
+    'automated_dossier_review': review,
+    'production_mutations': False,
+}
+(workdir / 'workflow-repros.json').write_text(json.dumps(result, indent=2) + '\n')
+print(json.dumps({
+    'date_backfill': result['date_backfill'],
+    'stale_search_timestamp': cached['searched_at'],
+    'dossier_verdict': review['verdict'],
+    'blocking': review['blocking'],
+    'should_fix': review['should_fix'],
+    'suggestions': review['suggestions'],
+}, indent=2))

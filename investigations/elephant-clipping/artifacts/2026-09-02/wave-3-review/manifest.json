@@ -1,0 +1,395 @@
+{
+  "generated_utc": "2026-09-02T20:00:55.817748+00:00",
+  "profile": "elephant-clipping",
+  "scope": "Explicitly allowlisted reviewed payloads only; seven commissioned findings",
+  "finding_ids": [
+    15447,
+    15448,
+    15449,
+    15450,
+    15451,
+    15455,
+    15456
+  ],
+  "payload_count": 43,
+  "payload_bytes": 396122,
+  "files": [
+    {
+      "path": "ach-baseline/baseline-elephant-arbitrage-pivot-competition.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-arbitrage-pivot-competition.json",
+      "bytes": 1005,
+      "sha256": "39c53a74b5a52cbd1efca48fe4e4fa334426ae53d8ecb4d7bb636529a61fac41",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-arbitrage-pivot-matrix.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-arbitrage-pivot-matrix.json",
+      "bytes": 6540,
+      "sha256": "2487da9e63959a6d77a62688f0a6b4bb9baa8e179488351ac9eb047d634da846",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-budget-theater-competition.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-budget-theater-competition.json",
+      "bytes": 967,
+      "sha256": "6db936a77846ab0a388b6826a1a5382a6cd12c67e82beefdfc1e83832ce1829f",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-budget-theater-matrix.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-budget-theater-matrix.json",
+      "bytes": 4622,
+      "sha256": "31454824ef8f6d3352dcbc24218fb3bad75bd81cabd2dff34189853c9f53fd0f",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-cpt-production-locus-competition.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-cpt-production-locus-competition.json",
+      "bytes": 1030,
+      "sha256": "163ff317572c951cc9398b5037c8f0370b0b8869a011484583711b33dcf24112",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-cpt-production-locus-matrix.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-cpt-production-locus-matrix.json",
+      "bytes": 5453,
+      "sha256": "e41845f8ab5f8fe1327aaa4ba78e5a6a797643b8c84454dc4ce36082681f2b7a",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-platform-keystone-competition.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-platform-keystone-competition.json",
+      "bytes": 1012,
+      "sha256": "3c08827404e28d0193e8ff4980a0057d3d12fb9c3b32406ace50d4585fb1d50a",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ach-baseline/baseline-elephant-platform-keystone-matrix.json",
+      "approved_source": "/tmp/osint-v4NdHom5/baseline-elephant-platform-keystone-matrix.json",
+      "bytes": 4959,
+      "sha256": "5a01a2e039b1a8042dab62fc0ca54b4f1e17da20a101cc0cc2cfcb68aef12258",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "artifact-audit-results.json",
+      "approved_source": "/tmp/osint-v4NdHom5/artifact-audit-results.json",
+      "bytes": 39722,
+      "sha256": "7497cf21051afd3a6c2f320c5d78ef637cb1dc79b5603eb2068ffc790f300766",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ohio-addendum-audit-results.json",
+      "approved_source": "/tmp/osint-v4NdHom5/ohio-addendum-audit-results.json",
+      "bytes": 5301,
+      "sha256": "c07d82a11e560c6014bb7d70883f0a60c01af2b7892f7a4941af645089cdc925",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ohio-navigation/MANIFEST.md",
+      "approved_source": "/tmp/osint-v4NdHom5/c-ohio-helper/MANIFEST.md",
+      "bytes": 2113,
+      "sha256": "785e69c464227a3e92608e70a643354459f8bc6355e5a80c541e1362e8fc947d",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ohio-navigation/form-ax-selected.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c-ohio-helper/form-ax-selected.json",
+      "bytes": 1725,
+      "sha256": "ad189ada8797f2a2c030c3002bdb935334b2c839b812b65780eb50ff976400d9",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ohio-navigation/navigation-scope.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c-ohio-helper/navigation-scope.json",
+      "bytes": 4399,
+      "sha256": "de4b88c13c88e72a3033b10b745630cf9ccb93ffe5e037b5c94e6781de7c1426",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "ohio-navigation/reader-entry-response.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c-ohio-helper/reader-entry-response.json",
+      "bytes": 4656,
+      "sha256": "5c90aa0d5440a8aee802b71da5f60635b9051f56fa317ffad173ee4f0d9506c0",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payment-main-audit-results.json",
+      "approved_source": "/tmp/osint-v4NdHom5/payment-main-audit-results.json",
+      "bytes": 18445,
+      "sha256": "789d419d9c61d536f1452eca546ca362e15dfc5089ae55d9e3d0ba68326530a2",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/fec-minimized.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/fec-minimized.json",
+      "bytes": 12934,
+      "sha256": "2e2c3fb2d6801c006cff98a0e24e4ed779f519de3821a1e9b396751ad185a2ad",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/fec-sweep.py",
+      "approved_source": "/tmp/osint-v4NdHom5/c/fec-sweep.py",
+      "bytes": 2065,
+      "sha256": "39707c0cd40fb8b6b8a4ecdcb03bc170783c74938b46cc7c7a206a293b9cbab8",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/finalize-evidence.py",
+      "approved_source": "/tmp/osint-v4NdHom5/c/finalize-evidence.py",
+      "bytes": 5469,
+      "sha256": "ac261e51c29792528f48c255dbe5ae58241922e91fdbe0484b68f5931ef219dc",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/finalize-ohio.py",
+      "approved_source": "/tmp/osint-v4NdHom5/c/finalize-ohio.py",
+      "bytes": 2942,
+      "sha256": "acdc2d9458bcc65d03975d0857b5269893c8882fee25d97d04e123f89121f461",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/manifest.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/manifest.json",
+      "bytes": 2357,
+      "sha256": "1f3966325a64a5aa36c8f65a282ad6dc6f4a0ab8dce63e612f5a9001b5be6785",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/ohio-statewide-observations.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/ohio-statewide-observations.json",
+      "bytes": 5760,
+      "sha256": "5a462321f58ffa8772490b1abd0605cc6d4eb2f34249d34ad74c14bbbc6b67de",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/ohio-statewide-search-log.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/ohio-statewide-search-log.json",
+      "bytes": 19605,
+      "sha256": "8eadc9d65ffc5771d951a3d698b8dff58fe2aa3f8c8a3a8e0ca11794870db42d",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/search-log-receipt.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/search-log-receipt.json",
+      "bytes": 30849,
+      "sha256": "01ce3945c1d40c8efee6d76829c5f49278c31e234b96262e4940a944e51d0f69",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "payments/ui-observations.json",
+      "approved_source": "/tmp/osint-v4NdHom5/c/ui-observations.json",
+      "bytes": 11112,
+      "sha256": "92c0ba1328e64c514385716cb3201afdcbd9c9289b6f1520e2a9e7b97a0ed83b",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/alternate-search-coverage.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/alternate-search-coverage.json",
+      "bytes": 2940,
+      "sha256": "c785583f4e6f16ccf58f9f5782bd4be8c77d17c481b85cc00a98d98bf5f34245",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/coaching-current-forms.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/coaching-current-forms.json",
+      "bytes": 1968,
+      "sha256": "5b69fa0075ba3130641d8f861ce705a61a5893b70c97285ca740a0d5b5ef0314",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/legal-chronology.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/legal-chronology.json",
+      "bytes": 3190,
+      "sha256": "e40bbbf2c6e2f1de3c7aa3221c3ef2689bc8fd06c7f7b3d58a474f0cc251d83d",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/manifest.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/manifest.json",
+      "bytes": 903,
+      "sha256": "235dfdedf26385a54a2df6cf541e71b0e38fc6dc00b33f9dd56604ab85b6cd94",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/mentorship-archives.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/mentorship-archives.json",
+      "bytes": 3475,
+      "sha256": "d89824add31a6a7901cf3d1b1936385d00eae34f29464dd31beb5a8b9e9183a4",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "platform/seed-article-comparison.json",
+      "approved_source": "/tmp/osint-v4NdHom5/a/reviewed/seed-article-comparison.json",
+      "bytes": 1104,
+      "sha256": "76dc082f2032d4bd66e7acfa7d69d84ebdeaad78888805c22b327c0bc9377b37",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "preservation-link-audit-reviewed.json",
+      "approved_source": "/tmp/osint-v4NdHom5/preservation-link-audit-reviewed.json",
+      "bytes": 6770,
+      "sha256": "2c6312a67f4d25b869dbe0a8bb89247beec92f2cab74d0f7019e4a2006c7a818",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-agent-a.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-agent-a.md",
+      "bytes": 16413,
+      "sha256": "12dcbaf309410808d866592f7ad40ee91e2b0a386159b2825af2352fb2408643",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-agent-b.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-agent-b.md",
+      "bytes": 14388,
+      "sha256": "d4c8113a01bb74ede397d0f79110b6e1110b54c9b3078a5f00f4d433e044c5c8",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-agent-c.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-agent-c.md",
+      "bytes": 22642,
+      "sha256": "8f1f83741983de6e8ca9ea408c289fd065a4084689fb70fbd4d0e7895004e3c9",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-agent-d.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-agent-d.md",
+      "bytes": 12055,
+      "sha256": "f0ee99cf9622eb2add21bb1170a6f8363f0dc8e0b68093a3e30268e0cf452acc",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-artifact-audit.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-artifact-audit.md",
+      "bytes": 15508,
+      "sha256": "e9c95b662c4f90f88439ee748ca643e9d2653cd47e4db390aa5d6323716b6bdb",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-money-tools-qa.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-money-tools-qa.md",
+      "bytes": 15278,
+      "sha256": "cb6ee813046cfdd2f6a5b95cd75a5055edcffbd3e4909156256c65c27bcdfc18",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-ohio-statewide.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-ohio-statewide.md",
+      "bytes": 7067,
+      "sha256": "3a941748595bdc539bd51471e51c9706215c32fd5bd5122a19b559acf005dff8",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "report-org-provenance-qa.md",
+      "approved_source": "/tmp/osint-v4NdHom5/report-org-provenance-qa.md",
+      "bytes": 14314,
+      "sha256": "a1f53db99f023dbfc8d7434658738fcb2169d0a2a5d1daea4c53e2a53c5194b0",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "reviewed-finding-snapshot.json",
+      "approved_source": "/tmp/osint-v4NdHom5/reviewed-finding-snapshot.json",
+      "bytes": 27595,
+      "sha256": "d4159cc8a52eb8fb688e8e26156113e6bc629651a40bb0eb3a3fcb501e076020",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "tools/MANIFEST.md",
+      "approved_source": "/tmp/osint-v4NdHom5/d/MANIFEST.md",
+      "bytes": 4538,
+      "sha256": "9c868d4181587fe3a0e240dcf8682b5d78d0b48d17d36c31c9e3115330d5d761",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "tools/article-comparison.json",
+      "approved_source": "/tmp/osint-v4NdHom5/d/article-comparison.json",
+      "bytes": 1773,
+      "sha256": "c08953899608eafec3c66b4e11ccc8850028132f5ef68e2f092cefb95f5c1a64",
+      "byte_identical_to_approved_source": true
+    },
+    {
+      "path": "tools/public-evidence.json",
+      "approved_source": "/tmp/osint-v4NdHom5/d/public-evidence.json",
+      "bytes": 29159,
+      "sha256": "f7cc79d2eb4510179c3e3574d6ea32b57010ed96b700b29b79706bfceceed5d9",
+      "byte_identical_to_approved_source": true
+    }
+  ],
+  "authored_narrative_manifest": {
+    "path": "MANIFEST.md",
+    "bytes": 6991,
+    "sha256": "9500a149b0834556504379721c52fd1a141dd578f11ff3b372d801e7779b5110"
+  },
+  "linked_provenance_bundle_count": 10,
+  "linked_provenance_bundle_bytes": 128858311,
+  "linked_provenance_bundle": [
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/MANIFEST.md",
+      "bytes": 5285,
+      "sha256": "cbbfa6bad59a8344534afc9e7752ea4b997924b0171fde108e5a193b74be3935",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/VIDPODCASTSERV1.mp4",
+      "bytes": 128113981,
+      "sha256": "ec293cafebdee849d9e69c957c4d8c164140b5b71dba75d70345482ebd32c81c",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/caption-strip-corrected.jpg",
+      "bytes": 342839,
+      "sha256": "af9f10ed8246796e55088790d7a5bdccdf67e20bb1233d49114a1db7daeb0f5f",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/sample-captions.jpg",
+      "bytes": 316385,
+      "sha256": "a1cc0d2e58c4e05f37b456c2a8998b7962037335e99e15fee879c0fdd353feeb",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/content-hub-reviewed.json",
+      "bytes": 64259,
+      "sha256": "432852ae01ea0e94b69d92965982d42fbe6847ddb61b3f30f95687fa83df26cd",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/episode-metadata.json",
+      "bytes": 2902,
+      "sha256": "72086b23a9db38b0d6bc3d49e669b81d18109b5550550735150387c28df7c797",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/reviewed-notes.md",
+      "bytes": 3812,
+      "sha256": "cf7fcc624748b4ed2c8d21cb38e1c8284773415b6d52b0227a59e8de588dd1c1",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/sample-download-metadata.json",
+      "bytes": 799,
+      "sha256": "55142f4292acb3d0414fbfa37204d9a2265cdc34e549f9f882ac833d5155eaa8",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/search-coverage-reviewed.json",
+      "bytes": 6209,
+      "sha256": "72b75ca33ee94890328302b70949dc3b22faff7989f45a72401f9a66ad7054b3",
+      "duplicated_in_review_bundle": false
+    },
+    {
+      "path": "investigations/elephant-clipping/artifacts/2026-09-02/provenance-wave-3/media-access-observations.json",
+      "bytes": 1840,
+      "sha256": "397c15dcee638053263ee08d808bd120d83a8bfa07975eec35c93de881dd084b",
+      "duplicated_in_review_bundle": false
+    }
+  ],
+  "limitations": [
+    "Byte identity is not independent authentication of source claims.",
+    "Baseline hypothesis rankings are disputed and are not endorsed.",
+    "Main-pass UI values and media HTTP outcomes have explicit collector-transcription limits.",
+    "The three payment collector scripts are preserved as inert source text; execution can retrieve sources or write logs.",
+    "This generated manifest does not hash itself; other payloads are independently inventoried."
+  ]
+}

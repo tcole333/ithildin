@@ -1,0 +1,22 @@
+import ast
+import json
+from pathlib import Path
+root = Path('tools')
+report = {}
+for filename in ['query_property.py', 'query_state_courts.py', 'public_records_monitor.py']:
+    source = (root / filename).read_text()
+    module = ast.parse(source)
+    report[filename] = {
+        'lines': len(source.splitlines()),
+        'top_level_functions': len([n for n in module.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]),
+        'parse_args_calls': len([n for n in ast.walk(module) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == 'parse_args']),
+        'probe_functions': len([n for n in module.body if isinstance(n, ast.FunctionDef) and n.name.startswith('probe_')]),
+    }
+files = sorted(root.glob('query_*.py')) + sorted(root.glob('ingest_*.py'))
+report['inventory'] = {
+    'query_modules': len(list(root.glob('query_*.py'))),
+    'ingest_modules': len(list(root.glob('ingest_*.py'))),
+    'ad_hoc_env_loading_modules': sum('env_path.read_text().splitlines()' in p.read_text() for p in files),
+    'query_modules_with_local_log_wrapper': sum('def _log(' in p.read_text() for p in root.glob('query_*.py')),
+}
+print(json.dumps(report, indent=2))

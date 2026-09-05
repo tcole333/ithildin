@@ -1,0 +1,135 @@
+import argparse
+import json
+import sqlite3
+import threading
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+from queue_system.queue import JobQueue
+from queue_system.triggers import TriggerEngine
+from scripts import dispatcher, queue_dispatcher
+from tools.lead_tracker import _ensure_schema
+
+ROOT = Path(tempfile.mkdtemp(prefix="orchestration-fixtures-", dir="/tmp/osint-SXYkyRSJ"))
+ROOT.mkdir(exist_ok=True)
+
+def create_db(name):
+    db = sqlite3.connect(ROOT / (name + '.db'))
+    db.row_factory = sqlite3.Row
+    db.execute('PRAGMA journal_mode=WAL')
+    db.execute('PRAGMA foreign_keys=ON')
+    _ensure_schema(db)
+    dispatcher.ensure_dispatch_table(db)
+    return db
+
+def create_run(db, name, records=None, only_report=False, lead_id=None):
+    staging = ROOT / name
+    staging.mkdir(exist_ok=True)
+    (staging / 'report.md').write_text('# Review fixture\n')
+    (staging / 'run.json').write_text('{}')
+    if not only_report:
+        for filename in dispatcher.REQUIRED_ARTIFACTS:
+            if filename.endswith('.jsonl'):
+                (staging / filename).write_text('')
+        if records:
+            (staging / 'candidate_findings.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in records))
+    cur = db.execute('INSERT INTO dispatch_runs (run_type, job_type, target, status, review_required, expected_artifacts, staging_dir, task_contract_json, lead_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', ('trace_entity','trace_entity','Example Corp','completed',1,json.dumps(dispatcher.REQUIRED_ARTIFACTS),str(staging),json.dumps({'profile_id':'review-test'}),lead_id))
+    run_id = cur.lastrowid
+    run = db.execute('SELECT * FROM dispatch_runs WHERE id=?',(run_id,)).fetchone()
+    inspection = dispatcher.inspect_staging_bundle(db, run, {}, update_db=True)
+    db.execute("UPDATE dispatch_staging SET review_status='approved' WHERE run_id=?", (run_id,))
+    db.commit()
+    return run_id, inspection
+
+out = {}
+db = create_db('evidence')
+run_id, _ = create_run(db, 'evidence', [{'target_name':'Example Corp','summary':'An inference','finding_type':'financial','claim_type':'inference','confidence':'confirmed','source_datasets':'edgar','evidence_ids':['EDGAR:fixture'],'source_quotes':{'EDGAR:fixture':{'quote':'Evidence fixture'}},'date_of_event':'2025'}])
+out['evidence_import_counts'] = dispatcher.import_staged_run(db,run_id,{},'review-test')
+out['evidence_finding'] = dict(db.execute('SELECT claim_type,confidence,source_datasets,event_date_iso,date_precision FROM findings').fetchone())
+out['evidence_rows'] = db.execute('SELECT COUNT(*) FROM finding_evidence').fetchone()[0]
+db.close()
+
+db = create_db('incomplete')
+lead_id = db.execute("INSERT INTO leads (title, category, status) VALUES ('Source lead','entity','open')").lastrowid
+db.commit()
+run_id, inspection = create_run(db, 'incomplete', only_report=True, lead_id=lead_id)
+out['incomplete_inspection'] = {k:inspection[k] for k in ['ready','validation_error','artifact_presence']}
+args = argparse.Namespace(approve=run_id,note='Fixture approval',reviewer='review-test')
+with patch.object(dispatcher, 'get_db', return_value=db), patch.object(dispatcher, 'load_config', return_value={}):
+    dispatcher.cmd_review(args)
+db = sqlite3.connect(ROOT / 'incomplete.db')
+db.row_factory = sqlite3.Row
+out['incomplete_approved'] = db.execute('SELECT review_status FROM dispatch_staging').fetchone()[0]
+out['incomplete_import_counts'] = dispatcher.import_staged_run(db,run_id,{},'review-test')
+out['incomplete_lead_status'] = db.execute('SELECT status FROM leads WHERE id=?',(lead_id,)).fetchone()[0]
+db.close()
+
+q = JobQueue(ROOT / 'heartbeat.db')
+q.register_agent('slow','surveyor',['source_scan'])
+job_id=q.create_job('source_scan','discovery')
+q.claim_next('slow',['source_scan'])
+q.start_job(job_id,'slow')
+q.create_job('source_scan','discovery')
+db=q._connect()
+db.execute("UPDATE agent_instances SET last_heartbeat=datetime('now','-91 seconds')")
+db.commit()
+active=queue_dispatcher.get_active_agents(db,90)
+config={'agents':[{'persona':'surveyor','job_types':['source_scan'],'max_workers':1}]}
+out['heartbeat_busy_job_status']=q.get_job(job_id)['status']
+out['heartbeat_active_agents']=active
+out['heartbeat_scale_action']=queue_dispatcher.compute_scale_actions(config,queue_dispatcher.get_pending_by_type(db),active)
+q.set_status(job_id,'cancelled')
+q.complete_job(job_id,{'slow_worker':'returned later'})
+out['cancelled_job_after_late_completion']=q.get_job(job_id)['status']
+db.close()
+
+for mode in ['scheduled','thresholds']:
+    q=JobQueue(ROOT / ('trigger_'+mode+'.db'),busy_timeout_ms=5,retry_attempts=1)
+    triggers=[]
+    for i in range(2):
+        trigger={'name':f'trigger{i}','job_type':'echo','domain':'system'}
+        if mode=='scheduled': trigger['interval_minutes']=10
+        else: trigger.update(metric='queue_pending',threshold=0)
+        triggers.append(trigger)
+    config_path=ROOT / ('trigger_'+mode+'.json')
+    config_path.write_text(json.dumps({mode:triggers}))
+    engine=TriggerEngine(q,config_path=config_path)
+    try:
+        getattr(engine,'run_'+mode)()
+        error=None
+    except sqlite3.OperationalError as exc:
+        error=str(exc)
+    db=q._connect()
+    out['trigger_'+mode]={'error':error,'jobs_created':db.execute('SELECT count(*) FROM job_queue').fetchone()[0],'trigger_runs_recorded':db.execute('SELECT count(*) FROM trigger_runs').fetchone()[0]}
+    db.close()
+
+# Deterministically have two independent imports finish eligibility checks before either imports.
+db=create_db('race')
+run_id,_=create_run(db,'race',[{'target_name':'Example Corp','summary':'Only once','finding_type':'financial'}])
+db.close()
+original_load=dispatcher.load_jsonl
+barrier=threading.Barrier(2)
+local=threading.local()
+def synchronized_load(file_path):
+    local.n=getattr(local,'n',0)+1
+    # Four reads occur in inspect_staging_bundle, then import reads the files again after its commit.
+    if local.n==5: barrier.wait(timeout=10)
+    return original_load(file_path)
+results=[]
+def import_thread():
+    db=sqlite3.connect(ROOT/'race.db',timeout=10)
+    db.row_factory=sqlite3.Row
+    try: results.append(dispatcher.import_staged_run(db,run_id,{},'review-test'))
+    except Exception as exc: results.append({'error':str(exc)})
+    finally: db.close()
+with patch.object(dispatcher,'load_jsonl',side_effect=synchronized_load):
+    threads=[threading.Thread(target=import_thread) for _ in range(2)]
+    for thread in threads: thread.start()
+    for thread in threads: thread.join()
+db=sqlite3.connect(ROOT/'race.db')
+out['concurrent_imports']={'results':results,'findings_count':db.execute('SELECT COUNT(*) FROM findings').fetchone()[0],'raw_count':db.execute('SELECT COUNT(*) FROM dispatch_import_raw').fetchone()[0]}
+db.close()
+
+print(ROOT)
+print(json.dumps(out,indent=2))
+(ROOT/'repro-results.json').write_text(json.dumps(out,indent=2)+'\n')

@@ -1,0 +1,54 @@
+import contextlib
+import io
+import json
+import sqlite3
+from argparse import Namespace
+from unittest.mock import patch
+from urllib.error import URLError
+
+from tools import ingest_florida, ingest_ohio, query_registry, query_usaspending, query_fec
+
+# 1: Fresh registry schema, a Florida company with existing filing history,
+# then repeat the normal Florida quarterly import using its actual batch code.
+db = sqlite3.connect(':memory:')
+db.execute('PRAGMA foreign_keys=ON')
+query_registry._ensure_schema(db)
+entity = ('fl', 'TEST0001', 'FIXTURE LLC', 'llc', 'active') + (None,) * 16 + ('https://example.invalid/company',)
+officers = [('TEST0001', 'FIXTURE OFFICER', 'P', 'person', None, None, None, None)]
+ingest_florida._flush_batch(db, [entity], officers, [])
+db.commit()
+old_id = db.execute('SELECT id FROM registry_entities').fetchone()[0]
+db.execute('INSERT INTO registry_filings (entity_id, filing_type, filing_date) VALUES (?, ?, ?)', (old_id, 'annual_report', '2025-01-01'))
+db.commit()
+ingest_florida._flush_batch(db, [entity], officers, [])
+db.commit()
+print('florida_repeat_import', json.dumps({
+    'original_id': old_id,
+    'current_id': db.execute('SELECT id FROM registry_entities').fetchone()[0],
+    'fk_enabled': db.execute('PRAGMA foreign_keys').fetchone()[0],
+    'fk_violations': db.execute('PRAGMA foreign_key_check').fetchall(),
+    'filings_visible_via_entity_join': db.execute('SELECT COUNT(*) FROM registry_filings f JOIN registry_entities e ON e.id=f.entity_id').fetchone()[0],
+}))
+
+# 2: Upsert identical Ohio data twice; agent UNIQUE key includes nullable date.
+ohiodb = sqlite3.connect(':memory:')
+query_registry._ensure_schema(ohiodb)
+search = {'charter_num': 'TEST0002', 'business_name': 'FIXTURE INC', 'status': 'A'}
+detail = {'registrant': {'contact_name': 'FIXTURE AGENT'}}
+for _ in range(2):
+    ingest_ohio._upsert_entity(ohiodb, search, detail)
+print('ohio_identical_upsert', json.dumps({'agent_rows': ohiodb.execute('SELECT COUNT(*) FROM registry_agents').fetchone()[0]}))
+
+# 3: Real USAspending transport wrapper sees a network error, recipient command
+# prints a definitive no-match and exits normally without its requested artifact.
+out, err = io.StringIO(), io.StringIO()
+with patch.object(query_usaspending, 'urlopen', side_effect=URLError('fixture offline')), contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+    returned = query_usaspending.cmd_recipient(Namespace(query='FIXTURE', output='/tmp/osint-SXYkyRSJ/never-created-recipient.json', json_out=False))
+print('usaspending_failure', json.dumps({'return': returned, 'stdout': out.getvalue().strip(), 'stderr': err.getvalue().strip()}))
+
+# 4: FEC search history drops filter scope even when results differ.
+log_calls = []
+with patch.object(query_fec, '_fetch', return_value=([], {'count': 0})), patch.object(query_fec, '_log', side_effect=lambda *a: log_calls.append(a)), patch.object(query_fec, 'write_output', return_value=True):
+    for year in [2022, 2024]:
+        query_fec.cmd_donor(Namespace(query='FIXTURE', employer=None, min_amount=None, max_amount=None, cycle=year, state=None, limit=100))
+print('fec_scope_collision', json.dumps(log_calls))

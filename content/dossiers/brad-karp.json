@@ -7,20 +7,20 @@
   "profile_ids": [
     "brad-karp"
   ],
-  "generated_at": "2026-07-14T21:33:14.946275",
-  "last_updated": "2026-07-14T20:52:43.669798",
+  "generated_at": "2026-07-15T05:13:05.192854",
+  "last_updated": "2026-07-15T05:10:56.386579",
   "export_options": {
     "include_unverified": false
   },
   "stats": {
-    "total_findings": 84,
-    "total_connections": 6,
+    "total_findings": 85,
+    "total_connections": 4,
     "total_entities": 22,
     "finding_types": {
       "financial": 6,
       "background": 10,
       "legal": 20,
-      "relationship": 19,
+      "relationship": 20,
       "communication": 7,
       "intelligence": 7,
       "identity": 2,
@@ -31,11 +31,9 @@
     "connection_types": {
       "legal": 2,
       "successor_to": 1,
-      "social": 1,
-      "intelligence": 1,
       "political": 1
     },
-    "last_updated": "2026-07-14T20:52:43.669798"
+    "last_updated": "2026-07-15T05:10:56.386579"
   },
   "findings": [
     {
@@ -837,6 +835,32 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA02593035",
           "source_quote": "We are working on a licensing agreement for use of the Phaidon name by Narrows Holdings LLC.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 13338,
+      "finding_type": "relationship",
+      "summary": "When Larry Summers asked Jeffrey Epstein how he knew Kathy Ruemmler, Epstein replied that Brad Karp, head of Paul Weiss, was the initial source.",
+      "detail": "The released email directly establishes Epstein\u2019s contemporaneous account to Summers: Karp was involved \u201cinitially\u201d in Epstein\u2019s connection to Ruemmler. It does not independently establish the exact act Karp took, whether Karp made a direct introduction, what Karp knew about Epstein\u2019s intended contact, or whether other intermediaries also facilitated the relationship.",
+      "source_datasets": [
+        "kabass"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2014-07-22",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-07-15 05:10:43",
+      "verified_at": "2026-07-15T05:10:56.386579+00:00",
+      "target_name": "Brad Karp",
+      "profile_id": "brad-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01918117",
+          "source_quote": "did she call you? brad karp, head of paul weiss initially",
           "source_page": null,
           "assessment": null
         }
@@ -3440,6 +3464,7 @@
       "created_at": "2026-07-14 15:29:39",
       "verified_at": "2026-07-14 18:51:36",
       "profile_id": "brad-karp",
+      "finding_id": 13195,
       "other_person": "Carlos Ghosn Bichara",
       "other_person_slug": "carlos-ghosn-bichara",
       "evidence": [
@@ -3447,31 +3472,36 @@
           "evidence_type": "ref",
           "evidence_ref": "SEC-PR:2019-183",
           "source_quote": "Ghosn also agreed to a $1 million civil penalty and a 10-year officer and director bar.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://lda.senate.gov/api/v1/filings/?lobbyist_name=Brad%20S.%20Karp",
           "source_quote": "count: 7; each result identifies BRAD KARP among the lobbying_activity lobbyists for client CARLOS GHOSN BICHARA.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://lda.senate.gov/filings/public/filing/0f6b8056-329a-46fa-b1aa-a2be60bba2b1/print/",
           "source_quote": "Paul, Weiss seeks to secure its client\u2019s rights to reasonable bail conditions and a fair trial on criminal charges in Japan by engaging with the media and the U.S. government.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://lda.senate.gov/filings/public/filing/75d1e76f-ab66-4e25-84bd-e34a53719a7a/print/",
           "source_quote": "Termination Date: 02/25/2020; Lobbyist: BRAD KARP.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://www.paulweiss.com/insights/client-news/paul-weiss-strikes-sec-settlement-for-former-nissan-chair-carlos-ghosn",
           "source_quote": "The Paul, Weiss team was led by partners Brad Karp, Michael Gertzman and Kaye Yoshino, and included, among others, litigation counsel Daniel Juceam and corporate counsel Chikara Momota.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         }
       ]
     },
@@ -3487,6 +3517,7 @@
       "created_at": "2026-07-14 15:29:39",
       "verified_at": "2026-07-14 18:51:36",
       "profile_id": "brad-karp",
+      "finding_id": 13084,
       "other_person": "Scott Barshay",
       "other_person_slug": "scott-barshay",
       "evidence": [
@@ -3494,137 +3525,15 @@
           "evidence_type": "url",
           "evidence_ref": "https://www.paulweiss.com/professionals/partners-and-counsel/brad-s-karp",
           "source_quote": "Brad S. Karp is a partner in the Litigation Department, and former Chair of the firm (2008\u20132026).",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://www.prnewswire.com/news-releases/paul-weiss-appoints-scott-barshay-chairman-302679633.html",
           "source_quote": "Scott Barshay has been appointed Chairman of the firm, effective immediately, following Brad Karp\u2019s decision to resign as Chairman.",
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 6415,
-      "person_a": "Brad Karp",
-      "person_b": "Jeffrey Epstein",
-      "relationship_type": "social",
-      "description": "Primary records document a July 21, 2015 dinner involving Karp and Epstein, Karp's next-day thanks, and recurring phone/call scheduling through December 7, 2016. This edge captures only documented social/contact interaction; legal and client-matter flows require separate findings.",
-      "strength": "medium",
-      "date_range": "2015-07-21 to 2016-12-07",
-      "verification_status": "verified",
-      "created_at": "2026-07-14 14:31:22",
-      "verified_at": "2026-07-14 18:51:36",
-      "profile_id": "brad-karp",
-      "other_person": "Jeffrey Epstein",
-      "other_person_slug": "jeffrey-epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA00285083",
-          "source_quote": "Tues. July 21.2015 NY ... 7:00pm Dinner w/Woody Allen, Soon Yi, Brad Karp and wife",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01744132",
-          "source_quote": "Sent: Thursday, September 24, 2015 8:27:18 PM ... 5:30pm Phone Date w/Brad Karp",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02040186",
-          "source_quote": "Jeffrey and I have been exchanging notes. I got stuck in a board meeting and will be calling Jeffrey this morning instead.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02040188",
-          "source_quote": "Brad Karp will not be coming at 9am anymore! Cancelled!",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02044384",
-          "source_quote": "August 26, 2016 11:00 AM : 11:00am Conference Call w/Brad Karp, Pat Fenn and Brad Wechsler",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02196167",
-          "source_quote": "December 2, 2016 10:00 AM : 10am call brad karp",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02197253",
-          "source_quote": "On Dec 1, 2016 ... Good news - he just called and they are speaking at the moment.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02347329",
-          "source_quote": "He kept saying, \"you're the man\"; \"I've never met anyone as cool as Jeffrey\"! Thank you so much for arranging this!",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02494251",
-          "source_quote": "I can't thank you enough for including me in an evening I'll never forget.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02667768",
-          "source_quote": "On Wed, Dec 7, 2016 at 3:44 PM, Karp, Brad S wrote: I can call now. What # is best for you?",
-          "source_page": null
-        }
-      ]
-    },
-    {
-      "id": 6416,
-      "person_a": "Brad Karp",
-      "person_b": "Nardello & Co.",
-      "relationship_type": "intelligence",
-      "description": "Nardello personnel sent a documented series of 2015 draft transcripts to Karp and Lorin Reisner. This establishes a work-product channel; the formal contracting client, payer, complete tasking, and command chain remain undocumented.",
-      "strength": "medium",
-      "date_range": "2015-08-12 to 2015-10-19",
-      "verification_status": "verified",
-      "created_at": "2026-07-14 14:34:07",
-      "verified_at": "2026-07-14 18:51:36",
-      "profile_id": "brad-karp",
-      "other_person": "Nardello & Co.",
-      "other_person_slug": "nardello-co",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA00590667",
-          "source_quote": "(E) which took place on August 14, 2015 at Le Bernardin, 155 W. Sr Street, New York, New York between approximately 12:30 pm and 1:45 pm. The recording was made with the consent of JD.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01128746",
-          "source_quote": "The following is a draft transcript of a recording of a conversation between John Doe (JD) and GG) which took place on August 12, 2015 at the Four Seasons Restaurant, 99 E. 52e' Street, ew or New York between approximately 1:00 pm and 2:30 pm. The recording was made with the consent of JD.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01190807",
-          "source_quote": "which took place on August 19, 2015 at The Modem restaurant, 9 W 53rd St, New York, New York 10019. The recording was made with the consent of JD.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01200840",
-          "source_quote": "which took place on October 15, 2015 at King Cole, 2 E 55th St, New York, New or . e recording was made with the consent of JD.",
-          "source_page": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02716245",
-          "source_quote": "Attached is a draft transcript of today\u2019s meeting at the Four Seasons.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         }
       ]
     },
@@ -3640,6 +3549,7 @@
       "created_at": "2026-07-14 15:29:39",
       "verified_at": "2026-07-14 18:51:36",
       "profile_id": "brad-karp",
+      "finding_id": 13082,
       "other_person": "Donald Trump",
       "other_person_slug": "donald-trump",
       "evidence": [
@@ -3647,19 +3557,22 @@
           "evidence_type": "url",
           "evidence_ref": "https://www.presidency.ucsb.edu/documents/truth-social-posts-march-20-2025",
           "source_quote": "The President is agreeing to this action in light of a meeting with Paul, Weiss Chairman, Brad Karp.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://www.whitehouse.gov/presidential-actions/2025/03/addressing-remedial-action-by-paul-weiss/",
           "source_quote": "I hereby revoke Executive Order 14237 of March 14, 2025 (Addressing Risks from Paul Weiss).",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         },
         {
           "evidence_type": "url",
           "evidence_ref": "https://www.whitehouse.gov/presidential-actions/2025/03/addressing-risks-from-paul-weiss/",
           "source_quote": "The Attorney General, the Director of National Intelligence, and all other relevant heads of executive departments and agencies shall immediately take steps consistent with applicable law to suspend any active security clearances held by individuals at Paul Weiss.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         }
       ]
     },
@@ -3675,6 +3588,7 @@
       "created_at": "2026-07-14 15:29:39",
       "verified_at": "2026-07-14 18:51:36",
       "profile_id": "brad-karp",
+      "finding_id": 13086,
       "other_person": "Free Speech For People",
       "other_person_slug": "free-speech-for-people",
       "evidence": [
@@ -3682,7 +3596,8 @@
           "evidence_type": "url",
           "evidence_ref": "https://freespeechforpeople.org/wp-content/uploads/2026/04/paul-weiss-ethics-complaint-ny-2026.04.02.pdf",
           "source_quote": "Free Speech For People respectfully requests that the Attorney Grievance Committee investigate Paul, Weiss, Rifkind, Wharton & Garrison LLP ... The Committee should include in the scope of its investigation former firm Chairman Brad Karp.",
-          "source_page": null
+          "source_page": null,
+          "assessment": null
         }
       ]
     }
@@ -4077,6 +3992,14 @@
       "id": 13149
     },
     {
+      "date": "2014-07-22",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "When Larry Summers asked Jeffrey Epstein how he knew Kathy Ruemmler, Epstein replied that Brad Karp, head of Paul Weiss, was the initial source.",
+      "confidence": "confirmed",
+      "id": 13338
+    },
+    {
       "date": "2014-10-03",
       "type": "finding",
       "finding_type": "identity",
@@ -4117,14 +4040,6 @@
       "id": 13100
     },
     {
-      "date": "2015-07-21 to 2016-12-07",
-      "type": "connection",
-      "relationship_type": "social",
-      "description": "Primary records document a July 21, 2015 dinner involving Karp and Epstein, Karp's next-day thanks, and recurring phone/call scheduling through December 7, 2016. This edge captures only documented social/contact interaction; legal and client-matter flows require separate findings.",
-      "other_person": "Jeffrey Epstein",
-      "id": 6415
-    },
-    {
       "date": "2015-08-11",
       "type": "finding",
       "finding_type": "intelligence",
@@ -4139,14 +4054,6 @@
       "summary": "Released records support, but do not adjudicate, a bounded identity match between the 2015 Nardello JD/GG recording series and Leon Black\u2019s dispute with Guzel Ganieva; the formal Nardello contracting client and payer remain undocumented.",
       "confidence": "medium",
       "id": 13219
-    },
-    {
-      "date": "2015-08-12 to 2015-10-19",
-      "type": "connection",
-      "relationship_type": "intelligence",
-      "description": "Nardello personnel sent a documented series of 2015 draft transcripts to Karp and Lorin Reisner. This establishes a work-product channel; the formal contracting client, payer, complete tasking, and command chain remain undocumented.",
-      "other_person": "Nardello & Co.",
-      "id": 6416
     },
     {
       "date": "2015-08-23",
@@ -4641,25 +4548,23 @@
     "key_finding_ids": [
       13125,
       13099,
-      13160,
-      13161,
-      13103,
+      13072,
+      13102,
+      13100,
+      13101,
+      13075,
       13153,
-      13157,
-      13080,
-      13164,
-      13162,
-      13163,
-      13181,
-      13178,
-      13225,
-      13084
+      13184,
+      10528,
+      13219,
+      13208
     ],
     "key_identifiers": {
       "jurisdictions": [
         "Delaware",
         "Massachusetts",
         "New York",
+        "Switzerland",
         "ny",
         "us-ny"
       ],
@@ -4669,6 +4574,18 @@
           "entity": "Paul Weiss Rifkind Wharton & Garrison LLP",
           "start": "2000",
           "end": "2007"
+        },
+        {
+          "role": "Outside counsel in WorldCom securities settlement",
+          "entity": "Citigroup Inc.",
+          "start": "2004-05-07",
+          "end": "2004-05-07"
+        },
+        {
+          "role": "Outside counsel in Dynegy securities settlement",
+          "entity": "Citigroup Inc.",
+          "start": "2005-05-02",
+          "end": "2005-05-02"
         },
         {
           "role": "Chair",
@@ -4695,9 +4612,21 @@
           "end": null
         },
         {
+          "role": "Outside investigation team co-lead (Archegos)",
+          "entity": "Credit Suisse Group AG",
+          "start": "2021",
+          "end": "2021"
+        },
+        {
           "role": "director",
           "entity": "Garden of Dreams Foundation",
           "start": "2022-06",
+          "end": null
+        },
+        {
+          "role": "UK overseas entity managing officer",
+          "entity": "Paul Weiss Rifkind Wharton & Garrison LLP",
+          "start": "2022-11-16",
           "end": null
         },
         {
@@ -4729,30 +4658,6 @@
           "entity": "Mount Sinai Health System Inc",
           "start": null,
           "end": null
-        },
-        {
-          "role": "Trustee/Secretary (reported tax year 2023)",
-          "entity": "St. Luke\u2019s-Roosevelt Hospital Center",
-          "start": null,
-          "end": null
-        },
-        {
-          "role": "Secretary/Trustee (reported tax year 2023)",
-          "entity": "The Mount Sinai Medical Center",
-          "start": null,
-          "end": null
-        },
-        {
-          "role": "Secretary/Trustee (reported tax year 2023)",
-          "entity": "Icahn School of Medicine at Mount Sinai",
-          "start": null,
-          "end": null
-        },
-        {
-          "role": "Secretary/Trustee (reported tax year 2023)",
-          "entity": "New York Eye & Ear Infirmary",
-          "start": null,
-          "end": null
         }
       ],
       "entities": [
@@ -4762,6 +4667,13 @@
           "type": "partnership",
           "jurisdiction": "ny",
           "role": "Litigation Department Chair"
+        },
+        {
+          "id": 4752,
+          "name": "Citigroup Inc.",
+          "type": "corporation",
+          "jurisdiction": null,
+          "role": "Outside counsel in WorldCom securities settlement"
         },
         {
           "id": 3720,
@@ -4776,6 +4688,13 @@
           "type": "nonprofit",
           "jurisdiction": "Massachusetts",
           "role": "director"
+        },
+        {
+          "id": 4290,
+          "name": "Credit Suisse Group AG",
+          "type": "corporation",
+          "jurisdiction": "Switzerland",
+          "role": "Outside investigation team co-lead (Archegos)"
         },
         {
           "id": 5206,
@@ -4862,31 +4781,19 @@
         "title": "Key Relationships",
         "viz": "ego_network",
         "finding_ids": [
+          13255,
           13160,
-          10530,
-          2160,
           10528,
           13149,
+          13338,
           13100,
           13138,
           13158
         ],
         "connection_ids": [
-          207,
-          363,
-          367,
-          450,
-          483,
-          695,
-          1041,
-          1101,
-          1104,
-          1190,
-          1463,
-          1794,
-          2151,
-          2155,
-          5415
+          6417,
+          6419,
+          6418
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -4899,11 +4806,8 @@
           13171,
           13217,
           13204,
-          10524,
-          883,
-          517,
           13220,
-          10533
+          13262
         ],
         "connection_ids": [],
         "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
@@ -4913,9 +4817,7 @@
         "title": "Corporate Structure",
         "viz": null,
         "finding_ids": [],
-        "connection_ids": [
-          1794
-        ],
+        "connection_ids": [],
         "guidance": "Narrative about corporate entities, roles, jurisdictions. Explain the structure and its purpose, not just list entities."
       },
       {
@@ -4923,22 +4825,18 @@
         "title": "Legal Proceedings",
         "viz": "timeline",
         "finding_ids": [
+          13245,
+          13246,
           13094,
           13125,
           13098,
           13161,
           13147,
-          13143,
-          526,
-          13157
+          13143
         ],
         "connection_ids": [
-          207,
-          363,
-          367,
-          450,
-          695,
-          1041
+          6417,
+          6421
         ],
         "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
       },
@@ -4953,15 +4851,9 @@
           13219,
           13201,
           13209,
-          2161,
           13210
         ],
-        "connection_ids": [
-          483,
-          6121,
-          6416,
-          416
-        ],
+        "connection_ids": [],
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       },
       {
@@ -4970,25 +4862,24 @@
         "viz": null,
         "finding_ids": [
           13099,
-          10514,
-          2048,
           13073,
           13106,
           13155,
-          879,
-          13075
+          13075,
+          13074,
+          13102
         ],
         "connection_ids": [],
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-07-14T19:59:42.867352",
+    "curated_at": "2026-07-15T05:11:25.777156",
     "lead": "<p>Brad Karp is a New York litigation partner at <a href=\"/dossiers/paul-weiss\">Paul, Weiss, Rifkind, Wharton &amp; Garrison</a> who chaired the firm from 2008 until February 2026 and previously led its Litigation Department from 2000 through 2007.[Finding #13077][Finding #13084] The verified chronology places Karp in an institutional and adverse professional channel involving <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> by December 2009, through litigation in which Karp represented Bear Stearns against an Epstein-controlled plaintiff; a separate March 2010 record identifies Karp as fund-side counsel in a settlement channel involving Epstein.[Finding #13125][Finding #13129][Finding #13130] The earliest located direct personal appointment between Karp and Epstein is dated November 7, 2013, so the record does not support backdating their personal relationship to the earlier litigation.[Finding #13099][Finding #13125]</p><p>Later records place Karp in several matter-specific professional and personal exchanges with Epstein.[Finding #13099][Finding #13100][Finding #13101][Finding #13102] <a href=\"/dossiers/leon-black\">Leon Black</a> formally retained Epstein and <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a> in 2013 to assist Paul Weiss and McDermott with defined estate-planning work, subject to an express authorization limit on disclosure of privileged or confidential information; Cross-reference of the released records places Karp later in Black and <a href=\"/dossiers/apollo-global-management\">Apollo</a> tax, billing, escrow, and fee-dispute workflows.[Finding #13160][Finding #13161][Finding #13103][Finding #13138][Finding #13153][Finding #13157] Paul Weiss filings establish a formal <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> lobbying mandate, while an archived firm biography establishes <a href=\"/dossiers/softbank-group\">SoftBank</a> as a Karp client without establishing <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a> as his personal client.[Finding #13080][Finding #13162][Finding #13163] Other records document a Caesars status exchange, counsel-referral discussions involving <a href=\"/dossiers/robert-kraft\">Robert Kraft</a> and John Havens, and a Gates Foundation-related legal consultation, but those sources do not by themselves establish a general client-referral pipeline, a Paul Weiss mandate for Kraft or Havens, or Foundation retention of Paul Weiss.[Finding #13180][Finding #13181][Finding #13178]</p><p>In March 2025, President Donald Trump revoked an executive order targeting Paul Weiss after announcing commitments attributed to Karp and the firm, including $40 million in pro bono services.[Finding #13082] Cross-reference of the January 30 and February 4 records shows that Paul Weiss announced Karp's resignation as chair on February 4, 2026, five days after a large Justice Department Epstein-file publication, but Karp attributed the decision only to unspecified recent reporting and the primary record does not establish which event caused it.[Finding #13084][Finding #13176] The firm said he would continue serving clients full time, and a June 2026 Third Circuit appearance for the National Football League confirms continued post-chair practice.[Finding #13084][Finding #13168][Finding #13183]</p>",
     "sections": [
       {
         "id": "relationship-origin-and-chronology",
         "title": "Relationship Origin and Chronology",
-        "content": "<p>The earliest located Karp connection to <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> arose through adverse institutional work, not a documented friendship.[Finding #13125] On December 3, 2009, Karp and Eric Goldstein, acting for Bear Stearns, filed a tag-along notice identifying an action brought by Epstein-controlled <a href=\"/dossiers/financial-trust-company\">Financial Trust Company</a>; later settlement papers identify Karp as a direct lawyer-to-lawyer counterpart but do not show a personal exchange with Epstein.[Finding #13125][Finding #13130] In a separate March 2010 Fortress/Jeepers channel, Karp was addressed as counsel for the fund in proposed settlement-confidentiality terms, but the located record does not prove he attended the contemplated Briger-Epstein meeting.[Finding #13129]</p><p>Direct personal contact is first documented by a November 7, 2013 appointment at Karp's <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> office, followed by calls, a 2014 visit, and a screening invitation involving Karp's children.[Finding #13099] Scheduling records then show continued calls and meetings through 2018, including a May 2017 invitation with <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a> at Epstein's Manhattan residence and several later visits there.[Finding #13100][Finding #13101] The last located direct exchange is Karp's March 30, 2019 recommendation of Nardello over Kroll for unspecified \"types of matters,\" 98 days before Epstein's arrest; the phrasing does not identify the proposed investigation, client, payer, or eventual use.[Finding #13102]</p><p>Cross-reference of the verified timeline characterizes the relationship as episodic and client-centered at inception, with later pockets of two-way professional assistance; temporal proximity alone does not establish coordination, authorization, privilege, confidentiality, or causation.[Finding #13213]</p>",
+        "content": "<p>The earliest located Karp connection to <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> arose through adverse institutional work, not a documented friendship.[Finding #13125] On December 3, 2009, Karp and Eric Goldstein, acting for Bear Stearns, filed a tag-along notice identifying an action brought by Epstein-controlled <a href=\"/dossiers/financial-trust-company\">Financial Trust Company</a>; later settlement papers identify Karp as a direct lawyer-to-lawyer counterpart but do not show a personal exchange with Epstein.[Finding #13125][Finding #13130] In a separate March 2010 Fortress/Jeepers channel, Karp was addressed as counsel for the fund in proposed settlement-confidentiality terms, but the located record does not prove he attended the contemplated Briger-Epstein meeting.[Finding #13129]</p><p>Direct personal contact is first documented by a November 7, 2013 appointment at Karp's <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> office, followed by calls, a 2014 visit, and a screening invitation involving Karp's children.[Finding #13099] On July 22, 2014, when <a href=\"/dossiers/lawrence-summers\">Lawrence Summers</a> asked Epstein how he knew <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a>, Epstein answered, \"did she call you? brad karp, head of paul weiss initially\"; the page records Epstein's attribution to Karp but does not show the underlying introduction or Karp's knowledge of Epstein's subsequent contact.[EFTA01918117] Scheduling records then show continued calls and meetings through 2018, including a May 2017 invitation with Ruemmler at Epstein's Manhattan residence and several later visits there.[Finding #13100][Finding #13101] The last located direct exchange is Karp's March 30, 2019 recommendation of Nardello over Kroll for unspecified \"types of matters,\" 98 days before Epstein's arrest; the phrasing does not identify the proposed investigation, client, payer, or eventual use.[Finding #13102]</p><p>Cross-reference of the verified timeline characterizes the relationship as episodic and client-centered at inception, with later pockets of two-way professional assistance; temporal proximity alone does not establish coordination, authorization, privilege, confidentiality, or causation.[Finding #13213]</p>",
         "viz": "timeline"
       },
       {

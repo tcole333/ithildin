@@ -1,0 +1,108 @@
+[
+  {
+    "target_name": "David Jan Mitchell / David J. Mitchell",
+    "summary": "Primary records resolve the David Jan Mitchell credited by Wayne Owens in 1989 as the David J. Mitchell who founded and ran Mitchell Holdings LLC and corresponded with Jeffrey Epstein.",
+    "detail": "The March 9, 1989 Congressional Record names 'David Jan Mitchell, an investment banker in New York.' A 2009 SEC Form 4 names and is signed by 'David Jan Mitchell'; Fortress/TSS's 2009 proxy identifies David J. Mitchell as Mitchell Holdings LLC's January 1991 founder and as a Rodman & Renshaw managing director/principal in 1988-1990. EFTA02562428 then addresses the Mitchell Holdings correspondent as 'David Jan Mitchell' inside a thread signed David Mitchell / Mitchell Holdings LLC. The exact full name, career timing, firm, and corpus self-identification converge on one person. This identity synthesis does not by itself establish a 1989 Mitchell-Epstein relationship.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "congressional_record",
+      "sec_edgar",
+      "kabasshouse"
+    ],
+    "date_of_event": "1989-03-09 to 2012-10-18",
+    "source_quote": "MITCHELL DAVID JAN",
+    "evidence_refs": [
+      "https://www.congress.gov/101/crecb/1989/03/09/GPO-CRECB-1989-pt3-9-1.pdf",
+      "https://www.sec.gov/Archives/edgar/data/1320760/000114420409023308/v147432_def14a.htm",
+      "https://www.sec.gov/Archives/edgar/data/1320760/000114420409025294/xslF345X03/v148564_ex.xml",
+      "EFTA02562428",
+      "EFTA02377208",
+      "EFTA02537551",
+      "finding:13924"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "David Jan Mitchell / Israel Bonds",
+    "summary": "A contemporaneous January 1989 JTA brief identifies David Jan Mitchell as chairman of Israel Bonds' Manhattan New Leadership Division.",
+    "detail": "The Rhode Island Jewish Herald's January 12, 1989 JTA brief reports that Ron Silver's election as president of the State of Israel Bonds Sabra Society was announced by David Jan Mitchell, chairman of the Manhattan New Leadership Division of Israel Bonds. The item independently places the exact full-name investment banker in organized Israel-related activity immediately before Owens credited him on the development-bank project. It does not establish a Center office, travel, or Epstein contact.",
+    "claim_type": "direct_quote",
+    "confidence": "high",
+    "source_datasets": [
+      "contemporaneous_press"
+    ],
+    "date_of_event": "1989-01-12",
+    "source_quote": "David Jan Mitchell, chairman of the Manhattan New Leadership Division of Israel Bonds",
+    "evidence_refs": [
+      "https://www.rijha.org/wp-content/uploads/voiceandherald/1989/1989-01-12.pdf"
+    ],
+    "tier": "T2",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Jeffrey Epstein / David Jan Mitchell",
+    "summary": "A May 27, 2009 Mitchell Holdings email places an in-person Mitchell-Epstein meeting in the preceding week.",
+    "detail": "On May 27, 2009, David Mitchell wrote from djm@mitchellholdings.com that, 'When I saw JEE last week,' Epstein wanted someone to inspect a New York apartment. The Mitchell Holdings signature and email resolve the sender to the target. The statement proves an in-person encounter in the preceding week; it does not establish when the men first met.",
+    "claim_type": "direct_quote",
+    "confidence": "confirmed",
+    "source_datasets": [
+      "kabasshouse"
+    ],
+    "date_of_event": "2009-05",
+    "source_quote": "When I saw JEE last week",
+    "evidence_refs": [
+      "EFTA02443038"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "Jeffrey Epstein / David Jan Mitchell / Shimon Peres dinner invitation",
+    "summary": "Mitchell offered Epstein a September 24, 2010 Peres dinner, but Epstein opted out after the prospective attendance expanded from six to 12-18 people.",
+    "detail": "Jonathan Leitersdorf first invited Mitchell to meet Peres for a cozy dinner. Mitchell invited Epstein to a six-person dinner, Epstein proposed moving it to his house, and Mitchell said Peres's people were checking. When Mitchell warned the event might be 12-18 people, Epstein replied 'I'm out.' Mitchell followed up on September 27 that he thought it would be six people. No guest roster, event confirmation, or contrary Epstein attendance record was located. The record supports an invitation and declined access opportunity, not a completed Epstein-Peres dinner.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "kabasshouse",
+      "lmsband"
+    ],
+    "date_of_event": "2010-09-24",
+    "source_quote": "Might be 12-18 people is that an issue ... I'm out",
+    "evidence_refs": [
+      "EFTA00756245",
+      "EFTA01811139",
+      "EFTA01810423",
+      "EFTA02421857",
+      "EFTA02421875",
+      "EFTA02419921"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  },
+  {
+    "target_name": "David Jan Mitchell / pre-2000 Epstein bridge",
+    "summary": "No reviewed record shows Mitchell knew Epstein before 2000; the released target-context chronology begins in May 2009.",
+    "detail": "Read-only exact and contextual searches of Kabasshouse, LMSBAND, Unified, the entity layers, SEC/firm/registry material, 1988-1992 press, Center material, Joyce Starr's fully OCRed Development Diplomacy, and open-web indexes found no pre-2000 Mitchell-Epstein name hit. Exact Mitchell Holdings combinations also returned no Owens, Center, development-bank, Rod-Larsen, or IPI hit. The earliest dated target-controlled item is EFTA02443038 on May 27, 2009. This is a bounded null in left-censored records, not proof the men had never met; it means the proposed bridge back to 1989 is not documented.",
+    "claim_type": "synthesis",
+    "confidence": "medium",
+    "source_datasets": [
+      "kabasshouse",
+      "lmsband",
+      "unified",
+      "sec_edgar",
+      "contemporaneous_press"
+    ],
+    "date_of_event": "1989 to 2009-05-27",
+    "source_quote": null,
+    "evidence_refs": [
+      "EFTA02443038",
+      "EFTA02437722",
+      "EFTA01946748",
+      "investigations/epstein-oslo/reports/owens-d-mitchell.md"
+    ],
+    "tier": "T1",
+    "thread_id": 175
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "generated_at_utc": "2026-09-04T04:40:16.421826+00:00",
+  "year": 2022,
+  "source_archive_index": "../../../history-access-evidence/older-archive-index.json",
+  "source_index_url": "https://www.boston.gov/departments/licensing-board/licensing-board-information-and-members",
+  "observed_distinct_urls": 24,
+  "downloaded_documents": 24,
+  "download_errors": 0,
+  "pdf_pages": 302,
+  "text_empty_pages": 1,
+  "text_empty_pages_visually_verified_blank": 1,
+  "ocr_required": false,
+  "document_dates_match_archive": 24,
+  "first_document_date": "2022-01-06",
+  "last_document_date": "2022-12-15",
+  "archive_link_coverage_complete": true,
+  "calendar_completeness_established": false,
+  "candidate_items_reviewed": 189,
+  "unmatched_keyword_occurrences": 0,
+  "keyword_scope": "transfer, pledge, stock, stockholder, ownership, owner, interest, share, equity, corporate structure, conversion, member, sale, sold, purchase, surrender, revoke",
+  "decision_events_by_type": {
+    "license_transfer": 101,
+    "license_pledge": 43
+  },
+  "decision_events_by_type_and_outcome": {
+    "license_transfer": {
+      "granted": 90,
+      "continued": 2,
+      "withdrawn": 1,
+      "deferred": 7,
+      "rejected": 1
+    },
+    "license_pledge": {
+      "granted": 40,
+      "deferred": 3
+    }
+  },
+  "distinct_printed_valid_transfer_license_ids": 88,
+  "transfer_decisions_without_valid_lb_id": 1,
+  "ownership_decisions": 51,
+  "ownership_scope": {
+    "explicit_alcohol": 46,
+    "common_victualler_no_alcohol_stated": 5
+  },
+  "ownership_outcomes": {
+    "granted": 51
+  },
+  "entity_conversions_explicit": 1,
+  "notices_by_type": {
+    "pledge_release": 5,
+    "ownership_clarification_notice": 1,
+    "license_cancellation": 1
+  },
+  "proposed_events": 0,
+  "unresolved_events": 0,
+  "excluded_candidates": 11,
+  "completed_sales_verified": 0,
+  "current_liens_verified": 0,
+  "validation": "Source hashes, exact candidate text containment, page bounds, date matches, canonical IDs, decision gates, unique event IDs and candidate-accounting passed.",
+  "limitations": [
+    "Covers only the 24 documents linked in the retained archive index; no meeting-calendar completeness claim.",
+    "Board grant is application disposition, not proof of ABCC approval, issuance, closing, consideration, continuing debt or lien perfection.",
+    "Repeated applications and separate events for the same license remain separate; counts are not unique sales.",
+    "One malformed printed L-99088 ID is retained raw with normalized LB ID null.",
+    "Five Common Victualler ownership items do not explicitly state alcohol category; they remain separately marked."
+  ]
+}

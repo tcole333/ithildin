@@ -1,0 +1,60 @@
+{
+  "date_backfill": {
+    "id": 1,
+    "date_of_event": "2020-02-03",
+    "event_date_iso": null,
+    "date_precision": null
+  },
+  "stale_search_returned": {
+    "id": 1,
+    "query_text": "Synthetic Entity",
+    "source": "synthetic_source",
+    "result_count": 0,
+    "searched_at": "2001-01-01 00:00:00"
+  },
+  "synthetic_dossier": {
+    "slug": "synthetic-subject",
+    "name": "Synthetic Subject",
+    "findings": [
+      {
+        "id": 1,
+        "claim_type": "direct_quote",
+        "confidence": "confirmed",
+        "verification_status": "verified",
+        "summary": "Synthetic Subject opened a company in 2020.",
+        "detail": "This synthetic evidence says nothing about crime."
+      }
+    ],
+    "curation": {
+      "lead": "<p>Synthetic Subject was convicted of fraud [Finding #1].</p>",
+      "system_role": "Business owner",
+      "sections": [
+        {
+          "id": "background",
+          "title": "Background",
+          "viz": null,
+          "content": "<p>Synthetic Subject bribed officials at <a href=\"/dossiers/example-a\">Example A</a>, <a href=\"/dossiers/example-b\">Example B</a>, <a href=\"/dossiers/example-c\">Example C</a>, <a href=\"/dossiers/example-d\">Example D</a>, <a href=\"/dossiers/example-e\">Example E</a> [Finding #1].</p>"
+        }
+      ],
+      "applicable_models": []
+    }
+  },
+  "automated_dossier_review": {
+    "slug": "synthetic-subject",
+    "name": "Synthetic Subject",
+    "verdict": "PASS",
+    "blocking": [],
+    "should_fix": [],
+    "suggestions": [],
+    "metrics": {
+      "supported_pct": 100.0,
+      "outbound_links": 5,
+      "orphan_citations": 0,
+      "non_verified_citations": 0,
+      "banned_phrases": 0,
+      "internal_refs": 0,
+      "missing_crosslinks": 0
+    }
+  },
+  "production_mutations": false
+}

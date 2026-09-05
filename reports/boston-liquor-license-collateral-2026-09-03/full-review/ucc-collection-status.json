@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-09-04T04:05:12Z",
+  "status": "paused_pending_supported_bulk_access",
+  "collection_paused": true,
+  "pause_reason": "published_bulk_collection_restriction",
+  "portal_access": {
+    "observed_date": "2026-09-04",
+    "timestamp_precision": "date",
+    "status": "search_form_loaded",
+    "source_url": "https://corp.sec.state.ma.us/CorpWeb/UCCSearch/UCCSearch.aspx",
+    "capture_method": "in_app_browser_accessibility_tree_observation",
+    "observation": "One normal navigation in the same in-app browser loaded the UCC Public Search form, including name and Article 9 controls. No new debtor query or filing-document request was submitted.",
+    "interpretation": "The search form is reachable again. This does not establish that result pages or document access have recovered, explain the earlier denial, or authorize bulk collection.",
+    "historical_access_denial_file": "ucc-access-block.json"
+  },
+  "terms_review": {
+    "observed_date": "2026-09-04",
+    "source_url": "https://www.sec.state.ma.us/divisions/terms.htm",
+    "source_title": "Secretary of the Commonwealth — Terms of Use",
+    "source_sections": ["Acceptable Use", "Prohibited Activities"],
+    "source_quote": "‘Scraping’ or ‘crawling,’ whether by automated means or manually, to access, view, or collect information is prohibited.",
+    "scope_note": "The terms describe lawful searches of individual business records as an acceptable use. A full-roster extraction requires a supported access route; reducing request speed alone does not resolve the published restriction.",
+    "collection_decision": "Do not restart full-roster portal collection. Research official bulk-data and records-delivery options and continue analysis of saved evidence."
+  },
+  "current_queries_complete": 96,
+  "current_queries_pending": 1348,
+  "lapsed_queries_complete": 0,
+  "lapsed_queries_pending": 1444,
+  "new_debtor_queries_during_recovery_check": 0,
+  "new_filing_document_requests_during_recovery_check": 0,
+  "historical_observations_preserved": ["ucc-access-block.json", "ucc-cua/events.jsonl"],
+  "next_action": "Prepare an unsent inquiry for a supported electronic export, licensed bulk service or public-records delivery. No agency message or paid order is authorized by this status record.",
+  "coverage_note": "Completed index queries are not completed collateral reviews or loan counts. All unsearched scopes remain pending."
+}

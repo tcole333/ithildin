@@ -1,0 +1,78 @@
+{
+  "sources": [
+    {
+      "id": "01",
+      "file": "01-glynn-company-search.json",
+      "source_type": "OpenCorporates registry-derived API response",
+      "original_response_sha256": "f948d67c2cc2b2c2c9ee8194ff81047b3697a48c9a9eac86044483b9784b6e8a",
+      "durable_redacted_sha256": "f948d67c2cc2b2c2c9ee8194ff81047b3697a48c9a9eac86044483b9784b6e8a",
+      "redaction": "Date-of-birth/death, nationality and unneeded officer address fields omitted; 83 Central corporate-office observations retained."
+    },
+    {
+      "id": "02",
+      "file": "02-glynn-company-details.json",
+      "source_type": "OpenCorporates registry-derived API response",
+      "original_response_sha256": "9f5f4edddef1e7a2d73298368590c2c0ff3216d902e5db9fb2a83d3dca8ec251",
+      "durable_redacted_sha256": "844509e0c3c5343cea72957eeff130618ee505690fff0849cef9e17964381080",
+      "redaction": "Date-of-birth/death, nationality and unneeded officer address fields omitted; 83 Central corporate-office observations retained."
+    },
+    {
+      "id": "03",
+      "file": "03-christine-freeman-officers.json",
+      "source_type": "OpenCorporates registry-derived API response",
+      "original_response_sha256": "e3f8ff986cf3efee8a03540e57c84880a7a6c4a33ea1584c50fcbe444ccb0a1a",
+      "durable_redacted_sha256": "b4c39c66d530af5c528fd78ec79d0f62ef0918ede63527200573228c7edf85c6",
+      "redaction": "Date-of-birth/death, nationality and unneeded officer address fields omitted; 83 Central corporate-office observations retained."
+    },
+    {
+      "title": "ABCC Craft Beer Guild decision packet, February 11 2016",
+      "url": "https://archives.lib.state.ma.us/server/api/core/bitstreams/5a733d6b-970a-4421-8319-cb941abdb3d2/content",
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/christine-freeman/primary-craft-beer-2016.pdf",
+      "sha256": "a651dcab64707209efa6e414e116c4b80efc28f1db06b3b91d863de8d92aeb4c",
+      "use": "Historical corporate roles and management-company relationships only; no assertion of present ownership, equity percentages or present legal status of unrelated enforcement proceedings.",
+      "id": "ABCC2016",
+      "published_date": "2016-02-11",
+      "visual_qc": {
+        "pages": [
+          11,
+          12
+        ],
+        "status": "verified_by_root",
+        "notes": "Original rendered pages readable; footnotes 16,20,21 and22 checked. Nonfatal Fontconfig warning; render visually good."
+      }
+    }
+  ],
+  "api_ledger": "api-call-ledger.json",
+  "no_mass_sos_live_requests": true,
+  "no_contact": true,
+  "credential_values_stored": false,
+  "summary": {
+    "api_calls_used": 3,
+    "api_call_limit": 3,
+    "account_status_calls": 0,
+    "remaining_account_credits": "not checked to conserve calls; billing consumption not independently queried",
+    "officer_search_records": 78,
+    "distinct_company_ids": 41,
+    "pagination_complete_for_this_query": true,
+    "scope": "One MA-scoped name query, page1/per_page100; not a complete national network or verified single-person company count.",
+    "middle_initial_A_records": 3,
+    "middle_name_Marie_records": 1,
+    "inactive_true_role_records": 24,
+    "other_inactive_values": {
+      "None": 54,
+      "True": 24
+    },
+    "roles_with_start_date": 0,
+    "roles_with_end_date": 3,
+    "roles_at_confirmed_corporate_office": 49,
+    "matched_existing_alcohol_license_ids": [
+      "LB-99225",
+      "LB-99100",
+      "LB-99227",
+      "LB-98998",
+      "LB-99156",
+      "LB-98953"
+    ],
+    "new_current_license_assignments": 0
+  }
+}

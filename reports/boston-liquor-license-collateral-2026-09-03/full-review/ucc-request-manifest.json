@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-09-04T04:08:40.742455+00:00",
+  "status": "prepared_not_sent",
+  "purpose": "Scope an access or price inquiry for existing public UCC records; not a placed search or copy order.",
+  "attachment": "ucc-request-roster.csv",
+  "attachment_sha256": "d0ad94d6569e0fe3bd5343abc49c75365adf34bbbb7c3bb1a8902998f5a10c66",
+  "source_queue": "ucc-queue.json",
+  "source_queue_sha256": "6fed97c52feec4d6d403875cb0e04e78fd5d8d67441133bfe24a4f90365eceb7",
+  "source_roster": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/source-licenses.csv",
+  "source_roster_sha256": "95373009e2f8c566525838a8feabc77a8c4a4e7cb30b6428b926491f35be4ef9",
+  "holder_rows": 1444,
+  "license_count": 1520,
+  "core_alcohol_holder_rows": 1437,
+  "name_mode_review_rows": 33,
+  "list_cell_encoding": "JSON arrays within CSV cells, preserving source-name and row lineage.",
+  "limitations": [
+    "Holder IDs identify local normalized roster groups, not official company or UCC debtor IDs.",
+    "Roster names, DBAs and license numbers do not establish debtor identity, jurisdiction, aliases or common ownership.",
+    "Core alcohol records and separately flagged BYOB/unclear categories remain distinguishable.",
+    "This attachment neither requests newly created analysis nor authorizes fees, purchases or agency contact."
+  ]
+}

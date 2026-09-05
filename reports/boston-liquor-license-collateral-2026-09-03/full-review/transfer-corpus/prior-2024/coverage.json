@@ -1,0 +1,180 @@
+{
+  "integration_status": "qa_complete",
+  "generated_at_utc": "2026-09-04T04:46:43.136850+00:00",
+  "source_window": "2020-2023",
+  "scope": "All exact retained official pre-2024 archive links; not lifetime or calendar-complete license history.",
+  "archive_index_url": "https://www.boston.gov/departments/licensing-board/licensing-board-information-and-members",
+  "archive_index_sha256": "13c41a6b49339b5290827a56632e76456f1eabc0d136fb55544945098802ac95",
+  "observed_urls": 91,
+  "successful_pdf_downloads": 91,
+  "unique_document_hashes": 89,
+  "unique_pdf_pages": 906,
+  "document_date_range": [
+    "2020-04-23",
+    "2023-12-14"
+  ],
+  "documents_without_explicit_vote_date": [
+    {
+      "source_id": "BLB-2021-04-20",
+      "document_date": "2021-04-20",
+      "date_basis": "Emergency hearing date in annotated notice; the actual vote date is not independently stated"
+    }
+  ],
+  "archive_date_range": [
+    "2020-04-23",
+    "2023-12-14"
+  ],
+  "source_counts_by_year": {
+    "2020": {
+      "observed_urls": 20,
+      "unique_document_hashes": 19,
+      "unique_pdf_pages": 97
+    },
+    "2021": {
+      "observed_urls": 26,
+      "unique_document_hashes": 25,
+      "unique_pdf_pages": 230
+    },
+    "2022": {
+      "observed_urls": 24,
+      "unique_document_hashes": 24,
+      "unique_pdf_pages": 302
+    },
+    "2023": {
+      "observed_urls": 21,
+      "unique_document_hashes": 21,
+      "unique_pdf_pages": 277
+    }
+  },
+  "duplicate_assets": [
+    {
+      "source_id": "BLB-2020-09-10-v2",
+      "duplicate_of": "BLB-2020-09-10",
+      "sha256": "03466145f3c0bcbd74e214bdd9b127f32c096fcbcb8e6ae19eedbfadf68b9e27"
+    },
+    {
+      "source_id": "BLB-2021-04-08-v2",
+      "duplicate_of": "BLB-2021-04-08-v1",
+      "sha256": "133830192dfae30ffbcd6c81c98275f63ec1bbe24e6995c177104f3f0863a5cf"
+    }
+  ],
+  "cross_window_hash_check": {
+    "baseline_manifest": "../source-index.json",
+    "baseline_manifest_sha256": "11c99c72043410cd7da9bff0f1f9a90ab8ca5a78a8b03bf579e2a119db74763d",
+    "baseline_source_records": 64,
+    "baseline_unique_source_hashes": 64,
+    "duplicates": [],
+    "duplicates_found": 0
+  },
+  "date_conflicts": [
+    {
+      "year": "2020",
+      "details": []
+    },
+    {
+      "year": "2021",
+      "details": []
+    },
+    {
+      "year": "2022",
+      "details": []
+    },
+    {
+      "year": "2023",
+      "details": [
+        "August 17 document's internal transactional hearing heading says Wednesday August 18, 2023, inconsistent with calendar/vote date; vote-date heading matches August 17 archive label.",
+        "May 25 archive anchor title says 5-23-23 while visible label and PDF vote-date heading say May 25."
+      ]
+    }
+  ],
+  "events": 473,
+  "event_subtypes": {
+    "pledge_application_disposition": 147,
+    "transfer_application_disposition": 319,
+    "pledge_release_acknowledgment": 7
+  },
+  "event_outcomes": {
+    "granted": 406,
+    "deferred": 44,
+    "to_be_re_noticed": 1,
+    "continued": 7,
+    "rescheduled": 3,
+    "withdrawn": 2,
+    "rejected": 3,
+    "acknowledged": 7
+  },
+  "action_outcomes": {
+    "pledge_application_disposition": {
+      "granted": 131,
+      "deferred": 12,
+      "continued": 1,
+      "withdrawn": 1,
+      "rescheduled": 1,
+      "rejected": 1
+    },
+    "pledge_release_acknowledgment": {
+      "acknowledged": 7
+    },
+    "transfer_application_disposition": {
+      "granted": 275,
+      "deferred": 32,
+      "to_be_re_noticed": 1,
+      "continued": 6,
+      "rescheduled": 2,
+      "rejected": 2,
+      "withdrawn": 1
+    }
+  },
+  "events_by_year": {
+    "2020": {
+      "pledge_application_disposition": 16,
+      "transfer_application_disposition": 28
+    },
+    "2021": {
+      "transfer_application_disposition": 112,
+      "pledge_application_disposition": 40
+    },
+    "2022": {
+      "transfer_application_disposition": 101,
+      "pledge_application_disposition": 43,
+      "pledge_release_acknowledgment": 5
+    },
+    "2023": {
+      "pledge_application_disposition": 48,
+      "transfer_application_disposition": 78,
+      "pledge_release_acknowledgment": 2
+    }
+  },
+  "ownership_interest_events": 155,
+  "ownership_outcomes": {
+    "granted": 155
+  },
+  "ownership_license_scopes": {
+    "explicit_alcohol": 126,
+    "common_victualler_no_alcohol_stated": 29
+  },
+  "ownership_explicit_conversion_items": 4,
+  "transfer_pledge_status_notices": 6,
+  "ownership_interest_notices": 9,
+  "proposed_or_unresolved_events": 1,
+  "proposed_or_unresolved_outcomes": {
+    "ambiguous_printed_grated": 1
+  },
+  "missing_normalized_license_ids": {
+    "events": 5,
+    "ownership_interest_events": 19,
+    "notices": 5,
+    "ownership_interest_notices": 0,
+    "proposed_or_unresolved_events": 1
+  },
+  "duplicate_events_removed": 0,
+  "full_source_quote_and_page_bounds_checks_passed": 644,
+  "frozen_existing_files_verified": 19,
+  "roster_join_performed": false,
+  "limitations": [
+    "Counts are source actions, not unique economic transactions or completed sales.",
+    "Grant does not establish closing, price, current debt, current lien or ownership control.",
+    "No source linked before April23,2020 was acquired; later link completeness is not meeting-calendar completeness.",
+    "Malformed/missing IDs are preserved, with no name/address-derived LB replacements."
+  ]
+}

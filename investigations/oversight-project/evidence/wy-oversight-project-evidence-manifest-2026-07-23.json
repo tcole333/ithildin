@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-23",
+  "created_for_lead_id": 73879,
+  "profile_id": "oversight-project",
+  "source": "Wyoming Secretary of State",
+  "entity": {
+    "name": "The Oversight Project",
+    "wyoming_id": "2025-001619271"
+  },
+  "repair_policy": {
+    "original_files_preserved": true,
+    "original_bytes_modified": false,
+    "canonical_files_are_byte_identical_copies": true,
+    "reason": "The two original local filenames are semantically swapped. Preserving them retains historical audit references; canonical copies provide unambiguous paths for current evidence."
+  },
+  "documents": [
+    {
+      "actual_document_type": "Mutual Benefit Nonprofit Corporation Articles of Incorporation packet",
+      "actual_document_date": "2025-02-21",
+      "identifiers": {
+        "original_id": "2025-001619271",
+        "filed_at": "2025-02-21 16:34"
+      },
+      "content_markers": [
+        "Mutual Benefit Nonprofit Corporation Articles of Incorporation",
+        "FILED: Feb 21 2025 4:34PM",
+        "Original ID: 2025-001619271",
+        "William M. Klimon",
+        "Articles 7 and 8 identify I.R.C. section 501(c)(4)"
+      ],
+      "pages": 5,
+      "bytes": 111259,
+      "sha256": "85b2d1622408ce0149d3a26508aa7333aec85f03994a47646b0a2f920569e3ea",
+      "original_swapped_path": "investigations/oversight-project/evidence/wy-annual-report-oversight-project-2026.pdf",
+      "canonical_path": "investigations/oversight-project/evidence/wy-oversight-project-articles-of-incorporation-2025.pdf",
+      "byte_comparison": "identical"
+    },
+    {
+      "actual_document_type": "2026 Nonprofit Corporation Annual Report",
+      "actual_document_date": "2026-01-22",
+      "identifiers": {
+        "entity_id": "2025-001619271",
+        "annual_report_number": "15384787",
+        "due_on_or_before": "2026-02-01"
+      },
+      "content_markers": [
+        "2026 Nonprofit Corporation Annual Report",
+        "AR Number: 15384787",
+        "Officers and Directors",
+        "Michael Howell",
+        "January 22, 2026"
+      ],
+      "pages": 1,
+      "bytes": 25307,
+      "sha256": "bdd9f12679d5c11b483bfcedaf1e8921988588b61f7c6a1076501f4a1cc21f19",
+      "original_swapped_path": "investigations/oversight-project/evidence/wy-articles-oversight-project-2025.pdf",
+      "canonical_path": "investigations/oversight-project/evidence/wy-oversight-project-annual-report-2026.pdf",
+      "byte_comparison": "identical"
+    }
+  ],
+  "pre_repair_database_inventory": [
+    {
+      "finding_id": 14041,
+      "reference": "investigations/oversight-project/evidence/wy-articles-oversight-project-2025.pdf",
+      "claimed_document": "2025 Articles of Incorporation",
+      "mapping_before_repair": "incorrect"
+    },
+    {
+      "finding_id": 14042,
+      "reference": "investigations/oversight-project/evidence/wy-articles-oversight-project-2025.pdf",
+      "claimed_document": "2025 Articles of Incorporation",
+      "mapping_before_repair": "incorrect"
+    },
+    {
+      "finding_id": 14042,
+      "reference": "investigations/oversight-project/evidence/wy-annual-report-oversight-project-2026.pdf",
+      "claimed_document": "2026 Annual Report",
+      "mapping_before_repair": "incorrect"
+    },
+    {
+      "finding_id": 14043,
+      "reference": "investigations/oversight-project/evidence/wy-annual-report-oversight-project-2026.pdf",
+      "claimed_document": "2026 Annual Report",
+      "mapping_before_repair": "incorrect"
+    },
+    {
+      "finding_id": 14068,
+      "reference": "WY report",
+      "claimed_document": "2026 Annual Report",
+      "mapping_before_repair": "generic"
+    },
+    {
+      "finding_id": 14073,
+      "reference": "WY report",
+      "claimed_document": "2026 Annual Report",
+      "mapping_before_repair": "generic"
+    },
+    {
+      "finding_id": 14073,
+      "reference": "agentref:investigations-oversight-project-evidence-wy-articles-oversight-project-2025-pdf",
+      "claimed_document": "2026 Annual Report",
+      "mapping_before_repair": "incorrect_and_duplicative"
+    },
+    {
+      "finding_id": 14087,
+      "reference": "investigations/oversight-project/evidence/wy-annual-report-oversight-project-2026.pdf",
+      "claimed_document": "2025 Articles of Incorporation",
+      "mapping_before_repair": "content_correct_but_filename_misleading"
+    },
+    {
+      "finding_id": 14087,
+      "reference": "agentref:investigations-oversight-project-evidence-wy-articles-oversight-project-2025-pdf",
+      "claimed_document": "2025 Articles of Incorporation",
+      "mapping_before_repair": "incorrect_and_duplicative"
+    }
+  ],
+  "post_repair_database_state": {
+    "current_evidence_references": [
+      {
+        "finding_ids": [
+          14041,
+          14042,
+          14087
+        ],
+        "canonical_path": "investigations/oversight-project/evidence/wy-oversight-project-articles-of-incorporation-2025.pdf"
+      },
+      {
+        "finding_ids": [
+          14042,
+          14043,
+          14068,
+          14073
+        ],
+        "canonical_path": "investigations/oversight-project/evidence/wy-oversight-project-annual-report-2026.pdf"
+      }
+    ],
+    "correction_ids": [
+      10961,
+      10962,
+      10963,
+      10964,
+      10965,
+      10966,
+      10967,
+      10968,
+      10969,
+      10970
+    ],
+    "integrity_finding_id": 14349,
+    "post_repair_evidence_audit": {
+      "zero_issue_finding_ids": [
+        14041,
+        14042,
+        14043,
+        14068,
+        14349
+      ],
+      "unrelated_preexisting_warning_counts": {
+        "14073": 5,
+        "14087": 2
+      },
+      "mapping_issue_count": 0
+    }
+  },
+  "audit_history_policy": "Historical corrections, finding text describing the original swap, and the two original files are retained. Current finding evidence references should use the canonical paths."
+}

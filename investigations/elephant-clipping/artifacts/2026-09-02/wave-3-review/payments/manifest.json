@@ -1,0 +1,61 @@
+{
+  "created_at": "2026-09-02T19:35:59.601099+00:00",
+  "lead_id": 95000,
+  "profile": "elephant-clipping",
+  "artifacts": [
+    {
+      "path": "/tmp/osint-v4NdHom5/c/ui-observations.json",
+      "bytes": 11112,
+      "sha256": "92c0ba1328e64c514385716cb3201afdcbd9c9289b6f1520e2a9e7b97a0ed83b"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/fec-minimized.json",
+      "bytes": 12934,
+      "sha256": "2e2c3fb2d6801c006cff98a0e24e4ed779f519de3821a1e9b396751ad185a2ad"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/search-log-receipt.json",
+      "bytes": 30849,
+      "sha256": "01ce3945c1d40c8efee6d76829c5f49278c31e234b96262e4940a944e51d0f69"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/fec-sweep.py",
+      "bytes": 2065,
+      "sha256": "39707c0cd40fb8b6b8a4ecdcb03bc170783c74938b46cc7c7a206a293b9cbab8"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/finalize-evidence.py",
+      "bytes": 5469,
+      "sha256": "ac261e51c29792528f48c255dbe5ae58241922e91fdbe0484b68f5931ef219dc"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/ohio-statewide-observations.json",
+      "bytes": 5760,
+      "sha256": "5a462321f58ffa8772490b1abd0605cc6d4eb2f34249d34ad74c14bbbc6b67de"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/ohio-statewide-search-log.json",
+      "bytes": 19605,
+      "sha256": "8eadc9d65ffc5771d951a3d698b8dff58fe2aa3f8c8a3a8e0ca11794870db42d"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/c/finalize-ohio.py",
+      "bytes": 2942,
+      "sha256": "acdc2d9458bcc65d03975d0857b5269893c8882fee25d97d04e123f89121f461"
+    },
+    {
+      "path": "/tmp/osint-v4NdHom5/report-agent-c.md",
+      "bytes": 22642,
+      "sha256": "8f1f83741983de6e8ca9ea408c289fd065a4084689fb70fbd4d0e7895004e3c9"
+    }
+  ],
+  "provenance": "FEC-minimized retains fetched API fields and query/pagination metadata; UI file is explicitly analyst transcription, not raw source response. No source payment finding added.",
+  "temporary_raw_files_not_for_durable_export": [
+    "fec-sweep.json (sandbox DNS failures)",
+    "fec-sweep-live.json (original provider output)",
+    "fec-wynn-2024.json",
+    "fec-wynn-2026.json"
+  ],
+  "updated_at": "2026-09-02T19:54:08+00:00",
+  "ohio_addendum_scope": "18 completed empty-display target scopes with no source-provided count, plus one first-page positive control; helper routing is not duplicate queries."
+}

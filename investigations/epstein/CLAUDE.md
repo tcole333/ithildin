@@ -36,11 +36,66 @@ Normalized, **regenerable** analysis layer built from the corpora. Schema contra
 | Capability | Query tool | Examples |
 |---|---|---|
 | **Temporal** — "interactions within ±N days of date X" | `tools/query_events.py` | `near --date 2005-08-15 --window 21 [--type transaction,flight,meeting,call,filing] [--actor "Epstein"]`; `window --start --end`; `stats --by-type`. ~32.5K events, each with an EFTA `ref` + participants. |
-| **Financial** — normalized ledger | `tools/query_fin.py` | `counterparty "Maxwell"`, `spend --group-by category`, `flows --from --to`, `balances --owner`, `positions`, `flights --passenger`, `near-date`, `review --outliers`. 53.1K txns as signed integer cents (OCR outliers quarantined, same-page dups collapsed). |
+| **Financial** — normalized ledger | `tools/query_fin.py` | `counterparty "Maxwell"`, `spend --group-by category`, `flows --from --to`, `balances --owner`, `positions`, `flights --passenger`, `near-date`, `accounts`, `statements`, `coverage`, `review --outliers|--truncated-refs|--parse-rules`. 53.1K txns as signed integer cents (OCR outliers quarantined, same-page dups collapsed). |
 | **Entities** — nickname/alias resolution | `tools/person_resolution.py` | `lookup "Jeffrey Epstein"` (gathers the 532-string cluster; keeps Mark/Edward Epstein separate); `stats`; `reconcile --dry-run`. 83.7K canonical persons ← 155.8K raw strings. Candidate crosswalk to core in `entity_crosswalk` (never auto-promoted). |
 | **Provenance** | sqlite (`epstein_derived.db`) | `evidence_item` (1.42M pages) / `evidence_representation` / `source_crosswalk` (591K LMSBAND EFTA edges). |
+| **Damaged-artifact recovery** — public-work deduplication, outer-container triage, page-selective OCR, strict InfoPath extraction | `tools/epstein_recovery.py` | Start with `ledger --actionable`; pin source hashes with `inspect`; use `extract-text`/`ocr-pages`; write an artifact only through strict `decode-infopath`. Queue rules: `investigations/epstein/recovery/README.md`. |
 
 A derived fact becomes a curated finding ONLY via `findings_tracker.py add` (never a direct cross-DB write) — it then gets confidence caps, evidence, and a `finding_entities` link.
+
+### What the financial model is, and is not
+
+This corpus is **account and card statements, not a two-sided transfer ledger.**
+There is no second ledger and no payment identifier carried across stages, so a
+transfer can never be matched from an instruction record to a receipt record.
+Do **not** approximate that with same-day / same-amount / opposite-sign pairing:
+it manufactures conservation out of reversals and out of duplicate
+representations of one event. `query_fin` is a one-sided screen.
+
+What money-conservation reasoning *is* available is the **closed-ledger form**,
+within one account and one statement period:
+
+```
+computed_ending = beginning_balance + charges + payments
+residual        = ending_balance - computed_ending
+```
+
+`financial_statement.recon_status` is `ok` (|residual| <= 1c), `delta`, or
+`not_computable`. A missing boundary balance or an unparseable member amount is
+always `not_computable` — never a zero residual. `recon_basis` says where the
+boundary balances came from: `boundary_markers` (kabass Beginning/Ending Balance
+rows on the page), `declared_totals` (a card statement's own previous/purchases/
+payments/balance fields), `fund_totals`, or `none`.
+
+**Account identity is tiered, and the tier is load-bearing.**
+`financial_account.key_basis` records which fields formed the key:
+
+| key_basis | conf | meaning |
+|---|---|---|
+| `source_account_number` | 0.95 | LMSBAND gave a full account number + bank |
+| `owner_digits` | 0.9 | statement carried both owner and card/account digits |
+| `digits` | 0.6 | digits with no owner attributed |
+| `owner` | 0.3 | **owner only — a party grouping, NOT one account** |
+
+Jeffrey E Epstein alone appears under 30 distinct `account_digits`, so any query
+that means "per account" must filter to the digit-anchored tiers
+(`query_fin accounts --identified-only`). Account digits are stored at their
+source length and are never folded to last-4: `1005`, `31005`, `61005` and
+`71005` are four different accounts.
+
+`query_fin coverage` reports every join dimension separately and their
+intersection, by row count **and** by absolute amount — state those denominators
+before making any conservation claim. `query_fin review --truncated-refs` lists
+rows whose `canonical_ref` is a short EFTA id (`EFTA00`, `EFTA0013`); those are
+shared by unrelated pages, so the builder salts their `dedupe_key` and they must
+be excluded from any page-based join.
+
+`counterparty_raw` holds the source's own field where one exists
+(`counterparty_parse_rule = 'source_field'`); otherwise it is parsed from
+`raw_description`, with `counterparty_parse_rule` naming the extraction family so
+precision can be audited per family rather than assumed uniform. Extraction is
+~86% strictly correct on a hand-graded 100-row sample; `raw_description` and the
+source fields are never overwritten.
 
 ## Reporting Sidecar (`datasets/epstein_reporting.db`)
 

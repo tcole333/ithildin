@@ -1,0 +1,15 @@
+{
+  "created_date_local": "2026-09-04",
+  "purpose": "Optional unsent selector for existing Boston transfer/pledge application packets, after baseline register availability and scope are established. Not a request submission, paid-copy order, claim of completion or current debt status.",
+  "source": "transfer-corpus/events.json",
+  "source_sha256": "0b4e7ef87c1ca8bfb2d69844c0607534011917a1227b868f5201659cb47f8390",
+  "output": "boston-records-packet-event-selector.csv",
+  "output_sha256": "f1469fd038ceb523f6682d03489408a2c1cb2e83ff5b56c8f53b9265306551d6",
+  "rows": 307,
+  "distinct_event_ids": 307,
+  "rows_with_missing_license_id": 4,
+  "missing_license_id_note": "Four rows describe two combined transfer/pledge items whose printed source omits the license ID. They remain selectable by source date, item and parties.",
+  "page_link_note": "Source URLs identify voting documents, not application attachments. PDF #page fragments are navigation hints; three HTML-document events have no page number. Item numbers are separate exact fields.",
+  "repeat_policy": "No deduplication: repeated decisions, combined transfer/pledge rows, releases and revocation notices are preserved. An office may supply a single shared packet for rows from the same application.",
+  "outcome_scope": "Outcome is the source-document action, not a representation of closing, ownership consummation or present lien status."
+}

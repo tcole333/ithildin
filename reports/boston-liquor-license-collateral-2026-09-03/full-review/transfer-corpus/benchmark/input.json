@@ -1,0 +1,410 @@
+{
+  "benchmark_version": "1.0",
+  "case_count": 13,
+  "instructions": [
+    "Answer every case independently using only that case's supplied source text. Do not browse, use tools, inspect other files, or import facts from other cases.",
+    "Return only one JSON object conforming to output_schema. Do not include analysis, markdown fences, or extra fields.",
+    "Report what the supplied evidence establishes. Use null for facts not supplied and an empty list when no listed action applies. Do not infer missing transaction terms.",
+    "For board records, actions is limited to the six listed categories; omit ancillary manager, hours, premises, and stock-interest changes from actions. Stock-transfer/stock-pledge categories must not populate fields defined for license transfers or license pledges.",
+    "Normalize an explicitly supplied Boston LB number as LB followed by digits. Transfer parties, DBAs, addresses, and pledge parties refer only to an explicit license transfer/pledge, including its release or revocation notice. Preserve the disposition's corrections.",
+    "from_address is the transferor's source location, or the licensee's location for a standalone license pledge/release; to_address is only a license-transfer destination. Do not infer a street address from a creditor's name.",
+    "conditions_or_corrections should capture material final-disposition conditions, deferral/continuance reasons, and explicit corrections rather than every operating detail in the application.",
+    "Provide one to three short verbatim evidence_quotes from the supplied text that support the main classification or disposition. Harmless whitespace normalization is allowed."
+  ],
+  "questions": {
+    "board_record": "What license/stock actions and dispositions are explicitly recorded, who are the relevant license-transfer or license-pledge parties, what locations and material conditions/corrections are supplied, and what does this evidence establish about approval, sale completion, current license liens, and loan amount?",
+    "ownership_record": "What relationship does the source establish for the subject, does it establish private-equity backing or current equity ownership, and what investor or equity percentage is actually stated?"
+  },
+  "output_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "results": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "board_record"
+                },
+                "license_num": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "actions": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "enum": [
+                      "license_transfer",
+                      "license_pledge",
+                      "license_transfer_revocation_notice",
+                      "license_pledge_release",
+                      "stock_transfer",
+                      "stock_pledge"
+                    ]
+                  }
+                },
+                "disposition": {
+                  "enum": [
+                    "granted",
+                    "deferred",
+                    "continued",
+                    "rescheduled",
+                    "withdrawn",
+                    "denied",
+                    "acknowledged",
+                    "not_stated"
+                  ]
+                },
+                "transferor": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "transferee": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "transferee_dba": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "pledging_party": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "pledge_recipient": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "from_address": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "to_address": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "conditions_or_corrections": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "license_transfer_approved": {
+                  "type": "boolean"
+                },
+                "new_license_pledge_approved": {
+                  "type": "boolean"
+                },
+                "sale_completion_status": {
+                  "enum": [
+                    "not_established",
+                    "reported_not_timely_closed",
+                    "reported_voided",
+                    "established_completed"
+                  ]
+                },
+                "current_license_lien_status": {
+                  "enum": [
+                    "not_established",
+                    "established"
+                  ]
+                },
+                "loan_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "evidence_quotes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "kind",
+                "license_num",
+                "actions",
+                "disposition",
+                "transferor",
+                "transferee",
+                "transferee_dba",
+                "pledging_party",
+                "pledge_recipient",
+                "from_address",
+                "to_address",
+                "conditions_or_corrections",
+                "license_transfer_approved",
+                "new_license_pledge_approved",
+                "sale_completion_status",
+                "current_license_lien_status",
+                "loan_amount",
+                "evidence_quotes"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "ownership_record"
+                },
+                "subject": {
+                  "type": "string"
+                },
+                "relationship_classification": {
+                  "enum": [
+                    "private_equity_investment",
+                    "portfolio_affiliation_only",
+                    "historical_fundraising_only",
+                    "public_company",
+                    "not_established"
+                  ]
+                },
+                "named_investor": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "equity_percentage": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "private_equity_backing_established": {
+                  "type": "boolean"
+                },
+                "current_equity_ownership_established": {
+                  "type": "boolean"
+                },
+                "qualifications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "evidence_quotes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "kind",
+                "subject",
+                "relationship_classification",
+                "named_investor",
+                "equity_percentage",
+                "private_equity_backing_established",
+                "current_equity_ownership_established",
+                "qualifications",
+                "evidence_quotes"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "required": [
+      "results"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "C01",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf",
+          "page_start": 15,
+          "page_end": 15,
+          "item_text": "3, The Board is in receipt of correspondence from D Street Music LLC d/b/a D\u2019s Keys Dueling Pianos,\n391 D St., Boston, MA 02210 (seller) and Proctor Restaurant Enterprise, Inc. d/b/a LuXXor/The Bloom\nRoom, 28-30 Kingston St., Boston, MA 02111 (buyer), License #: LB-99070, notifying the Board of the\nmutual intent to revoke the transfer of the license approved by the Board on August 28, 2025, as the\ntransaction has not been timely closed as required by the purchase and sale agreement.\n\nAcknowledged\n___________________________________________________________________________________"
+        }
+      ]
+    },
+    {
+      "case_id": "C02",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/12/Voting%20Minutes%2012-4-25.docx.pdf",
+          "page_start": 4,
+          "page_end": 4,
+          "item_text": "6. Tri\u2019ur, Inc.\n\nDoing business as: Salty Pig\n130 Dartmouth St, Boston, MA 02116\nLicense #: LB-99747\nHolder of a Common Victualler 7 Day Wines and Malt Beverages with Liqueurs License has petitioned\nfor Change of Stock Interest. Secondly, has petitioned for a pledge of stock to James T. Cochener.\nAttorney: Marshall F. Newman\n\nGranted"
+        }
+      ]
+    },
+    {
+      "case_id": "C03",
+      "kind": "ownership_record",
+      "sources": [
+        {
+          "source_url": "https://lyonsgroup.com/portfolio",
+          "page_start": null,
+          "page_end": null,
+          "item_text": "Our Portfolio Our Venues Fine dining, sports bars, clam shacks, nightclubs, and a donut shop. All ours."
+        },
+        {
+          "source_url": "https://lyonsgroup.com/portfolio",
+          "page_start": null,
+          "page_end": null,
+          "item_text": "All venues are independently owned and operated. Lyons Group does not own any of the entities listed on this website."
+        }
+      ]
+    },
+    {
+      "case_id": "C04",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/08/Voting%20Minutes%208-28-25.docx.pdf",
+          "page_start": 14,
+          "page_end": 14,
+          "item_text": "37. D Street Music, LLC\n\nDoing business as: D\u2019s Keys Dueling Pianos\n391 D St, Boston, MA 02210\nLicense #: LB-99070\nHolder of a Common Victualler 7 Day All-Alcoholic Beverages License has petitioned to transfer the\nlicense and the location - From: D Street Music, LLC located at 391 D St, Boston, MA 02210 To:\nProctor Restaurant Enterprise, Inc. dba LuXXor/The Bloom Room located at 28-30 Kingston St,\nBoston, MA 02111. Ravinder Shahani, Manager. 2:00 AM Closing Hour. Premise consists of - In one\nlarge room on ground floor comprised of various dining areas (74 seats) and bar with seating for 8\npatrons, kitchen in rear; together with room on lower level with additional dining areas (19 seats) and\nbar with seating for 12 patrons; food prep, storage, office space and restrooms on lower level. All\ntogether comprised of 1,529 sf with one entrance and four exits. (aka 100-106 Bedford St).\nAdditionally, has petitioned to provide Bottle Service for up to 11 tables on the first floor and 5 tables\non the lower level.\nAttorney: Dennis A. Quilty\n\nGranted\nLicense not to be issued Board has received confirmation from the Downtown Boston\nNeighborhood Association that the community process has been completed"
+        }
+      ]
+    },
+    {
+      "case_id": "C05",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/08/Voting%20Minutes%208-27-26.docx_0.pdf",
+          "page_start": 9,
+          "page_end": 9,
+          "item_text": "19. Union Oyster House, Inc.\n\nDoing business as: Union Oyster House\n20 Marshall St., Boston, MA 02108\nLicense #: LB 99139\nHolder of a Common Victualler 7 Day All Alcoholic Beverages License has petitioned to transfer the\nlicense from the above \u2013 To: UOH Manager, LLC dba Union Oyster House (at the same location).\nKathleen Street, Manager. 2:00 AM Closing Hour. Updating the description of premise as follows\n19,980 sq. ft. restaurant with four floors, 2 entrances and 6 exits. 1st floor with dining rooms, an oyster\nbar with seating for 10 and Union Bar with seating for 22, total seating for 311; 2nd floor with dining\nrooms and total seating for 234; 3rd floor with offices and basement for storage. Seasonal 517 sq. ft.\npatio on public property with 36 seats, adhering to hours and seasons of operation as set forth by the\nCity\u2019s outdoor dining guidelines.\nAttorney: Joseph H. Devlin\n\nGranted\n___________________________________________________________________________________"
+        }
+      ]
+    },
+    {
+      "case_id": "C06",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf",
+          "page_start": 8,
+          "page_end": 8,
+          "item_text": "17. The DOT Restaurant, LLC\n\nDoing business as: the Dorchester\nLicense #: LB-99134\nHolder of a Common Victualler 7 Day All-Alcoholic Beverages License has petitioned to transfer the\nlicense from the above - To: DOT Associates, LLC dba Five Horses Tavern (at the same location).\nDylan S. Welsh, Manager. 2:00 AM closing hour. Secondly, has petitioned to amend the description of\npremise - From: In one large room on the ground floor with bar, seating areas, kitchen, restrooms,\nstorage space in basement, and annual outdoor patio on private property. Outdoor patio will consist of\n459sf with seating for 40 patrons. Indoor hours of operation will be 11:00am-1:00am Monday-Friday,\n9:00am-1:00am on Saturday-Sunday. Outdoor hours of operation will 11:00am-11:00pm\nMonday-Friday and 9:00am-11:00pm on Saturday-Sunday. Total sf is 4969 sf with a total capacity of\n275 and a total seat capacity of 255. To: 6,449sf TOTAL: On ground level, 5,401sf main dining area &\nbar area; 468sf secondary dining area, kitchen, office, employee lounge, & storage in rear; 580sf\nbasement for storage. 1 Main entrance/ exit on Dorchester Ave; additional entrance on Dorchester Ave.,\nand emergency exit in rear of premises. Lastly, has petitioned to pledge the license and stock to 1121\nDorchester Avenue Realty LLC.\nAttorney: Kristen L. Scanlon\n\nGranted, with Maria Murray as manager of record"
+        }
+      ]
+    },
+    {
+      "case_id": "C07",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf",
+          "page_start": 15,
+          "page_end": 15,
+          "item_text": "1. The Board is in receipt of a Release of Pledge of License and Security Interests from Rockland Trust\nCompany, releasing any previous pledges held on Shippy\u2019s Inc. d/b/a Beacon Street Liquors, 842\nBeacon Street, Boston, MA 02215, License # LB-334563.\n\nAcknowledged"
+        }
+      ]
+    },
+    {
+      "case_id": "C08",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/03/Voting%20Minutes%203-6-25.docx.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "item_text": "1. Athenian Enterprise, Inc.\n\nDoing business as: Stash\u2019s\n612 Blue Hill Av., Dorchester, MA 02121\nLicense #: LB\u2011100527\nHolder of a Common Victualler License has petitioned for a Change of Officers and Transfer of Stock\nFrom: Stavros Papantoniadis (Owner) 100% shares To: Anastasia Papantoniadis ( President )50%\nshares, Gregorios Papantoniadis (Treasurer, Director) 25% shares & Anastasios Papantoniadis\n(Secretary) 25% shares.\n\nGranted\n___________________________________________________________________________________"
+        }
+      ]
+    },
+    {
+      "case_id": "C09",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2024/12/Voting%20Minutes%2012-12-24.docx.pdf",
+          "page_start": 9,
+          "page_end": 9,
+          "item_text": "23. KBG, Inc.\n\nDoing business as: Kelleher\u2019s Bar & Grille\n1410 - 1420 Centre St, Roslindale, MA 02131\nLicense #: LB-98978\nHolder of a Common Victualler 7 Day All-Alcoholic Beverages License has petitioned to transfer the license\nand the location from the above - To: Flik International Corp. dba Flik located at 200 Clarendon St, Boston, MA\n02116. Premise consists of: 8,132 SF located on the 3rd floor of an office building with 2 entrances/exits in a\nspace known as the 200 Club with various meeting/function rooms, lounges, and an art gallery, with a total\noccupant load of approximately 445 persons. Cory Templehof, Manager. 12:00AM Closing Hour. Additionally,\nhas petitioned to pledge the license to BP TRS Services, LLC.\n\nDeferred to allow the Applicant to file an application for a Change of License Type"
+        }
+      ]
+    },
+    {
+      "case_id": "C10",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/06/Voting%20Minutes%206-5-25.docx.pdf",
+          "page_start": 4,
+          "page_end": 5,
+          "item_text": "4. Harvard Convenience Inc.\n\nDoing business as: Harvard Convenience\n157 Brighton Av., Allston, MA 02134\nLicense #: LB-540101\nHolder of a Retail Package Store Wines and Malt Beverages License has petitioned to transfer the\nlicense from the above To: Patel Harvard, Inc. dba Harvard Convenience (at the same location). Tushar\nKanubhai Patel, Manager. 2:00 AM Closing Hour (with alcohol sales ceasing at 11:00 PM). Secondly,\nhas petitioned to pledge the license and inventory to Rockland Trust Company.\nAttorney: Jackson L. Christian\n\nGranted, with a closing hour of 11:00 PM\n\n___________________________________________________________________________________"
+        }
+      ]
+    },
+    {
+      "case_id": "C11",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/01/Voting%20Minutes%201-9-26.docx.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "item_text": "14. Alasty Corp.\n\nDoing business as: Napper Tandys\n4187-4195 Washington St, Roslindale, MA 02131\nLicense #: LB-99286\nHolder of a Common Victualler 7 Day All-Alcoholic Beverages License has petitioned to transfer the\nlicense from the above - To: LH Roslindale, LLC dba La Hacienda (at the same location). Miguel A.\nCallejas, Manager. 2:00 AM Closing Hour. Updating the description of premise as follows: One level\nbuilding with basement; ground floor holds approximately 2046 square feet of patron floor space, three\nbathrooms, including one handicap accessible bathroom, kitchen area with 405 square feet, two\nentrances on Washington, two egresses on Washington and one egress at rear of building. 2451 SF total.\nAttorney: Mark A. White\n\nContinued to the January 28, 2026 Transactional Hearing"
+        }
+      ]
+    },
+    {
+      "case_id": "C12",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/06/Voting%20Minutes%206-5-25.docx.pdf",
+          "page_start": 4,
+          "page_end": 4,
+          "item_text": "3. Pasta Beach Rowes Wharf, LLC\n\nDoing business as: Pasta Beach\n30 Rowes Wharf, Boston, MA 02110\nLicense #: LB-99452\nHolder of a Common Victuallar 7 Day All Alcoholic Beverages License has petitioned to transfer the\nlicense from the above To: 1928 Boston Harbor, LLC dba 1928 Rowes Wharf (at the same location).\nKristin Jenkins, Manager. 1:00 AM Closing Hour. Updating the description of premise as follows:\n5,303sf TOTAL: 2,953sf on ground floor with main dining area and bar seating; kitchen and storage in\nrear; mezzanine level for additional equipment and storage; 2 entrance/exits of Atlantic Ave.; additional\nentrance/exit on northern side of premises. 2,350sf annual patio on private property with seating for 70,\nclosing hour 11pm.\nAttorney: Kristen L. Scanlon\n\nGranted, with corrected transferee entity name of 1928 Rowes Wharf LLC\nThe Board requests submission of a security plan, to address, at minimum: the relationship\nbetween Licensee and hotel security; and how the Licensee will prevent patrons leaving the\npremise with alcohol.\n___________________________________________________________________________________"
+        }
+      ]
+    },
+    {
+      "case_id": "C13",
+      "kind": "board_record",
+      "sources": [
+        {
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "item_text": "13. Shippy\u2019s Inc.\n\nDoing business as: Beacon Street Liquors\n842 Beacon St, Boston, MA 02215\nLicense #: LB-334563\nHolder of a Retail Package Store All-Alcoholic Beverages License has petitioned to pledge the license\nto Brookline Bank.\n\nGranted"
+        }
+      ]
+    }
+  ]
+}

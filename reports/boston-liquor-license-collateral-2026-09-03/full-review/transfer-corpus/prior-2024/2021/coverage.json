@@ -1,0 +1,84 @@
+{
+  "generated_at_utc": "2026-09-04T04:42:11.860126+00:00",
+  "archive_year": 2021,
+  "archive_date_range": [
+    "2021-01-21",
+    "2021-12-16"
+  ],
+  "archive_date_entries": 25,
+  "distinct_observed_urls": 26,
+  "downloaded_urls": 26,
+  "http_errors": 0,
+  "unique_pdf_hashes": 25,
+  "unique_pdf_pages": 230,
+  "duplicate_pdf_urls": 1,
+  "duplicate_pair": [
+    "BLB-2021-04-08-v1",
+    "BLB-2021-04-08-v2"
+  ],
+  "archive_label_dates_verified": 25,
+  "date_mismatches": 0,
+  "actual_vote_date_not_independently_stated": [
+    "BLB-2021-04-20"
+  ],
+  "candidate_items_reviewed": 199,
+  "keyword_lines_reviewed": 278,
+  "keyword_pattern": "transfer|pledg|owner|interest|share|equity|sale|sold|stock|beneficial|membership|corporate structure|convert|conversion",
+  "unmatched_keyword_lines": 5,
+  "unmatched_keyword_lines_reviewed_as_non_alcohol_section_headers": 5,
+  "main_events": 152,
+  "event_types": {
+    "license_transfer": 112,
+    "license_pledge": 40
+  },
+  "event_outcomes_by_type": {
+    "license_transfer": {
+      "to_be_re_noticed": 1,
+      "granted": 87,
+      "continued": 4,
+      "deferred": 17,
+      "rescheduled": 2,
+      "rejected": 1
+    },
+    "license_pledge": {
+      "granted": 31,
+      "continued": 1,
+      "deferred": 5,
+      "withdrawn": 1,
+      "rescheduled": 1,
+      "rejected": 1
+    }
+  },
+  "distinct_transfer_license_ids": 89,
+  "transfer_events_missing_explicit_license_id": 2,
+  "ownership_interest_decisions": 47,
+  "ownership_scope": {
+    "explicit_alcohol": 37,
+    "common_victualler_no_alcohol_stated": 10
+  },
+  "ownership_outcomes": {
+    "granted": 47
+  },
+  "ownership_with_named_before_after_parties": 9,
+  "explicit_entity_conversions": 1,
+  "notices": 5,
+  "notice_types": {
+    "ownership_information_hearing": 1,
+    "license_cancellation": 1,
+    "prospective_transfer_or_status_notice": 3
+  },
+  "stock_inventory_only_pledge_decisions_separate": 2,
+  "proposed_or_unresolved_events": 0,
+  "excluded_candidates": 31,
+  "provenance_span_audit": "passed for all main/ownership/notice rows",
+  "completed_sale_verified_count": 0,
+  "current_lien_status_verified_count": 0,
+  "limits": [
+    "Coverage is every observed link in the retained official archive index, not proof that every 2021 meeting or transaction is represented.",
+    "April 20 is an annotated emergency inspection notice; its printed hearing date matches the archive but actual vote date is not independently stated. It produces no in-scope transfer/pledge/ownership event.",
+    "Applications granted/deferred/rejected at different meetings remain separate source occurrences, not unique completed deals.",
+    "No sale price, payment, closing or currently outstanding secured balance is verified by this decision corpus.",
+    "No historical/current-roster ID is imputed when an item omits its license number.",
+    "No Massachusetts SOS portal, paid API or records-request submission was used."
+  ]
+}

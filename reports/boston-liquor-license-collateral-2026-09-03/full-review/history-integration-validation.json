@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "canonical_files_unchanged": 8,
+  "benchmark_files_unchanged": 16,
+  "original_source_documents_hashes_unchanged": 64,
+  "raw_event_fields_preserved": 1115,
+  "source_hash_intersections": [
+    {
+      "left_window_id": "2020-2023",
+      "right_window_id": "2024-2026",
+      "shared_source_sha256": []
+    }
+  ],
+  "combined_ledgers": {
+    "review-board-events-combined.json": {
+      "records": 780,
+      "review_joined": 727,
+      "distinct_review_ids": 412
+    },
+    "review-ownership-interest-events-combined.json": {
+      "records": 301,
+      "review_joined": 215,
+      "distinct_review_ids": 182
+    },
+    "review-ownership-interest-notices-combined.json": {
+      "records": 14,
+      "review_joined": 6,
+      "distinct_review_ids": 6
+    },
+    "review-history-notices-combined.json": {
+      "records": 19,
+      "review_joined": 12,
+      "distinct_review_ids": 12
+    },
+    "review-history-proposals-combined.json": {
+      "records": 1,
+      "review_joined": 0,
+      "distinct_review_ids": 0
+    }
+  },
+  "judgment_notices": {
+    "source": 13,
+    "integrated_observations": 8,
+    "integrated_license_ids": 7,
+    "outside_review": 5
+  },
+  "ownership": {
+    "affiliations": 72,
+    "reviewed": 83,
+    "unresolved_reviewed": 11,
+    "groups": 17,
+    "documented_pe_affiliations": 5,
+    "documented_pe_groups": 2
+  },
+  "ucc_search_states": {
+    "current": {
+      "complete": 96,
+      "pending": 1348
+    },
+    "lapsed": {
+      "pending": 1444
+    }
+  },
+  "csv_rows": 1520,
+  "filing_queue_hash_unchanged": true,
+  "files": {
+    "review-data.json": "fc4f5719479d5200c726a69d0d03445a0ea03feeccfba0f61e71e23d98fc9cd4",
+    "dashboard.html": "7bd4bac76fc4a416e59c979d7abae403abbfbb43db60794b237274c4c57ce832",
+    "license-review.csv": "5252ded528e774a5f446288d0c29d2f208fba15db4a6db21b8fbb554af96ac15",
+    "build_review_data.py": "332f9ed4809eb36b32630131cf0e1a863ccbfa98ea5fc4e50ed3802c448b0efb",
+    "build_dashboard.py": "0a3b2f44817b7a4bec574b0dac362da55cd38b7b856b9a19ad9e565d1698362c"
+  },
+  "verified_at": "2026-09-04T05:01:00.239279+00:00",
+  "focused_tests": "17 passed: tests/test_boston_license_review_report.py",
+  "lint": "Ruff passed on both builders and the focused test file",
+  "javascript": "Node syntax, all9 cohort filters, access banner and links,7 reconciled histories, source-window counts,8 judgment notice cards and Airport5-affiliations/1-group rendering passed offline.",
+  "network_or_paid_calls": false,
+  "scope": "Integrates only finalized qa_complete2020\u20132023 source window alongside immutable2024\u20132026 baseline. Independent supplemental notice ledger remains separate; no lifetime-history, closing, current-debt or historical-equity inference.",
+  "source_readiness_sha256": "569aec0a3aeff6fa1c69b63dffadfc855378c041a8125927da647de014b333ae",
+  "independent_prior_window_quality_review": "transfer-corpus/prior-2024/quality-review/README.md",
+  "judgment_ledger_sha256": "3f38ecdd826faa4048d62ce20866182bf79391ac88489b6acb37ac5d142427a7",
+  "papercuts_resolved": [
+    2664,
+    2665
+  ],
+  "local_validation_scripts_directory": "/private/tmp/osint-history-integration-44cyhh85"
+}

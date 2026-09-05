@@ -1,0 +1,20 @@
+{
+  "status": "fail",
+  "scope": "publish",
+  "strict": true,
+  "run_db_id": 1,
+  "critical_count": 1,
+  "warning_count": 0,
+  "blocking_rules": [
+    "MATH004_EXPORT_TOTAL_PARITY"
+  ],
+  "sample_issues": [
+    {
+      "record_ref": "financial_export:ds10-flows.json",
+      "issue_code": "MATH004_EXPORT_TOTAL_PARITY",
+      "severity": "critical"
+    }
+  ],
+  "math_checks_passed": false,
+  "quality_run_id": "20260905T210704Z"
+}

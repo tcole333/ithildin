@@ -1,0 +1,124 @@
+{
+  "schema_version": "public-records-result/1.0",
+  "retrieved_at": "2026-09-04T14:15:53Z",
+  "status": "ok",
+  "query": {
+    "schema_version": "public-records-query/1.0",
+    "source": {
+      "source_id": "us-ma-massgis-parcels",
+      "name": "MassGIS Standardized Property Tax Parcels",
+      "source_role": "assessment_parcel_geometry_bulk",
+      "base_url": "https://services9.arcgis.com/2ynJbr9BE17vXxR8/ArcGIS/rest/services/MassGIS_L3_Parcels_gdb/FeatureServer/2",
+      "dataset_id": "L3_PARCEL_FTP_LINKS",
+      "metadata": {
+        "authority": "Massachusetts Bureau of Geographic Information",
+        "coverage": "351 Massachusetts municipalities",
+        "release_scope": "municipality"
+      }
+    },
+    "jurisdiction": {
+      "jurisdiction_id": "us-ma",
+      "name": "Massachusetts",
+      "country_code": "US",
+      "state_code": "MA",
+      "county_fips": null,
+      "locality": null,
+      "metadata": {
+        "state_fips": "25"
+      }
+    },
+    "query": {
+      "operation": "manifest",
+      "parameters": {
+        "town": "HINGHAM"
+      },
+      "requested_limit": 50,
+      "cursor": null,
+      "metadata": {}
+    },
+    "fingerprint": "5f5456085395da365ce3174598a93a835a2d7884123bed292c8727b0f94223ff"
+  },
+  "records": [
+    {
+      "canonical_ref": "PROPERTY:us-ma-massgis-parcels/25/bulk_release/M131%3AFY2024",
+      "town": "HINGHAM",
+      "town_id": 131,
+      "assessor_fiscal_year": 2024,
+      "release_kind": "snapshot",
+      "manifest": {
+        "source_id": "us-ma-massgis-parcels",
+        "dataset_id": "MassGIS-L3-Parcels",
+        "release": {
+          "release_id": "M131:FY2024",
+          "kind": "snapshot",
+          "effective_at": null,
+          "base_release_id": null,
+          "sequence": null,
+          "coverage": {
+            "assessor_fiscal_year": 2024,
+            "municipality": "HINGHAM",
+            "town_id": 131
+          }
+        },
+        "artifacts": [
+          {
+            "artifact_id": "shapefile",
+            "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/shapefiles/l3parcels/L3_SHP_M131_HINGHAM.zip",
+            "filename": "L3_SHP_M131_HINGHAM.zip",
+            "media_type": "application/zip",
+            "archive_format": "zip",
+            "expected_size": null,
+            "expected_sha256": null,
+            "etag": null,
+            "last_modified": null,
+            "metadata": {
+              "assessor_fiscal_year": 2024,
+              "municipality": "HINGHAM",
+              "town_id": 131
+            }
+          },
+          {
+            "artifact_id": "file_geodatabase",
+            "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/gdbs/l3parcels/M131_parcels_gdb.zip",
+            "filename": "M131_parcels_gdb.zip",
+            "media_type": "application/zip",
+            "archive_format": "zip",
+            "expected_size": null,
+            "expected_sha256": null,
+            "etag": null,
+            "last_modified": null,
+            "metadata": {
+              "assessor_fiscal_year": 2024,
+              "municipality": "HINGHAM",
+              "town_id": 131
+            }
+          }
+        ],
+        "schema": {
+          "logical_components": [
+            "L3_ASSESS",
+            "L3_LUT",
+            "L3_MISC_POLY",
+            "L3_OTHLEG_POLY",
+            "L3_TAXPAR_POLY",
+            "L3_UC_LUT"
+          ],
+          "parcel_assessment_join_key": "LOC_ID",
+          "source_description": "https://www.mass.gov/info-details/massgis-data-property-tax-parcels",
+          "standard": "MassGIS Digital Parcel Standard Level 3"
+        },
+        "metadata": {
+          "source_manifest_object_id": 324,
+          "source_manifest_schema_fingerprint": "39a8dbfac09dc1c51843335b9f1efaae56cc872d09d6aefa726b2937038592bf",
+          "source_note": null
+        },
+        "schema_fingerprint": "d3d60c48ea00cd6830777b6a6124d3f0eefc36abaad384dec79bc479a81d97e0",
+        "manifest_fingerprint": "e93ca610aa81c20de0f3f34db495829a877f53a92f5638a323c14f2b6e3ee452"
+      }
+    }
+  ],
+  "next_cursor": null,
+  "raw_artifact_refs": [],
+  "warnings": [],
+  "errors": []
+}

@@ -1,0 +1,364 @@
+# Investigation profile: cross-border political clipping and astroturfing network
+
+name: "elephant-clipping"
+
+primary_subject: "Elephant Clipping / ClipIt political clipping operation"
+
+description: >-
+  Evidence-led investigation of the cross-border paid video-clipping network
+  described by The Atlantic on September 2, 2026, including its vendors,
+  funders, content suppliers, distribution accounts, political beneficiaries,
+  cloud-document provenance, payment flows, and disclosure practices.
+
+key_persons:
+  - "serviuos"
+  - "blake wynn"
+  - "steve wynn"
+  - "anders wedøe"
+  - "anders wedoe"
+  - "jules katz"
+  - "benjamin goodman"
+  - "jack o'hara"
+  - "charlie kirk"
+  - "erika kirk"
+  - "andrew kolvet"
+  - "vivek ramaswamy"
+  - "tulsi gabbard"
+  - "ben shapiro"
+  - "steven crowder"
+  - "nick shirley"
+
+# No street address from the seed article is treated as verified. Agents should
+# add registry-sourced offices and addresses as they resolve the legal entities.
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "Core Operation, Sponsorship & Payments"
+    description: >-
+      Resolve Elephant Clipping, ClipIt, Serviuos, Monster Lab, campaign budgets,
+      payment rails, ultimate customers, and the source and disposition of funds.
+    targets:
+      - "elephant clipping"
+      - "clipit"
+      - "serviuos"
+      - "serviuos.com"
+      - "monster lab"
+    keywords:
+      - 'elephant clipping|clipit|serviuos|monster lab'
+      - 'campaign budget|payout|payment rail|views? per month|clipper'
+
+  - id: 2
+    name: "Enclave & Key / Wynn Network"
+    description: >-
+      Map Enclave & Key, its brands or operating units, officers, employees, clients, Wynn
+      family relationships, political access, and any role in supplying or
+      commissioning campaign content.
+    targets:
+      - "enclave & key"
+      - "b wynn sports llc"
+      - "celebrity poker tour"
+      - "blake wynn"
+      - "steve wynn"
+      - "jules katz"
+      - "benjamin goodman"
+      - "jack o'hara"
+    keywords:
+      - 'enclave\s*(?:&|and)\s*key|blake wynn|steve wynn'
+      - 'jules katz|benjamin goodman|jack o.hara'
+
+  - id: 3
+    name: "Latvian & Norwegian Vendor Chain"
+    description: >-
+      Resolve the legal entities, principals, domains, contractors, and business
+      histories behind ClipIt, ClipSon, US Politics Clipping, and their operators
+      in Latvia, Norway, and other contractor jurisdictions.
+    targets:
+      - "clipson"
+      - "clipson wedøe"
+      - "us politics clipping"
+      - "anders wedøe"
+      - "anders wedoe"
+      - "riga"
+    keywords:
+      - 'clipson|us politics clipping|anders wed(?:ø|o)e'
+      - 'latvia|latvian|riga|norway|norwegian'
+
+  - id: 4
+    name: "Cloud Documents & Content Provenance"
+    description: >-
+      Recover and authenticate publicly shared Google Drive/Docs/Sheets/Forms and
+      other cloud artifacts; preserve IDs, uploader metadata, filenames, dates,
+      revisions, link graphs, and archival traces without bypassing access controls.
+    targets:
+      - "google drive"
+      - "google docs"
+      - "google sheets"
+      - "google forms"
+    keywords:
+      - 'drive\.google\.com|docs\.google\.com|forms\.gle'
+      - 'uploaded by|owner|revision|folder id|document id|content library'
+
+  - id: 5
+    name: "Distribution Accounts & Coordination"
+    description: >-
+      Enumerate participating TikTok, Instagram, YouTube, and other accounts;
+      test claimed reach; identify coordinated posting, reused assets, proxy use,
+      payment markers, and disclosure patterns.
+    targets:
+      - "_politicalhub"
+      - "frontrawpolitics"
+      - "tiktok"
+      - "instagram"
+      - "youtube"
+      - "lonealphapolitics"
+      - "theusdebatearena"
+      - "newzinsights"
+      - "politi.cszone"
+      - "rightsideamerica2026"
+      - "usavoiceclips"
+      - "rightrepublican.view"
+      - "cnsrvtvperspective"
+      - "politics_decoded11"
+      - "politics.ts"
+      - "politicsthree60"
+      - "politics.fx"
+      - "dailyusapolitics"
+      - "uspoliticsclipsz"
+      - "politics.vm"
+      - "politics.vs"
+      - "dailypolitics2026"
+      - "truth.inpolitics"
+      - "republicanrisexhq"
+      - "mr.debaterz.street"
+      - "clips.crowder"
+      - "crowderclipssz"
+      - "debatecrowder"
+      - "freedomwire_1"
+    keywords:
+      - '_politicalhub|frontrawpolitics'
+      - 'tiktok|instagram reels|youtube shorts|proxy server'
+      - 'goal of the campaign|coordinated posting|paid partnership|disclosure'
+
+  - id: 6
+    name: "Political Clients, Targets & Beneficiaries"
+    description: >-
+      Determine who requested, funded, supplied, approved, or benefited from each
+      campaign involving Turning Point USA, the Wynns, political figures, and
+      conservative media personalities; preserve denials and competing explanations.
+    targets:
+      - "turning point usa"
+      - "vivek ramaswamy"
+      - "tulsi gabbard"
+      - "ben shapiro"
+      - "steven crowder"
+      - "erika kirk"
+      - "nick shirley"
+    keywords:
+      - 'turning point usa|tpusa|charlie kirk|erika kirk'
+      - 'vivek ramaswamy|tulsi gabbard|ben shapiro|steven crowder|nick shirley'
+      - 'client|beneficiar|commission|sponsor|content supplier'
+
+  - id: 7
+    name: "Disclosure, Election Law & Platform Rules"
+    description: >-
+      Test campaign-finance, advertising, consumer-protection, foreign-national,
+      tax, contractual, and platform-policy implications. Distinguish deliberate
+      rule avoidance from lawful editorial restrictions and ordinary brand safety.
+    targets:
+      - "federal election commission"
+      - "federal trade commission"
+      - "meta"
+      - "tiktok"
+      - "youtube"
+    keywords:
+      - 'fec|ftc|campaign finance|foreign national|independent expenditure'
+      - 'sponsored content|material connection|disclosure|terms of service'
+      - 'vote for|vote against|donate|prohibited subject|brand safety'
+
+corpus_tools: []
+
+key_dates:
+  - date: "2018-09-28"
+    event: >-
+      B WYNN SPORTS LLC, the Nevada legal entity behind the Enclave & Key DBA,
+      was formed according to the Nevada-registry record corroborated by official
+      Clark County and USPTO trade-name evidence.
+    category: "corporate"
+
+  - date: "2024-05-11"
+    event: >-
+      ClipIt's current public Discord discovery page identifies this as the
+      server's creation date.
+    category: "operational"
+
+  - date: "2025-02-25"
+    event: >-
+      Whop's public business object gives this as the creation date of the ClipIt
+      storefront controlled by the public SERVIUOS account.
+    category: "operational"
+
+  - date: "2025-05-13"
+    event: >-
+      Norway's Brønnøysund Register Centre registered CLIPSON WEDØE as Anders
+      Wedøe's sole proprietorship for advertising-agency activity.
+    category: "corporate"
+
+  - date: "2024-11-05"
+    event: >-
+      Blake Wynn later said he was with Donald Trump and other political figures
+      at Mar-a-Lago on U.S. Election Night; source claim requires corroboration.
+    category: "political"
+
+  - date: "2025-09-10"
+    event: >-
+      Date of Charlie Kirk's reported assassination, inferred from the article's
+      statement that campaign files uploaded September 15 were posted five days later.
+    category: "political"
+
+  - date: "2025-09-15"
+    event: >-
+      Article-reported upload date for Turning Point USA-related Google Drive videos,
+      many featuring Erika Kirk.
+    category: "operational"
+
+  - date: "2025-11-01"
+    event: >-
+      Approximate month of Blake Wynn's Bring the Juice interview describing
+      Enclave & Key's political work and personal relationships.
+    category: "media"
+
+  - date: "2026-02-01"
+    event: >-
+      Article-reported month of a completed political-clipping campaign displaying
+      a $900,000 budget on Monster Lab.
+    category: "financial"
+
+  - date: "2026-04-01"
+    event: >-
+      Earliest Elephant Clipping budget records visible to the reporter; Serviuos
+      reportedly said that month that the campaign had run for about a year.
+    category: "operational"
+
+  - date: "2026-08-01"
+    event: >-
+      Article-reported month for a $120,000 Turning Point USA-related campaign and
+      $30,000 campaigns associated with Ben Shapiro and Steven Crowder.
+    category: "financial"
+
+  - date: "2026-08-26"
+    event: >-
+      @_politicalhub and @lonealphapolitics published effectively the same
+      audiovisual political clip and cleaned caption; timestamps derived from
+      their public Instagram media IDs differ by 9.749 seconds.
+    category: "operational"
+
+  - date: "2026-09-02"
+    event: >-
+      The Atlantic published "Inside a Conservative Operation to Hijack Your
+      Social-Media Feed" by Ali Breland.
+    category: "media"
+
+seed_pillars:
+  - name: "Elephant Clipping"
+    pillar_type: "operations"
+    sub_type: "political_clipping_campaign"
+    status: "unknown"
+    significance: "Named campaign at the center of the seed article."
+
+  - name: "ClipIt"
+    pillar_type: "operations"
+    sub_type: "clipping_vendor"
+    status: "active"
+    jurisdiction: "Latvia (reported location; legal entity unresolved)"
+    significance: >-
+      Public trade/brand name controlled by the SERVIUOS digital account and
+      co-branded on Monster Lab; the underlying legal company remains undisclosed.
+
+  - name: "Monster Lab"
+    pillar_type: "operations"
+    sub_type: "campaign_marketplace"
+    status: "active"
+    significance: >-
+      Current clipping/proxy/automation platform whose public code documents the
+      social-profile verification workflow consistent with observed ML-* bio codes.
+
+  - name: "Enclave & Key"
+    pillar_type: "operations"
+    sub_type: "marketing_company"
+    status: "active"
+    jurisdiction: "Nevada (DBA of B WYNN SPORTS LLC)"
+    significance: >-
+      Marketing company whose apparent employees were reported as uploaders of
+      campaign source files; its precise role and customers remain unresolved.
+
+  - name: "B WYNN SPORTS LLC"
+    pillar_type: "operations"
+    sub_type: "marketing_legal_entity"
+    status: "active"
+    jurisdiction: "Nevada, United States"
+    significance: >-
+      Legal entity confirmed by official Clark County and USPTO records as the
+      owner behind the Enclave & Key DBA and Celebrity Poker Tour mark.
+
+  - name: "ClipSon"
+    pillar_type: "operations"
+    sub_type: "clipping_vendor"
+    status: "active"
+    jurisdiction: "Norway (associated registered enterprise CLIPSON WEDØE, 935490014)"
+    significance: >-
+      Public product stack associated with Anders Wedøe, whose registered sole
+      proprietorship is CLIPSON WEDØE; the reported US Politics Clipping link
+      remains uncorroborated.
+
+  - name: "Turning Point USA"
+    pillar_type: "media"
+    sub_type: "political_nonprofit"
+    status: "active"
+    jurisdiction: "United States"
+    significance: >-
+      Source material and personalities reportedly appeared in a campaign; the
+      organization denied knowledge of work with a Latvian company.
+
+  - name: "Discord"
+    pillar_type: "operations"
+    sub_type: "coordination_platform"
+    status: "active"
+    significance: "Reported recruitment, instruction, submission, and campaign coordination venue."
+
+  - name: "Google Drive"
+    pillar_type: "operations"
+    sub_type: "content_repository"
+    status: "active"
+    significance: "Reported source of campaign media and uploader/provenance clues."
+
+  - name: "TikTok"
+    pillar_type: "media"
+    sub_type: "distribution_platform"
+    status: "active"
+    significance: "One of the principal short-form distribution surfaces."
+
+  - name: "Instagram"
+    pillar_type: "media"
+    sub_type: "distribution_platform"
+    status: "active"
+    significance: "One of the principal short-form distribution surfaces."
+
+  - name: "YouTube"
+    pillar_type: "media"
+    sub_type: "distribution_platform"
+    status: "active"
+    significance: "One of the principal short-form distribution surfaces."
+
+  - name: "Federal Election Commission"
+    pillar_type: "government"
+    sub_type: "campaign_finance_regulator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Primary federal source for campaign-finance records and legal boundaries."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "elephant clipping"
+
+source_overrides: {}

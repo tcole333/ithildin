@@ -1,0 +1,45 @@
+{
+  "checked_date_local": "2026-09-04",
+  "timezone": "America/New_York",
+  "temporary_workdir": "/private/tmp/osint-history-access-9acwv3kg",
+  "method": "Read retained archive index and provenance; inspected a bounded set of official web pages/search results. No prior64 source documents were re-downloaded or re-read. No portal query, records request, contact or payment was performed.",
+  "sources": [
+    {
+      "url": "https://www.boston.gov/departments/public-records/commonly-requested-records",
+      "observation": "Licensing section explicitly identifies the Licensing Board dataset as active only; excludes void, expired, closed establishments and pending local/ABCC applications. Section12 alcohol dataset described as active only.",
+      "quote": "This dataset lists all licenses that are currently active.",
+      "access": "Opened with web tool; lines98\u2013103 reviewed."
+    },
+    {
+      "url": "https://www.boston.gov/departments/public-records",
+      "observation": "Official City public-records page states migration from GovQA to JustFOIA and links a request portal.",
+      "quote": "The City has transitioned to a new records management portal, JustFOIA.",
+      "linked_request_url": "https://boston.justfoia.com/publicportal/home/newrequest",
+      "access": "Official page opened and request link resolved; no form submitted."
+    },
+    {
+      "url": "https://www.boston.gov/departments/licensing-board/common-licensing-board-forms-and-applications",
+      "observation": "Lists forms for transfer of license, stock changes, pledge, and other amendments; directs submission through an online form. No completed application archive identified on this page.",
+      "quote": "Please submit any alcohol-related petitions through the Licensing Board\u2019s new online form.",
+      "access": "Official HTML lines86\u2013151 reviewed; this is observation of available links, not proof no other repository exists."
+    },
+    {
+      "url": "https://www.mass.gov/info-details/submit-a-public-records-request-to-the-alcoholic-beverages-control-commission",
+      "observation": "Official indexed content describes active retail licensee search and Download Results Excel export; requires corporate name, DBA and address for targeted records requests; hearing-name/date for audio/transcripts.",
+      "quote": "You may also select Download Results to obtain an Excel file of the licensee list you picked.",
+      "access": "Direct web open failed; official-domain search returned full relevant page text. Portal not queried."
+    },
+    {
+      "url": "https://data.boston.gov/dataset/licensing-board-licenses",
+      "observation": "Landing page unavailable through current web open. Retained source-manifest and full-review source CSV establish earlier download and schema. Current official Commonly Requested Records page independently defines active-only scope.",
+      "access": "No re-download; existing artifact provenance used."
+    },
+    {
+      "url": "https://www.boston.gov/public-notices/58091",
+      "observation": "Official search index contains a March27 2019 licensing-hearing application notice. Direct inspection redirected to sign-on; not counted as a retrieved historical decision or proof of application outcome.",
+      "access": "Search-index lead only; no sign-in or further access attempted."
+    }
+  ],
+  "full_history_export_found": false,
+  "full_history_export_claim_limit": "No verified machine-readable transaction-history download found in the bounded sources examined; this does not prove the City/ABCC lacks an internal historical register or a different public resource."
+}
