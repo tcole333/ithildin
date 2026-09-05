@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head><title>Case Search</title></head>
+  <body>
+    <form id="case-search-form-id" method="post">
+      <div id="SearchBy-Control">
+        <input id="SearchBy-HiddenField" name="SearchBy">
+        <select title="Search By">
+          <option value="">&nbsp;</option>
+          <option value="AppellateCourtName">Appellate</option>
+          <option value="DateFiled">Date Filed</option>
+          <option value="DocketNumber">Docket Number</option>
+          <option>Organization</option>
+          <option value="ParticipantName">Participant Name</option>
+        </select>
+      </div>
+      <input name="AdvanceSearch" type="checkbox" value="true">
+      <input name="DocketNumber" type="text">
+      <input
+        data-aopc-maxAllowedLimit="180"
+        data-aopc-maxUnits="days"
+        name="FiledStartDate"
+        type="date"
+      >
+      <input name="FiledEndDate" type="date">
+      <input name="County">
+      <input name="ParticipantLastName">
+      <input name="ParticipantFirstName">
+      <input name="OrganizationName">
+      <input name="AppellateCourtName">
+      <input
+        name="__RequestVerificationToken"
+        type="hidden"
+        value="fixture-antiforgery-token"
+      >
+      <button id="btnSearch">Search</button>
+    </form>
+  </body>
+</html>

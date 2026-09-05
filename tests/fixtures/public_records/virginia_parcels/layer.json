@@ -1,0 +1,93 @@
+{
+  "currentVersion": 11.3,
+  "id": 0,
+  "name": "Virginia Parcels",
+  "type": "Feature Layer",
+  "displayField": "PARCELID",
+  "geometryType": "esriGeometryPolygon",
+  "objectIdField": "OBJECTID",
+  "maxRecordCount": 2000,
+  "standardMaxRecordCount": 4000,
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "capabilities": "Query",
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsStatistics": true,
+    "supportsHavingClause": true,
+    "supportsOrderBy": true,
+    "supportsDistinct": true,
+    "supportsCountDistinct": true,
+    "supportsQueryWithDistance": true,
+    "supportsReturningGeometryCentroid": true
+  },
+  "dateFieldsTimeReference": {
+    "timeZone": "UTC",
+    "respectsDaylightSaving": false
+  },
+  "fields": [
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "length": null,
+      "nullable": true
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "length": null,
+      "nullable": true
+    },
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "length": null,
+      "nullable": false
+    },
+    {
+      "name": "VGIN_QPID",
+      "type": "esriFieldTypeDouble",
+      "length": null,
+      "nullable": true
+    },
+    {
+      "name": "FIPS",
+      "type": "esriFieldTypeString",
+      "length": 8,
+      "nullable": true
+    },
+    {
+      "name": "LOCALITY",
+      "type": "esriFieldTypeString",
+      "length": 64,
+      "nullable": true
+    },
+    {
+      "name": "PARCELID",
+      "type": "esriFieldTypeString",
+      "length": 64,
+      "nullable": true
+    },
+    {
+      "name": "PTM_ID",
+      "type": "esriFieldTypeString",
+      "length": 64,
+      "nullable": true
+    },
+    {
+      "name": "LASTUPDATE",
+      "type": "esriFieldTypeDate",
+      "length": 8,
+      "nullable": true
+    }
+  ],
+  "extent": {
+    "xmin": -9314704.8308,
+    "ymin": 4374818.2639,
+    "xmax": -8375617.7627,
+    "ymax": 4788360.1286,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  }
+}

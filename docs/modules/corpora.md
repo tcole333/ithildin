@@ -19,6 +19,9 @@ Tools for searching document collections, email archives, entity databases, and 
 | `ingest_epstein_20k.py` | House Oversight 20K docs | Local SQLite (FTS5) | None | 25.8K docs |
 | `ingest_fbi_files.py` | FBI release + named exhibits (Flight Log, Contact Book) | Local SQLite (FTS5) | None | 8,150 docs |
 | `ingest_epstein_exposed.py` | EpsteinExposed.com corpus | Remote API + Local DB | None | 1.5M docs, 1.2K persons |
+| `epstein_metadata.py` | Read-only, format-aware audit of local Epstein artifacts | Local files + `epstein_derived.db` | None | Run `stats` for live counts |
+| `query_barak.py` | **Ehud Barak emails (DDoSecrets/Handala leak)** — 2 mailboxes, 2007-2016; Cyberwar-category, attachments cataloged as inert bytes only | Local SQLite (FTS5) | None | ~80K messages, ~20K attachments (run `stats`) |
+| `epstein_recovery.py` | Deduplicated triage and evidence-safe recovery of damaged public Epstein artifacts | Local files + recovery ledger | None | Initial public recovery ledger; grows by verified candidate |
 | `reporting_corpus.py` | Versioned Epstein reporting + attributed claim genealogy | Local SQLite (FTS5) + discovery adapters | Public feeds/GDELT; licensed exports optional | Grows continuously |
 | `government_release_corpus.py` | DOJ and SEC official press releases | Local SQLite (FTS5) | None | DOJ API + SEC 1997-present online archive |
 
@@ -29,6 +32,80 @@ See `docs/modules/reporting.md`; do not count repeated reporting as independent
 corroboration and do not promote a claim without quoted primary evidence.
 
 ## Subcommands & Examples
+
+### epstein_metadata.py -- Local artifact metadata audit
+
+Hashes exact file bytes and extracts format-aware metadata without modifying the
+source artifacts. Results live in the regenerable `datasets/epstein_derived.db`
+sidecar. Each value is assigned a provenance layer so source-native email or
+Office metadata is not conflated with mailbox-production, release-container, or
+local acquisition timestamps.
+
+```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+
+# Fast deterministic cross-format sample
+uv run python tools/epstein_metadata.py pilot \
+  --max-files 500 --output "$WORKDIR/metadata-pilot.json"
+
+# Explicit directory/file scan
+uv run python tools/epstein_metadata.py scan PATH [PATH ...] \
+  --collection local-import --output "$WORKDIR/metadata-scan.json"
+
+# Aggregate date anomalies, exact duplicates, fingerprints, and coverage gaps
+uv run python tools/epstein_metadata.py report \
+  --reference-date 2019-07-06 --output "$WORKDIR/metadata-report.json"
+
+uv run python tools/epstein_metadata.py show EFTA01091533 \
+  --output "$WORKDIR/metadata-EFTA01091533.json"
+uv run python tools/epstein_metadata.py stats \
+  --output "$WORKDIR/metadata-stats.json"
+```
+
+Email extraction covers routing headers, client fingerprints, attachment names,
+types, sizes, and hashes. PDF extraction covers document info/XMP, embedded-file
+inventory, and structural validation. OpenXML, ZIP, RTF, CSV, and media
+containers have dedicated extractors. ExifTool is optional and adds the broadest
+EXIF/IPTC/XMP/device coverage when installed.
+
+GPS, location, originating-IP, and BCC values are redacted from `report` and
+`show` output by default. Use `--include-sensitive` only for a justified,
+bounded review. A post-reference production, release, or acquisition timestamp
+is lineage evidence, not a source-event date.
+
+### epstein_recovery.py -- Damaged-artifact recovery
+
+Use this only after checking the durable recovery ledger. It separates outer
+PDF corruption from damaged printed or embedded payloads and excludes public
+recoveries before new work starts.
+
+```bash
+uv run python tools/epstein_recovery.py ledger --actionable \
+  --output "$WORKDIR/recovery-queue.json"
+
+uv run python tools/epstein_recovery.py inspect "$WORKDIR/EFTA00147557.pdf" \
+  --efta-id EFTA00147557 --expected-sha256 HASH \
+  --output "$WORKDIR/EFTA00147557-inspect.json"
+
+uv run python tools/epstein_recovery.py extract-text \
+  "$WORKDIR/EFTA00147557.pdf" --pages 3-29 \
+  --start-marker "<my:field11>" --end-marker "my:fieldll>" \
+  --text-output "$WORKDIR/EFTA00147557.txt" \
+  --candidate-output "$WORKDIR/EFTA00147557-large.b64.txt" \
+  --output "$WORKDIR/EFTA00147557-text-audit.json"
+
+uv run python tools/epstein_recovery.py decode-infopath \
+  "$WORKDIR/validated.b64.txt" --artifact-dir "$WORKDIR/artifacts" \
+  --write-artifact --source-ref EFTA00147557 \
+  --output "$WORKDIR/decode.json"
+```
+
+The InfoPath decoder fails closed unless the Base64 alphabet and padding,
+Microsoft attachment signature, fixed header, UTF-16LE filename, and declared
+payload size all agree. OCR normalization marks unknown glyphs as `?`; it never
+guesses them. Unknown image or video payloads remain quarantined and
+metadata-only. Recovery status and provenance rules are documented in
+`investigations/epstein/recovery/README.md`.
 
 ### ingest_kabasshouse.py -- Most complete Epstein corpus (kabasshouse/epstein-data)
 

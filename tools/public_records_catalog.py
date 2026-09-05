@@ -439,6 +439,18 @@ def _validate_url(value: str | None, field_name: str, *, required: bool) -> str 
     return value.strip()
 
 
+def _validate_probe_endpoint(value: str) -> str:
+    """Validate an observed network endpoint, including WebSocket transports."""
+    if not isinstance(value, str) or not value.strip():
+        raise ManifestValidationError("endpoint must be a non-empty URL")
+    parsed = urlsplit(value.strip())
+    if parsed.scheme not in {"http", "https", "ws", "wss"} or not parsed.netloc:
+        raise ManifestValidationError(
+            "endpoint must be an HTTP(S) or WebSocket URL"
+        )
+    return value.strip()
+
+
 def _json_dump(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -1773,7 +1785,7 @@ class PublicRecordsCatalog:
         if capability is not None and not _NAME_RE.fullmatch(capability):
             raise CatalogError("capability must use lowercase snake_case")
         if endpoint is not None:
-            _validate_url(endpoint, "endpoint", required=False)
+            endpoint = _validate_probe_endpoint(endpoint)
         if http_status is not None and not 100 <= http_status <= 599:
             raise CatalogError("http_status must be between 100 and 599")
         if latency_ms is not None and latency_ms < 0:

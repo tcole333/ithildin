@@ -1,0 +1,30 @@
+<!doctype html>
+<html><body>
+<form method="POST" action="https://www.fcmcclerk.com/case/search/results" id="searchForm">
+  <input name="_token" type="hidden" value="fixture-csrf-token">
+  <input name="last_name" type="text">
+  <input name="first_name" type="text">
+  <input name="middle_name" type="text">
+  <input name="date_of_birth" type="text">
+  <input name="company_name" type="text">
+  <select name="party_code">
+    <option value="">ALL</option>
+    <option value="DEFENDANT">DEFENDANT</option>
+    <option value="PLAINTIFF">PLAINTIFF</option>
+    <option value="OFFICER COMPLAINANT">OFFICER COMPLAINANT</option>
+  </select>
+  <input name="case_number" type="text">
+  <input name="ticket_number" type="text">
+  <select name="case_type">
+    <option value="">ALL</option>
+    <option value="CIVIL">CIVIL</option>
+    <option value="CRIMINAL/TRAFFIC">CRIMINAL/TRAFFIC</option>
+  </select>
+  <input name="case_year" type="number">
+  <select name="case_status">
+    <option value="">ALL</option>
+    <option value="OPEN">OPEN</option>
+    <option value="CLOSED">CLOSED</option>
+  </select>
+</form>
+</body></html>

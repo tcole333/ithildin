@@ -1,0 +1,93 @@
+{
+  "common_fields": [
+    {"name": "OBJECTID", "type": "esriFieldTypeOID", "nullable": false},
+    {"name": "COUNTY_NAME", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "MUNI_NAME", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "SWIS", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+    {"name": "PARCEL_ADDR", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "PRINT_KEY", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "SBL", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "CITYTOWN_NAME", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "CITYTOWN_SWIS", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+    {"name": "LOC_ST_NBR", "type": "esriFieldTypeString", "length": 25, "nullable": true},
+    {"name": "LOC_STREET", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "LOC_UNIT", "type": "esriFieldTypeString", "length": 25, "nullable": true},
+    {"name": "LOC_ZIP", "type": "esriFieldTypeString", "length": 25, "nullable": true},
+    {"name": "PROP_CLASS", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+    {"name": "ROLL_SECTION", "type": "esriFieldTypeString", "length": 2, "nullable": true},
+    {"name": "LAND_AV", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "TOTAL_AV", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "FULL_MARKET_VAL", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "PRIMARY_OWNER", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "ADD_OWNER", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "MAIL_ADDR", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "MAIL_CITY", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "MAIL_STATE", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "MAIL_ZIP", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "BOOK", "type": "esriFieldTypeInteger", "nullable": true},
+    {"name": "PAGE", "type": "esriFieldTypeInteger", "nullable": true},
+    {"name": "MUNI_PARCEL_ID", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "SWIS_SBL_ID", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "SWIS_PRINT_KEY_ID", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "ROLL_YR", "type": "esriFieldTypeInteger", "nullable": true},
+    {"name": "SPATIAL_YR", "type": "esriFieldTypeInteger", "nullable": true},
+    {"name": "OWNER_TYPE", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+    {"name": "NYS_NAME", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "NYS_NAME_SOURCE", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "DUP_GEO", "type": "esriFieldTypeString", "length": 5, "nullable": true},
+    {"name": "CALC_ACRES", "type": "esriFieldTypeDouble", "nullable": true}
+  ],
+  "extra_normalization_fields": [
+    {"name": "PO_BOX", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "ADD_MAIL_ADDR", "type": "esriFieldTypeString", "length": 255, "nullable": true},
+    {"name": "ADD_MAIL_PO_BOX", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "ADD_MAIL_CITY", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "ADD_MAIL_STATE", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "ADD_MAIL_ZIP", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "YR_BLT", "type": "esriFieldTypeInteger", "nullable": true},
+    {"name": "SQ_FT", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "SQFT_LIVING", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "GFA", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "ACRES", "type": "esriFieldTypeDouble", "nullable": true},
+    {"name": "NBR_BEDROOMS", "type": "esriFieldTypeSmallInteger", "nullable": true},
+    {"name": "NBR_FULL_BATHS", "type": "esriFieldTypeSmallInteger", "nullable": true},
+    {"name": "BLDG_STYLE_DESC", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "USED_AS_DESC", "type": "esriFieldTypeString", "length": 50, "nullable": true}
+  ],
+  "footprint_fields": [
+    {"name": "OBJECTID", "type": "esriFieldTypeOID", "nullable": false},
+    {"name": "NAME", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+    {"name": "COUNTY_FIPS", "type": "esriFieldTypeString", "length": 3, "nullable": true},
+    {"name": "SWIS", "type": "esriFieldTypeString", "length": 6, "nullable": true}
+  ],
+  "components": {
+    "centroids": {
+      "id": 0,
+      "name": "NYS_Tax_Parcel_Centroid_Points",
+      "geometry_type": "esriGeometryPoint",
+      "max_record_count": 1000,
+      "title": "NYS 2025 Tax Parcel Centroid Points"
+    },
+    "public-parcels": {
+      "id": 1,
+      "name": "NYS_Tax_Parcels_Public",
+      "geometry_type": "esriGeometryPolygon",
+      "max_record_count": 50000,
+      "title": "NYS 2025 Tax Parcels Public"
+    },
+    "state-owned": {
+      "id": 0,
+      "name": "NYS_Tax_Parcels_State_Owned",
+      "geometry_type": "esriGeometryPolygon",
+      "max_record_count": 1000,
+      "title": "NYS 2025 Tax Parcels State Owned"
+    },
+    "public-footprint": {
+      "id": 0,
+      "name": "NYS_Tax_Parcels_Public_Footprint",
+      "geometry_type": "esriGeometryPolygon",
+      "max_record_count": 50000,
+      "title": "NYS 2025 Tax Parcels Public"
+    }
+  }
+}

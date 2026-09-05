@@ -4,6 +4,8 @@ version = "0.0.0"
 description = "Local test/runtime configuration for Ithildin OSINT research workspace."
 requires-python = ">=3.11"
 dependencies = [
+  "beautifulsoup4>=4.14.3",
+  "curl-cffi>=0.13.0",
   "duckdb>=1.4.4",
   "edgartools>=5.25.1",
   "neo4j>=6.1.0",
@@ -14,6 +16,9 @@ dependencies = [
   "pytest>=8.3.5",
   "python-muckrock>=2.3.0",
   "pyyaml>=6.0.3",
+  "requests>=2.32.5",
+  "truststore>=0.10.4",
+  "websockets>=16.0",
   "yfinance>=0.2.36",
 ]
 

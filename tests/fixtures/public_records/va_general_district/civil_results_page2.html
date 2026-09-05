@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Hearing Date</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <input type="hidden" name="formAction" value="">
+      <input type="hidden" name="curentFipsCode" value="013">
+      <input type="hidden" name="searchTerm" value="07/30/2026">
+      <input type="submit" name="caseInfoScrollBack" value="Previous">
+      <table class="tableborder">
+        <tr>
+          <td class="gridheader">&nbsp;</td>
+          <td class="gridheader">Case #</td>
+          <td class="gridheader">Defendant</td>
+          <td class="gridheader">Plaintiff</td>
+          <td class="gridheader">Case Type</td>
+          <td class="gridheader">Hearing Time</td>
+        </tr>
+        <tr class="evenRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GV26000003-00"></td>
+          <td class="gridrow"><a href="caseSearch.do?formAction=caseDetails&amp;displayCaseNumber=GV26000003-00&amp;localFipsCode=013&amp;clientSearchCounter=4">GV26000003-00</a></td>
+          <td class="gridrow">TAYLOR LANE</td>
+          <td class="gridrow">EXAMPLE CREDIT UNION</td>
+          <td class="gridrow">Warrant In Debt</td>
+          <td class="gridrow">11:00 AM</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

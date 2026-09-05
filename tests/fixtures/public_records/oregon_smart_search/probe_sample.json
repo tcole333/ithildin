@@ -1,0 +1,375 @@
+{
+  "source_url": "https://webportal.courts.oregon.gov/portal/Home/Dashboard/29",
+  "final_url": "https://webportal.courts.oregon.gov/portal/Home/Dashboard/29",
+  "http_status": 200,
+  "title": "Smart Search - OREGON JUDICIAL DEPARTMENT - Online Records Search",
+  "form": {
+    "action": "https://webportal.courts.oregon.gov/portal/SmartSearch/SmartSearch/SmartSearch",
+    "method": "post",
+    "named_controls": [
+      {
+        "name": "Settings.CaptchaEnabled",
+        "type": "hidden",
+        "checked": null
+      },
+      {
+        "name": "Settings.CaptchaDisabledForAuthenticated",
+        "type": "hidden",
+        "checked": null
+      },
+      {
+        "name": "caseCriteria.SearchCriteria",
+        "type": "text",
+        "checked": null
+      },
+      {
+        "name": "caseCriteria.CourtLocation",
+        "type": "text",
+        "checked": null
+      },
+      {
+        "name": "caseCriteria.SearchBy",
+        "type": "text",
+        "checked": null
+      },
+      {
+        "name": "caseCriteria.SearchCases",
+        "type": "checkbox",
+        "checked": true
+      },
+      {
+        "name": "caseCriteria.SearchCases",
+        "type": "hidden",
+        "checked": null
+      },
+      {
+        "name": "caseCriteria.CaseStatus",
+        "type": "text",
+        "checked": null
+      },
+      {
+        "name": "g-recaptcha-response",
+        "type": "textarea",
+        "checked": null
+      },
+      {
+        "name": "a-rendered-session-field",
+        "type": "text",
+        "checked": null
+      },
+      {
+        "name": "Search",
+        "type": "submit",
+        "checked": null
+      }
+    ]
+  },
+  "settings": {
+    "CaptchaEnabled": true,
+    "CaptchaDisabledForAuthenticated": false,
+    "DefaultLocation": "All Locations",
+    "SearchCasesEnabled": true,
+    "SearchJudgmentsEnabled": true,
+    "SearchWarrantsEnabled": true,
+    "SearchProtectionOrdersEnabled": false,
+    "DisableAnonymousWildcardSearches": true,
+    "DisableWildcardCaseOrCitationNum": true,
+    "PerformSoundsLikeSearchByDefault": false,
+    "SearchMultipleLocationsEnabled": false,
+    "DisableJudicialOfficerSearch": false
+  },
+  "captcha": {
+    "enabled": "True",
+    "disabled_for_authenticated": "False",
+    "provider": "google_recaptcha",
+    "frame_count": 2
+  },
+  "option_sets": {
+    "JudicialOfficerSearchBy": {
+      "count": 1112,
+      "first": [
+        {
+          "text": "Abar, Donald",
+          "value": "850209"
+        }
+      ],
+      "last": [
+        {
+          "text": "Zuver, Julie",
+          "value": "932610"
+        }
+      ]
+    },
+    "NameSuffix": {
+      "count": 19,
+      "first": [
+        {
+          "text": "DC",
+          "value": "DC "
+        }
+      ],
+      "last": [
+        {
+          "text": "VI",
+          "value": "VI "
+        }
+      ]
+    },
+    "CourtLocation": {
+      "count": 38,
+      "first": [
+        {
+          "text": "All Locations",
+          "value": "All Locations"
+        },
+        {
+          "text": "Baker",
+          "value": "Baker"
+        }
+      ],
+      "last": [
+        {
+          "text": "Wheeler",
+          "value": "Wheeler"
+        },
+        {
+          "text": "Yamhill",
+          "value": "Yamhill"
+        }
+      ],
+      "values": [
+        {
+          "text": "All Locations",
+          "value": "All Locations"
+        },
+        {
+          "text": "Baker",
+          "value": "Baker"
+        },
+        {
+          "text": "Tax Court",
+          "value": "Tax Court"
+        },
+        {
+          "text": "Yamhill",
+          "value": "Yamhill"
+        }
+      ]
+    },
+    "SearchBy": {
+      "count": 11,
+      "first": [
+        {
+          "text": "Smart Search",
+          "value": "SmartSearch"
+        },
+        {
+          "text": "Attorney Bar Number",
+          "value": "AttorneyBarNumber"
+        }
+      ],
+      "last": [
+        {
+          "text": "Party Name",
+          "value": "PartyName"
+        },
+        {
+          "text": "Warrant Number",
+          "value": "WarrantNumber"
+        }
+      ],
+      "values": [
+        {
+          "text": "Smart Search",
+          "value": "SmartSearch"
+        },
+        {
+          "text": "Business Name",
+          "value": "BusinessName"
+        },
+        {
+          "text": "Case Number",
+          "value": "CaseNumber"
+        },
+        {
+          "text": "Party Name",
+          "value": "PartyName"
+        }
+      ]
+    },
+    "CaseType": {
+      "count": 5,
+      "first": [
+        {
+          "text": "All Case Types",
+          "value": "All Case Types "
+        },
+        {
+          "text": "Civil",
+          "value": "Civil"
+        }
+      ],
+      "last": [
+        {
+          "text": "Family",
+          "value": "Family "
+        },
+        {
+          "text": "Probate",
+          "value": "Probate"
+        }
+      ],
+      "values": [
+        {
+          "text": "All Case Types",
+          "value": "All Case Types "
+        },
+        {
+          "text": "Civil",
+          "value": "Civil"
+        },
+        {
+          "text": "Criminal",
+          "value": "Criminal "
+        },
+        {
+          "text": "Family",
+          "value": "Family "
+        },
+        {
+          "text": "Probate",
+          "value": "Probate"
+        }
+      ]
+    },
+    "CaseStatus": {
+      "count": 46,
+      "first": [
+        {
+          "text": "Active",
+          "value": "ACT"
+        },
+        {
+          "text": "Appeal",
+          "value": "APPL"
+        }
+      ],
+      "last": [
+        {
+          "text": "Under Advisement",
+          "value": "UNAD"
+        },
+        {
+          "text": "Waived to Adult Court",
+          "value": "WVAC"
+        }
+      ],
+      "values": [
+        {
+          "text": "Active",
+          "value": "ACT"
+        },
+        {
+          "text": "Closed",
+          "value": "CLSD"
+        },
+        {
+          "text": "Open",
+          "value": "OPEN"
+        }
+      ]
+    },
+    "JudicialOfficer": {
+      "count": 1112,
+      "first": [
+        {
+          "text": "Abar, Donald",
+          "value": "850209"
+        }
+      ],
+      "last": [
+        {
+          "text": "Zuver, Julie",
+          "value": "932610"
+        }
+      ]
+    },
+    "JudgmentType": {
+      "count": 162,
+      "first": [
+        {
+          "text": "Backloaded Financial Balances",
+          "value": "BKBA"
+        }
+      ],
+      "last": [
+        {
+          "text": "Transcript of Judgment",
+          "value": "JGTR"
+        }
+      ]
+    },
+    "WarrantType": {
+      "count": 13,
+      "first": [
+        {
+          "text": "Arrest Warrant",
+          "value": "WTAR"
+        }
+      ],
+      "last": [
+        {
+          "text": "Warrant - Juvenile Detention",
+          "value": "WTDJ"
+        }
+      ],
+      "values": [
+        {
+          "text": "Arrest Warrant",
+          "value": "WTAR"
+        },
+        {
+          "text": "Bench Warrant",
+          "value": "WTBN"
+        }
+      ]
+    },
+    "WarrantStatus": {
+      "count": 12,
+      "first": [
+        {
+          "text": "Active",
+          "value": "ACTV"
+        }
+      ],
+      "last": [
+        {
+          "text": "Served/Not Returned",
+          "value": "WTSV"
+        }
+      ],
+      "values": [
+        {
+          "text": "Active",
+          "value": "ACTV"
+        },
+        {
+          "text": "Inactive",
+          "value": "INAC"
+        }
+      ]
+    }
+  },
+  "panels": [
+    "Smart Search",
+    "General Options",
+    "Party Search Criteria",
+    "Case Search Criteria",
+    "Judgment Search Criteria",
+    "Warrant Search Criteria"
+  ],
+  "runtime": {
+    "playwright_module": "playwright",
+    "browser_channel": "chrome"
+  }
+}

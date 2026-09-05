@@ -384,6 +384,68 @@ def test_arcgis_paginates_on_transfer_limit_and_uses_declared_schema():
     )
 
 
+def test_arcgis_preserves_explicit_stable_order_across_offset_pages():
+    """Tables without an OID need the adapter's deterministic order on every page."""
+    fields = [
+        {"name": "pacs_prop_id", "type": "esriFieldTypeInteger"},
+        {"name": "owner_name", "type": "esriFieldTypeString", "length": 70},
+    ]
+    transport = QueueTransport(
+        [
+            FakeResponse(
+                {
+                    "fields": fields,
+                    "features": [
+                        {
+                            "attributes": {
+                                "pacs_prop_id": 358951,
+                                "owner_name": "TAUREAN GENERAL SERVICES",
+                            }
+                        }
+                    ],
+                    "exceededTransferLimit": True,
+                }
+            ),
+            FakeResponse(
+                {
+                    "fields": fields,
+                    "features": [
+                        {
+                            "attributes": {
+                                "pacs_prop_id": 612138,
+                                "owner_name": "GRACE CHURCH OF SAN ANTONIO",
+                            }
+                        }
+                    ],
+                    "exceededTransferLimit": False,
+                }
+            ),
+        ]
+    )
+    client = ArcGISRESTClient(
+        "https://maps.example.test/MapServer/9",
+        page_size=1,
+        transport=transport,
+        minimum_interval=0,
+    )
+
+    result = client.query(
+        where="owner_name IS NOT NULL",
+        out_fields=["pacs_prop_id", "owner_name"],
+        parameters={"orderByFields": "pacs_prop_id ASC"},
+        requested_limit=5,
+    )
+
+    assert [
+        feature["attributes"]["pacs_prop_id"] for feature in result.records
+    ] == [358951, 612138]
+    assert [call["params"]["resultOffset"] for call in transport.calls] == [0, 1]
+    assert all(
+        call["params"]["orderByFields"] == "pacs_prop_id ASC"
+        for call in transport.calls
+    )
+
+
 def test_arcgis_safety_cap_returns_cursor_without_overfetching():
     transport = QueueTransport(
         [

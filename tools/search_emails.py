@@ -2,7 +2,10 @@
 """
 Comprehensive search of Epstein archive email datasets:
   1. jeeproject_yahoo/ - 13,011 .eml files
-  2. ehud_barak_emails/ - 1,411 files (.html + .meta + some .eml)
+  2. ehud_barak_emails/ - DEPRECATED. This 1,411-file curated subset is a small
+     sample of the full DDoSecrets/Handala Barak leak. Use tools/query_barak.py
+     (datasets/barak_emails.db, 80,221 messages) instead; Phase 2 below is
+     short-circuited and no longer parses the subset.
 
 Parses all emails, extracts headers and body text, searches for
 high-priority terms, and generates summary statistics.
@@ -13,10 +16,8 @@ import email.policy
 import json
 import os
 import re
-import sys
 from collections import Counter, defaultdict
 from datetime import datetime
-from email import policy
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -131,7 +132,7 @@ def parse_eml_file(filepath):
     """Parse a standard .eml file. Returns a record dict or None."""
     try:
         raw = filepath.read_bytes()
-    except Exception as e:
+    except Exception:
         return None
 
     # Try multiple encodings
@@ -382,9 +383,12 @@ def process_all():
     print("PHASE 2: Parsing ehud_barak_emails directory")
     print("=" * 80)
 
-    barak_html_files = sorted(BARAK_DIR.glob("*.html"))
-    barak_meta_files = sorted(BARAK_DIR.glob("*.meta"))
-    barak_eml_files = sorted(BARAK_DIR.glob("*.eml"))
+    # DEPRECATED 2026-08-25: the 1,411-file curated subset is superseded by the
+    # full DDoSecrets/Handala Barak leak. Use tools/query_barak.py
+    # (datasets/barak_emails.db). Phase 2 is short-circuited to empty lists.
+    print("DEPRECATED: skipping partial ehud_barak_emails subset — "
+          "use tools/query_barak.py for the full 80,221-message Barak corpus.")
+    barak_html_files = barak_meta_files = barak_eml_files = []
 
     print(f"Found: {len(barak_html_files)} .html, {len(barak_meta_files)} .meta, {len(barak_eml_files)} .eml")
 
@@ -526,7 +530,7 @@ def process_all():
         for a in addrs:
             sender_counter[a] += 1
 
-    print(f"\nTOP 20 SENDERS:")
+    print("\nTOP 20 SENDERS:")
     for addr, count in sender_counter.most_common(20):
         print(f"  {count:>5}  {addr}")
 
@@ -538,7 +542,7 @@ def process_all():
             for a in addrs:
                 recip_counter[a] += 1
 
-    print(f"\nTOP 20 RECIPIENTS:")
+    print("\nTOP 20 RECIPIENTS:")
     for addr, count in recip_counter.most_common(20):
         print(f"  {count:>5}  {addr}")
 
@@ -552,7 +556,7 @@ def process_all():
             if clean:
                 subject_counter[clean] += 1
 
-    print(f"\nTOP 20 SUBJECTS (normalized, Re:/Fwd: stripped):")
+    print("\nTOP 20 SUBJECTS (normalized, Re:/Fwd: stripped):")
     for subj, count in subject_counter.most_common(20):
         print(f"  {count:>5}  {subj[:100]}")
 

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head><title>TerraScan TaxSifter - ADAMS County Washington</title></head>
+  <body>
+    <form method="post" action="./SalesSearch.aspx">
+      <input type="hidden" name="__VIEWSTATE" value="sales-viewstate">
+      <input type="hidden" name="ctl77$Main$hdfSelectedPageIndex" value="0">
+      <input name="ctl77$Main$txtdateFrom" value="">
+      <input name="ctl77$Main$txtdateTo" value="">
+      <input name="ctl77$Main$txtpriceFrom" value="">
+      <input name="ctl77$Main$txtpriceTo" value="">
+      <input name="ctl77$Main$txtparcelNumber" value="">
+      <select name="ctl77$Main$ddlSaleType">
+        <option selected value="">All sales</option>
+        <option value="1">Valid sale</option>
+      </select>
+      <select name="ctl77$Main$ddlSliceType">
+        <option selected value="0"></option>
+        <option value="1">Single-family Residence</option>
+      </select>
+      <input type="submit" name="ctl77$Main$searchbutton" value="Search">
+    </form>
+  </body>
+</html>

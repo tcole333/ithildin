@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import re
 import shutil
 import subprocess
 import sys
@@ -7,6 +9,56 @@ from pathlib import Path
 from typing import Callable
 
 import pytest
+
+
+LIVE_PUBLIC_RECORD_ENV_RE = re.compile(
+    r"""(?:getenv|environ\.get)\(\s*["']"""
+    r"""((?:RUN_LIVE|LIVE_PUBLIC_RECORDS|OSINT_LIVE_TESTS)[A-Z0-9_]*)"""
+    r"""["']"""
+)
+
+
+def _live_public_record_env_names(
+    tests_root: Path | None = None,
+) -> tuple[str, ...]:
+    """Discover the existing opt-in environment gates without importing tests."""
+
+    root = tests_root or Path(__file__).resolve().parent
+    names: set[str] = set()
+    for path in root.rglob("*.py"):
+        names.update(
+            LIVE_PUBLIC_RECORD_ENV_RE.findall(
+                path.read_text(encoding="utf-8")
+            )
+        )
+    return tuple(sorted(names))
+
+
+def _enable_live_public_record_tests(
+    tests_root: Path | None = None,
+) -> tuple[str, ...]:
+    names = _live_public_record_env_names(tests_root)
+    for name in names:
+        os.environ[name] = "1"
+    return names
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    group = parser.getgroup("public records")
+    group.addoption(
+        "--run-live-public-records",
+        action="store_true",
+        default=False,
+        help=(
+            "Enable the repository's existing opt-in public-record live "
+            "checks before test collection"
+        ),
+    )
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    if config.getoption("run_live_public_records"):
+        _enable_live_public_record_tests()
 
 
 @pytest.fixture(scope="session")

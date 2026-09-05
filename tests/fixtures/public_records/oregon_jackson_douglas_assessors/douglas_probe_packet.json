@@ -1,0 +1,131 @@
+{
+  "observed_at": "2026-07-30T01:03:47Z",
+  "source_id": "us-or-douglas-county-assessor-parcels",
+  "count": 68890,
+  "schema_fingerprint": "17cfdb9c9b70104b9243298250a5932094d28eb82fe62927a9ce9b35ce141a0e",
+  "metadata": {
+    "name": "Parcels",
+    "serviceItemId": "5eadf9aa1f8c485d8f04d54e7206d937",
+    "type": "Feature Layer",
+    "description": "",
+    "objectIdField": "OBJECTID",
+    "geometryType": "esriGeometryPolygon",
+    "maxRecordCount": 50000,
+    "capabilities": "Query,Extract",
+    "supportedQueryFormats": "JSON, geoJSON, PBF",
+    "supportedExportFormats": "sqlite,filegdb,shapefile,csv,geojson",
+    "sourceSpatialReference": {
+      "wkid": 2270,
+      "latestWkid": 2270
+    },
+    "extent": {
+      "xmin": -115242814.58605936,
+      "ymin": -97276008.31504323,
+      "xmax": 125085334.27109873,
+      "ymax": 88591654.05866143,
+      "spatialReference": {
+        "wkid": 2270,
+        "latestWkid": 2270
+      }
+    },
+    "advancedQueryCapabilities": {
+      "supportsPagination": true,
+      "supportsOrderBy": true,
+      "supportsStatistics": true,
+      "supportsDistinct": true
+    },
+    "editingInfo": null,
+    "fields": [
+      {"name": "TAXID", "type": "esriFieldTypeString", "alias": "TAXID", "nullable": true, "length": 20},
+      {"name": "PROP_ID", "type": "esriFieldTypeString", "alias": "PROP_ID", "nullable": true, "length": 10},
+      {"name": "NAME", "type": "esriFieldTypeString", "alias": "NAME", "nullable": true, "length": 350},
+      {"name": "ADDR1", "type": "esriFieldTypeString", "alias": "ADDR1", "nullable": true, "length": 100},
+      {"name": "ADDR2", "type": "esriFieldTypeString", "alias": "ADDR2", "nullable": true, "length": 100},
+      {"name": "ADDR3", "type": "esriFieldTypeString", "alias": "ADDR3", "nullable": true, "length": 100},
+      {"name": "CSZ", "type": "esriFieldTypeString", "alias": "CSZ", "nullable": true, "length": 90},
+      {"name": "ACCT_ACREAGE", "type": "esriFieldTypeDouble", "alias": "ACCT_ACREAGE", "nullable": true},
+      {"name": "ALT_ACCTNUM", "type": "esriFieldTypeString", "alias": "ALT_ACCTNUM", "nullable": true, "length": 15},
+      {"name": "ASSD_VALUE", "type": "esriFieldTypeDouble", "alias": "ASSD_VALUE", "nullable": true},
+      {"name": "LAND_MKT_VALUE", "type": "esriFieldTypeDouble", "alias": "LAND_MKT_VALUE", "nullable": true},
+      {"name": "MARKET_VALUE", "type": "esriFieldTypeDouble", "alias": "MARKET_VALUE", "nullable": true},
+      {"name": "IMPRV_VALUE", "type": "esriFieldTypeDouble", "alias": "IMPRV_VALUE", "nullable": true},
+      {"name": "PROPCLASS", "type": "esriFieldTypeString", "alias": "PROPCLASS", "nullable": true, "length": 10},
+      {"name": "LEGAL", "type": "esriFieldTypeString", "alias": "LEGAL", "nullable": true, "length": 1073741823},
+      {"name": "INST_NO", "type": "esriFieldTypeString", "alias": "INST_NO", "nullable": true, "length": 500},
+      {"name": "LOC_CODE", "type": "esriFieldTypeString", "alias": "LOC_CODE", "nullable": true, "length": 8},
+      {"name": "MAINTAREA", "type": "esriFieldTypeString", "alias": "MAINTAREA", "nullable": true, "length": 5},
+      {"name": "NBHDCODE", "type": "esriFieldTypeString", "alias": "NBHDCODE", "nullable": true, "length": 8},
+      {"name": "OWNER_ID", "type": "esriFieldTypeInteger", "alias": "OWNER_ID", "nullable": true},
+      {"name": "CODEAREA", "type": "esriFieldTypeString", "alias": "CODEAREA", "nullable": true, "length": 10},
+      {"name": "BLOCK", "type": "esriFieldTypeString", "alias": "BLOCK", "nullable": true, "length": 255},
+      {"name": "LOT", "type": "esriFieldTypeString", "alias": "LOT", "nullable": true, "length": 255},
+      {"name": "SPECINTEREST", "type": "esriFieldTypeString", "alias": "SPECINTEREST", "nullable": true, "length": 5},
+      {"name": "MTLACREAGE", "type": "esriFieldTypeDouble", "alias": "MTLACREAGE", "nullable": true},
+      {"name": "TotalAcreage", "type": "esriFieldTypeDouble", "alias": "TotalAcreage", "nullable": true},
+      {"name": "SaleDate", "type": "esriFieldTypeString", "alias": "SaleDate", "nullable": true, "length": 10},
+      {"name": "SitusAddress", "type": "esriFieldTypeString", "alias": "SitusAddress", "nullable": true, "length": 50},
+      {"name": "SitusCSZ", "type": "esriFieldTypeString", "alias": "SitusCSZ", "nullable": true, "length": 50},
+      {"name": "OBJECTID", "type": "esriFieldTypeOID", "alias": "OBJECTID", "nullable": false}
+    ]
+  },
+  "item_metadata": {
+    "id": "5eadf9aa1f8c485d8f04d54e7206d937",
+    "owner": "vyla.grindberg@douglascountyor.gov",
+    "created": 1774554035404,
+    "modified": 1774884160745,
+    "title": "Parcels",
+    "type": "Feature Service",
+    "url": "https://gis.co.douglas.or.us/server/rest/services/Parcel/Parcels/FeatureServer",
+    "access": "public"
+  },
+  "representative_feature": {
+    "attributes": {
+      "TAXID": "19080000100",
+      "PROP_ID": "R10007",
+      "NAME": "O & C Revested Grant",
+      "ADDR1": null,
+      "ADDR2": null,
+      "ADDR3": null,
+      "CSZ": null,
+      "ACCT_ACREAGE": 663.46,
+      "ALT_ACCTNUM": null,
+      "ASSD_VALUE": 0,
+      "LAND_MKT_VALUE": 522475,
+      "MARKET_VALUE": 522475,
+      "IMPRV_VALUE": 0,
+      "PROPCLASS": "970",
+      "LEGAL": "TRACT ALL SEC 7 LESS LOTS 1, 2 & 3, ACRES 663.46",
+      "INST_NO": "2000-3417",
+      "LOC_CODE": null,
+      "MAINTAREA": "1",
+      "NBHDCODE": "JV",
+      "OWNER_ID": null,
+      "CODEAREA": "00150",
+      "BLOCK": null,
+      "LOT": null,
+      "SPECINTEREST": null,
+      "MTLACREAGE": 663.46,
+      "TotalAcreage": 694.2669,
+      "SaleDate": "2000-02-10",
+      "SitusAddress": "0 Us Highway 101",
+      "SitusCSZ": "Westlake, OR  97493",
+      "OBJECTID": 1
+    },
+    "geometry": {
+      "rings": [
+        [
+          [-123.679256941304, 43.936774927737225],
+          [-123.67927970844009, 43.92900850785365],
+          [-123.67912737176303, 43.921692211562736],
+          [-123.68931278851049, 43.92190106224776],
+          [-123.70380990940896, 43.92214920643652],
+          [-123.70381270210245, 43.929712207076336],
+          [-123.70379020416381, 43.93346305980864],
+          [-123.68923751687043, 43.93312933257535],
+          [-123.68921181247809, 43.93695885517346],
+          [-123.679256941304, 43.936774927737225]
+        ]
+      ]
+    }
+  }
+}

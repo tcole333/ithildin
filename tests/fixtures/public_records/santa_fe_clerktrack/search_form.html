@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <body>
+    <span id="lblIndexDate">Last Index Date: 7/30/2026</span>
+    <span id="lblError"></span>
+    <form id="searchForm" action="./recsearch.aspx" method="post">
+      <input type="hidden" name="__VIEWSTATE" value="search-state">
+      <input type="hidden" name="__VIEWSTATEGENERATOR" value="search-generator">
+      <input type="hidden" name="__EVENTVALIDATION" value="search-validation">
+      <input name="txtName">
+      <input name="rbNameType" type="radio" value="Both" checked>
+      <input name="rbNameType" type="radio" value="Grantor">
+      <input name="rbNameType" type="radio" value="Grantee">
+      <input name="txtDateF">
+      <input name="txtDateT">
+      <input name="txtInstr">
+      <input name="txtBook">
+      <input name="txtPage">
+      <select id="lstTypes" name="lstTypes" multiple>
+        <option value="-1" selected>ALL</option>
+        <option value="1010">QUITCLAIM DEED</option>
+        <option value="1020">WARRANTY DEED</option>
+      </select>
+      <input name="txtLegal">
+      <input name="ac_subdivision">
+      <input name="txtLot">
+      <input name="txtBlock">
+      <input name="txtTract">
+      <input name="txtSection">
+      <input name="txtTown">
+      <input name="txtRange">
+      <input name="txtUnit">
+      <input name="txtInfo">
+      <input name="btnSearch" type="submit" value="Search">
+    </form>
+  </body>
+</html>

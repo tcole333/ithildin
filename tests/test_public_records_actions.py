@@ -147,3 +147,139 @@ def test_execute_plan_and_direct_cli_help(tmp_path):
     )
     assert completed.returncode == 0, completed.stderr
     assert "enqueue" in completed.stdout
+
+
+def test_los_angeles_paid_name_and_physical_recorder_actions_remain_distinct(
+    tmp_path,
+):
+    catalog_path = tmp_path / "catalog.db"
+    seed_catalog(db_path=catalog_path)
+    catalog = PublicRecordsCatalog(catalog_path)
+
+    name_action = build_action(
+        catalog,
+        source_id="us-ca-los-angeles-superior-probate-name-index",
+        operation="search_cases",
+        selector="EXAMPLE PERSON",
+        action_type="paid_lookup",
+    )
+    recorder_action = build_action(
+        catalog,
+        source_id="us-ca-los-angeles-registrar-recorder-real-estate",
+        operation="request_instrument_copy",
+        selector="EXAMPLE GRANTOR 2020",
+    )
+
+    assert name_action["selected_action_type"] == "paid_lookup"
+    assert {"purchase", "paid_lookup"} <= set(
+        name_action["suggested_action_types"]
+    )
+    assert len(name_action["capabilities"]) == 1
+    name_capability = name_action["capabilities"][0]
+    assert name_capability["name"] == "search_cases"
+    assert name_capability["supported"] is True
+    assert name_capability["details"] == {
+        "route_type": "paid_lookup",
+        "input_fields": [
+            "party_last_name_and_first_name",
+            "company_name",
+        ],
+        "output_fields": [
+            "litigant_name",
+            "case_type",
+            "filing_date",
+            "filing_location",
+            "raw_case_number",
+            "available_image_count",
+        ],
+    }
+
+    assert recorder_action["selected_action_type"] == "physical_records"
+    recorder_capabilities = {
+        capability["name"]: capability["details"]
+        for capability in recorder_action["capabilities"]
+    }
+    assert recorder_capabilities["search_parties"]["input_fields"] == [
+        "grantor_name",
+        "grantee_name",
+        "recording_year",
+    ]
+    assert recorder_capabilities["request_instrument_copy"][
+        "input_fields"
+    ] == [
+        "document_title",
+        "listed_names",
+        "recording_year_or_range",
+        "recording_document_number",
+    ]
+
+
+def test_los_angeles_civil_name_index_action_exposes_implemented_stages(
+    tmp_path,
+) -> None:
+    catalog_path = tmp_path / "catalog.db"
+    seed_catalog(db_path=catalog_path)
+
+    action = build_action(
+        PublicRecordsCatalog(catalog_path),
+        source_id="us-ca-los-angeles-superior-civil-name-index",
+        operation="prepare_name_search",
+        selector="EXAMPLE HOLDINGS LLC",
+        action_type="paid_lookup",
+    )
+
+    assert action["selected_action_type"] == "paid_lookup"
+    assert {"purchase", "paid_lookup"} <= set(
+        action["suggested_action_types"]
+    )
+    capabilities = {
+        capability["name"]: capability["details"]
+        for capability in action["capabilities"]
+    }
+    assert capabilities["probe_source"]["adapter_command"] == "probe"
+    assert capabilities["prepare_name_search"]["adapter_command"] == (
+        "prepare"
+    )
+    assert capabilities["recover_purchased_search"][
+        "retrieve_option"
+    ] == "--retrieve"
+    assert capabilities["parse_purchased_results"]["adapter_command"] == (
+        "parse-results"
+    )
+    assert capabilities["ingest_court_records"][
+        "source_occurrence_table"
+    ] == "case_source_occurrence"
+
+
+def test_nyscef_action_includes_local_fulltext_follow_on(
+    tmp_path,
+) -> None:
+    catalog_path = tmp_path / "catalog.db"
+    seed_catalog(db_path=catalog_path)
+
+    action = build_action(
+        PublicRecordsCatalog(catalog_path),
+        source_id="us-ny-nyscef",
+        operation="fetch_document",
+        selector="156728/2019 document 7",
+        action_type="manual_verification",
+    )
+
+    capabilities = {
+        capability["name"]: capability["details"]
+        for capability in action["capabilities"]
+    }
+    assert capabilities["fetch_document"]["adapter_tool"] == (
+        "query_nyscef.py"
+    )
+    assert capabilities["normalize_document_manifest"][
+        "adapter_tool"
+    ] == "query_nyscef_fulltext.py"
+    assert capabilities["build_fulltext_index"]["incremental_identity"] == (
+        "record_identity_plus_pdf_sha256"
+    )
+    assert capabilities["search_filing_text"]["modes"] == [
+        "phrase",
+        "all",
+        "fts",
+    ]

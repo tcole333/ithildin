@@ -1,0 +1,56 @@
+<html>
+  <body>
+    <form
+      id="SearchParameters"
+      name="SearchParameters"
+      method="post"
+      action="Search.aspx?ID=900"
+    >
+      <input type="hidden" name="__VIEWSTATE" value="fixture-viewstate" />
+      <input
+        type="hidden"
+        name="__VIEWSTATEGENERATOR"
+        value="fixture-generator"
+      />
+      <input
+        type="hidden"
+        name="__EVENTVALIDATION"
+        value="fixture-event-validation"
+      />
+      <input type="hidden" name="NodeID" value="111100" />
+      <input type="hidden" name="NodeDesc" value="Deschutes" />
+      <input type="hidden" name="SearchType" value="" />
+      <input type="hidden" name="SearchMode" value="" />
+      <input type="hidden" name="NameTypeKy" value="" />
+      <input type="hidden" name="BaseConnKy" value="" />
+      <input type="hidden" name="StatusType" value="" />
+      <input type="hidden" name="AllStatusTypes" value="" />
+      <input type="hidden" name="CaseCategories" value="" />
+      <select id="SearchBy" name="SearchBy">
+        <option value="2">Attorney</option>
+        <option value="0">Case</option>
+        <option value="3">Judicial Officer</option>
+        <option value="1">Party or Defendant Name</option>
+        <option value="5">Date Range</option>
+      </select>
+      <select id="cboJudOffc" name="cboJudOffc">
+        <option value="1001">Flint, Bethany</option>
+        <option value="1002">Miller, Walter R</option>
+      </select>
+    </form>
+    <div class="ssHeaderTitleBanner">
+      Oregon eCourt Circuit Court Calendars
+    </div>
+    <div>Location : Deschutes</div>
+    <script>
+      function CheckSearchParameters() {
+        var MaxCalendarSearchDays = 90;
+        var priorDateError =
+          "'On or After' date cannot be prior to today's date.";
+        var futureDateError =
+          "Date range cannot be more than 90 day(s) in the future.";
+        return MaxCalendarSearchDays;
+      }
+    </script>
+  </body>
+</html>

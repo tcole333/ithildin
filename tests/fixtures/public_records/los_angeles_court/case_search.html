@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <body>
+    <form id="caseSummaryForm" method="post">
+      <input type="text" name="txtCaseNumber">
+      <select name="ddlCourthouse">
+        <option value="">Select a Courthouse (Optional)</option>
+        <option value="ALH;Alhambra Courthouse">Alhambra Courthouse</option>
+        <option value="LA;Stanley Mosk Courthouse">Stanley Mosk Courthouse</option>
+      </select>
+      <button name="action" value="Search">Search</button>
+      <input
+        type="hidden"
+        name="__RequestVerificationToken"
+        value="civil-case-token"
+      >
+    </form>
+  </body>
+</html>

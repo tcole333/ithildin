@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Traffic/Criminal Search by Hearing Date</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <table class="tableborder">
+        <tr>
+          <td class="gridheader">&nbsp;</td>
+          <td class="gridheader">Case #</td>
+          <td class="gridheader">Defendant</td>
+          <td class="gridheader">Complainant</td>
+          <td class="gridheader">Charge</td>
+          <td class="gridheader">Hearing Time</td>
+          <td class="gridheader">Result</td>
+        </tr>
+        <tr class="evenRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GT26000123-00"></td>
+          <td class="gridrow"><a href="caseSearch.do?formAction=caseDetails&amp;displayCaseNumber=GT26000123-00&amp;localFipsCode=013&amp;caseActive=true&amp;clientSearchCounter=5">GT26000123-00</a></td>
+          <td class="gridrow">CASEY EXAMPLE</td>
+          <td class="gridrow">OFFICER SAMPLE</td>
+          <td class="gridrow">40/25 SP</td>
+          <td class="gridrow">09:00 AM</td>
+          <td class="gridrow">Finalized</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

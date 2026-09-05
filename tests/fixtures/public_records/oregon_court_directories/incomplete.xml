@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetListItemsResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetListItemsResult>
+        <listitems xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema">
+          <rs:data ItemCount="3" ListItemCollectionPositionNext="Paged=TRUE&amp;p_ID=1">
+            <z:row ows_Title="Only Row" ows_ID="1" ows_UniqueId="1;#{00000000-0000-0000-0000-000000000001}" />
+          </rs:data>
+        </listitems>
+      </GetListItemsResult>
+    </GetListItemsResponse>
+  </soap:Body>
+</soap:Envelope>

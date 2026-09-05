@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Search</title>
+  <script>var site = encodeURI("/BenchmarkWeb/");</script>
+  <script src="/BenchmarkWeb/Scripts/home/search.js?version=2.9.10.0"></script>
+</head>
+<body>
+  <div id="title">Case Search</div>
+  <div>
+    <input class="radioButton" searchtype="Name" type="radio">
+    <input class="radioButton" searchtype="CaseNumber" type="radio">
+    <input class="radioButton" searchtype="CitationNumber" type="radio">
+    <input class="radioButton" searchtype="CaseNumberArresting" type="radio">
+  </div>
+  <form class="searchform" method="post">
+    <input name="__RequestVerificationToken" type="hidden"
+           value="fixture-verification-token">
+    <input name="type" type="hidden">
+    <input name="search" type="hidden">
+    <input name="openedFrom" type="hidden">
+    <input name="openedTo" type="hidden">
+    <input name="closedFrom" type="hidden">
+    <input name="closedTo" type="hidden">
+    <input name="courtTypes" type="hidden" value="5,4,7">
+    <input name="caseTypes" type="hidden" value="2,112,55">
+    <input name="partyTypes" type="hidden" value="1,2,3,4,5">
+    <input name="divisions" type="hidden" value="7,20,11">
+  </form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "currentVersion": 11.3,
+  "id": 0,
+  "name": "Parcels",
+  "type": "Feature Layer",
+  "serviceItemId": "26ab5fad8d5d4258a7492a14de83bc0e",
+  "geometryType": "esriGeometryPolygon",
+  "objectIdField": "OBJECTID",
+  "maxRecordCount": 2000,
+  "spatialReference": {
+    "wkid": 102723,
+    "latestWkid": 3735
+  },
+  "advancedQueryCapabilities": {
+    "supportsOrderBy": true,
+    "supportsPagination": true
+  },
+  "editingInfo": {
+    "lastEditDate": 1785384000000
+  },
+  "indexes": [
+    {
+      "name": "CountyIndex",
+      "fields": "County",
+      "isUnique": false
+    },
+    {
+      "name": "LocalParcelIDIndex",
+      "fields": "LocalParcelID",
+      "isUnique": false
+    },
+    {
+      "name": "CAMADataSiteIndex",
+      "fields": "CAMADataSite",
+      "isUnique": false
+    }
+  ],
+  "fields": [
+    {"name": "OBJECTID", "type": "esriFieldTypeOID"},
+    {"name": "County", "type": "esriFieldTypeString"},
+    {"name": "LocalParcelID", "type": "esriFieldTypeString"},
+    {"name": "StateParcelID", "type": "esriFieldTypeString"},
+    {"name": "StateLUC", "type": "esriFieldTypeString"},
+    {"name": "SitusAddressAll", "type": "esriFieldTypeString"},
+    {"name": "MailAddressAll", "type": "esriFieldTypeString"},
+    {"name": "MailNumber", "type": "esriFieldTypeString"},
+    {"name": "MailStreetPrefix", "type": "esriFieldTypeString"},
+    {"name": "MailStreetName", "type": "esriFieldTypeString"},
+    {"name": "MailStreetSuffix", "type": "esriFieldTypeString"},
+    {"name": "MailUnitNumber", "type": "esriFieldTypeString"},
+    {"name": "MailCity", "type": "esriFieldTypeString"},
+    {"name": "MailZip", "type": "esriFieldTypeString"},
+    {"name": "MailState", "type": "esriFieldTypeString"},
+    {"name": "LandArea", "type": "esriFieldTypeDouble"},
+    {"name": "LandArea_PY", "type": "esriFieldTypeDouble"},
+    {"name": "CurrentTo", "type": "esriFieldTypeDate"},
+    {"name": "CAMADataSite", "type": "esriFieldTypeString"},
+    {"name": "GlobalID", "type": "esriFieldTypeGlobalID"},
+    {"name": "Shape__Area", "type": "esriFieldTypeDouble"},
+    {"name": "Shape__Length", "type": "esriFieldTypeDouble"}
+  ]
+}

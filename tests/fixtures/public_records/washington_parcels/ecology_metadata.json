@@ -1,0 +1,146 @@
+{
+  "name": "Parcels_2026",
+  "type": "Feature Layer",
+  "serviceItemId": "2b603a599a0842a3b2284c04c8927f35",
+  "geometryType": "esriGeometryPolygon",
+  "maxRecordCount": 2000,
+  "supportsStatistics": true,
+  "spatialReference": {
+    "wkid": 2927,
+    "latestWkid": 2927
+  },
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsOrderBy": true,
+    "supportsStatistics": true
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "alias": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "nullable": false
+    },
+    {
+      "name": "FIPS_NR",
+      "alias": "County FIPS Code",
+      "type": "esriFieldTypeString",
+      "length": 3,
+      "nullable": true
+    },
+    {
+      "name": "COUNTY_NM",
+      "alias": "County Name",
+      "type": "esriFieldTypeString",
+      "length": 12,
+      "nullable": true
+    },
+    {
+      "name": "PARCEL_ID_NR",
+      "alias": "FIPS Parcel ID Number",
+      "type": "esriFieldTypeString",
+      "length": 24,
+      "nullable": true
+    },
+    {
+      "name": "ORIG_PARCEL_ID",
+      "alias": "Original Parcel ID Number",
+      "type": "esriFieldTypeString",
+      "length": 20,
+      "nullable": true
+    },
+    {
+      "name": "SITUS_ADDRESS",
+      "alias": "Situs Address",
+      "type": "esriFieldTypeString",
+      "length": 200,
+      "nullable": true
+    },
+    {
+      "name": "SUB_ADDRESS",
+      "alias": "Situs Address Misc.",
+      "type": "esriFieldTypeString",
+      "length": 100,
+      "nullable": true
+    },
+    {
+      "name": "SITUS_CITY_NM",
+      "alias": "Situs City",
+      "type": "esriFieldTypeString",
+      "length": 50,
+      "nullable": true
+    },
+    {
+      "name": "SITUS_ZIP_NR",
+      "alias": "Situs Zip Code",
+      "type": "esriFieldTypeString",
+      "length": 10,
+      "nullable": true
+    },
+    {
+      "name": "LANDUSE_CD",
+      "alias": "DOR Land Use Code",
+      "type": "esriFieldTypeSmallInteger",
+      "nullable": true,
+      "domain": {
+        "type": "codedValue",
+        "name": "DOR_Land_Use_Codes",
+        "codedValues": [
+          {
+            "name": "11 - Household, single family units",
+            "code": 11
+          },
+          {
+            "name": "83 - Agricultural current use",
+            "code": 83
+          }
+        ]
+      }
+    },
+    {
+      "name": "ORIG_LANDUSE_CD",
+      "alias": "Original Land Use Code",
+      "type": "esriFieldTypeString",
+      "length": 50,
+      "nullable": true
+    },
+    {
+      "name": "VALUE_LAND",
+      "alias": "Land Value",
+      "type": "esriFieldTypeInteger",
+      "nullable": true
+    },
+    {
+      "name": "VALUE_BLDG",
+      "alias": "Building Value",
+      "type": "esriFieldTypeInteger",
+      "nullable": true
+    },
+    {
+      "name": "DATA_LINK",
+      "alias": "County Assessor Link",
+      "type": "esriFieldTypeString",
+      "length": 255,
+      "nullable": true
+    },
+    {
+      "name": "GlobalID",
+      "alias": "GlobalID",
+      "type": "esriFieldTypeGlobalID",
+      "length": 38,
+      "nullable": false
+    },
+    {
+      "name": "Shape__Area",
+      "alias": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "nullable": true
+    },
+    {
+      "name": "Shape__Length",
+      "alias": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "nullable": true
+    }
+  ]
+}

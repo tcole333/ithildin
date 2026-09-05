@@ -52,32 +52,212 @@ DEFAULT_PROFILES_DIR = PROJECT_ROOT / "investigations"
 SCHEMA_VERSION = 1
 
 PROPERTY_DISCOVERY_CAPABILITIES = frozenset(
-    {"search_owner", "search_address", "sync"}
+    {
+        "search_owner",
+        "search_address",
+        "search_assessment_records",
+        "search_tax_accounts",
+        "enrich_census_geography",
+        "sync",
+    }
 )
 PROPERTY_DETAIL_CAPABILITIES = frozenset(
     {
+        "fetch_account",
         "fetch_parcel",
         "fetch_geometry",
         "search_parcels",
         "search_sales",
+        "search_recent_deed_reference",
         "search_tax_default",
+        "fetch_tax_status",
+        "fetch_bills",
+        "fetch_payment_history",
+        "fetch_auction_event",
+        "fetch_foreclosure_case",
+        "list_releases",
+        "download_bulk",
+        "list_operator_history",
+        "resolve_operator",
+        "resolve_well",
+        "route_to_county_source",
+        "route_to_county_recorder",
     }
 )
-RECORDER_CAPABILITIES = frozenset(
-    {"search_parties", "search_parcels", "fetch_instrument"}
-)
-RECORDER_ROLES = frozenset({"recorder", "instrument_index"})
-COURT_SEARCH_CAPABILITIES = frozenset(
+RECORDER_INDEX_CAPABILITIES = frozenset(
     {
-        "search_cases",
-        "search_judgments",
-        "search_opinions",
+        "search_folio",
+        "search_document_text",
+        "search_instruments",
+        "search_parcels",
         "search_parties",
     }
 )
-COURT_DETAIL_CAPABILITIES = frozenset(
-    {"list_docket_entries", "fetch_document"}
+RECORDER_ENRICHMENT_CAPABILITIES = frozenset(
+    {
+        "search_cfn",
+        "search_book_page",
+        "hydrate_search_results",
+        "fetch_instrument",
+        "fetch_parties",
+        "fetch_financial_detail",
+        "fetch_document",
+        "request_bulk_files",
+        "request_bulk_images",
+        "request_deed_of_trust",
+        "request_instrument_copy",
+        "request_oil_gas_record",
+    }
 )
+RECORDER_ROLES = frozenset({"recorder", "instrument_index"})
+PROPERTY_ROLES = frozenset(
+    {
+        "assessment",
+        "ownership",
+        "parcel_geometry",
+        "parcel_geography",
+        "parcel_index",
+        "situs_address",
+        "tax_status",
+        "sales",
+        "deed_history",
+        "deeds",
+        "improvements",
+        "exemptions",
+        "hearings",
+        "oil_gas_operator_history",
+        "oil_gas_organizations",
+        "oil_gas_wells",
+        "lease_index",
+        "well_index",
+        "regulatory_records",
+        "entity_resolution",
+    }
+)
+COURT_SEARCH_CAPABILITIES = frozenset(
+    {
+        "search_cases",
+        "search_documents",
+        "search_hearings",
+        "search_judgments",
+        "search_opinions",
+        "search_parties",
+        "search_publications",
+        "search_owner",
+        "search_address",
+        "search_judges",
+        "lookup_case",
+        "list_excess_proceeds",
+    }
+)
+COURT_SETUP_CAPABILITIES = frozenset(
+    {
+        "list_case_reports",
+        "list_courts",
+        "list_judges",
+        "list_court_offices",
+        "list_prothonotaries",
+        "list_clerks_of_courts",
+        "list_registers_of_wills",
+        "list_district_court_administrators",
+        "list_calendars",
+        "list_current_releases",
+        "query_magisterial_district_geometry",
+        "route_address_to_magisterial_district",
+    }
+)
+COURT_DETAIL_CAPABILITIES = frozenset(
+    {
+        "fetch_case",
+        "fetch_document",
+        "fetch_parties",
+        "fetch_publication",
+        "fetch_legacy_document",
+        "list_case_events",
+        "list_charges",
+        "list_docket_entries",
+        "list_document_index",
+        "list_docket_documents",
+        "list_estate_docket",
+        "list_probate_notes",
+        "list_probate_claims",
+        "request_bulk_files",
+        "request_case_copy",
+        "request_case_report",
+        "request_certified_copy",
+        "request_court_data",
+        "request_docket_range",
+        "fetch_calendar_document",
+        "fetch_opinion",
+        "fetch_opinion_pdf",
+        "fetch_release_document",
+        "export",
+    }
+)
+
+
+def _court_capability_groups(
+    supported: set[str],
+    *,
+    adapter_capabilities: set[str],
+) -> tuple[set[str], set[str], set[str]]:
+    """Classify shared names plus executable adapter-specific variants."""
+
+    setup = set(supported & COURT_SETUP_CAPABILITIES)
+    search = set(supported & COURT_SEARCH_CAPABILITIES)
+    search.update(
+        capability
+        for capability in adapter_capabilities
+        if capability.startswith(("search_", "lookup_"))
+    )
+    detail = set(supported & COURT_DETAIL_CAPABILITIES)
+    detail.update(
+        capability
+        for capability in adapter_capabilities
+        if capability.startswith(
+            (
+                "fetch_",
+                "request_",
+                "parse_",
+                "download_",
+                "export_",
+            )
+        )
+    )
+    search.difference_update(setup)
+    detail.difference_update(setup | search)
+    return setup, search, detail
+
+
+def _property_capability_groups(
+    supported: set[str],
+    *,
+    adapter_capabilities: set[str],
+) -> tuple[set[str], set[str]]:
+    """Classify shared names plus executable property-specific variants."""
+
+    discovery = set(supported & PROPERTY_DISCOVERY_CAPABILITIES)
+    detail = set(supported & PROPERTY_DETAIL_CAPABILITIES)
+    discovery.update(
+        capability
+        for capability in adapter_capabilities
+        if capability.startswith(("search_", "lookup_"))
+    )
+    detail.update(
+        capability
+        for capability in adapter_capabilities
+        if capability.startswith(
+            (
+                "fetch_",
+                "request_",
+                "parse_",
+                "download_",
+                "export_",
+            )
+        )
+    )
+    discovery.difference_update(detail)
+    return discovery, detail
 
 
 class SearchPlanError(ValueError):
@@ -168,9 +348,7 @@ def _open_readonly(path: Path) -> sqlite3.Connection:
 def _alias_rows(db: sqlite3.Connection) -> list[dict[str, Any]]:
     if not _table_exists(db, "name_aliases"):
         return []
-    columns = {
-        row["name"] for row in db.execute("PRAGMA table_info(name_aliases)")
-    }
+    columns = {row["name"] for row in db.execute("PRAGMA table_info(name_aliases)")}
     selected = ["canonical_name", "alias"]
     for optional in ("alias_type", "entity_id"):
         if optional in columns:
@@ -221,9 +399,7 @@ def _resolve_canonical_name(
     )
     canonical = candidates[0] if candidates else _clean(subject)
     canonical_rows = [
-        row
-        for row in alias_rows
-        if _key(str(row["canonical_name"])) == _key(canonical)
+        row for row in alias_rows if _key(str(row["canonical_name"])) == _key(canonical)
     ]
     return canonical, canonical_rows, candidates
 
@@ -252,8 +428,7 @@ def _matching_entities(
     return [
         dict(row)
         for row in rows
-        if int(row["id"]) in entity_id_set
-        or _key(str(row["name"])) in name_keys
+        if int(row["id"]) in entity_id_set or _key(str(row["name"])) in name_keys
     ]
 
 
@@ -434,11 +609,7 @@ def _load_identity_context(
                     ]
                 )
                 related_addresses = _sorted_unique(
-                    [
-                        str(row["address"])
-                        for row in entity_rows
-                        if row.get("address")
-                    ]
+                    [str(row["address"]) for row in entity_rows if row.get("address")]
                 )
                 related_jurisdictions = _sorted_unique(
                     [
@@ -518,9 +689,9 @@ def _load_identity_context(
     if profile is not None:
         primary_subject = _clean(str(profile.get("primary_subject", "")))
         profile_context["primary_subject"] = primary_subject or None
-        profile_context["primary_subject_match"] = (
-            bool(primary_subject) and _key(primary_subject) == _key(canonical_name)
-        )
+        profile_context["primary_subject_match"] = bool(primary_subject) and _key(
+            primary_subject
+        ) == _key(canonical_name)
         key_people = _sorted_unique(
             str(value) for value in profile.get("key_persons", [])
         )
@@ -544,11 +715,7 @@ def _load_identity_context(
             canonical_name,
             subject,
             *explicit_aliases,
-            *[
-                name
-                for related in related_rows
-                for name in related.get("names", [])
-            ],
+            *[name for related in related_rows for name in related.get("names", [])],
         ]
         matching_addresses = [
             (address, description)
@@ -596,6 +763,8 @@ def _parse_date(value: str | None, field: str) -> str | None:
 def _jurisdiction_match(
     requested: Sequence[str],
     source_jurisdictions: Sequence[Mapping[str, Any]],
+    *,
+    numeric_hierarchy: bool = True,
 ) -> dict[str, Any]:
     requested_values = _sorted_unique(requested)
     if not requested_values:
@@ -624,11 +793,11 @@ def _jurisdiction_match(
             geoid = str(jurisdiction.get("geoid") or "")
             country_code = str(jurisdiction.get("country_code") or "")
             numeric_hierarchy_match = (
-                bool(request_digits)
+                numeric_hierarchy
+                and bool(request_digits)
                 and geoid.isdigit()
                 and (
-                    request_digits.startswith(geoid)
-                    or geoid.startswith(request_digits)
+                    request_digits.startswith(geoid) or geoid.startswith(request_digits)
                 )
             )
             nationwide_match = geoid.upper() in {"US", "USA"} and (
@@ -643,15 +812,13 @@ def _jurisdiction_match(
                 break
     matched = _sorted_unique(matched)
     unmatched = [
-        value for value in requested_values if _key(value) not in {_key(v) for v in matched}
+        value
+        for value in requested_values
+        if _key(value) not in {_key(v) for v in matched}
     ]
     return {
         "status": (
-            "matched"
-            if not unmatched
-            else "partial"
-            if matched
-            else "no_catalog_match"
+            "matched" if not unmatched else "partial" if matched else "no_catalog_match"
         ),
         "requested": requested_values,
         "matched": matched,
@@ -669,9 +836,7 @@ def _catalog_access(detail: Mapping[str, Any]) -> dict[str, Any]:
             "latest_review": None,
             "manifest_proposal": {
                 "access_class": source["proposed_access_class"],
-                "automation_disposition": source[
-                    "proposed_automation_disposition"
-                ],
+                "automation_disposition": source["proposed_automation_disposition"],
             },
         }
     return {
@@ -696,9 +861,7 @@ def _catalog_access(detail: Mapping[str, Any]) -> dict[str, Any]:
         },
         "manifest_proposal": {
             "access_class": source["proposed_access_class"],
-            "automation_disposition": source[
-                "proposed_automation_disposition"
-            ],
+            "automation_disposition": source["proposed_automation_disposition"],
         },
     }
 
@@ -722,6 +885,7 @@ def _load_catalog_sources(
                 continue
             detail = catalog.show_source(row["source_id"])
             source = detail["source"]
+            manifest = detail.get("current_manifest") or {}
             capabilities = [
                 {
                     "name": capability["name"],
@@ -756,13 +920,24 @@ def _load_catalog_sources(
                     "official_url": source["official_url"],
                     "platform_family": source["platform_family"],
                     "source_status": source["source_status"],
+                    "coverage_start": source.get("coverage_start"),
+                    "update_cadence": source.get("update_cadence"),
                     "adapter_family": source.get("adapter_family"),
                     "adapter_version": source.get("adapter_version"),
+                    "record_identity_source_id": (
+                        manifest.get("record_identity_source_id") or source["source_id"]
+                    ),
+                    "complementary_source_ids": list(
+                        manifest.get("complementary_source_ids") or []
+                    ),
                     "capabilities": capabilities,
                     "jurisdictions": jurisdictions,
                     "requested_jurisdiction_coverage": _jurisdiction_match(
                         requested_jurisdictions,
                         jurisdictions,
+                        numeric_hierarchy=(
+                            manifest.get("jurisdiction_match_mode") != "explicit"
+                        ),
                     ),
                     "access": _catalog_access(detail),
                 }
@@ -800,11 +975,20 @@ def _task(
     seed_parameters: Mapping[str, Any],
     runtime_inputs: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
+    capability_details = next(
+        (
+            capability_row.get("details") or {}
+            for capability_row in source["capabilities"]
+            if capability_row["name"] == capability
+        ),
+        {},
+    )
     return {
         "task_id": task_id,
         "stage": stage,
         "source_id": source["source_id"],
         "capability": capability,
+        "capability_details": dict(capability_details),
         "depends_on": sorted(set(depends_on)),
         "seed_parameters": dict(seed_parameters),
         "runtime_inputs": list(runtime_inputs),
@@ -819,9 +1003,7 @@ def _build_workflow(
 ) -> dict[str, Any]:
     subject_names = [row["value"] for row in identity["names"]]
     related_names = _sorted_unique(
-        name
-        for related in identity["related_entities"]
-        for name in related["names"]
+        name for related in identity["related_entities"] for name in related["names"]
     )
     party_names = _sorted_unique([*subject_names, *related_names])
     addresses = [row["value"] for row in identity["addresses"]]
@@ -841,15 +1023,15 @@ def _build_workflow(
     workflow_sources = [
         source
         for source in sources
-        if not jurisdictions
-        or source["requested_jurisdiction_coverage"]["matched"]
+        if not jurisdictions or source["requested_jurisdiction_coverage"]["matched"]
     ]
 
     property_tasks: list[dict[str, Any]] = []
     property_seed_ids: list[str] = []
     property_detail_specs: list[tuple[Mapping[str, Any], str]] = []
-    recorder_specs: list[tuple[Mapping[str, Any], str]] = []
-    court_sources: list[tuple[Mapping[str, Any], set[str]]] = []
+    recorder_index_specs: list[tuple[Mapping[str, Any], str]] = []
+    recorder_enrichment_specs: list[tuple[Mapping[str, Any], str]] = []
+    court_sources: list[tuple[Mapping[str, Any], set[str], set[str], set[str]]] = []
 
     for source in workflow_sources:
         supported = {
@@ -857,19 +1039,45 @@ def _build_workflow(
             for capability in source["capabilities"]
             if capability["supported"]
         }
-        if source["domain"] in {"property", "mixed"}:
-            for capability in sorted(supported & PROPERTY_DISCOVERY_CAPABILITIES):
+        roles = set(source["roles"])
+        is_recorder = bool(RECORDER_ROLES.intersection(roles))
+        is_parcel_source = bool(PROPERTY_ROLES.intersection(roles))
+        if source["domain"] in {"property", "mixed"} and (
+            is_parcel_source or not is_recorder
+        ):
+            adapter_capabilities = {
+                capability["name"]
+                for capability in source["capabilities"]
+                if capability["supported"]
+                and (
+                    (capability.get("details") or {}).get("adapter_tool")
+                    or (capability.get("details") or {}).get("adapter_command")
+                    or (capability.get("details") or {}).get("adapter_commands")
+                )
+            }
+            discovery, detail = _property_capability_groups(
+                supported,
+                adapter_capabilities=adapter_capabilities,
+            )
+            for capability in sorted(discovery):
                 task_id = f"property.{source['source_id']}.{capability}"
                 parameters: dict[str, Any] = source_scope(source)
                 if capability == "search_owner":
                     parameters["names"] = party_names
                 elif capability == "search_address":
                     parameters["addresses"] = addresses
+                elif capability == "search_assessment_records":
+                    parameters["queries"] = _sorted_unique([*party_names, *addresses])
+                elif capability == "enrich_census_geography":
+                    parameters["geographies"] = list(parameters["jurisdictions"])
+                    parameters["addresses"] = addresses
                 elif capability == "sync":
                     parameters["selectors"] = {
                         "names": party_names,
                         "addresses": addresses,
                     }
+                else:
+                    parameters["queries"] = _sorted_unique([*party_names, *addresses])
                 property_tasks.append(
                     _task(
                         task_id=task_id,
@@ -881,13 +1089,31 @@ def _build_workflow(
                     )
                 )
                 property_seed_ids.append(task_id)
-            for capability in sorted(supported & PROPERTY_DETAIL_CAPABILITIES):
+            for capability in sorted(detail):
                 property_detail_specs.append((source, capability))
-            if RECORDER_ROLES.intersection(source["roles"]):
-                for capability in sorted(supported & RECORDER_CAPABILITIES):
-                    recorder_specs.append((source, capability))
+        if source["domain"] in {"property", "mixed"} and is_recorder:
+            recorder_index_capabilities = supported & RECORDER_INDEX_CAPABILITIES
+            if "search_parcels" in recorder_index_capabilities:
+                recorder_index_capabilities.discard("search_folio")
+            for capability in sorted(recorder_index_capabilities):
+                recorder_index_specs.append((source, capability))
+            for capability in sorted(supported & RECORDER_ENRICHMENT_CAPABILITIES):
+                recorder_enrichment_specs.append((source, capability))
         if source["domain"] in {"court", "mixed"}:
-            court_sources.append((source, supported))
+            adapter_capabilities = {
+                capability["name"]
+                for capability in source["capabilities"]
+                if capability["supported"]
+                and (
+                    (capability.get("details") or {}).get("adapter_tool")
+                    or (capability.get("details") or {}).get("adapter_command")
+                )
+            }
+            setup, search, detail = _court_capability_groups(
+                supported,
+                adapter_capabilities=adapter_capabilities,
+            )
+            court_sources.append((source, setup, search, detail))
 
     for source, capability in property_detail_specs:
         task_id = f"property.{source['source_id']}.{capability}"
@@ -908,8 +1134,15 @@ def _build_workflow(
                         "name": "parcel_identifiers",
                         "from_tasks": sorted(property_seed_ids),
                         "fields": [
+                            "tax_bill_id",
+                            "parcel_id",
+                            "parid",
+                            "ain",
+                            "apn",
                             "native_parcel_id",
                             "alternate_parcel_id",
+                            "state_parcel_id",
+                            "local_parcel_id",
                             "jurisdiction_geoid",
                         ],
                     }
@@ -921,11 +1154,7 @@ def _build_workflow(
 
     recorder_tasks: list[dict[str, Any]] = []
     recorder_search_ids: list[str] = []
-    recorder_fetch_specs: list[tuple[Mapping[str, Any], str]] = []
-    for source, capability in recorder_specs:
-        if capability == "fetch_instrument":
-            recorder_fetch_specs.append((source, capability))
-            continue
+    for source, capability in recorder_index_specs:
         task_id = f"recorder.{source['source_id']}.{capability}"
         recorder_tasks.append(
             _task(
@@ -944,17 +1173,26 @@ def _build_workflow(
                         "name": "property_identifiers",
                         "from_tasks": property_ids,
                         "fields": [
+                            "ain",
+                            "apn",
                             "native_parcel_id",
                             "alternate_parcel_id",
+                            "state_parcel_id",
+                            "local_parcel_id",
                             "situs_address",
+                            "legal_description",
                             "owner_name",
+                            "book",
+                            "page",
+                            "book_type",
+                            "native_sale_id",
                         ],
                     }
                 ],
             )
         )
         recorder_search_ids.append(task_id)
-    for source, capability in recorder_fetch_specs:
+    for source, capability in recorder_enrichment_specs:
         task_id = f"recorder.{source['source_id']}.{capability}"
         recorder_tasks.append(
             _task(
@@ -966,9 +1204,24 @@ def _build_workflow(
                 seed_parameters=source_scope(source),
                 runtime_inputs=[
                     {
-                        "name": "instrument_identifiers",
-                        "from_tasks": sorted(recorder_search_ids),
-                        "fields": ["native_document_id", "instrument_id"],
+                        "name": "instrument_and_route_identifiers",
+                        "from_tasks": sorted({*property_ids, *recorder_search_ids}),
+                        "fields": [
+                            "native_document_id",
+                            "instrument_id",
+                            "clerk_file_number",
+                            "cfn_master_id",
+                            "cfn_master_ids",
+                            "document_type",
+                            "instrument_type",
+                            "recording_date",
+                            "recording_document_number",
+                            "recording_locator",
+                            "book",
+                            "page",
+                            "book_type",
+                            "issued_search_token",
+                        ],
                     }
                 ],
             )
@@ -977,11 +1230,28 @@ def _build_workflow(
     recorder_ids = [task["task_id"] for task in recorder_tasks]
 
     court_tasks: list[dict[str, Any]] = []
+    court_setup_ids_by_source: dict[str, list[str]] = {}
     court_search_ids_by_source: dict[str, list[str]] = {}
     upstream_ids = sorted([*property_ids, *recorder_ids])
-    for source, supported in court_sources:
+    for source, setup_capabilities, search_capabilities, _detail in court_sources:
+        source_setup_ids = []
+        for capability in sorted(setup_capabilities):
+            task_id = f"court.{source['source_id']}.{capability}"
+            court_tasks.append(
+                _task(
+                    task_id=task_id,
+                    stage="court_source_discovery",
+                    source=source,
+                    capability=capability,
+                    depends_on=[],
+                    seed_parameters=source_scope(source),
+                )
+            )
+            source_setup_ids.append(task_id)
+        court_setup_ids_by_source[source["source_id"]] = source_setup_ids
+
         source_search_ids = []
-        for capability in sorted(supported & COURT_SEARCH_CAPABILITIES):
+        for capability in sorted(search_capabilities):
             task_id = f"court.{source['source_id']}.{capability}"
             court_tasks.append(
                 _task(
@@ -989,7 +1259,10 @@ def _build_workflow(
                     stage="court_case_search",
                     source=source,
                     capability=capability,
-                    depends_on=upstream_ids,
+                    depends_on=[
+                        *upstream_ids,
+                        *source_setup_ids,
+                    ],
                     seed_parameters={
                         **source_scope(source),
                         "party_names": party_names,
@@ -1004,41 +1277,147 @@ def _build_workflow(
                                 "party_name",
                                 "situs_address",
                                 "mailing_address",
+                                "ain",
+                                "apn",
+                                "legal_description",
                                 "native_parcel_id",
                                 "native_document_id",
                                 "instrument_id",
+                                "recording_document_number",
                             ],
-                        }
+                        },
+                        {
+                            "name": "court_identifiers",
+                            "from_tasks": sorted(source_setup_ids),
+                            "fields": [
+                                "court_id",
+                                "court_resource_uuid",
+                                "native_court_id",
+                                "native_court_external_id",
+                            ],
+                        },
                     ],
                 )
             )
             source_search_ids.append(task_id)
         court_search_ids_by_source[source["source_id"]] = source_search_ids
 
-    for source, supported in court_sources:
-        source_dependencies = court_search_ids_by_source[source["source_id"]]
-        for capability in sorted(supported & COURT_DETAIL_CAPABILITIES):
+    court_search_ids_by_identity: dict[str, list[str]] = {}
+    for source, _setup, _search, _detail in court_sources:
+        identity_source_id = str(
+            source.get("record_identity_source_id") or source["source_id"]
+        )
+        court_search_ids_by_identity.setdefault(
+            identity_source_id,
+            [],
+        ).extend(court_search_ids_by_source[source["source_id"]])
+
+    for source, _setup, _search, detail_capabilities in court_sources:
+        source_setup_ids = court_setup_ids_by_source[source["source_id"]]
+        identity_source_id = str(
+            source.get("record_identity_source_id") or source["source_id"]
+        )
+        source_dependencies = sorted(
+            set(court_search_ids_by_identity.get(identity_source_id, []))
+        )
+        for capability in sorted(detail_capabilities):
             task_id = f"court.{source['source_id']}.{capability}"
+            capability_details = next(
+                (
+                    capability_row.get("details") or {}
+                    for capability_row in source["capabilities"]
+                    if capability_row["name"] == capability
+                ),
+                {},
+            )
+            declared_prior_selectors = capability_details.get(
+                "requires_prior_selectors",
+                capability_details.get("requires_prior_selector"),
+            )
+            if isinstance(declared_prior_selectors, str):
+                prior_selector_fields = [declared_prior_selectors]
+            elif isinstance(declared_prior_selectors, Sequence):
+                prior_selector_fields = [
+                    str(value)
+                    for value in declared_prior_selectors
+                    if str(value).strip()
+                ]
+            else:
+                prior_selector_fields = []
+            if (
+                "raw_case_number" in prior_selector_fields
+                and "case_number" not in prior_selector_fields
+            ):
+                prior_selector_fields.append("case_number")
+            runtime_inputs = [
+                {
+                    "name": "case_or_document_identifiers",
+                    "from_tasks": sorted(
+                        {*source_setup_ids, *source_dependencies}
+                    ),
+                    "fields": [
+                        "court_id",
+                        "court_resource_uuid",
+                        "native_court_id",
+                        "native_court_external_id",
+                        "raw_case_number",
+                        "trial_case_number",
+                        "appellate_case_number",
+                        "docket_id",
+                        "case_uuid",
+                        "case_instance_uuid",
+                        "source_internal_id",
+                        "party_uuid",
+                        "docket_entry_uuid",
+                        "native_entry_id",
+                        "claim_uuid",
+                        "claim_sequence_no",
+                        "document_uuid",
+                        "document_link_uuid",
+                        "native_document_id",
+                        "legacy_item_id",
+                        "doc_id",
+                        "rs_id",
+                        "image_id",
+                        "publication_uuid",
+                        "notice_refcode",
+                        "calendar_item",
+                    ],
+                }
+            ]
+            if prior_selector_fields:
+                runtime_inputs.append(
+                    {
+                        "name": "declared_prior_selectors",
+                        "from_tasks": sorted(
+                            {
+                                *upstream_ids,
+                                *source_setup_ids,
+                                *source_dependencies,
+                            }
+                        ),
+                        "fields": _sorted_unique(prior_selector_fields),
+                        "declared_sources": list(
+                            capability_details.get(
+                                "prior_selector_sources",
+                                (),
+                            )
+                        ),
+                    }
+                )
             court_tasks.append(
                 _task(
                     task_id=task_id,
                     stage="court_dockets_and_documents",
                     source=source,
                     capability=capability,
-                    depends_on=[*upstream_ids, *source_dependencies],
-                    seed_parameters=source_scope(source),
-                    runtime_inputs=[
-                        {
-                            "name": "case_or_document_identifiers",
-                            "from_tasks": sorted(source_dependencies),
-                            "fields": [
-                                "court_id",
-                                "raw_case_number",
-                                "docket_id",
-                                "native_document_id",
-                            ],
-                        }
+                    depends_on=[
+                        *upstream_ids,
+                        *source_setup_ids,
+                        *source_dependencies,
                     ],
+                    seed_parameters=source_scope(source),
+                    runtime_inputs=runtime_inputs,
                 )
             )
     court_tasks.sort(key=lambda task: task["task_id"])
@@ -1063,8 +1442,9 @@ def _build_workflow(
         {
             "stage_id": "court",
             "purpose": (
-                "Search cases with the identity, property, and instrument context, "
-                "then resolve docket entries and documents."
+                "Resolve source courts, search case, party, document, and "
+                "publication indexes with the available context, then retrieve "
+                "case details, docket entries, and selected public records."
             ),
             "tasks": court_tasks,
         },
@@ -1075,10 +1455,97 @@ def _build_workflow(
     }
 
 
+def _supported_capability_names(
+    source: Mapping[str, Any],
+) -> set[str]:
+    return {
+        str(capability["name"])
+        for capability in source["capabilities"]
+        if capability["supported"]
+    }
+
+
+def _complementary_routes(
+    sources: Sequence[Mapping[str, Any]],
+    identity: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    """Expand catalog-declared complements into field-oriented route groups."""
+
+    sources_by_id = {str(source["source_id"]): source for source in sources}
+    requested_jurisdictions = {str(row["value"]) for row in identity["jurisdictions"]}
+    groups: list[dict[str, Any]] = []
+    for source in sources:
+        complement_ids = source.get("complementary_source_ids") or []
+        if not complement_ids:
+            continue
+        matched = set(source["requested_jurisdiction_coverage"]["matched"])
+        if requested_jurisdictions and not matched:
+            continue
+        primary_roles = set(source["roles"])
+        primary_capabilities = _supported_capability_names(source)
+        complements: list[dict[str, Any]] = []
+        for complement_id in complement_ids:
+            complement = sources_by_id.get(str(complement_id))
+            if complement is None:
+                continue
+            complement_roles = set(complement["roles"])
+            complement_capabilities = _supported_capability_names(complement)
+            complements.append(
+                {
+                    "source_id": complement["source_id"],
+                    "name": complement["name"],
+                    "domain": complement["domain"],
+                    "official_url": complement["official_url"],
+                    "source_status": complement["source_status"],
+                    "adapter_family": complement["adapter_family"],
+                    "roles": sorted(complement_roles),
+                    "supported_capabilities": sorted(complement_capabilities),
+                    "adds_roles": sorted(complement_roles - primary_roles),
+                    "adds_capabilities": sorted(
+                        complement_capabilities - primary_capabilities
+                    ),
+                    "access_mode": complement["access"]["mode"],
+                    "coverage_start": complement["coverage_start"],
+                    "update_cadence": complement["update_cadence"],
+                    "requested_jurisdiction_match": list(
+                        complement["requested_jurisdiction_coverage"]["matched"]
+                    ),
+                    "record_identity_relation": (
+                        "shared"
+                        if complement["record_identity_source_id"]
+                        == source["record_identity_source_id"]
+                        else "independent"
+                    ),
+                }
+            )
+        if complements:
+            groups.append(
+                {
+                    "primary_source_id": source["source_id"],
+                    "primary_name": source["name"],
+                    "primary_official_url": source["official_url"],
+                    "primary_source_status": source["source_status"],
+                    "primary_adapter_family": source["adapter_family"],
+                    "primary_access_mode": source["access"]["mode"],
+                    "primary_coverage_start": source["coverage_start"],
+                    "primary_update_cadence": source["update_cadence"],
+                    "primary_roles": sorted(primary_roles),
+                    "primary_supported_capabilities": sorted(primary_capabilities),
+                    "relationship_basis": "catalog_declared",
+                    "complements": sorted(
+                        complements,
+                        key=lambda row: row["source_id"],
+                    ),
+                }
+            )
+    return sorted(groups, key=lambda row: row["primary_source_id"])
+
+
 def _coverage_summary(
     sources: Sequence[Mapping[str, Any]],
     identity: Mapping[str, Any],
     workflow: Mapping[str, Any],
+    complementary_routes: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
     domain_counts = Counter(source["domain"] for source in sources)
     mode_counts = Counter(source["access"]["mode"] for source in sources)
@@ -1088,16 +1555,13 @@ def _coverage_summary(
         for capability in source["capabilities"]
         if capability["supported"]
     )
-    requested_jurisdictions = [
-        row["value"] for row in identity["jurisdictions"]
-    ]
+    requested_jurisdictions = [row["value"] for row in identity["jurisdictions"]]
     jurisdiction_rows = []
     for jurisdiction in requested_jurisdictions:
         matching_sources = [
             source["source_id"]
             for source in sources
-            if jurisdiction
-            in source["requested_jurisdiction_coverage"]["matched"]
+            if jurisdiction in source["requested_jurisdiction_coverage"]["matched"]
         ]
         jurisdiction_rows.append(
             {
@@ -1117,9 +1581,9 @@ def _coverage_summary(
             "related_entities": len(identity["related_entities"]),
         },
         "query_template_counts": {
-            stage["stage_id"]: len(stage["tasks"])
-            for stage in workflow["stages"]
+            stage["stage_id"]: len(stage["tasks"]) for stage in workflow["stages"]
         },
+        "complementary_route_group_count": len(complementary_routes),
     }
 
 
@@ -1205,8 +1669,7 @@ def _append_unresolved_notes(
         jurisdiction
         for jurisdiction in requested
         if not any(
-            jurisdiction
-            in source["requested_jurisdiction_coverage"]["matched"]
+            jurisdiction in source["requested_jurisdiction_coverage"]["matched"]
             for source in sources
         )
     ]
@@ -1221,6 +1684,34 @@ def _append_unresolved_notes(
                 "jurisdictions": sorted(uncovered, key=str.casefold),
             }
         )
+    if requested:
+        complement_gaps = [
+            {
+                "source_id": source["source_id"],
+                "access_mode": source["access"]["mode"],
+            }
+            for source in sources
+            if source["requested_jurisdiction_coverage"]["matched"]
+            and source["access"]["mode"] not in {"allowed", "allowed_with_limits"}
+            and not source.get("complementary_source_ids")
+        ]
+        if complement_gaps:
+            unresolved.append(
+                {
+                    "code": "complementary_route_not_cataloged",
+                    "note": (
+                        "These jurisdiction-matched sources do not yet "
+                        "declare an adjacent source or acquisition route. "
+                        "Review official indexes, publications, archives, "
+                        "record custodians, and useful account or data "
+                        "products for partial coverage."
+                    ),
+                    "sources": sorted(
+                        complement_gaps,
+                        key=lambda row: row["source_id"],
+                    ),
+                }
+            )
 
 
 def build_search_plan(
@@ -1256,9 +1747,7 @@ def build_search_plan(
         profile_name=_clean(profile) if profile else None,
         profiles_dir=Path(profiles_dir),
     )
-    requested_jurisdictions = [
-        row["value"] for row in identity["jurisdictions"]
-    ]
+    requested_jurisdictions = [row["value"] for row in identity["jurisdictions"]]
     sources, catalog_notes = _load_catalog_sources(
         Path(catalog_db),
         requested_jurisdictions,
@@ -1266,6 +1755,7 @@ def build_search_plan(
     unresolved.extend(catalog_notes)
     date_bounds = {"after": after_date, "before": before_date}
     workflow = _build_workflow(sources, identity, date_bounds)
+    complementary_routes = _complementary_routes(sources, identity)
     _append_unresolved_notes(
         unresolved,
         sources=sources,
@@ -1290,7 +1780,13 @@ def build_search_plan(
         "context": context,
         "sources": sources,
         "workflow": workflow,
-        "coverage": _coverage_summary(sources, identity, workflow),
+        "complementary_routes": complementary_routes,
+        "coverage": _coverage_summary(
+            sources,
+            identity,
+            workflow,
+            complementary_routes,
+        ),
         "unresolved": unresolved,
     }
     plan["fingerprint"] = hashlib.sha256(
@@ -1331,9 +1827,7 @@ def _emit(plan: Mapping[str, Any], args: argparse.Namespace) -> None:
     payload = canonical_json(plan)
     if args.output:
         Path(args.output).write_text(payload + "\n")
-        print(
-            f"Search plan {plan['fingerprint']} saved to {args.output}"
-        )
+        print(f"Search plan {plan['fingerprint']} saved to {args.output}")
         return
     if args.json_out:
         print(payload)

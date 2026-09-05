@@ -19,8 +19,17 @@ Usage:
     uv run python tools/query_fin.py balances --owner "Southern"
     uv run python tools/query_fin.py positions --owner "Epstein"
     uv run python tools/query_fin.py flights --passenger "Maxwell"
-    uv run python tools/query_fin.py review --outliers
+    uv run python tools/query_fin.py accounts --identified-only
+    uv run python tools/query_fin.py statements --reconcilable --status delta
+    uv run python tools/query_fin.py coverage
+    uv run python tools/query_fin.py review --outliers | --truncated-refs | --parse-rules
 Common flags: --limit N, --output FILE (write results), --json (JSON output).
+
+This is a ONE-SIDED statement/transaction screen. It exposes closed-ledger
+reconciliation within a single account and period (`statements`), never a
+transfer matched across independent sending and receiving books — the corpus has
+no second ledger and no payment identifier carried between stages. `coverage`
+reports the real denominators before any conservation claim is made.
 """
 
 import argparse
@@ -56,9 +65,18 @@ def _day_to_iso(db, day):
     return row["d"] or "—"
 
 
-# Default filters: exclude structural markers and collapsed duplicates.
-# t.* qualified so it composes with queries that also join the merchant table.
-_ACTIVE = ("t.is_duplicate_of IS NULL "
+# Default filters. t.* qualified so they compose with queries that also join the
+# merchant table.
+#
+# _NOT_DUPLICATE drops rows collapsed into a canonical copy — correct everywhere.
+# _ACTIVE additionally drops statement markers, which is what AGGREGATES want:
+# "Beginning Balance" and "Wire Transfer" rows would otherwise inflate spend and
+# double-count internal movement. It is wrong for a LOOKUP: a wire's merchant name
+# starts with "wire transfer", so 3,763 of the 6,481 rows carrying a
+# counterparty_raw are statement-marker-classed and would be invisible to anyone
+# searching for the counterparty by name.
+_NOT_DUPLICATE = "t.is_duplicate_of IS NULL"
+_ACTIVE = (f"{_NOT_DUPLICATE} "
            "AND (t.merchant_id IS NULL OR t.merchant_id NOT IN "
            "(SELECT merchant_id FROM merchant WHERE is_structural=1))")
 
@@ -139,7 +157,7 @@ def cmd_counterparty(db, args):
         FROM financial_transaction t
         LEFT JOIN source_system ss ON ss.source_system_id = t.source_system_id
         WHERE (t.counterparty_raw LIKE ? OR t.cardholder_raw LIKE ?)
-          AND {_ACTIVE} {amt_clause}
+          AND {_NOT_DUPLICATE} {amt_clause}
         ORDER BY ABS(t.amount_minor) DESC
         LIMIT ?
     """, ([EPOCH] + params)).fetchall()
@@ -284,10 +302,156 @@ def cmd_flights(db, args):
           args, title=title)
 
 
-def cmd_review(db, args):
-    if not args.outliers:
-        sys.exit("review: pass --outliers")
+def cmd_accounts(db, args):
+    """Accounts, with the key_basis that says how firmly each is identified."""
+    where, params = ["1=1"], []
+    if args.owner:
+        where.append("a.owner_raw LIKE ?")
+        params.append(f"%{args.owner}%")
+    if args.identified_only:
+        where.append("a.key_basis IN ('owner_digits','digits','source_account_number')")
+    params.append(args.limit)
     rows = db.execute(f"""
+        SELECT a.account_id, a.owner_raw, a.account_digits, a.institution_name,
+               a.account_type, a.key_basis, a.resolution_confidence,
+               (SELECT COUNT(*) FROM financial_transaction t
+                 WHERE t.account_id = a.account_id) AS txns,
+               (SELECT COUNT(*) FROM financial_statement s
+                 WHERE s.account_id = a.account_id) AS stmts
+        FROM financial_account a
+        WHERE {' AND '.join(where)}
+        ORDER BY txns DESC
+        LIMIT ?
+    """, params).fetchall()
+    out = [{"id": r["account_id"], "owner": r["owner_raw"] or "",
+            "digits": r["account_digits"] or "", "institution": r["institution_name"] or "",
+            "type": r["account_type"] or "", "key_basis": r["key_basis"] or "",
+            "conf": r["resolution_confidence"] if r["resolution_confidence"] is not None else "",
+            "txns": r["txns"], "stmts": r["stmts"]} for r in rows]
+    _emit(out, ["id", "owner", "digits", "institution", "type", "key_basis", "conf",
+                "txns", "stmts"], args, title="financial accounts")
+
+
+def cmd_statements(db, args):
+    """Statement periods and their closed-ledger reconciliation outcome."""
+    where, params = ["1=1"], []
+    if args.owner:
+        where.append("a.owner_raw LIKE ?")
+        params.append(f"%{args.owner}%")
+    if args.status:
+        where.append("s.recon_status = ?")
+        params.append(args.status)
+    if args.reconcilable:
+        where.append("s.recon_status IN ('ok','delta')")
+    params.append(args.limit)
+    rows = db.execute(f"""
+        SELECT s.statement_id, a.owner_raw, a.account_digits, s.canonical_ref,
+               date(?, '+' || s.statement_date_day || ' days') AS stmt_date,
+               s.beginning_balance_minor, s.charges_minor, s.payments_minor,
+               s.computed_ending_minor, s.ending_balance_minor, s.recon_delta_minor,
+               s.txn_count, s.recon_basis, s.recon_status
+        FROM financial_statement s
+        LEFT JOIN financial_account a ON a.account_id = s.account_id
+        WHERE {' AND '.join(where)}
+        ORDER BY ABS(COALESCE(s.recon_delta_minor, 0)) DESC, s.statement_date_day DESC
+        LIMIT ?
+    """, ([EPOCH] + params)).fetchall()
+    out = [{"id": r["statement_id"], "owner": r["owner_raw"] or "",
+            "digits": r["account_digits"] or "",
+            "date": r["stmt_date"] if r["stmt_date"] else "—",
+            "beginning": _dollars(r["beginning_balance_minor"]),
+            "charges": _dollars(r["charges_minor"]),
+            "payments": _dollars(r["payments_minor"]),
+            "computed": _dollars(r["computed_ending_minor"]),
+            "ending": _dollars(r["ending_balance_minor"]),
+            "residual": _dollars(r["recon_delta_minor"]),
+            "txns": r["txn_count"] if r["txn_count"] is not None else "",
+            "basis": r["recon_basis"] or "", "status": r["recon_status"] or "",
+            "ref": r["canonical_ref"] or ""} for r in rows]
+    _emit(out, ["id", "owner", "digits", "date", "beginning", "charges", "payments",
+                "computed", "ending", "residual", "txns", "basis", "status", "ref"],
+          args, title="statement reconciliation (ending = beginning + charges + payments)")
+
+
+def cmd_coverage(db, args):
+    """Honest denominators for the joins card-39-style tests depend on.
+
+    Reports each dimension separately AND their intersection, by row count and by
+    absolute amount, because a high amount-parse rate can otherwise disguise a
+    zero join rate.
+    """
+    def scalar(q, *p):
+        return db.execute(q, p).fetchone()[0] or 0
+
+    n = scalar("SELECT COUNT(*) FROM financial_transaction")
+    gross = scalar("SELECT SUM(ABS(amount_minor)) FROM financial_transaction")
+    dims = [
+        ("amount parseable", "amount_minor IS NOT NULL"),
+        ("ordering date usable", "txn_day_min IS NOT NULL"),
+        ("account_id set (any tier)", "account_id IS NOT NULL"),
+        ("account_id digit-anchored",
+         "account_id IN (SELECT account_id FROM financial_account "
+         "WHERE key_basis IN ('owner_digits','digits','source_account_number'))"),
+        ("statement_id set", "statement_id IS NOT NULL"),
+        ("statement is reconcilable",
+         "statement_id IN (SELECT statement_id FROM financial_statement "
+         "WHERE recon_status IN ('ok','delta'))"),
+        ("counterparty_raw set", "counterparty_raw IS NOT NULL"),
+        ("intermediary_bank_raw set", "intermediary_bank_raw IS NOT NULL"),
+        ("direction known", "direction IN ('debit','credit')"),
+    ]
+    out = []
+    for label, clause in dims:
+        rows = scalar(f"SELECT COUNT(*) FROM financial_transaction WHERE {clause}")
+        amt = scalar(f"SELECT SUM(ABS(amount_minor)) FROM financial_transaction WHERE {clause}")
+        out.append({"dimension": label, "rows": f"{rows:,}",
+                    "row_pct": f"{rows / n:.3%}" if n else "—",
+                    "amount": _dollars(amt),
+                    "amount_pct": f"{amt / gross:.3%}" if gross else "—"})
+    closed = ("amount_minor IS NOT NULL AND txn_day_min IS NOT NULL AND statement_id IN "
+              "(SELECT statement_id FROM financial_statement WHERE recon_status IN ('ok','delta'))")
+    rows = scalar(f"SELECT COUNT(*) FROM financial_transaction WHERE {closed}")
+    amt = scalar(f"SELECT SUM(ABS(amount_minor)) FROM financial_transaction WHERE {closed}")
+    out.append({"dimension": "INTERSECTION: closed-ledger testable",
+                "rows": f"{rows:,}", "row_pct": f"{rows / n:.3%}" if n else "—",
+                "amount": _dollars(amt), "amount_pct": f"{amt / gross:.3%}" if gross else "—"})
+    _emit(out, ["dimension", "rows", "row_pct", "amount", "amount_pct"], args,
+          title=f"financial_transaction coverage (n={n:,}, gross |amount| {_dollars(gross)})")
+
+
+def cmd_review(db, args):
+    if args.truncated_refs:
+        rows = db.execute("""
+            SELECT ss.name AS source, t.canonical_ref, COUNT(*) AS rows_,
+                   SUM(t.evidence_item_id IS NULL) AS unlinked
+            FROM financial_transaction t
+            LEFT JOIN source_system ss ON ss.source_system_id = t.source_system_id
+            WHERE t.canonical_ref LIKE 'EFTA%' AND LENGTH(t.canonical_ref) < 12
+            GROUP BY ss.name, t.canonical_ref
+            ORDER BY rows_ DESC
+            LIMIT ?
+        """, (args.limit,)).fetchall()
+        out = [{"source": r["source"], "ref": r["canonical_ref"], "rows": r["rows_"],
+                "no_evidence_item": r["unlinked"]} for r in rows]
+        _emit(out, ["source", "ref", "rows", "no_evidence_item"], args,
+              title="truncated canonical_ref — unsafe as a provenance or join key")
+        return
+    if args.parse_rules:
+        rows = db.execute("""
+            SELECT COALESCE(counterparty_parse_rule, '(none)') AS rule,
+                   COUNT(*) AS rows_, COUNT(counterparty_raw) AS with_cp,
+                   COUNT(intermediary_bank_raw) AS with_bank
+            FROM financial_transaction
+            GROUP BY rule ORDER BY rows_ DESC LIMIT ?
+        """, (args.limit,)).fetchall()
+        out = [{"parse_rule": r["rule"], "rows": r["rows_"], "counterparty": r["with_cp"],
+                "intermediary_bank": r["with_bank"]} for r in rows]
+        _emit(out, ["parse_rule", "rows", "counterparty", "intermediary_bank"], args,
+              title="counterparty extraction by rule (audit precision per family)")
+        return
+    if not args.outliers:
+        sys.exit("review: pass --outliers, --truncated-refs or --parse-rules")
+    rows = db.execute("""
         SELECT t.transaction_id AS id, ss.name AS source, t.source_native_id,
                date(?, '+' || t.txn_day_min || ' days') AS date,
                t.amount_minor, t.raw_amount,
@@ -349,8 +513,28 @@ def main():
     p.add_argument("--passenger")
     add_common(p)
 
+    p = sub.add_parser("accounts", help="accounts + how firmly each is identified")
+    p.add_argument("--owner")
+    p.add_argument("--identified-only", action="store_true",
+                   help="only digit-anchored accounts (exclude owner-only groupings)")
+    add_common(p)
+
+    p = sub.add_parser("statements", help="statement periods + closed-ledger reconciliation")
+    p.add_argument("--owner")
+    p.add_argument("--status", choices=["ok", "delta", "not_computable"])
+    p.add_argument("--reconcilable", action="store_true",
+                   help="only statements the residual could actually be computed for")
+    add_common(p)
+
+    p = sub.add_parser("coverage", help="join/parse coverage by row count AND amount")
+    add_common(p)
+
     p = sub.add_parser("review", help="review queues")
     p.add_argument("--outliers", action="store_true", help="show flagged outliers")
+    p.add_argument("--truncated-refs", action="store_true",
+                   help="rows whose canonical_ref is a short/unsafe EFTA id")
+    p.add_argument("--parse-rules", action="store_true",
+                   help="counterparty extraction volume per rule")
     add_common(p)
 
     args = ap.parse_args()
@@ -358,7 +542,8 @@ def main():
     dispatch = {
         "near-date": cmd_near_date, "counterparty": cmd_counterparty, "spend": cmd_spend,
         "flows": cmd_flows, "balances": cmd_balances, "positions": cmd_positions,
-        "flights": cmd_flights, "review": cmd_review,
+        "flights": cmd_flights, "review": cmd_review, "accounts": cmd_accounts,
+        "statements": cmd_statements, "coverage": cmd_coverage,
     }
     dispatch[args.cmd](db, args)
     db.close()

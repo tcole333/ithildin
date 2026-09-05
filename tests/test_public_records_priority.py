@@ -10,10 +10,76 @@ import yaml
 
 from tools.public_records_catalog import PublicRecordsCatalog
 from tools.public_records_census import PublicRecordsCensus
-from tools.public_records_priority import PublicRecordsPriority
+from tools.public_records_priority import (
+    PublicRecordsPriority,
+    catalog_audit_summary,
+)
 
 
 AS_OF = "2026-07-28T12:00:00Z"
+
+
+def test_catalog_audit_summary_surfaces_drift_without_blocking(
+    monkeypatch,
+    tmp_path,
+):
+    def fake_audit_catalog(*, db_path):
+        assert db_path == tmp_path / "catalog.db"
+        return {
+            "status": "drift",
+            "counts": {
+                "tracked_sources": 12,
+                "live_catalog_sources": 10,
+            },
+            "adapter_declared_sources_missing_live_catalog": [
+                "us-test-one",
+                "us-test-two",
+            ],
+            "outdated_live_manifests": ["us-test-three"],
+            "declared_reviews_missing_live_catalog": [],
+            "declared_associations_missing_live_census": [],
+            "outdated_live_census_associations": [],
+            "shared_adapter_operation_mismatches": [],
+        }
+
+    monkeypatch.setattr(
+        "tools.seed_public_records_catalog.audit_catalog",
+        fake_audit_catalog,
+    )
+
+    summary = catalog_audit_summary(tmp_path / "catalog.db")
+
+    assert summary == {
+        "status": "drift",
+        "tracked_sources": 12,
+        "live_catalog_sources": 10,
+        "issue_count": 3,
+        "issues": {
+            "adapter_declared_sources_missing_live_catalog": [
+                "us-test-one",
+                "us-test-two",
+            ],
+            "outdated_live_manifests": ["us-test-three"],
+        },
+    }
+
+
+def test_sheriff_sale_capabilities_do_not_establish_assessment_coverage():
+    source = {
+        "roles": ["sales", "sheriff_sale_auction_records"],
+        "capabilities": ["search_sales"],
+    }
+
+    assert (
+        PublicRecordsPriority._role_evidence(
+            source,
+            domain="property",
+            role="assessment_roll",
+            directly_linked=False,
+            coverage_kind="jurisdiction",
+        )
+        is None
+    )
 
 
 def _manifest(
@@ -218,12 +284,19 @@ def _target(
     state: str,
     domain: str,
     role: str,
+    jurisdiction_geoid: str | None = None,
 ) -> dict:
     rows = PublicRecordsCensus(catalog_db).list_targets(
         state=state,
         domain=domain,
         role=role,
     )
+    if jurisdiction_geoid is not None:
+        rows = [
+            row
+            for row in rows
+            if row["geoid"] == jurisdiction_geoid
+        ]
     assert len(rows) == 1
     return rows[0]
 
@@ -233,7 +306,8 @@ def test_recompute_uses_separate_explainable_dimensions(tmp_path):
 
     result = priority.recompute(actor="test-agent", as_of=AS_OF)
 
-    assert result["targets_evaluated"] == 448
+    expected_targets = PublicRecordsCensus(catalog_db).stats()["total_targets"]
+    assert result["targets_evaluated"] == expected_targets
     assert result["dry_run"] is False
     assert result["demand_inputs"] == {
         "known_addresses": 2,
@@ -284,6 +358,14 @@ def test_recompute_uses_separate_explainable_dimensions(tmp_path):
     assert ca_property["benefit_score"] == 0
     assert ca_property["feasibility_score"] < nc_property["feasibility_score"]
     assert ca_property["risk_score"] > nc_property["risk_score"]
+    ca_scope = ca_property["priority_basis"]["dimensions"]["feasibility"][
+        "components"
+    ]["jurisdiction_coverage"]
+    assert ca_scope == {
+        "score": 5.0,
+        "kind": "subjurisdiction",
+        "covers_complete_target_scope": False,
+    }
 
     serialized = json.dumps(nc_property["priority_basis"])
     assert "priority_score" not in serialized
@@ -346,13 +428,14 @@ def test_recompute_emits_audit_events_and_dry_run_does_not_write(tmp_path):
 
 
 def test_metrics_report_dimensions_and_pareto_frontier(tmp_path):
-    priority, _ = _priority_fixture(tmp_path)
+    priority, catalog_db = _priority_fixture(tmp_path)
     priority.recompute(actor="test-agent", as_of=AS_OF)
 
     metrics = priority.metrics()
+    expected_targets = PublicRecordsCensus(catalog_db).stats()["total_targets"]
 
-    assert metrics["targets"] == 448
-    assert metrics["targets_with_recomputed_basis"] == 448
+    assert metrics["targets"] == expected_targets
+    assert metrics["targets_with_recomputed_basis"] == expected_targets
     assert metrics["targets_with_catalog_capability_path"] == 2
     assert metrics["catalog_state"]["sources"] == 2
     assert metrics["catalog_state"]["sources_with_access_review"] == 1
@@ -371,12 +454,66 @@ def test_metrics_report_dimensions_and_pareto_frontier(tmp_path):
         {"name": "risk", "direction": "lower"},
     ]
     assert metrics["comparison_model"]["pareto_frontier"]
+    provenance = metrics["priority_provenance"]
+    assert provenance["status"] == "current"
+    assert provenance["active_profile"] == "test-profile"
+    assert provenance["targets_matching_active_profile"] == expected_targets
+    assert provenance["targets_matching_current_inputs"] == expected_targets
+    assert provenance["targets_with_other_profile"] == 0
     serialized = json.dumps(metrics)
     assert "priority_score" not in serialized
     assert "combined_score" not in serialized
 
 
-def test_nationwide_capability_does_not_imply_every_state_role(tmp_path):
+def test_metrics_exposes_active_profile_and_input_drift(tmp_path):
+    priority, catalog_db = _priority_fixture(tmp_path)
+    priority.recompute(actor="test-agent", as_of=AS_OF)
+    expected_targets = PublicRecordsCensus(catalog_db).stats()["total_targets"]
+
+    profile_path = (
+        priority.investigations_dir / "test-profile" / "config.yaml"
+    )
+    profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
+    profile["known_addresses"]["456 New Street, Charlotte, NC"] = (
+        "New demand"
+    )
+    profile_path.write_text(yaml.safe_dump(profile), encoding="utf-8")
+
+    changed_inputs = priority.metrics()["priority_provenance"]
+    assert changed_inputs["status"] == "inputs_changed"
+    assert changed_inputs["targets_matching_active_profile"] == expected_targets
+    assert changed_inputs["targets_matching_current_inputs"] == 0
+
+    other_profile = priority.investigations_dir / "other-profile"
+    other_profile.mkdir()
+    (other_profile / "config.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "name": "other-profile",
+                "primary_subject": "Other Subject",
+                "known_addresses": {},
+            }
+        ),
+        encoding="utf-8",
+    )
+    db = sqlite3.connect(priority.investigation_db)
+    db.execute(
+        """
+        UPDATE investigation_config SET value='other-profile'
+        WHERE key='active_profile'
+        """
+    )
+    db.commit()
+    db.close()
+
+    wrong_profile = priority.metrics()["priority_provenance"]
+    assert wrong_profile["status"] == "profile_mismatch"
+    assert wrong_profile["active_profile"] == "other-profile"
+    assert wrong_profile["targets_matching_active_profile"] == 0
+    assert wrong_profile["targets_with_other_profile"] == expected_targets
+
+
+def test_nationwide_source_needs_explicit_state_coverage_role(tmp_path):
     priority, catalog_db = _priority_fixture(tmp_path)
     catalog = PublicRecordsCatalog(catalog_db)
     catalog.register_manifest(
@@ -403,6 +540,30 @@ def test_nationwide_capability_does_not_imply_every_state_role(tmp_path):
         },
         submitted_by="test",
     )
+    catalog.register_manifest(
+        {
+            "source_id": "us-national-state-opinion-aggregator",
+            "name": "National State Opinion Aggregator",
+            "domain": "court",
+            "roles": ["legal_aggregator", "opinion_archive"],
+            "authority": "Source courts",
+            "operator": "Test Authority",
+            "jurisdiction_geoids": ["US"],
+            "official_url": "https://example.gov/state-opinions",
+            "platform_family": "documented_api",
+            "access_class": "B",
+            "automation_disposition": "unclear",
+            "authentication": "none",
+            "fees": "none",
+            "stable_keys": ["native_id"],
+            "adapter_family": "test_adapter",
+            "adapter_version": 1,
+            "last_verified_at": "2026-07-27T12:00:00Z",
+            "source_status": "active",
+            "capabilities": ["search_cases", "search_opinions"],
+        },
+        submitted_by="test",
+    )
 
     priority.recompute(actor="test-agent", as_of=AS_OF)
 
@@ -426,13 +587,212 @@ def test_nationwide_capability_does_not_imply_every_state_role(tmp_path):
     )
     assert appellate["priority_basis"]["dimensions"]["feasibility"][
         "selected_source_id"
-    ] == "us-national-opinion-archive"
+    ] == "us-national-state-opinion-aggregator"
+    assert {
+        item["source_id"]
+        for item in appellate["priority_basis"]["dimensions"]["feasibility"][
+            "candidate_sources"
+        ]
+    } == {"us-national-state-opinion-aggregator"}
     assert trial["priority_basis"]["dimensions"]["feasibility"][
         "selected_source_id"
     ] is None
     assert bulk["priority_basis"]["dimensions"]["feasibility"][
         "selected_source_id"
     ] is None
+
+
+def test_parcel_identifier_search_does_not_establish_geometry_coverage(
+    tmp_path,
+):
+    priority, catalog_db = _priority_fixture(tmp_path)
+    catalog = PublicRecordsCatalog(catalog_db)
+    manifest = _manifest(
+        source_id="us-ny-test-recorder",
+        geoid="36061",
+    )
+    manifest["roles"] = ["recorder", "instrument_index"]
+    manifest["capabilities"] = [
+        "search_parties",
+        "search_parcels",
+        "fetch_instrument",
+    ]
+    catalog.register_manifest(manifest, submitted_by="test")
+
+    priority.recompute(actor="test-agent", as_of=AS_OF)
+
+    geometry = _target(
+        catalog_db,
+        state="NY",
+        domain="property",
+        role="parcel_geometry",
+        jurisdiction_geoid="36061",
+    )
+    land_records = _target(
+        catalog_db,
+        state="NY",
+        domain="property",
+        role="land_records_index",
+    )
+    geometry_candidates = geometry["priority_basis"]["dimensions"][
+        "feasibility"
+    ]["candidate_sources"]
+    land_candidates = land_records["priority_basis"]["dimensions"][
+        "feasibility"
+    ]["candidate_sources"]
+
+    assert "us-ny-test-recorder" not in {
+        candidate["source_id"] for candidate in geometry_candidates
+    }
+    assert "us-ny-test-recorder" in {
+        candidate["source_id"] for candidate in land_candidates
+    }
+
+
+def test_case_search_source_does_not_satisfy_bulk_data_target(tmp_path):
+    priority, catalog_db = _priority_fixture(tmp_path)
+    catalog = PublicRecordsCatalog(catalog_db)
+    base = {
+        "domain": "court",
+        "authority": "Test State Courts",
+        "operator": "Test State Courts",
+        "jurisdiction_geoids": ["37"],
+        "access_class": "B",
+        "automation_disposition": "unclear",
+        "authentication": "none",
+        "fees": "none",
+        "stable_keys": ["case_number"],
+        "adapter_family": "test_adapter",
+        "adapter_version": 1,
+        "last_verified_at": "2026-07-27T12:00:00Z",
+        "source_status": "active",
+    }
+    catalog.register_manifest(
+        {
+            **base,
+            "source_id": "us-nc-test-case-search",
+            "name": "North Carolina Test Case Search",
+            "roles": ["court_administration", "case_metadata"],
+            "official_url": "https://example.gov/nc-case-search",
+            "platform_family": "browser_portal",
+            "capabilities": ["search_cases", "fetch_case"],
+        },
+        submitted_by="test",
+    )
+    catalog.register_manifest(
+        {
+            **base,
+            "source_id": "us-nc-test-directory",
+            "name": "North Carolina Test Court Directory",
+            "roles": ["court_administration"],
+            "official_url": "https://example.gov/nc-court-directory",
+            "platform_family": "public_directory",
+            "capabilities": ["list_courts"],
+        },
+        submitted_by="test",
+    )
+    catalog.register_manifest(
+        {
+            **base,
+            "source_id": "us-nc-test-bulk",
+            "name": "North Carolina Test Bulk Feed",
+            "roles": ["court_administration", "bulk_case_metadata"],
+            "official_url": "https://example.gov/nc-bulk",
+            "platform_family": "licensed_bulk",
+            "capabilities": ["sync", "apply_deletions"],
+        },
+        submitted_by="test",
+    )
+    catalog.register_manifest(
+        {
+            **base,
+            "source_id": "us-nc-test-specialized-case-list",
+            "name": "North Carolina Specialized Case List",
+            "roles": [
+                "litigant_index",
+                "case_discovery",
+                "public_spreadsheet",
+            ],
+            "official_url": "https://example.gov/nc-specialized-list",
+            "platform_family": "public_html_and_xlsx",
+            "capabilities": [
+                "search_cases",
+                "fetch_document",
+                "sync",
+            ],
+        },
+        submitted_by="test",
+    )
+    catalog.register_manifest(
+        {
+            **base,
+            "source_id": "us-nc-test-appellate-releases",
+            "name": "North Carolina Appellate Releases",
+            "roles": ["appellate_release_index", "opinions", "orders"],
+            "official_url": "https://example.gov/nc-appellate-releases",
+            "platform_family": "public_release_index",
+            "capabilities": ["search_opinions", "fetch_document"],
+        },
+        submitted_by="test",
+    )
+
+    priority.recompute(actor="test-agent", as_of=AS_OF)
+
+    bulk = _target(
+        catalog_db,
+        state="NC",
+        domain="court",
+        role="bulk_data_program",
+    )
+    directory = _target(
+        catalog_db,
+        state="NC",
+        domain="court",
+        role="court_directory",
+    )
+    trial = _target(
+        catalog_db,
+        state="NC",
+        domain="court",
+        role="trial_case_index",
+    )
+    appellate = _target(
+        catalog_db,
+        state="NC",
+        domain="court",
+        role="appellate_opinions",
+    )
+    feasibility = bulk["priority_basis"]["dimensions"]["feasibility"]
+    assert feasibility["selected_source_id"] == "us-nc-test-bulk"
+    assert {
+        item["source_id"] for item in feasibility["candidate_sources"]
+    } == {"us-nc-test-bulk"}
+    directory_feasibility = directory["priority_basis"]["dimensions"][
+        "feasibility"
+    ]
+    assert directory_feasibility["selected_source_id"] == (
+        "us-nc-test-directory"
+    )
+    directory_role_evidence = directory_feasibility["components"][
+        "role_capability_evidence"
+    ]
+    assert directory_role_evidence["alias_roles"] == []
+    assert directory_role_evidence["capabilities"] == ["list_courts"]
+    assert directory_role_evidence[
+        "capability_establishes_coverage"
+    ] is True
+    assert {
+        item["source_id"]
+        for item in trial["priority_basis"]["dimensions"]["feasibility"][
+            "candidate_sources"
+        ]
+    } == {"us-nc-test-case-search"}
+    assert {
+        item["source_id"]
+        for item in appellate["priority_basis"]["dimensions"]["feasibility"][
+            "candidate_sources"
+        ]
+    } == {"us-nc-test-appellate-releases"}
 
 
 def test_all_census_source_associations_feed_priority_selection(tmp_path):
@@ -517,3 +877,95 @@ def test_direct_cli_import_path_supports_repository_tool_pattern():
     )
     assert result.returncode == 0, result.stderr
     assert "benefit, feasibility, and risk" in result.stdout
+
+
+def test_recompute_help_documents_as_of_timezone_requirement():
+    project_root = Path(__file__).resolve().parent.parent
+    result = subprocess.run(
+        [
+            sys.executable,
+            "tools/public_records_priority.py",
+            "recompute",
+            "--help",
+        ],
+        cwd=project_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "ISO 8601 timestamp with timezone" in result.stdout
+
+
+def test_state_abbreviations_require_address_or_location_context():
+    db = sqlite3.connect(":memory:")
+    db.row_factory = sqlite3.Row
+    try:
+        rows = db.execute(
+            """
+            SELECT 'OR' AS subdivision_code, 'Oregon' AS jurisdiction_name
+            UNION ALL
+            SELECT 'IN', 'Indiana'
+            UNION ALL
+            SELECT 'CO', 'Colorado'
+            """
+        ).fetchall()
+    finally:
+        db.close()
+    patterns = PublicRecordsPriority._jurisdiction_patterns(rows)
+
+    assert PublicRecordsPriority._mentioned_states(
+        "Need OR integration and an IN clause",
+        patterns,
+    ) == frozenset()
+    assert PublicRecordsPriority._mentioned_states(
+        "Request records from the agency, or use the public portal",
+        patterns,
+    ) == frozenset()
+    assert PublicRecordsPriority._mentioned_states(
+        "Search permits, in addition to court records",
+        patterns,
+    ) == frozenset()
+    assert PublicRecordsPriority._mentioned_states(
+        "Palantir HQ, Denver CO",
+        patterns,
+    ) == frozenset({"CO"})
+    assert PublicRecordsPriority._mentioned_states(
+        "123 Main Street, Portland, OR 97201",
+        patterns,
+    ) == frozenset({"OR"})
+
+
+def test_appellate_and_probate_only_sources_do_not_imply_general_trial_index():
+    appellate = {
+        "roles": [
+            "appellate_case_metadata",
+            "party_index",
+            "docket_entries",
+            "document_portal",
+        ],
+        "capabilities": ["search_cases", "list_docket_entries"],
+    }
+    probate = {
+        "roles": [
+            "superior_court_probate",
+            "trial_case_metadata",
+            "docket_entries",
+        ],
+        "capabilities": ["search_cases", "list_docket_entries"],
+    }
+
+    assert PublicRecordsPriority._role_evidence(
+        appellate,
+        domain="court",
+        role="trial_case_index",
+        directly_linked=False,
+        coverage_kind="jurisdiction",
+    ) is None
+    assert PublicRecordsPriority._role_evidence(
+        probate,
+        domain="court",
+        role="trial_case_index",
+        directly_linked=False,
+        coverage_kind="subjurisdiction",
+    ) is None

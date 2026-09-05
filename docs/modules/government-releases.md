@@ -65,9 +65,39 @@ uv run python tools/government_release_corpus.py stats \
   --output "$WORKDIR/government-release-stats.json"
 ```
 
+This corpus holds **press releases only** — for SEC it is the newsroom index
+(2012–present) plus the static press archive (1997–2011), all under
+`SEC-PR:`. It contains no litigation releases, administrative proceedings, or
+AAERs; those are the separate action corpus in `datasets/sec_enforcement.db`
+(`tools/query_sec_enforcement.py`, see `docs/modules/financial.md`). A press
+release is a selective communications series, not the complete action series, so
+it cannot stand in as an SEC enforcement-output denominator.
+
 Canonical internal references are `DOJ-PR:<uuid>` and
 `SEC-PR:<release-number>`. Search/show output always includes the citable official
-URL. When attaching a release to a reporting claim, prefer `reporting_corpus.py
+URL.
+
+## Key integrity
+
+`SEC-PR:<release-number>` derives the citable key from the agency's own
+release-number field, which the SEC occasionally publishes wrong — in either
+direction:
+
+```bash
+uv run python tools/government_release_corpus.py audit-keys \
+  --output "$WORKDIR/sec-key-audit.json"
+```
+
+Two known rows (of 6,802) disagree with their canonical URL slug:
+
+| Record | Stored number | URL slug | `published_at` | Sound key |
+|---|---|---|---|---|
+| `SEC-PR:2022-123` | `2022-123` | `2023-123` | 2023-06-29 | slug — the release-number field is an upstream typo, corroborated against `og:url` and the linked `comp-pr2023-123.pdf` |
+| `SEC-PR:2013-218` | `2013-218` | `2103-218` | 2013-10-09 | release number — the SEC's own URL slug is transposed |
+
+`published_at` is correct in both cases and is the arbiter: cite whichever side
+agrees with the published year. Both agency strings are preserved verbatim rather
+than silently rewritten, so the disagreement stays auditable. When attaching a release to a reporting claim, prefer `reporting_corpus.py
 link-release`; it stores the official URL as finding evidence and the internal ID
 as the independence group.
 

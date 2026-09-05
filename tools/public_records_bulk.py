@@ -610,12 +610,12 @@ class BulkTransferClient:
                 },
             )
 
-        if destination_path.is_file():
+        if destination_path.is_file() and expected_sha256 is not None:
             existing_size = destination_path.stat().st_size
             existing_sha256 = file_sha256(destination_path)
             if (
                 (expected_size is None or existing_size == expected_size)
-                and (expected_sha256 is None or existing_sha256 == expected_sha256)
+                and existing_sha256 == expected_sha256
             ):
                 return DownloadResult(
                     path=str(destination_path),
@@ -804,11 +804,26 @@ class BulkTransferClient:
 def _resume_state_matches(previous: Mapping[str, Any], current: Mapping[str, Any]) -> bool:
     if previous.get("url") != current.get("url"):
         return False
-    for key in ("etag", "last_modified", "expected_size", "expected_sha256"):
-        old_value = previous.get(key)
-        new_value = current.get(key)
-        if old_value is not None and new_value is not None and old_value != new_value:
+
+    # A URL and byte count alone do not identify a publication revision.
+    # Resume only when the current probe supplies an identity-bearing validator
+    # or digest that was captured with the partial bytes.
+    identity_keys = ("etag", "last_modified", "expected_sha256")
+    current_identity = {
+        key: current.get(key)
+        for key in identity_keys
+        if current.get(key) is not None
+    }
+    if not current_identity:
+        return False
+    for key, new_value in current_identity.items():
+        if previous.get(key) != new_value:
             return False
+
+    old_size = previous.get("expected_size")
+    new_size = current.get("expected_size")
+    if old_size is not None and new_size is not None and old_size != new_size:
+        return False
     return True
 
 

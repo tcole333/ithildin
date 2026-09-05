@@ -242,7 +242,12 @@ def batch_entities(company_numbers, output_file=None):
             results[number] = {"error": str(e)}
 
     if output_file:
-        write_output(results, output_file)
+        output_args = argparse.Namespace(output=output_file, json_out=False)
+        write_output(
+            results,
+            output_args,
+            summary=f"Delaware entity batch: {len(results)} results",
+        )
 
     return results
 
@@ -284,8 +289,6 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    output_file = getattr(args, 'output', None)
-
     if args.command == "search":
         results = search_companies(
             args.query,
@@ -293,8 +296,12 @@ def main():
             per_page=args.per_page,
             page=args.page
         )
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware company search '{args.query}'",
+            result_count=results["total_count"],
+        ):
             print(f"\nFound {results['total_count']} companies")
             for company in results['companies']:
                 print(f"\n{company['name']} ({company['company_number']})")
@@ -305,8 +312,11 @@ def main():
 
     elif args.command == "entity":
         results = get_company(args.company_number)
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware entity {args.company_number}",
+        ):
             print(f"\n{results['name']}")
             print(f"Number: {results['company_number']}")
             print(f"Type: {results['company_type']}")
@@ -322,8 +332,12 @@ def main():
             per_page=args.per_page,
             page=args.page
         )
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware filings {args.company_number}",
+            result_count=results["total_count"],
+        ):
             print(f"\nFound {results['total_count']} filings")
             for filing in results['filings']:
                 print(f"\n{filing['date']}: {filing['title']}")
@@ -331,8 +345,13 @@ def main():
                     print(f"  Type: {filing['filing_type']}")
 
     elif args.command == "batch-entities":
-        results = batch_entities(args.company_numbers, output_file)
-        if not output_file:
+        results = batch_entities(args.company_numbers)
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware entity batch: {len(results)} results",
+            result_count=len(results),
+        ):
             print(f"\nFetched {len(results)} entities")
 
 

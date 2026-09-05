@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-07-31",
+  "item": {
+    "id": "9ab04f655f5b4e398d9f2f070d2d29bb",
+    "owner": "dave.chapman@wyo.gov",
+    "title": "Wyoming Parcels for 2026",
+    "type": "Feature Service",
+    "access": "public",
+    "size": 632504320
+  },
+  "layer": {
+    "id": 0,
+    "name": "Wyoming_Parcels_for_2026",
+    "type": "Feature Layer",
+    "serviceItemId": "9ab04f655f5b4e398d9f2f070d2d29bb",
+    "objectIdField": "FID",
+    "geometryType": "esriGeometryPolygon",
+    "capabilities": "Query",
+    "maxRecordCount": 2000,
+    "editingInfo": {
+      "schemaLastEditDate": 1781120127469,
+      "dataLastEditDate": 1781120127469
+    },
+    "advancedQueryCapabilities": {
+      "supportsPagination": true,
+      "supportsOrderBy": true,
+      "supportsStatistics": true,
+      "supportsDistinct": true,
+      "supportsReturningQueryExtent": true
+    },
+    "fields": [
+      {"name": "FID", "type": "esriFieldTypeOID", "nullable": false},
+      {"name": "ID", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "taxyear", "type": "esriFieldTypeString", "length": 19, "nullable": true},
+      {"name": "parcelnb", "type": "esriFieldTypeString", "length": 21, "nullable": true},
+      {"name": "accountno", "type": "esriFieldTypeString", "length": 30, "nullable": true},
+      {"name": "jurisdicti", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+      {"name": "ownername1", "type": "esriFieldTypeString", "length": 60, "nullable": true},
+      {"name": "ownername2", "type": "esriFieldTypeString", "length": 60, "nullable": true},
+      {"name": "mailaddres", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+      {"name": "mailcity", "type": "esriFieldTypeString", "length": 50, "nullable": true},
+      {"name": "mailstate", "type": "esriFieldTypeString", "length": 2, "nullable": true},
+      {"name": "mailzipcod", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+      {"name": "locationad", "type": "esriFieldTypeString", "length": 100, "nullable": true},
+      {"name": "legal", "type": "esriFieldTypeString", "length": 254, "nullable": true},
+      {"name": "actualvalu", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "assessedva", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "landgrossa", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "landgrosss", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "DEFAULTTAX", "type": "esriFieldTypeString", "length": 10, "nullable": true},
+      {"name": "Shape__Area", "type": "esriFieldTypeDouble", "nullable": true},
+      {"name": "Shape__Length", "type": "esriFieldTypeDouble", "nullable": true}
+    ]
+  }
+}

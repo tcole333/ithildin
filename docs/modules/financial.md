@@ -110,6 +110,7 @@ Query the local enforcement database for litigation releases, admin proceedings,
 ```bash
 uv run python tools/query_sec_enforcement.py search "insider trading"
 uv run python tools/query_sec_enforcement.py search "Epstein" --source litigation
+uv run python tools/query_sec_enforcement.py search "10b-5" --with-body    # conduct-searchable rows only
 uv run python tools/query_sec_enforcement.py defendant "Leon Black" --fuzzy --threshold 80
 uv run python tools/query_sec_enforcement.py action LR-26503
 uv run python tools/query_sec_enforcement.py co-defendants LR-26489
@@ -124,20 +125,101 @@ does not perform fuzzy matching. Use `defendant --fuzzy --threshold N` for a
 bounded approximate lookup. This keeps cross-reference auto-leads restricted to
 exact normalized matches.
 
-**Prerequisite:** Run `uv run python tools/ingest_sec_enforcement.py ingest` first to build the database.
+`enforcement_defendants` holds every party named in SEC's respondent field, so
+each row carries a `role`: `defendant`, or `presiding_alj` for the administrative
+law judge that field sometimes appends (`"...Anne P. Hovis James T. Kelly,
+Administrative Law Judge"`). A judge is not a party to the action they heard —
+every defendant-semantics query filters on `role = 'defendant'`, and `action`
+reports the judge separately. Any new query over this table must filter too, or
+it will report judges as enforcement targets. After changing the parser, rebuild
+with `ingest_sec_enforcement.py reparse`; that discards `enforcement_matches`
+(they reference defendant row ids), so re-run `cross-ref` afterwards.
+
+`search` spans respondent text, release numbers, **and** release bodies. Every
+result carries `body_chars` and a `body_snippet` so a statutory-conduct query is
+never mistaken for a hit on metadata: rows whose text has not been fetched report
+`body_chars = 0`, and the human-readable output warns when any result is
+metadata-only. `--with-body` restricts results to conduct-searchable rows.
+
+**Prerequisite:** Run `uv run python tools/ingest_sec_enforcement.py ingest` to
+build the database, then `fetch-bodies` to populate release text. Statutory or
+conduct-level queries are meaningless without the second step.
 
 ## ingest_sec_enforcement.py — SEC Enforcement Ingest
 
-Scrapes SEC enforcement index pages and parses defendant names into `datasets/sec_enforcement.db`.
+Scrapes SEC enforcement index pages and parses defendant names into
+`datasets/sec_enforcement.db`, then fetches the full text of each release.
 
 ```bash
 uv run python tools/ingest_sec_enforcement.py ingest                     # All sources, all pages
 uv run python tools/ingest_sec_enforcement.py ingest --source litigation  # One source type
 uv run python tools/ingest_sec_enforcement.py ingest --pages 3            # First 3 pages only
 uv run python tools/ingest_sec_enforcement.py ingest --incremental        # Stop at existing entries
-uv run python tools/ingest_sec_enforcement.py stats                       # Summary counts
+uv run python tools/ingest_sec_enforcement.py fetch-bodies                # Backfill missing release text
+uv run python tools/ingest_sec_enforcement.py fetch-bodies --start 2021-01-01 --end 2025-12-31
+uv run python tools/ingest_sec_enforcement.py fetch-bodies --retry-failed # Re-attempt failed/empty rows
+uv run python tools/ingest_sec_enforcement.py stats                       # Summary counts + body coverage
 uv run python tools/ingest_sec_enforcement.py reparse                     # Re-run defendant parsing
 ```
+
+**`ingest` does not fetch bodies.** It records only what the index pages expose
+(respondent, release number, date, file number, URL). Release text comes from the
+separate, resumable `fetch-bodies` pass, which reads the `release_url` already
+stored on each row. Until it runs, `body_text` is NULL and FTS search is
+effectively respondent/release-number only — a `10b-5` or `Section 10(b)` query
+returns zero regardless of how many matching actions exist. `stats` reports body
+coverage so an empty text layer cannot go unnoticed.
+
+Bodies arrive in four verified shapes, all handled by `fetch-bodies`:
+
+| Shape | Handling |
+|---|---|
+| `/files/litigation/admin/<year>/<release>.pdf` | PDF text extraction (PyMuPDF if installed, else Poppler `pdftotext`) |
+| `/enforcement-litigation/litigation-releases/lr-N` | Drupal `field--name-body` container |
+| Legacy `.txt` | stored verbatim |
+| Legacy `.htm` | full-page extraction, whole-line site nav removed |
+
+Two modern-site templates need a derived fallback, and they need **different**
+ones:
+
+- `/administrative-proceedings/` and `/opinions-adjudicatory-orders/` pages are
+  **stubs** carrying only the respondent name; the ordered text exists solely in
+  the order PDF under `/files/litigation/admin/<year>/`.
+- some `/litigation-releases/` pages publish a **header-only body** (release
+  number and date, no narrative); the legacy static release still has the full
+  text under `/files/litigation/litreleases/<year>/`.
+
+Both are keyed on the page's own URL slug — not the row's release number,
+because composite releases (e.g. `AAER-4403` and `34-97381`) share one page and
+only the slug resolves. The admin PDF convention is never applied to a
+litigation release, and vice versa: the cross-applied path cannot exist. Because
+a *present but tiny* body container is as unusable as a missing one, the fallback
+ladder is driven by extracted length, not by whether a container was found.
+`body_source_url` records which location actually supplied the text.
+
+Rows that share a `release_url` are one document announced under several release
+numbers; each document is fetched once and written to every row citing it.
+
+Per-row provenance is recorded in `body_fetch_status` (`complete` / `empty` /
+`failed` / `pending`), `body_fetch_error`, `body_source_url`,
+`body_extraction_method`, and `body_fetched_at`. `failed` is a transport error,
+worth an immediate `--retry-failed`. `empty` means the official source was reached
+and no fallback in the ladder yielded text — an unchanged retry will not help, but
+extending the ladder can: every `empty` row from the first full backfill was
+cleared once the era-specific paths above were added. Treat a cluster of `empty`
+rows as a hint that a path convention is missing, not as proof the text is gone.
+Chrome-only text is never stored as a body.
+
+Corpus state after the 2026-07-29 backfill: **37,793 of 37,793 rows carry release
+text** — 20,087 from PDF orders, 15,089 from Drupal HTML, 2,596 legacy plain text,
+15 full-page HTML, 6 via legacy text markers. 32 rows were recovered from a derived
+fallback rather than the stored `release_url`.
+
+**Evidence discipline:** release text is stored verbatim and never reworded or
+normalized. Allegation, charge, settlement, and conviction language
+(*alleged*, *charged*, *consented*, *without admitting or denying*, *convicted*)
+must survive intact — an SEC release proves what the Commission alleged, ordered,
+or settled, not that the described conduct occurred.
 
 ## query_990.py — IRS 990 Nonprofits
 

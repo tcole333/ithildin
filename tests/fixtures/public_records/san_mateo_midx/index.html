@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head><title>San Mateo MIDX</title></head>
+  <body>
+    <p>
+      The information provided is current as of
+      <strong>July 28, 2026 at 05:30 AM</strong>
+    </p>
+
+    <form action="lookup.php" method="post" name="midxsearch1" id="midxsearch1">
+      <input type="text" name="casenumber" value="">
+      <input type="hidden" name="5m2op" value="ASC">
+      <input type="hidden" name="searchtype" value="casenumber">
+      <input type="hidden" name="ct" value="case-token">
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+
+    <form action="lookup.php" method="post" name="midxsearch2" id="midxsearch2">
+      <input type="text" name="firstname" value="">
+      <input type="text" name="lastname" value="">
+      <input type="hidden" name="5m2op" value="ASC">
+      <input type="hidden" name="searchtype" value="partyname">
+      <input type="hidden" name="ct" value="person-token">
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+
+    <form action="lookup.php" method="post" name="midxsearch3" id="midxsearch3">
+      <input type="text" name="businessname" value="">
+      <input type="hidden" name="5m2op" value="ASC">
+      <input type="hidden" name="searchtype" value="businessname">
+      <input type="hidden" name="ct" value="business-token">
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+
+    <form action="lookup.php" method="post" name="midxsearch4" id="midxsearch4">
+      <input type="text" name="df" value="">
+      <input type="text" name="dt" value="">
+      <input type="hidden" name="5m2op" value="ASC">
+      <input type="hidden" name="searchtype" value="filedate">
+      <input type="hidden" name="ct" value="date-token">
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+  </body>
+</html>

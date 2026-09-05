@@ -18,6 +18,7 @@ Tools for corporate entity search, officer lookup, and ownership tracing across 
 | `query_michigan.py` | MI | LARA portal API (Cloudflare WAF) | Node.js browser helper | Entities, officers via browser bypass |
 | `query_newjersey.py` | NJ | HTML form scraping | None | Name/ID search only (no officers in free portal) |
 | `query_massachusetts.py` | MA | ASP.NET WebForms (Imperva WAF) | Node.js browser helper | Entity, officers, agent, name changes |
+| `query_massachusetts_ucc.py` | MA (UCC) | Public WebForms search | None; Node Playwright + installed Chrome | Organization/individual search, filing-number lookup; separate lapsed archive |
 | `query_nevada.py` | NV | SilverFlume portal (Incapsula WAF) | Playwright/Chrome browser helper | Officers, agents, filing history, name history |
 | `query_wyoming.py` | WY | WyoBiz ASP.NET (F5 WAF + CAPTCHA) | Node.js browser helper | Key crypto-LLC state; parties, agents, filings |
 | `query_tennessee_corps.py` | TN | TNCaB portal (Cloudflare Turnstile) | Node.js browser helper | Officers, agents, filings, standing |
@@ -236,10 +237,124 @@ the Playwright browser with `npx playwright install chromium`.
 2. Check collateral descriptions: `ucc-collateral "aircraft"` or `"all assets"`
 3. For Florida: note that `ingest_ucc_florida.py` covers federal liens (IRS), NOT commercial UCC
 4. For New Mexico: `ingest_ucc_newmexico.py` covers both debtor and secured party search
+5. For Massachusetts: use `query_massachusetts_ucc.py` for live public UCC records; follow the search controls below.
+
+### Massachusetts UCC: `query_massachusetts_ucc.py`
+
+**Bulk-access status, reviewed September 4, 2026:** the Secretary's
+[Terms of Use](https://www.sec.state.ma.us/divisions/terms.htm) permit individual
+business-record searches but prohibit scraping/crawling by automated or manual
+means. The Boston full-roster portal run is paused pending a supported
+bulk route. [950 CMR 140.11](https://www.sec.state.ma.us/divisions/corporations/pdf-html/950_CMR_140.htm)
+publishes an index extract and image service, with data layout available on
+request. Ask `corpinfo@sec.state.ma.us` for baseline/history coverage, current
+price, minimum order and applicable terms before ordering. The published
+weekly price does not establish that one week includes a historical baseline.
+
+Corporate bulk records are a separate published program under
+[950 CMR 113.15](https://www.sec.state.ma.us/divisions/corporations/download/950113.pdf#page=7).
+Confirm its entity-type coverage and historical role fields separately; do not
+assume a UCC order includes corporate data. Officers, directors, managers and
+agents are reported roles, not a complete equity-ownership table. The Boston
+[access review](../../reports/boston-liquor-license-collateral-2026-09-03/full-review/corporate-records-access-options.md)
+and [combined unsent inquiry](../../reports/boston-liquor-license-collateral-2026-09-03/full-review/massachusetts-bulk-data-inquiry-draft.md)
+preserve the verified routes and unresolved product questions.
+
+The [Secretary of the Commonwealth's public UCC search](https://corp.sec.state.ma.us/corpweb/UCCSearch/UCCSearch.aspx)
+supports organization and individual names, filing numbers, and a separate
+lapsed-record archive. The default database is the current database, which can
+retain filings for one year after lapse; preserve reported status and dates
+without treating current-database membership as active lien status.
+It uses Node Playwright with installed Chrome in a temporary, visible browser
+session and needs no account. `runtime-check` checks local dependencies without
+opening Chrome or contacting the portal. `source_report.py` reports that result
+as `configured`; run `probe` to check whether the live public form is available.
+An HTTP 200 response alone is insufficient: ordinary HTTP
+requests can receive an Imperva challenge instead of the search form.
+
+```bash
+uv run python tools/query_massachusetts_ucc.py runtime-check --output "$WORKDIR/ma-ucc-runtime.json"
+uv run python tools/query_massachusetts_ucc.py probe --output "$WORKDIR/ma-ucc-probe.json"
+uv run python tools/query_massachusetts_ucc.py search-org "HARVARD" --limit 25 --output "$WORKDIR/ma-ucc-org.json"
+uv run python tools/query_massachusetts_ucc.py search-individual "SMITH" --first "JOHN" --output "$WORKDIR/ma-ucc-person.json"
+uv run python tools/query_massachusetts_ucc.py search-org "BANK" --role secured --search-type begins --output "$WORKDIR/ma-ucc-secured.json"
+uv run python tools/query_massachusetts_ucc.py search-org "HARVARD" --lapsed --output "$WORKDIR/ma-ucc-lapsed.json"
+uv run python tools/query_massachusetts_ucc.py filing "<FILING_NUMBER>" --output "$WORKDIR/ma-ucc-filing.json"
+```
+
+Search controls:
+
+- `--search-type begins` is the default. `article9` uses the portal's Article 9
+  name search; `exact` is available for organizations only.
+- `--role debtor` is the default; `secured` and `assignee` require `begins`.
+- `search-individual` takes the last name separately from optional `--first`,
+  `--middle`, and `--suffix` fields.
+- `--city`, `--state`, and `--since YYYY-MM-DD` narrow the search. `--limit`
+  accepts 1–500 returned occurrence rows and defaults to 25. Use uppercase
+  two-letter state codes. Multiple occurrences can
+  refer to one filing; do not treat the row count as a unique-filing count.
+- `--lapsed` selects a separate archive. Run it separately when historical
+  coverage matters; an empty current search does not establish archive absence.
+
+For a prepared Boston holder queue, `boston_ucc_runner.py --queue QUEUE.json
+--output-dir CAPTURE_DIR --scope current --max-queries 20 --batch-size 20`
+reuses one owned, isolated Chrome for a bounded serial batch. `--scope lapsed`
+is separate. It merges the queue's sibling `ucc-cua/events.jsonl` by default
+(override with `--events`), skips completed scopes, and defers both invalid
+inputs and nonempty `name_mode_review_reasons` to `needs-review.json`. The
+existing input flag and organization-query completions retain their original
+meaning; they do not certify all possible individual/partnership name modes.
+Raw HTML responses, parsed results, append-only events, and queue progress are
+checkpointed before the next request. Resume recovers saved evidence without
+requerying it; `STOP` in the output directory stops before another request.
+The browser is recycled after 1–50 requests (`--batch-size`, default 20), with
+at least one second between navigations and no retry of an access challenge.
+The new persistent session path has offline regression coverage only. Its live
+three-query parity check was canceled after Access Denied / Error 15 on
+September 4, 2026. One later navigation in the same in-app browser reached the
+search form, without testing result or document access. Full-roster portal
+batches remain paused because of the published bulk-collection restriction;
+a slower rate or different browser does not establish permission. The saved
+runner is an implementation artifact, not an approved public-portal bulk route.
+
+`filing` takes a 12-digit filing number and also accepts `--lapsed`. Name inputs
+follow the source's limits: organization 175 characters, individual last name 35,
+first/middle/suffix 25 each, and city 35. The CLI rejects longer values before
+opening the browser.
+
+All commands support `--output FILE`. This version provides live lookup without
+ingesting into `registry.db`; local `query_registry.py ucc-search --jurisdiction ma`
+therefore does not replace a live search. Store findings with
+`--sources massachusetts_ucc` and evidence references `MA-UCC:<filing-number>`.
+The citation opens the official public search page. Preserve the source-returned
+history/detail URLs in the JSON evidence; those URLs cannot be derived reliably
+from the filing number alone.
+
+Filing-number lookup returns the available UCC1/UCC3 history sections, named
+party/address blocks, collateral text where published, and source-linked PDF
+viewer URLs. Use the `filing` command to retrieve a known filing rather than
+constructing a history URL from its number.
+
+The portal's paid certified UCC11 search and its separate liens database remain
+complementary routes when a certified result or non-UCC lien coverage is needed.
+The public UCC adapter does not submit paid requests or query that liens database.
+
+`boston_ucc_filing_review.py build` is an **offline** companion for a Boston
+license-holder inventory. Supply `--queue`, `--observations`, `--samples`, and
+`--output`. It validates saved CUA index captures with the existing bridge parser,
+groups original filing numbers while retaining party occurrences and namesakes,
+and keeps history review, original PDFs, and amendment PDFs separate. Optional
+`--tool-index HOLDER_ID=FILE` and `--tool-history FILE` import existing MA query
+tool JSON; a captured history does not certify analyst review. Explicit
+`--decisions FILE` records require evidence and a note, including for false-positive
+rejections. No network or investigation database writes occur. Rebuild to include
+new captures; malformed records and unresolved original numbers remain explicit.
+See the generated filing queue's limitations for formation-jurisdiction, alias,
+individual-mode, and current-versus-lapsed coverage gaps. No loan count is inferred.
 
 ## Database Schema
 
-All state tools ingest into a shared `registry.db` with unified tables:
+Ingest-capable state tools use a shared `registry.db` with unified tables:
 - `registry_entities` — one row per corporate entity (name, type, status, addresses, EIN)
 - `registry_officers` — officers/directors/managers with addresses and dates
 - `registry_agents` — registered agents with address history

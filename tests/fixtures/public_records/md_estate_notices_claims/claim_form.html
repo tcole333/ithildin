@@ -1,0 +1,55 @@
+<html><body>
+<form method="post" action="./frmClaimSearch.aspx" id="form1">
+  <input type="hidden" name="__VIEWSTATE" value="claim-form" />
+  <input type="hidden" name="__EVENTVALIDATION" value="claim-validation" />
+  <span id="rblSearchNameBy">
+    <input type="radio" name="rblSearchNameBy" value="Filed By" />
+    <input type="radio" name="rblSearchNameBy" value="Decedent" checked="checked" />
+  </span>
+  <input name="txtLN" id="txtLN" value="" />
+  <input type="checkbox" name="chkExactMatchLastName" id="chkExactMatchLastName" />
+  <input name="txtFN" id="txtFN" value="" />
+  <input name="txtMN" id="txtMN" value="" />
+  <input name="txtSN" id="txtSN" value="" />
+  <input name="txtCorpName" id="txtCorpName" value="" />
+  <input name="txtEstateNo" id="txtEstateNo" value="" />
+  <input name="txtDOF" id="txtDOF" value="" />
+  <select name="cboCountyId" id="cboCountyId">
+    <option value=""></option>
+    <option value="1">Allegany</option><option value="2">Anne Arundel</option>
+    <option value="3">Baltimore</option><option value="24">Baltimore City</option>
+    <option value="4">Calvert</option><option value="5">Caroline</option>
+    <option value="6">Carroll</option><option value="7">Cecil</option>
+    <option value="8">Charles</option><option value="9">Dorchester</option>
+    <option value="10">Frederick</option><option value="11">Garrett</option>
+    <option value="12">Harford</option><option value="13">Howard</option>
+    <option value="14">Kent</option><option value="15">Montgomery</option>
+    <option value="16">Prince George's</option><option value="17">Queen Anne's</option>
+    <option value="19">Somerset</option><option value="18">St. Mary's</option>
+    <option value="20">Talbot</option><option value="21">Washington</option>
+    <option value="22">Wicomico</option><option value="23">Worcester</option>
+  </select>
+  <select name="cboType" id="cboType">
+    <option value=""></option><option value="DEBT">DEBT</option>
+    <option value="CONTINGENCY">CONTINGENCY</option>
+    <option value="SECURED DEBT">SECURED DEBT</option>
+  </select>
+  <select name="cboStatus" id="cboStatus">
+    <option value=""></option><option value="OPEN">OPEN</option>
+    <option value="PENDING">PENDING</option><option value="SATISFIED">SATISFIED</option>
+    <option value="WITHDRAWN">WITHDRAWN</option><option value="DISALLOWED">DISALLOWED</option>
+    <option value="PARTIALLY SATISFIED">PARTIALLY SATISFIED</option>
+    <option value="PARTIALLY DISALLOWED">PARTIALLY DISALLOWED</option>
+  </select>
+  <span id="rblLinkedToEstate">
+    <input type="radio" name="rblLinkedToEstate" value="yes" />
+    <input type="radio" name="rblLinkedToEstate" value="no" />
+  </span>
+  <span id="rblMigratedToEstate">
+    <input type="radio" name="rblMigratedToEstate" value="yes" />
+    <input type="radio" name="rblMigratedToEstate" value="no" />
+  </span>
+  <input type="submit" name="cmdSearch" id="cmdSearch" value="Search" />
+  <span id="lblLatestDataDateTime">7/29/2026 4:00:00 PM (rownetwebalt)</span>
+</form>
+</body></html>

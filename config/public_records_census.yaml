@@ -68,8 +68,375 @@ roles:
     parcel_geometry: Official parcel/GIS layer or bulk geometry
     tax_collection: Official tax collector, delinquency, lien, or tax-sale source
     land_records_index: Official recorder/register/clerk instrument index
+    sheriff_sale_auction_records: Official sheriff-sale auction calendar, listing, and status records
+    sheriff_foreclosure_archive_and_sale_outcomes: Official sheriff foreclosure archive and published sale-outcome observations
   court:
     court_directory: Official court and clerk directory
+    attorney_registration_index: Official attorney-registration and status index
     trial_case_index: Official trial-court case index available online, by request, through bulk or subscription service, or in person
+    estate_legal_notices: Official probate or estate legal-notice publication occurrences
+    estate_claim_index: Official filed estate-claim index with source-reported status
+    hearing_calendars: Official trial or local court hearing, daily docket, or calendar source
+    trial_court_rulings: Official trial or local court ruling, order, minute-order, or disposition publication source
+    appellate_case_index: Official appellate case index or docket source
+    appellate_calendars: Official appellate argument or session calendar source
     appellate_opinions: Official appellate opinion and order source
+    federal_bankruptcy_docket_archive: Public archive and discovery source for federal bankruptcy docket metadata and contributed documents; archive coverage does not establish the complete official docket
     bulk_data_program: Official API, bulk, subscription, or compiled-data program
+additional_jurisdictions:
+  - jurisdiction_id: us-fl-orange-county
+    name: Orange County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: FL
+    geoid: "12095"
+    parent_geoid: "12"
+  - jurisdiction_id: us-fl-palm-beach-county
+    name: Palm Beach County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: FL
+    geoid: "12099"
+    parent_geoid: "12"
+  - jurisdiction_id: us-or-lane-county
+    name: Lane County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: OR
+    geoid: "41039"
+    parent_geoid: "41"
+  - jurisdiction_id: us-or-marion-county
+    name: Marion County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: OR
+    geoid: "41047"
+    parent_geoid: "41"
+  - jurisdiction_id: us-wa-mason-county
+    name: Mason County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: WA
+    geoid: "53045"
+    parent_geoid: "53"
+  - jurisdiction_id: us-oh-franklin-county
+    name: Franklin County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: OH
+    geoid: "39049"
+    parent_geoid: "39"
+  - jurisdiction_id: us-oh-licking-county
+    name: Licking County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: OH
+    geoid: "39089"
+    parent_geoid: "39"
+  - jurisdiction_id: us-oh-delaware-county
+    name: Delaware County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: OH
+    geoid: "39041"
+    parent_geoid: "39"
+  - jurisdiction_id: us-nm-santa-fe-county
+    name: Santa Fe County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NM
+    geoid: "35049"
+    parent_geoid: "35"
+  - jurisdiction_id: us-ny-bronx-county
+    name: Bronx County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NY
+    geoid: "36005"
+    parent_geoid: "36"
+  - jurisdiction_id: us-ny-kings-county
+    name: Kings County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NY
+    geoid: "36047"
+    parent_geoid: "36"
+  - jurisdiction_id: us-ny-new-york-county
+    name: New York County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NY
+    geoid: "36061"
+    parent_geoid: "36"
+  - jurisdiction_id: us-ny-queens-county
+    name: Queens County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NY
+    geoid: "36081"
+    parent_geoid: "36"
+  - jurisdiction_id: us-ny-richmond-county
+    name: Richmond County
+    kind: county_equivalent
+    country_code: US
+    subdivision_code: NY
+    geoid: "36085"
+    parent_geoid: "36"
+  - {jurisdiction_id: us-wy-albany-county, name: Albany County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56001", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-big-horn-county, name: Big Horn County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56003", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-campbell-county, name: Campbell County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56005", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-carbon-county, name: Carbon County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56007", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-converse-county, name: Converse County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56009", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-crook-county, name: Crook County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56011", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-fremont-county, name: Fremont County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56013", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-goshen-county, name: Goshen County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56015", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-hot-springs-county, name: Hot Springs County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56017", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-johnson-county, name: Johnson County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56019", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-laramie-county, name: Laramie County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56021", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-lincoln-county, name: Lincoln County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56023", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-natrona-county, name: Natrona County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56025", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-niobrara-county, name: Niobrara County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56027", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-park-county, name: Park County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56029", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-platte-county, name: Platte County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56031", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-sheridan-county, name: Sheridan County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56033", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-sublette-county, name: Sublette County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56035", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-sweetwater-county, name: Sweetwater County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56037", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-teton-county, name: Teton County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56039", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-uinta-county, name: Uinta County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56041", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-washakie-county, name: Washakie County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56043", parent_geoid: "56"}
+  - {jurisdiction_id: us-wy-weston-county, name: Weston County, kind: county_equivalent, country_code: US, subdivision_code: WY, geoid: "56045", parent_geoid: "56"}
+additional_targets:
+  - jurisdiction_geoid: "12095"
+    domain: property
+    role: tax_collection
+    description: Official county property-tax collection source
+  - jurisdiction_geoid: "12099"
+    domain: property
+    role: assessment_roll
+    description: Official county assessor or appraisal roll
+  - jurisdiction_geoid: "12099"
+    domain: property
+    role: parcel_geometry
+    description: Official county parcel/GIS layer or bulk geometry
+  - jurisdiction_geoid: "12099"
+    domain: property
+    role: tax_collection
+    description: Official county property-tax collection source
+  - jurisdiction_geoid: "12099"
+    domain: property
+    role: tax_deed_cases_and_sales
+    description: Official county tax-deed case, sale, event, and document source
+  - jurisdiction_geoid: "24"
+    domain: property
+    role: assessment_component_bulk_releases
+    description: Official statewide CAMA component and bundle releases
+  - jurisdiction_geoid: "24"
+    domain: property
+    role: assessment_roll_bulk_representation
+    description: Official statewide bulk representation of assessment parcel records
+  - jurisdiction_geoid: "24"
+    domain: property
+    role: residential_sales_analytic_bulk
+    description: Official statewide residential-sales analytic bulk releases
+  - jurisdiction_geoid: "24"
+    domain: property
+    role: recorded_plats
+    description: Maryland State Archives recorded plat, subdivision, and survey archive covering all 24 county equivalents
+  - jurisdiction_geoid: "41039"
+    domain: property
+    role: assessment_roll
+    description: Official Lane County assessor parcel and property-account sources
+  - jurisdiction_geoid: "41039"
+    domain: property
+    role: parcel_geometry
+    description: Official Lane County parcel geometry and assessment tax-map representations
+  - jurisdiction_geoid: "41039"
+    domain: property
+    role: tax_collection
+    description: Official Lane County property-account tax and receipt source
+  - jurisdiction_geoid: "41039"
+    domain: property
+    role: land_records_index
+    description: Official Lane County Clerk recorded-document research and copy routes
+  - jurisdiction_geoid: "41047"
+    domain: property
+    role: assessment_roll
+    description: Official county assessor or appraisal roll
+  - jurisdiction_geoid: "53045"
+    domain: property
+    role: assessment_roll
+    description: Official county assessor or appraisal roll
+  - jurisdiction_geoid: "53045"
+    domain: property
+    role: parcel_geometry
+    description: Official county parcel/GIS layer or bulk geometry
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: assessment_roll
+    description: Official Franklin County assessment and parcel-detail source
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: assessor_sale_history
+    description: Official Franklin County Auditor sale occurrences, transaction parties, qualification fields, and parcel joins
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: tax_collection
+    description: Official Franklin County tax-accounting and payment source
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: parcel_geometry
+    description: Official Franklin County and statewide parcel geometry representations
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: land_records_index
+    description: Official Franklin County recorded-instrument index
+  - jurisdiction_geoid: "39049"
+    domain: property
+    role: sheriff_sale_auction_records
+    description: Official Franklin County sheriff-sale auction calendar, listing, and status records
+  - jurisdiction_geoid: "39049"
+    domain: court
+    role: trial_case_index
+    description: Official Franklin County Common Pleas, Municipal, and Probate case indexes collectively covering party discovery, cases, schedules, dockets, fiduciaries, attorneys, and source-available filing or summary-copy records
+  - jurisdiction_geoid: "39089"
+    domain: property
+    role: assessment_roll
+    description: Official Licking County Auditor assessment and GIS records with a separately attributable same-lineage statewide parcel representation
+  - jurisdiction_geoid: "39089"
+    domain: property
+    role: parcel_geometry
+    description: Official Licking County and statewide parcel geometry representations
+  - jurisdiction_geoid: "39089"
+    domain: property
+    role: land_records_index
+    description: Official Licking County recorder discovery, exact-detail, and archival routes
+  - jurisdiction_geoid: "39089"
+    domain: property
+    role: sheriff_sale_auction_records
+    description: Official Licking County sheriff-sale auction calendar, listing, and status records
+  - jurisdiction_geoid: "39089"
+    domain: property
+    role: sheriff_foreclosure_archive_and_sale_outcomes
+    description: Official Licking County foreclosure archive and published sale-outcome observations
+  - jurisdiction_geoid: "39089"
+    domain: court
+    role: trial_case_index
+    description: Official Licking County Common Pleas General, Domestic Relations, and Fifth District appellate remote case, docket, and pleading routes plus the Clerk's bulk-distribution channel
+  - jurisdiction_geoid: "39041"
+    domain: property
+    role: assessment_roll
+    description: Official Delaware County assessment and parcel-detail source
+  - jurisdiction_geoid: "39041"
+    domain: property
+    role: parcel_geometry
+    description: Official local and statewide parcel-map representations
+  - jurisdiction_geoid: "39041"
+    domain: property
+    role: land_records_index
+    description: Official Delaware County recorded-instrument index
+  - jurisdiction_geoid: "39041"
+    domain: property
+    role: sheriff_sale_auction_records
+    description: Official Delaware County sheriff-sale auction calendar, listing, and status records
+  - jurisdiction_geoid: "39041"
+    domain: court
+    role: trial_case_index
+    description: Official Delaware County Common Pleas party index, exact case detail, docket, event, financial, receipt, and source-published filing-copy records
+  - jurisdiction_geoid: "35049"
+    domain: property
+    role: assessment_roll
+    description: Official Santa Fe County assessor account and assessment observations
+  - jurisdiction_geoid: "35049"
+    domain: property
+    role: parcel_geometry
+    description: Official Santa Fe County cadastral parcel and feature geometry
+  - jurisdiction_geoid: "35049"
+    domain: property
+    role: land_records_index
+    description: Official Santa Fe County recorded-instrument index and detail metadata
+  - jurisdiction_geoid: "36005"
+    domain: property
+    role: assessment_roll
+    description: Official Bronx County parcel, owner, assessment, and exemption layers
+  - jurisdiction_geoid: "36005"
+    domain: property
+    role: parcel_geometry
+    description: Official Bronx County cadastral tax-lot geometry
+  - jurisdiction_geoid: "36047"
+    domain: property
+    role: assessment_roll
+    description: Official Kings County parcel, owner, assessment, and exemption layers
+  - jurisdiction_geoid: "36047"
+    domain: property
+    role: parcel_geometry
+    description: Official Kings County cadastral tax-lot geometry
+  - jurisdiction_geoid: "36061"
+    domain: property
+    role: assessment_roll
+    description: Official New York County parcel, owner, assessment, and exemption layers
+  - jurisdiction_geoid: "36061"
+    domain: property
+    role: parcel_geometry
+    description: Official New York County cadastral tax-lot geometry
+  - jurisdiction_geoid: "36081"
+    domain: property
+    role: assessment_roll
+    description: Official Queens County parcel, owner, assessment, and exemption layers
+  - jurisdiction_geoid: "36081"
+    domain: property
+    role: parcel_geometry
+    description: Official Queens County cadastral tax-lot geometry
+  - jurisdiction_geoid: "36085"
+    domain: property
+    role: assessment_roll
+    description: Official Richmond County parcel, owner, assessment, and exemption layers
+  - jurisdiction_geoid: "36085"
+    domain: property
+    role: parcel_geometry
+    description: Official Richmond County cadastral tax-lot geometry
+  - {jurisdiction_geoid: "56001", domain: property, role: assessment_roll, description: Wyoming DOR annual Albany County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56001", domain: property, role: parcel_geometry, description: Wyoming DOR annual Albany County FID polygon occurrences}
+  - {jurisdiction_geoid: "56003", domain: property, role: assessment_roll, description: Wyoming DOR annual Big Horn County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56003", domain: property, role: parcel_geometry, description: Wyoming DOR annual Big Horn County FID polygon occurrences}
+  - {jurisdiction_geoid: "56005", domain: property, role: assessment_roll, description: Wyoming DOR annual Campbell County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56005", domain: property, role: parcel_geometry, description: Wyoming DOR annual Campbell County FID polygon occurrences}
+  - {jurisdiction_geoid: "56007", domain: property, role: assessment_roll, description: Wyoming DOR annual Carbon County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56007", domain: property, role: parcel_geometry, description: Wyoming DOR annual Carbon County FID polygon occurrences}
+  - {jurisdiction_geoid: "56009", domain: property, role: assessment_roll, description: Wyoming DOR annual Converse County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56009", domain: property, role: parcel_geometry, description: Wyoming DOR annual Converse County FID polygon occurrences}
+  - {jurisdiction_geoid: "56011", domain: property, role: assessment_roll, description: Wyoming DOR annual Crook County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56011", domain: property, role: parcel_geometry, description: Wyoming DOR annual Crook County FID polygon occurrences}
+  - {jurisdiction_geoid: "56013", domain: property, role: assessment_roll, description: Wyoming DOR annual Fremont County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56013", domain: property, role: parcel_geometry, description: Wyoming DOR annual Fremont County FID polygon occurrences}
+  - {jurisdiction_geoid: "56015", domain: property, role: assessment_roll, description: Wyoming DOR annual Goshen County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56015", domain: property, role: parcel_geometry, description: Wyoming DOR annual Goshen County FID polygon occurrences}
+  - {jurisdiction_geoid: "56017", domain: property, role: assessment_roll, description: Wyoming DOR annual Hot Springs County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56017", domain: property, role: parcel_geometry, description: Wyoming DOR annual Hot Springs County FID polygon occurrences}
+  - {jurisdiction_geoid: "56019", domain: property, role: assessment_roll, description: Wyoming DOR annual Johnson County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56019", domain: property, role: parcel_geometry, description: Wyoming DOR annual Johnson County FID polygon occurrences}
+  - {jurisdiction_geoid: "56021", domain: property, role: assessment_roll, description: Wyoming DOR annual Laramie County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56021", domain: property, role: parcel_geometry, description: Wyoming DOR annual Laramie County FID polygon occurrences}
+  - {jurisdiction_geoid: "56023", domain: property, role: assessment_roll, description: Wyoming DOR annual Lincoln County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56023", domain: property, role: parcel_geometry, description: Wyoming DOR annual Lincoln County FID polygon occurrences}
+  - {jurisdiction_geoid: "56025", domain: property, role: assessment_roll, description: Wyoming DOR annual Natrona County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56025", domain: property, role: parcel_geometry, description: Wyoming DOR annual Natrona County FID polygon occurrences}
+  - {jurisdiction_geoid: "56027", domain: property, role: assessment_roll, description: Wyoming DOR annual Niobrara County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56027", domain: property, role: parcel_geometry, description: Wyoming DOR annual Niobrara County FID polygon occurrences}
+  - {jurisdiction_geoid: "56029", domain: property, role: assessment_roll, description: Wyoming DOR annual Park County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56029", domain: property, role: parcel_geometry, description: Wyoming DOR annual Park County FID polygon occurrences}
+  - {jurisdiction_geoid: "56031", domain: property, role: assessment_roll, description: Wyoming DOR annual Platte County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56031", domain: property, role: parcel_geometry, description: Wyoming DOR annual Platte County FID polygon occurrences}
+  - {jurisdiction_geoid: "56033", domain: property, role: assessment_roll, description: Wyoming DOR annual Sheridan County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56033", domain: property, role: parcel_geometry, description: Wyoming DOR annual Sheridan County FID polygon occurrences}
+  - {jurisdiction_geoid: "56035", domain: property, role: assessment_roll, description: Wyoming DOR annual Sublette County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56035", domain: property, role: parcel_geometry, description: Wyoming DOR annual Sublette County FID polygon occurrences}
+  - {jurisdiction_geoid: "56037", domain: property, role: assessment_roll, description: Wyoming DOR annual Sweetwater County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56037", domain: property, role: parcel_geometry, description: Wyoming DOR annual Sweetwater County FID polygon occurrences}
+  - {jurisdiction_geoid: "56039", domain: property, role: assessment_roll, description: Wyoming DOR annual Teton County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56039", domain: property, role: parcel_geometry, description: Wyoming DOR annual Teton County FID polygon occurrences}
+  - {jurisdiction_geoid: "56041", domain: property, role: assessment_roll, description: Wyoming DOR annual Uinta County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56041", domain: property, role: parcel_geometry, description: Wyoming DOR annual Uinta County FID polygon occurrences}
+  - {jurisdiction_geoid: "56043", domain: property, role: assessment_roll, description: Wyoming DOR annual Washakie County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56043", domain: property, role: parcel_geometry, description: Wyoming DOR annual Washakie County FID polygon occurrences}
+  - {jurisdiction_geoid: "56045", domain: property, role: assessment_roll, description: Wyoming DOR annual Weston County tax-roll observations with county assessor complement}
+  - {jurisdiction_geoid: "56045", domain: property, role: parcel_geometry, description: Wyoming DOR annual Weston County FID polygon occurrences}

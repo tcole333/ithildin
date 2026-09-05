@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+    targetNamespace="http://mapserver.gis.umn.edu/mapserver"
+    xmlns:ms="http://mapserver.gis.umn.edu/mapserver"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    elementFormDefault="qualified"
+    version="0.1">
+  <import
+      namespace="http://www.opengis.net/gml/3.2"
+      schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <element
+      name="Taxlots_selection"
+      type="ms:Taxlots_selectionType"
+      substitutionGroup="gml:AbstractFeature"/>
+  <complexType name="Taxlots_selectionType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="msGeometry" type="gml:GeometryPropertyType" minOccurs="0" maxOccurs="1"/>
+          <element name="ogc_fid" minOccurs="0" type="string"/>
+          <element name="imagekey" minOccurs="0" type="string"/>
+          <element name="taxlotacre" minOccurs="0" type="string"/>
+          <element name="mapacres" minOccurs="0" type="string"/>
+          <element name="parcelid" minOccurs="0" type="string"/>
+          <element name="ormapfield" minOccurs="0" type="string"/>
+          <element name="propertyid" minOccurs="0" type="string"/>
+          <element name="ownname" minOccurs="0" type="string"/>
+          <element name="address1" minOccurs="0" type="string"/>
+          <element name="address2" minOccurs="0" type="string"/>
+          <element name="address3" minOccurs="0" type="string"/>
+          <element name="ctystzip" minOccurs="0" type="string"/>
+          <element name="situsall" minOccurs="0" type="string"/>
+          <element name="gislink" minOccurs="0" type="string"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+</schema>

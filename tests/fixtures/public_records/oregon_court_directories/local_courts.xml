@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetListItemsResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetListItemsResult>
+        <listitems xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema">
+          <rs:data ItemCount="2">
+            <z:row
+              ows_LinkTitleNoMenu="Bend Municipal Court"
+              ows_Court_x0020_Type=";#Municipal Court;#"
+              ows_Phone_x0020_Number="541-388-5572"
+              ows_Street_x0020_Address="555 NE 15th St"
+              ows_City="Bend"
+              ows_Zip_x0020_Code="97701"
+              ows_County=";#Deschutes;#"
+              ows_Website="http://www.bendoregon.gov/municipalcourt, http://www.bendoregon.gov/municipalcourt"
+              ows_Court_x0020_Contact="Gentry Richardson"
+              ows_Contact_x0020_Title="Municipal Court Manager"
+              ows_Contact_x0020_Email="Bendmunicourt@bendoregon.gov"
+              ows_Certified_x0020_Date="2026-04-30 00:00:00"
+              ows_UniqueId="15;#{99B2139D-661C-4F56-8336-EED5D4641BF8}"
+              ows_Modified="2026-05-01 14:26:57"
+              ows_Title="Bend Municipal Court"
+              ows_ID="15"
+              ows_Created="2022-03-04 10:02:35"
+            />
+            <z:row
+              ows_LinkTitleNoMenu="Wheeler County Justice Court"
+              ows_Court_x0020_Type=";#Justice Court;#"
+              ows_Phone_x0020_Number="541-763-2047"
+              ows_Street_x0020_Address="701 Adams St"
+              ows_Mailing_x0020_Address="PO Box 447"
+              ows_City="Fossil"
+              ows_Zip_x0020_Code="97830"
+              ows_County=";#Wheeler;#"
+              ows_Website="https://www.wheelercountyoregon.com/justice-court, https://www.wheelercountyoregon.com/justice-court"
+              ows_Court_x0020_Contact="Robin Ordway"
+              ows_Contact_x0020_Title="Justice of the Peace"
+              ows_Contact_x0020_Email="justicecourt@wheelercountyor.gov"
+              ows_Certified_x0020_Date="2026-02-27 00:00:00"
+              ows_UniqueId="168;#{70726815-01E7-4E8E-9367-BE80AB67BFEB}"
+              ows_Modified="2026-03-03 16:55:16"
+              ows_Title="Wheeler County Justice Court"
+              ows_ID="168"
+              ows_Created="2022-03-04 10:09:02"
+            />
+          </rs:data>
+        </listitems>
+      </GetListItemsResult>
+    </GetListItemsResponse>
+  </soap:Body>
+</soap:Envelope>

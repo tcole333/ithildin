@@ -9,6 +9,7 @@ specific adapters remain responsible for field normalization.
 from __future__ import annotations
 
 import json
+import ssl
 import time
 from dataclasses import dataclass, field
 from threading import Lock
@@ -16,6 +17,9 @@ from typing import Any, Callable, Mapping, Protocol, Sequence
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+
+import requests
+import truststore
 
 try:
     from tools.public_records_contract import (
@@ -102,6 +106,35 @@ class UrllibTransport:
                 headers=dict(exc.headers.items()) if exc.headers else {},
                 text=body,
             )
+
+
+class SystemTrustHTTPAdapter(requests.adapters.HTTPAdapter):
+    """Requests adapter backed by the operating system certificate store."""
+
+    def init_poolmanager(
+        self,
+        connections: int,
+        maxsize: int,
+        block: bool = requests.adapters.DEFAULT_POOLBLOCK,
+        **pool_kwargs: Any,
+    ) -> None:
+        pool_kwargs["ssl_context"] = truststore.SSLContext(
+            ssl.PROTOCOL_TLS_CLIENT
+        )
+        super().init_poolmanager(
+            connections,
+            maxsize,
+            block=block,
+            **pool_kwargs,
+        )
+
+
+def system_trust_session() -> requests.Session:
+    """Return a requests session using the host certificate store."""
+
+    session = requests.Session()
+    session.mount("https://", SystemTrustHTTPAdapter())
+    return session
 
 
 @dataclass(frozen=True)

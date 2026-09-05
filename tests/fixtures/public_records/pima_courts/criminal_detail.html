@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head><title>Pima County Superior Court - Case Information</title></head>
+  <body>
+    <form method="post" action="./GetCase2.aspx?ID=987654" id="Form1">
+      <input name="txtCaseNumber" value="CR20253098" id="txtCaseNumber">
+      <input name="txtCaseDate" value="7/2/2025" id="txtCaseDate">
+      <textarea name="txtCaseCaption" id="txtCaseCaption">
+        STATE OF ARIZONA VS. SAMPLE DEFENDANT
+      </textarea>
+      <input name="txtJudge" value="SAMPLE JUDGE" id="txtJudge">
+
+      <table id="grdParty">
+        <tr>
+          <td>Party Full Name</td>
+          <td>Party Role</td>
+          <td>Name Type</td>
+          <td>DOB</td>
+        </tr>
+        <tr>
+          <td>SAMPLE DEFENDANT</td>
+          <td>Defendant</td>
+          <td>True</td>
+          <td>6/2000</td>
+        </tr>
+      </table>
+
+      <table id="grdCharges">
+        <tr>
+          <td>Party Full Name</td>
+          <td>Count</td>
+          <td>Prep Offense</td>
+          <td>ARS</td>
+          <td>Desc</td>
+          <td>Class</td>
+          <td>Disp Date</td>
+          <td>Disposition</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>SAMPLE DEFENDANT</td>
+          <td>1</td>
+          <td></td>
+          <td>13-0000A1</td>
+          <td>SAMPLE OFFENSE</td>
+          <td>F2</td>
+          <td>8/18/2025</td>
+          <td>Court Dismissed</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>2</td>
+          <td>Attempt</td>
+          <td>13-0000A1</td>
+          <td>SECOND SAMPLE OFFENSE</td>
+          <td>F3</td>
+          <td>8/18/2025</td>
+          <td>Court Dismissed</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <table id="grdDocuments">
+        <tr>
+          <td>Document Type</td>
+          <td>Document SubType</td>
+          <td>Document Caption</td>
+          <td>File Date</td>
+          <td>Image</td>
+        </tr>
+        <tr>
+          <td>Order</td>
+          <td>Order</td>
+          <td>ORDER</td>
+          <td>8/20/2025</td>
+          <td class="Image">Available at Courthouse</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

@@ -55,6 +55,48 @@ RESOLUTION_STATUSES = CENSUS_STATUSES - {"pending", "in_progress"}
 COVERAGE_STATUSES = frozenset(
     {"unassessed", "partial", "comprehensive", "not_applicable"}
 )
+COMPACT_TARGET_FIELDS = (
+    "census_target_id",
+    "jurisdiction_id",
+    "jurisdiction_name",
+    "geoid",
+    "subdivision_code",
+    "domain",
+    "role",
+    "status",
+    "coverage_status",
+    "benefit_score",
+    "feasibility_score",
+    "risk_score",
+    "priority_profile_name",
+    "priority_as_of",
+    "priority_run_id",
+    "priority_input_fingerprint",
+    "source_count",
+    "source_ids",
+    "candidate_source_count",
+    "candidate_source_ids",
+    "claimed_by",
+)
+CANDIDATE_SOURCE_EXISTS_SQL = """
+EXISTS(
+    SELECT 1
+    FROM json_each(
+        COALESCE(
+            json_extract(
+                t.priority_basis_json,
+                '$.dimensions.feasibility.candidate_sources'
+            ),
+            '[]'
+        )
+    ) AS candidate
+    WHERE candidate.type='object'
+      AND NULLIF(
+        TRIM(json_extract(candidate.value, '$.source_id')),
+        ''
+      ) IS NOT NULL
+)
+""".strip()
 
 
 class CensusError(RuntimeError):
@@ -76,6 +118,35 @@ def _json_dump(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
+def _candidate_source_ids(priority_basis: Any) -> list[str]:
+    if not isinstance(priority_basis, Mapping):
+        return []
+    dimensions = priority_basis.get("dimensions")
+    if not isinstance(dimensions, Mapping):
+        return []
+    feasibility = dimensions.get("feasibility")
+    if not isinstance(feasibility, Mapping):
+        return []
+    candidates = feasibility.get("candidate_sources")
+    if not isinstance(candidates, Sequence) or isinstance(
+        candidates,
+        (str, bytes),
+    ):
+        return []
+    source_ids: list[str] = []
+    for candidate in candidates:
+        if not isinstance(candidate, Mapping):
+            continue
+        source_id = candidate.get("source_id")
+        if (
+            isinstance(source_id, str)
+            and source_id
+            and source_id not in source_ids
+        ):
+            source_ids.append(source_id)
+    return source_ids
+
+
 def _load_config(path: Path) -> dict[str, Any]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(data, Mapping):
@@ -88,7 +159,118 @@ def _load_config(path: Path) -> dict[str, Any]:
         raise CensusError("census config requires jurisdictions")
     if not isinstance(roles, Mapping) or not roles:
         raise CensusError("census config requires roles")
-    return dict(data)
+
+    base_geoids: set[str] = set()
+    for state_code, raw in jurisdictions.items():
+        if not isinstance(raw, Mapping):
+            raise CensusError(f"jurisdiction {state_code} must be a mapping")
+        geoid = str(raw.get("geoid") or "").strip()
+        if not geoid:
+            raise CensusError(f"jurisdiction {state_code} requires geoid")
+        if geoid in base_geoids:
+            raise CensusError(f"duplicate census jurisdiction geoid: {geoid}")
+        base_geoids.add(geoid)
+
+    additional_jurisdictions = data.get("additional_jurisdictions", [])
+    if not isinstance(additional_jurisdictions, Sequence) or isinstance(
+        additional_jurisdictions,
+        (str, bytes),
+    ):
+        raise CensusError("additional_jurisdictions must be a list")
+    additional_geoids: set[str] = set()
+    additional_ids: set[str] = set()
+    for index, raw in enumerate(additional_jurisdictions):
+        field = f"additional_jurisdictions[{index}]"
+        if not isinstance(raw, Mapping):
+            raise CensusError(f"{field} must be a mapping")
+        required = (
+            "jurisdiction_id",
+            "name",
+            "kind",
+            "country_code",
+            "subdivision_code",
+            "geoid",
+            "parent_geoid",
+        )
+        values = {
+            name: str(raw.get(name) or "").strip() for name in required
+        }
+        missing = [name for name, value in values.items() if not value]
+        if missing:
+            raise CensusError(
+                f"{field} requires {', '.join(sorted(missing))}"
+            )
+        if values["country_code"] != "US":
+            raise CensusError(f"{field}.country_code must be US")
+        if values["geoid"] in base_geoids | additional_geoids:
+            raise CensusError(
+                f"duplicate census jurisdiction geoid: {values['geoid']}"
+            )
+        if values["jurisdiction_id"] in additional_ids:
+            raise CensusError(
+                "duplicate additional jurisdiction_id: "
+                f"{values['jurisdiction_id']}"
+            )
+        additional_geoids.add(values["geoid"])
+        additional_ids.add(values["jurisdiction_id"])
+
+    known_geoids = base_geoids | additional_geoids
+    for index, raw in enumerate(additional_jurisdictions):
+        parent_geoid = str(raw["parent_geoid"]).strip()
+        if parent_geoid not in known_geoids:
+            raise CensusError(
+                "additional_jurisdictions"
+                f"[{index}].parent_geoid is not declared: {parent_geoid}"
+            )
+
+    additional_targets = data.get("additional_targets", [])
+    if not isinstance(additional_targets, Sequence) or isinstance(
+        additional_targets,
+        (str, bytes),
+    ):
+        raise CensusError("additional_targets must be a list")
+    target_keys: set[tuple[str, str, str]] = set()
+    for index, raw in enumerate(additional_targets):
+        field = f"additional_targets[{index}]"
+        if not isinstance(raw, Mapping):
+            raise CensusError(f"{field} must be a mapping")
+        geoid = str(raw.get("jurisdiction_geoid") or "").strip()
+        domain = str(raw.get("domain") or "").strip()
+        role = str(raw.get("role") or "").strip()
+        description = str(raw.get("description") or "").strip()
+        if geoid not in known_geoids:
+            raise CensusError(
+                f"{field}.jurisdiction_geoid is not declared: {geoid}"
+            )
+        if domain not in {"property", "court"}:
+            raise CensusError(f"{field}.domain must be property or court")
+        if not role:
+            raise CensusError(f"{field}.role is required")
+        if not description:
+            raise CensusError(f"{field}.description is required")
+        key = (geoid, domain, role)
+        if key in target_keys:
+            raise CensusError(
+                "duplicate additional census target: "
+                f"{'/'.join(key)}"
+            )
+        if (
+            geoid in base_geoids
+            and isinstance(roles.get(domain), Mapping)
+            and role in roles[domain]
+        ):
+            raise CensusError(
+                "additional census target duplicates a nationwide target: "
+                f"{'/'.join(key)}"
+            )
+        target_keys.add(key)
+
+    normalized = dict(data)
+    normalized["additional_jurisdictions"] = list(
+        additional_jurisdictions
+    )
+    normalized["additional_targets"] = list(additional_targets)
+    return normalized
 
 
 class PublicRecordsCensus:
@@ -312,6 +494,119 @@ class PublicRecordsCensus:
                                     "geoid": geoid,
                                 },
                             )
+
+            for raw in config["additional_jurisdictions"]:
+                geoid = str(raw["geoid"])
+                parent_geoid = str(raw["parent_geoid"])
+                parent = self._jurisdiction_by_geoid(db, parent_geoid)
+                if parent is None:
+                    raise CensusError(
+                        "additional jurisdiction parent does not exist: "
+                        f"{parent_geoid}"
+                    )
+                counts["jurisdictions_seen"] += 1
+                existing = self._jurisdiction_by_geoid(db, geoid)
+                jurisdiction_id = (
+                    str(existing["jurisdiction_id"])
+                    if existing
+                    else str(raw["jurisdiction_id"])
+                )
+                metadata = {
+                    "census_seed": True,
+                    "additional_target_jurisdiction": True,
+                    "parent_geoid": parent_geoid,
+                }
+                official_url = str(
+                    raw.get("official_url") or geography_source
+                )
+                if existing is None:
+                    db.execute(
+                        """
+                        INSERT INTO jurisdictions(
+                            jurisdiction_id, name, kind, country_code,
+                            subdivision_code, geoid,
+                            parent_jurisdiction_id, official_url,
+                            metadata_json, created_at, updated_at
+                        ) VALUES(?,?,?,?,?,?,?,?,?,?,?)
+                        """,
+                        (
+                            jurisdiction_id,
+                            str(raw["name"]),
+                            str(raw["kind"]),
+                            str(raw["country_code"]),
+                            str(raw["subdivision_code"]),
+                            geoid,
+                            str(parent["jurisdiction_id"]),
+                            official_url,
+                            _json_dump(metadata),
+                            now,
+                            now,
+                        ),
+                    )
+                    counts["jurisdictions_created"] += 1
+                else:
+                    db.execute(
+                        """
+                        UPDATE jurisdictions
+                        SET name=?, kind=?, country_code=?,
+                            subdivision_code=?,
+                            parent_jurisdiction_id=?, official_url=?,
+                            metadata_json=?, updated_at=?
+                        WHERE jurisdiction_id=?
+                        """,
+                        (
+                            str(raw["name"]),
+                            str(raw["kind"]),
+                            str(raw["country_code"]),
+                            str(raw["subdivision_code"]),
+                            str(parent["jurisdiction_id"]),
+                            official_url,
+                            _json_dump(metadata),
+                            now,
+                            jurisdiction_id,
+                        ),
+                    )
+
+            for raw in config["additional_targets"]:
+                geoid = str(raw["jurisdiction_geoid"])
+                jurisdiction = self._jurisdiction_by_geoid(db, geoid)
+                if jurisdiction is None:
+                    raise CensusError(
+                        "additional target jurisdiction does not exist: "
+                        f"{geoid}"
+                    )
+                counts["targets_seen"] += 1
+                cursor = db.execute(
+                    """
+                    INSERT OR IGNORE INTO source_census_targets(
+                        jurisdiction_id, domain, role, description,
+                        created_at, updated_at
+                    ) VALUES(?,?,?,?,?,?)
+                    """,
+                    (
+                        str(jurisdiction["jurisdiction_id"]),
+                        str(raw["domain"]),
+                        str(raw["role"]),
+                        str(raw["description"]),
+                        now,
+                        now,
+                    ),
+                )
+                if cursor.rowcount:
+                    target_id = int(cursor.lastrowid)
+                    counts["targets_created"] += 1
+                    self._event(
+                        db,
+                        target_id,
+                        event_type="seeded",
+                        actor="public-records-census",
+                        from_status=None,
+                        to_status="pending",
+                        details={
+                            "configuration": "additional_target",
+                            "geoid": geoid,
+                        },
+                    )
             db.commit()
         except Exception:
             db.rollback()
@@ -337,6 +632,32 @@ class PublicRecordsCensus:
             result[field.removesuffix("_json")] = (
                 json.loads(raw) if raw is not None else default
             )
+        candidate_source_ids = _candidate_source_ids(
+            result["priority_basis"]
+        )
+        profile = result["priority_basis"].get("profile")
+        result["priority_profile_name"] = (
+            str(profile.get("name")).strip()
+            if isinstance(profile, Mapping) and profile.get("name")
+            else None
+        )
+        result["priority_as_of"] = (
+            str(result["priority_basis"].get("as_of")).strip()
+            if result["priority_basis"].get("as_of")
+            else None
+        )
+        result["priority_run_id"] = (
+            str(result["priority_basis"].get("run_id")).strip()
+            if result["priority_basis"].get("run_id")
+            else None
+        )
+        result["priority_input_fingerprint"] = (
+            str(result["priority_basis"].get("input_fingerprint")).strip()
+            if result["priority_basis"].get("input_fingerprint")
+            else None
+        )
+        result["candidate_source_ids"] = candidate_source_ids
+        result["candidate_source_count"] = len(candidate_source_ids)
         return result
 
     @staticmethod
@@ -395,12 +716,30 @@ class PublicRecordsCensus:
         domain: str | None = None,
         state: str | None = None,
         role: str | None = None,
+        coverage_status: str | None = None,
+        source_presence: str | None = None,
+        candidate_presence: str | None = None,
         limit: int = 100,
     ) -> list[dict[str, Any]]:
         if status is not None and status not in CENSUS_STATUSES:
             raise CensusError(f"invalid status: {status}")
         if domain is not None and domain not in {"property", "court"}:
             raise CensusError(f"invalid domain: {domain}")
+        if (
+            coverage_status is not None
+            and coverage_status not in COVERAGE_STATUSES
+        ):
+            raise CensusError(
+                f"invalid coverage status: {coverage_status}"
+            )
+        if source_presence not in {None, "none", "some"}:
+            raise CensusError(
+                f"invalid source presence: {source_presence}"
+            )
+        if candidate_presence not in {None, "none", "some"}:
+            raise CensusError(
+                f"invalid candidate presence: {candidate_presence}"
+            )
         if limit <= 0:
             raise CensusError("limit must be positive")
         clauses: list[str] = []
@@ -417,6 +756,25 @@ class PublicRecordsCensus:
         if role:
             clauses.append("t.role=?")
             params.append(role)
+        if coverage_status:
+            clauses.append("t.coverage_status=?")
+            params.append(coverage_status)
+        if source_presence:
+            existence = "" if source_presence == "some" else "NOT "
+            clauses.append(
+                f"""
+                {existence}EXISTS(
+                    SELECT 1
+                    FROM source_census_target_sources a
+                    WHERE a.census_target_id=t.census_target_id
+                )
+                """
+            )
+        if candidate_presence:
+            negation = "" if candidate_presence == "some" else "NOT "
+            clauses.append(
+                f"{negation}({CANDIDATE_SOURCE_EXISTS_SQL})"
+            )
         where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
         params.append(limit)
         db = self._connect()
@@ -553,6 +911,9 @@ class PublicRecordsCensus:
         claimed_by: str,
         domain: str | None = None,
         state: str | None = None,
+        coverage_status: str | None = None,
+        source_presence: str | None = None,
+        candidate_presence: str | None = None,
     ) -> dict[str, Any] | None:
         if not claimed_by.strip():
             raise CensusError("claimed_by must not be blank")
@@ -566,6 +927,40 @@ class PublicRecordsCensus:
         if state:
             clauses.append("UPPER(j.subdivision_code)=?")
             params.append(state.upper())
+        if (
+            coverage_status is not None
+            and coverage_status not in COVERAGE_STATUSES
+        ):
+            raise CensusError(
+                f"invalid coverage status: {coverage_status}"
+            )
+        if coverage_status:
+            clauses.append("t.coverage_status=?")
+            params.append(coverage_status)
+        if source_presence not in {None, "none", "some"}:
+            raise CensusError(
+                f"invalid source presence: {source_presence}"
+            )
+        if source_presence:
+            existence = "" if source_presence == "some" else "NOT "
+            clauses.append(
+                f"""
+                {existence}EXISTS(
+                    SELECT 1
+                    FROM source_census_target_sources a
+                    WHERE a.census_target_id=t.census_target_id
+                )
+                """
+            )
+        if candidate_presence not in {None, "none", "some"}:
+            raise CensusError(
+                f"invalid candidate presence: {candidate_presence}"
+            )
+        if candidate_presence:
+            negation = "" if candidate_presence == "some" else "NOT "
+            clauses.append(
+                f"{negation}({CANDIDATE_SOURCE_EXISTS_SQL})"
+            )
         db = self._connect()
         try:
             db.execute("BEGIN IMMEDIATE")
@@ -795,6 +1190,118 @@ class PublicRecordsCensus:
                     "coverage": dict(coverage or {}),
                     "coverage_gaps": list(coverage_gaps or []),
                     "notes": notes,
+                },
+            )
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+        finally:
+            db.close()
+        return self.show(target_id)
+
+    def disassociate_source(
+        self,
+        target_id: int,
+        *,
+        source_id: str,
+        removed_by: str,
+    ) -> dict[str, Any]:
+        """Remove one source association while preserving the target assessment."""
+        if not source_id.strip():
+            raise CensusError("source_id must not be blank")
+        if not removed_by.strip():
+            raise CensusError("removed_by must not be blank")
+
+        db = self._connect()
+        try:
+            db.execute("BEGIN IMMEDIATE")
+            target = db.execute(
+                """
+                SELECT status, source_id
+                FROM source_census_targets
+                WHERE census_target_id=?
+                """,
+                (target_id,),
+            ).fetchone()
+            if target is None:
+                raise CensusError(f"unknown census target: {target_id}")
+
+            association = db.execute(
+                """
+                SELECT *
+                FROM source_census_target_sources
+                WHERE census_target_id=? AND source_id=?
+                """,
+                (target_id, source_id),
+            ).fetchone()
+            if association is None:
+                raise CensusError(
+                    f"source {source_id} is not associated with "
+                    f"census target {target_id}"
+                )
+
+            was_primary = target["source_id"] == source_id
+            db.execute(
+                """
+                DELETE FROM source_census_target_sources
+                WHERE census_target_id=? AND source_id=?
+                """,
+                (target_id, source_id),
+            )
+
+            replacement = None
+            if was_primary:
+                replacement = db.execute(
+                    """
+                    SELECT source_id, official_url
+                    FROM source_census_target_sources
+                    WHERE census_target_id=?
+                    ORDER BY added_at, source_id
+                    LIMIT 1
+                    """,
+                    (target_id,),
+                ).fetchone()
+
+            now = utc_now()
+            if was_primary:
+                db.execute(
+                    """
+                    UPDATE source_census_targets
+                    SET source_id=?, official_url=?, updated_at=?
+                    WHERE census_target_id=?
+                    """,
+                    (
+                        replacement["source_id"] if replacement else None,
+                        replacement["official_url"] if replacement else None,
+                        now,
+                        target_id,
+                    ),
+                )
+            else:
+                db.execute(
+                    """
+                    UPDATE source_census_targets SET updated_at=?
+                    WHERE census_target_id=?
+                    """,
+                    (now, target_id),
+                )
+
+            removed_association = self._decode_association(association)
+            self._event(
+                db,
+                target_id,
+                event_type="source_disassociated",
+                actor=removed_by.strip(),
+                from_status=str(target["status"]),
+                to_status=str(target["status"]),
+                details={
+                    "source_id": source_id,
+                    "was_primary": was_primary,
+                    "replacement_source_id": (
+                        replacement["source_id"] if replacement else None
+                    ),
+                    "removed_association": removed_association,
                 },
             )
             db.commit()
@@ -1147,6 +1654,15 @@ def _add_common_output(parser: argparse.ArgumentParser) -> None:
     add_output_args(parser)
 
 
+def compact_target_rows(targets: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    """Project census targets into the fields used for ranked queue triage."""
+
+    return [
+        {field: target.get(field) for field in COMPACT_TARGET_FIELDS}
+        for target in targets
+    ]
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Manage the nationwide public-record source-census queue"
@@ -1163,7 +1679,32 @@ def build_parser() -> argparse.ArgumentParser:
     list_parser.add_argument("--domain", choices=["property", "court"])
     list_parser.add_argument("--state")
     list_parser.add_argument("--role")
+    list_parser.add_argument(
+        "--coverage-status",
+        choices=sorted(COVERAGE_STATUSES),
+    )
+    list_parser.add_argument(
+        "--source-presence",
+        choices=["none", "some"],
+        help="Select targets without or with a catalog source association",
+    )
+    list_parser.add_argument(
+        "--candidate-presence",
+        choices=["none", "some"],
+        help=(
+            "Select targets without or with compatible catalog candidates "
+            "recorded by priority recomputation"
+        ),
+    )
     list_parser.add_argument("--limit", type=int, default=100)
+    list_parser.add_argument(
+        "--compact",
+        action="store_true",
+        help=(
+            "Return ranked queue fields without expanded priority evidence, "
+            "coverage gaps, or source-association records"
+        ),
+    )
     _add_common_output(list_parser)
 
     show_parser = sub.add_parser("show")
@@ -1174,6 +1715,23 @@ def build_parser() -> argparse.ArgumentParser:
     claim_parser.add_argument("--by", required=True)
     claim_parser.add_argument("--domain", choices=["property", "court"])
     claim_parser.add_argument("--state")
+    claim_parser.add_argument(
+        "--coverage-status",
+        choices=sorted(COVERAGE_STATUSES),
+    )
+    claim_parser.add_argument(
+        "--source-presence",
+        choices=["none", "some"],
+        help="Claim a target without or with a catalog source association",
+    )
+    claim_parser.add_argument(
+        "--candidate-presence",
+        choices=["none", "some"],
+        help=(
+            "Claim a target without or with compatible catalog candidates "
+            "recorded by priority recomputation"
+        ),
+    )
     _add_common_output(claim_parser)
 
     release_parser = sub.add_parser("release")
@@ -1208,12 +1766,33 @@ def build_parser() -> argparse.ArgumentParser:
     associate_parser.add_argument("target_id", type=int)
     associate_parser.add_argument("--source-id", required=True)
     associate_parser.add_argument("--official-url")
-    associate_parser.add_argument("--coverage", default="{}")
-    associate_parser.add_argument("--coverage-gaps", default="[]")
-    associate_parser.add_argument("--evidence", default="[]")
+    associate_parser.add_argument(
+        "--coverage",
+        default="{}",
+        help="JSON object describing the source's contribution",
+    )
+    associate_parser.add_argument(
+        "--coverage-gaps",
+        default="[]",
+        help="JSON list of gaps left by this source",
+    )
+    associate_parser.add_argument(
+        "--evidence",
+        default="[]",
+        help="JSON list of evidence objects",
+    )
     associate_parser.add_argument("--notes")
     associate_parser.add_argument("--by", required=True)
     _add_common_output(associate_parser)
+
+    disassociate_parser = sub.add_parser(
+        "disassociate-source",
+        help="Remove one catalog source association from a census target",
+    )
+    disassociate_parser.add_argument("target_id", type=int)
+    disassociate_parser.add_argument("--source-id", required=True)
+    disassociate_parser.add_argument("--by", required=True)
+    _add_common_output(disassociate_parser)
 
     coverage_parser = sub.add_parser("assess-coverage")
     coverage_parser.add_argument("target_id", type=int)
@@ -1223,8 +1802,16 @@ def build_parser() -> argparse.ArgumentParser:
         choices=sorted(COVERAGE_STATUSES),
         required=True,
     )
-    coverage_parser.add_argument("--gaps", default="[]")
-    coverage_parser.add_argument("--evidence", default="[]")
+    coverage_parser.add_argument(
+        "--gaps",
+        default="[]",
+        help="JSON list of unresolved coverage gaps",
+    )
+    coverage_parser.add_argument(
+        "--evidence",
+        default="[]",
+        help="JSON list of evidence objects",
+    )
     coverage_parser.add_argument("--notes")
     coverage_parser.add_argument("--by", required=True)
     _add_common_output(coverage_parser)
@@ -1271,8 +1858,13 @@ def main() -> int:
                 domain=args.domain,
                 state=args.state,
                 role=args.role,
+                coverage_status=args.coverage_status,
+                source_presence=args.source_presence,
+                candidate_presence=args.candidate_presence,
                 limit=args.limit,
             )
+            if args.compact:
+                value = compact_target_rows(value)
         elif args.command == "show":
             value = census.show(args.target_id)
         elif args.command == "claim":
@@ -1280,6 +1872,9 @@ def main() -> int:
                 claimed_by=args.by,
                 domain=args.domain,
                 state=args.state,
+                coverage_status=args.coverage_status,
+                source_presence=args.source_presence,
+                candidate_presence=args.candidate_presence,
             )
         elif args.command == "release":
             value = census.release(args.target_id, released_by=args.by)
@@ -1327,6 +1922,12 @@ def main() -> int:
                 evidence=evidence,
                 notes=args.notes,
                 added_by=args.by,
+            )
+        elif args.command == "disassociate-source":
+            value = census.disassociate_source(
+                args.target_id,
+                source_id=args.source_id,
+                removed_by=args.by,
             )
         elif args.command == "assess-coverage":
             gaps = _json_value(args.gaps, default=[])

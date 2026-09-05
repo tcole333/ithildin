@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/app-rest-api/todays-superior-court-cases" method="get">
+      <input name="party" placeholder="Party" maxlength="128">
+      <input name="case_no" placeholder="Case Number" maxlength="128">
+      <select name="judges">
+        <option value="All" selected>Judges</option>
+      </select>
+      <select name="courtroom">
+        <option value="All" selected>Courtroom</option>
+      </select>
+    </form>
+    <div class="view-empty">
+      <div class="empty-response">
+        <p class="title">No results found</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,17 +1,24 @@
 from __future__ import annotations
 
 from pathlib import Path
+import zipfile
 
 import yaml
 
 from tools.public_records_bulk import ArtifactProbe, DownloadResult
 from tools.query_fl_dor_property import (
     MAP_DATA_ROOT,
+    NAL_REQUIRED_PUBLIC_COLUMNS,
+    NAL_SCHEMA,
+    SDF_REQUIRED_PUBLIC_COLUMNS,
+    SDF_SCHEMA,
     SOURCE_ID,
     TAX_ROLL_ROOT,
     FloridaDORDirectoryClient,
     build_parser,
     execute,
+    inspect_nal_csv_archive,
+    inspect_sdf_csv_archive,
 )
 
 
@@ -207,6 +214,73 @@ def test_metadata_commands_have_no_default_record_ceiling():
     assert parser.parse_args(["manifest"]).limit is None
 
 
+def test_nal_schema_distinguishes_logical_fields_from_physical_csv_columns():
+    assert "field_count" not in NAL_SCHEMA
+    assert NAL_SCHEMA["documented_logical_field_count"] == 92
+    published = NAL_SCHEMA["published_csv"]
+    assert published["sampled_release"] == "2026P"
+    assert published["sampled_physical_field_count"] == 165
+    by_role = {
+        field["role"]: field for field in published["sampled_key_columns"]
+    }
+    assert by_role["owner_name"] == {
+        "position": 74,
+        "name": "OWN_NAME",
+        "role": "owner_name",
+    }
+    assert by_role["file_sequence"]["position"] == 159
+
+
+def test_nal_archive_inspection_reads_current_expanded_header(tmp_path):
+    required = sorted(NAL_REQUIRED_PUBLIC_COLUMNS)
+    header = required + [
+        f"EXPANDED_{index:03d}"
+        for index in range(1, 166 - len(required))
+    ]
+    archive_path = tmp_path / "nal.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr(
+            "NAL12P202601.csv",
+            ",".join(header) + "\n",
+        )
+
+    inspection = inspect_nal_csv_archive(archive_path)
+
+    assert inspection["member"] == "NAL12P202601.csv"
+    assert inspection["physical_field_count"] == 165
+    assert inspection["documented_logical_field_count"] == 92
+    assert inspection["header_fields"] == header
+    assert inspection["required_projection_columns_present"] is True
+    assert len(inspection["header_fingerprint"]) == 64
+
+
+def test_sdf_schema_and_archive_inspection_use_named_physical_columns(
+    tmp_path,
+):
+    assert "field_count" not in SDF_SCHEMA
+    assert SDF_SCHEMA["documented_logical_field_count"] == 14
+    assert SDF_SCHEMA["published_csv"]["sampled_physical_field_count"] == 23
+    assert SDF_SCHEMA["published_csv"]["sampled_columns"][14] == "CLERK_NO"
+
+    header = list(SDF_SCHEMA["published_csv"]["sampled_columns"])
+    assert SDF_REQUIRED_PUBLIC_COLUMNS <= set(header)
+    archive_path = tmp_path / "sdf.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr(
+            "SDF12P202601.csv",
+            ",".join(header) + "\n",
+        )
+
+    inspection = inspect_sdf_csv_archive(archive_path)
+
+    assert inspection["member"] == "SDF12P202601.csv"
+    assert inspection["dataset_type"] == "sdf"
+    assert inspection["physical_field_count"] == 23
+    assert inspection["documented_logical_field_count"] == 14
+    assert inspection["header_fields"] == header
+    assert inspection["required_projection_columns_present"] is True
+
+
 def test_list_reports_current_release_directories_and_fingerprints(monkeypatch):
     no_log(monkeypatch)
     args = build_parser().parse_args(["list", "--type", "gis-pin", "--year", "2026"])
@@ -256,7 +330,7 @@ def test_manifest_filters_county_and_builds_bulk_fingerprints(monkeypatch):
     assert len(record["manifest"]["schema_fingerprint"]) == 64
     assert len(record["manifest"]["manifest_fingerprint"]) == 64
     assert (
-        record["manifest"]["schema"]["fields"][12]["name"]
+        record["manifest"]["schema"]["documented_fields"][12]["name"]
         == "CLERK_INSTRUMENT_NUMBER"
     )
     assert record["manifest"]["metadata"]["source_omissions"][

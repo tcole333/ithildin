@@ -14,6 +14,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import sqlite3
 from contextvars import ContextVar
 from pathlib import Path
@@ -35,6 +36,26 @@ def _deferred_health_check(check, *args, **kwargs):
         "status": "deferred",
         "_health_check": lambda: check(*args, **kwargs),
     }
+
+
+def check_massachusetts_ucc_runtime():
+    """Check local browser dependencies without opening Chrome or probing the site."""
+    deferred = _deferred_health_check(check_massachusetts_ucc_runtime)
+    if deferred:
+        return deferred
+    try:
+        try:
+            from tools.query_massachusetts_ucc import runtime_check
+        except ImportError:
+            from query_massachusetts_ucc import runtime_check
+        return {
+            "status": "configured",
+            "runtime": runtime_check(),
+            "live_checked": False,
+            "note": "Browser dependencies ready; run query_massachusetts_ucc.py probe for live availability.",
+        }
+    except Exception as exc:
+        return {"status": "error", "live_checked": False, "error": str(exc)}
 
 
 def load_env_file():
@@ -416,6 +437,15 @@ def generate_report():
         ),
     }
 
+    sources["Barak Emails (DDoSecrets/Handala)"] = {
+        "description": "100k+ emails/attachments from Ehud Barak mailboxes 2007-2016 (leaked); Cyberwar-category, handle attachments as inert bytes",
+        "query_tool": "tools/query_barak.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "barak_emails.db",
+            "SELECT COUNT(*) FROM messages"
+        ),
+    }
+
     lmsband_inventory = check_sqlite_inventory(
         PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db",
         {
@@ -466,6 +496,25 @@ def generate_report():
         **check_sqlite(
             PROJECT_ROOT / "datasets" / "epstein_reporting.db",
             "SELECT COUNT(*) FROM reporting_item"
+        ),
+    }
+
+    sources["Epstein Artifact Metadata"] = {
+        "description": (
+            "Content-addressed hashes, file locations, and format-aware metadata "
+            "with source/release/production/acquisition provenance layers"
+        ),
+        "query_tool": "tools/epstein_metadata.py",
+        **check_sqlite_inventory(
+            PROJECT_ROOT / "datasets" / "epstein_derived.db",
+            {
+                "artifact_locations": "SELECT COUNT(*) FROM artifact_location",
+                "unique_artifacts": "SELECT COUNT(*) FROM artifact_file",
+                "metadata_observations": (
+                    "SELECT COUNT(*) FROM artifact_metadata_observation"
+                ),
+            },
+            primary_metric="artifact_locations",
         ),
     }
 
@@ -522,9 +571,9 @@ def generate_report():
         **check_directory(PROJECT_ROOT / "datasets" / "epstein-archive" / "data" / "emails" / "jeeproject_yahoo"),
     }
 
-    sources["Barak Emails"] = {
-        "description": "1,411 Ehud Barak email files (.html + .meta)",
-        "query_tool": "tools/search_emails.py",
+    sources["Barak Emails (curated subset, DEPRECATED)"] = {
+        "description": "DEPRECATED — 1,411-file sample superseded by the full leak; use tools/query_barak.py (datasets/barak_emails.db)",
+        "query_tool": "tools/query_barak.py",
         **check_directory(PROJECT_ROOT / "datasets" / "epstein-archive" / "data" / "emails" / "ehud_barak_emails"),
     }
 
@@ -543,6 +592,12 @@ def generate_report():
             PROJECT_ROOT / "registry.db",
             "SELECT COUNT(*) FROM registry_entities"
         ),
+    }
+
+    sources["Massachusetts UCC"] = {
+        "description": "Public UCC party searches and filing histories; separate current and lapsed scopes",
+        "query_tool": "tools/query_massachusetts_ucc.py",
+        **check_massachusetts_ucc_runtime(),
     }
 
     # Investigations DB (ingested PDFs)
@@ -929,6 +984,26 @@ def generate_report():
     return sources
 
 
+def _source_report_match(sources, source_name):
+    """Match a report label or exact canonical source ID."""
+    requested = source_name.casefold()
+    for name, info in sources.items():
+        if name.casefold() == requested:
+            return name, info
+        source_id = info.get("source_id")
+        if isinstance(source_id, str) and source_id.casefold() == requested:
+            return name, info
+    for name, info in sources.items():
+        if requested in name.casefold():
+            return name, info
+    return None
+
+
+def _could_be_catalog_source_id(value):
+    """Recognize the source-ID grammar without treating prose as a catalog lookup."""
+    return re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)+", value.casefold()) is not None
+
+
 def quick_health_check(source_name, *, public_records_db=None):
     """Run health check for a single named source.
 
@@ -936,29 +1011,25 @@ def quick_health_check(source_name, *, public_records_db=None):
     Matches source names case-insensitively.
     """
     load_env_file()
-    if "public record" in source_name.lower():
+    catalog_lookup = (
+        public_records_db is not None
+        or "public record" in source_name.casefold()
+        or _could_be_catalog_source_id(source_name)
+    )
+    match = None
+    if catalog_lookup:
         sources = check_public_records_catalog(public_records_db)
-    else:
+        match = _source_report_match(sources, source_name)
+
+    if match is None and "public record" not in source_name.casefold():
         token = _DEFER_HEALTH_CHECKS.set(True)
         try:
             sources = generate_report()
         finally:
             _DEFER_HEALTH_CHECKS.reset(token)
+        match = _source_report_match(sources, source_name)
 
-    # Case-insensitive lookup
-    match = None
-    for name, info in sources.items():
-        if name.lower() == source_name.lower():
-            match = (name, info)
-            break
-    if not match:
-        # Try partial match
-        for name, info in sources.items():
-            if source_name.lower() in name.lower():
-                match = (name, info)
-                break
-
-    if not match:
+    if match is None:
         return {"available": False, "note": f"Unknown source: {source_name}", "status": "unknown"}
 
     name, source_info = match
@@ -969,7 +1040,15 @@ def quick_health_check(source_name, *, public_records_db=None):
     status = info.get("status", "unknown")
     available = status in ("available", "running", "configured")
     note = info.get("error") or info.get("note") or info.get("start_cmd") or ""
-    return {"available": available, "note": note, "status": status, "name": name}
+    result = {
+        "available": available,
+        "note": note,
+        "status": status,
+        "name": name,
+    }
+    if info.get("source_id"):
+        result["source_id"] = info["source_id"]
+    return result
 
 
 def main():
@@ -983,7 +1062,17 @@ def main():
 
     # check <source_name>
     check_p = sub.add_parser("check", help="Quick health check for a single source")
-    check_p.add_argument("source_name", help="Source name (case-insensitive, partial match)")
+    check_p.add_argument(
+        "source_name",
+        help="Source name (case-insensitive, partial match) or canonical source ID",
+    )
+    check_p.add_argument(
+        "-j",
+        "--json",
+        dest="check_json",
+        action="store_true",
+        help="Emit the single-source result as JSON",
+    )
     check_p.add_argument(
         "--public-records-db",
         help="Override the public-record source catalog path for catalog checks",
@@ -996,7 +1085,7 @@ def main():
             args.source_name,
             public_records_db=args.public_records_db,
         )
-        if args.json:
+        if args.json or args.check_json:
             print(json.dumps(result, indent=2))
         else:
             icon = "[OK]" if result["available"] else "[!!]"

@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 
 import pytest
 
@@ -53,4 +54,28 @@ def test_add_lead_accepts_existing_related_lead(lead_db):
     assert db.execute(
         "SELECT lead_id, related_lead_id FROM lead_relations"
     ).fetchall() == [(lead_id, existing_id)]
+    db.close()
+
+
+def test_add_cli_can_override_active_profile(lead_db, monkeypatch):
+    db_path, _ = lead_db
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "lead_tracker.py",
+            "add",
+            "--title",
+            "Profile-safe lead",
+            "--profile",
+            "epstein",
+        ],
+    )
+
+    lead_tracker.main()
+
+    db = sqlite3.connect(db_path)
+    assert db.execute(
+        "SELECT profile_id FROM leads WHERE title='Profile-safe lead'"
+    ).fetchone()[0] == "epstein"
     db.close()

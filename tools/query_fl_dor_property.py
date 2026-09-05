@@ -20,10 +20,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
 import re
 import sys
 import time
+import zipfile
+from collections import Counter
 from dataclasses import replace
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -150,6 +154,7 @@ JURISDICTION = JurisdictionMetadata(
 )
 
 DATASET_TYPES = ("nal", "sdf", "gis-pin", "gis-par")
+MAX_CSV_HEADER_CHARS = 1_000_000
 TAX_FOLDER_NAMES = {"nal": "NAL", "sdf": "SDF"}
 GIS_VARIANTS = {"gis-pin": "PIN", "gis-par": "PAR"}
 RELEASE_FOLDER_RE = re.compile(r"^(?P<year>\d{4})(?P<stage>[PF])$")
@@ -258,14 +263,19 @@ SOURCE_OMISSIONS = {
 NAL_SCHEMA = {
     "schema_year": 2026,
     "format": "comma_delimited",
-    "field_count": 92,
     "documentation_url": NAL_SCHEMA_URL,
+    "documented_logical_field_count": 92,
+    "field_count_semantics": (
+        "The summary-table PDF numbers 92 logical fields. Published CSV "
+        "archives can expand repeating groups into additional physical "
+        "columns and omit nonpublic fields."
+    ),
     "join": {
         "nal_field": "PARCEL_ID",
         "nal_position": 2,
         "gis_field": "PARCELNO",
     },
-    "key_fields": [
+    "documented_key_fields": [
         {"position": 1, "name": "COUNTY_NUMBER", "type": "numeric"},
         {"position": 2, "name": "PARCEL_ID", "type": "alphanumeric"},
         {"position": 3, "name": "FILE_TYPE", "type": "alphabetical"},
@@ -291,14 +301,77 @@ NAL_SCHEMA = {
         {"position": 91, "name": "PARCEL_ID_CHANGE", "type": "alphanumeric"},
         {"position": 92, "name": "FILE_SEQUENCE_NUMBER", "type": "alphanumeric"},
     ],
+    "published_csv": {
+        "header_row": True,
+        "sampled_release": "2026P",
+        "sampled_physical_field_count": 165,
+        "sampled_key_columns": [
+            {"position": 1, "name": "CO_NO", "role": "county_number"},
+            {"position": 2, "name": "PARCEL_ID", "role": "parcel_id"},
+            {"position": 3, "name": "FILE_T", "role": "file_type"},
+            {"position": 4, "name": "ASMNT_YR", "role": "assessment_year"},
+            {"position": 8, "name": "DOR_UC", "role": "dor_land_use_code"},
+            {"position": 11, "name": "JV", "role": "total_just_value"},
+            {"position": 41, "name": "LND_VAL", "role": "land_value"},
+            {
+                "position": 48,
+                "name": "EFF_YR_BLT",
+                "role": "effective_year_built",
+            },
+            {
+                "position": 49,
+                "name": "ACT_YR_BLT",
+                "role": "actual_year_built",
+            },
+            {"position": 74, "name": "OWN_NAME", "role": "owner_name"},
+            {"position": 75, "name": "OWN_ADDR1", "role": "owner_address_1"},
+            {"position": 76, "name": "OWN_ADDR2", "role": "owner_address_2"},
+            {"position": 77, "name": "OWN_CITY", "role": "owner_city"},
+            {"position": 78, "name": "OWN_STATE", "role": "owner_state"},
+            {"position": 79, "name": "OWN_ZIPCD", "role": "owner_zip"},
+            {"position": 88, "name": "S_LEGAL", "role": "short_legal"},
+            {"position": 99, "name": "PHY_ADDR1", "role": "situs_address_1"},
+            {"position": 100, "name": "PHY_ADDR2", "role": "situs_address_2"},
+            {"position": 101, "name": "PHY_CITY", "role": "situs_city"},
+            {"position": 102, "name": "PHY_ZIPCD", "role": "situs_zip"},
+            {"position": 103, "name": "ALT_KEY", "role": "alternate_key"},
+            {"position": 159, "name": "SEQ_NO", "role": "file_sequence"},
+            {"position": 162, "name": "STATE_PAR_ID", "role": "state_parcel_id"},
+        ],
+    },
 }
+
+NAL_REQUIRED_PUBLIC_COLUMNS = frozenset(
+    {
+        "CO_NO",
+        "PARCEL_ID",
+        "FILE_T",
+        "ASMNT_YR",
+        "DOR_UC",
+        "JV",
+        "LND_VAL",
+        "OWN_NAME",
+        "OWN_ADDR1",
+        "OWN_CITY",
+        "S_LEGAL",
+        "PHY_ADDR1",
+        "PHY_CITY",
+        "ALT_KEY",
+        "SEQ_NO",
+    }
+)
 
 SDF_SCHEMA = {
     "schema_year": 2026,
     "format": "comma_delimited",
-    "field_count": 14,
     "documentation_url": SDF_SCHEMA_URL,
-    "fields": [
+    "documented_logical_field_count": 14,
+    "field_count_semantics": (
+        "The summary-table PDF describes 14 logical sale fields. Published "
+        "CSV archives include county, parcel, and grouping context as "
+        "additional physical columns."
+    ),
+    "documented_fields": [
         {"position": 1, "name": "FILE_TYPE", "type": "alphabetical"},
         {"position": 2, "name": "COUNTY_NUMBER", "type": "numeric"},
         {"position": 3, "name": "PARCEL_ID", "type": "alphanumeric"},
@@ -314,7 +387,56 @@ SDF_SCHEMA = {
         {"position": 13, "name": "CLERK_INSTRUMENT_NUMBER", "type": "numeric"},
         {"position": 14, "name": "SALE_IDENTIFICATION_CODE", "type": "alphanumeric"},
     ],
+    "published_csv": {
+        "header_row": True,
+        "sampled_release": "2026P",
+        "sampled_physical_field_count": 23,
+        "sampled_columns": [
+            "CO_NO",
+            "PARCEL_ID",
+            "ASMNT_YR",
+            "ATV_STRT",
+            "GRP_NO",
+            "DOR_UC",
+            "NBRHD_CD",
+            "MKT_AR",
+            "CENSUS_BK",
+            "SALE_ID_CD",
+            "SAL_CHG_CD",
+            "VI_CD",
+            "OR_BOOK",
+            "OR_PAGE",
+            "CLERK_NO",
+            "QUAL_CD",
+            "SALE_YR",
+            "SALE_MO",
+            "SALE_PRC",
+            "MULTI_PAR_SAL",
+            "RS_ID",
+            "MP_ID",
+            "STATE_PARCEL_ID",
+        ],
+    },
 }
+
+SDF_REQUIRED_PUBLIC_COLUMNS = frozenset(
+    {
+        "CO_NO",
+        "PARCEL_ID",
+        "ASMNT_YR",
+        "SALE_ID_CD",
+        "SAL_CHG_CD",
+        "VI_CD",
+        "OR_BOOK",
+        "OR_PAGE",
+        "CLERK_NO",
+        "QUAL_CD",
+        "SALE_YR",
+        "SALE_MO",
+        "SALE_PRC",
+        "MULTI_PAR_SAL",
+    }
+)
 
 GIS_SCHEMA = {
     "schema_year": 2026,
@@ -345,6 +467,149 @@ class FloridaDORSelectorError(BulkSourceError):
     result_status = ResultStatus.UNAVAILABLE
     code = "fl_dor_selector_unresolved"
     category = "query"
+
+
+def _inspect_public_csv_archive(
+    path: str | Path,
+    *,
+    dataset_label: str,
+    required_columns: frozenset[str],
+    documented_logical_field_count: int,
+) -> dict[str, Any]:
+    """Read and validate one bounded header row from a DOR CSV archive."""
+
+    display_label = dataset_label.upper()
+    archive_path = Path(path)
+    try:
+        with zipfile.ZipFile(archive_path) as archive:
+            csv_members = [
+                member
+                for member in archive.infolist()
+                if not member.is_dir() and member.filename.casefold().endswith(".csv")
+            ]
+            if len(csv_members) != 1:
+                raise FloridaDORSchemaError(
+                    f"Florida DOR {display_label} archive must contain one "
+                    "CSV member",
+                    details={
+                        "dataset_type": dataset_label,
+                        "archive_path": str(archive_path),
+                        "csv_members": [
+                            member.filename for member in csv_members
+                        ],
+                    },
+                )
+            member = csv_members[0]
+            with archive.open(member) as raw:
+                with io.TextIOWrapper(
+                    raw,
+                    encoding="utf-8-sig",
+                    errors="strict",
+                    newline="",
+                ) as text:
+                    header_line = text.readline(MAX_CSV_HEADER_CHARS + 1)
+                    if len(header_line) > MAX_CSV_HEADER_CHARS:
+                        raise FloridaDORSchemaError(
+                            f"Florida DOR {display_label} CSV header exceeds "
+                            "the bounded inspection size",
+                            details={
+                                "dataset_type": dataset_label,
+                                "maximum_header_chars": (
+                                    MAX_CSV_HEADER_CHARS
+                                ),
+                            },
+                        )
+                    header = next(csv.reader([header_line]), None)
+    except FloridaDORSchemaError:
+        raise
+    except (
+        csv.Error,
+        OSError,
+        UnicodeDecodeError,
+        zipfile.BadZipFile,
+    ) as error:
+        raise FloridaDORSchemaError(
+            f"Florida DOR {display_label} CSV header could not be read",
+            details={
+                "dataset_type": dataset_label,
+                "archive_path": str(archive_path),
+                "error": str(error),
+            },
+        ) from error
+
+    fields = [value.strip() for value in (header or [])]
+    if not fields or any(not value for value in fields):
+        raise FloridaDORSchemaError(
+            f"Florida DOR {display_label} CSV header is empty or contains "
+            "blank columns",
+            details={
+                "dataset_type": dataset_label,
+                "archive_path": str(archive_path),
+            },
+        )
+    duplicates = sorted(
+        field for field, count in Counter(fields).items() if count > 1
+    )
+    if duplicates:
+        raise FloridaDORSchemaError(
+            f"Florida DOR {display_label} CSV header contains duplicate "
+            "columns",
+            details={
+                "dataset_type": dataset_label,
+                "duplicates": duplicates,
+            },
+        )
+    missing = sorted(required_columns - set(fields))
+    if missing:
+        raise FloridaDORSchemaError(
+            f"Florida DOR {display_label} CSV header lacks projection columns",
+            details={
+                "dataset_type": dataset_label,
+                "archive_path": str(archive_path),
+                "missing_columns": missing,
+                "observed_field_count": len(fields),
+            },
+        )
+
+    return {
+        "member": member.filename,
+        "dataset_type": dataset_label,
+        "encoding": "utf-8-sig",
+        "header_row": True,
+        "header_read_limit_chars": MAX_CSV_HEADER_CHARS,
+        "physical_field_count": len(fields),
+        "header_fields": fields,
+        "header_fingerprint": sha256_fingerprint(fields),
+        "documented_logical_field_count": documented_logical_field_count,
+        "required_projection_columns": sorted(required_columns),
+        "required_projection_columns_present": True,
+    }
+
+
+def inspect_nal_csv_archive(path: str | Path) -> dict[str, Any]:
+    """Read the bounded header row from one downloaded public NAL archive."""
+
+    return _inspect_public_csv_archive(
+        path,
+        dataset_label="nal",
+        required_columns=NAL_REQUIRED_PUBLIC_COLUMNS,
+        documented_logical_field_count=int(
+            NAL_SCHEMA["documented_logical_field_count"]
+        ),
+    )
+
+
+def inspect_sdf_csv_archive(path: str | Path) -> dict[str, Any]:
+    """Read the bounded header row from one downloaded public SDF archive."""
+
+    return _inspect_public_csv_archive(
+        path,
+        dataset_label="sdf",
+        required_columns=SDF_REQUIRED_PUBLIC_COLUMNS,
+        documented_logical_field_count=int(
+            SDF_SCHEMA["documented_logical_field_count"]
+        ),
+    )
 
 
 class FloridaDORDirectoryClient:
@@ -1171,6 +1436,20 @@ def execute(
                         resume=args.resume,
                         max_bytes=args.max_download_bytes,
                     )
+                    archive = inspect_zip(download.path).to_dict()
+                    csv_inspection = None
+                    csv_inspection_key = None
+                    if Path(download.path).is_file():
+                        if args.dataset_type == "nal":
+                            csv_inspection = inspect_nal_csv_archive(
+                                download.path
+                            )
+                            csv_inspection_key = "nal_csv"
+                        elif args.dataset_type == "sdf":
+                            csv_inspection = inspect_sdf_csv_archive(
+                                download.path
+                            )
+                            csv_inspection_key = "sdf_csv"
                     result = PublicRecordsResult.success(
                         query,
                         [
@@ -1178,7 +1457,17 @@ def execute(
                                 **record,
                                 "selected_artifact": artifact.to_dict(),
                                 "download": download.to_dict(),
-                                "archive": inspect_zip(download.path).to_dict(),
+                                "archive": archive,
+                                **(
+                                    {
+                                        str(csv_inspection_key): (
+                                            csv_inspection
+                                        )
+                                    }
+                                    if csv_inspection is not None
+                                    and csv_inspection_key is not None
+                                    else {}
+                                ),
                             }
                         ],
                         raw_artifact_refs=[download.path],

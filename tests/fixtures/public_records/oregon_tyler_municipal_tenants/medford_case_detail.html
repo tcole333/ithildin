@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <body>
+    <div class="page-header"><h1>Citation M100-01</h1></div>
+    <h3>Defendant</h3>
+    <table><tr><th>Name</th><td>JANE DOE</td></tr></table>
+    <section id="citation-information">
+      <table>
+        <tr><th>Docket Number</th><td>2400100</td></tr>
+        <tr><th>Offense Description</th><td>SAMPLE OFFENSE</td></tr>
+        <tr><th>Filed Date</th><td>07/02/2026</td></tr>
+        <tr><th>PD Case Number</th><td>26-100</td></tr>
+      </table>
+    </section>
+    <section id="status">
+      <table>
+        <tr><th>Status</th><td>Open</td></tr>
+        <tr><th>Active Warrant</th><td>No</td></tr>
+      </table>
+    </section>
+    <section id="fee-info"><table></table></section>
+    <section id="judgement-info"><table></table></section>
+    <h3>Violations</h3>
+    <table>
+      <thead><tr><th>Violation</th><th>Status</th></tr></thead>
+      <tbody><tr><td>SAMPLE OFFENSE</td><td>Open</td></tr></tbody>
+    </table>
+    <div id="documents">
+      <a href="/medfordor/Cases/ViolationDocuments/Download/doc-1">
+        Download document
+      </a>
+    </div>
+    <a href="https://www.municipalonlinepayments.com/medfordor/court/search">
+      Payment lookup
+    </a>
+    <script>
+      $.getJSON('/medfordor/Cases/ViolationHistory?citationNumber=M100');
+      $.getJSON('/medfordor/Cases/ViolationDocuments?citationNumber=M100');
+    </script>
+  </body>
+</html>

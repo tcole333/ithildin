@@ -1,0 +1,51 @@
+<form action="/dockets" method="post" id="docket-search-form">
+  <select name="district">
+    <option value="-1">Select</option>
+    <option value="2">2nd Judicial District</option>
+  </select>
+  <select name="county">
+    <option value="-1">Select</option>
+    <option value="16">Denver - District</option>
+  </select>
+  <select name="courthouse">
+    <option value="">Select</option>
+    <option value="16_civil">Denver City &amp; County Bldg (Civil and Domestic Matters)</option>
+    <option value="16_criminal">Lindsey-Flanigan Courthouse (Criminal Matters)</option>
+  </select>
+  <select name="court">
+    <option value="" selected="selected">Both</option>
+    <option value="C">County</option>
+    <option value="D">District</option>
+  </select>
+  <input name="division" value="" />
+  <select name="date_range">
+    <option value="6_month">6 Months</option>
+    <option value="3_month">3 Months</option>
+    <option value="1_month">1 Month</option>
+    <option value="1_week" selected="selected">1 Week</option>
+    <option value="today">Today</option>
+    <option value="specific_date">Specific Date</option>
+  </select>
+  <input name="specific_date" value="" />
+  <input name="four_digit_year" value="" />
+  <select name="case_class">
+    <option value="">Select</option>
+    <option value="CR">CR</option>
+    <option value="CV">CV</option>
+    <option value="DR">DR</option>
+  </select>
+  <input name="case_sequence" value="" />
+  <input type="radio" name="name_type" value="individual" checked="checked" />
+  <input type="radio" name="name_type" value="company" />
+  <input name="first_name" value="" />
+  <input name="last_name" value="" />
+  <input name="company_name" value="" />
+  <input type="radio" name="attorney_type" value="name" checked="checked" />
+  <input type="radio" name="attorney_type" value="number" />
+  <input name="bar_number" value="" />
+  <input name="attorney_first_name" value="" />
+  <input name="attorney_last_name" value="" />
+  <input name="form_build_id" value="form-TRANSIENT-DO-NOT-EXPOSE" />
+  <input name="form_id" value="docket_search_form" />
+  <button name="op" value="Find Dockets">Find Dockets</button>
+</form>

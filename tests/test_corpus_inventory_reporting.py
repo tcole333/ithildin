@@ -46,6 +46,12 @@ def test_source_report_corpus_descriptions_use_live_inventory(monkeypatch):
                 "entity_mentions": 34,
                 "financial_transactions": 5,
             }
+        elif path.name == "epstein_derived.db":
+            inventory = {
+                "artifact_locations": 27,
+                "unique_artifacts": 14,
+                "metadata_observations": 56,
+            }
         else:
             inventory = {
                 "files": 67,
@@ -94,3 +100,9 @@ def test_source_report_corpus_descriptions_use_live_inventory(monkeypatch):
     assert report["LMSBAND"]["description"] == (
         "67 files, 89 entity mentions, and 10 co-occurrences"
     )
+    assert report["Epstein Artifact Metadata"]["records"] == 27
+    assert report["Epstein Artifact Metadata"]["inventory"] == {
+        "artifact_locations": 27,
+        "unique_artifacts": 14,
+        "metadata_observations": 56,
+    }

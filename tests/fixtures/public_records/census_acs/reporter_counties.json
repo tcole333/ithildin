@@ -1,0 +1,252 @@
+{
+  "release": {
+    "id": "acs2024_5yr",
+    "name": "ACS 2024 5-year",
+    "years": "2020-2024"
+  },
+  "tables": {
+    "B01002": {
+      "title": "Median Age by Sex",
+      "universe": "Total population",
+      "columns": {
+        "B01002001": {"name": "Median age -- Total:"}
+      }
+    },
+    "B01003": {
+      "title": "Total Population",
+      "universe": "Total population",
+      "columns": {
+        "B01003001": {"name": "Total"}
+      }
+    },
+    "B03002": {
+      "title": "Hispanic or Latino Origin by Race",
+      "universe": "Total population",
+      "columns": {
+        "B03002001": {"name": "Total"},
+        "B03002003": {"name": "White alone, not Hispanic"},
+        "B03002004": {"name": "Black alone, not Hispanic"},
+        "B03002005": {"name": "AIAN alone, not Hispanic"},
+        "B03002006": {"name": "Asian alone, not Hispanic"},
+        "B03002007": {"name": "NHPI alone, not Hispanic"},
+        "B03002008": {"name": "Other race alone, not Hispanic"},
+        "B03002009": {"name": "Two or more races, not Hispanic"},
+        "B03002012": {"name": "Hispanic or Latino"}
+      }
+    },
+    "B09001": {
+      "title": "Population Under 18 Years by Age",
+      "universe": "Population under 18 years",
+      "columns": {
+        "B09001001": {"name": "Total"}
+      }
+    },
+    "B09020": {
+      "title": "Relationship by Household Type for Population 65+",
+      "universe": "Population 65 years and over",
+      "columns": {
+        "B09020001": {"name": "Total"}
+      }
+    },
+    "B17001": {
+      "title": "Poverty Status by Sex by Age",
+      "universe": "Population for whom poverty status is determined",
+      "columns": {
+        "B17001001": {"name": "Total"},
+        "B17001002": {"name": "Income below poverty level"}
+      }
+    },
+    "B19013": {
+      "title": "Median Household Income",
+      "universe": "Households",
+      "columns": {
+        "B19013001": {"name": "Median household income"}
+      }
+    },
+    "B19301": {
+      "title": "Per Capita Income",
+      "universe": "Total population",
+      "columns": {
+        "B19301001": {"name": "Per capita income"}
+      }
+    },
+    "B25001": {
+      "title": "Housing Units",
+      "universe": "Housing units",
+      "columns": {
+        "B25001001": {"name": "Total"}
+      }
+    },
+    "B25003": {
+      "title": "Tenure",
+      "universe": "Occupied housing units",
+      "columns": {
+        "B25003001": {"name": "Total"},
+        "B25003002": {"name": "Owner occupied"},
+        "B25003003": {"name": "Renter occupied"}
+      }
+    },
+    "B25077": {
+      "title": "Median Value",
+      "universe": "Owner-occupied housing units",
+      "columns": {
+        "B25077001": {"name": "Median value"}
+      }
+    }
+  },
+  "geography": {
+    "04000US24": {"name": "Maryland"},
+    "05000US24001": {"name": "Allegany County, MD"},
+    "05000US24003": {"name": "Anne Arundel County, MD"}
+  },
+  "data": {
+    "05000US24001": {
+      "B01002": {
+        "estimate": {"B01002001": 41.2},
+        "error": {"B01002001": 0.4}
+      },
+      "B01003": {
+        "estimate": {"B01003001": 67452.0},
+        "error": {"B01003001": null}
+      },
+      "B03002": {
+        "estimate": {
+          "B03002001": 67452.0,
+          "B03002003": 57908.0,
+          "B03002004": 4594.0,
+          "B03002005": 116.0,
+          "B03002006": 708.0,
+          "B03002007": 28.0,
+          "B03002008": 349.0,
+          "B03002009": 2421.0,
+          "B03002012": 1328.0
+        },
+        "error": {
+          "B03002001": null,
+          "B03002003": 246.0,
+          "B03002004": 270.0,
+          "B03002005": 64.0,
+          "B03002006": 110.0,
+          "B03002007": 57.0,
+          "B03002008": 197.0,
+          "B03002009": 350.0,
+          "B03002012": null
+        }
+      },
+      "B09001": {
+        "estimate": {"B09001001": 12032.0},
+        "error": {"B09001001": null}
+      },
+      "B09020": {
+        "estimate": {"B09020001": 14262.0},
+        "error": {"B09020001": 89.0}
+      },
+      "B17001": {
+        "estimate": {"B17001001": 61133.0, "B17001002": 10302.0},
+        "error": {"B17001001": 166.0, "B17001002": 1134.0}
+      },
+      "B19013": {
+        "estimate": {"B19013001": 59603.0},
+        "error": {"B19013001": 2750.0}
+      },
+      "B19301": {
+        "estimate": {"B19301001": 31210.0},
+        "error": {"B19301001": 885.0}
+      },
+      "B25001": {
+        "estimate": {"B25001001": 32720.0},
+        "error": {"B25001001": 63.0}
+      },
+      "B25003": {
+        "estimate": {
+          "B25003001": 27382.0,
+          "B25003002": 19363.0,
+          "B25003003": 8019.0
+        },
+        "error": {
+          "B25003001": 459.0,
+          "B25003002": 567.0,
+          "B25003003": 558.0
+        }
+      },
+      "B25077": {
+        "estimate": {"B25077001": 154900.0},
+        "error": {"B25077001": 3969.0}
+      }
+    },
+    "05000US24003": {
+      "B01002": {
+        "estimate": {"B01002001": 40.2},
+        "error": {"B01002001": 0.2}
+      },
+      "B01003": {
+        "estimate": {"B01003001": 598061.0},
+        "error": {"B01003001": null}
+      },
+      "B03002": {
+        "estimate": {
+          "B03002001": 598061.0,
+          "B03002003": 379900.0,
+          "B03002004": 105000.0,
+          "B03002005": 1000.0,
+          "B03002006": 27000.0,
+          "B03002007": 300.0,
+          "B03002008": 4000.0,
+          "B03002009": 30000.0,
+          "B03002012": 50861.0
+        },
+        "error": {
+          "B03002001": null,
+          "B03002003": 1000.0,
+          "B03002004": 900.0,
+          "B03002005": 150.0,
+          "B03002006": 500.0,
+          "B03002007": 70.0,
+          "B03002008": 300.0,
+          "B03002009": 800.0,
+          "B03002012": 700.0
+        }
+      },
+      "B09001": {
+        "estimate": {"B09001001": 130000.0},
+        "error": {"B09001001": 100.0}
+      },
+      "B09020": {
+        "estimate": {"B09020001": 95000.0},
+        "error": {"B09020001": 150.0}
+      },
+      "B17001": {
+        "estimate": {"B17001001": 580000.0, "B17001002": 35000.0},
+        "error": {"B17001001": 500.0, "B17001002": 1200.0}
+      },
+      "B19013": {
+        "estimate": {"B19013001": 120060.0},
+        "error": {"B19013001": 1760.0}
+      },
+      "B19301": {
+        "estimate": {"B19301001": 55000.0},
+        "error": {"B19301001": 600.0}
+      },
+      "B25001": {
+        "estimate": {"B25001001": 230000.0},
+        "error": {"B25001001": 200.0}
+      },
+      "B25003": {
+        "estimate": {
+          "B25003001": 220000.0,
+          "B25003002": 160000.0,
+          "B25003003": 60000.0
+        },
+        "error": {
+          "B25003001": 700.0,
+          "B25003002": 900.0,
+          "B25003003": 850.0
+        }
+      },
+      "B25077": {
+        "estimate": {"B25077001": 420000.0},
+        "error": {"B25077001": 5000.0}
+      }
+    }
+  }
+}

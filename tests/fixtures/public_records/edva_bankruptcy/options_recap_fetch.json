@@ -1,0 +1,23 @@
+{
+  "name": "RECAP Fetch List",
+  "description": "Create PACER-backed acquisition requests.",
+  "renders": [
+    "application/json"
+  ],
+  "parses": [
+    "application/json"
+  ],
+  "actions": {
+    "POST": {
+      "client_code": {"type": "string", "required": false},
+      "court": {"type": "field", "required": false},
+      "docket": {"type": "field", "required": false},
+      "docket_number": {"type": "string", "required": false},
+      "pacer_case_id": {"type": "string", "required": false},
+      "pacer_password": {"type": "string", "required": false},
+      "pacer_username": {"type": "string", "required": false},
+      "recap_document": {"type": "field", "required": false},
+      "request_type": {"type": "choice", "required": true}
+    }
+  }
+}

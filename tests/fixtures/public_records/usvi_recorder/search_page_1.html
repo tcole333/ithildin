@@ -1,0 +1,18 @@
+<!doctype html>
+<html><body>
+<script>
+searchResultObj = new SearchResult();
+searchResultObj.noResults = false;
+searchResultObj.numRecordPages = 2;
+searchResultObj.resultListSize = 2;
+searchResultObj.resultsCount = 3;
+$("#navDisplay").text("Displaying 1\-2 of 3 Items");
+</script>
+<form name="resultForm" action="searchResults.do">
+  <input name="sortColumn" value="allname">
+  <input name="sortDirection" value="asc">
+  <input name="startCursor" value="0">
+</form>
+<iframe id="resultListFrame"
+ src="USVI/docs_SearchResultList.jsp?scrollPos=0&amp;searchSessionId=searchJobMain"></iframe>
+</body></html>

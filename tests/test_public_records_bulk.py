@@ -302,6 +302,67 @@ def test_existing_verified_download_is_reused(tmp_path):
     assert len(opener.requests) == 1
 
 
+def test_existing_same_size_download_without_digest_is_refetched(tmp_path):
+    destination = tmp_path / "archive.zip"
+    destination.write_bytes(b"stale bytes")
+    current_body = b"fresh bytes"
+    artifact = BulkArtifact.from_url(
+        "shapefile",
+        "https://example.test/archive.zip",
+    )
+    opener = RecordingOpener(
+        [
+            FakeResponse(headers={"Content-Length": str(len(current_body))}),
+            FakeResponse(current_body),
+        ]
+    )
+
+    result = BulkTransferClient(opener=opener).download(artifact, destination)
+
+    assert destination.read_bytes() == current_body
+    assert result.reused_existing is False
+    assert result.resumed_from == 0
+    assert len(opener.requests) == 2
+
+
+def test_partial_without_digest_or_validator_restarts_from_zero(tmp_path):
+    full_body = b"current publication"
+    artifact = BulkArtifact.from_url(
+        "shapefile",
+        "https://example.test/archive.zip",
+    )
+    destination = tmp_path / "archive.zip"
+    partial = tmp_path / "archive.zip.part"
+    state = tmp_path / "archive.zip.part.json"
+    partial.write_bytes(b"stale ")
+    state.write_text(
+        json.dumps(
+            {
+                "url": artifact.url,
+                "etag": None,
+                "last_modified": None,
+                "expected_size": len(full_body),
+                "expected_sha256": None,
+            }
+        ),
+        encoding="utf-8",
+    )
+    opener = RecordingOpener(
+        [
+            FakeResponse(headers={"Content-Length": str(len(full_body))}),
+            FakeResponse(full_body),
+        ]
+    )
+
+    result = BulkTransferClient(opener=opener).download(artifact, destination)
+
+    assert destination.read_bytes() == full_body
+    assert result.resumed_from == 0
+    request = opener.requests[1][0]
+    assert request.get_header("Range") is None
+    assert request.get_header("If-range") is None
+
+
 def test_zip_inspection_fingerprints_schema_and_extracts_safely(tmp_path):
     archive = tmp_path / "parcels.zip"
     make_zip(

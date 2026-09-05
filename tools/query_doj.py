@@ -12,6 +12,7 @@ Usage:
 """
 
 import argparse
+import hashlib
 import json
 import os
 import sqlite3
@@ -19,7 +20,7 @@ import sys
 import tempfile
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 from urllib.request import Request, urlopen
 
 try:
@@ -41,7 +42,10 @@ def _log(query, source, count):
 
 DB_PATH = "/Users/travcole/projects/epstein-docs/output/documents.db"
 DOJ_EPSTEIN_HOSTS = {"justice.gov", "www.justice.gov"}
-MAX_PDF_BYTES = 500 * 1024 * 1024
+DOJ_PDF_PATH_PREFIXES = (
+    "/epstein/files/",
+    "/multimedia/court records/",
+)
 
 
 def get_db():
@@ -110,18 +114,28 @@ def get_names(bates_id):
     return None
 
 
-def download_epstein_pdf(url, output_path, *, opener=None):
-    """Download one public DOJ Epstein PDF through the age-verification gate."""
+def download_epstein_pdf(
+    url,
+    output_path,
+    *,
+    opener=None,
+    max_bytes=None,
+    timeout=60,
+):
+    """Download one indexed DOJ Epstein PDF through the age-verification gate."""
     parsed = urlparse(url)
+    normalized_path = unquote(parsed.path).casefold()
     if (
         parsed.scheme != "https"
         or parsed.hostname not in DOJ_EPSTEIN_HOSTS
-        or not parsed.path.casefold().startswith("/epstein/files/")
-        or not parsed.path.casefold().endswith(".pdf")
+        or not normalized_path.startswith(DOJ_PDF_PATH_PREFIXES)
+        or not normalized_path.endswith(".pdf")
     ):
         raise ValueError(
-            "download URL must be an official HTTPS justice.gov/epstein/files/*.pdf"
+            "download URL must be an official HTTPS justice.gov indexed Epstein PDF"
         )
+    if max_bytes is not None and max_bytes <= 0:
+        raise ValueError("max_bytes must be positive when supplied")
 
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -136,8 +150,9 @@ def download_epstein_pdf(url, output_path, *, opener=None):
     opener = opener or urlopen
     temp_path = None
     total = 0
+    digest = hashlib.sha256()
     try:
-        with opener(request, timeout=60) as response:
+        with opener(request, timeout=timeout) as response:
             content_type = response.headers.get("Content-Type", "")
             prefix = response.read(5)
             if "text/html" in content_type.casefold() or prefix != b"%PDF-":
@@ -154,17 +169,25 @@ def download_epstein_pdf(url, output_path, *, opener=None):
             ) as handle:
                 temp_path = Path(handle.name)
                 handle.write(prefix)
+                digest.update(prefix)
                 total = len(prefix)
                 while True:
                     chunk = response.read(1024 * 1024)
                     if not chunk:
                         break
                     total += len(chunk)
-                    if total > MAX_PDF_BYTES:
+                    if max_bytes is not None and total > max_bytes:
                         raise ValueError(
-                            f"DOJ PDF exceeds the {MAX_PDF_BYTES:,}-byte safety limit"
+                            f"DOJ PDF exceeds caller-selected max_bytes={max_bytes}"
                         )
                     handle.write(chunk)
+                    digest.update(chunk)
+            geturl = getattr(response, "geturl", None)
+            retrieved_url = geturl() if callable(geturl) else url
+            status = getattr(response, "status", None)
+            if status is None:
+                getcode = getattr(response, "getcode", None)
+                status = getcode() if callable(getcode) else None
         os.replace(temp_path, output_path)
         temp_path = None
     finally:
@@ -173,9 +196,13 @@ def download_epstein_pdf(url, output_path, *, opener=None):
 
     return {
         "url": url,
+        "source_url": url,
+        "retrieved_url": retrieved_url,
         "output": str(output_path),
         "content_type": content_type,
+        "http_status": status,
         "bytes": total,
+        "sha256": digest.hexdigest(),
     }
 
 
@@ -209,10 +236,15 @@ def main():
     # download
     d = subparsers.add_parser(
         "download",
-        help="Download a public DOJ Epstein PDF through the age gate",
+        help="Download an indexed DOJ Epstein PDF through the age gate",
     )
-    d.add_argument("url", help="Official justice.gov/epstein/files/*.pdf URL")
+    d.add_argument("url", help="Indexed justice.gov Epstein PDF URL")
     d.add_argument("--output", required=True, help="Destination PDF path")
+    d.add_argument(
+        "--max-bytes",
+        type=int,
+        help="Optional caller-selected maximum download size",
+    )
 
     args = parser.parse_args()
 
@@ -276,7 +308,11 @@ def main():
 
     elif args.command == "download":
         try:
-            result = download_epstein_pdf(args.url, args.output)
+            result = download_epstein_pdf(
+                args.url,
+                args.output,
+                max_bytes=args.max_bytes,
+            )
         except (HTTPError, URLError, OSError, ValueError) as error:
             print(f"ERROR: {error}", file=sys.stderr)
             raise SystemExit(2) from error

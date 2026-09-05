@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <body>
+    <input id="dnn_ctl01_ProxyAddressQuickSearch" value="/Proxy/" />
+    <input id="dnn_ctl01_TaxYear" value="2026" />
+    <script>
+      $.getJSON(proxyAddressQuickSearch + "Search/Properties/quick/?f=" + filteredText);
+      window.location = "/Property-Detail/PropertyQuickRefID/" +
+        selectedItem.PropertyQuickRefID + "/PartyQuickRefID/" +
+        selectedItem.PartyQuickRefID + "/";
+    </script>
+  </body>
+</html>

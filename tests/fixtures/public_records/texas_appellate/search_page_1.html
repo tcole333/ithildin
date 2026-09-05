@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <body>
+    <form id="aspnetForm" action="./CaseSearch.aspx?coa=cossup" method="post">
+      <input type="hidden" name="__VIEWSTATE" value="fixture-page-1">
+      <input type="hidden" name="__EVENTVALIDATION" value="fixture-validation-1">
+      <select id="ctl00_ContentPlaceHolder1_ddlOriginateCOA">
+        <option value="">All Courts</option>
+        <option value="3">3rd Court</option>
+      </select>
+      <select id="ctl00_ContentPlaceHolder1_ddCounty">
+        <option value="">All Counties</option>
+        <option value="227">Travis</option>
+      </select>
+      <select id="ctl00_ContentPlaceHolder1_ddlTrialCourt">
+        <option value="">All Trial Courts</option>
+        <option value="250">250th District Court</option>
+      </select>
+      <table id="ctl00_ContentPlaceHolder1_grdCases_ctl00">
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Date Filed</th>
+            <th>Style</th>
+            <th>v.</th>
+            <th>Case Type</th>
+            <th>COA Case Number</th>
+            <th>Trial Court Case Number</th>
+            <th>Trial County</th>
+            <th>Trial Court</th>
+            <th>Court</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="Case.aspx?cn=26-0797&amp;coa=cossup">26-0797</a></td>
+            <td>07/27/2026</td>
+            <td>IN RE TESLA HEALTH SYSTEMS, LLC</td>
+            <td>&nbsp;</td>
+            <td>Petition for Writ of Mandamus</td>
+            <td>14-26-00393-CV 14-25-00034-CV</td>
+            <td>2024-53990</td>
+            <td>Harris</td>
+            <td>11th District Court</td>
+            <td>SC</td>
+            <td>cossup</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="Case.aspx?cn=03-25-00287-CV&amp;coa=coa03">
+                03-25-00287-CV
+              </a>
+            </td>
+            <td>04/25/2025</td>
+            <td>Tesla Insurance Company</td>
+            <td>Karla Roberson</td>
+            <td>Insurance</td>
+            <td>&nbsp;</td>
+            <td>D-1-GN-24-008508</td>
+            <td>Travis</td>
+            <td>250th District Court</td>
+            <td>3rd Court</td>
+            <td>coa03</td>
+          </tr>
+        </tbody>
+      </table>
+      <span class="rgInfoPart">3 items in 2 pages</span>
+      <input
+        class="rgCurrentPage"
+        name="ctl00$ContentPlaceHolder1$grdCases$ctl00$ctl03$ctl01"
+        type="submit"
+        value="1"
+      >
+      <input
+        class="rgPageNext"
+        name="ctl00$ContentPlaceHolder1$grdCases$ctl00$ctl03$ctl01$ctl03"
+        type="submit"
+        value=" "
+      >
+    </form>
+  </body>
+</html>

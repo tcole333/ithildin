@@ -6,6 +6,8 @@ import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
+
 from tools.public_records_catalog import PublicRecordsCatalog
 from tools import source_report
 
@@ -270,3 +272,92 @@ def test_public_records_catalog_direct_cli_uses_local_import_fallback(tmp_path):
     result = json.loads(completed.stdout)
     assert result["available"] is True
     assert result["status"] == "available"
+
+
+def test_check_cli_accepts_json_after_subcommand(tmp_path):
+    catalog_path = tmp_path / "public_records_catalog.db"
+    catalog = PublicRecordsCatalog(catalog_path)
+    manifest = _catalog_manifest(
+        "us-test-property",
+        name="Test Property",
+        domain="property",
+        access_class="A",
+        automation_disposition="allowed",
+    )
+    catalog.register_manifest(
+        manifest,
+        submitted_by="test:subcommand-json",
+        submitted_at="2026-07-30T12:00:00Z",
+    )
+    catalog.evaluate_access(
+        manifest["source_id"],
+        access_class="A",
+        automation_disposition="allowed",
+        reviewed_by="test:subcommand-json",
+        review_basis="Fixture review.",
+        reviewed_at="2026-07-30T12:00:00Z",
+    )
+
+    root = Path(__file__).resolve().parent.parent
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "tools/source_report.py",
+            "check",
+            "us-test-property",
+            "--json",
+            "--public-records-db",
+            str(catalog_path),
+        ],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    result = json.loads(completed.stdout)
+    assert result["available"] is True
+    assert result["source_id"] == "us-test-property"
+
+
+def test_quick_health_check_resolves_exact_public_record_source_id(
+    tmp_path,
+    monkeypatch,
+):
+    catalog_path = tmp_path / "public_records_catalog.db"
+    catalog = PublicRecordsCatalog(catalog_path)
+    manifest = _catalog_manifest(
+        "us-test-property",
+        name="Test Property",
+        domain="property",
+        access_class="A",
+        automation_disposition="allowed",
+    )
+    catalog.register_manifest(
+        manifest,
+        submitted_by="test:source-id-check",
+        submitted_at="2026-07-30T12:00:00Z",
+    )
+    catalog.evaluate_access(
+        manifest["source_id"],
+        access_class="A",
+        automation_disposition="allowed",
+        reviewed_by="test:source-id-check",
+        review_basis="Fixture review.",
+        reviewed_at="2026-07-30T12:00:00Z",
+    )
+    monkeypatch.setattr(
+        source_report,
+        "generate_report",
+        lambda: pytest.fail("exact catalog ID should not run the full report"),
+    )
+
+    result = source_report.quick_health_check(
+        "US-TEST-PROPERTY",
+        public_records_db=catalog_path,
+    )
+
+    assert result["available"] is True
+    assert result["status"] == "configured"
+    assert result["source_id"] == "us-test-property"
+    assert result["name"] == "Public records / Test Property"

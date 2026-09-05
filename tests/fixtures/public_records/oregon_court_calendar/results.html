@@ -1,0 +1,126 @@
+<html>
+  <body>
+    <form
+      id="SearchParameters"
+      action="CourtCalendarSearchResults.aspx"
+      method="post"
+    >
+      <input type="hidden" name="SearchType" value="DATERANGE" />
+      <input type="hidden" name="SearchMode" value="DATERANGE" />
+      <input type="hidden" name="SearchBy" value="5" />
+      <input type="hidden" name="CaseCategories" value="CR,CV,FAM,PR" />
+      <input
+        type="hidden"
+        name="DateSettingOnAfter"
+        value="07/29/2026"
+      />
+      <input
+        type="hidden"
+        name="DateSettingOnBefore"
+        value="07/29/2026"
+      />
+    </form>
+    <div class="ssHeaderTitleBanner">Calendar Search Results</div>
+    <nav>Location : Deschutes <a href="help.pdf">Help</a></nav>
+    <table>
+      <tr><td>Record Count:</td></tr>
+      <tr><td>3</td></tr>
+    </table>
+    <table id="calendar-results">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>Sort By</td>
+              <td>Case Number</td>
+              <td>Date and Time</td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>Case Number</td>
+              <td>Judicial Officer</td>
+              <td>Time</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <th>Style</th>
+              <th>Physical Location</th>
+              <th>Hearing Type</th>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <img src="warrant.png" alt="Active Warrant" />
+                26CR10001
+              </td>
+            </tr>
+            <tr><td>Offense Felony</td></tr>
+          </table>
+        </td>
+        <td>State of Oregon<br />Alex Example</td>
+        <td>
+          <table>
+            <tr><td>Flint, Bethany</td></tr>
+            <tr><td>Courtroom 2D</td></tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr><td>07/29/2026</td></tr>
+            <tr><td>8:30 AM</td></tr>
+            <tr><td>Hearing - Plea</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr><td>26CR10001</td></tr>
+            <tr><td>Offense Felony</td></tr>
+          </table>
+        </td>
+        <td>State of Oregon<br />Alex Example</td>
+        <td>
+          <table>
+            <tr><td>Miller, Walter R</td></tr>
+            <tr><td>Courtroom 1A</td></tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr><td>07/30/2026</td></tr>
+            <tr><td>1:30 PM</td></tr>
+            <tr><td>Hearing - Sentencing</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr><td>26DR20002</td></tr>
+            <tr><td>Dissolution</td></tr>
+          </table>
+        </td>
+        <td>Jordan Example vs. Taylor Example</td>
+        <td>
+          <table>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td></td></tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr><td>07/29/2026</td></tr>
+            <tr><td>9:00 AM</td></tr>
+            <tr><td>Hearing - Modification</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

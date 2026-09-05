@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Service/Process</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <input type="hidden" name="formAction" value="caseDetails">
+      <input type="text" name="lastName" value="">
+      <input type="text" name="firstName" value="">
+      <input type="text" name="middleName" value="">
+      <input type="text" name="suffix" value="">
+      <input type="hidden" name="curentFipsCode" value="013">
+      <select name="searchCategory" disabled>
+        <option value="A">Current</option>
+        <option value="I">Archived</option>
+        <option value="O">All</option>
+      </select>
+      <input type="hidden" name="searchCategory" value="S">
+      <input type="hidden" name="searchFipsCode" value="013">
+      <input type="submit" name="caseSearch" value="Search">
+    </form>
+  </body>
+</html>

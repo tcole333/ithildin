@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/medfordor/Cases/Search">
+      <select id="SearchBy" name="SearchBy">
+        <option value="Name">Name</option>
+        <option value="CitationNumber">Citation Number</option>
+        <option value="DocketNumber">Docket Number</option>
+        <option value="CaseNumber">PD Case Number</option>
+        <option value="VehiclePlate">Vehicle Plate</option>
+        <option value="VIN">VIN</option>
+      </select>
+    </form>
+    <table>
+      <thead>
+        <tr><th>Warrant</th><th>Last</th><th>First</th><th>Case</th></tr>
+      </thead>
+      <tbody>
+        <tr
+          data-sort-citation-number="M100"
+          data-sort-docket-number="D-2400100"
+          data-sort-offense="SAMPLE OFFENSE"
+          data-sort-violation-date="20260701"
+          data-sort-status="Open"
+          data-sort-status-date="20260702"
+          data-sort-fine-amount="$125.00"
+        >
+          <td>No</td>
+          <td class="visible-lg">DOE</td>
+          <td class="visible-lg">JANE</td>
+          <td>
+            <a href="/medfordor/Cases/Detail?citationNumber=M100&amp;violationNumber=01">
+              M100-01
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -650,6 +650,47 @@ def test_probe_health_distinguishes_true_zero_degradation_and_restriction(
     )[0]["health"] == "restricted"
 
 
+def test_probe_history_accepts_websocket_transport_endpoints(
+    catalog: PublicRecordsCatalog,
+    source_manifest: dict,
+) -> None:
+    register(catalog, source_manifest)
+
+    probe = catalog.record_probe(
+        source_manifest["source_id"],
+        status="ok",
+        endpoint="wss://records.example.gov/ws",
+        result_count=1,
+        probed_by="agent:sentinel",
+        probed_at=NOW,
+    )
+
+    assert catalog.probe_history(
+        source_manifest["source_id"],
+        probe_ids=[probe["probe_id"]],
+    )[0]["endpoint"] == "wss://records.example.gov/ws"
+    assert catalog.health(
+        source_manifest["source_id"],
+        as_of="2026-07-28T13:00:00Z",
+    )[0]["endpoint"] == "wss://records.example.gov/ws"
+
+
+def test_probe_history_rejects_non_network_endpoint(
+    catalog: PublicRecordsCatalog,
+    source_manifest: dict,
+) -> None:
+    register(catalog, source_manifest)
+
+    with pytest.raises(CatalogError, match="WebSocket URL"):
+        catalog.record_probe(
+            source_manifest["source_id"],
+            status="ok",
+            endpoint="file:///tmp/probe.json",
+            probed_by="agent:sentinel",
+            probed_at=NOW,
+        )
+
+
 def test_probe_health_marks_old_latest_probe_stale(
     catalog: PublicRecordsCatalog,
     source_manifest: dict,

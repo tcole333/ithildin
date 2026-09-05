@@ -102,6 +102,12 @@ PROBE_FEASIBILITY = {
     "source_changed": 0.0,
     "error": 0.0,
 }
+JURISDICTION_COVERAGE_FEASIBILITY = {
+    "jurisdiction": 15.0,
+    "nationwide": 15.0,
+    "direct_target_link": 15.0,
+    "subjurisdiction": 5.0,
+}
 
 SOURCE_STATUS_RISK = {
     "active": 0.0,
@@ -139,19 +145,38 @@ PROBE_RISK = {
 
 ROLE_ALIASES: dict[tuple[str, str], dict[str, frozenset[str]]] = {
     ("property", "assessment_roll"): {
-        "roles": frozenset({"assessment", "appraisal", "assessment_roll", "sales"}),
+        "roles": frozenset({"assessment", "appraisal", "assessment_roll"}),
         "capabilities": frozenset(
-            {"search_owner", "search_address", "fetch_parcel", "search_sales"}
+            {"search_owner", "search_address", "fetch_parcel"}
         ),
     },
     ("property", "parcel_geometry"): {
         "roles": frozenset({"parcel_geometry", "gis", "parcels"}),
-        "capabilities": frozenset({"fetch_geometry", "search_parcels"}),
+        "capabilities": frozenset({"fetch_geometry"}),
     },
     ("property", "tax_collection"): {
-        "roles": frozenset({"tax_collection", "tax_status", "tax_sale"}),
+        "roles": frozenset(
+            {
+                "tax_collection",
+                "property_tax",
+                "tax_status",
+                "delinquency",
+                "tax_account",
+                "bill_installments",
+                "payment_history",
+                "tax_sale",
+            }
+        ),
         "capabilities": frozenset(
-            {"search_tax_default", "search_tax_sale", "fetch_tax_status"}
+            {
+                "search_tax_accounts",
+                "search_tax_default",
+                "search_tax_sale",
+                "fetch_account",
+                "fetch_tax_status",
+                "fetch_bills",
+                "fetch_payment_history",
+            }
         ),
     },
     ("property", "land_records_index"): {
@@ -163,16 +188,21 @@ ROLE_ALIASES: dict[tuple[str, str], dict[str, frozenset[str]]] = {
         ),
     },
     ("court", "court_directory"): {
-        "roles": frozenset({"court_directory", "court", "clerk", "court_administration"}),
+        "roles": frozenset(
+            {
+                "court_directory",
+                "court_locations",
+                "court_contacts",
+            }
+        ),
         "capabilities": frozenset({"list_courts", "search_courts"}),
     },
     ("court", "trial_case_index"): {
         "roles": frozenset(
             {
                 "trial_case_index",
+                "trial_case_metadata",
                 "case_metadata",
-                "document_portal",
-                "court",
             }
         ),
         "capabilities": frozenset(
@@ -181,7 +211,13 @@ ROLE_ALIASES: dict[tuple[str, str], dict[str, frozenset[str]]] = {
     },
     ("court", "appellate_opinions"): {
         "roles": frozenset(
-            {"appellate_opinions", "opinion_archive", "legal_aggregator"}
+            {
+                "appellate_opinions",
+                "appellate_release_index",
+                "supreme_court_release_index",
+                "opinion_archive",
+                "legal_aggregator",
+            }
         ),
         "capabilities": frozenset({"search_opinions", "fetch_opinion"}),
     },
@@ -189,12 +225,134 @@ ROLE_ALIASES: dict[tuple[str, str], dict[str, frozenset[str]]] = {
         "roles": frozenset(
             {
                 "bulk_data_program",
-                "court_administration",
-                "case_metadata",
+                "bulk_case_metadata",
+                "compiled_case_data",
+                "licensed_court_feed",
             }
         ),
-        "capabilities": frozenset({"sync", "bulk_download", "apply_deletions"}),
+        "capabilities": frozenset(
+            {
+                "sync",
+                "bulk_download",
+                "apply_deletions",
+                "request_bulk_distribution",
+                "request_court_data",
+            }
+        ),
     },
+}
+
+NATIONWIDE_STATE_COVERAGE_ROLES: dict[
+    tuple[str, str], frozenset[str]
+] = {
+    ("court", "trial_case_index"): frozenset(
+        {
+            "state_court_aggregator",
+            "nationwide_state_court_aggregator",
+        }
+    ),
+    ("court", "appellate_opinions"): frozenset(
+        {
+            "legal_aggregator",
+            "state_court_aggregator",
+            "nationwide_state_court_aggregator",
+        }
+    ),
+    ("property", "assessment_roll"): frozenset(
+        {
+            "national_property_aggregator",
+            "nationwide_property_aggregator",
+        }
+    ),
+    ("property", "parcel_geometry"): frozenset(
+        {
+            "national_property_aggregator",
+            "nationwide_property_aggregator",
+        }
+    ),
+    ("property", "tax_collection"): frozenset(
+        {
+            "national_property_aggregator",
+            "nationwide_property_aggregator",
+        }
+    ),
+    ("property", "land_records_index"): frozenset(
+        {
+            "national_property_aggregator",
+            "nationwide_property_aggregator",
+        }
+    ),
+}
+
+# These roles describe a deliberately narrower discovery or publication
+# surface. Its capabilities still help route searches, but a generic
+# ``search_cases``/``sync`` label alone should not promote that surface to a
+# complete trial index or bulk-data program. An exact/alias role or a direct
+# census association still establishes the target relationship.
+CAPABILITY_ONLY_COMPLEMENT_ROLES = frozenset(
+    {
+        "case_discovery",
+        "citation_by_publication",
+        "court_notices",
+        "foreclosure_notice",
+        "legal_notice_discovery",
+        "legal_notice_index",
+        "litigant_index",
+        "prefiling_orders",
+        "public_spreadsheet",
+        "trustee_sale_notice",
+        "appellate_case_metadata",
+        "appellate_docket",
+        "appellate_case_index",
+        "superior_court_probate",
+        "probate_case_index",
+        "probate_only",
+        "hearing_calendar",
+    }
+)
+
+# Some capability names are useful but too broad to establish a target by
+# themselves. For example, an opinion archive can fetch a document without
+# being a trial-case index, and a GIS can search parcels without being a
+# recorder. Exact roles, aliases, and direct census associations remain the
+# stronger signals.
+CAPABILITY_COVERAGE_SIGNALS: dict[
+    tuple[str, str], frozenset[str]
+] = {
+    ("property", "assessment_roll"): frozenset(
+        {"search_owner", "search_address", "fetch_parcel"}
+    ),
+    ("property", "parcel_geometry"): frozenset({"fetch_geometry"}),
+    ("property", "tax_collection"): frozenset(
+        {
+            "search_tax_accounts",
+            "search_tax_default",
+            "search_tax_sale",
+            "fetch_account",
+            "fetch_tax_status",
+            "fetch_bills",
+            "fetch_payment_history",
+        }
+    ),
+    ("property", "land_records_index"): frozenset(
+        {"search_parties", "fetch_instrument"}
+    ),
+    ("court", "court_directory"): frozenset(
+        {"list_courts", "search_courts"}
+    ),
+    ("court", "trial_case_index"): frozenset(
+        {"search_cases", "list_docket_entries"}
+    ),
+    ("court", "appellate_opinions"): frozenset(
+        {"search_opinions", "fetch_opinion"}
+    ),
+    ("court", "bulk_data_program"): frozenset(
+        {
+            "bulk_download",
+            "request_bulk_distribution",
+            "request_court_data",
+        }
+    ),
 }
 
 PROPERTY_KEYWORDS = frozenset(
@@ -430,10 +588,18 @@ class PublicRecordsPriority:
             if not state:
                 continue
             patterns[state] = (
-                re.compile(rf"(?<![A-Za-z]){re.escape(state)}(?![A-Za-z])"),
                 re.compile(
-                    rf",\s*{re.escape(state.casefold())}(?![a-z])",
+                    rf",[ \t]*{re.escape(state)}"
+                    r"(?=[ \t]*(?:\d{5}(?:-\d{4})?(?!\d)|\r?\n|$|[(),.;]))",
+                ),
+                re.compile(
+                    rf"(?<![A-Za-z]){re.escape(state)}"
+                    r"\s+\d{5}(?:-\d{4})?(?!\d)",
                     re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"(?<![A-Za-z]){re.escape(state)}"
+                    r"(?=\s*(?:$|[(),.;]))",
                 ),
                 re.compile(
                     rf"(?<![A-Za-z]){re.escape(name)}(?![A-Za-z])",
@@ -834,13 +1000,42 @@ class PublicRecordsPriority:
         exact_roles = sorted(source_roles & {role})
         alias_roles = sorted(source_roles & set(aliases["roles"]))
         capability_matches = sorted(capabilities & set(aliases["capabilities"]))
-        capability_establishes_coverage = coverage_kind != "nationwide"
+        nationwide_bridge_roles = sorted(
+            source_roles
+            & set(
+                NATIONWIDE_STATE_COVERAGE_ROLES.get(
+                    (domain, role),
+                    (),
+                )
+            )
+        )
+        if (
+            coverage_kind == "nationwide"
+            and not directly_linked
+            and not nationwide_bridge_roles
+        ):
+            return None
+        complement_roles = sorted(
+            source_roles & CAPABILITY_ONLY_COMPLEMENT_ROLES
+        )
+        capability_coverage_matches = sorted(
+            capabilities
+            & set(
+                CAPABILITY_COVERAGE_SIGNALS.get(
+                    (domain, role),
+                    (),
+                )
+            )
+        )
+        capability_establishes_coverage = bool(
+            capability_coverage_matches
+        ) and not complement_roles
         if directly_linked or exact_roles:
             points = 20.0
-        elif alias_roles or (
-            capability_establishes_coverage and capability_matches
-        ):
+        elif alias_roles and not complement_roles:
             points = 15.0
+        elif capability_establishes_coverage:
+            points = 10.0
         else:
             return None
         return points, {
@@ -848,7 +1043,12 @@ class PublicRecordsPriority:
             "exact_roles": exact_roles,
             "alias_roles": alias_roles,
             "capabilities": capability_matches,
-            "capability_establishes_coverage": capability_establishes_coverage,
+            "coverage_capabilities": capability_coverage_matches,
+            "nationwide_bridge_roles": nationwide_bridge_roles,
+            "complement_roles": complement_roles,
+            "capability_establishes_coverage": (
+                capability_establishes_coverage
+            ),
         }
 
     @staticmethod
@@ -921,10 +1121,16 @@ class PublicRecordsPriority:
             if probe_status is not None
             else 0.0
         )
+        jurisdiction_feasibility = JURISDICTION_COVERAGE_FEASIBILITY.get(
+            coverage_kind,
+            0.0,
+        )
         feasibility_components = {
             "jurisdiction_coverage": {
-                "score": 15.0,
+                "score": jurisdiction_feasibility,
                 "kind": coverage_kind,
+                "covers_complete_target_scope": coverage_kind
+                != "subjurisdiction",
             },
             "role_capability_evidence": {
                 "score": role_points,
@@ -1421,6 +1627,16 @@ class PublicRecordsPriority:
                     """
                 )
             ]
+            jurisdictions = db.execute(
+                """
+                SELECT jurisdiction_id, name AS jurisdiction_name,
+                       subdivision_code, geoid
+                FROM jurisdictions
+                WHERE country_code='US'
+                  AND kind='state_equivalent'
+                ORDER BY subdivision_code
+                """
+            ).fetchall()
             source_status_counts = {
                 str(row["source_status"]): int(row["count"])
                 for row in db.execute(
@@ -1476,6 +1692,11 @@ class PublicRecordsPriority:
         }
         targets_with_source_path = 0
         recomputed_targets = 0
+        basis_profile_counts: dict[str, int] = defaultdict(int)
+        basis_run_counts: dict[str, int] = defaultdict(int)
+        basis_input_counts: dict[str, int] = defaultdict(int)
+        basis_as_of_counts: dict[str, int] = defaultdict(int)
+        targets_without_profile_provenance = 0
         for row in rows:
             by_status[str(row["status"])] += 1
             for dimension in ("benefit", "feasibility", "risk"):
@@ -1494,6 +1715,23 @@ class PublicRecordsPriority:
             dimensions = basis.get("dimensions", {})
             if dimensions:
                 recomputed_targets += 1
+            profile = basis.get("profile")
+            profile_name = (
+                str(profile.get("name")).strip()
+                if isinstance(profile, Mapping) and profile.get("name")
+                else ""
+            )
+            if profile_name:
+                basis_profile_counts[profile_name] += 1
+            else:
+                targets_without_profile_provenance += 1
+            for value, counts in (
+                (basis.get("run_id"), basis_run_counts),
+                (basis.get("input_fingerprint"), basis_input_counts),
+                (basis.get("as_of"), basis_as_of_counts),
+            ):
+                if value:
+                    counts[str(value)] += 1
             benefit = dimensions.get("benefit", {}).get("components", {})
             has_demand_signal = False
             for signal in demand_signal_counts:
@@ -1528,11 +1766,87 @@ class PublicRecordsPriority:
             for row in rows
             if row["census_target_id"] in frontier_set
         ]
+
+        active_profile: str | None = None
+        current_input_fingerprint: str | None = None
+        provenance_error: str | None = None
+        try:
+            active_profile = self._active_profile_name(None)
+            current_input_fingerprint = self._load_demand_inputs(
+                profile_name=active_profile,
+                jurisdictions=jurisdictions,
+            ).input_fingerprint
+        except (OSError, PriorityError, sqlite3.Error, ValueError) as error:
+            provenance_error = str(error)
+
+        matching_profile_targets = (
+            basis_profile_counts.get(active_profile, 0)
+            if active_profile is not None
+            else 0
+        )
+        other_profile_targets = (
+            sum(basis_profile_counts.values()) - matching_profile_targets
+        )
+        matching_input_targets = 0
+        if active_profile is not None and current_input_fingerprint is not None:
+            for row in rows:
+                try:
+                    basis = json.loads(row["priority_basis_json"] or "{}")
+                except json.JSONDecodeError:
+                    continue
+                profile = basis.get("profile")
+                if (
+                    isinstance(profile, Mapping)
+                    and profile.get("name") == active_profile
+                    and basis.get("input_fingerprint")
+                    == current_input_fingerprint
+                ):
+                    matching_input_targets += 1
+
+        if not basis_profile_counts:
+            provenance_status = "uncomputed"
+        elif active_profile is None:
+            provenance_status = "active_profile_unavailable"
+        elif other_profile_targets and matching_profile_targets:
+            provenance_status = "mixed_profiles"
+        elif other_profile_targets:
+            provenance_status = "profile_mismatch"
+        elif current_input_fingerprint is None:
+            provenance_status = "active_inputs_unavailable"
+        elif matching_input_targets != matching_profile_targets:
+            provenance_status = "inputs_changed"
+        elif targets_without_profile_provenance:
+            provenance_status = "incomplete_provenance"
+        else:
+            provenance_status = "current"
+
         return {
             "targets": len(rows),
             "targets_with_recomputed_basis": recomputed_targets,
             "targets_with_catalog_capability_path": targets_with_source_path,
             "targets_with_demand_signal": demand_signal_counts,
+            "priority_provenance": {
+                "status": provenance_status,
+                "active_profile": active_profile,
+                "current_input_fingerprint": current_input_fingerprint,
+                "targets_matching_active_profile": matching_profile_targets,
+                "targets_matching_current_inputs": matching_input_targets,
+                "targets_with_other_profile": other_profile_targets,
+                "targets_without_profile_provenance": (
+                    targets_without_profile_provenance
+                ),
+                "basis_profile_counts": dict(
+                    sorted(basis_profile_counts.items())
+                ),
+                "basis_run_counts": dict(sorted(basis_run_counts.items())),
+                "basis_input_fingerprint_counts": dict(
+                    sorted(basis_input_counts.items())
+                ),
+                "basis_as_of_counts": dict(
+                    sorted(basis_as_of_counts.items())
+                ),
+                "error": provenance_error,
+            },
             "by_status": dict(sorted(by_status.items())),
             "score_dimensions": {
                 dimension: _dimension_summary(
@@ -1695,7 +2009,10 @@ def build_parser() -> argparse.ArgumentParser:
     recompute_parser = sub.add_parser("recompute")
     recompute_parser.add_argument("--by", required=True)
     recompute_parser.add_argument("--profile")
-    recompute_parser.add_argument("--as-of")
+    recompute_parser.add_argument(
+        "--as-of",
+        help="ISO 8601 timestamp with timezone (for example, 2026-07-30T12:00:00Z)",
+    )
     recompute_parser.add_argument("--dry-run", action="store_true")
     add_output_args(recompute_parser)
 
@@ -1708,11 +2025,79 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+_CATALOG_AUDIT_ISSUE_KEYS = (
+    "adapter_declared_sources_missing_live_catalog",
+    "outdated_live_manifests",
+    "declared_reviews_missing_live_catalog",
+    "declared_associations_missing_live_census",
+    "outdated_live_census_associations",
+    "shared_adapter_operation_mismatches",
+)
+
+
+def catalog_audit_summary(
+    catalog_db: Path | str,
+) -> dict[str, Any]:
+    """Return concise catalog drift context for a priority run.
+
+    Priority scoring remains available when the audit reports drift.  Including
+    the diagnostics in the same result keeps a successful recomputation from
+    being mistaken for evidence that the source inventory was current.
+    """
+
+    try:
+        try:
+            from tools.seed_public_records_catalog import audit_catalog
+        except ImportError:
+            from seed_public_records_catalog import audit_catalog
+
+        audit = audit_catalog(db_path=catalog_db)
+    except (OSError, sqlite3.Error, SyntaxError, ValueError) as error:
+        return {
+            "status": "unavailable",
+            "error_type": type(error).__name__,
+            "error": str(error),
+        }
+
+    issues = {
+        key: audit.get(key, [])
+        for key in _CATALOG_AUDIT_ISSUE_KEYS
+        if audit.get(key)
+    }
+    return {
+        "status": str(audit["status"]),
+        "tracked_sources": int(audit["counts"]["tracked_sources"]),
+        "live_catalog_sources": int(
+            audit["counts"]["live_catalog_sources"]
+        ),
+        "issue_count": sum(len(values) for values in issues.values()),
+        "issues": issues,
+    }
+
+
 def _emit(value: Any, args: argparse.Namespace) -> None:
+    summary = f"Public-record census priority {args.command}"
+    provenance = (
+        value.get("priority_provenance")
+        if isinstance(value, Mapping)
+        else None
+    )
+    if isinstance(provenance, Mapping):
+        summary += (
+            "; priority provenance "
+            f"{str(provenance.get('status') or 'unknown')}"
+        )
+    audit = value.get("catalog_audit") if isinstance(value, Mapping) else None
+    if isinstance(audit, Mapping):
+        audit_status = str(audit.get("status") or "unknown")
+        issue_count = audit.get("issue_count")
+        summary += f"; catalog audit {audit_status}"
+        if isinstance(issue_count, int) and issue_count:
+            summary += f" ({issue_count} issues)"
     if write_output(
         value,
         args,
-        summary=f"Public-record census priority {args.command}",
+        summary=summary,
     ):
         return
     print(json.dumps(value, indent=2, sort_keys=True))
@@ -1733,6 +2118,7 @@ def main() -> int:
                 dry_run=args.dry_run,
                 as_of=args.as_of,
             )
+            value["catalog_audit"] = catalog_audit_summary(args.catalog_db)
         elif args.command == "metrics":
             value = priority.metrics()
         else:

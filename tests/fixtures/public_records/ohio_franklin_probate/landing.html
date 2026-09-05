@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head><title>General Case Search</title></head>
+  <body>
+    <p><strong>All records provided through the case search are current as of the previous day's date.</strong></p>
+    <p>If you are experiencing difficulties accessing the Probate General Case Index Search, it may be due to the routine back up of files each weekday evening between 10 PM and 2 AM and randomly throughout the weekend days.</p>
+    <form>
+      <select name="searchMethod">
+        <option value="CaseName">Case Name</option>
+        <option value="CaseOpenDate">Case Open Date</option>
+        <option value="CaseNumberSuffix">Case Number/Suffix</option>
+        <option value="CaseTypeSubtype">Case Type/Subtype</option>
+        <option value="AttorneyName">Attorney Name</option>
+        <option value="FiduciaryName">Fiduciary Name</option>
+      </select>
+    </form>
+    <form id="CaseName" method="get">
+      <input type="text" name="string">
+    </form>
+    <form id="CaseOpenDate" method="get" action="https://probatesearch.franklincountyohio.gov/netdata/PBODateInx.ndm/input">
+      <input type="text" name="string">
+    </form>
+    <form id="CaseNumberSuffix" method="get">
+      <input type="text" name="s_CaseNumber">
+      <input type="text" name="s_CaseSuffix">
+    </form>
+    <form id="CaseTypeSubtype" method="get">
+      <select name="s_CaseType"><option value="E%20">E=Estate</option></select>
+      <input type="text" name="s_CaseSubType">
+    </form>
+    <form id="AttorneyName" method="get"><input type="text" name="string"></form>
+    <form id="FiduciaryName" method="get"><input type="text" name="string"></form>
+  </body>
+</html>

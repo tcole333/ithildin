@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/Court/Index" method="post">
+      <input
+        name="__RequestVerificationToken"
+        type="hidden"
+        value="fixture-token-empty"
+      />
+      <input id="hearDate" name="hearDate" type="date" value="" />
+      <input id="caseNumber" name="caseNumber" value="2099-CF-999999-A-O" />
+      <input id="firstName" name="firstName" value="" />
+      <input id="lastName" name="lastName" value="" />
+      <select id="judge" name="judge"><option value=""></option></select>
+      <span>0 Total Hearings for case 2099-CF-999999-A-O</span>
+      <table id="hearings">
+        <thead>
+          <tr>
+            <th>Case Number</th>
+            <th>Hearing Date</th>
+            <th>Time Slot</th>
+            <th>Location</th>
+            <th>Name</th>
+            <th>Judge</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </form>
+  </body>
+</html>

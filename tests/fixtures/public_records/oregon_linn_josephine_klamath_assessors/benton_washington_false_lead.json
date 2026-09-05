@@ -1,0 +1,25 @@
+{
+  "discovery_query_context": "Oregon Benton County assessor parcel source discovery",
+  "candidate": {
+    "id": "1b877de44ccb4d1fa14bbaa476844638",
+    "title": "Benton_County_Parcels",
+    "owner": "YakimaGIS",
+    "orgId": "9Qz94N8Zml9hnG84",
+    "url": "https://services3.arcgis.com/9Qz94N8Zml9hnG84/arcgis/rest/services/Benton_County_Parcels/FeatureServer",
+    "description": "Benton County Parcels.",
+    "tags": ["Taxlots"],
+    "extent": [[-119.88488037507106, 45.83388720704709], [-118.9363545425229, 46.63037545720258]]
+  },
+  "expected_oregon_identity": {
+    "county_geoid": "41003",
+    "expected_extent": [-123.85, 44.20, -122.80, 45.05],
+    "official_hosts": ["gis.co.benton.or.us"]
+  },
+  "decision": "reject_as_wrong_jurisdiction",
+  "evidence": {
+    "publisher_owner": "YakimaGIS",
+    "candidate_center_is_in_expected_oregon_extent": false,
+    "candidate_host_is_official_benton_oregon_host": false,
+    "actual_jurisdiction": "Benton County, Washington"
+  }
+}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>Guest Information</h1>
+    <a href="CivilIndex" title="Click here to search for a Case by Name">Search for Case by Name</a>
+    <a href="CriminalIndex" title="Click here to search by Defendant Name">Search for Case by Defendant Name</a>
+    <a href="DocumentImages" title="Click here to search for Document Images">Search for Document Images</a>
+    <form method="post" name="paosForm" id="paosForm">
+      <p>You have not added any valid receipt numbers.</p>
+      <input id="ReceiptNumber" name="ReceiptNumber" value="">
+      <input id="Last4CC" name="Last4CC" value="">
+      <p>
+        Name Search results remain available for 24 hours after completing the
+        transaction.
+      </p>
+      <p>You have no transactions.</p>
+      <input id="ActionToPerform" name="ActionToPerform" value="">
+      <input id="ActionDocumentID" name="ActionDocumentID" value="">
+      <input id="ActionReceiptNumber" name="ActionReceiptNumber" value="">
+      <input id="SecurityKey" name="SecurityKey" value="">
+      <input name="__RequestVerificationToken" type="hidden" value="guest-token">
+    </form>
+  </body>
+</html>

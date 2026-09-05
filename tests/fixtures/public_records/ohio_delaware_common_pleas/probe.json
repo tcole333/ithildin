@@ -1,0 +1,51 @@
+{
+  "operation": "probe",
+  "status": "ok",
+  "source_url": "https://court.co.delaware.oh.us/eservices/home.page",
+  "platform_family": "equivant_courtview_wicket",
+  "native_page_size": 100,
+  "native_page_size_options": [
+    {"text": "25", "value": "0"},
+    {"text": "50", "value": "1"},
+    {"text": "75", "value": "2"},
+    {"text": "100", "value": "3"}
+  ],
+  "contract": {
+    "route": "/eservices/search.page.10",
+    "form_method": "post",
+    "person_fields": ["lastName", "firstName", "middleName", "sffxCd"],
+    "company_field": true,
+    "date_fields": [
+      "dobDateRange:dateInputBegin",
+      "dobDateRange:dateInputEnd",
+      "dodDateRange:dateInputBegin",
+      "dodDateRange:dateInputEnd",
+      "fileDateRange:dateInputBegin",
+      "fileDateRange:dateInputEnd"
+    ],
+    "option_sets": {
+      "case_type": [
+        {"text": "All Cases", "value": ""},
+        {"text": "(CR) CRIMINAL", "value": "CR"},
+        {"text": "(CV) CIVIL COMMON PLEAS", "value": "CV"},
+        {"text": "(DR) DOMESTIC RELATIONS", "value": "DR"}
+      ],
+      "case_status": [
+        {"text": "All Statuses", "value": ""},
+        {"text": "Closed", "value": "C"},
+        {"text": "Open", "value": "O"}
+      ],
+      "party_type": [
+        {"text": "All Party Types", "value": ""},
+        {"text": "Defendant", "value": "DFNDT"},
+        {"text": "Plaintiff", "value": "PLNTF"}
+      ],
+      "suffix": [
+        {"text": "Choose One", "value": ""},
+        {"text": "JR", "value": "JR"}
+      ]
+    },
+    "courtview_version": "1.54.05",
+    "copyright_year": 2026
+  }
+}

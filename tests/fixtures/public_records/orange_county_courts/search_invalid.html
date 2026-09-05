@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/Court/Index" method="post">
+      <input
+        name="__RequestVerificationToken"
+        type="hidden"
+        value="fixture-token-invalid"
+      />
+      <div class="alert alert-danger text-center" role="alert">
+        Invalid case number.
+      </div>
+      <input id="hearDate" name="hearDate" type="date" value="" />
+      <input id="caseNumber" name="caseNumber" value="ZZZZ-NOT-A-CASE" />
+      <input id="firstName" name="firstName" value="" />
+      <input id="lastName" name="lastName" value="" />
+      <select id="judge" name="judge"><option value=""></option></select>
+    </form>
+  </body>
+</html>

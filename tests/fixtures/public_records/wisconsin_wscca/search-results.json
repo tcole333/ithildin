@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "operation": "search",
+  "selectors": {
+    "scope": "business",
+    "query": "Wisconsin Voter Alliance",
+    "first_name": "",
+    "middle_name": "",
+    "county": "",
+    "similar_names": false,
+    "exclude_missing_middle": false
+  },
+  "source_url": "https://wscca.wicourts.gov/case-search-results?searchSimilarPartyName=false&includeMissingPartyNameM=true&businessName=Wisconsin%20Voter%20Alliance",
+  "count_api_url": "https://wscca.wicourts.gov/api/case-search/00000000-0000-0000-0000-000000000001/count",
+  "search_api_url": "https://wscca.wicourts.gov/api/case-search/00000000-0000-0000-0000-000000000002",
+  "temporary_search_id": "00000000-0000-0000-0000-000000000002",
+  "validation": {
+    "attempted": true,
+    "status": 202,
+    "url": "https://wscca.wicourts.gov/api/captcha/validate/search"
+  },
+  "total_reported": 2,
+  "records": [
+    {
+      "shortCaption": "Wisconsin Voter Alliance v. Kristina Secord",
+      "wcisClsCodeDescr": "Appeal from a circuit court writ (30602)",
+      "districtNo": 2,
+      "ccCounty": "Walworth",
+      "filingDate": {
+        "m": 1,
+        "d": 6,
+        "y": 2023
+      },
+      "sccaCaseNo": "2023AP000036",
+      "courtType": "SC",
+      "pdcNos": [
+        "2025 WI 2",
+        "2026 WI 27"
+      ]
+    },
+    {
+      "shortCaption": "Wisconsin Voter Alliance v. Terry Reynolds",
+      "wcisClsCodeDescr": "Appeal from a circuit court writ (30602)",
+      "districtNo": 4,
+      "ccCounty": "Juneau",
+      "filingDate": {
+        "m": 10,
+        "d": 12,
+        "y": 2022
+      },
+      "sccaCaseNo": "2022AP001749",
+      "courtType": "CA",
+      "pdcNos": [
+        "2023 WI App 66"
+      ]
+    }
+  ],
+  "source_count_envelope": {
+    "result": {
+      "c": "Completed",
+      "p": [
+        2
+      ]
+    }
+  },
+  "source_result_envelope": {
+    "result": {
+      "c": "Result",
+      "p": [
+        []
+      ]
+    }
+  }
+}

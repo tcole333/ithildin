@@ -34,7 +34,8 @@ def inv_db(tmp_path, monkeypatch):
 
 def _lead_rows(db):
     return db.execute(
-        "SELECT id, title, category, priority, status, source, target_name FROM leads"
+        """SELECT id, title, description, category, priority, status, source,
+           target_name FROM leads"""
     ).fetchall()
 
 
@@ -77,6 +78,7 @@ def test_icij_lead_emission_writes_lead_and_note(inv_db):
     note = _note_for(db, row["id"])
     assert note is not None
     assert "ICIJ ID: 80012345" in note
+    assert row["description"] == note
 
 
 def test_icij_lead_emission_dedupes(inv_db):

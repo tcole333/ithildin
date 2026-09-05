@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+  <body>
+    <div id="dnn_ctr425_JosephineGuestView_tdDistrictTitle">
+      Lincoln County Property Assessment and Tax Data
+    </div>
+    <script>
+      var link = "";
+      link = link.replace(/{PropertyQuickRef}/g, "R452940");
+      link = link.replace(/{PartyQuickRef}/g, "O0064958");
+      link = link.replace(/{PropertyID}/g, "61623");
+      link = link.replace(/{PropertyOwnerID}/g, "143319");
+      link = link.replace(/{MapNumber}/g, "07-11-03-DC-05800-00");
+      var effYear = 2026;
+      var effMonth = 7;
+      var effDay = 29;
+      function OpenTaxStatementPDF(propertyID, partyID, taxYear) {
+        var postData = {
+          PropertyID: propertyID,
+          PartyID: partyID,
+          TaxYear: taxYear,
+          EffectiveDate: "11-15-" + taxYear
+        };
+        $.ajax({url: "https://propertyweb.co.lincoln.or.us/Proxy/tax/TaxStatement"});
+      }
+      function OpenReceiptPDF(quickRefID, transactionID) {
+        $.ajax({url: "https://propertyweb.co.lincoln.or.us/Proxy/tax/Receipt"});
+      }
+      function OpenAppraisalCardPDF() {
+        var postData = {
+          PropertyID: "61623",
+          TaxYear: "2026",
+          ReportFormatID: "502405"
+        };
+        $.ajax({url: "https://propertyweb.co.lincoln.or.us/Proxy/properties/AppraisalCard"});
+        var button = 'id=\"btnAppraisalCard\"';
+      }
+      function OpenAccountSummaryPDF() {
+        var postData = {
+          PropertyID: "61623",
+          TaxYear: "2026",
+          EffectiveDate: document.getElementById("effectiveDatePicker").value,
+          PartyID: "208038"
+        };
+        $.ajax({url: "https://propertyweb.co.lincoln.or.us/Proxy/tax/AccountSummary"});
+      }
+    </script>
+
+    <table id="tblPropertyHeaderInfo">
+      <tr>
+        <th>Property</th>
+        <th>Owner</th>
+        <th>Property Address</th>
+        <th>2026 In Process Real Market Value</th>
+      </tr>
+      <tr>
+        <td id="dnn_ctr425_JosephineGuestView_tdPropertyID">R452940</td>
+        <td id="dnn_ctr425_JosephineGuestView_tdOwnerName">
+          EUGENE L &amp; KAREN L SCRUTTON LLC
+        </td>
+        <td id="dnn_ctr425_JosephineGuestView_tdPropertyAddress">
+          3205 NW INLET AVE
+        </td>
+        <td id="dnn_ctr425_JosephineGuestView_tdTotalAssessedValue">
+          $1,204,130
+        </td>
+      </tr>
+    </table>
+
+    <table id="tblGeneralInformation">
+      <tr>
+        <td id="dnn_ctr425_JosephineGuestView_tdGITitle" class="sectionHeader" colspan="2">
+          2026 GENERAL INFORMATION
+        </td>
+      </tr>
+      <tr><td>Property Status</td><td>A Active</td></tr>
+      <tr><td>Property Type</td><td>RP Residential</td></tr>
+      <tr>
+        <td>Legal Description</td>
+        <td>WECOMA BEACH, BLOCK 12, LOT 7, MF373-1874</td>
+      </tr>
+      <tr><td>Alternate Account Number</td><td>-</td></tr>
+      <tr>
+        <td>Neighborhood</td>
+        <td>L24I: NORTH LINCOLN CITY RES-COMM OCEANFRONT</td>
+      </tr>
+      <tr>
+        <td>Map Number</td>
+        <td id="dnn_ctr425_JosephineGuestView_tdGIMapNumber">
+          07-11-03-DC-05800-00
+        </td>
+      </tr>
+      <tr><td>Property Use</td><td>121: RES IMP IN COM ZONE</td></tr>
+      <tr>
+        <td>Levy Code Area</td>
+        <td id="dnn_ctr425_JosephineGuestView_tdGITaxingUnitGroup">
+          <a>402</a>
+          <div id="divTaxingUnits">
+            <table><tr><td>CODE AREA 402 TAXING DISTRICTS</td></tr></table>
+            <table class="datatable">
+              <tr><th>CODE</th><th>DESCRIPTION</th></tr>
+              <tr><td>505</td><td>A-LINC CO GENERAL</td></tr>
+              <tr><td>614</td><td>CITY OF LINCOLN CITY</td></tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <tr><td>Zoning</td><td>R-C</td></tr>
+    </table>
+
+    <table id="tblOwnerInformation">
+      <tr><td class="sectionHeader" colspan="2">2026 OWNER INFORMATION</td></tr>
+      <tr>
+        <td>Owner Name</td>
+        <td id="dnn_ctr425_JosephineGuestView_tdOIOwnerName">
+          EUGENE L &amp; KAREN L SCRUTTON LLC
+        </td>
+      </tr>
+      <tr>
+        <td>Mailing Address</td>
+        <td id="dnn_ctr425_JosephineGuestView_tdOIMailingAddress">
+          3264 NW JETTY AVE<br />LINCOLN CITY, OR 97367
+        </td>
+      </tr>
+    </table>
+
+    <table id="tblRelatedProperties">
+      <tr><td class="sectionHeader" colspan="2">RELATED PROPERTIES</td></tr>
+      <tr>
+        <td>Linked Properties</td>
+        <td>
+          <a href="/Property-Detail/PropertyQuickRefID/R111111/PartyQuickRefID/O222222/">
+            R111111
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <table id="tblExemptions">
+      <tr><td class="sectionHeader">EXEMPTIONS</td></tr>
+      <tr>
+        <td>
+          <table class="datatable">
+            <tr><th>TYPE</th><th>AMOUNT</th></tr>
+            <tr><td>VETERANS</td><td>$10,000</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="tblImprovementTable0">
+      <tr><th></th><th>Improvement #1</th><th>Improvement Type</th><th>Beds</th></tr>
+      <tr><td></td><td>-</td><td>R: RESIDENTIAL</td><td>3</td></tr>
+    </table>
+    <table id="tblSegmentTable0">
+      <tr>
+        <th>ID</th><th>SEGMENT TYPE</th><th>SEGMENT CLASS</th>
+        <th>YEAR BUILT</th><th>AREA</th><th>DETAILS</th>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <table class="fullWidthTable">
+            <tr>
+              <td>1</td><td>MA: MAIN AREA</td><td>4+</td>
+              <td>1940</td><td>1,076</td><td>Expand Details</td>
+            </tr>
+            <tr>
+              <td colspan="6">
+                <table class="segmentDetailsTable">
+                  <tr>
+                    <td>Eff Yr Built</td><td>2000</td>
+                    <td>Adjustment %</td><td>-</td>
+                    <td>Roof Styles</td><td>HVYC,GBL</td>
+                  </tr>
+                  <tr>
+                    <td>Baths</td><td>B2,LTB</td>
+                    <td>Heat/AC</td><td>BB</td>
+                    <td>Fireplaces</td><td>FP1</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="dnn_ctr425_JosephineGuestView_tblLandSegments">
+      <tr><td class="sectionHeader">2026 LAND SEGMENTS</td></tr>
+      <tr>
+        <td>
+          <table id="dnn_ctr425_JosephineGuestView_tblLandSegmentsData">
+            <tr><th>STATE CODE</th><th>SEGMENT TYPE</th><th>LAND SIZE</th></tr>
+            <tr><td>L1</td><td>LOF: DEV OCEANFRONT LOT</td><td>0.11 Acres</td></tr>
+            <tr><td>TOTALS</td><td></td><td>0.11 acres</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="dnn_ctr425_JosephineGuestView_tblValueHistoryRP">
+      <tr><td class="sectionHeader">CERTIFIED / IN PROCESS VALUES</td></tr>
+      <tr>
+        <td>
+          <table id="dnn_ctr425_JosephineGuestView_tblValueHistoryDataRP">
+            <tr>
+              <th>YEAR</th><th>IMPROVEMENTS</th><th>LAND</th>
+              <th>RMV</th><th>SPECIAL USE</th><th>ASSESSED VALUE</th>
+            </tr>
+            <tr>
+              <td>2026 (In Process)</td><td>$348,960</td><td>$855,170</td>
+              <td>$1,204,130</td><td>$0</td><td>$415,550</td>
+            </tr>
+            <tr>
+              <td>2025</td><td>$344,650</td><td>$865,320</td>
+              <td>$1,209,970</td><td>$0</td><td>$403,450</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="dnn_ctr425_JosephineGuestView_tblSalesHistory">
+      <tr><td class="sectionHeader">SALES HISTORY</td></tr>
+      <tr>
+        <td>
+          <table id="dnn_ctr425_JosephineGuestView_tblSalesHistoryData">
+            <tr>
+              <th>SALE DATE</th><th>SELLER</th><th>BUYER</th>
+              <th>INST #</th><th>SALE PRICE</th><th>INST TYPE</th>
+            </tr>
+            <tr>
+              <td></td><td>SCRUTTON GENE L</td>
+              <td>EUGENE L &amp; KAREN L SCRUTTON LLC</td>
+              <td>202501695</td><td>$115</td><td>WD WARRANTY DEED</td>
+            </tr>
+            <tr>
+              <td>1/6/1999</td><td>STROHECKER ARMAND G</td>
+              <td>SCRUTTON GENE L</td><td>MF373-1874</td>
+              <td>$320,000</td><td>WD WARRANTY DEED</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="tblBillsTable">
+      <tr>
+        <th>TAXYEAR</th><th>TOTAL BILLED</th><th>AD VALOREM</th>
+        <th>SPECIAL ASMT</th><th>PRINCIPAL</th><th>INTEREST</th>
+        <th>DATE PAID</th><th>TOTAL OWED</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="#" onclick="return OpenTaxStatementPDF('61623', '208038', '2025');">
+            2025
+          </a>
+        </td>
+        <td>$6,782.65</td><td>$6,782.65</td><td>$0</td>
+        <td>$6,782.65</td><td>$0.00</td><td>-</td><td>$0.00</td>
+      </tr>
+      <tr>
+        <td>Installment 1</td><td>$2,260.89</td><td>-</td><td>-</td>
+        <td>-</td><td>$0.00</td><td>11-12-2025</td><td>$0.00</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://propertyweb.co.lincoln.or.us/TaxStatements/2021/R452940.pdf">
+            2021
+          </a>
+        </td>
+        <td>$6,013.60</td><td>$6,013.60</td><td>$0</td>
+        <td>$6,013.60</td><td>$0.00</td><td>-</td><td>$0.00</td>
+      </tr>
+    </table>
+    <div id="dnn_ctr425_JosephineGuestView_tdPMCurrentAmountDue">$0.00</div>
+    <div id="dnn_ctr425_JosephineGuestView_tdPMPastYearsDue">$0.00</div>
+    <div id="dnn_ctr425_JosephineGuestView_tdPMTotalDue">$0.00</div>
+
+    <table id="tblPaymentHistoryTable">
+      <tr>
+        <th>TAXYEAR</th><th>RECEIPT NUMBER</th>
+        <th>TRANSACTION DATE</th><th>PAYMENT AMOUNT</th>
+      </tr>
+      <tr>
+        <td>2025</td>
+        <td>
+          <a onclick="return OpenReceiptPDF('R452940', '1496170');">
+            LINC-181244
+          </a>
+        </td>
+        <td>11-12-2025</td><td>$6,579.17</td>
+      </tr>
+      <tr>
+        <td><a>2000</a><div><ul><li>2000</li><li>1999</li></ul></div></td>
+        <td>
+          <a onclick="return OpenReceiptPDF('R452940', '908113');">
+            609703
+          </a>
+        </td>
+        <td>11-15-2000</td><td>$1,000.00</td>
+      </tr>
+    </table>
+  </body>
+</html>

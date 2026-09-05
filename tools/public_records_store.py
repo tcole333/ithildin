@@ -33,7 +33,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PROPERTY_DB = PROJECT_ROOT / "datasets" / "property_records.db"
 DEFAULT_COURT_DB = PROJECT_ROOT / "datasets" / "state_court_records.db"
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 6
+
+CASE_IDENTITY_NATIVE_PREFIX = "native:"
+CASE_IDENTITY_NUMBER_PREFIX = "number:"
 
 ACCESS_STATES = (
     "public",
@@ -183,6 +186,10 @@ CREATE INDEX IF NOT EXISTS idx_property_observation_source
     ON source_observation(source_id, retrieved_at);
 CREATE INDEX IF NOT EXISTS idx_property_observation_query
     ON source_observation(query_fingerprint);
+CREATE INDEX IF NOT EXISTS idx_property_observation_native_artifact
+    ON source_observation(
+        source_id, record_kind, source_native_id, raw_artifact_sha256
+    );
 
 CREATE TABLE IF NOT EXISTS parcel_snapshot (
     parcel_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -211,6 +218,8 @@ CREATE TABLE IF NOT EXISTS parcel_alias (
 );
 CREATE INDEX IF NOT EXISTS idx_parcel_alias_value
     ON parcel_alias(alias_value);
+CREATE INDEX IF NOT EXISTS idx_parcel_alias_source_type_value
+    ON parcel_alias(source_id, alias_type, alias_value);
 
 CREATE TABLE IF NOT EXISTS parcel_address (
     address_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -295,6 +304,105 @@ CREATE TABLE IF NOT EXISTS sale_event (
     raw_json TEXT,
     UNIQUE(parcel_id, source_id, native_sale_id, sale_date, derivation)
 );
+
+CREATE TABLE IF NOT EXISTS property_event (
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    source_id TEXT NOT NULL,
+    jurisdiction_geoid TEXT NOT NULL REFERENCES jurisdiction(geoid),
+    native_event_id TEXT NOT NULL,
+    source_record_id TEXT NOT NULL,
+    record_kind TEXT NOT NULL,
+    event_type TEXT,
+    description TEXT,
+    status TEXT,
+    status_category TEXT,
+    event_date TEXT,
+    normalized_case_number TEXT,
+    submitted_date TEXT,
+    approved_date TEXT,
+    last_update_date TEXT,
+    estimated_cost_minor INTEGER,
+    currency TEXT NOT NULL DEFAULT 'USD',
+    address_raw TEXT,
+    map_taxlot_candidate TEXT,
+    longitude REAL,
+    latitude REAL,
+    geometry_crs TEXT,
+    observation_id INTEGER REFERENCES source_observation(observation_id),
+    raw_json TEXT,
+    UNIQUE(source_id, jurisdiction_geoid, native_event_id, source_record_id)
+);
+CREATE INDEX IF NOT EXISTS idx_property_event_native
+    ON property_event(jurisdiction_geoid, native_event_id);
+CREATE INDEX IF NOT EXISTS idx_property_event_address
+    ON property_event(address_raw);
+CREATE INDEX IF NOT EXISTS idx_property_event_map_taxlot
+    ON property_event(map_taxlot_candidate);
+
+CREATE TABLE IF NOT EXISTS property_event_parcel_join_key (
+    event_id INTEGER NOT NULL
+        REFERENCES property_event(event_id) ON DELETE CASCADE,
+    normalized_parcel_id TEXT NOT NULL,
+    PRIMARY KEY(event_id, normalized_parcel_id)
+);
+CREATE INDEX IF NOT EXISTS idx_property_event_parcel_join_value
+    ON property_event_parcel_join_key(normalized_parcel_id, event_id);
+
+CREATE TABLE IF NOT EXISTS property_event_party (
+    event_party_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL REFERENCES property_event(event_id) ON DELETE CASCADE,
+    sequence_no INTEGER NOT NULL DEFAULT 0,
+    role TEXT NOT NULL,
+    raw_name TEXT NOT NULL,
+    normalized_name TEXT,
+    assertion_type TEXT,
+    UNIQUE(event_id, sequence_no, role, raw_name)
+);
+CREATE INDEX IF NOT EXISTS idx_property_event_party_name
+    ON property_event_party(raw_name);
+
+CREATE TABLE IF NOT EXISTS property_event_parcel_link (
+    event_id INTEGER PRIMARY KEY REFERENCES property_event(event_id) ON DELETE CASCADE,
+    parcel_id INTEGER REFERENCES parcel_snapshot(parcel_id) ON DELETE SET NULL,
+    map_taxlot_candidate TEXT,
+    link_method TEXT NOT NULL,
+    link_confidence REAL,
+    evidence_json TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_property_event_parcel
+    ON property_event_parcel_link(parcel_id);
+
+CREATE TABLE IF NOT EXISTS property_event_representation (
+    representation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL REFERENCES property_event(event_id) ON DELETE CASCADE,
+    representation_kind TEXT NOT NULL,
+    source_url TEXT NOT NULL,
+    relationship TEXT,
+    source_state TEXT,
+    raw_json TEXT,
+    UNIQUE(event_id, representation_kind, source_url)
+);
+
+CREATE TABLE IF NOT EXISTS property_event_relation (
+    relation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL
+        REFERENCES property_event(event_id) ON DELETE CASCADE,
+    related_event_id INTEGER NOT NULL
+        REFERENCES property_event(event_id) ON DELETE CASCADE,
+    relationship TEXT NOT NULL,
+    independent_corroboration INTEGER NOT NULL DEFAULT 0
+        CHECK (independent_corroboration IN (0, 1)),
+    normalized_case_number TEXT,
+    event_date TEXT,
+    overlapping_parcels_json TEXT,
+    evidence_json TEXT NOT NULL,
+    CHECK (event_id < related_event_id),
+    UNIQUE(event_id, related_event_id, relationship)
+);
+CREATE INDEX IF NOT EXISTS idx_property_event_relation_case_date
+    ON property_event_relation(normalized_case_number, event_date);
+CREATE INDEX IF NOT EXISTS idx_property_event_relation_related
+    ON property_event_relation(related_event_id, relationship);
 
 CREATE TABLE IF NOT EXISTS recorded_instrument (
     instrument_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -453,6 +561,52 @@ CREATE INDEX IF NOT EXISTS idx_court_snapshot_source
 CREATE INDEX IF NOT EXISTS idx_court_snapshot_query
     ON source_snapshot(query_fingerprint);
 
+CREATE TABLE IF NOT EXISTS court_data_delivery_receipt (
+    receipt_id TEXT PRIMARY KEY,
+    source_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    product_name TEXT,
+    system_name TEXT,
+    publisher TEXT,
+    delivery_version TEXT NOT NULL,
+    received_at TEXT NOT NULL,
+    received_at_basis TEXT,
+    provider_reference TEXT,
+    correction_state TEXT,
+    delivery_scope_note TEXT,
+    specification_refs_json TEXT,
+    case_document_refs_json TEXT,
+    artifact_root TEXT,
+    artifact_set_sha256 TEXT NOT NULL,
+    payload_lineage_key TEXT NOT NULL,
+    file_count INTEGER NOT NULL,
+    total_size_bytes INTEGER NOT NULL,
+    interpretation_json TEXT,
+    created_at TEXT,
+    raw_json TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_court_delivery_payload
+    ON court_data_delivery_receipt(
+        product_id, delivery_version, artifact_set_sha256
+    );
+CREATE INDEX IF NOT EXISTS idx_court_delivery_lineage
+    ON court_data_delivery_receipt(payload_lineage_key);
+
+CREATE TABLE IF NOT EXISTS court_data_delivery_file (
+    receipt_id TEXT NOT NULL
+        REFERENCES court_data_delivery_receipt(receipt_id) ON DELETE CASCADE,
+    relative_path TEXT NOT NULL,
+    absolute_path TEXT,
+    size_bytes INTEGER NOT NULL,
+    sha256 TEXT NOT NULL,
+    format_observation_json TEXT,
+    zip_members_json TEXT,
+    raw_json TEXT NOT NULL,
+    PRIMARY KEY(receipt_id, relative_path)
+);
+CREATE INDEX IF NOT EXISTS idx_court_delivery_file_sha
+    ON court_data_delivery_file(sha256);
+
 CREATE TABLE IF NOT EXISTS court (
     court_id TEXT PRIMARY KEY,
     source_id TEXT NOT NULL,
@@ -475,6 +629,13 @@ CREATE TABLE IF NOT EXISTS case_record (
     raw_case_number TEXT NOT NULL,
     display_case_number TEXT,
     source_internal_id TEXT,
+    case_identity_key TEXT GENERATED ALWAYS AS (
+        CASE
+            WHEN NULLIF(TRIM(source_internal_id), '') IS NOT NULL
+            THEN 'native:' || TRIM(source_internal_id)
+            ELSE 'number:' || raw_case_number
+        END
+    ) STORED,
     caption TEXT,
     case_type TEXT,
     filing_date TEXT,
@@ -486,7 +647,7 @@ CREATE TABLE IF NOT EXISTS case_record (
     source_url TEXT,
     snapshot_id INTEGER REFERENCES source_snapshot(snapshot_id),
     raw_json TEXT,
-    UNIQUE(source_id, court_id, raw_case_number),
+    UNIQUE(source_id, court_id, case_identity_key),
     CHECK (access_state IN (
         'public', 'restricted', 'sealed', 'expunged', 'removed', 'redacted', 'unknown'
     )),
@@ -498,6 +659,60 @@ CREATE INDEX IF NOT EXISTS idx_case_caption
     ON case_record(caption);
 CREATE INDEX IF NOT EXISTS idx_case_filing_date
     ON case_record(filing_date);
+
+CREATE TABLE IF NOT EXISTS case_source_occurrence (
+    occurrence_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    case_id INTEGER NOT NULL REFERENCES case_record(case_id) ON DELETE CASCADE,
+    source_id TEXT NOT NULL,
+    record_identity_source_id TEXT NOT NULL,
+    snapshot_id INTEGER NOT NULL REFERENCES source_snapshot(snapshot_id),
+    record_kind TEXT NOT NULL,
+    source_internal_id TEXT,
+    source_result_id TEXT NOT NULL,
+    canonical_ref TEXT,
+    matched_party_name TEXT,
+    case_type TEXT,
+    filing_date TEXT,
+    filing_location TEXT,
+    source_url TEXT,
+    raw_json TEXT NOT NULL,
+    UNIQUE(source_id, snapshot_id, source_result_id)
+);
+CREATE INDEX IF NOT EXISTS idx_case_source_occurrence_case
+    ON case_source_occurrence(case_id, source_id);
+CREATE INDEX IF NOT EXISTS idx_case_source_occurrence_party
+    ON case_source_occurrence(matched_party_name);
+
+CREATE TABLE IF NOT EXISTS case_claim (
+    claim_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    case_id INTEGER NOT NULL REFERENCES case_record(case_id) ON DELETE CASCADE,
+    source_id TEXT NOT NULL,
+    native_claim_id TEXT NOT NULL,
+    sequence_no INTEGER,
+    claim_type TEXT,
+    claim_date TEXT,
+    claimant_raw TEXT,
+    amount_minor INTEGER,
+    currency TEXT,
+    status TEXT,
+    limited_stub INTEGER,
+    access_state TEXT,
+    native_access_state TEXT,
+    snapshot_id INTEGER REFERENCES source_snapshot(snapshot_id),
+    raw_json TEXT,
+    UNIQUE(case_id, native_claim_id),
+    CHECK (limited_stub IN (0, 1) OR limited_stub IS NULL),
+    CHECK (
+        access_state IS NULL OR access_state IN (
+            'public', 'restricted', 'sealed', 'expunged', 'removed',
+            'redacted', 'unknown'
+        )
+    )
+);
+CREATE INDEX IF NOT EXISTS idx_case_claim_sequence
+    ON case_claim(case_id, sequence_no, claim_id);
+CREATE INDEX IF NOT EXISTS idx_case_claim_native
+    ON case_claim(source_id, native_claim_id);
 
 CREATE TABLE IF NOT EXISTS case_party (
     case_party_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -694,7 +909,10 @@ CREATE TABLE IF NOT EXISTS case_relation (
 
 
 def _column_names(db: sqlite3.Connection, table: str) -> set[str]:
-    return {str(row["name"]) for row in db.execute(f'PRAGMA table_info("{table}")')}
+    return {
+        str(row["name"])
+        for row in db.execute(f'PRAGMA table_xinfo("{table}")')
+    }
 
 
 def _table_sql(db: sqlite3.Connection, table: str) -> str:
@@ -703,6 +921,119 @@ def _table_sql(db: sqlite3.Connection, table: str) -> str:
         (table,),
     ).fetchone()
     return str(row["sql"] or "") if row is not None else ""
+
+
+def _unique_index_columns(
+    db: sqlite3.Connection,
+    table: str,
+) -> set[tuple[str, ...]]:
+    unique_indexes: set[tuple[str, ...]] = set()
+    for row in db.execute(f'PRAGMA index_list("{table}")'):
+        if not bool(row["unique"]):
+            continue
+        name = str(row["name"]).replace('"', '""')
+        columns = tuple(
+            str(column["name"])
+            for column in db.execute(f'PRAGMA index_info("{name}")')
+        )
+        unique_indexes.add(columns)
+    return unique_indexes
+
+
+def _create_case_record_table(
+    db: sqlite3.Connection,
+    table: str,
+) -> None:
+    identifier = table.replace('"', '""')
+    db.execute(
+        f"""
+        CREATE TABLE "{identifier}" (
+            case_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source_id TEXT NOT NULL,
+            court_id TEXT NOT NULL REFERENCES court(court_id),
+            raw_case_number TEXT NOT NULL,
+            display_case_number TEXT,
+            source_internal_id TEXT,
+            case_identity_key TEXT GENERATED ALWAYS AS (
+                CASE
+                    WHEN NULLIF(TRIM(source_internal_id), '') IS NOT NULL
+                    THEN 'native:' || TRIM(source_internal_id)
+                    ELSE 'number:' || raw_case_number
+                END
+            ) STORED,
+            caption TEXT,
+            case_type TEXT,
+            filing_date TEXT,
+            disposition_date TEXT,
+            status TEXT,
+            access_state TEXT NOT NULL DEFAULT 'public',
+            native_access_state TEXT,
+            certified_record INTEGER NOT NULL DEFAULT 0,
+            source_url TEXT,
+            snapshot_id INTEGER REFERENCES source_snapshot(snapshot_id),
+            raw_json TEXT,
+            UNIQUE(source_id, court_id, case_identity_key),
+            CHECK (access_state IN (
+                'public', 'restricted', 'sealed', 'expunged', 'removed',
+                'redacted', 'unknown'
+            )),
+            CHECK (certified_record IN (0, 1))
+        )
+        """
+    )
+
+
+def _create_case_indexes(db: sqlite3.Connection) -> None:
+    db.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_case_raw_number
+        ON case_record(raw_case_number)
+        """
+    )
+    db.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_case_caption
+        ON case_record(caption)
+        """
+    )
+    db.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_case_filing_date
+        ON case_record(filing_date)
+        """
+    )
+
+
+def _rebuild_case_record_identity(db: sqlite3.Connection) -> None:
+    """Rebuild case identity while retaining stable case primary keys."""
+
+    replacement = "case_record_schema_v4"
+    db.execute(f'DROP TABLE IF EXISTS "{replacement}"')
+    _create_case_record_table(db, replacement)
+    db.execute(
+        f"""
+        INSERT INTO "{replacement}"(
+            case_id, source_id, court_id, raw_case_number,
+            display_case_number, source_internal_id, caption, case_type,
+            filing_date, disposition_date, status, access_state,
+            native_access_state, certified_record, source_url, snapshot_id,
+            raw_json
+        )
+        SELECT
+            case_id, source_id, court_id, raw_case_number,
+            display_case_number, source_internal_id, caption, case_type,
+            filing_date, disposition_date, status, access_state,
+            native_access_state, certified_record, source_url, snapshot_id,
+            raw_json
+        FROM case_record
+        ORDER BY case_id
+        """
+    )
+    db.execute("DROP TABLE case_record")
+    db.execute(
+        f'ALTER TABLE "{replacement}" RENAME TO case_record'
+    )
+    _create_case_indexes(db)
 
 
 def _rebuild_case_event(db: sqlite3.Connection) -> None:
@@ -849,8 +1180,106 @@ def _rebuild_restriction_event(db: sqlite3.Connection) -> None:
     )
 
 
+def _migrate_property_schema(db: sqlite3.Connection) -> None:
+    """Apply additive property-event columns to existing sidecars."""
+
+    columns = {
+        str(row["name"])
+        for row in db.execute("PRAGMA table_info(property_event)")
+    }
+    if "event_date" not in columns:
+        db.execute("ALTER TABLE property_event ADD COLUMN event_date TEXT")
+    if "normalized_case_number" not in columns:
+        db.execute(
+            "ALTER TABLE property_event ADD COLUMN normalized_case_number TEXT"
+        )
+    db.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_property_event_join
+        ON property_event(
+            source_id, jurisdiction_geoid, normalized_case_number, event_date
+        )
+        """
+    )
+    relation_columns = {
+        str(row["name"]): int(row["notnull"])
+        for row in db.execute(
+            "PRAGMA table_info(property_event_relation)"
+        )
+    }
+    optional_relation_fields = {
+        "normalized_case_number",
+        "event_date",
+        "overlapping_parcels_json",
+    }
+    if any(
+        relation_columns.get(field_name) == 1
+        for field_name in optional_relation_fields
+    ):
+        db.execute("DROP INDEX IF EXISTS idx_property_event_relation_case_date")
+        db.execute("DROP INDEX IF EXISTS idx_property_event_relation_related")
+        db.execute(
+            """
+            ALTER TABLE property_event_relation
+            RENAME TO property_event_relation_strict
+            """
+        )
+        db.execute(
+            """
+            CREATE TABLE property_event_relation (
+                relation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_id INTEGER NOT NULL
+                    REFERENCES property_event(event_id) ON DELETE CASCADE,
+                related_event_id INTEGER NOT NULL
+                    REFERENCES property_event(event_id) ON DELETE CASCADE,
+                relationship TEXT NOT NULL,
+                independent_corroboration INTEGER NOT NULL DEFAULT 0
+                    CHECK (independent_corroboration IN (0, 1)),
+                normalized_case_number TEXT,
+                event_date TEXT,
+                overlapping_parcels_json TEXT,
+                evidence_json TEXT NOT NULL,
+                CHECK (event_id < related_event_id),
+                UNIQUE(event_id, related_event_id, relationship)
+            )
+            """
+        )
+        db.execute(
+            """
+            INSERT INTO property_event_relation(
+                relation_id, event_id, related_event_id, relationship,
+                independent_corroboration, normalized_case_number, event_date,
+                overlapping_parcels_json, evidence_json
+            )
+            SELECT relation_id, event_id, related_event_id, relationship,
+                   independent_corroboration, normalized_case_number,
+                   event_date, overlapping_parcels_json, evidence_json
+            FROM property_event_relation_strict
+            """
+        )
+        db.execute("DROP TABLE property_event_relation_strict")
+        db.execute(
+            """
+            CREATE INDEX idx_property_event_relation_case_date
+            ON property_event_relation(normalized_case_number, event_date)
+            """
+        )
+        db.execute(
+            """
+            CREATE INDEX idx_property_event_relation_related
+            ON property_event_relation(related_event_id, relationship)
+            """
+        )
+    violations = list(db.execute("PRAGMA foreign_key_check"))
+    if violations:
+        raise sqlite3.IntegrityError(
+            "property schema migration produced "
+            f"{len(violations)} foreign-key violations"
+        )
+
+
 def _migrate_court_schema(db: sqlite3.Connection) -> None:
-    """Upgrade v1 court sidecars without discarding native source labels."""
+    """Upgrade court sidecars while retaining native labels and child rows."""
     db.commit()
     db.execute("PRAGMA foreign_keys=OFF")
     try:
@@ -870,6 +1299,28 @@ def _migrate_court_schema(db: sqlite3.Connection) -> None:
                 WHERE native_access_state IS NULL
                 """
             )
+
+        case_unique_indexes = _unique_index_columns(db, "case_record")
+        expected_case_identity = (
+            "source_id",
+            "court_id",
+            "case_identity_key",
+        )
+        legacy_raw_identity = (
+            "source_id",
+            "court_id",
+            "raw_case_number",
+        )
+        case_record_sql = _table_sql(db, "case_record").lower()
+        if (
+            "case_identity_key"
+            not in _column_names(db, "case_record")
+            or expected_case_identity not in case_unique_indexes
+            or legacy_raw_identity in case_unique_indexes
+            or "'native:'" not in case_record_sql
+            or "'number:'" not in case_record_sql
+        ):
+            _rebuild_case_record_identity(db)
 
         case_event_sql = _table_sql(db, "case_event").lower()
         if (
@@ -914,7 +1365,9 @@ def _connect(path: Path | str, schema: str, domain: str) -> sqlite3.Connection:
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA foreign_keys=ON")
     db.executescript(schema)
-    if domain == "state_local_courts":
+    if domain == "property":
+        _migrate_property_schema(db)
+    elif domain == "state_local_courts":
         _migrate_court_schema(db)
     db.execute(
         "INSERT OR REPLACE INTO schema_meta(key, value) VALUES (?, ?)",
@@ -952,6 +1405,22 @@ def canonical_property_ref(
     return f"PROPERTY:{encoded}"
 
 
+def court_case_identity_key(
+    raw_case_number: str,
+    source_internal_id: str | None = None,
+) -> str:
+    """Return the namespaced identity stored for one source-native case."""
+
+    raw_number = str(raw_case_number).strip()
+    if not raw_number:
+        raise ValueError("raw_case_number cannot be blank")
+    if source_internal_id is not None:
+        native_id = str(source_internal_id).strip()
+        if native_id:
+            return f"{CASE_IDENTITY_NATIVE_PREFIX}{native_id}"
+    return f"{CASE_IDENTITY_NUMBER_PREFIX}{raw_number}"
+
+
 def canonical_court_ref(
     source_id: str,
     court_id: str,
@@ -978,6 +1447,7 @@ def apply_case_restriction(
     source_id: str,
     court_id: str,
     case_number: str,
+    source_internal_id: str | None = None,
     event_type: str,
     effective_at: str,
     reason: str | None = None,
@@ -985,27 +1455,50 @@ def apply_case_restriction(
 ) -> int:
     """Record and propagate a court restriction or restoration.
 
-    Restrictions update the case, parties, docket entries, and document
-    artifacts in one transaction. A restoration changes only the serving state;
-    it does not erase the audit trail.
+    Restrictions update the case, claims, parties, docket entries, and
+    document artifacts in one transaction. A restoration changes only the
+    serving state; it does not erase the audit trail.
     """
     native_event_type = str(event_type).strip()
     if not native_event_type:
         raise ValueError("restriction event type cannot be blank")
     canonical_event_type = canonical_restriction_event(native_event_type)
 
-    row = db.execute(
-        """
-        SELECT case_id
+    selector = source_internal_id
+    if selector is not None:
+        selector = str(selector).strip()
+        if not selector:
+            raise ValueError("source_internal_id cannot be blank")
+    params: list[Any] = [source_id, court_id, case_number]
+    internal_condition = ""
+    if selector is not None:
+        internal_condition = (
+            " AND source_internal_id IS NOT NULL "
+            "AND TRIM(source_internal_id) = ?"
+        )
+        params.append(selector)
+    rows = db.execute(
+        f"""
+        SELECT case_id, source_internal_id
         FROM case_record
         WHERE source_id = ? AND court_id = ? AND raw_case_number = ?
+        {internal_condition}
+        ORDER BY case_id
+        LIMIT 2
         """,
-        (source_id, court_id, case_number),
-    ).fetchone()
-    if row is None:
-        raise KeyError(f"case not found: {source_id}/{court_id}/{case_number}")
+        params,
+    ).fetchall()
+    if not rows:
+        suffix = f"/{selector}" if selector is not None else ""
+        raise KeyError(
+            f"case not found: {source_id}/{court_id}/{case_number}{suffix}"
+        )
+    if len(rows) > 1:
+        raise ValueError(
+            "case number is ambiguous; provide source_internal_id"
+        )
 
-    case_id = int(row["case_id"])
+    case_id = int(rows[0]["case_id"])
     if canonical_event_type == "restored":
         access_state = "public"
     elif canonical_event_type == "other":
@@ -1033,6 +1526,14 @@ def apply_case_restriction(
         db.execute(
             """
             UPDATE case_record
+            SET access_state = ?, native_access_state = ?
+            WHERE case_id = ?
+            """,
+            (access_state, native_event_type, case_id),
+        )
+        db.execute(
+            """
+            UPDATE case_claim
             SET access_state = ?, native_access_state = ?
             WHERE case_id = ?
             """,
@@ -1117,6 +1618,7 @@ def _build_parser() -> argparse.ArgumentParser:
     restrict.add_argument("--source-id", required=True)
     restrict.add_argument("--court-id", required=True)
     restrict.add_argument("--case-number", required=True)
+    restrict.add_argument("--source-internal-id")
     restrict.add_argument(
         "--state",
         required=True,
@@ -1155,6 +1657,7 @@ def main() -> None:
                 source_id=args.source_id,
                 court_id=args.court_id,
                 case_number=args.case_number,
+                source_internal_id=args.source_internal_id,
                 event_type=args.state,
                 effective_at=args.effective_at,
                 reason=args.reason,

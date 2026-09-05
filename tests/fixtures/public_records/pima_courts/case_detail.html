@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head><title>Pima County Superior Court - Case Information</title></head>
+  <body>
+    <form method="post" action="./GetCase2.aspx?ID=1632792" id="Form1">
+      <input name="txtCaseNumber" value="PB20210563" id="txtCaseNumber">
+      <input name="txtCaseDate" value="4/1/2021" id="txtCaseDate">
+      <textarea name="txtCaseCaption" id="txtCaseCaption">
+        Estate of: SAMPLE PERSON
+      </textarea>
+      <input name="txtJudge" value="No Judge Info" id="txtJudge">
+
+      <table id="grdParty">
+        <tr>
+          <td>Party Full Name</td>
+          <td>Party Role</td>
+          <td>Name Type</td>
+          <td>DOB</td>
+        </tr>
+        <tr>
+          <td><a href="PARTY_TOKEN_A">ALPHA SAMPLE</a></td>
+          <td>Fiduciary</td>
+          <td>True</td>
+          <td>5/1935</td>
+        </tr>
+        <tr>
+          <td>SAMPLE PERSON</td>
+          <td>Decedent</td>
+          <td>Also Known As (AKA)</td>
+          <td>1934</td>
+        </tr>
+      </table>
+
+      <table id="grdDocuments">
+        <tr>
+          <td>Document Type</td>
+          <td>Document SubType</td>
+          <td>Document Caption</td>
+          <td>File Date</td>
+          <td>Image</td>
+        </tr>
+        <tr>
+          <td>Notice</td>
+          <td>Notice To Creditors</td>
+          <td>NOTICE TO CREDITORS</td>
+          <td>4/2/2021</td>
+          <td class="Image"><a href="PDF_SESSION_TOKEN_1">Available</a></td>
+        </tr>
+        <tr>
+          <td>Notice</td>
+          <td>Notice To Creditors</td>
+          <td>NOTICE TO CREDITORS</td>
+          <td>4/2/2021</td>
+          <td class="Image">Available at Courthouse</td>
+        </tr>
+        <tr>
+          <td>Will</td>
+          <td>Last Will &amp; Testament</td>
+          <td>LAST WILL &amp; TESTAMENT</td>
+          <td>4/2/2021</td>
+          <td class="Image">Available at Courthouse</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

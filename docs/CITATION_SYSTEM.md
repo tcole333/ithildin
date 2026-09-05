@@ -18,6 +18,7 @@ Writers include citations as inline tokens in content:
 | Token Pattern | Example | Resolves To |
 |--------------|---------|-------------|
 | `[EFTAxxxxxx]` | `[EFTA02576529]` | Jmail viewer for DOJ documents |
+| `[DOJCOURT:EFTAxxxxxxxx]` | `[DOJCOURT:EFTA02824136]` | Exact case-grouped DOJ court-record release URL when registered |
 | `[Finding #N]` | `[Finding #42]` | Evidence sources for that finding |
 | `[SEC:accession]` | `[SEC:0001193125-15-266790]` | SEC EDGAR filing |
 | `[EDGAR:accession]` | `[EDGAR:0001193125-15-266790]` | SEC EDGAR filing (alias) |
@@ -25,6 +26,12 @@ Writers include citations as inline tokens in content:
 | `[PROPERTY:source/jurisdiction/kind/id]` | `[PROPERTY:us-nc-onemap-parcels/37005/parcel/3013467134]` | Canonical property record; official source URL when registered |
 | `[ACRIS:docid]` | `[ACRIS:2008012900966001]` | NYC property record |
 | `[STATECOURT:source/court/case/kind]` | `[STATECOURT:us-ny-nyscef/ny-supreme/CV-2026-1/case]` | Canonical state/local-court record; official source URL when registered |
+| `[COURT-DATA:source/artifact]` | `[COURT-DATA:us-co-judicial-annual-statistical-reports/annual-statistical-report-fy-2024]` | Court-data report, dashboard, policy, or request-workflow record; component source URL when registered |
+| `[COOPINION:source/court/document]` | `[COOPINION:us-co-appellate-case-law-search/supreme/887202075]` | Colorado historical appellate-opinion record |
+| `[COOPINION-RELEASE:source/court/release]` | `[COOPINION-RELEASE:us-co-judicial-appellate-opinion-releases/appeals/2026-07-23]` | Colorado current opinion release or announcement packet |
+| `[COOPINION-ARTIFACT:source:sha256]` | `[COOPINION-ARTIFACT:us-co-appellate-case-law-search:548c46ea71ce849c3837f5bf6bde8486ea1aa74dd1a8ba54c92dde9976946abe]` | Downloaded Colorado opinion or release artifact with component provenance |
+| `[ORCOURT-DOC:source:item]` | `[ORCOURT-DOC:us-or-law-library-coa-briefs:124865]` | Oregon Law Library opinion, brief, decision, or order with collection provenance |
+| `[ORCOURT-ARTIFACT:source:sha256]` | `[ORCOURT-ARTIFACT:us-or-law-library-coa-briefs:548c46ea71ce849c3837f5bf6bde8486ea1aa74dd1a8ba54c92dde9976946abe]` | Downloaded Oregon court-document artifact with collection provenance |
 | `[CL:docket]` | `[CL:4608967]` | CourtListener docket |
 | `[FEC:committee]` | `[FEC:C00431569]` | FEC committee page |
 | `[FARA:num]` | `[FARA:6071]` | FARA registration |

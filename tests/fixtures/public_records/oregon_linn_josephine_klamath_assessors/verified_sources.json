@@ -1,0 +1,84 @@
+{
+  "observed_at": "2026-07-29",
+  "sources": {
+    "us-or-linn-county-assessor-taxlots": {
+      "county_geoid": "41043",
+      "layer_name": "Tax Lots",
+      "service_item_id": "a2baa70a21de4f7fbcdb31884b562603",
+      "count": 54600,
+      "max_record_count": 2000,
+      "object_id_field": "OBJECTID",
+      "source_wkid": 2913,
+      "supported_query_formats": ["JSON", "geoJSON", "PBF"],
+      "schema_fingerprint": "0592bda23014beba31a4607067eab9bd6003fe42f1b94453ba66d08ba08a4d54",
+      "field_count": 87,
+      "item": {
+        "id": "a2baa70a21de4f7fbcdb31884b562603",
+        "title": "pub11_taxlots",
+        "type": "Map Service",
+        "owner": "kolsen",
+        "orgId": null,
+        "url": "https://gis.co.linn.or.us/public/rest/services/AssessmentTax/pub11_taxlots/MapServer",
+        "access": "public",
+        "created": 1781908694022,
+        "modified": 1781909992391,
+        "description": "Linn County Oregon Tax lots. Used by the county assessor for county property tax purposes.",
+        "extent": [[-123.271201, 44.191682], [-121.785578, 44.809479]]
+      },
+      "update_evidence": {
+        "row_fields": ["LASTUPDATE", "created_date", "last_edited_date"],
+        "representative_last_edited_date": 1784875953000
+      }
+    },
+    "us-or-josephine-county-assessor-taxlots": {
+      "county_geoid": "41033",
+      "layer_name": "Assessor Taxlots",
+      "service_item_id": "e6a1823c9fc44fe7b29dbbe210139c32",
+      "count": 41990,
+      "max_record_count": 2000,
+      "object_id_field": "OBJECTID",
+      "source_wkid": 2270,
+      "supported_query_formats": ["JSON", "geoJSON", "PBF"],
+      "schema_fingerprint": "46dca0f553feb4ba3c7d3d69a694afdb7c3b86fd4a7f16c1b57013a77d52ad6f",
+      "field_count": 68,
+      "item": null,
+      "update_evidence": {
+        "row_fields": [],
+        "note": "No explicit row-edit timestamp is published by this layer."
+      }
+    },
+    "us-or-klamath-county-assessor-taxlots": {
+      "county_geoid": "41035",
+      "layer_name": "KC_Taxlot_Publish",
+      "service_item_id": "e3ea8ceb692f405caad95e28eed50688",
+      "count": 61228,
+      "max_record_count": 1000,
+      "object_id_field": "OBJECTID",
+      "source_wkid": 2914,
+      "supported_query_formats": ["JSON", "geoJSON", "PBF"],
+      "schema_fingerprint": "56dc02c633c97c8d4b8c88ab68d2d9de7386e1bec5fcdfc3232972595493c042",
+      "field_count": 101,
+      "item": {
+        "id": "e3ea8ceb692f405caad95e28eed50688",
+        "title": "KC_Taxlots",
+        "type": "Feature Service",
+        "owner": "ewilde",
+        "orgId": "H6Mh1bySxR4oHx6x",
+        "url": "https://services.arcgis.com/H6Mh1bySxR4oHx6x/arcgis/rest/services/KC_Taxlots/FeatureServer",
+        "access": "public",
+        "created": 1466020841000,
+        "modified": 1784961978000,
+        "description": "Klamath County Taxlots. Information is derived from Klamath County Assessor data joined with GIS polygons.",
+        "extent": [[-122.33686405295003, 41.97983511197687], [-120.87745247742588, 43.62463580197916]]
+      },
+      "update_evidence": {
+        "row_fields": ["RDATE", "DDate", "Heliondate"],
+        "editing_info": {
+          "lastEditDate": 1784961975133,
+          "schemaLastEditDate": 1784961975133,
+          "dataLastEditDate": 1784961975133
+        }
+      }
+    }
+  }
+}
