@@ -64,7 +64,7 @@ def test_subawards_use_advanced_search_and_keep_uei_queries_distinct(monkeypatch
         outputs.append(json.loads(output.read_text()))
 
     assert outputs[0] != outputs[1]
-    assert [result[0]["Sub-Recipient UEI"] for result in outputs] == list(rows)
+    assert [result["results"][0]["Sub-Recipient UEI"] for result in outputs] == list(rows)
     for endpoint, payload in captured:
         assert endpoint == "/search/spending_by_award/"
         assert payload["subawards"] is True
@@ -101,10 +101,10 @@ def test_subawards_serialize_exact_prime_award_and_normalize_recipient_name(
     ))
 
     assert captured["payload"]["filters"]["award_ids"] == ["70CDCR23FR0000035"]
-    assert json.loads(output.read_text())[0]["Prime Award ID"] == "70CDCR23FR0000035"
+    assert json.loads(output.read_text())["results"][0]["Prime Award ID"] == "70CDCR23FR0000035"
 
 
-def test_subawards_refuse_to_write_out_of_scope_response(monkeypatch, tmp_path, capsys):
+def test_subawards_write_error_without_out_of_scope_rows(monkeypatch, tmp_path, capsys):
     output = tmp_path / "leaked.json"
     leaked = _row("UNRELATED123", "MAYA BRIDGE LLC")
     monkeypatch.setattr(
@@ -121,5 +121,9 @@ def test_subawards_refuse_to_write_out_of_scope_response(monkeypatch, tmp_path, 
         ))
 
     assert exc_info.value.code == 1
-    assert not output.exists()
+    saved = json.loads(output.read_text())
+    assert saved["status"] == "error"
+    assert saved["results"] == []
+    assert saved["errors"][0]["kind"] == "scope_mismatch"
+    assert "MAYA BRIDGE LLC" not in output.read_text()
     assert "refusing to emit potentially unfiltered results" in capsys.readouterr().err

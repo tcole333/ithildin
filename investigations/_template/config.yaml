@@ -20,8 +20,10 @@ key_persons: []
 # Known addresses for priority escalation.
 # When entities are registered at these addresses, leads get high priority.
 # Keys are partial address patterns (lowercase), values are descriptions.
+# Include the city and two-letter state or territory in either field so
+# geography-aware source ranking can resolve shorthand street patterns.
 known_addresses: {}
-  # "123 main st": "Subject's primary office"
+  # "123 main st": "Subject's primary office, Austin, TX"
 
 # Investigation threads for organizing leads and findings.
 # Each thread groups related work under a theme.

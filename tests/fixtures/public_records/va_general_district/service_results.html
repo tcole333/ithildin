@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Service/Process</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <table class="tableborder">
+        <tr>
+          <td class="gridheader">&nbsp;</td>
+          <td class="gridheader">Case #</td>
+          <td class="gridheader">Person Served</td>
+          <td class="gridheader">Plaintiff</td>
+          <td class="gridheader">Hearing Date</td>
+          <td class="gridheader">Hearing Time</td>
+          <td class="gridheader">Process Type</td>
+          <td class="gridheader">How Served</td>
+          <td class="gridheader">Date Issued</td>
+          <td class="gridheader">Date Served</td>
+        </tr>
+        <tr class="evenRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GV25000123-01"></td>
+          <td class="gridrow"><a href="caseSearch.do?formAction=caseDetails&amp;displayCaseNumber=GV25000123-01&amp;localFipsCode=013&amp;clientSearchCounter=8">GV25000123-01</a></td>
+          <td class="gridrow">EXAMPLE DYNAMICS LLC</td>
+          <td class="gridrow">SAMPLE FUNDING LLC</td>
+          <td class="gridrow">11/02/2026</td>
+          <td class="gridrow">02:00 PM</td>
+          <td class="gridrow">Garnishment Summons</td>
+          <td class="gridrow">In Person</td>
+          <td class="gridrow">06/04/2026</td>
+          <td class="gridrow">07/07/2026</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

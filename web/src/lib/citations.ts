@@ -18,6 +18,7 @@ export type CitationLink = {
   sourceRecordUrl?: string;
   sourceId?: string;
   sourceKind?: SourceKind;
+  sourceType?: string;
   publishValid?: boolean;
   // When true, inline/footnote links target the live URL directly instead of
   // the internal /sources/[id] page. Used for gated external artifacts (e.g.
@@ -152,6 +153,33 @@ function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
 
+function buildOhioPaxRecordUrl(
+  countyGeoid: string,
+  identityKind: string,
+  identity: string,
+): string | undefined {
+  if (countyGeoid === "39089" && identityKind.toLowerCase() === "instrument") {
+    return `https://apps.lickingcounty.gov/recorder/record-search/?instrument=${encodeURIComponent(identity)}`;
+  }
+  if (countyGeoid === "39041" && identityKind.toLowerCase() === "reference") {
+    return "https://delaware.dts-central-oh.com/PaxWorld/";
+  }
+  return undefined;
+}
+
+function buildOhioPaxDocumentUrl(
+  countyGeoid: string,
+  instrument: string,
+): string | undefined {
+  if (countyGeoid === "39089") {
+    return `https://apps.lickingcounty.gov/recorder/record-search/document?instrument=${encodeURIComponent(instrument)}`;
+  }
+  if (countyGeoid === "39041") {
+    return "https://delaware.dts-central-oh.com/PaxWorld/";
+  }
+  return undefined;
+}
+
 function buildLaAssessorOwnershipUrl(ain: string): string {
   return `https://portal.assessor.lacounty.gov/api/parcel_ownershiphistory?ain=${ain}`;
 }
@@ -192,7 +220,53 @@ function buildWaybackLookupUrl(url?: string): string | undefined {
 
 const clOverrides: Record<string, string> = clOverridesData;
 const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
-const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceRecordsData;
+export function parseManualSourceRecords(value: unknown): Record<string, ManualSourceRecord> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Source records must be an object");
+  for (const [key, record] of Object.entries(value)) {
+    if (!record || typeof record !== "object" || Array.isArray(record)) throw new Error(`Invalid source record: ${key}`);
+    for (const field of ["title", "source_type", "publisher_or_origin", "publication_or_capture_date", "page_or_locator", "excerpt_or_quote", "access_note", "external_url", "hosted_asset_url", "archive_url"]) {
+      if (record[field] !== undefined && typeof record[field] !== "string") throw new Error(`Invalid source record ${key}.${field}`);
+    }
+    if (record.kind !== undefined && !["external", "hosted_copy", "archived_copy", "record_only", "private_internal"].includes(record.kind)) throw new Error(`Invalid source kind: ${key}`);
+    if (record.publish_valid !== undefined && typeof record.publish_valid !== "boolean") throw new Error(`Invalid source publication status: ${key}`);
+    if (record.integrity !== undefined && (!record.integrity || typeof record.integrity !== "object" || Array.isArray(record.integrity))) throw new Error(`Invalid source integrity: ${key}`);
+  }
+  return value as Record<string, ManualSourceRecord>;
+}
+
+const manualSourceRecords = parseManualSourceRecords(manualSourceRecordsData);
+
+function buildPublicRecordSourceUrl(
+  domain: "PROPERTY" | "STATECOURT",
+  canonicalBody: string,
+): string | undefined {
+  const sourceId = canonicalBody.split("/", 1)[0]?.toLowerCase();
+  if (!sourceId) return undefined;
+  return sourceUrlOverrides[`${domain}_SOURCE:${sourceId}`];
+}
+
+function buildCensusAcsUrl(canonicalBody: string): string {
+  const year = canonicalBody.match(/^(\d{4})(?::|$)/)?.[1];
+  return year
+    ? `https://api.census.gov/data/${year}/acs/acs5.html`
+    : "https://api.census.gov/data.html";
+}
+
+const PA_OPINION_COURT_URLS: Record<string, string> = {
+  supreme: "https://www.pacourts.us/courts/supreme-court/court-opinions",
+  superior: "https://www.pacourts.us/courts/superior-court/court-opinions",
+  commonwealth: "https://www.pacourts.us/courts/commonwealth-court/court-opinions",
+};
+
+function buildPaOpinionUrl(canonicalBody: string): string | undefined {
+  const parts = canonicalBody.split("/");
+  const court = (
+    parts[0]?.toLowerCase() === "us-pa-appellate-opinions-postings"
+      ? parts[1]
+      : parts[0]
+  )?.toLowerCase();
+  return court ? PA_OPINION_COURT_URLS[court] : undefined;
+}
 
 function buildCourtListenerUrl(docketId: string): string {
   if (clOverrides[docketId]) return clOverrides[docketId];
@@ -211,6 +285,35 @@ function buildCourtListenerOpinionUrl(opinionId: string): string {
 
 function buildNyscefCaseUrl(docketId: string): string {
   return `https://iapps.courts.state.ny.us/nyscef/CaseDetails?docketId=${encodeURIComponent(docketId)}`;
+}
+
+function canonicalTaxCourtDocket(docket: string): string {
+  const normalized = cleanToken(docket).toUpperCase();
+  const match = normalized.match(/^(\d+-\d{2})(?:SL|[DLPRSWX])?$/);
+  return match?.[1] ?? normalized;
+}
+
+function buildTaxCourtCaseUrl(docket: string): string {
+  return `https://dawson.ustaxcourt.gov/case-detail/${encodeURIComponent(canonicalTaxCourtDocket(docket))}`;
+}
+
+function buildNyLawReportsUrl(reference: string): string {
+  if (reference.includes("/")) {
+    const path = reference.replace(/^\/+/, "");
+    return `https://www.nycourts.gov/reporter/${path}`;
+  }
+  const slipOpinion = reference.match(/^(\d{4})_\d{5}$/);
+  if (slipOpinion) {
+    const series = Number.parseInt(slipOpinion[1], 10) >= 2004
+      ? "3dseries"
+      : "2dseries";
+    return `https://www.nycourts.gov/reporter/current/${series}/${slipOpinion[1]}/${reference}.shtml`;
+  }
+  return "https://www.nycourts.gov/reporter/";
+}
+
+function buildNyColumnNoticeUrl(noticeId: string): string {
+  return `https://newyork.column.us/?activeNotice=${encodeURIComponent(noticeId)}`;
 }
 
 function buildDs10Url(): string {
@@ -241,7 +344,7 @@ function buildDocumentCloudUrl(docId: string): string {
 }
 
 function buildMuckRockUrl(requestId: string): string {
-  return `https://www.muckrock.com/foi/${requestId}/`;
+  return `https://www.muckrock.com/foi/request/${requestId}/`;
 }
 
 function buildLittleSisUrl(entityId: string): string {
@@ -469,11 +572,23 @@ function guessSourceType(value: string): string {
   if (/^(?:SEC\s+)?(?:EDGAR\s+)?ADSH\b/i.test(token)) return "securities_filing";
   if (/^990:/i.test(token)) return "tax_filing";
   if (/^OPENPAYMENTS:/i.test(token)) return "healthcare_payment_record";
+  if (/^PROPERTY:/i.test(token)) return "property_record";
   if (/^ACRIS:/i.test(token)) return "property_record";
+  if (/^PAX(?:DOC)?:/i.test(token)) return "property_record";
+  if (/^STATECOURT:/i.test(token)) return "court_record";
+  if (/^DOJCOURT:EFTA\d{8}/i.test(token)) return "court_record";
+  if (/^(?:PAOPINION|PAOPINION-ARTIFACT|DEOPINION|COOPINION|COOPINION-RELEASE|COOPINION-ARTIFACT|ORCOURT-DOC|ORCOURT-ARTIFACT):/i.test(token)) return "court_record";
+  if (/^DECOURTCONNECT:JUDGMENT:/i.test(token)) return "court_record";
+  if (/^COURT-BULK:/i.test(token)) return "court_record";
+  if (/^COURT-DATA:/i.test(token)) return "court_record";
+  if (/^TAXCOURT:/i.test(token)) return "court_record";
+  if (/^NY_LAW_REPORTS:/i.test(token)) return "court_record";
+  if (/^NY_COLUMN:/i.test(token)) return "public_notice";
   if (/^(CL|CourtListener)/i.test(token)) return "court_record";
   if (/^NYSCEF_CASE:/i.test(token)) return "court_record";
   if (/^FEC:/i.test(token)) return "campaign_finance_record";
   if (/^FARA:/i.test(token)) return "lobbying_record";
+  if (/^MA-UCC:/i.test(token)) return "ucc_filing";
   if (/^(USVI:|REG:|FL-SunBiz|NM-SoS|NY-SoS)/i.test(token)) return "corporate_registry";
   if (/^DOCUMENTCLOUD:/i.test(token)) return "document_cloud_record";
   if (/^MUCKROCK:/i.test(token)) return "foia_record";
@@ -802,6 +917,7 @@ function sourceRecordToCitationLink(record: SourceRecord, labelOverride?: string
     sourceRecordUrl: record.recordUrl,
     sourceId: record.id,
     sourceKind: record.kind,
+    sourceType: record.sourceType,
     publishValid: record.publishValid,
   };
 }
@@ -933,6 +1049,38 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     stripPattern: false,
   },
   {
+    id: "doj_court_release",
+    tokenPattern: "DOJCOURT:EFTA\\d{8}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/DOJCOURT:(EFTA\d{8})/i);
+      if (!match) return null;
+      const documentId = match[1].toUpperCase();
+      const canonical = `DOJCOURT:${documentId}`;
+      return {
+        key: `doj-court:${documentId}`,
+        label: canonical,
+        url: sourceUrlOverrides[canonical],
+        directLink: Boolean(sourceUrlOverrides[canonical]),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/DOJCOURT:EFTA\d{8}/gi) || []
+      ).map(ref => {
+        const documentId = ref.replace(/^DOJCOURT:/i, "").toUpperCase();
+        const canonical = `DOJCOURT:${documentId}`;
+        const url = sourceUrlOverrides[canonical];
+        return {
+          key: `doj-court:${documentId}`,
+          label: canonical,
+          url,
+          directLink: Boolean(url),
+        };
+      });
+    },
+  },
+  {
     id: "efta",
     tokenPattern: "EFTA\\d{6,}",
     healthTier: "tier4",
@@ -948,11 +1096,23 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       return { key: `efta:${label}`, label, url: doj?.url, directLink: true };
     },
     extract(raw) {
-      return (raw.match(/EFTA\d{6,}/gi) || []).map(id => {
-        const normalized = id.toUpperCase();
-        const url = resolveEftaDoj(normalized)?.url;
-        return { key: `efta:${normalized}`, label: normalized, url, directLink: true };
-      });
+      return Array.from(raw.matchAll(/EFTA\d{6,}/gi))
+        .filter(match => {
+          const index = match.index ?? 0;
+          return raw
+            .slice(Math.max(0, index - "DOJCOURT:".length), index)
+            .toUpperCase() !== "DOJCOURT:";
+        })
+        .map(match => {
+          const normalized = match[0].toUpperCase();
+          const url = resolveEftaDoj(normalized)?.url;
+          return {
+            key: `efta:${normalized}`,
+            label: normalized,
+            url,
+            directLink: true,
+          };
+        });
     },
   },
   {
@@ -1096,6 +1256,101 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     },
   },
   {
+    id: "property",
+    tokenPattern: "PROPERTY:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PROPERTY:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `property:${canonicalBody}`,
+        label: `PROPERTY:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("PROPERTY", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/PROPERTY:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^PROPERTY:/i, "");
+        return {
+          key: `property:${canonicalBody}`,
+          label: `PROPERTY:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("PROPERTY", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "ohio_pax_record",
+    tokenPattern: "PAX:\\d{5}:(?:reference|instrument):[A-Za-z0-9._-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PAX:(\d{5}):(reference|instrument):([A-Za-z0-9._-]+)$/i,
+      );
+      if (!match) return null;
+      const [, countyGeoid, identityKind, identity] = match;
+      return {
+        key: `pax:${countyGeoid}:${identityKind.toLowerCase()}:${identity}`,
+        label: `PAX:${countyGeoid}:${identityKind.toLowerCase()}:${identity}`,
+        url: buildOhioPaxRecordUrl(countyGeoid, identityKind, identity),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/PAX:\d{5}:(?:reference|instrument):[A-Za-z0-9._-]+/gi) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /PAX:(\d{5}):(reference|instrument):([A-Za-z0-9._-]+)/i,
+        );
+        if (!match) return [];
+        const [, countyGeoid, identityKind, identity] = match;
+        return [{
+          key: `pax:${countyGeoid}:${identityKind.toLowerCase()}:${identity}`,
+          label: `PAX:${countyGeoid}:${identityKind.toLowerCase()}:${identity}`,
+          url: buildOhioPaxRecordUrl(countyGeoid, identityKind, identity),
+        }];
+      });
+    },
+  },
+  {
+    id: "ohio_pax_document",
+    tokenPattern: "PAXDOC:\\d{5}:[A-Za-z0-9._-]+:[A-Za-z0-9._-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PAXDOC:(\d{5}):([A-Za-z0-9._-]+):([A-Za-z0-9._-]+)$/i,
+      );
+      if (!match) return null;
+      const [, countyGeoid, instrument, representationKey] = match;
+      return {
+        key: `paxdoc:${countyGeoid}:${instrument}:${representationKey}`,
+        label: `PAXDOC:${countyGeoid}:${instrument}:${representationKey}`,
+        url: buildOhioPaxDocumentUrl(countyGeoid, instrument),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/PAXDOC:\d{5}:[A-Za-z0-9._-]+:[A-Za-z0-9._-]+/gi) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /PAXDOC:(\d{5}):([A-Za-z0-9._-]+):([A-Za-z0-9._-]+)/i,
+        );
+        if (!match) return [];
+        const [, countyGeoid, instrument, representationKey] = match;
+        return [{
+          key: `paxdoc:${countyGeoid}:${instrument}:${representationKey}`,
+          label: `PAXDOC:${countyGeoid}:${instrument}:${representationKey}`,
+          url: buildOhioPaxDocumentUrl(countyGeoid, instrument),
+        }];
+      });
+    },
+  },
+  {
     id: "acris",
     // The NYC ACRIS doc_id is the 13-16 digit number; some refs carry an
     // "FT_" document-type prefix (ACRIS:FT_1690000317169) that is stripped
@@ -1173,6 +1428,582 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const docket = m[2].toUpperCase();
         const url = buildMilitaryCorrectionsUrl(service);
         return [{ key: `bcmr:${service}:${docket}`, label: `BCMR:${service}:${docket}`, url }];
+      });
+    },
+  },
+  {
+    id: "court_bulk",
+    tokenPattern: "COURT-BULK:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^COURT-BULK:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `court-bulk:${canonicalBody}`,
+        label: `COURT-BULK:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/COURT-BULK:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^COURT-BULK:/i, "");
+        return {
+          key: `court-bulk:${canonicalBody}`,
+          label: `COURT-BULK:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "court-data",
+    tokenPattern: "COURT-DATA:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^COURT-DATA:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `court-data:${canonicalBody}`,
+        label: `COURT-DATA:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/COURT-DATA:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^COURT-DATA:/i, "");
+        return {
+          key: `court-data:${canonicalBody}`,
+          label: `COURT-DATA:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "or-court-document",
+    tokenPattern: "ORCOURT-DOC:[A-Za-z0-9._-]+:[A-Za-z0-9._-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^ORCOURT-DOC:([A-Za-z0-9._-]+):([A-Za-z0-9._-]+)$/i,
+      );
+      if (!match) return null;
+      const sourceId = match[1].toLowerCase();
+      const itemId = match[2];
+      const canonicalRef = `ORCOURT-DOC:${sourceId}:${itemId}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildPublicRecordSourceUrl(
+          "STATECOURT",
+          `${sourceId}/${itemId}`,
+        ),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(
+          /ORCOURT-DOC:[A-Za-z0-9._-]+:[A-Za-z0-9._-]+/gi,
+        ) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^ORCOURT-DOC:([A-Za-z0-9._-]+):([A-Za-z0-9._-]+)$/i,
+        );
+        if (!match) return [];
+        const sourceId = match[1].toLowerCase();
+        const itemId = match[2];
+        const canonicalRef = `ORCOURT-DOC:${sourceId}:${itemId}`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildPublicRecordSourceUrl(
+            "STATECOURT",
+            `${sourceId}/${itemId}`,
+          ),
+        }];
+      });
+    },
+  },
+  {
+    id: "or-court-artifact",
+    tokenPattern: "ORCOURT-ARTIFACT:[A-Za-z0-9._-]+:[A-Fa-f0-9]{64}",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^ORCOURT-ARTIFACT:([A-Za-z0-9._-]+):([A-Fa-f0-9]{64})$/i,
+      );
+      if (!match) return null;
+      const sourceId = match[1].toLowerCase();
+      const digest = match[2].toLowerCase();
+      const canonicalRef = `ORCOURT-ARTIFACT:${sourceId}:${digest}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildPublicRecordSourceUrl(
+          "STATECOURT",
+          `${sourceId}/artifact`,
+        ),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(
+          /ORCOURT-ARTIFACT:[A-Za-z0-9._-]+:[A-Fa-f0-9]{64}/gi,
+        ) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^ORCOURT-ARTIFACT:([A-Za-z0-9._-]+):([A-Fa-f0-9]{64})$/i,
+        );
+        if (!match) return [];
+        const sourceId = match[1].toLowerCase();
+        const digest = match[2].toLowerCase();
+        const canonicalRef = `ORCOURT-ARTIFACT:${sourceId}:${digest}`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildPublicRecordSourceUrl(
+            "STATECOURT",
+            `${sourceId}/artifact`,
+          ),
+        }];
+      });
+    },
+  },
+  {
+    id: "coopinion",
+    tokenPattern: "COOPINION:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^COOPINION:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `coopinion:${canonicalBody}`,
+        label: `COOPINION:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/COOPINION:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^COOPINION:/i, "");
+        return {
+          key: `coopinion:${canonicalBody}`,
+          label: `COOPINION:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "coopinion-release",
+    tokenPattern: "COOPINION-RELEASE:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^COOPINION-RELEASE:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `coopinion-release:${canonicalBody}`,
+        label: `COOPINION-RELEASE:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/COOPINION-RELEASE:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^COOPINION-RELEASE:/i, "");
+        return {
+          key: `coopinion-release:${canonicalBody}`,
+          label: `COOPINION-RELEASE:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "coopinion-artifact",
+    tokenPattern: "COOPINION-ARTIFACT:[A-Za-z0-9._-]+:[A-Fa-f0-9]{64}",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^COOPINION-ARTIFACT:([A-Za-z0-9._-]+):([A-Fa-f0-9]{64})$/i,
+      );
+      if (!match) return null;
+      const sourceId = match[1].toLowerCase();
+      const digest = match[2].toLowerCase();
+      const canonicalRef = `COOPINION-ARTIFACT:${sourceId}:${digest}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildPublicRecordSourceUrl(
+          "STATECOURT",
+          `${sourceId}/artifact`,
+        ),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(
+          /COOPINION-ARTIFACT:[A-Za-z0-9._-]+:[A-Fa-f0-9]{64}/gi,
+        ) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^COOPINION-ARTIFACT:([A-Za-z0-9._-]+):([A-Fa-f0-9]{64})$/i,
+        );
+        if (!match) return [];
+        const sourceId = match[1].toLowerCase();
+        const digest = match[2].toLowerCase();
+        const canonicalRef = `COOPINION-ARTIFACT:${sourceId}:${digest}`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildPublicRecordSourceUrl(
+            "STATECOURT",
+            `${sourceId}/artifact`,
+          ),
+        }];
+      });
+    },
+  },
+  {
+    id: "de_courtconnect_judgment",
+    tokenPattern: "DECOURTCONNECT:JUDGMENT:[A-Za-z0-9%+._-]+:[A-Za-z0-9%+._-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^DECOURTCONNECT:JUDGMENT:([A-Za-z0-9%+._-]+):([A-Za-z0-9%+._-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalRef = `DECOURTCONNECT:JUDGMENT:${match[1]}:${match[2]}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildPublicRecordSourceUrl(
+          "STATECOURT",
+          "us-de-courtconnect/judgments",
+        ),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(
+          /DECOURTCONNECT:JUDGMENT:[A-Za-z0-9%+._-]+:[A-Za-z0-9%+._-]+/gi,
+        ) || []
+      ).map(ref => ({
+        key: ref.toLowerCase(),
+        label: ref,
+        url: buildPublicRecordSourceUrl(
+          "STATECOURT",
+          "us-de-courtconnect/judgments",
+        ),
+      }));
+    },
+  },
+  {
+    id: "census_acs5",
+    tokenPattern: "USCENSUS:ACS5:[A-Za-z0-9:_-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^USCENSUS:ACS5:([A-Za-z0-9:_-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      const canonicalRef = `USCENSUS:ACS5:${canonicalBody}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildCensusAcsUrl(canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/USCENSUS:ACS5:[A-Za-z0-9:_-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^USCENSUS:ACS5:/i, "");
+        const canonicalRef = `USCENSUS:ACS5:${canonicalBody}`;
+        return {
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildCensusAcsUrl(canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "statecourt",
+    tokenPattern: "STATECOURT:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^STATECOURT:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `statecourt:${canonicalBody}`,
+        label: `STATECOURT:${canonicalBody}`,
+        url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/STATECOURT:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^STATECOURT:/i, "");
+        return {
+          key: `statecourt:${canonicalBody}`,
+          label: `STATECOURT:${canonicalBody}`,
+          url: buildPublicRecordSourceUrl("STATECOURT", canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "pa_opinion",
+    tokenPattern: "PAOPINION:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PAOPINION:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const canonicalBody = match[1];
+      return {
+        key: `paopinion:${canonicalBody}`,
+        label: `PAOPINION:${canonicalBody}`,
+        url: buildPaOpinionUrl(canonicalBody),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/PAOPINION:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const canonicalBody = ref.replace(/^PAOPINION:/i, "");
+        return {
+          key: `paopinion:${canonicalBody}`,
+          label: `PAOPINION:${canonicalBody}`,
+          url: buildPaOpinionUrl(canonicalBody),
+        };
+      });
+    },
+  },
+  {
+    id: "pa_opinion_artifact",
+    tokenPattern: "PAOPINION-ARTIFACT:(?:supreme|superior|commonwealth):[A-Fa-f0-9]{64}",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^PAOPINION-ARTIFACT:(supreme|superior|commonwealth):([A-Fa-f0-9]{64})$/i,
+      );
+      if (!match) return null;
+      const canonicalRef = `PAOPINION-ARTIFACT:${match[1].toLowerCase()}:${match[2].toLowerCase()}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildPaOpinionUrl(match[1]),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(
+          /PAOPINION-ARTIFACT:(?:supreme|superior|commonwealth):[A-Fa-f0-9]{64}/gi,
+        ) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^PAOPINION-ARTIFACT:(supreme|superior|commonwealth):([A-Fa-f0-9]{64})$/i,
+        );
+        if (!match) return [];
+        const canonicalRef = `PAOPINION-ARTIFACT:${match[1].toLowerCase()}:${match[2].toLowerCase()}`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildPaOpinionUrl(match[1]),
+        }];
+      });
+    },
+  },
+  {
+    id: "de_opinion",
+    tokenPattern: "DEOPINION:\\d+(?::PDF:[A-Fa-f0-9]{64})?",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^DEOPINION:(\d+)(?::PDF:([A-Fa-f0-9]{64}))?$/i,
+      );
+      if (!match) return null;
+      const documentId = match[1];
+      const digest = match[2]?.toLowerCase();
+      const canonicalRef = `DEOPINION:${documentId}${
+        digest ? `:PDF:${digest}` : ""
+      }`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: `https://courts.delaware.gov/opinions/download.aspx?id=${documentId}`,
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/DEOPINION:\d+(?::PDF:[A-Fa-f0-9]{64})?/gi) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^DEOPINION:(\d+)(?::PDF:([A-Fa-f0-9]{64}))?$/i,
+        );
+        if (!match) return [];
+        const documentId = match[1];
+        const digest = match[2]?.toLowerCase();
+        const canonicalRef = `DEOPINION:${documentId}${
+          digest ? `:PDF:${digest}` : ""
+        }`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: `https://courts.delaware.gov/opinions/download.aspx?id=${documentId}`,
+        }];
+      });
+    },
+  },
+  {
+    id: "taxcourt",
+    tokenPattern: "TAXCOURT:\\d+-\\d{2}(?:SL|[DLPRSWX])?(?::[A-Za-z0-9-]+)?",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^TAXCOURT:(\d+-\d{2}(?:SL|[DLPRSWX])?)(?::([A-Za-z0-9-]+))?$/i,
+      );
+      if (!match) return null;
+      const docket = canonicalTaxCourtDocket(match[1]);
+      const entryId = match[2];
+      const canonicalRef = `TAXCOURT:${docket}${entryId ? `:${entryId}` : ""}`;
+      return {
+        key: canonicalRef.toLowerCase(),
+        label: canonicalRef,
+        url: buildTaxCourtCaseUrl(docket),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/TAXCOURT:\d+-\d{2}(?:SL|[DLPRSWX])?(?::[A-Za-z0-9-]+)?/gi) || []
+      ).flatMap(ref => {
+        const match = ref.match(
+          /^TAXCOURT:(\d+-\d{2}(?:SL|[DLPRSWX])?)(?::([A-Za-z0-9-]+))?$/i,
+        );
+        if (!match) return [];
+        const docket = canonicalTaxCourtDocket(match[1]);
+        const entryId = match[2];
+        const canonicalRef = `TAXCOURT:${docket}${entryId ? `:${entryId}` : ""}`;
+        return [{
+          key: canonicalRef.toLowerCase(),
+          label: canonicalRef,
+          url: buildTaxCourtCaseUrl(docket),
+        }];
+      });
+    },
+  },
+  {
+    id: "ny_law_reports",
+    tokenPattern: "NY_LAW_REPORTS:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^NY_LAW_REPORTS:([A-Za-z0-9%+/_=.-]+)$/i,
+      );
+      if (!match) return null;
+      const reference = match[1];
+      return {
+        key: `ny-law-reports:${reference}`,
+        label: `NY_LAW_REPORTS:${reference}`,
+        url: buildNyLawReportsUrl(reference),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/NY_LAW_REPORTS:[A-Za-z0-9%+/_=.-]+/gi) || []
+      ).map(ref => {
+        const reference = ref.replace(/^NY_LAW_REPORTS:/i, "");
+        return {
+          key: `ny-law-reports:${reference}`,
+          label: `NY_LAW_REPORTS:${reference}`,
+          url: buildNyLawReportsUrl(reference),
+        };
+      });
+    },
+  },
+  {
+    id: "ny_column",
+    tokenPattern: "NY_COLUMN:[A-Za-z0-9_-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^NY_COLUMN:([A-Za-z0-9_-]+)$/i,
+      );
+      if (!match) return null;
+      const noticeId = match[1];
+      return {
+        key: `ny-column:${noticeId}`,
+        label: `NY_COLUMN:${noticeId}`,
+        url: buildNyColumnNoticeUrl(noticeId),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/NY_COLUMN:[A-Za-z0-9_-]+/gi) || []
+      ).map(ref => {
+        const noticeId = ref.replace(/^NY_COLUMN:/i, "");
+        return {
+          key: `ny-column:${noticeId}`,
+          label: `NY_COLUMN:${noticeId}`,
+          url: buildNyColumnNoticeUrl(noticeId),
+        };
+      });
+    },
+  },
+  {
+    id: "courtlistener_docket",
+    tokenPattern: "CourtListener:docket(?:\\/|:)\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = cleanToken(token).match(
+        /^CourtListener:docket(?:\/|:)(\d+)$/i,
+      );
+      if (!match) return null;
+      const docketId = match[1];
+      return {
+        key: `cl-docket:${docketId}`,
+        label: `CourtListener docket ${docketId}`,
+        url: buildCourtListenerUrl(docketId),
+      };
+    },
+    extract(raw) {
+      return (
+        raw.match(/CourtListener:docket(?:\/|:)\d+/gi) || []
+      ).map(ref => {
+        const match = ref.match(/(\d+)$/);
+        const docketId = match?.[1] ?? "";
+        const url = buildCourtListenerUrl(docketId);
+        return {
+          key: url,
+          label: `CourtListener docket ${docketId}`,
+          url,
+        };
       });
     },
   },
@@ -1407,6 +2238,32 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
 	        return [{ key: url, label: `REG:${jurisdiction}:${entityId}`, url }];
 	      });
 	    },
+  },
+  {
+    id: "ma-ucc",
+    tokenPattern: "MA-UCC:\\d+",
+    healthTier: "tier3",
+    resolve(token) {
+      const match = token.match(/^MA-UCC:(\d+)$/i);
+      if (!match) return null;
+      const filingNumber = match[1];
+      return {
+        key: `ma-ucc:${filingNumber}`,
+        label: `MA-UCC:${filingNumber}`,
+        // Filing history URLs use source-issued identifiers, not filing numbers.
+        url: "https://corp.sec.state.ma.us/corpweb/UCCSearch/UCCSearch.aspx",
+      };
+    },
+    extract(raw) {
+      return (raw.match(/MA-UCC:\d+/gi) || []).map(ref => {
+        const filingNumber = ref.replace(/^MA-UCC:/i, "");
+        return {
+          key: `ma-ucc:${filingNumber}`,
+          label: `MA-UCC:${filingNumber}`,
+          url: "https://corp.sec.state.ma.us/corpweb/UCCSearch/UCCSearch.aspx",
+        };
+      });
+    },
   },
   {
     // UK Companies House (companies-house:08150769, companies-house:OC377122).
@@ -2268,7 +3125,7 @@ export function applyCitations(markdown: string, options: CitationOptions = {}, 
     transformCitationTextNodes(tree, options, citationState, false);
 
     const output = unified()
-      .use(remarkStringify, { allowDangerousHtml: true })
+      .use(remarkStringify)
       .stringify(tree);
 
     return { markdown: output, entries: citationState.entries };

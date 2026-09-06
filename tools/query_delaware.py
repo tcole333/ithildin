@@ -15,39 +15,35 @@ Usage:
 """
 
 import argparse
-import json
-import os
 import sys
 import time
-from pathlib import Path
 
 import requests
 
 try:
     from tools.env_loader import load_env_file
-    from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from tools.output_util import add_output_args, write_output
 except ImportError:
     from env_loader import load_env_file
-    from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from output_util import add_output_args, write_output
 
 API_BASE = "https://api.opencorporates.com/v0.4"
 JURISDICTION = "us_de"  # Delaware
 RATE_LIMIT_DELAY = 0.5  # 500ms between requests to avoid rate limits
 
 load_env_file()
-
-
-def get_api_key():
-    """Get OpenCorporates API key from environment."""
-    key = os.getenv("OPENCORPORATES_API_KEY")
-    if not key:
-        print("ERROR: OPENCORPORATES_API_KEY environment variable not set", file=sys.stderr)
-        print("Get a free research key: https://opencorporates.com/api_accounts/new", file=sys.stderr)
-        print("Or set: export OPENCORPORATES_API_KEY=your_key_here", file=sys.stderr)
-        sys.exit(1)
-    return key
 
 
 def api_request(endpoint, params=None):
@@ -66,16 +62,9 @@ def api_request(endpoint, params=None):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 401:
-            print(f"ERROR: Invalid API token. Check your OPENCORPORATES_API_KEY", file=sys.stderr)
-        elif e.response.status_code == 429:
-            print(f"ERROR: Rate limit exceeded. Free tier: 200/month, 50/day", file=sys.stderr)
-        else:
-            print(f"HTTP {e.response.status_code}: {e.response.text}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_http_error(e.response.status_code)
     except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_transport_error(e)
 
 
 def search_companies(query, inactive=False, per_page=30, page=1):
@@ -253,7 +242,12 @@ def batch_entities(company_numbers, output_file=None):
             results[number] = {"error": str(e)}
 
     if output_file:
-        write_output(results, output_file)
+        output_args = argparse.Namespace(output=output_file, json_out=False)
+        write_output(
+            results,
+            output_args,
+            summary=f"Delaware entity batch: {len(results)} results",
+        )
 
     return results
 
@@ -295,8 +289,6 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    output_file = getattr(args, 'output', None)
-
     if args.command == "search":
         results = search_companies(
             args.query,
@@ -304,8 +296,12 @@ def main():
             per_page=args.per_page,
             page=args.page
         )
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware company search '{args.query}'",
+            result_count=results["total_count"],
+        ):
             print(f"\nFound {results['total_count']} companies")
             for company in results['companies']:
                 print(f"\n{company['name']} ({company['company_number']})")
@@ -316,8 +312,11 @@ def main():
 
     elif args.command == "entity":
         results = get_company(args.company_number)
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware entity {args.company_number}",
+        ):
             print(f"\n{results['name']}")
             print(f"Number: {results['company_number']}")
             print(f"Type: {results['company_type']}")
@@ -333,8 +332,12 @@ def main():
             per_page=args.per_page,
             page=args.page
         )
-        write_output(results, output_file)
-        if not output_file:
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware filings {args.company_number}",
+            result_count=results["total_count"],
+        ):
             print(f"\nFound {results['total_count']} filings")
             for filing in results['filings']:
                 print(f"\n{filing['date']}: {filing['title']}")
@@ -342,8 +345,13 @@ def main():
                     print(f"  Type: {filing['filing_type']}")
 
     elif args.command == "batch-entities":
-        results = batch_entities(args.company_numbers, output_file)
-        if not output_file:
+        results = batch_entities(args.company_numbers)
+        if not write_output(
+            results,
+            args,
+            summary=f"Delaware entity batch: {len(results)} results",
+            result_count=len(results),
+        ):
             print(f"\nFetched {len(results)} entities")
 
 

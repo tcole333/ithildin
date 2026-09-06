@@ -64,13 +64,33 @@ def get_db():
     return db
 
 
+def defendants_only(db, alias=""):
+    """SQL predicate excluding non-party rows (currently presiding ALJs).
+
+    `enforcement_defendants` holds every party named in the respondent field, so
+    defendant-semantics queries must filter on role. Degrades to a no-op against
+    a database that predates the role column.
+    """
+    cols = {r[1] for r in db.execute("PRAGMA table_info(enforcement_defendants)")}
+    if "role" not in cols:
+        return "1=1"
+    return f"{alias + '.' if alias else ''}role = 'defendant'"
+
+
 # ---------------------------------------------------------------------------
 # search
 # ---------------------------------------------------------------------------
 
 
 def cmd_search(args):
-    """FTS5 search across respondent text and release numbers."""
+    """FTS5 search across respondent text, release numbers, and release bodies.
+
+    A match can land in the respondent/release metadata or in the release text
+    itself, so every result carries the body length and a body snippet: a
+    statutory-conduct query (e.g. "10b-5") is only meaningful where a body was
+    actually fetched. Rows still awaiting `ingest_sec_enforcement.py
+    fetch-bodies` report body_chars = 0.
+    """
     db = get_db()
     query = args.query
     fts_query = literal_fts_query(query)
@@ -82,6 +102,8 @@ def cmd_search(args):
     if args.source:
         conditions.append("ea.source_type = ?")
         params.append(args.source)
+    if getattr(args, "with_body", False):
+        conditions.append("TRIM(COALESCE(ea.body_text, '')) <> ''")
 
     # Date filters
     if args.start:
@@ -97,7 +119,9 @@ def cmd_search(args):
 
     rows = db.execute(
         f"""SELECT ea.id, ea.release_number, ea.source_type, ea.date_published,
-                   ea.respondent_text, ea.release_url, ea.file_number
+                   ea.respondent_text, ea.release_url, ea.file_number,
+                   LENGTH(COALESCE(ea.body_text, '')) AS body_chars,
+                   snippet(enforcement_actions_fts, 2, '', '', '…', 24) AS body_snippet
             FROM enforcement_actions ea
             JOIN enforcement_actions_fts f ON ea.id = f.rowid
             WHERE enforcement_actions_fts MATCH ?
@@ -111,7 +135,18 @@ def cmd_search(args):
     _log(query, "sec_enforcement", len(results))
     db.close()
 
-    if write_output(results, args, summary=f"SEC enforcement search '{query}'"):
+    # Surfaced in both output modes: a conduct query that matched only metadata
+    # is not evidence the conduct is absent from the corpus.
+    bodyless = sum(1 for r in results if not r["body_chars"])
+    coverage = (
+        f"; {bodyless} of {len(results)} have no release text stored (metadata-only)"
+        if bodyless
+        else ""
+    )
+
+    if write_output(
+        results, args, summary=f"SEC enforcement search '{query}'{coverage}"
+    ):
         return
 
     if not results:
@@ -122,9 +157,18 @@ def cmd_search(args):
     for r in results:
         print(f"  {r['release_number']:12s} {r['date_published']}  [{r['source_type']}]")
         print(f"    {r['respondent_text'][:100]}")
+        if r["body_snippet"]:
+            print(f"    body: {r['body_snippet']}")
         if r.get("release_url"):
             print(f"    {r['release_url']}")
         print()
+    if bodyless:
+        print(
+            f"NOTE: {bodyless} of {len(results)} results have no release text stored, "
+            "so this match is metadata-only.\n"
+            "      Backfill with: uv run python tools/ingest_sec_enforcement.py fetch-bodies",
+            file=sys.stderr,
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -179,10 +223,11 @@ def _exact_defendant_search(db, name):
     norm_entity = normalize_entity_name(name)
 
     rows = db.execute(
-        """SELECT ea.*, ed.name_raw as matched_name, ed.defendant_type
+        f"""SELECT ea.*, ed.name_raw as matched_name, ed.defendant_type
            FROM enforcement_defendants ed
            JOIN enforcement_actions ea ON ed.action_id = ea.id
            WHERE ed.name_normalized IN (?, ?)
+             AND {defendants_only(db, "ed")}
            ORDER BY ea.date_published DESC""",
         (norm_person, norm_entity),
     ).fetchall()
@@ -222,10 +267,11 @@ def _fuzzy_defendant_search(db, name, threshold):
         fts_query = f'"{norm}"'
 
     candidates = db.execute(
-        """SELECT ed.id, ed.action_id, ed.name_raw, ed.name_normalized, ed.defendant_type
+        f"""SELECT ed.id, ed.action_id, ed.name_raw, ed.name_normalized, ed.defendant_type
            FROM enforcement_defendants ed
            JOIN enforcement_defendants_fts f ON ed.id = f.rowid
            WHERE enforcement_defendants_fts MATCH ?
+             AND {defendants_only(db, "ed")}
            LIMIT 500""",
         (fts_query,),
     ).fetchall()
@@ -280,16 +326,20 @@ def cmd_action(args):
         print(f"No enforcement action found with release number '{release}'.")
         sys.exit(1)
 
-    # Get all defendants
-    defendants = db.execute(
-        """SELECT name_raw, name_normalized, defendant_type, is_et_al
+    # Every party named in the respondent field, defendants and presiding ALJ
+    parties = db.execute(
+        f"""SELECT name_raw, name_normalized, defendant_type, is_et_al,
+                  {"role" if defendants_only(db) != "1=1" else "'defendant' AS role"}
            FROM enforcement_defendants WHERE action_id = ?
-           ORDER BY defendant_type, name_raw""",
+           ORDER BY role, defendant_type, name_raw""",
         (action["id"],),
     ).fetchall()
 
     result = dict(action)
-    result["defendants"] = [dict(d) for d in defendants]
+    result["defendants"] = [dict(d) for d in parties if d["role"] == "defendant"]
+    result["presiding_alj"] = [
+        d["name_raw"] for d in parties if d["role"] == "presiding_alj"
+    ]
 
     db.close()
 
@@ -310,6 +360,32 @@ def cmd_action(args):
     for d in result["defendants"]:
         et = " (et al.)" if d["is_et_al"] else ""
         print(f"    [{d['defendant_type']:7s}] {d['name_raw']}{et}")
+    for judge in result["presiding_alj"]:
+        print(f"\n  Presiding ALJ: {judge} (not a defendant)")
+
+    body = result.get("body_text") or ""
+    if body:
+        print(
+            f"\n  Release text ({len(body):,} chars via "
+            f"{result.get('body_extraction_method') or 'unknown'}, verbatim):"
+        )
+        excerpt = body if len(body) <= 4000 else body[:4000]
+        for line in excerpt.splitlines():
+            print(f"    {line}")
+        if len(body) > 4000:
+            print(
+                f"\n    [truncated at 4,000 of {len(body):,} chars — "
+                "use --output FILE for the full text]"
+            )
+    else:
+        status = result.get("body_fetch_status") or "pending"
+        print(f"\n  Release text: none stored (body_fetch_status={status})")
+        if result.get("body_fetch_error"):
+            print(f"    {result['body_fetch_error']}")
+        elif status == "pending":
+            print(
+                "    Backfill with: uv run python tools/ingest_sec_enforcement.py fetch-bodies"
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -339,8 +415,9 @@ def cmd_co_defendants(args):
         sys.exit(1)
 
     defendants = db.execute(
-        """SELECT name_raw, name_normalized, defendant_type, is_et_al
-           FROM enforcement_defendants WHERE action_id = ?
+        f"""SELECT name_raw, name_normalized, defendant_type, is_et_al
+           FROM enforcement_defendants
+           WHERE action_id = ? AND {defendants_only(db)}
            ORDER BY defendant_type, name_raw""",
         (action["id"],),
     ).fetchall()
@@ -393,20 +470,21 @@ def cmd_network(args):
 
         # Find all actions this person is in
         action_rows = db.execute(
-            """SELECT DISTINCT action_id
+            f"""SELECT DISTINCT action_id
                FROM enforcement_defendants
-               WHERE name_normalized = ?""",
+               WHERE name_normalized = ? AND {defendants_only(db)}""",
             (current_name,),
         ).fetchall()
 
         for ar in action_rows:
             # Find all co-defendants in those actions
             co_defs = db.execute(
-                """SELECT ed.name_raw, ed.name_normalized, ed.defendant_type,
+                f"""SELECT ed.name_raw, ed.name_normalized, ed.defendant_type,
                           ea.release_number, ea.date_published
                    FROM enforcement_defendants ed
                    JOIN enforcement_actions ea ON ed.action_id = ea.id
-                   WHERE ed.action_id = ? AND ed.name_normalized != ?""",
+                   WHERE ed.action_id = ? AND ed.name_normalized != ?
+                     AND {defendants_only(db, "ed")}""",
                 (ar["action_id"], current_name),
             ).fetchall()
 
@@ -472,7 +550,7 @@ def cmd_repeat_offenders(args):
     db = get_db()
 
     rows = db.execute(
-        """SELECT ed.name_normalized, ed.defendant_type,
+        f"""SELECT ed.name_normalized, ed.defendant_type,
                   GROUP_CONCAT(DISTINCT ea.release_number) as releases,
                   GROUP_CONCAT(DISTINCT ea.source_type) as source_types,
                   COUNT(DISTINCT ed.action_id) as action_count,
@@ -481,6 +559,7 @@ def cmd_repeat_offenders(args):
                   MAX(ed.name_raw) as name_display
            FROM enforcement_defendants ed
            JOIN enforcement_actions ea ON ed.action_id = ea.id
+           WHERE {defendants_only(db, "ed")}
            GROUP BY ed.name_normalized
            HAVING action_count >= ?
            ORDER BY action_count DESC, ed.name_normalized""",
@@ -528,7 +607,11 @@ def cmd_stats(args):
         "SELECT COUNT(*) FROM enforcement_actions"
     ).fetchone()[0]
     results["total_defendants"] = db.execute(
-        "SELECT COUNT(*) FROM enforcement_defendants"
+        f"SELECT COUNT(*) FROM enforcement_defendants WHERE {defendants_only(db)}"
+    ).fetchone()[0]
+    results["total_presiding_alj"] = db.execute(
+        "SELECT COUNT(*) FROM enforcement_defendants "
+        f"WHERE NOT ({defendants_only(db)})"
     ).fetchone()[0]
 
     # By source
@@ -548,15 +631,17 @@ def cmd_stats(args):
 
     # By defendant type
     rows = db.execute(
-        """SELECT defendant_type, COUNT(*) as cnt
-           FROM enforcement_defendants GROUP BY defendant_type ORDER BY cnt DESC"""
+        f"""SELECT defendant_type, COUNT(*) as cnt
+           FROM enforcement_defendants WHERE {defendants_only(db)}
+           GROUP BY defendant_type ORDER BY cnt DESC"""
     ).fetchall()
     results["by_defendant_type"] = {r["defendant_type"]: r["cnt"] for r in rows}
 
     # Repeat offenders
     results["repeat_offenders"] = db.execute(
-        """SELECT COUNT(*) FROM (
+        f"""SELECT COUNT(*) FROM (
             SELECT name_normalized FROM enforcement_defendants
+            WHERE {defendants_only(db)}
             GROUP BY name_normalized HAVING COUNT(DISTINCT action_id) >= 2
         )"""
     ).fetchone()[0]
@@ -579,6 +664,8 @@ def cmd_stats(args):
     print(f"  Defendants:       {results['total_defendants']:,}")
     for dtype, cnt in sorted(results["by_defendant_type"].items(), key=lambda x: -x[1]):
         print(f"    {dtype or 'null':12s} {cnt:,}")
+    if results["total_presiding_alj"]:
+        print(f"  Presiding ALJs:   {results['total_presiding_alj']:,} (not defendants)")
     print(f"  Repeat offenders: {results['repeat_offenders']:,}")
     print(f"  Date range:       {results['date_range'][0]} to {results['date_range'][1]}")
 
@@ -602,10 +689,12 @@ def cmd_cross_ref(args):
     names_to_check = _gather_investigation_names()
     print(f"Gathered {len(names_to_check)} names from investigation.db and registry.db")
 
-    # Load all enforcement defendants
+    # Load all enforcement defendants. Presiding ALJs are excluded: matching one
+    # against an investigation name would create a lead alleging enforcement
+    # against the judge who heard the case.
     all_defendants = db.execute(
-        """SELECT id, action_id, name_raw, name_normalized, defendant_type
-           FROM enforcement_defendants"""
+        f"""SELECT id, action_id, name_raw, name_normalized, defendant_type
+           FROM enforcement_defendants WHERE {defendants_only(db)}"""
     ).fetchall()
 
     # Build normalized name index
@@ -820,12 +909,19 @@ def main():
     sub = parser.add_subparsers(dest="command")
 
     # search
-    p = sub.add_parser("search", help="FTS5 search across enforcement actions")
+    p = sub.add_parser(
+        "search", help="FTS5 search across respondents, release numbers, and bodies"
+    )
     p.add_argument("query", help="Search query")
     p.add_argument("--source", choices=["litigation", "admin", "aaer"])
     p.add_argument("--start", help="Start date (YYYY-MM-DD)")
     p.add_argument("--end", help="End date (YYYY-MM-DD)")
     p.add_argument("--limit", type=int, default=20)
+    p.add_argument(
+        "--with-body",
+        action="store_true",
+        help="Only rows whose release text has been fetched (conduct-searchable)",
+    )
     add_output_args(p)
 
     # defendant

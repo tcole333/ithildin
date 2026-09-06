@@ -1,0 +1,65 @@
+{
+  "verified_at": "2026-07-29",
+  "p4": {
+    "filename": "p4f606.ebc.gz",
+    "compressed_bytes": 207592761,
+    "uncompressed_bytes": 2787886120,
+    "record_count": 30303110,
+    "sha256": "530629ea3cb16f9574fd0a9cb711318c57296001ad2467c45496d9995fbe5708",
+    "complete_record_sentinel": {
+      "record_number": 3,
+      "record_id": "11",
+      "record_type": "gas_schedule",
+      "raw_hex": "f1f1f0f0f0f0f0f0f0f040f0f0f0f0f0f0f0f0f0f0f0f0f0f040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040"
+    }
+  },
+  "p5": {
+    "filename": "orf850.txt.gz",
+    "compressed_bytes": 19489800,
+    "uncompressed_bytes": 120902504,
+    "sha256": "dd45052b32545854b06e9f97dbf9f1db34bd0c856b3e4dca8cdb77a220507989",
+    "observed_organization_content_characters": 334,
+    "observed_organization_physical_line_bytes": 336,
+    "observed_line_ending": "CRLF",
+    "extended_byte_observation": {
+      "physical_line": 1980,
+      "zero_byte_offsets": [303, 304],
+      "extended_byte_offset": 305,
+      "extended_byte_hex": "f4"
+    }
+  },
+  "wellbore": {
+    "filename": "OG_WELLBORE_EWA_Report_2026-07-02.csv",
+    "bytes": 496557360,
+    "record_count": 1368247,
+    "physical_line_count_including_report_footer": 1368263,
+    "report_footer_row_count": 1368247,
+    "sha256": "1a39f0a87cb48662e2ac7e5a1a203785e15f772d02f23cbc6bf04cd34c14d7f3",
+    "column_count": 59,
+    "has_header": false,
+    "terminal_quote_observation": {
+      "physical_line": 466104,
+      "field": "WELL_NO_DISPLAY",
+      "raw_value": "2023H\""
+    },
+    "range_request_status": 200,
+    "range_request_returned_complete_artifact": true
+  },
+  "identity_sentinels": [
+    {
+      "recorder_party": "APR OPERATING LLC",
+      "p5_number": "028612",
+      "p5_name": "APR OPERATING LLC",
+      "wellbore_operator_number": "028612",
+      "wellbore_operator_name": "APR OPERATING LLC",
+      "match_basis": "exact_p5_number_and_normalized_name"
+    },
+    {
+      "recorder_party": "THREE RIVERS OPERATING CO III LLC",
+      "p5_number": "857765",
+      "p5_name": "THREE RIVERS OPER CO III LLC",
+      "match_basis": "text_heuristic_candidate_only",
+      "automatic_join_performed": false
+    }
+  ]
+}

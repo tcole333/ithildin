@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities
+    xmlns:wfs="http://www.opengis.net/wfs/2.0"
+    xmlns:ows="http://www.opengis.net/ows/1.1"
+    xmlns:fes="http://www.opengis.net/fes/2.0"
+    version="2.0.0">
+  <ows:ServiceIdentification>
+    <ows:Title>Parcel Maps</ows:Title>
+  </ows:ServiceIdentification>
+  <ows:OperationsMetadata>
+    <ows:Constraint name="ImplementsResultPaging">
+      <ows:DefaultValue>TRUE</ows:DefaultValue>
+    </ows:Constraint>
+  </ows:OperationsMetadata>
+  <wfs:FeatureTypeList>
+    <wfs:FeatureType>
+      <wfs:Name>ms:Taxlots_selection</wfs:Name>
+      <wfs:Title>Parcel Polygons</wfs:Title>
+      <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::26915</wfs:DefaultCRS>
+      <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4326</wfs:OtherCRS>
+      <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+      <wfs:OtherCRS>urn:ogc:def:crs:EPSG::900913</wfs:OtherCRS>
+      <wfs:OutputFormats>
+        <wfs:Format>application/gml+xml; version=3.2</wfs:Format>
+        <wfs:Format>application/json</wfs:Format>
+      </wfs:OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>-124.115659 44.275093</ows:LowerCorner>
+        <ows:UpperCorner>-123.595894 45.045777</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </wfs:FeatureType>
+  </wfs:FeatureTypeList>
+  <fes:Filter_Capabilities>
+    <fes:Conformance>
+      <fes:Constraint name="ImplementsSorting">
+        <ows:DefaultValue>TRUE</ows:DefaultValue>
+      </fes:Constraint>
+    </fes:Conformance>
+  </fes:Filter_Capabilities>
+</wfs:WFS_Capabilities>

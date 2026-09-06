@@ -1,0 +1,37 @@
+import json
+import sqlite3
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+from queue_system.queue import JobQueue
+from queue_system.worker import LeadTriageWorker, DeepPersonWorker
+from tools import lead_tracker
+
+root=Path(tempfile.mkdtemp(prefix='worker-semantics-',dir='/tmp/osint-SXYkyRSJ'))
+db_path=root/'worker.db'
+def db_connection():
+    db=sqlite3.connect(db_path)
+    db.row_factory=sqlite3.Row
+    return db
+
+db=db_connection()
+lead_tracker._ensure_schema(db)
+db.execute("INSERT INTO leads (title,target_name,category,status,profile_id) VALUES ('Trace corporation ownership','Example Person','entity','completed','profile-a')")
+new_id=db.execute("INSERT INTO leads (title,target_name,category,status,profile_id) VALUES ('Inspect independent court testimony','Example Person','legal','pending_triage','profile-b')").lastrowid
+db.commit()
+db.close()
+queue=JobQueue(db_path)
+triage=LeadTriageWorker(queue,'fixture','lead_triage',['lead_triage'])
+with patch.object(lead_tracker,'get_db',side_effect=db_connection):
+    triage_result=triage.execute({'id':'triage-fixture','payload':{'dry_run':True,'profile_id':'profile-b'}})
+
+workdir=root/'workdir'
+(workdir/'output').mkdir(parents=True)
+worker=DeepPersonWorker(queue,'fixture','deep_person',['deep_person'])
+with patch('queue_system.worker._ensure_workdir',return_value=workdir), patch('queue_system.worker._run_tool',return_value={'returncode':1,'stderr':'Source unavailable','output_path':'fixture.json'}), patch.object(lead_tracker,'claim_lead'), patch.object(lead_tracker,'add_note'), patch.object(lead_tracker,'complete_lead') as complete:
+    result=worker.execute({'id':'failed-source-fixture','payload':{'target_name':'Example Person','lead_id':new_id,'sources':['doj','lmsband']}})
+    completion_calls=[list(call.args) for call in complete.call_args_list]
+out={'triage':triage_result,'all_tools_failed':all(tool['returncode']==1 for tool in result['tools'].values()),'lead_completion_calls':completion_calls,'returned_job_status':result.get('job_status','completed (base worker default)')}
+(root/'repro-results.json').write_text(json.dumps(out,indent=2)+'\n')
+print(root)
+print(json.dumps(out,indent=2))

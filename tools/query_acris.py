@@ -1,31 +1,22 @@
 #!/usr/bin/env python3
-"""
-NYC ACRIS (Automated City Register Information System) property records.
+"""NYC ACRIS property-record adapter with shared source and result contracts.
 
-Queries NYC Open Data (Socrata SODA) for real property transactions:
-deeds, mortgages, liens, satisfactions, assignments, and UCC filings.
-
-Datasets:
-  - Real Property Master (bnx9-e6tj): Document metadata (type, amount, date)
-  - Real Property Parties (636b-3b5g): Party names per document (grantor/grantee)
-  - Real Property Legals (8h5j-fqxa): Borough/block/lot for each document
-
-Performance notes:
-  - Party search uses exact match first (upper(name) = 'X'), falls back to LIKE
-  - History command batches master record fetches (20 per request) instead of N+1
-  - Master records are cached within a session to avoid redundant fetches
-  - Use --exact to force exact-only matching (fastest)
-  - Use --timeout to control per-request timeout
+The adapter queries the official NYC Open Data Socrata resources for ACRIS
+    master, party, and legal records. Party and BBL searches return document-level
+    records enriched from all three datasets. Source capabilities and endpoint
+    paging metadata come from the central catalog, and each outcome has an explicit
+    status.
 
 Usage:
-    python tools/query_acris.py party "Jeffrey Epstein"
-    python tools/query_acris.py party "LSJE LLC" --exact
-    python tools/query_acris.py party "EPSTEIN" --timeout 90
-    python tools/query_acris.py address --borough 1 --block 1390 --lot 29
-    python tools/query_acris.py document "2019012345678"
-    python tools/query_acris.py batch-entities
-    python tools/query_acris.py history --borough 1 --block 1390 --lot 29
+    uv run python tools/query_acris.py party "Jeffrey Epstein"
+    uv run python tools/query_acris.py party "LSJE LLC" --exact
+    uv run python tools/query_acris.py address --borough 1 --block 1390 --lot 29
+    uv run python tools/query_acris.py document "2019012345678"
+    uv run python tools/query_acris.py history --borough 1 --block 1390 --lot 29
+    uv run python tools/query_acris.py batch-entities
 """
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -33,36 +24,105 @@ import os
 import sqlite3
 import sys
 import time
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
+from typing import Any
 
 try:
+    from tools.lead_tracker import log_search
     from tools.output_util import add_output_args, write_output
+    from tools.public_records_catalog import (
+        DEFAULT_DB_PATH,
+        AcquisitionUnavailableError,
+        CatalogError,
+        acquisition_result_status,
+    )
+    from tools.public_records_contract import (
+        JurisdictionMetadata,
+        PublicRecordsError,
+        PublicRecordsQuery,
+        PublicRecordsResult,
+        QueryMetadata,
+        ResultStatus,
+        SourceMetadata,
+        canonical_json,
+    )
+    from tools.public_records_http import (
+        PaginatedFetch,
+        PublicRecordsHTTPError,
+        SocrataSODAClient,
+    )
+    from tools.seed_public_records_catalog import (
+        DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
+        ensure_catalog_source,
+    )
 except ImportError:
+    from lead_tracker import log_search
     from output_util import add_output_args, write_output
+    from public_records_catalog import (
+        DEFAULT_DB_PATH,
+        AcquisitionUnavailableError,
+        CatalogError,
+        acquisition_result_status,
+    )
+    from public_records_contract import (
+        JurisdictionMetadata,
+        PublicRecordsError,
+        PublicRecordsQuery,
+        PublicRecordsResult,
+        QueryMetadata,
+        ResultStatus,
+        SourceMetadata,
+        canonical_json,
+    )
+    from public_records_http import (
+        PaginatedFetch,
+        PublicRecordsHTTPError,
+        SocrataSODAClient,
+    )
+    from seed_public_records_catalog import (
+        DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
+        ensure_catalog_source,
+    )
 
-# Load .env for optional app token
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
 
-# ACRIS dataset IDs on NYC Open Data
+SOURCE_ID = "us-nyc-acris"
+BASE_URL = "https://data.cityofnewyork.us/resource"
 MASTER_ID = "bnx9-e6tj"
 PARTIES_ID = "636b-3b5g"
 LEGALS_ID = "8h5j-fqxa"
-
-BASE_URL = "https://data.cityofnewyork.us/resource"
-
-# Batch size for IN queries on master records
 MASTER_BATCH_SIZE = 20
 
-# Known Epstein-related NYC properties (BBL = Borough/Block/Lot)
+SOURCE_METADATA = SourceMetadata(
+    source_id=SOURCE_ID,
+    name="NYC ACRIS",
+    source_role="recorder_instrument_index",
+    base_url=BASE_URL,
+    dataset_id=",".join((MASTER_ID, PARTIES_ID, LEGALS_ID)),
+    metadata={
+        "authority": "New York City Department of Finance",
+        "coverage_note": (
+            "ACRIS covers Manhattan, Bronx, Brooklyn, and Queens; Richmond "
+            "County records are maintained separately."
+        ),
+        "access_class": "B",
+        "automation_disposition": "allowed_with_limits",
+    },
+)
+
+SOURCE_WARNINGS = (
+    "ACRIS party roles and indexed legal descriptions are recorder observations, not proof of beneficial ownership.",
+    "ACRIS does not provide Richmond County (Staten Island) land records.",
+)
+
+BOROUGH_METADATA = {
+    "1": ("36061", "New York County (Manhattan)"),
+    "2": ("36005", "Bronx County"),
+    "3": ("36047", "Kings County (Brooklyn)"),
+    "4": ("36081", "Queens County"),
+    "5": ("36085", "Richmond County (outside ACRIS coverage)"),
+}
+
 KNOWN_PROPERTIES = {
     "9 E 71st St": {"borough": "1", "block": "1386", "lot": "10"},
     "11 E 71st St": {"borough": "1", "block": "1386", "lot": "12"},
@@ -70,7 +130,6 @@ KNOWN_PROPERTIES = {
     "301 E 66th St": {"borough": "1", "block": "1419", "lot": "31"},
 }
 
-# ACRIS document type codes
 DOC_TYPE_MAP = {
     "DEED": "Deed",
     "DEEDO": "Deed, Other",
@@ -89,530 +148,920 @@ DOC_TYPE_MAP = {
     "SUBM": "Subordination of Mortgage",
 }
 
-# Party type codes
-PARTY_TYPE = {"1": "grantor/seller", "2": "grantee/buyer", "3": "other"}
 
-# Session-level cache for master records (avoids re-fetching same document)
-_master_cache = {}
-
-
-def _soda_request(dataset_id, params, limit=1000, timeout=60):
-    """Make a SODA API request to NYC Open Data."""
-    url = f"{BASE_URL}/{dataset_id}.json"
-    params["$limit"] = limit
-
-    token = os.environ.get("NYC_SODA_APP_TOKEN") or os.environ.get("NY_SODA_APP_TOKEN")
-    if token:
-        params["$$app_token"] = token
-
-    full_url = url + "?" + urlencode(params)
-    headers = {"Accept": "application/json"}
-    req = Request(full_url, headers=headers)
-
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode())
-    except TimeoutError:
-        print(f"ERROR: Request timed out ({timeout}s). Try a more specific query or --exact.", file=sys.stderr)
-        return []
-    except HTTPError as e:
-        body = e.read().decode()[:500]
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return []
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return []
+def _load_env() -> None:
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"'))
 
 
-def _get_master(document_id, timeout=60):
-    """Get master record for a document, with session cache."""
-    if document_id in _master_cache:
-        return _master_cache[document_id]
-    results = _soda_request(MASTER_ID, {"$where": f"document_id='{document_id}'"}, limit=1, timeout=timeout)
-    record = results[0] if results else {}
-    _master_cache[document_id] = record
-    return record
+_load_env()
 
 
-def _get_masters_batch(document_ids, timeout=60):
-    """Fetch master records in batches using SoQL IN clause.
+def _sql_literal(value: str) -> str:
+    normalized = " ".join(str(value).replace("\x00", "").split()).strip()
+    if not normalized:
+        raise ValueError("query value must not be blank")
+    return normalized.replace("'", "''")
 
-    Instead of N+1 queries (one per doc), batches into groups of MASTER_BATCH_SIZE
-    using: document_id IN ('id1','id2',...). Results are cached.
 
-    Returns dict of {document_id: master_record}.
-    """
-    results = {}
-    uncached_ids = []
+def _jurisdiction(borough: str | None) -> JurisdictionMetadata:
+    geoid, name = BOROUGH_METADATA.get(
+        str(borough or ""),
+        ("nyc-acris", "New York City ACRIS coverage"),
+    )
+    return JurisdictionMetadata(
+        jurisdiction_id=geoid,
+        name=name,
+        state_code="NY",
+        county_fips=geoid if geoid.isdigit() else None,
+        locality="New York City",
+    )
 
-    # Serve from cache first
-    for doc_id in document_ids:
-        if doc_id in _master_cache:
-            results[doc_id] = _master_cache[doc_id]
+
+def build_query(
+    operation: str,
+    parameters: Mapping[str, Any],
+    *,
+    borough: str | None,
+    requested_limit: int | None,
+    cursor: str | None,
+) -> PublicRecordsQuery:
+    """Build the deterministic public-record query used for logging and output."""
+    return PublicRecordsQuery(
+        source=SOURCE_METADATA,
+        jurisdiction=_jurisdiction(borough),
+        query=QueryMetadata(
+            operation=operation,
+            parameters=dict(parameters),
+            requested_limit=requested_limit,
+            cursor=cursor,
+        ),
+    )
+
+
+def _require_access(args: argparse.Namespace) -> dict[str, Any]:
+    """Bootstrap a missing source entry, then read its latest access review."""
+    db_path = Path(getattr(args, "catalog_db", DEFAULT_DB_PATH))
+    config_path = Path(
+        getattr(args, "catalog_config", str(DEFAULT_CATALOG_CONFIG_PATH))
+    )
+    catalog = ensure_catalog_source(
+        SOURCE_ID,
+        db_path=db_path,
+        config_path=config_path,
+    )
+    return catalog.require_machine_acquisition(SOURCE_ID)
+
+
+def _access_failure(
+    query: PublicRecordsQuery,
+    error: AcquisitionUnavailableError | CatalogError | OSError | ValueError,
+) -> PublicRecordsResult:
+    if isinstance(error, AcquisitionUnavailableError):
+        decision = error.decision
+        status = ResultStatus(acquisition_result_status(decision))
+        contract_error = PublicRecordsError(
+            code=str(
+                decision.get("reason_code") or "acquisition_route_unavailable"
+            ),
+            message=str(decision.get("reason") or error),
+            category="access",
+            retryable=False,
+            details=decision,
+        )
+    else:
+        status = ResultStatus.UNAVAILABLE
+        contract_error = PublicRecordsError(
+            code="acquisition_route_unavailable",
+            message=str(error),
+            category="access_control",
+            retryable=False,
+        )
+    return PublicRecordsResult.failure(
+        query,
+        status,
+        [contract_error],
+        warnings=SOURCE_WARNINGS,
+    )
+
+
+class _ACRISSource:
+    """Shared Socrata acquisition context for all ACRIS datasets."""
+
+    def __init__(self, args: argparse.Namespace, decision: Mapping[str, Any]) -> None:
+        limits = decision.get("limits", {})
+        requested_interval = float(getattr(args, "minimum_interval", 0.25))
+        requested_cap = getattr(args, "max_records", None)
+        if requested_cap is not None:
+            requested_cap = int(requested_cap)
+        reviewed_interval = limits.get("minimum_interval_seconds")
+        self.minimum_interval = max(
+            requested_interval,
+            float(reviewed_interval) if reviewed_interval is not None else 0.0,
+        )
+        self.max_records = requested_cap
+        requested_page_size = int(getattr(args, "page_size", 1_000))
+        reviewed_page_size = limits.get("maximum_page_size")
+        page_size_values = [requested_page_size]
+        if self.max_records is not None:
+            page_size_values.append(self.max_records)
+        if reviewed_page_size is not None:
+            page_size_values.append(int(reviewed_page_size))
+        self.page_size = min(page_size_values)
+        self.timeout = float(getattr(args, "timeout", 60.0))
+        self.token = (
+            os.environ.get("NYC_SODA_APP_TOKEN")
+            or os.environ.get("NY_SODA_APP_TOKEN")
+        )
+        self._clients: dict[str, SocrataSODAClient] = {}
+        self._last_query_finished: float | None = None
+
+    def _client(self, dataset_id: str) -> SocrataSODAClient:
+        if dataset_id not in self._clients:
+            self._clients[dataset_id] = SocrataSODAClient(
+                BASE_URL,
+                dataset_id,
+                app_token=self.token,
+                page_size=self.page_size,
+                max_records=self.max_records,
+                timeout=self.timeout,
+                minimum_interval=self.minimum_interval,
+            )
+        return self._clients[dataset_id]
+
+    def query(
+        self,
+        dataset_id: str,
+        parameters: Mapping[str, Any],
+        *,
+        requested_limit: int,
+        cursor: str | None = None,
+    ) -> PaginatedFetch:
+        if self._last_query_finished is not None:
+            elapsed = time.monotonic() - self._last_query_finished
+            if elapsed < self.minimum_interval:
+                time.sleep(self.minimum_interval - elapsed)
+        try:
+            return self._client(dataset_id).query(
+                parameters,
+                requested_limit=requested_limit,
+                max_records=self.max_records,
+                cursor=cursor,
+            )
+        finally:
+            self._last_query_finished = time.monotonic()
+
+
+def _cursor_parts(cursor: str | None, expected_kind: str) -> tuple[str, str | None]:
+    if not cursor:
+        return expected_kind, None
+    prefix = "acris:"
+    if not cursor.startswith(prefix):
+        return expected_kind, cursor
+    remainder = cursor[len(prefix) :]
+    kind, separator, source_cursor = remainder.partition(":")
+    if not separator or kind != expected_kind or not source_cursor:
+        raise ValueError(f"invalid ACRIS {expected_kind} continuation cursor")
+    return kind, source_cursor
+
+
+def _wrap_cursor(kind: str, cursor: str | None) -> str | None:
+    return f"acris:{kind}:{cursor}" if cursor else None
+
+
+def _batch_values(values: Sequence[str], size: int = MASTER_BATCH_SIZE):
+    for index in range(0, len(values), size):
+        yield values[index : index + size]
+
+
+def _fetch_document_rows(
+    source: _ACRISSource,
+    dataset_id: str,
+    document_ids: Sequence[str],
+    *,
+    order: str,
+) -> tuple[list[Mapping[str, Any]], list[str]]:
+    rows: list[Mapping[str, Any]] = []
+    warnings: list[str] = []
+    for batch in _batch_values(list(document_ids)):
+        id_list = ",".join(f"'{_sql_literal(document_id)}'" for document_id in batch)
+        fetched = source.query(
+            dataset_id,
+            {
+                "$where": f"document_id IN ({id_list})",
+                "$order": order,
+            },
+            requested_limit=source.max_records,
+        )
+        rows.extend(fetched.records)
+        warnings.extend(fetched.warnings)
+        if fetched.truncated_by_cap:
+            warnings.append(
+                f"Enrichment from dataset {dataset_id} reached the configured record ceiling."
+            )
+    return rows, warnings
+
+
+def _group_by_document(rows: Sequence[Mapping[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        document_id = str(row.get("document_id") or "").strip()
+        if document_id:
+            grouped.setdefault(document_id, []).append(dict(row))
+    return grouped
+
+
+def _minimal_document_records(
+    matched_rows: Sequence[Mapping[str, Any]],
+    match_key: str,
+) -> list[dict[str, Any]]:
+    grouped = _group_by_document(matched_rows)
+    return [
+        {
+            "source_id": SOURCE_ID,
+            "document_id": document_id,
+            match_key: rows,
+            "master": None,
+            "parties": [],
+            "legals": [],
+            "enrichment_complete": False,
+        }
+        for document_id, rows in grouped.items()
+    ]
+
+
+def _enrich_documents(
+    source: _ACRISSource,
+    matched_rows: Sequence[Mapping[str, Any]],
+    *,
+    match_key: str,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    matched_by_document = _group_by_document(matched_rows)
+    document_ids = list(matched_by_document)
+    if matched_rows and not document_ids:
+        raise ValueError(
+            "ACRIS match rows no longer contain the required document_id field"
+        )
+    if not document_ids:
+        return [], []
+
+    masters, master_warnings = _fetch_document_rows(
+        source,
+        MASTER_ID,
+        document_ids,
+        order="document_id",
+    )
+    parties, party_warnings = _fetch_document_rows(
+        source,
+        PARTIES_ID,
+        document_ids,
+        order="document_id, party_type, name",
+    )
+    legals, legal_warnings = _fetch_document_rows(
+        source,
+        LEGALS_ID,
+        document_ids,
+        order="document_id, borough, block, lot",
+    )
+    master_by_document = {
+        str(row.get("document_id")): dict(row)
+        for row in masters
+        if row.get("document_id")
+    }
+    parties_by_document = _group_by_document(parties)
+    legals_by_document = _group_by_document(legals)
+
+    records = []
+    missing_master = 0
+    for document_id in document_ids:
+        master = master_by_document.get(document_id)
+        if master is None:
+            missing_master += 1
+        records.append(
+            {
+                "source_id": SOURCE_ID,
+                "document_id": document_id,
+                "crfn": master.get("crfn") if master else None,
+                "document_type": master.get("doc_type") if master else None,
+                "document_type_description": (
+                    DOC_TYPE_MAP.get(master.get("doc_type"), master.get("doc_type"))
+                    if master
+                    else None
+                ),
+                match_key: matched_by_document[document_id],
+                "master": master,
+                "parties": parties_by_document.get(document_id, []),
+                "legals": legals_by_document.get(document_id, []),
+                "enrichment_complete": master is not None,
+            }
+        )
+    warnings = [*master_warnings, *party_warnings, *legal_warnings]
+    if missing_master:
+        warnings.append(
+            f"{missing_master} indexed document(s) lacked a matching ACRIS master row."
+        )
+    return records, warnings
+
+
+def _finalize(
+    query: PublicRecordsQuery,
+    records: Sequence[Mapping[str, Any]],
+    *,
+    next_cursor: str | None = None,
+    warnings: Sequence[str] = (),
+    errors: Sequence[PublicRecordsError] = (),
+    primary_truncated: bool = False,
+) -> PublicRecordsResult:
+    all_warnings = tuple(dict.fromkeys((*SOURCE_WARNINGS, *warnings)))
+    if errors:
+        status = ResultStatus.PARTIAL if records else ResultStatus.UNAVAILABLE
+        return PublicRecordsResult.failure(
+            query,
+            status,
+            errors,
+            records=records,
+            next_cursor=next_cursor,
+            warnings=all_warnings,
+        )
+    if primary_truncated:
+        return PublicRecordsResult(
+            query=query,
+            status=ResultStatus.PARTIAL,
+            records=records,
+            next_cursor=next_cursor,
+            warnings=all_warnings,
+        )
+    return PublicRecordsResult.success(
+        query,
+        records,
+        next_cursor=next_cursor,
+        warnings=all_warnings,
+    )
+
+
+def _execute_party(
+    args: argparse.Namespace,
+    query: PublicRecordsQuery,
+    source: _ACRISSource,
+) -> PublicRecordsResult:
+    name = _sql_literal(args.query).upper()
+    cursor_kind = "exact"
+    source_cursor = None
+    if args.cursor:
+        if args.cursor.startswith("acris:like:"):
+            cursor_kind, source_cursor = _cursor_parts(args.cursor, "like")
         else:
-            uncached_ids.append(doc_id)
+            cursor_kind, source_cursor = _cursor_parts(args.cursor, "exact")
 
-    # Batch-fetch uncached IDs
-    for i in range(0, len(uncached_ids), MASTER_BATCH_SIZE):
-        batch = uncached_ids[i:i + MASTER_BATCH_SIZE]
-        id_list = ",".join(f"'{did}'" for did in batch)
-        where = f"document_id IN ({id_list})"
-        rows = _soda_request(MASTER_ID, {"$where": where}, limit=MASTER_BATCH_SIZE, timeout=timeout)
-        time.sleep(0.3)  # Rate limiting between batches
+    where = (
+        f"upper(name) = '{name}'"
+        if cursor_kind == "exact"
+        else f"upper(name) LIKE '%{name}%'"
+    )
+    fetched = source.query(
+        PARTIES_ID,
+        {"$where": where, "$order": "document_id, party_type, name"},
+        requested_limit=args.limit,
+        cursor=source_cursor,
+    )
+    if (
+        not fetched.records
+        and not args.cursor
+        and not args.exact
+        and cursor_kind == "exact"
+    ):
+        cursor_kind = "like"
+        fetched = source.query(
+            PARTIES_ID,
+            {
+                "$where": f"upper(name) LIKE '%{name}%'",
+                "$order": "document_id, party_type, name",
+            },
+            requested_limit=args.limit,
+        )
 
-        # Index results by document_id and populate cache
-        fetched = {}
-        for row in rows:
-            did = row.get("document_id")
-            if did:
-                fetched[did] = row
-                _master_cache[did] = row
-
-        # IDs not returned get cached as empty (doc doesn't exist)
-        for did in batch:
-            if did not in fetched:
-                _master_cache[did] = {}
-                results[did] = {}
-            else:
-                results[did] = fetched[did]
-
-    return results
-
-
-def _get_parties(document_id, timeout=60):
-    """Get all parties for a document."""
-    return _soda_request(PARTIES_ID, {"$where": f"document_id='{document_id}'"}, limit=100, timeout=timeout)
-
-
-def _get_legals(document_id, timeout=60):
-    """Get BBL info for a document."""
-    return _soda_request(LEGALS_ID, {"$where": f"document_id='{document_id}'"}, limit=100, timeout=timeout)
-
-
-def _format_amount(amt_str):
-    """Format dollar amount."""
+    next_cursor = _wrap_cursor(cursor_kind, fetched.next_cursor)
+    minimal_records = _minimal_document_records(fetched.records, "matched_parties")
     try:
-        amt = float(amt_str)
-        if amt == 0:
-            return ""
-        return f"${amt:,.0f}"
-    except (ValueError, TypeError):
+        records, enrichment_warnings = _enrich_documents(
+            source,
+            fetched.records,
+            match_key="matched_parties",
+        )
+    except PublicRecordsHTTPError as error:
+        return PublicRecordsResult.failure(
+            query,
+            ResultStatus.PARTIAL if minimal_records else error.result_status,
+            [error.to_contract_error()],
+            records=minimal_records,
+            next_cursor=next_cursor,
+            warnings=(*SOURCE_WARNINGS, *fetched.warnings),
+        )
+    return _finalize(
+        query,
+        records,
+        next_cursor=next_cursor,
+        warnings=(*fetched.warnings, *enrichment_warnings),
+        primary_truncated=fetched.truncated_by_cap,
+    )
+
+
+def _bbl_from_args(args: argparse.Namespace) -> tuple[str, str, str]:
+    borough = getattr(args, "borough", None)
+    block = getattr(args, "block", None)
+    lot = getattr(args, "lot", None)
+    property_name = getattr(args, "property_name", None)
+    if property_name:
+        for name, bbl in KNOWN_PROPERTIES.items():
+            if property_name.lower() in name.lower():
+                return bbl["borough"], bbl["block"], bbl["lot"]
+        raise ValueError(
+            f"unknown property name; known values: {', '.join(KNOWN_PROPERTIES)}"
+        )
+    if not (borough and block and lot):
+        raise ValueError(
+            "must specify --borough, --block, --lot or --property-name"
+        )
+    return str(borough), str(block), str(lot)
+
+
+def _execute_bbl(
+    args: argparse.Namespace,
+    query: PublicRecordsQuery,
+    source: _ACRISSource,
+) -> PublicRecordsResult:
+    borough, block, lot = _bbl_from_args(args)
+    _, source_cursor = _cursor_parts(args.cursor, "legal")
+    fetched = source.query(
+        LEGALS_ID,
+        {
+            "$where": (
+                f"borough='{_sql_literal(borough)}' AND "
+                f"block='{_sql_literal(block)}' AND lot='{_sql_literal(lot)}'"
+            ),
+            "$order": "document_id, borough, block, lot",
+        },
+        requested_limit=args.limit,
+        cursor=source_cursor,
+    )
+    next_cursor = _wrap_cursor("legal", fetched.next_cursor)
+    minimal_records = _minimal_document_records(fetched.records, "matched_legals")
+    try:
+        records, enrichment_warnings = _enrich_documents(
+            source,
+            fetched.records,
+            match_key="matched_legals",
+        )
+    except PublicRecordsHTTPError as error:
+        return PublicRecordsResult.failure(
+            query,
+            ResultStatus.PARTIAL if minimal_records else error.result_status,
+            [error.to_contract_error()],
+            records=minimal_records,
+            next_cursor=next_cursor,
+            warnings=(*SOURCE_WARNINGS, *fetched.warnings),
+        )
+    if args.command == "history":
+        records.sort(
+            key=lambda record: (
+                (record.get("master") or {}).get("document_date") or "",
+                record["document_id"],
+            )
+        )
+    return _finalize(
+        query,
+        records,
+        next_cursor=next_cursor,
+        warnings=(*fetched.warnings, *enrichment_warnings),
+        primary_truncated=fetched.truncated_by_cap,
+    )
+
+
+def _execute_document(
+    args: argparse.Namespace,
+    query: PublicRecordsQuery,
+    source: _ACRISSource,
+) -> PublicRecordsResult:
+    document_id = _sql_literal(args.document_id)
+    matched = [{"document_id": document_id}]
+    records, warnings = _enrich_documents(
+        source,
+        matched,
+        match_key="matched_documents",
+    )
+    if records and not (
+        records[0]["master"] or records[0]["parties"] or records[0]["legals"]
+    ):
+        records = []
+    return _finalize(query, records, warnings=warnings)
+
+
+def _execute_batch_entities(
+    args: argparse.Namespace,
+    query: PublicRecordsQuery,
+    source: _ACRISSource,
+) -> PublicRecordsResult:
+    db_path = Path(getattr(args, "investigation_db", Path(__file__).parent.parent / "investigation.db"))
+    if not db_path.exists():
+        raise ValueError(f"investigation database not found: {db_path}")
+    with sqlite3.connect(db_path) as db:
+        db.row_factory = sqlite3.Row
+        entities = db.execute(
+            "SELECT id, name FROM entities WHERE length(name) >= 4 ORDER BY name"
+        ).fetchall()
+
+    records: list[dict[str, Any]] = []
+    errors: list[PublicRecordsError] = []
+    warnings: list[str] = []
+    for entity in entities:
+        safe_name = _sql_literal(entity["name"]).upper()
+        try:
+            fetched = source.query(
+                PARTIES_ID,
+                {
+                    "$where": f"upper(name) = '{safe_name}'",
+                    "$order": "document_id, party_type, name",
+                },
+                requested_limit=args.per_entity_limit,
+            )
+            matched = list(fetched.records)
+            if not matched and not args.exact:
+                fetched = source.query(
+                    PARTIES_ID,
+                    {
+                        "$where": f"upper(name) LIKE '%{safe_name}%'",
+                        "$order": "document_id, party_type, name",
+                    },
+                    requested_limit=args.per_entity_limit,
+                )
+                matched = list(fetched.records)
+            if not matched:
+                continue
+            enriched, enrichment_warnings = _enrich_documents(
+                source,
+                matched,
+                match_key="matched_parties",
+            )
+            records.append(
+                {
+                    "entity_id": entity["id"],
+                    "entity_name": entity["name"],
+                    "documents": enriched,
+                }
+            )
+            warnings.extend((*fetched.warnings, *enrichment_warnings))
+        except PublicRecordsHTTPError as error:
+            errors.append(error.to_contract_error())
+
+    return _finalize(
+        query,
+        records,
+        warnings=warnings,
+        errors=errors,
+    )
+
+
+def execute(
+    args: argparse.Namespace,
+    *,
+    source: _ACRISSource | Any | None = None,
+    access_decision: Mapping[str, Any] | None = None,
+) -> PublicRecordsResult:
+    """Execute one remote ACRIS command and return a canonical result envelope."""
+    operation = args.command
+    try:
+        if operation in {"address", "history"}:
+            borough, block, lot = _bbl_from_args(args)
+            parameters = {
+                "borough": borough,
+                "block": block,
+                "lot": lot,
+                "property_name": getattr(args, "property_name", None),
+            }
+            requested_limit = args.limit
+        elif operation == "party":
+            borough = None
+            parameters = {"name": args.query, "exact_only": args.exact}
+            requested_limit = args.limit
+        elif operation == "document":
+            borough = None
+            parameters = {"document_id": args.document_id}
+            requested_limit = 1
+        elif operation == "batch-entities":
+            borough = None
+            parameters = {
+                "investigation_db": str(args.investigation_db),
+                "per_entity_limit": args.per_entity_limit,
+                "exact_only": args.exact,
+            }
+            requested_limit = args.per_entity_limit
+        else:
+            raise ValueError(f"unsupported remote command: {operation}")
+        query = build_query(
+            operation,
+            parameters,
+            borough=borough,
+            requested_limit=requested_limit,
+            cursor=getattr(args, "cursor", None),
+        )
+    except ValueError as error:
+        query = build_query(
+            operation,
+            {"invalid_request": True},
+            borough=getattr(args, "borough", None),
+            requested_limit=getattr(args, "limit", 1),
+            cursor=getattr(args, "cursor", None),
+        )
+        return PublicRecordsResult.failure(
+            query,
+            ResultStatus.UNAVAILABLE,
+            [
+                PublicRecordsError(
+                    code="invalid_query",
+                    message=str(error),
+                    category="query",
+                    retryable=False,
+                )
+            ],
+            warnings=SOURCE_WARNINGS,
+        )
+
+    try:
+        decision = dict(access_decision or _require_access(args))
+    except (
+        AcquisitionUnavailableError,
+        CatalogError,
+        OSError,
+        ValueError,
+    ) as error:
+        result = _access_failure(query, error)
+    else:
+        if operation in {"address", "history"} and borough == "5":
+            result = PublicRecordsResult.failure(
+                query,
+                ResultStatus.UNAVAILABLE,
+                [
+                    PublicRecordsError(
+                        code="outside_source_coverage",
+                        message=(
+                            "Richmond County land records are outside ACRIS "
+                            "coverage."
+                        ),
+                        category="coverage",
+                        retryable=False,
+                    )
+                ],
+                warnings=SOURCE_WARNINGS,
+            )
+            count = None
+            log_search(canonical_json(query.to_dict()), SOURCE_ID, count)
+            return result
+        acquisition = source or _ACRISSource(args, decision)
+        try:
+            if operation == "party":
+                result = _execute_party(args, query, acquisition)
+            elif operation in {"address", "history"}:
+                result = _execute_bbl(args, query, acquisition)
+            elif operation == "document":
+                result = _execute_document(args, query, acquisition)
+            else:
+                result = _execute_batch_entities(args, query, acquisition)
+        except PublicRecordsHTTPError as error:
+            result = PublicRecordsResult.failure(
+                query,
+                error.result_status,
+                [error.to_contract_error()],
+                warnings=SOURCE_WARNINGS,
+            )
+        except (TypeError, ValueError) as error:
+            result = PublicRecordsResult.failure(
+                query,
+                ResultStatus.SOURCE_CHANGED,
+                [
+                    PublicRecordsError(
+                        code="normalization_failed",
+                        message=str(error),
+                        category="source_schema",
+                        retryable=False,
+                    )
+                ],
+                warnings=SOURCE_WARNINGS,
+            )
+
+    count = (
+        len(result.records)
+        if result.status
+        in {ResultStatus.OK, ResultStatus.NO_RESULTS, ResultStatus.PARTIAL}
+        else None
+    )
+    log_search(canonical_json(query.to_dict()), SOURCE_ID, count)
+    return result
+
+
+def _format_amount(value: Any) -> str:
+    try:
+        amount = float(value)
+    except (TypeError, ValueError):
         return ""
+    return "" if amount == 0 else f"${amount:,.0f}"
 
 
-def _format_date(date_str):
-    """Extract date from ISO timestamp."""
-    if not date_str:
-        return ""
-    return date_str[:10]
+def _format_date(value: Any) -> str:
+    return str(value or "")[:10]
 
 
-def _print_transaction(master, parties, legals=None):
-    """Print a formatted transaction summary."""
-    doc_id = master.get("document_id", "?")
-    doc_type = master.get("doc_type", "?")
-    doc_type_desc = DOC_TYPE_MAP.get(doc_type, doc_type)
+def _print_transaction(record: Mapping[str, Any]) -> None:
+    master = record.get("master") or {}
+    document_id = record.get("document_id", "?")
+    doc_type = master.get("doc_type") or record.get("document_type") or "?"
     amount = _format_amount(master.get("document_amt"))
-    doc_date = _format_date(master.get("document_date"))
-    recorded = _format_date(master.get("recorded_datetime"))
-    borough = master.get("recorded_borough", "")
-
-    print(f"  [{doc_type}] {doc_type_desc}")
-    print(f"    Document: {doc_id} | CRFN: {master.get('crfn', 'N/A')}")
+    print(f"  [{doc_type}] {DOC_TYPE_MAP.get(doc_type, doc_type)}")
+    print(f"    Document: {document_id} | CRFN: {master.get('crfn', 'N/A')}")
     if amount:
         print(f"    Amount: {amount}")
-    if doc_date:
-        print(f"    Date: {doc_date} (recorded: {recorded})")
-    if borough:
-        borough_names = {"1": "Manhattan", "2": "Bronx", "3": "Brooklyn", "4": "Queens", "5": "Staten Island"}
-        print(f"    Borough: {borough_names.get(borough, borough)}")
-
-    # Group parties by type
-    grantors = [p for p in parties if p.get("party_type") == "1"]
-    grantees = [p for p in parties if p.get("party_type") == "2"]
-    others = [p for p in parties if p.get("party_type") not in ("1", "2")]
-
+    if master.get("document_date"):
+        print(
+            f"    Date: {_format_date(master.get('document_date'))} "
+            f"(recorded: {_format_date(master.get('recorded_datetime'))})"
+        )
+    grantors = [
+        party.get("name", "?")
+        for party in record.get("parties", ())
+        if party.get("party_type") == "1"
+    ]
+    grantees = [
+        party.get("name", "?")
+        for party in record.get("parties", ())
+        if party.get("party_type") == "2"
+    ]
     if grantors:
-        names = [p.get("name", "?") for p in grantors]
-        print(f"    From (grantor): {', '.join(names)}")
-        for p in grantors:
-            addr = p.get("address_1", "")
-            if addr:
-                city = p.get("city", "")
-                state = p.get("state", "")
-                print(f"      Address: {addr}, {city}, {state}")
-
+        print(f"    From (grantor): {', '.join(grantors)}")
     if grantees:
-        names = [p.get("name", "?") for p in grantees]
-        print(f"    To (grantee): {', '.join(names)}")
-        for p in grantees:
-            addr = p.get("address_1", "")
-            if addr:
-                city = p.get("city", "")
-                state = p.get("state", "")
-                print(f"      Address: {addr}, {city}, {state}")
-
-    if others:
-        for p in others:
-            print(f"    Other party: {p.get('name', '?')}")
-
-    if legals:
-        for leg in legals[:3]:
-            b = leg.get("borough", "")
-            bl = leg.get("block", "")
-            lo = leg.get("lot", "")
-            if b and bl and lo:
-                print(f"    Property: Borough {b}, Block {bl}, Lot {lo}")
-
+        print(f"    To (grantee): {', '.join(grantees)}")
+    for legal in record.get("legals", ())[:3]:
+        if legal.get("borough") and legal.get("block") and legal.get("lot"):
+            print(
+                "    Property: Borough "
+                f"{legal['borough']}, Block {legal['block']}, Lot {legal['lot']}"
+            )
     print()
 
 
-def cmd_party(args):
-    """Search ACRIS by party name — the primary investigation use case.
-
-    Optimization: tries exact match first (upper(name) = 'X') which is much
-    faster on SODA than LIKE '%X%'. Falls back to LIKE only if exact returns
-    nothing and --exact was not specified.
-    """
-    timeout = getattr(args, 'timeout', 60)
-    name = args.query.upper().replace("'", "''")  # Escape single quotes for SoQL
-    exact_only = getattr(args, 'exact', False)
-
-    # Phase 1: Exact match (fast — indexed equality on upper(name))
-    where_exact = f"upper(name) = '{name}'"
-    t0 = time.time()
-    parties = _soda_request(PARTIES_ID, {"$where": where_exact}, limit=args.limit, timeout=timeout)
-    elapsed = time.time() - t0
-
-    search_mode = "exact"
-    if parties:
-        print(f"Found {len(parties)} ACRIS party records matching '{args.query}' (exact match, {elapsed:.1f}s)")
-    elif not exact_only:
-        # Phase 2: Fall back to LIKE (slow — full scan)
-        print(f"No exact match for '{args.query}', falling back to LIKE search...", file=sys.stderr)
-        where_like = f"upper(name) LIKE '%{name}%'"
-        t0 = time.time()
-        parties = _soda_request(PARTIES_ID, {"$where": where_like}, limit=args.limit, timeout=timeout)
-        elapsed = time.time() - t0
-        search_mode = "LIKE"
-        print(f"Found {len(parties)} ACRIS party records matching '{args.query}' (LIKE, {elapsed:.1f}s)")
+def _emit(result: PublicRecordsResult, args: argparse.Namespace) -> None:
+    data = result.to_dict()
+    if write_output(
+        data,
+        args,
+        summary=f"ACRIS {args.command} ({result.status.value})",
+    ):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, sort_keys=True))
+        return
+    print(f"ACRIS {args.command}: {result.status.value} ({len(result.records)} records)")
+    if result.next_cursor:
+        print(f"Next cursor: {result.next_cursor}")
+    if args.command == "batch-entities":
+        for match in result.records:
+            print(f"  {match['entity_name']}: {len(match['documents'])} documents")
     else:
-        print(f"Found 0 ACRIS party records matching '{args.query}' (exact only, {elapsed:.1f}s)")
-
-    print()
-
-    if not parties:
-        return
-
-    # Get unique document IDs and fetch master records in batch
-    doc_ids = list(dict.fromkeys(p.get("document_id") for p in parties if p.get("document_id")))
-
-    if write_output(parties, args, summary=f"ACRIS party search '{args.query}' ({len(doc_ids)} docs)"):
-        return
-
-    print(f"Across {len(doc_ids)} unique documents")
-    print()
-
-    # Batch-fetch master records for the docs we'll display
-    display_ids = doc_ids[:args.max_docs]
-    masters = _get_masters_batch(display_ids, timeout=timeout)
-
-    for doc_id in display_ids:
-        master = masters.get(doc_id, {})
-        if not master:
-            continue
-        all_parties = _get_parties(doc_id, timeout=timeout)
-        legals = _get_legals(doc_id, timeout=timeout)
-        _print_transaction(master, all_parties, legals)
-        time.sleep(0.3)  # Rate limiting
-
-    if len(doc_ids) > args.max_docs:
-        print(f"  ... and {len(doc_ids) - args.max_docs} more documents (use --max-docs to see more)")
+        for record in result.records[: getattr(args, "max_docs", len(result.records))]:
+            _print_transaction(record)
+    for warning in result.warnings:
+        print(f"WARNING: {warning}", file=sys.stderr)
+    for error in result.errors:
+        print(f"ERROR [{error.code}]: {error.message}", file=sys.stderr)
 
 
-def cmd_address(args):
-    """Search ACRIS by BBL (Borough/Block/Lot) — property transaction history."""
-    timeout = getattr(args, 'timeout', 60)
-    borough = args.borough
-    block = args.block
-    lot = args.lot
-
-    # Look up known property if name given
-    if args.property_name:
-        for name, bbl in KNOWN_PROPERTIES.items():
-            if args.property_name.lower() in name.lower():
-                borough = bbl["borough"]
-                block = bbl["block"]
-                lot = bbl["lot"]
-                print(f"Resolved '{args.property_name}' to BBL: {borough}/{block}/{lot} ({name})")
-                break
-        else:
-            print(f"Unknown property '{args.property_name}'. Known properties:")
-            for name, bbl in KNOWN_PROPERTIES.items():
-                print(f"  {name}: Borough {bbl['borough']}, Block {bbl['block']}, Lot {bbl['lot']}")
-            return
-
-    if not (borough and block and lot):
-        print("Must specify --borough, --block, --lot or --property-name")
-        return
-
-    where = f"borough='{borough}' AND block='{block}' AND lot='{lot}'"
-    legals = _soda_request(LEGALS_ID, {"$where": where, "$order": "document_id DESC"}, limit=args.limit, timeout=timeout)
-
-    doc_ids = list(dict.fromkeys(l.get("document_id") for l in legals if l.get("document_id")))
-
-    if write_output(legals, args, summary=f"ACRIS address BBL {borough}/{block}/{lot} ({len(doc_ids)} docs)"):
-        return
-
-    print(f"Found {len(legals)} documents for BBL: {borough}/{block}/{lot}")
-    print()
-
-    # Batch-fetch master records
-    display_ids = doc_ids[:args.max_docs]
-    masters = _get_masters_batch(display_ids, timeout=timeout)
-
-    for doc_id in display_ids:
-        master = masters.get(doc_id, {})
-        if not master:
-            continue
-        parties = _get_parties(doc_id, timeout=timeout)
-        _print_transaction(master, parties)
-        time.sleep(0.3)
-
-    if len(doc_ids) > args.max_docs:
-        print(f"  ... and {len(doc_ids) - args.max_docs} more documents")
+def cmd_party(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
 
 
-def cmd_document(args):
-    """Get full details for a specific ACRIS document."""
-    timeout = getattr(args, 'timeout', 60)
-    doc_id = args.document_id
-    master = _get_master(doc_id, timeout=timeout)
-    if not master:
-        print(f"Document {doc_id} not found")
-        return
-
-    parties = _get_parties(doc_id, timeout=timeout)
-    legals = _get_legals(doc_id, timeout=timeout)
-
-    data = {"master": master, "parties": parties, "legals": legals}
-    if write_output(data, args, summary=f"ACRIS document {doc_id}"):
-        pass
-    elif args.json:
-        print(f"=== Document {doc_id} ===")
-        print()
-        _print_transaction(master, parties, legals)
-        print("\n=== Raw JSON ===")
-        print(json.dumps(data, indent=2))
-    else:
-        print(f"=== Document {doc_id} ===")
-        print()
-        _print_transaction(master, parties, legals)
+def cmd_address(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
 
 
-def cmd_history(args):
-    """Full transaction history for a property (BBL), sorted by date.
-
-    Optimization: fetches master records in batches of 20 using SoQL IN clause
-    instead of one-by-one. Caches results to avoid redundant fetches.
-    """
-    timeout = getattr(args, 'timeout', 60)
-    borough = args.borough
-    block = args.block
-    lot = args.lot
-
-    if args.property_name:
-        for name, bbl in KNOWN_PROPERTIES.items():
-            if args.property_name.lower() in name.lower():
-                borough = bbl["borough"]
-                block = bbl["block"]
-                lot = bbl["lot"]
-                print(f"Resolved '{args.property_name}' to BBL: {borough}/{block}/{lot} ({name})")
-                break
-        else:
-            print(f"Unknown property. Known: {list(KNOWN_PROPERTIES.keys())}")
-            return
-
-    if not (borough and block and lot):
-        print("Must specify --borough, --block, --lot or --property-name")
-        return
-
-    where = f"borough='{borough}' AND block='{block}' AND lot='{lot}'"
-    legals = _soda_request(LEGALS_ID, {"$where": where}, limit=5000, timeout=timeout)
-
-    doc_ids = list(dict.fromkeys(l.get("document_id") for l in legals if l.get("document_id")))
-
-    if write_output(legals, args, summary=f"ACRIS history BBL {borough}/{block}/{lot} ({len(doc_ids)} docs)"):
-        return
-
-    print(f"Found {len(doc_ids)} documents for BBL: {borough}/{block}/{lot}")
-    print()
-
-    # Batch-fetch all master records (instead of N+1 individual queries)
-    t0 = time.time()
-    masters = _get_masters_batch(doc_ids, timeout=timeout)
-    elapsed = time.time() - t0
-    print(f"Fetched {len([m for m in masters.values() if m])} master records in {elapsed:.1f}s "
-          f"({len(doc_ids)} docs, batches of {MASTER_BATCH_SIZE})")
-    print()
-
-    # Build sorted transaction list
-    transactions = []
-    for doc_id in doc_ids:
-        master = masters.get(doc_id, {})
-        if master:
-            transactions.append((doc_id, master))
-
-    # Sort by document date
-    transactions.sort(key=lambda x: x[1].get("document_date", "") or "")
-
-    for doc_id, master in transactions[:args.limit]:
-        parties = _get_parties(doc_id, timeout=timeout)
-        _print_transaction(master, parties)
-        time.sleep(0.2)
+def cmd_document(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
 
 
-def cmd_batch_entities(args):
-    """Cross-reference all investigation entities against ACRIS.
-
-    Uses exact match for speed (entity names from the registry are typically
-    exact legal names that match ACRIS records).
-    """
-    timeout = getattr(args, 'timeout', 15)
-    db_path = Path(__file__).parent.parent / "investigation.db"
-    if not db_path.exists():
-        print("investigation.db not found")
-        return
-
-    db = sqlite3.connect(str(db_path))
-    db.row_factory = sqlite3.Row
-    entities = db.execute("SELECT id, name FROM entities ORDER BY name").fetchall()
-    db.close()
-
-    if not entities:
-        print("No entities in investigation.db")
-        return
-
-    # Filter to entities worth querying (skip very short names)
-    searchable = [e for e in entities if len(e["name"]) >= 4]
-    print(f"Cross-referencing {len(searchable)} entities against ACRIS ({timeout}s timeout per query)")
-    print("=" * 70)
-
-    hits = 0
-    skipped = 0
-    all_matches = []
-    for i, ent in enumerate(searchable):
-        name = ent["name"]
-        print(f"  [{i+1}/{len(searchable)}] {name}...", end=" ", flush=True)
-
-        safe_name = name.upper().replace("'", "''")
-
-        # Try exact match first (fast)
-        where = f"upper(name) = '{safe_name}'"
-        results = _soda_request(PARTIES_ID, {"$where": where}, limit=5, timeout=timeout)
-        time.sleep(0.3)
-
-        # Fall back to LIKE only if exact returned nothing
-        if not results:
-            where = f"upper(name) LIKE '%{safe_name}%'"
-            results = _soda_request(PARTIES_ID, {"$where": where}, limit=5, timeout=timeout)
-            time.sleep(0.3)
-
-        if results is None or (isinstance(results, list) and len(results) == 0):
-            print("0 hits")
-            continue
-
-        if results:
-            hits += 1
-            doc_ids = list(dict.fromkeys(r.get("document_id") for r in results))
-            print(f"MATCH -- {len(results)} records in {len(doc_ids)} docs")
-            all_matches.append({"entity_id": ent["id"], "entity_name": name, "records": results, "doc_count": len(doc_ids)})
-
-            # Batch-fetch master records for display
-            masters = _get_masters_batch(doc_ids[:2], timeout=timeout)
-            for doc_id in doc_ids[:2]:
-                master = masters.get(doc_id, {})
-                if master:
-                    doc_type = DOC_TYPE_MAP.get(master.get("doc_type", ""), master.get("doc_type", "?"))
-                    amount = _format_amount(master.get("document_amt"))
-                    date = _format_date(master.get("document_date"))
-                    print(f"      {date} | {doc_type} | {amount}")
-        else:
-            print("0 hits")
-
-    print(f"\n{'='*70}")
-    print(f"Entities with ACRIS matches: {hits}/{len(searchable)}")
-
-    write_output(all_matches, args, summary=f"ACRIS batch-entities ({hits}/{len(searchable)} matches)")
+def cmd_history(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
 
 
-def cmd_known(args):
-    """List known Epstein-related NYC properties and their BBLs."""
+def cmd_batch_entities(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
+
+
+def cmd_known(args: argparse.Namespace) -> None:
     data = [{"name": name, **bbl} for name, bbl in KNOWN_PROPERTIES.items()]
     if write_output(data, args, summary="ACRIS known properties"):
         return
-    print("Known Epstein-related NYC properties:")
-    print()
-    for name, bbl in KNOWN_PROPERTIES.items():
-        print(f"  {name}")
-        print(f"    Borough: {bbl['borough']}, Block: {bbl['block']}, Lot: {bbl['lot']}")
-        print()
-    print("Use with: python tools/query_acris.py address --property-name '71st'")
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, sort_keys=True))
+        return
+    print("Known ACRIS property shortcuts:")
+    for row in data:
+        print(
+            f"  {row['name']}: Borough {row['borough']}, "
+            f"Block {row['block']}, Lot {row['lot']}"
+        )
 
 
-def main():
-    parser = argparse.ArgumentParser(description="NYC ACRIS property records via SODA API")
+def _add_remote_arguments(
+    parser: argparse.ArgumentParser,
+    *,
+    include_cursor: bool = True,
+) -> None:
+    if include_cursor:
+        parser.add_argument("--cursor", help="Continuation cursor from a prior result")
+    parser.add_argument("--page-size", type=int, default=1_000)
+    parser.add_argument(
+        "--max-records",
+        type=int,
+        help="Optional user-selected record ceiling for one dataset query",
+    )
+    parser.add_argument(
+        "--minimum-interval",
+        type=float,
+        default=0.25,
+        help="Client pacing in seconds (a documented catalog minimum, if any, also applies)",
+    )
+    parser.add_argument("--timeout", type=float, default=60.0)
+    parser.add_argument("--catalog-db", default=str(DEFAULT_DB_PATH))
+    add_output_args(parser)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Query official NYC ACRIS records via Socrata"
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # party -- search by party name
-    p = sub.add_parser("party", help="Search by party name (grantor/grantee)")
-    p.add_argument("query", help="Party name to search")
-    p.add_argument("--limit", type=int, default=100, help="Max party records to fetch")
-    p.add_argument("--max-docs", type=int, default=20, help="Max documents to show details for")
-    p.add_argument("--exact", action="store_true", help="Exact name match only (fastest, no LIKE fallback)")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds (default: 60)")
-    add_output_args(p)
+    party = sub.add_parser("party", help="Search by grantor/grantee party name")
+    party.add_argument("query")
+    party.add_argument("--limit", type=int, default=100)
+    party.add_argument("--max-docs", type=int, default=20)
+    party.add_argument("--exact", action="store_true")
+    _add_remote_arguments(party)
 
-    # address -- search by BBL
-    p = sub.add_parser("address", help="Search by property address (BBL)")
-    p.add_argument("--borough", help="Borough code (1=Manhattan, 2=Bronx, 3=Brooklyn, 4=Queens, 5=SI)")
-    p.add_argument("--block", help="Block number")
-    p.add_argument("--lot", help="Lot number")
-    p.add_argument("--property-name", help="Look up known property by name fragment (e.g., '71st')")
-    p.add_argument("--limit", type=int, default=50, help="Max records")
-    p.add_argument("--max-docs", type=int, default=20, help="Max documents to show")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds (default: 60)")
-    add_output_args(p)
+    address = sub.add_parser("address", help="Search by borough/block/lot")
+    address.add_argument("--borough")
+    address.add_argument("--block")
+    address.add_argument("--lot")
+    address.add_argument("--property-name")
+    address.add_argument("--limit", type=int, default=50)
+    address.add_argument("--max-docs", type=int, default=20)
+    _add_remote_arguments(address)
 
-    # document -- get specific document
-    p = sub.add_parser("document", help="Get full details for a specific document")
-    p.add_argument("document_id", help="ACRIS document ID")
-    p.add_argument("--json", action="store_true", help="Output raw JSON")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds (default: 60)")
-    add_output_args(p)
+    document = sub.add_parser("document", help="Fetch one ACRIS document")
+    document.add_argument("document_id")
+    document.add_argument("--max-docs", type=int, default=1)
+    _add_remote_arguments(document, include_cursor=False)
 
-    # history -- full property transaction history sorted by date
-    p = sub.add_parser("history", help="Full transaction history for a property")
-    p.add_argument("--borough", help="Borough code")
-    p.add_argument("--block", help="Block number")
-    p.add_argument("--lot", help="Lot number")
-    p.add_argument("--property-name", help="Look up known property by name")
-    p.add_argument("--limit", type=int, default=50, help="Max transactions to show")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds (default: 60)")
-    add_output_args(p)
+    history = sub.add_parser("history", help="Get enriched BBL transaction history")
+    history.add_argument("--borough")
+    history.add_argument("--block")
+    history.add_argument("--lot")
+    history.add_argument("--property-name")
+    history.add_argument("--limit", type=int, default=50)
+    history.add_argument("--max-docs", type=int, default=50)
+    _add_remote_arguments(history)
 
-    # batch-entities -- cross-reference investigation entities
-    p = sub.add_parser("batch-entities", help="Cross-ref all investigation entities against ACRIS")
-    p.add_argument("--timeout", type=int, default=15, help="Per-request timeout in seconds (default: 15)")
-    add_output_args(p)
+    batch = sub.add_parser(
+        "batch-entities",
+        help="Cross-reference investigation entities against ACRIS",
+    )
+    batch.add_argument(
+        "--investigation-db",
+        default=str(Path(__file__).resolve().parent.parent / "investigation.db"),
+    )
+    batch.add_argument("--per-entity-limit", type=int, default=5)
+    batch.add_argument("--exact", action="store_true")
+    batch.add_argument("--max-docs", type=int, default=20)
+    _add_remote_arguments(batch, include_cursor=False)
 
-    # known -- list known properties
-    p = sub.add_parser("known", help="List known Epstein NYC properties with BBLs")
-    add_output_args(p)
+    known = sub.add_parser("known", help="List local ACRIS property shortcuts")
+    add_output_args(known)
+    return parser
 
+
+def main() -> None:
+    parser = build_parser()
     args = parser.parse_args()
-
-    handlers = {
+    for name in ("limit", "page_size", "max_records", "per_entity_limit"):
+        value = getattr(args, name, None)
+        if value is not None and value <= 0:
+            parser.error(f"{name.replace('_', '-')} must be positive")
+    if getattr(args, "minimum_interval", 0) < 0:
+        parser.error("minimum-interval must not be negative")
+    commands = {
         "party": cmd_party,
         "address": cmd_address,
         "document": cmd_document,
@@ -620,7 +1069,7 @@ def main():
         "batch-entities": cmd_batch_entities,
         "known": cmd_known,
     }
-    handlers[args.command](args)
+    commands[args.command](args)
 
 
 if __name__ == "__main__":

@@ -12,13 +12,18 @@ import sys
 from collections import deque
 from pathlib import Path
 
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
-OUTPUT_DIR = Path(__file__).parent.parent / "content" / "structures"
+try:
+    from .paths import CONTENT_DIR, DB_PATH
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR, DB_PATH
+
+INVESTIGATION_DB = DB_PATH
+OUTPUT_DIR = CONTENT_DIR / "structures"
 
 # Add tools to path for name_resolver
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tools.name_resolver import resolve_canonical
+from tools.name_resolver import resolve_canonical  # noqa: E402 - CLI repository path bootstrap
 
 # Ownership/control relation types — these define parent→child in the DAG
 STRUCTURAL_RELATIONS = {

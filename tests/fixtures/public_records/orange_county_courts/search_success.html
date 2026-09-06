@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <body>
+    <main>
+      <form action="/Court/Index" method="post">
+        <input
+          name="__RequestVerificationToken"
+          type="hidden"
+          value="fixture-token-success"
+        />
+        <input id="hearDate" name="hearDate" type="date" value="" />
+        <input id="caseNumber" name="caseNumber" value="2020-CT-001540-A-O" />
+        <input id="firstName" name="firstName" value="" />
+        <input id="lastName" name="lastName" value="" />
+        <select id="judge" name="judge"><option value=""></option></select>
+        <span>2 Total Hearings for case 2020-CT-001540-A-O</span>
+        <table id="hearings">
+          <thead>
+            <tr>
+              <th>Case Number</th>
+              <th>Hearing Date</th>
+              <th>Time Slot</th>
+              <th>Location</th>
+              <th>Name</th>
+              <th>Judge</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2020-CT-001540-A-O</td>
+              <td>07/28/2026</td>
+              <td>7:30 AM</td>
+              <td>Room 4-c On The 4th Floor</td>
+              <td>State Of Florida Vs. Douglas, Justin Andrew</td>
+              <td>Beasley, Jeramy C</td>
+              <td>Cancelled</td>
+            </tr>
+            <tr>
+              <td>2020-CT-001540-A-O</td>
+              <td>08/20/2026</td>
+              <td>1:30 PM</td>
+              <td>Video/audio/tele Conference</td>
+              <td>State Of Florida Vs. Douglas, Justin Andrew</td>
+              <td>Bova, Amanda S</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </main>
+  </body>
+</html>

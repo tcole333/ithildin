@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import argparse
 import io
+import json
 from urllib.error import HTTPError
 
 from tools.government_releases import connect
@@ -14,6 +16,7 @@ from tools.government_release_corpus import (
     parse_doj_archive_month,
     extract_doj_archive_body,
     begin_run,
+    cmd_search,
     doj_api_params,
     doj_state_key,
     extract_sec_body,
@@ -158,6 +161,38 @@ def test_official_fetch_retries_transient_503(monkeypatch):
     monkeypatch.setattr("tools.government_release_corpus.time.sleep",lambda _:None)
     assert get_bytes("https://example.gov/release",retries=1)==b"ok"
     assert len(calls)==2
+
+
+def test_search_treats_currency_punctuation_as_literal_terms(tmp_path):
+    db_path = tmp_path / "government.db"
+    db = connect(db_path)
+    upsert_release(
+        db,
+        {
+            "agency": "DOJ",
+            "native_id": "currency-release",
+            "title": "DaVita resolves $270 million Medicare Advantage matter",
+            "canonical_url": "https://www.justice.gov/example",
+            "published_at": "2026-01-01",
+            "content_text": "The resolution totals $270 million.",
+        },
+    )
+    db.commit()
+    db.close()
+    output = tmp_path / "search.json"
+
+    cmd_search(
+        argparse.Namespace(
+            db=db_path,
+            query="DaVita $270 million Medicare Advantage",
+            agency="DOJ",
+            limit=10,
+            output=str(output),
+            json_out=False,
+        )
+    )
+
+    assert json.loads(output.read_text())[0]["source_ref"] == "DOJ-PR:currency-release"
 
 
 def test_parse_doj_legacy_month_and_release():

@@ -8,11 +8,15 @@ from __future__ import annotations
 import json
 import os
 import re
+import signal
 import sqlite3
 import subprocess
 import sys
+import threading
 import time
 import traceback
+from contextvars import ContextVar
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -22,6 +26,59 @@ from queue_system.queue import JobQueue
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+
+@dataclass
+class ExecutionContext:
+    deadline: float
+    cancelled: threading.Event
+    env: dict[str, str]
+
+
+_execution_context: ContextVar[ExecutionContext | None] = ContextVar("queue_execution", default=None)
+
+
+def _run_process(cmd: List[str]) -> subprocess.CompletedProcess:
+    """Supervise the complete subprocess group against a fixed job deadline."""
+    context = _execution_context.get()
+    deadline = context.deadline if context else time.monotonic() + 1800
+    if context and context.cancelled.is_set():
+        raise RuntimeError("Job ownership was cancelled or expired")
+    proc = subprocess.Popen(
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        env=context.env if context else None, start_new_session=True,
+    )
+    try:
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired(cmd, 0)
+            if context and context.cancelled.is_set():
+                raise RuntimeError("Job ownership was cancelled or expired")
+            try:
+                stdout, stderr = proc.communicate(timeout=min(0.25, remaining))
+                return subprocess.CompletedProcess(cmd, proc.returncode, stdout, stderr)
+            except subprocess.TimeoutExpired:
+                continue
+    except BaseException:
+        # start_new_session makes this process the group leader. Descendants must
+        # not continue changing state after their task has been cancelled.
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        proc.communicate()
+        raise
+
+
+def _result_codes(value: Any) -> List[int]:
+    if isinstance(value, dict):
+        if "returncode" in value:
+            return [value["returncode"]]
+        return [code for child in value.values() for code in _result_codes(child)]
+    if isinstance(value, list):
+        return [code for child in value for code in _result_codes(child)]
+    return []
 
 
 class AgentWorker:
@@ -45,37 +102,92 @@ class AgentWorker:
         raise NotImplementedError
 
     def run_forever(self) -> None:
-        self.queue.register_agent(self.agent_id, self.persona, self.capabilities)
-        while True:
-            self.queue.heartbeat_agent(self.agent_id)
-            if self.queue.is_paused():
-                time.sleep(self.poll_interval)
-                continue
+        if self.queue.register_agent(self.agent_id, self.persona, self.capabilities) is False:
+            return
+        try:
+            while self.queue.heartbeat_agent(self.agent_id) is not False:
+                if self.queue.is_paused():
+                    time.sleep(self.poll_interval)
+                    continue
+                job = self.queue.claim_next(self.agent_id, self.capabilities)
+                if not job:
+                    time.sleep(self.poll_interval)
+                    continue
+                self.run_job(job)
+        finally:
+            self.queue.stop_agent(self.agent_id)
 
-            job = self.queue.claim_next(self.agent_id, self.capabilities)
-            if not job:
-                time.sleep(self.poll_interval)
-                continue
-
-            job_id = job["id"]
-            self.queue.update_agent_job(self.agent_id, job_id)
-            self.queue.start_job(job_id, self.agent_id)
-            base = Path(os.environ.get("OSINT_WORKDIR_BASE", "/tmp/osint-jobs"))
-            self.queue.set_workdir(job_id, str(base / job_id))
-
-            try:
-                output = self.execute(job)
-                if output and isinstance(output, dict):
-                    status = output.pop("job_status", "completed")
-                else:
-                    status = "completed"
-                self.queue.complete_job(job_id, output, status=status)
-                self.queue.update_agent_stats(self.agent_id, completed=True)
-            except Exception as exc:
-                self.queue.fail_job(job_id, str(exc), traceback.format_exc())
+    def run_job(self, job: Dict[str, Any]) -> None:
+        """One owned attempt; process success and research resolution stay separate."""
+        job_id = job["id"]
+        attempt = job["attempts"]
+        started = self.queue.start_job(job_id, self.agent_id, attempt=attempt)
+        if not started:
+            return
+        self.queue.update_agent_job(self.agent_id, job_id)
+        self.queue.set_workdir(job_id, str(_ensure_workdir(job_id)))
+        try:
+            # Legacy research jobs without a persisted pin require deliberate
+            # re-enqueueing; execution must never choose today's shared default.
+            payload = self.queue.prepare_job_payload(
+                started["domain"], started.get("payload"), resolve_default=False,
+            )
+        except ValueError as exc:
+            accepted = self.queue.fail_job(
+                job_id, str(exc), traceback.format_exc(), agent_id=self.agent_id, attempt=attempt,
+            )
+            if accepted:
                 self.queue.update_agent_stats(self.agent_id, completed=False)
-            finally:
-                self.queue.update_agent_job(self.agent_id, None)
+            self.queue.update_agent_job(self.agent_id, None)
+            return
+        timeout = float(job.get("timeout_seconds") or 1800)
+        done = threading.Event()
+        cancelled = threading.Event()
+        env = os.environ.copy()
+        env["ITHILDIN_DB_PATH"] = payload["db_path"]
+        profile = payload.get("profile_id")
+        if profile:
+            env["ITHILDIN_PROFILE"] = profile
+        else:
+            env.pop("ITHILDIN_PROFILE", None)
+        context = ExecutionContext(time.monotonic() + timeout, cancelled, env)
+
+        def maintain_ownership():
+            while not done.wait(min(10.0, max(0.05, timeout / 4))):
+                try:
+                    if not self.queue.heartbeat_job(job_id, self.agent_id, attempt):
+                        cancelled.set()
+                        return
+                except Exception:
+                    # Losing the ability to prove ownership must stop further tools.
+                    cancelled.set()
+                    return
+
+        heartbeat = threading.Thread(target=maintain_ownership, daemon=True)
+        heartbeat.start()
+        token = _execution_context.set(context)
+        try:
+            output = self.execute(started)
+            if cancelled.is_set() or time.monotonic() >= context.deadline:
+                raise RuntimeError("Job ownership was cancelled or its deadline expired")
+            status = output.pop("job_status", "completed") if isinstance(output, dict) else "completed"
+            codes = _result_codes(output)
+            if codes and all(code != 0 for code in codes):
+                raise RuntimeError("All task tools failed; see the attempt report")
+            if any(code != 0 for code in codes):
+                status = "awaiting_review"
+            accepted = self.queue.complete_job(job_id, output, status=status, agent_id=self.agent_id, attempt=attempt)
+            if accepted:
+                self.queue.update_agent_stats(self.agent_id, completed=status == "completed")
+        except Exception as exc:
+            accepted = self.queue.fail_job(job_id, str(exc), traceback.format_exc(), agent_id=self.agent_id, attempt=attempt)
+            if accepted:
+                self.queue.update_agent_stats(self.agent_id, completed=False)
+        finally:
+            done.set()
+            heartbeat.join()
+            _execution_context.reset(token)
+            self.queue.update_agent_job(self.agent_id, None)
 
 
 class EchoWorker(AgentWorker):
@@ -178,7 +290,7 @@ def _result_count(data: Any) -> int:
 
 def _run_tool(tool_path: Path, args: List[str], output_path: Path) -> Dict[str, Any]:
     cmd = [sys.executable, str(tool_path)] + args + ["--output", str(output_path)]
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    proc = _run_process(cmd)
     result = {
         "cmd": " ".join(cmd),
         "returncode": proc.returncode,
@@ -192,12 +304,17 @@ def _run_tool(tool_path: Path, args: List[str], output_path: Path) -> Dict[str, 
             result["count"] = _result_count(data)
         except json.JSONDecodeError:
             result["count"] = None
+            result["returncode"] = 1
+            result["stderr"] += "\nTool output is not valid JSON"
+    elif proc.returncode == 0:
+        result["returncode"] = 1
+        result["stderr"] += "\nTool did not create its required output file"
     return result
 
 
 def _run_script(script_path: Path, args: List[str]) -> Dict[str, Any]:
     cmd = [sys.executable, str(script_path)] + args
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    proc = _run_process(cmd)
     return {
         "cmd": " ".join(cmd),
         "returncode": proc.returncode,
@@ -289,124 +406,60 @@ class LeadTriageWorker(AgentWorker):
     JOB_TYPES = ["lead_triage"]
 
     def execute(self, job: Dict[str, Any]) -> Dict[str, Any]:
-        from tools import lead_tracker
-
         payload = job.get("payload", {})
+        profile_id = payload.get("profile_id") or os.environ.get("ITHILDIN_PROFILE")
+        if not profile_id:
+            raise ValueError("lead_triage requires a pinned profile_id")
         batch_size = int(payload.get("batch_size", 20))
         dry_run = bool(payload.get("dry_run", False))
         triaged_by = payload.get("triaged_by", "agent:lead_triage")
-
-        db = lead_tracker.get_db()
-        rows = db.execute(
-            """
-            SELECT * FROM leads
-            WHERE status = 'pending_triage'
-            ORDER BY created_at ASC
-            LIMIT ?
-            """,
-            (batch_size,),
-        ).fetchall()
-        leads = [dict(r) for r in rows]
-        db.close()
-
-        results = {
-            "total": len(leads),
-            "opened": [],
-            "duplicates": [],
-            "dry_run": dry_run,
-        }
-
-        now = _utcnow().isoformat()
-        for lead in leads:
-            lead_id = lead["id"]
-            target_name = lead.get("target_name") or ""
-            title = lead.get("title") or ""
-
-            dup_id = None
-            db = lead_tracker.get_db()
-            try:
-                if target_name:
-                    dup = db.execute(
-                        """
-                        SELECT id FROM leads
-                        WHERE LOWER(target_name) = LOWER(?)
-                          AND id != ?
-                          AND status != 'pending_triage'
-                        ORDER BY created_at ASC
-                        LIMIT 1
-                        """,
-                        (target_name, lead_id),
-                    ).fetchone()
-                    if dup:
-                        dup_id = dup["id"]
-                if not dup_id and title:
-                    dup = db.execute(
-                        """
-                        SELECT id FROM leads
-                        WHERE LOWER(title) = LOWER(?)
-                          AND id != ?
-                          AND status != 'pending_triage'
-                        ORDER BY created_at ASC
-                        LIMIT 1
-                        """,
-                        (title, lead_id),
-                    ).fetchone()
-                    if dup:
-                        dup_id = dup["id"]
-            finally:
-                db.close()
-
-            if dup_id:
-                results["duplicates"].append({"lead_id": lead_id, "duplicate_of": dup_id})
-                if not dry_run:
-                    lead_tracker.dead_end_lead(lead_id, f"Duplicate of lead #{dup_id}")
-                    lead_tracker.add_note(lead_id, f"Triage: duplicate of lead #{dup_id}")
-                    db = lead_tracker.get_db()
-                    try:
-                        db.execute(
-                            """
-                            INSERT OR IGNORE INTO lead_relations
-                            (lead_id, related_lead_id, relation_type)
-                            VALUES (?, ?, 'duplicate')
-                            """,
-                            (lead_id, dup_id),
-                        )
-                        db.execute(
-                            """
-                            UPDATE leads
-                            SET triaged_by = ?, triaged_at = ?, updated_at = ?
-                            WHERE id = ?
-                            """,
-                            (triaged_by, now, now, lead_id),
-                        )
-                        db.commit()
-                    finally:
-                        db.close()
-                continue
-
-            results["opened"].append(lead_id)
-            if not dry_run:
-                db = lead_tracker.get_db()
-                try:
+        results = {"total": 0, "opened": [], "duplicates": [], "dry_run": dry_run}
+        db = self.queue._connect()
+        try:
+            db.execute("BEGIN IMMEDIATE")
+            leads = db.execute(
+                "SELECT * FROM leads WHERE status='pending_triage' AND profile_id=? ORDER BY created_at,id LIMIT ?",
+                (profile_id, batch_size),
+            ).fetchall()
+            results["total"] = len(leads)
+            for lead in leads:
+                # Sharing a subject is useful linkage, never sufficient evidence
+                # that two investigative questions are duplicates.
+                duplicate = db.execute(
+                    """SELECT id FROM leads WHERE profile_id=? AND id!=?
+                       AND status IN ('open','in_progress')
+                       AND LOWER(TRIM(title))=LOWER(TRIM(?))
+                       AND LOWER(TRIM(COALESCE(target_name,'')))=LOWER(TRIM(COALESCE(?,'')))
+                       ORDER BY created_at,id LIMIT 1""",
+                    (profile_id, lead["id"], lead["title"], lead["target_name"]),
+                ).fetchone()
+                if duplicate:
+                    results["duplicates"].append({"lead_id": lead["id"], "duplicate_of": duplicate["id"]})
+                    disposition = "dead_end"
+                    note = f"Triage: same question and subject as active lead #{duplicate['id']}"
+                else:
+                    results["opened"].append(lead["id"])
+                    disposition = "open"
+                    note = "Triage: promoted to open"
+                if dry_run:
+                    continue
+                db.execute(
+                    """UPDATE leads SET status=?,triaged_by=?,triaged_at=CURRENT_TIMESTAMP,
+                       updated_at=CURRENT_TIMESTAMP WHERE id=? AND profile_id=? AND status='pending_triage'""",
+                    (disposition, triaged_by, lead["id"], profile_id),
+                )
+                db.execute("INSERT INTO lead_notes (lead_id,note) VALUES (?,?)", (lead["id"], note))
+                if duplicate:
                     db.execute(
-                        """
-                        UPDATE leads
-                        SET status = 'open',
-                            triaged_by = ?,
-                            triaged_at = ?,
-                            updated_at = ?
-                        WHERE id = ?
-                        """,
-                        (triaged_by, now, now, lead_id),
+                        "INSERT OR IGNORE INTO lead_relations (lead_id,related_lead_id,relation_type) VALUES (?,?,'duplicate')",
+                        (lead["id"], duplicate["id"]),
                     )
-                    db.execute(
-                        "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
-                        (lead_id, "Triage: promoted to open"),
-                    )
-                    db.commit()
-                finally:
-                    db.close()
-
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+        finally:
+            db.close()
         return results
 
 
@@ -414,8 +467,6 @@ class DeepPersonWorker(AgentWorker):
     JOB_TYPES = ["deep_person"]
 
     def execute(self, job: Dict[str, Any]) -> Dict[str, Any]:
-        from tools import lead_tracker
-
         payload = job.get("payload", {})
         target = payload.get("target_name") or payload.get("query")
         if not target:
@@ -435,9 +486,18 @@ class DeepPersonWorker(AgentWorker):
                 "findings",
             ]
 
+        dry_run = bool(payload.get("dry_run", False))
+        profile_id = payload.get("profile_id") or os.environ.get("ITHILDIN_PROFILE")
         if lead_id:
-            lead_tracker.claim_lead(lead_id)
-            lead_tracker.add_note(lead_id, f"Deep investigation started for '{target}'")
+            db = self.queue._connect()
+            try:
+                lead = db.execute("SELECT profile_id FROM leads WHERE id=?", (lead_id,)).fetchone()
+                if not lead or not profile_id or lead["profile_id"] != profile_id:
+                    raise ValueError("lead_id must belong to the job's pinned profile_id")
+            finally:
+                db.close()
+        if dry_run:
+            sources = []
 
         workdir = _ensure_workdir(job["id"])
         report_path = workdir / "report.md"
@@ -522,15 +582,29 @@ class DeepPersonWorker(AgentWorker):
 
         report_path.write_text("\n".join(report_lines))
 
-        summary = f"Deep investigation completed for '{target}'."
-        if lead_id:
-            lead_tracker.complete_lead(lead_id, summary)
-            lead_tracker.add_note(lead_id, f"Report: {report_path}")
-
+        failed = [name for name, result in tool_results.items() if result.get("returncode") != 0]
+        complete_coverage = bool(tool_results) and not failed
+        if lead_id and not dry_run:
+            db = self.queue._connect()
+            try:
+                db.execute(
+                    "UPDATE leads SET status=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND profile_id=? AND status IN ('open','in_progress','blocked')",
+                    ("open" if complete_coverage else "blocked", lead_id, profile_id),
+                )
+                db.execute("INSERT INTO lead_notes (lead_id,note) VALUES (?,?)", (
+                    lead_id, f"Source collection {'ready for review' if complete_coverage else 'incomplete'}; report: {report_path}",
+                ))
+                db.commit()
+            finally:
+                db.close()
+        if not dry_run and (not tool_results or len(failed) == len(tool_results)):
+            raise RuntimeError("Source collection failed: no source completed successfully")
         return {
             "target": target,
             "report_path": str(report_path),
             "tools": tool_results,
+            "job_status": "awaiting_review",
+            "coverage": "partial" if failed else "complete" if complete_coverage else "dry_run",
         }
 
 
@@ -1216,6 +1290,7 @@ class ExplainerWriterWorker(AgentWorker):
                     priority=payload.get("review_priority", 5),
                     created_by=f"agent:{self.persona}",
                     source_trigger="mechanism_explainer",
+                    parent_job_id=job["id"],
                 )
         else:
             report_lines.append("## Dry Run: content not written")
@@ -1265,7 +1340,6 @@ class ContextualAnalystWorker(AgentWorker):
         frontmatter = [line for line in frontmatter if line is not None]
 
         # Detect applicable analytical models from title/targets
-        model_index = _load_model_index()
         detect_text = f"{title} {' '.join(targets) if isinstance(targets, list) else targets}"
         try:
             from tools.model_detector import detect_models
@@ -1344,6 +1418,7 @@ class ContextualAnalystWorker(AgentWorker):
                     priority=payload.get("review_priority", 5),
                     created_by=f"agent:{self.persona}",
                     source_trigger="analytical_article",
+                    parent_job_id=job["id"],
                 )
         else:
             report_lines.append("## Dry Run: content not written")
@@ -1827,7 +1902,7 @@ class DeepInvestigationWorker(AgentWorker):
                 elif job_type == "pattern_trigger":
                     child_payload = {"dry_run": payload.get("dry_run", False)}
 
-            for key in ("limit", "sources", "context", "jurisdictions"):
+            for key in ("limit", "sources", "context", "jurisdictions", "profile_id", "dry_run"):
                 if key in payload and key not in child_payload:
                     child_payload[key] = payload[key]
 
@@ -1963,6 +2038,7 @@ class DossierWriterWorker(AgentWorker):
                     priority=payload.get("review_priority", 4),
                     created_by=f"agent:{self.persona}",
                     source_trigger="wiki_dossier_update",
+                    parent_job_id=job["id"],
                 )
 
         # Detect applicable analytical models for this target
@@ -2031,8 +2107,7 @@ class DossierWriterWorker(AgentWorker):
 class DossierFreshnessWorker(AgentWorker):
     JOB_TYPES = ["dossier_freshness_audit"]
 
-    def _has_pending_update(self, canonical_name: str) -> bool:
-        pattern = f"%\"target_name\": \"{canonical_name}\"%"
+    def _has_pending_update(self, canonical_name: str, profile_id: str) -> bool:
         db = self.queue._connect()
         try:
             row = db.execute(
@@ -2041,9 +2116,10 @@ class DossierFreshnessWorker(AgentWorker):
                 FROM job_queue
                 WHERE job_type='wiki_dossier_update'
                   AND status IN ('pending', 'claimed', 'in_progress', 'blocked')
-                  AND payload LIKE ?
+                  AND json_extract(payload, '$.target_name') = ?
+                  AND json_extract(payload, '$.profile_id') = ?
                 """,
-                (pattern,),
+                (canonical_name, profile_id),
             ).fetchone()
             return row["n"] > 0
         finally:
@@ -2051,6 +2127,9 @@ class DossierFreshnessWorker(AgentWorker):
 
     def execute(self, job: Dict[str, Any]) -> Dict[str, Any]:
         payload = job.get("payload", {})
+        profile_id = payload.get("profile_id")
+        if not profile_id:
+            raise ValueError("dossier_freshness_audit requires a pinned profile_id")
         min_findings = int(payload.get("min_findings", 5))
         max_updates = int(payload.get("max_updates", 25))
         dry_run = bool(payload.get("dry_run", False))
@@ -2075,6 +2154,10 @@ class DossierFreshnessWorker(AgentWorker):
                 name = dossier.get("name")
                 if not name:
                     continue
+                if profile_id not in (dossier.get("profile_ids") or []):
+                    # A dossier for another profile, or a legacy unscoped
+                    # snapshot, cannot prove this profile's output is current.
+                    continue
                 existing[name.lower()] = {
                     "name": name,
                     "slug": dossier.get("slug") or path.stem,
@@ -2097,9 +2180,10 @@ class DossierFreshnessWorker(AgentWorker):
                 """
                 SELECT target_name, COUNT(*) as cnt, MAX(created_at) as max_created
                 FROM findings
-                WHERE verification_status != 'retracted'
+                WHERE verification_status != 'retracted' AND profile_id = ?
                 GROUP BY target_name
-                """
+                """,
+                (profile_id,),
             ).fetchall()
             for row in rows:
                 raw_name = row["target_name"]
@@ -2122,14 +2206,15 @@ class DossierFreshnessWorker(AgentWorker):
                 """
                 SELECT person_a as name, MAX(created_at) as max_created
                 FROM connections
-                WHERE verification_status != 'retracted'
+                WHERE verification_status != 'retracted' AND profile_id = ?
                 GROUP BY person_a
                 UNION ALL
                 SELECT person_b as name, MAX(created_at) as max_created
                 FROM connections
-                WHERE verification_status != 'retracted'
+                WHERE verification_status != 'retracted' AND profile_id = ?
                 GROUP BY person_b
-                """
+                """,
+                (profile_id, profile_id),
             ).fetchall()
             for row in conn_rows:
                 raw_name = row["name"]
@@ -2176,7 +2261,7 @@ class DossierFreshnessWorker(AgentWorker):
             for canonical in updates_needed:
                 if len(jobs_created) >= max_updates:
                     break
-                if self._has_pending_update(canonical):
+                if self._has_pending_update(canonical, profile_id):
                     continue
                 job_id = self.queue.create_job(
                     job_type="wiki_dossier_update",
@@ -2192,6 +2277,7 @@ class DossierFreshnessWorker(AgentWorker):
                     priority=payload.get("priority", 4),
                     created_by=f"agent:{self.persona}",
                     source_trigger="dossier_freshness_audit",
+                    parent_job_id=job["id"],
                 )
                 jobs_created.append(job_id)
 

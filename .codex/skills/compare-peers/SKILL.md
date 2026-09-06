@@ -76,8 +76,13 @@ uv run python tools/financial_ratios.py compare \
 Read the comparison output. Key fields:
 - `matrix`: ratio values for each company
 - `medians`: group median for each ratio
-- `outliers`: companies with ratios >2 standard deviations from median
+- `outliers`: flagged values with `sample_size`, `outlier_score`, `threshold`, and `score_method`
 - `anomaly_counts`: number of outlier flags per company
+
+Interpret the method exactly as reported. With at least five non-null values,
+the score is deviation from the median divided by population standard deviation
+and the threshold is 2.0. With two to four values, it is a small-cohort
+heuristic using half the observed range and a 1.5 threshold—not a z-score.
 
 ### 4. Generate Forensic Hypotheses
 
@@ -85,7 +90,7 @@ For each statistical outlier flagged in the comparison, generate a hypothesis:
 
 **Every hypothesis MUST include:**
 
-1. **The observation**: "[Company] has [ratio] of [X] vs peer median of [Y] (z=[Z])"
+1. **The observation**: "[Company] has [ratio] of [X] vs peer median of [Y] (score=[Z], n=[N], method=[METHOD])"
 2. **Forensic hypothesis**: What might explain this deviation beyond business model differences?
 3. **Best innocent explanation**: The most plausible non-concerning reason
 4. **Falsification criterion**: What evidence would disprove the concerning interpretation?
@@ -112,24 +117,34 @@ For each notable outlier (forensically significant, not just business-model-diff
 PYTHONPATH=. uv run python tools/findings_tracker.py add \
   --target "<COMPANY>" \
   --summary "Peer comparison: <ratio> is <value> vs industry median <median> (<direction> outlier)" \
+  --detail "Outlier score <SCORE>, n=<N>, method=<SCORE_METHOD>, threshold=<THRESHOLD>; included peers and any null/excluded peers: <DETAILS>" \
   --type financial \
-  --evidence "SEC:CIK<NUM>:<ACCESSION>" \
+  --evidence \
+    "SEC:CIK<TARGET>:<TARGET_ACCESSION>" \
+    "SEC:CIK<PEER_1>:<PEER_1_ACCESSION>" \
+    "SEC:CIK<PEER_N>:<PEER_N_ACCESSION>" \
   --claim-type synthesis \
-  --source-quote "Automated peer comparison across <N> companies in <sector>" \
+  --source-quote \
+    "SEC:CIK<TARGET>:<TARGET_ACCESSION>:<exact period/value rows needed to compute the target ratio>" \
+    "SEC:CIK<PEER_1>:<PEER_1_ACCESSION>:<exact period/value rows needed to compute peer 1's ratio>" \
+    "SEC:CIK<PEER_N>:<PEER_N_ACCESSION>:<exact period/value rows needed to compute peer N's ratio>" \
   --sources edgar \
   --confidence medium
 ```
 
-Connect target to peer group if structural relationships discovered:
-```bash
-PYTHONPATH=. uv run python tools/findings_tracker.py connect \
-  --person-a "<TARGET>" --person-b "<PEER>" \
-  --type corporate \
-  --description "Same SIC <CODE>, compared in peer analysis" \
-  --entity-a-type inc --entity-b-type inc
-```
+Attach one evidence reference and exact load-bearing source quote for **every**
+company whose value contributes to that ratio's `sample_size`. The finding must
+be reproducible from the attached rows alone. Put the calculation method and
+null/exclusion handling in `--detail`, never in `--source-quote`. If complete
+peer provenance is unavailable, keep the result in `comparison.json` and the
+hypothesis record; do not promote it to a finding.
 
-`connect` auto-registers any endpoint that isn't already an entity, but it can only guess `entity_type='unknown'` — so pass `--entity-a-type`/`--entity-b-type` (here `inc`) to type the companies correctly. For the richest graph, register each company explicitly with its jurisdiction so peer-group and shared-officer patterns are queryable:
+Peer-group membership, shared SIC, and selection as a comparator are analytical
+metadata—not corporate relationships. **Do not call `findings_tracker.py
+connect` for those facts.** Create a connection only when independent evidence
+establishes an actual relationship, using its accurate type and attached
+provenance. Register each analyzed company explicitly with its jurisdiction so
+it can be resolved consistently without inventing peer-to-peer edges:
 
 ```bash
 uv run python tools/entity_tracker.py add-entity --name "<PEER>" --entity-type inc --jurisdiction <STATE> --source "edgar"
@@ -160,8 +175,8 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
 |-------|--------|--------|--------|-----|--------|-----------------|
 
 ### Statistical Outliers
-| Company | Ratio | Value | Median | z-score | Forensic Note |
-|---------|-------|-------|--------|---------|---------------|
+| Company | Ratio | Value | Median | Score | n | Method | Threshold | Forensic Note |
+|---------|-------|-------|--------|-------|---|--------|-----------|---------------|
 
 ### Forensic Hypotheses
 1. **<Company> <ratio> outlier** — Hypothesis #<ID>
@@ -195,4 +210,3 @@ When generating hypotheses, consider applying relevant frameworks from `research
 - **Related-Party Transaction Scoring** — margin outliers that might indicate RPT-driven pricing
 - **Corporate Governance Red Flags** — compound governance indicators across the peer group
 - **Peripheral Collapse** — margin outliers suggesting pass-through or shell entity behavior
-

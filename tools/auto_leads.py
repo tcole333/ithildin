@@ -131,15 +131,20 @@ class LeadLimitReached(Exception):
 
 def create_lead(db, title, category, priority, source, target=None, notes=None,
                 profile_id=None, thread_id=None):
-    """Create a lead and return its ID. Auto-leads go to pending_triage."""
+    """Create a lead and return its ID. Auto-leads go to pending_triage.
+
+    The generation context is stored both as the lead description, so triage
+    batches can assess the row directly, and as an immutable lead note for the
+    audit trail.
+    """
     global _leads_created_this_run
     if _leads_created_this_run >= _max_leads_per_run:
         raise LeadLimitReached(f"Lead limit ({_max_leads_per_run}) reached for this run")
     db.execute(
-        """INSERT INTO leads (title, category, priority, status, source, target_name,
-           profile_id, thread_id, created_at)
-           VALUES (?, ?, ?, 'pending_triage', ?, ?, ?, ?, datetime('now'))""",
-        (title, category, priority, source, target, profile_id, thread_id)
+        """INSERT INTO leads (title, description, category, priority, status,
+           source, target_name, profile_id, thread_id, created_at)
+           VALUES (?, ?, ?, ?, 'pending_triage', ?, ?, ?, ?, datetime('now'))""",
+        (title, notes, category, priority, source, target, profile_id, thread_id)
     )
     lead_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
     if notes:
@@ -409,13 +414,26 @@ def process_new_entities(db, dry_run=False, profile_id=None):
 
 def process_new_connections(db, dry_run=False, profile_id=None):
     """Generate leads for new connections where person has < 5 findings."""
-    rows = db.execute("""
-        SELECT c.id, c.person_a, c.person_b, c.relationship_type
+    scope_clause = ""
+    scope_params = []
+    if profile_id:
+        scope_clause = """
+          AND (
+              c.profile_id = ?
+              OR c.finding_id IN (
+                  SELECT id FROM findings WHERE profile_id = ?
+              )
+          )
+        """
+        scope_params = [profile_id, profile_id]
+    rows = db.execute(f"""
+        SELECT c.id, c.person_a, c.person_b, c.relationship_type, c.finding_id
         FROM connections c
         WHERE c.id NOT IN (
             SELECT record_id FROM auto_crossref_log WHERE table_name='connections'
         )
-    """).fetchall()
+        {scope_clause}
+    """, scope_params).fetchall()
 
     # Only generate leads for persons with HIGH priority (key persons)
     # or persons with 0 findings AND a strong connection type
@@ -444,9 +462,14 @@ def process_new_connections(db, dry_run=False, profile_id=None):
             if person.strip().lower() in skip_persons:
                 continue
 
+            finding_scope = " AND profile_id = ?" if profile_id else ""
+            finding_params = [f"%{person.strip()}%", row["finding_id"]]
+            if profile_id:
+                finding_params.append(profile_id)
             finding_count = db.execute(
-                "SELECT COUNT(*) FROM findings WHERE target_name LIKE ?",
-                (f"%{person.strip()}%",)
+                f"""SELECT COUNT(DISTINCT id) FROM findings
+                    WHERE (target_name LIKE ? OR id = ?){finding_scope}""",
+                finding_params,
             ).fetchone()[0]
             if finding_count >= 3:
                 continue
@@ -468,8 +491,8 @@ def process_new_connections(db, dry_run=False, profile_id=None):
             if dry_run:
                 print(f"  [DRY] Connection lead ({priority}): {title}")
             else:
-                lead_id = create_lead(db, title, "person", priority, "agent:auto_leads",
-                                      target=person.strip(), notes=notes, profile_id=profile_id)
+                create_lead(db, title, "person", priority, "agent:auto_leads",
+                            target=person.strip(), notes=notes, profile_id=profile_id)
                 created += 1
 
         log_processed(db, "connections", row["id"], "connection_search")
@@ -572,9 +595,9 @@ def process_pillar_gaps(db, dry_run=False, profile_id=None):
                 existing = lead_exists(db, f"Pillar gap: {person['canonical_name']}.*{gap}")
                 if existing:
                     continue
-                lead_id = create_lead(db, title, "connection", "medium", "agent:auto_leads:pillar_gap",
-                                      target=person["canonical_name"], notes=notes,
-                                      profile_id=profile_id)
+                create_lead(db, title, "connection", "medium", "agent:auto_leads:pillar_gap",
+                            target=person["canonical_name"], notes=notes,
+                            profile_id=profile_id)
                 created += 1
 
         log_processed(db, "persons", person["id"], dedup_key)
@@ -840,6 +863,125 @@ def _is_abstract_target(target):
     except ImportError:
         from entity_resolution import is_abstract_entity_target
     return is_abstract_entity_target(target)
+
+
+_PERSON_IDENTITY_TYPES = frozenset({"individual", "person"})
+_GOVERNMENT_IDENTITY_TYPES = frozenset({
+    "agency", "government", "government_agency", "public_body",
+})
+_GENERATIONAL_PERSON_SUFFIXES = frozenset({"jr", "sr", "ii", "iii", "iv"})
+_FACILITY_KIND_TOKENS = frozenset({
+    "correctional", "detention", "jail", "prison",
+})
+_FACILITY_GENERIC_TOKENS = _FACILITY_KIND_TOKENS | frozenset({
+    "center", "centre", "complex", "county", "facility",
+})
+
+
+def _normalized_identity_tokens(name, entity_type):
+    """Return normalized tokens used by the conservative alias guard."""
+    try:
+        from tools.entity_resolution import (
+            normalize_entity_name,
+            normalize_person_name,
+        )
+    except ImportError:
+        from entity_resolution import normalize_entity_name, normalize_person_name
+
+    normalized_type = str(entity_type or "").strip().casefold()
+    if normalized_type in _PERSON_IDENTITY_TYPES:
+        return normalize_person_name(name).split()
+    return normalize_entity_name(name).split()
+
+
+def _without_us_prefix(tokens):
+    if tokens[:2] in (["u", "s"], ["united", "states"]):
+        return tokens[2:]
+    if tokens[:1] == ["us"]:
+        return tokens[1:]
+    return tokens
+
+
+def _is_known_self_alias(left_name, left_type, right_name, right_type=None):
+    """Recognize only recurring, low-risk spelling variants of one identity."""
+    normalized_left_type = str(left_type or "").strip().casefold()
+    normalized_right_type = str(right_type or "").strip().casefold()
+
+    if normalized_left_type in _PERSON_IDENTITY_TYPES:
+        if right_type is not None and normalized_right_type not in _PERSON_IDENTITY_TYPES:
+            return False
+        left = _normalized_identity_tokens(left_name, "person")
+        right = _normalized_identity_tokens(right_name, "person")
+        if len(left) < 2 or len(right) < 2 or left[0] != right[0] or left[-1] != right[-1]:
+            return False
+        left_middle = left[1:-1]
+        right_middle = right[1:-1]
+        # Suppress only an omitted middle initial. Different initials and full
+        # middle names remain candidates because they can distinguish people.
+        return (
+            bool(left_middle) != bool(right_middle)
+            and all(len(token) == 1 for token in left_middle + right_middle)
+        )
+
+    if normalized_left_type in _GOVERNMENT_IDENTITY_TYPES:
+        if right_type is not None and normalized_right_type not in _GOVERNMENT_IDENTITY_TYPES:
+            return False
+        left = _normalized_identity_tokens(left_name, "government")
+        right = _normalized_identity_tokens(right_name, "government")
+        return left != right and _without_us_prefix(left) == _without_us_prefix(right)
+
+    return False
+
+
+def _has_person_suffix_distinction(left_name, left_type, right_name, right_type=None):
+    """Return whether matching cores carry a genealogical suffix distinction."""
+    normalized_left_type = str(left_type or "").strip().casefold()
+    normalized_right_type = str(right_type or "").strip().casefold()
+    if normalized_left_type not in _PERSON_IDENTITY_TYPES:
+        return False
+    if right_type is not None and normalized_right_type not in _PERSON_IDENTITY_TYPES:
+        return False
+
+    def split_name(name):
+        tokens = re.findall(r"[a-z0-9]+", str(name or "").casefold())
+        suffix = tokens[-1] if tokens and tokens[-1] in _GENERATIONAL_PERSON_SUFFIXES else None
+        return _normalized_identity_tokens(name, "person"), suffix
+
+    left_core, left_suffix = split_name(left_name)
+    right_core, right_suffix = split_name(right_name)
+    return (
+        left_core == right_core
+        and bool(left_core)
+        and left_suffix != right_suffix
+        and bool(left_suffix or right_suffix)
+    )
+
+
+def _has_distinct_facility_identity(left_name, right_name):
+    """Reject facility matches supported only by generic facility wording."""
+    left = set(_normalized_identity_tokens(left_name, "organization"))
+    right = set(_normalized_identity_tokens(right_name, "organization"))
+    if not (_FACILITY_KIND_TOKENS.intersection(left)
+            and _FACILITY_KIND_TOKENS.intersection(right)):
+        return False
+    left_identity = left - _FACILITY_GENERIC_TOKENS
+    right_identity = right - _FACILITY_GENERIC_TOKENS
+    return bool(
+        left_identity
+        and right_identity
+        and left_identity.isdisjoint(right_identity)
+    )
+
+
+def _skip_fuzzy_identity_match(left_name, left_type, right_name, right_type=None):
+    """Apply conservative guards before a fuzzy identity match becomes a lead."""
+    return (
+        _is_known_self_alias(left_name, left_type, right_name, right_type)
+        or _has_person_suffix_distinction(
+            left_name, left_type, right_name, right_type
+        )
+        or _has_distinct_facility_identity(left_name, right_name)
+    )
 
 
 _CONTRACT_EVIDENCE_SOURCES = frozenset({
@@ -1273,8 +1415,18 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
     """).fetchall()
 
     # Load all entity names for matching
-    all_entities = db.execute("SELECT id, name FROM entities").fetchall()
-    entity_names = [(r["id"], r["name"], normalize_entity_name(r["name"])) for r in all_entities]
+    all_entities = db.execute(
+        "SELECT id, name, entity_type FROM entities"
+    ).fetchall()
+    entity_names = [
+        (
+            r["id"],
+            r["name"],
+            normalize_entity_name(r["name"]),
+            r["entity_type"],
+        )
+        for r in all_entities
+    ]
 
     # Load connection person names for matching
     conn_persons = set()
@@ -1310,12 +1462,16 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
         matches = []
 
         # Match against other entities
-        for eid, ename, enorm in entity_names:
+        for eid, ename, enorm, entity_type in entity_names:
             if eid == row["id"]:
                 continue
             # Exact normalized identities are duplicate representations, not
-            # investigative cross-references. Fuzzy name variants remain useful.
-            if enorm == norm:
+            # investigative cross-references. Middle-initial person variants
+            # and federal-agency names with or without a leading "U.S." are
+            # likewise self-aliases rather than useful fuzzy matches.
+            if enorm == norm or _skip_fuzzy_identity_match(
+                name, row["entity_type"], ename, entity_type
+            ):
                 continue
             score = fuzz.token_sort_ratio(norm, enorm)
             if score >= THRESHOLD:
@@ -1324,7 +1480,9 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
         # Match against connection persons
         for person in conn_persons:
             person_norm = normalize_entity_name(person)
-            if person_norm == norm:
+            if person_norm == norm or _skip_fuzzy_identity_match(
+                name, row["entity_type"], person
+            ):
                 continue
             score = fuzz.token_sort_ratio(norm, person_norm)
             if score >= THRESHOLD:
@@ -1333,7 +1491,9 @@ def process_entity_crossref(db, dry_run=False, profile_id=None):
         # Match against finding targets
         for target in finding_targets:
             target_norm = normalize_entity_name(target)
-            if target_norm == norm:
+            if target_norm == norm or _skip_fuzzy_identity_match(
+                name, row["entity_type"], target
+            ):
                 continue
             score = fuzz.token_sort_ratio(norm, target_norm)
             if score >= THRESHOLD:
@@ -1417,12 +1577,13 @@ def process_person_crossref(db, dry_run=False, profile_id=None):
         if len(norm) < 3:
             log_processed(db, "entity_roles", row["id"], "person_crossref")
             continue
-
         matches = []
 
         for cp in conn_persons:
             cp_norm = normalize_person_name(cp)
-            if cp_norm == norm:
+            if cp_norm == norm or _skip_fuzzy_identity_match(
+                person, "person", cp
+            ):
                 continue
             score = fuzz.token_sort_ratio(norm, cp_norm)
             if score >= THRESHOLD:
@@ -1430,7 +1591,9 @@ def process_person_crossref(db, dry_run=False, profile_id=None):
 
         for ft in finding_targets:
             ft_norm = normalize_person_name(ft)
-            if ft_norm == norm:
+            if ft_norm == norm or _skip_fuzzy_identity_match(
+                person, "person", ft
+            ):
                 continue
             score = fuzz.token_sort_ratio(norm, ft_norm)
             if score >= THRESHOLD:

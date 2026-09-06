@@ -7,16 +7,19 @@ from pathlib import Path
 import pytest
 
 from tools import query_california
+from tests.browser_runtime_fixture import browser_runtime_env
 
 
 ROOT = Path(__file__).resolve().parents[1]
 HELPER = ROOT / "tools" / "_ca_browser_helper.js"
 
 
-def test_california_runtime_check_uses_node_playwright_and_chrome() -> None:
+def test_california_runtime_check_uses_node_playwright_and_chrome(tmp_path) -> None:
+    env = browser_runtime_env(tmp_path, "CA")
     result = subprocess.run(
         ["node", str(HELPER), "runtime-check"],
         cwd=ROOT,
+        env=env,
         capture_output=True,
         text=True,
         timeout=30,
@@ -24,10 +27,21 @@ def test_california_runtime_check_uses_node_playwright_and_chrome() -> None:
     assert result.returncode == 0, result.stderr
     data = json.loads(result.stdout)
     assert data["ok"] is True
-    assert data["playwright_module"] in {"playwright", "playwright-core"}
+    assert data["playwright_module"] == env["CA_PLAYWRIGHT_MODULE"]
     assert data["browser_channel"] == "chrome"
-    assert Path(data["browser_executable"]).is_file()
+    assert "chrome" in data["browser_executable"].lower()
     assert data["headless"] is False
+
+
+def test_california_missing_chrome_is_actionable(tmp_path) -> None:
+    result = subprocess.run(
+        ["node", str(HELPER), "runtime-check"], cwd=ROOT,
+        env=browser_runtime_env(tmp_path, "CA", browser_present=False),
+        capture_output=True, text=True, timeout=30,
+    )
+    assert result.returncode == 1
+    assert "Google Chrome runtime not found" in result.stderr
+    assert not result.stdout
 
 
 def test_california_missing_playwright_error_is_actionable() -> None:
@@ -43,7 +57,7 @@ def test_california_missing_playwright_error_is_actionable() -> None:
     )
     assert result.returncode == 1
     assert "Playwright runtime not found" in result.stderr
-    assert "npm install playwright" in result.stderr
+    assert "npm --prefix web ci" in result.stderr
 
 
 def test_california_helper_rejects_unbounded_limit_before_browser_launch() -> None:

@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-07-31",
+  "total_rows": 373666,
+  "tax_year_counts": {"2026": 373666},
+  "jurisdiction_count": 23,
+  "database_non_null_counts": {
+    "taxyear": 373666,
+    "jurisdicti": 373666,
+    "parcelnb": 373666,
+    "accountno": 373666,
+    "ID": 373666
+  },
+  "blank_string_counts": {
+    "parcelnb_single_space": 1214,
+    "accountno_single_space": 40487,
+    "both_single_space": 1214
+  },
+  "largest_grouped_tuples": [
+    {
+      "row_count": 1049,
+      "taxyear": "2026",
+      "jurisdicti": "LINCOLN",
+      "parcelnb": " ",
+      "accountno": " "
+    },
+    {
+      "row_count": 84,
+      "taxyear": "2026",
+      "jurisdicti": "LINCOLN",
+      "parcelnb": "37181840001700",
+      "accountno": "R0015471"
+    }
+  ],
+  "normalized_identity_basis_counts": {
+    "tax_year_jurisdiction_parcel_account": 333179,
+    "tax_year_jurisdiction_parcel": 37474,
+    "tax_year_jurisdiction_account": 0,
+    "release_occurrence_only": 3013
+  },
+  "occurrence_only_breakdown": {
+    "blank_parcel_and_account": 1214,
+    "non_specific_parcel_without_account": 1799
+  },
+  "interpretation": "The annual business tuple joins geometry occurrences; FID identifies each raw feature."
+}

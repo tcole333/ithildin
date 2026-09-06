@@ -24,8 +24,7 @@ import json
 import sys
 import time
 from collections import Counter, defaultdict
-from datetime import datetime
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -35,37 +34,69 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 BASE_URL = "https://crt.sh"
+_MAX_ATTEMPTS = 3
+_RETRYABLE_HTTP_CODES = frozenset({429, 500, 502, 503, 504})
 
 
-def _fetch(params, timeout=30):
-    """Fetch from crt.sh JSON API."""
-    params["output"] = "json"
-    url = f"{BASE_URL}/?{urlencode(params)}"
+def _fetch(params, timeout=30, max_attempts=_MAX_ATTEMPTS):
+    """Fetch from crt.sh JSON API with bounded transient retries."""
+    request_params = {**params, "output": "json"}
+    url = f"{BASE_URL}/?{urlencode(request_params)}"
     req = Request(url, headers={
         "Accept": "application/json",
         "User-Agent": "OSINT-Research/1.0",
     })
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            text = resp.read().decode()
-            if not text.strip():
-                return []
-            return json.loads(text)
-    except HTTPError as e:
-        print(f"ERROR: crt.sh returned {e.code}", file=sys.stderr)
-        sys.exit(1)
-    except TimeoutError:
+    query = ", ".join(f"{key}={value}" for key, value in params.items())
+
+    for attempt in range(1, max_attempts + 1):
+        failure = None
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                text = resp.read().decode()
+                if not text.strip():
+                    return []
+                return json.loads(text)
+        except HTTPError as exc:
+            if exc.code not in _RETRYABLE_HTTP_CODES:
+                print(f"ERROR: crt.sh returned {exc.code}", file=sys.stderr)
+                raise SystemExit(1) from None
+            failure = f"HTTP {exc.code}"
+        except TimeoutError:
+            failure = f"timeout after {timeout}s"
+        except URLError as exc:
+            reason = str(exc.reason)
+            if not (
+                isinstance(exc.reason, TimeoutError)
+                or "timed out" in reason.casefold()
+            ):
+                print(f"ERROR: Network error: {exc.reason}", file=sys.stderr)
+                raise SystemExit(1) from None
+            failure = f"timeout after {timeout}s"
+        except json.JSONDecodeError:
+            print(
+                "ERROR: crt.sh returned non-JSON response "
+                "(may be overloaded, retry later)",
+                file=sys.stderr,
+            )
+            raise SystemExit(1) from None
+
+        if attempt == max_attempts:
+            print(
+                f"ERROR: crt.sh query failed after {attempt} attempts "
+                f"({failure}; {query}); retry later",
+                file=sys.stderr,
+            )
+            raise SystemExit(1)
+
+        delay = min(2 ** (attempt - 1), 4)
         print(
-            f"ERROR: crt.sh did not respond within {timeout}s; retry later",
+            f"WARNING: crt.sh attempt {attempt}/{max_attempts} failed "
+            f"({failure}); retrying in {delay}s",
             file=sys.stderr,
         )
-        sys.exit(1)
-    except URLError as e:
-        print(f"ERROR: Network error: {e.reason}", file=sys.stderr)
-        sys.exit(1)
-    except json.JSONDecodeError:
-        print("ERROR: crt.sh returned non-JSON response (may be overloaded, retry later)", file=sys.stderr)
-        sys.exit(1)
+        time.sleep(delay)
+
+    raise AssertionError("unreachable")
 
 
 def _dedupe_certs(records):
@@ -208,6 +239,7 @@ def cmd_timeline(args):
         "last_seen": deduped[-1].get("not_before", "?")[:10] if deduped else "N/A",
         "issuers": dict(issuers.most_common()),
         "monthly": {k: len(v) for k, v in sorted(monthly.items())},
+        "records": deduped,
     }
 
     if write_output(data, args, summary=f"timeline for {args.domain}"):
@@ -223,11 +255,11 @@ def cmd_timeline(args):
         print(f"First issued: {data['first_seen']}")
         print(f"Last issued: {data['last_seen']}")
 
-    print(f"\nIssuers:")
+    print("\nIssuers:")
     for issuer, count in issuers.most_common():
         print(f"  {issuer}: {count}")
 
-    print(f"\nMonthly issuance:")
+    print("\nMonthly issuance:")
     for month, certs in sorted(monthly.items()):
         bar = "#" * len(certs)
         print(f"  {month}: {bar} ({len(certs)})")
@@ -235,19 +267,7 @@ def cmd_timeline(args):
 
 def cmd_cert(args):
     """Get details for a specific certificate by crt.sh ID."""
-    params = {"id": args.cert_id, "output": "json"}
-    url = f"{BASE_URL}/?{urlencode(params)}"
-    req = Request(url, headers={
-        "Accept": "application/json",
-        "User-Agent": "OSINT-Research/1.0",
-    })
-    try:
-        with urlopen(req, timeout=30) as resp:
-            text = resp.read().decode()
-            data = json.loads(text) if text.strip() else {}
-    except (HTTPError, URLError, json.JSONDecodeError) as e:
-        print(f"ERROR: Failed to fetch cert {args.cert_id}: {e}", file=sys.stderr)
-        sys.exit(1)
+    data = _fetch({"id": args.cert_id}, timeout=30)
 
     if write_output(data, args, summary=f"cert {args.cert_id}"):
         return

@@ -1,0 +1,46 @@
+import json
+import sqlite3
+from pathlib import Path
+from tools import lead_tracker as lt, findings_tracker as ft, name_resolver
+from tools.entity_resolution import resolve_or_create_entity
+from scripts.migrate_core_model_v2 import DDL
+
+base = Path('/tmp/osint-SXYkyRSJ/data-model-fixtures')
+base.mkdir(exist_ok=True)
+p = base / 'current.db'
+if p.exists(): p.unlink()
+db = sqlite3.connect(p)
+db.row_factory = sqlite3.Row
+db.execute('PRAGMA foreign_keys=ON')
+lt._ensure_schema(db)
+print('fresh_schema_tables', {t: bool(db.execute('SELECT 1 FROM sqlite_master WHERE name=?',(t,)).fetchone()) for t in ['finding_entities','finding_relations','investigation_profiles','schema_migrations']})
+db.executescript(DDL)
+db.close()
+ft.DB_PATH = p
+ft._schema_initialized = True
+lt.DB_PATH = p
+lt._schema_initialized = True
+name_resolver.resolve_canonical = lambda x: x
+ref='COURTLISTENER:fixture-1'
+fid=ft.add_finding('Original Company LLC','A supported statement.',finding_type='legal',source_datasets=['courtlistener'],confidence='confirmed',claim_type='direct_quote',evidence_ids=[ref],source_quotes={ref:{'quote':'A supported statement.'}},profile_id='fixture-profile')
+ft.verify_finding(fid,verified_by='fixture-reviewer')
+ft.update_finding(fid,'summary','An entirely different allegation.','Fixture correction')
+print('verified_summary_correction', {k:ft.get_finding(fid)[k] for k in ['summary','verification_status','verified_by']})
+ft.update_finding(fid,'target_name','Unrelated Organization Inc','Fixture wrong-subject correction')
+db=sqlite3.connect(p)
+print('corrected_subject_link', db.execute('SELECT f.target_name,e.name,fe.raw_name FROM findings f JOIN finding_entities fe ON fe.finding_id=f.id JOIN entities e ON e.id=fe.entity_id WHERE f.id=?',(fid,)).fetchone())
+db.close()
+ft.update_finding(fid,'claim_type','inference','Fixture inferential reclassification')
+ft.verify_finding(fid,verified_by='fixture-reviewer')
+print('confirmed_inference_after_correction_and_verify', {k:ft.get_finding(fid)[k] for k in ['claim_type','confidence','verification_status']})
+ft.update_finding(fid,'confidence','low','Fixture reduce confidence')
+ft.update_finding(fid,'confidence','confirmed','Fixture raise confidence')
+print('confidence_correction', {k:ft.get_finding(fid)[k] for k in ['claim_type','confidence','verification_status']})
+db=sqlite3.connect(p)
+db.row_factory=sqlite3.Row
+first=resolve_or_create_entity(db,'Example Holdings LLC',entity_type='llc',jurisdiction='Delaware',ein='11-1111111')
+variant=resolve_or_create_entity(db,'Example  Holdings LLC',entity_type='llc',jurisdiction='Delaware',ein='11-1111111')
+foreign=resolve_or_create_entity(db,'Example  Holdings LLC',entity_type='llc',jurisdiction='Florida',ein='22-2222222')
+db.commit()
+print('alias_jurisdiction_resolution', {'first':first._asdict(),'variant':variant._asdict(),'florida':foreign._asdict(),'stored':dict(db.execute('SELECT id,name,jurisdiction,ein FROM entities WHERE id=?',(foreign.entity_id,)).fetchone())})
+db.close()

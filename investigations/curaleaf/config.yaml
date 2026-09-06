@@ -1,0 +1,472 @@
+# Curaleaf — ownership, offshore financing, sanctions, licensing, and federal-investigation review
+
+name: "curaleaf"
+
+primary_subject: "Curaleaf Holdings, Inc."
+
+description: >
+  Evidence-led investigation of Curaleaf Holdings, Inc. (CIK 0001756770;
+  TSX: CURA; OTCQX: CURLF), its controlling shareholders, offshore financing
+  vehicles, share pledges and repurchase transactions, related-party network,
+  cannabis-license ownership disclosures, and released FBI records. The
+  initial commission tests reporting by The Newsground concerning federal
+  money-laundering/public-corruption investigative activity and Credit Bank of
+  Moscow's realization of Curaleaf shares, while pursuing independently
+  newsworthy contradictions and control questions. No article allegation is
+  treated as established without primary evidence.
+
+key_persons:
+  - "boris jordan"
+  - "boris alexis jordan"
+  - "andrey s. blokh"
+  - "andrey sergeevich blokh"
+  - "andrei blokh"
+  - "mary louise ferrier"
+  - "roman avdeev"
+  - "roman ivanovich avdeev"
+  - "roman abramovich"
+  - "nicholas jordan"
+  - "joseph f. lusardi"
+  - "joseph lusardi"
+  - "peter clateman"
+  - "ed kremer"
+  - "camilo lyon"
+  - "rahul pinto"
+  - "daniel mickelson"
+  - "mitchell kahn"
+  - "matt darin"
+  - "joseph bayern"
+  - "justin ort"
+  - "evan farber"
+
+known_addresses:
+  "250 harbor drive": "Current principal executive office, Stamford, Connecticut"
+  "290 harbor drive": "Recent historical Curaleaf executive-office address, Stamford, Connecticut"
+  "666 burrard street": "Curaleaf registered/records office, Vancouver, British Columbia; suite number varies by filing date"
+  "301 edgewater place": "Historical Curaleaf/PalliaTech address, Wakefield, Massachusetts"
+  "420 lexington avenue": "Historical Curaleaf- and affiliate-linked filing address, New York, New York; resolve entity and date"
+  "300 park avenue": "Historical Measure 8 address, New York, New York; resolve entity and date"
+
+threads:
+  - id: 1
+    name: "Ownership, Voting Control & Lifebrook"
+    description: "Dual-class control, Gociter holdings, the December 2023 U.S. reorganization, Lifebrook, the unnamed voting investor, board nomination rights, and affiliate/control representations."
+    targets:
+      - "curaleaf holdings inc"
+      - "curaleaf inc"
+      - "gociter holdings ltd"
+      - "lifebrook investments ltd"
+      - "mary louise ferrier"
+    keywords:
+      - 'multiple.voting.share'
+      - 'subordinate.voting.share'
+      - 'class.a.voting'
+      - 'variable.interest.entity'
+      - '\bvie\b'
+      - 'unaffiliated'
+      - 'beneficial.owner'
+      - 'voting.control'
+
+  - id: 2
+    name: "Tangela, Universal Growth & Share-Repo Chain"
+    description: "Tangela's Curaleaf share acquisitions, Sova/CBoM repos and pledges, the unidentified surety, the 2023 realization, parent-company receivables, and lot-level share/cash reconciliation."
+    targets:
+      - "tangela holdings ltd"
+      - "universal growth capital fund ltd"
+      - "universal growth capital ltd"
+      - "credit bank of moscow"
+      - "sova capital"
+    keywords:
+      - 'repurchase.agreement'
+      - '\brepo\b'
+      - 'surety'
+      - 'realized.*shares'
+      - 'pledged.*shares'
+      - '15,?500,?000'
+      - '3,?168,?500,?000'
+      - 'parent.*receivable'
+
+  - id: 3
+    name: "Cetus, Meliastove & Offshore Financing"
+    description: "Cetus and Meliastove ownership, loans, warrants, liquidation-assistance terms, Abramovich-related claims, the disputed payoff chronology, trust transfers, note assignments, and offshore administrators."
+    targets:
+      - "cetus investments limited"
+      - "meliastove investments limited"
+      - "roman abramovich"
+      - "portiagate investment ltd"
+    keywords:
+      - 'cetus'
+      - 'meliastove'
+      - 'liquidation.assistance'
+      - 'payoff'
+      - 'audit.confirmation'
+      - '90,?795,?144'
+      - 'senior.secured.note'
+      - 'family.trust'
+
+  - id: 4
+    name: "Russian Financial Institutions & Sanctions"
+    description: "Credit Bank of Moscow, Sova Capital, Rossium, transaction dates, title and custody mechanics, sanctions designations, licenses, payment channels, and ownership/control tests."
+    targets:
+      - "credit bank of moscow"
+      - "moscow credit bank"
+      - "sova capital"
+      - "rossium holding"
+      - "concern rossium"
+      - "roman avdeev"
+    keywords:
+      - '\bcbom\b'
+      - '\bmkb\b'
+      - 'ofac'
+      - 'blocking.sanction'
+      - 'general.license'
+      - 'wind.down'
+      - 'bank.of.russia'
+      - 'custod'
+
+  - id: 5
+    name: "FBI, Grand Juries & Visa-Letter Questions"
+    description: "FOIA release 1579784-000, SDNY and EDPA case files, subpoenas, FD-302 interviews, redacted subject identities, case disposition, and any separate Sputnik visa-letter referral."
+    targets:
+      - "federal bureau of investigation"
+      - "southern district of new york"
+      - "eastern district of pennsylvania"
+      - "nicholas jordan"
+      - "sputnik group"
+    keywords:
+      - '1579784-000'
+      - '272B-NY-2225719'
+      - '194A-PH-3006435'
+      - '281H-NY-3007826'
+      - 'grand.jury.19-07'
+      - 'fd-302'
+      - '18.u\.s\.c.*1956'
+      - 'visa.*letter'
+
+  - id: 6
+    name: "Cannabis Licensing & Ownership Disclosures"
+    description: "Pennsylvania clinical-registrant applications and award, disclosure thresholds, ownership schedules, regulator awareness, and comparison across Curaleaf's licensed states."
+    targets:
+      - "pennsylvania department of health"
+      - "massachusetts cannabis control commission"
+      - "curaleaf pa"
+      - "perelman school of medicine"
+    keywords:
+      - 'clinical.registrant'
+      - '\bcr06\b'
+      - '\bcr10\b'
+      - 'license.application'
+      - 'ownership.schedule'
+      - 'beneficial.owner'
+      - 'control.person'
+      - 'background.report'
+
+  - id: 7
+    name: "Jordan, Sputnik & Measure 8 Related Parties"
+    description: "Gociter, MedTech, Sputnik, Measure 8, Jordan Family Investments, EMMAC/Four 20, funded participations, overlapping personnel, and related-party disclosure."
+    targets:
+      - "the sputnik group"
+      - "sputnik trading"
+      - "medtech international group llc"
+      - "measure 8 ventures management llc"
+      - "measure 8 full spectrum fund lp"
+      - "jordan family investments llc"
+    keywords:
+      - 'related.party'
+      - 'funded.participation'
+      - 'sputnik'
+      - 'measure.8'
+      - 'medtech'
+      - 'gociter'
+      - 'emmac'
+      - 'four.20.pharma'
+
+  - id: 8
+    name: "Securities Disclosure, Audit & Lenders"
+    description: "SEDAR+/SEDI/SEC disclosure chronology, insider pledges, audit-confirmation conflicts, comment letters, auditor changes, lender identities, internal controls, and pending domestication."
+    targets:
+      - "securities and exchange commission"
+      - "british columbia securities commission"
+      - "pkf o'connor davies llp"
+      - "bdo usa p.c."
+      - "needham bank"
+      - "east west bank"
+    keywords:
+      - 'sedi'
+      - 'sedar'
+      - 'insider.report'
+      - 'comment.letter'
+      - 'material.weakness'
+      - 'audit.confirmation'
+      - 'repaid.in.full'
+      - 'domestication'
+
+  - id: 9
+    name: "Retail Cash, Banking & AML Controls"
+    description: "Till-to-bank reconstruction for Curaleaf dispensaries: tender mix, POS and seed-to-sale reconciliation, cash logistics, deposit institutions, cashless-ATM and ACH transitions, tax and inventory controls, internal-control failures, and peer baselines. High cash volume alone is not evidence of laundering; the thread tests for Curaleaf-specific mismatches or intermediaries against ordinary regulated-cannabis operations."
+    targets:
+      - "curaleaf holdings inc"
+      - "curaleaf dispensaries"
+      - "curaleaf retail"
+      - "curaleaf cash management"
+      - "curaleaf banking relationships"
+    keywords:
+      - 'cash.on.hand'
+      - 'cash.in.transit'
+      - 'cashless.atm'
+      - 'armored.car'
+      - 'deposit.account'
+      - 'merchant.cash.advance'
+      - 'seed.to.sale'
+      - 'metrc'
+      - 'point.of.sale'
+      - 'daily.reconciliation'
+      - 'cash.overage'
+      - 'cash.shortage'
+      - 'form.8300'
+      - 'currency.transaction.report'
+      - '\bctr\b'
+      - 'suspicious.activity'
+      - 'money.laundering'
+
+corpus_tools: []
+
+key_dates:
+  - date: "2014-11-13"
+    event: "Current British Columbia parent incorporated as Maccabi Ventures Inc. (BC1018969)"
+    category: "milestone"
+  - date: "2018-08-24"
+    event: "Curaleaf disclosures describe $85 million Cetus senior secured financing and warrant"
+    category: "financial"
+  - date: "2018-10-25"
+    event: "Business combination/reverse takeover completes and parent becomes Curaleaf Holdings, Inc."
+    category: "milestone"
+  - date: "2018-10-26"
+    event: "First visible SDNY grand-jury subpoena in FBI file 272B-NY-2225719-GJ"
+    category: "legal"
+  - date: "2018-11-15"
+    event: "Date on partial Boris Jordan/Cetus Liquidation Assistance Agreement excerpts; full agreement requires authentication"
+    category: "financial"
+  - date: "2018-12-24"
+    event: "Gociter accounts say 12 million Curaleaf MVS were pledged to Credit Bank of Moscow for a shareholder facility"
+    category: "financial"
+  - date: "2019-02-04"
+    event: "EDPA grand-jury subpoena in file 194A-PH-3006435-GJ, Grand Jury 19-07"
+    category: "legal"
+  - date: "2019-09-26"
+    event: "First released Curaleaf/Pennsylvania-related FBI witness interview (FD-302 serial 32)"
+    category: "legal"
+  - date: "2019-10-11"
+    event: "Second released Curaleaf-related FBI witness interview (FD-302 serial 40)"
+    category: "legal"
+  - date: "2019-12-20"
+    event: "Issuer disclosure says Cetus debt was repaid in full"
+    category: "financial"
+  - date: "2019-12-31"
+    event: "Article-published audit-confirmation excerpt reports $90,795,144.42 due to Cetus as of this date, creating an unresolved timing contradiction"
+    category: "financial"
+  - date: "2020-02-20"
+    event: "Pennsylvania awards Curaleaf Phase III clinical-registrant permit CR06"
+    category: "operational"
+  - date: "2020-09-11"
+    event: "Tangela accounts record CBoM purchase of 15.5 million Curaleaf SVS in a $77 million repo"
+    category: "financial"
+  - date: "2022-12-16"
+    event: "European Union lists Credit Bank of Moscow for asset-freeze sanctions"
+    category: "legal"
+  - date: "2023-02-24"
+    event: "U.S. Treasury/OFAC fully blocks Credit Bank of Moscow"
+    category: "legal"
+  - date: "2023-12-08"
+    event: "Tangela accounts say 254,315 Curaleaf SVS were sold to Lifebrook; Curaleaf reorganizes U.S. voting control for TSX listing"
+    category: "financial"
+  - date: "2023-12-14"
+    event: "Curaleaf begins TSX trading; Tangela's amended CBoM repo deadline falls on this date and its accounts report December realization"
+    category: "milestone"
+  - date: "2024-08-27"
+    event: "SEC asks Curaleaf to identify the third-party Curaleaf, Inc. voting investor and explain control"
+    category: "legal"
+  - date: "2024-09-18"
+    event: "Curaleaf SEC response identifies Lifebrook Investments Ltd. as the voting investor"
+    category: "legal"
+  - date: "2026-08-11"
+    event: "The Newsground publishes FBI-investigation article (updated August 16)"
+    category: "media"
+  - date: "2026-08-24"
+    event: "The Newsground publishes Tangela/Credit Bank of Moscow share-repo article"
+    category: "media"
+
+seed_pillars:
+  - name: "Curaleaf Holdings, Inc."
+    pillar_type: "operations"
+    sub_type: "public_cannabis_issuer"
+    status: "active"
+    founded: "2014"
+    dissolved: null
+    jurisdiction: "British Columbia / U.S. reporting issuer"
+    significance: "Primary subject; TSX CURA and OTCQX CURLF; Boris Jordan controls most voting power through multiple-voting shares."
+
+  - name: "Curaleaf, Inc."
+    pillar_type: "operations"
+    sub_type: "us_operating_vie"
+    status: "active"
+    founded: "2010"
+    dissolved: null
+    jurisdiction: "Delaware"
+    significance: "Principal U.S. operating company; parent retains 99.9% economics while Lifebrook holds the sole voting share."
+
+  - name: "Gociter Holdings Ltd."
+    pillar_type: "operations"
+    sub_type: "controlling_shareholder_vehicle"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Offshore jurisdiction to verify"
+    significance: "Jordan-controlled holder of Curaleaf voting shares; historical CBoM pledge and Cetus obligations require reconstruction."
+
+  - name: "Tangela Holdings Ltd."
+    pillar_type: "operations"
+    sub_type: "offshore_financing_vehicle"
+    status: "active"
+    founded: "2017"
+    dissolved: null
+    jurisdiction: "Cyprus (HE376379)"
+    significance: "Held and financed large Curaleaf share blocks, entered Sova/CBoM repos, lent into the Curaleaf network, and sold the Lifebrook block."
+
+  - name: "Lifebrook Investments Ltd."
+    pillar_type: "operations"
+    sub_type: "voting_shareholder_vehicle"
+    status: "active"
+    founded: "2023"
+    dissolved: null
+    jurisdiction: "United Kingdom (company 15130253)"
+    significance: "Ferrier-controlled holder of the sole Curaleaf, Inc. Class A voting share; board and control rights are a priority question."
+
+  - name: "Cetus Investments Limited"
+    pillar_type: "banking"
+    sub_type: "offshore_lender_and_shareholder"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "Exact BVI/Cyprus legal identity to verify"
+    significance: "Major historical Curaleaf lender/shareholder linked in reporting to Abramovich; payoff timing, ownership, collateral, and note assignments are unresolved."
+
+  - name: "Credit Bank of Moscow"
+    pillar_type: "banking"
+    sub_type: "sanctioned_russian_bank"
+    status: "active"
+    founded: "1992"
+    dissolved: null
+    jurisdiction: "Russia"
+    significance: "Counterparty to Tangela and Gociter Curaleaf-share financings; EU-listed in 2022 and OFAC-blocked in 2023."
+
+  - name: "Sova Capital Limited"
+    pillar_type: "banking"
+    sub_type: "broker_dealer"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "United Kingdom"
+    significance: "Earlier Tangela repo counterparty under then-common ultimate control with CBoM through Roman Avdeev."
+
+  - name: "The Sputnik Group"
+    pillar_type: "operations"
+    sub_type: "investment_group"
+    status: "unknown"
+    founded: "1999"
+    dissolved: null
+    jurisdiction: "Multijurisdictional / exact entities to resolve"
+    significance: "Jordan-founded network whose entities and personnel overlap Curaleaf finance, Tangela loans, Measure 8, and FBI visa-letter questioning."
+
+  - name: "U.S. Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    founded: "1934"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Primary filing source and author of the 2024 control/investor comment letter."
+
+  - name: "Federal Bureau of Investigation"
+    pillar_type: "government"
+    sub_type: "federal_law_enforcement"
+    status: "active"
+    founded: "1908"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "FOIA release 1579784-000 documents 2018-2019 investigative activity; status, scope, and disposition remain partially redacted."
+
+  - name: "Pennsylvania Department of Health"
+    pillar_type: "government"
+    sub_type: "cannabis_licensing_regulator"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Pennsylvania"
+    significance: "Received Curaleaf clinical-registrant applications and awarded CR06 after the released FBI witness interviews."
+
+  - name: "Massachusetts Cannabis Control Commission"
+    pillar_type: "government"
+    sub_type: "cannabis_licensing_regulator"
+    status: "active"
+    founded: "2017"
+    dissolved: null
+    jurisdiction: "Massachusetts"
+    significance: "Reportedly reviewed Tangela/Sputnik control questions in 2023; the underlying file should be obtained."
+
+  - name: "U.S. Department of the Treasury / OFAC"
+    pillar_type: "government"
+    sub_type: "sanctions_authority"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Authoritative source for CBoM designations, blocked-property rules, and applicable general licenses."
+
+  - name: "British Columbia Securities Commission / Canadian Securities Administrators"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Canada / British Columbia"
+    significance: "Primary Canadian disclosure and insider-reporting framework for Curaleaf, SEDAR+, and SEDI."
+
+  - name: "PKF O'Connor Davies LLP"
+    pillar_type: "accounting"
+    sub_type: "former_independent_auditor"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Curaleaf auditor from 2022 through May 2026; audit confirmations and related-party/internal-control treatment are relevant."
+
+  - name: "BDO USA, P.C."
+    pillar_type: "accounting"
+    sub_type: "independent_auditor"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Appointed successor auditor in 2026; future controls and related-party disclosures are a monitoring point."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "curaleaf holdings inc"
+
+source_overrides:
+  "The Newsground":
+    trust: "secondary"
+    note: "The two August 2026 articles are the commission and a lead map, not independent corroboration; verify every load-bearing claim against primary records and include omitted qualifying evidence."
+  "FBI FOIA 1579784-000":
+    trust: "primary_with_scope_limit"
+    note: "Primary evidence of investigative activity, subpoenas, indexing, and witness statements; not proof of a crime, formal target status, or case disposition."
+  "DocumentCloud Tangela/Gociter accounts":
+    trust: "primary_copy"
+    note: "Audited-account copies are strong documentary evidence but should be replaced or corroborated with certified Cyprus registry copies before publication."
+  "Meritservus / DDoSecrets material":
+    trust: "lead_only"
+    note: "Already-published leaked material may generate leads; require provenance, exact file IDs/hashes, and independent primary corroboration."
+  "Article-published document excerpts":
+    trust: "incomplete_primary_copy"
+    note: "Use only for the precise visible text and seek the complete authenticated agreement, confirmation, account, or exhibit before drawing conclusions."

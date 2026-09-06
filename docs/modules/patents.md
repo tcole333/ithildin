@@ -2,6 +2,8 @@
 
 Tools for patent search, inventor tracing, ownership chain analysis, and patent portfolio mapping.
 
+This module also covers trademark-register research for mark ownership and claimed goods and services.
+
 **When to read this module:** When investigating patent holdings, IP transfers, inventor connections, or technology-related financial activity for any entity.
 
 ## Tool Inventory
@@ -9,6 +11,10 @@ Tools for patent search, inventor tracing, ownership chain analysis, and patent 
 | Tool | Source | Auth | Local Data | Rate Limit |
 |------|--------|------|------------|------------|
 | `query_patents.py` | USPTO Open Data Portal (ODP) API | `USPTO_API_KEY` in .env | Cache in `datasets/patents.db` | 60 req/min (peak), 120 off-peak |
+| `query_trademarks.py` | USPTO Trademark Search register | None | None; supports saved JSON responses | ~1 request/sec |
+
+Patents and trademarks are **different USPTO registers with different source tokens**. They are not
+interchangeable: cite patent findings as `patents` and trademark-register findings as `trademarks`.
 
 ## query_patents.py — USPTO Patents
 
@@ -92,3 +98,59 @@ Cache TTL is 30 days. Use `--force-refresh` to re-fetch.
 - `citations` subcommand returns continuity data (parent/child apps), not prior-art citations -- prior-art citations require bulk PatentsView data (not yet available via ODP API)
 - ODP only covers applications filed on or after January 1, 2001
 - Env var: accepts both `USPTO_API_KEY` and `PATENTSVIEW_API_KEY` (legacy)
+
+## query_trademarks.py — USPTO Trademarks
+
+Searches the public USPTO trademark register for exact wordmarks, owner blocks, serial numbers, and
+goods-and-services claims. Unlike the patent ODP API, this source requires no API key and does not use
+the patents cache. Use source token **`trademarks`** when creating a finding.
+
+### Subcommands
+
+```bash
+# Exact-phrase wordmark search (the default)
+uv run python tools/query_trademarks.py mark "HC STANDARD"
+uv run python tools/query_trademarks.py mark "HC STANDARD" --include-pseudo
+
+# Opt in to the trademark site's broad OR-style word search
+uv run python tools/query_trademarks.py mark "HC STANDARD" --loose
+
+# Find marks associated with an owner, including historical owner blocks
+uv run python tools/query_trademarks.py owner "Global Emergency Resources"
+
+# Fetch by serial number or search claimed capabilities
+uv run python tools/query_trademarks.py serial 85877492
+uv run python tools/query_trademarks.py goods "asset tracking" --live-only --class 042
+
+# Parse a saved API response without making a request
+uv run python tools/query_trademarks.py mark "HC STANDARD" --from-file saved-response.json
+```
+
+All subcommands support `--limit`, `--all-pages` (capped at 20 pages), `--live-only` / `--dead-only`,
+`--class`, `--output FILE`, `--json`, and `--from-file PATH`. Live paging is limited to about one
+request per second.
+
+### Investigative Use and Query Behavior
+
+- **Ownership transfers**: The tool preserves and prints every `ownerFullText` entry. A record may
+  contain both `(REGISTRANT)` and `(LAST LISTED OWNER)` lines; retaining both is essential for tracing
+  an assignment or ownership chain.
+- **Owner portfolios**: `owner` phrase-matches the full owner block to answer which marks a company
+  owns or previously owned.
+- **Capability claims**: `goods` phrase-matches goods-and-services text to identify entities claiming
+  a product or service capability.
+- **Null findings**: A valid empty response prints `0 results.` and exits successfully.
+
+The site's default loose query OR-matches words. A bare multi-word search can therefore return tens of
+thousands of irrelevant hits. `query_trademarks.py mark` instead defaults to `match_phrase` on the
+wordmark field; use `--loose` only when that broader matching is intentional.
+
+### Data Source and Known Quirks
+
+- Endpoint: `POST https://tmsearch.uspto.gov/prod-v1-0-0/tmsearch`, with raw Elasticsearch DSL
+- Response records are under `hits.hits[].source`, not Elasticsearch's usual `_source`
+- `id` is the trademark serial number; `registrationId` is the registration number
+- `alive` distinguishes live from dead or abandoned marks
+- `internationalClass` values are formatted like `IC 042`
+- The endpoint may return HTML when a request is blocked; the tool reports that condition rather than
+  trying to parse it as JSON

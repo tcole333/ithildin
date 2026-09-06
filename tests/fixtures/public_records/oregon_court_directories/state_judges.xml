@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetListItemsResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetListItemsResult>
+        <listitems xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema">
+          <rs:data ItemCount="2">
+            <z:row
+              ows_District="string;#11"
+              ows_County="Deschutes"
+              ows_Office_x0020_Phone="541-388-5300"
+              ows_Email="Example.Judge@ojd.state.or.us"
+              ows_Position="1.00000000000000"
+              ows_Term_x0020_Expires="2031-01-06 00:00:00"
+              ows_UniqueId="201;#{11111111-2222-3333-4444-555555555555}"
+              ows_FirstName="Example"
+              ows_Category="Circuit Court"
+              ows_Modified="2026-01-02 09:30:00"
+              ows_State="OR"
+              ows_AddressTitle="Deschutes County Courthouse"
+              ows_Title="Judge"
+              ows_Job_x0020_Title="Circuit Court Presiding Judge"
+              ows_Middle_x0020_Initial="Q"
+              ows_Address1="1100 NW Bond St"
+              ows_ID="201"
+              ows_Created="2025-01-01 10:00:00"
+              ows_Judicial_x0020_District="11.0000000000000"
+              ows_Zip="97703"
+              ows_City="Bend"
+            />
+            <z:row
+              ows_District="string;#20"
+              ows_County="Washington"
+              ows_Position="2.00000000000000"
+              ows_Term_x0020_Expires="2029-01-01 00:00:00"
+              ows_UniqueId="202;#{AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE}"
+              ows_FirstName="—"
+              ows_Category="Circuit Court"
+              ows_Modified="2026-07-21 11:53:59"
+              ows_Title="Vacant"
+              ows_Job_x0020_Title="Circuit Court Judge"
+              ows_ID="202"
+              ows_Created="2018-04-05 11:53:04"
+              ows_Judicial_x0020_District="20.0000000000000"
+            />
+          </rs:data>
+        </listitems>
+      </GetListItemsResult>
+    </GetListItemsResponse>
+  </soap:Body>
+</soap:Envelope>

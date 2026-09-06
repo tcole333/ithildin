@@ -1,0 +1,81 @@
+{
+  "cases": [
+    {
+      "case_id": "OWN-LYONS-01",
+      "subject": "Lyons Group and the venues listed in its portfolio",
+      "question": "Based only on these excerpts, what ownership or affiliation relationship is established between Lyons Group and its listed venues? State whether an institutional private-equity sponsor or equity-control percentage is established.",
+      "source_urls": [
+        "https://lyonsgroup.com/portfolio"
+      ],
+      "page": null,
+      "source_excerpts": [
+        {
+          "source_url": "https://lyonsgroup.com/portfolio",
+          "page": null,
+          "text": "Our Portfolio Our Venues Fine dining, sports bars, clam shacks, nightclubs, and a donut shop. All ours.",
+          "source_artifact_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/additional-local-groups/lyons-portfolio.html",
+          "artifact_sha256": "50ac7fc9164e520102b3f9204c74d6514374207841fafcfa25536fe84ff6137e",
+          "extraction_method": "Visible HTML text; whitespace collapsed. Navigation/header and footer excerpts kept separate."
+        },
+        {
+          "source_url": "https://lyonsgroup.com/portfolio",
+          "page": null,
+          "text": "All venues are independently owned and operated. Lyons Group does not own any of the entities listed on this website.",
+          "source_artifact_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/additional-local-groups/lyons-portfolio.html",
+          "artifact_sha256": "50ac7fc9164e520102b3f9204c74d6514374207841fafcfa25536fe84ff6137e",
+          "extraction_method": "Visible HTML text; whitespace collapsed. Navigation/header and footer excerpts kept separate."
+        }
+      ],
+      "answer": {
+        "relationship_classification": "portfolio_affiliation_not_group_equity_ownership",
+        "lyons_equity_ownership_of_listed_entities": "explicitly_disclaimed_by_the_source",
+        "institutional_private_equity_sponsor": "not_established",
+        "equity_control_percentage": null
+      },
+      "reference": {
+        "supported_conclusion": "The page markets a venue portfolio but explicitly says the venues are independently owned and operated and Lyons Group does not own the listed entities. Portfolio affiliation is supported; Lyons equity ownership is not.",
+        "required_distinctions": [
+          "Marketing phrase All ours does not override the explicit legal-entity ownership disclaimer.",
+          "No named institutional equity sponsor or ownership percentage appears in the excerpts.",
+          "The disclaimer does not prove each venue has no other institutional investor, no common beneficial owners, or only one operating location."
+        ],
+        "unsupported_conclusions": [
+          "Lyons owns all listed licensees.",
+          "Every venue is confirmed non-PE or an independent single-location business.",
+          "Lyons is a documented institutional private-equity sponsor."
+        ]
+      }
+    }
+  ],
+  "skipped_candidates": [
+    {
+      "candidate": "Broadway Hospitality Group / Tavern / Garnett Station",
+      "status": "skipped_primary_artifact_not_retained",
+      "source_urls": [
+        "https://garnettstation.com/partner/tavern-in-the-square/",
+        "https://www.nasdaq.com/press-release/authentic-restaurant-brands-adds-tavern-square-its-latest-fortress-regional-brand"
+      ],
+      "available_artifact_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/sample-a/S03-tavern-ownership.json",
+      "gap": "Available file is analyst structured research with short attributed quotes and conclusions. No retained sponsor HTML or original/republished company release was found within ownership/evidence. Reconstructing a primary evidence passage from the analyst supports field would violate the benchmark requirement."
+    },
+    {
+      "candidate": "Big Night historical fundraising",
+      "status": "skipped_primary_artifact_not_retained",
+      "source_urls": [
+        "https://www.sherin.com/firm-news/congratulations-to-our-client-big-night-entertainment-group-on-development-of-new-boston-concert-venue/"
+      ],
+      "available_artifact_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/additional-local-groups/ownership-local-groups.json",
+      "gap": "Historical counsel fundraising page is represented only by an attributed phrase in analyst JSON. Archive manifest explicitly records HTTP403 and no saved primary page. Retained Big Night operator HTML does not substantiate that financing claim."
+    },
+    {
+      "candidate": "Darden public ownership",
+      "status": "skipped_insufficient_primary_artifact",
+      "source_urls": [
+        "https://www.sec.gov/Archives/edgar/data/940944/000094094426000025/dri-20260531.htm"
+      ],
+      "available_artifact_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/ownership/evidence/root-groups.json",
+      "gap": "Available analyst JSON names public-company classification and quotes restaurant count, but no retained SEC filing/public-listing excerpt was found in ownership/evidence. The restaurant-count quote alone does not establish publicly traded ownership."
+    }
+  ],
+  "method": "Only existing report ownership/evidence artifacts inspected. No new web research, model invocation, or input/reference benchmark files created. Excerpts verified directly against retained primary HTML, not analyst report text."
+}

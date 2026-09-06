@@ -1,0 +1,211 @@
+# Eastport Cinemas / Eastport Shopping Center investigation profile
+
+name: "eastport-cinemas"
+
+primary_subject: "Eastport Cinemas / Eastport Shopping Center redevelopment site, Annapolis, Maryland"
+
+description: >-
+  Property, ownership, and redevelopment investigation into the long-vacant
+  Eastport Cinemas building and the Eastport Shopping Center site identified by
+  Maryland accounts 020600004896700 and 020600004896706. The investigation
+  traces record and beneficial ownership, the 2004 cinema closure, superseded
+  and current redevelopment proposals, and the legal, financial, environmental,
+  physical, and market explanations for delayed construction.
+
+key_persons:
+  - "daniel lederberg"
+  - "dan lederberg"
+  - "alex kopicki"
+  - "charles liff"
+
+known_addresses:
+  "915 chesapeake avenue": "City project address for the former-cinema redevelopment area, Annapolis, MD"
+  "919 chesapeake avenue": "Historical cinema address reported by theater and business directories, Annapolis, MD"
+  "925 chesapeake avenue": "Dry-cleaner portion of MDE environmental-covenant area MD1282, Annapolis, MD"
+  "1023 bay ridge avenue": "Current shopping-center address variant, Annapolis, MD"
+  "7315 wisconsin avenue": "Eastport Plaza LLC owner mail routed care of L & L Investments, Bethesda, MD"
+  "5215 chesapeake avenue": "Unsupported Cinema Treasures/user-supplied legacy alias; no current official Maryland parcel match"
+  "eastport shopping center": "Shopping-center name associated with accounts 020600004896700 and 020600004896706, Annapolis, MD"
+
+threads:
+  - id: 1
+    name: "Parcel, Title, and Beneficial Ownership"
+    description: "Identify the parcel, deed chain, record owner, entity layers, controllers, and ultimate economic beneficiaries."
+    targets:
+      - "eastport cinemas"
+      - "5215 chesapeake avenue"
+      - "eastport shopping center"
+      - "eastport plaza llc"
+      - "eastport plaza limited partnership"
+      - "l & l investments llc"
+      - "020600004896700"
+      - "020600004896706"
+    keywords:
+      - "parcel|deed|grantor|grantee|land records|title|owner|beneficial|member|manager|trust|llc"
+
+  - id: 2
+    name: "Cinema Operations and Closure"
+    description: "Reconstruct the cinema's operators, leases, closure date and reasons, asset disposition, and later attempts to reopen."
+    targets:
+      - "eastport cinemas"
+      - "eastport cinema"
+      - "crown eastport cinemas"
+      - "crown eastport theatres"
+      - "crown 2"
+    keywords:
+      - "cinema|theater|theatre|operator|tenant|lease|closure|closed|reopen|vacant"
+
+  - id: 3
+    name: "Redevelopment Proposals and Planning History"
+    description: "Trace every proposed reuse or redevelopment, its sponsors, approvals, opposition, revisions, withdrawal, denial, or lapse."
+    targets:
+      - "eastport cinemas"
+      - "eastport shopping center"
+      - "lofts at eastport landing"
+      - "solstice partners llc"
+      - "spre eastport llc"
+      - "sdp2018-006"
+      - "pd2016-002"
+    keywords:
+      - "redevelop|development|site plan|concept plan|variance|special exception|rezoning|mixed.use|application|withdrawn|denied|expired"
+
+  - id: 4
+    name: "Land Use, Permits, and Public Constraints"
+    description: "Assess zoning, permits, code enforcement, environmental, access, parking, utility, flood, and municipal or county constraints."
+    targets:
+      - "5215 chesapeake avenue"
+      - "915 chesapeake avenue"
+      - "925 chesapeake avenue"
+      - "md1282"
+      - "sdp2018-006"
+    keywords:
+      - "zoning|permit|inspection|code|violation|environment|stormwater|flood|traffic|parking|utility|access|annapolis|anne arundel"
+
+  - id: 5
+    name: "Financing, Liens, Taxes, and Litigation"
+    description: "Identify mortgages, assignments, liens, tax status, foreclosure risk, bankruptcy, contracts, and disputes affecting the property or owner."
+    targets:
+      - "eastport cinemas"
+      - "eastport shopping center"
+      - "eastport plaza llc"
+      - "eastport plaza limited partnership"
+    keywords:
+      - "mortgage|deed of trust|assignment|lien|ucc|tax|foreclos|bankrupt|lawsuit|litigation|default|receivership"
+
+  - id: 6
+    name: "Market, Community, and Political Context"
+    description: "Evaluate surrounding land values and uses, neighborhood priorities, public statements, lobbying, campaign ties, and economic feasibility claims."
+    targets:
+      - "eastport cinemas"
+      - "eastport shopping center"
+    keywords:
+      - "community|neighborhood|eastport|hearing|testimony|council|alderman|campaign|lobby|market|appraisal|feasibility"
+
+corpus_tools: []
+
+key_dates:
+  - date: "1996-01-25"
+    event: "Charles Liff dies; the public Montgomery County nonprobate-estate index does not identify beneficiaries or successors"
+    category: "legal"
+
+  - date: "2001-11-20"
+    event: "SDAT records a non-arm's-length transfer from Eastport Plaza Limited Partnership to Eastport Plaza LLC under deed 10983/410"
+    category: "financial"
+
+  - date: "2017-07-14"
+    event: "Annapolis Planning Director requires revision of the original 127-unit redevelopment proposal's density methodology"
+    category: "legal"
+
+  - date: "2018-11-26"
+    event: "Annapolis approves SDP2018-006 for a revised 98-unit mixed-use redevelopment"
+    category: "milestone"
+
+  - date: "2020-03-17"
+    event: "Annapolis Board of Appeals vacates and remands the initial adequacy-of-public-facilities certification"
+    category: "legal"
+
+  - date: "2022-05-02"
+    event: "Circuit Court partly reverses and partly affirms the APF ruling, leaving stormwater, police, and auto-transportation issues"
+    category: "legal"
+
+  - date: "2023-06-30"
+    event: "City reissues APF certification with binding police, traffic, and stormwater mitigation"
+    category: "legal"
+
+  - date: "2025-10-14"
+    event: "City grants a one-year extension of SDP2018-006 after evidence of ongoing drawing and permit work"
+    category: "milestone"
+
+  - date: "2026-10-16"
+    event: "Current displayed expiration date for the SDP2018-006 site-design approval"
+    category: "milestone"
+
+seed_pillars:
+  - name: "Maryland Department of Assessments and Taxation"
+    pillar_type: "government"
+    sub_type: "corporate_and_property_registry"
+    status: "active"
+    jurisdiction: "Maryland"
+    significance: "Primary state source for entity registrations, resident agents, and real-property assessment records."
+
+  - name: "Maryland State Archives Land Records (MDLandRec)"
+    pillar_type: "government"
+    sub_type: "land_records"
+    status: "active"
+    jurisdiction: "Maryland"
+    significance: "Primary source for deeds, deeds of trust, assignments, releases, and other recorded instruments in the title chain."
+
+  - name: "Anne Arundel County Office of Planning and Zoning"
+    pillar_type: "government"
+    sub_type: "county_planning_and_zoning"
+    status: "active"
+    jurisdiction: "Anne Arundel County, Maryland"
+    significance: "Potential custodian of zoning, site-development, variance, permit, and enforcement records if the parcel is under county jurisdiction."
+
+  - name: "City of Annapolis Department of Planning and Zoning"
+    pillar_type: "government"
+    sub_type: "municipal_planning_and_zoning"
+    status: "active"
+    jurisdiction: "Annapolis, Maryland"
+    significance: "Potential custodian of municipal planning, zoning, historic, permit, and code records if the parcel is within city jurisdiction."
+
+  - name: "Circuit Court for Anne Arundel County"
+    pillar_type: "legal"
+    sub_type: "state_trial_and_land_records_court"
+    status: "active"
+    jurisdiction: "Anne Arundel County, Maryland"
+    significance: "Court of record for relevant civil disputes and local land-record instruments."
+
+  - name: "Maryland Department of the Environment"
+    pillar_type: "government"
+    sub_type: "environmental_regulator"
+    status: "active"
+    jurisdiction: "Maryland"
+    significance: "Regulator and custodian of environmental covenant MD1282 affecting construction and vapor controls at part of the center."
+
+  - name: "Eastport Plaza LLC"
+    pillar_type: "operations"
+    sub_type: "property_holding_company"
+    status: "active"
+    jurisdiction: "Maryland"
+    significance: "Current record-title owner identified by Maryland and City property records."
+
+  - name: "L & L Investments LLC"
+    pillar_type: "operations"
+    sub_type: "real_estate_management"
+    status: "unknown"
+    jurisdiction: "Maryland"
+    significance: "Care-of and apparent administrative/management affiliate for Eastport Plaza LLC; ownership remains unproven."
+
+  - name: "Solstice Partners LLC"
+    pillar_type: "operations"
+    sub_type: "real_estate_developer"
+    status: "active"
+    jurisdiction: "Maryland"
+    significance: "Co-applicant on the current Lofts at Eastport Landing redevelopment approvals."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "Eastport Cinemas / Eastport Shopping Center redevelopment site, Annapolis, Maryland"
+
+source_overrides: {}

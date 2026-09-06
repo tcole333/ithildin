@@ -28,7 +28,6 @@ CLI:
 
 import argparse
 import sqlite3
-import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -38,7 +37,7 @@ LMSBAND_DB = PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db"
 UNIFIED_DB = PROJECT_ROOT / "datasets" / "unified_epstein.db"
 CORE_DB = PROJECT_ROOT / "investigation.db"
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 SCHEMA = """
 -- ─────────────────────────── meta / provenance ───────────────────────────
@@ -102,6 +101,77 @@ CREATE TABLE IF NOT EXISTS source_crosswalk (
     PRIMARY KEY (source_system_id, source_native_id)
 );
 
+-- Content-addressed local artifacts and format-aware metadata observations.
+-- The source files remain immutable; this is a regenerable inventory of what
+-- each exact byte sequence and local representation exposes.
+CREATE TABLE IF NOT EXISTS artifact_file (
+    artifact_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sha256 TEXT NOT NULL UNIQUE,
+    byte_length INTEGER NOT NULL,
+    media_type TEXT,
+    file_extension TEXT,
+    first_seen_run INTEGER REFERENCES derivation_run(run_id),
+    last_seen_run INTEGER REFERENCES derivation_run(run_id)
+);
+CREATE INDEX IF NOT EXISTS idx_artifact_media_type
+    ON artifact_file(media_type);
+
+-- One artifact can occur at several paths under different filenames. Keeping
+-- the location separate makes identical-file aliases visible without storing
+-- or hashing a second copy.
+CREATE TABLE IF NOT EXISTS artifact_location (
+    location_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    artifact_id INTEGER NOT NULL REFERENCES artifact_file(artifact_id),
+    relative_path TEXT NOT NULL UNIQUE,
+    collection_name TEXT NOT NULL,
+    canonical_ref TEXT,
+    evidence_item_id INTEGER REFERENCES evidence_item(evidence_item_id),
+    filesystem_mtime_ns INTEGER,
+    filesystem_ctime_ns INTEGER,
+    first_seen_run INTEGER REFERENCES derivation_run(run_id),
+    last_seen_run INTEGER REFERENCES derivation_run(run_id)
+);
+CREATE INDEX IF NOT EXISTS idx_artifact_location_artifact
+    ON artifact_location(artifact_id);
+CREATE INDEX IF NOT EXISTS idx_artifact_location_ref
+    ON artifact_location(canonical_ref);
+CREATE INDEX IF NOT EXISTS idx_artifact_location_collection
+    ON artifact_location(collection_name);
+
+-- Every value retains its original spelling plus an optional normalized form.
+-- provenance_layer is deliberately explicit:
+--   source_native       original email/Office/application metadata
+--   production_lineage mailbox sidecar, Bates/CART/device/load-file metadata
+--   release_container   PDF/release wrapper metadata
+--   container_embedded  media-container tags whose origin needs review
+--   acquisition         local path/stat/hash/retrieval observations
+CREATE TABLE IF NOT EXISTS artifact_metadata_observation (
+    observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    artifact_id INTEGER NOT NULL REFERENCES artifact_file(artifact_id),
+    location_id INTEGER NOT NULL REFERENCES artifact_location(location_id),
+    namespace TEXT NOT NULL,
+    field_name TEXT NOT NULL,
+    occurrence INTEGER NOT NULL DEFAULT 0,
+    raw_value TEXT,
+    normalized_value TEXT,
+    value_type TEXT NOT NULL DEFAULT 'text',
+    provenance_layer TEXT NOT NULL CHECK(provenance_layer IN (
+        'source_native', 'production_lineage', 'release_container',
+        'container_embedded', 'acquisition'
+    )),
+    extractor TEXT NOT NULL,
+    extractor_version TEXT,
+    first_seen_run INTEGER REFERENCES derivation_run(run_id),
+    last_seen_run INTEGER REFERENCES derivation_run(run_id),
+    UNIQUE(location_id, namespace, field_name, occurrence)
+);
+CREATE INDEX IF NOT EXISTS idx_artifact_metadata_field
+    ON artifact_metadata_observation(namespace, field_name);
+CREATE INDEX IF NOT EXISTS idx_artifact_metadata_layer
+    ON artifact_metadata_observation(provenance_layer);
+CREATE INDEX IF NOT EXISTS idx_artifact_metadata_normalized
+    ON artifact_metadata_observation(field_name, normalized_value);
+
 -- Links a derived fact back to the core finding it was promoted to / from.
 CREATE TABLE IF NOT EXISTS derived_fact_provenance (
     derived_type TEXT NOT NULL,            -- event | transaction | canonical_person ...
@@ -163,6 +233,10 @@ CREATE TABLE IF NOT EXISTS event_evidence (
 
 -- ─────────────────────────── financial model ─────────────────────────────
 -- Amounts are signed INTEGER minor units (cents); raw string always preserved.
+-- An account is only as identified as the source made it. `key_basis` records
+-- WHICH fields formed account_key, so a query can demand real account identity
+-- ('owner_digits'/'digits'/'source_account_number') and exclude the owner-only
+-- pseudo-accounts, which group one party's statements but are NOT one account.
 CREATE TABLE IF NOT EXISTS financial_account (
     account_id INTEGER PRIMARY KEY AUTOINCREMENT,
     account_key TEXT UNIQUE,               -- normalized (owner|bank|last4)
@@ -172,21 +246,34 @@ CREATE TABLE IF NOT EXISTS financial_account (
     account_type TEXT,
     account_digits TEXT,
     currency TEXT DEFAULT 'USD',
-    resolution_confidence REAL
+    resolution_confidence REAL,
+    key_basis TEXT                         -- owner_digits|digits|owner|source_account_number
 );
 
+-- One statement period for one account. `recon_basis` says how the boundary
+-- balances were obtained; only 'boundary_markers'/'declared_totals'/'fund_totals'
+-- support the closed-ledger identity ending = beginning + charges + payments.
 CREATE TABLE IF NOT EXISTS financial_statement (
     statement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    statement_key TEXT UNIQUE,             -- stable across rebuilds (account|period|doc)
     account_id INTEGER REFERENCES financial_account(account_id),
+    source_system_id INTEGER REFERENCES source_system(source_system_id),
+    canonical_ref TEXT,                    -- denormalized EFTA for convenience
     period_start_day INTEGER,
     period_end_day INTEGER,
     statement_date_day INTEGER,
     beginning_balance_minor INTEGER,
     ending_balance_minor INTEGER,
-    recon_status TEXT,                     -- ok|delta|unknown (from LMSBAND recon)
+    charges_minor INTEGER,                 -- signed sum of outflow lines
+    payments_minor INTEGER,                -- signed sum of inflow lines
+    computed_ending_minor INTEGER,          -- beginning + charges + payments
+    txn_count INTEGER,
+    recon_basis TEXT,                      -- boundary_markers|declared_totals|fund_totals|none
+    recon_status TEXT,                     -- ok|delta|not_computable
     recon_delta_minor INTEGER,
     evidence_item_id INTEGER REFERENCES evidence_item(evidence_item_id)
 );
+CREATE INDEX IF NOT EXISTS idx_stmt_account ON financial_statement(account_id);
 
 CREATE TABLE IF NOT EXISTS merchant (
     merchant_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -213,9 +300,11 @@ CREATE TABLE IF NOT EXISTS financial_transaction (
     cardholder_entity_id INTEGER,
     cardholder_raw TEXT,                   -- raw statement cardholder/account owner (resolution -> cardholder_entity_id later)
     counterparty_entity_id INTEGER,
-    counterparty_raw TEXT,
+    counterparty_raw TEXT,                 -- source field when present, else parsed from raw_description
+    intermediary_bank_raw TEXT,            -- the wire's "Via:" correspondent bank
+    counterparty_parse_rule TEXT,          -- source_field|wire_debit_ben|fao|... (audits the extraction)
     raw_amount TEXT,
-    raw_description TEXT,
+    raw_description TEXT,                  -- the statement line, verbatim; never overwritten
     parse_confidence REAL,
     is_outlier INTEGER NOT NULL DEFAULT 0,
     is_duplicate_of INTEGER REFERENCES financial_transaction(transaction_id),
@@ -227,6 +316,11 @@ CREATE INDEX IF NOT EXISTS idx_txn_counterparty ON financial_transaction(counter
 CREATE INDEX IF NOT EXISTS idx_txn_cardholder ON financial_transaction(cardholder_entity_id);
 CREATE INDEX IF NOT EXISTS idx_txn_merchant ON financial_transaction(merchant_id);
 CREATE INDEX IF NOT EXISTS idx_txn_dedupe ON financial_transaction(dedupe_key);
+-- is_duplicate_of is a self-FK. Without this index, PRAGMA foreign_keys=ON makes
+-- every DELETE scan the whole table looking for children, so the builder's
+-- delete-and-reinsert rebuild degrades to O(n^2) (~10 min at 53K rows). It also
+-- serves the is_duplicate_of IS NULL filter every query_fin command applies.
+CREATE INDEX IF NOT EXISTS idx_txn_duplicate_of ON financial_transaction(is_duplicate_of);
 
 CREATE TABLE IF NOT EXISTS balance_snapshot (
     balance_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -386,6 +480,30 @@ def attach(db, alias, path):
 # here (idempotent — a duplicate-column error is swallowed).
 _COLUMN_MIGRATIONS = [
     ("financial_transaction", "cardholder_raw", "TEXT"),
+    ("financial_transaction", "intermediary_bank_raw", "TEXT"),
+    ("financial_transaction", "counterparty_parse_rule", "TEXT"),
+    ("financial_account", "key_basis", "TEXT"),
+    ("financial_statement", "statement_key", "TEXT"),
+    ("financial_statement", "source_system_id", "INTEGER"),
+    ("financial_statement", "canonical_ref", "TEXT"),
+    ("financial_statement", "charges_minor", "INTEGER"),
+    ("financial_statement", "payments_minor", "INTEGER"),
+    ("financial_statement", "computed_ending_minor", "INTEGER"),
+    ("financial_statement", "txn_count", "INTEGER"),
+    ("financial_statement", "recon_basis", "TEXT"),
+]
+
+# Indexes that can only exist once _COLUMN_MIGRATIONS has added their column.
+_POST_MIGRATION_INDEXES = [
+    # Must NOT be a partial index: SQLite rejects a partial unique index as an
+    # ON CONFLICT target, and the builder upserts statements by statement_key.
+    # (Multiple NULLs remain legal in a SQLite unique index.) The drop clears the
+    # partial version an earlier schema revision may have left behind.
+    "DROP INDEX IF EXISTS idx_stmt_key",
+    "CREATE UNIQUE INDEX IF NOT EXISTS idx_stmt_key_unique "
+    "ON financial_statement(statement_key)",
+    "CREATE INDEX IF NOT EXISTS idx_txn_account ON financial_transaction(account_id)",
+    "CREATE INDEX IF NOT EXISTS idx_txn_statement ON financial_transaction(statement_id)",
 ]
 
 
@@ -396,8 +514,13 @@ def init_schema(db):
             db.execute(f"ALTER TABLE {table} ADD COLUMN {col} {col_def}")
         except sqlite3.OperationalError:
             pass  # column already present
-    db.execute("INSERT OR IGNORE INTO schema_meta(key, value) VALUES ('schema_version', ?)",
-               (str(SCHEMA_VERSION),))
+    for stmt in _POST_MIGRATION_INDEXES:
+        db.execute(stmt)
+    db.execute(
+        "INSERT INTO schema_meta(key, value) VALUES ('schema_version', ?) "
+        "ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+        (str(SCHEMA_VERSION),),
+    )
     for name, cls, grp in SOURCE_SYSTEMS:
         db.execute(
             "INSERT OR IGNORE INTO source_system(name, source_class, default_independence_group) "

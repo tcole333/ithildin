@@ -1,0 +1,214 @@
+{
+  "tools": {
+    "files": 401,
+    "lines": 606989,
+    "largest": [
+      {
+        "path": "tools/public_records_monitor.py",
+        "lines": 26146
+      },
+      {
+        "path": "tools/ingest_property_records.py",
+        "lines": 21879
+      },
+      {
+        "path": "tools/query_property.py",
+        "lines": 17953
+      },
+      {
+        "path": "tools/query_state_courts.py",
+        "lines": 14333
+      },
+      {
+        "path": "tools/ingest_state_court_records.py",
+        "lines": 10925
+      },
+      {
+        "path": "tools/findings_tracker.py",
+        "lines": 4562
+      },
+      {
+        "path": "tools/extract_sec_enforcement_parties.py",
+        "lines": 4411
+      },
+      {
+        "path": "tools/query_washington_taxsifter.py",
+        "lines": 4070
+      }
+    ]
+  },
+  "scripts": {
+    "files": 128,
+    "lines": 48005,
+    "largest": [
+      {
+        "path": "scripts/dispatcher.py",
+        "lines": 3141
+      },
+      {
+        "path": "scripts/build_geo_state_local_political_ledger.py",
+        "lines": 1488
+      },
+      {
+        "path": "scripts/financial_quality.py",
+        "lines": 1471
+      },
+      {
+        "path": "scripts/review_dossier_checks.py",
+        "lines": 1281
+      },
+      {
+        "path": "scripts/ingest_patent_assignments.py",
+        "lines": 1207
+      },
+      {
+        "path": "scripts/extract_ds09_wires.py",
+        "lines": 1048
+      },
+      {
+        "path": "scripts/extract_ds09_financials.py",
+        "lines": 871
+      },
+      {
+        "path": "scripts/compile_epstein_draft_candidates.py",
+        "lines": 832
+      }
+    ]
+  },
+  "pipeline": {
+    "files": 17,
+    "lines": 4777,
+    "largest": [
+      {
+        "path": "pipeline/export_dossiers.py",
+        "lines": 795
+      },
+      {
+        "path": "pipeline/curate_dossier.py",
+        "lines": 571
+      },
+      {
+        "path": "pipeline/story_clustering.py",
+        "lines": 461
+      },
+      {
+        "path": "pipeline/compute_backlinks.py",
+        "lines": 439
+      },
+      {
+        "path": "pipeline/batch_curate.py",
+        "lines": 397
+      },
+      {
+        "path": "pipeline/evidence_refs.py",
+        "lines": 337
+      },
+      {
+        "path": "pipeline/export_financials.py",
+        "lines": 302
+      },
+      {
+        "path": "pipeline/export_network.py",
+        "lines": 291
+      }
+    ]
+  },
+  "queue_system": {
+    "files": 4,
+    "lines": 3840,
+    "largest": [
+      {
+        "path": "queue_system/worker.py",
+        "lines": 2354
+      },
+      {
+        "path": "queue_system/queue.py",
+        "lines": 1137
+      },
+      {
+        "path": "queue_system/triggers.py",
+        "lines": 346
+      },
+      {
+        "path": "queue_system/__init__.py",
+        "lines": 3
+      }
+    ]
+  },
+  "tests": {
+    "files": 536,
+    "lines": 220059,
+    "largest": [
+      {
+        "path": "tests/test_public_records_monitor.py",
+        "lines": 6976
+      },
+      {
+        "path": "tests/test_ingest_property_records.py",
+        "lines": 5520
+      },
+      {
+        "path": "tests/test_query_property.py",
+        "lines": 4532
+      },
+      {
+        "path": "tests/test_seed_public_records_catalog.py",
+        "lines": 4319
+      },
+      {
+        "path": "tests/test_query_state_courts.py",
+        "lines": 3324
+      },
+      {
+        "path": "tests/test_public_records_search_plan.py",
+        "lines": 2037
+      },
+      {
+        "path": "tests/test_extract_sec_enforcement_parties.py",
+        "lines": 1955
+      },
+      {
+        "path": "tests/test_ingest_state_court_records.py",
+        "lines": 1745
+      }
+    ]
+  },
+  "web/src": {
+    "files": 44,
+    "lines": 15414,
+    "largest": [
+      {
+        "path": "web/src/lib/citations.ts",
+        "lines": 3206
+      },
+      {
+        "path": "web/src/components/CorporateStructureV2.tsx",
+        "lines": 1085
+      },
+      {
+        "path": "web/src/components/CorporateStructure.tsx",
+        "lines": 1053
+      },
+      {
+        "path": "web/src/components/FinancialWorkbench.tsx",
+        "lines": 939
+      },
+      {
+        "path": "web/src/components/TimelineChart.tsx",
+        "lines": 929
+      },
+      {
+        "path": "web/src/components/NetworkGraph.tsx",
+        "lines": 810
+      },
+      {
+        "path": "web/src/components/EgoNetworkV2.tsx",
+        "lines": 749
+      },
+      {
+        "path": "web/src/components/EgoNetwork.tsx",
+        "lines": 749
+      }
+    ]
+  }
+}

@@ -52,18 +52,29 @@ uv run python scripts/review_dossier_checks.py fix <slug>
 
 ### Phase 2: LLM Editorial Review
 
-Skip this phase if `--fix-only`. For each dossier that didn't get a clean PASS:
+With `--fix-only`, report that semantic review remains outstanding. Otherwise
+review every selected dossier, including automated PASS results. Skip a semantic
+re-review only when `validate-receipts --slug <slug>` passes for the exact current
+content version. Automated PASS establishes structural checks, not claim support.
+
+```bash
+uv run python scripts/review_dossier_checks.py validate-receipts \
+  --slug <slug> --output "$WORKDIR/prior-review-<slug>.json"
+```
+
+A missing/stale receipt means perform the review; do not convert an old database
+verdict into a new receipt.
 
 Read the dossier JSON:
 ```bash
 Read: content/dossiers/<slug>.json
 ```
 
-Read the automated check results from Phase 1.
+Read the automated check results from Phase 1 and copy their `content_sha256` into the semantic result. Review that exact dossier version and its cited evidence; changes invalidate the review.
 
 **Review checklist** (what automated checks cannot evaluate):
 
-1. **Claim-evidence alignment**: For inference/synthesis findings, is the prose properly attributed? ("Analysis indicates..." not stated as fact). Check `claim_type` on each finding referenced.
+1. **Claim-evidence alignment**: Read the actual finding and its source evidence for every material assertion. A valid or verified citation ID may still be unrelated to the prose. Preserve attribution for allegations and distinguish fact, inference, and synthesis; flag unsupported assertions as BLOCKING.
 
 2. **Tone**: Encyclopedic and neutral throughout? Any editorializing or loaded language beyond the banned phrase list? Watch for:
    - Implying guilt or wrongdoing without evidence
@@ -95,6 +106,10 @@ Write LLM findings to `$WORKDIR/review-<slug>.json`:
 ```json
 {
   "slug": "<slug>",
+  "content_sha256": "<hash from reviewed Phase 1 output>",
+  "reviewer": "<reviewing agent or human>",
+  "reviewed_at": "<actual ISO timestamp with timezone>",
+  "verdict": "NEEDS_FIXES",
   "llm_issues": [
     {
       "severity": "SHOULD_FIX",
@@ -106,7 +121,10 @@ Write LLM findings to `$WORKDIR/review-<slug>.json`:
 }
 ```
 
-Categorize each issue as `BLOCKING`, `SHOULD_FIX`, or `SUGGESTION`.
+Categorize each issue as `BLOCKING`, `SHOULD_FIX`, or `SUGGESTION`. Verdict is
+`FAIL` with any blocking issue, `NEEDS_FIXES` with any should-fix issue, otherwise
+`PASS`; even a clean result explicitly includes `llm_issues: []`. Only the actual
+reviewer supplies this judgment. A missing field is not an implicit pass.
 
 #### Batch parallelism
 
@@ -117,7 +135,21 @@ Agent tool: subagent_type=general-purpose
 Prompt: "Review dossier <slug> for editorial quality. Read content/dossiers/<slug>.json and the automated check results at $WORKDIR/automated-<slug>.json. Apply the LLM review checklist [paste checklist]. Write results to $WORKDIR/review-<slug>.json. Do NOT modify the dossier — review only."
 ```
 
-Read each sub-agent's output file after completion.
+#### Persist completed reviews (single target or batch)
+
+Read each reviewer's completed output. For each newly completed semantic review,
+the parent serially persists the supplied reviews and receipts after checking
+each reviewed hash. Reusing an existing valid receipt needs no new ingestion:
+
+```bash
+uv run python scripts/review_dossier_checks.py ingest-llm --dir "$WORKDIR"
+uv run python scripts/review_dossier_checks.py receipt \
+  --review-file "$WORKDIR/review-<slug>.json"
+```
+
+Receipts live in `content/dossier-review-receipts.json`; add one only for a
+completed actual review, including its issues. The release validator rechecks
+current bytes and automated blockers without using the private database.
 
 ### Phase 3: Compile Report
 
@@ -168,7 +200,7 @@ After fixing, re-run automated checks to confirm improvement:
 uv run python scripts/review_dossier_checks.py check <slug> --output $WORKDIR/post-fix-<slug>.json
 ```
 
-Print before/after comparison for each fixed dossier.
+Print before/after comparison for each fixed dossier. Content changes invalidate previous semantic receipts; repeat semantic review on the changed version before claiming publication readiness.
 
 ## Automated Check Reference
 
@@ -179,7 +211,7 @@ These checks run deterministically in `scripts/review_dossier_checks.py`:
 | 1 | **Cross-link completeness** — names in text that have dossiers but aren't linked | SHOULD_FIX | Yes |
 | 2 | **Banned phrase scan** — regex against editorial standards list | BLOCKING (titles/system_role), SHOULD_FIX (body) | Partial |
 | 3 | **Structure validation** — has lead, has sections, no `<ul>`/`<ol>`, valid viz values | BLOCKING if missing lead/sections | No |
-| 4 | **Citation coverage** — % of sentences with inline citations | BLOCKING if <50%, SHOULD_FIX if <80% | No |
+| 4 | **Citation coverage** — heuristic inline-ID coverage | SHOULD_FIX if <50%, SUGGESTION if <80%; not proof of support | No |
 | 5 | **Claim type compliance** — inference/synthesis cited without attribution language | SHOULD_FIX | No |
 | 6 | **Outbound link count** — flag if <5 cross-links | SUGGESTION | No |
 
@@ -195,11 +227,11 @@ uv run python scripts/review_dossier_checks.py status
 uv run python scripts/review_dossier_checks.py gate
 ```
 
-The gate blocks publication if any curated dossier has a FAIL verdict or has never been reviewed.
+The gate requires an exact-content semantic PASS receipt for every curated dossier and reruns static automated blockers. Missing, unbound, or stale reviews are outstanding review work; they do not acquire a PASS from an automated result or historical database row.
 
 ## Context Management
 
 - Dossier JSONs are typically 50-200KB — read in full for review
 - Use `--output` on all check commands to keep results in WORKDIR
 - For batch LLM review, sub-agents read files from WORKDIR — don't pass large content through TaskOutput
-- Don't dump findings into context — the automated checks already analyze them
+- Read cited findings and underlying source evidence selectively for claim support; automated citation checks cannot establish that support

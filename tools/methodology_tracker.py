@@ -23,7 +23,6 @@ Usage:
 """
 
 import argparse
-import json
 import re
 import sys
 from collections import Counter, defaultdict
@@ -327,6 +326,39 @@ def detect_patterns(min_count=3):
 # ── Report Ingestion ────────────────────────────────────────
 
 
+def _referenced_papercut_ids(description):
+    """Return observation IDs cited after a papercut marker."""
+    marker = re.search(r"\bpapercuts?\b", description, re.IGNORECASE)
+    if not marker:
+        return []
+    reference_text = description[marker.end(): marker.end() + 160]
+    return [int(value) for value in re.findall(r"#(\d+)", reference_text)]
+
+
+def _canonical_papercut_id(obs_id):
+    """Follow duplicate links to a canonical observation suitable for linking."""
+    seen = set()
+    while obs_id not in seen:
+        seen.add(obs_id)
+        observation = get_observation(obs_id)
+        if not observation:
+            return None
+        if observation["status"] != "duplicate":
+            return (
+                obs_id
+                if observation["status"] in {"open", "acknowledged", "addressed"}
+                else None
+            )
+        match = re.search(
+            r"Duplicate of observation #(\d+)",
+            observation.get("resolution") or "",
+        )
+        if not match:
+            return None
+        obs_id = int(match.group(1))
+    return None
+
+
 def ingest_report(filepath, skill=None, lead_id=None):
     """Parse a structured handoff report and bulk-insert Learnings as observations.
 
@@ -348,9 +380,21 @@ def ingest_report(filepath, skill=None, lead_id=None):
     report_skill = skill or fm.get("skill")
     report_lead_id = lead_id
 
-    # Parse Learnings section
-    learn_match = re.search(r'^## Learnings(?:\s*/[^\n]*)?\s*\n(.*?)(?=^## |\Z)', text,
-                            re.MULTILINE | re.DOTALL)
+    # Parse common handoff headings used for operational observations. Reports
+    # accumulated several natural variants before the importer documented one
+    # exact spelling, so treat them as one structured section.
+    learn_match = re.search(
+        r"^##\s+(?:"
+        r"(?:Methodology\s+|Methodological\s+)?Learnings(?:\s*/[^\n]*)?"
+        r"|Methodology\s*/\s*Papercuts?"
+        r"|Methodology\s+Observations?"
+        r"|Papercuts?"
+        r"|Caveats(?:\s*/\s*Papercuts?)?"
+        r")\s*\n"
+        r"(.*?)(?=^## |\Z)",
+        text,
+        re.MULTILINE | re.DOTALL | re.IGNORECASE,
+    )
     if not learn_match:
         return []
 
@@ -359,10 +403,24 @@ def ingest_report(filepath, skill=None, lead_id=None):
         r'^-\s+(?:\[([^\]]+)\]|\*\*([^*]+?):\*\*|([^:\n]+):)\s*(.+)$',
         re.MULTILINE,
     )
-    for match in bullet_pattern.finditer(learn_match.group(1)):
-        label = next(value for value in match.groups()[:3] if value).strip()
-        description = match.group(4).strip()
-        category = CATEGORY_MAP.get(label, "methodology")
+    for line in learn_match.group(1).splitlines():
+        if not re.match(r"^-\s+\S", line):
+            continue
+        match = bullet_pattern.match(line)
+        if match:
+            label = next(value for value in match.groups()[:3] if value).strip()
+            description = match.group(4).strip()
+            category = next(
+                (
+                    value
+                    for key, value in CATEGORY_MAP.items()
+                    if key.casefold() == label.casefold()
+                ),
+                "methodology",
+            )
+        else:
+            description = re.sub(r"^-\s+", "", line).strip()
+            category = "methodology"
 
         obs_id = add_observation(
             category=category,
@@ -372,6 +430,18 @@ def ingest_report(filepath, skill=None, lead_id=None):
             agent=agent,
             target=target,
         )
+        for referenced_id in _referenced_papercut_ids(description):
+            canonical_id = _canonical_papercut_id(referenced_id)
+            if canonical_id is not None:
+                canonical = get_observation(canonical_id)
+                if (
+                    canonical is not None
+                    and canonical.get("category") is not None
+                    and canonical["category"] != category
+                ):
+                    continue
+                mark_duplicate(obs_id, canonical_id)
+                break
         inserted.append(obs_id)
 
     return inserted

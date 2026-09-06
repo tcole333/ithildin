@@ -1,0 +1,75 @@
+{
+  "observed_at": "2026-07-31",
+  "parcel_level_aggregate_query": {
+    "group_by": [
+      "PARID",
+      "TAXYR",
+      "F_EXCODE",
+      "F_EXEMPT_TYPE",
+      "SORT_ORDER"
+    ],
+    "count_field": "OBJECTID",
+    "order_by": "row_count DESC"
+  },
+  "largest_parcel_level_group": {
+    "row_count": 324,
+    "PARID": "3801190032",
+    "TAXYR": 2025,
+    "F_EXCODE": "12366",
+    "F_EXEMPT_TYPE": "MTA",
+    "SORT_ORDER": 1
+  },
+  "refined_child_aggregate_query": {
+    "group_by": [
+      "PARID_ORG",
+      "PARID",
+      "TAXYR",
+      "F_EXCODE",
+      "F_EXEMPT_TYPE",
+      "SORT_ORDER"
+    ],
+    "count_field": "OBJECTID",
+    "order_by": "row_count DESC"
+  },
+  "largest_refined_child_group": {
+    "row_count": 1,
+    "PARID_ORG": "1000010010",
+    "PARID": "1000010010",
+    "TAXYR": 2021,
+    "F_EXCODE": " ",
+    "F_EXEMPT_TYPE": " ",
+    "SORT_ORDER": 0
+  },
+  "sample_features": [
+    {
+      "attributes": {
+        "OBJECTID": 9673,
+        "PARID_ORG": "3801190032 E219",
+        "PARID": "3801190032",
+        "TAXYR": 2025,
+        "F_TAXYR": " ",
+        "F_TAXABLE_AV": " ",
+        "F_EXEMPT_AV": "$900",
+        "F_EXCODE": "12366",
+        "F_EXEMPT_TYPE": "MTA",
+        "F_TAXABLE_BILL_AV": " ",
+        "SORT_ORDER": 1
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 22606,
+        "PARID_ORG": "3801190032 E147",
+        "PARID": "3801190032",
+        "TAXYR": 2025,
+        "F_TAXYR": " ",
+        "F_TAXABLE_AV": " ",
+        "F_EXEMPT_AV": "$900",
+        "F_EXCODE": "12366",
+        "F_EXEMPT_TYPE": "MTA",
+        "F_TAXABLE_BILL_AV": " ",
+        "SORT_ORDER": 1
+      }
+    }
+  ]
+}

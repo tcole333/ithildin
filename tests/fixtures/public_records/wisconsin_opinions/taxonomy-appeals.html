@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/other/appeals/caopin.jsp" method="get" id="SearchForm">
+      <input type="text" maxlength="12" name="docket_number">
+      <select name="trial_county">
+        <option value="">not selected</option>
+        <option value="13">Dane</option>
+        <option value="40">Milwaukee</option>
+      </select>
+      <select name="ca_district">
+        <option value="">not selected</option>
+        <option value="1">District 1</option>
+        <option value="4">District 4</option>
+      </select>
+      <select name="disp_code">
+        <option value="">not selected</option>
+        <option value="AFFD">Affirmed</option>
+        <option value="REVS">Reversed</option>
+      </select>
+      <input type="submit" name="Submit" value="Search">
+    </form>
+  </body>
+</html>

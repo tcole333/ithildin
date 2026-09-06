@@ -63,3 +63,36 @@ def test_write_output_distinguishes_unavailable_source(tmp_path, capsys):
     assert capsys.readouterr().out == (
         f"results unavailable (remote source) saved to {output_path}\n"
     )
+
+
+def test_write_output_accepts_explicit_count_for_mapping_response(tmp_path, capsys):
+    output_path = tmp_path / "dns.json"
+    payload = {"a.example": "192.0.2.1", "b.example": None}
+
+    assert write_output(
+        payload,
+        Namespace(output=str(output_path)),
+        summary="DNS mapping",
+        result_count=len(payload),
+    )
+
+    assert capsys.readouterr().out == (
+        f"2 results (DNS mapping) saved to {output_path}\n"
+    )
+    assert json.loads(output_path.read_text()) == payload
+
+
+def test_write_output_prints_raw_json_when_requested(capsys):
+    payload = [{"id": 1}]
+
+    assert write_output(payload, Namespace(output=None, json_out=True))
+
+    assert json.loads(capsys.readouterr().out) == payload
+
+
+def test_write_output_creates_missing_parent_directories(tmp_path):
+    output_path = tmp_path / "nested" / "results" / "data.json"
+
+    assert write_output([{"id": 1}], Namespace(output=str(output_path)))
+
+    assert json.loads(output_path.read_text()) == [{"id": 1}]

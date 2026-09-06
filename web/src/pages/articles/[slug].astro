@@ -1,32 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { readFileSync, existsSync, readdirSync } from 'fs';
-import { resolve, basename } from 'path';
+import { readFileSync, existsSync } from 'fs';
+import { loadArticles, contentRoot } from '../../lib/articleContent';
+import { resolve } from 'path';
 import { loadArticleFindingCatalog, loadGlobalFindingCatalog, mergeFindingCatalogs } from '../../lib/findingCatalog';
 import { processArticleEvidenceContent, safeJsonForScript } from '../../lib/contentEvidencePipeline';
 import { extractCitedFindingIds, loadFindingDetails } from '../../lib/findingDetail';
 
 export function getStaticPaths() {
-  const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
-  if (!existsSync(articlesDir)) return [];
-
-  const files = readdirSync(articlesDir).filter(f => f.endsWith('.mdx'));
-  return files.map(f => ({
-    params: { slug: basename(f, '.mdx') },
-  }));
+  return loadArticles().map(article => ({ params: { slug: article.slug }, props: { article } }));
 }
 
 const { slug } = Astro.params;
-const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
-const articlePath = resolve(articlesDir, `${slug}.mdx`);
+const meta = Astro.props.article;
+const rawContent = meta.content;
+const wordCount = meta.wordCount;
 
-if (!existsSync(articlePath)) {
-  return Astro.redirect('/articles');
-}
-
-const raw = readFileSync(articlePath, 'utf-8');
-
-const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+const backlinksPath = resolve(contentRoot(), 'backlinks.json');
 let linkedDossiers: any[] = [];
 let relatedArticles: any[] = [];
 if (existsSync(backlinksPath)) {
@@ -35,19 +25,6 @@ if (existsSync(backlinksPath)) {
   relatedArticles = backlinks.article_to_article?.[slug] || [];
 }
 
-const frontmatterMatch = raw.match(/^---\n([\s\S]*?)\n---/);
-const meta: Record<string, string> = {};
-if (frontmatterMatch) {
-  for (const line of frontmatterMatch[1].split('\n')) {
-    const [key, ...valueParts] = line.split(':');
-    if (key && valueParts.length > 0) {
-      meta[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
-    }
-  }
-}
-
-const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
-const wordCount = rawContent.split(/\s+/).length;
 const findingCatalog = mergeFindingCatalogs(
   loadGlobalFindingCatalog({ includeDbFallback: true }),
   loadArticleFindingCatalog(slug!),
@@ -79,7 +56,7 @@ const supportSummary = supportMetrics.total_sentences > 0
         <div class="flex flex-wrap gap-4 text-xs text-mithril font-mono">
           <span>{Math.round(wordCount / 1000)}K words</span>
           <span>{Math.ceil(wordCount / 250)} min read</span>
-          {meta.targets && <span>Targets: {meta.targets}</span>}
+          {meta.targets.length > 0 && <span>Targets: {meta.targets.join(', ')}</span>}
         </div>
       </div>
     </section>

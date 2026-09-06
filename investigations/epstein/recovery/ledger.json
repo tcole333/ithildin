@@ -1,0 +1,340 @@
+{
+  "schema_version": "epstein-recovery-ledger/1.0",
+  "as_of_utc": "2026-07-30T15:42:21Z",
+  "scope": "Public recovery status and source-byte availability; no case-fact extraction.",
+  "rules": {
+    "complete_public": "A usable recovery artifact or reproducible extraction is public now.",
+    "analyzed_irrecoverable": "The finite source was byte-analyzed and the remaining bytes are absent, truncated, overwritten, or zero-filled.",
+    "active": "No usable public completion was found, exact source bytes are available, and the target is suitable for evidence-preserving recovery.",
+    "safety": "Unknown image/video payloads remain metadata-only and quarantined until classified."
+  },
+  "records": [
+    {
+      "efta_id": "EFTA00400459",
+      "status": "complete_public",
+      "queue_decision": "exclude",
+      "failure_mode": "OCR-damaged printed Base64 attachment",
+      "public_result": "Recovered two-page PDF, checksums, technical report, and reproducibility code are public.",
+      "sources": [
+        "https://archive.org/details/dbc-12-one-page-invite-with-reply",
+        "https://neosmart.net/blog/efta00400459-has-been-cracked-dbc12-pdf-liberated/",
+        "https://github.com/mqudsi/epstein-ocr"
+      ]
+    },
+    {
+      "efta_id": "EFTA00593870",
+      "status": "analyzed_irrecoverable",
+      "queue_decision": "exclude",
+      "failure_mode": "Null-padded PDF shell",
+      "public_result": "Page-one text is public; pages 2-4 were reported zero-filled.",
+      "remaining_route": "Search only for a separately preserved duplicate.",
+      "sources": [
+        "https://epstein-data.com/reports/recovered_corrupted_pdfs/README.html",
+        "https://github.com/rhowardstone/Epstein-research-data/tree/main/recovered_corrupted_pdfs/EFTA00593870"
+      ]
+    },
+    {
+      "efta_id": "EFTA00597207",
+      "status": "complete_public",
+      "queue_decision": "exclude",
+      "failure_mode": "Mixed PDF/plist/photo sectors with overwritten cross-reference data",
+      "public_result": "The contacts and embedded photo are public, and the full ten-page aircraft presentation survives as clean official duplicate EFTA01734963.",
+      "resolution_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA00597207-2026-07-30.md",
+        "likely_original_filename": "A6-DFR_BBJ_Specs_-_May_2016-rev3.pdf",
+        "partial_reconstruction": {
+          "status": "validated_but_superseded_by_intact_duplicate",
+          "page": 1,
+          "recovered_title": "A6-DFR Boeing Business Jet",
+          "recovered_literal_text": "May 2016",
+          "pdf_sha256": "358795e7a8016670746f4793f9b23d7027e55ba4d4a455e6f723f5ea25826043"
+        },
+        "intact_duplicate": {
+          "efta_id": "EFTA01734963",
+          "official_url": "https://www.justice.gov/epstein/files/DataSet%2010/EFTA01734963.pdf",
+          "bytes": 515841,
+          "pages": 10,
+          "sha256": "dbef8ef87245b46f51cbc9dd0c8c3570627010f1357352b4f166229abfae3301",
+          "qpdf_check": "clean"
+        },
+        "ancillary_uuidtext": {
+          "status": "recovered_separate_disk_fragment",
+          "source_byte_range": [
+            618496,
+            618963
+          ],
+          "bytes": 467,
+          "sha256": "44e58d3afc6abf1441e09662ccb45264fbad2d05238f4e9d0f17c4a719249ce2",
+          "warning": "Static Apple ScreenSaverEngine UUIDText strings, not trace events and not PDF content."
+        }
+      },
+      "sources": [
+        "https://epstein-data.com/reports/recovered_corrupted_pdfs/README.html",
+        "https://github.com/rhowardstone/Epstein-research-data/tree/main/recovered_corrupted_pdfs/EFTA00597207",
+        "https://www.justice.gov/epstein/files/DataSet%2010/EFTA01734963.pdf"
+      ]
+    },
+    {
+      "efta_id": "EFTA00645624",
+      "status": "complete_public",
+      "queue_decision": "exclude",
+      "failure_mode": "Missing PDF cross-reference/trailer around a CCITT fax stream",
+      "public_result": "The full decoded page image and OCR are public.",
+      "sources": [
+        "https://epstein-data.com/reports/recovered_corrupted_pdfs/README.html",
+        "https://github.com/rhowardstone/Epstein-research-data/tree/main/recovered_corrupted_pdfs/EFTA00645624"
+      ]
+    },
+    {
+      "efta_id": "EFTA01175426",
+      "status": "analyzed_irrecoverable",
+      "queue_decision": "exclude",
+      "failure_mode": "Physically truncated linearized fax PDF",
+      "public_result": "Ten recovered page images and combined OCR are public; the absent tail prevents recovery of the missing page from this copy.",
+      "remaining_route": "Search only for an untruncated duplicate.",
+      "sources": [
+        "https://epstein-data.com/reports/recovered_corrupted_pdfs/README.html",
+        "https://github.com/rhowardstone/Epstein-research-data/tree/main/recovered_corrupted_pdfs/EFTA01175426"
+      ]
+    },
+    {
+      "efta_id": "EFTA01220934",
+      "status": "analyzed_irrecoverable",
+      "queue_decision": "exclude",
+      "failure_mode": "Finite raw-disk fragment mislabeled as PDF",
+      "public_result": "Fourteen carved artifacts are public; continuation sectors for incomplete fragments are absent.",
+      "sources": [
+        "https://epstein-data.com/reports/recovered_corrupted_pdfs/README.html",
+        "https://github.com/rhowardstone/Epstein-research-data/tree/main/recovered_corrupted_pdfs/EFTA01220934"
+      ]
+    },
+    {
+      "efta_id": "EFTA00147557",
+      "status": "analyzed_irrecoverable",
+      "status_scope": "The top-level status follows the only unrecovered component, Epstein addition.xml; LTL Policy.pdf is separately complete_public.",
+      "queue_decision": "exclude",
+      "failure_mode": "Valid 36-page PDF containing one exact previously public InfoPath/PDF recovery and one physically truncated InfoPath/XML payload.",
+      "public_result": "The exact 14,384-byte LTL Policy.pdf body was already public and is now independently source-matched, strictly validated, rendered, and preserved locally. Epstein addition.xml is not recoverable from this released print because at least 2,696,214 of its declared 2,772,789 body bytes are physically absent.",
+      "target_scope": "Retain the validated previously public LTL Policy.pdf artifact. Pursue Epstein addition.xml only through an intact duplicate or original export.",
+      "attempt_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA00147557-2026-07-30.md",
+        "large_attachment": {
+          "filename": "Epstein addition.xml",
+          "status": "physically_truncated",
+          "declared_payload_bytes": 2772789,
+          "maximum_visible_payload_bytes": 76575,
+          "maximum_visible_fraction": 0.0276165983,
+          "minimum_physically_absent_bytes": 2696214,
+          "next_route": "Find an untruncated duplicate or the original XML; do not synthesize the absent bytes."
+        },
+        "small_attachment": {
+          "filename": "LTL Policy.pdf",
+          "status": "complete_pixels_but_ocr_ambiguous",
+          "declared_payload_bytes": 14384,
+          "base64_positions": 19252,
+          "cells_without_direct_ocr_vote": 4,
+          "cells_with_any_engine_disagreement": 1702,
+          "strict_result": "InfoPath envelope and length validate, but the candidate body lacks a valid PDF signature and fails qpdf.",
+          "next_route": "Continue calibrated glyph/template recovery against the complete printed grid; reject every candidate that fails PDF signature and qpdf validation."
+        },
+        "artifact_written": false
+      },
+      "resolution_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA00147557-2026-07-30.md",
+        "overall_status": "resolved_mixed_components",
+        "history_note": "The attempt object above records the earlier failed OCR candidate. The exact previously public PDF body supersedes only that small-attachment result; the large-attachment truncation measurement remains current.",
+        "small_attachment": {
+          "filename": "LTL Policy.pdf",
+          "status": "complete_public",
+          "provenance_status": "validated_previously_public_recovery",
+          "novel_recovery_claimed": false,
+          "bytes": 14384,
+          "sha256": "e6bbf18e58813276e15a11361da70b80b82c917b69948acd76f3d28f52ae2591",
+          "pages": 2,
+          "pdf_version": "1.5",
+          "qpdf_status": "warning_only_operation_succeeded",
+          "pypdf_strict_open": true,
+          "all_pages_rendered_and_visually_inspected": true,
+          "body_bytes_synthesized": false,
+          "artifact": "output/pdf/epstein-recovery/EFTA00147557/recovered-e6bbf18e58813276.pdf",
+          "provenance": "output/pdf/epstein-recovery/EFTA00147557/public-recovery-provenance.json",
+          "contact_sheet": "output/pdf/epstein-recovery/EFTA00147557/rendered/LTL-Policy-contact-sheet.png",
+          "public_recovery_urls": [
+            "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/o6wvhco/",
+            "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/o6wvixn/"
+          ]
+        },
+        "large_attachment": {
+          "filename": "Epstein addition.xml",
+          "status": "analyzed_irrecoverable",
+          "declared_payload_bytes": 2772789,
+          "maximum_visible_payload_bytes": 76575,
+          "minimum_physically_absent_bytes": 2696214,
+          "minimum_physically_absent_fraction": 0.9723834017,
+          "artifact_written": false,
+          "bytes_synthesized": false,
+          "duplicate_search_result": "No intact duplicate, complete Base64, checksum, or download candidate was located in the bounded local/public search as of 2026-07-30.",
+          "remaining_route": "Find an untruncated copy or original XML/export and validate it against pinned provenance or a trustworthy checksum."
+        }
+      },
+      "official_url": "https://www.justice.gov/epstein/files/DataSet%209/EFTA00147557.pdf",
+      "official_sha256": "88f9a0740d4a8b04b966fa8ce7d423bbc4e3bd495a60f7cbc89df14b8cc7ee64",
+      "wayback_payload_sha1": "645ffe984b5d82fb61a39e6f76aab9ad17af3468",
+      "wayback_url": "https://web.archive.org/web/20260131112527id_/https://www.justice.gov/epstein/files/DataSet%209/EFTA00147557.pdf",
+      "sources": [
+        "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/",
+        "https://learn.microsoft.com/en-us/previous-versions/office/troubleshoot/office-developer/encode-and-decode-attachment-using-visual-c-in-infopath-2010",
+        "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/o6wvhco/",
+        "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/o6wvixn/",
+        "https://wichitaks.granicus.com/MetaViewer.php?clip_id=3572&meta_id=181044&view_id=2"
+      ]
+    },
+    {
+      "efta_id": "EFTA02340539",
+      "status": "analyzed_irrecoverable",
+      "queue_decision": "exclude",
+      "failure_mode": "Valid 237-page PDF containing an OCR-damaged printed Base64 JPEG/Exif payload whose tail is physically replaced by unrelated XML.",
+      "public_result": "No exact intact duplicate or independently verified complete recovery was located. The apparent JPEG Base64 ends midstream on page 10 and cannot support a byte-faithful reconstruction.",
+      "safety": "The incomplete JPEG payload remained quarantined and was never opened, rendered, or visually inspected; only source pages and header metadata were examined.",
+      "official_url": "https://www.justice.gov/epstein/files/DataSet%2011/EFTA02340539.pdf",
+      "official_bytes": 23049733,
+      "wayback_payload_sha1": "b8732c0e4ff518086055f9c685a49cdfff3d0c1a",
+      "wayback_url": "https://web.archive.org/web/20260131062922id_/https://www.justice.gov/epstein/files/DataSet%2011/EFTA02340539.pdf",
+      "pinned_pdf_sha256": "76547ad38890ce93c67a277e01288b572597a2106e607e55ac1957137b1d77dc",
+      "resolution_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA02340539-2026-07-30.md",
+        "outer_pdf_pages": 237,
+        "qpdf_check": "clean",
+        "payload_classification": "JPEG/Exif prefix",
+        "visible_full_payload_pages": "1-9",
+        "visible_tail_page": 10,
+        "tail_page_base64_prefix_glyphs": 247,
+        "physical_boundary": "Base64 stops midstream near the top of page 10 and is replaced by unrelated SOAP/XML.",
+        "maximum_decoded_prefix_bytes_from_visible_positions_approx": 24230,
+        "embedded_base64_glyphs_pages_1_to_9": 31983,
+        "glyphs_supported_by_both_ocr_passes": 26011,
+        "glyphs_unsupported_or_disputed": 5972,
+        "header_metadata": {
+          "device": "Apple iPhone 5s",
+          "software": "9.0.1",
+          "orientation": "upper-right",
+          "datetime": "2015:10:02 09:03:44"
+        },
+        "artifact_written": false,
+        "bytes_synthesized": false,
+        "status_artifact": "output/pdf/epstein-recovery/EFTA02340539/recovery-status.md",
+        "technical_audit": "output/pdf/epstein-recovery/EFTA02340539/technical-audit.json"
+      },
+      "remaining_route": "Locate an intact duplicate or original photo/export and validate it against pinned provenance or a trustworthy checksum.",
+      "sources": [
+        "https://www.reddit.com/r/Epstein/comments/1qu2k4k/base64_encoded_images/",
+        "https://web.archive.org/web/20260131062922id_/https://www.justice.gov/epstein/files/DataSet%2011/EFTA02340539.pdf"
+      ]
+    },
+    {
+      "efta_id": "EFTA02346601",
+      "status": "analyzed_irrecoverable",
+      "queue_decision": "exclude",
+      "failure_mode": "Valid 65-page PDF containing an OCR-damaged printed Base64 JPEG/Exif payload whose tail is physically overwritten by repeated U+00FF filler.",
+      "public_result": "No exact intact duplicate or independently verified complete recovery was located. The apparent JPEG Base64 is overwritten by filler on page 60 and cannot support a byte-faithful reconstruction.",
+      "safety": "The incomplete JPEG payload remained quarantined and was never opened, rendered, or visually inspected; only source pages and header metadata were examined.",
+      "official_url": "https://www.justice.gov/epstein/files/DataSet%2011/EFTA02346601.pdf",
+      "official_bytes": 18574402,
+      "wayback_payload_sha1": "801ff60843eded9a39f3df84f5870842aa3f163e",
+      "wayback_url": "https://web.archive.org/web/20260131044745id_/https://www.justice.gov/epstein/files/DataSet%2011/EFTA02346601.pdf",
+      "pinned_pdf_sha256": "f36ad9d10c50aa830c2f2e05c0c68361337149d6fc06c89a34af8e6b7ebbb00d",
+      "resolution_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA02346601-2026-07-30.md",
+        "outer_pdf_pages": 65,
+        "qpdf_check": "clean",
+        "payload_classification": "JPEG/Exif prefix",
+        "visible_full_payload_pages": "1-59",
+        "visible_tail_page": 60,
+        "physical_boundary": "Apparent Base64 changes abruptly to repeated literal U+00FF filler on page 60; pages 61-65 consist entirely of that filler.",
+        "embedded_base64_glyphs_pages_1_to_60": 249242,
+        "glyphs_supported_by_both_ocr_passes": 220073,
+        "glyphs_unsupported_or_disputed": 29169,
+        "header_metadata": {
+          "device": "Apple iPhone 6",
+          "orientation": "lower-right",
+          "datetime": "2015:08:30 17:12:44"
+        },
+        "artifact_written": false,
+        "bytes_synthesized": false,
+        "status_artifact": "output/pdf/epstein-recovery/EFTA02346601/recovery-status.md",
+        "technical_audit": "output/pdf/epstein-recovery/EFTA02346601/technical-audit.json"
+      },
+      "remaining_route": "Locate an intact duplicate or original photo/export and validate it against pinned provenance or a trustworthy checksum.",
+      "sources": [
+        "https://www.reddit.com/r/epsteinfiles/comments/1r2mbx1/can_anyone_decode_this_file_65_pages_of_nonsense/",
+        "https://web.archive.org/web/20260131044745id_/https://www.justice.gov/epstein/files/DataSet%2011/EFTA02346601.pdf"
+      ]
+    },
+    {
+      "efta_id": "EFTA00045963",
+      "status": "false_positive",
+      "queue_decision": "exclude",
+      "failure_mode": "Large-file/browser-viewer and source-version issue, not demonstrated corruption",
+      "public_result": "Both checked official versions have a PDF header, xref/trailer, startxref, and EOF; the current file is about 114 MB.",
+      "official_url": "https://www.justice.gov/epstein/files/DataSet%209/EFTA00045963.pdf",
+      "sources": [
+        "https://www.reddit.com/r/Epstein/comments/1stssgn/cant_open_pdf_file/"
+      ]
+    },
+    {
+      "efta_id": "EFTA01150379",
+      "status": "complete_public",
+      "queue_decision": "exclude",
+      "failure_mode": "Large valid PDF containing a printed Base64 attachment whose complete filed content has an ordinary official public duplicate.",
+      "public_result": "The 234 physical pages of LM Federal.pdf are public as official DataSet 9 file EFTA01109465. The filed source itself omits internally numbered page 154 and paragraphs 424-426; the wrapper contains no hidden replacement page.",
+      "target_scope": "Use the official 234-page public filed-content duplicate. Pursue the missing pre-filing text only through an independently sourced draft or counsel-held original, not PDF repair.",
+      "official_url": "https://www.justice.gov/epstein/files/DataSet%209/EFTA01150379.pdf",
+      "official_bytes": 468677992,
+      "wayback_payload_sha1": "b9558ffa51811a5f13e05ae22e58a663ad034ecb",
+      "resolution_2026_07_30": {
+        "report": "investigations/epstein/recovery/attempts/EFTA01150379-2026-07-30.md",
+        "outer_pdf_status": "valid",
+        "outer_pdf_pages": 2427,
+        "full_outer_download_performed": false,
+        "attachment_filename": "LM Federal.pdf",
+        "filed_physical_pages": 234,
+        "public_duplicate": {
+          "efta_id": "EFTA01109465",
+          "official_url": "https://www.justice.gov/epstein/files/DataSet%209/EFTA01109465.pdf",
+          "bytes": 26641600,
+          "pages": 234,
+          "sha256": "b52be6a9a0536ee82027622395cbea6987981a4d9bea434cceff892be80bdfa2",
+          "qpdf_check": "clean",
+          "local_artifact": "output/pdf/epstein-recovery/EFTA01150379/LM-Federal-as-filed-234-pages-internal-page-154-absent.pdf"
+        },
+        "inherited_source_gap": {
+          "prior_physical_page": "Internal page 153 ends in paragraph 423 mid-sentence.",
+          "next_physical_page": "Internal page 155 begins paragraph 427.",
+          "missing_content": "Internally numbered page 154 and paragraphs 424-426.",
+          "conclusion": "The gap predates DOJ packaging and is present in the filed attachment."
+        },
+        "object_1847_false_positive": {
+          "status": "retracted_before_publication",
+          "overlay": "154 of 234",
+          "identified_image": "Already-public docket attachment page 72 / combined physical page 154 / source footer Page 155 of 234.",
+          "public_image_object": 547,
+          "printed_image_object": 1847,
+          "base64_ocr_similarity": 0.9215900802,
+          "adjacent_page_control_similarities": [
+            0.0475322149,
+            0.0482210876
+          ]
+        },
+        "status_artifact": "output/pdf/epstein-recovery/EFTA01150379/recovery-status.md",
+        "technical_audit": "output/pdf/epstein-recovery/EFTA01150379/technical-audit.json"
+      },
+      "remaining_route": "For the absent internal text only, locate a pre-filing draft or counsel-held original; repair of the filed PDF cannot restore content not present.",
+      "sources": [
+        "https://www.reddit.com/r/Epstein/comments/1r88zyj/i_would_like_files_with_base64_data_youve_not/",
+        "https://www.justice.gov/epstein/files/DataSet%209/EFTA01109465.pdf",
+        "https://www.courtlistener.com/docket/12691619/lm-v-espstein/",
+        "https://web.archive.org/web/20251219222603id_/https://www.justice.gov/multimedia/Court%20Records/L.M.%20v.%20Epstein,%20909-cv-81092%20(S.D.%20Fla.%202009)/001-01.pdf"
+      ]
+    }
+  ]
+}

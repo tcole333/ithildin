@@ -1,0 +1,12 @@
+import json
+from pathlib import Path
+from unittest.mock import patch
+from pipeline.curate_dossier import curate_dossier
+p=Path('/tmp/osint-SXYkyRSJ/curator-scratch.json')
+payload={'name':'Review fixture','curation':{'lead':'Human-authored lead','sections':[{'id':'evidence','content':'Authored narrative'}]},'findings':[],'entities':[],'connections':[]}
+p.write_text(json.dumps(payload))
+with patch('pipeline.curate_dossier.select_key_findings',return_value=[]),patch('pipeline.curate_dossier.extract_key_identifiers',return_value={}),patch('pipeline.curate_dossier.suggest_sections',return_value=[]),patch('pipeline.curate_dossier.build_ego_network',return_value={}),patch('pipeline.curate_dossier.build_timeline_events',return_value=[]):
+    result=curate_dossier(p, viz_only=True)
+print('viz_only input curation:',list(payload['curation']))
+print('viz_only output curation:',list(result['curation']))
+print('Narrative retained:',result['curation'].get('lead')=='Human-authored lead')

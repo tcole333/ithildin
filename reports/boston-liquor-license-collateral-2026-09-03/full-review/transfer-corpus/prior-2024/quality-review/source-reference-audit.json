@@ -1,0 +1,137 @@
+{
+  "audit_type": "independent_consolidated_source_reference_and_boundary_audit",
+  "audited_at_utc": "2026-09-04T04:51:35.133983+00:00",
+  "status": "passed",
+  "scope": "Only the nine consolidated files listed in inputs were read. No yearly partial outputs, PDFs, page-text artifacts, network sources, or outside baseline manifests were read. Page bounds are checked against source-index page counts; source-text/PDF visual validation belongs to the separate parent audit.",
+  "inputs": [
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/readiness.json",
+      "sha256": "569aec0a3aeff6fa1c69b63dffadfc855378c041a8125927da647de014b333ae"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/coverage.json",
+      "sha256": "1decd122789b46ecfa79be63bcf6c062ccaa63765cd904c9b1655f1f369820dc"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/source-index.json",
+      "sha256": "8399161442fe0fc2c7bdc24c14d42f5e6672fcd412d2a54fb92d36511567a62a"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/events.json",
+      "sha256": "c9d75f56d90cbb2c9fa22fcd3ee4bc8ce4a4a1a4cee2d0db056f0af4844fac2d"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/ownership-interest-events.json",
+      "sha256": "ad8887ceb5ee46284ed88bf51ec1260f9257c4aa27d29682d46cfbcd953ec4c0"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/notices.json",
+      "sha256": "e780a07f1423c5030f5f2774cac3eebdc2fca67bb477e53c3a916f59b1389c1b"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/ownership-interest-notices.json",
+      "sha256": "49d1be1e74822c3115d1680ed3f77c107618edb2152b59c4a8633982c6f3a5ef"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/proposed-events.json",
+      "sha256": "d19b41a0768ac659bcbb6ac5750edb7693f4cd5db789cde4472fec93571971f8"
+    },
+    {
+      "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/README.md",
+      "sha256": "a1b0976315398ea5bb7f038071d5bcd7ae3ff6d5726b073db15439dc7fb78dc2"
+    }
+  ],
+  "counts": {
+    "source_records": 91,
+    "unique_source_ids": 91,
+    "unique_recorded_document_hashes": 89,
+    "unique_pdf_pages_as_indexed": 906,
+    "retained_rows": 644,
+    "unique_event_ids": 644,
+    "by_ledger": {
+      "events.json": 473,
+      "ownership-interest-events.json": 155,
+      "notices.json": 6,
+      "ownership-interest-notices.json": 9,
+      "proposed-events.json": 1
+    },
+    "main_outcomes": {
+      "granted": 406,
+      "deferred": 44,
+      "to_be_re_noticed": 1,
+      "continued": 7,
+      "rescheduled": 3,
+      "withdrawn": 2,
+      "rejected": 3,
+      "acknowledged": 7
+    },
+    "main_action_subtypes": {
+      "pledge_application_disposition": 147,
+      "transfer_application_disposition": 319,
+      "pledge_release_acknowledgment": 7
+    },
+    "unapproved_application_dispositions": 60,
+    "release_acknowledgments": 7,
+    "ownership_granted": 155,
+    "ownership_license_scopes": {
+      "explicit_alcohol": 126,
+      "common_victualler_no_alcohol_stated": 29
+    }
+  },
+  "checks": {
+    "source_ids_unique": true,
+    "event_ids_globally_unique": true,
+    "event_source_references_resolve": true,
+    "event_page_ranges_within_index_bounds": true,
+    "source_url_and_hash_references_consistent": true,
+    "outcomes_and_grant_flags_consistent": true,
+    "all_completed_sale_verified_false": true,
+    "all_ownership_equity_completion_flags_false": true,
+    "saved_outcome_text_contained_in_saved_item_text": true,
+    "item_text_hashes_consistent": true,
+    "readiness_artifact_hashes_checked": [
+      "source-index.json",
+      "events.json",
+      "ownership-interest-events.json",
+      "notices.json",
+      "ownership-interest-notices.json",
+      "proposed-events.json",
+      "coverage.json",
+      "README.md"
+    ]
+  },
+  "boundary_review": {
+    "main": "319 transfer dispositions, 147 license-pledge dispositions, and 7 release acknowledgments. The 60 unapproved applications retain actual outcomes and board_granted_application=false; releases also have grant=false.",
+    "notices": "All 6 transfer/status notices and all 9 ownership-related records have board_granted_application=false. Conditional revocation and alleged unauthorized-interest-change cancellation records are not classified as completed equity transfers.",
+    "proposal": "The single printed Grated outcome stays in proposed-events.json with outcome_normalization_uncertain=true, withheld_from_decision_counts=true, decision_bearing=false, and grant=false.",
+    "ownership": "All 155 applications are granted; 29 Common Victualler records explicitly retain common_victualler_no_alcohol_stated and do not become alcohol-license evidence."
+  },
+  "nonblocking_observations": [
+    {
+      "topic": "decision_bearing is not an approval or event-ledger gate",
+      "detail": "12 of the 15 notice rows have decision_bearing=true for acknowledgments, directives, or disciplinary outcomes. Use ledger/action subtype plus board_granted_application; all 15 grant flags are false."
+    },
+    {
+      "topic": "short printed identifier retained",
+      "event_id": "BLB-2023-01-05-033-transfer",
+      "detail": "normalized_license_num=LB9216 preserves the printed four-digit identifier, with an explicit ambiguity note. It fails a five/six-digit validation heuristic but is not a silent ID repair or a reference error."
+    },
+    {
+      "topic": "missing prefix withheld",
+      "event_id": "BLB-2022-10-26-028-transfer",
+      "detail": "Printed L-99088 is retained in item text/ambiguity notes; normalized LB identifier remains null."
+    },
+    {
+      "topic": "date uncertainty",
+      "detail": "Source BLB-2021-04-20 has an emergency hearing date without an independently stated vote date; no retained event/notice/proposal references it."
+    }
+  ],
+  "missing_normalized_license_ids": {
+    "events.json": 5,
+    "ownership-interest-events.json": 19,
+    "notices.json": 5,
+    "ownership-interest-notices.json": 0,
+    "proposed-events.json": 1
+  },
+  "issues": []
+}

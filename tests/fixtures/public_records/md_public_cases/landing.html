@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      function loadframe() {
+        document.getElementById("case_reports").src =
+          "/data/case/?O=D" + "&amp;" + Date.now();
+      }
+    </script>
+    <p>
+      This page contains reports of public cases that have been created by
+      MDEC courts in the previous 5 days.
+    </p>
+    <p>
+      <a href="/sites/default/files/import/mdec/pdfs/file2026-04-01.pdf">
+        file2026-04-01.pdf
+      </a>
+    </p>
+    <iframe id="case_reports"></iframe>
+  </body>
+</html>

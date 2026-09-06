@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <body>
+    <form action="/app-rest-api/todays-superior-court-cases" method="get">
+      <input name="party" placeholder="Party" maxlength="128">
+      <input name="case_no" placeholder="Case Number" maxlength="128">
+      <select name="judges">
+        <option value=""></option>
+        <option value="All" selected>Judges</option>
+        <option value="10234">Berkower, Risa</option>
+      </select>
+      <select name="courtroom">
+        <option value=""></option>
+        <option value="All" selected>Courtroom</option>
+        <option value="10211">Building B, Courtroom B-109</option>
+      </select>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th><a href="?order=field_xml_party_long&amp;sort=desc">Party</a></th>
+          <th><a href="?order=field_xml_case_no&amp;sort=asc">Case Number</a></th>
+          <th><a href="?order=field_xml_division&amp;sort=asc">Division</a></th>
+          <th>Courtroom</th>
+          <th><a href="?order=field_judge_link&amp;sort=asc">Judge</a></th>
+          <th><a href="?order=field_timestamp&amp;sort=asc">Time</a></th>
+          <th><a href="?order=field_xml_case_type&amp;sort=asc">Case Type</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LAST PAGE PARTY</td>
+          <td>2026-CAB-000777</td>
+          <td>Civil</td>
+          <td>Moultrie, Courtroom 210</td>
+          <td>Berkower, Risa</td>
+          <td><time datetime="2026-07-30T14:30:00-04:00">2:30 PM</time></td>
+          <td>Civil Action</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="pagination-total">Total 12 items</span>
+    <ul class="pager__items">
+      <li class="pager__item active"><a href="?page=1" aria-current="page">2</a></li>
+    </ul>
+  </body>
+</html>

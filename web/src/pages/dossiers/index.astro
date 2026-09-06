@@ -1,10 +1,11 @@
 ---
+import { contentRoot } from '../../lib/contentPaths';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DossierIndex from '../../components/DossierIndex';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const contentDir = resolve(process.cwd(), '..', 'content');
+const contentDir = resolve(contentRoot());
 const dossierIndexPath = resolve(contentDir, 'dossiers', '_index.json');
 const investigationsPath = resolve(contentDir, 'investigations.json');
 

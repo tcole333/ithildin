@@ -1,0 +1,313 @@
+{
+  "created_at": "2026-09-04T01:52:03.377040+00:00",
+  "checked_date_local": "2026-09-03",
+  "timezone": "America/New_York",
+  "roster_source_url": "https://data.boston.gov/dataset/licensing-board-licenses",
+  "roster_csv_sha256": "95373009e2f8c566525838a8feabc77a8c4a4e7cb30b6428b926491f35be4ef9",
+  "sample_summary": {
+    "sampled_holders": 12,
+    "legal_name_matched_ucc_holders": 8,
+    "specific_license_collateral_holders": 2,
+    "conditional_liquor_clause_holders": 1,
+    "successor_entity_filing_holders": 1,
+    "no_matching_current_ucc_holders": 3,
+    "candidate_original_histories_reviewed": 19,
+    "reported_index_occurrences": 73,
+    "categories": {
+      "no_matching_current_ucc": 3,
+      "specific_license_collateral": 2,
+      "generic_or_equipment_collateral": 5,
+      "conditional_liquor_license_clause": 1,
+      "documented_successor_terminated_filing": 1
+    }
+  },
+  "transfer_summary": {
+    "selected_grants": 9,
+    "transferee_roster_matches": 8,
+    "grants_with_license_pledge": 4,
+    "pledged_grants_without_roster_marker": 3
+  },
+  "capture_note": "Board PDFs and the blank ABCC transfer form are retained as downloaded files. UCC and corporate summaries are labeled CUA observations, with visual PDF checks indicated individually; no source HTML/PDF download is implied by those JSON files.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 11927,
+      "sha256": "9a9230575099f6854d4d3456ace985605e0ed557aee433054bbf296377eaf1ac"
+    },
+    {
+      "path": "evidence/corporate-chain/harvard-corporate-chain.json",
+      "bytes": 2577,
+      "sha256": "237ce24326f9a82184bd0a0872e120a9cf13879ca85473353218b085247f9a24"
+    },
+    {
+      "path": "evidence/corporate-chain/report-harvard-resolution.md",
+      "bytes": 3339,
+      "sha256": "96684f3458059d9778a18325dea87042e69f01e2cce097ff361e992abec671cb"
+    },
+    {
+      "path": "evidence/sales/manifest.json",
+      "bytes": 594,
+      "sha256": "83042e020471320c5efd9cab80c0383a6c93acf9e1bf27e81d72a34277640d24"
+    },
+    {
+      "path": "evidence/sales/report-license-sales.md",
+      "bytes": 6074,
+      "sha256": "49eb93af1cd857ead37771fc11326adf52c65098d8d4cb5d3ce6aa006505f475"
+    },
+    {
+      "path": "evidence/sales/transfer-application.pdf",
+      "bytes": 1592880,
+      "sha256": "2b1097c42a2c3167a4c7322f4603c5e150c9cba31cf08a4977a64e50921a1f21"
+    },
+    {
+      "path": "evidence/sales/transfer-application.txt",
+      "bytes": 22630,
+      "sha256": "5706453ae257f7cd0e8fdad5ab2f3c64e3af98df6e6d9dc041e9e7f4031014ea"
+    },
+    {
+      "path": "evidence/transfers/build_report.py",
+      "bytes": 13828,
+      "sha256": "0c63f45a4c1fdb5ebb705a190f494e2901ed4e1f4439be2a3dbd93cbb3d4b77b"
+    },
+    {
+      "path": "evidence/transfers/report-transfers.md",
+      "bytes": 6621,
+      "sha256": "5f6fe063fbffd1d97a9f08621f1a698a02e58f7ba8111753a633ea19d8ea07f5"
+    },
+    {
+      "path": "evidence/transfers/source/voting-decisions-2024-07-11-page4.txt",
+      "bytes": 1688,
+      "sha256": "a8065b8ad43fbc8697a1688b023a76d7c1acb07516335008a2f7b4c50a1a8078"
+    },
+    {
+      "path": "evidence/transfers/source/voting-decisions-2024-07-11-page5.txt",
+      "bytes": 1936,
+      "sha256": "3a466887e2afec401585345206063ef9832f3b5de5d65e4cc4d507147dec5ede"
+    },
+    {
+      "path": "evidence/transfers/source/voting-decisions-2024-07-11.pdf",
+      "bytes": 167654,
+      "sha256": "e27913f9350506d32ed4a3fe03cae7e12503b339864ea1766db066ea43162f91"
+    },
+    {
+      "path": "evidence/transfers/source/voting-decisions-2024-07-11.txt",
+      "bytes": 16050,
+      "sha256": "347366d6e7c3e491d7b155571d26d46384c39c8fccef31b7912bbc9202fa7f9f"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2024-06-26-page7.txt",
+      "bytes": 2368,
+      "sha256": "f11b54974aad1a941abacae4f6fe324d60f811a03a1a22e5f2b2668a19a2911e"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2024-06-26.pdf",
+      "bytes": 199232,
+      "sha256": "50de6fc3f2cc01886a92c104ca06aa4f5978f1d20af0a220c44226f4040006ea"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2024-06-26.txt",
+      "bytes": 19471,
+      "sha256": "3bc8731d95613aa7add22b21dfceeda8c34179af80066e644cf2e6972ee656e6"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2026-03-26-page11.txt",
+      "bytes": 2553,
+      "sha256": "5968aeaec3aea18ab80fcb34f37eea9b8b2167362850c4e2f2142924e7c891f2"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2026-03-26-page12.txt",
+      "bytes": 1917,
+      "sha256": "3945f172f4461cf5baad36b818993dd9d6be47af06347d9b5d268cf5385dad3f"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2026-03-26-page13.txt",
+      "bytes": 2600,
+      "sha256": "48e09766e17f476490688943bab5e49a939bf7f840158a86581592949a338fc7"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2026-03-26.pdf",
+      "bytes": 428629,
+      "sha256": "f1dcceab940d83a77c1fdd4cd7d092245ffd24e00f49c194d6fcde274ed1ba4d"
+    },
+    {
+      "path": "evidence/transfers/source/voting-minutes-2026-03-26.txt",
+      "bytes": 53312,
+      "sha256": "48ce2cdcc4c4a9c9270f170e11daae24fbdc26464eee568ca0983b85613d5ee6"
+    },
+    {
+      "path": "evidence/transfers/source-manifest.json",
+      "bytes": 1445,
+      "sha256": "0b9d4bb1cf52474c780766689611f07612948f10088659f305aa6f0b27696fbd"
+    },
+    {
+      "path": "evidence/transfers/transfer-events.json",
+      "bytes": 20717,
+      "sha256": "49bdd5d67dc28c13962155350892523bd1708a7f7984a7cb9e29b15aa38c7067"
+    },
+    {
+      "path": "evidence/transfers/voting-decisions-2024-07-11-page4.png",
+      "bytes": 255042,
+      "sha256": "3f404e9d5208015f0122a872b86797f95c9e77b9e21dc0c517bd45e6769fd07e"
+    },
+    {
+      "path": "evidence/transfers/voting-decisions-2024-07-11-page4.render.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/transfers/voting-decisions-2024-07-11-page5.png",
+      "bytes": 274201,
+      "sha256": "008f58c1773b6982ea1f600d619a99a35866c38278e0ce69df0aed021870c91e"
+    },
+    {
+      "path": "evidence/transfers/voting-decisions-2024-07-11-page5.render.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2024-06-26-page7.png",
+      "bytes": 296626,
+      "sha256": "dab9b4cd320e1edbf6fa38d12f36d561a0cea11288cf2d01623cc59a74dfacfc"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page11.png",
+      "bytes": 307815,
+      "sha256": "20738245fc8574edab37f0e5effbbbeda679d2b670a468bfbc38176310dd6768"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page11.render.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page12.png",
+      "bytes": 236059,
+      "sha256": "be47129566dd0768238dfbc11586651930383edd81eb391094d18d21379686f0"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page12.render.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page13.png",
+      "bytes": 324748,
+      "sha256": "71783a2a8c16850a5da09a07ea840ec662132bb3763973232957968118beaf5e"
+    },
+    {
+      "path": "evidence/transfers/voting-minutes-2026-03-26-page13.render.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/ucc-mixed/S05-cua-observed.json",
+      "bytes": 2623,
+      "sha256": "fe533f478e6075fecda3ce0809dc6ffb9d34693eb9b0e7123038a9048257d1ee"
+    },
+    {
+      "path": "evidence/ucc-mixed/S06-cua-observed.json",
+      "bytes": 7237,
+      "sha256": "d3c50af9dab12888a85a0188f41f55db773b5eaed2c04cee229d32dcd25f5c66"
+    },
+    {
+      "path": "evidence/ucc-mixed/S07-cua-observed.json",
+      "bytes": 2552,
+      "sha256": "351a858656b1765661becc953c2d957a340c092479165954b7b65ceab448b508"
+    },
+    {
+      "path": "evidence/ucc-mixed/S08-cua-observed.json",
+      "bytes": 5420,
+      "sha256": "edd20871197645c852f43645033fecf260671d4c7697ee5e3577e7c80412194b"
+    },
+    {
+      "path": "evidence/ucc-mixed/log-audit.jsonl",
+      "bytes": 1386,
+      "sha256": "468b493612375c962c38273865698ffa7ed4c6dbc9714a636d73d16f949ea2b2"
+    },
+    {
+      "path": "evidence/ucc-mixed/report.md",
+      "bytes": 5454,
+      "sha256": "b7b77ebd2cbaafc8d8556c0de598ec22b57d577ad5ab8d2abcb7e4210cdb9249"
+    },
+    {
+      "path": "evidence/ucc-mixed/results.json",
+      "bytes": 19511,
+      "sha256": "01c1b6d93084ccdafbd089ca8a1f18b2e8398b2a304e7e985ffeb3ee21f16fa6"
+    },
+    {
+      "path": "evidence/ucc-mixed/samples.json",
+      "bytes": 4289,
+      "sha256": "c52e00f7de7a205b98cc5632a7e59a5742ce27ebbee351cf89aad8fd7c1286bb"
+    },
+    {
+      "path": "evidence/ucc-retail/S09.json",
+      "bytes": 3078,
+      "sha256": "e3d852dd76dea4005f9f7950b4cf2e396e451e7989a2b215d81130a04b85a1c1"
+    },
+    {
+      "path": "evidence/ucc-retail/S10.json",
+      "bytes": 7008,
+      "sha256": "ade269c14cad7358eba210ca5916a5bcb8658ef5b73242c76171876f9c2cfd3f"
+    },
+    {
+      "path": "evidence/ucc-retail/S11.json",
+      "bytes": 5778,
+      "sha256": "49eb80bf61c2e1538a45ae2a22ad50da836d33dc1ea900d16fa18a1943200281"
+    },
+    {
+      "path": "evidence/ucc-retail/S12.json",
+      "bytes": 2897,
+      "sha256": "d61d6d61cb225b81982146eed4281fbbda971c0fa2104a14537555a9d83bbd0d"
+    },
+    {
+      "path": "evidence/ucc-retail/plan.json",
+      "bytes": 3189,
+      "sha256": "3244d65951b4c81d07489b2d2e53166fa7548058e4679f71ef3184e474c0bdf9"
+    },
+    {
+      "path": "evidence/ucc-retail/report-retail-sample.md",
+      "bytes": 11709,
+      "sha256": "6bffceb2c68ae95cfe576f62303427824e4910fbd9bdbcf44748a32a5d369f44"
+    },
+    {
+      "path": "evidence/ucc-retail/retail-sample-results.json",
+      "bytes": 20963,
+      "sha256": "098d1f9f45789d50d836811866ce3af8b36649a7d081bcce37a9b5b4be69b3dc"
+    },
+    {
+      "path": "evidence/ucc-root/sample-results-root.json",
+      "bytes": 15218,
+      "sha256": "1600e104e73ae6253bd7cc3d0bed7ab6f3935a7b5bb59d34743ae1ea168436e0"
+    },
+    {
+      "path": "sample-plan.json",
+      "bytes": 9174,
+      "sha256": "504760bd6fb0d84c1e84fab86e1914bba0eae43140c09d22a5b6f89f5a0116f2"
+    },
+    {
+      "path": "sample-results.json",
+      "bytes": 51854,
+      "sha256": "3a2ccc5494a580503dc38de019743552e852339b66421a92e4ea2a994b6398dd"
+    },
+    {
+      "path": "sampling-frame.csv",
+      "bytes": 110839,
+      "sha256": "253e457cf16f9788adb67affccffb3f5c65a80ee18fb188a48dde99e9bf866cf"
+    },
+    {
+      "path": "transfer-events.json",
+      "bytes": 24163,
+      "sha256": "1552ea80b54bd724960ee62f01ceedd39b0dc99d7129ac4676dfe488407605ab"
+    },
+    {
+      "path": "transfers.csv",
+      "bytes": 3445,
+      "sha256": "b11b3f37b79f528c0dc34b800e469ab3c1a42b42fe6ba32d98b1d21cdb223a4f"
+    },
+    {
+      "path": "ucc-sample.csv",
+      "bytes": 11910,
+      "sha256": "585f952e45a682c5c26afd525241dac0b4c905349a650ce965a924e6795c1c2c"
+    }
+  ]
+}

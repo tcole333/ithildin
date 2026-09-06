@@ -39,6 +39,7 @@ class ContentPipelineWorkerTests(unittest.TestCase):
         self.tmpdir.cleanup()
 
     def _make_job(self, job_type, payload):
+        payload = {"profile_id": "test-profile", **payload}
         job_id = self.queue.create_job(job_type=job_type, domain="understanding", payload=payload)
         return self.queue.get_job(job_id)
 
@@ -74,10 +75,10 @@ class ContentPipelineWorkerTests(unittest.TestCase):
             db = lead_tracker.get_db()
             db.execute(
                 """
-                INSERT INTO findings (target_name, finding_type, summary, confidence, claim_type, verification_status)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO findings (target_name, finding_type, summary, confidence, claim_type, verification_status, profile_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
-                ("Alpha", "financial", "Test finding", "medium", "inference", "unverified"),
+                ("Alpha", "financial", "Test finding", "medium", "inference", "unverified", "test-profile"),
             )
             db.commit()
             db.close()
@@ -93,6 +94,7 @@ class ContentPipelineWorkerTests(unittest.TestCase):
                     "name": "Alpha",
                     "slug": "alpha",
                     "aliases": [],
+                    "profile_ids": ["test-profile"],
                     "generated_at": "2000-01-01T00:00:00",
                     "last_updated": "2000-01-01T00:00:00",
                     "stats": {

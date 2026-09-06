@@ -1,0 +1,69 @@
+{
+  "displayFieldName": "FOLIO",
+  "fieldAliases": {
+    "FOLIO": "FOLIO",
+    "OBJECTID": "OBJECTID",
+    "TRUE_SITE_ADDR": "true_site_addr",
+    "CONDO_FLAG": "condo_flag",
+    "PARENT_FOLIO": "parent_folio"
+  },
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "FOLIO",
+      "type": "esriFieldTypeString",
+      "alias": "FOLIO",
+      "length": 13
+    },
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "TRUE_SITE_ADDR",
+      "type": "esriFieldTypeString",
+      "alias": "true_site_addr",
+      "length": 100
+    },
+    {
+      "name": "CONDO_FLAG",
+      "type": "esriFieldTypeString",
+      "alias": "condo_flag",
+      "length": 1
+    },
+    {
+      "name": "PARENT_FOLIO",
+      "type": "esriFieldTypeString",
+      "alias": "parent_folio",
+      "length": 13
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "FOLIO": "0101060501010",
+        "OBJECTID": 373,
+        "TRUE_SITE_ADDR": "530 NW 1 CT",
+        "CONDO_FLAG": "N",
+        "PARENT_FOLIO": null
+      },
+      "geometry": {
+        "rings": [
+          [
+            [-80.19722730589267, 25.779342403039013],
+            [-80.19736134503685, 25.77947559470735],
+            [-80.19737046394036, 25.77973683496865],
+            [-80.19693310608574, 25.77967954322513],
+            [-80.19691939912613, 25.779352113371655],
+            [-80.19722730589267, 25.779342403039013]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <body>
+    <form id="aspnetForm" action="./CaseSearch.aspx?coa=cossup" method="post">
+      <input type="hidden" name="__VIEWSTATE" value="fixture-page-2">
+      <input type="hidden" name="__EVENTVALIDATION" value="fixture-validation-2">
+      <select id="ctl00_ContentPlaceHolder1_ddlOriginateCOA">
+        <option value="">All Courts</option>
+        <option value="3">3rd Court</option>
+      </select>
+      <select id="ctl00_ContentPlaceHolder1_ddCounty">
+        <option value="">All Counties</option>
+        <option value="227">Travis</option>
+      </select>
+      <select id="ctl00_ContentPlaceHolder1_ddlTrialCourt">
+        <option value="">All Trial Courts</option>
+        <option value="250">250th District Court</option>
+      </select>
+      <table id="ctl00_ContentPlaceHolder1_grdCases_ctl00">
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Date Filed</th>
+            <th>Style</th>
+            <th>v.</th>
+            <th>Case Type</th>
+            <th>COA Case Number</th>
+            <th>Trial Court Case Number</th>
+            <th>Trial County</th>
+            <th>Trial Court</th>
+            <th>Court</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="Case.aspx?cn=05-22-01054-CV&amp;coa=coa05">
+                05-22-01054-CV
+              </a>
+            </td>
+            <td>10/31/2022</td>
+            <td>Tesla, Inc.</td>
+            <td>John Doe</td>
+            <td>Other</td>
+            <td>&nbsp;</td>
+            <td>DC-22-00123</td>
+            <td>Dallas</td>
+            <td>101st District Court</td>
+            <td>5th Court</td>
+            <td>coa05</td>
+          </tr>
+        </tbody>
+      </table>
+      <span class="rgInfoPart">3 items in 2 pages</span>
+      <input
+        class="rgCurrentPage"
+        name="ctl00$ContentPlaceHolder1$grdCases$ctl00$ctl03$ctl01"
+        type="submit"
+        value="2"
+      >
+    </form>
+  </body>
+</html>

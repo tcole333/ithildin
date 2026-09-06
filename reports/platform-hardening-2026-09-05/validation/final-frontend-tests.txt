@@ -1,0 +1,655 @@
+
+> web@0.0.1 test:frontend
+> npm run test:citations && npm run test:citations:snapshots && npm run test:changed-content && npm run test:support-spans && node scripts/test-frontend-contracts.mjs && node scripts/test-content-selection.mjs && node scripts/test-publication-checks.mjs && node scripts/test-source-catalog-selection.mjs
+
+
+> web@0.0.1 test:citations
+> node scripts/test-citations.mjs
+
+PASS EFTA: resolves token to DOJ DataSet URL
+PASS EFTA: extractEvidenceLinks resolves EFTA ID to DOJ URL
+PASS EFTA: handles range notation (EFTA-EFTA)
+PASS DOJCOURT: preserves the exact case-grouped DOJ document URL
+PASS DOJCOURT: extractEvidenceLinks uses the exact release mapping
+PASS HOUSE_OVERSIGHT: resolves to jmail.world URL
+PASS SEC: resolves accession number to EDGAR URL
+PASS EDGAR: resolves same as SEC variant
+PASS SEC ADSH: resolves prose accession notation
+PASS SEC CIK: resolves prose CIK notation
+PASS SEC: extractEvidenceLinks resolves accession
+PASS 990: resolves EIN to ProPublica URL
+PASS 990: extractEvidenceLinks resolves EIN
+PASS OPENPAYMENTS: resolves covered-recipient profile ID
+PASS OPENPAYMENTS: extractEvidenceLinks resolves profile ID
+PASS SENATE_FINANCE: resolves an official archive path
+PASS SENATE_FINANCE: extractEvidenceLinks resolves an attachment
+PASS ACRIS: resolves document ID to NYC ACRIS URL
+PASS ACRIS: extractEvidenceLinks resolves doc ID
+PASS ACRIS: strips FT_ document-type prefix before building doc_id URL
+PASS PROPERTY: us-nc-onemap-parcels resolves to its official source
+PASS PROPERTY: us-nm-santa-fe-clerktrack-index resolves to its official source
+PASS PROPERTY: us-fl-dor-property-roll resolves to its official source
+PASS PROPERTY: us-mt-msl-cadastral resolves to its official source
+PASS PROPERTY: us-fl-miami-dade-official-records resolves to its official source
+PASS PROPERTY: us-fl-miami-dade-official-records-public resolves to its official source
+PASS PROPERTY: us-fl-miami-dade-property-appraiser resolves to its official source
+PASS PROPERTY: us-fl-orange-official-records resolves to its official source
+PASS PROPERTY: us-fl-orange-tax-collector-property-tax resolves to its official source
+PASS PROPERTY: us-fl-orange-comptroller-tax-deed-sales resolves to its official source
+PASS PROPERTY: us-ma-massgis-parcels resolves to its official source
+PASS PROPERTY: us-il-cook-parcel-universe resolves to its official source
+PASS PROPERTY: us-md-sdat-property-hidden resolves to its official source
+PASS PROPERTY: us-md-mdp-parcel-points resolves to its official source
+PASS PROPERTY: us-md-mdp-parcel-downloads resolves to its official source
+PASS PROPERTY: us-md-mdp-cama-downloads resolves to its official source
+PASS PROPERTY: us-md-mdp-property-sales-downloads resolves to its official source
+PASS PROPERTY: us-md-land-records resolves to its official source
+PASS PROPERTY: us-md-local-finance-tax-liens resolves to its official source
+PASS PROPERTY: us-md-plats resolves to its official source
+PASS PROPERTY: us-md-sdat-real-property resolves to its official source
+PASS PROPERTY: us-ny-statewide-parcels resolves to its official source
+PASS PROPERTY: us-ny-statewide-parcels-bulk resolves to its official source
+PASS PROPERTY: us-ny-orpts-sales-web resolves to its official source
+PASS PROPERTY: us-ny-county-parcel-resource-directory resolves to its official source
+PASS PROPERTY: us-ny-ogs-land-records resolves to its official source
+PASS PROPERTY: us-ny-richmond-county-clerk-land-documents resolves to its official source
+PASS PROPERTY: us-ny-assessment-coordinate-lookup resolves to its official source
+PASS PROPERTY: us-nyc-acris resolves to its official source
+PASS PROPERTY: us-nyc-property-information-portal resolves to its official source
+PASS PROPERTY: us-nyc-acris-images resolves to its official source
+PASS PROPERTY: us-la-ebr-property resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-official-records resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-official-records-daily-index resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-official-records-cd-archive resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-property-appraiser resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-tax-collector resolves to its official source
+PASS PROPERTY: us-fl-palm-beach-tax-deeds resolves to its official source
+PASS PROPERTY: us-la-orleans-property-viewer resolves to its official source
+PASS PROPERTY: us-or-lincoln-propertyweb resolves to its official source
+PASS PROPERTY: us-or-lincoln-county-taxlots-wfs resolves to its official source
+PASS PROPERTY: us-or-lincoln-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-yamhill-county-ascendweb-property resolves to its official source
+PASS PROPERTY: us-or-yamhill-county-at-taxlots resolves to its official source
+PASS PROPERTY: us-or-yamhill-county-retired-taxlots resolves to its official source
+PASS PROPERTY: us-or-yamhill-county-assessment-permits resolves to its official source
+PASS PROPERTY: us-or-yamhill-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-clackamas-county-ascendweb-property resolves to its official source
+PASS PROPERTY: us-or-clackamas-county-cmap-taxlots resolves to its official source
+PASS PROPERTY: us-or-wasco-county-ascendweb-property resolves to its official source
+PASS PROPERTY: us-or-wasco-county-taxlots resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-road-records resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-file-cabinet-surveys resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-roll-maps resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-commissioner-records resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-land-corners resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-plats resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-subdivisions resolves to its official source
+PASS PROPERTY: us-or-wasco-county-surveyor-survey-book resolves to its official source
+PASS PROPERTY: us-or-washington-county-casefiles resolves to its official source
+PASS PROPERTY: us-or-washington-county-taxlot-project-activity resolves to its official source
+PASS PROPERTY: us-or-washington-county-building-permits resolves to its official source
+PASS PROPERTY: us-or-washington-county-permit-reports resolves to its official source
+PASS PROPERTY: us-or-washington-county-accela-current-planning resolves to its official source
+PASS PROPERTY: us-or-washington-county-land-use-document-routes resolves to its official source
+PASS PROPERTY: us-or-washington-county-survey-explorer-api resolves to its official source
+PASS PROPERTY: us-or-washington-county-survey-explorer-arcgis resolves to its official source
+PASS PROPERTY: us-or-washington-county-taxlots resolves to its official source
+PASS PROPERTY: us-or-washington-county-situs-addresses resolves to its official source
+PASS PROPERTY: us-or-washington-county-intermap-property resolves to its official source
+PASS PROPERTY: us-or-washington-county-washcotax resolves to its official source
+PASS PROPERTY: us-dc-itspe-property-lineage resolves to its official source
+PASS PROPERTY: us-dc-itspe-public-extract resolves to its official source
+PASS PROPERTY: us-dc-common-ownership-polygons resolves to its official source
+PASS PROPERTY: us-dc-cama-property-sales resolves to its official source
+PASS PROPERTY: us-dc-surveyor-document-system resolves to its official source
+PASS PROPERTY: us-dc-recorder-of-deeds-public-records resolves to its official source
+PASS PROPERTY: us-wa-state-archives-digital-recorded-land resolves to its official source
+PASS PROPERTY: us-wa-mason-county-tax-parcels-gis resolves to its official source
+PASS PROPERTY: us-wa-state-parcels-normalized resolves to its official source
+PASS PROPERTY: us-wa-current-parcels-ecology resolves to its official source
+PASS PROPERTY: us-wa-current-parcels-dnr resolves to its official source
+PASS PROPERTY: us-wa-current-parcels-wisaard resolves to its official source
+PASS PROPERTY: us-wa-current-parcels-county-freshness resolves to its official source
+PASS PROPERTY: us-wa-current-parcels-county-land-use resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-tax-parcels resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-survey-records resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-subdivision-plats resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-partition-plats resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-condominium-plats resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-road-surveys resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-bearing-tree-public-land-corners resolves to its official source
+PASS PROPERTY: us-or-multnomah-sail-field-book-quarter-sheets resolves to its official source
+PASS PROPERTY: us-ca-los-angeles-county-assessor-parcels resolves to its official source
+PASS PROPERTY: us-ca-los-angeles-county-ttc-payment-history resolves to its official source
+PASS PROPERTY: us-ca-los-angeles-county-ttc-tax-sale resolves to its official source
+PASS PROPERTY: us-ca-los-angeles-registrar-recorder-real-estate resolves to its official source
+PASS PROPERTY: us-tx-bexar-bcad-property resolves to its official source
+PASS PROPERTY: us-tx-comptroller-epts resolves to its official source
+PASS PROPERTY: us-tx-reeves-county-clerk-official-records resolves to its official source
+PASS PROPERTY: us-pa-dep-parcels resolves to its official source
+PASS PROPERTY: us-pa-pasda-parcels resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-property-data resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-opa-properties resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-opa-current-bulk resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-opa-carto-mirror resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-opa-assessment-history resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-opa-history-bulk resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-dor-parcels resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-atlas resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-philadox resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-records-and-archives resolves to its official source
+PASS PROPERTY: us-pa-philadelphia-property-application resolves to its official source
+PASS PROPERTY: us-pa-allegheny-property-feeds resolves to its official source
+PASS PROPERTY: us-pa-county-recorder-and-court-routing resolves to its official source
+PASS PROPERTY: us-de-firstmap-parcels resolves to its official source
+PASS PROPERTY: us-de-kent-parcels resolves to its official source
+PASS PROPERTY: us-de-sussex-parcels resolves to its official source
+PASS PROPERTY: us-de-new-castle-parcel-search resolves to its official source
+PASS PROPERTY: us-de-kent-recorder-i2 resolves to its official source
+PASS PROPERTY: us-de-sussex-recorder-landmark resolves to its official source
+PASS PROPERTY: us-de-new-castle-recorder-index resolves to its official source
+PASS PROPERTY: us-de-new-castle-recorder-pax resolves to its official source
+PASS PROPERTY: us-pa-berks-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-pa-delaware-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-pa-indiana-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-pa-lawrence-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-de-kent-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-co-denver-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-co-denver-parcels resolves to its official source
+PASS PROPERTY: us-co-denver-public-trustee-gts resolves to its official source
+PASS PROPERTY: us-co-denver-delinquent-real-property-tax-list resolves to its official source
+PASS PROPERTY: us-co-denver-spatialest-property-tax resolves to its official source
+PASS PROPERTY: us-co-denver-tax-lien-auction resolves to its official source
+PASS PROPERTY: us-co-denver-realforeclose-auctions resolves to its official source
+PASS PROPERTY: us-tx-reeves-clerk-bulk-images resolves to its official source
+PASS PROPERTY: us-tx-culberson-clerk-historical-deeds resolves to its official source
+PASS PROPERTY: us-tx-culberson-clerk-records-request resolves to its official source
+PASS PROPERTY: us-tx-sos-ucc-portal resolves to its official source
+PASS PROPERTY: us-tx-sos-ucc-bulk resolves to its official source
+PASS PROPERTY: us-tx-rrc-p4-bulk resolves to its official source
+PASS PROPERTY: us-tx-rrc-p5-bulk resolves to its official source
+PASS PROPERTY: us-tx-rrc-wellbore-bulk resolves to its official source
+PASS PROPERTY: us-tx-harris-clerk-real-property resolves to its official source
+PASS PROPERTY: us-tx-harris-clerk-foreclosures resolves to its official source
+PASS PROPERTY: us-tx-harris-hcad-property resolves to its official source
+PASS PROPERTY: us-tx-harris-hcad-gis resolves to its official source
+PASS PROPERTY: us-tx-txgio-land-parcels resolves to its official source
+PASS PROPERTY: us-or-deschutes-county-taxlots resolves to its official source
+PASS PROPERTY: us-or-deschutes-cdd-weblink resolves to its official source
+PASS PROPERTY: us-or-deschutes-dial-property resolves to its official source
+PASS PROPERTY: us-or-umatilla-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-wasco-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-crook-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-benton-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-benton-county-taxlot-owners resolves to its official source
+PASS PROPERTY: us-or-benton-county-assessment-bulk resolves to its official source
+PASS PROPERTY: us-or-benton-county-assessment-maps resolves to its official source
+PASS PROPERTY: us-or-deschutes-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-hood-river-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-jackson-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-jackson-county-assessor-taxlots resolves to its official source
+PASS PROPERTY: us-or-douglas-county-assessor-parcels resolves to its official source
+PASS PROPERTY: us-or-jackson-county-building-permits resolves to its official source
+PASS PROPERTY: us-or-jackson-county-accela-building-details resolves to its official source
+PASS PROPERTY: us-or-jackson-county-land-use-permits resolves to its official source
+PASS PROPERTY: us-or-jackson-county-accela-planning-details resolves to its official source
+PASS PROPERTY: us-or-jackson-county-code-compliance resolves to its official source
+PASS PROPERTY: us-or-jefferson-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-multnomah-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-polk-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-tillamook-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-wheeler-helion-recorder resolves to its official source
+PASS PROPERTY: us-or-clackamas-tax-foreclosure-publications resolves to its official source
+PASS PROPERTY: us-or-marion-tax-foreclosure-publications resolves to its official source
+PASS PROPERTY: us-or-multnomah-tax-foreclosure-publications resolves to its official source
+PASS PROPERTY: us-or-tillamook-tax-foreclosure-publications resolves to its official source
+PASS PROPERTY: us-or-lane-county-assessor-parcels resolves to its official source
+PASS PROPERTY: us-or-lane-county-recent-property-sales resolves to its official source
+PASS PROPERTY: us-or-lane-property-account-information resolves to its official source
+PASS PROPERTY: us-or-lane-tax-maps resolves to its official source
+PASS PROPERTY: us-or-lane-tax-maps resolves to its official source
+PASS PROPERTY: us-or-marion-county-assessor-parcels resolves to its official source
+PASS PROPERTY: us-or-marion-sales-data resolves to its official source
+PASS PROPERTY: us-or-marion-assessor-data-request resolves to its official source
+PASS PROPERTY: us-or-portland-regional-taxlots resolves to its official source
+PASS PROPERTY: us-or-metro-rlis-public-taxlots resolves to its official source
+PASS PROPERTY: us-or-owrd-public-tax-lots resolves to its official source
+PASS PROPERTY: us-or-umatilla-helion-property resolves to its official source
+PASS PROPERTY: us-or-morrow-helion-property resolves to its official source
+PASS PROPERTY: us-or-polk-helion-property resolves to its official source
+PASS PROPERTY: us-or-tillamook-helion-property resolves to its official source
+PASS PROPERTY: us-or-columbia-helion-property resolves to its official source
+PASS PROPERTY: us-or-coos-helion-property resolves to its official source
+PASS PROPERTY: us-va-arlington-property-map resolves to its official source
+PASS PROPERTY: us-va-vgin-parcels resolves to its official source
+PASS PROPERTY: us-va-virginia-beach-delinquent-real-estate-taxes resolves to its official source
+PASS PROPERTY: us-va-vgin-parcels-bulk resolves to its official source
+PASS PROPERTY: us-va-local-property-systems resolves to its official source
+PASS PROPERTY: us-va-arlington-land-records-publicsearch resolves to its official source
+PASS PROPERTY: us-va-secure-remote-access-land-records resolves to its official source
+PASS PROPERTY: us-wi-statewide-parcels resolves to its official source
+PASS PROPERTY: us-wi-statewide-parcels-bulk resolves to its official source
+PASS PROPERTY: us-wi-geodata resolves to its official source
+PASS PROPERTY: us-wi-county-land-record-directory resolves to its official source
+PASS PROPERTY: us-wi-dor-retr resolves to its official source
+PASS PROPERTY: us-wi-dor-retr-historical resolves to its official source
+PASS PROPERTY: us-wi-dor-parcel-number-formats resolves to its official source
+PASS PROPERTY: us-wi-statewide-parcel-map resolves to its official source
+PASS PROPERTY: us-nj-njgin-parcels-modiv resolves to its official source
+PASS PROPERTY: us-nj-njgin-property-explorer resolves to its official source
+PASS PROPERTY: us-nj-njgin-parcels-modiv-bulk resolves to its official source
+PASS PROPERTY: us-nj-njgin-parcels-only-bulk resolves to its official source
+PASS PROPERTY: us-nj-njgin-modiv-tax-list resolves to its official source
+PASS PROPERTY: us-nj-treasury-modiv-files resolves to its official source
+PASS PROPERTY: us-nj-treasury-sr1a-sales resolves to its official source
+PASS PROPERTY: us-nj-local-assessors-tax-boards resolves to its official source
+PASS PROPERTY: us-nj-county-clerks-registers resolves to its official source
+PASS PROPERTY: us-nj-opra-property-records resolves to its official source
+PASS PROPERTY: us-nj-tax-court-property-cases resolves to its official source
+PASS PROPERTY: us-nj-local-property-assessment-sources resolves to its official source
+PASS PROPERTY: us-nj-property-tax-appeals resolves to its official source
+PASS PROPERTY: us-nj-county-tax-boards resolves to its official source
+PASS PROPERTY: us-nj-dca-property-registration resolves to its official source
+PASS PROPERTY: us-nj-dca-bhi-active-buildings-opra resolves to its official source
+PASS PROPERTY: us-oh-ogrip-statewide-parcels resolves to its official source
+PASS PROPERTY: us-oh-franklin-county-auditor-property resolves to its official source
+PASS PROPERTY: us-oh-franklin-county-auditor-bulk resolves to its official source
+PASS PROPERTY: us-oh-franklin-county-auditor-sales-gis resolves to its official source
+PASS PROPERTY: us-oh-franklin-county-recorder-publicsearch resolves to its official source
+PASS PROPERTY: us-oh-licking-county-auditor-gis resolves to its official source
+PASS PROPERTY: us-oh-licking-county-auditor-ontrac resolves to its official source
+PASS PROPERTY: us-oh-licking-county-recorder-pax resolves to its official source
+PASS PROPERTY: us-oh-licking-county-recorder-instrument-detail resolves to its official source
+PASS PROPERTY: us-oh-licking-county-recorder-archives resolves to its official source
+PASS PROPERTY: us-oh-delaware-county-auditor-property resolves to its official source
+PASS PROPERTY: us-oh-delaware-county-auditor-gis resolves to its official source
+PASS PROPERTY: us-oh-delaware-county-recorder-pax resolves to its official source
+PASS PAX: Licking exact-instrument evidence deep-links without changing identity
+PASS PAXDOC: Licking public PDF evidence resolves to the official document
+PASS PAX: Delaware evidence never persists a session or ticket locator
+PASS PROPERTY: Lane tax-map locator and PDF retain distinct citations
+PASS PROPERTY: unmapped source remains an honest record-only citation
+PASS STATECOURT: au-qld-authorised-and-unreported-judgments resolves to its source landing page
+PASS STATECOURT: au-qld-court-record-copy-request resolves to its source landing page
+PASS STATECOURT: au-qld-criminal-case-lookup resolves to its source landing page
+PASS STATECOURT: au-qld-daily-law-lists resolves to its source landing page
+PASS STATECOURT: au-qld-ecourts-civil resolves to its source landing page
+PASS STATECOURT: au-qld-official-caselaw resolves to its source landing page
+PASS STATECOURT: au-qld-state-archives-court-records resolves to its source landing page
+PASS STATECOURT: us-nj-tax-court-property-cases resolves to its source landing page
+PASS STATECOURT: us-nj-tax-court-current-object-versions resolves to its source landing page
+PASS STATECOURT: us-nj-tax-court-judgment-archives resolves to its source landing page
+PASS STATECOURT: us-nj-govconnect-tax-notices resolves to its source landing page
+PASS STATECOURT: us-nj-tax-case-public-access resolves to its source landing page
+PASS STATECOURT: us-nj-tax-court-opinions resolves to its source landing page
+PASS STATECOURT: us-nj-courts-full-site-search resolves to its source landing page
+PASS STATECOURT: us-nj-tax-court-reports resolves to its source landing page
+PASS STATECOURT: us-nj-local-property-assessment-sources resolves to its source landing page
+PASS STATECOURT: us-nj-rutgers-court-opinions resolves to its source landing page
+PASS STATECOURT: us-courtlistener-opinions resolves to its source landing page
+PASS STATECOURT: us-nj-property-tax-appeals resolves to its source landing page
+PASS STATECOURT: us-nj-county-tax-boards resolves to its source landing page
+PASS STATECOURT: us-courtlistener-api resolves to its source landing page
+PASS STATECOURT: us-doj-epstein-court-records resolves to its source landing page
+PASS STATECOURT: us-ny-oca-attorney-registrations resolves to its source landing page
+PASS STATECOURT: us-ny-nyscef resolves to its source landing page
+PASS STATECOURT: us-pa-ujs-public-dockets resolves to its source landing page
+PASS STATECOURT: us-pa-aopc-bulk resolves to its source landing page
+PASS STATECOURT: us-pa-appellate-opinions-postings resolves to its source landing page
+PASS STATECOURT: us-pa-judges-and-mdj-districts resolves to its source landing page
+PASS STATECOURT: us-md-case-search resolves to its source landing page
+PASS STATECOURT: us-md-aoc-court-data resolves to its source landing page
+PASS STATECOURT: us-md-appellate-opinions resolves to its source landing page
+PASS STATECOURT: us-md-business-technology-opinions resolves to its source landing page
+PASS STATECOURT: us-md-circuit-clerk-records resolves to its source landing page
+PASS STATECOURT: us-md-estate-claims resolves to its source landing page
+PASS STATECOURT: us-md-estate-legal-notices resolves to its source landing page
+PASS STATECOURT: us-md-estate-search resolves to its source landing page
+PASS STATECOURT: us-md-judgment-liens resolves to its source landing page
+PASS STATECOURT: us-md-mdec-public-cases resolves to its source landing page
+PASS STATECOURT: us-md-register-of-wills-offices resolves to its source landing page
+PASS STATECOURT: us-mi-appellate-case-opinion-order-search resolves to its source landing page
+PASS STATECOURT: us-mi-business-court-search resolves to its source landing page
+PASS STATECOURT: us-mi-micourt-developer-case-search-api resolves to its source landing page
+PASS STATECOURT: us-mi-micourt-trial-case-search resolves to its source landing page
+PASS STATECOURT: us-mi-trial-court-directory resolves to its source landing page
+PASS STATECOURT: us-dc-court-of-appeals-calendars resolves to its source landing page
+PASS STATECOURT: us-dc-court-of-appeals-case-search resolves to its source landing page
+PASS STATECOURT: us-dc-court-of-appeals-opinions-mojs resolves to its source landing page
+PASS STATECOURT: us-dc-superior-court-criminal-calendar resolves to its source landing page
+PASS STATECOURT: us-dc-superior-court-tax-calendars resolves to its source landing page
+PASS STATECOURT: us-dc-superior-court-today-calendar resolves to its source landing page
+PASS STATECOURT: us-dc-superior-court-portal resolves to its source landing page
+PASS STATECOURT: us-dc-superior-eaccess resolves to its source landing page
+PASS STATECOURT: us-de-courtconnect resolves to its source landing page
+PASS STATECOURT: us-de-court-directory-and-calendars resolves to its source landing page
+PASS STATECOURT: us-de-project-rightful-owner resolves to its source landing page
+PASS STATECOURT: us-de-court-records-access resolves to its source landing page
+PASS STATECOURT: us-de-file-and-servexpress resolves to its source landing page
+PASS STATECOURT: us-de-opinions-orders resolves to its source landing page
+PASS STATECOURT: us-fl-acis resolves to its source landing page
+PASS STATECOURT: us-fl-state-court-location-directory resolves to its source landing page
+PASS STATECOURT: us-fl-virtual-courtroom-directory resolves to its source landing page
+PASS STATECOURT: us-fl-osca-public-records-request resolves to its source landing page
+PASS STATECOURT: us-fl-trial-court-statistical-reference-guide resolves to its source landing page
+PASS STATECOURT: us-ga-aoc-court-personnel-directory resolves to its source landing page
+PASS STATECOURT: us-fl-ninth-circuit-division-calendars resolves to its source landing page
+PASS STATECOURT: us-fl-ninth-circuit-appellate-opinions-archive resolves to its source landing page
+PASS STATECOURT: us-fl-ninth-circuit-administrative-orders resolves to its source landing page
+PASS STATECOURT: us-fl-orange-clerk-records-request resolves to its source landing page
+PASS STATECOURT: us-fl-ninth-circuit-court-reporters resolves to its source landing page
+PASS STATECOURT: us-fl-orange-court-registry-balance resolves to its source landing page
+PASS STATECOURT: us-fl-orange-confidentiality-notices resolves to its source landing page
+PASS STATECOURT: us-fl-appellate-opinions-search resolves to its source landing page
+PASS STATECOURT: us-fl-sixth-dca-opinion-releases resolves to its source landing page
+PASS STATECOURT: us-flmd-recent-opinions resolves to its source landing page
+PASS STATECOURT: us-ca11-published-opinions resolves to its source landing page
+PASS STATECOURT: us-ca11-unpublished-opinions resolves to its source landing page
+PASS STATECOURT: us-az-pima-superior-agave resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-probate resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-probate-name-index resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-probate-document-images resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-probate-records resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-civil resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-civil-archives-records-center resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-civil-name-index resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-civil-document-images resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-divorce-judgment-orders resolves to its source landing page
+PASS STATECOURT: us-ca-trellis-los-angeles-superior-court resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-family-case-summary resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-small-claims-case-summary resolves to its source landing page
+PASS STATECOURT: us-ca-los-angeles-superior-appellate-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-public-records resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-ecourt-portal resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-daily-calendar resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-probate-examiner-notes resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-case-index-product resolves to its source landing page
+PASS STATECOURT: us-ca-fresno-superior-court-records-routes resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-public-records resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-calendar resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-civil-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-family-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-probate-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-case-name-search resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-case-access-portals resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-permanent-case-index resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-case-index-products resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-probate-notes resolves to its source landing page
+PASS STATECOURT: us-ca-orange-superior-court-records-and-copies resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-public-records resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-ecalendar resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-tentative-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-public-access resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-public-access-guide resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-name-index-products resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-clerk-search resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-records-and-certified-copies resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-probate-notes resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-high-interest-cases resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-transcript-requests resolves to its source landing page
+PASS STATECOURT: us-ca-riverside-superior-court-appellate-division resolves to its source landing page
+PASS STATECOURT: us-ca-fourth-district-division-two-case-information resolves to its source landing page
+PASS STATECOURT: us-ca-san-mateo-midx resolves to its source landing page
+PASS STATECOURT: us-ca-san-mateo-odyssey resolves to its source landing page
+PASS STATECOURT: us-ca-san-mateo-hearings-rulings resolves to its source landing page
+PASS STATECOURT: us-ca-san-mateo-records resolves to its source landing page
+PASS STATECOURT: us-ca-first-district-appellate-case-information resolves to its source landing page
+PASS STATECOURT: us-ca-second-district-appellate-case-information resolves to its source landing page
+PASS STATECOURT: us-ca-judicial-branch-opinions resolves to its source landing page
+PASS STATECOURT: us-ca-public-notices resolves to its source landing page
+PASS STATECOURT: us-tax-court-dawson resolves to its source landing page
+PASS STATECOURT: us-tax-court-reports resolves to its source landing page
+PASS STATECOURT: us-tax-court-records-transcripts resolves to its source landing page
+PASS STATECOURT: us-govinfo-uscourts resolves to its source landing page
+PASS STATECOURT: us-ny-law-reporting-bureau resolves to its source landing page
+PASS STATECOURT: us-ny-webcivil-supreme resolves to its source landing page
+PASS STATECOURT: us-ny-court-pass resolves to its source landing page
+PASS STATECOURT: us-ny-court-appeals-archives resolves to its source landing page
+PASS STATECOURT: us-ny-county-clerk-court-records resolves to its source landing page
+PASS STATECOURT: us-ny-public-notices-column resolves to its source landing page
+PASS STATECOURT: us-ny-trellis resolves to its source landing page
+PASS STATECOURT: us-ny-courtlink resolves to its source landing page
+PASS STATECOURT: us-ny-elaw resolves to its source landing page
+PASS STATECOURT: us-fl-orange-clerk-my-eclerk resolves to its source landing page
+PASS STATECOURT: us-fl-orange-county-hearing-calendar resolves to its source landing page
+PASS STATECOURT: us-co-denver-county-court-public-docket resolves to its source landing page
+PASS STATECOURT: us-co-appellate-case-law-search resolves to its source landing page
+PASS STATECOURT: us-co-judicial-appellate-opinion-releases resolves to its source landing page
+PASS STATECOURT: us-co-judicial-compiled-aggregate-data-requests resolves to its source landing page
+PASS STATECOURT: us-co-judicial-data-reports resolves to its source landing page
+PASS STATECOURT: us-co-judicial-annual-statistical-reports resolves to its source landing page
+PASS STATECOURT: us-co-judicial-case-parties-without-representation resolves to its source landing page
+PASS STATECOURT: us-co-judicial-eviction-filings-dashboard resolves to its source landing page
+PASS STATECOURT: us-co-judicial-docket-search resolves to its source landing page
+PASS STATECOURT: us-co-denver-district-court-records-request resolves to its source landing page
+PASS STATECOURT: us-co-denver-county-court-records-request resolves to its source landing page
+PASS STATECOURT: us-co-denver-district-administrative-orders resolves to its source landing page
+PASS STATECOURT: us-va-general-district-court-case-information resolves to its source landing page
+PASS STATECOURT: us-va-circuit-court-case-information resolves to its source landing page
+PASS STATECOURT: us-va-appellate-opinions resolves to its source landing page
+PASS STATECOURT: us-fl-palm-beach-ecaseview resolves to its source landing page
+PASS STATECOURT: us-fl-palm-beach-clerkcart resolves to its source landing page
+PASS STATECOURT: us-fl-palm-beach-records-service resolves to its source landing page
+PASS STATECOURT: us-in-iocs-bulk resolves to its source landing page
+PASS STATECOURT: us-wi-wcca-public resolves to its source landing page
+PASS STATECOURT: us-wi-wscca-public resolves to its source landing page
+PASS STATECOURT: us-wi-court-opinions resolves to its source landing page
+PASS STATECOURT: us-wi-state-law-library-briefs resolves to its source landing page
+PASS STATECOURT: us-wi-uw-law-historical-briefs resolves to its source landing page
+PASS STATECOURT: us-wi-appellate-clerk resolves to its source landing page
+PASS STATECOURT: us-wi-wcca-rest resolves to its source landing page
+PASS STATECOURT: us-mn-court-bulk resolves to its source landing page
+PASS STATECOURT: us-nc-rpa-courts resolves to its source landing page
+PASS STATECOURT: us-az-eaccess resolves to its source landing page
+PASS STATECOURT: us-or-ojcin resolves to its source landing page
+PASS STATECOURT: us-or-ojd-statewide-court-data-products resolves to its source landing page
+PASS STATECOURT: us-or-ojcin-oeci-subscription resolves to its source landing page
+PASS STATECOURT: us-or-ojcin-acms-subscription resolves to its source landing page
+PASS STATECOURT: us-or-ojcin-standard-report-package resolves to its source landing page
+PASS STATECOURT: us-or-ojcin-bulk-data-transfer resolves to its source landing page
+PASS STATECOURT: us-or-osca-statewide-court-data-request resolves to its source landing page
+PASS STATECOURT: us-or-ojd-smart-search resolves to its source landing page
+PASS STATECOURT: us-or-appellate-record-search resolves to its source landing page
+PASS STATECOURT: us-or-circuit-tax-court-calendars resolves to its source landing page
+PASS STATECOURT: us-or-court-of-appeals-calendar resolves to its source landing page
+PASS STATECOURT: us-or-eugene-municipal-record-search resolves to its source landing page
+PASS STATECOURT: us-or-clackamas-county-justice-record-search resolves to its source landing page
+PASS STATECOURT: us-or-corvallis-municipal-record-search resolves to its source landing page
+PASS STATECOURT: us-or-hermiston-municipal-record-search resolves to its source landing page
+PASS STATECOURT: us-or-linn-county-justice-record-search resolves to its source landing page
+PASS STATECOURT: us-or-medford-municipal-record-search resolves to its source landing page
+PASS STATECOURT: us-or-springfield-municipal-record-search resolves to its source landing page
+PASS STATECOURT: us-tribal-grand-ronde-record-search resolves to its source landing page
+PASS STATECOURT: us-or-supreme-court-calendar resolves to its source landing page
+PASS STATECOURT: us-or-state-court-directory resolves to its source landing page
+PASS STATECOURT: us-or-state-judge-directory resolves to its source landing page
+PASS STATECOURT: us-or-local-court-registry resolves to its source landing page
+PASS STATECOURT: us-or-local-judge-registry resolves to its source landing page
+PASS STATECOURT: us-or-law-library-supreme-opinions resolves to its source landing page
+PASS STATECOURT: us-or-law-library-coa-opinions resolves to its source landing page
+PASS STATECOURT: us-or-law-library-tax-court-decisions resolves to its source landing page
+PASS STATECOURT: us-or-law-library-supreme-briefs resolves to its source landing page
+PASS STATECOURT: us-or-law-library-coa-briefs resolves to its source landing page
+PASS STATECOURT: us-or-law-library-coa-orders-interest resolves to its source landing page
+PASS STATECOURT: us-or-law-library-multnomah-presiding-orders resolves to its source landing page
+PASS STATECOURT: us-wa-jis-link resolves to its source landing page
+PASS STATECOURT: us-tx-appellate-released-orders-opinions resolves to its source landing page
+PASS STATECOURT: us-tx-appellate-tames resolves to its source landing page
+PASS STATECOURT: us-tx-bexar-district-historical-cases resolves to its source landing page
+PASS STATECOURT: us-tx-bexar-justice-portal resolves to its source landing page
+PASS STATECOURT: us-vi-c-track resolves to its source landing page
+PASS STATECOURT: us-tx-bexar-district-clerk-records-request resolves to its source landing page
+PASS STATECOURT: us-tx-bexar-county-clerk-records-request resolves to its source landing page
+PASS STATECOURT: us-tx-hays-county-clerk-courts resolves to its source landing page
+PASS STATECOURT: us-tx-hays-district-clerk-records-request resolves to its source landing page
+PASS STATECOURT: us-tx-hays-district-court-portal resolves to its source landing page
+PASS STATECOURT: us-tx-harris-district-clerk-courts resolves to its source landing page
+PASS STATECOURT: us-tx-harris-district-clerk-public-datasets resolves to its source landing page
+PASS STATECOURT: us-tx-oca-citations-notices resolves to its source landing page
+PASS STATECOURT: us-tx-oca-court-activity resolves to its source landing page
+PASS STATECOURT: us-tx-oca-local-rules-standing-orders resolves to its source landing page
+PASS STATECOURT: us-tx-oca-statistical-supplements resolves to its source landing page
+PASS STATECOURT: us-tx-oca-vexatious-litigants resolves to its source landing page
+PASS STATECOURT: us-tx-researchtx resolves to its source landing page
+PASS STATECOURT: us-tx-supreme-orders-opinions resolves to its source landing page
+PASS STATECOURT: us-tx-travis-criminal-docket-search resolves to its source landing page
+PASS STATECOURT: us-tx-travis-district-clerk-records-request resolves to its source landing page
+PASS STATECOURT: us-tx-travis-odyssey-courts resolves to its source landing page
+PASS STATECOURT: us-oh-franklin-common-pleas-cio resolves to its source landing page
+PASS STATECOURT: us-oh-franklin-probate-netdata resolves to its source landing page
+PASS Eugene Municipal Court request complement resolves to the City JustFOIA form
+PASS STATECOURT: unmapped source remains record-only
+PASS USCENSUS:ACS5 observation resolves to its official release page
+PASS USCENSUS:ACS5 route refs resolve to the Census data catalog
+PASS PAOPINION: resolves through the official publication source
+PASS PAOPINION: superior resolves through its own court page
+PASS PAOPINION: commonwealth resolves through its own court page
+PASS PAOPINION-ARTIFACT: resolves through the artifact court page
+PASS DECOURTCONNECT judgment resolves through the official source
+PASS COURT-BULK resolves through the official artifact catalog
+PASS COURT-DATA resolves through the component source
+PASS Colorado opinion refs retain component provenance
+PASS Oregon court-document refs retain collection provenance
+PASS DEOPINION: resolves to the exact official archive PDF
+PASS TAXCOURT: resolves suffixed docket to stable base case URL
+PASS TAXCOURT: preserves docket-entry UUID in canonical label
+PASS NY_LAW_REPORTS: resolves slip opinion to official full text
+PASS NY_COLUMN: resolves notice ID to the direct public notice
+PASS CL: resolves docket ID to CourtListener URL
+PASS CL: extractEvidenceLinks resolves docket
+PASS CourtListener docket refs resolve both explicit separators
+PASS CourtListener opinion: explicit opinion/<id> resolves to opinion URL
+PASS CourtListener opinion: extractEvidenceLinks resolves explicit opinion ref
+PASS CourtListener bare numeric: NOT guessed as an opinion URL
+PASS CourtListener junk numeric: small ids never link out
+PASS NYSCEF_CASE: resolves encoded docket ID to NYSCEF URL
+PASS FEC: committee ID resolves to FEC committee URL
+PASS FEC: name query resolves to FEC search URL
+PASS FEC: committee-year resolves to receipts URL
+PASS FEC: committee/schedule_a resolves to receipts URL
+PASS FEC: normalizes odd-year to two-year cycle
+PASS FEC: does not emit orphaned suffix fragments
+PASS FARA: resolves registration number to efile URL
+PASS FARA: extractEvidenceLinks resolves FARA number
+PASS FR: resolves document number to Federal Register URL
+PASS FR: extractEvidenceLinks resolves Federal Register document
+PASS USVI: resolves entity ID to USVI URL
+PASS REG: resolves jurisdiction:id to registry URL
+PASS REG: FL jurisdiction links to SunBiz
+PASS REG: UK jurisdiction links to Companies House
+PASS REG: extractEvidenceLinks resolves registry ref
+PASS REG: GB jurisdiction links to Companies House
+PASS REG: GB jurisdiction handles OC (LLP) numbers
+PASS MA-UCC: filing citation links to the official search page
+PASS MA-UCC: distinct filing references stay distinct at the same portal URL
+PASS Companies House: resolves numeric company number
+PASS Companies House: resolves OC (LLP) number, uppercased
+PASS Companies House: extractEvidenceLinks resolves company number
+PASS FL-SunBiz: shorthand resolves to SunBiz URL
+PASS NM-SoS: shorthand resolves to NM portal URL
+PASS NY-SoS: shorthand resolves to NY DOS URL
+PASS DS10: plain token links to financials page
+PASS DS10: qualified token links to financials page
+PASS DS10: extractEvidenceLinks resolves DS10 ref
+PASS KPMG: resolves to source-record citation
+PASS KPMG: extractEvidenceLinks returns source-record link
+PASS LDA: resolves to Senate LDA search URL
+PASS LDA: extractEvidenceLinks resolves LDA registrant
+PASS OpenSanctions: resolves entity ID to opensanctions.org URL
+PASS OpenSanctions: resolves space-separated entity notation
+PASS OpenSanctions: extractEvidenceLinks resolves entity
+PASS OpenSanctions: resolves dataset-prefixed canonical ID (NK- hash)
+PASS OpenSanctions: resolves dataset-prefixed canonical ID (ohchr- hash)
+PASS OpenSanctions: garbage token does not emit a dead entity URL
+PASS OpenSanctions: prose mention does not become a citation
+PASS DocumentCloud: resolves document ID to DocumentCloud URL
+PASS DocumentCloud: extractEvidenceLinks resolves doc ID
+PASS OffshoreAlert: resolves slug to hosted consent-order copy
+PASS OffshoreAlert: hosted primary copies resolve to local PDFs, never offshorealert.com
+PASS OffshoreAlert: un-hosted slug is honest record_only with no dead link
+PASS OffshoreAlert: extractEvidenceLinks never emits an offshorealert.com URL
+PASS MuckRock: resolves request ID to MuckRock URL
+PASS MuckRock: resolves request ID with filename
+PASS MuckRock: extractEvidenceLinks resolves request
+PASS LittleSis: resolves colon-separated ID to LittleSis URL
+PASS LittleSis: resolves underscore variant
+PASS LittleSis: extractEvidenceLinks resolves entity ID
+PASS LittleSis: resolves whitespace-separated entity ID
+PASS LittleSis: resolves 'entity' keyword form
+PASS LittleSis: resolves 'ID' keyword form
+PASS LittleSis: resolves 'rel' relationship form
+PASS LittleSis: resolves full 'relationship' keyword form
+PASS LittleSis: whitespace year is not mistaken for an entity ID
+PASS LittleSis: explicit keyword overrides the year guard
+PASS LittleSis: bare 'relationships' word with no ID is not a citation
+PASS LittleSis: extracts entity ID amid multi-token evidence ref
+PASS LittleSis: entity ID stops at trailing parenthetical
+PASS ICIJ: resolves plain format to offshore leaks URL
+PASS ICIJ: resolves PP variant
+PASS ICIJ: resolves node variant
+PASS ICIJ: extractEvidenceLinks resolves ICIJ ref
+PASS ICIJ: resolves dataset slug form to node URL
+PASS Finding: resolves with evidence map to popover citation plus sources
+PASS Finding: resolves without evidence map to label-only
+PASS Finding: dedupes co-cited evidence refs
+PASS Finding evidence: recursively resolves finding-backed sources
+PASS Internal refs: finding groups expand into finding citations
+PASS Internal refs: plural finding groups expand into finding citations
+PASS Internal refs: mixed connection and source groups keep the source citation
+PASS Internal refs: mixed finding and loose source labels render cleanly
+PASS URL: extractEvidenceLinks resolves raw URL
+PASS Rendered EFTA citations link directly to DOJ, preserving the source record
+PASS Statute: unrecognized pattern passes through unchanged
+PASS preserves markdown links and does not split URL citations
+PASS shares stable numbering across multiple citation blocks
+PASS splitCitationGroup: splits comma-separated tokens
+PASS multiple types in one group: each gets a citation entry
+PASS getCitationHealthTier: returns correct tier for known prefixes
+PASS getCitationHealthTier: returns skip for unknown prefixes
+PASS Registry: all 29 types produce citation entries
+PASS Registry: all extractable types produce evidence links
+PASS Registry: unrecognized bracket content passes through unchanged
+PASS Registry: empty evidence string returns empty links
+PASS Registry: splitCitationGroup recognizes all token types
+PASS Registry: splitCitationGroup recognizes new types
+PASS source-urls.json: override file is loaded without error
+PASS Internal artifact: temp/session path produces no source card
+PASS Internal artifact: analysis-run handle produces no source card
+PASS Internal artifact: analysis_run underscore variant is suppressed
+PASS Internal artifact: bare #N internal ref produces no source card
+PASS Internal artifact: #YYYY is NOT suppressed (neutral-citation year guard)
+PASS Internal artifact: underscore redaction notation is NOT suppressed
+PASS Internal artifact: inline artifact-only group renders as plain text
+PASS Internal artifact: real internal reference and source still render in brackets
+PASS Internal artifact: finding-NNNN self-ref produces no source card
+PASS Internal artifact: bare-numeric self-ref produces no source card
+PASS Internal artifact: 4-digit years are NOT suppressed (UK neutral cites)
+PASS record_only: honest access note, no 'held locally' language
+PASS Namespaced refs: web:/ref:/hf_ stay record_only, not suppressed
+
+621 passed, 0 failed out of 621 tests.
+All citation tests passed.
+
+> web@0.0.1 test:citations:snapshots
+> node scripts/test-citation-snapshots.mjs
+
+Citation snapshot regression checks passed.
+
+> web@0.0.1 test:changed-content
+> node scripts/test-changed-content-files.mjs
+
+Changed-content selection checks passed.
+
+> web@0.0.1 test:support-spans
+> node scripts/test-support-spans.mjs
+
+PASS sentence with inline citation is supported and uncited sentence is unsupported
+PASS citation in adjacent sentence does not support prior sentence
+PASS finding citations expand to finding plus resolved source nodes
+PASS unreferenced citation entries are reported as orphan citations
+All support-span unit checks passed.
+Frontend JSON validation, retry, shared initialization, and ranking checks passed.
+Selected content, page/index parity, changed metadata, and removed browser asset checks passed.
+Publication gate selected-content checks passed: 19.
+Selected article/dossier source catalog and corpus isolation checks passed.

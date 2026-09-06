@@ -57,9 +57,9 @@ def target_db():
             UNIQUE(table_name, record_id, crossref_type)
         );
         CREATE TABLE leads (
-            id INTEGER PRIMARY KEY, title TEXT, category TEXT, priority TEXT,
-            status TEXT, source TEXT, target_name TEXT, profile_id TEXT,
-            thread_id INTEGER, created_at TEXT
+            id INTEGER PRIMARY KEY, title TEXT, description TEXT, category TEXT,
+            priority TEXT, status TEXT, source TEXT, target_name TEXT,
+            profile_id TEXT, thread_id INTEGER, created_at TEXT
         );
         CREATE TABLE lead_notes (
             id INTEGER PRIMARY KEY, lead_id INTEGER, note TEXT, created_at TEXT

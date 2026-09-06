@@ -9,6 +9,7 @@ Tools for federal spending analysis, contract intelligence, SAM.gov entity regis
 | Tool | Source | Auth | Local Data | Rate Limit |
 |------|--------|------|------------|------------|
 | `query_usaspending.py` | USAspending.gov API | None | No | ~10 req/sec |
+| `query_fpds.py` | FPDS-NG ATOM feed | None | No | 1 req/sec self-imposed |
 | `query_highergov.py` | HigherGov API | `HIGHERGOV_API_KEY` in .env | No | 10 req/sec, 10K records/month |
 | `query_sam.py` | SAM.gov API | `SAM_API_KEY` (free) | No | 10 req/day (basic); 1K/day (SAM role) |
 | `ingest_sam.py` | SAM.gov bulk extracts | None | `datasets/sam.db` (874K entities, 167K exclusions) | N/A (local) |
@@ -29,21 +30,74 @@ uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC."    
 uv run python tools/query_usaspending.py awards --uei "RN99S3S7N977" --agency "Department of Defense"
 uv run python tools/query_usaspending.py awards "Booz Allen" --grants            # Grant awards
 uv run python tools/query_usaspending.py recipient "Palantir Technologies"       # Spending by agency
-uv run python tools/query_usaspending.py award CONT_AWD_12345                    # Single award detail
+uv run python tools/query_usaspending.py award 70CDCR26FR0000002                 # Plain PIID is resolved first
 uv run python tools/query_usaspending.py subawards "Shield AI" --limit 25        # Subcontractor search
 uv run python tools/query_usaspending.py transactions "Anduril" --agency "Department of Defense"
+uv run python tools/query_usaspending.py transactions --uei JMLKZZ1NL2Z6 \
+    --agency "U.S. Immigration and Customs Enforcement" --agency-tier subtier --output /tmp/transactions.json
 uv run python tools/query_usaspending.py covid "recipient name" --limit 20       # COVID relief awards
 uv run python tools/query_usaspending.py loans "recipient name"                  # Loan awards
 uv run python tools/query_usaspending.py geography "Palantir" --scope place_of_performance --geo-layer state
 uv run python tools/query_usaspending.py timeline "Palantir" --group fiscal_year
 uv run python tools/query_usaspending.py top-recipients --agency "Department of Homeland Security" --limit 20
 uv run python tools/query_usaspending.py agencies --limit 20                     # Agency spending summary
+uv run python tools/query_usaspending.py transactions-keyword "skip tracing" --all-pages
+uv run python tools/query_usaspending.py transactions-keyword "wellness check" --naics 561611 --psc R799 \
+    --agency "U.S. Immigration and Customs Enforcement" --agency-tier subtier --output /tmp/hits.json
 ```
 
 **Known quirks:**
+- All USAspending JSON outputs contain `results`, `status`, `errors`, `query`, and `retrieval`. Former bare-list outputs now put their rows under `results`; award-detail and recipient fields also remain at the top level. Check acquisition errors and `retrieval.complete` before treating an empty result as evidence. Failed acquisition writes the requested artifact and exits 1; partially acquired records are retained with `status: partial`.
+- `transactions-keyword --all-pages` stops after 50 pages with an explicit partial result and `pagination.next_page`. Resume with `--page N --all-pages`. A successful page does not by itself establish complete coverage, and unknown pagination coverage stays `null`.
 - Award type groups cannot be mixed in a single request (API returns 422). The tool separates contracts (A/B/C/D), grants (02-05), and loans (07-08) automatically.
 - The `--grants` flag switches from contract to grant award types.
+- `award` accepts either a generated USAspending identifier or a plain PIID. A plain PIID is exact-matched across contract and IDV award groups first; ambiguous matches fail closed and list the generated identifiers.
+- Advanced transaction searches enforce the API's 1-100 page-size range locally. Use `--page` to continue.
+- Agency filters default to `toptier` department names. Pass `--agency-tier subtier` for a component such as U.S. Immigration and Customs Enforcement.
+- Transaction JSON is an envelope containing `results`, preserved pagination, and returned recipient identities. A parent UEI can expand to affiliated recipients; check `recipient_scope_expansion_observed` and `returned_recipients` before combining separate UEI queries. An absent API total remains `null` rather than being inferred from the current page length.
+- `top-recipients --naics` sends the current `{"require": [...], "exclude": []}` filter object; that endpoint rejects the older list-of-objects form.
 - SSL context uses certifi; set `OSINT_INSECURE_SSL=true` if cert issues arise.
+- `transactions-keyword` searches **transaction** descriptions, so it sees scope added by modification — award-level search does not. Use it whenever asking "when did this agency first buy X?"
+- That endpoint's `naics_codes`/`psc_codes` filters take bare code strings (`["561611"]`); the object form used by the award endpoints returns HTTP 422 there.
+
+## query_fpds.py — FPDS-NG Contract Actions
+
+The only source for contract-action **workflow fields** — `createdBy`, `lastModifiedBy`, `approvedBy` and
+their timestamps. USAspending omits them; HigherGov exposes the columns but returns null. Use these to test
+separation of duties (did one user create *and* approve an award?).
+
+```bash
+uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --output /tmp/actions.json
+uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --max-pages 5 --output /tmp/vendor.json
+uv run python tools/query_fpds.py piid 70CDCR26FR0000014 --from-file saved-feed.xml   # offline parse
+uv run python tools/query_fpds.py search 'VENDOR_UEI:D13LLJJZYH64' --with-metadata --output /tmp/v.json
+```
+
+**Known quirks:**
+- One `<entry>` per contract action, so a base award and each modification are separate rows; filter on
+  `modification_number` to isolate the base action.
+- The feed has **two payload roots**, reported as `record_type`. `award` is a dated contract action;
+  `IDV` is the indefinite-delivery vehicle those actions are placed against. Roughly 10% of rows in a
+  DHS vendor slice are IDVs, and for some vendors the IDV *is* the flagship instrument — the $1.596B UAC
+  IDIQ `70CDCR26D00000045` is an IDV row. Treating "no dated action" as "no contracting history" will
+  call an incumbent a first-time entrant; screen on `record_type` instead.
+- IDVs carry no parent vehicle and no completion dates, so `referenced_idv_piid`, `transaction_number`,
+  `current_completion_date` and `ultimate_completion_date` are null on those rows. Their period bound is
+  `lastDateToOrder`, which is deliberately not aliased into a completion-date field. An IDV's ceiling
+  reads from `base_and_all_options_value`; its `action_obligation` is usually `0`.
+- A `record_type` of `null` means FPDS used a payload root this tool does not know. The CLI warns on
+  stderr; treat those rows as unparsed rather than empty.
+- **Paging truncates silently at the source.** A fetch stopping at `--max-pages` while the feed still
+  offers a next page returns a partial set — at the default of 10 that is 100 rows. The tool now warns on
+  stderr, exits 2, and sets `truncated`/`next_url`/`pages_fetched` under `--with-metadata`. Never derive
+  an earliest-action or first-seen date from a truncated fetch; raise `--max-pages` until it exits 0.
+- Parsed keys are mixed case: snake_case for most fields but **camelCase for the workflow fields**
+  (`createdBy`, `lastModifiedBy`, `approvedBy`). Reading them with snake_case names silently yields `None`,
+  which looks identical to missing data.
+- Query syntax is FPDS's own: `PIID:"..."`, `VENDOR_UEI:"..."`, `REF_IDV_PIID:"..."`, `AGENCY_CODE:"..."`.
+- Cite findings from this tool with source token `fpds` — not `usaspending` or `sam_gov`.
+- Records the data-entry workflow, which is not identical to the FAR contracting-officer approval chain.
+  Say what the field shows, not more.
 
 ## query_highergov.py — HigherGov Contract Intelligence
 

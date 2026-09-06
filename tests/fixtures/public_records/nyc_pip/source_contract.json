@@ -1,0 +1,78 @@
+{
+  "observed_at": "2026-07-31",
+  "official_portal": "https://propertyinformationportal.nyc.gov/",
+  "official_linker": "https://home4.nyc.gov/site/finance/property/property-digital-tax-map.page",
+  "arcgis_org": "https://services6.arcgis.com/yG5s3afENB5iO9fj/ArcGIS/rest/services",
+  "layers": {
+    "detail": {
+      "id": 18,
+      "name": "PTS_DESC_DAILY",
+      "type": "Table",
+      "objectIdField": "OBJECTID",
+      "capabilities": "Query,Extract",
+      "maxRecordCount": 1000,
+      "advancedQueryCapabilities": {
+        "supportsPagination": true,
+        "supportsOrderBy": true
+      }
+    },
+    "tax_lot": {
+      "id": 0,
+      "name": "TAX_LOT_POLYGON",
+      "type": "Feature Layer",
+      "objectIdField": "OBJECTID",
+      "geometryType": "esriGeometryPolygon",
+      "capabilities": "Query,Extract",
+      "maxRecordCount": 1000,
+      "advancedQueryCapabilities": {
+        "supportsPagination": true,
+        "supportsOrderBy": true
+      }
+    },
+    "current_assessment": {
+      "id": 0,
+      "name": "PROPMAST",
+      "type": "Table",
+      "objectIdField": "OBJECTID",
+      "capabilities": "Query",
+      "maxRecordCount": 2000,
+      "advancedQueryCapabilities": {
+        "supportsPagination": true,
+        "supportsOrderBy": true
+      }
+    },
+    "assessment_history": {
+      "id": 0,
+      "name": "PROPMAST_HIST",
+      "type": "Table",
+      "objectIdField": "OBJECTID",
+      "capabilities": "Query",
+      "maxRecordCount": 2000,
+      "advancedQueryCapabilities": {
+        "supportsPagination": true,
+        "supportsOrderBy": true
+      }
+    },
+    "exemptions": {
+      "id": 0,
+      "name": "EXDET_PIP",
+      "type": "Table",
+      "objectIdField": "OBJECTID",
+      "capabilities": "Query",
+      "maxRecordCount": 2000,
+      "advancedQueryCapabilities": {
+        "supportsPagination": true,
+        "supportsOrderBy": true
+      }
+    }
+  },
+  "sentinel": {
+    "bbl": "1013860010",
+    "borough": "Manhattan",
+    "block": 1386,
+    "lot": 10,
+    "house_number": "9",
+    "street": "EAST 71 STREET",
+    "exemption_count": 0
+  }
+}

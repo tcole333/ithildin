@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <body>
+    <form id="aspnetForm" method="post" action="./PublicDatasets.aspx">
+      <input type="hidden" name="__VIEWSTATE" value="fixture-viewstate" />
+      <input type="hidden" name="__VIEWSTATEGENERATOR" value="fixture-generator" />
+      <input type="hidden" name="__EVENTVALIDATION" value="fixture-validation" />
+      <input type="hidden" name="hiddenDownloadFile" value="" />
+      <input
+        type="submit"
+        name="ctl00$ctl00$ctl00$ContentPlaceHolder1$ContentPlaceHolder2$ContentPlaceHolder2$buttonDownload"
+        value=""
+        id="ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder2_ContentPlaceHolder2_buttonDownload"
+        style="display:none"
+      />
+      <table id="tblPublicDatasets">
+        <thead>
+          <tr><th>Date</th><th>Dataset</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr class="trPublicReportsSubHeader">
+            <th scope="colgroup" colspan="4">Civil</th>
+          </tr>
+          <tr>
+            <th scope="row">2014-03-26</th>
+            <td>OVERVIEW.pdf</td>
+            <td>
+              <a onclick="DownloadDoc('Civil\\2014-03-26 OVERVIEW.pdf');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr class="rowAlt">
+            <th scope="row">2024-08-15</th>
+            <td>FIELD_CODES.xlsx</td>
+            <td>
+              <a onclick="DownloadDoc('Civil\\2024-08-15 FIELD_CODES.xlsx');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2026-02-07</th>
+            <td>Civil_Historical.zip</td>
+            <td>
+              <a onclick="DownloadDoc('Civil\\2026-02-07 Civil_Historical.zip');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr class="rowAlt">
+            <th scope="row">2026-07-29</th>
+            <td>CaseSummaryMods_Historical2000-2004.txt</td>
+            <td>
+              <a onclick="DownloadDoc('Civil\\2026-07-29 CaseSummaryMods_Historical2000-2004.txt');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr class="trPublicReportsSubHeader">
+            <th scope="colgroup" colspan="4">Criminal</th>
+          </tr>
+          <tr>
+            <th scope="row">2014-08-13</th>
+            <td>RecordLayoutsAndFieldNames.xlsx</td>
+            <td>
+              <a onclick="DownloadDoc('Criminal\\2014-08-13 RecordLayoutsAndFieldNames.xlsx');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr class="rowAlt">
+            <th scope="row">2026-07-29</th>
+            <td>CrimDisposDaily_withHeadings.txt</td>
+            <td>
+              <a onclick="DownloadDoc('Criminal\\2026-07-29 CrimDisposDaily_withHeadings.txt');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2026-07-29</th>
+            <td>CrimFilingsDaily_withHeadings.txt</td>
+            <td>
+              <a onclick="DownloadDoc('Criminal\\2026-07-29 CrimFilingsDaily_withHeadings.txt');">
+                Download
+              </a>
+            </td>
+          </tr>
+          <tr class="rowAlt">
+            <th scope="row">2026-07-29</th>
+            <td>CrimFilingsWithFutureSettings_withHeadings.txt</td>
+            <td>
+              <a onclick="DownloadDoc('Criminal\\2026-07-29 CrimFilingsWithFutureSettings_withHeadings.txt');">
+                Download
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+{
+  "inputs": [
+    {
+      "track": "timeline-baseline",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/timeline-baseline/events.csv",
+      "rows": 395,
+      "sha256": "7c72694f81efba7a62562823d6405f47040627692c7ab362395ed5d263e765c1"
+    },
+    {
+      "track": "suffolk",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/suffolk/events.csv",
+      "rows": 17,
+      "sha256": "3faaf9ec44a295805c84a7cadb3dfe0521726e0d12b4ef0df897c1aa3c6bbc25"
+    },
+    {
+      "track": "plymouth",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/plymouth/events.csv",
+      "rows": 24,
+      "sha256": "1dd4f7ec33b170007c7f6b4f6ec9ccd7b71962ed285e9cc509fdeba2a4f53ae0"
+    },
+    {
+      "track": "other-counties",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/other-counties/events.csv",
+      "rows": 7,
+      "sha256": "f5c9ad25995a605965a0057b6913280ae411ff3ea330ee4eef0c2336ed9b9e2e"
+    },
+    {
+      "track": "probate-family",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/probate-family/events.csv",
+      "rows": 0,
+      "sha256": "a62ac968bd6d02d62a2f87631d88c507776fca1e2c112f1240b15d863f07e0c0"
+    },
+    {
+      "track": "local-courts",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/local-courts/events.csv",
+      "rows": 6,
+      "sha256": "4ee2a3c38d0b55ca24d3aa6dfc9992cbc12f969438fa04bd941654866a84a848"
+    },
+    {
+      "track": "capital",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave2/capital/events.csv",
+      "rows": 0,
+      "sha256": "a62ac968bd6d02d62a2f87631d88c507776fca1e2c112f1240b15d863f07e0c0"
+    }
+  ],
+  "missing_tracks": [],
+  "events": 442,
+  "property_context_groups": 72,
+  "by_county": {
+    "Middlesex": 2,
+    "Norfolk": 6,
+    "Plymouth": 24,
+    "Suffolk": 410
+  },
+  "by_event_type": {
+    "mortgage": 3,
+    "court_hearing": 1,
+    "deed": 25,
+    "deed_with_life_estate": 1,
+    "mortgage_discharge": 2,
+    "assessor_history": 6,
+    "assessment_observation": 150,
+    "trust_declaration": 4,
+    "lease_allegation": 1,
+    "court_complaint": 1,
+    "court_pleading_trust_reference": 3,
+    "mortgage_index_candidate": 4,
+    "foreclosure_deed_index_candidate": 2,
+    "deed_index_candidate": 8,
+    "unit_deed_index_candidate": 1,
+    "municipal_permit": 197,
+    "trustee_certificate": 3,
+    "demolition_permit": 3,
+    "court_order": 8,
+    "mortgage_recorded": 1,
+    "lien_index_candidate": 5,
+    "development_approval": 1,
+    "term_conveyance_with_reserved_rights": 1,
+    "trust_agreement_index_candidate": 1,
+    "foreclosure_deed_recorded": 1,
+    "deed_recorded": 3,
+    "attachment_recorded": 2,
+    "financing_statement_index_candidate": 1,
+    "tax_lien_index_candidate": 1,
+    "alleged_family_agreement": 1,
+    "case_disposition": 1
+  },
+  "by_evidence_status": {
+    "original_partial_review": 8,
+    "primary_opinion_page1_only": 1,
+    "original_document_reviewed": 6,
+    "official_assessor_history": 6,
+    "original_image_reviewed": 13,
+    "official_assessor_observation": 3,
+    "primary_pleading_allegation": 2,
+    "primary_pleading_public_reproduction_partial": 3,
+    "index_only_candidate": 23,
+    "official_assessment_observation": 147,
+    "official_permit_observation": 200,
+    "original_full_document_read": 17,
+    "judicial_text_reviewed_property_join_candidate": 1,
+    "official_board_document_reviewed": 1,
+    "judicial_text_reviewed": 7,
+    "original_complete_review": 2,
+    "allegations_in_judicial_opinion": 1,
+    "public_filed_document_reproduction": 1
+  },
+  "superseded_baseline_rows": 7,
+  "superseded_instrument_joins_for_review": [
+    {
+      "instrument": "('suffolk', 'recorded', '17988/312')",
+      "baseline_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501159000",
+        "US-MA-SUFFOLK:PARCEL:0501160000",
+        "US-MA-SUFFOLK:PARCEL:0501161000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501159000",
+        "US-MA-SUFFOLK:PARCEL:0501160000",
+        "US-MA-SUFFOLK:PARCEL:0501161000"
+      ]
+    },
+    {
+      "instrument": "('suffolk', 'recorded', '56448/317')",
+      "baseline_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501162000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501162000"
+      ]
+    },
+    {
+      "instrument": "('suffolk', 'recorded', '56448/321')",
+      "baseline_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501161000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501159000",
+        "US-MA-SUFFOLK:PARCEL:0501160000",
+        "US-MA-SUFFOLK:PARCEL:0501161000"
+      ]
+    },
+    {
+      "instrument": "('suffolk', 'recorded', '56617/263')",
+      "baseline_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501234000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501234000"
+      ]
+    },
+    {
+      "instrument": "('suffolk', 'recorded', '56617/271')",
+      "baseline_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ]
+    }
+  ],
+  "exact_duplicates_dropped": [],
+  "unique_land_instruments": 58,
+  "interpretation": "Counts measure observations and research contexts, not properties currently owned or independent transactions."
+}

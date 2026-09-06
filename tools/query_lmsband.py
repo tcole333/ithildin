@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Query LMSBAND Epstein Files database (60,806 files, 851K entities, 110K co-occurrences).
+Query the local LMSBAND Epstein Files database.
+
+Run the ``stats`` subcommand for the current file, entity-mention, and
+co-occurrence inventory.
 
 Database: datasets/lmsband_epstein_files.db
 
@@ -215,7 +218,9 @@ def get_stats():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Query LMSBAND Epstein Files (60K files, 851K entities)")
+    parser = argparse.ArgumentParser(
+        description="Query the local LMSBAND Epstein Files database"
+    )
     subparsers = parser.add_subparsers(dest="command")
 
     # search
@@ -246,6 +251,7 @@ def main():
     f.add_argument("file_id", type=int)
     f.add_argument("-j", "--json", action="store_true")
     f.add_argument("--text", action="store_true", help="Show full text")
+    add_output_args(f)
 
     # stats
     subparsers.add_parser("stats", help="Database statistics")
@@ -306,9 +312,12 @@ def main():
         if not result:
             print(f"File #{args.file_id} not found.")
             sys.exit(1)
-        if args.json:
-            if not args.text and result.get("text"):
-                result["text"].pop("extracted_text", None)
+        if not args.text and result.get("text"):
+            result = {**result, "text": dict(result["text"])}
+            result["text"].pop("extracted_text", None)
+        if write_output(result, args, summary=f"LMSBAND file #{args.file_id}"):
+            pass
+        elif args.json:
             print(json.dumps(result, indent=2, default=str))
         else:
             print(f"\nFile #{result['id']}: {result['filename']}")
@@ -319,19 +328,19 @@ def main():
                 if args.text:
                     print(f"\n--- Text ---\n{result['text'].get('extracted_text', '')[:5000]}")
             if result.get("entities"):
-                print(f"\n  Top entities:")
+                print("\n  Top entities:")
                 for e in result["entities"][:15]:
                     print(f"    {e['entity_text']:<40} [{e['entity_label']}] x{e['count']}")
 
     elif args.command == "stats":
         stats = get_stats()
-        print(f"LMSBAND Database Statistics:")
+        print("LMSBAND Database Statistics:")
         print(f"  Files: {stats['files']}")
         print(f"  Text cached: {stats['text_cached']}")
         print(f"  Entity mentions: {stats['entities']}")
         print(f"  Unique entities: {stats['unique_entities']}")
         print(f"  Co-occurrences: {stats['cooccurrences']}")
-        print(f"\n  Entity labels:")
+        print("\n  Entity labels:")
         for label, cnt in stats["top_labels"].items():
             print(f"    {label}: {cnt}")
 

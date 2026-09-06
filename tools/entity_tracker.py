@@ -16,7 +16,7 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 VALID_ENTITY_TYPES = [
     "person",
@@ -249,7 +249,7 @@ def cmd_add_entity(args):
 
 def cmd_add_role(args):
     db = get_db()
-    db.execute(
+    cur = db.execute(
         """
         INSERT OR IGNORE INTO entity_roles
             (entity_id, person_name, role, date_start, date_end, source)
@@ -264,9 +264,38 @@ def cmd_add_role(args):
             args.source,
         ),
     )
+    inserted = cur.rowcount == 1
+    existing = None
+    if not inserted:
+        existing = db.execute(
+            """
+            SELECT date_start, date_end, source
+            FROM entity_roles
+            WHERE entity_id = ? AND person_name = ? AND role = ?
+            """,
+            (args.entity_id, args.person_name.strip(), args.role.strip()),
+        ).fetchone()
     db.commit()
     db.close()
-    print(f"Recorded role: entity #{args.entity_id} :: {args.person_name} -> {args.role}")
+    if inserted:
+        print(
+            f"Recorded role: entity #{args.entity_id} :: "
+            f"{args.person_name} -> {args.role}"
+        )
+        return True
+
+    tenure = (
+        f"{existing['date_start'] or '?'} to {existing['date_end'] or '?'}"
+        if existing is not None
+        else "unknown dates"
+    )
+    print(
+        f"Role already exists; no row recorded: entity #{args.entity_id} :: "
+        f"{args.person_name} -> {args.role} (existing tenure: {tenure}). "
+        "The current schema cannot represent a second tenure for the same "
+        "entity, person, and role."
+    )
+    return False
 
 
 def cmd_add_address(args):
@@ -352,13 +381,35 @@ def correct_entity_field(
     db = get_db()
     try:
         entity = db.execute(
-            f"SELECT id, {field} FROM entities WHERE id = ?", (entity_id,)
+            f"SELECT id, name, jurisdiction, {field} "
+            "FROM entities WHERE id = ?",
+            (entity_id,),
         ).fetchone()
         if entity is None:
             raise ValueError(f"Entity #{entity_id} does not exist")
         old_value = entity[field]
         if old_value == normalized_value:
             return False
+
+        if field == "jurisdiction":
+            collision = db.execute(
+                """
+                SELECT id FROM entities
+                WHERE name = ? AND jurisdiction IS ? AND id != ?
+                ORDER BY id
+                LIMIT 1
+                """,
+                (entity["name"], normalized_value, entity_id),
+            ).fetchone()
+            if collision is not None:
+                raise ValueError(
+                    f"Correction would duplicate entity #{collision['id']} "
+                    f"({entity['name']!r}, jurisdiction {normalized_value!r}). "
+                    "Review both records, then use "
+                    "'uv run python tools/entity_dedup.py merge "
+                    f"--keep-id {collision['id']} --delete-id {entity_id} "
+                    "--dry-run' before changing canonical metadata."
+                )
 
         actor = (
             corrected_by
@@ -512,7 +563,12 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("lookup", help="Lookup entities by name")
-    p.add_argument("--name", required=True)
+    p.add_argument("name", nargs="?", help="Entity name or substring")
+    p.add_argument(
+        "--name",
+        dest="name_option",
+        help="Entity name or substring (compatibility form)",
+    )
     p.add_argument("--limit", type=int, default=30)
     add_output_args(p)
 
@@ -591,6 +647,9 @@ def main():
 
     args = parser.parse_args()
     if args.command == "lookup":
+        args.name = args.name_option or args.name
+        if not args.name:
+            parser.error("lookup requires NAME or --name NAME")
         cmd_lookup(args)
     elif args.command == "show":
         cmd_show(args)

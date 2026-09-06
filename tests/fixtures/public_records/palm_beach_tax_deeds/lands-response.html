@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <body>
+    <input id="idTabToSelectBasedOnLastSearch" value="landsavailable">
+    <script>
+      jQuery('#TaxDeed').jqGrid({
+        rowList:[10,25,50,100],
+        rowNum:25,
+        url:'/Home/GridSearchData?SearchType=Lands%20Available'
+      });
+    </script>
+  </body>
+</html>

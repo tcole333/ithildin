@@ -197,6 +197,7 @@ def test_agent_guidance_warns_about_zsh_currency_and_status_parameter():
         guidance = (root / filename).read_text()
         assert "zsh expands dollar-prefixed values" in guidance
         assert "exit_code=$?" in guidance
+        assert "tools.env_loader.load_env_file()" in guidance
 
 
 def test_fbi_search_treats_email_punctuation_as_literal(tmp_path, monkeypatch):
@@ -287,6 +288,7 @@ def test_kabasshouse_zero_match_entity_lookup_succeeds(tmp_path, monkeypatch, ca
 def test_crtsh_timeout_is_reported_without_traceback(monkeypatch, capsys):
     from tools import query_crtsh
 
+    monkeypatch.setattr(query_crtsh.time, "sleep", lambda _delay: None)
     monkeypatch.setattr(
         query_crtsh, "urlopen",
         lambda request, timeout: (_ for _ in ()).throw(TimeoutError()),
@@ -296,6 +298,8 @@ def test_crtsh_timeout_is_reported_without_traceback(monkeypatch, capsys):
         query_crtsh._fetch({"q": "example.com"}, timeout=7)
 
     assert exc.value.code == 1
-    assert capsys.readouterr().err == (
-        "ERROR: crt.sh did not respond within 7s; retry later\n"
-    )
+    error = capsys.readouterr().err
+    assert error.count("WARNING: crt.sh attempt") == 2
+    assert "ERROR: crt.sh query failed after 3 attempts" in error
+    assert "timeout after 7s" in error
+    assert "Traceback" not in error

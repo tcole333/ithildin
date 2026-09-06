@@ -12,9 +12,16 @@ Usage:
 """
 
 import argparse
+import hashlib
 import json
+import os
 import sqlite3
 import sys
+import tempfile
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.parse import unquote, urlparse
+from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -34,6 +41,11 @@ def _log(query, source, count):
 
 
 DB_PATH = "/Users/travcole/projects/epstein-docs/output/documents.db"
+DOJ_EPSTEIN_HOSTS = {"justice.gov", "www.justice.gov"}
+DOJ_PDF_PATH_PREFIXES = (
+    "/epstein/files/",
+    "/multimedia/court records/",
+)
 
 
 def get_db():
@@ -102,6 +114,98 @@ def get_names(bates_id):
     return None
 
 
+def download_epstein_pdf(
+    url,
+    output_path,
+    *,
+    opener=None,
+    max_bytes=None,
+    timeout=60,
+):
+    """Download one indexed DOJ Epstein PDF through the age-verification gate."""
+    parsed = urlparse(url)
+    normalized_path = unquote(parsed.path).casefold()
+    if (
+        parsed.scheme != "https"
+        or parsed.hostname not in DOJ_EPSTEIN_HOSTS
+        or not normalized_path.startswith(DOJ_PDF_PATH_PREFIXES)
+        or not normalized_path.endswith(".pdf")
+    ):
+        raise ValueError(
+            "download URL must be an official HTTPS justice.gov indexed Epstein PDF"
+        )
+    if max_bytes is not None and max_bytes <= 0:
+        raise ValueError("max_bytes must be positive when supplied")
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    request = Request(
+        url,
+        headers={
+            "Accept": "application/pdf",
+            "Cookie": "justiceGovAgeVerified=true",
+            "User-Agent": "Ithildin Research research@example.com",
+        },
+    )
+    opener = opener or urlopen
+    temp_path = None
+    total = 0
+    digest = hashlib.sha256()
+    try:
+        with opener(request, timeout=timeout) as response:
+            content_type = response.headers.get("Content-Type", "")
+            prefix = response.read(5)
+            if "text/html" in content_type.casefold() or prefix != b"%PDF-":
+                raise ValueError(
+                    "DOJ returned a non-PDF response; age verification or the "
+                    "document URL may have changed"
+                )
+            with tempfile.NamedTemporaryFile(
+                mode="wb",
+                prefix=f".{output_path.name}.",
+                suffix=".tmp",
+                dir=output_path.parent,
+                delete=False,
+            ) as handle:
+                temp_path = Path(handle.name)
+                handle.write(prefix)
+                digest.update(prefix)
+                total = len(prefix)
+                while True:
+                    chunk = response.read(1024 * 1024)
+                    if not chunk:
+                        break
+                    total += len(chunk)
+                    if max_bytes is not None and total > max_bytes:
+                        raise ValueError(
+                            f"DOJ PDF exceeds caller-selected max_bytes={max_bytes}"
+                        )
+                    handle.write(chunk)
+                    digest.update(chunk)
+            geturl = getattr(response, "geturl", None)
+            retrieved_url = geturl() if callable(geturl) else url
+            status = getattr(response, "status", None)
+            if status is None:
+                getcode = getattr(response, "getcode", None)
+                status = getcode() if callable(getcode) else None
+        os.replace(temp_path, output_path)
+        temp_path = None
+    finally:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+
+    return {
+        "url": url,
+        "source_url": url,
+        "retrieved_url": retrieved_url,
+        "output": str(output_path),
+        "content_type": content_type,
+        "http_status": status,
+        "bytes": total,
+        "sha256": digest.hexdigest(),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Query DOJ Vol 11 (331K OCR'd pages)")
     subparsers = parser.add_subparsers(dest="command")
@@ -128,6 +232,19 @@ def main():
     # names
     n = subparsers.add_parser("names", help="Get extracted names from document")
     n.add_argument("bates_id")
+
+    # download
+    d = subparsers.add_parser(
+        "download",
+        help="Download an indexed DOJ Epstein PDF through the age gate",
+    )
+    d.add_argument("url", help="Indexed justice.gov Epstein PDF URL")
+    d.add_argument("--output", required=True, help="Destination PDF path")
+    d.add_argument(
+        "--max-bytes",
+        type=int,
+        help="Optional caller-selected maximum download size",
+    )
 
     args = parser.parse_args()
 
@@ -188,6 +305,21 @@ def main():
                 print(names)
         else:
             print(f"No extracted names for {args.bates_id}")
+
+    elif args.command == "download":
+        try:
+            result = download_epstein_pdf(
+                args.url,
+                args.output,
+                max_bytes=args.max_bytes,
+            )
+        except (HTTPError, URLError, OSError, ValueError) as error:
+            print(f"ERROR: {error}", file=sys.stderr)
+            raise SystemExit(2) from error
+        print(
+            f"Downloaded DOJ PDF ({result['bytes']:,} bytes) to "
+            f"{result['output']}"
+        )
 
 
 if __name__ == "__main__":

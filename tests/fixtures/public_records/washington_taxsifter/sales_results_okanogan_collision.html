@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head><title>TerraScan TaxSifter - Okanogan County Washington</title></head>
+  <body>
+    <form method="post" action="./SalesSearch.aspx">
+      <input type="hidden" name="ctl00$cphContent$hdfSelectedPageIndex" value="1">
+      <input name="ctl00$cphContent$txtparcelNumber" value="4030014005">
+      <input type="submit" name="ctl00$cphContent$searchbutton" value="Search">
+      <div class="resultCount">2 records found.</div>
+      <table class="dataGrid">
+        <tr>
+          <th>Parcel Number</th>
+          <th>Date</th>
+          <th>Sale Document</th>
+          <th>Excise #</th>
+          <th>Owner</th>
+          <th>Situs</th>
+          <th>Price</th>
+        </tr>
+        <tr><td colspan="7">Multiple Parcels in Sale</td></tr>
+        <tr>
+          <td>4030014005</td>
+          <td>10/1/1984</td>
+          <td>54-2535</td>
+          <td>840001</td>
+          <td>EXAMPLE OWNER ONE</td>
+          <td>100 TEST ROAD</td>
+          <td>$35,000</td>
+        </tr>
+        <tr>
+          <td>4030014005</td>
+          <td>6/15/1992</td>
+          <td>92-10876</td>
+          <td>920002</td>
+          <td>EXAMPLE OWNER TWO</td>
+          <td>100 TEST ROAD</td>
+          <td>$82,500</td>
+        </tr>
+      </table>
+      <span id="lblRollYear">TX_RollYear_Search: 2027</span>
+    </form>
+  </body>
+</html>

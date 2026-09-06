@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetListResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetListResult>
+        <List
+          ID="{ABABABAB-CDCD-EFEF-0101-121212121212}"
+          Title="Judges"
+          ItemCount="211"
+          BaseType="0"
+          ServerTemplate="100"
+        >
+          <Fields>
+            <Field Name="Title" StaticName="Title" DisplayName="Last Name" Type="Text" Required="TRUE" />
+            <Field Name="FirstName" StaticName="FirstName" DisplayName="First Name" Type="Text" />
+          </Fields>
+        </List>
+      </GetListResult>
+    </GetListResponse>
+  </soap:Body>
+</soap:Envelope>

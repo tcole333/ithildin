@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html>
+  <head><title>Maryland Judiciary Judgment and Liens Search}</title></head>
+  <body>
+    <form id="searchForm" name="searchForm" method="post"
+      action="/judgment/judgementSearch.jsf;jsessionid=PERSONSESSION">
+      <input type="hidden" name="searchForm" value="searchForm" />
+      <input type="radio" name="searchForm:companyIndicatorRadio"
+        value="N" checked="checked" />
+      <input type="radio" name="searchForm:companyIndicatorRadio" value="Y" />
+      <input type="text" name="searchForm:lastName" value="" />
+      <input type="text" name="searchForm:firstName" value="" />
+      <input type="text" name="searchForm:middleName" value="" />
+      <input type="checkbox" name="searchForm:wantsExactMatch" />
+      <select name="searchForm:county">
+        <option value="">Default All</option>
+        <option value="BALTIMORE CITY">Baltimore City</option>
+        <option value="BALTIMORE COUNTY">Baltimore County</option>
+      </select>
+      <input type="text" name="searchForm:filingStartDate" />
+      <input type="text" name="searchForm:filingEndDate" />
+      <input type="text" name="searchForm:exactFilingDate" />
+      <input type="submit" name="searchForm:caseSearchGet" value="Search" />
+      <input type="hidden" name="javax.faces.ViewState"
+        value="person-view-state" />
+    </form>
+  </body>
+</html>

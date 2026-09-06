@@ -1,0 +1,125 @@
+{
+  "type": "@kofile/FETCH_DOCUMENTS_FULFILLED/v6",
+  "payload": {
+    "workspaceID": "fixture-workspace",
+    "data": {
+      "byOrder": [
+        101,
+        102
+      ],
+      "byHash": {
+        "101": {
+          "id": 101,
+          "docId": 101,
+          "rsId": "BexarTXCivilCaseFiles-005548",
+          "docNumber": "6707",
+          "instrumentNumber": "6707",
+          "documentNumber": "6707",
+          "docType": "DIVORCE CASE",
+          "docTypeCode": "DIVORCE",
+          "docGroup": "CS",
+          "recordedDate": "1/1/1800",
+          "year": 1800,
+          "parties": [
+            {
+              "partyTypeCode": "DT",
+              "name": "WAISHAUER FANNIE",
+              "type": "direct",
+              "isDirect": true
+            },
+            {
+              "partyTypeCode": "IT",
+              "name": "WAISHAUER SAM",
+              "type": "indirect",
+              "isDirect": false
+            }
+          ],
+          "pageCount": 2,
+          "imageId": 501,
+          "images": [
+            {
+              "id": 501,
+              "totalPages": 2,
+              "previewType": "png",
+              "type": "stamped"
+            }
+          ],
+          "ocrText": "divorce petition excerpt",
+          "metadataVersion": 2,
+          "docVersion": 3,
+          "createdAt": "2025-01-13T18:36:42.884Z",
+          "updatedAt": "2025-01-13T18:54:34.574Z",
+          "contentModifiedAt": "2025-01-13T18:54:34.574Z"
+        },
+        "102": {
+          "id": 102,
+          "docId": 102,
+          "rsId": "BexarTXCivilCaseFiles-012294",
+          "docNumber": "6707",
+          "instrumentNumber": "6707",
+          "documentNumber": "6707",
+          "docType": "CIVIL CASE",
+          "docTypeCode": "CIVIL",
+          "docGroup": "CS",
+          "recordedDate": "9/17/1919",
+          "year": 1919,
+          "parties": [
+            {
+              "partyTypeCode": "DT",
+              "name": "ROOS H",
+              "type": "direct",
+              "isDirect": true
+            },
+            {
+              "partyTypeCode": "IT",
+              "name": "ALTHAUS EUGENE",
+              "type": "indirect",
+              "isDirect": false
+            }
+          ],
+          "pageCount": 9,
+          "imageId": 502,
+          "images": [
+            {
+              "id": 502,
+              "totalPages": 9,
+              "previewType": "png",
+              "type": "stamped"
+            }
+          ],
+          "ocrText": "civil petition excerpt",
+          "metadataVersion": 4,
+          "docVersion": 5,
+          "createdAt": "2025-01-14T18:36:42.884Z",
+          "updatedAt": "2025-01-14T18:54:34.574Z",
+          "contentModifiedAt": "2025-01-14T18:54:34.574Z"
+        }
+      }
+    },
+    "meta": {
+      "numRecords": 3,
+      "statistics": {
+        "recorded-years": [
+          {
+            "label": "1800",
+            "hits": 1
+          },
+          {
+            "label": "1919",
+            "hits": 2
+          }
+        ],
+        "docTypes": [
+          {
+            "label": "CIVIL",
+            "hits": 2
+          },
+          {
+            "label": "DIVORCE",
+            "hits": 1
+          }
+        ]
+      }
+    }
+  }
+}

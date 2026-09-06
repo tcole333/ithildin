@@ -61,8 +61,11 @@ uv run python tools/query_lobbying.py registrant "Epstein"
 # Search by individual lobbyist
 uv run python tools/query_lobbying.py lobbyist "Weingarten"
 
-# Detailed filing search (LD-2 activity reports)
-uv run python tools/query_lobbying.py filings --client "International Peace Institute" --type ld2
+# Search all filings for a client, including LD-2 activity reports
+uv run python tools/query_lobbying.py filings --client "International Peace Institute"
+
+# Filter by the Senate API's filing-period code (for example, first-quarter LD-2s)
+uv run python tools/query_lobbying.py filings --client "International Peace Institute" --type Q1
 
 # LD-203 contribution reports
 uv run python tools/query_lobbying.py contributions "International Peace Institute"

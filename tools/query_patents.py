@@ -66,6 +66,12 @@ _last_request = 0.0
 MIN_INTERVAL = 1.0  # 60 req/min peak
 
 
+# ─── Errors ───────────────────────────────────────────────────────────────────
+
+class PatentSourceUnavailable(RuntimeError):
+    """Raised when USPTO ODP could not answer a request."""
+
+
 # ─── Logging ──────────────────────────────────────────────────────────────────
 
 def _log(query, source, count):
@@ -132,14 +138,17 @@ def _api_request(url, params=None, body=None, method=None):
             if e.code == 404:
                 return None
             body_text = e.read().decode()[:500]
-            print(f"ERROR: HTTP {e.code} from USPTO ODP: {body_text}", file=sys.stderr)
-            return None
+            raise PatentSourceUnavailable(
+                f"HTTP {e.code} from USPTO ODP: {body_text}"
+            ) from e
         except URLError as e:
-            print(f"ERROR: Cannot reach USPTO ODP: {e.reason}", file=sys.stderr)
-            return None
+            raise PatentSourceUnavailable(
+                f"cannot reach USPTO ODP: {e.reason}"
+            ) from e
+        except TimeoutError as e:
+            raise PatentSourceUnavailable("USPTO ODP request timed out") from e
 
-    print("ERROR: Exhausted retries on rate limit", file=sys.stderr)
-    return None
+    raise PatentSourceUnavailable("USPTO ODP exhausted rate-limit retries")
 
 
 # ─── ODP Search Helpers ───────────────────────────────────────────────────────
@@ -167,6 +176,39 @@ def _search_patents(q, limit=25, offset=0, filters=None, sort=None, fields=None)
         body["fields"] = fields
 
     return _api_request(f"{ODP_PATENT_APPS}/search", body=body)
+
+
+def _lucene_phrase(value):
+    """Quote a user value as one Lucene phrase."""
+    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def _normalized_person_name(value):
+    """Normalize a person name while preserving exact token identity.
+
+    USPTO sometimes stores names as ``Last, First``. Reordering that explicit
+    form lets it match the CLI's ``First Last`` convention without turning a
+    full-name lookup into token co-occurrence.
+    """
+    value = value.strip()
+    if "," in value:
+        last, remainder = value.split(",", 1)
+        value = f"{remainder} {last}"
+    return tuple(re.findall(r"[^\W_]+", value.casefold()))
+
+
+def _exact_inventor_match(info, requested_name):
+    """Return whether a patent has a name-scoped match for the request."""
+    requested = _normalized_person_name(requested_name)
+    if not requested:
+        return False
+    candidates = [
+        _normalized_person_name(inventor.get("name", ""))
+        for inventor in info.get("inventors", [])
+    ]
+    if len(requested) == 1:
+        return any(requested[0] in candidate for candidate in candidates)
+    return any(candidate == requested for candidate in candidates)
 
 
 def _get_patent_detail(app_number):
@@ -558,7 +600,7 @@ def _print_search(result):
 
 def cmd_inventor(args):
     """Find patents by inventor name."""
-    q = f"inventorNameText:{args.name}"
+    q = f"inventorNameText:{_lucene_phrase(args.name)}"
 
     resp = _search_patents(q, limit=args.limit,
                            sort=[{"field": "applicationMetaData.filingDate", "order": "desc"}])
@@ -567,23 +609,33 @@ def cmd_inventor(args):
         return
 
     bag = resp.get("patentFileWrapperDataBag", [])
-    total = resp.get("count", len(bag))
+    api_total = resp.get("count", len(bag))
 
     db = _init_db()
     results = []
     for entry in bag:
         info = _extract_patent_info(entry)
+        if not _exact_inventor_match(info, args.name):
+            continue
         _cache_patent_info(db, info)
         results.append(info)
     db.close()
 
-    _log(f"inventor:{args.name}", "patents", total)
+    matched = len(results)
+    _log(f"inventor:{args.name}", "patents", matched)
 
     result = {
         "query": args.name,
         "query_type": "inventor",
-        "total": total,
-        "returned": len(results),
+        "match_semantics": (
+            "exact_normalized_inventor_name"
+            if len(_normalized_person_name(args.name)) > 1
+            else "exact_inventor_name_token"
+        ),
+        "total": matched,
+        "returned": matched,
+        "api_candidate_total": api_total,
+        "api_candidates_screened": len(bag),
         "patents": [{
             "patent_number": p["patent_number"],
             "app_number": p["app_number"],
@@ -595,15 +647,21 @@ def cmd_inventor(args):
         } for p in results],
     }
 
-    summary = f"inventor '{args.name}': {total} patents"
-    if write_output(result, args, summary=summary):
+    summary = (
+        f"inventor '{args.name}': {matched} name-scoped matches "
+        f"from {len(bag)} screened candidates"
+    )
+    if write_output(result, args, summary=summary, result_count=matched):
         return
     if getattr(args, "json_out", False):
         print(json.dumps(result, indent=2, default=str))
         return
 
     print(f"\n  Patents by Inventor: \"{args.name}\"")
-    print(f"  {total} total, showing {len(results)}")
+    print(
+        f"  {matched} name-scoped matches; screened {len(bag)} "
+        f"of {api_total} API candidates"
+    )
     print("  " + "-" * 68)
     for i, p in enumerate(result["patents"], 1):
         title = (p.get("title") or "")[:75]
@@ -789,20 +847,20 @@ def _print_patent_detail(result):
         print(f"  CPC Codes:   {', '.join(result['cpc_codes'][:10])}")
 
     if result.get("assignees"):
-        print(f"\n  Assignees:")
+        print("\n  Assignees:")
         for a in result["assignees"]:
             loc = ", ".join(filter(None, [a.get("city"), a.get("state"), a.get("country")])) or ""
             print(f"    - {a['name']}" + (f"  ({loc})" if loc else ""))
 
     if result.get("inventors"):
-        print(f"\n  Inventors:")
+        print("\n  Inventors:")
         for inv in result["inventors"]:
             loc = ", ".join(filter(None, [inv.get("city"), inv.get("state"), inv.get("country")])) or ""
             print(f"    - {inv['name']}" + (f"  ({loc})" if loc else ""))
 
     if result.get("abstract"):
         abstract = result["abstract"][:500]
-        print(f"\n  Abstract:")
+        print("\n  Abstract:")
         words = abstract.split()
         line = "    "
         for w in words:
@@ -1177,26 +1235,26 @@ def _print_portfolio(result):
     if result.get("by_year"):
         years = sorted(result["by_year"].keys())
         print(f"  Date range:        {years[0]} - {years[-1]}")
-        print(f"\n  Patents by year:")
+        print("\n  Patents by year:")
         for y in years:
             count = result["by_year"][y]
             bar = "#" * min(count, 40)
             print(f"    {y}: {bar} {count}")
 
     if result.get("top_cpc_codes"):
-        print(f"\n  Top technology areas (CPC):")
+        print("\n  Top technology areas (CPC):")
         for entry in result["top_cpc_codes"][:8]:
             print(f"    {entry['code']}: {entry['count']} patents")
 
     if result.get("assignment_summary"):
         a = result["assignment_summary"]
-        print(f"\n  Ownership activity:")
+        print("\n  Ownership activity:")
         print(f"    Acquired via transfer: {a['acquired_via_transfer']}")
         print(f"    Divested:              {a['divested']}")
         if a["security_interests"]:
             print(f"    !! Security interests:  {a['security_interests']} (used as collateral)")
 
-    print(f"\n  Recent patents:")
+    print("\n  Recent patents:")
     sorted_patents = sorted(result.get("patents", []),
                             key=lambda p: p.get("date") or "", reverse=True)
     for p in sorted_patents[:10]:
@@ -1564,8 +1622,22 @@ def main():
         "citations": cmd_citations,
         "enrich": cmd_enrich,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except PatentSourceUnavailable as exc:
+        result = {
+            "status": "unavailable",
+            "source": "uspto_odp",
+            "command": args.command,
+            "query": getattr(args, "query", getattr(args, "name", None)),
+            "error": str(exc),
+            "results": [],
+        }
+        write_output(result, args, summary=f"USPTO ODP {args.command}")
+        print(f"ERROR: USPTO ODP unavailable: {exc}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -1,0 +1,335 @@
+# Investigation Profile: Epstein-Oslo Back Channel Prehistory
+
+name: "epstein-oslo"
+
+primary_subject: "Epstein-Oslo back channel prehistory (Rod-Larsen / Juul, 1992-93)"
+
+description: >
+  Tests whether any Jeffrey Epstein contact, funding, or facilitation of the
+  Oslo-channel network predates the documented post-2004 record - specifically
+  around the Dec 1992 - Sept 1993 secret channel. Three pre-registered
+  hypotheses: H1 active background role in the channel itself (~3% prior);
+  H2 pre-2000 contact with channel participants or their networks, most
+  plausibly via the PLO-adjacent finance world (~15-20%); H3 null / reverse
+  acquisition - Epstein acquired the Oslo network's afterlife (IPI, envoy
+  circuit, mythology) from ~2005 (remainder). An all-null outcome retires H1
+  and publishes H3 as a consolidated finding; that outcome is publishable.
+  Pre-committed update rules live in research/hypotheses.md - do not
+  improvise new ones. The 2005-2019 relationship record (IPI donations,
+  personal loan, Drammensveien 42, will beneficiaries, Feb 2026 Okokrim
+  charges) is ESTABLISHED TERRITORY under the epstein and epstein-gates-ipi
+  profiles: cite it, do not re-derive it.
+
+key_persons:
+  - "jeffrey epstein"
+  - "terje rod-larsen"
+  - "terje rød-larsen"
+  - "mona juul"
+  - "johan jorgen holst"
+  - "johan jørgen holst"
+  - "marianne heiberg"
+  - "jan egeland"
+  - "yair hirschfeld"
+  - "ron pundak"
+  - "yossi beilin"
+  - "uri savir"
+  - "joel singer"
+  - "ahmed qurei"
+  - "abu ala"
+  - "hassan asfour"
+  - "maher el-kurd"
+  - "hilde henriksen waage"
+  - "fabrice aidan"
+  - "thorbjorn jagland"
+  - "thorbjørn jagland"
+  - "adnan khashoggi"
+  - "muhammad rashid"
+  - "khaled salam"
+  - "fuad shubaki"
+  - "david rodgers"
+  - "larry visoski"
+  - "steven hoffenberg"
+  - "douglas leese"
+  - "robert maxwell"
+  - "shimon peres"
+
+known_addresses:
+  "777 united nations plaza": "International Peace Institute headquarters, New York"
+
+threads:
+  - id: 170
+    name: "Chronology Spine & Movement Correlation"
+    description: "WP0 round-by-round channel chronology + WP1 Epstein flight/movement correlation 1991-1994"
+    targets:
+      - "david rodgers"
+      - "larry visoski"
+      - "jeffrey epstein"
+    keywords:
+      - "flight log"
+      - "n908je"
+      - "n120je"
+      - "gulfstream"
+      - "fornebu"
+      - "teterboro"
+      - "bromma"
+      - "le bourget"
+
+  - id: 171
+    name: "Contact Dating - Black Book & Corpus Terminus"
+    description: "WP2 black book as dating instrument + WP3 released-corpus terminus and retrospection/bragging test"
+    targets:
+      - "terje rod-larsen"
+      - "mona juul"
+    keywords:
+      - "black book"
+      - "contact book"
+      - "address book"
+      - "since we met"
+      - "old friend"
+      - "back channel"
+
+  - id: 172
+    name: "Channel Funding - FAFO & ECF"
+    description: "WP4 FAFO funding archaeology 1990-1994 + WP5 ECF early funding 1991-1993; find any non-LO, non-state, US private money"
+    targets:
+      - "fafo"
+      - "economic cooperation foundation"
+    keywords:
+      - "fafo"
+      - "annual report"
+      - "donor"
+      - "amutot"
+      - "grant"
+
+  - id: 173
+    name: "Norwegian Archival Void"
+    description: "WP6 characterize the MFA Jan-Sept 1993 archival gap; what survives around it; Holst/Heiberg papers; Stortinget special-law push"
+    targets:
+      - "hilde henriksen waage"
+      - "norwegian ministry of foreign affairs"
+      - "riksarkivet"
+    keywords:
+      - "archival"
+      - "waage"
+      - "offentleglova"
+      - "stortinget"
+      - "missing"
+
+  - id: 174
+    name: "Epstein 1992-93 Reconstruction"
+    description: "WP7 density map of Epstein's documented life during the channel window (alibi/anti-alibi)"
+    targets:
+      - "jeffrey epstein"
+      - "towers financial"
+      - "leslie wexner"
+    keywords:
+      - "zorro"
+      - "waves"
+      - "visitor log"
+      - "towers"
+      - "1993"
+
+  - id: 175
+    name: "Mid-90s Ascent Vector"
+    description: "WP8 test whether Epstein's mid-90s sponsors/venues carry peace-process or finance/science/philanthropy fingerprints; pin Barak/Peres intro chain"
+    targets:
+      - "council on foreign relations"
+      - "rockefeller university"
+      - "trilateral commission"
+      - "ehud barak"
+    keywords:
+      - "membership"
+      - "trustee"
+      - "nominat"
+      - "wexner foundation"
+
+  - id: 176
+    name: "PLO-Finance Vector"
+    description: "WP9 H2's concrete form - Abu Ala's economic world, Samed, BCCI/Iran-Contra gray-finance substrate; name-hit or nothing"
+    targets:
+      - "samed"
+      - "adnan khashoggi"
+      - "muhammad rashid"
+      - "bcci"
+    keywords:
+      - "samed"
+      - "bcci"
+      - "iran.?contra"
+      - "walsh"
+      - "kerry committee"
+      - "triad"
+      - "austrian passport"
+
+  - id: 177
+    name: "Witness Prep & Monitoring"
+    description: "WP10 witness dossiers (prep only, human-approved outreach) + standing monitors (Stortinget archive-law push)"
+    targets:
+      - "hilde henriksen waage"
+      - "joel singer"
+      - "yair hirschfeld"
+      - "jan egeland"
+      - "yossi beilin"
+    keywords:
+      - "dossier"
+      - "outreach"
+      - "special law"
+      - "private archive"
+
+corpus_tools:
+  - tool: "tools/ingest_kabasshouse.py"
+    name: "Kabasshouse Epstein Corpus"
+    description: "Primary Epstein full-text corpus; use EFTA IDs as canonical references"
+    commands: ["search", "doc", "entity", "financials", "curated"]
+
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein Relationship Database"
+    description: "Parsed emails, entities, semantic triples, and co-occurrence relationships"
+    commands: ["emails", "docs", "entities", "triples", "cooccurrence"]
+
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND Structured Epstein Data"
+    description: "Structured financial, flight, balance, and entity layers; text overlaps Kabasshouse"
+    commands: ["search", "entities", "file"]
+
+  - tool: "tools/ingest_epstein_20k.py"
+    name: "House Oversight Epstein Files"
+    description: "Distinct House Oversight release"
+    commands: ["search"]
+
+  - tool: "tools/ingest_fbi_files.py"
+    name: "FBI Epstein Files"
+    description: "FBI release incl. named exhibits: Flight Log, Contact Book"
+    commands: ["search", "overlap"]
+
+  - tool: "tools/ingest_epstein_exposed.py"
+    name: "EpsteinExposed Aggregate"
+    description: "Cross-type search incl. flights subcommand (passenger/year filters)"
+    commands: ["search", "flights", "persons", "documents"]
+
+  - tool: "tools/reporting_corpus.py"
+    name: "Epstein Reporting Knowledge Layer"
+    description: "Versioned reporting and attributed claims; not primary corroboration"
+    commands: ["search", "claims", "primary-gaps"]
+
+  - tool: "tools/government_release_corpus.py"
+    name: "DOJ and SEC Press Releases"
+    description: "Official agency statements"
+    commands: ["search", "show", "stats"]
+
+  - tool: "tools/query_investigations.py"
+    name: "Ingested Investigation Reports"
+    description: "Congressional/enforcement report corpus (BCCI, Iran-Contra candidates)"
+    commands: ["search", "read", "list"]
+
+key_dates:
+  - date: "1992-12-04"
+    event: "London: Hirschfeld-Qurei first meeting, brokered by Rod-Larsen (Ashrawi suggested it); direct PLO contact still illegal under Israeli law until Jan 1993"
+    category: "milestone"
+  - date: "1993-01-20"
+    event: "Oslo channel Round 1 opens at Borregaard Manor, Sarpsborg (Jan 20-22); Hirschfeld/Pundak the only Israelis"
+    category: "operational"
+  - date: "1993-05-20"
+    event: "Uri Savir enters the channel (May 1993; exact round date to be pinned by WP0); channel upgraded to official"
+    category: "operational"
+  - date: "1993-08-17"
+    event: "Stockholm: Holst-Peres overnight phone marathon with Arafat/Tunis (Aug 17-18)"
+    category: "operational"
+  - date: "1993-08-20"
+    event: "Secret initialing of the Declaration of Principles, Oslo, Peres present"
+    category: "milestone"
+  - date: "1993-09-13"
+    event: "White House signing ceremony (~3,000 lawn guests); whether Epstein attended is a WP7 check"
+    category: "milestone"
+  - date: "1994-01-13"
+    event: "Johan Jorgen Holst dies; location of his personal papers is a WP6 target"
+    category: "milestone"
+  - date: "2000-06-01"
+    event: "MFA shutdown of Waage's archival research (2000; month approximate, actor per plan brief - WP6 verifies); predates any documented Epstein tie"
+    category: "operational"
+  - date: "2019-08-08"
+    event: "Epstein signs final will; reported USD 10M total to Rod-Larsen/Juul's two children (see epstein profile finding 143)"
+    category: "financial"
+  - date: "2026-01-30"
+    event: "DOJ releases 3M+ pages; triggers Juul resignation as ambassador, Okokrim charges (Feb 2026), French investigation of Fabrice Aidan"
+    category: "legal"
+
+seed_pillars:
+  - name: "FAFO"
+    pillar_type: "academia"
+    sub_type: "labor_research_institute"
+    status: "active"
+    founded: "1982"
+    jurisdiction: "Norway"
+    significance: "LO-founded research institute; Rod-Larsen's platform and the channel's logistics/cover vehicle; its 1990-94 funding map is WP4"
+
+  - name: "Economic Cooperation Foundation"
+    pillar_type: "operations"
+    sub_type: "policy_ngo"
+    status: "active"
+    founded: "1991"
+    jurisdiction: "Israel"
+    significance: "Hirschfeld/Pundak vehicle on the Israeli side of the channel; who funded years one and two is WP5"
+
+  - name: "International Peace Academy"
+    pillar_type: "operations"
+    sub_type: "international_policy_nonprofit"
+    status: "active"
+    founded: "1970"
+    jurisdiction: "New York, United States"
+    significance: "IPI's predecessor; renamed under Rod-Larsen; the afterlife vehicle Epstein funded 2011-2017 (established territory)"
+
+  - name: "Norwegian Ministry of Foreign Affairs"
+    pillar_type: "government"
+    sub_type: "foreign_ministry"
+    status: "active"
+    founded: "1905"
+    jurisdiction: "Norway"
+    significance: "Channel co-funder; the Jan-Sept 1993 archival void (Waage's finding) is WP6"
+
+  - name: "Samed"
+    pillar_type: "operations"
+    sub_type: "plo_economic_institution"
+    status: "dissolved"
+    founded: "1970"
+    jurisdiction: "Lebanon / Tunisia"
+    significance: "PLO economic arm; Qurei's economic circuit; H2's hypothesized contact surface"
+
+  - name: "Towers Financial Corporation"
+    pillar_type: "banking"
+    sub_type: "receivables_finance"
+    status: "dissolved"
+    founded: null
+    jurisdiction: "New York, United States"
+    significance: "Epstein's documented 1987-88 business association (Hoffenberg-era); post-1991 involvement rests on T4 testimony - WP7 boundary object"
+
+  - name: "Bank of Credit and Commerce International"
+    pillar_type: "banking"
+    sub_type: "international_bank"
+    status: "dissolved"
+    founded: "1972"
+    dissolved: "1991"
+    jurisdiction: "Luxembourg / Pakistan"
+    significance: "Gray-finance substrate for PLO/Gulf/arms flows; WP9 name-search corpus (Kerry-Brown, Bingham)"
+
+  - name: "Lincoln Center Theater"
+    pillar_type: "media"
+    sub_type: "nonprofit_theater"
+    status: "active"
+    founded: "1985"
+    jurisdiction: "New York, United States"
+    significance: "Produced the 2016-17 play Oslo; MEE's Epstein-financing claim requires independent verification via donor/producer records (WP3b)"
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "Jeffrey Epstein"
+
+# Include epstein-gates-ipi threads in scoped queries (sibling investigation, same cast)
+bridge_threads: [122, 123, 124, 125, 126, 127, 128]
+
+source_overrides:
+  "Middle East Eye": "T3 advocacy-inflected - leads only; every load-bearing claim (incl. the Oslo-play financing claim) needs independent T1/T2"
+  "Al Jazeera features": "T3 - leads only"
+  "Steven Hoffenberg": "T4 unreliable narrator - log verbatim with provenance, never load-bearing"
+  "Ari Ben-Menashe": "T4 unreliable narrator - never load-bearing"
+  "2020 FBI trained-as-spy document": "T4 - locate the underlying document by identifier in the release before referencing at all; assess provenance chain"
+  "Michael Wolff": "Treat as a participant in Epstein's information operations, not independent corroboration"
+  "NYT / Landon Thomas Jr.": "Extreme caution: Thomas acted as a deal intermediary while covering Epstein"

@@ -35,16 +35,19 @@ Usage:
 """
 
 import argparse
+from contextlib import contextmanager
 import gzip
 import html
 import json
+import os
 import re
 import sys
+import tempfile
 import time
 import xml.etree.ElementTree as ET
 import zlib
 from html.parser import HTMLParser
-from urllib.parse import urlencode, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -54,13 +57,11 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 
-def _log(query, source, count):
-    """Log search to prevent redundant queries."""
-    try:
-        from tools.lead_tracker import log_search
-        log_search(query, source, count)
-    except Exception:
-        pass
+try:
+    from tools.search_log_util import log_search_result as _log
+except ImportError:
+    from search_log_util import log_search_result as _log
+
 
 
 EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
@@ -74,6 +75,7 @@ _last_request = 0.0
 MIN_INTERVAL = 0.11  # 10 req/sec max
 MAX_FILING_BYTES = 25 * 1024 * 1024
 MAX_SUBMISSIONS_BYTES = 25 * 1024 * 1024
+MAX_MATCH_CONTEXT_CHARS = 800
 MAX_REQUEST_ATTEMPTS = 3
 _TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
 
@@ -442,24 +444,58 @@ def _extract_document_text(data):
     return text
 
 
+def _bounded_context_line(line, *, match_start=None, before_match=False):
+    """Keep one context line bounded, centering a match when present."""
+    if len(line) <= MAX_MATCH_CONTEXT_CHARS:
+        return line, False
+
+    content_budget = MAX_MATCH_CONTEXT_CHARS - 2
+    if match_start is not None:
+        start = max(0, match_start - content_budget // 2)
+        end = min(len(line), start + content_budget)
+        start = max(0, end - content_budget)
+    elif before_match:
+        end = len(line)
+        start = end - content_budget
+    else:
+        start = 0
+        end = content_budget
+
+    prefix = "…" if start else ""
+    suffix = "…" if end < len(line) else ""
+    return f"{prefix}{line[start:end]}{suffix}", True
+
+
 def _line_matches(lines, terms, *, context=2, max_matches=20):
     """Return bounded line-context matches from the complete extracted text."""
     matches = []
     for term in terms or []:
         needle = term.casefold()
         for index, line in enumerate(lines):
-            if needle not in line.casefold():
+            match_start = line.casefold().find(needle)
+            if match_start < 0:
                 continue
             start = max(0, index - context)
             end = min(len(lines), index + context + 1)
-            matches.append({
-                "term": term,
-                "line": index + 1,
-                "context": [
-                    {"line": offset + 1, "text": lines[offset]}
-                    for offset in range(start, end)
-                ],
-            })
+            context_lines = []
+            for offset in range(start, end):
+                compact, truncated = _bounded_context_line(
+                    lines[offset],
+                    match_start=match_start if offset == index else None,
+                    before_match=offset < index,
+                )
+                item = {"line": offset + 1, "text": compact}
+                if truncated:
+                    item["truncated"] = True
+                context_lines.append(item)
+            matches.append(
+                {
+                    "term": term,
+                    "line": index + 1,
+                    "column": match_start + 1,
+                    "context": context_lines,
+                }
+            )
             if len(matches) >= max_matches:
                 return matches
     return matches
@@ -480,6 +516,7 @@ def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
         context=context,
         max_matches=max_matches,
     )
+    find_terms = getattr(args, "find", None)
     result = {
         "title": title,
         "url": url,
@@ -487,8 +524,11 @@ def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
         "characters": len(text),
         "line_count": len(lines),
         "matches": matches,
-        "text": text,
     }
+    if find_terms:
+        result["text_included"] = False
+    else:
+        result["text"] = text
     if write_output(result, args, summary=title):
         return
     if getattr(args, "json_out", False):
@@ -557,10 +597,17 @@ def cmd_search(args):
     if args.forms:
         params["forms"] = _normalize_efts_forms(args.forms)
 
-    data = _request(EFTS_URL, params)
-    if not data:
-        print("No results.")
-        return
+    try:
+        data = _request(EFTS_URL, params, raise_errors=True)
+    except SecRequestError as error:
+        print(f"ERROR: EDGAR search unavailable: {error}", file=sys.stderr)
+        raise SystemExit(2) from error
+    if not isinstance(data, dict) or not isinstance(data.get("hits"), dict):
+        print(
+            "ERROR: EDGAR search returned an invalid response without a hits object",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
 
     hits = data.get("hits", {})
     total = hits.get("total", {}).get("value", 0)
@@ -1011,6 +1058,14 @@ def cmd_insider(args):
                 "url": _filing_url(cik_display, accessions[i] if i < len(accessions) else "", primary_docs[i] if i < len(primary_docs) else ""),
             })
 
+    if args.detail:
+        for filing in insider_filings[:args.limit]:
+            filing["detail"] = _fetch_insider_detail(
+                cik_display,
+                filing["accession"],
+                filing["doc"],
+            )
+
     data_out = {
         "company_name": name,
         "cik": cik_display,
@@ -1046,8 +1101,8 @@ def cmd_insider(args):
     for idx, filing in enumerate(insider_filings[:show]):
         print(f"  [{idx+1}] {filing['date']} | Form {filing['form']}")
 
-        if args.detail and filing["doc"].endswith(".xml"):
-            _fetch_insider_detail(cik_display, filing["accession"], filing["doc"])
+        if args.detail:
+            _print_insider_detail(filing["detail"])
         elif filing["url"]:
             print(f"      {filing['url']}")
         print()
@@ -1056,96 +1111,328 @@ def cmd_insider(args):
         print(f"  ... {len(insider_filings) - show} more insider filings")
 
 
+def _ownership_xml_url(index_url, href):
+    """Resolve a filing-index XML link to the underlying raw ownership XML."""
+    if not href:
+        return None
+    url = urljoin(index_url, html.unescape(href))
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in {"sec.gov", "www.sec.gov"}:
+        return None
+    path = re.sub(r"/xslF345X\d+/", "/", parsed.path, flags=re.IGNORECASE)
+    if not path.casefold().endswith(".xml"):
+        return None
+    raw_url = parsed._replace(path=path, params="", query="", fragment="").geturl()
+    if not raw_url.startswith(index_url):
+        return None
+    return raw_url
+
+
+def _ownership_xml_candidates(index_url, index_text, doc_name):
+    """Return bounded, ranked raw ownership XML candidates from a filing page."""
+    hrefs = [doc_name] if doc_name else []
+    hrefs.extend(
+        re.findall(
+            r"""href\s*=\s*["']([^"']+\.xml(?:[?#][^"']*)?)["']""",
+            index_text,
+            flags=re.IGNORECASE,
+        )
+    )
+    primary_name = urlparse(urljoin(index_url, doc_name or "")).path.rsplit("/", 1)[-1]
+    candidates = []
+    seen = set()
+    for position, href in enumerate(hrefs):
+        url = _ownership_xml_url(index_url, href)
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        filename = urlparse(url).path.rsplit("/", 1)[-1]
+        auxiliary = bool(
+            re.search(
+                r"(?:_cal|_def|_lab|_pre|filingsummary)\.xml$",
+                filename,
+                flags=re.IGNORECASE,
+            )
+        )
+        candidates.append(
+            (
+                auxiliary,
+                filename.casefold() != primary_name.casefold(),
+                position,
+                url,
+            )
+        )
+    candidates.sort()
+    return [candidate[-1] for candidate in candidates[:10]]
+
+
+def _findall_local(root, name):
+    """Find namespaced or namespace-free descendants without duplicates."""
+    elements = root.findall(f".//{name}")
+    return elements if elements else root.findall(f".//{{*}}{name}")
+
+
+def _findtext_local(element, path):
+    """Read a nested value from namespace-free or namespaced ownership XML."""
+    value = element.findtext(f".//{path}")
+    if value is None:
+        namespaced_path = "/".join(f"{{*}}{part}" for part in path.split("/"))
+        value = element.findtext(f".//{namespaced_path}")
+    return (value or "").strip()
+
+
+def _parse_insider_xml(xml_data, source_url):
+    """Parse an SEC ownership document into structured transactions."""
+    xml_text = (
+        xml_data.decode("utf-8", errors="replace")
+        if isinstance(xml_data, bytes)
+        else str(xml_data)
+    )
+    root = ET.fromstring(xml_text)
+    if root.tag.rsplit("}", 1)[-1] != "ownershipDocument":
+        return None
+
+    issuer_name = ""
+    issuer_ticker = ""
+    issuers = _findall_local(root, "issuer")
+    if issuers:
+        issuer_name = _findtext_local(issuers[0], "issuerName")
+        issuer_ticker = _findtext_local(issuers[0], "issuerTradingSymbol")
+
+    roles = []
+    relationships = _findall_local(root, "reportingOwnerRelationship")
+    if relationships:
+        relationship = relationships[0]
+        if _findtext_local(relationship, "isDirector") == "1":
+            roles.append("Director")
+        if _findtext_local(relationship, "isOfficer") == "1":
+            roles.append(
+                _findtext_local(relationship, "officerTitle") or "Officer"
+            )
+        if _findtext_local(relationship, "isTenPercentOwner") == "1":
+            roles.append("10%+ Owner")
+
+    code_map = {
+        "P": "Purchase",
+        "S": "Sale",
+        "A": "Grant",
+        "D": "Disposition",
+        "F": "Tax",
+        "M": "Exercise",
+        "G": "Gift",
+        "C": "Conversion",
+    }
+    transactions = []
+    for element_name, security_type in (
+        ("nonDerivativeTransaction", "non_derivative"),
+        ("derivativeTransaction", "derivative"),
+    ):
+        for transaction in _findall_local(root, element_name):
+            code = _findtext_local(transaction, "transactionCode") or "?"
+            acquired_disposed = _findtext_local(
+                transaction, "transactionAcquiredDisposedCode/value"
+            )
+            transactions.append(
+                {
+                    "security_type": security_type,
+                    "security": _findtext_local(
+                        transaction, "securityTitle/value"
+                    )
+                    or "?",
+                    "date": _findtext_local(
+                        transaction, "transactionDate/value"
+                    )
+                    or "?",
+                    "code": code,
+                    "action": code_map.get(code, code),
+                    "shares": _findtext_local(
+                        transaction, "transactionShares/value"
+                    )
+                    or "?",
+                    "price_per_share": _findtext_local(
+                        transaction, "transactionPricePerShare/value"
+                    ),
+                    "direction": (
+                        "Acquired"
+                        if acquired_disposed == "A"
+                        else "Disposed"
+                        if acquired_disposed == "D"
+                        else ""
+                    ),
+                }
+            )
+
+    holdings = []
+    for element_name, security_type in (
+        ("nonDerivativeHolding", "non_derivative"),
+        ("derivativeHolding", "derivative"),
+    ):
+        for holding in _findall_local(root, element_name):
+            holdings.append(
+                {
+                    "security_type": security_type,
+                    "security": _findtext_local(holding, "securityTitle/value")
+                    or "?",
+                    "shares": _findtext_local(
+                        holding, "sharesOwnedFollowingTransaction/value"
+                    )
+                    or "?",
+                }
+            )
+
+    return {
+        "status": "parsed",
+        "source_url": source_url,
+        "issuer": {"name": issuer_name or "?", "ticker": issuer_ticker},
+        "roles": roles,
+        "transactions": transactions,
+        "holdings": holdings,
+    }
+
+
 def _fetch_insider_detail(cik, accession, doc_name):
-    """Fetch and parse a Form 3/4/5 XML for transaction details."""
-    # Get the filing index to find the raw XML (not XSLT version)
+    """Fetch and parse a Form 3/4/5 raw XML, following XSL display links."""
     acc_path = accession.replace("-", "")
     index_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc_path}/"
     index_data = _request(index_url, accept="text/html")
     if not index_data:
+        return {
+            "status": "unavailable",
+            "reason": "Could not retrieve filing index",
+        }
+
+    index_text = (
+        index_data.decode("utf-8", errors="replace")
+        if isinstance(index_data, bytes)
+        else str(index_data)
+    )
+    candidates = _ownership_xml_candidates(index_url, index_text, doc_name)
+    if not candidates:
+        return {
+            "status": "unavailable",
+            "reason": "Filing index did not expose an ownership XML document",
+        }
+
+    for xml_url in candidates:
+        xml_data = _request(xml_url, accept="application/xml")
+        if not xml_data:
+            continue
+        try:
+            detail = _parse_insider_xml(xml_data, xml_url)
+        except ET.ParseError:
+            continue
+        if detail is not None:
+            return detail
+    return {
+        "status": "unavailable",
+        "reason": "No candidate contained a parseable SEC ownership document",
+        "candidate_urls": candidates,
+    }
+
+
+def _print_insider_detail(detail):
+    """Render one structured ownership-document detail record."""
+    if detail["status"] != "parsed":
+        print(f"      ({detail['reason']})")
         return
 
-    index_text = index_data.decode("utf-8", errors="replace") if isinstance(index_data, bytes) else str(index_data)
-    xml_files = re.findall(r'href="([^"]+\.xml)"', index_text)
-    # Prefer non-xsl XML files
-    raw_xmls = [f for f in xml_files if "xsl" not in f.lower()]
+    issuer = detail["issuer"]
+    print(f"      Issuer: {issuer['name']} ({issuer['ticker']})")
+    if detail["roles"]:
+        print(f"      Role: {', '.join(detail['roles'])}")
+    for transaction in detail["transactions"]:
+        price = transaction["price_per_share"]
+        price_text = f" @ ${price}" if price else ""
+        print(
+            f"      {transaction['date']} | {transaction['action']} "
+            f"{transaction['shares']} {transaction['security']}{price_text} "
+            f"({transaction['direction']})"
+        )
+    for holding in detail["holdings"]:
+        print(f"      Holds: {holding['shares']} {holding['security']}")
+    if not detail["transactions"] and not detail["holdings"]:
+        print("      (Ownership XML contained no transaction or holding rows)")
 
-    if not raw_xmls:
-        return
 
-    xml_path = raw_xmls[0]
-    if xml_path.startswith("/"):
-        xml_url = f"https://www.sec.gov{xml_path}"
-    else:
-        xml_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc_path}/{xml_path}"
+@contextmanager
+def _edgartools_import_lock():
+    """Serialize edgartools' non-atomic one-time cache migration.
 
-    xml_data = _request(xml_url, accept="application/xml")
-    if not xml_data:
-        return
-
+    edgartools 5.x clears ``_tcache`` and creates its Issue #457 marker during
+    import. Concurrent CLI processes can otherwise remove the directory while
+    another import is touching the marker, producing a benign but alarming
+    cleanup warning.
+    """
     try:
-        xml_text = xml_data.decode("utf-8", errors="replace") if isinstance(xml_data, bytes) else str(xml_data)
-        root = ET.fromstring(xml_text)
+        import fcntl
+    except ImportError:
+        yield
+        return
 
-        # Issuer info
-        issuer = root.find(".//issuer")
-        if issuer is None:
-            issuer = root.find(".//{*}issuer")
-        if issuer is not None:
-            issuer_name = (issuer.findtext("issuerName") or issuer.findtext("{*}issuerName") or "?").strip()
-            issuer_ticker = (issuer.findtext("issuerTradingSymbol") or issuer.findtext("{*}issuerTradingSymbol") or "").strip()
-            print(f"      Issuer: {issuer_name} ({issuer_ticker})")
+    lock_path = os.path.join(
+        tempfile.gettempdir(), "ithildin-edgartools-import.lock"
+    )
+    with open(lock_path, "a", encoding="utf-8") as lock_file:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
 
-        # Owner relationship
-        rel = root.find(".//reportingOwnerRelationship")
-        if rel is None:
-            rel = root.find(".//{*}reportingOwnerRelationship")
-        if rel is not None:
-            roles = []
-            if rel.findtext("isDirector") == "1" or rel.findtext("{*}isDirector") == "1":
-                roles.append("Director")
-            if rel.findtext("isOfficer") == "1" or rel.findtext("{*}isOfficer") == "1":
-                title = (rel.findtext("officerTitle") or rel.findtext("{*}officerTitle") or "Officer").strip()
-                roles.append(title)
-            if rel.findtext("isTenPercentOwner") == "1" or rel.findtext("{*}isTenPercentOwner") == "1":
-                roles.append("10%+ Owner")
-            if roles:
-                print(f"      Role: {', '.join(roles)}")
 
-        # Non-derivative transactions
-        for txn in root.findall(".//nonDerivativeTransaction") + root.findall(".//{*}nonDerivativeTransaction"):
-            security = (txn.findtext(".//securityTitle/value") or txn.findtext(".//{*}securityTitle/{*}value") or "?").strip()
-            date = (txn.findtext(".//transactionDate/value") or txn.findtext(".//{*}transactionDate/{*}value") or "?").strip()
-            code = (txn.findtext(".//transactionCode") or txn.findtext(".//{*}transactionCode") or "?").strip()
-            shares = (txn.findtext(".//transactionShares/value") or txn.findtext(".//{*}transactionShares/{*}value") or "?").strip()
-            price = (txn.findtext(".//transactionPricePerShare/value") or txn.findtext(".//{*}transactionPricePerShare/{*}value") or "").strip()
-            acq_disp = (txn.findtext(".//transactionAcquiredDisposedCode/value") or txn.findtext(".//{*}transactionAcquiredDisposedCode/{*}value") or "").strip()
+def _configure_edgartools_data_dir():
+    """Use a writable cache root when the default home cache is read-only."""
+    configured = os.environ.get("EDGAR_LOCAL_DATA_DIR")
+    if configured:
+        return configured
 
-            code_map = {"P": "Purchase", "S": "Sale", "A": "Grant", "D": "Disposition",
-                        "F": "Tax", "M": "Exercise", "G": "Gift", "C": "Conversion"}
-            action = code_map.get(code, code)
-            direction = "Acquired" if acq_disp == "A" else "Disposed" if acq_disp == "D" else ""
-            price_str = f" @ ${price}" if price else ""
+    default_dir = os.path.expanduser("~/.edgar")
+    cache_dir = os.path.join(default_dir, "_tcache")
+    if os.path.isdir(default_dir):
+        default_writable = (
+            os.access(default_dir, os.W_OK)
+            and (
+                not os.path.exists(cache_dir)
+                or os.access(cache_dir, os.W_OK)
+            )
+        )
+    else:
+        default_writable = (
+            not os.path.exists(default_dir)
+            and os.access(os.path.dirname(default_dir), os.W_OK)
+        )
+    if default_writable:
+        return default_dir
 
-            print(f"      {date} | {action} {shares} {security}{price_str} ({direction})")
+    user_id = os.getuid() if hasattr(os, "getuid") else "user"
+    fallback_dir = os.path.join(
+        tempfile.gettempdir(), f"ithildin-edgar-data-{user_id}"
+    )
+    os.makedirs(fallback_dir, mode=0o700, exist_ok=True)
+    os.environ["EDGAR_LOCAL_DATA_DIR"] = fallback_dir
+    return fallback_dir
 
-        # Holdings
-        for holding in root.findall(".//nonDerivativeHolding") + root.findall(".//{*}nonDerivativeHolding"):
-            security = (holding.findtext(".//securityTitle/value") or holding.findtext(".//{*}securityTitle/{*}value") or "?").strip()
-            shares = (holding.findtext(".//sharesOwnedFollowingTransaction/value") or
-                      holding.findtext(".//{*}sharesOwnedFollowingTransaction/{*}value") or
-                      holding.findtext(".//postTransactionAmounts/sharesOwnedFollowingTransaction/value") or "?").strip()
-            print(f"      Holds: {shares} {security}")
 
-    except ET.ParseError:
-        print("      (Could not parse XML)")
+def _ensure_edgartools_migration_markers(data_dir):
+    """Keep both upstream one-time cache migrations marked complete."""
+    cache_dir = os.path.join(data_dir, "_tcache")
+    os.makedirs(cache_dir, mode=0o700, exist_ok=True)
+    for marker_name in (
+        ".locale_fix_457_applied",
+        ".empty_response_fix_672_applied",
+    ):
+        marker_path = os.path.join(cache_dir, marker_name)
+        with open(marker_path, "a", encoding="utf-8"):
+            pass
 
 
 def _get_edgartools_filing(ticker_or_cik, form="10-K", index=0):
     """Get a filing via edgartools. Returns (filing, company) or (None, None)."""
-    import os
     os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
-    from edgar import Company
+    data_dir = _configure_edgartools_data_dir()
+    with _edgartools_import_lock():
+        from edgar import Company
+        _ensure_edgartools_migration_markers(data_dir)
     company = Company(str(ticker_or_cik))
     filings = company.get_filings(form=form)
     if not filings or index >= len(filings):
@@ -1283,24 +1570,27 @@ def cmd_sections(args):
         )
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
-        return
+        return 2
 
     if not filing:
         print(f"ERROR: No {args.form or '10-K'} filings found for {args.ticker}", file=sys.stderr)
-        return
-
-    print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ───")
-    print(f"    Accession: {filing.accession_no}")
-    print()
+        return 2
 
     try:
         obj = filing.obj()
     except Exception as e:
         print(f"WARNING: Could not parse filing structure ({e}). Falling back to full text.", file=sys.stderr)
         text = filing.text()
-        lines = text.split("\n")[:args.lines]
-        for line in lines:
-            print(line)
+        _emit_filing_text(
+            text,
+            args,
+            title=(
+                f"Full filing fallback | {filing.form} filed "
+                f"{filing.filing_date} | {company.name}"
+            ),
+            url=getattr(filing, "homepage_url", None),
+            retrieval="edgartools-full-text-fallback",
+        )
         return
 
     # Financial statement section names
@@ -1324,8 +1614,8 @@ def cmd_sections(args):
             "item1a": ("risk_factors", "Item 1A"),
             "mda": ("management_discussion", "Item 7"),
             "item7": ("management_discussion", "Item 7"),
-            "legal": ("legal_proceedings", "Item 3"),
-            "item3": ("legal_proceedings", "Item 3"),
+            "legal": (("legal_proceedings", "part_i_item_3"), "Item 3"),
+            "item3": (("legal_proceedings", "part_i_item_3"), "Item 3"),
         }
         key = args.section.lower().replace(" ", "_").replace("-", "_")
 
@@ -1335,51 +1625,89 @@ def cmd_sections(args):
             stmt = _get_financial_statement(obj, resolved)
             if stmt:
                 result = _statement_to_json(stmt, resolved, filing)
-                if hasattr(args, "output") and args.output:
-                    write_output(result, args)
-                else:
-                    print(json.dumps(result, indent=2, default=str))
+                if write_output(
+                    result,
+                    args,
+                    summary=(
+                        f"{resolved} | {filing.form} filed "
+                        f"{filing.filing_date}"
+                    ),
+                ):
+                    return
+                print(json.dumps(result, indent=2, default=str))
             else:
                 print(f"Financial statement '{key}' not available in this filing.")
             return
 
         if key in section_map:
             attr, label = section_map[key]
-            section = getattr(obj, attr, None)
+            attrs = attr if isinstance(attr, tuple) else (attr,)
+            section = next(
+                (
+                    candidate
+                    for candidate_name in attrs
+                    if (candidate := getattr(obj, candidate_name, None))
+                ),
+                None,
+            )
             if section:
                 text = str(section)
-                print(f"─── {label} ({len(text):,} chars) ───")
-                print()
-                lines = text.split("\n")[:args.lines]
-                for line in lines:
-                    print(line)
-                if len(text.split("\n")) > args.lines:
-                    print("\n... (truncated, use --lines to see more)")
+                _emit_filing_text(
+                    text,
+                    args,
+                    title=(
+                        f"{label} | {filing.form} filed "
+                        f"{filing.filing_date} | {company.name}"
+                    ),
+                    url=getattr(filing, "homepage_url", None),
+                    retrieval="edgartools-section",
+                )
             else:
                 # Try bracket access
                 try:
                     section = obj[args.section]
-                    text = str(section)
-                    print(f"─── {args.section} ({len(text):,} chars) ───")
-                    print()
-                    for line in text.split("\n")[:args.lines]:
-                        print(line)
                 except Exception:
+                    section = None
+                if section:
+                    text = str(section)
+                    _emit_filing_text(
+                        text,
+                        args,
+                        title=(
+                            f"{args.section} | {filing.form} filed "
+                            f"{filing.filing_date} | {company.name}"
+                        ),
+                        url=getattr(filing, "homepage_url", None),
+                        retrieval="edgartools-section",
+                    )
+                else:
                     print(f"Section '{args.section}' not found in this filing.")
         else:
             # Try direct bracket access
             try:
                 section = obj[args.section]
-                text = str(section)
-                print(f"─── {args.section} ({len(text):,} chars) ───")
-                print()
-                for line in text.split("\n")[:args.lines]:
-                    print(line)
             except Exception:
+                section = None
+            if section:
+                text = str(section)
+                _emit_filing_text(
+                    text,
+                    args,
+                    title=(
+                        f"{args.section} | {filing.form} filed "
+                        f"{filing.filing_date} | {company.name}"
+                    ),
+                    url=getattr(filing, "homepage_url", None),
+                    retrieval="edgartools-section",
+                )
+            else:
                 print(f"Section '{args.section}' not found. Try: business, risk, mda, legal, balance_sheet, income_statement, cashflow_statement")
         return
 
     # No specific section — show overview of all available sections
+    print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ───")
+    print(f"    Accession: {filing.accession_no}")
+    print()
     sections_found = []
     for attr, label in [
         ("business", "Item 1 - Business"),
@@ -1508,7 +1836,9 @@ def main():
         "read": cmd_read,
         "sections": cmd_sections,
     }
-    handlers[args.command](args)
+    exit_code = handlers[args.command](args)
+    if exit_code:
+        sys.exit(exit_code)
 
 
 if __name__ == "__main__":

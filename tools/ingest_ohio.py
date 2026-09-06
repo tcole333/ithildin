@@ -32,6 +32,8 @@ Usage:
 """
 
 import argparse
+import csv
+import hashlib
 import json
 import os
 import re
@@ -45,25 +47,23 @@ from curl_cffi import requests as req_lib
 # Add tools dir to path
 sys.path.insert(0, str(Path(__file__).parent))
 from query_registry import get_db, _rebuild_fts
+from registry_ingest_util import upsert_current_agent
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.env_loader import load_env_file
     from tools.lead_tracker import log_search
 except ImportError:
     from output_util import add_output_args, write_output
+    from env_loader import load_env_file
     from lead_tracker import log_search
 
-# Load .env
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
+load_env_file()
 
 SEARCH_URL = "https://businesssearch.ohiosos.gov/"
 API_BASE = "https://businesssearchapi.ohiosos.gov"
+IMAGE_BASE = "https://bizimage.ohiosos.gov/api/image"
+DEFAULT_IMAGE_DIR = Path(__file__).parent.parent / "datasets" / "ohio_sos" / "filings"
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -86,6 +86,7 @@ STATUS_MAP = {
 # ---------------------------------------------------------------------------
 
 _session = None
+_image_session = None
 _cf_clearance = None
 
 
@@ -121,7 +122,7 @@ def _api_get(path):
         if resp.status_code == 200:
             return resp.json()
         elif resp.status_code == 403:
-            print(f"ERROR: HTTP 403 — cf_clearance cookie may be expired. Get a fresh one.", file=sys.stderr)
+            print("ERROR: HTTP 403 — cf_clearance cookie may be expired. Get a fresh one.", file=sys.stderr)
             return None
         else:
             print(f"ERROR: HTTP {resp.status_code} for {url}", file=sys.stderr)
@@ -129,6 +130,166 @@ def _api_get(path):
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return None
+
+
+# ---------------------------------------------------------------------------
+# Filing-image downloads
+# ---------------------------------------------------------------------------
+
+_DOCUMENT_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$")
+
+
+def _get_image_session():
+    """Return a Chrome-compatible session for the public filing-image host."""
+    global _image_session
+    if _image_session is not None:
+        return _image_session
+
+    _image_session = req_lib.Session(impersonate="chrome")
+    _image_session.headers.update({
+        "Accept": "application/pdf,application/octet-stream;q=0.9,*/*;q=0.8",
+        "Referer": SEARCH_URL,
+    })
+    return _image_session
+
+
+def _normalize_image_kind(raw):
+    value = str(raw or "pdf").strip().lower()
+    if value in {"standard", "pdf"}:
+        return "pdf"
+    if value in {"cert", "certificate"}:
+        return "cert"
+    raise ValueError(f"Unsupported Ohio image kind: {raw!r}")
+
+
+def download_filing_image(document_id, output_dir=DEFAULT_IMAGE_DIR, kind="pdf", force=False):
+    """Download one Ohio filing packet and verify that the response is a PDF."""
+    document_id = str(document_id).strip()
+    if not _DOCUMENT_ID_RE.fullmatch(document_id):
+        raise ValueError(f"Invalid Ohio document ID: {document_id!r}")
+
+    image_kind = _normalize_image_kind(kind)
+    destination_dir = Path(output_dir).expanduser().resolve()
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    destination = destination_dir / f"{document_id}.pdf"
+
+    if destination.exists() and not force:
+        existing = destination.read_bytes()
+        if not existing.startswith(b"%PDF-"):
+            raise RuntimeError(f"Existing file is not a PDF: {destination}")
+        return {
+            "document_id": document_id,
+            "kind": image_kind,
+            "status": "existing",
+            "path": str(destination),
+            "bytes": len(existing),
+            "sha256": hashlib.sha256(existing).hexdigest(),
+        }
+
+    url = f"{IMAGE_BASE}/{image_kind}/{document_id}"
+    response = _get_image_session().get(url, timeout=60)
+    content_type = (response.headers.get("content-type") or "").lower()
+    content = response.content
+    if response.status_code != 200:
+        raise RuntimeError(f"Ohio image request returned HTTP {response.status_code}: {url}")
+    if not content.startswith(b"%PDF-"):
+        raise RuntimeError(
+            f"Ohio image response was not a PDF "
+            f"(content-type={content_type or 'missing'}, bytes={len(content)}): {url}"
+        )
+
+    temporary = destination.with_suffix(".pdf.part")
+    try:
+        temporary.write_bytes(content)
+        os.replace(temporary, destination)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+    return {
+        "document_id": document_id,
+        "kind": image_kind,
+        "status": "downloaded",
+        "path": str(destination),
+        "bytes": len(content),
+        "sha256": hashlib.sha256(content).hexdigest(),
+        "source_url": url,
+    }
+
+
+def _manifest_rows(path):
+    """Load filing rows from a JSON or CSV manifest."""
+    manifest_path = Path(path)
+    if manifest_path.suffix.lower() == ".json":
+        payload = json.loads(manifest_path.read_text())
+        if isinstance(payload, dict):
+            payload = payload.get("filings", payload.get("rows"))
+        if not isinstance(payload, list):
+            raise ValueError("JSON manifest must be a list or contain a 'filings'/'rows' list")
+        return payload
+
+    csv.field_size_limit(10 * 1024 * 1024)
+    with manifest_path.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        if not reader.fieldnames:
+            raise ValueError("CSV manifest has no header")
+        if not {"document_id", "din", "doc_id"}.intersection(reader.fieldnames):
+            raise ValueError(
+                "CSV manifest must contain one of: document_id, din, doc_id "
+                f"(actual header: {reader.fieldnames})"
+            )
+        return list(reader)
+
+
+def download_filing_manifest(path, output_dir=DEFAULT_IMAGE_DIR, force=False, delay=0.5):
+    """Download and deduplicate all filing packets named in a JSON/CSV manifest."""
+    results = []
+    seen = set()
+    for raw_row in _manifest_rows(path):
+        if isinstance(raw_row, str):
+            row = {"document_id": raw_row}
+        elif isinstance(raw_row, dict):
+            row = raw_row
+        else:
+            results.append({"status": "error", "error": f"Unsupported manifest row: {raw_row!r}"})
+            continue
+
+        document_id = row.get("document_id") or row.get("din") or row.get("doc_id")
+        kind = row.get("image_kind") or row.get("img_status") or "pdf"
+        if str(kind).strip().lower() in {"unavailable", "none", "no image"}:
+            results.append({
+                "document_id": str(document_id or "").strip(),
+                "charter_num": str(
+                    row.get("charter_num") or row.get("ohio_entity_number") or ""
+                ),
+                "status": "unavailable",
+            })
+            continue
+        try:
+            normalized_kind = _normalize_image_kind(kind)
+            key = (str(document_id).strip(), normalized_kind)
+            if key in seen:
+                continue
+            seen.add(key)
+            result = download_filing_image(
+                document_id,
+                output_dir=output_dir,
+                kind=normalized_kind,
+                force=force,
+            )
+            result["charter_num"] = str(
+                row.get("charter_num") or row.get("ohio_entity_number") or ""
+            )
+            results.append(result)
+            if result["status"] == "downloaded" and delay:
+                time.sleep(delay)
+        except Exception as exc:
+            results.append({
+                "document_id": str(document_id or ""),
+                "status": "error",
+                "error": str(exc),
+            })
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -344,6 +505,39 @@ def cmd_ingest_batch(args):
     print(f"\nBatch ingest complete: {total} entities ingested")
 
 
+def cmd_download_image(args):
+    result = download_filing_image(
+        args.document_id,
+        output_dir=args.output_dir,
+        kind=args.kind,
+        force=args.force,
+    )
+    print(json.dumps(result, indent=2))
+
+
+def cmd_download_manifest(args):
+    results = download_filing_manifest(
+        args.manifest,
+        output_dir=args.output_dir,
+        force=args.force,
+        delay=args.delay,
+    )
+    output_dir = Path(args.output_dir).expanduser().resolve()
+    report_path = output_dir / "download-report.json"
+    report_path.write_text(json.dumps(results, indent=2) + "\n")
+    downloaded = sum(row.get("status") == "downloaded" for row in results)
+    existing = sum(row.get("status") == "existing" for row in results)
+    unavailable = sum(row.get("status") == "unavailable" for row in results)
+    errors = sum(row.get("status") == "error" for row in results)
+    print(
+        f"Ohio filing download complete: {downloaded} downloaded, "
+        f"{existing} existing, {unavailable} unavailable, {errors} errors. "
+        f"Report: {report_path}"
+    )
+    if errors:
+        raise SystemExit(1)
+
+
 # ---------------------------------------------------------------------------
 # Registry DB integration
 # ---------------------------------------------------------------------------
@@ -478,15 +672,11 @@ def _upsert_entity(db, search_data, detail=None):
         eid = row[0]
 
     if agent_name:
-        try:
-            db.execute(
-                """INSERT OR REPLACE INTO registry_agents
-                (entity_id, agent_name, agent_type, address, city, state, zip, country)
-                VALUES (?, ?, 'person', ?, ?, ?, ?, 'US')""",
-                [eid, agent_name, agent_addr, agent_city, agent_state, agent_zip],
-            )
-        except Exception:
-            pass
+        upsert_current_agent(
+            db, entity_id=eid, agent_name=agent_name, agent_type="person",
+            address=agent_addr, city=agent_city, state=agent_state,
+            zip=agent_zip, country="US",
+        )
 
     return eid
 
@@ -523,6 +713,21 @@ def main():
     p.add_argument("--status", choices=list(STATUS_MAP.keys()), default="all")
     p.add_argument("--force", action="store_true", help="Re-ingest existing")
 
+    p = sub.add_parser("download-image", help="Download one filing packet by document ID")
+    p.add_argument("document_id", help="Ohio filing document/image ID")
+    p.add_argument("--kind", choices=["pdf", "standard", "cert", "certificate"], default="pdf")
+    p.add_argument("--output-dir", type=Path, default=DEFAULT_IMAGE_DIR)
+    p.add_argument("--force", action="store_true", help="Replace an existing verified PDF")
+
+    p = sub.add_parser(
+        "download-manifest",
+        help="Download and deduplicate filing packets from a JSON/CSV manifest",
+    )
+    p.add_argument("manifest", type=Path)
+    p.add_argument("--output-dir", type=Path, default=DEFAULT_IMAGE_DIR)
+    p.add_argument("--delay", type=float, default=0.5, help="Delay after each new download")
+    p.add_argument("--force", action="store_true", help="Replace existing verified PDFs")
+
     args = parser.parse_args()
 
     # Set cf_clearance from --cookie flag or env var
@@ -536,6 +741,8 @@ def main():
         "detail": cmd_detail,
         "ingest-entity": cmd_ingest_entity,
         "ingest-batch": cmd_ingest_batch,
+        "download-image": cmd_download_image,
+        "download-manifest": cmd_download_manifest,
     }
     handlers[args.command](args)
 

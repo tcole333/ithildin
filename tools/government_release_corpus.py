@@ -26,9 +26,11 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 try:
+    from tools.fts_query import literal_fts_query
     from tools.government_releases import DEFAULT_DB_PATH, connect, content_hash, refresh_fts
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from fts_query import literal_fts_query
     from government_releases import DEFAULT_DB_PATH, connect, content_hash, refresh_fts
     from output_util import add_output_args, write_output
 
@@ -479,7 +481,8 @@ def cmd_fetch_sec(args):
 
 def cmd_search(args):
     db=connect(args.db,create=False)
-    agency_clause=" AND r.agency=?" if args.agency else ""; params=[args.query]
+    agency_clause=" AND r.agency=?" if args.agency else ""
+    params=[literal_fts_query(args.query)]
     if args.agency: params.append(args.agency)
     params.append(args.limit)
     rows=db.execute(f"""SELECT r.id,r.agency,r.source_ref,r.release_number,r.title,r.published_at,
@@ -508,6 +511,75 @@ def cmd_stats(args):
     print(json.dumps(data,indent=2,default=str))
 
 
+SEC_SLUG_RE=re.compile(r'/(?:newsroom/press-releases|news/press(?:release)?)/([0-9]{4}-[0-9A-Za-z]+)/?$',re.I)
+
+
+def cmd_audit_keys(args):
+    """Report SEC rows whose release_number disagrees with its canonical URL slug.
+
+    `SEC-PR:<release-number>` is the citable key, so a wrong release number
+    mislabels the record even when the date and URL are right. Both sides of the
+    pair carry upstream SEC typos, in either direction:
+
+    * /newsroom/press-releases/2023-123 publishes "2022-123" in its
+      release-number field, so the stored number is wrong.
+    * /newsroom/press-releases/2103-218 is itself a transposed slug for release
+      2013-218, so the URL is wrong.
+
+    `published_at` is the arbiter, not the slug: it is correct in both known
+    cases. Whichever of {release_number, url_slug} agrees with the published
+    year is the sound key. The agency's own strings are preserved verbatim.
+    """
+    db = connect(args.db, create=False)
+    rows = []
+    for row in db.execute(
+        "SELECT source_ref,release_number,published_at,canonical_url,title "
+        "FROM government_release WHERE agency='SEC' AND release_number IS NOT NULL"
+    ):
+        slug = SEC_SLUG_RE.search(row["canonical_url"] or "")
+        if not slug:
+            continue
+        stored = (row["release_number"] or "").strip()
+        if stored.lower() == slug.group(1).lower():
+            continue
+        published_year = (row["published_at"] or "")[:4]
+        # published_at arbitrates: the side matching the published year is sound.
+        if stored[:4] == published_year:
+            agrees = "release_number"
+        elif slug.group(1)[:4] == published_year:
+            agrees = "url_slug"
+        else:
+            agrees = "neither"
+        rows.append({
+            "source_ref": row["source_ref"],
+            "stored_release_number": stored,
+            "url_slug": slug.group(1),
+            "published_at": row["published_at"],
+            "canonical_url": row["canonical_url"],
+            "title": row["title"],
+            "agrees_with_published_year": agrees,
+        })
+    data = {"checked_agency": "SEC", "mismatches": len(rows), "rows": rows}
+    if write_output(data, args, summary="SEC release-number/URL-slug audit"):
+        return
+    if not rows:
+        print("No SEC release_number/URL-slug disagreements.")
+        return
+    print(f"{len(rows)} SEC release_number/URL-slug disagreement(s):\n")
+    for entry in rows:
+        print(
+            f"  {entry['source_ref']}  stored={entry['stored_release_number']}  "
+            f"slug={entry['url_slug']}  published={entry['published_at']}"
+        )
+        print(f"    sound key follows: {entry['agrees_with_published_year']}")
+        print(f"    {entry['canonical_url']}")
+        print(f"    {entry['title']}\n")
+    print(
+        "Both strings are the agency's own and are left verbatim. published_at is "
+        "the arbiter: cite the side that agrees with the published year."
+    )
+
+
 def common(p): p.add_argument("--db",type=Path,default=DEFAULT_DB_PATH)
 
 
@@ -522,6 +594,7 @@ def main():
     p=sub.add_parser("search"); p.add_argument("query"); p.add_argument("--agency",choices=["DOJ","SEC"]); p.add_argument("--limit",type=int,default=50); add_output_args(p); common(p); p.set_defaults(func=cmd_search)
     p=sub.add_parser("show"); p.add_argument("identifier"); add_output_args(p); common(p); p.set_defaults(func=cmd_show)
     p=sub.add_parser("stats"); add_output_args(p); common(p); p.set_defaults(func=cmd_stats)
+    p=sub.add_parser("audit-keys",help="Flag SEC release_number values that disagree with the canonical URL slug"); add_output_args(p); common(p); p.set_defaults(func=cmd_audit_keys)
     args=parser.parse_args()
     try: args.func(args)
     except (ValueError,FileNotFoundError,sqlite3.Error,RuntimeError) as exc:

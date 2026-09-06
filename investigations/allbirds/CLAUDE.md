@@ -1,8 +1,9 @@
-# Allbirds / NewBird AI — Investigation-Specific Context
+# Smartbird / Allbirds / NewBird AI — Investigation-Specific Context
 
 ## The Core Question
 
-On **April 15, 2026**, Allbirds, Inc. (NASDAQ: BIRD) — a cash-burning,
+On **April 15, 2026**, Allbirds, Inc. (NASDAQ: BIRD) — now **Smartbird,
+Inc.** in current SEC submissions — was a cash-burning,
 going-concern-flagged sustainable footwear company that had closed all its
 full-price U.S. stores — announced a rebrand to "NewBird AI" with a $50M
 convertible financing from an undisclosed institutional investor, stating
@@ -15,6 +16,14 @@ The stock closed up **~582% in one day**, from ~$3 to $16.99.
 2. Who benefited from the price move — and were they in position to do so?
 3. What is the conversion/dilution structure of the $50M facility?
 4. Does the company have the operational substance to justify the narrative?
+
+## Current Corporate Identity
+
+- **Current SEC registrant:** Smartbird, Inc.
+- **CIK:** 0001653909
+- **Historical names/search aliases:** Allbirds, Inc.; NewBird AI
+- Preserve “NewBird AI” when describing the April 2026 announcement, but use
+  “Smartbird, Inc.” for current filings and present-tense corporate references.
 
 ## The Comparable — Read This First
 

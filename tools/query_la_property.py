@@ -1,65 +1,96 @@
 #!/usr/bin/env python3
-"""
-Louisiana property records via Socrata SODA API.
+"""East Baton Rouge Parish property records via official Socrata APIs.
 
-Queries parish-level open data portals for property ownership, tax rolls,
-parcel data, and adjudicated (tax-defaulted) properties.
-
-Supported parishes:
-  - East Baton Rouge (data.brla.gov): Tax Roll, Tax Parcel, Property Info, Adjudicated
-
-Datasets (EBR):
-  - Tax Roll (myfc-nh6n): Taxpayer names, addresses, assessed values, legal descriptions
-  - Tax Parcel (ei2c-krsr): Owner, physical address, sale year, value breakdowns, GeoJSON
-  - Property Info (re5c-hrw9): Full address, zoning, land use (no owner field)
-  - Adjudicated (a4h4-zi7e): Tax-defaulted properties with owner and assessed value
+The adapter combines assessor, parcel, planning, and adjudicated-property
+    datasets while preserving each row's source dataset. Source capabilities and
+    endpoint paging metadata come from the central catalog, and all remote outcomes
+    use the canonical public-record result envelope.
 
 Usage:
-    python tools/query_la_property.py owner "SMITH" --parish ebr
-    python tools/query_la_property.py address "MAIN ST" --parish ebr
-    python tools/query_la_property.py parcel "011-0499-3" --parish ebr
-    python tools/query_la_property.py details "1104993" --parish ebr
-    python tools/query_la_property.py adjudicated "SMITH" --parish ebr
-    python tools/query_la_property.py parishes
+    uv run python tools/query_la_property.py owner "SMITH" --parish ebr
+    uv run python tools/query_la_property.py address "MAIN ST" --parish ebr
+    uv run python tools/query_la_property.py parcel "011-0499-3" --parish ebr
+    uv run python tools/query_la_property.py details "1104993" --parish ebr
+    uv run python tools/query_la_property.py adjudicated "SMITH" --parish ebr
+    uv run python tools/query_la_property.py parishes
 """
 
+from __future__ import annotations
+
 import argparse
+import base64
 import json
 import os
-import sqlite3
 import sys
 import time
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
-
-try:
-    from tools.output_util import add_output_args, write_output
-except ImportError:
-    from output_util import add_output_args, write_output
+from typing import Any
 
 try:
     from tools.lead_tracker import log_search
+    from tools.output_util import add_output_args, write_output
+    from tools.public_records_catalog import (
+        DEFAULT_DB_PATH,
+        AcquisitionUnavailableError,
+        CatalogError,
+        acquisition_result_status,
+    )
+    from tools.public_records_contract import (
+        JurisdictionMetadata,
+        PublicRecordsError,
+        PublicRecordsQuery,
+        PublicRecordsResult,
+        QueryMetadata,
+        ResultStatus,
+        SourceMetadata,
+        canonical_json,
+    )
+    from tools.public_records_http import (
+        PaginatedFetch,
+        PublicRecordsHTTPError,
+        SocrataSODAClient,
+    )
+    from tools.seed_public_records_catalog import (
+        DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
+        ensure_catalog_source,
+    )
 except ImportError:
     from lead_tracker import log_search
+    from output_util import add_output_args, write_output
+    from public_records_catalog import (
+        DEFAULT_DB_PATH,
+        AcquisitionUnavailableError,
+        CatalogError,
+        acquisition_result_status,
+    )
+    from public_records_contract import (
+        JurisdictionMetadata,
+        PublicRecordsError,
+        PublicRecordsQuery,
+        PublicRecordsResult,
+        QueryMetadata,
+        ResultStatus,
+        SourceMetadata,
+        canonical_json,
+    )
+    from public_records_http import (
+        PaginatedFetch,
+        PublicRecordsHTTPError,
+        SocrataSODAClient,
+    )
+    from seed_public_records_catalog import (
+        DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
+        ensure_catalog_source,
+    )
 
-# Load .env for optional app token
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
 
-# Rate limiting between SODA requests
-RATE_LIMIT_DELAY = 0.5
-
-# Parish configurations
+SOURCE_ID = "us-la-ebr-property"
+DEFAULT_PARISH = "ebr"
 PARISHES = {
     "ebr": {
         "name": "East Baton Rouge",
+        "jurisdiction_geoid": "22033",
         "base_url": "https://data.brla.gov/resource",
         "token_env": "BRLA_SODA_APP_TOKEN",
         "datasets": {
@@ -71,460 +102,744 @@ PARISHES = {
     },
 }
 
-DEFAULT_PARISH = "ebr"
+SOURCE_METADATA = SourceMetadata(
+    source_id=SOURCE_ID,
+    name="East Baton Rouge Parish Property Open Data",
+    source_role="assessment_parcel_tax_status",
+    base_url=PARISHES["ebr"]["base_url"],
+    dataset_id=",".join(PARISHES["ebr"]["datasets"].values()),
+    metadata={
+        "authority": "City of Baton Rouge and Parish of East Baton Rouge",
+        "access_class": "B",
+        "automation_disposition": "allowed_with_limits",
+    },
+)
+
+SOURCE_WARNINGS = (
+    "Taxpayer and parcel-owner names are assessor observations, not proof of legal title or beneficial ownership.",
+    "Assessment, planning, and adjudication datasets have distinct update cycles and should not be treated as a single contemporaneous record.",
+)
 
 
-def _soda_request(parish_key, dataset_key, params, limit=50, timeout=60):
-    """Make a SODA API request to a parish open data portal."""
-    parish = PARISHES[parish_key]
-    dataset_id = parish["datasets"][dataset_key]
-    url = f"{parish['base_url']}/{dataset_id}.json"
-    params["$limit"] = limit
-
-    token = os.environ.get(parish["token_env"])
-    if token:
-        params["$$app_token"] = token
-
-    full_url = url + "?" + urlencode(params)
-    headers = {"Accept": "application/json"}
-    req = Request(full_url, headers=headers)
-
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode())
-    except TimeoutError:
-        print(f"ERROR: Request timed out ({timeout}s). Try a more specific query.", file=sys.stderr)
-        return []
-    except HTTPError as e:
-        body = e.read().decode()[:500]
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return []
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return []
+def _load_env() -> None:
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"'))
 
 
-def _format_assessment_no(raw_digits):
-    """Convert raw assessment digits to formatted NNN-NNNN-N.
+_load_env()
 
-    EBR assessment_no_new is numeric (e.g. 3076237), but assessment_num
-    in the Tax Parcel dataset is zero-padded to 8 digits and formatted
-    as NNN-NNNN-N (e.g. 030-7623-7).
-    """
+
+def _sql_literal(value: str) -> str:
+    normalized = " ".join(str(value).replace("\x00", "").split()).strip()
+    if not normalized:
+        raise ValueError("query value must not be blank")
+    return normalized.replace("'", "''")
+
+
+def _format_assessment_no(raw_digits: str) -> str:
     padded = raw_digits.zfill(8)
     return f"{padded[:3]}-{padded[3:7]}-{padded[7:]}"
 
 
-def _format_money(val):
-    """Format a numeric string as currency."""
+def _format_money(value: Any) -> str:
     try:
-        n = float(val)
-        if n == 0:
-            return "$0"
-        return f"${n:,.0f}"
-    except (ValueError, TypeError):
-        return str(val) if val else ""
+        amount = float(value)
+    except (TypeError, ValueError):
+        return str(value) if value else ""
+    return f"${amount:,.0f}"
 
 
-def _print_tax_roll_record(rec):
-    """Print a formatted Tax Roll record."""
-    name = rec.get("taxpayer_name", "?")
-    addr1 = rec.get("taxpayer_addr_1", "")
-    addr2 = rec.get("taxpayer_addr_2", "")
-    assess = rec.get("assessment_no", rec.get("assessment_no_new", ""))
-    fmv = _format_money(rec.get("fair_market_val"))
-    assessed = _format_money(rec.get("total_value"))
-    legal = rec.get("legal_description", "")
-    year = rec.get("tax_year", "")
-    homestead = rec.get("homestead_exempt_type", "")
-    vacant = rec.get("vacant_lot_yn", "")
-    freeze = rec.get("tax_freeze", "")
-
-    print(f"  {name}")
-    print(f"    Assessment: {assess} | Tax Year: {year}")
-    if addr1:
-        print(f"    Address: {addr1}")
-    if addr2:
-        print(f"    City/State: {addr2}")
-    if fmv:
-        print(f"    Fair Market Value: {fmv} | Assessed: {assessed}")
-    if homestead and homestead != "NO":
-        extra = f" | Tax Freeze: {freeze}" if freeze and freeze != "NONE" else ""
-        print(f"    Homestead Exempt: {homestead}{extra}")
-    if vacant == "YES":
-        print(f"    Vacant Lot: YES")
-    if legal:
-        print(f"    Legal: {legal}")
-    print()
+def build_query(
+    operation: str,
+    parameters: Mapping[str, Any],
+    *,
+    parish: str,
+    requested_limit: int,
+    cursor: str | None,
+) -> PublicRecordsQuery:
+    config = PARISHES[parish]
+    return PublicRecordsQuery(
+        source=SOURCE_METADATA,
+        jurisdiction=JurisdictionMetadata(
+            jurisdiction_id=config["jurisdiction_geoid"],
+            name=f"{config['name']} Parish",
+            state_code="LA",
+            county_fips=config["jurisdiction_geoid"],
+            locality=config["name"],
+        ),
+        query=QueryMetadata(
+            operation=operation,
+            parameters={"parish": parish, **dict(parameters)},
+            requested_limit=requested_limit,
+            cursor=cursor,
+            metadata={"limit_semantics": "per_dataset"},
+        ),
+    )
 
 
-def _print_parcel_record(rec):
-    """Print a formatted Tax Parcel record."""
-    owner = rec.get("owner", "?")
-    addr = rec.get("physical_address", "")
-    owner_addr = rec.get("owner_address", "")
-    owner_csz = rec.get("owner_city_state_zip", "")
-    assess = rec.get("assessment_num", "")
-    subdiv = rec.get("subdivision", "")
-    fmv = _format_money(rec.get("sum_fair_market_value"))
-    land = _format_money(rec.get("sum_land_value"))
-    improvement = _format_money(rec.get("sum_improvement_value"))
-    assessed = _format_money(rec.get("sum_assessed_value"))
-    sale_year = rec.get("sale_year", "")
-    flood = rec.get("flood_zone", "")
-
-    print(f"  {owner}")
-    print(f"    Assessment: {assess}")
-    if addr:
-        print(f"    Property: {addr}")
-    if owner_addr:
-        line = owner_addr
-        if owner_csz:
-            line += f", {owner_csz}"
-        print(f"    Owner Address: {line}")
-    if subdiv:
-        print(f"    Subdivision: {subdiv}")
-    if fmv:
-        print(f"    FMV: {fmv} | Land: {land} | Improvement: {improvement} | Assessed: {assessed}")
-    if sale_year:
-        print(f"    Last Sale Year: {sale_year}")
-    if flood:
-        print(f"    Flood Zone: {flood}")
-    print()
+def _require_access(args: argparse.Namespace) -> dict[str, Any]:
+    db_path = Path(getattr(args, "catalog_db", DEFAULT_DB_PATH))
+    config_path = Path(
+        getattr(args, "catalog_config", str(DEFAULT_CATALOG_CONFIG_PATH))
+    )
+    catalog = ensure_catalog_source(
+        SOURCE_ID,
+        db_path=db_path,
+        config_path=config_path,
+    )
+    return catalog.require_machine_acquisition(SOURCE_ID)
 
 
-def cmd_owner(args):
-    """Search property records by owner/taxpayer name."""
-    parish = args.parish
-    timeout = args.timeout
-    name = args.query.upper().replace("'", "''")
-
-    # Search Tax Roll by taxpayer_name
-    where = f"upper(taxpayer_name) like '%{name}%'"
-    tax_results = _soda_request(parish, "tax_roll", {"$where": where}, limit=args.limit, timeout=timeout)
-    time.sleep(RATE_LIMIT_DELAY)
-
-    # Search Tax Parcel by owner
-    where = f"upper(owner) like '%{name}%'"
-    parcel_results = _soda_request(parish, "tax_parcel", {"$where": where}, limit=args.limit, timeout=timeout)
-
-    total = len(tax_results) + len(parcel_results)
-    parish_name = PARISHES[parish]["name"]
-    print(f"Found {len(tax_results)} tax roll + {len(parcel_results)} parcel records for '{args.query}' in {parish_name}")
-    print()
-
-    log_search(args.query, f"la_property_{parish}", total)
-
-    combined = {"query": args.query, "parish": parish, "tax_roll": tax_results, "parcels": parcel_results}
-    if write_output(combined, args, summary=f"LA property owner '{args.query}' ({parish_name})"):
-        return
-
-    if tax_results:
-        print(f"--- Tax Roll ({len(tax_results)} records) ---")
-        print()
-        for rec in tax_results[:args.max_results]:
-            _print_tax_roll_record(rec)
-
-    if parcel_results:
-        print(f"--- Tax Parcels ({len(parcel_results)} records) ---")
-        print()
-        for rec in parcel_results[:args.max_results]:
-            _print_parcel_record(rec)
-
-    shown = min(len(tax_results), args.max_results) + min(len(parcel_results), args.max_results)
-    if total > shown:
-        print(f"  ... {total - shown} more records (use --max-results or --output to see all)")
+def _access_failure(
+    query: PublicRecordsQuery,
+    error: AcquisitionUnavailableError | CatalogError | OSError | ValueError,
+) -> PublicRecordsResult:
+    if isinstance(error, AcquisitionUnavailableError):
+        decision = error.decision
+        status = ResultStatus(acquisition_result_status(decision))
+        contract_error = PublicRecordsError(
+            code=str(
+                decision.get("reason_code") or "acquisition_route_unavailable"
+            ),
+            message=str(decision.get("reason") or error),
+            category="access",
+            retryable=False,
+            details=decision,
+        )
+    else:
+        status = ResultStatus.UNAVAILABLE
+        contract_error = PublicRecordsError(
+            code="acquisition_route_unavailable",
+            message=str(error),
+            category="access_control",
+            retryable=False,
+        )
+    return PublicRecordsResult.failure(
+        query,
+        status,
+        [contract_error],
+        warnings=SOURCE_WARNINGS,
+    )
 
 
-def cmd_address(args):
-    """Search property records by address."""
-    parish = args.parish
-    timeout = args.timeout
-    addr = args.query.upper().replace("'", "''")
+class _EBRSource:
+    """Shared Socrata acquisition context for the configured parish datasets."""
 
-    # Search Tax Parcel by physical_address
-    where = f"upper(physical_address) like '%{addr}%'"
-    parcel_results = _soda_request(parish, "tax_parcel", {"$where": where}, limit=args.limit, timeout=timeout)
-    time.sleep(RATE_LIMIT_DELAY)
+    def __init__(self, args: argparse.Namespace, decision: Mapping[str, Any]) -> None:
+        limits = decision.get("limits", {})
+        requested_interval = float(getattr(args, "minimum_interval", 0.5))
+        requested_cap = getattr(args, "max_records", None)
+        if requested_cap is not None:
+            requested_cap = int(requested_cap)
+        reviewed_interval = limits.get("minimum_interval_seconds")
+        self.minimum_interval = max(
+            requested_interval,
+            float(reviewed_interval) if reviewed_interval is not None else 0.0,
+        )
+        self.max_records = requested_cap
+        requested_page_size = int(getattr(args, "page_size", 1_000))
+        reviewed_page_size = limits.get("maximum_page_size")
+        page_size_values = [requested_page_size]
+        if self.max_records is not None:
+            page_size_values.append(self.max_records)
+        if reviewed_page_size is not None:
+            page_size_values.append(int(reviewed_page_size))
+        self.page_size = min(page_size_values)
+        self.timeout = float(getattr(args, "timeout", 60.0))
+        self._clients: dict[str, SocrataSODAClient] = {}
+        self._last_query_finished: float | None = None
 
-    # Search Property Info by full_address
-    where = f"upper(full_address) like '%{addr}%'"
-    info_results = _soda_request(parish, "property_info", {"$where": where}, limit=args.limit, timeout=timeout)
+    def _client(self, parish: str, dataset_key: str) -> SocrataSODAClient:
+        cache_key = f"{parish}:{dataset_key}"
+        if cache_key not in self._clients:
+            config = PARISHES[parish]
+            self._clients[cache_key] = SocrataSODAClient(
+                config["base_url"],
+                config["datasets"][dataset_key],
+                app_token=os.environ.get(config["token_env"]),
+                page_size=self.page_size,
+                max_records=self.max_records,
+                timeout=self.timeout,
+                minimum_interval=self.minimum_interval,
+            )
+        return self._clients[cache_key]
 
-    total = len(parcel_results) + len(info_results)
-    parish_name = PARISHES[parish]["name"]
-    print(f"Found {len(parcel_results)} parcel + {len(info_results)} property info records for '{args.query}' in {parish_name}")
-    print()
-
-    log_search(args.query, f"la_property_{parish}", total)
-
-    combined = {"query": args.query, "parish": parish, "parcels": parcel_results, "property_info": info_results}
-    if write_output(combined, args, summary=f"LA property address '{args.query}' ({parish_name})"):
-        return
-
-    if parcel_results:
-        print(f"--- Tax Parcels ({len(parcel_results)} records) ---")
-        print()
-        for rec in parcel_results[:args.max_results]:
-            _print_parcel_record(rec)
-
-    if info_results:
-        print(f"--- Property Info ({len(info_results)} records) ---")
-        print()
-        for rec in info_results[:args.max_results]:
-            addr_str = rec.get("full_address", "?")
-            city = rec.get("city", "")
-            zoning = rec.get("zoning_type", "")
-            land_use = rec.get("existing_land_use", "")
-            lot_id = rec.get("lot_id", "")
-            acres = rec.get("area_meas_acres", "")
-            print(f"  {addr_str}, {city}")
-            print(f"    Lot: {lot_id} | Zoning: {zoning} | Land Use: {land_use} | Acres: {acres}")
-            print()
-
-    shown = min(len(parcel_results), args.max_results) + min(len(info_results), args.max_results)
-    if total > shown:
-        print(f"  ... {total - shown} more records (use --max-results or --output to see all)")
-
-
-def cmd_parcel(args):
-    """Look up a specific parcel by assessment number."""
-    parish = args.parish
-    timeout = args.timeout
-    assess = args.assessment_no.replace("-", "").strip()
-
-    # Try assessment_no_new (numeric) on Tax Roll
-    tax_results = _soda_request(parish, "tax_roll", {"assessment_no_new": assess}, limit=10, timeout=timeout)
-    time.sleep(RATE_LIMIT_DELAY)
-
-    # Also try formatted assessment_no (NNN-NNNN-N)
-    if not tax_results and "-" not in args.assessment_no and assess.isdigit():
-        formatted = _format_assessment_no(assess)
-        where = f"assessment_no = '{formatted}'"
-        tax_results = _soda_request(parish, "tax_roll", {"$where": where}, limit=10, timeout=timeout)
-        time.sleep(RATE_LIMIT_DELAY)
-
-    # Search Tax Parcel by assessment_num (formatted NNN-NNNN-N)
-    parcel_key = _format_assessment_no(assess) if assess.isdigit() else args.assessment_no
-    parcel_results = _soda_request(parish, "tax_parcel", {"assessment_num": parcel_key}, limit=10, timeout=timeout)
-
-    total = len(tax_results) + len(parcel_results)
-    parish_name = PARISHES[parish]["name"]
-    print(f"Found {len(tax_results)} tax roll + {len(parcel_results)} parcel records for assessment '{args.assessment_no}' in {parish_name}")
-    print()
-
-    log_search(f"parcel:{args.assessment_no}", f"la_property_{parish}", total)
-
-    combined = {"assessment_no": args.assessment_no, "parish": parish, "tax_roll": tax_results, "parcels": parcel_results}
-    if write_output(combined, args, summary=f"LA parcel '{args.assessment_no}' ({parish_name})"):
-        return
-
-    for rec in tax_results:
-        _print_tax_roll_record(rec)
-    for rec in parcel_results:
-        _print_parcel_record(rec)
+    def query(
+        self,
+        parish: str,
+        dataset_key: str,
+        parameters: Mapping[str, Any],
+        *,
+        requested_limit: int,
+        cursor: str | None = None,
+    ) -> PaginatedFetch:
+        if self._last_query_finished is not None:
+            elapsed = time.monotonic() - self._last_query_finished
+            if elapsed < self.minimum_interval:
+                time.sleep(self.minimum_interval - elapsed)
+        try:
+            return self._client(parish, dataset_key).query(
+                parameters,
+                requested_limit=requested_limit,
+                max_records=self.max_records,
+                cursor=cursor,
+            )
+        finally:
+            self._last_query_finished = time.monotonic()
 
 
-def cmd_details(args):
-    """Cross-dataset detail view for a single parcel."""
-    parish = args.parish
-    timeout = args.timeout
-    raw = args.assessment_no.replace("-", "").strip()
+def _encode_cursor(cursors: Mapping[str, str | None]) -> str | None:
+    nonempty = {key: value for key, value in cursors.items() if value}
+    if not nonempty:
+        return None
+    payload = canonical_json(nonempty).encode("utf-8")
+    encoded = base64.urlsafe_b64encode(payload).decode("ascii").rstrip("=")
+    return f"ebr:{encoded}"
 
-    # Tax Roll — uses assessment_no_new (digits only)
-    tax_results = _soda_request(parish, "tax_roll", {"assessment_no_new": raw}, limit=10, timeout=timeout)
-    time.sleep(RATE_LIMIT_DELAY)
 
-    # Tax Parcel — uses formatted assessment_num (NNN-NNNN-N)
-    formatted = _format_assessment_no(raw) if raw.isdigit() else args.assessment_no
-    parcel_results = _soda_request(parish, "tax_parcel", {"assessment_num": formatted}, limit=10, timeout=timeout)
-    time.sleep(RATE_LIMIT_DELAY)
+def _decode_cursor(cursor: str | None) -> dict[str, str]:
+    if not cursor:
+        return {}
+    if not cursor.startswith("ebr:"):
+        raise ValueError("invalid East Baton Rouge continuation cursor")
+    encoded = cursor[4:]
+    padding = "=" * (-len(encoded) % 4)
+    try:
+        value = json.loads(
+            base64.urlsafe_b64decode(encoded + padding).decode("utf-8")
+        )
+    except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError("invalid East Baton Rouge continuation cursor") from error
+    if not isinstance(value, dict) or any(
+        not isinstance(key, str) or not isinstance(item, str)
+        for key, item in value.items()
+    ):
+        raise ValueError("invalid East Baton Rouge continuation cursor")
+    return value
 
-    # Property Info — join via address from parcel
-    info_results = []
-    if parcel_results:
-        phys_addr = parcel_results[0].get("physical_address", "")
-        if phys_addr:
-            safe_addr = phys_addr.upper().replace("'", "''")
-            where = f"upper(full_address) = '{safe_addr}'"
-            info_results = _soda_request(parish, "property_info", {"$where": where}, limit=10, timeout=timeout)
 
-    parish_name = PARISHES[parish]["name"]
-    total = len(tax_results) + len(parcel_results) + len(info_results)
-    print(f"Detail view for assessment {args.assessment_no} in {parish_name}")
-    print(f"  Tax Roll: {len(tax_results)} | Parcel: {len(parcel_results)} | Property Info: {len(info_results)}")
-    print()
-
-    log_search(f"details:{args.assessment_no}", f"la_property_{parish}", total)
-
-    combined = {
-        "assessment_no": args.assessment_no, "parish": parish,
-        "tax_roll": tax_results, "parcels": parcel_results, "property_info": info_results,
+def _record(dataset_key: str, dataset_id: str, row: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "source_id": SOURCE_ID,
+        "dataset": dataset_key,
+        "dataset_id": dataset_id,
+        "record": dict(row),
     }
-    if write_output(combined, args, summary=f"LA detail '{args.assessment_no}' ({parish_name})"):
+
+
+def _finalize(
+    query: PublicRecordsQuery,
+    records: Sequence[Mapping[str, Any]],
+    *,
+    cursors: Mapping[str, str | None],
+    warnings: Sequence[str],
+    failures: Sequence[PublicRecordsHTTPError],
+    truncated: bool,
+) -> PublicRecordsResult:
+    next_cursor = _encode_cursor(cursors)
+    all_warnings = tuple(dict.fromkeys((*SOURCE_WARNINGS, *warnings)))
+    if failures:
+        status = ResultStatus.PARTIAL if records else failures[0].result_status
+        return PublicRecordsResult.failure(
+            query,
+            status,
+            [error.to_contract_error() for error in failures],
+            records=records,
+            next_cursor=next_cursor,
+            warnings=all_warnings,
+        )
+    if truncated:
+        return PublicRecordsResult(
+            query=query,
+            status=ResultStatus.PARTIAL,
+            records=records,
+            next_cursor=next_cursor,
+            warnings=all_warnings,
+        )
+    return PublicRecordsResult.success(
+        query,
+        records,
+        next_cursor=next_cursor,
+        warnings=all_warnings,
+    )
+
+
+def _fetch_specs(
+    source: _EBRSource | Any,
+    parish: str,
+    specs: Sequence[tuple[str, Mapping[str, Any]]],
+    *,
+    requested_limit: int,
+    input_cursors: Mapping[str, str],
+) -> tuple[
+    list[dict[str, Any]],
+    dict[str, str | None],
+    list[str],
+    list[PublicRecordsHTTPError],
+    bool,
+    dict[str, list[dict[str, Any]]],
+]:
+    records: list[dict[str, Any]] = []
+    next_cursors: dict[str, str | None] = {}
+    warnings: list[str] = []
+    failures: list[PublicRecordsHTTPError] = []
+    truncated = False
+    raw_by_dataset: dict[str, list[dict[str, Any]]] = {}
+    for dataset_key, parameters in specs:
+        try:
+            fetched = source.query(
+                parish,
+                dataset_key,
+                parameters,
+                requested_limit=requested_limit,
+                cursor=input_cursors.get(dataset_key),
+            )
+        except PublicRecordsHTTPError as error:
+            failures.append(error)
+            continue
+        dataset_id = PARISHES[parish]["datasets"][dataset_key]
+        rows = [dict(row) for row in fetched.records]
+        raw_by_dataset[dataset_key] = rows
+        records.extend(_record(dataset_key, dataset_id, row) for row in rows)
+        next_cursors[dataset_key] = fetched.next_cursor
+        warnings.extend(fetched.warnings)
+        truncated = truncated or fetched.truncated_by_cap
+    return (
+        records,
+        next_cursors,
+        warnings,
+        failures,
+        truncated,
+        raw_by_dataset,
+    )
+
+
+def _operation_specs(
+    args: argparse.Namespace,
+) -> tuple[list[tuple[str, Mapping[str, Any]]], dict[str, Any]]:
+    operation = args.command
+    if operation == "owner":
+        value = _sql_literal(args.query).upper()
+        return (
+            [
+                (
+                    "tax_roll",
+                    {
+                        "$where": f"upper(taxpayer_name) LIKE '%{value}%'",
+                        "$order": "assessment_no_new, tax_year",
+                    },
+                ),
+                (
+                    "tax_parcel",
+                    {
+                        "$where": f"upper(owner) LIKE '%{value}%'",
+                        "$order": "assessment_num",
+                    },
+                ),
+            ],
+            {"owner_name": args.query},
+        )
+    if operation == "address":
+        value = _sql_literal(args.query).upper()
+        return (
+            [
+                (
+                    "tax_parcel",
+                    {
+                        "$where": f"upper(physical_address) LIKE '%{value}%'",
+                        "$order": "assessment_num",
+                    },
+                ),
+                (
+                    "property_info",
+                    {
+                        "$where": f"upper(full_address) LIKE '%{value}%'",
+                        "$order": "full_address, lot_id",
+                    },
+                ),
+            ],
+            {"address": args.query},
+        )
+    if operation in {"parcel", "details"}:
+        raw = args.assessment_no.replace("-", "").strip()
+        if not raw:
+            raise ValueError("assessment number must not be blank")
+        formatted = _format_assessment_no(raw) if raw.isdigit() else args.assessment_no
+        return (
+            [
+                (
+                    "tax_roll",
+                    {
+                        "$where": (
+                            f"assessment_no_new='{_sql_literal(raw)}' OR "
+                            f"assessment_no='{_sql_literal(formatted)}'"
+                        ),
+                        "$order": "tax_year DESC, assessment_no_new",
+                    },
+                ),
+                (
+                    "tax_parcel",
+                    {
+                        "$where": f"assessment_num='{_sql_literal(formatted)}'",
+                        "$order": "assessment_num",
+                    },
+                ),
+            ],
+            {
+                "assessment_number": args.assessment_no,
+                "assessment_number_normalized": formatted,
+            },
+        )
+    if operation == "adjudicated":
+        value = _sql_literal(args.query).upper()
+        return (
+            [
+                (
+                    "adjudicated",
+                    {
+                        "$where": f"upper(owner) LIKE '%{value}%'",
+                        "$order": "assessment_num, tax_roll_year DESC",
+                    },
+                )
+            ],
+            {"owner_name": args.query, "tax_status": "adjudicated"},
+        )
+    raise ValueError(f"unsupported remote command: {operation}")
+
+
+def _execute_remote(
+    args: argparse.Namespace,
+    query: PublicRecordsQuery,
+    source: _EBRSource | Any,
+) -> PublicRecordsResult:
+    input_cursors = _decode_cursor(args.cursor)
+    specs, _ = _operation_specs(args)
+    (
+        records,
+        next_cursors,
+        warnings,
+        failures,
+        truncated,
+        raw_by_dataset,
+    ) = _fetch_specs(
+        source,
+        args.parish,
+        specs,
+        requested_limit=args.limit,
+        input_cursors=input_cursors,
+    )
+
+    if args.command == "details":
+        parcel_rows = raw_by_dataset.get("tax_parcel", [])
+        if parcel_rows:
+            physical_address = str(
+                parcel_rows[0].get("physical_address") or ""
+            ).strip()
+            if physical_address:
+                details_specs = [
+                    (
+                        "property_info",
+                        {
+                            "$where": (
+                                "upper(full_address) = "
+                                f"'{_sql_literal(physical_address).upper()}'"
+                            ),
+                            "$order": "full_address, lot_id",
+                        },
+                    )
+                ]
+                (
+                    detail_records,
+                    detail_cursors,
+                    detail_warnings,
+                    detail_failures,
+                    detail_truncated,
+                    _,
+                ) = _fetch_specs(
+                    source,
+                    args.parish,
+                    details_specs,
+                    requested_limit=args.limit,
+                    input_cursors=input_cursors,
+                )
+                records.extend(detail_records)
+                next_cursors.update(detail_cursors)
+                warnings.extend(detail_warnings)
+                failures.extend(detail_failures)
+                truncated = truncated or detail_truncated
+
+    return _finalize(
+        query,
+        records,
+        cursors=next_cursors,
+        warnings=warnings,
+        failures=failures,
+        truncated=truncated,
+    )
+
+
+def execute(
+    args: argparse.Namespace,
+    *,
+    source: _EBRSource | Any | None = None,
+    access_decision: Mapping[str, Any] | None = None,
+) -> PublicRecordsResult:
+    """Execute a remote EBR query and return a canonical result envelope."""
+    try:
+        _, parameters = _operation_specs(args)
+        query = build_query(
+            args.command,
+            parameters,
+            parish=args.parish,
+            requested_limit=args.limit,
+            cursor=args.cursor,
+        )
+    except ValueError as error:
+        query = build_query(
+            args.command,
+            {"invalid_request": True},
+            parish=getattr(args, "parish", DEFAULT_PARISH),
+            requested_limit=max(1, getattr(args, "limit", 1)),
+            cursor=getattr(args, "cursor", None),
+        )
+        return PublicRecordsResult.failure(
+            query,
+            ResultStatus.UNAVAILABLE,
+            [
+                PublicRecordsError(
+                    code="invalid_query",
+                    message=str(error),
+                    category="query",
+                    retryable=False,
+                )
+            ],
+            warnings=SOURCE_WARNINGS,
+        )
+
+    try:
+        decision = dict(access_decision or _require_access(args))
+    except (
+        AcquisitionUnavailableError,
+        CatalogError,
+        OSError,
+        ValueError,
+    ) as error:
+        result = _access_failure(query, error)
+    else:
+        acquisition = source or _EBRSource(args, decision)
+        try:
+            result = _execute_remote(args, query, acquisition)
+        except PublicRecordsHTTPError as error:
+            result = PublicRecordsResult.failure(
+                query,
+                error.result_status,
+                [error.to_contract_error()],
+                warnings=SOURCE_WARNINGS,
+            )
+        except (TypeError, ValueError) as error:
+            result = PublicRecordsResult.failure(
+                query,
+                ResultStatus.SOURCE_CHANGED,
+                [
+                    PublicRecordsError(
+                        code="normalization_failed",
+                        message=str(error),
+                        category="source_schema",
+                        retryable=False,
+                    )
+                ],
+                warnings=SOURCE_WARNINGS,
+            )
+
+    count = (
+        len(result.records)
+        if result.status
+        in {ResultStatus.OK, ResultStatus.NO_RESULTS, ResultStatus.PARTIAL}
+        else None
+    )
+    log_search(canonical_json(query.to_dict()), SOURCE_ID, count)
+    return result
+
+
+def _print_record(wrapper: Mapping[str, Any]) -> None:
+    dataset = wrapper["dataset"]
+    record = wrapper["record"]
+    if dataset == "tax_roll":
+        print(f"  {record.get('taxpayer_name', '?')} [tax roll]")
+        print(
+            "    Assessment: "
+            f"{record.get('assessment_no', record.get('assessment_no_new', ''))} "
+            f"| Tax Year: {record.get('tax_year', '')}"
+        )
+        if record.get("fair_market_val"):
+            print(
+                f"    Fair Market Value: {_format_money(record['fair_market_val'])}"
+            )
+    elif dataset == "tax_parcel":
+        print(f"  {record.get('owner', '?')} [parcel]")
+        print(
+            f"    Assessment: {record.get('assessment_num', '')} | "
+            f"Property: {record.get('physical_address', '')}"
+        )
+    elif dataset == "property_info":
+        print(f"  {record.get('full_address', '?')} [property info]")
+        print(
+            f"    Zoning: {record.get('zoning_type', '')} | "
+            f"Land Use: {record.get('existing_land_use', '')}"
+        )
+    else:
+        print(f"  {record.get('owner', '?')} [adjudicated]")
+        print(
+            f"    Assessment: {record.get('assessment_num', '')} | "
+            f"Tax Year: {record.get('tax_roll_year', '')}"
+        )
+
+
+def _emit(result: PublicRecordsResult, args: argparse.Namespace) -> None:
+    data = result.to_dict()
+    if write_output(
+        data,
+        args,
+        summary=f"East Baton Rouge property {args.command} ({result.status.value})",
+    ):
         return
-
-    if tax_results:
-        print("--- Tax Roll ---")
-        print()
-        for rec in tax_results:
-            _print_tax_roll_record(rec)
-
-    if parcel_results:
-        print("--- Tax Parcel ---")
-        print()
-        for rec in parcel_results:
-            _print_parcel_record(rec)
-
-    if info_results:
-        print("--- Property Info ---")
-        print()
-        for rec in info_results:
-            addr = rec.get("full_address", "?")
-            city = rec.get("city", "")
-            zoning = rec.get("zoning_type", "")
-            land_use = rec.get("existing_land_use", "")
-            future_use = rec.get("future_land_use", "")
-            design = rec.get("design_level", "")
-            acres = rec.get("area_meas_acres", "")
-            fire = rec.get("fire_district", "")
-            school = rec.get("school_district", "")
-            flood_data = ""
-            if parcel_results:
-                flood_data = parcel_results[0].get("flood_zone", "")
-
-            print(f"  {addr}, {city}")
-            print(f"    Zoning: {zoning} | Land Use: {land_use} | Future: {future_use}")
-            print(f"    Design Level: {design} | Acres: {acres}")
-            print(f"    Fire: {fire} | School: {school}")
-            if flood_data:
-                print(f"    Flood Zone: {flood_data}")
-            print()
-
-
-def cmd_adjudicated(args):
-    """Search tax-defaulted (adjudicated) properties."""
-    parish = args.parish
-    timeout = args.timeout
-    name = args.query.upper().replace("'", "''")
-
-    where = f"upper(owner) like '%{name}%'"
-    results = _soda_request(parish, "adjudicated", {"$where": where}, limit=args.limit, timeout=timeout)
-
-    parish_name = PARISHES[parish]["name"]
-    print(f"Found {len(results)} adjudicated properties for '{args.query}' in {parish_name}")
-    print()
-
-    log_search(f"adjudicated:{args.query}", f"la_property_{parish}", len(results))
-
-    if write_output(results, args, summary=f"LA adjudicated '{args.query}' ({parish_name})"):
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, sort_keys=True))
         return
-
-    for rec in results[:args.max_results]:
-        owner = rec.get("owner", "?")
-        assess = rec.get("assessment_num", "")
-        addr = rec.get("physadd", "")
-        city = rec.get("owncity", "")
-        assessed = _format_money(rec.get("sum_tol_as"))
-        fmv = _format_money(rec.get("sum_fair_m"))
-        tax_year = rec.get("tax_roll_year", "")
-        council = rec.get("council_district_no", "")
-        subdiv = rec.get("subd", "")
-
-        print(f"  {owner}")
-        print(f"    Assessment: {assess} | Tax Year: {tax_year}")
-        if addr:
-            print(f"    Address: {addr}")
-        if city:
-            print(f"    Owner City: {city}")
-        if fmv:
-            print(f"    FMV: {fmv} | Assessed: {assessed}")
-        if subdiv:
-            print(f"    Subdivision: {subdiv}")
-        if council:
-            print(f"    Council District: {council}")
-        print()
-
-    if len(results) > args.max_results:
-        print(f"  ... {len(results) - args.max_results} more records")
+    print(
+        f"East Baton Rouge property {args.command}: {result.status.value} "
+        f"({len(result.records)} records)"
+    )
+    if result.next_cursor:
+        print(f"Next cursor: {result.next_cursor}")
+    for wrapper in result.records[: args.max_results]:
+        _print_record(wrapper)
+    for warning in result.warnings:
+        print(f"WARNING: {warning}", file=sys.stderr)
+    for error in result.errors:
+        print(f"ERROR [{error.code}]: {error.message}", file=sys.stderr)
 
 
-def cmd_parishes(args):
-    """List supported parishes and their data sources."""
-    data = []
-    for key, cfg in PARISHES.items():
-        entry = {
+def cmd_remote(args: argparse.Namespace) -> None:
+    _emit(execute(args), args)
+
+
+def cmd_owner(args: argparse.Namespace) -> None:
+    cmd_remote(args)
+
+
+def cmd_address(args: argparse.Namespace) -> None:
+    cmd_remote(args)
+
+
+def cmd_parcel(args: argparse.Namespace) -> None:
+    cmd_remote(args)
+
+
+def cmd_details(args: argparse.Namespace) -> None:
+    cmd_remote(args)
+
+
+def cmd_adjudicated(args: argparse.Namespace) -> None:
+    cmd_remote(args)
+
+
+def cmd_parishes(args: argparse.Namespace) -> None:
+    data = [
+        {
             "key": key,
-            "name": cfg["name"],
-            "base_url": cfg["base_url"],
-            "datasets": list(cfg["datasets"].keys()),
+            "name": config["name"],
+            "jurisdiction_geoid": config["jurisdiction_geoid"],
+            "base_url": config["base_url"],
+            "datasets": config["datasets"],
+            "source_id": SOURCE_ID,
         }
-        data.append(entry)
-
+        for key, config in PARISHES.items()
+    ]
     if write_output(data, args, summary="LA property supported parishes"):
         return
-
-    print("Supported Louisiana parishes:")
-    print()
-    for key, cfg in PARISHES.items():
-        print(f"  {key}: {cfg['name']}")
-        print(f"    Portal: {cfg['base_url']}")
-        print(f"    Datasets: {', '.join(cfg['datasets'].keys())}")
-        print()
-    print("Use --parish <key> to select (default: ebr)")
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, sort_keys=True))
+        return
+    for entry in data:
+        print(f"{entry['key']}: {entry['name']} ({entry['jurisdiction_geoid']})")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Louisiana property records via SODA API")
+def _add_remote_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--parish",
+        default=DEFAULT_PARISH,
+        choices=tuple(PARISHES),
+    )
+    parser.add_argument("--limit", type=int, default=50, help="Records per dataset")
+    parser.add_argument("--max-results", type=int, default=20)
+    parser.add_argument("--cursor", help="Composite continuation cursor")
+    parser.add_argument("--page-size", type=int, default=1_000)
+    parser.add_argument(
+        "--max-records",
+        type=int,
+        help="Optional user-selected record ceiling per dataset",
+    )
+    parser.add_argument(
+        "--minimum-interval",
+        type=float,
+        default=0.5,
+        help="Client pacing in seconds (a documented catalog minimum, if any, also applies)",
+    )
+    parser.add_argument("--timeout", type=float, default=60.0)
+    parser.add_argument("--catalog-db", default=str(DEFAULT_DB_PATH))
+    add_output_args(parser)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Query East Baton Rouge official property open data"
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # owner — search by taxpayer/owner name
-    p = sub.add_parser("owner", help="Search by owner/taxpayer name")
-    p.add_argument("query", help="Owner or taxpayer name to search")
-    p.add_argument("--parish", default=DEFAULT_PARISH, choices=list(PARISHES.keys()), help="Parish to search")
-    p.add_argument("--limit", type=int, default=50, help="Max records per dataset")
-    p.add_argument("--max-results", type=int, default=20, help="Max records to display")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds")
-    add_output_args(p)
+    owner = sub.add_parser("owner", help="Search taxpayer and parcel-owner names")
+    owner.add_argument("query")
+    _add_remote_arguments(owner)
 
-    # address — search by property address
-    p = sub.add_parser("address", help="Search by property address")
-    p.add_argument("query", help="Address or street name to search")
-    p.add_argument("--parish", default=DEFAULT_PARISH, choices=list(PARISHES.keys()), help="Parish to search")
-    p.add_argument("--limit", type=int, default=50, help="Max records per dataset")
-    p.add_argument("--max-results", type=int, default=20, help="Max records to display")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds")
-    add_output_args(p)
+    address = sub.add_parser("address", help="Search parcel and planning addresses")
+    address.add_argument("query")
+    _add_remote_arguments(address)
 
-    # parcel — look up by assessment number
-    p = sub.add_parser("parcel", help="Look up by assessment number")
-    p.add_argument("assessment_no", help="Assessment number (with or without dashes)")
-    p.add_argument("--parish", default=DEFAULT_PARISH, choices=list(PARISHES.keys()), help="Parish to search")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds")
-    add_output_args(p)
+    parcel = sub.add_parser("parcel", help="Look up an assessment number")
+    parcel.add_argument("assessment_no")
+    _add_remote_arguments(parcel)
 
-    # details — cross-dataset detail view
-    p = sub.add_parser("details", help="Cross-dataset detail view for a parcel")
-    p.add_argument("assessment_no", help="Assessment number")
-    p.add_argument("--parish", default=DEFAULT_PARISH, choices=list(PARISHES.keys()), help="Parish to search")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds")
-    add_output_args(p)
+    details = sub.add_parser("details", help="Join parcel details across datasets")
+    details.add_argument("assessment_no")
+    _add_remote_arguments(details)
 
-    # adjudicated — tax-defaulted properties
-    p = sub.add_parser("adjudicated", help="Search tax-defaulted (adjudicated) properties")
-    p.add_argument("query", help="Owner name to search")
-    p.add_argument("--parish", default=DEFAULT_PARISH, choices=list(PARISHES.keys()), help="Parish to search")
-    p.add_argument("--limit", type=int, default=50, help="Max records")
-    p.add_argument("--max-results", type=int, default=20, help="Max records to display")
-    p.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds")
-    add_output_args(p)
+    adjudicated = sub.add_parser(
+        "adjudicated",
+        help="Search tax-defaulted property records",
+    )
+    adjudicated.add_argument("query")
+    _add_remote_arguments(adjudicated)
 
-    # parishes — list supported parishes
-    p = sub.add_parser("parishes", help="List supported parishes and data sources")
-    add_output_args(p)
+    parishes = sub.add_parser("parishes", help="List configured parish sources")
+    add_output_args(parishes)
+    return parser
 
+
+def main() -> None:
+    parser = build_parser()
     args = parser.parse_args()
-
+    for name in ("limit", "max_results", "page_size", "max_records"):
+        value = getattr(args, name, None)
+        if value is not None and value <= 0:
+            parser.error(f"{name.replace('_', '-')} must be positive")
+    if getattr(args, "minimum_interval", 0) < 0:
+        parser.error("minimum-interval must not be negative")
     commands = {
         "owner": cmd_owner,
         "address": cmd_address,

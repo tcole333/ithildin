@@ -1,0 +1,173 @@
+{
+  "version": "1.0",
+  "reference_sha256": "f9c6a218afc9b91cb49e31cb7fbadcc4852c4c87162e46a2210e58598a25448e",
+  "frozen_reference_modified": false,
+  "applied_equally_to": [
+    "response-a.json",
+    "response-b.json"
+  ],
+  "adjudication": "Source text controls over the reference; weights are unchanged. A second blinded agent independently reviewed C01, C06, C07, and combined-petition pledging-party ambiguities.",
+  "entries": [
+    {
+      "id": "E01",
+      "type": "reference_correction",
+      "case_ids": [
+        "C06"
+      ],
+      "field": "actions",
+      "reference_value": [
+        "license_transfer",
+        "license_pledge"
+      ],
+      "corrected_value": [
+        "license_transfer",
+        "license_pledge",
+        "stock_pledge"
+      ],
+      "reason": "Stock pledge is explicit and is one of the six requested action categories.",
+      "evidence": [
+        {
+          "case_id": "C06",
+          "quote": "Lastly, has petitioned to pledge the license and stock to 1121 Dorchester Avenue Realty LLC.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "type": "semantic_allowance",
+      "case_ids": [
+        "C01"
+      ],
+      "field": "license_transfer_approved",
+      "reference_value": false,
+      "accepted_values": [
+        false,
+        true
+      ],
+      "acceptance_condition": "True denotes the historical approval explicitly recorded in the notice, while actions/disposition identify the present event as an acknowledged revocation-intent notice. It must not assert a new grant or formal completed revocation.",
+      "reason": "The schema gives no time qualifier for this flag; the source expressly records prior Board approval. Both responses preserve acknowledgment, revocation notice, and nonclosing.",
+      "evidence": [
+        {
+          "case_id": "C01",
+          "quote": "mutual intent to revoke the transfer of the license approved by the Board on August 28, 2025",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        },
+        {
+          "case_id": "C01",
+          "quote": "Acknowledged",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "type": "materiality_clarification",
+      "case_ids": [
+        "C06"
+      ],
+      "field": "conditions_or_corrections",
+      "required_content": [
+        "Final manager of record is Maria Murray."
+      ],
+      "not_separately_required": [
+        "Repeat that the street address is omitted.",
+        "Name the superseded proposed manager when the final manager is correctly supplied."
+      ],
+      "reason": "Address omission is an evidence limitation already scored through null address fields, not a final-disposition condition. Both answers supply the manager correction.",
+      "evidence": [
+        {
+          "case_id": "C06",
+          "quote": "Granted, with Maria Murray as manager of record",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "type": "materiality_clarification",
+      "case_ids": [
+        "C07"
+      ],
+      "field": "conditions_or_corrections",
+      "reference_value": [
+        "Rockland Trust Company releases previous pledges/security interests; excerpt does not establish absence of other liens."
+      ],
+      "accepted_empty_list": true,
+      "reason": "No final condition or correction is imposed. Release classification and uncertain current liens are separately and correctly represented; repetition in this field is not required.",
+      "evidence": [
+        {
+          "case_id": "C07",
+          "quote": "Release of Pledge of License and Security Interests from Rockland Trust Company, releasing any previous pledges held on Shippy’s Inc.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf"
+        },
+        {
+          "case_id": "C07",
+          "quote": "Acknowledged",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf"
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "type": "semantic_allowance",
+      "case_ids": [
+        "C06",
+        "C09",
+        "C10"
+      ],
+      "field": "pledging_party",
+      "accepted_values_by_case": {
+        "C06": [
+          "The DOT Restaurant, LLC",
+          "DOT Associates, LLC"
+        ],
+        "C09": [
+          "KBG, Inc.",
+          "Flik International Corp."
+        ],
+        "C10": [
+          "Harvard Convenience Inc.",
+          "Patel Harvard, Inc."
+        ]
+      },
+      "reason": "The holder is the grammatical subject of has petitioned; the combined petition does not expressly identify a separate pledgor. The rubric also explicitly accepts the proposed transferee/pledger. Both readings refer to named source parties, and the packet does not resolve the ultimate pledgor.",
+      "evidence": [
+        {
+          "case_id": "C06",
+          "quote": "Lastly, has petitioned to pledge the license and stock to 1121 Dorchester Avenue Realty LLC.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        },
+        {
+          "case_id": "C09",
+          "quote": "Additionally, has petitioned to pledge the license to BP TRS Services, LLC.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2024/12/Voting%20Minutes%2012-12-24.docx.pdf"
+        },
+        {
+          "case_id": "C10",
+          "quote": "Secondly, has petitioned to pledge the license and inventory to Rockland Trust Company.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2025/06/Voting%20Minutes%206-5-25.docx.pdf"
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "type": "materiality_clarification",
+      "case_ids": [
+        "C01"
+      ],
+      "field": "conditions_or_corrections",
+      "required_content": [
+        "The transaction was not timely closed under the purchase and sale agreement."
+      ],
+      "reason": "This is the explicit reason for the notice. Mutual revocation intent and acknowledgment may be represented in actions, disposition, and faithful quotes; the reference’s no-new-grant/no-formal-order commentary is not itself an imposed condition.",
+      "evidence": [
+        {
+          "case_id": "C01",
+          "quote": "the transaction has not been timely closed as required by the purchase and sale agreement.",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+        }
+      ]
+    }
+  ]
+}

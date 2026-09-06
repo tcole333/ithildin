@@ -3,12 +3,15 @@
 IRS 990 XML e-file ingest — Schedule I (grants) and Schedule R (related orgs).
 
 Downloads IRS e-file index CSVs to find OBJECT_IDs for tracked EINs, then fetches
-individual XML filings via ProPublica's Nonprofit Explorer (signed S3 URLs).
+XML filings from the official IRS batch archives, with ProPublica's Nonprofit
+Explorer as a fallback.
 Parses Schedule I/R into investigation.db.
 
 Index source: https://apps.irs.gov/pub/epostcard/990/xml/{YEAR}/index_{YEAR}.csv
-XML source: https://projects.propublica.org/nonprofits/download-xml?object_id={ID}
-Years: 2017-2025 (indexes), 2011+ (XMLs via ProPublica)
+XML sources:
+  https://apps.irs.gov/pub/epostcard/990/xml/{YEAR}/{XML_BATCH_ID}.zip
+  https://projects.propublica.org/nonprofits/download-xml?object_id={ID}
+Years: 2017-current year (indexes), 2011+ (XMLs via ProPublica fallback)
 
 Usage:
     python tools/ingest_990_xml.py download-index
@@ -25,14 +28,16 @@ Usage:
 
 import argparse
 import csv
-import json
-import os
+import io
 import sqlite3
 import sys
 import time
+import zipfile
+from datetime import date
 from pathlib import Path
-from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
+from xml.etree import ElementTree as ET
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -40,17 +45,18 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 try:
-    from tools.parse_990_xml import parse_filing, NS
+    from tools.parse_990_xml import parse_filing
 except ImportError:
-    from parse_990_xml import parse_filing, NS
+    from parse_990_xml import parse_filing
 
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 CACHE_DIR = Path(__file__).parent.parent / "datasets" / "irs_990_xml"
 XML_CACHE = CACHE_DIR / "xml"
+BATCH_CACHE = CACHE_DIR / "batches"
 
 INDEX_BASE = "https://apps.irs.gov/pub/epostcard/990/xml"
 PROPUBLICA_XML = "https://projects.propublica.org/nonprofits/download-xml"
-YEARS = range(2017, 2026)
+MIN_INDEX_YEAR = 2017
 
 TRACKED_EINS = {
     "660789697": "Gratitude America",
@@ -103,10 +109,16 @@ def _fetch(url, desc=""):
 
 # ── download-index ──────────────────────────────────────────────
 
+def index_years(today=None):
+    """Return all IRS index years through the current calendar year."""
+    current_year = (today or date.today()).year
+    return range(MIN_INDEX_YEAR, current_year + 1)
+
+
 def download_indexes(years=None):
     """Download index CSVs for each year, cache locally."""
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    years = years or YEARS
+    years = index_years() if years is None else years
     downloaded = 0
     for year in years:
         dest = CACHE_DIR / f"index_{year}.csv"
@@ -178,7 +190,65 @@ def cmd_lookup(args):
         write_output(all_results, args, summary="990 XML lookup")
 
 
-# ── download via ProPublica ──────────────────────────────────────
+# ── XML download ────────────────────────────────────────────────
+
+def _looks_like_xml(data):
+    """Return whether downloaded bytes appear to contain an XML document."""
+    return bool(data) and (
+        data[:5] == b"<?xml"
+        or data[:8] == b"\xef\xbb\xbf<?xml"
+    )
+
+
+def _fetch_xml_irs_batch(target):
+    """Extract one filing from its official IRS XML batch archive."""
+    object_id = target["object_id"]
+    batch_id = target.get("batch_id")
+    year = str(target.get("year") or "")
+    if not batch_id or not year.isdigit():
+        return None
+
+    BATCH_CACHE.mkdir(parents=True, exist_ok=True)
+    archive_path = BATCH_CACHE / f"{batch_id}.zip"
+    if archive_path.exists():
+        archive_data = archive_path.read_bytes()
+    else:
+        url = f"{INDEX_BASE}/{year}/{batch_id}.zip"
+        try:
+            archive_data = _fetch(url, f"{batch_id}.zip")
+        except HTTPError as error:
+            print(
+                f"    Official IRS batch {batch_id} returned HTTP {error.code}",
+                file=sys.stderr,
+            )
+            return None
+        if not archive_data:
+            return None
+        archive_path.write_bytes(archive_data)
+
+    expected_name = f"{object_id}_public.xml".lower()
+    try:
+        with zipfile.ZipFile(io.BytesIO(archive_data)) as archive:
+            member = next(
+                (
+                    name
+                    for name in archive.namelist()
+                    if Path(name).name.lower() == expected_name
+                ),
+                None,
+            )
+            if not member:
+                print(
+                    f"    Object {object_id} not found in IRS batch {batch_id}",
+                    file=sys.stderr,
+                )
+                return None
+            data = archive.read(member)
+    except (OSError, zipfile.BadZipFile) as error:
+        print(f"    Invalid IRS batch archive {batch_id}: {error}", file=sys.stderr)
+        return None
+
+    return data if _looks_like_xml(data) else None
 
 def _fetch_xml_propublica(object_id):
     """Fetch a single 990 XML filing from ProPublica's Nonprofit Explorer.
@@ -193,7 +263,7 @@ def _fetch_xml_propublica(object_id):
             # ProPublica returns 302 → S3 signed URL, urllib follows automatically
             data = resp.read()
             # Handle UTF-8 BOM (some IRS XMLs start with \xef\xbb\xbf)
-            if data and (data[:5] == b"<?xml" or data[:8] == b"\xef\xbb\xbf<?xml"):
+            if _looks_like_xml(data):
                 return data
             # Rate-limited or error page
             text = data.decode("utf-8", errors="replace")[:200]
@@ -213,7 +283,7 @@ def _fetch_xml_propublica(object_id):
 
 
 def download_xmls(targets):
-    """Download individual XML filings via ProPublica. Returns list of xml paths."""
+    """Download XML filings from IRS batches, with ProPublica fallback."""
     XML_CACHE.mkdir(parents=True, exist_ok=True)
 
     # Separate cached from uncached
@@ -229,17 +299,25 @@ def download_xmls(targets):
     if not uncached:
         return extracted
 
-    print(f"  Downloading {len(uncached)} XMLs from ProPublica (1/min rate limit)...")
-    for i, t in enumerate(uncached):
+    print(
+        f"  Downloading {len(uncached)} XMLs from official IRS batches "
+        "(ProPublica fallback)..."
+    )
+    propublica_requests = 0
+    for t in uncached:
         obj_id = t["object_id"]
         tp = t.get("tax_period", "?")
+        data = _fetch_xml_irs_batch(t)
 
-        # Rate limit: wait 62s between requests (ProPublica enforces 1/min)
-        if i > 0:
-            print(f"    Waiting 62s for rate limit... ({i}/{len(uncached)})")
-            time.sleep(62)
+        if data is None:
+            # Rate limit only fallback requests; official batch downloads do not
+            # use ProPublica's one-request-per-minute endpoint.
+            if propublica_requests:
+                print("    Waiting 62s for ProPublica rate limit...")
+                time.sleep(62)
+            propublica_requests += 1
+            data = _fetch_xml_propublica(obj_id)
 
-        data = _fetch_xml_propublica(obj_id)
         if data == "RATE_LIMITED":
             print(f"    Rate limited on {obj_id} (period {tp}), waiting 120s...")
             time.sleep(120)
@@ -382,16 +460,28 @@ def ingest_ein(ein, label=""):
 
 def cmd_ingest(args):
     """Ingest filings for an EIN or all tracked EINs."""
+    results = []
     if args.tracked:
         total = 0
         for ein, label in TRACKED_EINS.items():
-            total += ingest_ein(ein, label)
+            stored = ingest_ein(ein, label)
+            total += stored
+            results.append(
+                {"ein": ein, "label": label, "filings_stored": stored}
+            )
         print(f"\nTotal: {total} filings ingested across {len(TRACKED_EINS)} EINs")
     elif args.ein:
         label = TRACKED_EINS.get(args.ein, args.ein)
-        ingest_ein(args.ein, label)
+        stored = ingest_ein(args.ein, label)
+        results.append(
+            {"ein": args.ein, "label": label, "filings_stored": stored}
+        )
     else:
         print("Error: provide EIN or --tracked", file=sys.stderr)
+        return
+
+    payload = results if args.tracked else results[0]
+    write_output(payload, args, summary="IRS 990 XML ingest")
 
 
 # ── grants query ────────────────────────────────────────────────
@@ -439,7 +529,7 @@ def cmd_grants(args):
         db.close()
         return
 
-    if not write_output(results, args, summary=f"990 grants query"):
+    if not write_output(results, args, summary="990 grants query"):
         pass  # already printed above
 
     db.close()
@@ -577,7 +667,7 @@ def cmd_stats(args):
         "unique_recipients": unique_recipients,
     }
 
-    print(f"\nIRS 990 XML Stats:")
+    print("\nIRS 990 XML Stats:")
     print(f"  Filings:     {filing_count:,}")
     print(f"    w/ Sched I: {sched_i_count:,}")
     print(f"    w/ Sched R: {sched_r_count:,}")
@@ -588,12 +678,12 @@ def cmd_stats(args):
     print(f"  Unique recipients: {unique_recipients:,}")
 
     if top_filers:
-        print(f"\n  Top grantmakers:")
+        print("\n  Top grantmakers:")
         for r in top_filers:
             print(f"    ${r['total'] or 0:>14,.0f}  {r['filer_name']} ({r['grant_count']} grants)")
 
     if top_recipients:
-        print(f"\n  Top recipients:")
+        print("\n  Top recipients:")
         for r in top_recipients:
             print(f"    ${r['total'] or 0:>14,.0f}  {r['recipient_name']} ({r['times_received']}x)")
 

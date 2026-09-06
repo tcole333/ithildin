@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "source_url": "https://lickingcounty.gov/depts/clerk/records_search.htm",
+  "landing": {
+    "url": "https://lickingcounty.gov/depts/clerk/records_search.htm",
+    "status_code": 200,
+    "content_type": "text/html",
+    "title_matches": true,
+    "mentions_docket": true,
+    "mentions_pleadings": true,
+    "mentions_bulk": true
+  },
+  "portal_shell": {
+    "url": "https://researchoh.tylerhost.net/CourtRecordsSearch/ui/county/LickingCaseSearch",
+    "status_code": 200,
+    "content_type": "text/html",
+    "title_matches": false,
+    "mentions_docket": false,
+    "mentions_pleadings": false,
+    "mentions_bulk": false
+  },
+  "app_configuration": {
+    "url": "https://researchoh.tylerhost.net/CourtRecordsSearch//configuration/appConfiguration",
+    "status_code": 200,
+    "content_type": "application/json",
+    "payload": {
+      "name": "re:SearchOH",
+      "version": "2026.5.4.2302",
+      "environment": "Production",
+      "maxExportSearchResultsSize": 1000,
+      "sessionWarningMinutes": 20,
+      "sessionExpirationMinutes": 30
+    }
+  },
+  "claims": {
+    "url": "https://researchoh.tylerhost.net/CourtRecordsSearch/api/auth/claims",
+    "status_code": 200,
+    "content_type": "application/json",
+    "payload": {
+      "jwt": null,
+      "basicUserSecurity": null,
+      "userProfile": null,
+      "features": {}
+    }
+  },
+  "subscription_configuration": {
+    "url": "https://researchoh.tylerhost.net/CourtRecordsSearch//config/premiumAndProSubscription?getAdditionalDetails=false",
+    "status_code": 200,
+    "content_type": "application/json",
+    "payload": {
+      "premium": {"enabled": true},
+      "pro": {"enabled": true}
+    }
+  },
+  "county_configuration": {
+    "url": "https://researchoh.tylerhost.net/CourtRecordsSearch/CountySite/GetCountySite/LickingCaseSearch",
+    "status_code": 200,
+    "content_type": "application/json",
+    "payload": {
+      "countyId": 1,
+      "externalSource": "Licking County",
+      "site": "LickingCaseSearch"
+    }
+  },
+  "request_count": 6
+}

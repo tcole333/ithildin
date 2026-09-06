@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import sqlite3
+import sys
 from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parent.parent / "investigation.db"
@@ -248,16 +249,16 @@ def get_thread_priority_boost(thread_id, db):
 def _load_profile_config():
     """Load key_persons and known_addresses from active investigation profile."""
     try:
-        import yaml
-        from tools.investigation_context import get_active_profile_path
-        profile_path = get_active_profile_path()
-        if profile_path and profile_path.exists():
-            with open(profile_path) as f:
-                cfg = yaml.safe_load(f)
-            return cfg.get("key_persons", []), cfg.get("known_addresses", [])
-    except Exception:
-        pass
-    return [], []
+        try:
+            from tools.investigation_context import get_active_profile
+        except ImportError:
+            from investigation_context import get_active_profile
+
+        profile = get_active_profile()
+        return profile.key_persons or [], profile.known_addresses or {}
+    except (FileNotFoundError, KeyError, TypeError, ValueError) as exc:
+        print(f"WARNING: Could not load active investigation profile: {exc}", file=sys.stderr)
+        return [], {}
 
 
 def cmd_assess(args):
@@ -291,7 +292,7 @@ def cmd_rules(_args):
     print("=== Depth Tier Thresholds ===")
     print(f"  deep_dive: key_person OR roles >= {DEEP_DIVE_MIN_ROLES} OR connections >= {DEEP_DIVE_MIN_CONNECTIONS}")
     print(f"  standard:  roles >= {STANDARD_TIER_MIN_ROLES} OR connections >= {STANDARD_TIER_MIN_CONNECTIONS} OR known_address")
-    print(f"  scan:      default (no escalation signals)")
+    print("  scan:      default (no escalation signals)")
     print()
     print("=== Skill Recommendation ===")
     for (tier, cat), skill in sorted(SKILL_RECOMMENDATION.items()):

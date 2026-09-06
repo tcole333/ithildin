@@ -33,14 +33,14 @@ import argparse
 import csv
 import io
 import json
-import os
 import sqlite3
 import sys
 import time
 import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
-from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -48,13 +48,11 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 
-def _log(query, source, count):
-    """Log search to prevent redundant queries."""
-    try:
-        from tools.lead_tracker import log_search
-        log_search(query, source, count)
-    except Exception:
-        pass
+try:
+    from tools.search_log_util import log_search_result as _log
+except ImportError:
+    from search_log_util import log_search_result as _log
+
 
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -69,6 +67,71 @@ BULK_FILES = {
     "short_forms": f"{BULK_BASE}/FARA_All_ShortForms.csv.zip",
     "documents": f"{BULK_BASE}/FARA_All_RegistrantDocs.csv.zip",
 }
+
+STALE_AFTER_DAYS = 7
+
+
+def _utc_now():
+    """Return the current UTC time (a seam for deterministic freshness tests)."""
+    return datetime.now(timezone.utc)
+
+
+def _bulk_file_freshness(dataset_name):
+    """Describe the age of a downloaded bulk file without claiming source recency.
+
+    FARA does not embed a dataset version in the local tables.  The ZIP mtime is
+    therefore the best available provenance for an existing cache: downloads
+    performed by this tool create/replace the file at download time, while
+    manually copied files are accurately labeled as filesystem modification
+    times rather than DOJ publication dates.
+    """
+    source_path = DATA_DIR / f"{dataset_name}.csv.zip"
+    metadata = {
+        "source_file": str(source_path),
+        "source_file_modified_at": None,
+        "age_days": None,
+        "stale_after_days": STALE_AFTER_DAYS,
+        "stale": None,
+    }
+    try:
+        modified_at = datetime.fromtimestamp(
+            source_path.stat().st_mtime, tz=timezone.utc
+        )
+    except OSError:
+        return metadata
+
+    age_seconds = max(0.0, (_utc_now() - modified_at).total_seconds())
+    age_days = age_seconds / 86400
+    metadata.update(
+        {
+            "source_file_modified_at": modified_at.isoformat(),
+            "age_days": round(age_days, 1),
+            "stale": age_days > STALE_AFTER_DAYS,
+        }
+    )
+    return metadata
+
+
+def _active_status_freshness_warning(registrant, freshness):
+    """Warn when a local Active label is stale or has unknown provenance."""
+    if not registrant or str(registrant["status"]).lower() != "active":
+        return None
+
+    if freshness["stale"] is True:
+        return (
+            "Local FARA status is Active, but the registrants bulk cache is "
+            f"{freshness['age_days']:.1f} days old "
+            f"(stale after {freshness['stale_after_days']} days). "
+            "Run `uv run python tools/query_fara.py download` and "
+            "`uv run python tools/query_fara.py ingest` before relying on this status."
+        )
+    if freshness["stale"] is None:
+        return (
+            "Local FARA status is Active, but cache freshness is unknown because "
+            "registrants.csv.zip is unavailable. Refresh and ingest the FARA bulk "
+            "files before relying on this status."
+        )
+    return None
 
 
 def _download_file(url, dest_path, max_retries=6):
@@ -590,13 +653,25 @@ def cmd_detail(args):
         "SELECT * FROM fara_documents WHERE registration_number = ? ORDER BY stamp_date DESC", [reg_num]
     ).fetchall()
 
+    registrant_freshness = _bulk_file_freshness("registrants")
+    freshness_warning = _active_status_freshness_warning(
+        reg, registrant_freshness
+    )
+
     # Prepare output data
     output_data = {
         "registrant": dict(reg) if reg else None,
         "foreign_principals": [dict(fp) for fp in fps],
         "short_forms": [dict(sf) for sf in sfs],
         "documents": [dict(d) for d in docs],
+        "dataset_freshness": {
+            "registrants": registrant_freshness,
+        },
+        "warnings": [freshness_warning] if freshness_warning else [],
     }
+
+    if freshness_warning:
+        print(f"WARNING: {freshness_warning}", file=sys.stderr)
 
     # Handle output mode
     if getattr(args, "output", None) or getattr(args, "json_out", False):
@@ -611,6 +686,14 @@ def cmd_detail(args):
         print(f"=== Registrant #{reg_num} ===")
         print(f"  Name: {reg['registrant_name']}")
         print(f"  Status: {reg['status']}")
+        if registrant_freshness["source_file_modified_at"]:
+            print(
+                "  Registrants cache: "
+                f"{registrant_freshness['source_file_modified_at']} "
+                f"({registrant_freshness['age_days']:.1f} days old)"
+            )
+        else:
+            print("  Registrants cache: freshness unknown")
         if reg["address"]:
             print(f"  Address: {reg['address']}, {reg['city']}, {reg['state']} {reg['zip']}")
         if reg["registration_date"]:
@@ -674,7 +757,7 @@ def cmd_stats(args):
         """).fetchall()
 
         if countries:
-            print(f"\n=== Top Countries ===")
+            print("\n=== Top Countries ===")
             for c in countries:
                 print(f"  {c['foreign_principal_country']}: {c['cnt']}")
     except sqlite3.OperationalError:

@@ -1,0 +1,51 @@
+{
+  "checks": {
+    "all_index_source_hashes_match": true,
+    "included_observations_13": true,
+    "money_observations_6_and_matters_5": true,
+    "all_included_acknowledged": true,
+    "quotes_in_page_text": true,
+    "exact_id_joins_only": true,
+    "amounts_present_in_quotes": true,
+    "main_action_sources_unchanged_during_build": true,
+    "canonical_current_event_count_307": true,
+    "no_included_exact_main_item_overlap": true,
+    "occupancy_transfer_overlap_preserved": true,
+    "all_main_review_joins_financing_unmarked": true
+  },
+  "counts": {
+    "source_index_entries": 155,
+    "distinct_saved_texts_scanned": 153,
+    "saved_texts_by_archive_year": {
+      "2024": 23,
+      "2025": 25,
+      "2026": 16,
+      "2020": 19,
+      "2021": 25,
+      "2022": 24,
+      "2023": 21
+    },
+    "encumbrance_or_discharge_observations": 13,
+    "by_notice_type": {
+      "attachment_discharge_notice": 1,
+      "bankruptcy_and_writ_notice": 1,
+      "tax_license_seizure_notice": 3,
+      "personal_property_writ_notice": 2,
+      "license_attachment_execution_notice": 1,
+      "license_seizure_announced_auction_execution_notice": 1,
+      "tax_license_seizure_announced_auction_notice": 3,
+      "money_judgment_execution_notice": 1
+    },
+    "observations_with_amount": 6,
+    "identified_monetary_matters": 5,
+    "observations_joined_to_main_review": 8,
+    "distinct_license_ids_joined_to_main_review": 7,
+    "observations_matched_only_to_excluded_roster": 1,
+    "observations_with_unmatched_explicit_license_id": 1,
+    "observations_omitting_license_id": 3,
+    "adjacent_context_exclusions": 3,
+    "observations_overlapping_main_actions": 0,
+    "keyword_hit_lines": 79
+  },
+  "all_passed": true
+}

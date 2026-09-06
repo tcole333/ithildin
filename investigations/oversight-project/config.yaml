@@ -1,0 +1,247 @@
+# The Oversight Project / Mike Howell — Corporate Network & Infrastructure Investigation
+
+name: "oversight-project"
+
+primary_subject: "The Oversight Project (Mike Howell)"
+
+description: >
+  Investigation of The Oversight Project — a government-accountability / FOIA-
+  litigation operation that launched (circa 2022) as a project of the Heritage
+  Foundation and was subsequently incorporated as an independent Wyoming entity
+  with a DC/Virginia office at 211 North Union Street, Alexandria, VA 22314.
+  Executive Director: Mike Howell. The Wyoming incorporation was reportedly
+  handled by attorney William M. Klimon (Caplin & Drysdale), who also appears on
+  filings for a cluster of aligned nonprofits at 300 Independence Avenue SE,
+  Washington, DC 20003 — the Conservative Partnership Institute (CPI) building —
+  including the American Accountability Foundation and, potentially, the CUFI
+  Action Fund. Scope: corporate structure and the Heritage spin-out, leadership
+  and revolving-door ties, the CPI shared-services ecosystem, funding and grant
+  flows, digital infrastructure (certificates, DNS, hosting), and litigation /
+  political activity. All specifics below are seeds to verify against primary
+  sources (WY SOS, VA SCC, IRS 990s, FEC, court records, crt.sh, Shodan).
+
+key_persons:
+  - "mike howell"
+  - "michael howell"
+  - "william m. klimon"
+  - "william klimon"
+  - "jim demint"
+  - "james demint"
+  - "mark meadows"
+  - "ed corrigan"
+  - "edward corrigan"
+  - "russ vought"
+  - "russell vought"
+  - "cleta mitchell"
+  - "thomas jones"
+  - "matthew buckham"
+  - "john hagee"
+  - "kevin roberts"
+  - "wesley denton"
+  - "rachel bovard"
+
+known_addresses:
+  "211 north union": "Oversight Project DC/VA office, Alexandria VA 22314 (branch of the Wyoming entity)"
+  "300 independence ave": "Conservative Partnership Institute HQ, Washington DC 20003 — shared by American Accountability Foundation, Klimon incorporations, potentially CUFI Action Fund"
+
+threads:
+  - id: 1
+    name: "Oversight Project Corporate Structure & Heritage Spin-out"
+    description: "Wyoming incorporation, Virginia foreign/branch registration (211 N Union St), the separation from the Heritage Foundation, EIN, 990 filings, governance, officers, and registered agents."
+    targets:
+      - "the oversight project"
+      - "oversight project"
+      - "heritage foundation"
+      - "the heritage foundation"
+    keywords:
+      - "wyoming"
+      - "incorporat"
+      - "registered agent"
+      - "articles of incorporation"
+      - "foreign registration"
+      - "form 990"
+      - "990"
+      - "spin-out"
+      - "spinoff"
+
+  - id: 2
+    name: "Leadership & Revolving Door"
+    description: "Mike Howell and staff; prior DHS / first-Trump-administration roles; Heritage Foundation positions; board members; other affiliations and career arcs."
+    targets:
+      - "mike howell"
+      - "michael howell"
+    keywords:
+      - "executive director"
+      - "department of homeland security"
+      - "homeland security"
+      - "general counsel"
+      - "heritage"
+      - "senior advisor"
+      - "revolving door"
+      - "project 2025"
+
+  - id: 3
+    name: "CPI Ecosystem & Klimon Incorporation Nexus"
+    description: "The 300 Independence Ave SE address cluster; William M. Klimon / Caplin & Drysdale incorporations; shared officers, registered agents, and addresses across CPI, the American Accountability Foundation, the CUFI Action Fund, and The Oversight Project."
+    targets:
+      - "conservative partnership institute"
+      - "cpi"
+      - "william klimon"
+      - "william m. klimon"
+      - "caplin & drysdale"
+      - "caplin and drysdale"
+      - "american accountability foundation"
+    keywords:
+      - "300 independence"
+      - "klimon"
+      - "incorporator"
+      - "registered agent"
+      - "shared officer"
+      - "capitol hill"
+      - "fiscal sponsor"
+      - "shared services"
+
+  - id: 4
+    name: "Funding & Grant Flows"
+    description: "Donors and grant flows in and out; 990 Schedule I / Schedule R relationships; donor-advised-fund routing; fiscal sponsorship; dark-money constellation around the network."
+    targets:
+      - "donors trust"
+      - "donorstrust"
+      - "bradley foundation"
+      - "lynde and harry bradley foundation"
+    keywords:
+      - "grant"
+      - "schedule i"
+      - "schedule r"
+      - "donor advised"
+      - "dark money"
+      - "contribution"
+      - "990"
+      - "fiscal sponsor"
+
+  - id: 5
+    name: "Digital Infrastructure"
+    description: "Websites, domains, certificate-transparency history (crt.sh), DNS topology, hosting and vendor stack (Shodan / URLScan), email infrastructure, and shared infrastructure signals across the organization cluster."
+    targets:
+      - "the oversight project"
+      - "oversight project"
+    keywords:
+      - "domain"
+      - "certificate"
+      - "subdomain"
+      - "dns"
+      - "nameserver"
+      - "ssl"
+      - "hosting"
+      - "shodan"
+      - "wayback"
+
+  - id: 6
+    name: "Litigation, Campaigns & Political Activity"
+    description: "FOIA lawsuits and other litigation; the public accountability campaigns; lobbying, FARA, and FEC activity; CUFI Action Fund and other 501(c)(4) political vehicles in the network."
+    targets:
+      - "cufi action fund"
+      - "christians united for israel"
+      - "john hagee"
+    keywords:
+      - "foia"
+      - "lawsuit"
+      - "complaint"
+      - "litigation"
+      - "lobby"
+      - "fara"
+      - "fec"
+      - "501(c)(4)"
+      - "political action committee"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2017-01-01"
+    event: "Conservative Partnership Institute founded by Jim DeMint and Ed Corrigan; exact date to verify"
+    category: "milestone"
+  - date: "2022-01-01"
+    event: "The Oversight Project launched as a Heritage Foundation project; exact date to verify"
+    category: "milestone"
+  - date: "2025-01-01"
+    event: "The Oversight Project reportedly incorporated as an independent Wyoming entity via William M. Klimon, with a DC/VA office at 211 N Union St; date and details to verify"
+    category: "milestone"
+
+seed_pillars:
+  - name: "The Oversight Project"
+    pillar_type: "operations"
+    sub_type: "accountability_nonprofit"
+    status: "active"
+    founded: "2022"
+    dissolved: null
+    jurisdiction: "Wyoming / DC-Virginia"
+    significance: "Primary subject; government-accountability and FOIA-litigation operation, formerly a Heritage Foundation project, now an independent Wyoming entity."
+
+  - name: "The Heritage Foundation"
+    pillar_type: "academia"
+    sub_type: "think_tank"
+    status: "active"
+    founded: "1973"
+    dissolved: null
+    jurisdiction: "Washington, DC"
+    significance: "Original institutional parent of The Oversight Project and sponsor of Project 2025; the spin-out relationship is a core question."
+
+  - name: "Conservative Partnership Institute"
+    pillar_type: "operations"
+    sub_type: "nonprofit_incubator"
+    status: "active"
+    founded: "2017"
+    dissolved: null
+    jurisdiction: "Washington, DC"
+    significance: "Capitol Hill incubator/shared-services hub at 300 Independence Ave SE for a network of aligned nonprofits; the address and officer nexus to verify."
+
+  - name: "American Accountability Foundation"
+    pillar_type: "operations"
+    sub_type: "opposition_research"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "Washington, DC"
+    significance: "Conservative opposition-research nonprofit in the 300 Independence Ave SE / CPI cluster; shares the Klimon incorporation signal per the tasking."
+
+  - name: "CUFI Action Fund"
+    pillar_type: "operations"
+    sub_type: "advocacy_501c4"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "501(c)(4) advocacy arm of Christians United for Israel (John Hagee); a candidate Klimon/CPI-linked entity — cross-links to the existing 'hagee' investigation profile."
+
+  - name: "Caplin & Drysdale, Chartered"
+    pillar_type: "legal"
+    sub_type: "tax_nonprofit_law_firm"
+    status: "active"
+    founded: "1964"
+    dissolved: null
+    jurisdiction: "Washington, DC"
+    significance: "Law firm associated with William M. Klimon, the incorporator named in the tasking; his incorporation portfolio maps the network."
+
+  - name: "DonorsTrust"
+    pillar_type: "philanthropy"
+    sub_type: "donor_advised_fund"
+    status: "active"
+    founded: "1999"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Candidate donor-advised-fund conduit in the conservative-nonprofit funding constellation; presence in grant flows to verify."
+
+  - name: "The Lynde and Harry Bradley Foundation"
+    pillar_type: "philanthropy"
+    sub_type: "private_foundation"
+    status: "active"
+    founded: "1985"
+    dissolved: null
+    jurisdiction: "Wisconsin"
+    significance: "Candidate private-foundation funder of opposition-research and accountability nonprofits in this network; grant flows to verify."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "The Oversight Project"
+
+source_overrides: {}

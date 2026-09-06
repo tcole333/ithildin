@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICE Skip-Tracing / UAC Entity Tracker</title>
+<script>
+/* Set theme before first paint so there is no flash. */
+(function(){
+  try{
+    var k='ice-tracker-theme', s=localStorage.getItem(k);
+    var t = s || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --plane:#e9e6dd; --surface:#f5f2ea; --surface-2:#efece2; --panel:#fbf9f2;
+  --border:#d9d4c6; --border-strong:#c4bdac;
+  --ink:#1b1a17; --ink-2:#4c4a44; --muted:#7c7768;
+  --accent:#0f7a6c; --accent-ink:#ffffff;
+  --ok:#1a7d33; --bad:#c23a2f; --warn:#9a6a00; --info:#2f5aa6; --changed:#b25a28;
+  --skip:#3f6f9e; --uac:#8a5c99;
+  --shadow:0 1px 2px rgba(30,26,16,.08), 0 8px 24px rgba(30,26,16,.06);
+  --font-serif:'Iowan Old Style','Palatino Linotype','Palatino',Georgia,'Times New Roman',serif;
+  --font-sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --font-mono:ui-monospace,'SF Mono','SFMono-Regular','JetBrains Mono',Menlo,Consolas,'Liberation Mono',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]){
+    --plane:#0b0d0c; --surface:#121513; --surface-2:#171b18; --panel:#1b201c;
+    --border:#2a302b; --border-strong:#3b433c;
+    --ink:#e9ece7; --ink-2:#a7ada4; --muted:#767c72;
+    --accent:#4bb8a6; --accent-ink:#08100e;
+    --ok:#3ec46e; --bad:#e2564f; --warn:#e0a52a; --info:#78acea; --changed:#e08a4e;
+    --skip:#7aa4cc; --uac:#bb93c6;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --plane:#0b0d0c; --surface:#121513; --surface-2:#171b18; --panel:#1b201c;
+  --border:#2a302b; --border-strong:#3b433c;
+  --ink:#e9ece7; --ink-2:#a7ada4; --muted:#767c72;
+  --accent:#4bb8a6; --accent-ink:#08100e;
+  --ok:#3ec46e; --bad:#e2564f; --warn:#e0a52a; --info:#78acea; --changed:#e08a4e;
+  --skip:#7aa4cc; --uac:#bb93c6;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px rgba(0,0,0,.4);
+}
+:root[data-theme="light"]{
+  --plane:#e9e6dd; --surface:#f5f2ea; --surface-2:#efece2; --panel:#fbf9f2;
+  --border:#d9d4c6; --border-strong:#c4bdac;
+  --ink:#1b1a17; --ink-2:#4c4a44; --muted:#7c7768;
+  --accent:#0f7a6c; --accent-ink:#ffffff;
+  --ok:#1a7d33; --bad:#c23a2f; --warn:#9a6a00; --info:#2f5aa6; --changed:#b25a28;
+  --skip:#3f6f9e; --uac:#8a5c99;
+  --shadow:0 1px 2px rgba(30,26,16,.08), 0 8px 24px rgba(30,26,16,.06);
+}
+
+/* ============ RESET / BASE ============ */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--plane); color:var(--ink);
+  font-family:var(--font-sans); font-size:15px; line-height:1.5;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-serif); font-weight:600; line-height:1.15; margin:0}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+.mono{font-family:var(--font-mono)}
+.wrap{max-width:1400px; margin:0 auto; padding:0 clamp(14px,3vw,34px)}
+
+/* ============ MASTHEAD ============ */
+.masthead{border-bottom:1px solid var(--border-strong); background:
+  linear-gradient(var(--surface),var(--surface));}
+.masthead .wrap{padding-top:22px; padding-bottom:20px}
+.kicker{font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.kicker .flag{color:var(--bad); border:1px solid color-mix(in srgb,var(--bad) 45%, transparent);
+  border-radius:3px; padding:1px 6px; letter-spacing:.12em}
+.masthead h1{font-size:clamp(24px,4vw,38px); margin:10px 0 6px; letter-spacing:-.01em}
+.masthead .sub{color:var(--ink-2); max-width:78ch; font-size:15px}
+.meta-line{margin-top:12px; display:flex; gap:8px 20px; flex-wrap:wrap;
+  font-family:var(--font-mono); font-size:12px; color:var(--muted)}
+.meta-line b{color:var(--ink-2); font-weight:600}
+
+.toolbar-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+.tbtn{font-family:var(--font-mono); font-size:12px; cursor:pointer; color:var(--ink-2);
+  background:var(--panel); border:1px solid var(--border-strong); border-radius:6px; padding:7px 11px;
+  display:inline-flex; align-items:center; gap:7px}
+.tbtn:hover{border-color:var(--accent); color:var(--ink)}
+
+/* ============ STICKY NAV ============ */
+nav.jump{position:sticky; top:0; z-index:30; background:color-mix(in srgb,var(--surface) 92%, transparent);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--border); }
+nav.jump .wrap{display:flex; gap:2px; overflow-x:auto; padding-top:0; padding-bottom:0; scrollbar-width:thin}
+nav.jump a{white-space:nowrap; font-family:var(--font-mono); font-size:12px; color:var(--ink-2);
+  padding:11px 12px; border-bottom:2px solid transparent}
+nav.jump a:hover{color:var(--ink); text-decoration:none; border-bottom-color:var(--border-strong)}
+nav.jump a.on{color:var(--ink); border-bottom-color:var(--accent)}
+
+/* ============ SECTIONS ============ */
+section{padding:34px 0 8px; scroll-margin-top:56px}
+.sec-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:4px}
+.sec-head h2{font-size:clamp(19px,2.6vw,26px)}
+.sec-num{font-family:var(--font-mono); font-size:12px; color:var(--accent); font-weight:700}
+.sec-desc{color:var(--ink-2); max-width:82ch; margin:6px 0 18px; font-size:14.5px}
+
+/* ============ READING KEY ============ */
+.keybar{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; margin-top:8px}
+.keycard{background:var(--panel); border:1px solid var(--border); border-radius:9px; padding:13px 15px; box-shadow:var(--shadow)}
+.keycard h4{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:9px}
+.keyrow{display:flex; gap:8px; align-items:center; font-size:12.5px; margin:5px 0; color:var(--ink-2)}
+.keyrow .mono{color:var(--ink)}
+
+/* confidence chips */
+.chip{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  padding:2px 7px 2px 6px; border-radius:20px; display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+  border:1px solid transparent; font-weight:600; line-height:1.5}
+.chip::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor; flex:none}
+.c-confirmed{color:var(--ok); background:color-mix(in srgb,var(--ok) 13%, transparent); border-color:color-mix(in srgb,var(--ok) 34%, transparent)}
+.c-refuted{color:var(--bad); background:color-mix(in srgb,var(--bad) 13%, transparent); border-color:color-mix(in srgb,var(--bad) 34%, transparent)}
+.c-unconfirmed{color:var(--warn); background:color-mix(in srgb,var(--warn) 15%, transparent); border-color:color-mix(in srgb,var(--warn) 36%, transparent)}
+.c-inference{color:var(--info); background:color-mix(in srgb,var(--info) 14%, transparent); border-color:color-mix(in srgb,var(--info) 34%, transparent)}
+.c-changed{color:var(--changed); background:color-mix(in srgb,var(--changed) 14%, transparent); border-color:color-mix(in srgb,var(--changed) 34%, transparent)}
+
+/* ceiling vs obligated figures */
+.cap{font-family:var(--font-mono); color:var(--muted); font-weight:500; white-space:nowrap;
+  border-bottom:1px dotted var(--border-strong)}
+.cap::before{content:"\25C7\FE0E"; margin-right:4px; color:var(--muted); font-size:.9em}
+.obl{font-family:var(--font-mono); color:var(--ink); font-weight:700; white-space:nowrap}
+.obl::before{content:"\25CF"; margin-right:4px; color:var(--accent); font-size:.8em; vertical-align:1px}
+sup.tag{font-family:var(--font-mono); font-size:8.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); font-weight:600; margin-left:3px}
+
+/* standing note */
+.standing{display:flex; gap:12px; align-items:flex-start; background:color-mix(in srgb,var(--warn) 9%, var(--panel));
+  border:1px solid color-mix(in srgb,var(--warn) 38%, var(--border)); border-left:4px solid var(--warn);
+  border-radius:9px; padding:13px 16px; margin:16px 0; font-size:13.5px; color:var(--ink-2)}
+.standing b{color:var(--ink)}
+.standing .ic{font-size:16px; line-height:1.2; color:var(--warn); flex:none}
+
+/* ============ PROGRAM CARDS ============ */
+.prog-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin-top:8px}
+.prog{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:0; box-shadow:var(--shadow); overflow:hidden}
+.prog.skip{border-top:4px solid var(--skip)}
+.prog.uac{border-top:4px solid var(--uac)}
+.prog .ph{padding:15px 18px 12px; border-bottom:1px solid var(--border)}
+.prog .ph .tag{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:700}
+.prog.skip .ph .tag{color:var(--skip)}
+.prog.uac .ph .tag{color:var(--uac)}
+.prog .ph h3{font-size:19px; margin:4px 0 2px}
+.prog .ph .soli{font-family:var(--font-mono); font-size:12px; color:var(--muted)}
+.prog dl{margin:0; padding:6px 18px 16px; display:grid; grid-template-columns:auto 1fr; gap:0}
+.prog dt{font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);
+  padding:9px 14px 9px 0; border-bottom:1px solid var(--border); align-self:center}
+.prog dd{margin:0; padding:9px 0; border-bottom:1px solid var(--border); text-align:right; font-family:var(--font-mono); font-size:13px}
+.prog dl>div{display:contents}
+.status-pill{font-family:var(--font-mono); font-size:11px; padding:2px 9px; border-radius:20px; font-weight:600; letter-spacing:.03em}
+.st-active{color:var(--ok); background:color-mix(in srgb,var(--ok) 14%, transparent)}
+.st-dormant{color:var(--muted); background:color-mix(in srgb,var(--muted) 18%, transparent)}
+
+/* ============ KPI TILES ============ */
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:13px; margin-top:20px}
+.kpi{background:var(--panel); border:1px solid var(--border); border-radius:11px; padding:15px 16px; box-shadow:var(--shadow); position:relative}
+.kpi .lab{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; min-height:2.2em}
+.kpi .big{font-family:var(--font-mono); font-size:26px; font-weight:700; letter-spacing:-.02em; line-height:1}
+.kpi .big.money{color:var(--ink)}
+.kpi .sub2{font-size:12px; color:var(--ink-2); margin-top:7px; font-family:var(--font-mono)}
+.kpi.hot{border-color:color-mix(in srgb,var(--bad) 40%, var(--border))}
+.kpi.hot .big{color:var(--bad)}
+
+/* ============ FEATURE PANEL (B.I. channel) ============ */
+.feature{background:var(--panel); border:1px solid var(--border-strong); border-radius:13px; box-shadow:var(--shadow);
+  overflow:hidden; margin-top:6px}
+.feature .fhead{padding:16px 20px; background:color-mix(in srgb,var(--bad) 8%, var(--panel));
+  border-bottom:1px solid var(--border); border-left:5px solid var(--bad)}
+.feature .fhead .k{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--bad); font-weight:700}
+.feature .fhead h3{font-size:21px; margin-top:5px}
+.feature .fbody{padding:18px 20px}
+.compare{display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; margin-bottom:18px}
+.compare .side{text-align:center; padding:14px; border-radius:10px; border:1px solid var(--border)}
+.compare .side.chan{background:color-mix(in srgb,var(--bad) 10%, transparent); border-color:color-mix(in srgb,var(--bad) 30%, transparent)}
+.compare .side.comp{background:var(--surface-2)}
+.compare .side .n{font-family:var(--font-mono); font-size:clamp(22px,3vw,30px); font-weight:700; letter-spacing:-.02em}
+.compare .side.chan .n{color:var(--bad)}
+.compare .side .cap2{font-family:var(--font-mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:6px}
+.compare .mult{font-family:var(--font-serif); font-size:clamp(20px,3vw,30px); font-weight:700; color:var(--ink); white-space:nowrap}
+.compare .mult small{display:block; font-family:var(--font-mono); font-size:10px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; font-weight:600}
+.quotebox{font-family:var(--font-mono); font-size:12.5px; background:var(--surface-2); border:1px solid var(--border);
+  border-left:3px solid var(--accent); border-radius:7px; padding:11px 14px; color:var(--ink-2); margin:14px 0}
+.seq{list-style:none; margin:14px 0 0; padding:0; display:grid; gap:0}
+.seq li{display:grid; grid-template-columns:104px 1fr; gap:14px; padding:9px 0; border-top:1px solid var(--border); align-items:baseline}
+.seq li:first-child{border-top:0}
+.seq .d{font-family:var(--font-mono); font-size:12px; color:var(--accent); font-weight:600}
+.seq .e{font-size:13.5px; color:var(--ink-2)}
+.seq .e b{color:var(--ink); font-family:var(--font-mono)}
+
+/* ============ TABLES ============ */
+.roster{margin-top:6px}
+.rtools{display:flex; gap:10px 14px; flex-wrap:wrap; align-items:center; margin:6px 0 12px}
+.rsearch{position:relative; flex:1 1 240px; min-width:210px; max-width:360px}
+.rsearch input{width:100%; font-family:var(--font-mono); font-size:13px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border-strong); border-radius:7px; padding:8px 10px 8px 30px}
+.rsearch input::placeholder{color:var(--muted)}
+.rsearch .mag{position:absolute; left:9px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:13px; pointer-events:none}
+.cats{display:flex; gap:6px; flex-wrap:wrap}
+.cats button{font-family:var(--font-mono); font-size:11px; cursor:pointer; color:var(--ink-2);
+  background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:5px 11px}
+.cats button:hover{border-color:var(--accent); color:var(--ink)}
+.cats button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600}
+.rcount{font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-left:auto}
+
+.table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:11px; box-shadow:var(--shadow); background:var(--surface)}
+table.data{border-collapse:separate; border-spacing:0; width:100%; min-width:940px; font-size:13px}
+table.data thead th{position:sticky; top:0; z-index:2; background:var(--surface-2); text-align:left;
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted);
+  padding:11px 12px; border-bottom:1px solid var(--border-strong); white-space:nowrap; vertical-align:bottom}
+table.data th[data-type]{cursor:pointer; user-select:none}
+table.data th[data-type]:hover{color:var(--ink)}
+table.data th .arw{opacity:.3; margin-left:4px}
+table.data th[data-dir] .arw{opacity:1; color:var(--accent)}
+table.data th.num, table.data td.num{text-align:right}
+table.data tbody td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; color:var(--ink-2)}
+table.data tbody tr:hover td{background:color-mix(in srgb,var(--accent) 6%, transparent)}
+table.data tbody tr:last-child td{border-bottom:0}
+.firm{color:var(--ink); font-weight:600; font-family:var(--font-sans); white-space:nowrap}
+.firm .x{margin-left:6px}
+td .note{font-size:12px; color:var(--ink-2); min-width:240px; display:block}
+td .uei,td .piid{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-2); white-space:nowrap}
+.addr{font-size:12px; min-width:150px; display:block}
+.atype{font-family:var(--font-mono); font-size:10px; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); display:block; margin-top:3px}
+/* cross-program badge */
+.xbadge{font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.05em; color:var(--accent-ink);
+  background:var(--accent); border-radius:4px; padding:1px 5px; vertical-align:1px}
+tr.xrow td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+/* category dots */
+.cattag{font-family:var(--font-mono); font-size:10px; letter-spacing:.02em; color:var(--ink-2); white-space:nowrap; display:inline-block}
+.cattag::before{content:"\25AA"; margin-right:4px}
+.ct-established::before{color:var(--skip)} .ct-newcomer::before{color:var(--changed)}
+.ct-residential::before{color:var(--bad)} .ct-orr::before{color:var(--uac)}
+.ct-incumbent::before{color:var(--info)}
+tr[hidden]{display:none}
+
+/* ============ ORR / GENERIC PANELS ============ */
+.panel{background:var(--panel); border:1px solid var(--border); border-radius:11px; padding:16px 18px; box-shadow:var(--shadow)}
+.panel + .panel{margin-top:14px}
+.orr-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:6px}
+.orr-card{background:var(--panel); border:1px solid var(--border); border-left:4px solid var(--uac); border-radius:10px; padding:14px 16px; box-shadow:var(--shadow)}
+.orr-card h4{font-size:16px; margin-bottom:3px}
+.orr-card .who{font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-bottom:9px}
+.orr-card p{margin:8px 0 0; font-size:13px; color:var(--ink-2)}
+.orr-card .fig{font-family:var(--font-mono); font-size:12.5px; color:var(--ink); font-weight:600}
+
+/* people */
+.ppl-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:13px}
+.pcard{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:13px 15px; box-shadow:var(--shadow)}
+.pcard.official{border-left:4px solid var(--info)}
+.pcard .pn{font-family:var(--font-serif); font-size:16px; font-weight:600; color:var(--ink)}
+.pcard .pr{font-family:var(--font-mono); font-size:11px; color:var(--muted); margin:2px 0 8px}
+.pcard .pid{font-family:var(--font-mono); font-size:11px; color:var(--info); font-weight:600}
+.pcard p{margin:6px 0 0; font-size:12.5px; color:var(--ink-2)}
+.grouplabel{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  margin:20px 0 11px; padding-bottom:6px; border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center}
+.grouplabel .dot{width:9px;height:9px;border-radius:50%;background:var(--info)}
+.grouplabel.prin .dot{background:var(--ink-2)}
+
+/* refuted */
+.ruled{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:13px; margin-top:6px}
+.rcard{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px 16px; box-shadow:var(--shadow); border-left:4px solid var(--bad)}
+.rcard h4{font-size:15.5px; margin-bottom:7px; display:flex; align-items:center; gap:8px}
+.rcard h4 .x{color:var(--bad); font-family:var(--font-mono); flex:none}
+.rcard p{margin:0; font-size:13px; color:var(--ink-2)}
+.rcard .ev{font-family:var(--font-mono); font-size:11.5px; color:var(--ink); margin-top:8px; display:block}
+
+/* open questions */
+.oq{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:13px; margin-top:6px}
+.oqcard{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px 16px; box-shadow:var(--shadow); border-left:4px solid var(--accent)}
+.oqcard h4{font-size:15px; margin-bottom:6px}
+.oqcard p{margin:0; font-size:13px; color:var(--ink-2)}
+.oqcard .ref{font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:8px; display:block}
+.foia{counter-reset:foia; list-style:none; margin:10px 0 0; padding:0}
+.foia li{position:relative; padding:9px 0 9px 40px; border-top:1px solid var(--border); font-size:13px; color:var(--ink-2)}
+.foia li:first-child{border-top:0}
+.foia li::before{counter-increment:foia; content:counter(foia); position:absolute; left:0; top:9px;
+  font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent-ink); background:var(--accent);
+  width:22px; height:22px; border-radius:6px; display:grid; place-items:center}
+.foia li b{color:var(--ink)}
+
+/* footer */
+footer{margin-top:40px; border-top:1px solid var(--border-strong); background:var(--surface)}
+footer .wrap{padding:22px 0 40px; color:var(--muted); font-size:12.5px; font-family:var(--font-mono)}
+footer b{color:var(--ink-2)}
+.disc{max-width:80ch; line-height:1.6; margin-top:8px}
+
+@media (max-width:640px){
+  .compare{grid-template-columns:1fr; gap:10px}
+  .compare .mult{transform:rotate(90deg)}
+  .prog dl{grid-template-columns:1fr auto}
+  .seq li{grid-template-columns:88px 1fr; gap:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="toolbar-top">
+      <div class="kicker">
+        <span class="flag">Internal working file</span>
+        <span>OSINT research · not for publication</span>
+      </div>
+      <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle colour theme">◑ Theme</button>
+    </div>
+    <h1>ICE Skip-Tracing &amp; UAC Safety-Verification &mdash; Entity Tracker</h1>
+    <p class="sub">Working reference for two linked ICE ERO procurement programs run out of contracting office
+      <span class="mono">70CDCR</span>: a $1.44B competed <b>skip-tracing</b> IDIQ family and a $20.58B
+      <b>"safety verification and wellness checks for unaccompanied alien children"</b> IDIQ family. Every figure
+      is drawn from primary procurement records (FPDS-NG, USASpending, SAM). Confidence labels are carried through
+      from the source reports unchanged.</p>
+    <div class="meta-line">
+      <span><b>Last updated</b> 2026-07-28</span>
+      <span><b>Reflects</b> findings #14378&ndash;#14409</span>
+      <span><b>Profile</b> tech-right · threads 11/15/16</span>
+      <span><b>Primary sources</b> FPDS-NG · USASpending · SAM · HigherGov</span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Section navigation">
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#bi-channel">B.I./GEO channel</a>
+    <a href="#skip">Skip-tracing (14)</a>
+    <a href="#uac">UAC (18)</a>
+    <a href="#orr">ORR crossover</a>
+    <a href="#satellites">Satellites</a>
+    <a href="#people">People</a>
+    <a href="#refuted">Refuted / ruled out</a>
+    <a href="#open">Open questions</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= OVERVIEW ================= -->
+<section id="overview">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Program overview</h2></div>
+
+  <div class="standing" role="note">
+    <span class="ic" aria-hidden="true">&#9888;&#65039;</span>
+    <div><b>Ceilings are ordering capacity, not money spent.</b> Every IDIQ ceiling below (the <span class="cap">capacity</span>
+      figures) is the maximum ICE could order over the life of the vehicle &mdash; it is not revenue, obligation, or spend.
+      Actual money obligated to date (the <span class="obl">obligated</span> figures) is a tiny fraction of it:
+      $19.03M of a $1.44B skip-tracing ceiling, $86.82M of a $20.58B UAC ceiling. Never read the $20.58B as spending.</div>
+  </div>
+
+  <div class="prog-grid">
+    <!-- SKIP -->
+    <div class="prog skip">
+      <div class="ph">
+        <div class="tag">Program A &middot; Skip tracing</div>
+        <h3>DHS ICE Skip Tracing Services</h3>
+        <div class="soli">Solicitation 26-SOL-DCR-01 &middot; HigherGov vehicle 8760</div>
+      </div>
+      <dl>
+        <div><dt>IDIQ range</dt><dd>D00000003 &ndash; D00000021</dd></div>
+        <div><dt>Awards</dt><dd>14 IDIQs</dd></div>
+        <div><dt>Combined ceiling</dt><dd><span class="cap">$1,442,909,640<sup class="tag">cap</sup></span></dd></div>
+        <div><dt>Obligated</dt><dd><span class="obl">$19,032,607</span></dd></div>
+        <div><dt>Outlaid</dt><dd><span class="obl">$11,878,880</span> <span style="color:var(--muted)">(62.4%)</span></dd></div>
+        <div><dt>Competition</dt><dd>51 offers &rarr; 14 awards</dd></div>
+        <div><dt>Status</dt><dd><span class="status-pill st-dormant">Dormant since 2026-03-11</span></dd></div>
+      </dl>
+    </div>
+    <!-- UAC -->
+    <div class="prog uac">
+      <div class="ph">
+        <div class="tag">Program B &middot; UAC "Safety Verification Initiative"</div>
+        <h3>Safety verification &amp; wellness checks, unaccompanied children</h3>
+        <div class="soli">Solicitation 70CDCR26R00000015 &middot; NAICS 561611 · PSC R799</div>
+      </div>
+      <dl>
+        <div><dt>IDIQ range</dt><dd>D00000030 &ndash; D00000047</dd></div>
+        <div><dt>Awards</dt><dd>18 IDIQs</dd></div>
+        <div><dt>Combined ceiling</dt><dd><span class="cap">$20,583,928,204<sup class="tag">cap</sup></span></dd></div>
+        <div><dt>Obligated</dt><dd><span class="obl">$86,822,317</span> <span style="color:var(--muted)">(19 TOs)</span></dd></div>
+        <div><dt>Per-case spread</dt><dd>$1,055 &ndash; $11,965 (11.3&times;)</dd></div>
+        <div><dt>Competition</dt><dd>18 offers &rarr; 18 awards</dd></div>
+        <div><dt>Status</dt><dd><span class="status-pill st-active">Active &middot; last action 2026-07-24</span></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <!-- KPI strip -->
+  <div class="kpis">
+    <div class="kpi hot">
+      <div class="lab">B.I./GEO sole-source skip tracing via ISAP&nbsp;V channel</div>
+      <div class="big money">$86.36M</div>
+      <div class="sub2">vs $19.03M across all 14 competed awardees &middot; 4.54&times;</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Amendment 2 deleted the program ceiling; awards came to</div>
+      <div class="big">8.0&times;</div>
+      <div class="sub2">the $180M maximum advertised nine days earlier</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Firms present in BOTH programs</div>
+      <div class="big">3</div>
+      <div class="sub2">NPS &middot; Response&nbsp;AI &middot; SOSi</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">UAC awardees with zero prior federal prime $ (pre-2025)</div>
+      <div class="big">12<span style="font-size:16px;color:var(--muted)"> / 18</span></div>
+      <div class="sub2">8 of 13 newcomers at a residence, mailbox or virtual suite</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">UAC awardees with direct ORR child-welfare lineage</div>
+      <div class="big">3<span style="font-size:16px;color:var(--muted)"> / 18</span></div>
+      <div class="sub2">Compass United &middot; Applied Intellect &middot; The Baptiste Group</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Coordinated-bidding pairwise matches across 27 firms</div>
+      <div class="big">0</div>
+      <div class="sub2">addresses, POC names/streets, NAICS/PSC &mdash; theory refuted</div>
+    </div>
+  </div>
+
+  <!-- reading key -->
+  <div class="keybar" style="margin-top:22px">
+    <div class="keycard">
+      <h4>Money vs capacity</h4>
+      <div class="keyrow"><span class="cap">$1,442,909,640<sup class="tag">cap</sup></span></div>
+      <div class="keyrow" style="color:var(--muted)">Ordering ceiling &mdash; capacity, never spend</div>
+      <div class="keyrow"><span class="obl">$19,032,607</span></div>
+      <div class="keyrow" style="color:var(--muted)">Obligated &mdash; actual money committed</div>
+    </div>
+    <div class="keycard">
+      <h4>Confidence (carried from source)</h4>
+      <div class="keyrow"><span class="chip c-confirmed">Confirmed</span> primary record seen</div>
+      <div class="keyrow"><span class="chip c-refuted">Refuted</span> checked &amp; disproved</div>
+      <div class="keyrow"><span class="chip c-unconfirmed">Unconfirmed</span> tried, not established</div>
+      <div class="keyrow"><span class="chip c-inference">Inference</span> reasoning, labelled</div>
+      <div class="keyrow"><span class="chip c-changed">Changed</span> earlier claim corrected</div>
+    </div>
+    <div class="keycard">
+      <h4>Row markers</h4>
+      <div class="keyrow"><span class="xbadge">&#8644; BOTH</span> firm in both programs</div>
+      <div class="keyrow"><span class="cattag ct-newcomer">newcomer</span> thin/no prior federal history</div>
+      <div class="keyrow"><span class="cattag ct-residential">residential</span> house / mailbox / virtual suite</div>
+      <div class="keyrow"><span class="cattag ct-orr">ORR-lineage</span> from HHS child-welfare system</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B.I. CHANNEL ================= -->
+<section id="bi-channel">
+  <div class="sec-head"><span class="sec-num">02</span><h2>The B.I./GEO incumbent channel</h2>
+    <span class="chip c-confirmed">Confirmed &middot; FPDS-NG</span></div>
+  <p class="sec-desc">The single most important finding. ICE ran a $1.44B competition for skip tracing and then bought the
+    service, at 4.5&times; the scale, from the company that already monitors the same people &mdash; through a pre-priced
+    line item inside B.I.'s sole-source ISAP&nbsp;V electronic-monitoring task order.</p>
+
+  <div class="feature">
+    <div class="fhead">
+      <div class="k">Sole-source vs competed &mdash; skip tracing dollars obligated</div>
+      <h3>$86,361,425 through ISAP&nbsp;V Item 42 &middot; $19,032,607 across 14 competed awardees</h3>
+    </div>
+    <div class="fbody">
+      <div class="compare">
+        <div class="side chan">
+          <div class="n">$86,361,425</div>
+          <div class="cap2">Sole-source to B.I. via task order<br><span class="mono">70CDCR25FR0000127</span> · P00002+P00003+P00004</div>
+        </div>
+        <div class="mult">4.54&times;<small>the competed program</small></div>
+        <div class="side comp">
+          <div class="n">$19,032,607</div>
+          <div class="cap2">Obligated across all fourteen<br>competed skip-tracing awardees</div>
+        </div>
+      </div>
+
+      <div class="quotebox">
+        FPDS mod text, verbatim: &ldquo;THIS MODIFICATION ADDS FUNDING FOR <b>ATTACHMENT 4 PRICING SCHEDULE ITEM 42
+        SKIP TRACING SERVICES</b> FOR THE INTENSIVE SUPERVISION APPEARANCE PROGRAM (ISAP)&nbsp;V&hellip;&rdquo;
+        &mdash; skip tracing was already a pre-priced CLIN inside the electronic-monitoring contract, so ICE never
+        needed a competition to buy it from B.I. B.I.'s own competed delivery order (<span class="mono">70CDCR26FR0000021</span>)
+        carries just $1,624,500 &mdash; 1.9% of what it received through the ISAP channel.
+      </div>
+
+      <ol class="seq">
+        <li><span class="d">2025-09-30</span><span class="e">ISAP&nbsp;V renewal task order awarded to B.I., <b>$21.98M</b>, PoP to 2026-09-29.</span></li>
+        <li><span class="d">2025-10-30</span><span class="e">P00002 adds <b>+$690,000</b> of skip tracing &mdash; GEO's investor-facing "pilot"; 11 days before the competition published.</span></li>
+        <li><span class="d">2025-12-16</span><span class="e">ICE awards 14 competed skip-tracing IDIQs, including B.I.'s <span class="cap">$121,837,500<sup class="tag">cap</sup></span>.</span></li>
+        <li><span class="d">2025-12-17</span><span class="e">The very next day &mdash; P00003 adds <b>+$9,660,000</b> of Item 42 skip tracing to the sole-source ISAP order.</span></li>
+        <li><span class="d">2026-01-27</span><span class="e">P00004 adds <b>+$76,011,425</b> more &mdash; the largest tranche, cumulative ISAP order now $108,343,853.</span></li>
+      </ol>
+
+      <div class="standing" style="margin-top:18px">
+        <span class="ic" aria-hidden="true">&#9432;</span>
+        <div><b>Amendment&nbsp;2 (2025-11-19)</b> deleted the skip-tracing solicitation's <b>$180,000,000 total program ceiling</b>
+          outright (&ldquo;The overall ceiling has been removed&rdquo;), raised the per-IDIQ cap $90M&rarr;$281.25M and the
+          guaranteed minimum $250&rarr;$7.5M, five days before proposals were due. It also removed the contractors' contemplated
+          access to EARM/EID, ENFORCE, IDENT/HART, ATLAS and NCIC and the Public-Trust clearance tied to it, and removed the
+          Service Contract Act. <span class="chip c-confirmed">Confirmed · solicitation PDFs</span></div>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);font-family:var(--font-mono);margin-top:12px">
+        Cross-profile: mapped in the <b>geo-group</b> profile (findings #12488, B.I./ICE skip-channel ledger).
+        GEO's Q4-2025 8-K called this a skip-tracing "pilot"; GEO told investors "up to $60M/yr" (the FPDS ceiling read as
+        revenue) while the $86.4M that actually moved is invisible in its securities disclosure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKIP TRACING ROSTER ================= -->
+<section id="skip">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Skip-tracing roster</h2>
+    <span class="mono" style="color:var(--muted);font-size:13px">14 awardees</span></div>
+  <p class="sec-desc">Each awardee holds one IDIQ (<span class="mono">70CDCR26D00000###</span>) and exactly one delivery order
+    (<span class="mono">70CDCR26FR00000##</span>). All 14 DOs are now expired; none has been replaced. Award facts
+    <span class="chip c-confirmed">Confirmed &middot; FPDS/USASpending</span>. Sort any column; filter by category or search.</p>
+
+  <div class="roster" data-role="roster">
+    <div class="rtools">
+      <label class="rsearch"><span class="mag" aria-hidden="true">&#9906;</span>
+        <input type="search" data-role="search" placeholder="Search firm, UEI, city, note&hellip;" aria-label="Search skip-tracing roster"></label>
+      <div class="cats" role="group" aria-label="Filter by category">
+        <button data-cat="all" aria-pressed="true">All</button>
+        <button data-cat="established" aria-pressed="false">Established prime</button>
+        <button data-cat="newcomer" aria-pressed="false">Newcomer</button>
+        <button data-cat="residential" aria-pressed="false">Residential-address</button>
+        <button data-cat="incumbent" aria-pressed="false">Incumbent</button>
+        <button data-cat="cross" aria-pressed="false">Cross-program</button>
+      </div>
+      <span class="rcount" data-role="count"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr>
+          <th data-type="text">Firm</th>
+          <th data-type="text">IDIQ</th>
+          <th data-type="text">UEI</th>
+          <th class="num" data-type="num">Ceiling <span class="arw">&#8645;</span></th>
+          <th class="num" data-type="num">Obligated <span class="arw">&#8645;</span></th>
+          <th class="num" data-type="num">Outlay% <span class="arw">&#8645;</span></th>
+          <th data-type="text">Perf. location</th>
+          <th data-type="text">Category</th>
+          <th>Note</th>
+        </tr></thead>
+        <tbody>
+          <tr data-cat="established cross" class="xrow">
+            <td><span class="firm">SOS International (SOSi) <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000012</td><td class="uei">L3VCKMD7J585</td>
+            <td class="num"><span class="cap" data-sort="123166969">$123,166,969<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1642226">$1,642,226</span></td>
+            <td class="num" data-sort="96.8">96.8%</td>
+            <td>Washington DC</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Also holds UAC D00000046 ($559.6M) <em>and</em> the pre-solicitation sole-source letter contract 70CDCR26C00000001 ($6.95M, signed 2025-10-21). In both programs plus the pre-competition channel.</span></td>
+          </tr>
+          <tr data-cat="incumbent">
+            <td><span class="firm">B.I. Incorporated (GEO)</span></td>
+            <td class="piid">D00000005</td><td class="uei">PKK6L9KLMYR5</td>
+            <td class="num"><span class="cap" data-sort="121837500">$121,837,500<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1624500">$1,624,500</span></td>
+            <td class="num" data-sort="91.2">91.2%</td>
+            <td>Boulder CO</td>
+            <td><span class="cattag ct-incumbent">incumbent</span></td>
+            <td><span class="note">Competed DO is 1.9% of the $86.36M B.I. received sole-source via the ISAP&nbsp;V channel (see &sect;02). GEO owns the ISAP monitoring contract on the same non-detained docket.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Capgemini Government Solutions</span></td>
+            <td class="piid">D00000015</td><td class="uei">DR6MQ56MGFA5</td>
+            <td class="num"><span class="cap" data-sort="365821219">$365,821,219<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="4816782">$4,816,782</span></td>
+            <td class="num" data-sort="98.7">98.7%</td>
+            <td>McLean VA</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Largest ceiling &mdash; exceeds the Amdt-2 $281.25M per-IDIQ cap by $84.6M (highest per-case price). Ran a pre-competition GSA "bridge" (+$7.37M mod, 2025-10-09); bridge extended to <b>2026-09-23</b> &mdash; the live decision point.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Global Recovery Group</span></td>
+            <td class="piid">D00000014</td><td class="uei">PDG7UND3CWN8</td>
+            <td class="num"><span class="cap" data-sort="217265625">$217,265,625<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="2812500">$2,812,500</span></td>
+            <td class="num" data-sort="59.0">59.0%</td>
+            <td>Washington DC</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Collections firm (SAM since 2004). One of two DOs never extended &mdash; but on its own later schedule (to 2026-04-16), so not comparable to Gravitas. Also had a separate GSA-schedule skip-tracing TO ($33.5M ceiling).</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Bluehawk LLC</span></td>
+            <td class="piid">D00000013</td><td class="uei">LJ93K5X4BJN7</td>
+            <td class="num"><span class="cap" data-sort="201443062">$201,443,062<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="2656328">$2,656,328</span></td>
+            <td class="num" data-sort="0">0.0%</td>
+            <td>Washington DC</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Disbursed <b>$0.00</b> yet received the 60-day extension &mdash; the opposite of Gravitas, which outlaid 30.6% and was dropped.</span></td>
+          </tr>
+          <tr data-cat="established residential">
+            <td><span class="firm">Omniplex World Services</span></td>
+            <td class="piid">D00000016</td><td class="uei">K87GBMDQNEX8</td>
+            <td class="num"><span class="cap" data-sort="113242028">$113,242,028<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1487580">$1,487,580</span></td>
+            <td class="num" data-sort="3.6">3.6%</td>
+            <td>Herndon VA</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Disbursed 3.6%, still extended. (Ceiling corrected from an earlier $32.1M mis-attribution.) <span class="chip c-changed">Changed</span></span></td>
+          </tr>
+          <tr data-cat="newcomer residential cross" class="xrow">
+            <td><span class="firm">National Protective Services <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000021</td><td class="uei">W4AUG3SNRTL6</td>
+            <td class="num"><span class="cap" data-sort="68231250">$68,231,250<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="909750">$909,750</span></td>
+            <td class="num" data-sort="73.2">73.2%</td>
+            <td>San Antonio TX</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Also UAC D00000039 ($415M). SAM-registered 2025-11-19, nine days after the skip solicitation issued. Factored ICE receivables to 1st Commercial Credit (2026-05-21); POC Wesley Swearingen formed 4S&nbsp;Apex&nbsp;LLC at a mailbox two days prior. No valid TLS cert since 2025-08-25. <span class="chip c-unconfirmed">TLS unverified-remote</span></span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Constellation Inc</span></td>
+            <td class="piid">D00000020</td><td class="uei">F93GMYJCTJR8</td>
+            <td class="num"><span class="cap" data-sort="57848438">$57,848,438<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="767469">$767,469</span></td>
+            <td class="num" data-sort="97.6">97.6%</td>
+            <td>McLean VA</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Established firm &mdash; explicitly <em>not</em> a shell (corrects earlier framing). <span class="chip c-changed">Changed</span></span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">GSS &ndash; Government Support Svcs</span></td>
+            <td class="piid">D00000019</td><td class="uei">EMNSGMGP3CP8</td>
+            <td class="num"><span class="cap" data-sort="55575000">$55,575,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="741000">$741,000</span></td>
+            <td class="num" data-sort="0">0.0%</td>
+            <td>Milton FL</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Milton FL house in SAM; registry HQ is Ft Walton Beach. Disbursed $0.00, still extended. Hodrick-controlled; twin <b>Habari Inc</b> at 5942 Chi Chi Cir. SAM record literally carries city <span class="mono">OUAGADOUGOU</span>, state FL.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">AI Solutions 87 LLC</span></td>
+            <td class="piid">D00000006</td><td class="uei">RXFLA65SEJL9</td>
+            <td class="num"><span class="cap" data-sort="48491250">$48,491,250<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="636500">$636,500</span></td>
+            <td class="num" data-sort="99.0">99.0%</td>
+            <td>Boulder CO</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">4067 Sleeping Dragon Rd, West Bend WI (a house). Gregory Behm is agent + sole officer of the West Bend trio (with DC&nbsp;Gravity, SDNexus&nbsp;DataOps). Place of performance Boulder CO = B.I.'s HQ ZIP. Changed agent 2026-01-08; website scrubbed to a google.com redirect.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Gravitas Professional Services</span></td>
+            <td class="piid">D00000018</td><td class="uei">EJB9AHGV8BD1</td>
+            <td class="num"><span class="cap" data-sort="32062500">$32,062,500<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="427500">$427,500</span></td>
+            <td class="num" data-sort="30.6">30.6%</td>
+            <td>Kings Mills OH</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note"><b>The only firm of 14 not extended</b> &mdash; DO lapsed 2026-03-15 (a Sunday) with no termination, no de-obligation, $296,730 undisbursed. A licensed 10-year Ohio PI firm (also KY/IN). Non-renewal is <b>unexplained but mundane</b> &mdash; see &sect;08. <span class="chip c-refuted">Non-performance refuted</span></span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Fraud Inc</span></td>
+            <td class="piid">D00000017</td><td class="uei">D13LLJJZYH64</td>
+            <td class="num"><span class="cap" data-sort="25578000">$25,578,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="348000">$348,000</span></td>
+            <td class="num" data-sort="23.9">23.9%</td>
+            <td>Washington DC</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Licensed TX PI firm (DPS A22991201); SAM shows Conroe TX apartment, registry a Houston suite. Took 149 days for a 90-day / 5,000-case scope; no follow-on order. Officers Richard &amp; Kelley Leslie, Allan Clary, Pretra Loomer. Changed agent 2026-01-17.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential cross" class="xrow">
+            <td><span class="firm">Response AI Solutions <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000008</td><td class="uei">ZE2JVFS8ML75</td>
+            <td class="num"><span class="cap" data-sort="9715500">$9,715,500<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="127920">$127,920</span></td>
+            <td class="num" data-sort="35.4">35.4%</td>
+            <td>McLean VA</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Also UAC D00000041 ($489M) + Delaney Hall fencing PO + surge logistics. Operating address is a house in Great Falls VA. Owns Global Emergency Response Inc (disclosed). Beneficial ownership not established. See &sect;06.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Enprovera Corp</span></td>
+            <td class="piid">D00000003</td><td class="uei">XWMMKN745MS5</td>
+            <td class="num"><span class="cap" data-sort="2631300">$2,631,300<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="34552">$34,552</span></td>
+            <td class="num" data-sort="94.8">94.8%</td>
+            <td>Tampa FL</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">SBA 8(a) participant. Its ceiling ($2.63M) is <em>below</em> Amendment 2's stated $7.5M guaranteed minimum &mdash; a contract whose maximum is less than its stated minimum.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UAC ROSTER ================= -->
+<section id="uac">
+  <div class="sec-head"><span class="sec-num">04</span><h2>UAC "Safety Verification Initiative" roster</h2>
+    <span class="mono" style="color:var(--muted);font-size:13px">18 awardees</span></div>
+  <p class="sec-desc">All 18 IDIQs signed 2026-06-02; ordering period to 2027-05-31. First task orders (FR0000081&ndash;0098)
+    all read "to meet the IDIQ minimum requirement of 1000 cases." UEIs and award facts
+    <span class="chip c-confirmed">Confirmed &middot; FPDS/SAM</span>. Prior-federal figures are pre-2025-01-01 prime dollars under the same UEI.</p>
+
+  <div class="roster" data-role="roster">
+    <div class="rtools">
+      <label class="rsearch"><span class="mag" aria-hidden="true">&#9906;</span>
+        <input type="search" data-role="search" placeholder="Search firm, UEI, city, note&hellip;" aria-label="Search UAC roster"></label>
+      <div class="cats" role="group" aria-label="Filter by category">
+        <button data-cat="all" aria-pressed="true">All</button>
+        <button data-cat="established" aria-pressed="false">Established prime</button>
+        <button data-cat="newcomer" aria-pressed="false">Newcomer</button>
+        <button data-cat="residential" aria-pressed="false">Residential-address</button>
+        <button data-cat="orr" aria-pressed="false">ORR-lineage</button>
+        <button data-cat="cross" aria-pressed="false">Cross-program</button>
+      </div>
+      <span class="rcount" data-role="count"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr>
+          <th data-type="text">Firm</th>
+          <th data-type="text">IDIQ</th>
+          <th data-type="text">UEI</th>
+          <th class="num" data-type="num">Ceiling <span class="arw">&#8645;</span></th>
+          <th class="num" data-type="num">1st TO obligated <span class="arw">&#8645;</span></th>
+          <th data-type="text">Address</th>
+          <th class="num" data-type="num">Prior fed $ <span class="arw">&#8645;</span></th>
+          <th data-type="text">Category</th>
+          <th>Note</th>
+        </tr></thead>
+        <tbody>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Septimo Solutions LLC</span></td>
+            <td class="piid">D00000043</td><td class="uei">SL5DUHMP9163</td>
+            <td class="num"><span class="cap" data-sort="3105250000">$3,105,250,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="8686250">$8,686,250</span></td>
+            <td><span class="addr">21 Magothy Bridge Rd, Severna Park MD</span><span class="atype">Residence &middot; inc. VA</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note"><b>Largest ceiling in the program.</b> 2023 VA LLC operating from a Maryland house. Principal Miguel Howe; affiliate Aurelian Group holds a FEMA/EMI contract ($4.6M). Website first archived Apr 2025.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Security Insights LLC</span></td>
+            <td class="piid">D00000042</td><td class="uei">GS9LV7EPJQ74</td>
+            <td class="num"><span class="cap" data-sort="1982235852">$1,982,235,852<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="5507232">$5,507,232</span></td>
+            <td><span class="addr">305 Escandon Ave, Rancho Viejo TX</span><span class="atype">Residence &middot; sole registrant</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">A <b>sole proprietorship</b> (SAM entity structure 2J) at a house; website 404s. Sole member Jaime Salazar. Formed Security Insights Solutions LLC on 2026-06-22, 20 days after award.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Lemoine Disaster Recovery LLC</span></td>
+            <td class="piid">D00000038</td><td class="uei">C182PM2K1463</td>
+            <td class="num"><span class="cap" data-sort="1734450000">$1,734,450,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="7690000">$7,690,000</span></td>
+            <td><span class="addr">1906 Eraste Landry Rd Ste 200, Lafayette LA</span><span class="atype">Office</span></td>
+            <td class="num" data-sort="0">$0 <span style="color:var(--muted)">(this UEI)</span></td>
+            <td><span class="cattag ct-established">established</span></td>
+            <td><span class="note">Subsidiary of an established parent, The Lemoine Company LLC (a disaster-construction firm). 751&ndash;1000 employees.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Caduceus Inc.</span></td>
+            <td class="piid">D00000032</td><td class="uei">ZX23KR32ZH32</td>
+            <td class="num"><span class="cap" data-sort="1623930000">$1,623,930,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="11965000">$11,965,000</span></td>
+            <td><span class="addr">1850 Parkway Pl SE Ste 725, Marietta GA</span><span class="atype">Office tower</span></td>
+            <td class="num" data-sort="280137468">$280,137,468</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Highest first task order. Healthcare-staffing firm; $280M prior (CDC, Army, DHA, VA). Only "IDDQ"-typed award. First UAC-family mod (2026-07-24) incorporated an <b>assignment of claims</b> &mdash; same day as its receivables factoring.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Savvy Professor LLC (dba SIVS)</span></td>
+            <td class="piid">D00000045</td><td class="uei">HHZZRGNWPL44</td>
+            <td class="num"><span class="cap" data-sort="1596251500">$1,596,251,500<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="4727750">$4,727,750</span></td>
+            <td><span class="addr">8401 Old Mill Ln, Spotsylvania VA</span><span class="atype">Residence + mailbox</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">SAM-registered 2026-02-05, 63 days before the solicitation. Principal Todd M Thompson (self-described retired FBI Cyber). Factored receivables to RCA Funding (2026-07-06). Recruited remote field staff with no investigator licence required.</span></td>
+          </tr>
+          <tr data-cat="orr newcomer">
+            <td><span class="firm">Compass United</span></td>
+            <td class="piid">D00000033</td><td class="uei">LB2PEHVPDGB2</td>
+            <td class="num"><span class="cap" data-sort="1567890829">$1,567,890,829<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="8916302">$8,916,302</span></td>
+            <td><span class="addr">2330 N Loop 1604 W Ste 300, San Antonio TX</span><span class="atype">Office &middot; shared w/ Compass Connections</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-orr">ORR-lineage</span></td>
+            <td><span class="note">Nonprofit with <b>zero federal history</b>. Its SAM registration names <b>BCFS Health and Human Services</b> as parent ($2.99B ACF unaccompanied-children shelter grants); shares agent, suite, PO box and 8 of 9 directors with Compass Connections ($1.76B ACF). See &sect;05.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Delta Point LLC</span></td>
+            <td class="piid">D00000036</td><td class="uei">YPABB25UK1L3</td>
+            <td class="num"><span class="cap" data-sort="1510186884">$1,510,186,884<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="3910774">$3,910,774</span></td>
+            <td><span class="addr">38 Windy Walkway, King Cove AK</span><span class="atype">ANC village office (11 registrants)</span></td>
+            <td class="num" data-sort="72430668">$72,430,668</td>
+            <td><span class="cattag ct-established">established</span></td>
+            <td><span class="note">SBA 8(a), Alaska Native Corporation-owned. Shares POCs with The King Cove Corporation and 8 "Delta"/"Cape" JV entities &mdash; classic ANC pass-through geometry; who performs is the question.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">EagleGrace Global LLC</span></td>
+            <td class="piid">D00000037</td><td class="uei">SW56UKW28L15</td>
+            <td class="num"><span class="cap" data-sort="1080860000">$1,080,860,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="5236600">$5,236,600</span></td>
+            <td><span class="addr">60 Twin Lakes Dr, Covington GA</span><span class="atype">Single-family residence &middot; sole registrant</span></td>
+            <td class="num" data-sort="53268">$53,268</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">2024 GA LLC at a house. <b>No website in existence</b> (zero Wayback captures), no employee count in any source. Sole POC Sandra Ofili. One prior $53,268 Army award (2024).</span></td>
+          </tr>
+          <tr data-cat="established orr">
+            <td><span class="firm">Applied Intellect LLC</span></td>
+            <td class="piid">D00000031</td><td class="uei">SKDNFVJ9K8U3</td>
+            <td class="num"><span class="cap" data-sort="1040372408">$1,040,372,408<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="3080158">$3,080,158</span></td>
+            <td><span class="addr">43457 Bettys Farm Dr Ste 100, Chantilly VA</span><span class="atype">Suburban suite</span></td>
+            <td class="num" data-sort="41943064">$41,943,064</td>
+            <td><span class="cattag ct-orr">ORR-lineage</span></td>
+            <td><span class="note">SBA 8(a). Holds a <b>currently-running</b> ACF "Home Study and Post Release Services for Unaccompanied Children" contract ($84.5M, to 2026-09-28) simultaneously with this ICE IDIQ.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">Continuity Global Solutions LLC</span></td>
+            <td class="piid">D00000034</td><td class="uei">FAQYB9J9EA36</td>
+            <td class="num"><span class="cap" data-sort="1015420918">$1,015,420,918<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="6270128">$6,270,128</span></td>
+            <td><span class="addr">101 Reid Ave Ste 106, Port Saint Joe FL</span><span class="atype">Small-town office</span></td>
+            <td class="num" data-sort="565386270">$565,386,270</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Established security family (State Dept $414M, Army $118M). &gt;1500 employees. Deprioritised as genuinely established.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Severance Security Services LLC</span></td>
+            <td class="piid">D00000044</td><td class="uei">DKFGF41MVR41</td>
+            <td class="num"><span class="cap" data-sort="779000000">$779,000,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="4770000">$4,770,000</span></td>
+            <td><span class="addr">18740 County Road 12 S, Foley AL</span><span class="atype">Rural residence &middot; officer's home</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note"><b>Tightest timing in either program</b> &mdash; initial SAM registration 2026-03-23, 17 days before the solicitation posted; activated the day after. Executive-protection firm; no socioeconomic certifications. POC "Tracy Harris" vs FL officers Tracey Matthews / Timothy W Harry unresolved.</span></td>
+          </tr>
+          <tr data-cat="newcomer">
+            <td><span class="firm">Critical Response Strategies LLC</span></td>
+            <td class="piid">D00000035</td><td class="uei">ZDN8V5GKJ959</td>
+            <td class="num"><span class="cap" data-sort="650378000">$650,378,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1614000">$1,614,000</span></td>
+            <td><span class="addr">6440 Southpoint Pkwy Ste 300, Jacksonville FL</span><span class="atype">Office park</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Real office, CT Corporation agent, zero federal history. SAM reactivated 2026-04-09 (the exact posting day &mdash; read as coincidence). Factored receivables to Klear Trade (2025-09-15). Looks like a genuine small firm out of its depth.</span></td>
+          </tr>
+          <tr data-cat="established">
+            <td><span class="firm">The Baptiste Group LLC</span></td>
+            <td class="piid">D00000047</td><td class="uei">GEGMCJMMZ634</td>
+            <td class="num"><span class="cap" data-sort="580475000">$580,475,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="2073250">$2,073,250</span></td>
+            <td><span class="addr">1510 Pennsylvania Ave, McDonough GA</span><span class="atype">Sole registrant</span></td>
+            <td class="num" data-sort="0">$0 contracts</td>
+            <td><span class="cattag ct-orr">ORR-lineage</span></td>
+            <td><span class="note">Former ORR shelter grantee ($17.67M ACF, 2019&ndash;2022). Flagged <span class="mono">DEBT SUBJECT TO OFFSET = Y</span> in SAM. Official website dead; live site a 2.6&nbsp;KB stub. Principal Kevin Baptiste.</span></td>
+          </tr>
+          <tr data-cat="established cross" class="xrow">
+            <td><span class="firm">SOS International LLC (SOSi) <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000046</td><td class="uei">L3VCKMD7J585</td>
+            <td class="num"><span class="cap" data-sort="559578059">$559,578,059<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="3224029">$3,224,029</span></td>
+            <td><span class="addr">1881 Campus Commons Dr Ste 500, Reston VA</span><span class="atype">Corporate HQ</span></td>
+            <td class="num" data-sort="1928579812">$1,928,579,812</td>
+            <td><span class="cattag ct-established">established prime</span></td>
+            <td><span class="note">Also skip-tracing D00000012 and the pre-solicitation letter contract. $1.93B prior (Army, DOJ, DISA). The pre-competition letter-contract firm, now in both programs.</span></td>
+          </tr>
+          <tr data-cat="newcomer">
+            <td><span class="firm">Origin Investigations Inc</span></td>
+            <td class="piid">D00000040</td><td class="uei">VSF3D5VZABZ5</td>
+            <td class="num"><span class="cap" data-sort="536620000">$536,620,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1812000">$1,812,000</span></td>
+            <td><span class="addr">515 S Flower St Fl 18, Los Angeles CA</span><span class="atype">Shared 18th floor (16 registrants)</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Ten years SAM-registered with <b>zero federal awards</b>, then $536M. Shares the virtual floor with same-owner shells Origin Intelligence and ZeroFour (both zero awards). Owner Jayden Brant.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential cross" class="xrow">
+            <td><span class="firm">Response AI Solutions LLC <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000041</td><td class="uei">ZE2JVFS8ML75</td>
+            <td class="num"><span class="cap" data-sort="489158780">$489,158,780<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="3670800">$3,670,800</span></td>
+            <td><span class="addr">843 Constellation Dr, Great Falls VA</span><span class="atype">Residence &middot; mail 1530 Wilson (49 reg.)</span></td>
+            <td class="num" data-sort="0">$0 <span style="color:var(--muted)">pre-2025</span></td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Also skip-tracing D00000008 + Delaney Hall fencing. Owns Global Emergency Response Inc. Markets the child-visit work without naming ICE. Beneficial ownership not established &mdash; see &sect;06.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential cross" class="xrow">
+            <td><span class="firm">National Protective Services LLC <span class="xbadge x">&#8644; BOTH</span></span></td>
+            <td class="piid">D00000039</td><td class="uei">W4AUG3SNRTL6</td>
+            <td class="num"><span class="cap" data-sort="415134000">$415,134,000<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1166500">$1,166,500</span></td>
+            <td><span class="addr">6858 Ingram Rd, San Antonio TX</span><span class="atype">Sole registrant</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Also skip-tracing D00000021. SDVOSB. Lifetime federal revenue $2.08M, 100% from ICE &mdash; and factored it. POC Wesley Swearingen; 4S&nbsp;Apex&nbsp;LLC formed at a mailbox two days before the factoring.</span></td>
+          </tr>
+          <tr data-cat="newcomer residential">
+            <td><span class="firm">Alpha Recovery LLC</span></td>
+            <td class="piid">D00000030</td><td class="uei">R8JUHEXBCZB9</td>
+            <td class="num"><span class="cap" data-sort="316735974">$316,735,974<sup class="tag">cap</sup></span></td>
+            <td class="num"><span class="obl" data-sort="1055544">$1,055,544</span></td>
+            <td><span class="addr">1080 W Peachtree St NW Unit 2101, Atlanta GA</span><span class="atype">Residential high-rise unit</span></td>
+            <td class="num" data-sort="0">$0</td>
+            <td><span class="cattag ct-newcomer">newcomer</span></td>
+            <td><span class="note">Smallest UAC ceiling. Fugitive-recovery firm; entire SAM contact surface is one person (Deion Hackworth) at a 148-tenant mail drop. Claims "3,000+ fugitives located." Domain predates the 2022 LLC by two decades.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ORR CROSSOVER ================= -->
+<section id="orr">
+  <div class="sec-head"><span class="sec-num">05</span><h2>The ORR care-to-enforcement crossover</h2>
+    <span class="chip c-inference">Structural &middot; inference</span></div>
+  <p class="sec-desc">Three of eighteen UAC awardees come out of the HHS/ORR unaccompanied-children system &mdash; the same
+    child-welfare side that produced the address, sponsor and family data the ICE "safety verification" visits confirm.
+    Documented structural conflict; <b>not</b>, on this evidence, proof of data transfer (none found).</p>
+
+  <div class="orr-grid">
+    <div class="orr-card">
+      <h4>Compass United</h4>
+      <div class="who">UAC D00000033 &middot; <span class="fig">$1,567,890,829</span> ceiling</div>
+      <p>Its own SAM registration names <b>BCFS Health and Human Services</b> as parent. BCFS holds <span class="fig">$2.99B</span>
+        in ACF grants for unaccompanied-children shelters; sibling <b>Compass Connections</b> holds <span class="fig">$1.76B</span>
+        (incl. $291M for "Home Study and Post Release Services"). Compass United shares their registered agent (Sonya Thompson),
+        suite, PO box and 8 of 9 directors &mdash; yet had <b>zero federal awards of any kind</b> before this IDIQ.</p>
+      <p style="margin-top:9px;color:var(--muted);font-size:12px">Caveat: TX officer lists carry stale report years (2002/2014); the SAM parent field (current to 2026-05-29) is the load-bearing evidence.</p>
+    </div>
+    <div class="orr-card">
+      <h4>Applied Intellect LLC</h4>
+      <div class="who">UAC D00000031 &middot; <span class="fig">$1,040,372,408</span> ceiling</div>
+      <p>Holds a <b>currently-running</b> ACF contract &mdash; "Home Study and Post Release Services for Unaccompanied Children"
+        (<span class="fig">$84,526,777</span>, 2023-09-29 &rarr; 2026-09-28) &mdash; at the same time as this ICE IDIQ. The post-release
+        case files and the ICE visit target the same children.</p>
+    </div>
+    <div class="orr-card">
+      <h4>The Baptiste Group LLC</h4>
+      <div class="who">UAC D00000047 &middot; <span class="fig">$580,475,000</span> ceiling</div>
+      <p>Former ORR residential-shelter grantee &mdash; ACF 90ZU0278 (<span class="fig">$15.47M</span>), 90ZU0285 (<span class="fig">$2.20M</span>)
+        and 90ZU0391, for unaccompanied children (2019&ndash;2022). No prior federal <em>contracts</em>; flagged
+        <span class="mono">DEBT SUBJECT TO OFFSET = Y</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SATELLITES ================= -->
+<section id="satellites">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Satellite &amp; related entities</h2></div>
+  <p class="sec-desc">Corporate families, affiliates and adjacent entities that surfaced around the two rosters. Most are a firm's
+    <em>own</em> corporate family, not a link between competitors (the coordinated-bidding scan found zero awardee-to-awardee links).</p>
+
+  <div class="table-wrap">
+    <table class="data" style="min-width:820px">
+      <thead><tr>
+        <th data-type="text">Entity</th>
+        <th data-type="text">Cluster</th>
+        <th data-type="text">Control / link</th>
+        <th data-type="text">Federal awards</th>
+        <th>Note</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="firm">Global Emergency Response Inc</td><td>Response AI</td><td>Owned subsidiary; POC James Kraemer</td><td class="mono">6 awards, tiny</td><td><span class="note">HC Standard&reg; patient-tracking software (Augusta&rarr;Lowell&rarr;Great Falls chain). Disclosed parent-subsidiary, <b>not</b> a concealed twin. <span class="chip c-refuted">"Concealed twin" refuted</span></span></td></tr>
+        <tr><td class="firm">Global Emergency Resources LLC</td><td>Response AI</td><td>Legacy HC Standard TM holder (Augusta GA)</td><td class="mono">legacy</td><td><span class="note">1030/1050 Stevens Creek Rd + 4115 Hammonds Ferry Rd, Evans GA. TM assignment records confirm the ownership chain; ties to Stan Kuzia's Georgia venture.</span></td></tr>
+        <tr><td class="firm">Cyber DI LLC</td><td>Response AI</td><td>James Kraemer (CEO); VA LLC</td><td class="mono">$0</td><td><span class="note">"Cyber Data Intelligence" &mdash; CMMC / AI-security certification training. Contact address is the same 1530 Wilson Ste 650 suite. Third Kraemer entity.</span></td></tr>
+        <tr><td class="firm">Data Intelligence Technologies Inc &rarr; Axiologic</td><td>Response AI</td><td>Kraemer founded 2010; sold May 2022</td><td class="mono">former</td><td><span class="note">DoD/IC data-engineering &amp; analytics services firm; #1 on 2020 WT Fast 50. Sold to Axiologic Solutions (terms undisclosed). Now at Axiologic's address/POC.</span></td></tr>
+        <tr><td class="firm">GL-Solutions Inc</td><td>Response AI</td><td>Gregory Llinas; 1530 Wilson Ste 650</td><td class="mono">nominal</td><td><span class="note">Outsourced back-office contract administration for federal contractors. Natalia Vela (Response AI / GER electronic POC) is likely a GL-Solutions consultant &mdash; <em>not</em> evidence of a shell network. <span class="chip c-inference">Inference</span></span></td></tr>
+        <tr><td class="firm">AI Solutions 87 LLC</td><td>West Bend trio</td><td>Gregory P Behm (agent + sole officer)</td><td class="mono">skip D00000006</td><td><span class="note">4067 Sleeping Dragon Rd, West Bend WI. Roberto Guercini is a co-resident (role unresolved).</span></td></tr>
+        <tr><td class="firm">DC Gravity LLC</td><td>West Bend trio</td><td>Gregory P Behm; WI, formed 2025-05-27</td><td class="mono">$0</td><td><span class="note">Zero federal awards, no web presence. Formed one day before SDNexus DataOps &mdash; batch-filed. Purpose unknown.</span></td></tr>
+        <tr><td class="firm">SDNexus DataOps LLC</td><td>West Bend trio</td><td>Gregory P Behm; WI, formed 2025-05-28</td><td class="mono">$0</td><td><span class="note">Zero federal awards. <b>Unrelated</b> to SDNEXUS LLC of Melbourne FL and to the sdnexus.app surplus-property SaaS. <span class="chip c-refuted">Melbourne tie refuted</span></span></td></tr>
+        <tr><td class="firm">Habari Inc</td><td>GSS</td><td>Jeffrey I Hodrick (CEO + agent)</td><td class="mono">none</td><td><span class="note">FL F24000000300, now inactive. Same 5942 Chi Chi Cir address as GSS; Gwendolyn I Hodrick is GSS's manager.</span></td></tr>
+        <tr><td class="firm">4S Apex LLC</td><td>National Protective Svcs</td><td>Wes &amp; Mary Jane Swearingen</td><td class="mono">$0</td><td><span class="note">TX 0806609990, formed 2026-05-19 at a Monarch Mail box (Ste 107-11 = mailbox 11), two days before NPS factored its ICE receivables. Not licensed for guard/investigative work in TX. Wes Swearingen is NPS's SAM govt POC.</span></td></tr>
+        <tr><td class="firm">The King Cove Corporation</td><td>Delta Point</td><td>Shared POCs Apperson / Kosa</td><td class="mono">$0 (itself)</td><td><span class="note">Alaska Native Corporation parent; 38 Windy Walkway + 8 "Delta"/"Cape" 8(a) JV entities.</span></td></tr>
+        <tr><td class="firm">The Lemoine Company LLC</td><td>Lemoine DR</td><td>SAM parent of Lemoine Disaster Recovery</td><td class="mono">established</td><td><span class="note">Established disaster-construction parent; Lemoine DR is the awardee subsidiary.</span></td></tr>
+        <tr><td class="firm">MVM Inc</td><td>UAC (adjacent)</td><td>Holds UAC TO 70CDCR26FR0000052</td><td class="mono">$1,446,000</td><td><span class="note">$1,446,000 order under the older FY24 vehicle 70CDCR24D00000002 (2026-03-20); also holds nationwide UAC-transport orders ($28M + $19.9M).</span></td></tr>
+        <tr><td class="firm">Ballard Green LLC</td><td>Skip-tracing (protests)</td><td>Filed 5 GAO protests, all dismissed</td><td class="mono">$0</td><td><span class="note">B-424186.1&ndash;.5 vs 26-SOL-DCR-01, dismissed 2026-01-13/29 &amp; 2026-03-13 with no published decision. Zero federal awards; <b>still unidentified</b> &mdash; the biggest unexplained gap in the record. <span class="chip c-unconfirmed">Identity unresolved</span></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PEOPLE ================= -->
+<section id="people">
+  <div class="sec-head"><span class="sec-num">07</span><h2>People</h2></div>
+  <p class="sec-desc">Named in public procurement filings in their professional capacity. Business/registration record only &mdash;
+    no characterisation, no personal detail. Where status is unresolved it is said plainly.</p>
+
+  <div class="grouplabel official"><span class="dot"></span>ICE officials &mdash; identified from primary procurement records (FPDS-NG / SAM solicitation POCs)</div>
+  <div class="ppl-grid">
+    <div class="pcard official">
+      <div class="pn">Jimmy Abyad</div><div class="pr">Contracting Officer &middot; ICE ERO</div>
+      <div class="pid">JABYAD7012</div>
+      <p>Sole releasing FPDS user on 13 of 14 skip-tracing base delivery orders (12 inside one 37-minute batch). Create-and-approves 100% of what he touches, program or not. <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard official">
+      <div class="pn">Ian Somppi</div><div class="pr">Section Chief &middot; ICE ERO</div>
+      <div class="pid">ISOMPPI7012</div>
+      <p>Approver on 37 of 38 UAC actions &mdash; released the entire $20.58B IDIQ family in 56 minutes before 7&nbsp;a.m. Has create-and-approved his own actions since 2018. <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard official">
+      <div class="pn">Jason Boudreaux</div><div class="pr">Procurement Officer &middot; ICE ERO</div>
+      <div class="pid">JBOUDREAUX7012</div>
+      <p>Named POC on 26-SOL-DCR-01. Split duties on 52/52 actions through 2026-03-11, then self-approved 5/5 from 2026-05-21 &mdash; a role change, not instrument-specific discretion. Keyed the Delaney Hall PO. <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard official">
+      <div class="pn">Shayla B. Wray</div><div class="pr">Procurement Officer &middot; ICE ERO</div>
+      <div class="pid">SWRAY7012</div>
+      <p>Approver on all 14 skip-tracing IDIQs (a pure approver in the sample). <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard official">
+      <div class="pn">John Cappello</div><div class="pr">Procurement Officer &middot; ICE ERO</div>
+      <div class="pid">JCAPPELLO7012</div>
+      <p>Secondary POC on the UAC solicitation; preparer on many UAC IDIQs/TOs. Created and approved the Caduceus assignment-of-claims mod (2026-07-24). <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard official">
+      <div class="pn">Valerie Leonova</div><div class="pr">ICE ERO &middot; contracting staff</div>
+      <div class="pid">VLEONOVA7012</div>
+      <p>Preparer on the AI Solutions 87 skip-tracing IDIQ (2025-11-26) and on the Response AI detainee-meals purchase order (2026-06-29); both were approved by a different user. Name resolved by the same email-to-short-ID straddle method, across three contracts. <span class="chip c-confirmed">Confirmed</span></p>
+    </div>
+    <div class="pcard">
+      <div class="pn" style="color:var(--muted)">Unresolved user IDs</div><div class="pr">deliberately not guessed</div>
+      <div class="pid" style="color:var(--muted)">RROBINSON7012 &middot; TROSS7012</div>
+      <p>Surfaced in the FPDS workflow records but not named from any primary source; left unresolved rather than guessed. (Whether ICE policy permits one user to create <em>and</em> approve a CAR is also unconfirmed.) <span class="chip c-unconfirmed">Unresolved</span></p>
+    </div>
+  </div>
+
+  <div class="grouplabel prin"><span class="dot"></span>Company principals &mdash; from SAM / corporate registry records</div>
+  <div class="ppl-grid">
+    <div class="pcard"><div class="pn">James Kraemer</div><div class="pr">President &mdash; Response AI / GER / Cyber DI</div><p>Sole disclosed principal of the Response AI cluster (Great Falls VA). Founded Data Intelligence Technologies (2010), sold to Axiologic 2022. Beneficial ownership of Response AI not established. <span class="chip c-unconfirmed">Ownership unconfirmed</span></p></div>
+    <div class="pcard"><div class="pn">Natalia Vela</div><div class="pr">Electronic POC &mdash; Response AI / GER</div><p>Electronic POC of exactly these two entities. Likely a GL-Solutions outsourced contract administrator, not a Response AI insider. <span class="chip c-inference">Inference</span></p></div>
+    <div class="pcard"><div class="pn">Gregory P Behm</div><div class="pr">Agent/officer &mdash; West Bend trio</div><p>Registered agent and sole listed officer of AI Solutions 87, DC Gravity and SDNexus DataOps &mdash; one person, one house, three LLCs.</p></div>
+    <div class="pcard"><div class="pn">Roberto Guercini</div><div class="pr">Co-resident &mdash; 4067 Sleeping Dragon Rd</div><p>Confirmed co-resident of Behm at the West Bend address; role and relationship <b>unresolved</b>. <span class="chip c-unconfirmed">Role unresolved</span></p></div>
+    <div class="pcard"><div class="pn">Adam Visnic</div><div class="pr">Principal &mdash; Gravitas Professional Services</div><p>President/founder; licensed private investigator in OH, KY and IN (disciplinary actions: none recorded in KY). Firm still trading.</p></div>
+    <div class="pcard"><div class="pn">Todd M Thompson</div><div class="pr">Principal &mdash; Savvy Professor / SIVS</div><p>Sole SAM POC; self-described retired FBI Cyber Intelligence Technician. Not the excluded "Todd A. Thompson" (name collision, checked). <span class="chip c-refuted">Exclusion collision refuted</span></p></div>
+    <div class="pcard"><div class="pn">Sonya L Thompson</div><div class="pr">Registered agent &mdash; Compass United / Compass Connections</div><p>President and TX registered agent of both Compass entities; the shared control point in the BCFS family.</p></div>
+    <div class="pcard"><div class="pn">Miguel Howe</div><div class="pr">Managing Partner &mdash; Septimo Solutions</div><p>Also POC of affiliate Aurelian Group LLC (its FEMA/EMI contract is his only visible federal performance).</p></div>
+    <div class="pcard"><div class="pn">Jeffrey &amp; Gwendolyn Hodrick</div><div class="pr">GSS / Habari Inc</div><p>Jeffrey is GSS agent and Habari CEO; Gwendolyn is GSS manager. Shared Ft Walton Beach / Milton FL footprint.</p></div>
+    <div class="pcard"><div class="pn">Wesley &amp; Mary Jane Swearingen</div><div class="pr">National Protective Services / 4S Apex</div><p>Wesley is NPS's SAM govt POC and VP; both are managing members of 4S Apex LLC (formed at a mailbox).</p></div>
+    <div class="pcard"><div class="pn">Fraud Inc officers</div><div class="pr">Richard Leslie · Kelley Leslie · Allan Clary · Pretra Loomer</div><p>President/treasurer and VP/secretary of the licensed TX PI firm at a Houston commercial suite.</p></div>
+    <div class="pcard"><div class="pn">Stan Kuzia</div><div class="pr">Legacy principal &mdash; Global Emergency Response (Augusta)</div><p>Past-performance POC for GER; separate Georgia venture (Global Medical Technology Partners) at the legacy Augusta-area address.</p></div>
+  </div>
+</section>
+
+<!-- ================= REFUTED ================= -->
+<section id="refuted">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Refuted / ruled out</h2>
+    <span class="chip c-refuted">Do not re-derive</span></div>
+  <p class="sec-desc">Dead theories, recorded so they are not re-opened. Each was checked against primary data and did not survive.</p>
+
+  <div class="ruled">
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Separation-of-duties failure</h4>
+      <p>Single-user create-and-approve is the <b>norm</b> at ICE office 70CDCR &mdash; 37.4% of 1,249 baseline actions,
+        48.7% contemporaneous, 42.5% on an independent pre-program sample. Both programs sat <em>below</em> the surrounding rate.
+        It tracks warranted-vs-unwarranted role, not program. FPDS fields are data-entry, not the FAR approval chain.</p>
+      <span class="ev">JABYAD7012 100% solo on non-program work · Somppi solo since 2018 · Boudreaux clean date-break</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Coordinated bidding / broker slate</h4>
+      <p>The twin-detection method was run at full scale across all 27 firms on entity address, mailing address, all six POC
+        name slots, all six POC street addresses, and the complete NAICS and PSC strings. <b>Zero pairwise matches.</b> The only
+        exact NAICS/PSC duplicate is the disclosed Response AI &harr; GER parent-subsidiary. Firms appear independently spawned.</p>
+      <span class="ev">27 firms · 0 shared agents, officers, addresses or code strings</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>"Zero reported subawards" as a signal</h4>
+      <p>No discriminating power: <b>228 of 228</b> ICE prime awards in the geo-group archive report zero subawards with blank
+        amounts, in every size band including all $100M+ awards. A zero on Delaney Hall or anywhere else is not evidence of a
+        pass-through. The field has inadequate sensitivity for this question.</p>
+      <span class="ev">228/228 zero · per codex-Q base-rate memo</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Cyber Intel Service / CIS Labs</h4>
+      <p>Entered the investigation only through a website name-collision. Cyber Intel Service LLC (Melbourne FL) returns zero
+        USASpending matches and zero awards under its UEI; the CIS Labs federal footprint resolves to a different, older company.
+        <b>Not an ICE contractor.</b></p>
+      <span class="ev">Melbourne FL cluster · zero federal awards</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>SDNEXUS LLC (Melbourne FL)</h4>
+      <p>Unrelated to the West Bend <b>SDNexus DataOps LLC</b> (Behm). The original "product of CIS Labs" claim is unsupported in
+        either direction; the sdnexus.app brand is a surplus-property compliance SaaS.</p>
+      <span class="ev">Name collision · no established link</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Gravitas Investigations Group LLC (NJ)</h4>
+      <p>A separate New Jersey entity that appears <b>unrelated</b> to Ohio's Gravitas Professional Services (dba Gravitas
+        Investigations). CourtListener name-collisions (Gravitas NW, Gravitas Search Partners, Gravitas Capital) are likewise
+        unrelated.</p>
+      <span class="ev">Distinct entity · not the ICE awardee</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Data Bulldog</h4>
+      <p>The data-acquisition source Response AI names behind its AI-BOSS child address-verification engine. <b>No trademark, no
+        company, no domain</b> is findable in open sources; USPTO returns zero for Data Bulldog, AI-BOSS (as owned by Response AI)
+        and MCMS. Remains an unexamined name.</p>
+      <span class="ev">USPTO zero · databulldog domain does not resolve</span>
+    </div>
+    <div class="rcard">
+      <h4><span class="x" aria-hidden="true">&#10007;</span>Gravitas non-renewal &mdash; distress explanation</h4>
+      <p>No licensing, litigation, corporate-status or financing-distress explanation survives checking. Licensed in three states,
+        litigation-free, SAM-active before the decision, website live and maintained. Thread closed as <b>unexplained but mundane</b>
+        &mdash; most likely left out of a discretionary $0 extension batch. <span class="chip c-unconfirmed">Ohio UCC still blocked</span></p>
+      <span class="ev">Outlaid 30.6% vs Bluehawk/GSS 0.0% (both extended)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OPEN QUESTIONS ================= -->
+<section id="open">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Open questions &amp; next steps</h2></div>
+
+  <div class="oq">
+    <div class="oqcard">
+      <h4>Ballard Green identity</h4>
+      <p>Who is Ballard Green LLC? Five GAO protests (B-424186.1&ndash;.5) against 26-SOL-DCR-01, all dismissed without a published
+        decision; zero federal awards; otherwise unidentified. The biggest unexplained gap in the procurement record.</p>
+      <span class="ref">FOIA #1 &middot; GAO Procurement Law Division</span>
+    </div>
+    <div class="oqcard">
+      <h4>Response AI beneficial ownership</h4>
+      <p>Ownership held by natural persons / a non-registered vehicle (SAM records no parent; DE agent = CSC; VA SCC reCAPTCHA-gated).
+        The single highest-value manual lookup: <b>Fairfax County deed book 27700, page 2112</b> (843 Constellation Dr, 2022-07-01,
+        $975,000) for the grantee names &mdash; bears on the unresolved woman-owned question.</p>
+      <span class="ref">Manual &middot; Fairfax CPAN (login-gated)</span>
+    </div>
+    <div class="oqcard">
+      <h4>Capgemini bridge &mdash; the live decision point</h4>
+      <p>Bridge order 70CDCR24FR0000006 P00013 (+$2.69M, 2026-04-09) extended performance to <b>2026-09-23</b>. It is the only live
+        ICE skip-tracing-capable instrument with time left; the competed program is dormant. Watch that date.</p>
+      <span class="ref">FPDS &middot; expires 2026-09-23</span>
+    </div>
+    <div class="oqcard">
+      <h4>Roberto Guercini</h4>
+      <p>Co-resident of Gregory Behm at 4067 Sleeping Dragon Rd, West Bend WI. Identity and role in the AI Solutions 87 / DC Gravity /
+        SDNexus DataOps cluster unresolved.</p>
+      <span class="ref">Manual &middot; WI DFI officer extraction blocked</span>
+    </div>
+    <div class="oqcard">
+      <h4>Ohio UCC gap</h4>
+      <p>Ohio SOS UCC search sits behind Cloudflare (and an alternate API behind a bearer token). Gravitas cannot be placed in or
+        excluded from the receivables-factoring cluster until this is run; the repo UCC index does not cover Ohio.</p>
+      <span class="ref">Blocked &middot; manual / OpenCorporates</span>
+    </div>
+    <div class="oqcard">
+      <h4>Amendment-2 guaranteed minimum</h4>
+      <p>Did the $7,500,000 per-IDIQ guaranteed minimum survive into the signed contracts? If so ICE guaranteed $105M across 14 IDIQs
+        against $19.03M ordered &mdash; and Enprovera's $2.63M ceiling is below its own minimum. Resolvable only from Section B of each
+        signed IDIQ.</p>
+      <span class="ref">FOIA &middot; award documents</span>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <h4 style="font-family:var(--font-serif);font-size:17px;margin-bottom:4px">FOIA queue (ranked)</h4>
+    <ol class="foia">
+      <li><b>Ballard Green protest file</b> &mdash; B-424186.1&ndash;.5 vs 26-SOL-DCR-01 (GAO Procurement Law Division, then DHS/ICE). Highest value.</li>
+      <li><b>SOSi letter-contract J&amp;A</b> &mdash; the FAR justification for sole-source 70CDCR26C00000001 ($6.95M, 2025-10-21), three weeks before the competition published.</li>
+      <li><b>UAC evaluation record</b> &mdash; source-selection decision, offeror roster and pricing for 70CDCR26R00000015 (how 18 offers became 18 awards).</li>
+      <li><b>CPARS</b> &mdash; Fraud Inc (FR0000014) and Gravitas (FR0000016); whatever Gravitas "failed" defines the standard the other 13 were held to.</li>
+      <li><b>Delaney Hall</b> &mdash; the FAR 6.302-2 urgency justification for the Response AI fencing/lighting PO (70CDCR26P00000013) + any supplier documentation.</li>
+      <li><b>UAC privacy compliance</b> &mdash; PIA/SORN and retention schedule for contractor-held UAC location data. A null result is itself the finding.</li>
+    </ol>
+    <p style="font-size:12px;color:var(--muted);font-family:var(--font-mono);margin-top:12px">Also open: who physically supplied/installed the Delaney Hall fencing (Newark permits / FSRS); Data Bulldog / AI-BOSS / MCMS provenance; Capgemini&nbsp;SE (Paris) CSRD/CS3D disclosure of ICE removal-support work; GEO/B.I. earnings-call transcripts.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>ICE Skip-Tracing &amp; UAC Entity Tracker</b> &middot; internal OSINT working reference &middot; profile tech-right (threads 11/15/16)</div>
+    <p class="disc">Compiled 2026-07-28 from findings #14378&ndash;#14409 and the underlying wave reports. All dollar figures are from
+      primary procurement records (FPDS-NG, USASpending, SAM); ceilings are ordering capacity, not spend. Individuals are named from
+      public procurement filings in their professional capacity only. Confidence labels (Confirmed / Refuted / Unconfirmed / Inference /
+      Changed) are carried through from the source reports and have not been upgraded. Not for publication.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Theme toggle ---------- */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn'), KEY='ice-tracker-theme';
+  function label(){ btn.textContent = (root.getAttribute('data-theme')==='dark') ? '◑ Light' : '◐ Dark'; }
+  label();
+  btn.addEventListener('click',function(){
+    var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem(KEY,next); }catch(e){}
+    label();
+  });
+})();
+
+/* ---------- Roster: search + category filter + column sort ---------- */
+function initRoster(root){
+  var table=root.querySelector('table.data');
+  if(!table) return;
+  var search=root.querySelector('[data-role="search"]');
+  var catBtns=Array.prototype.slice.call(root.querySelectorAll('.cats button'));
+  var count=root.querySelector('[data-role="count"]');
+  var tbody=table.tBodies[0];
+  var rows=Array.prototype.slice.call(tbody.rows);
+  var activeCat='all';
+
+  function cellVal(r,ci){ var td=r.cells[ci]; if(!td) return ''; return (td.getAttribute('data-sort') || td.textContent).trim(); }
+
+  function apply(){
+    var q=(search && search.value ? search.value : '').trim().toLowerCase();
+    var shown=0;
+    rows.forEach(function(r){
+      var cats=(r.getAttribute('data-cat')||'').split(/\s+/);
+      var okCat = activeCat==='all' || cats.indexOf(activeCat)!==-1;
+      var okText = !q || r.textContent.toLowerCase().indexOf(q)!==-1;
+      var vis = okCat && okText;
+      r.hidden = !vis;
+      if(vis) shown++;
+    });
+    if(count) count.textContent = shown + ' of ' + rows.length;
+  }
+
+  if(search) search.addEventListener('input', apply);
+  catBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      activeCat=b.getAttribute('data-cat');
+      catBtns.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true':'false'); });
+      apply();
+    });
+  });
+
+  var heads=Array.prototype.slice.call(table.querySelectorAll('th[data-type]'));
+  heads.forEach(function(th){
+    th.tabIndex=0; th.setAttribute('role','button'); th.setAttribute('aria-sort','none');
+    function sort(){
+      var type=th.getAttribute('data-type');
+      var ci=Array.prototype.indexOf.call(th.parentNode.children, th);
+      var asc = th.getAttribute('data-dir')!=='asc';
+      heads.forEach(function(o){ if(o!==th){ o.removeAttribute('data-dir'); o.setAttribute('aria-sort','none'); }});
+      th.setAttribute('data-dir', asc?'asc':'desc');
+      th.setAttribute('aria-sort', asc?'ascending':'descending');
+      var sorted=rows.slice().sort(function(a,b){
+        var av=cellVal(a,ci), bv=cellVal(b,ci);
+        if(type==='num'){ av=parseFloat(av)||0; bv=parseFloat(bv)||0; return asc? av-bv : bv-av; }
+        return asc? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      sorted.forEach(function(r){ tbody.appendChild(r); });
+    }
+    th.addEventListener('click', sort);
+    th.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); sort(); }});
+  });
+
+  apply();
+}
+Array.prototype.slice.call(document.querySelectorAll('[data-role="roster"]')).forEach(initRoster);
+
+/* ---------- Sortable non-roster tables (satellites) ---------- */
+Array.prototype.slice.call(document.querySelectorAll('.table-wrap table.data')).forEach(function(table){
+  if(table.closest('[data-role="roster"]')) return;
+  var tbody=table.tBodies[0]; if(!tbody) return;
+  var rows=Array.prototype.slice.call(tbody.rows);
+  var heads=Array.prototype.slice.call(table.querySelectorAll('th[data-type]'));
+  heads.forEach(function(th){
+    th.tabIndex=0; th.setAttribute('role','button'); th.setAttribute('aria-sort','none'); th.style.cursor='pointer';
+    function sort(){
+      var ci=Array.prototype.indexOf.call(th.parentNode.children, th);
+      var asc=th.getAttribute('data-dir')!=='asc';
+      heads.forEach(function(o){ if(o!==th){ o.removeAttribute('data-dir'); o.setAttribute('aria-sort','none'); }});
+      th.setAttribute('data-dir', asc?'asc':'desc'); th.setAttribute('aria-sort', asc?'ascending':'descending');
+      rows.slice().sort(function(a,b){
+        var av=(a.cells[ci]?a.cells[ci].textContent:'').trim().toLowerCase();
+        var bv=(b.cells[ci]?b.cells[ci].textContent:'').trim().toLowerCase();
+        return asc? av.localeCompare(bv) : bv.localeCompare(av);
+      }).forEach(function(r){ tbody.appendChild(r); });
+    }
+    th.addEventListener('click', sort);
+    th.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); sort(); }});
+  });
+});
+
+/* ---------- Jump-nav active-section highlight ---------- */
+(function(){
+  var links=Array.prototype.slice.call(document.querySelectorAll('nav.jump a'));
+  var map={};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var s=document.getElementById(id); if(s) map[id]=a; });
+  if(!('IntersectionObserver' in window)) return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('on'); });
+        var a=map[en.target.id]; if(a) a.classList.add('on');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px', threshold:0});
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>

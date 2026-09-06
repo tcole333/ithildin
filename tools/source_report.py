@@ -14,10 +14,48 @@ import argparse
 import base64
 import json
 import os
+import re
 import sqlite3
+from contextvars import ContextVar
 from pathlib import Path
 
+try:
+    from tools.public_records_catalog import acquisition_result_status
+except ImportError:
+    from public_records_catalog import acquisition_result_status
+
 PROJECT_ROOT = Path(__file__).parent.parent
+_DEFER_HEALTH_CHECKS = ContextVar("defer_source_health_checks", default=False)
+
+
+def _deferred_health_check(check, *args, **kwargs):
+    """Return a lazy health check while resolving one requested source."""
+    if not _DEFER_HEALTH_CHECKS.get():
+        return None
+    return {
+        "status": "deferred",
+        "_health_check": lambda: check(*args, **kwargs),
+    }
+
+
+def check_massachusetts_ucc_runtime():
+    """Check local browser dependencies without opening Chrome or probing the site."""
+    deferred = _deferred_health_check(check_massachusetts_ucc_runtime)
+    if deferred:
+        return deferred
+    try:
+        try:
+            from tools.query_massachusetts_ucc import runtime_check
+        except ImportError:
+            from query_massachusetts_ucc import runtime_check
+        return {
+            "status": "configured",
+            "runtime": runtime_check(),
+            "live_checked": False,
+            "note": "Browser dependencies ready; run query_massachusetts_ucc.py probe for live availability.",
+        }
+    except Exception as exc:
+        return {"status": "error", "live_checked": False, "error": str(exc)}
 
 
 def load_env_file():
@@ -36,6 +74,9 @@ def load_env_file():
 
 def check_sqlite(path, count_query):
     """Check if a SQLite DB exists and get record count."""
+    deferred = _deferred_health_check(check_sqlite, path, count_query)
+    if deferred:
+        return deferred
     if not path.exists():
         return {"status": "missing", "path": str(path), "records": 0}
     try:
@@ -48,8 +89,54 @@ def check_sqlite(path, count_query):
         return {"status": "error", "path": str(path), "error": str(e)}
 
 
+def check_sqlite_inventory(path, count_queries, *, primary_metric):
+    """Return a live multi-table inventory for a local SQLite source."""
+    deferred = _deferred_health_check(
+        check_sqlite_inventory,
+        path,
+        count_queries,
+        primary_metric=primary_metric,
+    )
+    if deferred:
+        return deferred
+    if not path.exists():
+        return {
+            "status": "missing",
+            "path": str(path),
+            "records": 0,
+            "inventory": {},
+        }
+    try:
+        db = sqlite3.connect(str(path))
+        try:
+            inventory = {
+                name: db.execute(query).fetchone()[0]
+                for name, query in count_queries.items()
+            }
+        finally:
+            db.close()
+        size_mb = path.stat().st_size / (1024 * 1024)
+        return {
+            "status": "available",
+            "path": str(path),
+            "records": inventory[primary_metric],
+            "inventory": inventory,
+            "size_mb": round(size_mb, 1),
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "path": str(path),
+            "error": str(e),
+            "inventory": {},
+        }
+
+
 def check_parquet(path):
     """Check if a parquet file exists and get row count."""
+    deferred = _deferred_health_check(check_parquet, path)
+    if deferred:
+        return deferred
     if not path.exists():
         return {"status": "missing", "path": str(path), "records": 0}
     try:
@@ -67,6 +154,9 @@ def check_parquet(path):
 
 def check_directory(path):
     """Check if a directory exists and count files."""
+    deferred = _deferred_health_check(check_directory, path)
+    if deferred:
+        return deferred
     if not path.exists():
         return {"status": "missing", "path": str(path), "records": 0}
     try:
@@ -79,6 +169,9 @@ def check_directory(path):
 
 def check_neo4j():
     """Check if ICIJ Neo4j is running."""
+    deferred = _deferred_health_check(check_neo4j)
+    if deferred:
+        return deferred
     try:
         import subprocess
         result = subprocess.run(
@@ -94,6 +187,9 @@ def check_neo4j():
 
 def check_api(name, test_url=None, headers=None):
     """Check if an API is reachable."""
+    deferred = _deferred_health_check(check_api, name, test_url, headers)
+    if deferred:
+        return deferred
     if not test_url:
         return {"status": "configured"}
     try:
@@ -112,18 +208,215 @@ def check_api(name, test_url=None, headers=None):
         return {"status": "unreachable", "error": str(e)}
 
 
+def check_muckrock():
+    """Check authenticated MuckRock API-v2 readiness without exposing secrets."""
+    deferred = _deferred_health_check(check_muckrock)
+    if deferred:
+        return deferred
+    load_env_file()
+    username = os.environ.get("MUCKROCK_USERNAME", "").strip()
+    password = os.environ.get("MUCKROCK_PASSWORD", "")
+    if not username or not password:
+        return {
+            "status": "no_credentials",
+            "start_cmd": (
+                "Set MUCKROCK_USERNAME and MUCKROCK_PASSWORD in the repo-local .env"
+            ),
+        }
+
+    try:
+        from muckrock import MuckRock
+        from squarelet.exceptions import CredentialsFailedError, SquareletError
+
+        client = MuckRock(username=username, password=password)
+        results = client.requests.list(page_size=1)
+        # Force response decoding so schema/auth failures cannot look healthy.
+        next(iter(results), None)
+        return {"status": "available", "note": "Authenticated API v2"}
+    except CredentialsFailedError as e:
+        return {"status": "error:auth", "error": str(e)}
+    except SquareletError as e:
+        return {"status": "unreachable", "error": str(e)}
+    except ImportError:
+        return {
+            "status": "missing_dependency",
+            "start_cmd": "uv sync  # installs python-muckrock",
+        }
+
+
+def _public_record_report_status(
+    *,
+    health: dict,
+    decision: dict,
+) -> str:
+    """Map catalog access and probe state to a source-report status."""
+    if not decision.get("allowed"):
+        result_status = acquisition_result_status(decision)
+        if result_status in {"human_required", "terms_blocked", "restricted"}:
+            return result_status
+        return "access_review_required"
+
+    health_state = health.get("health")
+    observed_status = health.get("observed_status")
+    if health_state == "healthy":
+        return "available"
+    if health_state in {"degraded", "stale"}:
+        return health_state
+    if health_state in {"restricted", "unhealthy"}:
+        return observed_status or health_state
+    return "configured"
+
+
+def check_public_records_catalog(
+    db_path=None,
+    *,
+    as_of=None,
+):
+    """Return catalog and per-source readiness without probing live endpoints."""
+    catalog_path = Path(
+        db_path or PROJECT_ROOT / "datasets" / "public_records_catalog.db"
+    )
+    catalog_entry = {
+        "description": (
+            "Access-reviewed property and state/local-court source control plane"
+        ),
+        "query_tool": "tools/public_records_catalog.py / tools/seed_public_records_catalog.py",
+        "path": str(catalog_path),
+    }
+    if _DEFER_HEALTH_CHECKS.get():
+        return {
+            "Public Records Catalog": {
+                **catalog_entry,
+                "status": "deferred",
+            }
+        }
+    if not catalog_path.exists():
+        return {
+            "Public Records Catalog": {
+                **catalog_entry,
+                "status": "missing",
+                "start_cmd": "uv run python tools/seed_public_records_catalog.py",
+            }
+        }
+
+    try:
+        try:
+            from tools.public_records_catalog import PublicRecordsCatalog
+        except ImportError:
+            from public_records_catalog import PublicRecordsCatalog
+
+        catalog = PublicRecordsCatalog(catalog_path, initialize=False)
+        rows = catalog.list_sources()
+        health_by_source = {
+            item["source_id"]: item
+            for item in catalog.health(as_of=as_of)
+        }
+    except Exception as error:
+        return {
+            "Public Records Catalog": {
+                **catalog_entry,
+                "status": "error",
+                "error": str(error),
+            }
+        }
+
+    reviewed_count = sum(
+        1 for row in rows if row.get("access_review_id") is not None
+    )
+    report = {
+        "Public Records Catalog": {
+            **catalog_entry,
+            "status": "available" if rows else "not_ingested",
+            "source_count": len(rows),
+            "note": (
+                f"{len(rows)} sources cataloged; "
+                f"{reviewed_count} have reviewed access decisions"
+            ),
+        }
+    }
+    for row in rows:
+        source_id = row["source_id"]
+        health = health_by_source.get(source_id, {})
+        decision = catalog.machine_acquisition_decision(
+            source_id,
+            as_of=as_of,
+        )
+        status = _public_record_report_status(
+            health=health,
+            decision=decision,
+        )
+        domain = row["domain"]
+        query_tool = (
+            "tools/query_property.py"
+            if domain == "property"
+            else "tools/query_state_courts.py"
+        )
+        notes = [str(decision.get("reason", "")).strip()]
+        if health.get("observed_status"):
+            notes.append(
+                "latest probe "
+                f"{health['observed_status']} at {health.get('probed_at')}"
+            )
+        elif decision.get("allowed"):
+            notes.append("no sentinel probe recorded")
+
+        report[f"Public records / {row['name']}"] = {
+            "description": (
+                f"{domain.title()} source operated by {row['authority']} "
+                f"({row['platform_family']})"
+            ),
+            "query_tool": query_tool,
+            "status": status,
+            "source_id": source_id,
+            "official_url": row["official_url"],
+            "access_class": row.get("access_class"),
+            "automation_disposition": row.get("automation_disposition"),
+            "probe_status": health.get("observed_status"),
+            "probed_at": health.get("probed_at"),
+            "note": "; ".join(note for note in notes if note),
+        }
+    return report
+
+
 def generate_report():
     """Generate full source coverage report."""
     sources = {}
 
     # Local SQLite databases
+    kabasshouse_inventory = check_sqlite_inventory(
+        PROJECT_ROOT / "datasets" / "kabasshouse_epstein.db",
+        {
+            "document_page_records": "SELECT COUNT(*) FROM documents",
+            "distinct_file_keys": (
+                "SELECT COUNT(DISTINCT file_key) FROM documents"
+            ),
+            "entity_mentions": "SELECT COUNT(*) FROM entities",
+            "financial_transactions": (
+                "SELECT COUNT(*) FROM financial_transactions"
+            ),
+        },
+        primary_metric="document_page_records",
+    )
+    kabasshouse_counts = kabasshouse_inventory.get("inventory", {})
+    if kabasshouse_counts:
+        kabasshouse_description = (
+            "PRIMARY Epstein corpus: "
+            f"{kabasshouse_counts['document_page_records']:,} OCR "
+            "document/page records across "
+            f"{kabasshouse_counts['distinct_file_keys']:,} distinct file_keys, "
+            f"{kabasshouse_counts['entity_mentions']:,} entity mentions, and "
+            f"{kabasshouse_counts['financial_transactions']:,} financial "
+            "transactions"
+        )
+    else:
+        kabasshouse_description = (
+            "PRIMARY Epstein corpus (DOJ DS1-12 + FBI + House); "
+            "live inventory unavailable"
+        )
     sources["Kabasshouse"] = {
-        "description": "PRIMARY Epstein corpus: 1.42M OCR'd docs (DOJ DS1-12 + FBI + House), 10.6M entities, 49.7K financial txns",
+        "description": kabasshouse_description,
         "query_tool": "tools/ingest_kabasshouse.py",
-        **check_sqlite(
-            PROJECT_ROOT / "datasets" / "kabasshouse_epstein.db",
-            "SELECT COUNT(*) FROM documents"
-        ),
+        **kabasshouse_inventory,
     }
 
     sources["DOJ Vol 11"] = {
@@ -144,13 +437,39 @@ def generate_report():
         ),
     }
 
-    sources["LMSBAND"] = {
-        "description": "60K files, 851K entities, 110K co-occurrences",
-        "query_tool": "tools/query_lmsband.py",
+    sources["Barak Emails (DDoSecrets/Handala)"] = {
+        "description": "100k+ emails/attachments from Ehud Barak mailboxes 2007-2016 (leaked); Cyberwar-category, handle attachments as inert bytes",
+        "query_tool": "tools/query_barak.py",
         **check_sqlite(
-            PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db",
-            "SELECT COUNT(*) FROM files"
+            PROJECT_ROOT / "datasets" / "barak_emails.db",
+            "SELECT COUNT(*) FROM messages"
         ),
+    }
+
+    lmsband_inventory = check_sqlite_inventory(
+        PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db",
+        {
+            "files": "SELECT COUNT(*) FROM files",
+            "entity_mentions": "SELECT COUNT(*) FROM entities",
+            "cooccurrences": "SELECT COUNT(*) FROM entity_cooccurrence",
+        },
+        primary_metric="files",
+    )
+    lmsband_counts = lmsband_inventory.get("inventory", {})
+    if lmsband_counts:
+        lmsband_description = (
+            f"{lmsband_counts['files']:,} files, "
+            f"{lmsband_counts['entity_mentions']:,} entity mentions, and "
+            f"{lmsband_counts['cooccurrences']:,} co-occurrences"
+        )
+    else:
+        lmsband_description = (
+            "Local LMSBAND Epstein corpus; live inventory unavailable"
+        )
+    sources["LMSBAND"] = {
+        "description": lmsband_description,
+        "query_tool": "tools/query_lmsband.py",
+        **lmsband_inventory,
     }
 
     sources["Unified DB"] = {
@@ -177,6 +496,25 @@ def generate_report():
         **check_sqlite(
             PROJECT_ROOT / "datasets" / "epstein_reporting.db",
             "SELECT COUNT(*) FROM reporting_item"
+        ),
+    }
+
+    sources["Epstein Artifact Metadata"] = {
+        "description": (
+            "Content-addressed hashes, file locations, and format-aware metadata "
+            "with source/release/production/acquisition provenance layers"
+        ),
+        "query_tool": "tools/epstein_metadata.py",
+        **check_sqlite_inventory(
+            PROJECT_ROOT / "datasets" / "epstein_derived.db",
+            {
+                "artifact_locations": "SELECT COUNT(*) FROM artifact_location",
+                "unique_artifacts": "SELECT COUNT(*) FROM artifact_file",
+                "metadata_observations": (
+                    "SELECT COUNT(*) FROM artifact_metadata_observation"
+                ),
+            },
+            primary_metric="artifact_locations",
         ),
     }
 
@@ -233,16 +571,16 @@ def generate_report():
         **check_directory(PROJECT_ROOT / "datasets" / "epstein-archive" / "data" / "emails" / "jeeproject_yahoo"),
     }
 
-    sources["Barak Emails"] = {
-        "description": "1,411 Ehud Barak email files (.html + .meta)",
-        "query_tool": "tools/search_emails.py",
+    sources["Barak Emails (curated subset, DEPRECATED)"] = {
+        "description": "DEPRECATED — 1,411-file sample superseded by the full leak; use tools/query_barak.py (datasets/barak_emails.db)",
+        "query_tool": "tools/query_barak.py",
         **check_directory(PROJECT_ROOT / "datasets" / "epstein-archive" / "data" / "emails" / "ehud_barak_emails"),
     }
 
-    # Neo4j
-    sources["ICIJ Offshore Leaks"] = {
-        "description": "~800K offshore entities (Neo4j)",
-        "query_tool": "tools/query_icij.py",
+    # Optional local Neo4j for deeper/bulk graph traversal.
+    sources["ICIJ Local Neo4j (optional)"] = {
+        "description": "Optional local graph for depth > 1 and bulk Cypher",
+        "query_tool": "tools/query_icij.py --local",
         **check_neo4j(),
     }
 
@@ -254,6 +592,12 @@ def generate_report():
             PROJECT_ROOT / "registry.db",
             "SELECT COUNT(*) FROM registry_entities"
         ),
+    }
+
+    sources["Massachusetts UCC"] = {
+        "description": "Public UCC party searches and filing histories; separate current and lapsed scopes",
+        "query_tool": "tools/query_massachusetts_ucc.py",
+        **check_massachusetts_ucc_runtime(),
     }
 
     # Investigations DB (ingested PDFs)
@@ -327,13 +671,6 @@ def generate_report():
     if not courtlistener_token:
         sources["CourtListener / RECAP"]["status"] = "no_api_key"
         sources["CourtListener / RECAP"]["start_cmd"] = "export COURTLISTENER_TOKEN=<token>"
-
-    sources["NYSCEF"] = {
-        "description": "New York State state-court guest search, case details, document lists, and PDF filings",
-        "query_tool": "tools/query_nyscef.py",
-        "status": "configured",
-        "note": "No public JSON API discovered. Browser-backed guest search only; use low-volume searches and respect NYSCEF Terms of Use.",
-    }
 
     # UK Companies House
     companies_house_key = os.environ.get("COMPANIES_HOUSE_API_KEY")
@@ -411,9 +748,9 @@ def generate_report():
 
     # MuckRock FOIA
     sources["MuckRock FOIA"] = {
-        "description": "Public FOIA request metadata + release links",
+        "description": "FOIA request metadata, communications, and release links via authenticated API v2",
         "query_tool": "tools/query_muckrock.py",
-        **check_api("MuckRock", "https://www.muckrock.com/api_v1/foia/?page_size=1"),
+        **check_muckrock(),
     }
 
     # HigherGov (paid API)
@@ -441,13 +778,6 @@ def generate_report():
         "description": "Full-text search across all SEC filings (1,237 Epstein hits)",
         "query_tool": "tools/query_edgar.py",
         **check_api("EDGAR", "https://efts.sec.gov/LATEST/search-index?q=test&size=1"),
-    }
-
-    # NYC ACRIS Property Records
-    sources["NYC ACRIS"] = {
-        "description": "NYC property transactions (deeds, mortgages, liens) via SODA API",
-        "query_tool": "tools/query_acris.py",
-        **check_api("ACRIS"),  # SODA API is slow to respond — skip live check
     }
 
     # FEC Campaign Finance
@@ -643,46 +973,82 @@ def generate_report():
         sources["Congress.gov"]["status"] = "no_api_key"
         sources["Congress.gov"]["start_cmd"] = "export CONGRESS_API_KEY=<key> (free at https://api.congress.gov/sign-up/)"
 
-    # ICIJ Reconciliation API (no auth needed)
-    sources["ICIJ Reconciliation API"] = {
-        "description": "Match entity names against 810K+ offshore entities (no Neo4j needed)",
-        "query_tool": "tools/query_icij.py reconcile / reconcile-all",
+    # Primary ICIJ path: remote reconciliation plus public first-hop node pages.
+    sources["ICIJ Offshore Leaks"] = {
+        "description": "810K+ remote records with bounded first-hop graph (no Neo4j)",
+        "query_tool": "tools/query_icij.py search / entity / connections / officers",
         **check_api("ICIJ Reconcile", "https://offshoreleaks.icij.org/api/v1/reconcile"),
     }
 
+    sources.update(check_public_records_catalog())
     return sources
 
 
-def quick_health_check(source_name):
+def _source_report_match(sources, source_name):
+    """Match a report label or exact canonical source ID."""
+    requested = source_name.casefold()
+    for name, info in sources.items():
+        if name.casefold() == requested:
+            return name, info
+        source_id = info.get("source_id")
+        if isinstance(source_id, str) and source_id.casefold() == requested:
+            return name, info
+    for name, info in sources.items():
+        if requested in name.casefold():
+            return name, info
+    return None
+
+
+def _could_be_catalog_source_id(value):
+    """Recognize the source-ID grammar without treating prose as a catalog lookup."""
+    return re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)+", value.casefold()) is not None
+
+
+def quick_health_check(source_name, *, public_records_db=None):
     """Run health check for a single named source.
 
     Returns {available: bool, note: str, status: str}.
     Matches source names case-insensitively.
     """
     load_env_file()
-    sources = generate_report()
-
-    # Case-insensitive lookup
+    catalog_lookup = (
+        public_records_db is not None
+        or "public record" in source_name.casefold()
+        or _could_be_catalog_source_id(source_name)
+    )
     match = None
-    for name, info in sources.items():
-        if name.lower() == source_name.lower():
-            match = (name, info)
-            break
-    if not match:
-        # Try partial match
-        for name, info in sources.items():
-            if source_name.lower() in name.lower():
-                match = (name, info)
-                break
+    if catalog_lookup:
+        sources = check_public_records_catalog(public_records_db)
+        match = _source_report_match(sources, source_name)
 
-    if not match:
+    if match is None and "public record" not in source_name.casefold():
+        token = _DEFER_HEALTH_CHECKS.set(True)
+        try:
+            sources = generate_report()
+        finally:
+            _DEFER_HEALTH_CHECKS.reset(token)
+        match = _source_report_match(sources, source_name)
+
+    if match is None:
         return {"available": False, "note": f"Unknown source: {source_name}", "status": "unknown"}
 
-    name, info = match
+    name, source_info = match
+    info = dict(source_info)
+    health_check = info.pop("_health_check", None)
+    if health_check:
+        info.update(health_check())
     status = info.get("status", "unknown")
     available = status in ("available", "running", "configured")
     note = info.get("error") or info.get("note") or info.get("start_cmd") or ""
-    return {"available": available, "note": note, "status": status, "name": name}
+    result = {
+        "available": available,
+        "note": note,
+        "status": status,
+        "name": name,
+    }
+    if info.get("source_id"):
+        result["source_id"] = info["source_id"]
+    return result
 
 
 def main():
@@ -696,13 +1062,30 @@ def main():
 
     # check <source_name>
     check_p = sub.add_parser("check", help="Quick health check for a single source")
-    check_p.add_argument("source_name", help="Source name (case-insensitive, partial match)")
+    check_p.add_argument(
+        "source_name",
+        help="Source name (case-insensitive, partial match) or canonical source ID",
+    )
+    check_p.add_argument(
+        "-j",
+        "--json",
+        dest="check_json",
+        action="store_true",
+        help="Emit the single-source result as JSON",
+    )
+    check_p.add_argument(
+        "--public-records-db",
+        help="Override the public-record source catalog path for catalog checks",
+    )
 
     args = parser.parse_args()
 
     if args.command == "check":
-        result = quick_health_check(args.source_name)
-        if args.json:
+        result = quick_health_check(
+            args.source_name,
+            public_records_db=args.public_records_db,
+        )
+        if args.json or args.check_json:
             print(json.dumps(result, indent=2))
         else:
             icon = "[OK]" if result["available"] else "[!!]"
@@ -729,9 +1112,16 @@ def main():
     def status_icon(status):
         if status in ("available", "running", "configured"):
             return "[OK]"
-        if status in ("missing", "not_ingested"):
+        if status in (
+            "missing",
+            "not_ingested",
+            "access_review_required",
+            "human_required",
+            "terms_blocked",
+            "restricted",
+        ):
             return "[--]"
-        if status in ("no_api_key", "unreachable", "unknown"):
+        if status in ("no_api_key", "no_credentials", "unreachable", "unknown"):
             return "[??]"
         if isinstance(status, str) and status.startswith("error"):
             return "[!!]"

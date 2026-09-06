@@ -1,0 +1,37 @@
+{
+  "name": "ACCOUNTS",
+  "type": "Feature Layer",
+  "geometryType": "esriGeometryPolygon",
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 2000,
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsOrderBy": true
+  },
+  "fields": [
+    {"name": "OBJECTID", "type": "esriFieldTypeOID"},
+    {"name": "UPC", "type": "esriFieldTypeString", "length": 19},
+    {"name": "parcel_number", "type": "esriFieldTypeString", "length": 30},
+    {"name": "eff_from_date", "type": "esriFieldTypeDate"},
+    {"name": "eff_to_date", "type": "esriFieldTypeDate"},
+    {"name": "active_status", "type": "esriFieldTypeString", "length": 1},
+    {"name": "situs_line_1", "type": "esriFieldTypeString", "length": 50},
+    {"name": "situs_city", "type": "esriFieldTypeString", "length": 40},
+    {"name": "owner_name", "type": "esriFieldTypeString", "length": 100},
+    {"name": "owner_line_1", "type": "esriFieldTypeString", "length": 50},
+    {"name": "tca_number", "type": "esriFieldTypeString", "length": 10},
+    {"name": "township", "type": "esriFieldTypeString", "length": 10},
+    {"name": "section", "type": "esriFieldTypeString", "length": 10},
+    {"name": "range", "type": "esriFieldTypeString", "length": 10},
+    {"name": "legal_text", "type": "esriFieldTypeString"},
+    {"name": "property_class", "type": "esriFieldTypeString", "length": 100},
+    {"name": "book_page", "type": "esriFieldTypeString", "length": 100},
+    {"name": "acreage", "type": "esriFieldTypeString", "length": 100},
+    {"name": "adeed", "type": "esriFieldTypeString", "length": 100},
+    {"name": "adhst", "type": "esriFieldTypeString", "length": 100},
+    {"name": "current_assessed_land", "type": "esriFieldTypeDouble"},
+    {"name": "current_assessed_imp", "type": "esriFieldTypeDouble"},
+    {"name": "prior_assessed_land", "type": "esriFieldTypeDouble"},
+    {"name": "prior_assessed_imp", "type": "esriFieldTypeDouble"}
+  ]
+}

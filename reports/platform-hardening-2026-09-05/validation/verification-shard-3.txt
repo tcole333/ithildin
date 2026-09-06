@@ -1,0 +1,84 @@
+warning: `VIRTUAL_ENV=/Users/travcole/projects/osint-research/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Using CPython 3.11.14
+Creating virtual environment at: .venv
+Downloading pymupdf (22.8MiB)
+Downloading pyarrow (32.7MiB)
+Downloading pandas (9.5MiB)
+Downloading curl-cffi (2.9MiB)
+Downloading pydantic-core (1.8MiB)
+Downloading numpy (5.2MiB)
+Downloading ruff (10.1MiB)
+Downloading rapidfuzz (1.3MiB)
+Downloading pygments (1.2MiB)
+Downloading duckdb (13.0MiB)
+Downloading lxml (8.2MiB)
+Downloading edgartools (3.0MiB)
+   Building multitasking==0.0.12
+   Building ratelimit==2.2.1
+ Downloaded rapidfuzz
+ Downloaded pydantic-core
+ Downloaded pygments
+ Downloaded curl-cffi
+ Downloaded edgartools
+ Downloaded numpy
+      Built ratelimit==2.2.1
+      Built multitasking==0.0.12
+ Downloaded lxml
+ Downloaded ruff
+ Downloaded pandas
+ Downloaded duckdb
+ Downloaded pymupdf
+ Downloaded pyarrow
+Installed 82 packages in 121ms
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+............s........................................................... [ 40%]
+...................................sss.................................. [ 45%]
+.s...................................................................... [ 49%]
+........................................................................ [ 54%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+s..........s............s..............ssss............ss............... [ 67%]
+............ssssssss..............s..................................... [ 72%]
+.......ssssssss...............sssss..................................... [ 76%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 95%]
+........................................................................ [ 99%]
+.......                                                                  [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_query_delaware_opinions.py:464: set RUN_LIVE_DE_OPINIONS=1 for official-site probe
+SKIPPED [1] tests/test_query_deschutes_laserfiche.py:783: set RUN_LIVE_DESCHUTES_WEBLINK=1 for official live probes
+SKIPPED [1] tests/test_query_deschutes_laserfiche.py:802: set RUN_LIVE_DESCHUTES_WEBLINK=1 for official live probes
+SKIPPED [1] tests/test_query_deschutes_laserfiche.py:823: set RUN_LIVE_DESCHUTES_WEBLINK=1 for official live probes
+SKIPPED [1] tests/test_query_eugene_municipal_court.py:472: set LIVE_PUBLIC_RECORDS=1 for official Eugene probes
+SKIPPED [1] tests/test_query_orange_county_court.py:406: set LIVE_PUBLIC_RECORDS=1 for official endpoint probes
+SKIPPED [1] tests/test_query_oregon_appellate.py:657: set RUN_LIVE_OR_APPELLATE=1 for the official A182332 sentinel
+SKIPPED [1] tests/test_query_oregon_benton_property.py:506: set RUN_BENTON_PROPERTY_LIVE=1 for bounded official-source probes
+SKIPPED [1] tests/test_query_oregon_clackamas_property.py:669: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_clackamas_property.py:692: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_clackamas_property.py:716: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_clackamas_property.py:737: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [2] tests/test_query_oregon_jackson_accela.py:459: set LIVE_PUBLIC_RECORDS=1 for official endpoint probes
+SKIPPED [1] tests/test_query_oregon_lincoln_taxlots.py:793: set RUN_LIVE_OR_LINCOLN_TAXLOTS=1 for official WFS probes
+SKIPPED [1] tests/test_query_oregon_lincoln_taxlots.py:811: set RUN_LIVE_OR_LINCOLN_TAXLOTS=1 for official WFS probes
+SKIPPED [4] tests/test_query_oregon_lincoln_taxlots.py:838: set RUN_LIVE_OR_LINCOLN_TAXLOTS=1 for official WFS probes
+SKIPPED [1] tests/test_query_oregon_lincoln_taxlots.py:892: set RUN_LIVE_OR_LINCOLN_TAXLOTS=1 for official WFS probes
+SKIPPED [1] tests/test_query_oregon_lincoln_taxlots.py:942: set RUN_LIVE_OR_LINCOLN_TAXLOTS=1 for official WFS probes
+SKIPPED [1] tests/test_query_oregon_linn_josephine_klamath_assessors.py:574: set RUN_OREGON_ASSESSOR_LIVE=1 for official endpoint probes
+SKIPPED [4] tests/test_query_oregon_tyler_municipal_tenants.py:403: set LIVE_PUBLIC_RECORDS=1 for official Oregon tenant probes
+SKIPPED [3] tests/test_query_oregon_tyler_municipal_tenants.py:433: set LIVE_PUBLIC_RECORDS=1 for official gated-tenant probes
+SKIPPED [1] tests/test_query_oregon_tyler_municipal_tenants.py:461: set LIVE_PUBLIC_RECORDS=1 for an official Medford deep-path probe
+SKIPPED [1] tests/test_query_oregon_yamhill_property.py:859: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_yamhill_property.py:884: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_yamhill_property.py:910: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_yamhill_property.py:935: set OSINT_LIVE_TESTS=1 for live source checks
+SKIPPED [1] tests/test_query_oregon_yamhill_property.py:954: set OSINT_LIVE_TESTS=1 for live source checks
+1555 passed, 36 skipped, 32 deselected in 598.29s (0:09:58)

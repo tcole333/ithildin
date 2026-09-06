@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Optional
@@ -21,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from queue_system.queue import DEFAULT_DB_PATH, JobQueue
+from queue_system.queue import DEFAULT_DB_PATH, JobQueue  # noqa: E402 - direct CLI bootstrap
 
 
 def _queue(args) -> JobQueue:
@@ -43,6 +44,10 @@ def _load_payload(payload_str: Optional[str], payload_file: Optional[str]) -> di
 def cmd_submit(args):
     queue = _queue(args)
     payload = _load_payload(args.payload, args.payload_file)
+    if getattr(args, "profile", None):
+        if payload.get("profile_id") not in (None, args.profile):
+            raise ValueError("Payload profile_id differs from --profile")
+        payload["profile_id"] = args.profile
     job_id = queue.create_job(
         job_type=args.type,
         domain=args.domain,
@@ -65,11 +70,16 @@ def _priority_to_int(priority: str) -> int:
 
 
 def cmd_enqueue_triage(args):
-    from tools import lead_tracker
+    from scripts.dispatcher import resolve_active_profile_id
 
-    db = lead_tracker.get_db()
+    queue = _queue(args)
+    db = queue._connect()
+    profile_id = getattr(args, "profile", None) or resolve_active_profile_id(db)
+    if not profile_id:
+        db.close()
+        raise ValueError("enqueue-triage requires --profile or an active profile in the selected database")
     total = db.execute(
-        "SELECT COUNT(*) as n FROM leads WHERE status='pending_triage'"
+        "SELECT COUNT(*) as n FROM leads WHERE status='pending_triage' AND profile_id=?", (profile_id,),
     ).fetchone()["n"]
     db.close()
 
@@ -78,11 +88,11 @@ def cmd_enqueue_triage(args):
         return
 
     payload = {
+        "profile_id": profile_id,
         "batch_size": args.batch_size,
         "dry_run": args.dry_run,
         "triaged_by": args.triaged_by,
     }
-    queue = _queue(args)
     job_id = queue.create_job(
         job_type="lead_triage",
         domain="discovery",
@@ -94,15 +104,19 @@ def cmd_enqueue_triage(args):
 
 
 def cmd_enqueue_lead(args):
-    from tools import lead_tracker
-
-    db = lead_tracker.get_db()
+    queue = _queue(args)
+    db = queue._connect()
     lead = db.execute("SELECT * FROM leads WHERE id = ?", (args.lead_id,)).fetchone()
     db.close()
 
     if not lead:
         print("Lead not found.")
         return
+    if not lead["profile_id"]:
+        raise ValueError("Lead must belong to a profile before it can be enqueued")
+    requested_profile = getattr(args, "profile", None)
+    if requested_profile and lead["profile_id"] != requested_profile:
+        raise ValueError("Lead does not belong to the requested profile")
 
     target = lead["target_name"] or lead["title"]
     sources = [s.strip() for s in args.sources.split(",") if s.strip()] if args.sources else None
@@ -110,12 +124,12 @@ def cmd_enqueue_lead(args):
     payload = {
         "target_name": target,
         "lead_id": lead["id"],
+        "profile_id": lead["profile_id"],
         "limit": args.limit,
     }
     if sources is not None:
         payload["sources"] = sources
 
-    queue = _queue(args)
     job_id = queue.create_job(
         job_type=args.job_type,
         domain=args.domain,
@@ -199,9 +213,10 @@ def main():
     parser = argparse.ArgumentParser(description="Queue management CLI")
     parser.add_argument(
         "--db-path",
-        default=str(DEFAULT_DB_PATH),
+        default=os.environ.get("ITHILDIN_DB_PATH", str(DEFAULT_DB_PATH)),
         help=f"Path to queue DB (default: {DEFAULT_DB_PATH})",
     )
+    parser.add_argument("--profile", default=os.environ.get("ITHILDIN_PROFILE"), help="Pin investigation scope")
     sub = parser.add_subparsers(dest="command")
 
     p_submit = sub.add_parser("submit", help="Submit a job")

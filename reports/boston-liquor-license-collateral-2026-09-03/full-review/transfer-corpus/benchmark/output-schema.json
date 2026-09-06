@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "case_id": {
+                "type": "string"
+              },
+              "kind": {
+                "const": "board_record"
+              },
+              "license_num": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "actions": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "license_transfer",
+                    "license_pledge",
+                    "license_transfer_revocation_notice",
+                    "license_pledge_release",
+                    "stock_transfer",
+                    "stock_pledge"
+                  ]
+                }
+              },
+              "disposition": {
+                "enum": [
+                  "granted",
+                  "deferred",
+                  "continued",
+                  "rescheduled",
+                  "withdrawn",
+                  "denied",
+                  "acknowledged",
+                  "not_stated"
+                ]
+              },
+              "transferor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transferee": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transferee_dba": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "pledging_party": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "pledge_recipient": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "from_address": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "to_address": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conditions_or_corrections": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "license_transfer_approved": {
+                "type": "boolean"
+              },
+              "new_license_pledge_approved": {
+                "type": "boolean"
+              },
+              "sale_completion_status": {
+                "enum": [
+                  "not_established",
+                  "reported_not_timely_closed",
+                  "reported_voided",
+                  "established_completed"
+                ]
+              },
+              "current_license_lien_status": {
+                "enum": [
+                  "not_established",
+                  "established"
+                ]
+              },
+              "loan_amount": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "evidence_quotes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "case_id",
+              "kind",
+              "license_num",
+              "actions",
+              "disposition",
+              "transferor",
+              "transferee",
+              "transferee_dba",
+              "pledging_party",
+              "pledge_recipient",
+              "from_address",
+              "to_address",
+              "conditions_or_corrections",
+              "license_transfer_approved",
+              "new_license_pledge_approved",
+              "sale_completion_status",
+              "current_license_lien_status",
+              "loan_amount",
+              "evidence_quotes"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "case_id": {
+                "type": "string"
+              },
+              "kind": {
+                "const": "ownership_record"
+              },
+              "subject": {
+                "type": "string"
+              },
+              "relationship_classification": {
+                "enum": [
+                  "private_equity_investment",
+                  "portfolio_affiliation_only",
+                  "historical_fundraising_only",
+                  "public_company",
+                  "not_established"
+                ]
+              },
+              "named_investor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "equity_percentage": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "private_equity_backing_established": {
+                "type": "boolean"
+              },
+              "current_equity_ownership_established": {
+                "type": "boolean"
+              },
+              "qualifications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence_quotes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "case_id",
+              "kind",
+              "subject",
+              "relationship_classification",
+              "named_investor",
+              "equity_percentage",
+              "private_equity_backing_established",
+              "current_equity_ownership_established",
+              "qualifications",
+              "evidence_quotes"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "results"
+  ]
+}

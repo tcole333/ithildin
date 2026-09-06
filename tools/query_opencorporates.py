@@ -22,35 +22,36 @@ Usage:
 
 import argparse
 import json
-import os
 import sys
 import time
-from pathlib import Path
 
 import requests
 
 try:
     from tools.env_loader import load_env_file
-    from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from tools.output_util import add_output_args, write_output
+    from tools.search_log_util import canonical_search_key
 except ImportError:
     from env_loader import load_env_file
-    from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from opencorporates_auth import (
+        exit_for_http_error,
+        exit_for_transport_error,
+        get_api_key,
+    )
+    from output_util import add_output_args, write_output
+    from search_log_util import canonical_search_key
 
 API_BASE = "https://api.opencorporates.com/v0.4"
 RATE_LIMIT_DELAY = 0.5
 
 load_env_file()
-
-
-def get_api_key():
-    """Get OpenCorporates API key from environment."""
-    key = os.getenv("OPENCORPORATES_API_KEY")
-    if not key:
-        print("ERROR: OPENCORPORATES_API_KEY not set", file=sys.stderr)
-        sys.exit(1)
-    return key
 
 
 def api_request(endpoint, params=None):
@@ -67,21 +68,13 @@ def api_request(endpoint, params=None):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 401:
-            print("ERROR: Invalid API token", file=sys.stderr)
-        elif e.response.status_code == 403:
-            print("ERROR: Access denied — may need a paid plan for this endpoint", file=sys.stderr)
-        elif e.response.status_code == 429:
-            print("ERROR: Rate limit exceeded", file=sys.stderr)
-        elif e.response.status_code == 404:
+        status_code = e.response.status_code
+        if status_code == 404:
             print(f"ERROR: Not found: {endpoint}", file=sys.stderr)
             return None
-        else:
-            print(f"HTTP {e.response.status_code}: {e.response.text[:200]}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_http_error(status_code)
     except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}", file=sys.stderr)
-        sys.exit(1)
+        exit_for_transport_error(e)
 
 
 def _parse_company(company):
@@ -123,6 +116,26 @@ def _parse_officer(officer):
 
 # --- Search commands ---
 
+def _log_result(mode, query, source, count, **filters):
+    """Record returned rows under a key that distinguishes paid query scopes.
+
+    Filters are explicit public arguments, never the request params dictionary:
+    api_request adds the credential to that dictionary in place.
+    """
+    try:
+        log_search(
+            query_text=canonical_search_key(mode, query, **filters),
+            source=source,
+            result_count=count,
+        )
+    except Exception as exc:
+        print(
+            f"WARNING: OpenCorporates {mode} result was not recorded in search history "
+            f"({type(exc).__name__}); returned results are still available.",
+            file=sys.stderr,
+        )
+
+
 def search_companies(query, jurisdiction=None, country=None, inactive=False,
                      address=None, per_page=30, page=1):
     """Search companies by name, optionally filtered by jurisdiction or address."""
@@ -140,13 +153,9 @@ def search_companies(query, jurisdiction=None, country=None, inactive=False,
     companies = data.get("results", {}).get("companies", [])
     total = data.get("results", {}).get("total_count", 0)
 
-    try:
-        log_search("opencorporates", query, {
-            "result_count": total,
-            "jurisdiction": jurisdiction or country or "global",
-        })
-    except Exception:
-        pass
+    _log_result("search", query, "opencorporates", len(companies),
+                jurisdiction=jurisdiction, country=country, inactive=inactive,
+                address=address, per_page=per_page, page=page)
 
     return {
         "query": query,
@@ -170,13 +179,8 @@ def search_officers(query, jurisdiction=None, per_page=30, page=1):
     officers = data.get("results", {}).get("officers", [])
     total = data.get("results", {}).get("total_count", 0)
 
-    try:
-        log_search("opencorporates_officers", query, {
-            "result_count": total,
-            "jurisdiction": jurisdiction or "global",
-        })
-    except Exception:
-        pass
+    _log_result("officers", query, "opencorporates_officers", len(officers),
+                jurisdiction=jurisdiction, per_page=per_page, page=page)
 
     return {
         "query": query,
@@ -209,10 +213,8 @@ def get_company(jurisdiction, company_number, sparse=False):
 
     company = data.get("results", {}).get("company", {})
 
-    try:
-        log_search("opencorporates", f"entity:{jurisdiction}/{company_number}", {"found": True})
-    except Exception:
-        pass
+    _log_result("entity", f"{jurisdiction}/{company_number}", "opencorporates", 1,
+                sparse=sparse)
 
     result = _parse_company(company)
     result["previous_names"] = company.get("previous_names", [])
@@ -246,11 +248,8 @@ def get_filings(jurisdiction, company_number, per_page=100, page=1):
 
     filings = data.get("results", {}).get("filings", [])
 
-    try:
-        log_search("opencorporates", f"filings:{jurisdiction}/{company_number}",
-                    {"result_count": len(filings)})
-    except Exception:
-        pass
+    _log_result("filings", f"{jurisdiction}/{company_number}", "opencorporates", len(filings),
+                per_page=per_page, page=page)
 
     return {
         "jurisdiction": jurisdiction,
@@ -351,8 +350,6 @@ def main():
     if not args.command:
         parser.print_help()
         sys.exit(1)
-
-    output_file = getattr(args, "output", None)
 
     if args.command == "search":
         results = search_companies(

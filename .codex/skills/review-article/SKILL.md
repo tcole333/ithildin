@@ -260,7 +260,15 @@ Flag:
 
 #### Estimative-language consistency (blocking)
 
-Check every probability phrase against the cited findings' confidence tiers using the Kent mapping in `research/INVESTIGATIVE_METHODOLOGY.md`: `confirmed` = established/documented; `high` = almost certainly/very likely; `medium` = likely/probably; `low` = possibly/may; `unverified` = unconfirmed/alleged. Prose may not outrun the weakest confidence in its citation chain—for example, "almost certainly" is unsupported when any necessary link is `medium`. Flag every mismatch as a **BLOCKING** edit.
+Apply the estimative-language standard in `research/INVESTIGATIVE_METHODOLOGY.md`.
+Confidence tiers are evidence-quality ceilings, not probability estimates.
+For every likelihood phrase, require a proposition-specific rationale that
+addresses alternatives, source independence, and material uncertainty; `medium`
+alone does not authorize "probably." Prose may not outrun the weakest necessary
+evidence link. A documented quotation establishes that the statement was made;
+preserve allegation or attribution language for its content. Unsupported
+certainty or probability claims are **BLOCKING** edits; a lower confidence tier
+does not require inventing a numeric probability.
 
 **Not a problem**: An article that presents evidence and then draws a conclusion using assertion language. "The Golden Dome procurement structure produces a specific set of conditions" is an earned conclusion if the preceding sections document those conditions.
 

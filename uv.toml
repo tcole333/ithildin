@@ -1,3 +1,7 @@
 # Keep uv's cache inside the project so managed Codex sandboxes can access it.
 # `.cache/` is already ignored by Git.
 cache-dir = "./.cache/uv"
+
+# uv <0.9.29 panics before launching commands in restricted macOS sandboxes.
+# 0.9.29 includes the system-configuration 0.7.0 fix (astral-sh/uv#17829).
+required-version = ">=0.9.29"

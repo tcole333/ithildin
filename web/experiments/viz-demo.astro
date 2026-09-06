@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../src/layouts/BaseLayout.astro';
+import TimelineChart from '../src/components/TimelineChart';
+import TransactionTable from '../src/components/TransactionTable';
+import EgoNetwork from '../src/components/EgoNetwork';
+import CorporateStructure from '../src/components/CorporateStructure';
+import CorporateStructureV2 from './CorporateStructureV2';
+import StepDiagram from '../src/components/StepDiagram';
+
+// Load full shell network hierarchy data
+import shellNetworkData from '../../content/structures/shell-network-hierarchy.json';
+
+const timelineEvents = [
+  { date: '1995-03-15', label: 'Wexner grants POA to Epstein', type: 'legal', entity: 'Leslie Wexner', evidence_ref: 'EFTA02336502' },
+  { date: '1996-08-01', label: 'Ohio Trust Co established', type: 'corporate', entity: 'Leslie Wexner', detail: 'Columbus, OH' },
+  { date: '1998-06-22', label: '$46.7M transfer to JE via Wexner Trust', type: 'financial', entity: 'Leslie Wexner', evidence_ref: 'EFTA02410088' },
+  { date: '1999-02-10', label: 'NES LLC registered (NM)', type: 'corporate', entity: 'Jeffrey Epstein' },
+  { date: '2000-11-15', label: 'FINL stock transfer', type: 'financial', entity: 'Leslie Wexner', evidence_ref: 'EFTA02663759' },
+  { date: '2002-03-01', label: 'Southern Trust Co incorporated (USVI)', type: 'corporate', entity: 'Jeffrey Epstein' },
+  { date: '2003-09-15', label: 'DB Private Wealth account opened', type: 'financial', entity: 'Deutsche Bank', evidence_ref: 'DFS-SAR-001' },
+  { date: '2004-06-01', label: 'Palm Beach PD investigation begins', type: 'legal', entity: 'Jeffrey Epstein' },
+  { date: '2005-03-15', label: 'FBI opens investigation', type: 'legal', entity: 'Jeffrey Epstein' },
+  { date: '2006-09-17', label: 'SAR filed by Deutsche Bank', type: 'financial', entity: 'Deutsche Bank', evidence_ref: 'DFS-SAR-003' },
+  { date: '2007-06-30', label: 'NPA signed (SDFL)', type: 'legal', entity: 'Jeffrey Epstein', detail: 'Non-Prosecution Agreement' },
+  { date: '2008-06-30', label: 'FL state guilty plea', type: 'legal', entity: 'Jeffrey Epstein' },
+  { date: '2008-09-01', label: 'Leon Black first meeting with JE', type: 'communication', entity: 'Leon Black', detail: 'Per Black testimony' },
+  { date: '2012-07-15', label: '$50M to STC from Black entities', type: 'financial', entity: 'Leon Black', evidence_ref: 'DECHERT-001' },
+  { date: '2013-04-01', label: 'Gratitude America 501(c)(3) filed', type: 'corporate', entity: 'Jeffrey Epstein' },
+  { date: '2014-11-01', label: '$10M Black to Epstein tax planning', type: 'financial', entity: 'Leon Black' },
+  { date: '2015-01-06', label: 'Giuffre v. Maxwell filed (SDNY)', type: 'legal', entity: 'Ghislaine Maxwell' },
+  { date: '2015-12-30', label: 'DB compliance escalation re: JE', type: 'communication', entity: 'Deutsche Bank' },
+  { date: '2019-07-06', label: 'Epstein arrested (SDNY)', type: 'legal', entity: 'Jeffrey Epstein' },
+  { date: '2019-08-10', label: 'Epstein death (MCC)', type: 'legal', entity: 'Jeffrey Epstein' },
+  { date: '2020-07-02', label: 'Maxwell arrested (NH)', type: 'legal', entity: 'Ghislaine Maxwell' },
+  { date: '2021-03-22', label: 'Black resigns as Apollo CEO', type: 'corporate', entity: 'Leon Black' },
+];
+
+const transactions = [
+  { date: '1998-06-22', from: 'Wexner Trust', to: 'J. Epstein (personal)', amount: 46700000, type: 'wire', evidence_ref: 'EFTA02410088' },
+  { date: '2000-11-15', from: 'L. Wexner', to: 'J. Epstein', amount: 12000000, type: 'stock transfer', evidence_ref: 'EFTA02663759' },
+  { date: '2008-10-01', from: 'L. Black (via Apollo)', to: 'Southern Trust Co', amount: 50000000, type: 'wire', evidence_ref: 'DECHERT-001' },
+  { date: '2012-07-15', from: 'L. Black', to: 'STC / Epstein', amount: 50000000, type: 'consulting fee', evidence_ref: 'DECHERT-001' },
+  { date: '2013-05-01', from: 'L. Black', to: 'Gratitude America', amount: 10000000, type: 'donation' },
+  { date: '2014-11-01', from: 'L. Black', to: 'J. Epstein', amount: 10000000, type: 'tax planning fee' },
+  { date: '2015-06-15', from: 'J. Epstein', to: 'E. Barak (via shell)', amount: 2500000, type: 'consulting', description: 'Via Carbyne-linked entity' },
+  { date: '2017-03-01', from: 'Deutsche Bank PW', to: 'NES LLC', amount: 8300000, type: 'wire', evidence_ref: 'DFS-SAR-007' },
+  { date: '2003-09-15', from: 'J. Epstein', to: 'Deutsche Bank PW', amount: 25000000, type: 'deposit', evidence_ref: 'DFS-SAR-001', description: 'Initial PW deposit' },
+  { date: '2006-03-01', from: 'Southern Trust Co', to: 'Offshore Entity (VI)', amount: 6400000, type: 'wire' },
+  { date: '2019-01-15', from: 'J. Epstein', to: 'K&E Legal Fees', amount: 4200000, type: 'legal fees', description: 'Kirkland & Ellis retainer' },
+  { date: '2016-08-01', from: 'G. Nader', to: 'E. Broidy (shell)', amount: 2500000, type: 'wire', description: 'Via Canadian entity' },
+];
+
+const egoConnections = [
+  { target: 'Leslie Wexner', type: 'financial', strength: 1.0, evidence_ref: 'EFTA02336502', description: 'POA, $46.7M transfer' },
+  { target: 'Ghislaine Maxwell', type: 'social', strength: 0.95, description: 'Longtime associate, co-defendant' },
+  { target: 'Leon Black', type: 'financial', strength: 0.9, evidence_ref: 'DECHERT-001', description: '$158M total payments' },
+  { target: 'Deutsche Bank', type: 'financial', strength: 0.85, evidence_ref: 'DFS-SAR-001', description: 'PWM client 2013-2019' },
+  { target: 'Ehud Barak', type: 'advisory', strength: 0.75, description: 'Carbyne, consulting payments' },
+  { target: 'Jean-Luc Brunel', type: 'social', strength: 0.7, description: 'MC2 modeling agency' },
+  { target: 'Southern Trust Co', type: 'corporate', strength: 0.85, description: 'USVI entity, tax structure' },
+  { target: 'Gratitude America', type: 'corporate', strength: 0.6, description: '501(c)(3) foundation' },
+  { target: 'Alan Dershowitz', type: 'legal', strength: 0.65, description: 'Legal advisor, named in suits' },
+  { target: 'JPMorgan Chase', type: 'financial', strength: 0.8, description: 'Banking relationship pre-2013' },
+  { target: 'Kirkland & Ellis', type: 'legal', strength: 0.7, description: 'NPA negotiation, ongoing representation' },
+  { target: 'NES LLC', type: 'corporate', strength: 0.5, description: 'New Mexico entity' },
+];
+
+const egoSecondHop: Record<string, any[]> = {
+  'Leon Black': [
+    { target: 'Apollo Global', type: 'corporate', strength: 0.9, description: 'Co-founder, CEO until 2021' },
+    { target: 'Josh Harris', type: 'corporate', strength: 0.7, description: 'Apollo co-founder' },
+    { target: 'Dechert LLP', type: 'legal', strength: 0.6, description: 'Investigation counsel' },
+  ],
+  'Ehud Barak': [
+    { target: 'Carbyne', type: 'corporate', strength: 0.8, description: 'Chairman' },
+    { target: 'Israel MoD', type: 'intelligence', strength: 0.7, description: 'Former PM/Defense Minister' },
+  ],
+  'Leslie Wexner': [
+    { target: 'Mega Group', type: 'social', strength: 0.85, description: 'Co-founder' },
+    { target: 'The Limited Inc', type: 'corporate', strength: 0.9, description: 'Founder, CEO' },
+    { target: 'Charles Bronfman', type: 'social', strength: 0.7, description: 'Mega Group co-founder' },
+  ],
+  'Ghislaine Maxwell': [
+    { target: 'Robert Maxwell', type: 'social', strength: 0.95, description: 'Father' },
+    { target: 'TerraMar Project', type: 'corporate', strength: 0.6, description: 'Founded 2012' },
+  ],
+};
+
+const structureData = {
+  id: 'epstein-stc',
+  title: 'Epstein / Southern Trust Company Structure',
+  subtitle: 'Corporate ownership hierarchy centered on Southern Trust Company, Inc.',
+  nodes: [
+    { id: 'person:epstein', name: 'Jeffrey Epstein', nodeType: 'person', parentIds: [] },
+    { id: 'person:black', name: 'Leon Black', nodeType: 'person', parentIds: [] },
+    { id: 'entity:stc', name: 'Southern Trust Company', nodeType: 'entity', entityType: 'inc', role: 'Trust company', jurisdiction: 'USVI', status: 'active', emphasis: 'primary', parentIds: ['person:epstein'] },
+    { id: 'entity:ga', name: 'Gratitude America', nodeType: 'entity', entityType: 'nonprofit', role: 'Foundation', jurisdiction: 'USVI', status: 'active', parentIds: ['person:epstein'] },
+    { id: 'entity:nes', name: 'NES LLC', nodeType: 'entity', entityType: 'llc', role: 'Finance LLC', jurisdiction: 'NM', status: 'active', parentIds: ['person:epstein'] },
+    { id: 'entity:jege', name: 'JEGE Inc', nodeType: 'entity', entityType: 'inc', role: 'Shell', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:pland', name: 'Plan D LLC', nodeType: 'entity', entityType: 'llc', role: 'Asset SPV', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:we', name: 'WE LLC', nodeType: 'entity', entityType: 'llc', role: 'Investment SPV', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:igo', name: 'IGO Company LLC', nodeType: 'entity', entityType: 'llc', role: 'Offshore bank', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:bfp', name: 'Black Family Partners', nodeType: 'entity', entityType: 'partnership', role: 'Investment vehicle', jurisdiction: 'NY', status: 'active', parentIds: ['person:black'] },
+    { id: 'entity:edr', name: 'Edmond de Rothschild Trust', nodeType: 'entity', entityType: 'trust', role: 'Trust', jurisdiction: 'UK', status: 'active', parentIds: ['entity:bfp'] },
+    { id: 'entity:phaidon', name: 'Phaidon Global LLC', nodeType: 'entity', entityType: 'llc', role: 'Holding LLC', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
+    { id: 'entity:cat', name: '2017 Caterpillar Trust', nodeType: 'entity', entityType: 'trust', role: 'Trust', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
+  ],
+  edges: [
+    { source: 'person:epstein', target: 'entity:stc', relationType: 'owns', description: 'Founder, beneficial owner, president', category: 'ownership', strength: 0.9 },
+    { source: 'person:epstein', target: 'entity:ga', relationType: 'founder', description: '501(c)(3) foundation', category: 'governance', strength: 0.6 },
+    { source: 'person:epstein', target: 'entity:nes', relationType: 'owns', description: 'New Mexico entity', category: 'ownership', strength: 0.7 },
+    { source: 'entity:stc', target: 'entity:jege', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:pland', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:we', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:igo', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'person:black', target: 'entity:bfp', relationType: 'controls', description: 'Family investment vehicle', category: 'ownership', strength: 0.7 },
+    { source: 'entity:bfp', target: 'entity:stc', relationType: 'funds', description: '$158M+ total payments', label: 'Management fees', category: 'financial', strength: 0.9, showLabel: true },
+    { source: 'entity:bfp', target: 'entity:edr', relationType: 'funds', description: '$25M transfer', label: 'Transfer', category: 'financial', strength: 0.6 },
+    { source: 'entity:bfp', target: 'entity:phaidon', relationType: 'controls', description: '$10M+ line of credit', category: 'ownership', strength: 0.6 },
+    { source: 'entity:bfp', target: 'entity:cat', relationType: 'controls', description: 'Trust contributions', category: 'ownership', strength: 0.5 },
+    { source: 'entity:edr', target: 'entity:stc', relationType: 'funds', description: '$25M transfer to STC', label: 'Transfer', category: 'financial', strength: 0.6 },
+  ],
+  annotations: [
+    { id: 'ann-1', targetId: 'entity:stc', text: 'Trust company anchors the structure and routes payments into the shell cluster.' },
+    { id: 'ann-2', targetId: 'entity:bfp', text: 'Funds from Black Family Partners enter as management fees.' },
+  ],
+};
+
+const waterfallData = {
+  "title": "Who Owns This Money?",
+  "subtitle": "Tracing beneficial ownership through the shell network — information degrades at every layer",
+  "nodes": [
+    { "id": "question", "name": "Who owns this $56.5M?", "category": "question" },
+    { "id": "db_account", "name": "Deutsche Bank Account", "category": "bank" },
+    { "id": "stc", "name": "Southern Trust Company, Inc.", "category": "entity" },
+    { "id": "bbvi", "name": "Business Basics VI, LLC", "category": "entity" },
+    { "id": "kellerhals", "name": "Kellerhals Ferguson Kroblin", "category": "person" },
+    { "id": "usvi_registry", "name": "USVI Corporate Registry", "category": "registry" },
+    { "id": "beneficial_owner", "name": "Jeffrey Epstein (invisible)", "category": "person" }
+  ],
+  "links": [
+    { "source": "question", "target": "db_account", "value": 100, "label": "Bank statement shows: Southern Trust Company, Inc.", "info_loss": "0%" },
+    { "source": "db_account", "target": "stc", "value": 80, "label": "STC registered in USVI. Address: 6100 Red Hook Quarter B3.", "info_loss": "20% — entity is in a different jurisdiction from the bank" },
+    { "source": "stc", "target": "usvi_registry", "value": 60, "label": "USVI registry shows: Registered agent is Business Basics VI, LLC", "info_loss": "40% — no beneficial owner disclosed in USVI filings" },
+    { "source": "usvi_registry", "target": "bbvi", "value": 40, "label": "BBVI at 9053 Estate Thomas. Agent: Erika Kellerhals. Purpose: 'Other.'", "info_loss": "60% — BBVI has zero internet presence, zero litigation history" },
+    { "source": "bbvi", "target": "kellerhals", "value": 20, "label": "Law firm handles all entity formation. No public client list.", "info_loss": "80% — attorney-client privilege blocks further inquiry" },
+    { "source": "kellerhals", "target": "beneficial_owner", "value": 5, "label": "Jeffrey Epstein — 'Sole shareholder' per DB KYC (not public)", "info_loss": "95% — beneficial ownership only visible in bank's own internal records" }
+  ]
+};
+---
+<BaseLayout title="Visualization Demo">
+  <div class="space-y-10">
+    <section class="surface beam p-8 reveal" style="--delay: 0s;">
+      <div class="space-y-3">
+        <div class="section-label">Visualization</div>
+        <h1 class="text-3xl md:text-4xl font-display text-moon">Component Library</h1>
+        <p class="text-mithril font-body">
+          Interactive visualization primitives for the Ithildin investigation platform.
+          Three components designed for financial and network analysis of investigative data.
+        </p>
+      </div>
+    </section>
+
+    <!-- Timeline Chart -->
+    <section class="space-y-4 reveal" style="--delay: 0.1s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Timeline</h2>
+        <span class="text-xs text-mithril font-mono">TimelineChart.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Horizontal timeline of events across the Epstein network. Color-coded by event type.
+        Scroll to zoom, drag to pan. Below: grouped by entity.
+      </p>
+      <TimelineChart
+        events={timelineEvents}
+        groupBy="entity"
+        height={420}
+        client:visible
+      />
+    </section>
+
+    <!-- Transaction Table -->
+    <section class="space-y-4 reveal" style="--delay: 0.2s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Transactions</h2>
+        <span class="text-xs text-mithril font-mono">TransactionTable.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Sortable, filterable table of financial transactions. Click column headers to sort.
+        Filter by entity name or amount range. Running totals update with filters.
+      </p>
+      <TransactionTable
+        transactions={transactions}
+        title="Key Financial Flows"
+        client:visible
+      />
+    </section>
+
+    <!-- Ego Network -->
+    <section class="space-y-4 reveal" style="--delay: 0.3s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Ego Network</h2>
+        <span class="text-xs text-mithril font-mono">EgoNetwork.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Force-directed graph centered on a single entity. Edge thickness encodes relationship
+        strength, color encodes type. Hover highlights connected subgraph. 2-hop view below.
+      </p>
+      <EgoNetwork
+        center="Jeffrey Epstein"
+        connections={egoConnections}
+        secondHop={egoSecondHop}
+        depth={2}
+        height={520}
+        client:visible
+      />
+    </section>
+
+    <!-- Corporate Structure -->
+    <section class="space-y-4 reveal" style="--delay: 0.35s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Corporate Structure</h2>
+        <span class="text-xs text-mithril font-mono">CorporateStructure.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Top-down ownership diagram using Sugiyama DAG layout. Entity types encoded as shapes,
+        jurisdictions as stroke colors, relationship types as edge colors, evidence quality as
+        dashes. Click nodes to highlight ancestor/descendant chains. Click +/- to collapse
+        subtrees.
+      </p>
+      <CorporateStructure
+        data={structureData}
+        height={600}
+        client:visible
+      />
+    </section>
+
+    <!-- Corporate Structure V2 -->
+    <section class="space-y-4 reveal" style="--delay: 0.36s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Corporate Structure V2 (Left-to-Right)</h2>
+        <span class="text-xs text-mithril font-mono">CorporateStructureV2.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Horizontal ownership diagram using Sugiyama DAG layout. Solves the horizontal sprawl issue by scrolling vertically. Entity types encoded as shapes, jurisdictions as stroke colors, relationship types as edge colors, evidence quality as dashes.
+      </p>
+      <CorporateStructureV2
+        data={structureData}
+        height={800}
+        client:visible
+      />
+    </section>
+
+    <!-- Corporate Structure V2 - Full Network -->
+    <section class="space-y-4 reveal" style="--delay: 0.365s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Corporate Structure V2 - Full Shell Network</h2>
+        <span class="text-xs text-mithril font-mono">CorporateStructureV2.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Testing the V2 component with the full, dense 30+ entity network structure used in the main article.
+      </p>
+      <CorporateStructureV2
+        data={shellNetworkData}
+        height={600}
+        client:visible
+      />
+    </section>
+
+    <!-- Information Waterfall (Step Diagram) -->
+    <section class="space-y-4 reveal" style="--delay: 0.37s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Information Waterfall</h2>
+        <span class="text-xs text-mithril font-mono">StepDiagram.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        A progressive disclosure diagram showing information degradation step-by-step. Replaces the Sankey diagram which is unsuitable for non-financial or sequential qualitative flows.
+      </p>
+      <StepDiagram
+        data={waterfallData}
+        client:visible
+      />
+    </section>
+
+    <!-- Article Embedding Convention -->
+    <section class="surface p-6 space-y-4 reveal" style="--delay: 0.4s;">
+      <div class="section-label">Convention</div>
+      <h2 class="text-xl font-display text-moon">Article Embedding</h2>
+      <p class="text-sm text-mithril font-body leading-relaxed">
+        To embed a visualization in an MDX article, use a data-attribute marker.
+        The hydrator script scans for <code class="text-ember bg-[rgba(18,21,27,0.8)] border border-[rgba(42,49,59,0.6)] px-1.5 py-0.5 rounded text-xs">&lt;div data-viz="..."&gt;</code> elements
+        and mounts the corresponding React component with props loaded from the JSON source.
+      </p>
+      <div class="surface-muted p-4 font-mono text-xs text-mithril leading-relaxed overflow-x-auto">
+        <div class="text-icy">&lt;!-- In your .mdx article: --&gt;</div>
+        <div class="mt-2">&lt;div data-viz="<span class="text-ember">TimelineChart</span>"</div>
+        <div class="pl-5">data-src="<span class="text-moon">/content/timelines/apollo.json</span>"</div>
+        <div class="pl-5">data-height="<span class="text-moon">400</span>"</div>
+        <div class="pl-5">data-group-by="<span class="text-moon">entity</span>"&gt;&lt;/div&gt;</div>
+        <div class="mt-4">&lt;div data-viz="<span class="text-ember">TransactionTable</span>"</div>
+        <div class="pl-5">data-src="<span class="text-moon">/content/financials/transactions.json</span>"&gt;&lt;/div&gt;</div>
+        <div class="mt-4">&lt;div data-viz="<span class="text-ember">EgoNetwork</span>"</div>
+        <div class="pl-5">data-src="<span class="text-moon">/content/ego/leon-black.json</span>"</div>
+        <div class="pl-5">data-depth="<span class="text-moon">2</span>"&gt;&lt;/div&gt;</div>
+      </div>
+      <div class="text-xs text-mithril font-body mt-2">
+        JSON files follow the same prop shape as the component. The hydrator fetches the JSON,
+        merges any data-attribute overrides, and mounts the React component. Articles remain
+        readable without JS — the surrounding prose provides context.
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -11,17 +11,22 @@ Subcommands:
 """
 
 import argparse
+import hashlib
 import json
+import os
 import re
 import sqlite3
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from datetime import datetime, timezone
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DOSSIER_DIR = ROOT_DIR / "content" / "dossiers"
+CONTENT_DIR = Path(os.environ.get("ITHILDIN_CONTENT_DIR") or ROOT_DIR / "content")
+DOSSIER_DIR = CONTENT_DIR / "dossiers"
 INDEX_PATH = DOSSIER_DIR / "_index.json"
-DB_PATH = ROOT_DIR / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH") or ROOT_DIR / "investigation.db")
+RECEIPT_PATH = CONTENT_DIR / "dossier-review-receipts.json"
 
 # --- Banned phrases (from curate-dossier editorial standards) ---
 
@@ -211,6 +216,13 @@ def load_dossier(slug: str) -> dict:
         print(f"Error: dossier not found: {path}", file=sys.stderr)
         sys.exit(1)
     return json.loads(path.read_text())
+
+
+def dossier_content_sha256(slug: str) -> str:
+    """Bind semantic review to the exact checked-in dossier, including evidence."""
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", slug):
+        raise ValueError(f"Invalid dossier slug: {slug!r}")
+    return hashlib.sha256((DOSSIER_DIR / f"{slug}.json").read_bytes()).hexdigest()
 
 
 def check_crosslinks(dossier: dict, name_to_slug: dict) -> list[dict]:
@@ -704,7 +716,9 @@ def fix_banned_titles(dossier: dict) -> tuple[dict, int]:
 # --- Main check orchestrator ---
 
 
-def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
+def run_checks(
+    slug: str, name_to_slug: dict | None = None, *, static_only: bool = False,
+) -> dict:
     """Run all checks on a dossier and return structured result."""
     dossier = load_dossier(slug)
     curation = dossier.get("curation", {})
@@ -736,7 +750,9 @@ def run_checks(slug: str, name_to_slug: dict | None = None) -> dict:
     all_issues.extend(check_structure(dossier))
 
     # Check 4: Citations
-    global_finding_statuses = load_global_finding_statuses()
+    # Portable release checks must resolve citations from the exported dossier,
+    # including citation_findings. A developer's private DB cannot bless a build.
+    global_finding_statuses = {} if static_only else load_global_finding_statuses()
     citation_issues, citation_metrics = check_citations(
         dossier,
         global_finding_ids=set(global_finding_statuses),
@@ -853,6 +869,10 @@ def ensure_review_schema(db: sqlite3.Connection) -> None:
         CREATE INDEX IF NOT EXISTS idx_dossier_llm_reviews_slug
             ON dossier_llm_reviews(slug, reviewed_at DESC);
     """)
+    columns = {row[1] for row in db.execute("PRAGMA table_info(dossier_llm_reviews)")}
+    for name in ("content_sha256", "reviewer", "verdict"):
+        if name not in columns:
+            db.execute(f"ALTER TABLE dossier_llm_reviews ADD COLUMN {name} TEXT")
 
 
 def get_review_db() -> sqlite3.Connection:
@@ -899,28 +919,12 @@ def get_latest_verdict(slug: str) -> dict | None:
     return dict(row) if row else None
 
 
-def check_publish_gate(slugs: list[str] | None = None) -> tuple[bool, list[dict]]:
-    """Check if all curated dossiers pass review. Returns (ok, failures)."""
-    db = get_review_db()
-
-    if slugs is None:
-        slugs = get_curated_slugs()
-
-    failures = []
-    for slug in slugs:
-        row = db.execute(
-            "SELECT slug, name, verdict, reviewed_at FROM dossier_reviews "
-            "WHERE slug = ? ORDER BY reviewed_at DESC LIMIT 1",
-            (slug,),
-        ).fetchone()
-
-        if row is None:
-            failures.append({"slug": slug, "reason": "never reviewed"})
-        elif row["verdict"] == "FAIL":
-            failures.append({"slug": slug, "reason": f"verdict={row['verdict']}", "reviewed_at": row["reviewed_at"]})
-
-    db.close()
-    return len(failures) == 0, failures
+def check_publish_gate(
+    slugs: list[str] | None = None, *, receipt_file: Path | None = None,
+) -> tuple[bool, list[dict]]:
+    """Require current semantic receipts and static checks without opening a DB."""
+    result = validate_receipts(receipt_file or RECEIPT_PATH, slugs=slugs)
+    return result["status"] == "passed", result["failures"]
 
 
 # --- CLI ---
@@ -928,6 +932,7 @@ def check_publish_gate(slugs: list[str] | None = None) -> tuple[bool, list[dict]
 
 def cmd_check(args):
     result = run_checks(args.slug)
+    result["content_sha256"] = dossier_content_sha256(args.slug)
     if not args.no_record and result["verdict"] != "SKIP":
         record_review(result)
     if args.output:
@@ -943,6 +948,7 @@ def cmd_batch(args):
     results = []
     for slug in slugs:
         result = run_checks(slug, name_to_slug)
+        result["content_sha256"] = dossier_content_sha256(slug)
         if not args.no_record and result["verdict"] != "SKIP":
             record_review(result)
         results.append(result)
@@ -1046,8 +1052,8 @@ def print_summary_table(results: list[dict], file=None):
 
 
 def cmd_gate(args):
-    """Publish gate — exits non-zero if any curated dossier has FAIL verdict."""
-    ok, failures = check_publish_gate()
+    """Publish gate for exact-content semantic receipts and static checks."""
+    ok, failures = check_publish_gate(receipt_file=Path(args.receipt_file))
 
     result = {
         "gate": "dossier-review",
@@ -1060,7 +1066,7 @@ def cmd_gate(args):
         print(json.dumps(result, indent=2))
     else:
         if ok:
-            print(f"Dossier review gate: PASSED (all curated dossiers reviewed)")
+            print("Dossier review gate: PASSED (all curated dossiers reviewed)")
         else:
             print(f"Dossier review gate: FAILED ({len(failures)} issues)")
             for f in failures:
@@ -1150,19 +1156,137 @@ def extract_llm_issues(review: dict) -> list[dict]:
     return all_issues
 
 
+def validate_semantic_review(review: dict, *, require_pass: bool = False) -> dict:
+    """Validate an actual review's shape and exact content binding, not its truth.
+
+    This accepts no implicit PASS from missing fields or legacy DB records.
+    Semantic judgment remains the reviewer's responsibility.
+    """
+    if not isinstance(review, dict):
+        raise ValueError("semantic review must be an object")
+    slug = review.get("slug")
+    if not isinstance(slug, str) or not slug:
+        raise ValueError("semantic review needs a slug")
+    if review.get("content_sha256") != dossier_content_sha256(slug):
+        raise ValueError("missing or stale content_sha256; review this dossier version")
+    reviewer = review.get("reviewer")
+    if not isinstance(reviewer, str) or not reviewer.strip():
+        raise ValueError("semantic review needs an identified reviewer")
+    try:
+        reviewed_at = datetime.fromisoformat(review["reviewed_at"].replace("Z", "+00:00"))
+    except (KeyError, TypeError, AttributeError, ValueError) as exc:
+        raise ValueError("semantic review needs an ISO reviewed_at timestamp with timezone") from exc
+    if reviewed_at.tzinfo is None or reviewed_at > datetime.now(timezone.utc):
+        raise ValueError("reviewed_at must have a timezone and cannot be in the future")
+    issues = review.get("llm_issues")
+    if not isinstance(issues, list) or any(
+        not isinstance(issue, dict)
+        or issue.get("severity") not in {"BLOCKING", "SHOULD_FIX", "SUGGESTION"}
+        or not isinstance(issue.get("detail"), str)
+        or not issue["detail"].strip()
+        for issue in issues
+    ):
+        raise ValueError("llm_issues must explicitly list issues with valid severity and detail")
+    verdict = (
+        "FAIL" if any(i["severity"] == "BLOCKING" for i in issues)
+        else "NEEDS_FIXES" if any(i["severity"] == "SHOULD_FIX" for i in issues)
+        else "PASS"
+    )
+    if review.get("verdict") != verdict:
+        raise ValueError("semantic verdict must be explicit and agree with llm_issues")
+    if require_pass and verdict != "PASS":
+        raise ValueError(f"semantic verdict={verdict}")
+    return {
+        "slug": slug, "content_sha256": review["content_sha256"],
+        "reviewer": reviewer, "reviewed_at": review["reviewed_at"],
+        "verdict": verdict, "llm_issues": issues,
+    }
+
+
+def _load_receipts(receipt_file: Path) -> dict[str, dict]:
+    payload = json.loads(receipt_file.read_text())
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+        raise ValueError("receipt file must have schema_version=1")
+    reviews = payload.get("reviews")
+    if not isinstance(reviews, list):
+        raise ValueError("receipt file needs a reviews array")
+    result = {}
+    for review in reviews:
+        if not isinstance(review, dict) or not isinstance(review.get("slug"), str):
+            raise ValueError("each receipt needs a slug")
+        slug = review["slug"]
+        if slug in result:
+            raise ValueError(f"duplicate receipt for {slug}")
+        result[slug] = review
+    return result
+
+
+def validate_receipts(receipt_file: Path, *, slugs: list[str] | None = None) -> dict:
+    """DB-free release validation. Old unbound reviews are review debt."""
+    failures = []
+    try:
+        receipts = _load_receipts(Path(receipt_file))
+        if slugs is None:
+            # Include every published curated file, even if the index is stale.
+            slugs = [
+                path.stem for path in sorted(DOSSIER_DIR.glob("*.json"))
+                if not path.name.startswith("_")
+                and json.loads(path.read_text()).get("curation", {}).get("lead")
+            ]
+        name_to_slug = load_index()
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        return {"gate": "dossier-review", "status": "failed", "checked": 0,
+                "failures": [{"slug": "*", "reason": str(exc)}]}
+    for slug in slugs:
+        try:
+            review = receipts.get(slug)
+            if review is None:
+                raise ValueError("no exact-content semantic review receipt")
+            validated = validate_semantic_review(review, require_pass=True)
+            automated = run_checks(slug, name_to_slug, static_only=True)
+            if automated["verdict"] in {"FAIL", "SKIP"}:
+                raise ValueError(f"static verdict={automated['verdict']}: {automated['blocking']}")
+            if validated["content_sha256"] != dossier_content_sha256(slug):
+                raise ValueError("dossier changed during validation")
+        except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+            failures.append({"slug": slug, "reason": str(exc)})
+    return {"gate": "dossier-review", "status": "failed" if failures else "passed",
+            "checked": len(slugs), "failures": failures}
+
+
+def store_receipt(review: dict, receipt_file: Path) -> dict:
+    """Store a supplied actual review, including failed reviews; never infer one."""
+    validated = validate_semantic_review(review)
+    receipt_file = Path(receipt_file)
+    receipts = _load_receipts(receipt_file) if receipt_file.exists() else {}
+    receipts[validated["slug"]] = validated
+    payload = {"schema_version": 1, "reviews": [receipts[k] for k in sorted(receipts)]}
+    # Serialize receipt writes in the parent after all reviewers finish.
+    temporary = receipt_file.with_name(f".{receipt_file.name}.{os.getpid()}.tmp")
+    try:
+        temporary.write_text(json.dumps(payload, indent=2) + "\n")
+        temporary.replace(receipt_file)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return validated
+
+
 def record_llm_review(review: dict) -> None:
     """Write an LLM review result to the dossier_llm_reviews table."""
+    review = validate_semantic_review(review)
     db = get_review_db()
-    issues = extract_llm_issues(review)
+    issues = review["llm_issues"]
     blocking = sum(1 for i in issues if i.get("severity") == "BLOCKING")
     should_fix = sum(1 for i in issues if i.get("severity") == "SHOULD_FIX")
     suggestion = sum(1 for i in issues if i.get("severity") == "SUGGESTION")
 
     db.execute(
         """INSERT INTO dossier_llm_reviews
-           (slug, blocking_count, should_fix_count, suggestion_count, issues_json)
-           VALUES (?, ?, ?, ?, ?)""",
-        (review["slug"], blocking, should_fix, suggestion, json.dumps(issues)),
+           (slug, blocking_count, should_fix_count, suggestion_count, issues_json,
+            content_sha256, reviewer, verdict, reviewed_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (review["slug"], blocking, should_fix, suggestion, json.dumps(issues),
+         review["content_sha256"], review["reviewer"], review["verdict"], review["reviewed_at"]),
     )
     db.commit()
     db.close()
@@ -1179,6 +1303,7 @@ def cmd_ingest_llm(args):
         sys.exit(1)
 
     ingested = 0
+    failed = 0
     for f in files:
         try:
             review = json.loads(Path(f).read_text())
@@ -1191,10 +1316,13 @@ def cmd_ingest_llm(args):
             s = sum(1 for i in issues if i.get("severity") == "SHOULD_FIX")
             print(f"  {review['slug']}: {b} blocking, {s} should_fix, {len(issues)-b-s} suggestions")
             ingested += 1
-        except (json.JSONDecodeError, KeyError) as e:
+        except (ValueError, KeyError, OSError) as e:
             print(f"  Error in {f}: {e}", file=sys.stderr)
+            failed += 1
 
     print(f"\nIngested {ingested} LLM reviews")
+    if failed or not ingested:
+        raise SystemExit(1)
 
 
 def cmd_llm_status(args):
@@ -1205,22 +1333,25 @@ def cmd_llm_status(args):
     reviewed = 0
     blocking_total = 0
 
-    print(f"\n{'Slug':<40} {'Block':>5} {'Fix':>5} {'Suggest':>7} {'Reviewed At':<20}")
+    print(f"\n{'Slug':<40} {'Block':>5} {'Fix':>5} {'Suggest':>7} {'Current':<8} {'Reviewed At':<20}")
     print(f"{'-'*40} {'-'*5} {'-'*5} {'-'*7} {'-'*20}")
 
     for slug in slugs:
         row = db.execute(
-            "SELECT slug, blocking_count, should_fix_count, suggestion_count, reviewed_at "
-            "FROM dossier_llm_reviews WHERE slug = ? ORDER BY reviewed_at DESC LIMIT 1",
+            "SELECT slug, blocking_count, should_fix_count, suggestion_count, reviewed_at, "
+            "content_sha256 FROM dossier_llm_reviews WHERE slug = ? "
+            "ORDER BY reviewed_at DESC, id DESC LIMIT 1",
             (slug,),
         ).fetchone()
         if row:
-            reviewed += 1
-            blocking_total += row["blocking_count"]
-            print(f"{row['slug']:<40} {row['blocking_count']:>5} {row['should_fix_count']:>5} {row['suggestion_count']:>7} {row['reviewed_at']:<20}")
+            current = row["content_sha256"] == dossier_content_sha256(slug)
+            reviewed += int(current)
+            if current:
+                blocking_total += row["blocking_count"]
+            print(f"{row['slug']:<40} {row['blocking_count']:>5} {row['should_fix_count']:>5} {row['suggestion_count']:>7} {str(current):<8} {row['reviewed_at']:<20}")
 
     db.close()
-    print(f"\n{reviewed}/{len(slugs)} curated dossiers have LLM reviews")
+    print(f"\n{reviewed}/{len(slugs)} curated dossiers have current content-bound LLM reviews")
     if blocking_total:
         print(f"Total blocking issues: {blocking_total}")
 
@@ -1244,8 +1375,19 @@ def main():
 
     sub.add_parser("summary", help="Print aggregate summary table")
 
-    p_gate = sub.add_parser("gate", help="Publish gate — fail if any dossier has FAIL verdict")
+    p_gate = sub.add_parser("gate", help="Require exact-content semantic receipts and static checks")
     p_gate.add_argument("--json", action="store_true", help="Output JSON")
+    p_gate.add_argument("--receipt-file", type=Path, default=RECEIPT_PATH)
+
+    p_receipt = sub.add_parser("receipt", help="Store an actual content-bound semantic review")
+    p_receipt.add_argument("--review-file", type=Path, required=True)
+    p_receipt.add_argument("--receipt-file", type=Path, default=RECEIPT_PATH)
+
+    p_validate = sub.add_parser("validate-receipts", help="Check portable semantic receipts without a DB")
+    p_validate.add_argument("--receipt-file", type=Path, default=RECEIPT_PATH)
+    p_validate.add_argument("--slug", action="append", help="Check selected dossier (repeatable)")
+    p_validate.add_argument("--json", action="store_true")
+    p_validate.add_argument("--output", type=Path)
 
     sub.add_parser("status", help="Show review status from DB")
 
@@ -1273,6 +1415,23 @@ def main():
         cmd_ingest_llm(args)
     elif args.command == "llm-status":
         cmd_llm_status(args)
+    elif args.command == "receipt":
+        try:
+            receipt = store_receipt(json.loads(args.review_file.read_text()), args.receipt_file)
+        except (OSError, ValueError, KeyError) as exc:
+            parser.error(str(exc))
+        print(f"Stored {receipt['verdict']} review of {receipt['slug']} in {args.receipt_file}")
+    elif args.command == "validate-receipts":
+        result = validate_receipts(args.receipt_file, slugs=args.slug)
+        if args.output:
+            args.output.write_text(json.dumps(result, indent=2) + "\n")
+        if args.json:
+            print(json.dumps(result, indent=2))
+        else:
+            print(f"Dossier receipts: {result['status']} ({len(result['failures'])} issues)")
+            for failure in result["failures"]:
+                print(f"  {failure['slug']}: {failure['reason']}")
+        raise SystemExit(0 if result["status"] == "passed" else 1)
     else:
         parser.print_help()
 

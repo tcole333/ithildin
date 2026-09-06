@@ -1,0 +1,337 @@
+{
+  "inputs": [
+    {
+      "track": "suffolk",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/suffolk/events.csv",
+      "rows": 38,
+      "sha256": "6cdb4e2549af96081474b0d79ab6cbab5599928a4622a974d4974bcaab65ecfc"
+    },
+    {
+      "track": "plymouth",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/plymouth/events.csv",
+      "rows": 20,
+      "sha256": "ac54316258a40c6ccc168a8e906fd4c556dd2a8c185e208cf9dcfda3aee14894"
+    },
+    {
+      "track": "other-counties",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/other-counties/events.csv",
+      "rows": 8,
+      "sha256": "e8f5bcaaf32247b2f2eca3d352273a4d706183b3d17589651f83b91467a82f3e"
+    },
+    {
+      "track": "probate-family",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/probate-family/events.csv",
+      "rows": 0,
+      "sha256": "a62ac968bd6d02d62a2f87631d88c507776fca1e2c112f1240b15d863f07e0c0"
+    },
+    {
+      "track": "local-courts",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/local-courts/events.csv",
+      "rows": 18,
+      "sha256": "5a9aad1d8ae3bf1ec2255adefeac8c5ef72a67cf9c2678a9d572f7e3d81f5b7d"
+    },
+    {
+      "track": "capital",
+      "path": "/Users/travcole/projects/osint-research/investigations/hassan-boston/evidence/wave3/capital/property-events.csv",
+      "rows": 0,
+      "sha256": "7cffeefc20b4b8aa94fe418f1a46a63723214a45139910ac92a2db4fa807b971"
+    }
+  ],
+  "missing_tracks": [],
+  "prior_events": 442,
+  "new_track_observations": 84,
+  "superseded_events": 20,
+  "superseded_event_ids": [
+    "middlesex-south-83538-298",
+    "MA-MIDDLESEX-1781CV02053-20181107-HEARING",
+    "plymouth-5787-169-deed",
+    "plymouth-11586-233-mortgage",
+    "MA-SUFFOLK-RAINBOWS-20240206-COMPLAINT",
+    "US-MA-SUFFOLK:RECORDED:56448/317:0501162000",
+    "US-MA-SUFFOLK:RECORDED:19678/333:0501164000",
+    "US-MA-SUFFOLK:RECORDED:19679/1:0501164000",
+    "US-MA-SUFFOLK:RECORDED:27659/170:0501164000",
+    "US-MA-SUFFOLK:RECORDED:56617/271:0501164000",
+    "US-MA-SUFFOLK:RECORDED:21956/113:0502425000",
+    "US-MA-SUFFOLK:RECORDED:21956/120:0502425000",
+    "US-MA-SUFFOLK:RECORDED:56617/279:0502425000",
+    "US-MA-SUFFOLK:RECORDED:20630/164:0503224000",
+    "US-MA-SUFFOLK:RECORDED:56617/267:0503224000",
+    "US-MA-SUFFOLK:RECORDED:20630/164:0503225000",
+    "US-MA-SUFFOLK:RECORDED:20630/170:0503225000",
+    "US-MA-SUFFOLK:RECORDED:20630/196:0503225000",
+    "US-MA-SUFFOLK:RECORDED:56617/267:0503225000",
+    "MA-COURT:FINDING:15579:FAMILY-CONTEXT"
+  ],
+  "instrument_property_joins_for_review": [
+    {
+      "instrument": [
+        "middlesex-south",
+        "recorded",
+        "83538/298"
+      ],
+      "prior_properties": [
+        "middlesex-south-groton-3-summit"
+      ],
+      "new_properties": [
+        "middlesex-groton-3-summit-lot108"
+      ]
+    },
+    {
+      "instrument": [
+        "plymouth",
+        "recorded",
+        "11586/233"
+      ],
+      "prior_properties": [
+        "plymouth-hull-25-084"
+      ],
+      "new_properties": [
+        "plymouth-hull-25-084"
+      ]
+    },
+    {
+      "instrument": [
+        "plymouth",
+        "recorded",
+        "5787/169"
+      ],
+      "prior_properties": [
+        "plymouth-hull-25-084"
+      ],
+      "new_properties": [
+        "plymouth-hull-25-084"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "19678/333"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "19679/1"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "20630/164"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "20630/170"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "20630/196"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "21956/113"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "21956/120"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "27659/170"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "56448/317"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501162000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501162000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "56617/267"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0503224000",
+        "US-MA-SUFFOLK:PARCEL:0503225000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "56617/271"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0501164000"
+      ]
+    },
+    {
+      "instrument": [
+        "suffolk",
+        "recorded",
+        "56617/279"
+      ],
+      "prior_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ],
+      "new_properties": [
+        "US-MA-SUFFOLK:PARCEL:0502425000"
+      ]
+    }
+  ],
+  "events": 506,
+  "property_context_groups": 75,
+  "by_county": {
+    "Middlesex": 13,
+    "Norfolk": 6,
+    "Plymouth": 42,
+    "Suffolk": 445
+  },
+  "by_event_type": {
+    "court_hearing": 1,
+    "court_summary_judgment_order": 1,
+    "court_damages_clarification": 1,
+    "court_corrected_judgment": 1,
+    "court_judgment_satisfied": 1,
+    "mortgage": 11,
+    "mortgage_discharge": 10,
+    "quitclaim_deed": 1,
+    "transfer_certificate_of_title": 1,
+    "assessment_snapshot": 1,
+    "deed_indexed": 2,
+    "homestead_declaration_indexed": 1,
+    "deed": 24,
+    "deed_with_life_estate": 1,
+    "assessor_history": 6,
+    "manager_authority_certificate": 1,
+    "assessment_observation": 150,
+    "trust_declaration": 5,
+    "trustee_removal_recording": 1,
+    "trustee_resignation_recording": 1,
+    "mortgage_assignment": 3,
+    "trustee_certificate": 6,
+    "court_sworn_affidavit": 1,
+    "lease_allegation": 1,
+    "court_pleading_trust_reference": 3,
+    "mortgage_index_candidate": 3,
+    "foreclosure_deed_index_candidate": 2,
+    "deed_index_candidate": 5,
+    "unit_deed_index_candidate": 1,
+    "municipal_permit": 197,
+    "demolition_permit": 3,
+    "court_order": 8,
+    "court_conveyance_order": 1,
+    "trust_declaration_recorded": 5,
+    "deed_recorded": 9,
+    "trustee_certificate_conveyance_authority": 5,
+    "lien_index_candidate": 5,
+    "development_approval": 1,
+    "term_conveyance_with_reserved_rights": 1,
+    "foreclosure_deed": 1,
+    "mortgage_release": 1,
+    "court_jury_judgment": 1,
+    "court_mechanics_lien_judgment": 1,
+    "court_appeal_withdrawn": 1,
+    "trustee_certificate_loan_authority": 2,
+    "financing_statement": 2,
+    "financing_statement_continuation": 2,
+    "financing_statement_termination": 2,
+    "court_complaint": 2,
+    "court_amended_judgment": 1,
+    "court_partial_summary_judgment": 1,
+    "court_attachment_order": 1,
+    "attachment_recorded": 2,
+    "court_appeal_entry": 2,
+    "tax_lien_index_candidate": 1,
+    "alleged_family_agreement": 1,
+    "court_stipulated_dismissal": 1
+  },
+  "interpretation": "Observation and research-context counts, not current property totals."
+}

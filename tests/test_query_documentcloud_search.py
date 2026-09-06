@@ -82,3 +82,44 @@ def test_search_rejects_unfiltered_list_response(monkeypatch, tmp_path, capsys):
     assert exc_info.value.code == 1
     assert not output.exists()
     assert "refusing potentially unfiltered documents" in capsys.readouterr().err
+
+
+def test_quoted_search_filters_token_cooccurrence_against_document_text(
+    monkeypatch,
+    tmp_path,
+    capsys,
+):
+    output = tmp_path / "exact-phrase.json"
+    monkeypatch.setattr(
+        query_documentcloud,
+        "_request",
+        lambda url: {
+            "count": 2,
+            "escaped": False,
+            "results": [
+                {"id": "1", "slug": "manifest", "title": "Flight manifest"},
+                {"id": "2", "slug": "memo", "title": "Interview memo"},
+            ],
+            "next": None,
+        },
+    )
+    monkeypatch.setattr(
+        query_documentcloud,
+        "_fetch_text",
+        lambda url: (
+            "FULLER GREG | BEHM MICHAEL"
+            if "/1/" in url
+            else "The witness was Greg\nBehm, according to the memo."
+        ),
+    )
+
+    query_documentcloud.cmd_search(
+        _args(output, query='"Greg Behm"', project=None, limit=10)
+    )
+
+    result = json.loads(output.read_text())
+    assert [doc["id"] for doc in result] == ["2"]
+    assert result[0]["_search_match"] == "exact_phrase_verified"
+    captured = capsys.readouterr()
+    assert "exact phrase verified" in captured.out
+    assert "excluded 1 DocumentCloud token-cooccurrence candidate" in captured.err

@@ -1,0 +1,34 @@
+"""Isolated demonstration: ambient profile changes between writes in one task."""
+import json
+import sqlite3
+import tempfile
+from pathlib import Path
+from tools import investigation_context as context
+from tools import lead_tracker as leads
+
+with tempfile.TemporaryDirectory(prefix='profile-repro-', dir='/tmp/osint-SXYkyRSJ') as temporary:
+    fixture_db = Path(temporary) / 'fixture.db'
+    fixture_profiles = Path(temporary) / 'investigations'
+    fixture_profiles.mkdir()
+    for name in ('review-a', 'review-b'):
+        folder = fixture_profiles / name
+        folder.mkdir()
+        (folder / 'config.yaml').write_text(f'primary_subject: {name}\n')
+    context.DB_PATH = leads.DB_PATH = fixture_db
+    context.INVESTIGATIONS_DIR = fixture_profiles
+    leads._schema_initialized = False
+    connection = leads.get_db()
+    connection.close()
+    context.set_active_profile('review-a')
+    first = leads.add_lead('Task A first write')
+    # Models another task using the documented profile switch command.
+    context.set_active_profile('review-b')
+    second = leads.add_lead('Task A follow-up, same calling process')
+    third = leads.add_lead('Task A explicitly pinned write', profile_id='review-a')
+    connection = sqlite3.connect(f'file:{fixture_db}?mode=ro', uri=True)
+    rows = connection.execute('SELECT title,profile_id FROM leads WHERE id IN (?,?,?) ORDER BY id', (first, second, third)).fetchall()
+    connection.close()
+    print(json.dumps(rows, indent=2))
+    assert rows[0][1] == 'review-a'
+    assert rows[1][1] == 'review-b'
+    assert rows[2][1] == 'review-a'

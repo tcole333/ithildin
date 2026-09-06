@@ -18,12 +18,11 @@ Quality bar: Better to generate 3 genuinely interesting hunches than 20 obvious 
 - `--thread N`: focus on a specific thread
 
 ### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
+Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
+resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
+`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
+environment for corpus tools, dates, threads, people, and jurisdictions; use
+those values throughout this skill. Do not change the shared active profile.
 
 ## Process
 
@@ -87,7 +86,7 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 - Example: "Gratitude America and Black Family Foundation both fund Melanoma Research Alliance"
 
 **f) Unexplained gaps**
-- High-activity targets with sudden silence periods (no findings for 6+ months in an otherwise active timeline)
+- Gaps of six or more months in collected findings: measure source coverage and collection effort before treating them as inactivity
 - Targets with many connections but zero entity registrations (or vice versa)
 
 **g) Naming pattern analysis**
@@ -96,25 +95,25 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 
 **h) Alumni dispersal patterns**
 - Run `uv run python tools/pillar_tracker.py dispersal "INSTITUTION" --output $WORKDIR/dispersal.json` for dissolved institutions
-- Look for coordinated movement: 3+ alumni landing at the same destination
+- Compare shared destinations for 3+ alumni with normal hiring channels, industry concentration, and institution size
 - Example: "4 alumni from a dissolved institution all landed at the same firm — known names plus an unexpected fourth person"
 
 **i) Cross-pillar broker detection**
 - Run `uv run python tools/pillar_tracker.py score --top 20 --output $WORKDIR/scores.json`
 - Look for unexpected names in orchestrator rankings — people who span banking + legal + government
-- Flag anyone with revolving_door score > 0
+- Inspect nonzero revolving_door scores as candidate transitions; assess role relevance and the background transition rate
 
 **j) Nonprofit funding network concentration**
 - Identify nonprofits mentioned in 3+ investigation threads via findings search
 - For each, run `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/hunch-990-flow-<EIN>.json` to see their funding constellation
-- Look for: same set of funders backing recipients across multiple threads (coordinated funding network)
+- Look for: same funders backing recipients across threads; compare shared mission, grant eligibility, and donor concentration before testing coordination
 - Look for: circular flows between investigation-linked nonprofits (A funds B which funds A back)
 - Look for: shared officers across investigation-linked nonprofits via `uv run python tools/query_990.py shared-officers <EIN1> <EIN2> ... --output $WORKDIR/hunch-990-shared.json`
-- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — coordinated funding constellation"
+- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — overlapping grant recipients; test common eligibility and shared strategy as alternatives"
 
 **k) Missing pillar analysis**
 - Run `uv run python tools/pillar_tracker.py gaps --person "NAME"` for key actors
-- If a known operator has no legal connections, that's suspicious — lawyers leave fewer traces
+- Missing legal connections describe a collection gap; check expected record coverage, naming, and disclosure requirements before inferring an undisclosed relationship
 - Example: "A key actor has banking, operations, philanthropy arcs but no legal firm arcs (despite using many firms)"
 
 **l) Procurement acceleration clustering**
@@ -123,7 +122,7 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 - Flag companies with >50% YoY contract growth in the most recent fiscal year
 - Cross-reference with lobbying data: `uv run python tools/query_lobbying.py client "<COMPANY>" --output $WORKDIR/hunch-lobby-<slug>.json`
 - Check for partnership overlaps: do accelerating companies team together on the same contract vehicles?
-- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — coordinated defense tech acceleration"
+- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — simultaneous growth; compare agency budgets, sector growth, acquisitions, and shared procurement decisions"
 
 ### 5. Novelty Filter (Critical)
 
@@ -132,7 +131,8 @@ For each potential pattern found, apply these filters:
 1. **Already known?** Check existing hypotheses and tags — skip if already captured
 2. **Obviously connected?** Skip patterns between directly-connected actors — that's expected
 3. **3+ independent contexts?** Require the pattern to appear in 3+ independent findings/entities, not just one finding's detail text
-4. **Genuinely surprising?** Ask: "Would an investigator who knows the full case find this interesting?" If not, skip
+4. **Coverage and base rate?** Check whether the pattern survives collection gaps, shared exposure, and a relevant comparison group. Record a discriminating test rather than treating overlap as coordination.
+5. **Genuinely surprising?** Ask: "Would an investigator who knows the full case find this interesting?" If not, skip
 
 ### 6. Record Genuine Hunches
 

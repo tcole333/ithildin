@@ -9,7 +9,7 @@ Tools for relationship mapping, offshore entity tracing, sanctions screening, co
 | Tool | Data Source | Auth | Size |
 |------|-----------|------|------|
 | `query_littlesis.py` | LittleSis power network | None | 500K+ relationships |
-| `query_icij.py` | ICIJ Offshore Leaks (Neo4j) | None (local DB) | 800K entities |
+| `query_icij.py` | ICIJ Offshore Leaks (official reconciliation API + node pages) | None | 810K+ records; local Neo4j optional for deeper traversal |
 | `query_opencorporates.py` | OpenCorporates global registry | `OPENCORPORATES_API_KEY` | 200M+ companies |
 | `query_opensanctions.py` | OpenSanctions bulk data | None (local DB) | 4.1M entities |
 | `query_gleif.py` | GLEIF Legal Entity Identifiers | None | 2M+ LEIs |
@@ -39,32 +39,42 @@ Category IDs: 1=Position, 2=Education, 3=Membership, 4=Family, 5=Donation, 6=Tra
 
 ### query_icij.py -- ICIJ Offshore Leaks
 
-Neo4j graph database of offshore entities from Panama Papers, Paradise Papers, Pandora Papers, etc. Also has a reconciliation API that works without Neo4j.
+Official remote access to more than 810,000 offshore records from the Panama
+Papers, Paradise Papers, Pandora Papers, Bahamas Leaks, and Offshore Leaks.
+Bounded name matching uses ICIJ's reconciliation API; entity properties and
+first-hop relationships come from the graph embedded in the public node page.
 
 ```bash
-# Neo4j commands (requires running: ./scripts/start_icij_db.sh)
+# Default: official remote API/public node pages (no local service)
 uv run python tools/query_icij.py search "Jeffrey Epstein"
 uv run python tools/query_icij.py search "Liquid Funding" --type Entity
-uv run python tools/query_icij.py entity 80063035
-uv run python tools/query_icij.py connections "Liquid Funding" --depth 2
-uv run python tools/query_icij.py officers "Financial Trust"
+uv run python tools/query_icij.py entity 82004676
+uv run python tools/query_icij.py connections 82004676
+uv run python tools/query_icij.py officers 82004676
 
-# Reconciliation API (no Neo4j needed, uses ICIJ REST API)
+# Explicit reconciliation and batch matching
 uv run python tools/query_icij.py reconcile "Financial Trust Company"
 uv run python tools/query_icij.py reconcile-all --threshold 85
 uv run python tools/query_icij.py reconcile-all --create-leads --threshold 85
+
+# Optional local Neo4j only for deeper/bulk traversal
+./scripts/start_icij_db.sh
+uv run python tools/query_icij.py connections 82004676 --depth 2 --local
 ```
 
 | Subcommand | Requires Neo4j | Description |
 |------------|---------------|-------------|
-| `search` | Yes | Search by name across Entity, Officer, Intermediary types |
-| `entity` | Yes | Get entity by node_id with all properties |
-| `connections` | Yes | Graph traversal with configurable depth |
-| `officers` | Yes | Officers/directors of matching entities |
+| `search` | No | Reconcile by name across Entity, Officer, Intermediary types |
+| `entity` | No | Get a numeric node ID's properties from its public page |
+| `connections` | No for depth 1 | First-hop graph; `--local` required for deeper traversal |
+| `officers` | No | Officers/directors in a numeric or exact-name entity's first hop |
 | `reconcile` | No | Match a single name against ICIJ Reconciliation API |
 | `reconcile-all` | No | Batch reconcile all investigation.db entities |
 
-**Auth:** None. Neo4j must be running locally at `bolt://localhost:7689` for graph queries. Start with `./scripts/start_icij_db.sh`.
+**Auth:** None. Remote queries are bounded: reconciliation returns at most 25
+candidates and node pages are capped at 5 MB. Connections refuse unconfirmed
+fuzzy-name traversal; review `search` output and pass a numeric node ID. Local
+Neo4j at `bolt://localhost:7689` is optional and only needed with `--local`.
 
 ### query_opencorporates.py -- Global Corporate Registry
 
@@ -202,7 +212,7 @@ uv run python tools/ingest_bic.py stats
 | Tool | Auth | Env Variable | Tier/Limits |
 |------|------|-------------|-------------|
 | `query_littlesis.py` | None | -- | Aggressive 503s; built-in retry |
-| `query_icij.py` | None (local Neo4j) | -- | Start DB first: `./scripts/start_icij_db.sh` |
+| `query_icij.py` | None (official remote API/pages) | -- | Local Neo4j optional for depth > 1 |
 | `query_opencorporates.py` | API key required | `OPENCORPORATES_API_KEY` | 500/month, 200/day (basic) |
 | `query_opensanctions.py` | None (bulk download) | -- | One-time download + ingest |
 | `query_gleif.py` | None | -- | 60 req/min |
@@ -212,7 +222,7 @@ uv run python tools/ingest_bic.py stats
 
 ## Known Quirks
 
-- **ICIJ Neo4j must be running locally.** Graph queries fail without it. The `reconcile` and `reconcile-all` subcommands work via ICIJ's REST API and do NOT require Neo4j.
+- **ICIJ node REST view is currently unreliable.** The advertised `/api/v1/rest/nodes/{id}` endpoint returned HTTP 500 in July 2026, so bounded detail/first-hop queries parse `document.body.nodeData` from the official public node page. Use `--local` only for deeper graph traversal.
 - **OpenCorporates quota burns fast.** 500 calls/month on basic tier. Use `account-status` to check remaining calls. Prefer jurisdiction-scoped queries over global searches to get better results per call.
 - **OpenSanctions requires download + ingest.** The `search` command will fail until you run `download` then `ingest`. The ingest builds FTS5 indexes locally for fast search.
 - **FinCEN contains ONLY bank names.** No individual person names. If a search returns 0 results for a person, this is expected. Cross-reference SAR IDs against published ICIJ reporting for person-level connections.

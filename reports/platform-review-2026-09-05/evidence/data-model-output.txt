@@ -1,0 +1,6 @@
+fresh_schema_tables {'finding_entities': False, 'finding_relations': False, 'investigation_profiles': False, 'schema_migrations': False}
+verified_summary_correction {'summary': 'An entirely different allegation.', 'verification_status': 'verified', 'verified_by': 'fixture-reviewer'}
+corrected_subject_link ('Unrelated Organization Inc', 'Original Company LLC', 'Original Company LLC')
+confirmed_inference_after_correction_and_verify {'claim_type': 'inference', 'confidence': 'confirmed', 'verification_status': 'verified'}
+confidence_correction {'claim_type': 'inference', 'confidence': 'confirmed', 'verification_status': 'verified'}
+alias_jurisdiction_resolution {'first': {'entity_id': 2, 'action': 'created', 'matched_name': 'Example Holdings LLC', 'score': None}, 'variant': {'entity_id': 2, 'action': 'fuzzy', 'matched_name': 'Example Holdings LLC', 'score': 100.0}, 'florida': {'entity_id': 2, 'action': 'alias', 'matched_name': 'Example Holdings LLC', 'score': 100.0}, 'stored': {'id': 2, 'name': 'Example Holdings LLC', 'jurisdiction': 'Delaware', 'ein': '11-1111111'}}

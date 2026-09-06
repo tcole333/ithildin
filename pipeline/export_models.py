@@ -9,7 +9,12 @@ import json
 import sys
 from pathlib import Path
 
-MODELS_DIR = Path(__file__).parent.parent / "content" / "models"
+try:
+    from .paths import CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR
+
+MODELS_DIR = CONTENT_DIR / "models"
 
 REQUIRED_FIELDS = [
     "id", "version", "title", "subtitle", "archetype", "definition",

@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ithildin.app',
+  publicDir: process.env.ITHILDIN_WEB_PUBLIC_DIR || './.cache/public',
   integrations: [react()],
 
   vite: {

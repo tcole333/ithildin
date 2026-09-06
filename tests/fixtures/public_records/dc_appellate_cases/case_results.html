@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head><title>Case Search</title></head>
+  <body>
+    <form id="paginatedSearchForm" method="post" action="/public/caseSearch.do">
+      <input name="csNumber" value="">
+      <input name="shortTitle" value="Smith">
+      <input name="lcCsNumber" value="">
+      <input name="fromDt" value="">
+      <input name="toDt" value="">
+      <input name="startRow" value="1">
+      <input name="displayRows" value="50">
+    </form>
+    <table>
+      <tr><td>1 to 2 of 2 rows are displayed.</td></tr>
+    </table>
+    <table class="FormTable">
+      <tr class="TableHeading"><td colspan="7">Search Results</td></tr>
+      <tr class="TableSubHeading">
+        <td>Case No.</td>
+        <td>Short Caption</td>
+        <td>Group</td>
+        <td>Type</td>
+        <td>Subtype</td>
+        <td>Status</td>
+        <td>Superior Court or Agency Case Number</td>
+      </tr>
+      <tr class="OddRow">
+        <td><a href="/public/caseView.do?csIID=32210">99-CV-1385</a></td>
+        <td>BYRON SMITH V. DISTRICT OF COLUMBIA</td>
+        <td>Appeals</td>
+        <td>Civil</td>
+        <td>Other Civil</td>
+        <td>Closed</td>
+        <td>1998-CA-007597</td>
+      </tr>
+      <tr class="EvenRow">
+        <td><a href="/public/caseView.do?csIID=32324">99-SP-1539</a></td>
+        <td>DARRYL J. SMITH V. HONORABLE HENRY GREENE</td>
+        <td>Appeals</td>
+        <td>Special Proceedings</td>
+        <td>Pet. For A Writ Of Mandamus</td>
+        <td>Closed</td>
+        <td>Not Specified</td>
+      </tr>
+    </table>
+  </body>
+</html>

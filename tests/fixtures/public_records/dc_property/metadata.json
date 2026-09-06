@@ -1,0 +1,52 @@
+{
+  "currentVersion": 11.5,
+  "id": 40,
+  "name": "Owner Polygons (Common Ownership Layer)",
+  "type": "Feature Layer",
+  "description": "Daily common ownership layer generated from current vector-property mapping and ITSPE information.",
+  "geometryType": "esriGeometryPolygon",
+  "capabilities": "Query,Map,Data",
+  "maxRecordCount": 1000,
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "supportsStatistics": true,
+  "sourceSpatialReference": {
+    "wkid": 102685,
+    "latestWkid": 2248
+  },
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsOrderBy": true,
+    "supportsStatistics": true
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "alias": "OBJECTID",
+      "type": "esriFieldTypeOID"
+    },
+    {
+      "name": "SSL",
+      "alias": "Square, Suffix, Lot",
+      "type": "esriFieldTypeString"
+    },
+    {
+      "name": "OWNERNAME",
+      "alias": "Owner Name",
+      "type": "esriFieldTypeString"
+    },
+    {
+      "name": "SHAPE",
+      "alias": "Shape",
+      "type": "esriFieldTypeGeometry"
+    }
+  ],
+  "relationships": [
+    {
+      "id": 10,
+      "name": "DCGIS.SURDOCS",
+      "relatedTableId": 69,
+      "keyField": "SSL",
+      "cardinality": "esriRelCardinalityOneToMany"
+    }
+  ]
+}

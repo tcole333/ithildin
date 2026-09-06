@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetViewCollectionResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetViewCollectionResult>
+        <Views>
+          <View
+            Name="{C4B238D3-A4D0-4728-A8F4-D6691300285E}"
+            Type="HTML"
+            DisplayName="Judges"
+            Url="/courts/Lists/Judges/Judges.aspx"
+            Level="1"
+            BaseViewID="1"
+          />
+          <View
+            Name="{5B91361C-C281-4E28-8897-78AE1DDD0BC7}"
+            Type="HTML"
+            DisplayName="Supreme"
+            Url="/courts/Lists/Judges/Supreme.aspx"
+            Level="1"
+            BaseViewID="1"
+          />
+          <View
+            Name="{99999999-9999-9999-9999-999999999999}"
+            DefaultView="TRUE"
+            Type="HTML"
+            DisplayName="New Source View"
+            Url="/courts/Lists/Judges/New.aspx"
+            Level="1"
+            BaseViewID="1"
+          />
+        </Views>
+      </GetViewCollectionResult>
+    </GetViewCollectionResponse>
+  </soap:Body>
+</soap:Envelope>

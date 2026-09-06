@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { execFileSync } from "node:child_process";
 import { createJiti } from "jiti";
+import { collectChangedContentFiles } from "./changed-content-files.mjs";
 
 const cwd = process.cwd();
 const projectRoot = resolve(cwd, "..");
@@ -24,52 +24,18 @@ const changedFilesMode = args.has("--changed-files");
 const baseRef = readArgValue("--base-ref") || process.env.SUPPORT_COVERAGE_BASE_REF || "";
 const headRef = readArgValue("--head-ref") || process.env.SUPPORT_COVERAGE_HEAD_REF || "HEAD";
 
-function runGit(argsList) {
-  try {
-    return execFileSync("git", argsList, { cwd: projectRoot, encoding: "utf-8" }).trim();
-  } catch {
-    return "";
-  }
-}
-
-function normalizeRepoPath(path) {
-  const normalized = String(path || "")
-    .trim()
-    .replace(/\\/g, "/")
-    .replace(/^\.\//, "");
-  if (normalized.startsWith("site/")) {
-    return normalized.slice("site/".length);
-  }
-  return normalized;
-}
-
 function isCoverageTrackedContent(path) {
-  return /^content\/articles\/.+\.mdx$/.test(path) || /^content\/dossiers\/[^/]+\.json$/.test(path);
+  return /^content\/articles\/.+\.mdx$/.test(path) || /^content\/dossiers\/(?!_)[^/]+\.json$/.test(path);
 }
 
 function getChangedContentFiles() {
   if (!changedFilesMode) return null;
-
-  /** @type {string[]} */
-  const candidates = [];
-  if (baseRef) {
-    const rangeOutput = runGit(["diff", "--name-only", "--diff-filter=ACMR", `${baseRef}...${headRef}`]);
-    if (rangeOutput) {
-      candidates.push(...rangeOutput.split("\n"));
-    }
-  } else {
-    const unstaged = runGit(["diff", "--name-only", "--diff-filter=ACMR"]);
-    const staged = runGit(["diff", "--name-only", "--diff-filter=ACMR", "--cached"]);
-    if (unstaged) candidates.push(...unstaged.split("\n"));
-    if (staged) candidates.push(...staged.split("\n"));
-  }
-
-  const out = new Set();
-  for (const rawPath of candidates) {
-    const file = normalizeRepoPath(rawPath);
-    if (isCoverageTrackedContent(file)) out.add(file);
-  }
-  return out;
+  return collectChangedContentFiles({
+    projectRoot,
+    baseRef,
+    headRef,
+    isTrackedContent: isCoverageTrackedContent,
+  });
 }
 
 const jiti = createJiti(import.meta.url);

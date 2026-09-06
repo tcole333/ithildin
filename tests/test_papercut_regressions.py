@@ -125,11 +125,44 @@ def test_profile_thread_mapping_exposes_global_ids(monkeypatch):
     db.row_factory = sqlite3.Row
     db.execute("CREATE TABLE investigation_threads (id INTEGER, title TEXT, profile_id TEXT)")
     db.execute("INSERT INTO investigation_threads VALUES (81, 'Core', 'sample')")
-    monkeypatch.setattr(investigation_context, "_get_db", lambda: db)
+    monkeypatch.setattr(investigation_context, "_get_read_db", lambda: db)
     profile = investigation_context.InvestigationProfile(
         name="sample", primary_subject="Subject", threads=[{"id": 1, "name": "Core"}]
     )
     assert investigation_context.get_global_thread_ids(profile) == {1: 81}
+
+
+def test_active_profile_read_does_not_contend_with_an_open_writer(
+    tmp_path, monkeypatch
+):
+    from tools import investigation_context
+
+    db_path = tmp_path / "investigation.db"
+    setup = sqlite3.connect(db_path)
+    setup.execute("PRAGMA journal_mode=WAL")
+    setup.execute(
+        "CREATE TABLE investigation_config "
+        "(key TEXT PRIMARY KEY, value TEXT NOT NULL)"
+    )
+    setup.execute(
+        "INSERT INTO investigation_config VALUES ('active_profile', 'sample')"
+    )
+    setup.commit()
+
+    writer = sqlite3.connect(db_path)
+    writer.execute("BEGIN IMMEDIATE")
+    writer.execute(
+        "UPDATE investigation_config SET value = 'uncommitted' "
+        "WHERE key = 'active_profile'"
+    )
+    monkeypatch.setattr(investigation_context, "DB_PATH", db_path)
+
+    try:
+        assert investigation_context.get_active_profile_name() == "sample"
+    finally:
+        writer.rollback()
+        writer.close()
+        setup.close()
 
 
 def test_log_search_validates_registered_session(tmp_path, monkeypatch):
@@ -151,6 +184,184 @@ def test_log_search_validates_registered_session(tmp_path, monkeypatch):
     db = lead_tracker.get_db()
     row = db.execute("SELECT session_id FROM search_log WHERE query_text='query'").fetchone()
     assert row["session_id"] == session_id
+    db.close()
+
+
+def test_profile_stats_label_unscoped_search_totals_global(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.log_search("query", "source", 1)
+
+    stats = lead_tracker.get_stats(profile_id="test")
+
+    assert stats["profile_id"] == "test"
+    assert stats["total_searches"] == 1
+    assert stats["search_scope"] == "global"
+
+
+def test_lead_stats_recent_completion_excludes_other_terminal_statuses(
+    tmp_path, monkeypatch
+):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    completed = lead_tracker.add_lead("Completed lead", profile_id="test")
+    dead_end = lead_tracker.add_lead("Dead-end lead", profile_id="test")
+    db = lead_tracker.get_db()
+    db.execute(
+        "UPDATE leads SET status = 'completed', completed_at = datetime('now') "
+        "WHERE id = ?",
+        (completed,),
+    )
+    db.execute(
+        "UPDATE leads SET status = 'dead_end', completed_at = datetime('now') "
+        "WHERE id = ?",
+        (dead_end,),
+    )
+    db.commit()
+    db.close()
+
+    assert lead_tracker.get_stats(profile_id="test")["recently_completed"] == 1
+
+
+def test_lead_search_accepts_a_result_limit(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.add_lead("Needle alpha", profile_id="test")
+    lead_tracker.add_lead("Needle beta", profile_id="test")
+
+    assert len(lead_tracker.search_leads("Needle", profile_id="test", limit=1)) == 1
+
+
+def test_lead_evidence_classifies_https_before_file_paths(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    url = "https://www.courtlistener.com/api/rest/v4/documents/123/"
+    lead_id = lead_tracker.add_lead(
+        "URL evidence lead",
+        profile_id="test",
+        evidence=[url],
+    )
+
+    evidence = lead_tracker.get_lead(lead_id)["evidence"]
+    assert [(row["evidence_type"], row["evidence_ref"]) for row in evidence] == [
+        ("url", url)
+    ]
+
+
+def test_existing_lead_can_be_assigned_to_a_profile_thread(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_id = lead_tracker.add_lead("Unthreaded lead", profile_id="test")
+    db = lead_tracker.get_db()
+    thread_id = db.execute(
+        "INSERT INTO investigation_threads (title, profile_id) VALUES (?, ?)",
+        ("Test thread", "test"),
+    ).lastrowid
+    db.commit()
+    db.close()
+
+    assert lead_tracker.assign_lead_thread(lead_id, thread_id)
+    assigned = lead_tracker.get_lead(lead_id)
+    assert assigned["thread_id"] == thread_id
+    assert any("Assigned to investigation thread" in note["note"] for note in assigned["notes"])
+
+
+def test_block_lead_preserves_structured_stop_reason(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_id = lead_tracker.add_lead("Await a nonpublic filing", profile_id="test")
+
+    lead_tracker.block_lead(lead_id, "The filing is not public until 2027-01-15")
+
+    db = lead_tracker.get_db()
+    lead = db.execute(
+        "SELECT status, stop_reason FROM leads WHERE id = ?",
+        (lead_id,),
+    ).fetchone()
+    note = db.execute(
+        "SELECT note FROM lead_notes WHERE lead_id = ? ORDER BY id DESC LIMIT 1",
+        (lead_id,),
+    ).fetchone()
+    assert tuple(lead) == ("blocked", "The filing is not public until 2027-01-15")
+    assert note["note"] == "BLOCKED: The filing is not public until 2027-01-15"
+    db.close()
+
+
+def test_reopen_lead_clears_stale_claim_and_block_state(tmp_path, monkeypatch):
+    from tools import lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_id = lead_tracker.add_lead("Reopen a closed lead", profile_id="test")
+    db = lead_tracker.get_db()
+    db.execute(
+        """
+        UPDATE leads
+        SET status = 'blocked',
+            claimed_by = 'stale-agent',
+            claimed_at = '2026-01-01T00:00:00',
+            lease_until = '2026-01-01T02:00:00',
+            completed_at = '2026-01-01T03:00:00',
+            stop_reason = 'Waiting on access',
+            blocked_by_infra_id = NULL
+        WHERE id = ?
+        """,
+        (lead_id,),
+    )
+    db.commit()
+    db.close()
+
+    lead_tracker.reopen_lead(lead_id)
+
+    reopened = lead_tracker.get_lead(lead_id)
+    assert reopened["status"] == "open"
+    for field in (
+        "claimed_by",
+        "claimed_at",
+        "lease_until",
+        "completed_at",
+        "stop_reason",
+        "blocked_by_infra_id",
+    ):
+        assert reopened[field] is None
+
+
+def test_infra_block_preserves_structured_stop_reason(tmp_path, monkeypatch):
+    from tools import infra_tracker, lead_tracker
+
+    monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_id = lead_tracker.add_lead("Await registry access", profile_id="test")
+    infra_id = infra_tracker.add_request(
+        "Authenticated registry lookup",
+        "new_source",
+        "Obtain the official filing behind a login",
+    )
+
+    infra_tracker.block_lead_on_infra(lead_id, infra_id, "Login approval is pending")
+
+    db = lead_tracker.get_db()
+    lead = db.execute(
+        "SELECT status, blocked_by_infra_id, stop_reason FROM leads WHERE id = ?",
+        (lead_id,),
+    ).fetchone()
+    assert tuple(lead) == (
+        "blocked",
+        infra_id,
+        f"Waiting on infra request #{infra_id} — Login approval is pending",
+    )
     db.close()
 
 
@@ -194,6 +405,8 @@ def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
         "Target",
         "Verified finding created before its lead link was supplied",
         source_datasets=["courtlistener"],
+        evidence_ids=["COURTLISTENER:fixture-record"],
+        source_quotes={"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
         profile_id="test",
     )
 
@@ -227,6 +440,8 @@ def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
         findings_tracker.add_finding(
             f"Target {index}", "shared searchable phrase", date_of_event="2020",
             source_datasets=["web_search"], profile_id="test",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         for index in range(3)
     ]

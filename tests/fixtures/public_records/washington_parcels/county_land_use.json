@@ -1,0 +1,31 @@
+{
+  "name": "County_Unique_Land_Use_Codes",
+  "maxRecordCount": 2000,
+  "fields": [
+    {"name": "OBJECTID", "alias": "OBJECTID", "type": "esriFieldTypeOID"},
+    {"name": "COUNTY_NM", "alias": "COUNTY_NM", "type": "esriFieldTypeString"},
+    {"name": "CODE", "alias": "CODE", "type": "esriFieldTypeString"},
+    {"name": "CODE_DESC", "alias": "CODE_DESC", "type": "esriFieldTypeString"},
+    {"name": "GlobalID", "alias": "GlobalID", "type": "esriFieldTypeGlobalID"}
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1,
+        "COUNTY_NM": "11",
+        "CODE": "11-10",
+        "CODE_DESC": "10 - HOUSING UNITS, SINGLE FAMILY",
+        "GlobalID": "3726ef49-8447-42b8-8a95-fbd89a9811d4"
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 2,
+        "COUNTY_NM": "1",
+        "CODE": "AG",
+        "CODE_DESC": "AGRICULTURAL",
+        "GlobalID": "24c37b8d-5ae5-4d82-93ae-120b001f16fb"
+      }
+    }
+  ]
+}

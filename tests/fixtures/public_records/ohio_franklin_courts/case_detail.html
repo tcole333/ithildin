@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Case Information Online</title>
+    <script>
+      var images = new Array();
+      images['0000'] = encodeURIComponent('fixture-coordinate-shared-a');
+      images['0001'] = encodeURIComponent('fixture-coordinate-shared-b');
+    </script>
+  </head>
+  <body>
+    <form method="POST" name="search" id="search">
+      <input type="hidden" id="caseYear" name="caseYear_h" value="22">
+      <input type="hidden" id="caseType" name="caseType_h" value="CV">
+      <input type="hidden" id="caseSeq" name="caseSeq_h" value="003098">
+
+      <h1><span>CIVIL CASE DETAIL</span></h1>
+      <section id="case-summary-container">
+        <table id="main">
+          <thead>
+            <tr>
+              <th></th><th>CASE NUMBER</th><th>TYPE of CASE</th>
+              <th>STATUS</th><th>DATE FILED</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td><td>22 CV 003098</td><td>FORECLOSURES</td>
+              <td>CLOSED</td><td>05/09/2022</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="judge-container">
+        <table>
+          <tbody>
+            <tr>
+              <td></td><td>ANDRIA C NOBLE</td>
+              <td>COURTROOM 6F<br>345 SOUTH HIGH STREET<br>COLUMBUS, OH 43215</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="plaintiff-container">
+        <table>
+          <tbody id="plaintiff-body">
+            <tr><td>+</td><td>ADAIR ASSET MANAGEMENT LLC</td><td>JOSEPH L BEYKE</td></tr>
+            <tr id="pladetail0001"><td></td><td>8561 S MASON MONTGOMERY<br>MASON, OH 45040</td><td>BEYKE LAW, LLC</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="defendant-container">
+        <table>
+          <tbody id="defendant-body">
+            <tr><td>+</td><td>SHERRY J KIMBALL</td><td>NO ATTORNEY ON RECORD</td></tr>
+            <tr id="defdetail0001"><td></td><td>3606 LIEB STREET<br>COLUMBUS, OH 43214</td><td></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="case-schedule-container">
+        <table>
+          <tbody id="caseschedule">
+            <tr><td>05/09/22</td><td>CASE FILED</td></tr>
+            <tr><td>SET UPON REQUEST TO CHAMBERS</td><td>FINAL PRETRIAL CONFERENCE</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="docket-container">
+        <input type="hidden" id="prior-docket-key"
+               name="priorDocketKey" value="797378999920000">
+        <input type="hidden" id="next-docket-key"
+               name="nextDocketKey" value="797786999950000">
+        <table id="docket">
+          <tbody id="docket-body">
+            <tr class="T">
+              <td></td><td>07/22/26</td>
+              <td>NOTICE OF FINAL APPEALABLE ORDER</td>
+              <td><a href="javascript:openImageLink('0000')">PDF</a></td>
+              <td>0H954</td><td>N47</td><td>9</td>
+            </tr>
+            <tr class="E">
+              <td></td><td>07/22/26</td><td>CONFIRMATION OF SALE</td>
+              <td><a href="javascript:openImageLink('0001')">PDF</a></td>
+              <td>0H954</td><td>N47</td><td>9</td>
+            </tr>
+            <tr class="F">
+              <td><img id="docimg0003"></td><td>07/10/26</td>
+              <td>SALE PROCEEDS RECEIVED</td><td></td>
+              <td></td><td>00</td><td></td>
+            </tr>
+            <tr id="docdetail0003" class="detail">
+              <td></td>
+              <td colspan="5">
+                <table id="doctable0003">
+                  <tr class="detail"><td>AMOUNT - PAID:</td><td>276600.00</td></tr>
+                  <tr class="detail"><td>NAME:</td><td>BONNIE REALTY SERVICES LLC</td></tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </form>
+  </body>
+</html>

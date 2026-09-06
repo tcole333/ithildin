@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-04T04:51:46.467720+00:00",
+  "method": "Purposeful difficult-case spot-checks against consolidated records, saved page-preserving full text, and freshly rendered local PDF pages. No network calls.",
+  "summary": {
+    "purposeful_cases": 8,
+    "source_documents": 8,
+    "unique_pages_visually_inspected": 9,
+    "consolidated_rows_spot_checked": 9,
+    "issues": 0
+  },
+  "cases": [
+    {
+      "case_id": "ambiguous_outcome",
+      "source_id": "BLB-2020-12-03",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2020/12/Board%27s%20Voting%20Agenda%2012.3.20.pdf",
+      "source_sha256": "e2a8ea18d4ec11024f95de9a008e7dbad55e5535a85406d4606d3fbdb6681b57",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2020/documents/BLB-2020-12-03.pdf",
+      "pages": [
+        8
+      ],
+      "event_ids": [
+        "BLB-2020-12-03-C038-ownership"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2020-12-03-p8.png",
+          "sha256": "620e1fcb648a476d4ae755d0e207151cf3f076db8e32a8c5f7d94e2053182104"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "Grated",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "Visible outcome is Grated; the record remains proposed/unresolved and is withheld from decision counts. Common Victualler context does not state an alcohol license.",
+      "result": "pass",
+      "pending_caveats": [
+        "The disposition is visibly printed 'Grated' on PDF page 8. It appears in the disposition position but is not silently normalized to Granted; the exact printed outcome is unresolved."
+      ]
+    },
+    {
+      "case_id": "withdrawn_additional_pledge",
+      "source_id": "BLB-2021-09-02",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2021/09/Voting%20Agenda%20%28Corrected%29%209-2-21_0.pdf",
+      "source_sha256": "6ab44779bd4b1cb8ea4c6ee3010618855c201d59466798aa230d14c3d7696fe9",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2021/documents/BLB-2021-09-02.pdf",
+      "pages": [
+        1
+      ],
+      "event_ids": [
+        "BLB-2021-09-02-c003-pledge"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2021-09-02-p1.png",
+          "sha256": "7d2305ca313d2bb51fdc8814c68f0834e260a70e6c5f86b5c3705672277f83c4"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "had recently petitioned to transfer the license",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "(additionally) petitions to Pledge the License to LE, Inc.",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "WITHDRAWN",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "Only the additional license pledge receives this withdrawn disposition. The prior transfer and stock/inventory pledge remain context; there is no additional transfer row for this source item.",
+      "result": "pass",
+      "pending_caveats": [
+        "The prior transfer and stock/inventory pledge are historical context; only the additional license-pledge petition receives the withdrawn disposition here."
+      ]
+    },
+    {
+      "case_id": "release_not_new_pledge",
+      "source_id": "BLB-2022-03-24",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2022/03/Voting%20Minutes%203-24-22.docx.pdf",
+      "source_sha256": "73e4b289780099189c5ac2bef216a2197eb43a3efca1f1655eb5ce3e13dfa0e6",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2022/documents/BLB-2022-03-24.pdf",
+      "pages": [
+        19
+      ],
+      "event_ids": [
+        "BLB-2022-03-24-054-notice",
+        "BLB-2022-03-24-055-notice",
+        "BLB-2022-03-24-056-notice"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2022-03-24-p19.png",
+          "sha256": "adf3722e5b342f951e4367c3617b2af1371a166564662eb447136a89f217db3f"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "Release of Pledge of License and Security Interests",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Acknowledged",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "All three visible receipt acknowledgments are routed as pledge_release_acknowledgment, with board_granted_application=false; they do not prove absence of other or later liens.",
+      "result": "pass",
+      "pending_caveats": [
+        "Board acknowledges receipt of release from named creditor; this does not establish absence of other or later security interests.",
+        "Board acknowledges receipt of release from named creditor; this does not establish absence of other or later security interests.",
+        "Board acknowledges receipt of release from named creditor; this does not establish absence of other or later security interests."
+      ]
+    },
+    {
+      "case_id": "malformed_license_prefix",
+      "source_id": "BLB-2022-10-26",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2022/10/Voting%20Minutes%2010-26-22.pdf",
+      "source_sha256": "501737e2d2fffa33ac7cff756fe573e5b1877fe554fb129170671923e33edfcc",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2022/documents/BLB-2022-10-26.pdf",
+      "pages": [
+        9
+      ],
+      "event_ids": [
+        "BLB-2022-10-26-028-transfer"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2022-10-26-p9.png",
+          "sha256": "76cbf9579a0d741826a270fd95959fa76b30d4139261a89985f4172ecfdc225d"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "License #: L-99088",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Granted",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "The PDF prints L-99088. The grant is preserved while normalized LB identity remains null; no missing B is invented.",
+      "result": "pass",
+      "pending_caveats": [
+        "Printed license ID is L-99088, not LB-99088. Normalized LB ID withheld pending independent resolution."
+      ]
+    },
+    {
+      "case_id": "short_printed_license_number",
+      "source_id": "BLB-2023-01-05",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2023/01/1-5-23%20-%20Voting%20Minutes%20-%202nd%20Final%20Draft.pdf",
+      "source_sha256": "4c15c2d2aaddb6054e0d4d616b4bce355d666dc5d3423318cd63903699dc9696",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2023/documents/BLB-2023-01-05.pdf",
+      "pages": [
+        10
+      ],
+      "event_ids": [
+        "BLB-2023-01-05-033-transfer"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2023-01-05-p10.png",
+          "sha256": "3306c15a5832911b5ef108c806dcb6049b2af595287f76a876ee6016fd825e22"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "License #: LB- 9216",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Granted",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "The PDF prints LB- 9216. Whitespace normalization to LB9216 preserves the printed digits; no missing digit or roster substitution is supplied. Matching requires the existing caveat.",
+      "result": "pass",
+      "pending_caveats": [
+        "The PDF visibly prints LB-9216; retained without inferring a missing digit or matching to a different roster ID."
+      ]
+    },
+    {
+      "case_id": "wrapped_item_boundary",
+      "source_id": "BLB-2023-09-14",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2023/09/Voting%20Minutes%209-14-23.docx%20%281%29_0.pdf",
+      "source_sha256": "d60d214e84d3a5227248c7303adf8fab47b1ed2570d537e52379642a62e2403c",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2023/documents/BLB-2023-09-14.pdf",
+      "pages": [
+        11
+      ],
+      "event_ids": [
+        "BLB-2023-09-14-033-transfer",
+        "BLB-2023-09-14-033-pledge"
+      ],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2023-09-14-p11.png",
+          "sha256": "80b6aac8be35609925f354c65a3a3537447b04d6b407bc336d2a4a7d631d906d"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "45. Annual outdoor patio",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Lastly, has petitioned to Pledge the License to:",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Granted",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "45 is the occupancy figure in item 24, not a new numbered item. The complete same item supports a transfer application and a license pledge to Hood Park, LLC; two source actions are not two completed economic transactions.",
+      "result": "pass",
+      "pending_caveats": [
+        "Full item 24 joins a wrapped occupancy figure '45.' that the initial parser treated as a new item; visually verified on page 11.",
+        "Full item 24 joins a wrapped occupancy figure '45.' that the initial parser treated as a new item; visually verified on page 11."
+      ]
+    },
+    {
+      "case_id": "hearing_date_without_stated_vote_date",
+      "source_id": "BLB-2021-04-20",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2021/05/Emergency%20Hearing%204.20.21%20%281%29.pdf",
+      "source_sha256": "cec57c6c0099fe6157f68a9759bbe9e7d7f3580f19c106c86a7204207a1004cf",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2021/documents/BLB-2021-04-20.pdf",
+      "pages": [
+        1
+      ],
+      "event_ids": [],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2021-04-20-p1.png",
+          "sha256": "1767b0052ff3d686f058d24dd7cdf5e40dd5ad0968b5fe6d246a531aeb41c588"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "EMERGENCY LICENSED PREMISE INSPECTION HEARING",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Tuesday, April 20, 2021",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "The heading/body identify an emergency inspection hearing and contain disciplinary annotations. document_vote_date remains null and no scoped transaction or ownership row references this document.",
+      "result": "pass",
+      "pending_caveats": []
+    },
+    {
+      "case_id": "conflicting_internal_transactional_date",
+      "source_id": "BLB-2023-08-17",
+      "source_url": "https://www.boston.gov/sites/default/files/file/2023/08/8-17%20Voting%20Minutes%20.docx%20%282%29.pdf",
+      "source_sha256": "9721de924724aec13302e24c9ca97a364ed5614f0045d4aac702ab6a5eda93cf",
+      "pdf_path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/2023/documents/BLB-2023-08-17.pdf",
+      "pages": [
+        1,
+        4
+      ],
+      "event_ids": [],
+      "visual_review": "Complete cited PNG pages rendered from the saved PDF were visually inspected by the analyst in this audit; this is not full-PDF visual review.",
+      "renders": [
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2023-08-17-p1.png",
+          "sha256": "96e523a37b43c0a8d0c17f0491d98e04ec3598c63e0440623dbf4a883a6932fa"
+        },
+        {
+          "path": "/Users/travcole/projects/osint-research/reports/boston-liquor-license-collateral-2026-09-03/full-review/transfer-corpus/prior-2024/quality-review/renders/BLB-2023-08-17-p4.png",
+          "sha256": "e061d5c20d0fb258c2e9be39882309c288dc558fab2f440eaf889b5282bbaa69"
+        }
+      ],
+      "source_quotes": [
+        {
+          "source_quote": "August 17, 2023",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        },
+        {
+          "source_quote": "Transactional Hearing on Wednesday, August 18, 2023",
+          "contained_in_saved_cited_pages_after_whitespace_normalization": true
+        }
+      ],
+      "finding": "Page 1 voting heading says August 17; page 4 internally says Wednesday August 18. The source retains August 17 as vote date and coverage explicitly records the inconsistent internal heading. No alternate voting date is inferred.",
+      "result": "pass",
+      "pending_caveats": []
+    }
+  ],
+  "limitations": [
+    "Purposeful spot-check, not a second full manual review of every record or every PDF.",
+    "Current license identity, sale completion, price, lien existence and outstanding balance are not established by this audit."
+  ]
+}

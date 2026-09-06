@@ -32,12 +32,6 @@ registry.db
 !tests/fixtures/**/*.sqlite
 !tests/fixtures/**/*.sqlite3
 
-# Build artifacts
-site/web/node_modules/
-site/web/dist/
-site/web/.astro/
-site/web/.cache/
-
 # Logs
 *.log
 
@@ -55,10 +49,50 @@ web/citation-lint-report.json
 web/.playwright-cli/
 tmp/
 workbench-agents/
+output/
+outputs/
+scratchpad/
+
+# Large local research tables/dashboards are retained with checksum inventories.
+/investigations/tech-right/reports/2026-07-28-dhs-census/census-awards.csv
+/investigations/tech-right/reports/2026-07-28-dhs-census/census-transactions.csv
+/reports/boston-liquor-license-collateral-2026-09-03/full-review/dashboard.html
+/reports/boston-liquor-license-collateral-2026-09-03/full-review/review-data.json
 
 # Local investigation evidence caches (track reports/manifests instead)
 investigations/*/sources/
 
-# Python build artifacts
-__pycache__/
-*.pyc
+# Acquisition payloads stay local; authored reports, collectors and manifests
+# remain visible to Git even when older tasks placed them beside raw material.
+/investigations/*/evidence/**
+!/investigations/*/evidence/**/
+!/investigations/*/evidence/**/*.md
+!/investigations/*/evidence/**/*.py
+!/investigations/*/evidence/**/*manifest*.json
+!/investigations/*/evidence/**/MANIFEST.json
+/investigations/*/artifacts/**
+!/investigations/*/artifacts/**/
+!/investigations/*/artifacts/**/*.md
+!/investigations/*/artifacts/**/*.py
+!/investigations/*/artifacts/**/*manifest*.json
+!/investigations/*/artifacts/**/MANIFEST.json
+/investigations/*/incoming/**
+!/investigations/*/incoming/**/
+!/investigations/*/incoming/**/*.md
+!/investigations/*/incoming/**/*.py
+!/investigations/*/incoming/**/*manifest*.json
+/research/patterns/_intake/*/raw/**
+!/research/patterns/_intake/*/raw/**/
+!/research/patterns/_intake/*/raw/**/*.md
+!/research/patterns/_intake/*/raw/**/*.py
+!/research/patterns/_intake/*/raw/**/*manifest*.json
+/reports/boston-liquor-license-collateral-2026-09-03/**/evidence/**
+!/reports/boston-liquor-license-collateral-2026-09-03/**/evidence/**/
+!/reports/boston-liquor-license-collateral-2026-09-03/**/evidence/**/*.md
+!/reports/boston-liquor-license-collateral-2026-09-03/**/evidence/**/*.py
+!/reports/boston-liquor-license-collateral-2026-09-03/**/evidence/**/*manifest*.json
+/reports/boston-liquor-license-collateral-2026-09-03/**/documents/**
+!/reports/boston-liquor-license-collateral-2026-09-03/**/documents/**/
+!/reports/boston-liquor-license-collateral-2026-09-03/**/documents/**/*.md
+!/reports/boston-liquor-license-collateral-2026-09-03/**/documents/**/*.py
+!/reports/boston-liquor-license-collateral-2026-09-03/**/documents/**/*manifest*.json

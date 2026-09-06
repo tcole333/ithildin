@@ -1,0 +1,3602 @@
+{
+  "summary": {
+    "files_with_pytest_functions": 513,
+    "function_count": 4932,
+    "unmarked_function_files": 502,
+    "unmarked_function_count": 4897,
+    "unmarked_and_not_live_gated_count": 4212
+  },
+  "files": [
+    {
+      "path": "tests/test_florida_court_directory_data_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_uv_configuration.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_orange_county_courts.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_appellate.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_denver_delinquent_tax_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_ohio_delaware_licking_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ny_statewide_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_courtlistener_pagination.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_wasco_property.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_finding_relation_corrections.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_california_court_directory.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_supreme_docket_shared_integration.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_reporter_decisions.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_miami_dade_property.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_benton_property.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_name_index_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_washington_parcel_projection.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_denver_county_court.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_analysis_export_timeline.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nydos_ingest.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edgar_import_lock.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_plats_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_palm_beach_official_records.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_superior_calendar_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_usaspending_subawards.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_franklin_probate_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_990_xml_download.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_lane_marion_parcels.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_ohio_franklin_courts.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edgar_search.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_texas_supreme_publications_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_court_calendar.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_deschutes_property.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_openpayments.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_florida_ninth_opinions_shared_integration.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_jersey_sr1a.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_column_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_santa_fe_property_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_kofile_publicsearch.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_jersey_dca_catalog_monitor.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_auto_lead_emission.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_crtsh.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nyc_pip.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_lead_profile_thread_integrity.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_florida_acis.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_courtlistener_api_client.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fl_dor_property.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_california_opinions_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_court.py",
+      "pytest_functions": 22,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_contract.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_shodan_output.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_california_court_lifecycle.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_export_dossiers_verification_scope.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_clackamas_property.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_boston_ucc_filing_review.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_tyler_municipal_tenants.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_wisconsin_wscca.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_tax_collector_lifecycle.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_hcad_property.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ny_attorneys_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_recorder_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_connection_dedup_migration.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_estate_notices_claims.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_denver_foreclosures_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_texas_property_wave_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_taxlots.py",
+      "pytest_functions": 24,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_florida_output_contracts.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_jersey_tax_court.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_business_opinions_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_bulk.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_vicourts.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_florida_acis_calendar_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_nyc_pip_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_abstract_finding_targets.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_palm_beach_official_records_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_wy_dor_parcels_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_oregon_marion_downloads_lifecycle.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_property.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_parcels.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_california_auth.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_probate.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_financial_ratios_compare.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_appellate_cases.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_ogrip_shared_integration.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_ttc.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_washington_courts_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_mdp_property_downloads.py",
+      "pytest_functions": 22,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_pillar_bootstrap_matching.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_opinions.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_court_access_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_fix_papercut_queue.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_muckrock.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_mason_county_tax_parcels.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_delaware_opinions.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_wisconsin_court_directory.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_florida_directory_data.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_lmsband_file_output.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_trademarks.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_profile_analysis_papercuts.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_papercut_regressions.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_auto_leads_profile_scope.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_broward_official_records_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_shapefile.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_build_salus_csro_artifacts.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_public_cases.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_pax_recorders_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wayback.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_plats.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_jackson_douglas_assessors.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_pima_courts.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_delaware_courts.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_papercut.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_fl_dor_property.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_deschutes_laserfiche.py",
+      "pytest_functions": 28,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_analysis_cli_papercuts.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_hcad_gis_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_uk_companies_house_output.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fec.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_compile_epstein_draft_candidates.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_delaware_firstmap.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_foreclosures_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_mexico_case_lookup.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_osceola_benchmark_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_franklin_courts_shared_integration.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_washington_case_permits.py",
+      "pytest_functions": 25,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_san_mateo_midx.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_edva_bankruptcy_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_sec_enforcement.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fara.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_usvi_property_tax.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_wscca_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_harris_court_bulk_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edva_bankruptcy.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_lincoln_taxlots.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_new_jersey_tax_court_opinions.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_recorder.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_salesweb.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_extract.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_muckrock_reliability.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_property_directories_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_edgar_filings.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_orange_tax_collector.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_curate_dossier_resolution.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_county_party_indexes_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_supreme_court.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_pax_recorders_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_acris_output.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_washington_taxsifter.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_mdp_parcel_points.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_kabasshouse_doc_output.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_licking_property.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_jackson_property_events.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_public_records_router_bootstrap.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_statewide_parcels.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_usvi_property_tax_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_franklin_sales_gis_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_census_acs.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_pima.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_linn_josephine_klamath_assessors.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_lobbying_errors.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_govinfo_log_search.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_georgia_supreme_docket.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_lead_tracker_related_validation.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_colorado_judicial.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_search_log_correctness.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_jersey_tax_court_opinions_catalog_monitor.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_montana_cadastral_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_corpus_inventory_reporting.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_licking_foreclosure_archive.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_delaware_common_pleas.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_denver_property.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_property_records.py",
+      "pytest_functions": 58,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_san_diego_court_index.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_sam.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_epstein_recovery.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_washington_digital_archives_land_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts.py",
+      "pytest_functions": 72,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_business_court.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_oregon_marion_downloads_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_san_diego_court_index_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_oregon_court_documents.py",
+      "pytest_functions": 29,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_epstein_metadata.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_auto_leads_identity_noise.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_santa_fe_clerktrack.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_parcels.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fresno_superior_court_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_ingest_edva_bankruptcy.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_hcad_gis_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_hcad_gis.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_pax_recorders.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_doj_court_records_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_txgio_land_parcels_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_miami_dade_recorder.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_txgio_land_parcels.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edva_bankruptcy_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_florida_court_directory_data.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_riverside_court.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_orange_tax_collector.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_florida_ninth_opinions.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_990_lookup_flow.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_boston_ucc_runner.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_parse_email_chain_sources.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_marion_downloads.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_court_bulk_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_opinions.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_mdp_parcel_points_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_990_shared_officers.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_990_lookup_failures.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_dc_failures.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_arlington_property.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_mason_county_tax_parcels_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_ttc_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_palm_beach_tax_collector_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_mdp_property_downloads_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_va_general_district_catalog_monitor.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_qld_ecourts_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_ma_ucc_browser_session.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_search_plan.py",
+      "pytest_functions": 32,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_texas_epts.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_opinions.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_taxsifter.py",
+      "pytest_functions": 45,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_appellate.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_deschutes_dial.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_md_mdp_parcel_points.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_jersey_tax_court_opinions_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_reeves_records.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_registry_address_index.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_santa_fe_clerktrack_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_multnomah_sail.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_va_beach_delinquent_tax_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_analysis_export_connections.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_supreme_publications_lifecycle.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_fl_dor_property_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_georgia_court_access.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_live_public_records_switch.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_oregon_ascendweb.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_court_access_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_sec_alias.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_property_sources_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_fl_dor_property_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_lincoln_propertyweb.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_bulk_lead_cleanup.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nyscef_fulltext.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_oregon_county_property_projection.py",
+      "pytest_functions": 22,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_investigations.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_orange_county_court.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_harris_court_bulk.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_findings_tracker_evidence.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_taxsifter_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_usaspending_papercuts.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_osceola_courts.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_selector_pivot.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_supreme_docket_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_colorado_court_data.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_kabasshouse_financials.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_property_appraiser_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_va_general_district_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_denver_delinquent_tax.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_dc_md_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_appellate_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_osceola_benchmark_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_property.py",
+      "pytest_functions": 25,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_opencorporates_search_logging.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_monitor.py",
+      "pytest_functions": 105,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fresno_superior_court.py",
+      "pytest_functions": 24,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_review_dossier_checks.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_bexar_property.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_output_util.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_georgia_property_sources.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_delaware_output.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_estate_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_virginia_parcels.py",
+      "pytest_functions": 22,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_michigan_property_directory_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_finding_evidence_crud.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_palm_beach_tax_deeds.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_santa_clara_court_records.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_parcels_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_hcad_property_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_franklin_sales_gis.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_parcels_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_reporting_corpus.py",
+      "pytest_functions": 66,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_state_court_records.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_santa_clara_court_records_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_washington_courts_catalog_monitor.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_attorneys.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_govos_recorders.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_helion_property.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_ohio_downloads.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_texas_supreme_publications.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_franklin_auditor_bulk.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_urlscan.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_fpds.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_source_report_single_check.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_usvi_recorder.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_column.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_pillar_score_cache.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_harris_court_bulk_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_jersey_tax_court_opinions_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_virginia_parcels_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_dc_court_directory_data_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_usvi_recorder_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_statewide_parcels.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_store.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_licking_common_pleas.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_ohio_franklin_sales_gis.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_catalog.py",
+      "pytest_functions": 26,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_estate_notices_claims_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_california_opinions.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_supreme_court_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_extract_sec_enforcement_parties.py",
+      "pytest_functions": 55,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_court_directory_data.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_eaton_parcels.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_eval.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_connecticut_civil_family_shared_integration.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_virginia_parcels_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_ohio_franklin_municipal.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_texas_appellate.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_california_browser_helper.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_oregon_lane_property_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_law_reports_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_montana_cadastral.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_opinions_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_connection_evidence_workflow.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_va_general_district_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_texas_epts_shared_integration.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_opinions_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_wisconsin_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_entity_candidates.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nevada_browser_helper.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_doj_download.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_littlesis_retries.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_court_directory_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_ny_law_reports.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_foreclosure_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_priority.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_parse_ds10_financials.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_kabasshouse_entity.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edgar_insider.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_tax_deeds_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_court_data_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_highergov.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_washington_digital_archives_land.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_palm_beach_tax_deeds.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_tax_court.py",
+      "pytest_functions": 29,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_seed_public_records_catalog.py",
+      "pytest_functions": 55,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_acris.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_superior_calendar.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_statewide_parcels_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_california_opinions_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_palm_beach_tax_collector.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_kabasshouse_search.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_jersey_dca_property.py",
+      "pytest_functions": 28,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_franklin_probate.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_tax_foreclosures.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_ingest_sam.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_va_general_district.py",
+      "pytest_functions": 24,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_boston_license_review.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_opencorporates_auth.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_dc_property_live.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_triage_leads_skill.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_senate_finance.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_eugene_municipal_court.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_georgia_court_directory.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_palm_beach.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_icij_remote.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_lead_tracker_fk_migration.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_newyork_output.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_source_report_cli.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_franklin_recorder_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_actions.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_washington_digital_archives_land_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_new_jersey_dca_property_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_philadelphia_property_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_broward_official_records.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_census.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_mexico_case_lookup_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_judgment_liens.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_cli_exit_codes.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ny_attorneys_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_palm_beach_courts.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_licking_property_shared_integration.py",
+      "pytest_functions": 8,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_dc_property_projection.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_broward_official_records_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_va_beach_delinquent_tax.py",
+      "pytest_functions": 19,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_harris_foreclosures.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_parcel_shell_lineage.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_build_geo_cy2025_ice_revenue_reconciliation.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_entity_identity_papercuts.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_property.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_georgia_supreme_publications.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_http.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_washington_taxsifter_lifecycle.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_oregon_smart_search.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_edva_bankruptcy_lifecycle.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ohio_sheriff_sales.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_massgis_property.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_boston_license_review_report.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_mason_county_tax_parcels.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_los_angeles.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_usvi_output.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_appellate_calendars.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_doj_court_records_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_orleans_property.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_cook_property.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_courts.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_georgia_court_data_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_rrc_bulk.py",
+      "pytest_functions": 18,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_boston_ucc_cua_bridge.py",
+      "pytest_functions": 9,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_jackson_accela.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_990_filings.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_business_opinions_live.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_findings_read_commands.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nyscef.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_mason_county_tax_parcels_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wy_dor_parcels.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_montana_cadastral_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_property.py",
+      "pytest_functions": 90,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_md_opinions_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_palm_beach_property_appraiser.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_philadelphia_property.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_la_property.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_palm_beach_property_appraiser.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_txgio_land_parcels_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_court_directory_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_connection_evidence_atomicity.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_denver_foreclosures.py",
+      "pytest_functions": 28,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_montana_cadastral.py",
+      "pytest_functions": 15,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_government_release_corpus.py",
+      "pytest_functions": 14,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_property_appraiser_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_digital_archives_land.py",
+      "pytest_functions": 34,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_massachusetts_ucc.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_reporting_update_runner.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_lane_property.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_ny_salesweb_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_santa_fe_property.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_georgia_court_data.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_eaton_parcels_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_orange_tax_collector_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_wi_mi_directory_catalog_monitor.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_va_beach_delinquent_tax_shared_integration.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_jersey_tax_court_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_mason_county_tax_parcels_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_new_jersey_parcels.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_registry_output.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_michigan_property_directories.py",
+      "pytest_functions": 17,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_filegdb.py",
+      "pytest_functions": 31,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_reporter_shared_integration.py",
+      "pytest_functions": 6,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_oregon_court_discovery_queue.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_tax_deeds_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_census_acs_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_wisconsin_opinions_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_colorado_opinions.py",
+      "pytest_functions": 30,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_georgia_court_directory_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_yamhill_property.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_qld_ecourts.py",
+      "pytest_functions": 16,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_michigan_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_texas_property_sources.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_estate_search.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_washington_digital_archives_land_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_hypothesis_tracker_ach.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_palm_beach_parcel_shell_reconciliation.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ohio_franklin_auditor_bulk_shared_integration.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_entity_merge.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_bexar_courts.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_pa_ujs.py",
+      "pytest_functions": 11,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_documentcloud_search.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_courtlistener_download_fallback.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_supreme_publications_shared_integration.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_texas.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_los_angeles_name_index.py",
+      "pytest_functions": 12,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_ojcin_products.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_court_directories.py",
+      "pytest_functions": 20,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_usaspending.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_md_business_opinions.py",
+      "pytest_functions": 21,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_ingest_harris_court_bulk.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_michigan_business_court_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_doj_court_records.py",
+      "pytest_functions": 26,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_california_court_directory_live.py",
+      "pytest_functions": 2,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_investigation_context_profiles.py",
+      "pytest_functions": 7,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_public_records_artifacts.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_new_jersey_dca_shared_integration.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_pa_opinions.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_doj_court_records_live.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_entity_corrections.py",
+      "pytest_functions": 10,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_washington_property.py",
+      "pytest_functions": 23,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_methodology_tracker.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_washington_taxsifter_shared_integration.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_michigan_eaton_shared_integration.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_oregon_helion_recorder.py",
+      "pytest_functions": 28,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_dc_court_directory_data_catalog_monitor.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_nc_property.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_connecticut_civil_family.py",
+      "pytest_functions": 25,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_georgia_property_sources_lifecycle.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_courtlistener_live.py",
+      "pytest_functions": 1,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_findings_provenance_papercuts.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_montana_cadastral_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_query_los_angeles_court_live.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": true
+    },
+    {
+      "path": "tests/test_florida_ninth_opinions_lifecycle.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edgar_read.py",
+      "pytest_functions": 9,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_state_courts_bexar.py",
+      "pytest_functions": 5,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_patents_papercuts.py",
+      "pytest_functions": 3,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_vicourts.py",
+      "pytest_functions": 13,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/test_query_edgar_sections.py",
+      "pytest_functions": 4,
+      "integration_marked": false,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_financial_quality_cli_paths.py",
+      "pytest_functions": 2,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_normalize_dossier_evidence_refs_cli.py",
+      "pytest_functions": 3,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_financial_quality_gate.py",
+      "pytest_functions": 2,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_financial_quality_backfill.py",
+      "pytest_functions": 1,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_trigger_engine_cli_integration.py",
+      "pytest_functions": 3,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_fixture_manifest_consistency.py",
+      "pytest_functions": 2,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_check_dossier_evidence_sync.py",
+      "pytest_functions": 6,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_export_financials_cli_integration.py",
+      "pytest_functions": 3,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_live_data_smoke.py",
+      "pytest_functions": 2,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    },
+    {
+      "path": "tests/integration/test_queue_cli_integration.py",
+      "pytest_functions": 2,
+      "integration_marked": true,
+      "unittest_classes": 0,
+      "live_gate": false
+    }
+  ]
+}

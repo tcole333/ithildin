@@ -1,0 +1,13 @@
+{
+  "cartodb_id": {"type": "number", "pgtype": "int8"},
+  "the_geom": {"type": "geometry", "wkbtype": "Unknown", "dims": 2, "srid": 4326},
+  "the_geom_webmercator": {"type": "geometry", "wkbtype": "Unknown", "dims": 2, "srid": 3857},
+  "parcel_number": {"type": "string", "pgtype": "varchar"},
+  "year": {"type": "string", "pgtype": "varchar"},
+  "market_value": {"type": "number", "pgtype": "numeric"},
+  "taxable_land": {"type": "number", "pgtype": "numeric"},
+  "taxable_building": {"type": "number", "pgtype": "numeric"},
+  "exempt_land": {"type": "number", "pgtype": "numeric"},
+  "exempt_building": {"type": "number", "pgtype": "numeric"},
+  "objectid": {"type": "number", "pgtype": "int8"}
+}

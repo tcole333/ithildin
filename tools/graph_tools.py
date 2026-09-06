@@ -22,12 +22,10 @@ Usage:
 """
 
 import argparse
-import json
 import random
 import sqlite3
 import sys
 from collections import defaultdict, deque
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -434,8 +432,6 @@ def find_structural_holes(adj, nodes, min_degree=5):
                     actual_edges += 1
 
         density = actual_edges / possible_edges if possible_edges > 0 else 1.0
-        constraint = density  # higher density = more constrained = fewer holes
-
         holes.append({
             "node": node,
             "degree": len(neighbors),
@@ -937,6 +933,7 @@ def main():
     # stats
     p_stats = sub.add_parser("stats", help="Graph summary statistics")
     p_stats.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
+    add_output_args(p_stats)
 
     args = parser.parse_args()
     p_id = getattr(args, "profile", None)
@@ -1219,13 +1216,13 @@ def main():
         if write_output(c, args, summary=f"community #{target_id}"):
             return
         print(f"\nCommunity #{target_id} ({c['size']} members, {c['internal_edges']} internal edges)")
-        print(f"\nMembers:")
+        print("\nMembers:")
         for m in c["members"]:
             degree = len(adj.get(m, {}))
             is_bridge = "B" if m in c["bridge_nodes"] else " "
             print(f"  [{is_bridge}] {m:<40} degree={degree}")
         if c["bridge_nodes"]:
-            print(f"\nBridge nodes (connected to other communities):")
+            print("\nBridge nodes (connected to other communities):")
             for b in c["bridge_nodes"]:
                 external = [n for n in adj.get(b, {}) if n not in set(c["members"])]
                 print(f"  {b} → {', '.join(external[:5])}")
@@ -1235,7 +1232,7 @@ def main():
         adj, nodes = build_graph(db, profile_id=p_id, all_profiles=p_all)
         summaries = community_summary(adj, nodes, db=db, resolution=args.resolution,
                                       profile_id=p_id, all_profiles=p_all)
-        if write_output(summaries, args, summary=f"community summaries"):
+        if write_output(summaries, args, summary="community summaries"):
             return
         for c in summaries:
             if c["size"] < 2:
@@ -1245,7 +1242,7 @@ def main():
                   f"{c['internal_edges']} internal edges, {len(c['bridge_nodes'])} bridges")
             print(f"Members: {', '.join(c['member_preview'])}")
             if c["top_findings"]:
-                print(f"Key findings:")
+                print("Key findings:")
                 for f in c["top_findings"][:5]:
                     conf = f.get("confidence", "?")
                     print(f"  F#{f['id']} [{conf}] {f['target_name']}: {f['summary'][:70]}")
@@ -1254,6 +1251,8 @@ def main():
         adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
                                  profile_id=p_id, all_profiles=p_all)
         s = graph_stats(adj, nodes)
+        if write_output(s, args, summary="graph statistics"):
+            return
         print("Graph Statistics")
         print("=" * 40)
         print(f"  Nodes:              {s['nodes']}")

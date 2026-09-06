@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "case_count": 13,
+  "case_types": {
+    "board_record": 12,
+    "ownership_record": 1
+  },
+  "schema_validation": "Reference answers checked against schema required fields, additional-properties constraint, JSON types, enum/const values, oneOf branches, uniqueItems and array item schemas; jsonschema library unavailable.",
+  "input_exposes_only_source_text_urls_pages_case_ids_and_shared_questions_schema": true,
+  "reference_quote_checks_passed": true,
+  "files": {
+    "input.json": {
+      "sha256": "d4952abfa65904484d3ae835d0a8a6e1dc1cc0f2d41e177a81a10196950b5258",
+      "bytes": 22478
+    },
+    "reference.json": {
+      "sha256": "f9c6a218afc9b91cb49e31cb7fbadcc4852c4c87162e46a2210e58598a25448e",
+      "bytes": 14636
+    },
+    "output-schema.json": {
+      "sha256": "4320be2005e32a5b95e475c6e11f334423633b31c8c50bbb3fd9fc7122524f73",
+      "bytes": 6261
+    },
+    "rubric.md": {
+      "sha256": "865e2c3b1a344c802f218c32ab384eeb184d7d345524de0a6f1f99b6877ebc8e",
+      "bytes": 7036
+    },
+    "runner-prompt.txt": {
+      "sha256": "d0a525d41c10160326a43e8d867aa945615d17a2a522d1794820cd9bc38a6291",
+      "bytes": 410
+    }
+  },
+  "limitations": [
+    "Hand-selected pilot, not representative performance estimate.",
+    "Ownership coverage limited to retained Lyons primary HTML; other requested ownership sources not retained.",
+    "No model runs have been performed by the pack builder."
+  ]
+}

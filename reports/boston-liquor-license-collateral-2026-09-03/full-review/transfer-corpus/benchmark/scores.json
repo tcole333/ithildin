@@ -1,0 +1,1905 @@
+{
+  "benchmark_version": "1.0",
+  "scoring_version": "1.0",
+  "blinded": true,
+  "response_labels": [
+    "response-a.json",
+    "response-b.json"
+  ],
+  "frozen_file_sha256": {
+    "input.json": "d4952abfa65904484d3ae835d0a8a6e1dc1cc0f2d41e177a81a10196950b5258",
+    "output-schema.json": "4320be2005e32a5b95e475c6e11f334423633b31c8c50bbb3fd9fc7122524f73",
+    "reference.json": "f9c6a218afc9b91cb49e31cb7fbadcc4852c4c87162e46a2210e58598a25448e",
+    "rubric.md": "865e2c3b1a344c802f218c32ab384eeb184d7d345524de0a6f1f99b6877ebc8e",
+    "response-a.json": "3972437b0ab4283cded7b2432343750134fe5ff3961b659bfad01080acec97a3",
+    "response-b.json": "60616e721e61754096d1a1646665259b2e4de0e87481e886c0dc374beba95840",
+    "administration.md": "89d091b8c2d8a2e2fef15f61e227cf9387a357a8ca6d5cc906ef44e7869d2c3e"
+  },
+  "rubric": "rubric.md",
+  "errata": "errata.json",
+  "component_maxima": {
+    "board_record": {
+      "action_classification": 20,
+      "disposition_and_approval_flags": 15,
+      "explicit_license_number": 5,
+      "relevant_parties_and_dba": 20,
+      "locations": 5,
+      "conditions_and_corrections": 10,
+      "limits_of_evidence": 20,
+      "evidence_quotes": 5
+    },
+    "ownership_record": {
+      "relationship_and_subject": 25,
+      "investor_and_percentage": 15,
+      "establishment_flags": 25,
+      "material_qualifications": 25,
+      "evidence_quotes": 10
+    }
+  },
+  "scoring_notes": [
+    "No model identities or materials outside the seven allowed input files were sought.",
+    "Source-supported errata and semantic allowances apply equally. No predeclared weights changed.",
+    "Scores are equal-case means; each case is worth 100. Critical unsupported inference caps apply once per affected case after component scoring.",
+    "Each material erroneous proposition is counted once even if repeated. The C04 partial condition is one omission; three current-lien assertions are three critical claims in three cases.",
+    "All supplied evidence quotes match the same-case packet after whitespace normalization and satisfy the one-to-three-quote instruction."
+  ],
+  "responses": {
+    "response-a.json": {
+      "schema_valid": true,
+      "schema_validation_errors": [],
+      "schema_validation_method": "Recursive validation of every assertion keyword used by output-schema.json: type, const, enum, required, properties, additionalProperties, items, uniqueItems, oneOf. Independent case-ID/completeness and one-to-three-quote checks also performed.",
+      "cases_answered": 13,
+      "expected_cases": 13,
+      "unique_case_ids": 13,
+      "missing_case_ids": [],
+      "extra_case_ids": [],
+      "duplicate_case_ids": [],
+      "all_cases": {
+        "case_count": 13,
+        "maximum_total": 1300,
+        "raw_weighted_total": 1271,
+        "raw_equal_case_mean": 97.769231,
+        "capped_total": 1145,
+        "capped_equal_case_mean": 88.076923,
+        "component_totals": {
+          "action_classification": 240,
+          "disposition_and_approval_flags": 180,
+          "explicit_license_number": 60,
+          "relevant_parties_and_dba": 240,
+          "locations": 60,
+          "conditions_and_corrections": 115,
+          "limits_of_evidence": 216,
+          "evidence_quotes": 70,
+          "relationship_and_subject": 25,
+          "investor_and_percentage": 15,
+          "establishment_flags": 25,
+          "material_qualifications": 25
+        }
+      },
+      "licensing_board_only": {
+        "case_count": 12,
+        "maximum_total": 1200,
+        "raw_weighted_total": 1171,
+        "raw_equal_case_mean": 97.583333,
+        "capped_total": 1045,
+        "capped_equal_case_mean": 87.083333,
+        "component_totals": {
+          "action_classification": 240,
+          "disposition_and_approval_flags": 180,
+          "explicit_license_number": 60,
+          "relevant_parties_and_dba": 240,
+          "locations": 60,
+          "conditions_and_corrections": 115,
+          "limits_of_evidence": 216,
+          "evidence_quotes": 60
+        }
+      },
+      "ownership_only": {
+        "case_count": 1,
+        "maximum_total": 100,
+        "raw_weighted_total": 100,
+        "raw_equal_case_mean": 100.0,
+        "capped_total": 100,
+        "capped_equal_case_mean": 100.0,
+        "component_totals": {
+          "relationship_and_subject": 25,
+          "investor_and_percentage": 15,
+          "establishment_flags": 25,
+          "material_qualifications": 25,
+          "evidence_quotes": 10
+        }
+      },
+      "critical_inference_case_count": 3,
+      "critical_inference_claim_count": 3,
+      "omission_count": 1,
+      "omission_count_by_component": {
+        "action_classification": 0,
+        "conditions_and_corrections": 1,
+        "disposition_and_approval_flags": 0,
+        "establishment_flags": 0,
+        "evidence_quotes": 0,
+        "explicit_license_number": 0,
+        "investor_and_percentage": 0,
+        "limits_of_evidence": 0,
+        "locations": 0,
+        "material_qualifications": 0,
+        "relationship_and_subject": 0,
+        "relevant_parties_and_dba": 0
+      },
+      "incorrect_extraction_or_classification_count": 0,
+      "false_positive_action_count": 0,
+      "false_negative_action_count": 0,
+      "cases": [
+        {
+          "case_id": "C01",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "mutual intent to revoke the transfer of the license approved by the Board on August 28, 2025",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "the transaction has not been timely closed as required by the purchase and sale agreement.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Acknowledged",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C02",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned for a pledge of stock to James T. Cochener.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C03",
+          "kind": "ownership_record",
+          "components": {
+            "relationship_and_subject": 25,
+            "investor_and_percentage": 15,
+            "establishment_flags": 25,
+            "material_qualifications": 25,
+            "evidence_quotes": 10
+          },
+          "component_detail": {
+            "relationship_and_subject": {
+              "relationship": 20,
+              "subject": 5
+            },
+            "investor_and_percentage": {
+              "named_investor": 7.5,
+              "equity_percentage": 7.5
+            },
+            "establishment_flags": {
+              "private_equity_backing_established": 12.5,
+              "current_equity_ownership_established": 12.5
+            },
+            "material_qualifications": {
+              "explicit_disclaimer_overrides_marketing": 15,
+              "avoids_universal_no_other_investors_inference": 10
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "All ours.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "All venues are independently owned and operated.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Lyons Group does not own any of the entities listed on this website.",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Both responses explicitly preserve the ownership disclaimer and make no universal claim that venues lack other investors. The rubric rewards avoiding that inference; it does not require reciting its negation."
+          ]
+        },
+        {
+          "case_id": "C04",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 5,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            },
+            "conditions_and_corrections": {
+              "issuance_hold_preserved": 5,
+              "required_confirmation_to_lift_hold": 0
+            }
+          },
+          "raw_weighted_score": 95,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 95,
+          "critical_inference_claim_count": 0,
+          "errors": [
+            {
+              "type": "omission",
+              "critical": false,
+              "component": "conditions_and_corrections",
+              "field": "conditions_or_corrections",
+              "actual": [
+                "License not to be issued"
+              ],
+              "points_lost_before_cap": 5,
+              "reason": "The issuance hold is captured, but the Downtown Boston Neighborhood Association confirmation of completion of the community process is omitted. Half credit under proportional conditions scoring; no unsupported claim that issuance occurred.",
+              "evidence": [
+                {
+                  "case_id": "C04",
+                  "quote": "License not to be issued Board has received confirmation from the Downtown Boston Neighborhood Association that the community process has been completed",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2025/08/Voting%20Minutes%208-28-25.docx.pdf"
+                }
+              ]
+            }
+          ],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license and the location",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "License not to be issued",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C05",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above – To: UOH Manager, LLC dba Union Oyster House (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C06",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 12,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 0,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 92,
+          "maximum": 100,
+          "critical_inference_cap_applied": true,
+          "capped_score": 50,
+          "critical_inference_claim_count": 1,
+          "errors": [
+            {
+              "type": "unsupported_positive_inference",
+              "critical": true,
+              "critical_rubric_item": 1,
+              "component": "limits_of_evidence",
+              "field": "current_license_lien_status",
+              "actual": "established",
+              "expected": "not_established",
+              "points_lost_before_cap": 8,
+              "reason": "A granted pledge petition establishes approval, not a current outstanding license lien.",
+              "evidence": [
+                {
+                  "case_id": "C06",
+                  "quote": "Lastly, has petitioned to pledge the license and stock to 1121 Dorchester Avenue Realty LLC.",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+                },
+                {
+                  "case_id": "C06",
+                  "quote": "Granted",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2026/03/Voting%20Minutes%203-5-26.pdf"
+                }
+              ]
+            }
+          ],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above - To: DOT Associates, LLC dba Five Horses Tavern (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "has petitioned to pledge the license and stock to 1121 Dorchester Avenue Realty LLC.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with Maria Murray as manager of record",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C07",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "Release of Pledge of License and Security Interests from Rockland Trust Company",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "releasing any previous pledges held on Shippy’s Inc. d/b/a Beacon Street Liquors",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Acknowledged",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C08",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned for a Change of Officers and Transfer of Stock",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "From: Stavros Papantoniadis (Owner) 100% shares To: Anastasia Papantoniadis",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C09",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license and the location",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "has petitioned to pledge the license to BP TRS Services, LLC.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Deferred to allow the Applicant to file an application for a Change of License Type",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C10",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 12,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 0,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 92,
+          "maximum": 100,
+          "critical_inference_cap_applied": true,
+          "capped_score": 50,
+          "critical_inference_claim_count": 1,
+          "errors": [
+            {
+              "type": "unsupported_positive_inference",
+              "critical": true,
+              "critical_rubric_item": 1,
+              "component": "limits_of_evidence",
+              "field": "current_license_lien_status",
+              "actual": "established",
+              "expected": "not_established",
+              "points_lost_before_cap": 8,
+              "reason": "A granted pledge petition establishes approval, not a current outstanding license lien.",
+              "evidence": [
+                {
+                  "case_id": "C10",
+                  "quote": "Secondly, has petitioned to pledge the license and inventory to Rockland Trust Company.",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2025/06/Voting%20Minutes%206-5-25.docx.pdf"
+                },
+                {
+                  "case_id": "C10",
+                  "quote": "Granted",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2025/06/Voting%20Minutes%206-5-25.docx.pdf"
+                }
+              ]
+            }
+          ],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above To: Patel Harvard, Inc. dba Harvard Convenience (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "has petitioned to pledge the license and inventory to Rockland Trust Company.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with a closing hour of 11:00 PM",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C11",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above - To: LH Roslindale, LLC dba La Hacienda (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Continued to the January 28, 2026 Transactional Hearing",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C12",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above To: 1928 Boston Harbor, LLC dba 1928 Rowes Wharf (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with corrected transferee entity name of 1928 Rowes Wharf LLC",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "The Board requests submission of a security plan",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C13",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 12,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 0,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 92,
+          "maximum": 100,
+          "critical_inference_cap_applied": true,
+          "capped_score": 50,
+          "critical_inference_claim_count": 1,
+          "errors": [
+            {
+              "type": "unsupported_positive_inference",
+              "critical": true,
+              "critical_rubric_item": 1,
+              "component": "limits_of_evidence",
+              "field": "current_license_lien_status",
+              "actual": "established",
+              "expected": "not_established",
+              "points_lost_before_cap": 8,
+              "reason": "A granted pledge petition establishes approval, not a current outstanding license lien.",
+              "evidence": [
+                {
+                  "case_id": "C13",
+                  "quote": "has petitioned to pledge the license to Brookline Bank.",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf"
+                },
+                {
+                  "case_id": "C13",
+                  "quote": "Granted",
+                  "source_url": "https://www.boston.gov/sites/default/files/file/2025/05/Voting%20Minutes%205-15-25.docx.pdf"
+                }
+              ]
+            }
+          ],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to pledge the license to Brookline Bank.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        }
+      ]
+    },
+    "response-b.json": {
+      "schema_valid": true,
+      "schema_validation_errors": [],
+      "schema_validation_method": "Recursive validation of every assertion keyword used by output-schema.json: type, const, enum, required, properties, additionalProperties, items, uniqueItems, oneOf. Independent case-ID/completeness and one-to-three-quote checks also performed.",
+      "cases_answered": 13,
+      "expected_cases": 13,
+      "unique_case_ids": 13,
+      "missing_case_ids": [],
+      "extra_case_ids": [],
+      "duplicate_case_ids": [],
+      "all_cases": {
+        "case_count": 13,
+        "maximum_total": 1300,
+        "raw_weighted_total": 1300,
+        "raw_equal_case_mean": 100.0,
+        "capped_total": 1300,
+        "capped_equal_case_mean": 100.0,
+        "component_totals": {
+          "action_classification": 240,
+          "disposition_and_approval_flags": 180,
+          "explicit_license_number": 60,
+          "relevant_parties_and_dba": 240,
+          "locations": 60,
+          "conditions_and_corrections": 120,
+          "limits_of_evidence": 240,
+          "evidence_quotes": 70,
+          "relationship_and_subject": 25,
+          "investor_and_percentage": 15,
+          "establishment_flags": 25,
+          "material_qualifications": 25
+        }
+      },
+      "licensing_board_only": {
+        "case_count": 12,
+        "maximum_total": 1200,
+        "raw_weighted_total": 1200,
+        "raw_equal_case_mean": 100.0,
+        "capped_total": 1200,
+        "capped_equal_case_mean": 100.0,
+        "component_totals": {
+          "action_classification": 240,
+          "disposition_and_approval_flags": 180,
+          "explicit_license_number": 60,
+          "relevant_parties_and_dba": 240,
+          "locations": 60,
+          "conditions_and_corrections": 120,
+          "limits_of_evidence": 240,
+          "evidence_quotes": 60
+        }
+      },
+      "ownership_only": {
+        "case_count": 1,
+        "maximum_total": 100,
+        "raw_weighted_total": 100,
+        "raw_equal_case_mean": 100.0,
+        "capped_total": 100,
+        "capped_equal_case_mean": 100.0,
+        "component_totals": {
+          "relationship_and_subject": 25,
+          "investor_and_percentage": 15,
+          "establishment_flags": 25,
+          "material_qualifications": 25,
+          "evidence_quotes": 10
+        }
+      },
+      "critical_inference_case_count": 0,
+      "critical_inference_claim_count": 0,
+      "omission_count": 0,
+      "omission_count_by_component": {
+        "action_classification": 0,
+        "conditions_and_corrections": 0,
+        "disposition_and_approval_flags": 0,
+        "establishment_flags": 0,
+        "evidence_quotes": 0,
+        "explicit_license_number": 0,
+        "investor_and_percentage": 0,
+        "limits_of_evidence": 0,
+        "locations": 0,
+        "material_qualifications": 0,
+        "relationship_and_subject": 0,
+        "relevant_parties_and_dba": 0
+      },
+      "incorrect_extraction_or_classification_count": 0,
+      "false_positive_action_count": 0,
+      "false_negative_action_count": 0,
+      "cases": [
+        {
+          "case_id": "C01",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "mutual intent to revoke the transfer of the license approved by the Board on August 28, 2025",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "the transaction has not been timely closed as required by the purchase and sale agreement.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Acknowledged",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C02",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "Secondly, has petitioned for a pledge of stock to James T. Cochener.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C03",
+          "kind": "ownership_record",
+          "components": {
+            "relationship_and_subject": 25,
+            "investor_and_percentage": 15,
+            "establishment_flags": 25,
+            "material_qualifications": 25,
+            "evidence_quotes": 10
+          },
+          "component_detail": {
+            "relationship_and_subject": {
+              "relationship": 20,
+              "subject": 5
+            },
+            "investor_and_percentage": {
+              "named_investor": 7.5,
+              "equity_percentage": 7.5
+            },
+            "establishment_flags": {
+              "private_equity_backing_established": 12.5,
+              "current_equity_ownership_established": 12.5
+            },
+            "material_qualifications": {
+              "explicit_disclaimer_overrides_marketing": 15,
+              "avoids_universal_no_other_investors_inference": 10
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "Our Portfolio Our Venues Fine dining, sports bars, clam shacks, nightclubs, and a donut shop. All ours.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "All venues are independently owned and operated. Lyons Group does not own any of the entities listed on this website.",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Both responses explicitly preserve the ownership disclaimer and make no universal claim that venues lack other investors. The rubric rewards avoiding that inference; it does not require reciting its negation."
+          ]
+        },
+        {
+          "case_id": "C04",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license and the location",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "License not to be issued Board has received confirmation from the Downtown Boston Neighborhood Association that the community process has been completed",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "C04 alternate Bedford Street address is explicitly present in the source and earns full location credit."
+          ]
+        },
+        {
+          "case_id": "C05",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above – To: UOH Manager, LLC dba Union Oyster House (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C06",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above - To: DOT Associates, LLC dba Five Horses Tavern (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Lastly, has petitioned to pledge the license and stock to 1121 Dorchester Avenue Realty LLC.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with Maria Murray as manager of record",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C07",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "The Board is in receipt of a Release of Pledge of License and Security Interests from Rockland Trust Company, releasing any previous pledges held on Shippy’s Inc.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Acknowledged",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C08",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned for a Change of Officers and Transfer of Stock",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C09",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license and the location from the above - To: Flik International Corp. dba Flik located at 200 Clarendon St, Boston, MA 02116.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "has petitioned to pledge the license to BP TRS Services, LLC.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Deferred to allow the Applicant to file an application for a Change of License Type",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C10",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above To: Patel Harvard, Inc. dba Harvard Convenience (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Secondly, has petitioned to pledge the license and inventory to Rockland Trust Company.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with a closing hour of 11:00 PM",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": [
+            "Applicable source-supported reference correction or semantic/materiality allowance is recorded in errata.json and applied equally."
+          ]
+        },
+        {
+          "case_id": "C11",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above - To: LH Roslindale, LLC dba La Hacienda (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Continued to the January 28, 2026 Transactional Hearing",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C12",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to transfer the license from the above To: 1928 Boston Harbor, LLC dba 1928 Rowes Wharf (at the same location).",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted, with corrected transferee entity name of 1928 Rowes Wharf LLC",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "The Board requests submission of a security plan, to address, at minimum: the relationship between Licensee and hotel security; and how the Licensee will prevent patrons leaving the premise with alcohol.",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        },
+        {
+          "case_id": "C13",
+          "kind": "board_record",
+          "components": {
+            "action_classification": 20,
+            "disposition_and_approval_flags": 15,
+            "explicit_license_number": 5,
+            "relevant_parties_and_dba": 20,
+            "locations": 5,
+            "conditions_and_corrections": 10,
+            "limits_of_evidence": 20,
+            "evidence_quotes": 5
+          },
+          "component_detail": {
+            "disposition_and_approval_flags": {
+              "disposition": 5,
+              "license_transfer_approved": 5,
+              "new_license_pledge_approved": 5
+            },
+            "relevant_parties_and_dba": {
+              "transferor": 4,
+              "transferee": 4,
+              "transferee_dba": 4,
+              "pledging_party": 4,
+              "pledge_recipient": 4
+            },
+            "locations": {
+              "from_address": 2.5,
+              "to_address": 2.5
+            },
+            "limits_of_evidence": {
+              "sale_completion_status": 8,
+              "current_license_lien_status": 8,
+              "loan_amount": 4
+            }
+          },
+          "raw_weighted_score": 100,
+          "maximum": 100,
+          "critical_inference_cap_applied": false,
+          "capped_score": 100,
+          "critical_inference_claim_count": 0,
+          "errors": [],
+          "action_errors": {
+            "false_positive": [],
+            "false_negative": []
+          },
+          "evidence_quote_checks": [
+            {
+              "quote": "has petitioned to pledge the license to Brookline Bank.",
+              "faithful_whitespace_normalized_substring": true
+            },
+            {
+              "quote": "Granted",
+              "faithful_whitespace_normalized_substring": true
+            }
+          ],
+          "adjudication_notes": []
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "preferred_response_under_predeclared_rule": "response-b.json",
+    "tie": false,
+    "basis": "Response B has zero critical-inference cases versus three in A, and a higher capped equal-case score.",
+    "ownership_tie": true,
+    "scope": "This single run on 13 deliberately selected cases (12 Board, one ownership) is an accuracy pilot. It does not estimate population accuracy or establish general model equivalence, reliability, or cost-effectiveness."
+  },
+  "frozen_files_unchanged_during_scoring": true
+}

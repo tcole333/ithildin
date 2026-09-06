@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head><title>Superior Court of California - County of Orange</title></head>
+<body>
+  <form id="searchForm" action="/search.do;jsessionid=FIXTURE" method="post">
+    <select name="searchForm.caseType" id="caseType">
+      <option value="ALL">Select Case Category</option>
+      <option value="CV">Civil</option>
+      <option value="CM">Criminal</option>
+      <option value="FL">Family Law</option>
+      <option value="PR">Probate</option>
+      <option value="SC">Small Claims</option>
+      <option value="TF">Traffic</option>
+    </select>
+    <input name="searchForm.caseNo" id="caseNo" value="">
+    <input name="searchForm.caseYear" id="caseYear" value="">
+    <input name="searchForm.title" id="title" value="">
+    <select name="searchForm.jc" id="jc"><option value=""></option></select>
+    <select name="searchForm.dept" id="dept"><option value=""></option></select>
+    <input name="searchForm.dateFrom" id="dateFrom" value="Jul-30-2026">
+    <input name="searchForm.dateTo" id="dateTo" value="Sep-10-2026">
+    <select name="searchForm.eventTime" id="eventTime">
+      <option value="ALL">Any</option>
+    </select>
+    <select name="searchForm.numRecordsPerPage" id="numRecordsPerPage">
+      <option value="10">10</option>
+      <option value="15" selected>15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+    </select>
+    <input type="hidden" name="searchForm.action" value="">
+  </form>
+</body>
+</html>

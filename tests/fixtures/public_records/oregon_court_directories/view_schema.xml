@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetViewResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetViewResult>
+        <View
+          Name="{C4B238D3-A4D0-4728-A8F4-D6691300285E}"
+          DisplayName="Judges"
+          Type="HTML"
+        >
+          <ViewFields>
+            <FieldRef Name="FirstName" />
+            <FieldRef Name="Title" />
+            <FieldRef Name="Term_x0020_Expires" />
+          </ViewFields>
+        </View>
+      </GetViewResult>
+    </GetViewResponse>
+  </soap:Body>
+</soap:Envelope>

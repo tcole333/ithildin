@@ -1,161 +1,395 @@
 #!/usr/bin/env python3
-"""
-MuckRock FOIA API wrapper for OSINT investigations.
+"""Authenticated MuckRock API v2 client for OSINT investigations.
 
-Searches public FOIA requests on MuckRock, downloads released documents,
-and navigates the Epstein FOIA project (ID 507, 21 requests).
+Searches FOIA requests, retrieves request communications and released-file
+metadata, downloads released documents, lists project requests, and searches
+agencies through MuckRock's official ``python-muckrock`` wrapper. It can also
+build and search a resumable local SQLite/FTS5 index of the public corpus.
 
-API: https://www.muckrock.com/api_v1/
-Auth: None required for public read.
-Pagination: Django REST (count/next/previous/results), page_size up to 100.
-Rate limit: 1 req/sec.
+Authentication uses a normal MuckRock account. The wrapper exchanges the
+credentials for short-lived Squarelet access/refresh tokens and refreshes them
+automatically.
 
-IMPORTANT: The `search=` and `project=` query params on /foia/ are BROKEN
-(return all 114K results unfiltered). For project listing, fetch the project
-detail to get request IDs, then fetch each individually. For search, use
-the `tags=` parameter which works correctly.
+Required environment variables (a repo-local ``.env`` is also supported):
+    MUCKROCK_USERNAME
+    MUCKROCK_PASSWORD
 
 Usage:
-    python tools/query_muckrock.py project                          # Epstein project (507)
-    python tools/query_muckrock.py project 507
-    python tools/query_muckrock.py request 12345
-    python tools/query_muckrock.py download 12345 --dir datasets/muckrock
-    python tools/query_muckrock.py search epstein
-    python tools/query_muckrock.py agencies "Federal Bureau"
+    uv run python tools/query_muckrock.py project
+    uv run python tools/query_muckrock.py project 507
+    uv run python tools/query_muckrock.py request 78799
+    uv run python tools/query_muckrock.py download 78799 --dir datasets/muckrock
+    uv run python tools/query_muckrock.py search "Jeffrey Epstein" --limit 25
+    uv run python tools/query_muckrock.py agencies "Federal Bureau"
+    uv run python tools/query_muckrock.py crawl-index --max-pages 1
+    uv run python tools/query_muckrock.py unlinked-files "GEO Group"
 """
 
+from __future__ import annotations
+
 import argparse
-import gzip
 import json
 import os
+import sqlite3
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode, urlparse, quote
-from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from urllib.parse import urljoin, urlparse
+from urllib.request import Request, urlopen
+
+from muckrock import MuckRock
+from squarelet.exceptions import (
+    CredentialsFailedError,
+    DoesNotExistError,
+    SquareletError,
+)
 
 try:
+    from tools.env_loader import load_env_file
+    from tools.lead_tracker import log_search
+    from tools.muckrock_index import (
+        COLLECTIONS as INDEX_COLLECTIONS,
+        DEFAULT_INDEX_DB,
+        crawl_index,
+        index_stats,
+        search_index,
+    )
     from tools.output_util import add_output_args, write_output
 except ImportError:
+    from env_loader import load_env_file
+    from lead_tracker import log_search
+    from muckrock_index import (
+        COLLECTIONS as INDEX_COLLECTIONS,
+        DEFAULT_INDEX_DB,
+        crawl_index,
+        index_stats,
+        search_index,
+    )
     from output_util import add_output_args, write_output
 
-BASE_URL = "https://www.muckrock.com/api_v1"
-CDN_BASE = "https://cdn.muckrock.com"
-USER_AGENT = "OSINT-Research/1.0"
-RATE_LIMIT_DELAY = 1.0  # 1 request per second
-DEFAULT_PROJECT_ID = None  # Set via --project or MUCKROCK_PROJECT_ID env var
+load_env_file()
+
+DEFAULT_PROJECT_ID = 507
 DEFAULT_DOWNLOAD_DIR = "datasets/muckrock"
+MUCKROCK_WEB_BASE = "https://www.muckrock.com"
+DOWNLOAD_USER_AGENT = "OSINT-Research/1.0"
+API_RETRY_ATTEMPTS = 3
+API_RETRY_BACKOFF_SECONDS = 1.0
+TRANSIENT_API_STATUS_CODES = {500, 502, 503, 504}
 
-_last_request_time = 0
+
+class MuckRockConfigurationError(RuntimeError):
+    """Raised when local MuckRock configuration is missing or invalid."""
 
 
 # ---------------------------------------------------------------------------
-# HTTP helpers
+# Client and object helpers
 # ---------------------------------------------------------------------------
 
-def _fetch(url, _retries=2):
-    """Fetch JSON from MuckRock API, respecting rate limit.
 
-    Handles gzip-encoded responses and retries on transient failures.
-    """
-    global _last_request_time
-    elapsed = time.time() - _last_request_time
-    if elapsed < RATE_LIMIT_DELAY:
-        time.sleep(RATE_LIMIT_DELAY - elapsed)
+def _create_client() -> MuckRock:
+    """Create an authenticated official API-v2 client."""
+    username = os.environ.get("MUCKROCK_USERNAME", "").strip()
+    password = os.environ.get("MUCKROCK_PASSWORD", "")
 
-    req = Request(url, headers={
-        "Accept": "application/json",
-        "Accept-Encoding": "gzip",
-        "User-Agent": USER_AGENT,
-    })
+    missing = [
+        name
+        for name, value in (
+            ("MUCKROCK_USERNAME", username),
+            ("MUCKROCK_PASSWORD", password),
+        )
+        if not value
+    ]
+    if missing:
+        joined = " and ".join(missing)
+        raise MuckRockConfigurationError(
+            f"{joined} not set. Add your MuckRock account credentials to the "
+            "repo-local .env file or export them in the shell."
+        )
 
-    try:
-        _last_request_time = time.time()
-        with urlopen(req, timeout=30) as resp:
-            raw = resp.read()
-            encoding = resp.headers.get("Content-Encoding", "")
-            if encoding == "gzip":
-                raw = gzip.decompress(raw)
-            return json.loads(raw.decode("utf-8", errors="replace"))
-    except HTTPError as e:
-        body_raw = e.read()
+    return MuckRock(username=username, password=password)
+
+
+def _retry_api_call(operation, description):
+    """Run one API-v2 operation with bounded transient-server retries."""
+    for attempt in range(API_RETRY_ATTEMPTS):
         try:
-            body = gzip.decompress(body_raw).decode()[:500]
-        except Exception:
-            try:
-                body = body_raw.decode()[:500]
-            except Exception:
-                body = str(body_raw[:200])
-        if e.code == 429 and _retries > 0:
-            wait = RATE_LIMIT_DELAY * 3
-            print(f"  Rate limited, waiting {wait:.0f}s...", file=sys.stderr)
+            return operation()
+        except SquareletError as exc:
+            status_code = getattr(exc, "status_code", None)
+            is_retryable = status_code in TRANSIENT_API_STATUS_CODES
+            if not is_retryable or attempt + 1 == API_RETRY_ATTEMPTS:
+                raise
+            wait = API_RETRY_BACKOFF_SECONDS * (2**attempt)
+            print(
+                f"  MuckRock {description} returned HTTP {status_code}; "
+                f"retrying in {wait:g}s...",
+                file=sys.stderr,
+            )
             time.sleep(wait)
-            return _fetch(url, _retries=_retries - 1)
-        if e.code >= 500 and _retries > 0:
-            print(f"  Server error {e.code}, retrying...", file=sys.stderr)
-            time.sleep(RATE_LIMIT_DELAY * 2)
-            return _fetch(url, _retries=_retries - 1)
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        if _retries > 0:
-            print(f"  Connection error, retrying: {e.reason}", file=sys.stderr)
-            time.sleep(RATE_LIMIT_DELAY * 2)
-            return _fetch(url, _retries=_retries - 1)
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return None
-    except json.JSONDecodeError as e:
-        print(f"ERROR: Invalid JSON response: {e}", file=sys.stderr)
-        return None
+    raise AssertionError("unreachable")
 
 
-def _fetch_endpoint(endpoint, params=None):
-    """Fetch from a MuckRock API endpoint (relative path)."""
-    url = f"{BASE_URL}/{endpoint.lstrip('/')}/"
-    if params:
-        url += "?" + urlencode(params, doseq=True)
-    return _fetch(url)
+def _retrieve_request(client: MuckRock, request_id):
+    """Retrieve one FOIA request with transient-server retry handling."""
+    return _retry_api_call(
+        lambda: client.requests.retrieve(request_id),
+        f"request {request_id}",
+    )
 
 
-def _paginate(endpoint, params=None, max_results=100):
-    """Paginate through Django REST results."""
-    if params is None:
-        params = {}
-    params["format"] = "json"
-    params["page_size"] = min(100, max_results)
-
-    all_results = []
-    url = f"{BASE_URL}/{endpoint.lstrip('/')}/"
-    url += "?" + urlencode(params, doseq=True)
-
-    while url and len(all_results) < max_results:
-        data = _fetch(url)
-        if not data:
-            break
-
-        results = data.get("results", [])
-        all_results.extend(results)
-
-        url = data.get("next")  # Full URL for next page
-
-    total = data.get("count", len(all_results)) if data else len(all_results)
-    return all_results[:max_results], total
-
-
-def _download_file(url, dest_path):
-    """Download a file to disk. Returns True on success."""
-    req = Request(url, headers={"User-Agent": USER_AGENT})
+def _configured_project_id() -> int:
+    """Return the configured default project ID."""
+    raw = os.environ.get("MUCKROCK_PROJECT_ID", str(DEFAULT_PROJECT_ID)).strip()
     try:
-        with urlopen(req, timeout=120) as resp:
-            data = resp.read()
-            dest_path.parent.mkdir(parents=True, exist_ok=True)
-            dest_path.write_bytes(data)
-            size_kb = len(data) / 1024
-            print(f"  Downloaded {dest_path.name} ({size_kb:.1f} KB)")
-            return True
-    except (HTTPError, URLError, TimeoutError) as e:
-        print(f"  ERROR downloading {url}: {e}", file=sys.stderr)
+        return int(raw)
+    except ValueError as exc:
+        raise MuckRockConfigurationError(
+            f"MUCKROCK_PROJECT_ID must be an integer, got {raw!r}."
+        ) from exc
+
+
+def _get(obj, name, default=None):
+    """Read a field from an API object or plain dictionary."""
+    if isinstance(obj, dict):
+        return obj.get(name, default)
+    return getattr(obj, name, default)
+
+
+def _first(obj, *names, default=None):
+    """Return the first present, non-None object field."""
+    for name in names:
+        value = _get(obj, name)
+        if value is not None:
+            return value
+    return default
+
+
+def _object_id(value):
+    """Normalize an ID that may be scalar, dictionary, or API object."""
+    if value is None or isinstance(value, (int, str)):
+        return value
+    return _get(value, "id", value)
+
+
+def _display_party(value) -> str:
+    """Render a communication participant represented by ID or object."""
+    if value is None:
+        return ""
+    if isinstance(value, (int, str)):
+        return str(value)
+    return str(_first(value, "name", "username", "id", default=""))
+
+
+def _limited(results, limit: int):
+    """Yield at most ``limit`` objects from a paginated API result."""
+    for index, result in enumerate(results):
+        if index >= limit:
+            break
+        yield result
+
+
+def _total_count(results, returned: int) -> int:
+    """Read the API's total result count with a safe local fallback."""
+    count = getattr(results, "count", None)
+    return returned if count is None else int(count)
+
+
+def _positive_int(value: str) -> int:
+    """Argparse type for strictly positive limits."""
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("must be at least 1")
+    return parsed
+
+
+def _nonnegative_int(value: str) -> int:
+    """Argparse type for counts where zero means unlimited."""
+    parsed = int(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("cannot be negative")
+    return parsed
+
+
+def _nonnegative_float(value: str) -> float:
+    """Argparse type for nonnegative crawl delays."""
+    parsed = float(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("cannot be negative")
+    return parsed
+
+
+_agency_cache: dict[int | str, str] = {}
+
+
+def _agency_name(client: MuckRock, agency) -> str:
+    """Resolve a request agency ID to a human-readable name."""
+    if agency is None:
+        return "Unknown Agency"
+
+    direct_name = _get(agency, "name")
+    if direct_name:
+        return str(direct_name)
+
+    agency_id = _object_id(agency)
+    if agency_id in _agency_cache:
+        return _agency_cache[agency_id]
+
+    try:
+        resolved = client.agencies.retrieve(agency_id)
+        name = str(_get(resolved, "name", f"Agency #{agency_id}"))
+    except DoesNotExistError:
+        name = f"Agency #{agency_id}"
+
+    _agency_cache[agency_id] = name
+    return name
+
+
+def _request_file_count(foia) -> int:
+    """Count request files from communication file references."""
+    count = 0
+    communications = _retry_api_call(
+        lambda: list(foia.get_communications()),
+        f"communications for request {_get(foia, 'id', '?')}",
+    )
+    for communication in communications:
+        file_refs = _get(communication, "files")
+        if isinstance(file_refs, (list, tuple, set)):
+            count += len(file_refs)
+        else:
+            count += len(_communication_files(communication))
+    return count
+
+
+def _request_summary(client: MuckRock, foia, *, include_file_count: bool) -> dict:
+    """Normalize request fields shared by project and search output."""
+    agency = _get(foia, "agency")
+    summary = {
+        "id": _get(foia, "id"),
+        "title": _get(foia, "title", "Untitled"),
+        "status": _get(foia, "status", "unknown"),
+        "agency": _agency_name(client, agency),
+        "agency_id": _object_id(agency),
+        "date_submitted": str(_get(foia, "datetime_submitted", "") or ""),
+        "tracking_id": _get(foia, "tracking_id", "") or "",
+        "slug": _get(foia, "slug", "") or "",
+        "file_count": None,
+    }
+    if include_file_count:
+        summary["file_count"] = _request_file_count(foia)
+    return summary
+
+
+def _communication_files(communication) -> list:
+    """Retrieve file objects for a communication, avoiding known-empty calls."""
+    file_refs = _get(communication, "files")
+    if isinstance(file_refs, (list, tuple, set)) and not file_refs:
+        return []
+    return _retry_api_call(
+        lambda: list(communication.get_files()),
+        f"files for communication {_get(communication, 'id', '?')}",
+    )
+
+
+def _file_record(file_obj, communication_date: str) -> dict:
+    """Normalize a MuckRock file object."""
+    return {
+        "id": _get(file_obj, "id"),
+        "title": _get(file_obj, "title", "") or "",
+        "url": _get(file_obj, "ffile", "") or "",
+        "pages": _get(file_obj, "pages"),
+        "datetime": str(_get(file_obj, "datetime", "") or ""),
+        "source": _get(file_obj, "source", "") or "",
+        "description": _get(file_obj, "description", "") or "",
+        "doc_id": _get(file_obj, "doc_id"),
+        "comm_date": communication_date,
+    }
+
+
+def _request_detail(client: MuckRock, foia) -> tuple[dict, list[dict]]:
+    """Build full request output and return its flattened file records."""
+    communications = []
+    all_files = []
+
+    request_id = _get(foia, "id", "?")
+    communication_objects = _retry_api_call(
+        lambda: list(foia.get_communications()),
+        f"communications for request {request_id}",
+    )
+    for communication in communication_objects:
+        communication_date = str(_get(communication, "datetime", "") or "")
+        files = [
+            _file_record(file_obj, communication_date)
+            for file_obj in _communication_files(communication)
+        ]
+        all_files.extend(files)
+        communications.append(
+            {
+                "id": _get(communication, "id"),
+                "date": communication_date,
+                "from_who": _display_party(
+                    _first(communication, "from_who", "from_user")
+                ),
+                "to_who": _display_party(
+                    _first(communication, "to_who", "to_user")
+                ),
+                "subject": _get(communication, "subject", "") or "",
+                "body": _get(communication, "communication", "") or "",
+                "response": bool(_get(communication, "response", False)),
+                "status": _get(communication, "status", "") or "",
+                "file_count": len(files),
+                "files": files,
+            }
+        )
+
+    agency = _get(foia, "agency")
+    request_id = _get(foia, "id")
+    output = {
+        "id": request_id,
+        "title": _get(foia, "title", "Untitled"),
+        "status": _get(foia, "status", "unknown"),
+        "agency": _agency_name(client, agency),
+        "agency_id": _object_id(agency),
+        "date_submitted": str(_get(foia, "datetime_submitted", "") or ""),
+        "date_done": str(_get(foia, "datetime_done", "") or ""),
+        "tracking_id": _get(foia, "tracking_id", "") or "",
+        "slug": _get(foia, "slug", "") or "",
+        "requested_docs": _get(foia, "requested_docs", "") or "",
+        "url": f"{MUCKROCK_WEB_BASE}/foi/request/{request_id}/",
+        "total_files": len(all_files),
+        "total_pages": sum(_get(file_obj, "pages", 0) or 0 for file_obj in all_files),
+        "communications": communications,
+    }
+    return output, all_files
+
+
+def _record_search(query: str, result_count: int) -> None:
+    """Log successful MuckRock searches without obscuring local DB failures."""
+    try:
+        log_search(query, "muckrock", result_count)
+    except Exception as exc:  # local logging must not invalidate remote results
+        print(f"WARNING: Could not log MuckRock search: {exc}", file=sys.stderr)
+
+
+# ---------------------------------------------------------------------------
+# Download helper
+# ---------------------------------------------------------------------------
+
+
+def _download_file(url: str, dest_path: Path) -> bool:
+    """Download a released file URL returned by API v2."""
+    absolute_url = urljoin(MUCKROCK_WEB_BASE, url)
+    req = Request(absolute_url, headers={"User-Agent": DOWNLOAD_USER_AGENT})
+    try:
+        with urlopen(req, timeout=120) as response:
+            data = response.read()
+        dest_path.parent.mkdir(parents=True, exist_ok=True)
+        dest_path.write_bytes(data)
+        print(f"  Downloaded {dest_path.name} ({len(data) / 1024:.1f} KB)")
+        return True
+    except (HTTPError, URLError, TimeoutError, OSError) as exc:
+        print(f"  ERROR downloading {absolute_url}: {exc}", file=sys.stderr)
         return False
 
 
@@ -163,106 +397,52 @@ def _download_file(url, dest_path):
 # Status display helpers
 # ---------------------------------------------------------------------------
 
+
 FOIA_STATUS_LABELS = {
-    "submitted": "Submitted",
-    "ack": "Acknowledged",
-    "processed": "Processing",
-    "appealing": "Appealing",
+    "submitted": "Processing",
+    "ack": "Awaiting Acknowledgement",
+    "processed": "Awaiting Response",
+    "appealing": "Awaiting Appeal",
     "fix": "Fix Required",
     "payment": "Payment Required",
     "rejected": "Rejected",
-    "no_docs": "No Responsive Docs",
+    "no_docs": "No Responsive Documents",
     "done": "Completed",
     "partial": "Partially Completed",
-    "abandoned": "Abandoned",
+    "abandoned": "Withdrawn",
     "lawsuit": "In Litigation",
+    "consolidated": "Consolidated",
 }
 
 
-def _status_label(status):
-    """Human-readable status label."""
+def _status_label(status) -> str:
+    """Return a human-readable MuckRock request status."""
     return FOIA_STATUS_LABELS.get(status, status or "Unknown")
-
-
-def _extract_files(foia):
-    """Extract all files from a FOIA request's communications."""
-    files = []
-    for comm in foia.get("communications", []):
-        for f in comm.get("files", []):
-            f["comm_date"] = comm.get("datetime", "")
-            files.append(f)
-    return files
-
-
-_agency_cache = {}
-
-
-def _resolve_agency(agency_id):
-    """Resolve an agency ID to its name, with in-memory caching."""
-    if agency_id in _agency_cache:
-        return _agency_cache[agency_id]
-
-    data = _fetch_endpoint(f"agency/{agency_id}", {"format": "json"})
-    if data and isinstance(data, dict):
-        name = data.get("name", f"Agency #{agency_id}")
-    else:
-        name = f"Agency #{agency_id}"
-
-    _agency_cache[agency_id] = name
-    return name
-
-
-def _agency_name(agency):
-    """Extract agency name from agency object, string, or integer ID."""
-    if isinstance(agency, dict):
-        return agency.get("name", "Unknown Agency")
-    if isinstance(agency, int):
-        return _resolve_agency(agency)
-    if isinstance(agency, str):
-        return agency
-    return "Unknown Agency"
 
 
 # ---------------------------------------------------------------------------
 # Commands
 # ---------------------------------------------------------------------------
 
-def cmd_project(args):
-    """List FOIA requests in a MuckRock project."""
+
+def cmd_project(client: MuckRock, args) -> int:
+    """List FOIA requests associated with a MuckRock project."""
     project_id = args.project_id
-
-    # Fetch project detail to get request IDs
     print(f"Fetching project {project_id}...", file=sys.stderr)
-    project = _fetch_endpoint(f"project/{project_id}", {"format": "json"})
-    if not project:
-        print(f"ERROR: Could not fetch project {project_id}", file=sys.stderr)
-        sys.exit(1)
+    project = client.projects.retrieve(project_id)
 
-    request_ids = project.get("requests", [])
-    title = project.get("title", f"Project {project_id}")
-    print(f"Project: {title} ({len(request_ids)} FOIA requests)", file=sys.stderr)
-
-    # Fetch each FOIA request detail
+    request_refs = _get(project, "requests", []) or []
     requests = []
-    for i, rid in enumerate(request_ids):
-        print(f"  Fetching request {rid} ({i+1}/{len(request_ids)})...", file=sys.stderr)
-        foia = _fetch_endpoint(f"foia/{rid}", {"format": "json"})
-        if foia:
-            file_count = sum(
-                len(comm.get("files", []))
-                for comm in foia.get("communications", [])
-            )
-            requests.append({
-                "id": foia.get("id"),
-                "title": foia.get("title", "Untitled"),
-                "status": foia.get("status", "unknown"),
-                "agency": _agency_name(foia.get("agency")),
-                "date_submitted": foia.get("datetime_submitted", ""),
-                "file_count": file_count,
-                "tracking_id": foia.get("tracking_id", ""),
-            })
+    for index, request_ref in enumerate(request_refs, 1):
+        request_id = _object_id(request_ref)
+        print(
+            f"  Fetching request {request_id} ({index}/{len(request_refs)})...",
+            file=sys.stderr,
+        )
+        foia = _retrieve_request(client, request_id)
+        requests.append(_request_summary(client, foia, include_file_count=True))
 
-    # Output
+    title = _get(project, "title", f"Project {project_id}")
     output_data = {
         "project_id": project_id,
         "project_title": title,
@@ -270,165 +450,130 @@ def cmd_project(args):
         "requests": requests,
     }
 
-    if write_output(output_data, args, summary=f"MuckRock project {project_id} '{title}'"):
-        return
+    if write_output(
+        output_data,
+        args,
+        summary=f"MuckRock project {project_id} '{title}'",
+    ):
+        return 0
     if getattr(args, "json_out", False):
         print(json.dumps(output_data, indent=2, default=str))
-        return
+        return 0
 
-    # Pretty print
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"MuckRock Project: {title} (ID {project_id})")
     print(f"FOIA Requests: {len(requests)}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
-    for r in requests:
-        status = _status_label(r["status"])
-        files = f"{r['file_count']} files" if r["file_count"] else "no files"
-        date = r["date_submitted"][:10] if r["date_submitted"] else "no date"
-        print(f"  [{r['id']}] {r['title']}")
-        print(f"    Status: {status}  |  Agency: {r['agency']}  |  {files}  |  {date}")
-        if r.get("tracking_id"):
-            print(f"    Tracking: {r['tracking_id']}")
+    for request in requests:
+        status = _status_label(request["status"])
+        files = f"{request['file_count']} files"
+        date = request["date_submitted"][:10] or "no date"
+        print(f"  [{request['id']}] {request['title']}")
+        print(
+            f"    Status: {status}  |  Agency: {request['agency']}  |  "
+            f"{files}  |  {date}"
+        )
+        if request["tracking_id"]:
+            print(f"    Tracking: {request['tracking_id']}")
         print()
+    return 0
 
 
-def cmd_request(args):
+def cmd_request(client: MuckRock, args) -> int:
     """Show detail for a single FOIA request."""
-    rid = args.request_id
+    request_id = args.request_id
+    print(f"Fetching FOIA request {request_id}...", file=sys.stderr)
+    foia = _retrieve_request(client, request_id)
+    output_data, _files = _request_detail(client, foia)
 
-    print(f"Fetching FOIA request {rid}...", file=sys.stderr)
-    foia = _fetch_endpoint(f"foia/{rid}", {"format": "json"})
-    if not foia:
-        print(f"ERROR: Could not fetch request {rid}", file=sys.stderr)
-        sys.exit(1)
-
-    # Build structured output
-    files = _extract_files(foia)
-    comms = []
-    for comm in foia.get("communications", []):
-        comms.append({
-            "date": comm.get("datetime", ""),
-            "from_who": comm.get("from_who", {}).get("name", "") if isinstance(comm.get("from_who"), dict) else str(comm.get("from_who", "")),
-            "to_who": comm.get("to_who", {}).get("name", "") if isinstance(comm.get("to_who"), dict) else str(comm.get("to_who", "")),
-            "subject": comm.get("subject", ""),
-            "response": comm.get("response", False),
-            "file_count": len(comm.get("files", [])),
-            "files": [
-                {
-                    "id": f.get("id"),
-                    "title": f.get("title", ""),
-                    "url": f.get("ffile", ""),
-                    "pages": f.get("pages"),
-                }
-                for f in comm.get("files", [])
-            ],
-        })
-
-    output_data = {
-        "id": foia.get("id"),
-        "title": foia.get("title", "Untitled"),
-        "status": foia.get("status", "unknown"),
-        "agency": _agency_name(foia.get("agency")),
-        "date_submitted": foia.get("datetime_submitted", ""),
-        "date_done": foia.get("datetime_done", ""),
-        "tracking_id": foia.get("tracking_id", ""),
-        "slug": foia.get("slug", ""),
-        "total_files": len(files),
-        "total_pages": sum(f.get("pages") or 0 for f in files),
-        "communications": comms,
-    }
-
-    if write_output(output_data, args, summary=f"MuckRock FOIA #{rid}"):
-        return
+    if write_output(output_data, args, summary=f"MuckRock FOIA #{request_id}"):
+        return 0
     if getattr(args, "json_out", False):
         print(json.dumps(output_data, indent=2, default=str))
-        return
+        return 0
 
-    # Pretty print
     status = _status_label(output_data["status"])
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"FOIA Request #{output_data['id']}: {output_data['title']}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"  Status:    {status}")
     print(f"  Agency:    {output_data['agency']}")
-    print(f"  Submitted: {output_data['date_submitted'][:10] if output_data['date_submitted'] else 'N/A'}")
+    submitted = output_data["date_submitted"][:10] or "N/A"
+    print(f"  Submitted: {submitted}")
     if output_data["date_done"]:
         print(f"  Completed: {output_data['date_done'][:10]}")
     if output_data["tracking_id"]:
         print(f"  Tracking:  {output_data['tracking_id']}")
-    print(f"  Files:     {output_data['total_files']} ({output_data['total_pages']} pages)")
+    print(
+        f"  Files:     {output_data['total_files']} "
+        f"({output_data['total_pages']} pages)"
+    )
     print()
 
-    for i, comm in enumerate(comms, 1):
-        date = comm["date"][:10] if comm["date"] else "no date"
-        direction = "RESPONSE" if comm["response"] else "SENT"
-        from_str = f" from {comm['from_who']}" if comm["from_who"] else ""
-        to_str = f" to {comm['to_who']}" if comm["to_who"] else ""
-        print(f"  --- Communication {i} [{direction}] {date}{from_str}{to_str} ---")
-        if comm["subject"]:
-            print(f"  Subject: {comm['subject']}")
-        if comm["files"]:
-            for f in comm["files"]:
-                pages = f" ({f['pages']} pages)" if f.get("pages") else ""
-                title = f["title"] or "Untitled"
-                print(f"    FILE: {title}{pages}")
-                if f["url"]:
-                    print(f"          {f['url']}")
+    for index, communication in enumerate(output_data["communications"], 1):
+        date = communication["date"][:10] or "no date"
+        direction = "RESPONSE" if communication["response"] else "SENT"
+        from_part = (
+            f" from {communication['from_who']}" if communication["from_who"] else ""
+        )
+        to_part = f" to {communication['to_who']}" if communication["to_who"] else ""
+        print(
+            f"  --- Communication {index} [{direction}] "
+            f"{date}{from_part}{to_part} ---"
+        )
+        if communication["subject"]:
+            print(f"  Subject: {communication['subject']}")
+        for file_obj in communication["files"]:
+            pages = f" ({file_obj['pages']} pages)" if file_obj["pages"] else ""
+            print(f"    FILE: {file_obj['title'] or 'Untitled'}{pages}")
+            if file_obj["url"]:
+                print(f"          {file_obj['url']}")
         print()
+    return 0
 
 
-def cmd_download(args):
-    """Download all files from a FOIA request."""
-    rid = args.request_id
+def cmd_download(client: MuckRock, args) -> int:
+    """Download all released files attached to a FOIA request."""
+    request_id = args.request_id
     base_dir = Path(args.dir) if args.dir else Path(DEFAULT_DOWNLOAD_DIR)
-    dest_dir = base_dir / str(rid)
-    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest_dir = base_dir / str(request_id)
 
-    print(f"Fetching FOIA request {rid}...", file=sys.stderr)
-    foia = _fetch_endpoint(f"foia/{rid}", {"format": "json"})
-    if not foia:
-        print(f"ERROR: Could not fetch request {rid}", file=sys.stderr)
-        sys.exit(1)
+    print(f"Fetching FOIA request {request_id}...", file=sys.stderr)
+    foia = _retrieve_request(client, request_id)
+    output_data, files = _request_detail(client, foia)
 
-    files = _extract_files(foia)
     if not files:
-        print(f"No files found for FOIA request {rid}")
-        return
+        print(f"No files found for FOIA request {request_id}")
+        return 0
 
-    title = foia.get("title", "Untitled")
-    print(f"FOIA #{rid}: {title}")
-    print(f"  {len(files)} files to download -> {dest_dir}")
-    print()
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    print(f"FOIA #{request_id}: {output_data['title']}")
+    print(f"  {len(files)} files to download -> {dest_dir}\n")
 
     downloaded = 0
     skipped = 0
     failed = 0
 
-    for f in files:
-        url = f.get("ffile", "")
+    for file_obj in files:
+        url = file_obj["url"]
         if not url:
-            print(f"  SKIP: No URL for file {f.get('id', '?')}", file=sys.stderr)
+            print(f"  SKIP: No URL for file {file_obj['id']}", file=sys.stderr)
             failed += 1
             continue
 
-        # Derive filename from URL path or file title
-        parsed = urlparse(url)
-        url_filename = Path(parsed.path).name
-        if not url_filename or url_filename == "/":
-            # Fall back to title + id
-            ext = ".pdf"  # Most FOIA files are PDFs
-            safe_title = "".join(c if c.isalnum() or c in "-_." else "_" for c in (f.get("title", "") or ""))
-            url_filename = f"{f.get('id', 'file')}_{safe_title}{ext}" if safe_title else f"{f.get('id', 'file')}{ext}"
+        url_filename = Path(urlparse(url).path).name
+        if not url_filename:
+            safe_title = "".join(
+                character if character.isalnum() or character in "-_." else "_"
+                for character in file_obj["title"]
+            )
+            url_filename = f"{file_obj['id']}_{safe_title or 'file'}.pdf"
 
         dest_path = dest_dir / url_filename
-
         if dest_path.exists():
             skipped += 1
             continue
-
-        # Rate limit between downloads
-        time.sleep(RATE_LIMIT_DELAY)
 
         if _download_file(url, dest_path):
             downloaded += 1
@@ -437,36 +582,22 @@ def cmd_download(args):
 
     print(f"\nDone: {downloaded} downloaded, {skipped} skipped (exist), {failed} failed")
     print(f"Files in: {dest_dir}")
+    return 1 if failed else 0
 
 
-def cmd_search(args):
-    """Search FOIA requests by tag."""
+def cmd_search(client: MuckRock, args) -> int:
+    """Search FOIA requests using API v2 full-text search."""
     query = args.query
-
-    params = {
-        "tags": query,
-        "format": "json",
-        "page_size": min(100, args.limit),
-    }
-
-    results, total = _paginate("foia", params, max_results=args.limit)
-
-    # Enrich with file counts (already in list response)
-    output_results = []
-    for r in results:
-        file_count = sum(
-            len(comm.get("files", []))
-            for comm in r.get("communications", [])
-        )
-        output_results.append({
-            "id": r.get("id"),
-            "title": r.get("title", "Untitled"),
-            "status": r.get("status", "unknown"),
-            "agency": _agency_name(r.get("agency")),
-            "date_submitted": r.get("datetime_submitted", ""),
-            "file_count": file_count,
-            "tracking_id": r.get("tracking_id", ""),
-        })
+    api_results = client.requests.list(
+        search=query,
+        page_size=min(100, args.limit),
+    )
+    requests = list(_limited(api_results, args.limit))
+    output_results = [
+        _request_summary(client, request, include_file_count=False)
+        for request in requests
+    ]
+    total = _total_count(api_results, len(output_results))
 
     output_data = {
         "query": query,
@@ -474,90 +605,64 @@ def cmd_search(args):
         "showing": len(output_results),
         "results": output_results,
     }
+    _record_search(query, len(output_results))
 
-    if write_output(output_data, args, summary=f"MuckRock search tags='{query}'"):
-        return
+    if write_output(output_data, args, summary=f"MuckRock search '{query}'"):
+        return 0
     if getattr(args, "json_out", False):
         print(json.dumps(output_data, indent=2, default=str))
-        return
+        return 0
 
-    # Pretty print
-    print(f"\nMuckRock FOIA search: tags='{query}'")
+    print(f"\nMuckRock FOIA search: '{query}'")
     print(f"Found {total} results (showing {len(output_results)})\n")
 
-    for r in output_results:
-        status = _status_label(r["status"])
-        files = f"{r['file_count']} files" if r["file_count"] else "no files"
-        date = r["date_submitted"][:10] if r["date_submitted"] else "no date"
-        print(f"  [{r['id']}] {r['title']}")
-        print(f"    Status: {status}  |  Agency: {r['agency']}  |  {files}  |  {date}")
+    for request in output_results:
+        status = _status_label(request["status"])
+        date = request["date_submitted"][:10] or "no date"
+        print(f"  [{request['id']}] {request['title']}")
+        print(
+            f"    Status: {status}  |  Agency: {request['agency']}  |  "
+            f"file count not expanded  |  {date}"
+        )
         print()
+    return 0
 
 
-def cmd_agencies(args):
-    """Search agencies on MuckRock.
-
-    NOTE: The MuckRock agency API does not support partial text search (search=,
-    q=, name__icontains= all return unfiltered results). Only exact name= works.
-    Strategy: try exact match first; if no results, fetch pages and filter
-    client-side by case-insensitive substring match.
-    """
+def cmd_agencies(client: MuckRock, args) -> int:
+    """Search MuckRock agencies by partial name through API v2."""
     query = args.query
-
-    # Try exact match first
-    exact = _fetch_endpoint("agency", {"format": "json", "name": query, "page_size": 100})
-    if exact and exact.get("count", 0) > 0:
-        results = exact.get("results", [])
-        total = exact.get("count", len(results))
-    else:
-        # Client-side filter: fetch up to 500 agencies and filter
-        # (API has no working partial search)
-        print(f"No exact match for '{query}', searching by substring...", file=sys.stderr)
-        query_lower = query.lower()
-        results = []
-        page = 1
-        max_pages = 5  # 100 per page * 5 = 500 scanned
-        while page <= max_pages and len(results) < args.limit:
-            data = _fetch_endpoint("agency", {
-                "format": "json",
-                "page_size": 100,
-                "page": page,
-            })
-            if not data or not data.get("results"):
-                break
-            for a in data["results"]:
-                name = a.get("name", "")
-                if query_lower in name.lower():
-                    results.append(a)
-            if not data.get("next"):
-                break
-            page += 1
-        total = len(results)
+    api_results = client.agencies.list(
+        name=query,
+        page_size=min(100, args.limit),
+    )
+    agencies = list(_limited(api_results, args.limit))
+    total = _total_count(api_results, len(agencies))
 
     output_results = []
-    for a in results[:args.limit]:
-        jurisdiction = a.get("jurisdiction", {})
-        if isinstance(jurisdiction, dict):
-            jur_name = jurisdiction.get("name", "")
-            jur_level = jurisdiction.get("level", "")
-            jur_str = f"{jur_name} ({jur_level})" if jur_level else jur_name
-        elif isinstance(jurisdiction, int):
-            jur_str = ""  # Jurisdiction is an ID; resolving would cost extra requests
+    for agency in agencies:
+        jurisdiction = _get(agency, "jurisdiction")
+        jurisdiction_id = _object_id(jurisdiction)
+        if isinstance(jurisdiction, dict) or _get(jurisdiction, "name"):
+            jurisdiction_name = str(_get(jurisdiction, "name", ""))
         else:
-            jur_str = str(jurisdiction) if jurisdiction else ""
+            jurisdiction_name = ""
 
-        output_results.append({
-            "id": a.get("id"),
-            "name": a.get("name", "Unknown"),
-            "slug": a.get("slug", ""),
-            "status": a.get("status", ""),
-            "jurisdiction": jur_str,
-            "jurisdiction_id": a.get("jurisdiction") if isinstance(a.get("jurisdiction"), int) else None,
-            "average_response_time": a.get("average_response_time"),
-            "success_rate": a.get("success_rate"),
-            "number_requests": a.get("number_requests", 0),
-            "number_requests_completed": a.get("number_requests_done", 0),
-        })
+        output_results.append(
+            {
+                "id": _get(agency, "id"),
+                "name": _get(agency, "name", "Unknown"),
+                "slug": _get(agency, "slug", "") or "",
+                "status": _get(agency, "status", "") or "",
+                "jurisdiction": jurisdiction_name,
+                "jurisdiction_id": jurisdiction_id,
+                "average_response_time": _get(agency, "average_response_time"),
+                "success_rate": _get(agency, "success_rate"),
+                "number_requests": _get(agency, "number_requests"),
+                "number_requests_completed": _get(
+                    agency, "number_requests_done"
+                ),
+            }
+        )
 
     output_data = {
         "query": query,
@@ -565,103 +670,382 @@ def cmd_agencies(args):
         "showing": len(output_results),
         "results": output_results,
     }
+    _record_search(f"agency:{query}", len(output_results))
 
     if write_output(output_data, args, summary=f"MuckRock agencies '{query}'"):
-        return
+        return 0
     if getattr(args, "json_out", False):
         print(json.dumps(output_data, indent=2, default=str))
-        return
+        return 0
 
-    # Pretty print
     print(f"\nMuckRock Agency search: '{query}'")
     print(f"Found {total} agencies (showing {len(output_results)})\n")
 
-    for a in output_results:
-        reqs = a["number_requests"] or 0
-        done = a["number_requests_completed"] or 0
-        resp_time = a["average_response_time"]
-        success = a["success_rate"]
+    for agency in output_results:
+        print(f"  [{agency['id']}] {agency['name']}")
+        jurisdiction = agency["jurisdiction"] or (
+            f"Jurisdiction #{agency['jurisdiction_id']}"
+            if agency["jurisdiction_id"] is not None
+            else "N/A"
+        )
+        print(f"    Jurisdiction: {jurisdiction}")
 
-        stats_parts = [f"{reqs} requests ({done} completed)"]
-        if resp_time is not None:
-            stats_parts.append(f"avg {resp_time} days")
-        if success is not None:
-            # success_rate is a percentage (26.0 = 26%). List endpoint may
-            # return it as int*100 (2600); normalize if > 100.
+        stats = []
+        if agency["number_requests"] is not None:
+            done = agency["number_requests_completed"]
+            done_text = f" ({done} completed)" if done is not None else ""
+            stats.append(f"{agency['number_requests']} requests{done_text}")
+        if agency["average_response_time"] is not None:
+            stats.append(f"avg {agency['average_response_time']} days")
+        if agency["success_rate"] is not None:
             try:
-                pct = float(success)
-                if pct > 100:
-                    pct = pct / 100.0
-                stats_parts.append(f"{pct:.1f}% success")
-            except (ValueError, TypeError):
-                stats_parts.append(f"{success} success")
-
-        print(f"  [{a['id']}] {a['name']}")
-        print(f"    Jurisdiction: {a['jurisdiction'] or 'N/A'}")
-        print(f"    Stats: {' | '.join(stats_parts)}")
+                success_rate = float(agency["success_rate"])
+                if success_rate > 100:
+                    success_rate /= 100
+                stats.append(f"{success_rate:.1f}% success")
+            except (TypeError, ValueError):
+                stats.append(f"{agency['success_rate']} success")
+        if stats:
+            print(f"    Stats: {' | '.join(stats)}")
         print()
+    return 0
+
+
+def _index_progress(
+    collection: str, page: int, row_count: int, total: int | None
+) -> None:
+    """Print one concise crawl checkpoint after it is committed."""
+    total_text = f"/{total}" if total is not None else ""
+    print(
+        f"  [{collection}] page {page}: {row_count} rows "
+        f"(API total {total_text.lstrip('/') or 'unknown'})",
+        file=sys.stderr,
+        flush=True,
+    )
+
+
+def cmd_crawl_index(client: MuckRock, args) -> int:
+    """Crawl public MuckRock collections into the resumable local index."""
+    result = crawl_index(
+        client,
+        db_path=args.db,
+        collections=args.collections,
+        max_pages=args.max_pages,
+        delay=args.delay,
+        restart=args.restart,
+        progress=_index_progress,
+    )
+    query = "crawl-index " + ",".join(args.collections)
+    _record_search(query, result["rows_upserted"])
+    if write_output(result, args, summary=f"MuckRock {query}"):
+        return 0
+    print(json.dumps(result, indent=2, default=str))
+    return 0
+
+
+def _local_index_search(args, *, force_unlinked: bool = False) -> int:
+    without_documentcloud = force_unlinked or args.without_documentcloud
+    response_only = (
+        not args.include_outbound if force_unlinked else args.responses_only
+    )
+    results = search_index(
+        db_path=args.db,
+        query=args.query,
+        without_documentcloud=without_documentcloud,
+        response_only=response_only,
+        agency_id=args.agency_id,
+        limit=args.limit,
+    )
+    output_data = {
+        "query": args.query or "",
+        "db": str(args.db),
+        "without_documentcloud": without_documentcloud,
+        "documentcloud_filter_note": (
+            "Blank MuckRock doc_id means no direct DocumentCloud linkage; it does "
+            "not rule out a separately uploaded duplicate."
+        ),
+        "responses_only": response_only,
+        "showing": len(results),
+        "results": results,
+    }
+    qualifiers = []
+    if without_documentcloud:
+        qualifiers.append("documentcloud-unlinked")
+    if response_only:
+        qualifiers.append("responses-only")
+    log_query = f"index:{args.query or '*'}"
+    if qualifiers:
+        log_query += " " + ",".join(qualifiers)
+    _record_search(log_query, len(results))
+
+    if write_output(
+        output_data,
+        args,
+        summary=f"MuckRock local index search '{args.query or '*'}'",
+    ):
+        return 0
+    if getattr(args, "json_out", False):
+        print(json.dumps(output_data, indent=2, default=str))
+        return 0
+
+    label = "DocumentCloud-unlinked response files" if force_unlinked else "files"
+    print(f"\nMuckRock local index: {label}")
+    print(f"Query: {args.query or '(all indexed records)'}")
+    print(f"Showing {len(results)} results\n")
+    for result in results:
+        pages = f" ({result['pages']} pages)" if result["pages"] else ""
+        print(f"  [file {result['file_id']}] {result['file_title'] or 'Untitled'}{pages}")
+        request_title = result["request_title"] or "Unknown request"
+        agency = result["agency_name"] or (
+            f"Agency #{result['agency_id']}"
+            if result["agency_id"] is not None
+            else "Unknown agency"
+        )
+        print(f"    Request #{result['request_id']}: {request_title}")
+        print(f"    Agency: {agency}")
+        if result["communication_subject"]:
+            print(f"    Communication: {result['communication_subject']}")
+        if result["communication_excerpt"]:
+            print(f"    Context: {result['communication_excerpt']}")
+        print(f"    File: {result['file_url']}")
+        print(f"    Request: {result['request_url']}")
+        print()
+    return 0
+
+
+def cmd_index_search(args) -> int:
+    """Search the local index across request, communication, and file text."""
+    return _local_index_search(args)
+
+
+def cmd_unlinked_files(args) -> int:
+    """Find response files with no direct DocumentCloud linkage."""
+    return _local_index_search(args, force_unlinked=True)
+
+
+def cmd_index_stats(args) -> int:
+    """Show local index counts, linkage coverage, and resumable cursors."""
+    result = index_stats(args.db)
+    if write_output(result, args, summary="MuckRock local index stats"):
+        return 0
+    print(json.dumps(result, indent=2, default=str))
+    return 0
 
 
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
-def main():
+
+def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="MuckRock FOIA API tool for OSINT investigations",
+        description="Authenticated MuckRock API v2 tool for OSINT investigations",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
+Requires MUCKROCK_USERNAME and MUCKROCK_PASSWORD.
+
 Examples:
-  %(prog)s project                          # List Epstein project (507)
-  %(prog)s project 507                      # Same, explicit ID
-  %(prog)s request 12345                    # Detail for one FOIA request
-  %(prog)s download 12345                   # Download all files from request
-  %(prog)s search epstein                   # Search by tag
-  %(prog)s agencies "Federal Bureau"        # Search agencies
+  %(prog)s project
+  %(prog)s project 507
+  %(prog)s request 78799
+  %(prog)s download 78799 --dir datasets/muckrock
+  %(prog)s search "Jeffrey Epstein" --limit 25
+  %(prog)s agencies "Federal Bureau"
+  %(prog)s crawl-index --max-pages 1
+  %(prog)s crawl-index --output /tmp/muckrock-crawl.json
+  %(prog)s index-search "GEO Group" --without-documentcloud
+  %(prog)s unlinked-files "private prison" --limit 50
+  %(prog)s index-stats
         """,
     )
-    sub = parser.add_subparsers(dest="command", required=True)
+    subparsers = parser.add_subparsers(dest="command", required=True)
 
-    # project
-    p_project = sub.add_parser("project", help="List FOIA requests in a project")
-    p_project.add_argument("project_id", nargs="?", type=int, default=DEFAULT_PROJECT_ID,
-                           help=f"Project ID (default: {DEFAULT_PROJECT_ID} = Epstein)")
-    add_output_args(p_project)
+    project = subparsers.add_parser("project", help="List FOIA requests in a project")
+    project.add_argument(
+        "project_id",
+        nargs="?",
+        type=int,
+        help=(
+            f"Project ID (default: MUCKROCK_PROJECT_ID or {DEFAULT_PROJECT_ID})"
+        ),
+    )
+    add_output_args(project)
 
-    # request
-    p_request = sub.add_parser("request", help="Show detail for a FOIA request")
-    p_request.add_argument("request_id", type=int, help="FOIA request ID")
-    add_output_args(p_request)
+    request = subparsers.add_parser("request", help="Show detail for a FOIA request")
+    request.add_argument("request_id", type=int, help="FOIA request ID")
+    add_output_args(request)
 
-    # download
-    p_download = sub.add_parser("download", help="Download files from a FOIA request")
-    p_download.add_argument("request_id", type=int, help="FOIA request ID")
-    p_download.add_argument("--dir", help=f"Download directory (default: {DEFAULT_DOWNLOAD_DIR})")
+    download = subparsers.add_parser(
+        "download", help="Download released files from a FOIA request"
+    )
+    download.add_argument("request_id", type=int, help="FOIA request ID")
+    download.add_argument(
+        "--dir",
+        help=f"Download directory (default: {DEFAULT_DOWNLOAD_DIR})",
+    )
 
-    # search
-    p_search = sub.add_parser("search", help="Search FOIA requests by tag")
-    p_search.add_argument("query", help="Tag to search for")
-    p_search.add_argument("--limit", type=int, default=100, help="Max results (default: 100)")
-    add_output_args(p_search)
+    search = subparsers.add_parser("search", help="Full-text search FOIA requests")
+    search.add_argument("query", help="Text to search for")
+    search.add_argument(
+        "--limit",
+        type=_positive_int,
+        default=100,
+        help="Maximum results (default: 100)",
+    )
+    add_output_args(search)
 
-    # agencies
-    p_agencies = sub.add_parser("agencies", help="Search agencies")
-    p_agencies.add_argument("query", help="Agency name to search for")
-    p_agencies.add_argument("--limit", type=int, default=50, help="Max results (default: 50)")
-    add_output_args(p_agencies)
+    agencies = subparsers.add_parser("agencies", help="Search agencies")
+    agencies.add_argument("query", help="Partial agency name")
+    agencies.add_argument(
+        "--limit",
+        type=_positive_int,
+        default=50,
+        help="Maximum results (default: 50)",
+    )
+    add_output_args(agencies)
 
+    crawl = subparsers.add_parser(
+        "crawl-index",
+        help="Crawl public API collections into a resumable local SQLite index",
+    )
+    crawl.add_argument(
+        "--db",
+        type=Path,
+        default=DEFAULT_INDEX_DB,
+        help=f"Index database (default: {DEFAULT_INDEX_DB})",
+    )
+    crawl.add_argument(
+        "--collections",
+        nargs="+",
+        choices=INDEX_COLLECTIONS,
+        default=list(INDEX_COLLECTIONS),
+        help="Collections to crawl (default: all)",
+    )
+    crawl.add_argument(
+        "--max-pages",
+        type=_nonnegative_int,
+        default=0,
+        help="Maximum pages per collection this run; 0 is unlimited",
+    )
+    crawl.add_argument(
+        "--delay",
+        type=_nonnegative_float,
+        default=1.0,
+        help="Minimum seconds between aggregate API requests (default: 1.0)",
+    )
+    crawl.add_argument(
+        "--restart",
+        action="store_true",
+        help="Restart selected completed/in-progress collection cursors at page 1",
+    )
+    add_output_args(crawl)
+
+    index_search = subparsers.add_parser(
+        "index-search",
+        help="Search local request, communication, and file metadata",
+    )
+    index_search.add_argument(
+        "query",
+        nargs="?",
+        help="Terms to match; omit to browse indexed files",
+    )
+    index_search.add_argument(
+        "--db",
+        type=Path,
+        default=DEFAULT_INDEX_DB,
+        help=f"Index database (default: {DEFAULT_INDEX_DB})",
+    )
+    index_search.add_argument(
+        "--without-documentcloud",
+        action="store_true",
+        help="Only files whose MuckRock API record has no DocumentCloud doc_id",
+    )
+    index_search.add_argument(
+        "--responses-only",
+        action="store_true",
+        help="Only files attached to incoming agency responses",
+    )
+    index_search.add_argument("--agency-id", type=int)
+    index_search.add_argument("--limit", type=_positive_int, default=100)
+    add_output_args(index_search)
+
+    unlinked = subparsers.add_parser(
+        "unlinked-files",
+        help="Find agency-response files with no direct DocumentCloud linkage",
+    )
+    unlinked.add_argument(
+        "query",
+        nargs="?",
+        help="Terms to match; omit to browse all indexed unlinked response files",
+    )
+    unlinked.add_argument(
+        "--db",
+        type=Path,
+        default=DEFAULT_INDEX_DB,
+        help=f"Index database (default: {DEFAULT_INDEX_DB})",
+    )
+    unlinked.add_argument(
+        "--include-outbound",
+        action="store_true",
+        help="Also include requester uploads and other outbound attachments",
+    )
+    unlinked.add_argument("--agency-id", type=int)
+    unlinked.add_argument("--limit", type=_positive_int, default=100)
+    unlinked.set_defaults(without_documentcloud=True, responses_only=True)
+    add_output_args(unlinked)
+
+    stats = subparsers.add_parser(
+        "index-stats", help="Show local index and DocumentCloud-linkage coverage"
+    )
+    stats.add_argument(
+        "--db",
+        type=Path,
+        default=DEFAULT_INDEX_DB,
+        help=f"Index database (default: {DEFAULT_INDEX_DB})",
+    )
+    add_output_args(stats)
+    return parser
+
+
+def main() -> int:
+    parser = _build_parser()
     args = parser.parse_args()
 
-    commands = {
-        "project": cmd_project,
-        "request": cmd_request,
-        "download": cmd_download,
-        "search": cmd_search,
-        "agencies": cmd_agencies,
-    }
+    try:
+        local_handlers = {
+            "index-search": cmd_index_search,
+            "unlinked-files": cmd_unlinked_files,
+            "index-stats": cmd_index_stats,
+        }
+        if args.command in local_handlers:
+            return local_handlers[args.command](args)
 
-    commands[args.command](args)
+        if args.command == "project" and args.project_id is None:
+            args.project_id = _configured_project_id()
+        client = _create_client()
+        handlers = {
+            "project": cmd_project,
+            "request": cmd_request,
+            "download": cmd_download,
+            "search": cmd_search,
+            "agencies": cmd_agencies,
+            "crawl-index": cmd_crawl_index,
+        }
+        return handlers[args.command](client, args)
+    except MuckRockConfigurationError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+    except CredentialsFailedError as exc:
+        print(f"ERROR: MuckRock authentication failed: {exc}", file=sys.stderr)
+    except DoesNotExistError as exc:
+        print(f"ERROR: MuckRock resource not found: {exc}", file=sys.stderr)
+    except SquareletError as exc:
+        print(f"ERROR: MuckRock API request failed: {exc}", file=sys.stderr)
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"ERROR: Unexpected MuckRock API response: {exc}", file=sys.stderr)
+    except (FileNotFoundError, sqlite3.Error) as exc:
+        print(f"ERROR: MuckRock local index failed: {exc}", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

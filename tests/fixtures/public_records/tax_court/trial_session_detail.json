@@ -1,0 +1,98 @@
+{
+  "calendaredCases": [
+    {
+      "entityName": "PublicCaseDTO",
+      "canAllowDocumentService": true,
+      "canAllowPrintableDocketRecord": true,
+      "canDojPractitionersRepresentParty": false,
+      "caseCaption": "David Reed & Zandria Reed, Petitioners",
+      "createdAt": "2025-07-18T18:01:46.985Z",
+      "docketNumber": "10764-25",
+      "docketNumberWithSuffix": "10764-25",
+      "hasIrsPractitioner": true,
+      "docketEntries": [],
+      "isPaper": true,
+      "partyType": "Petitioner & spouse",
+      "receivedAt": "2025-07-09T04:00:00.000Z",
+      "isSealed": false,
+      "petitioners": [
+        {
+          "entityName": "PublicContact",
+          "contactId": "b758956d-22aa-4b93-b1b9-fbe65a3f254f",
+          "contactType": "petitioner",
+          "serviceIndicator": "Paper",
+          "name": "David Reed",
+          "state": "CA"
+        },
+        {
+          "entityName": "PublicContact",
+          "contactId": "0060a329-2a77-465f-8711-2a0fc766cf34",
+          "contactType": "petitioner",
+          "serviceIndicator": "Paper",
+          "name": "Zandria Reed",
+          "state": "CA"
+        }
+      ],
+      "irsPractitioners": [
+        {
+          "entityName": "PublicContact",
+          "contactId": "579d8ba8-c944-46dd-9d06-ec3d84666089",
+          "serviceIndicator": "Electronic",
+          "name": "Connor K. Whitney"
+        },
+        {
+          "entityName": "PublicContact",
+          "contactId": "2b997539-072d-4dc9-8eac-284abc478def",
+          "serviceIndicator": "Electronic",
+          "name": "Lisa R. Jones"
+        }
+      ],
+      "privatePractitioners": []
+    },
+    {
+      "entityName": "PublicCaseDTO",
+      "canAllowDocumentService": true,
+      "canAllowPrintableDocketRecord": true,
+      "canDojPractitionersRepresentParty": false,
+      "caseCaption": "Ivan Medina, Petitioner",
+      "createdAt": "2024-12-09T06:41:30.275Z",
+      "docketNumber": "19205-24",
+      "docketNumberSuffix": "S",
+      "docketNumberWithSuffix": "19205-24S",
+      "hasIrsPractitioner": true,
+      "docketEntries": [],
+      "isPaper": false,
+      "partyType": "Petitioner",
+      "receivedAt": "2024-12-09T06:41:30.275Z",
+      "isSealed": false,
+      "petitioners": [
+        {
+          "entityName": "PublicContact",
+          "contactId": "04cd1003-9998-4356-825f-eb6568b9ab6d",
+          "contactType": "petitioner",
+          "serviceIndicator": "None",
+          "name": "Ivan Medina ",
+          "state": "NY"
+        }
+      ],
+      "irsPractitioners": [
+        {
+          "entityName": "PublicContact",
+          "contactId": "3f95d7a4-014b-47de-a8bc-105720caedd5",
+          "serviceIndicator": "Electronic",
+          "name": "Erik M. Sternberg"
+        }
+      ],
+      "privatePractitioners": [
+        {
+          "entityName": "PublicContact",
+          "contactId": "a12439a1-ad4f-4a42-8a71-c052dd291216",
+          "serviceIndicator": "Electronic",
+          "name": "Gokul N. Krish"
+        }
+      ]
+    }
+  ],
+  "startDate": "2026-10-07T04:00:00.000Z",
+  "trialLocation": "Washington, District of Columbia"
+}

@@ -21,15 +21,29 @@ def evidence_db(tmp_path, monkeypatch):
     db.close()
 
 
-def _add_draft(**kwargs):
+def _add_unverified(**kwargs):
     values = {
         "target_name": "Evidence Target",
         "summary": "Evidence summary",
         "source_datasets": ["courtlistener"],
         "profile_id": "test",
+        "evidence_ids": ["COURTLISTENER:fixture-record"],
+        "source_quotes": {"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
     }
     values.update(kwargs)
     return findings_tracker.add_finding(**values)
+
+
+def _insert_legacy_without_evidence(db):
+    """Create only the historical incomplete state exercised by repair tests."""
+    cursor = db.execute(
+        """INSERT INTO findings (target_name, summary, source_datasets,
+            claim_type, confidence, verification_status, profile_id)
+        VALUES ('Legacy Target', 'Legacy summary', '["courtlistener"]',
+                'inference', 'medium', 'unverified', 'test')"""
+    )
+    db.commit()
+    return cursor.lastrowid
 
 
 def test_schema_migrates_composite_record_key(evidence_db):
@@ -46,10 +60,100 @@ def test_schema_migrates_composite_record_key(evidence_db):
 def test_new_findings_require_source_token_array_and_supported_tokens(evidence_db):
     db, _ = evidence_db
     with pytest.raises(ValueError, match="JSON-array-compatible"):
-        _add_draft(source_datasets="courtlistener")
+        _add_unverified(source_datasets="courtlistener")
     with pytest.raises(ValueError, match="Unsupported source token"):
-        _add_draft(source_datasets=["not_a_supported_source"])
+        _add_unverified(source_datasets=["not_a_supported_source"])
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+
+
+def test_add_cli_declares_sources_as_required(monkeypatch, capsys):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "add",
+            "--target",
+            "Missing Source Target",
+            "--summary",
+            "Missing source should fail in argparse",
+        ],
+    )
+
+    with pytest.raises(SystemExit) as exc:
+        findings_tracker.main()
+
+    assert exc.value.code == 2
+    assert "the following arguments are required: --sources" in capsys.readouterr().err
+
+
+def test_new_finding_rejects_unknown_metadata_and_duplicate_evidence_refs(
+    evidence_db,
+):
+    db, _ = evidence_db
+    ref = "COURTLISTENER:record/1"
+    with pytest.raises(ValueError, match="refs not present in evidence_ids.*LABEL"):
+        _add_unverified(
+            evidence_ids=[ref],
+            source_quotes={"LABEL": {"quote": "Exact excerpt"}},
+        )
+    with pytest.raises(ValueError, match="duplicate references"):
+        _add_unverified(evidence_ids=[ref, ref], source_quotes={})
+
+    assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+    assert db.execute("SELECT COUNT(*) FROM finding_evidence").fetchone()[0] == 0
+
+
+@pytest.mark.parametrize(
+    ("evidence", "source_quotes", "error"),
+    [
+        (
+            ["https://primary.example/record"],
+            ["LABEL:Exact excerpt"],
+            "refs not present in evidence_ids: LABEL",
+        ),
+        (
+            ["COURTLISTENER:record/1"],
+            [
+                "COURTLISTENER:record/1:First excerpt",
+                "COURTLISTENER:record/1:Second excerpt",
+            ],
+            "Duplicate quote metadata for evidence 'COURTLISTENER:record/1'",
+        ),
+    ],
+)
+def test_add_cli_rejects_invalid_source_quote_mapping_atomically(
+    evidence_db, monkeypatch, capsys, evidence, source_quotes, error
+):
+    db, _ = evidence_db
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "add",
+            "--target",
+            "Temp Target",
+            "--summary",
+            "Invalid evidence metadata",
+            "--evidence",
+            *evidence,
+            "--source-quote",
+            *source_quotes,
+            "--sources",
+            "courtlistener",
+            "--profile",
+            "test",
+        ],
+    )
+
+    with pytest.raises(SystemExit) as exc:
+        findings_tracker.main()
+
+    assert exc.value.code == 2
+    assert error in capsys.readouterr().err
+    assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+    assert db.execute("SELECT COUNT(*) FROM finding_evidence").fetchone()[0] == 0
 
 
 @pytest.mark.parametrize(
@@ -57,6 +161,10 @@ def test_new_findings_require_source_token_array_and_supported_tokens(evidence_d
     [
         (["unified", "fbi-files"], ["unified_db", "fbi"]),
         (["unified", "fbi_files"], ["unified_db", "fbi"]),
+        (["nydos"], ["ny_dos"]),
+        (["SEC EDGAR", "ds10"], ["edgar", "ds10_financial"]),
+        (["Kabasshouse Epstein Corpus"], ["kabass"]),
+        (["doj_epstein_files"], ["doj"]),
         (["kabasshouse", "unified_epstein"], ["kabass", "unified_db"]),
         (
             ["house_20k", "fbi_epstein", "epstein_reporting"],
@@ -70,7 +178,7 @@ def test_configured_corpus_source_aliases_are_stored_canonically(
     evidence_db, source_tokens, canonical_tokens
 ):
     db, _ = evidence_db
-    finding_id = _add_draft(source_datasets=source_tokens)
+    finding_id = _add_unverified(source_datasets=source_tokens)
     stored = db.execute(
         "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
     ).fetchone()[0]
@@ -79,11 +187,22 @@ def test_configured_corpus_source_aliases_are_stored_canonically(
 
 @pytest.mark.parametrize(
     "source_token",
-    ["finra", "efta", "supreme_court", "openpayments", "senate_finance"],
+    [
+        "finra",
+        "sec",
+        "efta",
+        "supreme_court",
+        "openpayments",
+        "senate_finance",
+        "ny_ag",
+        "sipc",
+        "dmhc",
+        "caltech",
+    ],
 )
 def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token):
     db, _ = evidence_db
-    finding_id = _add_draft(source_datasets=[source_token])
+    finding_id = _add_unverified(source_datasets=[source_token])
     stored = db.execute(
         "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
     ).fetchone()[0]
@@ -92,7 +211,7 @@ def test_supported_primary_source_tokens_are_accepted(evidence_db, source_token)
 
 def test_alias_and_canonical_source_are_deduplicated(evidence_db):
     db, _ = evidence_db
-    finding_id = _add_draft(source_datasets=["unified", "unified_db"])
+    finding_id = _add_unverified(source_datasets=["unified", "unified_db"])
     stored = db.execute(
         "SELECT source_datasets FROM findings WHERE id=?", (finding_id,)
     ).fetchone()[0]
@@ -108,11 +227,11 @@ def test_source_alias_targets_are_registered_canonical_tokens():
 def test_direct_quote_write_is_atomic_and_requires_quoted_evidence(evidence_db):
     db, _ = evidence_db
     with pytest.raises(ValueError, match="at least one evidence"):
-        _add_draft(claim_type="direct_quote")
+        _add_unverified(claim_type="direct_quote", evidence_ids=[], source_quotes={})
     with pytest.raises(ValueError, match="non-empty source_quote"):
-        _add_draft(
+        _add_unverified(
             claim_type="direct_quote",
-            evidence_ids=["COURTLISTENER:docket/123"],
+            evidence_ids=["COURTLISTENER:docket/123"], source_quotes={},
         )
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
     assert db.execute("SELECT COUNT(*) FROM finding_evidence").fetchone()[0] == 0
@@ -121,13 +240,13 @@ def test_direct_quote_write_is_atomic_and_requires_quoted_evidence(evidence_db):
 def test_http_refs_are_urls_and_canonical_slash_refs_are_not_files(evidence_db):
     db, _ = evidence_db
     url = "https://example.gov/records/123"
-    url_id = _add_draft(
+    url_id = _add_unverified(
         claim_type="direct_quote",
         evidence_ids=[url],
         source_quotes={url: {"quote": "Exact remote source text"}},
     )
     canonical = "CourtListener:docket/69737684"
-    canonical_id = _add_draft(evidence_ids=[canonical])
+    canonical_id = _add_unverified(evidence_ids=[canonical], source_quotes={canonical: {"quote": "Exact canonical source text"}})
     rows = db.execute(
         "SELECT finding_id, evidence_type FROM finding_evidence ORDER BY finding_id"
     ).fetchall()
@@ -141,7 +260,7 @@ def test_local_file_exists_and_resolvable_quote_span_matches(evidence_db, tmp_pa
     db, _ = evidence_db
     source = tmp_path / "record.txt"
     source.write_text("Before the exact source language after.", encoding="utf-8")
-    finding_id = _add_draft(
+    finding_id = _add_unverified(
         claim_type="direct_quote",
         evidence_ids=[str(source)],
         source_quotes={str(source): {"quote": "the exact source language"}},
@@ -151,20 +270,20 @@ def test_local_file_exists_and_resolvable_quote_span_matches(evidence_db, tmp_pa
     ).fetchone()[0] == "file"
 
     with pytest.raises(ValueError, match="failed exact quote validation"):
-        _add_draft(
+        _add_unverified(
             target_name="Mismatch",
             claim_type="direct_quote",
             evidence_ids=[str(source)],
             source_quotes={str(source): {"quote": "words that are not present"}},
         )
     with pytest.raises(ValueError, match="does not exist"):
-        _add_draft(evidence_ids=[str(tmp_path / "missing.pdf")])
+        _add_unverified(evidence_ids=[str(tmp_path / "missing.pdf")], source_quotes={})
     assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 1
 
 
-def test_evidence_crud_records_audit_and_invalidates_verification(evidence_db):
+def test_legacy_evidence_crud_records_audit_and_invalidates_verification(evidence_db):
     db, _ = evidence_db
-    finding_id = _add_draft()
+    finding_id = _insert_legacy_without_evidence(db)
     ref = "COURTLISTENER:docket/123"
     findings_tracker.add_finding_evidence(
         finding_id, ref, source_quote="Original exact language",
@@ -227,7 +346,7 @@ def test_non_efta_evidence_rejects_efta_only_metadata_corrections(
 ):
     db, _ = evidence_db
     ref = "COURTLISTENER:docket/123"
-    finding_id = _add_draft(evidence_ids=[ref])
+    finding_id = _add_unverified(evidence_ids=[ref], source_quotes={ref: {"quote": "The record identifies the subject."}})
 
     with pytest.raises(ValueError, match=f"Cannot correct {field} on non-EFTA evidence"):
         findings_tracker.correct_finding_evidence(
@@ -248,7 +367,7 @@ def test_non_efta_evidence_rejects_efta_only_metadata_corrections(
 
 def test_efta_ref_reclassification_requires_audited_metadata_clears(evidence_db):
     db, _ = evidence_db
-    finding_id = _add_draft()
+    finding_id = _add_unverified()
     efta_ref = "EFTA00000001"
     url_ref = "https://example.gov/record/1"
     findings_tracker.add_finding_evidence(
@@ -264,8 +383,8 @@ def test_efta_ref_reclassification_requires_audited_metadata_clears(evidence_db)
         )
     unchanged = db.execute(
         "SELECT evidence_type,evidence_ref,email_sender,email_date,chain_position "
-        "FROM finding_evidence WHERE finding_id=?",
-        (finding_id,),
+        "FROM finding_evidence WHERE finding_id=? AND evidence_ref=?",
+        (finding_id, efta_ref),
     ).fetchone()
     assert tuple(unchanged) == (
         "efta", efta_ref, "Sender Name", "2019-01-01", 1,
@@ -283,8 +402,8 @@ def test_efta_ref_reclassification_requires_audited_metadata_clears(evidence_db)
 
     reclassified = db.execute(
         "SELECT evidence_type,evidence_ref,email_sender,email_date,chain_position "
-        "FROM finding_evidence WHERE finding_id=?",
-        (finding_id,),
+        "FROM finding_evidence WHERE finding_id=? AND evidence_ref=?",
+        (finding_id, url_ref),
     ).fetchone()
     assert tuple(reclassified) == ("url", url_ref, None, None, None)
     fields = db.execute(
@@ -300,7 +419,7 @@ def test_efta_ref_reclassification_requires_audited_metadata_clears(evidence_db)
 def test_delete_cannot_remove_last_direct_quote_evidence(evidence_db):
     db, _ = evidence_db
     ref = "COURTLISTENER:opinion/456"
-    finding_id = _add_draft(
+    finding_id = _add_unverified(
         claim_type="direct_quote",
         evidence_ids=[ref],
         source_quotes={ref: {"quote": "Exact opinion text"}},
@@ -321,7 +440,7 @@ def test_evidence_ref_collision_rolls_back_update_and_audit(evidence_db):
     db, _ = evidence_db
     ref_a = "COURTLISTENER:record/a"
     ref_b = "COURTLISTENER:record/b"
-    finding_id = _add_draft(evidence_ids=[ref_a, ref_b])
+    finding_id = _add_unverified(evidence_ids=[ref_a, ref_b], source_quotes={ref_a: {"quote": "Record A identifies the subject."}, ref_b: {"quote": "Record B identifies the subject."}})
     with pytest.raises(sqlite3.IntegrityError):
         findings_tracker.correct_finding_evidence(
             finding_id, ref_a, "evidence_ref", ref_b,
@@ -337,9 +456,9 @@ def test_evidence_ref_collision_rolls_back_update_and_audit(evidence_db):
     ).fetchone()[0] == 0
 
 
-def test_finding_correction_validates_sources_and_direct_quote_transition(evidence_db):
+def test_legacy_finding_correction_validates_sources_and_direct_quote_transition(evidence_db):
     db, _ = evidence_db
-    finding_id = _add_draft()
+    finding_id = _insert_legacy_without_evidence(db)
     with pytest.raises(ValueError, match="valid JSON"):
         findings_tracker.update_finding(
             finding_id, "source_datasets", "courtlistener", "Invalid shape"

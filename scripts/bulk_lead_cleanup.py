@@ -5,7 +5,7 @@ Batch lead cleanup — dead-end low-value leads, assign profiles, enrich categor
 Usage:
     python scripts/bulk_lead_cleanup.py scan                        # Preview all changes
     python scripts/bulk_lead_cleanup.py dead-end [--dry-run]        # Aggressive dead-end
-    python scripts/bulk_lead_cleanup.py assign-profiles [--dry-run] # Assign NULL profile_ids
+    python scripts/bulk_lead_cleanup.py assign-profiles [--status STATUS] [--dry-run]
     python scripts/bulk_lead_cleanup.py enrich-categories [--dry-run] # Infer NULL categories
     python scripts/bulk_lead_cleanup.py stats                       # Before/after summary
 """
@@ -14,6 +14,7 @@ import argparse
 import re
 import sqlite3
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -22,8 +23,6 @@ INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
-
-from datetime import datetime, timezone
 
 
 def _utcnow():
@@ -130,18 +129,26 @@ def run_dead_end(dry_run=False):
 
 # ── Profile assignment ──────────────────────────────────────
 
-def run_assign_profiles(dry_run=False):
-    """Assign profile_id to NULL-profile open leads."""
+def run_assign_profiles(dry_run=False, statuses=("open",)):
+    """Assign profile_id to NULL-profile leads in the requested statuses."""
     db = get_db()
     profiles = _load_all_profiles()
     thread_map = _build_thread_profile_map(db)
 
+    statuses = tuple(statuses)
+    if not statuses:
+        raise ValueError("at least one lead status is required")
+    placeholders = ",".join("?" for _ in statuses)
+
     rows = db.execute(
-        "SELECT id, title, description, target_name, thread_id, source FROM leads WHERE status = 'open' AND profile_id IS NULL"
+        f"""SELECT id, title, description, target_name, thread_id, source
+            FROM leads
+            WHERE status IN ({placeholders}) AND profile_id IS NULL""",
+        statuses,
     ).fetchall()
 
     if not rows:
-        print("No NULL-profile open leads found.")
+        print(f"No NULL-profile leads found for statuses: {', '.join(statuses)}.")
         db.close()
         return {}
 
@@ -347,8 +354,17 @@ def main():
     dead_p = subparsers.add_parser("dead-end", help="Dead-end low-value leads")
     dead_p.add_argument("--dry-run", action="store_true")
 
-    prof_p = subparsers.add_parser("assign-profiles", help="Assign profile_id to NULL-profile leads")
+    prof_p = subparsers.add_parser(
+        "assign-profiles",
+        help="Assign profile_id to NULL-profile leads in an explicit status scope",
+    )
     prof_p.add_argument("--dry-run", action="store_true")
+    prof_p.add_argument(
+        "--status",
+        choices=("open", "pending_triage", "all"),
+        default="open",
+        help="Lead status to process (default: open; all means open + pending_triage)",
+    )
 
     cat_p = subparsers.add_parser("enrich-categories", help="Infer categories for NULL-category leads")
     cat_p.add_argument("--dry-run", action="store_true")
@@ -366,7 +382,8 @@ def main():
     elif args.command == "dead-end":
         run_dead_end(dry_run=args.dry_run)
     elif args.command == "assign-profiles":
-        run_assign_profiles(dry_run=args.dry_run)
+        statuses = ("open", "pending_triage") if args.status == "all" else (args.status,)
+        run_assign_profiles(dry_run=args.dry_run, statuses=statuses)
     elif args.command == "enrich-categories":
         run_enrich_categories(dry_run=args.dry_run)
     elif args.command == "stats":

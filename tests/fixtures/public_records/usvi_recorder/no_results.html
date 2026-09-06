@@ -1,0 +1,16 @@
+<!doctype html>
+<html><body>
+<script>
+searchResultObj = new SearchResult();
+searchResultObj.noResults = true;
+searchResultObj.numRecordPages = 0;
+searchResultObj.resultListSize = 0;
+searchResultObj.resultsCount = 0;
+</script>
+<form name="resultForm" action="searchResults.do">
+  <input name="sortColumn" value="null">
+  <input name="sortDirection" value="null">
+  <input name="startCursor" value="null">
+</form>
+<div>No documents were found that match the specified criteria.</div>
+</body></html>

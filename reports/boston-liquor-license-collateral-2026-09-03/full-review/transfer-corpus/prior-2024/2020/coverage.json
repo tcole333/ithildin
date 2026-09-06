@@ -1,0 +1,862 @@
+{
+  "completed_at_utc": "2026-09-04T04:41:14.088304+00:00",
+  "scope": "All 20 exact observed 2020 PDF URLs in the retained older archive inventory. Identical SHA-256 variants share one extracted document; source occurrences are preserved.",
+  "source_urls": 20,
+  "successful_http_downloads": 20,
+  "http_errors": 0,
+  "unique_pdf_hashes": 19,
+  "unique_document_pages": 97,
+  "duplicate_url_assets": [
+    {
+      "source_id": "BLB-2020-09-10-v2",
+      "duplicate_of": "BLB-2020-09-10",
+      "url": "https://www.boston.gov/sites/default/files/file/2020/09/Board%27s%20Voting%20Agenda%2C%20September%2010%2C%202020_0.pdf",
+      "sha256": "03466145f3c0bcbd74e214bdd9b127f32c096fcbcb8e6ae19eedbfadf68b9e27"
+    }
+  ],
+  "archive_label_date_range": [
+    "2020-04-23",
+    "2020-12-23"
+  ],
+  "document_date_discrepancies": [],
+  "reviewed_candidates": 76,
+  "raw_numbered_scan_candidates": 75,
+  "candidate_classification_counts": {
+    "ownership_application_disposition": 26,
+    "excluded": 8,
+    "transfer_or_pledge_application_disposition": 35,
+    "notice_or_related_directive": 6,
+    "unresolved_ownership_disposition_wording": 1
+  },
+  "ledger_counts": {
+    "events.json": 44,
+    "ownership-interest-events.json": 26,
+    "notices.json": 6,
+    "proposed-events.json": 0,
+    "unresolved-events.json": 1
+  },
+  "transfer_pledge_outcomes": {
+    "license_pledge": {
+      "granted": 14,
+      "deferred": 2
+    },
+    "license_transfer": {
+      "granted": 24,
+      "deferred": 4
+    }
+  },
+  "ownership_outcomes": {
+    "granted": 26
+  },
+  "ownership_license_scopes": {
+    "alcohol_stated": 24,
+    "common_victualler_no_alcohol_stated": 2
+  },
+  "actual_revocation_or_release_events": 0,
+  "explicit_entity_conversions": 0,
+  "uncovered_keyword_lines": [],
+  "review_method": "All document headings checked; broad full-document keyword scan including unnumbered text; every matching candidate manually reviewed; full item text, source IDs/URLs, and page spans retained. Five sparse pages and two ambiguous item/outcome layouts visually checked. No OCR required.",
+  "keyword_pattern": "\\b(?:transf\\w*|pledg\\w*|stocks?|share\\w*|beneficial|ownership|corporate|reorganiz\\w*|members?\\b(?!\\s+present)|conver\\w*|interests?|revok\\w*|revoc\\w*|rescind\\w*|cancel\\w*|surrend\\w*|releas\\w*|sold|sale)\\b",
+  "additional_full_document_pattern": "\\b(?:assign\\w*|mortgag\\w*|liens?|collateral|security|financ\\w*|acqui\\w*)\\b",
+  "limitations": [
+    "The saved index is not proof of meeting completeness. No January–March 2020 materials were linked in that index; no missing-meeting reconciliation was performed.",
+    "Board dispositions do not prove that an approved transaction closed, that a pledge remained effective, or that a loan was outstanding.",
+    "Separate source occurrences, including deferred then granted Atlas applications and repeated Del Frisco's ownership applications, are not a deduplicated transaction count.",
+    "The Asmabanu disposition printed 'Grated' is retained only in unresolved-events.json; it is not counted as a granted ownership change.",
+    "Churrascaria's conditional revocation directive is retained as a notice, not as an established completed revocation."
+  ],
+  "acquisition_environment_note": "Initial sandbox attempts failed at DNS before HTTP; sandbox-dns-attempts.json preserves them. Approved network execution made one successful HTTP attempt per exact observed URL, with no HTTP-error retry loop.",
+  "documents": [
+    {
+      "source_id": "BLB-2020-04-23",
+      "archive_date": "2020-04-23",
+      "document_vote_date": "2020-04-23",
+      "archive_date_matches_document_heading": true,
+      "sha256": "5a5411bed079abed909e9b39c0d787841d78f6c7402baa4d5d9d192972913869",
+      "page_count": 5,
+      "reviewed_candidate_count": 2,
+      "events": 0,
+      "ownership-interest-events": 1,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 80,
+          "text": "has petitioned for Issuance/Transfer of Stock/New Stockholder. Lastly, has petitioned for",
+          "uncovered_terms": []
+        },
+        {
+          "line": 118,
+          "text": "stock; in one room on first floor; cellar for stock. To: One main room on ground floor",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-04-30",
+      "archive_date": "2020-04-30",
+      "document_vote_date": "2020-04-30",
+      "archive_date_matches_document_heading": true,
+      "sha256": "ad8d3f750ff6de664d894301da6501acee79ee480163ff1b465153a88c48b2d3",
+      "page_count": 3,
+      "reviewed_candidate_count": 2,
+      "events": 2,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 41,
+          "text": "Holder of an Innholder All Alcoholic Beverages License has petitioned to pledge the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 63,
+          "text": "pledge the license to Eastern Bank.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-05-07",
+      "archive_date": "2020-05-07",
+      "document_vote_date": "2020-05-07",
+      "archive_date_matches_document_heading": true,
+      "sha256": "b0bfaf590f5498e61d286b6faf2d391884cdb401ade12540068932b608a6bd5a",
+      "page_count": 1,
+      "reviewed_candidate_count": 0,
+      "events": 0,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-05-14",
+      "archive_date": "2020-05-14",
+      "document_vote_date": "2020-05-14",
+      "archive_date_matches_document_heading": true,
+      "sha256": "c72b82f199c5bc1eee8e015fcf62ebee13ca7f054de0106cb67c866642634cdc",
+      "page_count": 3,
+      "reviewed_candidate_count": 0,
+      "events": 0,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-05-21",
+      "archive_date": "2020-05-21",
+      "document_vote_date": "2020-05-21",
+      "archive_date_matches_document_heading": true,
+      "sha256": "aedfab6ba2ba001092c8c668dc766eb8fa3c0000275d6009d67aec3f064d1455",
+      "page_count": 3,
+      "reviewed_candidate_count": 2,
+      "events": 1,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 35,
+          "text": "transfer the license and location from the above referenced business - To: Lee's Quik Pik,",
+          "uncovered_terms": []
+        },
+        {
+          "line": 91,
+          "text": "space or any other similar condition that prohibits the sale and service of alcohol on",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-05-28",
+      "archive_date": "2020-05-28",
+      "document_vote_date": "2020-05-28",
+      "archive_date_matches_document_heading": true,
+      "sha256": "56529e92d7f8758bd36c8b987f3b66f43d3f2780236890e069ad782f6de1023c",
+      "page_count": 3,
+      "reviewed_candidate_count": 4,
+      "events": 5,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 46,
+          "text": "to transfer the license from the above - To: Nusret Boston, LLC d/b/a Nusret Steakhouse",
+          "uncovered_terms": []
+        },
+        {
+          "line": 57,
+          "text": "transfer the license from the above - To: MadMac Partners, LLC d/b/a Sagarino's (at the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 70,
+          "text": "transfer the license and location from the above - To: Newa Liquors, Inc. d/b/a Walsh",
+          "uncovered_terms": []
+        },
+        {
+          "line": 73,
+          "text": "Manager. 11:00 PM Closing Hour. Lastly, has petitioned to pledge the license to Alfa",
+          "uncovered_terms": []
+        },
+        {
+          "line": 84,
+          "text": "petitioned to transfer the license and location from the above - To: Dolce, Inc d/b/a Dolce",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-06-04",
+      "archive_date": "2020-06-04",
+      "document_vote_date": "2020-06-04",
+      "archive_date_matches_document_heading": true,
+      "sha256": "01f3e2936c0a8cd8e2aca3da7a0942fa2a49d7cbbc13cbf71682b1af1ccb1c49",
+      "page_count": 3,
+      "reviewed_candidate_count": 1,
+      "events": 1,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 51,
+          "text": "to transfer the licensed business from the above - To: Capital Burger Holdings, LLC d/b/a",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-07-16",
+      "archive_date": "2020-07-16",
+      "document_vote_date": "2020-07-16",
+      "archive_date_matches_document_heading": true,
+      "sha256": "fa648343d9ec01d3d0079c0d194bfa14e2538c33fea6af90bed7f08995cdd9d0",
+      "page_count": 7,
+      "reviewed_candidate_count": 7,
+      "events": 5,
+      "ownership-interest-events": 3,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 97,
+          "text": "ownership interest and transfer of stock.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 107,
+          "text": "ownership interest and transfer of stock.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 117,
+          "text": "ownership interest and transfer of stock.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 220,
+          "text": "Holder Retail Package Wines & Malt License has petitioned to transfer the license",
+          "uncovered_terms": []
+        },
+        {
+          "line": 222,
+          "text": "Kapadia, Manager. 11:00 PM Closing Hour. Lastly, has petitioned to pledge the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 233,
+          "text": "transfer the license from the above To: Shivam Baba Corp d/b/a Atlas Liquors (at the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 235,
+          "text": "pledge the license & inventory to Atlas Liquors, Inc.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 245,
+          "text": "to transfer the license and location from the above - To: 175 Ipswich Street, LLC 175",
+          "uncovered_terms": []
+        },
+        {
+          "line": 317,
+          "text": "capacity or the point of sale or service of alcohol.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-07-30",
+      "archive_date": "2020-07-30",
+      "document_vote_date": "2020-07-30",
+      "archive_date_matches_document_heading": true,
+      "sha256": "becc6ebac4622fd84a62e0b87a7bee5fce33b308e1e1890e54f90a3529b24097",
+      "page_count": 4,
+      "reviewed_candidate_count": 2,
+      "events": 1,
+      "ownership-interest-events": 1,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 59,
+          "text": "stock interest and ownership interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 102,
+          "text": "petitioned to transfer the license from the above - To: Mario Gomes (at the same",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-08-13",
+      "archive_date": "2020-08-13",
+      "document_vote_date": "2020-08-13",
+      "archive_date_matches_document_heading": true,
+      "sha256": "f77f7a1bb0e9ffee99bab99a3c4bd1301ababc5f3e314f8d6814c69cb15b2ffb",
+      "page_count": 1,
+      "reviewed_candidate_count": 2,
+      "events": 2,
+      "ownership-interest-events": 0,
+      "notices": 1,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 28,
+          "text": "Park Avenue, to transfer the Retail Package Store All-Alcoholic Beverages License to",
+          "uncovered_terms": []
+        },
+        {
+          "line": 29,
+          "text": "Shivam Baba Corp. at the same location and to pledge the license and inventory to Atlas",
+          "uncovered_terms": []
+        },
+        {
+          "line": 35,
+          "text": "transfer the license.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-08-20",
+      "archive_date": "2020-08-20",
+      "document_vote_date": "2020-08-20",
+      "archive_date_matches_document_heading": true,
+      "sha256": "dd1f94605101773c5ed22fda2d0e0b0723789a816755c9b63e847b8f63cff632",
+      "page_count": 5,
+      "reviewed_candidate_count": 3,
+      "events": 2,
+      "ownership-interest-events": 2,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 91,
+          "text": "issuance/transfer of stock/new stockholder. Lastly, has petitioned to pledge the stock to",
+          "uncovered_terms": []
+        },
+        {
+          "line": 104,
+          "text": "officers/directors/stockholders. Secondly, has petitioned for the issuance/transfer of",
+          "uncovered_terms": []
+        },
+        {
+          "line": 105,
+          "text": "stock. Thirdly, has petitioned to",
+          "uncovered_terms": []
+        },
+        {
+          "line": 141,
+          "text": "transfer the license from the above",
+          "uncovered_terms": []
+        },
+        {
+          "line": 144,
+          "text": "Lastly, has petitioned to pledge the license to North Shore Bank.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-09-10",
+      "archive_date": "2020-09-10",
+      "document_vote_date": "2020-09-10",
+      "archive_date_matches_document_heading": true,
+      "sha256": "03466145f3c0bcbd74e214bdd9b127f32c096fcbcb8e6ae19eedbfadf68b9e27",
+      "page_count": 8,
+      "reviewed_candidate_count": 4,
+      "events": 3,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 185,
+          "text": "pledge the license to Tremont",
+          "uncovered_terms": []
+        },
+        {
+          "line": 220,
+          "text": "to transfer the license and location from the above - To: Power Couple, LLC d/b/a El",
+          "uncovered_terms": []
+        },
+        {
+          "line": 238,
+          "text": "transfer the licensed business from the above - To: 1885 Centre Street, LLC d/b/a Boston",
+          "uncovered_terms": []
+        },
+        {
+          "line": 242,
+          "text": "and stock in basement. Seasonal ( April-November) outdoor patio on private property",
+          "uncovered_terms": []
+        },
+        {
+          "line": 245,
+          "text": "closing hour restaurant with 32 seats and standing for 7 people, and cellar for stock and",
+          "uncovered_terms": []
+        },
+        {
+          "line": 336,
+          "text": "C. The following Lodging House is applying for a transfer of existing license",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-09-17",
+      "archive_date": "2020-09-17",
+      "document_vote_date": "2020-09-17",
+      "archive_date_matches_document_heading": true,
+      "sha256": "160a48648163e546eeb051a84caf0033a7ae5642aa6ce9a23816f272b56a344c",
+      "page_count": 7,
+      "reviewed_candidate_count": 4,
+      "events": 2,
+      "ownership-interest-events": 2,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 145,
+          "text": "basement. Shared laundry facilities are located in the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 172,
+          "text": "petitioned for a change of stock interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 234,
+          "text": "has petitioned to transfer the license form the above - To:Castaneda Gomez",
+          "uncovered_terms": []
+        },
+        {
+          "line": 238,
+          "text": "1:00 AM Closing Hour. Lastly, has petitioned to pledge the license to",
+          "uncovered_terms": []
+        },
+        {
+          "line": 265,
+          "text": "Brighton, MA 02135 has petitioned to transfer the stock of the",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-10-01",
+      "archive_date": "2020-10-01",
+      "document_vote_date": "2020-10-01",
+      "archive_date_matches_document_heading": true,
+      "sha256": "16300f7e8c29d767c649b90476af3ba3b8e815fdefed5da04db4839864472b00",
+      "page_count": 10,
+      "reviewed_candidate_count": 1,
+      "events": 1,
+      "ownership-interest-events": 0,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 310,
+          "text": "Holder of a Common Victualler 7 Day All Alcoholic Beverages License has petitioned to pledge the",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-10-08",
+      "archive_date": "2020-10-08",
+      "document_vote_date": "2020-10-08",
+      "archive_date_matches_document_heading": true,
+      "sha256": "7b1ebdfa956fa2a3709ab64d16ce03b7b0a4df8a3ae37d10c7cf6fc50d3b9969",
+      "page_count": 3,
+      "reviewed_candidate_count": 2,
+      "events": 0,
+      "ownership-interest-events": 0,
+      "notices": 2,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 24,
+          "text": "requirements and questions regarding ownership interests.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 117,
+          "text": "transfer and sell the same.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-10-29",
+      "archive_date": "2020-10-29",
+      "document_vote_date": "2020-10-29",
+      "archive_date_matches_document_heading": true,
+      "sha256": "c0324aed6c39ec01763cf70c2172dedac66e00692e37787379105ab247e01835",
+      "page_count": 11,
+      "reviewed_candidate_count": 10,
+      "events": 4,
+      "ownership-interest-events": 5,
+      "notices": 1,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 61,
+          "text": "Notice: Sale of alcohol to persons under 21 years of age in violation of M.G.L. ch. 138 s.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 85,
+          "text": "Notice: Mandatory informational hearing regarding ownership/beneficial interest in the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 174,
+          "text": "for a change of ownership interest and a change of officers..",
+          "uncovered_terms": []
+        },
+        {
+          "line": 184,
+          "text": "for a change of ownership interest and change of officers.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 194,
+          "text": "officers/directors and for a change of ownership interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 203,
+          "text": "Holder of Innholder All Alcoholic Beverages License has petitioned to pledge the license",
+          "uncovered_terms": []
+        },
+        {
+          "line": 234,
+          "text": "change of officer/director and change of stock interest. Lastly has petitioned to change",
+          "uncovered_terms": []
+        },
+        {
+          "line": 376,
+          "text": "to transfer the license from the above - To: 143 145 Meridian Street, LLC. (at the same",
+          "uncovered_terms": []
+        },
+        {
+          "line": 387,
+          "text": "transfer the license from the above - To: Cummins Highway Liquor Group, Inc. D/B/A",
+          "uncovered_terms": []
+        },
+        {
+          "line": 390,
+          "text": "Manager. Closing hour at 11:00 PM. Lastly, has petitioned to pledge the license,",
+          "uncovered_terms": []
+        },
+        {
+          "line": 391,
+          "text": "inventory, and stock to Newburyport Bank.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 527,
+          "text": "petitioned to transfer 100% of the stock of the corporation to Yoshinori Uda.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-11-05",
+      "archive_date": "2020-11-05",
+      "document_vote_date": "2020-11-05",
+      "archive_date_matches_document_heading": true,
+      "sha256": "18c71d84a7876865de978f351adebcfce7ddf71ddaab8790a6d095b7ef0795bc",
+      "page_count": 4,
+      "reviewed_candidate_count": 6,
+      "events": 3,
+      "ownership-interest-events": 3,
+      "notices": 0,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 43,
+          "text": "for a change of officers/directors and stockholders. Lastly, has petitioned for a transfer of",
+          "uncovered_terms": []
+        },
+        {
+          "line": 44,
+          "text": "stock.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 55,
+          "text": "transfer the license and the location from the above - To: Parcel A Development Lessee,",
+          "uncovered_terms": []
+        },
+        {
+          "line": 78,
+          "text": "a new officers/directors. Lastly, has petitioned for a change in Stock Interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 93,
+          "text": "for new officer/director. Lastly, has petitioned for a change in stock interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 115,
+          "text": "pledge the license - To: JDS Cap Co., LLC.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 129,
+          "text": "pledge the license - To: JDS Cap Co., LLC.",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-12-03",
+      "archive_date": "2020-12-03",
+      "document_vote_date": "2020-12-03",
+      "archive_date_matches_document_heading": true,
+      "sha256": "e2a8ea18d4ec11024f95de9a008e7dbad55e5535a85406d4606d3fbdb6681b57",
+      "page_count": 8,
+      "reviewed_candidate_count": 13,
+      "events": 4,
+      "ownership-interest-events": 7,
+      "notices": 1,
+      "proposed-events": 0,
+      "unresolved-events": 1,
+      "keyword_lines": [
+        {
+          "line": 51,
+          "text": "10/23/2020 Mandatory informational hearing regarding ownership/beneficial interest",
+          "uncovered_terms": []
+        },
+        {
+          "line": 59,
+          "text": "premise as well as sworn statements regarding the ownership and operational of the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 61,
+          "text": "pursuant to this vote by 5:00pm on December 10, 2020 the License shall be revoked as of",
+          "uncovered_terms": []
+        },
+        {
+          "line": 114,
+          "text": "change of Officers/Directors and Change of Ownership Interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 124,
+          "text": "change of Officers/Directors and Change of Ownership Interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 163,
+          "text": "for a change of Officers/Directors. Lastly, has petitioned for a change in ownership",
+          "uncovered_terms": []
+        },
+        {
+          "line": 164,
+          "text": "interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 174,
+          "text": "for a change in Ownership Interest and Change of LLC Manager.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 184,
+          "text": "for a change in Ownership Interest and Change of LLC Manager.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 194,
+          "text": "for a change in Ownership Interest and Change of LLC Manager.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 206,
+          "text": "petitioned for a change of Stock Interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 237,
+          "text": "Holder of a Retail Package Store Malt and Wine License has petitioned to transfer the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 243,
+          "text": "Closing hour is at 11:00 PM. Lastly, has petitioned to pledge the license and",
+          "uncovered_terms": []
+        },
+        {
+          "line": 255,
+          "text": "first floor; cellar for stock and, to install 2 handicap restrooms. Capacity breakdown: 180",
+          "uncovered_terms": []
+        },
+        {
+          "line": 270,
+          "text": "stock; one room and kitchen first floor; cellar for stock. To: In two rooms all on first",
+          "uncovered_terms": []
+        },
+        {
+          "line": 304,
+          "text": "to transfer the license from the above - To: LRTB LLC. d/b/a Little Rose Taco Bar (at the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 306,
+          "text": "to pledge the license to LDJ Development LLC.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 395,
+          "text": "Commonwealth Avenue, Allston, MA 02134 has petitioned to transfer the stock",
+          "uncovered_terms": []
+        },
+        {
+          "line": 396,
+          "text": "of the corporation, secondly, has petitioned to remove shareholder Sarfaraz",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    },
+    {
+      "source_id": "BLB-2020-12-23",
+      "archive_date": "2020-12-23",
+      "document_vote_date": "2020-12-23",
+      "archive_date_matches_document_heading": true,
+      "sha256": "17a0bffd6a97728098e90ee09bc79c8ed1e4b6b07ce411040065b7486c1d6455",
+      "page_count": 8,
+      "reviewed_candidate_count": 11,
+      "events": 8,
+      "ownership-interest-events": 2,
+      "notices": 1,
+      "proposed-events": 0,
+      "unresolved-events": 0,
+      "keyword_lines": [
+        {
+          "line": 137,
+          "text": "for a change of ownership interest.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 160,
+          "text": "change of Officer/Director/LLC Manager, and a change in Ownership Interest. Lastly,",
+          "uncovered_terms": []
+        },
+        {
+          "line": 172,
+          "text": "to transfer the license from the above - To: Brasserie 560 LLC. D/B/A Brasserie (at the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 184,
+          "text": "to transfer the license and the location from the above - To: GTI Properties, Inc. D/B/A",
+          "uncovered_terms": []
+        },
+        {
+          "line": 202,
+          "text": "to transfer the license and the location from the above – To: Pho on Thayer, LLC. D/B/A",
+          "uncovered_terms": []
+        },
+        {
+          "line": 219,
+          "text": "to transfer the license from the above - To: Depot Realty LLC. D/B/A Regina Pizza at the",
+          "uncovered_terms": []
+        },
+        {
+          "line": 231,
+          "text": "petitioned to transfer the license from the above – To: Lola Burger Restaurant Boston,",
+          "uncovered_terms": []
+        },
+        {
+          "line": 244,
+          "text": "to transfer the license from the above - To: Lola 42 Restaurant Boston, LLC d/b/a Lola",
+          "uncovered_terms": []
+        },
+        {
+          "line": 256,
+          "text": "petitioned to transfer the license from the above – To: Panda Hot Pot Chinatown, Inc.",
+          "uncovered_terms": []
+        },
+        {
+          "line": 270,
+          "text": "to transfer the license from the above - To: Canal Street Realty LLC (at the same",
+          "uncovered_terms": []
+        },
+        {
+          "line": 287,
+          "text": "DEFER TO CLARIFY OWNERSHIP AND PREVIOUS TRANSACTION",
+          "uncovered_terms": []
+        }
+      ],
+      "uncovered_keyword_lines": []
+    }
+  ]
+}

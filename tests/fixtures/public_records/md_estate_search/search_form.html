@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <body>
+    <form id="form1" method="post" action="./frmEstateSearch2.aspx">
+      <input type="hidden" name="__EVENTTARGET" value="" />
+      <input type="hidden" name="__EVENTARGUMENT" value="" />
+      <input type="hidden" name="__VIEWSTATE" value="form-viewstate" />
+      <input type="hidden" name="__VIEWSTATEGENERATOR" value="ABCD1234" />
+      <input type="hidden" name="__EVENTVALIDATION" value="form-validation" />
+      <input id="txtEstateNo" name="txtEstateNo" type="text" />
+      <input id="txtLN" name="txtLN" type="text" />
+      <input id="txtFN" name="txtFN" type="text" />
+      <input id="txtMN" name="txtMN" type="text" />
+      <input id="chkExactMatchLastName" name="chkExactMatchLastName"
+        type="checkbox" />
+      <select id="cboCountyId" name="cboCountyId">
+        <option value=""></option>
+        <option value="1">Allegany County</option>
+        <option value="2">Anne Arundel County</option>
+        <option value="3">Baltimore</option>
+        <option value="4">Calvert County</option>
+        <option value="5">Caroline County</option>
+        <option value="6">Carroll County</option>
+        <option value="7">Cecil County</option>
+        <option value="8">Charles County</option>
+        <option value="9">Dorchester County</option>
+        <option value="10">Frederick County</option>
+        <option value="11">Garrett County</option>
+        <option value="12">Harford County</option>
+        <option value="13">Howard County</option>
+        <option value="14">Kent County</option>
+        <option value="15">Montgomery County</option>
+        <option value="16">Prince George's County</option>
+        <option value="17">Queen Anne's County</option>
+        <option value="18">St. Mary's County</option>
+        <option value="19">Somerset County</option>
+        <option value="20">Talbot County</option>
+        <option value="21">Washington County</option>
+        <option value="22">Wicomico County</option>
+        <option value="23">Worcester County</option>
+        <option value="24">Baltimore City</option>
+      </select>
+      <select id="cboStatus" name="cboStatus">
+        <option value=""></option>
+        <option value="ARCHIV">Archived</option>
+        <option value="CLOSED">Closed</option>
+        <option value="OPEN">Open</option>
+        <option value="PENDIN">Pending</option>
+      </select>
+      <select id="cboType" name="cboType">
+        <option value=""></option>
+        <option value="FP">Foreign Proceeding</option>
+        <option value="LO">Limited Order</option>
+        <option value="MA">Modified Administration</option>
+        <option value="MV">Motor Vehicle</option>
+        <option value="NP">NonProbate</option>
+        <option value="RE">Regular Estate</option>
+        <option value="RJ">Regular Estate Judicial</option>
+        <option value="SE">Small Estate</option>
+        <option value="SJ">Small Estate Judicial</option>
+        <option value="UN">Unprobated Will Only</option>
+      </select>
+      <input id="DateOfFilingFrom" name="DateOfFilingFrom" type="text" />
+      <input id="DateOfFilingTo" name="DateOfFilingTo" type="text" />
+      <input id="txtDOF" name="txtDOF" type="text" />
+      <select id="cboPartyType" name="cboPartyType">
+        <option value="Decedent">Decedent</option>
+        <option value="Personal Representative">Personal Representative</option>
+      </select>
+      <input id="cmdSearch" name="cmdSearch" type="submit" value="Search" />
+      <span id="lblLatestDataDateTime">
+        7/29/2026 4:00:00 PM (rownetwebalt)
+      </span>
+    </form>
+  </body>
+</html>

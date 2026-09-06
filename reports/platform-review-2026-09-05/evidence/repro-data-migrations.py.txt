@@ -1,0 +1,43 @@
+import sqlite3
+from pathlib import Path
+from tools import lead_tracker as lt, findings_tracker as ft, analysis_export as ae
+base=Path('/tmp/osint-SXYkyRSJ/data-model-fixtures')
+p=base/'legacy-connections.db'
+if p.exists(): p.unlink()
+db=sqlite3.connect(p)
+db.row_factory=sqlite3.Row
+db.execute('PRAGMA foreign_keys=ON')
+db.executescript('''CREATE TABLE connections (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+person_a TEXT NOT NULL, person_b TEXT NOT NULL,
+relationship_type TEXT CHECK(relationship_type IN ('financial','social','legal','intelligence','employment','familial','corporate','advisory','political')),
+description TEXT, strength TEXT DEFAULT 'medium' CHECK(strength IN ('strong','medium','weak','circumstantial')),
+date_range TEXT, finding_id INTEGER REFERENCES findings(id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+agent_run_id TEXT
+);''')
+db.execute("PRAGMA foreign_keys=OFF")
+db.execute("INSERT INTO connections(person_a,person_b,relationship_type,agent_run_id) VALUES ('Acme','Beta','financial','original-agent')")
+db.commit()
+db.execute("PRAGMA foreign_keys=ON")
+lt._ensure_schema(db)
+print('legacy_connection_migration', {'foreign_keys':db.execute('PRAGMA foreign_keys').fetchone()[0], 'has_agent_run_id': any(r['name']=='agent_run_id' for r in db.execute('PRAGMA table_info(connections)')), 'rows': [dict(r) for r in db.execute('SELECT * FROM connections')]})
+try:
+    db.execute("INSERT INTO connection_evidence(connection_id,evidence_type,evidence_ref) VALUES (999999,'ref','FIXTURE:orphan')")
+    db.commit()
+    print('orphan_insert','accepted')
+except sqlite3.IntegrityError as e:
+    print('orphan_insert',str(e))
+db.close()
+# Current automatic initialization does not install v2 table definitions.
+p=base/'bootstrap.db'
+if p.exists(): p.unlink()
+lt.DB_PATH=p
+lt._schema_initialized=False
+ft.DB_PATH=p
+ft._schema_initialized=False
+db=lt.get_db()
+db.close()
+try:
+    ae.export_entity_network(profile_id='fixture-profile')
+except Exception as e:
+    print('fresh_entity_network_export',type(e).__name__,str(e))

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Hearing Date</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <input type="hidden" name="formAction" value="">
+      <input type="hidden" name="curentFipsCode" value="013">
+      <input type="hidden" name="searchTerm" value="07/30/2026">
+      <input type="hidden" name="searchFipsCode" value="013">
+      <input type="submit" name="caseInfoScrollForward" value="Next">
+      <table class="tableborder">
+        <tr>
+          <td class="gridheader">&nbsp;</td>
+          <td class="gridheader">Case #</td>
+          <td class="gridheader">Defendant</td>
+          <td class="gridheader">Plaintiff</td>
+          <td class="gridheader">Case Type</td>
+          <td class="gridheader">Hearing Time</td>
+        </tr>
+        <tr class="evenRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GV26000001-00"></td>
+          <td class="gridrow"><a href="caseSearch.do?formAction=caseDetails&amp;displayCaseNumber=GV26000001-00&amp;localFipsCode=013&amp;clientSearchCounter=3">GV26000001-00</a></td>
+          <td class="gridrow">EXAMPLE PROPERTIES LLC</td>
+          <td class="gridrow">ALEX RIVER</td>
+          <td class="gridrow">Warrant In Debt</td>
+          <td class="gridrow">09:30 AM</td>
+        </tr>
+        <tr class="oddRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GV26000002-00"></td>
+          <td class="gridrow"><a href="caseSearch.do?formAction=caseDetails&amp;displayCaseNumber=GV26000002-00&amp;localFipsCode=013&amp;clientSearchCounter=3">GV26000002-00</a></td>
+          <td class="gridrow">MORGAN PARK</td>
+          <td class="gridrow">SAMPLE BANK</td>
+          <td class="gridrow">Unlawful Detainer</td>
+          <td class="gridrow">10:00 AM</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

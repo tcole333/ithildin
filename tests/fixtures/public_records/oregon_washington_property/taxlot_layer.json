@@ -1,0 +1,50 @@
+{
+  "currentVersion": 11.5,
+  "id": 0,
+  "name": "taxlots",
+  "type": "Feature Layer",
+  "geometryType": "esriGeometryPolygon",
+  "serviceItemId": "c8d84fcec9574060b05ba3854a2df62e",
+  "objectIdField": "OBJECTID",
+  "maxRecordCount": 2000,
+  "spatialReference": {
+    "wkid": 2913,
+    "latestWkid": 2913
+  },
+  "sourceSpatialReference": {
+    "wkid": 2913,
+    "latestWkid": 2913
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeInteger",
+      "nullable": false
+    },
+    {
+      "name": "TLNO",
+      "type": "esriFieldTypeString",
+      "alias": "TLNO",
+      "sqlType": "sqlTypeNVarchar",
+      "length": 20,
+      "nullable": true
+    },
+    {
+      "name": "MAPNO",
+      "type": "esriFieldTypeString",
+      "alias": "MAPNO",
+      "sqlType": "sqlTypeNVarchar",
+      "length": 12,
+      "nullable": true
+    },
+    {
+      "name": "TLNO5",
+      "type": "esriFieldTypeInteger",
+      "alias": "TLNO5",
+      "sqlType": "sqlTypeInteger",
+      "nullable": true
+    }
+  ]
+}

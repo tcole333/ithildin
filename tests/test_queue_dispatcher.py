@@ -7,8 +7,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from queue_system.queue import JobQueue
-from scripts import queue_dispatcher as dispatcher
+from queue_system.queue import JobQueue  # noqa: E402 — bootstrap direct-script imports
+from scripts import queue_dispatcher as dispatcher  # noqa: E402
 
 
 class QueueDispatcherTests(unittest.TestCase):
@@ -26,7 +26,7 @@ class QueueDispatcherTests(unittest.TestCase):
     def test_get_pending_by_type_counts_pending(self):
         job_a = self.queue.create_job(job_type="echo", domain="system")
         self.queue.create_job(job_type="echo", domain="system")
-        self.queue.create_job(job_type="source_scan", domain="discovery")
+        self.queue.create_job(job_type="source_scan", domain="discovery", payload={"profile_id": "test-profile"})
         self.queue.complete_job(job_a, {"ok": True})
 
         db = dispatcher._connect()

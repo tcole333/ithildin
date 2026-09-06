@@ -47,6 +47,98 @@ site:littlesis.org "jeffrey epstein"        # Pre-mapped relationships
 - **CourtListener** (courtlistener.com): Free federal court data — `python tools/query_courtlistener.py`
 - **Unicourt**: State and federal court records (freemium)
 - **State court systems**: Each state has its own e-filing system
+- **D.C. Courts directories and data publications**: Current Superior Court and Court of Appeals judges/contacts, assignment PDFs, the submitted data-request program, and aggregate report PDFs — `uv run python tools/query_dc_court_directory_data.py sources --json`
+- **Michigan Business Court documents**:
+  `uv run python tools/query_michigan_business_court.py --help` searches the
+  official selective trial-publication collection, exact native category and
+  court facets, and linked PDFs. Omitted limits follow the source's native
+  totals. Preserve the PDF, query-row, and case-number-candidate identities
+  separately, then use MiCOURT or the responsible clerk to confirm the trial
+  court and controlling case file.
+- **Supreme Court of Texas Orders & Opinions**:
+  `uv run python tools/query_texas_supreme_publications.py --help` enumerates
+  official annual hand-down dates and extracts the full release text, native
+  docket, action/section context, print-order PDF, summaries, opinions, and
+  separate writings. It also inventories the distinct May 2020 outage files
+  and pre-October-2014 archives. TAMES case detail and TAMES released-orders
+  pages remain separately attributable retrieval representations.
+
+### Property and Land Records
+- **Unified local source router**: `uv run python tools/query_property.py sources`
+  lists the cataloged assessor, parcel, recorder, tax, survey, and related
+  sources; source-specific adapters retain their native identifiers and
+  fields.
+- **Maryland MD iMAP Parcel Points**:
+  `uv run python tools/query_md_mdp_parcel_points.py --help` queries official
+  statewide point, appraisal, structure, land, zoning, deed/plat-reference,
+  and address fields under catalog source `us-md-mdp-parcel-points`.
+  `ACCTID` joins the same SDAT account represented in the hidden-owner
+  Socrata dataset; `OBJECTID` identifies the ArcGIS feature occurrence.
+- **Maryland MDP property downloads**:
+  `uv run python tools/query_md_mdp_property_downloads.py --help` discovers,
+  transfers, and inspects the official statewide parcel, CAMA, and residential-
+  sales release families while retaining their distinct release and artifact
+  lineage.
+- **Maryland State Archives Plats.net**:
+  `uv run python tools/query_md_plats.py --help` searches the anonymous
+  24-jurisdiction WebForms archive by book/page, plat, right-of-way,
+  description, filing date, or archive series/unit. Catalog source
+  `us-md-plats` retains metadata-only units and separate PDF/TIFF/JPEG
+  representations. MDLandRec, MD iMAP Parcel Points, CAMA, and property-sales
+  releases remain separately attributable sources for deed, parcel,
+  assessment, and sale context.
+- **Local parcel shapefiles**:
+  `uv run python tools/public_records_shapefile.py --help` inspects and streams
+  caller-acquired SHP/SHX/DBF ZIPs or sidecar sets with native-CRS geometry,
+  DBF attributes, source-occurrence lineage, and resumable searches.
+- **Florida DOR assessment and GIS releases**:
+  `uv run python tools/query_fl_dor_property.py --help` discovers and acquires
+  the official NAL, SDF, GIS-PIN, and GIS-PAR county releases.
+  `uv run python tools/ingest_fl_dor_property.py --help` streams NAL/SDF rows
+  and projects aligned GIS-PIN feature occurrences into exact-join parcel
+  shells and native-CRS geometry collections.
+- **Local parcel FileGDB artifacts**:
+  `uv run python tools/public_records_filegdb.py --help` inventories FileGDB
+  ZIPs or directories without GDAL. `ogrinfo` 3.7+ with OpenFileGDB read adds
+  layer inspection; compatible `ogr2ogr` with GPKG write adds native-FID
+  feature occurrences with native-CRS WKB geometry.
+- **Texas EPTS transaction reports**:
+  `uv run python tools/query_texas_epts.py --help` exposes the Comptroller's
+  current 52-field schema, prepares a non-submitting public-information request
+  handoff, and inspects or searches delivered CSV, tab, XLSX, and ZIP
+  artifacts while retaining confidentiality and row-occurrence states.
+- **Orange County, Florida property-tax records**:
+  `uv run python tools/query_orange_tax_collector.py --help` searches the
+  current GovHub/TaxSys account and bill routes and separately handles the Tax
+  Collector's fixed 2020 current/delinquent bulk snapshots. Use the exact
+  15-digit account for parcel joins; retain bill, certificate, receipt, and
+  bulk-row identities separately. Shared routing and normalized ingestion use
+  `query_property.py` with source
+  `us-fl-orange-tax-collector-property-tax` and `--ingest`.
+- **Lane County, Oregon property-account and tax-map stack**:
+  `uv run python tools/query_oregon_lane_property.py --help` searches the
+  anonymous Property Account Information indexes and account detail under
+  `us-or-lane-property-account-information`, and searches or downloads the
+  separately identified Tax Map Search locators/PDFs under
+  `us-or-lane-tax-maps`. The account index preserves `Tax Payer` and `Owner`
+  as distinct labels; Lane Deeds and Records supplies recorded-title
+  instruments. The existing Lane ArcGIS parcel/recent-sales sources, subscribed
+  RLID pages, and the County's full tax-map image set/update subscriptions are
+  separately attributable complements. Omitted limits return every
+  source-supplied row, while explicit windows use anchored continuation.
+- **Marion County, Oregon land-record stack**:
+  `query_oregon_helion_recorder.py` and the shared `query_property.py`
+  instrument route use `us-or-marion-clerk-recorded-documents` for the
+  verified 1974-present current index and detail. Keep the separate
+  `us-or-marion-clerk-historical-deeds` search (county listing 1855-1976;
+  form wording 1850-1976), the assessor search, and the Clerk counter/mail
+  copy and certification route as complementary representations. A missing
+  image/OCR/cart link on a current detail is a routing fact, not an empty
+  instrument record.
+- **Field-matched alternatives**: When a primary portal is difficult, use the
+  catalog's separately attributed bulk releases, official publications,
+  archives, recorder indexes, assessor/treasurer systems, and copy/request
+  routes for the particular missing fields.
 
 ### Biographical / Social
 - **Wikipedia**: Starting point only (can be edited by subjects/PR firms). Always verify against primary sources

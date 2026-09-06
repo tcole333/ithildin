@@ -1,5 +1,5 @@
-import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,14 +33,15 @@ export type FindingCatalog = {
 
 type CatalogOptions = {
   findingIds?: string[];
+  /** @deprecated Ignored: use publication_snapshot.py --db for an explicit audit. */
   includeDbFallback?: boolean;
 };
 
 let cachedContentCatalog: FindingCatalog | null = null;
-let cachedDbCatalog: FindingCatalog | null = null;
+let cachedPublicationCatalog: FindingCatalog | null = null;
 
 function contentRoot(): string {
-  return resolve(process.cwd(), "..", "content");
+  return resolve(process.env.ITHILDIN_CONTENT_DIR || resolve(process.cwd(), "..", "content"));
 }
 
 function articlesDir(): string {
@@ -49,27 +50,6 @@ function articlesDir(): string {
 
 function dossiersDir(): string {
   return resolve(contentRoot(), "dossiers");
-}
-
-function candidateDbPaths(): string[] {
-  const envPath = String(process.env.INVESTIGATION_DB_PATH || "").trim();
-  const moduleDir = dirname(fileURLToPath(import.meta.url));
-  const candidates = [
-    envPath,
-    resolve(process.cwd(), "investigation.db"),
-    resolve(process.cwd(), "..", "investigation.db"),
-    resolve(moduleDir, "..", "..", "..", "investigation.db"),
-  ].filter((value): value is string => Boolean(value));
-  return Array.from(new Set(candidates));
-}
-
-function isUsableDb(path: string): boolean {
-  if (!existsSync(path)) return false;
-  try {
-    return statSync(path).size > 0;
-  } catch {
-    return false;
-  }
 }
 
 function normalizeEvidenceItem(evidence: any): RawFindingEvidenceDetail | null {
@@ -96,7 +76,7 @@ function normalizeFindingRecord(finding: any): RawFindingDetail | null {
     verification_status: finding?.verification_status || "unverified",
     date_of_event: finding?.date_of_event || undefined,
     evidence: Array.isArray(finding?.evidence)
-      ? finding.evidence.map(normalizeEvidenceItem).filter((item): item is RawFindingEvidenceDetail => Boolean(item))
+      ? finding.evidence.map(normalizeEvidenceItem).filter((item: RawFindingEvidenceDetail | null): item is RawFindingEvidenceDetail => Boolean(item))
       : [],
   };
 }
@@ -148,6 +128,8 @@ function mergeDetailMaps(...maps: RawFindingDetailMap[]): RawFindingDetailMap {
 }
 
 export function mergeFindingCatalogs(...catalogs: Array<FindingCatalog | null | undefined>): FindingCatalog {
+  const publication = loadPublicationFindingCatalog();
+  if (publication) return publication;
   const detailMaps = catalogs.filter(Boolean).map((catalog) => catalog!.detailMap);
   const detailMap = mergeDetailMaps(...detailMaps);
   return {
@@ -197,81 +179,6 @@ function scanDossierFindings(detailMap: RawFindingDetailMap): void {
   }
 }
 
-function queryFindingRowsFromDb(dbPath: string, findingIds?: string[]): any[] {
-  const whereClause = findingIds && findingIds.length > 0
-    ? `WHERE f.id IN (${findingIds.map((id) => `'${String(id).replace(/'/g, "''")}'`).join(",")})`
-    : "";
-  const sql = `
-    SELECT f.id, f.summary, f.finding_type, f.confidence, f.claim_type,
-           f.verification_status, f.date_of_event,
-           fe.evidence_type, fe.evidence_ref, fe.source_quote,
-           fe.source_page, fe.assessment
-    FROM findings f
-    LEFT JOIN finding_evidence fe ON fe.finding_id = f.id
-    ${whereClause}
-    ORDER BY f.id;
-  `;
-
-  try {
-    const output = execFileSync("sqlite3", [dbPath, ".mode json", sql], {
-      encoding: "utf-8",
-      maxBuffer: 128 * 1024 * 1024,
-    }).trim();
-    if (!output) return [];
-    return JSON.parse(output) as any[];
-  } catch {
-    return [];
-  }
-}
-
-function buildCatalogFromDbRows(rows: any[]): FindingCatalog {
-  const detailMap: RawFindingDetailMap = {};
-  for (const row of rows) {
-    const id = String(row.id);
-    if (!detailMap[id]) {
-      detailMap[id] = {
-        id,
-        summary: row.summary || "",
-        finding_type: row.finding_type || "unknown",
-        confidence: row.confidence || "medium",
-        claim_type: row.claim_type || "inference",
-        verification_status: row.verification_status || "unverified",
-        date_of_event: row.date_of_event || undefined,
-        evidence: [],
-      };
-    }
-    const normalized = normalizeEvidenceItem(row);
-    if (normalized) {
-      detailMap[id].evidence.push(normalized);
-    }
-  }
-  return {
-    detailMap,
-    evidenceMap: buildFindingEvidenceMapFromItems(Object.values(detailMap)),
-  };
-}
-
-function loadDbFindingCatalog(findingIds?: string[]): FindingCatalog {
-  if (!findingIds || findingIds.length === 0) {
-    if (cachedDbCatalog) return cachedDbCatalog;
-    for (const dbPath of candidateDbPaths()) {
-      if (!isUsableDb(dbPath)) continue;
-      const catalog = buildCatalogFromDbRows(queryFindingRowsFromDb(dbPath));
-      cachedDbCatalog = catalog;
-      return cachedDbCatalog;
-    }
-    cachedDbCatalog = { detailMap: {}, evidenceMap: {} };
-    return cachedDbCatalog;
-  }
-
-  for (const dbPath of candidateDbPaths()) {
-    if (!isUsableDb(dbPath)) continue;
-    return buildCatalogFromDbRows(queryFindingRowsFromDb(dbPath, findingIds));
-  }
-
-  return { detailMap: {}, evidenceMap: {} };
-}
-
 export function loadContentFindingCatalog(): FindingCatalog {
   if (cachedContentCatalog) return cachedContentCatalog;
   const detailMap: RawFindingDetailMap = {};
@@ -284,22 +191,57 @@ export function loadContentFindingCatalog(): FindingCatalog {
   return cachedContentCatalog;
 }
 
-export function loadGlobalFindingCatalog(options: CatalogOptions = {}): FindingCatalog {
-  const contentCatalog = filterCatalog(loadContentFindingCatalog(), options.findingIds);
-  if (!options.includeDbFallback) {
-    return contentCatalog;
-  }
+function recordFingerprint(record: any): string {
+  const normalized = normalizeFindingRecord(record);
+  if (!normalized) throw new Error("Publication finding is missing an id");
+  normalized.evidence.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  return JSON.stringify(normalized);
+}
 
-  const requestedIds = options.findingIds?.map((id) => String(id).trim()).filter(Boolean) || [];
-  if (requestedIds.length > 0) {
-    const missingIds = requestedIds.filter((id) => !contentCatalog.detailMap[id]);
-    if (missingIds.length === 0) {
-      return contentCatalog;
+export function loadPublicationFindingCatalog(): FindingCatalog | null {
+  const snapshotPath = process.env.ITHILDIN_FINDING_SNAPSHOT;
+  if (!snapshotPath) return null; // Unreviewed local preview; release requires a snapshot.
+  if (cachedPublicationCatalog) return cachedPublicationCatalog;
+  const snapshot = JSON.parse(readFileSync(resolve(snapshotPath), "utf-8"));
+  if (snapshot.schema_version !== 1 || !snapshot.source_hashes || !snapshot.findings) {
+    throw new Error("Invalid publication finding snapshot");
+  }
+  const expectedFiles = [
+    ...readdirSync(dossiersDir()).filter((file) => file.endsWith(".json") && !file.startsWith("_")).map((file) => `dossiers/${file}`),
+    ...readdirSync(articlesDir()).filter((file) => file.endsWith(".mdx") || file.endsWith("-findings.json")).map((file) => `articles/${file}`),
+  ].sort();
+  if (JSON.stringify(expectedFiles) !== JSON.stringify(Object.keys(snapshot.source_hashes).sort())) {
+    throw new Error("Publication snapshot source files changed; regenerate and review the snapshot");
+  }
+  for (const relative of expectedFiles) {
+    const raw = readFileSync(resolve(contentRoot(), relative));
+    if (createHash("sha256").update(raw).digest("hex") !== snapshot.source_hashes[relative]) {
+      throw new Error(`Publication snapshot is stale: ${relative}`);
     }
-    return mergeFindingCatalogs(loadDbFindingCatalog(missingIds), contentCatalog);
+    if (!relative.endsWith(".json")) continue;
+    const payload = JSON.parse(raw.toString("utf-8"));
+    const records = relative.endsWith("-findings.json") ? Object.values(payload)
+      : [...(payload.findings || []), ...(payload.citation_findings || [])];
+    for (const record of records as any[]) {
+      const approved = snapshot.findings[String(record.id)];
+      if (!approved || recordFingerprint(record) !== recordFingerprint(approved)) {
+        throw new Error(`Finding ${record.id} differs from the publication snapshot in ${relative}`);
+      }
+    }
   }
+  for (const [id, record] of Object.entries(snapshot.findings) as Array<[string, any]>) {
+    if (String(record.id) !== id || record.verification_status !== "verified") {
+      throw new Error(`Non-verified or invalid finding ${id} in publication snapshot`);
+    }
+  }
+  cachedPublicationCatalog = catalogFromFindingItems(Object.values(snapshot.findings));
+  return cachedPublicationCatalog;
+}
 
-  return mergeFindingCatalogs(loadDbFindingCatalog(), contentCatalog);
+export function loadGlobalFindingCatalog(options: CatalogOptions = {}): FindingCatalog {
+  // Builds are static and deterministic. Current DB status is audited explicitly
+  // by publication_snapshot.py; it is never silently merged into a web build.
+  return filterCatalog(loadPublicationFindingCatalog() || loadContentFindingCatalog(), options.findingIds);
 }
 
 export function loadArticleFindingCatalog(slug: string): FindingCatalog {

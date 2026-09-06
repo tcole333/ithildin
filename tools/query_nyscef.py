@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
-"""
-NYSCEF guest-search tool for New York State court e-filing records.
+"""New York State court e-filing record adapter.
 
 NYSCEF does not expose a public JSON API for guest search. The public portal is
-server-rendered and fronted by Cloudflare, so this tool uses a Playwright-backed
-browser helper to perform low-volume searches through the same guest workflow a
-human uses.
-
-Use for targeted court research, not bulk extraction. NYSCEF's public terms
-state that data may not be mined and the site may not be accessed by a bot for
-extracting data.
+server-rendered. The central public-record catalog supplies the current access
+state. When machine access is unavailable, commands return a structured action
+with the requested criteria and official URLs; when the catalog permits it,
+the retained browser adapter handles the same commands.
 
 Usage:
     python tools/query_nyscef.py search "Jeffrey Epstein"
@@ -30,9 +26,13 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.public_records_catalog import DEFAULT_DB_PATH as DEFAULT_CATALOG_DB
+    from tools.seed_public_records_catalog import ensure_catalog_source
 except ImportError:
     sys.path.insert(0, str(Path(__file__).parent))
     from output_util import add_output_args, write_output
+    from public_records_catalog import DEFAULT_DB_PATH as DEFAULT_CATALOG_DB
+    from seed_public_records_catalog import ensure_catalog_source
 
 try:
     from tools.lead_tracker import log_search
@@ -45,9 +45,15 @@ except ImportError:
 
 
 HELPER_PATH = Path(__file__).parent / "_nyscef_browser_helper.js"
-HARD_LIMIT = 50
+SOURCE_ID = "us-ny-nyscef"
 BASE_URL = "https://iapps.courts.state.ny.us/nyscef"
-
+GUEST_SEARCH_URL = f"{BASE_URL}/CaseSearch"
+TERMS_URL = "https://iappscontent.courts.state.ny.us/NYSCEF/live/termsOfUse.htm"
+FAQ_URL = "https://iappscontent.courts.state.ny.us/nyscef/live/faq.htm"
+RECORDS_HELP_URL = (
+    "https://www.nycourts.gov/help/representing-yourself-court/"
+    "getting-court-records-case-information"
+)
 _UNAVAILABLE_SEARCH_STATUSES = frozenset(
     {"blocked", "challenged", "error", "failed", "failure", "unavailable"}
 )
@@ -61,8 +67,56 @@ _CHALLENGE_MESSAGE_MARKERS = (
 )
 
 
-def _run_helper(command, payload, timeout=180):
-    """Run the NYSCEF browser helper through npx so Playwright is available."""
+def _access_decision(catalog_db=DEFAULT_CATALOG_DB):
+    """Return the current catalog decision for the NYSCEF source."""
+    catalog = ensure_catalog_source(SOURCE_ID, db_path=catalog_db)
+    return catalog.machine_acquisition_decision(SOURCE_ID)
+
+
+def _human_required_response(command, payload, decision):
+    """Describe the current catalog route without launching the helper."""
+    access_status = (
+        "terms_blocked"
+        if decision.get("automation_disposition") == "prohibited"
+        else "human_required"
+    )
+    return {
+        "source": "nyscef",
+        "status": "human_required",
+        "access_status": access_status,
+        "human_required": True,
+        "terms_blocked": access_status == "terms_blocked",
+        "available": False,
+        "source_available": True,
+        "automation_attempted": False,
+        "reason": decision.get("reason_code") or "catalog_access_state",
+        "message": decision.get("reason") or "Use the catalogued source route.",
+        "access_decision": decision,
+        "requested_action": {
+            "command": command,
+            "criteria": payload,
+        },
+        "official_urls": {
+            "guest_search": GUEST_SEARCH_URL,
+            "terms_of_use": TERMS_URL,
+            "faq": FAQ_URL,
+            "court_records_help": RECORDS_HELP_URL,
+        },
+        "next_step": "Use the official guest search with requested_action.criteria.",
+    }
+
+
+def _run_helper(
+    command,
+    payload,
+    timeout=180,
+    catalog_db=DEFAULT_CATALOG_DB,
+):
+    """Use the route selected by the source catalog."""
+    decision = _access_decision(catalog_db)
+    if not decision["allowed"]:
+        return _human_required_response(command, payload, decision)
+
     if not HELPER_PATH.exists():
         print(f"ERROR: Browser helper not found at {HELPER_PATH}", file=sys.stderr)
         return None
@@ -115,15 +169,9 @@ def _run_helper(command, payload, timeout=180):
 
 
 def _normalize_limit(limit):
-    """Clamp guest-search page traversal to a small number of records."""
+    """Normalize a requested result count."""
     if limit is None:
         return 20
-    if limit > HARD_LIMIT:
-        print(
-            f"  Limiting requested search to {HARD_LIMIT} records for low-volume use.",
-            file=sys.stderr,
-        )
-        return HARD_LIMIT
     if limit < 1:
         return 1
     return limit
@@ -181,6 +229,9 @@ def _normalize_search_response(data):
         return data
 
     status = str(data.get("status") or "").strip().lower()
+    if data.get("human_required") is True or status == "human_required":
+        return data
+
     challenge_status = str(data.get("challenge_status") or "").strip().lower()
     message = " ".join(
         str(data.get(key) or "") for key in ("message", "error")
@@ -210,6 +261,29 @@ def _normalize_search_response(data):
         normalized["challenge_status"] = "challenged"
         normalized.setdefault("reason", "captcha_or_anti_bot_challenge")
     return normalized
+
+
+def _handle_human_required(data, args, label):
+    """Emit the structured manual-action response before any result processing."""
+    if not isinstance(data, dict) or data.get("human_required") is not True:
+        return False
+
+    if write_output(
+        data,
+        args,
+        summary=f"{label}: human action required (terms blocked)",
+    ):
+        return True
+
+    if getattr(args, "json_out", False):
+        print(json.dumps(data, indent=2, default=str))
+        return True
+
+    print(f"{label}: human action required; automated extraction is terms-blocked.")
+    print(f"  Official guest search: {GUEST_SEARCH_URL}")
+    print(f"  Terms of Use: {TERMS_URL}")
+    print("  Re-enter the requested criteria manually and preserve source provenance.")
+    return True
 
 
 def _handle_unavailable_search(data, args, label):
@@ -282,7 +356,13 @@ def cmd_search(args):
     if args.query and not args.business and not any([args.first, args.middle, args.last]):
         payload.update(_derive_person_fields(args.query))
 
-    data = _run_helper("search-name", payload)
+    data = _run_helper(
+        "search-name",
+        payload,
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF search"):
+        return
     if not data:
         print("Search failed")
         return
@@ -316,7 +396,13 @@ def cmd_case(args):
         "limit": _normalize_limit(args.limit),
     }
 
-    data = _run_helper("search-case", payload)
+    data = _run_helper(
+        "search-case",
+        payload,
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF case search"):
+        return
     if not data:
         print("Case search failed")
         return
@@ -345,7 +431,13 @@ def cmd_new_cases(args):
         "limit": _normalize_limit(args.limit),
     }
 
-    data = _run_helper("new-cases", payload)
+    data = _run_helper(
+        "new-cases",
+        payload,
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF new-cases search"):
+        return
     if not data:
         print("New-case search failed")
         return
@@ -372,9 +464,19 @@ def cmd_new_cases(args):
 
 
 def cmd_detail(args):
-    data = _run_helper("detail", {"docket_id": args.docket_id})
+    data = _run_helper(
+        "detail",
+        {"docket_id": args.docket_id},
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF case detail"):
+        return
     if not data:
         print(f"Case detail lookup failed for {args.docket_id}")
+        return
+
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF case detail"):
         return
 
     if write_output(data, args, summary=f"NYSCEF case detail {args.docket_id}"):
@@ -433,9 +535,19 @@ def cmd_documents(args):
         "motion_only": args.motion_only,
     }
 
-    data = _run_helper("documents", payload)
+    data = _run_helper(
+        "documents",
+        payload,
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF document list"):
+        return
     if not data:
         print(f"Document list lookup failed for {args.docket_id}")
+        return
+
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF document list"):
         return
 
     documents = _filter_documents(data.get("documents", []), args)
@@ -495,9 +607,20 @@ def cmd_download(args):
     else:
         payload["doc_index"] = args.target
 
-    data = _run_helper("download", payload, timeout=240)
+    data = _run_helper(
+        "download",
+        payload,
+        timeout=240,
+        catalog_db=getattr(args, "catalog_db", DEFAULT_CATALOG_DB),
+    )
+    if _handle_human_required(data, args, "NYSCEF document download"):
+        return
     if not data:
         print("Download failed")
+        return
+
+    data = _normalize_search_response(data)
+    if _handle_unavailable_search(data, args, "NYSCEF document download"):
         return
 
     if write_output(data, args, summary=f"NYSCEF download -> {data.get('output_file', args.output_file)}"):
@@ -514,7 +637,7 @@ def cmd_download(args):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        description="Search NYSCEF guest-accessible state court records via browser automation."
+        description="Query NYSCEF through its current catalogued source route"
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -535,6 +658,7 @@ def build_parser():
     search_parser.add_argument("--after", help="Filed on/after date (YYYY-MM-DD or MM/DD/YYYY)")
     search_parser.add_argument("--before", help="Filed on/before date (YYYY-MM-DD or MM/DD/YYYY)")
     search_parser.add_argument("--limit", type=int, default=20)
+    search_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(search_parser)
     search_parser.set_defaults(func=cmd_search)
 
@@ -551,6 +675,7 @@ def build_parser():
     case_parser.add_argument("--after", help="Filed on/after date (YYYY-MM-DD or MM/DD/YYYY)")
     case_parser.add_argument("--before", help="Filed on/before date (YYYY-MM-DD or MM/DD/YYYY)")
     case_parser.add_argument("--limit", type=int, default=20)
+    case_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(case_parser)
     case_parser.set_defaults(func=cmd_case)
 
@@ -561,11 +686,13 @@ def build_parser():
     new_cases_parser.add_argument("--court", required=True, help="Court label, e.g. 'New York County Supreme Court'")
     new_cases_parser.add_argument("--date", required=True, help="Date (YYYY-MM-DD or MM/DD/YYYY)")
     new_cases_parser.add_argument("--limit", type=int, default=20)
+    new_cases_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(new_cases_parser)
     new_cases_parser.set_defaults(func=cmd_new_cases)
 
     detail_parser = subparsers.add_parser("detail", help="Get case detail by NYSCEF docket ID")
     detail_parser.add_argument("docket_id", help="Opaque docketId from search results")
+    detail_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(detail_parser)
     detail_parser.set_defaults(func=cmd_detail)
 
@@ -578,6 +705,7 @@ def build_parser():
     documents_parser.add_argument("--status", help="Filter document status by substring")
     documents_parser.add_argument("--motion-only", action="store_true", help="Use the motion-folder view")
     documents_parser.add_argument("--limit", type=int, help="Limit returned documents after filtering")
+    documents_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(documents_parser)
     documents_parser.set_defaults(func=cmd_documents)
 
@@ -587,6 +715,7 @@ def build_parser():
     )
     download_parser.add_argument("target", help="docIndex or full URL")
     download_parser.add_argument("output_file", help="Path to save the PDF")
+    download_parser.add_argument("--catalog-db", default=str(DEFAULT_CATALOG_DB))
     add_output_args(download_parser)
     download_parser.set_defaults(func=cmd_download)
 

@@ -36,7 +36,7 @@ class WorkerTests(unittest.TestCase):
     def _insert_lead(self, title, status, target_name=None):
         db = self.lead_tracker.get_db()
         cursor = db.execute(
-            "INSERT INTO leads (title, status, target_name) VALUES (?, ?, ?)",
+            "INSERT INTO leads (title, status, target_name, profile_id) VALUES (?, ?, ?, 'profile-a')",
             (title, status, target_name),
         )
         db.commit()
@@ -46,13 +46,13 @@ class WorkerTests(unittest.TestCase):
 
     def test_lead_triage_worker(self):
         existing = self._insert_lead("Existing Lead", "open", "Alpha")
-        dup = self._insert_lead("Dup Lead", "pending_triage", "Alpha")
+        dup = self._insert_lead("Existing Lead", "pending_triage", "Alpha")
         pending = self._insert_lead("New Lead", "pending_triage", "Bravo")
 
-        job_id = self.queue.create_job(
+        self.queue.create_job(
             job_type="lead_triage",
             domain="discovery",
-            payload={"batch_size": 10, "triaged_by": "test:triage"},
+            payload={"batch_size": 10, "triaged_by": "test:triage", "profile_id": "profile-a"},
         )
         job = self.queue.claim_next("triage-1", capabilities=["lead_triage"])
         worker = LeadTriageWorker(self.queue, "triage-1", "lead_triage", ["lead_triage"])
@@ -75,19 +75,20 @@ class WorkerTests(unittest.TestCase):
         job_id = self.queue.create_job(
             job_type="deep_person",
             domain="investigation",
-            payload={"target_name": "Charlie", "lead_id": lead_id, "sources": []},
+            payload={"target_name": "Charlie", "lead_id": lead_id, "sources": [], "profile_id": "profile-a"},
         )
         job = self.queue.claim_next("deep-1", capabilities=["deep_person"])
         worker = DeepPersonWorker(self.queue, "deep-1", "deep_person", ["deep_person"])
-        output = worker.execute(job)
+        with self.assertRaisesRegex(RuntimeError, "no source completed"):
+            worker.execute(job)
 
         db = self.lead_tracker.get_db()
         row = db.execute("SELECT status, findings FROM leads WHERE id=?", (lead_id,)).fetchone()
         db.close()
 
-        self.assertEqual(row["status"], "completed")
-        self.assertIn("Deep investigation completed", row["findings"])
-        self.assertTrue(Path(output["report_path"]).exists())
+        self.assertEqual(row["status"], "blocked")
+        self.assertIsNone(row["findings"])
+        self.assertTrue((Path(self.tmpdir.name) / job_id / "report.md").exists())
 
 
 if __name__ == "__main__":

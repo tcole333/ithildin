@@ -5,6 +5,7 @@ Trigger engine CLI for scheduled and threshold triggers.
 
 import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -13,8 +14,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from queue_system.queue import JobQueue
-from queue_system.triggers import DEFAULT_CONFIG_PATH, TriggerEngine
+from queue_system.queue import JobQueue  # noqa: E402 — bootstrap direct-script imports
+from queue_system.triggers import DEFAULT_CONFIG_PATH, TriggerEngine  # noqa: E402
 
 
 def _print_results(results):
@@ -26,7 +27,7 @@ def _print_results(results):
 
 def _engine(args) -> TriggerEngine:
     queue = JobQueue(db_path=Path(args.db_path))
-    return TriggerEngine(queue, config_path=args.config)
+    return TriggerEngine(queue, config_path=args.config, profile_id=args.profile)
 
 
 def cmd_run_scheduled(args):
@@ -73,7 +74,8 @@ def main():
         default=str(DEFAULT_CONFIG_PATH),
         help="Path to trigger config JSON",
     )
-    parser.add_argument("--db-path", default=str(PROJECT_ROOT / "investigation.db"))
+    parser.add_argument("--db-path", default=os.environ.get("ITHILDIN_DB_PATH", str(PROJECT_ROOT / "investigation.db")))
+    parser.add_argument("--profile", help="Pin research triggers to this profile for the whole run or daemon lifetime")
     parser.add_argument("--dry-run", action="store_true")
     sub = parser.add_subparsers(dest="command")
 

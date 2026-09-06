@@ -13,6 +13,18 @@ from tools import env_loader
 from tools import query_sam
 
 
+def test_missing_api_key_exits_nonzero_with_explicit_diagnostic(monkeypatch, capsys):
+    monkeypatch.setattr(query_sam, "SAM_API_KEY", "")
+
+    with pytest.raises(SystemExit) as exc_info:
+        query_sam._check_api_key()
+
+    assert exc_info.value.code == 1
+    stderr = capsys.readouterr().err
+    assert "ERROR: SAM_API_KEY not set" in stderr
+    assert "export SAM_API_KEY" in stderr
+
+
 def test_query_sam_loads_api_key_from_repo_env(monkeypatch, tmp_path):
     monkeypatch.delenv("SAM_API_KEY", raising=False)
     monkeypatch.setattr(env_loader, "PROJECT_ROOT", tmp_path)
@@ -335,6 +347,25 @@ def test_api_failure_exits_nonzero_and_does_not_write_output(monkeypatch, tmp_pa
         sys,
         "argv",
         ["query_sam.py", "exclusions", "--uei", "JMLKZZ1NL2Z6", "--output", str(output)],
+    )
+
+    with pytest.raises(SystemExit) as exc_info:
+        query_sam.main()
+
+    assert exc_info.value.code == 1
+    assert not output.exists()
+
+
+def test_entity_api_failure_exits_nonzero_and_does_not_write_output(
+    monkeypatch, tmp_path
+):
+    output = tmp_path / "failed-entity.json"
+    monkeypatch.setattr(query_sam, "SAM_API_KEY", "test-sam-key")
+    monkeypatch.setattr(query_sam, "_fetch", lambda _url, _params: None)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["query_sam.py", "entity", "Critical Metals Corp", "--output", str(output)],
     )
 
     with pytest.raises(SystemExit) as exc_info:

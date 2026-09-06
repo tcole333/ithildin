@@ -1,0 +1,82 @@
+warning: `VIRTUAL_ENV=/Users/travcole/projects/osint-research/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Using CPython 3.11.14
+Creating virtual environment at: .venv
+Downloading curl-cffi (2.9MiB)
+Downloading lxml (8.2MiB)
+Downloading numpy (5.2MiB)
+Downloading pandas (9.5MiB)
+Downloading edgartools (3.0MiB)
+Downloading pygments (1.2MiB)
+Downloading rapidfuzz (1.3MiB)
+Downloading duckdb (13.0MiB)
+Downloading ruff (10.1MiB)
+Downloading pyarrow (32.7MiB)
+Downloading pymupdf (22.8MiB)
+Downloading pydantic-core (1.8MiB)
+   Building multitasking==0.0.12
+   Building ratelimit==2.2.1
+ Downloaded rapidfuzz
+ Downloaded pydantic-core
+ Downloaded pygments
+ Downloaded edgartools
+ Downloaded curl-cffi
+      Built multitasking==0.0.12
+      Built ratelimit==2.2.1
+ Downloaded numpy
+ Downloaded lxml
+ Downloaded pandas
+ Downloaded ruff
+ Downloaded duckdb
+ Downloaded pymupdf
+ Downloaded pyarrow
+Installed 82 packages in 147ms
+...............ss....................................................... [  3%]
+........................................................................ [  7%]
+........................................................................ [ 11%]
+........................................................................ [ 15%]
+........................................................................ [ 19%]
+........................................................................ [ 23%]
+........................................................................ [ 27%]
+........................................................................ [ 31%]
+..................................s..................................... [ 35%]
+........................................................................ [ 38%]
+........................................................................ [ 42%]
+........................................................................ [ 46%]
+....ss.................................................................. [ 50%]
+........................................................................ [ 54%]
+.........................................................ssssss......... [ 58%]
+..........ss........sss................................................. [ 62%]
+.........sssssss........................................................ [ 66%]
+........................................................................ [ 70%]
+........................................................................ [ 73%]
+........................................................................ [ 77%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 89%]
+............................ss.......................................... [ 93%]
+........................................................................ [ 97%]
+...................................................                      [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_build_geo_cy2025_ice_revenue_reconciliation.py:11: GEO lead-62481 source archive not available at /private/tmp/osint-CUTDyZF1/verification-shard-4/investigations/geo-group/sources/2026-07-14-lead-62481
+SKIPPED [1] tests/test_build_salus_csro_artifacts.py:12: Salus CSRO source archive not available at investigations/geo-group/sources/2026-07-14-lead-62736
+SKIPPED [1] tests/test_query_colorado_opinions.py:888: set RUN_LIVE_PUBLIC_RECORD_TESTS=1 for the official live sentinel
+SKIPPED [1] tests/test_query_ny_attorneys.py:535: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_ny_attorneys.py:571: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:880: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:914: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:945: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:970: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:1001: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [1] tests/test_query_oregon_helion_recorder.py:1049: set RUN_LIVE_OR_HELION=1 for official county sentinels
+SKIPPED [2] tests/test_query_oregon_jackson_douglas_assessors.py:653: set RUN_LIVE_OR_JACKSON_DOUGLAS=1 for official ArcGIS probes
+SKIPPED [3] tests/test_query_oregon_jackson_property_events.py:412: set RUN_LIVE_PUBLIC_RECORDS=1 for official live probes
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:659: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:684: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:710: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:732: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:758: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:788: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_case_permits.py:807: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_washington_courts.py:524: set LIVE_PUBLIC_RECORDS=1 for official Washington probes
+SKIPPED [1] tests/test_query_washington_courts.py:565: set LIVE_PUBLIC_RECORDS=1 for official Washington probes
+1826 passed, 25 skipped, 33 deselected in 613.34s (0:10:13)

@@ -1,0 +1,74 @@
+{
+  "evidence_import_counts": {
+    "findings": 1,
+    "leads": 0,
+    "entities": 0,
+    "connections": 0
+  },
+  "evidence_finding": {
+    "claim_type": "inference",
+    "confidence": "confirmed",
+    "source_datasets": "edgar",
+    "event_date_iso": null,
+    "date_precision": null
+  },
+  "evidence_rows": 0,
+  "incomplete_inspection": {
+    "ready": false,
+    "validation_error": null,
+    "artifact_presence": {
+      "report.md": true,
+      "run.json": true,
+      "candidate_findings.jsonl": false,
+      "candidate_leads.jsonl": false,
+      "candidate_entities.jsonl": false,
+      "candidate_connections.jsonl": false
+    }
+  },
+  "incomplete_approved": "approved",
+  "incomplete_import_counts": {
+    "findings": 0,
+    "leads": 0,
+    "entities": 0,
+    "connections": 0
+  },
+  "incomplete_lead_status": "completed",
+  "heartbeat_busy_job_status": "in_progress",
+  "heartbeat_active_agents": {},
+  "heartbeat_scale_action": [
+    {
+      "persona": "surveyor",
+      "spawn": 1,
+      "pending": 1
+    }
+  ],
+  "cancelled_job_after_late_completion": "completed",
+  "trigger_scheduled": {
+    "error": "database is locked",
+    "jobs_created": 1,
+    "trigger_runs_recorded": 0
+  },
+  "trigger_thresholds": {
+    "error": "database is locked",
+    "jobs_created": 1,
+    "trigger_runs_recorded": 0
+  },
+  "concurrent_imports": {
+    "results": [
+      {
+        "findings": 1,
+        "leads": 0,
+        "entities": 0,
+        "connections": 0
+      },
+      {
+        "findings": 1,
+        "leads": 0,
+        "entities": 0,
+        "connections": 0
+      }
+    ],
+    "findings_count": 2,
+    "raw_count": 2
+  }
+}

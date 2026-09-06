@@ -14,9 +14,14 @@ import os
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import Any, Iterator, Optional
+from typing import Iterator, Optional
 
 import requests
+
+try:
+    from tools.env_loader import load_env_file
+except ImportError:
+    from env_loader import load_env_file
 
 logger = logging.getLogger(__name__)
 
@@ -103,6 +108,8 @@ class CourtListenerClient:
                 slowest legitimate response — the FJC database can take ~30s — so
                 that true hangs convert to a retryable Timeout instead of blocking.
         """
+        if token is None:
+            load_env_file()
         self.token = token or os.environ.get("COURTLISTENER_TOKEN")
         if not self.token:
             logger.warning(
@@ -118,6 +125,7 @@ class CourtListenerClient:
         self.session.headers["User-Agent"] = "offshore-leaks-research/1.0"
         self.rate_limiter = RateLimiter(max_requests=rate_limit)
         self.timeout = timeout
+        self.last_pagination: Optional[dict] = None
 
     def _request(
         self,
@@ -211,21 +219,61 @@ class CourtListenerClient:
         Yields:
             Individual result objects
         """
-        params = params or {}
+        params = dict(params or {})
         count = 0
+        pages = 0
+        upstream_count = None
 
         while True:
             data = self._request("GET", endpoint, params, retries=retries)
+            pages += 1
+            if upstream_count is None and isinstance(data.get("count"), int):
+                upstream_count = data["count"]
 
-            for result in data.get("results", []):
+            page_results = data.get("results", [])
+            for index, result in enumerate(page_results):
                 yield result
                 count += 1
                 if max_results and count >= max_results:
+                    next_url = data.get("next")
+                    has_more = (
+                        index < len(page_results) - 1
+                        or bool(next_url)
+                        or (
+                            upstream_count is not None
+                            and count < upstream_count
+                        )
+                    )
+                    self.last_pagination = {
+                        "requested_limit": max_results,
+                        "returned": count,
+                        "upstream_count": upstream_count,
+                        "pages": pages,
+                        "complete": not has_more,
+                        "limit_reached": True,
+                        "upstream_ended_early": False,
+                        "next_url": next_url,
+                    }
                     return
 
             # Check for next page
             next_url = data.get("next")
             if not next_url:
+                upstream_ended_early = (
+                    upstream_count is not None and count < upstream_count
+                )
+                self.last_pagination = {
+                    "requested_limit": max_results,
+                    "returned": count,
+                    "upstream_count": upstream_count,
+                    "pages": pages,
+                    "complete": not upstream_ended_early,
+                    "limit_reached": bool(
+                        max_results and count >= max_results
+                    ),
+                    "upstream_ended_early": upstream_ended_early,
+                    "next_url": None,
+                }
                 break
 
             # Extract cursor/page from next URL

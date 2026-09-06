@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Name</title></head>
+  <body>
+    <form name="nameSearchForm" method="post" action="/gdcourts/nameSearch.do">
+      <input type="hidden" name="formAction" value="newSearch">
+      <input type="hidden" name="lastName" value="EXAMPLE">
+      <input type="hidden" name="searchCategory" value="O">
+      <input type="hidden" name="searchFipsCode" value="013">
+      <input type="hidden" name="searchDivision" value="V">
+      <input type="submit" onclick="submitForm('next')" value="Next">
+      <table class="tableborder">
+        <tr>
+          <td class="gridheader">&nbsp;</td>
+          <td class="gridheader">Case #</td>
+          <td class="gridheader">Plaintiff</td>
+          <td class="gridheader">Defendant</td>
+          <td class="gridheader">Hearing Date</td>
+          <td class="gridheader">Hearing Time</td>
+          <td class="gridheader">Case Judgment</td>
+          <td class="gridheader">Case Type</td>
+        </tr>
+        <tr class="evenRow">
+          <td class="gridrow"><input type="checkbox" name="checkedCases" value="GV24000123-00"></td>
+          <td class="gridrow"><a href="nameSearch.do?formAction=caseDetails&amp;displayCaseNumber=GV24000123-00&amp;localFipsCode=013&amp;caseActive=true&amp;clientSearchCounter=10">GV24000123-00</a></td>
+          <td class="gridrow">EXAMPLE COUNTY</td>
+          <td class="gridrow">JORDAN SKY</td>
+          <td class="gridrow">06/09/2026</td>
+          <td class="gridrow">02:00 PM</td>
+          <td class="gridrow">Plaintiff</td>
+          <td class="gridrow">Motion For Judgment</td>
+        </tr>
+      </table>
+      <input type="hidden" name="firstRowName" value="EXAMPLE COUNTY">
+      <input type="hidden" name="firstRowCaseNumber" value="GV24000123-00">
+      <input type="hidden" name="lastRowName" value="EXAMPLE COUNTY">
+      <input type="hidden" name="lastRowCaseNumber" value="GV24000123-00">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+# Election Integrity Release Investigation
+# Review of the White House "Election Integrity" document release
+# published at https://www.whitehouse.gov/election-integrity/ on 2026-07-16.
+
+name: "election-integrity"
+
+primary_subject: "White House Election Integrity document release (July 2026)"
+
+description: >
+  Forensic review of the four document collections released at
+  whitehouse.gov/election-integrity on 2026-07-16: declassified IC assessments
+  on voting-system vulnerabilities, PRC acquisition of US voter data, FBI files
+  on the Michigan (Muskegon/GBI Strategies) voter-registration investigation,
+  and a DHS review of noncitizens on state voter rolls. Core question: what do
+  the primary documents actually establish, versus the release page's
+  characterization? Includes provenance/redaction analysis and downstream
+  verification against independent records.
+
+key_persons:
+  - "kash patel"
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "Voting-System Vulnerability Assessments"
+    description: "IC/CISA assessments of electronic voting and ballot-counting system vulnerabilities, incl. Venezuela 2020 plot reporting"
+    targets:
+      - "cisa"
+    keywords:
+      - "voting machine"
+      - "ballot[- ]counting"
+      - "election infrastructure"
+      - "venezuela"
+  - id: 2
+    name: "PRC Voter-Data Acquisition"
+    description: "Claimed PRC compromise of ~220M US voter files 2018-2024; IC reporting chain and alleged suppression"
+    targets: []
+    keywords:
+      - "prc"
+      - "china"
+      - "voter data"
+      - "voter registration (database|files)"
+  - id: 3
+    name: "Michigan Voter-Registration Investigation"
+    description: "FBI Detroit / MSP investigation of GBI Strategies Muskegon operation; DOJ PIN declinations and delay claims"
+    targets:
+      - "gbi strategies"
+    keywords:
+      - "michigan"
+      - "muskegon"
+      - "gbi"
+  - id: 4
+    name: "Noncitizen Voter-Roll Review"
+    description: "DHS review claiming ~278,000 noncitizens registered; methodology and state coverage"
+    targets: []
+    keywords:
+      - "noncitizen"
+      - "non-citizen"
+      - "alien voter"
+  - id: 5
+    name: "Release Provenance and Framing"
+    description: "How the release was assembled (PDF metadata, redaction workflow, doc dating), page framing vs document content, newly-authored vs declassified docs"
+    targets: []
+    keywords:
+      - "declass"
+      - "redact"
+      - "provenance"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2020-01-15"
+    event: "NICM: Vulnerabilities in US 2020 Election Infrastructure (earliest assessment in release)"
+    category: "operational"
+  - date: "2020-08-19"
+    event: "NICA: Foreign Threats to 2020 US Election"
+    category: "operational"
+  - date: "2020-10-16"
+    event: "NICM: China Steps to Influence Election"
+    category: "operational"
+  - date: "2020-11-03"
+    event: "US presidential election"
+    category: "political"
+  - date: "2020-12-30"
+    event: "Email: ICA comments re minority view (post-election ICA drafting dispute)"
+    category: "operational"
+  - date: "2021-12-23"
+    event: "Email: 'Everyone's favorite topic' (recurring voter-data discussion)"
+    category: "operational"
+  - date: "2026-06-24"
+    event: "'Voter Registration Database Threats - FINAL' authored in Word (PDF metadata)"
+    category: "milestone"
+  - date: "2026-06-29"
+    event: "CIA Note: Venezuela Machines Intel Memo dated"
+    category: "operational"
+  - date: "2026-07-13"
+    event: "'CISA Election Report - FINAL' PDF created (Adobe metadata)"
+    category: "milestone"
+  - date: "2026-07-16"
+    event: "White House election-integrity page and four zip collections published"
+    category: "political"
+
+seed_pillars:
+  - name: "National Intelligence Council"
+    pillar_type: "intelligence"
+    sub_type: "analysis"
+    status: "active"
+    founded: "1979"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Author of the NICA/NICM assessments in the release"
+  - name: "Central Intelligence Agency"
+    pillar_type: "intelligence"
+    sub_type: "agency"
+    status: "active"
+    founded: "1947"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Source of wire memos, Venezuela reporting, PDB items"
+  - name: "FBI Detroit Field Office"
+    pillar_type: "government"
+    sub_type: "law_enforcement"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "US-MI"
+    significance: "Ran the Michigan voter-registration investigation"
+  - name: "DOJ Public Integrity Section"
+    pillar_type: "government"
+    sub_type: "prosecutorial"
+    status: "active"
+    founded: "1976"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Issued declination memos in the Michigan matter"
+  - name: "Cybersecurity and Infrastructure Security Agency"
+    pillar_type: "government"
+    sub_type: "agency"
+    status: "active"
+    founded: "2018"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Named author of the July 2026 election report in collection 1"
+  - name: "Department of Homeland Security"
+    pillar_type: "government"
+    sub_type: "agency"
+    status: "active"
+    founded: "2002"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Author of the noncitizen voter-roll review"
+  - name: "GBI Strategies"
+    pillar_type: "operations"
+    sub_type: "political_consulting"
+    status: "unknown"
+    founded: null
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Voter-registration contractor at the center of the Michigan investigation"
+
+evidence_id_prefix: "WHEI"
+
+exclude_from_graph: ""
+
+source_overrides:
+  "whitehouse.gov election-integrity page": "Political characterization of the documents — treat as secondary framing; verify every claim against the enclosed primary documents"
+  "WHEI released documents": "Primary government records, but released selectively with redactions; note what is withheld and corroborate externally where possible"

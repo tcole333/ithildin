@@ -21,11 +21,11 @@ Usage:
 """
 
 import argparse
+import gzip
 import json
 import sys
-import time
-from collections import Counter, defaultdict
-from urllib.parse import urlencode, quote
+from collections import Counter
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -61,6 +61,12 @@ def _cdx_fetch(params, timeout=60):
             return []
         print(f"ERROR: Wayback CDX returned {e.code}", file=sys.stderr)
         sys.exit(1)
+    except TimeoutError:
+        print(
+            f"ERROR: Wayback CDX did not respond within {timeout}s; retry later",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from None
     except URLError as e:
         print(f"ERROR: Network error: {e.reason}", file=sys.stderr)
         sys.exit(1)
@@ -79,6 +85,18 @@ def _format_timestamp(ts):
 def _wayback_url(original, timestamp):
     """Build a Wayback Machine URL for a specific snapshot."""
     return f"{WEB_URL}/{timestamp}/{original}"
+
+
+def _decode_http_body(raw, content_encoding="", charset="utf-8"):
+    """Decode an archived response, including gzip bodies urllib leaves raw."""
+    encodings = {
+        item.strip().casefold()
+        for item in content_encoding.split(",")
+        if item.strip()
+    }
+    if "gzip" in encodings or raw.startswith(b"\x1f\x8b"):
+        raw = gzip.decompress(raw)
+    return raw.decode(charset or "utf-8", errors="replace")
 
 
 # -- Commands ----------------------------------------------------------------
@@ -178,13 +196,13 @@ def cmd_timeline(args):
 
     print(f"\nStatus codes: {dict(statuses.most_common())}")
 
-    print(f"\nYearly captures:")
+    print("\nYearly captures:")
     for year, count in sorted(yearly.items()):
         bar = "#" * min(count, 60)
         print(f"  {year}: {bar} ({count})")
 
     if args.monthly:
-        print(f"\nMonthly captures:")
+        print("\nMonthly captures:")
         for month, count in sorted(monthly.items()):
             bar = "#" * min(count, 40)
             ym = f"{month[:4]}-{month[4:6]}"
@@ -231,21 +249,6 @@ def cmd_first(args):
 
 def cmd_diff(args):
     """Compare snapshots between two dates by listing unique content digests."""
-    params_from = {
-        "url": args.url,
-        "fl": "timestamp,digest,statuscode,mimetype",
-        "limit": 1,
-        "to": args.from_date,
-        "sort": "default",
-    }
-    params_to = {
-        "url": args.url,
-        "fl": "timestamp,digest,statuscode,mimetype",
-        "limit": 1,
-        "to": args.to_date,
-        "sort": "default",
-    }
-
     # Get all snapshots in range, collapsed by digest (unique content versions)
     params_range = {
         "url": args.url,
@@ -298,14 +301,28 @@ def cmd_fetch(args):
     req = Request(url, headers={"User-Agent": "OSINT-Research/1.0"})
     try:
         with urlopen(req, timeout=30) as resp:
-            content = resp.read().decode("utf-8", errors="replace")
+            charset = resp.headers.get_content_charset() or "utf-8"
+            content = _decode_http_body(
+                resp.read(),
+                resp.headers.get("Content-Encoding", ""),
+                charset,
+            )
             final_url = resp.url
     except HTTPError as e:
         print(f"ERROR: Wayback returned {e.code} for {url}", file=sys.stderr)
         sys.exit(1)
+    except TimeoutError:
+        print(
+            f"ERROR: Wayback did not respond within 30s for {url}; retry later",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from None
     except URLError as e:
         print(f"ERROR: Network error: {e.reason}", file=sys.stderr)
         sys.exit(1)
+    except OSError as e:
+        print(f"ERROR: Could not decode Wayback response: {e}", file=sys.stderr)
+        raise SystemExit(1) from None
 
     data = {
         "url": args.url,

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>Guest Information</h1>
+    <a href="CivilIndex" title="Click here to search for a Case by Name">Search for Case by Name</a>
+    <form method="post" name="paosForm" id="paosForm">
+      <input id="ReceiptNumber" name="ReceiptNumber" value="">
+      <input id="Last4CC" name="Last4CC" value="">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th><th>Date</th><th>Receipt #</th><th>Amount</th>
+            <th>Description</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Guest-fixture</td><td>07/30/2026</td>
+            <td>PA-2026-123456789</td><td>$4.75</td>
+            <td>Civil Name Search For "ACME HOLDINGS LLC"</td>
+            <td>
+              <input type="button" value="Redo Search"
+                onclick="return getSearch('IDX','Civil','PA-2026-123456789');">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <input id="ActionToPerform" name="ActionToPerform" value="">
+      <input id="ActionDocumentID" name="ActionDocumentID" value="">
+      <input id="ActionReceiptNumber" name="ActionReceiptNumber" value="">
+      <input id="SecurityKey" name="SecurityKey" value="">
+      <input name="__RequestVerificationToken" type="hidden" value="attached-token">
+    </form>
+  </body>
+</html>

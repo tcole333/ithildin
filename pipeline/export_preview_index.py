@@ -7,10 +7,16 @@ that the backlink popover lazy-loads on first click.
 
 import json
 import re
-from pathlib import Path
 
-CONTENT_DIR = Path(__file__).parent.parent / "content"
-OUTPUT_PATH = Path(__file__).parent.parent / "web" / "public" / "content" / "preview-index.json"
+try:
+    from .article_metadata import load_article
+    from .paths import CONTENT_DIR, PUBLIC_CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from article_metadata import load_article
+    from paths import CONTENT_DIR, PUBLIC_CONTENT_DIR
+
+
+OUTPUT_PATH = PUBLIC_CONTENT_DIR / "preview-index.json"
 
 
 def _strip_html(text: str) -> str:
@@ -71,19 +77,8 @@ def export_articles(index: dict) -> int:
     count = 0
 
     for path in sorted(article_dir.glob("*.mdx")):
-        text = path.read_text()
-
-        # Parse YAML frontmatter
-        fm = {}
-        if text.startswith("---"):
-            end = text.find("---", 3)
-            if end != -1:
-                for line in text[3:end].strip().split("\n"):
-                    if ":" in line:
-                        key, val = line.split(":", 1)
-                        fm[key.strip()] = val.strip().strip('"')
-
-        slug = fm.get("cluster", path.stem)
+        fm = load_article(path)
+        slug = fm["slug"]
 
         index[f"articles/{slug}"] = {
             "type": "article",

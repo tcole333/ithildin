@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head><title>Party Name Search</title></head>
+<body>
+<form id="aspnetForm" action="./PartySearch.aspx" method="post">
+  <input type="hidden" name="__VIEWSTATE" value="fixture-viewstate">
+  <input type="hidden" name="__VIEWSTATEGENERATOR" value="fixture-generator">
+  <input type="hidden" name="__EVENTVALIDATION" value="fixture-validation">
+  <input name="ctl00$ContentPlaceHolder1$txtLastName">
+  <input name="ctl00$ContentPlaceHolder1$txtFirstName">
+  <select name="ctl00$ContentPlaceHolder1$ddlLocation">
+    <option value="ALL" selected>All</option>
+    <option value="FBT">FBT-Bridgeport JD</option>
+  </select>
+  <select name="ctl00$ContentPlaceHolder1$ddlCaseCategory">
+    <option value="ALL" selected>All</option>
+    <option value="CV">CV</option>
+    <option value="FA">FA</option>
+  </select>
+  <select name="ctl00$ContentPlaceHolder1$ddlCaseType">
+    <option value="All" selected>All</option>
+    <option value="C40">C40 Contracts/Collections</option>
+  </select>
+  <select name="ctl00$ContentPlaceHolder1$ddlSortOrder">
+    <option value="court_loc, party_name">Court Location, Party Name</option>
+    <option value="party_name" selected>Party Name</option>
+  </select>
+  <input type="radio"
+         name="ctl00$ContentPlaceHolder1$rblLastNameSearchType"
+         value="Starts With" checked>
+  <input type="radio"
+         name="ctl00$ContentPlaceHolder1$rblLastNameSearchType"
+         value="Contains">
+  <input type="radio"
+         name="ctl00$ContentPlaceHolder1$rblLastNameSearchType"
+         value="Is Equal To">
+  <input type="radio"
+         name="ctl00$ContentPlaceHolder1$rblLastNameSearchType"
+         value="Soundex">
+  <input type="submit"
+         name="ctl00$ContentPlaceHolder1$btnSubmit"
+         value="Search">
+</form>
+</body>
+</html>

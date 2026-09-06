@@ -1,0 +1,169 @@
+{
+  "ok": true,
+  "url": "https://ecourtcalendars.riverside.courts.ca.gov/",
+  "business_days": [
+    "2026-07-30",
+    "2026-07-31",
+    "2026-08-03",
+    "2026-08-04"
+  ],
+  "selector_tree": [
+    {
+      "id": "5",
+      "name": "Historic Court House",
+      "departments": [
+        {
+          "id": 450,
+          "locationName": "Department 8",
+          "isActive": false,
+          "areas": [
+            {"id": 0, "name": "Probate", "sortOrder": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "397",
+      "name": "Banning Justice Center",
+      "departments": [
+        {
+          "id": 479,
+          "locationName": "Department B201",
+          "isActive": false,
+          "areas": [
+            {"id": 0, "name": "Civil", "sortOrder": 1},
+            {"id": 0, "name": "Criminal", "sortOrder": 2}
+          ]
+        }
+      ]
+    }
+  ],
+  "selected_date_range": {
+    "start": "2026-07-30",
+    "end": "2026-07-31",
+    "days": ["2026-07-30", "2026-07-31"]
+  },
+  "selected_combinations": 2,
+  "source_requests": [
+    "https://ecourtcalendars.riverside.courts.ca.gov/Home/GetDepartmentCalendar?startdate=2026-07-30&enddate=2026-07-31&department=Department%208&areaoflaw=Probate",
+    "https://ecourtcalendars.riverside.courts.ca.gov/Home/GetDepartmentCalendar?startdate=2026-07-30&enddate=2026-07-31&department=Department%20B201&areaoflaw=Civil"
+  ],
+  "records": [
+    {
+      "event_date": "0001-01-01",
+      "event_time": "00:00:00",
+      "case_id": 0,
+      "case_type": "",
+      "case_name": "Estate of: ADA LOVELACE",
+      "case_number": "PRRI2601001",
+      "defendant": "Estate of: ADA LOVELACE",
+      "location_name": "",
+      "courthouse": "Historic Court House",
+      "address1": "4050 Main Street",
+      "address2": "",
+      "city": "Riverside",
+      "state": "CA",
+      "zip_code": "92501",
+      "judge_name": "Christopher B. Harmon ",
+      "judge_role": "JUD",
+      "charge_data": "",
+      "attorney": "Alex Counsel<br/>Blair Counsel",
+      "event_name": "Hearing on Petition for Probate<br/>Status Conference",
+      "name_extension": "",
+      "date_time": "2026-07-30T08:30:00",
+      "special_status": "NEW",
+      "source_location_id": "5",
+      "source_courthouse": "Historic Court House",
+      "source_department_id": 450,
+      "source_department": "Department 8",
+      "source_area_of_law": "Probate"
+    },
+    {
+      "event_date": "0001-01-01",
+      "event_time": "00:00:00",
+      "case_id": 0,
+      "case_type": "",
+      "case_name": "Matter of: ANALYTICAL ENGINE TRUST",
+      "case_number": "PRRI2501002",
+      "defendant": "Matter of: ANALYTICAL ENGINE TRUST",
+      "location_name": "",
+      "courthouse": "Historic Court House",
+      "address1": "4050 Main Street",
+      "address2": "",
+      "city": "Riverside",
+      "state": "CA",
+      "zip_code": "92501",
+      "judge_name": "Christopher B. Harmon",
+      "judge_role": "JUD",
+      "charge_data": "",
+      "attorney": "",
+      "event_name": "Court Trial - Long Cause",
+      "name_extension": "",
+      "date_time": "2026-07-30T13:30:00",
+      "special_status": "",
+      "source_location_id": "5",
+      "source_courthouse": "Historic Court House",
+      "source_department_id": 450,
+      "source_department": "Department 8",
+      "source_area_of_law": "Probate"
+    },
+    {
+      "event_date": "0001-01-01",
+      "event_time": "00:00:00",
+      "case_id": 0,
+      "case_type": "",
+      "case_name": "HOPPER VS COBOL SYSTEMS, INC.",
+      "case_number": "CVRI2601003",
+      "defendant": "HOPPER VS COBOL SYSTEMS, INC.",
+      "location_name": "",
+      "courthouse": "Banning Justice Center",
+      "address1": "311 E. Ramsey Street",
+      "address2": "",
+      "city": "Banning",
+      "state": "CA",
+      "zip_code": "92220",
+      "judge_name": "Source Judge",
+      "judge_role": "JUD",
+      "charge_data": "",
+      "attorney": "Casey Counsel",
+      "event_name": "Motion Hearing",
+      "name_extension": "",
+      "date_time": "2026-07-31T09:00:00",
+      "special_status": "NEW",
+      "source_location_id": "397",
+      "source_courthouse": "Banning Justice Center",
+      "source_department_id": 479,
+      "source_department": "Department B201",
+      "source_area_of_law": "Civil"
+    },
+    {
+      "event_date": "0001-01-01",
+      "event_time": "00:00:00",
+      "case_id": 0,
+      "case_type": "",
+      "case_name": "TURING VS COMPUTING GROUP",
+      "case_number": "CVRI2601004",
+      "defendant": "TURING VS COMPUTING GROUP",
+      "location_name": "",
+      "courthouse": "Banning Justice Center",
+      "address1": "311 E. Ramsey Street",
+      "address2": "",
+      "city": "Banning",
+      "state": "CA",
+      "zip_code": "92220",
+      "judge_name": "Source Judge",
+      "judge_role": "JUD",
+      "charge_data": "",
+      "attorney": "",
+      "event_name": "Case Management Conference",
+      "name_extension": "",
+      "date_time": "2026-07-31T10:00:00",
+      "special_status": "",
+      "source_location_id": "397",
+      "source_courthouse": "Banning Justice Center",
+      "source_department_id": 479,
+      "source_department": "Department B201",
+      "source_area_of_law": "Civil"
+    }
+  ]
+}

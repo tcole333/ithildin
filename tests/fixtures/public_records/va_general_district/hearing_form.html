@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head><title>Virginia GDC - Civil Search by Hearing Date</title></head>
+  <body>
+    <form name="caseSearchForm" method="post" action="/gdcourts/caseSearch.do">
+      <input type="hidden" name="formAction" value="">
+      <input type="hidden" name="curentFipsCode" value="013">
+      <input type="text" name="searchTerm" value="">
+      <input type="text" name="searchHearingTime" value="">
+      <input type="text" name="searchCourtroom" value="">
+      <select name="searchHearingType">
+        <option value=""></option>
+        <option value="MO">MO - Motion</option>
+      </select>
+      <input type="hidden" name="searchFipsCode" value="013">
+      <input type="submit" name="caseSearch" value="Search">
+    </form>
+  </body>
+</html>

@@ -1,12 +1,159 @@
 from __future__ import annotations
 
+import os
+import ipaddress
+import re
 import shutil
+import socket
 import subprocess
 import sys
 from pathlib import Path
 from typing import Callable
 
 import pytest
+
+
+LIVE_PUBLIC_RECORD_ENV_RE = re.compile(
+    r"""(?:getenv|environ\.get)\(\s*["']"""
+    r"""((?:RUN_LIVE|LIVE_PUBLIC_RECORDS|OSINT_LIVE_TESTS)[A-Z0-9_]*)"""
+    r"""["']"""
+)
+
+# Representatives from the four integrity suites omitted by the former
+# integration-only CI selector. Keep these explicit so a rename/removal receives
+# review rather than silently reducing the protected collection contract.
+CRITICAL_TEST_NODEIDS = frozenset({
+    "tests/test_enforcement.py::TestConfidenceCapping::test_inference_confirmed_clamps_to_medium",
+    "tests/test_finding_evidence_crud.py::test_delete_cannot_remove_last_direct_quote_evidence",
+    "tests/test_lead_tracker_fk_migration.py::test_workflow_fk_rebuild_preserves_rows_objects_sequences_and_fts",
+    "tests/test_auto_leads_profile_scope.py::test_cmd_run_propagates_active_profile_to_every_generator",
+})
+
+
+def _live_public_record_env_names(
+    tests_root: Path | None = None,
+) -> tuple[str, ...]:
+    """Discover the existing opt-in environment gates without importing tests."""
+
+    root = tests_root or Path(__file__).resolve().parent
+    names: set[str] = set()
+    for path in root.rglob("*.py"):
+        names.update(
+            LIVE_PUBLIC_RECORD_ENV_RE.findall(
+                path.read_text(encoding="utf-8")
+            )
+        )
+    return tuple(sorted(names))
+
+
+def _enable_live_public_record_tests(
+    tests_root: Path | None = None,
+) -> tuple[str, ...]:
+    names = _live_public_record_env_names(tests_root)
+    for name in names:
+        os.environ[name] = "1"
+    return names
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption(
+        "--require-critical-tests",
+        action="store_true",
+        default=False,
+        help="Fail collection if CI's required evidence, confidence, migration, or profile tests are omitted",
+    )
+    group = parser.getgroup("public records")
+    group.addoption(
+        "--run-live-public-records",
+        action="store_true",
+        default=False,
+        help=(
+            "Enable the repository's existing opt-in public-record live "
+            "checks before test collection"
+        ),
+    )
+    group.addoption(
+        "--run-live-data",
+        action="store_true",
+        default=False,
+        help="Allow tests marked live_data (including local large corpora)",
+    )
+    group.addoption(
+        "--offline",
+        action="store_true",
+        default=False,
+        help="Disable live opt-ins and reject external socket connections; loopback fixtures are allowed",
+    )
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    if config.getoption("offline"):
+        if config.getoption("run_live_public_records") or config.getoption("run_live_data"):
+            raise pytest.UsageError("--offline cannot be combined with live-test options")
+        for name in _live_public_record_env_names():
+            os.environ.pop(name, None)
+    if config.getoption("run_live_public_records"):
+        _enable_live_public_record_tests()
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    allow_live = config.getoption("run_live_data") or config.getoption("run_live_public_records")
+    for item in items:
+        # Historical live modules used many separate environment opt-ins. Give
+        # all of them the same marker so CI selection is explicit and complete.
+        if item.path.name.endswith("_live.py"):
+            item.add_marker(pytest.mark.live_data)
+        if item.get_closest_marker("live_data") and not allow_live:
+            item.add_marker(pytest.mark.skip(reason="live data requires an explicit live-test option"))
+
+
+def pytest_collection_finish(session: pytest.Session) -> None:
+    # Finish runs after all -m/-k/path deselection hooks, unlike a check at the
+    # start of modifyitems, which can accept tests later removed by a selector.
+    if session.config.getoption("require_critical_tests"):
+        missing = sorted(CRITICAL_TEST_NODEIDS - {item.nodeid for item in session.items})
+        if missing:
+            raise pytest.UsageError(
+                "Required critical tests were omitted from collection:\n  "
+                + "\n  ".join(missing)
+                + "\nRun the full deterministic suite without narrowing its path, -m, or -k selection."
+            )
+
+
+@pytest.fixture(autouse=True)
+def offline_network_guard(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch):
+    if not request.config.getoption("offline"):
+        return
+
+    def guard(original):
+        def connect(sock, address, *args, **kwargs):
+            if sock.family == socket.AF_UNIX or _is_loopback_address(address):
+                return original(sock, address, *args, **kwargs)
+            raise AssertionError("External network access is disabled by --offline; use a fixture or a live_data test")
+        return connect
+
+    monkeypatch.setattr(socket.socket, "connect", guard(socket.socket.connect))
+    monkeypatch.setattr(socket.socket, "connect_ex", guard(socket.socket.connect_ex))
+    original_create = socket.create_connection
+
+    def create(address, *args, **kwargs):
+        if not _is_loopback_address(address):
+            raise AssertionError("External network access is disabled by --offline; use a fixture or a live_data test")
+        return original_create(address, *args, **kwargs)
+
+    monkeypatch.setattr(socket, "create_connection", create)
+
+
+def _is_loopback_address(address) -> bool:
+    if not isinstance(address, tuple) or not address:
+        return False
+    host = address[0]
+    if host == "localhost":
+        return True  # The connect guard also checks the eventual resolved IP.
+    try:
+        return ipaddress.ip_address(host).is_loopback
+    except ValueError:
+        return False
 
 
 @pytest.fixture(scope="session")

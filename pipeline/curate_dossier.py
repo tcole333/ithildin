@@ -14,14 +14,22 @@ are added by the /curate-dossier skill and are NOT touched by this script.
 
 import argparse
 import json
+import re
 import sqlite3
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
-DOSSIER_DIR = Path(__file__).parent.parent / "content" / "dossiers"
+try:
+    from .paths import CONTENT_DIR, DB_PATH
+    from .export_dossiers import validate_connection_publication
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR, DB_PATH
+    from export_dossiers import validate_connection_publication
+
+
+DOSSIER_DIR = CONTENT_DIR / "dossiers"
 
 STRENGTH_MAP = {"strong": 1.0, "medium": 0.7, "weak": 0.4, "circumstantial": 0.2}
 CONFIDENCE_RANK = {"confirmed": 4, "high": 3, "medium": 2, "low": 1, "unverified": 0}
@@ -33,6 +41,95 @@ SECTION_THRESHOLD = 2
 
 def _utcnow() -> str:
     return datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+
+
+def _slugify(value: str) -> str:
+    slug = value.lower().strip()
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"[\s-]+", "-", slug)
+    return slug.strip("-")
+
+
+def _name_tokens(value: str) -> tuple[str, ...]:
+    return tuple(re.findall(r"[a-z0-9]+", value.casefold()))
+
+
+def _load_redirects(dossier_dir: Path) -> dict[str, str]:
+    path = dossier_dir / "_redirects.json"
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    if not isinstance(payload, dict):
+        raise ValueError(f"Dossier redirects must be a JSON object: {path}")
+    return {
+        str(alias).strip(): str(canonical).strip()
+        for alias, canonical in payload.items()
+        if str(alias).strip() and str(canonical).strip()
+    }
+
+
+def _resolve_redirect(slug: str, redirects: dict[str, str]) -> str:
+    current = slug
+    seen: set[str] = set()
+    while current in redirects:
+        if current in seen:
+            raise ValueError(f"Dossier redirect cycle while resolving {slug!r}")
+        seen.add(current)
+        current = redirects[current]
+    return current
+
+
+def resolve_dossier_path(dossier_dir: Path, target: str) -> Path | None:
+    """Resolve a slug, redirect alias, dossier name, or unambiguous long-form name."""
+    dossier_paths = sorted(
+        path for path in dossier_dir.glob("*.json") if not path.name.startswith("_")
+    )
+    by_slug = {path.stem: path for path in dossier_paths}
+
+    target_slug = _slugify(target)
+    canonical_slug = _resolve_redirect(target_slug, _load_redirects(dossier_dir))
+    if canonical_slug in by_slug:
+        return by_slug[canonical_slug]
+
+    target_folded = target.casefold().strip()
+    loaded: list[tuple[Path, dict]] = []
+    for path in dossier_paths:
+        try:
+            dossier = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            continue
+        loaded.append((path, dossier))
+        names = [dossier.get("name", ""), *(dossier.get("aliases") or [])]
+        if any(str(name).casefold().strip() == target_folded for name in names):
+            return path
+
+    # Long legal names are sometimes more specific than the public dossier
+    # display name (for example, "Paul Weiss" versus the full firm name).
+    # Resolve only an unambiguous token-prefix match with at least two tokens.
+    target_tokens = _name_tokens(target)
+    prefix_matches: list[tuple[int, Path]] = []
+    for path, dossier in loaded:
+        names = [path.stem.replace("-", " "), dossier.get("name", "")]
+        names.extend(dossier.get("aliases") or [])
+        best_length = 0
+        for name in names:
+            candidate_tokens = _name_tokens(str(name))
+            if (
+                len(candidate_tokens) >= 2
+                and len(candidate_tokens) < len(target_tokens)
+                and target_tokens[: len(candidate_tokens)] == candidate_tokens
+            ):
+                best_length = max(best_length, len(candidate_tokens))
+        if best_length:
+            prefix_matches.append((best_length, path))
+
+    if not prefix_matches:
+        return None
+    longest = max(length for length, _path in prefix_matches)
+    best_paths = {path for length, path in prefix_matches if length == longest}
+    if len(best_paths) == 1:
+        return best_paths.pop()
+    return None
 
 
 def _score_finding(f: dict, connection_counts: dict[int, int]) -> float:
@@ -249,6 +346,12 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
     include_unverified = bool(
         dossier.get("export_options", {}).get("include_unverified", False)
     )
+    export_options = dossier.get("export_options", {})
+    if "profile_id" in export_options:
+        profile_ids = [export_options["profile_id"]] if export_options["profile_id"] else []
+    else:
+        # Older exports only carry the profiles that contributed their records.
+        profile_ids = dossier.get("profile_ids", [])
 
     for conn in dossier.get("connections", []):
         strength_str = conn.get("strength", "weak")
@@ -267,7 +370,7 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
     second_hop: dict[str, list[dict]] = {}
     if connections:
         try:
-            db = sqlite3.connect(str(db_path))
+            db = sqlite3.connect(f"{Path(db_path).resolve().as_uri()}?mode=ro", uri=True)
             db.row_factory = sqlite3.Row
             first_hop_names = [c["target"] for c in connections[:20]]
             placeholders = ",".join("?" * len(first_hop_names))
@@ -276,21 +379,33 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
                 if include_unverified
                 else "c.verification_status = 'verified'"
             )
+            profile_predicate = (
+                f" AND c.profile_id IN ({','.join('?' for _ in profile_ids)})"
+                if profile_ids else ""
+            )
             rows = db.execute(
                 f"""
-                SELECT c.person_a, c.person_b, c.relationship_type, c.strength, c.description
+                SELECT c.*
                 FROM connections c
                 WHERE {verification_predicate}
                   AND (c.person_a IN ({placeholders}) OR c.person_b IN ({placeholders}))
+                  {profile_predicate}
                 ORDER BY CASE c.strength
                     WHEN 'strong' THEN 1 WHEN 'medium' THEN 2
                     WHEN 'weak' THEN 3 ELSE 4 END
                 LIMIT 200
                 """,
-                first_hop_names + first_hop_names,
+                first_hop_names + first_hop_names + profile_ids,
             ).fetchall()
 
             for row in rows:
+                if not include_unverified:
+                    if validate_connection_publication is None:
+                        raise RuntimeError("Connection publication validator could not be imported")
+                    try:
+                        validate_connection_publication(db, row)
+                    except ValueError:
+                        continue
                 source = row["person_a"] if row["person_a"] in first_hop_names else row["person_b"]
                 target = row["person_b"] if source == row["person_a"] else row["person_a"]
                 if target == center:
@@ -389,34 +504,25 @@ def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool =
     """
     dossier = json.loads(dossier_path.read_text())
 
-    # Preserve existing LLM-generated curation fields
+    # Authored fields are open-ended: regeneration must not discard unfamiliar
+    # editorial metadata or a visualization-only update's narrative.
     existing_curation = dossier.get("curation") or {}
-    llm_fields = {
-        k: existing_curation[k]
-        for k in ("lead", "sections", "system_role", "open_questions", "applicable_models",
-                   # Legacy fields — keep if present for backward compat
-                   "overview", "financial_summary", "ownership_chain")
-        if k in existing_curation
-    }
-
-    key_finding_ids = select_key_findings(dossier)
-    key_identifiers = extract_key_identifiers(dossier)
-    section_suggestions = suggest_sections(dossier)
+    if not isinstance(existing_curation, dict):
+        raise ValueError("Dossier curation must be an object")
     ego_network = build_ego_network(dossier, db_path)
     timeline_events = build_timeline_events(dossier)
 
-    curation = {
-        "key_finding_ids": key_finding_ids,
-        "key_identifiers": key_identifiers,
-        "section_suggestions": section_suggestions,
-        "curated_at": _utcnow(),
-    }
-
     if not viz_only:
-        curation.update(llm_fields)
+        dossier["curation"] = {
+            **existing_curation,
+            "key_finding_ids": select_key_findings(dossier),
+            "key_identifiers": extract_key_identifiers(dossier),
+            "section_suggestions": suggest_sections(dossier),
+            "curated_at": _utcnow(),
+        }
 
-    dossier["curation"] = curation
     dossier["viz_data"] = {
+        **(dossier.get("viz_data") or {}),
         "ego_network": ego_network,
         "timeline_events": timeline_events,
     }
@@ -445,23 +551,9 @@ def main():
 
     dossier_files: list[Path] = []
     if args.target:
-        slug_path = args.dossier_dir / f"{args.target.lower().replace(' ', '-')}.json"
-        if slug_path.exists():
-            dossier_files.append(slug_path)
-        else:
-            for p in args.dossier_dir.glob("*.json"):
-                if p.name.startswith("_"):
-                    continue
-                try:
-                    d = json.loads(p.read_text())
-                    if d.get("name", "").lower() == args.target.lower():
-                        dossier_files.append(p)
-                        break
-                    if args.target.lower() in [a.lower() for a in d.get("aliases", [])]:
-                        dossier_files.append(p)
-                        break
-                except json.JSONDecodeError:
-                    continue
+        dossier_path = resolve_dossier_path(args.dossier_dir, args.target)
+        if dossier_path is not None:
+            dossier_files.append(dossier_path)
         if not dossier_files:
             print(f"No dossier found for: {args.target}", file=sys.stderr)
             sys.exit(1)
@@ -471,6 +563,7 @@ def main():
         )
 
     print(f"Curating {len(dossier_files)} dossier(s)...")
+    failures = 0
     for path in dossier_files:
         try:
             dossier = curate_dossier(path, db_path=args.db, viz_only=args.viz_only)
@@ -486,10 +579,15 @@ def main():
             status = "[has narrative]" if has_lead and has_sections else "[needs /curate-dossier]"
             print(f"  {name}: {key_count} key findings, {ego_count} connections, sections: {', '.join(section_names)} {status}")
         except Exception as e:
+            failures += 1
             print(f"  ERROR {path.stem}: {e}", file=sys.stderr)
 
+    if failures:
+        print(f"Failed to curate {failures} dossier(s).", file=sys.stderr)
+        return 1
     print("Done.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

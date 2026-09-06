@@ -1,0 +1,72 @@
+{
+  "skip_tracing_26SOLDCR01": {
+    "n_idvs": 14,
+    "idv_piids": [
+      "70CDCR26D00000003",
+      "70CDCR26D00000005",
+      "70CDCR26D00000006",
+      "70CDCR26D00000008",
+      "70CDCR26D00000012",
+      "70CDCR26D00000013",
+      "70CDCR26D00000014",
+      "70CDCR26D00000015",
+      "70CDCR26D00000016",
+      "70CDCR26D00000017",
+      "70CDCR26D00000018",
+      "70CDCR26D00000019",
+      "70CDCR26D00000020",
+      "70CDCR26D00000021"
+    ],
+    "ceiling_sum": "1442909640.02",
+    "child_order_obligations": 19032607.0,
+    "n_child_awards": 14
+  },
+  "skip_expected": {
+    "n_idvs": 14,
+    "ceiling": "1442909640",
+    "obligated": "19032607"
+  },
+  "uac_70CDCR26R00000015": {
+    "n_idvs": 18,
+    "idv_piids": [
+      "70CDCR26D00000030",
+      "70CDCR26D00000031",
+      "70CDCR26D00000032",
+      "70CDCR26D00000033",
+      "70CDCR26D00000034",
+      "70CDCR26D00000035",
+      "70CDCR26D00000036",
+      "70CDCR26D00000037",
+      "70CDCR26D00000038",
+      "70CDCR26D00000039",
+      "70CDCR26D00000040",
+      "70CDCR26D00000041",
+      "70CDCR26D00000042",
+      "70CDCR26D00000043",
+      "70CDCR26D00000044",
+      "70CDCR26D00000045",
+      "70CDCR26D00000046",
+      "70CDCR26D00000047"
+    ],
+    "ceiling_sum": "20583928204.05",
+    "child_order_obligations_new_family": 85376317.14,
+    "n_child_awards_new_family": 18,
+    "mvm_FR0000052": [
+      {
+        "award": "CONT_AWD_70CDCR26FR0000052_7012_70CDCR24D00000002_7012",
+        "obligations": 1446000.0
+      }
+    ],
+    "initiative_total_with_mvm": 86822317.14,
+    "mvm_note": "pattern initially matched 23 same-suffix orders; pinned to the FY24-vehicle row per wave-3 brief"
+  },
+  "uac_expected": {
+    "n_idvs": 18,
+    "ceiling": "~20583928204",
+    "obligated_19_orders": "86822317"
+  },
+  "validation_verdict": {
+    "skip_tracing": "EXACT MATCH: 14 IDIQs, ceiling 1442909640.02, child obligations 19032607.00",
+    "uac": "EXACT MATCH: 18 IDIQs D00000030-47, ceiling 20583928204.05, strict family 85376317.14, +MVM 1446000.00 = 86822317.14 vs canonical 86822317"
+  }
+}

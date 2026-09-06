@@ -1251,6 +1251,7 @@ def main():
     # gaps
     p_gaps = sub.add_parser("gaps", help="Pillar types missing from person's career")
     p_gaps.add_argument("--person", required=True)
+    add_output_args(p_gaps)
 
     # cross-pillar
     p_xp = sub.add_parser("cross-pillar", help="People appearing across multiple pillar types")
@@ -1502,6 +1503,13 @@ def main():
 
     elif args.command == "gaps":
         canonical, present, missing = get_pillar_gaps(args.person)
+        result = {
+            "person": canonical,
+            "present": present,
+            "missing": missing,
+        }
+        if write_output(result, args, summary=f"pillar gaps for {canonical}"):
+            return
         print(f"\nPillar Gaps: {canonical}")
         print(f"  Present: {', '.join(present) if present else 'none'}")
         print(f"  Missing: {', '.join(missing) if missing else 'none (full coverage!)'}")

@@ -18,6 +18,10 @@ Usage in tools:
 """
 
 import json
+from pathlib import Path
+
+
+_AUTO_RESULT_COUNT = object()
 
 
 # List-valued fields that represent returned rows rather than response metadata.
@@ -110,24 +114,35 @@ def add_output_args(parser):
         )
 
 
-def write_output(data, args, summary=None):
-    """If --output is set, write JSON to file and print summary. Returns True if written.
+def write_output(data, args, summary=None, *, result_count=_AUTO_RESULT_COUNT):
+    """Honor structured output flags and return whether output was handled.
 
     Args:
         data: The data to serialize (list, dict, or other JSON-serializable).
-        args: Parsed argparse namespace (checks args.output).
+        args: Parsed argparse namespace (checks ``output`` and ``json_out``).
         summary: Optional description for the summary line.
               If omitted, uses a generic count-based message.
+        result_count: Optional explicit count for API response shapes whose
+              dictionaries cannot be inferred safely by ``substantive_result_count``.
     """
     output_path = getattr(args, "output", None)
     if not output_path:
+        if getattr(args, "json_out", False):
+            print(json.dumps(data, indent=2, default=str))
+            return True
         return False
 
-    with open(output_path, "w") as f:
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w") as f:
         json.dump(data, f, indent=2, default=str)
 
     # Build summary line from substantive rows rather than wrapper keys.
-    count = substantive_result_count(data)
+    count = (
+        substantive_result_count(data)
+        if result_count is _AUTO_RESULT_COUNT
+        else result_count
+    )
     result_label = "results unavailable" if count is None else f"{count} results"
     desc = f" ({summary})" if summary else ""
     print(f"{result_label}{desc} saved to {output_path}")

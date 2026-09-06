@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <body>
+    <div class="field-last-update">
+      <span>Last Updated:</span>
+      <span>02/13/2026</span>
+    </div>
+    <p>
+      <a href="/livexml/Attorney_Calendar_Internet.pdf">Court Schedule</a>
+    </p>
+    <form action="/superior-court/superior-court-case-calendars/criminal-attorney-case-calendar" method="get">
+      <input name="field_xml_defendant_value" placeholder="Defendant" maxlength="128">
+      <input name="field_xml_timex_value" placeholder="Time" maxlength="128">
+      <input name="event" placeholder="Event" maxlength="128">
+      <input name="field_xml_charge_value" placeholder="Charge" maxlength="128">
+      <input name="field_xml_attorney_value" placeholder="Attorney" maxlength="128">
+      <input name="field_xml_case_no_value" placeholder="Case Number" maxlength="128">
+      <select name="field_courtroom_link_target_id">
+        <option value="All" selected>Courtroom</option>
+        <option value="10087">301</option>
+      </select>
+      <select name="field_judge_link_target_id">
+        <option value="All" selected>Judge</option>
+        <option value="10056">Richter, David</option>
+      </select>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th><a href="?order=field_xml_defendant&amp;sort=desc">Defendant</a></th>
+          <th><a href="?order=field_xml_evnt&amp;sort=asc">Event</a></th>
+          <th><a href="?order=field_xml_charge&amp;sort=asc">Charge</a></th>
+          <th><a href="?order=field_timestamp&amp;sort=asc">Time</a></th>
+          <th><a href="?order=field_xml_attorney&amp;sort=asc">Attorney</a></th>
+          <th><a href="?order=field_xml_case_no&amp;sort=asc">Case Number</a></th>
+          <th>Courtroom</th>
+          <th><a href="?order=field_xml_judge&amp;sort=asc">Judge</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ADULRAHMAN, MOHAMED I</td>
+          <td>Ascertainment of Counsel</td>
+          <td>-DRIVING UNDER THE INFLUENCE OF ALCOHOL OR A DRUG</td>
+          <td><time datetime="2026-07-30T09:30:00-04:00">9:30 AM</time></td>
+          <td>NICHOLAS, LAUCKLAND A</td>
+          <td>2026 CTF 004287</td>
+          <td>310</td>
+          <td>RICHTER, DAVID</td>
+        </tr>
+        <tr>
+          <td>ADULRAHMAN, MOHAMED I</td>
+          <td>Ascertainment of Counsel</td>
+          <td>-OPERATING A VEHICLE WHILE IMPAIRED</td>
+          <td><time datetime="2026-07-30T09:30:00-04:00">9:30 AM</time></td>
+          <td>NICHOLAS, LAUCKLAND A</td>
+          <td>2026 CTF 004287</td>
+          <td>310</td>
+          <td>RICHTER, DAVID</td>
+        </tr>
+        <tr>
+          <td>ADULRAHMAN, MOHAMED I</td>
+          <td>Ascertainment of Counsel</td>
+          <td>-NO PERMIT</td>
+          <td><time datetime="2026-07-30T09:30:00-04:00">9:30 AM</time></td>
+          <td>NICHOLAS, LAUCKLAND A</td>
+          <td>2026 CTF 004287</td>
+          <td>310</td>
+          <td>RICHTER, DAVID</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="pagination-total">Total 13 items</span>
+    <ul class="pager__items">
+      <li class="pager__item pager__item--last"><a href="?page=1">2</a></li>
+      <li class="pager__item pager__item--next"><a href="?page=1" rel="next">Next</a></li>
+    </ul>
+  </body>
+</html>

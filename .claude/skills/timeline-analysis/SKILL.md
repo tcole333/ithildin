@@ -17,12 +17,11 @@ Analyze findings and external events on a timeline to find activity clusters, su
 - `--window YYYY-MM-DD YYYY-MM-DD`: analyze a specific date range
 
 ### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
+Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
+resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
+`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
+environment for corpus tools, dates, threads, people, and jurisdictions; use
+those values throughout this skill. Do not change the shared active profile.
 
 ## Process
 
@@ -61,22 +60,19 @@ Many findings have NULL `date_of_event` but mention dates in their summary/detai
 For each finding with an extractable date, note it for analysis. Optionally backfill `date_of_event`:
 
 ```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.execute('UPDATE findings SET date_of_event = ? WHERE id = ?', ('YYYY-MM-DD', FINDING_ID))
-db.commit()
-"
+uv run python tools/findings_tracker.py correct <FINDING_ID> \
+    --field date_of_event --value "YYYY-MM-DD" \
+    --reason "Exact event date documented in <EVIDENCE_REF>"
 ```
 
-Only backfill when extraction is high confidence (exact date mentioned, not inferred).
+Only backfill an exact documented event date. The tracker synchronizes the normalized date/precision and records the correction; retain the source reference in the reason.
 
 ### 4. Temporal Clustering Analysis
 
 **a) Activity bursts**
 Find clusters where 3+ findings occur within a 14-day window:
 - Group all dated findings by 2-week windows
-- Windows with unusually high activity indicate coordinated events or investigative focus
+- Check whether dense windows reflect source availability, collection effort, or actual activity before testing coordination
 
 **b) Cross-reference with events**
 For each activity cluster, check the event timeline:
@@ -134,9 +130,17 @@ uv run python tools/findings_tracker.py add \
     --detail "DETAIL with dates and cross-references" \
     --confidence medium \
     --claim-type synthesis \
-    --evidence "analysis-run-{RUN_ID}" \
-    --source-quote "timeline analysis: N events in WINDOW"
+    --evidence "SOURCE:ID_A" "SOURCE:ID_B" \
+    --source-quote "SOURCE:ID_A:Exact supporting source excerpt" \
+    --source-quote "SOURCE:ID_B:Exact supporting source excerpt" \
+    --sources analysis_run
 ```
+
+Replace placeholders with the underlying canonical evidence and matching exact
+quotes. Include the preserved calculation/report artifact when the claim depends
+on computed results; `analysis_run` identifies the analysis provenance, and add
+the actual underlying source tokens. An analysis-run label alone is not evidence.
+
 
 ### 7. Tag Temporal Patterns
 

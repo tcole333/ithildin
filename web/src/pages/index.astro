@@ -1,9 +1,10 @@
 ---
+import { contentRoot } from '../lib/contentPaths';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const contentDir = resolve(process.cwd(), '..', 'content');
+const contentDir = resolve(contentRoot());
 
 let dossierIndex: Array<{ name: string; slug: string; stats: any; last_updated?: string }> = [];
 const dossierIndexPath = resolve(contentDir, 'dossiers', '_index.json');

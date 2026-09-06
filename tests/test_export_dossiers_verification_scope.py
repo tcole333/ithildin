@@ -92,7 +92,7 @@ def dossier_db() -> sqlite3.Connection:
             id, target_name, finding_type, summary, detail, source_datasets,
             confidence, date_of_event, claim_type, verification_status,
             created_at, verified_at, profile_id
-        ) VALUES (?, 'Alpha Person', 'relationship', ?, NULL, NULL, 'medium', ?,
+        ) VALUES (?, 'Alpha Person', 'relationship', ?, NULL, '["official_website"]', 'medium', ?,
                   'paraphrase', ?, ?, ?, 'test-profile')
         """,
         [
@@ -165,7 +165,7 @@ def test_public_export_is_verified_only_everywhere(dossier_db: sqlite3.Connectio
         ("connection", 11),
     }
     assert dossier["last_updated"] == "2024-03-01T00:00:00"
-    assert dossier["export_options"] == {"include_unverified": False}
+    assert dossier["export_options"] == {"include_unverified": False, "profile_id": "test-profile"}
 
 
 def test_mixed_timezone_timestamps_are_normalized_before_comparison(
@@ -211,7 +211,7 @@ def test_research_override_includes_non_retracted_states(
     assert {event["id"] for event in dossier["timeline"]} == {
         1, 2, 3, 11, 12, 13, 15, 16, 17,
     }
-    assert dossier["export_options"] == {"include_unverified": True}
+    assert dossier["export_options"] == {"include_unverified": True, "profile_id": "test-profile"}
 
 
 def test_target_threshold_uses_the_requested_verification_scope(
@@ -230,6 +230,28 @@ def test_target_threshold_uses_the_requested_verification_scope(
         include_unverified=True,
     )
     assert targets == [("Alpha Person", ["Alpha Person"])]
+
+
+def test_single_target_profile_mismatch_is_rejected_before_export(
+    dossier_db: sqlite3.Connection,
+) -> None:
+    scoped = export_dossiers.export_target(
+        dossier_db,
+        "Alpha Person",
+        ["Alpha Person"],
+        profile_id="wrong-profile",
+    )
+    assert scoped["stats"]["total_findings"] == 0
+    assert scoped["stats"]["total_connections"] == 0
+
+    with pytest.raises(ValueError, match="refusing to write an empty dossier"):
+        export_dossiers._validate_target_profile_scope(
+            dossier_db,
+            "Alpha Person",
+            ["Alpha Person"],
+            scoped,
+            "wrong-profile",
+        )
 
 
 def test_incremental_skip_requires_matching_scope_and_record_membership(
@@ -253,6 +275,10 @@ def test_incremental_skip_requires_matching_scope_and_record_membership(
     wrong_scope = copy.deepcopy(existing)
     wrong_scope["export_options"]["include_unverified"] = True
     assert not export_dossiers._can_skip_incremental(wrong_scope, dossier, False)
+
+    different_profile = copy.deepcopy(existing)
+    different_profile["export_options"]["profile_id"] = "other-profile"
+    assert not export_dossiers._can_skip_incremental(different_profile, dossier, False)
 
     stale_membership = copy.deepcopy(existing)
     stale_membership["findings"].append(
@@ -370,7 +396,19 @@ def test_ego_network_second_hop_respects_export_scope(
             (22, "Unverified Second Hop", "unverified second hop", "unverified"),
             (23, "Disputed Second Hop", "disputed second hop", "disputed"),
             (24, "Retracted Second Hop", "retracted second hop", "retracted"),
+            (25, "Unbacked Second Hop", "verified edge without evidence", "verified"),
+            (26, "Invalid Upstream Second Hop", "verified edge with unverified upstream", "verified"),
+            (27, "Other Profile Second Hop", "unrelated profile", "verified"),
         ],
+    )
+    dossier_db.execute("UPDATE connections SET finding_id=2 WHERE id=26")
+    dossier_db.execute("UPDATE connections SET profile_id='other-profile' WHERE id=27")
+    dossier_db.executemany(
+        "INSERT INTO connection_evidence(connection_id,evidence_type,evidence_ref,source_quote) "
+        "VALUES(?,'url',?,?)",
+        [(21, "https://example.test/second-hop", "Verified Contact and Second Hop are colleagues."),
+         (26, "https://example.test/invalid-upstream", "A quote does not verify the upstream finding."),
+         (27, "https://example.test/other-profile", "A relationship recorded for a different investigation.")],
     )
     dossier_db.commit()
     db_path = tmp_path / "dossier.db"
@@ -399,4 +437,15 @@ def test_ego_network_second_hop_respects_export_scope(
     research_ego = curate_dossier.build_ego_network(research_dossier, db_path)
     assert {
         item["target"] for item in research_ego["secondHop"]["Verified Contact"]
-    } == {"Verified Second Hop", "Unverified Second Hop", "Disputed Second Hop"}
+    } == {"Verified Second Hop", "Unverified Second Hop", "Disputed Second Hop",
+          "Unbacked Second Hop", "Invalid Upstream Second Hop"}
+
+    # Explicit all-profile exports may include the other investigation, but its
+    # public edges still require their own current evidence.
+    global_dossier = export_dossiers.export_target(
+        dossier_db, "Alpha Person", ["Alpha Person"], profile_id=None,
+    )
+    global_ego = curate_dossier.build_ego_network(global_dossier, db_path)
+    assert {item["target"] for item in global_ego["secondHop"]["Verified Contact"]} == {
+        "Verified Second Hop", "Other Profile Second Hop",
+    }

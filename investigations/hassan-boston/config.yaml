@@ -1,0 +1,140 @@
+name: hassan-boston
+primary_subject: Hicham Ali Hassan (reported alias Sam Hassan)
+description: Trace the corporate, real-estate, financing and litigation records of
+  Hicham Ali Hassan and the user-named possible relatives Zouhair, Abdul Rahman, Houssam,
+  Talal and Tarek Ali Hassan. Verify identities and relationships separately; reconstruct
+  documented sources of capital without presuming misconduct.
+key_persons:
+- hicham ali hassan
+- sam hassan
+- zouhair ali hassan
+- abdul rahman ali hassan
+- houssam ali hassan
+- talal ali hassan
+- tarek ali hassan
+- hachim ali hassan
+- hicham abdul hafiz ali hassan
+- harriet s. ali hassan
+known_addresses:
+  18 brimmer: 'Boston, MA: Eighteen Brimmer trust acquired in1997;2016 deed to Hassan
+    Residential Properties LLC (Suffolk21956/120;56617/279).'
+  392 boylston: Boston, MA:1993 trustee acquisition at17988/312; FY2026 owner label392-402
+    Boylston Street Realty LLC.
+  216 newbury: Boston, MA:2016 trust-to-LLC deed56617/267; July2026 attachment72957/242.
+  218 newbury: Boston, MA:second parcel in same Newbury deed/attachment; retain separate
+    assessor PID.
+  711 boylston: Boston, MA:retail address corresponds to33Exeter assessor parcel0503202000;
+    FY2026 owner711 Boylston Street Realty LLC.
+  372 boylston: Boston, MA:372-378 property in1995 mortgage19679/1; current assessor
+    label376 Boylston Street Realty LLC.
+  384 boylston: Boston, MA:384 Boylston Street Realty LLC assessment; separate from392-402
+    vehicle.
+  419 boylston: Boston, MA:419 Boylston Street Realty LLC; board-approved41-unit conversion
+    May14,2026.
+  33 exeter: Boston, MA:assessor situs for711 Boylston Street Realty LLC parcel0503202000.
+threads:
+- id: 1
+  name: Identities and business origins
+  description: Resolve all six people, aliases, documented kinship and early business
+    history
+  targets:
+  - hicham ali hassan
+  - sam hassan
+  - zouhair ali hassan
+  - abdul rahman ali hassan
+  - houssam ali hassan
+  - talal ali hassan
+  - tarek ali hassan
+  keywords:
+  - identity|alias|kinship|nephew|brother|background|origin
+- id: 2
+  name: Corporate vehicles and control
+  description: Incorporations, officers, managers, trusts, annual filings and changes
+    of control
+  targets:
+  - the tannery
+  - concepts
+  keywords:
+  - corporat|officer|manager|incorporat|company|trustee
+- id: 3
+  name: Property ownership and transfers
+  description: Boston, Plymouth, Norfolk and evidence-linked Middlesex jurisdictions;
+    parcel inventory, recorded and registered land, dated deeds and qualified title interests
+  targets: []
+  keywords:
+  - property|parcel|deed|boylston|newbury|brimmer|cambridge|plymouth|hingham|hull|pinecrest|brookline|middlesex
+- id: 4
+  name: Mortgages liens and capital
+  description: Purchase financing, lenders, secured obligations, releases and documented
+    capital sources
+  targets: []
+  keywords:
+  - mortgage|lien|ucc|financ|capital|loan|credit|refinanc
+- id: 5
+  name: Litigation bankruptcy and enforcement
+  description: Case parties, pleaded allegations, rulings, settlements and financial
+    disclosures
+  targets: []
+  keywords:
+  - lawsuit|litigat|court|bankrupt|judgment|settlement|enforcement|probate|divorce|estate|land court|housing court
+- id: 6
+  name: Financial disclosures and wider network
+  description: Campaign finance, nonprofits, regulatory filings and documented outside
+    business ties
+  targets: []
+  keywords:
+  - donation|nonprofit|political|edgar|fara|lobby|aircraft
+corpus_tools: []
+key_dates:
+- date: '2019-01-16'
+  event: Boston magazine publishes the initiating article about Sam Hassan and the
+    Tannery; reporting is a lead source
+  category: media
+- date: '1976-11-02'
+  event: Origins Corp articles accepted; Hachim and Harriet S. Ali Hassan are incorporators.
+    MA042659122.
+  category: operational
+- date: '1993-01-15'
+  event: Boylston deed names Hicham, Abdul Rahman and Zouhair as trustees of 400 Boylston Street Realty Trust;
+    corrected consideration 1.925 million dollars. Suffolk 17988/312. Full-width rereading corrects the initial transcription.
+  category: financial
+- date: '1995-04-03'
+  event: Mortgage recorded naming Hicham and Zouhair as trustees on a1million-dollar
+    Berkshire Life note. Suffolk19679/1.
+  category: financial
+- date: '1997-12-02'
+  event: Brimmer foreclosure deed toZouhair as trustee recorded;325000dollars subject
+    to senior mortgage/encumbrances. Suffolk21956/120.
+  category: financial
+- date: '2016-08-17'
+  event: Brimmer and Newbury trust-to-LLC deeds recorded, each with less-than100-dollar
+    consideration. Suffolk56617/279 and56617/267.
+  category: financial
+- date: '2017-06-26'
+  event: Alana and Nader Chapter7 cases filed inDistrict ofMassachusetts;17-12396
+    and17-12398.
+  category: legal
+- date: '2021-08-13'
+  event: Signed consent judgment inCommonwealth vHichamAliHassan; defined public-accommodation
+    injunction and220000-dollar obligation with half suspended.
+  category: legal
+- date: '2026-07-01'
+  event: Newbury LLC405000-dollar attachment recorded inTivoli Audio case; payment/release
+    status not established. Suffolk72957/242.
+  category: legal
+seed_pillars:
+- name: Massachusetts Secretary of the Commonwealth
+  pillar_type: government
+  sub_type: corporate_registry
+  status: active
+  significance: Corporate role, filing-history and UCC records authority; jurisdictional
+    source, not an alleged associate
+- name: Suffolk County Registry of Deeds
+  pillar_type: government
+  sub_type: property_recorder
+  status: active
+  significance: Boston recorded land instruments; jurisdictional source, not an alleged
+    associate
+evidence_id_prefix: ''
+exclude_from_graph: ''
+source_overrides: {}

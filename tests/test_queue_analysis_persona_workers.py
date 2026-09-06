@@ -25,6 +25,7 @@ class AnalysisPersonaWorkerTests(unittest.TestCase):
         self.tmpdir.cleanup()
 
     def _make_job(self, job_type, payload):
+        payload = {"profile_id": "test-profile", **payload}
         job_id = self.queue.create_job(job_type=job_type, domain="analysis", payload=payload)
         return self.queue.get_job(job_id)
 

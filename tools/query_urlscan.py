@@ -26,9 +26,9 @@ import json
 import os
 import sys
 from pathlib import Path
-from urllib.parse import urlencode, quote
-from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -71,6 +71,13 @@ def _fetch(url, timeout=30):
             print("ERROR: URLScan.io rate limit exceeded. Wait and retry.", file=sys.stderr)
         elif e.code == 404:
             print("ERROR: Scan not found.", file=sys.stderr)
+        elif e.code == 403:
+            print(
+                "ERROR: URLScan.io denied result retrieval (HTTP 403). "
+                "A scan can appear in public search while its result endpoint "
+                "still requires a logged-in account or URLSCAN_API_KEY.",
+                file=sys.stderr,
+            )
         else:
             print(f"ERROR: URLScan.io returned {e.code}: {body[:500]}", file=sys.stderr)
         sys.exit(1)
@@ -151,7 +158,6 @@ def cmd_result(args):
     page = data.get("page", {})
     lists = data.get("lists", {})
     meta = data.get("meta", {})
-    stats = data.get("stats", {})
     verdicts = data.get("verdicts", {})
 
     print(f"Scan Result: {args.uuid}")
@@ -198,7 +204,7 @@ def cmd_result(args):
     # Technologies
     techs = meta.get("processors", {}).get("wappa", {}).get("data", [])
     if techs:
-        print(f"\n  Technologies detected:")
+        print("\n  Technologies detected:")
         for t in techs:
             if isinstance(t, dict):
                 cats = ", ".join(c.get("name", "?") for c in t.get("categories", []))

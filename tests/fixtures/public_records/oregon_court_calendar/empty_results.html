@@ -1,0 +1,62 @@
+<html>
+  <body>
+    <form
+      id="SearchParameters"
+      action="CourtCalendarSearchResults.aspx"
+      method="post"
+    >
+      <input type="hidden" name="SearchType" value="CASE" />
+      <input type="hidden" name="SearchMode" value="CASENUMBER" />
+      <input type="hidden" name="SearchBy" value="0" />
+      <input
+        type="hidden"
+        name="CourtCaseSearchValue"
+        value="ZZZZ999999999"
+      />
+      <input
+        type="hidden"
+        name="DateSettingOnAfter"
+        value="07/29/2026"
+      />
+      <input
+        type="hidden"
+        name="DateSettingOnBefore"
+        value="07/29/2026"
+      />
+    </form>
+    <div class="ssHeaderTitleBanner">Calendar Search Results</div>
+    <nav>Location : Deschutes <a href="help.pdf">Help</a></nav>
+    <table>
+      <tr><td>Record Count:</td></tr>
+      <tr><td>0</td></tr>
+    </table>
+    <table id="calendar-results">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>Sort By</td>
+              <td>Case Number</td>
+              <td>Date and Time</td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>Case Number</td>
+              <td>Judicial Officer</td>
+              <td>Time</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <th>Style</th>
+              <th>Physical Location</th>
+              <th>Hearing Type</th>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>No cases matched your search criteria.</td>
+      </tr>
+    </table>
+  </body>
+</html>

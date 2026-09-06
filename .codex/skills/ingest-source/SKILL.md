@@ -25,7 +25,7 @@ For downloadable datasets:
 ```bash
 # HuggingFace datasets
 pip install datasets  # if needed
-python -c "from datasets import load_dataset; ds = load_dataset('<ID>'); ds.save_to_disk('datasets/<name>')"
+uv run python -c "from datasets import load_dataset; ds = load_dataset('<ID>'); ds.save_to_disk('datasets/<name>')"
 
 # Or direct download
 curl -L <URL> -o datasets/<filename>
@@ -61,21 +61,24 @@ print(df.head())
 Create `tools/query_<source>.py` following the standard pattern:
 - CLI with argparse subcommands
 - `search` command for text/keyword search
-- `--json` flag for structured output
+- `--output FILE` via `tools.output_util.add_output_args()` and `write_output()`
+- `--json` flag for structured stdout fallback
 - `--limit` flag for result count
-- Consistent output formatting
+- Consistent output formatting with only a one-line stdout summary when `--output` is used
 
 See existing wrappers for reference:
 - `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
 - `tools/query_doj.py` (SQLite + FTS5)
 - `tools/query_lmsband.py` (SQLite)
-- `tools/query_icij.py` (Neo4j)
+- `tools/query_icij.py` (official remote service; optional local Neo4j traversal)
 
 ### 5. Run Initial Investigation Search
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:
 ```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+
 # Get the most-investigated targets from existing findings
-python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('''
@@ -85,13 +88,18 @@ rows = db.execute('''
 for name, cnt in rows:
     print(f'{name} ({cnt} findings)')
 "
+
+# Smoke-test the wrapper's bounded artifact output before wider use.
+uv run python tools/query_<source>.py search "<PRIMARY_SUBJECT>" --limit 10 \
+    --output "$WORKDIR/ingest-source-smoke.json"
+uv run python -m json.tool "$WORKDIR/ingest-source-smoke.json" >/dev/null
 ```
 Also always include the primary subject and core inner circle members as search terms.
 
 ### 6. Create Leads from Findings
 For any significant new results, create leads:
 ```bash
-python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --title "New data in <source>: <description>" \
     --category document \
     --priority medium \

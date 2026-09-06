@@ -25,14 +25,28 @@ import requests
 try:
     from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.search_log_util import canonical_search_key
 except ImportError:
     from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from search_log_util import canonical_search_key
 
 API_BASE = "https://publicsearchapi.floridaucc.com"
 RATE_LIMIT_DELAY = 0.5
 SOURCE_NAME = "florida_ucc"
 MAX_PAGES = 20  # safety cap on auto-pagination
+
+
+def _record_search(mode, count, query=None, **filters):
+    """Log one Florida UCC operation with the current tracker signature."""
+    try:
+        log_search(
+            canonical_search_key(mode, query, **filters),
+            SOURCE_NAME,
+            count,
+        )
+    except Exception as exc:
+        print(f"WARNING: Could not log Florida UCC search: {exc}", file=sys.stderr)
 
 
 def _get(path, params=None, timeout=30):
@@ -97,11 +111,6 @@ def search_org(name, status="filed", all_pages=False, proximity=False):
     sub_option = status_map.get(status, "FiledCompactDebtorNameList")
     category = "Standard" if proximity else "Exact"
 
-    try:
-        log_search(SOURCE_NAME, f"org:{name}", {"status": status})
-    except Exception:
-        pass
-
     if all_pages:
         debtors = _all_pages(name, "OrganizationDebtorName", sub_option, category)
         total = len(debtors)
@@ -110,6 +119,14 @@ def search_org(name, status="filed", all_pages=False, proximity=False):
         debtors = page.get("debtors") or []
         total = page.get("totalExactMatches") or len(debtors)
 
+    _record_search(
+        "organization",
+        total,
+        name,
+        status=status,
+        pagination="all_pages" if all_pages else "first_page",
+        match="proximity" if proximity else "exact",
+    )
     return {
         "query": name,
         "search_type": "OrganizationDebtorName",
@@ -141,15 +158,11 @@ def search_individual(name, status="filed"):
     }
     sub_option = status_map.get(status, "FiledCompactDebtorNameList")
 
-    try:
-        log_search(SOURCE_NAME, f"individual:{name}", {"status": status})
-    except Exception:
-        pass
-
     page = _search_page(name, "IndividualDebtorName", sub_option, "")
     debtors = page.get("debtors") or []
     total = page.get("totalExactMatches") or len(debtors)
 
+    _record_search("individual", total, name, status=status)
     return {
         "query": name,
         "search_type": "IndividualDebtorName",
@@ -172,16 +185,12 @@ def get_filing(ucc_number):
     Returns:
         dict with full filing detail including debtors, secured parties, events
     """
-    try:
-        log_search(SOURCE_NAME, f"filing:{ucc_number}", {})
-    except Exception:
-        pass
-
     params = {
         "searchOptionType": "DocumentNumber",
         "filingNumber": ucc_number,
     }
     payload = _get("filing-details", params)
+    _record_search("filing", 1 if payload else 0, ucc_number)
 
     # Normalize dates for readability
     def _fmt(dt_str):

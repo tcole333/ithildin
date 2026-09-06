@@ -15,12 +15,11 @@ Claim and investigate the next highest-priority open lead. Operates fully autono
 - No arguments: automatically picks the highest-priority open lead
 
 ### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
+Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
+resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
+`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
+environment for corpus tools, dates, threads, people, and jurisdictions; use
+those values throughout this skill. Do not change the shared active profile.
 
 ### Ambient Documentation
 **Document everything, not just what's relevant to your current hypothesis.**
@@ -70,63 +69,52 @@ Read the lead's description and category to determine the right approach:
 - **digital** → Focus on email accounts, usernames, digital footprint
 - **connection** → Focus on tracing relationship between two known entities
 
-### 3. Check Search Log
-Before querying any source, check if the query was already run:
-```python
-# In your search workflow, check:
-from tools.lead_tracker import check_searched
-prior = check_searched("rod-larsen", "doj_vol11")
-if prior:
-    # Skip this source, already searched
-```
+### 3. Check Prior Work and Result Reuse
 
-### 4. Source Checklist by Target Type
+Follow `docs/RESEARCH_WORKFLOW_CONTRACT.md#reuse-a-result-not-a-historical-log-entry`.
+Historical `check_searched` rows describe work already done. Skip a new query only
+when `search_reuse.py check` returns `reusable: true` for the actual operation,
+filters, limit, freshness/source version, successful outcome, and intact artifact.
+Inspect the reused results and record their scope in the lead report.
 
-Before searching, identify which sources are mandatory for this lead type. **Do not skip sources because you "found enough" elsewhere.** Check every mandatory source and record the result (including zero-result searches).
+### 4. Build the Applicable Source Plan
 
-**Person leads:**
-- [ ] Investigation corpus (all corpus_tools from profile)
-- [ ] CourtListener (federal litigation: `query_courtlistener.py search --party "NAME"`, `cases`, `opinions`)
-- [ ] FEC donations (`query_fec.py donor`)
-- [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
-- [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
-- [ ] LittleSis (`query_littlesis.py search` — pre-mapped relationships)
-- [ ] Corporate registries (`query_registry.py officers` — what entities are they officer of?)
-- [ ] FARA (`query_fara.py search` — foreign agent registrations)
-- [ ] Lobbying disclosures (`query_lobbying.py lobbyist`)
-- [ ] OpenSanctions (`query_opensanctions.py search` — PEP/sanctions check)
-- [ ] WebSearch (biography, news, known associations)
-
-**Entity/corporate leads:**
-- [ ] Investigation corpus
-- [ ] Corporate registries (`query_registry.py search` — all jurisdictions)
-- [ ] SEC EDGAR (`query_edgar.py search` — filings mentioning entity)
-- [ ] IRS 990 (`query_990.py lookup <EIN>` — comprehensive view; `officers` — board/staff; `financials` — revenue trends)
-- [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
-- [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
-- [ ] CourtListener (`query_courtlistener.py search --party "ENTITY"` — litigation involving entity)
-- [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
-- [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
-- [ ] FARA (`query_fara.py search` — foreign principal registrations)
-- [ ] State registries (CA/TX/MI/MA/NJ/NY DOS as relevant by jurisdiction)
-- [ ] WebSearch (corporate profile, news)
-
-**Financial leads:**
-- [ ] Investigation corpus
-- [ ] SEC EDGAR (10-K, 10-Q, proxy, insider transactions)
-- [ ] IRS 990 (grant flows via `filer`/`recipient`; `officers` for compensation; `red-flags` for ratio analysis)
-- [ ] FEC (political spending by entity + executives)
-- [ ] USASpending (contract/grant awards)
-- [ ] DS10 financial records (`parse_ds10_financials.py query`)
-- [ ] ACRIS property records (`query_acris.py party`)
-- [ ] UCC filings (`query_registry.py ucc-search`)
-- [ ] GLEIF hierarchy
-- [ ] CourtListener (financial litigation, SEC enforcement)
+Use the canonical applicability checklist in `docs/RESEARCH_WORKFLOW_CONTRACT.md`.
+For each source record the question, jurisdiction/date scope, relevance reason,
+and planned outcome. Check every applicable required source, including sources
+likely to return zero. Record `not_applicable` for an irrelevant source with a
+specific reason; an unavailable relevant source remains a coverage gap.
 
 ### 4b. Execute Searches
+When the source plan selects property or litigation records, build the
+capability-driven public-record plan before choosing a jurisdiction-specific
+route:
+
+```bash
+uv run python tools/public_records_search_plan.py "<TARGET>" \
+  --output "$WORKDIR/lead-public-record-plan.json"
+uv run python tools/query_property.py owner "<TARGET>" \
+  --output "$WORKDIR/lead-property.json"
+uv run python tools/query_state_courts.py search "<TARGET>" \
+  --output "$WORKDIR/lead-state-courts.json"
+```
+
+Use the plan's source IDs and operations with the unified routers for direct
+adapters. When the catalog describes an account, request, purchase, formal
+feed, or physical-office route, render the concrete work with
+`public_records_actions.py plan`. Treat local-cache misses and acquisition
+states as coverage information rather than source-authoritative zero results.
+
 Run queries against relevant sources. For each search:
 1. Query the source
-2. Log the search: `python tools/lead_tracker.py` (use log_search function)
+2. Log the search with the current function signature:
+   ```python
+   from tools.lead_tracker import log_search
+   log_search("<query text>", "<source>", result_count)
+   ```
+   Pass `session_id=` only when it is the integer ID of an existing `sessions`
+   row; a lead ID is not a session ID. Use `lead_tracker.py note <LEAD_ID> ...`
+   when the search also needs a lead-specific audit note.
 3. Record notable results as notes on the lead
 4. If a definitive finding is discovered, create a finding in findings_tracker
 
@@ -158,7 +146,7 @@ This is especially important when:
 ### 5. Record Findings
 For each confirmed discovery (all provenance fields required by hooks):
 ```bash
-python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "<TARGET_NAME>" \
     --summary "One-line summary of what the evidence shows" \
     --type communication \
@@ -181,7 +169,7 @@ python tools/findings_tracker.py add \
 
 If the finding reveals a relationship:
 ```bash
-python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "<PERSON_A>" --person-b "<PERSON_B>" \
     --type financial --strength strong \
     --evidence <EVIDENCE_REF> \
@@ -228,7 +216,7 @@ Check registered pillars: `uv run python tools/pillar_tracker.py list --type ban
 ### 6. Spawn Follow-Up Leads
 When investigation reveals new threads worth pursuing:
 ```bash
-python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --title "Investigate Samantha Stein ProtonMail communications" \
     --category person \
     --priority high \
@@ -244,15 +232,15 @@ Agents should freely create follow-up leads at whatever priority they judge appr
 
 ```bash
 # SEC filing worth reading in full
-python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
+uv run python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
   --category filing --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Government contract worth tracing
-python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
+uv run python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
   --category contract --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
 
 # Court case worth deep reading
-python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
+uv run python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
   --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
 ```
 
@@ -264,27 +252,31 @@ These route to `$analyze-filing`, `$analyze-contract`, and `$analyze-case` which
 
 Stop investigating and move to completion when ANY of these is true:
 
-- **Mandatory sources exhausted with corroboration**: You've checked all mandatory sources for this target type and found corroborating evidence across 2+ independent sources.
+- **Applicable source plan complete**: You've checked the required sources and answered the factual question to its evidence standard, or recorded the remaining bounded uncertainty. Count independent evidence, not mirrors of one document.
 - **Mandatory sources exhausted with consistent negatives**: You've checked all mandatory sources and found nothing. Record negative results and complete.
-- **Diminishing returns**: Recent searches are yielding no new entities, connections, or documents. You've exhausted productive search variations.
+- **Diminishing returns after applicable coverage**: Required source coverage is complete and further query variations yield no new entities, connections, or documents. Unsearched relevant sources remain explicit gaps; an access barrier follows the blocking path below.
 - **Hard access barrier**: The next useful step requires infrastructure we don't have (e.g., a registry tool, a paid database, FOIA). Create an infra request and block the lead.
 
 Do NOT stop because you "found enough" — stop because sources are exhausted or returns are diminishing. But also do NOT rabbit-hole into speculative searches when mandatory sources are done.
 
 ### 8. Complete the Lead
 ```bash
-python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
+uv run python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
 ```
 
 If the lead is a dead end:
 ```bash
-python tools/lead_tracker.py dead-end <ID> "Explanation of why"
+uv run python tools/lead_tracker.py dead-end <ID> "Explanation of why"
 ```
 
-If blocked (e.g., Neo4j not running, API down):
+If blocked by a hard access barrier after exhausting public alternatives:
 ```bash
-python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-reference"
+uv run python tools/lead_tracker.py block <ID> "Required primary record is behind unavailable authenticated or paid access"
 ```
+
+Do not block solely because local ICIJ Neo4j is unavailable. Run the official
+remote ICIJ search and first-hop workflow first; missing local Neo4j limits only
+depth greater than one and should be recorded as a narrower coverage gap.
 
 ## Investigative Mindset
 
@@ -310,8 +302,8 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 ### When Recording Findings
 
 - **Distinguish fact from inference.** "Email shows wire transfer of $18M" is a fact. "This was payment for diplomatic access" is an inference. Label them differently.
-- **Note what you didn't find.** "Searched 5 sources for Target-Subject financial links, found none" is itself a finding.
-- **End with new hypotheses.** Every completed lead should spawn questions, not just answers.
+- **Scope negative results.** Record searched queries, dates, filters, and coverage in the report/search log. Create a negative finding only when the bounded-negative evidence standard is met.
+- **Record remaining factual questions.** Queue actionable follow-ups when evidence leaves a useful next step; a completed answer need not generate another lead.
 
 ### Thread Awareness
 
@@ -321,13 +313,13 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 
 ## Operational Principles
 
-- **Be thorough**: Search at least 3-4 local sources before completing
+- **Complete applicable coverage**: Follow the shared source plan and stop conditions; a universal source count does not establish coverage
 - **Cite evidence**: Always include EFTA IDs, file paths, or source references
-- **Don't duplicate**: Check search_log before querying, check existing findings before creating
+- **Reuse deliberately**: Inspect prior search history and use the shared reuse check; search existing findings before creating new ones
 - **Prefer EFTA IDs** as canonical evidence references when available
 - **Create follow-ups generously**: If something looks interesting, create a lead for it
 - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
-- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update both `CLAUDE.md` and `AGENTS.md`.
+- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, probe only enough to verify the public endpoint and create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. Do not implement the integration during research; `$build-infra` owns the claimed build, tests, documentation, citation support, source-health update, and completion.
 - **Extend existing tools when gaps appear**: If a query tool doesn't cover a jurisdiction you need, or a search tool misses a variant you tried manually, create an infra request with `--type tool_improvement`. Small enhancements compound across all future investigations.
 
 ## Context Management

@@ -29,7 +29,7 @@ class OrchestrationTests(unittest.TestCase):
         job_id = self.queue.create_job(
             job_type="deep_investigate",
             domain="investigation",
-            payload={"target_name": "Test Target", "dry_run": True},
+            payload={"target_name": "Test Target", "dry_run": True, "profile_id": "test-profile"},
         )
         job = self.queue.get_job(job_id)
 

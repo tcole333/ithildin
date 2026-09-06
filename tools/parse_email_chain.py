@@ -20,10 +20,11 @@ import json
 import re
 import sqlite3
 import sys
-from dataclasses import dataclass, field, asdict
-from typing import Optional
+from dataclasses import asdict, dataclass
+from pathlib import Path
 
 DOCUMENTS_DB = "/Users/travcole/projects/epstein-docs/output/documents.db"
+KABASS_DB = Path(__file__).parent.parent / "datasets" / "kabasshouse_epstein.db"
 
 
 @dataclass
@@ -281,13 +282,63 @@ def parse_email_chain(ocr_text):
 
 
 def get_ocr_text(efta_id):
-    """Retrieve OCR text for an EFTA ID from documents.db."""
-    db = sqlite3.connect(DOCUMENTS_DB)
-    db.row_factory = sqlite3.Row
-    doc = db.execute("SELECT ocr_text FROM documents WHERE bates_id = ?", (efta_id,)).fetchone()
-    db.close()
-    if doc:
-        return doc["ocr_text"]
+    """Retrieve canonical Kabass OCR for an EFTA ID, then legacy OCR."""
+    if Path(KABASS_DB).is_file():
+        db = sqlite3.connect(str(KABASS_DB))
+        db.row_factory = sqlite3.Row
+        try:
+            rows = db.execute(
+                """
+                SELECT full_text FROM documents
+                WHERE file_key = ?
+                ORDER BY page_number, rowid
+                """,
+                (efta_id,),
+            ).fetchall()
+            if not rows:
+                try:
+                    rows = db.execute(
+                        """
+                        SELECT d.full_text
+                        FROM documents_fts
+                        JOIN documents d ON d.rowid = documents_fts.rowid
+                        WHERE documents_fts MATCH ?
+                          AND instr(d.full_text, ?) > 0
+                        ORDER BY d.file_key, d.page_number, d.rowid
+                        LIMIT 50
+                        """,
+                        (f'"{efta_id}"', efta_id),
+                    ).fetchall()
+                except sqlite3.OperationalError:
+                    rows = db.execute(
+                        """
+                        SELECT full_text FROM documents
+                        WHERE instr(full_text, ?) > 0
+                        ORDER BY file_key, page_number, rowid
+                        LIMIT 50
+                        """,
+                        (efta_id,),
+                    ).fetchall()
+            text = "\n".join(
+                row["full_text"] for row in rows if row["full_text"]
+            )
+            if text:
+                return text
+        finally:
+            db.close()
+
+    if Path(DOCUMENTS_DB).is_file():
+        db = sqlite3.connect(DOCUMENTS_DB)
+        db.row_factory = sqlite3.Row
+        try:
+            doc = db.execute(
+                "SELECT ocr_text FROM documents WHERE bates_id = ?",
+                (efta_id,),
+            ).fetchone()
+            if doc:
+                return doc["ocr_text"]
+        finally:
+            db.close()
     return None
 
 

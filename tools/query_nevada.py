@@ -100,7 +100,7 @@ def _run_helper(args_list, timeout=120):
     node = shutil.which("node")
     if not node:
         print("ERROR: Node.js runtime not found in PATH.", file=sys.stderr)
-        print("  Install Node.js, then run: npm install playwright", file=sys.stderr)
+        print("  Install Node.js, then run from the repository root: npm --prefix web ci", file=sys.stderr)
         return None
 
     cmd = [node, str(HELPER_PATH)] + args_list
@@ -203,7 +203,7 @@ def cmd_warmup(args):
     node = shutil.which("node")
     if not node:
         print("ERROR: Node.js runtime not found in PATH.", file=sys.stderr)
-        print("  Install Node.js, then run: npm install playwright", file=sys.stderr)
+        print("  Install Node.js, then run from the repository root: npm --prefix web ci", file=sys.stderr)
         return
 
     print("Opening NV SOS browser for warmup...")

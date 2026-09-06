@@ -1,0 +1,99 @@
+{
+  "window_start": "2024-01-01",
+  "window_end": "2026-09-03",
+  "archive_url": "https://www.boston.gov/departments/licensing-board/licensing-board-information-and-members",
+  "documents": 64,
+  "documents_by_year": {
+    "2024": 23,
+    "2025": 25,
+    "2026": 16
+  },
+  "downloaded_documents": 64,
+  "pdf_pages": 918,
+  "unpaginated_html_documents": [
+    "BLB-2025-10-01"
+  ],
+  "events": 307,
+  "counts": [
+    {
+      "event_type": "license_pledge",
+      "action_subtype": "pledge_application_disposition",
+      "outcome": "deferred",
+      "count": 1
+    },
+    {
+      "event_type": "license_pledge",
+      "action_subtype": "pledge_application_disposition",
+      "outcome": "granted",
+      "count": 101
+    },
+    {
+      "event_type": "license_pledge",
+      "action_subtype": "pledge_release_acknowledgment",
+      "outcome": "acknowledged",
+      "count": 3
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_application_disposition",
+      "outcome": "continued",
+      "count": 3
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_application_disposition",
+      "outcome": "deferred",
+      "count": 4
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_application_disposition",
+      "outcome": "granted",
+      "count": 190
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_application_disposition",
+      "outcome": "rescheduled",
+      "count": 1
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_application_disposition",
+      "outcome": "withdrawn",
+      "count": 1
+    },
+    {
+      "event_type": "license_transfer",
+      "action_subtype": "transfer_revocation_notice",
+      "outcome": "acknowledged",
+      "count": 3
+    }
+  ],
+  "separate_status_notices": 13,
+  "unique_transfer_license_ids": 176,
+  "uncovered_keyword_lines_2025_2026": 0,
+  "scope_limit": "Complete extraction of explicit transfers and license pledges in 64 linked decision-bearing records from the current official archive for 2024\u20132026 through September 3. This is not complete license history, a census of consummated sales, or proof of current liens. Calendar completeness is limited by the archive's links.",
+  "archive_date_notes": [
+    {
+      "date": "2024-03-05",
+      "evidence": "Archive lists combined transactional/voting video with no separately dated minutes; March 7 minutes explicitly include March 5 transactional decisions. Not treated as a proven missing transactional meeting."
+    }
+  ],
+  "calendar_audit_file": "extraction-2024/cross-year-coverage-audit.json",
+  "calendar_audit_summary": {
+    "headings_checked": 41,
+    "heading_archive_mismatches": 0,
+    "filename_date_discrepancies": 2,
+    "internal_hearing_weekday_date_discrepancies": 2,
+    "video_links_checked": 64,
+    "video_links_with_matching_minutes_date_after_split_anchor_fix": 63,
+    "video_dates_without_separately_indexed_minutes": [
+      "2024-03-05"
+    ],
+    "minutes_dates_without_video_link": [
+      "2025-12-18"
+    ],
+    "malformed_video_hrefs": 2
+  }
+}

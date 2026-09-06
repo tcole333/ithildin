@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 import sqlite3
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from queue_system.queue import JobQueue
 
@@ -22,16 +22,23 @@ class TriggerEngine:
         queue: JobQueue,
         db_path: Optional[Path] = None,
         config_path: Optional[Path] = None,
+        profile_id: Optional[str] = None,
     ) -> None:
         self.queue = queue
         self.db_path = Path(db_path) if db_path else Path(queue.db_path)
+        if self.db_path.resolve() != Path(queue.db_path).resolve():
+            raise ValueError("trigger receipts and jobs must use the same database")
         self.config_path = Path(config_path) if config_path else DEFAULT_CONFIG_PATH
+        # A daemon retains its start-time context even if another task switches
+        # the interactive default. Explicit profiles on individual triggers win.
+        self.profile_id = queue.capture_profile(profile_id=profile_id)
         self._ensure_tables()
 
     def _connect(self) -> sqlite3.Connection:
         db = sqlite3.connect(str(self.db_path))
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA journal_mode=WAL")
+        db.execute("PRAGMA foreign_keys=ON")
         db.execute("PRAGMA busy_timeout=5000")
         return db
 
@@ -161,6 +168,7 @@ class TriggerEngine:
         db: sqlite3.Connection,
         trigger_name: str,
         metric: str,
+        profile_id: Optional[str] = None,
     ) -> Tuple[int, Dict[str, Any]]:
         if metric == "queue_pending":
             row = db.execute(
@@ -173,39 +181,53 @@ class TriggerEngine:
             ).fetchone()
             return row["n"], {}
         if metric == "pending_triage":
+            if profile_id is None:
+                raise ValueError("pending_triage requires a pinned trigger profile")
             try:
                 row = db.execute(
-                    "SELECT COUNT(*) as n FROM leads WHERE status='pending_triage'"
+                    "SELECT COUNT(*) as n FROM leads WHERE status='pending_triage' AND profile_id=?",
+                    (profile_id,),
                 ).fetchone()
                 return row["n"], {}
             except sqlite3.OperationalError:
                 return 0, {}
         if metric == "findings_total":
+            if profile_id is None:
+                raise ValueError("findings_total requires a pinned trigger profile")
             try:
-                row = db.execute("SELECT COUNT(*) as n FROM findings").fetchone()
+                row = db.execute("SELECT COUNT(*) as n FROM findings WHERE profile_id=?", (profile_id,)).fetchone()
                 return row["n"], {}
             except sqlite3.OperationalError:
                 return 0, {}
         if metric == "findings_delta":
+            if profile_id is None:
+                raise ValueError("findings_delta requires a pinned trigger profile")
             try:
-                row = db.execute("SELECT COUNT(*) as n FROM findings").fetchone()
+                row = db.execute("SELECT COUNT(*) as n FROM findings WHERE profile_id=?", (profile_id,)).fetchone()
                 total = row["n"]
             except sqlite3.OperationalError:
                 total = 0
-            last_key = f"trigger:{trigger_name}:last_count"
+            last_key = f"trigger:{trigger_name}:profile:{profile_id}:last_count"
             last = self._get_state_int(db, last_key, default=0)
             return total - last, {"total": total, "last": last}
 
         return 0, {}
 
-    def _create_job(self, trigger: Dict[str, Any]) -> str:
+    def _trigger_payload(self, trigger: Dict[str, Any]) -> Dict[str, Any]:
+        return self.queue.prepare_job_payload(
+            trigger["domain"], trigger.get("payload", {}),
+            default_profile=self.profile_id, resolve_default=False,
+        )
+
+    def _create_job(self, trigger: Dict[str, Any], db: sqlite3.Connection) -> str:
         return self.queue.create_job(
             job_type=trigger["job_type"],
             domain=trigger["domain"],
-            payload=trigger.get("payload", {}),
+            payload=self._trigger_payload(trigger),
             priority=trigger.get("priority", 5),
             created_by=f"trigger:{trigger['name']}",
             source_trigger=trigger["name"],
+            conn=db,
         )
 
     def run_scheduled(self, dry_run: bool = False) -> List[Dict[str, Any]]:
@@ -215,6 +237,7 @@ class TriggerEngine:
         results: List[Dict[str, Any]] = []
         db = self._connect()
         try:
+            db.execute("BEGIN" if dry_run else "BEGIN IMMEDIATE")
             for trigger in triggers:
                 if not trigger.get("enabled", True):
                     continue
@@ -222,6 +245,8 @@ class TriggerEngine:
                 interval_minutes = trigger.get("interval_minutes")
                 if not name or not interval_minutes:
                     continue
+                # Validate context in dry runs as well as actual enqueueing.
+                self._trigger_payload(trigger)
                 if self._cooldown_active(db, name, trigger.get("cooldown_minutes")):
                     continue
                 if self._max_per_hour_reached(db, name, trigger.get("max_per_hour")):
@@ -254,7 +279,7 @@ class TriggerEngine:
                     results.append({"name": name, "status": "dry_run"})
                     continue
 
-                job_id = self._create_job(trigger)
+                job_id = self._create_job(trigger, db)
                 details = {
                     "interval_minutes": interval_minutes,
                     "job_type": trigger["job_type"],
@@ -273,6 +298,7 @@ class TriggerEngine:
         results: List[Dict[str, Any]] = []
         db = self._connect()
         try:
+            db.execute("BEGIN" if dry_run else "BEGIN IMMEDIATE")
             for trigger in triggers:
                 if not trigger.get("enabled", True):
                     continue
@@ -290,7 +316,8 @@ class TriggerEngine:
                         results.append({"name": name, "status": "budget_exceeded"})
                     continue
 
-                value, meta = self._get_metric_value(db, name, metric)
+                payload = self._trigger_payload(trigger)
+                value, meta = self._get_metric_value(db, name, metric, payload.get("profile_id"))
                 if value < threshold:
                     continue
 
@@ -300,7 +327,7 @@ class TriggerEngine:
                     )
                     continue
 
-                job_id = self._create_job(trigger)
+                job_id = self._create_job(trigger, db)
                 details = {
                     "metric": metric,
                     "value": value,
@@ -309,7 +336,9 @@ class TriggerEngine:
                 }
                 self._record_run(db, name, "threshold", job_id, details)
                 if metric == "findings_delta":
-                    self._set_state(db, f"trigger:{name}:last_count", meta.get("total", 0))
+                    self._set_state(
+                        db, f"trigger:{name}:profile:{payload['profile_id']}:last_count", meta.get("total", 0),
+                    )
                 results.append({"name": name, "job_id": job_id, "value": value})
             db.commit()
         finally:

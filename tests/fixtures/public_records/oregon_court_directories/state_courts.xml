@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetListItemsResponse xmlns="http://schemas.microsoft.com/sharepoint/soap/">
+      <GetListItemsResult>
+        <listitems xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema">
+          <rs:data ItemCount="2">
+            <z:row
+              ows_District="string;#11"
+              ows_County="Deschutes"
+              ows_Location="string;#&lt;div&gt;Deschutes County Courthouse&lt;br /&gt;1100 NW Bond St&lt;br /&gt;Bend, OR 97703&lt;/div&gt;"
+              ows_MailingAddress="string;#&lt;div&gt;Deschutes County Circuit Court&lt;br /&gt;1100 NW Bond St&lt;br /&gt;Bend, OR 97703&lt;/div&gt;"
+              ows_ContactName="string;#&lt;div&gt;Zoe Wild&lt;br /&gt;Trial Court Administrator&lt;/div&gt;"
+              ows_PhoneNumbers="string;#&lt;div&gt;Admin: 541-388-5300&lt;br /&gt;Fax: 541-388-5309&lt;br /&gt;Info: 541-388-5300&lt;/div&gt;"
+              ows_Company_x0020_Name="Deschutes County Circuit Court"
+              ows_UniqueId="41;#{EAFCC48B-A85A-43CB-9510-37270F78CD9C}"
+              ows_FirstName="Zoe"
+              ows_Info_x0020_Phone="541-388-5300"
+              ows_Modified="2026-06-10 11:57:06"
+              ows_State="OR"
+              ows_AddressTitle="Deschutes County Courthouse"
+              ows_Title="Wild"
+              ows_Job_x0020_Title="Trial Court Administrator"
+              ows_Address1="1100 NW Bond St"
+              ows_ID="41"
+              ows_Created="2018-04-05 11:54:43"
+              ows_Judicial_x0020_District="11"
+              ows_Zip="97703"
+              ows_City="Bend"
+              ows_Office_x0020_Phone="541-388-5300"
+              ows_Office_x0020_Fax="541-388-5309"
+            />
+            <z:row
+              ows_District="string;#22"
+              ows_County="Crook"
+              ows_Company_x0020_Name="Crook County Circuit Court"
+              ows_UniqueId="8;#{EA51502F-71CD-4880-BB90-51EBD898C683}"
+              ows_FirstName="Katie"
+              ows_Modified="2026-05-20 09:07:02"
+              ows_Title="Slattery"
+              ows_Job_x0020_Title="Trial Court Administrator"
+              ows_Address1="260 NW 2nd St, Suite 300"
+              ows_ID="8"
+              ows_Created="2018-04-05 11:54:42"
+              ows_Judicial_x0020_District="22"
+              ows_Zip="97754"
+              ows_City="Prineville"
+            />
+          </rs:data>
+        </listitems>
+      </GetListItemsResult>
+    </GetListItemsResponse>
+  </soap:Body>
+</soap:Envelope>

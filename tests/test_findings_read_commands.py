@@ -23,6 +23,8 @@ def _add_unverified(profile_id, target):
         target_name=target,
         summary=f"{target} summary",
         source_datasets=["courtlistener"],
+        evidence_ids=["COURTLISTENER:fixture-record"],
+        source_quotes={"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
         profile_id=profile_id,
     )
 
@@ -99,3 +101,66 @@ def test_audit_cli_supports_json_and_output_file(
     findings_tracker.main()
     assert json.loads(output.read_text())[0]["record_id"] == finding_id
     assert "saved to" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "query_args",
+    [
+        ["Alpha"],
+        ["--query", "Alpha"],
+    ],
+)
+def test_search_cli_accepts_positional_and_query_flag(
+    findings_db, monkeypatch, capsys, query_args
+):
+    finding_id = _add_unverified("alpha", "Alpha")
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "search",
+            *query_args,
+            "--all-profiles",
+            "--json",
+        ],
+    )
+
+    findings_tracker.main()
+
+    payload = json.loads(capsys.readouterr().out)
+    assert [row["id"] for row in payload] == [finding_id]
+
+
+@pytest.mark.parametrize("type_flag", ["--type", "--relation-type"])
+def test_relate_cli_accepts_short_and_explicit_relation_type(
+    monkeypatch, capsys, type_flag
+):
+    calls = []
+    monkeypatch.setattr(
+        findings_tracker,
+        "relate_findings",
+        lambda *args, **kwargs: calls.append((args, kwargs)),
+    )
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "findings_tracker.py",
+            "relate",
+            "10",
+            "11",
+            type_flag,
+            "corroborates",
+        ],
+    )
+
+    findings_tracker.main()
+
+    assert calls == [
+        (
+            (10, 11, "corroborates"),
+            {"assessment": None, "created_by": "human"},
+        )
+    ]
+    assert "Recorded: #10 corroborates #11" in capsys.readouterr().out
